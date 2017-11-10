@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Simple Scatterplot Generated with Eve</title>
+  <meta charset="utf-8">
+
+  <!-- These scripts link to the Vega-Lite runtime -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc6/vega-embed.js"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="simpleScatterplot.js"></script>
+</head>
+
+<body>
+  <h1>Simple Scatterplot Generated with Eve</h1>
+
+  <!-- The id indicates the container in which to embed the Vega-Lite output. -->
+  <div id="vis"></div>
+
+  <script>
+    // This function grabs the specification from Elm.
+    // Replace SimpleScatterplot in line below with name of Elm module if write your own Elm module.
+    Elm.SimpleScatterplot.worker().ports.fromElm.subscribe(function(elmObj) {
+      vegaEmbed("#vis", elmObj, {
+        // Change actions to true to display linking actions (source, Vega-Lite editor and image output)
+        actions: false
+      }).catch(console.warn);
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,21612 @@
+
+(function() {
+'use strict';
+
+function F2(fun)
+{
+  function wrapper(a) { return function(b) { return fun(a,b); }; }
+  wrapper.arity = 2;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F3(fun)
+{
+  function wrapper(a) {
+    return function(b) { return function(c) { return fun(a, b, c); }; };
+  }
+  wrapper.arity = 3;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F4(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return fun(a, b, c, d); }; }; };
+  }
+  wrapper.arity = 4;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F5(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return fun(a, b, c, d, e); }; }; }; };
+  }
+  wrapper.arity = 5;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F6(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return fun(a, b, c, d, e, f); }; }; }; }; };
+  }
+  wrapper.arity = 6;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F7(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return fun(a, b, c, d, e, f, g); }; }; }; }; }; };
+  }
+  wrapper.arity = 7;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F8(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return function(h) {
+    return fun(a, b, c, d, e, f, g, h); }; }; }; }; }; }; };
+  }
+  wrapper.arity = 8;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F9(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return function(h) { return function(i) {
+    return fun(a, b, c, d, e, f, g, h, i); }; }; }; }; }; }; }; };
+  }
+  wrapper.arity = 9;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function A2(fun, a, b)
+{
+  return fun.arity === 2
+    ? fun.func(a, b)
+    : fun(a)(b);
+}
+function A3(fun, a, b, c)
+{
+  return fun.arity === 3
+    ? fun.func(a, b, c)
+    : fun(a)(b)(c);
+}
+function A4(fun, a, b, c, d)
+{
+  return fun.arity === 4
+    ? fun.func(a, b, c, d)
+    : fun(a)(b)(c)(d);
+}
+function A5(fun, a, b, c, d, e)
+{
+  return fun.arity === 5
+    ? fun.func(a, b, c, d, e)
+    : fun(a)(b)(c)(d)(e);
+}
+function A6(fun, a, b, c, d, e, f)
+{
+  return fun.arity === 6
+    ? fun.func(a, b, c, d, e, f)
+    : fun(a)(b)(c)(d)(e)(f);
+}
+function A7(fun, a, b, c, d, e, f, g)
+{
+  return fun.arity === 7
+    ? fun.func(a, b, c, d, e, f, g)
+    : fun(a)(b)(c)(d)(e)(f)(g);
+}
+function A8(fun, a, b, c, d, e, f, g, h)
+{
+  return fun.arity === 8
+    ? fun.func(a, b, c, d, e, f, g, h)
+    : fun(a)(b)(c)(d)(e)(f)(g)(h);
+}
+function A9(fun, a, b, c, d, e, f, g, h, i)
+{
+  return fun.arity === 9
+    ? fun.func(a, b, c, d, e, f, g, h, i)
+    : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
+}
+
+//import Native.List //
+
+var _elm_lang$core$Native_Array = function() {
+
+// A RRB-Tree has two distinct data types.
+// Leaf -> "height"  is always 0
+//         "table"   is an array of elements
+// Node -> "height"  is always greater than 0
+//         "table"   is an array of child nodes
+//         "lengths" is an array of accumulated lengths of the child nodes
+
+// M is the maximal table size. 32 seems fast. E is the allowed increase
+// of search steps when concatting to find an index. Lower values will
+// decrease balancing, but will increase search steps.
+var M = 32;
+var E = 2;
+
+// An empty array.
+var empty = {
+	ctor: '_Array',
+	height: 0,
+	table: []
+};
+
+
+function get(i, array)
+{
+	if (i < 0 || i >= length(array))
+	{
+		throw new Error(
+			'Index ' + i + ' is out of range. Check the length of ' +
+			'your array first or use getMaybe or getWithDefault.');
+	}
+	return unsafeGet(i, array);
+}
+
+
+function unsafeGet(i, array)
+{
+	for (var x = array.height; x > 0; x--)
+	{
+		var slot = i >> (x * 5);
+		while (array.lengths[slot] <= i)
+		{
+			slot++;
+		}
+		if (slot > 0)
+		{
+			i -= array.lengths[slot - 1];
+		}
+		array = array.table[slot];
+	}
+	return array.table[i];
+}
+
+
+// Sets the value at the index i. Only the nodes leading to i will get
+// copied and updated.
+function set(i, item, array)
+{
+	if (i < 0 || length(array) <= i)
+	{
+		return array;
+	}
+	return unsafeSet(i, item, array);
+}
+
+
+function unsafeSet(i, item, array)
+{
+	array = nodeCopy(array);
+
+	if (array.height === 0)
+	{
+		array.table[i] = item;
+	}
+	else
+	{
+		var slot = getSlot(i, array);
+		if (slot > 0)
+		{
+			i -= array.lengths[slot - 1];
+		}
+		array.table[slot] = unsafeSet(i, item, array.table[slot]);
+	}
+	return array;
+}
+
+
+function initialize(len, f)
+{
+	if (len <= 0)
+	{
+		return empty;
+	}
+	var h = Math.floor( Math.log(len) / Math.log(M) );
+	return initialize_(f, h, 0, len);
+}
+
+function initialize_(f, h, from, to)
+{
+	if (h === 0)
+	{
+		var table = new Array((to - from) % (M + 1));
+		for (var i = 0; i < table.length; i++)
+		{
+		  table[i] = f(from + i);
+		}
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: table
+		};
+	}
+
+	var step = Math.pow(M, h);
+	var table = new Array(Math.ceil((to - from) / step));
+	var lengths = new Array(table.length);
+	for (var i = 0; i < table.length; i++)
+	{
+		table[i] = initialize_(f, h - 1, from + (i * step), Math.min(from + ((i + 1) * step), to));
+		lengths[i] = length(table[i]) + (i > 0 ? lengths[i-1] : 0);
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: table,
+		lengths: lengths
+	};
+}
+
+function fromList(list)
+{
+	if (list.ctor === '[]')
+	{
+		return empty;
+	}
+
+	// Allocate M sized blocks (table) and write list elements to it.
+	var table = new Array(M);
+	var nodes = [];
+	var i = 0;
+
+	while (list.ctor !== '[]')
+	{
+		table[i] = list._0;
+		list = list._1;
+		i++;
+
+		// table is full, so we can push a leaf containing it into the
+		// next node.
+		if (i === M)
+		{
+			var leaf = {
+				ctor: '_Array',
+				height: 0,
+				table: table
+			};
+			fromListPush(leaf, nodes);
+			table = new Array(M);
+			i = 0;
+		}
+	}
+
+	// Maybe there is something left on the table.
+	if (i > 0)
+	{
+		var leaf = {
+			ctor: '_Array',
+			height: 0,
+			table: table.splice(0, i)
+		};
+		fromListPush(leaf, nodes);
+	}
+
+	// Go through all of the nodes and eventually push them into higher nodes.
+	for (var h = 0; h < nodes.length - 1; h++)
+	{
+		if (nodes[h].table.length > 0)
+		{
+			fromListPush(nodes[h], nodes);
+		}
+	}
+
+	var head = nodes[nodes.length - 1];
+	if (head.height > 0 && head.table.length === 1)
+	{
+		return head.table[0];
+	}
+	else
+	{
+		return head;
+	}
+}
+
+// Push a node into a higher node as a child.
+function fromListPush(toPush, nodes)
+{
+	var h = toPush.height;
+
+	// Maybe the node on this height does not exist.
+	if (nodes.length === h)
+	{
+		var node = {
+			ctor: '_Array',
+			height: h + 1,
+			table: [],
+			lengths: []
+		};
+		nodes.push(node);
+	}
+
+	nodes[h].table.push(toPush);
+	var len = length(toPush);
+	if (nodes[h].lengths.length > 0)
+	{
+		len += nodes[h].lengths[nodes[h].lengths.length - 1];
+	}
+	nodes[h].lengths.push(len);
+
+	if (nodes[h].table.length === M)
+	{
+		fromListPush(nodes[h], nodes);
+		nodes[h] = {
+			ctor: '_Array',
+			height: h + 1,
+			table: [],
+			lengths: []
+		};
+	}
+}
+
+// Pushes an item via push_ to the bottom right of a tree.
+function push(item, a)
+{
+	var pushed = push_(item, a);
+	if (pushed !== null)
+	{
+		return pushed;
+	}
+
+	var newTree = create(item, a.height);
+	return siblise(a, newTree);
+}
+
+// Recursively tries to push an item to the bottom-right most
+// tree possible. If there is no space left for the item,
+// null will be returned.
+function push_(item, a)
+{
+	// Handle resursion stop at leaf level.
+	if (a.height === 0)
+	{
+		if (a.table.length < M)
+		{
+			var newA = {
+				ctor: '_Array',
+				height: 0,
+				table: a.table.slice()
+			};
+			newA.table.push(item);
+			return newA;
+		}
+		else
+		{
+		  return null;
+		}
+	}
+
+	// Recursively push
+	var pushed = push_(item, botRight(a));
+
+	// There was space in the bottom right tree, so the slot will
+	// be updated.
+	if (pushed !== null)
+	{
+		var newA = nodeCopy(a);
+		newA.table[newA.table.length - 1] = pushed;
+		newA.lengths[newA.lengths.length - 1]++;
+		return newA;
+	}
+
+	// When there was no space left, check if there is space left
+	// for a new slot with a tree which contains only the item
+	// at the bottom.
+	if (a.table.length < M)
+	{
+		var newSlot = create(item, a.height - 1);
+		var newA = nodeCopy(a);
+		newA.table.push(newSlot);
+		newA.lengths.push(newA.lengths[newA.lengths.length - 1] + length(newSlot));
+		return newA;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+// Converts an array into a list of elements.
+function toList(a)
+{
+	return toList_(_elm_lang$core$Native_List.Nil, a);
+}
+
+function toList_(list, a)
+{
+	for (var i = a.table.length - 1; i >= 0; i--)
+	{
+		list =
+			a.height === 0
+				? _elm_lang$core$Native_List.Cons(a.table[i], list)
+				: toList_(list, a.table[i]);
+	}
+	return list;
+}
+
+// Maps a function over the elements of an array.
+function map(f, a)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: new Array(a.table.length)
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths;
+	}
+	for (var i = 0; i < a.table.length; i++)
+	{
+		newA.table[i] =
+			a.height === 0
+				? f(a.table[i])
+				: map(f, a.table[i]);
+	}
+	return newA;
+}
+
+// Maps a function over the elements with their index as first argument.
+function indexedMap(f, a)
+{
+	return indexedMap_(f, a, 0);
+}
+
+function indexedMap_(f, a, from)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: new Array(a.table.length)
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths;
+	}
+	for (var i = 0; i < a.table.length; i++)
+	{
+		newA.table[i] =
+			a.height === 0
+				? A2(f, from + i, a.table[i])
+				: indexedMap_(f, a.table[i], i == 0 ? from : from + a.lengths[i - 1]);
+	}
+	return newA;
+}
+
+function foldl(f, b, a)
+{
+	if (a.height === 0)
+	{
+		for (var i = 0; i < a.table.length; i++)
+		{
+			b = A2(f, a.table[i], b);
+		}
+	}
+	else
+	{
+		for (var i = 0; i < a.table.length; i++)
+		{
+			b = foldl(f, b, a.table[i]);
+		}
+	}
+	return b;
+}
+
+function foldr(f, b, a)
+{
+	if (a.height === 0)
+	{
+		for (var i = a.table.length; i--; )
+		{
+			b = A2(f, a.table[i], b);
+		}
+	}
+	else
+	{
+		for (var i = a.table.length; i--; )
+		{
+			b = foldr(f, b, a.table[i]);
+		}
+	}
+	return b;
+}
+
+// TODO: currently, it slices the right, then the left. This can be
+// optimized.
+function slice(from, to, a)
+{
+	if (from < 0)
+	{
+		from += length(a);
+	}
+	if (to < 0)
+	{
+		to += length(a);
+	}
+	return sliceLeft(from, sliceRight(to, a));
+}
+
+function sliceRight(to, a)
+{
+	if (to === length(a))
+	{
+		return a;
+	}
+
+	// Handle leaf level.
+	if (a.height === 0)
+	{
+		var newA = { ctor:'_Array', height:0 };
+		newA.table = a.table.slice(0, to);
+		return newA;
+	}
+
+	// Slice the right recursively.
+	var right = getSlot(to, a);
+	var sliced = sliceRight(to - (right > 0 ? a.lengths[right - 1] : 0), a.table[right]);
+
+	// Maybe the a node is not even needed, as sliced contains the whole slice.
+	if (right === 0)
+	{
+		return sliced;
+	}
+
+	// Create new node.
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice(0, right),
+		lengths: a.lengths.slice(0, right)
+	};
+	if (sliced.table.length > 0)
+	{
+		newA.table[right] = sliced;
+		newA.lengths[right] = length(sliced) + (right > 0 ? newA.lengths[right - 1] : 0);
+	}
+	return newA;
+}
+
+function sliceLeft(from, a)
+{
+	if (from === 0)
+	{
+		return a;
+	}
+
+	// Handle leaf level.
+	if (a.height === 0)
+	{
+		var newA = { ctor:'_Array', height:0 };
+		newA.table = a.table.slice(from, a.table.length + 1);
+		return newA;
+	}
+
+	// Slice the left recursively.
+	var left = getSlot(from, a);
+	var sliced = sliceLeft(from - (left > 0 ? a.lengths[left - 1] : 0), a.table[left]);
+
+	// Maybe the a node is not even needed, as sliced contains the whole slice.
+	if (left === a.table.length - 1)
+	{
+		return sliced;
+	}
+
+	// Create new node.
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice(left, a.table.length + 1),
+		lengths: new Array(a.table.length - left)
+	};
+	newA.table[0] = sliced;
+	var len = 0;
+	for (var i = 0; i < newA.table.length; i++)
+	{
+		len += length(newA.table[i]);
+		newA.lengths[i] = len;
+	}
+
+	return newA;
+}
+
+// Appends two trees.
+function append(a,b)
+{
+	if (a.table.length === 0)
+	{
+		return b;
+	}
+	if (b.table.length === 0)
+	{
+		return a;
+	}
+
+	var c = append_(a, b);
+
+	// Check if both nodes can be crunshed together.
+	if (c[0].table.length + c[1].table.length <= M)
+	{
+		if (c[0].table.length === 0)
+		{
+			return c[1];
+		}
+		if (c[1].table.length === 0)
+		{
+			return c[0];
+		}
+
+		// Adjust .table and .lengths
+		c[0].table = c[0].table.concat(c[1].table);
+		if (c[0].height > 0)
+		{
+			var len = length(c[0]);
+			for (var i = 0; i < c[1].lengths.length; i++)
+			{
+				c[1].lengths[i] += len;
+			}
+			c[0].lengths = c[0].lengths.concat(c[1].lengths);
+		}
+
+		return c[0];
+	}
+
+	if (c[0].height > 0)
+	{
+		var toRemove = calcToRemove(a, b);
+		if (toRemove > E)
+		{
+			c = shuffle(c[0], c[1], toRemove);
+		}
+	}
+
+	return siblise(c[0], c[1]);
+}
+
+// Returns an array of two nodes; right and left. One node _may_ be empty.
+function append_(a, b)
+{
+	if (a.height === 0 && b.height === 0)
+	{
+		return [a, b];
+	}
+
+	if (a.height !== 1 || b.height !== 1)
+	{
+		if (a.height === b.height)
+		{
+			a = nodeCopy(a);
+			b = nodeCopy(b);
+			var appended = append_(botRight(a), botLeft(b));
+
+			insertRight(a, appended[1]);
+			insertLeft(b, appended[0]);
+		}
+		else if (a.height > b.height)
+		{
+			a = nodeCopy(a);
+			var appended = append_(botRight(a), b);
+
+			insertRight(a, appended[0]);
+			b = parentise(appended[1], appended[1].height + 1);
+		}
+		else
+		{
+			b = nodeCopy(b);
+			var appended = append_(a, botLeft(b));
+
+			var left = appended[0].table.length === 0 ? 0 : 1;
+			var right = left === 0 ? 1 : 0;
+			insertLeft(b, appended[left]);
+			a = parentise(appended[right], appended[right].height + 1);
+		}
+	}
+
+	// Check if balancing is needed and return based on that.
+	if (a.table.length === 0 || b.table.length === 0)
+	{
+		return [a, b];
+	}
+
+	var toRemove = calcToRemove(a, b);
+	if (toRemove <= E)
+	{
+		return [a, b];
+	}
+	return shuffle(a, b, toRemove);
+}
+
+// Helperfunctions for append_. Replaces a child node at the side of the parent.
+function insertRight(parent, node)
+{
+	var index = parent.table.length - 1;
+	parent.table[index] = node;
+	parent.lengths[index] = length(node);
+	parent.lengths[index] += index > 0 ? parent.lengths[index - 1] : 0;
+}
+
+function insertLeft(parent, node)
+{
+	if (node.table.length > 0)
+	{
+		parent.table[0] = node;
+		parent.lengths[0] = length(node);
+
+		var len = length(parent.table[0]);
+		for (var i = 1; i < parent.lengths.length; i++)
+		{
+			len += length(parent.table[i]);
+			parent.lengths[i] = len;
+		}
+	}
+	else
+	{
+		parent.table.shift();
+		for (var i = 1; i < parent.lengths.length; i++)
+		{
+			parent.lengths[i] = parent.lengths[i] - parent.lengths[0];
+		}
+		parent.lengths.shift();
+	}
+}
+
+// Returns the extra search steps for E. Refer to the paper.
+function calcToRemove(a, b)
+{
+	var subLengths = 0;
+	for (var i = 0; i < a.table.length; i++)
+	{
+		subLengths += a.table[i].table.length;
+	}
+	for (var i = 0; i < b.table.length; i++)
+	{
+		subLengths += b.table[i].table.length;
+	}
+
+	var toRemove = a.table.length + b.table.length;
+	return toRemove - (Math.floor((subLengths - 1) / M) + 1);
+}
+
+// get2, set2 and saveSlot are helpers for accessing elements over two arrays.
+function get2(a, b, index)
+{
+	return index < a.length
+		? a[index]
+		: b[index - a.length];
+}
+
+function set2(a, b, index, value)
+{
+	if (index < a.length)
+	{
+		a[index] = value;
+	}
+	else
+	{
+		b[index - a.length] = value;
+	}
+}
+
+function saveSlot(a, b, index, slot)
+{
+	set2(a.table, b.table, index, slot);
+
+	var l = (index === 0 || index === a.lengths.length)
+		? 0
+		: get2(a.lengths, a.lengths, index - 1);
+
+	set2(a.lengths, b.lengths, index, l + length(slot));
+}
+
+// Creates a node or leaf with a given length at their arrays for perfomance.
+// Is only used by shuffle.
+function createNode(h, length)
+{
+	if (length < 0)
+	{
+		length = 0;
+	}
+	var a = {
+		ctor: '_Array',
+		height: h,
+		table: new Array(length)
+	};
+	if (h > 0)
+	{
+		a.lengths = new Array(length);
+	}
+	return a;
+}
+
+// Returns an array of two balanced nodes.
+function shuffle(a, b, toRemove)
+{
+	var newA = createNode(a.height, Math.min(M, a.table.length + b.table.length - toRemove));
+	var newB = createNode(a.height, newA.table.length - (a.table.length + b.table.length - toRemove));
+
+	// Skip the slots with size M. More precise: copy the slot references
+	// to the new node
+	var read = 0;
+	while (get2(a.table, b.table, read).table.length % M === 0)
+	{
+		set2(newA.table, newB.table, read, get2(a.table, b.table, read));
+		set2(newA.lengths, newB.lengths, read, get2(a.lengths, b.lengths, read));
+		read++;
+	}
+
+	// Pulling items from left to right, caching in a slot before writing
+	// it into the new nodes.
+	var write = read;
+	var slot = new createNode(a.height - 1, 0);
+	var from = 0;
+
+	// If the current slot is still containing data, then there will be at
+	// least one more write, so we do not break this loop yet.
+	while (read - write - (slot.table.length > 0 ? 1 : 0) < toRemove)
+	{
+		// Find out the max possible items for copying.
+		var source = get2(a.table, b.table, read);
+		var to = Math.min(M - slot.table.length, source.table.length);
+
+		// Copy and adjust size table.
+		slot.table = slot.table.concat(source.table.slice(from, to));
+		if (slot.height > 0)
+		{
+			var len = slot.lengths.length;
+			for (var i = len; i < len + to - from; i++)
+			{
+				slot.lengths[i] = length(slot.table[i]);
+				slot.lengths[i] += (i > 0 ? slot.lengths[i - 1] : 0);
+			}
+		}
+
+		from += to;
+
+		// Only proceed to next slots[i] if the current one was
+		// fully copied.
+		if (source.table.length <= to)
+		{
+			read++; from = 0;
+		}
+
+		// Only create a new slot if the current one is filled up.
+		if (slot.table.length === M)
+		{
+			saveSlot(newA, newB, write, slot);
+			slot = createNode(a.height - 1, 0);
+			write++;
+		}
+	}
+
+	// Cleanup after the loop. Copy the last slot into the new nodes.
+	if (slot.table.length > 0)
+	{
+		saveSlot(newA, newB, write, slot);
+		write++;
+	}
+
+	// Shift the untouched slots to the left
+	while (read < a.table.length + b.table.length )
+	{
+		saveSlot(newA, newB, write, get2(a.table, b.table, read));
+		read++;
+		write++;
+	}
+
+	return [newA, newB];
+}
+
+// Navigation functions
+function botRight(a)
+{
+	return a.table[a.table.length - 1];
+}
+function botLeft(a)
+{
+	return a.table[0];
+}
+
+// Copies a node for updating. Note that you should not use this if
+// only updating only one of "table" or "lengths" for performance reasons.
+function nodeCopy(a)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice()
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths.slice();
+	}
+	return newA;
+}
+
+// Returns how many items are in the tree.
+function length(array)
+{
+	if (array.height === 0)
+	{
+		return array.table.length;
+	}
+	else
+	{
+		return array.lengths[array.lengths.length - 1];
+	}
+}
+
+// Calculates in which slot of "table" the item probably is, then
+// find the exact slot via forward searching in  "lengths". Returns the index.
+function getSlot(i, a)
+{
+	var slot = i >> (5 * a.height);
+	while (a.lengths[slot] <= i)
+	{
+		slot++;
+	}
+	return slot;
+}
+
+// Recursively creates a tree with a given height containing
+// only the given item.
+function create(item, h)
+{
+	if (h === 0)
+	{
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: [item]
+		};
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: [create(item, h - 1)],
+		lengths: [1]
+	};
+}
+
+// Recursively creates a tree that contains the given tree.
+function parentise(tree, h)
+{
+	if (h === tree.height)
+	{
+		return tree;
+	}
+
+	return {
+		ctor: '_Array',
+		height: h,
+		table: [parentise(tree, h - 1)],
+		lengths: [length(tree)]
+	};
+}
+
+// Emphasizes blood brotherhood beneath two trees.
+function siblise(a, b)
+{
+	return {
+		ctor: '_Array',
+		height: a.height + 1,
+		table: [a, b],
+		lengths: [length(a), length(a) + length(b)]
+	};
+}
+
+function toJSArray(a)
+{
+	var jsArray = new Array(length(a));
+	toJSArray_(jsArray, 0, a);
+	return jsArray;
+}
+
+function toJSArray_(jsArray, i, a)
+{
+	for (var t = 0; t < a.table.length; t++)
+	{
+		if (a.height === 0)
+		{
+			jsArray[i + t] = a.table[t];
+		}
+		else
+		{
+			var inc = t === 0 ? 0 : a.lengths[t - 1];
+			toJSArray_(jsArray, i + inc, a.table[t]);
+		}
+	}
+}
+
+function fromJSArray(jsArray)
+{
+	if (jsArray.length === 0)
+	{
+		return empty;
+	}
+	var h = Math.floor(Math.log(jsArray.length) / Math.log(M));
+	return fromJSArray_(jsArray, h, 0, jsArray.length);
+}
+
+function fromJSArray_(jsArray, h, from, to)
+{
+	if (h === 0)
+	{
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: jsArray.slice(from, to)
+		};
+	}
+
+	var step = Math.pow(M, h);
+	var table = new Array(Math.ceil((to - from) / step));
+	var lengths = new Array(table.length);
+	for (var i = 0; i < table.length; i++)
+	{
+		table[i] = fromJSArray_(jsArray, h - 1, from + (i * step), Math.min(from + ((i + 1) * step), to));
+		lengths[i] = length(table[i]) + (i > 0 ? lengths[i - 1] : 0);
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: table,
+		lengths: lengths
+	};
+}
+
+return {
+	empty: empty,
+	fromList: fromList,
+	toList: toList,
+	initialize: F2(initialize),
+	append: F2(append),
+	push: F2(push),
+	slice: F3(slice),
+	get: F2(get),
+	set: F3(set),
+	map: F2(map),
+	indexedMap: F2(indexedMap),
+	foldl: F3(foldl),
+	foldr: F3(foldr),
+	length: length,
+
+	toJSArray: toJSArray,
+	fromJSArray: fromJSArray
+};
+
+}();
+//import Native.Utils //
+
+var _elm_lang$core$Native_Basics = function() {
+
+function div(a, b)
+{
+	return (a / b) | 0;
+}
+function rem(a, b)
+{
+	return a % b;
+}
+function mod(a, b)
+{
+	if (b === 0)
+	{
+		throw new Error('Cannot perform mod 0. Division by zero error.');
+	}
+	var r = a % b;
+	var m = a === 0 ? 0 : (b > 0 ? (a >= 0 ? r : r + b) : -mod(-a, -b));
+
+	return m === b ? 0 : m;
+}
+function logBase(base, n)
+{
+	return Math.log(n) / Math.log(base);
+}
+function negate(n)
+{
+	return -n;
+}
+function abs(n)
+{
+	return n < 0 ? -n : n;
+}
+
+function min(a, b)
+{
+	return _elm_lang$core$Native_Utils.cmp(a, b) < 0 ? a : b;
+}
+function max(a, b)
+{
+	return _elm_lang$core$Native_Utils.cmp(a, b) > 0 ? a : b;
+}
+function clamp(lo, hi, n)
+{
+	return _elm_lang$core$Native_Utils.cmp(n, lo) < 0
+		? lo
+		: _elm_lang$core$Native_Utils.cmp(n, hi) > 0
+			? hi
+			: n;
+}
+
+var ord = ['LT', 'EQ', 'GT'];
+
+function compare(x, y)
+{
+	return { ctor: ord[_elm_lang$core$Native_Utils.cmp(x, y) + 1] };
+}
+
+function xor(a, b)
+{
+	return a !== b;
+}
+function not(b)
+{
+	return !b;
+}
+function isInfinite(n)
+{
+	return n === Infinity || n === -Infinity;
+}
+
+function truncate(n)
+{
+	return n | 0;
+}
+
+function degrees(d)
+{
+	return d * Math.PI / 180;
+}
+function turns(t)
+{
+	return 2 * Math.PI * t;
+}
+function fromPolar(point)
+{
+	var r = point._0;
+	var t = point._1;
+	return _elm_lang$core$Native_Utils.Tuple2(r * Math.cos(t), r * Math.sin(t));
+}
+function toPolar(point)
+{
+	var x = point._0;
+	var y = point._1;
+	return _elm_lang$core$Native_Utils.Tuple2(Math.sqrt(x * x + y * y), Math.atan2(y, x));
+}
+
+return {
+	div: F2(div),
+	rem: F2(rem),
+	mod: F2(mod),
+
+	pi: Math.PI,
+	e: Math.E,
+	cos: Math.cos,
+	sin: Math.sin,
+	tan: Math.tan,
+	acos: Math.acos,
+	asin: Math.asin,
+	atan: Math.atan,
+	atan2: F2(Math.atan2),
+
+	degrees: degrees,
+	turns: turns,
+	fromPolar: fromPolar,
+	toPolar: toPolar,
+
+	sqrt: Math.sqrt,
+	logBase: F2(logBase),
+	negate: negate,
+	abs: abs,
+	min: F2(min),
+	max: F2(max),
+	clamp: F3(clamp),
+	compare: F2(compare),
+
+	xor: F2(xor),
+	not: not,
+
+	truncate: truncate,
+	ceiling: Math.ceil,
+	floor: Math.floor,
+	round: Math.round,
+	toFloat: function(x) { return x; },
+	isNaN: isNaN,
+	isInfinite: isInfinite
+};
+
+}();
+//import //
+
+var _elm_lang$core$Native_Utils = function() {
+
+// COMPARISONS
+
+function eq(x, y)
+{
+	var stack = [];
+	var isEqual = eqHelp(x, y, 0, stack);
+	var pair;
+	while (isEqual && (pair = stack.pop()))
+	{
+		isEqual = eqHelp(pair.x, pair.y, 0, stack);
+	}
+	return isEqual;
+}
+
+
+function eqHelp(x, y, depth, stack)
+{
+	if (depth > 100)
+	{
+		stack.push({ x: x, y: y });
+		return true;
+	}
+
+	if (x === y)
+	{
+		return true;
+	}
+
+	if (typeof x !== 'object')
+	{
+		if (typeof x === 'function')
+		{
+			throw new Error(
+				'Trying to use `(==)` on functions. There is no way to know if functions are "the same" in the Elm sense.'
+				+ ' Read more about this at http://package.elm-lang.org/packages/elm-lang/core/latest/Basics#=='
+				+ ' which describes why it is this way and what the better version will look like.'
+			);
+		}
+		return false;
+	}
+
+	if (x === null || y === null)
+	{
+		return false
+	}
+
+	if (x instanceof Date)
+	{
+		return x.getTime() === y.getTime();
+	}
+
+	if (!('ctor' in x))
+	{
+		for (var key in x)
+		{
+			if (!eqHelp(x[key], y[key], depth + 1, stack))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// convert Dicts and Sets to lists
+	if (x.ctor === 'RBNode_elm_builtin' || x.ctor === 'RBEmpty_elm_builtin')
+	{
+		x = _elm_lang$core$Dict$toList(x);
+		y = _elm_lang$core$Dict$toList(y);
+	}
+	if (x.ctor === 'Set_elm_builtin')
+	{
+		x = _elm_lang$core$Set$toList(x);
+		y = _elm_lang$core$Set$toList(y);
+	}
+
+	// check if lists are equal without recursion
+	if (x.ctor === '::')
+	{
+		var a = x;
+		var b = y;
+		while (a.ctor === '::' && b.ctor === '::')
+		{
+			if (!eqHelp(a._0, b._0, depth + 1, stack))
+			{
+				return false;
+			}
+			a = a._1;
+			b = b._1;
+		}
+		return a.ctor === b.ctor;
+	}
+
+	// check if Arrays are equal
+	if (x.ctor === '_Array')
+	{
+		var xs = _elm_lang$core$Native_Array.toJSArray(x);
+		var ys = _elm_lang$core$Native_Array.toJSArray(y);
+		if (xs.length !== ys.length)
+		{
+			return false;
+		}
+		for (var i = 0; i < xs.length; i++)
+		{
+			if (!eqHelp(xs[i], ys[i], depth + 1, stack))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	if (!eqHelp(x.ctor, y.ctor, depth + 1, stack))
+	{
+		return false;
+	}
+
+	for (var key in x)
+	{
+		if (!eqHelp(x[key], y[key], depth + 1, stack))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
+// the particular integer values assigned to LT, EQ, and GT.
+
+var LT = -1, EQ = 0, GT = 1;
+
+function cmp(x, y)
+{
+	if (typeof x !== 'object')
+	{
+		return x === y ? EQ : x < y ? LT : GT;
+	}
+
+	if (x instanceof String)
+	{
+		var a = x.valueOf();
+		var b = y.valueOf();
+		return a === b ? EQ : a < b ? LT : GT;
+	}
+
+	if (x.ctor === '::' || x.ctor === '[]')
+	{
+		while (x.ctor === '::' && y.ctor === '::')
+		{
+			var ord = cmp(x._0, y._0);
+			if (ord !== EQ)
+			{
+				return ord;
+			}
+			x = x._1;
+			y = y._1;
+		}
+		return x.ctor === y.ctor ? EQ : x.ctor === '[]' ? LT : GT;
+	}
+
+	if (x.ctor.slice(0, 6) === '_Tuple')
+	{
+		var ord;
+		var n = x.ctor.slice(6) - 0;
+		var err = 'cannot compare tuples with more than 6 elements.';
+		if (n === 0) return EQ;
+		if (n >= 1) { ord = cmp(x._0, y._0); if (ord !== EQ) return ord;
+		if (n >= 2) { ord = cmp(x._1, y._1); if (ord !== EQ) return ord;
+		if (n >= 3) { ord = cmp(x._2, y._2); if (ord !== EQ) return ord;
+		if (n >= 4) { ord = cmp(x._3, y._3); if (ord !== EQ) return ord;
+		if (n >= 5) { ord = cmp(x._4, y._4); if (ord !== EQ) return ord;
+		if (n >= 6) { ord = cmp(x._5, y._5); if (ord !== EQ) return ord;
+		if (n >= 7) throw new Error('Comparison error: ' + err); } } } } } }
+		return EQ;
+	}
+
+	throw new Error(
+		'Comparison error: comparison is only defined on ints, '
+		+ 'floats, times, chars, strings, lists of comparable values, '
+		+ 'and tuples of comparable values.'
+	);
+}
+
+
+// COMMON VALUES
+
+var Tuple0 = {
+	ctor: '_Tuple0'
+};
+
+function Tuple2(x, y)
+{
+	return {
+		ctor: '_Tuple2',
+		_0: x,
+		_1: y
+	};
+}
+
+function chr(c)
+{
+	return new String(c);
+}
+
+
+// GUID
+
+var count = 0;
+function guid(_)
+{
+	return count++;
+}
+
+
+// RECORDS
+
+function update(oldRecord, updatedFields)
+{
+	var newRecord = {};
+
+	for (var key in oldRecord)
+	{
+		newRecord[key] = oldRecord[key];
+	}
+
+	for (var key in updatedFields)
+	{
+		newRecord[key] = updatedFields[key];
+	}
+
+	return newRecord;
+}
+
+
+//// LIST STUFF ////
+
+var Nil = { ctor: '[]' };
+
+function Cons(hd, tl)
+{
+	return {
+		ctor: '::',
+		_0: hd,
+		_1: tl
+	};
+}
+
+function append(xs, ys)
+{
+	// append Strings
+	if (typeof xs === 'string')
+	{
+		return xs + ys;
+	}
+
+	// append Lists
+	if (xs.ctor === '[]')
+	{
+		return ys;
+	}
+	var root = Cons(xs._0, Nil);
+	var curr = root;
+	xs = xs._1;
+	while (xs.ctor !== '[]')
+	{
+		curr._1 = Cons(xs._0, Nil);
+		xs = xs._1;
+		curr = curr._1;
+	}
+	curr._1 = ys;
+	return root;
+}
+
+
+// CRASHES
+
+function crash(moduleName, region)
+{
+	return function(message) {
+		throw new Error(
+			'Ran into a `Debug.crash` in module `' + moduleName + '` ' + regionToString(region) + '\n'
+			+ 'The message provided by the code author is:\n\n    '
+			+ message
+		);
+	};
+}
+
+function crashCase(moduleName, region, value)
+{
+	return function(message) {
+		throw new Error(
+			'Ran into a `Debug.crash` in module `' + moduleName + '`\n\n'
+			+ 'This was caused by the `case` expression ' + regionToString(region) + '.\n'
+			+ 'One of the branches ended with a crash and the following value got through:\n\n    ' + toString(value) + '\n\n'
+			+ 'The message provided by the code author is:\n\n    '
+			+ message
+		);
+	};
+}
+
+function regionToString(region)
+{
+	if (region.start.line == region.end.line)
+	{
+		return 'on line ' + region.start.line;
+	}
+	return 'between lines ' + region.start.line + ' and ' + region.end.line;
+}
+
+
+// TO STRING
+
+function toString(v)
+{
+	var type = typeof v;
+	if (type === 'function')
+	{
+		return '<function>';
+	}
+
+	if (type === 'boolean')
+	{
+		return v ? 'True' : 'False';
+	}
+
+	if (type === 'number')
+	{
+		return v + '';
+	}
+
+	if (v instanceof String)
+	{
+		return '\'' + addSlashes(v, true) + '\'';
+	}
+
+	if (type === 'string')
+	{
+		return '"' + addSlashes(v, false) + '"';
+	}
+
+	if (v === null)
+	{
+		return 'null';
+	}
+
+	if (type === 'object' && 'ctor' in v)
+	{
+		var ctorStarter = v.ctor.substring(0, 5);
+
+		if (ctorStarter === '_Tupl')
+		{
+			var output = [];
+			for (var k in v)
+			{
+				if (k === 'ctor') continue;
+				output.push(toString(v[k]));
+			}
+			return '(' + output.join(',') + ')';
+		}
+
+		if (ctorStarter === '_Task')
+		{
+			return '<task>'
+		}
+
+		if (v.ctor === '_Array')
+		{
+			var list = _elm_lang$core$Array$toList(v);
+			return 'Array.fromList ' + toString(list);
+		}
+
+		if (v.ctor === '<decoder>')
+		{
+			return '<decoder>';
+		}
+
+		if (v.ctor === '_Process')
+		{
+			return '<process:' + v.id + '>';
+		}
+
+		if (v.ctor === '::')
+		{
+			var output = '[' + toString(v._0);
+			v = v._1;
+			while (v.ctor === '::')
+			{
+				output += ',' + toString(v._0);
+				v = v._1;
+			}
+			return output + ']';
+		}
+
+		if (v.ctor === '[]')
+		{
+			return '[]';
+		}
+
+		if (v.ctor === 'Set_elm_builtin')
+		{
+			return 'Set.fromList ' + toString(_elm_lang$core$Set$toList(v));
+		}
+
+		if (v.ctor === 'RBNode_elm_builtin' || v.ctor === 'RBEmpty_elm_builtin')
+		{
+			return 'Dict.fromList ' + toString(_elm_lang$core$Dict$toList(v));
+		}
+
+		var output = '';
+		for (var i in v)
+		{
+			if (i === 'ctor') continue;
+			var str = toString(v[i]);
+			var c0 = str[0];
+			var parenless = c0 === '{' || c0 === '(' || c0 === '<' || c0 === '"' || str.indexOf(' ') < 0;
+			output += ' ' + (parenless ? str : '(' + str + ')');
+		}
+		return v.ctor + output;
+	}
+
+	if (type === 'object')
+	{
+		if (v instanceof Date)
+		{
+			return '<' + v.toString() + '>';
+		}
+
+		if (v.elm_web_socket)
+		{
+			return '<websocket>';
+		}
+
+		var output = [];
+		for (var k in v)
+		{
+			output.push(k + ' = ' + toString(v[k]));
+		}
+		if (output.length === 0)
+		{
+			return '{}';
+		}
+		return '{ ' + output.join(', ') + ' }';
+	}
+
+	return '<internal structure>';
+}
+
+function addSlashes(str, isChar)
+{
+	var s = str.replace(/\\/g, '\\\\')
+			  .replace(/\n/g, '\\n')
+			  .replace(/\t/g, '\\t')
+			  .replace(/\r/g, '\\r')
+			  .replace(/\v/g, '\\v')
+			  .replace(/\0/g, '\\0');
+	if (isChar)
+	{
+		return s.replace(/\'/g, '\\\'');
+	}
+	else
+	{
+		return s.replace(/\"/g, '\\"');
+	}
+}
+
+
+return {
+	eq: eq,
+	cmp: cmp,
+	Tuple0: Tuple0,
+	Tuple2: Tuple2,
+	chr: chr,
+	update: update,
+	guid: guid,
+
+	append: F2(append),
+
+	crash: crash,
+	crashCase: crashCase,
+
+	toString: toString
+};
+
+}();
+var _elm_lang$core$Basics$never = function (_p0) {
+	never:
+	while (true) {
+		var _p1 = _p0;
+		var _v1 = _p1._0;
+		_p0 = _v1;
+		continue never;
+	}
+};
+var _elm_lang$core$Basics$uncurry = F2(
+	function (f, _p2) {
+		var _p3 = _p2;
+		return A2(f, _p3._0, _p3._1);
+	});
+var _elm_lang$core$Basics$curry = F3(
+	function (f, a, b) {
+		return f(
+			{ctor: '_Tuple2', _0: a, _1: b});
+	});
+var _elm_lang$core$Basics$flip = F3(
+	function (f, b, a) {
+		return A2(f, a, b);
+	});
+var _elm_lang$core$Basics$always = F2(
+	function (a, _p4) {
+		return a;
+	});
+var _elm_lang$core$Basics$identity = function (x) {
+	return x;
+};
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<|'] = F2(
+	function (f, x) {
+		return f(x);
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['|>'] = F2(
+	function (x, f) {
+		return f(x);
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>>'] = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<<'] = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['++'] = _elm_lang$core$Native_Utils.append;
+var _elm_lang$core$Basics$toString = _elm_lang$core$Native_Utils.toString;
+var _elm_lang$core$Basics$isInfinite = _elm_lang$core$Native_Basics.isInfinite;
+var _elm_lang$core$Basics$isNaN = _elm_lang$core$Native_Basics.isNaN;
+var _elm_lang$core$Basics$toFloat = _elm_lang$core$Native_Basics.toFloat;
+var _elm_lang$core$Basics$ceiling = _elm_lang$core$Native_Basics.ceiling;
+var _elm_lang$core$Basics$floor = _elm_lang$core$Native_Basics.floor;
+var _elm_lang$core$Basics$truncate = _elm_lang$core$Native_Basics.truncate;
+var _elm_lang$core$Basics$round = _elm_lang$core$Native_Basics.round;
+var _elm_lang$core$Basics$not = _elm_lang$core$Native_Basics.not;
+var _elm_lang$core$Basics$xor = _elm_lang$core$Native_Basics.xor;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['||'] = _elm_lang$core$Native_Basics.or;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['&&'] = _elm_lang$core$Native_Basics.and;
+var _elm_lang$core$Basics$max = _elm_lang$core$Native_Basics.max;
+var _elm_lang$core$Basics$min = _elm_lang$core$Native_Basics.min;
+var _elm_lang$core$Basics$compare = _elm_lang$core$Native_Basics.compare;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>='] = _elm_lang$core$Native_Basics.ge;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<='] = _elm_lang$core$Native_Basics.le;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>'] = _elm_lang$core$Native_Basics.gt;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<'] = _elm_lang$core$Native_Basics.lt;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['/='] = _elm_lang$core$Native_Basics.neq;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['=='] = _elm_lang$core$Native_Basics.eq;
+var _elm_lang$core$Basics$e = _elm_lang$core$Native_Basics.e;
+var _elm_lang$core$Basics$pi = _elm_lang$core$Native_Basics.pi;
+var _elm_lang$core$Basics$clamp = _elm_lang$core$Native_Basics.clamp;
+var _elm_lang$core$Basics$logBase = _elm_lang$core$Native_Basics.logBase;
+var _elm_lang$core$Basics$abs = _elm_lang$core$Native_Basics.abs;
+var _elm_lang$core$Basics$negate = _elm_lang$core$Native_Basics.negate;
+var _elm_lang$core$Basics$sqrt = _elm_lang$core$Native_Basics.sqrt;
+var _elm_lang$core$Basics$atan2 = _elm_lang$core$Native_Basics.atan2;
+var _elm_lang$core$Basics$atan = _elm_lang$core$Native_Basics.atan;
+var _elm_lang$core$Basics$asin = _elm_lang$core$Native_Basics.asin;
+var _elm_lang$core$Basics$acos = _elm_lang$core$Native_Basics.acos;
+var _elm_lang$core$Basics$tan = _elm_lang$core$Native_Basics.tan;
+var _elm_lang$core$Basics$sin = _elm_lang$core$Native_Basics.sin;
+var _elm_lang$core$Basics$cos = _elm_lang$core$Native_Basics.cos;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['^'] = _elm_lang$core$Native_Basics.exp;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['%'] = _elm_lang$core$Native_Basics.mod;
+var _elm_lang$core$Basics$rem = _elm_lang$core$Native_Basics.rem;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['//'] = _elm_lang$core$Native_Basics.div;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['/'] = _elm_lang$core$Native_Basics.floatDiv;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['*'] = _elm_lang$core$Native_Basics.mul;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['-'] = _elm_lang$core$Native_Basics.sub;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['+'] = _elm_lang$core$Native_Basics.add;
+var _elm_lang$core$Basics$toPolar = _elm_lang$core$Native_Basics.toPolar;
+var _elm_lang$core$Basics$fromPolar = _elm_lang$core$Native_Basics.fromPolar;
+var _elm_lang$core$Basics$turns = _elm_lang$core$Native_Basics.turns;
+var _elm_lang$core$Basics$degrees = _elm_lang$core$Native_Basics.degrees;
+var _elm_lang$core$Basics$radians = function (t) {
+	return t;
+};
+var _elm_lang$core$Basics$GT = {ctor: 'GT'};
+var _elm_lang$core$Basics$EQ = {ctor: 'EQ'};
+var _elm_lang$core$Basics$LT = {ctor: 'LT'};
+var _elm_lang$core$Basics$JustOneMore = function (a) {
+	return {ctor: 'JustOneMore', _0: a};
+};
+
+var _elm_lang$core$Maybe$withDefault = F2(
+	function ($default, maybe) {
+		var _p0 = maybe;
+		if (_p0.ctor === 'Just') {
+			return _p0._0;
+		} else {
+			return $default;
+		}
+	});
+var _elm_lang$core$Maybe$Nothing = {ctor: 'Nothing'};
+var _elm_lang$core$Maybe$andThen = F2(
+	function (callback, maybeValue) {
+		var _p1 = maybeValue;
+		if (_p1.ctor === 'Just') {
+			return callback(_p1._0);
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$Just = function (a) {
+	return {ctor: 'Just', _0: a};
+};
+var _elm_lang$core$Maybe$map = F2(
+	function (f, maybe) {
+		var _p2 = maybe;
+		if (_p2.ctor === 'Just') {
+			return _elm_lang$core$Maybe$Just(
+				f(_p2._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map2 = F3(
+	function (func, ma, mb) {
+		var _p3 = {ctor: '_Tuple2', _0: ma, _1: mb};
+		if (((_p3.ctor === '_Tuple2') && (_p3._0.ctor === 'Just')) && (_p3._1.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A2(func, _p3._0._0, _p3._1._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map3 = F4(
+	function (func, ma, mb, mc) {
+		var _p4 = {ctor: '_Tuple3', _0: ma, _1: mb, _2: mc};
+		if ((((_p4.ctor === '_Tuple3') && (_p4._0.ctor === 'Just')) && (_p4._1.ctor === 'Just')) && (_p4._2.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A3(func, _p4._0._0, _p4._1._0, _p4._2._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map4 = F5(
+	function (func, ma, mb, mc, md) {
+		var _p5 = {ctor: '_Tuple4', _0: ma, _1: mb, _2: mc, _3: md};
+		if (((((_p5.ctor === '_Tuple4') && (_p5._0.ctor === 'Just')) && (_p5._1.ctor === 'Just')) && (_p5._2.ctor === 'Just')) && (_p5._3.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A4(func, _p5._0._0, _p5._1._0, _p5._2._0, _p5._3._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map5 = F6(
+	function (func, ma, mb, mc, md, me) {
+		var _p6 = {ctor: '_Tuple5', _0: ma, _1: mb, _2: mc, _3: md, _4: me};
+		if ((((((_p6.ctor === '_Tuple5') && (_p6._0.ctor === 'Just')) && (_p6._1.ctor === 'Just')) && (_p6._2.ctor === 'Just')) && (_p6._3.ctor === 'Just')) && (_p6._4.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A5(func, _p6._0._0, _p6._1._0, _p6._2._0, _p6._3._0, _p6._4._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_List = function() {
+
+var Nil = { ctor: '[]' };
+
+function Cons(hd, tl)
+{
+	return { ctor: '::', _0: hd, _1: tl };
+}
+
+function fromArray(arr)
+{
+	var out = Nil;
+	for (var i = arr.length; i--; )
+	{
+		out = Cons(arr[i], out);
+	}
+	return out;
+}
+
+function toArray(xs)
+{
+	var out = [];
+	while (xs.ctor !== '[]')
+	{
+		out.push(xs._0);
+		xs = xs._1;
+	}
+	return out;
+}
+
+function foldr(f, b, xs)
+{
+	var arr = toArray(xs);
+	var acc = b;
+	for (var i = arr.length; i--; )
+	{
+		acc = A2(f, arr[i], acc);
+	}
+	return acc;
+}
+
+function map2(f, xs, ys)
+{
+	var arr = [];
+	while (xs.ctor !== '[]' && ys.ctor !== '[]')
+	{
+		arr.push(A2(f, xs._0, ys._0));
+		xs = xs._1;
+		ys = ys._1;
+	}
+	return fromArray(arr);
+}
+
+function map3(f, xs, ys, zs)
+{
+	var arr = [];
+	while (xs.ctor !== '[]' && ys.ctor !== '[]' && zs.ctor !== '[]')
+	{
+		arr.push(A3(f, xs._0, ys._0, zs._0));
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function map4(f, ws, xs, ys, zs)
+{
+	var arr = [];
+	while (   ws.ctor !== '[]'
+		   && xs.ctor !== '[]'
+		   && ys.ctor !== '[]'
+		   && zs.ctor !== '[]')
+	{
+		arr.push(A4(f, ws._0, xs._0, ys._0, zs._0));
+		ws = ws._1;
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function map5(f, vs, ws, xs, ys, zs)
+{
+	var arr = [];
+	while (   vs.ctor !== '[]'
+		   && ws.ctor !== '[]'
+		   && xs.ctor !== '[]'
+		   && ys.ctor !== '[]'
+		   && zs.ctor !== '[]')
+	{
+		arr.push(A5(f, vs._0, ws._0, xs._0, ys._0, zs._0));
+		vs = vs._1;
+		ws = ws._1;
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function sortBy(f, xs)
+{
+	return fromArray(toArray(xs).sort(function(a, b) {
+		return _elm_lang$core$Native_Utils.cmp(f(a), f(b));
+	}));
+}
+
+function sortWith(f, xs)
+{
+	return fromArray(toArray(xs).sort(function(a, b) {
+		var ord = f(a)(b).ctor;
+		return ord === 'EQ' ? 0 : ord === 'LT' ? -1 : 1;
+	}));
+}
+
+return {
+	Nil: Nil,
+	Cons: Cons,
+	cons: F2(Cons),
+	toArray: toArray,
+	fromArray: fromArray,
+
+	foldr: F3(foldr),
+
+	map2: F3(map2),
+	map3: F4(map3),
+	map4: F5(map4),
+	map5: F6(map5),
+	sortBy: F2(sortBy),
+	sortWith: F2(sortWith)
+};
+
+}();
+var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
+var _elm_lang$core$List$sortBy = _elm_lang$core$Native_List.sortBy;
+var _elm_lang$core$List$sort = function (xs) {
+	return A2(_elm_lang$core$List$sortBy, _elm_lang$core$Basics$identity, xs);
+};
+var _elm_lang$core$List$singleton = function (value) {
+	return {
+		ctor: '::',
+		_0: value,
+		_1: {ctor: '[]'}
+	};
+};
+var _elm_lang$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return list;
+			} else {
+				var _p0 = list;
+				if (_p0.ctor === '[]') {
+					return list;
+				} else {
+					var _v1 = n - 1,
+						_v2 = _p0._1;
+					n = _v1;
+					list = _v2;
+					continue drop;
+				}
+			}
+		}
+	});
+var _elm_lang$core$List$map5 = _elm_lang$core$Native_List.map5;
+var _elm_lang$core$List$map4 = _elm_lang$core$Native_List.map4;
+var _elm_lang$core$List$map3 = _elm_lang$core$Native_List.map3;
+var _elm_lang$core$List$map2 = _elm_lang$core$Native_List.map2;
+var _elm_lang$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			var _p1 = list;
+			if (_p1.ctor === '[]') {
+				return false;
+			} else {
+				if (isOkay(_p1._0)) {
+					return true;
+				} else {
+					var _v4 = isOkay,
+						_v5 = _p1._1;
+					isOkay = _v4;
+					list = _v5;
+					continue any;
+				}
+			}
+		}
+	});
+var _elm_lang$core$List$all = F2(
+	function (isOkay, list) {
+		return !A2(
+			_elm_lang$core$List$any,
+			function (_p2) {
+				return !isOkay(_p2);
+			},
+			list);
+	});
+var _elm_lang$core$List$foldr = _elm_lang$core$Native_List.foldr;
+var _elm_lang$core$List$foldl = F3(
+	function (func, acc, list) {
+		foldl:
+		while (true) {
+			var _p3 = list;
+			if (_p3.ctor === '[]') {
+				return acc;
+			} else {
+				var _v7 = func,
+					_v8 = A2(func, _p3._0, acc),
+					_v9 = _p3._1;
+				func = _v7;
+				acc = _v8;
+				list = _v9;
+				continue foldl;
+			}
+		}
+	});
+var _elm_lang$core$List$length = function (xs) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (_p4, i) {
+				return i + 1;
+			}),
+		0,
+		xs);
+};
+var _elm_lang$core$List$sum = function (numbers) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x + y;
+			}),
+		0,
+		numbers);
+};
+var _elm_lang$core$List$product = function (numbers) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x * y;
+			}),
+		1,
+		numbers);
+};
+var _elm_lang$core$List$maximum = function (list) {
+	var _p5 = list;
+	if (_p5.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(
+			A3(_elm_lang$core$List$foldl, _elm_lang$core$Basics$max, _p5._0, _p5._1));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$minimum = function (list) {
+	var _p6 = list;
+	if (_p6.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(
+			A3(_elm_lang$core$List$foldl, _elm_lang$core$Basics$min, _p6._0, _p6._1));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			_elm_lang$core$List$any,
+			function (a) {
+				return _elm_lang$core$Native_Utils.eq(a, x);
+			},
+			xs);
+	});
+var _elm_lang$core$List$isEmpty = function (xs) {
+	var _p7 = xs;
+	if (_p7.ctor === '[]') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _elm_lang$core$List$tail = function (list) {
+	var _p8 = list;
+	if (_p8.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(_p8._1);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$head = function (list) {
+	var _p9 = list;
+	if (_p9.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(_p9._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List_ops = _elm_lang$core$List_ops || {};
+_elm_lang$core$List_ops['::'] = _elm_lang$core$Native_List.cons;
+var _elm_lang$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return {
+						ctor: '::',
+						_0: f(x),
+						_1: acc
+					};
+				}),
+			{ctor: '[]'},
+			xs);
+	});
+var _elm_lang$core$List$filter = F2(
+	function (pred, xs) {
+		var conditionalCons = F2(
+			function (front, back) {
+				return pred(front) ? {ctor: '::', _0: front, _1: back} : back;
+			});
+		return A3(
+			_elm_lang$core$List$foldr,
+			conditionalCons,
+			{ctor: '[]'},
+			xs);
+	});
+var _elm_lang$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _p10 = f(mx);
+		if (_p10.ctor === 'Just') {
+			return {ctor: '::', _0: _p10._0, _1: xs};
+		} else {
+			return xs;
+		}
+	});
+var _elm_lang$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			_elm_lang$core$List$maybeCons(f),
+			{ctor: '[]'},
+			xs);
+	});
+var _elm_lang$core$List$reverse = function (list) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			}),
+		{ctor: '[]'},
+		list);
+};
+var _elm_lang$core$List$scanl = F3(
+	function (f, b, xs) {
+		var scan1 = F2(
+			function (x, accAcc) {
+				var _p11 = accAcc;
+				if (_p11.ctor === '::') {
+					return {
+						ctor: '::',
+						_0: A2(f, x, _p11._0),
+						_1: accAcc
+					};
+				} else {
+					return {ctor: '[]'};
+				}
+			});
+		return _elm_lang$core$List$reverse(
+			A3(
+				_elm_lang$core$List$foldl,
+				scan1,
+				{
+					ctor: '::',
+					_0: b,
+					_1: {ctor: '[]'}
+				},
+				xs));
+	});
+var _elm_lang$core$List$append = F2(
+	function (xs, ys) {
+		var _p12 = ys;
+		if (_p12.ctor === '[]') {
+			return xs;
+		} else {
+			return A3(
+				_elm_lang$core$List$foldr,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				ys,
+				xs);
+		}
+	});
+var _elm_lang$core$List$concat = function (lists) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		_elm_lang$core$List$append,
+		{ctor: '[]'},
+		lists);
+};
+var _elm_lang$core$List$concatMap = F2(
+	function (f, list) {
+		return _elm_lang$core$List$concat(
+			A2(_elm_lang$core$List$map, f, list));
+	});
+var _elm_lang$core$List$partition = F2(
+	function (pred, list) {
+		var step = F2(
+			function (x, _p13) {
+				var _p14 = _p13;
+				var _p16 = _p14._0;
+				var _p15 = _p14._1;
+				return pred(x) ? {
+					ctor: '_Tuple2',
+					_0: {ctor: '::', _0: x, _1: _p16},
+					_1: _p15
+				} : {
+					ctor: '_Tuple2',
+					_0: _p16,
+					_1: {ctor: '::', _0: x, _1: _p15}
+				};
+			});
+		return A3(
+			_elm_lang$core$List$foldr,
+			step,
+			{
+				ctor: '_Tuple2',
+				_0: {ctor: '[]'},
+				_1: {ctor: '[]'}
+			},
+			list);
+	});
+var _elm_lang$core$List$unzip = function (pairs) {
+	var step = F2(
+		function (_p18, _p17) {
+			var _p19 = _p18;
+			var _p20 = _p17;
+			return {
+				ctor: '_Tuple2',
+				_0: {ctor: '::', _0: _p19._0, _1: _p20._0},
+				_1: {ctor: '::', _0: _p19._1, _1: _p20._1}
+			};
+		});
+	return A3(
+		_elm_lang$core$List$foldr,
+		step,
+		{
+			ctor: '_Tuple2',
+			_0: {ctor: '[]'},
+			_1: {ctor: '[]'}
+		},
+		pairs);
+};
+var _elm_lang$core$List$intersperse = F2(
+	function (sep, xs) {
+		var _p21 = xs;
+		if (_p21.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var step = F2(
+				function (x, rest) {
+					return {
+						ctor: '::',
+						_0: sep,
+						_1: {ctor: '::', _0: x, _1: rest}
+					};
+				});
+			var spersed = A3(
+				_elm_lang$core$List$foldr,
+				step,
+				{ctor: '[]'},
+				_p21._1);
+			return {ctor: '::', _0: _p21._0, _1: spersed};
+		}
+	});
+var _elm_lang$core$List$takeReverse = F3(
+	function (n, list, taken) {
+		takeReverse:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return taken;
+			} else {
+				var _p22 = list;
+				if (_p22.ctor === '[]') {
+					return taken;
+				} else {
+					var _v23 = n - 1,
+						_v24 = _p22._1,
+						_v25 = {ctor: '::', _0: _p22._0, _1: taken};
+					n = _v23;
+					list = _v24;
+					taken = _v25;
+					continue takeReverse;
+				}
+			}
+		}
+	});
+var _elm_lang$core$List$takeTailRec = F2(
+	function (n, list) {
+		return _elm_lang$core$List$reverse(
+			A3(
+				_elm_lang$core$List$takeReverse,
+				n,
+				list,
+				{ctor: '[]'}));
+	});
+var _elm_lang$core$List$takeFast = F3(
+	function (ctr, n, list) {
+		if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+			return {ctor: '[]'};
+		} else {
+			var _p23 = {ctor: '_Tuple2', _0: n, _1: list};
+			_v26_5:
+			do {
+				_v26_1:
+				do {
+					if (_p23.ctor === '_Tuple2') {
+						if (_p23._1.ctor === '[]') {
+							return list;
+						} else {
+							if (_p23._1._1.ctor === '::') {
+								switch (_p23._0) {
+									case 1:
+										break _v26_1;
+									case 2:
+										return {
+											ctor: '::',
+											_0: _p23._1._0,
+											_1: {
+												ctor: '::',
+												_0: _p23._1._1._0,
+												_1: {ctor: '[]'}
+											}
+										};
+									case 3:
+										if (_p23._1._1._1.ctor === '::') {
+											return {
+												ctor: '::',
+												_0: _p23._1._0,
+												_1: {
+													ctor: '::',
+													_0: _p23._1._1._0,
+													_1: {
+														ctor: '::',
+														_0: _p23._1._1._1._0,
+														_1: {ctor: '[]'}
+													}
+												}
+											};
+										} else {
+											break _v26_5;
+										}
+									default:
+										if ((_p23._1._1._1.ctor === '::') && (_p23._1._1._1._1.ctor === '::')) {
+											var _p28 = _p23._1._1._1._0;
+											var _p27 = _p23._1._1._0;
+											var _p26 = _p23._1._0;
+											var _p25 = _p23._1._1._1._1._0;
+											var _p24 = _p23._1._1._1._1._1;
+											return (_elm_lang$core$Native_Utils.cmp(ctr, 1000) > 0) ? {
+												ctor: '::',
+												_0: _p26,
+												_1: {
+													ctor: '::',
+													_0: _p27,
+													_1: {
+														ctor: '::',
+														_0: _p28,
+														_1: {
+															ctor: '::',
+															_0: _p25,
+															_1: A2(_elm_lang$core$List$takeTailRec, n - 4, _p24)
+														}
+													}
+												}
+											} : {
+												ctor: '::',
+												_0: _p26,
+												_1: {
+													ctor: '::',
+													_0: _p27,
+													_1: {
+														ctor: '::',
+														_0: _p28,
+														_1: {
+															ctor: '::',
+															_0: _p25,
+															_1: A3(_elm_lang$core$List$takeFast, ctr + 1, n - 4, _p24)
+														}
+													}
+												}
+											};
+										} else {
+											break _v26_5;
+										}
+								}
+							} else {
+								if (_p23._0 === 1) {
+									break _v26_1;
+								} else {
+									break _v26_5;
+								}
+							}
+						}
+					} else {
+						break _v26_5;
+					}
+				} while(false);
+				return {
+					ctor: '::',
+					_0: _p23._1._0,
+					_1: {ctor: '[]'}
+				};
+			} while(false);
+			return list;
+		}
+	});
+var _elm_lang$core$List$take = F2(
+	function (n, list) {
+		return A3(_elm_lang$core$List$takeFast, 0, n, list);
+	});
+var _elm_lang$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return result;
+			} else {
+				var _v27 = {ctor: '::', _0: value, _1: result},
+					_v28 = n - 1,
+					_v29 = value;
+				result = _v27;
+				n = _v28;
+				value = _v29;
+				continue repeatHelp;
+			}
+		}
+	});
+var _elm_lang$core$List$repeat = F2(
+	function (n, value) {
+		return A3(
+			_elm_lang$core$List$repeatHelp,
+			{ctor: '[]'},
+			n,
+			value);
+	});
+var _elm_lang$core$List$rangeHelp = F3(
+	function (lo, hi, list) {
+		rangeHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(lo, hi) < 1) {
+				var _v30 = lo,
+					_v31 = hi - 1,
+					_v32 = {ctor: '::', _0: hi, _1: list};
+				lo = _v30;
+				hi = _v31;
+				list = _v32;
+				continue rangeHelp;
+			} else {
+				return list;
+			}
+		}
+	});
+var _elm_lang$core$List$range = F2(
+	function (lo, hi) {
+		return A3(
+			_elm_lang$core$List$rangeHelp,
+			lo,
+			hi,
+			{ctor: '[]'});
+	});
+var _elm_lang$core$List$indexedMap = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$map2,
+			f,
+			A2(
+				_elm_lang$core$List$range,
+				0,
+				_elm_lang$core$List$length(xs) - 1),
+			xs);
+	});
+
+var _elm_lang$core$Array$append = _elm_lang$core$Native_Array.append;
+var _elm_lang$core$Array$length = _elm_lang$core$Native_Array.length;
+var _elm_lang$core$Array$isEmpty = function (array) {
+	return _elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Array$length(array),
+		0);
+};
+var _elm_lang$core$Array$slice = _elm_lang$core$Native_Array.slice;
+var _elm_lang$core$Array$set = _elm_lang$core$Native_Array.set;
+var _elm_lang$core$Array$get = F2(
+	function (i, array) {
+		return ((_elm_lang$core$Native_Utils.cmp(0, i) < 1) && (_elm_lang$core$Native_Utils.cmp(
+			i,
+			_elm_lang$core$Native_Array.length(array)) < 0)) ? _elm_lang$core$Maybe$Just(
+			A2(_elm_lang$core$Native_Array.get, i, array)) : _elm_lang$core$Maybe$Nothing;
+	});
+var _elm_lang$core$Array$push = _elm_lang$core$Native_Array.push;
+var _elm_lang$core$Array$empty = _elm_lang$core$Native_Array.empty;
+var _elm_lang$core$Array$filter = F2(
+	function (isOkay, arr) {
+		var update = F2(
+			function (x, xs) {
+				return isOkay(x) ? A2(_elm_lang$core$Native_Array.push, x, xs) : xs;
+			});
+		return A3(_elm_lang$core$Native_Array.foldl, update, _elm_lang$core$Native_Array.empty, arr);
+	});
+var _elm_lang$core$Array$foldr = _elm_lang$core$Native_Array.foldr;
+var _elm_lang$core$Array$foldl = _elm_lang$core$Native_Array.foldl;
+var _elm_lang$core$Array$indexedMap = _elm_lang$core$Native_Array.indexedMap;
+var _elm_lang$core$Array$map = _elm_lang$core$Native_Array.map;
+var _elm_lang$core$Array$toIndexedList = function (array) {
+	return A3(
+		_elm_lang$core$List$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		A2(
+			_elm_lang$core$List$range,
+			0,
+			_elm_lang$core$Native_Array.length(array) - 1),
+		_elm_lang$core$Native_Array.toList(array));
+};
+var _elm_lang$core$Array$toList = _elm_lang$core$Native_Array.toList;
+var _elm_lang$core$Array$fromList = _elm_lang$core$Native_Array.fromList;
+var _elm_lang$core$Array$initialize = _elm_lang$core$Native_Array.initialize;
+var _elm_lang$core$Array$repeat = F2(
+	function (n, e) {
+		return A2(
+			_elm_lang$core$Array$initialize,
+			n,
+			_elm_lang$core$Basics$always(e));
+	});
+var _elm_lang$core$Array$Array = {ctor: 'Array'};
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_Char = function() {
+
+return {
+	fromCode: function(c) { return _elm_lang$core$Native_Utils.chr(String.fromCharCode(c)); },
+	toCode: function(c) { return c.charCodeAt(0); },
+	toUpper: function(c) { return _elm_lang$core$Native_Utils.chr(c.toUpperCase()); },
+	toLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLowerCase()); },
+	toLocaleUpper: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleUpperCase()); },
+	toLocaleLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleLowerCase()); }
+};
+
+}();
+var _elm_lang$core$Char$fromCode = _elm_lang$core$Native_Char.fromCode;
+var _elm_lang$core$Char$toCode = _elm_lang$core$Native_Char.toCode;
+var _elm_lang$core$Char$toLocaleLower = _elm_lang$core$Native_Char.toLocaleLower;
+var _elm_lang$core$Char$toLocaleUpper = _elm_lang$core$Native_Char.toLocaleUpper;
+var _elm_lang$core$Char$toLower = _elm_lang$core$Native_Char.toLower;
+var _elm_lang$core$Char$toUpper = _elm_lang$core$Native_Char.toUpper;
+var _elm_lang$core$Char$isBetween = F3(
+	function (low, high, $char) {
+		var code = _elm_lang$core$Char$toCode($char);
+		return (_elm_lang$core$Native_Utils.cmp(
+			code,
+			_elm_lang$core$Char$toCode(low)) > -1) && (_elm_lang$core$Native_Utils.cmp(
+			code,
+			_elm_lang$core$Char$toCode(high)) < 1);
+	});
+var _elm_lang$core$Char$isUpper = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('A'),
+	_elm_lang$core$Native_Utils.chr('Z'));
+var _elm_lang$core$Char$isLower = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('a'),
+	_elm_lang$core$Native_Utils.chr('z'));
+var _elm_lang$core$Char$isDigit = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('0'),
+	_elm_lang$core$Native_Utils.chr('9'));
+var _elm_lang$core$Char$isOctDigit = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('0'),
+	_elm_lang$core$Native_Utils.chr('7'));
+var _elm_lang$core$Char$isHexDigit = function ($char) {
+	return _elm_lang$core$Char$isDigit($char) || (A3(
+		_elm_lang$core$Char$isBetween,
+		_elm_lang$core$Native_Utils.chr('a'),
+		_elm_lang$core$Native_Utils.chr('f'),
+		$char) || A3(
+		_elm_lang$core$Char$isBetween,
+		_elm_lang$core$Native_Utils.chr('A'),
+		_elm_lang$core$Native_Utils.chr('F'),
+		$char));
+};
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_Scheduler = function() {
+
+var MAX_STEPS = 10000;
+
+
+// TASKS
+
+function succeed(value)
+{
+	return {
+		ctor: '_Task_succeed',
+		value: value
+	};
+}
+
+function fail(error)
+{
+	return {
+		ctor: '_Task_fail',
+		value: error
+	};
+}
+
+function nativeBinding(callback)
+{
+	return {
+		ctor: '_Task_nativeBinding',
+		callback: callback,
+		cancel: null
+	};
+}
+
+function andThen(callback, task)
+{
+	return {
+		ctor: '_Task_andThen',
+		callback: callback,
+		task: task
+	};
+}
+
+function onError(callback, task)
+{
+	return {
+		ctor: '_Task_onError',
+		callback: callback,
+		task: task
+	};
+}
+
+function receive(callback)
+{
+	return {
+		ctor: '_Task_receive',
+		callback: callback
+	};
+}
+
+
+// PROCESSES
+
+function rawSpawn(task)
+{
+	var process = {
+		ctor: '_Process',
+		id: _elm_lang$core$Native_Utils.guid(),
+		root: task,
+		stack: null,
+		mailbox: []
+	};
+
+	enqueue(process);
+
+	return process;
+}
+
+function spawn(task)
+{
+	return nativeBinding(function(callback) {
+		var process = rawSpawn(task);
+		callback(succeed(process));
+	});
+}
+
+function rawSend(process, msg)
+{
+	process.mailbox.push(msg);
+	enqueue(process);
+}
+
+function send(process, msg)
+{
+	return nativeBinding(function(callback) {
+		rawSend(process, msg);
+		callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function kill(process)
+{
+	return nativeBinding(function(callback) {
+		var root = process.root;
+		if (root.ctor === '_Task_nativeBinding' && root.cancel)
+		{
+			root.cancel();
+		}
+
+		process.root = null;
+
+		callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function sleep(time)
+{
+	return nativeBinding(function(callback) {
+		var id = setTimeout(function() {
+			callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+		}, time);
+
+		return function() { clearTimeout(id); };
+	});
+}
+
+
+// STEP PROCESSES
+
+function step(numSteps, process)
+{
+	while (numSteps < MAX_STEPS)
+	{
+		var ctor = process.root.ctor;
+
+		if (ctor === '_Task_succeed')
+		{
+			while (process.stack && process.stack.ctor === '_Task_onError')
+			{
+				process.stack = process.stack.rest;
+			}
+			if (process.stack === null)
+			{
+				break;
+			}
+			process.root = process.stack.callback(process.root.value);
+			process.stack = process.stack.rest;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_fail')
+		{
+			while (process.stack && process.stack.ctor === '_Task_andThen')
+			{
+				process.stack = process.stack.rest;
+			}
+			if (process.stack === null)
+			{
+				break;
+			}
+			process.root = process.stack.callback(process.root.value);
+			process.stack = process.stack.rest;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_andThen')
+		{
+			process.stack = {
+				ctor: '_Task_andThen',
+				callback: process.root.callback,
+				rest: process.stack
+			};
+			process.root = process.root.task;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_onError')
+		{
+			process.stack = {
+				ctor: '_Task_onError',
+				callback: process.root.callback,
+				rest: process.stack
+			};
+			process.root = process.root.task;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_nativeBinding')
+		{
+			process.root.cancel = process.root.callback(function(newRoot) {
+				process.root = newRoot;
+				enqueue(process);
+			});
+
+			break;
+		}
+
+		if (ctor === '_Task_receive')
+		{
+			var mailbox = process.mailbox;
+			if (mailbox.length === 0)
+			{
+				break;
+			}
+
+			process.root = process.root.callback(mailbox.shift());
+			++numSteps;
+			continue;
+		}
+
+		throw new Error(ctor);
+	}
+
+	if (numSteps < MAX_STEPS)
+	{
+		return numSteps + 1;
+	}
+	enqueue(process);
+
+	return numSteps;
+}
+
+
+// WORK QUEUE
+
+var working = false;
+var workQueue = [];
+
+function enqueue(process)
+{
+	workQueue.push(process);
+
+	if (!working)
+	{
+		setTimeout(work, 0);
+		working = true;
+	}
+}
+
+function work()
+{
+	var numSteps = 0;
+	var process;
+	while (numSteps < MAX_STEPS && (process = workQueue.shift()))
+	{
+		if (process.root)
+		{
+			numSteps = step(numSteps, process);
+		}
+	}
+	if (!process)
+	{
+		working = false;
+		return;
+	}
+	setTimeout(work, 0);
+}
+
+
+return {
+	succeed: succeed,
+	fail: fail,
+	nativeBinding: nativeBinding,
+	andThen: F2(andThen),
+	onError: F2(onError),
+	receive: receive,
+
+	spawn: spawn,
+	kill: kill,
+	sleep: sleep,
+	send: F2(send),
+
+	rawSpawn: rawSpawn,
+	rawSend: rawSend
+};
+
+}();
+//import //
+
+var _elm_lang$core$Native_Platform = function() {
+
+
+// PROGRAMS
+
+function program(impl)
+{
+	return function(flagDecoder)
+	{
+		return function(object, moduleName)
+		{
+			object['worker'] = function worker(flags)
+			{
+				if (typeof flags !== 'undefined')
+				{
+					throw new Error(
+						'The `' + moduleName + '` module does not need flags.\n'
+						+ 'Call ' + moduleName + '.worker() with no arguments and you should be all set!'
+					);
+				}
+
+				return initialize(
+					impl.init,
+					impl.update,
+					impl.subscriptions,
+					renderer
+				);
+			};
+		};
+	};
+}
+
+function programWithFlags(impl)
+{
+	return function(flagDecoder)
+	{
+		return function(object, moduleName)
+		{
+			object['worker'] = function worker(flags)
+			{
+				if (typeof flagDecoder === 'undefined')
+				{
+					throw new Error(
+						'Are you trying to sneak a Never value into Elm? Trickster!\n'
+						+ 'It looks like ' + moduleName + '.main is defined with `programWithFlags` but has type `Program Never`.\n'
+						+ 'Use `program` instead if you do not want flags.'
+					);
+				}
+
+				var result = A2(_elm_lang$core$Native_Json.run, flagDecoder, flags);
+				if (result.ctor === 'Err')
+				{
+					throw new Error(
+						moduleName + '.worker(...) was called with an unexpected argument.\n'
+						+ 'I tried to convert it to an Elm value, but ran into this problem:\n\n'
+						+ result._0
+					);
+				}
+
+				return initialize(
+					impl.init(result._0),
+					impl.update,
+					impl.subscriptions,
+					renderer
+				);
+			};
+		};
+	};
+}
+
+function renderer(enqueue, _)
+{
+	return function(_) {};
+}
+
+
+// HTML TO PROGRAM
+
+function htmlToProgram(vnode)
+{
+	var emptyBag = batch(_elm_lang$core$Native_List.Nil);
+	var noChange = _elm_lang$core$Native_Utils.Tuple2(
+		_elm_lang$core$Native_Utils.Tuple0,
+		emptyBag
+	);
+
+	return _elm_lang$virtual_dom$VirtualDom$program({
+		init: noChange,
+		view: function(model) { return main; },
+		update: F2(function(msg, model) { return noChange; }),
+		subscriptions: function (model) { return emptyBag; }
+	});
+}
+
+
+// INITIALIZE A PROGRAM
+
+function initialize(init, update, subscriptions, renderer)
+{
+	// ambient state
+	var managers = {};
+	var updateView;
+
+	// init and update state in main process
+	var initApp = _elm_lang$core$Native_Scheduler.nativeBinding(function(callback) {
+		var model = init._0;
+		updateView = renderer(enqueue, model);
+		var cmds = init._1;
+		var subs = subscriptions(model);
+		dispatchEffects(managers, cmds, subs);
+		callback(_elm_lang$core$Native_Scheduler.succeed(model));
+	});
+
+	function onMessage(msg, model)
+	{
+		return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback) {
+			var results = A2(update, msg, model);
+			model = results._0;
+			updateView(model);
+			var cmds = results._1;
+			var subs = subscriptions(model);
+			dispatchEffects(managers, cmds, subs);
+			callback(_elm_lang$core$Native_Scheduler.succeed(model));
+		});
+	}
+
+	var mainProcess = spawnLoop(initApp, onMessage);
+
+	function enqueue(msg)
+	{
+		_elm_lang$core$Native_Scheduler.rawSend(mainProcess, msg);
+	}
+
+	var ports = setupEffects(managers, enqueue);
+
+	return ports ? { ports: ports } : {};
+}
+
+
+// EFFECT MANAGERS
+
+var effectManagers = {};
+
+function setupEffects(managers, callback)
+{
+	var ports;
+
+	// setup all necessary effect managers
+	for (var key in effectManagers)
+	{
+		var manager = effectManagers[key];
+
+		if (manager.isForeign)
+		{
+			ports = ports || {};
+			ports[key] = manager.tag === 'cmd'
+				? setupOutgoingPort(key)
+				: setupIncomingPort(key, callback);
+		}
+
+		managers[key] = makeManager(manager, callback);
+	}
+
+	return ports;
+}
+
+function makeManager(info, callback)
+{
+	var router = {
+		main: callback,
+		self: undefined
+	};
+
+	var tag = info.tag;
+	var onEffects = info.onEffects;
+	var onSelfMsg = info.onSelfMsg;
+
+	function onMessage(msg, state)
+	{
+		if (msg.ctor === 'self')
+		{
+			return A3(onSelfMsg, router, msg._0, state);
+		}
+
+		var fx = msg._0;
+		switch (tag)
+		{
+			case 'cmd':
+				return A3(onEffects, router, fx.cmds, state);
+
+			case 'sub':
+				return A3(onEffects, router, fx.subs, state);
+
+			case 'fx':
+				return A4(onEffects, router, fx.cmds, fx.subs, state);
+		}
+	}
+
+	var process = spawnLoop(info.init, onMessage);
+	router.self = process;
+	return process;
+}
+
+function sendToApp(router, msg)
+{
+	return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
+	{
+		router.main(msg);
+		callback(_elm_lang$core$Native_Scheduler.succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function sendToSelf(router, msg)
+{
+	return A2(_elm_lang$core$Native_Scheduler.send, router.self, {
+		ctor: 'self',
+		_0: msg
+	});
+}
+
+
+// HELPER for STATEFUL LOOPS
+
+function spawnLoop(init, onMessage)
+{
+	var andThen = _elm_lang$core$Native_Scheduler.andThen;
+
+	function loop(state)
+	{
+		var handleMsg = _elm_lang$core$Native_Scheduler.receive(function(msg) {
+			return onMessage(msg, state);
+		});
+		return A2(andThen, loop, handleMsg);
+	}
+
+	var task = A2(andThen, loop, init);
+
+	return _elm_lang$core$Native_Scheduler.rawSpawn(task);
+}
+
+
+// BAGS
+
+function leaf(home)
+{
+	return function(value)
+	{
+		return {
+			type: 'leaf',
+			home: home,
+			value: value
+		};
+	};
+}
+
+function batch(list)
+{
+	return {
+		type: 'node',
+		branches: list
+	};
+}
+
+function map(tagger, bag)
+{
+	return {
+		type: 'map',
+		tagger: tagger,
+		tree: bag
+	}
+}
+
+
+// PIPE BAGS INTO EFFECT MANAGERS
+
+function dispatchEffects(managers, cmdBag, subBag)
+{
+	var effectsDict = {};
+	gatherEffects(true, cmdBag, effectsDict, null);
+	gatherEffects(false, subBag, effectsDict, null);
+
+	for (var home in managers)
+	{
+		var fx = home in effectsDict
+			? effectsDict[home]
+			: {
+				cmds: _elm_lang$core$Native_List.Nil,
+				subs: _elm_lang$core$Native_List.Nil
+			};
+
+		_elm_lang$core$Native_Scheduler.rawSend(managers[home], { ctor: 'fx', _0: fx });
+	}
+}
+
+function gatherEffects(isCmd, bag, effectsDict, taggers)
+{
+	switch (bag.type)
+	{
+		case 'leaf':
+			var home = bag.home;
+			var effect = toEffect(isCmd, home, taggers, bag.value);
+			effectsDict[home] = insert(isCmd, effect, effectsDict[home]);
+			return;
+
+		case 'node':
+			var list = bag.branches;
+			while (list.ctor !== '[]')
+			{
+				gatherEffects(isCmd, list._0, effectsDict, taggers);
+				list = list._1;
+			}
+			return;
+
+		case 'map':
+			gatherEffects(isCmd, bag.tree, effectsDict, {
+				tagger: bag.tagger,
+				rest: taggers
+			});
+			return;
+	}
+}
+
+function toEffect(isCmd, home, taggers, value)
+{
+	function applyTaggers(x)
+	{
+		var temp = taggers;
+		while (temp)
+		{
+			x = temp.tagger(x);
+			temp = temp.rest;
+		}
+		return x;
+	}
+
+	var map = isCmd
+		? effectManagers[home].cmdMap
+		: effectManagers[home].subMap;
+
+	return A2(map, applyTaggers, value)
+}
+
+function insert(isCmd, newEffect, effects)
+{
+	effects = effects || {
+		cmds: _elm_lang$core$Native_List.Nil,
+		subs: _elm_lang$core$Native_List.Nil
+	};
+	if (isCmd)
+	{
+		effects.cmds = _elm_lang$core$Native_List.Cons(newEffect, effects.cmds);
+		return effects;
+	}
+	effects.subs = _elm_lang$core$Native_List.Cons(newEffect, effects.subs);
+	return effects;
+}
+
+
+// PORTS
+
+function checkPortName(name)
+{
+	if (name in effectManagers)
+	{
+		throw new Error('There can only be one port named `' + name + '`, but your program has multiple.');
+	}
+}
+
+
+// OUTGOING PORTS
+
+function outgoingPort(name, converter)
+{
+	checkPortName(name);
+	effectManagers[name] = {
+		tag: 'cmd',
+		cmdMap: outgoingPortMap,
+		converter: converter,
+		isForeign: true
+	};
+	return leaf(name);
+}
+
+var outgoingPortMap = F2(function cmdMap(tagger, value) {
+	return value;
+});
+
+function setupOutgoingPort(name)
+{
+	var subs = [];
+	var converter = effectManagers[name].converter;
+
+	// CREATE MANAGER
+
+	var init = _elm_lang$core$Native_Scheduler.succeed(null);
+
+	function onEffects(router, cmdList, state)
+	{
+		while (cmdList.ctor !== '[]')
+		{
+			// grab a separate reference to subs in case unsubscribe is called
+			var currentSubs = subs;
+			var value = converter(cmdList._0);
+			for (var i = 0; i < currentSubs.length; i++)
+			{
+				currentSubs[i](value);
+			}
+			cmdList = cmdList._1;
+		}
+		return init;
+	}
+
+	effectManagers[name].init = init;
+	effectManagers[name].onEffects = F3(onEffects);
+
+	// PUBLIC API
+
+	function subscribe(callback)
+	{
+		subs.push(callback);
+	}
+
+	function unsubscribe(callback)
+	{
+		// copy subs into a new array in case unsubscribe is called within a
+		// subscribed callback
+		subs = subs.slice();
+		var index = subs.indexOf(callback);
+		if (index >= 0)
+		{
+			subs.splice(index, 1);
+		}
+	}
+
+	return {
+		subscribe: subscribe,
+		unsubscribe: unsubscribe
+	};
+}
+
+
+// INCOMING PORTS
+
+function incomingPort(name, converter)
+{
+	checkPortName(name);
+	effectManagers[name] = {
+		tag: 'sub',
+		subMap: incomingPortMap,
+		converter: converter,
+		isForeign: true
+	};
+	return leaf(name);
+}
+
+var incomingPortMap = F2(function subMap(tagger, finalTagger)
+{
+	return function(value)
+	{
+		return tagger(finalTagger(value));
+	};
+});
+
+function setupIncomingPort(name, callback)
+{
+	var sentBeforeInit = [];
+	var subs = _elm_lang$core$Native_List.Nil;
+	var converter = effectManagers[name].converter;
+	var currentOnEffects = preInitOnEffects;
+	var currentSend = preInitSend;
+
+	// CREATE MANAGER
+
+	var init = _elm_lang$core$Native_Scheduler.succeed(null);
+
+	function preInitOnEffects(router, subList, state)
+	{
+		var postInitResult = postInitOnEffects(router, subList, state);
+
+		for(var i = 0; i < sentBeforeInit.length; i++)
+		{
+			postInitSend(sentBeforeInit[i]);
+		}
+
+		sentBeforeInit = null; // to release objects held in queue
+		currentSend = postInitSend;
+		currentOnEffects = postInitOnEffects;
+		return postInitResult;
+	}
+
+	function postInitOnEffects(router, subList, state)
+	{
+		subs = subList;
+		return init;
+	}
+
+	function onEffects(router, subList, state)
+	{
+		return currentOnEffects(router, subList, state);
+	}
+
+	effectManagers[name].init = init;
+	effectManagers[name].onEffects = F3(onEffects);
+
+	// PUBLIC API
+
+	function preInitSend(value)
+	{
+		sentBeforeInit.push(value);
+	}
+
+	function postInitSend(value)
+	{
+		var temp = subs;
+		while (temp.ctor !== '[]')
+		{
+			callback(temp._0(value));
+			temp = temp._1;
+		}
+	}
+
+	function send(incomingValue)
+	{
+		var result = A2(_elm_lang$core$Json_Decode$decodeValue, converter, incomingValue);
+		if (result.ctor === 'Err')
+		{
+			throw new Error('Trying to send an unexpected type of value through port `' + name + '`:\n' + result._0);
+		}
+
+		currentSend(result._0);
+	}
+
+	return { send: send };
+}
+
+return {
+	// routers
+	sendToApp: F2(sendToApp),
+	sendToSelf: F2(sendToSelf),
+
+	// global setup
+	effectManagers: effectManagers,
+	outgoingPort: outgoingPort,
+	incomingPort: incomingPort,
+
+	htmlToProgram: htmlToProgram,
+	program: program,
+	programWithFlags: programWithFlags,
+	initialize: initialize,
+
+	// effect bags
+	leaf: leaf,
+	batch: batch,
+	map: F2(map)
+};
+
+}();
+
+var _elm_lang$core$Platform_Cmd$batch = _elm_lang$core$Native_Platform.batch;
+var _elm_lang$core$Platform_Cmd$none = _elm_lang$core$Platform_Cmd$batch(
+	{ctor: '[]'});
+var _elm_lang$core$Platform_Cmd_ops = _elm_lang$core$Platform_Cmd_ops || {};
+_elm_lang$core$Platform_Cmd_ops['!'] = F2(
+	function (model, commands) {
+		return {
+			ctor: '_Tuple2',
+			_0: model,
+			_1: _elm_lang$core$Platform_Cmd$batch(commands)
+		};
+	});
+var _elm_lang$core$Platform_Cmd$map = _elm_lang$core$Native_Platform.map;
+var _elm_lang$core$Platform_Cmd$Cmd = {ctor: 'Cmd'};
+
+var _elm_lang$core$Platform_Sub$batch = _elm_lang$core$Native_Platform.batch;
+var _elm_lang$core$Platform_Sub$none = _elm_lang$core$Platform_Sub$batch(
+	{ctor: '[]'});
+var _elm_lang$core$Platform_Sub$map = _elm_lang$core$Native_Platform.map;
+var _elm_lang$core$Platform_Sub$Sub = {ctor: 'Sub'};
+
+var _elm_lang$core$Platform$hack = _elm_lang$core$Native_Scheduler.succeed;
+var _elm_lang$core$Platform$sendToSelf = _elm_lang$core$Native_Platform.sendToSelf;
+var _elm_lang$core$Platform$sendToApp = _elm_lang$core$Native_Platform.sendToApp;
+var _elm_lang$core$Platform$programWithFlags = _elm_lang$core$Native_Platform.programWithFlags;
+var _elm_lang$core$Platform$program = _elm_lang$core$Native_Platform.program;
+var _elm_lang$core$Platform$Program = {ctor: 'Program'};
+var _elm_lang$core$Platform$Task = {ctor: 'Task'};
+var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
+var _elm_lang$core$Platform$Router = {ctor: 'Router'};
+
+var _elm_lang$core$Result$toMaybe = function (result) {
+	var _p0 = result;
+	if (_p0.ctor === 'Ok') {
+		return _elm_lang$core$Maybe$Just(_p0._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$Result$withDefault = F2(
+	function (def, result) {
+		var _p1 = result;
+		if (_p1.ctor === 'Ok') {
+			return _p1._0;
+		} else {
+			return def;
+		}
+	});
+var _elm_lang$core$Result$Err = function (a) {
+	return {ctor: 'Err', _0: a};
+};
+var _elm_lang$core$Result$andThen = F2(
+	function (callback, result) {
+		var _p2 = result;
+		if (_p2.ctor === 'Ok') {
+			return callback(_p2._0);
+		} else {
+			return _elm_lang$core$Result$Err(_p2._0);
+		}
+	});
+var _elm_lang$core$Result$Ok = function (a) {
+	return {ctor: 'Ok', _0: a};
+};
+var _elm_lang$core$Result$map = F2(
+	function (func, ra) {
+		var _p3 = ra;
+		if (_p3.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(
+				func(_p3._0));
+		} else {
+			return _elm_lang$core$Result$Err(_p3._0);
+		}
+	});
+var _elm_lang$core$Result$map2 = F3(
+	function (func, ra, rb) {
+		var _p4 = {ctor: '_Tuple2', _0: ra, _1: rb};
+		if (_p4._0.ctor === 'Ok') {
+			if (_p4._1.ctor === 'Ok') {
+				return _elm_lang$core$Result$Ok(
+					A2(func, _p4._0._0, _p4._1._0));
+			} else {
+				return _elm_lang$core$Result$Err(_p4._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p4._0._0);
+		}
+	});
+var _elm_lang$core$Result$map3 = F4(
+	function (func, ra, rb, rc) {
+		var _p5 = {ctor: '_Tuple3', _0: ra, _1: rb, _2: rc};
+		if (_p5._0.ctor === 'Ok') {
+			if (_p5._1.ctor === 'Ok') {
+				if (_p5._2.ctor === 'Ok') {
+					return _elm_lang$core$Result$Ok(
+						A3(func, _p5._0._0, _p5._1._0, _p5._2._0));
+				} else {
+					return _elm_lang$core$Result$Err(_p5._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p5._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p5._0._0);
+		}
+	});
+var _elm_lang$core$Result$map4 = F5(
+	function (func, ra, rb, rc, rd) {
+		var _p6 = {ctor: '_Tuple4', _0: ra, _1: rb, _2: rc, _3: rd};
+		if (_p6._0.ctor === 'Ok') {
+			if (_p6._1.ctor === 'Ok') {
+				if (_p6._2.ctor === 'Ok') {
+					if (_p6._3.ctor === 'Ok') {
+						return _elm_lang$core$Result$Ok(
+							A4(func, _p6._0._0, _p6._1._0, _p6._2._0, _p6._3._0));
+					} else {
+						return _elm_lang$core$Result$Err(_p6._3._0);
+					}
+				} else {
+					return _elm_lang$core$Result$Err(_p6._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p6._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p6._0._0);
+		}
+	});
+var _elm_lang$core$Result$map5 = F6(
+	function (func, ra, rb, rc, rd, re) {
+		var _p7 = {ctor: '_Tuple5', _0: ra, _1: rb, _2: rc, _3: rd, _4: re};
+		if (_p7._0.ctor === 'Ok') {
+			if (_p7._1.ctor === 'Ok') {
+				if (_p7._2.ctor === 'Ok') {
+					if (_p7._3.ctor === 'Ok') {
+						if (_p7._4.ctor === 'Ok') {
+							return _elm_lang$core$Result$Ok(
+								A5(func, _p7._0._0, _p7._1._0, _p7._2._0, _p7._3._0, _p7._4._0));
+						} else {
+							return _elm_lang$core$Result$Err(_p7._4._0);
+						}
+					} else {
+						return _elm_lang$core$Result$Err(_p7._3._0);
+					}
+				} else {
+					return _elm_lang$core$Result$Err(_p7._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p7._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p7._0._0);
+		}
+	});
+var _elm_lang$core$Result$mapError = F2(
+	function (f, result) {
+		var _p8 = result;
+		if (_p8.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(_p8._0);
+		} else {
+			return _elm_lang$core$Result$Err(
+				f(_p8._0));
+		}
+	});
+var _elm_lang$core$Result$fromMaybe = F2(
+	function (err, maybe) {
+		var _p9 = maybe;
+		if (_p9.ctor === 'Just') {
+			return _elm_lang$core$Result$Ok(_p9._0);
+		} else {
+			return _elm_lang$core$Result$Err(err);
+		}
+	});
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_Debug = function() {
+
+function log(tag, value)
+{
+	var msg = tag + ': ' + _elm_lang$core$Native_Utils.toString(value);
+	var process = process || {};
+	if (process.stdout)
+	{
+		process.stdout.write(msg);
+	}
+	else
+	{
+		console.log(msg);
+	}
+	return value;
+}
+
+function crash(message)
+{
+	throw new Error(message);
+}
+
+return {
+	crash: crash,
+	log: F2(log)
+};
+
+}();
+//import Maybe, Native.List, Native.Utils, Result //
+
+var _elm_lang$core$Native_String = function() {
+
+function isEmpty(str)
+{
+	return str.length === 0;
+}
+function cons(chr, str)
+{
+	return chr + str;
+}
+function uncons(str)
+{
+	var hd = str[0];
+	if (hd)
+	{
+		return _elm_lang$core$Maybe$Just(_elm_lang$core$Native_Utils.Tuple2(_elm_lang$core$Native_Utils.chr(hd), str.slice(1)));
+	}
+	return _elm_lang$core$Maybe$Nothing;
+}
+function append(a, b)
+{
+	return a + b;
+}
+function concat(strs)
+{
+	return _elm_lang$core$Native_List.toArray(strs).join('');
+}
+function length(str)
+{
+	return str.length;
+}
+function map(f, str)
+{
+	var out = str.split('');
+	for (var i = out.length; i--; )
+	{
+		out[i] = f(_elm_lang$core$Native_Utils.chr(out[i]));
+	}
+	return out.join('');
+}
+function filter(pred, str)
+{
+	return str.split('').map(_elm_lang$core$Native_Utils.chr).filter(pred).join('');
+}
+function reverse(str)
+{
+	return str.split('').reverse().join('');
+}
+function foldl(f, b, str)
+{
+	var len = str.length;
+	for (var i = 0; i < len; ++i)
+	{
+		b = A2(f, _elm_lang$core$Native_Utils.chr(str[i]), b);
+	}
+	return b;
+}
+function foldr(f, b, str)
+{
+	for (var i = str.length; i--; )
+	{
+		b = A2(f, _elm_lang$core$Native_Utils.chr(str[i]), b);
+	}
+	return b;
+}
+function split(sep, str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split(sep));
+}
+function join(sep, strs)
+{
+	return _elm_lang$core$Native_List.toArray(strs).join(sep);
+}
+function repeat(n, str)
+{
+	var result = '';
+	while (n > 0)
+	{
+		if (n & 1)
+		{
+			result += str;
+		}
+		n >>= 1, str += str;
+	}
+	return result;
+}
+function slice(start, end, str)
+{
+	return str.slice(start, end);
+}
+function left(n, str)
+{
+	return n < 1 ? '' : str.slice(0, n);
+}
+function right(n, str)
+{
+	return n < 1 ? '' : str.slice(-n);
+}
+function dropLeft(n, str)
+{
+	return n < 1 ? str : str.slice(n);
+}
+function dropRight(n, str)
+{
+	return n < 1 ? str : str.slice(0, -n);
+}
+function pad(n, chr, str)
+{
+	var half = (n - str.length) / 2;
+	return repeat(Math.ceil(half), chr) + str + repeat(half | 0, chr);
+}
+function padRight(n, chr, str)
+{
+	return str + repeat(n - str.length, chr);
+}
+function padLeft(n, chr, str)
+{
+	return repeat(n - str.length, chr) + str;
+}
+
+function trim(str)
+{
+	return str.trim();
+}
+function trimLeft(str)
+{
+	return str.replace(/^\s+/, '');
+}
+function trimRight(str)
+{
+	return str.replace(/\s+$/, '');
+}
+
+function words(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.trim().split(/\s+/g));
+}
+function lines(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split(/\r\n|\r|\n/g));
+}
+
+function toUpper(str)
+{
+	return str.toUpperCase();
+}
+function toLower(str)
+{
+	return str.toLowerCase();
+}
+
+function any(pred, str)
+{
+	for (var i = str.length; i--; )
+	{
+		if (pred(_elm_lang$core$Native_Utils.chr(str[i])))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+function all(pred, str)
+{
+	for (var i = str.length; i--; )
+	{
+		if (!pred(_elm_lang$core$Native_Utils.chr(str[i])))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+function contains(sub, str)
+{
+	return str.indexOf(sub) > -1;
+}
+function startsWith(sub, str)
+{
+	return str.indexOf(sub) === 0;
+}
+function endsWith(sub, str)
+{
+	return str.length >= sub.length &&
+		str.lastIndexOf(sub) === str.length - sub.length;
+}
+function indexes(sub, str)
+{
+	var subLen = sub.length;
+
+	if (subLen < 1)
+	{
+		return _elm_lang$core$Native_List.Nil;
+	}
+
+	var i = 0;
+	var is = [];
+
+	while ((i = str.indexOf(sub, i)) > -1)
+	{
+		is.push(i);
+		i = i + subLen;
+	}
+
+	return _elm_lang$core$Native_List.fromArray(is);
+}
+
+
+function toInt(s)
+{
+	var len = s.length;
+
+	// if empty
+	if (len === 0)
+	{
+		return intErr(s);
+	}
+
+	// if hex
+	var c = s[0];
+	if (c === '0' && s[1] === 'x')
+	{
+		for (var i = 2; i < len; ++i)
+		{
+			var c = s[i];
+			if (('0' <= c && c <= '9') || ('A' <= c && c <= 'F') || ('a' <= c && c <= 'f'))
+			{
+				continue;
+			}
+			return intErr(s);
+		}
+		return _elm_lang$core$Result$Ok(parseInt(s, 16));
+	}
+
+	// is decimal
+	if (c > '9' || (c < '0' && c !== '-' && c !== '+'))
+	{
+		return intErr(s);
+	}
+	for (var i = 1; i < len; ++i)
+	{
+		var c = s[i];
+		if (c < '0' || '9' < c)
+		{
+			return intErr(s);
+		}
+	}
+
+	return _elm_lang$core$Result$Ok(parseInt(s, 10));
+}
+
+function intErr(s)
+{
+	return _elm_lang$core$Result$Err("could not convert string '" + s + "' to an Int");
+}
+
+
+function toFloat(s)
+{
+	// check if it is a hex, octal, or binary number
+	if (s.length === 0 || /[\sxbo]/.test(s))
+	{
+		return floatErr(s);
+	}
+	var n = +s;
+	// faster isNaN check
+	return n === n ? _elm_lang$core$Result$Ok(n) : floatErr(s);
+}
+
+function floatErr(s)
+{
+	return _elm_lang$core$Result$Err("could not convert string '" + s + "' to a Float");
+}
+
+
+function toList(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split('').map(_elm_lang$core$Native_Utils.chr));
+}
+function fromList(chars)
+{
+	return _elm_lang$core$Native_List.toArray(chars).join('');
+}
+
+return {
+	isEmpty: isEmpty,
+	cons: F2(cons),
+	uncons: uncons,
+	append: F2(append),
+	concat: concat,
+	length: length,
+	map: F2(map),
+	filter: F2(filter),
+	reverse: reverse,
+	foldl: F3(foldl),
+	foldr: F3(foldr),
+
+	split: F2(split),
+	join: F2(join),
+	repeat: F2(repeat),
+
+	slice: F3(slice),
+	left: F2(left),
+	right: F2(right),
+	dropLeft: F2(dropLeft),
+	dropRight: F2(dropRight),
+
+	pad: F3(pad),
+	padLeft: F3(padLeft),
+	padRight: F3(padRight),
+
+	trim: trim,
+	trimLeft: trimLeft,
+	trimRight: trimRight,
+
+	words: words,
+	lines: lines,
+
+	toUpper: toUpper,
+	toLower: toLower,
+
+	any: F2(any),
+	all: F2(all),
+
+	contains: F2(contains),
+	startsWith: F2(startsWith),
+	endsWith: F2(endsWith),
+	indexes: F2(indexes),
+
+	toInt: toInt,
+	toFloat: toFloat,
+	toList: toList,
+	fromList: fromList
+};
+
+}();
+
+var _elm_lang$core$String$fromList = _elm_lang$core$Native_String.fromList;
+var _elm_lang$core$String$toList = _elm_lang$core$Native_String.toList;
+var _elm_lang$core$String$toFloat = _elm_lang$core$Native_String.toFloat;
+var _elm_lang$core$String$toInt = _elm_lang$core$Native_String.toInt;
+var _elm_lang$core$String$indices = _elm_lang$core$Native_String.indexes;
+var _elm_lang$core$String$indexes = _elm_lang$core$Native_String.indexes;
+var _elm_lang$core$String$endsWith = _elm_lang$core$Native_String.endsWith;
+var _elm_lang$core$String$startsWith = _elm_lang$core$Native_String.startsWith;
+var _elm_lang$core$String$contains = _elm_lang$core$Native_String.contains;
+var _elm_lang$core$String$all = _elm_lang$core$Native_String.all;
+var _elm_lang$core$String$any = _elm_lang$core$Native_String.any;
+var _elm_lang$core$String$toLower = _elm_lang$core$Native_String.toLower;
+var _elm_lang$core$String$toUpper = _elm_lang$core$Native_String.toUpper;
+var _elm_lang$core$String$lines = _elm_lang$core$Native_String.lines;
+var _elm_lang$core$String$words = _elm_lang$core$Native_String.words;
+var _elm_lang$core$String$trimRight = _elm_lang$core$Native_String.trimRight;
+var _elm_lang$core$String$trimLeft = _elm_lang$core$Native_String.trimLeft;
+var _elm_lang$core$String$trim = _elm_lang$core$Native_String.trim;
+var _elm_lang$core$String$padRight = _elm_lang$core$Native_String.padRight;
+var _elm_lang$core$String$padLeft = _elm_lang$core$Native_String.padLeft;
+var _elm_lang$core$String$pad = _elm_lang$core$Native_String.pad;
+var _elm_lang$core$String$dropRight = _elm_lang$core$Native_String.dropRight;
+var _elm_lang$core$String$dropLeft = _elm_lang$core$Native_String.dropLeft;
+var _elm_lang$core$String$right = _elm_lang$core$Native_String.right;
+var _elm_lang$core$String$left = _elm_lang$core$Native_String.left;
+var _elm_lang$core$String$slice = _elm_lang$core$Native_String.slice;
+var _elm_lang$core$String$repeat = _elm_lang$core$Native_String.repeat;
+var _elm_lang$core$String$join = _elm_lang$core$Native_String.join;
+var _elm_lang$core$String$split = _elm_lang$core$Native_String.split;
+var _elm_lang$core$String$foldr = _elm_lang$core$Native_String.foldr;
+var _elm_lang$core$String$foldl = _elm_lang$core$Native_String.foldl;
+var _elm_lang$core$String$reverse = _elm_lang$core$Native_String.reverse;
+var _elm_lang$core$String$filter = _elm_lang$core$Native_String.filter;
+var _elm_lang$core$String$map = _elm_lang$core$Native_String.map;
+var _elm_lang$core$String$length = _elm_lang$core$Native_String.length;
+var _elm_lang$core$String$concat = _elm_lang$core$Native_String.concat;
+var _elm_lang$core$String$append = _elm_lang$core$Native_String.append;
+var _elm_lang$core$String$uncons = _elm_lang$core$Native_String.uncons;
+var _elm_lang$core$String$cons = _elm_lang$core$Native_String.cons;
+var _elm_lang$core$String$fromChar = function ($char) {
+	return A2(_elm_lang$core$String$cons, $char, '');
+};
+var _elm_lang$core$String$isEmpty = _elm_lang$core$Native_String.isEmpty;
+
+var _elm_lang$core$Dict$foldr = F3(
+	function (f, acc, t) {
+		foldr:
+		while (true) {
+			var _p0 = t;
+			if (_p0.ctor === 'RBEmpty_elm_builtin') {
+				return acc;
+			} else {
+				var _v1 = f,
+					_v2 = A3(
+					f,
+					_p0._1,
+					_p0._2,
+					A3(_elm_lang$core$Dict$foldr, f, acc, _p0._4)),
+					_v3 = _p0._3;
+				f = _v1;
+				acc = _v2;
+				t = _v3;
+				continue foldr;
+			}
+		}
+	});
+var _elm_lang$core$Dict$keys = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, keyList) {
+				return {ctor: '::', _0: key, _1: keyList};
+			}),
+		{ctor: '[]'},
+		dict);
+};
+var _elm_lang$core$Dict$values = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, valueList) {
+				return {ctor: '::', _0: value, _1: valueList};
+			}),
+		{ctor: '[]'},
+		dict);
+};
+var _elm_lang$core$Dict$toList = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, list) {
+				return {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: key, _1: value},
+					_1: list
+				};
+			}),
+		{ctor: '[]'},
+		dict);
+};
+var _elm_lang$core$Dict$foldl = F3(
+	function (f, acc, dict) {
+		foldl:
+		while (true) {
+			var _p1 = dict;
+			if (_p1.ctor === 'RBEmpty_elm_builtin') {
+				return acc;
+			} else {
+				var _v5 = f,
+					_v6 = A3(
+					f,
+					_p1._1,
+					_p1._2,
+					A3(_elm_lang$core$Dict$foldl, f, acc, _p1._3)),
+					_v7 = _p1._4;
+				f = _v5;
+				acc = _v6;
+				dict = _v7;
+				continue foldl;
+			}
+		}
+	});
+var _elm_lang$core$Dict$merge = F6(
+	function (leftStep, bothStep, rightStep, leftDict, rightDict, initialResult) {
+		var stepState = F3(
+			function (rKey, rValue, _p2) {
+				stepState:
+				while (true) {
+					var _p3 = _p2;
+					var _p9 = _p3._1;
+					var _p8 = _p3._0;
+					var _p4 = _p8;
+					if (_p4.ctor === '[]') {
+						return {
+							ctor: '_Tuple2',
+							_0: _p8,
+							_1: A3(rightStep, rKey, rValue, _p9)
+						};
+					} else {
+						var _p7 = _p4._1;
+						var _p6 = _p4._0._1;
+						var _p5 = _p4._0._0;
+						if (_elm_lang$core$Native_Utils.cmp(_p5, rKey) < 0) {
+							var _v10 = rKey,
+								_v11 = rValue,
+								_v12 = {
+								ctor: '_Tuple2',
+								_0: _p7,
+								_1: A3(leftStep, _p5, _p6, _p9)
+							};
+							rKey = _v10;
+							rValue = _v11;
+							_p2 = _v12;
+							continue stepState;
+						} else {
+							if (_elm_lang$core$Native_Utils.cmp(_p5, rKey) > 0) {
+								return {
+									ctor: '_Tuple2',
+									_0: _p8,
+									_1: A3(rightStep, rKey, rValue, _p9)
+								};
+							} else {
+								return {
+									ctor: '_Tuple2',
+									_0: _p7,
+									_1: A4(bothStep, _p5, _p6, rValue, _p9)
+								};
+							}
+						}
+					}
+				}
+			});
+		var _p10 = A3(
+			_elm_lang$core$Dict$foldl,
+			stepState,
+			{
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Dict$toList(leftDict),
+				_1: initialResult
+			},
+			rightDict);
+		var leftovers = _p10._0;
+		var intermediateResult = _p10._1;
+		return A3(
+			_elm_lang$core$List$foldl,
+			F2(
+				function (_p11, result) {
+					var _p12 = _p11;
+					return A3(leftStep, _p12._0, _p12._1, result);
+				}),
+			intermediateResult,
+			leftovers);
+	});
+var _elm_lang$core$Dict$reportRemBug = F4(
+	function (msg, c, lgot, rgot) {
+		return _elm_lang$core$Native_Debug.crash(
+			_elm_lang$core$String$concat(
+				{
+					ctor: '::',
+					_0: 'Internal red-black tree invariant violated, expected ',
+					_1: {
+						ctor: '::',
+						_0: msg,
+						_1: {
+							ctor: '::',
+							_0: ' and got ',
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Basics$toString(c),
+								_1: {
+									ctor: '::',
+									_0: '/',
+									_1: {
+										ctor: '::',
+										_0: lgot,
+										_1: {
+											ctor: '::',
+											_0: '/',
+											_1: {
+												ctor: '::',
+												_0: rgot,
+												_1: {
+													ctor: '::',
+													_0: '\nPlease report this bug to <https://github.com/elm-lang/core/issues>',
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}));
+	});
+var _elm_lang$core$Dict$isBBlack = function (dict) {
+	var _p13 = dict;
+	_v14_2:
+	do {
+		if (_p13.ctor === 'RBNode_elm_builtin') {
+			if (_p13._0.ctor === 'BBlack') {
+				return true;
+			} else {
+				break _v14_2;
+			}
+		} else {
+			if (_p13._0.ctor === 'LBBlack') {
+				return true;
+			} else {
+				break _v14_2;
+			}
+		}
+	} while(false);
+	return false;
+};
+var _elm_lang$core$Dict$sizeHelp = F2(
+	function (n, dict) {
+		sizeHelp:
+		while (true) {
+			var _p14 = dict;
+			if (_p14.ctor === 'RBEmpty_elm_builtin') {
+				return n;
+			} else {
+				var _v16 = A2(_elm_lang$core$Dict$sizeHelp, n + 1, _p14._4),
+					_v17 = _p14._3;
+				n = _v16;
+				dict = _v17;
+				continue sizeHelp;
+			}
+		}
+	});
+var _elm_lang$core$Dict$size = function (dict) {
+	return A2(_elm_lang$core$Dict$sizeHelp, 0, dict);
+};
+var _elm_lang$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			var _p15 = dict;
+			if (_p15.ctor === 'RBEmpty_elm_builtin') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p16 = A2(_elm_lang$core$Basics$compare, targetKey, _p15._1);
+				switch (_p16.ctor) {
+					case 'LT':
+						var _v20 = targetKey,
+							_v21 = _p15._3;
+						targetKey = _v20;
+						dict = _v21;
+						continue get;
+					case 'EQ':
+						return _elm_lang$core$Maybe$Just(_p15._2);
+					default:
+						var _v22 = targetKey,
+							_v23 = _p15._4;
+						targetKey = _v22;
+						dict = _v23;
+						continue get;
+				}
+			}
+		}
+	});
+var _elm_lang$core$Dict$member = F2(
+	function (key, dict) {
+		var _p17 = A2(_elm_lang$core$Dict$get, key, dict);
+		if (_p17.ctor === 'Just') {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var _elm_lang$core$Dict$maxWithDefault = F3(
+	function (k, v, r) {
+		maxWithDefault:
+		while (true) {
+			var _p18 = r;
+			if (_p18.ctor === 'RBEmpty_elm_builtin') {
+				return {ctor: '_Tuple2', _0: k, _1: v};
+			} else {
+				var _v26 = _p18._1,
+					_v27 = _p18._2,
+					_v28 = _p18._4;
+				k = _v26;
+				v = _v27;
+				r = _v28;
+				continue maxWithDefault;
+			}
+		}
+	});
+var _elm_lang$core$Dict$NBlack = {ctor: 'NBlack'};
+var _elm_lang$core$Dict$BBlack = {ctor: 'BBlack'};
+var _elm_lang$core$Dict$Black = {ctor: 'Black'};
+var _elm_lang$core$Dict$blackish = function (t) {
+	var _p19 = t;
+	if (_p19.ctor === 'RBNode_elm_builtin') {
+		var _p20 = _p19._0;
+		return _elm_lang$core$Native_Utils.eq(_p20, _elm_lang$core$Dict$Black) || _elm_lang$core$Native_Utils.eq(_p20, _elm_lang$core$Dict$BBlack);
+	} else {
+		return true;
+	}
+};
+var _elm_lang$core$Dict$Red = {ctor: 'Red'};
+var _elm_lang$core$Dict$moreBlack = function (color) {
+	var _p21 = color;
+	switch (_p21.ctor) {
+		case 'Black':
+			return _elm_lang$core$Dict$BBlack;
+		case 'Red':
+			return _elm_lang$core$Dict$Black;
+		case 'NBlack':
+			return _elm_lang$core$Dict$Red;
+		default:
+			return _elm_lang$core$Native_Debug.crash('Can\'t make a double black node more black!');
+	}
+};
+var _elm_lang$core$Dict$lessBlack = function (color) {
+	var _p22 = color;
+	switch (_p22.ctor) {
+		case 'BBlack':
+			return _elm_lang$core$Dict$Black;
+		case 'Black':
+			return _elm_lang$core$Dict$Red;
+		case 'Red':
+			return _elm_lang$core$Dict$NBlack;
+		default:
+			return _elm_lang$core$Native_Debug.crash('Can\'t make a negative black node less black!');
+	}
+};
+var _elm_lang$core$Dict$LBBlack = {ctor: 'LBBlack'};
+var _elm_lang$core$Dict$LBlack = {ctor: 'LBlack'};
+var _elm_lang$core$Dict$RBEmpty_elm_builtin = function (a) {
+	return {ctor: 'RBEmpty_elm_builtin', _0: a};
+};
+var _elm_lang$core$Dict$empty = _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+var _elm_lang$core$Dict$isEmpty = function (dict) {
+	return _elm_lang$core$Native_Utils.eq(dict, _elm_lang$core$Dict$empty);
+};
+var _elm_lang$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {ctor: 'RBNode_elm_builtin', _0: a, _1: b, _2: c, _3: d, _4: e};
+	});
+var _elm_lang$core$Dict$ensureBlackRoot = function (dict) {
+	var _p23 = dict;
+	if ((_p23.ctor === 'RBNode_elm_builtin') && (_p23._0.ctor === 'Red')) {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p23._1, _p23._2, _p23._3, _p23._4);
+	} else {
+		return dict;
+	}
+};
+var _elm_lang$core$Dict$lessBlackTree = function (dict) {
+	var _p24 = dict;
+	if (_p24.ctor === 'RBNode_elm_builtin') {
+		return A5(
+			_elm_lang$core$Dict$RBNode_elm_builtin,
+			_elm_lang$core$Dict$lessBlack(_p24._0),
+			_p24._1,
+			_p24._2,
+			_p24._3,
+			_p24._4);
+	} else {
+		return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+	}
+};
+var _elm_lang$core$Dict$balancedTree = function (col) {
+	return function (xk) {
+		return function (xv) {
+			return function (yk) {
+				return function (yv) {
+					return function (zk) {
+						return function (zv) {
+							return function (a) {
+								return function (b) {
+									return function (c) {
+										return function (d) {
+											return A5(
+												_elm_lang$core$Dict$RBNode_elm_builtin,
+												_elm_lang$core$Dict$lessBlack(col),
+												yk,
+												yv,
+												A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, xk, xv, a, b),
+												A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, zk, zv, c, d));
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _elm_lang$core$Dict$blacken = function (t) {
+	var _p25 = t;
+	if (_p25.ctor === 'RBEmpty_elm_builtin') {
+		return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+	} else {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p25._1, _p25._2, _p25._3, _p25._4);
+	}
+};
+var _elm_lang$core$Dict$redden = function (t) {
+	var _p26 = t;
+	if (_p26.ctor === 'RBEmpty_elm_builtin') {
+		return _elm_lang$core$Native_Debug.crash('can\'t make a Leaf red');
+	} else {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Red, _p26._1, _p26._2, _p26._3, _p26._4);
+	}
+};
+var _elm_lang$core$Dict$balanceHelp = function (tree) {
+	var _p27 = tree;
+	_v36_6:
+	do {
+		_v36_5:
+		do {
+			_v36_4:
+			do {
+				_v36_3:
+				do {
+					_v36_2:
+					do {
+						_v36_1:
+						do {
+							_v36_0:
+							do {
+								if (_p27.ctor === 'RBNode_elm_builtin') {
+									if (_p27._3.ctor === 'RBNode_elm_builtin') {
+										if (_p27._4.ctor === 'RBNode_elm_builtin') {
+											switch (_p27._3._0.ctor) {
+												case 'Red':
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v36_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v36_1;
+																} else {
+																	if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																		break _v36_2;
+																	} else {
+																		if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																			break _v36_3;
+																		} else {
+																			break _v36_6;
+																		}
+																	}
+																}
+															}
+														case 'NBlack':
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v36_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v36_1;
+																} else {
+																	if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																		break _v36_4;
+																	} else {
+																		break _v36_6;
+																	}
+																}
+															}
+														default:
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v36_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v36_1;
+																} else {
+																	break _v36_6;
+																}
+															}
+													}
+												case 'NBlack':
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																break _v36_2;
+															} else {
+																if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																	break _v36_3;
+																} else {
+																	if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																		break _v36_5;
+																	} else {
+																		break _v36_6;
+																	}
+																}
+															}
+														case 'NBlack':
+															if (_p27._0.ctor === 'BBlack') {
+																if ((((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																	break _v36_4;
+																} else {
+																	if ((((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																		break _v36_5;
+																	} else {
+																		break _v36_6;
+																	}
+																}
+															} else {
+																break _v36_6;
+															}
+														default:
+															if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																break _v36_5;
+															} else {
+																break _v36_6;
+															}
+													}
+												default:
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																break _v36_2;
+															} else {
+																if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																	break _v36_3;
+																} else {
+																	break _v36_6;
+																}
+															}
+														case 'NBlack':
+															if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																break _v36_4;
+															} else {
+																break _v36_6;
+															}
+														default:
+															break _v36_6;
+													}
+											}
+										} else {
+											switch (_p27._3._0.ctor) {
+												case 'Red':
+													if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+														break _v36_0;
+													} else {
+														if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+															break _v36_1;
+														} else {
+															break _v36_6;
+														}
+													}
+												case 'NBlack':
+													if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+														break _v36_5;
+													} else {
+														break _v36_6;
+													}
+												default:
+													break _v36_6;
+											}
+										}
+									} else {
+										if (_p27._4.ctor === 'RBNode_elm_builtin') {
+											switch (_p27._4._0.ctor) {
+												case 'Red':
+													if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+														break _v36_2;
+													} else {
+														if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+															break _v36_3;
+														} else {
+															break _v36_6;
+														}
+													}
+												case 'NBlack':
+													if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+														break _v36_4;
+													} else {
+														break _v36_6;
+													}
+												default:
+													break _v36_6;
+											}
+										} else {
+											break _v36_6;
+										}
+									}
+								} else {
+									break _v36_6;
+								}
+							} while(false);
+							return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._3._3._1)(_p27._3._3._2)(_p27._3._1)(_p27._3._2)(_p27._1)(_p27._2)(_p27._3._3._3)(_p27._3._3._4)(_p27._3._4)(_p27._4);
+						} while(false);
+						return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._3._1)(_p27._3._2)(_p27._3._4._1)(_p27._3._4._2)(_p27._1)(_p27._2)(_p27._3._3)(_p27._3._4._3)(_p27._3._4._4)(_p27._4);
+					} while(false);
+					return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._1)(_p27._2)(_p27._4._3._1)(_p27._4._3._2)(_p27._4._1)(_p27._4._2)(_p27._3)(_p27._4._3._3)(_p27._4._3._4)(_p27._4._4);
+				} while(false);
+				return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._1)(_p27._2)(_p27._4._1)(_p27._4._2)(_p27._4._4._1)(_p27._4._4._2)(_p27._3)(_p27._4._3)(_p27._4._4._3)(_p27._4._4._4);
+			} while(false);
+			return A5(
+				_elm_lang$core$Dict$RBNode_elm_builtin,
+				_elm_lang$core$Dict$Black,
+				_p27._4._3._1,
+				_p27._4._3._2,
+				A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p27._1, _p27._2, _p27._3, _p27._4._3._3),
+				A5(
+					_elm_lang$core$Dict$balance,
+					_elm_lang$core$Dict$Black,
+					_p27._4._1,
+					_p27._4._2,
+					_p27._4._3._4,
+					_elm_lang$core$Dict$redden(_p27._4._4)));
+		} while(false);
+		return A5(
+			_elm_lang$core$Dict$RBNode_elm_builtin,
+			_elm_lang$core$Dict$Black,
+			_p27._3._4._1,
+			_p27._3._4._2,
+			A5(
+				_elm_lang$core$Dict$balance,
+				_elm_lang$core$Dict$Black,
+				_p27._3._1,
+				_p27._3._2,
+				_elm_lang$core$Dict$redden(_p27._3._3),
+				_p27._3._4._3),
+			A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p27._1, _p27._2, _p27._3._4._4, _p27._4));
+	} while(false);
+	return tree;
+};
+var _elm_lang$core$Dict$balance = F5(
+	function (c, k, v, l, r) {
+		var tree = A5(_elm_lang$core$Dict$RBNode_elm_builtin, c, k, v, l, r);
+		return _elm_lang$core$Dict$blackish(tree) ? _elm_lang$core$Dict$balanceHelp(tree) : tree;
+	});
+var _elm_lang$core$Dict$bubble = F5(
+	function (c, k, v, l, r) {
+		return (_elm_lang$core$Dict$isBBlack(l) || _elm_lang$core$Dict$isBBlack(r)) ? A5(
+			_elm_lang$core$Dict$balance,
+			_elm_lang$core$Dict$moreBlack(c),
+			k,
+			v,
+			_elm_lang$core$Dict$lessBlackTree(l),
+			_elm_lang$core$Dict$lessBlackTree(r)) : A5(_elm_lang$core$Dict$RBNode_elm_builtin, c, k, v, l, r);
+	});
+var _elm_lang$core$Dict$removeMax = F5(
+	function (c, k, v, l, r) {
+		var _p28 = r;
+		if (_p28.ctor === 'RBEmpty_elm_builtin') {
+			return A3(_elm_lang$core$Dict$rem, c, l, r);
+		} else {
+			return A5(
+				_elm_lang$core$Dict$bubble,
+				c,
+				k,
+				v,
+				l,
+				A5(_elm_lang$core$Dict$removeMax, _p28._0, _p28._1, _p28._2, _p28._3, _p28._4));
+		}
+	});
+var _elm_lang$core$Dict$rem = F3(
+	function (color, left, right) {
+		var _p29 = {ctor: '_Tuple2', _0: left, _1: right};
+		if (_p29._0.ctor === 'RBEmpty_elm_builtin') {
+			if (_p29._1.ctor === 'RBEmpty_elm_builtin') {
+				var _p30 = color;
+				switch (_p30.ctor) {
+					case 'Red':
+						return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+					case 'Black':
+						return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBBlack);
+					default:
+						return _elm_lang$core$Native_Debug.crash('cannot have bblack or nblack nodes at this point');
+				}
+			} else {
+				var _p33 = _p29._1._0;
+				var _p32 = _p29._0._0;
+				var _p31 = {ctor: '_Tuple3', _0: color, _1: _p32, _2: _p33};
+				if ((((_p31.ctor === '_Tuple3') && (_p31._0.ctor === 'Black')) && (_p31._1.ctor === 'LBlack')) && (_p31._2.ctor === 'Red')) {
+					return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p29._1._1, _p29._1._2, _p29._1._3, _p29._1._4);
+				} else {
+					return A4(
+						_elm_lang$core$Dict$reportRemBug,
+						'Black/LBlack/Red',
+						color,
+						_elm_lang$core$Basics$toString(_p32),
+						_elm_lang$core$Basics$toString(_p33));
+				}
+			}
+		} else {
+			if (_p29._1.ctor === 'RBEmpty_elm_builtin') {
+				var _p36 = _p29._1._0;
+				var _p35 = _p29._0._0;
+				var _p34 = {ctor: '_Tuple3', _0: color, _1: _p35, _2: _p36};
+				if ((((_p34.ctor === '_Tuple3') && (_p34._0.ctor === 'Black')) && (_p34._1.ctor === 'Red')) && (_p34._2.ctor === 'LBlack')) {
+					return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p29._0._1, _p29._0._2, _p29._0._3, _p29._0._4);
+				} else {
+					return A4(
+						_elm_lang$core$Dict$reportRemBug,
+						'Black/Red/LBlack',
+						color,
+						_elm_lang$core$Basics$toString(_p35),
+						_elm_lang$core$Basics$toString(_p36));
+				}
+			} else {
+				var _p40 = _p29._0._2;
+				var _p39 = _p29._0._4;
+				var _p38 = _p29._0._1;
+				var newLeft = A5(_elm_lang$core$Dict$removeMax, _p29._0._0, _p38, _p40, _p29._0._3, _p39);
+				var _p37 = A3(_elm_lang$core$Dict$maxWithDefault, _p38, _p40, _p39);
+				var k = _p37._0;
+				var v = _p37._1;
+				return A5(_elm_lang$core$Dict$bubble, color, k, v, newLeft, right);
+			}
+		}
+	});
+var _elm_lang$core$Dict$map = F2(
+	function (f, dict) {
+		var _p41 = dict;
+		if (_p41.ctor === 'RBEmpty_elm_builtin') {
+			return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+		} else {
+			var _p42 = _p41._1;
+			return A5(
+				_elm_lang$core$Dict$RBNode_elm_builtin,
+				_p41._0,
+				_p42,
+				A2(f, _p42, _p41._2),
+				A2(_elm_lang$core$Dict$map, f, _p41._3),
+				A2(_elm_lang$core$Dict$map, f, _p41._4));
+		}
+	});
+var _elm_lang$core$Dict$Same = {ctor: 'Same'};
+var _elm_lang$core$Dict$Remove = {ctor: 'Remove'};
+var _elm_lang$core$Dict$Insert = {ctor: 'Insert'};
+var _elm_lang$core$Dict$update = F3(
+	function (k, alter, dict) {
+		var up = function (dict) {
+			var _p43 = dict;
+			if (_p43.ctor === 'RBEmpty_elm_builtin') {
+				var _p44 = alter(_elm_lang$core$Maybe$Nothing);
+				if (_p44.ctor === 'Nothing') {
+					return {ctor: '_Tuple2', _0: _elm_lang$core$Dict$Same, _1: _elm_lang$core$Dict$empty};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Dict$Insert,
+						_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Red, k, _p44._0, _elm_lang$core$Dict$empty, _elm_lang$core$Dict$empty)
+					};
+				}
+			} else {
+				var _p55 = _p43._2;
+				var _p54 = _p43._4;
+				var _p53 = _p43._3;
+				var _p52 = _p43._1;
+				var _p51 = _p43._0;
+				var _p45 = A2(_elm_lang$core$Basics$compare, k, _p52);
+				switch (_p45.ctor) {
+					case 'EQ':
+						var _p46 = alter(
+							_elm_lang$core$Maybe$Just(_p55));
+						if (_p46.ctor === 'Nothing') {
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Dict$Remove,
+								_1: A3(_elm_lang$core$Dict$rem, _p51, _p53, _p54)
+							};
+						} else {
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Dict$Same,
+								_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p46._0, _p53, _p54)
+							};
+						}
+					case 'LT':
+						var _p47 = up(_p53);
+						var flag = _p47._0;
+						var newLeft = _p47._1;
+						var _p48 = flag;
+						switch (_p48.ctor) {
+							case 'Same':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Same,
+									_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p55, newLeft, _p54)
+								};
+							case 'Insert':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Insert,
+									_1: A5(_elm_lang$core$Dict$balance, _p51, _p52, _p55, newLeft, _p54)
+								};
+							default:
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Remove,
+									_1: A5(_elm_lang$core$Dict$bubble, _p51, _p52, _p55, newLeft, _p54)
+								};
+						}
+					default:
+						var _p49 = up(_p54);
+						var flag = _p49._0;
+						var newRight = _p49._1;
+						var _p50 = flag;
+						switch (_p50.ctor) {
+							case 'Same':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Same,
+									_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p55, _p53, newRight)
+								};
+							case 'Insert':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Insert,
+									_1: A5(_elm_lang$core$Dict$balance, _p51, _p52, _p55, _p53, newRight)
+								};
+							default:
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Remove,
+									_1: A5(_elm_lang$core$Dict$bubble, _p51, _p52, _p55, _p53, newRight)
+								};
+						}
+				}
+			}
+		};
+		var _p56 = up(dict);
+		var flag = _p56._0;
+		var updatedDict = _p56._1;
+		var _p57 = flag;
+		switch (_p57.ctor) {
+			case 'Same':
+				return updatedDict;
+			case 'Insert':
+				return _elm_lang$core$Dict$ensureBlackRoot(updatedDict);
+			default:
+				return _elm_lang$core$Dict$blacken(updatedDict);
+		}
+	});
+var _elm_lang$core$Dict$insert = F3(
+	function (key, value, dict) {
+		return A3(
+			_elm_lang$core$Dict$update,
+			key,
+			_elm_lang$core$Basics$always(
+				_elm_lang$core$Maybe$Just(value)),
+			dict);
+	});
+var _elm_lang$core$Dict$singleton = F2(
+	function (key, value) {
+		return A3(_elm_lang$core$Dict$insert, key, value, _elm_lang$core$Dict$empty);
+	});
+var _elm_lang$core$Dict$union = F2(
+	function (t1, t2) {
+		return A3(_elm_lang$core$Dict$foldl, _elm_lang$core$Dict$insert, t2, t1);
+	});
+var _elm_lang$core$Dict$filter = F2(
+	function (predicate, dictionary) {
+		var add = F3(
+			function (key, value, dict) {
+				return A2(predicate, key, value) ? A3(_elm_lang$core$Dict$insert, key, value, dict) : dict;
+			});
+		return A3(_elm_lang$core$Dict$foldl, add, _elm_lang$core$Dict$empty, dictionary);
+	});
+var _elm_lang$core$Dict$intersect = F2(
+	function (t1, t2) {
+		return A2(
+			_elm_lang$core$Dict$filter,
+			F2(
+				function (k, _p58) {
+					return A2(_elm_lang$core$Dict$member, k, t2);
+				}),
+			t1);
+	});
+var _elm_lang$core$Dict$partition = F2(
+	function (predicate, dict) {
+		var add = F3(
+			function (key, value, _p59) {
+				var _p60 = _p59;
+				var _p62 = _p60._1;
+				var _p61 = _p60._0;
+				return A2(predicate, key, value) ? {
+					ctor: '_Tuple2',
+					_0: A3(_elm_lang$core$Dict$insert, key, value, _p61),
+					_1: _p62
+				} : {
+					ctor: '_Tuple2',
+					_0: _p61,
+					_1: A3(_elm_lang$core$Dict$insert, key, value, _p62)
+				};
+			});
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			add,
+			{ctor: '_Tuple2', _0: _elm_lang$core$Dict$empty, _1: _elm_lang$core$Dict$empty},
+			dict);
+	});
+var _elm_lang$core$Dict$fromList = function (assocs) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (_p63, dict) {
+				var _p64 = _p63;
+				return A3(_elm_lang$core$Dict$insert, _p64._0, _p64._1, dict);
+			}),
+		_elm_lang$core$Dict$empty,
+		assocs);
+};
+var _elm_lang$core$Dict$remove = F2(
+	function (key, dict) {
+		return A3(
+			_elm_lang$core$Dict$update,
+			key,
+			_elm_lang$core$Basics$always(_elm_lang$core$Maybe$Nothing),
+			dict);
+	});
+var _elm_lang$core$Dict$diff = F2(
+	function (t1, t2) {
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			F3(
+				function (k, v, t) {
+					return A2(_elm_lang$core$Dict$remove, k, t);
+				}),
+			t1,
+			t2);
+	});
+
+var _elm_lang$core$Debug$crash = _elm_lang$core$Native_Debug.crash;
+var _elm_lang$core$Debug$log = _elm_lang$core$Native_Debug.log;
+
+//import Maybe, Native.Array, Native.List, Native.Utils, Result //
+
+var _elm_lang$core$Native_Json = function() {
+
+
+// CORE DECODERS
+
+function succeed(msg)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'succeed',
+		msg: msg
+	};
+}
+
+function fail(msg)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'fail',
+		msg: msg
+	};
+}
+
+function decodePrimitive(tag)
+{
+	return {
+		ctor: '<decoder>',
+		tag: tag
+	};
+}
+
+function decodeContainer(tag, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: tag,
+		decoder: decoder
+	};
+}
+
+function decodeNull(value)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'null',
+		value: value
+	};
+}
+
+function decodeField(field, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'field',
+		field: field,
+		decoder: decoder
+	};
+}
+
+function decodeIndex(index, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'index',
+		index: index,
+		decoder: decoder
+	};
+}
+
+function decodeKeyValuePairs(decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'key-value',
+		decoder: decoder
+	};
+}
+
+function mapMany(f, decoders)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'map-many',
+		func: f,
+		decoders: decoders
+	};
+}
+
+function andThen(callback, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'andThen',
+		decoder: decoder,
+		callback: callback
+	};
+}
+
+function oneOf(decoders)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'oneOf',
+		decoders: decoders
+	};
+}
+
+
+// DECODING OBJECTS
+
+function map1(f, d1)
+{
+	return mapMany(f, [d1]);
+}
+
+function map2(f, d1, d2)
+{
+	return mapMany(f, [d1, d2]);
+}
+
+function map3(f, d1, d2, d3)
+{
+	return mapMany(f, [d1, d2, d3]);
+}
+
+function map4(f, d1, d2, d3, d4)
+{
+	return mapMany(f, [d1, d2, d3, d4]);
+}
+
+function map5(f, d1, d2, d3, d4, d5)
+{
+	return mapMany(f, [d1, d2, d3, d4, d5]);
+}
+
+function map6(f, d1, d2, d3, d4, d5, d6)
+{
+	return mapMany(f, [d1, d2, d3, d4, d5, d6]);
+}
+
+function map7(f, d1, d2, d3, d4, d5, d6, d7)
+{
+	return mapMany(f, [d1, d2, d3, d4, d5, d6, d7]);
+}
+
+function map8(f, d1, d2, d3, d4, d5, d6, d7, d8)
+{
+	return mapMany(f, [d1, d2, d3, d4, d5, d6, d7, d8]);
+}
+
+
+// DECODE HELPERS
+
+function ok(value)
+{
+	return { tag: 'ok', value: value };
+}
+
+function badPrimitive(type, value)
+{
+	return { tag: 'primitive', type: type, value: value };
+}
+
+function badIndex(index, nestedProblems)
+{
+	return { tag: 'index', index: index, rest: nestedProblems };
+}
+
+function badField(field, nestedProblems)
+{
+	return { tag: 'field', field: field, rest: nestedProblems };
+}
+
+function badIndex(index, nestedProblems)
+{
+	return { tag: 'index', index: index, rest: nestedProblems };
+}
+
+function badOneOf(problems)
+{
+	return { tag: 'oneOf', problems: problems };
+}
+
+function bad(msg)
+{
+	return { tag: 'fail', msg: msg };
+}
+
+function badToString(problem)
+{
+	var context = '_';
+	while (problem)
+	{
+		switch (problem.tag)
+		{
+			case 'primitive':
+				return 'Expecting ' + problem.type
+					+ (context === '_' ? '' : ' at ' + context)
+					+ ' but instead got: ' + jsToString(problem.value);
+
+			case 'index':
+				context += '[' + problem.index + ']';
+				problem = problem.rest;
+				break;
+
+			case 'field':
+				context += '.' + problem.field;
+				problem = problem.rest;
+				break;
+
+			case 'oneOf':
+				var problems = problem.problems;
+				for (var i = 0; i < problems.length; i++)
+				{
+					problems[i] = badToString(problems[i]);
+				}
+				return 'I ran into the following problems'
+					+ (context === '_' ? '' : ' at ' + context)
+					+ ':\n\n' + problems.join('\n');
+
+			case 'fail':
+				return 'I ran into a `fail` decoder'
+					+ (context === '_' ? '' : ' at ' + context)
+					+ ': ' + problem.msg;
+		}
+	}
+}
+
+function jsToString(value)
+{
+	return value === undefined
+		? 'undefined'
+		: JSON.stringify(value);
+}
+
+
+// DECODE
+
+function runOnString(decoder, string)
+{
+	var json;
+	try
+	{
+		json = JSON.parse(string);
+	}
+	catch (e)
+	{
+		return _elm_lang$core$Result$Err('Given an invalid JSON: ' + e.message);
+	}
+	return run(decoder, json);
+}
+
+function run(decoder, value)
+{
+	var result = runHelp(decoder, value);
+	return (result.tag === 'ok')
+		? _elm_lang$core$Result$Ok(result.value)
+		: _elm_lang$core$Result$Err(badToString(result));
+}
+
+function runHelp(decoder, value)
+{
+	switch (decoder.tag)
+	{
+		case 'bool':
+			return (typeof value === 'boolean')
+				? ok(value)
+				: badPrimitive('a Bool', value);
+
+		case 'int':
+			if (typeof value !== 'number') {
+				return badPrimitive('an Int', value);
+			}
+
+			if (-2147483647 < value && value < 2147483647 && (value | 0) === value) {
+				return ok(value);
+			}
+
+			if (isFinite(value) && !(value % 1)) {
+				return ok(value);
+			}
+
+			return badPrimitive('an Int', value);
+
+		case 'float':
+			return (typeof value === 'number')
+				? ok(value)
+				: badPrimitive('a Float', value);
+
+		case 'string':
+			return (typeof value === 'string')
+				? ok(value)
+				: (value instanceof String)
+					? ok(value + '')
+					: badPrimitive('a String', value);
+
+		case 'null':
+			return (value === null)
+				? ok(decoder.value)
+				: badPrimitive('null', value);
+
+		case 'value':
+			return ok(value);
+
+		case 'list':
+			if (!(value instanceof Array))
+			{
+				return badPrimitive('a List', value);
+			}
+
+			var list = _elm_lang$core$Native_List.Nil;
+			for (var i = value.length; i--; )
+			{
+				var result = runHelp(decoder.decoder, value[i]);
+				if (result.tag !== 'ok')
+				{
+					return badIndex(i, result)
+				}
+				list = _elm_lang$core$Native_List.Cons(result.value, list);
+			}
+			return ok(list);
+
+		case 'array':
+			if (!(value instanceof Array))
+			{
+				return badPrimitive('an Array', value);
+			}
+
+			var len = value.length;
+			var array = new Array(len);
+			for (var i = len; i--; )
+			{
+				var result = runHelp(decoder.decoder, value[i]);
+				if (result.tag !== 'ok')
+				{
+					return badIndex(i, result);
+				}
+				array[i] = result.value;
+			}
+			return ok(_elm_lang$core$Native_Array.fromJSArray(array));
+
+		case 'maybe':
+			var result = runHelp(decoder.decoder, value);
+			return (result.tag === 'ok')
+				? ok(_elm_lang$core$Maybe$Just(result.value))
+				: ok(_elm_lang$core$Maybe$Nothing);
+
+		case 'field':
+			var field = decoder.field;
+			if (typeof value !== 'object' || value === null || !(field in value))
+			{
+				return badPrimitive('an object with a field named `' + field + '`', value);
+			}
+
+			var result = runHelp(decoder.decoder, value[field]);
+			return (result.tag === 'ok') ? result : badField(field, result);
+
+		case 'index':
+			var index = decoder.index;
+			if (!(value instanceof Array))
+			{
+				return badPrimitive('an array', value);
+			}
+			if (index >= value.length)
+			{
+				return badPrimitive('a longer array. Need index ' + index + ' but there are only ' + value.length + ' entries', value);
+			}
+
+			var result = runHelp(decoder.decoder, value[index]);
+			return (result.tag === 'ok') ? result : badIndex(index, result);
+
+		case 'key-value':
+			if (typeof value !== 'object' || value === null || value instanceof Array)
+			{
+				return badPrimitive('an object', value);
+			}
+
+			var keyValuePairs = _elm_lang$core$Native_List.Nil;
+			for (var key in value)
+			{
+				var result = runHelp(decoder.decoder, value[key]);
+				if (result.tag !== 'ok')
+				{
+					return badField(key, result);
+				}
+				var pair = _elm_lang$core$Native_Utils.Tuple2(key, result.value);
+				keyValuePairs = _elm_lang$core$Native_List.Cons(pair, keyValuePairs);
+			}
+			return ok(keyValuePairs);
+
+		case 'map-many':
+			var answer = decoder.func;
+			var decoders = decoder.decoders;
+			for (var i = 0; i < decoders.length; i++)
+			{
+				var result = runHelp(decoders[i], value);
+				if (result.tag !== 'ok')
+				{
+					return result;
+				}
+				answer = answer(result.value);
+			}
+			return ok(answer);
+
+		case 'andThen':
+			var result = runHelp(decoder.decoder, value);
+			return (result.tag !== 'ok')
+				? result
+				: runHelp(decoder.callback(result.value), value);
+
+		case 'oneOf':
+			var errors = [];
+			var temp = decoder.decoders;
+			while (temp.ctor !== '[]')
+			{
+				var result = runHelp(temp._0, value);
+
+				if (result.tag === 'ok')
+				{
+					return result;
+				}
+
+				errors.push(result);
+
+				temp = temp._1;
+			}
+			return badOneOf(errors);
+
+		case 'fail':
+			return bad(decoder.msg);
+
+		case 'succeed':
+			return ok(decoder.msg);
+	}
+}
+
+
+// EQUALITY
+
+function equality(a, b)
+{
+	if (a === b)
+	{
+		return true;
+	}
+
+	if (a.tag !== b.tag)
+	{
+		return false;
+	}
+
+	switch (a.tag)
+	{
+		case 'succeed':
+		case 'fail':
+			return a.msg === b.msg;
+
+		case 'bool':
+		case 'int':
+		case 'float':
+		case 'string':
+		case 'value':
+			return true;
+
+		case 'null':
+			return a.value === b.value;
+
+		case 'list':
+		case 'array':
+		case 'maybe':
+		case 'key-value':
+			return equality(a.decoder, b.decoder);
+
+		case 'field':
+			return a.field === b.field && equality(a.decoder, b.decoder);
+
+		case 'index':
+			return a.index === b.index && equality(a.decoder, b.decoder);
+
+		case 'map-many':
+			if (a.func !== b.func)
+			{
+				return false;
+			}
+			return listEquality(a.decoders, b.decoders);
+
+		case 'andThen':
+			return a.callback === b.callback && equality(a.decoder, b.decoder);
+
+		case 'oneOf':
+			return listEquality(a.decoders, b.decoders);
+	}
+}
+
+function listEquality(aDecoders, bDecoders)
+{
+	var len = aDecoders.length;
+	if (len !== bDecoders.length)
+	{
+		return false;
+	}
+	for (var i = 0; i < len; i++)
+	{
+		if (!equality(aDecoders[i], bDecoders[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+// ENCODE
+
+function encode(indentLevel, value)
+{
+	return JSON.stringify(value, null, indentLevel);
+}
+
+function identity(value)
+{
+	return value;
+}
+
+function encodeObject(keyValuePairs)
+{
+	var obj = {};
+	while (keyValuePairs.ctor !== '[]')
+	{
+		var pair = keyValuePairs._0;
+		obj[pair._0] = pair._1;
+		keyValuePairs = keyValuePairs._1;
+	}
+	return obj;
+}
+
+return {
+	encode: F2(encode),
+	runOnString: F2(runOnString),
+	run: F2(run),
+
+	decodeNull: decodeNull,
+	decodePrimitive: decodePrimitive,
+	decodeContainer: F2(decodeContainer),
+
+	decodeField: F2(decodeField),
+	decodeIndex: F2(decodeIndex),
+
+	map1: F2(map1),
+	map2: F3(map2),
+	map3: F4(map3),
+	map4: F5(map4),
+	map5: F6(map5),
+	map6: F7(map6),
+	map7: F8(map7),
+	map8: F9(map8),
+	decodeKeyValuePairs: decodeKeyValuePairs,
+
+	andThen: F2(andThen),
+	fail: fail,
+	succeed: succeed,
+	oneOf: oneOf,
+
+	identity: identity,
+	encodeNull: null,
+	encodeArray: _elm_lang$core$Native_Array.toJSArray,
+	encodeList: _elm_lang$core$Native_List.toArray,
+	encodeObject: encodeObject,
+
+	equality: equality
+};
+
+}();
+
+var _elm_lang$core$Json_Encode$list = _elm_lang$core$Native_Json.encodeList;
+var _elm_lang$core$Json_Encode$array = _elm_lang$core$Native_Json.encodeArray;
+var _elm_lang$core$Json_Encode$object = _elm_lang$core$Native_Json.encodeObject;
+var _elm_lang$core$Json_Encode$null = _elm_lang$core$Native_Json.encodeNull;
+var _elm_lang$core$Json_Encode$bool = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$float = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$int = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$string = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$encode = _elm_lang$core$Native_Json.encode;
+var _elm_lang$core$Json_Encode$Value = {ctor: 'Value'};
+
+var _elm_lang$core$Json_Decode$null = _elm_lang$core$Native_Json.decodeNull;
+var _elm_lang$core$Json_Decode$value = _elm_lang$core$Native_Json.decodePrimitive('value');
+var _elm_lang$core$Json_Decode$andThen = _elm_lang$core$Native_Json.andThen;
+var _elm_lang$core$Json_Decode$fail = _elm_lang$core$Native_Json.fail;
+var _elm_lang$core$Json_Decode$succeed = _elm_lang$core$Native_Json.succeed;
+var _elm_lang$core$Json_Decode$lazy = function (thunk) {
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		thunk,
+		_elm_lang$core$Json_Decode$succeed(
+			{ctor: '_Tuple0'}));
+};
+var _elm_lang$core$Json_Decode$decodeValue = _elm_lang$core$Native_Json.run;
+var _elm_lang$core$Json_Decode$decodeString = _elm_lang$core$Native_Json.runOnString;
+var _elm_lang$core$Json_Decode$map8 = _elm_lang$core$Native_Json.map8;
+var _elm_lang$core$Json_Decode$map7 = _elm_lang$core$Native_Json.map7;
+var _elm_lang$core$Json_Decode$map6 = _elm_lang$core$Native_Json.map6;
+var _elm_lang$core$Json_Decode$map5 = _elm_lang$core$Native_Json.map5;
+var _elm_lang$core$Json_Decode$map4 = _elm_lang$core$Native_Json.map4;
+var _elm_lang$core$Json_Decode$map3 = _elm_lang$core$Native_Json.map3;
+var _elm_lang$core$Json_Decode$map2 = _elm_lang$core$Native_Json.map2;
+var _elm_lang$core$Json_Decode$map = _elm_lang$core$Native_Json.map1;
+var _elm_lang$core$Json_Decode$oneOf = _elm_lang$core$Native_Json.oneOf;
+var _elm_lang$core$Json_Decode$maybe = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'maybe', decoder);
+};
+var _elm_lang$core$Json_Decode$index = _elm_lang$core$Native_Json.decodeIndex;
+var _elm_lang$core$Json_Decode$field = _elm_lang$core$Native_Json.decodeField;
+var _elm_lang$core$Json_Decode$at = F2(
+	function (fields, decoder) {
+		return A3(_elm_lang$core$List$foldr, _elm_lang$core$Json_Decode$field, decoder, fields);
+	});
+var _elm_lang$core$Json_Decode$keyValuePairs = _elm_lang$core$Native_Json.decodeKeyValuePairs;
+var _elm_lang$core$Json_Decode$dict = function (decoder) {
+	return A2(
+		_elm_lang$core$Json_Decode$map,
+		_elm_lang$core$Dict$fromList,
+		_elm_lang$core$Json_Decode$keyValuePairs(decoder));
+};
+var _elm_lang$core$Json_Decode$array = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'array', decoder);
+};
+var _elm_lang$core$Json_Decode$list = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'list', decoder);
+};
+var _elm_lang$core$Json_Decode$nullable = function (decoder) {
+	return _elm_lang$core$Json_Decode$oneOf(
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$null(_elm_lang$core$Maybe$Nothing),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Maybe$Just, decoder),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _elm_lang$core$Json_Decode$float = _elm_lang$core$Native_Json.decodePrimitive('float');
+var _elm_lang$core$Json_Decode$int = _elm_lang$core$Native_Json.decodePrimitive('int');
+var _elm_lang$core$Json_Decode$bool = _elm_lang$core$Native_Json.decodePrimitive('bool');
+var _elm_lang$core$Json_Decode$string = _elm_lang$core$Native_Json.decodePrimitive('string');
+var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
+
+var _elm_lang$core$Tuple$mapSecond = F2(
+	function (func, _p0) {
+		var _p1 = _p0;
+		return {
+			ctor: '_Tuple2',
+			_0: _p1._0,
+			_1: func(_p1._1)
+		};
+	});
+var _elm_lang$core$Tuple$mapFirst = F2(
+	function (func, _p2) {
+		var _p3 = _p2;
+		return {
+			ctor: '_Tuple2',
+			_0: func(_p3._0),
+			_1: _p3._1
+		};
+	});
+var _elm_lang$core$Tuple$second = function (_p4) {
+	var _p5 = _p4;
+	return _p5._1;
+};
+var _elm_lang$core$Tuple$first = function (_p6) {
+	var _p7 = _p6;
+	return _p7._0;
+};
+
+var _user$project$Eve$viewConfig = function (viewCfg) {
+	var _p0 = viewCfg;
+	switch (_p0.ctor) {
+		case 'VWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'width',
+				_1: _elm_lang$core$Json_Encode$float(_p0._0)
+			};
+		case 'VHeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'height',
+				_1: _elm_lang$core$Json_Encode$float(_p0._0)
+			};
+		case 'Clip':
+			return {
+				ctor: '_Tuple2',
+				_0: 'clip',
+				_1: _elm_lang$core$Json_Encode$bool(_p0._0)
+			};
+		case 'Fill':
+			var _p1 = _p0._0;
+			if (_p1.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'fill',
+					_1: _elm_lang$core$Json_Encode$string(_p1._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'fill', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'FillOpacity':
+			var _p2 = _p0._0;
+			if (_p2.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'fillOpacity',
+					_1: _elm_lang$core$Json_Encode$float(_p2._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'fillOpacity', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'Stroke':
+			var _p3 = _p0._0;
+			if (_p3.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'stroke',
+					_1: _elm_lang$core$Json_Encode$string(_p3._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'stroke', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'StrokeOpacity':
+			var _p4 = _p0._0;
+			if (_p4.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'strokeOpacity',
+					_1: _elm_lang$core$Json_Encode$float(_p4._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'strokeOpacity', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'StrokeWidth':
+			var _p5 = _p0._0;
+			if (_p5.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'strokeWidth',
+					_1: _elm_lang$core$Json_Encode$float(_p5._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'strokeWidth', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'StrokeDash':
+			var _p6 = _p0._0;
+			if (_p6.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'strokeDash',
+					_1: _elm_lang$core$Json_Encode$list(
+						A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p6._0))
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'strokeDash', _1: _elm_lang$core$Json_Encode$null};
+			}
+		default:
+			var _p7 = _p0._0;
+			if (_p7.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'strokeDashOffset',
+					_1: _elm_lang$core$Json_Encode$float(_p7._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'strokeDashOffset', _1: _elm_lang$core$Json_Encode$null};
+			}
+	}
+};
+var _user$project$Eve$vAlignLabel = function (align) {
+	var _p8 = align;
+	switch (_p8.ctor) {
+		case 'AlignTop':
+			return 'top';
+		case 'AlignMiddle':
+			return 'middle';
+		default:
+			return 'bottom';
+	}
+};
+var _user$project$Eve$timeUnitLabel = function (tu) {
+	var _p9 = tu;
+	switch (_p9.ctor) {
+		case 'Year':
+			return 'year';
+		case 'YearQuarter':
+			return 'yearquarter';
+		case 'YearQuarterMonth':
+			return 'yearquartermonth';
+		case 'YearMonth':
+			return 'yearmonth';
+		case 'YearMonthDate':
+			return 'yearmonthdate';
+		case 'YearMonthDateHours':
+			return 'yearmonthdatehours';
+		case 'YearMonthDateHoursMinutes':
+			return 'yearmonthdatehoursminutes';
+		case 'YearMonthDateHoursMinutesSeconds':
+			return 'yearmonthdatehoursminutesseconds';
+		case 'Quarter':
+			return 'quarter';
+		case 'QuarterMonth':
+			return 'quartermonth';
+		case 'Month':
+			return 'month';
+		case 'MonthDate':
+			return 'monthdate';
+		case 'Date':
+			return 'date';
+		case 'Day':
+			return 'day';
+		case 'Hours':
+			return 'hours';
+		case 'HoursMinutes':
+			return 'hoursminutes';
+		case 'HoursMinutesSeconds':
+			return 'hoursminutesseconds';
+		case 'Minutes':
+			return 'minutes';
+		case 'MinutesSeconds':
+			return 'minutesseconds';
+		case 'Seconds':
+			return 'seconds';
+		case 'SecondsMilliseconds':
+			return 'secondsmilliseconds';
+		default:
+			return 'milliseconds';
+	}
+};
+var _user$project$Eve$stackProperty = function (sp) {
+	var _p10 = sp;
+	switch (_p10.ctor) {
+		case 'StZero':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stack',
+				_1: _elm_lang$core$Json_Encode$string('zero')
+			};
+		case 'StNormalize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stack',
+				_1: _elm_lang$core$Json_Encode$string('normalize')
+			};
+		case 'StCenter':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stack',
+				_1: _elm_lang$core$Json_Encode$string('center')
+			};
+		default:
+			return {ctor: '_Tuple2', _0: 'stack', _1: _elm_lang$core$Json_Encode$null};
+	}
+};
+var _user$project$Eve$propertyLabel = function (spec) {
+	var _p11 = spec;
+	switch (_p11.ctor) {
+		case 'Name':
+			return 'name';
+		case 'Description':
+			return 'description';
+		case 'Title':
+			return 'title';
+		case 'Width':
+			return 'width';
+		case 'Height':
+			return 'height';
+		case 'Data':
+			return 'data';
+		case 'Mark':
+			return 'mark';
+		case 'Transform':
+			return 'transform';
+		case 'Encoding':
+			return 'encoding';
+		case 'Config':
+			return 'config';
+		case 'Selection':
+			return 'selection';
+		case 'HConcat':
+			return 'hconcat';
+		case 'VConcat':
+			return 'vconcat';
+		case 'Layer':
+			return 'layer';
+		case 'Repeat':
+			return 'repeat';
+		case 'Facet':
+			return 'facet';
+		case 'Spec':
+			return 'spec';
+		default:
+			return 'resolve';
+	}
+};
+var _user$project$Eve$symbolLabel = function (sym) {
+	var _p12 = sym;
+	switch (_p12.ctor) {
+		case 'SymCircle':
+			return 'circle';
+		case 'SymSquare':
+			return 'square';
+		case 'Cross':
+			return 'cross';
+		case 'Diamond':
+			return 'diamond';
+		case 'TriangleUp':
+			return 'triangle-up';
+		case 'TriangleDown':
+			return 'triangle-down';
+		default:
+			return _p12._0;
+	}
+};
+var _user$project$Eve$sideLabel = function (side) {
+	var _p13 = side;
+	switch (_p13.ctor) {
+		case 'STop':
+			return 'top';
+		case 'SBottom':
+			return 'bottom';
+		case 'SLeft':
+			return 'left';
+		default:
+			return 'right';
+	}
+};
+var _user$project$Eve$selectionMarkProperty = function (markProp) {
+	var _p14 = markProp;
+	switch (_p14.ctor) {
+		case 'SMFill':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fill',
+				_1: _elm_lang$core$Json_Encode$string(_p14._0)
+			};
+		case 'SMFillOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fillOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p14._0)
+			};
+		case 'SMStroke':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stroke',
+				_1: _elm_lang$core$Json_Encode$string(_p14._0)
+			};
+		case 'SMStrokeOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p14._0)
+			};
+		case 'SMStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p14._0)
+			};
+		case 'SMStrokeDash':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeDash',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p14._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeDashOffset',
+				_1: _elm_lang$core$Json_Encode$float(_p14._0)
+			};
+	}
+};
+var _user$project$Eve$selectionLabel = function (seType) {
+	var _p15 = seType;
+	switch (_p15.ctor) {
+		case 'Single':
+			return 'single';
+		case 'Multi':
+			return 'multi';
+		default:
+			return 'interval';
+	}
+};
+var _user$project$Eve$scheme = function (sch) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'scheme',
+				_1: _elm_lang$core$Json_Encode$string(sch)
+			},
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Eve$scaleLabel = function (scType) {
+	var _p16 = scType;
+	switch (_p16.ctor) {
+		case 'ScLinear':
+			return 'linear';
+		case 'ScPow':
+			return 'pow';
+		case 'ScSqrt':
+			return 'sqrt';
+		case 'ScLog':
+			return 'log';
+		case 'ScTime':
+			return 'time';
+		case 'ScUtc':
+			return 'utc';
+		case 'ScSequential':
+			return 'sequential';
+		case 'ScOrdinal':
+			return 'ordinal';
+		case 'ScBand':
+			return 'band';
+		case 'ScPoint':
+			return 'point';
+		case 'ScBinLinear':
+			return 'bin-linear';
+		default:
+			return 'bin-ordinal';
+	}
+};
+var _user$project$Eve$scaleRangeProperty = function (srType) {
+	var _p17 = srType;
+	switch (_p17.ctor) {
+		case 'RNumbers':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p17._0));
+		case 'RStrings':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p17._0));
+		default:
+			return _elm_lang$core$Json_Encode$string(_p17._0);
+	}
+};
+var _user$project$Eve$scaleConfig = function (scaleCfg) {
+	var _p18 = scaleCfg;
+	switch (_p18.ctor) {
+		case 'SCBandPaddingInner':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bandPaddingInner',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCBandPaddingOuter':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bandPaddingOuter',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCClamp':
+			return {
+				ctor: '_Tuple2',
+				_0: 'clamp',
+				_1: _elm_lang$core$Json_Encode$bool(_p18._0)
+			};
+		case 'SCMaxBandSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxBandSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMinBandSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minBandSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMaxFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMinFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMaxOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMinOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMaxSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMinSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minSize',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMaxStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxStrokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCMinStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minStrokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCPointPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'pointPadding',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		case 'SCRangeStep':
+			var _p19 = _p18._0;
+			if (_p19.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'rangeStep',
+					_1: _elm_lang$core$Json_Encode$float(_p19._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'rangeStep', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'SCRound':
+			return {
+				ctor: '_Tuple2',
+				_0: 'round',
+				_1: _elm_lang$core$Json_Encode$bool(_p18._0)
+			};
+		case 'SCTextXRangeStep':
+			return {
+				ctor: '_Tuple2',
+				_0: 'textXRangeStep',
+				_1: _elm_lang$core$Json_Encode$float(_p18._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'useUnaggregatedDomain',
+				_1: _elm_lang$core$Json_Encode$bool(_p18._0)
+			};
+	}
+};
+var _user$project$Eve$selectionResolutionLabel = function (res) {
+	var _p20 = res;
+	switch (_p20.ctor) {
+		case 'Global':
+			return 'global';
+		case 'Union':
+			return 'union';
+		default:
+			return 'intersect';
+	}
+};
+var _user$project$Eve$resolutionLabel = function (res) {
+	var _p21 = res;
+	if (_p21.ctor === 'Shared') {
+		return 'shared';
+	} else {
+		return 'independent';
+	}
+};
+var _user$project$Eve$repeatFields = function (fields) {
+	var _p22 = fields;
+	if (_p22.ctor === 'RowFields') {
+		return {
+			ctor: '_Tuple2',
+			_0: 'row',
+			_1: _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p22._0))
+		};
+	} else {
+		return {
+			ctor: '_Tuple2',
+			_0: 'column',
+			_1: _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p22._0))
+		};
+	}
+};
+var _user$project$Eve$rangeConfig = function (rangeCfg) {
+	var _p23 = rangeCfg;
+	switch (_p23.ctor) {
+		case 'RCategory':
+			return {
+				ctor: '_Tuple2',
+				_0: 'category',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+		case 'RDiverging':
+			return {
+				ctor: '_Tuple2',
+				_0: 'diverging',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+		case 'RHeatmap':
+			return {
+				ctor: '_Tuple2',
+				_0: 'heatmap',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+		case 'ROrdinal':
+			return {
+				ctor: '_Tuple2',
+				_0: 'ordinal',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+		case 'RRamp':
+			return {
+				ctor: '_Tuple2',
+				_0: 'ramp',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbol',
+				_1: _user$project$Eve$scheme(_p23._0)
+			};
+	}
+};
+var _user$project$Eve$positionLabel = function (pChannel) {
+	var _p24 = pChannel;
+	switch (_p24.ctor) {
+		case 'X':
+			return 'x';
+		case 'Y':
+			return 'y';
+		case 'X2':
+			return 'x2';
+		default:
+			return 'y2';
+	}
+};
+var _user$project$Eve$overlapStrategyLabel = function (strat) {
+	var _p25 = strat;
+	switch (_p25.ctor) {
+		case 'ONone':
+			return 'false';
+		case 'OParity':
+			return 'parity';
+		default:
+			return 'greedy';
+	}
+};
+var _user$project$Eve$opLabel = function (op) {
+	var _p26 = op;
+	switch (_p26.ctor) {
+		case 'Count':
+			return 'count';
+		case 'Valid':
+			return 'valid';
+		case 'Missing':
+			return 'missing';
+		case 'Distinct':
+			return 'distinct';
+		case 'Sum':
+			return 'sum';
+		case 'Mean':
+			return 'mean';
+		case 'Average':
+			return 'average';
+		case 'Variance':
+			return 'variance';
+		case 'VarianceP':
+			return 'variancep';
+		case 'Stdev':
+			return 'stdev';
+		case 'StdevP':
+			return 'stdevp';
+		case 'Stderr':
+			return 'stderr';
+		case 'Median':
+			return 'median';
+		case 'Q1':
+			return 'q1';
+		case 'Q3':
+			return 'q3';
+		case 'CI0':
+			return 'ci0';
+		case 'CI1':
+			return 'ci1';
+		case 'Min':
+			return 'min';
+		default:
+			return 'max';
+	}
+};
+var _user$project$Eve$nice = function (ni) {
+	var _p27 = ni;
+	switch (_p27.ctor) {
+		case 'NMillisecond':
+			return _elm_lang$core$Json_Encode$string('millisecond');
+		case 'NSecond':
+			return _elm_lang$core$Json_Encode$string('second');
+		case 'NMinute':
+			return _elm_lang$core$Json_Encode$string('minute');
+		case 'NHour':
+			return _elm_lang$core$Json_Encode$string('hour');
+		case 'NDay':
+			return _elm_lang$core$Json_Encode$string('day');
+		case 'NWeek':
+			return _elm_lang$core$Json_Encode$string('week');
+		case 'NMonth':
+			return _elm_lang$core$Json_Encode$string('month');
+		case 'NYear':
+			return _elm_lang$core$Json_Encode$string('year');
+		case 'IsNice':
+			return _elm_lang$core$Json_Encode$bool(_p27._0);
+		default:
+			return _elm_lang$core$Json_Encode$int(_p27._0);
+	}
+};
+var _user$project$Eve$monthLabel = function (mon) {
+	var _p28 = mon;
+	switch (_p28.ctor) {
+		case 'Jan':
+			return 'Jan';
+		case 'Feb':
+			return 'Feb';
+		case 'Mar':
+			return 'Mar';
+		case 'Apr':
+			return 'Apr';
+		case 'May':
+			return 'May';
+		case 'Jun':
+			return 'Jun';
+		case 'Jul':
+			return 'Jul';
+		case 'Aug':
+			return 'Aug';
+		case 'Sep':
+			return 'Sep';
+		case 'Oct':
+			return 'Oct';
+		case 'Nov':
+			return 'Nov';
+		default:
+			return 'Dec';
+	}
+};
+var _user$project$Eve$measurementLabel = function (mType) {
+	var _p29 = mType;
+	switch (_p29.ctor) {
+		case 'Nominal':
+			return 'nominal';
+		case 'Ordinal':
+			return 'ordinal';
+		case 'Quantitative':
+			return 'quantitative';
+		default:
+			return 'temporal';
+	}
+};
+var _user$project$Eve$markOrientLabel = function (orient) {
+	var _p30 = orient;
+	if (_p30.ctor === 'Horizontal') {
+		return 'horizontal';
+	} else {
+		return 'vertical';
+	}
+};
+var _user$project$Eve$markLabel = function (mark) {
+	var _p31 = mark;
+	switch (_p31.ctor) {
+		case 'Area':
+			return 'area';
+		case 'Bar':
+			return 'bar';
+		case 'Circle':
+			return 'circle';
+		case 'Line':
+			return 'line';
+		case 'Point':
+			return 'point';
+		case 'Rect':
+			return 'rect';
+		case 'Rule':
+			return 'rule';
+		case 'Square':
+			return 'square';
+		case 'Text':
+			return 'text';
+		default:
+			return 'tick';
+	}
+};
+var _user$project$Eve$markInterpolationLabel = function (interp) {
+	var _p32 = interp;
+	switch (_p32.ctor) {
+		case 'Linear':
+			return 'linear';
+		case 'LinearClosed':
+			return 'linear-closed';
+		case 'Stepwise':
+			return 'step';
+		case 'StepBefore':
+			return 'step-before';
+		case 'StepAfter':
+			return 'step-after';
+		case 'Basis':
+			return 'basis';
+		case 'BasisOpen':
+			return 'basis-open';
+		case 'BasisClosed':
+			return 'basis-closed';
+		case 'Cardinal':
+			return 'cardinal';
+		case 'CardinalOpen':
+			return 'cardinal-open';
+		case 'CardinalClosed':
+			return 'cardinal-closed';
+		case 'Bundle':
+			return 'bundle';
+		default:
+			return 'monotone';
+	}
+};
+var _user$project$Eve$legendOrientLabel = function (orient) {
+	var _p33 = orient;
+	switch (_p33.ctor) {
+		case 'Left':
+			return 'left';
+		case 'BottomLeft':
+			return 'bottom-left';
+		case 'BottomRight':
+			return 'bottom-right';
+		case 'Right':
+			return 'right';
+		case 'TopLeft':
+			return 'top-left';
+		case 'TopRight':
+			return 'top-right';
+		default:
+			return 'none';
+	}
+};
+var _user$project$Eve$interpolateProperty = function (iType) {
+	var _p34 = iType;
+	switch (_p34.ctor) {
+		case 'Rgb':
+			return _elm_lang$core$Json_Encode$string('rgb');
+		case 'Hsl':
+			return _elm_lang$core$Json_Encode$string('hsl');
+		case 'HslLong':
+			return _elm_lang$core$Json_Encode$string('hsl-long');
+		case 'Lab':
+			return _elm_lang$core$Json_Encode$string('lab');
+		case 'Hcl':
+			return _elm_lang$core$Json_Encode$string('hcl');
+		case 'HclLong':
+			return _elm_lang$core$Json_Encode$string('hcl-long');
+		case 'CubeHelix':
+			return _elm_lang$core$Json_Encode$string('cubehelix');
+		default:
+			return _elm_lang$core$Json_Encode$string('cubehelix-long');
+	}
+};
+var _user$project$Eve$inputProperty = function (prop) {
+	var _p35 = prop;
+	switch (_p35.ctor) {
+		case 'InMin':
+			return {
+				ctor: '_Tuple2',
+				_0: 'min',
+				_1: _elm_lang$core$Json_Encode$float(_p35._0)
+			};
+		case 'InMax':
+			return {
+				ctor: '_Tuple2',
+				_0: 'max',
+				_1: _elm_lang$core$Json_Encode$float(_p35._0)
+			};
+		case 'InStep':
+			return {
+				ctor: '_Tuple2',
+				_0: 'step',
+				_1: _elm_lang$core$Json_Encode$float(_p35._0)
+			};
+		case 'Debounce':
+			return {
+				ctor: '_Tuple2',
+				_0: 'debounce',
+				_1: _elm_lang$core$Json_Encode$float(_p35._0)
+			};
+		case 'InOptions':
+			return {
+				ctor: '_Tuple2',
+				_0: 'options',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p35._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'element',
+				_1: _elm_lang$core$Json_Encode$string(_p35._0)
+			};
+	}
+};
+var _user$project$Eve$hAlignLabel = function (align) {
+	var _p36 = align;
+	switch (_p36.ctor) {
+		case 'AlignLeft':
+			return 'left';
+		case 'AlignCenter':
+			return 'center';
+		default:
+			return 'right';
+	}
+};
+var _user$project$Eve$fDataType = function (dType) {
+	var _p37 = dType;
+	switch (_p37.ctor) {
+		case 'FNumber':
+			return _elm_lang$core$Json_Encode$string('number');
+		case 'FBoolean':
+			return _elm_lang$core$Json_Encode$string('boolean');
+		case 'FDate':
+			var _p38 = _p37._0;
+			return _elm_lang$core$Native_Utils.eq(_p38, '') ? _elm_lang$core$Json_Encode$string('date') : _elm_lang$core$Json_Encode$string(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'date:\'',
+					A2(_elm_lang$core$Basics_ops['++'], _p38, '\'')));
+		default:
+			var _p39 = _p37._0;
+			return _elm_lang$core$Native_Utils.eq(_p39, '') ? _elm_lang$core$Json_Encode$string('utc') : _elm_lang$core$Json_Encode$string(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'utc:\'',
+					A2(_elm_lang$core$Basics_ops['++'], _p39, '\'')));
+	}
+};
+var _user$project$Eve$format = function (fmt) {
+	var _p40 = fmt;
+	switch (_p40.ctor) {
+		case 'JSON':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('json')
+			};
+		case 'CSV':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('csv')
+			};
+		case 'TSV':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('tsv')
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'parse',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p41) {
+							var _p42 = _p41;
+							return {
+								ctor: '_Tuple2',
+								_0: _p42._0,
+								_1: _user$project$Eve$fDataType(_p42._1)
+							};
+						},
+						_p40._0))
+			};
+	}
+};
+var _user$project$Eve$fontWeight = function (w) {
+	var _p43 = w;
+	switch (_p43.ctor) {
+		case 'Normal':
+			return _elm_lang$core$Json_Encode$string('normal');
+		case 'Bold':
+			return _elm_lang$core$Json_Encode$string('bold');
+		case 'Bolder':
+			return _elm_lang$core$Json_Encode$string('bolder');
+		case 'Lighter':
+			return _elm_lang$core$Json_Encode$string('lighter');
+		case 'W100':
+			return _elm_lang$core$Json_Encode$float(100);
+		case 'W200':
+			return _elm_lang$core$Json_Encode$float(200);
+		case 'W300':
+			return _elm_lang$core$Json_Encode$float(300);
+		case 'W400':
+			return _elm_lang$core$Json_Encode$float(400);
+		case 'W500':
+			return _elm_lang$core$Json_Encode$float(500);
+		case 'W600':
+			return _elm_lang$core$Json_Encode$float(600);
+		case 'W700':
+			return _elm_lang$core$Json_Encode$float(700);
+		case 'W800':
+			return _elm_lang$core$Json_Encode$float(800);
+		default:
+			return _elm_lang$core$Json_Encode$float(900);
+	}
+};
+var _user$project$Eve$markProperty = function (mProp) {
+	var _p44 = mProp;
+	switch (_p44.ctor) {
+		case 'MFilled':
+			return {
+				ctor: '_Tuple2',
+				_0: 'filled',
+				_1: _elm_lang$core$Json_Encode$bool(_p44._0)
+			};
+		case 'MClip':
+			return {
+				ctor: '_Tuple2',
+				_0: 'clip',
+				_1: _elm_lang$core$Json_Encode$bool(_p44._0)
+			};
+		case 'MColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'color',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MFill':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fill',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MStroke':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stroke',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'opacity',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MFillOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fillOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MStrokeOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MStrokeDash':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeDash',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p44._0))
+			};
+		case 'MStrokeDashOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeDashOffset',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'style',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p44._0))
+			};
+		case 'MInterpolate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'interpolate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$markInterpolationLabel(_p44._0))
+			};
+		case 'MTension':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tension',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MOrient':
+			return {
+				ctor: '_Tuple2',
+				_0: 'orient',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$markOrientLabel(_p44._0))
+			};
+		case 'MShape':
+			return {
+				ctor: '_Tuple2',
+				_0: 'shape',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$symbolLabel(_p44._0))
+			};
+		case 'MSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'size',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MAngle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'angle',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'align',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$hAlignLabel(_p44._0))
+			};
+		case 'MBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'baseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$vAlignLabel(_p44._0))
+			};
+		case 'MdX':
+			return {
+				ctor: '_Tuple2',
+				_0: 'dx',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MdY':
+			return {
+				ctor: '_Tuple2',
+				_0: 'dy',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'font',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MFontStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fontStyle',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fontWeight',
+				_1: _user$project$Eve$fontWeight(_p44._0)
+			};
+		case 'MRadius':
+			return {
+				ctor: '_Tuple2',
+				_0: 'radius',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MText':
+			return {
+				ctor: '_Tuple2',
+				_0: 'text',
+				_1: _elm_lang$core$Json_Encode$string(_p44._0)
+			};
+		case 'MTheta':
+			return {
+				ctor: '_Tuple2',
+				_0: 'theta',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MBinSpacing':
+			return {
+				ctor: '_Tuple2',
+				_0: 'binSpacing',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MContinuousBandSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'continuousBandSize',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MDiscreteBandSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'discreteBandSize',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		case 'MShortTimeLabels':
+			return {
+				ctor: '_Tuple2',
+				_0: 'shortTimeLabels',
+				_1: _elm_lang$core$Json_Encode$bool(_p44._0)
+			};
+		case 'MBandSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bandSize',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'thickness',
+				_1: _elm_lang$core$Json_Encode$float(_p44._0)
+			};
+	}
+};
+var _user$project$Eve$headerProperty = function (hProp) {
+	var _p45 = hProp;
+	if (_p45.ctor === 'HFormat') {
+		return {
+			ctor: '_Tuple2',
+			_0: 'format',
+			_1: _elm_lang$core$Json_Encode$string(_p45._0)
+		};
+	} else {
+		return {
+			ctor: '_Tuple2',
+			_0: 'title',
+			_1: _elm_lang$core$Json_Encode$string(_p45._0)
+		};
+	}
+};
+var _user$project$Eve$dayLabel = function (day) {
+	var _p46 = day;
+	switch (_p46.ctor) {
+		case 'Mon':
+			return 'Mon';
+		case 'Tue':
+			return 'Tue';
+		case 'Wed':
+			return 'Wed';
+		case 'Thu':
+			return 'Thu';
+		case 'Fri':
+			return 'Fri';
+		case 'Sat':
+			return 'Sat';
+		default:
+			return 'Sun';
+	}
+};
+var _user$project$Eve$dateTimeProperty = function (dt) {
+	var _p47 = dt;
+	switch (_p47.ctor) {
+		case 'DTYear':
+			return {
+				ctor: '_Tuple2',
+				_0: 'year',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		case 'DTQuarter':
+			return {
+				ctor: '_Tuple2',
+				_0: 'quarter',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		case 'DTMonth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'month',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$monthLabel(_p47._0))
+			};
+		case 'DTDate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'date',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		case 'DTDay':
+			return {
+				ctor: '_Tuple2',
+				_0: 'day',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$dayLabel(_p47._0))
+			};
+		case 'DTHours':
+			return {
+				ctor: '_Tuple2',
+				_0: 'hours',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		case 'DTMinutes':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minutes',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		case 'DTSeconds':
+			return {
+				ctor: '_Tuple2',
+				_0: 'seconds',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'milliseconds',
+				_1: _elm_lang$core$Json_Encode$int(_p47._0)
+			};
+	}
+};
+var _user$project$Eve$legendProperty = function (legendProp) {
+	var _p48 = legendProp;
+	switch (_p48.ctor) {
+		case 'LType':
+			var _p49 = _p48._0;
+			if (_p49.ctor === 'Gradient') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string('gradient')
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string('symbol')
+				};
+			}
+		case 'LEntryPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'entryPadding',
+				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+			};
+		case 'LFormat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'format',
+				_1: _elm_lang$core$Json_Encode$string(_p48._0)
+			};
+		case 'LOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'offset',
+				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+			};
+		case 'LOrient':
+			return {
+				ctor: '_Tuple2',
+				_0: 'orient',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$legendOrientLabel(_p48._0))
+			};
+		case 'LPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'padding',
+				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+			};
+		case 'LTickCount':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickCount',
+				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+			};
+		case 'LTitle':
+			var _p50 = _p48._0;
+			return _elm_lang$core$Native_Utils.eq(_p50, '') ? {ctor: '_Tuple2', _0: 'title', _1: _elm_lang$core$Json_Encode$null} : {
+				ctor: '_Tuple2',
+				_0: 'title',
+				_1: _elm_lang$core$Json_Encode$string(_p50)
+			};
+		case 'LValues':
+			var _p53 = _p48._0;
+			var list = function () {
+				var _p51 = _p53;
+				switch (_p51.ctor) {
+					case 'Numbers':
+						return _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p51._0));
+					case 'DateTimes':
+						return _elm_lang$core$Json_Encode$list(
+							A2(
+								_elm_lang$core$List$map,
+								function (dt) {
+									return _elm_lang$core$Json_Encode$object(
+										A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, dt));
+								},
+								_p51._0));
+					case 'Strings':
+						return _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p51._0));
+					default:
+						var _p52 = A2(_elm_lang$core$Debug$log, 'Cannot create legend values with a list of of booleans ', _p53);
+						return _elm_lang$core$Json_Encode$null;
+				}
+			}();
+			return {ctor: '_Tuple2', _0: 'values', _1: list};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'zindex',
+				_1: _elm_lang$core$Json_Encode$int(_p48._0)
+			};
+	}
+};
+var _user$project$Eve$scaleDomainProperty = function (sdType) {
+	var _p54 = sdType;
+	switch (_p54.ctor) {
+		case 'DNumbers':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p54._0));
+		case 'DDateTimes':
+			return _elm_lang$core$Json_Encode$list(
+				A2(
+					_elm_lang$core$List$map,
+					function (dt) {
+						return _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, dt));
+					},
+					_p54._0));
+		case 'DStrings':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p54._0));
+		case 'DSelection':
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'selection',
+						_1: _elm_lang$core$Json_Encode$string(_p54._0)
+					},
+					_1: {ctor: '[]'}
+				});
+		default:
+			return _elm_lang$core$Json_Encode$string('unaggregated');
+	}
+};
+var _user$project$Eve$scaleProperty = function (scaleProp) {
+	var _p55 = scaleProp;
+	switch (_p55.ctor) {
+		case 'SType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$scaleLabel(_p55._0))
+			};
+		case 'SDomain':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domain',
+				_1: _user$project$Eve$scaleDomainProperty(_p55._0)
+			};
+		case 'SRange':
+			var _p56 = _p55._0;
+			switch (_p56.ctor) {
+				case 'RNumbers':
+					return {
+						ctor: '_Tuple2',
+						_0: 'range',
+						_1: _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p56._0))
+					};
+				case 'RStrings':
+					return {
+						ctor: '_Tuple2',
+						_0: 'range',
+						_1: _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p56._0))
+					};
+				default:
+					return {
+						ctor: '_Tuple2',
+						_0: 'range',
+						_1: _elm_lang$core$Json_Encode$string(_p56._0)
+					};
+			}
+		case 'SScheme':
+			return {
+				ctor: '_Tuple2',
+				_0: 'scheme',
+				_1: _elm_lang$core$Json_Encode$string(_p55._0)
+			};
+		case 'SPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'padding',
+				_1: _elm_lang$core$Json_Encode$float(_p55._0)
+			};
+		case 'SPaddingInner':
+			return {
+				ctor: '_Tuple2',
+				_0: 'paddingInner',
+				_1: _elm_lang$core$Json_Encode$float(_p55._0)
+			};
+		case 'SPaddingOuter':
+			return {
+				ctor: '_Tuple2',
+				_0: 'paddingOuter',
+				_1: _elm_lang$core$Json_Encode$float(_p55._0)
+			};
+		case 'SRangeStep':
+			var _p57 = _p55._0;
+			if (_p57.ctor === 'Just') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'rangeStep',
+					_1: _elm_lang$core$Json_Encode$float(_p57._0)
+				};
+			} else {
+				return {ctor: '_Tuple2', _0: 'rangeStep', _1: _elm_lang$core$Json_Encode$null};
+			}
+		case 'SRound':
+			return {
+				ctor: '_Tuple2',
+				_0: 'round',
+				_1: _elm_lang$core$Json_Encode$bool(_p55._0)
+			};
+		case 'SClamp':
+			return {
+				ctor: '_Tuple2',
+				_0: 'clamp',
+				_1: _elm_lang$core$Json_Encode$bool(_p55._0)
+			};
+		case 'SInterpolate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'interpolate',
+				_1: _user$project$Eve$interpolateProperty(_p55._0)
+			};
+		case 'SNice':
+			return {
+				ctor: '_Tuple2',
+				_0: 'nice',
+				_1: _user$project$Eve$nice(_p55._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'zero',
+				_1: _elm_lang$core$Json_Encode$bool(_p55._0)
+			};
+	}
+};
+var _user$project$Eve$value = function (val) {
+	var _p58 = val;
+	switch (_p58.ctor) {
+		case 'Number':
+			return _elm_lang$core$Json_Encode$float(_p58._0);
+		case 'Str':
+			return _elm_lang$core$Json_Encode$string(_p58._0);
+		case 'Boolean':
+			return _elm_lang$core$Json_Encode$bool(_p58._0);
+		default:
+			return _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, _p58._0));
+	}
+};
+var _user$project$Eve$channelLabel = function (ch) {
+	var _p59 = ch;
+	switch (_p59.ctor) {
+		case 'ChX':
+			return 'x';
+		case 'ChY':
+			return 'y';
+		case 'ChX2':
+			return 'x2';
+		case 'ChY2':
+			return 'y2';
+		case 'ChColor':
+			return 'color';
+		case 'ChOpacity':
+			return 'opacity';
+		case 'ChShape':
+			return 'shape';
+		default:
+			return 'size';
+	}
+};
+var _user$project$Eve$resolveProperty = function (res) {
+	var _p60 = res;
+	switch (_p60.ctor) {
+		case 'RAxis':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axis',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p61) {
+							var _p62 = _p61;
+							return {
+								ctor: '_Tuple2',
+								_0: _user$project$Eve$channelLabel(_p62._0),
+								_1: _elm_lang$core$Json_Encode$string(
+									_user$project$Eve$resolutionLabel(_p62._1))
+							};
+						},
+						_p60._0))
+			};
+		case 'RLegend':
+			return {
+				ctor: '_Tuple2',
+				_0: 'legend',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p63) {
+							var _p64 = _p63;
+							return {
+								ctor: '_Tuple2',
+								_0: _user$project$Eve$channelLabel(_p64._0),
+								_1: _elm_lang$core$Json_Encode$string(
+									_user$project$Eve$resolutionLabel(_p64._1))
+							};
+						},
+						_p60._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'scale',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p65) {
+							var _p66 = _p65;
+							return {
+								ctor: '_Tuple2',
+								_0: _user$project$Eve$channelLabel(_p66._0),
+								_1: _elm_lang$core$Json_Encode$string(
+									_user$project$Eve$resolutionLabel(_p66._1))
+							};
+						},
+						_p60._0))
+			};
+	}
+};
+var _user$project$Eve$binding = function (bnd) {
+	var _p67 = bnd;
+	switch (_p67.ctor) {
+		case 'InRange':
+			return {
+				ctor: '_Tuple2',
+				_0: _p67._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('range')
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$inputProperty, _p67._1)
+					})
+			};
+		case 'InCheckbox':
+			return {
+				ctor: '_Tuple2',
+				_0: _p67._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('checkbox')
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$inputProperty, _p67._1)
+					})
+			};
+		case 'InRadio':
+			return {
+				ctor: '_Tuple2',
+				_0: _p67._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('radio')
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$inputProperty, _p67._1)
+					})
+			};
+		case 'InSelect':
+			return {
+				ctor: '_Tuple2',
+				_0: _p67._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('select')
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$inputProperty, _p67._1)
+					})
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: _p67._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('text')
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$inputProperty, _p67._1)
+					})
+			};
+	}
+};
+var _user$project$Eve$selectionProperty = function (selProp) {
+	var _p68 = selProp;
+	switch (_p68.ctor) {
+		case 'Fields':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fields',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p68._0))
+			};
+		case 'Encodings':
+			return {
+				ctor: '_Tuple2',
+				_0: 'encodings',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p69) {
+							return _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$channelLabel(_p69));
+						},
+						_p68._0))
+			};
+		case 'On':
+			return {
+				ctor: '_Tuple2',
+				_0: 'on',
+				_1: _elm_lang$core$Json_Encode$string(_p68._0)
+			};
+		case 'Empty':
+			return {
+				ctor: '_Tuple2',
+				_0: 'empty',
+				_1: _elm_lang$core$Json_Encode$string('none')
+			};
+		case 'ResolveSelections':
+			return {
+				ctor: '_Tuple2',
+				_0: 'resolve',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$selectionResolutionLabel(_p68._0))
+			};
+		case 'SelectionMark':
+			return {
+				ctor: '_Tuple2',
+				_0: 'mark',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$selectionMarkProperty, _p68._0))
+			};
+		case 'BindScales':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bind',
+				_1: _elm_lang$core$Json_Encode$string('scales')
+			};
+		case 'Bind':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bind',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$binding, _p68._0))
+			};
+		case 'Nearest':
+			return {
+				ctor: '_Tuple2',
+				_0: 'nearest',
+				_1: _elm_lang$core$Json_Encode$bool(_p68._0)
+			};
+		case 'NoToggle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'toggle',
+				_1: _elm_lang$core$Json_Encode$bool(false)
+			};
+		case 'Translate':
+			var _p70 = _p68._0;
+			return _elm_lang$core$Native_Utils.eq(_p70, '') ? {
+				ctor: '_Tuple2',
+				_0: 'translate',
+				_1: _elm_lang$core$Json_Encode$bool(false)
+			} : {
+				ctor: '_Tuple2',
+				_0: 'translate',
+				_1: _elm_lang$core$Json_Encode$string(_p70)
+			};
+		default:
+			var _p71 = _p68._0;
+			return _elm_lang$core$Native_Utils.eq(_p71, '') ? {
+				ctor: '_Tuple2',
+				_0: 'zoom',
+				_1: _elm_lang$core$Json_Encode$bool(false)
+			} : {
+				ctor: '_Tuple2',
+				_0: 'zoom',
+				_1: _elm_lang$core$Json_Encode$string(_p71)
+			};
+	}
+};
+var _user$project$Eve$binProperty = function (binProp) {
+	var _p72 = binProp;
+	switch (_p72.ctor) {
+		case 'MaxBins':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxbins',
+				_1: _elm_lang$core$Json_Encode$int(_p72._0)
+			};
+		case 'Base':
+			return {
+				ctor: '_Tuple2',
+				_0: 'base',
+				_1: _elm_lang$core$Json_Encode$float(_p72._0)
+			};
+		case 'Step':
+			return {
+				ctor: '_Tuple2',
+				_0: 'step',
+				_1: _elm_lang$core$Json_Encode$float(_p72._0)
+			};
+		case 'Steps':
+			return {
+				ctor: '_Tuple2',
+				_0: 'steps',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p72._0))
+			};
+		case 'MinStep':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minstep',
+				_1: _elm_lang$core$Json_Encode$float(_p72._0)
+			};
+		case 'Divide':
+			return {
+				ctor: '_Tuple2',
+				_0: 'divide',
+				_1: _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$float(_p72._0),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Json_Encode$float(_p72._1),
+							_1: {ctor: '[]'}
+						}
+					})
+			};
+		case 'Extent':
+			return {
+				ctor: '_Tuple2',
+				_0: 'extent',
+				_1: _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$float(_p72._0),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Json_Encode$float(_p72._1),
+							_1: {ctor: '[]'}
+						}
+					})
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'nice',
+				_1: _elm_lang$core$Json_Encode$bool(_p72._0)
+			};
+	}
+};
+var _user$project$Eve$axisProperty = function (axisProp) {
+	var _p73 = axisProp;
+	switch (_p73.ctor) {
+		case 'Format':
+			return {
+				ctor: '_Tuple2',
+				_0: 'format',
+				_1: _elm_lang$core$Json_Encode$string(_p73._0)
+			};
+		case 'Labels':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labels',
+				_1: _elm_lang$core$Json_Encode$bool(_p73._0)
+			};
+		case 'LabelAngle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelAngle',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'LabelOverlap':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOverlap',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$overlapStrategyLabel(_p73._0))
+			};
+		case 'LabelPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelPadding',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'Domain':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domain',
+				_1: _elm_lang$core$Json_Encode$bool(_p73._0)
+			};
+		case 'Grid':
+			return {
+				ctor: '_Tuple2',
+				_0: 'grid',
+				_1: _elm_lang$core$Json_Encode$bool(_p73._0)
+			};
+		case 'MaxExtent':
+			return {
+				ctor: '_Tuple2',
+				_0: 'maxExtent',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'MinExtent':
+			return {
+				ctor: '_Tuple2',
+				_0: 'minExtent',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'Orient':
+			return {
+				ctor: '_Tuple2',
+				_0: 'orient',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$sideLabel(_p73._0))
+			};
+		case 'Offset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'offset',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'Position':
+			return {
+				ctor: '_Tuple2',
+				_0: 'position',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'ZIndex':
+			return {
+				ctor: '_Tuple2',
+				_0: 'zindex',
+				_1: _elm_lang$core$Json_Encode$int(_p73._0)
+			};
+		case 'Ticks':
+			return {
+				ctor: '_Tuple2',
+				_0: 'ticks',
+				_1: _elm_lang$core$Json_Encode$bool(_p73._0)
+			};
+		case 'TickCount':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickCount',
+				_1: _elm_lang$core$Json_Encode$int(_p73._0)
+			};
+		case 'TickSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickSize',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'Values':
+			return {
+				ctor: '_Tuple2',
+				_0: 'values',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p73._0))
+			};
+		case 'AxTitle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'title',
+				_1: _elm_lang$core$Json_Encode$string(_p73._0)
+			};
+		case 'AxTitleAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$hAlignLabel(_p73._0))
+			};
+		case 'AxTitleAngle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleAngle',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		case 'AxTitleMaxLength':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleMaxLength',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'titlePadding',
+				_1: _elm_lang$core$Json_Encode$float(_p73._0)
+			};
+	}
+};
+var _user$project$Eve$axisConfig = function (axisCfg) {
+	var _p74 = axisCfg;
+	switch (_p74.ctor) {
+		case 'BandPosition':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bandPosition',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'DomainColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainColor',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'DomainWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'GridColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gridColor',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'GridDash':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gridDash',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p74._0))
+			};
+		case 'GridOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gridOpacity',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'GridWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gridWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'LabelColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelColor',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'LabelFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFont',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'LabelFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'LabelLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelLimit',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'ShortTimeLabels':
+			return {
+				ctor: '_Tuple2',
+				_0: 'shortTimeLabels',
+				_1: _elm_lang$core$Json_Encode$bool(_p74._0)
+			};
+		case 'TickColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickColor',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'TickRound':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickRound',
+				_1: _elm_lang$core$Json_Encode$bool(_p74._0)
+			};
+		case 'TickWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'TitleBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$vAlignLabel(_p74._0))
+			};
+		case 'TitleColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleColor',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'TitleFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFont',
+				_1: _elm_lang$core$Json_Encode$string(_p74._0)
+			};
+		case 'TitleFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontWeight',
+				_1: _user$project$Eve$fontWeight(_p74._0)
+			};
+		case 'TitleFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'TitleLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleLimit',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		case 'TitleX':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleX',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleY',
+				_1: _elm_lang$core$Json_Encode$float(_p74._0)
+			};
+	}
+};
+var _user$project$Eve$autosizeConfig = function (asCfg) {
+	var _p75 = asCfg;
+	switch (_p75.ctor) {
+		case 'APad':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('pad')
+			};
+		case 'AFit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('fit')
+			};
+		case 'ANone':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('none')
+			};
+		case 'AResize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'resize',
+				_1: _elm_lang$core$Json_Encode$bool(_p75._0)
+			};
+		case 'AContent':
+			return {
+				ctor: '_Tuple2',
+				_0: 'contains',
+				_1: _elm_lang$core$Json_Encode$string('content')
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'contains',
+				_1: _elm_lang$core$Json_Encode$string('padding')
+			};
+	}
+};
+var _user$project$Eve$arrangementLabel = function (arrng) {
+	var _p76 = arrng;
+	if (_p76.ctor === 'Row') {
+		return 'row';
+	} else {
+		return 'column';
+	}
+};
+var _user$project$Eve$sortProperty = function (sp) {
+	var _p77 = sp;
+	switch (_p77.ctor) {
+		case 'Ascending':
+			return {
+				ctor: '_Tuple2',
+				_0: 'order',
+				_1: _elm_lang$core$Json_Encode$string('ascending')
+			};
+		case 'Descending':
+			return {
+				ctor: '_Tuple2',
+				_0: 'order',
+				_1: _elm_lang$core$Json_Encode$string('descending')
+			};
+		case 'ByField':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p77._0)
+			};
+		case 'Op':
+			return {
+				ctor: '_Tuple2',
+				_0: 'op',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p77._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'repeat',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$arrangementLabel(_p77._0))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+	}
+};
+var _user$project$Eve$anchorLabel = function (an) {
+	var _p78 = an;
+	switch (_p78.ctor) {
+		case 'AStart':
+			return 'start';
+		case 'AMiddle':
+			return 'middle';
+		default:
+			return 'end';
+	}
+};
+var _user$project$Eve$titleConfig = function (titleCfg) {
+	var _p79 = titleCfg;
+	switch (_p79.ctor) {
+		case 'TAnchor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'anchor',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$anchorLabel(_p79._0))
+			};
+		case 'TAngle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'angle',
+				_1: _elm_lang$core$Json_Encode$float(_p79._0)
+			};
+		case 'TBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'baseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$vAlignLabel(_p79._0))
+			};
+		case 'TColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'color',
+				_1: _elm_lang$core$Json_Encode$string(_p79._0)
+			};
+		case 'TFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'font',
+				_1: _elm_lang$core$Json_Encode$string(_p79._0)
+			};
+		case 'TFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p79._0)
+			};
+		case 'TFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fontWeight',
+				_1: _user$project$Eve$fontWeight(_p79._0)
+			};
+		case 'TLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'limit',
+				_1: _elm_lang$core$Json_Encode$float(_p79._0)
+			};
+		case 'TOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'offset',
+				_1: _elm_lang$core$Json_Encode$float(_p79._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'orient',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$sideLabel(_p79._0))
+			};
+	}
+};
+var _user$project$Eve$configProperty = function (configProp) {
+	var _p80 = configProp;
+	switch (_p80.ctor) {
+		case 'Autosize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'autosize',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$autosizeConfig(_p80._0),
+						_1: {ctor: '[]'}
+					})
+			};
+		case 'Background':
+			return {
+				ctor: '_Tuple2',
+				_0: 'background',
+				_1: _elm_lang$core$Json_Encode$string(_p80._0)
+			};
+		case 'CountTitle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'countTitle',
+				_1: _elm_lang$core$Json_Encode$string(_p80._0)
+			};
+		case 'RemoveInvalid':
+			return _p80._0 ? {
+				ctor: '_Tuple2',
+				_0: 'invalidValues',
+				_1: _elm_lang$core$Json_Encode$string('filter')
+			} : {ctor: '_Tuple2', _0: 'invalidValues', _1: _elm_lang$core$Json_Encode$null};
+		case 'NumberFormat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'numberFormat',
+				_1: _elm_lang$core$Json_Encode$string(_p80._0)
+			};
+		case 'Padding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'padding',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'left',
+							_1: _elm_lang$core$Json_Encode$float(_p80._0)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'top',
+								_1: _elm_lang$core$Json_Encode$float(_p80._1)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'right',
+									_1: _elm_lang$core$Json_Encode$float(_p80._2)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'bottom',
+										_1: _elm_lang$core$Json_Encode$float(_p80._3)
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					})
+			};
+		case 'TimeFormat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeFormat',
+				_1: _elm_lang$core$Json_Encode$string(_p80._0)
+			};
+		case 'Axis':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axis',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisX':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisX',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisY':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisY',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisLeft':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisLeft',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisRight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisRight',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisTop':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisTop',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisBottom':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisBottom',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'AxisBand':
+			return {
+				ctor: '_Tuple2',
+				_0: 'axisBand',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisConfig, _p80._0))
+			};
+		case 'Legend':
+			return {
+				ctor: '_Tuple2',
+				_0: 'legend',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$legendProperty, _p80._0))
+			};
+		case 'MarkStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'mark',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'AreaStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'area',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'BarStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'bar',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'CircleStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'circle',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'LineStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'line',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'PointStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'point',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'RectStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'rect',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'RuleStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'rule',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'SquareStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'square',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'TextStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'text',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'TickStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tick',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'TitleStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'title',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$titleConfig, _p80._0))
+			};
+		case 'Style':
+			return {
+				ctor: '_Tuple2',
+				_0: 'style',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._0))
+			};
+		case 'NamedStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'style',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _p80._0,
+							_1: _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, _p80._1))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+		case 'Scale':
+			return {
+				ctor: '_Tuple2',
+				_0: 'scale',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$scaleConfig, _p80._0))
+			};
+		case 'Range':
+			return {
+				ctor: '_Tuple2',
+				_0: 'range',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$rangeConfig, _p80._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'view',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$viewConfig, _p80._0))
+			};
+	}
+};
+var _user$project$Eve$transpose = function (ll) {
+	transpose:
+	while (true) {
+		var _p81 = ll;
+		if (_p81.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			if (_p81._0.ctor === '[]') {
+				var _v70 = _p81._1;
+				ll = _v70;
+				continue transpose;
+			} else {
+				var _p82 = _p81._1;
+				var tails = A2(_elm_lang$core$List$filterMap, _elm_lang$core$List$tail, _p82);
+				var heads = A2(_elm_lang$core$List$filterMap, _elm_lang$core$List$head, _p82);
+				return {
+					ctor: '::',
+					_0: {ctor: '::', _0: _p81._0._0, _1: heads},
+					_1: _user$project$Eve$transpose(
+						{ctor: '::', _0: _p81._0._1, _1: tails})
+				};
+			}
+		}
+	}
+};
+var _user$project$Eve$toVegaLite = function (spec) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: '$schema',
+				_1: _elm_lang$core$Json_Encode$string('https://vega.github.io/schema/vega-lite/v2.json')
+			},
+			_1: A2(
+				_elm_lang$core$List$map,
+				function (_p83) {
+					var _p84 = _p83;
+					return {
+						ctor: '_Tuple2',
+						_0: _user$project$Eve$propertyLabel(_p84._0),
+						_1: _p84._1
+					};
+				},
+				spec)
+		});
+};
+var _user$project$Eve$select = F3(
+	function (name, sType, options) {
+		var selProps = {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$selectionLabel(sType))
+			},
+			_1: A2(_elm_lang$core$List$map, _user$project$Eve$selectionProperty, options)
+		};
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			{
+				ctor: '_Tuple2',
+				_0: name,
+				_1: _elm_lang$core$Json_Encode$object(selProps)
+			});
+	});
+var _user$project$Eve$resolution = function (res) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		_user$project$Eve$resolveProperty(res));
+};
+var _user$project$Eve$opAs = F3(
+	function (op, field, label) {
+		return _elm_lang$core$Json_Encode$object(
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'op',
+					_1: _elm_lang$core$Json_Encode$string(
+						_user$project$Eve$opLabel(op))
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'field',
+						_1: _elm_lang$core$Json_Encode$string(field)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'as',
+							_1: _elm_lang$core$Json_Encode$string(label)
+						},
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _user$project$Eve$mType = function (m) {
+	return {
+		ctor: '_Tuple2',
+		_0: 'type',
+		_1: _elm_lang$core$Json_Encode$string(
+			_user$project$Eve$measurementLabel(m))
+	};
+};
+var _user$project$Eve$filter = F2(
+	function (f, transforms) {
+		var _p85 = f;
+		switch (_p85.ctor) {
+			case 'FExpr':
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'filter',
+						_1: _elm_lang$core$Json_Encode$string(_p85._0)
+					},
+					_1: transforms
+				};
+			case 'FEqual':
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'filter',
+						_1: _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'field',
+									_1: _elm_lang$core$Json_Encode$string(_p85._0)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'equal',
+										_1: _user$project$Eve$value(_p85._1)
+									},
+									_1: {ctor: '[]'}
+								}
+							})
+					},
+					_1: transforms
+				};
+			case 'FSelection':
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'filter',
+						_1: _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'selection',
+									_1: _elm_lang$core$Json_Encode$string(_p85._0)
+								},
+								_1: {ctor: '[]'}
+							})
+					},
+					_1: transforms
+				};
+			case 'FRange':
+				var _p89 = _p85._1;
+				var values = function () {
+					var _p86 = _p89;
+					switch (_p86.ctor) {
+						case 'Numbers':
+							return _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p86._0));
+						case 'DateTimes':
+							return _elm_lang$core$Json_Encode$list(
+								A2(
+									_elm_lang$core$List$map,
+									function (dt) {
+										return _elm_lang$core$Json_Encode$object(
+											A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, dt));
+									},
+									_p86._0));
+						case 'Strings':
+							var _p87 = A2(_elm_lang$core$Debug$log, 'Cannot filter with range of strings ', _p89);
+							return _elm_lang$core$Json_Encode$null;
+						default:
+							var _p88 = A2(_elm_lang$core$Debug$log, 'Cannot filter with range of booleans ', _p89);
+							return _elm_lang$core$Json_Encode$null;
+					}
+				}();
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'filter',
+						_1: _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'field',
+									_1: _elm_lang$core$Json_Encode$string(_p85._0)
+								},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'range', _1: values},
+									_1: {ctor: '[]'}
+								}
+							})
+					},
+					_1: transforms
+				};
+			default:
+				var values = function () {
+					var _p90 = _p85._1;
+					switch (_p90.ctor) {
+						case 'Numbers':
+							return _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p90._0));
+						case 'DateTimes':
+							return _elm_lang$core$Json_Encode$list(
+								A2(
+									_elm_lang$core$List$map,
+									function (dt) {
+										return _elm_lang$core$Json_Encode$object(
+											A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, dt));
+									},
+									_p90._0));
+						case 'Strings':
+							return _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p90._0));
+						default:
+							return _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$bool, _p90._0));
+					}
+				}();
+				return {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'filter',
+						_1: _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'field',
+									_1: _elm_lang$core$Json_Encode$string(_p85._0)
+								},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'oneOf', _1: values},
+									_1: {ctor: '[]'}
+								}
+							})
+					},
+					_1: transforms
+				};
+		}
+	});
+var _user$project$Eve$dataColumn = F2(
+	function (colName, data) {
+		var _p91 = data;
+		switch (_p91.ctor) {
+			case 'Numbers':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					A2(
+						_elm_lang$core$List$map,
+						function (x) {
+							return {
+								ctor: '_Tuple2',
+								_0: colName,
+								_1: _elm_lang$core$Json_Encode$float(x)
+							};
+						},
+						_p91._0));
+			case 'Strings':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					A2(
+						_elm_lang$core$List$map,
+						function (s) {
+							return {
+								ctor: '_Tuple2',
+								_0: colName,
+								_1: _elm_lang$core$Json_Encode$string(s)
+							};
+						},
+						_p91._0));
+			case 'DateTimes':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					A2(
+						_elm_lang$core$List$map,
+						function (dts) {
+							return {
+								ctor: '_Tuple2',
+								_0: colName,
+								_1: _elm_lang$core$Json_Encode$object(
+									A2(_elm_lang$core$List$map, _user$project$Eve$dateTimeProperty, dts))
+							};
+						},
+						_p91._0));
+			default:
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					A2(
+						_elm_lang$core$List$map,
+						function (b) {
+							return {
+								ctor: '_Tuple2',
+								_0: colName,
+								_1: _elm_lang$core$Json_Encode$bool(b)
+							};
+						},
+						_p91._0));
+		}
+	});
+var _user$project$Eve$configuration = function (cfg) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		_user$project$Eve$configProperty(cfg));
+};
+var _user$project$Eve$calculate = F2(
+	function (expr, label) {
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			{
+				ctor: '_Tuple2',
+				_0: 'calculate',
+				_1: _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$string(expr),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Json_Encode$string(label),
+							_1: {ctor: '[]'}
+						}
+					})
+			});
+	});
+var _user$project$Eve$bin = function (bProps) {
+	return _elm_lang$core$Native_Utils.eq(
+		bProps,
+		{ctor: '[]'}) ? {
+		ctor: '_Tuple2',
+		_0: 'bin',
+		_1: _elm_lang$core$Json_Encode$bool(true)
+	} : {
+		ctor: '_Tuple2',
+		_0: 'bin',
+		_1: _elm_lang$core$Json_Encode$object(
+			A2(_elm_lang$core$List$map, _user$project$Eve$binProperty, bProps))
+	};
+};
+var _user$project$Eve$detailChannelProperty = function (field) {
+	var _p92 = field;
+	switch (_p92.ctor) {
+		case 'DName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p92._0)
+			};
+		case 'DmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p92._0))
+			};
+		case 'DBin':
+			return _user$project$Eve$bin(_p92._0);
+		case 'DTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p92._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p92._0))
+			};
+	}
+};
+var _user$project$Eve$detail = function (detailProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'detail',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$detailChannelProperty, detailProps))
+		});
+};
+var _user$project$Eve$facetChannelProperty = function (fMap) {
+	var _p93 = fMap;
+	switch (_p93.ctor) {
+		case 'FName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p93._0)
+			};
+		case 'FmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p93._0))
+			};
+		case 'FBin':
+			return _user$project$Eve$bin(_p93._0);
+		case 'FAggregate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p93._0))
+			};
+		case 'FTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p93._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'header',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$headerProperty, _p93._0))
+			};
+	}
+};
+var _user$project$Eve$column = function (fFields) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'column',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$facetChannelProperty, fFields))
+		});
+};
+var _user$project$Eve$row = function (fFields) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'row',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$facetChannelProperty, fFields))
+		});
+};
+var _user$project$Eve$facetMappingProperty = function (fMap) {
+	var _p94 = fMap;
+	if (_p94.ctor === 'RowBy') {
+		return {
+			ctor: '_Tuple2',
+			_0: 'row',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$facetChannelProperty, _p94._0))
+		};
+	} else {
+		return {
+			ctor: '_Tuple2',
+			_0: 'column',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$facetChannelProperty, _p94._0))
+		};
+	}
+};
+var _user$project$Eve$markChannelProperty = function (field) {
+	var _p95 = field;
+	switch (_p95.ctor) {
+		case 'MName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p95._0)
+			};
+		case 'MRepeat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'repeat',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$arrangementLabel(_p95._0))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+		case 'MmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p95._0))
+			};
+		case 'MScale':
+			return {
+				ctor: '_Tuple2',
+				_0: 'scale',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$scaleProperty, _p95._0))
+			};
+		case 'MLegend':
+			var _p96 = _p95._0;
+			return _elm_lang$core$Native_Utils.eq(
+				_p96,
+				{ctor: '[]'}) ? {ctor: '_Tuple2', _0: 'legend', _1: _elm_lang$core$Json_Encode$null} : {
+				ctor: '_Tuple2',
+				_0: 'legend',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$legendProperty, _p96))
+			};
+		case 'MBin':
+			return _user$project$Eve$bin(_p95._0);
+		case 'MCondition':
+			return {
+				ctor: '_Tuple2',
+				_0: 'condition',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'selection',
+							_1: _elm_lang$core$Json_Encode$string(_p95._0)
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$markChannelProperty, _p95._1)
+					})
+			};
+		case 'MTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p95._0))
+			};
+		case 'MAggregate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p95._0))
+			};
+		case 'MNumber':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$float(_p95._0)
+			};
+		case 'MString':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string(_p95._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$bool(_p95._0)
+			};
+	}
+};
+var _user$project$Eve$color = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'color',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$markChannelProperty, markProps))
+		});
+};
+var _user$project$Eve$opacity = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'opacity',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$markChannelProperty, markProps))
+		});
+};
+var _user$project$Eve$shape = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'shape',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$markChannelProperty, markProps))
+		});
+};
+var _user$project$Eve$size = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'size',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$markChannelProperty, markProps))
+		});
+};
+var _user$project$Eve$orderChannelProperty = function (oDef) {
+	var _p97 = oDef;
+	switch (_p97.ctor) {
+		case 'OName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p97._0)
+			};
+		case 'ORepeat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'repeat',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$arrangementLabel(_p97._0))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+		case 'OmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p97._0))
+			};
+		case 'OBin':
+			return _user$project$Eve$bin(_p97._0);
+		case 'OAggregate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p97._0))
+			};
+		case 'OTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p97._0))
+			};
+		default:
+			var _p99 = _p97._0;
+			var _p98 = _p99;
+			_v81_2:
+			do {
+				if ((_p98.ctor === '::') && (_p98._1.ctor === '[]')) {
+					switch (_p98._0.ctor) {
+						case 'Ascending':
+							return {
+								ctor: '_Tuple2',
+								_0: 'sort',
+								_1: _elm_lang$core$Json_Encode$string('ascending')
+							};
+						case 'Descending':
+							return {
+								ctor: '_Tuple2',
+								_0: 'sort',
+								_1: _elm_lang$core$Json_Encode$string('descending')
+							};
+						default:
+							break _v81_2;
+					}
+				} else {
+					break _v81_2;
+				}
+			} while(false);
+			return {
+				ctor: '_Tuple2',
+				_0: 'sort',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$sortProperty, _p99))
+			};
+	}
+};
+var _user$project$Eve$order = function (oDefs) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'order',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$orderChannelProperty, oDefs))
+		});
+};
+var _user$project$Eve$positionChannelProperty = function (pDef) {
+	var _p100 = pDef;
+	switch (_p100.ctor) {
+		case 'PName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p100._0)
+			};
+		case 'PmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p100._0))
+			};
+		case 'PBin':
+			return _user$project$Eve$bin(_p100._0);
+		case 'PAggregate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p100._0))
+			};
+		case 'PTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p100._0))
+			};
+		case 'PSort':
+			var _p102 = _p100._0;
+			var _p101 = _p102;
+			_v83_2:
+			do {
+				if ((_p101.ctor === '::') && (_p101._1.ctor === '[]')) {
+					switch (_p101._0.ctor) {
+						case 'Ascending':
+							return {
+								ctor: '_Tuple2',
+								_0: 'sort',
+								_1: _elm_lang$core$Json_Encode$string('ascending')
+							};
+						case 'Descending':
+							return {
+								ctor: '_Tuple2',
+								_0: 'sort',
+								_1: _elm_lang$core$Json_Encode$string('descending')
+							};
+						default:
+							break _v83_2;
+					}
+				} else {
+					break _v83_2;
+				}
+			} while(false);
+			return {
+				ctor: '_Tuple2',
+				_0: 'sort',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$sortProperty, _p102))
+			};
+		case 'PScale':
+			return {
+				ctor: '_Tuple2',
+				_0: 'scale',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$scaleProperty, _p100._0))
+			};
+		case 'PAxis':
+			var _p103 = _p100._0;
+			return _elm_lang$core$Native_Utils.eq(
+				_p103,
+				{ctor: '[]'}) ? {ctor: '_Tuple2', _0: 'axis', _1: _elm_lang$core$Json_Encode$null} : {
+				ctor: '_Tuple2',
+				_0: 'axis',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$axisProperty, _p103))
+			};
+		case 'PStack':
+			return _user$project$Eve$stackProperty(_p100._0);
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'repeat',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$arrangementLabel(_p100._0))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+	}
+};
+var _user$project$Eve$position = F2(
+	function (pos, pDefs) {
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			{
+				ctor: '_Tuple2',
+				_0: _user$project$Eve$positionLabel(pos),
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _user$project$Eve$positionChannelProperty, pDefs))
+			});
+	});
+var _user$project$Eve$textChannelProperty = function (tDef) {
+	var _p104 = tDef;
+	switch (_p104.ctor) {
+		case 'TName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$string(_p104._0)
+			};
+		case 'TRepeat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'field',
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'repeat',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$arrangementLabel(_p104._0))
+						},
+						_1: {ctor: '[]'}
+					})
+			};
+		case 'TmType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$measurementLabel(_p104._0))
+			};
+		case 'TBin':
+			return _user$project$Eve$bin(_p104._0);
+		case 'TAggregate':
+			return {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$opLabel(_p104._0))
+			};
+		case 'TTimeUnit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'timeUnit',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$timeUnitLabel(_p104._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'format',
+				_1: _elm_lang$core$Json_Encode$string(_p104._0)
+			};
+	}
+};
+var _user$project$Eve$text = function (tDefs) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'text',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _user$project$Eve$textChannelProperty, tDefs))
+		});
+};
+var _user$project$Eve$asSpec = function (specs) {
+	return _elm_lang$core$Json_Encode$object(
+		A2(
+			_elm_lang$core$List$map,
+			function (_p105) {
+				var _p106 = _p105;
+				return {
+					ctor: '_Tuple2',
+					_0: _user$project$Eve$propertyLabel(_p106._0),
+					_1: _p106._1
+				};
+			},
+			specs));
+};
+var _user$project$Eve$aggregate = F3(
+	function (ops, groups, transforms) {
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'aggregate',
+				_1: _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$list(ops),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, groups)),
+							_1: {ctor: '[]'}
+						}
+					})
+			},
+			_1: transforms
+		};
+	});
+var _user$project$Eve$AEnd = {ctor: 'AEnd'};
+var _user$project$Eve$AMiddle = {ctor: 'AMiddle'};
+var _user$project$Eve$AStart = {ctor: 'AStart'};
+var _user$project$Eve$Row = {ctor: 'Row'};
+var _user$project$Eve$Column = {ctor: 'Column'};
+var _user$project$Eve$AResize = function (a) {
+	return {ctor: 'AResize', _0: a};
+};
+var _user$project$Eve$APadding = {ctor: 'APadding'};
+var _user$project$Eve$APad = {ctor: 'APad'};
+var _user$project$Eve$ANone = {ctor: 'ANone'};
+var _user$project$Eve$AFit = {ctor: 'AFit'};
+var _user$project$Eve$AContent = {ctor: 'AContent'};
+var _user$project$Eve$TitleY = function (a) {
+	return {ctor: 'TitleY', _0: a};
+};
+var _user$project$Eve$TitleX = function (a) {
+	return {ctor: 'TitleX', _0: a};
+};
+var _user$project$Eve$TitleLimit = function (a) {
+	return {ctor: 'TitleLimit', _0: a};
+};
+var _user$project$Eve$TitleFontSize = function (a) {
+	return {ctor: 'TitleFontSize', _0: a};
+};
+var _user$project$Eve$TitleFontWeight = function (a) {
+	return {ctor: 'TitleFontWeight', _0: a};
+};
+var _user$project$Eve$TitleFont = function (a) {
+	return {ctor: 'TitleFont', _0: a};
+};
+var _user$project$Eve$TitleColor = function (a) {
+	return {ctor: 'TitleColor', _0: a};
+};
+var _user$project$Eve$TitleBaseline = function (a) {
+	return {ctor: 'TitleBaseline', _0: a};
+};
+var _user$project$Eve$TickWidth = function (a) {
+	return {ctor: 'TickWidth', _0: a};
+};
+var _user$project$Eve$TickRound = function (a) {
+	return {ctor: 'TickRound', _0: a};
+};
+var _user$project$Eve$TickColor = function (a) {
+	return {ctor: 'TickColor', _0: a};
+};
+var _user$project$Eve$ShortTimeLabels = function (a) {
+	return {ctor: 'ShortTimeLabels', _0: a};
+};
+var _user$project$Eve$LabelLimit = function (a) {
+	return {ctor: 'LabelLimit', _0: a};
+};
+var _user$project$Eve$LabelFontSize = function (a) {
+	return {ctor: 'LabelFontSize', _0: a};
+};
+var _user$project$Eve$LabelFont = function (a) {
+	return {ctor: 'LabelFont', _0: a};
+};
+var _user$project$Eve$LabelColor = function (a) {
+	return {ctor: 'LabelColor', _0: a};
+};
+var _user$project$Eve$GridWidth = function (a) {
+	return {ctor: 'GridWidth', _0: a};
+};
+var _user$project$Eve$GridOpacity = function (a) {
+	return {ctor: 'GridOpacity', _0: a};
+};
+var _user$project$Eve$GridDash = function (a) {
+	return {ctor: 'GridDash', _0: a};
+};
+var _user$project$Eve$GridColor = function (a) {
+	return {ctor: 'GridColor', _0: a};
+};
+var _user$project$Eve$DomainWidth = function (a) {
+	return {ctor: 'DomainWidth', _0: a};
+};
+var _user$project$Eve$DomainColor = function (a) {
+	return {ctor: 'DomainColor', _0: a};
+};
+var _user$project$Eve$BandPosition = function (a) {
+	return {ctor: 'BandPosition', _0: a};
+};
+var _user$project$Eve$ZIndex = function (a) {
+	return {ctor: 'ZIndex', _0: a};
+};
+var _user$project$Eve$Values = function (a) {
+	return {ctor: 'Values', _0: a};
+};
+var _user$project$Eve$AxTitlePadding = function (a) {
+	return {ctor: 'AxTitlePadding', _0: a};
+};
+var _user$project$Eve$AxTitleMaxLength = function (a) {
+	return {ctor: 'AxTitleMaxLength', _0: a};
+};
+var _user$project$Eve$AxTitleAngle = function (a) {
+	return {ctor: 'AxTitleAngle', _0: a};
+};
+var _user$project$Eve$AxTitleAlign = function (a) {
+	return {ctor: 'AxTitleAlign', _0: a};
+};
+var _user$project$Eve$AxTitle = function (a) {
+	return {ctor: 'AxTitle', _0: a};
+};
+var _user$project$Eve$TickSize = function (a) {
+	return {ctor: 'TickSize', _0: a};
+};
+var _user$project$Eve$TickCount = function (a) {
+	return {ctor: 'TickCount', _0: a};
+};
+var _user$project$Eve$Ticks = function (a) {
+	return {ctor: 'Ticks', _0: a};
+};
+var _user$project$Eve$Position = function (a) {
+	return {ctor: 'Position', _0: a};
+};
+var _user$project$Eve$Orient = function (a) {
+	return {ctor: 'Orient', _0: a};
+};
+var _user$project$Eve$Offset = function (a) {
+	return {ctor: 'Offset', _0: a};
+};
+var _user$project$Eve$MinExtent = function (a) {
+	return {ctor: 'MinExtent', _0: a};
+};
+var _user$project$Eve$MaxExtent = function (a) {
+	return {ctor: 'MaxExtent', _0: a};
+};
+var _user$project$Eve$Labels = function (a) {
+	return {ctor: 'Labels', _0: a};
+};
+var _user$project$Eve$LabelPadding = function (a) {
+	return {ctor: 'LabelPadding', _0: a};
+};
+var _user$project$Eve$LabelOverlap = function (a) {
+	return {ctor: 'LabelOverlap', _0: a};
+};
+var _user$project$Eve$LabelAngle = function (a) {
+	return {ctor: 'LabelAngle', _0: a};
+};
+var _user$project$Eve$Grid = function (a) {
+	return {ctor: 'Grid', _0: a};
+};
+var _user$project$Eve$Format = function (a) {
+	return {ctor: 'Format', _0: a};
+};
+var _user$project$Eve$Domain = function (a) {
+	return {ctor: 'Domain', _0: a};
+};
+var _user$project$Eve$Steps = function (a) {
+	return {ctor: 'Steps', _0: a};
+};
+var _user$project$Eve$Step = function (a) {
+	return {ctor: 'Step', _0: a};
+};
+var _user$project$Eve$Nice = function (a) {
+	return {ctor: 'Nice', _0: a};
+};
+var _user$project$Eve$MinStep = function (a) {
+	return {ctor: 'MinStep', _0: a};
+};
+var _user$project$Eve$MaxBins = function (a) {
+	return {ctor: 'MaxBins', _0: a};
+};
+var _user$project$Eve$Extent = F2(
+	function (a, b) {
+		return {ctor: 'Extent', _0: a, _1: b};
+	});
+var _user$project$Eve$Divide = F2(
+	function (a, b) {
+		return {ctor: 'Divide', _0: a, _1: b};
+	});
+var _user$project$Eve$Base = function (a) {
+	return {ctor: 'Base', _0: a};
+};
+var _user$project$Eve$InText = F2(
+	function (a, b) {
+		return {ctor: 'InText', _0: a, _1: b};
+	});
+var _user$project$Eve$InSelect = F2(
+	function (a, b) {
+		return {ctor: 'InSelect', _0: a, _1: b};
+	});
+var _user$project$Eve$InRadio = F2(
+	function (a, b) {
+		return {ctor: 'InRadio', _0: a, _1: b};
+	});
+var _user$project$Eve$InCheckbox = F2(
+	function (a, b) {
+		return {ctor: 'InCheckbox', _0: a, _1: b};
+	});
+var _user$project$Eve$InRange = F2(
+	function (a, b) {
+		return {ctor: 'InRange', _0: a, _1: b};
+	});
+var _user$project$Eve$ChSize = {ctor: 'ChSize'};
+var _user$project$Eve$ChShape = {ctor: 'ChShape'};
+var _user$project$Eve$ChOpacity = {ctor: 'ChOpacity'};
+var _user$project$Eve$ChColor = {ctor: 'ChColor'};
+var _user$project$Eve$ChY2 = {ctor: 'ChY2'};
+var _user$project$Eve$ChX2 = {ctor: 'ChX2'};
+var _user$project$Eve$ChY = {ctor: 'ChY'};
+var _user$project$Eve$ChX = {ctor: 'ChX'};
+var _user$project$Eve$Rgb = {ctor: 'Rgb'};
+var _user$project$Eve$Lab = {ctor: 'Lab'};
+var _user$project$Eve$HslLong = {ctor: 'HslLong'};
+var _user$project$Eve$Hsl = {ctor: 'Hsl'};
+var _user$project$Eve$HclLong = {ctor: 'HclLong'};
+var _user$project$Eve$Hcl = {ctor: 'Hcl'};
+var _user$project$Eve$CubeHelixLong = {ctor: 'CubeHelixLong'};
+var _user$project$Eve$CubeHelix = {ctor: 'CubeHelix'};
+var _user$project$Eve$View = function (a) {
+	return {ctor: 'View', _0: a};
+};
+var _user$project$Eve$TimeFormat = function (a) {
+	return {ctor: 'TimeFormat', _0: a};
+};
+var _user$project$Eve$TitleStyle = function (a) {
+	return {ctor: 'TitleStyle', _0: a};
+};
+var _user$project$Eve$TickStyle = function (a) {
+	return {ctor: 'TickStyle', _0: a};
+};
+var _user$project$Eve$TextStyle = function (a) {
+	return {ctor: 'TextStyle', _0: a};
+};
+var _user$project$Eve$Style = function (a) {
+	return {ctor: 'Style', _0: a};
+};
+var _user$project$Eve$SquareStyle = function (a) {
+	return {ctor: 'SquareStyle', _0: a};
+};
+var _user$project$Eve$Scale = function (a) {
+	return {ctor: 'Scale', _0: a};
+};
+var _user$project$Eve$RuleStyle = function (a) {
+	return {ctor: 'RuleStyle', _0: a};
+};
+var _user$project$Eve$RemoveInvalid = function (a) {
+	return {ctor: 'RemoveInvalid', _0: a};
+};
+var _user$project$Eve$RectStyle = function (a) {
+	return {ctor: 'RectStyle', _0: a};
+};
+var _user$project$Eve$Range = function (a) {
+	return {ctor: 'Range', _0: a};
+};
+var _user$project$Eve$PointStyle = function (a) {
+	return {ctor: 'PointStyle', _0: a};
+};
+var _user$project$Eve$Padding = F4(
+	function (a, b, c, d) {
+		return {ctor: 'Padding', _0: a, _1: b, _2: c, _3: d};
+	});
+var _user$project$Eve$NumberFormat = function (a) {
+	return {ctor: 'NumberFormat', _0: a};
+};
+var _user$project$Eve$NamedStyle = F2(
+	function (a, b) {
+		return {ctor: 'NamedStyle', _0: a, _1: b};
+	});
+var _user$project$Eve$MarkStyle = function (a) {
+	return {ctor: 'MarkStyle', _0: a};
+};
+var _user$project$Eve$LineStyle = function (a) {
+	return {ctor: 'LineStyle', _0: a};
+};
+var _user$project$Eve$Legend = function (a) {
+	return {ctor: 'Legend', _0: a};
+};
+var _user$project$Eve$CountTitle = function (a) {
+	return {ctor: 'CountTitle', _0: a};
+};
+var _user$project$Eve$CircleStyle = function (a) {
+	return {ctor: 'CircleStyle', _0: a};
+};
+var _user$project$Eve$BarStyle = function (a) {
+	return {ctor: 'BarStyle', _0: a};
+};
+var _user$project$Eve$Background = function (a) {
+	return {ctor: 'Background', _0: a};
+};
+var _user$project$Eve$AxisBand = function (a) {
+	return {ctor: 'AxisBand', _0: a};
+};
+var _user$project$Eve$AxisBottom = function (a) {
+	return {ctor: 'AxisBottom', _0: a};
+};
+var _user$project$Eve$AxisTop = function (a) {
+	return {ctor: 'AxisTop', _0: a};
+};
+var _user$project$Eve$AxisRight = function (a) {
+	return {ctor: 'AxisRight', _0: a};
+};
+var _user$project$Eve$AxisLeft = function (a) {
+	return {ctor: 'AxisLeft', _0: a};
+};
+var _user$project$Eve$AxisY = function (a) {
+	return {ctor: 'AxisY', _0: a};
+};
+var _user$project$Eve$AxisX = function (a) {
+	return {ctor: 'AxisX', _0: a};
+};
+var _user$project$Eve$Axis = function (a) {
+	return {ctor: 'Axis', _0: a};
+};
+var _user$project$Eve$Autosize = function (a) {
+	return {ctor: 'Autosize', _0: a};
+};
+var _user$project$Eve$AreaStyle = function (a) {
+	return {ctor: 'AreaStyle', _0: a};
+};
+var _user$project$Eve$Str = function (a) {
+	return {ctor: 'Str', _0: a};
+};
+var _user$project$Eve$Number = function (a) {
+	return {ctor: 'Number', _0: a};
+};
+var _user$project$Eve$DT = function (a) {
+	return {ctor: 'DT', _0: a};
+};
+var _user$project$Eve$Boolean = function (a) {
+	return {ctor: 'Boolean', _0: a};
+};
+var _user$project$Eve$Strings = function (a) {
+	return {ctor: 'Strings', _0: a};
+};
+var _user$project$Eve$Numbers = function (a) {
+	return {ctor: 'Numbers', _0: a};
+};
+var _user$project$Eve$DateTimes = function (a) {
+	return {ctor: 'DateTimes', _0: a};
+};
+var _user$project$Eve$Booleans = function (a) {
+	return {ctor: 'Booleans', _0: a};
+};
+var _user$project$Eve$DTMilliseconds = function (a) {
+	return {ctor: 'DTMilliseconds', _0: a};
+};
+var _user$project$Eve$DTSeconds = function (a) {
+	return {ctor: 'DTSeconds', _0: a};
+};
+var _user$project$Eve$DTMinutes = function (a) {
+	return {ctor: 'DTMinutes', _0: a};
+};
+var _user$project$Eve$DTHours = function (a) {
+	return {ctor: 'DTHours', _0: a};
+};
+var _user$project$Eve$DTDay = function (a) {
+	return {ctor: 'DTDay', _0: a};
+};
+var _user$project$Eve$DTDate = function (a) {
+	return {ctor: 'DTDate', _0: a};
+};
+var _user$project$Eve$DTMonth = function (a) {
+	return {ctor: 'DTMonth', _0: a};
+};
+var _user$project$Eve$DTQuarter = function (a) {
+	return {ctor: 'DTQuarter', _0: a};
+};
+var _user$project$Eve$DTYear = function (a) {
+	return {ctor: 'DTYear', _0: a};
+};
+var _user$project$Eve$Sun = {ctor: 'Sun'};
+var _user$project$Eve$Sat = {ctor: 'Sat'};
+var _user$project$Eve$Fri = {ctor: 'Fri'};
+var _user$project$Eve$Thu = {ctor: 'Thu'};
+var _user$project$Eve$Wed = {ctor: 'Wed'};
+var _user$project$Eve$Tue = {ctor: 'Tue'};
+var _user$project$Eve$Mon = {ctor: 'Mon'};
+var _user$project$Eve$DAggregate = function (a) {
+	return {ctor: 'DAggregate', _0: a};
+};
+var _user$project$Eve$DTimeUnit = function (a) {
+	return {ctor: 'DTimeUnit', _0: a};
+};
+var _user$project$Eve$DBin = function (a) {
+	return {ctor: 'DBin', _0: a};
+};
+var _user$project$Eve$DmType = function (a) {
+	return {ctor: 'DmType', _0: a};
+};
+var _user$project$Eve$DName = function (a) {
+	return {ctor: 'DName', _0: a};
+};
+var _user$project$Eve$FHeader = function (a) {
+	return {ctor: 'FHeader', _0: a};
+};
+var _user$project$Eve$FTimeUnit = function (a) {
+	return {ctor: 'FTimeUnit', _0: a};
+};
+var _user$project$Eve$FAggregate = function (a) {
+	return {ctor: 'FAggregate', _0: a};
+};
+var _user$project$Eve$FBin = function (a) {
+	return {ctor: 'FBin', _0: a};
+};
+var _user$project$Eve$FmType = function (a) {
+	return {ctor: 'FmType', _0: a};
+};
+var _user$project$Eve$FName = function (a) {
+	return {ctor: 'FName', _0: a};
+};
+var _user$project$Eve$RowBy = function (a) {
+	return {ctor: 'RowBy', _0: a};
+};
+var _user$project$Eve$ColumnBy = function (a) {
+	return {ctor: 'ColumnBy', _0: a};
+};
+var _user$project$Eve$FUtc = function (a) {
+	return {ctor: 'FUtc', _0: a};
+};
+var _user$project$Eve$FDate = function (a) {
+	return {ctor: 'FDate', _0: a};
+};
+var _user$project$Eve$FBoolean = {ctor: 'FBoolean'};
+var _user$project$Eve$FNumber = {ctor: 'FNumber'};
+var _user$project$Eve$FRange = F2(
+	function (a, b) {
+		return {ctor: 'FRange', _0: a, _1: b};
+	});
+var _user$project$Eve$FOneOf = F2(
+	function (a, b) {
+		return {ctor: 'FOneOf', _0: a, _1: b};
+	});
+var _user$project$Eve$FSelection = function (a) {
+	return {ctor: 'FSelection', _0: a};
+};
+var _user$project$Eve$FExpr = function (a) {
+	return {ctor: 'FExpr', _0: a};
+};
+var _user$project$Eve$FEqual = F2(
+	function (a, b) {
+		return {ctor: 'FEqual', _0: a, _1: b};
+	});
+var _user$project$Eve$Parse = function (a) {
+	return {ctor: 'Parse', _0: a};
+};
+var _user$project$Eve$TSV = {ctor: 'TSV'};
+var _user$project$Eve$CSV = {ctor: 'CSV'};
+var _user$project$Eve$JSON = {ctor: 'JSON'};
+var _user$project$Eve$W900 = {ctor: 'W900'};
+var _user$project$Eve$W800 = {ctor: 'W800'};
+var _user$project$Eve$W700 = {ctor: 'W700'};
+var _user$project$Eve$W600 = {ctor: 'W600'};
+var _user$project$Eve$W500 = {ctor: 'W500'};
+var _user$project$Eve$W400 = {ctor: 'W400'};
+var _user$project$Eve$W300 = {ctor: 'W300'};
+var _user$project$Eve$W200 = {ctor: 'W200'};
+var _user$project$Eve$W100 = {ctor: 'W100'};
+var _user$project$Eve$Normal = {ctor: 'Normal'};
+var _user$project$Eve$Lighter = {ctor: 'Lighter'};
+var _user$project$Eve$Bolder = {ctor: 'Bolder'};
+var _user$project$Eve$Bold = {ctor: 'Bold'};
+var _user$project$Eve$AlignRight = {ctor: 'AlignRight'};
+var _user$project$Eve$AlignLeft = {ctor: 'AlignLeft'};
+var _user$project$Eve$AlignCenter = {ctor: 'AlignCenter'};
+var _user$project$Eve$HTitle = function (a) {
+	return {ctor: 'HTitle', _0: a};
+};
+var _user$project$Eve$HFormat = function (a) {
+	return {ctor: 'HFormat', _0: a};
+};
+var _user$project$Eve$InStep = function (a) {
+	return {ctor: 'InStep', _0: a};
+};
+var _user$project$Eve$InMax = function (a) {
+	return {ctor: 'InMax', _0: a};
+};
+var _user$project$Eve$InMin = function (a) {
+	return {ctor: 'InMin', _0: a};
+};
+var _user$project$Eve$InOptions = function (a) {
+	return {ctor: 'InOptions', _0: a};
+};
+var _user$project$Eve$Element = function (a) {
+	return {ctor: 'Element', _0: a};
+};
+var _user$project$Eve$Debounce = function (a) {
+	return {ctor: 'Debounce', _0: a};
+};
+var _user$project$Eve$Symbol = {ctor: 'Symbol'};
+var _user$project$Eve$Gradient = {ctor: 'Gradient'};
+var _user$project$Eve$TopRight = {ctor: 'TopRight'};
+var _user$project$Eve$TopLeft = {ctor: 'TopLeft'};
+var _user$project$Eve$Right = {ctor: 'Right'};
+var _user$project$Eve$None = {ctor: 'None'};
+var _user$project$Eve$Left = {ctor: 'Left'};
+var _user$project$Eve$BottomRight = {ctor: 'BottomRight'};
+var _user$project$Eve$BottomLeft = {ctor: 'BottomLeft'};
+var _user$project$Eve$LZIndex = function (a) {
+	return {ctor: 'LZIndex', _0: a};
+};
+var _user$project$Eve$LValues = function (a) {
+	return {ctor: 'LValues', _0: a};
+};
+var _user$project$Eve$LType = function (a) {
+	return {ctor: 'LType', _0: a};
+};
+var _user$project$Eve$LTitle = function (a) {
+	return {ctor: 'LTitle', _0: a};
+};
+var _user$project$Eve$LTickCount = function (a) {
+	return {ctor: 'LTickCount', _0: a};
+};
+var _user$project$Eve$LPadding = function (a) {
+	return {ctor: 'LPadding', _0: a};
+};
+var _user$project$Eve$LOrient = function (a) {
+	return {ctor: 'LOrient', _0: a};
+};
+var _user$project$Eve$LOffset = function (a) {
+	return {ctor: 'LOffset', _0: a};
+};
+var _user$project$Eve$LFormat = function (a) {
+	return {ctor: 'LFormat', _0: a};
+};
+var _user$project$Eve$LEntryPadding = function (a) {
+	return {ctor: 'LEntryPadding', _0: a};
+};
+var _user$project$Eve$Tick = {ctor: 'Tick'};
+var _user$project$Eve$Text = {ctor: 'Text'};
+var _user$project$Eve$Square = {ctor: 'Square'};
+var _user$project$Eve$Rule = {ctor: 'Rule'};
+var _user$project$Eve$Rect = {ctor: 'Rect'};
+var _user$project$Eve$Point = {ctor: 'Point'};
+var _user$project$Eve$Line = {ctor: 'Line'};
+var _user$project$Eve$Circle = {ctor: 'Circle'};
+var _user$project$Eve$Bar = {ctor: 'Bar'};
+var _user$project$Eve$Area = {ctor: 'Area'};
+var _user$project$Eve$Stepwise = {ctor: 'Stepwise'};
+var _user$project$Eve$StepBefore = {ctor: 'StepBefore'};
+var _user$project$Eve$StepAfter = {ctor: 'StepAfter'};
+var _user$project$Eve$Monotone = {ctor: 'Monotone'};
+var _user$project$Eve$LinearClosed = {ctor: 'LinearClosed'};
+var _user$project$Eve$Linear = {ctor: 'Linear'};
+var _user$project$Eve$CardinalOpen = {ctor: 'CardinalOpen'};
+var _user$project$Eve$CardinalClosed = {ctor: 'CardinalClosed'};
+var _user$project$Eve$Cardinal = {ctor: 'Cardinal'};
+var _user$project$Eve$Bundle = {ctor: 'Bundle'};
+var _user$project$Eve$BasisOpen = {ctor: 'BasisOpen'};
+var _user$project$Eve$BasisClosed = {ctor: 'BasisClosed'};
+var _user$project$Eve$Basis = {ctor: 'Basis'};
+var _user$project$Eve$MBoolean = function (a) {
+	return {ctor: 'MBoolean', _0: a};
+};
+var _user$project$Eve$MString = function (a) {
+	return {ctor: 'MString', _0: a};
+};
+var _user$project$Eve$MNumber = function (a) {
+	return {ctor: 'MNumber', _0: a};
+};
+var _user$project$Eve$MCondition = F2(
+	function (a, b) {
+		return {ctor: 'MCondition', _0: a, _1: b};
+	});
+var _user$project$Eve$MLegend = function (a) {
+	return {ctor: 'MLegend', _0: a};
+};
+var _user$project$Eve$MAggregate = function (a) {
+	return {ctor: 'MAggregate', _0: a};
+};
+var _user$project$Eve$MTimeUnit = function (a) {
+	return {ctor: 'MTimeUnit', _0: a};
+};
+var _user$project$Eve$MBin = function (a) {
+	return {ctor: 'MBin', _0: a};
+};
+var _user$project$Eve$MScale = function (a) {
+	return {ctor: 'MScale', _0: a};
+};
+var _user$project$Eve$MmType = function (a) {
+	return {ctor: 'MmType', _0: a};
+};
+var _user$project$Eve$MRepeat = function (a) {
+	return {ctor: 'MRepeat', _0: a};
+};
+var _user$project$Eve$MName = function (a) {
+	return {ctor: 'MName', _0: a};
+};
+var _user$project$Eve$Vertical = {ctor: 'Vertical'};
+var _user$project$Eve$Horizontal = {ctor: 'Horizontal'};
+var _user$project$Eve$MThickness = function (a) {
+	return {ctor: 'MThickness', _0: a};
+};
+var _user$project$Eve$MTheta = function (a) {
+	return {ctor: 'MTheta', _0: a};
+};
+var _user$project$Eve$MText = function (a) {
+	return {ctor: 'MText', _0: a};
+};
+var _user$project$Eve$MTension = function (a) {
+	return {ctor: 'MTension', _0: a};
+};
+var _user$project$Eve$MStyle = function (a) {
+	return {ctor: 'MStyle', _0: a};
+};
+var _user$project$Eve$MStrokeWidth = function (a) {
+	return {ctor: 'MStrokeWidth', _0: a};
+};
+var _user$project$Eve$MStrokeOpacity = function (a) {
+	return {ctor: 'MStrokeOpacity', _0: a};
+};
+var _user$project$Eve$MStrokeDashOffset = function (a) {
+	return {ctor: 'MStrokeDashOffset', _0: a};
+};
+var _user$project$Eve$MStrokeDash = function (a) {
+	return {ctor: 'MStrokeDash', _0: a};
+};
+var _user$project$Eve$MStroke = function (a) {
+	return {ctor: 'MStroke', _0: a};
+};
+var _user$project$Eve$MSize = function (a) {
+	return {ctor: 'MSize', _0: a};
+};
+var _user$project$Eve$MShortTimeLabels = function (a) {
+	return {ctor: 'MShortTimeLabels', _0: a};
+};
+var _user$project$Eve$MShape = function (a) {
+	return {ctor: 'MShape', _0: a};
+};
+var _user$project$Eve$MRadius = function (a) {
+	return {ctor: 'MRadius', _0: a};
+};
+var _user$project$Eve$MOrient = function (a) {
+	return {ctor: 'MOrient', _0: a};
+};
+var _user$project$Eve$MOpacity = function (a) {
+	return {ctor: 'MOpacity', _0: a};
+};
+var _user$project$Eve$MInterpolate = function (a) {
+	return {ctor: 'MInterpolate', _0: a};
+};
+var _user$project$Eve$MFontWeight = function (a) {
+	return {ctor: 'MFontWeight', _0: a};
+};
+var _user$project$Eve$MFontStyle = function (a) {
+	return {ctor: 'MFontStyle', _0: a};
+};
+var _user$project$Eve$MFontSize = function (a) {
+	return {ctor: 'MFontSize', _0: a};
+};
+var _user$project$Eve$MFont = function (a) {
+	return {ctor: 'MFont', _0: a};
+};
+var _user$project$Eve$MFillOpacity = function (a) {
+	return {ctor: 'MFillOpacity', _0: a};
+};
+var _user$project$Eve$MFilled = function (a) {
+	return {ctor: 'MFilled', _0: a};
+};
+var _user$project$Eve$MFill = function (a) {
+	return {ctor: 'MFill', _0: a};
+};
+var _user$project$Eve$MdY = function (a) {
+	return {ctor: 'MdY', _0: a};
+};
+var _user$project$Eve$MdX = function (a) {
+	return {ctor: 'MdX', _0: a};
+};
+var _user$project$Eve$MDiscreteBandSize = function (a) {
+	return {ctor: 'MDiscreteBandSize', _0: a};
+};
+var _user$project$Eve$MContinuousBandSize = function (a) {
+	return {ctor: 'MContinuousBandSize', _0: a};
+};
+var _user$project$Eve$MColor = function (a) {
+	return {ctor: 'MColor', _0: a};
+};
+var _user$project$Eve$MClip = function (a) {
+	return {ctor: 'MClip', _0: a};
+};
+var _user$project$Eve$MBinSpacing = function (a) {
+	return {ctor: 'MBinSpacing', _0: a};
+};
+var _user$project$Eve$MBaseline = function (a) {
+	return {ctor: 'MBaseline', _0: a};
+};
+var _user$project$Eve$MBandSize = function (a) {
+	return {ctor: 'MBandSize', _0: a};
+};
+var _user$project$Eve$MAngle = function (a) {
+	return {ctor: 'MAngle', _0: a};
+};
+var _user$project$Eve$MAlign = function (a) {
+	return {ctor: 'MAlign', _0: a};
+};
+var _user$project$Eve$Temporal = {ctor: 'Temporal'};
+var _user$project$Eve$Quantitative = {ctor: 'Quantitative'};
+var _user$project$Eve$Ordinal = {ctor: 'Ordinal'};
+var _user$project$Eve$Nominal = {ctor: 'Nominal'};
+var _user$project$Eve$Dec = {ctor: 'Dec'};
+var _user$project$Eve$Nov = {ctor: 'Nov'};
+var _user$project$Eve$Oct = {ctor: 'Oct'};
+var _user$project$Eve$Sep = {ctor: 'Sep'};
+var _user$project$Eve$Aug = {ctor: 'Aug'};
+var _user$project$Eve$Jul = {ctor: 'Jul'};
+var _user$project$Eve$Jun = {ctor: 'Jun'};
+var _user$project$Eve$May = {ctor: 'May'};
+var _user$project$Eve$Apr = {ctor: 'Apr'};
+var _user$project$Eve$Mar = {ctor: 'Mar'};
+var _user$project$Eve$Feb = {ctor: 'Feb'};
+var _user$project$Eve$Jan = {ctor: 'Jan'};
+var _user$project$Eve$VarianceP = {ctor: 'VarianceP'};
+var _user$project$Eve$Variance = {ctor: 'Variance'};
+var _user$project$Eve$Valid = {ctor: 'Valid'};
+var _user$project$Eve$Sum = {ctor: 'Sum'};
+var _user$project$Eve$StdevP = {ctor: 'StdevP'};
+var _user$project$Eve$Stdev = {ctor: 'Stdev'};
+var _user$project$Eve$Stderr = {ctor: 'Stderr'};
+var _user$project$Eve$Q3 = {ctor: 'Q3'};
+var _user$project$Eve$Q1 = {ctor: 'Q1'};
+var _user$project$Eve$Missing = {ctor: 'Missing'};
+var _user$project$Eve$Min = {ctor: 'Min'};
+var _user$project$Eve$Median = {ctor: 'Median'};
+var _user$project$Eve$Mean = {ctor: 'Mean'};
+var _user$project$Eve$Max = {ctor: 'Max'};
+var _user$project$Eve$Distinct = {ctor: 'Distinct'};
+var _user$project$Eve$Count = {ctor: 'Count'};
+var _user$project$Eve$CI1 = {ctor: 'CI1'};
+var _user$project$Eve$CI0 = {ctor: 'CI0'};
+var _user$project$Eve$Average = {ctor: 'Average'};
+var _user$project$Eve$OSort = function (a) {
+	return {ctor: 'OSort', _0: a};
+};
+var _user$project$Eve$OTimeUnit = function (a) {
+	return {ctor: 'OTimeUnit', _0: a};
+};
+var _user$project$Eve$OAggregate = function (a) {
+	return {ctor: 'OAggregate', _0: a};
+};
+var _user$project$Eve$OBin = function (a) {
+	return {ctor: 'OBin', _0: a};
+};
+var _user$project$Eve$OmType = function (a) {
+	return {ctor: 'OmType', _0: a};
+};
+var _user$project$Eve$ORepeat = function (a) {
+	return {ctor: 'ORepeat', _0: a};
+};
+var _user$project$Eve$OName = function (a) {
+	return {ctor: 'OName', _0: a};
+};
+var _user$project$Eve$OGreedy = {ctor: 'OGreedy'};
+var _user$project$Eve$OParity = {ctor: 'OParity'};
+var _user$project$Eve$ONone = {ctor: 'ONone'};
+var _user$project$Eve$Y2 = {ctor: 'Y2'};
+var _user$project$Eve$X2 = {ctor: 'X2'};
+var _user$project$Eve$Y = {ctor: 'Y'};
+var _user$project$Eve$X = {ctor: 'X'};
+var _user$project$Eve$PStack = function (a) {
+	return {ctor: 'PStack', _0: a};
+};
+var _user$project$Eve$PSort = function (a) {
+	return {ctor: 'PSort', _0: a};
+};
+var _user$project$Eve$PAxis = function (a) {
+	return {ctor: 'PAxis', _0: a};
+};
+var _user$project$Eve$PScale = function (a) {
+	return {ctor: 'PScale', _0: a};
+};
+var _user$project$Eve$PAggregate = function (a) {
+	return {ctor: 'PAggregate', _0: a};
+};
+var _user$project$Eve$PTimeUnit = function (a) {
+	return {ctor: 'PTimeUnit', _0: a};
+};
+var _user$project$Eve$PBin = function (a) {
+	return {ctor: 'PBin', _0: a};
+};
+var _user$project$Eve$PmType = function (a) {
+	return {ctor: 'PmType', _0: a};
+};
+var _user$project$Eve$PRepeat = function (a) {
+	return {ctor: 'PRepeat', _0: a};
+};
+var _user$project$Eve$PName = function (a) {
+	return {ctor: 'PName', _0: a};
+};
+var _user$project$Eve$Selection = {ctor: 'Selection'};
+var _user$project$Eve$selection = function (sels) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Selection,
+		_1: _elm_lang$core$Json_Encode$object(sels)
+	};
+};
+var _user$project$Eve$Config = {ctor: 'Config'};
+var _user$project$Eve$configure = function (configs) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Config,
+		_1: _elm_lang$core$Json_Encode$object(configs)
+	};
+};
+var _user$project$Eve$Resolve = {ctor: 'Resolve'};
+var _user$project$Eve$resolve = function (res) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Resolve,
+		_1: _elm_lang$core$Json_Encode$object(res)
+	};
+};
+var _user$project$Eve$Spec = {ctor: 'Spec'};
+var _user$project$Eve$specification = function (spec) {
+	return {ctor: '_Tuple2', _0: _user$project$Eve$Spec, _1: spec};
+};
+var _user$project$Eve$Facet = {ctor: 'Facet'};
+var _user$project$Eve$facet = function (fMaps) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Facet,
+		_1: _elm_lang$core$Json_Encode$object(
+			A2(_elm_lang$core$List$map, _user$project$Eve$facetMappingProperty, fMaps))
+	};
+};
+var _user$project$Eve$Repeat = {ctor: 'Repeat'};
+var _user$project$Eve$repeat = function (fields) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Repeat,
+		_1: _elm_lang$core$Json_Encode$object(
+			A2(_elm_lang$core$List$map, _user$project$Eve$repeatFields, fields))
+	};
+};
+var _user$project$Eve$VConcat = {ctor: 'VConcat'};
+var _user$project$Eve$vConcat = function (specs) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$VConcat,
+		_1: _elm_lang$core$Json_Encode$list(specs)
+	};
+};
+var _user$project$Eve$HConcat = {ctor: 'HConcat'};
+var _user$project$Eve$hConcat = function (specs) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$HConcat,
+		_1: _elm_lang$core$Json_Encode$list(specs)
+	};
+};
+var _user$project$Eve$Layer = {ctor: 'Layer'};
+var _user$project$Eve$layer = function (specs) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Layer,
+		_1: _elm_lang$core$Json_Encode$list(specs)
+	};
+};
+var _user$project$Eve$Encoding = {ctor: 'Encoding'};
+var _user$project$Eve$encoding = function (channels) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Encoding,
+		_1: _elm_lang$core$Json_Encode$object(channels)
+	};
+};
+var _user$project$Eve$Transform = {ctor: 'Transform'};
+var _user$project$Eve$transform = function (transforms) {
+	var assemble = function (_p107) {
+		var _p108 = _p107;
+		var _p113 = _p108._1;
+		var _p112 = _p108._0;
+		var _p109 = _p112;
+		switch (_p109) {
+			case 'calculate':
+				var _p110 = A2(
+					_elm_lang$core$Json_Decode$decodeString,
+					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p113));
+				if ((((_p110.ctor === 'Ok') && (_p110._0.ctor === '::')) && (_p110._0._1.ctor === '::')) && (_p110._0._1._1.ctor === '[]')) {
+					return _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'calculate', _1: _p110._0._0},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'as', _1: _p110._0._1._0},
+								_1: {ctor: '[]'}
+							}
+						});
+				} else {
+					return _elm_lang$core$Json_Encode$null;
+				}
+			case 'aggregate':
+				var _p111 = A2(
+					_elm_lang$core$Json_Decode$decodeString,
+					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p113));
+				if ((((_p111.ctor === 'Ok') && (_p111._0.ctor === '::')) && (_p111._0._1.ctor === '::')) && (_p111._0._1._1.ctor === '[]')) {
+					return _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'aggregate', _1: _p111._0._0},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p111._0._1._0},
+								_1: {ctor: '[]'}
+							}
+						});
+				} else {
+					return _elm_lang$core$Json_Encode$null;
+				}
+			default:
+				return _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _p112, _1: _p113},
+						_1: {ctor: '[]'}
+					});
+		}
+	};
+	return _elm_lang$core$List$isEmpty(transforms) ? {ctor: '_Tuple2', _0: _user$project$Eve$Transform, _1: _elm_lang$core$Json_Encode$null} : {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Transform,
+		_1: _elm_lang$core$Json_Encode$list(
+			A2(_elm_lang$core$List$map, assemble, transforms))
+	};
+};
+var _user$project$Eve$Mark = {ctor: 'Mark'};
+var _user$project$Eve$mark = F2(
+	function (mark, mProps) {
+		var _p114 = mProps;
+		if (_p114.ctor === '[]') {
+			return {
+				ctor: '_Tuple2',
+				_0: _user$project$Eve$Mark,
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Eve$markLabel(mark))
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _user$project$Eve$Mark,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'type',
+							_1: _elm_lang$core$Json_Encode$string(
+								_user$project$Eve$markLabel(mark))
+						},
+						_1: A2(_elm_lang$core$List$map, _user$project$Eve$markProperty, mProps)
+					})
+			};
+		}
+	});
+var _user$project$Eve$Data = {ctor: 'Data'};
+var _user$project$Eve$dataFromColumns = F2(
+	function (fmts, cols) {
+		var dataArray = _elm_lang$core$Json_Encode$list(
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Json_Encode$object,
+				_user$project$Eve$transpose(cols)));
+		return _elm_lang$core$Native_Utils.eq(
+			fmts,
+			{ctor: '[]'}) ? {
+			ctor: '_Tuple2',
+			_0: _user$project$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'values', _1: dataArray},
+					_1: {ctor: '[]'}
+				})
+		} : {
+			ctor: '_Tuple2',
+			_0: _user$project$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'values', _1: dataArray},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'format',
+							_1: _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$map, _user$project$Eve$format, fmts))
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _user$project$Eve$dataFromUrl = F2(
+	function (url, fmts) {
+		return _elm_lang$core$Native_Utils.eq(
+			fmts,
+			{ctor: '[]'}) ? {
+			ctor: '_Tuple2',
+			_0: _user$project$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'url',
+						_1: _elm_lang$core$Json_Encode$string(url)
+					},
+					_1: {ctor: '[]'}
+				})
+		} : {
+			ctor: '_Tuple2',
+			_0: _user$project$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'url',
+						_1: _elm_lang$core$Json_Encode$string(url)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'format',
+							_1: _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$map, _user$project$Eve$format, fmts))
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _user$project$Eve$Height = {ctor: 'Height'};
+var _user$project$Eve$height = function (h) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Height,
+		_1: _elm_lang$core$Json_Encode$float(h)
+	};
+};
+var _user$project$Eve$Width = {ctor: 'Width'};
+var _user$project$Eve$width = function (w) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Width,
+		_1: _elm_lang$core$Json_Encode$float(w)
+	};
+};
+var _user$project$Eve$Title = {ctor: 'Title'};
+var _user$project$Eve$title = function (s) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Title,
+		_1: _elm_lang$core$Json_Encode$string(s)
+	};
+};
+var _user$project$Eve$Description = {ctor: 'Description'};
+var _user$project$Eve$description = function (s) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Description,
+		_1: _elm_lang$core$Json_Encode$string(s)
+	};
+};
+var _user$project$Eve$Name = {ctor: 'Name'};
+var _user$project$Eve$name = function (s) {
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$Eve$Name,
+		_1: _elm_lang$core$Json_Encode$string(s)
+	};
+};
+var _user$project$Eve$RSymbol = function (a) {
+	return {ctor: 'RSymbol', _0: a};
+};
+var _user$project$Eve$RRamp = function (a) {
+	return {ctor: 'RRamp', _0: a};
+};
+var _user$project$Eve$ROrdinal = function (a) {
+	return {ctor: 'ROrdinal', _0: a};
+};
+var _user$project$Eve$RHeatmap = function (a) {
+	return {ctor: 'RHeatmap', _0: a};
+};
+var _user$project$Eve$RDiverging = function (a) {
+	return {ctor: 'RDiverging', _0: a};
+};
+var _user$project$Eve$RCategory = function (a) {
+	return {ctor: 'RCategory', _0: a};
+};
+var _user$project$Eve$ColumnFields = function (a) {
+	return {ctor: 'ColumnFields', _0: a};
+};
+var _user$project$Eve$RowFields = function (a) {
+	return {ctor: 'RowFields', _0: a};
+};
+var _user$project$Eve$Independent = {ctor: 'Independent'};
+var _user$project$Eve$Shared = {ctor: 'Shared'};
+var _user$project$Eve$RScale = function (a) {
+	return {ctor: 'RScale', _0: a};
+};
+var _user$project$Eve$RLegend = function (a) {
+	return {ctor: 'RLegend', _0: a};
+};
+var _user$project$Eve$RAxis = function (a) {
+	return {ctor: 'RAxis', _0: a};
+};
+var _user$project$Eve$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
+var _user$project$Eve$ScBinLinear = {ctor: 'ScBinLinear'};
+var _user$project$Eve$ScPoint = {ctor: 'ScPoint'};
+var _user$project$Eve$ScBand = {ctor: 'ScBand'};
+var _user$project$Eve$ScOrdinal = {ctor: 'ScOrdinal'};
+var _user$project$Eve$ScSequential = {ctor: 'ScSequential'};
+var _user$project$Eve$ScUtc = {ctor: 'ScUtc'};
+var _user$project$Eve$ScTime = {ctor: 'ScTime'};
+var _user$project$Eve$ScLog = {ctor: 'ScLog'};
+var _user$project$Eve$ScSqrt = {ctor: 'ScSqrt'};
+var _user$project$Eve$ScPow = {ctor: 'ScPow'};
+var _user$project$Eve$ScLinear = {ctor: 'ScLinear'};
+var _user$project$Eve$SCUseUnaggregatedDomain = function (a) {
+	return {ctor: 'SCUseUnaggregatedDomain', _0: a};
+};
+var _user$project$Eve$SCTextXRangeStep = function (a) {
+	return {ctor: 'SCTextXRangeStep', _0: a};
+};
+var _user$project$Eve$SCRound = function (a) {
+	return {ctor: 'SCRound', _0: a};
+};
+var _user$project$Eve$SCRangeStep = function (a) {
+	return {ctor: 'SCRangeStep', _0: a};
+};
+var _user$project$Eve$SCPointPadding = function (a) {
+	return {ctor: 'SCPointPadding', _0: a};
+};
+var _user$project$Eve$SCMinStrokeWidth = function (a) {
+	return {ctor: 'SCMinStrokeWidth', _0: a};
+};
+var _user$project$Eve$SCMaxStrokeWidth = function (a) {
+	return {ctor: 'SCMaxStrokeWidth', _0: a};
+};
+var _user$project$Eve$SCMinSize = function (a) {
+	return {ctor: 'SCMinSize', _0: a};
+};
+var _user$project$Eve$SCMaxSize = function (a) {
+	return {ctor: 'SCMaxSize', _0: a};
+};
+var _user$project$Eve$SCMinOpacity = function (a) {
+	return {ctor: 'SCMinOpacity', _0: a};
+};
+var _user$project$Eve$SCMaxOpacity = function (a) {
+	return {ctor: 'SCMaxOpacity', _0: a};
+};
+var _user$project$Eve$SCMinFontSize = function (a) {
+	return {ctor: 'SCMinFontSize', _0: a};
+};
+var _user$project$Eve$SCMaxFontSize = function (a) {
+	return {ctor: 'SCMaxFontSize', _0: a};
+};
+var _user$project$Eve$SCMinBandSize = function (a) {
+	return {ctor: 'SCMinBandSize', _0: a};
+};
+var _user$project$Eve$SCMaxBandSize = function (a) {
+	return {ctor: 'SCMaxBandSize', _0: a};
+};
+var _user$project$Eve$SCClamp = function (a) {
+	return {ctor: 'SCClamp', _0: a};
+};
+var _user$project$Eve$SCBandPaddingOuter = function (a) {
+	return {ctor: 'SCBandPaddingOuter', _0: a};
+};
+var _user$project$Eve$SCBandPaddingInner = function (a) {
+	return {ctor: 'SCBandPaddingInner', _0: a};
+};
+var _user$project$Eve$Unaggregated = {ctor: 'Unaggregated'};
+var _user$project$Eve$DSelection = function (a) {
+	return {ctor: 'DSelection', _0: a};
+};
+var _user$project$Eve$DDateTimes = function (a) {
+	return {ctor: 'DDateTimes', _0: a};
+};
+var _user$project$Eve$DStrings = function (a) {
+	return {ctor: 'DStrings', _0: a};
+};
+var _user$project$Eve$DNumbers = function (a) {
+	return {ctor: 'DNumbers', _0: a};
+};
+var _user$project$Eve$NTickCount = function (a) {
+	return {ctor: 'NTickCount', _0: a};
+};
+var _user$project$Eve$IsNice = function (a) {
+	return {ctor: 'IsNice', _0: a};
+};
+var _user$project$Eve$NYear = {ctor: 'NYear'};
+var _user$project$Eve$NMonth = {ctor: 'NMonth'};
+var _user$project$Eve$NWeek = {ctor: 'NWeek'};
+var _user$project$Eve$NDay = {ctor: 'NDay'};
+var _user$project$Eve$NHour = {ctor: 'NHour'};
+var _user$project$Eve$NMinute = {ctor: 'NMinute'};
+var _user$project$Eve$NSecond = {ctor: 'NSecond'};
+var _user$project$Eve$NMillisecond = {ctor: 'NMillisecond'};
+var _user$project$Eve$SZero = function (a) {
+	return {ctor: 'SZero', _0: a};
+};
+var _user$project$Eve$SNice = function (a) {
+	return {ctor: 'SNice', _0: a};
+};
+var _user$project$Eve$SInterpolate = function (a) {
+	return {ctor: 'SInterpolate', _0: a};
+};
+var _user$project$Eve$SClamp = function (a) {
+	return {ctor: 'SClamp', _0: a};
+};
+var _user$project$Eve$SRound = function (a) {
+	return {ctor: 'SRound', _0: a};
+};
+var _user$project$Eve$SRangeStep = function (a) {
+	return {ctor: 'SRangeStep', _0: a};
+};
+var _user$project$Eve$SPaddingOuter = function (a) {
+	return {ctor: 'SPaddingOuter', _0: a};
+};
+var _user$project$Eve$SPaddingInner = function (a) {
+	return {ctor: 'SPaddingInner', _0: a};
+};
+var _user$project$Eve$SPadding = function (a) {
+	return {ctor: 'SPadding', _0: a};
+};
+var _user$project$Eve$SScheme = function (a) {
+	return {ctor: 'SScheme', _0: a};
+};
+var _user$project$Eve$SRange = function (a) {
+	return {ctor: 'SRange', _0: a};
+};
+var _user$project$Eve$SDomain = function (a) {
+	return {ctor: 'SDomain', _0: a};
+};
+var _user$project$Eve$SType = function (a) {
+	return {ctor: 'SType', _0: a};
+};
+var _user$project$Eve$RName = function (a) {
+	return {ctor: 'RName', _0: a};
+};
+var _user$project$Eve$RStrings = function (a) {
+	return {ctor: 'RStrings', _0: a};
+};
+var _user$project$Eve$RNumbers = function (a) {
+	return {ctor: 'RNumbers', _0: a};
+};
+var _user$project$Eve$Interval = {ctor: 'Interval'};
+var _user$project$Eve$Multi = {ctor: 'Multi'};
+var _user$project$Eve$Single = {ctor: 'Single'};
+var _user$project$Eve$SMStrokeDashOffset = function (a) {
+	return {ctor: 'SMStrokeDashOffset', _0: a};
+};
+var _user$project$Eve$SMStrokeDash = function (a) {
+	return {ctor: 'SMStrokeDash', _0: a};
+};
+var _user$project$Eve$SMStrokeWidth = function (a) {
+	return {ctor: 'SMStrokeWidth', _0: a};
+};
+var _user$project$Eve$SMStrokeOpacity = function (a) {
+	return {ctor: 'SMStrokeOpacity', _0: a};
+};
+var _user$project$Eve$SMStroke = function (a) {
+	return {ctor: 'SMStroke', _0: a};
+};
+var _user$project$Eve$SMFillOpacity = function (a) {
+	return {ctor: 'SMFillOpacity', _0: a};
+};
+var _user$project$Eve$SMFill = function (a) {
+	return {ctor: 'SMFill', _0: a};
+};
+var _user$project$Eve$NoToggle = {ctor: 'NoToggle'};
+var _user$project$Eve$Nearest = function (a) {
+	return {ctor: 'Nearest', _0: a};
+};
+var _user$project$Eve$Bind = function (a) {
+	return {ctor: 'Bind', _0: a};
+};
+var _user$project$Eve$BindScales = {ctor: 'BindScales'};
+var _user$project$Eve$SelectionMark = function (a) {
+	return {ctor: 'SelectionMark', _0: a};
+};
+var _user$project$Eve$ResolveSelections = function (a) {
+	return {ctor: 'ResolveSelections', _0: a};
+};
+var _user$project$Eve$Empty = {ctor: 'Empty'};
+var _user$project$Eve$Encodings = function (a) {
+	return {ctor: 'Encodings', _0: a};
+};
+var _user$project$Eve$Fields = function (a) {
+	return {ctor: 'Fields', _0: a};
+};
+var _user$project$Eve$Zoom = function (a) {
+	return {ctor: 'Zoom', _0: a};
+};
+var _user$project$Eve$Translate = function (a) {
+	return {ctor: 'Translate', _0: a};
+};
+var _user$project$Eve$On = function (a) {
+	return {ctor: 'On', _0: a};
+};
+var _user$project$Eve$Intersection = {ctor: 'Intersection'};
+var _user$project$Eve$Union = {ctor: 'Union'};
+var _user$project$Eve$Global = {ctor: 'Global'};
+var _user$project$Eve$SRight = {ctor: 'SRight'};
+var _user$project$Eve$SLeft = {ctor: 'SLeft'};
+var _user$project$Eve$SBottom = {ctor: 'SBottom'};
+var _user$project$Eve$STop = {ctor: 'STop'};
+var _user$project$Eve$ByRepeat = function (a) {
+	return {ctor: 'ByRepeat', _0: a};
+};
+var _user$project$Eve$ByField = function (a) {
+	return {ctor: 'ByField', _0: a};
+};
+var _user$project$Eve$Op = function (a) {
+	return {ctor: 'Op', _0: a};
+};
+var _user$project$Eve$Descending = {ctor: 'Descending'};
+var _user$project$Eve$Ascending = {ctor: 'Ascending'};
+var _user$project$Eve$NoStack = {ctor: 'NoStack'};
+var _user$project$Eve$StCenter = {ctor: 'StCenter'};
+var _user$project$Eve$StNormalize = {ctor: 'StNormalize'};
+var _user$project$Eve$StZero = {ctor: 'StZero'};
+var _user$project$Eve$Path = function (a) {
+	return {ctor: 'Path', _0: a};
+};
+var _user$project$Eve$TriangleDown = {ctor: 'TriangleDown'};
+var _user$project$Eve$TriangleUp = {ctor: 'TriangleUp'};
+var _user$project$Eve$Diamond = {ctor: 'Diamond'};
+var _user$project$Eve$Cross = {ctor: 'Cross'};
+var _user$project$Eve$SymSquare = {ctor: 'SymSquare'};
+var _user$project$Eve$SymCircle = {ctor: 'SymCircle'};
+var _user$project$Eve$TFormat = function (a) {
+	return {ctor: 'TFormat', _0: a};
+};
+var _user$project$Eve$TTimeUnit = function (a) {
+	return {ctor: 'TTimeUnit', _0: a};
+};
+var _user$project$Eve$TAggregate = function (a) {
+	return {ctor: 'TAggregate', _0: a};
+};
+var _user$project$Eve$TBin = function (a) {
+	return {ctor: 'TBin', _0: a};
+};
+var _user$project$Eve$TmType = function (a) {
+	return {ctor: 'TmType', _0: a};
+};
+var _user$project$Eve$TRepeat = function (a) {
+	return {ctor: 'TRepeat', _0: a};
+};
+var _user$project$Eve$TName = function (a) {
+	return {ctor: 'TName', _0: a};
+};
+var _user$project$Eve$Milliseconds = {ctor: 'Milliseconds'};
+var _user$project$Eve$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
+var _user$project$Eve$Seconds = {ctor: 'Seconds'};
+var _user$project$Eve$MinutesSeconds = {ctor: 'MinutesSeconds'};
+var _user$project$Eve$Minutes = {ctor: 'Minutes'};
+var _user$project$Eve$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
+var _user$project$Eve$HoursMinutes = {ctor: 'HoursMinutes'};
+var _user$project$Eve$Hours = {ctor: 'Hours'};
+var _user$project$Eve$Day = {ctor: 'Day'};
+var _user$project$Eve$Date = {ctor: 'Date'};
+var _user$project$Eve$MonthDate = {ctor: 'MonthDate'};
+var _user$project$Eve$Month = {ctor: 'Month'};
+var _user$project$Eve$QuarterMonth = {ctor: 'QuarterMonth'};
+var _user$project$Eve$Quarter = {ctor: 'Quarter'};
+var _user$project$Eve$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
+var _user$project$Eve$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
+var _user$project$Eve$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
+var _user$project$Eve$YearMonthDate = {ctor: 'YearMonthDate'};
+var _user$project$Eve$YearMonth = {ctor: 'YearMonth'};
+var _user$project$Eve$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
+var _user$project$Eve$YearQuarter = {ctor: 'YearQuarter'};
+var _user$project$Eve$Year = {ctor: 'Year'};
+var _user$project$Eve$TOrient = function (a) {
+	return {ctor: 'TOrient', _0: a};
+};
+var _user$project$Eve$TOffset = function (a) {
+	return {ctor: 'TOffset', _0: a};
+};
+var _user$project$Eve$TLimit = function (a) {
+	return {ctor: 'TLimit', _0: a};
+};
+var _user$project$Eve$TFontWeight = function (a) {
+	return {ctor: 'TFontWeight', _0: a};
+};
+var _user$project$Eve$TFontSize = function (a) {
+	return {ctor: 'TFontSize', _0: a};
+};
+var _user$project$Eve$TFont = function (a) {
+	return {ctor: 'TFont', _0: a};
+};
+var _user$project$Eve$TColor = function (a) {
+	return {ctor: 'TColor', _0: a};
+};
+var _user$project$Eve$TBaseline = function (a) {
+	return {ctor: 'TBaseline', _0: a};
+};
+var _user$project$Eve$TAngle = function (a) {
+	return {ctor: 'TAngle', _0: a};
+};
+var _user$project$Eve$TAnchor = function (a) {
+	return {ctor: 'TAnchor', _0: a};
+};
+var _user$project$Eve$AlignBottom = {ctor: 'AlignBottom'};
+var _user$project$Eve$AlignMiddle = {ctor: 'AlignMiddle'};
+var _user$project$Eve$AlignTop = {ctor: 'AlignTop'};
+var _user$project$Eve$StrokeDashOffset = function (a) {
+	return {ctor: 'StrokeDashOffset', _0: a};
+};
+var _user$project$Eve$StrokeDash = function (a) {
+	return {ctor: 'StrokeDash', _0: a};
+};
+var _user$project$Eve$StrokeWidth = function (a) {
+	return {ctor: 'StrokeWidth', _0: a};
+};
+var _user$project$Eve$StrokeOpacity = function (a) {
+	return {ctor: 'StrokeOpacity', _0: a};
+};
+var _user$project$Eve$Stroke = function (a) {
+	return {ctor: 'Stroke', _0: a};
+};
+var _user$project$Eve$FillOpacity = function (a) {
+	return {ctor: 'FillOpacity', _0: a};
+};
+var _user$project$Eve$Fill = function (a) {
+	return {ctor: 'Fill', _0: a};
+};
+var _user$project$Eve$Clip = function (a) {
+	return {ctor: 'Clip', _0: a};
+};
+var _user$project$Eve$VHeight = function (a) {
+	return {ctor: 'VHeight', _0: a};
+};
+var _user$project$Eve$VWidth = function (a) {
+	return {ctor: 'VWidth', _0: a};
+};
+
+var _user$project$Gallery$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Gallery$update = F2(
+	function (msg, model) {
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _user$project$Gallery$vlFacetExample = function () {
+	var enc = function (_p0) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(15),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MLegend(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p0))));
+	};
+	var spec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$facet(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$RowBy(
+							{
+								ctor: '::',
+								_0: _user$project$Eve$FName('Origin'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$FmType(_user$project$Eve$Nominal),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$specification(spec),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vlRepeatExample = function () {
+	var enc = function (_p1) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p1))));
+	};
+	var spec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _user$project$Eve$ColumnFields(
+						{
+							ctor: '::',
+							_0: 'Horsepower',
+							_1: {
+								ctor: '::',
+								_0: 'Miles_per_Gallon',
+								_1: {
+									ctor: '::',
+									_0: 'Acceleration',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$specification(spec),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl60 = function () {
+	var res = function (_p2) {
+		return _user$project$Eve$resolve(
+			A2(
+				_user$project$Eve$resolution,
+				_user$project$Eve$RLegend(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _user$project$Eve$ChColor, _1: _user$project$Eve$Independent},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _user$project$Eve$ChSize, _1: _user$project$Eve$Independent},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_p2));
+	};
+	var config = function (_p3) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				_user$project$Eve$Range(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$RHeatmap('greenblue'),
+						_1: {ctor: '[]'}
+					}),
+				_p3));
+	};
+	var encBar = function (_p4) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Major_Genre'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$LabelAngle(-40),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'myPts',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MString('steelblue'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MString('grey'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p4))));
+	};
+	var sel = function (_p5) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myPts',
+				_user$project$Eve$Single,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p5));
+	};
+	var barSpec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(330),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(120),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Bar,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: sel(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: encBar(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	var enc2 = function (_p6) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(10),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PBin(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$MaxBins(10),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MAggregate(_user$project$Eve$Count),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MLegend(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$LTitle('In Selected Category'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MString('#666'),
+								_1: {ctor: '[]'}
+							},
+							_p6)))));
+	};
+	var enc1 = function (_p7) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(10),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PBin(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$MaxBins(10),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MAggregate(_user$project$Eve$Count),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MLegend(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$LTitle(''),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p7))));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rect,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc1(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var selTrans = function (_p8) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FSelection('myPts'),
+				_p8));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: selTrans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc2(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var heatSpec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$layer(
+				{
+					ctor: '::',
+					_0: spec1,
+					_1: {
+						ctor: '::',
+						_0: spec2,
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/movies.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$vConcat(
+					{
+						ctor: '::',
+						_0: heatSpec,
+						_1: {
+							ctor: '::',
+							_0: barSpec,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: res(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: config(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl59 = function () {
+	var enc = function (_p9) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PRepeat(_user$project$Eve$Row),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'myBrush',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MString('grey'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p9))));
+	};
+	var sel = function (_p10) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myBrush',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$On('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$Translate('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$Zoom('wheel![event.shiftKey]'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$ResolveSelections(_user$project$Eve$Union),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A4(
+					_user$project$Eve$select,
+					'',
+					_user$project$Eve$Interval,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$BindScales,
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$Translate('[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$Zoom('wheel![event.shiftKey]'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$ResolveSelections(_user$project$Eve$Global),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_p10)));
+	};
+	var spec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _user$project$Eve$RowFields(
+						{
+							ctor: '::',
+							_0: 'Horsepower',
+							_1: {
+								ctor: '::',
+								_0: 'Acceleration',
+								_1: {
+									ctor: '::',
+									_0: 'Miles_per_Gallon',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$ColumnFields(
+							{
+								ctor: '::',
+								_0: 'Miles_per_Gallon',
+								_1: {
+									ctor: '::',
+									_0: 'Acceleration',
+									_1: {
+										ctor: '::',
+										_0: 'Horsepower',
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$specification(spec),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl58 = function () {
+	var enc2 = function (_p11) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(20),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('goldenrod'),
+							_1: {ctor: '[]'}
+						},
+						_p11))));
+	};
+	var enc1 = function (_p12) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(20),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p12)));
+	};
+	var selTrans = function (_p13) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FSelection('myBrush'),
+				_p13));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: selTrans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc2(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var sel = function (_p14) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myBrush',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p14));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var trans = function (_p15) {
+		return _user$project$Eve$transform(
+			A3(_user$project$Eve$calculate, 'hours(datum.date)', 'time', _p15));
+	};
+	var spec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/flights-2k.json',
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Parse(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'date',
+								_1: _user$project$Eve$FDate('')
+							},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: spec1,
+							_1: {
+								ctor: '::',
+								_0: spec2,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _user$project$Eve$ColumnFields(
+						{
+							ctor: '::',
+							_0: 'distance',
+							_1: {
+								ctor: '::',
+								_0: 'delay',
+								_1: {
+									ctor: '::',
+									_0: 'time',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$specification(spec),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl57 = function () {
+	var enc2 = function (_p16) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$Format('%Y'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$TickCount(3),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$Grid(false),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p16)));
+	};
+	var enc1 = function (_p17) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SDomain(
+										_user$project$Eve$DSelection('myBrush')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle(''),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p17)));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(500),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Area,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var sel = function (_p18) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myBrush',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p18));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(480),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(60),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Area,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc2(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/sp500.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$vConcat(
+					{
+						ctor: '::',
+						_0: spec1,
+						_1: {
+							ctor: '::',
+							_0: spec2,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl56 = function () {
+	var enc2 = function (_p19) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$Y,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('precipitation'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(
+					_user$project$Eve$color,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MString('firebrick'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(3),
+							_1: {ctor: '[]'}
+						},
+						_p19))));
+	};
+	var trans = function (_p20) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FSelection('myBrush'),
+				_p20));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: trans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Rule,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc2(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var enc1 = function (_p21) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('precipitation'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$opacity,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'myBrush',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MNumber(1),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(0.7),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p21))));
+	};
+	var sel = function (_p22) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myBrush',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p22));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: spec1,
+						_1: {
+							ctor: '::',
+							_0: spec2,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl55 = function () {
+	var enc2 = function (_p23) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(100),
+								_1: {ctor: '[]'}
+							},
+							_p23)))));
+	};
+	var trans2 = function (_p24) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FSelection('CylYr'),
+				_p24));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: trans2(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc2(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var enc1 = function (_p25) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'CylYr',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MString('grey'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p25))));
+	};
+	var sel1 = function (_p26) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'CylYr',
+				_user$project$Eve$Single,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Fields(
+						{
+							ctor: '::',
+							_0: 'Cylinders',
+							_1: {
+								ctor: '::',
+								_0: 'Year',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$Bind(
+							{
+								ctor: '::',
+								_0: A2(
+									_user$project$Eve$InRange,
+									'Cylinders',
+									{
+										ctor: '::',
+										_0: _user$project$Eve$InMin(3),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$InMax(8),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$InStep(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_user$project$Eve$InRange,
+										'Year',
+										{
+											ctor: '::',
+											_0: _user$project$Eve$InMin(1969),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$InMax(1981),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Eve$InStep(1),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p26));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: sel1(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var trans = function (_p27) {
+		return _user$project$Eve$transform(
+			A3(_user$project$Eve$calculate, 'year(datum.Year)', 'Year', _p27));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: spec1,
+							_1: {
+								ctor: '::',
+								_0: spec2,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl54 = function () {
+	var enc = function (_p28) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SDomain(
+										_user$project$Eve$DNumbers(
+											{
+												ctor: '::',
+												_0: 75,
+												_1: {
+													ctor: '::',
+													_0: 150,
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SDomain(
+											_user$project$Eve$DNumbers(
+												{
+													ctor: '::',
+													_0: 20,
+													_1: {
+														ctor: '::',
+														_0: 40,
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Cylinders'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p28))));
+	};
+	var sel = function (_p29) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myGrid',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$BindScales,
+					_1: {ctor: '[]'}
+				},
+				_p29));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl53 = function () {
+	var enc = function (_p30) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'myPaintbrush',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MNumber(300),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(50),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p30))));
+	};
+	var sel = function (_p31) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myPaintbrush',
+				_user$project$Eve$Multi,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$On('mouseover'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$Nearest(true),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p31));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl52 = function () {
+	var enc = function (_p32) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Eve$MCondition,
+								'myBrush',
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MName('Cylinders'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MmType(_user$project$Eve$Ordinal),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MString('grey'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p32))));
+	};
+	var sel = function (_p33) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'myBrush',
+				_user$project$Eve$Interval,
+				{ctor: '[]'},
+				_p33));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl51 = function () {
+	var enc2 = function (_p34) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('location'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p34))));
+	};
+	var spec2 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc2(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var enc1 = function (_p35) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PRepeat(_user$project$Eve$Column),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$detail,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$DName('date'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$DmType(_user$project$Eve$Temporal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$DTimeUnit(_user$project$Eve$Year),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MName('location'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							A2(
+								_user$project$Eve$opacity,
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MNumber(0.2),
+									_1: {ctor: '[]'}
+								},
+								_p35))))));
+	};
+	var spec1 = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc1(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var spec = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$layer(
+				{
+					ctor: '::',
+					_0: spec1,
+					_1: {
+						ctor: '::',
+						_0: spec2,
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/weather.csv',
+				{
+					ctor: '::',
+					_0: _user$project$Eve$Parse(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'date',
+								_1: _user$project$Eve$FDate('%Y-%m-%d %H:%M')
+							},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$repeat(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$ColumnFields(
+							{
+								ctor: '::',
+								_0: 'temp_max',
+								_1: {
+									ctor: '::',
+									_0: 'precipitation',
+									_1: {
+										ctor: '::',
+										_0: 'wind',
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$specification(spec),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl50 = function () {
+	var config = function (_p36) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				_user$project$Eve$AreaStyle(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MInterpolate(_user$project$Eve$Monotone),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$MOrient(_user$project$Eve$Vertical),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_p36));
+	};
+	var encUpper = function (_p37) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('x'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('ny'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SDomain(
+											_user$project$Eve$DNumbers(
+												{
+													ctor: '::',
+													_0: 0,
+													_1: {
+														ctor: '::',
+														_0: 50,
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('y'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$opacity,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(0.3),
+							_1: {ctor: '[]'}
+						},
+						_p37))));
+	};
+	var encLower = function (_p38) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('x'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SZero(false),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$SNice(
+											_user$project$Eve$IsNice(false)),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('y'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SDomain(
+											_user$project$Eve$DNumbers(
+												{
+													ctor: '::',
+													_0: 0,
+													_1: {
+														ctor: '::',
+														_0: 50,
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$opacity,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(0.6),
+							_1: {ctor: '[]'}
+						},
+						_p38))));
+	};
+	var specLower = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Area,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MClip(true),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encLower(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p39) {
+		return _user$project$Eve$transform(
+			A3(_user$project$Eve$calculate, 'datum.y - 50', 'ny', _p39));
+	};
+	var specUpper = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: trans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Area,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MClip(true),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: encUpper(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var data = function (_p40) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'x',
+				_user$project$Eve$Numbers(
+					A2(
+						_elm_lang$core$List$map,
+						_elm_lang$core$Basics$toFloat,
+						A2(_elm_lang$core$List$range, 1, 20))),
+				A3(
+					_user$project$Eve$dataColumn,
+					'y',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 28,
+							_1: {
+								ctor: '::',
+								_0: 55,
+								_1: {
+									ctor: '::',
+									_0: 43,
+									_1: {
+										ctor: '::',
+										_0: 91,
+										_1: {
+											ctor: '::',
+											_0: 81,
+											_1: {
+												ctor: '::',
+												_0: 53,
+												_1: {
+													ctor: '::',
+													_0: 19,
+													_1: {
+														ctor: '::',
+														_0: 87,
+														_1: {
+															ctor: '::',
+															_0: 52,
+															_1: {
+																ctor: '::',
+																_0: 48,
+																_1: {
+																	ctor: '::',
+																	_0: 24,
+																	_1: {
+																		ctor: '::',
+																		_0: 49,
+																		_1: {
+																			ctor: '::',
+																			_0: 87,
+																			_1: {
+																				ctor: '::',
+																				_0: 66,
+																				_1: {
+																					ctor: '::',
+																					_0: 17,
+																					_1: {
+																						ctor: '::',
+																						_0: 27,
+																						_1: {
+																							ctor: '::',
+																							_0: 68,
+																							_1: {
+																								ctor: '::',
+																								_0: 16,
+																								_1: {
+																									ctor: '::',
+																									_0: 49,
+																									_1: {
+																										ctor: '::',
+																										_0: 15,
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p40)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(50),
+				_1: {
+					ctor: '::',
+					_0: data(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$layer(
+							{
+								ctor: '::',
+								_0: specLower,
+								_1: {
+									ctor: '::',
+									_0: specUpper,
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: config(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl49 = function () {
+	var res = function (_p41) {
+		return _user$project$Eve$resolve(
+			A2(
+				_user$project$Eve$resolution,
+				_user$project$Eve$RScale(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _user$project$Eve$ChY, _1: _user$project$Eve$Independent},
+						_1: {ctor: '[]'}
+					}),
+				_p41));
+	};
+	var encLine = function (_p42) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('temp_max'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$Grid(false),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$PScale(
+											{
+												ctor: '::',
+												_0: _user$project$Eve$SZero(false),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('firebrick'),
+							_1: {ctor: '[]'}
+						},
+						_p42))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLine(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBar = function (_p43) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('precipitation'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$Grid(false),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_p43)));
+	};
+	var specBar = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBar(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specBar,
+						_1: {
+							ctor: '::',
+							_0: specLine,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: res(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl48 = function () {
+	var encPoints = function (_p44) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('life_expect'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$AxTitle('Life Expectanct (years)'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('country'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('Country'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$Offset(5),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$Ticks(false),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Eve$MinExtent(70),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Eve$Domain(false),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('year'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Ordinal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SDomain(
+												_user$project$Eve$DNumbers(
+													{
+														ctor: '::',
+														_0: 1955,
+														_1: {
+															ctor: '::',
+															_0: 2000,
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$SRange(
+													_user$project$Eve$RStrings(
+														{
+															ctor: '::',
+															_0: '#e6959c',
+															_1: {
+																ctor: '::',
+																_0: '#911a24',
+																_1: {ctor: '[]'}
+															}
+														})),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MLegend(
+											{
+												ctor: '::',
+												_0: _user$project$Eve$LTitle('Year'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(100),
+								_1: {ctor: '[]'}
+							},
+							A2(
+								_user$project$Eve$opacity,
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MNumber(1),
+									_1: {ctor: '[]'}
+								},
+								_p44))))));
+	};
+	var specPoints = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Point,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MFilled(true),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encPoints(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encLine = function (_p45) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('life_expect'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('country'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$detail,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$DName('country'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$DmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MString('#db646f'),
+								_1: {ctor: '[]'}
+							},
+							_p45)))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLine(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p46) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				A2(
+					_user$project$Eve$FOneOf,
+					'country',
+					_user$project$Eve$Strings(
+						{
+							ctor: '::',
+							_0: 'China',
+							_1: {
+								ctor: '::',
+								_0: 'India',
+								_1: {
+									ctor: '::',
+									_0: 'United States',
+									_1: {
+										ctor: '::',
+										_0: 'Indonesia',
+										_1: {
+											ctor: '::',
+											_0: 'Brazil',
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						})),
+				A2(
+					_user$project$Eve$filter,
+					A2(
+						_user$project$Eve$FOneOf,
+						'year',
+						_user$project$Eve$Numbers(
+							{
+								ctor: '::',
+								_0: 1955,
+								_1: {
+									ctor: '::',
+									_0: 2000,
+									_1: {ctor: '[]'}
+								}
+							})),
+					_p46)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/countries.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: specLine,
+							_1: {
+								ctor: '::',
+								_0: specPoints,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl47 = function () {
+	var encPopulation = function (_p47) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('year'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Year),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle(''),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('population'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('#333'),
+							_1: {ctor: '[]'}
+						},
+						_p47))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encPopulation(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var specPoints = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Point,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encPopulation(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encRects = function (_p48) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('start'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Year),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$X2,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('end'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Year),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('event'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p48))));
+	};
+	var highlights = function (_p49) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{
+				ctor: '::',
+				_0: _user$project$Eve$Parse(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'start',
+							_1: _user$project$Eve$FDate('%Y')
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'end',
+								_1: _user$project$Eve$FDate('%Y')
+							},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A3(
+				_user$project$Eve$dataColumn,
+				'start',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: '1933',
+						_1: {
+							ctor: '::',
+							_0: '1948',
+							_1: {ctor: '[]'}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'end',
+					_user$project$Eve$Strings(
+						{
+							ctor: '::',
+							_0: '1945',
+							_1: {
+								ctor: '::',
+								_0: '1989',
+								_1: {ctor: '[]'}
+							}
+						}),
+					A3(
+						_user$project$Eve$dataColumn,
+						'event',
+						_user$project$Eve$Strings(
+							{
+								ctor: '::',
+								_0: 'Nazi Rule',
+								_1: {
+									ctor: '::',
+									_0: 'GDR (East Germany)',
+									_1: {ctor: '[]'}
+								}
+							}),
+						_p49))));
+	};
+	var specRects = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: highlights(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Rect,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: encRects(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var data = function (_p50) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{
+				ctor: '::',
+				_0: _user$project$Eve$Parse(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'year',
+							_1: _user$project$Eve$FDate('%Y')
+						},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A3(
+				_user$project$Eve$dataColumn,
+				'year',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: '1875',
+						_1: {
+							ctor: '::',
+							_0: '1890',
+							_1: {
+								ctor: '::',
+								_0: '1910',
+								_1: {
+									ctor: '::',
+									_0: '1925',
+									_1: {
+										ctor: '::',
+										_0: '1933',
+										_1: {
+											ctor: '::',
+											_0: '1939',
+											_1: {
+												ctor: '::',
+												_0: '1946',
+												_1: {
+													ctor: '::',
+													_0: '1950',
+													_1: {
+														ctor: '::',
+														_0: '1964',
+														_1: {
+															ctor: '::',
+															_0: '1971',
+															_1: {
+																ctor: '::',
+																_0: '1981',
+																_1: {
+																	ctor: '::',
+																	_0: '1985',
+																	_1: {
+																		ctor: '::',
+																		_0: '1989',
+																		_1: {
+																			ctor: '::',
+																			_0: '1990',
+																			_1: {
+																				ctor: '::',
+																				_0: '1991',
+																				_1: {
+																					ctor: '::',
+																					_0: '1992',
+																					_1: {
+																						ctor: '::',
+																						_0: '1993',
+																						_1: {
+																							ctor: '::',
+																							_0: '1994',
+																							_1: {
+																								ctor: '::',
+																								_0: '1995',
+																								_1: {
+																									ctor: '::',
+																									_0: '1996',
+																									_1: {
+																										ctor: '::',
+																										_0: '1997',
+																										_1: {
+																											ctor: '::',
+																											_0: '1998',
+																											_1: {
+																												ctor: '::',
+																												_0: '1999',
+																												_1: {
+																													ctor: '::',
+																													_0: '2000',
+																													_1: {
+																														ctor: '::',
+																														_0: '2001',
+																														_1: {
+																															ctor: '::',
+																															_0: '2002',
+																															_1: {
+																																ctor: '::',
+																																_0: '2003',
+																																_1: {
+																																	ctor: '::',
+																																	_0: '2004',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: '2005',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: '2006',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: '2007',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: '2008',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: '2009',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: '2010',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: '2011',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: '2012',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: '2013',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: '2014',
+																																											_1: {ctor: '[]'}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'population',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 1309,
+							_1: {
+								ctor: '::',
+								_0: 1558,
+								_1: {
+									ctor: '::',
+									_0: 4512,
+									_1: {
+										ctor: '::',
+										_0: 8180,
+										_1: {
+											ctor: '::',
+											_0: 15915,
+											_1: {
+												ctor: '::',
+												_0: 24824,
+												_1: {
+													ctor: '::',
+													_0: 28275,
+													_1: {
+														ctor: '::',
+														_0: 29189,
+														_1: {
+															ctor: '::',
+															_0: 29881,
+															_1: {
+																ctor: '::',
+																_0: 26007,
+																_1: {
+																	ctor: '::',
+																	_0: 24029,
+																	_1: {
+																		ctor: '::',
+																		_0: 23340,
+																		_1: {
+																			ctor: '::',
+																			_0: 22307,
+																			_1: {
+																				ctor: '::',
+																				_0: 22087,
+																				_1: {
+																					ctor: '::',
+																					_0: 22139,
+																					_1: {
+																						ctor: '::',
+																						_0: 22105,
+																						_1: {
+																							ctor: '::',
+																							_0: 22242,
+																							_1: {
+																								ctor: '::',
+																								_0: 22801,
+																								_1: {
+																									ctor: '::',
+																									_0: 24273,
+																									_1: {
+																										ctor: '::',
+																										_0: 25640,
+																										_1: {
+																											ctor: '::',
+																											_0: 27393,
+																											_1: {
+																												ctor: '::',
+																												_0: 29505,
+																												_1: {
+																													ctor: '::',
+																													_0: 32124,
+																													_1: {
+																														ctor: '::',
+																														_0: 33791,
+																														_1: {
+																															ctor: '::',
+																															_0: 35297,
+																															_1: {
+																																ctor: '::',
+																																_0: 36179,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 36829,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 37493,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 38376,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 39008,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 39366,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 39821,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 40179,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 40511,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 40465,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 40905,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 41258,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 41777,
+																																												_1: {ctor: '[]'}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p50)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(500),
+			_1: {
+				ctor: '::',
+				_0: data(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: specRects,
+							_1: {
+								ctor: '::',
+								_0: specLine,
+								_1: {
+									ctor: '::',
+									_0: specPoints,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl46 = function () {
+	var encLine = function (_p51) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Year'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Year),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p51)));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Line,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLine(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBand = function (_p52) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Year'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Year),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$CI0),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Miles/Gallon'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('Miles_per_Gallon'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAggregate(_user$project$Eve$CI1),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$opacity,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(0.3),
+								_1: {ctor: '[]'}
+							},
+							_p52)))));
+	};
+	var specBand = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Area,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBand(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specBand,
+						_1: {
+							ctor: '::',
+							_0: specLine,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl45 = function () {
+	var encRect = function (_p53) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$Y,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('lower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y2,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('upper'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$opacity,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(0.2),
+							_1: {ctor: '[]'}
+						},
+						_p53))));
+	};
+	var specRect = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rect,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encRect(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encMean = function (_p54) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$Y,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('mean_MPG'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p54));
+	};
+	var specMean = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encMean(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p55) {
+		return _user$project$Eve$transform(
+			A3(
+				_user$project$Eve$aggregate,
+				{
+					ctor: '::',
+					_0: A3(_user$project$Eve$opAs, _user$project$Eve$Mean, 'Miles_per_Gallon', 'mean_MPG'),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$Eve$opAs, _user$project$Eve$Stdev, 'Miles_per_Gallon', 'dev_MPG'),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'},
+				A3(
+					_user$project$Eve$calculate,
+					'datum.mean_MPG+datum.dev_MPG',
+					'upper',
+					A3(_user$project$Eve$calculate, 'datum.mean_MPG-datum.dev_MPG', 'lower', _p55))));
+	};
+	var specSpread = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: trans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specMean,
+						_1: {
+							ctor: '::',
+							_0: specRect,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encPoints = function (_p56) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p56)));
+	};
+	var specPoints = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Point,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encPoints(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specPoints,
+						_1: {
+							ctor: '::',
+							_0: specSpread,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl44 = function () {
+	var encMean = function (_p57) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(
+					_user$project$Eve$color,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MString('red'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(5),
+							_1: {ctor: '[]'}
+						},
+						_p57))));
+	};
+	var specMean = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encMean(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBars = function (_p58) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p58)));
+	};
+	var specBars = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBars(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/movies.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specBars,
+						_1: {
+							ctor: '::',
+							_0: specMean,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl43 = function () {
+	var encStdevs = function (_p59) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('upper'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$X2,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('lower'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('variety'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p59))));
+	};
+	var specStdevs = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encStdevs(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encMeans = function (_p60) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('mean'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SZero(false),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('Barley Yield'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('variety'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('black'),
+							_1: {ctor: '[]'}
+						},
+						_p60))));
+	};
+	var specMeans = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Point,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MFilled(true),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encMeans(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p61) {
+		return _user$project$Eve$transform(
+			A3(
+				_user$project$Eve$aggregate,
+				{
+					ctor: '::',
+					_0: A3(_user$project$Eve$opAs, _user$project$Eve$Mean, 'yield', 'mean'),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$Eve$opAs, _user$project$Eve$Stdev, 'yield', 'stdev'),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: 'variety',
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_user$project$Eve$calculate,
+					'datum.mean-datum.stdev',
+					'lower',
+					A3(_user$project$Eve$calculate, 'datum.mean+datum.stdev', 'upper', _p61))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: specMeans,
+							_1: {
+								ctor: '::',
+								_0: specStdevs,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl42 = function () {
+	var encCIs = function (_p62) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('yield'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$CI0),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$X2,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('yield'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$CI1),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('variety'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p62))));
+	};
+	var specCIs = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encCIs(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encPoints = function (_p63) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('yield'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Barley Yield'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('variety'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('black'),
+							_1: {ctor: '[]'}
+						},
+						_p63))));
+	};
+	var specPoints = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Point,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MFilled(true),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encPoints(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specPoints,
+						_1: {
+							ctor: '::',
+							_0: specCIs,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl41 = function () {
+	var encBar = function (_p64) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonthDate),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('open'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('close'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							A2(
+								_user$project$Eve$color,
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MName('isIncrease'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$MLegend(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								_p64))))));
+	};
+	var specBar = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBar(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encLine = function (_p65) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonthDate),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SDomain(
+											_user$project$Eve$DDateTimes(
+												{
+													ctor: '::',
+													_0: {
+														ctor: '::',
+														_0: _user$project$Eve$DTMonth(_user$project$Eve$May),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Eve$DTDate(31),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Eve$DTYear(2009),
+																_1: {ctor: '[]'}
+															}
+														}
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '::',
+															_0: _user$project$Eve$DTMonth(_user$project$Eve$Jul),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Eve$DTDate(1),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Eve$DTYear(2009),
+																	_1: {ctor: '[]'}
+																}
+															}
+														},
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Date in 2009'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$Format('%m/%d'),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('low'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('high'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MName('isIncrease'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MLegend(
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$MScale(
+												{
+													ctor: '::',
+													_0: _user$project$Eve$SRange(
+														_user$project$Eve$RStrings(
+															{
+																ctor: '::',
+																_0: '#ae1325',
+																_1: {
+																	ctor: '::',
+																	_0: '#06982d',
+																	_1: {ctor: '[]'}
+																}
+															})),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							_p65)))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLine(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p66) {
+		return _user$project$Eve$transform(
+			A3(_user$project$Eve$calculate, 'datum.open > datum.close', 'isIncrease', _p66));
+	};
+	var data = function (_p67) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'date',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: '01-Jun-2009',
+						_1: {
+							ctor: '::',
+							_0: '02-Jun-2009',
+							_1: {
+								ctor: '::',
+								_0: '03-Jun-2009',
+								_1: {
+									ctor: '::',
+									_0: '04-Jun-2009',
+									_1: {
+										ctor: '::',
+										_0: '05-Jun-2009',
+										_1: {
+											ctor: '::',
+											_0: '08-Jun-2009',
+											_1: {
+												ctor: '::',
+												_0: '09-Jun-2009',
+												_1: {
+													ctor: '::',
+													_0: '10-Jun-2009',
+													_1: {
+														ctor: '::',
+														_0: '11-Jun-2009',
+														_1: {
+															ctor: '::',
+															_0: '12-Jun-2009',
+															_1: {
+																ctor: '::',
+																_0: '15-Jun-2009',
+																_1: {
+																	ctor: '::',
+																	_0: '16-Jun-2009',
+																	_1: {
+																		ctor: '::',
+																		_0: '17-Jun-2009',
+																		_1: {
+																			ctor: '::',
+																			_0: '18-Jun-2009',
+																			_1: {
+																				ctor: '::',
+																				_0: '19-Jun-2009',
+																				_1: {
+																					ctor: '::',
+																					_0: '22-Jun-2009',
+																					_1: {
+																						ctor: '::',
+																						_0: '23-Jun-2009',
+																						_1: {
+																							ctor: '::',
+																							_0: '24-Jun-2009',
+																							_1: {
+																								ctor: '::',
+																								_0: '25-Jun-2009',
+																								_1: {
+																									ctor: '::',
+																									_0: '26-Jun-2009',
+																									_1: {
+																										ctor: '::',
+																										_0: '29-Jun-2009',
+																										_1: {
+																											ctor: '::',
+																											_0: '30-Jun-2009',
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'open',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 28.7,
+							_1: {
+								ctor: '::',
+								_0: 30.04,
+								_1: {
+									ctor: '::',
+									_0: 29.62,
+									_1: {
+										ctor: '::',
+										_0: 31.02,
+										_1: {
+											ctor: '::',
+											_0: 29.39,
+											_1: {
+												ctor: '::',
+												_0: 30.84,
+												_1: {
+													ctor: '::',
+													_0: 29.77,
+													_1: {
+														ctor: '::',
+														_0: 26.9,
+														_1: {
+															ctor: '::',
+															_0: 27.36,
+															_1: {
+																ctor: '::',
+																_0: 28.08,
+																_1: {
+																	ctor: '::',
+																	_0: 29.7,
+																	_1: {
+																		ctor: '::',
+																		_0: 30.81,
+																		_1: {
+																			ctor: '::',
+																			_0: 31.19,
+																			_1: {
+																				ctor: '::',
+																				_0: 31.54,
+																				_1: {
+																					ctor: '::',
+																					_0: 29.16,
+																					_1: {
+																						ctor: '::',
+																						_0: 30.4,
+																						_1: {
+																							ctor: '::',
+																							_0: 31.3,
+																							_1: {
+																								ctor: '::',
+																								_0: 30.58,
+																								_1: {
+																									ctor: '::',
+																									_0: 29.45,
+																									_1: {
+																										ctor: '::',
+																										_0: 27.09,
+																										_1: {
+																											ctor: '::',
+																											_0: 25.93,
+																											_1: {
+																												ctor: '::',
+																												_0: 25.36,
+																												_1: {ctor: '[]'}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_user$project$Eve$dataColumn,
+						'high',
+						_user$project$Eve$Numbers(
+							{
+								ctor: '::',
+								_0: 30.05,
+								_1: {
+									ctor: '::',
+									_0: 30.13,
+									_1: {
+										ctor: '::',
+										_0: 31.79,
+										_1: {
+											ctor: '::',
+											_0: 31.02,
+											_1: {
+												ctor: '::',
+												_0: 30.81,
+												_1: {
+													ctor: '::',
+													_0: 31.82,
+													_1: {
+														ctor: '::',
+														_0: 29.77,
+														_1: {
+															ctor: '::',
+															_0: 29.74,
+															_1: {
+																ctor: '::',
+																_0: 28.11,
+																_1: {
+																	ctor: '::',
+																	_0: 28.5,
+																	_1: {
+																		ctor: '::',
+																		_0: 31.09,
+																		_1: {
+																			ctor: '::',
+																			_0: 32.75,
+																			_1: {
+																				ctor: '::',
+																				_0: 32.77,
+																				_1: {
+																					ctor: '::',
+																					_0: 31.54,
+																					_1: {
+																						ctor: '::',
+																						_0: 29.32,
+																						_1: {
+																							ctor: '::',
+																							_0: 32.05,
+																							_1: {
+																								ctor: '::',
+																								_0: 31.54,
+																								_1: {
+																									ctor: '::',
+																									_0: 30.58,
+																									_1: {
+																										ctor: '::',
+																										_0: 29.56,
+																										_1: {
+																											ctor: '::',
+																											_0: 27.22,
+																											_1: {
+																												ctor: '::',
+																												_0: 27.18,
+																												_1: {
+																													ctor: '::',
+																													_0: 27.38,
+																													_1: {ctor: '[]'}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}),
+						A3(
+							_user$project$Eve$dataColumn,
+							'low',
+							_user$project$Eve$Numbers(
+								{
+									ctor: '::',
+									_0: 28.45,
+									_1: {
+										ctor: '::',
+										_0: 28.3,
+										_1: {
+											ctor: '::',
+											_0: 29.62,
+											_1: {
+												ctor: '::',
+												_0: 29.92,
+												_1: {
+													ctor: '::',
+													_0: 28.85,
+													_1: {
+														ctor: '::',
+														_0: 26.41,
+														_1: {
+															ctor: '::',
+															_0: 27.79,
+															_1: {
+																ctor: '::',
+																_0: 26.9,
+																_1: {
+																	ctor: '::',
+																	_0: 26.81,
+																	_1: {
+																		ctor: '::',
+																		_0: 27.73,
+																		_1: {
+																			ctor: '::',
+																			_0: 29.64,
+																			_1: {
+																				ctor: '::',
+																				_0: 30.07,
+																				_1: {
+																					ctor: '::',
+																					_0: 30.64,
+																					_1: {
+																						ctor: '::',
+																						_0: 29.6,
+																						_1: {
+																							ctor: '::',
+																							_0: 27.56,
+																							_1: {
+																								ctor: '::',
+																								_0: 30.3,
+																								_1: {
+																									ctor: '::',
+																									_0: 27.83,
+																									_1: {
+																										ctor: '::',
+																										_0: 28.79,
+																										_1: {
+																											ctor: '::',
+																											_0: 26.3,
+																											_1: {
+																												ctor: '::',
+																												_0: 25.76,
+																												_1: {
+																													ctor: '::',
+																													_0: 25.29,
+																													_1: {
+																														ctor: '::',
+																														_0: 25.02,
+																														_1: {ctor: '[]'}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							A3(
+								_user$project$Eve$dataColumn,
+								'close',
+								_user$project$Eve$Numbers(
+									{
+										ctor: '::',
+										_0: 30.04,
+										_1: {
+											ctor: '::',
+											_0: 29.63,
+											_1: {
+												ctor: '::',
+												_0: 31.02,
+												_1: {
+													ctor: '::',
+													_0: 30.18,
+													_1: {
+														ctor: '::',
+														_0: 29.62,
+														_1: {
+															ctor: '::',
+															_0: 29.77,
+															_1: {
+																ctor: '::',
+																_0: 28.27,
+																_1: {
+																	ctor: '::',
+																	_0: 28.46,
+																	_1: {
+																		ctor: '::',
+																		_0: 28.11,
+																		_1: {
+																			ctor: '::',
+																			_0: 28.15,
+																			_1: {
+																				ctor: '::',
+																				_0: 30.81,
+																				_1: {
+																					ctor: '::',
+																					_0: 32.68,
+																					_1: {
+																						ctor: '::',
+																						_0: 31.54,
+																						_1: {
+																							ctor: '::',
+																							_0: 30.03,
+																							_1: {
+																								ctor: '::',
+																								_0: 27.99,
+																								_1: {
+																									ctor: '::',
+																									_0: 31.17,
+																									_1: {
+																										ctor: '::',
+																										_0: 30.58,
+																										_1: {
+																											ctor: '::',
+																											_0: 29.05,
+																											_1: {
+																												ctor: '::',
+																												_0: 26.36,
+																												_1: {
+																													ctor: '::',
+																													_0: 25.93,
+																													_1: {
+																														ctor: '::',
+																														_0: 25.35,
+																														_1: {
+																															ctor: '::',
+																															_0: 26.35,
+																															_1: {ctor: '[]'}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								A3(
+									_user$project$Eve$dataColumn,
+									'signal',
+									_user$project$Eve$Strings(
+										{
+											ctor: '::',
+											_0: 'short',
+											_1: {
+												ctor: '::',
+												_0: 'short',
+												_1: {
+													ctor: '::',
+													_0: 'short',
+													_1: {
+														ctor: '::',
+														_0: 'short',
+														_1: {
+															ctor: '::',
+															_0: 'short',
+															_1: {
+																ctor: '::',
+																_0: 'short',
+																_1: {
+																	ctor: '::',
+																	_0: 'short',
+																	_1: {
+																		ctor: '::',
+																		_0: 'short',
+																		_1: {
+																			ctor: '::',
+																			_0: 'short',
+																			_1: {
+																				ctor: '::',
+																				_0: 'short',
+																				_1: {
+																					ctor: '::',
+																					_0: 'long',
+																					_1: {
+																						ctor: '::',
+																						_0: 'short',
+																						_1: {
+																							ctor: '::',
+																							_0: 'short',
+																							_1: {
+																								ctor: '::',
+																								_0: 'short',
+																								_1: {
+																									ctor: '::',
+																									_0: 'short',
+																									_1: {
+																										ctor: '::',
+																										_0: 'short',
+																										_1: {
+																											ctor: '::',
+																											_0: 'short',
+																											_1: {
+																												ctor: '::',
+																												_0: 'long',
+																												_1: {
+																													ctor: '::',
+																													_0: 'long',
+																													_1: {
+																														ctor: '::',
+																														_0: 'long',
+																														_1: {
+																															ctor: '::',
+																															_0: 'long',
+																															_1: {
+																																ctor: '::',
+																																_0: 'long',
+																																_1: {ctor: '[]'}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}),
+									A3(
+										_user$project$Eve$dataColumn,
+										'ret',
+										_user$project$Eve$Numbers(
+											{
+												ctor: '::',
+												_0: -4.89396411092985,
+												_1: {
+													ctor: '::',
+													_0: -0.322580645161295,
+													_1: {
+														ctor: '::',
+														_0: 3.68663594470045,
+														_1: {
+															ctor: '::',
+															_0: 4.51010886469673,
+															_1: {
+																ctor: '::',
+																_0: 6.08424336973478,
+																_1: {
+																	ctor: '::',
+																	_0: 1.2539184952978,
+																	_1: {
+																		ctor: '::',
+																		_0: -5.02431118314424,
+																		_1: {
+																			ctor: '::',
+																			_0: -5.46623794212217,
+																			_1: {
+																				ctor: '::',
+																				_0: -8.3743842364532,
+																				_1: {
+																					ctor: '::',
+																					_0: -5.52763819095477,
+																					_1: {
+																						ctor: '::',
+																						_0: 3.4920634920635,
+																						_1: {
+																							ctor: '::',
+																							_0: 0.155038759689914,
+																							_1: {
+																								ctor: '::',
+																								_0: 5.82822085889571,
+																								_1: {
+																									ctor: '::',
+																									_0: 8.17610062893082,
+																									_1: {
+																										ctor: '::',
+																										_0: 8.59872611464968,
+																										_1: {
+																											ctor: '::',
+																											_0: 15.4907975460123,
+																											_1: {
+																												ctor: '::',
+																												_0: 11.7370892018779,
+																												_1: {
+																													ctor: '::',
+																													_0: -10.4234527687296,
+																													_1: {
+																														ctor: '::',
+																														_0: 0,
+																														_1: {
+																															ctor: '::',
+																															_0: 0,
+																															_1: {
+																																ctor: '::',
+																																_0: 5.26315789473684,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 6.73758865248228,
+																																	_1: {ctor: '[]'}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_p67))))))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(320),
+			_1: {
+				ctor: '::',
+				_0: data(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: trans(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$layer(
+							{
+								ctor: '::',
+								_0: specLine,
+								_1: {
+									ctor: '::',
+									_0: specBar,
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl40 = function () {
+	var encBoxMid = function (_p68) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('midBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p68)))));
+	};
+	var specBoxMid = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Tick,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxMid',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBoxMid(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBox = function (_p69) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('lowerBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('upperBox'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p69)))));
+	};
+	var specBox = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'box',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBox(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encUWhisker = function (_p70) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('upperBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('upperWhisker'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p70))));
+	};
+	var specUWhisker = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encUWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encLWhisker = function (_p71) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('lowerWhisker'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('Population'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('lowerBox'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p71))));
+	};
+	var specLWhisker = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encLWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p72) {
+		return _user$project$Eve$transform(
+			A3(
+				_user$project$Eve$aggregate,
+				{
+					ctor: '::',
+					_0: A3(_user$project$Eve$opAs, _user$project$Eve$Q1, 'people', 'lowerBox'),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$Eve$opAs, _user$project$Eve$Median, 'people', 'midBox'),
+						_1: {
+							ctor: '::',
+							_0: A3(_user$project$Eve$opAs, _user$project$Eve$Q3, 'people', 'upperBox'),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: 'age',
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_user$project$Eve$calculate,
+					'datum.upperBox - datum.lowerBox',
+					'IQR',
+					A3(
+						_user$project$Eve$calculate,
+						'datum.upperBox + datum.IQR * 1.5',
+						'upperWhisker',
+						A3(_user$project$Eve$calculate, 'max(0,datum.lowerBox - datum.IQR *1.5)', 'lowerWhisker', _p72)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: specLWhisker,
+							_1: {
+								ctor: '::',
+								_0: specUWhisker,
+								_1: {
+									ctor: '::',
+									_0: specBox,
+									_1: {
+										ctor: '::',
+										_0: specBoxMid,
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl39 = function () {
+	var encBoxMid = function (_p73) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('midBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p73)))));
+	};
+	var specBoxMid = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Tick,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxMid',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBoxMid(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBox = function (_p74) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('lowerBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('upperBox'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$size,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p74)))));
+	};
+	var specBox = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'box',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBox(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encUWhisker = function (_p75) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('upperBox'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('upperWhisker'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p75))));
+	};
+	var specUWhisker = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encUWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encLWhisker = function (_p76) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('lowerWhisker'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('Population'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('lowerBox'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p76))));
+	};
+	var specLWhisker = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encLWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p77) {
+		return _user$project$Eve$transform(
+			A3(
+				_user$project$Eve$aggregate,
+				{
+					ctor: '::',
+					_0: A3(_user$project$Eve$opAs, _user$project$Eve$Min, 'people', 'lowerWhisker'),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$Eve$opAs, _user$project$Eve$Q1, 'people', 'lowerBox'),
+						_1: {
+							ctor: '::',
+							_0: A3(_user$project$Eve$opAs, _user$project$Eve$Median, 'people', 'midBox'),
+							_1: {
+								ctor: '::',
+								_0: A3(_user$project$Eve$opAs, _user$project$Eve$Q3, 'people', 'upperBox'),
+								_1: {
+									ctor: '::',
+									_0: A3(_user$project$Eve$opAs, _user$project$Eve$Max, 'people', 'upperWhisker'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: 'age',
+					_1: {ctor: '[]'}
+				},
+				_p77));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Eve$layer(
+						{
+							ctor: '::',
+							_0: specLWhisker,
+							_1: {
+								ctor: '::',
+								_0: specUWhisker,
+								_1: {
+									ctor: '::',
+									_0: specBox,
+									_1: {
+										ctor: '::',
+										_0: specBoxMid,
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl38 = function () {
+	var config = function (_p78) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				_user$project$Eve$Scale(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$SCBandPaddingInner(0),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$SCBandPaddingOuter(0),
+							_1: {ctor: '[]'}
+						}
+					}),
+				A2(
+					_user$project$Eve$configuration,
+					_user$project$Eve$TextStyle(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MBaseline(_user$project$Eve$AlignMiddle),
+							_1: {ctor: '[]'}
+						}),
+					_p78)));
+	};
+	var encText = function (_p79) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Cylinders'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Origin'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MString('white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_user$project$Eve$text,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$TName('*'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$TmType(_user$project$Eve$Quantitative),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$TAggregate(_user$project$Eve$Count),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							_p79)))));
+	};
+	var specText = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Text,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encText(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encRect = function (_p80) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Cylinders'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Origin'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('*'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MAggregate(_user$project$Eve$Count),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p80))));
+	};
+	var specRect = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rect,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encRect(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specRect,
+						_1: {
+							ctor: '::',
+							_0: specText,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: config(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl37 = function () {
+	var encLine = function (_p81) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$Y,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('precipitation'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(
+					_user$project$Eve$color,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MString('red'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(3),
+							_1: {ctor: '[]'}
+						},
+						_p81))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Rule,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLine(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBar = function (_p82) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('precipitation'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p82)));
+	};
+	var specBar = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBar(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specBar,
+						_1: {
+							ctor: '::',
+							_0: specLine,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl36 = function () {
+	var config = function (_p83) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				A2(
+					_user$project$Eve$NamedStyle,
+					'label',
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MAlign(_user$project$Eve$AlignLeft),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$MBaseline(_user$project$Eve$AlignMiddle),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MdX(3),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_p83));
+	};
+	var encText = function (_p84) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('b'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('a'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$text,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$TName('b'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$TmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p84))));
+	};
+	var specText = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Text,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'label',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encText(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBar = function (_p85) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('b'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('a'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p85)));
+	};
+	var specBar = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$mark,
+				_user$project$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encBar(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var data = function (_p86) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'a',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'b',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 28,
+							_1: {
+								ctor: '::',
+								_0: 55,
+								_1: {
+									ctor: '::',
+									_0: 43,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_p86)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specBar,
+						_1: {
+							ctor: '::',
+							_0: specText,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: config(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl35 = function () {
+	var enc = function (_p87) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('yield'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Median),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('variety'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PSort(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$ByField('Horsepower'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$Op(_user$project$Eve$Mean),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$Descending,
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SRangeStep(
+												_elm_lang$core$Maybe$Just(12)),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('year'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$row,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$FName('site'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p87)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl34 = function () {
+	var enc = function (_p88) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(15),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$row,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$FName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p88))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl33 = function () {
+	var enc = function (_p89) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Worldwide_Gross'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('US_DVD_Sales'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$column,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$FName('MPAA_Rating'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p89))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/movies.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl32 = function () {
+	var enc = function (_p90) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('yield'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('variety'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('site'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$column,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$FName('year'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p90)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl31 = function () {
+	var enc = function (_p91) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SRangeStep(
+										_elm_lang$core$Maybe$Just(17)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('people'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Population'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('gender'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SRange(
+												_user$project$Eve$RStrings(
+													{
+														ctor: '::',
+														_0: '#EA98D2',
+														_1: {
+															ctor: '::',
+															_0: '#659CCA',
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$row,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$FName('gender'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$FmType(_user$project$Eve$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p91)))));
+	};
+	var trans = function (_p92) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.year == 2000'),
+				A3(_user$project$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p92)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Bar,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl30 = function () {
+	var enc = function (_p93) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('X'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SZero(false),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Y'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$opacity,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MNumber(1),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_user$project$Eve$column,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$FName('Series'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p93)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/anscombe.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl29 = function () {
+	var enc = function (_p94) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('percentage_start'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$AxTitle('Percentage'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$X2,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('percentage_end'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$Y,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('question'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Question'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$Offset(5),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Eve$Ticks(false),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Eve$MinExtent(60),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Eve$Domain(false),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MName('type'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MLegend(
+											{
+												ctor: '::',
+												_0: _user$project$Eve$LTitle('Response'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$MScale(
+												{
+													ctor: '::',
+													_0: _user$project$Eve$SType(_user$project$Eve$ScOrdinal),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Eve$SDomain(
+															_user$project$Eve$DStrings(
+																{
+																	ctor: '::',
+																	_0: 'Strongly disagree',
+																	_1: {
+																		ctor: '::',
+																		_0: 'Disagree',
+																		_1: {
+																			ctor: '::',
+																			_0: 'Neither agree nor disagree',
+																			_1: {
+																				ctor: '::',
+																				_0: 'Agree',
+																				_1: {
+																					ctor: '::',
+																					_0: 'Strongly agree',
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																})),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Eve$SRange(
+																_user$project$Eve$RStrings(
+																	{
+																		ctor: '::',
+																		_0: '#c30d24',
+																		_1: {
+																			ctor: '::',
+																			_0: '#f3a583',
+																			_1: {
+																				ctor: '::',
+																				_0: '#cccccc',
+																				_1: {
+																					ctor: '::',
+																					_0: '#94c6da',
+																					_1: {
+																						ctor: '::',
+																						_0: '#1770ab',
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	})),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							_p94)))));
+	};
+	var data = function (_p95) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'question',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: 'Q1',
+						_1: {
+							ctor: '::',
+							_0: 'Q1',
+							_1: {
+								ctor: '::',
+								_0: 'Q1',
+								_1: {
+									ctor: '::',
+									_0: 'Q1',
+									_1: {
+										ctor: '::',
+										_0: 'Q1',
+										_1: {
+											ctor: '::',
+											_0: 'Q2',
+											_1: {
+												ctor: '::',
+												_0: 'Q2',
+												_1: {
+													ctor: '::',
+													_0: 'Q2',
+													_1: {
+														ctor: '::',
+														_0: 'Q2',
+														_1: {
+															ctor: '::',
+															_0: 'Q2',
+															_1: {
+																ctor: '::',
+																_0: 'Q3',
+																_1: {
+																	ctor: '::',
+																	_0: 'Q3',
+																	_1: {
+																		ctor: '::',
+																		_0: 'Q3',
+																		_1: {
+																			ctor: '::',
+																			_0: 'Q3',
+																			_1: {
+																				ctor: '::',
+																				_0: 'Q3',
+																				_1: {
+																					ctor: '::',
+																					_0: 'Q4',
+																					_1: {
+																						ctor: '::',
+																						_0: 'Q4',
+																						_1: {
+																							ctor: '::',
+																							_0: 'Q4',
+																							_1: {
+																								ctor: '::',
+																								_0: 'Q4',
+																								_1: {
+																									ctor: '::',
+																									_0: 'Q4',
+																									_1: {
+																										ctor: '::',
+																										_0: 'Q5',
+																										_1: {
+																											ctor: '::',
+																											_0: 'Q5',
+																											_1: {
+																												ctor: '::',
+																												_0: 'Q5',
+																												_1: {
+																													ctor: '::',
+																													_0: 'Q5',
+																													_1: {
+																														ctor: '::',
+																														_0: 'Q5',
+																														_1: {
+																															ctor: '::',
+																															_0: 'Q6',
+																															_1: {
+																																ctor: '::',
+																																_0: 'Q6',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'Q6',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 'Q6',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 'Q6',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 'Q7',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 'Q7',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 'Q7',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 'Q7',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 'Q7',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 'Q8',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 'Q8',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 'Q8',
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 'Q8',
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 'Q8',
+																																													_1: {ctor: '[]'}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'type',
+					_user$project$Eve$Strings(
+						{
+							ctor: '::',
+							_0: 'Strongly disagree',
+							_1: {
+								ctor: '::',
+								_0: 'Disagree',
+								_1: {
+									ctor: '::',
+									_0: 'Neither agree nor disagree',
+									_1: {
+										ctor: '::',
+										_0: 'Agree',
+										_1: {
+											ctor: '::',
+											_0: 'Strongly agree',
+											_1: {
+												ctor: '::',
+												_0: 'Strongly disagree',
+												_1: {
+													ctor: '::',
+													_0: 'Disagree',
+													_1: {
+														ctor: '::',
+														_0: 'Neither agree nor disagree',
+														_1: {
+															ctor: '::',
+															_0: 'Agree',
+															_1: {
+																ctor: '::',
+																_0: 'Strongly agree',
+																_1: {
+																	ctor: '::',
+																	_0: 'Strongly disagree',
+																	_1: {
+																		ctor: '::',
+																		_0: 'Disagree',
+																		_1: {
+																			ctor: '::',
+																			_0: 'Neither agree nor disagree',
+																			_1: {
+																				ctor: '::',
+																				_0: 'Agree',
+																				_1: {
+																					ctor: '::',
+																					_0: 'Strongly agree',
+																					_1: {
+																						ctor: '::',
+																						_0: 'Strongly disagree',
+																						_1: {
+																							ctor: '::',
+																							_0: 'Disagree',
+																							_1: {
+																								ctor: '::',
+																								_0: 'Neither agree nor disagree',
+																								_1: {
+																									ctor: '::',
+																									_0: 'Agree',
+																									_1: {
+																										ctor: '::',
+																										_0: 'Strongly agree',
+																										_1: {
+																											ctor: '::',
+																											_0: 'Strongly disagree',
+																											_1: {
+																												ctor: '::',
+																												_0: 'Disagree',
+																												_1: {
+																													ctor: '::',
+																													_0: 'Neither agree nor disagree',
+																													_1: {
+																														ctor: '::',
+																														_0: 'Agree',
+																														_1: {
+																															ctor: '::',
+																															_0: 'Strongly agree',
+																															_1: {
+																																ctor: '::',
+																																_0: 'Strongly disagree',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'Disagree',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 'Neither agree nor disagree',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 'Agree',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 'Strongly agree',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 'Strongly disagree',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 'Disagree',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 'Neither agree nor disagree',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 'Agree',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 'Strongly agree',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 'Strongly disagree',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 'Disagree',
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 'Neither agree nor disagree',
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 'Agree',
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 'Strongly agree',
+																																														_1: {ctor: '[]'}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_user$project$Eve$dataColumn,
+						'value',
+						_user$project$Eve$Numbers(
+							{
+								ctor: '::',
+								_0: 24,
+								_1: {
+									ctor: '::',
+									_0: 294,
+									_1: {
+										ctor: '::',
+										_0: 594,
+										_1: {
+											ctor: '::',
+											_0: 1927,
+											_1: {
+												ctor: '::',
+												_0: 376,
+												_1: {
+													ctor: '::',
+													_0: 2,
+													_1: {
+														ctor: '::',
+														_0: 2,
+														_1: {
+															ctor: '::',
+															_0: 0,
+															_1: {
+																ctor: '::',
+																_0: 7,
+																_1: {
+																	ctor: '::',
+																	_0: 11,
+																	_1: {
+																		ctor: '::',
+																		_0: 2,
+																		_1: {
+																			ctor: '::',
+																			_0: 0,
+																			_1: {
+																				ctor: '::',
+																				_0: 2,
+																				_1: {
+																					ctor: '::',
+																					_0: 4,
+																					_1: {
+																						ctor: '::',
+																						_0: 2,
+																						_1: {
+																							ctor: '::',
+																							_0: 0,
+																							_1: {
+																								ctor: '::',
+																								_0: 2,
+																								_1: {
+																									ctor: '::',
+																									_0: 1,
+																									_1: {
+																										ctor: '::',
+																										_0: 7,
+																										_1: {
+																											ctor: '::',
+																											_0: 6,
+																											_1: {
+																												ctor: '::',
+																												_0: 0,
+																												_1: {
+																													ctor: '::',
+																													_0: 1,
+																													_1: {
+																														ctor: '::',
+																														_0: 3,
+																														_1: {
+																															ctor: '::',
+																															_0: 16,
+																															_1: {
+																																ctor: '::',
+																																_0: 4,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 1,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 1,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 2,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 9,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 3,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 0,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 0,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 1,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 4,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 0,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 0,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 0,
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 0,
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 0,
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 2,
+																																															_1: {ctor: '[]'}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}),
+						A3(
+							_user$project$Eve$dataColumn,
+							'percentage',
+							_user$project$Eve$Numbers(
+								{
+									ctor: '::',
+									_0: 0.7,
+									_1: {
+										ctor: '::',
+										_0: 9.1,
+										_1: {
+											ctor: '::',
+											_0: 18.5,
+											_1: {
+												ctor: '::',
+												_0: 59.9,
+												_1: {
+													ctor: '::',
+													_0: 11.7,
+													_1: {
+														ctor: '::',
+														_0: 18.2,
+														_1: {
+															ctor: '::',
+															_0: 18.2,
+															_1: {
+																ctor: '::',
+																_0: 0,
+																_1: {
+																	ctor: '::',
+																	_0: 63.6,
+																	_1: {
+																		ctor: '::',
+																		_0: 0,
+																		_1: {
+																			ctor: '::',
+																			_0: 20,
+																			_1: {
+																				ctor: '::',
+																				_0: 0,
+																				_1: {
+																					ctor: '::',
+																					_0: 20,
+																					_1: {
+																						ctor: '::',
+																						_0: 40,
+																						_1: {
+																							ctor: '::',
+																							_0: 20,
+																							_1: {
+																								ctor: '::',
+																								_0: 0,
+																								_1: {
+																									ctor: '::',
+																									_0: 12.5,
+																									_1: {
+																										ctor: '::',
+																										_0: 6.3,
+																										_1: {
+																											ctor: '::',
+																											_0: 43.8,
+																											_1: {
+																												ctor: '::',
+																												_0: 37.5,
+																												_1: {
+																													ctor: '::',
+																													_0: 0,
+																													_1: {
+																														ctor: '::',
+																														_0: 4.2,
+																														_1: {
+																															ctor: '::',
+																															_0: 12.5,
+																															_1: {
+																																ctor: '::',
+																																_0: 66.7,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 16.7,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 6.3,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 6.3,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 12.5,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 56.3,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 18.8,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 0,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 0,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 20,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 80,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 0,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 0,
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 0,
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 0,
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 0,
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 100,
+																																																_1: {ctor: '[]'}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							A3(
+								_user$project$Eve$dataColumn,
+								'percentage_start',
+								_user$project$Eve$Numbers(
+									{
+										ctor: '::',
+										_0: -19.1,
+										_1: {
+											ctor: '::',
+											_0: -18.4,
+											_1: {
+												ctor: '::',
+												_0: -9.2,
+												_1: {
+													ctor: '::',
+													_0: 9.2,
+													_1: {
+														ctor: '::',
+														_0: 69.2,
+														_1: {
+															ctor: '::',
+															_0: -36.4,
+															_1: {
+																ctor: '::',
+																_0: -18.2,
+																_1: {
+																	ctor: '::',
+																	_0: 0,
+																	_1: {
+																		ctor: '::',
+																		_0: 0,
+																		_1: {
+																			ctor: '::',
+																			_0: 63.6,
+																			_1: {
+																				ctor: '::',
+																				_0: -30,
+																				_1: {
+																					ctor: '::',
+																					_0: -10,
+																					_1: {
+																						ctor: '::',
+																						_0: -10,
+																						_1: {
+																							ctor: '::',
+																							_0: 10,
+																							_1: {
+																								ctor: '::',
+																								_0: 50,
+																								_1: {
+																									ctor: '::',
+																									_0: -15.6,
+																									_1: {
+																										ctor: '::',
+																										_0: -15.6,
+																										_1: {
+																											ctor: '::',
+																											_0: -3.1,
+																											_1: {
+																												ctor: '::',
+																												_0: 3.1,
+																												_1: {
+																													ctor: '::',
+																													_0: 46.9,
+																													_1: {
+																														ctor: '::',
+																														_0: -10.4,
+																														_1: {
+																															ctor: '::',
+																															_0: -10.4,
+																															_1: {
+																																ctor: '::',
+																																_0: -6.3,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 6.3,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 72.9,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: -18.8,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: -12.5,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: -6.3,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 6.3,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 62.5,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: -10,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: -10,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: -10,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 10,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 90,
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 0,
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 0,
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 0,
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 0,
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: 0,
+																																																	_1: {ctor: '[]'}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								A3(
+									_user$project$Eve$dataColumn,
+									'percentage_end',
+									_user$project$Eve$Numbers(
+										{
+											ctor: '::',
+											_0: -18.4,
+											_1: {
+												ctor: '::',
+												_0: -9.2,
+												_1: {
+													ctor: '::',
+													_0: 9.2,
+													_1: {
+														ctor: '::',
+														_0: 69.2,
+														_1: {
+															ctor: '::',
+															_0: 80.9,
+															_1: {
+																ctor: '::',
+																_0: -18.2,
+																_1: {
+																	ctor: '::',
+																	_0: 0,
+																	_1: {
+																		ctor: '::',
+																		_0: 0,
+																		_1: {
+																			ctor: '::',
+																			_0: 63.6,
+																			_1: {
+																				ctor: '::',
+																				_0: 63.6,
+																				_1: {
+																					ctor: '::',
+																					_0: -10,
+																					_1: {
+																						ctor: '::',
+																						_0: -10,
+																						_1: {
+																							ctor: '::',
+																							_0: 10,
+																							_1: {
+																								ctor: '::',
+																								_0: 50,
+																								_1: {
+																									ctor: '::',
+																									_0: 70,
+																									_1: {
+																										ctor: '::',
+																										_0: -15.6,
+																										_1: {
+																											ctor: '::',
+																											_0: -3.1,
+																											_1: {
+																												ctor: '::',
+																												_0: 3.1,
+																												_1: {
+																													ctor: '::',
+																													_0: 46.9,
+																													_1: {
+																														ctor: '::',
+																														_0: 84.4,
+																														_1: {
+																															ctor: '::',
+																															_0: -10.4,
+																															_1: {
+																																ctor: '::',
+																																_0: -6.3,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 6.3,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 72.9,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 89.6,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: -12.5,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: -6.3,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 6.3,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 62.5,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 81.3,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: -10,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: -10,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 10,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 90,
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 90,
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 0,
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 0,
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 0,
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: 0,
+																																																	_1: {
+																																																		ctor: '::',
+																																																		_0: 100,
+																																																		_1: {ctor: '[]'}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}),
+									_p95)))))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl28 = function () {
+	var enc = function (_p96) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SRangeStep(
+										_elm_lang$core$Maybe$Just(17)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('people'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Population'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$PStack(_user$project$Eve$NoStack),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('gender'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SRange(
+												_user$project$Eve$RStrings(
+													{
+														ctor: '::',
+														_0: '#e377c2',
+														_1: {
+															ctor: '::',
+															_0: '#1f77b4',
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_user$project$Eve$opacity,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MNumber(0.7),
+								_1: {ctor: '[]'}
+							},
+							_p96)))));
+	};
+	var trans = function (_p97) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.year == 2000'),
+				A3(_user$project$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p97)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Bar,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl27 = function () {
+	var enc = function (_p98) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonth),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$Domain(false),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$Format('%Y'),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('count'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$PStack(_user$project$Eve$StCenter),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('series'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SScheme('category20b'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p98))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(200),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$dataFromUrl,
+						'data/unemployment-across-industries.json',
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Area,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl26 = function () {
+	var enc = function (_p99) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonth),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$Domain(false),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Eve$Format('%Y'),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('count'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$PStack(_user$project$Eve$StNormalize),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('series'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SScheme('category20b'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p99))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(200),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$dataFromUrl,
+						'data/unemployment-across-industries.json',
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Area,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl25 = function () {
+	var enc = function (_p100) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonth),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$Format('%Y'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('count'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('series'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SScheme('category20b'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p100))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/unemployment-across-industries.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Area,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl24 = function () {
+	var enc = function (_p101) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SRangeStep(
+										_elm_lang$core$Maybe$Just(17)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('people'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Population'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$PStack(_user$project$Eve$StNormalize),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('gender'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SRange(
+												_user$project$Eve$RStrings(
+													{
+														ctor: '::',
+														_0: '#EA98D2',
+														_1: {
+															ctor: '::',
+															_0: '#659CCA',
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p101))));
+	};
+	var trans = function (_p102) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.year == 2000'),
+				A3(_user$project$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p102)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Bar,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl23 = function () {
+	var enc = function (_p103) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('yield'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('variety'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('site'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p103))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl22 = function () {
+	var enc = function (_p104) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Month),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('Month of the year'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('weather'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MScale(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$SDomain(
+												_user$project$Eve$DStrings(
+													{
+														ctor: '::',
+														_0: 'sun',
+														_1: {
+															ctor: '::',
+															_0: 'fog',
+															_1: {
+																ctor: '::',
+																_0: 'drizzle',
+																_1: {
+																	ctor: '::',
+																	_0: 'rain',
+																	_1: {
+																		ctor: '::',
+																		_0: 'snow',
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													})),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$SRange(
+													_user$project$Eve$RStrings(
+														{
+															ctor: '::',
+															_0: '#e7ba52',
+															_1: {
+																ctor: '::',
+																_0: '#c7c7c7',
+																_1: {
+																	ctor: '::',
+																	_0: '#aec7e8',
+																	_1: {
+																		ctor: '::',
+																		_0: '#1f77b4',
+																		_1: {
+																			ctor: '::',
+																			_0: '#9467bd',
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														})),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MLegend(
+											{
+												ctor: '::',
+												_0: _user$project$Eve$LTitle('Weather type'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_p104))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl21 = function () {
+	var enc = function (_p105) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('time'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Hours),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('time'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PTimeUnit(_user$project$Eve$Day),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('count'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MAggregate(_user$project$Eve$Sum),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p105))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/github.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl20 = function () {
+	var config = function (_p106) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				_user$project$Eve$Range(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$RHeatmap('greenblue'),
+						_1: {ctor: '[]'}
+					}),
+				A2(
+					_user$project$Eve$configuration,
+					_user$project$Eve$View(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$Stroke(_elm_lang$core$Maybe$Nothing),
+							_1: {ctor: '[]'}
+						}),
+					_p106)));
+	};
+	var enc = function (_p107) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(60),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PBin(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$MaxBins(40),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MAggregate(_user$project$Eve$Count),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p107))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(200),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$dataFromUrl,
+						'data/movies.json',
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Rect,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: config(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl19 = function () {
+	var enc = function (_p108) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Cylinders'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Origin'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Horsepower'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MAggregate(_user$project$Eve$Mean),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p108))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Rect,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl18 = function () {
+	var enc = function (_p109) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PTimeUnit(_user$project$Eve$YearMonth),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$Format('%Y'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('count'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('Count'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_p109)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(200),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$dataFromUrl,
+						'data/unemployment-across-industries.json',
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Area,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl17 = function () {
+	var enc = function (_p110) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('miles'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SZero(false),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('gas'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$order,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$OName('year'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$OmType(_user$project$Eve$Temporal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p110))));
+	};
+	var specLine = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: enc(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Line,
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var specPoint = _user$project$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: enc(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$MFilled(true),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/driving.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$layer(
+					{
+						ctor: '::',
+						_0: specLine,
+						_1: {
+							ctor: '::',
+							_0: specPoint,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _user$project$Gallery$vl16 = function () {
+	var enc = function (_p111) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$Format('%Y'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p111)));
+	};
+	var trans = function (_p112) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.symbol === \'GOOG\''),
+				_p112));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/stocks.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Line,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MInterpolate(_user$project$Eve$StepAfter),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl15 = function () {
+	var enc = function (_p113) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('year'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SRangeStep(
+										_elm_lang$core$Maybe$Just(50)),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$SPadding(0.5),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('yield'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Median),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('site'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p113))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/barley.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Line,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl14 = function () {
+	var enc = function (_p114) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$Format('%Y'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('symbol'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p114))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/stocks.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Line,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl13 = function () {
+	var enc = function (_p115) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$Format('%Y'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p115)));
+	};
+	var trans = function (_p116) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.symbol === \'GOOG\''),
+				_p116));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/stocks.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$mark,
+						_user$project$Eve$Line,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl12 = function () {
+	var enc = function (_p117) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Cylinders'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p117)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Tick,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl11 = function () {
+	var sel = function (_p118) {
+		return _user$project$Eve$selection(
+			A4(
+				_user$project$Eve$select,
+				'view',
+				_user$project$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$BindScales,
+					_1: {ctor: '[]'}
+				},
+				_p118));
+	};
+	var enc = function (_p119) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('income'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SType(_user$project$Eve$ScLog),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('health'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SZero(false),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('population'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MString('#000'),
+								_1: {ctor: '[]'}
+							},
+							_p119)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _user$project$Eve$width(500),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Eve$height(300),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Eve$dataFromUrl,
+						'data/gapminder-health-income.csv',
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Eve$mark,
+							_user$project$Eve$Circle,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: sel(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl10 = function () {
+	var enc = function (_p120) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$color,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$shape,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MName('Origin'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p120)))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl9 = function () {
+	var enc = function (_p121) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$MaxBins(10),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PBin(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$MaxBins(10),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MAggregate(_user$project$Eve$Count),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p121))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/movies.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl8 = function () {
+	var enc = function (_p122) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p122)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl7 = function () {
+	var enc = function (_p123) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Eve$size,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$MName('Acceleration'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$MmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p123))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl6 = function () {
+	var enc = function (_p124) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p124)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl5 = function () {
+	var config = function (_p125) {
+		return _user$project$Eve$configure(
+			A2(
+				_user$project$Eve$configuration,
+				_user$project$Eve$Axis(
+					{
+						ctor: '::',
+						_0: _user$project$Eve$DomainWidth(1),
+						_1: {ctor: '[]'}
+					}),
+				A2(
+					_user$project$Eve$configuration,
+					_user$project$Eve$View(
+						{
+							ctor: '::',
+							_0: _user$project$Eve$Stroke(_elm_lang$core$Maybe$Nothing),
+							_1: {ctor: '[]'}
+						}),
+					_p125)));
+	};
+	var enc = function (_p126) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('gender'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _user$project$Eve$SRangeStep(
+										_elm_lang$core$Maybe$Just(12)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle(''),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('people'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$PAxis(
+										{
+											ctor: '::',
+											_0: _user$project$Eve$AxTitle('population'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Eve$Grid(false),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A2(
+						_user$project$Eve$column,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$FName('age'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$FmType(_user$project$Eve$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Eve$color,
+							{
+								ctor: '::',
+								_0: _user$project$Eve$MName('gender'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Eve$MmType(_user$project$Eve$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Eve$MScale(
+											{
+												ctor: '::',
+												_0: _user$project$Eve$SRange(
+													_user$project$Eve$RStrings(
+														{
+															ctor: '::',
+															_0: '#EA98D2',
+															_1: {
+																ctor: '::',
+																_0: '#659CCA',
+																_1: {ctor: '[]'}
+															}
+														})),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							_p126)))));
+	};
+	var trans = function (_p127) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.year == 2000'),
+				A3(_user$project$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p127)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: trans(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: config(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl4 = function () {
+	var enc = function (_p128) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$Y,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('task'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$X,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('start'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Eve$position,
+						_user$project$Eve$X2,
+						{
+							ctor: '::',
+							_0: _user$project$Eve$PName('end'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p128))));
+	};
+	var data = function (_p129) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'task',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'start',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 1,
+							_1: {
+								ctor: '::',
+								_0: 3,
+								_1: {
+									ctor: '::',
+									_0: 8,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					A3(
+						_user$project$Eve$dataColumn,
+						'end',
+						_user$project$Eve$Numbers(
+							{
+								ctor: '::',
+								_0: 3,
+								_1: {
+									ctor: '::',
+									_0: 8,
+									_1: {
+										ctor: '::',
+										_0: 10,
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_p129))));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl3 = function () {
+	var enc = function (_p130) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PBin(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Count),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p130)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/movies.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl2 = function () {
+	var enc = function (_p131) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('people'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PAggregate(_user$project$Eve$Sum),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$AxTitle('population'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('age'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _user$project$Eve$SRangeStep(
+											_elm_lang$core$Maybe$Just(17)),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p131)));
+	};
+	var trans = function (_p132) {
+		return _user$project$Eve$transform(
+			A2(
+				_user$project$Eve$filter,
+				_user$project$Eve$FExpr('datum.year == 2000'),
+				_p132));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Eve$dataFromUrl,
+				'data/population.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: trans(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$vl1 = function () {
+	var enc = function (_p133) {
+		return _user$project$Eve$encoding(
+			A3(
+				_user$project$Eve$position,
+				_user$project$Eve$X,
+				{
+					ctor: '::',
+					_0: _user$project$Eve$PName('a'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Eve$PmType(_user$project$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Eve$position,
+					_user$project$Eve$Y,
+					{
+						ctor: '::',
+						_0: _user$project$Eve$PName('b'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Eve$PmType(_user$project$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p133)));
+	};
+	var data = function (_p134) {
+		return A2(
+			_user$project$Eve$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_user$project$Eve$dataColumn,
+				'a',
+				_user$project$Eve$Strings(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {
+									ctor: '::',
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {
+											ctor: '::',
+											_0: 'F',
+											_1: {
+												ctor: '::',
+												_0: 'G',
+												_1: {
+													ctor: '::',
+													_0: 'H',
+													_1: {
+														ctor: '::',
+														_0: 'I',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Eve$dataColumn,
+					'b',
+					_user$project$Eve$Numbers(
+						{
+							ctor: '::',
+							_0: 28,
+							_1: {
+								ctor: '::',
+								_0: 55,
+								_1: {
+									ctor: '::',
+									_0: 43,
+									_1: {
+										ctor: '::',
+										_0: 91,
+										_1: {
+											ctor: '::',
+											_0: 81,
+											_1: {
+												ctor: '::',
+												_0: 53,
+												_1: {
+													ctor: '::',
+													_0: 19,
+													_1: {
+														ctor: '::',
+														_0: 87,
+														_1: {
+															ctor: '::',
+															_0: 52,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p134)));
+	};
+	return _user$project$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Eve$mark,
+					_user$project$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _user$project$Gallery$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
+	'fromElm',
+	function (v) {
+		return v;
+	});
+var _user$project$Gallery$init = {
+	ctor: '_Tuple2',
+	_0: 0,
+	_1: _user$project$Gallery$fromElm(
+		_elm_lang$core$Json_Encode$list(
+			{
+				ctor: '::',
+				_0: _user$project$Gallery$vl1,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Gallery$vl2,
+					_1: {
+						ctor: '::',
+						_0: _user$project$Gallery$vl3,
+						_1: {
+							ctor: '::',
+							_0: _user$project$Gallery$vl4,
+							_1: {
+								ctor: '::',
+								_0: _user$project$Gallery$vl5,
+								_1: {
+									ctor: '::',
+									_0: _user$project$Gallery$vl6,
+									_1: {
+										ctor: '::',
+										_0: _user$project$Gallery$vl7,
+										_1: {
+											ctor: '::',
+											_0: _user$project$Gallery$vl8,
+											_1: {
+												ctor: '::',
+												_0: _user$project$Gallery$vl9,
+												_1: {
+													ctor: '::',
+													_0: _user$project$Gallery$vl10,
+													_1: {
+														ctor: '::',
+														_0: _user$project$Gallery$vl11,
+														_1: {
+															ctor: '::',
+															_0: _user$project$Gallery$vl12,
+															_1: {
+																ctor: '::',
+																_0: _user$project$Gallery$vl13,
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Gallery$vl14,
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$Gallery$vl15,
+																		_1: {
+																			ctor: '::',
+																			_0: _user$project$Gallery$vl16,
+																			_1: {
+																				ctor: '::',
+																				_0: _user$project$Gallery$vl17,
+																				_1: {
+																					ctor: '::',
+																					_0: _user$project$Gallery$vl18,
+																					_1: {
+																						ctor: '::',
+																						_0: _user$project$Gallery$vl19,
+																						_1: {
+																							ctor: '::',
+																							_0: _user$project$Gallery$vl20,
+																							_1: {
+																								ctor: '::',
+																								_0: _user$project$Gallery$vl21,
+																								_1: {
+																									ctor: '::',
+																									_0: _user$project$Gallery$vl22,
+																									_1: {
+																										ctor: '::',
+																										_0: _user$project$Gallery$vl23,
+																										_1: {
+																											ctor: '::',
+																											_0: _user$project$Gallery$vl24,
+																											_1: {
+																												ctor: '::',
+																												_0: _user$project$Gallery$vl25,
+																												_1: {
+																													ctor: '::',
+																													_0: _user$project$Gallery$vl26,
+																													_1: {
+																														ctor: '::',
+																														_0: _user$project$Gallery$vl27,
+																														_1: {
+																															ctor: '::',
+																															_0: _user$project$Gallery$vl28,
+																															_1: {
+																																ctor: '::',
+																																_0: _user$project$Gallery$vl29,
+																																_1: {
+																																	ctor: '::',
+																																	_0: _user$project$Gallery$vl30,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: _user$project$Gallery$vl31,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: _user$project$Gallery$vl32,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: _user$project$Gallery$vl33,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: _user$project$Gallery$vl34,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: _user$project$Gallery$vl35,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: _user$project$Gallery$vl36,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: _user$project$Gallery$vl37,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: _user$project$Gallery$vl38,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: _user$project$Gallery$vl39,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: _user$project$Gallery$vl40,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: _user$project$Gallery$vl41,
+																																												_1: {
+																																													ctor: '::',
+																																													_0: _user$project$Gallery$vl42,
+																																													_1: {
+																																														ctor: '::',
+																																														_0: _user$project$Gallery$vl43,
+																																														_1: {
+																																															ctor: '::',
+																																															_0: _user$project$Gallery$vl44,
+																																															_1: {
+																																																ctor: '::',
+																																																_0: _user$project$Gallery$vl45,
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: _user$project$Gallery$vl46,
+																																																	_1: {
+																																																		ctor: '::',
+																																																		_0: _user$project$Gallery$vl47,
+																																																		_1: {
+																																																			ctor: '::',
+																																																			_0: _user$project$Gallery$vl48,
+																																																			_1: {
+																																																				ctor: '::',
+																																																				_0: _user$project$Gallery$vl49,
+																																																				_1: {
+																																																					ctor: '::',
+																																																					_0: _user$project$Gallery$vl50,
+																																																					_1: {
+																																																						ctor: '::',
+																																																						_0: _user$project$Gallery$vl51,
+																																																						_1: {
+																																																							ctor: '::',
+																																																							_0: _user$project$Gallery$vl52,
+																																																							_1: {
+																																																								ctor: '::',
+																																																								_0: _user$project$Gallery$vl53,
+																																																								_1: {
+																																																									ctor: '::',
+																																																									_0: _user$project$Gallery$vl54,
+																																																									_1: {
+																																																										ctor: '::',
+																																																										_0: _user$project$Gallery$vl55,
+																																																										_1: {
+																																																											ctor: '::',
+																																																											_0: _user$project$Gallery$vl56,
+																																																											_1: {
+																																																												ctor: '::',
+																																																												_0: _user$project$Gallery$vl57,
+																																																												_1: {
+																																																													ctor: '::',
+																																																													_0: _user$project$Gallery$vl58,
+																																																													_1: {
+																																																														ctor: '::',
+																																																														_0: _user$project$Gallery$vl59,
+																																																														_1: {
+																																																															ctor: '::',
+																																																															_0: _user$project$Gallery$vl60,
+																																																															_1: {ctor: '[]'}
+																																																														}
+																																																													}
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}))
+};
+var _user$project$Gallery$main = _elm_lang$core$Platform$program(
+	{init: _user$project$Gallery$init, update: _user$project$Gallery$update, subscriptions: _user$project$Gallery$subscriptions})();
+var _user$project$Gallery$FromElm = {ctor: 'FromElm'};
+
+var Elm = {};
+Elm['Gallery'] = Elm['Gallery'] || {};
+if (typeof _user$project$Gallery$main !== 'undefined') {
+    _user$project$Gallery$main(Elm['Gallery'], 'Gallery', undefined);
+}
+
+if (typeof define === "function" && define['amd'])
+{
+  define([], function() { return Elm; });
+  return;
+}
+
+if (typeof module === "object")
+{
+  module['exports'] = Elm;
+  return;
+}
+
+var globalElm = this['Elm'];
+if (typeof globalElm === "undefined")
+{
+  this['Elm'] = Elm;
+  return;
+}
+
+for (var publicModule in Elm)
+{
+  if (publicModule in globalElm)
+  {
+    throw new Error('There are two Elm modules called `' + publicModule + '` on this page! Rename one of them.');
+  }
+  globalElm[publicModule] = Elm[publicModule];
+}
+
+}).call(this);
+
