@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Vega-Lite Gallery Generated in Elm</title>
+  <meta charset="utf-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.1/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc6/vega-embed.js"></script>
+  <script src="gallery.js"></script>
+</head>
+
+<body>
+  <h1>Vega-Lite Gallery</h1>
+
+  <table border="0">
+    <tr>
+      <td id="vis1"></td>
+      <td id="vis2"></td>
+      <td id="vis3"></td>
+      <td id="vis4"></td>
+    </tr>
+
+    <tr>
+      <td id="vis5" colspan="4"></td>
+
+    </tr>
+
+    <tr>
+      <td id="vis6"></td>
+      <td id="vis7"></td>
+      <td id="vis8"></td>
+      <td id="vis10"></td>
+    </tr>
+
+    <tr>
+      <td id="vis11" colspan="2"></td>
+      <td id="vis9" colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td id="vis12"></td>
+      <td id="vis13"></td>
+      <td id="vis14"></td>
+      <td id="vis15"></td>
+    </tr>
+
+    <tr>
+      <td id="vis16"></td>
+      <td id="vis17"></td>
+      <td id="vis18"></td>
+      <td id="vis19"></td>
+    </tr>
+
+    <tr>
+      <td id="vis20" colspan="2"></td>
+      <td id="vis21" colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td id="vis22"></td>
+      <td id="vis23"></td>
+      <td id="vis24"></td>
+      <td id="vis28"></td>
+    </tr>
+
+    <tr>
+      <td id="vis26" colspan="2"></td>
+      <td id="vis25"></td>
+      <td id="vis27"></td>
+    </tr>
+
+    <tr>
+      <td id="vis29" colspan="2"></td>
+      <td id="vis30" colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td id="vis31" colspan="2"></td>
+      <td id="vis32" colspan="2"></td>
+
+    </tr>
+
+    <tr>
+      <td id="vis34"></td>
+      <td id="vis33" colspan="3"></td>
+    </tr>
+
+    <tr>
+      <td id="vis35" colspan="2"></td>
+      <td id="vis36"></td>
+      <td id="vis37"></td>
+    </tr>
+
+    <tr>
+      <td id="vis38" colspan="2"></td>
+      <td id="vis39"></td>
+      <td id="vis40"></td>
+    </tr>
+
+    <tr>
+      <td id="vis41" colspan="2"></td>
+      <td id="vis42"></td>
+      <td id="vis43"></td>
+    </tr>
+
+    <tr>
+      <td id="vis44"></td>
+      <td id="vis45"></td>
+      <td id="vis46"></td>
+      <td id="vis47"></td>
+    </tr>
+
+    <tr>
+      <td id="vis48"></td>
+      <td id="vis49"></td>
+      <td id="vis50"></td>
+      <td id="vis51"></td>
+    </tr>
+
+
+    <tr>
+      <td id="vis52"></td>
+      <td id="vis53"></td>
+      <td id="vis54"></td>
+      <td id="vis55"></td>
+    </tr>
+
+    <tr>
+      <td id="vis56"></td>
+      <td id="vis57" colspan="2"></td>
+      <td id="vis58"></td>
+    </tr>
+
+    <tr>
+      <td id="vis59" colspan="2"></td>
+      <td id="vis60" colspan="2"></td>
+    </tr>
+
+  </table>
+
+
+  <script>
+    Elm.Gallery.worker().ports.fromElm.subscribe(function(elmObj) {
+      let id = 1;
+      for (let obj of elmObj) {
+        vegaEmbed("#vis" + id++, obj, {
+          actions: {"export":false, "source":false, "editor":true}, logLevel:vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
