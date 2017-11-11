@@ -1181,7 +1181,7 @@ type ScaleProperty
     = SType Scale
     | SDomain ScaleDomain
     | SRange ScaleRange
-    | SScheme String
+    | SScheme String (List Float)
     | SPadding Float
     | SPaddingInner Float
     | SPaddingOuter Float
@@ -3700,8 +3700,13 @@ scaleProperty scaleProp =
                 RName s ->
                     ( "range", JE.string s )
 
-        SScheme sch ->
-            ( "scheme", JE.string sch )
+        SScheme name extent ->
+            case extent of
+                [ mn, mx ] ->
+                    ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
+
+                _ ->
+                    ( "scheme", JE.string name )
 
         SPadding x ->
             ( "padding", JE.float x )
