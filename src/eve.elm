@@ -1066,15 +1066,17 @@ named colour scheme such as `accent` or `purpleorange-11`. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
 -}
 type RangeConfig
-    = RCategory String
-    | RDiverging String
-    | RHeatmap String
-    | ROrdinal String
-    | RRamp String
-    | RSymbol String
+    = RCategory String (List Float)
+    | RDiverging String (List Float)
+    | RHeatmap String (List Float)
+    | ROrdinal String (List Float)
+    | RRamp String (List Float)
+    | RSymbol String (List Float)
 
 
-{-| TODO: XXXX
+{-| Create a list of fields to use in set of repeated small multiples. The list of
+fields named here can be referenced in an encoding with `PRepeat Column`, `PRepeat Row`
+etc.
 -}
 type RepeatFields
     = RowFields (List String)
@@ -1600,7 +1602,7 @@ dataFromUrl url fmts =
 
     enc = ...
     toVegaLite
-        [ descriptions "Population change of key regions since 1900"
+        [ description "Population change of key regions since 1900"
         , dataFromUrl "data/population.json"
         , mark Bar []
         , enc
@@ -1614,32 +1616,17 @@ description s =
 
 {-| Encode a 'level of detail' channel. This provides a way of grouping by a field
 but unlike, say `color`, all groups have the same visual properties. The first
-parameter is a list of the mark fields to be grouped. The second parameter is a
-list of any previous channels to which this shape channel should be added. See the
+parameter is a list of the field characteristics to be grouped. The second parameter
+is a list of any previous channels to which this shape channel should be added. See the
 [Vega-Lite documentation])(<https://vega.github.io/vega-lite/docs/encoding.html#detail>)
 for details.
 
-    detail [ MName "Species", MmType Nominal ] []
+    detail [ DName "Species", DmType Nominal ] []
 
 -}
-
-
-
--- TODO: XXXX Replace MarkChannel with DetailChannel restricting options to field name and type. Update documentation comments above.
-
-
 detail : List DetailChannel -> List LabelledSpec -> List LabelledSpec
 detail detailProps =
     (::) ( "detail", List.map detailChannelProperty detailProps |> JE.object )
-
-
-
--- dimension : List Dimension -> Spec
--- dimension dims =
---
---         JE.object [ ( "url", JE.string url ) ]
---     else
---         JE.object [ ( "url", JE.string url ), ( "format", JE.object (List.map format fmts) ) ]
 
 
 {-| Create an encoding specification from a list of channel encodings.
@@ -1817,17 +1804,6 @@ mark mark mProps =
             )
 
 
-{-| Identifies the measurement type of the field (typcially a data column name)
-to be used in some form of channel encoding.
-
-    TODO: XXXX
-
--}
-mType : Measurement -> LabelledSpec
-mType m =
-    ( "type", JE.string (measurementLabel m) )
-
-
 {-| Provides an optional name to be associated with the visualization.
 
     enc = ...
@@ -1938,7 +1914,8 @@ pairing the channel to which it applies and the rule type.
 The first parameter identifies the type of resolution, the second a list of previous
 resolutions to which this one may be added.
 
-TODO:XXX Add example
+    resolve
+        << resolution (RScale [ ( ChY, Independent ) ])
 
 -}
 resolution : Resolve -> List LabelledSpec -> List LabelledSpec
@@ -1997,9 +1974,11 @@ be specified. The fourth is a list of selections to which this is added, which i
 commonly implicit when chaining a series of selections together with functional
 composition.
 
-TODO: XXXX Consider an additional input element example
-
-    select "view" Interval [ Bind Scales ] []
+    sel =
+        selection
+            << select "view" Interval [ Bind Scales ] []
+            << select "myBrush" Interval []
+            << select "myPaintbrush" Multi [ On "mouseover", Nearest True ]
 
 -}
 select : String -> Selection -> List SelectionProperty -> List LabelledSpec -> List LabelledSpec
@@ -2126,7 +2105,6 @@ allows This to be done compactly.
 -}
 toVegaLite : List ( Property, Spec ) -> Spec
 toVegaLite spec =
-    -- TODO: XXXX Add description field
     ( "$schema", JE.string "https://vega.github.io/schema/vega-lite/v2.json" )
         :: List.map (\( s, v ) -> ( propertyLabel s, v )) spec
         |> JE.object
@@ -3530,23 +3508,23 @@ positionLabel pChannel =
 rangeConfig : RangeConfig -> LabelledSpec
 rangeConfig rangeCfg =
     case rangeCfg of
-        RCategory sch ->
-            ( "category", scheme sch )
+        RCategory name extent ->
+            ( "category", JE.object [ scheme name extent ] )
 
-        RDiverging sch ->
-            ( "diverging", scheme sch )
+        RDiverging name extent ->
+            ( "diverging", JE.object [ scheme name extent ] )
 
-        RHeatmap sch ->
-            ( "heatmap", scheme sch )
+        RHeatmap name extent ->
+            ( "heatmap", JE.object [ scheme name extent ] )
 
-        ROrdinal sch ->
-            ( "ordinal", scheme sch )
+        ROrdinal name extent ->
+            ( "ordinal", JE.object [ scheme name extent ] )
 
-        RRamp sch ->
-            ( "ramp", scheme sch )
+        RRamp name extent ->
+            ( "ramp", JE.object [ scheme name extent ] )
 
-        RSymbol sch ->
-            ( "symbol", scheme sch )
+        RSymbol name extent ->
+            ( "symbol", JE.object [ scheme name extent ] )
 
 
 repeatFields : RepeatFields -> LabelledSpec
@@ -3701,12 +3679,7 @@ scaleProperty scaleProp =
                     ( "range", JE.string s )
 
         SScheme name extent ->
-            case extent of
-                [ mn, mx ] ->
-                    ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
-
-                _ ->
-                    ( "scheme", JE.string name )
+            scheme name extent
 
         SPadding x ->
             ( "padding", JE.float x )
@@ -3794,9 +3767,14 @@ scaleLabel scType =
             "bin-ordinal"
 
 
-scheme : String -> Spec
-scheme sch =
-    JE.object [ ( "scheme", JE.string sch ) ]
+scheme : String -> List Float -> LabelledSpec
+scheme name extent =
+    case extent of
+        [ mn, mx ] ->
+            ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
+
+        _ ->
+            ( "scheme", JE.string name )
 
 
 selectionLabel : Selection -> String

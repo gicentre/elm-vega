@@ -2105,44 +2105,50 @@
           [
             "RCategory",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
             "RDiverging",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
             "RHeatmap",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
             "ROrdinal",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
             "RRamp",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
             "RSymbol",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ]
         ]
       },
       {
         "name": "RepeatFields",
-        "comment": " TODO: XXXX\n",
+        "comment": " Create a list of fields to use in set of repeated small multiples. The list of\nfields named here can be referenced in an encoding with `PRepeat Column`, `PRepeat Row`\netc.\n",
         "args": [],
         "cases": [
           [
@@ -2481,7 +2487,8 @@
           [
             "SScheme",
             [
-              "String"
+              "String",
+              "List Float"
             ]
           ],
           [
@@ -3197,12 +3204,12 @@
       },
       {
         "name": "description",
-        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ descriptions \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc\n        ]\n\n",
+        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ description \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc\n        ]\n\n",
         "type": "String -> ( Eve.Property, Eve.Spec )"
       },
       {
         "name": "detail",
-        "comment": " Encode a 'level of detail' channel. This provides a way of grouping by a field\nbut unlike, say `color`, all groups have the same visual properties. The first\nparameter is a list of the mark fields to be grouped. The second parameter is a\nlist of any previous channels to which this shape channel should be added. See the\n[Vega-Lite documentation])(<https://vega.github.io/vega-lite/docs/encoding.html#detail>)\nfor details.\n\n    detail [ MName \"Species\", MmType Nominal ] []\n\n",
+        "comment": " Encode a 'level of detail' channel. This provides a way of grouping by a field\nbut unlike, say `color`, all groups have the same visual properties. The first\nparameter is a list of the field characteristics to be grouped. The second parameter\nis a list of any previous channels to which this shape channel should be added. See the\n[Vega-Lite documentation])(<https://vega.github.io/vega-lite/docs/encoding.html#detail>)\nfor details.\n\n    detail [ DName \"Species\", DmType Nominal ] []\n\n",
         "type": "List Eve.DetailChannel -> List Eve.LabelledSpec -> List Eve.LabelledSpec"
       },
       {
@@ -3272,7 +3279,7 @@
       },
       {
         "name": "resolution",
-        "comment": " Define a single resolution option to be applied when scales, axes or legends\nin composite views share channel encodings. This allows, for example, two different\ncolour encodings to be created in a layered view, which otherwise by default would\nshare colour channels between layers. Each resolution rule should be in a tuple\npairing the channel to which it applies and the rule type.\nThe first parameter identifies the type of resolution, the second a list of previous\nresolutions to which this one may be added.\n\nTODO:XXX Add example\n\n",
+        "comment": " Define a single resolution option to be applied when scales, axes or legends\nin composite views share channel encodings. This allows, for example, two different\ncolour encodings to be created in a layered view, which otherwise by default would\nshare colour channels between layers. Each resolution rule should be in a tuple\npairing the channel to which it applies and the rule type.\nThe first parameter identifies the type of resolution, the second a list of previous\nresolutions to which this one may be added.\n\n    resolve\n        << resolution (RScale [ ( ChY, Independent ) ])\n\n",
         "type": "Eve.Resolve -> List Eve.LabelledSpec -> List Eve.LabelledSpec"
       },
       {
@@ -3287,7 +3294,7 @@
       },
       {
         "name": "select",
-        "comment": " Create a single named selection that may be applied to a data query or transformation.\nThe first two parameters specify the name to be given to the selection for later reference\nand the type of selection made. The third allows additional selection options to\nbe specified. The fourth is a list of selections to which this is added, which is\ncommonly implicit when chaining a series of selections together with functional\ncomposition.\n\nTODO: XXXX Consider an additional input element example\n\n    select \"view\" Interval [ Bind Scales ] []\n\n",
+        "comment": " Create a single named selection that may be applied to a data query or transformation.\nThe first two parameters specify the name to be given to the selection for later reference\nand the type of selection made. The third allows additional selection options to\nbe specified. The fourth is a list of selections to which this is added, which is\ncommonly implicit when chaining a series of selections together with functional\ncomposition.\n\n    sel =\n        selection\n            << select \"view\" Interval [ Bind Scales ] []\n            << select \"myBrush\" Interval []\n            << select \"myPaintbrush\" Multi [ On \"mouseover\", Nearest True ]\n\n",
         "type": "String -> Eve.Selection -> List Eve.SelectionProperty -> List Eve.LabelledSpec -> List Eve.LabelledSpec"
       },
       {
