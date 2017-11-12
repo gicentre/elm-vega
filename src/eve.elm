@@ -1066,12 +1066,12 @@ named colour scheme such as `accent` or `purpleorange-11`. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
 -}
 type RangeConfig
-    = RCategory String (List Float)
-    | RDiverging String (List Float)
-    | RHeatmap String (List Float)
-    | ROrdinal String (List Float)
-    | RRamp String (List Float)
-    | RSymbol String (List Float)
+    = RCategory String
+    | RDiverging String
+    | RHeatmap String
+    | ROrdinal String
+    | RRamp String
+    | RSymbol String
 
 
 {-| Create a list of fields to use in set of repeated small multiples. The list of
@@ -3508,23 +3508,23 @@ positionLabel pChannel =
 rangeConfig : RangeConfig -> LabelledSpec
 rangeConfig rangeCfg =
     case rangeCfg of
-        RCategory name extent ->
-            ( "category", JE.object [ scheme name extent ] )
+        RCategory name ->
+            ( "category", JE.object [ scheme name [] ] )
 
-        RDiverging name extent ->
-            ( "diverging", JE.object [ scheme name extent ] )
+        RDiverging name ->
+            ( "diverging", JE.object [ scheme name [] ] )
 
-        RHeatmap name extent ->
-            ( "heatmap", JE.object [ scheme name extent ] )
+        RHeatmap name ->
+            ( "heatmap", JE.object [ scheme name [] ] )
 
-        ROrdinal name extent ->
-            ( "ordinal", JE.object [ scheme name extent ] )
+        ROrdinal name ->
+            ( "ordinal", JE.object [ scheme name [] ] )
 
-        RRamp name extent ->
-            ( "ramp", JE.object [ scheme name extent ] )
+        RRamp name ->
+            ( "ramp", JE.object [ scheme name [] ] )
 
-        RSymbol name extent ->
-            ( "symbol", JE.object [ scheme name extent ] )
+        RSymbol name ->
+            ( "symbol", JE.object [ scheme name [] ] )
 
 
 repeatFields : RepeatFields -> LabelledSpec
