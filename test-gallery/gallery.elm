@@ -24,11 +24,15 @@ port fromElm : Spec -> Cmd msg
 
 -- NOTE: All data sources in these examples originally provided at
 -- https://vega.github.io/vega-datasets/
+-- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
 
 
 vl1 : Spec
 vl1 =
     let
+        des =
+            description "A simple bar chart with embedded data."
+
         data =
             dataFromColumns []
                 << dataColumn "a" (Strings [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ])
@@ -39,12 +43,15 @@ vl1 =
                 << position X [ PName "a", PmType Ordinal ]
                 << position Y [ PName "b", PmType Quantitative ]
     in
-    toVegaLite [ data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
 vl2 : Spec
 vl2 =
     let
+        des =
+            description "A bar chart showing the US population distribution of age groups in 2000."
+
         trans =
             transform << filter (FExpr "datum.year == 2000")
 
@@ -53,23 +60,29 @@ vl2 =
                 << position X [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "population" ] ]
                 << position Y [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [] ]
 
 
 vl3 : Spec
 vl3 =
     let
+        des =
+            description "Simple histogram of IMDB ratings."
+
         enc =
             encoding
                 << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [] ]
                 << position Y [ PmType Quantitative, PAggregate Count ]
     in
-    toVegaLite [ dataFromUrl "data/movies.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Bar [], enc [] ]
 
 
 vl4 : Spec
 vl4 =
     let
+        des =
+            description "A simple bar chart with ranged data (aka Gantt Chart)."
+
         data =
             dataFromColumns []
                 << dataColumn "task" (Strings [ "A", "B", "C" ])
@@ -82,12 +95,15 @@ vl4 =
                 << position X [ PName "start", PmType Quantitative ]
                 << position X2 [ PName "end", PmType Quantitative ]
     in
-    toVegaLite [ data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
 vl5 : Spec
 vl5 =
     let
+        des =
+            description "Grouped bar chart shoing population structure by age and gender."
+
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
@@ -105,58 +121,58 @@ vl5 =
                 << configuration (Axis [ DomainWidth 1 ])
                 << configuration (View [ Stroke Nothing ])
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [], config [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [], config [] ]
 
 
 vl6 : Spec
 vl6 =
     let
+        des =
+            description "A scatterplot showing horsepower and miles per gallon for various cars (via point marks)."
+
         enc =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
 vl7 : Spec
 vl7 =
     let
+        des =
+            description "A scatterplot showing horsepower and miles per gallon for various cars (via circle marks)."
+
         enc =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << size [ MName "Acceleration", MmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
 
 
 vl8 : Spec
 vl8 =
     let
-        enc =
-            encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-    in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
+        des =
+            description "A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews."
 
-
-vl9 : Spec
-vl9 =
-    let
         enc =
             encoding
                 << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
                 << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
                 << size [ MAggregate Count, MmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/movies.json" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Circle [], enc [] ]
 
 
-vl10 : Spec
-vl10 =
+vl9 : Spec
+vl9 =
     let
+        des =
+            description "A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape."
+
         enc =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
@@ -164,12 +180,30 @@ vl10 =
                 << color [ MName "Origin", MmType Nominal ]
                 << shape [ MName "Origin", MmType Nominal ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+
+
+vl10 : Spec
+vl10 =
+    let
+        des =
+            description "A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size."
+
+        enc =
+            encoding
+                << position X [ PName "Horsepower", PmType Quantitative ]
+                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << size [ MName "Acceleration", MmType Quantitative ]
+    in
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
 vl11 : Spec
 vl11 =
     let
+        des =
+            description "A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost's blog post 'One Chart, Twelve Charting Libraries' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/)."
+
         enc =
             encoding
                 << position X [ PName "income", PmType Quantitative, PScale [ SType ScLog ] ]
@@ -181,7 +215,8 @@ vl11 =
             selection << select "view" Interval [ BindScales ]
     in
     toVegaLite
-        [ width 500
+        [ des
+        , width 500
         , height 300
         , dataFromUrl "data/gapminder-health-income.csv" []
         , mark Circle []
@@ -193,17 +228,23 @@ vl11 =
 vl12 : Spec
 vl12 =
     let
+        des =
+            description "Shows the relationship between horsepower and the number of cylinders using tick marks."
+
         enc =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Cylinders", PmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
 
 
 vl13 : Spec
 vl13 =
     let
+        des =
+            description "Google's stock price over time."
+
         trans =
             transform << filter (FExpr "datum.symbol === 'GOOG'")
 
@@ -212,36 +253,45 @@ vl13 =
                 << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y" ] ]
                 << position Y [ PName "price", PmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
 
 
 vl14 : Spec
 vl14 =
     let
+        des =
+            description "Stock prices of 5 tech companies over time."
+
         enc =
             encoding
                 << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y" ] ]
                 << position Y [ PName "price", PmType Quantitative ]
                 << color [ MName "symbol", MmType Nominal ]
     in
-    toVegaLite [ dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
 
 
 vl15 : Spec
 vl15 =
     let
+        des =
+            description "Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site."
+
         enc =
             encoding
                 << position X [ PName "year", PmType Ordinal, PScale [ SRangeStep (Just 50), SPadding 0.5 ] ]
                 << position Y [ PName "yield", PmType Quantitative, PAggregate Median ]
                 << color [ MName "site", MmType Nominal ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
 
 
 vl16 : Spec
 vl16 =
     let
+        des =
+            description "Google's stock price over time (quantized as a step-chart)."
+
         trans =
             transform << filter (FExpr "datum.symbol === 'GOOG'")
 
@@ -250,37 +300,23 @@ vl16 =
                 << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y" ] ]
                 << position Y [ PName "price", PmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
 
 
 vl17 : Spec
 vl17 =
     let
-        enc =
-            encoding
-                << position X [ PName "miles", PmType Quantitative, PScale [ SZero False ] ]
-                << position Y [ PName "gas", PmType Quantitative, PScale [ SZero False ] ]
-                << order [ OName "year", OmType Temporal ]
+        des =
+            description "Unemployment over time (area chart)"
 
-        specLine =
-            asSpec [ enc [], mark Line [] ]
-
-        specPoint =
-            asSpec [ enc [], mark Point [ MFilled True ] ]
-    in
-    toVegaLite [ dataFromUrl "data/driving.json" [], layer [ specLine, specPoint ] ]
-
-
-vl18 : Spec
-vl18 =
-    let
         enc =
             encoding
                 << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Format "%Y" ] ]
                 << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Count" ] ]
     in
     toVegaLite
-        [ width 300
+        [ des
+        , width 300
         , height 200
         , dataFromUrl "data/unemployment-across-industries.json" []
         , mark Area []
@@ -288,21 +324,27 @@ vl18 =
         ]
 
 
-vl19 : Spec
-vl19 =
+vl18 : Spec
+vl18 =
     let
+        des =
+            description "'Table heatmap' showing engine size/power for three countries."
+
         enc =
             encoding
                 << position X [ PName "Cylinders", PmType Ordinal ]
                 << position Y [ PName "Origin", PmType Nominal ]
                 << color [ MName "Horsepower", MmType Quantitative, MAggregate Mean ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
 
 
-vl20 : Spec
-vl20 =
+vl19 : Spec
+vl19 =
     let
+        des =
+            description "'Binned heatmap' comparing movie ratings."
+
         enc =
             encoding
                 << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [ MaxBins 60 ] ]
@@ -315,7 +357,8 @@ vl20 =
                 << configuration (View [ Stroke Nothing ])
     in
     toVegaLite
-        [ width 300
+        [ des
+        , width 300
         , height 200
         , dataFromUrl "data/movies.json" []
         , mark Rect []
@@ -324,21 +367,27 @@ vl20 =
         ]
 
 
-vl21 : Spec
-vl21 =
+vl20 : Spec
+vl20 =
     let
+        des =
+            description "Table bubble plot in the style of a Github punched card."
+
         enc =
             encoding
                 << position X [ PName "time", PmType Ordinal, PTimeUnit Hours ]
                 << position Y [ PName "time", PmType Ordinal, PTimeUnit Day ]
                 << size [ MName "count", MmType Quantitative, MAggregate Sum ]
     in
-    toVegaLite [ dataFromUrl "data/github.csv" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/github.csv" [], mark Circle [], enc [] ]
 
 
-vl22 : Spec
-vl22 =
+vl21 : Spec
+vl21 =
     let
+        des =
+            description "Seattle weather stacked bar chart"
+
         enc =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month, PAxis [ AxTitle "Month of the year" ] ]
@@ -353,24 +402,30 @@ vl22 =
                     , MLegend [ LTitle "Weather type" ]
                     ]
     in
-    toVegaLite [ dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
 
 
-vl23 : Spec
-vl23 =
+vl22 : Spec
+vl22 =
     let
+        des =
+            description "Barley crop yields as a horizontal stacked bar chart"
+
         enc =
             encoding
                 << position X [ PName "yield", PmType Quantitative, PAggregate Sum ]
                 << position Y [ PName "variety", PmType Nominal ]
                 << color [ MName "site", MmType Nominal ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
 
 
-vl24 : Spec
-vl24 =
+vl23 : Spec
+vl23 =
     let
+        des =
+            description "Population structure as a normalised stacked bar chart."
+
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
@@ -382,32 +437,61 @@ vl24 =
                 << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Population" ], PStack StNormalize ]
                 << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
+
+
+vl24 : Spec
+vl24 =
+    let
+        des =
+            description "Unemployment across industries as a stacked area chart."
+
+        enc =
+            encoding
+                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Format "%Y" ] ]
+                << position Y [ PName "count", PmType Quantitative, PAggregate Sum ]
+                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
+    in
+    toVegaLite [ des, dataFromUrl "data/unemployment-across-industries.json" [], mark Area [], enc [] ]
 
 
 vl25 : Spec
 vl25 =
     let
+        des =
+            description "Unemployment across industries as a normalised area chart."
+
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Format "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" ] ]
+                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Domain False, Format "%Y" ] ]
+                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StNormalize ]
+                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
     in
-    toVegaLite [ dataFromUrl "data/unemployment-across-industries.json" [], mark Area [], enc [] ]
+    toVegaLite
+        [ des
+        , width 300
+        , height 200
+        , dataFromUrl "data/unemployment-across-industries.json" []
+        , mark Area []
+        , enc []
+        ]
 
 
 vl26 : Spec
 vl26 =
     let
+        des =
+            description "Unemployment across industries as a streamgraph (centred, stacked area chart)."
+
         enc =
             encoding
                 << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Domain False, Format "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StNormalize ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" ] ]
+                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StCenter ]
+                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
     in
     toVegaLite
-        [ width 300
+        [ des
+        , width 300
         , height 200
         , dataFromUrl "data/unemployment-across-industries.json" []
         , mark Area []
@@ -418,24 +502,9 @@ vl26 =
 vl27 : Spec
 vl27 =
     let
-        enc =
-            encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ Domain False, Format "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StCenter ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" ] ]
-    in
-    toVegaLite
-        [ width 300
-        , height 200
-        , dataFromUrl "data/unemployment-across-industries.json" []
-        , mark Area []
-        , enc []
-        ]
+        des =
+            description "Layered bar chart showing the US population distribution of age groups and gender in 2000."
 
-
-vl28 : Spec
-vl28 =
-    let
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
@@ -448,12 +517,15 @@ vl28 =
                 << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#e377c2", "#1f77b4" ]) ] ]
                 << opacity [ MNumber 0.7 ]
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
 
 
-vl29 : Spec
-vl29 =
+vl28 : Spec
+vl28 =
     let
+        des =
+            description "A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark."
+
         data =
             dataFromColumns []
                 << dataColumn "question" (Strings [ "Q1", "Q1", "Q1", "Q1", "Q1", "Q2", "Q2", "Q2", "Q2", "Q2", "Q3", "Q3", "Q3", "Q3", "Q3", "Q4", "Q4", "Q4", "Q4", "Q4", "Q5", "Q5", "Q5", "Q5", "Q5", "Q6", "Q6", "Q6", "Q6", "Q6", "Q7", "Q7", "Q7", "Q7", "Q7", "Q8", "Q8", "Q8", "Q8", "Q8" ])
@@ -479,12 +551,15 @@ vl29 =
                         ]
                     ]
     in
-    toVegaLite [ data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
-vl30 : Spec
-vl30 =
+vl29 : Spec
+vl29 =
     let
+        des =
+            description "Anscombe's Quartet"
+
         enc =
             encoding
                 << position X [ PName "X", PmType Quantitative, PScale [ SZero False ] ]
@@ -492,12 +567,15 @@ vl30 =
                 << opacity [ MNumber 1 ]
                 << column [ FName "Series", FmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/anscombe.json" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/anscombe.json" [], mark Circle [], enc [] ]
 
 
-vl31 : Spec
-vl31 =
+vl30 : Spec
+vl30 =
     let
+        des =
+            description "A trellis bar chart showing the US population distribution of age groups and gender in 2000."
+
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
@@ -511,16 +589,20 @@ vl31 =
                 << row [ FName "gender", FmType Nominal ]
     in
     toVegaLite
-        [ dataFromUrl "data/population.json" []
+        [ des
+        , dataFromUrl "data/population.json" []
         , trans []
         , mark Bar []
         , enc []
         ]
 
 
-vl32 : Spec
-vl32 =
+vl31 : Spec
+vl31 =
     let
+        des =
+            description "Barley crop yields in 1931 and 1932 shown as stacked bar charts."
+
         enc =
             encoding
                 << position X [ PName "yield", PmType Quantitative, PAggregate Sum ]
@@ -528,36 +610,45 @@ vl32 =
                 << color [ MName "site", MmType Nominal ]
                 << column [ FName "year", FmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
 
 
-vl33 : Spec
-vl33 =
+vl32 : Spec
+vl32 =
     let
+        des =
+            description "Scatterplots of movie takings vs profits for different MPAA ratings."
+
         enc =
             encoding
                 << position X [ PName "Worldwide_Gross", PmType Quantitative ]
                 << position Y [ PName "US_DVD_Sales", PmType Quantitative ]
                 << column [ FName "MPAA_Rating", FmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/movies.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Point [], enc [] ]
 
 
-vl34 : Spec
-vl34 =
+vl33 : Spec
+vl33 =
     let
+        des =
+            description "Disitributions of car engine power for different countries of origin."
+
         enc =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative, PBin [ MaxBins 15 ] ]
                 << position Y [ PmType Quantitative, PAggregate Count ]
                 << row [ FName "Origin", FmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
 
 
-vl35 : Spec
-vl35 =
+vl34 : Spec
+vl34 =
     let
+        des =
+            description "The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison."
+
         enc =
             encoding
                 << position X [ PName "yield", PmType Quantitative, PAggregate Median, PScale [ SZero False ] ]
@@ -565,12 +656,34 @@ vl35 =
                 << color [ MName "year", MmType Nominal ]
                 << row [ FName "site", FmType Ordinal ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Point [], enc [] ]
+
+
+vl35 : Spec
+vl35 =
+    let
+        des =
+            description "Stock prices of four large companies as a small multiples of area charts."
+
+        trans =
+            transform << filter (FExpr "datum.symbol !== 'GOOG'")
+
+        enc =
+            encoding
+                << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y", AxTitle "Time", Grid False ] ]
+                << position Y [ PName "price", PmType Quantitative, PAxis [ AxTitle "Time", Grid False ] ]
+                << color [ MName "symbol", MmType Nominal, MLegend [] ]
+                << row [ FName "symbol", FmType Nominal, FHeader [ HTitle "Company" ] ]
+    in
+    toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], mark Area [], enc [] ]
 
 
 vl36 : Spec
 vl36 =
     let
+        des =
+            description "A simple bar chart with embedded data labels."
+
         data =
             dataFromColumns []
                 << dataColumn "a" (Strings [ "A", "B", "C" ])
@@ -596,12 +709,15 @@ vl36 =
         config =
             configure << configuration (NamedStyle "label" [ MAlign AlignLeft, MBaseline AlignMiddle, MdX 3 ])
     in
-    toVegaLite [ data [], layer [ specBar, specText ], config [] ]
+    toVegaLite [ des, data [], layer [ specBar, specText ], config [] ]
 
 
 vl37 : Spec
 vl37 =
     let
+        des =
+            description "Monthly precipitation with mean value overlay."
+
         encBar =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
@@ -619,12 +735,15 @@ vl37 =
         specLine =
             asSpec [ mark Rule [], encLine [] ]
     in
-    toVegaLite [ dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ] ]
+    toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ] ]
 
 
 vl38 : Spec
 vl38 =
     let
+        des =
+            description "Layering text over 'heatmap'."
+
         encRect =
             encoding
                 << position X [ PName "Cylinders", PmType Ordinal ]
@@ -649,12 +768,15 @@ vl38 =
                 << configuration (Scale [ SCBandPaddingInner 0, SCBandPaddingOuter 0 ])
                 << configuration (TextStyle [ MBaseline AlignMiddle ])
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], layer [ specRect, specText ], config [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specRect, specText ], config [] ]
 
 
 vl39 : Spec
 vl39 =
     let
+        des =
+            description "A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000."
+
         trans =
             transform
                 << aggregate
@@ -704,12 +826,15 @@ vl39 =
         specBoxMid =
             asSpec [ mark Tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
 vl40 : Spec
 vl40 =
     let
+        des =
+            description "A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn't strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts."
+
         trans =
             transform
                 << aggregate [ opAs Q1 "people" "lowerBox", opAs Median "people" "midBox", opAs Q3 "people" "upperBox" ] [ "age" ]
@@ -757,12 +882,15 @@ vl40 =
             asSpec
                 [ mark Tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
     in
-    toVegaLite [ dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
 vl41 : Spec
 vl41 =
     let
+        des =
+            description "A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)"
+
         data =
             dataFromColumns []
                 << dataColumn "date" (Strings [ "01-Jun-2009", "02-Jun-2009", "03-Jun-2009", "04-Jun-2009", "05-Jun-2009", "08-Jun-2009", "09-Jun-2009", "10-Jun-2009", "11-Jun-2009", "12-Jun-2009", "15-Jun-2009", "16-Jun-2009", "17-Jun-2009", "18-Jun-2009", "19-Jun-2009", "22-Jun-2009", "23-Jun-2009", "24-Jun-2009", "25-Jun-2009", "26-Jun-2009", "29-Jun-2009", "30-Jun-2009" ])
@@ -803,12 +931,15 @@ vl41 =
         specBar =
             asSpec [ mark Bar [], encBar [] ]
     in
-    toVegaLite [ width 320, data [], trans [], layer [ specLine, specBar ] ]
+    toVegaLite [ des, width 320, data [], trans [], layer [ specLine, specBar ] ]
 
 
 vl42 : Spec
 vl42 =
     let
+        des =
+            description "Error bars showing confidence intervals"
+
         encPoints =
             encoding
                 << position X [ PName "yield", PmType Quantitative, PAggregate Mean, PScale [ SZero False ], PAxis [ AxTitle "Barley Yield" ] ]
@@ -827,12 +958,15 @@ vl42 =
         specCIs =
             asSpec [ mark Rule [], encCIs [] ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], layer [ specPoints, specCIs ] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], layer [ specPoints, specCIs ] ]
 
 
 vl43 : Spec
 vl43 =
     let
+        des =
+            description "Error bars showing standard deviation."
+
         trans =
             transform
                 << aggregate [ opAs Mean "yield" "mean", opAs Stdev "yield" "stdev" ] [ "variety" ]
@@ -857,12 +991,15 @@ vl43 =
         specStdevs =
             asSpec [ mark Rule [], encStdevs [] ]
     in
-    toVegaLite [ dataFromUrl "data/barley.json" [], trans [], layer [ specMeans, specStdevs ] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], trans [], layer [ specMeans, specStdevs ] ]
 
 
 vl44 : Spec
 vl44 =
     let
+        des =
+            description "Histogram with global mean overlay."
+
         encBars =
             encoding
                 << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [], PAxis [] ]
@@ -880,12 +1017,15 @@ vl44 =
         specMean =
             asSpec [ mark Rule [], encMean [] ]
     in
-    toVegaLite [ dataFromUrl "data/movies.json" [], layer [ specBars, specMean ] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], layer [ specBars, specMean ] ]
 
 
 vl45 : Spec
 vl45 =
     let
+        des =
+            description "A scatterplot showing horsepower and miles per gallon for various cars with a global mean and standard deviation overlay."
+
         encPoints =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
@@ -918,12 +1058,15 @@ vl45 =
         specSpread =
             asSpec [ trans [], layer [ specMean, specRect ] ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], layer [ specPoints, specSpread ] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specPoints, specSpread ] ]
 
 
 vl46 : Spec
 vl46 =
     let
+        des =
+            description "Line chart with confidence interval band."
+
         encBand =
             encoding
                 << position X [ PName "Year", PmType Temporal, PTimeUnit Year ]
@@ -942,12 +1085,15 @@ vl46 =
         specLine =
             asSpec [ mark Line [], encLine [] ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], layer [ specBand, specLine ] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specBand, specLine ] ]
 
 
 vl47 : Spec
 vl47 =
     let
+        des =
+            description "The population of the German city of Falkensee over time with annotated time periods highlighted."
+
         data =
             dataFromColumns [ Parse [ ( "year", FDate "%Y" ) ] ]
                 << dataColumn "year" (Strings [ "1875", "1890", "1910", "1925", "1933", "1939", "1946", "1950", "1964", "1971", "1981", "1985", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" ])
@@ -980,12 +1126,15 @@ vl47 =
         specPoints =
             asSpec [ mark Point [], encPopulation [] ]
     in
-    toVegaLite [ width 500, data [], layer [ specRects, specLine, specPoints ] ]
+    toVegaLite [ des, width 500, data [], layer [ specRects, specLine, specPoints ] ]
 
 
 vl48 : Spec
 vl48 =
     let
+        des =
+            description "A ranged dot plot that uses 'layer' to convey changing life expectancy for the five most populous countries (between 1955 and 2000)."
+
         trans =
             transform
                 << filter (FOneOf "country" (Strings [ "China", "India", "United States", "Indonesia", "Brazil" ]))
@@ -1012,12 +1161,15 @@ vl48 =
         specPoints =
             asSpec [ mark Point [ MFilled True ], encPoints [] ]
     in
-    toVegaLite [ dataFromUrl "data/countries.json" [], trans [], layer [ specLine, specPoints ] ]
+    toVegaLite [ des, dataFromUrl "data/countries.json" [], trans [], layer [ specLine, specPoints ] ]
 
 
 vl49 : Spec
 vl49 =
     let
+        des =
+            description "Layered bar/line chart with dual axes."
+
         encBar =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
@@ -1039,12 +1191,15 @@ vl49 =
             resolve
                 << resolution (RScale [ ( ChY, Independent ) ])
     in
-    toVegaLite [ dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ], res [] ]
+    toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ], res [] ]
 
 
 vl50 : Spec
 vl50 =
     let
+        des =
+            description "Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)"
+
         data =
             dataFromColumns []
                 << dataColumn "x" (Numbers (List.map toFloat <| List.range 1 20))
@@ -1075,12 +1230,36 @@ vl50 =
             configure
                 << configuration (AreaStyle [ MInterpolate Monotone, MOrient Vertical ])
     in
-    toVegaLite [ width 300, height 50, data [], layer [ specLower, specUpper ], config [] ]
+    toVegaLite [ des, width 300, height 50, data [], layer [ specLower, specUpper ], config [] ]
 
 
 vl51 : Spec
 vl51 =
     let
+        des =
+            description "Connected scatterplot showing change over time."
+
+        enc =
+            encoding
+                << position X [ PName "miles", PmType Quantitative, PScale [ SZero False ] ]
+                << position Y [ PName "gas", PmType Quantitative, PScale [ SZero False ] ]
+                << order [ OName "year", OmType Temporal ]
+
+        specLine =
+            asSpec [ enc [], mark Line [] ]
+
+        specPoint =
+            asSpec [ enc [], mark Point [ MFilled True ] ]
+    in
+    toVegaLite [ des, dataFromUrl "data/driving.json" [], layer [ specLine, specPoint ] ]
+
+
+vl52 : Spec
+vl52 =
+    let
+        des =
+            description "Monthly weather information for individual years and overall average for Seatle and New York."
+
         enc1 =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
@@ -1102,7 +1281,7 @@ vl51 =
             asSpec [ mark Line [], enc2 [] ]
 
         spec =
-            asSpec [ layer [ spec1, spec2 ] ]
+            asSpec [ des, layer [ spec1, spec2 ] ]
     in
     toVegaLite
         [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FDate "%Y-%m-%d %H:%M" ) ] ]
@@ -1111,9 +1290,12 @@ vl51 =
         ]
 
 
-vl52 : Spec
-vl52 =
+vl53 : Spec
+vl53 =
     let
+        des =
+            description "Drag out a rectangular brush to highlight points."
+
         sel =
             selection << select "myBrush" Interval []
 
@@ -1126,12 +1308,15 @@ vl52 =
                     , MString "grey"
                     ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
 
 
-vl53 : Spec
-vl53 =
+vl54 : Spec
+vl54 =
     let
+        des =
+            description "Mouse over individual points or select multiple points with the shift key."
+
         sel =
             selection << select "myPaintbrush" Multi [ On "mouseover", Nearest True ]
 
@@ -1141,12 +1326,15 @@ vl53 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << size [ MCondition "myPaintbrush" [ MNumber 300 ], MNumber 50 ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
 
 
-vl54 : Spec
-vl54 =
+vl55 : Spec
+vl55 =
     let
+        des =
+            description "Drag to pan. Zoom in or out with mousewheel/zoom gesture."
+
         sel =
             selection << select "myGrid" Interval [ BindScales ]
 
@@ -1156,12 +1344,15 @@ vl54 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PScale [ SDomain (DNumbers [ 20, 40 ]) ] ]
                 << size [ MName "Cylinders", MmType Quantitative ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], mark Circle [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], sel [], enc [] ]
 
 
-vl55 : Spec
-vl55 =
+vl56 : Spec
+vl56 =
     let
+        des =
+            description "Drag the sliders to highlight points."
+
         trans =
             transform
                 << calculate "year(datum.Year)" "Year"
@@ -1200,12 +1391,15 @@ vl55 =
         spec2 =
             asSpec [ trans2 [], mark Circle [], enc2 [] ]
     in
-    toVegaLite [ dataFromUrl "data/cars.json" [], trans [], layer [ spec1, spec2 ] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], trans [], layer [ spec1, spec2 ] ]
 
 
-vl56 : Spec
-vl56 =
+vl57 : Spec
+vl57 =
     let
+        des =
+            description "Drag over bars to update selection average."
+
         sel =
             selection << select "myBrush" Interval [ Encodings [ ChX ] ]
 
@@ -1229,14 +1423,17 @@ vl56 =
                 << size [ MNumber 3 ]
 
         spec2 =
-            asSpec [ trans [], mark Rule [], enc2 [] ]
+            asSpec [ des, trans [], mark Rule [], enc2 [] ]
     in
     toVegaLite [ dataFromUrl "data/seattle-weather.csv" [], layer [ spec1, spec2 ] ]
 
 
-vl57 : Spec
-vl57 =
+vl58 : Spec
+vl58 =
     let
+        des =
+            description "Drag over lower chart to update detailed view in upper chart."
+
         sel =
             selection << select "myBrush" Interval [ Encodings [ ChX ] ]
 
@@ -1256,12 +1453,15 @@ vl57 =
         spec2 =
             asSpec [ width 480, height 60, sel [], mark Area [], enc2 [] ]
     in
-    toVegaLite [ dataFromUrl "data/sp500.csv" [], vConcat [ spec1, spec2 ] ]
+    toVegaLite [ des, dataFromUrl "data/sp500.csv" [], vConcat [ spec1, spec2 ] ]
 
 
-vl58 : Spec
-vl58 =
+vl59 : Spec
+vl59 =
     let
+        des =
+            description "Drag over any chart to cross-filter highlights in all charts."
+
         trans =
             transform
                 << calculate "hours(datum.date)" "time"
@@ -1292,7 +1492,8 @@ vl58 =
 
         spec =
             asSpec
-                [ dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FDate "" ) ] ]
+                [ des
+                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FDate "" ) ] ]
                 , trans []
                 , layer [ spec1, spec2 ]
                 ]
@@ -1303,9 +1504,12 @@ vl58 =
         ]
 
 
-vl59 : Spec
-vl59 =
+vl60 : Spec
+vl60 =
     let
+        des =
+            description "Scatterplot matrix. Drag/zoom in any scatterplot to update view of all scatterplots containing selected variables. Shift-select to highlight selected points."
+
         sel =
             selection
                 << select "myBrush"
@@ -1333,14 +1537,18 @@ vl59 =
             asSpec [ dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
     in
     toVegaLite
-        [ repeat [ RowFields [ "Horsepower", "Acceleration", "Miles_per_Gallon" ], ColumnFields [ "Miles_per_Gallon", "Acceleration", "Horsepower" ] ]
+        [ des
+        , repeat [ RowFields [ "Horsepower", "Acceleration", "Miles_per_Gallon" ], ColumnFields [ "Miles_per_Gallon", "Acceleration", "Horsepower" ] ]
         , specification spec
         ]
 
 
-vl60 : Spec
-vl60 =
+vl61 : Spec
+vl61 =
     let
+        des =
+            description "A dashboard with cross-highlighting. Select bars in lower chart to update view in upper chart."
+
         selTrans =
             transform
                 << filter (FSelection "myPts")
@@ -1387,7 +1595,7 @@ vl60 =
             resolve
                 << resolution (RLegend [ ( ChColor, Independent ), ( ChSize, Independent ) ])
     in
-    toVegaLite [ dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
+    toVegaLite [ des, width 300, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
 
 
 vlRepeatExample : Spec
@@ -1429,7 +1637,7 @@ vlFacetExample =
 
 init : ( Model, Cmd msg )
 init =
-    ( 0, fromElm <| Json.Encode.list [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60 ] )
+    ( 0, fromElm <| Json.Encode.list [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ] )
 
 
 update : Msg -> Model -> ( Model, Cmd msg )
