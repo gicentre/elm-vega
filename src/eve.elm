@@ -500,20 +500,26 @@ type BinProperty
     | Steps (List Float)
 
 
-{-| Describes the binding property of a selection. This is either the scales of
-the visualization (allowing zooming and panning) or one or more input elements such
-as a checkbox or radiobutton. For details see the
+{-| Describes the binding property of a selection based on some HTML input element
+such as a checkbox or radio button. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)
 and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
 -}
-type
-    Binding
-    -- TODO: Add other HTML form input types
+type Binding
     = InRange String (List InputProperty)
     | InCheckbox String (List InputProperty)
     | InRadio String (List InputProperty)
     | InSelect String (List InputProperty)
+      -- TODO: Check validity: The following input types generate a warning if options are included even if options appear to have an effect (e.g. placeholder)
     | InText String (List InputProperty)
+    | InNumber String (List InputProperty)
+    | InDate String (List InputProperty)
+    | InTime String (List InputProperty)
+    | InMonth String (List InputProperty)
+    | InWeek String (List InputProperty)
+    | InDateTimeLocal String (List InputProperty)
+    | InTel String (List InputProperty)
+    | InColor String (List InputProperty)
 
 
 {-| Indicates a channel type to be used in a resolution specification.
@@ -762,8 +768,9 @@ type HeaderProperty
 
 {-| GUI Input properties. The type of relevant proerty will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
-max and step values; InSelect (selector) has a list of selection labels. For details
-see the [Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
+max and step values; InSelect (selector) has a list of selection label options.
+For details see the
+[Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
 The `debounce` property, available for all input types allows a delay in input event
 handling to be added in order to avoid unecessary event broadcasting. The `Element`
 property is an optional CSS selector indicating the parent element to which the
@@ -777,6 +784,7 @@ type InputProperty
     | InMin Float
     | InMax Float
     | InStep Float
+    | InPlaceholder String
 
 
 {-| Indicates the type of legend to create. Gradient legends are usually used for
@@ -1680,7 +1688,7 @@ filter f transforms =
             ( "filter", JE.string expr ) :: transforms
 
         FEqual field val ->
-            ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", value val ) ] ) :: transforms
+            ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", datavalue val ) ] ) :: transforms
 
         FSelection selName ->
             ( "filter", JE.object [ ( "selection", JE.string selName ) ] ) :: transforms
@@ -2443,6 +2451,7 @@ binProperty binProp =
 binding : Binding -> LabelledSpec
 binding bnd =
     case bnd of
+        -- TODO: Would InputRange, InputCheckbox etc. be better names? Or even IRange, ICheckbox etc. for one-letter consistency?
         InRange label props ->
             ( label, JE.object (( "input", JE.string "range" ) :: List.map inputProperty props) )
 
@@ -2457,6 +2466,30 @@ binding bnd =
 
         InText label props ->
             ( label, JE.object (( "input", JE.string "text" ) :: List.map inputProperty props) )
+
+        InNumber label props ->
+            ( label, JE.object (( "input", JE.string "number" ) :: List.map inputProperty props) )
+
+        InDate label props ->
+            ( label, JE.object (( "input", JE.string "date" ) :: List.map inputProperty props) )
+
+        InTime label props ->
+            ( label, JE.object (( "input", JE.string "time" ) :: List.map inputProperty props) )
+
+        InMonth label props ->
+            ( label, JE.object (( "input", JE.string "month" ) :: List.map inputProperty props) )
+
+        InWeek label props ->
+            ( label, JE.object (( "input", JE.string "week" ) :: List.map inputProperty props) )
+
+        InDateTimeLocal label props ->
+            ( label, JE.object (( "input", JE.string "datetimelocal" ) :: List.map inputProperty props) )
+
+        InTel label props ->
+            ( label, JE.object (( "input", JE.string "tel" ) :: List.map inputProperty props) )
+
+        InColor label props ->
+            ( label, JE.object (( "input", JE.string "color" ) :: List.map inputProperty props) )
 
 
 channelLabel : Channel -> String
@@ -2629,6 +2662,22 @@ dateTimeProperty dt =
 
         DTMilliseconds ms ->
             ( "milliseconds", JE.int ms )
+
+
+datavalue : DataValue -> Spec
+datavalue val =
+    case val of
+        Number x ->
+            JE.float x
+
+        Str s ->
+            JE.string s
+
+        Boolean b ->
+            JE.bool b
+
+        DT dt ->
+            JE.object (List.map dateTimeProperty dt)
 
 
 dayLabel : DayName -> String
@@ -2860,7 +2909,6 @@ format fmt =
 hAlignLabel : HAlign -> String
 hAlignLabel align =
     case align of
-        -- TODO: Check valid horiz align options
         AlignLeft ->
             "left"
 
@@ -2888,6 +2936,9 @@ inputProperty prop =
 
         InOptions opts ->
             ( "options", JE.list (List.map JE.string opts) )
+
+        InPlaceholder el ->
+            ( "placeholder", JE.string el )
 
         Element el ->
             ( "element", JE.string el )
@@ -4138,26 +4189,6 @@ vAlignLabel align =
 
         AlignBottom ->
             "bottom"
-
-
-
--- TODO: Do we need value any more if we create MNumbers etc.?
-
-
-value : DataValue -> Spec
-value val =
-    case val of
-        Number x ->
-            JE.float x
-
-        Str s ->
-            JE.string s
-
-        Boolean b ->
-            JE.bool b
-
-        DT dt ->
-            JE.object (List.map dateTimeProperty dt)
 
 
 viewConfig : ViewConfig -> LabelledSpec
