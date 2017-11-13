@@ -6676,6 +6676,12 @@ var _gicentre$eve$Eve$inputProperty = function (prop) {
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p36._0))
 			};
+		case 'InPlaceholder':
+			return {
+				ctor: '_Tuple2',
+				_0: 'placeholder',
+				_1: _elm_lang$core$Json_Encode$string(_p36._0)
+			};
 		default:
 			return {
 				ctor: '_Tuple2',
@@ -7496,7 +7502,7 @@ var _gicentre$eve$Eve$binding = function (bnd) {
 						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
 					})
 			};
-		default:
+		case 'InText':
 			return {
 				ctor: '_Tuple2',
 				_0: _p68._0,
@@ -7507,6 +7513,126 @@ var _gicentre$eve$Eve$binding = function (bnd) {
 							ctor: '_Tuple2',
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('text')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InNumber':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('number')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InDate':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('date')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InTime':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('time')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InMonth':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('month')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InWeek':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('week')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InDateTimeLocal':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('datetimelocal')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		case 'InTel':
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('tel')
+						},
+						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
+					})
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: _p68._0,
+				_1: _elm_lang$core$Json_Encode$object(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'input',
+							_1: _elm_lang$core$Json_Encode$string('color')
 						},
 						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$inputProperty, _p68._1)
 					})
@@ -9552,6 +9678,38 @@ var _gicentre$eve$Eve$Divide = F2(
 var _gicentre$eve$Eve$Base = function (a) {
 	return {ctor: 'Base', _0: a};
 };
+var _gicentre$eve$Eve$InColor = F2(
+	function (a, b) {
+		return {ctor: 'InColor', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InTel = F2(
+	function (a, b) {
+		return {ctor: 'InTel', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InDateTimeLocal = F2(
+	function (a, b) {
+		return {ctor: 'InDateTimeLocal', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InWeek = F2(
+	function (a, b) {
+		return {ctor: 'InWeek', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InMonth = F2(
+	function (a, b) {
+		return {ctor: 'InMonth', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InTime = F2(
+	function (a, b) {
+		return {ctor: 'InTime', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InDate = F2(
+	function (a, b) {
+		return {ctor: 'InDate', _0: a, _1: b};
+	});
+var _gicentre$eve$Eve$InNumber = F2(
+	function (a, b) {
+		return {ctor: 'InNumber', _0: a, _1: b};
+	});
 var _gicentre$eve$Eve$InText = F2(
 	function (a, b) {
 		return {ctor: 'InText', _0: a, _1: b};
@@ -9839,6 +9997,9 @@ var _gicentre$eve$Eve$HTitle = function (a) {
 };
 var _gicentre$eve$Eve$HFormat = function (a) {
 	return {ctor: 'HFormat', _0: a};
+};
+var _gicentre$eve$Eve$InPlaceholder = function (a) {
+	return {ctor: 'InPlaceholder', _0: a};
 };
 var _gicentre$eve$Eve$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
@@ -10822,8 +10983,282 @@ var _gicentre$eve$Gallery$update = F2(
 	function (msg, model) {
 		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 	});
+var _gicentre$eve$Gallery$vlInput = function () {
+	var enc2 = function (_p0) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_gicentre$eve$Eve$size,
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MNumber(100),
+								_1: {ctor: '[]'}
+							},
+							_p0)))));
+	};
+	var trans2 = function (_p1) {
+		return _gicentre$eve$Eve$transform(
+			A2(
+				_gicentre$eve$Eve$filter,
+				_gicentre$eve$Eve$FSelection('CylYr'),
+				_p1));
+	};
+	var spec2 = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: trans2(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc2(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var enc1 = function (_p2) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: A2(
+								_gicentre$eve$Eve$MCondition,
+								'CylYr',
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MString('grey'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p2))));
+	};
+	var sel1 = function (_p3) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'CylYr',
+				_gicentre$eve$Eve$Single,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Fields(
+						{
+							ctor: '::',
+							_0: 'Cylinders',
+							_1: {
+								ctor: '::',
+								_0: 'Year',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$Bind(
+							{
+								ctor: '::',
+								_0: A2(
+									_gicentre$eve$Eve$InRange,
+									'Cylinders',
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$InMin(3),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InMax(8),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$InStep(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gicentre$eve$Eve$InRange,
+										'Year',
+										{
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InMin(1969),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$InMax(1981),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$eve$Eve$InStep(1),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A4(
+					_gicentre$eve$Eve$select,
+					'InTest',
+					_gicentre$eve$Eve$Single,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$Fields(
+							{
+								ctor: '::',
+								_0: 'Test',
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$Bind(
+								{
+									ctor: '::',
+									_0: A2(
+										_gicentre$eve$Eve$InDate,
+										'Test',
+										{
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InPlaceholder('hello'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p3)));
+	};
+	var spec1 = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: sel1(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var trans = function (_p4) {
+		return _gicentre$eve$Eve$transform(
+			A3(_gicentre$eve$Eve$calculate, 'year(datum.Year)', 'Year', _p4));
+	};
+	var des = _gicentre$eve$Eve$description('Drag the sliders to highlight points.');
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: des,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$dataFromUrl,
+					'data/cars.json',
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: trans(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$layer(
+							{
+								ctor: '::',
+								_0: spec1,
+								_1: {
+									ctor: '::',
+									_0: spec2,
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
 var _gicentre$eve$Gallery$vlFacetExample = function () {
-	var enc = function (_p0) {
+	var enc = function (_p5) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -10874,7 +11309,7 @@ var _gicentre$eve$Gallery$vlFacetExample = function () {
 								}
 							}
 						},
-						_p0))));
+						_p5))));
 	};
 	var spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -10923,7 +11358,7 @@ var _gicentre$eve$Gallery$vlFacetExample = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vlRepeatExample = function () {
-	var enc = function (_p1) {
+	var enc = function (_p6) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -10965,7 +11400,7 @@ var _gicentre$eve$Gallery$vlRepeatExample = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p1))));
+						_p6))));
 	};
 	var spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11018,7 +11453,7 @@ var _gicentre$eve$Gallery$vlRepeatExample = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl61 = function () {
-	var res = function (_p2) {
+	var res = function (_p7) {
 		return _gicentre$eve$Eve$resolve(
 			A2(
 				_gicentre$eve$Eve$resolution,
@@ -11032,9 +11467,9 @@ var _gicentre$eve$Gallery$vl61 = function () {
 							_1: {ctor: '[]'}
 						}
 					}),
-				_p2));
+				_p7));
 	};
-	var config = function (_p3) {
+	var config = function (_p8) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -11044,9 +11479,9 @@ var _gicentre$eve$Gallery$vl61 = function () {
 						_0: _gicentre$eve$Eve$RHeatmap('greenblue'),
 						_1: {ctor: '[]'}
 					}),
-				_p3));
+				_p8));
 	};
-	var encBar = function (_p4) {
+	var encBar = function (_p9) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11099,9 +11534,9 @@ var _gicentre$eve$Gallery$vl61 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p4))));
+						_p9))));
 	};
-	var sel = function (_p5) {
+	var sel = function (_p10) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -11117,7 +11552,7 @@ var _gicentre$eve$Gallery$vl61 = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p5));
+				_p10));
 	};
 	var barSpec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11146,7 +11581,7 @@ var _gicentre$eve$Gallery$vl61 = function () {
 				}
 			}
 		});
-	var enc2 = function (_p6) {
+	var enc2 = function (_p11) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11217,9 +11652,9 @@ var _gicentre$eve$Gallery$vl61 = function () {
 								_0: _gicentre$eve$Eve$MString('#666'),
 								_1: {ctor: '[]'}
 							},
-							_p6)))));
+							_p11)))));
 	};
-	var enc1 = function (_p7) {
+	var enc1 = function (_p12) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11283,7 +11718,7 @@ var _gicentre$eve$Gallery$vl61 = function () {
 								}
 							}
 						},
-						_p7))));
+						_p12))));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11299,12 +11734,12 @@ var _gicentre$eve$Gallery$vl61 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var selTrans = function (_p8) {
+	var selTrans = function (_p13) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FSelection('myPts'),
-				_p8));
+				_p13));
 	};
 	var spec2 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11383,7 +11818,7 @@ var _gicentre$eve$Gallery$vl61 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl60 = function () {
-	var enc = function (_p9) {
+	var enc = function (_p14) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11431,9 +11866,9 @@ var _gicentre$eve$Gallery$vl60 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p9))));
+						_p14))));
 	};
-	var sel = function (_p10) {
+	var sel = function (_p15) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -11477,7 +11912,7 @@ var _gicentre$eve$Gallery$vl60 = function () {
 							}
 						}
 					},
-					_p10)));
+					_p15)));
 	};
 	var spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11557,7 +11992,7 @@ var _gicentre$eve$Gallery$vl60 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl59 = function () {
-	var enc2 = function (_p11) {
+	var enc2 = function (_p16) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11599,9 +12034,9 @@ var _gicentre$eve$Gallery$vl59 = function () {
 							_0: _gicentre$eve$Eve$MString('goldenrod'),
 							_1: {ctor: '[]'}
 						},
-						_p11))));
+						_p16))));
 	};
-	var enc1 = function (_p12) {
+	var enc1 = function (_p17) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11636,14 +12071,14 @@ var _gicentre$eve$Gallery$vl59 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p12)));
+					_p17)));
 	};
-	var selTrans = function (_p13) {
+	var selTrans = function (_p18) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FSelection('myBrush'),
-				_p13));
+				_p18));
 	};
 	var spec2 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11664,7 +12099,7 @@ var _gicentre$eve$Gallery$vl59 = function () {
 				}
 			}
 		});
-	var sel = function (_p14) {
+	var sel = function (_p19) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -11680,7 +12115,7 @@ var _gicentre$eve$Gallery$vl59 = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p14));
+				_p19));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11701,9 +12136,9 @@ var _gicentre$eve$Gallery$vl59 = function () {
 				}
 			}
 		});
-	var trans = function (_p15) {
+	var trans = function (_p20) {
 		return _gicentre$eve$Eve$transform(
-			A3(_gicentre$eve$Eve$calculate, 'hours(datum.date)', 'time', _p15));
+			A3(_gicentre$eve$Eve$calculate, 'hours(datum.date)', 'time', _p20));
 	};
 	var des = _gicentre$eve$Eve$description('Drag over any chart to cross-filter highlights in all charts.');
 	var spec = _gicentre$eve$Eve$asSpec(
@@ -11780,7 +12215,7 @@ var _gicentre$eve$Gallery$vl59 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl58 = function () {
-	var enc2 = function (_p16) {
+	var enc2 = function (_p21) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11828,9 +12263,9 @@ var _gicentre$eve$Gallery$vl58 = function () {
 							}
 						}
 					},
-					_p16)));
+					_p21)));
 	};
-	var enc1 = function (_p17) {
+	var enc1 = function (_p22) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11875,7 +12310,7 @@ var _gicentre$eve$Gallery$vl58 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p17)));
+					_p22)));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11895,7 +12330,7 @@ var _gicentre$eve$Gallery$vl58 = function () {
 				}
 			}
 		});
-	var sel = function (_p18) {
+	var sel = function (_p23) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -11911,7 +12346,7 @@ var _gicentre$eve$Gallery$vl58 = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p18));
+				_p23));
 	};
 	var spec2 = _gicentre$eve$Eve$asSpec(
 		{
@@ -11969,7 +12404,7 @@ var _gicentre$eve$Gallery$vl58 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl57 = function () {
-	var enc2 = function (_p19) {
+	var enc2 = function (_p24) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12001,16 +12436,16 @@ var _gicentre$eve$Gallery$vl57 = function () {
 							_0: _gicentre$eve$Eve$MNumber(3),
 							_1: {ctor: '[]'}
 						},
-						_p19))));
+						_p24))));
 	};
-	var trans = function (_p20) {
+	var trans = function (_p25) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FSelection('myBrush'),
-				_p20));
+				_p25));
 	};
-	var enc1 = function (_p21) {
+	var enc1 = function (_p26) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12062,9 +12497,9 @@ var _gicentre$eve$Gallery$vl57 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p21))));
+						_p26))));
 	};
-	var sel = function (_p22) {
+	var sel = function (_p27) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -12080,7 +12515,7 @@ var _gicentre$eve$Gallery$vl57 = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p22));
+				_p27));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -12149,7 +12584,7 @@ var _gicentre$eve$Gallery$vl57 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl56 = function () {
-	var enc2 = function (_p23) {
+	var enc2 = function (_p28) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12193,14 +12628,14 @@ var _gicentre$eve$Gallery$vl56 = function () {
 								_0: _gicentre$eve$Eve$MNumber(100),
 								_1: {ctor: '[]'}
 							},
-							_p23)))));
+							_p28)))));
 	};
-	var trans2 = function (_p24) {
+	var trans2 = function (_p29) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FSelection('CylYr'),
-				_p24));
+				_p29));
 	};
 	var spec2 = _gicentre$eve$Eve$asSpec(
 		{
@@ -12221,7 +12656,7 @@ var _gicentre$eve$Gallery$vl56 = function () {
 				}
 			}
 		});
-	var enc1 = function (_p25) {
+	var enc1 = function (_p30) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12269,9 +12704,9 @@ var _gicentre$eve$Gallery$vl56 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p25))));
+						_p30))));
 	};
-	var sel1 = function (_p26) {
+	var sel1 = function (_p31) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -12334,7 +12769,7 @@ var _gicentre$eve$Gallery$vl56 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p26));
+				_p31));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -12355,9 +12790,9 @@ var _gicentre$eve$Gallery$vl56 = function () {
 				}
 			}
 		});
-	var trans = function (_p27) {
+	var trans = function (_p32) {
 		return _gicentre$eve$Eve$transform(
-			A3(_gicentre$eve$Eve$calculate, 'year(datum.Year)', 'Year', _p27));
+			A3(_gicentre$eve$Eve$calculate, 'year(datum.Year)', 'Year', _p32));
 	};
 	var des = _gicentre$eve$Eve$description('Drag the sliders to highlight points.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -12393,7 +12828,7 @@ var _gicentre$eve$Gallery$vl56 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl55 = function () {
-	var enc = function (_p28) {
+	var enc = function (_p33) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12468,9 +12903,9 @@ var _gicentre$eve$Gallery$vl55 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p28))));
+						_p33))));
 	};
-	var sel = function (_p29) {
+	var sel = function (_p34) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -12481,7 +12916,7 @@ var _gicentre$eve$Gallery$vl55 = function () {
 					_0: _gicentre$eve$Eve$BindScales,
 					_1: {ctor: '[]'}
 				},
-				_p29));
+				_p34));
 	};
 	var des = _gicentre$eve$Eve$description('Drag to pan. Zoom in or out with mousewheel/zoom gesture.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -12516,7 +12951,7 @@ var _gicentre$eve$Gallery$vl55 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl54 = function () {
-	var enc = function (_p30) {
+	var enc = function (_p35) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12560,9 +12995,9 @@ var _gicentre$eve$Gallery$vl54 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p30))));
+						_p35))));
 	};
-	var sel = function (_p31) {
+	var sel = function (_p36) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -12577,7 +13012,7 @@ var _gicentre$eve$Gallery$vl54 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p31));
+				_p36));
 	};
 	var des = _gicentre$eve$Eve$description('Mouse over individual points or select multiple points with the shift key.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -12612,7 +13047,7 @@ var _gicentre$eve$Gallery$vl54 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl53 = function () {
-	var enc = function (_p32) {
+	var enc = function (_p37) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12660,16 +13095,16 @@ var _gicentre$eve$Gallery$vl53 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p32))));
+						_p37))));
 	};
-	var sel = function (_p33) {
+	var sel = function (_p38) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
 				'myBrush',
 				_gicentre$eve$Eve$Interval,
 				{ctor: '[]'},
-				_p33));
+				_p38));
 	};
 	var des = _gicentre$eve$Eve$description('Drag out a rectangular brush to highlight points.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -12704,7 +13139,7 @@ var _gicentre$eve$Gallery$vl53 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl52 = function () {
-	var enc2 = function (_p34) {
+	var enc2 = function (_p39) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12749,7 +13184,7 @@ var _gicentre$eve$Gallery$vl52 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p34))));
+						_p39))));
 	};
 	var spec2 = _gicentre$eve$Eve$asSpec(
 		{
@@ -12765,7 +13200,7 @@ var _gicentre$eve$Gallery$vl52 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var enc1 = function (_p35) {
+	var enc1 = function (_p40) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12832,7 +13267,7 @@ var _gicentre$eve$Gallery$vl52 = function () {
 									_0: _gicentre$eve$Eve$MNumber(0.2),
 									_1: {ctor: '[]'}
 								},
-								_p35))))));
+								_p40))))));
 	};
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
@@ -12918,7 +13353,7 @@ var _gicentre$eve$Gallery$vl52 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl51 = function () {
-	var enc = function (_p36) {
+	var enc = function (_p41) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12973,7 +13408,7 @@ var _gicentre$eve$Gallery$vl51 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p36))));
+						_p41))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -13036,7 +13471,7 @@ var _gicentre$eve$Gallery$vl51 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl50 = function () {
-	var config = function (_p37) {
+	var config = function (_p42) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -13050,9 +13485,9 @@ var _gicentre$eve$Gallery$vl50 = function () {
 							_1: {ctor: '[]'}
 						}
 					}),
-				_p37));
+				_p42));
 	};
-	var encUpper = function (_p38) {
+	var encUpper = function (_p43) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13113,9 +13548,9 @@ var _gicentre$eve$Gallery$vl50 = function () {
 							_0: _gicentre$eve$Eve$MNumber(0.3),
 							_1: {ctor: '[]'}
 						},
-						_p38))));
+						_p43))));
 	};
-	var encLower = function (_p39) {
+	var encLower = function (_p44) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13181,7 +13616,7 @@ var _gicentre$eve$Gallery$vl50 = function () {
 							_0: _gicentre$eve$Eve$MNumber(0.6),
 							_1: {ctor: '[]'}
 						},
-						_p39))));
+						_p44))));
 	};
 	var specLower = _gicentre$eve$Eve$asSpec(
 		{
@@ -13201,9 +13636,9 @@ var _gicentre$eve$Gallery$vl50 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var trans = function (_p40) {
+	var trans = function (_p45) {
 		return _gicentre$eve$Eve$transform(
-			A3(_gicentre$eve$Eve$calculate, 'datum.y - 50', 'ny', _p40));
+			A3(_gicentre$eve$Eve$calculate, 'datum.y - 50', 'ny', _p45));
 	};
 	var specUpper = _gicentre$eve$Eve$asSpec(
 		{
@@ -13228,7 +13663,7 @@ var _gicentre$eve$Gallery$vl50 = function () {
 				}
 			}
 		});
-	var data = function (_p41) {
+	var data = function (_p46) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -13325,7 +13760,7 @@ var _gicentre$eve$Gallery$vl50 = function () {
 								}
 							}
 						}),
-					_p41)));
+					_p46)));
 	};
 	var des = _gicentre$eve$Eve$description('Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -13367,7 +13802,7 @@ var _gicentre$eve$Gallery$vl50 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl49 = function () {
-	var res = function (_p42) {
+	var res = function (_p47) {
 		return _gicentre$eve$Eve$resolve(
 			A2(
 				_gicentre$eve$Eve$resolution,
@@ -13377,9 +13812,9 @@ var _gicentre$eve$Gallery$vl49 = function () {
 						_0: {ctor: '_Tuple2', _0: _gicentre$eve$Eve$ChY, _1: _gicentre$eve$Eve$Independent},
 						_1: {ctor: '[]'}
 					}),
-				_p42));
+				_p47));
 	};
-	var encLine = function (_p43) {
+	var encLine = function (_p48) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13438,7 +13873,7 @@ var _gicentre$eve$Gallery$vl49 = function () {
 							_0: _gicentre$eve$Eve$MString('firebrick'),
 							_1: {ctor: '[]'}
 						},
-						_p43))));
+						_p48))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -13454,7 +13889,7 @@ var _gicentre$eve$Gallery$vl49 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encBar = function (_p44) {
+	var encBar = function (_p49) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13497,7 +13932,7 @@ var _gicentre$eve$Gallery$vl49 = function () {
 							}
 						}
 					},
-					_p44)));
+					_p49)));
 	};
 	var specBar = _gicentre$eve$Eve$asSpec(
 		{
@@ -13547,7 +13982,7 @@ var _gicentre$eve$Gallery$vl49 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl48 = function () {
-	var encPoints = function (_p45) {
+	var encPoints = function (_p50) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13674,7 +14109,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 									_0: _gicentre$eve$Eve$MNumber(1),
 									_1: {ctor: '[]'}
 								},
-								_p45))))));
+								_p50))))));
 	};
 	var specPoints = _gicentre$eve$Eve$asSpec(
 		{
@@ -13694,7 +14129,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encLine = function (_p46) {
+	var encLine = function (_p51) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13738,7 +14173,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 								_0: _gicentre$eve$Eve$MString('#db646f'),
 								_1: {ctor: '[]'}
 							},
-							_p46)))));
+							_p51)))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -13754,7 +14189,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var trans = function (_p47) {
+	var trans = function (_p52) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
@@ -13798,7 +14233,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 									_1: {ctor: '[]'}
 								}
 							})),
-					_p47)));
+					_p52)));
 	};
 	var des = _gicentre$eve$Eve$description('A ranged dot plot that uses \'layer\' to convey changing life expectancy for the five most populous countries (between 1955 and 2000).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -13834,7 +14269,7 @@ var _gicentre$eve$Gallery$vl48 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl47 = function () {
-	var encPopulation = function (_p48) {
+	var encPopulation = function (_p53) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13880,7 +14315,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 							_0: _gicentre$eve$Eve$MString('#333'),
 							_1: {ctor: '[]'}
 						},
-						_p48))));
+						_p53))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -13910,7 +14345,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encRects = function (_p49) {
+	var encRects = function (_p54) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -13960,9 +14395,9 @@ var _gicentre$eve$Gallery$vl47 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p49))));
+						_p54))));
 	};
-	var highlights = function (_p50) {
+	var highlights = function (_p55) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{
@@ -14026,7 +14461,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 									_1: {ctor: '[]'}
 								}
 							}),
-						_p50))));
+						_p55))));
 	};
 	var specRects = _gicentre$eve$Eve$asSpec(
 		{
@@ -14047,7 +14482,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 				}
 			}
 		});
-	var data = function (_p51) {
+	var data = function (_p56) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{
@@ -14378,7 +14813,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 								}
 							}
 						}),
-					_p51)));
+					_p56)));
 	};
 	var des = _gicentre$eve$Eve$description('The population of the German city of Falkensee over time with annotated time periods highlighted.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -14415,7 +14850,7 @@ var _gicentre$eve$Gallery$vl47 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl46 = function () {
-	var encLine = function (_p52) {
+	var encLine = function (_p57) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14449,7 +14884,7 @@ var _gicentre$eve$Gallery$vl46 = function () {
 							}
 						}
 					},
-					_p52)));
+					_p57)));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -14465,7 +14900,7 @@ var _gicentre$eve$Gallery$vl46 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encBand = function (_p53) {
+	var encBand = function (_p58) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14531,7 +14966,7 @@ var _gicentre$eve$Gallery$vl46 = function () {
 								_0: _gicentre$eve$Eve$MNumber(0.3),
 								_1: {ctor: '[]'}
 							},
-							_p53)))));
+							_p58)))));
 	};
 	var specBand = _gicentre$eve$Eve$asSpec(
 		{
@@ -14576,7 +15011,7 @@ var _gicentre$eve$Gallery$vl46 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl45 = function () {
-	var encRect = function (_p54) {
+	var encRect = function (_p59) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14609,7 +15044,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 							_0: _gicentre$eve$Eve$MNumber(0.2),
 							_1: {ctor: '[]'}
 						},
-						_p54))));
+						_p59))));
 	};
 	var specRect = _gicentre$eve$Eve$asSpec(
 		{
@@ -14625,7 +15060,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encMean = function (_p55) {
+	var encMean = function (_p60) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14639,7 +15074,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p55));
+				_p60));
 	};
 	var specMean = _gicentre$eve$Eve$asSpec(
 		{
@@ -14655,7 +15090,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var trans = function (_p56) {
+	var trans = function (_p61) {
 		return _gicentre$eve$Eve$transform(
 			A3(
 				_gicentre$eve$Eve$aggregate,
@@ -14673,7 +15108,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 					_gicentre$eve$Eve$calculate,
 					'datum.mean_MPG+datum.dev_MPG',
 					'upper',
-					A3(_gicentre$eve$Eve$calculate, 'datum.mean_MPG-datum.dev_MPG', 'lower', _p56))));
+					A3(_gicentre$eve$Eve$calculate, 'datum.mean_MPG-datum.dev_MPG', 'lower', _p61))));
 	};
 	var specSpread = _gicentre$eve$Eve$asSpec(
 		{
@@ -14695,7 +15130,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encPoints = function (_p57) {
+	var encPoints = function (_p62) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14721,7 +15156,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p57)));
+					_p62)));
 	};
 	var specPoints = _gicentre$eve$Eve$asSpec(
 		{
@@ -14766,7 +15201,7 @@ var _gicentre$eve$Gallery$vl45 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl44 = function () {
-	var encMean = function (_p58) {
+	var encMean = function (_p63) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14798,7 +15233,7 @@ var _gicentre$eve$Gallery$vl44 = function () {
 							_0: _gicentre$eve$Eve$MNumber(5),
 							_1: {ctor: '[]'}
 						},
-						_p58))));
+						_p63))));
 	};
 	var specMean = _gicentre$eve$Eve$asSpec(
 		{
@@ -14814,7 +15249,7 @@ var _gicentre$eve$Gallery$vl44 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encBars = function (_p59) {
+	var encBars = function (_p64) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14850,7 +15285,7 @@ var _gicentre$eve$Gallery$vl44 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p59)));
+					_p64)));
 	};
 	var specBars = _gicentre$eve$Eve$asSpec(
 		{
@@ -14895,7 +15330,7 @@ var _gicentre$eve$Gallery$vl44 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl43 = function () {
-	var encStdevs = function (_p60) {
+	var encStdevs = function (_p65) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -14933,7 +15368,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p60))));
+						_p65))));
 	};
 	var specStdevs = _gicentre$eve$Eve$asSpec(
 		{
@@ -14949,7 +15384,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encMeans = function (_p61) {
+	var encMeans = function (_p66) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -15000,7 +15435,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 							_0: _gicentre$eve$Eve$MString('black'),
 							_1: {ctor: '[]'}
 						},
-						_p61))));
+						_p66))));
 	};
 	var specMeans = _gicentre$eve$Eve$asSpec(
 		{
@@ -15020,7 +15455,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var trans = function (_p62) {
+	var trans = function (_p67) {
 		return _gicentre$eve$Eve$transform(
 			A3(
 				_gicentre$eve$Eve$aggregate,
@@ -15042,7 +15477,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 					_gicentre$eve$Eve$calculate,
 					'datum.mean-datum.stdev',
 					'lower',
-					A3(_gicentre$eve$Eve$calculate, 'datum.mean+datum.stdev', 'upper', _p62))));
+					A3(_gicentre$eve$Eve$calculate, 'datum.mean+datum.stdev', 'upper', _p67))));
 	};
 	var des = _gicentre$eve$Eve$description('Error bars showing standard deviation.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -15078,7 +15513,7 @@ var _gicentre$eve$Gallery$vl43 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl42 = function () {
-	var encCIs = function (_p63) {
+	var encCIs = function (_p68) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -15124,7 +15559,7 @@ var _gicentre$eve$Gallery$vl42 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p63))));
+						_p68))));
 	};
 	var specCIs = _gicentre$eve$Eve$asSpec(
 		{
@@ -15140,7 +15575,7 @@ var _gicentre$eve$Gallery$vl42 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encPoints = function (_p64) {
+	var encPoints = function (_p69) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -15195,7 +15630,7 @@ var _gicentre$eve$Gallery$vl42 = function () {
 							_0: _gicentre$eve$Eve$MString('black'),
 							_1: {ctor: '[]'}
 						},
-						_p64))));
+						_p69))));
 	};
 	var specPoints = _gicentre$eve$Eve$asSpec(
 		{
@@ -15244,7 +15679,7 @@ var _gicentre$eve$Gallery$vl42 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl41 = function () {
-	var encBar = function (_p65) {
+	var encBar = function (_p70) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -15309,7 +15744,7 @@ var _gicentre$eve$Gallery$vl41 = function () {
 										}
 									}
 								},
-								_p65))))));
+								_p70))))));
 	};
 	var specBar = _gicentre$eve$Eve$asSpec(
 		{
@@ -15325,7 +15760,7 @@ var _gicentre$eve$Gallery$vl41 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encLine = function (_p66) {
+	var encLine = function (_p71) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -15467,7 +15902,7 @@ var _gicentre$eve$Gallery$vl41 = function () {
 									}
 								}
 							},
-							_p66)))));
+							_p71)))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -15483,11 +15918,11 @@ var _gicentre$eve$Gallery$vl41 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var trans = function (_p67) {
+	var trans = function (_p72) {
 		return _gicentre$eve$Eve$transform(
-			A3(_gicentre$eve$Eve$calculate, 'datum.open > datum.close', 'isIncrease', _p67));
+			A3(_gicentre$eve$Eve$calculate, 'datum.open > datum.close', 'isIncrease', _p72));
 	};
-	var data = function (_p68) {
+	var data = function (_p73) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -16142,7 +16577,7 @@ var _gicentre$eve$Gallery$vl41 = function () {
 													}
 												}
 											}),
-										_p68))))))));
+										_p73))))))));
 	};
 	var des = _gicentre$eve$Eve$description('A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -16180,350 +16615,6 @@ var _gicentre$eve$Gallery$vl41 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl40 = function () {
-	var encBoxMid = function (_p69) {
-		return _gicentre$eve$Eve$encoding(
-			A3(
-				_gicentre$eve$Eve$position,
-				_gicentre$eve$Eve$X,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$PName('age'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$eve$Eve$position,
-					_gicentre$eve$Eve$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PName('midBox'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$eve$Eve$color,
-						{
-							ctor: '::',
-							_0: _gicentre$eve$Eve$MString('white'),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$eve$Eve$size,
-							{
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MNumber(5),
-								_1: {ctor: '[]'}
-							},
-							_p69)))));
-	};
-	var specBoxMid = _gicentre$eve$Eve$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$eve$Eve$mark,
-				_gicentre$eve$Eve$Tick,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$MStyle(
-						{
-							ctor: '::',
-							_0: 'boxMid',
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: encBoxMid(
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	var encBox = function (_p70) {
-		return _gicentre$eve$Eve$encoding(
-			A3(
-				_gicentre$eve$Eve$position,
-				_gicentre$eve$Eve$X,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$PName('age'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$eve$Eve$position,
-					_gicentre$eve$Eve$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PName('lowerBox'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A3(
-						_gicentre$eve$Eve$position,
-						_gicentre$eve$Eve$Y2,
-						{
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PName('upperBox'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$eve$Eve$size,
-							{
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MNumber(5),
-								_1: {ctor: '[]'}
-							},
-							_p70)))));
-	};
-	var specBox = _gicentre$eve$Eve$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$eve$Eve$mark,
-				_gicentre$eve$Eve$Bar,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$MStyle(
-						{
-							ctor: '::',
-							_0: 'box',
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: encBox(
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	var encUWhisker = function (_p71) {
-		return _gicentre$eve$Eve$encoding(
-			A3(
-				_gicentre$eve$Eve$position,
-				_gicentre$eve$Eve$X,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$PName('age'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$eve$Eve$position,
-					_gicentre$eve$Eve$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PName('upperBox'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A3(
-						_gicentre$eve$Eve$position,
-						_gicentre$eve$Eve$Y2,
-						{
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PName('upperWhisker'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-								_1: {ctor: '[]'}
-							}
-						},
-						_p71))));
-	};
-	var specUWhisker = _gicentre$eve$Eve$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$eve$Eve$mark,
-				_gicentre$eve$Eve$Rule,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$MStyle(
-						{
-							ctor: '::',
-							_0: 'boxWhisker',
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: encUWhisker(
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	var encLWhisker = function (_p72) {
-		return _gicentre$eve$Eve$encoding(
-			A3(
-				_gicentre$eve$Eve$position,
-				_gicentre$eve$Eve$X,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$PName('age'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$eve$Eve$position,
-					_gicentre$eve$Eve$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$eve$Eve$PName('lowerWhisker'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$PAxis(
-									{
-										ctor: '::',
-										_0: _gicentre$eve$Eve$AxTitle('Population'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A3(
-						_gicentre$eve$Eve$position,
-						_gicentre$eve$Eve$Y2,
-						{
-							ctor: '::',
-							_0: _gicentre$eve$Eve$PName('lowerBox'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
-								_1: {ctor: '[]'}
-							}
-						},
-						_p72))));
-	};
-	var specLWhisker = _gicentre$eve$Eve$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$eve$Eve$mark,
-				_gicentre$eve$Eve$Rule,
-				{
-					ctor: '::',
-					_0: _gicentre$eve$Eve$MStyle(
-						{
-							ctor: '::',
-							_0: 'boxWhisker',
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: encLWhisker(
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	var trans = function (_p73) {
-		return _gicentre$eve$Eve$transform(
-			A3(
-				_gicentre$eve$Eve$aggregate,
-				{
-					ctor: '::',
-					_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Q1, 'people', 'lowerBox'),
-					_1: {
-						ctor: '::',
-						_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Median, 'people', 'midBox'),
-						_1: {
-							ctor: '::',
-							_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Q3, 'people', 'upperBox'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: 'age',
-					_1: {ctor: '[]'}
-				},
-				A3(
-					_gicentre$eve$Eve$calculate,
-					'datum.upperBox - datum.lowerBox',
-					'IQR',
-					A3(
-						_gicentre$eve$Eve$calculate,
-						'datum.upperBox + datum.IQR * 1.5',
-						'upperWhisker',
-						A3(_gicentre$eve$Eve$calculate, 'max(0,datum.lowerBox - datum.IQR *1.5)', 'lowerWhisker', _p73)))));
-	};
-	var des = _gicentre$eve$Eve$description('A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn\'t strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts.');
-	return _gicentre$eve$Eve$toVegaLite(
-		{
-			ctor: '::',
-			_0: des,
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$eve$Eve$dataFromUrl,
-					'data/population.json',
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: trans(
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$layer(
-							{
-								ctor: '::',
-								_0: specLWhisker,
-								_1: {
-									ctor: '::',
-									_0: specUWhisker,
-									_1: {
-										ctor: '::',
-										_0: specBox,
-										_1: {
-											ctor: '::',
-											_0: specBoxMid,
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$eve$Gallery$vl39 = function () {
 	var encBoxMid = function (_p74) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
@@ -16800,6 +16891,350 @@ var _gicentre$eve$Gallery$vl39 = function () {
 				_gicentre$eve$Eve$aggregate,
 				{
 					ctor: '::',
+					_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Q1, 'people', 'lowerBox'),
+					_1: {
+						ctor: '::',
+						_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Median, 'people', 'midBox'),
+						_1: {
+							ctor: '::',
+							_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Q3, 'people', 'upperBox'),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: 'age',
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_gicentre$eve$Eve$calculate,
+					'datum.upperBox - datum.lowerBox',
+					'IQR',
+					A3(
+						_gicentre$eve$Eve$calculate,
+						'datum.upperBox + datum.IQR * 1.5',
+						'upperWhisker',
+						A3(_gicentre$eve$Eve$calculate, 'max(0,datum.lowerBox - datum.IQR *1.5)', 'lowerWhisker', _p78)))));
+	};
+	var des = _gicentre$eve$Eve$description('A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn\'t strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts.');
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: des,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$dataFromUrl,
+					'data/population.json',
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: trans(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$layer(
+							{
+								ctor: '::',
+								_0: specLWhisker,
+								_1: {
+									ctor: '::',
+									_0: specUWhisker,
+									_1: {
+										ctor: '::',
+										_0: specBox,
+										_1: {
+											ctor: '::',
+											_0: specBoxMid,
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$eve$Gallery$vl39 = function () {
+	var encBoxMid = function (_p79) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('midBox'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$MString('white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_gicentre$eve$Eve$size,
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p79)))));
+	};
+	var specBoxMid = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Tick,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxMid',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBoxMid(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encBox = function (_p80) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('lowerBox'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$eve$Eve$position,
+						_gicentre$eve$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PName('upperBox'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_gicentre$eve$Eve$size,
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MNumber(5),
+								_1: {ctor: '[]'}
+							},
+							_p80)))));
+	};
+	var specBox = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Bar,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'box',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encBox(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encUWhisker = function (_p81) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('upperBox'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$eve$Eve$position,
+						_gicentre$eve$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PName('upperWhisker'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p81))));
+	};
+	var specUWhisker = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encUWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encLWhisker = function (_p82) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('age'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('lowerWhisker'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$AxTitle('Population'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A3(
+						_gicentre$eve$Eve$position,
+						_gicentre$eve$Eve$Y2,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PName('lowerBox'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p82))));
+	};
+	var specLWhisker = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Rule,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$MStyle(
+						{
+							ctor: '::',
+							_0: 'boxWhisker',
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encLWhisker(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p83) {
+		return _gicentre$eve$Eve$transform(
+			A3(
+				_gicentre$eve$Eve$aggregate,
+				{
+					ctor: '::',
 					_0: A3(_gicentre$eve$Eve$opAs, _gicentre$eve$Eve$Min, 'people', 'lowerWhisker'),
 					_1: {
 						ctor: '::',
@@ -16824,7 +17259,7 @@ var _gicentre$eve$Gallery$vl39 = function () {
 					_0: 'age',
 					_1: {ctor: '[]'}
 				},
-				_p78));
+				_p83));
 	};
 	var des = _gicentre$eve$Eve$description('A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -16868,7 +17303,7 @@ var _gicentre$eve$Gallery$vl39 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl38 = function () {
-	var config = function (_p79) {
+	var config = function (_p84) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -16890,9 +17325,9 @@ var _gicentre$eve$Gallery$vl38 = function () {
 							_0: _gicentre$eve$Eve$MBaseline(_gicentre$eve$Eve$AlignMiddle),
 							_1: {ctor: '[]'}
 						}),
-					_p79)));
+					_p84)));
 	};
-	var encText = function (_p80) {
+	var encText = function (_p85) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -16940,7 +17375,7 @@ var _gicentre$eve$Gallery$vl38 = function () {
 									}
 								}
 							},
-							_p80)))));
+							_p85)))));
 	};
 	var specText = _gicentre$eve$Eve$asSpec(
 		{
@@ -16956,7 +17391,7 @@ var _gicentre$eve$Gallery$vl38 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encRect = function (_p81) {
+	var encRect = function (_p86) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -16997,7 +17432,7 @@ var _gicentre$eve$Gallery$vl38 = function () {
 								}
 							}
 						},
-						_p81))));
+						_p86))));
 	};
 	var specRect = _gicentre$eve$Eve$asSpec(
 		{
@@ -17047,7 +17482,7 @@ var _gicentre$eve$Gallery$vl38 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl37 = function () {
-	var encLine = function (_p82) {
+	var encLine = function (_p87) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17079,7 +17514,7 @@ var _gicentre$eve$Gallery$vl37 = function () {
 							_0: _gicentre$eve$Eve$MNumber(3),
 							_1: {ctor: '[]'}
 						},
-						_p82))));
+						_p87))));
 	};
 	var specLine = _gicentre$eve$Eve$asSpec(
 		{
@@ -17095,7 +17530,7 @@ var _gicentre$eve$Gallery$vl37 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encBar = function (_p83) {
+	var encBar = function (_p88) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17129,7 +17564,7 @@ var _gicentre$eve$Gallery$vl37 = function () {
 							}
 						}
 					},
-					_p83)));
+					_p88)));
 	};
 	var specBar = _gicentre$eve$Eve$asSpec(
 		{
@@ -17174,7 +17609,7 @@ var _gicentre$eve$Gallery$vl37 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl36 = function () {
-	var config = function (_p84) {
+	var config = function (_p89) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -17194,9 +17629,9 @@ var _gicentre$eve$Gallery$vl36 = function () {
 							}
 						}
 					}),
-				_p84));
+				_p89));
 	};
-	var encText = function (_p85) {
+	var encText = function (_p90) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17233,7 +17668,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p85))));
+						_p90))));
 	};
 	var specText = _gicentre$eve$Eve$asSpec(
 		{
@@ -17258,7 +17693,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encBar = function (_p86) {
+	var encBar = function (_p91) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17284,7 +17719,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p86)));
+					_p91)));
 	};
 	var specBar = _gicentre$eve$Eve$asSpec(
 		{
@@ -17300,7 +17735,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var data = function (_p87) {
+	var data = function (_p92) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -17338,7 +17773,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 								}
 							}
 						}),
-					_p87)));
+					_p92)));
 	};
 	var des = _gicentre$eve$Eve$description('A simple bar chart with embedded data labels.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17372,7 +17807,7 @@ var _gicentre$eve$Gallery$vl36 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl35 = function () {
-	var enc = function (_p88) {
+	var enc = function (_p93) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17464,14 +17899,14 @@ var _gicentre$eve$Gallery$vl35 = function () {
 									}
 								}
 							},
-							_p88)))));
+							_p93)))));
 	};
-	var trans = function (_p89) {
+	var trans = function (_p94) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.symbol !== \'GOOG\''),
-				_p89));
+				_p94));
 	};
 	var des = _gicentre$eve$Eve$description('Stock prices of four large companies as a small multiples of area charts.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17514,7 +17949,7 @@ var _gicentre$eve$Gallery$vl35 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl34 = function () {
-	var enc = function (_p90) {
+	var enc = function (_p95) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17602,7 +18037,7 @@ var _gicentre$eve$Gallery$vl34 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p90)))));
+							_p95)))));
 	};
 	var des = _gicentre$eve$Eve$description('The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17632,7 +18067,7 @@ var _gicentre$eve$Gallery$vl34 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl33 = function () {
-	var enc = function (_p91) {
+	var enc = function (_p96) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17678,7 +18113,7 @@ var _gicentre$eve$Gallery$vl33 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p91))));
+						_p96))));
 	};
 	var des = _gicentre$eve$Eve$description('Disitributions of car engine power for different countries of origin.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17708,7 +18143,7 @@ var _gicentre$eve$Gallery$vl33 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl32 = function () {
-	var enc = function (_p92) {
+	var enc = function (_p97) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17745,7 +18180,7 @@ var _gicentre$eve$Gallery$vl32 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p92))));
+						_p97))));
 	};
 	var des = _gicentre$eve$Eve$description('Scatterplots of movie takings vs profits for different MPAA ratings.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17775,7 +18210,7 @@ var _gicentre$eve$Gallery$vl32 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl31 = function () {
-	var enc = function (_p93) {
+	var enc = function (_p98) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17827,7 +18262,7 @@ var _gicentre$eve$Gallery$vl31 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p93)))));
+							_p98)))));
 	};
 	var des = _gicentre$eve$Eve$description('Barley crop yields in 1931 and 1932 shown as stacked bar charts.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17857,7 +18292,7 @@ var _gicentre$eve$Gallery$vl31 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl30 = function () {
-	var enc = function (_p94) {
+	var enc = function (_p99) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -17947,14 +18382,14 @@ var _gicentre$eve$Gallery$vl30 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p94)))));
+							_p99)))));
 	};
-	var trans = function (_p95) {
+	var trans = function (_p100) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.year == 2000'),
-				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p95)));
+				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p100)));
 	};
 	var des = _gicentre$eve$Eve$description('A trellis bar chart showing the US population distribution of age groups and gender in 2000.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -17989,7 +18424,7 @@ var _gicentre$eve$Gallery$vl30 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl29 = function () {
-	var enc = function (_p96) {
+	var enc = function (_p101) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -18051,7 +18486,7 @@ var _gicentre$eve$Gallery$vl29 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p96)))));
+							_p101)))));
 	};
 	var des = _gicentre$eve$Eve$description('Anscombe\'s Quartet');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -18081,7 +18516,7 @@ var _gicentre$eve$Gallery$vl29 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl28 = function () {
-	var enc = function (_p97) {
+	var enc = function (_p102) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -18234,9 +18669,9 @@ var _gicentre$eve$Gallery$vl28 = function () {
 									}
 								}
 							},
-							_p97)))));
+							_p102)))));
 	};
-	var data = function (_p98) {
+	var data = function (_p103) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -19230,7 +19665,7 @@ var _gicentre$eve$Gallery$vl28 = function () {
 												}
 											}
 										}),
-									_p98)))))));
+									_p103)))))));
 	};
 	var des = _gicentre$eve$Eve$description('A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19258,7 +19693,7 @@ var _gicentre$eve$Gallery$vl28 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl27 = function () {
-	var enc = function (_p99) {
+	var enc = function (_p104) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19348,14 +19783,14 @@ var _gicentre$eve$Gallery$vl27 = function () {
 								_0: _gicentre$eve$Eve$MNumber(0.7),
 								_1: {ctor: '[]'}
 							},
-							_p99)))));
+							_p104)))));
 	};
-	var trans = function (_p100) {
+	var trans = function (_p105) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.year == 2000'),
-				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p100)));
+				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p105)));
 	};
 	var des = _gicentre$eve$Eve$description('Layered bar chart showing the US population distribution of age groups and gender in 2000.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19390,7 +19825,7 @@ var _gicentre$eve$Gallery$vl27 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl26 = function () {
-	var enc = function (_p101) {
+	var enc = function (_p106) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19469,7 +19904,7 @@ var _gicentre$eve$Gallery$vl26 = function () {
 								}
 							}
 						},
-						_p101))));
+						_p106))));
 	};
 	var des = _gicentre$eve$Eve$description('Unemployment across industries as a streamgraph (centred, stacked area chart).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19507,7 +19942,7 @@ var _gicentre$eve$Gallery$vl26 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl25 = function () {
-	var enc = function (_p102) {
+	var enc = function (_p107) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19586,7 +20021,7 @@ var _gicentre$eve$Gallery$vl25 = function () {
 								}
 							}
 						},
-						_p102))));
+						_p107))));
 	};
 	var des = _gicentre$eve$Eve$description('Unemployment across industries as a normalised area chart.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19624,7 +20059,7 @@ var _gicentre$eve$Gallery$vl25 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl24 = function () {
-	var enc = function (_p103) {
+	var enc = function (_p108) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19690,7 +20125,7 @@ var _gicentre$eve$Gallery$vl24 = function () {
 								}
 							}
 						},
-						_p103))));
+						_p108))));
 	};
 	var des = _gicentre$eve$Eve$description('Unemployment across industries as a stacked area chart.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19720,7 +20155,7 @@ var _gicentre$eve$Gallery$vl24 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl23 = function () {
-	var enc = function (_p104) {
+	var enc = function (_p109) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19803,14 +20238,14 @@ var _gicentre$eve$Gallery$vl23 = function () {
 								}
 							}
 						},
-						_p104))));
+						_p109))));
 	};
-	var trans = function (_p105) {
+	var trans = function (_p110) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.year == 2000'),
-				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p105)));
+				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p110)));
 	};
 	var des = _gicentre$eve$Eve$description('Population structure as a normalised stacked bar chart.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19845,7 +20280,7 @@ var _gicentre$eve$Gallery$vl23 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl22 = function () {
-	var enc = function (_p106) {
+	var enc = function (_p111) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -19886,7 +20321,7 @@ var _gicentre$eve$Gallery$vl22 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p106))));
+						_p111))));
 	};
 	var des = _gicentre$eve$Eve$description('Barley crop yields as a horizontal stacked bar chart');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -19916,7 +20351,7 @@ var _gicentre$eve$Gallery$vl22 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl21 = function () {
-	var enc = function (_p107) {
+	var enc = function (_p112) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20032,7 +20467,7 @@ var _gicentre$eve$Gallery$vl21 = function () {
 								}
 							}
 						},
-						_p107))));
+						_p112))));
 	};
 	var des = _gicentre$eve$Eve$description('Seattle weather stacked bar chart');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20062,7 +20497,7 @@ var _gicentre$eve$Gallery$vl21 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl20 = function () {
-	var enc = function (_p108) {
+	var enc = function (_p113) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20111,7 +20546,7 @@ var _gicentre$eve$Gallery$vl20 = function () {
 								}
 							}
 						},
-						_p108))));
+						_p113))));
 	};
 	var des = _gicentre$eve$Eve$description('Table bubble plot in the style of a Github punched card.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20141,7 +20576,7 @@ var _gicentre$eve$Gallery$vl20 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl19 = function () {
-	var config = function (_p109) {
+	var config = function (_p114) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -20159,9 +20594,9 @@ var _gicentre$eve$Gallery$vl19 = function () {
 							_0: _gicentre$eve$Eve$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p109)));
+					_p114)));
 	};
-	var enc = function (_p110) {
+	var enc = function (_p115) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20216,7 +20651,7 @@ var _gicentre$eve$Gallery$vl19 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p110))));
+						_p115))));
 	};
 	var des = _gicentre$eve$Eve$description('\'Binned heatmap\' comparing movie ratings.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20259,7 +20694,7 @@ var _gicentre$eve$Gallery$vl19 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl18 = function () {
-	var enc = function (_p111) {
+	var enc = function (_p116) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20300,7 +20735,7 @@ var _gicentre$eve$Gallery$vl18 = function () {
 								}
 							}
 						},
-						_p111))));
+						_p116))));
 	};
 	var des = _gicentre$eve$Eve$description('\'Table heatmap\' showing engine size/power for three countries.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20330,7 +20765,7 @@ var _gicentre$eve$Gallery$vl18 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl17 = function () {
-	var enc = function (_p112) {
+	var enc = function (_p117) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20382,7 +20817,7 @@ var _gicentre$eve$Gallery$vl17 = function () {
 							}
 						}
 					},
-					_p112)));
+					_p117)));
 	};
 	var des = _gicentre$eve$Eve$description('Unemployment over time (area chart)');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20420,7 +20855,7 @@ var _gicentre$eve$Gallery$vl17 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl16 = function () {
-	var enc = function (_p113) {
+	var enc = function (_p118) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20455,14 +20890,14 @@ var _gicentre$eve$Gallery$vl16 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p113)));
+					_p118)));
 	};
-	var trans = function (_p114) {
+	var trans = function (_p119) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.symbol === \'GOOG\''),
-				_p114));
+				_p119));
 	};
 	var des = _gicentre$eve$Eve$description('Google\'s stock price over time (quantized as a step-chart).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20501,7 +20936,7 @@ var _gicentre$eve$Gallery$vl16 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl15 = function () {
-	var enc = function (_p115) {
+	var enc = function (_p120) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20556,7 +20991,7 @@ var _gicentre$eve$Gallery$vl15 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p115))));
+						_p120))));
 	};
 	var des = _gicentre$eve$Eve$description('Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20586,7 +21021,7 @@ var _gicentre$eve$Gallery$vl15 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl14 = function () {
-	var enc = function (_p116) {
+	var enc = function (_p121) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20632,7 +21067,7 @@ var _gicentre$eve$Gallery$vl14 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p116))));
+						_p121))));
 	};
 	var des = _gicentre$eve$Eve$description('Stock prices of 5 tech companies over time.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20662,7 +21097,7 @@ var _gicentre$eve$Gallery$vl14 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl13 = function () {
-	var enc = function (_p117) {
+	var enc = function (_p122) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20697,14 +21132,14 @@ var _gicentre$eve$Gallery$vl13 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p117)));
+					_p122)));
 	};
-	var trans = function (_p118) {
+	var trans = function (_p123) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.symbol === \'GOOG\''),
-				_p118));
+				_p123));
 	};
 	var des = _gicentre$eve$Eve$description('Google\'s stock price over time.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20739,7 +21174,7 @@ var _gicentre$eve$Gallery$vl13 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl12 = function () {
-	var enc = function (_p119) {
+	var enc = function (_p124) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20765,7 +21200,7 @@ var _gicentre$eve$Gallery$vl12 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p119)));
+					_p124)));
 	};
 	var des = _gicentre$eve$Eve$description('Shows the relationship between horsepower and the number of cylinders using tick marks.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20795,7 +21230,7 @@ var _gicentre$eve$Gallery$vl12 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl11 = function () {
-	var sel = function (_p120) {
+	var sel = function (_p125) {
 		return _gicentre$eve$Eve$selection(
 			A4(
 				_gicentre$eve$Eve$select,
@@ -20806,9 +21241,9 @@ var _gicentre$eve$Gallery$vl11 = function () {
 					_0: _gicentre$eve$Eve$BindScales,
 					_1: {ctor: '[]'}
 				},
-				_p120));
+				_p125));
 	};
-	var enc = function (_p121) {
+	var enc = function (_p126) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20870,7 +21305,7 @@ var _gicentre$eve$Gallery$vl11 = function () {
 								_0: _gicentre$eve$Eve$MString('#000'),
 								_1: {ctor: '[]'}
 							},
-							_p121)))));
+							_p126)))));
 	};
 	var des = _gicentre$eve$Eve$description('A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost\'s blog post \'One Chart, Twelve Charting Libraries\' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20913,7 +21348,7 @@ var _gicentre$eve$Gallery$vl11 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl10 = function () {
-	var enc = function (_p122) {
+	var enc = function (_p127) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -20950,7 +21385,7 @@ var _gicentre$eve$Gallery$vl10 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p122))));
+						_p127))));
 	};
 	var des = _gicentre$eve$Eve$description('A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -20980,7 +21415,7 @@ var _gicentre$eve$Gallery$vl10 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl9 = function () {
-	var enc = function (_p123) {
+	var enc = function (_p128) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21028,7 +21463,7 @@ var _gicentre$eve$Gallery$vl9 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p123)))));
+							_p128)))));
 	};
 	var des = _gicentre$eve$Eve$description('A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21058,7 +21493,7 @@ var _gicentre$eve$Gallery$vl9 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl8 = function () {
-	var enc = function (_p124) {
+	var enc = function (_p129) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21113,7 +21548,7 @@ var _gicentre$eve$Gallery$vl8 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p124))));
+						_p129))));
 	};
 	var des = _gicentre$eve$Eve$description('A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21143,7 +21578,7 @@ var _gicentre$eve$Gallery$vl8 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl7 = function () {
-	var enc = function (_p125) {
+	var enc = function (_p130) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21169,7 +21604,7 @@ var _gicentre$eve$Gallery$vl7 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p125)));
+					_p130)));
 	};
 	var des = _gicentre$eve$Eve$description('A scatterplot showing horsepower and miles per gallon for various cars (via circle marks).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21199,7 +21634,7 @@ var _gicentre$eve$Gallery$vl7 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl6 = function () {
-	var enc = function (_p126) {
+	var enc = function (_p131) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21225,7 +21660,7 @@ var _gicentre$eve$Gallery$vl6 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p126)));
+					_p131)));
 	};
 	var des = _gicentre$eve$Eve$description('A scatterplot showing horsepower and miles per gallon for various cars (via point marks).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21255,7 +21690,7 @@ var _gicentre$eve$Gallery$vl6 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl5 = function () {
-	var config = function (_p127) {
+	var config = function (_p132) {
 		return _gicentre$eve$Eve$configure(
 			A2(
 				_gicentre$eve$Eve$configuration,
@@ -21273,9 +21708,9 @@ var _gicentre$eve$Gallery$vl5 = function () {
 							_0: _gicentre$eve$Eve$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p127)));
+					_p132)));
 	};
-	var enc = function (_p128) {
+	var enc = function (_p133) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21378,14 +21813,14 @@ var _gicentre$eve$Gallery$vl5 = function () {
 									}
 								}
 							},
-							_p128)))));
+							_p133)))));
 	};
-	var trans = function (_p129) {
+	var trans = function (_p134) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.year == 2000'),
-				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p129)));
+				A3(_gicentre$eve$Eve$calculate, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p134)));
 	};
 	var des = _gicentre$eve$Eve$description('Grouped bar chart shoing population structure by age and gender.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21425,7 +21860,7 @@ var _gicentre$eve$Gallery$vl5 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl4 = function () {
-	var enc = function (_p130) {
+	var enc = function (_p135) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21463,9 +21898,9 @@ var _gicentre$eve$Gallery$vl4 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p130))));
+						_p135))));
 	};
-	var data = function (_p131) {
+	var data = function (_p136) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -21520,7 +21955,7 @@ var _gicentre$eve$Gallery$vl4 = function () {
 									}
 								}
 							}),
-						_p131))));
+						_p136))));
 	};
 	var des = _gicentre$eve$Eve$description('A simple bar chart with ranged data (aka Gantt Chart).');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21548,7 +21983,7 @@ var _gicentre$eve$Gallery$vl4 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl3 = function () {
-	var enc = function (_p132) {
+	var enc = function (_p137) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21579,7 +22014,7 @@ var _gicentre$eve$Gallery$vl3 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p132)));
+					_p137)));
 	};
 	var des = _gicentre$eve$Eve$description('Simple histogram of IMDB ratings.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21609,7 +22044,7 @@ var _gicentre$eve$Gallery$vl3 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl2 = function () {
-	var enc = function (_p133) {
+	var enc = function (_p138) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21658,14 +22093,14 @@ var _gicentre$eve$Gallery$vl2 = function () {
 							}
 						}
 					},
-					_p133)));
+					_p138)));
 	};
-	var trans = function (_p134) {
+	var trans = function (_p139) {
 		return _gicentre$eve$Eve$transform(
 			A2(
 				_gicentre$eve$Eve$filter,
 				_gicentre$eve$Eve$FExpr('datum.year == 2000'),
-				_p134));
+				_p139));
 	};
 	var des = _gicentre$eve$Eve$description('A bar chart showing the US population distribution of age groups in 2000.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21700,7 +22135,7 @@ var _gicentre$eve$Gallery$vl2 = function () {
 		});
 }();
 var _gicentre$eve$Gallery$vl1 = function () {
-	var enc = function (_p135) {
+	var enc = function (_p140) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -21726,9 +22161,9 @@ var _gicentre$eve$Gallery$vl1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p135)));
+					_p140)));
 	};
-	var data = function (_p136) {
+	var data = function (_p141) {
 		return A2(
 			_gicentre$eve$Eve$dataFromColumns,
 			{ctor: '[]'},
@@ -21814,7 +22249,7 @@ var _gicentre$eve$Gallery$vl1 = function () {
 								}
 							}
 						}),
-					_p136)));
+					_p141)));
 	};
 	var des = _gicentre$eve$Eve$description('A simple bar chart with embedded data.');
 	return _gicentre$eve$Eve$toVegaLite(
@@ -21853,256 +22288,8 @@ var _gicentre$eve$Gallery$init = {
 		_elm_lang$core$Json_Encode$list(
 			{
 				ctor: '::',
-				_0: _gicentre$eve$Gallery$vl1,
-				_1: {
-					ctor: '::',
-					_0: _gicentre$eve$Gallery$vl2,
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Gallery$vl3,
-						_1: {
-							ctor: '::',
-							_0: _gicentre$eve$Gallery$vl4,
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Gallery$vl5,
-								_1: {
-									ctor: '::',
-									_0: _gicentre$eve$Gallery$vl6,
-									_1: {
-										ctor: '::',
-										_0: _gicentre$eve$Gallery$vl7,
-										_1: {
-											ctor: '::',
-											_0: _gicentre$eve$Gallery$vl8,
-											_1: {
-												ctor: '::',
-												_0: _gicentre$eve$Gallery$vl9,
-												_1: {
-													ctor: '::',
-													_0: _gicentre$eve$Gallery$vl10,
-													_1: {
-														ctor: '::',
-														_0: _gicentre$eve$Gallery$vl11,
-														_1: {
-															ctor: '::',
-															_0: _gicentre$eve$Gallery$vl12,
-															_1: {
-																ctor: '::',
-																_0: _gicentre$eve$Gallery$vl13,
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$eve$Gallery$vl14,
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$eve$Gallery$vl15,
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$eve$Gallery$vl16,
-																			_1: {
-																				ctor: '::',
-																				_0: _gicentre$eve$Gallery$vl17,
-																				_1: {
-																					ctor: '::',
-																					_0: _gicentre$eve$Gallery$vl18,
-																					_1: {
-																						ctor: '::',
-																						_0: _gicentre$eve$Gallery$vl19,
-																						_1: {
-																							ctor: '::',
-																							_0: _gicentre$eve$Gallery$vl20,
-																							_1: {
-																								ctor: '::',
-																								_0: _gicentre$eve$Gallery$vl21,
-																								_1: {
-																									ctor: '::',
-																									_0: _gicentre$eve$Gallery$vl22,
-																									_1: {
-																										ctor: '::',
-																										_0: _gicentre$eve$Gallery$vl23,
-																										_1: {
-																											ctor: '::',
-																											_0: _gicentre$eve$Gallery$vl24,
-																											_1: {
-																												ctor: '::',
-																												_0: _gicentre$eve$Gallery$vl25,
-																												_1: {
-																													ctor: '::',
-																													_0: _gicentre$eve$Gallery$vl26,
-																													_1: {
-																														ctor: '::',
-																														_0: _gicentre$eve$Gallery$vl27,
-																														_1: {
-																															ctor: '::',
-																															_0: _gicentre$eve$Gallery$vl28,
-																															_1: {
-																																ctor: '::',
-																																_0: _gicentre$eve$Gallery$vl29,
-																																_1: {
-																																	ctor: '::',
-																																	_0: _gicentre$eve$Gallery$vl30,
-																																	_1: {
-																																		ctor: '::',
-																																		_0: _gicentre$eve$Gallery$vl31,
-																																		_1: {
-																																			ctor: '::',
-																																			_0: _gicentre$eve$Gallery$vl32,
-																																			_1: {
-																																				ctor: '::',
-																																				_0: _gicentre$eve$Gallery$vl33,
-																																				_1: {
-																																					ctor: '::',
-																																					_0: _gicentre$eve$Gallery$vl34,
-																																					_1: {
-																																						ctor: '::',
-																																						_0: _gicentre$eve$Gallery$vl35,
-																																						_1: {
-																																							ctor: '::',
-																																							_0: _gicentre$eve$Gallery$vl36,
-																																							_1: {
-																																								ctor: '::',
-																																								_0: _gicentre$eve$Gallery$vl37,
-																																								_1: {
-																																									ctor: '::',
-																																									_0: _gicentre$eve$Gallery$vl38,
-																																									_1: {
-																																										ctor: '::',
-																																										_0: _gicentre$eve$Gallery$vl39,
-																																										_1: {
-																																											ctor: '::',
-																																											_0: _gicentre$eve$Gallery$vl40,
-																																											_1: {
-																																												ctor: '::',
-																																												_0: _gicentre$eve$Gallery$vl41,
-																																												_1: {
-																																													ctor: '::',
-																																													_0: _gicentre$eve$Gallery$vl42,
-																																													_1: {
-																																														ctor: '::',
-																																														_0: _gicentre$eve$Gallery$vl43,
-																																														_1: {
-																																															ctor: '::',
-																																															_0: _gicentre$eve$Gallery$vl44,
-																																															_1: {
-																																																ctor: '::',
-																																																_0: _gicentre$eve$Gallery$vl45,
-																																																_1: {
-																																																	ctor: '::',
-																																																	_0: _gicentre$eve$Gallery$vl46,
-																																																	_1: {
-																																																		ctor: '::',
-																																																		_0: _gicentre$eve$Gallery$vl47,
-																																																		_1: {
-																																																			ctor: '::',
-																																																			_0: _gicentre$eve$Gallery$vl48,
-																																																			_1: {
-																																																				ctor: '::',
-																																																				_0: _gicentre$eve$Gallery$vl49,
-																																																				_1: {
-																																																					ctor: '::',
-																																																					_0: _gicentre$eve$Gallery$vl50,
-																																																					_1: {
-																																																						ctor: '::',
-																																																						_0: _gicentre$eve$Gallery$vl51,
-																																																						_1: {
-																																																							ctor: '::',
-																																																							_0: _gicentre$eve$Gallery$vl52,
-																																																							_1: {
-																																																								ctor: '::',
-																																																								_0: _gicentre$eve$Gallery$vl53,
-																																																								_1: {
-																																																									ctor: '::',
-																																																									_0: _gicentre$eve$Gallery$vl54,
-																																																									_1: {
-																																																										ctor: '::',
-																																																										_0: _gicentre$eve$Gallery$vl55,
-																																																										_1: {
-																																																											ctor: '::',
-																																																											_0: _gicentre$eve$Gallery$vl56,
-																																																											_1: {
-																																																												ctor: '::',
-																																																												_0: _gicentre$eve$Gallery$vl57,
-																																																												_1: {
-																																																													ctor: '::',
-																																																													_0: _gicentre$eve$Gallery$vl58,
-																																																													_1: {
-																																																														ctor: '::',
-																																																														_0: _gicentre$eve$Gallery$vl59,
-																																																														_1: {
-																																																															ctor: '::',
-																																																															_0: _gicentre$eve$Gallery$vl60,
-																																																															_1: {
-																																																																ctor: '::',
-																																																																_0: _gicentre$eve$Gallery$vl61,
-																																																																_1: {
-																																																																	ctor: '::',
-																																																																	_0: _gicentre$eve$Gallery$vlFacetExample,
-																																																																	_1: {
-																																																																		ctor: '::',
-																																																																		_0: _gicentre$eve$Gallery$vlRepeatExample,
-																																																																		_1: {ctor: '[]'}
-																																																																	}
-																																																																}
-																																																															}
-																																																														}
-																																																													}
-																																																												}
-																																																											}
-																																																										}
-																																																									}
-																																																								}
-																																																							}
-																																																						}
-																																																					}
-																																																				}
-																																																			}
-																																																		}
-																																																	}
-																																																}
-																																															}
-																																														}
-																																													}
-																																												}
-																																											}
-																																										}
-																																									}
-																																								}
-																																							}
-																																						}
-																																					}
-																																				}
-																																			}
-																																		}
-																																	}
-																																}
-																															}
-																														}
-																													}
-																												}
-																											}
-																										}
-																									}
-																								}
-																							}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+				_0: _gicentre$eve$Gallery$vlInput,
+				_1: {ctor: '[]'}
 			}))
 };
 var _gicentre$eve$Gallery$main = _elm_lang$core$Platform$program(
