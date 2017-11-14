@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Eve Colour Tests</title>
+  <meta charset="utf-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.1/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc6/vega-embed.js"></script>
+  <script src="colorTests.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} figcaption {padding-top: 0.5em;}.cell { float: left; padding:1em; border-radius: 1em; margin:1.2em; background-color: rgb(251,247,238);}</style>
+</head>
+
+<body>
+  <h1> Eve Colour Tests</h1>
+
+  <h2>Default Schemes</h2>
+  <figure class="cell"><div id="vis1"></div><figcaption>Default continuous colours</figcaption></figure>
+  <figure class="cell"><div id="vis2"></div><figcaption>Default ordinal colours</figcaption></figure>
+  <figure class="cell"><div id="vis3"></div><figcaption>Default nominal colours</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <h2>Named Schemes</h2>
+    <figure class="cell"><div id="vis4"></div><figcaption>Named colour scheme (plasma)</figcaption></figure>
+    <figure class="cell"><div id="vis5"></div><figcaption>Upper range of named colour scheme</figcaption></figure>
+    <figure class="cell"><div id="vis6"></div><figcaption>Reversed named colour scheme</figcaption></figure>
+    <figure class="cell"><div id="vis7"></div><figcaption>Upper range of reversed colour scheme</figcaption></figure>
+    <div style="clear:left"></div>
+
+  <h2>Custom Schemes</h2>
+    <figure class="cell"><div id="vis8"></div><figcaption>Custom continuous range (red to blue)</figcaption></figure>
+    <figure class="cell"><div id="vis9"></div><figcaption>Custom discrete values (red, green, blue)</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <h2>Colour Scales</h2>
+    <figure class="cell"><div id="vis10"></div><figcaption>Sequential scale (default)</figcaption></figure>
+    <figure class="cell"><div id="vis11"></div><figcaption>Linear scale</figcaption></figure>
+    <figure class="cell"><div id="vis12"></div><figcaption>Power scale</figcaption></figure>
+    <figure class="cell"><div id="vis13"></div><figcaption>Square root scale</figcaption></figure>
+    <figure class="cell"><div id="vis14"></div><figcaption>Log Scale</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <h2>Interpolation Type</h2>
+    <figure class="cell"><div id="vis15"></div><figcaption>HSL interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis16"></div><figcaption>HSL-long interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis17"></div><figcaption>Lab interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis18"></div><figcaption>HCL interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis19"></div><figcaption>HCL-long interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis20"></div><figcaption>Cubehelix interpolation</figcaption></figure>
+    <figure class="cell"><div id="vis21"></div><figcaption>Cubehelix-long interpolation</figcaption></figure>
+    <div style="clear:left"></div>
+
+  <h2>Gamma Value</h2>
+    <figure class="cell"><div id="vis22"></div><figcaption>Cubehelix-long, gamma = -0.1</figcaption></figure>
+    <figure class="cell"><div id="vis23"></div><figcaption>Cubehelix-long, gamma = 0</figcaption></figure>
+    <figure class="cell"><div id="vis24"></div><figcaption>Cubehelix-long, (default) gamma = 1</figcaption></figure>
+    <figure class="cell"><div id="vis25"></div><figcaption>Cubehelix-long, gamma = 2</figcaption></figure>
+    <figure class="cell"><div id="vis26"></div><figcaption>Cubehelix-long, gamma = 10</figcaption></figure>
+    <div style="clear:left"></div>
+
+  <script>
+    Elm.ColorTests.worker().ports.fromElm.subscribe(function(elmObj) {
+      let id = 1;
+      for (let obj of elmObj) {
+        vegaEmbed("#vis" + id++, obj, {
+          actions: {"export":false, "source":false, "editor":true}, logLevel:vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

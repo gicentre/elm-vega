@@ -510,7 +510,7 @@ type Binding
     | InCheckbox String (List InputProperty)
     | InRadio String (List InputProperty)
     | InSelect String (List InputProperty)
-      -- TODO: Check validity: The following input types generate a warning if options are included even if options appear to have an effect (e.g. placeholder)
+      -- TODO: Check validity: The following input types can generate a warning if options are included even if options appear to have an effect (e.g. placeholder)
     | InText String (List InputProperty)
     | InNumber String (List InputProperty)
     | InDate String (List InputProperty)
@@ -535,19 +535,25 @@ type Channel
     | ChSize
 
 
-{-| Indicates the type of colour interpolation to apply, when, for example mapping
-a range of nubmers onto a colour scale.
+{-| Indicates the type of colour interpolation to apply, when mapping a data field
+onto a colour scale. Note that color interpolation cannot be applied with the default
+`sequential` color scale, so additionally, you should set the `SType` to another
+continuous scale such as `linear`, `pow` etc.
+
+Of the interpolation options below `Rgb`, `CubeHelix` and `CubeHelixLong` also require
+a `gamma` value (with 1 being a recommended default to provide). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+
 -}
 type CInterpolate
-    = -- TODO: Add colour object property
-      CubeHelix
-    | CubeHelixLong
+    = CubeHelix Float
+    | CubeHelixLong Float
     | Hcl
     | HclLong
     | Hsl
     | HslLong
     | Lab
-    | Rgb
+    | Rgb Float
 
 
 {-| Type of configuration property to customise. See the
@@ -1198,9 +1204,12 @@ type ScaleProperty
     | SRangeStep (Maybe Float)
     | SRound Bool
     | SClamp Bool
+      -- TODO:  Need to restrict set of valid scale types that work with colour interpolation
     | SInterpolate CInterpolate
     | SNice ScaleNice
     | SZero Bool
+      -- TODO: Check: This is a Vega, not Vega-Lite property so can generate a warning if validated against the Vega-Lite spec.
+    | SReverse Bool
 
 
 {-| Describes a scale range of scale output values. For full details see the
@@ -2947,29 +2956,29 @@ inputProperty prop =
 interpolateProperty : CInterpolate -> Spec
 interpolateProperty iType =
     case iType of
-        Rgb ->
-            JE.string "rgb"
+        Rgb gamma ->
+            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
 
         Hsl ->
-            JE.string "hsl"
+            JE.object [ ( "type", JE.string "hsl" ) ]
 
         HslLong ->
-            JE.string "hsl-long"
+            JE.object [ ( "type", JE.string "hsl-long" ) ]
 
         Lab ->
-            JE.string "lab"
+            JE.object [ ( "type", JE.string "lab" ) ]
 
         Hcl ->
-            JE.string "hcl"
+            JE.object [ ( "type", JE.string "hcl" ) ]
 
         HclLong ->
-            JE.string "hcl-long"
+            JE.object [ ( "type", JE.string "hcl-long" ) ]
 
-        CubeHelix ->
-            JE.string "cubehelix"
+        CubeHelix gamma ->
+            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
 
-        CubeHelixLong ->
-            JE.string "cubehelix-long"
+        CubeHelixLong gamma ->
+            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
 
 
 legendOrientLabel : LegendOrientation -> String
@@ -3763,6 +3772,9 @@ scaleProperty scaleProp =
 
         SZero b ->
             ( "zero", JE.bool b )
+
+        SReverse b ->
+            ( "reverse", JE.bool b )
 
 
 scaleRangeProperty : ScaleRange -> Spec
