@@ -5787,7 +5787,11 @@ var _gicentre$eve$Eve$viewConfig = function (viewCfg) {
 					_1: _elm_lang$core$Json_Encode$string(_p1._0)
 				};
 			} else {
-				return {ctor: '_Tuple2', _0: 'fill', _1: _elm_lang$core$Json_Encode$null};
+				return {
+					ctor: '_Tuple2',
+					_0: 'fill',
+					_1: _elm_lang$core$Json_Encode$string('')
+				};
 			}
 		case 'FillOpacity':
 			var _p2 = _p0._0;
@@ -5847,7 +5851,12 @@ var _gicentre$eve$Eve$viewConfig = function (viewCfg) {
 						A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p6._0))
 				};
 			} else {
-				return {ctor: '_Tuple2', _0: 'strokeDash', _1: _elm_lang$core$Json_Encode$null};
+				return {
+					ctor: '_Tuple2',
+					_0: 'strokeDash',
+					_1: _elm_lang$core$Json_Encode$list(
+						{ctor: '[]'})
+				};
 			}
 		default:
 			var _p7 = _p0._0;
@@ -11397,7 +11406,7 @@ var _gicentre$eve$Gallery$vl61 = function () {
 	var barSpec = _gicentre$eve$Eve$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$eve$Eve$width(330),
+			_0: _gicentre$eve$Eve$width(420),
 			_1: {
 				ctor: '::',
 				_0: _gicentre$eve$Eve$height(120),
@@ -11563,15 +11572,19 @@ var _gicentre$eve$Gallery$vl61 = function () {
 	var spec1 = _gicentre$eve$Eve$asSpec(
 		{
 			ctor: '::',
-			_0: A2(
-				_gicentre$eve$Eve$mark,
-				_gicentre$eve$Eve$Rect,
-				{ctor: '[]'}),
+			_0: _gicentre$eve$Eve$width(300),
 			_1: {
 				ctor: '::',
-				_0: enc1(
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Rect,
 					{ctor: '[]'}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: enc1(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 	var selTrans = function (_p8) {
@@ -11622,35 +11635,31 @@ var _gicentre$eve$Gallery$vl61 = function () {
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$eve$Eve$width(300),
+				_0: A2(
+					_gicentre$eve$Eve$dataFromUrl,
+					'data/movies.json',
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_gicentre$eve$Eve$dataFromUrl,
-						'data/movies.json',
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$eve$Eve$vConcat(
-							{
-								ctor: '::',
-								_0: heatSpec,
-								_1: {
-									ctor: '::',
-									_0: barSpec,
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
+					_0: _gicentre$eve$Eve$vConcat(
+						{
 							ctor: '::',
-							_0: res(
-								{ctor: '[]'}),
+							_0: heatSpec,
 							_1: {
 								ctor: '::',
-								_0: config(
-									{ctor: '[]'}),
+								_0: barSpec,
 								_1: {ctor: '[]'}
 							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: res(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: config(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
 						}
 					}
 				}

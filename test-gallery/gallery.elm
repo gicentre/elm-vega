@@ -1560,7 +1560,7 @@ vl61 =
                 << color [ MAggregate Count, MmType Quantitative, MLegend [ LTitle "" ] ]
 
         spec1 =
-            asSpec [ mark Rect [], enc1 [] ]
+            asSpec [ width 300, mark Rect [], enc1 [] ]
 
         enc2 =
             encoding
@@ -1579,7 +1579,7 @@ vl61 =
             selection << select "myPts" Single [ Encodings [ ChX ] ]
 
         barSpec =
-            asSpec [ width 330, height 120, mark Bar [], sel [], encBar [] ]
+            asSpec [ width 420, height 120, mark Bar [], sel [], encBar [] ]
 
         encBar =
             encoding
@@ -1595,7 +1595,7 @@ vl61 =
             resolve
                 << resolution (RLegend [ ( ChColor, Independent ), ( ChSize, Independent ) ])
     in
-    toVegaLite [ des, width 300, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
 
 
 vlRepeatExample : Spec
