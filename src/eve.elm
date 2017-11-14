@@ -1431,8 +1431,8 @@ this is to be added. For further detais see the
 
 -}
 aggregate : List Spec -> List String -> List LabelledSpec -> List LabelledSpec
-aggregate ops groups transforms =
-    ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] ) :: transforms
+aggregate ops groups =
+    (::) ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] )
 
 
 {-| Create a specification sufficient to define an element in a composed visualization
@@ -1683,7 +1683,9 @@ facet fMaps =
 
 
 {-| Adds the given filter operation a list of transformations that may be applied
-to a channel or field.
+to a channel or field. The first parameter is the filter operation and the second,
+often implicit, parameter is the list of other filter operations to which this
+should be added in sequence.
 
     trans =
         transform
@@ -1691,16 +1693,16 @@ to a channel or field.
 
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
-filter f transforms =
+filter f =
     case f of
         FExpr expr ->
-            ( "filter", JE.string expr ) :: transforms
+            (::) ( "filter", JE.string expr )
 
         FEqual field val ->
-            ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", datavalue val ) ] ) :: transforms
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", datavalue val ) ] )
 
         FSelection selName ->
-            ( "filter", JE.object [ ( "selection", JE.string selName ) ] ) :: transforms
+            (::) ( "filter", JE.object [ ( "selection", JE.string selName ) ] )
 
         FRange field vals ->
             let
@@ -1726,7 +1728,7 @@ filter f transforms =
                             in
                             JE.null
             in
-            ( "filter", JE.object [ ( "field", JE.string field ), ( "range", values ) ] ) :: transforms
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "range", values ) ] )
 
         FOneOf field vals ->
             let
@@ -1744,7 +1746,7 @@ filter f transforms =
                         Booleans bs ->
                             List.map JE.bool bs |> JE.list
             in
-            ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] ) :: transforms
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
 
 
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
@@ -2127,8 +2129,8 @@ toVegaLite spec =
         |> JE.object
 
 
-{-| Create a single transform specification from a list of transformation specifications.
-Note that the order of transformations can be important, especially if labels created
+{-| Create a single transform from a list of transformation specifications. Note
+that the order of transformations can be important, especially if labels created
 with `calculate` are used in other transofrmations. Using the functional composition
 pipeline idiom (as example below) allows you to provide the transformations in the
 order intended.
@@ -4221,7 +4223,7 @@ viewConfig viewCfg =
                     ( "fill", JE.string s )
 
                 Nothing ->
-                    ( "fill", JE.null )
+                    ( "fill", JE.string "" )
 
         FillOpacity mx ->
             case mx of
@@ -4237,7 +4239,7 @@ viewConfig viewCfg =
                     ( "stroke", JE.string s )
 
                 Nothing ->
-                    ( "stroke", JE.null )
+                    ( "stroke", JE.string "" )
 
         StrokeOpacity mx ->
             case mx of
@@ -4261,7 +4263,7 @@ viewConfig viewCfg =
                     ( "strokeDash", JE.list (List.map JE.float xs) )
 
                 Nothing ->
-                    ( "strokeDash", JE.null )
+                    ( "strokeDash", JE.list [] )
 
         StrokeDashOffset mx ->
             case mx of
