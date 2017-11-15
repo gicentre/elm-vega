@@ -10962,6 +10962,22 @@ var _gicentre$eve$Eve$RName = function (a) {
 var _gicentre$eve$Eve$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
+var _gicentre$eve$Eve$scaleDomainToRange = function (scaleDomainPairs) {
+	var _p116 = _elm_lang$core$List$unzip(scaleDomainPairs);
+	var domain = _p116._0;
+	var range = _p116._1;
+	return {
+		ctor: '::',
+		_0: _gicentre$eve$Eve$SDomain(
+			_gicentre$eve$Eve$DStrings(domain)),
+		_1: {
+			ctor: '::',
+			_0: _gicentre$eve$Eve$SRange(
+				_gicentre$eve$Eve$RStrings(range)),
+			_1: {ctor: '[]'}
+		}
+	};
+};
 var _gicentre$eve$Eve$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
 };
@@ -11164,7 +11180,28 @@ var _gicentre$eve$Walkthrough$update = F2(
 	function (msg, model) {
 		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 	});
-var _gicentre$eve$Walkthrough$multiBar = function () {
+var _gicentre$eve$Walkthrough$weatherColors = {
+	ctor: '::',
+	_0: {ctor: '_Tuple2', _0: 'sun', _1: '#e7ba52'},
+	_1: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'fog', _1: '#c7c7c7'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'drizzle', _1: '#aec7ea'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'rain', _1: '#1f77b4'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'snow', _1: '#9467bd'},
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	}
+};
+var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 	var enc = function (_p0) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
@@ -11197,90 +11234,22 @@ var _gicentre$eve$Walkthrough$multiBar = function () {
 						}
 					},
 					A2(
-						_gicentre$eve$Eve$column,
+						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: _gicentre$eve$Eve$FName('weather'),
+							_0: _gicentre$eve$Eve$MName('weather'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$eve$Eve$color,
-							{
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MName('weather'),
+								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$eve$Eve$MLegend(
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$eve$Eve$MScale(
-												{
-													ctor: '::',
-													_0: _gicentre$eve$Eve$SDomain(
-														_gicentre$eve$Eve$DStrings(
-															{
-																ctor: '::',
-																_0: 'sun',
-																_1: {
-																	ctor: '::',
-																	_0: 'fog',
-																	_1: {
-																		ctor: '::',
-																		_0: 'drizzle',
-																		_1: {
-																			ctor: '::',
-																			_0: 'rain',
-																			_1: {
-																				ctor: '::',
-																				_0: 'snow',
-																				_1: {ctor: '[]'}
-																			}
-																		}
-																	}
-																}
-															})),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$eve$Eve$SRange(
-															_gicentre$eve$Eve$RStrings(
-																{
-																	ctor: '::',
-																	_0: '#e7ba52',
-																	_1: {
-																		ctor: '::',
-																		_0: '#c7c7c7',
-																		_1: {
-																			ctor: '::',
-																			_0: '#aec7ea',
-																			_1: {
-																				ctor: '::',
-																				_0: '#1f77b4',
-																				_1: {
-																					ctor: '::',
-																					_0: '#9467bd',
-																					_1: {ctor: '[]'}
-																				}
-																			}
-																		}
-																	}
-																})),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
+									_0: _gicentre$eve$Eve$MScale(
+										_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
+									_1: {ctor: '[]'}
 								}
-							},
-							_p0)))));
+							}
+						},
+						_p0))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -11347,59 +11316,7 @@ var _gicentre$eve$Walkthrough$lineChart = function () {
 								_1: {
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MScale(
-										{
-											ctor: '::',
-											_0: _gicentre$eve$Eve$SDomain(
-												_gicentre$eve$Eve$DStrings(
-													{
-														ctor: '::',
-														_0: 'sun',
-														_1: {
-															ctor: '::',
-															_0: 'fog',
-															_1: {
-																ctor: '::',
-																_0: 'drizzle',
-																_1: {
-																	ctor: '::',
-																	_0: 'rain',
-																	_1: {
-																		ctor: '::',
-																		_0: 'snow',
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														}
-													})),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$eve$Eve$SRange(
-													_gicentre$eve$Eve$RStrings(
-														{
-															ctor: '::',
-															_0: '#e7ba52',
-															_1: {
-																ctor: '::',
-																_0: '#c7c7c7',
-																_1: {
-																	ctor: '::',
-																	_0: '#aec7ea',
-																	_1: {
-																		ctor: '::',
-																		_0: '#1f77b4',
-																		_1: {
-																			ctor: '::',
-																			_0: '#9467bd',
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														})),
-												_1: {ctor: '[]'}
-											}
-										}),
+										_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -11428,7 +11345,7 @@ var _gicentre$eve$Walkthrough$lineChart = function () {
 			}
 		});
 }();
-var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
+var _gicentre$eve$Walkthrough$multiBar = function () {
 	var enc = function (_p2) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
@@ -11461,74 +11378,38 @@ var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 						}
 					},
 					A2(
-						_gicentre$eve$Eve$color,
+						_gicentre$eve$Eve$column,
 						{
 							ctor: '::',
-							_0: _gicentre$eve$Eve$MName('weather'),
+							_0: _gicentre$eve$Eve$FName('weather'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$eve$Eve$MScale(
-										{
-											ctor: '::',
-											_0: _gicentre$eve$Eve$SDomain(
-												_gicentre$eve$Eve$DStrings(
-													{
-														ctor: '::',
-														_0: 'sun',
-														_1: {
-															ctor: '::',
-															_0: 'fog',
-															_1: {
-																ctor: '::',
-																_0: 'drizzle',
-																_1: {
-																	ctor: '::',
-																	_0: 'rain',
-																	_1: {
-																		ctor: '::',
-																		_0: 'snow',
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														}
-													})),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$eve$Eve$SRange(
-													_gicentre$eve$Eve$RStrings(
-														{
-															ctor: '::',
-															_0: '#e7ba52',
-															_1: {
-																ctor: '::',
-																_0: '#c7c7c7',
-																_1: {
-																	ctor: '::',
-																	_0: '#aec7ea',
-																	_1: {
-																		ctor: '::',
-																		_0: '#1f77b4',
-																		_1: {
-																			ctor: '::',
-																			_0: '#9467bd',
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														})),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
+								_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
+								_1: {ctor: '[]'}
 							}
 						},
-						_p2))));
+						A2(
+							_gicentre$eve$Eve$color,
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MName('weather'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MLegend(
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$MScale(
+												_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							_p2)))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{

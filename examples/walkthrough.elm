@@ -61,6 +61,11 @@ stackedHistogram =
         ]
 
 
+weatherColors : List ( String, String )
+weatherColors =
+    [ ( "sun", "#e7ba52" ), ( "fog", "#c7c7c7" ), ( "drizzle", "#aec7ea" ), ( "rain", "#1f77b4" ), ( "snow", "#9467bd" ) ]
+
+
 stackedHistogram2 : Spec
 stackedHistogram2 =
     let
@@ -68,14 +73,7 @@ stackedHistogram2 =
             encoding
                 << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
-                << color
-                    [ MName "weather"
-                    , MmType Nominal
-                    , MScale
-                        [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                        , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                        ]
-                    ]
+                << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
@@ -91,14 +89,7 @@ lineChart =
             encoding
                 << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
-                << color
-                    [ MName "weather"
-                    , MmType Nominal
-                    , MScale
-                        [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                        , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                        ]
-                    ]
+                << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
@@ -115,15 +106,7 @@ multiBar =
                 << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
                 << column [ FName "weather", FmType Nominal ]
-                << color
-                    [ MName "weather"
-                    , MmType Nominal
-                    , MLegend []
-                    , MScale
-                        [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                        , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                        ]
-                    ]
+                << color [ MName "weather", MmType Nominal, MLegend [], MScale (scaleDomainToRange weatherColors) ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []

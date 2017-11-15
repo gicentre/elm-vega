@@ -139,6 +139,10 @@ The Eve code to do this is simply to add another channel encoding, this time `co
 Unlike temperature, weather type is _nominal_, that is, categorical with no intrinsic order.
 And once again, simply by stating the measurement type, Vega-Lite determines an appropriate colour scheme and legend.
 
+Notice how that in Eve we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
+Types used to customise various channels all start with an uppercase letter indicating the type of channel affected.
+So the name of the data field use to encode _position_ is `PName`, its measurement type, `PmType`  and its positional aggregation is `PAggregate`, whereas the name of the data field for encoding colour is indicated by `MName` and its measurement type `MmType` (where `M` is short for Mark).
+
 ### Stacked Histogram with Customised Colours (7:20)
 
 
@@ -152,19 +156,16 @@ Changing the way a channel is encoded involves specifying the _scale_ and in par
 
 
 ```elm
+weatherColors : List ( String, String )
+weatherColors =
+    [ ( "sun", "#e7ba52" ), ( "fog", "#c7c7c7" ), ( "drizzle", "#aec7ea" ), ( "rain", "#1f77b4" ), ( "snow", "#9467bd" ) ]
+
 let
     enc =
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << color
-                [ MName "weather"
-                , MmType Nominal
-                , MScale
-                    [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                    , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                    ]
-                ]
+            << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
@@ -173,11 +174,7 @@ toVegaLite
     ]
 ```
 
-Notice how that in Eve we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
-Types used to customise various channels all start with an uppercase letter indicating the type of channel affected.
-So the name of the data field use to encode position is `PName`, its measurement type, `PmType` whereas the name of the data field for encoding colour is indicated by the type `MName` (where `M` is short for Mark).
-Similar rules apply for nested properties, so that the domain and range of a scale are indicated by `SDomain` and `SRange`.
-
+The mapping between the values in the domain (weather types `sun`, `fog` etc.) and the colors used to represent them (hex values `#e7ba52`, `#c7c7c7` etc.) is handled by an Eve function `scaleDomainToRange` which accepts a list of tuples defining those mappings.
 
 Notice how we never needed to state explicitly that we wished our bars to be stacked.
 This was inferred directly by Vega-Lite based on the combination of bar marks and colour channel encoding.
@@ -191,14 +188,7 @@ let
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << color
-                [ MName "weather"
-                , MmType Nominal
-                , MScale
-                    [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                    , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                    ]
-                ]
+            << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
@@ -224,15 +214,7 @@ let
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
             << column [ FName "weather", FmType Nominal ]
-            << color
-                [ MName "weather"
-                , MmType Nominal
-                , MLegend []
-                , MScale
-                    [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                    , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7ea", "#1f77b4", "#9467bd" ])
-                    ]
-                ]
+            << color [ MName "weather", MmType Nominal, MLegend [], MScale (scaleDomainToRange weatherColors) ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
