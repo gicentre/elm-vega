@@ -1209,7 +1209,7 @@ type ScaleNice
     | NWeek
     | NMonth
     | NYear
-      -- TODO: Time interval object
+    | NInterval TimeUnit Int
     | IsNice Bool
     | NTickCount Int
 
@@ -3475,6 +3475,9 @@ nice ni =
 
         NYear ->
             JE.string "year"
+
+        NInterval tu step ->
+            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
 
         IsNice b ->
             JE.bool b
