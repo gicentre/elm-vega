@@ -734,7 +734,8 @@ type Format
     = JSON
     | CSV
     | TSV
-      -- TODO: TopoJSON format
+    | TopojsonFeature String
+    | TopojsonMesh String
     | Parse (List ( String, FDataType ))
 
 
@@ -1594,7 +1595,7 @@ dataFromColumns fmts cols =
     if fmts == [] then
         ( Data, JE.object [ ( "values", dataArray ) ] )
     else
-        ( Data, JE.object [ ( "values", dataArray ), ( "format", JE.object (List.map format fmts) ) ] )
+        ( Data, JE.object [ ( "values", dataArray ), ( "format", JE.object (List.concatMap format fmts) ) ] )
 
 
 {-| Declare data source from a url. The url can be a local path on a web server
@@ -1612,7 +1613,7 @@ dataFromUrl url fmts =
     if fmts == [] then
         ( Data, JE.object [ ( "url", JE.string url ) ] )
     else
-        ( Data, JE.object [ ( "url", JE.string url ), ( "format", JE.object (List.map format fmts) ) ] )
+        ( Data, JE.object [ ( "url", JE.string url ), ( "format", JE.object (List.concatMap format fmts) ) ] )
 
 
 {-| Provides an optional description to be associated with the visualization.
@@ -2901,20 +2902,26 @@ fDataType dType =
                 JE.string ("utc:'" ++ dateFmt ++ "'")
 
 
-format : Format -> LabelledSpec
+format : Format -> List LabelledSpec
 format fmt =
     case fmt of
         JSON ->
-            ( "type", JE.string "json" )
+            [ ( "type", JE.string "json" ) ]
 
         CSV ->
-            ( "type", JE.string "csv" )
+            [ ( "type", JE.string "csv" ) ]
 
         TSV ->
-            ( "type", JE.string "tsv" )
+            [ ( "type", JE.string "tsv" ) ]
+
+        TopojsonFeature objectSet ->
+            [ ( "type", JE.string "json" ), ( "feature", JE.string objectSet ) ]
+
+        TopojsonMesh objectSet ->
+            [ ( "type", JE.string "json" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
-            ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, fDataType fmt )) fmts )
+            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, fDataType fmt )) fmts ) ]
 
 
 hAlignLabel : HAlign -> String
