@@ -1322,7 +1322,6 @@ type SortProperty
     = Ascending
     | Descending
     | Op Operation
-      -- TODO: Do we need a NoSort option?
     | ByField String
     | ByRepeat Arrangement
 
@@ -3571,6 +3570,9 @@ orderChannelProperty oDef =
 
         OSort ops ->
             case ops of
+                [] ->
+                    ( "sort", JE.null )
+
                 [ Ascending ] ->
                     ( "sort", JE.string "ascending" )
 
@@ -3614,6 +3616,9 @@ positionChannelProperty pDef =
 
         PSort ops ->
             case ops of
+                [] ->
+                    ( "sort", JE.null )
+
                 [ Ascending ] ->
                     ( "sort", JE.string "ascending" )
 
