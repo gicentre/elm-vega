@@ -123,7 +123,7 @@ port to some JavaScript that invokes the Vega-Lite runtime.
 
 ## General Data types
 
-In addtion to more general data types like integers and string, the following types
+In addition to more general data types like integers and string, the following types
 can carry data used in specifications.
 
 @docs Spec
@@ -159,7 +159,7 @@ Types and functions for declaring the type of visual marks used in the visualiza
 
 # Creating the Encoding Specification
 
-Types and functions for declaring the enocding rules that map visual expression
+Types and functions for declaring the encoding rules that map visual expression
 to data. Channels can include position on screen (e.g. `X`,`Y`), visual mark properties
 (e.g. colour, size, shape), text, ordering, level of detail and facets (for nested
 visualization).
@@ -226,7 +226,7 @@ Channels for faceting single plots into small multiples. Can be used to create
 trellis plots or other arrangements in rows and columns. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#facet)
 for further details. See also, 'faceted view composition' for a more flexible (but
-more verbose) way of definting faceted views.
+more verbose) way of defining faceted views.
 
 @docs row
 @docs column
@@ -236,10 +236,10 @@ more verbose) way of definting faceted views.
 
 Used for grouping data but without changing the visual appearance of a mark. When,
 for example, a field is encoded by colour, all data items with the same value for
-that field are given the same colour. When a field is encoded by a detail channel,
-all data items with the same value are placed in the same group. This allows, for
-example a line chart with multiple lines to be created – one for each group. See
-the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
+that field are given the same colour. When a detail channel encodes a field, all
+data items with the same value are placed in the same group. This allows, for example
+a line chart with multiple lines to be created – one for each group. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
 for more information.
 
 @docs detail
@@ -248,7 +248,7 @@ for more information.
 
 # Creating the Transform Specification
 
-Types and functions for declaring the transoformation rules that are applied to
+Types and functions for declaring the transformation rules that are applied to
 data or fields. Transformations may be applied to a number of different encodings,
 such as position, colour and size.
 
@@ -294,7 +294,7 @@ such as position, colour and size.
 # Creating view compositions
 
 Views can be combined to create more complex multiview displays. This may involve
-layering views on top of each other (superpositon) or laying them out in adjacent
+layering views on top of each other (superposition) or laying them out in adjacent
 spaces (juxtaposition using `repeat`, `facet` or concatenate). Where different views
 have potentially conflicting channels (for example, two position scales in a layered
 visualization) the rules for resolving them can be defined with `resolve`. For details
@@ -348,12 +348,12 @@ For details, see the
 
 ## Making conditional channel encodings
 
-Sometimes, espcially when building interaction into a visualization, it is useful
+Sometimes, especially when building interaction into a visualization, it is useful
 to make channel encoding conditional on some kind of selection such as clicking
 or dragging. Once a selection has been defined and named, supplying a set of
 `MCondition` encodings allow mark encodings to become dependent on that selection.
 `MCondition` is followed firstly by the name of the selection upon which it is
-dependent, then a list of mark field encondings that should be applied when the
+dependent, then a list of mark field encodings that should be applied when the
 selection is true. Finally there must be some encoding to be applied when the selection
 is not true (`MString "grey"` in the example below). The colour encoding below
 is saying "whenever data marks are selected with an interval mouse drag, encode
@@ -429,7 +429,7 @@ type AutosizeConfig
     | AResize Bool
 
 
-{-| Axis configuration opptions for customising all axes. See the
+{-| Axis configuration options for customising all axes. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config)
 for more details.
 -}
@@ -460,7 +460,7 @@ type AxisConfig
 
 
 {-| Axis customisation properties. These are used for customising individual axes.
-To confgure all axes, use `AxisConfig` with a `configuration` instead. See the
+To configure all axes, use `AxisConfig` with a `configuration` instead. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
 for more details.
 -}
@@ -708,8 +708,8 @@ type FacetMapping
 {-| Indicates the type of data to be parsed when reading input data. For `FDate`
 and `FUtc`, the formatting specification can be specified using
 [D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
-or left as an empty string if detault date formatting is to be applied. Care should
-be taken when assuming detfault passing of dates though as different browsers can
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default passing of dates though as different browsers can
 parse dates differently. Being explicit about the date format is usually safer.
 -}
 type FDataType
@@ -783,7 +783,7 @@ max and step values; InSelect (selector) has a list of selection label options.
 For details see the
 [Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
 The `debounce` property, available for all input types allows a delay in input event
-handling to be added in order to avoid unecessary event broadcasting. The `Element`
+handling to be added in order to avoid unnecessary event broadcasting. The `Element`
 property is an optional CSS selector indicating the parent element to which the
 input element should be added. This allows the option of the input element to be
 outside the visualization container.
@@ -1019,7 +1019,7 @@ type OverlapStrategy
 
 
 {-| Type of position channel, `X` and `Y` represent horizontal and vertical axis dimensions
-while `X2` and `Y2` represent secondary axis dimensions where two scales are overlayed
+while `X2` and `Y2` represent secondary axis dimensions where two scales are overlaid
 in the same space.
 -}
 type Position
@@ -1044,7 +1044,7 @@ type PositionChannel
     | PStack StackProperty
 
 
-{-| Top-level Vega-Lite properties. These are the ones that define the visualzation.
+{-| Top-level Vega-Lite properties. These are the ones that define the visualization.
 They are generated by functions such as `mark`, `transform`, `dataFromUrl` etc.
 Commonly you will define at least the data property (providing the data to visualize);
 the mark property (the form of visual symbolisation to use); and the encoding property
@@ -1228,7 +1228,7 @@ type ScaleRange
 
 {-| Indicates the type of selection to be generated by the user. `Single` allows
 one mark at a time to be selected. 'Multi' allows multiple items to be selected
-(e.g. with shift-click). 'Interval' alows a bounding rectangle to be dragged by
+(e.g. with shift-click). 'Interval' allows a bounding rectangle to be dragged by
 user to select all items intersecting with it.
 -}
 type Selection
@@ -1306,7 +1306,7 @@ type SortProperty
 
 
 {-| Represents a Vega-Lite specification. Specs can be (and usually are) nested.
-They can range from a single boolean value up to the entire Vega-Lite specification.
+They can range from a single Boolean value up to the entire Vega-Lite specification.
 -}
 type alias Spec =
     JE.Value
@@ -1423,9 +1423,9 @@ type ViewConfig
 {-| Defines a set of named aggregation transformations to be used when encoding
 channels. This is useful when, for example, you wish to apply the same transformation
 to a number of channels but do not want to define it each time. The first parameter is
-a list of the named agreggation operations to apply. The second parameter is a list
-of 'group by' fields. The third paramter is the list of transformations to which
-this is to be added. For further detais see the
+a list of the named aggregation operations to apply. The second parameter is a list
+of 'group by' fields. The third parameter is the list of transformations to which
+this is to be added. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/aggregate.html#aggregate-op-def).
 
     trans =
@@ -1443,8 +1443,8 @@ aggregate ops groups =
 {-| Create a specification sufficient to define an element in a composed visualization
 such as a superposed layer or juxtaposed facet. Typically a layer will contain a
 full set of specifications that define a visualization with
-the exception of the data specification which is usally defined outside of any one
-layer. Whereas for repeated and faceted specs, the entire specification is provied.
+the exception of the data specification which is usually defined outside of any one
+layer. Whereas for repeated and faceted specs, the entire specification is provided.
 
     enc1 = ...
     spec1 =
@@ -1490,7 +1490,7 @@ calculate expr label =
     (::) ( "calculate", JE.list [ JE.string expr, JE.string label ] )
 
 
-{-| Create a set of discrete domain to color mappings suitable for customsing categorical
+{-| Create a set of discrete domain to color mappings suitable for customising categorical
 scales. The first item in each tuple should be a domain value and the second the
 colour value with which it should be associated. It is a convenience function equivalent
 to specifying separate `SDomain` and `SRange` lists and is safer as it guarantees
@@ -1530,10 +1530,10 @@ color markProps =
 
 
 {-| Encodes a new facet to be arranged in columns. The first parameter is a list
-of properties that define the faceting channel. The should include at least the name
-of the data field and its measurement type. The final parameter is a list of any
-previous channels to which this is to be added. This is usually implicit when chaining
-encodings using functional composition
+of properties that define the faceting channel. This should include at least the
+name of the data field and its measurement type. The final parameter is a list of
+anyprevious channels to which this is to be added. This is usually implicit when
+chaining encodings using functional composition
 
     enc =
         encoding
@@ -1678,7 +1678,7 @@ detail detailProps =
     (::) ( "detail", List.map detailChannelProperty detailProps |> JE.object )
 
 
-{-| Create a pair of continuous domain to color mappings suitable for customsing
+{-| Create a pair of continuous domain to color mappings suitable for customising
 ordered scales. The first parameter is a tuple representing the mapping of the lowest
 numeric value in the domain to its equivalent color; the second tuple the mapping
 of the highest numeric value to color. If the domain contains any values between
@@ -1721,7 +1721,7 @@ encoding channels =
 {-| Defines the fields that will be used to facet a view in rows or columns to create
 a set of small multiples. This is used where the encoding of the visualization in small
 multiples is identical, but data for each is grouped by the given fields. When
-creating a faceted view in this way you also need to define a full sepcification
+creating a faceted view in this way you also need to define a full specification
 to apply to each of those facets using `asSpec`.
 
     spec = ...
@@ -1781,7 +1781,7 @@ filter f =
                         Booleans bs ->
                             let
                                 _ =
-                                    Debug.log "Cannot filter with range of booleans " vals
+                                    Debug.log "Cannot filter with range of Booleans " vals
                             in
                             JE.null
             in
@@ -1823,7 +1823,7 @@ hConcat specs =
     ( HConcat, JE.list specs )
 
 
-{-| Overrides the default height of the visualization. If not speciied the height
+{-| Overrides the default height of the visualization. If not specified the height
 will be calculated based on the content of the visualization.
 
     enc = ...
@@ -1860,7 +1860,7 @@ layer specs =
 {-| Create a mark specification. Used to create a mark ( property, specification )
 pair. All marks must have a type (first parameter) and can optionally be customised
 with a list of mark properties such as interpolation style for lines. To keep the
-default style for the mark just provide an empty list for the second parameter.
+default style for the mark, just provide an empty list for the second parameter.
 
     mark Circle []
     mark Line [ MInterpolate StepAfter ]
@@ -1947,7 +1947,7 @@ order oDefs =
 {-| Encode a position channel. The first parameter identifies the channel,
 the second a list of qualifying options. Usually these will include at least the
 name of the data field associated with it and its measurement type (either the field
-name directly, or a refernce to a row / column repeat field). The final parameter
+name directly, or a reference to a row / column repeat field). The final parameter
 is a list of any previous channels to which this position channel should be added.
 This is often implicit when chaining a series of encodings using functional composition.
 
@@ -1964,7 +1964,7 @@ position pos pDefs =
 {-| Define the fields that will be used to compose rows and columns of a set of
 small multiples. This is used where the encoding of the visualization in small
 multiples is largely identical, but the data field used in each might vary. When
-a list of fields is identified with `repeat` you also need to define a full sepcification
+a list of fields is identified with `repeat` you also need to define a full specification
 to apply to each of those fields using `asSpec`.
 
     spec = ...
@@ -2026,10 +2026,10 @@ resolve res =
 
 
 {-| Encode a new facet to be arranged in rows. The first parameter is a list of
-facet properties that define the faceting channel. The should include at least the
-name of data the field and its measurement type. The final parameter is a list of
-any previous channels to which this is to be added. This is usually implicit when
-chaining encodings using functional composition
+facet properties that define the faceting channel. This should include at least
+the name of data the field and its measurement type. The final parameter is a list
+of any previous channels to which this is to be added. This is usually implicit
+when chaining encodings using functional composition
 
     enc =
         encoding
@@ -2157,11 +2157,11 @@ passed to Vega-Lite for graphics generation. Commonly these will include at leas
 a data, mark and encoding specification.
 
 While simple properties like `mark` may be provided directly, it is usually clearer
-to label more complex ones such as encodings as sepearate expressions. This becomes
+to label more complex ones such as encodings as separate expressions. This becomes
 increasingly helpful for visualizations that involve composition of layers, repeats
 and facets.
 
-Sepcifications can be built up by chaining a series of functions (such as `dataColumn`
+Specifications can be built up by chaining a series of functions (such as `dataColumn`
 or `position` in the example below). Functional composition using the `<<` operator
 allows This to be done compactly.
 
@@ -2188,7 +2188,7 @@ toVegaLite spec =
 
 {-| Create a single transform from a list of transformation specifications. Note
 that the order of transformations can be important, especially if labels created
-with `calculate` are used in other transofrmations. Using the functional composition
+with `calculate` are used in other transformations. Using the functional composition
 pipeline idiom (as example below) allows you to provide the transformations in the
 order intended.
 
@@ -2246,7 +2246,7 @@ vConcat specs =
     ( VConcat, JE.list specs )
 
 
-{-| Override the default width of the visualization. If not speciied the width
+{-| Override the default width of the visualization. If not specified the width
 will be calculated based on the content of the visualization.
 
     enc = ...
@@ -3122,7 +3122,7 @@ legendProperty legendProp =
                         Booleans bs ->
                             let
                                 _ =
-                                    Debug.log "Cannot create legend values with a list of of booleans " vals
+                                    Debug.log "Cannot create legend values with a list of Booleans " vals
                             in
                             JE.null
             in
