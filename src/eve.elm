@@ -582,6 +582,7 @@ type ConfigurationProperty
     | BarStyle (List MarkProperty)
     | CircleStyle (List MarkProperty)
     | CountTitle String
+    | FieldTitle FieldTitleProperty
     | Legend (List LegendProperty)
     | LineStyle (List MarkProperty)
     | MarkStyle (List MarkProperty)
@@ -594,9 +595,9 @@ type ConfigurationProperty
     | RemoveInvalid Bool
     | RuleStyle (List MarkProperty)
     | Scale (List ScaleConfig)
-      -- TODO: Add Selecion config
+    | SelectionStyle (List ( Selection, List SelectionProperty ))
     | SquareStyle (List MarkProperty)
-    | Style (List MarkProperty)
+    | Stack StackProperty
     | TextStyle (List MarkProperty)
     | TickStyle (List MarkProperty)
     | TitleStyle (List TitleConfig)
@@ -1415,6 +1416,17 @@ type TitleConfig
     | TOrient Side
 
 
+{-| Indicates the style in which field names are displayed. The `Verbal` style is
+'Sum of field', 'Year of date', 'field (binned)' etc. The `Function` style is
+'SUM(field)', 'YEAR(date)', 'BIN(field)' etc. The `Plain` style is just the field
+name without any additional text.
+-}
+type FieldTitleProperty
+    = Verbal
+    | Function
+    | Plain
+
+
 {-| Indicates the vertical alignment of some text that may be attached to a mark.
 -}
 type VAlign
@@ -1589,6 +1601,7 @@ more details.
         configure
             << configuration (Axis [ DomainWidth 1 ])
             << configuration (View [ Stroke (Just "transparent") ])
+            << configuration (SelectionStyle [ ( Single, [ On "dblclick" ] ) ])
 
 -}
 configure : List LabelledSpec -> ( VLProperty, Spec )
@@ -1673,9 +1686,9 @@ dataFromUrl url fmts =
     enc = ...
     toVegaLite
         [ description "Population change of key regions since 1900"
-        , dataFromUrl "data/population.json"
+        , dataFromUrl "data/population.json" []
         , mark Bar []
-        , enc
+        , enc []
         ]
 
 -}
@@ -1834,7 +1847,7 @@ filter f =
         spec2 = ...
     in
     toVegaLite
-        [ dataFromUrl "data/driving.json"
+        [ dataFromUrl "data/driving.json" []
         , hConcat [ spec1, spec2 ]
         ]
 
@@ -1850,9 +1863,9 @@ will be calculated based on the content of the visualization.
     enc = ...
     toVegaLite
         [ height 300
-        , dataFromUrl "data/population.json"
+        , dataFromUrl "data/population.json" []
         , mark Bar []
-        , enc
+        , enc []
         ]
 
 -}
@@ -1868,7 +1881,7 @@ height h =
         spec2 = ...
     in
     toVegaLite
-        [ dataFromUrl "data/driving.json"
+        [ dataFromUrl "data/driving.json" []
         , layer [ spec1, spec2 ]
         ]
 
@@ -1908,7 +1921,7 @@ mark mark mProps =
         [ name "PopGrowth"
         , dataFromUrl "data/population.json" []
         , mark Bar []
-        , enc
+        , enc []
         ]
 
 -}
@@ -2162,7 +2175,7 @@ text tDefs =
     enc = ...
     toVegaLite
         [ title "Population Growth"
-        , dataFromUrl "data/population.json"
+        , dataFromUrl "data/population.json" []
         , mark Bar []
         , enc []
         ]
@@ -2257,7 +2270,7 @@ transform transforms =
         spec2 = ...
     in
     toVegaLite
-        [ dataFromUrl "data/driving.json"
+        [ dataFromUrl "data/driving.json" []
         , vConcat [ spec1, spec2 ]
         ]
 
@@ -2273,9 +2286,9 @@ will be calculated based on the content of the visualization.
     enc = ...
     toVegaLite
         [ width 500
-        , dataFromUrl "data/population.json"
+        , dataFromUrl "data/population.json" []
         , mark Bar []
-        , enc
+        , enc []
         ]
 
 -}
@@ -2620,6 +2633,9 @@ configProperty configProp =
         CountTitle title ->
             ( "countTitle", JE.string title )
 
+        FieldTitle ftp ->
+            ( "fieldTitle", JE.string (fieldTitleLabel ftp) )
+
         RemoveInvalid b ->
             if b then
                 ( "invalidValues", JE.string "filter" )
@@ -2705,17 +2721,24 @@ configProperty configProp =
         TitleStyle tcs ->
             ( "title", JE.object (List.map titleConfig tcs) )
 
-        Style mps ->
-            ( "style", JE.object (List.map markProperty mps) )
-
         NamedStyle name mps ->
             ( "style", JE.object [ ( name, JE.object (List.map markProperty mps) ) ] )
 
         Scale scs ->
             ( "scale", JE.object (List.map scaleConfig scs) )
 
+        Stack sp ->
+            stackProperty sp
+
         Range rcs ->
             ( "range", JE.object (List.map rangeConfig rcs) )
+
+        SelectionStyle selConfig ->
+            let
+                selProp ( sel, sps ) =
+                    ( selectionLabel sel, JE.object (List.map selectionProperty sps) )
+            in
+            ( "selection", JE.object (List.map selProp selConfig) )
 
         View vcs ->
             ( "view", JE.object (List.map viewConfig vcs) )
@@ -2901,6 +2924,19 @@ facetMappingProperty fMap =
 
         ColumnBy fFields ->
             ( "column", JE.object (List.map facetChannelProperty fFields) )
+
+
+fieldTitleLabel : FieldTitleProperty -> String
+fieldTitleLabel ftp =
+    case ftp of
+        Verbal ->
+            "verbal"
+
+        Function ->
+            "function"
+
+        Plain ->
+            "plain"
 
 
 headerProperty : HeaderProperty -> LabelledSpec
