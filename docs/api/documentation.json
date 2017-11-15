@@ -425,91 +425,91 @@
         "args": [],
         "cases": [
           [
-            "InRange",
+            "IRange",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InCheckbox",
+            "ICheckbox",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InRadio",
+            "IRadio",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InSelect",
+            "ISelect",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InText",
+            "IText",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InNumber",
+            "INumber",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InDate",
+            "IDate",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InTime",
+            "ITime",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InMonth",
+            "IMonth",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InWeek",
+            "IWeek",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InDateTimeLocal",
+            "IDateTimeLocal",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InTel",
+            "ITel",
             [
               "String",
               "List Eve.InputProperty"
             ]
           ],
           [
-            "InColor",
+            "IColor",
             [
               "String",
               "List Eve.InputProperty"
@@ -691,6 +691,12 @@
             ]
           ],
           [
+            "FieldTitle",
+            [
+              "Eve.FieldTitleProperty"
+            ]
+          ],
+          [
             "Legend",
             [
               "List Eve.LegendProperty"
@@ -767,15 +773,21 @@
             ]
           ],
           [
+            "SelectionStyle",
+            [
+              "List ( Eve.Selection, List Eve.SelectionProperty )"
+            ]
+          ],
+          [
             "SquareStyle",
             [
               "List Eve.MarkProperty"
             ]
           ],
           [
-            "Style",
+            "Stack",
             [
-              "List Eve.MarkProperty"
+              "Eve.StackProperty"
             ]
           ],
           [
@@ -3279,7 +3291,7 @@
       },
       {
         "name": "configure",
-        "comment": " Create a single global configuration from a list of configuration specifications.\nConfigurations are applied to all relevant items in the specification. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html) for\nmore details.\n\n    config =\n        configure\n            << configuration (Axis [ DomainWidth 1 ])\n            << configuration (View [ Stroke (Just \"transparent\") ])\n\n",
+        "comment": " Create a single global configuration from a list of configuration specifications.\nConfigurations are applied to all relevant items in the specification. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html) for\nmore details.\n\n    config =\n        configure\n            << configuration (Axis [ DomainWidth 1 ])\n            << configuration (View [ Stroke (Just \"transparent\") ])\n            << configuration (SelectionStyle [ ( Single, [ On \"dblclick\" ] ) ])\n\n",
         "type": "List Eve.LabelledSpec -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
@@ -3299,7 +3311,7 @@
       },
       {
         "name": "description",
-        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ description \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc\n        ]\n\n",
+        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ description \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
@@ -3329,17 +3341,17 @@
       },
       {
         "name": "hConcat",
-        "comment": " Assigns a list of specifications to be juxtaposed horizontally in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\"\n        , hConcat [ spec1, spec2 ]\n        ]\n\n",
+        "comment": " Assigns a list of specifications to be juxtaposed horizontally in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\" []\n        , hConcat [ spec1, spec2 ]\n        ]\n\n",
         "type": "List Eve.Spec -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
         "name": "height",
-        "comment": " Overrides the default height of the visualization. If not specified the height\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ height 300\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc\n        ]\n\n",
+        "comment": " Overrides the default height of the visualization. If not specified the height\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ height 300\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
         "type": "Float -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
         "name": "layer",
-        "comment": " Assigns a list of specifications to superposed layers in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\"\n        , layer [ spec1, spec2 ]\n        ]\n\n",
+        "comment": " Assigns a list of specifications to superposed layers in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\" []\n        , layer [ spec1, spec2 ]\n        ]\n\n",
         "type": "List Eve.Spec -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
@@ -3349,7 +3361,7 @@
       },
       {
         "name": "name",
-        "comment": " Provides an optional name to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ name \"PopGrowth\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc\n        ]\n\n",
+        "comment": " Provides an optional name to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ name \"PopGrowth\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
@@ -3424,7 +3436,7 @@
       },
       {
         "name": "title",
-        "comment": " Provide an optional title to be displayed in the visualization.\n\n    enc = ...\n    toVegaLite\n        [ title \"Population Growth\"\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Provide an optional title to be displayed in the visualization.\n\n    enc = ...\n    toVegaLite\n        [ title \"Population Growth\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
@@ -3439,12 +3451,12 @@
       },
       {
         "name": "vConcat",
-        "comment": " Assigns a list of specifications to be juxtaposed vertically in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\"\n        , vConcat [ spec1, spec2 ]\n        ]\n\n",
+        "comment": " Assigns a list of specifications to be juxtaposed vertically in a visualization.\n\n    let\n        spec1 = ...\n        spec2 = ...\n    in\n    toVegaLite\n        [ dataFromUrl \"data/driving.json\" []\n        , vConcat [ spec1, spec2 ]\n        ]\n\n",
         "type": "List Eve.Spec -> ( Eve.VLProperty, Eve.Spec )"
       },
       {
         "name": "width",
-        "comment": " Override the default width of the visualization. If not specified the width\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , dataFromUrl \"data/population.json\"\n        , mark Bar []\n        , enc\n        ]\n\n",
+        "comment": " Override the default width of the visualization. If not specified the width\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
         "type": "Float -> ( Eve.VLProperty, Eve.Spec )"
       }
     ],
