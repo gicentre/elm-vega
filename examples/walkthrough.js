@@ -10962,7 +10962,7 @@ var _gicentre$eve$Eve$RName = function (a) {
 var _gicentre$eve$Eve$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
-var _gicentre$eve$Eve$scaleDomainToRange = function (scaleDomainPairs) {
+var _gicentre$eve$Eve$categoricalDomainMap = function (scaleDomainPairs) {
 	var _p116 = _elm_lang$core$List$unzip(scaleDomainPairs);
 	var domain = _p116._0;
 	var range = _p116._1;
@@ -10978,6 +10978,32 @@ var _gicentre$eve$Eve$scaleDomainToRange = function (scaleDomainPairs) {
 		}
 	};
 };
+var _gicentre$eve$Eve$domainRangeMap = F2(
+	function (lowerMap, upperMap) {
+		var _p117 = _elm_lang$core$List$unzip(
+			{
+				ctor: '::',
+				_0: lowerMap,
+				_1: {
+					ctor: '::',
+					_0: upperMap,
+					_1: {ctor: '[]'}
+				}
+			});
+		var domain = _p117._0;
+		var range = _p117._1;
+		return {
+			ctor: '::',
+			_0: _gicentre$eve$Eve$SDomain(
+				_gicentre$eve$Eve$DNumbers(domain)),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$SRange(
+					_gicentre$eve$Eve$RStrings(range)),
+				_1: {ctor: '[]'}
+			}
+		};
+	});
 var _gicentre$eve$Eve$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
 };
@@ -11180,27 +11206,28 @@ var _gicentre$eve$Walkthrough$update = F2(
 	function (msg, model) {
 		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 	});
-var _gicentre$eve$Walkthrough$weatherColors = {
-	ctor: '::',
-	_0: {ctor: '_Tuple2', _0: 'sun', _1: '#e7ba52'},
-	_1: {
+var _gicentre$eve$Walkthrough$weatherColors = _gicentre$eve$Eve$categoricalDomainMap(
+	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'fog', _1: '#c7c7c7'},
+		_0: {ctor: '_Tuple2', _0: 'sun', _1: '#e7ba52'},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'drizzle', _1: '#aec7ea'},
+			_0: {ctor: '_Tuple2', _0: 'fog', _1: '#c7c7c7'},
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'rain', _1: '#1f77b4'},
+				_0: {ctor: '_Tuple2', _0: 'drizzle', _1: '#aec7ea'},
 				_1: {
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'snow', _1: '#9467bd'},
-					_1: {ctor: '[]'}
+					_0: {ctor: '_Tuple2', _0: 'rain', _1: '#1f77b4'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'snow', _1: '#9467bd'},
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		}
-	}
-};
+	});
 var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 	var enc = function (_p0) {
 		return _gicentre$eve$Eve$encoding(
@@ -11243,8 +11270,7 @@ var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Eve$MScale(
-										_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
+									_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -11315,8 +11341,7 @@ var _gicentre$eve$Walkthrough$lineChart = function () {
 								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Eve$MScale(
-										_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
+									_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -11402,8 +11427,7 @@ var _gicentre$eve$Walkthrough$multiBar = function () {
 											{ctor: '[]'}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$eve$Eve$MScale(
-												_gicentre$eve$Eve$scaleDomainToRange(_gicentre$eve$Walkthrough$weatherColors)),
+											_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
 											_1: {ctor: '[]'}
 										}
 									}

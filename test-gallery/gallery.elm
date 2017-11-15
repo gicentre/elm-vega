@@ -395,10 +395,14 @@ vl21 =
                 << color
                     [ MName "weather"
                     , MmType Nominal
-                    , MScale
-                        [ SDomain (DStrings [ "sun", "fog", "drizzle", "rain", "snow" ])
-                        , SRange (RStrings [ "#e7ba52", "#c7c7c7", "#aec7e8", "#1f77b4", "#9467bd" ])
-                        ]
+                    , MScale <|
+                        categoricalDomainMap
+                            [ ( "sun", "#e7ba52" )
+                            , ( "fog", "#c7c7c7" )
+                            , ( "drizzle", "#aec7ea" )
+                            , ( "rain", "#1f77b4" )
+                            , ( "snow", "#9467bd" )
+                            ]
                     , MLegend [ LTitle "Weather type" ]
                     ]
     in
@@ -544,11 +548,15 @@ vl28 =
                     [ MName "type"
                     , MmType Nominal
                     , MLegend [ LTitle "Response" ]
-                    , MScale
-                        [ SType ScOrdinal
-                        , SDomain (DStrings [ "Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree" ])
-                        , SRange (RStrings [ "#c30d24", "#f3a583", "#cccccc", "#94c6da", "#1770ab" ])
-                        ]
+                    , MScale <|
+                        SType ScOrdinal
+                            :: categoricalDomainMap
+                                [ ( "Strongly disagree", "#c30d24" )
+                                , ( "Disagree", "#f3a583" )
+                                , ( "Neither agree nor disagree", "#cccccc" )
+                                , ( "Agree", "#94c6da" )
+                                , ( "Strongly agree", "#1770ab" )
+                                ]
                     ]
     in
     toVegaLite [ des, data [], mark Bar [], enc [] ]
@@ -1154,7 +1162,7 @@ vl48 =
             encoding
                 << position X [ PName "life_expect", PmType Quantitative, PAxis [ AxTitle "Life Expectanct (years)" ] ]
                 << position Y [ PName "country", PmType Nominal, PAxis [ AxTitle "Country", Offset 5, Ticks False, MinExtent 70, Domain False ] ]
-                << color [ MName "year", MmType Ordinal, MScale [ SDomain (DNumbers [ 1955, 2000 ]), SRange (RStrings [ "#e6959c", "#911a24" ]) ], MLegend [ LTitle "Year" ] ]
+                << color [ MName "year", MmType Ordinal, MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )), MLegend [ LTitle "Year" ] ]
                 << size [ MNumber 100 ]
                 << opacity [ MNumber 1 ]
 

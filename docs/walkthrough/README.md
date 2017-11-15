@@ -156,16 +156,21 @@ Changing the way a channel is encoded involves specifying the _scale_ and in par
 
 
 ```elm
-weatherColors : List ( String, String )
+weatherColors : List ScaleProperty
 weatherColors =
-    [ ( "sun", "#e7ba52" ), ( "fog", "#c7c7c7" ), ( "drizzle", "#aec7ea" ), ( "rain", "#1f77b4" ), ( "snow", "#9467bd" ) ]
-
+    categoricalDomainMap
+        [ ( "sun", "#e7ba52" )
+        , ( "fog", "#c7c7c7" )
+        , ( "drizzle", "#aec7ea" )
+        , ( "rain", "#1f77b4" )
+        , ( "snow", "#9467bd" )
+        ]
 let
     enc =
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
+            << color [ MName "weather", MmType Nominal, MScale weatherColors ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
@@ -174,7 +179,7 @@ toVegaLite
     ]
 ```
 
-The mapping between the values in the domain (weather types `sun`, `fog` etc.) and the colors used to represent them (hex values `#e7ba52`, `#c7c7c7` etc.) is handled by an Eve function `scaleDomainToRange` which accepts a list of tuples defining those mappings.
+The mapping between the values in the domain (weather types `sun`, `fog` etc.) and the colors used to represent them (hex values `#e7ba52`, `#c7c7c7` etc.) is handled by an Eve function `categoricalDomainMap` which accepts a list of tuples defining those mappings.
 
 Notice how we never needed to state explicitly that we wished our bars to be stacked.
 This was inferred directly by Vega-Lite based on the combination of bar marks and colour channel encoding.
@@ -188,7 +193,7 @@ let
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MScale (scaleDomainToRange weatherColors) ]
+            << color [ MName "weather", MmType Nominal, MScale weatherColors ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
@@ -214,7 +219,7 @@ let
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
             << column [ FName "weather", FmType Nominal ]
-            << color [ MName "weather", MmType Nominal, MLegend [], MScale (scaleDomainToRange weatherColors) ]
+            << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []

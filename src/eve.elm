@@ -68,6 +68,7 @@ module Eve
         , asSpec
         , bin
         , calculate
+        , categoricalDomainMap
         , color
         , column
         , configuration
@@ -77,6 +78,7 @@ module Eve
         , dataFromUrl
         , description
         , detail
+        , domainRangeMap
         , encoding
         , facet
         , filter
@@ -93,7 +95,6 @@ module Eve
         , resolution
         , resolve
         , row
-        , scaleDomainToRange
         , select
         , selection
         , shape
@@ -282,7 +283,8 @@ such as position, colour and size.
 
 @docs ScaleProperty
 @docs Scale
-@docs scaleDomainToRange
+@docs categoricalDomainMap
+@docs domainRangeMap
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
@@ -1488,6 +1490,33 @@ calculate expr label =
     (::) ( "calculate", JE.list [ JE.string expr, JE.string label ] )
 
 
+{-| Create a set of discrete domain to color mappings suitable for customsing categorical
+scales. The first item in each tuple should be a domain value and the second the
+colour value with which it should be associated. It is a convenience function equivalent
+to specifying separate `SDomain` and `SRange` lists and is safer as it guarantees
+a one-to-one correspondence between domain and range values.
+
+    color
+        [ MName "weather"
+        , MmType Nominal
+        , MScale <|
+            categoricalDomainMap
+                [ ( "sun", "yellow" )
+                , ( "rain", "blue" )
+                , ( "fog", "grey" )
+                ]
+        ]
+
+-}
+categoricalDomainMap : List ( String, String ) -> List ScaleProperty
+categoricalDomainMap scaleDomainPairs =
+    let
+        ( domain, range ) =
+            List.unzip scaleDomainPairs
+    in
+    [ SDomain (DStrings domain), SRange (RStrings range) ]
+
+
 {-| Encode a colour channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by colour. The second parameter
 is a list of any previous channels to which this colour channel should be added.
@@ -1647,6 +1676,31 @@ for details.
 detail : List DetailChannel -> List LabelledSpec -> List LabelledSpec
 detail detailProps =
     (::) ( "detail", List.map detailChannelProperty detailProps |> JE.object )
+
+
+{-| Create a pair of continuous domain to color mappings suitable for customsing
+ordered scales. The first parameter is a tuple representing the mapping of the lowest
+numeric value in the domain to its equivalent color; the second tuple the mapping
+of the highest numeric value to color. If the domain contains any values between
+these lower and upper bounds they are interpolated according to the scale's interpolation
+function. This is a convenience function equivalent to specifying separate `SDomain`
+and `SRange` lists and is safer as it guarantees a one-to-one correspondence between
+domain and range values.
+
+    color
+        [ MName "year"
+        , MmType Ordinal
+        , MScale <| domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )
+        ]
+
+-}
+domainRangeMap : ( Float, String ) -> ( Float, String ) -> List ScaleProperty
+domainRangeMap lowerMap upperMap =
+    let
+        ( domain, range ) =
+            List.unzip [ lowerMap, upperMap ]
+    in
+    [ SDomain (DNumbers domain), SRange (RStrings range) ]
 
 
 {-| Create an encoding specification from a list of channel encodings.
@@ -1987,34 +2041,6 @@ chaining encodings using functional composition
 row : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 row fFields =
     (::) ( "row", JE.object (List.map facetChannelProperty fFields) )
-
-
-{-| Create a set of discrete domain to range mappings suitable for customsing a
-scale. The first item in each tuple should be a domain value and the second the
-range value with which it should be associated. This can be used, for example, to
-create custom colour schemes for particular domain values. It is a convenience function
-equivalent to specifying separate `SDomain` and `SRange` lists and is safer as it
-guarantees a one-to-one correspondence between domain and range values.
-
-    color
-        [ MName "weather"
-        , MmType Nominal
-        , MScale <|
-            scaleDomainToRange
-                [ ( "sun", "yellow" )
-                , ( "rain", "blue" )
-                , ( "fog", "grey" )
-                ]
-        ]
-
--}
-scaleDomainToRange : List ( String, String ) -> List ScaleProperty
-scaleDomainToRange scaleDomainPairs =
-    let
-        ( domain, range ) =
-            List.unzip scaleDomainPairs
-    in
-    [ SDomain (DStrings domain), SRange (RStrings range) ]
 
 
 {-| Create a single named selection that may be applied to a data query or transformation.
