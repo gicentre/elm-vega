@@ -1276,8 +1276,10 @@ type SelectionMarkProperty
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
 for details. When linking a selection property to an event stream with `On`, `Translate`
 or `Zoom`, a String should be provided describing the event stream as detailed in the
-[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).
-If an empty string is provided, the property is set to `false`.
+[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams).
+If an empty string is provided, the property is set to `false`. The `Toggle` option
+expects a [Vega expression](https://vega.github.io/vega/docs/expressions) that evaluates
+to either true or false.
 -}
 type SelectionProperty
     = On String
@@ -1291,8 +1293,7 @@ type SelectionProperty
     | BindScales
     | Bind (List Binding)
     | Nearest Bool
-      -- TODO: XXXX Add toggle vega expression option
-    | NoToggle
+    | Toggle String
 
 
 {-| Determines how selections in faceted or repeated views are resolved. See the
@@ -3997,8 +3998,8 @@ selectionProperty selProp =
         Nearest b ->
             ( "nearest", JE.bool b )
 
-        NoToggle ->
-            ( "toggle", JE.bool False )
+        Toggle expr ->
+            ( "toggle", JE.string expr )
 
         Translate e ->
             if e == "" then

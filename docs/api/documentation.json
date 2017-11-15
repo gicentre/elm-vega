@@ -2517,6 +2517,13 @@
             []
           ],
           [
+            "NInterval",
+            [
+              "Eve.TimeUnit",
+              "Int"
+            ]
+          ],
+          [
             "IsNice",
             [
               "Bool"
@@ -2717,7 +2724,7 @@
       },
       {
         "name": "SelectionProperty",
-        "comment": " Properties for customising the nature of the selection. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)\nfor details. When linking a selection property to an event stream with `On`, `Translate`\nor `Zoom`, a String should be provided describing the event stream as detailed in the\n[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).\nIf an empty string is provided, the property is set to `false`.\n",
+        "comment": " Properties for customising the nature of the selection. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)\nfor details. When linking a selection property to an event stream with `On`, `Translate`\nor `Zoom`, a String should be provided describing the event stream as detailed in the\n[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams).\nIf an empty string is provided, the property is set to `false`. The `Toggle` option\nexpects a [Vega expression](https://vega.github.io/vega/docs/expressions) that evaluates\nto either true or false.\n",
         "args": [],
         "cases": [
           [
@@ -2783,8 +2790,10 @@
             ]
           ],
           [
-            "NoToggle",
-            []
+            "Toggle",
+            [
+              "String"
+            ]
           ]
         ]
       },
