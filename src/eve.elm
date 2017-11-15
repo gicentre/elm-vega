@@ -93,6 +93,7 @@ module Eve
         , resolution
         , resolve
         , row
+        , scaleDomainToRange
         , select
         , selection
         , shape
@@ -281,6 +282,7 @@ such as position, colour and size.
 
 @docs ScaleProperty
 @docs Scale
+@docs scaleDomainToRange
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
@@ -1985,6 +1987,34 @@ chaining encodings using functional composition
 row : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 row fFields =
     (::) ( "row", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Create a set of discrete domain to range mappings suitable for customsing a
+scale. The first item in each tuple should be a domain value and the second the
+range value with which it should be associated. This can be used, for example, to
+create custom colour schemes for particular domain values. It is a convenience function
+equivalent to specifying separate `SDomain` and `SRange` lists and is safer as it
+guarantees a one-to-one correspondence between domain and range values.
+
+    color
+        [ MName "weather"
+        , MmType Nominal
+        , MScale <|
+            scaleDomainToRange
+                [ ( "sun", "yellow" )
+                , ( "rain", "blue" )
+                , ( "fog", "grey" )
+                ]
+        ]
+
+-}
+scaleDomainToRange : List ( String, String ) -> List ScaleProperty
+scaleDomainToRange scaleDomainPairs =
+    let
+        ( domain, range ) =
+            List.unzip scaleDomainPairs
+    in
+    [ SDomain (DStrings domain), SRange (RStrings range) ]
 
 
 {-| Create a single named selection that may be applied to a data query or transformation.
