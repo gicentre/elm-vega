@@ -513,20 +513,20 @@ such as a checkbox or radio button. For details see the
 and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
 -}
 type Binding
-    = InRange String (List InputProperty)
-    | InCheckbox String (List InputProperty)
-    | InRadio String (List InputProperty)
-    | InSelect String (List InputProperty)
+    = IRange String (List InputProperty)
+    | ICheckbox String (List InputProperty)
+    | IRadio String (List InputProperty)
+    | ISelect String (List InputProperty)
       -- TODO: Check validity: The following input types can generate a warning if options are included even if options appear to have an effect (e.g. placeholder)
-    | InText String (List InputProperty)
-    | InNumber String (List InputProperty)
-    | InDate String (List InputProperty)
-    | InTime String (List InputProperty)
-    | InMonth String (List InputProperty)
-    | InWeek String (List InputProperty)
-    | InDateTimeLocal String (List InputProperty)
-    | InTel String (List InputProperty)
-    | InColor String (List InputProperty)
+    | IText String (List InputProperty)
+    | INumber String (List InputProperty)
+    | IDate String (List InputProperty)
+    | ITime String (List InputProperty)
+    | IMonth String (List InputProperty)
+    | IWeek String (List InputProperty)
+    | IDateTimeLocal String (List InputProperty)
+    | ITel String (List InputProperty)
+    | IColor String (List InputProperty)
 
 
 {-| Indicates a channel type to be used in a resolution specification.
@@ -2540,44 +2540,43 @@ binProperty binProp =
 binding : Binding -> LabelledSpec
 binding bnd =
     case bnd of
-        -- TODO: Would InputRange, InputCheckbox etc. be better names? Or even IRange, ICheckbox etc. for one-letter consistency?
-        InRange label props ->
+        IRange label props ->
             ( label, JE.object (( "input", JE.string "range" ) :: List.map inputProperty props) )
 
-        InCheckbox label props ->
+        ICheckbox label props ->
             ( label, JE.object (( "input", JE.string "checkbox" ) :: List.map inputProperty props) )
 
-        InRadio label props ->
+        IRadio label props ->
             ( label, JE.object (( "input", JE.string "radio" ) :: List.map inputProperty props) )
 
-        InSelect label props ->
+        ISelect label props ->
             ( label, JE.object (( "input", JE.string "select" ) :: List.map inputProperty props) )
 
-        InText label props ->
+        IText label props ->
             ( label, JE.object (( "input", JE.string "text" ) :: List.map inputProperty props) )
 
-        InNumber label props ->
+        INumber label props ->
             ( label, JE.object (( "input", JE.string "number" ) :: List.map inputProperty props) )
 
-        InDate label props ->
+        IDate label props ->
             ( label, JE.object (( "input", JE.string "date" ) :: List.map inputProperty props) )
 
-        InTime label props ->
+        ITime label props ->
             ( label, JE.object (( "input", JE.string "time" ) :: List.map inputProperty props) )
 
-        InMonth label props ->
+        IMonth label props ->
             ( label, JE.object (( "input", JE.string "month" ) :: List.map inputProperty props) )
 
-        InWeek label props ->
+        IWeek label props ->
             ( label, JE.object (( "input", JE.string "week" ) :: List.map inputProperty props) )
 
-        InDateTimeLocal label props ->
+        IDateTimeLocal label props ->
             ( label, JE.object (( "input", JE.string "datetimelocal" ) :: List.map inputProperty props) )
 
-        InTel label props ->
+        ITel label props ->
             ( label, JE.object (( "input", JE.string "tel" ) :: List.map inputProperty props) )
 
-        InColor label props ->
+        IColor label props ->
             ( label, JE.object (( "input", JE.string "color" ) :: List.map inputProperty props) )
 
 
