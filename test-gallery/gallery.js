@@ -7371,7 +7371,7 @@ var _gicentre$eve$Eve$legendProperty = function (legendProp) {
 						return _elm_lang$core$Json_Encode$list(
 							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p53._0));
 					default:
-						var _p54 = A2(_elm_lang$core$Debug$log, 'Cannot create legend values with a list of of booleans ', _p55);
+						var _p54 = A2(_elm_lang$core$Debug$log, 'Cannot create legend values with a list of Booleans ', _p55);
 						return _elm_lang$core$Json_Encode$null;
 				}
 			}();
@@ -8898,7 +8898,7 @@ var _gicentre$eve$Eve$filter = function (f) {
 						var _p88 = A2(_elm_lang$core$Debug$log, 'Cannot filter with range of strings ', _p90);
 						return _elm_lang$core$Json_Encode$null;
 					default:
-						var _p89 = A2(_elm_lang$core$Debug$log, 'Cannot filter with range of booleans ', _p90);
+						var _p89 = A2(_elm_lang$core$Debug$log, 'Cannot filter with range of Booleans ', _p90);
 						return _elm_lang$core$Json_Encode$null;
 				}
 			}();
@@ -9215,98 +9215,150 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 	switch (_p96.ctor) {
 		case 'MName':
 			return {
-				ctor: '_Tuple2',
-				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p96._0)
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'field',
+					_1: _elm_lang$core$Json_Encode$string(_p96._0)
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MRepeat':
 			return {
-				ctor: '_Tuple2',
-				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$object(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'repeat',
-							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$eve$Eve$arrangementLabel(_p96._0))
-						},
-						_1: {ctor: '[]'}
-					})
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'field',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'repeat',
+								_1: _elm_lang$core$Json_Encode$string(
+									_gicentre$eve$Eve$arrangementLabel(_p96._0))
+							},
+							_1: {ctor: '[]'}
+						})
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MmType':
 			return {
-				ctor: '_Tuple2',
-				_0: 'type',
-				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$measurementLabel(_p96._0))
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string(
+						_gicentre$eve$Eve$measurementLabel(_p96._0))
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MScale':
 			return {
-				ctor: '_Tuple2',
-				_0: 'scale',
-				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p96._0))
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'scale',
+					_1: _elm_lang$core$Json_Encode$object(
+						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p96._0))
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MLegend':
 			var _p97 = _p96._0;
 			return _elm_lang$core$Native_Utils.eq(
 				_p97,
-				{ctor: '[]'}) ? {ctor: '_Tuple2', _0: 'legend', _1: _elm_lang$core$Json_Encode$null} : {
-				ctor: '_Tuple2',
-				_0: 'legend',
-				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$legendProperty, _p97))
+				{ctor: '[]'}) ? {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'legend', _1: _elm_lang$core$Json_Encode$null},
+				_1: {ctor: '[]'}
+			} : {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'legend',
+					_1: _elm_lang$core$Json_Encode$object(
+						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$legendProperty, _p97))
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MBin':
-			return _gicentre$eve$Eve$bin(_p96._0);
+			return {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$bin(_p96._0),
+				_1: {ctor: '[]'}
+			};
 		case 'MCondition':
 			return {
-				ctor: '_Tuple2',
-				_0: 'condition',
-				_1: _elm_lang$core$Json_Encode$object(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'selection',
-							_1: _elm_lang$core$Json_Encode$string(_p96._0)
-						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$eve$Eve$markChannelProperty, _p96._1)
-					})
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'condition',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'selection',
+								_1: _elm_lang$core$Json_Encode$string(_p96._0)
+							},
+							_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p96._1)
+						})
+				},
+				_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p96._2)
 			};
 		case 'MTimeUnit':
 			return {
-				ctor: '_Tuple2',
-				_0: 'timeUnit',
-				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$timeUnitLabel(_p96._0))
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'timeUnit',
+					_1: _elm_lang$core$Json_Encode$string(
+						_gicentre$eve$Eve$timeUnitLabel(_p96._0))
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MAggregate':
 			return {
-				ctor: '_Tuple2',
-				_0: 'aggregate',
-				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$opLabel(_p96._0))
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'aggregate',
+					_1: _elm_lang$core$Json_Encode$string(
+						_gicentre$eve$Eve$opLabel(_p96._0))
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MNumber':
 			return {
-				ctor: '_Tuple2',
-				_0: 'value',
-				_1: _elm_lang$core$Json_Encode$float(_p96._0)
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'value',
+					_1: _elm_lang$core$Json_Encode$float(_p96._0)
+				},
+				_1: {ctor: '[]'}
 			};
 		case 'MString':
 			return {
-				ctor: '_Tuple2',
-				_0: 'value',
-				_1: _elm_lang$core$Json_Encode$string(_p96._0)
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'value',
+					_1: _elm_lang$core$Json_Encode$string(_p96._0)
+				},
+				_1: {ctor: '[]'}
 			};
 		default:
 			return {
-				ctor: '_Tuple2',
-				_0: 'value',
-				_1: _elm_lang$core$Json_Encode$bool(_p96._0)
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'value',
+					_1: _elm_lang$core$Json_Encode$bool(_p96._0)
+				},
+				_1: {ctor: '[]'}
 			};
 	}
 };
@@ -9319,7 +9371,7 @@ var _gicentre$eve$Eve$color = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'color',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, markProps))
 		});
 };
 var _gicentre$eve$Eve$opacity = function (markProps) {
@@ -9331,7 +9383,7 @@ var _gicentre$eve$Eve$opacity = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'opacity',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, markProps))
 		});
 };
 var _gicentre$eve$Eve$shape = function (markProps) {
@@ -9343,7 +9395,7 @@ var _gicentre$eve$Eve$shape = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'shape',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, markProps))
 		});
 };
 var _gicentre$eve$Eve$size = function (markProps) {
@@ -9355,7 +9407,7 @@ var _gicentre$eve$Eve$size = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'size',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, markProps))
 		});
 };
 var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
@@ -10268,9 +10320,9 @@ var _gicentre$eve$Eve$MString = function (a) {
 var _gicentre$eve$Eve$MNumber = function (a) {
 	return {ctor: 'MNumber', _0: a};
 };
-var _gicentre$eve$Eve$MCondition = F2(
-	function (a, b) {
-		return {ctor: 'MCondition', _0: a, _1: b};
+var _gicentre$eve$Eve$MCondition = F3(
+	function (a, b, c) {
+		return {ctor: 'MCondition', _0: a, _1: b, _2: c};
 	});
 var _gicentre$eve$Eve$MLegend = function (a) {
 	return {ctor: 'MLegend', _0: a};
@@ -10962,6 +11014,48 @@ var _gicentre$eve$Eve$RName = function (a) {
 var _gicentre$eve$Eve$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
+var _gicentre$eve$Eve$categoricalDomainMap = function (scaleDomainPairs) {
+	var _p116 = _elm_lang$core$List$unzip(scaleDomainPairs);
+	var domain = _p116._0;
+	var range = _p116._1;
+	return {
+		ctor: '::',
+		_0: _gicentre$eve$Eve$SDomain(
+			_gicentre$eve$Eve$DStrings(domain)),
+		_1: {
+			ctor: '::',
+			_0: _gicentre$eve$Eve$SRange(
+				_gicentre$eve$Eve$RStrings(range)),
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _gicentre$eve$Eve$domainRangeMap = F2(
+	function (lowerMap, upperMap) {
+		var _p117 = _elm_lang$core$List$unzip(
+			{
+				ctor: '::',
+				_0: lowerMap,
+				_1: {
+					ctor: '::',
+					_0: upperMap,
+					_1: {ctor: '[]'}
+				}
+			});
+		var domain = _p117._0;
+		var range = _p117._1;
+		return {
+			ctor: '::',
+			_0: _gicentre$eve$Eve$SDomain(
+				_gicentre$eve$Eve$DNumbers(domain)),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$SRange(
+					_gicentre$eve$Eve$RStrings(range)),
+				_1: {ctor: '[]'}
+			}
+		};
+	});
 var _gicentre$eve$Eve$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
 };
@@ -11427,19 +11521,20 @@ var _gicentre$eve$Gallery$vl61 = function () {
 						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'myPts',
 								{
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MString('steelblue'),
 									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MString('grey'),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p4))));
 	};
@@ -11755,7 +11850,7 @@ var _gicentre$eve$Gallery$vl60 = function () {
 						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'myBrush',
 								{
@@ -11766,12 +11861,13 @@ var _gicentre$eve$Gallery$vl60 = function () {
 										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
 										_1: {ctor: '[]'}
 									}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MString('grey'),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p9))));
 	};
@@ -12390,19 +12486,20 @@ var _gicentre$eve$Gallery$vl57 = function () {
 						_gicentre$eve$Eve$opacity,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'myBrush',
 								{
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MNumber(1),
 									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MNumber(0.7),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MNumber(0.7),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p21))));
 	};
@@ -12593,7 +12690,7 @@ var _gicentre$eve$Gallery$vl56 = function () {
 						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'CylYr',
 								{
@@ -12604,12 +12701,13 @@ var _gicentre$eve$Gallery$vl56 = function () {
 										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
 										_1: {ctor: '[]'}
 									}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MString('grey'),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p25))));
 	};
@@ -12888,19 +12986,20 @@ var _gicentre$eve$Gallery$vl54 = function () {
 						_gicentre$eve$Eve$size,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'myPaintbrush',
 								{
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MNumber(300),
 									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MNumber(50),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MNumber(50),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p30))));
 	};
@@ -12984,7 +13083,7 @@ var _gicentre$eve$Gallery$vl53 = function () {
 						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: A2(
+							_0: A3(
 								_gicentre$eve$Eve$MCondition,
 								'myBrush',
 								{
@@ -12995,12 +13094,13 @@ var _gicentre$eve$Gallery$vl53 = function () {
 										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Ordinal),
 										_1: {ctor: '[]'}
 									}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$eve$Eve$MString('grey'),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						_p32))));
 	};
@@ -13960,35 +14060,10 @@ var _gicentre$eve$Gallery$vl48 = function () {
 								_1: {
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MScale(
-										{
-											ctor: '::',
-											_0: _gicentre$eve$Eve$SDomain(
-												_gicentre$eve$Eve$DNumbers(
-													{
-														ctor: '::',
-														_0: 1955,
-														_1: {
-															ctor: '::',
-															_0: 2000,
-															_1: {ctor: '[]'}
-														}
-													})),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$eve$Eve$SRange(
-													_gicentre$eve$Eve$RStrings(
-														{
-															ctor: '::',
-															_0: '#e6959c',
-															_1: {
-																ctor: '::',
-																_0: '#911a24',
-																_1: {ctor: '[]'}
-															}
-														})),
-												_1: {ctor: '[]'}
-											}
-										}),
+										A2(
+											_gicentre$eve$Eve$domainRangeMap,
+											{ctor: '_Tuple2', _0: 1955, _1: '#e6959c'},
+											{ctor: '_Tuple2', _0: 2000, _1: '#911a24'})),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$eve$Eve$MLegend(
@@ -18517,59 +18592,28 @@ var _gicentre$eve$Gallery$vl28 = function () {
 												{
 													ctor: '::',
 													_0: _gicentre$eve$Eve$SType(_gicentre$eve$Eve$ScOrdinal),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$eve$Eve$SDomain(
-															_gicentre$eve$Eve$DStrings(
-																{
+													_1: _gicentre$eve$Eve$categoricalDomainMap(
+														{
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'Strongly disagree', _1: '#c30d24'},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'Disagree', _1: '#f3a583'},
+																_1: {
 																	ctor: '::',
-																	_0: 'Strongly disagree',
+																	_0: {ctor: '_Tuple2', _0: 'Neither agree nor disagree', _1: '#cccccc'},
 																	_1: {
 																		ctor: '::',
-																		_0: 'Disagree',
+																		_0: {ctor: '_Tuple2', _0: 'Agree', _1: '#94c6da'},
 																		_1: {
 																			ctor: '::',
-																			_0: 'Neither agree nor disagree',
-																			_1: {
-																				ctor: '::',
-																				_0: 'Agree',
-																				_1: {
-																					ctor: '::',
-																					_0: 'Strongly agree',
-																					_1: {ctor: '[]'}
-																				}
-																			}
+																			_0: {ctor: '_Tuple2', _0: 'Strongly agree', _1: '#1770ab'},
+																			_1: {ctor: '[]'}
 																		}
 																	}
-																})),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$eve$Eve$SRange(
-																_gicentre$eve$Eve$RStrings(
-																	{
-																		ctor: '::',
-																		_0: '#c30d24',
-																		_1: {
-																			ctor: '::',
-																			_0: '#f3a583',
-																			_1: {
-																				ctor: '::',
-																				_0: '#cccccc',
-																				_1: {
-																					ctor: '::',
-																					_0: '#94c6da',
-																					_1: {
-																						ctor: '::',
-																						_0: '#1770ab',
-																						_1: {ctor: '[]'}
-																					}
-																				}
-																			}
-																		}
-																	})),
-															_1: {ctor: '[]'}
-														}
-													}
+																}
+															}
+														})
 												}),
 											_1: {ctor: '[]'}
 										}
@@ -20308,59 +20352,28 @@ var _gicentre$eve$Gallery$vl21 = function () {
 								_1: {
 									ctor: '::',
 									_0: _gicentre$eve$Eve$MScale(
-										{
-											ctor: '::',
-											_0: _gicentre$eve$Eve$SDomain(
-												_gicentre$eve$Eve$DStrings(
-													{
+										_gicentre$eve$Eve$categoricalDomainMap(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'sun', _1: '#e7ba52'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'fog', _1: '#c7c7c7'},
+													_1: {
 														ctor: '::',
-														_0: 'sun',
+														_0: {ctor: '_Tuple2', _0: 'drizzle', _1: '#aec7ea'},
 														_1: {
 															ctor: '::',
-															_0: 'fog',
+															_0: {ctor: '_Tuple2', _0: 'rain', _1: '#1f77b4'},
 															_1: {
 																ctor: '::',
-																_0: 'drizzle',
-																_1: {
-																	ctor: '::',
-																	_0: 'rain',
-																	_1: {
-																		ctor: '::',
-																		_0: 'snow',
-																		_1: {ctor: '[]'}
-																	}
-																}
+																_0: {ctor: '_Tuple2', _0: 'snow', _1: '#9467bd'},
+																_1: {ctor: '[]'}
 															}
 														}
-													})),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$eve$Eve$SRange(
-													_gicentre$eve$Eve$RStrings(
-														{
-															ctor: '::',
-															_0: '#e7ba52',
-															_1: {
-																ctor: '::',
-																_0: '#c7c7c7',
-																_1: {
-																	ctor: '::',
-																	_0: '#aec7e8',
-																	_1: {
-																		ctor: '::',
-																		_0: '#1f77b4',
-																		_1: {
-																			ctor: '::',
-																			_0: '#9467bd',
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														})),
-												_1: {ctor: '[]'}
-											}
-										}),
+													}
+												}
+											})),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$eve$Eve$MLegend(

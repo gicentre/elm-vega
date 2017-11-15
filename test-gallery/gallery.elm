@@ -1312,8 +1312,9 @@ vl53 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "myBrush" [ MName "Cylinders", MmType Ordinal ]
-                    , MString "grey"
+                    [ MCondition "myBrush"
+                        [ MName "Cylinders", MmType Ordinal ]
+                        [ MString "grey" ]
                     ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
@@ -1332,7 +1333,11 @@ vl54 =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << size [ MCondition "myPaintbrush" [ MNumber 300 ], MNumber 50 ]
+                << size
+                    [ MCondition "myPaintbrush"
+                        [ MNumber 300 ]
+                        [ MNumber 50 ]
+                    ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
 
@@ -1380,7 +1385,11 @@ vl56 =
             encoding
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MCondition "CylYr" [ MName "Origin", MmType Nominal ], MString "grey" ]
+                << color
+                    [ MCondition "CylYr"
+                        [ MName "Origin", MmType Nominal ]
+                        [ MString "grey" ]
+                    ]
 
         spec1 =
             asSpec [ sel1 [], mark Circle [], enc1 [] ]
@@ -1415,7 +1424,11 @@ vl57 =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-                << opacity [ MCondition "myBrush" [ MNumber 1 ], MNumber 0.7 ]
+                << opacity
+                    [ MCondition "myBrush"
+                        [ MNumber 1 ]
+                        [ MNumber 0.7 ]
+                    ]
 
         spec1 =
             asSpec [ sel [], mark Bar [], enc1 [] ]
@@ -1539,7 +1552,11 @@ vl60 =
             encoding
                 << position X [ PRepeat Column, PmType Quantitative ]
                 << position Y [ PRepeat Row, PmType Quantitative ]
-                << color [ MCondition "myBrush" [ MName "Origin", MmType Nominal ], MString "grey" ]
+                << color
+                    [ MCondition "myBrush"
+                        [ MName "Origin", MmType Nominal ]
+                        [ MString "grey" ]
+                    ]
 
         spec =
             asSpec [ dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
@@ -1593,7 +1610,11 @@ vl61 =
             encoding
                 << position X [ PName "Major_Genre", PmType Nominal, PAxis [ LabelAngle -40 ] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MCondition "myPts" [ MString "steelblue" ], MString "grey" ]
+                << color
+                    [ MCondition "myPts"
+                        [ MString "steelblue" ]
+                        [ MString "grey" ]
+                    ]
 
         config =
             configure

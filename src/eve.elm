@@ -353,11 +353,11 @@ to make channel encoding conditional on some kind of selection such as clicking
 or dragging. Once a selection has been defined and named, supplying a set of
 `MCondition` encodings allow mark encodings to become dependent on that selection.
 `MCondition` is followed firstly by the name of the selection upon which it is
-dependent, then a list of mark field encodings that should be applied when the
-selection is true. Finally there must be some encoding to be applied when the selection
-is not true (`MString "grey"` in the example below). The colour encoding below
-is saying "whenever data marks are selected with an interval mouse drag, encode
-the cylinder field with an ordinal colour scheme; if not selected make them grey".
+dependent, then an 'if' and an 'else' clause. Each clause is a list of mark field
+encodings that should be applied when the selection is true (the 'if clause') and
+when it is false (the 'else clause'). The colour encoding below is saying "whenever
+data marks are selected with an interval mouse drag, encode the cylinder field with
+an ordinal colour scheme, else make them grey".
 
       sel =
           selection << select "myBrush" Interval []
@@ -367,8 +367,9 @@ the cylinder field with an ordinal colour scheme; if not selected make them grey
               << position X [ PName "Horsepower", PmType Quantitative ]
               << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
               << color
-                  [ MCondition "myBrush" [ MName "Cylinders", MmType Ordinal ]
-                  , MString "grey"
+                  [ MCondition "myBrush"
+                      [ MName "Cylinders", MmType Ordinal ]
+                      [ MString "grey" ]
                   ]
 
 For details, see the
@@ -882,7 +883,7 @@ type MarkChannel
     | MTimeUnit TimeUnit
     | MAggregate Operation
     | MLegend (List LegendProperty)
-    | MCondition String (List MarkChannel)
+    | MCondition String (List MarkChannel) (List MarkChannel)
     | MNumber Float
     | MString String
     | MBoolean Bool
@@ -1526,7 +1527,7 @@ is a list of any previous channels to which this colour channel should be added.
 -}
 color : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 color markProps =
-    (::) ( "color", List.map markChannelProperty markProps |> JE.object )
+    (::) ( "color", List.concatMap markChannelProperty markProps |> JE.object )
 
 
 {-| Encodes a new facet to be arranged in columns. The first parameter is a list
@@ -1905,7 +1906,7 @@ is a list of any previous channels to which this shape channel should be added.
 -}
 opacity : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 opacity markProps =
-    (::) ( "opacity", List.map markChannelProperty markProps |> JE.object )
+    (::) ( "opacity", List.concatMap markChannelProperty markProps |> JE.object )
 
 
 {-| Create a named aggregation operation on a field that can be added to a transformation.
@@ -2088,7 +2089,7 @@ is a list of any previous channels to which this shape channel should be added.
 -}
 shape : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 shape markProps =
-    (::) ( "shape", List.map markChannelProperty markProps |> JE.object )
+    (::) ( "shape", List.concatMap markChannelProperty markProps |> JE.object )
 
 
 {-| Encode a size channel. The first parameter is a list of mark channel properties
@@ -2100,7 +2101,7 @@ is a list of any previous channels to which this size channel should be added.
 -}
 size : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 size markProps =
-    (::) ( "size", List.map markChannelProperty markProps |> JE.object )
+    (::) ( "size", List.concatMap markChannelProperty markProps |> JE.object )
 
 
 {-| Defines a specification object for use with faceted and repeated small multiples.
@@ -3132,48 +3133,48 @@ legendProperty legendProp =
             ( "zindex", JE.int n )
 
 
-markChannelProperty : MarkChannel -> LabelledSpec
+markChannelProperty : MarkChannel -> List LabelledSpec
 markChannelProperty field =
     case field of
         MName s ->
-            ( "field", JE.string s )
+            [ ( "field", JE.string s ) ]
 
         MRepeat arr ->
-            ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
 
         MmType t ->
-            ( "type", JE.string (measurementLabel t) )
+            [ ( "type", JE.string (measurementLabel t) ) ]
 
         MScale sps ->
-            ( "scale", JE.object (List.map scaleProperty sps) )
+            [ ( "scale", JE.object (List.map scaleProperty sps) ) ]
 
         MLegend lps ->
             if lps == [] then
-                ( "legend", JE.null )
+                [ ( "legend", JE.null ) ]
             else
-                ( "legend", JE.object (List.map legendProperty lps) )
+                [ ( "legend", JE.object (List.map legendProperty lps) ) ]
 
         MBin bps ->
-            bin bps
+            [ bin bps ]
 
-        MCondition selName ifs ->
-            -- TODO: Should we also include the 'else' branch as part of an MCondition or assume it will be in the list of mark channel properties?
-            ( "condition", JE.object (( "selection", JE.string selName ) :: List.map markChannelProperty ifs) )
+        MCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap markChannelProperty ifClause) )
+                :: List.concatMap markChannelProperty elseClause
 
         MTimeUnit tu ->
-            ( "timeUnit", JE.string (timeUnitLabel tu) )
+            [ ( "timeUnit", JE.string (timeUnitLabel tu) ) ]
 
         MAggregate op ->
-            ( "aggregate", JE.string (opLabel op) )
+            [ ( "aggregate", JE.string (opLabel op) ) ]
 
         MNumber x ->
-            ( "value", JE.float x )
+            [ ( "value", JE.float x ) ]
 
         MString s ->
-            ( "value", JE.string s )
+            [ ( "value", JE.string s ) ]
 
         MBoolean b ->
-            ( "value", JE.bool b )
+            [ ( "value", JE.bool b ) ]
 
 
 markInterpolationLabel : MarkInterpolation -> String
