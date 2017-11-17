@@ -10,6 +10,7 @@ module Eve
         , CInterpolate(..)
         , Channel(..)
         , ConfigurationProperty(..)
+        , DataColumn
         , DataValue(..)
         , DataValues(..)
         , DateTime(..)
@@ -130,6 +131,7 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromUrl
 @docs dataFromColumns
 @docs dataColumn
+@docs DataColumn
 @docs Format
 @docs FDataType
 
@@ -605,6 +607,13 @@ type ConfigurationProperty
     | TitleStyle (List TitleConfig)
     | TimeFormat String
     | View (List ViewConfig)
+
+
+{-| Represents a single column of data. Used when generating inline data with
+`dataColumn`.
+-}
+type alias DataColumn =
+    List LabelledSpec
 
 
 {-| A single data value. This is used when a function can accept values of different
@@ -1617,7 +1626,7 @@ parameter is the list of any other columns to which this is added.
     dataColumn "Animals" (Strings [ "Cat", "Dog", "Mouse"]) []
 
 -}
-dataColumn : String -> DataValues -> List Column -> List Column
+dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
 dataColumn colName data =
     case data of
         Numbers col ->
@@ -1650,7 +1659,7 @@ The columns themselves are most easily generated with `dataColumn`
             << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
 
 -}
-dataFromColumns : List Format -> List Column -> ( VLProperty, Spec )
+dataFromColumns : List Format -> List DataColumn -> ( VLProperty, Spec )
 dataFromColumns fmts cols =
     let
         dataArray =
@@ -2328,10 +2337,6 @@ width w =
 
 type alias LabelledSpec =
     ( String, Spec )
-
-
-type alias Column =
-    List LabelledSpec
 
 
 transpose : List (List a) -> List (List a)
