@@ -24,7 +24,7 @@ In common with other languages that build upon a grammar of graphics such as D3 
 But unlike those languages, Vega-Lite and Eve provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
 
 
-## A Single View specification (3:03)
+## A Single View specification (3:03)˜
 
 Let's start with a simple table of data representing time-stamped weather data for Seattle:
 
@@ -37,7 +37,7 @@ Let's start with a simple table of data representing time-stamped weather data f
 
 ### A Strip plot (3:26)
 
-We could encode one of the numeric data fields as a _strip plot_ where the horizontal position of a tic mark is determined by the magnitude of the data item:
+We could encode one of the numeric data fields as a _strip plot_ where the horizontal position of a tick mark is determined by the magnitude of the data item:
 
 
 ![Strip plot of Seattle daily maximum temperature](images/stripPlot.png)
@@ -233,3 +233,158 @@ Note that the `F` prefix for `FName` and `FmType` refers to _facet_ – a form o
 
 
 The second, minor change, is to include an `MLegend` specification in the colour encoding, but here by providing an empty list, we are stating we do not wish the default legend to appear (the arrangement into columns with colour encoding and default column labels make the legend redundant).
+
+### Multi-view Composition Operators (9:00)
+
+There are four ways in which multiple views may be combined:
+
+* The **facet operator** takes subsets of a dataset and separately applies the same view specification to each of those facets (as seen with the `column` function above).
+Eve functions to create faceted views: `column`, `row`, `facet` and `specification`.
+
+* The **layer operator** creates different views of the data but each is layered (superposed) on the same same space, for example a trend line layered on top of a scatterplot.
+Eve functions to create a layered view: `layer` and `asSpec`.
+
+* The **concatenation operator** allows arbitrary views (potentially with different datasets) to be assembled in rows or columns.
+This allows 'dashboards' to be built.
+Eve functions to create concatenated views: `vConcat`, `hConcat` and `asSpec`.
+
+* The **repeat operator** is a concise way of combining multiple views with only small data-driven differences in each view.
+Eve functions for repeated views: `repeat` and `specification`.
+
+## Composition Example: Precipitation in Seattle (9:40)
+
+As a basis for discussing view composition, let's start with a single bar chart showing monthly precipitation in Seattle:
+
+![Seattle precipitation aggregated by month](images/barChart.png)
+
+```elm
+let
+    enc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+in
+toVegaLite
+    [ dataFromUrl "data/seattle-weather.csv" []
+    , mark Bar []
+    , enc []
+    ]
+```
+
+(Note that here we've cast the date, which has been quantized into monthly intervals to be ordinal so that bars span the full width of each month.)
+
+### Composing layers (10:08)
+
+We can annotate the chart by placing the bar chart specification in a _layer_ and adding another layer with the annotation.
+In this example we will add a layer showing the average precipitation for the entire period:
+
+![Seattle precipitation aggregated by month with average line as separate layer](images/barChart2.png)
+
+```elm
+let
+    barEnc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+    barSpec =
+        asSpec [ mark Bar [], barEnc [] ]
+
+    avLineEnc =
+        encoding
+            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+    avLineSpec =
+        asSpec [ mark Rule [], avLineEnc [] ]
+in
+toVegaLite
+    [ dataFromUrl "data/seattle-weather.csv" []
+    , layer [ barSpec, avLineSpec ]
+    ]
+```
+
+The bar encoding is exactly as it was previously, but this time instead of passing it directly to `toVegaLite` we store it in its own specification object with `asSepc` (which we called `barSpec` in the example above).
+We add a similar average line specification but only need to encode the y-position as we wish to span the entire chart space with the `rule` mark.
+The two specifications are combined as layers with the `layer` function which we add to the list of specifications passed to `toVegaLite` in place of the original bar specification.
+
+### Concatenating views (10:47)
+
+Instead of layering one view on top of another (superposition), we can place them side by side in a row or column (juxtaposition). In Vega-Lite this is referred to as concatenation:
+
+
+![Seattle precipitation and maximum temperatures](images/barChartPair.png)
+
+```elm
+let
+    bar1Enc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+    bar1Spec =
+        asSpec [ mark Bar [], bar1Enc [] ]
+
+    bar2Enc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
+
+    bar2Spec =
+        asSpec [ mark Bar [], bar2Enc [] ]
+in
+toVegaLite
+    [ dataFromUrl "data/seattle-weather.csv" []
+    , vConcat [ bar1Spec, bar2Spec ]
+    ]
+```
+
+Concatenated views are specified in the same way as layered views expect that we use the `vConcat` (or `hConcat` for a horizontal arrangement) function in place of `layer`.
+
+### Repeated Views (11:08)
+
+Noting that juxtaposing similar charts is a common operation, and the specification for each of them often is very similar, the repeat operator allows us to streamline the specification required to do this.
+We might, for example, wish to show three data fields from the Seattle weather dataset:
+
+![Seattle precipitation, temperatures and wind speed](images/barChartTriplet.png)
+
+```elm
+let
+    enc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+
+    spec =
+        asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+in
+toVegaLite
+    [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+    , specification spec
+    ]
+```
+
+This more compact specification replaces the data field name (`PName "precipitation"` etc.) with a reference to the repeating field (`PRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `RowFields` (or `ColumnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
+
+We can combine repeated rows and repeated columns to create a grid of views, such in a scatterplot matrix (or SPLOM for short):
+
+
+![Scatterplot matrix comparing wind, temperature and precipitation](images/splom.png)
+
+```elm
+let
+    enc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PRepeat Row, PmType Quantitative ]
+
+    spec =
+        asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Point [], enc [] ]
+in
+toVegaLite
+    [ repeat
+        [ RowFields [ "temp_max", "precipitation", "wind" ]
+        , ColumnFields [ "wind", "precipitation", "temp_max" ]
+        ]
+    , specification spec
+    ]
+```

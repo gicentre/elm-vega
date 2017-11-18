@@ -121,6 +121,107 @@ multiBar =
         ]
 
 
+barChart : Spec
+barChart =
+    let
+        enc =
+            encoding
+                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+    in
+    toVegaLite
+        [ dataFromUrl "data/seattle-weather.csv" []
+        , mark Bar []
+        , enc []
+        ]
+
+
+barChartWithAverage : Spec
+barChartWithAverage =
+    let
+        barEnc =
+            encoding
+                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+        barSpec =
+            asSpec [ mark Bar [], barEnc [] ]
+
+        avLineEnc =
+            encoding
+                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+        avLineSpec =
+            asSpec [ mark Rule [], avLineEnc [] ]
+    in
+    toVegaLite
+        [ dataFromUrl "data/seattle-weather.csv" []
+        , layer [ barSpec, avLineSpec ]
+        ]
+
+
+barChartPair : Spec
+barChartPair =
+    let
+        bar1Enc =
+            encoding
+                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
+        bar1Spec =
+            asSpec [ mark Bar [], bar1Enc [] ]
+
+        bar2Enc =
+            encoding
+                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
+
+        bar2Spec =
+            asSpec [ mark Bar [], bar2Enc [] ]
+    in
+    toVegaLite
+        [ dataFromUrl "data/seattle-weather.csv" []
+        , vConcat [ bar1Spec, bar2Spec ]
+        ]
+
+
+barChartTriplet : Spec
+barChartTriplet =
+    let
+        enc =
+            encoding
+                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+
+        spec =
+            asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+    in
+    toVegaLite
+        [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+        , specification spec
+        ]
+
+
+splom : Spec
+splom =
+    let
+        enc =
+            encoding
+                << position X [ PRepeat Column, PmType Quantitative ]
+                << position Y [ PRepeat Row, PmType Quantitative ]
+
+        spec =
+            asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Point [], enc [] ]
+    in
+    toVegaLite
+        [ repeat
+            [ RowFields [ "temp_max", "precipitation", "wind" ]
+            , ColumnFields [ "wind", "precipitation", "temp_max" ]
+            ]
+        , specification spec
+        ]
+
+
 init : ( Model, Cmd msg )
 init =
     ( 0
@@ -132,6 +233,11 @@ init =
             , stackedHistogram2
             , lineChart
             , multiBar
+            , barChart
+            , barChartWithAverage
+            , barChartPair
+            , barChartTriplet
+            , splom
             ]
     )
 
