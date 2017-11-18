@@ -1384,7 +1384,9 @@ type TextChannel
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
 for further details.
 -}
-type TimeUnit
+type
+    TimeUnit
+    -- TODO: Add UTC prefix option with a utc function (see https://vega.github.io/vega-lite/docs/timeunit.html)
     = Year
     | YearQuarter
     | YearQuarterMonth
