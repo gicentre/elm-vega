@@ -756,7 +756,7 @@ The ability to determine the scale of a chart based on a selection is useful in 
 We can achieve this by setting the scale of one view based on the selection in another.
 The detail view is updated whenever the selected region is changed through interaction:
 
-![Selection across views](images/contextandFocus.png)
+![Selection across views](images/contextAndFocus.png)
 ```elm
 let
     sel =
