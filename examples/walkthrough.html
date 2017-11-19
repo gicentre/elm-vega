@@ -37,12 +37,36 @@
   <figure class="cell"><div id="vis10"></div><figcaption>Repeated view: Monthly precipitation, temperature and wind</figcaption></figure>
   <figure class="cell"><div id="vis11"></div><figcaption>Repeated view: Scatterplot Matrix</figcaption></figure>
 
+  <h3>Dashboards</h3>
+  <figure class="cell"><div id="vis12"></div><figcaption>Dashboard views : Frequency histogram, scatterploat, bar chart, annotation</figcaption></figure>
+  <figure class="cell"><div id="vis13"></div><figcaption>Dashboard of composed views</figcaption></figure>
+
+  <h2>Interaction</h2>
+
+  <figure class="cell"><div id="vis14"></div><figcaption>Single point selection scatterplot</figcaption></figure>
+  <figure class="cell"><div id="vis15"></div><figcaption>Multi point selection scatterplot</figcaption></figure>
+  <figure class="cell"><div id="vis16"></div><figcaption>Mouseover multi point selection scatterplot</figcaption></figure>
+  <figure class="cell"><div id="vis17"></div><figcaption>Selection projection onto number of cylinders</figcaption></figure>
+  <figure class="cell"><div id="vis18"></div><figcaption>Selection projection with a bound slider</figcaption></figure>
+  <figure class="cell"><div id="vis19"></div><figcaption>Selection projection with two bound sliders</figcaption></figure>
+  <figure class="cell"><div id="vis20"></div><figcaption>Interval selection over a scatterplot</figcaption></figure>
+  <figure class="cell"><div id="vis21"></div><figcaption>Interval projection onto the X-position</figcaption></figure>
+  <figure class="cell"><div id="vis22"></div><figcaption>Interval projection bound to the scatterplot scaling</figcaption></figure>
+
+  <h3>Coordinated Views</h3>
+  <figure class="cell"><div id="vis23"></div><figcaption>Selection across repeated views</figcaption></figure>
+  <figure class="cell"><div id="vis24"></div><figcaption>Zooming and panning across repeated views</figcaption></figure>
+  <figure class="cell"><div id="vis25"></div><figcaption>Context and focus</figcaption></figure>
+
+  <h3>Cross Filtering</h3>
+  <figure class="cell"><div id="vis26"></div><figcaption>Cross Filtering</figcaption></figure>
+
   <script>
     Elm.Walkthrough.worker().ports.fromElm.subscribe(function(elmObj) {
       let id = 1;
       for (let obj of elmObj) {
         vegaEmbed("#vis" + id++, obj, {
-          actions: {"export":true, "source":false, "editor":false}, logLevel:vega.Warn
+          actions: {"export":false, "source":false, "editor":false}, logLevel:vega.Warn
         }).catch(console.warn);
       }
     });

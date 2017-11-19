@@ -24,7 +24,7 @@ In common with other languages that build upon a grammar of graphics such as D3 
 But unlike those languages, Vega-Lite and Eve provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
 
 
-## A Single View specification (3:03)˜
+## A Single View specification (3:03)
 
 Let's start with a simple table of data representing time-stamped weather data for Seattle:
 
@@ -365,7 +365,7 @@ toVegaLite
 
 This more compact specification replaces the data field name (`PName "precipitation"` etc.) with a reference to the repeating field (`PRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `RowFields` (or `ColumnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
 
-We can combine repeated rows and repeated columns to create a grid of views, such in a scatterplot matrix (or SPLOM for short):
+We can combine repeated rows and repeated columns to create a grid of views, such as a scatterplot matrix (or SPLOM for short):
 
 
 ![Scatterplot matrix comparing wind, temperature and precipitation](images/splom.png)
@@ -386,5 +386,456 @@ toVegaLite
         , ColumnFields [ "wind", "precipitation", "temp_max" ]
         ]
     , specification spec
+    ]
+```
+
+### Building A Dashboard (12:40)
+
+We can compose more complex 'dashboards' by assembling single views but varying either their encoding or the data that is encoded. To illustrate, let's first consider the 4 single view types that we will compose with.
+(all of these we have considered above, but are identified here again for clarity)
+
+![Four single views](images/dashboard1.png)
+
+As we have seen, we can arrange combinations of these views with the composition operators _layer_, _facet_, _repeat_ and _concatenate_. The specifications that result can themselves be further composed with the same operators to form a tree of compositions:
+
+
+![Composition tree](images/compositionTree.png)
+
+This allows us to created a nested dashboard of views:
+
+![Full dashboard of 17 views of Seattle weather](images/dashboard2.png)
+
+```elm
+let
+    histoEnc =
+        encoding
+            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
+            << position Y [ PAggregate Count, PmType Quantitative ]
+            << column [ FName "weather", FmType Nominal ]
+            << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+
+    histoSpec =
+        asSpec [ mark Bar [], histoEnc [] ]
+
+    scatterEnc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PRepeat Row, PmType Quantitative ]
+
+    scatterSpec =
+        asSpec [ mark Point [], scatterEnc [] ]
+
+    barEnc =
+        encoding
+            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+
+    annotationEnc =
+        encoding
+            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+
+    layerSpec =
+        asSpec
+            [ layer
+                [ asSpec [ mark Bar [], barEnc [] ]
+                , asSpec [ mark Rule [], annotationEnc [] ]
+                ]
+            ]
+
+    barsSpec =
+        asSpec
+            [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+            , specification layerSpec
+            ]
+
+    splomSpec =
+        asSpec
+            [ repeat
+                [ RowFields [ "temp_max", "precipitation", "wind" ]
+                , ColumnFields [ "wind", "precipitation", "temp_max" ]
+                ]
+            , specification scatterSpec
+            ]
+in
+toVegaLite
+    [ dataFromUrl "data/seattle-weather.csv" []
+    , vConcat
+        [ asSpec [ hConcat [ splomSpec, barsSpec ] ]
+        , histoSpec
+        ]
+    ]
+```
+
+There is nothing new in this example – we have simply assembled a range of views with the composition operators.
+It is worth noting that the data source (`seattle-weather.csv`) need only be identified once so can be removed from the component view specifications.
+This has the advantage that if we were to replace the reference to the data file with another, we only need do it once.
+Here, for example is exactly the same specification but with `newYork-weather` given as the data source.
+
+![Full dashboard of 17 views of New York weather](images/dashboard2NY.png)
+
+It would be trivial to concatenate these two specifications to allow a Seattle – New York comparison dashboard to be created.
+
+## Interaction (14:35)
+
+Interaction is enabled by creating _selections_ that may be combined with the kinds of specifications already described.
+Selections involve three components:
+
+* **events** Those actions that trigger the interaction such as clicking at a location on screen or pressing a key.
+
+* **points of interest** The elements of the visualization with which the interaction occurs, for example, a set of points selected on a scatterplot.
+
+* **predicate** (i.e. a Boolean function) that identifies which parts of the visualization are to respond to the interaction.
+
+By way of an example consider this coloured scatterplot where any point can be selected and all non-selected points are turned grey (_see `examples/walkthrough.html` for the interactive version of the visualization; here a click is symbolised by a highlighting circle._):
+
+![Single mark selection on a scatterplot](images/interactiveScatter1.png)
+
+```elm
+let
+    enc =
+        encoding
+            << position X [ PName "Horsepower", PmType Quantitative ]
+            << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+            << color
+                [ MCondition "picked"
+                    [ MName "Origin", MmType Nominal ]
+                    [ MString "grey" ]
+                ]
+
+    sel =
+        selection
+            << select "picked" Single []
+in
+toVegaLite
+    [ dataFromUrl "data/cars.json" []
+    , mark Circle []
+    , enc []
+    , sel []
+    ]
+```
+
+In comparison to the static specifications we have already seen the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MCondition` used to encode color.
+
+Previously when encoding color (or any other channel) we have provided a list of properties.
+Here we provide a pair of lists – one for when the selection condition is true, the other for when it is false.
+
+The name `"picked"` is just one we have chosen to call the selection.
+The type of selection here is `Single` meaning we can only select one item at a time.
+
+Because we will reuse the scatterplot specification in several examples, we can declare the basic specification in its own function:
+
+```elm
+scatterProps : List ( VLProperty, Spec )
+scatterProps =
+    let
+        enc =
+            encoding
+                << position X [ PName "Horsepower", PmType Quantitative ]
+                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << color
+                    [ MCondition "picked"
+                        [ MName "Origin", MmType Nominal ]
+                        [ MString "grey" ]
+                    ]
+    in
+    [ dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
+```
+
+This allows us to add the selection specification separately.
+So the previous example can now be created by adding the selection function and passing the complete list to `toVegaLite`
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Single []
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+
+To select multiple points by shift-clicking, we use `Multi` instead of 'Single' in the `selection`:
+
+![Multi-point selection on a scatterplot](images/interactiveScatter2.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Multi []
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+Alternatively, we could make the selection happen based on any browser event by parameterising `select` with the type `On` and a value matching a JavaScript event name, such as mouse movement over points to give more of a paintbrush effect:
+
+![Multi-point selection on a scatterplot with mouse hover](images/interactiveScatter3.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Multi [On "mouseover"]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+### Selection Transformations (16:39)
+
+Simple selections as described above create sets of selected data marks based directly on what was interacted with by the user.
+Selection transformations allow us to project that direct selection onto other parts of our dataset.
+For example, suppose we wanted to know what effect the number of engine cylinders has on the relationship between engine power and engine efficiency.
+We can invoke a _selection projection_ on `Cylinders` in our dataset that says 'when a single point is selected, extend that selection to all other points in the dataset that share the same number of cylinders':
+
+![Selection projection onto marks with matched number of cylinders](images/interactiveScatter4.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Single [ Empty, Fields [ "Cylinders" ] ]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+This is invoked simply by adding a parameterised `Fields` type to the `select` parameters naming the fields onto which we wish to project our selection.
+Additionally, we have set the default selection to `Empty` here so that if nothing is selected, the selection is empty (without this the default selection is the entire encoded dataset.)
+
+
+Selection need not be limited to direct interaction with the visualization marks.
+We can also _bind_ the selection to other user-interface components.
+For example we could select all those cars with a chosen number of cylinders with a slider by binding the selection to an HTML _input range_ component.
+Clicking on a point projects the selection as before, but also updates the slider; moving the slider updates the selected points:
+
+![Selecton bound to slider representing number of engine cylinders](images/interactiveScatter5.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked"
+                Single
+                [ Fields [ "Cylinders" ]
+                , Bind [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ] ]
+                ]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+The binding to the slider is added with the parameterised `Bind` type followed by a type representing the HTML input element (`IRange` in this example), the data field to which it is to be bound and then a list of optional input element parameters (here just selecting the limits of the slider and step between slider values).
+
+Binding need not be limited to single input element.
+We could, for example, bind another input slider to the year of manufacture to see if there are any trends in engine efficiency over time.
+Here the selection projection matches both number of cylinders and year of manufacture either selected by clicking on a mark or adjusting the sliders:
+
+![Selection bound to sliders representing year of manufacture and number of engine cylinders](images/interactiveScatter6.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked"
+                Single
+                [ Fields [ "Cylinders", "Year" ]
+                , Bind
+                    [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
+                    , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                    ]
+                ]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+The `Interval` selection type is useful for rapidly choosing a region of a view.
+Simply providing an unparameterised selection allows both the width and the height of the selection to be chosen:
+
+![Interval selection in X- and Y- dimensions](images/interactiveScatter7.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Interval []
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+Projecting the selection onto a position channel can be used to select all marks that have an X- or Y- position within a region regardless of the other spatial coordinate:
+
+![Interval selection projected onto X-coordinates of selected marks](images/interactiveScatter8.png)
+
+```elm
+let
+    sel =
+        selection
+            << select "picked" Interval [ Encodings [ ChX ] ]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+Notice here that to project the selection we parameterise `Interval` not with a field name as we have done previously but with a channel encoding using the union type `Encodings` (here parameterised with the X-position channel `ChX`).
+
+If we further _bind_ that selection to the _scale_ transformation of X-position, we have created the ability to pan and zoom the view as the scaling is determined interactively depending on the extent and position of the interval selection:
+
+
+![Selection bound to scale of scatterplot](images/interactiveScatter9.png)
+```elm
+let
+    sel =
+        selection
+            << select "picked" Interval [ Encodings [ ChX ], BindScales ]
+in
+toVegaLite <| sel [] :: scatterProps
+```
+
+### Multiple Coordinated Views (19:38)
+
+One of the more powerful aspects of selection-based interaction is in coordinating different views – a selection of a data subset is projected onto all other views of the same data:
+
+![Selection across views](images/coordinatedScatter1.png)
+```elm
+let
+    enc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PRepeat Row, PmType Quantitative ]
+            << color
+                [ MCondition "picked"
+                    [ MName "Origin", MmType Nominal ]
+                    [ MString "grey" ]
+                ]
+
+    sel =
+        selection
+            << select "picked" Interval [ Encodings [ ChX ] ]
+
+    spec =
+        asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+in
+toVegaLite
+    [ repeat
+        [ RowFields [ "Displacement", "Miles_per_Gallon" ]
+        , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+        ]
+    , specification spec
+    ]
+```
+
+There is nothing new in the specification here other than combining the `repeat` function with the `selection`.
+The selection is projected across all views as it is duplicated by the `repeat` operator.
+
+It is a simple step to bind the scales of the scatterplots in the same way to coordinate zooming and panning across views:
+
+![Selection across views](images/coordinatedScatter2.png)
+```elm
+let
+    enc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PRepeat Row, PmType Quantitative ]
+            << color [ MName "Origin", MmType Nominal ]
+
+    sel =
+        selection
+            << select "picked" Interval [ BindScales ]
+
+    spec =
+        asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+in
+toVegaLite
+    [ repeat
+        [ RowFields [ "Displacement", "Miles_per_Gallon" ]
+        , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+        ]
+    , specification spec
+    ]
+```
+
+The only difference between this and the previous example is that we now `BindScales` based on the selection rather than provide a condition encoding of color.
+
+The ability to determine the scale of a chart based on a selection is useful in implementing a common visualization design pattern, that of 'context and focus' (or sometimes referred to as 'overview and detail on demand').
+We can achieve this by setting the scale of one view based on the selection in another.
+The detail view is updated whenever the selected region is changed through interaction:
+
+![Selection across views](images/contextandFocus.png)
+```elm
+let
+    sel =
+        selection << select "brush" Interval [ Encodings [ ChX ] ]
+
+    encContext =
+        encoding
+            << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y" ] ]
+            << position Y
+                [ PName "price"
+                , PmType Quantitative
+                , PAxis [ TickCount 3, Grid False ]
+                ]
+
+    specContext =
+        asSpec [ width 400, height 80, sel [], mark Area [], encContext [] ]
+
+    encDetail =
+        encoding
+            << position X
+                [ PName "date"
+                , PmType Temporal
+                , PScale [ SDomain (DSelection "brush") ]
+                , PAxis [ AxTitle "" ]
+                ]
+            << position Y [ PName "price", PmType Quantitative ]
+
+    specDetail =
+        asSpec [ width 400, mark Area [], encDetail [] ]
+in
+toVegaLite
+    [ dataFromUrl "data/sp500.csv" []
+    , vConcat [ specContext, specDetail ]
+    ]
+```
+
+### Cross Filtering (20:41)
+
+The final example brings together ideas of view composition and interactive selection with data filtering by implementing _cross_filtering_.
+
+A cross-filter involves selecting a subset of the data in one view and then only displaying those data in other views.
+In this example we use `repeat` to show three fields in a flights database – hour of day in which a flight departs, the distribution of flight delays and the distribution of flight distances. By selecting a subset of any one of those views, we overlay a layer in a gold color of just those selected flights for all three fields:
+
+![Cross filtering](images/crossFilter.png)
+```elm
+let
+    hourTrans =
+        -- This generates a new field based on the hour of day extracted from the date field.
+        transform
+            << calculate "hours(datum.date)" "hour"
+
+    sel =
+        selection << select "brush" Interval [ Encodings [ ChX ] ]
+
+    filterTrans =
+        transform
+            << filter (FSelection "brush")
+
+    totalEnc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PAggregate Count, PmType Quantitative ]
+
+    selectedEnc =
+        encoding
+            << position X [ PRepeat Column, PmType Quantitative ]
+            << position Y [ PAggregate Count, PmType Quantitative ]
+            << color [ MString "goldenrod" ]
+in
+toVegaLite
+    [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
+    , specification <|
+        asSpec
+            [ dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FDate "%Y/%m/%d %H:%M" ) ] ]
+            , hourTrans []
+            , layer
+                [ asSpec [ mark Bar [], totalEnc [] ]
+                , asSpec [ sel [], filterTrans [], mark Bar [], selectedEnc [] ]
+                ]
+            ]
     ]
 ```

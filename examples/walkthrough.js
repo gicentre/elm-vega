@@ -11393,8 +11393,403 @@ var _gicentre$eve$Walkthrough$update = F2(
 	function (msg, model) {
 		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 	});
-var _gicentre$eve$Walkthrough$splom = function () {
-	var enc = function (_p0) {
+var _gicentre$eve$Walkthrough$crossFilter = function () {
+	var selectedEnc = function (_p0) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$MString('goldenrod'),
+							_1: {ctor: '[]'}
+						},
+						_p0))));
+	};
+	var totalEnc = function (_p1) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p1)));
+	};
+	var filterTrans = function (_p2) {
+		return _gicentre$eve$Eve$transform(
+			A2(
+				_gicentre$eve$Eve$filter,
+				_gicentre$eve$Eve$FSelection('brush'),
+				_p2));
+	};
+	var sel = function (_p3) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'brush',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p3));
+	};
+	var hourTrans = function (_p4) {
+		return _gicentre$eve$Eve$transform(
+			A3(_gicentre$eve$Eve$calculate, 'hours(datum.date)', 'hour', _p4));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$ColumnFields(
+						{
+							ctor: '::',
+							_0: 'hour',
+							_1: {
+								ctor: '::',
+								_0: 'delay',
+								_1: {
+									ctor: '::',
+									_0: 'distance',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$specification(
+					_gicentre$eve$Eve$asSpec(
+						{
+							ctor: '::',
+							_0: A2(
+								_gicentre$eve$Eve$dataFromUrl,
+								'data/flights-2k.json',
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$Parse(
+										{
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'date',
+												_1: _gicentre$eve$Eve$FDate('%Y/%m/%d %H:%M')
+											},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: hourTrans(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$eve$Eve$layer(
+										{
+											ctor: '::',
+											_0: _gicentre$eve$Eve$asSpec(
+												{
+													ctor: '::',
+													_0: A2(
+														_gicentre$eve$Eve$mark,
+														_gicentre$eve$Eve$Bar,
+														{ctor: '[]'}),
+													_1: {
+														ctor: '::',
+														_0: totalEnc(
+															{ctor: '[]'}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$asSpec(
+													{
+														ctor: '::',
+														_0: sel(
+															{ctor: '[]'}),
+														_1: {
+															ctor: '::',
+															_0: filterTrans(
+																{ctor: '[]'}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gicentre$eve$Eve$mark,
+																	_gicentre$eve$Eve$Bar,
+																	{ctor: '[]'}),
+																_1: {
+																	ctor: '::',
+																	_0: selectedEnc(
+																		{ctor: '[]'}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						})),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$eve$Walkthrough$contextAndFocus = function () {
+	var encDetail = function (_p5) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PScale(
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$SDomain(
+										_gicentre$eve$Eve$DSelection('brush')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$AxTitle(''),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p5)));
+	};
+	var specDetail = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$width(400),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Area,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: encDetail(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var encContext = function (_p6) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Temporal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PAxis(
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$Format('%Y'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('price'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$TickCount(3),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$Grid(false),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p6)));
+	};
+	var sel = function (_p7) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'brush',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p7));
+	};
+	var specContext = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$width(400),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$height(80),
+				_1: {
+					ctor: '::',
+					_0: sel(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gicentre$eve$Eve$mark,
+							_gicentre$eve$Eve$Area,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: encContext(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$dataFromUrl,
+				'data/sp500.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$vConcat(
+					{
+						ctor: '::',
+						_0: specContext,
+						_1: {
+							ctor: '::',
+							_0: specDetail,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$eve$Walkthrough$coordinatedScatter2 = function () {
+	var sel = function (_p8) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$BindScales,
+					_1: {ctor: '[]'}
+				},
+				_p8));
+	};
+	var enc = function (_p9) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11420,7 +11815,861 @@ var _gicentre$eve$Walkthrough$splom = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p0)));
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$MName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p9))));
+	};
+	var spec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: sel(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$RowFields(
+						{
+							ctor: '::',
+							_0: 'Displacement',
+							_1: {
+								ctor: '::',
+								_0: 'Miles_per_Gallon',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$ColumnFields(
+							{
+								ctor: '::',
+								_0: 'Horsepower',
+								_1: {
+									ctor: '::',
+									_0: 'Miles_per_Gallon',
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$specification(spec),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$eve$Walkthrough$coordinatedScatter1 = function () {
+	var sel = function (_p10) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p10));
+	};
+	var enc = function (_p11) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Row),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: A3(
+								_gicentre$eve$Eve$MCondition,
+								'picked',
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						_p11))));
+	};
+	var spec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$dataFromUrl,
+				'data/cars.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: sel(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$RowFields(
+						{
+							ctor: '::',
+							_0: 'Displacement',
+							_1: {
+								ctor: '::',
+								_0: 'Miles_per_Gallon',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$ColumnFields(
+							{
+								ctor: '::',
+								_0: 'Horsepower',
+								_1: {
+									ctor: '::',
+									_0: 'Miles_per_Gallon',
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$specification(spec),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$eve$Walkthrough$scatterProps = function () {
+	var enc = function (_p12) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$color,
+						{
+							ctor: '::',
+							_0: A3(
+								_gicentre$eve$Eve$MCondition,
+								'picked',
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MString('grey'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						_p12))));
+	};
+	var trans = function (_p13) {
+		return _gicentre$eve$Eve$transform(
+			A3(_gicentre$eve$Eve$calculate, 'year(datum.Year)', 'Year', _p13));
+	};
+	return {
+		ctor: '::',
+		_0: A2(
+			_gicentre$eve$Eve$dataFromUrl,
+			'data/cars.json',
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: trans(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter1 = function () {
+	var sel = function (_p14) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Single,
+				{ctor: '[]'},
+				_p14));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter2 = function () {
+	var sel = function (_p15) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Multi,
+				{ctor: '[]'},
+				_p15));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter3 = function () {
+	var sel = function (_p16) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Multi,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$On('mouseover'),
+					_1: {ctor: '[]'}
+				},
+				_p16));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter4 = function () {
+	var sel = function (_p17) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Single,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Empty,
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$Fields(
+							{
+								ctor: '::',
+								_0: 'Cylinders',
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p17));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter5 = function () {
+	var sel = function (_p18) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Single,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Fields(
+						{
+							ctor: '::',
+							_0: 'Cylinders',
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$Bind(
+							{
+								ctor: '::',
+								_0: A2(
+									_gicentre$eve$Eve$IRange,
+									'Cylinders',
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$InMin(3),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InMax(8),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$InStep(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p18));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter6 = function () {
+	var sel = function (_p19) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Single,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Fields(
+						{
+							ctor: '::',
+							_0: 'Cylinders',
+							_1: {
+								ctor: '::',
+								_0: 'Year',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$Bind(
+							{
+								ctor: '::',
+								_0: A2(
+									_gicentre$eve$Eve$IRange,
+									'Cylinders',
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$InMin(3),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InMax(8),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$InStep(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gicentre$eve$Eve$IRange,
+										'Year',
+										{
+											ctor: '::',
+											_0: _gicentre$eve$Eve$InMin(1969),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$eve$Eve$InMax(1981),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$eve$Eve$InStep(1),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p19));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter7 = function () {
+	var sel = function (_p20) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Interval,
+				{ctor: '[]'},
+				_p20));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter8 = function () {
+	var sel = function (_p21) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p21));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$interactiveScatter9 = function () {
+	var sel = function (_p22) {
+		return _gicentre$eve$Eve$selection(
+			A4(
+				_gicentre$eve$Eve$select,
+				'picked',
+				_gicentre$eve$Eve$Interval,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$Encodings(
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$ChX,
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$BindScales,
+						_1: {ctor: '[]'}
+					}
+				},
+				_p22));
+	};
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: sel(
+				{ctor: '[]'}),
+			_1: _gicentre$eve$Walkthrough$scatterProps
+		});
+}();
+var _gicentre$eve$Walkthrough$dashboard1 = function () {
+	var annotationEnc = function (_p23) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$Y,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('precipitation'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Mean),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PScale(
+									{
+										ctor: '::',
+										_0: _gicentre$eve$Eve$SDomain(
+											_gicentre$eve$Eve$DNumbers(
+												{
+													ctor: '::',
+													_0: 0,
+													_1: {
+														ctor: '::',
+														_0: 5.5,
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_p23));
+	};
+	var annotationSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$title('Annotation'),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$width(200),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$eve$Eve$mark,
+						_gicentre$eve$Eve$Rule,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: annotationEnc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	var barEnc = function (_p24) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PTimeUnit(_gicentre$eve$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('precipitation'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p24)));
+	};
+	var barSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$title('Bar chart'),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: barEnc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var scatterEnc = function (_p25) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('temp_max'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PName('precipitation'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p25)));
+	};
+	var scatterSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$title('Scatterplot'),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Point,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: scatterEnc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var histoEnc = function (_p26) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('temp_max'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PBin(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p26)));
+	};
+	var histoSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$title('Frequency histogram'),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$eve$Eve$mark,
+					_gicentre$eve$Eve$Bar,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: histoEnc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$hConcat(
+					{
+						ctor: '::',
+						_0: histoSpec,
+						_1: {
+							ctor: '::',
+							_0: scatterSpec,
+							_1: {
+								ctor: '::',
+								_0: barSpec,
+								_1: {
+									ctor: '::',
+									_0: annotationSpec,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$eve$Walkthrough$splom = function () {
+	var enc = function (_p27) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Row),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p27)));
 	};
 	var spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11490,7 +12739,7 @@ var _gicentre$eve$Walkthrough$splom = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$barChartTriplet = function () {
-	var enc = function (_p1) {
+	var enc = function (_p28) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11524,7 +12773,7 @@ var _gicentre$eve$Walkthrough$barChartTriplet = function () {
 							}
 						}
 					},
-					_p1)));
+					_p28)));
 	};
 	var spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11577,7 +12826,7 @@ var _gicentre$eve$Walkthrough$barChartTriplet = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$barChartPair = function () {
-	var bar2Enc = function (_p2) {
+	var bar2Enc = function (_p29) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11611,7 +12860,7 @@ var _gicentre$eve$Walkthrough$barChartPair = function () {
 							}
 						}
 					},
-					_p2)));
+					_p29)));
 	};
 	var bar2Spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11627,7 +12876,7 @@ var _gicentre$eve$Walkthrough$barChartPair = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var bar1Enc = function (_p3) {
+	var bar1Enc = function (_p30) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11661,7 +12910,7 @@ var _gicentre$eve$Walkthrough$barChartPair = function () {
 							}
 						}
 					},
-					_p3)));
+					_p30)));
 	};
 	var bar1Spec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11701,7 +12950,7 @@ var _gicentre$eve$Walkthrough$barChartPair = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$barChartWithAverage = function () {
-	var avLineEnc = function (_p4) {
+	var avLineEnc = function (_p31) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11719,7 +12968,7 @@ var _gicentre$eve$Walkthrough$barChartWithAverage = function () {
 						}
 					}
 				},
-				_p4));
+				_p31));
 	};
 	var avLineSpec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11735,7 +12984,7 @@ var _gicentre$eve$Walkthrough$barChartWithAverage = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var barEnc = function (_p5) {
+	var barEnc = function (_p32) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11769,7 +13018,7 @@ var _gicentre$eve$Walkthrough$barChartWithAverage = function () {
 							}
 						}
 					},
-					_p5)));
+					_p32)));
 	};
 	var barSpec = _gicentre$eve$Eve$asSpec(
 		{
@@ -11809,7 +13058,7 @@ var _gicentre$eve$Walkthrough$barChartWithAverage = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$barChart = function () {
-	var enc = function (_p6) {
+	var enc = function (_p33) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11843,7 +13092,7 @@ var _gicentre$eve$Walkthrough$barChart = function () {
 							}
 						}
 					},
-					_p6)));
+					_p33)));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -11890,7 +13139,7 @@ var _gicentre$eve$Walkthrough$weatherColors = _gicentre$eve$Eve$categoricalDomai
 		}
 	});
 var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
-	var enc = function (_p7) {
+	var enc = function (_p34) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -11936,7 +13185,7 @@ var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 								}
 							}
 						},
-						_p7))));
+						_p34))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -11961,7 +13210,7 @@ var _gicentre$eve$Walkthrough$stackedHistogram2 = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$lineChart = function () {
-	var enc = function (_p8) {
+	var enc = function (_p35) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12007,7 +13256,7 @@ var _gicentre$eve$Walkthrough$lineChart = function () {
 								}
 							}
 						},
-						_p8))));
+						_p35))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -12032,7 +13281,7 @@ var _gicentre$eve$Walkthrough$lineChart = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$multiBar = function () {
-	var enc = function (_p9) {
+	var enc = function (_p36) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12094,7 +13343,7 @@ var _gicentre$eve$Walkthrough$multiBar = function () {
 									}
 								}
 							},
-							_p9)))));
+							_p36)))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -12118,8 +13367,336 @@ var _gicentre$eve$Walkthrough$multiBar = function () {
 			}
 		});
 }();
+var _gicentre$eve$Walkthrough$dashboard2 = function () {
+	var annotationEnc = function (_p37) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$Y,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Row),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Mean),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_p37));
+	};
+	var barEnc = function (_p38) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('date'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PTimeUnit(_gicentre$eve$Eve$Month),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Row),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Mean),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p38)));
+	};
+	var layerSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$layer(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$asSpec(
+						{
+							ctor: '::',
+							_0: A2(
+								_gicentre$eve$Eve$mark,
+								_gicentre$eve$Eve$Bar,
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: barEnc(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$asSpec(
+							{
+								ctor: '::',
+								_0: A2(
+									_gicentre$eve$Eve$mark,
+									_gicentre$eve$Eve$Rule,
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: annotationEnc(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+	var barsSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$RowFields(
+						{
+							ctor: '::',
+							_0: 'precipitation',
+							_1: {
+								ctor: '::',
+								_0: 'temp_max',
+								_1: {
+									ctor: '::',
+									_0: 'wind',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$specification(layerSpec),
+				_1: {ctor: '[]'}
+			}
+		});
+	var scatterEnc = function (_p39) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Column),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PRepeat(_gicentre$eve$Eve$Row),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p39)));
+	};
+	var scatterSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Point,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: scatterEnc(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var splomSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$eve$Eve$repeat(
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$RowFields(
+						{
+							ctor: '::',
+							_0: 'temp_max',
+							_1: {
+								ctor: '::',
+								_0: 'precipitation',
+								_1: {
+									ctor: '::',
+									_0: 'wind',
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$ColumnFields(
+							{
+								ctor: '::',
+								_0: 'wind',
+								_1: {
+									ctor: '::',
+									_0: 'precipitation',
+									_1: {
+										ctor: '::',
+										_0: 'temp_max',
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$specification(scatterSpec),
+				_1: {ctor: '[]'}
+			}
+		});
+	var histoEnc = function (_p40) {
+		return _gicentre$eve$Eve$encoding(
+			A3(
+				_gicentre$eve$Eve$position,
+				_gicentre$eve$Eve$X,
+				{
+					ctor: '::',
+					_0: _gicentre$eve$Eve$PName('temp_max'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PBin(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$eve$Eve$position,
+					_gicentre$eve$Eve$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$PAggregate(_gicentre$eve$Eve$Count),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$eve$Eve$PmType(_gicentre$eve$Eve$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$eve$Eve$column,
+						{
+							ctor: '::',
+							_0: _gicentre$eve$Eve$FName('weather'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_gicentre$eve$Eve$color,
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$MName('weather'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MLegend(
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							_p40)))));
+	};
+	var histoSpec = _gicentre$eve$Eve$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$mark,
+				_gicentre$eve$Eve$Bar,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: histoEnc(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _gicentre$eve$Eve$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$eve$Eve$dataFromUrl,
+				'data/seattle-weather.csv',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$eve$Eve$vConcat(
+					{
+						ctor: '::',
+						_0: _gicentre$eve$Eve$asSpec(
+							{
+								ctor: '::',
+								_0: _gicentre$eve$Eve$hConcat(
+									{
+										ctor: '::',
+										_0: splomSpec,
+										_1: {
+											ctor: '::',
+											_0: barsSpec,
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: histoSpec,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
 var _gicentre$eve$Walkthrough$stackedHistogram = function () {
-	var enc = function (_p10) {
+	var enc = function (_p41) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12161,7 +13738,7 @@ var _gicentre$eve$Walkthrough$stackedHistogram = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p10))));
+						_p41))));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -12186,7 +13763,7 @@ var _gicentre$eve$Walkthrough$stackedHistogram = function () {
 		});
 }();
 var _gicentre$eve$Walkthrough$histogram = function () {
-	var enc = function (_p11) {
+	var enc = function (_p42) {
 		return _gicentre$eve$Eve$encoding(
 			A3(
 				_gicentre$eve$Eve$position,
@@ -12217,7 +13794,7 @@ var _gicentre$eve$Walkthrough$histogram = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p11)));
+					_p42)));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{
@@ -12317,7 +13894,67 @@ var _gicentre$eve$Walkthrough$init = {
 													_1: {
 														ctor: '::',
 														_0: _gicentre$eve$Walkthrough$splom,
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: _gicentre$eve$Walkthrough$dashboard1,
+															_1: {
+																ctor: '::',
+																_0: _gicentre$eve$Walkthrough$dashboard2,
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$eve$Walkthrough$interactiveScatter1,
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$eve$Walkthrough$interactiveScatter2,
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$eve$Walkthrough$interactiveScatter3,
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$eve$Walkthrough$interactiveScatter4,
+																				_1: {
+																					ctor: '::',
+																					_0: _gicentre$eve$Walkthrough$interactiveScatter5,
+																					_1: {
+																						ctor: '::',
+																						_0: _gicentre$eve$Walkthrough$interactiveScatter6,
+																						_1: {
+																							ctor: '::',
+																							_0: _gicentre$eve$Walkthrough$interactiveScatter7,
+																							_1: {
+																								ctor: '::',
+																								_0: _gicentre$eve$Walkthrough$interactiveScatter8,
+																								_1: {
+																									ctor: '::',
+																									_0: _gicentre$eve$Walkthrough$interactiveScatter9,
+																									_1: {
+																										ctor: '::',
+																										_0: _gicentre$eve$Walkthrough$coordinatedScatter1,
+																										_1: {
+																											ctor: '::',
+																											_0: _gicentre$eve$Walkthrough$coordinatedScatter2,
+																											_1: {
+																												ctor: '::',
+																												_0: _gicentre$eve$Walkthrough$contextAndFocus,
+																												_1: {
+																													ctor: '::',
+																													_0: _gicentre$eve$Walkthrough$crossFilter,
+																													_1: {ctor: '[]'}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
 													}
 												}
 											}
