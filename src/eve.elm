@@ -898,6 +898,7 @@ type MarkChannel
     | MAggregate Operation
     | MLegend (List LegendProperty)
     | MCondition String (List MarkChannel) (List MarkChannel)
+    | MPath String
     | MNumber Float
     | MString String
     | MBoolean Bool
@@ -3253,6 +3254,9 @@ markChannelProperty field =
 
         MAggregate op ->
             [ ( "aggregate", JE.string (opLabel op) ) ]
+
+        MPath s ->
+            [ ( "value", JE.string s ) ]
 
         MNumber x ->
             [ ( "value", JE.float x ) ]
