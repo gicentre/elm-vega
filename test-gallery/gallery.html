@@ -8,136 +8,166 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.1/vega-lite.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc6/vega-embed.js"></script>
   <script src="gallery.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} .cell {float:left; padding:1em; border-radius: 1em; margin:1.2em; background-color: rgb(251,247,238);}</style>
 </head>
 
 <body>
-  <h1>Vega-Lite Gallery</h1>
+  <h1>Vega-Lite Gallery Generated in Eve</h1>
 
-  <table border="0">
-    <tr>
-      <td id="vis1"></td>
-      <td id="vis2"></td>
-      <td id="vis3"></td>
-      <td id="vis4"></td>
-    </tr>
+  <p>
+    These examples, converted from the <a href="https://vega.github.io/vega-lite/examples/" target="_blank">Vega-Lite Gallery</a> are primarily to test the <a href="https://github.com/gicentre/eve" target="_blank">Eve</a> implementation, but they also show the range of possible chart types easily implementable.
+  </p>
 
-    <tr>
-      <td id="vis5" colspan="4"></td>
-
-    </tr>
-
-    <tr>
-      <td id="vis6"></td>
-      <td id="vis7"></td>
-      <td id="vis8"></td>
-      <td id="vis10"></td>
-    </tr>
-
-    <tr>
-      <td id="vis11" colspan="2"></td>
-      <td id="vis9" colspan="2"></td>
-    </tr>
-
-    <tr>
-      <td id="vis12"></td>
-      <td id="vis13"></td>
-      <td id="vis14"></td>
-      <td id="vis15"></td>
-    </tr>
-
-    <tr>
-      <td id="vis16"></td>
-      <td id="vis17"></td>
-      <td id="vis18"></td>
-      <td id="vis19"></td>
-    </tr>
-
-    <tr>
-      <td id="vis20" colspan="2"></td>
-      <td id="vis21" colspan="2"></td>
-    </tr>
-
-    <tr>
-      <td id="vis22"></td>
-      <td id="vis23"></td>
-      <td id="vis24"></td>
-      <td id="vis28"></td>
-    </tr>
-
-    <tr>
-      <td id="vis26" colspan="2"></td>
-      <td id="vis25"></td>
-      <td id="vis27"></td>
-    </tr>
-
-    <tr>
-      <td id="vis29" colspan="2"></td>
-      <td id="vis30" colspan="2"></td>
-    </tr>
-
-    <tr>
-      <td id="vis31" colspan="2"></td>
-      <td id="vis32" colspan="2"></td>
-
-    </tr>
-
-    <tr>
-      <td id="vis34"></td>
-      <td id="vis33" colspan="3"></td>
-    </tr>
-
-    <tr>
-      <td id="vis35" colspan="2"></td>
-      <td id="vis36"></td>
-      <td id="vis37"></td>
-    </tr>
-
-    <tr>
-      <td id="vis38" colspan="2"></td>
-      <td id="vis39"></td>
-      <td id="vis40"></td>
-    </tr>
-
-    <tr>
-      <td id="vis41" colspan="2"></td>
-      <td id="vis42"></td>
-      <td id="vis43"></td>
-    </tr>
-
-    <tr>
-      <td id="vis44"></td>
-      <td id="vis45"></td>
-      <td id="vis46"></td>
-      <td id="vis47"></td>
-    </tr>
-
-    <tr>
-      <td id="vis48"></td>
-      <td id="vis49"></td>
-      <td id="vis50"></td>
-      <td id="vis51"></td>
-    </tr>
+  <h2>1. Basic</h2>
 
 
-    <tr>
-      <td id="vis52"></td>
-      <td id="vis53"></td>
-      <td id="vis54"></td>
-      <td id="vis55"></td>
-    </tr>
+  <div class="cell" id="vis1"></div>
+  <div class="cell" id="vis2"></div>
+  <div class="cell" id="vis3"></div>
+  <div class="cell" id="vis4"></div>
+  <div style="clear:left"></div>
 
-    <tr>
-      <td id="vis56"></td>
-      <td id="vis57" colspan="2"></td>
-      <td id="vis58"></td>
-    </tr>
 
-    <tr>
-      <td id="vis59" colspan="2"></td>
-      <td id="vis60" colspan="2"></td>
-    </tr>
+  <div class="cell" id="vis5"></div>
+  <div class="cell" id="vis6"></div>
+  <div style="clear:left"></div>
 
-  </table>
+  <div class="cell" id="vis7"></div>
+  <div class="cell" id="vis8"></div>
+  <div class="cell" id="vis9"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis10"></div>
+  <div class="cell" id="vis11"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis12"></div>
+  <div class="cell" id="vis13"></div>
+  <div class="cell" id="vis14"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis15"></div>
+  <div class="cell" id="vis16"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis17"></div>
+  <div class="cell" id="vis18"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis19"></div>
+  <div class="cell" id="vis20"></div>
+  <div style="clear:left"></div>
+
+
+  <h2>Stack</h2>
+
+  <div class="cell" id="vis21"></div>
+  <div class="cell" id="vis22"></div>
+  <div style="clear:left"></div>
+
+
+  <div class="cell" id="vis23"></div>
+  <div class="cell" id="vis24"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis25"></div>
+  <div class="cell" id="vis26"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis27"></div>
+  <div class="cell" id="vis28"></div>
+  <div style="clear:left"></div>
+
+  <h2>Trellis</h2>
+
+  <div class="cell" id="vis29"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis30"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis31"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis32"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis33"></div>
+  <div class="cell" id="vis34"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis35"></div>
+  <div style="clear:left"></div>
+
+  <h2>Layering</h2>
+
+  <div class="cell" id="vis36"></div>
+  <div class="cell" id="vis37"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis38"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis39"></div>
+  <div class="cell" id="vis40"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis41"></div>
+  <div class="cell" id="vis42"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis43"></div>
+  <div class="cell" id="vis44"></div>
+  <div class="cell" id="vis45"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis46"></div>
+  <div class="cell" id="vis47"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis48"></div>
+  <div class="cell" id="vis49"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis50"></div>
+  <div class="cell" id="vis51"></div>
+  <div style="clear:left"></div>
+
+  <h2>Composition</h2>
+
+  <div class="cell" id="vis52"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis62"></div>
+  <div class="cell" id="vis63"></div>
+  <div style="clear:left"></div>
+
+  <h2>Interactive</h2>
+
+  <div class="cell" id="vis53"></div>
+  <div class="cell" id="vis54"></div>
+  <div class="cell" id="vis55"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis56"></div>
+  <div class="cell" id="vis57"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis58"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis59"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis60"></div>
+  <div style="clear:left"></div>
+
+  <div class="cell" id="vis61"></div>
+  <div style="clear:left"></div>
+
+
 
 
   <script>
