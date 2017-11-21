@@ -5,22 +5,6 @@ import Json.Encode
 import Platform
 
 
-main : Program Never Model Msg
-main =
-    Platform.program { init = init, update = update, subscriptions = subscriptions }
-
-
-type alias Model =
-    Int
-
-
-type Msg
-    = FromElm
-
-
-port fromElm : Spec -> Cmd msg
-
-
 stripPlot : Spec
 stripPlot =
     toVegaLite
@@ -578,46 +562,63 @@ crossFilter =
         ]
 
 
-init : ( Model, Cmd msg )
-init =
-    ( 0
-    , fromElm <|
-        Json.Encode.list
-            [ stripPlot
-            , histogram
-            , stackedHistogram
-            , stackedHistogram2
-            , lineChart
-            , multiBar
-            , barChart
-            , barChartWithAverage
-            , barChartPair
-            , barChartTriplet
-            , splom
-            , dashboard1
-            , dashboard2
-            , interactiveScatter1
-            , interactiveScatter2
-            , interactiveScatter3
-            , interactiveScatter4
-            , interactiveScatter5
-            , interactiveScatter6
-            , interactiveScatter7
-            , interactiveScatter8
-            , interactiveScatter9
-            , coordinatedScatter1
-            , coordinatedScatter2
-            , contextAndFocus
-            , crossFilter
-            ]
-    )
+
+{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
-update msg model =
-    ( model, Cmd.none )
+specs : List Spec
+specs =
+    [ stripPlot
+    , histogram
+    , stackedHistogram
+    , stackedHistogram2
+    , lineChart
+    , multiBar
+    , barChart
+    , barChartWithAverage
+    , barChartPair
+    , barChartTriplet
+    , splom
+    , dashboard1
+    , dashboard2
+    , interactiveScatter1
+    , interactiveScatter2
+    , interactiveScatter3
+    , interactiveScatter4
+    , interactiveScatter5
+    , interactiveScatter6
+    , interactiveScatter7
+    , interactiveScatter8
+    , interactiveScatter9
+    , coordinatedScatter1
+    , coordinatedScatter2
+    , contextAndFocus
+    , crossFilter
+    ]
 
 
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+
+{- The code below is boilerplate for creating a headerless Elm module that opens
+   an outgoing port to Javascript and sends the specs to it.
+-}
+
+
+main : Program Never (List Spec) Msg
+main =
+    Platform.program
+        { init = init specs
+        , update = \_ model -> ( model, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+type Msg
+    = FromElm
+
+
+init : List Spec -> ( List Spec, Cmd msg )
+init specs =
+    ( specs, fromElm <| Json.Encode.list specs )
+
+
+port fromElm : Spec -> Cmd msg

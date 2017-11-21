@@ -5,23 +5,6 @@ import Json.Encode
 import Platform
 
 
-main : Program Never Model Msg
-main =
-    Platform.program { init = init, update = update, subscriptions = subscriptions }
-
-
-type alias Model =
-    Int
-
-
-type Msg
-    = FromElm
-
-
-port fromElm : Spec -> Cmd msg
-
-
-
 -- NOTE: All data sources in these examples originally provided at
 -- https://vega.github.io/vega-datasets/
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -1664,16 +1647,37 @@ vlFacetExample =
         ]
 
 
-init : ( Model, Cmd msg )
-init =
-    ( 0, fromElm <| Json.Encode.list [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ] )
+
+{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
-update msg model =
-    ( model, Cmd.none )
+specs : List Spec
+specs =
+    [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ]
 
 
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+
+{- The code below is boilerplate for creating a headerless Elm module that opens
+   an outgoing port to Javascript and sends the specs to it.
+-}
+
+
+main : Program Never (List Spec) Msg
+main =
+    Platform.program
+        { init = init specs
+        , update = \_ model -> ( model, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+type Msg
+    = FromElm
+
+
+init : List Spec -> ( List Spec, Cmd msg )
+init specs =
+    ( specs, fromElm <| Json.Encode.list specs )
+
+
+port fromElm : Spec -> Cmd msg

@@ -9379,6 +9379,16 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'MPath':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'value',
+					_1: _elm_lang$core$Json_Encode$string(_p99._0)
+				},
+				_1: {ctor: '[]'}
+			};
 		case 'MNumber':
 			return {
 				ctor: '::',
@@ -10442,6 +10452,9 @@ var _gicentre$eve$Eve$MString = function (a) {
 var _gicentre$eve$Eve$MNumber = function (a) {
 	return {ctor: 'MNumber', _0: a};
 };
+var _gicentre$eve$Eve$MPath = function (a) {
+	return {ctor: 'MPath', _0: a};
+};
 var _gicentre$eve$Eve$MCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MCondition', _0: a, _1: b, _2: c};
@@ -11386,13 +11399,6 @@ var _gicentre$eve$Eve$VWidth = function (a) {
 	return {ctor: 'VWidth', _0: a};
 };
 
-var _gicentre$eve$Walkthrough$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _gicentre$eve$Walkthrough$update = F2(
-	function (msg, model) {
-		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-	});
 var _gicentre$eve$Walkthrough$crossFilter = function () {
 	var selectedEnc = function (_p0) {
 		return _gicentre$eve$Eve$encoding(
@@ -13851,98 +13857,85 @@ var _gicentre$eve$Walkthrough$stripPlot = _gicentre$eve$Eve$toVegaLite(
 			}
 		}
 	});
-var _gicentre$eve$Walkthrough$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
-	function (v) {
-		return v;
-	});
-var _gicentre$eve$Walkthrough$init = {
-	ctor: '_Tuple2',
-	_0: 0,
-	_1: _gicentre$eve$Walkthrough$fromElm(
-		_elm_lang$core$Json_Encode$list(
-			{
+var _gicentre$eve$Walkthrough$specs = {
+	ctor: '::',
+	_0: _gicentre$eve$Walkthrough$stripPlot,
+	_1: {
+		ctor: '::',
+		_0: _gicentre$eve$Walkthrough$histogram,
+		_1: {
+			ctor: '::',
+			_0: _gicentre$eve$Walkthrough$stackedHistogram,
+			_1: {
 				ctor: '::',
-				_0: _gicentre$eve$Walkthrough$stripPlot,
+				_0: _gicentre$eve$Walkthrough$stackedHistogram2,
 				_1: {
 					ctor: '::',
-					_0: _gicentre$eve$Walkthrough$histogram,
+					_0: _gicentre$eve$Walkthrough$lineChart,
 					_1: {
 						ctor: '::',
-						_0: _gicentre$eve$Walkthrough$stackedHistogram,
+						_0: _gicentre$eve$Walkthrough$multiBar,
 						_1: {
 							ctor: '::',
-							_0: _gicentre$eve$Walkthrough$stackedHistogram2,
+							_0: _gicentre$eve$Walkthrough$barChart,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$eve$Walkthrough$lineChart,
+								_0: _gicentre$eve$Walkthrough$barChartWithAverage,
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Walkthrough$multiBar,
+									_0: _gicentre$eve$Walkthrough$barChartPair,
 									_1: {
 										ctor: '::',
-										_0: _gicentre$eve$Walkthrough$barChart,
+										_0: _gicentre$eve$Walkthrough$barChartTriplet,
 										_1: {
 											ctor: '::',
-											_0: _gicentre$eve$Walkthrough$barChartWithAverage,
+											_0: _gicentre$eve$Walkthrough$splom,
 											_1: {
 												ctor: '::',
-												_0: _gicentre$eve$Walkthrough$barChartPair,
+												_0: _gicentre$eve$Walkthrough$dashboard1,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$eve$Walkthrough$barChartTriplet,
+													_0: _gicentre$eve$Walkthrough$dashboard2,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$eve$Walkthrough$splom,
+														_0: _gicentre$eve$Walkthrough$interactiveScatter1,
 														_1: {
 															ctor: '::',
-															_0: _gicentre$eve$Walkthrough$dashboard1,
+															_0: _gicentre$eve$Walkthrough$interactiveScatter2,
 															_1: {
 																ctor: '::',
-																_0: _gicentre$eve$Walkthrough$dashboard2,
+																_0: _gicentre$eve$Walkthrough$interactiveScatter3,
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$eve$Walkthrough$interactiveScatter1,
+																	_0: _gicentre$eve$Walkthrough$interactiveScatter4,
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$eve$Walkthrough$interactiveScatter2,
+																		_0: _gicentre$eve$Walkthrough$interactiveScatter5,
 																		_1: {
 																			ctor: '::',
-																			_0: _gicentre$eve$Walkthrough$interactiveScatter3,
+																			_0: _gicentre$eve$Walkthrough$interactiveScatter6,
 																			_1: {
 																				ctor: '::',
-																				_0: _gicentre$eve$Walkthrough$interactiveScatter4,
+																				_0: _gicentre$eve$Walkthrough$interactiveScatter7,
 																				_1: {
 																					ctor: '::',
-																					_0: _gicentre$eve$Walkthrough$interactiveScatter5,
+																					_0: _gicentre$eve$Walkthrough$interactiveScatter8,
 																					_1: {
 																						ctor: '::',
-																						_0: _gicentre$eve$Walkthrough$interactiveScatter6,
+																						_0: _gicentre$eve$Walkthrough$interactiveScatter9,
 																						_1: {
 																							ctor: '::',
-																							_0: _gicentre$eve$Walkthrough$interactiveScatter7,
+																							_0: _gicentre$eve$Walkthrough$coordinatedScatter1,
 																							_1: {
 																								ctor: '::',
-																								_0: _gicentre$eve$Walkthrough$interactiveScatter8,
+																								_0: _gicentre$eve$Walkthrough$coordinatedScatter2,
 																								_1: {
 																									ctor: '::',
-																									_0: _gicentre$eve$Walkthrough$interactiveScatter9,
+																									_0: _gicentre$eve$Walkthrough$contextAndFocus,
 																									_1: {
 																										ctor: '::',
-																										_0: _gicentre$eve$Walkthrough$coordinatedScatter1,
-																										_1: {
-																											ctor: '::',
-																											_0: _gicentre$eve$Walkthrough$coordinatedScatter2,
-																											_1: {
-																												ctor: '::',
-																												_0: _gicentre$eve$Walkthrough$contextAndFocus,
-																												_1: {
-																													ctor: '::',
-																													_0: _gicentre$eve$Walkthrough$crossFilter,
-																													_1: {ctor: '[]'}
-																												}
-																											}
-																										}
+																										_0: _gicentre$eve$Walkthrough$crossFilter,
+																										_1: {ctor: '[]'}
 																									}
 																								}
 																							}
@@ -13965,10 +13958,34 @@ var _gicentre$eve$Walkthrough$init = {
 						}
 					}
 				}
-			}))
+			}
+		}
+	}
+};
+var _gicentre$eve$Walkthrough$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
+	'fromElm',
+	function (v) {
+		return v;
+	});
+var _gicentre$eve$Walkthrough$init = function (specs) {
+	return {
+		ctor: '_Tuple2',
+		_0: specs,
+		_1: _gicentre$eve$Walkthrough$fromElm(
+			_elm_lang$core$Json_Encode$list(specs))
+	};
 };
 var _gicentre$eve$Walkthrough$main = _elm_lang$core$Platform$program(
-	{init: _gicentre$eve$Walkthrough$init, update: _gicentre$eve$Walkthrough$update, subscriptions: _gicentre$eve$Walkthrough$subscriptions})();
+	{
+		init: _gicentre$eve$Walkthrough$init(_gicentre$eve$Walkthrough$specs),
+		update: F2(
+			function (_p43, model) {
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			}),
+		subscriptions: function (_p44) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})();
 var _gicentre$eve$Walkthrough$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};

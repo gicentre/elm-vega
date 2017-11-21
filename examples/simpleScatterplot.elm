@@ -20,43 +20,27 @@ scatter =
 
 
 
-{- The parameter of 'fromElm' should match the specification name above
-   (scatter in this example).
--}
-
-
-init : ( Model, Cmd msg )
-init =
-    ( 0, fromElm scatter )
-
-
-
 {- The code below is boilerplate for creating a headerless Elm module that opens
-   an outgoing port to Javascript and should not need to be changed.
+   an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Model Msg
+main : Program Never Spec Msg
 main =
-    Platform.program { init = init, update = update, subscriptions = subscriptions }
-
-
-type alias Model =
-    Int
+    Platform.program
+        { init = init scatter
+        , update = \_ model -> ( model, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
 
 
 type Msg
     = FromElm
 
 
+init : Spec -> ( Spec, Cmd msg )
+init spec =
+    ( spec, fromElm spec )
+
+
 port fromElm : Spec -> Cmd msg
-
-
-update : Msg -> Model -> ( Model, Cmd msg )
-update msg model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
