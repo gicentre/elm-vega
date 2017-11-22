@@ -5,23 +5,6 @@ import Json.Encode
 import Platform
 
 
-main : Program Never Model Msg
-main =
-    Platform.program { init = init, update = update, subscriptions = subscriptions }
-
-
-type alias Model =
-    Int
-
-
-type Msg
-    = FromElm
-
-
-port fromElm : Spec -> Cmd msg
-
-
-
 -- NOTE: All data sources in these examples originally provided at
 -- https://vega.github.io/vega-datasets/
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -1103,12 +1086,12 @@ vl47 =
             description "The population of the German city of Falkensee over time with annotated time periods highlighted."
 
         data =
-            dataFromColumns [ Parse [ ( "year", FDate "%Y" ) ] ]
+            dataFromColumns [ Parse [ ( "year", FoDate "%Y" ) ] ]
                 << dataColumn "year" (Strings [ "1875", "1890", "1910", "1925", "1933", "1939", "1946", "1950", "1964", "1971", "1981", "1985", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" ])
                 << dataColumn "population" (Numbers [ 1309, 1558, 4512, 8180, 15915, 24824, 28275, 29189, 29881, 26007, 24029, 23340, 22307, 22087, 22139, 22105, 22242, 22801, 24273, 25640, 27393, 29505, 32124, 33791, 35297, 36179, 36829, 37493, 38376, 39008, 39366, 39821, 40179, 40511, 40465, 40905, 41258, 41777 ])
 
         highlights =
-            dataFromColumns [ Parse [ ( "start", FDate "%Y" ), ( "end", FDate "%Y" ) ] ]
+            dataFromColumns [ Parse [ ( "start", FoDate "%Y" ), ( "end", FoDate "%Y" ) ] ]
                 << dataColumn "start" (Strings [ "1933", "1948" ])
                 << dataColumn "end" (Strings [ "1945", "1989" ])
                 << dataColumn "event" (Strings [ "Nazi Rule", "GDR (East Germany)" ])
@@ -1292,7 +1275,7 @@ vl52 =
             asSpec [ des, layer [ spec1, spec2 ] ]
     in
     toVegaLite
-        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FDate "%Y-%m-%d %H:%M" ) ] ]
+        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
         , repeat [ ColumnFields [ "temp_max", "precipitation", "wind" ] ]
         , specification spec
         ]
@@ -1514,7 +1497,7 @@ vl59 =
         spec =
             asSpec
                 [ des
-                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FDate "" ) ] ]
+                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FoDate "" ) ] ]
                 , trans []
                 , layer [ spec1, spec2 ]
                 ]
@@ -1664,16 +1647,37 @@ vlFacetExample =
         ]
 
 
-init : ( Model, Cmd msg )
-init =
-    ( 0, fromElm <| Json.Encode.list [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ] )
+
+{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
-update msg model =
-    ( model, Cmd.none )
+specs : List Spec
+specs =
+    [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ]
 
 
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+
+{- The code below is boilerplate for creating a headerless Elm module that opens
+   an outgoing port to Javascript and sends the specs to it.
+-}
+
+
+main : Program Never (List Spec) Msg
+main =
+    Platform.program
+        { init = init specs
+        , update = \_ model -> ( model, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+type Msg
+    = FromElm
+
+
+init : List Spec -> ( List Spec, Cmd msg )
+init specs =
+    ( specs, fromElm <| Json.Encode.list specs )
+
+
+port fromElm : Spec -> Cmd msg

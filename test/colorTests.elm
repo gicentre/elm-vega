@@ -5,22 +5,6 @@ import Json.Encode
 import Platform
 
 
-main : Program Never Model Msg
-main =
-    Platform.program { init = init, update = update, subscriptions = subscriptions }
-
-
-type alias Model =
-    Int
-
-
-type Msg
-    = FromElm
-
-
-port fromElm : Spec -> Cmd msg
-
-
 chart : String -> (List a -> List ( String, Spec )) -> Spec
 chart des enc =
     toVegaLite
@@ -194,46 +178,63 @@ gamma5 =
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SInterpolate (CubeHelixLong 10), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
 
 
-init : ( Model, Cmd msg )
-init =
-    ( 0
-    , fromElm <|
-        Json.Encode.list
-            [ defContinuous
-            , defOrdinal
-            , defNominal
-            , namedContinuous1
-            , namedContinuous2
-            , namedContinuous3
-            , namedContinuous4
-            , namedContinuous5
-            , namedContinuous6
-            , scale0
-            , scale1
-            , scale2
-            , scale3
-            , scale4
-            , interp1
-            , interp2
-            , interp3
-            , interp4
-            , interp5
-            , interp6
-            , interp7
-            , gamma1
-            , gamma2
-            , gamma3
-            , gamma4
-            , gamma5
-            ]
-    )
+
+{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-update : Msg -> Model -> ( Model, Cmd msg )
-update msg model =
-    ( model, Cmd.none )
+specs : List Spec
+specs =
+    [ defContinuous
+    , defOrdinal
+    , defNominal
+    , namedContinuous1
+    , namedContinuous2
+    , namedContinuous3
+    , namedContinuous4
+    , namedContinuous5
+    , namedContinuous6
+    , scale0
+    , scale1
+    , scale2
+    , scale3
+    , scale4
+    , interp1
+    , interp2
+    , interp3
+    , interp4
+    , interp5
+    , interp6
+    , interp7
+    , gamma1
+    , gamma2
+    , gamma3
+    , gamma4
+    , gamma5
+    ]
 
 
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
+
+{- The code below is boilerplate for creating a headerless Elm module that opens
+   an outgoing port to Javascript and sends the specs to it.
+-}
+
+
+main : Program Never (List Spec) Msg
+main =
+    Platform.program
+        { init = init specs
+        , update = \_ model -> ( model, Cmd.none )
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+type Msg
+    = FromElm
+
+
+init : List Spec -> ( List Spec, Cmd msg )
+init specs =
+    ( specs, fromElm <| Json.Encode.list specs )
+
+
+port fromElm : Spec -> Cmd msg
