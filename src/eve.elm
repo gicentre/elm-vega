@@ -12,12 +12,12 @@ module Eve
         , ConfigurationProperty(..)
         , DataColumn
         , DataRow
+        , DataType(..)
         , DataValue(..)
         , DataValues(..)
         , DateTime(..)
         , DayName(..)
         , DetailChannel(..)
-        , FDataType(..)
         , FacetChannel(..)
         , FacetMapping(..)
         , Filter(..)
@@ -139,7 +139,7 @@ Functions and types for declaring the input data to the visualization.
 @docs DataColumn
 @docs DataRow
 @docs Format
-@docs FDataType
+@docs DataType
 
 
 # Creating the Transform Specification
@@ -733,18 +733,18 @@ type FacetMapping
     | RowBy (List FacetChannel)
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FDate`
-and `FUtc`, the formatting specification can be specified using
+{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
+and `FoUtc`, the formatting specification can be specified using
 [D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
 or left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default passing of dates though as different browsers can
+be taken when assuming default parsing of dates though as different browsers can
 parse dates differently. Being explicit about the date format is usually safer.
 -}
-type FDataType
-    = FNumber
-    | FBoolean
-    | FDate String
-    | FUtc String
+type DataType
+    = FoNumber
+    | FoBoolean
+    | FoDate String
+    | FoUtc String
 
 
 {-| Type of filtering operation. See the
@@ -768,7 +768,7 @@ type Format
     | TSV
     | TopojsonFeature String
     | TopojsonMesh String
-    | Parse (List ( String, FDataType ))
+    | Parse (List ( String, DataType ))
 
 
 {-| Indicates the weight options for a font.
@@ -3081,22 +3081,22 @@ fontWeight w =
             JE.float 900
 
 
-fDataType : FDataType -> Spec
-fDataType dType =
+foDataType : DataType -> Spec
+foDataType dType =
     case dType of
-        FNumber ->
+        FoNumber ->
             JE.string "number"
 
-        FBoolean ->
+        FoBoolean ->
             JE.string "boolean"
 
-        FDate dateFmt ->
+        FoDate dateFmt ->
             if dateFmt == "" then
                 JE.string "date"
             else
                 JE.string ("date:'" ++ dateFmt ++ "'")
 
-        FUtc dateFmt ->
+        FoUtc dateFmt ->
             if dateFmt == "" then
                 JE.string "utc"
             else
@@ -3122,7 +3122,7 @@ format fmt =
             [ ( "type", JE.string "json" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
-            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, fDataType fmt )) fmts ) ]
+            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataType fmt )) fmts ) ]
 
 
 hAlignLabel : HAlign -> String

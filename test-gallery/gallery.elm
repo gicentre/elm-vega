@@ -1086,12 +1086,12 @@ vl47 =
             description "The population of the German city of Falkensee over time with annotated time periods highlighted."
 
         data =
-            dataFromColumns [ Parse [ ( "year", FDate "%Y" ) ] ]
+            dataFromColumns [ Parse [ ( "year", FoDate "%Y" ) ] ]
                 << dataColumn "year" (Strings [ "1875", "1890", "1910", "1925", "1933", "1939", "1946", "1950", "1964", "1971", "1981", "1985", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" ])
                 << dataColumn "population" (Numbers [ 1309, 1558, 4512, 8180, 15915, 24824, 28275, 29189, 29881, 26007, 24029, 23340, 22307, 22087, 22139, 22105, 22242, 22801, 24273, 25640, 27393, 29505, 32124, 33791, 35297, 36179, 36829, 37493, 38376, 39008, 39366, 39821, 40179, 40511, 40465, 40905, 41258, 41777 ])
 
         highlights =
-            dataFromColumns [ Parse [ ( "start", FDate "%Y" ), ( "end", FDate "%Y" ) ] ]
+            dataFromColumns [ Parse [ ( "start", FoDate "%Y" ), ( "end", FoDate "%Y" ) ] ]
                 << dataColumn "start" (Strings [ "1933", "1948" ])
                 << dataColumn "end" (Strings [ "1945", "1989" ])
                 << dataColumn "event" (Strings [ "Nazi Rule", "GDR (East Germany)" ])
@@ -1275,7 +1275,7 @@ vl52 =
             asSpec [ des, layer [ spec1, spec2 ] ]
     in
     toVegaLite
-        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FDate "%Y-%m-%d %H:%M" ) ] ]
+        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
         , repeat [ ColumnFields [ "temp_max", "precipitation", "wind" ] ]
         , specification spec
         ]
@@ -1497,7 +1497,7 @@ vl59 =
         spec =
             asSpec
                 [ des
-                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FDate "" ) ] ]
+                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FoDate "" ) ] ]
                 , trans []
                 , layer [ spec1, spec2 ]
                 ]
