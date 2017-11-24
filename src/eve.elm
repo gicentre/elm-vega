@@ -1770,7 +1770,7 @@ description s =
 {-| Encode a 'level of detail' channel. This provides a way of grouping by a field
 but unlike, say `color`, all groups have the same visual properties. The first
 parameter is a list of the field characteristics to be grouped. The second parameter
-is a list of any previous channels to which this shape channel should be added. See the
+is a list of any previous channels to which this detail channel should be added. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
 for details.
 
@@ -2002,7 +2002,7 @@ name s =
 
 {-| Encode an opacity channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by opacity. The second parameter
-is a list of any previous channels to which this shape channel should be added.
+is a list of any previous channels to which this opacity channel should be added.
 
     opacity [ MName "Age", MmType Quantitative ] []
 
