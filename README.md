@@ -94,7 +94,7 @@ Yet JSON is really an interchange format rather than one suited directly for vis
 By wrapping Vega-Lite within the Elm language, we can avoid working with JSON directly and instead take advantage of a typed functional programming environment for improved error support and customisation.
  This greatly improves reusability of code (for example, it is easy to create custom chart types such as box-and-whisker plots that can be used with a range of datasets) and integration with larger programming projects.
 
-Elm and Eve provide an ideal environment for educators wishing to teach Data Visualization combining he beginner-friendly design of Elm with the robust and theoretically underpinned design of a grammar of graphics.
+Elm and Eve provide an ideal environment for educators wishing to teach Data Visualization combining the beginner-friendly design of Elm with the robust and theoretically underpinned design of a grammar of graphics.
 
 ## Limitations
 
@@ -103,7 +103,7 @@ Elm and Eve provide an ideal environment for educators wishing to teach Data Vis
 * Eve is currently limited to the Vega-Lite specification (and a small amount of the Vega specification) so is limited to Cartesian coordinate systems (e.g. no pie charts or rose diagrams).
 However, as Vega-Lite develops (e.g. geospatial mapping will be available shortly), so will Eve.
 
-* While limited animation is possible through interaction and dynamic data generation, there is no direct support for animated transations (unlike D3 for example).
+* While limited animation is possible through interaction and dynamic data generation, there is no direct support for animated transitions (unlike D3 for example).
 
 ## Further Reading
 

@@ -3352,7 +3352,7 @@
       },
       {
         "name": "detail",
-        "comment": " Encode a 'level of detail' channel. This provides a way of grouping by a field\nbut unlike, say `color`, all groups have the same visual properties. The first\nparameter is a list of the field characteristics to be grouped. The second parameter\nis a list of any previous channels to which this shape channel should be added. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)\nfor details.\n\n    detail [ DName \"Species\", DmType Nominal ] []\n\n",
+        "comment": " Encode a 'level of detail' channel. This provides a way of grouping by a field\nbut unlike, say `color`, all groups have the same visual properties. The first\nparameter is a list of the field characteristics to be grouped. The second parameter\nis a list of any previous channels to which this detail channel should be added. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)\nfor details.\n\n    detail [ DName \"Species\", DmType Nominal ] []\n\n",
         "type": "List Eve.DetailChannel -> List Eve.LabelledSpec -> List Eve.LabelledSpec"
       },
       {
@@ -3407,7 +3407,7 @@
       },
       {
         "name": "opacity",
-        "comment": " Encode an opacity channel. The first parameter is a list of mark channel properties\nthat characterise the way a data field is encoded by opacity. The second parameter\nis a list of any previous channels to which this shape channel should be added.\n\n    opacity [ MName \"Age\", MmType Quantitative ] []\n\n",
+        "comment": " Encode an opacity channel. The first parameter is a list of mark channel properties\nthat characterise the way a data field is encoded by opacity. The second parameter\nis a list of any previous channels to which this opacity channel should be added.\n\n    opacity [ MName \"Age\", MmType Quantitative ] []\n\n",
         "type": "List Eve.MarkChannel -> List Eve.LabelledSpec -> List Eve.LabelledSpec"
       },
       {
