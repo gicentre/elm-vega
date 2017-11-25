@@ -1,13 +1,13 @@
-# An Eve Walkthrough
+# An elm-vega Walkthrough
 
-This walkthrough will introduce you to the principles and coding style for using Eve to create interactive visualizations in the [Elm](http://elm-lang.org) language.
+This walkthrough will introduce you to the principles and coding style for using elm-vega (or 'Eve' for short) to create interactive visualizations in the [Elm](http://elm-lang.org) language.
 It is based on the talk given by [Wongsuphasawat et al at the 2017 Open Vis Conf](https://youtu.be/9uaHRWj04D4).
 If you wish to follow along with their talk, timings are given by each section.
 
 
 ## A Grammar of Graphics (0:30)
 
-Eve is a wrapper for the [Vega-Lite visualization grammar](https://vega.github.io) which itself is based on Leland Wilkinson's [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447).
+_elm-vega_ is a wrapper for the [Vega-Lite visualization grammar](https://vega.github.io) which itself is based on Leland Wilkinson's [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447).
 The grammar provides an expressive way to define how data are represented graphically.
 The six key elements of the original grammar are:
 
@@ -43,7 +43,7 @@ We could encode one of the numeric data fields as a _strip plot_ where the horiz
 ![Strip plot of Seattle daily maximum temperature](images/stripPlot.png)
 
 
-In Eve, to create this visualization expression we do the following:
+With elm-vega, we do the following to create this visualization expression:
 
 ```elm
 toVegaLite
@@ -72,7 +72,7 @@ The final parameter of `position` is a list of any additional encodings in our s
 Here, with only one encoding, we provide an empty list.
 
 
-As we build up more complex visualizations we will use many more encodings. To keep the coding clear, the idiomatic way to do this in Eve is to chain encoding functions using point-free style.
+As we build up more complex visualizations we will use many more encodings. To keep the coding clear, the idiomatic way to do this with elm-vega is to chain encoding functions using point-free style.
 The example above coded in this way would be
 
 ```elm
@@ -108,7 +108,7 @@ toVegaLite
     ]
 ```
 
-The Eve code now contains two chained `position` encodings: one for the x-position, which is now binned, and one for the y-position which is aggregated by providing `PAggregate Count` instead of a data field name.
+The code now contains two chained `position` encodings: one for the x-position, which is now binned, and one for the y-position which is aggregated by providing `PAggregate Count` instead of a data field name.
 
 Notice again that sensible defaults are provided for the parts of the specification we didn't specify such as axis titles, colors and number of bins.
 
@@ -136,11 +136,11 @@ toVegaLite
     ]
 ```
 
-The Eve code to do this simply adds another channel encoding, this time `color` rather than `position`, and uses it to encode the `weather` data field.
+The code to do this simply adds another channel encoding, this time `color` rather than `position`, and uses it to encode the `weather` data field.
 Unlike temperature, weather type is _nominal_, that is, categorical with no intrinsic order.
 And once again, simply by declaring the measurement type, Vega-Lite determines an appropriate color scheme and legend.
 
-Notice how that in Eve we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
+Notice how that with elm-vega we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
 Types used to customise various channels all start with an uppercase letter indicating the type of channel affected.
 So the name of the data field use to encode _position_ is `PName`, its measurement type, `PmType`  and its positional aggregation is `PAggregate`, whereas the name of the data field for encoding color is indicated by `MName` and its measurement type `MmType` (where `M` is short for _mark_).
 
@@ -180,7 +180,7 @@ toVegaLite
     ]
 ```
 
-The mapping between the values in the domain (weather types `sun`, `fog` etc.) and the colors used to represent them (hex values `#e7ba52`, `#c7c7c7` etc.) is handled by an Eve function `categoricalDomainMap` which accepts a list of tuples defining those mappings.
+The mapping between the values in the domain (weather types `sun`, `fog` etc.) and the colors used to represent them (hex values `#e7ba52`, `#c7c7c7` etc.) is handled by an elm-vega function `categoricalDomainMap` which accepts a list of tuples defining those mappings.
 
 Notice how we never needed to state explicitly that we wished our bars to be stacked.
 This was reasoned directly by Vega-Lite based on the combination of bar marks and color channel encoding.
@@ -219,8 +219,8 @@ let
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << column [ FName "weather", FmType Nominal ]
             << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+            << column [ FName "weather", FmType Nominal ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
@@ -228,7 +228,7 @@ toVegaLite
     , enc []
     ]
 ```
-There are only two additions to the Eve specification to create these small multiples.
+There are only two additions in order to create these small multiples.
 Firstly we have an extra encoding with the `column` function specifying the `weather` data field as the one to determine which column each data item gets mapped to.
 Note that the `F` prefix for `FName` and `FmType` refers to _facet_ – a form of data selection and grouping standard in data visualization.
 
@@ -411,8 +411,8 @@ let
         encoding
             << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
             << position Y [ PAggregate Count, PmType Quantitative ]
-            << column [ FName "weather", FmType Nominal ]
             << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+            << column [ FName "weather", FmType Nominal ]
 
     histoSpec =
         asSpec [ mark Bar [], histoEnc [] ]

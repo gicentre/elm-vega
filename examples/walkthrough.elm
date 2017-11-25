@@ -95,8 +95,8 @@ multiBar =
             encoding
                 << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
-                << column [ FName "weather", FmType Nominal ]
                 << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+                << column [ FName "weather", FmType Nominal ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
@@ -253,8 +253,8 @@ dashboard2 =
             encoding
                 << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
-                << column [ FName "weather", FmType Nominal ]
                 << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+                << column [ FName "weather", FmType Nominal ]
 
         histoSpec =
             asSpec [ mark Bar [], histoEnc [] ]
