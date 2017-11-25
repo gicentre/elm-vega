@@ -30,13 +30,13 @@ defContinuous =
 
 defOrdinal : Spec
 defOrdinal =
-    chart "Default continuous colour scales."
+    chart "Default ordinal colour scales."
         (color [ MName "Cylinders", MmType Ordinal ])
 
 
 defNominal : Spec
 defNominal =
-    chart "Default continuous colour scales."
+    chart "Default nominal colour scales."
         (color [ MName "Origin", MmType Nominal ])
 
 
