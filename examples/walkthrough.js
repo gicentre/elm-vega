@@ -13378,34 +13378,34 @@ var _gicentre$eve$Walkthrough$multiBar = function () {
 						}
 					},
 					A2(
-						_gicentre$eve$Eve$column,
+						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: _gicentre$eve$Eve$FName('weather'),
+							_0: _gicentre$eve$Eve$MName('weather'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
-								_1: {ctor: '[]'}
+								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MLegend(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						},
 						A2(
-							_gicentre$eve$Eve$color,
+							_gicentre$eve$Eve$column,
 							{
 								ctor: '::',
-								_0: _gicentre$eve$Eve$MName('weather'),
+								_0: _gicentre$eve$Eve$FName('weather'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$eve$Eve$MLegend(
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
-											_1: {ctor: '[]'}
-										}
-									}
+									_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
+									_1: {ctor: '[]'}
 								}
 							},
 							_p36)))));
@@ -13677,34 +13677,34 @@ var _gicentre$eve$Walkthrough$dashboard2 = function () {
 						}
 					},
 					A2(
-						_gicentre$eve$Eve$column,
+						_gicentre$eve$Eve$color,
 						{
 							ctor: '::',
-							_0: _gicentre$eve$Eve$FName('weather'),
+							_0: _gicentre$eve$Eve$MName('weather'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
-								_1: {ctor: '[]'}
+								_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$eve$Eve$MLegend(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						},
 						A2(
-							_gicentre$eve$Eve$color,
+							_gicentre$eve$Eve$column,
 							{
 								ctor: '::',
-								_0: _gicentre$eve$Eve$MName('weather'),
+								_0: _gicentre$eve$Eve$FName('weather'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$eve$Eve$MmType(_gicentre$eve$Eve$Nominal),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$eve$Eve$MLegend(
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$eve$Eve$MScale(_gicentre$eve$Walkthrough$weatherColors),
-											_1: {ctor: '[]'}
-										}
-									}
+									_0: _gicentre$eve$Eve$FmType(_gicentre$eve$Eve$Nominal),
+									_1: {ctor: '[]'}
 								}
 							},
 							_p40)))));
