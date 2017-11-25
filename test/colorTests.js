@@ -6830,14 +6830,14 @@ var _gicentre$eve$Eve$hAlignLabel = function (align) {
 			return 'right';
 	}
 };
-var _gicentre$eve$Eve$fDataType = function (dType) {
+var _gicentre$eve$Eve$foDataType = function (dType) {
 	var _p38 = dType;
 	switch (_p38.ctor) {
-		case 'FNumber':
+		case 'FoNumber':
 			return _elm_lang$core$Json_Encode$string('number');
-		case 'FBoolean':
+		case 'FoBoolean':
 			return _elm_lang$core$Json_Encode$string('boolean');
-		case 'FDate':
+		case 'FoDate':
 			var _p39 = _p38._0;
 			return _elm_lang$core$Native_Utils.eq(_p39, '') ? _elm_lang$core$Json_Encode$string('date') : _elm_lang$core$Json_Encode$string(
 				A2(
@@ -6936,7 +6936,7 @@ var _gicentre$eve$Eve$format = function (fmt) {
 								return {
 									ctor: '_Tuple2',
 									_0: _p43._0,
-									_1: _gicentre$eve$Eve$fDataType(_p43._1)
+									_1: _gicentre$eve$Eve$foDataType(_p43._1)
 								};
 							},
 							_p41._0))
@@ -9021,10 +9021,28 @@ var _gicentre$eve$Eve$filter = function (f) {
 				});
 	}
 };
+var _gicentre$eve$Eve$dataRow = function (row) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		_elm_lang$core$Json_Encode$object(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p95) {
+					var _p96 = _p95;
+					return {
+						ctor: '_Tuple2',
+						_0: _p96._0,
+						_1: _gicentre$eve$Eve$datavalue(_p96._1)
+					};
+				},
+				row)));
+};
 var _gicentre$eve$Eve$dataColumn = F2(
 	function (colName, data) {
-		var _p95 = data;
-		switch (_p95.ctor) {
+		var _p97 = data;
+		switch (_p97.ctor) {
 			case 'Numbers':
 				return F2(
 					function (x, y) {
@@ -9039,7 +9057,7 @@ var _gicentre$eve$Eve$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$float(x)
 							};
 						},
-						_p95._0));
+						_p97._0));
 			case 'Strings':
 				return F2(
 					function (x, y) {
@@ -9054,7 +9072,7 @@ var _gicentre$eve$Eve$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$string(s)
 							};
 						},
-						_p95._0));
+						_p97._0));
 			case 'DateTimes':
 				return F2(
 					function (x, y) {
@@ -9070,7 +9088,7 @@ var _gicentre$eve$Eve$dataColumn = F2(
 									A2(_elm_lang$core$List$map, _gicentre$eve$Eve$dateTimeProperty, dts))
 							};
 						},
-						_p95._0));
+						_p97._0));
 			default:
 				return F2(
 					function (x, y) {
@@ -9085,7 +9103,7 @@ var _gicentre$eve$Eve$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$bool(b)
 							};
 						},
-						_p95._0));
+						_p97._0));
 		}
 	});
 var _gicentre$eve$Eve$configuration = function (cfg) {
@@ -9131,36 +9149,36 @@ var _gicentre$eve$Eve$bin = function (bProps) {
 	};
 };
 var _gicentre$eve$Eve$detailChannelProperty = function (field) {
-	var _p96 = field;
-	switch (_p96.ctor) {
+	var _p98 = field;
+	switch (_p98.ctor) {
 		case 'DName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p96._0)
+				_1: _elm_lang$core$Json_Encode$string(_p98._0)
 			};
 		case 'DmType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$measurementLabel(_p96._0))
+					_gicentre$eve$Eve$measurementLabel(_p98._0))
 			};
 		case 'DBin':
-			return _gicentre$eve$Eve$bin(_p96._0);
+			return _gicentre$eve$Eve$bin(_p98._0);
 		case 'DTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$timeUnitLabel(_p96._0))
+					_gicentre$eve$Eve$timeUnitLabel(_p98._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$opLabel(_p96._0))
+					_gicentre$eve$Eve$opLabel(_p98._0))
 			};
 	}
 };
@@ -9177,43 +9195,43 @@ var _gicentre$eve$Eve$detail = function (detailProps) {
 		});
 };
 var _gicentre$eve$Eve$facetChannelProperty = function (fMap) {
-	var _p97 = fMap;
-	switch (_p97.ctor) {
+	var _p99 = fMap;
+	switch (_p99.ctor) {
 		case 'FName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p97._0)
+				_1: _elm_lang$core$Json_Encode$string(_p99._0)
 			};
 		case 'FmType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$measurementLabel(_p97._0))
+					_gicentre$eve$Eve$measurementLabel(_p99._0))
 			};
 		case 'FBin':
-			return _gicentre$eve$Eve$bin(_p97._0);
+			return _gicentre$eve$Eve$bin(_p99._0);
 		case 'FAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$opLabel(_p97._0))
+					_gicentre$eve$Eve$opLabel(_p99._0))
 			};
 		case 'FTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$timeUnitLabel(_p97._0))
+					_gicentre$eve$Eve$timeUnitLabel(_p99._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'header',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$headerProperty, _p97._0))
+					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$headerProperty, _p99._0))
 			};
 	}
 };
@@ -9242,33 +9260,33 @@ var _gicentre$eve$Eve$row = function (fFields) {
 		});
 };
 var _gicentre$eve$Eve$facetMappingProperty = function (fMap) {
-	var _p98 = fMap;
-	if (_p98.ctor === 'RowBy') {
+	var _p100 = fMap;
+	if (_p100.ctor === 'RowBy') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'row',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$facetChannelProperty, _p98._0))
+				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$facetChannelProperty, _p100._0))
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'column',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$facetChannelProperty, _p98._0))
+				A2(_elm_lang$core$List$map, _gicentre$eve$Eve$facetChannelProperty, _p100._0))
 		};
 	}
 };
 var _gicentre$eve$Eve$markChannelProperty = function (field) {
-	var _p99 = field;
-	switch (_p99.ctor) {
+	var _p101 = field;
+	switch (_p101.ctor) {
 		case 'MName':
 			return {
 				ctor: '::',
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'field',
-					_1: _elm_lang$core$Json_Encode$string(_p99._0)
+					_1: _elm_lang$core$Json_Encode$string(_p101._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9285,7 +9303,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 								ctor: '_Tuple2',
 								_0: 'repeat',
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$eve$Eve$arrangementLabel(_p99._0))
+									_gicentre$eve$Eve$arrangementLabel(_p101._0))
 							},
 							_1: {ctor: '[]'}
 						})
@@ -9299,7 +9317,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'type',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$measurementLabel(_p99._0))
+						_gicentre$eve$Eve$measurementLabel(_p101._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9310,14 +9328,14 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'scale',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p99._0))
+						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p101._0))
 				},
 				_1: {ctor: '[]'}
 			};
 		case 'MLegend':
-			var _p100 = _p99._0;
+			var _p102 = _p101._0;
 			return _elm_lang$core$Native_Utils.eq(
-				_p100,
+				_p102,
 				{ctor: '[]'}) ? {
 				ctor: '::',
 				_0: {ctor: '_Tuple2', _0: 'legend', _1: _elm_lang$core$Json_Encode$null},
@@ -9328,14 +9346,14 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'legend',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$legendProperty, _p100))
+						A2(_elm_lang$core$List$map, _gicentre$eve$Eve$legendProperty, _p102))
 				},
 				_1: {ctor: '[]'}
 			};
 		case 'MBin':
 			return {
 				ctor: '::',
-				_0: _gicentre$eve$Eve$bin(_p99._0),
+				_0: _gicentre$eve$Eve$bin(_p101._0),
 				_1: {ctor: '[]'}
 			};
 		case 'MCondition':
@@ -9350,12 +9368,12 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'selection',
-								_1: _elm_lang$core$Json_Encode$string(_p99._0)
+								_1: _elm_lang$core$Json_Encode$string(_p101._0)
 							},
-							_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p99._1)
+							_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p101._1)
 						})
 				},
-				_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p99._2)
+				_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$markChannelProperty, _p101._2)
 			};
 		case 'MTimeUnit':
 			return {
@@ -9364,7 +9382,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'timeUnit',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$timeUnitLabel(_p99._0))
+						_gicentre$eve$Eve$timeUnitLabel(_p101._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9375,7 +9393,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'aggregate',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$opLabel(_p99._0))
+						_gicentre$eve$Eve$opLabel(_p101._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9385,7 +9403,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'value',
-					_1: _elm_lang$core$Json_Encode$string(_p99._0)
+					_1: _elm_lang$core$Json_Encode$string(_p101._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9395,7 +9413,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'value',
-					_1: _elm_lang$core$Json_Encode$float(_p99._0)
+					_1: _elm_lang$core$Json_Encode$float(_p101._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9405,7 +9423,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'value',
-					_1: _elm_lang$core$Json_Encode$string(_p99._0)
+					_1: _elm_lang$core$Json_Encode$string(_p101._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9415,7 +9433,7 @@ var _gicentre$eve$Eve$markChannelProperty = function (field) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'value',
-					_1: _elm_lang$core$Json_Encode$bool(_p99._0)
+					_1: _elm_lang$core$Json_Encode$bool(_p101._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9470,13 +9488,13 @@ var _gicentre$eve$Eve$size = function (markProps) {
 		});
 };
 var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
-	var _p101 = oDef;
-	switch (_p101.ctor) {
+	var _p103 = oDef;
+	switch (_p103.ctor) {
 		case 'OName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p101._0)
+				_1: _elm_lang$core$Json_Encode$string(_p103._0)
 			};
 		case 'ORepeat':
 			return {
@@ -9489,7 +9507,7 @@ var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
 							ctor: '_Tuple2',
 							_0: 'repeat',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$eve$Eve$arrangementLabel(_p101._0))
+								_gicentre$eve$Eve$arrangementLabel(_p103._0))
 						},
 						_1: {ctor: '[]'}
 					})
@@ -9499,34 +9517,34 @@ var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$measurementLabel(_p101._0))
+					_gicentre$eve$Eve$measurementLabel(_p103._0))
 			};
 		case 'OBin':
-			return _gicentre$eve$Eve$bin(_p101._0);
+			return _gicentre$eve$Eve$bin(_p103._0);
 		case 'OAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$opLabel(_p101._0))
+					_gicentre$eve$Eve$opLabel(_p103._0))
 			};
 		case 'OTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$timeUnitLabel(_p101._0))
+					_gicentre$eve$Eve$timeUnitLabel(_p103._0))
 			};
 		default:
-			var _p103 = _p101._0;
-			var _p102 = _p103;
-			_v84_3:
+			var _p105 = _p103._0;
+			var _p104 = _p105;
+			_v85_3:
 			do {
-				if (_p102.ctor === '[]') {
+				if (_p104.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: 'sort', _1: _elm_lang$core$Json_Encode$null};
 				} else {
-					if (_p102._1.ctor === '[]') {
-						switch (_p102._0.ctor) {
+					if (_p104._1.ctor === '[]') {
+						switch (_p104._0.ctor) {
 							case 'Ascending':
 								return {
 									ctor: '_Tuple2',
@@ -9540,10 +9558,10 @@ var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
 									_1: _elm_lang$core$Json_Encode$string('descending')
 								};
 							default:
-								break _v84_3;
+								break _v85_3;
 						}
 					} else {
-						break _v84_3;
+						break _v85_3;
 					}
 				}
 			} while(false);
@@ -9551,7 +9569,7 @@ var _gicentre$eve$Eve$orderChannelProperty = function (oDef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$sortProperty, _p103))
+					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$sortProperty, _p105))
 			};
 	}
 };
@@ -9568,47 +9586,47 @@ var _gicentre$eve$Eve$order = function (oDefs) {
 		});
 };
 var _gicentre$eve$Eve$positionChannelProperty = function (pDef) {
-	var _p104 = pDef;
-	switch (_p104.ctor) {
+	var _p106 = pDef;
+	switch (_p106.ctor) {
 		case 'PName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p104._0)
+				_1: _elm_lang$core$Json_Encode$string(_p106._0)
 			};
 		case 'PmType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$measurementLabel(_p104._0))
+					_gicentre$eve$Eve$measurementLabel(_p106._0))
 			};
 		case 'PBin':
-			return _gicentre$eve$Eve$bin(_p104._0);
+			return _gicentre$eve$Eve$bin(_p106._0);
 		case 'PAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$opLabel(_p104._0))
+					_gicentre$eve$Eve$opLabel(_p106._0))
 			};
 		case 'PTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$eve$Eve$timeUnitLabel(_p104._0))
+					_gicentre$eve$Eve$timeUnitLabel(_p106._0))
 			};
 		case 'PSort':
-			var _p106 = _p104._0;
-			var _p105 = _p106;
-			_v86_3:
+			var _p108 = _p106._0;
+			var _p107 = _p108;
+			_v87_3:
 			do {
-				if (_p105.ctor === '[]') {
+				if (_p107.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: 'sort', _1: _elm_lang$core$Json_Encode$null};
 				} else {
-					if (_p105._1.ctor === '[]') {
-						switch (_p105._0.ctor) {
+					if (_p107._1.ctor === '[]') {
+						switch (_p107._0.ctor) {
 							case 'Ascending':
 								return {
 									ctor: '_Tuple2',
@@ -9622,10 +9640,10 @@ var _gicentre$eve$Eve$positionChannelProperty = function (pDef) {
 									_1: _elm_lang$core$Json_Encode$string('descending')
 								};
 							default:
-								break _v86_3;
+								break _v87_3;
 						}
 					} else {
-						break _v86_3;
+						break _v87_3;
 					}
 				}
 			} while(false);
@@ -9633,27 +9651,27 @@ var _gicentre$eve$Eve$positionChannelProperty = function (pDef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$sortProperty, _p106))
+					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$sortProperty, _p108))
 			};
 		case 'PScale':
 			return {
 				ctor: '_Tuple2',
 				_0: 'scale',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p104._0))
+					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$scaleProperty, _p106._0))
 			};
 		case 'PAxis':
-			var _p107 = _p104._0;
+			var _p109 = _p106._0;
 			return _elm_lang$core$Native_Utils.eq(
-				_p107,
+				_p109,
 				{ctor: '[]'}) ? {ctor: '_Tuple2', _0: 'axis', _1: _elm_lang$core$Json_Encode$null} : {
 				ctor: '_Tuple2',
 				_0: 'axis',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$axisProperty, _p107))
+					A2(_elm_lang$core$List$map, _gicentre$eve$Eve$axisProperty, _p109))
 			};
 		case 'PStack':
-			return _gicentre$eve$Eve$stackProperty(_p104._0);
+			return _gicentre$eve$Eve$stackProperty(_p106._0);
 		default:
 			return {
 				ctor: '_Tuple2',
@@ -9665,7 +9683,7 @@ var _gicentre$eve$Eve$positionChannelProperty = function (pDef) {
 							ctor: '_Tuple2',
 							_0: 'repeat',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$eve$Eve$arrangementLabel(_p104._0))
+								_gicentre$eve$Eve$arrangementLabel(_p106._0))
 						},
 						_1: {ctor: '[]'}
 					})
@@ -9686,15 +9704,15 @@ var _gicentre$eve$Eve$position = F2(
 			});
 	});
 var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
-	var _p108 = tDef;
-	switch (_p108.ctor) {
+	var _p110 = tDef;
+	switch (_p110.ctor) {
 		case 'TName':
 			return {
 				ctor: '::',
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'field',
-					_1: _elm_lang$core$Json_Encode$string(_p108._0)
+					_1: _elm_lang$core$Json_Encode$string(_p110._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9711,7 +9729,7 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 								ctor: '_Tuple2',
 								_0: 'repeat',
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$eve$Eve$arrangementLabel(_p108._0))
+									_gicentre$eve$Eve$arrangementLabel(_p110._0))
 							},
 							_1: {ctor: '[]'}
 						})
@@ -9725,14 +9743,14 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'type',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$measurementLabel(_p108._0))
+						_gicentre$eve$Eve$measurementLabel(_p110._0))
 				},
 				_1: {ctor: '[]'}
 			};
 		case 'TBin':
 			return {
 				ctor: '::',
-				_0: _gicentre$eve$Eve$bin(_p108._0),
+				_0: _gicentre$eve$Eve$bin(_p110._0),
 				_1: {ctor: '[]'}
 			};
 		case 'TAggregate':
@@ -9742,7 +9760,7 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'aggregate',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$opLabel(_p108._0))
+						_gicentre$eve$Eve$opLabel(_p110._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9753,7 +9771,7 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'timeUnit',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$eve$Eve$timeUnitLabel(_p108._0))
+						_gicentre$eve$Eve$timeUnitLabel(_p110._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9763,7 +9781,7 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'format',
-					_1: _elm_lang$core$Json_Encode$string(_p108._0)
+					_1: _elm_lang$core$Json_Encode$string(_p110._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9779,12 +9797,12 @@ var _gicentre$eve$Eve$textChannelProperty = function (tDef) {
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'selection',
-								_1: _elm_lang$core$Json_Encode$string(_p108._0)
+								_1: _elm_lang$core$Json_Encode$string(_p110._0)
 							},
-							_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$textChannelProperty, _p108._1)
+							_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$textChannelProperty, _p110._1)
 						})
 				},
-				_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$textChannelProperty, _p108._2)
+				_1: A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$textChannelProperty, _p110._2)
 			};
 	}
 };
@@ -9816,12 +9834,12 @@ var _gicentre$eve$Eve$asSpec = function (specs) {
 	return _elm_lang$core$Json_Encode$object(
 		A2(
 			_elm_lang$core$List$map,
-			function (_p109) {
-				var _p110 = _p109;
+			function (_p111) {
+				var _p112 = _p111;
 				return {
 					ctor: '_Tuple2',
-					_0: _gicentre$eve$Eve$propertyLabel(_p110._0),
-					_1: _p110._1
+					_0: _gicentre$eve$Eve$propertyLabel(_p112._0),
+					_1: _p112._1
 				};
 			},
 			specs));
@@ -10300,14 +10318,14 @@ var _gicentre$eve$Eve$RowBy = function (a) {
 var _gicentre$eve$Eve$ColumnBy = function (a) {
 	return {ctor: 'ColumnBy', _0: a};
 };
-var _gicentre$eve$Eve$FUtc = function (a) {
-	return {ctor: 'FUtc', _0: a};
+var _gicentre$eve$Eve$FoUtc = function (a) {
+	return {ctor: 'FoUtc', _0: a};
 };
-var _gicentre$eve$Eve$FDate = function (a) {
-	return {ctor: 'FDate', _0: a};
+var _gicentre$eve$Eve$FoDate = function (a) {
+	return {ctor: 'FoDate', _0: a};
 };
-var _gicentre$eve$Eve$FBoolean = {ctor: 'FBoolean'};
-var _gicentre$eve$Eve$FNumber = {ctor: 'FNumber'};
+var _gicentre$eve$Eve$FoBoolean = {ctor: 'FoBoolean'};
+var _gicentre$eve$Eve$FoNumber = {ctor: 'FoNumber'};
 var _gicentre$eve$Eve$FRange = F2(
 	function (a, b) {
 		return {ctor: 'FRange', _0: a, _1: b};
@@ -10763,25 +10781,25 @@ var _gicentre$eve$Eve$encoding = function (channels) {
 };
 var _gicentre$eve$Eve$Transform = {ctor: 'Transform'};
 var _gicentre$eve$Eve$transform = function (transforms) {
-	var assemble = function (_p111) {
-		var _p112 = _p111;
-		var _p117 = _p112._1;
-		var _p116 = _p112._0;
-		var _p113 = _p116;
-		switch (_p113) {
+	var assemble = function (_p113) {
+		var _p114 = _p113;
+		var _p119 = _p114._1;
+		var _p118 = _p114._0;
+		var _p115 = _p118;
+		switch (_p115) {
 			case 'calculate':
-				var _p114 = A2(
+				var _p116 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p117));
-				if ((((_p114.ctor === 'Ok') && (_p114._0.ctor === '::')) && (_p114._0._1.ctor === '::')) && (_p114._0._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p119));
+				if ((((_p116.ctor === 'Ok') && (_p116._0.ctor === '::')) && (_p116._0._1.ctor === '::')) && (_p116._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'calculate', _1: _p114._0._0},
+							_0: {ctor: '_Tuple2', _0: 'calculate', _1: _p116._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'as', _1: _p114._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'as', _1: _p116._0._1._0},
 								_1: {ctor: '[]'}
 							}
 						});
@@ -10789,18 +10807,18 @@ var _gicentre$eve$Eve$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'aggregate':
-				var _p115 = A2(
+				var _p117 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p117));
-				if ((((_p115.ctor === 'Ok') && (_p115._0.ctor === '::')) && (_p115._0._1.ctor === '::')) && (_p115._0._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p119));
+				if ((((_p117.ctor === 'Ok') && (_p117._0.ctor === '::')) && (_p117._0._1.ctor === '::')) && (_p117._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'aggregate', _1: _p115._0._0},
+							_0: {ctor: '_Tuple2', _0: 'aggregate', _1: _p117._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p115._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p117._0._1._0},
 								_1: {ctor: '[]'}
 							}
 						});
@@ -10811,7 +10829,7 @@ var _gicentre$eve$Eve$transform = function (transforms) {
 				return _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _p116, _1: _p117},
+						_0: {ctor: '_Tuple2', _0: _p118, _1: _p119},
 						_1: {ctor: '[]'}
 					});
 		}
@@ -10826,8 +10844,8 @@ var _gicentre$eve$Eve$transform = function (transforms) {
 var _gicentre$eve$Eve$Mark = {ctor: 'Mark'};
 var _gicentre$eve$Eve$mark = F2(
 	function (mark, mProps) {
-		var _p118 = mProps;
-		if (_p118.ctor === '[]') {
+		var _p120 = mProps;
+		if (_p120.ctor === '[]') {
 			return {
 				ctor: '_Tuple2',
 				_0: _gicentre$eve$Eve$Mark,
@@ -10878,6 +10896,47 @@ var _gicentre$eve$Eve$dataFromColumns = F2(
 				{
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'values', _1: dataArray},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'format',
+							_1: _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$concatMap, _gicentre$eve$Eve$format, fmts))
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _gicentre$eve$Eve$dataFromRows = F2(
+	function (fmts, rows) {
+		return _elm_lang$core$Native_Utils.eq(
+			fmts,
+			{ctor: '[]'}) ? {
+			ctor: '_Tuple2',
+			_0: _gicentre$eve$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'values',
+						_1: _elm_lang$core$Json_Encode$list(rows)
+					},
+					_1: {ctor: '[]'}
+				})
+		} : {
+			ctor: '_Tuple2',
+			_0: _gicentre$eve$Eve$Data,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'values',
+						_1: _elm_lang$core$Json_Encode$list(rows)
+					},
 					_1: {
 						ctor: '::',
 						_0: {
@@ -11154,9 +11213,9 @@ var _gicentre$eve$Eve$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
 var _gicentre$eve$Eve$categoricalDomainMap = function (scaleDomainPairs) {
-	var _p119 = _elm_lang$core$List$unzip(scaleDomainPairs);
-	var domain = _p119._0;
-	var range = _p119._1;
+	var _p121 = _elm_lang$core$List$unzip(scaleDomainPairs);
+	var domain = _p121._0;
+	var range = _p121._1;
 	return {
 		ctor: '::',
 		_0: _gicentre$eve$Eve$SDomain(
@@ -11171,7 +11230,7 @@ var _gicentre$eve$Eve$categoricalDomainMap = function (scaleDomainPairs) {
 };
 var _gicentre$eve$Eve$domainRangeMap = F2(
 	function (lowerMap, upperMap) {
-		var _p120 = _elm_lang$core$List$unzip(
+		var _p122 = _elm_lang$core$List$unzip(
 			{
 				ctor: '::',
 				_0: lowerMap,
@@ -11181,8 +11240,8 @@ var _gicentre$eve$Eve$domainRangeMap = F2(
 					_1: {ctor: '[]'}
 				}
 			});
-		var domain = _p120._0;
-		var range = _p120._1;
+		var domain = _p122._0;
+		var range = _p122._1;
 		return {
 			ctor: '::',
 			_0: _gicentre$eve$Eve$SDomain(
@@ -11483,7 +11542,7 @@ var _gicentre$eve$ColorTests$defContinuous = A2(
 		}));
 var _gicentre$eve$ColorTests$defOrdinal = A2(
 	_gicentre$eve$ColorTests$chart,
-	'Default continuous colour scales.',
+	'Default ordinal colour scales.',
 	_gicentre$eve$Eve$color(
 		{
 			ctor: '::',
@@ -11496,7 +11555,7 @@ var _gicentre$eve$ColorTests$defOrdinal = A2(
 		}));
 var _gicentre$eve$ColorTests$defNominal = A2(
 	_gicentre$eve$ColorTests$chart,
-	'Default continuous colour scales.',
+	'Default nominal colour scales.',
 	_gicentre$eve$Eve$color(
 		{
 			ctor: '::',
