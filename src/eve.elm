@@ -21,6 +21,7 @@ module Eve
         , FacetChannel(..)
         , FacetMapping(..)
         , Filter(..)
+        , FilterRange(..)
         , FontWeight(..)
         , Format(..)
         , HAlign(..)
@@ -29,6 +30,7 @@ module Eve
         , Legend(..)
         , LegendOrientation(..)
         , LegendProperty(..)
+        , LegendValues(..)
         , Mark(..)
         , MarkChannel(..)
         , MarkInterpolation(..)
@@ -172,6 +174,7 @@ data fields before they are encoded visually.
 
 @docs filter
 @docs Filter
+@docs FilterRange
 
 
 # Creating the Mark Specification
@@ -228,6 +231,7 @@ Channels that relate to the appearance of the visual marks in the visualization.
 @docs LegendProperty
 @docs Legend
 @docs LegendOrientation
+@docs LegendValues
 
 
 ## Text Channels
@@ -756,7 +760,15 @@ type Filter
     | FExpr String
     | FSelection String
     | FOneOf String DataValues
-    | FRange String DataValues
+    | FRange String FilterRange
+
+
+{-| A pair of filter range data values. The first argument is the inclusive minimum
+vale to accept and the second the inclusive maximum.
+-}
+type FilterRange
+    = NumberRange Float Float
+    | DateRange (List DateTime) (List DateTime)
 
 
 {-| Specifies the type of format a data source uses. For details see the
@@ -834,6 +846,14 @@ type Legend
     | Symbol
 
 
+{-| A list of data values suitable for setting legend values.
+-}
+type LegendValues
+    = LDateTimes (List (List DateTime))
+    | LNumbers (List Float)
+    | LStrings (List String)
+
+
 {-| Indicates the legend orientation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config)
 for more details.
@@ -860,7 +880,7 @@ type LegendProperty
     | LTickCount Float
     | LTitle String
     | LType Legend
-    | LValues DataValues
+    | LValues LegendValues
     | LZIndex Int
 
 
@@ -1869,25 +1889,14 @@ filter f =
             let
                 values =
                     case vals of
-                        Numbers xs ->
-                            List.map JE.float xs |> JE.list
+                        NumberRange mn mx ->
+                            JE.list [ JE.float mn, JE.float mx ]
 
-                        DateTimes dts ->
-                            List.map (\dt -> JE.object (List.map dateTimeProperty dt)) dts |> JE.list
-
-                        Strings ss ->
-                            let
-                                _ =
-                                    Debug.log "Cannot filter with range of strings " vals
-                            in
-                            JE.null
-
-                        Booleans bs ->
-                            let
-                                _ =
-                                    Debug.log "Cannot filter with range of Booleans " vals
-                            in
-                            JE.null
+                        DateRange dMin dMax ->
+                            JE.list
+                                [ JE.object (List.map dateTimeProperty dMin)
+                                , JE.object (List.map dateTimeProperty dMax)
+                                ]
             in
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "range", values ) ] )
 
@@ -3255,21 +3264,14 @@ legendProperty legendProp =
             let
                 list =
                     case vals of
-                        Numbers xs ->
+                        LNumbers xs ->
                             List.map JE.float xs |> JE.list
 
-                        DateTimes dts ->
+                        LDateTimes dts ->
                             List.map (\dt -> JE.object (List.map dateTimeProperty dt)) dts |> JE.list
 
-                        Strings ss ->
+                        LStrings ss ->
                             List.map JE.string ss |> JE.list
-
-                        Booleans bs ->
-                            let
-                                _ =
-                                    Debug.log "Cannot create legend values with a list of Booleans " vals
-                            in
-                            JE.null
             in
             ( "values", list )
 
