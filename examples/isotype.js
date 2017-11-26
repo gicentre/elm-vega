@@ -6444,6 +6444,10 @@ var _gicentre$eve$Eve$overlapStrategyLabel = function (strat) {
 var _gicentre$eve$Eve$opLabel = function (op) {
 	var _p27 = op;
 	switch (_p27.ctor) {
+		case 'ArgMax':
+			return 'argmax';
+		case 'ArgMin':
+			return 'argmin';
 		case 'Count':
 			return 'count';
 		case 'Valid':
@@ -6830,14 +6834,14 @@ var _gicentre$eve$Eve$hAlignLabel = function (align) {
 			return 'right';
 	}
 };
-var _gicentre$eve$Eve$fDataType = function (dType) {
+var _gicentre$eve$Eve$foDataType = function (dType) {
 	var _p38 = dType;
 	switch (_p38.ctor) {
-		case 'FNumber':
+		case 'FoNumber':
 			return _elm_lang$core$Json_Encode$string('number');
-		case 'FBoolean':
+		case 'FoBoolean':
 			return _elm_lang$core$Json_Encode$string('boolean');
-		case 'FDate':
+		case 'FoDate':
 			var _p39 = _p38._0;
 			return _elm_lang$core$Native_Utils.eq(_p39, '') ? _elm_lang$core$Json_Encode$string('date') : _elm_lang$core$Json_Encode$string(
 				A2(
@@ -6936,7 +6940,7 @@ var _gicentre$eve$Eve$format = function (fmt) {
 								return {
 									ctor: '_Tuple2',
 									_0: _p43._0,
-									_1: _gicentre$eve$Eve$fDataType(_p43._1)
+									_1: _gicentre$eve$Eve$foDataType(_p43._1)
 								};
 							},
 							_p41._0))
@@ -10318,14 +10322,14 @@ var _gicentre$eve$Eve$RowBy = function (a) {
 var _gicentre$eve$Eve$ColumnBy = function (a) {
 	return {ctor: 'ColumnBy', _0: a};
 };
-var _gicentre$eve$Eve$FUtc = function (a) {
-	return {ctor: 'FUtc', _0: a};
+var _gicentre$eve$Eve$FoUtc = function (a) {
+	return {ctor: 'FoUtc', _0: a};
 };
-var _gicentre$eve$Eve$FDate = function (a) {
-	return {ctor: 'FDate', _0: a};
+var _gicentre$eve$Eve$FoDate = function (a) {
+	return {ctor: 'FoDate', _0: a};
 };
-var _gicentre$eve$Eve$FBoolean = {ctor: 'FBoolean'};
-var _gicentre$eve$Eve$FNumber = {ctor: 'FNumber'};
+var _gicentre$eve$Eve$FoBoolean = {ctor: 'FoBoolean'};
+var _gicentre$eve$Eve$FoNumber = {ctor: 'FoNumber'};
 var _gicentre$eve$Eve$FRange = F2(
 	function (a, b) {
 		return {ctor: 'FRange', _0: a, _1: b};
@@ -10643,6 +10647,8 @@ var _gicentre$eve$Eve$Count = {ctor: 'Count'};
 var _gicentre$eve$Eve$CI1 = {ctor: 'CI1'};
 var _gicentre$eve$Eve$CI0 = {ctor: 'CI0'};
 var _gicentre$eve$Eve$Average = {ctor: 'Average'};
+var _gicentre$eve$Eve$ArgMin = {ctor: 'ArgMin'};
+var _gicentre$eve$Eve$ArgMax = {ctor: 'ArgMax'};
 var _gicentre$eve$Eve$OSort = function (a) {
 	return {ctor: 'OSort', _0: a};
 };
@@ -11846,7 +11852,7 @@ var _gicentre$eve$Isotype$livestock = function () {
 			{ctor: '[]'},
 			A3(
 				_gicentre$eve$Isotype$toRows,
-				'GB',
+				'Great Britain',
 				{
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'cattle', _1: 3},
@@ -11862,7 +11868,7 @@ var _gicentre$eve$Isotype$livestock = function () {
 				},
 				A3(
 					_gicentre$eve$Isotype$toRows,
-					'US1',
+					'United States',
 					{
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
@@ -11876,39 +11882,7 @@ var _gicentre$eve$Isotype$livestock = function () {
 							}
 						}
 					},
-					A3(
-						_gicentre$eve$Isotype$toRows,
-						'US2',
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'pigs', _1: 6},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'sheep', _1: 7},
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						A3(
-							_gicentre$eve$Isotype$toRows,
-							'US3',
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'pigs', _1: 6},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'sheep', _1: 7},
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							_p7)))));
+					_p7)));
 	};
 	return _gicentre$eve$Eve$toVegaLite(
 		{

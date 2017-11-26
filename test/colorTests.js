@@ -6444,6 +6444,10 @@ var _gicentre$eve$Eve$overlapStrategyLabel = function (strat) {
 var _gicentre$eve$Eve$opLabel = function (op) {
 	var _p27 = op;
 	switch (_p27.ctor) {
+		case 'ArgMax':
+			return 'argmax';
+		case 'ArgMin':
+			return 'argmin';
 		case 'Count':
 			return 'count';
 		case 'Valid':
@@ -10643,6 +10647,8 @@ var _gicentre$eve$Eve$Count = {ctor: 'Count'};
 var _gicentre$eve$Eve$CI1 = {ctor: 'CI1'};
 var _gicentre$eve$Eve$CI0 = {ctor: 'CI0'};
 var _gicentre$eve$Eve$Average = {ctor: 'Average'};
+var _gicentre$eve$Eve$ArgMin = {ctor: 'ArgMin'};
+var _gicentre$eve$Eve$ArgMax = {ctor: 'ArgMax'};
 var _gicentre$eve$Eve$OSort = function (a) {
 	return {ctor: 'OSort', _0: a};
 };

@@ -48,6 +48,7 @@
   <script>
     Elm.ShapeTests.worker().ports.fromElm.subscribe(function(elmObj) {
       let id = 1;
+      console.log(elmObj);
       for (let obj of elmObj) {
         vegaEmbed("#vis" + id++, obj, {
           actions: {"export":true, "source":true, "editor":true}, logLevel:vega.Warn

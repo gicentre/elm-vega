@@ -1967,6 +1967,14 @@
         "args": [],
         "cases": [
           [
+            "ArgMax",
+            []
+          ],
+          [
+            "ArgMin",
+            []
+          ],
+          [
             "Average",
             []
           ],

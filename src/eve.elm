@@ -1000,10 +1000,10 @@ type MonthName
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/aggregate.html#ops)
 for more details.
 -}
-type
-    Operation
-    -- TODO: Add argmin and argmax (parameterised options)
-    = Average
+type Operation
+    = ArgMax
+    | ArgMin
+    | Average
     | CI0
     | CI1
     | Count
@@ -3616,6 +3616,12 @@ nice ni =
 opLabel : Operation -> String
 opLabel op =
     case op of
+        ArgMax ->
+            "argmax"
+
+        ArgMin ->
+            "argmin"
+
         Count ->
             "count"
 
