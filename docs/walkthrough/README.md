@@ -13,7 +13,7 @@ The six key elements of the original grammar are:
 
 
 * **Data**: The input to visualize. _Example Eve functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
-* **Transform**: Functions to change the data before they are visualized. _Example Eve functions:_ `filter`, `calculate` and `bin`.
+* **Transform**: Functions to change the data before they are visualized. _Example Eve functions:_ `filter`, `calculateAs` and `binAs`.
 * **Mark**: The visual symbol(s) that represent the data. _Example Eve types:_ `Line`, `Circle`, `Bar` and `Text`.
 * **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example Eve functions:_ `position`, `shape`, `size` and `color`.
 * **Scale**: Descriptions of the way encoded marks represent the data. _Example Eve types:_ `SDomain`, `SPadding` and `SInterpolate`.
@@ -807,7 +807,7 @@ let
     hourTrans =
         -- This generates a new field based on the hour of day extracted from the date field.
         transform
-            << calculate "hours(datum.date)" "hour"
+            << calculateAs "hours(datum.date)" "hour"
 
     sel =
         selection << select "brush" Interval [ Encodings [ ChX ] ]
