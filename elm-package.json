@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "Vega-Lite specification generation via Elm",
+    "summary": "Declarative visualization with Elm and Vega-Lite",
     "repository": "https://github.com/gicentre/elm-vega.git",
     "license": "BSD3",
     "source-directories": [
