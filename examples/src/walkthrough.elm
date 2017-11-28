@@ -315,7 +315,7 @@ scatterProps =
         trans =
             -- This rounds the year-month-day format to just year for later selection.
             transform
-                << calculate "year(datum.Year)" "Year"
+                << calculateAs "year(datum.Year)" "Year"
 
         enc =
             encoding
@@ -528,7 +528,7 @@ crossFilter =
         hourTrans =
             -- This generates a new field based on the hour of day extracted from the date field.
             transform
-                << calculate "hours(datum.date)" "hour"
+                << calculateAs "hours(datum.date)" "hour"
 
         sel =
             selection << select "brush" Interval [ Encodings [ ChX ] ]

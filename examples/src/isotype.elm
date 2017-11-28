@@ -43,8 +43,8 @@ personGrid =
 
         trans =
             transform
-                << calculate "ceil (datum.id/10)" "col"
-                << calculate "datum.id - datum.col*10" "row"
+                << calculateAs "ceil (datum.id/10)" "col"
+                << calculateAs "datum.id - datum.col*10" "row"
 
         sel =
             selection
