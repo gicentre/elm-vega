@@ -11,7 +11,7 @@ chart des enc =
         [ description des
         , dataFromUrl "data/cars.json" []
         , (transform
-            << calculate "year(datum.Year)" "YearOfManufacture"
+            << calculateAs "year(datum.Year)" "YearOfManufacture"
             << filter (FExpr "datum.YearOfManufacture == 1970")
           )
             []

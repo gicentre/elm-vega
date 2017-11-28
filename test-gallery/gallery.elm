@@ -90,7 +90,7 @@ vl5 =
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
-                << calculate "datum.sex == 2 ? 'Female' : 'Male'" "gender"
+                << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
             encoding
@@ -416,7 +416,7 @@ vl23 =
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
-                << calculate "datum.sex == 2 ? 'Female' : 'Male'" "gender"
+                << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
             encoding
@@ -495,7 +495,7 @@ vl27 =
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
-                << calculate "datum.sex == 2 ? 'Female' : 'Male'" "gender"
+                << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
             encoding
@@ -570,7 +570,7 @@ vl30 =
         trans =
             transform
                 << filter (FExpr "datum.year == 2000")
-                << calculate "datum.sex == 2 ? 'Female' : 'Male'" "gender"
+                << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
             encoding
@@ -829,9 +829,9 @@ vl40 =
         trans =
             transform
                 << aggregate [ opAs Q1 "people" "lowerBox", opAs Median "people" "midBox", opAs Q3 "people" "upperBox" ] [ "age" ]
-                << calculate "datum.upperBox - datum.lowerBox" "IQR"
-                << calculate "datum.upperBox + datum.IQR * 1.5" "upperWhisker"
-                << calculate "max(0,datum.lowerBox - datum.IQR *1.5)" "lowerWhisker"
+                << calculateAs "datum.upperBox - datum.lowerBox" "IQR"
+                << calculateAs "datum.upperBox + datum.IQR * 1.5" "upperWhisker"
+                << calculateAs "max(0,datum.lowerBox - datum.IQR *1.5)" "lowerWhisker"
 
         encLWhisker =
             encoding
@@ -893,7 +893,7 @@ vl41 =
                 << dataColumn "ret" (Numbers [ -4.89396411092985, -0.322580645161295, 3.68663594470045, 4.51010886469673, 6.08424336973478, 1.2539184952978, -5.02431118314424, -5.46623794212217, -8.3743842364532, -5.52763819095477, 3.4920634920635, 0.155038759689914, 5.82822085889571, 8.17610062893082, 8.59872611464968, 15.4907975460123, 11.7370892018779, -10.4234527687296, 0, 0, 5.26315789473684, 6.73758865248228 ])
 
         trans =
-            transform << calculate "datum.open > datum.close" "isIncrease"
+            transform << calculateAs "datum.open > datum.close" "isIncrease"
 
         encLine =
             encoding
@@ -961,8 +961,8 @@ vl43 =
         trans =
             transform
                 << aggregate [ opAs Mean "yield" "mean", opAs Stdev "yield" "stdev" ] [ "variety" ]
-                << calculate "datum.mean-datum.stdev" "lower"
-                << calculate "datum.mean+datum.stdev" "upper"
+                << calculateAs "datum.mean-datum.stdev" "lower"
+                << calculateAs "datum.mean+datum.stdev" "upper"
 
         encMeans =
             encoding
@@ -1028,8 +1028,8 @@ vl45 =
         trans =
             transform
                 << aggregate [ opAs Mean "Miles_per_Gallon" "mean_MPG", opAs Stdev "Miles_per_Gallon" "dev_MPG" ] []
-                << calculate "datum.mean_MPG+datum.dev_MPG" "upper"
-                << calculate "datum.mean_MPG-datum.dev_MPG" "lower"
+                << calculateAs "datum.mean_MPG+datum.dev_MPG" "upper"
+                << calculateAs "datum.mean_MPG-datum.dev_MPG" "lower"
 
         encMean =
             encoding << position Y [ PName "mean_MPG", PmType Quantitative ]
@@ -1197,7 +1197,7 @@ vl50 =
                 << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         trans =
-            transform << calculate "datum.y - 50" "ny"
+            transform << calculateAs "datum.y - 50" "ny"
 
         encLower =
             encoding
@@ -1351,7 +1351,7 @@ vl56 =
 
         trans =
             transform
-                << calculate "year(datum.Year)" "Year"
+                << calculateAs "year(datum.Year)" "Year"
 
         sel1 =
             selection
@@ -1468,7 +1468,7 @@ vl59 =
 
         trans =
             transform
-                << calculate "hours(datum.date)" "time"
+                << calculateAs "hours(datum.date)" "time"
 
         sel =
             selection << select "myBrush" Interval [ Encodings [ ChX ] ]
