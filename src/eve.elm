@@ -1816,7 +1816,7 @@ dataRow row =
 -}
 description : String -> ( VLProperty, Spec )
 description s =
-    ( Description, JE.string (s ++ " Generated with elm-vega") )
+    ( Description, JE.string s )
 
 
 {-| Encode a 'level of detail' channel. This provides a way of grouping by a field

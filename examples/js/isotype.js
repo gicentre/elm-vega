@@ -11231,8 +11231,7 @@ var _gicentre$elm_vega$Eve$description = function (s) {
 	return {
 		ctor: '_Tuple2',
 		_0: _gicentre$elm_vega$Eve$Description,
-		_1: _elm_lang$core$Json_Encode$string(
-			A2(_elm_lang$core$Basics_ops['++'], s, ' Generated with elm-vega'))
+		_1: _elm_lang$core$Json_Encode$string(s)
 	};
 };
 var _gicentre$elm_vega$Eve$Name = {ctor: 'Name'};
