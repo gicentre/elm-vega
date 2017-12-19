@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Eve Shape Tests</title>
+  <title>Elm-Vega Shape Tests</title>
   <meta charset="utf-8">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.7/vega.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.1/vega-lite.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc6/vega-embed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.8/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.3/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"></script>
   <script src="js/shapeTests.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <h1> Eve Shape Tests</h1>
+  <h1>Elm-Vega Shape Tests</h1>
 
   <h2>Default Shape Symbolization</h2>
   <figure class="cell"><div id="vis1"></div><figcaption>Default nominal shapes</figcaption></figure>
@@ -48,7 +48,6 @@
   <script>
     Elm.ShapeTests.worker().ports.fromElm.subscribe(function(elmObj) {
       let id = 1;
-      console.log(elmObj);
       for (let obj of elmObj) {
         vegaEmbed("#vis" + id++, obj, {
           actions: {"export":true, "source":true, "editor":true}, logLevel:vega.Warn

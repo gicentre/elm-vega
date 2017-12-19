@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "Eve (Elm-Vega generation) Examples",
+    "summary": "Elm-Vega generation Examples",
     "repository": "https://github.com/gicentre/elm-vega.git",
     "license": "BSD3",
     "source-directories": [

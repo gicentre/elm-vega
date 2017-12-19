@@ -1,8 +1,8 @@
 port module Gallery exposing (..)
 
-import Eve exposing (..)
 import Json.Encode
 import Platform
+import Vega exposing (..)
 
 
 -- NOTE: All data sources in these examples originally provided at
