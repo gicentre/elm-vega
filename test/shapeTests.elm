@@ -1,8 +1,8 @@
 port module ShapeTests exposing (..)
 
-import Eve exposing (..)
 import Json.Encode
 import Platform
+import Vega exposing (..)
 
 
 chart : String -> (List a -> List ( String, Spec )) -> Spec

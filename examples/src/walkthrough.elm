@@ -1,8 +1,8 @@
 port module Walkthrough exposing (..)
 
-import Eve exposing (..)
 import Json.Encode
 import Platform
+import Vega exposing (..)
 
 
 stripPlot : Spec

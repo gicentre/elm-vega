@@ -1,12 +1,12 @@
 {
     "version": "1.0.0",
-    "summary": "Eve (Elm-Vega generation) Library",
+    "summary": "Elm-Vega generation Library",
     "repository": "https://github.com/gicentre/elm-vega.git",
     "license": "BSD3",
     "source-directories": [
         "."
     ],
-    "exposed-modules": ["Eve"],
+    "exposed-modules": ["Vega"],
     "dependencies": {
         "elm-lang/core": "5.1.1 <= v < 6.0.0",
         "elm-lang/html": "2.0.0 <= v < 3.0.0"

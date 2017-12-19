@@ -1,6 +1,6 @@
 # An elm-vega Walkthrough
 
-This walkthrough will introduce you to the principles and coding style for using elm-vega (or 'Eve' for short) to create interactive visualizations in the [Elm](http://elm-lang.org) language.
+This walkthrough will introduce you to the principles and coding style for using elm-vega to create interactive visualizations in the [Elm](http://elm-lang.org) language.
 It is based on the talk given by [Wongsuphasawat et al at the 2017 Open Vis Conf](https://youtu.be/9uaHRWj04D4).
 If you wish to follow along with their talk, timings are given by each section.
 
@@ -12,16 +12,16 @@ The grammar provides an expressive way to define how data are represented graphi
 The six key elements of the original grammar are:
 
 
-* **Data**: The input to visualize. _Example Eve functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
-* **Transform**: Functions to change the data before they are visualized. _Example Eve functions:_ `filter`, `calculateAs` and `binAs`.
-* **Mark**: The visual symbol(s) that represent the data. _Example Eve types:_ `Line`, `Circle`, `Bar` and `Text`.
-* **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example Eve functions:_ `position`, `shape`, `size` and `color`.
-* **Scale**: Descriptions of the way encoded marks represent the data. _Example Eve types:_ `SDomain`, `SPadding` and `SInterpolate`.
-* **Guides**: Supplementary visual elements that support interpreting the visualization. _Example Eve types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
+* **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
+* **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
+* **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar` and `Text`.
+* **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
+* **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
+* **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
 
 
 In common with other languages that build upon a grammar of graphics such as D3 and Vega, this grammar allows fine grain control of visualization design.
-But unlike those languages, Vega-Lite and Eve provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
+But unlike those languages, Vega-Lite and elm-vega provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
 
 
 ## A Single View specification (3:03)
@@ -240,17 +240,17 @@ The second, minor change, is to include an `MLegend` specification in the color 
 There are four ways in which multiple views may be combined:
 
 * The **facet operator** takes subsets of a dataset (facets) and separately applies the same view specification to each of those facets (as seen with the `column` function above).
-Eve functions to create faceted views: `column`, `row`, `facet` and `specification`.
+elm-vega functions to create faceted views: `column`, `row`, `facet` and `specification`.
 
 * The **layer operator** creates different views of the data but each is layered (superposed) on the same same space, for example a trend line layered on top of a scatterplot.
-Eve functions to create a layered view: `layer` and `asSpec`.
+elm-vega functions to create a layered view: `layer` and `asSpec`.
 
 * The **concatenation operator** allows arbitrary views (potentially with different datasets) to be assembled in rows or columns.
 This allows 'dashboards' to be built.
-Eve functions to create concatenated views: `vConcat`, `hConcat` and `asSpec`.
+elm-vega functions to create concatenated views: `vConcat`, `hConcat` and `asSpec`.
 
 * The **repeat operator** is a concise way of combining multiple views with only small data-driven differences in each view.
-Eve functions for repeated views: `repeat` and `specification`.
+elm-vega functions for repeated views: `repeat` and `specification`.
 
 ## Composition Example: Precipitation in Seattle (9:40)
 
