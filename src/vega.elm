@@ -844,6 +844,7 @@ type InputProperty
     | InOptions (List String)
     | InMin Float
     | InMax Float
+    | InName String
     | InStep Float
     | InPlaceholder String
 
@@ -3284,6 +3285,9 @@ inputProperty prop =
 
         Debounce x ->
             ( "debounce", JE.float x )
+
+        InName s ->
+            ( "name", JE.string s )
 
         InOptions opts ->
             ( "options", JE.list (List.map JE.string opts) )

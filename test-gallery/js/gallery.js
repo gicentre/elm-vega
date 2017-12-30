@@ -6802,6 +6802,12 @@ var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
 				_0: 'debounce',
 				_1: _elm_lang$core$Json_Encode$float(_p36._0)
 			};
+		case 'InName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(_p36._0)
+			};
 		case 'InOptions':
 			return {
 				ctor: '_Tuple2',
@@ -10502,6 +10508,9 @@ var _gicentre$elm_vega$Vega$InPlaceholder = function (a) {
 var _gicentre$elm_vega$Vega$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
 };
+var _gicentre$elm_vega$Vega$InName = function (a) {
+	return {ctor: 'InName', _0: a};
+};
 var _gicentre$elm_vega$Vega$InMax = function (a) {
 	return {ctor: 'InMax', _0: a};
 };
@@ -13150,14 +13159,18 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 									'Cylinders',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$InMin(3),
+										_0: _gicentre$elm_vega$Vega$InName('Cylinders '),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$InMax(8),
+											_0: _gicentre$elm_vega$Vega$InMin(3),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$InStep(1),
-												_1: {ctor: '[]'}
+												_0: _gicentre$elm_vega$Vega$InMax(8),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$InStep(1),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}),
@@ -13168,14 +13181,18 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 										'Year',
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$InMin(1969),
+											_0: _gicentre$elm_vega$Vega$InName('Year '),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$InMax(1981),
+												_0: _gicentre$elm_vega$Vega$InMin(1969),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$InStep(1),
-													_1: {ctor: '[]'}
+													_0: _gicentre$elm_vega$Vega$InMax(1981),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$InStep(1),
+														_1: {ctor: '[]'}
+													}
 												}
 											}
 										}),

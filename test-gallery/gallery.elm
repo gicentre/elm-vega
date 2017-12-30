@@ -1359,8 +1359,8 @@ vl56 =
                     Single
                     [ Fields [ "Cylinders", "Year" ]
                     , Bind
-                        [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
-                        , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                        [ IRange "Cylinders" [ InName "Cylinders ", InMin 3, InMax 8, InStep 1 ]
+                        , IRange "Year" [ InName "Year ", InMin 1969, InMax 1981, InStep 1 ]
                         ]
                     ]
 
