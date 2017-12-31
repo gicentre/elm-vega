@@ -2,7 +2,7 @@ port module Gallery exposing (..)
 
 import Json.Encode
 import Platform
-import Vega exposing (..)
+import VegaLite exposing (..)
 
 
 -- NOTE: All data sources in these examples originally provided at

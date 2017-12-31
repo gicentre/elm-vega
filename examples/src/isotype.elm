@@ -3,7 +3,7 @@ port module Isotype exposing (fromElm)
 import Dict exposing (Dict)
 import Json.Encode
 import Platform
-import Vega exposing (..)
+import VegaLite exposing (..)
 
 
 -- Dictionary of Isotype SVG paths.

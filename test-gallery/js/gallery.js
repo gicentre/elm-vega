@@ -5757,16 +5757,16 @@ var _elm_lang$core$Tuple$first = function (_p6) {
 	return _p7._0;
 };
 
-var _gicentre$elm_vega$Vega$viewConfig = function (viewCfg) {
+var _gicentre$elm_vega$VegaLite$viewConfig = function (viewCfg) {
 	var _p0 = viewCfg;
 	switch (_p0.ctor) {
-		case 'VWidth':
+		case 'ViewWidth':
 			return {
 				ctor: '_Tuple2',
 				_0: 'width',
 				_1: _elm_lang$core$Json_Encode$float(_p0._0)
 			};
-		case 'VHeight':
+		case 'ViewHeight':
 			return {
 				ctor: '_Tuple2',
 				_0: 'height',
@@ -5871,7 +5871,7 @@ var _gicentre$elm_vega$Vega$viewConfig = function (viewCfg) {
 			}
 	}
 };
-var _gicentre$elm_vega$Vega$vAlignLabel = function (align) {
+var _gicentre$elm_vega$VegaLite$vAlignLabel = function (align) {
 	var _p8 = align;
 	switch (_p8.ctor) {
 		case 'AlignTop':
@@ -5882,7 +5882,7 @@ var _gicentre$elm_vega$Vega$vAlignLabel = function (align) {
 			return 'bottom';
 	}
 };
-var _gicentre$elm_vega$Vega$timeUnitLabel = function (tu) {
+var _gicentre$elm_vega$VegaLite$timeUnitLabel = function (tu) {
 	var _p9 = tu;
 	switch (_p9.ctor) {
 		case 'Year':
@@ -5931,7 +5931,7 @@ var _gicentre$elm_vega$Vega$timeUnitLabel = function (tu) {
 			return 'milliseconds';
 	}
 };
-var _gicentre$elm_vega$Vega$stackProperty = function (sp) {
+var _gicentre$elm_vega$VegaLite$stackProperty = function (sp) {
 	var _p10 = sp;
 	switch (_p10.ctor) {
 		case 'StZero':
@@ -5956,48 +5956,48 @@ var _gicentre$elm_vega$Vega$stackProperty = function (sp) {
 			return {ctor: '_Tuple2', _0: 'stack', _1: _elm_lang$core$Json_Encode$null};
 	}
 };
-var _gicentre$elm_vega$Vega$propertyLabel = function (spec) {
+var _gicentre$elm_vega$VegaLite$vlPropertyLabel = function (spec) {
 	var _p11 = spec;
 	switch (_p11.ctor) {
-		case 'Name':
+		case 'VLName':
 			return 'name';
-		case 'Description':
+		case 'VLDescription':
 			return 'description';
-		case 'Title':
+		case 'VLTitle':
 			return 'title';
-		case 'Width':
+		case 'VLWidth':
 			return 'width';
-		case 'Height':
+		case 'VLHeight':
 			return 'height';
-		case 'Data':
+		case 'VLData':
 			return 'data';
-		case 'Mark':
+		case 'VLMark':
 			return 'mark';
-		case 'Transform':
+		case 'VLTransform':
 			return 'transform';
-		case 'Encoding':
+		case 'VLEncoding':
 			return 'encoding';
-		case 'Config':
+		case 'VLConfig':
 			return 'config';
-		case 'Selection':
+		case 'VLSelection':
 			return 'selection';
-		case 'HConcat':
+		case 'VLHConcat':
 			return 'hconcat';
-		case 'VConcat':
+		case 'VLVConcat':
 			return 'vconcat';
-		case 'Layer':
+		case 'VLLayer':
 			return 'layer';
-		case 'Repeat':
+		case 'VLRepeat':
 			return 'repeat';
-		case 'Facet':
+		case 'VLFacet':
 			return 'facet';
-		case 'Spec':
+		case 'VLSpec':
 			return 'spec';
 		default:
 			return 'resolve';
 	}
 };
-var _gicentre$elm_vega$Vega$symbolLabel = function (sym) {
+var _gicentre$elm_vega$VegaLite$symbolLabel = function (sym) {
 	var _p12 = sym;
 	switch (_p12.ctor) {
 		case 'SymCircle':
@@ -6016,7 +6016,7 @@ var _gicentre$elm_vega$Vega$symbolLabel = function (sym) {
 			return _p12._0;
 	}
 };
-var _gicentre$elm_vega$Vega$sideLabel = function (side) {
+var _gicentre$elm_vega$VegaLite$sideLabel = function (side) {
 	var _p13 = side;
 	switch (_p13.ctor) {
 		case 'STop':
@@ -6029,7 +6029,7 @@ var _gicentre$elm_vega$Vega$sideLabel = function (side) {
 			return 'right';
 	}
 };
-var _gicentre$elm_vega$Vega$selectionMarkProperty = function (markProp) {
+var _gicentre$elm_vega$VegaLite$selectionMarkProperty = function (markProp) {
 	var _p14 = markProp;
 	switch (_p14.ctor) {
 		case 'SMFill':
@@ -6077,7 +6077,7 @@ var _gicentre$elm_vega$Vega$selectionMarkProperty = function (markProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$selectionLabel = function (seType) {
+var _gicentre$elm_vega$VegaLite$selectionLabel = function (seType) {
 	var _p15 = seType;
 	switch (_p15.ctor) {
 		case 'Single':
@@ -6088,7 +6088,7 @@ var _gicentre$elm_vega$Vega$selectionLabel = function (seType) {
 			return 'interval';
 	}
 };
-var _gicentre$elm_vega$Vega$scheme = F2(
+var _gicentre$elm_vega$VegaLite$scheme = F2(
 	function (name, extent) {
 		var _p16 = extent;
 		if (((_p16.ctor === '::') && (_p16._1.ctor === '::')) && (_p16._1._1.ctor === '[]')) {
@@ -6131,7 +6131,7 @@ var _gicentre$elm_vega$Vega$scheme = F2(
 			};
 		}
 	});
-var _gicentre$elm_vega$Vega$scaleLabel = function (scType) {
+var _gicentre$elm_vega$VegaLite$scaleLabel = function (scType) {
 	var _p17 = scType;
 	switch (_p17.ctor) {
 		case 'ScLinear':
@@ -6160,7 +6160,7 @@ var _gicentre$elm_vega$Vega$scaleLabel = function (scType) {
 			return 'bin-ordinal';
 	}
 };
-var _gicentre$elm_vega$Vega$scaleRangeProperty = function (srType) {
+var _gicentre$elm_vega$VegaLite$scaleRangeProperty = function (srType) {
 	var _p18 = srType;
 	switch (_p18.ctor) {
 		case 'RNumbers':
@@ -6173,7 +6173,7 @@ var _gicentre$elm_vega$Vega$scaleRangeProperty = function (srType) {
 			return _elm_lang$core$Json_Encode$string(_p18._0);
 	}
 };
-var _gicentre$elm_vega$Vega$scaleConfig = function (scaleCfg) {
+var _gicentre$elm_vega$VegaLite$scaleConfig = function (scaleCfg) {
 	var _p19 = scaleCfg;
 	switch (_p19.ctor) {
 		case 'SCBandPaddingInner':
@@ -6291,7 +6291,7 @@ var _gicentre$elm_vega$Vega$scaleConfig = function (scaleCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$selectionResolutionLabel = function (res) {
+var _gicentre$elm_vega$VegaLite$selectionResolutionLabel = function (res) {
 	var _p21 = res;
 	switch (_p21.ctor) {
 		case 'Global':
@@ -6302,7 +6302,7 @@ var _gicentre$elm_vega$Vega$selectionResolutionLabel = function (res) {
 			return 'intersect';
 	}
 };
-var _gicentre$elm_vega$Vega$resolutionLabel = function (res) {
+var _gicentre$elm_vega$VegaLite$resolutionLabel = function (res) {
 	var _p22 = res;
 	if (_p22.ctor === 'Shared') {
 		return 'shared';
@@ -6310,7 +6310,7 @@ var _gicentre$elm_vega$Vega$resolutionLabel = function (res) {
 		return 'independent';
 	}
 };
-var _gicentre$elm_vega$Vega$repeatFields = function (fields) {
+var _gicentre$elm_vega$VegaLite$repeatFields = function (fields) {
 	var _p23 = fields;
 	if (_p23.ctor === 'RowFields') {
 		return {
@@ -6328,7 +6328,7 @@ var _gicentre$elm_vega$Vega$repeatFields = function (fields) {
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
+var _gicentre$elm_vega$VegaLite$rangeConfig = function (rangeCfg) {
 	var _p24 = rangeCfg;
 	switch (_p24.ctor) {
 		case 'RCategory':
@@ -6339,7 +6339,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6353,7 +6353,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6367,7 +6367,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6381,7 +6381,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6395,7 +6395,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6409,7 +6409,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 					{
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$scheme,
+							_gicentre$elm_vega$VegaLite$scheme,
 							_p24._0,
 							{ctor: '[]'}),
 						_1: {ctor: '[]'}
@@ -6417,7 +6417,7 @@ var _gicentre$elm_vega$Vega$rangeConfig = function (rangeCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$positionLabel = function (pChannel) {
+var _gicentre$elm_vega$VegaLite$positionLabel = function (pChannel) {
 	var _p25 = pChannel;
 	switch (_p25.ctor) {
 		case 'X':
@@ -6430,7 +6430,7 @@ var _gicentre$elm_vega$Vega$positionLabel = function (pChannel) {
 			return 'y2';
 	}
 };
-var _gicentre$elm_vega$Vega$overlapStrategyLabel = function (strat) {
+var _gicentre$elm_vega$VegaLite$overlapStrategyLabel = function (strat) {
 	var _p26 = strat;
 	switch (_p26.ctor) {
 		case 'ONone':
@@ -6441,7 +6441,7 @@ var _gicentre$elm_vega$Vega$overlapStrategyLabel = function (strat) {
 			return 'greedy';
 	}
 };
-var _gicentre$elm_vega$Vega$opLabel = function (op) {
+var _gicentre$elm_vega$VegaLite$opLabel = function (op) {
 	var _p27 = op;
 	switch (_p27.ctor) {
 		case 'ArgMax':
@@ -6488,7 +6488,7 @@ var _gicentre$elm_vega$Vega$opLabel = function (op) {
 			return 'max';
 	}
 };
-var _gicentre$elm_vega$Vega$nice = function (ni) {
+var _gicentre$elm_vega$VegaLite$nice = function (ni) {
 	var _p28 = ni;
 	switch (_p28.ctor) {
 		case 'NMillisecond':
@@ -6515,7 +6515,7 @@ var _gicentre$elm_vega$Vega$nice = function (ni) {
 						ctor: '_Tuple2',
 						_0: 'interval',
 						_1: _elm_lang$core$Json_Encode$string(
-							_gicentre$elm_vega$Vega$timeUnitLabel(_p28._0))
+							_gicentre$elm_vega$VegaLite$timeUnitLabel(_p28._0))
 					},
 					_1: {
 						ctor: '::',
@@ -6533,7 +6533,7 @@ var _gicentre$elm_vega$Vega$nice = function (ni) {
 			return _elm_lang$core$Json_Encode$int(_p28._0);
 	}
 };
-var _gicentre$elm_vega$Vega$monthLabel = function (mon) {
+var _gicentre$elm_vega$VegaLite$monthLabel = function (mon) {
 	var _p29 = mon;
 	switch (_p29.ctor) {
 		case 'Jan':
@@ -6562,7 +6562,7 @@ var _gicentre$elm_vega$Vega$monthLabel = function (mon) {
 			return 'Dec';
 	}
 };
-var _gicentre$elm_vega$Vega$measurementLabel = function (mType) {
+var _gicentre$elm_vega$VegaLite$measurementLabel = function (mType) {
 	var _p30 = mType;
 	switch (_p30.ctor) {
 		case 'Nominal':
@@ -6575,7 +6575,7 @@ var _gicentre$elm_vega$Vega$measurementLabel = function (mType) {
 			return 'temporal';
 	}
 };
-var _gicentre$elm_vega$Vega$markOrientLabel = function (orient) {
+var _gicentre$elm_vega$VegaLite$markOrientLabel = function (orient) {
 	var _p31 = orient;
 	if (_p31.ctor === 'Horizontal') {
 		return 'horizontal';
@@ -6583,7 +6583,7 @@ var _gicentre$elm_vega$Vega$markOrientLabel = function (orient) {
 		return 'vertical';
 	}
 };
-var _gicentre$elm_vega$Vega$markLabel = function (mark) {
+var _gicentre$elm_vega$VegaLite$markLabel = function (mark) {
 	var _p32 = mark;
 	switch (_p32.ctor) {
 		case 'Area':
@@ -6608,7 +6608,7 @@ var _gicentre$elm_vega$Vega$markLabel = function (mark) {
 			return 'tick';
 	}
 };
-var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
+var _gicentre$elm_vega$VegaLite$markInterpolationLabel = function (interp) {
 	var _p33 = interp;
 	switch (_p33.ctor) {
 		case 'Linear':
@@ -6639,7 +6639,7 @@ var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
 			return 'monotone';
 	}
 };
-var _gicentre$elm_vega$Vega$legendOrientLabel = function (orient) {
+var _gicentre$elm_vega$VegaLite$legendOrientLabel = function (orient) {
 	var _p34 = orient;
 	switch (_p34.ctor) {
 		case 'Left':
@@ -6658,7 +6658,7 @@ var _gicentre$elm_vega$Vega$legendOrientLabel = function (orient) {
 			return 'none';
 	}
 };
-var _gicentre$elm_vega$Vega$interpolateProperty = function (iType) {
+var _gicentre$elm_vega$VegaLite$interpolateProperty = function (iType) {
 	var _p35 = iType;
 	switch (_p35.ctor) {
 		case 'Rgb':
@@ -6775,7 +6775,7 @@ var _gicentre$elm_vega$Vega$interpolateProperty = function (iType) {
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
+var _gicentre$elm_vega$VegaLite$inputProperty = function (prop) {
 	var _p36 = prop;
 	switch (_p36.ctor) {
 		case 'InMin':
@@ -6829,7 +6829,7 @@ var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
+var _gicentre$elm_vega$VegaLite$hAlignLabel = function (align) {
 	var _p37 = align;
 	switch (_p37.ctor) {
 		case 'AlignLeft':
@@ -6840,7 +6840,7 @@ var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
 			return 'right';
 	}
 };
-var _gicentre$elm_vega$Vega$foDataType = function (dType) {
+var _gicentre$elm_vega$VegaLite$foDataType = function (dType) {
 	var _p38 = dType;
 	switch (_p38.ctor) {
 		case 'FoNumber':
@@ -6863,7 +6863,7 @@ var _gicentre$elm_vega$Vega$foDataType = function (dType) {
 					A2(_elm_lang$core$Basics_ops['++'], _p40, '\'')));
 	}
 };
-var _gicentre$elm_vega$Vega$format = function (fmt) {
+var _gicentre$elm_vega$VegaLite$format = function (fmt) {
 	var _p41 = fmt;
 	switch (_p41.ctor) {
 		case 'JSON':
@@ -6946,7 +6946,7 @@ var _gicentre$elm_vega$Vega$format = function (fmt) {
 								return {
 									ctor: '_Tuple2',
 									_0: _p43._0,
-									_1: _gicentre$elm_vega$Vega$foDataType(_p43._1)
+									_1: _gicentre$elm_vega$VegaLite$foDataType(_p43._1)
 								};
 							},
 							_p41._0))
@@ -6955,7 +6955,7 @@ var _gicentre$elm_vega$Vega$format = function (fmt) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$fontWeight = function (w) {
+var _gicentre$elm_vega$VegaLite$fontWeight = function (w) {
 	var _p44 = w;
 	switch (_p44.ctor) {
 		case 'Normal':
@@ -6986,7 +6986,7 @@ var _gicentre$elm_vega$Vega$fontWeight = function (w) {
 			return _elm_lang$core$Json_Encode$float(900);
 	}
 };
-var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
+var _gicentre$elm_vega$VegaLite$markProperty = function (mProp) {
 	var _p45 = mProp;
 	switch (_p45.ctor) {
 		case 'MFilled':
@@ -7068,7 +7068,7 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$markInterpolationLabel(_p45._0))
+					_gicentre$elm_vega$VegaLite$markInterpolationLabel(_p45._0))
 			};
 		case 'MTension':
 			return {
@@ -7081,14 +7081,14 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$markOrientLabel(_p45._0))
+					_gicentre$elm_vega$VegaLite$markOrientLabel(_p45._0))
 			};
 		case 'MShape':
 			return {
 				ctor: '_Tuple2',
 				_0: 'shape',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$symbolLabel(_p45._0))
+					_gicentre$elm_vega$VegaLite$symbolLabel(_p45._0))
 			};
 		case 'MSize':
 			return {
@@ -7107,14 +7107,14 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 				ctor: '_Tuple2',
 				_0: 'align',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$hAlignLabel(_p45._0))
+					_gicentre$elm_vega$VegaLite$hAlignLabel(_p45._0))
 			};
 		case 'MBaseline':
 			return {
 				ctor: '_Tuple2',
 				_0: 'baseline',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$vAlignLabel(_p45._0))
+					_gicentre$elm_vega$VegaLite$vAlignLabel(_p45._0))
 			};
 		case 'MdX':
 			return {
@@ -7150,7 +7150,7 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'fontWeight',
-				_1: _gicentre$elm_vega$Vega$fontWeight(_p45._0)
+				_1: _gicentre$elm_vega$VegaLite$fontWeight(_p45._0)
 			};
 		case 'MRadius':
 			return {
@@ -7208,7 +7208,7 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$headerProperty = function (hProp) {
+var _gicentre$elm_vega$VegaLite$headerProperty = function (hProp) {
 	var _p46 = hProp;
 	if (_p46.ctor === 'HFormat') {
 		return {
@@ -7224,7 +7224,7 @@ var _gicentre$elm_vega$Vega$headerProperty = function (hProp) {
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$fieldTitleLabel = function (ftp) {
+var _gicentre$elm_vega$VegaLite$fieldTitleLabel = function (ftp) {
 	var _p47 = ftp;
 	switch (_p47.ctor) {
 		case 'Verbal':
@@ -7235,7 +7235,7 @@ var _gicentre$elm_vega$Vega$fieldTitleLabel = function (ftp) {
 			return 'plain';
 	}
 };
-var _gicentre$elm_vega$Vega$dayLabel = function (day) {
+var _gicentre$elm_vega$VegaLite$dayLabel = function (day) {
 	var _p48 = day;
 	switch (_p48.ctor) {
 		case 'Mon':
@@ -7254,7 +7254,7 @@ var _gicentre$elm_vega$Vega$dayLabel = function (day) {
 			return 'Sun';
 	}
 };
-var _gicentre$elm_vega$Vega$dateTimeProperty = function (dt) {
+var _gicentre$elm_vega$VegaLite$dateTimeProperty = function (dt) {
 	var _p49 = dt;
 	switch (_p49.ctor) {
 		case 'DTYear':
@@ -7274,7 +7274,7 @@ var _gicentre$elm_vega$Vega$dateTimeProperty = function (dt) {
 				ctor: '_Tuple2',
 				_0: 'month',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$monthLabel(_p49._0))
+					_gicentre$elm_vega$VegaLite$monthLabel(_p49._0))
 			};
 		case 'DTDate':
 			return {
@@ -7287,7 +7287,7 @@ var _gicentre$elm_vega$Vega$dateTimeProperty = function (dt) {
 				ctor: '_Tuple2',
 				_0: 'day',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$dayLabel(_p49._0))
+					_gicentre$elm_vega$VegaLite$dayLabel(_p49._0))
 			};
 		case 'DTHours':
 			return {
@@ -7315,7 +7315,7 @@ var _gicentre$elm_vega$Vega$dateTimeProperty = function (dt) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$datavalue = function (val) {
+var _gicentre$elm_vega$VegaLite$datavalue = function (val) {
 	var _p50 = val;
 	switch (_p50.ctor) {
 		case 'Number':
@@ -7326,10 +7326,10 @@ var _gicentre$elm_vega$Vega$datavalue = function (val) {
 			return _elm_lang$core$Json_Encode$bool(_p50._0);
 		default:
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, _p50._0));
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, _p50._0));
 	}
 };
-var _gicentre$elm_vega$Vega$legendProperty = function (legendProp) {
+var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 	var _p51 = legendProp;
 	switch (_p51.ctor) {
 		case 'LType':
@@ -7370,7 +7370,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (legendProp) {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$legendOrientLabel(_p51._0))
+					_gicentre$elm_vega$VegaLite$legendOrientLabel(_p51._0))
 			};
 		case 'LPadding':
 			return {
@@ -7404,7 +7404,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (legendProp) {
 								_elm_lang$core$List$map,
 								function (dt) {
 									return _elm_lang$core$Json_Encode$object(
-										A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, dt));
+										A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, dt));
 								},
 								_p54._0));
 					default:
@@ -7421,7 +7421,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (legendProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$scaleDomainProperty = function (sdType) {
+var _gicentre$elm_vega$VegaLite$scaleDomainProperty = function (sdType) {
 	var _p55 = sdType;
 	switch (_p55.ctor) {
 		case 'DNumbers':
@@ -7433,7 +7433,7 @@ var _gicentre$elm_vega$Vega$scaleDomainProperty = function (sdType) {
 					_elm_lang$core$List$map,
 					function (dt) {
 						return _elm_lang$core$Json_Encode$object(
-							A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, dt));
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, dt));
 					},
 					_p55._0));
 		case 'DStrings':
@@ -7454,7 +7454,7 @@ var _gicentre$elm_vega$Vega$scaleDomainProperty = function (sdType) {
 			return _elm_lang$core$Json_Encode$string('unaggregated');
 	}
 };
-var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
+var _gicentre$elm_vega$VegaLite$scaleProperty = function (scaleProp) {
 	var _p56 = scaleProp;
 	switch (_p56.ctor) {
 		case 'SType':
@@ -7462,13 +7462,13 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$scaleLabel(_p56._0))
+					_gicentre$elm_vega$VegaLite$scaleLabel(_p56._0))
 			};
 		case 'SDomain':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _gicentre$elm_vega$Vega$scaleDomainProperty(_p56._0)
+				_1: _gicentre$elm_vega$VegaLite$scaleDomainProperty(_p56._0)
 			};
 		case 'SRange':
 			var _p57 = _p56._0;
@@ -7495,7 +7495,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 					};
 			}
 		case 'SScheme':
-			return A2(_gicentre$elm_vega$Vega$scheme, _p56._0, _p56._1);
+			return A2(_gicentre$elm_vega$VegaLite$scheme, _p56._0, _p56._1);
 		case 'SPadding':
 			return {
 				ctor: '_Tuple2',
@@ -7541,13 +7541,13 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
-				_1: _gicentre$elm_vega$Vega$interpolateProperty(_p56._0)
+				_1: _gicentre$elm_vega$VegaLite$interpolateProperty(_p56._0)
 			};
 		case 'SNice':
 			return {
 				ctor: '_Tuple2',
 				_0: 'nice',
-				_1: _gicentre$elm_vega$Vega$nice(_p56._0)
+				_1: _gicentre$elm_vega$VegaLite$nice(_p56._0)
 			};
 		case 'SZero':
 			return {
@@ -7563,7 +7563,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$channelLabel = function (ch) {
+var _gicentre$elm_vega$VegaLite$channelLabel = function (ch) {
 	var _p59 = ch;
 	switch (_p59.ctor) {
 		case 'ChX':
@@ -7584,7 +7584,7 @@ var _gicentre$elm_vega$Vega$channelLabel = function (ch) {
 			return 'size';
 	}
 };
-var _gicentre$elm_vega$Vega$resolveProperty = function (res) {
+var _gicentre$elm_vega$VegaLite$resolveProperty = function (res) {
 	var _p60 = res;
 	switch (_p60.ctor) {
 		case 'RAxis':
@@ -7598,9 +7598,9 @@ var _gicentre$elm_vega$Vega$resolveProperty = function (res) {
 							var _p62 = _p61;
 							return {
 								ctor: '_Tuple2',
-								_0: _gicentre$elm_vega$Vega$channelLabel(_p62._0),
+								_0: _gicentre$elm_vega$VegaLite$channelLabel(_p62._0),
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$elm_vega$Vega$resolutionLabel(_p62._1))
+									_gicentre$elm_vega$VegaLite$resolutionLabel(_p62._1))
 							};
 						},
 						_p60._0))
@@ -7616,9 +7616,9 @@ var _gicentre$elm_vega$Vega$resolveProperty = function (res) {
 							var _p64 = _p63;
 							return {
 								ctor: '_Tuple2',
-								_0: _gicentre$elm_vega$Vega$channelLabel(_p64._0),
+								_0: _gicentre$elm_vega$VegaLite$channelLabel(_p64._0),
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$elm_vega$Vega$resolutionLabel(_p64._1))
+									_gicentre$elm_vega$VegaLite$resolutionLabel(_p64._1))
 							};
 						},
 						_p60._0))
@@ -7634,16 +7634,16 @@ var _gicentre$elm_vega$Vega$resolveProperty = function (res) {
 							var _p66 = _p65;
 							return {
 								ctor: '_Tuple2',
-								_0: _gicentre$elm_vega$Vega$channelLabel(_p66._0),
+								_0: _gicentre$elm_vega$VegaLite$channelLabel(_p66._0),
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$elm_vega$Vega$resolutionLabel(_p66._1))
+									_gicentre$elm_vega$VegaLite$resolutionLabel(_p66._1))
 							};
 						},
 						_p60._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$binding = function (bnd) {
+var _gicentre$elm_vega$VegaLite$binding = function (bnd) {
 	var _p67 = bnd;
 	switch (_p67.ctor) {
 		case 'IRange':
@@ -7658,7 +7658,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('range')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'ICheckbox':
@@ -7673,7 +7673,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('checkbox')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IRadio':
@@ -7688,7 +7688,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('radio')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'ISelect':
@@ -7703,7 +7703,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('select')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IText':
@@ -7718,7 +7718,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('text')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'INumber':
@@ -7733,7 +7733,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('number')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IDate':
@@ -7748,7 +7748,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('date')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'ITime':
@@ -7763,7 +7763,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('time')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IMonth':
@@ -7778,7 +7778,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('month')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IWeek':
@@ -7793,7 +7793,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('week')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'IDateTimeLocal':
@@ -7808,7 +7808,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('datetimelocal')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		case 'ITel':
@@ -7823,7 +7823,7 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('tel')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 		default:
@@ -7838,12 +7838,12 @@ var _gicentre$elm_vega$Vega$binding = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string('color')
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, _p67._1)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$inputProperty, _p67._1)
 					})
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$selectionProperty = function (selProp) {
+var _gicentre$elm_vega$VegaLite$selectionProperty = function (selProp) {
 	var _p68 = selProp;
 	switch (_p68.ctor) {
 		case 'Fields':
@@ -7862,7 +7862,7 @@ var _gicentre$elm_vega$Vega$selectionProperty = function (selProp) {
 						_elm_lang$core$List$map,
 						function (_p69) {
 							return _elm_lang$core$Json_Encode$string(
-								_gicentre$elm_vega$Vega$channelLabel(_p69));
+								_gicentre$elm_vega$VegaLite$channelLabel(_p69));
 						},
 						_p68._0))
 			};
@@ -7883,14 +7883,14 @@ var _gicentre$elm_vega$Vega$selectionProperty = function (selProp) {
 				ctor: '_Tuple2',
 				_0: 'resolve',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$selectionResolutionLabel(_p68._0))
+					_gicentre$elm_vega$VegaLite$selectionResolutionLabel(_p68._0))
 			};
 		case 'SelectionMark':
 			return {
 				ctor: '_Tuple2',
 				_0: 'mark',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$selectionMarkProperty, _p68._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$selectionMarkProperty, _p68._0))
 			};
 		case 'BindScales':
 			return {
@@ -7903,7 +7903,7 @@ var _gicentre$elm_vega$Vega$selectionProperty = function (selProp) {
 				ctor: '_Tuple2',
 				_0: 'bind',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$binding, _p68._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$binding, _p68._0))
 			};
 		case 'Nearest':
 			return {
@@ -7941,7 +7941,7 @@ var _gicentre$elm_vega$Vega$selectionProperty = function (selProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$binProperty = function (binProp) {
+var _gicentre$elm_vega$VegaLite$binProperty = function (binProp) {
 	var _p72 = binProp;
 	switch (_p72.ctor) {
 		case 'MaxBins':
@@ -8013,7 +8013,7 @@ var _gicentre$elm_vega$Vega$binProperty = function (binProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$axisProperty = function (axisProp) {
+var _gicentre$elm_vega$VegaLite$axisProperty = function (axisProp) {
 	var _p73 = axisProp;
 	switch (_p73.ctor) {
 		case 'Format':
@@ -8039,7 +8039,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (axisProp) {
 				ctor: '_Tuple2',
 				_0: 'labelOverlap',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$overlapStrategyLabel(_p73._0))
+					_gicentre$elm_vega$VegaLite$overlapStrategyLabel(_p73._0))
 			};
 		case 'LabelPadding':
 			return {
@@ -8076,7 +8076,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (axisProp) {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$sideLabel(_p73._0))
+					_gicentre$elm_vega$VegaLite$sideLabel(_p73._0))
 			};
 		case 'Offset':
 			return {
@@ -8132,7 +8132,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (axisProp) {
 				ctor: '_Tuple2',
 				_0: 'titleAlign',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$hAlignLabel(_p73._0))
+					_gicentre$elm_vega$VegaLite$hAlignLabel(_p73._0))
 			};
 		case 'AxTitleAngle':
 			return {
@@ -8154,7 +8154,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (axisProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$axisConfig = function (axisCfg) {
+var _gicentre$elm_vega$VegaLite$axisConfig = function (axisCfg) {
 	var _p74 = axisCfg;
 	switch (_p74.ctor) {
 		case 'BandPosition':
@@ -8253,7 +8253,7 @@ var _gicentre$elm_vega$Vega$axisConfig = function (axisCfg) {
 				ctor: '_Tuple2',
 				_0: 'titleBaseline',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$vAlignLabel(_p74._0))
+					_gicentre$elm_vega$VegaLite$vAlignLabel(_p74._0))
 			};
 		case 'TitleColor':
 			return {
@@ -8271,7 +8271,7 @@ var _gicentre$elm_vega$Vega$axisConfig = function (axisCfg) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleFontWeight',
-				_1: _gicentre$elm_vega$Vega$fontWeight(_p74._0)
+				_1: _gicentre$elm_vega$VegaLite$fontWeight(_p74._0)
 			};
 		case 'TitleFontSize':
 			return {
@@ -8299,7 +8299,7 @@ var _gicentre$elm_vega$Vega$axisConfig = function (axisCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$autosizeConfig = function (asCfg) {
+var _gicentre$elm_vega$VegaLite$autosizeConfig = function (asCfg) {
 	var _p75 = asCfg;
 	switch (_p75.ctor) {
 		case 'APad':
@@ -8340,7 +8340,7 @@ var _gicentre$elm_vega$Vega$autosizeConfig = function (asCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$arrangementLabel = function (arrng) {
+var _gicentre$elm_vega$VegaLite$arrangementLabel = function (arrng) {
 	var _p76 = arrng;
 	if (_p76.ctor === 'Row') {
 		return 'row';
@@ -8348,7 +8348,7 @@ var _gicentre$elm_vega$Vega$arrangementLabel = function (arrng) {
 		return 'column';
 	}
 };
-var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
+var _gicentre$elm_vega$VegaLite$sortProperty = function (sp) {
 	var _p77 = sp;
 	switch (_p77.ctor) {
 		case 'Ascending':
@@ -8374,7 +8374,7 @@ var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
 				ctor: '_Tuple2',
 				_0: 'op',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p77._0))
+					_gicentre$elm_vega$VegaLite$opLabel(_p77._0))
 			};
 		default:
 			return {
@@ -8387,14 +8387,14 @@ var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
 							ctor: '_Tuple2',
 							_0: 'repeat',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$elm_vega$Vega$arrangementLabel(_p77._0))
+								_gicentre$elm_vega$VegaLite$arrangementLabel(_p77._0))
 						},
 						_1: {ctor: '[]'}
 					})
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$anchorLabel = function (an) {
+var _gicentre$elm_vega$VegaLite$anchorLabel = function (an) {
 	var _p78 = an;
 	switch (_p78.ctor) {
 		case 'AStart':
@@ -8405,7 +8405,7 @@ var _gicentre$elm_vega$Vega$anchorLabel = function (an) {
 			return 'end';
 	}
 };
-var _gicentre$elm_vega$Vega$titleConfig = function (titleCfg) {
+var _gicentre$elm_vega$VegaLite$titleConfig = function (titleCfg) {
 	var _p79 = titleCfg;
 	switch (_p79.ctor) {
 		case 'TAnchor':
@@ -8413,7 +8413,7 @@ var _gicentre$elm_vega$Vega$titleConfig = function (titleCfg) {
 				ctor: '_Tuple2',
 				_0: 'anchor',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$anchorLabel(_p79._0))
+					_gicentre$elm_vega$VegaLite$anchorLabel(_p79._0))
 			};
 		case 'TAngle':
 			return {
@@ -8426,7 +8426,7 @@ var _gicentre$elm_vega$Vega$titleConfig = function (titleCfg) {
 				ctor: '_Tuple2',
 				_0: 'baseline',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$vAlignLabel(_p79._0))
+					_gicentre$elm_vega$VegaLite$vAlignLabel(_p79._0))
 			};
 		case 'TColor':
 			return {
@@ -8450,7 +8450,7 @@ var _gicentre$elm_vega$Vega$titleConfig = function (titleCfg) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'fontWeight',
-				_1: _gicentre$elm_vega$Vega$fontWeight(_p79._0)
+				_1: _gicentre$elm_vega$VegaLite$fontWeight(_p79._0)
 			};
 		case 'TLimit':
 			return {
@@ -8469,11 +8469,11 @@ var _gicentre$elm_vega$Vega$titleConfig = function (titleCfg) {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$sideLabel(_p79._0))
+					_gicentre$elm_vega$VegaLite$sideLabel(_p79._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
+var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 	var _p80 = configProp;
 	switch (_p80.ctor) {
 		case 'Autosize':
@@ -8483,7 +8483,7 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 				_1: _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$autosizeConfig(_p80._0),
+						_0: _gicentre$elm_vega$VegaLite$autosizeConfig(_p80._0),
 						_1: {ctor: '[]'}
 					})
 			};
@@ -8504,7 +8504,7 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 				ctor: '_Tuple2',
 				_0: 'fieldTitle',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$fieldTitleLabel(_p80._0))
+					_gicentre$elm_vega$VegaLite$fieldTitleLabel(_p80._0))
 			};
 		case 'RemoveInvalid':
 			return _p80._0 ? {
@@ -8568,147 +8568,147 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 				ctor: '_Tuple2',
 				_0: 'axis',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisX':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisX',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisY':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisY',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisLeft':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisLeft',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisRight':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisRight',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisTop':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisTop',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisBottom':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisBottom',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'AxisBand':
 			return {
 				ctor: '_Tuple2',
 				_0: 'axisBand',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisConfig, _p80._0))
 			};
 		case 'Legend':
 			return {
 				ctor: '_Tuple2',
 				_0: 'legend',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$legendProperty, _p80._0))
 			};
 		case 'MarkStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'mark',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'AreaStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'area',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'BarStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'bar',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'CircleStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'circle',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'LineStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'line',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'PointStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'point',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'RectStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rect',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'RuleStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rule',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'SquareStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'square',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'TextStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'text',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'TickStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tick',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._0))
 			};
 		case 'TitleStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$titleConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$titleConfig, _p80._0))
 			};
 		case 'NamedStyle':
 			return {
@@ -8721,7 +8721,7 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 							ctor: '_Tuple2',
 							_0: _p80._0,
 							_1: _elm_lang$core$Json_Encode$object(
-								A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p80._1))
+								A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p80._1))
 						},
 						_1: {ctor: '[]'}
 					})
@@ -8731,25 +8731,25 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 				ctor: '_Tuple2',
 				_0: 'scale',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$scaleConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$scaleConfig, _p80._0))
 			};
 		case 'Stack':
-			return _gicentre$elm_vega$Vega$stackProperty(_p80._0);
+			return _gicentre$elm_vega$VegaLite$stackProperty(_p80._0);
 		case 'Range':
 			return {
 				ctor: '_Tuple2',
 				_0: 'range',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$rangeConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$rangeConfig, _p80._0))
 			};
 		case 'SelectionStyle':
 			var selProp = function (_p81) {
 				var _p82 = _p81;
 				return {
 					ctor: '_Tuple2',
-					_0: _gicentre$elm_vega$Vega$selectionLabel(_p82._0),
+					_0: _gicentre$elm_vega$VegaLite$selectionLabel(_p82._0),
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$selectionProperty, _p82._1))
+						A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$selectionProperty, _p82._1))
 				};
 			};
 			return {
@@ -8763,11 +8763,11 @@ var _gicentre$elm_vega$Vega$configProperty = function (configProp) {
 				ctor: '_Tuple2',
 				_0: 'view',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$viewConfig, _p80._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$viewConfig, _p80._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$transpose = function (ll) {
+var _gicentre$elm_vega$VegaLite$transpose = function (ll) {
 	transpose:
 	while (true) {
 		var _p83 = ll;
@@ -8785,14 +8785,14 @@ var _gicentre$elm_vega$Vega$transpose = function (ll) {
 				return {
 					ctor: '::',
 					_0: {ctor: '::', _0: _p83._0._0, _1: heads},
-					_1: _gicentre$elm_vega$Vega$transpose(
+					_1: _gicentre$elm_vega$VegaLite$transpose(
 						{ctor: '::', _0: _p83._0._1, _1: tails})
 				};
 			}
 		}
 	}
 };
-var _gicentre$elm_vega$Vega$toVegaLite = function (spec) {
+var _gicentre$elm_vega$VegaLite$toVegaLite = function (spec) {
 	return _elm_lang$core$Json_Encode$object(
 		{
 			ctor: '::',
@@ -8807,14 +8807,14 @@ var _gicentre$elm_vega$Vega$toVegaLite = function (spec) {
 					var _p86 = _p85;
 					return {
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$Vega$propertyLabel(_p86._0),
+						_0: _gicentre$elm_vega$VegaLite$vlPropertyLabel(_p86._0),
 						_1: _p86._1
 					};
 				},
 				spec)
 		});
 };
-var _gicentre$elm_vega$Vega$timeUnitAs = F3(
+var _gicentre$elm_vega$VegaLite$timeUnitAs = F3(
 	function (tu, field, label) {
 		return F2(
 			function (x, y) {
@@ -8827,7 +8827,7 @@ var _gicentre$elm_vega$Vega$timeUnitAs = F3(
 					{
 						ctor: '::',
 						_0: _elm_lang$core$Json_Encode$string(
-							_gicentre$elm_vega$Vega$timeUnitLabel(tu)),
+							_gicentre$elm_vega$VegaLite$timeUnitLabel(tu)),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$core$Json_Encode$string(field),
@@ -8840,7 +8840,7 @@ var _gicentre$elm_vega$Vega$timeUnitAs = F3(
 					})
 			});
 	});
-var _gicentre$elm_vega$Vega$select = F3(
+var _gicentre$elm_vega$VegaLite$select = F3(
 	function (name, sType, options) {
 		var selProps = {
 			ctor: '::',
@@ -8848,9 +8848,9 @@ var _gicentre$elm_vega$Vega$select = F3(
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$selectionLabel(sType))
+					_gicentre$elm_vega$VegaLite$selectionLabel(sType))
 			},
-			_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$selectionProperty, options)
+			_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$selectionProperty, options)
 		};
 		return F2(
 			function (x, y) {
@@ -8862,14 +8862,14 @@ var _gicentre$elm_vega$Vega$select = F3(
 				_1: _elm_lang$core$Json_Encode$object(selProps)
 			});
 	});
-var _gicentre$elm_vega$Vega$resolution = function (res) {
+var _gicentre$elm_vega$VegaLite$resolution = function (res) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
 		})(
-		_gicentre$elm_vega$Vega$resolveProperty(res));
+		_gicentre$elm_vega$VegaLite$resolveProperty(res));
 };
-var _gicentre$elm_vega$Vega$opAs = F3(
+var _gicentre$elm_vega$VegaLite$opAs = F3(
 	function (op, field, label) {
 		return _elm_lang$core$Json_Encode$object(
 			{
@@ -8878,7 +8878,7 @@ var _gicentre$elm_vega$Vega$opAs = F3(
 					ctor: '_Tuple2',
 					_0: 'op',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$opLabel(op))
+						_gicentre$elm_vega$VegaLite$opLabel(op))
 				},
 				_1: {
 					ctor: '::',
@@ -8899,7 +8899,7 @@ var _gicentre$elm_vega$Vega$opAs = F3(
 				}
 			});
 	});
-var _gicentre$elm_vega$Vega$lookupAs = F4(
+var _gicentre$elm_vega$VegaLite$lookupAs = F4(
 	function (key1, _p87, key2, fields) {
 		var _p88 = _p87;
 		return F2(
@@ -8930,7 +8930,7 @@ var _gicentre$elm_vega$Vega$lookupAs = F4(
 					})
 			});
 	});
-var _gicentre$elm_vega$Vega$filter = function (f) {
+var _gicentre$elm_vega$VegaLite$filter = function (f) {
 	var _p89 = f;
 	switch (_p89.ctor) {
 		case 'FExpr':
@@ -8964,7 +8964,7 @@ var _gicentre$elm_vega$Vega$filter = function (f) {
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'equal',
-									_1: _gicentre$elm_vega$Vega$datavalue(_p89._1)
+									_1: _gicentre$elm_vega$VegaLite$datavalue(_p89._1)
 								},
 								_1: {ctor: '[]'}
 							}
@@ -9008,11 +9008,11 @@ var _gicentre$elm_vega$Vega$filter = function (f) {
 						{
 							ctor: '::',
 							_0: _elm_lang$core$Json_Encode$object(
-								A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, _p90._0)),
+								A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, _p90._0)),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$core$Json_Encode$object(
-									A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, _p90._1)),
+									A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, _p90._1)),
 								_1: {ctor: '[]'}
 							}
 						});
@@ -9053,7 +9053,7 @@ var _gicentre$elm_vega$Vega$filter = function (f) {
 								_elm_lang$core$List$map,
 								function (dt) {
 									return _elm_lang$core$Json_Encode$object(
-										A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, dt));
+										A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, dt));
 								},
 								_p91._0));
 					case 'Strings':
@@ -9088,7 +9088,7 @@ var _gicentre$elm_vega$Vega$filter = function (f) {
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$dataRow = function (row) {
+var _gicentre$elm_vega$VegaLite$dataRow = function (row) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9101,12 +9101,12 @@ var _gicentre$elm_vega$Vega$dataRow = function (row) {
 					return {
 						ctor: '_Tuple2',
 						_0: _p93._0,
-						_1: _gicentre$elm_vega$Vega$datavalue(_p93._1)
+						_1: _gicentre$elm_vega$VegaLite$datavalue(_p93._1)
 					};
 				},
 				row)));
 };
-var _gicentre$elm_vega$Vega$dataColumn = F2(
+var _gicentre$elm_vega$VegaLite$dataColumn = F2(
 	function (colName, data) {
 		var _p94 = data;
 		switch (_p94.ctor) {
@@ -9152,7 +9152,7 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 								ctor: '_Tuple2',
 								_0: colName,
 								_1: _elm_lang$core$Json_Encode$object(
-									A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dateTimeProperty, dts))
+									A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, dts))
 							};
 						},
 						_p94._0));
@@ -9173,14 +9173,14 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 						_p94._0));
 		}
 	});
-var _gicentre$elm_vega$Vega$configuration = function (cfg) {
+var _gicentre$elm_vega$VegaLite$configuration = function (cfg) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
 		})(
-		_gicentre$elm_vega$Vega$configProperty(cfg));
+		_gicentre$elm_vega$VegaLite$configProperty(cfg));
 };
-var _gicentre$elm_vega$Vega$calculateAs = F2(
+var _gicentre$elm_vega$VegaLite$calculateAs = F2(
 	function (expr, label) {
 		return F2(
 			function (x, y) {
@@ -9201,7 +9201,7 @@ var _gicentre$elm_vega$Vega$calculateAs = F2(
 					})
 			});
 	});
-var _gicentre$elm_vega$Vega$binAs = F3(
+var _gicentre$elm_vega$VegaLite$binAs = F3(
 	function (bProps, field, label) {
 		return _elm_lang$core$Native_Utils.eq(
 			bProps,
@@ -9237,7 +9237,7 @@ var _gicentre$elm_vega$Vega$binAs = F3(
 					{
 						ctor: '::',
 						_0: _elm_lang$core$Json_Encode$object(
-							A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$binProperty, bProps)),
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$binProperty, bProps)),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$core$Json_Encode$string(field),
@@ -9250,7 +9250,7 @@ var _gicentre$elm_vega$Vega$binAs = F3(
 					})
 			});
 	});
-var _gicentre$elm_vega$Vega$bin = function (bProps) {
+var _gicentre$elm_vega$VegaLite$bin = function (bProps) {
 	return _elm_lang$core$Native_Utils.eq(
 		bProps,
 		{ctor: '[]'}) ? {
@@ -9261,10 +9261,10 @@ var _gicentre$elm_vega$Vega$bin = function (bProps) {
 		ctor: '_Tuple2',
 		_0: 'bin',
 		_1: _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$binProperty, bProps))
+			A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$binProperty, bProps))
 	};
 };
-var _gicentre$elm_vega$Vega$detailChannelProperty = function (field) {
+var _gicentre$elm_vega$VegaLite$detailChannelProperty = function (field) {
 	var _p95 = field;
 	switch (_p95.ctor) {
 		case 'DName':
@@ -9278,27 +9278,27 @@ var _gicentre$elm_vega$Vega$detailChannelProperty = function (field) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$measurementLabel(_p95._0))
+					_gicentre$elm_vega$VegaLite$measurementLabel(_p95._0))
 			};
 		case 'DBin':
-			return _gicentre$elm_vega$Vega$bin(_p95._0);
+			return _gicentre$elm_vega$VegaLite$bin(_p95._0);
 		case 'DTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$timeUnitLabel(_p95._0))
+					_gicentre$elm_vega$VegaLite$timeUnitLabel(_p95._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p95._0))
+					_gicentre$elm_vega$VegaLite$opLabel(_p95._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$detail = function (detailProps) {
+var _gicentre$elm_vega$VegaLite$detail = function (detailProps) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9307,10 +9307,10 @@ var _gicentre$elm_vega$Vega$detail = function (detailProps) {
 			ctor: '_Tuple2',
 			_0: 'detail',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$detailChannelProperty, detailProps))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$detailChannelProperty, detailProps))
 		});
 };
-var _gicentre$elm_vega$Vega$facetChannelProperty = function (fMap) {
+var _gicentre$elm_vega$VegaLite$facetChannelProperty = function (fMap) {
 	var _p96 = fMap;
 	switch (_p96.ctor) {
 		case 'FName':
@@ -9324,34 +9324,34 @@ var _gicentre$elm_vega$Vega$facetChannelProperty = function (fMap) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$measurementLabel(_p96._0))
+					_gicentre$elm_vega$VegaLite$measurementLabel(_p96._0))
 			};
 		case 'FBin':
-			return _gicentre$elm_vega$Vega$bin(_p96._0);
+			return _gicentre$elm_vega$VegaLite$bin(_p96._0);
 		case 'FAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p96._0))
+					_gicentre$elm_vega$VegaLite$opLabel(_p96._0))
 			};
 		case 'FTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$timeUnitLabel(_p96._0))
+					_gicentre$elm_vega$VegaLite$timeUnitLabel(_p96._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'header',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$headerProperty, _p96._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$headerProperty, _p96._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$column = function (fFields) {
+var _gicentre$elm_vega$VegaLite$column = function (fFields) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9360,10 +9360,10 @@ var _gicentre$elm_vega$Vega$column = function (fFields) {
 			ctor: '_Tuple2',
 			_0: 'column',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetChannelProperty, fFields))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$facetChannelProperty, fFields))
 		});
 };
-var _gicentre$elm_vega$Vega$row = function (fFields) {
+var _gicentre$elm_vega$VegaLite$row = function (fFields) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9372,28 +9372,28 @@ var _gicentre$elm_vega$Vega$row = function (fFields) {
 			ctor: '_Tuple2',
 			_0: 'row',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetChannelProperty, fFields))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$facetChannelProperty, fFields))
 		});
 };
-var _gicentre$elm_vega$Vega$facetMappingProperty = function (fMap) {
+var _gicentre$elm_vega$VegaLite$facetMappingProperty = function (fMap) {
 	var _p97 = fMap;
 	if (_p97.ctor === 'RowBy') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'row',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetChannelProperty, _p97._0))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$facetChannelProperty, _p97._0))
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'column',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetChannelProperty, _p97._0))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$facetChannelProperty, _p97._0))
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
+var _gicentre$elm_vega$VegaLite$markChannelProperty = function (field) {
 	var _p98 = field;
 	switch (_p98.ctor) {
 		case 'MName':
@@ -9419,7 +9419,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 								ctor: '_Tuple2',
 								_0: 'repeat',
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$elm_vega$Vega$arrangementLabel(_p98._0))
+									_gicentre$elm_vega$VegaLite$arrangementLabel(_p98._0))
 							},
 							_1: {ctor: '[]'}
 						})
@@ -9433,7 +9433,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'type',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$measurementLabel(_p98._0))
+						_gicentre$elm_vega$VegaLite$measurementLabel(_p98._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9444,7 +9444,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'scale',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$scaleProperty, _p98._0))
+						A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$scaleProperty, _p98._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9462,14 +9462,14 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'legend',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendProperty, _p99))
+						A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$legendProperty, _p99))
 				},
 				_1: {ctor: '[]'}
 			};
 		case 'MBin':
 			return {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$bin(_p98._0),
+				_0: _gicentre$elm_vega$VegaLite$bin(_p98._0),
 				_1: {ctor: '[]'}
 			};
 		case 'MCondition':
@@ -9486,10 +9486,10 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 								_0: 'selection',
 								_1: _elm_lang$core$Json_Encode$string(_p98._0)
 							},
-							_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, _p98._1)
+							_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, _p98._1)
 						})
 				},
-				_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, _p98._2)
+				_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, _p98._2)
 			};
 		case 'MTimeUnit':
 			return {
@@ -9498,7 +9498,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'timeUnit',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$timeUnitLabel(_p98._0))
+						_gicentre$elm_vega$VegaLite$timeUnitLabel(_p98._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9509,7 +9509,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 					ctor: '_Tuple2',
 					_0: 'aggregate',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$opLabel(_p98._0))
+						_gicentre$elm_vega$VegaLite$opLabel(_p98._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9555,7 +9555,7 @@ var _gicentre$elm_vega$Vega$markChannelProperty = function (field) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$color = function (markProps) {
+var _gicentre$elm_vega$VegaLite$color = function (markProps) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9564,10 +9564,10 @@ var _gicentre$elm_vega$Vega$color = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'color',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
 };
-var _gicentre$elm_vega$Vega$opacity = function (markProps) {
+var _gicentre$elm_vega$VegaLite$opacity = function (markProps) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9576,10 +9576,10 @@ var _gicentre$elm_vega$Vega$opacity = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'opacity',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
 };
-var _gicentre$elm_vega$Vega$shape = function (markProps) {
+var _gicentre$elm_vega$VegaLite$shape = function (markProps) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9588,10 +9588,10 @@ var _gicentre$elm_vega$Vega$shape = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'shape',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
 };
-var _gicentre$elm_vega$Vega$size = function (markProps) {
+var _gicentre$elm_vega$VegaLite$size = function (markProps) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9600,10 +9600,10 @@ var _gicentre$elm_vega$Vega$size = function (markProps) {
 			ctor: '_Tuple2',
 			_0: 'size',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$markChannelProperty, markProps))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
 };
-var _gicentre$elm_vega$Vega$orderChannelProperty = function (oDef) {
+var _gicentre$elm_vega$VegaLite$orderChannelProperty = function (oDef) {
 	var _p100 = oDef;
 	switch (_p100.ctor) {
 		case 'OName':
@@ -9623,7 +9623,7 @@ var _gicentre$elm_vega$Vega$orderChannelProperty = function (oDef) {
 							ctor: '_Tuple2',
 							_0: 'repeat',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$elm_vega$Vega$arrangementLabel(_p100._0))
+								_gicentre$elm_vega$VegaLite$arrangementLabel(_p100._0))
 						},
 						_1: {ctor: '[]'}
 					})
@@ -9633,23 +9633,23 @@ var _gicentre$elm_vega$Vega$orderChannelProperty = function (oDef) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$measurementLabel(_p100._0))
+					_gicentre$elm_vega$VegaLite$measurementLabel(_p100._0))
 			};
 		case 'OBin':
-			return _gicentre$elm_vega$Vega$bin(_p100._0);
+			return _gicentre$elm_vega$VegaLite$bin(_p100._0);
 		case 'OAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p100._0))
+					_gicentre$elm_vega$VegaLite$opLabel(_p100._0))
 			};
 		case 'OTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$timeUnitLabel(_p100._0))
+					_gicentre$elm_vega$VegaLite$timeUnitLabel(_p100._0))
 			};
 		default:
 			var _p102 = _p100._0;
@@ -9685,11 +9685,11 @@ var _gicentre$elm_vega$Vega$orderChannelProperty = function (oDef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$sortProperty, _p102))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$sortProperty, _p102))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$order = function (oDefs) {
+var _gicentre$elm_vega$VegaLite$order = function (oDefs) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9698,10 +9698,10 @@ var _gicentre$elm_vega$Vega$order = function (oDefs) {
 			ctor: '_Tuple2',
 			_0: 'order',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$orderChannelProperty, oDefs))
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$orderChannelProperty, oDefs))
 		});
 };
-var _gicentre$elm_vega$Vega$positionChannelProperty = function (pDef) {
+var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 	var _p103 = pDef;
 	switch (_p103.ctor) {
 		case 'PName':
@@ -9715,23 +9715,23 @@ var _gicentre$elm_vega$Vega$positionChannelProperty = function (pDef) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$measurementLabel(_p103._0))
+					_gicentre$elm_vega$VegaLite$measurementLabel(_p103._0))
 			};
 		case 'PBin':
-			return _gicentre$elm_vega$Vega$bin(_p103._0);
+			return _gicentre$elm_vega$VegaLite$bin(_p103._0);
 		case 'PAggregate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aggregate',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p103._0))
+					_gicentre$elm_vega$VegaLite$opLabel(_p103._0))
 			};
 		case 'PTimeUnit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'timeUnit',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$timeUnitLabel(_p103._0))
+					_gicentre$elm_vega$VegaLite$timeUnitLabel(_p103._0))
 			};
 		case 'PSort':
 			var _p105 = _p103._0;
@@ -9767,14 +9767,14 @@ var _gicentre$elm_vega$Vega$positionChannelProperty = function (pDef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$sortProperty, _p105))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$sortProperty, _p105))
 			};
 		case 'PScale':
 			return {
 				ctor: '_Tuple2',
 				_0: 'scale',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$scaleProperty, _p103._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$scaleProperty, _p103._0))
 			};
 		case 'PAxis':
 			var _p106 = _p103._0;
@@ -9784,10 +9784,10 @@ var _gicentre$elm_vega$Vega$positionChannelProperty = function (pDef) {
 				ctor: '_Tuple2',
 				_0: 'axis',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$axisProperty, _p106))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$axisProperty, _p106))
 			};
 		case 'PStack':
-			return _gicentre$elm_vega$Vega$stackProperty(_p103._0);
+			return _gicentre$elm_vega$VegaLite$stackProperty(_p103._0);
 		default:
 			return {
 				ctor: '_Tuple2',
@@ -9799,14 +9799,14 @@ var _gicentre$elm_vega$Vega$positionChannelProperty = function (pDef) {
 							ctor: '_Tuple2',
 							_0: 'repeat',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$elm_vega$Vega$arrangementLabel(_p103._0))
+								_gicentre$elm_vega$VegaLite$arrangementLabel(_p103._0))
 						},
 						_1: {ctor: '[]'}
 					})
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$position = F2(
+var _gicentre$elm_vega$VegaLite$position = F2(
 	function (pos, pDefs) {
 		return F2(
 			function (x, y) {
@@ -9814,12 +9814,12 @@ var _gicentre$elm_vega$Vega$position = F2(
 			})(
 			{
 				ctor: '_Tuple2',
-				_0: _gicentre$elm_vega$Vega$positionLabel(pos),
+				_0: _gicentre$elm_vega$VegaLite$positionLabel(pos),
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$positionChannelProperty, pDefs))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
 			});
 	});
-var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
+var _gicentre$elm_vega$VegaLite$textChannelProperty = function (tDef) {
 	var _p107 = tDef;
 	switch (_p107.ctor) {
 		case 'TName':
@@ -9845,7 +9845,7 @@ var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
 								ctor: '_Tuple2',
 								_0: 'repeat',
 								_1: _elm_lang$core$Json_Encode$string(
-									_gicentre$elm_vega$Vega$arrangementLabel(_p107._0))
+									_gicentre$elm_vega$VegaLite$arrangementLabel(_p107._0))
 							},
 							_1: {ctor: '[]'}
 						})
@@ -9859,14 +9859,14 @@ var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'type',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$measurementLabel(_p107._0))
+						_gicentre$elm_vega$VegaLite$measurementLabel(_p107._0))
 				},
 				_1: {ctor: '[]'}
 			};
 		case 'TBin':
 			return {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$bin(_p107._0),
+				_0: _gicentre$elm_vega$VegaLite$bin(_p107._0),
 				_1: {ctor: '[]'}
 			};
 		case 'TAggregate':
@@ -9876,7 +9876,7 @@ var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'aggregate',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$opLabel(_p107._0))
+						_gicentre$elm_vega$VegaLite$opLabel(_p107._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9887,7 +9887,7 @@ var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
 					ctor: '_Tuple2',
 					_0: 'timeUnit',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$timeUnitLabel(_p107._0))
+						_gicentre$elm_vega$VegaLite$timeUnitLabel(_p107._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9915,14 +9915,14 @@ var _gicentre$elm_vega$Vega$textChannelProperty = function (tDef) {
 								_0: 'selection',
 								_1: _elm_lang$core$Json_Encode$string(_p107._0)
 							},
-							_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$textChannelProperty, _p107._1)
+							_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, _p107._1)
 						})
 				},
-				_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$textChannelProperty, _p107._2)
+				_1: A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, _p107._2)
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$text = function (tDefs) {
+var _gicentre$elm_vega$VegaLite$text = function (tDefs) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9931,10 +9931,10 @@ var _gicentre$elm_vega$Vega$text = function (tDefs) {
 			ctor: '_Tuple2',
 			_0: 'text',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$textChannelProperty, tDefs))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, tDefs))
 		});
 };
-var _gicentre$elm_vega$Vega$tooltip = function (tDefs) {
+var _gicentre$elm_vega$VegaLite$tooltip = function (tDefs) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -9943,10 +9943,10 @@ var _gicentre$elm_vega$Vega$tooltip = function (tDefs) {
 			ctor: '_Tuple2',
 			_0: 'tooltip',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$textChannelProperty, tDefs))
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, tDefs))
 		});
 };
-var _gicentre$elm_vega$Vega$asSpec = function (specs) {
+var _gicentre$elm_vega$VegaLite$asSpec = function (specs) {
 	return _elm_lang$core$Json_Encode$object(
 		A2(
 			_elm_lang$core$List$map,
@@ -9954,13 +9954,13 @@ var _gicentre$elm_vega$Vega$asSpec = function (specs) {
 				var _p109 = _p108;
 				return {
 					ctor: '_Tuple2',
-					_0: _gicentre$elm_vega$Vega$propertyLabel(_p109._0),
+					_0: _gicentre$elm_vega$VegaLite$vlPropertyLabel(_p109._0),
 					_1: _p109._1
 				};
 			},
 			specs));
 };
-var _gicentre$elm_vega$Vega$aggregate = F2(
+var _gicentre$elm_vega$VegaLite$aggregate = F2(
 	function (ops, groups) {
 		return F2(
 			function (x, y) {
@@ -9982,943 +9982,943 @@ var _gicentre$elm_vega$Vega$aggregate = F2(
 					})
 			});
 	});
-var _gicentre$elm_vega$Vega$AEnd = {ctor: 'AEnd'};
-var _gicentre$elm_vega$Vega$AMiddle = {ctor: 'AMiddle'};
-var _gicentre$elm_vega$Vega$AStart = {ctor: 'AStart'};
-var _gicentre$elm_vega$Vega$Row = {ctor: 'Row'};
-var _gicentre$elm_vega$Vega$Column = {ctor: 'Column'};
-var _gicentre$elm_vega$Vega$AResize = function (a) {
+var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
+var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
+var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
+var _gicentre$elm_vega$VegaLite$Row = {ctor: 'Row'};
+var _gicentre$elm_vega$VegaLite$Column = {ctor: 'Column'};
+var _gicentre$elm_vega$VegaLite$AResize = function (a) {
 	return {ctor: 'AResize', _0: a};
 };
-var _gicentre$elm_vega$Vega$APadding = {ctor: 'APadding'};
-var _gicentre$elm_vega$Vega$APad = {ctor: 'APad'};
-var _gicentre$elm_vega$Vega$ANone = {ctor: 'ANone'};
-var _gicentre$elm_vega$Vega$AFit = {ctor: 'AFit'};
-var _gicentre$elm_vega$Vega$AContent = {ctor: 'AContent'};
-var _gicentre$elm_vega$Vega$TitleY = function (a) {
+var _gicentre$elm_vega$VegaLite$APadding = {ctor: 'APadding'};
+var _gicentre$elm_vega$VegaLite$APad = {ctor: 'APad'};
+var _gicentre$elm_vega$VegaLite$ANone = {ctor: 'ANone'};
+var _gicentre$elm_vega$VegaLite$AFit = {ctor: 'AFit'};
+var _gicentre$elm_vega$VegaLite$AContent = {ctor: 'AContent'};
+var _gicentre$elm_vega$VegaLite$TitleY = function (a) {
 	return {ctor: 'TitleY', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleX = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleX = function (a) {
 	return {ctor: 'TitleX', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleLimit = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleLimit = function (a) {
 	return {ctor: 'TitleLimit', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleFontSize = function (a) {
 	return {ctor: 'TitleFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleFontWeight = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleFontWeight = function (a) {
 	return {ctor: 'TitleFontWeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleFont = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleFont = function (a) {
 	return {ctor: 'TitleFont', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleColor = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleColor = function (a) {
 	return {ctor: 'TitleColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleBaseline = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleBaseline = function (a) {
 	return {ctor: 'TitleBaseline', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$TickWidth = function (a) {
 	return {ctor: 'TickWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickRound = function (a) {
+var _gicentre$elm_vega$VegaLite$TickRound = function (a) {
 	return {ctor: 'TickRound', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickColor = function (a) {
+var _gicentre$elm_vega$VegaLite$TickColor = function (a) {
 	return {ctor: 'TickColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$ShortTimeLabels = function (a) {
+var _gicentre$elm_vega$VegaLite$ShortTimeLabels = function (a) {
 	return {ctor: 'ShortTimeLabels', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelLimit = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelLimit = function (a) {
 	return {ctor: 'LabelLimit', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelFontSize = function (a) {
 	return {ctor: 'LabelFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelFont = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelFont = function (a) {
 	return {ctor: 'LabelFont', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelColor = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelColor = function (a) {
 	return {ctor: 'LabelColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$GridWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$GridWidth = function (a) {
 	return {ctor: 'GridWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$GridOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$GridOpacity = function (a) {
 	return {ctor: 'GridOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$GridDash = function (a) {
+var _gicentre$elm_vega$VegaLite$GridDash = function (a) {
 	return {ctor: 'GridDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$GridColor = function (a) {
+var _gicentre$elm_vega$VegaLite$GridColor = function (a) {
 	return {ctor: 'GridColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$DomainWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$DomainWidth = function (a) {
 	return {ctor: 'DomainWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$DomainColor = function (a) {
+var _gicentre$elm_vega$VegaLite$DomainColor = function (a) {
 	return {ctor: 'DomainColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$BandPosition = function (a) {
+var _gicentre$elm_vega$VegaLite$BandPosition = function (a) {
 	return {ctor: 'BandPosition', _0: a};
 };
-var _gicentre$elm_vega$Vega$ZIndex = function (a) {
+var _gicentre$elm_vega$VegaLite$ZIndex = function (a) {
 	return {ctor: 'ZIndex', _0: a};
 };
-var _gicentre$elm_vega$Vega$Values = function (a) {
+var _gicentre$elm_vega$VegaLite$Values = function (a) {
 	return {ctor: 'Values', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitlePadding = function (a) {
+var _gicentre$elm_vega$VegaLite$AxTitlePadding = function (a) {
 	return {ctor: 'AxTitlePadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitleMaxLength = function (a) {
+var _gicentre$elm_vega$VegaLite$AxTitleMaxLength = function (a) {
 	return {ctor: 'AxTitleMaxLength', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitleAngle = function (a) {
+var _gicentre$elm_vega$VegaLite$AxTitleAngle = function (a) {
 	return {ctor: 'AxTitleAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitleAlign = function (a) {
+var _gicentre$elm_vega$VegaLite$AxTitleAlign = function (a) {
 	return {ctor: 'AxTitleAlign', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitle = function (a) {
+var _gicentre$elm_vega$VegaLite$AxTitle = function (a) {
 	return {ctor: 'AxTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickSize = function (a) {
+var _gicentre$elm_vega$VegaLite$TickSize = function (a) {
 	return {ctor: 'TickSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickCount = function (a) {
+var _gicentre$elm_vega$VegaLite$TickCount = function (a) {
 	return {ctor: 'TickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$Ticks = function (a) {
+var _gicentre$elm_vega$VegaLite$Ticks = function (a) {
 	return {ctor: 'Ticks', _0: a};
 };
-var _gicentre$elm_vega$Vega$Position = function (a) {
+var _gicentre$elm_vega$VegaLite$Position = function (a) {
 	return {ctor: 'Position', _0: a};
 };
-var _gicentre$elm_vega$Vega$Orient = function (a) {
+var _gicentre$elm_vega$VegaLite$Orient = function (a) {
 	return {ctor: 'Orient', _0: a};
 };
-var _gicentre$elm_vega$Vega$Offset = function (a) {
+var _gicentre$elm_vega$VegaLite$Offset = function (a) {
 	return {ctor: 'Offset', _0: a};
 };
-var _gicentre$elm_vega$Vega$MinExtent = function (a) {
+var _gicentre$elm_vega$VegaLite$MinExtent = function (a) {
 	return {ctor: 'MinExtent', _0: a};
 };
-var _gicentre$elm_vega$Vega$MaxExtent = function (a) {
+var _gicentre$elm_vega$VegaLite$MaxExtent = function (a) {
 	return {ctor: 'MaxExtent', _0: a};
 };
-var _gicentre$elm_vega$Vega$Labels = function (a) {
+var _gicentre$elm_vega$VegaLite$Labels = function (a) {
 	return {ctor: 'Labels', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelPadding = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelPadding = function (a) {
 	return {ctor: 'LabelPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelOverlap = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelOverlap = function (a) {
 	return {ctor: 'LabelOverlap', _0: a};
 };
-var _gicentre$elm_vega$Vega$LabelAngle = function (a) {
+var _gicentre$elm_vega$VegaLite$LabelAngle = function (a) {
 	return {ctor: 'LabelAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Grid = function (a) {
+var _gicentre$elm_vega$VegaLite$Grid = function (a) {
 	return {ctor: 'Grid', _0: a};
 };
-var _gicentre$elm_vega$Vega$Format = function (a) {
+var _gicentre$elm_vega$VegaLite$Format = function (a) {
 	return {ctor: 'Format', _0: a};
 };
-var _gicentre$elm_vega$Vega$Domain = function (a) {
+var _gicentre$elm_vega$VegaLite$Domain = function (a) {
 	return {ctor: 'Domain', _0: a};
 };
-var _gicentre$elm_vega$Vega$Steps = function (a) {
+var _gicentre$elm_vega$VegaLite$Steps = function (a) {
 	return {ctor: 'Steps', _0: a};
 };
-var _gicentre$elm_vega$Vega$Step = function (a) {
+var _gicentre$elm_vega$VegaLite$Step = function (a) {
 	return {ctor: 'Step', _0: a};
 };
-var _gicentre$elm_vega$Vega$Nice = function (a) {
+var _gicentre$elm_vega$VegaLite$Nice = function (a) {
 	return {ctor: 'Nice', _0: a};
 };
-var _gicentre$elm_vega$Vega$MinStep = function (a) {
+var _gicentre$elm_vega$VegaLite$MinStep = function (a) {
 	return {ctor: 'MinStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$MaxBins = function (a) {
+var _gicentre$elm_vega$VegaLite$MaxBins = function (a) {
 	return {ctor: 'MaxBins', _0: a};
 };
-var _gicentre$elm_vega$Vega$Extent = F2(
+var _gicentre$elm_vega$VegaLite$Extent = F2(
 	function (a, b) {
 		return {ctor: 'Extent', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$Divide = F2(
+var _gicentre$elm_vega$VegaLite$Divide = F2(
 	function (a, b) {
 		return {ctor: 'Divide', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$Base = function (a) {
+var _gicentre$elm_vega$VegaLite$Base = function (a) {
 	return {ctor: 'Base', _0: a};
 };
-var _gicentre$elm_vega$Vega$IColor = F2(
+var _gicentre$elm_vega$VegaLite$IColor = F2(
 	function (a, b) {
 		return {ctor: 'IColor', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$ITel = F2(
+var _gicentre$elm_vega$VegaLite$ITel = F2(
 	function (a, b) {
 		return {ctor: 'ITel', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IDateTimeLocal = F2(
+var _gicentre$elm_vega$VegaLite$IDateTimeLocal = F2(
 	function (a, b) {
 		return {ctor: 'IDateTimeLocal', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IWeek = F2(
+var _gicentre$elm_vega$VegaLite$IWeek = F2(
 	function (a, b) {
 		return {ctor: 'IWeek', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IMonth = F2(
+var _gicentre$elm_vega$VegaLite$IMonth = F2(
 	function (a, b) {
 		return {ctor: 'IMonth', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$ITime = F2(
+var _gicentre$elm_vega$VegaLite$ITime = F2(
 	function (a, b) {
 		return {ctor: 'ITime', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IDate = F2(
+var _gicentre$elm_vega$VegaLite$IDate = F2(
 	function (a, b) {
 		return {ctor: 'IDate', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$INumber = F2(
+var _gicentre$elm_vega$VegaLite$INumber = F2(
 	function (a, b) {
 		return {ctor: 'INumber', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IText = F2(
+var _gicentre$elm_vega$VegaLite$IText = F2(
 	function (a, b) {
 		return {ctor: 'IText', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$ISelect = F2(
+var _gicentre$elm_vega$VegaLite$ISelect = F2(
 	function (a, b) {
 		return {ctor: 'ISelect', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IRadio = F2(
+var _gicentre$elm_vega$VegaLite$IRadio = F2(
 	function (a, b) {
 		return {ctor: 'IRadio', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$ICheckbox = F2(
+var _gicentre$elm_vega$VegaLite$ICheckbox = F2(
 	function (a, b) {
 		return {ctor: 'ICheckbox', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$IRange = F2(
+var _gicentre$elm_vega$VegaLite$IRange = F2(
 	function (a, b) {
 		return {ctor: 'IRange', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$ChSize = {ctor: 'ChSize'};
-var _gicentre$elm_vega$Vega$ChShape = {ctor: 'ChShape'};
-var _gicentre$elm_vega$Vega$ChOpacity = {ctor: 'ChOpacity'};
-var _gicentre$elm_vega$Vega$ChColor = {ctor: 'ChColor'};
-var _gicentre$elm_vega$Vega$ChY2 = {ctor: 'ChY2'};
-var _gicentre$elm_vega$Vega$ChX2 = {ctor: 'ChX2'};
-var _gicentre$elm_vega$Vega$ChY = {ctor: 'ChY'};
-var _gicentre$elm_vega$Vega$ChX = {ctor: 'ChX'};
-var _gicentre$elm_vega$Vega$Rgb = function (a) {
+var _gicentre$elm_vega$VegaLite$ChSize = {ctor: 'ChSize'};
+var _gicentre$elm_vega$VegaLite$ChShape = {ctor: 'ChShape'};
+var _gicentre$elm_vega$VegaLite$ChOpacity = {ctor: 'ChOpacity'};
+var _gicentre$elm_vega$VegaLite$ChColor = {ctor: 'ChColor'};
+var _gicentre$elm_vega$VegaLite$ChY2 = {ctor: 'ChY2'};
+var _gicentre$elm_vega$VegaLite$ChX2 = {ctor: 'ChX2'};
+var _gicentre$elm_vega$VegaLite$ChY = {ctor: 'ChY'};
+var _gicentre$elm_vega$VegaLite$ChX = {ctor: 'ChX'};
+var _gicentre$elm_vega$VegaLite$Rgb = function (a) {
 	return {ctor: 'Rgb', _0: a};
 };
-var _gicentre$elm_vega$Vega$Lab = {ctor: 'Lab'};
-var _gicentre$elm_vega$Vega$HslLong = {ctor: 'HslLong'};
-var _gicentre$elm_vega$Vega$Hsl = {ctor: 'Hsl'};
-var _gicentre$elm_vega$Vega$HclLong = {ctor: 'HclLong'};
-var _gicentre$elm_vega$Vega$Hcl = {ctor: 'Hcl'};
-var _gicentre$elm_vega$Vega$CubeHelixLong = function (a) {
+var _gicentre$elm_vega$VegaLite$Lab = {ctor: 'Lab'};
+var _gicentre$elm_vega$VegaLite$HslLong = {ctor: 'HslLong'};
+var _gicentre$elm_vega$VegaLite$Hsl = {ctor: 'Hsl'};
+var _gicentre$elm_vega$VegaLite$HclLong = {ctor: 'HclLong'};
+var _gicentre$elm_vega$VegaLite$Hcl = {ctor: 'Hcl'};
+var _gicentre$elm_vega$VegaLite$CubeHelixLong = function (a) {
 	return {ctor: 'CubeHelixLong', _0: a};
 };
-var _gicentre$elm_vega$Vega$CubeHelix = function (a) {
+var _gicentre$elm_vega$VegaLite$CubeHelix = function (a) {
 	return {ctor: 'CubeHelix', _0: a};
 };
-var _gicentre$elm_vega$Vega$View = function (a) {
+var _gicentre$elm_vega$VegaLite$View = function (a) {
 	return {ctor: 'View', _0: a};
 };
-var _gicentre$elm_vega$Vega$TimeFormat = function (a) {
+var _gicentre$elm_vega$VegaLite$TimeFormat = function (a) {
 	return {ctor: 'TimeFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$TitleStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$TitleStyle = function (a) {
 	return {ctor: 'TitleStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$TickStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$TickStyle = function (a) {
 	return {ctor: 'TickStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$TextStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$TextStyle = function (a) {
 	return {ctor: 'TextStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Stack = function (a) {
+var _gicentre$elm_vega$VegaLite$Stack = function (a) {
 	return {ctor: 'Stack', _0: a};
 };
-var _gicentre$elm_vega$Vega$SquareStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$SquareStyle = function (a) {
 	return {ctor: 'SquareStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$SelectionStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$SelectionStyle = function (a) {
 	return {ctor: 'SelectionStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Scale = function (a) {
+var _gicentre$elm_vega$VegaLite$Scale = function (a) {
 	return {ctor: 'Scale', _0: a};
 };
-var _gicentre$elm_vega$Vega$RuleStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$RuleStyle = function (a) {
 	return {ctor: 'RuleStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$RemoveInvalid = function (a) {
+var _gicentre$elm_vega$VegaLite$RemoveInvalid = function (a) {
 	return {ctor: 'RemoveInvalid', _0: a};
 };
-var _gicentre$elm_vega$Vega$RectStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$RectStyle = function (a) {
 	return {ctor: 'RectStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Range = function (a) {
+var _gicentre$elm_vega$VegaLite$Range = function (a) {
 	return {ctor: 'Range', _0: a};
 };
-var _gicentre$elm_vega$Vega$PointStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$PointStyle = function (a) {
 	return {ctor: 'PointStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Padding = F4(
+var _gicentre$elm_vega$VegaLite$Padding = F4(
 	function (a, b, c, d) {
 		return {ctor: 'Padding', _0: a, _1: b, _2: c, _3: d};
 	});
-var _gicentre$elm_vega$Vega$NumberFormat = function (a) {
+var _gicentre$elm_vega$VegaLite$NumberFormat = function (a) {
 	return {ctor: 'NumberFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$NamedStyle = F2(
+var _gicentre$elm_vega$VegaLite$NamedStyle = F2(
 	function (a, b) {
 		return {ctor: 'NamedStyle', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$MarkStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$MarkStyle = function (a) {
 	return {ctor: 'MarkStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$LineStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$LineStyle = function (a) {
 	return {ctor: 'LineStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Legend = function (a) {
+var _gicentre$elm_vega$VegaLite$Legend = function (a) {
 	return {ctor: 'Legend', _0: a};
 };
-var _gicentre$elm_vega$Vega$FieldTitle = function (a) {
+var _gicentre$elm_vega$VegaLite$FieldTitle = function (a) {
 	return {ctor: 'FieldTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$CountTitle = function (a) {
+var _gicentre$elm_vega$VegaLite$CountTitle = function (a) {
 	return {ctor: 'CountTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$CircleStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$CircleStyle = function (a) {
 	return {ctor: 'CircleStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$BarStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$BarStyle = function (a) {
 	return {ctor: 'BarStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Background = function (a) {
+var _gicentre$elm_vega$VegaLite$Background = function (a) {
 	return {ctor: 'Background', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisBand = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisBand = function (a) {
 	return {ctor: 'AxisBand', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisBottom = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisBottom = function (a) {
 	return {ctor: 'AxisBottom', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisTop = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisTop = function (a) {
 	return {ctor: 'AxisTop', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisRight = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisRight = function (a) {
 	return {ctor: 'AxisRight', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisLeft = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisLeft = function (a) {
 	return {ctor: 'AxisLeft', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisY = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisY = function (a) {
 	return {ctor: 'AxisY', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxisX = function (a) {
+var _gicentre$elm_vega$VegaLite$AxisX = function (a) {
 	return {ctor: 'AxisX', _0: a};
 };
-var _gicentre$elm_vega$Vega$Axis = function (a) {
+var _gicentre$elm_vega$VegaLite$Axis = function (a) {
 	return {ctor: 'Axis', _0: a};
 };
-var _gicentre$elm_vega$Vega$Autosize = function (a) {
+var _gicentre$elm_vega$VegaLite$Autosize = function (a) {
 	return {ctor: 'Autosize', _0: a};
 };
-var _gicentre$elm_vega$Vega$AreaStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$AreaStyle = function (a) {
 	return {ctor: 'AreaStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Str = function (a) {
+var _gicentre$elm_vega$VegaLite$Str = function (a) {
 	return {ctor: 'Str', _0: a};
 };
-var _gicentre$elm_vega$Vega$Number = function (a) {
+var _gicentre$elm_vega$VegaLite$Number = function (a) {
 	return {ctor: 'Number', _0: a};
 };
-var _gicentre$elm_vega$Vega$DateTime = function (a) {
+var _gicentre$elm_vega$VegaLite$DateTime = function (a) {
 	return {ctor: 'DateTime', _0: a};
 };
-var _gicentre$elm_vega$Vega$Boolean = function (a) {
+var _gicentre$elm_vega$VegaLite$Boolean = function (a) {
 	return {ctor: 'Boolean', _0: a};
 };
-var _gicentre$elm_vega$Vega$Strings = function (a) {
+var _gicentre$elm_vega$VegaLite$Strings = function (a) {
 	return {ctor: 'Strings', _0: a};
 };
-var _gicentre$elm_vega$Vega$Numbers = function (a) {
+var _gicentre$elm_vega$VegaLite$Numbers = function (a) {
 	return {ctor: 'Numbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$DateTimes = function (a) {
+var _gicentre$elm_vega$VegaLite$DateTimes = function (a) {
 	return {ctor: 'DateTimes', _0: a};
 };
-var _gicentre$elm_vega$Vega$Booleans = function (a) {
+var _gicentre$elm_vega$VegaLite$Booleans = function (a) {
 	return {ctor: 'Booleans', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTMilliseconds = function (a) {
+var _gicentre$elm_vega$VegaLite$DTMilliseconds = function (a) {
 	return {ctor: 'DTMilliseconds', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTSeconds = function (a) {
+var _gicentre$elm_vega$VegaLite$DTSeconds = function (a) {
 	return {ctor: 'DTSeconds', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTMinutes = function (a) {
+var _gicentre$elm_vega$VegaLite$DTMinutes = function (a) {
 	return {ctor: 'DTMinutes', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTHours = function (a) {
+var _gicentre$elm_vega$VegaLite$DTHours = function (a) {
 	return {ctor: 'DTHours', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTDay = function (a) {
+var _gicentre$elm_vega$VegaLite$DTDay = function (a) {
 	return {ctor: 'DTDay', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTDate = function (a) {
+var _gicentre$elm_vega$VegaLite$DTDate = function (a) {
 	return {ctor: 'DTDate', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTMonth = function (a) {
+var _gicentre$elm_vega$VegaLite$DTMonth = function (a) {
 	return {ctor: 'DTMonth', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTQuarter = function (a) {
+var _gicentre$elm_vega$VegaLite$DTQuarter = function (a) {
 	return {ctor: 'DTQuarter', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTYear = function (a) {
+var _gicentre$elm_vega$VegaLite$DTYear = function (a) {
 	return {ctor: 'DTYear', _0: a};
 };
-var _gicentre$elm_vega$Vega$Sun = {ctor: 'Sun'};
-var _gicentre$elm_vega$Vega$Sat = {ctor: 'Sat'};
-var _gicentre$elm_vega$Vega$Fri = {ctor: 'Fri'};
-var _gicentre$elm_vega$Vega$Thu = {ctor: 'Thu'};
-var _gicentre$elm_vega$Vega$Wed = {ctor: 'Wed'};
-var _gicentre$elm_vega$Vega$Tue = {ctor: 'Tue'};
-var _gicentre$elm_vega$Vega$Mon = {ctor: 'Mon'};
-var _gicentre$elm_vega$Vega$DAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$Sun = {ctor: 'Sun'};
+var _gicentre$elm_vega$VegaLite$Sat = {ctor: 'Sat'};
+var _gicentre$elm_vega$VegaLite$Fri = {ctor: 'Fri'};
+var _gicentre$elm_vega$VegaLite$Thu = {ctor: 'Thu'};
+var _gicentre$elm_vega$VegaLite$Wed = {ctor: 'Wed'};
+var _gicentre$elm_vega$VegaLite$Tue = {ctor: 'Tue'};
+var _gicentre$elm_vega$VegaLite$Mon = {ctor: 'Mon'};
+var _gicentre$elm_vega$VegaLite$DAggregate = function (a) {
 	return {ctor: 'DAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$DTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$DTimeUnit = function (a) {
 	return {ctor: 'DTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$DBin = function (a) {
+var _gicentre$elm_vega$VegaLite$DBin = function (a) {
 	return {ctor: 'DBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$DmType = function (a) {
+var _gicentre$elm_vega$VegaLite$DmType = function (a) {
 	return {ctor: 'DmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$DName = function (a) {
+var _gicentre$elm_vega$VegaLite$DName = function (a) {
 	return {ctor: 'DName', _0: a};
 };
-var _gicentre$elm_vega$Vega$FHeader = function (a) {
+var _gicentre$elm_vega$VegaLite$FHeader = function (a) {
 	return {ctor: 'FHeader', _0: a};
 };
-var _gicentre$elm_vega$Vega$FTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$FTimeUnit = function (a) {
 	return {ctor: 'FTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$FAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$FAggregate = function (a) {
 	return {ctor: 'FAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$FBin = function (a) {
+var _gicentre$elm_vega$VegaLite$FBin = function (a) {
 	return {ctor: 'FBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$FmType = function (a) {
+var _gicentre$elm_vega$VegaLite$FmType = function (a) {
 	return {ctor: 'FmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$FName = function (a) {
+var _gicentre$elm_vega$VegaLite$FName = function (a) {
 	return {ctor: 'FName', _0: a};
 };
-var _gicentre$elm_vega$Vega$RowBy = function (a) {
+var _gicentre$elm_vega$VegaLite$RowBy = function (a) {
 	return {ctor: 'RowBy', _0: a};
 };
-var _gicentre$elm_vega$Vega$ColumnBy = function (a) {
+var _gicentre$elm_vega$VegaLite$ColumnBy = function (a) {
 	return {ctor: 'ColumnBy', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoUtc = function (a) {
+var _gicentre$elm_vega$VegaLite$FoUtc = function (a) {
 	return {ctor: 'FoUtc', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoDate = function (a) {
+var _gicentre$elm_vega$VegaLite$FoDate = function (a) {
 	return {ctor: 'FoDate', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoBoolean = {ctor: 'FoBoolean'};
-var _gicentre$elm_vega$Vega$FoNumber = {ctor: 'FoNumber'};
-var _gicentre$elm_vega$Vega$FRange = F2(
+var _gicentre$elm_vega$VegaLite$FoBoolean = {ctor: 'FoBoolean'};
+var _gicentre$elm_vega$VegaLite$FoNumber = {ctor: 'FoNumber'};
+var _gicentre$elm_vega$VegaLite$FRange = F2(
 	function (a, b) {
 		return {ctor: 'FRange', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$FOneOf = F2(
+var _gicentre$elm_vega$VegaLite$FOneOf = F2(
 	function (a, b) {
 		return {ctor: 'FOneOf', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$FSelection = function (a) {
+var _gicentre$elm_vega$VegaLite$FSelection = function (a) {
 	return {ctor: 'FSelection', _0: a};
 };
-var _gicentre$elm_vega$Vega$FExpr = function (a) {
+var _gicentre$elm_vega$VegaLite$FExpr = function (a) {
 	return {ctor: 'FExpr', _0: a};
 };
-var _gicentre$elm_vega$Vega$FEqual = F2(
+var _gicentre$elm_vega$VegaLite$FEqual = F2(
 	function (a, b) {
 		return {ctor: 'FEqual', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$DateRange = F2(
+var _gicentre$elm_vega$VegaLite$DateRange = F2(
 	function (a, b) {
 		return {ctor: 'DateRange', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$NumberRange = F2(
+var _gicentre$elm_vega$VegaLite$NumberRange = F2(
 	function (a, b) {
 		return {ctor: 'NumberRange', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$Parse = function (a) {
+var _gicentre$elm_vega$VegaLite$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
-var _gicentre$elm_vega$Vega$TopojsonMesh = function (a) {
+var _gicentre$elm_vega$VegaLite$TopojsonMesh = function (a) {
 	return {ctor: 'TopojsonMesh', _0: a};
 };
-var _gicentre$elm_vega$Vega$TopojsonFeature = function (a) {
+var _gicentre$elm_vega$VegaLite$TopojsonFeature = function (a) {
 	return {ctor: 'TopojsonFeature', _0: a};
 };
-var _gicentre$elm_vega$Vega$TSV = {ctor: 'TSV'};
-var _gicentre$elm_vega$Vega$CSV = {ctor: 'CSV'};
-var _gicentre$elm_vega$Vega$JSON = {ctor: 'JSON'};
-var _gicentre$elm_vega$Vega$W900 = {ctor: 'W900'};
-var _gicentre$elm_vega$Vega$W800 = {ctor: 'W800'};
-var _gicentre$elm_vega$Vega$W700 = {ctor: 'W700'};
-var _gicentre$elm_vega$Vega$W600 = {ctor: 'W600'};
-var _gicentre$elm_vega$Vega$W500 = {ctor: 'W500'};
-var _gicentre$elm_vega$Vega$W400 = {ctor: 'W400'};
-var _gicentre$elm_vega$Vega$W300 = {ctor: 'W300'};
-var _gicentre$elm_vega$Vega$W200 = {ctor: 'W200'};
-var _gicentre$elm_vega$Vega$W100 = {ctor: 'W100'};
-var _gicentre$elm_vega$Vega$Normal = {ctor: 'Normal'};
-var _gicentre$elm_vega$Vega$Lighter = {ctor: 'Lighter'};
-var _gicentre$elm_vega$Vega$Bolder = {ctor: 'Bolder'};
-var _gicentre$elm_vega$Vega$Bold = {ctor: 'Bold'};
-var _gicentre$elm_vega$Vega$AlignRight = {ctor: 'AlignRight'};
-var _gicentre$elm_vega$Vega$AlignLeft = {ctor: 'AlignLeft'};
-var _gicentre$elm_vega$Vega$AlignCenter = {ctor: 'AlignCenter'};
-var _gicentre$elm_vega$Vega$HTitle = function (a) {
+var _gicentre$elm_vega$VegaLite$TSV = {ctor: 'TSV'};
+var _gicentre$elm_vega$VegaLite$CSV = {ctor: 'CSV'};
+var _gicentre$elm_vega$VegaLite$JSON = {ctor: 'JSON'};
+var _gicentre$elm_vega$VegaLite$W900 = {ctor: 'W900'};
+var _gicentre$elm_vega$VegaLite$W800 = {ctor: 'W800'};
+var _gicentre$elm_vega$VegaLite$W700 = {ctor: 'W700'};
+var _gicentre$elm_vega$VegaLite$W600 = {ctor: 'W600'};
+var _gicentre$elm_vega$VegaLite$W500 = {ctor: 'W500'};
+var _gicentre$elm_vega$VegaLite$W400 = {ctor: 'W400'};
+var _gicentre$elm_vega$VegaLite$W300 = {ctor: 'W300'};
+var _gicentre$elm_vega$VegaLite$W200 = {ctor: 'W200'};
+var _gicentre$elm_vega$VegaLite$W100 = {ctor: 'W100'};
+var _gicentre$elm_vega$VegaLite$Normal = {ctor: 'Normal'};
+var _gicentre$elm_vega$VegaLite$Lighter = {ctor: 'Lighter'};
+var _gicentre$elm_vega$VegaLite$Bolder = {ctor: 'Bolder'};
+var _gicentre$elm_vega$VegaLite$Bold = {ctor: 'Bold'};
+var _gicentre$elm_vega$VegaLite$AlignRight = {ctor: 'AlignRight'};
+var _gicentre$elm_vega$VegaLite$AlignLeft = {ctor: 'AlignLeft'};
+var _gicentre$elm_vega$VegaLite$AlignCenter = {ctor: 'AlignCenter'};
+var _gicentre$elm_vega$VegaLite$HTitle = function (a) {
 	return {ctor: 'HTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$HFormat = function (a) {
+var _gicentre$elm_vega$VegaLite$HFormat = function (a) {
 	return {ctor: 'HFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$InPlaceholder = function (a) {
+var _gicentre$elm_vega$VegaLite$InPlaceholder = function (a) {
 	return {ctor: 'InPlaceholder', _0: a};
 };
-var _gicentre$elm_vega$Vega$InStep = function (a) {
+var _gicentre$elm_vega$VegaLite$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$InName = function (a) {
+var _gicentre$elm_vega$VegaLite$InName = function (a) {
 	return {ctor: 'InName', _0: a};
 };
-var _gicentre$elm_vega$Vega$InMax = function (a) {
+var _gicentre$elm_vega$VegaLite$InMax = function (a) {
 	return {ctor: 'InMax', _0: a};
 };
-var _gicentre$elm_vega$Vega$InMin = function (a) {
+var _gicentre$elm_vega$VegaLite$InMin = function (a) {
 	return {ctor: 'InMin', _0: a};
 };
-var _gicentre$elm_vega$Vega$InOptions = function (a) {
+var _gicentre$elm_vega$VegaLite$InOptions = function (a) {
 	return {ctor: 'InOptions', _0: a};
 };
-var _gicentre$elm_vega$Vega$Element = function (a) {
+var _gicentre$elm_vega$VegaLite$Element = function (a) {
 	return {ctor: 'Element', _0: a};
 };
-var _gicentre$elm_vega$Vega$Debounce = function (a) {
+var _gicentre$elm_vega$VegaLite$Debounce = function (a) {
 	return {ctor: 'Debounce', _0: a};
 };
-var _gicentre$elm_vega$Vega$Symbol = {ctor: 'Symbol'};
-var _gicentre$elm_vega$Vega$Gradient = {ctor: 'Gradient'};
-var _gicentre$elm_vega$Vega$LStrings = function (a) {
+var _gicentre$elm_vega$VegaLite$Symbol = {ctor: 'Symbol'};
+var _gicentre$elm_vega$VegaLite$Gradient = {ctor: 'Gradient'};
+var _gicentre$elm_vega$VegaLite$LStrings = function (a) {
 	return {ctor: 'LStrings', _0: a};
 };
-var _gicentre$elm_vega$Vega$LNumbers = function (a) {
+var _gicentre$elm_vega$VegaLite$LNumbers = function (a) {
 	return {ctor: 'LNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$LDateTimes = function (a) {
+var _gicentre$elm_vega$VegaLite$LDateTimes = function (a) {
 	return {ctor: 'LDateTimes', _0: a};
 };
-var _gicentre$elm_vega$Vega$TopRight = {ctor: 'TopRight'};
-var _gicentre$elm_vega$Vega$TopLeft = {ctor: 'TopLeft'};
-var _gicentre$elm_vega$Vega$Right = {ctor: 'Right'};
-var _gicentre$elm_vega$Vega$None = {ctor: 'None'};
-var _gicentre$elm_vega$Vega$Left = {ctor: 'Left'};
-var _gicentre$elm_vega$Vega$BottomRight = {ctor: 'BottomRight'};
-var _gicentre$elm_vega$Vega$BottomLeft = {ctor: 'BottomLeft'};
-var _gicentre$elm_vega$Vega$LZIndex = function (a) {
+var _gicentre$elm_vega$VegaLite$TopRight = {ctor: 'TopRight'};
+var _gicentre$elm_vega$VegaLite$TopLeft = {ctor: 'TopLeft'};
+var _gicentre$elm_vega$VegaLite$Right = {ctor: 'Right'};
+var _gicentre$elm_vega$VegaLite$None = {ctor: 'None'};
+var _gicentre$elm_vega$VegaLite$Left = {ctor: 'Left'};
+var _gicentre$elm_vega$VegaLite$BottomRight = {ctor: 'BottomRight'};
+var _gicentre$elm_vega$VegaLite$BottomLeft = {ctor: 'BottomLeft'};
+var _gicentre$elm_vega$VegaLite$LZIndex = function (a) {
 	return {ctor: 'LZIndex', _0: a};
 };
-var _gicentre$elm_vega$Vega$LValues = function (a) {
+var _gicentre$elm_vega$VegaLite$LValues = function (a) {
 	return {ctor: 'LValues', _0: a};
 };
-var _gicentre$elm_vega$Vega$LType = function (a) {
+var _gicentre$elm_vega$VegaLite$LType = function (a) {
 	return {ctor: 'LType', _0: a};
 };
-var _gicentre$elm_vega$Vega$LTitle = function (a) {
+var _gicentre$elm_vega$VegaLite$LTitle = function (a) {
 	return {ctor: 'LTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$LTickCount = function (a) {
+var _gicentre$elm_vega$VegaLite$LTickCount = function (a) {
 	return {ctor: 'LTickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$LPadding = function (a) {
+var _gicentre$elm_vega$VegaLite$LPadding = function (a) {
 	return {ctor: 'LPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$LOrient = function (a) {
+var _gicentre$elm_vega$VegaLite$LOrient = function (a) {
 	return {ctor: 'LOrient', _0: a};
 };
-var _gicentre$elm_vega$Vega$LOffset = function (a) {
+var _gicentre$elm_vega$VegaLite$LOffset = function (a) {
 	return {ctor: 'LOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$LFormat = function (a) {
+var _gicentre$elm_vega$VegaLite$LFormat = function (a) {
 	return {ctor: 'LFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$LEntryPadding = function (a) {
+var _gicentre$elm_vega$VegaLite$LEntryPadding = function (a) {
 	return {ctor: 'LEntryPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$Tick = {ctor: 'Tick'};
-var _gicentre$elm_vega$Vega$Text = {ctor: 'Text'};
-var _gicentre$elm_vega$Vega$Square = {ctor: 'Square'};
-var _gicentre$elm_vega$Vega$Rule = {ctor: 'Rule'};
-var _gicentre$elm_vega$Vega$Rect = {ctor: 'Rect'};
-var _gicentre$elm_vega$Vega$Point = {ctor: 'Point'};
-var _gicentre$elm_vega$Vega$Line = {ctor: 'Line'};
-var _gicentre$elm_vega$Vega$Circle = {ctor: 'Circle'};
-var _gicentre$elm_vega$Vega$Bar = {ctor: 'Bar'};
-var _gicentre$elm_vega$Vega$Area = {ctor: 'Area'};
-var _gicentre$elm_vega$Vega$Stepwise = {ctor: 'Stepwise'};
-var _gicentre$elm_vega$Vega$StepBefore = {ctor: 'StepBefore'};
-var _gicentre$elm_vega$Vega$StepAfter = {ctor: 'StepAfter'};
-var _gicentre$elm_vega$Vega$Monotone = {ctor: 'Monotone'};
-var _gicentre$elm_vega$Vega$LinearClosed = {ctor: 'LinearClosed'};
-var _gicentre$elm_vega$Vega$Linear = {ctor: 'Linear'};
-var _gicentre$elm_vega$Vega$CardinalOpen = {ctor: 'CardinalOpen'};
-var _gicentre$elm_vega$Vega$CardinalClosed = {ctor: 'CardinalClosed'};
-var _gicentre$elm_vega$Vega$Cardinal = {ctor: 'Cardinal'};
-var _gicentre$elm_vega$Vega$Bundle = {ctor: 'Bundle'};
-var _gicentre$elm_vega$Vega$BasisOpen = {ctor: 'BasisOpen'};
-var _gicentre$elm_vega$Vega$BasisClosed = {ctor: 'BasisClosed'};
-var _gicentre$elm_vega$Vega$Basis = {ctor: 'Basis'};
-var _gicentre$elm_vega$Vega$MBoolean = function (a) {
+var _gicentre$elm_vega$VegaLite$Tick = {ctor: 'Tick'};
+var _gicentre$elm_vega$VegaLite$Text = {ctor: 'Text'};
+var _gicentre$elm_vega$VegaLite$Square = {ctor: 'Square'};
+var _gicentre$elm_vega$VegaLite$Rule = {ctor: 'Rule'};
+var _gicentre$elm_vega$VegaLite$Rect = {ctor: 'Rect'};
+var _gicentre$elm_vega$VegaLite$Point = {ctor: 'Point'};
+var _gicentre$elm_vega$VegaLite$Line = {ctor: 'Line'};
+var _gicentre$elm_vega$VegaLite$Circle = {ctor: 'Circle'};
+var _gicentre$elm_vega$VegaLite$Bar = {ctor: 'Bar'};
+var _gicentre$elm_vega$VegaLite$Area = {ctor: 'Area'};
+var _gicentre$elm_vega$VegaLite$Stepwise = {ctor: 'Stepwise'};
+var _gicentre$elm_vega$VegaLite$StepBefore = {ctor: 'StepBefore'};
+var _gicentre$elm_vega$VegaLite$StepAfter = {ctor: 'StepAfter'};
+var _gicentre$elm_vega$VegaLite$Monotone = {ctor: 'Monotone'};
+var _gicentre$elm_vega$VegaLite$LinearClosed = {ctor: 'LinearClosed'};
+var _gicentre$elm_vega$VegaLite$Linear = {ctor: 'Linear'};
+var _gicentre$elm_vega$VegaLite$CardinalOpen = {ctor: 'CardinalOpen'};
+var _gicentre$elm_vega$VegaLite$CardinalClosed = {ctor: 'CardinalClosed'};
+var _gicentre$elm_vega$VegaLite$Cardinal = {ctor: 'Cardinal'};
+var _gicentre$elm_vega$VegaLite$Bundle = {ctor: 'Bundle'};
+var _gicentre$elm_vega$VegaLite$BasisOpen = {ctor: 'BasisOpen'};
+var _gicentre$elm_vega$VegaLite$BasisClosed = {ctor: 'BasisClosed'};
+var _gicentre$elm_vega$VegaLite$Basis = {ctor: 'Basis'};
+var _gicentre$elm_vega$VegaLite$MBoolean = function (a) {
 	return {ctor: 'MBoolean', _0: a};
 };
-var _gicentre$elm_vega$Vega$MString = function (a) {
+var _gicentre$elm_vega$VegaLite$MString = function (a) {
 	return {ctor: 'MString', _0: a};
 };
-var _gicentre$elm_vega$Vega$MNumber = function (a) {
+var _gicentre$elm_vega$VegaLite$MNumber = function (a) {
 	return {ctor: 'MNumber', _0: a};
 };
-var _gicentre$elm_vega$Vega$MPath = function (a) {
+var _gicentre$elm_vega$VegaLite$MPath = function (a) {
 	return {ctor: 'MPath', _0: a};
 };
-var _gicentre$elm_vega$Vega$MCondition = F3(
+var _gicentre$elm_vega$VegaLite$MCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MCondition', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$MLegend = function (a) {
+var _gicentre$elm_vega$VegaLite$MLegend = function (a) {
 	return {ctor: 'MLegend', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$MAggregate = function (a) {
 	return {ctor: 'MAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$MTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$MTimeUnit = function (a) {
 	return {ctor: 'MTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$MBin = function (a) {
+var _gicentre$elm_vega$VegaLite$MBin = function (a) {
 	return {ctor: 'MBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$MScale = function (a) {
+var _gicentre$elm_vega$VegaLite$MScale = function (a) {
 	return {ctor: 'MScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$MmType = function (a) {
+var _gicentre$elm_vega$VegaLite$MmType = function (a) {
 	return {ctor: 'MmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$MRepeat = function (a) {
+var _gicentre$elm_vega$VegaLite$MRepeat = function (a) {
 	return {ctor: 'MRepeat', _0: a};
 };
-var _gicentre$elm_vega$Vega$MName = function (a) {
+var _gicentre$elm_vega$VegaLite$MName = function (a) {
 	return {ctor: 'MName', _0: a};
 };
-var _gicentre$elm_vega$Vega$Vertical = {ctor: 'Vertical'};
-var _gicentre$elm_vega$Vega$Horizontal = {ctor: 'Horizontal'};
-var _gicentre$elm_vega$Vega$MThickness = function (a) {
+var _gicentre$elm_vega$VegaLite$Vertical = {ctor: 'Vertical'};
+var _gicentre$elm_vega$VegaLite$Horizontal = {ctor: 'Horizontal'};
+var _gicentre$elm_vega$VegaLite$MThickness = function (a) {
 	return {ctor: 'MThickness', _0: a};
 };
-var _gicentre$elm_vega$Vega$MTheta = function (a) {
+var _gicentre$elm_vega$VegaLite$MTheta = function (a) {
 	return {ctor: 'MTheta', _0: a};
 };
-var _gicentre$elm_vega$Vega$MText = function (a) {
+var _gicentre$elm_vega$VegaLite$MText = function (a) {
 	return {ctor: 'MText', _0: a};
 };
-var _gicentre$elm_vega$Vega$MTension = function (a) {
+var _gicentre$elm_vega$VegaLite$MTension = function (a) {
 	return {ctor: 'MTension', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$MStyle = function (a) {
 	return {ctor: 'MStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$MStrokeWidth = function (a) {
 	return {ctor: 'MStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$MStrokeOpacity = function (a) {
 	return {ctor: 'MStrokeOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeDashOffset = function (a) {
+var _gicentre$elm_vega$VegaLite$MStrokeDashOffset = function (a) {
 	return {ctor: 'MStrokeDashOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeDash = function (a) {
+var _gicentre$elm_vega$VegaLite$MStrokeDash = function (a) {
 	return {ctor: 'MStrokeDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStroke = function (a) {
+var _gicentre$elm_vega$VegaLite$MStroke = function (a) {
 	return {ctor: 'MStroke', _0: a};
 };
-var _gicentre$elm_vega$Vega$MSize = function (a) {
+var _gicentre$elm_vega$VegaLite$MSize = function (a) {
 	return {ctor: 'MSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MShortTimeLabels = function (a) {
+var _gicentre$elm_vega$VegaLite$MShortTimeLabels = function (a) {
 	return {ctor: 'MShortTimeLabels', _0: a};
 };
-var _gicentre$elm_vega$Vega$MShape = function (a) {
+var _gicentre$elm_vega$VegaLite$MShape = function (a) {
 	return {ctor: 'MShape', _0: a};
 };
-var _gicentre$elm_vega$Vega$MRadius = function (a) {
+var _gicentre$elm_vega$VegaLite$MRadius = function (a) {
 	return {ctor: 'MRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$MOrient = function (a) {
+var _gicentre$elm_vega$VegaLite$MOrient = function (a) {
 	return {ctor: 'MOrient', _0: a};
 };
-var _gicentre$elm_vega$Vega$MOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$MOpacity = function (a) {
 	return {ctor: 'MOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MInterpolate = function (a) {
+var _gicentre$elm_vega$VegaLite$MInterpolate = function (a) {
 	return {ctor: 'MInterpolate', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontWeight = function (a) {
+var _gicentre$elm_vega$VegaLite$MFontWeight = function (a) {
 	return {ctor: 'MFontWeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontStyle = function (a) {
+var _gicentre$elm_vega$VegaLite$MFontStyle = function (a) {
 	return {ctor: 'MFontStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$MFontSize = function (a) {
 	return {ctor: 'MFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFont = function (a) {
+var _gicentre$elm_vega$VegaLite$MFont = function (a) {
 	return {ctor: 'MFont', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFillOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$MFillOpacity = function (a) {
 	return {ctor: 'MFillOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFilled = function (a) {
+var _gicentre$elm_vega$VegaLite$MFilled = function (a) {
 	return {ctor: 'MFilled', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFill = function (a) {
+var _gicentre$elm_vega$VegaLite$MFill = function (a) {
 	return {ctor: 'MFill', _0: a};
 };
-var _gicentre$elm_vega$Vega$MdY = function (a) {
+var _gicentre$elm_vega$VegaLite$MdY = function (a) {
 	return {ctor: 'MdY', _0: a};
 };
-var _gicentre$elm_vega$Vega$MdX = function (a) {
+var _gicentre$elm_vega$VegaLite$MdX = function (a) {
 	return {ctor: 'MdX', _0: a};
 };
-var _gicentre$elm_vega$Vega$MDiscreteBandSize = function (a) {
+var _gicentre$elm_vega$VegaLite$MDiscreteBandSize = function (a) {
 	return {ctor: 'MDiscreteBandSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MContinuousBandSize = function (a) {
+var _gicentre$elm_vega$VegaLite$MContinuousBandSize = function (a) {
 	return {ctor: 'MContinuousBandSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MColor = function (a) {
+var _gicentre$elm_vega$VegaLite$MColor = function (a) {
 	return {ctor: 'MColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$MClip = function (a) {
+var _gicentre$elm_vega$VegaLite$MClip = function (a) {
 	return {ctor: 'MClip', _0: a};
 };
-var _gicentre$elm_vega$Vega$MBinSpacing = function (a) {
+var _gicentre$elm_vega$VegaLite$MBinSpacing = function (a) {
 	return {ctor: 'MBinSpacing', _0: a};
 };
-var _gicentre$elm_vega$Vega$MBaseline = function (a) {
+var _gicentre$elm_vega$VegaLite$MBaseline = function (a) {
 	return {ctor: 'MBaseline', _0: a};
 };
-var _gicentre$elm_vega$Vega$MBandSize = function (a) {
+var _gicentre$elm_vega$VegaLite$MBandSize = function (a) {
 	return {ctor: 'MBandSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAngle = function (a) {
+var _gicentre$elm_vega$VegaLite$MAngle = function (a) {
 	return {ctor: 'MAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAlign = function (a) {
+var _gicentre$elm_vega$VegaLite$MAlign = function (a) {
 	return {ctor: 'MAlign', _0: a};
 };
-var _gicentre$elm_vega$Vega$Temporal = {ctor: 'Temporal'};
-var _gicentre$elm_vega$Vega$Quantitative = {ctor: 'Quantitative'};
-var _gicentre$elm_vega$Vega$Ordinal = {ctor: 'Ordinal'};
-var _gicentre$elm_vega$Vega$Nominal = {ctor: 'Nominal'};
-var _gicentre$elm_vega$Vega$Dec = {ctor: 'Dec'};
-var _gicentre$elm_vega$Vega$Nov = {ctor: 'Nov'};
-var _gicentre$elm_vega$Vega$Oct = {ctor: 'Oct'};
-var _gicentre$elm_vega$Vega$Sep = {ctor: 'Sep'};
-var _gicentre$elm_vega$Vega$Aug = {ctor: 'Aug'};
-var _gicentre$elm_vega$Vega$Jul = {ctor: 'Jul'};
-var _gicentre$elm_vega$Vega$Jun = {ctor: 'Jun'};
-var _gicentre$elm_vega$Vega$May = {ctor: 'May'};
-var _gicentre$elm_vega$Vega$Apr = {ctor: 'Apr'};
-var _gicentre$elm_vega$Vega$Mar = {ctor: 'Mar'};
-var _gicentre$elm_vega$Vega$Feb = {ctor: 'Feb'};
-var _gicentre$elm_vega$Vega$Jan = {ctor: 'Jan'};
-var _gicentre$elm_vega$Vega$VarianceP = {ctor: 'VarianceP'};
-var _gicentre$elm_vega$Vega$Variance = {ctor: 'Variance'};
-var _gicentre$elm_vega$Vega$Valid = {ctor: 'Valid'};
-var _gicentre$elm_vega$Vega$Sum = {ctor: 'Sum'};
-var _gicentre$elm_vega$Vega$StdevP = {ctor: 'StdevP'};
-var _gicentre$elm_vega$Vega$Stdev = {ctor: 'Stdev'};
-var _gicentre$elm_vega$Vega$Stderr = {ctor: 'Stderr'};
-var _gicentre$elm_vega$Vega$Q3 = {ctor: 'Q3'};
-var _gicentre$elm_vega$Vega$Q1 = {ctor: 'Q1'};
-var _gicentre$elm_vega$Vega$Missing = {ctor: 'Missing'};
-var _gicentre$elm_vega$Vega$Min = {ctor: 'Min'};
-var _gicentre$elm_vega$Vega$Median = {ctor: 'Median'};
-var _gicentre$elm_vega$Vega$Mean = {ctor: 'Mean'};
-var _gicentre$elm_vega$Vega$Max = {ctor: 'Max'};
-var _gicentre$elm_vega$Vega$Distinct = {ctor: 'Distinct'};
-var _gicentre$elm_vega$Vega$Count = {ctor: 'Count'};
-var _gicentre$elm_vega$Vega$CI1 = {ctor: 'CI1'};
-var _gicentre$elm_vega$Vega$CI0 = {ctor: 'CI0'};
-var _gicentre$elm_vega$Vega$Average = {ctor: 'Average'};
-var _gicentre$elm_vega$Vega$ArgMin = {ctor: 'ArgMin'};
-var _gicentre$elm_vega$Vega$ArgMax = {ctor: 'ArgMax'};
-var _gicentre$elm_vega$Vega$OSort = function (a) {
+var _gicentre$elm_vega$VegaLite$Temporal = {ctor: 'Temporal'};
+var _gicentre$elm_vega$VegaLite$Quantitative = {ctor: 'Quantitative'};
+var _gicentre$elm_vega$VegaLite$Ordinal = {ctor: 'Ordinal'};
+var _gicentre$elm_vega$VegaLite$Nominal = {ctor: 'Nominal'};
+var _gicentre$elm_vega$VegaLite$Dec = {ctor: 'Dec'};
+var _gicentre$elm_vega$VegaLite$Nov = {ctor: 'Nov'};
+var _gicentre$elm_vega$VegaLite$Oct = {ctor: 'Oct'};
+var _gicentre$elm_vega$VegaLite$Sep = {ctor: 'Sep'};
+var _gicentre$elm_vega$VegaLite$Aug = {ctor: 'Aug'};
+var _gicentre$elm_vega$VegaLite$Jul = {ctor: 'Jul'};
+var _gicentre$elm_vega$VegaLite$Jun = {ctor: 'Jun'};
+var _gicentre$elm_vega$VegaLite$May = {ctor: 'May'};
+var _gicentre$elm_vega$VegaLite$Apr = {ctor: 'Apr'};
+var _gicentre$elm_vega$VegaLite$Mar = {ctor: 'Mar'};
+var _gicentre$elm_vega$VegaLite$Feb = {ctor: 'Feb'};
+var _gicentre$elm_vega$VegaLite$Jan = {ctor: 'Jan'};
+var _gicentre$elm_vega$VegaLite$VarianceP = {ctor: 'VarianceP'};
+var _gicentre$elm_vega$VegaLite$Variance = {ctor: 'Variance'};
+var _gicentre$elm_vega$VegaLite$Valid = {ctor: 'Valid'};
+var _gicentre$elm_vega$VegaLite$Sum = {ctor: 'Sum'};
+var _gicentre$elm_vega$VegaLite$StdevP = {ctor: 'StdevP'};
+var _gicentre$elm_vega$VegaLite$Stdev = {ctor: 'Stdev'};
+var _gicentre$elm_vega$VegaLite$Stderr = {ctor: 'Stderr'};
+var _gicentre$elm_vega$VegaLite$Q3 = {ctor: 'Q3'};
+var _gicentre$elm_vega$VegaLite$Q1 = {ctor: 'Q1'};
+var _gicentre$elm_vega$VegaLite$Missing = {ctor: 'Missing'};
+var _gicentre$elm_vega$VegaLite$Min = {ctor: 'Min'};
+var _gicentre$elm_vega$VegaLite$Median = {ctor: 'Median'};
+var _gicentre$elm_vega$VegaLite$Mean = {ctor: 'Mean'};
+var _gicentre$elm_vega$VegaLite$Max = {ctor: 'Max'};
+var _gicentre$elm_vega$VegaLite$Distinct = {ctor: 'Distinct'};
+var _gicentre$elm_vega$VegaLite$Count = {ctor: 'Count'};
+var _gicentre$elm_vega$VegaLite$CI1 = {ctor: 'CI1'};
+var _gicentre$elm_vega$VegaLite$CI0 = {ctor: 'CI0'};
+var _gicentre$elm_vega$VegaLite$Average = {ctor: 'Average'};
+var _gicentre$elm_vega$VegaLite$ArgMin = {ctor: 'ArgMin'};
+var _gicentre$elm_vega$VegaLite$ArgMax = {ctor: 'ArgMax'};
+var _gicentre$elm_vega$VegaLite$OSort = function (a) {
 	return {ctor: 'OSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$OTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$OTimeUnit = function (a) {
 	return {ctor: 'OTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$OAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$OAggregate = function (a) {
 	return {ctor: 'OAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$OBin = function (a) {
+var _gicentre$elm_vega$VegaLite$OBin = function (a) {
 	return {ctor: 'OBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$OmType = function (a) {
+var _gicentre$elm_vega$VegaLite$OmType = function (a) {
 	return {ctor: 'OmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$ORepeat = function (a) {
+var _gicentre$elm_vega$VegaLite$ORepeat = function (a) {
 	return {ctor: 'ORepeat', _0: a};
 };
-var _gicentre$elm_vega$Vega$OName = function (a) {
+var _gicentre$elm_vega$VegaLite$OName = function (a) {
 	return {ctor: 'OName', _0: a};
 };
-var _gicentre$elm_vega$Vega$OGreedy = {ctor: 'OGreedy'};
-var _gicentre$elm_vega$Vega$OParity = {ctor: 'OParity'};
-var _gicentre$elm_vega$Vega$ONone = {ctor: 'ONone'};
-var _gicentre$elm_vega$Vega$Y2 = {ctor: 'Y2'};
-var _gicentre$elm_vega$Vega$X2 = {ctor: 'X2'};
-var _gicentre$elm_vega$Vega$Y = {ctor: 'Y'};
-var _gicentre$elm_vega$Vega$X = {ctor: 'X'};
-var _gicentre$elm_vega$Vega$PStack = function (a) {
+var _gicentre$elm_vega$VegaLite$OGreedy = {ctor: 'OGreedy'};
+var _gicentre$elm_vega$VegaLite$OParity = {ctor: 'OParity'};
+var _gicentre$elm_vega$VegaLite$ONone = {ctor: 'ONone'};
+var _gicentre$elm_vega$VegaLite$Y2 = {ctor: 'Y2'};
+var _gicentre$elm_vega$VegaLite$X2 = {ctor: 'X2'};
+var _gicentre$elm_vega$VegaLite$Y = {ctor: 'Y'};
+var _gicentre$elm_vega$VegaLite$X = {ctor: 'X'};
+var _gicentre$elm_vega$VegaLite$PStack = function (a) {
 	return {ctor: 'PStack', _0: a};
 };
-var _gicentre$elm_vega$Vega$PSort = function (a) {
+var _gicentre$elm_vega$VegaLite$PSort = function (a) {
 	return {ctor: 'PSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$PAxis = function (a) {
+var _gicentre$elm_vega$VegaLite$PAxis = function (a) {
 	return {ctor: 'PAxis', _0: a};
 };
-var _gicentre$elm_vega$Vega$PScale = function (a) {
+var _gicentre$elm_vega$VegaLite$PScale = function (a) {
 	return {ctor: 'PScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$PAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
 	return {ctor: 'PAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$PTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
 	return {ctor: 'PTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$PBin = function (a) {
+var _gicentre$elm_vega$VegaLite$PBin = function (a) {
 	return {ctor: 'PBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$PmType = function (a) {
+var _gicentre$elm_vega$VegaLite$PmType = function (a) {
 	return {ctor: 'PmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$PRepeat = function (a) {
+var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
-var _gicentre$elm_vega$Vega$PName = function (a) {
+var _gicentre$elm_vega$VegaLite$PName = function (a) {
 	return {ctor: 'PName', _0: a};
 };
-var _gicentre$elm_vega$Vega$Selection = {ctor: 'Selection'};
-var _gicentre$elm_vega$Vega$selection = function (sels) {
+var _gicentre$elm_vega$VegaLite$VLSelection = {ctor: 'VLSelection'};
+var _gicentre$elm_vega$VegaLite$selection = function (sels) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Selection,
+		_0: _gicentre$elm_vega$VegaLite$VLSelection,
 		_1: _elm_lang$core$Json_Encode$object(sels)
 	};
 };
-var _gicentre$elm_vega$Vega$Config = {ctor: 'Config'};
-var _gicentre$elm_vega$Vega$configure = function (configs) {
+var _gicentre$elm_vega$VegaLite$VLConfig = {ctor: 'VLConfig'};
+var _gicentre$elm_vega$VegaLite$configure = function (configs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Config,
+		_0: _gicentre$elm_vega$VegaLite$VLConfig,
 		_1: _elm_lang$core$Json_Encode$object(configs)
 	};
 };
-var _gicentre$elm_vega$Vega$Resolve = {ctor: 'Resolve'};
-var _gicentre$elm_vega$Vega$resolve = function (res) {
+var _gicentre$elm_vega$VegaLite$VLResolve = {ctor: 'VLResolve'};
+var _gicentre$elm_vega$VegaLite$resolve = function (res) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Resolve,
+		_0: _gicentre$elm_vega$VegaLite$VLResolve,
 		_1: _elm_lang$core$Json_Encode$object(res)
 	};
 };
-var _gicentre$elm_vega$Vega$Spec = {ctor: 'Spec'};
-var _gicentre$elm_vega$Vega$specification = function (spec) {
-	return {ctor: '_Tuple2', _0: _gicentre$elm_vega$Vega$Spec, _1: spec};
+var _gicentre$elm_vega$VegaLite$VLSpec = {ctor: 'VLSpec'};
+var _gicentre$elm_vega$VegaLite$specification = function (spec) {
+	return {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$VLSpec, _1: spec};
 };
-var _gicentre$elm_vega$Vega$Facet = {ctor: 'Facet'};
-var _gicentre$elm_vega$Vega$facet = function (fMaps) {
+var _gicentre$elm_vega$VegaLite$VLFacet = {ctor: 'VLFacet'};
+var _gicentre$elm_vega$VegaLite$facet = function (fMaps) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Facet,
+		_0: _gicentre$elm_vega$VegaLite$VLFacet,
 		_1: _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetMappingProperty, fMaps))
+			A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$facetMappingProperty, fMaps))
 	};
 };
-var _gicentre$elm_vega$Vega$Repeat = {ctor: 'Repeat'};
-var _gicentre$elm_vega$Vega$repeat = function (fields) {
+var _gicentre$elm_vega$VegaLite$VLRepeat = {ctor: 'VLRepeat'};
+var _gicentre$elm_vega$VegaLite$repeat = function (fields) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Repeat,
+		_0: _gicentre$elm_vega$VegaLite$VLRepeat,
 		_1: _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$repeatFields, fields))
+			A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$repeatFields, fields))
 	};
 };
-var _gicentre$elm_vega$Vega$VConcat = {ctor: 'VConcat'};
-var _gicentre$elm_vega$Vega$vConcat = function (specs) {
+var _gicentre$elm_vega$VegaLite$VLVConcat = {ctor: 'VLVConcat'};
+var _gicentre$elm_vega$VegaLite$vConcat = function (specs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VConcat,
+		_0: _gicentre$elm_vega$VegaLite$VLVConcat,
 		_1: _elm_lang$core$Json_Encode$list(specs)
 	};
 };
-var _gicentre$elm_vega$Vega$HConcat = {ctor: 'HConcat'};
-var _gicentre$elm_vega$Vega$hConcat = function (specs) {
+var _gicentre$elm_vega$VegaLite$VLHConcat = {ctor: 'VLHConcat'};
+var _gicentre$elm_vega$VegaLite$hConcat = function (specs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$HConcat,
+		_0: _gicentre$elm_vega$VegaLite$VLHConcat,
 		_1: _elm_lang$core$Json_Encode$list(specs)
 	};
 };
-var _gicentre$elm_vega$Vega$Layer = {ctor: 'Layer'};
-var _gicentre$elm_vega$Vega$layer = function (specs) {
+var _gicentre$elm_vega$VegaLite$VLLayer = {ctor: 'VLLayer'};
+var _gicentre$elm_vega$VegaLite$layer = function (specs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Layer,
+		_0: _gicentre$elm_vega$VegaLite$VLLayer,
 		_1: _elm_lang$core$Json_Encode$list(specs)
 	};
 };
-var _gicentre$elm_vega$Vega$Encoding = {ctor: 'Encoding'};
-var _gicentre$elm_vega$Vega$encoding = function (channels) {
+var _gicentre$elm_vega$VegaLite$VLEncoding = {ctor: 'VLEncoding'};
+var _gicentre$elm_vega$VegaLite$encoding = function (channels) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Encoding,
+		_0: _gicentre$elm_vega$VegaLite$VLEncoding,
 		_1: _elm_lang$core$Json_Encode$object(channels)
 	};
 };
-var _gicentre$elm_vega$Vega$Transform = {ctor: 'Transform'};
-var _gicentre$elm_vega$Vega$transform = function (transforms) {
+var _gicentre$elm_vega$VegaLite$VLTransform = {ctor: 'VLTransform'};
+var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 	var assemble = function (_p110) {
 		var _p111 = _p110;
 		var _p119 = _p111._1;
@@ -11054,28 +11054,28 @@ var _gicentre$elm_vega$Vega$transform = function (transforms) {
 					});
 		}
 	};
-	return _elm_lang$core$List$isEmpty(transforms) ? {ctor: '_Tuple2', _0: _gicentre$elm_vega$Vega$Transform, _1: _elm_lang$core$Json_Encode$null} : {
+	return _elm_lang$core$List$isEmpty(transforms) ? {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$VLTransform, _1: _elm_lang$core$Json_Encode$null} : {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Transform,
+		_0: _gicentre$elm_vega$VegaLite$VLTransform,
 		_1: _elm_lang$core$Json_Encode$list(
 			A2(_elm_lang$core$List$map, assemble, transforms))
 	};
 };
-var _gicentre$elm_vega$Vega$Mark = {ctor: 'Mark'};
-var _gicentre$elm_vega$Vega$mark = F2(
+var _gicentre$elm_vega$VegaLite$VLMark = {ctor: 'VLMark'};
+var _gicentre$elm_vega$VegaLite$mark = F2(
 	function (mark, mProps) {
 		var _p120 = mProps;
 		if (_p120.ctor === '[]') {
 			return {
 				ctor: '_Tuple2',
-				_0: _gicentre$elm_vega$Vega$Mark,
+				_0: _gicentre$elm_vega$VegaLite$VLMark,
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$markLabel(mark))
+					_gicentre$elm_vega$VegaLite$markLabel(mark))
 			};
 		} else {
 			return {
 				ctor: '_Tuple2',
-				_0: _gicentre$elm_vega$Vega$Mark,
+				_0: _gicentre$elm_vega$VegaLite$VLMark,
 				_1: _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
@@ -11083,26 +11083,26 @@ var _gicentre$elm_vega$Vega$mark = F2(
 							ctor: '_Tuple2',
 							_0: 'type',
 							_1: _elm_lang$core$Json_Encode$string(
-								_gicentre$elm_vega$Vega$markLabel(mark))
+								_gicentre$elm_vega$VegaLite$markLabel(mark))
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, mProps)
+						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, mProps)
 					})
 			};
 		}
 	});
-var _gicentre$elm_vega$Vega$Data = {ctor: 'Data'};
-var _gicentre$elm_vega$Vega$dataFromColumns = F2(
+var _gicentre$elm_vega$VegaLite$VLData = {ctor: 'VLData'};
+var _gicentre$elm_vega$VegaLite$dataFromColumns = F2(
 	function (fmts, cols) {
 		var dataArray = _elm_lang$core$Json_Encode$list(
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Encode$object,
-				_gicentre$elm_vega$Vega$transpose(cols)));
+				_gicentre$elm_vega$VegaLite$transpose(cols)));
 		return _elm_lang$core$Native_Utils.eq(
 			fmts,
 			{ctor: '[]'}) ? {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11111,7 +11111,7 @@ var _gicentre$elm_vega$Vega$dataFromColumns = F2(
 				})
 		} : {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11122,20 +11122,20 @@ var _gicentre$elm_vega$Vega$dataFromColumns = F2(
 							ctor: '_Tuple2',
 							_0: 'format',
 							_1: _elm_lang$core$Json_Encode$object(
-								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$format, fmts))
+								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$format, fmts))
 						},
 						_1: {ctor: '[]'}
 					}
 				})
 		};
 	});
-var _gicentre$elm_vega$Vega$dataFromRows = F2(
+var _gicentre$elm_vega$VegaLite$dataFromRows = F2(
 	function (fmts, rows) {
 		return _elm_lang$core$Native_Utils.eq(
 			fmts,
 			{ctor: '[]'}) ? {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11148,7 +11148,7 @@ var _gicentre$elm_vega$Vega$dataFromRows = F2(
 				})
 		} : {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11163,20 +11163,20 @@ var _gicentre$elm_vega$Vega$dataFromRows = F2(
 							ctor: '_Tuple2',
 							_0: 'format',
 							_1: _elm_lang$core$Json_Encode$object(
-								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$format, fmts))
+								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$format, fmts))
 						},
 						_1: {ctor: '[]'}
 					}
 				})
 		};
 	});
-var _gicentre$elm_vega$Vega$dataFromUrl = F2(
+var _gicentre$elm_vega$VegaLite$dataFromUrl = F2(
 	function (url, fmts) {
 		return _elm_lang$core$Native_Utils.eq(
 			fmts,
 			{ctor: '[]'}) ? {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11189,7 +11189,7 @@ var _gicentre$elm_vega$Vega$dataFromUrl = F2(
 				})
 		} : {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Vega$Data,
+			_0: _gicentre$elm_vega$VegaLite$VLData,
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -11204,251 +11204,251 @@ var _gicentre$elm_vega$Vega$dataFromUrl = F2(
 							ctor: '_Tuple2',
 							_0: 'format',
 							_1: _elm_lang$core$Json_Encode$object(
-								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$format, fmts))
+								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$format, fmts))
 						},
 						_1: {ctor: '[]'}
 					}
 				})
 		};
 	});
-var _gicentre$elm_vega$Vega$Height = {ctor: 'Height'};
-var _gicentre$elm_vega$Vega$height = function (h) {
+var _gicentre$elm_vega$VegaLite$VLHeight = {ctor: 'VLHeight'};
+var _gicentre$elm_vega$VegaLite$height = function (h) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Height,
+		_0: _gicentre$elm_vega$VegaLite$VLHeight,
 		_1: _elm_lang$core$Json_Encode$float(h)
 	};
 };
-var _gicentre$elm_vega$Vega$Width = {ctor: 'Width'};
-var _gicentre$elm_vega$Vega$width = function (w) {
+var _gicentre$elm_vega$VegaLite$VLWidth = {ctor: 'VLWidth'};
+var _gicentre$elm_vega$VegaLite$width = function (w) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Width,
+		_0: _gicentre$elm_vega$VegaLite$VLWidth,
 		_1: _elm_lang$core$Json_Encode$float(w)
 	};
 };
-var _gicentre$elm_vega$Vega$Title = {ctor: 'Title'};
-var _gicentre$elm_vega$Vega$title = function (s) {
+var _gicentre$elm_vega$VegaLite$VLTitle = {ctor: 'VLTitle'};
+var _gicentre$elm_vega$VegaLite$title = function (s) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Title,
+		_0: _gicentre$elm_vega$VegaLite$VLTitle,
 		_1: _elm_lang$core$Json_Encode$string(s)
 	};
 };
-var _gicentre$elm_vega$Vega$Description = {ctor: 'Description'};
-var _gicentre$elm_vega$Vega$description = function (s) {
+var _gicentre$elm_vega$VegaLite$VLDescription = {ctor: 'VLDescription'};
+var _gicentre$elm_vega$VegaLite$description = function (s) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Description,
+		_0: _gicentre$elm_vega$VegaLite$VLDescription,
 		_1: _elm_lang$core$Json_Encode$string(s)
 	};
 };
-var _gicentre$elm_vega$Vega$Name = {ctor: 'Name'};
-var _gicentre$elm_vega$Vega$name = function (s) {
+var _gicentre$elm_vega$VegaLite$VLName = {ctor: 'VLName'};
+var _gicentre$elm_vega$VegaLite$name = function (s) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$Name,
+		_0: _gicentre$elm_vega$VegaLite$VLName,
 		_1: _elm_lang$core$Json_Encode$string(s)
 	};
 };
-var _gicentre$elm_vega$Vega$RSymbol = function (a) {
+var _gicentre$elm_vega$VegaLite$RSymbol = function (a) {
 	return {ctor: 'RSymbol', _0: a};
 };
-var _gicentre$elm_vega$Vega$RRamp = function (a) {
+var _gicentre$elm_vega$VegaLite$RRamp = function (a) {
 	return {ctor: 'RRamp', _0: a};
 };
-var _gicentre$elm_vega$Vega$ROrdinal = function (a) {
+var _gicentre$elm_vega$VegaLite$ROrdinal = function (a) {
 	return {ctor: 'ROrdinal', _0: a};
 };
-var _gicentre$elm_vega$Vega$RHeatmap = function (a) {
+var _gicentre$elm_vega$VegaLite$RHeatmap = function (a) {
 	return {ctor: 'RHeatmap', _0: a};
 };
-var _gicentre$elm_vega$Vega$RDiverging = function (a) {
+var _gicentre$elm_vega$VegaLite$RDiverging = function (a) {
 	return {ctor: 'RDiverging', _0: a};
 };
-var _gicentre$elm_vega$Vega$RCategory = function (a) {
+var _gicentre$elm_vega$VegaLite$RCategory = function (a) {
 	return {ctor: 'RCategory', _0: a};
 };
-var _gicentre$elm_vega$Vega$ColumnFields = function (a) {
+var _gicentre$elm_vega$VegaLite$ColumnFields = function (a) {
 	return {ctor: 'ColumnFields', _0: a};
 };
-var _gicentre$elm_vega$Vega$RowFields = function (a) {
+var _gicentre$elm_vega$VegaLite$RowFields = function (a) {
 	return {ctor: 'RowFields', _0: a};
 };
-var _gicentre$elm_vega$Vega$Independent = {ctor: 'Independent'};
-var _gicentre$elm_vega$Vega$Shared = {ctor: 'Shared'};
-var _gicentre$elm_vega$Vega$RScale = function (a) {
+var _gicentre$elm_vega$VegaLite$Independent = {ctor: 'Independent'};
+var _gicentre$elm_vega$VegaLite$Shared = {ctor: 'Shared'};
+var _gicentre$elm_vega$VegaLite$RScale = function (a) {
 	return {ctor: 'RScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$RLegend = function (a) {
+var _gicentre$elm_vega$VegaLite$RLegend = function (a) {
 	return {ctor: 'RLegend', _0: a};
 };
-var _gicentre$elm_vega$Vega$RAxis = function (a) {
+var _gicentre$elm_vega$VegaLite$RAxis = function (a) {
 	return {ctor: 'RAxis', _0: a};
 };
-var _gicentre$elm_vega$Vega$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
-var _gicentre$elm_vega$Vega$ScBinLinear = {ctor: 'ScBinLinear'};
-var _gicentre$elm_vega$Vega$ScPoint = {ctor: 'ScPoint'};
-var _gicentre$elm_vega$Vega$ScBand = {ctor: 'ScBand'};
-var _gicentre$elm_vega$Vega$ScOrdinal = {ctor: 'ScOrdinal'};
-var _gicentre$elm_vega$Vega$ScSequential = {ctor: 'ScSequential'};
-var _gicentre$elm_vega$Vega$ScUtc = {ctor: 'ScUtc'};
-var _gicentre$elm_vega$Vega$ScTime = {ctor: 'ScTime'};
-var _gicentre$elm_vega$Vega$ScLog = {ctor: 'ScLog'};
-var _gicentre$elm_vega$Vega$ScSqrt = {ctor: 'ScSqrt'};
-var _gicentre$elm_vega$Vega$ScPow = {ctor: 'ScPow'};
-var _gicentre$elm_vega$Vega$ScLinear = {ctor: 'ScLinear'};
-var _gicentre$elm_vega$Vega$SCUseUnaggregatedDomain = function (a) {
+var _gicentre$elm_vega$VegaLite$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
+var _gicentre$elm_vega$VegaLite$ScBinLinear = {ctor: 'ScBinLinear'};
+var _gicentre$elm_vega$VegaLite$ScPoint = {ctor: 'ScPoint'};
+var _gicentre$elm_vega$VegaLite$ScBand = {ctor: 'ScBand'};
+var _gicentre$elm_vega$VegaLite$ScOrdinal = {ctor: 'ScOrdinal'};
+var _gicentre$elm_vega$VegaLite$ScSequential = {ctor: 'ScSequential'};
+var _gicentre$elm_vega$VegaLite$ScUtc = {ctor: 'ScUtc'};
+var _gicentre$elm_vega$VegaLite$ScTime = {ctor: 'ScTime'};
+var _gicentre$elm_vega$VegaLite$ScLog = {ctor: 'ScLog'};
+var _gicentre$elm_vega$VegaLite$ScSqrt = {ctor: 'ScSqrt'};
+var _gicentre$elm_vega$VegaLite$ScPow = {ctor: 'ScPow'};
+var _gicentre$elm_vega$VegaLite$ScLinear = {ctor: 'ScLinear'};
+var _gicentre$elm_vega$VegaLite$SCUseUnaggregatedDomain = function (a) {
 	return {ctor: 'SCUseUnaggregatedDomain', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCTextXRangeStep = function (a) {
+var _gicentre$elm_vega$VegaLite$SCTextXRangeStep = function (a) {
 	return {ctor: 'SCTextXRangeStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCRound = function (a) {
+var _gicentre$elm_vega$VegaLite$SCRound = function (a) {
 	return {ctor: 'SCRound', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCRangeStep = function (a) {
+var _gicentre$elm_vega$VegaLite$SCRangeStep = function (a) {
 	return {ctor: 'SCRangeStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCPointPadding = function (a) {
+var _gicentre$elm_vega$VegaLite$SCPointPadding = function (a) {
 	return {ctor: 'SCPointPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMinStrokeWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMinStrokeWidth = function (a) {
 	return {ctor: 'SCMinStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMaxStrokeWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMaxStrokeWidth = function (a) {
 	return {ctor: 'SCMaxStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMinSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMinSize = function (a) {
 	return {ctor: 'SCMinSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMaxSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMaxSize = function (a) {
 	return {ctor: 'SCMaxSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMinOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMinOpacity = function (a) {
 	return {ctor: 'SCMinOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMaxOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMaxOpacity = function (a) {
 	return {ctor: 'SCMaxOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMinFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMinFontSize = function (a) {
 	return {ctor: 'SCMinFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMaxFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMaxFontSize = function (a) {
 	return {ctor: 'SCMaxFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMinBandSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMinBandSize = function (a) {
 	return {ctor: 'SCMinBandSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCMaxBandSize = function (a) {
+var _gicentre$elm_vega$VegaLite$SCMaxBandSize = function (a) {
 	return {ctor: 'SCMaxBandSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCClamp = function (a) {
+var _gicentre$elm_vega$VegaLite$SCClamp = function (a) {
 	return {ctor: 'SCClamp', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCBandPaddingOuter = function (a) {
+var _gicentre$elm_vega$VegaLite$SCBandPaddingOuter = function (a) {
 	return {ctor: 'SCBandPaddingOuter', _0: a};
 };
-var _gicentre$elm_vega$Vega$SCBandPaddingInner = function (a) {
+var _gicentre$elm_vega$VegaLite$SCBandPaddingInner = function (a) {
 	return {ctor: 'SCBandPaddingInner', _0: a};
 };
-var _gicentre$elm_vega$Vega$Unaggregated = {ctor: 'Unaggregated'};
-var _gicentre$elm_vega$Vega$DSelection = function (a) {
+var _gicentre$elm_vega$VegaLite$Unaggregated = {ctor: 'Unaggregated'};
+var _gicentre$elm_vega$VegaLite$DSelection = function (a) {
 	return {ctor: 'DSelection', _0: a};
 };
-var _gicentre$elm_vega$Vega$DDateTimes = function (a) {
+var _gicentre$elm_vega$VegaLite$DDateTimes = function (a) {
 	return {ctor: 'DDateTimes', _0: a};
 };
-var _gicentre$elm_vega$Vega$DStrings = function (a) {
+var _gicentre$elm_vega$VegaLite$DStrings = function (a) {
 	return {ctor: 'DStrings', _0: a};
 };
-var _gicentre$elm_vega$Vega$DNumbers = function (a) {
+var _gicentre$elm_vega$VegaLite$DNumbers = function (a) {
 	return {ctor: 'DNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$NTickCount = function (a) {
+var _gicentre$elm_vega$VegaLite$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$IsNice = function (a) {
+var _gicentre$elm_vega$VegaLite$IsNice = function (a) {
 	return {ctor: 'IsNice', _0: a};
 };
-var _gicentre$elm_vega$Vega$NInterval = F2(
+var _gicentre$elm_vega$VegaLite$NInterval = F2(
 	function (a, b) {
 		return {ctor: 'NInterval', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$NYear = {ctor: 'NYear'};
-var _gicentre$elm_vega$Vega$NMonth = {ctor: 'NMonth'};
-var _gicentre$elm_vega$Vega$NWeek = {ctor: 'NWeek'};
-var _gicentre$elm_vega$Vega$NDay = {ctor: 'NDay'};
-var _gicentre$elm_vega$Vega$NHour = {ctor: 'NHour'};
-var _gicentre$elm_vega$Vega$NMinute = {ctor: 'NMinute'};
-var _gicentre$elm_vega$Vega$NSecond = {ctor: 'NSecond'};
-var _gicentre$elm_vega$Vega$NMillisecond = {ctor: 'NMillisecond'};
-var _gicentre$elm_vega$Vega$SReverse = function (a) {
+var _gicentre$elm_vega$VegaLite$NYear = {ctor: 'NYear'};
+var _gicentre$elm_vega$VegaLite$NMonth = {ctor: 'NMonth'};
+var _gicentre$elm_vega$VegaLite$NWeek = {ctor: 'NWeek'};
+var _gicentre$elm_vega$VegaLite$NDay = {ctor: 'NDay'};
+var _gicentre$elm_vega$VegaLite$NHour = {ctor: 'NHour'};
+var _gicentre$elm_vega$VegaLite$NMinute = {ctor: 'NMinute'};
+var _gicentre$elm_vega$VegaLite$NSecond = {ctor: 'NSecond'};
+var _gicentre$elm_vega$VegaLite$NMillisecond = {ctor: 'NMillisecond'};
+var _gicentre$elm_vega$VegaLite$SReverse = function (a) {
 	return {ctor: 'SReverse', _0: a};
 };
-var _gicentre$elm_vega$Vega$SZero = function (a) {
+var _gicentre$elm_vega$VegaLite$SZero = function (a) {
 	return {ctor: 'SZero', _0: a};
 };
-var _gicentre$elm_vega$Vega$SNice = function (a) {
+var _gicentre$elm_vega$VegaLite$SNice = function (a) {
 	return {ctor: 'SNice', _0: a};
 };
-var _gicentre$elm_vega$Vega$SInterpolate = function (a) {
+var _gicentre$elm_vega$VegaLite$SInterpolate = function (a) {
 	return {ctor: 'SInterpolate', _0: a};
 };
-var _gicentre$elm_vega$Vega$SClamp = function (a) {
+var _gicentre$elm_vega$VegaLite$SClamp = function (a) {
 	return {ctor: 'SClamp', _0: a};
 };
-var _gicentre$elm_vega$Vega$SRound = function (a) {
+var _gicentre$elm_vega$VegaLite$SRound = function (a) {
 	return {ctor: 'SRound', _0: a};
 };
-var _gicentre$elm_vega$Vega$SRangeStep = function (a) {
+var _gicentre$elm_vega$VegaLite$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPaddingOuter = function (a) {
+var _gicentre$elm_vega$VegaLite$SPaddingOuter = function (a) {
 	return {ctor: 'SPaddingOuter', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPaddingInner = function (a) {
+var _gicentre$elm_vega$VegaLite$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPadding = function (a) {
+var _gicentre$elm_vega$VegaLite$SPadding = function (a) {
 	return {ctor: 'SPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$SScheme = F2(
+var _gicentre$elm_vega$VegaLite$SScheme = F2(
 	function (a, b) {
 		return {ctor: 'SScheme', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$SRange = function (a) {
+var _gicentre$elm_vega$VegaLite$SRange = function (a) {
 	return {ctor: 'SRange', _0: a};
 };
-var _gicentre$elm_vega$Vega$SDomain = function (a) {
+var _gicentre$elm_vega$VegaLite$SDomain = function (a) {
 	return {ctor: 'SDomain', _0: a};
 };
-var _gicentre$elm_vega$Vega$SType = function (a) {
+var _gicentre$elm_vega$VegaLite$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
-var _gicentre$elm_vega$Vega$RName = function (a) {
+var _gicentre$elm_vega$VegaLite$RName = function (a) {
 	return {ctor: 'RName', _0: a};
 };
-var _gicentre$elm_vega$Vega$RStrings = function (a) {
+var _gicentre$elm_vega$VegaLite$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
-var _gicentre$elm_vega$Vega$categoricalDomainMap = function (scaleDomainPairs) {
+var _gicentre$elm_vega$VegaLite$categoricalDomainMap = function (scaleDomainPairs) {
 	var _p121 = _elm_lang$core$List$unzip(scaleDomainPairs);
 	var domain = _p121._0;
 	var range = _p121._1;
 	return {
 		ctor: '::',
-		_0: _gicentre$elm_vega$Vega$SDomain(
-			_gicentre$elm_vega$Vega$DStrings(domain)),
+		_0: _gicentre$elm_vega$VegaLite$SDomain(
+			_gicentre$elm_vega$VegaLite$DStrings(domain)),
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$SRange(
-				_gicentre$elm_vega$Vega$RStrings(range)),
+			_0: _gicentre$elm_vega$VegaLite$SRange(
+				_gicentre$elm_vega$VegaLite$RStrings(range)),
 			_1: {ctor: '[]'}
 		}
 	};
 };
-var _gicentre$elm_vega$Vega$domainRangeMap = F2(
+var _gicentre$elm_vega$VegaLite$domainRangeMap = F2(
 	function (lowerMap, upperMap) {
 		var _p122 = _elm_lang$core$List$unzip(
 			{
@@ -11464,238 +11464,238 @@ var _gicentre$elm_vega$Vega$domainRangeMap = F2(
 		var range = _p122._1;
 		return {
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$SDomain(
-				_gicentre$elm_vega$Vega$DNumbers(domain)),
+			_0: _gicentre$elm_vega$VegaLite$SDomain(
+				_gicentre$elm_vega$VegaLite$DNumbers(domain)),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$SRange(
-					_gicentre$elm_vega$Vega$RStrings(range)),
+				_0: _gicentre$elm_vega$VegaLite$SRange(
+					_gicentre$elm_vega$VegaLite$RStrings(range)),
 				_1: {ctor: '[]'}
 			}
 		};
 	});
-var _gicentre$elm_vega$Vega$RNumbers = function (a) {
+var _gicentre$elm_vega$VegaLite$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$Interval = {ctor: 'Interval'};
-var _gicentre$elm_vega$Vega$Multi = {ctor: 'Multi'};
-var _gicentre$elm_vega$Vega$Single = {ctor: 'Single'};
-var _gicentre$elm_vega$Vega$SMStrokeDashOffset = function (a) {
+var _gicentre$elm_vega$VegaLite$Interval = {ctor: 'Interval'};
+var _gicentre$elm_vega$VegaLite$Multi = {ctor: 'Multi'};
+var _gicentre$elm_vega$VegaLite$Single = {ctor: 'Single'};
+var _gicentre$elm_vega$VegaLite$SMStrokeDashOffset = function (a) {
 	return {ctor: 'SMStrokeDashOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMStrokeDash = function (a) {
+var _gicentre$elm_vega$VegaLite$SMStrokeDash = function (a) {
 	return {ctor: 'SMStrokeDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMStrokeWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$SMStrokeWidth = function (a) {
 	return {ctor: 'SMStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMStrokeOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$SMStrokeOpacity = function (a) {
 	return {ctor: 'SMStrokeOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMStroke = function (a) {
+var _gicentre$elm_vega$VegaLite$SMStroke = function (a) {
 	return {ctor: 'SMStroke', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMFillOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$SMFillOpacity = function (a) {
 	return {ctor: 'SMFillOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$SMFill = function (a) {
+var _gicentre$elm_vega$VegaLite$SMFill = function (a) {
 	return {ctor: 'SMFill', _0: a};
 };
-var _gicentre$elm_vega$Vega$Toggle = function (a) {
+var _gicentre$elm_vega$VegaLite$Toggle = function (a) {
 	return {ctor: 'Toggle', _0: a};
 };
-var _gicentre$elm_vega$Vega$Nearest = function (a) {
+var _gicentre$elm_vega$VegaLite$Nearest = function (a) {
 	return {ctor: 'Nearest', _0: a};
 };
-var _gicentre$elm_vega$Vega$Bind = function (a) {
+var _gicentre$elm_vega$VegaLite$Bind = function (a) {
 	return {ctor: 'Bind', _0: a};
 };
-var _gicentre$elm_vega$Vega$BindScales = {ctor: 'BindScales'};
-var _gicentre$elm_vega$Vega$SelectionMark = function (a) {
+var _gicentre$elm_vega$VegaLite$BindScales = {ctor: 'BindScales'};
+var _gicentre$elm_vega$VegaLite$SelectionMark = function (a) {
 	return {ctor: 'SelectionMark', _0: a};
 };
-var _gicentre$elm_vega$Vega$ResolveSelections = function (a) {
+var _gicentre$elm_vega$VegaLite$ResolveSelections = function (a) {
 	return {ctor: 'ResolveSelections', _0: a};
 };
-var _gicentre$elm_vega$Vega$Empty = {ctor: 'Empty'};
-var _gicentre$elm_vega$Vega$Encodings = function (a) {
+var _gicentre$elm_vega$VegaLite$Empty = {ctor: 'Empty'};
+var _gicentre$elm_vega$VegaLite$Encodings = function (a) {
 	return {ctor: 'Encodings', _0: a};
 };
-var _gicentre$elm_vega$Vega$Fields = function (a) {
+var _gicentre$elm_vega$VegaLite$Fields = function (a) {
 	return {ctor: 'Fields', _0: a};
 };
-var _gicentre$elm_vega$Vega$Zoom = function (a) {
+var _gicentre$elm_vega$VegaLite$Zoom = function (a) {
 	return {ctor: 'Zoom', _0: a};
 };
-var _gicentre$elm_vega$Vega$Translate = function (a) {
+var _gicentre$elm_vega$VegaLite$Translate = function (a) {
 	return {ctor: 'Translate', _0: a};
 };
-var _gicentre$elm_vega$Vega$On = function (a) {
+var _gicentre$elm_vega$VegaLite$On = function (a) {
 	return {ctor: 'On', _0: a};
 };
-var _gicentre$elm_vega$Vega$Intersection = {ctor: 'Intersection'};
-var _gicentre$elm_vega$Vega$Union = {ctor: 'Union'};
-var _gicentre$elm_vega$Vega$Global = {ctor: 'Global'};
-var _gicentre$elm_vega$Vega$SRight = {ctor: 'SRight'};
-var _gicentre$elm_vega$Vega$SLeft = {ctor: 'SLeft'};
-var _gicentre$elm_vega$Vega$SBottom = {ctor: 'SBottom'};
-var _gicentre$elm_vega$Vega$STop = {ctor: 'STop'};
-var _gicentre$elm_vega$Vega$ByRepeat = function (a) {
+var _gicentre$elm_vega$VegaLite$Intersection = {ctor: 'Intersection'};
+var _gicentre$elm_vega$VegaLite$Union = {ctor: 'Union'};
+var _gicentre$elm_vega$VegaLite$Global = {ctor: 'Global'};
+var _gicentre$elm_vega$VegaLite$SRight = {ctor: 'SRight'};
+var _gicentre$elm_vega$VegaLite$SLeft = {ctor: 'SLeft'};
+var _gicentre$elm_vega$VegaLite$SBottom = {ctor: 'SBottom'};
+var _gicentre$elm_vega$VegaLite$STop = {ctor: 'STop'};
+var _gicentre$elm_vega$VegaLite$ByRepeat = function (a) {
 	return {ctor: 'ByRepeat', _0: a};
 };
-var _gicentre$elm_vega$Vega$ByField = function (a) {
+var _gicentre$elm_vega$VegaLite$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
-var _gicentre$elm_vega$Vega$Op = function (a) {
+var _gicentre$elm_vega$VegaLite$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
-var _gicentre$elm_vega$Vega$Descending = {ctor: 'Descending'};
-var _gicentre$elm_vega$Vega$Ascending = {ctor: 'Ascending'};
-var _gicentre$elm_vega$Vega$NoStack = {ctor: 'NoStack'};
-var _gicentre$elm_vega$Vega$StCenter = {ctor: 'StCenter'};
-var _gicentre$elm_vega$Vega$StNormalize = {ctor: 'StNormalize'};
-var _gicentre$elm_vega$Vega$StZero = {ctor: 'StZero'};
-var _gicentre$elm_vega$Vega$Path = function (a) {
+var _gicentre$elm_vega$VegaLite$Descending = {ctor: 'Descending'};
+var _gicentre$elm_vega$VegaLite$Ascending = {ctor: 'Ascending'};
+var _gicentre$elm_vega$VegaLite$NoStack = {ctor: 'NoStack'};
+var _gicentre$elm_vega$VegaLite$StCenter = {ctor: 'StCenter'};
+var _gicentre$elm_vega$VegaLite$StNormalize = {ctor: 'StNormalize'};
+var _gicentre$elm_vega$VegaLite$StZero = {ctor: 'StZero'};
+var _gicentre$elm_vega$VegaLite$Path = function (a) {
 	return {ctor: 'Path', _0: a};
 };
-var _gicentre$elm_vega$Vega$TriangleDown = {ctor: 'TriangleDown'};
-var _gicentre$elm_vega$Vega$TriangleUp = {ctor: 'TriangleUp'};
-var _gicentre$elm_vega$Vega$Diamond = {ctor: 'Diamond'};
-var _gicentre$elm_vega$Vega$Cross = {ctor: 'Cross'};
-var _gicentre$elm_vega$Vega$SymSquare = {ctor: 'SymSquare'};
-var _gicentre$elm_vega$Vega$SymCircle = {ctor: 'SymCircle'};
-var _gicentre$elm_vega$Vega$TFormat = function (a) {
+var _gicentre$elm_vega$VegaLite$TriangleDown = {ctor: 'TriangleDown'};
+var _gicentre$elm_vega$VegaLite$TriangleUp = {ctor: 'TriangleUp'};
+var _gicentre$elm_vega$VegaLite$Diamond = {ctor: 'Diamond'};
+var _gicentre$elm_vega$VegaLite$Cross = {ctor: 'Cross'};
+var _gicentre$elm_vega$VegaLite$SymSquare = {ctor: 'SymSquare'};
+var _gicentre$elm_vega$VegaLite$SymCircle = {ctor: 'SymCircle'};
+var _gicentre$elm_vega$VegaLite$TFormat = function (a) {
 	return {ctor: 'TFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$TCondition = F3(
+var _gicentre$elm_vega$VegaLite$TCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'TCondition', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$TTimeUnit = function (a) {
+var _gicentre$elm_vega$VegaLite$TTimeUnit = function (a) {
 	return {ctor: 'TTimeUnit', _0: a};
 };
-var _gicentre$elm_vega$Vega$TAggregate = function (a) {
+var _gicentre$elm_vega$VegaLite$TAggregate = function (a) {
 	return {ctor: 'TAggregate', _0: a};
 };
-var _gicentre$elm_vega$Vega$TBin = function (a) {
+var _gicentre$elm_vega$VegaLite$TBin = function (a) {
 	return {ctor: 'TBin', _0: a};
 };
-var _gicentre$elm_vega$Vega$TmType = function (a) {
+var _gicentre$elm_vega$VegaLite$TmType = function (a) {
 	return {ctor: 'TmType', _0: a};
 };
-var _gicentre$elm_vega$Vega$TRepeat = function (a) {
+var _gicentre$elm_vega$VegaLite$TRepeat = function (a) {
 	return {ctor: 'TRepeat', _0: a};
 };
-var _gicentre$elm_vega$Vega$TName = function (a) {
+var _gicentre$elm_vega$VegaLite$TName = function (a) {
 	return {ctor: 'TName', _0: a};
 };
-var _gicentre$elm_vega$Vega$Milliseconds = {ctor: 'Milliseconds'};
-var _gicentre$elm_vega$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
-var _gicentre$elm_vega$Vega$Seconds = {ctor: 'Seconds'};
-var _gicentre$elm_vega$Vega$MinutesSeconds = {ctor: 'MinutesSeconds'};
-var _gicentre$elm_vega$Vega$Minutes = {ctor: 'Minutes'};
-var _gicentre$elm_vega$Vega$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$HoursMinutes = {ctor: 'HoursMinutes'};
-var _gicentre$elm_vega$Vega$Hours = {ctor: 'Hours'};
-var _gicentre$elm_vega$Vega$Day = {ctor: 'Day'};
-var _gicentre$elm_vega$Vega$Date = {ctor: 'Date'};
-var _gicentre$elm_vega$Vega$MonthDate = {ctor: 'MonthDate'};
-var _gicentre$elm_vega$Vega$Month = {ctor: 'Month'};
-var _gicentre$elm_vega$Vega$QuarterMonth = {ctor: 'QuarterMonth'};
-var _gicentre$elm_vega$Vega$Quarter = {ctor: 'Quarter'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
-var _gicentre$elm_vega$Vega$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
-var _gicentre$elm_vega$Vega$YearMonthDate = {ctor: 'YearMonthDate'};
-var _gicentre$elm_vega$Vega$YearMonth = {ctor: 'YearMonth'};
-var _gicentre$elm_vega$Vega$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
-var _gicentre$elm_vega$Vega$YearQuarter = {ctor: 'YearQuarter'};
-var _gicentre$elm_vega$Vega$Year = {ctor: 'Year'};
-var _gicentre$elm_vega$Vega$TOrient = function (a) {
+var _gicentre$elm_vega$VegaLite$Milliseconds = {ctor: 'Milliseconds'};
+var _gicentre$elm_vega$VegaLite$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
+var _gicentre$elm_vega$VegaLite$Seconds = {ctor: 'Seconds'};
+var _gicentre$elm_vega$VegaLite$MinutesSeconds = {ctor: 'MinutesSeconds'};
+var _gicentre$elm_vega$VegaLite$Minutes = {ctor: 'Minutes'};
+var _gicentre$elm_vega$VegaLite$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
+var _gicentre$elm_vega$VegaLite$HoursMinutes = {ctor: 'HoursMinutes'};
+var _gicentre$elm_vega$VegaLite$Hours = {ctor: 'Hours'};
+var _gicentre$elm_vega$VegaLite$Day = {ctor: 'Day'};
+var _gicentre$elm_vega$VegaLite$Date = {ctor: 'Date'};
+var _gicentre$elm_vega$VegaLite$MonthDate = {ctor: 'MonthDate'};
+var _gicentre$elm_vega$VegaLite$Month = {ctor: 'Month'};
+var _gicentre$elm_vega$VegaLite$QuarterMonth = {ctor: 'QuarterMonth'};
+var _gicentre$elm_vega$VegaLite$Quarter = {ctor: 'Quarter'};
+var _gicentre$elm_vega$VegaLite$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
+var _gicentre$elm_vega$VegaLite$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
+var _gicentre$elm_vega$VegaLite$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
+var _gicentre$elm_vega$VegaLite$YearMonthDate = {ctor: 'YearMonthDate'};
+var _gicentre$elm_vega$VegaLite$YearMonth = {ctor: 'YearMonth'};
+var _gicentre$elm_vega$VegaLite$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
+var _gicentre$elm_vega$VegaLite$YearQuarter = {ctor: 'YearQuarter'};
+var _gicentre$elm_vega$VegaLite$Year = {ctor: 'Year'};
+var _gicentre$elm_vega$VegaLite$TOrient = function (a) {
 	return {ctor: 'TOrient', _0: a};
 };
-var _gicentre$elm_vega$Vega$TOffset = function (a) {
+var _gicentre$elm_vega$VegaLite$TOffset = function (a) {
 	return {ctor: 'TOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$TLimit = function (a) {
+var _gicentre$elm_vega$VegaLite$TLimit = function (a) {
 	return {ctor: 'TLimit', _0: a};
 };
-var _gicentre$elm_vega$Vega$TFontWeight = function (a) {
+var _gicentre$elm_vega$VegaLite$TFontWeight = function (a) {
 	return {ctor: 'TFontWeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$TFontSize = function (a) {
+var _gicentre$elm_vega$VegaLite$TFontSize = function (a) {
 	return {ctor: 'TFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$TFont = function (a) {
+var _gicentre$elm_vega$VegaLite$TFont = function (a) {
 	return {ctor: 'TFont', _0: a};
 };
-var _gicentre$elm_vega$Vega$TColor = function (a) {
+var _gicentre$elm_vega$VegaLite$TColor = function (a) {
 	return {ctor: 'TColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$TBaseline = function (a) {
+var _gicentre$elm_vega$VegaLite$TBaseline = function (a) {
 	return {ctor: 'TBaseline', _0: a};
 };
-var _gicentre$elm_vega$Vega$TAngle = function (a) {
+var _gicentre$elm_vega$VegaLite$TAngle = function (a) {
 	return {ctor: 'TAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$TAnchor = function (a) {
+var _gicentre$elm_vega$VegaLite$TAnchor = function (a) {
 	return {ctor: 'TAnchor', _0: a};
 };
-var _gicentre$elm_vega$Vega$Plain = {ctor: 'Plain'};
-var _gicentre$elm_vega$Vega$Function = {ctor: 'Function'};
-var _gicentre$elm_vega$Vega$Verbal = {ctor: 'Verbal'};
-var _gicentre$elm_vega$Vega$AlignBottom = {ctor: 'AlignBottom'};
-var _gicentre$elm_vega$Vega$AlignMiddle = {ctor: 'AlignMiddle'};
-var _gicentre$elm_vega$Vega$AlignTop = {ctor: 'AlignTop'};
-var _gicentre$elm_vega$Vega$StrokeDashOffset = function (a) {
+var _gicentre$elm_vega$VegaLite$Plain = {ctor: 'Plain'};
+var _gicentre$elm_vega$VegaLite$Function = {ctor: 'Function'};
+var _gicentre$elm_vega$VegaLite$Verbal = {ctor: 'Verbal'};
+var _gicentre$elm_vega$VegaLite$AlignBottom = {ctor: 'AlignBottom'};
+var _gicentre$elm_vega$VegaLite$AlignMiddle = {ctor: 'AlignMiddle'};
+var _gicentre$elm_vega$VegaLite$AlignTop = {ctor: 'AlignTop'};
+var _gicentre$elm_vega$VegaLite$StrokeDashOffset = function (a) {
 	return {ctor: 'StrokeDashOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$StrokeDash = function (a) {
+var _gicentre$elm_vega$VegaLite$StrokeDash = function (a) {
 	return {ctor: 'StrokeDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$StrokeWidth = function (a) {
+var _gicentre$elm_vega$VegaLite$StrokeWidth = function (a) {
 	return {ctor: 'StrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$StrokeOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$StrokeOpacity = function (a) {
 	return {ctor: 'StrokeOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$Stroke = function (a) {
+var _gicentre$elm_vega$VegaLite$Stroke = function (a) {
 	return {ctor: 'Stroke', _0: a};
 };
-var _gicentre$elm_vega$Vega$FillOpacity = function (a) {
+var _gicentre$elm_vega$VegaLite$FillOpacity = function (a) {
 	return {ctor: 'FillOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$Fill = function (a) {
+var _gicentre$elm_vega$VegaLite$Fill = function (a) {
 	return {ctor: 'Fill', _0: a};
 };
-var _gicentre$elm_vega$Vega$Clip = function (a) {
+var _gicentre$elm_vega$VegaLite$Clip = function (a) {
 	return {ctor: 'Clip', _0: a};
 };
-var _gicentre$elm_vega$Vega$VHeight = function (a) {
-	return {ctor: 'VHeight', _0: a};
+var _gicentre$elm_vega$VegaLite$ViewHeight = function (a) {
+	return {ctor: 'ViewHeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$VWidth = function (a) {
-	return {ctor: 'VWidth', _0: a};
+var _gicentre$elm_vega$VegaLite$ViewWidth = function (a) {
+	return {ctor: 'ViewWidth', _0: a};
 };
 
 var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 	var enc = function (_p0) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(15),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(15),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -11703,28 +11703,28 @@ var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+						_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Origin'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MLegend(
+									_0: _gicentre$elm_vega$VegaLite$MLegend(
 										{ctor: '[]'}),
 									_1: {ctor: '[]'}
 								}
@@ -11732,12 +11732,12 @@ var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 						},
 						_p0))));
 	};
-	var spec = _gicentre$elm_vega$Vega$asSpec(
+	var spec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -11746,25 +11746,25 @@ var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$dataFromUrl,
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
 				'data/cars.json',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$facet(
+				_0: _gicentre$elm_vega$VegaLite$facet(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$RowBy(
+						_0: _gicentre$elm_vega$VegaLite$RowBy(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('Origin'),
+								_0: _gicentre$elm_vega$VegaLite$FName('Origin'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {ctor: '[]'}
 								}
 							}),
@@ -11772,7 +11772,7 @@ var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$specification(spec),
+					_0: _gicentre$elm_vega$VegaLite$specification(spec),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -11780,61 +11780,61 @@ var _gicentre$elm_vega$Gallery$vlFacetExample = function () {
 }();
 var _gicentre$elm_vega$Gallery$vlRepeatExample = function () {
 	var enc = function (_p1) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+					_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{ctor: '[]'}),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Origin'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p1))));
 	};
-	var spec = _gicentre$elm_vega$Vega$asSpec(
+	var spec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$dataFromUrl,
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
 				'data/cars.json',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Bar,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Bar,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -11844,13 +11844,13 @@ var _gicentre$elm_vega$Gallery$vlRepeatExample = function () {
 				}
 			}
 		});
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$repeat(
+			_0: _gicentre$elm_vega$VegaLite$repeat(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$ColumnFields(
+					_0: _gicentre$elm_vega$VegaLite$ColumnFields(
 						{
 							ctor: '::',
 							_0: 'Horsepower',
@@ -11868,57 +11868,57 @@ var _gicentre$elm_vega$Gallery$vlRepeatExample = function () {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$specification(spec),
+				_0: _gicentre$elm_vega$VegaLite$specification(spec),
 				_1: {ctor: '[]'}
 			}
 		});
 }();
 var _gicentre$elm_vega$Gallery$vl61 = function () {
 	var res = function (_p2) {
-		return _gicentre$elm_vega$Vega$resolve(
+		return _gicentre$elm_vega$VegaLite$resolve(
 			A2(
-				_gicentre$elm_vega$Vega$resolution,
-				_gicentre$elm_vega$Vega$RLegend(
+				_gicentre$elm_vega$VegaLite$resolution,
+				_gicentre$elm_vega$VegaLite$RLegend(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$Vega$ChColor, _1: _gicentre$elm_vega$Vega$Independent},
+						_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$ChColor, _1: _gicentre$elm_vega$VegaLite$Independent},
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$Vega$ChSize, _1: _gicentre$elm_vega$Vega$Independent},
+							_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$ChSize, _1: _gicentre$elm_vega$VegaLite$Independent},
 							_1: {ctor: '[]'}
 						}
 					}),
 				_p2));
 	};
 	var config = function (_p3) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
-				_gicentre$elm_vega$Vega$Range(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$Range(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$RHeatmap('greenblue'),
+						_0: _gicentre$elm_vega$VegaLite$RHeatmap('greenblue'),
 						_1: {ctor: '[]'}
 					}),
 				_p3));
 	};
 	var encBar = function (_p4) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Major_Genre'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Major_Genre'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$LabelAngle(-40),
+									_0: _gicentre$elm_vega$VegaLite$LabelAngle(-40),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -11926,32 +11926,32 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+						_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'myPts',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MString('steelblue'),
+									_0: _gicentre$elm_vega$VegaLite$MString('steelblue'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MString('grey'),
+									_0: _gicentre$elm_vega$VegaLite$MString('grey'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -11959,35 +11959,35 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 						_p4))));
 	};
 	var sel = function (_p5) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myPts',
-				_gicentre$elm_vega$Vega$Single,
+				_gicentre$elm_vega$VegaLite$Single,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Encodings(
+					_0: _gicentre$elm_vega$VegaLite$Encodings(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$ChX,
+							_0: _gicentre$elm_vega$VegaLite$ChX,
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				},
 				_p5));
 	};
-	var barSpec = _gicentre$elm_vega$Vega$asSpec(
+	var barSpec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(420),
+			_0: _gicentre$elm_vega$VegaLite$width(420),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$height(120),
+				_0: _gicentre$elm_vega$VegaLite$height(120),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -12004,22 +12004,22 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 			}
 		});
 	var enc2 = function (_p6) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(10),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12027,20 +12027,20 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Rotten_Tomatoes_Rating'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PBin(
+								_0: _gicentre$elm_vega$VegaLite$PBin(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MaxBins(10),
+										_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -12048,19 +12048,19 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MLegend(
+									_0: _gicentre$elm_vega$VegaLite$MLegend(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$LTitle('In Selected Category'),
+											_0: _gicentre$elm_vega$VegaLite$LTitle('In Selected Category'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -12068,31 +12068,31 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MString('#666'),
+								_0: _gicentre$elm_vega$VegaLite$MString('#666'),
 								_1: {ctor: '[]'}
 							},
 							_p6)))));
 	};
 	var enc1 = function (_p7) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(10),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12100,20 +12100,20 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Rotten_Tomatoes_Rating'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PBin(
+								_0: _gicentre$elm_vega$VegaLite$PBin(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MaxBins(10),
+										_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -12121,19 +12121,19 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MLegend(
+									_0: _gicentre$elm_vega$VegaLite$MLegend(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$LTitle(''),
+											_0: _gicentre$elm_vega$VegaLite$LTitle(''),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -12142,15 +12142,15 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 						},
 						_p7))));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(300),
+			_0: _gicentre$elm_vega$VegaLite$width(300),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Rect,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Rect,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12161,13 +12161,13 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 			}
 		});
 	var selTrans = function (_p8) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FSelection('myPts'),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FSelection('myPts'),
 				_p8));
 	};
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: selTrans(
@@ -12175,8 +12175,8 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Point,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Point,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12186,10 +12186,10 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 				}
 			}
 		});
-	var heatSpec = _gicentre$elm_vega$Vega$asSpec(
+	var heatSpec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$layer(
+			_0: _gicentre$elm_vega$VegaLite$layer(
 				{
 					ctor: '::',
 					_0: spec1,
@@ -12201,20 +12201,20 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 				}),
 			_1: {ctor: '[]'}
 		});
-	var des = _gicentre$elm_vega$Vega$description('A dashboard with cross-highlighting. Select bars in lower chart to update view in upper chart.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A dashboard with cross-highlighting. Select bars in lower chart to update view in upper chart.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/movies.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$vConcat(
+					_0: _gicentre$elm_vega$VegaLite$vConcat(
 						{
 							ctor: '::',
 							_0: heatSpec,
@@ -12241,50 +12241,50 @@ var _gicentre$elm_vega$Gallery$vl61 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl60 = function () {
 	var enc = function (_p9) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+					_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Row),
+						_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Row),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'myBrush',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MName('Origin'),
+									_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MString('grey'),
+									_0: _gicentre$elm_vega$VegaLite$MString('grey'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12292,44 +12292,44 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 						_p9))));
 	};
 	var sel = function (_p10) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myBrush',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$On('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
+					_0: _gicentre$elm_vega$VegaLite$On('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$Translate('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
+						_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$Zoom('wheel![event.shiftKey]'),
+							_0: _gicentre$elm_vega$VegaLite$Zoom('wheel![event.shiftKey]'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$ResolveSelections(_gicentre$elm_vega$Vega$Union),
+								_0: _gicentre$elm_vega$VegaLite$ResolveSelections(_gicentre$elm_vega$VegaLite$Union),
 								_1: {ctor: '[]'}
 							}
 						}
 					}
 				},
 				A4(
-					_gicentre$elm_vega$Vega$select,
+					_gicentre$elm_vega$VegaLite$select,
 					'',
-					_gicentre$elm_vega$Vega$Interval,
+					_gicentre$elm_vega$VegaLite$Interval,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$BindScales,
+						_0: _gicentre$elm_vega$VegaLite$BindScales,
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$Translate('[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!'),
+							_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$Zoom('wheel![event.shiftKey]'),
+								_0: _gicentre$elm_vega$VegaLite$Zoom('wheel![event.shiftKey]'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$ResolveSelections(_gicentre$elm_vega$Vega$Global),
+									_0: _gicentre$elm_vega$VegaLite$ResolveSelections(_gicentre$elm_vega$VegaLite$Global),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -12337,18 +12337,18 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 					},
 					_p10)));
 	};
-	var spec = _gicentre$elm_vega$Vega$asSpec(
+	var spec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$dataFromUrl,
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
 				'data/cars.json',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Point,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Point,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12363,17 +12363,17 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 				}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Scatterplot matrix. Drag/zoom in any scatterplot to update view of all scatterplots containing selected variables. Shift-select to highlight selected points.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Scatterplot matrix. Drag/zoom in any scatterplot to update view of all scatterplots containing selected variables. Shift-select to highlight selected points.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$repeat(
+				_0: _gicentre$elm_vega$VegaLite$repeat(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$RowFields(
+						_0: _gicentre$elm_vega$VegaLite$RowFields(
 							{
 								ctor: '::',
 								_0: 'Horsepower',
@@ -12389,7 +12389,7 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$ColumnFields(
+							_0: _gicentre$elm_vega$VegaLite$ColumnFields(
 								{
 									ctor: '::',
 									_0: 'Miles_per_Gallon',
@@ -12408,7 +12408,7 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$specification(spec),
+					_0: _gicentre$elm_vega$VegaLite$specification(spec),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -12416,22 +12416,22 @@ var _gicentre$elm_vega$Gallery$vl60 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl59 = function () {
 	var enc2 = function (_p11) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+					_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(20),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(20),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12439,43 +12439,43 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+						_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('goldenrod'),
+							_0: _gicentre$elm_vega$VegaLite$MString('goldenrod'),
 							_1: {ctor: '[]'}
 						},
 						_p11))));
 	};
 	var enc1 = function (_p12) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+					_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(20),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(20),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12483,27 +12483,27 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+						_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p12)));
 	};
 	var selTrans = function (_p13) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FSelection('myBrush'),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FSelection('myBrush'),
 				_p13));
 	};
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: selTrans(
@@ -12511,8 +12511,8 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Bar,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Bar,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12523,24 +12523,24 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 			}
 		});
 	var sel = function (_p14) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myBrush',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Encodings(
+					_0: _gicentre$elm_vega$VegaLite$Encodings(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$ChX,
+							_0: _gicentre$elm_vega$VegaLite$ChX,
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				},
 				_p14));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: sel(
@@ -12548,8 +12548,8 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Bar,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Bar,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12560,28 +12560,28 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 			}
 		});
 	var trans = function (_p15) {
-		return _gicentre$elm_vega$Vega$transform(
-			A3(_gicentre$elm_vega$Vega$calculateAs, 'hours(datum.date)', 'time', _p15));
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'hours(datum.date)', 'time', _p15));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Drag over any chart to cross-filter highlights in all charts.');
-	var spec = _gicentre$elm_vega$Vega$asSpec(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag over any chart to cross-filter highlights in all charts.');
+	var spec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/flights-2k.json',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$Parse(
+						_0: _gicentre$elm_vega$VegaLite$Parse(
 							{
 								ctor: '::',
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'date',
-									_1: _gicentre$elm_vega$Vega$FoDate('')
+									_1: _gicentre$elm_vega$VegaLite$FoDate('')
 								},
 								_1: {ctor: '[]'}
 							}),
@@ -12593,7 +12593,7 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: spec1,
@@ -12608,13 +12608,13 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 				}
 			}
 		});
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$repeat(
+			_0: _gicentre$elm_vega$VegaLite$repeat(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$ColumnFields(
+					_0: _gicentre$elm_vega$VegaLite$ColumnFields(
 						{
 							ctor: '::',
 							_0: 'distance',
@@ -12632,29 +12632,29 @@ var _gicentre$elm_vega$Gallery$vl59 = function () {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$specification(spec),
+				_0: _gicentre$elm_vega$VegaLite$specification(spec),
 				_1: {ctor: '[]'}
 			}
 		});
 }();
 var _gicentre$elm_vega$Gallery$vl58 = function () {
 	var enc2 = function (_p16) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Format('%Y'),
+									_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12662,23 +12662,23 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$TickCount(3),
+										_0: _gicentre$elm_vega$VegaLite$TickCount(3),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Grid(false),
+											_0: _gicentre$elm_vega$VegaLite$Grid(false),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -12689,31 +12689,31 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 					_p16)));
 	};
 	var enc1 = function (_p17) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
-										_gicentre$elm_vega$Vega$DSelection('myBrush')),
+									_0: _gicentre$elm_vega$VegaLite$SDomain(
+										_gicentre$elm_vega$VegaLite$DSelection('myBrush')),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle(''),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle(''),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -12722,28 +12722,28 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p17)));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(500),
+			_0: _gicentre$elm_vega$VegaLite$width(500),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Area,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Area,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12754,30 +12754,30 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 			}
 		});
 	var sel = function (_p18) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myBrush',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Encodings(
+					_0: _gicentre$elm_vega$VegaLite$Encodings(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$ChX,
+							_0: _gicentre$elm_vega$VegaLite$ChX,
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				},
 				_p18));
 	};
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(480),
+			_0: _gicentre$elm_vega$VegaLite$width(480),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$height(60),
+				_0: _gicentre$elm_vega$VegaLite$height(60),
 				_1: {
 					ctor: '::',
 					_0: sel(
@@ -12785,8 +12785,8 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Area,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Area,
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
@@ -12798,20 +12798,20 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 				}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Drag over lower chart to update detailed view in upper chart.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag over lower chart to update detailed view in upper chart.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/sp500.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$vConcat(
+					_0: _gicentre$elm_vega$VegaLite$vConcat(
 						{
 							ctor: '::',
 							_0: spec1,
@@ -12828,95 +12828,95 @@ var _gicentre$elm_vega$Gallery$vl58 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl57 = function () {
 	var enc2 = function (_p19) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$Y,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('precipitation'),
+					_0: _gicentre$elm_vega$VegaLite$PName('precipitation'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A2(
-					_gicentre$elm_vega$Vega$color,
+					_gicentre$elm_vega$VegaLite$color,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MString('firebrick'),
+						_0: _gicentre$elm_vega$VegaLite$MString('firebrick'),
 						_1: {ctor: '[]'}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(3),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(3),
 							_1: {ctor: '[]'}
 						},
 						_p19))));
 	};
 	var trans = function (_p20) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FSelection('myBrush'),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FSelection('myBrush'),
 				_p20));
 	};
 	var enc1 = function (_p21) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('precipitation'),
+						_0: _gicentre$elm_vega$VegaLite$PName('precipitation'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$opacity,
+						_gicentre$elm_vega$VegaLite$opacity,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'myBrush',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(1),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(1),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(0.7),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(0.7),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -12924,24 +12924,24 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 						_p21))));
 	};
 	var sel = function (_p22) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myBrush',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Encodings(
+					_0: _gicentre$elm_vega$VegaLite$Encodings(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$ChX,
+							_0: _gicentre$elm_vega$VegaLite$ChX,
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				},
 				_p22));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: sel(
@@ -12949,8 +12949,8 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Bar,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Bar,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -12960,8 +12960,8 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 				}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Drag over bars to update selection average.');
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag over bars to update selection average.');
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: des,
@@ -12972,8 +12972,8 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Rule,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Rule,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -12984,16 +12984,16 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 				}
 			}
 		});
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$dataFromUrl,
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
 				'data/seattle-weather.csv',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$layer(
+				_0: _gicentre$elm_vega$VegaLite$layer(
 					{
 						ctor: '::',
 						_0: spec1,
@@ -13009,59 +13009,59 @@ var _gicentre$elm_vega$Gallery$vl57 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl56 = function () {
 	var enc2 = function (_p23) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Origin'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(100),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(100),
 								_1: {ctor: '[]'}
 							},
 							_p23)))));
 	};
 	var trans2 = function (_p24) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FSelection('CylYr'),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FSelection('CylYr'),
 				_p24));
 	};
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: trans2(
@@ -13069,8 +13069,8 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Circle,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -13081,50 +13081,50 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 			}
 		});
 	var enc1 = function (_p25) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'CylYr',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MName('Origin'),
+									_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MString('grey'),
+									_0: _gicentre$elm_vega$VegaLite$MString('grey'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -13132,14 +13132,14 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 						_p25))));
 	};
 	var sel1 = function (_p26) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'CylYr',
-				_gicentre$elm_vega$Vega$Single,
+				_gicentre$elm_vega$VegaLite$Single,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Fields(
+					_0: _gicentre$elm_vega$VegaLite$Fields(
 						{
 							ctor: '::',
 							_0: 'Cylinders',
@@ -13151,24 +13151,24 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 						}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$Bind(
+						_0: _gicentre$elm_vega$VegaLite$Bind(
 							{
 								ctor: '::',
 								_0: A2(
-									_gicentre$elm_vega$Vega$IRange,
+									_gicentre$elm_vega$VegaLite$IRange,
 									'Cylinders',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$InName('Cylinders '),
+										_0: _gicentre$elm_vega$VegaLite$InName('Cylinders '),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$InMin(3),
+											_0: _gicentre$elm_vega$VegaLite$InMin(3),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$InMax(8),
+												_0: _gicentre$elm_vega$VegaLite$InMax(8),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$InStep(1),
+													_0: _gicentre$elm_vega$VegaLite$InStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -13177,20 +13177,20 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 								_1: {
 									ctor: '::',
 									_0: A2(
-										_gicentre$elm_vega$Vega$IRange,
+										_gicentre$elm_vega$VegaLite$IRange,
 										'Year',
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$InName('Year '),
+											_0: _gicentre$elm_vega$VegaLite$InName('Year '),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$InMin(1969),
+												_0: _gicentre$elm_vega$VegaLite$InMin(1969),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$InMax(1981),
+													_0: _gicentre$elm_vega$VegaLite$InMax(1981),
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$InStep(1),
+														_0: _gicentre$elm_vega$VegaLite$InStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -13204,7 +13204,7 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 				},
 				_p26));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: sel1(
@@ -13212,8 +13212,8 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Circle,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -13224,18 +13224,18 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 			}
 		});
 	var trans = function (_p27) {
-		return _gicentre$elm_vega$Vega$transform(
-			A3(_gicentre$elm_vega$Vega$calculateAs, 'year(datum.Year)', 'Year', _p27));
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'year(datum.Year)', 'Year', _p27));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Drag the sliders to highlight points.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag the sliders to highlight points.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
@@ -13244,7 +13244,7 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: spec1,
@@ -13262,23 +13262,23 @@ var _gicentre$elm_vega$Gallery$vl56 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl55 = function () {
 	var enc = function (_p28) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
-										_gicentre$elm_vega$Vega$DNumbers(
+									_0: _gicentre$elm_vega$VegaLite$SDomain(
+										_gicentre$elm_vega$VegaLite$DNumbers(
 											{
 												ctor: '::',
 												_0: 75,
@@ -13295,21 +13295,21 @@ var _gicentre$elm_vega$Gallery$vl55 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
-											_gicentre$elm_vega$Vega$DNumbers(
+										_0: _gicentre$elm_vega$VegaLite$SDomain(
+											_gicentre$elm_vega$VegaLite$DNumbers(
 												{
 													ctor: '::',
 													_0: 20,
@@ -13326,47 +13326,47 @@ var _gicentre$elm_vega$Gallery$vl55 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Cylinders'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Cylinders'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p28))));
 	};
 	var sel = function (_p29) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myGrid',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$BindScales,
+					_0: _gicentre$elm_vega$VegaLite$BindScales,
 					_1: {ctor: '[]'}
 				},
 				_p29));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Drag to pan. Zoom in or out with mousewheel/zoom gesture.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag to pan. Zoom in or out with mousewheel/zoom gesture.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Circle,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Circle,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -13385,46 +13385,46 @@ var _gicentre$elm_vega$Gallery$vl55 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl54 = function () {
 	var enc = function (_p30) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'myPaintbrush',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(300),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(300),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(50),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(50),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -13432,38 +13432,38 @@ var _gicentre$elm_vega$Gallery$vl54 = function () {
 						_p30))));
 	};
 	var sel = function (_p31) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myPaintbrush',
-				_gicentre$elm_vega$Vega$Multi,
+				_gicentre$elm_vega$VegaLite$Multi,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$On('mouseover'),
+					_0: _gicentre$elm_vega$VegaLite$On('mouseover'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$Nearest(true),
+						_0: _gicentre$elm_vega$VegaLite$Nearest(true),
 						_1: {ctor: '[]'}
 					}
 				},
 				_p31));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Mouse over individual points or select multiple points with the shift key.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Mouse over individual points or select multiple points with the shift key.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -13482,50 +13482,50 @@ var _gicentre$elm_vega$Gallery$vl54 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl53 = function () {
 	var enc = function (_p32) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$MCondition,
+								_gicentre$elm_vega$VegaLite$MCondition,
 								'myBrush',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MName('Cylinders'),
+									_0: _gicentre$elm_vega$VegaLite$MName('Cylinders'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Ordinal),
+										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MString('grey'),
+									_0: _gicentre$elm_vega$VegaLite$MString('grey'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -13533,30 +13533,30 @@ var _gicentre$elm_vega$Gallery$vl53 = function () {
 						_p32))));
 	};
 	var sel = function (_p33) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'myBrush',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{ctor: '[]'},
 				_p33));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Drag out a rectangular brush to highlight points.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Drag out a rectangular brush to highlight points.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -13575,58 +13575,58 @@ var _gicentre$elm_vega$Gallery$vl53 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl52 = function () {
 	var enc2 = function (_p34) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+						_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('location'),
+							_0: _gicentre$elm_vega$VegaLite$MName('location'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p34))));
 	};
-	var spec2 = _gicentre$elm_vega$Vega$asSpec(
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -13636,80 +13636,80 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 			}
 		});
 	var enc1 = function (_p35) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PRepeat(_gicentre$elm_vega$Vega$Column),
+						_0: _gicentre$elm_vega$VegaLite$PRepeat(_gicentre$elm_vega$VegaLite$Column),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$detail,
+						_gicentre$elm_vega$VegaLite$detail,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$DName('date'),
+							_0: _gicentre$elm_vega$VegaLite$DName('date'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$DmType(_gicentre$elm_vega$Vega$Temporal),
+								_0: _gicentre$elm_vega$VegaLite$DmType(_gicentre$elm_vega$VegaLite$Temporal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$DTimeUnit(_gicentre$elm_vega$Vega$Year),
+									_0: _gicentre$elm_vega$VegaLite$DTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MName('location'),
+								_0: _gicentre$elm_vega$VegaLite$MName('location'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {ctor: '[]'}
 								}
 							},
 							A2(
-								_gicentre$elm_vega$Vega$opacity,
+								_gicentre$elm_vega$VegaLite$opacity,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(0.2),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(0.2),
 									_1: {ctor: '[]'}
 								},
 								_p35))))));
 	};
-	var spec1 = _gicentre$elm_vega$Vega$asSpec(
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -13718,14 +13718,14 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Monthly weather information for individual years and overall average for Seatle and New York.');
-	var spec = _gicentre$elm_vega$Vega$asSpec(
+	var des = _gicentre$elm_vega$VegaLite$description('Monthly weather information for individual years and overall average for Seatle and New York.');
+	var spec = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$layer(
+				_0: _gicentre$elm_vega$VegaLite$layer(
 					{
 						ctor: '::',
 						_0: spec1,
@@ -13738,21 +13738,21 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$dataFromUrl,
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
 				'data/weather.csv',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Parse(
+					_0: _gicentre$elm_vega$VegaLite$Parse(
 						{
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'date',
-								_1: _gicentre$elm_vega$Vega$FoDate('%Y-%m-%d %H:%M')
+								_1: _gicentre$elm_vega$VegaLite$FoDate('%Y-%m-%d %H:%M')
 							},
 							_1: {ctor: '[]'}
 						}),
@@ -13760,10 +13760,10 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$repeat(
+				_0: _gicentre$elm_vega$VegaLite$repeat(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$ColumnFields(
+						_0: _gicentre$elm_vega$VegaLite$ColumnFields(
 							{
 								ctor: '::',
 								_0: 'temp_max',
@@ -13781,7 +13781,7 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 					}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$specification(spec),
+					_0: _gicentre$elm_vega$VegaLite$specification(spec),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -13789,22 +13789,22 @@ var _gicentre$elm_vega$Gallery$vl52 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl51 = function () {
 	var enc = function (_p36) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('miles'),
+					_0: _gicentre$elm_vega$VegaLite$PName('miles'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(false),
+									_0: _gicentre$elm_vega$VegaLite$SZero(false),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -13812,20 +13812,20 @@ var _gicentre$elm_vega$Gallery$vl51 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('gas'),
+						_0: _gicentre$elm_vega$VegaLite$PName('gas'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -13833,19 +13833,19 @@ var _gicentre$elm_vega$Gallery$vl51 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$order,
+						_gicentre$elm_vega$VegaLite$order,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$OName('year'),
+							_0: _gicentre$elm_vega$VegaLite$OName('year'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$OmType(_gicentre$elm_vega$Vega$Temporal),
+								_0: _gicentre$elm_vega$VegaLite$OmType(_gicentre$elm_vega$VegaLite$Temporal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p36))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: enc(
@@ -13853,13 +13853,13 @@ var _gicentre$elm_vega$Gallery$vl51 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Line,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Line,
 					{ctor: '[]'}),
 				_1: {ctor: '[]'}
 			}
 		});
-	var specPoint = _gicentre$elm_vega$Vega$asSpec(
+	var specPoint = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: enc(
@@ -13867,30 +13867,30 @@ var _gicentre$elm_vega$Gallery$vl51 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Point,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Point,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MFilled(true),
+						_0: _gicentre$elm_vega$VegaLite$MFilled(true),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Connected scatterplot showing change over time.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Connected scatterplot showing change over time.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/driving.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specLine,
@@ -13907,51 +13907,51 @@ var _gicentre$elm_vega$Gallery$vl51 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl50 = function () {
 	var config = function (_p37) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
-				_gicentre$elm_vega$Vega$AreaStyle(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$AreaStyle(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MInterpolate(_gicentre$elm_vega$Vega$Monotone),
+						_0: _gicentre$elm_vega$VegaLite$MInterpolate(_gicentre$elm_vega$VegaLite$Monotone),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MOrient(_gicentre$elm_vega$Vega$Vertical),
+							_0: _gicentre$elm_vega$VegaLite$MOrient(_gicentre$elm_vega$VegaLite$Vertical),
 							_1: {ctor: '[]'}
 						}
 					}),
 				_p37));
 	};
 	var encUpper = function (_p38) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('x'),
+					_0: _gicentre$elm_vega$VegaLite$PName('x'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('ny'),
+						_0: _gicentre$elm_vega$VegaLite$PName('ny'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
-											_gicentre$elm_vega$Vega$DNumbers(
+										_0: _gicentre$elm_vega$VegaLite$SDomain(
+											_gicentre$elm_vega$VegaLite$DNumbers(
 												{
 													ctor: '::',
 													_0: 0,
@@ -13965,10 +13965,10 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('y'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('y'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -13977,35 +13977,35 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$opacity,
+						_gicentre$elm_vega$VegaLite$opacity,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(0.3),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(0.3),
 							_1: {ctor: '[]'}
 						},
 						_p38))));
 	};
 	var encLower = function (_p39) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('x'),
+					_0: _gicentre$elm_vega$VegaLite$PName('x'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(false),
+									_0: _gicentre$elm_vega$VegaLite$SZero(false),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SNice(
-											_gicentre$elm_vega$Vega$IsNice(false)),
+										_0: _gicentre$elm_vega$VegaLite$SNice(
+											_gicentre$elm_vega$VegaLite$IsNice(false)),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -14014,21 +14014,21 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('y'),
+						_0: _gicentre$elm_vega$VegaLite$PName('y'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
-											_gicentre$elm_vega$Vega$DNumbers(
+										_0: _gicentre$elm_vega$VegaLite$SDomain(
+											_gicentre$elm_vega$VegaLite$DNumbers(
 												{
 													ctor: '::',
 													_0: 0,
@@ -14045,23 +14045,23 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$opacity,
+						_gicentre$elm_vega$VegaLite$opacity,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(0.6),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(0.6),
 							_1: {ctor: '[]'}
 						},
 						_p39))));
 	};
-	var specLower = _gicentre$elm_vega$Vega$asSpec(
+	var specLower = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Area,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Area,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MClip(true),
+					_0: _gicentre$elm_vega$VegaLite$MClip(true),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -14072,10 +14072,10 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 			}
 		});
 	var trans = function (_p40) {
-		return _gicentre$elm_vega$Vega$transform(
-			A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.y - 50', 'ny', _p40));
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.y - 50', 'ny', _p40));
 	};
-	var specUpper = _gicentre$elm_vega$Vega$asSpec(
+	var specUpper = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: trans(
@@ -14083,11 +14083,11 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Area,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Area,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MClip(true),
+						_0: _gicentre$elm_vega$VegaLite$MClip(true),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -14100,20 +14100,20 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 		});
 	var data = function (_p41) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'x',
-				_gicentre$elm_vega$Vega$Numbers(
+				_gicentre$elm_vega$VegaLite$Numbers(
 					A2(
 						_elm_lang$core$List$map,
 						_elm_lang$core$Basics$toFloat,
 						A2(_elm_lang$core$List$range, 1, 20))),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'y',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 28,
@@ -14197,24 +14197,24 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 						}),
 					_p41)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(50),
+					_0: _gicentre$elm_vega$VegaLite$height(50),
 					_1: {
 						ctor: '::',
 						_0: data(
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$layer(
+							_0: _gicentre$elm_vega$VegaLite$layer(
 								{
 									ctor: '::',
 									_0: specLower,
@@ -14238,61 +14238,61 @@ var _gicentre$elm_vega$Gallery$vl50 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl49 = function () {
 	var res = function (_p42) {
-		return _gicentre$elm_vega$Vega$resolve(
+		return _gicentre$elm_vega$VegaLite$resolve(
 			A2(
-				_gicentre$elm_vega$Vega$resolution,
-				_gicentre$elm_vega$Vega$RScale(
+				_gicentre$elm_vega$VegaLite$resolution,
+				_gicentre$elm_vega$VegaLite$RScale(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$Vega$ChY, _1: _gicentre$elm_vega$Vega$Independent},
+						_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$ChY, _1: _gicentre$elm_vega$VegaLite$Independent},
 						_1: {ctor: '[]'}
 					}),
 				_p42));
 	};
 	var encLine = function (_p43) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('temp_max'),
+						_0: _gicentre$elm_vega$VegaLite$PName('temp_max'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Grid(false),
+											_0: _gicentre$elm_vega$VegaLite$Grid(false),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PScale(
+										_0: _gicentre$elm_vega$VegaLite$PScale(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SZero(false),
+												_0: _gicentre$elm_vega$VegaLite$SZero(false),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -14302,20 +14302,20 @@ var _gicentre$elm_vega$Gallery$vl49 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('firebrick'),
+							_0: _gicentre$elm_vega$VegaLite$MString('firebrick'),
 							_1: {ctor: '[]'}
 						},
 						_p43))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -14325,41 +14325,41 @@ var _gicentre$elm_vega$Gallery$vl49 = function () {
 			}
 		});
 	var encBar = function (_p44) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('precipitation'),
+						_0: _gicentre$elm_vega$VegaLite$PName('precipitation'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Grid(false),
+											_0: _gicentre$elm_vega$VegaLite$Grid(false),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -14369,12 +14369,12 @@ var _gicentre$elm_vega$Gallery$vl49 = function () {
 					},
 					_p44)));
 	};
-	var specBar = _gicentre$elm_vega$Vega$asSpec(
+	var specBar = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -14383,20 +14383,20 @@ var _gicentre$elm_vega$Gallery$vl49 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Layered bar/line chart with dual axes.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Layered bar/line chart with dual axes.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/seattle-weather.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specBar,
@@ -14418,22 +14418,22 @@ var _gicentre$elm_vega$Gallery$vl49 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl48 = function () {
 	var encPoints = function (_p45) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('life_expect'),
+					_0: _gicentre$elm_vega$VegaLite$PName('life_expect'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$AxTitle('Life Expectanct (years)'),
+									_0: _gicentre$elm_vega$VegaLite$AxTitle('Life Expectanct (years)'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -14441,32 +14441,32 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('country'),
+						_0: _gicentre$elm_vega$VegaLite$PName('country'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Country'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Country'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Offset(5),
+											_0: _gicentre$elm_vega$VegaLite$Offset(5),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Ticks(false),
+												_0: _gicentre$elm_vega$VegaLite$Ticks(false),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MinExtent(70),
+													_0: _gicentre$elm_vega$VegaLite$MinExtent(70),
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$Domain(false),
+														_0: _gicentre$elm_vega$VegaLite$Domain(false),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -14478,26 +14478,26 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('year'),
+							_0: _gicentre$elm_vega$VegaLite$MName('year'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										A2(
-											_gicentre$elm_vega$Vega$domainRangeMap,
+											_gicentre$elm_vega$VegaLite$domainRangeMap,
 											{ctor: '_Tuple2', _0: 1955, _1: '#e6959c'},
 											{ctor: '_Tuple2', _0: 2000, _1: '#911a24'})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MLegend(
+										_0: _gicentre$elm_vega$VegaLite$MLegend(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$LTitle('Year'),
+												_0: _gicentre$elm_vega$VegaLite$LTitle('Year'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -14506,30 +14506,30 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(100),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(100),
 								_1: {ctor: '[]'}
 							},
 							A2(
-								_gicentre$elm_vega$Vega$opacity,
+								_gicentre$elm_vega$VegaLite$opacity,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MNumber(1),
+									_0: _gicentre$elm_vega$VegaLite$MNumber(1),
 									_1: {ctor: '[]'}
 								},
 								_p45))))));
 	};
-	var specPoints = _gicentre$elm_vega$Vega$asSpec(
+	var specPoints = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Point,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Point,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFilled(true),
+					_0: _gicentre$elm_vega$VegaLite$MFilled(true),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -14540,57 +14540,57 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 			}
 		});
 	var encLine = function (_p46) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('life_expect'),
+					_0: _gicentre$elm_vega$VegaLite$PName('life_expect'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('country'),
+						_0: _gicentre$elm_vega$VegaLite$PName('country'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$detail,
+						_gicentre$elm_vega$VegaLite$detail,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$DName('country'),
+							_0: _gicentre$elm_vega$VegaLite$DName('country'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$DmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$DmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MString('#db646f'),
+								_0: _gicentre$elm_vega$VegaLite$MString('#db646f'),
 								_1: {ctor: '[]'}
 							},
 							_p46)))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -14600,13 +14600,13 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 			}
 		});
 	var trans = function (_p47) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
+				_gicentre$elm_vega$VegaLite$filter,
 				A2(
-					_gicentre$elm_vega$Vega$FOneOf,
+					_gicentre$elm_vega$VegaLite$FOneOf,
 					'country',
-					_gicentre$elm_vega$Vega$Strings(
+					_gicentre$elm_vega$VegaLite$Strings(
 						{
 							ctor: '::',
 							_0: 'China',
@@ -14629,11 +14629,11 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 							}
 						})),
 				A2(
-					_gicentre$elm_vega$Vega$filter,
+					_gicentre$elm_vega$VegaLite$filter,
 					A2(
-						_gicentre$elm_vega$Vega$FOneOf,
+						_gicentre$elm_vega$VegaLite$FOneOf,
 						'year',
-						_gicentre$elm_vega$Vega$Numbers(
+						_gicentre$elm_vega$VegaLite$Numbers(
 							{
 								ctor: '::',
 								_0: 1955,
@@ -14645,15 +14645,15 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 							})),
 					_p47)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A ranged dot plot that uses \'layer\' to convey changing life expectancy for the five most populous countries (between 1955 and 2000).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A ranged dot plot that uses \'layer\' to convey changing life expectancy for the five most populous countries (between 1955 and 2000).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/countries.json',
 					{ctor: '[]'}),
 				_1: {
@@ -14662,7 +14662,7 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: specLine,
@@ -14680,25 +14680,25 @@ var _gicentre$elm_vega$Gallery$vl48 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl47 = function () {
 	var encPopulation = function (_p48) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('year'),
+					_0: _gicentre$elm_vega$VegaLite$PName('year'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Year),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle(''),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle(''),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -14707,32 +14707,32 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('population'),
+						_0: _gicentre$elm_vega$VegaLite$PName('population'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('#333'),
+							_0: _gicentre$elm_vega$VegaLite$MString('#333'),
 							_1: {ctor: '[]'}
 						},
 						_p48))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -14741,12 +14741,12 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var specPoints = _gicentre$elm_vega$Vega$asSpec(
+	var specPoints = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Point,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Point,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -14756,22 +14756,22 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 			}
 		});
 	var encRects = function (_p49) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('start'),
+					_0: _gicentre$elm_vega$VegaLite$PName('start'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Year),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}
@@ -14779,29 +14779,29 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$X2,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X2,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('end'),
+						_0: _gicentre$elm_vega$VegaLite$PName('end'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Year),
+								_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('event'),
+							_0: _gicentre$elm_vega$VegaLite$MName('event'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -14809,23 +14809,23 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 	};
 	var highlights = function (_p50) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$Parse(
+				_0: _gicentre$elm_vega$VegaLite$Parse(
 					{
 						ctor: '::',
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'start',
-							_1: _gicentre$elm_vega$Vega$FoDate('%Y')
+							_1: _gicentre$elm_vega$VegaLite$FoDate('%Y')
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'end',
-								_1: _gicentre$elm_vega$Vega$FoDate('%Y')
+								_1: _gicentre$elm_vega$VegaLite$FoDate('%Y')
 							},
 							_1: {ctor: '[]'}
 						}
@@ -14833,9 +14833,9 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 				_1: {ctor: '[]'}
 			},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'start',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: '1933',
@@ -14846,9 +14846,9 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'end',
-					_gicentre$elm_vega$Vega$Strings(
+					_gicentre$elm_vega$VegaLite$Strings(
 						{
 							ctor: '::',
 							_0: '1945',
@@ -14859,9 +14859,9 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 							}
 						}),
 					A3(
-						_gicentre$elm_vega$Vega$dataColumn,
+						_gicentre$elm_vega$VegaLite$dataColumn,
 						'event',
-						_gicentre$elm_vega$Vega$Strings(
+						_gicentre$elm_vega$VegaLite$Strings(
 							{
 								ctor: '::',
 								_0: 'Nazi Rule',
@@ -14873,7 +14873,7 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 							}),
 						_p50))));
 	};
-	var specRects = _gicentre$elm_vega$Vega$asSpec(
+	var specRects = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: highlights(
@@ -14881,8 +14881,8 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Rect,
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Rect,
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
@@ -14894,25 +14894,25 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 		});
 	var data = function (_p51) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$Parse(
+				_0: _gicentre$elm_vega$VegaLite$Parse(
 					{
 						ctor: '::',
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'year',
-							_1: _gicentre$elm_vega$Vega$FoDate('%Y')
+							_1: _gicentre$elm_vega$VegaLite$FoDate('%Y')
 						},
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'year',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: '1875',
@@ -15067,9 +15067,9 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'population',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 1309,
@@ -15225,21 +15225,21 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 						}),
 					_p51)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('The population of the German city of Falkensee over time with annotated time periods highlighted.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('The population of the German city of Falkensee over time with annotated time periods highlighted.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(500),
+				_0: _gicentre$elm_vega$VegaLite$width(500),
 				_1: {
 					ctor: '::',
 					_0: data(
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: specRects,
@@ -15261,47 +15261,47 @@ var _gicentre$elm_vega$Gallery$vl47 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl46 = function () {
 	var encLine = function (_p52) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Year'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Year'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Year),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					_p52)));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Line,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Line,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15311,41 +15311,41 @@ var _gicentre$elm_vega$Gallery$vl46 = function () {
 			}
 		});
 	var encBand = function (_p53) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Year'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Year'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Year),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Year),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$CI0),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$CI0),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Miles/Gallon'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Miles/Gallon'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -15354,36 +15354,36 @@ var _gicentre$elm_vega$Gallery$vl46 = function () {
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+							_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$CI1),
+									_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$CI1),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$opacity,
+							_gicentre$elm_vega$VegaLite$opacity,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(0.3),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(0.3),
 								_1: {ctor: '[]'}
 							},
 							_p53)))));
 	};
-	var specBand = _gicentre$elm_vega$Vega$asSpec(
+	var specBand = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Area,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Area,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15392,20 +15392,20 @@ var _gicentre$elm_vega$Gallery$vl46 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Line chart with confidence interval band.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Line chart with confidence interval band.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specBand,
@@ -15422,46 +15422,46 @@ var _gicentre$elm_vega$Gallery$vl46 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl45 = function () {
 	var encRect = function (_p54) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$Y,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('lower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('lower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y2,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y2,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('upper'),
+						_0: _gicentre$elm_vega$VegaLite$PName('upper'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$opacity,
+						_gicentre$elm_vega$VegaLite$opacity,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(0.2),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(0.2),
 							_1: {ctor: '[]'}
 						},
 						_p54))));
 	};
-	var specRect = _gicentre$elm_vega$Vega$asSpec(
+	var specRect = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rect,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15471,27 +15471,27 @@ var _gicentre$elm_vega$Gallery$vl45 = function () {
 			}
 		});
 	var encMean = function (_p55) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$Y,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('mean_MPG'),
+					_0: _gicentre$elm_vega$VegaLite$PName('mean_MPG'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				_p55));
 	};
-	var specMean = _gicentre$elm_vega$Vega$asSpec(
+	var specMean = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15501,33 +15501,33 @@ var _gicentre$elm_vega$Gallery$vl45 = function () {
 			}
 		});
 	var trans = function (_p56) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A3(
-				_gicentre$elm_vega$Vega$aggregate,
+				_gicentre$elm_vega$VegaLite$aggregate,
 				{
 					ctor: '::',
-					_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Mean, 'Miles_per_Gallon', 'mean_MPG'),
+					_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Mean, 'Miles_per_Gallon', 'mean_MPG'),
 					_1: {
 						ctor: '::',
-						_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Stdev, 'Miles_per_Gallon', 'dev_MPG'),
+						_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Stdev, 'Miles_per_Gallon', 'dev_MPG'),
 						_1: {ctor: '[]'}
 					}
 				},
 				{ctor: '[]'},
 				A3(
-					_gicentre$elm_vega$Vega$calculateAs,
+					_gicentre$elm_vega$VegaLite$calculateAs,
 					'datum.mean_MPG+datum.dev_MPG',
 					'upper',
-					A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.mean_MPG-datum.dev_MPG', 'lower', _p56))));
+					A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.mean_MPG-datum.dev_MPG', 'lower', _p56))));
 	};
-	var specSpread = _gicentre$elm_vega$Vega$asSpec(
+	var specSpread = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: trans(
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$layer(
+				_0: _gicentre$elm_vega$VegaLite$layer(
 					{
 						ctor: '::',
 						_0: specMean,
@@ -15541,39 +15541,39 @@ var _gicentre$elm_vega$Gallery$vl45 = function () {
 			}
 		});
 	var encPoints = function (_p57) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p57)));
 	};
-	var specPoints = _gicentre$elm_vega$Vega$asSpec(
+	var specPoints = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Point,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Point,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15582,20 +15582,20 @@ var _gicentre$elm_vega$Gallery$vl45 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('A scatterplot showing horsepower and miles per gallon for various cars with a global mean and standard deviation overlay.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallon for various cars with a global mean and standard deviation overlay.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specPoints,
@@ -15612,45 +15612,45 @@ var _gicentre$elm_vega$Gallery$vl45 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl44 = function () {
 	var encMean = function (_p58) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A2(
-					_gicentre$elm_vega$Vega$color,
+					_gicentre$elm_vega$VegaLite$color,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MString('red'),
+						_0: _gicentre$elm_vega$VegaLite$MString('red'),
 						_1: {ctor: '[]'}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(5),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 							_1: {ctor: '[]'}
 						},
 						_p58))));
 	};
-	var specMean = _gicentre$elm_vega$Vega$asSpec(
+	var specMean = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15660,23 +15660,23 @@ var _gicentre$elm_vega$Gallery$vl44 = function () {
 			}
 		});
 	var encBars = function (_p59) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}
@@ -15684,25 +15684,25 @@ var _gicentre$elm_vega$Gallery$vl44 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p59)));
 	};
-	var specBars = _gicentre$elm_vega$Vega$asSpec(
+	var specBars = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15711,20 +15711,20 @@ var _gicentre$elm_vega$Gallery$vl44 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Histogram with global mean overlay.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Histogram with global mean overlay.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/movies.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specBars,
@@ -15741,51 +15741,51 @@ var _gicentre$elm_vega$Gallery$vl44 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl43 = function () {
 	var encStdevs = function (_p60) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('upper'),
+					_0: _gicentre$elm_vega$VegaLite$PName('upper'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$X2,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X2,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('lower'),
+						_0: _gicentre$elm_vega$VegaLite$PName('lower'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('variety'),
+							_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p60))));
 	};
-	var specStdevs = _gicentre$elm_vega$Vega$asSpec(
+	var specStdevs = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15795,30 +15795,30 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 			}
 		});
 	var encMeans = function (_p61) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('mean'),
+					_0: _gicentre$elm_vega$VegaLite$PName('mean'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(false),
+									_0: _gicentre$elm_vega$VegaLite$SZero(false),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Barley Yield'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Barley Yield'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -15827,35 +15827,35 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('variety'),
+						_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('black'),
+							_0: _gicentre$elm_vega$VegaLite$MString('black'),
 							_1: {ctor: '[]'}
 						},
 						_p61))));
 	};
-	var specMeans = _gicentre$elm_vega$Vega$asSpec(
+	var specMeans = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Point,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Point,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFilled(true),
+					_0: _gicentre$elm_vega$VegaLite$MFilled(true),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -15866,15 +15866,15 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 			}
 		});
 	var trans = function (_p62) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A3(
-				_gicentre$elm_vega$Vega$aggregate,
+				_gicentre$elm_vega$VegaLite$aggregate,
 				{
 					ctor: '::',
-					_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Mean, 'yield', 'mean'),
+					_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Mean, 'yield', 'mean'),
 					_1: {
 						ctor: '::',
-						_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Stdev, 'yield', 'stdev'),
+						_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Stdev, 'yield', 'stdev'),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -15884,20 +15884,20 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 					_1: {ctor: '[]'}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$calculateAs,
+					_gicentre$elm_vega$VegaLite$calculateAs,
 					'datum.mean-datum.stdev',
 					'lower',
-					A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.mean+datum.stdev', 'upper', _p62))));
+					A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.mean+datum.stdev', 'upper', _p62))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Error bars showing standard deviation.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Error bars showing standard deviation.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
@@ -15906,7 +15906,7 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: specMeans,
@@ -15924,59 +15924,59 @@ var _gicentre$elm_vega$Gallery$vl43 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl42 = function () {
 	var encCIs = function (_p63) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('yield'),
+					_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$CI0),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$CI0),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$X2,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X2,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('yield'),
+						_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$CI1),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$CI1),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('variety'),
+							_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p63))));
 	};
-	var specCIs = _gicentre$elm_vega$Vega$asSpec(
+	var specCIs = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -15986,33 +15986,33 @@ var _gicentre$elm_vega$Gallery$vl42 = function () {
 			}
 		});
 	var encPoints = function (_p64) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('yield'),
+					_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Barley Yield'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Barley Yield'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -16022,35 +16022,35 @@ var _gicentre$elm_vega$Gallery$vl42 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('variety'),
+						_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('black'),
+							_0: _gicentre$elm_vega$VegaLite$MString('black'),
 							_1: {ctor: '[]'}
 						},
 						_p64))));
 	};
-	var specPoints = _gicentre$elm_vega$Vega$asSpec(
+	var specPoints = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Point,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Point,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFilled(true),
+					_0: _gicentre$elm_vega$VegaLite$MFilled(true),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -16060,20 +16060,20 @@ var _gicentre$elm_vega$Gallery$vl42 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Error bars showing confidence intervals');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Error bars showing confidence intervals');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specPoints,
@@ -16090,65 +16090,65 @@ var _gicentre$elm_vega$Gallery$vl42 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl41 = function () {
 	var encBar = function (_p65) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonthDate),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonthDate),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('open'),
+						_0: _gicentre$elm_vega$VegaLite$PName('open'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('close'),
+							_0: _gicentre$elm_vega$VegaLite$PName('close'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(5),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 								_1: {ctor: '[]'}
 							},
 							A2(
-								_gicentre$elm_vega$Vega$color,
+								_gicentre$elm_vega$VegaLite$color,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MName('isIncrease'),
+									_0: _gicentre$elm_vega$VegaLite$MName('isIncrease'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MLegend(
+											_0: _gicentre$elm_vega$VegaLite$MLegend(
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
 										}
@@ -16156,12 +16156,12 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 								},
 								_p65))))));
 	};
-	var specBar = _gicentre$elm_vega$Vega$asSpec(
+	var specBar = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -16171,37 +16171,37 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 			}
 		});
 	var encLine = function (_p66) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonthDate),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonthDate),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
-											_gicentre$elm_vega$Vega$DDateTimes(
+										_0: _gicentre$elm_vega$VegaLite$SDomain(
+											_gicentre$elm_vega$VegaLite$DDateTimes(
 												{
 													ctor: '::',
 													_0: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$DTMonth(_gicentre$elm_vega$Vega$May),
+														_0: _gicentre$elm_vega$VegaLite$DTMonth(_gicentre$elm_vega$VegaLite$May),
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$DTDate(31),
+															_0: _gicentre$elm_vega$VegaLite$DTDate(31),
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$DTYear(2009),
+																_0: _gicentre$elm_vega$VegaLite$DTYear(2009),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -16210,13 +16210,13 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 														ctor: '::',
 														_0: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$DTMonth(_gicentre$elm_vega$Vega$Jul),
+															_0: _gicentre$elm_vega$VegaLite$DTMonth(_gicentre$elm_vega$VegaLite$Jul),
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$DTDate(1),
+																_0: _gicentre$elm_vega$VegaLite$DTDate(1),
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$DTYear(2009),
+																	_0: _gicentre$elm_vega$VegaLite$DTYear(2009),
 																	_1: {ctor: '[]'}
 																}
 															}
@@ -16228,13 +16228,13 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Date in 2009'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Date in 2009'),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Format('%m/%d'),
+												_0: _gicentre$elm_vega$VegaLite$Format('%m/%d'),
 												_1: {ctor: '[]'}
 											}
 										}),
@@ -16245,20 +16245,20 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('low'),
+						_0: _gicentre$elm_vega$VegaLite$PName('low'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -16266,36 +16266,36 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('high'),
+							_0: _gicentre$elm_vega$VegaLite$PName('high'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MName('isIncrease'),
+								_0: _gicentre$elm_vega$VegaLite$MName('isIncrease'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MLegend(
+										_0: _gicentre$elm_vega$VegaLite$MLegend(
 											{ctor: '[]'}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MScale(
+											_0: _gicentre$elm_vega$VegaLite$MScale(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$SRange(
-														_gicentre$elm_vega$Vega$RStrings(
+													_0: _gicentre$elm_vega$VegaLite$SRange(
+														_gicentre$elm_vega$VegaLite$RStrings(
 															{
 																ctor: '::',
 																_0: '#ae1325',
@@ -16314,12 +16314,12 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 							},
 							_p66)))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -16329,17 +16329,17 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 			}
 		});
 	var trans = function (_p67) {
-		return _gicentre$elm_vega$Vega$transform(
-			A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.open > datum.close', 'isIncrease', _p67));
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.open > datum.close', 'isIncrease', _p67));
 	};
 	var data = function (_p68) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'date',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: '01-Jun-2009',
@@ -16430,9 +16430,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'open',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 28.7,
@@ -16523,9 +16523,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 							}
 						}),
 					A3(
-						_gicentre$elm_vega$Vega$dataColumn,
+						_gicentre$elm_vega$VegaLite$dataColumn,
 						'high',
-						_gicentre$elm_vega$Vega$Numbers(
+						_gicentre$elm_vega$VegaLite$Numbers(
 							{
 								ctor: '::',
 								_0: 30.05,
@@ -16616,9 +16616,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 								}
 							}),
 						A3(
-							_gicentre$elm_vega$Vega$dataColumn,
+							_gicentre$elm_vega$VegaLite$dataColumn,
 							'low',
-							_gicentre$elm_vega$Vega$Numbers(
+							_gicentre$elm_vega$VegaLite$Numbers(
 								{
 									ctor: '::',
 									_0: 28.45,
@@ -16709,9 +16709,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 									}
 								}),
 							A3(
-								_gicentre$elm_vega$Vega$dataColumn,
+								_gicentre$elm_vega$VegaLite$dataColumn,
 								'close',
-								_gicentre$elm_vega$Vega$Numbers(
+								_gicentre$elm_vega$VegaLite$Numbers(
 									{
 										ctor: '::',
 										_0: 30.04,
@@ -16802,9 +16802,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 										}
 									}),
 								A3(
-									_gicentre$elm_vega$Vega$dataColumn,
+									_gicentre$elm_vega$VegaLite$dataColumn,
 									'signal',
-									_gicentre$elm_vega$Vega$Strings(
+									_gicentre$elm_vega$VegaLite$Strings(
 										{
 											ctor: '::',
 											_0: 'short',
@@ -16895,9 +16895,9 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 											}
 										}),
 									A3(
-										_gicentre$elm_vega$Vega$dataColumn,
+										_gicentre$elm_vega$VegaLite$dataColumn,
 										'ret',
-										_gicentre$elm_vega$Vega$Numbers(
+										_gicentre$elm_vega$VegaLite$Numbers(
 											{
 												ctor: '::',
 												_0: -4.89396411092985,
@@ -16989,14 +16989,14 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 											}),
 										_p68))))))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(320),
+				_0: _gicentre$elm_vega$VegaLite$width(320),
 				_1: {
 					ctor: '::',
 					_0: data(
@@ -17007,7 +17007,7 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$layer(
+							_0: _gicentre$elm_vega$VegaLite$layer(
 								{
 									ctor: '::',
 									_0: specLine,
@@ -17026,56 +17026,56 @@ var _gicentre$elm_vega$Gallery$vl41 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl40 = function () {
 	var encBoxMid = function (_p69) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('midBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('midBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('white'),
+							_0: _gicentre$elm_vega$VegaLite$MString('white'),
 							_1: {ctor: '[]'}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(5),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 								_1: {ctor: '[]'}
 							},
 							_p69)))));
 	};
-	var specBoxMid = _gicentre$elm_vega$Vega$asSpec(
+	var specBoxMid = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Tick,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Tick,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxMid',
@@ -17091,61 +17091,61 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 			}
 		});
 	var encBox = function (_p70) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('lowerBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('lowerBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('upperBox'),
+							_0: _gicentre$elm_vega$VegaLite$PName('upperBox'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(5),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 								_1: {ctor: '[]'}
 							},
 							_p70)))));
 	};
-	var specBox = _gicentre$elm_vega$Vega$asSpec(
+	var specBox = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'box',
@@ -17161,54 +17161,54 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 			}
 		});
 	var encUWhisker = function (_p71) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('upperBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('upperBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('upperWhisker'),
+							_0: _gicentre$elm_vega$VegaLite$PName('upperWhisker'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p71))));
 	};
-	var specUWhisker = _gicentre$elm_vega$Vega$asSpec(
+	var specUWhisker = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxWhisker',
@@ -17224,34 +17224,34 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 			}
 		});
 	var encLWhisker = function (_p72) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('lowerWhisker'),
+						_0: _gicentre$elm_vega$VegaLite$PName('lowerWhisker'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Population'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Population'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -17259,28 +17259,28 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('lowerBox'),
+							_0: _gicentre$elm_vega$VegaLite$PName('lowerBox'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p72))));
 	};
-	var specLWhisker = _gicentre$elm_vega$Vega$asSpec(
+	var specLWhisker = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxWhisker',
@@ -17296,18 +17296,18 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 			}
 		});
 	var trans = function (_p73) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A3(
-				_gicentre$elm_vega$Vega$aggregate,
+				_gicentre$elm_vega$VegaLite$aggregate,
 				{
 					ctor: '::',
-					_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Q1, 'people', 'lowerBox'),
+					_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Q1, 'people', 'lowerBox'),
 					_1: {
 						ctor: '::',
-						_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Median, 'people', 'midBox'),
+						_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Median, 'people', 'midBox'),
 						_1: {
 							ctor: '::',
-							_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Q3, 'people', 'upperBox'),
+							_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Q3, 'people', 'upperBox'),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -17318,24 +17318,24 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 					_1: {ctor: '[]'}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$calculateAs,
+					_gicentre$elm_vega$VegaLite$calculateAs,
 					'datum.upperBox - datum.lowerBox',
 					'IQR',
 					A3(
-						_gicentre$elm_vega$Vega$calculateAs,
+						_gicentre$elm_vega$VegaLite$calculateAs,
 						'datum.upperBox + datum.IQR * 1.5',
 						'upperWhisker',
-						A3(_gicentre$elm_vega$Vega$calculateAs, 'max(0,datum.lowerBox - datum.IQR *1.5)', 'lowerWhisker', _p73)))));
+						A3(_gicentre$elm_vega$VegaLite$calculateAs, 'max(0,datum.lowerBox - datum.IQR *1.5)', 'lowerWhisker', _p73)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn\'t strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn\'t strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
@@ -17344,7 +17344,7 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: specLWhisker,
@@ -17370,56 +17370,56 @@ var _gicentre$elm_vega$Gallery$vl40 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl39 = function () {
 	var encBoxMid = function (_p74) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('midBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('midBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('white'),
+							_0: _gicentre$elm_vega$VegaLite$MString('white'),
 							_1: {ctor: '[]'}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(5),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 								_1: {ctor: '[]'}
 							},
 							_p74)))));
 	};
-	var specBoxMid = _gicentre$elm_vega$Vega$asSpec(
+	var specBoxMid = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Tick,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Tick,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxMid',
@@ -17435,61 +17435,61 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 			}
 		});
 	var encBox = function (_p75) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('lowerBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('lowerBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('upperBox'),
+							_0: _gicentre$elm_vega$VegaLite$PName('upperBox'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$size,
+							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(5),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(5),
 								_1: {ctor: '[]'}
 							},
 							_p75)))));
 	};
-	var specBox = _gicentre$elm_vega$Vega$asSpec(
+	var specBox = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'box',
@@ -17505,54 +17505,54 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 			}
 		});
 	var encUWhisker = function (_p76) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('upperBox'),
+						_0: _gicentre$elm_vega$VegaLite$PName('upperBox'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('upperWhisker'),
+							_0: _gicentre$elm_vega$VegaLite$PName('upperWhisker'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p76))));
 	};
-	var specUWhisker = _gicentre$elm_vega$Vega$asSpec(
+	var specUWhisker = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxWhisker',
@@ -17568,34 +17568,34 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 			}
 		});
 	var encLWhisker = function (_p77) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('lowerWhisker'),
+						_0: _gicentre$elm_vega$VegaLite$PName('lowerWhisker'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Population'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Population'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -17603,28 +17603,28 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('lowerBox'),
+							_0: _gicentre$elm_vega$VegaLite$PName('lowerBox'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p77))));
 	};
-	var specLWhisker = _gicentre$elm_vega$Vega$asSpec(
+	var specLWhisker = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'boxWhisker',
@@ -17640,24 +17640,24 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 			}
 		});
 	var trans = function (_p78) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A3(
-				_gicentre$elm_vega$Vega$aggregate,
+				_gicentre$elm_vega$VegaLite$aggregate,
 				{
 					ctor: '::',
-					_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Min, 'people', 'lowerWhisker'),
+					_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Min, 'people', 'lowerWhisker'),
 					_1: {
 						ctor: '::',
-						_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Q1, 'people', 'lowerBox'),
+						_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Q1, 'people', 'lowerBox'),
 						_1: {
 							ctor: '::',
-							_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Median, 'people', 'midBox'),
+							_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Median, 'people', 'midBox'),
 							_1: {
 								ctor: '::',
-								_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Q3, 'people', 'upperBox'),
+								_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Q3, 'people', 'upperBox'),
 								_1: {
 									ctor: '::',
-									_0: A3(_gicentre$elm_vega$Vega$opAs, _gicentre$elm_vega$Vega$Max, 'people', 'upperWhisker'),
+									_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Max, 'people', 'upperWhisker'),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -17671,15 +17671,15 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 				},
 				_p78));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
@@ -17688,7 +17688,7 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$layer(
+						_0: _gicentre$elm_vega$VegaLite$layer(
 							{
 								ctor: '::',
 								_0: specLWhisker,
@@ -17714,85 +17714,85 @@ var _gicentre$elm_vega$Gallery$vl39 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl38 = function () {
 	var config = function (_p79) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
-				_gicentre$elm_vega$Vega$Scale(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$Scale(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SCBandPaddingInner(0),
+						_0: _gicentre$elm_vega$VegaLite$SCBandPaddingInner(0),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SCBandPaddingOuter(0),
+							_0: _gicentre$elm_vega$VegaLite$SCBandPaddingOuter(0),
 							_1: {ctor: '[]'}
 						}
 					}),
 				A2(
-					_gicentre$elm_vega$Vega$configuration,
-					_gicentre$elm_vega$Vega$TextStyle(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$TextStyle(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MBaseline(_gicentre$elm_vega$Vega$AlignMiddle),
+							_0: _gicentre$elm_vega$VegaLite$MBaseline(_gicentre$elm_vega$VegaLite$AlignMiddle),
 							_1: {ctor: '[]'}
 						}),
 					_p79)));
 	};
 	var encText = function (_p80) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Cylinders'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Origin'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Origin'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MString('white'),
+							_0: _gicentre$elm_vega$VegaLite$MString('white'),
 							_1: {ctor: '[]'}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$text,
+							_gicentre$elm_vega$VegaLite$text,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$TName('*'),
+								_0: _gicentre$elm_vega$VegaLite$TName('*'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$TmType(_gicentre$elm_vega$Vega$Quantitative),
+									_0: _gicentre$elm_vega$VegaLite$TmType(_gicentre$elm_vega$VegaLite$Quantitative),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$TAggregate(_gicentre$elm_vega$Vega$Count),
+										_0: _gicentre$elm_vega$VegaLite$TAggregate(_gicentre$elm_vega$VegaLite$Count),
 										_1: {ctor: '[]'}
 									}
 								}
 							},
 							_p80)))));
 	};
-	var specText = _gicentre$elm_vega$Vega$asSpec(
+	var specText = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Text,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Text,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -17802,54 +17802,54 @@ var _gicentre$elm_vega$Gallery$vl38 = function () {
 			}
 		});
 	var encRect = function (_p81) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Cylinders'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Origin'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Origin'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('*'),
+							_0: _gicentre$elm_vega$VegaLite$MName('*'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Count),
+									_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						_p81))));
 	};
-	var specRect = _gicentre$elm_vega$Vega$asSpec(
+	var specRect = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rect,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -17858,20 +17858,20 @@ var _gicentre$elm_vega$Gallery$vl38 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Layering text over \'heatmap\'.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Layering text over \'heatmap\'.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specRect,
@@ -17893,45 +17893,45 @@ var _gicentre$elm_vega$Gallery$vl38 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl37 = function () {
 	var encLine = function (_p82) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$Y,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('precipitation'),
+					_0: _gicentre$elm_vega$VegaLite$PName('precipitation'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A2(
-					_gicentre$elm_vega$Vega$color,
+					_gicentre$elm_vega$VegaLite$color,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MString('red'),
+						_0: _gicentre$elm_vega$VegaLite$MString('red'),
 						_1: {ctor: '[]'}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(3),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(3),
 							_1: {ctor: '[]'}
 						},
 						_p82))));
 	};
-	var specLine = _gicentre$elm_vega$Vega$asSpec(
+	var specLine = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rule,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Rule,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -17941,47 +17941,47 @@ var _gicentre$elm_vega$Gallery$vl37 = function () {
 			}
 		});
 	var encBar = function (_p83) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('precipitation'),
+						_0: _gicentre$elm_vega$VegaLite$PName('precipitation'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Mean),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Mean),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					_p83)));
 	};
-	var specBar = _gicentre$elm_vega$Vega$asSpec(
+	var specBar = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -17990,20 +17990,20 @@ var _gicentre$elm_vega$Gallery$vl37 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var des = _gicentre$elm_vega$Vega$description('Monthly precipitation with mean value overlay.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Monthly precipitation with mean value overlay.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/seattle-weather.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specBar,
@@ -18020,21 +18020,21 @@ var _gicentre$elm_vega$Gallery$vl37 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl36 = function () {
 	var config = function (_p84) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
+				_gicentre$elm_vega$VegaLite$configuration,
 				A2(
-					_gicentre$elm_vega$Vega$NamedStyle,
+					_gicentre$elm_vega$VegaLite$NamedStyle,
 					'label',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MAlign(_gicentre$elm_vega$Vega$AlignLeft),
+						_0: _gicentre$elm_vega$VegaLite$MAlign(_gicentre$elm_vega$VegaLite$AlignLeft),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MBaseline(_gicentre$elm_vega$Vega$AlignMiddle),
+							_0: _gicentre$elm_vega$VegaLite$MBaseline(_gicentre$elm_vega$VegaLite$AlignMiddle),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MdX(3),
+								_0: _gicentre$elm_vega$VegaLite$MdX(3),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -18042,53 +18042,53 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 				_p84));
 	};
 	var encText = function (_p85) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('b'),
+					_0: _gicentre$elm_vega$VegaLite$PName('b'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('a'),
+						_0: _gicentre$elm_vega$VegaLite$PName('a'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$text,
+						_gicentre$elm_vega$VegaLite$text,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$TName('b'),
+							_0: _gicentre$elm_vega$VegaLite$TName('b'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$TmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$TmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p85))));
 	};
-	var specText = _gicentre$elm_vega$Vega$asSpec(
+	var specText = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Text,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Text,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MStyle(
+					_0: _gicentre$elm_vega$VegaLite$MStyle(
 						{
 							ctor: '::',
 							_0: 'label',
@@ -18104,39 +18104,39 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 			}
 		});
 	var encBar = function (_p86) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('b'),
+					_0: _gicentre$elm_vega$VegaLite$PName('b'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('a'),
+						_0: _gicentre$elm_vega$VegaLite$PName('a'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p86)));
 	};
-	var specBar = _gicentre$elm_vega$Vega$asSpec(
+	var specBar = _gicentre$elm_vega$VegaLite$asSpec(
 		{
 			ctor: '::',
 			_0: A2(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Bar,
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Bar,
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
@@ -18147,12 +18147,12 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 		});
 	var data = function (_p87) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'a',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: 'A',
@@ -18167,9 +18167,9 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'b',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 28,
@@ -18185,8 +18185,8 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 						}),
 					_p87)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A simple bar chart with embedded data labels.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with embedded data labels.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
@@ -18196,7 +18196,7 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$layer(
+					_0: _gicentre$elm_vega$VegaLite$layer(
 						{
 							ctor: '::',
 							_0: specBar,
@@ -18218,28 +18218,28 @@ var _gicentre$elm_vega$Gallery$vl36 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl35 = function () {
 	var enc = function (_p88) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Format('%Y'),
+									_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Time'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Time'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Grid(false),
+											_0: _gicentre$elm_vega$VegaLite$Grid(false),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -18249,23 +18249,23 @@ var _gicentre$elm_vega$Gallery$vl35 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Time'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Time'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Grid(false),
+											_0: _gicentre$elm_vega$VegaLite$Grid(false),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -18274,35 +18274,35 @@ var _gicentre$elm_vega$Gallery$vl35 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('symbol'),
+							_0: _gicentre$elm_vega$VegaLite$MName('symbol'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MLegend(
+									_0: _gicentre$elm_vega$VegaLite$MLegend(
 										{ctor: '[]'}),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$row,
+							_gicentre$elm_vega$VegaLite$row,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('symbol'),
+								_0: _gicentre$elm_vega$VegaLite$FName('symbol'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$FHeader(
+										_0: _gicentre$elm_vega$VegaLite$FHeader(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$HTitle('Company'),
+												_0: _gicentre$elm_vega$VegaLite$HTitle('Company'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -18312,27 +18312,27 @@ var _gicentre$elm_vega$Gallery$vl35 = function () {
 							_p88)))));
 	};
 	var trans = function (_p89) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.symbol !== \'GOOG\''),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.symbol !== \'GOOG\''),
 				_p89));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Stock prices of four large companies as a small multiples of area charts.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Stock prices of four large companies as a small multiples of area charts.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(40),
+					_0: _gicentre$elm_vega$VegaLite$height(40),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/stocks.csv',
 							{ctor: '[]'}),
 						_1: {
@@ -18342,8 +18342,8 @@ var _gicentre$elm_vega$Gallery$vl35 = function () {
 							_1: {
 								ctor: '::',
 								_0: A2(
-									_gicentre$elm_vega$Vega$mark,
-									_gicentre$elm_vega$Vega$Area,
+									_gicentre$elm_vega$VegaLite$mark,
+									_gicentre$elm_vega$VegaLite$Area,
 									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
@@ -18360,25 +18360,25 @@ var _gicentre$elm_vega$Gallery$vl35 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl34 = function () {
 	var enc = function (_p90) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('yield'),
+					_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Median),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Median),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -18387,36 +18387,36 @@ var _gicentre$elm_vega$Gallery$vl34 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('variety'),
+						_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PSort(
+								_0: _gicentre$elm_vega$VegaLite$PSort(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$ByField('Horsepower'),
+										_0: _gicentre$elm_vega$VegaLite$ByField('Horsepower'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Op(_gicentre$elm_vega$Vega$Mean),
+											_0: _gicentre$elm_vega$VegaLite$Op(_gicentre$elm_vega$VegaLite$Mean),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Descending,
+												_0: _gicentre$elm_vega$VegaLite$Descending,
 												_1: {ctor: '[]'}
 											}
 										}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PScale(
+									_0: _gicentre$elm_vega$VegaLite$PScale(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRangeStep(
+											_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 												_elm_lang$core$Maybe$Just(12)),
 											_1: {ctor: '[]'}
 										}),
@@ -18426,45 +18426,45 @@ var _gicentre$elm_vega$Gallery$vl34 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('year'),
+							_0: _gicentre$elm_vega$VegaLite$MName('year'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$row,
+							_gicentre$elm_vega$VegaLite$row,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('site'),
+								_0: _gicentre$elm_vega$VegaLite$FName('site'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 									_1: {ctor: '[]'}
 								}
 							},
 							_p90)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -18478,22 +18478,22 @@ var _gicentre$elm_vega$Gallery$vl34 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl33 = function () {
 	var enc = function (_p91) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(15),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(15),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -18501,46 +18501,46 @@ var _gicentre$elm_vega$Gallery$vl33 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$row,
+						_gicentre$elm_vega$VegaLite$row,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$FName('Origin'),
+							_0: _gicentre$elm_vega$VegaLite$FName('Origin'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p91))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Disitributions of car engine power for different countries of origin.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Disitributions of car engine power for different countries of origin.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -18554,60 +18554,60 @@ var _gicentre$elm_vega$Gallery$vl33 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl32 = function () {
 	var enc = function (_p92) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Worldwide_Gross'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Worldwide_Gross'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('US_DVD_Sales'),
+						_0: _gicentre$elm_vega$VegaLite$PName('US_DVD_Sales'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$column,
+						_gicentre$elm_vega$VegaLite$column,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$FName('MPAA_Rating'),
+							_0: _gicentre$elm_vega$VegaLite$FName('MPAA_Rating'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p92))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Scatterplots of movie takings vs profits for different MPAA ratings.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Scatterplots of movie takings vs profits for different MPAA ratings.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/movies.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -18621,75 +18621,75 @@ var _gicentre$elm_vega$Gallery$vl32 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl31 = function () {
 	var enc = function (_p93) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('yield'),
+					_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('variety'),
+						_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('site'),
+							_0: _gicentre$elm_vega$VegaLite$MName('site'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$column,
+							_gicentre$elm_vega$VegaLite$column,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('year'),
+								_0: _gicentre$elm_vega$VegaLite$FName('year'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 									_1: {ctor: '[]'}
 								}
 							},
 							_p93)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Barley crop yields in 1931 and 1932 shown as stacked bar charts.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Barley crop yields in 1931 and 1932 shown as stacked bar charts.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -18703,22 +18703,22 @@ var _gicentre$elm_vega$Gallery$vl31 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl30 = function () {
 	var enc = function (_p94) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRangeStep(
+									_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 										_elm_lang$core$Maybe$Just(17)),
 									_1: {ctor: '[]'}
 								}),
@@ -18727,23 +18727,23 @@ var _gicentre$elm_vega$Gallery$vl30 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('people'),
+						_0: _gicentre$elm_vega$VegaLite$PName('people'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Population'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Population'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -18752,20 +18752,20 @@ var _gicentre$elm_vega$Gallery$vl30 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('gender'),
+							_0: _gicentre$elm_vega$VegaLite$MName('gender'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
-												_gicentre$elm_vega$Vega$RStrings(
+											_0: _gicentre$elm_vega$VegaLite$SRange(
+												_gicentre$elm_vega$VegaLite$RStrings(
 													{
 														ctor: '::',
 														_0: '#EA98D2',
@@ -18782,34 +18782,34 @@ var _gicentre$elm_vega$Gallery$vl30 = function () {
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$row,
+							_gicentre$elm_vega$VegaLite$row,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('gender'),
+								_0: _gicentre$elm_vega$VegaLite$FName('gender'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {ctor: '[]'}
 								}
 							},
 							_p94)))));
 	};
 	var trans = function (_p95) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p95)));
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p95)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A trellis bar chart showing the US population distribution of age groups and gender in 2000.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A trellis bar chart showing the US population distribution of age groups and gender in 2000.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
@@ -18819,8 +18819,8 @@ var _gicentre$elm_vega$Gallery$vl30 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Bar,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Bar,
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
@@ -18835,22 +18835,22 @@ var _gicentre$elm_vega$Gallery$vl30 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl29 = function () {
 	var enc = function (_p96) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('X'),
+					_0: _gicentre$elm_vega$VegaLite$PName('X'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(false),
+									_0: _gicentre$elm_vega$VegaLite$SZero(false),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -18858,20 +18858,20 @@ var _gicentre$elm_vega$Gallery$vl29 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Y'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Y'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -18879,41 +18879,41 @@ var _gicentre$elm_vega$Gallery$vl29 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$opacity,
+						_gicentre$elm_vega$VegaLite$opacity,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MNumber(1),
+							_0: _gicentre$elm_vega$VegaLite$MNumber(1),
 							_1: {ctor: '[]'}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$column,
+							_gicentre$elm_vega$VegaLite$column,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FName('Series'),
+								_0: _gicentre$elm_vega$VegaLite$FName('Series'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+									_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 									_1: {ctor: '[]'}
 								}
 							},
 							_p96)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Anscombe\'s Quartet');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Anscombe\'s Quartet');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/anscombe.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Circle,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Circle,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -18927,22 +18927,22 @@ var _gicentre$elm_vega$Gallery$vl29 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl28 = function () {
 	var enc = function (_p97) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('percentage_start'),
+					_0: _gicentre$elm_vega$VegaLite$PName('percentage_start'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$AxTitle('Percentage'),
+									_0: _gicentre$elm_vega$VegaLite$AxTitle('Percentage'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -18950,44 +18950,44 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$X2,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X2,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('percentage_end'),
+						_0: _gicentre$elm_vega$VegaLite$PName('percentage_end'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$Y,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('question'),
+							_0: _gicentre$elm_vega$VegaLite$PName('question'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Question'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Question'),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Offset(5),
+												_0: _gicentre$elm_vega$VegaLite$Offset(5),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$Ticks(false),
+													_0: _gicentre$elm_vega$VegaLite$Ticks(false),
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$MinExtent(60),
+														_0: _gicentre$elm_vega$VegaLite$MinExtent(60),
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$Domain(false),
+															_0: _gicentre$elm_vega$VegaLite$Domain(false),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -18999,28 +18999,28 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MName('type'),
+								_0: _gicentre$elm_vega$VegaLite$MName('type'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MLegend(
+										_0: _gicentre$elm_vega$VegaLite$MLegend(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$LTitle('Response'),
+												_0: _gicentre$elm_vega$VegaLite$LTitle('Response'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MScale(
+											_0: _gicentre$elm_vega$VegaLite$MScale(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
-													_1: _gicentre$elm_vega$Vega$categoricalDomainMap(
+													_0: _gicentre$elm_vega$VegaLite$SType(_gicentre$elm_vega$VegaLite$ScOrdinal),
+													_1: _gicentre$elm_vega$VegaLite$categoricalDomainMap(
 														{
 															ctor: '::',
 															_0: {ctor: '_Tuple2', _0: 'Strongly disagree', _1: '#c30d24'},
@@ -19052,12 +19052,12 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 	};
 	var data = function (_p98) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'question',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: 'Q1',
@@ -19220,9 +19220,9 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'type',
-					_gicentre$elm_vega$Vega$Strings(
+					_gicentre$elm_vega$VegaLite$Strings(
 						{
 							ctor: '::',
 							_0: 'Strongly disagree',
@@ -19385,9 +19385,9 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 							}
 						}),
 					A3(
-						_gicentre$elm_vega$Vega$dataColumn,
+						_gicentre$elm_vega$VegaLite$dataColumn,
 						'value',
-						_gicentre$elm_vega$Vega$Numbers(
+						_gicentre$elm_vega$VegaLite$Numbers(
 							{
 								ctor: '::',
 								_0: 24,
@@ -19550,9 +19550,9 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 								}
 							}),
 						A3(
-							_gicentre$elm_vega$Vega$dataColumn,
+							_gicentre$elm_vega$VegaLite$dataColumn,
 							'percentage',
-							_gicentre$elm_vega$Vega$Numbers(
+							_gicentre$elm_vega$VegaLite$Numbers(
 								{
 									ctor: '::',
 									_0: 0.7,
@@ -19715,9 +19715,9 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 									}
 								}),
 							A3(
-								_gicentre$elm_vega$Vega$dataColumn,
+								_gicentre$elm_vega$VegaLite$dataColumn,
 								'percentage_start',
-								_gicentre$elm_vega$Vega$Numbers(
+								_gicentre$elm_vega$VegaLite$Numbers(
 									{
 										ctor: '::',
 										_0: -19.1,
@@ -19880,9 +19880,9 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 										}
 									}),
 								A3(
-									_gicentre$elm_vega$Vega$dataColumn,
+									_gicentre$elm_vega$VegaLite$dataColumn,
 									'percentage_end',
-									_gicentre$elm_vega$Vega$Numbers(
+									_gicentre$elm_vega$VegaLite$Numbers(
 										{
 											ctor: '::',
 											_0: -18.4,
@@ -20046,8 +20046,8 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 										}),
 									_p98)))))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
@@ -20058,8 +20058,8 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -20073,22 +20073,22 @@ var _gicentre$elm_vega$Gallery$vl28 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl27 = function () {
 	var enc = function (_p99) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRangeStep(
+									_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 										_elm_lang$core$Maybe$Just(17)),
 									_1: {ctor: '[]'}
 								}),
@@ -20097,28 +20097,28 @@ var _gicentre$elm_vega$Gallery$vl27 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('people'),
+						_0: _gicentre$elm_vega$VegaLite$PName('people'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Population'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Population'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PStack(_gicentre$elm_vega$Vega$NoStack),
+										_0: _gicentre$elm_vega$VegaLite$PStack(_gicentre$elm_vega$VegaLite$NoStack),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20126,20 +20126,20 @@ var _gicentre$elm_vega$Gallery$vl27 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('gender'),
+							_0: _gicentre$elm_vega$VegaLite$MName('gender'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
-												_gicentre$elm_vega$Vega$RStrings(
+											_0: _gicentre$elm_vega$VegaLite$SRange(
+												_gicentre$elm_vega$VegaLite$RStrings(
 													{
 														ctor: '::',
 														_0: '#e377c2',
@@ -20156,30 +20156,30 @@ var _gicentre$elm_vega$Gallery$vl27 = function () {
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$opacity,
+							_gicentre$elm_vega$VegaLite$opacity,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MNumber(0.7),
+								_0: _gicentre$elm_vega$VegaLite$MNumber(0.7),
 								_1: {ctor: '[]'}
 							},
 							_p99)))));
 	};
 	var trans = function (_p100) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p100)));
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p100)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Layered bar chart showing the US population distribution of age groups and gender in 2000.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Layered bar chart showing the US population distribution of age groups and gender in 2000.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
@@ -20189,8 +20189,8 @@ var _gicentre$elm_vega$Gallery$vl27 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Bar,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Bar,
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
@@ -20205,28 +20205,28 @@ var _gicentre$elm_vega$Gallery$vl27 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl26 = function () {
 	var enc = function (_p101) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonth),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Domain(false),
+										_0: _gicentre$elm_vega$VegaLite$Domain(false),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Format('%Y'),
+											_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -20236,24 +20236,24 @@ var _gicentre$elm_vega$Gallery$vl26 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('count'),
+						_0: _gicentre$elm_vega$VegaLite$PName('count'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{ctor: '[]'}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PStack(_gicentre$elm_vega$Vega$StCenter),
+										_0: _gicentre$elm_vega$VegaLite$PStack(_gicentre$elm_vega$VegaLite$StCenter),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20261,20 +20261,20 @@ var _gicentre$elm_vega$Gallery$vl26 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('series'),
+							_0: _gicentre$elm_vega$VegaLite$MName('series'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
 											_0: A2(
-												_gicentre$elm_vega$Vega$SScheme,
+												_gicentre$elm_vega$VegaLite$SScheme,
 												'category20b',
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
@@ -20285,28 +20285,28 @@ var _gicentre$elm_vega$Gallery$vl26 = function () {
 						},
 						_p101))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Unemployment across industries as a streamgraph (centred, stacked area chart).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a streamgraph (centred, stacked area chart).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(200),
+					_0: _gicentre$elm_vega$VegaLite$height(200),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/unemployment-across-industries.json',
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Area,
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Area,
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
@@ -20322,28 +20322,28 @@ var _gicentre$elm_vega$Gallery$vl26 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl25 = function () {
 	var enc = function (_p102) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonth),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Domain(false),
+										_0: _gicentre$elm_vega$VegaLite$Domain(false),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$Format('%Y'),
+											_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -20353,24 +20353,24 @@ var _gicentre$elm_vega$Gallery$vl25 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('count'),
+						_0: _gicentre$elm_vega$VegaLite$PName('count'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{ctor: '[]'}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PStack(_gicentre$elm_vega$Vega$StNormalize),
+										_0: _gicentre$elm_vega$VegaLite$PStack(_gicentre$elm_vega$VegaLite$StNormalize),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20378,20 +20378,20 @@ var _gicentre$elm_vega$Gallery$vl25 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('series'),
+							_0: _gicentre$elm_vega$VegaLite$MName('series'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
 											_0: A2(
-												_gicentre$elm_vega$Vega$SScheme,
+												_gicentre$elm_vega$VegaLite$SScheme,
 												'category20b',
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
@@ -20402,28 +20402,28 @@ var _gicentre$elm_vega$Gallery$vl25 = function () {
 						},
 						_p102))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Unemployment across industries as a normalised area chart.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a normalised area chart.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(200),
+					_0: _gicentre$elm_vega$VegaLite$height(200),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/unemployment-across-industries.json',
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Area,
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Area,
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
@@ -20439,25 +20439,25 @@ var _gicentre$elm_vega$Gallery$vl25 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl24 = function () {
 	var enc = function (_p103) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonth),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Format('%Y'),
+										_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -20466,36 +20466,36 @@ var _gicentre$elm_vega$Gallery$vl24 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('count'),
+						_0: _gicentre$elm_vega$VegaLite$PName('count'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('series'),
+							_0: _gicentre$elm_vega$VegaLite$MName('series'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
 											_0: A2(
-												_gicentre$elm_vega$Vega$SScheme,
+												_gicentre$elm_vega$VegaLite$SScheme,
 												'category20b',
 												{ctor: '[]'}),
 											_1: {ctor: '[]'}
@@ -20506,22 +20506,22 @@ var _gicentre$elm_vega$Gallery$vl24 = function () {
 						},
 						_p103))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Unemployment across industries as a stacked area chart.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a stacked area chart.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/unemployment-across-industries.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Area,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Area,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -20535,22 +20535,22 @@ var _gicentre$elm_vega$Gallery$vl24 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl23 = function () {
 	var enc = function (_p104) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('age'),
+					_0: _gicentre$elm_vega$VegaLite$PName('age'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRangeStep(
+									_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 										_elm_lang$core$Maybe$Just(17)),
 									_1: {ctor: '[]'}
 								}),
@@ -20559,28 +20559,28 @@ var _gicentre$elm_vega$Gallery$vl23 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('people'),
+						_0: _gicentre$elm_vega$VegaLite$PName('people'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Population'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Population'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PStack(_gicentre$elm_vega$Vega$StNormalize),
+										_0: _gicentre$elm_vega$VegaLite$PStack(_gicentre$elm_vega$VegaLite$StNormalize),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20588,20 +20588,20 @@ var _gicentre$elm_vega$Gallery$vl23 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('gender'),
+							_0: _gicentre$elm_vega$VegaLite$MName('gender'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
-												_gicentre$elm_vega$Vega$RStrings(
+											_0: _gicentre$elm_vega$VegaLite$SRange(
+												_gicentre$elm_vega$VegaLite$RStrings(
 													{
 														ctor: '::',
 														_0: '#EA98D2',
@@ -20620,21 +20620,21 @@ var _gicentre$elm_vega$Gallery$vl23 = function () {
 						_p104))));
 	};
 	var trans = function (_p105) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p105)));
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p105)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Population structure as a normalised stacked bar chart.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Population structure as a normalised stacked bar chart.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
@@ -20644,8 +20644,8 @@ var _gicentre$elm_vega$Gallery$vl23 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Bar,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Bar,
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
@@ -20660,64 +20660,64 @@ var _gicentre$elm_vega$Gallery$vl23 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl22 = function () {
 	var enc = function (_p106) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('yield'),
+					_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('variety'),
+						_0: _gicentre$elm_vega$VegaLite$PName('variety'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('site'),
+							_0: _gicentre$elm_vega$VegaLite$MName('site'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p106))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Barley crop yields as a horizontal stacked bar chart');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Barley crop yields as a horizontal stacked bar chart');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -20731,25 +20731,25 @@ var _gicentre$elm_vega$Gallery$vl22 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl21 = function () {
 	var enc = function (_p107) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Month),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Month),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('Month of the year'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('Month of the year'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -20758,29 +20758,29 @@ var _gicentre$elm_vega$Gallery$vl21 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('weather'),
+							_0: _gicentre$elm_vega$VegaLite$MName('weather'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MScale(
-										_gicentre$elm_vega$Vega$categoricalDomainMap(
+									_0: _gicentre$elm_vega$VegaLite$MScale(
+										_gicentre$elm_vega$VegaLite$categoricalDomainMap(
 											{
 												ctor: '::',
 												_0: {ctor: '_Tuple2', _0: 'sun', _1: '#e7ba52'},
@@ -20804,10 +20804,10 @@ var _gicentre$elm_vega$Gallery$vl21 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MLegend(
+										_0: _gicentre$elm_vega$VegaLite$MLegend(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$LTitle('Weather type'),
+												_0: _gicentre$elm_vega$VegaLite$LTitle('Weather type'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -20817,22 +20817,22 @@ var _gicentre$elm_vega$Gallery$vl21 = function () {
 						},
 						_p107))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Seattle weather stacked bar chart');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Seattle weather stacked bar chart');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/seattle-weather.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -20846,72 +20846,72 @@ var _gicentre$elm_vega$Gallery$vl21 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl20 = function () {
 	var enc = function (_p108) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('time'),
+					_0: _gicentre$elm_vega$VegaLite$PName('time'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Hours),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Hours),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('time'),
+						_0: _gicentre$elm_vega$VegaLite$PName('time'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$Day),
+								_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$Day),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('count'),
+							_0: _gicentre$elm_vega$VegaLite$MName('count'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Sum),
+									_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Sum),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						_p108))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Table bubble plot in the style of a Github punched card.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Table bubble plot in the style of a Github punched card.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/github.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Circle,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Circle,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -20925,42 +20925,42 @@ var _gicentre$elm_vega$Gallery$vl20 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl19 = function () {
 	var config = function (_p109) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
-				_gicentre$elm_vega$Vega$Range(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$Range(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$RHeatmap('greenblue'),
+						_0: _gicentre$elm_vega$VegaLite$RHeatmap('greenblue'),
 						_1: {ctor: '[]'}
 					}),
 				A2(
-					_gicentre$elm_vega$Vega$configuration,
-					_gicentre$elm_vega$Vega$View(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$View(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$Stroke(_elm_lang$core$Maybe$Nothing),
+							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
 					_p109)));
 	};
 	var enc = function (_p110) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(60),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(60),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -20968,20 +20968,20 @@ var _gicentre$elm_vega$Gallery$vl19 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Rotten_Tomatoes_Rating'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PBin(
+								_0: _gicentre$elm_vega$VegaLite$PBin(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MaxBins(40),
+										_0: _gicentre$elm_vega$VegaLite$MaxBins(40),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -20989,40 +20989,40 @@ var _gicentre$elm_vega$Gallery$vl19 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Count),
+								_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p110))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('\'Binned heatmap\' comparing movie ratings.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('\'Binned heatmap\' comparing movie ratings.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(200),
+					_0: _gicentre$elm_vega$VegaLite$height(200),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/movies.json',
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Rect,
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Rect,
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
@@ -21043,64 +21043,64 @@ var _gicentre$elm_vega$Gallery$vl19 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl18 = function () {
 	var enc = function (_p111) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Cylinders'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Origin'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Origin'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Horsepower'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Horsepower'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Mean),
+									_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Mean),
 									_1: {ctor: '[]'}
 								}
 							}
 						},
 						_p111))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('\'Table heatmap\' showing engine size/power for three countries.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('\'Table heatmap\' showing engine size/power for three countries.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Rect,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Rect,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21114,25 +21114,25 @@ var _gicentre$elm_vega$Gallery$vl18 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl17 = function () {
 	var enc = function (_p112) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PTimeUnit(_gicentre$elm_vega$Vega$YearMonth),
+							_0: _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Format('%Y'),
+										_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -21141,23 +21141,23 @@ var _gicentre$elm_vega$Gallery$vl17 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('count'),
+						_0: _gicentre$elm_vega$VegaLite$PName('count'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('Count'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('Count'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -21167,28 +21167,28 @@ var _gicentre$elm_vega$Gallery$vl17 = function () {
 					},
 					_p112)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Unemployment over time (area chart)');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Unemployment over time (area chart)');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(300),
+				_0: _gicentre$elm_vega$VegaLite$width(300),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(200),
+					_0: _gicentre$elm_vega$VegaLite$height(200),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/unemployment-across-industries.json',
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Area,
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Area,
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
@@ -21204,22 +21204,22 @@ var _gicentre$elm_vega$Gallery$vl17 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl16 = function () {
 	var enc = function (_p113) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Format('%Y'),
+									_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -21227,35 +21227,35 @@ var _gicentre$elm_vega$Gallery$vl16 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p113)));
 	};
 	var trans = function (_p114) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.symbol === \'GOOG\''),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.symbol === \'GOOG\''),
 				_p114));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Google\'s stock price over time (quantized as a step-chart).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Google\'s stock price over time (quantized as a step-chart).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/stocks.csv',
 					{ctor: '[]'}),
 				_1: {
@@ -21265,11 +21265,11 @@ var _gicentre$elm_vega$Gallery$vl16 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Line,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Line,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MInterpolate(_gicentre$elm_vega$Vega$StepAfter),
+								_0: _gicentre$elm_vega$VegaLite$MInterpolate(_gicentre$elm_vega$VegaLite$StepAfter),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -21285,26 +21285,26 @@ var _gicentre$elm_vega$Gallery$vl16 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl15 = function () {
 	var enc = function (_p115) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('year'),
+					_0: _gicentre$elm_vega$VegaLite$PName('year'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRangeStep(
+									_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 										_elm_lang$core$Maybe$Just(50)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SPadding(0.5),
+										_0: _gicentre$elm_vega$VegaLite$SPadding(0.5),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -21313,50 +21313,50 @@ var _gicentre$elm_vega$Gallery$vl15 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('yield'),
+						_0: _gicentre$elm_vega$VegaLite$PName('yield'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Median),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Median),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('site'),
+							_0: _gicentre$elm_vega$VegaLite$MName('site'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p115))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/barley.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Line,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Line,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21370,22 +21370,22 @@ var _gicentre$elm_vega$Gallery$vl15 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl14 = function () {
 	var enc = function (_p116) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Format('%Y'),
+									_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -21393,46 +21393,46 @@ var _gicentre$elm_vega$Gallery$vl14 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('symbol'),
+							_0: _gicentre$elm_vega$VegaLite$MName('symbol'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p116))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Stock prices of 5 tech companies over time.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Stock prices of 5 tech companies over time.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/stocks.csv',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Line,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Line,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21446,22 +21446,22 @@ var _gicentre$elm_vega$Gallery$vl14 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl13 = function () {
 	var enc = function (_p117) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('date'),
+					_0: _gicentre$elm_vega$VegaLite$PName('date'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Temporal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Temporal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAxis(
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Format('%Y'),
+									_0: _gicentre$elm_vega$VegaLite$Format('%Y'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -21469,35 +21469,35 @@ var _gicentre$elm_vega$Gallery$vl13 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('price'),
+						_0: _gicentre$elm_vega$VegaLite$PName('price'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p117)));
 	};
 	var trans = function (_p118) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.symbol === \'GOOG\''),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.symbol === \'GOOG\''),
 				_p118));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Google\'s stock price over time.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Google\'s stock price over time.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/stocks.csv',
 					{ctor: '[]'}),
 				_1: {
@@ -21507,8 +21507,8 @@ var _gicentre$elm_vega$Gallery$vl13 = function () {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Line,
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Line,
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
@@ -21523,49 +21523,49 @@ var _gicentre$elm_vega$Gallery$vl13 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl12 = function () {
 	var enc = function (_p119) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Cylinders'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p119)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Shows the relationship between horsepower and the number of cylinders using tick marks.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Shows the relationship between horsepower and the number of cylinders using tick marks.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Tick,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Tick,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21579,35 +21579,35 @@ var _gicentre$elm_vega$Gallery$vl12 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl11 = function () {
 	var sel = function (_p120) {
-		return _gicentre$elm_vega$Vega$selection(
+		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
-				_gicentre$elm_vega$Vega$select,
+				_gicentre$elm_vega$VegaLite$select,
 				'view',
-				_gicentre$elm_vega$Vega$Interval,
+				_gicentre$elm_vega$VegaLite$Interval,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$BindScales,
+					_0: _gicentre$elm_vega$VegaLite$BindScales,
 					_1: {ctor: '[]'}
 				},
 				_p120));
 	};
 	var enc = function (_p121) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('income'),
+					_0: _gicentre$elm_vega$VegaLite$PName('income'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLog),
+									_0: _gicentre$elm_vega$VegaLite$SType(_gicentre$elm_vega$VegaLite$ScLog),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -21615,20 +21615,20 @@ var _gicentre$elm_vega$Gallery$vl11 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('health'),
+						_0: _gicentre$elm_vega$VegaLite$PName('health'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$VegaLite$SZero(false),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -21636,47 +21636,47 @@ var _gicentre$elm_vega$Gallery$vl11 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('population'),
+							_0: _gicentre$elm_vega$VegaLite$MName('population'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MString('#000'),
+								_0: _gicentre$elm_vega$VegaLite$MString('#000'),
 								_1: {ctor: '[]'}
 							},
 							_p121)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost\'s blog post \'One Chart, Twelve Charting Libraries\' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost\'s blog post \'One Chart, Twelve Charting Libraries\' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$width(500),
+				_0: _gicentre$elm_vega$VegaLite$width(500),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$height(300),
+					_0: _gicentre$elm_vega$VegaLite$height(300),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_gicentre$elm_vega$Vega$dataFromUrl,
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
 							'data/gapminder-health-income.csv',
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Circle,
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Circle,
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
@@ -21697,60 +21697,60 @@ var _gicentre$elm_vega$Gallery$vl11 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl10 = function () {
 	var enc = function (_p122) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Acceleration'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Acceleration'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p122))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21764,71 +21764,71 @@ var _gicentre$elm_vega$Gallery$vl10 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl9 = function () {
 	var enc = function (_p123) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$color,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MName('Origin'),
+							_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$shape,
+							_gicentre$elm_vega$VegaLite$shape,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MName('Origin'),
+								_0: _gicentre$elm_vega$VegaLite$MName('Origin'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {ctor: '[]'}
 								}
 							},
 							_p123)))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21842,22 +21842,22 @@ var _gicentre$elm_vega$Gallery$vl9 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl8 = function () {
 	var enc = function (_p124) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MaxBins(10),
+									_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -21865,20 +21865,20 @@ var _gicentre$elm_vega$Gallery$vl8 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Rotten_Tomatoes_Rating'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PBin(
+								_0: _gicentre$elm_vega$VegaLite$PBin(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MaxBins(10),
+										_0: _gicentre$elm_vega$VegaLite$MaxBins(10),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -21886,34 +21886,34 @@ var _gicentre$elm_vega$Gallery$vl8 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$size,
+						_gicentre$elm_vega$VegaLite$size,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
 						_p124))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/movies.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Circle,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Circle,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21927,49 +21927,49 @@ var _gicentre$elm_vega$Gallery$vl8 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl7 = function () {
 	var enc = function (_p125) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p125)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A scatterplot showing horsepower and miles per gallon for various cars (via circle marks).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallon for various cars (via circle marks).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Circle,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Circle,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -21983,49 +21983,49 @@ var _gicentre$elm_vega$Gallery$vl7 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl6 = function () {
 	var enc = function (_p126) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('Horsepower'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('Miles_per_Gallon'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p126)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A scatterplot showing horsepower and miles per gallon for various cars (via point marks).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallon for various cars (via point marks).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/cars.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Point,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Point,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -22039,51 +22039,51 @@ var _gicentre$elm_vega$Gallery$vl6 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl5 = function () {
 	var config = function (_p127) {
-		return _gicentre$elm_vega$Vega$configure(
+		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
-				_gicentre$elm_vega$Vega$configuration,
-				_gicentre$elm_vega$Vega$Axis(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$Axis(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$DomainWidth(1),
+						_0: _gicentre$elm_vega$VegaLite$DomainWidth(1),
 						_1: {ctor: '[]'}
 					}),
 				A2(
-					_gicentre$elm_vega$Vega$configuration,
-					_gicentre$elm_vega$Vega$View(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$View(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$Stroke(_elm_lang$core$Maybe$Nothing),
+							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
 					_p127)));
 	};
 	var enc = function (_p128) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('gender'),
+					_0: _gicentre$elm_vega$VegaLite$PName('gender'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Nominal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PScale(
+							_0: _gicentre$elm_vega$VegaLite$PScale(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRangeStep(
+									_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 										_elm_lang$core$Maybe$Just(12)),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle(''),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle(''),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -22092,26 +22092,26 @@ var _gicentre$elm_vega$Gallery$vl5 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('people'),
+						_0: _gicentre$elm_vega$VegaLite$PName('people'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+								_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PAxis(
+									_0: _gicentre$elm_vega$VegaLite$PAxis(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$AxTitle('population'),
+											_0: _gicentre$elm_vega$VegaLite$AxTitle('population'),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Grid(false),
+												_0: _gicentre$elm_vega$VegaLite$Grid(false),
 												_1: {ctor: '[]'}
 											}
 										}),
@@ -22121,31 +22121,31 @@ var _gicentre$elm_vega$Gallery$vl5 = function () {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$Vega$column,
+						_gicentre$elm_vega$VegaLite$column,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$FName('age'),
+							_0: _gicentre$elm_vega$VegaLite$FName('age'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FmType(_gicentre$elm_vega$Vega$Ordinal),
+								_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Ordinal),
 								_1: {ctor: '[]'}
 							}
 						},
 						A2(
-							_gicentre$elm_vega$Vega$color,
+							_gicentre$elm_vega$VegaLite$color,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$MName('gender'),
+								_0: _gicentre$elm_vega$VegaLite$MName('gender'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$MmType(_gicentre$elm_vega$Vega$Nominal),
+									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MScale(
+										_0: _gicentre$elm_vega$VegaLite$MScale(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SRange(
-													_gicentre$elm_vega$Vega$RStrings(
+												_0: _gicentre$elm_vega$VegaLite$SRange(
+													_gicentre$elm_vega$VegaLite$RStrings(
 														{
 															ctor: '::',
 															_0: '#EA98D2',
@@ -22164,28 +22164,28 @@ var _gicentre$elm_vega$Gallery$vl5 = function () {
 							_p128)))));
 	};
 	var trans = function (_p129) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$Vega$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p129)));
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p129)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Grouped bar chart shoing population structure by age and gender.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Grouped bar chart shoing population structure by age and gender.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -22209,40 +22209,40 @@ var _gicentre$elm_vega$Gallery$vl5 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl4 = function () {
 	var enc = function (_p130) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$Y,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('task'),
+					_0: _gicentre$elm_vega$VegaLite$PName('task'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$X,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('start'),
+						_0: _gicentre$elm_vega$VegaLite$PName('start'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$position,
-						_gicentre$elm_vega$Vega$X2,
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$X2,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PName('end'),
+							_0: _gicentre$elm_vega$VegaLite$PName('end'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -22250,12 +22250,12 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 	};
 	var data = function (_p131) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'task',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: 'A',
@@ -22270,9 +22270,9 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'start',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 1,
@@ -22287,9 +22287,9 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 							}
 						}),
 					A3(
-						_gicentre$elm_vega$Vega$dataColumn,
+						_gicentre$elm_vega$VegaLite$dataColumn,
 						'end',
-						_gicentre$elm_vega$Vega$Numbers(
+						_gicentre$elm_vega$VegaLite$Numbers(
 							{
 								ctor: '::',
 								_0: 3,
@@ -22305,8 +22305,8 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 							}),
 						_p131))));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A simple bar chart with ranged data (aka Gantt Chart).');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with ranged data (aka Gantt Chart).');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
@@ -22317,8 +22317,8 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -22332,54 +22332,54 @@ var _gicentre$elm_vega$Gallery$vl4 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl3 = function () {
 	var enc = function (_p132) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('IMDB_Rating'),
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PBin(
+							_0: _gicentre$elm_vega$VegaLite$PBin(
 								{ctor: '[]'}),
 							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Count),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Count),
 							_1: {ctor: '[]'}
 						}
 					},
 					_p132)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('Simple histogram of IMDB ratings.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('Simple histogram of IMDB ratings.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/movies.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -22393,25 +22393,25 @@ var _gicentre$elm_vega$Gallery$vl3 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl2 = function () {
 	var enc = function (_p133) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('people'),
+					_0: _gicentre$elm_vega$VegaLite$PName('people'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PAggregate(_gicentre$elm_vega$Vega$Sum),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Sum),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PAxis(
+								_0: _gicentre$elm_vega$VegaLite$PAxis(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$AxTitle('population'),
+										_0: _gicentre$elm_vega$VegaLite$AxTitle('population'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -22420,20 +22420,20 @@ var _gicentre$elm_vega$Gallery$vl2 = function () {
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('age'),
+						_0: _gicentre$elm_vega$VegaLite$PName('age'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PScale(
+								_0: _gicentre$elm_vega$VegaLite$PScale(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRangeStep(
+										_0: _gicentre$elm_vega$VegaLite$SRangeStep(
 											_elm_lang$core$Maybe$Just(17)),
 										_1: {ctor: '[]'}
 									}),
@@ -22444,28 +22444,28 @@ var _gicentre$elm_vega$Gallery$vl2 = function () {
 					_p133)));
 	};
 	var trans = function (_p134) {
-		return _gicentre$elm_vega$Vega$transform(
+		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
-				_gicentre$elm_vega$Vega$filter,
-				_gicentre$elm_vega$Vega$FExpr('datum.year == 2000'),
+				_gicentre$elm_vega$VegaLite$filter,
+				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
 				_p134));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A bar chart showing the US population distribution of age groups in 2000.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A bar chart showing the US population distribution of age groups in 2000.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$dataFromUrl,
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
 					'data/population.json',
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
@@ -22484,28 +22484,28 @@ var _gicentre$elm_vega$Gallery$vl2 = function () {
 }();
 var _gicentre$elm_vega$Gallery$vl1 = function () {
 	var enc = function (_p135) {
-		return _gicentre$elm_vega$Vega$encoding(
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$Vega$position,
-				_gicentre$elm_vega$Vega$X,
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$PName('a'),
+					_0: _gicentre$elm_vega$VegaLite$PName('a'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$position,
-					_gicentre$elm_vega$Vega$Y,
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$PName('b'),
+						_0: _gicentre$elm_vega$VegaLite$PName('b'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PmType(_gicentre$elm_vega$Vega$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -22513,12 +22513,12 @@ var _gicentre$elm_vega$Gallery$vl1 = function () {
 	};
 	var data = function (_p136) {
 		return A2(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
+				_gicentre$elm_vega$VegaLite$dataColumn,
 				'a',
-				_gicentre$elm_vega$Vega$Strings(
+				_gicentre$elm_vega$VegaLite$Strings(
 					{
 						ctor: '::',
 						_0: 'A',
@@ -22557,9 +22557,9 @@ var _gicentre$elm_vega$Gallery$vl1 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
+					_gicentre$elm_vega$VegaLite$dataColumn,
 					'b',
-					_gicentre$elm_vega$Vega$Numbers(
+					_gicentre$elm_vega$VegaLite$Numbers(
 						{
 							ctor: '::',
 							_0: 28,
@@ -22599,8 +22599,8 @@ var _gicentre$elm_vega$Gallery$vl1 = function () {
 						}),
 					_p136)));
 	};
-	var des = _gicentre$elm_vega$Vega$description('A simple bar chart with embedded data.');
-	return _gicentre$elm_vega$Vega$toVegaLite(
+	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with embedded data.');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
 			_0: des,
@@ -22611,8 +22611,8 @@ var _gicentre$elm_vega$Gallery$vl1 = function () {
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Bar,
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Bar,
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',

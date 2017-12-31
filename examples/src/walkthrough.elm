@@ -2,7 +2,7 @@ port module Walkthrough exposing (..)
 
 import Json.Encode
 import Platform
-import Vega exposing (..)
+import VegaLite exposing (..)
 
 
 stripPlot : Spec

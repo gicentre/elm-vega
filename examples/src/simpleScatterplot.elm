@@ -1,7 +1,7 @@
 port module SimpleScatterplot exposing (fromElm)
 
 import Platform
-import Vega exposing (..)
+import VegaLite exposing (..)
 
 
 scatter : Spec
