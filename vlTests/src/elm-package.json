@@ -1,10 +1,10 @@
 {
     "version": "1.0.0",
-    "summary": "Eve (Elm-Vega generation) tests",
+    "summary": "Tests for Elm with Vega / Vega-Lite",
     "repository": "https://github.com/gicentre/elm-vega.git",
     "license": "BSD3",
     "source-directories": [
-        ".","../src"
+        ".","../../src"
     ],
     "exposed-modules": [],
     "dependencies": {

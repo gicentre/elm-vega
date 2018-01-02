@@ -2,7 +2,7 @@ port module Gallery exposing (..)
 
 import Json.Encode
 import Platform
-import Vega exposing (..)
+import VegaLite exposing (..)
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -1359,8 +1359,8 @@ vl56 =
                     Single
                     [ Fields [ "Cylinders", "Year" ]
                     , Bind
-                        [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
-                        , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                        [ IRange "Cylinders" [ InName "Cylinders ", InMin 3, InMax 8, InStep 1 ]
+                        , IRange "Year" [ InName "Year ", InMin 1969, InMax 1981, InStep 1 ]
                         ]
                     ]
 

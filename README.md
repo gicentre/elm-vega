@@ -1,4 +1,5 @@
 # elm-vega
+
 ![alt text](images/banner.jpg "elm-vega")
 
 _Declarative visualization for Elm_
@@ -7,7 +8,6 @@ This library allows you to create Vega-Lite specifications in Elm providing a pu
 
 The library does not generate graphical output directly, but instead it allows you to create a JSON _specification_ that can be sent to the Vega-Lite runtime to create the output.
 This is therefore a 'pure' Elm package without any external non-Elm dependencies.
-
 
 ## Example
 
@@ -74,16 +74,15 @@ elm-vega is designed to fill that gap.
 
 **Characteristics of elm-vega**
 
-* Built upon the widely used [Vega-Lite](https://vega.github.io) specification that has an academic robustness and momentum behind its development (Vega-Lite is itself built upon the hugely influential [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447)).
+-   Built upon the widely used [Vega-Lite](https://vega.github.io) specification that has an academic robustness and momentum behind its development (Vega-Lite is itself built upon the hugely influential [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447)).
 
-* High-level declarative specification (a chart can be fully specified in as few as five lines of code)
+-   High-level declarative specification (a chart can be fully specified in as few as five lines of code)
 
-* Extensive use of _union types_ means "the compiler is your friend" when building and debugging complex visualizations.
+-   Extensive use of _union types_ means "the compiler is your friend" when building and debugging complex visualizations.
 
-* Flexible interaction for selecting, filtering and zooming built-in to the specification.
+-   Flexible interaction for selecting, filtering and zooming built-in to the specification.
 
-* Hierarchical view composition allows complex visualization dashboards to be built from trees of simpler views.
-
+-   Hierarchical view composition allows complex visualization dashboards to be built from trees of simpler views.
 
 ### A rationale for data visualisers
 
@@ -98,16 +97,16 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach Dat
 
 ## Limitations
 
-* elm-vega does not render graphics directly, but instead generates data visualization specifications that may be passed to JavaScript for rendering.
+-   elm-vega does not render graphics directly, but instead generates data visualization specifications that may be passed to JavaScript for rendering.
 
-* elm-vega is currently limited to the Vega-Lite specification (and a small amount of the Vega specification) so is limited to Cartesian coordinate systems (e.g. no pie charts or rose diagrams).
-However, as Vega-Lite develops (e.g. geospatial mapping will be available shortly), so will elm-vega.
-And the door remains open for full Vega integration in the future.
+-   elm-vega is currently limited to the Vega-Lite specification (and a small amount of the Vega specification) so is limited to Cartesian coordinate systems (e.g. no pie charts or rose diagrams).
+    However, as Vega-Lite develops (e.g. geospatial mapping will be available shortly), so will elm-vega.
+    And the door remains open for full Vega integration in the future.
 
-* While limited animation is possible through interaction and dynamic data generation, there is no direct support for animated transitions (unlike D3 for example).
+-   While limited animation is possible through interaction and dynamic data generation, there is no direct support for animated transitions (unlike D3 for example).
 
 ## Further Reading
 
-* For a more thorough set of examples/tutorial, see the [elm-vega walkthrough](docs/walkthrough/README.md).
-* For the elm-vega API documentation drop [documentation.json](docs/api/documentation.json) in the [Elm doc preview page](http://package.elm-lang.org/help/docs-preview)
-* Further examples can be found in the [elm-vega examples folder](examples/)
+-   For a more thorough set of examples/tutorial, see the [elm-vega walkthrough](docs/walkthrough/README.md).
+-   For the elm-vega API documentation drop [documentation.json](docs/api/documentation.json) in the [Elm doc preview page](http://package.elm-lang.org/help/docs-preview)
+-   Further examples can be found in the [elm-vega vlExamples folder](vlExamples/)
