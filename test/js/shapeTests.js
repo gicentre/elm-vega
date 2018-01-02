@@ -5969,6 +5969,8 @@ var _gicentre$elm_vega$VegaLite$vlPropertyLabel = function (spec) {
 			return 'width';
 		case 'VLHeight':
 			return 'height';
+		case 'VLAutosize':
+			return 'autosize';
 		case 'VLData':
 			return 'data';
 		case 'VLMark':
@@ -6448,44 +6450,44 @@ var _gicentre$elm_vega$VegaLite$opLabel = function (op) {
 			return 'argmax';
 		case 'ArgMin':
 			return 'argmin';
-		case 'Count':
-			return 'count';
-		case 'Valid':
-			return 'valid';
-		case 'Missing':
-			return 'missing';
-		case 'Distinct':
-			return 'distinct';
-		case 'Sum':
-			return 'sum';
-		case 'Mean':
-			return 'mean';
 		case 'Average':
 			return 'average';
-		case 'Variance':
-			return 'variance';
-		case 'VarianceP':
-			return 'variancep';
-		case 'Stdev':
-			return 'stdev';
-		case 'StdevP':
-			return 'stdevp';
-		case 'Stderr':
-			return 'stderr';
-		case 'Median':
-			return 'median';
-		case 'Q1':
-			return 'q1';
-		case 'Q3':
-			return 'q3';
+		case 'Count':
+			return 'count';
 		case 'CI0':
 			return 'ci0';
 		case 'CI1':
 			return 'ci1';
+		case 'Distinct':
+			return 'distinct';
+		case 'Max':
+			return 'max';
+		case 'Mean':
+			return 'mean';
+		case 'Median':
+			return 'median';
 		case 'Min':
 			return 'min';
+		case 'Missing':
+			return 'missing';
+		case 'Q1':
+			return 'q1';
+		case 'Q3':
+			return 'q3';
+		case 'Stdev':
+			return 'stdev';
+		case 'StdevP':
+			return 'stdevp';
+		case 'Sum':
+			return 'sum';
+		case 'Stderr':
+			return 'stderr';
+		case 'Valid':
+			return 'valid';
+		case 'Variance':
+			return 'variance';
 		default:
-			return 'max';
+			return 'variancep';
 	}
 };
 var _gicentre$elm_vega$VegaLite$nice = function (ni) {
@@ -8299,7 +8301,7 @@ var _gicentre$elm_vega$VegaLite$axisConfig = function (axisCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$VegaLite$autosizeConfig = function (asCfg) {
+var _gicentre$elm_vega$VegaLite$autosizeProperty = function (asCfg) {
 	var _p75 = asCfg;
 	switch (_p75.ctor) {
 		case 'APad':
@@ -8324,7 +8326,7 @@ var _gicentre$elm_vega$VegaLite$autosizeConfig = function (asCfg) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'resize',
-				_1: _elm_lang$core$Json_Encode$bool(_p75._0)
+				_1: _elm_lang$core$Json_Encode$bool(true)
 			};
 		case 'AContent':
 			return {
@@ -8481,11 +8483,7 @@ var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 				ctor: '_Tuple2',
 				_0: 'autosize',
 				_1: _elm_lang$core$Json_Encode$object(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$autosizeConfig(_p80._0),
-						_1: {ctor: '[]'}
-					})
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$autosizeProperty, _p80._0))
 			};
 		case 'Background':
 			return {
@@ -9987,9 +9985,7 @@ var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
 var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 var _gicentre$elm_vega$VegaLite$Row = {ctor: 'Row'};
 var _gicentre$elm_vega$VegaLite$Column = {ctor: 'Column'};
-var _gicentre$elm_vega$VegaLite$AResize = function (a) {
-	return {ctor: 'AResize', _0: a};
-};
+var _gicentre$elm_vega$VegaLite$AResize = {ctor: 'AResize'};
 var _gicentre$elm_vega$VegaLite$APadding = {ctor: 'APadding'};
 var _gicentre$elm_vega$VegaLite$APad = {ctor: 'APad'};
 var _gicentre$elm_vega$VegaLite$ANone = {ctor: 'ANone'};
@@ -11211,6 +11207,15 @@ var _gicentre$elm_vega$VegaLite$dataFromUrl = F2(
 				})
 		};
 	});
+var _gicentre$elm_vega$VegaLite$VLAutosize = {ctor: 'VLAutosize'};
+var _gicentre$elm_vega$VegaLite$autosize = function (aus) {
+	return {
+		ctor: '_Tuple2',
+		_0: _gicentre$elm_vega$VegaLite$VLAutosize,
+		_1: _elm_lang$core$Json_Encode$object(
+			A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$autosizeProperty, aus))
+	};
+};
 var _gicentre$elm_vega$VegaLite$VLHeight = {ctor: 'VLHeight'};
 var _gicentre$elm_vega$VegaLite$height = function (h) {
 	return {
