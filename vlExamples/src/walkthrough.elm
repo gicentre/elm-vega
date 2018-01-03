@@ -493,11 +493,11 @@ contextAndFocus =
 
         encContext =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ Format "%Y" ] ]
+                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
                 << position Y
                     [ PName "price"
                     , PmType Quantitative
-                    , PAxis [ TickCount 3, Grid False ]
+                    , PAxis [ AxTickCount 3, AxGrid False ]
                     ]
 
         specContext =
