@@ -8808,13 +8808,6 @@ var _gicentre$elm_vega$VegaLite$titleConfig = function (titleCfg) {
 var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 	var _p77 = configProp;
 	switch (_p77.ctor) {
-		case 'Autosize':
-			return {
-				ctor: '_Tuple2',
-				_0: 'autosize',
-				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$autosizeProperty, _p77._0))
-			};
 		case 'Background':
 			return {
 				ctor: '_Tuple2',
@@ -8849,7 +8842,7 @@ var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 		case 'Padding':
 			return {
 				ctor: '_Tuple2',
-				_0: 'padding ',
+				_0: 'padding',
 				_1: _gicentre$elm_vega$VegaLite$paddingProperty(_p77._0)
 			};
 		case 'TimeFormat':
@@ -10665,9 +10658,6 @@ var _gicentre$elm_vega$VegaLite$AxisX = function (a) {
 var _gicentre$elm_vega$VegaLite$Axis = function (a) {
 	return {ctor: 'Axis', _0: a};
 };
-var _gicentre$elm_vega$VegaLite$Autosize = function (a) {
-	return {ctor: 'Autosize', _0: a};
-};
 var _gicentre$elm_vega$VegaLite$AreaStyle = function (a) {
 	return {ctor: 'AreaStyle', _0: a};
 };
@@ -11026,19 +11016,6 @@ var _gicentre$elm_vega$VegaLite$Line = {ctor: 'Line'};
 var _gicentre$elm_vega$VegaLite$Circle = {ctor: 'Circle'};
 var _gicentre$elm_vega$VegaLite$Bar = {ctor: 'Bar'};
 var _gicentre$elm_vega$VegaLite$Area = {ctor: 'Area'};
-var _gicentre$elm_vega$VegaLite$Stepwise = {ctor: 'Stepwise'};
-var _gicentre$elm_vega$VegaLite$StepBefore = {ctor: 'StepBefore'};
-var _gicentre$elm_vega$VegaLite$StepAfter = {ctor: 'StepAfter'};
-var _gicentre$elm_vega$VegaLite$Monotone = {ctor: 'Monotone'};
-var _gicentre$elm_vega$VegaLite$LinearClosed = {ctor: 'LinearClosed'};
-var _gicentre$elm_vega$VegaLite$Linear = {ctor: 'Linear'};
-var _gicentre$elm_vega$VegaLite$CardinalOpen = {ctor: 'CardinalOpen'};
-var _gicentre$elm_vega$VegaLite$CardinalClosed = {ctor: 'CardinalClosed'};
-var _gicentre$elm_vega$VegaLite$Cardinal = {ctor: 'Cardinal'};
-var _gicentre$elm_vega$VegaLite$Bundle = {ctor: 'Bundle'};
-var _gicentre$elm_vega$VegaLite$BasisOpen = {ctor: 'BasisOpen'};
-var _gicentre$elm_vega$VegaLite$BasisClosed = {ctor: 'BasisClosed'};
-var _gicentre$elm_vega$VegaLite$Basis = {ctor: 'Basis'};
 var _gicentre$elm_vega$VegaLite$MBoolean = function (a) {
 	return {ctor: 'MBoolean', _0: a};
 };
@@ -11079,6 +11056,19 @@ var _gicentre$elm_vega$VegaLite$MRepeat = function (a) {
 var _gicentre$elm_vega$VegaLite$MName = function (a) {
 	return {ctor: 'MName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$Stepwise = {ctor: 'Stepwise'};
+var _gicentre$elm_vega$VegaLite$StepBefore = {ctor: 'StepBefore'};
+var _gicentre$elm_vega$VegaLite$StepAfter = {ctor: 'StepAfter'};
+var _gicentre$elm_vega$VegaLite$Monotone = {ctor: 'Monotone'};
+var _gicentre$elm_vega$VegaLite$LinearClosed = {ctor: 'LinearClosed'};
+var _gicentre$elm_vega$VegaLite$Linear = {ctor: 'Linear'};
+var _gicentre$elm_vega$VegaLite$CardinalOpen = {ctor: 'CardinalOpen'};
+var _gicentre$elm_vega$VegaLite$CardinalClosed = {ctor: 'CardinalClosed'};
+var _gicentre$elm_vega$VegaLite$Cardinal = {ctor: 'Cardinal'};
+var _gicentre$elm_vega$VegaLite$Bundle = {ctor: 'Bundle'};
+var _gicentre$elm_vega$VegaLite$BasisOpen = {ctor: 'BasisOpen'};
+var _gicentre$elm_vega$VegaLite$BasisClosed = {ctor: 'BasisClosed'};
+var _gicentre$elm_vega$VegaLite$Basis = {ctor: 'Basis'};
 var _gicentre$elm_vega$VegaLite$Vertical = {ctor: 'Vertical'};
 var _gicentre$elm_vega$VegaLite$Horizontal = {ctor: 'Horizontal'};
 var _gicentre$elm_vega$VegaLite$MThickness = function (a) {

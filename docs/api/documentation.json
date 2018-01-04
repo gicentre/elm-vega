@@ -707,12 +707,6 @@
             ]
           ],
           [
-            "Autosize",
-            [
-              "List VegaLite.Autosize"
-            ]
-          ],
-          [
             "Axis",
             [
               "List VegaLite.AxisConfig"

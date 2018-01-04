@@ -618,7 +618,7 @@ for details.
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
-    | Autosize (List Autosize)
+      --| Autosize (List Autosize)  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
     | Axis (List AxisConfig)
     | AxisX (List AxisConfig)
     | AxisY (List AxisConfig)
@@ -924,19 +924,6 @@ type LegendConfig
     | LeTitlePadding Float
 
 
-
--- LEntryPadding Float
--- | LFormat String
--- | LOffset Float
--- | LOrient LegendOrientation
--- | LPadding Float
--- | LTickCount Float
--- | LTitle String
--- | LType Legend
--- | LValues LegendValues
--- | LZIndex Int
-
-
 {-| Indicates the legend orientation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config)
 for more details.
@@ -990,6 +977,24 @@ type Mark
     | Tick
 
 
+{-| Mark channel properties used for creating a mark channel encoding.
+-}
+type MarkChannel
+    = MName String
+    | MRepeat Arrangement
+    | MmType Measurement
+    | MScale (List ScaleProperty)
+    | MBin (List BinProperty)
+    | MTimeUnit TimeUnit
+    | MAggregate Operation
+    | MLegend (List LegendProperty)
+    | MCondition String (List MarkChannel) (List MarkChannel)
+    | MPath String
+    | MNumber Float
+    | MString String
+    | MBoolean Bool
+
+
 {-| Indicates mark interpolation style. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#mark-def)
 for details.
@@ -1010,24 +1015,6 @@ type MarkInterpolation
     | Stepwise
 
 
-{-| Mark channel properties used for creating a mark channel encoding.
--}
-type MarkChannel
-    = MName String
-    | MRepeat Arrangement
-    | MmType Measurement
-    | MScale (List ScaleProperty)
-    | MBin (List BinProperty)
-    | MTimeUnit TimeUnit
-    | MAggregate Operation
-    | MLegend (List LegendProperty)
-    | MCondition String (List MarkChannel) (List MarkChannel)
-    | MPath String
-    | MNumber Float
-    | MString String
-    | MBoolean Bool
-
-
 {-| Indicates desired orientation of a mark (e.g. horizontally or vertically
 oriented bars.)
 -}
@@ -1039,7 +1026,12 @@ type MarkOrientation
 {-| Properties for customising the appearance of a mark. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).
 -}
-type MarkProperty
+type
+    MarkProperty
+    -- Note some of the following properties are specific options for particular
+    -- types of mark (Bar, Text and Tick) but for simplicity of the API, carry over
+    -- for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
+    -- MDiscreteBandSize, MShortTimeLabels and  MThickness.
     = MAlign HAlign
     | MAngle Float
     | MBandSize Float
@@ -3039,9 +3031,11 @@ channelLabel ch =
 configProperty : ConfigurationProperty -> LabelledSpec
 configProperty configProp =
     case configProp of
-        Autosize aus ->
-            ( "autosize", JE.object (List.map autosizeProperty aus) )
-
+        -- TODO: Wait for Vega bug #1103 : https://github.com/vega/vega/issues/1103
+        -- to be fixed before enabling Autosize within Config. Workaround is simply
+        -- to place the same call using autosize outside of config.
+        -- Autosize aus ->
+        --     ( "autosize", JE.object (List.map autosizeProperty aus) )
         Background bg ->
             ( "background", JE.string bg )
 
@@ -3061,7 +3055,7 @@ configProperty configProp =
             ( "numberFormat", JE.string fmt )
 
         Padding pad ->
-            ( "padding ", paddingProperty pad )
+            ( "padding", paddingProperty pad )
 
         TimeFormat fmt ->
             ( "timeFormat", JE.string fmt )
