@@ -1,6 +1,6 @@
 # elm-vega
 
-![alt text](https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg "elm-vega")
+<img src="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg" alt="elm-vega" width="600" />
 
 _Declarative visualization for Elm_
 
