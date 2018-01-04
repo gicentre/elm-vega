@@ -115,8 +115,8 @@ port fromElm : Spec -> Cmd msg
 Again, most of this is scaffolding that need not change for new Elm-Vega programs.
 This creates a working Elm-program whose job is to send a Vega-Lite specification as a JSON file via an Elm _port_ to the JavaScript seen in the HTML file above.
 For convenience, we will always call this port `fromElm` so it need not be changed when creating new programs.
-The only code you need to modify as you write your own Elm-Vega is the function that generates a `Spec`, here called `myVis`.
-Note also that parameter passed to `init` in `main` must correspond to the name of the function generating the spec.
+The only code you need to modify as you write your own Elm-Vega is the function that generates a `Spec`, here called `myVis` and the name of the module (here called `HelloWorld`).
+Note also that parameter passed to `init` in `main` must correspond to the name of the function generating the spec (here called `myVis`).
 
 `myVis` in this example geneates a single data column called `x` containing just three numbers (10, 20 and 30).
 It symbolises each with a `Circle` and positions each along a horizontal (`X`) axis below a welcoming title.
