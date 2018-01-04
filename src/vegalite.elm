@@ -28,6 +28,7 @@ module VegaLite
         , HeaderProperty(..)
         , InputProperty(..)
         , Legend(..)
+        , LegendConfig(..)
         , LegendOrientation(..)
         , LegendProperty(..)
         , LegendValues(..)
@@ -398,6 +399,7 @@ For details, see the
 
 Configuration options that affect the entire visualization. These are in addition
 to the data and transform options described above.
+
 @docs name
 @docs title
 @docs description
@@ -412,6 +414,7 @@ to the data and transform options described above.
 @docs Autosize
 @docs Padding
 @docs AxisConfig
+@docs LegendConfig
 @docs ScaleConfig
 @docs TitleConfig
 @docs APosition
@@ -470,26 +473,40 @@ for more details.
 -}
 type AxisConfig
     = BandPosition Float
+    | Domain Bool
     | DomainColor String
     | DomainWidth Float
+    | MaxExtent Float
+    | MinExtent Float
+    | Grid Bool
     | GridColor String
     | GridDash (List Float)
     | GridOpacity Float
     | GridWidth Float
+    | Labels Bool
+    | LabelAngle Float
     | LabelColor String
     | LabelFont String
     | LabelFontSize Float
     | LabelLimit Float
+    | LabelOverlap OverlapStrategy
+    | LabelPadding Float
     | ShortTimeLabels Bool
+    | Ticks Bool
     | TickColor String
     | TickRound Bool
+    | TickSize Float
     | TickWidth Float
+    | TitleAlign HAlign
+    | TitleAngle Float
     | TitleBaseline VAlign
     | TitleColor String
     | TitleFont String
     | TitleFontWeight FontWeight
     | TitleFontSize Float
     | TitleLimit Float
+    | TitleMaxLength Float
+    | TitlePadding Float
     | TitleX Float
     | TitleY Float
 
@@ -500,28 +517,28 @@ To configure all axes, use `AxisConfig` with a `configuration` instead. See the
 for more details.
 -}
 type AxisProperty
-    = Domain Bool
-    | Format String
-    | Grid Bool
-    | LabelAngle Float
-    | LabelOverlap OverlapStrategy
-    | LabelPadding Float
-    | Labels Bool
-    | MaxExtent Float
-    | MinExtent Float
-    | Offset Float
-    | Orient Side
-    | Position Float
-    | Ticks Bool
-    | TickCount Int
-    | TickSize Float
+    = AxDomain Bool
+    | AxFormat String
+    | AxGrid Bool
+    | AxLabelAngle Float
+    | AxLabelOverlap OverlapStrategy
+    | AxLabelPadding Float
+    | AxLabels Bool
+    | AxMaxExtent Float
+    | AxMinExtent Float
+    | AxOffset Float
+    | AxOrient Side
+    | AxPosition Float
+    | AxTicks Bool
+    | AxTickCount Int
+    | AxTickSize Float
     | AxTitle String
     | AxTitleAlign HAlign
     | AxTitleAngle Float
     | AxTitleMaxLength Float
     | AxTitlePadding Float
-    | Values (List Float)
-    | ZIndex Int
+    | AxValues (List Float)
+    | AxZIndex Int
 
 
 {-| Type of binning property to customise. See the
@@ -601,7 +618,7 @@ for details.
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
-    | Autosize (List Autosize)
+      --| Autosize (List Autosize)  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
     | Axis (List AxisConfig)
     | AxisX (List AxisConfig)
     | AxisY (List AxisConfig)
@@ -615,7 +632,7 @@ type ConfigurationProperty
     | CircleStyle (List MarkProperty)
     | CountTitle String
     | FieldTitle FieldTitleProperty
-    | Legend (List LegendProperty)
+    | Legend (List LegendConfig)
     | LineStyle (List MarkProperty)
     | MarkStyle (List MarkProperty)
     | NamedStyle String (List MarkProperty)
@@ -865,12 +882,46 @@ type Legend
     | Symbol
 
 
-{-| A list of data values suitable for setting legend values.
+{-| Legend configuration options. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
 -}
-type LegendValues
-    = LDateTimes (List (List DateTime))
-    | LNumbers (List Float)
-    | LStrings (List String)
+type LegendConfig
+    = CornerRadius Float
+    | FillColor String
+    | Orient LegendOrientation
+    | Offset Float
+    | StrokeColor String
+    | LeStrokeDash (List Float)
+    | LeStrokeWidth Float
+    | LePadding Float
+    | GradientLabelBaseline VAlign
+    | GradientLabelLimit Float
+    | GradientLabelOffset Float
+    | GradientStrokeColor String
+    | GradientStrokeWidth Float
+    | GradientHeight Float
+    | GradientWidth Float
+    | LeLabelAlign HAlign
+    | LeLabelBaseline VAlign
+    | LeLabelColor String
+    | LeLabelFont String
+    | LeLabelFontSize Float
+    | LeLabelLimit Float
+    | LeLabelOffset Float
+    | LeShortTimeLabels Bool
+    | EntryPadding Float
+    | SymbolColor String
+    | SymbolType Symbol
+    | SymbolSize Float
+    | SymbolStrokeWidth Float
+    | LeTitleAlign HAlign
+    | LeTitleBaseline VAlign
+    | LeTitleColor String
+    | LeTitleFont String
+    | LeTitleFontSize Float
+    | LeTitleFontWeight FontWeight
+    | LeTitleLimit Float
+    | LeTitlePadding Float
 
 
 {-| Indicates the legend orientation. See the
@@ -887,8 +938,8 @@ type LegendOrientation
     | TopRight
 
 
-{-| Legend configuration options. For more detail see the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html#legend-config).
+{-| Legend properties. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
 -}
 type LegendProperty
     = LEntryPadding Float
@@ -901,6 +952,14 @@ type LegendProperty
     | LType Legend
     | LValues LegendValues
     | LZIndex Int
+
+
+{-| A list of data values suitable for setting legend values.
+-}
+type LegendValues
+    = LDateTimes (List (List DateTime))
+    | LNumbers (List Float)
+    | LStrings (List String)
 
 
 {-| Type of visual mark used to represent data in the visualization.
@@ -916,6 +975,24 @@ type Mark
     | Square
     | Text
     | Tick
+
+
+{-| Mark channel properties used for creating a mark channel encoding.
+-}
+type MarkChannel
+    = MName String
+    | MRepeat Arrangement
+    | MmType Measurement
+    | MScale (List ScaleProperty)
+    | MBin (List BinProperty)
+    | MTimeUnit TimeUnit
+    | MAggregate Operation
+    | MLegend (List LegendProperty)
+    | MCondition String (List MarkChannel) (List MarkChannel)
+    | MPath String
+    | MNumber Float
+    | MString String
+    | MBoolean Bool
 
 
 {-| Indicates mark interpolation style. See the
@@ -938,24 +1015,6 @@ type MarkInterpolation
     | Stepwise
 
 
-{-| Mark channel properties used for creating a mark channel encoding.
--}
-type MarkChannel
-    = MName String
-    | MRepeat Arrangement
-    | MmType Measurement
-    | MScale (List ScaleProperty)
-    | MBin (List BinProperty)
-    | MTimeUnit TimeUnit
-    | MAggregate Operation
-    | MLegend (List LegendProperty)
-    | MCondition String (List MarkChannel) (List MarkChannel)
-    | MPath String
-    | MNumber Float
-    | MString String
-    | MBoolean Bool
-
-
 {-| Indicates desired orientation of a mark (e.g. horizontally or vertically
 oriented bars.)
 -}
@@ -967,7 +1026,12 @@ type MarkOrientation
 {-| Properties for customising the appearance of a mark. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).
 -}
-type MarkProperty
+type
+    MarkProperty
+    -- Note some of the following properties are specific options for particular
+    -- types of mark (Bar, Text and Tick) but for simplicity of the API, carry over
+    -- for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
+    -- MDiscreteBandSize, MShortTimeLabels and  MThickness.
     = MAlign HAlign
     | MAngle Float
     | MBandSize Float
@@ -2685,11 +2749,23 @@ axisConfig axisCfg =
         BandPosition x ->
             ( "bandPosition", JE.float x )
 
+        Domain b ->
+            ( "domain", JE.bool b )
+
         DomainColor c ->
             ( "domainColor", JE.string c )
 
         DomainWidth w ->
             ( "domainWidth", JE.float w )
+
+        MaxExtent n ->
+            ( "maxExtent", JE.float n )
+
+        MinExtent n ->
+            ( "minExtent", JE.float n )
+
+        Grid b ->
+            ( "grid", JE.bool b )
 
         GridColor c ->
             ( "gridColor", JE.string c )
@@ -2703,6 +2779,12 @@ axisConfig axisCfg =
         GridWidth x ->
             ( "gridWidth", JE.float x )
 
+        Labels b ->
+            ( "labels", JE.bool b )
+
+        LabelAngle angle ->
+            ( "labelAngle", JE.float angle )
+
         LabelColor c ->
             ( "labelColor", JE.string c )
 
@@ -2715,8 +2797,17 @@ axisConfig axisCfg =
         LabelLimit x ->
             ( "labelLimit", JE.float x )
 
+        LabelOverlap strat ->
+            ( "labelOverlap", JE.string (overlapStrategyLabel strat) )
+
+        LabelPadding pad ->
+            ( "labelPadding", JE.float pad )
+
         ShortTimeLabels b ->
             ( "shortTimeLabels", JE.bool b )
+
+        Ticks b ->
+            ( "ticks", JE.bool b )
 
         TickColor c ->
             ( "tickColor", JE.string c )
@@ -2724,8 +2815,17 @@ axisConfig axisCfg =
         TickRound b ->
             ( "tickRound", JE.bool b )
 
+        TickSize x ->
+            ( "tickSize", JE.float x )
+
         TickWidth x ->
             ( "tickWidth", JE.float x )
+
+        TitleAlign align ->
+            ( "titleAlign", JE.string (hAlignLabel align) )
+
+        TitleAngle angle ->
+            ( "titleAngle", JE.float angle )
 
         TitleBaseline va ->
             ( "titleBaseline", JE.string (vAlignLabel va) )
@@ -2745,6 +2845,12 @@ axisConfig axisCfg =
         TitleLimit x ->
             ( "titleLimit", JE.float x )
 
+        TitleMaxLength x ->
+            ( "titleMaxLength", JE.float x )
+
+        TitlePadding x ->
+            ( "titlePadding", JE.float x )
+
         TitleX x ->
             ( "titleX", JE.float x )
 
@@ -2755,55 +2861,55 @@ axisConfig axisCfg =
 axisProperty : AxisProperty -> LabelledSpec
 axisProperty axisProp =
     case axisProp of
-        Format fmt ->
+        AxFormat fmt ->
             ( "format", JE.string fmt )
 
-        Labels b ->
+        AxLabels b ->
             ( "labels", JE.bool b )
 
-        LabelAngle angle ->
+        AxLabelAngle angle ->
             ( "labelAngle", JE.float angle )
 
-        LabelOverlap strat ->
+        AxLabelOverlap strat ->
             ( "labelOverlap", JE.string (overlapStrategyLabel strat) )
 
-        LabelPadding pad ->
+        AxLabelPadding pad ->
             ( "labelPadding", JE.float pad )
 
-        Domain b ->
+        AxDomain b ->
             ( "domain", JE.bool b )
 
-        Grid b ->
+        AxGrid b ->
             ( "grid", JE.bool b )
 
-        MaxExtent n ->
+        AxMaxExtent n ->
             ( "maxExtent", JE.float n )
 
-        MinExtent n ->
+        AxMinExtent n ->
             ( "minExtent", JE.float n )
 
-        Orient side ->
+        AxOrient side ->
             ( "orient", JE.string (sideLabel side) )
 
-        Offset n ->
+        AxOffset n ->
             ( "offset", JE.float n )
 
-        Position n ->
+        AxPosition n ->
             ( "position", JE.float n )
 
-        ZIndex n ->
+        AxZIndex n ->
             ( "zindex", JE.int n )
 
-        Ticks b ->
+        AxTicks b ->
             ( "ticks", JE.bool b )
 
-        TickCount n ->
+        AxTickCount n ->
             ( "tickCount", JE.int n )
 
-        TickSize sz ->
+        AxTickSize sz ->
             ( "tickSize", JE.float sz )
 
-        Values vals ->
+        AxValues vals ->
             -- TODO: Convert data values
             ( "values", JE.list (List.map JE.float vals) )
 
@@ -2925,9 +3031,11 @@ channelLabel ch =
 configProperty : ConfigurationProperty -> LabelledSpec
 configProperty configProp =
     case configProp of
-        Autosize aus ->
-            ( "autosize", JE.object (List.map autosizeProperty aus) )
-
+        -- TODO: Wait for Vega bug #1103 : https://github.com/vega/vega/issues/1103
+        -- to be fixed before enabling Autosize within Config. Workaround is simply
+        -- to place the same call using autosize outside of config.
+        -- Autosize aus ->
+        --     ( "autosize", JE.object (List.map autosizeProperty aus) )
         Background bg ->
             ( "background", JE.string bg )
 
@@ -2947,7 +3055,7 @@ configProperty configProp =
             ( "numberFormat", JE.string fmt )
 
         Padding pad ->
-            ( "padding ", paddingProperty pad )
+            ( "padding", paddingProperty pad )
 
         TimeFormat fmt ->
             ( "timeFormat", JE.string fmt )
@@ -2976,8 +3084,8 @@ configProperty configProp =
         AxisBand acs ->
             ( "axisBand", JE.object (List.map axisConfig acs) )
 
-        Legend lps ->
-            ( "legend", JE.object (List.map legendProperty lps) )
+        Legend lcs ->
+            ( "legend", JE.object (List.map legendConfig lcs) )
 
         MarkStyle mps ->
             ( "mark", JE.object (List.map markProperty mps) )
@@ -3397,6 +3505,118 @@ interpolateProperty iType =
 
         CubeHelixLong gamma ->
             JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
+
+
+legendConfig : LegendConfig -> LabelledSpec
+legendConfig legendConfig =
+    case legendConfig of
+        CornerRadius r ->
+            ( "cornerRadius", JE.float r )
+
+        FillColor s ->
+            ( "fillColor", JE.string s )
+
+        Orient or ->
+            ( "orient", JE.string (legendOrientLabel or) )
+
+        Offset x ->
+            ( "offset", JE.float x )
+
+        StrokeColor s ->
+            ( "strokeColor", JE.string s )
+
+        LeStrokeDash xs ->
+            ( "strokeDash", JE.list (List.map JE.float xs) )
+
+        LeStrokeWidth x ->
+            ( "strokeWidth", JE.float x )
+
+        LePadding x ->
+            ( "padding", JE.float x )
+
+        GradientLabelBaseline va ->
+            ( "gradientLabelBaseline", JE.string (vAlignLabel va) )
+
+        GradientLabelLimit x ->
+            ( "gradientLabelLimit", JE.float x )
+
+        GradientLabelOffset x ->
+            ( "gradientLabelOffset", JE.float x )
+
+        GradientStrokeColor s ->
+            ( "gradientStrokeColor", JE.string s )
+
+        GradientStrokeWidth x ->
+            ( "gradientStrokeWidth", JE.float x )
+
+        GradientHeight x ->
+            ( "gradientHeight", JE.float x )
+
+        GradientWidth x ->
+            ( "gradientWidth", JE.float x )
+
+        LeLabelAlign ha ->
+            ( "labelAlign", JE.string (hAlignLabel ha) )
+
+        LeLabelBaseline va ->
+            ( "labelBaseline", JE.string (vAlignLabel va) )
+
+        LeLabelColor s ->
+            ( "labelColor", JE.string s )
+
+        LeLabelFont s ->
+            ( "labelFont", JE.string s )
+
+        LeLabelFontSize x ->
+            ( "labelFontSize", JE.float x )
+
+        LeLabelLimit x ->
+            ( "labelLimit", JE.float x )
+
+        LeLabelOffset x ->
+            ( "labelOffset", JE.float x )
+
+        LeShortTimeLabels b ->
+            ( "shortTimeLabels", JE.bool b )
+
+        EntryPadding x ->
+            ( "entryPadding", JE.float x )
+
+        SymbolColor s ->
+            ( "symbolColor", JE.string s )
+
+        SymbolType s ->
+            ( "symbolType", JE.string (symbolLabel s) )
+
+        SymbolSize x ->
+            ( "symbolSize", JE.float x )
+
+        SymbolStrokeWidth x ->
+            ( "symbolStrokeWidth", JE.float x )
+
+        LeTitleAlign ha ->
+            ( "titleAlign", JE.string (hAlignLabel ha) )
+
+        LeTitleBaseline va ->
+            ( "titleBaseline", JE.string (vAlignLabel va) )
+
+        LeTitleColor s ->
+            ( "titleColor", JE.string s )
+
+        LeTitleFont s ->
+            ( "titleFont", JE.string s )
+
+        LeTitleFontSize x ->
+            ( "titleFontSize", JE.float x )
+
+        LeTitleFontWeight fw ->
+            ( "titleFontWeight", fontWeight fw )
+
+        LeTitleLimit x ->
+            ( "titleLimit", JE.float x )
+
+        LeTitlePadding x ->
+            ( "titlePadding", JE.float x )
 
 
 legendOrientLabel : LegendOrientation -> String
