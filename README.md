@@ -107,7 +107,7 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach Dat
 
 ## Further Reading
 
--   To get started with your first Elm-Vega program, see [Creating your first Elm-Vega visualization](docs/helloWorld/README.md).
--   For a more thorough set of examples/tutorial, see the [elm-vega walkthrough](docs/walkthrough/README.md).
--   For the elm-vega API documentation drop [documentation.json](docs/api/documentation.json) in the [Elm doc preview page](http://package.elm-lang.org/help/docs-preview)
--   Further examples can be found in the [elm-vega vlExamples folder](vlExamples/)
+-   To get started with your first Elm-Vega program, see [Creating your first Elm-Vega visualization](https://github.com/gicentre/elm-vega/tree/master/docs/helloWorld/README.md).
+-   For a more thorough set of examples/tutorial, see the [elm-vega walkthrough](https://github.com/gicentre/elm-vega/tree/master/docs/walkthrough/README.md).
+-   For the elm-vega API documentation see <http://package.elm-lang.org/packages/gicentre/elm-vega/latest>
+-   Further examples can be found in the [elm-vega vlExamples folder](https://github.com/gicentre/elm-vega/tree/master/vlExamples)
