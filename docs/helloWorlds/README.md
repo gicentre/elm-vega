@@ -154,7 +154,7 @@ In this example, the main body of code comprises three functions (`myFirstVis`, 
 These are then combined into a single specification in the function `mySpecs` by assembling them into a `List` and encoding that List as Json.
 To ensure the json encoding works, you must also `import Json.Encode` at the top of the file.
 
-## 4. Compile the Elm-Vega into JavaScript
+## 3. Compile the Elm-Vega into JavaScript
 
 The final task, as before, is to convert the Elm file into JavaScript:
 
@@ -167,7 +167,7 @@ Running a local web server such as `elm-reactor` should allow easy testing and t
 
 ![Hello, Worlds! output](images/helloWorlds.png)
 
-## 5. Next Steps
+## 4. Next Steps
 
 You should now have the ability to embed single or multiple visualizations in your web pages.
 To understand more about how Elm-Vega itself works, and how to encode different visualization specifications, have a look at
