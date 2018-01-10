@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Hello Worlds from Elm-Vega</title>
+  <meta charset="utf-8">
+
+  <!-- These scripts link to the Vega-Lite runtime -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.8/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.3/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/helloWorlds.js"></script>
+</head>
+
+<body>
+  <h1>Hello Worlds</h1>
+
+  <!-- IDs should be numbered sequentially and correspond to the order of Vega-Lite specs generated in elm-vega. -->
+  <h2>Here is the first visualization</h2>
+  <div id="vis1"></div>
+
+  <h2>Here are the second and third visualizations</h2>
+  <div id="vis2"></div>
+  <div id="vis3"></div>
+
+
+  <script>
+    Elm.HelloWorlds.worker().ports.fromElm.subscribe(function(elmObj) {
+      let id = 1;
+      for (let obj of elmObj) {
+        vegaEmbed("#vis" + id++, obj, {
+          actions: false, logLevel:vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
