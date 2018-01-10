@@ -145,6 +145,7 @@ As such you would more typically test your applications with a local web server 
 Most of the setup described above varies little between applications.
 To understand more about how Elm-Vega itself works, and how to encode different visualization specifications, have a look at
 
--   the [Elm-Vega Walkthrough](../walkthrough/README.md)
--   the [simple examples](../../vlExamples) included in the `vlExamples` folder.
+-   embedding [multiple Visualizations in a single page](../helloWorlds/README.md),
+-   the [Elm-Vega Walkthrough](../walkthrough/README.md),
+-   the [simple examples](../../vlExamples) included in the `vlExamples` folder,
 -   the [vlTest-gallery](../../vlTest-gallery) for a full range of examples.
