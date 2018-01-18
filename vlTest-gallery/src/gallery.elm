@@ -1651,9 +1651,10 @@ vlFacetExample =
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : List Spec
+specs : Spec
 specs =
     [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ]
+        |> Json.Encode.list
 
 
 
@@ -1662,7 +1663,7 @@ specs =
 -}
 
 
-main : Program Never (List Spec) Msg
+main : Program Never Spec Msg
 main =
     Platform.program
         { init = init specs
@@ -1675,9 +1676,9 @@ type Msg
     = FromElm
 
 
-init : List Spec -> ( List Spec, Cmd msg )
+init : Spec -> ( Spec, Cmd msg )
 init specs =
-    ( specs, fromElm <| Json.Encode.list specs )
+    ( specs, fromElm specs )
 
 
 port fromElm : Spec -> Cmd msg

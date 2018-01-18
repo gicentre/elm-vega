@@ -37,6 +37,10 @@ isotypes =
 personGrid : Spec
 personGrid =
     let
+        config =
+            configure
+                << configuration (View [ Stroke Nothing ])
+
         data =
             dataFromColumns []
                 << dataColumn "id" (Numbers <| List.map toFloat (List.range 1 100))
@@ -62,7 +66,7 @@ personGrid =
                     ]
                 << size [ MNumber 90 ]
     in
-    toVegaLite [ width 400, height 400, data [], trans [], mark Point [ MFilled True ], enc [], sel [] ]
+    toVegaLite [ config [], width 400, height 400, data [], trans [], mark Point [ MFilled True ], enc [], sel [] ]
 
 
 toRows : String -> List ( String, Int ) -> List DataRow -> List DataRow
@@ -88,6 +92,10 @@ toRows country animalFreqs =
 livestock : Spec
 livestock =
     let
+        config =
+            configure
+                << configuration (View [ Stroke Nothing ])
+
         data =
             dataFromRows []
                 << toRows "Great Britain" [ ( "cattle", 3 ), ( "pigs", 2 ), ( "sheep", 10 ) ]
@@ -97,7 +105,7 @@ livestock =
             encoding
                 << position X [ PName "col", PmType Ordinal, PAxis [] ]
                 << position Y [ PName "animal", PmType Ordinal, PAxis [] ]
-                << row [ FName "country", FmType Nominal ]
+                << row [ FName "country", FmType Nominal, FHeader [ HTitle "" ] ]
                 << shape
                     [ MName "animal"
                     , MmType Nominal
@@ -125,16 +133,17 @@ livestock =
                 << opacity [ MNumber 1 ]
                 << size [ MNumber 200 ]
     in
-    toVegaLite [ width 800, height 200, data [], mark Point [ MFilled True ], enc [] ]
+    toVegaLite [ config [], width 800, height 200, data [], mark Point [ MFilled True ], enc [] ]
 
 
 
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : List Spec
+specs : Spec
 specs =
     [ personGrid, livestock ]
+        |> Json.Encode.list
 
 
 
@@ -143,7 +152,7 @@ specs =
 -}
 
 
-main : Program Never (List Spec) Msg
+main : Program Never Spec Msg
 main =
     Platform.program
         { init = init specs
@@ -156,9 +165,9 @@ type Msg
     = FromElm
 
 
-init : List Spec -> ( List Spec, Cmd msg )
+init : Spec -> ( Spec, Cmd msg )
 init specs =
-    ( specs, fromElm <| Json.Encode.list specs )
+    ( specs, fromElm specs )
 
 
 port fromElm : Spec -> Cmd msg

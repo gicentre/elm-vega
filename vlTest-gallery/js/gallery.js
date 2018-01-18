@@ -23088,196 +23088,198 @@ var _gicentre$elm_vega$Gallery$vl1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$specs = {
-	ctor: '::',
-	_0: _gicentre$elm_vega$Gallery$vl1,
-	_1: {
+var _gicentre$elm_vega$Gallery$specs = _elm_lang$core$Json_Encode$list(
+	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$Gallery$vl2,
+		_0: _gicentre$elm_vega$Gallery$vl1,
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$Gallery$vl3,
+			_0: _gicentre$elm_vega$Gallery$vl2,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Gallery$vl4,
+				_0: _gicentre$elm_vega$Gallery$vl3,
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Gallery$vl5,
+					_0: _gicentre$elm_vega$Gallery$vl4,
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Gallery$vl6,
+						_0: _gicentre$elm_vega$Gallery$vl5,
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Gallery$vl7,
+							_0: _gicentre$elm_vega$Gallery$vl6,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Gallery$vl8,
+								_0: _gicentre$elm_vega$Gallery$vl7,
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Gallery$vl9,
+									_0: _gicentre$elm_vega$Gallery$vl8,
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Gallery$vl10,
+										_0: _gicentre$elm_vega$Gallery$vl9,
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Gallery$vl11,
+											_0: _gicentre$elm_vega$Gallery$vl10,
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Gallery$vl12,
+												_0: _gicentre$elm_vega$Gallery$vl11,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Gallery$vl13,
+													_0: _gicentre$elm_vega$Gallery$vl12,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Gallery$vl14,
+														_0: _gicentre$elm_vega$Gallery$vl13,
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Gallery$vl15,
+															_0: _gicentre$elm_vega$Gallery$vl14,
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Gallery$vl16,
+																_0: _gicentre$elm_vega$Gallery$vl15,
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Gallery$vl17,
+																	_0: _gicentre$elm_vega$Gallery$vl16,
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$Gallery$vl18,
+																		_0: _gicentre$elm_vega$Gallery$vl17,
 																		_1: {
 																			ctor: '::',
-																			_0: _gicentre$elm_vega$Gallery$vl19,
+																			_0: _gicentre$elm_vega$Gallery$vl18,
 																			_1: {
 																				ctor: '::',
-																				_0: _gicentre$elm_vega$Gallery$vl20,
+																				_0: _gicentre$elm_vega$Gallery$vl19,
 																				_1: {
 																					ctor: '::',
-																					_0: _gicentre$elm_vega$Gallery$vl21,
+																					_0: _gicentre$elm_vega$Gallery$vl20,
 																					_1: {
 																						ctor: '::',
-																						_0: _gicentre$elm_vega$Gallery$vl22,
+																						_0: _gicentre$elm_vega$Gallery$vl21,
 																						_1: {
 																							ctor: '::',
-																							_0: _gicentre$elm_vega$Gallery$vl23,
+																							_0: _gicentre$elm_vega$Gallery$vl22,
 																							_1: {
 																								ctor: '::',
-																								_0: _gicentre$elm_vega$Gallery$vl24,
+																								_0: _gicentre$elm_vega$Gallery$vl23,
 																								_1: {
 																									ctor: '::',
-																									_0: _gicentre$elm_vega$Gallery$vl25,
+																									_0: _gicentre$elm_vega$Gallery$vl24,
 																									_1: {
 																										ctor: '::',
-																										_0: _gicentre$elm_vega$Gallery$vl26,
+																										_0: _gicentre$elm_vega$Gallery$vl25,
 																										_1: {
 																											ctor: '::',
-																											_0: _gicentre$elm_vega$Gallery$vl27,
+																											_0: _gicentre$elm_vega$Gallery$vl26,
 																											_1: {
 																												ctor: '::',
-																												_0: _gicentre$elm_vega$Gallery$vl28,
+																												_0: _gicentre$elm_vega$Gallery$vl27,
 																												_1: {
 																													ctor: '::',
-																													_0: _gicentre$elm_vega$Gallery$vl29,
+																													_0: _gicentre$elm_vega$Gallery$vl28,
 																													_1: {
 																														ctor: '::',
-																														_0: _gicentre$elm_vega$Gallery$vl30,
+																														_0: _gicentre$elm_vega$Gallery$vl29,
 																														_1: {
 																															ctor: '::',
-																															_0: _gicentre$elm_vega$Gallery$vl31,
+																															_0: _gicentre$elm_vega$Gallery$vl30,
 																															_1: {
 																																ctor: '::',
-																																_0: _gicentre$elm_vega$Gallery$vl32,
+																																_0: _gicentre$elm_vega$Gallery$vl31,
 																																_1: {
 																																	ctor: '::',
-																																	_0: _gicentre$elm_vega$Gallery$vl33,
+																																	_0: _gicentre$elm_vega$Gallery$vl32,
 																																	_1: {
 																																		ctor: '::',
-																																		_0: _gicentre$elm_vega$Gallery$vl34,
+																																		_0: _gicentre$elm_vega$Gallery$vl33,
 																																		_1: {
 																																			ctor: '::',
-																																			_0: _gicentre$elm_vega$Gallery$vl35,
+																																			_0: _gicentre$elm_vega$Gallery$vl34,
 																																			_1: {
 																																				ctor: '::',
-																																				_0: _gicentre$elm_vega$Gallery$vl36,
+																																				_0: _gicentre$elm_vega$Gallery$vl35,
 																																				_1: {
 																																					ctor: '::',
-																																					_0: _gicentre$elm_vega$Gallery$vl37,
+																																					_0: _gicentre$elm_vega$Gallery$vl36,
 																																					_1: {
 																																						ctor: '::',
-																																						_0: _gicentre$elm_vega$Gallery$vl38,
+																																						_0: _gicentre$elm_vega$Gallery$vl37,
 																																						_1: {
 																																							ctor: '::',
-																																							_0: _gicentre$elm_vega$Gallery$vl39,
+																																							_0: _gicentre$elm_vega$Gallery$vl38,
 																																							_1: {
 																																								ctor: '::',
-																																								_0: _gicentre$elm_vega$Gallery$vl40,
+																																								_0: _gicentre$elm_vega$Gallery$vl39,
 																																								_1: {
 																																									ctor: '::',
-																																									_0: _gicentre$elm_vega$Gallery$vl41,
+																																									_0: _gicentre$elm_vega$Gallery$vl40,
 																																									_1: {
 																																										ctor: '::',
-																																										_0: _gicentre$elm_vega$Gallery$vl42,
+																																										_0: _gicentre$elm_vega$Gallery$vl41,
 																																										_1: {
 																																											ctor: '::',
-																																											_0: _gicentre$elm_vega$Gallery$vl43,
+																																											_0: _gicentre$elm_vega$Gallery$vl42,
 																																											_1: {
 																																												ctor: '::',
-																																												_0: _gicentre$elm_vega$Gallery$vl44,
+																																												_0: _gicentre$elm_vega$Gallery$vl43,
 																																												_1: {
 																																													ctor: '::',
-																																													_0: _gicentre$elm_vega$Gallery$vl45,
+																																													_0: _gicentre$elm_vega$Gallery$vl44,
 																																													_1: {
 																																														ctor: '::',
-																																														_0: _gicentre$elm_vega$Gallery$vl46,
+																																														_0: _gicentre$elm_vega$Gallery$vl45,
 																																														_1: {
 																																															ctor: '::',
-																																															_0: _gicentre$elm_vega$Gallery$vl47,
+																																															_0: _gicentre$elm_vega$Gallery$vl46,
 																																															_1: {
 																																																ctor: '::',
-																																																_0: _gicentre$elm_vega$Gallery$vl48,
+																																																_0: _gicentre$elm_vega$Gallery$vl47,
 																																																_1: {
 																																																	ctor: '::',
-																																																	_0: _gicentre$elm_vega$Gallery$vl49,
+																																																	_0: _gicentre$elm_vega$Gallery$vl48,
 																																																	_1: {
 																																																		ctor: '::',
-																																																		_0: _gicentre$elm_vega$Gallery$vl50,
+																																																		_0: _gicentre$elm_vega$Gallery$vl49,
 																																																		_1: {
 																																																			ctor: '::',
-																																																			_0: _gicentre$elm_vega$Gallery$vl51,
+																																																			_0: _gicentre$elm_vega$Gallery$vl50,
 																																																			_1: {
 																																																				ctor: '::',
-																																																				_0: _gicentre$elm_vega$Gallery$vl52,
+																																																				_0: _gicentre$elm_vega$Gallery$vl51,
 																																																				_1: {
 																																																					ctor: '::',
-																																																					_0: _gicentre$elm_vega$Gallery$vl53,
+																																																					_0: _gicentre$elm_vega$Gallery$vl52,
 																																																					_1: {
 																																																						ctor: '::',
-																																																						_0: _gicentre$elm_vega$Gallery$vl54,
+																																																						_0: _gicentre$elm_vega$Gallery$vl53,
 																																																						_1: {
 																																																							ctor: '::',
-																																																							_0: _gicentre$elm_vega$Gallery$vl55,
+																																																							_0: _gicentre$elm_vega$Gallery$vl54,
 																																																							_1: {
 																																																								ctor: '::',
-																																																								_0: _gicentre$elm_vega$Gallery$vl56,
+																																																								_0: _gicentre$elm_vega$Gallery$vl55,
 																																																								_1: {
 																																																									ctor: '::',
-																																																									_0: _gicentre$elm_vega$Gallery$vl57,
+																																																									_0: _gicentre$elm_vega$Gallery$vl56,
 																																																									_1: {
 																																																										ctor: '::',
-																																																										_0: _gicentre$elm_vega$Gallery$vl58,
+																																																										_0: _gicentre$elm_vega$Gallery$vl57,
 																																																										_1: {
 																																																											ctor: '::',
-																																																											_0: _gicentre$elm_vega$Gallery$vl59,
+																																																											_0: _gicentre$elm_vega$Gallery$vl58,
 																																																											_1: {
 																																																												ctor: '::',
-																																																												_0: _gicentre$elm_vega$Gallery$vl60,
+																																																												_0: _gicentre$elm_vega$Gallery$vl59,
 																																																												_1: {
 																																																													ctor: '::',
-																																																													_0: _gicentre$elm_vega$Gallery$vl61,
+																																																													_0: _gicentre$elm_vega$Gallery$vl60,
 																																																													_1: {
 																																																														ctor: '::',
-																																																														_0: _gicentre$elm_vega$Gallery$vlFacetExample,
+																																																														_0: _gicentre$elm_vega$Gallery$vl61,
 																																																														_1: {
 																																																															ctor: '::',
-																																																															_0: _gicentre$elm_vega$Gallery$vlRepeatExample,
-																																																															_1: {ctor: '[]'}
+																																																															_0: _gicentre$elm_vega$Gallery$vlFacetExample,
+																																																															_1: {
+																																																																ctor: '::',
+																																																																_0: _gicentre$elm_vega$Gallery$vlRepeatExample,
+																																																																_1: {ctor: '[]'}
+																																																															}
 																																																														}
 																																																													}
 																																																												}
@@ -23339,8 +23341,7 @@ var _gicentre$elm_vega$Gallery$specs = {
 				}
 			}
 		}
-	}
-};
+	});
 var _gicentre$elm_vega$Gallery$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
 	'fromElm',
 	function (v) {
@@ -23350,8 +23351,7 @@ var _gicentre$elm_vega$Gallery$init = function (specs) {
 	return {
 		ctor: '_Tuple2',
 		_0: specs,
-		_1: _gicentre$elm_vega$Gallery$fromElm(
-			_elm_lang$core$Json_Encode$list(specs))
+		_1: _gicentre$elm_vega$Gallery$fromElm(specs)
 	};
 };
 var _gicentre$elm_vega$Gallery$main = _elm_lang$core$Platform$program(

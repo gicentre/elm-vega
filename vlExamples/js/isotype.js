@@ -12321,40 +12321,57 @@ var _gicentre$elm_vega$Isotype$personGrid = function () {
 						A2(_elm_lang$core$List$range, 1, 100))),
 				_p5));
 	};
+	var config = function (_p6) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$View(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}),
+				_p6));
+	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(400),
+			_0: config(
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(400),
+				_0: _gicentre$elm_vega$VegaLite$width(400),
 				_1: {
 					ctor: '::',
-					_0: data(
-						{ctor: '[]'}),
+					_0: _gicentre$elm_vega$VegaLite$height(400),
 					_1: {
 						ctor: '::',
-						_0: trans(
+						_0: data(
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_gicentre$elm_vega$VegaLite$mark,
-								_gicentre$elm_vega$VegaLite$Point,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MFilled(true),
-									_1: {ctor: '[]'}
-								}),
+							_0: trans(
+								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
-								_0: enc(
-									{ctor: '[]'}),
+								_0: A2(
+									_gicentre$elm_vega$VegaLite$mark,
+									_gicentre$elm_vega$VegaLite$Point,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MFilled(true),
+										_1: {ctor: '[]'}
+									}),
 								_1: {
 									ctor: '::',
-									_0: sel(
+									_0: enc(
 										{ctor: '[]'}),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: sel(
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -12364,7 +12381,7 @@ var _gicentre$elm_vega$Isotype$personGrid = function () {
 		});
 }();
 var _gicentre$elm_vega$Isotype$livestock = function () {
-	var enc = function (_p6) {
+	var enc = function (_p7) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -12408,7 +12425,16 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Nominal),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$FHeader(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$HTitle(''),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}
 						},
 						A2(
@@ -12529,9 +12555,9 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 											_0: _gicentre$elm_vega$VegaLite$MNumber(200),
 											_1: {ctor: '[]'}
 										},
-										_p6))))))));
+										_p7))))))));
 	};
-	var data = function (_p7) {
+	var data = function (_p8) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromRows,
 			{ctor: '[]'},
@@ -12567,49 +12593,67 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 							}
 						}
 					},
-					_p7)));
+					_p8)));
+	};
+	var config = function (_p9) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$View(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}),
+				_p9));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(800),
+			_0: config(
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(200),
+				_0: _gicentre$elm_vega$VegaLite$width(800),
 				_1: {
 					ctor: '::',
-					_0: data(
-						{ctor: '[]'}),
+					_0: _gicentre$elm_vega$VegaLite$height(200),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_gicentre$elm_vega$VegaLite$mark,
-							_gicentre$elm_vega$VegaLite$Point,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MFilled(true),
-								_1: {ctor: '[]'}
-							}),
+						_0: data(
+							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: enc(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
+							_0: A2(
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Point,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MFilled(true),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: enc(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}
 			}
 		});
 }();
-var _gicentre$elm_vega$Isotype$specs = {
-	ctor: '::',
-	_0: _gicentre$elm_vega$Isotype$personGrid,
-	_1: {
+var _gicentre$elm_vega$Isotype$specs = _elm_lang$core$Json_Encode$list(
+	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$Isotype$livestock,
-		_1: {ctor: '[]'}
-	}
-};
+		_0: _gicentre$elm_vega$Isotype$personGrid,
+		_1: {
+			ctor: '::',
+			_0: _gicentre$elm_vega$Isotype$livestock,
+			_1: {ctor: '[]'}
+		}
+	});
 var _gicentre$elm_vega$Isotype$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
 	'fromElm',
 	function (v) {
@@ -12619,18 +12663,17 @@ var _gicentre$elm_vega$Isotype$init = function (specs) {
 	return {
 		ctor: '_Tuple2',
 		_0: specs,
-		_1: _gicentre$elm_vega$Isotype$fromElm(
-			_elm_lang$core$Json_Encode$list(specs))
+		_1: _gicentre$elm_vega$Isotype$fromElm(specs)
 	};
 };
 var _gicentre$elm_vega$Isotype$main = _elm_lang$core$Platform$program(
 	{
 		init: _gicentre$elm_vega$Isotype$init(_gicentre$elm_vega$Isotype$specs),
 		update: F2(
-			function (_p8, model) {
+			function (_p10, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p9) {
+		subscriptions: function (_p11) {
 			return _elm_lang$core$Platform_Sub$none;
 		}
 	})();

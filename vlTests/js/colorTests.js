@@ -13109,85 +13109,87 @@ var _gicentre$elm_vega$ColorTests$gamma5 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$specs = {
-	ctor: '::',
-	_0: _gicentre$elm_vega$ColorTests$defContinuous,
-	_1: {
+var _gicentre$elm_vega$ColorTests$specs = _elm_lang$core$Json_Encode$list(
+	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$ColorTests$defOrdinal,
+		_0: _gicentre$elm_vega$ColorTests$defContinuous,
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$ColorTests$defNominal,
+			_0: _gicentre$elm_vega$ColorTests$defOrdinal,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$ColorTests$namedContinuous1,
+				_0: _gicentre$elm_vega$ColorTests$defNominal,
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$ColorTests$namedContinuous2,
+					_0: _gicentre$elm_vega$ColorTests$namedContinuous1,
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$ColorTests$namedContinuous3,
+						_0: _gicentre$elm_vega$ColorTests$namedContinuous2,
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$ColorTests$namedContinuous4,
+							_0: _gicentre$elm_vega$ColorTests$namedContinuous3,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$ColorTests$namedContinuous5,
+								_0: _gicentre$elm_vega$ColorTests$namedContinuous4,
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$ColorTests$namedContinuous6,
+									_0: _gicentre$elm_vega$ColorTests$namedContinuous5,
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$ColorTests$scale0,
+										_0: _gicentre$elm_vega$ColorTests$namedContinuous6,
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$ColorTests$scale1,
+											_0: _gicentre$elm_vega$ColorTests$scale0,
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$ColorTests$scale2,
+												_0: _gicentre$elm_vega$ColorTests$scale1,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$ColorTests$scale3,
+													_0: _gicentre$elm_vega$ColorTests$scale2,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$ColorTests$scale4,
+														_0: _gicentre$elm_vega$ColorTests$scale3,
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$ColorTests$interp1,
+															_0: _gicentre$elm_vega$ColorTests$scale4,
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$ColorTests$interp2,
+																_0: _gicentre$elm_vega$ColorTests$interp1,
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$ColorTests$interp3,
+																	_0: _gicentre$elm_vega$ColorTests$interp2,
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$ColorTests$interp4,
+																		_0: _gicentre$elm_vega$ColorTests$interp3,
 																		_1: {
 																			ctor: '::',
-																			_0: _gicentre$elm_vega$ColorTests$interp5,
+																			_0: _gicentre$elm_vega$ColorTests$interp4,
 																			_1: {
 																				ctor: '::',
-																				_0: _gicentre$elm_vega$ColorTests$interp6,
+																				_0: _gicentre$elm_vega$ColorTests$interp5,
 																				_1: {
 																					ctor: '::',
-																					_0: _gicentre$elm_vega$ColorTests$interp7,
+																					_0: _gicentre$elm_vega$ColorTests$interp6,
 																					_1: {
 																						ctor: '::',
-																						_0: _gicentre$elm_vega$ColorTests$gamma1,
+																						_0: _gicentre$elm_vega$ColorTests$interp7,
 																						_1: {
 																							ctor: '::',
-																							_0: _gicentre$elm_vega$ColorTests$gamma2,
+																							_0: _gicentre$elm_vega$ColorTests$gamma1,
 																							_1: {
 																								ctor: '::',
-																								_0: _gicentre$elm_vega$ColorTests$gamma3,
+																								_0: _gicentre$elm_vega$ColorTests$gamma2,
 																								_1: {
 																									ctor: '::',
-																									_0: _gicentre$elm_vega$ColorTests$gamma4,
+																									_0: _gicentre$elm_vega$ColorTests$gamma3,
 																									_1: {
 																										ctor: '::',
-																										_0: _gicentre$elm_vega$ColorTests$gamma5,
-																										_1: {ctor: '[]'}
+																										_0: _gicentre$elm_vega$ColorTests$gamma4,
+																										_1: {
+																											ctor: '::',
+																											_0: _gicentre$elm_vega$ColorTests$gamma5,
+																											_1: {ctor: '[]'}
+																										}
 																									}
 																								}
 																							}
@@ -13212,8 +13214,7 @@ var _gicentre$elm_vega$ColorTests$specs = {
 				}
 			}
 		}
-	}
-};
+	});
 var _gicentre$elm_vega$ColorTests$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
 	'fromElm',
 	function (v) {
@@ -13223,8 +13224,7 @@ var _gicentre$elm_vega$ColorTests$init = function (specs) {
 	return {
 		ctor: '_Tuple2',
 		_0: specs,
-		_1: _gicentre$elm_vega$ColorTests$fromElm(
-			_elm_lang$core$Json_Encode$list(specs))
+		_1: _gicentre$elm_vega$ColorTests$fromElm(specs)
 	};
 };
 var _gicentre$elm_vega$ColorTests$main = _elm_lang$core$Platform$program(

@@ -182,7 +182,7 @@ gamma5 =
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : List Spec
+specs : Spec
 specs =
     [ defContinuous
     , defOrdinal
@@ -211,6 +211,7 @@ specs =
     , gamma4
     , gamma5
     ]
+        |> Json.Encode.list
 
 
 
@@ -219,7 +220,7 @@ specs =
 -}
 
 
-main : Program Never (List Spec) Msg
+main : Program Never Spec Msg
 main =
     Platform.program
         { init = init specs
@@ -232,9 +233,9 @@ type Msg
     = FromElm
 
 
-init : List Spec -> ( List Spec, Cmd msg )
+init : Spec -> ( Spec, Cmd msg )
 init specs =
-    ( specs, fromElm <| Json.Encode.list specs )
+    ( specs, fromElm specs )
 
 
 port fromElm : Spec -> Cmd msg

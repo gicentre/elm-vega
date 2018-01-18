@@ -12142,7 +12142,7 @@ var _gicentre$elm_vega$VegaLite$ViewWidth = function (a) {
 	return {ctor: 'ViewWidth', _0: a};
 };
 
-var _gicentre$elm_vega$HelloWorld$myVis = _gicentre$elm_vega$VegaLite$toVegaLite(
+var _gicentre$elm_vega$HelloWorld$myFinalVis = _gicentre$elm_vega$VegaLite$toVegaLite(
 	{
 		ctor: '::',
 		_0: _gicentre$elm_vega$VegaLite$title('Hello, World!'),
@@ -12196,6 +12196,186 @@ var _gicentre$elm_vega$HelloWorld$myVis = _gicentre$elm_vega$VegaLite$toVegaLite
 			}
 		}
 	});
+var _gicentre$elm_vega$HelloWorld$myOtherVis = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$title('Hello, World!'),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromColumns,
+				{ctor: '[]'},
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'x',
+					_gicentre$elm_vega$VegaLite$Numbers(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$encoding(
+						A3(
+							_gicentre$elm_vega$VegaLite$position,
+							_gicentre$elm_vega$VegaLite$X,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PName('x'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'})),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$HelloWorld$mySecondVis = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$title('Hello, World!'),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromColumns,
+				{ctor: '[]'},
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'x',
+					_gicentre$elm_vega$VegaLite$Numbers(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$encoding(
+						A3(
+							_gicentre$elm_vega$VegaLite$position,
+							_gicentre$elm_vega$VegaLite$X,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PName('x'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'})),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$HelloWorld$myFirstVis = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$title('Hello, World!'),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromColumns,
+				{ctor: '[]'},
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'x',
+					_gicentre$elm_vega$VegaLite$Numbers(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$encoding(
+						A3(
+							_gicentre$elm_vega$VegaLite$position,
+							_gicentre$elm_vega$VegaLite$X,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PName('x'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'})),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$HelloWorld$mySpecs = _elm_lang$core$Json_Encode$list(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$HelloWorld$myFirstVis,
+		_1: {
+			ctor: '::',
+			_0: _gicentre$elm_vega$HelloWorld$mySecondVis,
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$HelloWorld$myOtherVis,
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$HelloWorld$myFinalVis,
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	});
 var _gicentre$elm_vega$HelloWorld$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
 	'fromElm',
 	function (v) {
@@ -12210,7 +12390,7 @@ var _gicentre$elm_vega$HelloWorld$init = function (spec) {
 };
 var _gicentre$elm_vega$HelloWorld$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$HelloWorld$init(_gicentre$elm_vega$HelloWorld$myVis),
+		init: _gicentre$elm_vega$HelloWorld$init(_gicentre$elm_vega$HelloWorld$mySpecs),
 		update: F2(
 			function (_p0, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
