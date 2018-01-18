@@ -12580,49 +12580,51 @@ var _gicentre$elm_vega$ShapeTests$scatter14 = A2(
 				},
 				_p11));
 	});
-var _gicentre$elm_vega$ShapeTests$specs = {
-	ctor: '::',
-	_0: _gicentre$elm_vega$ShapeTests$scatter1,
-	_1: {
+var _gicentre$elm_vega$ShapeTests$specs = _elm_lang$core$Json_Encode$list(
+	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$ShapeTests$scatter2,
+		_0: _gicentre$elm_vega$ShapeTests$scatter1,
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$ShapeTests$scatter3,
+			_0: _gicentre$elm_vega$ShapeTests$scatter2,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$ShapeTests$scatter4,
+				_0: _gicentre$elm_vega$ShapeTests$scatter3,
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$ShapeTests$scatter5,
+					_0: _gicentre$elm_vega$ShapeTests$scatter4,
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$ShapeTests$scatter6,
+						_0: _gicentre$elm_vega$ShapeTests$scatter5,
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$ShapeTests$scatter7,
+							_0: _gicentre$elm_vega$ShapeTests$scatter6,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$ShapeTests$scatter8,
+								_0: _gicentre$elm_vega$ShapeTests$scatter7,
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$ShapeTests$scatter9,
+									_0: _gicentre$elm_vega$ShapeTests$scatter8,
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$ShapeTests$scatter10,
+										_0: _gicentre$elm_vega$ShapeTests$scatter9,
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$ShapeTests$scatter11,
+											_0: _gicentre$elm_vega$ShapeTests$scatter10,
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$ShapeTests$scatter12,
+												_0: _gicentre$elm_vega$ShapeTests$scatter11,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$ShapeTests$scatter13,
+													_0: _gicentre$elm_vega$ShapeTests$scatter12,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$ShapeTests$scatter14,
-														_1: {ctor: '[]'}
+														_0: _gicentre$elm_vega$ShapeTests$scatter13,
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$ShapeTests$scatter14,
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											}
@@ -12635,8 +12637,7 @@ var _gicentre$elm_vega$ShapeTests$specs = {
 				}
 			}
 		}
-	}
-};
+	});
 var _gicentre$elm_vega$ShapeTests$scatter15 = A2(
 	_gicentre$elm_vega$ShapeTests$chart,
 	'Custom shape sets encoding origin.',
@@ -12677,8 +12678,7 @@ var _gicentre$elm_vega$ShapeTests$init = function (specs) {
 	return {
 		ctor: '_Tuple2',
 		_0: specs,
-		_1: _gicentre$elm_vega$ShapeTests$fromElm(
-			_elm_lang$core$Json_Encode$list(specs))
+		_1: _gicentre$elm_vega$ShapeTests$fromElm(specs)
 	};
 };
 var _gicentre$elm_vega$ShapeTests$main = _elm_lang$core$Platform$program(

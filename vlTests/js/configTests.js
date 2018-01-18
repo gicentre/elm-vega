@@ -12704,27 +12704,28 @@ var _gicentre$elm_vega$ConfigTests$paddingCfg = _gicentre$elm_vega$ConfigTests$s
 					A4(_gicentre$elm_vega$VegaLite$PEdges, 90, 60, 30, 0)),
 				_p8));
 	});
-var _gicentre$elm_vega$ConfigTests$specs = {
-	ctor: '::',
-	_0: _gicentre$elm_vega$ConfigTests$defaultCfg,
-	_1: {
+var _gicentre$elm_vega$ConfigTests$specs = _elm_lang$core$Json_Encode$list(
+	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$ConfigTests$darkCfg,
+		_0: _gicentre$elm_vega$ConfigTests$defaultCfg,
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$ConfigTests$markCfg1,
+			_0: _gicentre$elm_vega$ConfigTests$darkCfg,
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$ConfigTests$markCfg2,
+				_0: _gicentre$elm_vega$ConfigTests$markCfg1,
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$ConfigTests$paddingCfg,
-					_1: {ctor: '[]'}
+					_0: _gicentre$elm_vega$ConfigTests$markCfg2,
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$ConfigTests$paddingCfg,
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		}
-	}
-};
+	});
 var _gicentre$elm_vega$ConfigTests$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
 	'fromElm',
 	function (v) {
@@ -12734,8 +12735,7 @@ var _gicentre$elm_vega$ConfigTests$init = function (specs) {
 	return {
 		ctor: '_Tuple2',
 		_0: specs,
-		_1: _gicentre$elm_vega$ConfigTests$fromElm(
-			_elm_lang$core$Json_Encode$list(specs))
+		_1: _gicentre$elm_vega$ConfigTests$fromElm(specs)
 	};
 };
 var _gicentre$elm_vega$ConfigTests$main = _elm_lang$core$Platform$program(
