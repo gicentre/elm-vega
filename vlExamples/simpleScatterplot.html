@@ -17,16 +17,15 @@
   <h1>Simple Scatterplot Generated with elm-vega</h1>
 
   <!-- The id indicates the container in which to embed the Vega-Lite output. -->
-  <div id="vis"></div>
+  <div id="scatter"></div>
 
   <script>
-    // This function grabs the specification from Elm.
-    // Replace SimpleScatterplot in line below with name of Elm module if write your own Elm module.
-    Elm.SimpleScatterplot.worker().ports.fromElm.subscribe(function(elmObj) {
-      vegaEmbed("#vis", elmObj, {
-        // Change actions to true to display linking actions (source, Vega-Lite editor and image output)
-        actions: false
-      }).catch(console.warn);
+    Elm.SimpleScatterplot.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: false, logLevel:vega.Warn
+        }).catch(console.warn);
+      }
     });
   </script>
 

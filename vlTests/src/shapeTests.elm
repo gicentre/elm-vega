@@ -1,4 +1,4 @@
-port module ShapeTests exposing (..)
+port module ShapeTests exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -186,48 +186,40 @@ scatter15 =
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : Spec
-specs =
-    [ scatter1
-    , scatter2
-    , scatter3
-    , scatter4
-    , scatter5
-    , scatter6
-    , scatter7
-    , scatter8
-    , scatter9
-    , scatter10
-    , scatter11
-    , scatter12
-    , scatter13
-    , scatter14
-    ]
-        |> Json.Encode.list
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object
+        [ ( "defNominal", scatter1 )
+        , ( "defOrdinal", scatter2 )
+        , ( "size1", scatter3 )
+        , ( "size2", scatter4 )
+        , ( "size3", scatter5 )
+        , ( "multi1", scatter6 )
+        , ( "multi2", scatter7 )
+        , ( "multi3", scatter8 )
+        , ( "multi4", scatter9 )
+        , ( "multi5", scatter10 )
+        , ( "multi6", scatter11 )
+        , ( "custom1", scatter12 )
+        , ( "custom2", scatter13 )
+        , ( "custom3", scatter14 )
+        , ( "custom4", scatter15 )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init specs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init specs =
-    ( specs, fromElm specs )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

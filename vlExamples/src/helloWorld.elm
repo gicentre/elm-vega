@@ -1,4 +1,4 @@
-port module HelloWorld exposing (fromElm)
+port module HelloWorld exposing (elmToJS)
 
 import Platform
 import VegaLite exposing (..)
@@ -15,27 +15,18 @@ myVis =
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
-   an outgoing port to Javascript and sends the specs to it.
+{- The code below is boilerplate for creating a headless Elm module that opens
+   an outgoing port to JavaScript and sends the Vega-Lite spec (myVis) to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init myVis
+        { init = ( myVis, elmToJS myVis )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init spec =
-    ( spec, fromElm spec )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

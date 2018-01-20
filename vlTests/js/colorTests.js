@@ -12374,7 +12374,7 @@ var _gicentre$elm_vega$ColorTests$namedContinuous4 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$namedContinuous5 = A2(
+var _gicentre$elm_vega$ColorTests$customContinuous = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Custom continuous colour scheme (red to blue ramp).',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12406,7 +12406,7 @@ var _gicentre$elm_vega$ColorTests$namedContinuous5 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$namedContinuous6 = A2(
+var _gicentre$elm_vega$ColorTests$customDiscrete = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Custom discrete colours (red, green, blue).',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12442,7 +12442,7 @@ var _gicentre$elm_vega$ColorTests$namedContinuous6 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$scale0 = A2(
+var _gicentre$elm_vega$ColorTests$scale1 = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Sequential (default) colour scale.',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12478,7 +12478,7 @@ var _gicentre$elm_vega$ColorTests$scale0 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$scale1 = A2(
+var _gicentre$elm_vega$ColorTests$scale2 = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Linear colour scale.',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12514,7 +12514,7 @@ var _gicentre$elm_vega$ColorTests$scale1 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$scale2 = A2(
+var _gicentre$elm_vega$ColorTests$scale3 = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Power colour scale.',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12550,7 +12550,7 @@ var _gicentre$elm_vega$ColorTests$scale2 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$scale3 = A2(
+var _gicentre$elm_vega$ColorTests$scale4 = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Square root colour scale.',
 	_gicentre$elm_vega$VegaLite$color(
@@ -12586,7 +12586,7 @@ var _gicentre$elm_vega$ColorTests$scale3 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$scale4 = A2(
+var _gicentre$elm_vega$ColorTests$scale5 = A2(
 	_gicentre$elm_vega$ColorTests$chart,
 	'Log colour scale.',
 	_gicentre$elm_vega$VegaLite$color(
@@ -13109,85 +13109,85 @@ var _gicentre$elm_vega$ColorTests$gamma5 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ColorTests$specs = _elm_lang$core$Json_Encode$list(
+var _gicentre$elm_vega$ColorTests$mySpecs = _elm_lang$core$Json_Encode$object(
 	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$ColorTests$defContinuous,
+		_0: {ctor: '_Tuple2', _0: 'defContinuous', _1: _gicentre$elm_vega$ColorTests$defContinuous},
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$ColorTests$defOrdinal,
+			_0: {ctor: '_Tuple2', _0: 'defOrdinal', _1: _gicentre$elm_vega$ColorTests$defOrdinal},
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$ColorTests$defNominal,
+				_0: {ctor: '_Tuple2', _0: 'defNominal', _1: _gicentre$elm_vega$ColorTests$defNominal},
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$ColorTests$namedContinuous1,
+					_0: {ctor: '_Tuple2', _0: 'namedContinuous1', _1: _gicentre$elm_vega$ColorTests$namedContinuous1},
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$ColorTests$namedContinuous2,
+						_0: {ctor: '_Tuple2', _0: 'namedContinuous2', _1: _gicentre$elm_vega$ColorTests$namedContinuous2},
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$ColorTests$namedContinuous3,
+							_0: {ctor: '_Tuple2', _0: 'namedContinuous3', _1: _gicentre$elm_vega$ColorTests$namedContinuous3},
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$ColorTests$namedContinuous4,
+								_0: {ctor: '_Tuple2', _0: 'namedContinuous4', _1: _gicentre$elm_vega$ColorTests$namedContinuous4},
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$ColorTests$namedContinuous5,
+									_0: {ctor: '_Tuple2', _0: 'customContinuous', _1: _gicentre$elm_vega$ColorTests$customContinuous},
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$ColorTests$namedContinuous6,
+										_0: {ctor: '_Tuple2', _0: 'customDiscrete', _1: _gicentre$elm_vega$ColorTests$customDiscrete},
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$ColorTests$scale0,
+											_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ColorTests$scale1},
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$ColorTests$scale1,
+												_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ColorTests$scale2},
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$ColorTests$scale2,
+													_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ColorTests$scale3},
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$ColorTests$scale3,
+														_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ColorTests$scale4},
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$ColorTests$scale4,
+															_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ColorTests$scale5},
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$ColorTests$interp1,
+																_0: {ctor: '_Tuple2', _0: 'interp1', _1: _gicentre$elm_vega$ColorTests$interp1},
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$ColorTests$interp2,
+																	_0: {ctor: '_Tuple2', _0: 'interp2', _1: _gicentre$elm_vega$ColorTests$interp2},
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$ColorTests$interp3,
+																		_0: {ctor: '_Tuple2', _0: 'interp3', _1: _gicentre$elm_vega$ColorTests$interp3},
 																		_1: {
 																			ctor: '::',
-																			_0: _gicentre$elm_vega$ColorTests$interp4,
+																			_0: {ctor: '_Tuple2', _0: 'interp4', _1: _gicentre$elm_vega$ColorTests$interp4},
 																			_1: {
 																				ctor: '::',
-																				_0: _gicentre$elm_vega$ColorTests$interp5,
+																				_0: {ctor: '_Tuple2', _0: 'interp5', _1: _gicentre$elm_vega$ColorTests$interp5},
 																				_1: {
 																					ctor: '::',
-																					_0: _gicentre$elm_vega$ColorTests$interp6,
+																					_0: {ctor: '_Tuple2', _0: 'interp6', _1: _gicentre$elm_vega$ColorTests$interp6},
 																					_1: {
 																						ctor: '::',
-																						_0: _gicentre$elm_vega$ColorTests$interp7,
+																						_0: {ctor: '_Tuple2', _0: 'interp7', _1: _gicentre$elm_vega$ColorTests$interp7},
 																						_1: {
 																							ctor: '::',
-																							_0: _gicentre$elm_vega$ColorTests$gamma1,
+																							_0: {ctor: '_Tuple2', _0: 'gamma1', _1: _gicentre$elm_vega$ColorTests$gamma1},
 																							_1: {
 																								ctor: '::',
-																								_0: _gicentre$elm_vega$ColorTests$gamma2,
+																								_0: {ctor: '_Tuple2', _0: 'gamma2', _1: _gicentre$elm_vega$ColorTests$gamma2},
 																								_1: {
 																									ctor: '::',
-																									_0: _gicentre$elm_vega$ColorTests$gamma3,
+																									_0: {ctor: '_Tuple2', _0: 'gamma3', _1: _gicentre$elm_vega$ColorTests$gamma3},
 																									_1: {
 																										ctor: '::',
-																										_0: _gicentre$elm_vega$ColorTests$gamma4,
+																										_0: {ctor: '_Tuple2', _0: 'gamma4', _1: _gicentre$elm_vega$ColorTests$gamma4},
 																										_1: {
 																											ctor: '::',
-																											_0: _gicentre$elm_vega$ColorTests$gamma5,
+																											_0: {ctor: '_Tuple2', _0: 'gamma5', _1: _gicentre$elm_vega$ColorTests$gamma5},
 																											_1: {ctor: '[]'}
 																										}
 																									}
@@ -13215,30 +13215,24 @@ var _gicentre$elm_vega$ColorTests$specs = _elm_lang$core$Json_Encode$list(
 			}
 		}
 	});
-var _gicentre$elm_vega$ColorTests$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$ColorTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$ColorTests$init = function (specs) {
-	return {
-		ctor: '_Tuple2',
-		_0: specs,
-		_1: _gicentre$elm_vega$ColorTests$fromElm(specs)
-	};
-};
 var _gicentre$elm_vega$ColorTests$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$ColorTests$init(_gicentre$elm_vega$ColorTests$specs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$ColorTests$mySpecs,
+			_1: _gicentre$elm_vega$ColorTests$elmToJS(_gicentre$elm_vega$ColorTests$mySpecs)
+		},
 		update: F2(
 			function (_p1, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p2) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$ColorTests$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['ColorTests'] = Elm['ColorTests'] || {};

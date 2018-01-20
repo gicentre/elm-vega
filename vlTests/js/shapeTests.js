@@ -12580,64 +12580,6 @@ var _gicentre$elm_vega$ShapeTests$scatter14 = A2(
 				},
 				_p11));
 	});
-var _gicentre$elm_vega$ShapeTests$specs = _elm_lang$core$Json_Encode$list(
-	{
-		ctor: '::',
-		_0: _gicentre$elm_vega$ShapeTests$scatter1,
-		_1: {
-			ctor: '::',
-			_0: _gicentre$elm_vega$ShapeTests$scatter2,
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$ShapeTests$scatter3,
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$ShapeTests$scatter4,
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$ShapeTests$scatter5,
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$ShapeTests$scatter6,
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$ShapeTests$scatter7,
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$ShapeTests$scatter8,
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$ShapeTests$scatter9,
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$ShapeTests$scatter10,
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$ShapeTests$scatter11,
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$ShapeTests$scatter12,
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$ShapeTests$scatter13,
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$ShapeTests$scatter14,
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	});
 var _gicentre$elm_vega$ShapeTests$scatter15 = A2(
 	_gicentre$elm_vega$ShapeTests$chart,
 	'Custom shape sets encoding origin.',
@@ -12669,30 +12611,86 @@ var _gicentre$elm_vega$ShapeTests$scatter15 = A2(
 				}
 			}
 		}));
-var _gicentre$elm_vega$ShapeTests$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$ShapeTests$mySpecs = _elm_lang$core$Json_Encode$object(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'defNominal', _1: _gicentre$elm_vega$ShapeTests$scatter1},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'defOrdinal', _1: _gicentre$elm_vega$ShapeTests$scatter2},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'size1', _1: _gicentre$elm_vega$ShapeTests$scatter3},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'size2', _1: _gicentre$elm_vega$ShapeTests$scatter4},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'size3', _1: _gicentre$elm_vega$ShapeTests$scatter5},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'multi1', _1: _gicentre$elm_vega$ShapeTests$scatter6},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'multi2', _1: _gicentre$elm_vega$ShapeTests$scatter7},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'multi3', _1: _gicentre$elm_vega$ShapeTests$scatter8},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'multi4', _1: _gicentre$elm_vega$ShapeTests$scatter9},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'multi5', _1: _gicentre$elm_vega$ShapeTests$scatter10},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'multi6', _1: _gicentre$elm_vega$ShapeTests$scatter11},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'custom1', _1: _gicentre$elm_vega$ShapeTests$scatter12},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'custom2', _1: _gicentre$elm_vega$ShapeTests$scatter13},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'custom3', _1: _gicentre$elm_vega$ShapeTests$scatter14},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'custom4', _1: _gicentre$elm_vega$ShapeTests$scatter15},
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$ShapeTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$ShapeTests$init = function (specs) {
-	return {
-		ctor: '_Tuple2',
-		_0: specs,
-		_1: _gicentre$elm_vega$ShapeTests$fromElm(specs)
-	};
-};
 var _gicentre$elm_vega$ShapeTests$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$ShapeTests$init(_gicentre$elm_vega$ShapeTests$specs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$ShapeTests$mySpecs,
+			_1: _gicentre$elm_vega$ShapeTests$elmToJS(_gicentre$elm_vega$ShapeTests$mySpecs)
+		},
 		update: F2(
 			function (_p12, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p13) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$ShapeTests$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['ShapeTests'] = Elm['ShapeTests'] || {};

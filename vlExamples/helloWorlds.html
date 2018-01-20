@@ -16,7 +16,7 @@
 <body>
   <h1>Hello Worlds</h1>
 
-  <!-- IDs should be numbered sequentially and correspond to the order of Vega-Lite specs generated in elm-vega. -->
+  <!-- IDs should correspond to the names given to each visualization in Elm -->
   <h2>Here is the first visualization</h2>
   <div id="vis1"></div>
 
@@ -24,12 +24,10 @@
   <div id="vis2"></div>
   <div id="vis3"></div>
 
-
   <script>
-    Elm.HelloWorlds.worker().ports.fromElm.subscribe(function(elmObj) {
-      let id = 1;
-      for (let obj of elmObj) {
-        vegaEmbed("#vis" + id++, obj, {
+    Elm.HelloWorlds.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
           actions: false, logLevel:vega.Warn
         }).catch(console.warn);
       }

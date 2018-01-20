@@ -12205,30 +12205,30 @@ var _gicentre$elm_vega$SimpleScatterplot$scatter = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$SimpleScatterplot$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$SimpleScatterplot$mySpecs = _elm_lang$core$Json_Encode$object(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'scatter', _1: _gicentre$elm_vega$SimpleScatterplot$scatter},
+		_1: {ctor: '[]'}
+	});
+var _gicentre$elm_vega$SimpleScatterplot$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$SimpleScatterplot$init = function (spec) {
-	return {
-		ctor: '_Tuple2',
-		_0: spec,
-		_1: _gicentre$elm_vega$SimpleScatterplot$fromElm(spec)
-	};
-};
 var _gicentre$elm_vega$SimpleScatterplot$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$SimpleScatterplot$init(_gicentre$elm_vega$SimpleScatterplot$scatter),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$SimpleScatterplot$mySpecs,
+			_1: _gicentre$elm_vega$SimpleScatterplot$elmToJS(_gicentre$elm_vega$SimpleScatterplot$mySpecs)
+		},
 		update: F2(
 			function (_p1, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p2) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$SimpleScatterplot$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['SimpleScatterplot'] = Elm['SimpleScatterplot'] || {};

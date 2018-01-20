@@ -18,13 +18,11 @@
   <div id="vis"></div>
 
   <script>
-    // This function grabs the specification from Elm.
-    // Replace HelloWorld in line below with name of Elm module if write your own Elm module.
-    Elm.HelloWorld.worker().ports.fromElm.subscribe(function(elmObj) {
-      vegaEmbed("#vis", elmObj, {
-        // Change actions to true to display linking actions (source, Vega-Lite editor and image output)
-        actions: false
-      }).catch(console.warn);
+    // This function grabs the specification from Elm (here called specs).
+    // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
+    Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(specs) {
+      // Change actions to true to display links to source, editor and image.
+      vegaEmbed("#vis", specs, {actions: false}).catch(console.warn);
     });
   </script>
 

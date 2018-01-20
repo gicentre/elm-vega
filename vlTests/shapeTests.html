@@ -17,45 +17,44 @@
   <h1>Elm-Vega Shape Tests</h1>
 
   <h2>Default Shape Symbolization</h2>
-  <figure class="cell"><div id="vis1"></div><figcaption>Default nominal shapes</figcaption></figure>
-  <figure class="cell"><div id="vis2"></div><figcaption>Default ordinal shapes</figcaption></figure>
+  <figure class="cell"><div id="defNominal"></div><figcaption>Default nominal shapes</figcaption></figure>
+  <figure class="cell"><div id="defOrdinal"></div><figcaption>Default ordinal shapes</figcaption></figure>
   <div style="clear:left"></div>
 
   <h2>Sized shapes</h2>
-    <figure class="cell"><div id="vis3"></div><figcaption>Enlarged sizes for nominal shapes</figcaption></figure>
-    <figure class="cell"><div id="vis4"></div><figcaption>Reduced sizes for nominal shapes</figcaption></figure>
-    <figure class="cell"><div id="vis5"></div><figcaption>Fixed shape, sized by number of cylinders</figcaption></figure>
+    <figure class="cell"><div id="size1"></div><figcaption>Enlarged sizes for nominal shapes</figcaption></figure>
+    <figure class="cell"><div id="size2"></div><figcaption>Reduced sizes for nominal shapes</figcaption></figure>
+    <figure class="cell"><div id="size3"></div><figcaption>Fixed shape, sized by number of cylinders</figcaption></figure>
     <div style="clear:left"></div>
 
 
   <h2>Multiple encoding</h2>
-    <figure class="cell"><div id="vis6"></div><figcaption>Size and shape independent (should have two legend sets)</figcaption></figure>
-    <figure class="cell"><div id="vis7"></div><figcaption>Sized and shaped by number of cylinders (should only have a single set of legend items)</figcaption></figure>
-    <figure class="cell"><div id="vis8"></div><figcaption>Sized, shaped and coloured by number of cylinders (should only have a single set of legend items)</figcaption></figure>
-    <figure class="cell"><div id="vis9"></div><figcaption>Default-shaped and coloured by country of origin (should only have a single set of legend items)</figcaption></figure>
-    <figure class="cell"><div id="vis10"></div><figcaption>Custom-shaped and coloured by country of origin (should only have a single set of legend items)</figcaption></figure>
-    <figure class="cell"><div id="vis11"></div><figcaption>Sized, shaped by number of cylinders, coloured by origin (should have a pair of legend sets - one for shape/size, the other for color)</figcaption></figure>
+    <figure class="cell"><div id="multi1"></div><figcaption>Size and shape independent (should have two legend sets)</figcaption></figure>
+    <figure class="cell"><div id="multi2"></div><figcaption>Sized and shaped by number of cylinders (should only have a single set of legend items)</figcaption></figure>
+    <figure class="cell"><div id="multi3"></div><figcaption>Sized, shaped and coloured by number of cylinders (should only have a single set of legend items)</figcaption></figure>
+    <figure class="cell"><div id="multi4"></div><figcaption>Default-shaped and coloured by country of origin (should only have a single set of legend items)</figcaption></figure>
+    <figure class="cell"><div id="multi5"></div><figcaption>Custom-shaped and coloured by country of origin (should only have a single set of legend items)</figcaption></figure>
+    <figure class="cell"><div id="multi6"></div><figcaption>Sized, shaped by number of cylinders, coloured by origin (should have a pair of legend sets - one for shape/size, the other for color)</figcaption></figure>
     <div style="clear:left"></div>
 
 
   <h2>Custom shapes</h2>
-    <figure class="cell"><div id="vis12"></div><figcaption>Single custom shape with unit area and default size.</figcaption></figure>
-    <figure class="cell"><div id="vis13"></div><figcaption>Single custom shape with unit area and sized by cylinders.</figcaption></figure>
-    <figure class="cell"><div id="vis14"></div><figcaption>Single custom shape with area of 10x10 pixel units.</figcaption></figure>
-    <figure class="cell"><div id="vis15"></div><figcaption>Custom (3x3) shape sets encoding country of origin.</figcaption></figure>
+    <figure class="cell"><div id="custom1"></div><figcaption>Single custom shape with unit area and default size.</figcaption></figure>
+    <figure class="cell"><div id="custom2"></div><figcaption>Single custom shape with unit area and sized by cylinders.</figcaption></figure>
+    <figure class="cell"><div id="custom3"></div><figcaption>Single custom shape with area of 10x10 pixel units.</figcaption></figure>
+    <figure class="cell"><div id="custom4"></div><figcaption>Custom (3x3) shape sets encoding country of origin.</figcaption></figure>
 
 
-  <script>
-    Elm.ShapeTests.worker().ports.fromElm.subscribe(function(elmObj) {
-      let id = 1;
-      for (let obj of elmObj) {
-        vegaEmbed("#vis" + id++, obj, {
-          actions: {"export":true, "source":true, "editor":true}, logLevel:vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+    <script>
+      Elm.ShapeTests.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true, logLevel:vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
 
-</body>
+    </body>
 
-</html>
+    </html>

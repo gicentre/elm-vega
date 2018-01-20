@@ -12302,44 +12302,38 @@ var _gicentre$elm_vega$HelloWorlds$myFirstVis = _gicentre$elm_vega$VegaLite$toVe
 			}
 		}
 	});
-var _gicentre$elm_vega$HelloWorlds$mySpecs = _elm_lang$core$Json_Encode$list(
+var _gicentre$elm_vega$HelloWorlds$mySpecs = _elm_lang$core$Json_Encode$object(
 	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$HelloWorlds$myFirstVis,
+		_0: {ctor: '_Tuple2', _0: 'vis1', _1: _gicentre$elm_vega$HelloWorlds$myFirstVis},
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$HelloWorlds$mySecondVis,
+			_0: {ctor: '_Tuple2', _0: 'vis2', _1: _gicentre$elm_vega$HelloWorlds$mySecondVis},
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$HelloWorlds$myOtherVis,
+				_0: {ctor: '_Tuple2', _0: 'vis3', _1: _gicentre$elm_vega$HelloWorlds$myOtherVis},
 				_1: {ctor: '[]'}
 			}
 		}
 	});
-var _gicentre$elm_vega$HelloWorlds$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$HelloWorlds$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$HelloWorlds$init = function (spec) {
-	return {
-		ctor: '_Tuple2',
-		_0: spec,
-		_1: _gicentre$elm_vega$HelloWorlds$fromElm(spec)
-	};
-};
 var _gicentre$elm_vega$HelloWorlds$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$HelloWorlds$init(_gicentre$elm_vega$HelloWorlds$mySpecs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$HelloWorlds$mySpecs,
+			_1: _gicentre$elm_vega$HelloWorlds$elmToJS(_gicentre$elm_vega$HelloWorlds$mySpecs)
+		},
 		update: F2(
 			function (_p2, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p3) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$HelloWorlds$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['HelloWorlds'] = Elm['HelloWorlds'] || {};
