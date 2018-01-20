@@ -1,4 +1,4 @@
-port module Gallery exposing (..)
+port module Gallery exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -10,8 +10,8 @@ import VegaLite exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
 
 
-vl1 : Spec
-vl1 =
+basic1 : Spec
+basic1 =
     let
         des =
             description "A simple bar chart with embedded data."
@@ -29,8 +29,8 @@ vl1 =
     toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
-vl2 : Spec
-vl2 =
+basic2 : Spec
+basic2 =
     let
         des =
             description "A bar chart showing the US population distribution of age groups in 2000."
@@ -46,8 +46,8 @@ vl2 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [] ]
 
 
-vl3 : Spec
-vl3 =
+basic3 : Spec
+basic3 =
     let
         des =
             description "Simple histogram of IMDB ratings."
@@ -60,8 +60,8 @@ vl3 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Bar [], enc [] ]
 
 
-vl4 : Spec
-vl4 =
+basic4 : Spec
+basic4 =
     let
         des =
             description "A simple bar chart with ranged data (aka Gantt Chart)."
@@ -81,8 +81,8 @@ vl4 =
     toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
-vl5 : Spec
-vl5 =
+basic5 : Spec
+basic5 =
     let
         des =
             description "Grouped bar chart shoing population structure by age and gender."
@@ -107,8 +107,8 @@ vl5 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [], config [] ]
 
 
-vl6 : Spec
-vl6 =
+basic6 : Spec
+basic6 =
     let
         des =
             description "A scatterplot showing horsepower and miles per gallon for various cars (via point marks)."
@@ -121,8 +121,8 @@ vl6 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
-vl7 : Spec
-vl7 =
+basic7 : Spec
+basic7 =
     let
         des =
             description "A scatterplot showing horsepower and miles per gallon for various cars (via circle marks)."
@@ -135,8 +135,8 @@ vl7 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
 
 
-vl8 : Spec
-vl8 =
+basic8 : Spec
+basic8 =
     let
         des =
             description "A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews."
@@ -150,8 +150,8 @@ vl8 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Circle [], enc [] ]
 
 
-vl9 : Spec
-vl9 =
+basic9 : Spec
+basic9 =
     let
         des =
             description "A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape."
@@ -166,8 +166,8 @@ vl9 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
-vl10 : Spec
-vl10 =
+basic10 : Spec
+basic10 =
     let
         des =
             description "A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size."
@@ -181,8 +181,8 @@ vl10 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
-vl11 : Spec
-vl11 =
+basic11 : Spec
+basic11 =
     let
         des =
             description "A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost's blog post 'One Chart, Twelve Charting Libraries' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/)."
@@ -208,8 +208,8 @@ vl11 =
         ]
 
 
-vl12 : Spec
-vl12 =
+basic12 : Spec
+basic12 =
     let
         des =
             description "Shows the relationship between horsepower and the number of cylinders using tick marks."
@@ -222,8 +222,8 @@ vl12 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
 
 
-vl13 : Spec
-vl13 =
+basic13 : Spec
+basic13 =
     let
         des =
             description "Google's stock price over time."
@@ -239,8 +239,8 @@ vl13 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
 
 
-vl14 : Spec
-vl14 =
+basic14 : Spec
+basic14 =
     let
         des =
             description "Stock prices of 5 tech companies over time."
@@ -254,8 +254,8 @@ vl14 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
 
 
-vl15 : Spec
-vl15 =
+basic15 : Spec
+basic15 =
     let
         des =
             description "Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site."
@@ -269,8 +269,8 @@ vl15 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
 
 
-vl16 : Spec
-vl16 =
+basic16 : Spec
+basic16 =
     let
         des =
             description "Google's stock price over time (quantized as a step-chart)."
@@ -286,8 +286,8 @@ vl16 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
 
 
-vl17 : Spec
-vl17 =
+basic17 : Spec
+basic17 =
     let
         des =
             description "Unemployment over time (area chart)"
@@ -307,8 +307,8 @@ vl17 =
         ]
 
 
-vl18 : Spec
-vl18 =
+basic18 : Spec
+basic18 =
     let
         des =
             description "'Table heatmap' showing engine size/power for three countries."
@@ -322,8 +322,8 @@ vl18 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
 
 
-vl19 : Spec
-vl19 =
+basic19 : Spec
+basic19 =
     let
         des =
             description "'Binned heatmap' comparing movie ratings."
@@ -350,8 +350,8 @@ vl19 =
         ]
 
 
-vl20 : Spec
-vl20 =
+basic20 : Spec
+basic20 =
     let
         des =
             description "Table bubble plot in the style of a Github punched card."
@@ -365,8 +365,8 @@ vl20 =
     toVegaLite [ des, dataFromUrl "data/github.csv" [], mark Circle [], enc [] ]
 
 
-vl21 : Spec
-vl21 =
+stack1 : Spec
+stack1 =
     let
         des =
             description "Seattle weather stacked bar chart"
@@ -392,8 +392,8 @@ vl21 =
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
 
 
-vl22 : Spec
-vl22 =
+stack2 : Spec
+stack2 =
     let
         des =
             description "Barley crop yields as a horizontal stacked bar chart"
@@ -407,8 +407,8 @@ vl22 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
 
 
-vl23 : Spec
-vl23 =
+stack3 : Spec
+stack3 =
     let
         des =
             description "Population structure as a normalised stacked bar chart."
@@ -427,8 +427,8 @@ vl23 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
 
 
-vl24 : Spec
-vl24 =
+stack4 : Spec
+stack4 =
     let
         des =
             description "Unemployment across industries as a stacked area chart."
@@ -442,8 +442,8 @@ vl24 =
     toVegaLite [ des, dataFromUrl "data/unemployment-across-industries.json" [], mark Area [], enc [] ]
 
 
-vl25 : Spec
-vl25 =
+stack5 : Spec
+stack5 =
     let
         des =
             description "Unemployment across industries as a normalised area chart."
@@ -464,8 +464,8 @@ vl25 =
         ]
 
 
-vl26 : Spec
-vl26 =
+stack6 : Spec
+stack6 =
     let
         des =
             description "Unemployment across industries as a streamgraph (centred, stacked area chart)."
@@ -486,8 +486,8 @@ vl26 =
         ]
 
 
-vl27 : Spec
-vl27 =
+stack7 : Spec
+stack7 =
     let
         des =
             description "Layered bar chart showing the US population distribution of age groups and gender in 2000."
@@ -507,8 +507,8 @@ vl27 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
 
 
-vl28 : Spec
-vl28 =
+stack8 : Spec
+stack8 =
     let
         des =
             description "A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark."
@@ -545,8 +545,8 @@ vl28 =
     toVegaLite [ des, data [], mark Bar [], enc [] ]
 
 
-vl29 : Spec
-vl29 =
+trellis1 : Spec
+trellis1 =
     let
         des =
             description "Anscombe's Quartet"
@@ -561,8 +561,8 @@ vl29 =
     toVegaLite [ des, dataFromUrl "data/anscombe.json" [], mark Circle [], enc [] ]
 
 
-vl30 : Spec
-vl30 =
+trellis2 : Spec
+trellis2 =
     let
         des =
             description "A trellis bar chart showing the US population distribution of age groups and gender in 2000."
@@ -588,8 +588,8 @@ vl30 =
         ]
 
 
-vl31 : Spec
-vl31 =
+trellis3 : Spec
+trellis3 =
     let
         des =
             description "Barley crop yields in 1931 and 1932 shown as stacked bar charts."
@@ -604,8 +604,8 @@ vl31 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
 
 
-vl32 : Spec
-vl32 =
+trellis4 : Spec
+trellis4 =
     let
         des =
             description "Scatterplots of movie takings vs profits for different MPAA ratings."
@@ -619,8 +619,8 @@ vl32 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Point [], enc [] ]
 
 
-vl33 : Spec
-vl33 =
+trellis5 : Spec
+trellis5 =
     let
         des =
             description "Disitributions of car engine power for different countries of origin."
@@ -634,8 +634,8 @@ vl33 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
 
 
-vl34 : Spec
-vl34 =
+trellis6 : Spec
+trellis6 =
     let
         des =
             description "The Trellis display by Becker et al. helped establish small multiples as a “powerful mechanism for understanding interactions in studies of how a response depends on explanatory variables”. Here we reproduce a trellis of Barley yields from the 1930s, complete with main-effects ordering to facilitate comparison."
@@ -650,8 +650,8 @@ vl34 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Point [], enc [] ]
 
 
-vl35 : Spec
-vl35 =
+trellis7 : Spec
+trellis7 =
     let
         des =
             description "Stock prices of four large companies as a small multiples of area charts."
@@ -669,8 +669,8 @@ vl35 =
     toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], mark Area [], enc [] ]
 
 
-vl36 : Spec
-vl36 =
+layer1 : Spec
+layer1 =
     let
         des =
             description "A simple bar chart with embedded data labels."
@@ -703,8 +703,8 @@ vl36 =
     toVegaLite [ des, data [], layer [ specBar, specText ], config [] ]
 
 
-vl37 : Spec
-vl37 =
+layer2 : Spec
+layer2 =
     let
         des =
             description "Monthly precipitation with mean value overlay."
@@ -729,8 +729,8 @@ vl37 =
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ] ]
 
 
-vl38 : Spec
-vl38 =
+layer3 : Spec
+layer3 =
     let
         des =
             description "Layering text over 'heatmap'."
@@ -762,8 +762,8 @@ vl38 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specRect, specText ], config [] ]
 
 
-vl39 : Spec
-vl39 =
+layer4 : Spec
+layer4 =
     let
         des =
             description "A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000."
@@ -820,8 +820,8 @@ vl39 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
-vl40 : Spec
-vl40 =
+layer5 : Spec
+layer5 =
     let
         des =
             description "A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn't strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts."
@@ -876,8 +876,8 @@ vl40 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
-vl41 : Spec
-vl41 =
+layer6 : Spec
+layer6 =
     let
         des =
             description "A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)"
@@ -925,8 +925,8 @@ vl41 =
     toVegaLite [ des, width 320, data [], trans [], layer [ specLine, specBar ] ]
 
 
-vl42 : Spec
-vl42 =
+layer7 : Spec
+layer7 =
     let
         des =
             description "Error bars showing confidence intervals"
@@ -952,8 +952,8 @@ vl42 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], layer [ specPoints, specCIs ] ]
 
 
-vl43 : Spec
-vl43 =
+layer8 : Spec
+layer8 =
     let
         des =
             description "Error bars showing standard deviation."
@@ -985,8 +985,8 @@ vl43 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], trans [], layer [ specMeans, specStdevs ] ]
 
 
-vl44 : Spec
-vl44 =
+layer9 : Spec
+layer9 =
     let
         des =
             description "Histogram with global mean overlay."
@@ -1011,8 +1011,8 @@ vl44 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], layer [ specBars, specMean ] ]
 
 
-vl45 : Spec
-vl45 =
+layer10 : Spec
+layer10 =
     let
         des =
             description "A scatterplot showing horsepower and miles per gallon for various cars with a global mean and standard deviation overlay."
@@ -1052,8 +1052,8 @@ vl45 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specPoints, specSpread ] ]
 
 
-vl46 : Spec
-vl46 =
+layer11 : Spec
+layer11 =
     let
         des =
             description "Line chart with confidence interval band."
@@ -1079,8 +1079,8 @@ vl46 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specBand, specLine ] ]
 
 
-vl47 : Spec
-vl47 =
+layer12 : Spec
+layer12 =
     let
         des =
             description "The population of the German city of Falkensee over time with annotated time periods highlighted."
@@ -1120,8 +1120,8 @@ vl47 =
     toVegaLite [ des, width 500, data [], layer [ specRects, specLine, specPoints ] ]
 
 
-vl48 : Spec
-vl48 =
+layer13 : Spec
+layer13 =
     let
         des =
             description "A ranged dot plot that uses 'layer' to convey changing life expectancy for the five most populous countries (between 1955 and 2000)."
@@ -1155,8 +1155,8 @@ vl48 =
     toVegaLite [ des, dataFromUrl "data/countries.json" [], trans [], layer [ specLine, specPoints ] ]
 
 
-vl49 : Spec
-vl49 =
+layer14 : Spec
+layer14 =
     let
         des =
             description "Layered bar/line chart with dual axes."
@@ -1185,8 +1185,8 @@ vl49 =
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ], res [] ]
 
 
-vl50 : Spec
-vl50 =
+layer15 : Spec
+layer15 =
     let
         des =
             description "Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)"
@@ -1224,8 +1224,8 @@ vl50 =
     toVegaLite [ des, width 300, height 50, data [], layer [ specLower, specUpper ], config [] ]
 
 
-vl51 : Spec
-vl51 =
+layer16 : Spec
+layer16 =
     let
         des =
             description "Connected scatterplot showing change over time."
@@ -1245,8 +1245,8 @@ vl51 =
     toVegaLite [ des, dataFromUrl "data/driving.json" [], layer [ specLine, specPoint ] ]
 
 
-vl52 : Spec
-vl52 =
+comp1 : Spec
+comp1 =
     let
         des =
             description "Monthly weather information for individual years and overall average for Seatle and New York."
@@ -1281,8 +1281,45 @@ vl52 =
         ]
 
 
-vl53 : Spec
-vl53 =
+comp2 : Spec
+comp2 =
+    let
+        enc =
+            encoding
+                << position X [ PRepeat Column, PmType Quantitative, PBin [] ]
+                << position Y [ PmType Quantitative, PAggregate Count ]
+                << color [ MName "Origin", MmType Nominal ]
+
+        spec =
+            asSpec [ dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
+    in
+    toVegaLite
+        [ repeat [ ColumnFields [ "Horsepower", "Miles_per_Gallon", "Acceleration" ] ]
+        , specification spec
+        ]
+
+
+comp3 : Spec
+comp3 =
+    let
+        enc =
+            encoding
+                << position X [ PName "Horsepower", PmType Quantitative, PBin [ MaxBins 15 ] ]
+                << position Y [ PAggregate Count, PmType Quantitative ]
+                << color [ MName "Origin", MmType Nominal, MLegend [] ]
+
+        spec =
+            asSpec [ mark Bar [], enc [] ]
+    in
+    toVegaLite
+        [ dataFromUrl "data/cars.json" []
+        , facet [ RowBy [ FName "Origin", FmType Nominal ] ]
+        , specification spec
+        ]
+
+
+interactive1 : Spec
+interactive1 =
     let
         des =
             description "Drag out a rectangular brush to highlight points."
@@ -1303,8 +1340,8 @@ vl53 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
 
 
-vl54 : Spec
-vl54 =
+interactive2 : Spec
+interactive2 =
     let
         des =
             description "Mouse over individual points or select multiple points with the shift key."
@@ -1325,8 +1362,8 @@ vl54 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
 
 
-vl55 : Spec
-vl55 =
+interactive3 : Spec
+interactive3 =
     let
         des =
             description "Drag to pan. Zoom in or out with mousewheel/zoom gesture."
@@ -1343,8 +1380,8 @@ vl55 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], sel [], enc [] ]
 
 
-vl56 : Spec
-vl56 =
+interactive4 : Spec
+interactive4 =
     let
         des =
             description "Drag the sliders to highlight points."
@@ -1394,8 +1431,8 @@ vl56 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], trans [], layer [ spec1, spec2 ] ]
 
 
-vl57 : Spec
-vl57 =
+interactive5 : Spec
+interactive5 =
     let
         des =
             description "Drag over bars to update selection average."
@@ -1432,8 +1469,8 @@ vl57 =
     toVegaLite [ dataFromUrl "data/seattle-weather.csv" [], layer [ spec1, spec2 ] ]
 
 
-vl58 : Spec
-vl58 =
+interactive6 : Spec
+interactive6 =
     let
         des =
             description "Drag over lower chart to update detailed view in upper chart."
@@ -1460,8 +1497,8 @@ vl58 =
     toVegaLite [ des, dataFromUrl "data/sp500.csv" [], vConcat [ spec1, spec2 ] ]
 
 
-vl59 : Spec
-vl59 =
+interactive7 : Spec
+interactive7 =
     let
         des =
             description "Drag over any chart to cross-filter highlights in all charts."
@@ -1508,8 +1545,8 @@ vl59 =
         ]
 
 
-vl60 : Spec
-vl60 =
+interactive8 : Spec
+interactive8 =
     let
         des =
             description "Scatterplot matrix. Drag/zoom in any scatterplot to update view of all scatterplots containing selected variables. Shift-select to highlight selected points."
@@ -1551,8 +1588,8 @@ vl60 =
         ]
 
 
-vl61 : Spec
-vl61 =
+interactive9 : Spec
+interactive9 =
     let
         des =
             description "A dashboard with cross-highlighting. Select bars in lower chart to update view in upper chart."
@@ -1610,75 +1647,92 @@ vl61 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
 
 
-vlRepeatExample : Spec
-vlRepeatExample =
-    let
-        enc =
-            encoding
-                << position X [ PRepeat Column, PmType Quantitative, PBin [] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
-                << color [ MName "Origin", MmType Nominal ]
-
-        spec =
-            asSpec [ dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
-    in
-    toVegaLite
-        [ repeat [ ColumnFields [ "Horsepower", "Miles_per_Gallon", "Acceleration" ] ]
-        , specification spec
-        ]
-
-
-vlFacetExample : Spec
-vlFacetExample =
-    let
-        enc =
-            encoding
-                << position X [ PName "Horsepower", PmType Quantitative, PBin [ MaxBins 15 ] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal, MLegend [] ]
-
-        spec =
-            asSpec [ mark Bar [], enc [] ]
-    in
-    toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , facet [ RowBy [ FName "Origin", FmType Nominal ] ]
-        , specification spec
-        ]
-
-
 
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : Spec
-specs =
-    [ vl1, vl2, vl3, vl4, vl5, vl6, vl7, vl8, vl9, vl10, vl11, vl12, vl13, vl14, vl15, vl16, vl17, vl18, vl19, vl20, vl21, vl22, vl23, vl24, vl25, vl26, vl27, vl28, vl29, vl30, vl31, vl32, vl33, vl34, vl35, vl36, vl37, vl38, vl39, vl40, vl41, vl42, vl43, vl44, vl45, vl46, vl47, vl48, vl49, vl50, vl51, vl52, vl53, vl54, vl55, vl56, vl57, vl58, vl59, vl60, vl61, vlFacetExample, vlRepeatExample ]
-        |> Json.Encode.list
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object
+        [ ( "basic1", basic1 )
+        , ( "basic2", basic2 )
+        , ( "basic3", basic3 )
+        , ( "basic4", basic4 )
+        , ( "basic5", basic5 )
+        , ( "basic6", basic6 )
+        , ( "basic7", basic7 )
+        , ( "basic8", basic8 )
+        , ( "basic9", basic9 )
+        , ( "basic10", basic10 )
+        , ( "basic11", basic11 )
+        , ( "basic12", basic12 )
+        , ( "basic13", basic13 )
+        , ( "basic14", basic14 )
+        , ( "basic15", basic15 )
+        , ( "basic16", basic16 )
+        , ( "basic17", basic17 )
+        , ( "basic18", basic18 )
+        , ( "basic19", basic19 )
+        , ( "basic20", basic20 )
+        , ( "stack1", stack1 )
+        , ( "stack2", stack2 )
+        , ( "stack3", stack3 )
+        , ( "stack4", stack4 )
+        , ( "stack5", stack5 )
+        , ( "stack6", stack6 )
+        , ( "stack7", stack7 )
+        , ( "stack8", stack8 )
+        , ( "trellis1", trellis1 )
+        , ( "trellis2", trellis2 )
+        , ( "trellis3", trellis3 )
+        , ( "trellis4", trellis4 )
+        , ( "trellis5", trellis5 )
+        , ( "trellis6", trellis6 )
+        , ( "trellis7", trellis7 )
+        , ( "layer1", layer1 )
+        , ( "layer2", layer2 )
+        , ( "layer3", layer3 )
+        , ( "layer4", layer4 )
+        , ( "layer5", layer5 )
+        , ( "layer6", layer6 )
+        , ( "layer7", layer7 )
+        , ( "layer8", layer8 )
+        , ( "layer9", layer9 )
+        , ( "layer10", layer10 )
+        , ( "layer11", layer11 )
+        , ( "layer12", layer12 )
+        , ( "layer13", layer13 )
+        , ( "layer14", layer14 )
+        , ( "layer15", layer15 )
+        , ( "layer16", layer16 )
+        , ( "comp1", comp1 )
+        , ( "comp2", comp2 )
+        , ( "comp3", comp3 )
+        , ( "interactive1", interactive1 )
+        , ( "interactive2", interactive2 )
+        , ( "interactive3", interactive3 )
+        , ( "interactive4", interactive4 )
+        , ( "interactive5", interactive5 )
+        , ( "interactive6", interactive6 )
+        , ( "interactive7", interactive7 )
+        , ( "interactive8", interactive8 )
+        , ( "interactive9", interactive9 )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init specs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init specs =
-    ( specs, fromElm specs )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

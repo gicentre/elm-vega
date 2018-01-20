@@ -12644,40 +12644,34 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Isotype$specs = _elm_lang$core$Json_Encode$list(
+var _gicentre$elm_vega$Isotype$mySpecs = _elm_lang$core$Json_Encode$object(
 	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$Isotype$personGrid,
+		_0: {ctor: '_Tuple2', _0: 'vis1', _1: _gicentre$elm_vega$Isotype$personGrid},
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$Isotype$livestock,
+			_0: {ctor: '_Tuple2', _0: 'vis2', _1: _gicentre$elm_vega$Isotype$livestock},
 			_1: {ctor: '[]'}
 		}
 	});
-var _gicentre$elm_vega$Isotype$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$Isotype$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$Isotype$init = function (specs) {
-	return {
-		ctor: '_Tuple2',
-		_0: specs,
-		_1: _gicentre$elm_vega$Isotype$fromElm(specs)
-	};
-};
 var _gicentre$elm_vega$Isotype$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$Isotype$init(_gicentre$elm_vega$Isotype$specs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$Isotype$mySpecs,
+			_1: _gicentre$elm_vega$Isotype$elmToJS(_gicentre$elm_vega$Isotype$mySpecs)
+		},
 		update: F2(
 			function (_p10, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p11) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$Isotype$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['Isotype'] = Elm['Isotype'] || {};

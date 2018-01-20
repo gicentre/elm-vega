@@ -31,14 +31,10 @@
   <div id="vis2"></div>
 
   <script>
-    // This function grabs the specification from Elm.
-    // Replace SimpleScatterplot in line below with name of Elm module if write your own Elm module.
-    Elm.Isotype.worker().ports.fromElm.subscribe(function(elmObj) {
-      let id = 1;
-      for (let obj of elmObj) {
-        vegaEmbed("#vis" + id++, obj, {
-          // Change actions to true to display linking actions (source, Vega-Lite editor and image output)
-          actions: true
+    Elm.Isotype.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: false, logLevel:vega.Warn
         }).catch(console.warn);
       }
     });

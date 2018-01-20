@@ -1,4 +1,4 @@
-port module ColorTests exposing (..)
+port module ColorTests exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -64,44 +64,44 @@ namedContinuous4 =
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SScheme "plasma" [ 0, 0.5 ], SReverse True ] ])
 
 
-namedContinuous5 : Spec
-namedContinuous5 =
+customContinuous : Spec
+customContinuous =
     chart "Custom continuous colour scheme (red to blue ramp)."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SRange (RStrings [ "#f33", "#33f" ]) ] ])
 
 
-namedContinuous6 : Spec
-namedContinuous6 =
+customDiscrete : Spec
+customDiscrete =
     chart "Custom discrete colours (red, green, blue)."
         (color [ MName "Origin", MmType Nominal, MScale [ SRange (RStrings [ "#e33", "#3a3", "#33d" ]) ] ])
 
 
-scale0 : Spec
-scale0 =
+scale1 : Spec
+scale1 =
     chart "Sequential (default) colour scale."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SType ScSequential, SRange (RStrings [ "yellow", "red" ]) ] ])
 
 
-scale1 : Spec
-scale1 =
+scale2 : Spec
+scale2 =
     chart "Linear colour scale."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
 
 
-scale2 : Spec
-scale2 =
+scale3 : Spec
+scale3 =
     chart "Power colour scale."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SType ScPow, SRange (RStrings [ "yellow", "red" ]) ] ])
 
 
-scale3 : Spec
-scale3 =
+scale4 : Spec
+scale4 =
     chart "Square root colour scale."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SType ScSqrt, SRange (RStrings [ "yellow", "red" ]) ] ])
 
 
-scale4 : Spec
-scale4 =
+scale5 : Spec
+scale5 =
     chart "Log colour scale."
         (color [ MName "Acceleration", MmType Quantitative, MScale [ SType ScLog, SRange (RStrings [ "yellow", "red" ]) ] ])
 
@@ -182,60 +182,51 @@ gamma5 =
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : Spec
-specs =
-    [ defContinuous
-    , defOrdinal
-    , defNominal
-    , namedContinuous1
-    , namedContinuous2
-    , namedContinuous3
-    , namedContinuous4
-    , namedContinuous5
-    , namedContinuous6
-    , scale0
-    , scale1
-    , scale2
-    , scale3
-    , scale4
-    , interp1
-    , interp2
-    , interp3
-    , interp4
-    , interp5
-    , interp6
-    , interp7
-    , gamma1
-    , gamma2
-    , gamma3
-    , gamma4
-    , gamma5
-    ]
-        |> Json.Encode.list
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object
+        [ ( "defContinuous", defContinuous )
+        , ( "defOrdinal", defOrdinal )
+        , ( "defNominal", defNominal )
+        , ( "namedContinuous1", namedContinuous1 )
+        , ( "namedContinuous2", namedContinuous2 )
+        , ( "namedContinuous3", namedContinuous3 )
+        , ( "namedContinuous4", namedContinuous4 )
+        , ( "customContinuous", customContinuous )
+        , ( "customDiscrete", customDiscrete )
+        , ( "scale1", scale1 )
+        , ( "scale1", scale2 )
+        , ( "scale1", scale3 )
+        , ( "scale1", scale4 )
+        , ( "scale1", scale5 )
+        , ( "interp1", interp1 )
+        , ( "interp2", interp2 )
+        , ( "interp3", interp3 )
+        , ( "interp4", interp4 )
+        , ( "interp5", interp5 )
+        , ( "interp6", interp6 )
+        , ( "interp7", interp7 )
+        , ( "gamma1", gamma1 )
+        , ( "gamma2", gamma2 )
+        , ( "gamma3", gamma3 )
+        , ( "gamma4", gamma4 )
+        , ( "gamma5", gamma5 )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init specs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init specs =
-    ( specs, fromElm specs )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

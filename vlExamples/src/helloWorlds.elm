@@ -1,4 +1,4 @@
-port module HelloWorlds exposing (fromElm)
+port module HelloWorlds exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -46,42 +46,34 @@ myOtherVis =
 
 
 
-{- This list comprises the specifications to be provided to the Vega-Lite runtime.
-   It assembles all the listed specs into a single Json spec.
+{- This list comprises tuples of the label for each embedded visualization (here vis1, vis2 etc.)
+   and corresponding Vega-Lite specification.
+   It assembles all the listed specs into a single JSON object.
 -}
 
 
 mySpecs : Spec
 mySpecs =
-    [ myFirstVis
-    , mySecondVis
-    , myOtherVis
-    ]
-        |> Json.Encode.list
+    Json.Encode.object
+        [ ( "vis1", myFirstVis )
+        , ( "vis2", mySecondVis )
+        , ( "vis3", myOtherVis )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init mySpecs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init spec =
-    ( spec, fromElm spec )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

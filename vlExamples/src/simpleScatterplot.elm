@@ -1,5 +1,6 @@
-port module SimpleScatterplot exposing (fromElm)
+port module SimpleScatterplot exposing (elmToJS)
 
+import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -20,27 +21,27 @@ scatter =
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
-   an outgoing port to Javascript and sends the specs to it.
+{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
+
+
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object [ ( "scatter", scatter ) ]
+
+
+
+{- The code below is boilerplate for creating a headless Elm module that opens
+   an outgoing port to JavaScript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init scatter
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init spec =
-    ( spec, fromElm spec )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

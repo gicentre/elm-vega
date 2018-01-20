@@ -16,37 +16,36 @@
 <body>
   <h1>Elm-Vega Configuration Tests</h1>
 
-  <figure class="cell"><div id="vis1"></div><figcaption>Default configuration</figcaption></figure>
+  <figure class="cell"><div id="default"></div><figcaption>Default configuration</figcaption></figure>
   <div style="clear:left"></div>
 
   <h2>Colour and Font Configuration</h2>
 
-  <figure class="cell"><div id="vis2"></div><figcaption>Dark background, light axis and text</figcaption></figure>
+  <figure class="cell"><div id="dark"></div><figcaption>Dark background, light axis and text</figcaption></figure>
   <div style="clear:left"></div>
 
 
   <h2>Mark Configuration</h2>
 
-  <figure class="cell"><div id="vis3"></div><figcaption>Outline marks</figcaption></figure>
-  <figure class="cell"><div id="vis4"></div><figcaption>Solid scatter and bar, outline stream</figcaption></figure>
+  <figure class="cell"><div id="mark1"></div><figcaption>Outline marks</figcaption></figure>
+  <figure class="cell"><div id="mark2"></div><figcaption>Solid scatter and bar, outline stream</figcaption></figure>
   <div style="clear:left"></div>
 
   <h2>Autosize</h2>
 
-  <figure class="cell"><div id="vis5"></div><figcaption>Autosize to fit</figcaption></figure>
+  <figure class="cell"><div id="padding"></div><figcaption>Autosize to fit</figcaption></figure>
   <div style="clear:left"></div>
 
   <script>
-    Elm.ConfigTests.worker().ports.fromElm.subscribe(function(elmObj) {
-      let id = 1;
-      for (let obj of elmObj) {
-        vegaEmbed("#vis" + id++, obj, {
-          actions: {"export":false, "source":false, "editor":true}, logLevel:vega.Warn
+    Elm.ConfigTests.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: true, logLevel:vega.Warn
         }).catch(console.warn);
       }
     });
   </script>
 
-</body>
+  </body>
 
-</html>
+  </html>

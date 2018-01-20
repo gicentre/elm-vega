@@ -14600,85 +14600,85 @@ var _gicentre$elm_vega$Walkthrough$stripPlot = _gicentre$elm_vega$VegaLite$toVeg
 			}
 		}
 	});
-var _gicentre$elm_vega$Walkthrough$specs = _elm_lang$core$Json_Encode$list(
+var _gicentre$elm_vega$Walkthrough$mySpecs = _elm_lang$core$Json_Encode$object(
 	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$Walkthrough$stripPlot,
+		_0: {ctor: '_Tuple2', _0: 'singleView1', _1: _gicentre$elm_vega$Walkthrough$stripPlot},
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$Walkthrough$histogram,
+			_0: {ctor: '_Tuple2', _0: 'singleView2', _1: _gicentre$elm_vega$Walkthrough$histogram},
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Walkthrough$stackedHistogram,
+				_0: {ctor: '_Tuple2', _0: 'singleView3', _1: _gicentre$elm_vega$Walkthrough$stackedHistogram},
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Walkthrough$stackedHistogram2,
+					_0: {ctor: '_Tuple2', _0: 'singleView4', _1: _gicentre$elm_vega$Walkthrough$stackedHistogram2},
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Walkthrough$lineChart,
+						_0: {ctor: '_Tuple2', _0: 'singleView5', _1: _gicentre$elm_vega$Walkthrough$lineChart},
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Walkthrough$multiBar,
+							_0: {ctor: '_Tuple2', _0: 'multiView1', _1: _gicentre$elm_vega$Walkthrough$multiBar},
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Walkthrough$barChart,
+								_0: {ctor: '_Tuple2', _0: 'multiView2', _1: _gicentre$elm_vega$Walkthrough$barChart},
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Walkthrough$barChartWithAverage,
+									_0: {ctor: '_Tuple2', _0: 'multiView3', _1: _gicentre$elm_vega$Walkthrough$barChartWithAverage},
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Walkthrough$barChartPair,
+										_0: {ctor: '_Tuple2', _0: 'multiView4', _1: _gicentre$elm_vega$Walkthrough$barChartPair},
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Walkthrough$barChartTriplet,
+											_0: {ctor: '_Tuple2', _0: 'multiView5', _1: _gicentre$elm_vega$Walkthrough$barChartTriplet},
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Walkthrough$splom,
+												_0: {ctor: '_Tuple2', _0: 'multiView6', _1: _gicentre$elm_vega$Walkthrough$splom},
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Walkthrough$dashboard1,
+													_0: {ctor: '_Tuple2', _0: 'dashboard1', _1: _gicentre$elm_vega$Walkthrough$dashboard1},
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Walkthrough$dashboard2,
+														_0: {ctor: '_Tuple2', _0: 'dashboard2', _1: _gicentre$elm_vega$Walkthrough$dashboard2},
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Walkthrough$interactiveScatter1,
+															_0: {ctor: '_Tuple2', _0: 'interactive1', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter1},
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Walkthrough$interactiveScatter2,
+																_0: {ctor: '_Tuple2', _0: 'interactive2', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter2},
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Walkthrough$interactiveScatter3,
+																	_0: {ctor: '_Tuple2', _0: 'interactive3', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter3},
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$Walkthrough$interactiveScatter4,
+																		_0: {ctor: '_Tuple2', _0: 'interactive4', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter4},
 																		_1: {
 																			ctor: '::',
-																			_0: _gicentre$elm_vega$Walkthrough$interactiveScatter5,
+																			_0: {ctor: '_Tuple2', _0: 'interactive5', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter5},
 																			_1: {
 																				ctor: '::',
-																				_0: _gicentre$elm_vega$Walkthrough$interactiveScatter6,
+																				_0: {ctor: '_Tuple2', _0: 'interactive6', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter6},
 																				_1: {
 																					ctor: '::',
-																					_0: _gicentre$elm_vega$Walkthrough$interactiveScatter7,
+																					_0: {ctor: '_Tuple2', _0: 'interactive7', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter7},
 																					_1: {
 																						ctor: '::',
-																						_0: _gicentre$elm_vega$Walkthrough$interactiveScatter8,
+																						_0: {ctor: '_Tuple2', _0: 'interactive8', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter8},
 																						_1: {
 																							ctor: '::',
-																							_0: _gicentre$elm_vega$Walkthrough$interactiveScatter9,
+																							_0: {ctor: '_Tuple2', _0: 'interactive9', _1: _gicentre$elm_vega$Walkthrough$interactiveScatter9},
 																							_1: {
 																								ctor: '::',
-																								_0: _gicentre$elm_vega$Walkthrough$coordinatedScatter1,
+																								_0: {ctor: '_Tuple2', _0: 'coordinated1', _1: _gicentre$elm_vega$Walkthrough$coordinatedScatter1},
 																								_1: {
 																									ctor: '::',
-																									_0: _gicentre$elm_vega$Walkthrough$coordinatedScatter2,
+																									_0: {ctor: '_Tuple2', _0: 'coordinated2', _1: _gicentre$elm_vega$Walkthrough$coordinatedScatter2},
 																									_1: {
 																										ctor: '::',
-																										_0: _gicentre$elm_vega$Walkthrough$contextAndFocus,
+																										_0: {ctor: '_Tuple2', _0: 'coordinated3', _1: _gicentre$elm_vega$Walkthrough$contextAndFocus},
 																										_1: {
 																											ctor: '::',
-																											_0: _gicentre$elm_vega$Walkthrough$crossFilter,
+																											_0: {ctor: '_Tuple2', _0: 'crossFilter1', _1: _gicentre$elm_vega$Walkthrough$crossFilter},
 																											_1: {ctor: '[]'}
 																										}
 																									}
@@ -14706,30 +14706,24 @@ var _gicentre$elm_vega$Walkthrough$specs = _elm_lang$core$Json_Encode$list(
 			}
 		}
 	});
-var _gicentre$elm_vega$Walkthrough$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$Walkthrough$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$Walkthrough$init = function (specs) {
-	return {
-		ctor: '_Tuple2',
-		_0: specs,
-		_1: _gicentre$elm_vega$Walkthrough$fromElm(specs)
-	};
-};
 var _gicentre$elm_vega$Walkthrough$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$Walkthrough$init(_gicentre$elm_vega$Walkthrough$specs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$Walkthrough$mySpecs,
+			_1: _gicentre$elm_vega$Walkthrough$elmToJS(_gicentre$elm_vega$Walkthrough$mySpecs)
+		},
 		update: F2(
 			function (_p43, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p44) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$Walkthrough$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['Walkthrough'] = Elm['Walkthrough'] || {};

@@ -12704,52 +12704,46 @@ var _gicentre$elm_vega$ConfigTests$paddingCfg = _gicentre$elm_vega$ConfigTests$s
 					A4(_gicentre$elm_vega$VegaLite$PEdges, 90, 60, 30, 0)),
 				_p8));
 	});
-var _gicentre$elm_vega$ConfigTests$specs = _elm_lang$core$Json_Encode$list(
+var _gicentre$elm_vega$ConfigTests$mySpecs = _elm_lang$core$Json_Encode$object(
 	{
 		ctor: '::',
-		_0: _gicentre$elm_vega$ConfigTests$defaultCfg,
+		_0: {ctor: '_Tuple2', _0: 'default', _1: _gicentre$elm_vega$ConfigTests$defaultCfg},
 		_1: {
 			ctor: '::',
-			_0: _gicentre$elm_vega$ConfigTests$darkCfg,
+			_0: {ctor: '_Tuple2', _0: 'dark', _1: _gicentre$elm_vega$ConfigTests$darkCfg},
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$ConfigTests$markCfg1,
+				_0: {ctor: '_Tuple2', _0: 'mark1', _1: _gicentre$elm_vega$ConfigTests$markCfg1},
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$ConfigTests$markCfg2,
+					_0: {ctor: '_Tuple2', _0: 'mark2', _1: _gicentre$elm_vega$ConfigTests$markCfg2},
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$ConfigTests$paddingCfg,
+						_0: {ctor: '_Tuple2', _0: 'padding', _1: _gicentre$elm_vega$ConfigTests$paddingCfg},
 						_1: {ctor: '[]'}
 					}
 				}
 			}
 		}
 	});
-var _gicentre$elm_vega$ConfigTests$fromElm = _elm_lang$core$Native_Platform.outgoingPort(
-	'fromElm',
+var _gicentre$elm_vega$ConfigTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$ConfigTests$init = function (specs) {
-	return {
-		ctor: '_Tuple2',
-		_0: specs,
-		_1: _gicentre$elm_vega$ConfigTests$fromElm(specs)
-	};
-};
 var _gicentre$elm_vega$ConfigTests$main = _elm_lang$core$Platform$program(
 	{
-		init: _gicentre$elm_vega$ConfigTests$init(_gicentre$elm_vega$ConfigTests$specs),
+		init: {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$ConfigTests$mySpecs,
+			_1: _gicentre$elm_vega$ConfigTests$elmToJS(_gicentre$elm_vega$ConfigTests$mySpecs)
+		},
 		update: F2(
 			function (_p9, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
-		subscriptions: function (_p10) {
-			return _elm_lang$core$Platform_Sub$none;
-		}
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
-var _gicentre$elm_vega$ConfigTests$FromElm = {ctor: 'FromElm'};
 
 var Elm = {};
 Elm['ConfigTests'] = Elm['ConfigTests'] || {};

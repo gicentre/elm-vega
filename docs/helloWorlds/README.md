@@ -4,8 +4,9 @@
 
 In many cases you may wish to embed more than one visualization created by elm-vega inside a single page.
 The template to do this can be very similar to the simple [HelloWorld](../helloWorld/README.md) example.
-The  difference being that instead of a single `<div>` into which a visualization is inserted, you provide a sequence of `<div>`s each with a sequentially numbered id.
-There is also a minor change to the `vegeEmbed` function call so it references this sequence of IDs rather than a single one.
+The  difference being that instead of a single `<div>` into which a visualization is inserted, you provide a sequence of `<div>` containers each with some unique id.
+
+There is also a minor change to the `vegeEmbed` function call so it references a collection of named specifications corresponding to each of the unique IDs of the `<div>` containers.
 
 You can copy this example to a file `helloWorlds.html` somewhere on your machine:
 
@@ -28,7 +29,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
 <body>
   <h1>Hello Worlds</h1>
 
-  <!-- IDs should be numbered sequentially and correspond to the order of Vega-Lite specs generated in elm-vega. -->
+  <!-- IDs should correspond to the names given to each visualization in Elm -->
   <h2>Here is the first visualization</h2>
   <div id="vis1"></div>
 
@@ -36,12 +37,10 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
   <div id="vis2"></div>
   <div id="vis3"></div>
 
-
   <script>
-    Elm.HelloWorlds.worker().ports.fromElm.subscribe(function(elmObj) {
-      let id = 1;
-      for (let obj of elmObj) {
-        vegaEmbed("#vis" + id++, obj, {
+    Elm.HelloWorlds.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
           actions: false, logLevel:vega.Warn
         }).catch(console.warn);
       }
@@ -60,7 +59,7 @@ As previously, next create a file (here called `HelloWorlds.elm`) in the same lo
 Here is an example containing three visualizations:
 
 ```elm
-port module HelloWorlds exposing (fromElm)
+port module HelloWorlds exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -108,51 +107,44 @@ myOtherVis =
 
 
 
-{- This list comprises the specifications to be provided to the Vega-Lite runtime.
-   It assembles all the listed specs into a single Json spec.
+{- This list comprises tuples of the label for each embedded visualization (here vis1, vis2 etc.)
+   and corresponding Vega-Lite specification.
+   It assembles all the listed specs into a single JSON object.
 -}
 
 
 mySpecs : Spec
 mySpecs =
-    [ myFirstVis
-    , mySecondVis
-    , myOtherVis
-    ]
-        |> Json.Encode.list
+    Json.Encode.object
+        [ ( "vis1", myFirstVis )
+        , ( "vis2", mySecondVis )
+        , ( "vis3", myOtherVis )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init mySpecs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init spec =
-    ( spec, fromElm spec )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg
 ```
 
-The boilerplate code is the same as previously, using the name `mySpecs` to refer to the list of vega-lite specifications.
+The boilerplate code is the same as previously but here using the name `mySpecs` to refer to the collection of named vega-lite specifications.
+
 In this example, the main body of code comprises three functions (`myFirstVis`, `mySecondVis` and `myOtherVis`) each detailing a separate Vega-Lite specification.
-These are then combined into a single specification in the function `mySpecs` by assembling them into a `List` and encoding that List as Json.
-To ensure the json encoding works, you must also `import Json.Encode` at the top of the file.
+These are then combined into a single JSON object in the function `mySpecs` pairing each spec with an ID we can refer to in the HTML `<div>` containers.
+To ensure the JSON encoding works, you must also `import Json.Encode` at the top of the file.
 
 ## 3. Compile the Elm-Vega into JavaScript
 
@@ -163,7 +155,8 @@ The final task, as before, is to convert the Elm file into JavaScript:
 This should create the `helloWorlds.js` file required by the HTML.
 
 Because some of the visualizations in this example load an external file containing the data ([cars.json](../../vlExamples/data/cars.json)), the file `helloWorlds.html` can only be viewed when served from a web server.
-Running a local web server such as `elm-reactor` should allow easy testing and the result should look similar to this:
+Running a local web server such as `elm-reactor` provides a convenient way to test the code.
+The result should look similar to this:
 
 ![Hello, Worlds! output](images/helloWorlds.png)
 

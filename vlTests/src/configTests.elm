@@ -1,4 +1,4 @@
-port module ConfigTests exposing (fromElm)
+port module ConfigTests exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -109,39 +109,30 @@ paddingCfg =
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
 
-specs : Spec
-specs =
-    [ defaultCfg
-    , darkCfg
-    , markCfg1
-    , markCfg2
-    , paddingCfg
-    ]
-        |> Json.Encode.list
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object
+        [ ( "default", defaultCfg )
+        , ( "dark", darkCfg )
+        , ( "mark1", markCfg1 )
+        , ( "mark2", markCfg2 )
+        , ( "padding", paddingCfg )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init specs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init specs =
-    ( specs, fromElm specs )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg

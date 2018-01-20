@@ -1,4 +1,4 @@
-port module Walkthrough exposing (..)
+port module Walkthrough exposing (elmToJS)
 
 import Json.Encode
 import Platform
@@ -563,63 +563,56 @@ crossFilter =
 
 
 
-{- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
+{- This list comprises tuples of the label for each embedded visualization and
+   corresponding Vega-Lite specification.
+-}
 
 
-specs : Spec
-specs =
-    [ stripPlot
-    , histogram
-    , stackedHistogram
-    , stackedHistogram2
-    , lineChart
-    , multiBar
-    , barChart
-    , barChartWithAverage
-    , barChartPair
-    , barChartTriplet
-    , splom
-    , dashboard1
-    , dashboard2
-    , interactiveScatter1
-    , interactiveScatter2
-    , interactiveScatter3
-    , interactiveScatter4
-    , interactiveScatter5
-    , interactiveScatter6
-    , interactiveScatter7
-    , interactiveScatter8
-    , interactiveScatter9
-    , coordinatedScatter1
-    , coordinatedScatter2
-    , contextAndFocus
-    , crossFilter
-    ]
-        |> Json.Encode.list
+mySpecs : Spec
+mySpecs =
+    Json.Encode.object
+        [ ( "singleView1", stripPlot )
+        , ( "singleView2", histogram )
+        , ( "singleView3", stackedHistogram )
+        , ( "singleView4", stackedHistogram2 )
+        , ( "singleView5", lineChart )
+        , ( "multiView1", multiBar )
+        , ( "multiView2", barChart )
+        , ( "multiView3", barChartWithAverage )
+        , ( "multiView4", barChartPair )
+        , ( "multiView5", barChartTriplet )
+        , ( "multiView6", splom )
+        , ( "dashboard1", dashboard1 )
+        , ( "dashboard2", dashboard2 )
+        , ( "interactive1", interactiveScatter1 )
+        , ( "interactive2", interactiveScatter2 )
+        , ( "interactive3", interactiveScatter3 )
+        , ( "interactive4", interactiveScatter4 )
+        , ( "interactive5", interactiveScatter5 )
+        , ( "interactive6", interactiveScatter6 )
+        , ( "interactive7", interactiveScatter7 )
+        , ( "interactive8", interactiveScatter8 )
+        , ( "interactive9", interactiveScatter9 )
+        , ( "coordinated1", coordinatedScatter1 )
+        , ( "coordinated2", coordinatedScatter2 )
+        , ( "coordinated3", contextAndFocus )
+        , ( "crossFilter1", crossFilter )
+        ]
 
 
 
-{- The code below is boilerplate for creating a headerless Elm module that opens
+{- The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to Javascript and sends the specs to it.
 -}
 
 
-main : Program Never Spec Msg
+main : Program Never Spec msg
 main =
     Platform.program
-        { init = init specs
+        { init = ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
-        , subscriptions = \_ -> Sub.none
+        , subscriptions = always Sub.none
         }
 
 
-type Msg
-    = FromElm
-
-
-init : Spec -> ( Spec, Cmd msg )
-init specs =
-    ( specs, fromElm specs )
-
-
-port fromElm : Spec -> Cmd msg
+port elmToJS : Spec -> Cmd msg
