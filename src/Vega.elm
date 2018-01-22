@@ -1,13 +1,17 @@
 module Vega
     exposing
         ( Autosize(..)
+        , AxisProperty(..)
         , CInterpolate(..)
+        , ColorValue(..)
         , DataColumn
         , DataReference(..)
         , DataType(..)
         , DataValues(..)
+        , FieldValue(..)
         , Format(..)
         , Operation(..)
+        , OverlapStrategy(..)
         , Padding(..)
         , RangeDefault(..)
         , Scale(..)
@@ -15,12 +19,16 @@ module Vega
         , ScaleNice(..)
         , ScaleProperty(..)
         , ScaleRange(..)
+        , Side(..)
         , Signal(..)
         , SortProperty(..)
         , Spec
         , TimeUnit(..)
         , VProperty
+        , Value(..)
         , autosize
+        , axes
+        , axis
         , dataColumn
         , dataFromColumns
         , height
@@ -130,6 +138,39 @@ type Autosize
     | AResize
 
 
+{-| Indicates the characteristics of a chart axis such as its orientation, labels
+and ticks. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/axes)
+-}
+type AxisProperty
+    = AxScale String
+    | AxSide Side
+    | AxDomain Bool
+      --TODO: AxEncode
+    | AxFormat String
+    | AxGrid Bool
+    | AxGridScale String
+    | AxLabels Bool
+      -- TODO: Check that AxLabelBound and Flush set to True is equivalent to setting to 1
+    | AxLabelBound (Maybe Float)
+    | AxLabelFlush (Maybe Float)
+    | AxLabelFlushOffset Float
+    | AxLabelPadding Float
+    | AxLabelOverlap OverlapStrategy
+    | AxMinExtent Value
+    | AxMaxExtent Value
+    | AxOffset Value
+    | AxPosition Value
+    | AxTicks Bool
+    | AxTickCount Int
+    | AxTickSize Float
+    | AxTitle String
+    | AxTitlePadding Float
+      -- TODO: AxValues should allow numbers, strings and signal references
+    | AxValues (List Float)
+    | AxZIndex Int
+
+
 {-| Indicates the type of color interpolation to apply, when mapping a data field
 onto a color scale. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative).
@@ -143,6 +184,19 @@ type CInterpolate
     | HslLong
     | Lab
     | Rgb Float
+
+
+{-| Defines a custom colour value. Can use a variety of colour spaces such as RGB,
+HSL etc. For more details, see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#ColorValue)}
+-}
+type
+    ColorValue
+    -- TODO: Need to be able to express these values as the result of scale transforms (see https://vega.github.io/vega/docs/types/#ColorValue )
+    = RGB Float Float Float
+    | HSL Float Float Float
+    | LAB Float Float Float
+    | HCL Float Float Float
 
 
 {-| Represents a single column of data. Used when generating inline data with
@@ -189,6 +243,18 @@ type DataValues
     | Strings (List String)
 
 
+{-| Represents a field value. Rather than a simple field name this can be used to
+evaluate a signal, group or parent to indirectly reference a field. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue).
+-}
+type FieldValue
+    = FName String
+    | FSignal Signal
+    | FDatum FieldValue
+    | FGroup FieldValue
+    | FParent FieldValue
+
+
 {-| Specifies the type of format a data source uses. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/data/#format).
 -}
@@ -228,6 +294,17 @@ type Operation
     | Valid
     | Variance
     | VarianceP
+
+
+{-| Type of overlap strategy to be applied when there is not space to show all
+items on an axis. See the
+[Vega documentation](https://vega.github.io/vega/docs/axes)
+for more details.
+-}
+type OverlapStrategy
+    = ONone
+    | OParity
+    | OGreedy
 
 
 {-| Represents padding dimensions in pixel units. `PSize` will set the same value
@@ -347,6 +424,17 @@ type ScaleRange
     | RDefault RangeDefault
 
 
+{-| Indicates a rectangular side. Can be used to specify an axis position.
+[Vega documentation](https://vega.github.io/vega/docs/axes/#orientation)
+for more details.
+-}
+type Side
+    = Left
+    | Right
+    | Top
+    | Bottom
+
+
 type Signal
     = SName String
     | SExpr String
@@ -401,6 +489,22 @@ type
     | Milliseconds
 
 
+{-| Represents a value such as a number or reference to a value such as a field label
+or transformed value. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Value)
+-}
+type
+    Value
+    -- TODO: Add scale transform options
+    = VSignal Signal
+    | VColor ColorValue
+    | VField FieldValue
+    | VNumber Float
+    | VString String
+    | VBool Bool
+    | VNull
+
+
 {-| Top-level Vega properties. These are for testing purposes only prior to full
 Vega spec generatation being made available.
 -}
@@ -435,6 +539,29 @@ for details.
 autosize : List Autosize -> ( VProperty, Spec )
 autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
+
+
+{-| Create the axes used to visualize spatial scale mappings.
+
+    TODO: XXX
+
+-}
+axes : List Spec -> ( VProperty, Spec )
+axes axs =
+    ( VAxes, JE.list axs )
+
+
+{-| Create a single axis used to visualize a spatial scale mapping.
+
+    TODO: XXX
+
+-}
+axis : String -> Side -> List AxisProperty -> List Spec -> List Spec
+axis scName side aProps =
+    (::)
+        ((AxScale scName :: AxSide side :: aProps |> List.map axisProperty)
+            |> JE.object
+        )
 
 
 {-| Create a column of data. A column has a name and a list of values. The final
@@ -592,9 +719,103 @@ autosizeProperty asCfg =
             ( "contains", JE.string "padding" )
 
 
+axisProperty : AxisProperty -> LabelledSpec
+axisProperty ap =
+    case ap of
+        AxScale scName ->
+            ( "scale", JE.string scName )
 
--- | DReferences (List DataReference)
--- | DSort SortProperty
+        AxSide axSide ->
+            ( "orient", JE.string (sideLabel axSide) )
+
+        AxFormat fmt ->
+            ( "format", JE.string fmt )
+
+        AxDomain b ->
+            ( "domain", JE.bool b )
+
+        AxGrid b ->
+            ( "grid", JE.bool b )
+
+        AxLabels b ->
+            ( "labels", JE.bool b )
+
+        AxLabelOverlap strat ->
+            ( "labelOverlap", JE.string (overlapStrategyLabel strat) )
+
+        AxLabelPadding pad ->
+            ( "labelPadding", JE.float pad )
+
+        AxMaxExtent val ->
+            ( "maxExtent", value val )
+
+        AxMinExtent val ->
+            ( "minExtent", value val )
+
+        AxGridScale scName ->
+            ( "gridScale", JE.string scName )
+
+        AxLabelBound numOrNothing ->
+            case numOrNothing of
+                Nothing ->
+                    ( "labelBound", JE.bool False )
+
+                Just x ->
+                    ( "labelBound", JE.float x )
+
+        AxLabelFlush numOrNothing ->
+            case numOrNothing of
+                Nothing ->
+                    ( "labelFlush", JE.bool False )
+
+                Just x ->
+                    ( "labelFlush", JE.float x )
+
+        AxLabelFlushOffset pad ->
+            ( "labelFlushOffset", JE.float pad )
+
+        AxOffset val ->
+            ( "offset", value val )
+
+        AxPosition val ->
+            ( "position", value val )
+
+        AxTicks b ->
+            ( "ticks", JE.bool b )
+
+        AxTickCount n ->
+            ( "tickCount", JE.int n )
+
+        AxTickSize sz ->
+            ( "tickSize", JE.float sz )
+
+        AxTitle title ->
+            ( "title", JE.string title )
+
+        AxTitlePadding pad ->
+            ( "titlePadding", JE.float pad )
+
+        AxValues vals ->
+            ( "values", JE.list (List.map JE.float vals) )
+
+        AxZIndex n ->
+            ( "zindex", JE.int n )
+
+
+colorProperty : ColorValue -> LabelledSpec
+colorProperty cVal =
+    case cVal of
+        RGB r g b ->
+            ( "color", JE.object [ ( "r", JE.float r ), ( "g", JE.float g ), ( "b", JE.float b ) ] )
+
+        HSL h s l ->
+            ( "color", JE.object [ ( "h", JE.float h ), ( "s", JE.float s ), ( "l", JE.float l ) ] )
+
+        LAB l a b ->
+            ( "color", JE.object [ ( "l", JE.float l ), ( "a", JE.float a ), ( "b", JE.float b ) ] )
+
+        HCL h c l ->
+            ( "color", JE.object [ ( "h", JE.float h ), ( "c", JE.float c ), ( "l", JE.float l ) ] )
 
 
 dataRefProperty : DataReference -> LabelledSpec
@@ -617,6 +838,25 @@ dataRefProperty dataRef =
                 ( "sort", JE.bool True )
             else
                 ( "sort", JE.object (List.map sortProperty sps) )
+
+
+fieldValue : FieldValue -> Spec
+fieldValue fVal =
+    case fVal of
+        FName fName ->
+            JE.string fName
+
+        FSignal sig ->
+            JE.object [ signalProperty sig ]
+
+        FDatum fv ->
+            JE.object [ ( "datum", fieldValue fv ) ]
+
+        FGroup fv ->
+            JE.object [ ( "group", fieldValue fv ) ]
+
+        FParent fv ->
+            JE.object [ ( "parent", fieldValue fv ) ]
 
 
 foDataType : DataType -> Spec
@@ -798,6 +1038,35 @@ opLabel op =
             "variancep"
 
 
+overlapStrategyLabel : OverlapStrategy -> String
+overlapStrategyLabel strat =
+    case strat of
+        ONone ->
+            "false"
+
+        OParity ->
+            "parity"
+
+        OGreedy ->
+            "greedy"
+
+
+sideLabel : Side -> String
+sideLabel orient =
+    case orient of
+        Left ->
+            "left"
+
+        Bottom ->
+            "bottom"
+
+        Right ->
+            "right"
+
+        Top ->
+            "top"
+
+
 paddingProperty : Padding -> Spec
 paddingProperty pad =
     case pad of
@@ -947,8 +1216,6 @@ scaleProperty scaleProp =
                 RDefault rd ->
                     ( "range", JE.string (rangeDefaultLabel rd) )
 
-        -- SScheme name extent ->
-        --     scheme name extent
         SPadding x ->
             ( "padding", JE.float x )
 
@@ -1114,6 +1381,42 @@ transpose ll =
                     List.filterMap List.tail xss
             in
             (x :: heads) :: transpose (xs :: tails)
+
+
+value : Value -> Spec
+value val =
+    case val of
+        VSignal sig ->
+            JE.object [ signalProperty sig ]
+
+        VColor cVal ->
+            JE.object [ colorProperty cVal ]
+
+        VField fName ->
+            fieldValue fName
+
+        VNumber num ->
+            JE.float num
+
+        VString str ->
+            JE.string str
+
+        VBool b ->
+            JE.bool b
+
+        VNull ->
+            JE.null
+
+
+
+-- type Value
+--     = VSignal Signal
+--     | VColor ColorValue
+--     | VField FieldValue
+--     | VNumber Float
+--     | VString String
+--     | VBool Bool
+--     | VNull
 
 
 vPropertyLabel : VProperty -> String

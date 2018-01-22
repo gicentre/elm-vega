@@ -34,14 +34,19 @@ basic1 =
                     , SNice (IsNice True)
                     , SRange (RDefault RHeight)
                     ]
+
+        ax =
+            axes
+                << axis "xscale" Bottom []
+                << axis "yscale" Left []
     in
     toVega
         [ width 400
         , height 200
         , padding (PSize 5)
-        , autosize [ APad ]
         , data []
         , sc []
+        , ax []
         ]
 
 
