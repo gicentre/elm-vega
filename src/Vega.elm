@@ -1,8 +1,34 @@
 module Vega
     exposing
-        ( --  Spec
-          VProperty
+        ( Autosize(..)
+        , CInterpolate(..)
+        , DataColumn
+        , DataReference(..)
+        , DataType(..)
+        , DataValues(..)
+        , Format(..)
+        , Operation(..)
+        , Padding(..)
+        , RangeDefault(..)
+        , Scale(..)
+        , ScaleDomain(..)
+        , ScaleNice(..)
+        , ScaleProperty(..)
+        , ScaleRange(..)
+        , Signal(..)
+        , SortProperty(..)
+        , Spec
+        , TimeUnit(..)
+        , VProperty
+        , autosize
+        , dataColumn
+        , dataFromColumns
+        , height
+        , padding
+        , scale
+        , scales
         , toVega
+        , width
         )
 
 {-| This module will allow you to create a full Vega specification in Elm. A
@@ -20,12 +46,103 @@ testing purposes only.
 
 @docs toVega
 @docs VProperty
+@docs Spec
+
+
+# Creating the Data Specification
+
+Functions and types for declaring the input data to the visualization.
+
+@docs dataFromColumns
+@docs dataColumn
+@docs DataColumn
+@docs DataReference
+@docs DataType
+@docs Format
+@docs SortProperty
+
+
+## Signals
+
+TODO: Signal docs here. XXX
+
+@docs Signal
+
+
+## Scaling
+
+The mapping of data values to their visual expression.
+
+@docs scales
+@docs scale
+@docs RageDefault
+@docs ScaleProperty
+@docs Scale
+@docs categoricalDomainMap
+@docs domainRangeMap
+@docs ScaleDomain
+@docs ScaleRange
+@docs ScaleNice
+@docs CInterpolate
+
+
+## Aggregation
+
+@docs Operation
+
+
+# Global Configuration
+
+Configuration options that affect the entire visualization. These are in addition
+to the data and transform options described above.
+
+@docs autosize
+@docs height
+@docs padding
+@docs width
+@docs Autosize
+@docs Padding
+
+
+# General Data types
+
+In addition to more general data types like integers and strings, the following types
+can carry data used in specifications.
+
+@docs DataValues
+@docs TimeUnit
 
 -}
 
---import Json.Decode as JD
-
 import Json.Encode as JE
+
+
+{-| Indicates the auto-sizing characteristics of the visualization such as amount
+of padding, whether it should fill the parent container etc. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
+-}
+type Autosize
+    = AContent
+    | AFit
+    | ANone
+    | APad
+    | APadding
+    | AResize
+
+
+{-| Indicates the type of color interpolation to apply, when mapping a data field
+onto a color scale. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative).
+-}
+type CInterpolate
+    = CubeHelix Float
+    | CubeHelixLong Float
+    | Hcl
+    | HclLong
+    | Hsl
+    | HslLong
+    | Lab
+    | Rgb Float
 
 
 {-| Represents a single column of data. Used when generating inline data with
@@ -33,6 +150,18 @@ import Json.Encode as JE
 -}
 type alias DataColumn =
     List LabelledSpec
+
+
+{-| Reference to one or more sources of data such as dataset, field name or collection
+of fields. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+type DataReference
+    = DDataset String
+    | DField String
+    | DFields (List String)
+    | DReferences (List DataReference)
+    | DSort (List SortProperty)
 
 
 {-| Indicates the type of data to be parsed when reading input data. For `FoDate`
@@ -73,11 +202,203 @@ type Format
     | Parse (List ( String, DataType ))
 
 
+{-| Type of aggregation operation. See the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/aggregate/#ops)
+for more details.
+-}
+type Operation
+    = ArgMax
+    | ArgMin
+    | Average
+    | CI0
+    | CI1
+    | Count
+    | Distinct
+    | Max
+    | Mean
+    | Median
+    | Min
+    | Missing
+    | Q1
+    | Q3
+    | Stderr
+    | Stdev
+    | StdevP
+    | Sum
+    | Valid
+    | Variance
+    | VarianceP
+
+
+{-| Represents padding dimensions in pixel units. `PSize` will set the same value
+on all four edges of a rectangular container while `PEdges` can be used to specify
+different sizes on each edge in order _left_, _top_, _right_, _bottom_.
+-}
+type Padding
+    = PSize Float
+    | PEdges Float Float Float Float
+
+
+{-| Type of scale range. Can be used to set the default type of range to use
+in a scale. The value of the default for each type can be set separately via
+config settings. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range-defaults).
+-}
+type RangeDefault
+    = RWidth
+    | RHeight
+    | RSymbol
+    | RCategory
+    | RDiverging
+    | ROrdinal
+    | RRamp
+    | RHeatmap
+
+
+{-| Used to indicate the type of scale transformation to apply. See the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#types) for more details.
+-}
+type Scale
+    = ScLinear
+    | ScPow
+    | ScSqrt
+    | ScLog
+    | ScTime
+    | ScUtc
+    | ScSequential
+    | ScOrdinal
+    | ScBand
+    | ScPoint
+    | ScQuantile
+    | ScQuantize
+    | ScBinLinear
+    | ScBinOrdinal
+    | ScCustom String
+
+
+{-| Describes the scale domain (type of data in scale). For full details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#domain).
+-}
+type ScaleDomain
+    = DNumbers (List Float)
+    | DStrings (List String)
+      -- TODO: Can we have DateTimes as literals?
+      -- TODO: Documentation implies array literals can include signal references as elements. How do we add these?
+    | DSignal Signal
+    | DData (List DataReference)
+
+
+{-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative).
+-}
+type ScaleNice
+    = NMillisecond
+    | NSecond
+    | NMinute
+    | NHour
+    | NDay
+    | NWeek
+    | NMonth
+    | NYear
+    | NInterval TimeUnit Int
+    | IsNice Bool
+    | NTickCount Int
+
+
+{-| Individual scale property. Scale properties are related, but not identical,
+to Vega-Lite's `ScaleProperty` which in Vega are more comprehensive and flexible.
+Scale Properties characterise the fundamental data-to-visual transformations applied
+by the `scale` function. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+type ScaleProperty
+    = SType Scale
+    | SDomain ScaleDomain
+    | SDomainMax Float
+    | SDomainMin Float
+    | SDomainMid Float
+      -- TODO: Do we need domainRaw? Why not just use SDomain DNumbers [1,2,3] etc.?
+    | SRange ScaleRange
+    | SReverse Bool
+    | SRound Bool
+    | SClamp Bool
+    | SInterpolate CInterpolate
+    | SPadding Float
+    | SNice ScaleNice
+    | SZero Bool
+    | SExponent Float
+    | SBase Float
+    | SAlign Float
+    | SPaddingInner Float
+    | SPaddingOuter Float
+    | SRangeStep Float
+
+
+{-| Describes a scale range of scale output values. For full details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+type ScaleRange
+    = RNumbers (List Float)
+    | RStrings (List String)
+    | RSignal Signal
+    | RScheme String (List Float)
+    | RData DataReference
+    | RStep Float
+    | RDefault RangeDefault
+
+
+type Signal
+    = SName String
+    | SExpr String
+
+
+{-| Allow type of sorting to be customised. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#sort).
+-}
+type SortProperty
+    = Ascending
+    | Descending
+    | Op Operation
+    | ByField String
+
+
 {-| Represents a Vega specification. Specs can be (and usually are) nested.
 They can range from a single Boolean value up to the entire Vega specification.
 -}
 type alias Spec =
     JE.Value
+
+
+{-| Describes a unit of time. Useful for encoding and transformations. See the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative)
+for further details.
+-}
+type
+    -- TODO: Vega-Lite seems to have more time unit options than Vega (e.g. Quarter, Hours etc. - Check spec to see if this is a doc problem or a genuinely restricted set in Vega)
+    TimeUnit
+    -- TODO: Add UTC prefix option with a utc function (see https://vega.github.io/vega-lite/docs/timeunit.html)
+    = Year
+    | YearQuarter
+    | YearQuarterMonth
+    | YearMonth
+    | YearMonthDate
+    | YearMonthDateHours
+    | YearMonthDateHoursMinutes
+    | YearMonthDateHoursMinutesSeconds
+    | Quarter
+    | QuarterMonth
+    | Month
+    | MonthDate
+    | Date
+    | Day
+    | Hours
+    | HoursMinutes
+    | HoursMinutesSeconds
+    | Minutes
+    | MinutesSeconds
+    | Seconds
+    | SecondsMilliseconds
+    | Milliseconds
 
 
 {-| Top-level Vega properties. These are for testing purposes only prior to full
@@ -89,6 +410,7 @@ type VProperty
     | VBackground
     | VTitle
     | VWidth
+    | VAutosize
     | VHeight
     | VPadding
     | VAutoSize
@@ -101,6 +423,18 @@ type VProperty
     | VLegends
     | VMarks
     | VEncode
+
+
+{-| Declare the way the view is sized. See the
+[Vega documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
+for details.
+
+    TODO: XXX
+
+-}
+autosize : List Autosize -> ( VProperty, Spec )
+autosize aus =
+    ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
 
 {-| Create a column of data. A column has a name and a list of values. The final
@@ -158,6 +492,54 @@ dataFromColumns name fmts cols =
         ( VData, JE.object [ ( "name", JE.string name ), ( "values", dataArray ), ( "format", JE.object (List.concatMap format fmts) ) ] )
 
 
+{-| Override the default width of the visualization. If not specified the width
+will be calculated based on the content of the visualization.
+
+    TODO: XXX
+
+-}
+height : Float -> ( VProperty, Spec )
+height w =
+    ( VHeight, JE.float w )
+
+
+{-| Set the padding around the visualization in pixel units. The way padding is
+interpreted will depend on the `autosize` properties. See the
+[Vega documentation](https://vega.github.io/vega/docs/specification/)
+for details.
+
+    TODO: XXX
+
+-}
+padding : Padding -> ( VProperty, Spec )
+padding pad =
+    ( VPadding, paddingProperty pad )
+
+
+{-| Create the scales used to map data values to visual properties.
+
+    TODO: XXX
+
+-}
+scales : List Spec -> ( VProperty, Spec )
+scales scs =
+    ( VScales, JE.list scs )
+
+
+{-| Create a single scale used to map data values to visual properties.
+
+    TODO: XXX
+
+-}
+scale : String -> List ScaleProperty -> List Spec -> List Spec
+scale name sProps =
+    (::)
+        (( "name", JE.string name )
+            :: List.map scaleProperty sProps
+            |> JE.object
+        )
+
+
 {-| Convert a list of Vega specifications into a single JSON object that may be
 passed to Vega for graphics generation.
 Currently this is a placeholder only and is not available for use.
@@ -169,12 +551,72 @@ toVega spec =
         |> JE.object
 
 
+{-| Override the default width of the visualization. If not specified the width
+will be calculated based on the content of the visualization.
+
+    TODO: XXX
+
+-}
+width : Float -> ( VProperty, Spec )
+width w =
+    ( VWidth, JE.float w )
+
+
 
 -- ################################################# Private types and functions
 
 
 type alias LabelledSpec =
     ( String, Spec )
+
+
+autosizeProperty : Autosize -> LabelledSpec
+autosizeProperty asCfg =
+    case asCfg of
+        APad ->
+            ( "type", JE.string "pad" )
+
+        AFit ->
+            ( "type", JE.string "fit" )
+
+        ANone ->
+            ( "type", JE.string "none" )
+
+        AResize ->
+            ( "resize", JE.bool True )
+
+        AContent ->
+            ( "contains", JE.string "content" )
+
+        APadding ->
+            ( "contains", JE.string "padding" )
+
+
+
+-- | DReferences (List DataReference)
+-- | DSort SortProperty
+
+
+dataRefProperty : DataReference -> LabelledSpec
+dataRefProperty dataRef =
+    case dataRef of
+        DDataset ds ->
+            ( "data", JE.string ds )
+
+        DField df ->
+            ( "field", JE.string df )
+
+        DFields dfs ->
+            ( "fields", JE.list (List.map JE.string dfs) )
+
+        DReferences drs ->
+            ( "fields", JE.object (List.map dataRefProperty drs) )
+
+        DSort sps ->
+            if sps == [ Ascending ] then
+                ( "sort", JE.bool True )
+            else
+                ( "sort", JE.object (List.map sortProperty sps) )
 
 
 foDataType : DataType -> Spec
@@ -224,6 +666,436 @@ format fmt =
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataType fmt )) fmts ) ]
 
 
+interpolateProperty : CInterpolate -> Spec
+interpolateProperty iType =
+    case iType of
+        Rgb gamma ->
+            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
+
+        Hsl ->
+            JE.object [ ( "type", JE.string "hsl" ) ]
+
+        HslLong ->
+            JE.object [ ( "type", JE.string "hsl-long" ) ]
+
+        Lab ->
+            JE.object [ ( "type", JE.string "lab" ) ]
+
+        Hcl ->
+            JE.object [ ( "type", JE.string "hcl" ) ]
+
+        HclLong ->
+            JE.object [ ( "type", JE.string "hcl-long" ) ]
+
+        CubeHelix gamma ->
+            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
+
+        CubeHelixLong gamma ->
+            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
+
+
+nice : ScaleNice -> Spec
+nice ni =
+    case ni of
+        NMillisecond ->
+            JE.string "millisecond"
+
+        NSecond ->
+            JE.string "second"
+
+        NMinute ->
+            JE.string "minute"
+
+        NHour ->
+            JE.string "hour"
+
+        NDay ->
+            JE.string "day"
+
+        NWeek ->
+            JE.string "week"
+
+        NMonth ->
+            JE.string "month"
+
+        NYear ->
+            JE.string "year"
+
+        NInterval tu step ->
+            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
+
+        IsNice b ->
+            JE.bool b
+
+        NTickCount n ->
+            JE.int n
+
+
+opLabel : Operation -> String
+opLabel op =
+    case op of
+        ArgMax ->
+            "argmax"
+
+        ArgMin ->
+            "argmin"
+
+        Average ->
+            "average"
+
+        Count ->
+            "count"
+
+        CI0 ->
+            "ci0"
+
+        CI1 ->
+            "ci1"
+
+        Distinct ->
+            "distinct"
+
+        Max ->
+            "max"
+
+        Mean ->
+            "mean"
+
+        Median ->
+            "median"
+
+        Min ->
+            "min"
+
+        Missing ->
+            "missing"
+
+        Q1 ->
+            "q1"
+
+        Q3 ->
+            "q3"
+
+        Stdev ->
+            "stdev"
+
+        StdevP ->
+            "stdevp"
+
+        Sum ->
+            "sum"
+
+        Stderr ->
+            "stderr"
+
+        Valid ->
+            "valid"
+
+        Variance ->
+            "variance"
+
+        VarianceP ->
+            "variancep"
+
+
+paddingProperty : Padding -> Spec
+paddingProperty pad =
+    case pad of
+        PSize p ->
+            JE.float p
+
+        PEdges l t r b ->
+            JE.object
+                [ ( "left", JE.float l )
+                , ( "top", JE.float t )
+                , ( "right", JE.float r )
+                , ( "bottom", JE.float b )
+                ]
+
+
+rangeDefaultLabel : RangeDefault -> String
+rangeDefaultLabel rd =
+    case rd of
+        RWidth ->
+            "width"
+
+        RHeight ->
+            "height"
+
+        RSymbol ->
+            "symbol"
+
+        RCategory ->
+            "category"
+
+        RDiverging ->
+            "diverging"
+
+        ROrdinal ->
+            "ordinal"
+
+        RRamp ->
+            "ramp"
+
+        RHeatmap ->
+            "heatmap"
+
+
+scaleDomainProperty : ScaleDomain -> Spec
+scaleDomainProperty sdType =
+    case sdType of
+        DNumbers nums ->
+            JE.list (List.map JE.float nums)
+
+        DStrings cats ->
+            JE.list (List.map JE.string cats)
+
+        DSignal signal ->
+            JE.object [ signalProperty signal ]
+
+        DData dataRef ->
+            JE.object (List.map dataRefProperty dataRef)
+
+
+scaleLabel : Scale -> String
+scaleLabel scType =
+    case scType of
+        ScLinear ->
+            "linear"
+
+        ScPow ->
+            "pow"
+
+        ScSqrt ->
+            "sqrt"
+
+        ScLog ->
+            "log"
+
+        ScTime ->
+            "time"
+
+        ScUtc ->
+            "utc"
+
+        ScSequential ->
+            "sequential"
+
+        ScOrdinal ->
+            "ordinal"
+
+        ScBand ->
+            "band"
+
+        ScPoint ->
+            "point"
+
+        ScBinLinear ->
+            "bin-linear"
+
+        ScBinOrdinal ->
+            "bin-ordinal"
+
+        ScQuantile ->
+            "quantile"
+
+        ScQuantize ->
+            "quantize"
+
+        ScCustom s ->
+            s
+
+
+scaleProperty : ScaleProperty -> LabelledSpec
+scaleProperty scaleProp =
+    case scaleProp of
+        SType sType ->
+            ( "type", JE.string (scaleLabel sType) )
+
+        SDomain sdType ->
+            ( "domain", scaleDomainProperty sdType )
+
+        SDomainMax sdMax ->
+            ( "domainMax", JE.float sdMax )
+
+        SDomainMin sdMin ->
+            ( "domainMin", JE.float sdMin )
+
+        SDomainMid sdMid ->
+            ( "domainMid", JE.float sdMid )
+
+        SRange range ->
+            case range of
+                RNumbers xs ->
+                    ( "range", JE.list (List.map JE.float xs) )
+
+                RStrings ss ->
+                    ( "range", JE.list (List.map JE.string ss) )
+
+                RSignal sig ->
+                    ( "range", JE.object [ signalProperty sig ] )
+
+                RScheme name extent ->
+                    ( "range", JE.object [ schemeProperty name extent ] )
+
+                RData dRef ->
+                    ( "range", JE.object [ dataRefProperty dRef ] )
+
+                RStep step ->
+                    ( "range", JE.object [ ( "step", JE.float step ) ] )
+
+                RDefault rd ->
+                    ( "range", JE.string (rangeDefaultLabel rd) )
+
+        -- SScheme name extent ->
+        --     scheme name extent
+        SPadding x ->
+            ( "padding", JE.float x )
+
+        SPaddingInner x ->
+            ( "paddingInner", JE.float x )
+
+        SPaddingOuter x ->
+            ( "paddingOuter", JE.float x )
+
+        SRangeStep x ->
+            ( "rangeStep", JE.float x )
+
+        SRound b ->
+            ( "round", JE.bool b )
+
+        SClamp b ->
+            ( "clamp", JE.bool b )
+
+        SInterpolate interp ->
+            ( "interpolate", interpolateProperty interp )
+
+        SNice ni ->
+            ( "nice", nice ni )
+
+        SZero b ->
+            ( "zero", JE.bool b )
+
+        SReverse b ->
+            ( "reverse", JE.bool b )
+
+        SExponent x ->
+            ( "exponent", JE.float x )
+
+        SBase x ->
+            ( "base", JE.float x )
+
+        SAlign x ->
+            ( "align", JE.float x )
+
+
+schemeProperty : String -> List Float -> LabelledSpec
+schemeProperty name extent =
+    case extent of
+        [ mn, mx ] ->
+            ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
+
+        _ ->
+            ( "scheme", JE.string name )
+
+
+signalProperty : Signal -> LabelledSpec
+signalProperty signal =
+    case signal of
+        SName sName ->
+            ( "signal", JE.string sName )
+
+        SExpr sExpr ->
+            -- TODO: Should we check the expression for validity in any way?
+            ( "signal", JE.string sExpr )
+
+
+sortProperty : SortProperty -> LabelledSpec
+sortProperty sp =
+    case sp of
+        Ascending ->
+            ( "order", JE.string "ascending" )
+
+        Descending ->
+            ( "order", JE.string "descending" )
+
+        ByField field ->
+            ( "field", JE.string field )
+
+        Op op ->
+            ( "op", JE.string (opLabel op) )
+
+
+timeUnitLabel : TimeUnit -> String
+timeUnitLabel tu =
+    case tu of
+        Year ->
+            "year"
+
+        YearQuarter ->
+            "yearquarter"
+
+        YearQuarterMonth ->
+            "yearquartermonth"
+
+        YearMonth ->
+            "yearmonth"
+
+        YearMonthDate ->
+            "yearmonthdate"
+
+        YearMonthDateHours ->
+            "yearmonthdatehours"
+
+        YearMonthDateHoursMinutes ->
+            "yearmonthdatehoursminutes"
+
+        YearMonthDateHoursMinutesSeconds ->
+            "yearmonthdatehoursminutesseconds"
+
+        Quarter ->
+            "quarter"
+
+        QuarterMonth ->
+            "quartermonth"
+
+        Month ->
+            "month"
+
+        MonthDate ->
+            "monthdate"
+
+        Date ->
+            "date"
+
+        Day ->
+            "day"
+
+        Hours ->
+            "hours"
+
+        HoursMinutes ->
+            "hoursminutes"
+
+        HoursMinutesSeconds ->
+            "hoursminutesseconds"
+
+        Minutes ->
+            "minutes"
+
+        MinutesSeconds ->
+            "minutesseconds"
+
+        Seconds ->
+            "seconds"
+
+        SecondsMilliseconds ->
+            "secondsmilliseconds"
+
+        Milliseconds ->
+            "milliseconds"
+
+
 transpose : List (List a) -> List (List a)
 transpose ll =
     case ll of
@@ -261,6 +1133,9 @@ vPropertyLabel spec =
 
         VWidth ->
             "width"
+
+        VAutosize ->
+            "autosize"
 
         VHeight ->
             "height"

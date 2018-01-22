@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Vega Test Gallery</title>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);}</style>
+
+
+  <!-- These scripts link to the Vega runtime -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.8/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/gallery.js"></script>
+</head>
+
+<body>
+
+  <h1>Vega Test Gallery</h1>
+
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
+
+  <h2>Visualization</h2>
+  <div id="basic1"></div>
+
+  <script>
+    Elm.Gallery.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: false,
+          logLevel: vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
