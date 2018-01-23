@@ -39,6 +39,50 @@ basic1 =
             axes
                 << axis "xscale" Bottom []
                 << axis "yscale" Left []
+
+        si =
+            signals
+                << signal "tooltip"
+                    [ SiValue Empty
+                    , SiOn
+                        [ [ EEvents "rect:mouseover", EUpdate "datum" ]
+                        , [ EEvents "rect:mouseout", EUpdate "" ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ MFrom (SData "table")
+                    , MEncode
+                        [ Enter
+                            -- TODO: Restrict the different Mark Properties to their relevant options?
+                            [ MX [ VScale (FName "xscale"), VField (FName "category") ]
+                            , MWidth [ VScale (FName "xscale"), VBand 1 ]
+                            , MY [ VScale (FName "yscale"), VField (FName "amount") ]
+                            , MY2 [ VScale (FName "yscale"), VNumber 0 ]
+                            ]
+                        , Update [ MFill [ VString "steelblue" ] ]
+                        , Hover [ MFill [ VString "red" ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ MEncode
+                        [ Enter
+                            [ MAlign [ VString "center" ]
+                            , MBaseline [ VString "bottom" ]
+                            , MFill [ VString "#333" ]
+                            ]
+                        , Update
+                            [ MX [ VScale (FName "xscale"), VSignal (SName "tooltip.category"), VBand 0.5 ]
+                            , MY [ VScale (FName "yscale"), VSignal (SName "tooltip.amount"), VOffset (VNumber -2) ]
+                            , MText [ VSignal (SName "tooltip.amount") ]
+
+                            -- TODO: Production value for fill opacity
+                            , MFillOpacity []
+                            ]
+                        ]
+                    ]
     in
     toVega
         [ width 400
@@ -47,12 +91,12 @@ basic1 =
         , data []
         , sc []
         , ax []
+        , si []
+        , mk []
         ]
 
 
 
---, mark Bar [], enc [] ]
--- Json.Encode.string "test"
 {- This list comprises the specifications to be provided to the Vega runtime. -}
 
 

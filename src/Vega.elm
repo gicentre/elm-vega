@@ -2,14 +2,22 @@ module Vega
     exposing
         ( Autosize(..)
         , AxisProperty(..)
+        , Bind(..)
         , CInterpolate(..)
         , ColorValue(..)
         , DataColumn
         , DataReference(..)
         , DataType(..)
+        , DataValue(..)
         , DataValues(..)
+        , EncodingProperty(..)
+        , EventHandler(..)
+        , Facet(..)
         , FieldValue(..)
         , Format(..)
+        , InputProperty(..)
+        , Mark(..)
+        , MarkProperty(..)
         , Operation(..)
         , OverlapStrategy(..)
         , Padding(..)
@@ -20,10 +28,13 @@ module Vega
         , ScaleProperty(..)
         , ScaleRange(..)
         , Side(..)
-        , Signal(..)
+        , SignalProperty(..)
+        , SignalReference(..)
         , SortProperty(..)
+        , Source(..)
         , Spec
         , TimeUnit(..)
+        , TopMarkProperty(..)
         , VProperty
         , Value(..)
         , autosize
@@ -32,9 +43,13 @@ module Vega
         , dataColumn
         , dataFromColumns
         , height
+        , mark
+        , marks
         , padding
         , scale
         , scales
+        , signal
+        , signals
         , toVega
         , width
         )
@@ -68,13 +83,39 @@ Functions and types for declaring the input data to the visualization.
 @docs DataType
 @docs Format
 @docs SortProperty
+@docs Source
+
+
+## Axes
+
+@docs axes
+@docs axis
+@docs AxisProperty
+@docs Side
+@docs OverlapStrategy
+
+
+## Marks
+
+@docs marks
+@docs mark
+@docs Mark
+@docs TopMarkProperty
+@docs MarkProperty
+@docs EncodingProperty
 
 
 ## Signals
 
 TODO: Signal docs here. XXX
 
-@docs Signal
+@docs signals
+@docs signal
+@docs SignalReference
+@docs SignalProperty
+@docs Bind
+@docs InputProperty
+@docs EventHandler
 
 
 ## Scaling
@@ -83,11 +124,9 @@ The mapping of data values to their visual expression.
 
 @docs scales
 @docs scale
-@docs RageDefault
+@docs RangeDefault
 @docs ScaleProperty
 @docs Scale
-@docs categoricalDomainMap
-@docs domainRangeMap
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
@@ -117,8 +156,13 @@ to the data and transform options described above.
 In addition to more general data types like integers and strings, the following types
 can carry data used in specifications.
 
+@docs DataValue
 @docs DataValues
 @docs TimeUnit
+@docs ColorValue
+@docs FieldValue
+@docs Value
+@docs Facet
 
 -}
 
@@ -169,6 +213,25 @@ type AxisProperty
       -- TODO: AxValues should allow numbers, strings and signal references
     | AxValues (List Float)
     | AxZIndex Int
+
+
+{-| Describes a binding to some HTML input element such as a checkbox or radio button.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind).
+-}
+type Bind
+    = IRange (List InputProperty)
+    | ICheckbox (List InputProperty)
+    | IRadio (List InputProperty)
+    | ISelect (List InputProperty)
+    | IText (List InputProperty)
+    | INumber (List InputProperty)
+    | IDate (List InputProperty)
+    | ITime (List InputProperty)
+    | IMonth (List InputProperty)
+    | IWeek (List InputProperty)
+    | IDateTimeLocal (List InputProperty)
+    | ITel (List InputProperty)
+    | IColor (List InputProperty)
 
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
@@ -232,6 +295,16 @@ type DataType
     | FoUtc String
 
 
+{-| A single data value. This is used when a function can accept values of different
+types (e.g. either a number or a string).
+-}
+type DataValue
+    = Boolean Bool
+    | Number Float
+    | Str String
+    | Empty
+
+
 {-| A list of data values. This is used when a function can accept lists of
 different types (e.g. either a list of numbers or a list of strings).
 TODO: Check DateTimes only accept strings.
@@ -243,13 +316,49 @@ type DataValues
     | Strings (List String)
 
 
+{-| Indicates the charactersitcs of an encoding. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+TODO: Need to expand this doc comment.
+-}
+type EncodingProperty
+    = Enter (List MarkProperty)
+    | Update (List MarkProperty)
+    | Exit (List MarkProperty)
+    | Hover (List MarkProperty)
+    | Custom String (List MarkProperty)
+
+
+{-| Specifies an event handler indicating which events to respond to and what to
+update or encode as a result. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
+-}
+type
+    EventHandler
+    -- TODO: Replace EEvents strings with full event stream types.
+    = EEvents String
+    | EUpdate String
+    | EEncode String
+    | EForce Bool
+
+
+{-| Defines a facet directive. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#facet).
+-}
+type Facet
+    = FaName String
+    | FaData String
+    | FaField String
+      --TODO: | FaAggregate
+    | FaGroupBy (List String)
+
+
 {-| Represents a field value. Rather than a simple field name this can be used to
 evaluate a signal, group or parent to indirectly reference a field. For details
 see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue).
 -}
 type FieldValue
     = FName String
-    | FSignal Signal
+    | FSignal SignalReference
     | FDatum FieldValue
     | FGroup FieldValue
     | FParent FieldValue
@@ -266,6 +375,64 @@ type Format
     | TopojsonFeature String
     | TopojsonMesh String
     | Parse (List ( String, DataType ))
+
+
+{-| GUI Input properties. The type of relevant proerty will depend on the type of
+input element selected. For example an `InRange` (slider) can have numeric min,
+max and step values; InSelect (selector) has a list of selection label options.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind).
+The `debounce` property, available for all input types allows a delay in input event
+handling to be added in order to avoid unnecessary event broadcasting. The `Element`
+property is an optional CSS selector indicating the parent element to which the
+input element should be added. This allows the option of the input element to be
+outside the visualization container.
+-}
+type InputProperty
+    = Debounce Float
+    | Element String
+    | InOptions (List String)
+    | InMin Float
+    | InMax Float
+    | InName String
+    | InStep Float
+    | InPlaceholder String
+
+
+{-| Type of visual mark used to represent data in the visualization. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#types).
+-}
+type Mark
+    = Arc
+    | Area
+    | Image
+    | Group
+    | Line
+    | Path
+    | Rect
+    | Rule
+    | Shape
+    | Symbol
+    | Text
+    | Trail
+
+
+{-| Indicates an individual property of a mark used when encoding. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+type
+    MarkProperty
+    -- TODO: Add remaining properties including custom property
+    = MX (List Value)
+    | MY (List Value)
+    | MX2 (List Value)
+    | MY2 (List Value)
+    | MWidth (List Value)
+    | MHeight (List Value)
+    | MFill (List Value)
+    | MFillOpacity (List Value)
+    | MText (List Value)
+    | MAlign (List Value)
+    | MBaseline (List Value)
 
 
 {-| Type of aggregation operation. See the
@@ -361,7 +528,7 @@ type ScaleDomain
     | DStrings (List String)
       -- TODO: Can we have DateTimes as literals?
       -- TODO: Documentation implies array literals can include signal references as elements. How do we add these?
-    | DSignal Signal
+    | DSignal SignalReference
     | DData (List DataReference)
 
 
@@ -417,7 +584,7 @@ type ScaleProperty
 type ScaleRange
     = RNumbers (List Float)
     | RStrings (List String)
-    | RSignal Signal
+    | RSignal SignalReference
     | RScheme String (List Float)
     | RData DataReference
     | RStep Float
@@ -435,9 +602,25 @@ type Side
     | Bottom
 
 
-type Signal
+{-| Represents a signal name or expression. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Signal).
+-}
+type SignalReference
     = SName String
     | SExpr String
+
+
+{-| Individual signal property. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+type SignalProperty
+    = SiName String
+    | SiBind Bind
+    | SiDescription String
+    | SiOn (List (List EventHandler))
+      -- TODO: SiUpdate Expression
+    | SiReact Bool
+    | SiValue DataValue
 
 
 {-| Allow type of sorting to be customised. For details see the
@@ -448,6 +631,14 @@ type SortProperty
     | Descending
     | Op Operation
     | ByField String
+
+
+{-| Indicates the data source for a set of marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#from).
+-}
+type Source
+    = SData String
+    | SFacet (List Facet)
 
 
 {-| Represents a Vega specification. Specs can be (and usually are) nested.
@@ -489,16 +680,39 @@ type
     | Milliseconds
 
 
+{-| Indicates the charactersitcs of a mark. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+type TopMarkProperty
+    = MType Mark
+    | MClip Bool
+    | MDescription String
+    | MEncode (List EncodingProperty)
+    | MFrom Source
+    | MInteractive Bool
+    | MKey String
+    | MName String
+      -- TODO: MOn (List Trigger)
+      -- TODO: MSort Compare
+      -- TODO: MTransform (List Transform)
+    | MRole String
+    | MStyle (List String)
+
+
 {-| Represents a value such as a number or reference to a value such as a field label
 or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
 -}
-type
-    Value
-    -- TODO: Add scale transform options
-    = VSignal Signal
+type Value
+    = VSignal SignalReference
     | VColor ColorValue
     | VField FieldValue
+    | VScale FieldValue
+    | VBand Float
+    | VExponent Value
+    | VMultiply Value
+    | VOffset Value
+    | VRound Bool
     | VNumber Float
     | VString String
     | VBool Bool
@@ -526,7 +740,6 @@ type VProperty
     | VAxes
     | VLegends
     | VMarks
-    | VEncode
 
 
 {-| Declare the way the view is sized. See the
@@ -614,9 +827,20 @@ dataFromColumns name fmts cols =
                 |> JE.list
     in
     if fmts == [] then
-        ( VData, JE.object [ ( "name", JE.string name ), ( "values", dataArray ) ] )
+        ( VData
+        , JE.object
+            [ ( "name", JE.string name )
+            , ( "values", dataArray )
+            ]
+        )
     else
-        ( VData, JE.object [ ( "name", JE.string name ), ( "values", dataArray ), ( "format", JE.object (List.concatMap format fmts) ) ] )
+        ( VData
+        , JE.object
+            [ ( "name", JE.string name )
+            , ( "values", dataArray )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
+            ]
+        )
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -630,6 +854,29 @@ height w =
     ( VHeight, JE.float w )
 
 
+{-| Create a single mark definition.
+
+    TODO: XXX
+
+-}
+mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
+mark mark mProps =
+    (::)
+        ((MType mark :: mProps |> List.map topMarkProperty)
+            |> JE.object
+        )
+
+
+{-| Create the marks used in the visualization.
+
+    TODO: XXX
+
+-}
+marks : List Spec -> ( VProperty, Spec )
+marks axs =
+    ( VMarks, JE.list axs )
+
+
 {-| Set the padding around the visualization in pixel units. The way padding is
 interpreted will depend on the `autosize` properties. See the
 [Vega documentation](https://vega.github.io/vega/docs/specification/)
@@ -640,17 +887,7 @@ for details.
 -}
 padding : Padding -> ( VProperty, Spec )
 padding pad =
-    ( VPadding, paddingProperty pad )
-
-
-{-| Create the scales used to map data values to visual properties.
-
-    TODO: XXX
-
--}
-scales : List Spec -> ( VProperty, Spec )
-scales scs =
-    ( VScales, JE.list scs )
+    ( VPadding, paddingSpec pad )
 
 
 {-| Create a single scale used to map data values to visual properties.
@@ -663,6 +900,41 @@ scale name sProps =
     (::)
         (( "name", JE.string name )
             :: List.map scaleProperty sProps
+            |> JE.object
+        )
+
+
+{-| Create the scales used to map data values to visual properties.
+
+    TODO: XXX
+
+-}
+scales : List Spec -> ( VProperty, Spec )
+scales scs =
+    ( VScales, JE.list scs )
+
+
+{-| Create the signals used to add dynamism to the visualization.
+For further details see the [Vega documentation](https://vega.github.io/vega/docs/signals)
+
+    TODO: XXX
+
+-}
+signals : List Spec -> ( VProperty, Spec )
+signals sigs =
+    ( VSignals, JE.list sigs )
+
+
+{-| Create a single signal used to add a dynamic component to a visualization.
+For further details see the [Vega documentation](https://vega.github.io/vega/docs/signals)
+
+    TODO: XXX
+
+-}
+signal : String -> List SignalProperty -> List Spec -> List Spec
+signal sigName sProps =
+    (::)
+        ((SiName sigName :: sProps |> List.map signalProperty)
             |> JE.object
         )
 
@@ -747,10 +1019,10 @@ axisProperty ap =
             ( "labelPadding", JE.float pad )
 
         AxMaxExtent val ->
-            ( "maxExtent", value val )
+            ( "maxExtent", valueSpec val )
 
         AxMinExtent val ->
-            ( "minExtent", value val )
+            ( "minExtent", valueSpec val )
 
         AxGridScale scName ->
             ( "gridScale", JE.string scName )
@@ -775,10 +1047,10 @@ axisProperty ap =
             ( "labelFlushOffset", JE.float pad )
 
         AxOffset val ->
-            ( "offset", value val )
+            ( "offset", valueSpec val )
 
         AxPosition val ->
-            ( "position", value val )
+            ( "position", valueSpec val )
 
         AxTicks b ->
             ( "ticks", JE.bool b )
@@ -800,6 +1072,53 @@ axisProperty ap =
 
         AxZIndex n ->
             ( "zindex", JE.int n )
+
+
+bindingProperty : Bind -> LabelledSpec
+bindingProperty bnd =
+    let
+        bSpec iType props =
+            ( "bind", JE.object (( "input", JE.string iType ) :: List.map inputProperty props) )
+    in
+    case bnd of
+        IRange props ->
+            bSpec "range" props
+
+        ICheckbox props ->
+            bSpec "checkbox" props
+
+        IRadio props ->
+            bSpec "radio" props
+
+        ISelect props ->
+            bSpec "select" props
+
+        IText props ->
+            bSpec "text" props
+
+        INumber props ->
+            bSpec "number" props
+
+        IDate props ->
+            bSpec "date" props
+
+        ITime props ->
+            bSpec "time" props
+
+        IMonth props ->
+            bSpec "month" props
+
+        IWeek props ->
+            bSpec "week" props
+
+        IDateTimeLocal props ->
+            bSpec "datetimelocal" props
+
+        ITel props ->
+            bSpec "tel" props
+
+        IColor props ->
+            bSpec "color" props
 
 
 colorProperty : ColorValue -> LabelledSpec
@@ -840,27 +1159,85 @@ dataRefProperty dataRef =
                 ( "sort", JE.object (List.map sortProperty sps) )
 
 
-fieldValue : FieldValue -> Spec
-fieldValue fVal =
+encodingProperty : EncodingProperty -> LabelledSpec
+encodingProperty ep =
+    case ep of
+        Enter mProps ->
+            ( "enter", JE.object (List.map markProperty mProps) )
+
+        Update mProps ->
+            ( "update", JE.object (List.map markProperty mProps) )
+
+        Exit mProps ->
+            ( "exit", JE.object (List.map markProperty mProps) )
+
+        Hover mProps ->
+            ( "hover", JE.object (List.map markProperty mProps) )
+
+        Custom s mProps ->
+            ( s, JE.object (List.map markProperty mProps) )
+
+
+eventHandlerSpec : List EventHandler -> Spec
+eventHandlerSpec ehs =
+    let
+        eventHandler eh =
+            case eh of
+                EEvents s ->
+                    ( "events", JE.string s )
+
+                EUpdate s ->
+                    if s == "" then
+                        ( "update", JE.string "{}" )
+                    else
+                        ( "update", JE.string s )
+
+                EEncode s ->
+                    ( "encode", JE.string s )
+
+                EForce b ->
+                    ( "force", JE.bool b )
+    in
+    JE.object (List.map eventHandler ehs)
+
+
+facetProperty : Facet -> LabelledSpec
+facetProperty fct =
+    case fct of
+        FaName s ->
+            ( "name", JE.string s )
+
+        FaData s ->
+            ( "data", JE.string s )
+
+        FaField s ->
+            ( "field", JE.string s )
+
+        FaGroupBy ss ->
+            ( "groupby", JE.list (List.map JE.string ss) )
+
+
+fieldValueSpec : FieldValue -> Spec
+fieldValueSpec fVal =
     case fVal of
         FName fName ->
             JE.string fName
 
         FSignal sig ->
-            JE.object [ signalProperty sig ]
+            JE.object [ signalReferenceProperty sig ]
 
         FDatum fv ->
-            JE.object [ ( "datum", fieldValue fv ) ]
+            JE.object [ ( "datum", fieldValueSpec fv ) ]
 
         FGroup fv ->
-            JE.object [ ( "group", fieldValue fv ) ]
+            JE.object [ ( "group", fieldValueSpec fv ) ]
 
         FParent fv ->
-            JE.object [ ( "parent", fieldValue fv ) ]
+            JE.object [ ( "parent", fieldValueSpec fv ) ]
 
 
-foDataType : DataType -> Spec
-foDataType dType =
+foDataTypeSpec : DataType -> Spec
+foDataTypeSpec dType =
     case dType of
         FoNumber ->
             JE.string "number"
@@ -881,8 +1258,8 @@ foDataType dType =
                 JE.string ("utc:'" ++ dateFmt ++ "'")
 
 
-format : Format -> List LabelledSpec
-format fmt =
+formatProperty : Format -> List LabelledSpec
+formatProperty fmt =
     case fmt of
         JSON ->
             [ ( "type", JE.string "json" ) ]
@@ -903,11 +1280,11 @@ format fmt =
             [ ( "type", JE.string "json" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
-            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataType fmt )) fmts ) ]
+            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
 
 
-interpolateProperty : CInterpolate -> Spec
-interpolateProperty iType =
+interpolateSpec : CInterpolate -> Spec
+interpolateSpec iType =
     case iType of
         Rgb gamma ->
             JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
@@ -934,8 +1311,118 @@ interpolateProperty iType =
             JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
 
 
-nice : ScaleNice -> Spec
-nice ni =
+inputProperty : InputProperty -> LabelledSpec
+inputProperty prop =
+    case prop of
+        InMin x ->
+            ( "min", JE.float x )
+
+        InMax x ->
+            ( "max", JE.float x )
+
+        InStep x ->
+            ( "step", JE.float x )
+
+        Debounce x ->
+            ( "debounce", JE.float x )
+
+        InName s ->
+            ( "name", JE.string s )
+
+        InOptions opts ->
+            ( "options", JE.list (List.map JE.string opts) )
+
+        InPlaceholder el ->
+            ( "placeholder", JE.string el )
+
+        Element el ->
+            ( "element", JE.string el )
+
+
+markLabel : Mark -> String
+markLabel m =
+    case m of
+        Arc ->
+            "arc"
+
+        Area ->
+            "area"
+
+        Image ->
+            "image"
+
+        Group ->
+            "group"
+
+        Line ->
+            "line"
+
+        Path ->
+            "path"
+
+        Rect ->
+            "rect"
+
+        Rule ->
+            "rule"
+
+        Shape ->
+            "shape"
+
+        Symbol ->
+            "symbol"
+
+        Text ->
+            "text"
+
+        Trail ->
+            "trail"
+
+
+markProperty : MarkProperty -> LabelledSpec
+markProperty mProp =
+    let
+        valRef vs =
+            -- TODO: Need to account for Production Rules (https://vega.github.io/vega/docs/marks/#production-rule)
+            JE.object (List.map valueProperty vs)
+    in
+    case mProp of
+        MX vals ->
+            ( "x", valRef vals )
+
+        MY vals ->
+            ( "y", valRef vals )
+
+        MX2 vals ->
+            ( "x2", valRef vals )
+
+        MY2 vals ->
+            ( "y2", valRef vals )
+
+        MWidth vals ->
+            ( "width", valRef vals )
+
+        MHeight vals ->
+            ( "height", valRef vals )
+
+        MFill vals ->
+            ( "fill", valRef vals )
+
+        MFillOpacity vals ->
+            ( "fillOpacity", valRef vals )
+
+        MText vals ->
+            ( "text", valRef vals )
+
+        MAlign vals ->
+            ( "align", valRef vals )
+
+        MBaseline vals ->
+            ( "baseline", valRef vals )
+
+
+niceSpec : ScaleNice -> Spec
+niceSpec ni =
     case ni of
         NMillisecond ->
             JE.string "millisecond"
@@ -1051,24 +1538,8 @@ overlapStrategyLabel strat =
             "greedy"
 
 
-sideLabel : Side -> String
-sideLabel orient =
-    case orient of
-        Left ->
-            "left"
-
-        Bottom ->
-            "bottom"
-
-        Right ->
-            "right"
-
-        Top ->
-            "top"
-
-
-paddingProperty : Padding -> Spec
-paddingProperty pad =
+paddingSpec : Padding -> Spec
+paddingSpec pad =
     case pad of
         PSize p ->
             JE.float p
@@ -1110,8 +1581,8 @@ rangeDefaultLabel rd =
             "heatmap"
 
 
-scaleDomainProperty : ScaleDomain -> Spec
-scaleDomainProperty sdType =
+scaleDomainSpec : ScaleDomain -> Spec
+scaleDomainSpec sdType =
     case sdType of
         DNumbers nums ->
             JE.list (List.map JE.float nums)
@@ -1120,7 +1591,7 @@ scaleDomainProperty sdType =
             JE.list (List.map JE.string cats)
 
         DSignal signal ->
-            JE.object [ signalProperty signal ]
+            JE.object [ signalReferenceProperty signal ]
 
         DData dataRef ->
             JE.object (List.map dataRefProperty dataRef)
@@ -1182,7 +1653,7 @@ scaleProperty scaleProp =
             ( "type", JE.string (scaleLabel sType) )
 
         SDomain sdType ->
-            ( "domain", scaleDomainProperty sdType )
+            ( "domain", scaleDomainSpec sdType )
 
         SDomainMax sdMax ->
             ( "domainMax", JE.float sdMax )
@@ -1202,7 +1673,7 @@ scaleProperty scaleProp =
                     ( "range", JE.list (List.map JE.string ss) )
 
                 RSignal sig ->
-                    ( "range", JE.object [ signalProperty sig ] )
+                    ( "range", JE.object [ signalReferenceProperty sig ] )
 
                 RScheme name extent ->
                     ( "range", JE.object [ schemeProperty name extent ] )
@@ -1235,10 +1706,10 @@ scaleProperty scaleProp =
             ( "clamp", JE.bool b )
 
         SInterpolate interp ->
-            ( "interpolate", interpolateProperty interp )
+            ( "interpolate", interpolateSpec interp )
 
         SNice ni ->
-            ( "nice", nice ni )
+            ( "nice", niceSpec ni )
 
         SZero b ->
             ( "zero", JE.bool b )
@@ -1266,8 +1737,57 @@ schemeProperty name extent =
             ( "scheme", JE.string name )
 
 
-signalProperty : Signal -> LabelledSpec
-signalProperty signal =
+sideLabel : Side -> String
+sideLabel orient =
+    case orient of
+        Left ->
+            "left"
+
+        Bottom ->
+            "bottom"
+
+        Right ->
+            "right"
+
+        Top ->
+            "top"
+
+
+signalProperty : SignalProperty -> LabelledSpec
+signalProperty sigProp =
+    case sigProp of
+        SiName siName ->
+            ( "name", JE.string siName )
+
+        SiBind bind ->
+            bindingProperty bind
+
+        SiDescription s ->
+            ( "description", JE.string s )
+
+        SiOn ehs ->
+            ( "on", JE.list (List.map eventHandlerSpec ehs) )
+
+        SiReact b ->
+            ( "react", JE.bool b )
+
+        SiValue v ->
+            case v of
+                Boolean b ->
+                    ( "value", JE.bool b )
+
+                Number x ->
+                    ( "value", JE.float x )
+
+                Str s ->
+                    ( "value", JE.string s )
+
+                Empty ->
+                    ( "value", JE.object [] )
+
+
+signalReferenceProperty : SignalReference -> LabelledSpec
+signalReferenceProperty signal =
     case signal of
         SName sName ->
             ( "signal", JE.string sName )
@@ -1291,6 +1811,16 @@ sortProperty sp =
 
         Op op ->
             ( "op", JE.string (opLabel op) )
+
+
+sourceProperty : Source -> LabelledSpec
+sourceProperty src =
+    case src of
+        SData sName ->
+            ( "data", JE.string sName )
+
+        SFacet fcts ->
+            ( "facet", JE.object (List.map facetProperty fcts) )
 
 
 timeUnitLabel : TimeUnit -> String
@@ -1363,6 +1893,40 @@ timeUnitLabel tu =
             "milliseconds"
 
 
+topMarkProperty : TopMarkProperty -> LabelledSpec
+topMarkProperty mProp =
+    case mProp of
+        MType m ->
+            ( "type", JE.string (markLabel m) )
+
+        MClip b ->
+            ( "clip", JE.bool b )
+
+        MDescription s ->
+            ( "description", JE.string s )
+
+        MEncode eps ->
+            ( "encode", JE.object (List.map encodingProperty eps) )
+
+        MFrom src ->
+            ( "from", JE.object [ sourceProperty src ] )
+
+        MInteractive b ->
+            ( "interactive", JE.bool b )
+
+        MKey s ->
+            ( "key", JE.string s )
+
+        MName s ->
+            ( "name", JE.string s )
+
+        MRole s ->
+            ( "role", JE.string s )
+
+        MStyle ss ->
+            ( "style", JE.list (List.map JE.string ss) )
+
+
 transpose : List (List a) -> List (List a)
 transpose ll =
     case ll of
@@ -1383,17 +1947,87 @@ transpose ll =
             (x :: heads) :: transpose (xs :: tails)
 
 
-value : Value -> Spec
-value val =
+valueProperty : Value -> LabelledSpec
+valueProperty val =
+    let
+        valOrNum val =
+            case val of
+                VNumber x ->
+                    JE.float x
+
+                _ ->
+                    valueSpec val
+    in
     case val of
         VSignal sig ->
-            JE.object [ signalProperty sig ]
+            signalReferenceProperty sig
+
+        VColor cVal ->
+            colorProperty cVal
+
+        VField fVal ->
+            ( "field", fieldValueSpec fVal )
+
+        VScale fVal ->
+            ( "scale", fieldValueSpec fVal )
+
+        VBand x ->
+            ( "band", JE.float x )
+
+        VExponent val ->
+            ( "exponent", valOrNum val )
+
+        VMultiply val ->
+            ( "mult", valOrNum val )
+
+        VOffset val ->
+            ( "offset", valOrNum val )
+
+        VRound b ->
+            ( "round", JE.bool b )
+
+        VNumber num ->
+            ( "value", JE.float num )
+
+        VString str ->
+            ( "value", JE.string str )
+
+        VBool b ->
+            ( "value", JE.bool b )
+
+        VNull ->
+            ( "value", JE.null )
+
+
+valueSpec : Value -> Spec
+valueSpec val =
+    case val of
+        VSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
         VColor cVal ->
             JE.object [ colorProperty cVal ]
 
         VField fName ->
-            fieldValue fName
+            fieldValueSpec fName
+
+        VScale fName ->
+            fieldValueSpec fName
+
+        VBand x ->
+            JE.object [ ( "band", JE.float x ) ]
+
+        VExponent val ->
+            JE.object [ valueProperty val ]
+
+        VMultiply val ->
+            JE.object [ valueProperty val ]
+
+        VOffset val ->
+            JE.object [ valueProperty val ]
+
+        VRound b ->
+            JE.object [ ( "round", JE.bool b ) ]
 
         VNumber num ->
             JE.float num
@@ -1406,17 +2040,6 @@ value val =
 
         VNull ->
             JE.null
-
-
-
--- type Value
---     = VSignal Signal
---     | VColor ColorValue
---     | VField FieldValue
---     | VNumber Float
---     | VString String
---     | VBool Bool
---     | VNull
 
 
 vPropertyLabel : VProperty -> String
@@ -1472,6 +2095,3 @@ vPropertyLabel spec =
 
         VMarks ->
             "marks"
-
-        VEncode ->
-            "encode"
