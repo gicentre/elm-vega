@@ -9224,6 +9224,8 @@ var _gicentre$elm_vega$Vega$valueSpec = function (val) {
 			return _elm_lang$core$Json_Encode$string(_p29._0);
 		case 'VBool':
 			return _elm_lang$core$Json_Encode$bool(_p29._0);
+		case 'VNull':
+			return _elm_lang$core$Json_Encode$null;
 		default:
 			return _elm_lang$core$Json_Encode$null;
 	}
@@ -9303,153 +9305,213 @@ var _gicentre$elm_vega$Vega$valueProperty = function (val) {
 				_0: 'value',
 				_1: _elm_lang$core$Json_Encode$bool(_p31._0)
 			};
-		default:
+		case 'VNull':
 			return {ctor: '_Tuple2', _0: 'value', _1: _elm_lang$core$Json_Encode$null};
+		default:
+			return A2(
+				_elm_lang$core$Debug$log,
+				'Unexpected production rule passed to valueProperty',
+				{
+					ctor: '_Tuple2',
+					_0: 'productionRule',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'test',
+								_1: _elm_lang$core$Json_Encode$string(_p31._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'if',
+									_1: _elm_lang$core$Json_Encode$object(
+										A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p31._1))
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'else',
+										_1: _elm_lang$core$Json_Encode$object(
+											A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p31._2))
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						})
+				});
 	}
 };
 var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 	var valRef = function (vs) {
-		return _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, vs));
+		var _p32 = vs;
+		if (((_p32.ctor === '::') && (_p32._0.ctor === 'VIfElse')) && (_p32._1.ctor === '[]')) {
+			return _elm_lang$core$Json_Encode$list(
+				{
+					ctor: '::',
+					_0: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'test',
+								_1: _elm_lang$core$Json_Encode$string(_p32._0._0)
+							},
+							_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p32._0._1)
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p32._0._2)),
+						_1: {ctor: '[]'}
+					}
+				});
+		} else {
+			return _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, vs));
+		}
 	};
-	var _p32 = mProp;
-	switch (_p32.ctor) {
+	var _p33 = mProp;
+	switch (_p33.ctor) {
 		case 'MX':
 			return {
 				ctor: '_Tuple2',
 				_0: 'x',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MY':
 			return {
 				ctor: '_Tuple2',
 				_0: 'y',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MX2':
 			return {
 				ctor: '_Tuple2',
 				_0: 'x2',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MY2':
 			return {
 				ctor: '_Tuple2',
 				_0: 'y2',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MWidth':
 			return {
 				ctor: '_Tuple2',
 				_0: 'width',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MHeight':
 			return {
 				ctor: '_Tuple2',
 				_0: 'height',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MFill':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fill',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MFillOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fillOpacity',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MText':
 			return {
 				ctor: '_Tuple2',
 				_0: 'text',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		case 'MAlign':
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'baseline',
-				_1: valRef(_p32._0)
+				_1: valRef(_p33._0)
 			};
 	}
 };
 var _gicentre$elm_vega$Vega$encodingProperty = function (ep) {
-	var _p33 = ep;
-	switch (_p33.ctor) {
+	var _p34 = ep;
+	switch (_p34.ctor) {
 		case 'Enter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'enter',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p33._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p34._0))
 			};
 		case 'Update':
 			return {
 				ctor: '_Tuple2',
 				_0: 'update',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p33._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p34._0))
 			};
 		case 'Exit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exit',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p33._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p34._0))
 			};
 		case 'Hover':
 			return {
 				ctor: '_Tuple2',
 				_0: 'hover',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p33._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p34._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
-				_0: _p33._0,
+				_0: _p34._0,
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p33._1))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p34._1))
 			};
 	}
 };
 var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
-	var _p34 = mProp;
-	switch (_p34.ctor) {
+	var _p35 = mProp;
+	switch (_p35.ctor) {
 		case 'MType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$markLabel(_p34._0))
+					_gicentre$elm_vega$Vega$markLabel(_p35._0))
 			};
 		case 'MClip':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clip',
-				_1: _elm_lang$core$Json_Encode$bool(_p34._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p35._0)
 			};
 		case 'MDescription':
 			return {
 				ctor: '_Tuple2',
 				_0: 'description',
-				_1: _elm_lang$core$Json_Encode$string(_p34._0)
+				_1: _elm_lang$core$Json_Encode$string(_p35._0)
 			};
 		case 'MEncode':
 			return {
 				ctor: '_Tuple2',
 				_0: 'encode',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$encodingProperty, _p34._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$encodingProperty, _p35._0))
 			};
 		case 'MFrom':
 			return {
@@ -9458,7 +9520,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 				_1: _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$sourceProperty(_p34._0),
+						_0: _gicentre$elm_vega$Vega$sourceProperty(_p35._0),
 						_1: {ctor: '[]'}
 					})
 			};
@@ -9466,32 +9528,32 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'interactive',
-				_1: _elm_lang$core$Json_Encode$bool(_p34._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p35._0)
 			};
 		case 'MKey':
 			return {
 				ctor: '_Tuple2',
 				_0: 'key',
-				_1: _elm_lang$core$Json_Encode$string(_p34._0)
+				_1: _elm_lang$core$Json_Encode$string(_p35._0)
 			};
 		case 'MName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p34._0)
+				_1: _elm_lang$core$Json_Encode$string(_p35._0)
 			};
 		case 'MRole':
 			return {
 				ctor: '_Tuple2',
 				_0: 'role',
-				_1: _elm_lang$core$Json_Encode$string(_p34._0)
+				_1: _elm_lang$core$Json_Encode$string(_p35._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'style',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p34._0))
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p35._0))
 			};
 	}
 };
@@ -9513,86 +9575,86 @@ var _gicentre$elm_vega$Vega$bindingProperty = function (bnd) {
 					})
 			};
 		});
-	var _p35 = bnd;
-	switch (_p35.ctor) {
+	var _p36 = bnd;
+	switch (_p36.ctor) {
 		case 'IRange':
-			return A2(bSpec, 'range', _p35._0);
+			return A2(bSpec, 'range', _p36._0);
 		case 'ICheckbox':
-			return A2(bSpec, 'checkbox', _p35._0);
+			return A2(bSpec, 'checkbox', _p36._0);
 		case 'IRadio':
-			return A2(bSpec, 'radio', _p35._0);
+			return A2(bSpec, 'radio', _p36._0);
 		case 'ISelect':
-			return A2(bSpec, 'select', _p35._0);
+			return A2(bSpec, 'select', _p36._0);
 		case 'IText':
-			return A2(bSpec, 'text', _p35._0);
+			return A2(bSpec, 'text', _p36._0);
 		case 'INumber':
-			return A2(bSpec, 'number', _p35._0);
+			return A2(bSpec, 'number', _p36._0);
 		case 'IDate':
-			return A2(bSpec, 'date', _p35._0);
+			return A2(bSpec, 'date', _p36._0);
 		case 'ITime':
-			return A2(bSpec, 'time', _p35._0);
+			return A2(bSpec, 'time', _p36._0);
 		case 'IMonth':
-			return A2(bSpec, 'month', _p35._0);
+			return A2(bSpec, 'month', _p36._0);
 		case 'IWeek':
-			return A2(bSpec, 'week', _p35._0);
+			return A2(bSpec, 'week', _p36._0);
 		case 'IDateTimeLocal':
-			return A2(bSpec, 'datetimelocal', _p35._0);
+			return A2(bSpec, 'datetimelocal', _p36._0);
 		case 'ITel':
-			return A2(bSpec, 'tel', _p35._0);
+			return A2(bSpec, 'tel', _p36._0);
 		default:
-			return A2(bSpec, 'color', _p35._0);
+			return A2(bSpec, 'color', _p36._0);
 	}
 };
 var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
-	var _p36 = sigProp;
-	switch (_p36.ctor) {
+	var _p37 = sigProp;
+	switch (_p37.ctor) {
 		case 'SiName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p36._0)
+				_1: _elm_lang$core$Json_Encode$string(_p37._0)
 			};
 		case 'SiBind':
-			return _gicentre$elm_vega$Vega$bindingProperty(_p36._0);
+			return _gicentre$elm_vega$Vega$bindingProperty(_p37._0);
 		case 'SiDescription':
 			return {
 				ctor: '_Tuple2',
 				_0: 'description',
-				_1: _elm_lang$core$Json_Encode$string(_p36._0)
+				_1: _elm_lang$core$Json_Encode$string(_p37._0)
 			};
 		case 'SiOn':
 			return {
 				ctor: '_Tuple2',
 				_0: 'on',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$eventHandlerSpec, _p36._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$eventHandlerSpec, _p37._0))
 			};
 		case 'SiReact':
 			return {
 				ctor: '_Tuple2',
 				_0: 'react',
-				_1: _elm_lang$core$Json_Encode$bool(_p36._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p37._0)
 			};
 		default:
-			var _p37 = _p36._0;
-			switch (_p37.ctor) {
+			var _p38 = _p37._0;
+			switch (_p38.ctor) {
 				case 'Boolean':
 					return {
 						ctor: '_Tuple2',
 						_0: 'value',
-						_1: _elm_lang$core$Json_Encode$bool(_p37._0)
+						_1: _elm_lang$core$Json_Encode$bool(_p38._0)
 					};
 				case 'Number':
 					return {
 						ctor: '_Tuple2',
 						_0: 'value',
-						_1: _elm_lang$core$Json_Encode$float(_p37._0)
+						_1: _elm_lang$core$Json_Encode$float(_p38._0)
 					};
 				case 'Str':
 					return {
 						ctor: '_Tuple2',
 						_0: 'value',
-						_1: _elm_lang$core$Json_Encode$string(_p37._0)
+						_1: _elm_lang$core$Json_Encode$string(_p38._0)
 					};
 				default:
 					return {
@@ -9605,96 +9667,96 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 	}
 };
 var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
-	var _p38 = ap;
-	switch (_p38.ctor) {
+	var _p39 = ap;
+	switch (_p39.ctor) {
 		case 'AxScale':
 			return {
 				ctor: '_Tuple2',
 				_0: 'scale',
-				_1: _elm_lang$core$Json_Encode$string(_p38._0)
+				_1: _elm_lang$core$Json_Encode$string(_p39._0)
 			};
 		case 'AxSide':
 			return {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$sideLabel(_p38._0))
+					_gicentre$elm_vega$Vega$sideLabel(_p39._0))
 			};
 		case 'AxFormat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
-				_1: _elm_lang$core$Json_Encode$string(_p38._0)
+				_1: _elm_lang$core$Json_Encode$string(_p39._0)
 			};
 		case 'AxDomain':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _elm_lang$core$Json_Encode$bool(_p38._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p39._0)
 			};
 		case 'AxGrid':
 			return {
 				ctor: '_Tuple2',
 				_0: 'grid',
-				_1: _elm_lang$core$Json_Encode$bool(_p38._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p39._0)
 			};
 		case 'AxLabels':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labels',
-				_1: _elm_lang$core$Json_Encode$bool(_p38._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p39._0)
 			};
 		case 'AxLabelOverlap':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelOverlap',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$overlapStrategyLabel(_p38._0))
+					_gicentre$elm_vega$Vega$overlapStrategyLabel(_p39._0))
 			};
 		case 'AxLabelPadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelPadding',
-				_1: _elm_lang$core$Json_Encode$float(_p38._0)
+				_1: _elm_lang$core$Json_Encode$float(_p39._0)
 			};
 		case 'AxMaxExtent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'maxExtent',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p38._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p39._0)
 			};
 		case 'AxMinExtent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'minExtent',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p38._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p39._0)
 			};
 		case 'AxGridScale':
 			return {
 				ctor: '_Tuple2',
 				_0: 'gridScale',
-				_1: _elm_lang$core$Json_Encode$string(_p38._0)
+				_1: _elm_lang$core$Json_Encode$string(_p39._0)
 			};
 		case 'AxLabelBound':
-			var _p39 = _p38._0;
-			if (_p39.ctor === 'Nothing') {
-				return {
-					ctor: '_Tuple2',
-					_0: 'labelBound',
-					_1: _elm_lang$core$Json_Encode$bool(false)
-				};
-			} else {
-				return {
-					ctor: '_Tuple2',
-					_0: 'labelBound',
-					_1: _elm_lang$core$Json_Encode$float(_p39._0)
-				};
-			}
-		case 'AxLabelFlush':
-			var _p40 = _p38._0;
+			var _p40 = _p39._0;
 			if (_p40.ctor === 'Nothing') {
 				return {
 					ctor: '_Tuple2',
+					_0: 'labelBound',
+					_1: _elm_lang$core$Json_Encode$bool(false)
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: 'labelBound',
+					_1: _elm_lang$core$Json_Encode$float(_p40._0)
+				};
+			}
+		case 'AxLabelFlush':
+			var _p41 = _p39._0;
+			if (_p41.ctor === 'Nothing') {
+				return {
+					ctor: '_Tuple2',
 					_0: 'labelFlush',
 					_1: _elm_lang$core$Json_Encode$bool(false)
 				};
@@ -9702,75 +9764,75 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'labelFlush',
-					_1: _elm_lang$core$Json_Encode$float(_p40._0)
+					_1: _elm_lang$core$Json_Encode$float(_p41._0)
 				};
 			}
 		case 'AxLabelFlushOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFlushOffset',
-				_1: _elm_lang$core$Json_Encode$float(_p38._0)
+				_1: _elm_lang$core$Json_Encode$float(_p39._0)
 			};
 		case 'AxOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p38._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p39._0)
 			};
 		case 'AxPosition':
 			return {
 				ctor: '_Tuple2',
 				_0: 'position',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p38._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p39._0)
 			};
 		case 'AxTicks':
 			return {
 				ctor: '_Tuple2',
 				_0: 'ticks',
-				_1: _elm_lang$core$Json_Encode$bool(_p38._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p39._0)
 			};
 		case 'AxTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p38._0)
+				_1: _elm_lang$core$Json_Encode$int(_p39._0)
 			};
 		case 'AxTickSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickSize',
-				_1: _elm_lang$core$Json_Encode$float(_p38._0)
+				_1: _elm_lang$core$Json_Encode$float(_p39._0)
 			};
 		case 'AxTitle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
-				_1: _elm_lang$core$Json_Encode$string(_p38._0)
+				_1: _elm_lang$core$Json_Encode$string(_p39._0)
 			};
 		case 'AxTitlePadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
-				_1: _elm_lang$core$Json_Encode$float(_p38._0)
+				_1: _elm_lang$core$Json_Encode$float(_p39._0)
 			};
 		case 'AxValues':
 			return {
 				ctor: '_Tuple2',
 				_0: 'values',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p38._0))
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p39._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p38._0)
+				_1: _elm_lang$core$Json_Encode$int(_p39._0)
 			};
 	}
 };
 var _gicentre$elm_vega$Vega$autosizeProperty = function (asCfg) {
-	var _p41 = asCfg;
-	switch (_p41.ctor) {
+	var _p42 = asCfg;
+	switch (_p42.ctor) {
 		case 'APad':
 			return {
 				ctor: '_Tuple2',
@@ -9820,12 +9882,12 @@ var _gicentre$elm_vega$Vega$toVega = function (spec) {
 			},
 			_1: A2(
 				_elm_lang$core$List$map,
-				function (_p42) {
-					var _p43 = _p42;
+				function (_p43) {
+					var _p44 = _p43;
 					return {
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$Vega$vPropertyLabel(_p43._0),
-						_1: _p43._1
+						_0: _gicentre$elm_vega$Vega$vPropertyLabel(_p44._0),
+						_1: _p44._1
 					};
 				},
 				spec)
@@ -9833,8 +9895,8 @@ var _gicentre$elm_vega$Vega$toVega = function (spec) {
 };
 var _gicentre$elm_vega$Vega$dataColumn = F2(
 	function (colName, data) {
-		var _p44 = data;
-		switch (_p44.ctor) {
+		var _p45 = data;
+		switch (_p45.ctor) {
 			case 'Numbers':
 				return F2(
 					function (x, y) {
@@ -9849,7 +9911,7 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$float(x)
 							};
 						},
-						_p44._0));
+						_p45._0));
 			case 'Strings':
 				return F2(
 					function (x, y) {
@@ -9864,7 +9926,7 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$string(s)
 							};
 						},
-						_p44._0));
+						_p45._0));
 			case 'DateTimes':
 				return F2(
 					function (x, y) {
@@ -9879,7 +9941,7 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$string(s)
 							};
 						},
-						_p44._0));
+						_p45._0));
 			default:
 				return F2(
 					function (x, y) {
@@ -9894,7 +9956,7 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$bool(b)
 							};
 						},
-						_p44._0));
+						_p45._0));
 		}
 	});
 var _gicentre$elm_vega$Vega$AResize = {ctor: 'AResize'};
@@ -10463,38 +10525,38 @@ var _gicentre$elm_vega$Vega$Op = function (a) {
 var _gicentre$elm_vega$Vega$Descending = {ctor: 'Descending'};
 var _gicentre$elm_vega$Vega$Ascending = {ctor: 'Ascending'};
 var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
-	var _p45 = dataRef;
-	switch (_p45.ctor) {
+	var _p46 = dataRef;
+	switch (_p46.ctor) {
 		case 'DDataset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'data',
-				_1: _elm_lang$core$Json_Encode$string(_p45._0)
+				_1: _elm_lang$core$Json_Encode$string(_p46._0)
 			};
 		case 'DField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p45._0)
+				_1: _elm_lang$core$Json_Encode$string(_p46._0)
 			};
 		case 'DFields':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fields',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p45._0))
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p46._0))
 			};
 		case 'DReferences':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fields',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p45._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p46._0))
 			};
 		default:
-			var _p46 = _p45._0;
+			var _p47 = _p46._0;
 			return _elm_lang$core$Native_Utils.eq(
-				_p46,
+				_p47,
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$Vega$Ascending,
@@ -10507,81 +10569,81 @@ var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$sortProperty, _p46))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$sortProperty, _p47))
 			};
 	}
 };
 var _gicentre$elm_vega$Vega$scaleDomainSpec = function (sdType) {
-	var _p47 = sdType;
-	switch (_p47.ctor) {
+	var _p48 = sdType;
+	switch (_p48.ctor) {
 		case 'DNumbers':
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p47._0));
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p48._0));
 		case 'DStrings':
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p47._0));
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p48._0));
 		case 'DSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p47._0),
+					_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p48._0),
 					_1: {ctor: '[]'}
 				});
 		default:
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p47._0));
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p48._0));
 	}
 };
 var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
-	var _p48 = scaleProp;
-	switch (_p48.ctor) {
+	var _p49 = scaleProp;
+	switch (_p49.ctor) {
 		case 'SType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$scaleLabel(_p48._0))
+					_gicentre$elm_vega$Vega$scaleLabel(_p49._0))
 			};
 		case 'SDomain':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _gicentre$elm_vega$Vega$scaleDomainSpec(_p48._0)
+				_1: _gicentre$elm_vega$Vega$scaleDomainSpec(_p49._0)
 			};
 		case 'SDomainMax':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMax',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SDomainMin':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMin',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SDomainMid':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMid',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SRange':
-			var _p49 = _p48._0;
-			switch (_p49.ctor) {
+			var _p50 = _p49._0;
+			switch (_p50.ctor) {
 				case 'RNumbers':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$list(
-							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p49._0))
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p50._0))
 					};
 				case 'RStrings':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$list(
-							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p49._0))
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p50._0))
 					};
 				case 'RSignal':
 					return {
@@ -10590,7 +10652,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p49._0),
+								_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p50._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -10601,7 +10663,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: A2(_gicentre$elm_vega$Vega$schemeProperty, _p49._0, _p49._1),
+								_0: A2(_gicentre$elm_vega$Vega$schemeProperty, _p50._0, _p50._1),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -10612,7 +10674,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$dataRefProperty(_p49._0),
+								_0: _gicentre$elm_vega$Vega$dataRefProperty(_p50._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -10626,7 +10688,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'step',
-									_1: _elm_lang$core$Json_Encode$float(_p49._0)
+									_1: _elm_lang$core$Json_Encode$float(_p50._0)
 								},
 								_1: {ctor: '[]'}
 							})
@@ -10636,86 +10698,86 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string(
-							_gicentre$elm_vega$Vega$rangeDefaultLabel(_p49._0))
+							_gicentre$elm_vega$Vega$rangeDefaultLabel(_p50._0))
 					};
 			}
 		case 'SPadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SPaddingInner':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingInner',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SPaddingOuter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingOuter',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SRangeStep':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rangeStep',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SRound':
 			return {
 				ctor: '_Tuple2',
 				_0: 'round',
-				_1: _elm_lang$core$Json_Encode$bool(_p48._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p49._0)
 			};
 		case 'SClamp':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clamp',
-				_1: _elm_lang$core$Json_Encode$bool(_p48._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p49._0)
 			};
 		case 'SInterpolate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
-				_1: _gicentre$elm_vega$Vega$interpolateSpec(_p48._0)
+				_1: _gicentre$elm_vega$Vega$interpolateSpec(_p49._0)
 			};
 		case 'SNice':
 			return {
 				ctor: '_Tuple2',
 				_0: 'nice',
-				_1: _gicentre$elm_vega$Vega$niceSpec(_p48._0)
+				_1: _gicentre$elm_vega$Vega$niceSpec(_p49._0)
 			};
 		case 'SZero':
 			return {
 				ctor: '_Tuple2',
 				_0: 'zero',
-				_1: _elm_lang$core$Json_Encode$bool(_p48._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p49._0)
 			};
 		case 'SReverse':
 			return {
 				ctor: '_Tuple2',
 				_0: 'reverse',
-				_1: _elm_lang$core$Json_Encode$bool(_p48._0)
+				_1: _elm_lang$core$Json_Encode$bool(_p49._0)
 			};
 		case 'SExponent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exponent',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		case 'SBase':
 			return {
 				ctor: '_Tuple2',
 				_0: 'base',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: _elm_lang$core$Json_Encode$float(_p48._0)
+				_1: _elm_lang$core$Json_Encode$float(_p49._0)
 			};
 	}
 };
@@ -10809,6 +10871,10 @@ var _gicentre$elm_vega$Vega$mark = F2(
 						_0: _gicentre$elm_vega$Vega$MType(mark),
 						_1: mProps
 					})));
+	});
+var _gicentre$elm_vega$Vega$VIfElse = F3(
+	function (a, b, c) {
+		return {ctor: 'VIfElse', _0: a, _1: b, _2: c};
 	});
 var _gicentre$elm_vega$Vega$VNull = {ctor: 'VNull'};
 var _gicentre$elm_vega$Vega$VBool = function (a) {
@@ -11202,7 +11268,23 @@ var _gicentre$elm_vega$Gallery$basic1 = function () {
 													_1: {
 														ctor: '::',
 														_0: _gicentre$elm_vega$Vega$MFillOpacity(
-															{ctor: '[]'}),
+															{
+																ctor: '::',
+																_0: A3(
+																	_gicentre$elm_vega$Vega$VIfElse,
+																	'datum === tooltip',
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$VNumber(0),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$VNumber(1),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
 														_1: {ctor: '[]'}
 													}
 												}

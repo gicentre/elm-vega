@@ -77,9 +77,7 @@ basic1 =
                             [ MX [ VScale (FName "xscale"), VSignal (SName "tooltip.category"), VBand 0.5 ]
                             , MY [ VScale (FName "yscale"), VSignal (SName "tooltip.amount"), VOffset (VNumber -2) ]
                             , MText [ VSignal (SName "tooltip.amount") ]
-
-                            -- TODO: Production value for fill opacity
-                            , MFillOpacity []
+                            , MFillOpacity [ VIfElse "datum === tooltip" [ VNumber 0 ] [ VNumber 1 ] ]
                             ]
                         ]
                     ]
@@ -89,9 +87,9 @@ basic1 =
         , height 200
         , padding (PSize 5)
         , data []
+        , si []
         , sc []
         , ax []
-        , si []
         , mk []
         ]
 

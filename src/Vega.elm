@@ -717,6 +717,7 @@ type Value
     | VString String
     | VBool Bool
     | VNull
+    | VIfElse String (List Value) (List Value)
 
 
 {-| Top-level Vega properties. These are for testing purposes only prior to full
@@ -1383,8 +1384,15 @@ markProperty : MarkProperty -> LabelledSpec
 markProperty mProp =
     let
         valRef vs =
-            -- TODO: Need to account for Production Rules (https://vega.github.io/vega/docs/marks/#production-rule)
-            JE.object (List.map valueProperty vs)
+            case vs of
+                [ VIfElse expr ifs elses ] ->
+                    JE.list
+                        [ JE.object (( "test", JE.string expr ) :: List.map valueProperty ifs)
+                        , JE.object (List.map valueProperty elses)
+                        ]
+
+                _ ->
+                    JE.object (List.map valueProperty vs)
     in
     case mProp of
         MX vals ->
@@ -1998,6 +2006,16 @@ valueProperty val =
         VNull ->
             ( "value", JE.null )
 
+        VIfElse expr ifs elses ->
+            ( "productionRule"
+            , JE.object
+                [ ( "test", JE.string expr )
+                , ( "if", JE.object (List.map valueProperty ifs) )
+                , ( "else", JE.object (List.map valueProperty elses) )
+                ]
+            )
+                |> Debug.log "Unexpected production rule passed to valueProperty"
+
 
 valueSpec : Value -> Spec
 valueSpec val =
@@ -2039,6 +2057,9 @@ valueSpec val =
             JE.bool b
 
         VNull ->
+            JE.null
+
+        VIfElse expr ifs elses ->
             JE.null
 
 
