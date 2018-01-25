@@ -5,21 +5,28 @@ module Vega
         , Bind(..)
         , CInterpolate(..)
         , ColorValue(..)
+        , Comparator(..)
         , DataColumn
         , DataReference(..)
+        , DataRow
+        , DataTable
         , DataType(..)
         , DataValue(..)
         , DataValues(..)
         , EncodingProperty(..)
         , EventHandler(..)
+        , Expression
         , Facet(..)
+        , Field(..)
         , FieldValue(..)
         , Format(..)
         , InputProperty(..)
         , Mark(..)
         , MarkProperty(..)
         , Operation(..)
+        , Order(..)
         , OverlapStrategy(..)
+        , PackProperty(..)
         , Padding(..)
         , RangeDefault(..)
         , Scale(..)
@@ -27,14 +34,21 @@ module Vega
         , ScaleNice(..)
         , ScaleProperty(..)
         , ScaleRange(..)
+        , SchemeProperty(..)
         , Side(..)
+        , SignalNumber(..)
         , SignalProperty(..)
         , SignalReference(..)
+        , SignalString(..)
         , SortProperty(..)
         , Source(..)
         , Spec
+        , StackOffset(..)
+        , StackProperty(..)
         , TimeUnit(..)
         , TopMarkProperty(..)
+        , Transform(..)
+        , TriggerProperty(..)
         , VProperty
         , Value(..)
         , autosize
@@ -42,15 +56,24 @@ module Vega
         , axis
         , dataColumn
         , dataFromColumns
+        , dataFromRows
+        , dataRow
+        , dataSource
         , height
         , mark
         , marks
+        , on
         , padding
         , scale
         , scales
+        , sigHeight
+        , sigPadding
+        , sigWidth
         , signal
         , signals
         , toVega
+        , transform
+        , trigger
         , width
         )
 
@@ -76,14 +99,34 @@ testing purposes only.
 
 Functions and types for declaring the input data to the visualization.
 
+@docs dataSource
 @docs dataFromColumns
+@docs dataFromRows
 @docs dataColumn
+@docs dataRow
+@docs on
+@docs trigger
 @docs DataColumn
+@docs DataRow
+@docs DataTable
 @docs DataReference
 @docs DataType
 @docs Format
 @docs SortProperty
 @docs Source
+@docs TriggerProperty
+
+
+## Transformations
+
+@docs Transform
+@docs PackProperty
+@docs StackProperty
+@docs StackOffset
+
+@docs transform
+@docs Order
+@docs Comparator
 
 
 ## Axes
@@ -107,15 +150,18 @@ Functions and types for declaring the input data to the visualization.
 
 ## Signals
 
-TODO: Signal docs here. XXX
-
 @docs signals
 @docs signal
+@docs SignalNumber
+@docs SignalString
 @docs SignalReference
 @docs SignalProperty
 @docs Bind
 @docs InputProperty
 @docs EventHandler
+@docs sigWidth
+@docs sigHeight
+@docs sigPadding
 
 
 ## Scaling
@@ -130,6 +176,7 @@ The mapping of data values to their visual expression.
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
+@docs SchemeProperty
 @docs CInterpolate
 
 
@@ -160,6 +207,8 @@ can carry data used in specifications.
 @docs DataValues
 @docs TimeUnit
 @docs ColorValue
+@docs Expression
+@docs Field
 @docs FieldValue
 @docs Value
 @docs Facet
@@ -167,6 +216,10 @@ can carry data used in specifications.
 -}
 
 import Json.Encode as JE
+
+
+-- TODO: Most types should have the option of representing their type from a signal
+-- See StOffset as an example
 
 
 {-| Indicates the auto-sizing characteristics of the visualization such as amount
@@ -262,10 +315,31 @@ type
     | HCL Float Float Float
 
 
+{-| Defines how sorting should be applied. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Compare)
+-}
+type Comparator
+    = CoField (List Field)
+    | CoOrder (List Order)
+
+
 {-| Represents a single column of data. Used when generating inline data with
 `dataColumn`.
 -}
 type alias DataColumn =
+    List LabelledSpec
+
+
+{-| Represents a single row of data. Used when generating inline data with
+`dataRow`.
+-}
+type alias DataRow =
+    Spec
+
+
+{-| Represents a single table of data (collection of `dataColumn`s).
+-}
+type alias DataTable =
     List LabelledSpec
 
 
@@ -303,6 +377,7 @@ type DataValue
     | Number Float
     | Str String
     | Empty
+    | Null
 
 
 {-| A list of data values. This is used when a function can accept lists of
@@ -341,6 +416,14 @@ type
     | EForce Bool
 
 
+{-| Represents an expression to enable custom calculations. This should be text
+in the Vega expression language. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/expressions).
+-}
+type alias Expression =
+    String
+
+
 {-| Defines a facet directive. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#facet).
 -}
@@ -350,6 +433,14 @@ type Facet
     | FaField String
       --TODO: | FaAggregate
     | FaGroupBy (List String)
+
+
+{-| Represents a field name. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Field)
+-}
+type Field
+    = FieldName String
+    | FieldSignal String
 
 
 {-| Represents a field value. Rather than a simple field name this can be used to
@@ -430,7 +521,10 @@ type
     | MHeight (List Value)
     | MFill (List Value)
     | MFillOpacity (List Value)
+    | MStroke (List Value)
+    | MStrokeWidth (List Value)
     | MText (List Value)
+    | MSize (List Value)
     | MAlign (List Value)
     | MBaseline (List Value)
 
@@ -472,6 +566,26 @@ type OverlapStrategy
     = ONone
     | OParity
     | OGreedy
+
+
+{-| Properties of the packing transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pack)
+-}
+type PackProperty
+    = PaField Field
+    | PaSort (List Comparator)
+    | PaSize SignalNumber SignalNumber
+    | PaRadius (Maybe Field)
+    | PaPadding SignalNumber
+    | PaAs String String String String String
+
+
+{-| Indicates whether an ascending or descending order is required (usually in sorting).
+-}
+type Order
+    = Ascend
+    | Descend
+    | OrderSignal String
 
 
 {-| Represents padding dimensions in pixel units. `PSize` will set the same value
@@ -585,10 +699,19 @@ type ScaleRange
     = RNumbers (List Float)
     | RStrings (List String)
     | RSignal SignalReference
-    | RScheme String (List Float)
+    | RScheme String (List SchemeProperty)
     | RData DataReference
     | RStep Float
     | RDefault RangeDefault
+
+
+{-| Describes a color scheme. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/schemes/).
+-}
+type SchemeProperty
+    = SScheme String
+    | SCount Float
+    | SExtent Float Float
 
 
 {-| Indicates a rectangular side. Can be used to specify an axis position.
@@ -600,6 +723,22 @@ type Side
     | Right
     | Top
     | Bottom
+
+
+{-| Represents a numeric value that can either be a literal `SigNum` or signal that
+references a number.
+-}
+type SignalNumber
+    = SigNum Float
+    | SigNumRef SignalReference
+
+
+{-| Represents a string value that can either be a literal `SigStr` or signal that
+references a string.
+-}
+type SignalString
+    = SigStr String
+    | SigStrRef SignalReference
 
 
 {-| Represents a signal name or expression. For details see the
@@ -648,6 +787,30 @@ type alias Spec =
     JE.Value
 
 
+{-| Indicates the type of offsetting to apply when stacking. `OfZero` uses a baseline
+at the foot of a stack, `OfCenter` uses a central baseline with stacking both above
+and below it, while `OfNormalize` rescales stack to a common height while preserving
+the relative size of stacked quantities. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack)
+-}
+type StackOffset
+    = OfZero
+    | OfCenter
+    | OfNormalize
+    | OffsetSignal String
+
+
+{-| Properties of the stacking transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+type StackProperty
+    = StField Field
+    | StGroupBy (List Field)
+    | StSort (List Comparator)
+    | StOffset StackOffset
+    | StAs String String
+
+
 {-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative)
 for further details.
@@ -692,11 +855,70 @@ type TopMarkProperty
     | MInteractive Bool
     | MKey String
     | MName String
-      -- TODO: MOn (List Trigger)
-      -- TODO: MSort Compare
-      -- TODO: MTransform (List Transform)
+      -- TODO: MOn (List Trigger) combining with data trigger functions.
+    | MSort (List Comparator)
+      -- TODO: MTransform (List Transform) combining with Data transform functions
     | MRole String
     | MStyle (List String)
+
+
+{-| Defines a transformation that may be applied to a data stream or mark.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
+-}
+type
+    Transform
+    -- TODO: Parameterise each transform
+    = TAggregate
+    | TBin
+    | TCollect
+    | TCountPattern
+    | TCross
+    | TDensity
+    | TExtent
+    | TFilter
+    | TFold
+    | TFormula
+    | TIdentifier
+    | TImpute
+    | TJoinAggregate
+    | TLookup
+    | TProject
+    | TSample
+    | TSequence
+    | TWindow
+    | TContour
+    | TGeoJson
+    | TGeoPath
+    | TGeoPoint
+    | TGeoShape
+    | TGraticule
+    | TLinkpath
+    | TPie
+    | TStack (List StackProperty)
+    | TForce
+    | TVoronoi
+    | TWordCloud
+    | TNest
+    | TStratify Field Field
+    | TTreeLinks
+    | TPack (List PackProperty)
+    | TPartition
+    | TTree
+    | TTreeMap
+    | TCrossFilter
+    | TResolveFilter
+
+
+{-| Defines a trigger that can cause a data stream or mark to update.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/triggers).
+-}
+type TriggerProperty
+    = TrTrigger Expression
+    | TrInsert Expression
+      -- TODO: Do we need the boolean option here or is an expression `true` sufficient?
+    | TrRemove Expression
+    | TrToggle Expression
+    | TrModifyValues Expression Expression
 
 
 {-| Represents a value such as a number or reference to a value such as a field label
@@ -800,7 +1022,7 @@ dataColumn colName data =
             (::) (List.map (\b -> ( colName, JE.bool b )) col)
 
 
-{-| Declare a data source from a provided list of column values. Each column contains
+{-| Declare a data table from a provided list of column values. Each column contains
 values of the same type, but columns each with a different type are permitted.
 Columns should all contain the same number of items; if not the dataset will be
 truncated to the length of the shortest column. The first parameter should be the
@@ -811,14 +1033,14 @@ to use the default formatting. See the
 for details.
 The columns themselves are most easily generated with `dataColumn`
 
-    data =
+    dataTable =
         dataFromColumns "animals" [ Parse [ ( "Year", FDate "%Y" ) ] ]
             << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
             << dataColumn "Age" (Numbers [ 28, 12, 6 ])
             << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
 
 -}
-dataFromColumns : String -> List Format -> List DataColumn -> ( VProperty, Spec )
+dataFromColumns : String -> List Format -> List DataColumn -> DataTable
 dataFromColumns name fmts cols =
     let
         dataArray =
@@ -826,22 +1048,66 @@ dataFromColumns name fmts cols =
                 |> transpose
                 |> List.map JE.object
                 |> JE.list
+
+        fmt =
+            if fmts == [] then
+                []
+            else
+                [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
     in
-    if fmts == [] then
-        ( VData
-        , JE.object
-            [ ( "name", JE.string name )
-            , ( "values", dataArray )
-            ]
-        )
-    else
-        ( VData
-        , JE.object
-            [ ( "name", JE.string name )
-            , ( "values", dataArray )
-            , ( "format", JE.object (List.concatMap formatProperty fmts) )
-            ]
-        )
+    [ ( "name", JE.string name ), ( "values", dataArray ) ] ++ fmt
+
+
+{-| Declare a data source from a provided list of row values. Each row contains
+a list of tuples where the first value is a string representing the column name, and the
+second the column value for that row. Each column can have a value of a different type
+but you must ensure that when subsequent rows are added, they match the types of previous
+values with shared column names. An optional list for field formatting instructions can
+be provided in the first parameter or an empty list to use the default formatting. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
+for details.
+The rows themselves are most easily generated with `dataRow`. Note though that generally
+if you are creating data inline (as opposed to reading from a file), adding data by column
+in more efficent and less error-prone.
+
+    dataTable =
+        dataFromRows "animals" [ Parse [ ( "Year", FDate "%Y" ) ] ]
+            << dataRow [ ( "Animal", Str "Fish" ), ( "Age", Number 28 ), ( "Year", Str "2010" ) ]
+            << dataRow [ ( "Animal", Str "Dog" ), ( "Age", Number 12 ), ( "Year", Str "2014" ) ]
+            << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
+
+-}
+dataFromRows : String -> List Format -> List DataRow -> DataTable
+dataFromRows name fmts rows =
+    let
+        fmt =
+            if fmts == [] then
+                []
+            else
+                [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
+    in
+    [ ( "name", JE.string name ), ( "values", JE.list rows ) ] ++ fmt
+
+
+{-| Create a row of data. A row comprises a list of (columnName,value) pairs.
+The final parameter is the list of any other rows to which this is added.
+
+    dataRow [("Animal", Str "Fish"),("Age",Number 28),("Year", Str "2010")] []
+
+-}
+dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
+dataRow row =
+    (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValue val )) row))
+
+
+{-| Specify a data source to be used in the visualization. A data source is a collection
+of data tables which themselves may be generated inline, loaded from a URL or the
+result of a transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data).
+-}
+dataSource : List DataTable -> ( VProperty, Spec )
+dataSource dataTables =
+    ( VData, JE.list (List.map JE.object dataTables) )
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -876,6 +1142,14 @@ mark mark mProps =
 marks : List Spec -> ( VProperty, Spec )
 marks axs =
     ( VMarks, JE.list axs )
+
+
+{-| Adds list of triggers to the given data table or mark.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/triggers).
+-}
+on : List Spec -> DataTable -> DataTable
+on triggerSpecs dTable =
+    dTable ++ [ ( "on", JE.list triggerSpecs ) ]
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is
@@ -940,6 +1214,27 @@ signal sigName sProps =
         )
 
 
+{-| Preset signal representing the current height of the visualization.
+-}
+sigHeight : SignalNumber
+sigHeight =
+    SigNumRef (SName "height")
+
+
+{-| Preset signal representing the current padding setting of the visualization.
+-}
+sigPadding : SignalNumber
+sigPadding =
+    SigNumRef (SName "padding")
+
+
+{-| Preset signal representing the current width of the visualization.
+-}
+sigWidth : SignalNumber
+sigWidth =
+    SigNumRef (SName "width")
+
+
 {-| Convert a list of Vega specifications into a single JSON object that may be
 passed to Vega for graphics generation.
 Currently this is a placeholder only and is not available for use.
@@ -949,6 +1244,23 @@ toVega spec =
     ( "$schema", JE.string "https://vega.github.io/schema/vega/v3.0.json" )
         :: List.map (\( s, v ) -> ( vPropertyLabel s, v )) spec
         |> JE.object
+
+
+{-| Applies the given ordered list of transforms to the given data table.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
+-}
+transform : List Transform -> DataTable -> DataTable
+transform transforms dTable =
+    dTable ++ [ ( "transform", JE.list (List.map transformSpec transforms) ) ]
+
+
+{-| Creates a trigger that may be applied to a data table or mark.
+The first parameter is the name of the trigger and the second
+a list of trigger actions.
+-}
+trigger : String -> List TriggerProperty -> Spec
+trigger trName trProps =
+    JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -1138,6 +1450,16 @@ colorProperty cVal =
             ( "color", JE.object [ ( "h", JE.float h ), ( "c", JE.float c ), ( "l", JE.float l ) ] )
 
 
+comparatorProperty : Comparator -> LabelledSpec
+comparatorProperty comp =
+    case comp of
+        CoField fs ->
+            ( "field", JE.list (List.map fieldSpec fs) )
+
+        CoOrder os ->
+            ( "order", JE.list (List.map orderSpec os) )
+
+
 dataRefProperty : DataReference -> LabelledSpec
 dataRefProperty dataRef =
     case dataRef of
@@ -1158,6 +1480,25 @@ dataRefProperty dataRef =
                 ( "sort", JE.bool True )
             else
                 ( "sort", JE.object (List.map sortProperty sps) )
+
+
+dataValue : DataValue -> Spec
+dataValue val =
+    case val of
+        Number x ->
+            JE.float x
+
+        Str s ->
+            JE.string s
+
+        Boolean b ->
+            JE.bool b
+
+        Empty ->
+            JE.object []
+
+        Null ->
+            JE.null
 
 
 encodingProperty : EncodingProperty -> LabelledSpec
@@ -1216,6 +1557,20 @@ facetProperty fct =
 
         FaGroupBy ss ->
             ( "groupby", JE.list (List.map JE.string ss) )
+
+
+fieldSpec : Field -> Spec
+fieldSpec f =
+    case f of
+        FieldName s ->
+            JE.string s
+
+        FieldSignal sigName ->
+            signalStrSpec (SigStrRef (SName sigName))
+
+
+
+--signalStrSpec
 
 
 fieldValueSpec : FieldValue -> Spec
@@ -1419,6 +1774,15 @@ markProperty mProp =
         MFillOpacity vals ->
             ( "fillOpacity", valRef vals )
 
+        MStroke vals ->
+            ( "stroke", valRef vals )
+
+        MStrokeWidth vals ->
+            ( "strokeWidth", valRef vals )
+
+        MSize vals ->
+            ( "size", valRef vals )
+
         MText vals ->
             ( "text", valRef vals )
 
@@ -1533,6 +1897,19 @@ opLabel op =
             "variancep"
 
 
+orderSpec : Order -> Spec
+orderSpec order =
+    case order of
+        Ascend ->
+            JE.string "ascending"
+
+        Descend ->
+            JE.string "descending"
+
+        OrderSignal sigName ->
+            signalStrSpec (SigStrRef (SName sigName))
+
+
 overlapStrategyLabel : OverlapStrategy -> String
 overlapStrategyLabel strat =
     case strat of
@@ -1544,6 +1921,33 @@ overlapStrategyLabel strat =
 
         OGreedy ->
             "greedy"
+
+
+packProperty : PackProperty -> LabelledSpec
+packProperty pp =
+    case pp of
+        PaField f ->
+            ( "field", fieldSpec f )
+
+        PaSort comp ->
+            ( "sort", JE.object (List.map comparatorProperty comp) )
+
+        PaSize w h ->
+            ( "size", JE.list [ signalNumSpec w, signalNumSpec h ] )
+
+        PaRadius fOrNull ->
+            case fOrNull of
+                Just f ->
+                    ( "radius", fieldSpec f )
+
+                Nothing ->
+                    ( "radius", JE.null )
+
+        PaPadding padSize ->
+            ( "padding", signalNumSpec padSize )
+
+        PaAs x y r depth children ->
+            ( "as", JE.list (List.map JE.string [ x, y, r, depth, children ]) )
 
 
 paddingSpec : Padding -> Spec
@@ -1683,8 +2087,8 @@ scaleProperty scaleProp =
                 RSignal sig ->
                     ( "range", JE.object [ signalReferenceProperty sig ] )
 
-                RScheme name extent ->
-                    ( "range", JE.object [ schemeProperty name extent ] )
+                RScheme name options ->
+                    ( "range", JE.object (List.map schemeProperty (SScheme name :: options)) )
 
                 RData dRef ->
                     ( "range", JE.object [ dataRefProperty dRef ] )
@@ -1735,14 +2139,17 @@ scaleProperty scaleProp =
             ( "align", JE.float x )
 
 
-schemeProperty : String -> List Float -> LabelledSpec
-schemeProperty name extent =
-    case extent of
-        [ mn, mx ] ->
-            ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
+schemeProperty : SchemeProperty -> LabelledSpec
+schemeProperty sProps =
+    case sProps of
+        SScheme sName ->
+            ( "scheme", JE.string sName )
 
-        _ ->
-            ( "scheme", JE.string name )
+        SCount x ->
+            ( "count", JE.float x )
+
+        SExtent mn mx ->
+            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
 
 
 sideLabel : Side -> String
@@ -1759,6 +2166,26 @@ sideLabel orient =
 
         Top ->
             "top"
+
+
+signalNumSpec : SignalNumber -> Spec
+signalNumSpec sigNum =
+    case sigNum of
+        SigNum x ->
+            JE.float x
+
+        SigNumRef sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+
+signalStrSpec : SignalString -> Spec
+signalStrSpec sigStr =
+    case sigStr of
+        SigStr s ->
+            JE.string s
+
+        SigStrRef sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 signalProperty : SignalProperty -> LabelledSpec
@@ -1780,18 +2207,7 @@ signalProperty sigProp =
             ( "react", JE.bool b )
 
         SiValue v ->
-            case v of
-                Boolean b ->
-                    ( "value", JE.bool b )
-
-                Number x ->
-                    ( "value", JE.float x )
-
-                Str s ->
-                    ( "value", JE.string s )
-
-                Empty ->
-                    ( "value", JE.object [] )
+            ( "value", dataValue v )
 
 
 signalReferenceProperty : SignalReference -> LabelledSpec
@@ -1829,6 +2245,41 @@ sourceProperty src =
 
         SFacet fcts ->
             ( "facet", JE.object (List.map facetProperty fcts) )
+
+
+stackOffsetSpec : StackOffset -> Spec
+stackOffsetSpec off =
+    case off of
+        OfZero ->
+            JE.string "zero"
+
+        OfCenter ->
+            JE.string "center"
+
+        OfNormalize ->
+            JE.string "normalize"
+
+        OffsetSignal sigName ->
+            signalStrSpec (SigStrRef (SName sigName))
+
+
+stackProperty : StackProperty -> LabelledSpec
+stackProperty sp =
+    case sp of
+        StField f ->
+            ( "field", fieldSpec f )
+
+        StGroupBy fs ->
+            ( "groupby", JE.list (List.map fieldSpec fs) )
+
+        StSort comp ->
+            ( "sort", JE.object (List.map comparatorProperty comp) )
+
+        StOffset off ->
+            ( "offset", stackOffsetSpec off )
+
+        StAs y0 y1 ->
+            ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
 
 
 timeUnitLabel : TimeUnit -> String
@@ -1931,8 +2382,132 @@ topMarkProperty mProp =
         MRole s ->
             ( "role", JE.string s )
 
+        MSort comp ->
+            ( "sort", JE.object (List.map comparatorProperty comp) )
+
         MStyle ss ->
             ( "style", JE.list (List.map JE.string ss) )
+
+
+transformSpec : Transform -> Spec
+transformSpec trans =
+    case trans of
+        TAggregate ->
+            JE.object [ ( "type", JE.string "aggregate" ) ]
+
+        TBin ->
+            JE.object [ ( "type", JE.string "bin" ) ]
+
+        TCollect ->
+            JE.object [ ( "type", JE.string "collect" ) ]
+
+        TCountPattern ->
+            JE.object [ ( "type", JE.string "countpattern" ) ]
+
+        TCross ->
+            JE.object [ ( "type", JE.string "cross" ) ]
+
+        TDensity ->
+            JE.object [ ( "type", JE.string "density" ) ]
+
+        TExtent ->
+            JE.object [ ( "type", JE.string "extent" ) ]
+
+        TFilter ->
+            JE.object [ ( "type", JE.string "filter" ) ]
+
+        TFold ->
+            JE.object [ ( "type", JE.string "fold" ) ]
+
+        TFormula ->
+            JE.object [ ( "type", JE.string "formula" ) ]
+
+        TIdentifier ->
+            JE.object [ ( "type", JE.string "identifier" ) ]
+
+        TImpute ->
+            JE.object [ ( "type", JE.string "impute" ) ]
+
+        TJoinAggregate ->
+            JE.object [ ( "type", JE.string "joinaggregate" ) ]
+
+        TLookup ->
+            JE.object [ ( "type", JE.string "lookup" ) ]
+
+        TProject ->
+            JE.object [ ( "type", JE.string "project" ) ]
+
+        TSample ->
+            JE.object [ ( "type", JE.string "sample" ) ]
+
+        TSequence ->
+            JE.object [ ( "type", JE.string "sequence" ) ]
+
+        TWindow ->
+            JE.object [ ( "type", JE.string "window" ) ]
+
+        TContour ->
+            JE.object [ ( "type", JE.string "contour" ) ]
+
+        TGeoJson ->
+            JE.object [ ( "type", JE.string "geojson" ) ]
+
+        TGeoPath ->
+            JE.object [ ( "type", JE.string "geopath" ) ]
+
+        TGeoPoint ->
+            JE.object [ ( "type", JE.string "geopoint" ) ]
+
+        TGeoShape ->
+            JE.object [ ( "type", JE.string "geoshape" ) ]
+
+        TGraticule ->
+            JE.object [ ( "type", JE.string "graticule" ) ]
+
+        TLinkpath ->
+            JE.object [ ( "type", JE.string "linkpath" ) ]
+
+        TPie ->
+            JE.object [ ( "type", JE.string "pie" ) ]
+
+        TStack sps ->
+            JE.object (( "type", JE.string "stack" ) :: List.map stackProperty sps)
+
+        TForce ->
+            JE.object [ ( "type", JE.string "force" ) ]
+
+        TVoronoi ->
+            JE.object [ ( "type", JE.string "voronoi" ) ]
+
+        TWordCloud ->
+            JE.object [ ( "type", JE.string "wordcloud" ) ]
+
+        TNest ->
+            JE.object [ ( "type", JE.string "nest" ) ]
+
+        TStratify key parent ->
+            JE.object [ ( "type", JE.string "stratify" ), ( "key", fieldSpec key ), ( "parentKey", fieldSpec parent ) ]
+
+        TTreeLinks ->
+            JE.object [ ( "type", JE.string "treelinks" ) ]
+
+        TPack pps ->
+            JE.object (( "type", JE.string "pack" ) :: List.map packProperty pps)
+
+        TPartition ->
+            JE.object [ ( "type", JE.string "partition" ) ]
+
+        TTree ->
+            JE.object [ ( "type", JE.string "tree" ) ]
+
+        TTreeMap ->
+            JE.object [ ( "type", JE.string "treemap" ) ]
+
+        TCrossFilter ->
+            JE.object [ ( "type", JE.string "crossfilter" ) ]
+
+        TResolveFilter ->
+            JE.object [ ( "type", JE.string "resolvefilter" ) ]
 
 
 transpose : List (List a) -> List (List a)
@@ -1953,6 +2528,26 @@ transpose ll =
                     List.filterMap List.tail xss
             in
             (x :: heads) :: transpose (xs :: tails)
+
+
+triggerProperties : TriggerProperty -> List LabelledSpec
+triggerProperties trans =
+    case trans of
+        TrTrigger expr ->
+            [ ( "trigger", JE.string expr ) ]
+
+        TrInsert expr ->
+            [ ( "insert", JE.string expr ) ]
+
+        TrRemove expr ->
+            [ ( "remove", JE.string expr ) ]
+
+        TrToggle expr ->
+            [ ( "toggle", JE.string expr ) ]
+
+        -- Note the one-to-many relation between this trigger property and the labelled specs it generates.
+        TrModifyValues modExpr valExpr ->
+            [ ( "modify", JE.string modExpr ), ( "values", JE.string valExpr ) ]
 
 
 valueProperty : Value -> LabelledSpec
