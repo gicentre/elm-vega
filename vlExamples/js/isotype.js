@@ -12647,7 +12647,7 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Isotype$mySpecs = _elm_lang$core$Json_Encode$object(
+var _gicentre$elm_vega$Isotype$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'vis1', _1: _gicentre$elm_vega$Isotype$personGrid},

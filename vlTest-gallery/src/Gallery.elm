@@ -1,6 +1,5 @@
 port module Gallery exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -1653,7 +1652,7 @@ interactive9 =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "basic1", basic1 )
         , ( "basic2", basic2 )
         , ( "basic3", basic3 )

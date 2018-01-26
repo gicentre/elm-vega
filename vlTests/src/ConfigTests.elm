@@ -1,6 +1,5 @@
 port module ConfigTests exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -111,7 +110,7 @@ paddingCfg =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "default", defaultCfg )
         , ( "dark", darkCfg )
         , ( "mark1", markCfg1 )

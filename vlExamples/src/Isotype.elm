@@ -1,7 +1,6 @@
 port module Isotype exposing (elmToJS)
 
 import Dict exposing (Dict)
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -142,7 +141,7 @@ livestock =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "vis1", personGrid )
         , ( "vis2", livestock )
         ]

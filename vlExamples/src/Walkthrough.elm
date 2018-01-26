@@ -1,6 +1,5 @@
 port module Walkthrough exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -570,7 +569,7 @@ crossFilter =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "singleView1", stripPlot )
         , ( "singleView2", histogram )
         , ( "singleView3", stackedHistogram )

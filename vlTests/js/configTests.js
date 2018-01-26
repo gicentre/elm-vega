@@ -12707,7 +12707,7 @@ var _gicentre$elm_vega$ConfigTests$paddingCfg = _gicentre$elm_vega$ConfigTests$s
 					A4(_gicentre$elm_vega$VegaLite$PEdges, 90, 60, 30, 0)),
 				_p8));
 	});
-var _gicentre$elm_vega$ConfigTests$mySpecs = _elm_lang$core$Json_Encode$object(
+var _gicentre$elm_vega$ConfigTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'default', _1: _gicentre$elm_vega$ConfigTests$defaultCfg},
