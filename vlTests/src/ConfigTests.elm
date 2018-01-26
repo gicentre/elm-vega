@@ -99,7 +99,7 @@ markCfg2 =
 paddingCfg : Spec
 paddingCfg =
     configure
-        --<< configuration (Autosize [ AFit ])  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
+        << configuration (Autosize [ AFit ])
         << configuration (Padding (PEdges 90 60 30 0))
         |> singleVis
 

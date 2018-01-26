@@ -620,7 +620,7 @@ for details.
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
-      --| Autosize (List Autosize)  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
+    | Autosize (List Autosize)
     | Axis (List AxisConfig)
     | AxisX (List AxisConfig)
     | AxisY (List AxisConfig)
@@ -3048,11 +3048,9 @@ channelLabel ch =
 configProperty : ConfigurationProperty -> LabelledSpec
 configProperty configProp =
     case configProp of
-        -- TODO: Wait for Vega bug #1103 : https://github.com/vega/vega/issues/1103
-        -- to be fixed before enabling Autosize within Config. Workaround is simply
-        -- to place the same call using autosize outside of config.
-        -- Autosize aus ->
-        --     ( "autosize", JE.object (List.map autosizeProperty aus) )
+        Autosize aus ->
+            ( "autosize", JE.object (List.map autosizeProperty aus) )
+
         Background bg ->
             ( "background", JE.string bg )
 

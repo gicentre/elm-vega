@@ -8808,6 +8808,13 @@ var _gicentre$elm_vega$VegaLite$titleConfig = function (titleCfg) {
 var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 	var _p77 = configProp;
 	switch (_p77.ctor) {
+		case 'Autosize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'autosize',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$autosizeProperty, _p77._0))
+			};
 		case 'Background':
 			return {
 				ctor: '_Tuple2',
@@ -10660,6 +10667,9 @@ var _gicentre$elm_vega$VegaLite$AxisX = function (a) {
 };
 var _gicentre$elm_vega$VegaLite$Axis = function (a) {
 	return {ctor: 'Axis', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$Autosize = function (a) {
+	return {ctor: 'Autosize', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$AreaStyle = function (a) {
 	return {ctor: 'AreaStyle', _0: a};
@@ -12703,9 +12713,17 @@ var _gicentre$elm_vega$ConfigTests$paddingCfg = _gicentre$elm_vega$ConfigTests$s
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
-				_gicentre$elm_vega$VegaLite$Padding(
-					A4(_gicentre$elm_vega$VegaLite$PEdges, 90, 60, 30, 0)),
-				_p8));
+				_gicentre$elm_vega$VegaLite$Autosize(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$AFit,
+						_1: {ctor: '[]'}
+					}),
+				A2(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$Padding(
+						A4(_gicentre$elm_vega$VegaLite$PEdges, 90, 60, 30, 0)),
+					_p8)));
 	});
 var _gicentre$elm_vega$ConfigTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
