@@ -166,6 +166,7 @@ data fields or geospatial coordinates before they are encoded visually.
 @docs transform
 @docs projection
 @docs ProjectionProperty
+@docs Projection
 @docs ClipRect
 
 
@@ -1242,11 +1243,20 @@ paris into planar (x,y) coordinates for rendering and query. For details see the
 -}
 type ProjectionProperty
     = PType Projection
-    | ClipAngle (Maybe Float)
-    | ClipExtent ClipRect
-    | Center Float Float
-    | Rotate Float Float Float
-    | Precision Float
+    | PClipAngle (Maybe Float)
+    | PClipExtent ClipRect
+    | PCenter Float Float
+    | PRotate Float Float Float
+    | PPrecision Float
+    | PCoefficient Float
+    | PDistance Float
+    | PFraction Float
+    | PLobes Int
+    | PParallel Float
+    | PRadius Float
+    | PRatio Float
+    | PSpacing Float
+    | PTilt Float
 
 
 {-| Top-level Vega-Lite properties. These are the ones that define the core of the
@@ -4337,7 +4347,7 @@ projectionProperty pp =
         PType proj ->
             ( "type", JE.string (projectionLabel proj) )
 
-        ClipAngle numOrNull ->
+        PClipAngle numOrNull ->
             case numOrNull of
                 Just x ->
                     ( "clipAngle", JE.float x )
@@ -4345,7 +4355,7 @@ projectionProperty pp =
                 Nothing ->
                     ( "clipAngle", JE.null )
 
-        ClipExtent rClip ->
+        PClipExtent rClip ->
             case rClip of
                 NoClip ->
                     ( "clipExtent", JE.null )
@@ -4353,14 +4363,41 @@ projectionProperty pp =
                 LTRB l t r b ->
                     ( "clipExtent", JE.list (List.map JE.float [ l, t, r, b ]) )
 
-        Center lon lat ->
+        PCenter lon lat ->
             ( "center", JE.list [ JE.float lon, JE.float lat ] )
 
-        Rotate lambda phi gamma ->
+        PRotate lambda phi gamma ->
             ( "rotate", JE.list (List.map JE.float [ lambda, phi, gamma ]) )
 
-        Precision pr ->
+        PPrecision pr ->
             ( "precision", JE.float pr )
+
+        PCoefficient x ->
+            ( "coefficient", JE.float x )
+
+        PDistance x ->
+            ( "distance", JE.float x )
+
+        PFraction x ->
+            ( "fraction", JE.float x )
+
+        PLobes n ->
+            ( "lobes", JE.int n )
+
+        PParallel x ->
+            ( "parallel", JE.float x )
+
+        PRadius x ->
+            ( "radius", JE.float x )
+
+        PRatio x ->
+            ( "ratio", JE.float x )
+
+        PSpacing x ->
+            ( "spacing", JE.float x )
+
+        PTilt x ->
+            ( "tilt", JE.float x )
 
 
 positionChannelProperty : PositionChannel -> LabelledSpec

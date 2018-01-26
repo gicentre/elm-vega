@@ -6,6 +6,13 @@ import Json.Encode
 import VegaLite exposing (..)
 
 
+{- Some relevant data sources:
+
+   https://github.com/deldersveld/topojson
+   https://github.com/topojson/world-atlas.
+-}
+
+
 choropleth1 : Spec
 choropleth1 =
     let
@@ -31,6 +38,28 @@ choropleth1 =
         ]
 
 
+world1 : Spec
+world1 =
+    let
+        enc =
+            encoding
+                << color [ MString "#000" ]
+                << opacity [ MNumber 0.5 ]
+
+        -- proj =
+        --     projection [ PType AlbersUsa ]
+    in
+    toVegaLite
+        [ width 500
+        , height 300
+
+        --, proj
+        , dataFromUrl "data/worldCountries.json" [ TopojsonFeature "countries1" ]
+        , mark Geoshape []
+        , enc []
+        ]
+
+
 
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
@@ -39,6 +68,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "geo1", choropleth1 )
+        , ( "world1", world1 )
         ]
 
 
