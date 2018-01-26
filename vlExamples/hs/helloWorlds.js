@@ -12145,96 +12145,19 @@ var _gicentre$elm_vega$VegaLite$ViewWidth = function (a) {
 	return {ctor: 'ViewWidth', _0: a};
 };
 
-var _gicentre$elm_vega$Isotype$toRows = F2(
-	function (country, animalFreqs) {
-		var toRow = F2(
-			function (animal, n) {
-				return _gicentre$elm_vega$VegaLite$dataRow(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'country',
-							_1: _gicentre$elm_vega$VegaLite$Str(country)
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'animal',
-								_1: _gicentre$elm_vega$VegaLite$Str(animal)
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: 'col',
-									_1: _gicentre$elm_vega$VegaLite$Number(
-										_elm_lang$core$Basics$toFloat(n))
-								},
-								_1: {ctor: '[]'}
-							}
-						}
-					});
-			});
-		var fToCol = function (_p0) {
-			var _p1 = _p0;
-			return A3(
-				_elm_lang$core$List$foldl,
-				function (n) {
-					return A2(toRow, _p1._0, n);
-				},
-				{ctor: '[]'},
-				A2(_elm_lang$core$List$range, 1, _p1._1));
-		};
-		return F2(
-			function (x, y) {
-				return A2(_elm_lang$core$Basics_ops['++'], x, y);
-			})(
-			A2(_elm_lang$core$List$concatMap, fToCol, animalFreqs));
-	});
-var _gicentre$elm_vega$Isotype$isotypes = function () {
-	var person = 'M1.7 -1.7h-0.8c0.3 -0.2 0.6 -0.5 0.6 -0.9c0 -0.6 -0.4 -1 -1 -1c-0.6 0 -1 0.4 -1 1c0 0.4 0.2 0.7 0.6 0.9h-0.8c-0.4 0 -0.7 0.3 -0.7 0.6v1.9c0 0.3 0.3 0.6 0.6 0.6h0.2c0 0 0 0.1 0 0.1v1.9c0 0.3 0.2 0.6 0.3 0.6h1.3c0.2 0 0.3 -0.3 0.3 -0.6v-1.8c0 0 0 -0.1 0 -0.1h0.2c0.3 0 0.6 -0.3 0.6 -0.6v-2c0.2 -0.3 -0.1 -0.6 -0.4 -0.6z';
-	var sheep = 'M-4.1 -0.5c0.2 0 0.2 0.2 0.5 0.2c0.3 0 0.3 -0.2 0.5 -0.2c0.2 0 0.2 0.2 0.4 0.2c0.2 0 0.2 -0.2 0.5 -0.2c0.2 0 0.2 0.2 0.4 0.2c0.2 0 0.2 -0.2 0.4 -0.2c0.1 0 0.2 0.2 0.4 0.1c0.2 0 0.2 -0.2 0.4 -0.3c0.1 0 0.1 -0.1 0.4 0c0.3 0 0.3 -0.4 0.6 -0.4c0.3 0 0.6 -0.3 0.7 -0.2c0.1 0.1 1.4 1 1.3 1.4c-0.1 0.4 -0.3 0.3 -0.4 0.3c-0.1 0 -0.5 -0.4 -0.7 -0.2c-0.3 0.2 -0.1 0.4 -0.2 0.6c-0.1 0.1 -0.2 0.2 -0.3 0.4c0 0.2 0.1 0.3 0 0.5c-0.1 0.2 -0.3 0.2 -0.3 0.5c0 0.3 -0.2 0.3 -0.3 0.6c-0.1 0.2 0 0.3 -0.1 0.5c-0.1 0.2 -0.1 0.2 -0.2 0.3c-0.1 0.1 0.3 1.1 0.3 1.1l-0.3 0c0 0 -0.3 -0.9 -0.3 -1c0 -0.1 -0.1 -0.2 -0.3 -0.2c-0.2 0 -0.3 0.1 -0.4 0.4c0 0.3 -0.2 0.8 -0.2 0.8l-0.3 0l0.3 -1c0 0 0.1 -0.6 -0.2 -0.5c-0.3 0.1 -0.2 -0.1 -0.4 -0.1c-0.2 -0.1 -0.3 0.1 -0.4 0c-0.2 -0.1 -0.3 0.1 -0.5 0c-0.2 -0.1 -0.1 0 -0.3 0.3c-0.2 0.3 -0.4 0.3 -0.4 0.3l0.2 1.1l-0.3 0l-0.2 -1.1c0 0 -0.4 -0.6 -0.5 -0.4c-0.1 0.3 -0.1 0.4 -0.3 0.4c-0.1 -0.1 -0.2 1.1 -0.2 1.1l-0.3 0l0.2 -1.1c0 0 -0.3 -0.1 -0.3 -0.5c0 -0.3 0.1 -0.5 0.1 -0.7c0.1 -0.2 -0.1 -1 -0.2 -1.1c-0.1 -0.2 -0.2 -0.8 -0.2 -0.8c0 0 -0.1 -0.5 0.4 -0.8z';
-	var pig = 'M1.2 -2c0 0 0.7 0 1.2 0.5c0.5 0.5 0.4 0.6 0.5 0.6c0.1 0 0.7 0 0.8 0.1c0.1 0 0.2 0.2 0.2 0.2c0 0 -0.6 0.2 -0.6 0.3c0 0.1 0.4 0.9 0.6 0.9c0.1 0 0.6 0 0.6 0.1c0 0.1 0 0.7 -0.1 0.7c-0.1 0 -1.2 0.4 -1.5 0.5c-0.3 0.1 -1.1 0.5 -1.1 0.7c-0.1 0.2 0.4 1.2 0.4 1.2l-0.4 0c0 0 -0.4 -0.8 -0.4 -0.9c0 -0.1 -0.1 -0.3 -0.1 -0.3l-0.2 0l-0.5 1.3l-0.4 0c0 0 -0.1 -0.4 0 -0.6c0.1 -0.1 0.3 -0.6 0.3 -0.7c0 0 -0.8 0 -1.5 -0.1c-0.7 -0.1 -1.2 -0.3 -1.2 -0.2c0 0.1 -0.4 0.6 -0.5 0.6c0 0 0.3 0.9 0.3 0.9l-0.4 0c0 0 -0.4 -0.5 -0.4 -0.6c0 -0.1 -0.2 -0.6 -0.2 -0.5c0 0 -0.4 0.4 -0.6 0.4c-0.2 0.1 -0.4 0.1 -0.4 0.1c0 0 -0.1 0.6 -0.1 0.6l-0.5 0l0 -1c0 0 0.5 -0.4 0.5 -0.5c0 -0.1 -0.7 -1.2 -0.6 -1.4c0.1 -0.1 0.1 -1.1 0.1 -1.1c0 0 -0.2 0.1 -0.2 0.1c0 0 0 0.9 0 1c0 0.1 -0.2 0.3 -0.3 0.3c-0.1 0 0 -0.5 0 -0.9c0 -0.4 0 -0.4 0.2 -0.6c0.2 -0.2 0.6 -0.3 0.8 -0.8c0.3 -0.5 1 -0.6 1 -0.6z';
-	var cow = 'M4 -2c0 0 0.9 -0.7 1.1 -0.8c0.1 -0.1 -0.1 0.5 -0.3 0.7c-0.2 0.2 1.1 1.1 1.1 1.2c0 0.2 -0.2 0.8 -0.4 0.7c-0.1 0 -0.8 -0.3 -1.3 -0.2c-0.5 0.1 -1.3 1.6 -1.5 2c-0.3 0.4 -0.6 0.4 -0.6 0.4c0 0.1 0.3 1.7 0.4 1.8c0.1 0.1 -0.4 0.1 -0.5 0c0 0 -0.6 -1.9 -0.6 -1.9c-0.1 0 -0.3 -0.1 -0.3 -0.1c0 0.1 -0.5 1.4 -0.4 1.6c0.1 0.2 0.1 0.3 0.1 0.3c0 0 -0.4 0 -0.4 0c0 0 -0.2 -0.1 -0.1 -0.3c0 -0.2 0.3 -1.7 0.3 -1.7c0 0 -2.8 -0.9 -2.9 -0.8c-0.2 0.1 -0.4 0.6 -0.4 1c0 0.4 0.5 1.9 0.5 1.9l-0.5 0l-0.6 -2l0 -0.6c0 0 -1 0.8 -1 1c0 0.2 -0.2 1.3 -0.2 1.3c0 0 0.3 0.3 0.2 0.3c0 0 -0.5 0 -0.5 0c0 0 -0.2 -0.2 -0.1 -0.4c0 -0.1 0.2 -1.6 0.2 -1.6c0 0 0.5 -0.4 0.5 -0.5c0 -0.1 0 -2.7 -0.2 -2.7c-0.1 0 -0.4 2 -0.4 2c0 0 0 0.2 -0.2 0.5c-0.1 0.4 -0.2 1.1 -0.2 1.1c0 0 -0.2 -0.1 -0.2 -0.2c0 -0.1 -0.1 -0.7 0 -0.7c0.1 -0.1 0.3 -0.8 0.4 -1.4c0 -0.6 0.2 -1.3 0.4 -1.5c0.1 -0.2 0.6 -0.4 0.6 -0.4z';
-	return _elm_lang$core$Dict$fromList(
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'cow', _1: cow},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'pig', _1: pig},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'sheep', _1: sheep},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'person', _1: person},
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$Isotype$personGrid = function () {
-	var enc = function (_p2) {
+var _gicentre$elm_vega$HelloWorlds$myOtherVis = function () {
+	var enc = function (_p0) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
 				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('col'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PAxis(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				},
 				A3(
@@ -12242,165 +12165,54 @@ var _gicentre$elm_vega$Isotype$personGrid = function () {
 					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('row'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
+							_0: _gicentre$elm_vega$VegaLite$PAggregate(_gicentre$elm_vega$VegaLite$Average),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PAxis(
-									{ctor: '[]'}),
+								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
-					A2(
-						_gicentre$elm_vega$VegaLite$shape,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MPath(
-								A2(
-									_elm_lang$core$Maybe$withDefault,
-									'circle',
-									A2(_elm_lang$core$Dict$get, 'person', _gicentre$elm_vega$Isotype$isotypes))),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$color,
-							{
-								ctor: '::',
-								_0: A3(
-									_gicentre$elm_vega$VegaLite$MCondition,
-									'highlight',
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MString('rgb(194,81,64)'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MString('rgb(167,165,156)'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$size,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MNumber(90),
-									_1: {ctor: '[]'}
-								},
-								_p2))))));
-	};
-	var sel = function (_p3) {
-		return _gicentre$elm_vega$VegaLite$selection(
-			A4(
-				_gicentre$elm_vega$VegaLite$select,
-				'highlight',
-				_gicentre$elm_vega$VegaLite$Interval,
-				{ctor: '[]'},
-				_p3));
-	};
-	var trans = function (_p4) {
-		return _gicentre$elm_vega$VegaLite$transform(
-			A3(
-				_gicentre$elm_vega$VegaLite$calculateAs,
-				'ceil (datum.id/10)',
-				'col',
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.id - datum.col*10', 'row', _p4)));
-	};
-	var data = function (_p5) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromColumns,
-			{ctor: '[]'},
-			A3(
-				_gicentre$elm_vega$VegaLite$dataColumn,
-				'id',
-				_gicentre$elm_vega$VegaLite$Numbers(
-					A2(
-						_elm_lang$core$List$map,
-						_elm_lang$core$Basics$toFloat,
-						A2(_elm_lang$core$List$range, 1, 100))),
-				_p5));
-	};
-	var config = function (_p6) {
-		return _gicentre$elm_vega$VegaLite$configure(
-			A2(
-				_gicentre$elm_vega$VegaLite$configuration,
-				_gicentre$elm_vega$VegaLite$View(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
-						_1: {ctor: '[]'}
-					}),
-				_p6));
+					_p0)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: config(
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/cars.json',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$width(400),
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Bar,
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$height(400),
-					_1: {
-						ctor: '::',
-						_0: data(
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: trans(
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_gicentre$elm_vega$VegaLite$mark,
-									_gicentre$elm_vega$VegaLite$Point,
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MFilled(true),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: enc(
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: sel(
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					}
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
 				}
 			}
 		});
 }();
-var _gicentre$elm_vega$Isotype$livestock = function () {
-	var enc = function (_p7) {
+var _gicentre$elm_vega$HelloWorlds$mySecondVis = function () {
+	var enc = function (_p1) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
 				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('col'),
+					_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PAxis(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				},
 				A3(
@@ -12408,278 +12220,128 @@ var _gicentre$elm_vega$Isotype$livestock = function () {
 					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('animal'),
+						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PAxis(
-									{ctor: '[]'}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$row,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$FName('country'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$FmType(_gicentre$elm_vega$VegaLite$Nominal),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$FHeader(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$HTitle(''),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$shape,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MName('animal'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MScale(
-											_gicentre$elm_vega$VegaLite$categoricalDomainMap(
-												{
-													ctor: '::',
-													_0: {
-														ctor: '_Tuple2',
-														_0: 'person',
-														_1: A2(
-															_elm_lang$core$Maybe$withDefault,
-															'circle',
-															A2(_elm_lang$core$Dict$get, 'person', _gicentre$elm_vega$Isotype$isotypes))
-													},
-													_1: {
-														ctor: '::',
-														_0: {
-															ctor: '_Tuple2',
-															_0: 'cattle',
-															_1: A2(
-																_elm_lang$core$Maybe$withDefault,
-																'circle',
-																A2(_elm_lang$core$Dict$get, 'cow', _gicentre$elm_vega$Isotype$isotypes))
-														},
-														_1: {
-															ctor: '::',
-															_0: {
-																ctor: '_Tuple2',
-																_0: 'pigs',
-																_1: A2(
-																	_elm_lang$core$Maybe$withDefault,
-																	'circle',
-																	A2(_elm_lang$core$Dict$get, 'pig', _gicentre$elm_vega$Isotype$isotypes))
-															},
-															_1: {
-																ctor: '::',
-																_0: {
-																	ctor: '_Tuple2',
-																	_0: 'sheep',
-																	_1: A2(
-																		_elm_lang$core$Maybe$withDefault,
-																		'circle',
-																		A2(_elm_lang$core$Dict$get, 'sheep', _gicentre$elm_vega$Isotype$isotypes))
-																},
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												})),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$MLegend(
-												{ctor: '[]'}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$color,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MName('animal'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$MLegend(
-												{ctor: '[]'}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$VegaLite$MScale(
-													_gicentre$elm_vega$VegaLite$categoricalDomainMap(
-														{
-															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'person', _1: 'rgb(162,160,152)'},
-															_1: {
-																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'cattle', _1: 'rgb(194,81,64)'},
-																_1: {
-																	ctor: '::',
-																	_0: {ctor: '_Tuple2', _0: 'pigs', _1: 'rgb(93,93,93)'},
-																	_1: {
-																		ctor: '::',
-																		_0: {ctor: '_Tuple2', _0: 'sheep', _1: 'rgb(91,131,149)'},
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														})),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								},
-								A2(
-									_gicentre$elm_vega$VegaLite$opacity,
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MNumber(1),
-										_1: {ctor: '[]'}
-									},
-									A2(
-										_gicentre$elm_vega$VegaLite$size,
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$MNumber(200),
-											_1: {ctor: '[]'}
-										},
-										_p7))))))));
-	};
-	var data = function (_p8) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromRows,
-			{ctor: '[]'},
-			A3(
-				_gicentre$elm_vega$Isotype$toRows,
-				'Great Britain',
-				{
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'cattle', _1: 3},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'pigs', _1: 2},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'sheep', _1: 10},
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Isotype$toRows,
-					'United States',
-					{
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'pigs', _1: 6},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'sheep', _1: 7},
-								_1: {ctor: '[]'}
-							}
-						}
 					},
-					_p8)));
-	};
-	var config = function (_p9) {
-		return _gicentre$elm_vega$VegaLite$configure(
-			A2(
-				_gicentre$elm_vega$VegaLite$configuration,
-				_gicentre$elm_vega$VegaLite$View(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
-						_1: {ctor: '[]'}
-					}),
-				_p9));
+					_p1)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: config(
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/cars.json',
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$width(800),
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$height(200),
-					_1: {
-						ctor: '::',
-						_0: data(
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_gicentre$elm_vega$VegaLite$mark,
-								_gicentre$elm_vega$VegaLite$Point,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MFilled(true),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: enc(
-									{ctor: '[]'}),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
 				}
 			}
 		});
 }();
-var _gicentre$elm_vega$Isotype$mySpecs = _elm_lang$core$Json_Encode$object(
+var _gicentre$elm_vega$HelloWorlds$myFirstVis = _gicentre$elm_vega$VegaLite$toVegaLite(
 	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'vis1', _1: _gicentre$elm_vega$Isotype$personGrid},
+		_0: _gicentre$elm_vega$VegaLite$title('Hello, World!'),
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'vis2', _1: _gicentre$elm_vega$Isotype$livestock},
-			_1: {ctor: '[]'}
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromColumns,
+				{ctor: '[]'},
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'x',
+					_gicentre$elm_vega$VegaLite$Numbers(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 30,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Circle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$encoding(
+						A3(
+							_gicentre$elm_vega$VegaLite$position,
+							_gicentre$elm_vega$VegaLite$X,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PName('x'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'})),
+					_1: {ctor: '[]'}
+				}
+			}
 		}
 	});
-var _gicentre$elm_vega$Isotype$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+var _gicentre$elm_vega$HelloWorlds$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'vis1', _1: _gicentre$elm_vega$HelloWorlds$myFirstVis},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'vis2', _1: _gicentre$elm_vega$HelloWorlds$mySecondVis},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'vis3', _1: _gicentre$elm_vega$HelloWorlds$myOtherVis},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _gicentre$elm_vega$HelloWorlds$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$Isotype$main = _elm_lang$core$Platform$program(
+var _gicentre$elm_vega$HelloWorlds$main = _elm_lang$core$Platform$program(
 	{
 		init: {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Isotype$mySpecs,
-			_1: _gicentre$elm_vega$Isotype$elmToJS(_gicentre$elm_vega$Isotype$mySpecs)
+			_0: _gicentre$elm_vega$HelloWorlds$mySpecs,
+			_1: _gicentre$elm_vega$HelloWorlds$elmToJS(_gicentre$elm_vega$HelloWorlds$mySpecs)
 		},
 		update: F2(
-			function (_p10, model) {
+			function (_p2, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
 
 var Elm = {};
-Elm['Isotype'] = Elm['Isotype'] || {};
-if (typeof _gicentre$elm_vega$Isotype$main !== 'undefined') {
-    _gicentre$elm_vega$Isotype$main(Elm['Isotype'], 'Isotype', undefined);
+Elm['HelloWorlds'] = Elm['HelloWorlds'] || {};
+if (typeof _gicentre$elm_vega$HelloWorlds$main !== 'undefined') {
+    _gicentre$elm_vega$HelloWorlds$main(Elm['HelloWorlds'], 'HelloWorlds', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

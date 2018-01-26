@@ -61,7 +61,6 @@ Here is an example containing three visualizations:
 ```elm
 port module HelloWorlds exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -115,7 +114,7 @@ myOtherVis =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "vis1", myFirstVis )
         , ( "vis2", mySecondVis )
         , ( "vis3", myOtherVis )
@@ -143,8 +142,7 @@ port elmToJS : Spec -> Cmd msg
 The boilerplate code is the same as previously but here using the name `mySpecs` to refer to the collection of named vega-lite specifications.
 
 In this example, the main body of code comprises three functions (`myFirstVis`, `mySecondVis` and `myOtherVis`) each detailing a separate Vega-Lite specification.
-These are then combined into a single JSON object in the function `mySpecs` pairing each spec with an ID we can refer to in the HTML `<div>` containers.
-To ensure the JSON encoding works, you must also `import Json.Encode` at the top of the file.
+These are then combined (with `combineSpecs`) into a single JSON object in the function `mySpecs` pairing each spec with an ID we can refer to in the HTML `<div>` containers.
 
 ## 3. Compile the Elm-Vega into JavaScript
 

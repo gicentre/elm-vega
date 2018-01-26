@@ -1,6 +1,5 @@
 port module HelloWorlds exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -54,7 +53,7 @@ myOtherVis =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "vis1", myFirstVis )
         , ( "vis2", mySecondVis )
         , ( "vis3", myOtherVis )

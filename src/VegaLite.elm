@@ -80,6 +80,7 @@ module VegaLite
         , categoricalDomainMap
         , color
         , column
+        , combineSpecs
         , configuration
         , configure
         , dataColumn
@@ -135,6 +136,7 @@ port to some JavaScript that invokes the Vega-Lite runtime.
 @docs toVegaLite
 @docs VLProperty
 @docs Spec
+@docs combineSpecs
 
 
 # Creating the Data Specification
@@ -1781,6 +1783,21 @@ chaining encodings using functional composition
 column : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 column fFields =
     (::) ( "column", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Combines a list of labelled specifications into a single specification that
+may be passed to JavaScript for rendering.
+
+    combineSpecs
+        [ ( "vis1", myFirstVis )
+        , ( "vis2", mySecondVis )
+        , ( "vis3", myOtherVis )
+        ]
+
+-}
+combineSpecs : List LabelledSpec -> Spec
+combineSpecs specs =
+    JE.object specs
 
 
 {-| Defines a single configuration option to be applied globally across the visualization.

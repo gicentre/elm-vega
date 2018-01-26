@@ -9468,6 +9468,9 @@ var _gicentre$elm_vega$VegaLite$configuration = function (cfg) {
 		})(
 		_gicentre$elm_vega$VegaLite$configProperty(cfg));
 };
+var _gicentre$elm_vega$VegaLite$combineSpecs = function (specs) {
+	return _elm_lang$core$Json_Encode$object(specs);
+};
 var _gicentre$elm_vega$VegaLite$calculateAs = F2(
 	function (expr, label) {
 		return F2(
