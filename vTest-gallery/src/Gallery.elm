@@ -173,6 +173,102 @@ barChart2 =
         [ width 400, height 200, padding (PSize 5), ds, sc [], ax [], mk [] ]
 
 
+barChart3 : Spec
+barChart3 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "category" (Strings [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
+                << dataColumn "position" (Numbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
+                << dataColumn "value" (Numbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        sc =
+            scales
+                << scale "yscale"
+                    [ SType ScBand
+                    , SDomain (DData [ DDataset "table", DField "category" ])
+                    , SRange (RDefault RHeight)
+                    , SPadding 0.2
+                    ]
+                << scale "xscale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "table", DField "value" ])
+                    , SRange (RDefault RWidth)
+                    , SRound True
+                    , SZero True
+                    , SNice (IsNice True)
+                    ]
+                << scale "color"
+                    [ SType ScOrdinal
+                    , SDomain (DData [ DDataset "table", DField "position" ])
+                    , SRange (RScheme "category20" [])
+                    ]
+
+        ax =
+            axes
+                << axis "yscale" Left [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
+                << axis "xscale" Bottom []
+
+        mk =
+            marks
+                << mark Group
+                    [ MFrom
+                        (SFacet
+                            [ FaData "table"
+                            , FaName "facet"
+                            , FaGroupBy [ "category" ]
+                            ]
+                        )
+                    , MEncode
+                        [ Enter
+                            [ MY [ VScale (FName "yscale"), VField (FName "category") ] ]
+                        ]
+
+                    -- TODO: Add signals and other group specific contents
+                    --, MSignals []
+                    ]
+
+        -- << mark Rect
+        --     [ MFrom (SData "table")
+        --     , MEncode
+        --         [ Enter
+        --             [ MX [ VScale (FName "xscale"), VField (FName "category") ]
+        --             , MWidth [ VScale (FName "xscale"), VBand 1 ]
+        --             , MY [ VScale (FName "yscale"), VField (FName "amount") ]
+        --             , MY2 [ VScale (FName "yscale"), VNumber 0 ]
+        --             ]
+        --         , Update [ MFill [ VString "steelblue" ] ]
+        --         , Hover [ MFill [ VString "red" ] ]
+        --         ]
+        --     ]
+        -- << mark Text
+        --     [ MEncode
+        --         [ Enter
+        --             [ MAlign [ VString "center" ]
+        --             , MBaseline [ VString "bottom" ]
+        --             , MFill [ VString "#333" ]
+        --             ]
+        --         , Update
+        --             [ MX [ VScale (FName "xscale"), VSignal (SName "tooltip.category"), VBand 0.5 ]
+        --             , MY [ VScale (FName "yscale"), VSignal (SName "tooltip.amount"), VOffset (VNumber -2) ]
+        --             , MText [ VSignal (SName "tooltip.amount") ]
+        --             , MFillOpacity [ VIfElse "datum === tooltip" [ VNumber 0 ] [ VNumber 1 ] ]
+        --             ]
+        --         ]
+        --     ]
+    in
+    toVega
+        [ width 300, height 240, padding (PSize 5), ds, sc [], ax [], mk [] ]
+
+
+
+-- -----------------------------------------------------------------------------
+-- Transform examples
+
+
 packExample : Spec
 packExample =
     let
@@ -336,6 +432,7 @@ mySpecs =
     Json.Encode.object
         [ ( "barChart1", barChart1 )
         , ( "barChart2", barChart2 )
+        , ( "barChart3", barChart3 )
         , ( "packExample", packExample )
         , ( "stackExample", stackExample )
         ]
@@ -368,7 +465,7 @@ view spec =
     div []
         [ div [ id "specSource" ] []
         , pre []
-            [ Html.text (Json.Encode.encode 2 stackExample) ]
+            [ Html.text (Json.Encode.encode 2 barChart3) ]
         ]
 
 

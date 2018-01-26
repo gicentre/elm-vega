@@ -512,17 +512,28 @@ details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#enc
 -}
 type
     MarkProperty
-    -- TODO: Add remaining properties including custom property
+    -- TODO: The commented out props below are from https://vega.github.io/vega/docs/marks/group; should they be combined with more general properties
     = MX (List Value)
     | MY (List Value)
     | MX2 (List Value)
     | MY2 (List Value)
+      -- TODO: | MXC (List Value)
     | MWidth (List Value)
     | MHeight (List Value)
+      -- TODO: | MOpacity (List Value)
     | MFill (List Value)
     | MFillOpacity (List Value)
     | MStroke (List Value)
+      -- TODO: | MStrokeOpacity (List Value)
     | MStrokeWidth (List Value)
+      -- TODO: | MStrokeCap (List Value)
+      -- TODO: | MStrokeDash (List Value)
+      -- TODO: | MStrokeDashOffset (List Value)
+      -- TODO: | MStrokeJoin (List Value)
+      -- TODO: | MStrokeMiterLimit (List Value)
+      -- TODO: | MCursor (List Value)
+      -- TODO: | MHRef (List Value)
+      -- TODO: | MTooltip (List Value)
     | MText (List Value)
     | MSize (List Value)
     | MAlign (List Value)
