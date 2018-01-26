@@ -970,6 +970,7 @@ type Mark
     = Area
     | Bar
     | Circle
+    | Geoshape
     | Line
     | Point
     | Rect
@@ -3817,6 +3818,9 @@ markLabel mark =
 
         Line ->
             "line"
+
+        Geoshape ->
+            "geoshape"
 
         Point ->
             "point"
