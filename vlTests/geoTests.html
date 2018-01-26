@@ -16,16 +16,22 @@
 <body>
   <h1>Elm-Vega Geoshape Tests</h1>
 
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
+
+  <h2>Output</h2>
+
   <figure class="cell"><div id="geo1"></div><figcaption>US choropleth</figcaption></figure>
   <div style="clear:left"></div>
 
 
 
   <script>
-    Elm.GeoTests.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+    Elm.GeoTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
       for (let name of Object.keys(namedSpecs)) {
         vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: true, logLevel:vega.Warn
+          actions: false,
+          logLevel: vega.Warn
         }).catch(console.warn);
       }
     });
