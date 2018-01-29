@@ -100,6 +100,7 @@ module VegaLite
         , hConcat
         , height
         , layer
+        , lookup
         , lookupAs
         , mark
         , name
@@ -199,6 +200,7 @@ data fields or geospatial coordinates before they are encoded visually.
 
 ## Relational Joining (lookup)
 
+@docs lookup
 @docs lookupAs
 
 
@@ -658,6 +660,7 @@ type ConfigurationProperty
     | NumberFormat String
     | Padding Padding
     | PointStyle (List MarkProperty)
+    | Projection (List ProjectionProperty)
     | Range (List RangeConfig)
     | RectStyle (List MarkProperty)
     | RemoveInvalid Bool
@@ -1214,13 +1217,10 @@ projections see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html#projection-types).
 Additional custom projections from d3 can be defined via the
 [Vega API](https://vega.github.io/vega/docs/projections/#register) and called from
-within Elm-Vega setting the projection to `Custom name`
+within Elm-Vega setting the projection to `Custom proj` where `proj` is the name
+of the D3 projection to use (e.g. `winkel3`).
 -}
-type
-    Projection
-    -- TODO: XXX Check to see if we can define raw projections or use others in D3 but not documented in VL (e.g NaturalEarth)
-    -- Consider adding others that have preset parameters from existing projections such as OSBG (Albers).
-    -- Can we define the ellipsoid (e.g. other than WGS84?)
+type Projection
     = Albers
     | AlbersUsa
     | AzimuthalEqualArea
@@ -2228,28 +2228,37 @@ layer specs =
     ( VLLayer, JE.list specs )
 
 
-{-| Perform a lookup between two data sources. This allows you to find values in
-one data source based on the the values in another (like a relational join). The
-first parameter is the field in the primary data source to act as key, the second
-is the secondary data source which can be specified with a call to `dataFromUrl`
-or other data generating functions. The third is the name of the field in the secondary
+{-| Perform a lookup of named fields between two data sources. This allows you to
+find values in one data source based on the the values in another (like a relational
+join). The first parameter is the field in the primary data source to act as key,
+the second is the secondary data source which can be specified with a call to `dataFromUrl`
+or other data generating function. The third is the name of the field in the secondary
 data source to match values with the primary key. The fourth parameter is the list
 of fields to be stored when the keys match. As with other transformation functions,
 the final implicit parameter is a list of any other transformations to which this
-is to be added. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
+is to be added.
+
+Unlike `lookupAs`, this function will only return the specific fields named in the
+fourth parameter. If you wisth to return the entire set of fields in the secondary
+data source as a single object, use `lookupAs`.
+
+See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
 for further details.
+
+The following would return the values in the `age` and `height` fields from
+`lookup_people.csv` for all rows where the value in the `name` column in the that
+file matches the value of `person` in the primary data source.
 
     data =
         dataFromUrl "data/lookup_groups.csv" []
 
     trans =
         transform
-            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" [ "age", "height" ]
+            << lookup "person" (dataFromUrl "data/lookup_people.csv" []) "name" [ "age", "height" ]
 
 -}
-lookupAs : String -> ( VLProperty, Spec ) -> String -> List String -> List LabelledSpec -> List LabelledSpec
-lookupAs key1 ( vlProp, spec ) key2 fields =
+lookup : String -> ( VLProperty, Spec ) -> String -> List String -> List LabelledSpec -> List LabelledSpec
+lookup key1 ( vlProp, spec ) key2 fields =
     (::)
         ( "lookup"
         , JE.list
@@ -2257,6 +2266,49 @@ lookupAs key1 ( vlProp, spec ) key2 fields =
             , spec
             , JE.string key2
             , JE.list (List.map JE.string fields)
+            ]
+        )
+
+
+{-| Perform an object lookup between two data sources. This allows you to find
+values in one data source based on the the values in another (like a relational
+join). The first parameter is the field in the primary data source to act as key,
+the second is the secondary data source which can be specified with a call to
+`dataFromUrl` or other data generating function. The third is the name of the field
+in the secondary data source to match values with the primary key. The fourth
+parameter is the name to be given to the object storing matched values. As with
+other transformation functions, the final implicit parameter is a list of any other
+transformations to which this is to be added.
+
+Unlike `lookup`, this function returns the entire set of field values from the
+secondary data source when keys match. Those fields are stored as an object with
+the name provided in the fourth parameter.
+
+See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
+for further details.
+
+In the following example, `personDetails` would reference all the field values in
+`lookup_people.csv` for each row where the value in the `name` column in the that
+file matches the value of `person` in the primary data source.
+
+    data =
+        dataFromUrl "data/lookup_groups.csv" []
+
+    trans =
+        transform
+            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" personDetails
+
+-}
+lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
+lookupAs key1 ( vlProp, spec ) key2 asName =
+    (::)
+        ( "lookupAs"
+        , JE.list
+            [ JE.string key1
+            , spec
+            , JE.string key2
+            , JE.string asName
             ]
         )
 
@@ -2735,6 +2787,18 @@ transform transforms =
                         _ ->
                             JE.null
 
+                "lookupAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ key1, dataSpec, key2, asName ] ->
+                            JE.object
+                                [ ( "lookup", key1 )
+                                , ( "from", JE.object [ ( "data", dataSpec ), ( "key", key2 ) ] )
+                                , ( "as", asName )
+                                ]
+
+                        _ ->
+                            JE.null
+
                 "timeUnit" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
                         Ok [ tu, field, label ] ->
@@ -3207,6 +3271,9 @@ configProperty configProp =
 
         MarkStyle mps ->
             ( "mark", JE.object (List.map markProperty mps) )
+
+        Projection pps ->
+            ( "projection", JE.object (List.map projectionProperty pps) )
 
         AreaStyle mps ->
             ( "area", JE.object (List.map markProperty mps) )
@@ -4302,22 +4369,22 @@ projectionLabel proj =
             "albers"
 
         AlbersUsa ->
-            "albersusa"
+            "albersUsa"
 
         AzimuthalEqualArea ->
-            "azimuthalequalarea"
+            "azimuthalEqualArea"
 
         AzimuthalEquidistant ->
-            "azimuthalequidistant"
+            "azimuthalEquidistant"
 
         ConicConformal ->
-            "conicconformal"
+            "conicConformal"
 
         ConicEqualArea ->
-            "conicequalarea"
+            "conicEqualarea"
 
         ConicEquidistant ->
-            "conicequidistant"
+            "conicEquidistant"
 
         Custom pName ->
             pName
@@ -4338,7 +4405,7 @@ projectionLabel proj =
             "stereographic"
 
         TransverseMercator ->
-            "transversemercator"
+            "transverseMercator"
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
