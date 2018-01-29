@@ -8,17 +8,18 @@ If you wish to follow along with their talk, timings are given by each section.
 
 _elm-vega_ is a wrapper for the [Vega-Lite visualization grammar](https://vega.github.io) which itself is based on Leland Wilkinson's [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447).
 The grammar provides an expressive way to define how data are represented graphically.
-The six key elements of the original grammar are:
+The seven key elements of the grammar as represented in elm-vega and Vega-Lite are:
 
 -   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
 -   **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
--   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar` and `Text`.
+-   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
+-   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar`,  `Text` and `GeoShape`.
 -   **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
 -   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
 -   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
 
 In common with other languages that build upon a grammar of graphics such as D3 and Vega, this grammar allows fine grain control of visualization design.
-But unlike those languages, Vega-Lite and elm-vega provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
+But unlike those languages, Vega-Lite and elm-vega provide practical default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
 
 ## A Single View specification (3:03)
 
