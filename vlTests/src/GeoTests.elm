@@ -13,6 +13,58 @@ import VegaLite exposing (..)
 -}
 
 
+defaultSize1 : Spec
+defaultSize1 =
+    toVegaLite
+        [ description "Default map size"
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , mark Geoshape []
+        , encoding <| color [ MString "black" ] []
+        ]
+
+
+defaultSize2 : Spec
+defaultSize2 =
+    toVegaLite
+        [ description "Default map size with view width and height specified in config."
+        , configure <| configuration (View [ ViewWidth 500, ViewHeight 300 ]) <| []
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , mark Geoshape []
+        , encoding <| color [ MString "black" ] []
+        ]
+
+
+mapComp1 : Spec
+mapComp1 =
+    let
+        rotatedSpec rot =
+            let
+                graticuleSpec =
+                    asSpec
+                        [ width 300
+                        , height 300
+                        , projection [ PType Orthographic, PRotate rot 0 0 ]
+                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
+                        ]
+
+                countrySpec =
+                    asSpec
+                        [ width 300
+                        , height 300
+                        , projection [ PType Orthographic, PRotate rot 0 0 ]
+                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
+                        , mark Geoshape [ MStroke "white", MFill "black", MStrokeWidth 0.5 ]
+                        ]
+            in
+            asSpec [ layer [ graticuleSpec, countrySpec ] ]
+    in
+    toVegaLite
+        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
+
+
 scribbleMap1 : Spec
 scribbleMap1 =
     let
@@ -92,7 +144,7 @@ scribbleMap2 =
 
 sourceExample : Spec
 sourceExample =
-    scribbleMap1
+    mapComp1
 
 
 
@@ -102,8 +154,12 @@ sourceExample =
 mySpecs : Spec
 mySpecs =
     combineSpecs
-        [ ( "scribbleMap1", scribbleMap1 )
-        , ( "scribbleMap2", scribbleMap2 )
+        [ ( "defaultSize1", defaultSize1 )
+        , ( "defaultSize2", defaultSize2 )
+        , ( "mapComp1", mapComp1 )
+
+        -- , ( "scribbleMap1", scribbleMap1 )
+        -- , ( "scribbleMap2", scribbleMap2 )
         ]
 
 

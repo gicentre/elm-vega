@@ -15306,7 +15306,164 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GeoTests$sourceExample = _gicentre$elm_vega$GeoTests$scribbleMap1;
+var _gicentre$elm_vega$GeoTests$mapComp1 = function () {
+	var rotatedSpec = function (rot) {
+		var countrySpec = _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$width(300),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$height(300),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$projection(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$Orthographic),
+								_1: {
+									ctor: '::',
+									_0: A3(_gicentre$elm_vega$VegaLite$PRotate, rot, 0, 0),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gicentre$elm_vega$VegaLite$dataFromUrl,
+								'data/world-110m.json',
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('countries1'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gicentre$elm_vega$VegaLite$mark,
+									_gicentre$elm_vega$VegaLite$Geoshape,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MStroke('white'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$MFill('black'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(0.5),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			});
+		var graticuleSpec = _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$width(300),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$height(300),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$projection(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$Orthographic),
+								_1: {
+									ctor: '::',
+									_0: A3(_gicentre$elm_vega$VegaLite$PRotate, rot, 0, 0),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gicentre$elm_vega$VegaLite$dataFromUrl,
+								'data/graticule.json',
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('graticule'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gicentre$elm_vega$VegaLite$mark,
+									_gicentre$elm_vega$VegaLite$Geoshape,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MFillOpacity(1.0e-2),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$MStroke('#411'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(0.1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			});
+		return _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$layer(
+					{
+						ctor: '::',
+						_0: graticuleSpec,
+						_1: {
+							ctor: '::',
+							_0: countrySpec,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$configure(
+				A2(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$View(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+							_1: {ctor: '[]'}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$hConcat(
+					{
+						ctor: '::',
+						_0: rotatedSpec(-65),
+						_1: {
+							ctor: '::',
+							_0: rotatedSpec(115),
+							_1: {
+								ctor: '::',
+								_0: rotatedSpec(-65),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$elm_vega$GeoTests$sourceExample = _gicentre$elm_vega$GeoTests$mapComp1;
 var _gicentre$elm_vega$GeoTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -15336,14 +15493,125 @@ var _gicentre$elm_vega$GeoTests$view = function (spec) {
 			}
 		});
 };
+var _gicentre$elm_vega$GeoTests$defaultSize2 = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$description('Default map size with view width and height specified in config.'),
+		_1: {
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$configure(
+				A2(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$View(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$ViewWidth(500),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$ViewHeight(300),
+								_1: {ctor: '[]'}
+							}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$projection(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$dataFromUrl,
+						'data/us-10m.json',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('counties'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Geoshape,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$encoding(
+								A2(
+									_gicentre$elm_vega$VegaLite$color,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MString('black'),
+										_1: {ctor: '[]'}
+									},
+									{ctor: '[]'})),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$GeoTests$defaultSize1 = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$description('Default map size'),
+		_1: {
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$projection(
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
+					'data/us-10m.json',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('counties'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Geoshape,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$encoding(
+							A2(
+								_gicentre$elm_vega$VegaLite$color,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MString('black'),
+									_1: {ctor: '[]'}
+								},
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	});
 var _gicentre$elm_vega$GeoTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
+		_0: {ctor: '_Tuple2', _0: 'defaultSize1', _1: _gicentre$elm_vega$GeoTests$defaultSize1},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
-			_1: {ctor: '[]'}
+			_0: {ctor: '_Tuple2', _0: 'defaultSize2', _1: _gicentre$elm_vega$GeoTests$defaultSize2},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'mapComp1', _1: _gicentre$elm_vega$GeoTests$mapComp1},
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _gicentre$elm_vega$GeoTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
