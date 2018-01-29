@@ -20,22 +20,13 @@
   <h2>Source</h2>
   <div id="elmContainer"></div>
 
-  <h2>Choropleths</h2>
-
-  <figure class="cell"><div id="choropleth1"></div><figcaption>US unemployment</figcaption></figure>
-  <figure class="cell"><div id="choropleth2"></div><figcaption>3 choropleths</figcaption></figure>
-  <div style="clear:left"></div>
 
   <h2>Zip Code  Maps</h2>
-  <figure class="cell"><div id="dotmap1"></div><figcaption>US zip codes</figcaption></figure>
-  <figure class="cell"><div id="linemap1"></div><figcaption>Zipcodes connected in numeric order</figcaption></figure>
-  <figure class="cell"><div id="linemap2"></div><figcaption>Connected zipcodes coloured by first three digits</figcaption></figure>
+
+  <figure class="cell"><div id="scribbleMap1"></div><figcaption>Zipcodes connected in numeric order</figcaption></figure>
+  <figure class="cell"><div id="scribbleMap2"></div><figcaption>Connected zipcodes coloured by first three digits</figcaption></figure>
   <div style="clear:left"></div>
 
-  <h2>Flight Maps</h2>
-
-  <figure class="cell"><div id="dotmap2"></div><figcaption>Airport locations</figcaption></figure>
-  <figure class="cell"><div id="linemap3"></div><figcaption>Direct flights to Seattle</figcaption></figure>
 
   <script>
     Elm.GeoTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {

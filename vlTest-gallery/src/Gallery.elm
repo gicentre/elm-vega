@@ -5,7 +5,7 @@ import VegaLite exposing (..)
 
 
 -- NOTE: All data sources in these examples originally provided at
--- https://vega.github.io/vega-datasets/
+-- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
 
 
@@ -1317,6 +1317,273 @@ comp3 =
         ]
 
 
+geo1 : Spec
+geo1 =
+    toVegaLite
+        [ description "Choropleth of US unemployment rate by county"
+        , width 500
+        , height 300
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
+        , mark Geoshape []
+        , encoding <| color [ MName "rate", MmType Quantitative ] []
+        ]
+
+
+geo2 : Spec
+geo2 =
+    let
+        enc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << size [ MNumber 1 ]
+                << color [ MName "digit", MmType Nominal ]
+    in
+    toVegaLite
+        [ description "US zip codes: One dot per zipcode colored by first digit"
+        , width 500
+        , height 300
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/zipcodes.csv" []
+        , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
+        , mark Circle []
+        , enc []
+        ]
+
+
+geo3 : Spec
+geo3 =
+    let
+        des =
+            description "One dot per airport in the US overlayed on geoshape"
+
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        overlayEnc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << size [ MNumber 5 ]
+                << color [ MString "steelblue" ]
+
+        overlaySpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , overlayEnc []
+                ]
+    in
+    toVegaLite
+        [ des, width 500, height 300, layer [ backdropSpec, overlaySpec ] ]
+
+
+geo4 : Spec
+geo4 =
+    let
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        airportsEnc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << size [ MNumber 5 ]
+                << color [ MString "gray" ]
+
+        airportsSpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , airportsEnc []
+                ]
+
+        trans =
+            transform
+                << filter (FEqual "origin" (Str "SEA"))
+                << lookup "origin" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+                << calculateAs "datum.latitude" "origin_latitude"
+                << calculateAs "datum.longitude" "origin_longitude"
+                << lookup "destination" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+                << calculateAs "datum.latitude" "dest_latitude"
+                << calculateAs "datum.longitude" "dest_longitude"
+
+        flightsEnc =
+            encoding
+                << position X [ PName "origin_longitude", PmType Longitude ]
+                << position Y [ PName "origin_latitude", PmType Latitude ]
+                << position X2 [ PName "dest_longitude", PmType Longitude ]
+                << position Y2 [ PName "dest_latitude", PmType Latitude ]
+
+        flightsSpec =
+            asSpec
+                [ dataFromUrl "data/flights-airport.csv" []
+                , trans []
+                , projection [ PType AlbersUsa ]
+                , mark Rule []
+                , flightsEnc []
+                ]
+    in
+    toVegaLite
+        [ description "Rules (line segments) connecting SEA to every airport reachable via direct flight"
+        , width 800
+        , height 500
+        , layer [ backdropSpec, airportsSpec, flightsSpec ]
+        ]
+
+
+geo5 : Spec
+geo5 =
+    let
+        enc =
+            encoding
+                << shape [ MName "geo", MmType GeoJson ]
+                << color [ MRepeat Row, MmType Quantitative ]
+
+        spec =
+            asSpec
+                [ width 500
+                , height 300
+                , dataFromUrl "data/population_engineers_hurricanes.csv" []
+                , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , enc []
+                ]
+    in
+    toVegaLite
+        [ description "Population per state, engineers per state, and hurricanes per state"
+        , repeat [ RowFields [ "population", "engineers", "hurricanes" ] ]
+        , resolve <| resolution (RScale [ ( ChColor, Independent ) ]) []
+        , specification spec
+        ]
+
+
+geo6 : Spec
+geo6 =
+    let
+        des =
+            description "US state campitals overlayed on map of the US"
+
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#ccc" ] []
+                ]
+
+        overlayEnc =
+            encoding
+                << position X [ PName "lon", PmType Longitude ]
+                << position Y [ PName "lat", PmType Latitude ]
+                << text [ TName "city", TmType Nominal ]
+
+        overlaySpec =
+            asSpec
+                [ dataFromUrl "data/us-state-capitals.json" []
+                , projection [ PType AlbersUsa ]
+                , mark Text []
+                , overlayEnc []
+                ]
+    in
+    toVegaLite
+        [ des, width 800, height 500, layer [ backdropSpec, overlaySpec ] ]
+
+
+geo7 : Spec
+geo7 =
+    let
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        airportsEnc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << size [ MNumber 5 ]
+                << color [ MString "gray" ]
+
+        airportsSpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , airportsEnc []
+                ]
+
+        itinerary =
+            dataFromColumns []
+                << dataColumn "airport" (Strings [ "SEA", "SFO", "LAX", "LAS", "DFW", "DEN", "ORD", "JFK", "ATL" ])
+                << dataColumn "order" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ])
+
+        trans =
+            transform
+                << lookup "airport" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+
+        flightsEnc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << order [ OName "order", OmType Ordinal ]
+
+        flightsSpec =
+            asSpec
+                [ itinerary []
+                , trans []
+                , projection [ PType AlbersUsa ]
+                , mark Line []
+                , flightsEnc []
+                ]
+    in
+    toVegaLite
+        [ description "Line drawn between airports in the U.S. simulating a flight itinerary"
+        , width 800
+        , height 500
+        , layer [ backdropSpec, airportsSpec, flightsSpec ]
+        ]
+
+
+geo8 : Spec
+geo8 =
+    let
+        enc =
+            encoding
+                << shape [ MName "geo", MmType GeoJson ]
+                << color [ MName "pct", MmType Quantitative ]
+                << row [ FName "group", FmType Nominal ]
+    in
+    toVegaLite
+        [ description "Income in the U.S. by state, faceted over income brackets"
+        , width 500
+        , height 300
+        , dataFromUrl "data/income.json" []
+        , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+        , projection [ PType AlbersUsa ]
+        , mark Geoshape []
+        , enc []
+        ]
+
+
 interactive1 : Spec
 interactive1 =
     let
@@ -1707,6 +1974,14 @@ mySpecs =
         , ( "comp1", comp1 )
         , ( "comp2", comp2 )
         , ( "comp3", comp3 )
+        , ( "geo1", geo1 )
+        , ( "geo2", geo2 )
+        , ( "geo3", geo3 )
+        , ( "geo4", geo4 )
+        , ( "geo5", geo5 )
+        , ( "geo6", geo6 )
+        , ( "geo7", geo7 )
+        , ( "geo8", geo8 )
         , ( "interactive1", interactive1 )
         , ( "interactive2", interactive2 )
         , ( "interactive3", interactive3 )

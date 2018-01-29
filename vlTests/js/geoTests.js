@@ -14881,440 +14881,8 @@ var _gicentre$elm_vega$VegaLite$ViewWidth = function (a) {
 	return {ctor: 'ViewWidth', _0: a};
 };
 
-var _gicentre$elm_vega$GeoTests$flights1 = function () {
-	var flightsEnc = function (_p0) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('origin_longitude'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('origin_latitude'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
-							_1: {ctor: '[]'}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$VegaLite$position,
-						_gicentre$elm_vega$VegaLite$X2,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PName('dest_longitude'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
-								_1: {ctor: '[]'}
-							}
-						},
-						A3(
-							_gicentre$elm_vega$VegaLite$position,
-							_gicentre$elm_vega$VegaLite$Y2,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PName('dest_latitude'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
-									_1: {ctor: '[]'}
-								}
-							},
-							_p0)))));
-	};
-	var trans = function (_p1) {
-		return _gicentre$elm_vega$VegaLite$transform(
-			A2(
-				_gicentre$elm_vega$VegaLite$filter,
-				A2(
-					_gicentre$elm_vega$VegaLite$FEqual,
-					'origin',
-					_gicentre$elm_vega$VegaLite$Str('SEA')),
-				A5(
-					_gicentre$elm_vega$VegaLite$lookup,
-					'origin',
-					A2(
-						_gicentre$elm_vega$VegaLite$dataFromUrl,
-						'data/airports.csv',
-						{ctor: '[]'}),
-					'iata',
-					{
-						ctor: '::',
-						_0: 'latitude',
-						_1: {
-							ctor: '::',
-							_0: 'longitude',
-							_1: {ctor: '[]'}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$VegaLite$calculateAs,
-						'datum.latitude',
-						'origin_latitude',
-						A3(
-							_gicentre$elm_vega$VegaLite$calculateAs,
-							'datum.longitude',
-							'origin_longitude',
-							A5(
-								_gicentre$elm_vega$VegaLite$lookup,
-								'destination',
-								A2(
-									_gicentre$elm_vega$VegaLite$dataFromUrl,
-									'data/airports.csv',
-									{ctor: '[]'}),
-								'iata',
-								{
-									ctor: '::',
-									_0: 'latitude',
-									_1: {
-										ctor: '::',
-										_0: 'longitude',
-										_1: {ctor: '[]'}
-									}
-								},
-								A3(
-									_gicentre$elm_vega$VegaLite$calculateAs,
-									'datum.latitude',
-									'dest_latitude',
-									A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.longitude', 'dest_longitude', _p1))))))));
-	};
-	var flightsSpec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$dataFromUrl,
-				'data/flights-airport.csv',
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: trans(
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$projection(
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_gicentre$elm_vega$VegaLite$mark,
-							_gicentre$elm_vega$VegaLite$Rule,
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: flightsEnc(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-	var airportsEnc = function (_p2) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$size,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MNumber(5),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$color,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MString('gray'),
-								_1: {ctor: '[]'}
-							},
-							_p2)))));
-	};
-	var airportsSpec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$dataFromUrl,
-				'data/airports.csv',
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$projection(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Circle,
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: airportsEnc(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-	var backdropSpec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$dataFromUrl,
-				'data/us-10m.json',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('states'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$projection(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Geoshape,
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$encoding(
-							A2(
-								_gicentre$elm_vega$VegaLite$color,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MString('#eee'),
-									_1: {ctor: '[]'}
-								},
-								{ctor: '[]'})),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$description('Rules (line segments) connecting SEA to every airport reachable via direct flight'),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$width(800),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$height(500),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$layer(
-							{
-								ctor: '::',
-								_0: backdropSpec,
-								_1: {
-									ctor: '::',
-									_0: airportsSpec,
-									_1: {
-										ctor: '::',
-										_0: flightsSpec,
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$GeoTests$dotMap2 = function () {
-	var overlayEnc = function (_p3) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$size,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MNumber(5),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$color,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MString('steelblue'),
-								_1: {ctor: '[]'}
-							},
-							_p3)))));
-	};
-	var overlaySpec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$dataFromUrl,
-				'data/airports.csv',
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$projection(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Circle,
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: overlayEnc(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-	var backdropSpec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$dataFromUrl,
-				'data/us-10m.json',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('states'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$projection(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Geoshape,
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$encoding(
-							A2(
-								_gicentre$elm_vega$VegaLite$color,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MString('#eee'),
-									_1: {ctor: '[]'}
-								},
-								{ctor: '[]'})),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-	var des = _gicentre$elm_vega$VegaLite$description('One dot per airport in the US overlayed on geoshape');
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: des,
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$width(500),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$height(300),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$layer(
-							{
-								ctor: '::',
-								_0: backdropSpec,
-								_1: {
-									ctor: '::',
-									_0: overlaySpec,
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
 var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
-	var enc = function (_p4) {
+	var enc = function (_p0) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -15396,9 +14964,9 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 										_1: {ctor: '[]'}
 									}
 								},
-								_p4))))));
+								_p0))))));
 	};
-	var config = function (_p5) {
+	var config = function (_p1) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -15424,7 +14992,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p5)));
+					_p1)));
 	};
 	var stateCondition = _elm_lang$core$String$concat(
 		A2(
@@ -15468,7 +15036,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 					}
 				}
 			}));
-	var trans = function (_p6) {
+	var trans = function (_p2) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
@@ -15478,7 +15046,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 					_gicentre$elm_vega$VegaLite$calculateAs,
 					'substring(datum.zip_code, 0, 3)',
 					'digit3',
-					A3(_gicentre$elm_vega$VegaLite$calculateAs, 'length(datum.zip_code+\' \')', 'ziplen', _p6))));
+					A3(_gicentre$elm_vega$VegaLite$calculateAs, 'length(datum.zip_code+\' \')', 'ziplen', _p2))));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -15542,7 +15110,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 		});
 }();
 var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
-	var enc = function (_p7) {
+	var enc = function (_p3) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -15597,9 +15165,9 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 										_1: {ctor: '[]'}
 									}
 								},
-								_p7))))));
+								_p3))))));
 	};
-	var config = function (_p8) {
+	var config = function (_p4) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -15625,7 +15193,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p8)));
+					_p4)));
 	};
 	var stateCondition = _elm_lang$core$String$concat(
 		A2(
@@ -15669,13 +15237,13 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 					}
 				}
 			}));
-	var trans = function (_p9) {
+	var trans = function (_p5) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$FExpr(
 					A2(_elm_lang$core$Basics_ops['++'], 'datum.latitude != \'\' && datum.county != \'Honolulu\' ', stateCondition)),
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.state == \'HI\' ? \'hi\' : (datum.state == \'AK\' ? \'ak\' : \'continent\')', 'conterminous', _p9)));
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.state == \'HI\' ? \'hi\' : (datum.state == \'AK\' ? \'ak\' : \'continent\')', 'conterminous', _p5)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -15738,235 +15306,7 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GeoTests$dotMap1 = function () {
-	var enc = function (_p10) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$size,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MNumber(1),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$color,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MName('digit'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
-									_1: {ctor: '[]'}
-								}
-							},
-							_p10)))));
-	};
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$description('US zip codes: One dot per zipcode colored by first digit'),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$width(500),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$height(300),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$projection(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_gicentre$elm_vega$VegaLite$dataFromUrl,
-								'data/zipcodes.csv',
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$transform(
-									A3(
-										_gicentre$elm_vega$VegaLite$calculateAs,
-										'substring(datum.zip_code, 0, 1)',
-										'digit',
-										{ctor: '[]'})),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_gicentre$elm_vega$VegaLite$mark,
-										_gicentre$elm_vega$VegaLite$Circle,
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: enc(
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$GeoTests$choropleth2 = function () {
-	var enc = function (_p11) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A2(
-				_gicentre$elm_vega$VegaLite$shape,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$MName('geo'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$GeoJson),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$VegaLite$color,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$MRepeat(_gicentre$elm_vega$VegaLite$Row),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					_p11)));
-	};
-	var spec = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(500),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(300),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$dataFromUrl,
-						'data/population_engineers_hurricanes.csv',
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$transform(
-							A5(
-								_gicentre$elm_vega$VegaLite$lookupAs,
-								'id',
-								A2(
-									_gicentre$elm_vega$VegaLite$dataFromUrl,
-									'data/us-10m.json',
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('states'),
-										_1: {ctor: '[]'}
-									}),
-								'id',
-								'geo',
-								{ctor: '[]'})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$projection(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_gicentre$elm_vega$VegaLite$mark,
-									_gicentre$elm_vega$VegaLite$Geoshape,
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: enc(
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			}
-		});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$description('Population per state, engineers per state, and hurricanes per state'),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$repeat(
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$RowFields(
-							{
-								ctor: '::',
-								_0: 'population',
-								_1: {
-									ctor: '::',
-									_0: 'engineers',
-									_1: {
-										ctor: '::',
-										_0: 'hurricanes',
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$resolve(
-						A2(
-							_gicentre$elm_vega$VegaLite$resolution,
-							_gicentre$elm_vega$VegaLite$RScale(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$ChColor, _1: _gicentre$elm_vega$VegaLite$Independent},
-									_1: {ctor: '[]'}
-								}),
-							{ctor: '[]'})),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$specification(spec),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$GeoTests$sourceExample = _gicentre$elm_vega$GeoTests$choropleth2;
+var _gicentre$elm_vega$GeoTests$sourceExample = _gicentre$elm_vega$GeoTests$scribbleMap1;
 var _gicentre$elm_vega$GeoTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -15996,109 +15336,14 @@ var _gicentre$elm_vega$GeoTests$view = function (spec) {
 			}
 		});
 };
-var _gicentre$elm_vega$GeoTests$choropleth1 = _gicentre$elm_vega$VegaLite$toVegaLite(
-	{
-		ctor: '::',
-		_0: _gicentre$elm_vega$VegaLite$description('US unemployment rate by County'),
-		_1: {
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(500),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(300),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$projection(
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$AlbersUsa),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_gicentre$elm_vega$VegaLite$dataFromUrl,
-							'data/us-10m.json',
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('counties'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$transform(
-								A5(
-									_gicentre$elm_vega$VegaLite$lookup,
-									'id',
-									A2(
-										_gicentre$elm_vega$VegaLite$dataFromUrl,
-										'data/unemployment.tsv',
-										{ctor: '[]'}),
-									'id',
-									{
-										ctor: '::',
-										_0: 'rate',
-										_1: {ctor: '[]'}
-									},
-									{ctor: '[]'})),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_gicentre$elm_vega$VegaLite$mark,
-									_gicentre$elm_vega$VegaLite$Geoshape,
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$encoding(
-										A2(
-											_gicentre$elm_vega$VegaLite$color,
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$VegaLite$MName('rate'),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
-													_1: {ctor: '[]'}
-												}
-											},
-											{ctor: '[]'})),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	});
 var _gicentre$elm_vega$GeoTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'choropleth1', _1: _gicentre$elm_vega$GeoTests$choropleth1},
+		_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'choropleth2', _1: _gicentre$elm_vega$GeoTests$choropleth2},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'dotmap1', _1: _gicentre$elm_vega$GeoTests$dotMap1},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'dotmap2', _1: _gicentre$elm_vega$GeoTests$dotMap2},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'linemap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'linemap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'linemap3', _1: _gicentre$elm_vega$GeoTests$flights1},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
+			_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
+			_1: {ctor: '[]'}
 		}
 	});
 var _gicentre$elm_vega$GeoTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
@@ -16115,7 +15360,7 @@ var _gicentre$elm_vega$GeoTests$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GeoTests$view,
 		update: F2(
-			function (_p12, model) {
+			function (_p6, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
