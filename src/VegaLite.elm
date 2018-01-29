@@ -2446,12 +2446,12 @@ defines the mapping from longitude,latitude to an (x,y) plane used for rendering
 This is useful when using the `Geoshape` mark. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
 
-    TODO: XXX Add projection example
+    proj =
+        projection [ PType Orthographic, PRotate -40 0 0 ]
 
 -}
 projection : List ProjectionProperty -> ( VLProperty, Spec )
 projection pProps =
-    -- TODO: Add projection option to config.
     ( VLProjection, JE.object (List.map projectionProperty pProps) )
 
 

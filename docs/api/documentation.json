@@ -4069,7 +4069,7 @@
       },
       {
         "name": "projection",
-        "comment": " Sets the cartographic projection used for geospatial coordinates. A projection\ndefines the mapping from longitude,latitude to an (x,y) plane used for rendering.\nThis is useful when using the `Geoshape` mark. For further details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).\n\n    TODO: XXX Add projection example\n\n",
+        "comment": " Sets the cartographic projection used for geospatial coordinates. A projection\ndefines the mapping from longitude,latitude to an (x,y) plane used for rendering.\nThis is useful when using the `Geoshape` mark. For further details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).\n\n    proj =\n        projection [ PType Orthographic, PRotate -40 0 0 ]\n\n",
         "type": "List VegaLite.ProjectionProperty -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
