@@ -7,6 +7,7 @@ module VegaLite
         , AxisProperty(..)
         , BinProperty(..)
         , Binding(..)
+        , BooleanOp(..)
         , CInterpolate(..)
         , Channel(..)
         , ClipRect(..)
@@ -379,16 +380,20 @@ For details, see the
 
 ## Making conditional channel encodings
 
-Sometimes, especially when building interaction into a visualization, it is useful
-to make channel encoding conditional on some kind of selection such as clicking
-or dragging. Once a selection has been defined and named, supplying a set of
-`MCondition` encodings allow mark encodings to become dependent on that selection.
-`MCondition` is followed firstly by the name of the selection upon which it is
-dependent, then an 'if' and an 'else' clause. Each clause is a list of mark field
-encodings that should be applied when the selection is true (the 'if clause') and
-when it is false (the 'else clause'). The color encoding below is saying "whenever
-data marks are selected with an interval mouse drag, encode the cylinder field with
-an ordinal color scheme, else make them grey".
+Sometimes it is useful to make channel encoding conditional on something. For example,
+on the result of some interaction such as clicking or dragging or some data property
+such whether null or an outlier. `MSelectionCondition` (and `TSelectionCondition`) will
+encode a mark (or text) dependent on an interactive selection. `MDataCondition`
+(and `TDataCondition`) will encode it dependening on some data property.
+
+For interaction, once a selection has been defined and named, supplying a set of
+`MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
+`MSelectionCondition` is followed firstly by a boolean expression relating to the
+selection upon which it is dependent, then an 'if' and an 'else' clause. Each clause
+is a list of mark field encodings that should be applied when the selection is true
+(the 'if clause') and when it is false (the 'else clause'). The color encoding below
+is saying "whenever data marks are selected with an interval mouse drag, encode
+the cylinder field with an ordinal color scheme, else make them grey".
 
       sel =
           selection << select "myBrush" Interval []
@@ -398,13 +403,31 @@ an ordinal color scheme, else make them grey".
               << position X [ PName "Horsepower", PmType Quantitative ]
               << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
               << color
-                  [ MCondition "myBrush"
+                  [ MSelectionCondition (SelectionName "myBrush")
                       [ MName "Cylinders", MmType Ordinal ]
                       [ MString "grey" ]
                   ]
 
+In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
+on whether a predicate test is satisfied.
+
+      enc =
+          encoding
+              << position X [ PName "IMDB_Rating", PmType Quantitative ]
+              << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << color
+                    [ MDataCondition
+                        (Or (Expr "datum.IMDB_Rating === null")
+                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                        )
+                        [ MString "#ddd" ]
+                        [ MString "#0099ee" ]
+                    ]
+
 For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/condition.html).
+
+@docs BooleanOp
 
 
 # Global Configuration
@@ -590,6 +613,28 @@ type Binding
     | IColor String (List InputProperty)
 
 
+{-| Used for creating logical compositions. For example
+
+    color
+        [ MSelectionCondition (Or (SelectionName "alex") (SelectionName "morgan"))
+            [ MAggregate Count, MName "*", MmType Quantitative ]
+            [ MString "gray" ]
+        ]
+
+Logical compositions can be nested to any level. For example
+
+    Not (And (Expr "datum.IMDB_Rating === null") (Expr "datum.Rotten_Tomatoes_Rating === null") )
+
+-}
+type BooleanOp
+    = Expr String
+    | Selection String
+    | SelectionName String
+    | And BooleanOp BooleanOp
+    | Or BooleanOp BooleanOp
+    | Not BooleanOp
+
+
 {-| Indicates a channel type to be used in a resolution specification.
 -}
 type Channel
@@ -688,6 +733,20 @@ type alias DataColumn =
 -}
 type alias DataRow =
     Spec
+
+
+{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
+and `FoUtc`, the formatting specification can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of dates though as different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+type DataType
+    = FoNumber
+    | FoBoolean
+    | FoDate String
+    | FoUtc String
 
 
 {-| A single data value. This is used when a function can accept values of different
@@ -794,20 +853,6 @@ type FacetMapping
     | RowBy (List FacetChannel)
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
-and `FoUtc`, the formatting specification can be specified using
-[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
-or left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default parsing of dates though as different browsers can
-parse dates differently. Being explicit about the date format is usually safer.
--}
-type DataType
-    = FoNumber
-    | FoBoolean
-    | FoDate String
-    | FoUtc String
-
-
 {-| Type of filtering operation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
 for details.
@@ -815,6 +860,7 @@ for details.
 type Filter
     = FEqual String DataValue
     | FExpr String
+    | FCompose BooleanOp
     | FSelection String
     | FOneOf String DataValues
     | FRange String FilterRange
@@ -1011,7 +1057,8 @@ type MarkChannel
     | MTimeUnit TimeUnit
     | MAggregate Operation
     | MLegend (List LegendProperty)
-    | MCondition String (List MarkChannel) (List MarkChannel)
+    | MSelectionCondition BooleanOp (List MarkChannel) (List MarkChannel)
+    | MDataCondition BooleanOp (List MarkChannel) (List MarkChannel)
     | MPath String
     | MNumber Float
     | MString String
@@ -1583,7 +1630,8 @@ type TextChannel
     | TBin (List BinProperty)
     | TAggregate Operation
     | TTimeUnit TimeUnit
-    | TCondition String (List TextChannel) (List TextChannel)
+    | TSelectionCondition String (List TextChannel) (List TextChannel)
+    | TDataCondition String (List TextChannel) (List TextChannel)
     | TFormat String
 
 
@@ -2130,12 +2178,21 @@ should be added in sequence.
         transform
             << filter (FEqual "Animal" (Str "Cat"))
 
+Filter operations can combine selections and data predicates with `BooleanOp` expressions:
+
+    trans =
+        transform
+            << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
 filter f =
     case f of
         FExpr expr ->
             (::) ( "filter", JE.string expr )
+
+        FCompose boolExpr ->
+            (::) ( "filter", booleanOpSpec boolExpr )
 
         FEqual field val ->
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", dataValueSpec val ) ] )
@@ -3184,6 +3241,28 @@ bindingSpec bnd =
             ( label, JE.object (( "input", JE.string "color" ) :: List.map inputProperty props) )
 
 
+booleanOpSpec : BooleanOp -> Spec
+booleanOpSpec bo =
+    case bo of
+        Expr expr ->
+            JE.string expr
+
+        SelectionName selName ->
+            JE.string selName
+
+        Selection sel ->
+            JE.object [ ( "selection", JE.string sel ) ]
+
+        And operand1 operand2 ->
+            JE.object [ ( "and", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+
+        Or operand1 operand2 ->
+            JE.object [ ( "or", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+
+        Not operand ->
+            JE.object [ ( "not", booleanOpSpec operand ) ]
+
+
 channelLabel : Channel -> String
 channelLabel ch =
     case ch of
@@ -3907,8 +3986,12 @@ markChannelProperty field =
         MBin bps ->
             [ bin bps ]
 
-        MCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap markChannelProperty ifClause) )
+        MSelectionCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap markChannelProperty ifClause) )
+                :: List.concatMap markChannelProperty elseClause
+
+        MDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap markChannelProperty ifClause) )
                 :: List.concatMap markChannelProperty elseClause
 
         MTimeUnit tu ->
@@ -5047,8 +5130,12 @@ textChannelProperty tDef =
         TFormat fmt ->
             [ ( "format", JE.string fmt ) ]
 
-        TCondition selName ifClause elseClause ->
+        TSelectionCondition selName ifClause elseClause ->
             ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap textChannelProperty ifClause) )
+                :: List.concatMap textChannelProperty elseClause
+
+        TDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", JE.string predicate ) :: List.concatMap textChannelProperty ifClause) )
                 :: List.concatMap textChannelProperty elseClause
 
 

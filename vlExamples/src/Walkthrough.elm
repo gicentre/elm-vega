@@ -321,7 +321,7 @@ scatterProps =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -438,7 +438,7 @@ coordinatedScatter1 =
                 << position X [ PRepeat Column, PmType Quantitative ]
                 << position Y [ PRepeat Row, PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]

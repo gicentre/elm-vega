@@ -1598,7 +1598,7 @@ interactive1 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MName "Cylinders", MmType Ordinal ]
                         [ MString "grey" ]
                     ]
@@ -1620,7 +1620,7 @@ interactive2 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << size
-                    [ MCondition "myPaintbrush"
+                    [ MSelectionCondition (SelectionName "myPaintbrush")
                         [ MNumber 300 ]
                         [ MNumber 50 ]
                     ]
@@ -1672,7 +1672,7 @@ interactive4 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "CylYr"
+                    [ MSelectionCondition (SelectionName "CylYr")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -1711,7 +1711,7 @@ interactive5 =
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
                 << opacity
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MNumber 1 ]
                         [ MNumber 0.7 ]
                     ]
@@ -1839,7 +1839,7 @@ interactive8 =
                 << position X [ PRepeat Column, PmType Quantitative ]
                 << position Y [ PRepeat Row, PmType Quantitative ]
                 << color
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -1897,7 +1897,7 @@ interactive9 =
                 << position X [ PName "Major_Genre", PmType Nominal, PAxis [ AxLabelAngle -40 ] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
                 << color
-                    [ MCondition "myPts"
+                    [ MSelectionCondition (SelectionName "myPts")
                         [ MString "steelblue" ]
                         [ MString "grey" ]
                     ]

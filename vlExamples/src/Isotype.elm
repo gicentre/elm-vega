@@ -59,7 +59,7 @@ personGrid =
                 << position Y [ PName "row", PmType Ordinal, PAxis [] ]
                 << shape [ MPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
                 << color
-                    [ MCondition "highlight"
+                    [ MSelectionCondition (SelectionName "highlight")
                         [ MString "rgb(194,81,64)" ]
                         [ MString "rgb(167,165,156)" ]
                     ]

@@ -478,7 +478,7 @@ let
             << position X [ PName "Horsepower", PmType Quantitative ]
             << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
             << color
-                [ MCondition "picked"
+                [ MSelectionCondition (SelectionName "picked")
                     [ MName "Origin", MmType Nominal ]
                     [ MString "grey" ]
                 ]
@@ -495,7 +495,7 @@ toVegaLite
     ]
 ```
 
-In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MCondition` used to encode color.
+In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MSelectionCondition` used to encode color.
 
 Previously when encoding color (or any other channel) we have provided a list of properties.
 Here we provide a pair of lists – one for when the selection condition is true, the other for when it is false.
@@ -514,7 +514,7 @@ scatterProps =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -681,7 +681,7 @@ let
             << position X [ PRepeat Column, PmType Quantitative ]
             << position Y [ PRepeat Row, PmType Quantitative ]
             << color
-                [ MCondition "picked"
+                [ MSelectionCondition (SelectionName "picked")
                     [ MName "Origin", MmType Nominal ]
                     [ MString "grey" ]
                 ]
