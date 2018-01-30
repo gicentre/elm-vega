@@ -15317,476 +15317,8 @@ var _gicentre$elm_vega$VegaLite$name = function (s) {
 	};
 };
 
-var _gicentre$elm_vega$ConditionalTests$selectionCondition3 = function () {
-	var enc2 = function (_p0) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('Acceleration'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PScale(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$SDomain(
-										_gicentre$elm_vega$VegaLite$DNumbers(
-											{
-												ctor: '::',
-												_0: 0,
-												_1: {
-													ctor: '::',
-													_0: 25,
-													_1: {ctor: '[]'}
-												}
-											})),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('Displacement'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PScale(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$SDomain(
-											_gicentre$elm_vega$VegaLite$DNumbers(
-												{
-													ctor: '::',
-													_0: 0,
-													_1: {
-														ctor: '::',
-														_0: 500,
-														_1: {ctor: '[]'}
-													}
-												})),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_p0)));
-	};
-	var enc1 = function (_p1) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('Miles_per_Gallon'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					_p1)));
-	};
-	var sel = function (_p2) {
-		return _gicentre$elm_vega$VegaLite$selection(
-			A4(
-				_gicentre$elm_vega$VegaLite$select,
-				'brush',
-				_gicentre$elm_vega$VegaLite$Interval,
-				{ctor: '[]'},
-				_p2));
-	};
-	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: sel(
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$elm_vega$VegaLite$mark,
-					_gicentre$elm_vega$VegaLite$Point,
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: enc1(
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-	var trans = function (_p3) {
-		return _gicentre$elm_vega$VegaLite$transform(
-			A2(
-				_gicentre$elm_vega$VegaLite$filter,
-				_gicentre$elm_vega$VegaLite$FCompose(
-					A2(
-						_gicentre$elm_vega$VegaLite$And,
-						_gicentre$elm_vega$VegaLite$Expr('datum.Weight_in_lbs > 3000'),
-						_gicentre$elm_vega$VegaLite$Selection('brush'))),
-				_p3));
-	};
-	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
-		{
-			ctor: '::',
-			_0: trans(
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$elm_vega$VegaLite$mark,
-					_gicentre$elm_vega$VegaLite$Point,
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: enc2(
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-	var data = A2(
-		_gicentre$elm_vega$VegaLite$dataFromUrl,
-		'data/cars.json',
-		{ctor: '[]'});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: data,
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$vConcat(
-					{
-						ctor: '::',
-						_0: spec1,
-						_1: {
-							ctor: '::',
-							_0: spec2,
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-}();
-var _gicentre$elm_vega$ConditionalTests$sourceExample = _gicentre$elm_vega$ConditionalTests$selectionCondition3;
-var _gicentre$elm_vega$ConditionalTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$ConditionalTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _gicentre$elm_vega$ConditionalTests$selectionCondition2 = function () {
-	var enc = function (_p4) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$Y,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('Origin'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$X,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: A3(
-								_gicentre$elm_vega$VegaLite$MSelectionCondition,
-								A2(
-									_gicentre$elm_vega$VegaLite$And,
-									_gicentre$elm_vega$VegaLite$SelectionName('alex'),
-									_gicentre$elm_vega$VegaLite$SelectionName('morgan')),
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MName('*'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MString('gray'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						_p4))));
-	};
-	var sel = function (_p5) {
-		return _gicentre$elm_vega$VegaLite$selection(
-			A4(
-				_gicentre$elm_vega$VegaLite$select,
-				'alex',
-				_gicentre$elm_vega$VegaLite$Interval,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$On('[mousedown[!event.shiftKey], mouseup] > mousemove'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[!event.shiftKey], mouseup] > mousemove'),
-						_1: {ctor: '[]'}
-					}
-				},
-				A4(
-					_gicentre$elm_vega$VegaLite$select,
-					'morgan',
-					_gicentre$elm_vega$VegaLite$Interval,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$On('[mousedown[event.shiftKey], mouseup] > mousemove'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[event.shiftKey], mouseup] > mousemove'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$SelectionMark(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$SMFill('#fdbb84'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$SMFillOpacity(0.5),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$VegaLite$SMStroke('#e34a33'),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_p5)));
-	};
-	var data = A2(
-		_gicentre$elm_vega$VegaLite$dataFromUrl,
-		'data/cars.json',
-		{ctor: '[]'});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: data,
-			_1: {
-				ctor: '::',
-				_0: sel(
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Rect,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MCursor(_gicentre$elm_vega$VegaLite$CGrab),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: enc(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$ConditionalTests$selectionCondition1 = function () {
-	var enc = function (_p6) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$Y,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('Origin'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$X,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('Cylinders'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MAggregate(_gicentre$elm_vega$VegaLite$Count),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MName('*'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_p6))));
-	};
-	var sel = function (_p7) {
-		return _gicentre$elm_vega$VegaLite$selection(
-			A4(
-				_gicentre$elm_vega$VegaLite$select,
-				'alex',
-				_gicentre$elm_vega$VegaLite$Interval,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$On('[mousedown[!event.shiftKey], mouseup] > mousemove'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[!event.shiftKey], mouseup] > mousemove'),
-						_1: {ctor: '[]'}
-					}
-				},
-				A4(
-					_gicentre$elm_vega$VegaLite$select,
-					'morgan',
-					_gicentre$elm_vega$VegaLite$Interval,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$On('[mousedown[event.shiftKey], mouseup] > mousemove'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$Translate('[mousedown[event.shiftKey], mouseup] > mousemove'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$SelectionMark(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$SMFill('#fdbb84'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$SMFillOpacity(0.5),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$VegaLite$SMStroke('#e34a33'),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_p7)));
-	};
-	var data = A2(
-		_gicentre$elm_vega$VegaLite$dataFromUrl,
-		'data/cars.json',
-		{ctor: '[]'});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: data,
-			_1: {
-				ctor: '::',
-				_0: sel(
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Rect,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MCursor(_gicentre$elm_vega$VegaLite$CGrab),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: enc(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$ConditionalTests$markCondition1 = function () {
-	var enc = function (_p8) {
+var _gicentre$elm_vega$HyperlinkTests$hyperlink3 = function () {
+	var enc = function (_p0) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -15818,30 +15350,39 @@ var _gicentre$elm_vega$ConditionalTests$markCondition1 = function () {
 							ctor: '::',
 							_0: A3(
 								_gicentre$elm_vega$VegaLite$MDataCondition,
-								A2(
-									_gicentre$elm_vega$VegaLite$Or,
-									_gicentre$elm_vega$VegaLite$Expr('datum.IMDB_Rating === null'),
-									_gicentre$elm_vega$VegaLite$Expr('datum.Rotten_Tomatoes_Rating === null')),
+								_gicentre$elm_vega$VegaLite$Expr('datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating'),
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MString('#ddd'),
+									_0: _gicentre$elm_vega$VegaLite$MString('steelblue'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$MString('#0099ee'),
+									_0: _gicentre$elm_vega$VegaLite$MString('red'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
 						},
-						_p8))));
-	};
-	var config = function (_p9) {
-		return _gicentre$elm_vega$VegaLite$configure(
-			A2(
-				_gicentre$elm_vega$VegaLite$configuration,
-				_gicentre$elm_vega$VegaLite$RemoveInvalid(false),
-				_p9));
+						A2(
+							_gicentre$elm_vega$VegaLite$hyperlink,
+							{
+								ctor: '::',
+								_0: A3(
+									_gicentre$elm_vega$VegaLite$HDataCondition,
+									_gicentre$elm_vega$VegaLite$Expr('datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating'),
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$HString('http://www.imdb.com'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$HString('https://www.rottentomatoes.com'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							_p0)))));
 	};
 	var data = A2(
 		_gicentre$elm_vega$VegaLite$dataFromUrl,
@@ -15850,69 +15391,344 @@ var _gicentre$elm_vega$ConditionalTests$markCondition1 = function () {
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: config(
-				{ctor: '[]'}),
+			_0: data,
 			_1: {
 				ctor: '::',
-				_0: data,
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Point,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MCursor(_gicentre$elm_vega$VegaLite$CPointer),
+						_1: {ctor: '[]'}
+					}),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Point,
+					_0: enc(
 						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: enc(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		});
 }();
-var _gicentre$elm_vega$ConditionalTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
-	{
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'markCondition1', _1: _gicentre$elm_vega$ConditionalTests$markCondition1},
-		_1: {
+var _gicentre$elm_vega$HyperlinkTests$sourceExample = _gicentre$elm_vega$HyperlinkTests$hyperlink3;
+var _gicentre$elm_vega$HyperlinkTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'selectionCondition1', _1: _gicentre$elm_vega$ConditionalTests$selectionCondition1},
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'selectionCondition2', _1: _gicentre$elm_vega$ConditionalTests$selectionCondition2},
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$HyperlinkTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$HyperlinkTests$hyperlink2 = function () {
+	var enc = function (_p1) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$hyperlink,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$HString('http://www.imdb.com'),
+							_1: {ctor: '[]'}
+						},
+						_p1))));
+	};
+	var data = A2(
+		_gicentre$elm_vega$VegaLite$dataFromUrl,
+		'data/movies.json',
+		{ctor: '[]'});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Point,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MCursor(_gicentre$elm_vega$VegaLite$CPointer),
+						_1: {ctor: '[]'}
+					}),
 				_1: {
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'selectionCondition3', _1: _gicentre$elm_vega$ConditionalTests$selectionCondition3},
+					_0: enc(
+						{ctor: '[]'}),
 					_1: {ctor: '[]'}
 				}
 			}
+		});
+}();
+var _gicentre$elm_vega$HyperlinkTests$hyperlink1 = function () {
+	var encLabel = function (_p2) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('label'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$text,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$TName('label'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$TmType(_gicentre$elm_vega$VegaLite$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MString('white'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$size,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MNumber(16),
+								_1: {ctor: '[]'}
+							},
+							_p2)))));
+	};
+	var labelSpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Text,
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: encLabel(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var encCircle = function (_p3) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('label'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$size,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MNumber(8000),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MName('label'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MLegend(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$hyperlink,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$HName('url'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$HmType(_gicentre$elm_vega$VegaLite$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p3)))));
+	};
+	var symbolSpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$mark,
+				_gicentre$elm_vega$VegaLite$Circle,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$MCursor(_gicentre$elm_vega$VegaLite$CPointer),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: encCircle(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var data = function (_p4) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'label',
+				_gicentre$elm_vega$VegaLite$Strings(
+					{
+						ctor: '::',
+						_0: 'Vega',
+						_1: {
+							ctor: '::',
+							_0: 'Vega-Lite',
+							_1: {ctor: '[]'}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'url',
+					_gicentre$elm_vega$VegaLite$Strings(
+						{
+							ctor: '::',
+							_0: 'https://vega.github.io/vega',
+							_1: {
+								ctor: '::',
+								_0: 'https://vega.github.io/vega-lite',
+								_1: {ctor: '[]'}
+							}
+						}),
+					_p4)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$layer(
+					{
+						ctor: '::',
+						_0: symbolSpec,
+						_1: {
+							ctor: '::',
+							_0: labelSpec,
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$elm_vega$HyperlinkTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'hyperlink1', _1: _gicentre$elm_vega$HyperlinkTests$hyperlink1},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'hyperlink2', _1: _gicentre$elm_vega$HyperlinkTests$hyperlink2},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'hyperlink3', _1: _gicentre$elm_vega$HyperlinkTests$hyperlink3},
+				_1: {ctor: '[]'}
+			}
 		}
 	});
-var _gicentre$elm_vega$ConditionalTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+var _gicentre$elm_vega$HyperlinkTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$ConditionalTests$main = _elm_lang$html$Html$program(
+var _gicentre$elm_vega$HyperlinkTests$main = _elm_lang$html$Html$program(
 	{
 		init: {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$ConditionalTests$mySpecs,
-			_1: _gicentre$elm_vega$ConditionalTests$elmToJS(_gicentre$elm_vega$ConditionalTests$mySpecs)
+			_0: _gicentre$elm_vega$HyperlinkTests$mySpecs,
+			_1: _gicentre$elm_vega$HyperlinkTests$elmToJS(_gicentre$elm_vega$HyperlinkTests$mySpecs)
 		},
-		view: _gicentre$elm_vega$ConditionalTests$view,
+		view: _gicentre$elm_vega$HyperlinkTests$view,
 		update: F2(
-			function (_p10, model) {
+			function (_p5, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
 
 var Elm = {};
-Elm['ConditionalTests'] = Elm['ConditionalTests'] || {};
-if (typeof _gicentre$elm_vega$ConditionalTests$main !== 'undefined') {
-    _gicentre$elm_vega$ConditionalTests$main(Elm['ConditionalTests'], 'ConditionalTests', undefined);
+Elm['HyperlinkTests'] = Elm['HyperlinkTests'] || {};
+if (typeof _gicentre$elm_vega$HyperlinkTests$main !== 'undefined') {
+    _gicentre$elm_vega$HyperlinkTests$main(Elm['HyperlinkTests'], 'HyperlinkTests', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

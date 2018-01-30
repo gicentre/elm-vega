@@ -12,6 +12,7 @@ module VegaLite
         , Channel(..)
         , ClipRect(..)
         , ConfigurationProperty(..)
+        , Cursor(..)
         , DataColumn
         , DataRow
         , DataType(..)
@@ -28,6 +29,7 @@ module VegaLite
         , Format(..)
         , HAlign(..)
         , HeaderProperty(..)
+        , HyperlinkChannel(..)
         , InputProperty(..)
         , Legend(..)
         , LegendConfig(..)
@@ -100,6 +102,7 @@ module VegaLite
         , filter
         , hConcat
         , height
+        , hyperlink
         , layer
         , lookup
         , lookupAs
@@ -215,23 +218,24 @@ Types and functions for declaring the type of visual marks used in the visualiza
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
+@docs Cursor
 
 
 # Creating the Encoding Specification
 
 Types and functions for declaring which data fields are mapped to which channels.
 Channels can include position on screen (e.g. `X`,`Y`), visual mark properties
-(e.g. color, size, shape), text, ordering, level of detail and facets (for nested
-visualization). All can be further customised via a series of properties for determining
-how that encoding is implemented (e.g. scaling, sorting, spacing).
+(e.g. color, size, shape), text, hyperlinks, ordering, level of detail and facets
+(for nested visualization). All can be further customised via a series of properties
+for determining how that encoding is implemented (e.g. scaling, sorting, spacing).
 
 @docs encoding
 @docs Measurement
 
 
-## Position channels
+## Position channel
 
-Channels that relate to where something appears in the visualization.
+Relates to where something appears in the visualization.
 
 @docs position
 @docs PositionChannel
@@ -249,7 +253,8 @@ Channels that relate to where something appears in the visualization.
 
 ## Mark channels
 
-Channels that relate to the appearance of the visual marks in the visualization.
+Relate to the appearance of the visual marks in the visualization such as their
+color or size.
 
 @docs size
 @docs color
@@ -264,12 +269,22 @@ Channels that relate to the appearance of the visual marks in the visualization.
 
 ## Text Channels
 
-Channels that relate to the appearance of the text and tooltip elements of the
-visualization.
+Relate to the appearance of the text and tooltip elements of the visualization.
 
 @docs text
 @docs tooltip
 @docs TextChannel
+
+
+## Hyperlink Channel
+
+Relates to a clickable URL destination of a mark. Note that unlike most other
+channels, the hyperlink channel has no direct visual expression other than the
+option of changing the cursor style when hovering, so an encoding will usually
+pair hyperlinks with other visual channels such as marks or texts.
+
+@docs hyperlink
+@docs HyperlinkChannel
 
 
 ## Order channels
@@ -576,21 +591,6 @@ type AxisProperty
     | AxZIndex Int
 
 
-{-| Type of binning property to customise. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details.
--}
-type BinProperty
-    = Base Float
-    | Divide Float Float
-    | Extent Float Float
-    | MaxBins Int
-    | MinStep Float
-    | Nice Bool
-    | Step Float
-    | Steps (List Float)
-
-
 {-| Describes the binding property of a selection based on some HTML input element
 such as a checkbox or radio button. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)
@@ -611,6 +611,21 @@ type Binding
     | IDateTimeLocal String (List InputProperty)
     | ITel String (List InputProperty)
     | IColor String (List InputProperty)
+
+
+{-| Type of binning property to customise. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
+more details.
+-}
+type BinProperty
+    = Base Float
+    | Divide Float Float
+    | Extent Float Float
+    | MaxBins Int
+    | MinStep Float
+    | Nice Bool
+    | Step Float
+    | Steps (List Float)
 
 
 {-| Used for creating logical compositions. For example
@@ -719,6 +734,48 @@ type ConfigurationProperty
     | TitleStyle (List TitleConfig)
     | TimeFormat String
     | View (List ViewConfig)
+
+
+{-| Represents the type of cursor to display. For an explanation of each type,
+see the [CSS documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
+-}
+type Cursor
+    = CAuto
+    | CDefault
+    | CNone
+    | CContextMenu
+    | CHelp
+    | CPointer
+    | CProgress
+    | CWait
+    | CCell
+    | CCrosshair
+    | CText
+    | CVerticalText
+    | CAlias
+    | CCopy
+    | CMove
+    | CNoDrop
+    | CNotAllowed
+    | CAllScroll
+    | CColResize
+    | CRowResize
+    | CNResize
+    | CEResize
+    | CSResize
+    | CWResize
+    | CNEResize
+    | CNWResize
+    | CSEResize
+    | CSWResize
+    | CEWResize
+    | CNSResize
+    | CNESWResize
+    | CNWSEResize
+    | CZoomIn
+    | CZoomOut
+    | CGrab
+    | CGrabbing
 
 
 {-| Represents a single column of data. Used when generating inline data with
@@ -853,6 +910,17 @@ type FacetMapping
     | RowBy (List FacetChannel)
 
 
+{-| Indicates the style in which field names are displayed. The `Verbal` style is
+'Sum of field', 'Year of date', 'field (binned)' etc. The `Function` style is
+'SUM(field)', 'YEAR(date)', 'BIN(field)' etc. The `Plain` style is just the field
+name without any additional text.
+-}
+type FieldTitleProperty
+    = Verbal
+    | Function
+    | Plain
+
+
 {-| Type of filtering operation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
 for details.
@@ -874,18 +942,6 @@ type FilterRange
     | DateRange (List DateTime) (List DateTime)
 
 
-{-| Specifies the type of format a data source uses. For details see the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
--}
-type Format
-    = JSON
-    | CSV
-    | TSV
-    | TopojsonFeature String
-    | TopojsonMesh String
-    | Parse (List ( String, DataType ))
-
-
 {-| Indicates the weight options for a font.
 -}
 type FontWeight
@@ -904,6 +960,18 @@ type FontWeight
     | W900
 
 
+{-| Specifies the type of format a data source uses. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
+-}
+type Format
+    = JSON
+    | CSV
+    | TSV
+    | TopojsonFeature String
+    | TopojsonMesh String
+    | Parse (List ( String, DataType ))
+
+
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
 -}
 type HAlign
@@ -918,6 +986,20 @@ type HAlign
 type HeaderProperty
     = HFormat String
     | HTitle String
+
+
+{-| Types of hyperlink channel property used for linking marks or text to URLs.
+-}
+type HyperlinkChannel
+    = HName String
+    | HRepeat Arrangement
+    | HmType Measurement
+    | HBin (List BinProperty)
+    | HAggregate Operation
+    | HTimeUnit TimeUnit
+    | HSelectionCondition BooleanOp (List HyperlinkChannel) (List HyperlinkChannel)
+    | HDataCondition BooleanOp (List HyperlinkChannel) (List HyperlinkChannel)
+    | HString String
 
 
 {-| GUI Input properties. The type of relevant proerty will depend on the type of
@@ -1109,6 +1191,7 @@ type
     | MBinSpacing Float
     | MClip Bool
     | MColor String
+    | MCursor Cursor
     | MContinuousBandSize Float
     | MDiscreteBandSize Float
     | MdX Float
@@ -1304,67 +1387,6 @@ type ProjectionProperty
     | PRatio Float
     | PSpacing Float
     | PTilt Float
-
-
-{-| Top-level Vega-Lite properties. These are the ones that define the core of the
-visualization grammar. All `VLProperties` are created by functions which can be
-arranged into seven broad groups.
-
-**Data Properties** relate to the input data to be visualized. Generated by [`dataFromColumns`](#dataFromColumns),
-[`dataFromRows`](#dataFromRows) and [`dataFromUrl`](#dataFromUrl).
-
-**Transform Properties** are those which indicate some transformation of input
-data should be applied before encoding them visually. Generated by [`transform`](#transform)
-and [`projection`](#projection) they can include data transformations such as `filter`,
-`binAs` and `calculateAs` and geo transformations of longitude, latitude coordinates
-used by marks such as `Geoshape`, `Point` and `Line`.
-
-**Mark Properties** relate to the symbols used to visualize data items. Generated by [`mark`](#mark)
-they include types such as `Circle`, `Bar` and `Line`.
-
-**Encoding Properties** specify which data elements are mapped to which mark characteristics
-(known as _channels_). Generated by [`encoding`](#encoding) they include encodings
-such as `position`, `color`, `size`, `shape` and `text`.
-
-**Composition Properties** allow visualization views to be combined to form more
-complex visualizations. Generated by [`layer`](#layer), [`repeat`](#repeat),
-[`facet`](#facet), [`hConcat`](#hConcat), [`vConcat`](#vConcat), [`spec`](#spec)
-and [`resolve`](#resolve).
-
-**Interaction Properties** allow interactions such as clicking, dragging and others
-generated via a GUI or data stream to influence the visualization. Generated by
-[`selection`](#selection).
-
-**Supplementary and Configuration Properties** provide a means to add metadata and
-styling to one or more visualizations. Generated by [`name`](#name), [`title`](#title),
-[`description`](#description), [`background`](#background), [`width`](#width),
-[`height`](#height), [`padding`](#padding), [`autosize`](#autosize) and
-[`configure`](#configure).
-
--}
-type VLProperty
-    = VLName
-    | VLDescription
-    | VLTitle
-    | VLWidth
-    | VLHeight
-    | VLAutosize
-    | VLPadding
-    | VLBackground
-    | VLData
-    | VLMark
-    | VLTransform
-    | VLProjection
-    | VLEncoding
-    | VLLayer
-    | VLHConcat
-    | VLVConcat
-    | VLRepeat
-    | VLFacet
-    | VLSpec
-    | VLResolve
-    | VLConfig
-    | VLSelection
 
 
 {-| Properties for customising the colors of a range. The parameter should be a
@@ -1630,8 +1652,8 @@ type TextChannel
     | TBin (List BinProperty)
     | TAggregate Operation
     | TTimeUnit TimeUnit
-    | TSelectionCondition String (List TextChannel) (List TextChannel)
-    | TDataCondition String (List TextChannel) (List TextChannel)
+    | TSelectionCondition BooleanOp (List TextChannel) (List TextChannel)
+    | TDataCondition BooleanOp (List TextChannel) (List TextChannel)
     | TFormat String
 
 
@@ -1684,17 +1706,6 @@ type TitleConfig
     | TOrient Side
 
 
-{-| Indicates the style in which field names are displayed. The `Verbal` style is
-'Sum of field', 'Year of date', 'field (binned)' etc. The `Function` style is
-'SUM(field)', 'YEAR(date)', 'BIN(field)' etc. The `Plain` style is just the field
-name without any additional text.
--}
-type FieldTitleProperty
-    = Verbal
-    | Function
-    | Plain
-
-
 {-| Indicates the vertical alignment of some text that may be attached to a mark.
 -}
 type VAlign
@@ -1719,6 +1730,67 @@ type ViewConfig
     | StrokeWidth Float
     | StrokeDash (List Float)
     | StrokeDashOffset Float
+
+
+{-| Top-level Vega-Lite properties. These are the ones that define the core of the
+visualization grammar. All `VLProperties` are created by functions which can be
+arranged into seven broad groups.
+
+**Data Properties** relate to the input data to be visualized. Generated by [`dataFromColumns`](#dataFromColumns),
+[`dataFromRows`](#dataFromRows) and [`dataFromUrl`](#dataFromUrl).
+
+**Transform Properties** are those which indicate some transformation of input
+data should be applied before encoding them visually. Generated by [`transform`](#transform)
+and [`projection`](#projection) they can include data transformations such as `filter`,
+`binAs` and `calculateAs` and geo transformations of longitude, latitude coordinates
+used by marks such as `Geoshape`, `Point` and `Line`.
+
+**Mark Properties** relate to the symbols used to visualize data items. Generated by [`mark`](#mark)
+they include types such as `Circle`, `Bar` and `Line`.
+
+**Encoding Properties** specify which data elements are mapped to which mark characteristics
+(known as _channels_). Generated by [`encoding`](#encoding) they include encodings
+such as `position`, `color`, `size`, `shape` `text` and `hyperlink`.
+
+**Composition Properties** allow visualization views to be combined to form more
+complex visualizations. Generated by [`layer`](#layer), [`repeat`](#repeat),
+[`facet`](#facet), [`hConcat`](#hConcat), [`vConcat`](#vConcat), [`spec`](#spec)
+and [`resolve`](#resolve).
+
+**Interaction Properties** allow interactions such as clicking, dragging and others
+generated via a GUI or data stream to influence the visualization. Generated by
+[`selection`](#selection).
+
+**Supplementary and Configuration Properties** provide a means to add metadata and
+styling to one or more visualizations. Generated by [`name`](#name), [`title`](#title),
+[`description`](#description), [`background`](#background), [`width`](#width),
+[`height`](#height), [`padding`](#padding), [`autosize`](#autosize) and
+[`configure`](#configure).
+
+-}
+type VLProperty
+    = VLName
+    | VLDescription
+    | VLTitle
+    | VLWidth
+    | VLHeight
+    | VLAutosize
+    | VLPadding
+    | VLBackground
+    | VLData
+    | VLMark
+    | VLTransform
+    | VLProjection
+    | VLEncoding
+    | VLLayer
+    | VLHConcat
+    | VLVConcat
+    | VLRepeat
+    | VLFacet
+    | VLSpec
+    | VLResolve
+    | VLConfig
+    | VLSelection
 
 
 {-| Defines a set of named aggregation transformations to be used when encoding
@@ -2266,6 +2338,22 @@ will be calculated based on the content of the visualization.
 height : Float -> ( VLProperty, Spec )
 height h =
     ( VLHeight, JE.float h )
+
+
+{-| Encode a hyperlink channel. The first parameter is a list of hyperlink channel
+properties that characterise the hyperlinking such as the destination url and cursor
+type. The second parameter is a list of any previous encoding channels to which
+this hyperlink channel should be added.
+
+    hyperlink [ MName "Species", MmType Nominal ] []
+
+For further details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
+
+-}
+hyperlink : List HyperlinkChannel -> List LabelledSpec -> List LabelledSpec
+hyperlink hyperProps =
+    (::) ( "href", List.concatMap hyperlinkChannelProperty hyperProps |> JE.object )
 
 
 {-| Assigns a list of specifications to superposed layers in a visualization.
@@ -3170,34 +3258,6 @@ axisProperty axisProp =
             ( "titlePadding", JE.float pad )
 
 
-binProperty : BinProperty -> LabelledSpec
-binProperty binProp =
-    case binProp of
-        MaxBins n ->
-            ( "maxbins", JE.int n )
-
-        Base x ->
-            ( "base", JE.float x )
-
-        Step x ->
-            ( "step", JE.float x )
-
-        Steps xs ->
-            ( "steps", JE.list (List.map JE.float xs) )
-
-        MinStep x ->
-            ( "minstep", JE.float x )
-
-        Divide x y ->
-            ( "divide", JE.list [ JE.float x, JE.float y ] )
-
-        Extent mn mx ->
-            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
-
-        Nice b ->
-            ( "nice", JE.bool b )
-
-
 bindingSpec : Binding -> LabelledSpec
 bindingSpec bnd =
     case bnd of
@@ -3239,6 +3299,34 @@ bindingSpec bnd =
 
         IColor label props ->
             ( label, JE.object (( "input", JE.string "color" ) :: List.map inputProperty props) )
+
+
+binProperty : BinProperty -> LabelledSpec
+binProperty binProp =
+    case binProp of
+        MaxBins n ->
+            ( "maxbins", JE.int n )
+
+        Base x ->
+            ( "base", JE.float x )
+
+        Step x ->
+            ( "step", JE.float x )
+
+        Steps xs ->
+            ( "steps", JE.list (List.map JE.float xs) )
+
+        MinStep x ->
+            ( "minstep", JE.float x )
+
+        Divide x y ->
+            ( "divide", JE.list [ JE.float x, JE.float y ] )
+
+        Extent mn mx ->
+            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
+
+        Nice b ->
+            ( "nice", JE.bool b )
 
 
 booleanOpSpec : BooleanOp -> Spec
@@ -3289,6 +3377,34 @@ channelLabel ch =
 
         ChSize ->
             "size"
+
+
+cInterpolateSpec : CInterpolate -> Spec
+cInterpolateSpec iType =
+    case iType of
+        Rgb gamma ->
+            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
+
+        Hsl ->
+            JE.object [ ( "type", JE.string "hsl" ) ]
+
+        HslLong ->
+            JE.object [ ( "type", JE.string "hsl-long" ) ]
+
+        Lab ->
+            JE.object [ ( "type", JE.string "lab" ) ]
+
+        Hcl ->
+            JE.object [ ( "type", JE.string "hcl" ) ]
+
+        HclLong ->
+            JE.object [ ( "type", JE.string "hcl-long" ) ]
+
+        CubeHelix gamma ->
+            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
+
+        CubeHelixLong gamma ->
+            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
 
 
 configProperty : ConfigurationProperty -> LabelledSpec
@@ -3410,6 +3526,156 @@ configProperty configProp =
             ( "view", JE.object (List.map viewConfigProperty vcs) )
 
 
+cursorLabel : Cursor -> String
+cursorLabel cur =
+    case cur of
+        CAuto ->
+            "auto"
+
+        CDefault ->
+            "default"
+
+        CNone ->
+            "none"
+
+        CContextMenu ->
+            "context-menu"
+
+        CHelp ->
+            "help"
+
+        CPointer ->
+            "pointer"
+
+        CProgress ->
+            "progress"
+
+        CWait ->
+            "wait"
+
+        CCell ->
+            "cell"
+
+        CCrosshair ->
+            "crosshair"
+
+        CText ->
+            "text"
+
+        CVerticalText ->
+            "vertical-text"
+
+        CAlias ->
+            "alias"
+
+        CCopy ->
+            "copy"
+
+        CMove ->
+            "move"
+
+        CNoDrop ->
+            "no-drop"
+
+        CNotAllowed ->
+            "not-allowed"
+
+        CAllScroll ->
+            "all-scroll"
+
+        CColResize ->
+            "col-resize"
+
+        CRowResize ->
+            "row-resize"
+
+        CNResize ->
+            "n-resize"
+
+        CEResize ->
+            "e-resize"
+
+        CSResize ->
+            "s-resize"
+
+        CWResize ->
+            "w-resize"
+
+        CNEResize ->
+            "ne-resize"
+
+        CNWResize ->
+            "nw-resize"
+
+        CSEResize ->
+            "se-resize"
+
+        CSWResize ->
+            "sw-resize"
+
+        CEWResize ->
+            "ew-resize"
+
+        CNSResize ->
+            "ns-resize"
+
+        CNESWResize ->
+            "nesw-resize"
+
+        CNWSEResize ->
+            "nwse-resize"
+
+        CZoomIn ->
+            "zoom-in"
+
+        CZoomOut ->
+            "zoom-out"
+
+        CGrab ->
+            "grab"
+
+        CGrabbing ->
+            "grabbing"
+
+
+dataTypeSpec : DataType -> Spec
+dataTypeSpec dType =
+    case dType of
+        FoNumber ->
+            JE.string "number"
+
+        FoBoolean ->
+            JE.string "boolean"
+
+        FoDate dateFmt ->
+            if dateFmt == "" then
+                JE.string "date"
+            else
+                JE.string ("date:'" ++ dateFmt ++ "'")
+
+        FoUtc dateFmt ->
+            if dateFmt == "" then
+                JE.string "utc"
+            else
+                JE.string ("utc:'" ++ dateFmt ++ "'")
+
+
+dataValueSpec : DataValue -> Spec
+dataValueSpec val =
+    case val of
+        Number x ->
+            JE.float x
+
+        Str s ->
+            JE.string s
+
+        Boolean b ->
+            JE.bool b
+
+        DateTime dt ->
+            JE.object (List.map dateTimeProperty dt)
+
+
 dateTimeProperty : DateTime -> LabelledSpec
 dateTimeProperty dt =
     case dt of
@@ -3439,22 +3705,6 @@ dateTimeProperty dt =
 
         DTMilliseconds ms ->
             ( "milliseconds", JE.int ms )
-
-
-dataValueSpec : DataValue -> Spec
-dataValueSpec val =
-    case val of
-        Number x ->
-            JE.float x
-
-        Str s ->
-            JE.string s
-
-        Boolean b ->
-            JE.bool b
-
-        DateTime dt ->
-            JE.object (List.map dateTimeProperty dt)
 
 
 dayLabel : DayName -> String
@@ -3605,16 +3855,6 @@ fieldTitleLabel ftp =
             "plain"
 
 
-headerProperty : HeaderProperty -> LabelledSpec
-headerProperty hProp =
-    case hProp of
-        HFormat fmt ->
-            ( "format", JE.string fmt )
-
-        HTitle title ->
-            ( "title", JE.string title )
-
-
 fontWeightSpec : FontWeight -> Spec
 fontWeightSpec w =
     case w of
@@ -3658,28 +3898,6 @@ fontWeightSpec w =
             JE.float 900
 
 
-dataTypeSpec : DataType -> Spec
-dataTypeSpec dType =
-    case dType of
-        FoNumber ->
-            JE.string "number"
-
-        FoBoolean ->
-            JE.string "boolean"
-
-        FoDate dateFmt ->
-            if dateFmt == "" then
-                JE.string "date"
-            else
-                JE.string ("date:'" ++ dateFmt ++ "'")
-
-        FoUtc dateFmt ->
-            if dateFmt == "" then
-                JE.string "utc"
-            else
-                JE.string ("utc:'" ++ dateFmt ++ "'")
-
-
 formatProperty : Format -> List LabelledSpec
 formatProperty fmt =
     case fmt of
@@ -3715,6 +3933,49 @@ hAlignLabel align =
             "right"
 
 
+headerProperty : HeaderProperty -> LabelledSpec
+headerProperty hProp =
+    case hProp of
+        HFormat fmt ->
+            ( "format", JE.string fmt )
+
+        HTitle title ->
+            ( "title", JE.string title )
+
+
+hyperlinkChannelProperty : HyperlinkChannel -> List LabelledSpec
+hyperlinkChannelProperty field =
+    case field of
+        HName s ->
+            [ ( "field", JE.string s ) ]
+
+        HRepeat arr ->
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
+
+        HmType t ->
+            [ ( "type", JE.string (measurementLabel t) ) ]
+
+        HBin bps ->
+            [ bin bps ]
+
+        HSelectionCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap hyperlinkChannelProperty ifClause) )
+                :: List.concatMap hyperlinkChannelProperty elseClause
+
+        HDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap hyperlinkChannelProperty ifClause) )
+                :: List.concatMap hyperlinkChannelProperty elseClause
+
+        HTimeUnit tu ->
+            [ ( "timeUnit", JE.string (timeUnitLabel tu) ) ]
+
+        HAggregate op ->
+            [ ( "aggregate", JE.string (operationLabel op) ) ]
+
+        HString s ->
+            [ ( "value", JE.string s ) ]
+
+
 inputProperty : InputProperty -> LabelledSpec
 inputProperty prop =
     case prop of
@@ -3741,34 +4002,6 @@ inputProperty prop =
 
         Element el ->
             ( "element", JE.string el )
-
-
-cInterpolateSpec : CInterpolate -> Spec
-cInterpolateSpec iType =
-    case iType of
-        Rgb gamma ->
-            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
-
-        Hsl ->
-            JE.object [ ( "type", JE.string "hsl" ) ]
-
-        HslLong ->
-            JE.object [ ( "type", JE.string "hsl-long" ) ]
-
-        Lab ->
-            JE.object [ ( "type", JE.string "lab" ) ]
-
-        Hcl ->
-            JE.object [ ( "type", JE.string "hcl" ) ]
-
-        HclLong ->
-            JE.object [ ( "type", JE.string "hcl-long" ) ]
-
-        CubeHelix gamma ->
-            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
-
-        CubeHelixLong gamma ->
-            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
 
 
 legendConfigProperty : LegendConfig -> LabelledSpec
@@ -4115,6 +4348,9 @@ markProperty mProp =
         MColor col ->
             ( "color", JE.string col )
 
+        MCursor cur ->
+            ( "cursor", JE.string (cursorLabel cur) )
+
         MFill col ->
             ( "fill", JE.string col )
 
@@ -4275,43 +4511,6 @@ monthNameLabel mon =
 
         Dec ->
             "Dec"
-
-
-scaleNiceSpec : ScaleNice -> Spec
-scaleNiceSpec ni =
-    case ni of
-        NMillisecond ->
-            JE.string "millisecond"
-
-        NSecond ->
-            JE.string "second"
-
-        NMinute ->
-            JE.string "minute"
-
-        NHour ->
-            JE.string "hour"
-
-        NDay ->
-            JE.string "day"
-
-        NWeek ->
-            JE.string "week"
-
-        NMonth ->
-            JE.string "month"
-
-        NYear ->
-            JE.string "year"
-
-        NInterval tu step ->
-            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
-
-        IsNice b ->
-            JE.bool b
-
-        NTickCount n ->
-            JE.int n
 
 
 operationLabel : Operation -> String
@@ -4646,6 +4845,16 @@ repeatFieldsProperty fields =
             ( "column", JE.list (List.map JE.string fields) )
 
 
+resolutionLabel : Resolution -> String
+resolutionLabel res =
+    case res of
+        Shared ->
+            "shared"
+
+        Independent ->
+            "independent"
+
+
 resolveProperty : Resolve -> LabelledSpec
 resolveProperty res =
     case res of
@@ -4660,29 +4869,6 @@ resolveProperty res =
         RScale chRules ->
             --( "scale", JE.object [ ( channelLabel ch, JE.string (resolutionLabel rule) ) ] )
             ( "scale", JE.object <| List.map (\( ch, rule ) -> ( channelLabel ch, JE.string (resolutionLabel rule) )) chRules )
-
-
-resolutionLabel : Resolution -> String
-resolutionLabel res =
-    case res of
-        Shared ->
-            "shared"
-
-        Independent ->
-            "independent"
-
-
-selectionResolutionLabel : SelectionResolution -> String
-selectionResolutionLabel res =
-    case res of
-        Global ->
-            "global"
-
-        Union ->
-            "union"
-
-        Intersection ->
-            "intersect"
 
 
 scaleConfigProperty : ScaleConfig -> LabelledSpec
@@ -4767,6 +4953,83 @@ scaleDomainSpec sdType =
             JE.string "unaggregated"
 
 
+scaleLabel : Scale -> String
+scaleLabel scType =
+    case scType of
+        ScLinear ->
+            "linear"
+
+        ScPow ->
+            "pow"
+
+        ScSqrt ->
+            "sqrt"
+
+        ScLog ->
+            "log"
+
+        ScTime ->
+            "time"
+
+        ScUtc ->
+            "utc"
+
+        ScSequential ->
+            "sequential"
+
+        ScOrdinal ->
+            "ordinal"
+
+        ScBand ->
+            "band"
+
+        ScPoint ->
+            "point"
+
+        ScBinLinear ->
+            "bin-linear"
+
+        ScBinOrdinal ->
+            "bin-ordinal"
+
+
+scaleNiceSpec : ScaleNice -> Spec
+scaleNiceSpec ni =
+    case ni of
+        NMillisecond ->
+            JE.string "millisecond"
+
+        NSecond ->
+            JE.string "second"
+
+        NMinute ->
+            JE.string "minute"
+
+        NHour ->
+            JE.string "hour"
+
+        NDay ->
+            JE.string "day"
+
+        NWeek ->
+            JE.string "week"
+
+        NMonth ->
+            JE.string "month"
+
+        NYear ->
+            JE.string "year"
+
+        NInterval tu step ->
+            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
+
+        IsNice b ->
+            JE.bool b
+
+        NTickCount n ->
+            JE.int n
+
+
 scaleProperty : ScaleProperty -> LabelledSpec
 scaleProperty scaleProp =
     case scaleProp of
@@ -4824,46 +5087,6 @@ scaleProperty scaleProp =
 
         SReverse b ->
             ( "reverse", JE.bool b )
-
-
-scaleLabel : Scale -> String
-scaleLabel scType =
-    case scType of
-        ScLinear ->
-            "linear"
-
-        ScPow ->
-            "pow"
-
-        ScSqrt ->
-            "sqrt"
-
-        ScLog ->
-            "log"
-
-        ScTime ->
-            "time"
-
-        ScUtc ->
-            "utc"
-
-        ScSequential ->
-            "sequential"
-
-        ScOrdinal ->
-            "ordinal"
-
-        ScBand ->
-            "band"
-
-        ScPoint ->
-            "point"
-
-        ScBinLinear ->
-            "bin-linear"
-
-        ScBinOrdinal ->
-            "bin-ordinal"
 
 
 schemeProperty : String -> List Float -> LabelledSpec
@@ -4960,6 +5183,19 @@ selectionProperty selProp =
                 ( "zoom", JE.string e )
 
 
+selectionResolutionLabel : SelectionResolution -> String
+selectionResolutionLabel res =
+    case res of
+        Global ->
+            "global"
+
+        Union ->
+            "union"
+
+        Intersection ->
+            "intersect"
+
+
 sideLabel : Side -> String
 sideLabel side =
     case side of
@@ -4995,6 +5231,22 @@ sortProperty sp =
             ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
 
 
+stackProperty : StackProperty -> LabelledSpec
+stackProperty sp =
+    case sp of
+        StZero ->
+            ( "stack", JE.string "zero" )
+
+        StNormalize ->
+            ( "stack", JE.string "normalize" )
+
+        StCenter ->
+            ( "stack", JE.string "center" )
+
+        NoStack ->
+            ( "stack", JE.null )
+
+
 symbolLabel : Symbol -> String
 symbolLabel sym =
     case sym of
@@ -5018,92 +5270,6 @@ symbolLabel sym =
 
         Path svgPath ->
             svgPath
-
-
-vlPropertyLabel : VLProperty -> String
-vlPropertyLabel spec =
-    case spec of
-        VLName ->
-            "name"
-
-        VLDescription ->
-            "description"
-
-        VLTitle ->
-            "title"
-
-        VLWidth ->
-            "width"
-
-        VLHeight ->
-            "height"
-
-        VLPadding ->
-            "padding"
-
-        VLAutosize ->
-            "autosize"
-
-        VLBackground ->
-            "background"
-
-        VLData ->
-            "data"
-
-        VLProjection ->
-            "projection"
-
-        VLMark ->
-            "mark"
-
-        VLTransform ->
-            "transform"
-
-        VLEncoding ->
-            "encoding"
-
-        VLConfig ->
-            "config"
-
-        VLSelection ->
-            "selection"
-
-        VLHConcat ->
-            "hconcat"
-
-        VLVConcat ->
-            "vconcat"
-
-        VLLayer ->
-            "layer"
-
-        VLRepeat ->
-            "repeat"
-
-        VLFacet ->
-            "facet"
-
-        VLSpec ->
-            "spec"
-
-        VLResolve ->
-            "resolve"
-
-
-stackProperty : StackProperty -> LabelledSpec
-stackProperty sp =
-    case sp of
-        StZero ->
-            ( "stack", JE.string "zero" )
-
-        StNormalize ->
-            ( "stack", JE.string "normalize" )
-
-        StCenter ->
-            ( "stack", JE.string "center" )
-
-        NoStack ->
-            ( "stack", JE.null )
 
 
 textChannelProperty : TextChannel -> List LabelledSpec
@@ -5131,46 +5297,12 @@ textChannelProperty tDef =
             [ ( "format", JE.string fmt ) ]
 
         TSelectionCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap textChannelProperty ifClause) )
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap textChannelProperty ifClause) )
                 :: List.concatMap textChannelProperty elseClause
 
         TDataCondition predicate ifClause elseClause ->
-            ( "condition", JE.object (( "test", JE.string predicate ) :: List.concatMap textChannelProperty ifClause) )
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap textChannelProperty ifClause) )
                 :: List.concatMap textChannelProperty elseClause
-
-
-titleConfigSpec : TitleConfig -> LabelledSpec
-titleConfigSpec titleCfg =
-    case titleCfg of
-        TAnchor an ->
-            ( "anchor", JE.string (anchorLabel an) )
-
-        TAngle x ->
-            ( "angle", JE.float x )
-
-        TBaseline va ->
-            ( "baseline", JE.string (vAlignLabel va) )
-
-        TColor clr ->
-            ( "color", JE.string clr )
-
-        TFont fnt ->
-            ( "font", JE.string fnt )
-
-        TFontSize x ->
-            ( "fontSize", JE.float x )
-
-        TFontWeight w ->
-            ( "fontWeight", fontWeightSpec w )
-
-        TLimit x ->
-            ( "limit", JE.float x )
-
-        TOffset x ->
-            ( "offset", JE.float x )
-
-        TOrient sd ->
-            ( "orient", JE.string (sideLabel sd) )
 
 
 timeUnitLabel : TimeUnit -> String
@@ -5243,6 +5375,40 @@ timeUnitLabel tu =
             "milliseconds"
 
 
+titleConfigSpec : TitleConfig -> LabelledSpec
+titleConfigSpec titleCfg =
+    case titleCfg of
+        TAnchor an ->
+            ( "anchor", JE.string (anchorLabel an) )
+
+        TAngle x ->
+            ( "angle", JE.float x )
+
+        TBaseline va ->
+            ( "baseline", JE.string (vAlignLabel va) )
+
+        TColor clr ->
+            ( "color", JE.string clr )
+
+        TFont fnt ->
+            ( "font", JE.string fnt )
+
+        TFontSize x ->
+            ( "fontSize", JE.float x )
+
+        TFontWeight w ->
+            ( "fontWeight", fontWeightSpec w )
+
+        TLimit x ->
+            ( "limit", JE.float x )
+
+        TOffset x ->
+            ( "offset", JE.float x )
+
+        TOrient sd ->
+            ( "orient", JE.string (sideLabel sd) )
+
+
 vAlignLabel : VAlign -> String
 vAlignLabel align =
     case align of
@@ -5298,3 +5464,73 @@ viewConfigProperty viewCfg =
 
         StrokeDashOffset x ->
             ( "strokeDashOffset", JE.float x )
+
+
+vlPropertyLabel : VLProperty -> String
+vlPropertyLabel spec =
+    case spec of
+        VLName ->
+            "name"
+
+        VLDescription ->
+            "description"
+
+        VLTitle ->
+            "title"
+
+        VLWidth ->
+            "width"
+
+        VLHeight ->
+            "height"
+
+        VLPadding ->
+            "padding"
+
+        VLAutosize ->
+            "autosize"
+
+        VLBackground ->
+            "background"
+
+        VLData ->
+            "data"
+
+        VLProjection ->
+            "projection"
+
+        VLMark ->
+            "mark"
+
+        VLTransform ->
+            "transform"
+
+        VLEncoding ->
+            "encoding"
+
+        VLConfig ->
+            "config"
+
+        VLSelection ->
+            "selection"
+
+        VLHConcat ->
+            "hconcat"
+
+        VLVConcat ->
+            "vconcat"
+
+        VLLayer ->
+            "layer"
+
+        VLRepeat ->
+            "repeat"
+
+        VLFacet ->
+            "facet"
+
+        VLSpec ->
+            "spec"
+
+        VLResolve ->
+            "resolve"

@@ -65,7 +65,7 @@ selectionCondition1 =
                 << color [ MAggregate Count, MName "*", MmType Quantitative ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [], enc [] ]
+        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
 
 
 selectionCondition2 : Spec
@@ -99,7 +99,7 @@ selectionCondition2 =
                     ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [], enc [] ]
+        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
 
 
 selectionCondition3 : Spec
