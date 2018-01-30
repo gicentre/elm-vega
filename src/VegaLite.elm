@@ -588,6 +588,7 @@ type AxisProperty
     | AxTitleMaxLength Float
     | AxTitlePadding Float
     | AxValues (List Float)
+    | AxDates (List (List DateTime))
     | AxZIndex Int
 
 
@@ -3239,8 +3240,10 @@ axisProperty axisProp =
             ( "tickSize", JE.float sz )
 
         AxValues vals ->
-            -- TODO: Convert data values
             ( "values", JE.list (List.map JE.float vals) )
+
+        AxDates dtss ->
+            ( "values", JE.list (List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss) )
 
         AxTitle title ->
             ( "title", JE.string title )
