@@ -100,8 +100,7 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach Dat
 -   elm-vega does not render graphics directly, but instead generates data visualization specifications that may be passed to JavaScript for rendering.
 
 -   elm-vega is currently limited to the Vega-Lite specification (and a small amount of the Vega specification) so is limited to Cartesian coordinate systems (e.g. no pie charts or rose diagrams).
-    However, as Vega-Lite develops (e.g. geospatial mapping will be available shortly), so will elm-vega.
-    And the door remains open for full Vega integration in the future.
+    However, full Vega integration is currently being developed for a later release.
 
 -   While limited animation is possible through interaction and dynamic data generation, there is no direct support for animated transitions (unlike D3 for example).
 
