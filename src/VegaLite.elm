@@ -403,7 +403,7 @@ encode a mark (or text) dependent on an interactive selection. `MDataCondition`
 
 For interaction, once a selection has been defined and named, supplying a set of
 `MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
-`MSelectionCondition` is followed firstly by a boolean expression relating to the
+`MSelectionCondition` is followed firstly by a Boolean expression relating to the
 selection upon which it is dependent, then an 'if' and an 'else' clause. Each clause
 is a list of mark field encodings that should be applied when the selection is true
 (the 'if clause') and when it is false (the 'else clause'). The color encoding below
@@ -1003,7 +1003,7 @@ type HyperlinkChannel
     | HString String
 
 
-{-| GUI Input properties. The type of relevant proerty will depend on the type of
+{-| GUI Input properties. The type of relevant property will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
 max and step values; InSelect (selector) has a list of selection label options.
 For details see the
@@ -1226,7 +1226,7 @@ type
 {-| Type of measurement to be associated with some channel. `Nominal` data are
 categories identified by name alone and which have no intrinsic order. `Ordinal`
 data are also categories, but ones which have some natural order. `Quantitative`
-data are numeric measurements typcially on a continuous scale. `Temporal` data
+data are numeric measurements typically on a continuous scale. `Temporal` data
 describe time. Geospatial types can be set with `Longitude`, `Latitude` and `Geojson`.
 -}
 type Measurement
@@ -1369,7 +1369,7 @@ type Projection
 
 
 {-| Properties for customising a geospatial projection that converts longitude/latitude
-paris into planar (x,y) coordinates for rendering and query. For details see the
+pairs into planar (x,y) coordinate pairs for rendering and query. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
 -}
 type ProjectionProperty
@@ -1658,7 +1658,7 @@ type TextChannel
     | TFormat String
 
 
-{-| Describes a unit of time. Useufl for encoding and transformations. See the
+{-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
 for further details.
 -}
@@ -1887,8 +1887,8 @@ bin bProps =
 
 
 {-| Create a named binning transformation that may be referenced in other Transformations
-or encodings. This works in a similar way to `bin` but reqires the name of the field
-to bin and an addtional label so it may be referenced in other expressions. The
+or encodings. This works in a similar way to `bin` but requires the name of the field
+to bin and an additional label so it may be referenced in other expressions. The
 type of binning can be customised with a list of `BinProperty` or an empty list
 to use the default binning. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
@@ -1966,7 +1966,7 @@ color markProps =
 {-| Encodes a new facet to be arranged in columns. The first parameter is a list
 of properties that define the faceting channel. This should include at least the
 name of the data field and its measurement type. The final parameter is a list of
-anyprevious channels to which this is to be added. This is usually implicit when
+any previous channels to which this is to be added. This is usually implicit when
 chaining encodings using functional composition
 
     enc =
@@ -2094,7 +2094,7 @@ be provided in the first parameter or an empty list to use the default formattin
 for details.
 The rows themselves are most easily generated with `dataRow`. Note though that generally
 if you are creating data inline (as opposed to reading from a file), adding data by column
-in more efficent and less error-prone.
+in more efficient and less error-prone.
 
     data =
         dataFromRows [ Parse [ ( "Year", FDate "%Y" ) ] ]
@@ -2375,7 +2375,7 @@ layer specs =
 
 
 {-| Perform a lookup of named fields between two data sources. This allows you to
-find values in one data source based on the the values in another (like a relational
+find values in one data source based on the values in another (like a relational
 join). The first parameter is the field in the primary data source to act as key,
 the second is the secondary data source which can be specified with a call to `dataFromUrl`
 or other data generating function. The third is the name of the field in the secondary
@@ -2385,14 +2385,14 @@ the final implicit parameter is a list of any other transformations to which thi
 is to be added.
 
 Unlike `lookupAs`, this function will only return the specific fields named in the
-fourth parameter. If you wisth to return the entire set of fields in the secondary
+fourth parameter. If you wish to return the entire set of fields in the secondary
 data source as a single object, use `lookupAs`.
 
 See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
 for further details.
 
 The following would return the values in the `age` and `height` fields from
-`lookup_people.csv` for all rows where the value in the `name` column in the that
+`lookup_people.csv` for all rows where the value in the `name` column in that
 file matches the value of `person` in the primary data source.
 
     data =
@@ -2417,7 +2417,7 @@ lookup key1 ( vlProp, spec ) key2 fields =
 
 
 {-| Perform an object lookup between two data sources. This allows you to find
-values in one data source based on the the values in another (like a relational
+values in one data source based on the values in another (like a relational
 join). The first parameter is the field in the primary data source to act as key,
 the second is the secondary data source which can be specified with a call to
 `dataFromUrl` or other data generating function. The third is the name of the field
@@ -2435,7 +2435,7 @@ See the
 for further details.
 
 In the following example, `personDetails` would reference all the field values in
-`lookup_people.csv` for each row where the value in the `name` column in the that
+`lookup_people.csv` for each row where the value in the `name` column in that
 file matches the value of `person` in the primary data source.
 
     data =
@@ -2588,7 +2588,7 @@ position pos pDefs =
 
 
 {-| Sets the cartographic projection used for geospatial coordinates. A projection
-defines the mapping from longitude,latitude to an (x,y) plane used for rendering.
+defines the mapping from _(longitude,latitude)_ to an _(x,y)_ plane used for rendering.
 This is useful when using the `Geoshape` mark. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
 
@@ -2784,7 +2784,7 @@ to in multiple encodings. The first parameter is the 'width' of each temporal bi
 the second is the field to bin and the third is name to give the newly binned
 field. The final often implicit parameter is a list of previous transformations
 to which this is added. Note though that usually it is easer to apply the temporal
-binning directly as part of the encoding as this will autimatically format the
+binning directly as part of the encoding as this will automatically format the
 temporal axis. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html#transform)
 for further details.
