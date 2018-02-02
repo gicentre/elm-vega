@@ -36,6 +36,18 @@ defaultSize2 =
         ]
 
 
+choropleth1 : Spec
+choropleth1 =
+    toVegaLite
+        [ width 900
+        , height 500
+        , configure <| configuration (View [ Stroke Nothing ]) []
+        , dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+        , mark Geoshape [ MStrokeOpacity 0 ]
+        , encoding <| color [ MName "id", MmType Nominal ] []
+        ]
+
+
 mapComp1 : Spec
 mapComp1 =
     let
@@ -63,6 +75,66 @@ mapComp1 =
     in
     toVegaLite
         [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
+
+
+mapComp2 : Spec
+mapComp2 =
+    let
+        rotatedSpec rot =
+            let
+                seaSpec =
+                    asSpec
+                        [ width 300
+                        , height 300
+                        , projection [ PType Orthographic, PRotate 0 0 0 ]
+                        , dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
+                        , mark Geoshape [ MFill "#c1e7f5", MStrokeOpacity 0 ]
+                        ]
+
+                graticuleSpec =
+                    asSpec
+                        [ width 300
+                        , height 300
+                        , projection [ PType Orthographic, PRotate rot 0 0 ]
+                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
+                        ]
+
+                countrySpec =
+                    asSpec
+                        [ width 300
+                        , height 300
+                        , projection [ PType Orthographic, PRotate rot 0 0 ]
+                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
+                        , mark Geoshape [ MStroke "white", MFill "#242", MStrokeWidth 0.1 ]
+                        ]
+            in
+            asSpec [ layer [ seaSpec, graticuleSpec, countrySpec ] ]
+    in
+    toVegaLite
+        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec 0, rotatedSpec -40 ] ]
+
+
+dotMap1 : Spec
+dotMap1 =
+    let
+        enc =
+            encoding
+                << position X [ PName "longitude", PmType Longitude ]
+                << position Y [ PName "latitude", PmType Latitude ]
+                << size [ MNumber 1 ]
+                << color [ MName "digit", MmType Nominal ]
+    in
+    toVegaLite
+        [ description "US zip codes: One dot per zipcode colored by first digit"
+        , width 500
+        , height 300
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/zipcodes.csv" []
+        , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
+        , mark Circle []
+        , enc []
+        ]
 
 
 scribbleMap1 : Spec
@@ -156,10 +228,12 @@ mySpecs =
     combineSpecs
         [ ( "defaultSize1", defaultSize1 )
         , ( "defaultSize2", defaultSize2 )
+        , ( "choropleth1", choropleth1 )
         , ( "mapComp1", mapComp1 )
-
-        -- , ( "scribbleMap1", scribbleMap1 )
-        -- , ( "scribbleMap2", scribbleMap2 )
+        , ( "mapComp2", mapComp2 )
+        , ( "dotMap1", dotMap1 )
+        , ( "scribbleMap1", scribbleMap1 )
+        , ( "scribbleMap2", scribbleMap2 )
         ]
 
 
