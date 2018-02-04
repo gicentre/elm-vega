@@ -16250,6 +16250,731 @@ var _gicentre$elm_vega$GeoTests$view = function (spec) {
 			}
 		});
 };
+var _gicentre$elm_vega$GeoTests$tubeLineColors = _gicentre$elm_vega$VegaLite$categoricalDomainMap(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'Bakerloo', _1: 'rgb(137,78,36)'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'Central', _1: 'rgb(220,36,30)'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'Circle', _1: 'rgb(255,206,0)'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'District', _1: 'rgb(1,114,41)'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'DLR', _1: 'rgb(0,175,173)'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'Hammersmith & City', _1: 'rgb(215,153,175)'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'Jubilee', _1: 'rgb(106,114,120)'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'Metropolitan', _1: 'rgb(114,17,84)'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'Northern', _1: 'rgb(0,0,0)'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'Piccadilly', _1: 'rgb(0,24,168)'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'Victoria', _1: 'rgb(0,160,226)'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'Waterloo & City', _1: 'rgb(106,187,170)'},
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$GeoTests$boroughColors = _gicentre$elm_vega$VegaLite$categoricalDomainMap(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'Kingston upon Thames', _1: '#9db7b1'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'Croydon', _1: '#d4b4e5'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'Bromley', _1: '#afb9cb'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'Hounslow', _1: '#b2add6'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'Ealing', _1: '#e2f8ca'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'Havering', _1: '#a1bde6'},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'Hillingdon', _1: '#e8aa95'},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'Harrow', _1: '#8bd0eb'},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'Brent', _1: '#dfb89b'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'Barnet', _1: '#a2e7ed'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'Lambeth', _1: '#e3aba7'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'Southwark', _1: '#86cbd1'},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'Lewisham', _1: '#ecb1c2'},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'Greenwich', _1: '#acd8ba'},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'Bexley', _1: '#e4bad9'},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'Enfield', _1: '#9bd6ca'},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'Waltham Forest', _1: '#cec9f3'},
+																		_1: {
+																			ctor: '::',
+																			_0: {ctor: '_Tuple2', _0: 'Redbridge', _1: '#c9d2a8'},
+																			_1: {
+																				ctor: '::',
+																				_0: {ctor: '_Tuple2', _0: 'Sutton', _1: '#d1c1d9'},
+																				_1: {
+																					ctor: '::',
+																					_0: {ctor: '_Tuple2', _0: 'Richmond upon Thames', _1: '#ddcba2'},
+																					_1: {
+																						ctor: '::',
+																						_0: {ctor: '_Tuple2', _0: 'Merton', _1: '#a2acbd'},
+																						_1: {
+																							ctor: '::',
+																							_0: {ctor: '_Tuple2', _0: 'Wandsworth', _1: '#deefd6'},
+																							_1: {
+																								ctor: '::',
+																								_0: {ctor: '_Tuple2', _0: 'Hammersmith and Fulham', _1: '#b5d7a7'},
+																								_1: {
+																									ctor: '::',
+																									_0: {ctor: '_Tuple2', _0: 'Kensington and Chelsea', _1: '#f6d4c9'},
+																									_1: {
+																										ctor: '::',
+																										_0: {ctor: '_Tuple2', _0: 'Westminster', _1: '#add4e0'},
+																										_1: {
+																											ctor: '::',
+																											_0: {ctor: '_Tuple2', _0: 'Camden', _1: '#d9b9ad'},
+																											_1: {
+																												ctor: '::',
+																												_0: {ctor: '_Tuple2', _0: 'Tower Hamlets', _1: '#c6e1db'},
+																												_1: {
+																													ctor: '::',
+																													_0: {ctor: '_Tuple2', _0: 'Islington', _1: '#e0c7ce'},
+																													_1: {
+																														ctor: '::',
+																														_0: {ctor: '_Tuple2', _0: 'Hackney', _1: '#a6b79f'},
+																														_1: {
+																															ctor: '::',
+																															_0: {ctor: '_Tuple2', _0: 'Haringey', _1: '#cbd5e7'},
+																															_1: {
+																																ctor: '::',
+																																_0: {ctor: '_Tuple2', _0: 'Newham', _1: '#c2d2ba'},
+																																_1: {
+																																	ctor: '::',
+																																	_0: {ctor: '_Tuple2', _0: 'Barking and Dagenham', _1: '#ebe2cf'},
+																																	_1: {
+																																		ctor: '::',
+																																		_0: {ctor: '_Tuple2', _0: 'City of London', _1: '#c7bfad'},
+																																		_1: {ctor: '[]'}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$GeoTests$tubeLines3 = function () {
+	var tubeEnc = function (_p7) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A2(
+				_gicentre$elm_vega$VegaLite$color,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$MName('id'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MLegend(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$LTitle(''),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$LOrient(_gicentre$elm_vega$VegaLite$BottomRight),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$LOffset(0),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MScale(_gicentre$elm_vega$GeoTests$tubeLineColors),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_p7));
+	};
+	var routeSpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/londonTubeLines.json',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('line'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Geoshape,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MFilled(false),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(2),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: tubeEnc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var trans = function (_p8) {
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'indexof (datum.name,\' \') > 0  ? substring(datum.name,0,indexof(datum.name, \' \')) : datum.name', 'bLabel', _p8));
+	};
+	var labelEnc = function (_p9) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('cx'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PName('cy'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$TName('bLabel'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$TmType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$size,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MNumber(8),
+								_1: {ctor: '[]'}
+							},
+							A2(
+								_gicentre$elm_vega$VegaLite$opacity,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MNumber(0.6),
+									_1: {ctor: '[]'}
+								},
+								_p9))))));
+	};
+	var labelSpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/londonCentroids.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Text,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: labelEnc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	var polySpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/londonBoroughs.json',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('boroughs'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Geoshape,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MStroke('rgb(251,247,238)'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(2),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$encoding(
+						A2(
+							_gicentre$elm_vega$VegaLite$color,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MString('#ddc'),
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'})),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$width(700),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$height(500),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$configure(
+						A2(
+							_gicentre$elm_vega$VegaLite$configuration,
+							_gicentre$elm_vega$VegaLite$View(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+									_1: {ctor: '[]'}
+								}),
+							{ctor: '[]'})),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$layer(
+							{
+								ctor: '::',
+								_0: polySpec,
+								_1: {
+									ctor: '::',
+									_0: labelSpec,
+									_1: {
+										ctor: '::',
+										_0: routeSpec,
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GeoTests$tubeLines2 = function () {
+	var enc = function (_p10) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A2(
+				_gicentre$elm_vega$VegaLite$color,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$MName('id'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MLegend(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$LTitle(''),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$LOrient(_gicentre$elm_vega$VegaLite$BottomRight),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MScale(_gicentre$elm_vega$GeoTests$tubeLineColors),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_p10));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$width(700),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$height(500),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$configure(
+						A2(
+							_gicentre$elm_vega$VegaLite$configuration,
+							_gicentre$elm_vega$VegaLite$View(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+									_1: {ctor: '[]'}
+								}),
+							{ctor: '[]'})),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gicentre$elm_vega$VegaLite$dataFromUrl,
+							'data/londonTubeLines.json',
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('line'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Geoshape,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MFilled(false),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(2),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: enc(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GeoTests$tubeLines1 = _gicentre$elm_vega$VegaLite$toVegaLite(
+	{
+		ctor: '::',
+		_0: _gicentre$elm_vega$VegaLite$width(700),
+		_1: {
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$height(500),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
+					'data/londonTubeLines.json',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('line'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Geoshape,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MFilled(false),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$encoding(
+							A2(
+								_gicentre$elm_vega$VegaLite$color,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MName('id'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	});
+var _gicentre$elm_vega$GeoTests$choropleth2 = function () {
+	var labelEnc = function (_p11) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('cx'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PName('cy'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$TName('bLabel'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$TmType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p11))));
+	};
+	var polyEnc = function (_p12) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A2(
+				_gicentre$elm_vega$VegaLite$color,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$MName('id'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MScale(_gicentre$elm_vega$GeoTests$boroughColors),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MLegend(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$opacity,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MNumber(1),
+						_1: {ctor: '[]'}
+					},
+					_p12)));
+	};
+	var polySpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/londonBoroughs.json',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('boroughs'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$mark,
+					_gicentre$elm_vega$VegaLite$Geoshape,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$MStroke('rgb(251,247,238)'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(2),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: polyEnc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	var trans = function (_p13) {
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'indexof (datum.name,\' \') > 0  ? substring(datum.name,0,indexof(datum.name, \' \')) : datum.name', 'bLabel', _p13));
+	};
+	var labelSpec = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataFromUrl,
+				'data/londonCentroids.json',
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Text,
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: labelEnc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$width(1200),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$height(700),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$configure(
+						A2(
+							_gicentre$elm_vega$VegaLite$configuration,
+							_gicentre$elm_vega$VegaLite$View(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+									_1: {ctor: '[]'}
+								}),
+							{ctor: '[]'})),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$layer(
+							{
+								ctor: '::',
+								_0: polySpec,
+								_1: {
+									ctor: '::',
+									_0: labelSpec,
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
 var _gicentre$elm_vega$GeoTests$choropleth1 = _gicentre$elm_vega$VegaLite$toVegaLite(
 	{
 		ctor: '::',
@@ -16430,20 +17155,36 @@ var _gicentre$elm_vega$GeoTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpe
 				_0: {ctor: '_Tuple2', _0: 'choropleth1', _1: _gicentre$elm_vega$GeoTests$choropleth1},
 				_1: {
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'mapComp1', _1: _gicentre$elm_vega$GeoTests$mapComp1},
+					_0: {ctor: '_Tuple2', _0: 'choropleth2', _1: _gicentre$elm_vega$GeoTests$choropleth2},
 					_1: {
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'mapComp2', _1: _gicentre$elm_vega$GeoTests$mapComp2},
+						_0: {ctor: '_Tuple2', _0: 'linear1', _1: _gicentre$elm_vega$GeoTests$tubeLines1},
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'dotMap1', _1: _gicentre$elm_vega$GeoTests$dotMap1},
+							_0: {ctor: '_Tuple2', _0: 'linear2', _1: _gicentre$elm_vega$GeoTests$tubeLines2},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
+								_0: {ctor: '_Tuple2', _0: 'linear3', _1: _gicentre$elm_vega$GeoTests$tubeLines3},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
-									_1: {ctor: '[]'}
+									_0: {ctor: '_Tuple2', _0: 'mapComp1', _1: _gicentre$elm_vega$GeoTests$mapComp1},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'mapComp2', _1: _gicentre$elm_vega$GeoTests$mapComp2},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'dotMap1', _1: _gicentre$elm_vega$GeoTests$dotMap1},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
 								}
 							}
 						}
@@ -16466,7 +17207,7 @@ var _gicentre$elm_vega$GeoTests$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GeoTests$view,
 		update: F2(
-			function (_p7, model) {
+			function (_p14, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

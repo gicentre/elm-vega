@@ -48,6 +48,181 @@ choropleth1 =
         ]
 
 
+choropleth2 : Spec
+choropleth2 =
+    let
+        trans =
+            transform
+                << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
+
+        polyEnc =
+            encoding
+                << color [ MName "id", MmType Nominal, MScale boroughColors, MLegend [] ]
+                << opacity [ MNumber 1 ]
+
+        polySpec =
+            asSpec
+                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , polyEnc []
+                ]
+
+        labelEnc =
+            encoding
+                << position X [ PName "cx", PmType Longitude ]
+                << position Y [ PName "cy", PmType Latitude ]
+                << text [ TName "bLabel", TmType Nominal ]
+
+        labelSpec =
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+    in
+    toVegaLite
+        [ width 1200
+        , height 700
+        , configure <| configuration (View [ Stroke Nothing ]) []
+        , layer [ polySpec, labelSpec ]
+        ]
+
+
+tubeLines1 : Spec
+tubeLines1 =
+    toVegaLite
+        [ width 700
+        , height 500
+        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+        , mark Geoshape [ MFilled False ]
+        , encoding <| color [ MName "id", MmType Nominal ] []
+        ]
+
+
+tubeLines2 : Spec
+tubeLines2 =
+    let
+        enc =
+            encoding
+                << color
+                    [ MName "id"
+                    , MmType Nominal
+                    , MLegend [ LTitle "", LOrient BottomRight ]
+                    , MScale tubeLineColors
+                    ]
+    in
+    toVegaLite
+        [ width 700
+        , height 500
+        , configure <| configuration (View [ Stroke Nothing ]) []
+        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+        , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+        , enc []
+        ]
+
+
+tubeLines3 : Spec
+tubeLines3 =
+    let
+        polySpec =
+            asSpec
+                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , encoding <| color [ MString "#ddc" ] []
+                ]
+
+        labelEnc =
+            encoding
+                << position X [ PName "cx", PmType Longitude ]
+                << position Y [ PName "cy", PmType Latitude ]
+                << text [ TName "bLabel", TmType Nominal ]
+                << size [ MNumber 8 ]
+                << opacity [ MNumber 0.6 ]
+
+        trans =
+            transform
+                << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
+
+        labelSpec =
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+
+        tubeEnc =
+            encoding
+                << color
+                    [ MName "id"
+                    , MmType Nominal
+                    , MLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , MScale tubeLineColors
+                    ]
+
+        routeSpec =
+            asSpec
+                [ dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+                , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+                , tubeEnc []
+                ]
+    in
+    toVegaLite
+        [ width 700
+        , height 500
+        , configure <| configuration (View [ Stroke Nothing ]) []
+        , layer [ polySpec, labelSpec, routeSpec ]
+        ]
+
+
+boroughColors : List ScaleProperty
+boroughColors =
+    categoricalDomainMap
+        [ ( "Kingston upon Thames", "#9db7b1" )
+        , ( "Croydon", "#d4b4e5" )
+        , ( "Bromley", "#afb9cb" )
+        , ( "Hounslow", "#b2add6" )
+        , ( "Ealing", "#e2f8ca" )
+        , ( "Havering", "#a1bde6" )
+        , ( "Hillingdon", "#e8aa95" )
+        , ( "Harrow", "#8bd0eb" )
+        , ( "Brent", "#dfb89b" )
+        , ( "Barnet", "#a2e7ed" )
+        , ( "Lambeth", "#e3aba7" )
+        , ( "Southwark", "#86cbd1" )
+        , ( "Lewisham", "#ecb1c2" )
+        , ( "Greenwich", "#acd8ba" )
+        , ( "Bexley", "#e4bad9" )
+        , ( "Enfield", "#9bd6ca" )
+        , ( "Waltham Forest", "#cec9f3" )
+        , ( "Redbridge", "#c9d2a8" )
+        , ( "Sutton", "#d1c1d9" )
+        , ( "Richmond upon Thames", "#ddcba2" )
+        , ( "Merton", "#a2acbd" )
+        , ( "Wandsworth", "#deefd6" )
+        , ( "Hammersmith and Fulham", "#b5d7a7" )
+        , ( "Kensington and Chelsea", "#f6d4c9" )
+        , ( "Westminster", "#add4e0" )
+        , ( "Camden", "#d9b9ad" )
+        , ( "Tower Hamlets", "#c6e1db" )
+        , ( "Islington", "#e0c7ce" )
+        , ( "Hackney", "#a6b79f" )
+        , ( "Haringey", "#cbd5e7" )
+        , ( "Newham", "#c2d2ba" )
+        , ( "Barking and Dagenham", "#ebe2cf" )
+        , ( "City of London", "#c7bfad" )
+        ]
+
+
+tubeLineColors : List ScaleProperty
+tubeLineColors =
+    categoricalDomainMap
+        [ ( "Bakerloo", "rgb(137,78,36)" )
+        , ( "Central", "rgb(220,36,30)" )
+        , ( "Circle", "rgb(255,206,0)" )
+        , ( "District", "rgb(1,114,41)" )
+        , ( "DLR", "rgb(0,175,173)" )
+        , ( "Hammersmith & City", "rgb(215,153,175)" )
+        , ( "Jubilee", "rgb(106,114,120)" )
+        , ( "Metropolitan", "rgb(114,17,84)" )
+        , ( "Northern", "rgb(0,0,0)" )
+        , ( "Piccadilly", "rgb(0,24,168)" )
+        , ( "Victoria", "rgb(0,160,226)" )
+        , ( "Waterloo & City", "rgb(106,187,170)" )
+        ]
+
+
 mapComp1 : Spec
 mapComp1 =
     let
@@ -229,6 +404,10 @@ mySpecs =
         [ ( "defaultSize1", defaultSize1 )
         , ( "defaultSize2", defaultSize2 )
         , ( "choropleth1", choropleth1 )
+        , ( "choropleth2", choropleth2 )
+        , ( "linear1", tubeLines1 )
+        , ( "linear2", tubeLines2 )
+        , ( "linear3", tubeLines3 )
         , ( "mapComp1", mapComp1 )
         , ( "mapComp2", mapComp2 )
         , ( "dotMap1", dotMap1 )

@@ -8703,6 +8703,19 @@ var _gicentre$elm_vega$VegaLite$axisProperty = function (axisProp) {
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p75._0))
 			};
+		case 'AxDates':
+			return {
+				ctor: '_Tuple2',
+				_0: 'values',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(
+						_elm_lang$core$List$map,
+						function (dts) {
+							return _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$dateTimeProperty, dts));
+						},
+						_p75._0))
+			};
 		case 'AxTitle':
 			return {
 				ctor: '_Tuple2',
@@ -10959,6 +10972,9 @@ var _gicentre$elm_vega$VegaLite$BandPosition = function (a) {
 };
 var _gicentre$elm_vega$VegaLite$AxZIndex = function (a) {
 	return {ctor: 'AxZIndex', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$AxDates = function (a) {
+	return {ctor: 'AxDates', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$AxValues = function (a) {
 	return {ctor: 'AxValues', _0: a};
