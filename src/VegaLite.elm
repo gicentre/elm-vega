@@ -158,6 +158,7 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromRows
 @docs dataColumn
 @docs dataRow
+@docs Data
 @docs DataColumn
 @docs DataRow
 @docs Format
