@@ -13,6 +13,7 @@ module VegaLite
         , ClipRect(..)
         , ConfigurationProperty(..)
         , Cursor(..)
+        , Data
         , DataColumn
         , DataRow
         , DataType(..)
@@ -777,6 +778,19 @@ type Cursor
     | CZoomOut
     | CGrab
     | CGrabbing
+
+
+{-| Convenience type annotation label for use with data generation functions.
+
+    myRegion : List DataColumn -> Data
+    myRegion =
+        dataFromColumns []
+            << dataColumn "easting" (Numbers [ -3, 4, 4, -3, -3 ])
+            << dataColumn "northing" (Numbers [ 52, 52, 45, 45, 52 ])
+
+-}
+type alias Data =
+    ( VLProperty, Spec )
 
 
 {-| Represents a single column of data. Used when generating inline data with
@@ -2064,7 +2078,7 @@ The columns themselves are most easily generated with `dataColumn`
             << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
 
 -}
-dataFromColumns : List Format -> List DataColumn -> ( VLProperty, Spec )
+dataFromColumns : List Format -> List DataColumn -> Data
 dataFromColumns fmts cols =
     let
         dataArray =
@@ -2103,7 +2117,7 @@ in more efficient and less error-prone.
             << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
 
 -}
-dataFromRows : List Format -> List DataRow -> ( VLProperty, Spec )
+dataFromRows : List Format -> List DataRow -> Data
 dataFromRows fmts rows =
     if fmts == [] then
         ( VLData, JE.object [ ( "values", JE.list rows ) ] )
@@ -2126,7 +2140,7 @@ for details.
     ( Data, dataFromUrl "data/population.json" [])
 
 -}
-dataFromUrl : String -> List Format -> ( VLProperty, Spec )
+dataFromUrl : String -> List Format -> Data
 dataFromUrl url fmts =
     if fmts == [] then
         ( VLData, JE.object [ ( "url", JE.string url ) ] )
