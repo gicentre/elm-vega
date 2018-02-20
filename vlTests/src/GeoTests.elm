@@ -69,8 +69,8 @@ choropleth2 =
 
         labelEnc =
             encoding
-                << position X [ PName "cx", PmType Longitude ]
-                << position Y [ PName "cy", PmType Latitude ]
+                << position Longitude [ PName "cx" ]
+                << position Latitude [ PName "cy" ]
                 << text [ TName "bLabel", TmType Nominal ]
 
         labelSpec =
@@ -129,8 +129,8 @@ tubeLines3 =
 
         labelEnc =
             encoding
-                << position X [ PName "cx", PmType Longitude ]
-                << position Y [ PName "cy", PmType Latitude ]
+                << position Longitude [ PName "cx" ]
+                << position Latitude [ PName "cy" ]
                 << text [ TName "bLabel", TmType Nominal ]
                 << size [ MNumber 8 ]
                 << opacity [ MNumber 0.6 ]
@@ -295,8 +295,8 @@ dotMap1 =
     let
         enc =
             encoding
-                << position X [ PName "longitude", PmType Longitude ]
-                << position Y [ PName "latitude", PmType Latitude ]
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
                 << size [ MNumber 1 ]
                 << color [ MName "digit", MmType Nominal ]
     in
@@ -331,8 +331,8 @@ scribbleMap1 =
 
         enc =
             encoding
-                << position X [ PName "longitude", PmType Longitude ]
-                << position Y [ PName "latitude", PmType Latitude ]
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
                 << order [ OName "zip_code", OmType Quantitative ]
                 << color [ MString "#666" ]
                 << detail [ DName "conterminous", DmType Nominal ]
@@ -370,8 +370,8 @@ scribbleMap2 =
 
         enc =
             encoding
-                << position X [ PName "longitude", PmType Longitude, PSort [ ByField "zip_code" ] ]
-                << position Y [ PName "latitude", PmType Latitude, PSort [ ByField "zip_code" ] ]
+                << position Longitude [ PName "longitude", PSort [ ByField "zip_code" ] ]
+                << position Latitude [ PName "latitude", PSort [ ByField "zip_code" ] ]
                 << order [ OName "zip_code", OmType Quantitative ]
                 << color [ MName "digit3", MmType Nominal, MLegend [] ]
                 << detail [ DName "ziplen", DmType Nominal ]

@@ -8824,6 +8824,14 @@ var _gicentre$elm_vega$VegaLite$positionLabel = function (pChannel) {
 			return 'y';
 		case 'X2':
 			return 'x2';
+		case 'Y2':
+			return 'y2';
+		case 'Longitude':
+			return 'x';
+		case 'Latitude':
+			return 'y';
+		case 'Longitude2':
+			return 'x2';
 		default:
 			return 'y2';
 	}
@@ -9151,9 +9159,9 @@ var _gicentre$elm_vega$VegaLite$measurementLabel = function (mType) {
 			return 'quantitative';
 		case 'Temporal':
 			return 'temporal';
-		case 'Latitude':
+		case 'Latitude_':
 			return 'latitude';
-		case 'Longitude':
+		case 'Longitude_':
 			return 'longitude';
 		default:
 			return 'geojson';
@@ -13041,19 +13049,6 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 			};
 	}
 };
-var _gicentre$elm_vega$VegaLite$position = F2(
-	function (pos, pDefs) {
-		return F2(
-			function (x, y) {
-				return {ctor: '::', _0: x, _1: y};
-			})(
-			{
-				ctor: '_Tuple2',
-				_0: _gicentre$elm_vega$VegaLite$positionLabel(pos),
-				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
-			});
-	});
 var _gicentre$elm_vega$VegaLite$textChannelProperty = function (tDef) {
 	var _p112 = tDef;
 	switch (_p112.ctor) {
@@ -14255,9 +14250,9 @@ var _gicentre$elm_vega$VegaLite$MAngle = function (a) {
 var _gicentre$elm_vega$VegaLite$MAlign = function (a) {
 	return {ctor: 'MAlign', _0: a};
 };
-var _gicentre$elm_vega$VegaLite$GeoJson = {ctor: 'GeoJson'};
-var _gicentre$elm_vega$VegaLite$Longitude = {ctor: 'Longitude'};
-var _gicentre$elm_vega$VegaLite$Latitude = {ctor: 'Latitude'};
+var _gicentre$elm_vega$VegaLite$GeoFeature = {ctor: 'GeoFeature'};
+var _gicentre$elm_vega$VegaLite$Longitude_ = {ctor: 'Longitude_'};
+var _gicentre$elm_vega$VegaLite$Latitude_ = {ctor: 'Latitude_'};
 var _gicentre$elm_vega$VegaLite$Temporal = {ctor: 'Temporal'};
 var _gicentre$elm_vega$VegaLite$Quantitative = {ctor: 'Quantitative'};
 var _gicentre$elm_vega$VegaLite$Ordinal = {ctor: 'Ordinal'};
@@ -14326,6 +14321,10 @@ var _gicentre$elm_vega$VegaLite$PEdges = F4(
 var _gicentre$elm_vega$VegaLite$PSize = function (a) {
 	return {ctor: 'PSize', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$Latitude2 = {ctor: 'Latitude2'};
+var _gicentre$elm_vega$VegaLite$Longitude2 = {ctor: 'Longitude2'};
+var _gicentre$elm_vega$VegaLite$Latitude = {ctor: 'Latitude'};
+var _gicentre$elm_vega$VegaLite$Longitude = {ctor: 'Longitude'};
 var _gicentre$elm_vega$VegaLite$Y2 = {ctor: 'Y2'};
 var _gicentre$elm_vega$VegaLite$X2 = {ctor: 'X2'};
 var _gicentre$elm_vega$VegaLite$Y = {ctor: 'Y'};
@@ -14354,6 +14353,136 @@ var _gicentre$elm_vega$VegaLite$PBin = function (a) {
 var _gicentre$elm_vega$VegaLite$PmType = function (a) {
 	return {ctor: 'PmType', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$position = F2(
+	function (pos, pDefs) {
+		var isNotPmType = function (pp) {
+			var _p115 = pp;
+			if (_p115.ctor === 'PmType') {
+				return false;
+			} else {
+				return true;
+			}
+		};
+		var _p116 = pos;
+		switch (_p116.ctor) {
+			case 'X':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
+					});
+			case 'Y':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
+					});
+			case 'X2':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X2),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
+					});
+			case 'Y2':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y2),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
+					});
+			case 'Longitude':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(
+								_elm_lang$core$List$map,
+								_gicentre$elm_vega$VegaLite$positionChannelProperty,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude_),
+									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
+								}))
+					});
+			case 'Latitude':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(
+								_elm_lang$core$List$map,
+								_gicentre$elm_vega$VegaLite$positionChannelProperty,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude_),
+									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
+								}))
+					});
+			case 'Longitude2':
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X2),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(
+								_elm_lang$core$List$map,
+								_gicentre$elm_vega$VegaLite$positionChannelProperty,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude_),
+									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
+								}))
+					});
+			default:
+				return F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(
+					{
+						ctor: '_Tuple2',
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y2),
+						_1: _elm_lang$core$Json_Encode$object(
+							A2(
+								_elm_lang$core$List$map,
+								_gicentre$elm_vega$VegaLite$positionChannelProperty,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude_),
+									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
+								}))
+					});
+		}
+	});
 var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
@@ -14605,9 +14734,9 @@ var _gicentre$elm_vega$VegaLite$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$categoricalDomainMap = function (scaleDomainPairs) {
-	var _p115 = _elm_lang$core$List$unzip(scaleDomainPairs);
-	var domain = _p115._0;
-	var range = _p115._1;
+	var _p117 = _elm_lang$core$List$unzip(scaleDomainPairs);
+	var domain = _p117._0;
+	var range = _p117._1;
 	return {
 		ctor: '::',
 		_0: _gicentre$elm_vega$VegaLite$SDomain(
@@ -14622,7 +14751,7 @@ var _gicentre$elm_vega$VegaLite$categoricalDomainMap = function (scaleDomainPair
 };
 var _gicentre$elm_vega$VegaLite$domainRangeMap = F2(
 	function (lowerMap, upperMap) {
-		var _p116 = _elm_lang$core$List$unzip(
+		var _p118 = _elm_lang$core$List$unzip(
 			{
 				ctor: '::',
 				_0: lowerMap,
@@ -14632,8 +14761,8 @@ var _gicentre$elm_vega$VegaLite$domainRangeMap = F2(
 					_1: {ctor: '[]'}
 				}
 			});
-		var domain = _p116._0;
-		var range = _p116._1;
+		var domain = _p118._0;
+		var range = _p118._1;
 		return {
 			ctor: '::',
 			_0: _gicentre$elm_vega$VegaLite$SDomain(
@@ -14939,25 +15068,25 @@ var _gicentre$elm_vega$VegaLite$projection = function (pProps) {
 };
 var _gicentre$elm_vega$VegaLite$VLTransform = {ctor: 'VLTransform'};
 var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
-	var assemble = function (_p117) {
-		var _p118 = _p117;
-		var _p127 = _p118._1;
-		var _p126 = _p118._0;
-		var _p119 = _p126;
-		switch (_p119) {
+	var assemble = function (_p119) {
+		var _p120 = _p119;
+		var _p129 = _p120._1;
+		var _p128 = _p120._0;
+		var _p121 = _p128;
+		switch (_p121) {
 			case 'aggregate':
-				var _p120 = A2(
+				var _p122 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if ((((_p120.ctor === 'Ok') && (_p120._0.ctor === '::')) && (_p120._0._1.ctor === '::')) && (_p120._0._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if ((((_p122.ctor === 'Ok') && (_p122._0.ctor === '::')) && (_p122._0._1.ctor === '::')) && (_p122._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'aggregate', _1: _p120._0._0},
+							_0: {ctor: '_Tuple2', _0: 'aggregate', _1: _p122._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p120._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p122._0._1._0},
 								_1: {ctor: '[]'}
 							}
 						});
@@ -14965,21 +15094,21 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'bin':
-				var _p121 = A2(
+				var _p123 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if (((((_p121.ctor === 'Ok') && (_p121._0.ctor === '::')) && (_p121._0._1.ctor === '::')) && (_p121._0._1._1.ctor === '::')) && (_p121._0._1._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if (((((_p123.ctor === 'Ok') && (_p123._0.ctor === '::')) && (_p123._0._1.ctor === '::')) && (_p123._0._1._1.ctor === '::')) && (_p123._0._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'bin', _1: _p121._0._0},
+							_0: {ctor: '_Tuple2', _0: 'bin', _1: _p123._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'field', _1: _p121._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'field', _1: _p123._0._1._0},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'as', _1: _p121._0._1._1._0},
+									_0: {ctor: '_Tuple2', _0: 'as', _1: _p123._0._1._1._0},
 									_1: {ctor: '[]'}
 								}
 							}
@@ -14988,18 +15117,18 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'calculate':
-				var _p122 = A2(
+				var _p124 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if ((((_p122.ctor === 'Ok') && (_p122._0.ctor === '::')) && (_p122._0._1.ctor === '::')) && (_p122._0._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if ((((_p124.ctor === 'Ok') && (_p124._0.ctor === '::')) && (_p124._0._1.ctor === '::')) && (_p124._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'calculate', _1: _p122._0._0},
+							_0: {ctor: '_Tuple2', _0: 'calculate', _1: _p124._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'as', _1: _p122._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'as', _1: _p124._0._1._0},
 								_1: {ctor: '[]'}
 							}
 						});
@@ -15007,15 +15136,15 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'lookup':
-				var _p123 = A2(
+				var _p125 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if ((((((_p123.ctor === 'Ok') && (_p123._0.ctor === '::')) && (_p123._0._1.ctor === '::')) && (_p123._0._1._1.ctor === '::')) && (_p123._0._1._1._1.ctor === '::')) && (_p123._0._1._1._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if ((((((_p125.ctor === 'Ok') && (_p125._0.ctor === '::')) && (_p125._0._1.ctor === '::')) && (_p125._0._1._1.ctor === '::')) && (_p125._0._1._1._1.ctor === '::')) && (_p125._0._1._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'lookup', _1: _p123._0._0},
+							_0: {ctor: '_Tuple2', _0: 'lookup', _1: _p125._0._0},
 							_1: {
 								ctor: '::',
 								_0: {
@@ -15024,13 +15153,13 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 									_1: _elm_lang$core$Json_Encode$object(
 										{
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'data', _1: _p123._0._1._0},
+											_0: {ctor: '_Tuple2', _0: 'data', _1: _p125._0._1._0},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'key', _1: _p123._0._1._1._0},
+												_0: {ctor: '_Tuple2', _0: 'key', _1: _p125._0._1._1._0},
 												_1: {
 													ctor: '::',
-													_0: {ctor: '_Tuple2', _0: 'fields', _1: _p123._0._1._1._1._0},
+													_0: {ctor: '_Tuple2', _0: 'fields', _1: _p125._0._1._1._1._0},
 													_1: {ctor: '[]'}
 												}
 											}
@@ -15043,15 +15172,15 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'lookupAs':
-				var _p124 = A2(
+				var _p126 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if ((((((_p124.ctor === 'Ok') && (_p124._0.ctor === '::')) && (_p124._0._1.ctor === '::')) && (_p124._0._1._1.ctor === '::')) && (_p124._0._1._1._1.ctor === '::')) && (_p124._0._1._1._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if ((((((_p126.ctor === 'Ok') && (_p126._0.ctor === '::')) && (_p126._0._1.ctor === '::')) && (_p126._0._1._1.ctor === '::')) && (_p126._0._1._1._1.ctor === '::')) && (_p126._0._1._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'lookup', _1: _p124._0._0},
+							_0: {ctor: '_Tuple2', _0: 'lookup', _1: _p126._0._0},
 							_1: {
 								ctor: '::',
 								_0: {
@@ -15060,17 +15189,17 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 									_1: _elm_lang$core$Json_Encode$object(
 										{
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'data', _1: _p124._0._1._0},
+											_0: {ctor: '_Tuple2', _0: 'data', _1: _p126._0._1._0},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'key', _1: _p124._0._1._1._0},
+												_0: {ctor: '_Tuple2', _0: 'key', _1: _p126._0._1._1._0},
 												_1: {ctor: '[]'}
 											}
 										})
 								},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'as', _1: _p124._0._1._1._1._0},
+									_0: {ctor: '_Tuple2', _0: 'as', _1: _p126._0._1._1._1._0},
 									_1: {ctor: '[]'}
 								}
 							}
@@ -15079,21 +15208,21 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'timeUnit':
-				var _p125 = A2(
+				var _p127 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p127));
-				if (((((_p125.ctor === 'Ok') && (_p125._0.ctor === '::')) && (_p125._0._1.ctor === '::')) && (_p125._0._1._1.ctor === '::')) && (_p125._0._1._1._1.ctor === '[]')) {
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p129));
+				if (((((_p127.ctor === 'Ok') && (_p127._0.ctor === '::')) && (_p127._0._1.ctor === '::')) && (_p127._0._1._1.ctor === '::')) && (_p127._0._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'timeUnit', _1: _p125._0._0},
+							_0: {ctor: '_Tuple2', _0: 'timeUnit', _1: _p127._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'field', _1: _p125._0._1._0},
+								_0: {ctor: '_Tuple2', _0: 'field', _1: _p127._0._1._0},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'as', _1: _p125._0._1._1._0},
+									_0: {ctor: '_Tuple2', _0: 'as', _1: _p127._0._1._1._0},
 									_1: {ctor: '[]'}
 								}
 							}
@@ -15105,7 +15234,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				return _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _p126, _1: _p127},
+						_0: {ctor: '_Tuple2', _0: _p128, _1: _p129},
 						_1: {ctor: '[]'}
 					});
 		}
@@ -15120,8 +15249,8 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 var _gicentre$elm_vega$VegaLite$VLMark = {ctor: 'VLMark'};
 var _gicentre$elm_vega$VegaLite$mark = F2(
 	function (mark, mProps) {
-		var _p128 = mProps;
-		if (_p128.ctor === '[]') {
+		var _p130 = mProps;
+		if (_p130.ctor === '[]') {
 			return {
 				ctor: '_Tuple2',
 				_0: _gicentre$elm_vega$VegaLite$VLMark,
