@@ -23412,7 +23412,7 @@ var _gicentre$elm_vega$Gallery$stack1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic20 = function () {
+var _gicentre$elm_vega$Gallery$basic21 = function () {
 	var enc = function (_p120) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -23491,7 +23491,7 @@ var _gicentre$elm_vega$Gallery$basic20 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic19 = function () {
+var _gicentre$elm_vega$Gallery$basic20 = function () {
 	var config = function (_p121) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
@@ -23609,7 +23609,7 @@ var _gicentre$elm_vega$Gallery$basic19 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic18 = function () {
+var _gicentre$elm_vega$Gallery$basic19 = function () {
 	var enc = function (_p123) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -23680,7 +23680,7 @@ var _gicentre$elm_vega$Gallery$basic18 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic17 = function () {
+var _gicentre$elm_vega$Gallery$basic18 = function () {
 	var enc = function (_p124) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -23770,7 +23770,7 @@ var _gicentre$elm_vega$Gallery$basic17 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic16 = function () {
+var _gicentre$elm_vega$Gallery$basic17 = function () {
 	var enc = function (_p125) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -23851,7 +23851,7 @@ var _gicentre$elm_vega$Gallery$basic16 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic15 = function () {
+var _gicentre$elm_vega$Gallery$basic16 = function () {
 	var enc = function (_p127) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -23936,7 +23936,7 @@ var _gicentre$elm_vega$Gallery$basic15 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic14 = function () {
+var _gicentre$elm_vega$Gallery$basic15 = function () {
 	var enc = function (_p128) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -24012,7 +24012,7 @@ var _gicentre$elm_vega$Gallery$basic14 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic13 = function () {
+var _gicentre$elm_vega$Gallery$basic14 = function () {
 	var enc = function (_p129) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -24089,7 +24089,7 @@ var _gicentre$elm_vega$Gallery$basic13 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic12 = function () {
+var _gicentre$elm_vega$Gallery$basic13 = function () {
 	var enc = function (_p131) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -24145,7 +24145,7 @@ var _gicentre$elm_vega$Gallery$basic12 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic11 = function () {
+var _gicentre$elm_vega$Gallery$basic12 = function () {
 	var sel = function (_p132) {
 		return _gicentre$elm_vega$VegaLite$selection(
 			A4(
@@ -24263,7 +24263,7 @@ var _gicentre$elm_vega$Gallery$basic11 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic10 = function () {
+var _gicentre$elm_vega$Gallery$basic11 = function () {
 	var enc = function (_p134) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -24330,8 +24330,96 @@ var _gicentre$elm_vega$Gallery$basic10 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$basic9 = function () {
+var _gicentre$elm_vega$Gallery$basic10 = function () {
 	var enc = function (_p135) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$PName('IMDB_Rating'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PName('Rotten_Tomatoes_Rating'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: A3(
+								_gicentre$elm_vega$VegaLite$MDataCondition,
+								_gicentre$elm_vega$VegaLite$Expr('datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null'),
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MString('#ddd'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MString('#0099ee'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						_p135))));
+	};
+	var config = function (_p136) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$RemoveInvalid(false),
+				_p136));
+	};
+	var data = A2(
+		_gicentre$elm_vega$VegaLite$dataFromUrl,
+		'data/movies.json',
+		{ctor: '[]'});
+	var des = _gicentre$elm_vega$VegaLite$description('Scatterplot with Null values in grey');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: des,
+			_1: {
+				ctor: '::',
+				_0: config(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: data,
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gicentre$elm_vega$VegaLite$mark,
+							_gicentre$elm_vega$VegaLite$Point,
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: enc(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$Gallery$basic9 = function () {
+	var enc = function (_p137) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24379,7 +24467,7 @@ var _gicentre$elm_vega$Gallery$basic9 = function () {
 									_1: {ctor: '[]'}
 								}
 							},
-							_p135)))));
+							_p137)))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallons with country of origin double encoded by colour and shape.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24409,7 +24497,7 @@ var _gicentre$elm_vega$Gallery$basic9 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic8 = function () {
-	var enc = function (_p136) {
+	var enc = function (_p138) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24464,7 +24552,7 @@ var _gicentre$elm_vega$Gallery$basic8 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p136))));
+						_p138))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A binned scatterplot comparing IMDB and Rotten Tomatoes rating with marks sized by number of reviews.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24494,7 +24582,7 @@ var _gicentre$elm_vega$Gallery$basic8 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic7 = function () {
-	var enc = function (_p137) {
+	var enc = function (_p139) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24520,7 +24608,7 @@ var _gicentre$elm_vega$Gallery$basic7 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p137)));
+					_p139)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallon for various cars (via circle marks).');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24550,7 +24638,7 @@ var _gicentre$elm_vega$Gallery$basic7 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic6 = function () {
-	var enc = function (_p138) {
+	var enc = function (_p140) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24576,7 +24664,7 @@ var _gicentre$elm_vega$Gallery$basic6 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p138)));
+					_p140)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A scatterplot showing horsepower and miles per gallon for various cars (via point marks).');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24606,7 +24694,7 @@ var _gicentre$elm_vega$Gallery$basic6 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic5 = function () {
-	var config = function (_p139) {
+	var config = function (_p141) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -24624,9 +24712,9 @@ var _gicentre$elm_vega$Gallery$basic5 = function () {
 							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p139)));
+					_p141)));
 	};
-	var enc = function (_p140) {
+	var enc = function (_p142) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24729,14 +24817,14 @@ var _gicentre$elm_vega$Gallery$basic5 = function () {
 									}
 								}
 							},
-							_p140)))));
+							_p142)))));
 	};
-	var trans = function (_p141) {
+	var trans = function (_p143) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p141)));
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p143)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Grouped bar chart shoing population structure by age and gender.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24776,7 +24864,7 @@ var _gicentre$elm_vega$Gallery$basic5 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic4 = function () {
-	var enc = function (_p142) {
+	var enc = function (_p144) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24814,9 +24902,9 @@ var _gicentre$elm_vega$Gallery$basic4 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p142))));
+						_p144))));
 	};
-	var data = function (_p143) {
+	var data = function (_p145) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -24871,7 +24959,7 @@ var _gicentre$elm_vega$Gallery$basic4 = function () {
 									}
 								}
 							}),
-						_p143))));
+						_p145))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with ranged data (aka Gantt Chart).');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24899,7 +24987,7 @@ var _gicentre$elm_vega$Gallery$basic4 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic3 = function () {
-	var enc = function (_p144) {
+	var enc = function (_p146) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -24930,7 +25018,7 @@ var _gicentre$elm_vega$Gallery$basic3 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p144)));
+					_p146)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Simple histogram of IMDB ratings.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -24960,7 +25048,7 @@ var _gicentre$elm_vega$Gallery$basic3 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic2 = function () {
-	var enc = function (_p145) {
+	var enc = function (_p147) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -25009,14 +25097,14 @@ var _gicentre$elm_vega$Gallery$basic2 = function () {
 							}
 						}
 					},
-					_p145)));
+					_p147)));
 	};
-	var trans = function (_p146) {
+	var trans = function (_p148) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$FExpr('datum.year == 2000'),
-				_p146));
+				_p148));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A bar chart showing the US population distribution of age groups in 2000.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -25051,7 +25139,7 @@ var _gicentre$elm_vega$Gallery$basic2 = function () {
 		});
 }();
 var _gicentre$elm_vega$Gallery$basic1 = function () {
-	var enc = function (_p147) {
+	var enc = function (_p149) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -25077,9 +25165,9 @@ var _gicentre$elm_vega$Gallery$basic1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p147)));
+					_p149)));
 	};
-	var data = function (_p148) {
+	var data = function (_p150) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -25165,7 +25253,7 @@ var _gicentre$elm_vega$Gallery$basic1 = function () {
 								}
 							}
 						}),
-					_p148)));
+					_p150)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with embedded data.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -25255,158 +25343,162 @@ var _gicentre$elm_vega$Gallery$mySpecs = _gicentre$elm_vega$VegaLite$combineSpec
 																					_0: {ctor: '_Tuple2', _0: 'basic20', _1: _gicentre$elm_vega$Gallery$basic20},
 																					_1: {
 																						ctor: '::',
-																						_0: {ctor: '_Tuple2', _0: 'stack1', _1: _gicentre$elm_vega$Gallery$stack1},
+																						_0: {ctor: '_Tuple2', _0: 'basic21', _1: _gicentre$elm_vega$Gallery$basic21},
 																						_1: {
 																							ctor: '::',
-																							_0: {ctor: '_Tuple2', _0: 'stack2', _1: _gicentre$elm_vega$Gallery$stack2},
+																							_0: {ctor: '_Tuple2', _0: 'stack1', _1: _gicentre$elm_vega$Gallery$stack1},
 																							_1: {
 																								ctor: '::',
-																								_0: {ctor: '_Tuple2', _0: 'stack3', _1: _gicentre$elm_vega$Gallery$stack3},
+																								_0: {ctor: '_Tuple2', _0: 'stack2', _1: _gicentre$elm_vega$Gallery$stack2},
 																								_1: {
 																									ctor: '::',
-																									_0: {ctor: '_Tuple2', _0: 'stack4', _1: _gicentre$elm_vega$Gallery$stack4},
+																									_0: {ctor: '_Tuple2', _0: 'stack3', _1: _gicentre$elm_vega$Gallery$stack3},
 																									_1: {
 																										ctor: '::',
-																										_0: {ctor: '_Tuple2', _0: 'stack5', _1: _gicentre$elm_vega$Gallery$stack5},
+																										_0: {ctor: '_Tuple2', _0: 'stack4', _1: _gicentre$elm_vega$Gallery$stack4},
 																										_1: {
 																											ctor: '::',
-																											_0: {ctor: '_Tuple2', _0: 'stack6', _1: _gicentre$elm_vega$Gallery$stack6},
+																											_0: {ctor: '_Tuple2', _0: 'stack5', _1: _gicentre$elm_vega$Gallery$stack5},
 																											_1: {
 																												ctor: '::',
-																												_0: {ctor: '_Tuple2', _0: 'stack7', _1: _gicentre$elm_vega$Gallery$stack7},
+																												_0: {ctor: '_Tuple2', _0: 'stack6', _1: _gicentre$elm_vega$Gallery$stack6},
 																												_1: {
 																													ctor: '::',
-																													_0: {ctor: '_Tuple2', _0: 'stack8', _1: _gicentre$elm_vega$Gallery$stack8},
+																													_0: {ctor: '_Tuple2', _0: 'stack7', _1: _gicentre$elm_vega$Gallery$stack7},
 																													_1: {
 																														ctor: '::',
-																														_0: {ctor: '_Tuple2', _0: 'trellis1', _1: _gicentre$elm_vega$Gallery$trellis1},
+																														_0: {ctor: '_Tuple2', _0: 'stack8', _1: _gicentre$elm_vega$Gallery$stack8},
 																														_1: {
 																															ctor: '::',
-																															_0: {ctor: '_Tuple2', _0: 'trellis2', _1: _gicentre$elm_vega$Gallery$trellis2},
+																															_0: {ctor: '_Tuple2', _0: 'trellis1', _1: _gicentre$elm_vega$Gallery$trellis1},
 																															_1: {
 																																ctor: '::',
-																																_0: {ctor: '_Tuple2', _0: 'trellis3', _1: _gicentre$elm_vega$Gallery$trellis3},
+																																_0: {ctor: '_Tuple2', _0: 'trellis2', _1: _gicentre$elm_vega$Gallery$trellis2},
 																																_1: {
 																																	ctor: '::',
-																																	_0: {ctor: '_Tuple2', _0: 'trellis4', _1: _gicentre$elm_vega$Gallery$trellis4},
+																																	_0: {ctor: '_Tuple2', _0: 'trellis3', _1: _gicentre$elm_vega$Gallery$trellis3},
 																																	_1: {
 																																		ctor: '::',
-																																		_0: {ctor: '_Tuple2', _0: 'trellis5', _1: _gicentre$elm_vega$Gallery$trellis5},
+																																		_0: {ctor: '_Tuple2', _0: 'trellis4', _1: _gicentre$elm_vega$Gallery$trellis4},
 																																		_1: {
 																																			ctor: '::',
-																																			_0: {ctor: '_Tuple2', _0: 'trellis6', _1: _gicentre$elm_vega$Gallery$trellis6},
+																																			_0: {ctor: '_Tuple2', _0: 'trellis5', _1: _gicentre$elm_vega$Gallery$trellis5},
 																																			_1: {
 																																				ctor: '::',
-																																				_0: {ctor: '_Tuple2', _0: 'trellis7', _1: _gicentre$elm_vega$Gallery$trellis7},
+																																				_0: {ctor: '_Tuple2', _0: 'trellis6', _1: _gicentre$elm_vega$Gallery$trellis6},
 																																				_1: {
 																																					ctor: '::',
-																																					_0: {ctor: '_Tuple2', _0: 'layer1', _1: _gicentre$elm_vega$Gallery$layer1},
+																																					_0: {ctor: '_Tuple2', _0: 'trellis7', _1: _gicentre$elm_vega$Gallery$trellis7},
 																																					_1: {
 																																						ctor: '::',
-																																						_0: {ctor: '_Tuple2', _0: 'layer2', _1: _gicentre$elm_vega$Gallery$layer2},
+																																						_0: {ctor: '_Tuple2', _0: 'layer1', _1: _gicentre$elm_vega$Gallery$layer1},
 																																						_1: {
 																																							ctor: '::',
-																																							_0: {ctor: '_Tuple2', _0: 'layer3', _1: _gicentre$elm_vega$Gallery$layer3},
+																																							_0: {ctor: '_Tuple2', _0: 'layer2', _1: _gicentre$elm_vega$Gallery$layer2},
 																																							_1: {
 																																								ctor: '::',
-																																								_0: {ctor: '_Tuple2', _0: 'layer4', _1: _gicentre$elm_vega$Gallery$layer4},
+																																								_0: {ctor: '_Tuple2', _0: 'layer3', _1: _gicentre$elm_vega$Gallery$layer3},
 																																								_1: {
 																																									ctor: '::',
-																																									_0: {ctor: '_Tuple2', _0: 'layer5', _1: _gicentre$elm_vega$Gallery$layer5},
+																																									_0: {ctor: '_Tuple2', _0: 'layer4', _1: _gicentre$elm_vega$Gallery$layer4},
 																																									_1: {
 																																										ctor: '::',
-																																										_0: {ctor: '_Tuple2', _0: 'layer6', _1: _gicentre$elm_vega$Gallery$layer6},
+																																										_0: {ctor: '_Tuple2', _0: 'layer5', _1: _gicentre$elm_vega$Gallery$layer5},
 																																										_1: {
 																																											ctor: '::',
-																																											_0: {ctor: '_Tuple2', _0: 'layer7', _1: _gicentre$elm_vega$Gallery$layer7},
+																																											_0: {ctor: '_Tuple2', _0: 'layer6', _1: _gicentre$elm_vega$Gallery$layer6},
 																																											_1: {
 																																												ctor: '::',
-																																												_0: {ctor: '_Tuple2', _0: 'layer8', _1: _gicentre$elm_vega$Gallery$layer8},
+																																												_0: {ctor: '_Tuple2', _0: 'layer7', _1: _gicentre$elm_vega$Gallery$layer7},
 																																												_1: {
 																																													ctor: '::',
-																																													_0: {ctor: '_Tuple2', _0: 'layer9', _1: _gicentre$elm_vega$Gallery$layer9},
+																																													_0: {ctor: '_Tuple2', _0: 'layer8', _1: _gicentre$elm_vega$Gallery$layer8},
 																																													_1: {
 																																														ctor: '::',
-																																														_0: {ctor: '_Tuple2', _0: 'layer10', _1: _gicentre$elm_vega$Gallery$layer10},
+																																														_0: {ctor: '_Tuple2', _0: 'layer9', _1: _gicentre$elm_vega$Gallery$layer9},
 																																														_1: {
 																																															ctor: '::',
-																																															_0: {ctor: '_Tuple2', _0: 'layer11', _1: _gicentre$elm_vega$Gallery$layer11},
+																																															_0: {ctor: '_Tuple2', _0: 'layer10', _1: _gicentre$elm_vega$Gallery$layer10},
 																																															_1: {
 																																																ctor: '::',
-																																																_0: {ctor: '_Tuple2', _0: 'layer12', _1: _gicentre$elm_vega$Gallery$layer12},
+																																																_0: {ctor: '_Tuple2', _0: 'layer11', _1: _gicentre$elm_vega$Gallery$layer11},
 																																																_1: {
 																																																	ctor: '::',
-																																																	_0: {ctor: '_Tuple2', _0: 'layer13', _1: _gicentre$elm_vega$Gallery$layer13},
+																																																	_0: {ctor: '_Tuple2', _0: 'layer12', _1: _gicentre$elm_vega$Gallery$layer12},
 																																																	_1: {
 																																																		ctor: '::',
-																																																		_0: {ctor: '_Tuple2', _0: 'layer14', _1: _gicentre$elm_vega$Gallery$layer14},
+																																																		_0: {ctor: '_Tuple2', _0: 'layer13', _1: _gicentre$elm_vega$Gallery$layer13},
 																																																		_1: {
 																																																			ctor: '::',
-																																																			_0: {ctor: '_Tuple2', _0: 'layer15', _1: _gicentre$elm_vega$Gallery$layer15},
+																																																			_0: {ctor: '_Tuple2', _0: 'layer14', _1: _gicentre$elm_vega$Gallery$layer14},
 																																																			_1: {
 																																																				ctor: '::',
-																																																				_0: {ctor: '_Tuple2', _0: 'layer16', _1: _gicentre$elm_vega$Gallery$layer16},
+																																																				_0: {ctor: '_Tuple2', _0: 'layer15', _1: _gicentre$elm_vega$Gallery$layer15},
 																																																				_1: {
 																																																					ctor: '::',
-																																																					_0: {ctor: '_Tuple2', _0: 'comp1', _1: _gicentre$elm_vega$Gallery$comp1},
+																																																					_0: {ctor: '_Tuple2', _0: 'layer16', _1: _gicentre$elm_vega$Gallery$layer16},
 																																																					_1: {
 																																																						ctor: '::',
-																																																						_0: {ctor: '_Tuple2', _0: 'comp2', _1: _gicentre$elm_vega$Gallery$comp2},
+																																																						_0: {ctor: '_Tuple2', _0: 'comp1', _1: _gicentre$elm_vega$Gallery$comp1},
 																																																						_1: {
 																																																							ctor: '::',
-																																																							_0: {ctor: '_Tuple2', _0: 'comp3', _1: _gicentre$elm_vega$Gallery$comp3},
+																																																							_0: {ctor: '_Tuple2', _0: 'comp2', _1: _gicentre$elm_vega$Gallery$comp2},
 																																																							_1: {
 																																																								ctor: '::',
-																																																								_0: {ctor: '_Tuple2', _0: 'geo1', _1: _gicentre$elm_vega$Gallery$geo1},
+																																																								_0: {ctor: '_Tuple2', _0: 'comp3', _1: _gicentre$elm_vega$Gallery$comp3},
 																																																								_1: {
 																																																									ctor: '::',
-																																																									_0: {ctor: '_Tuple2', _0: 'geo2', _1: _gicentre$elm_vega$Gallery$geo2},
+																																																									_0: {ctor: '_Tuple2', _0: 'geo1', _1: _gicentre$elm_vega$Gallery$geo1},
 																																																									_1: {
 																																																										ctor: '::',
-																																																										_0: {ctor: '_Tuple2', _0: 'geo3', _1: _gicentre$elm_vega$Gallery$geo3},
+																																																										_0: {ctor: '_Tuple2', _0: 'geo2', _1: _gicentre$elm_vega$Gallery$geo2},
 																																																										_1: {
 																																																											ctor: '::',
-																																																											_0: {ctor: '_Tuple2', _0: 'geo4', _1: _gicentre$elm_vega$Gallery$geo4},
+																																																											_0: {ctor: '_Tuple2', _0: 'geo3', _1: _gicentre$elm_vega$Gallery$geo3},
 																																																											_1: {
 																																																												ctor: '::',
-																																																												_0: {ctor: '_Tuple2', _0: 'geo5', _1: _gicentre$elm_vega$Gallery$geo5},
+																																																												_0: {ctor: '_Tuple2', _0: 'geo4', _1: _gicentre$elm_vega$Gallery$geo4},
 																																																												_1: {
 																																																													ctor: '::',
-																																																													_0: {ctor: '_Tuple2', _0: 'geo6', _1: _gicentre$elm_vega$Gallery$geo6},
+																																																													_0: {ctor: '_Tuple2', _0: 'geo5', _1: _gicentre$elm_vega$Gallery$geo5},
 																																																													_1: {
 																																																														ctor: '::',
-																																																														_0: {ctor: '_Tuple2', _0: 'geo7', _1: _gicentre$elm_vega$Gallery$geo7},
+																																																														_0: {ctor: '_Tuple2', _0: 'geo6', _1: _gicentre$elm_vega$Gallery$geo6},
 																																																														_1: {
 																																																															ctor: '::',
-																																																															_0: {ctor: '_Tuple2', _0: 'geo8', _1: _gicentre$elm_vega$Gallery$geo8},
+																																																															_0: {ctor: '_Tuple2', _0: 'geo7', _1: _gicentre$elm_vega$Gallery$geo7},
 																																																															_1: {
 																																																																ctor: '::',
-																																																																_0: {ctor: '_Tuple2', _0: 'interactive1', _1: _gicentre$elm_vega$Gallery$interactive1},
+																																																																_0: {ctor: '_Tuple2', _0: 'geo8', _1: _gicentre$elm_vega$Gallery$geo8},
 																																																																_1: {
 																																																																	ctor: '::',
-																																																																	_0: {ctor: '_Tuple2', _0: 'interactive2', _1: _gicentre$elm_vega$Gallery$interactive2},
+																																																																	_0: {ctor: '_Tuple2', _0: 'interactive1', _1: _gicentre$elm_vega$Gallery$interactive1},
 																																																																	_1: {
 																																																																		ctor: '::',
-																																																																		_0: {ctor: '_Tuple2', _0: 'interactive3', _1: _gicentre$elm_vega$Gallery$interactive3},
+																																																																		_0: {ctor: '_Tuple2', _0: 'interactive2', _1: _gicentre$elm_vega$Gallery$interactive2},
 																																																																		_1: {
 																																																																			ctor: '::',
-																																																																			_0: {ctor: '_Tuple2', _0: 'interactive4', _1: _gicentre$elm_vega$Gallery$interactive4},
+																																																																			_0: {ctor: '_Tuple2', _0: 'interactive3', _1: _gicentre$elm_vega$Gallery$interactive3},
 																																																																			_1: {
 																																																																				ctor: '::',
-																																																																				_0: {ctor: '_Tuple2', _0: 'interactive5', _1: _gicentre$elm_vega$Gallery$interactive5},
+																																																																				_0: {ctor: '_Tuple2', _0: 'interactive4', _1: _gicentre$elm_vega$Gallery$interactive4},
 																																																																				_1: {
 																																																																					ctor: '::',
-																																																																					_0: {ctor: '_Tuple2', _0: 'interactive6', _1: _gicentre$elm_vega$Gallery$interactive6},
+																																																																					_0: {ctor: '_Tuple2', _0: 'interactive5', _1: _gicentre$elm_vega$Gallery$interactive5},
 																																																																					_1: {
 																																																																						ctor: '::',
-																																																																						_0: {ctor: '_Tuple2', _0: 'interactive7', _1: _gicentre$elm_vega$Gallery$interactive7},
+																																																																						_0: {ctor: '_Tuple2', _0: 'interactive6', _1: _gicentre$elm_vega$Gallery$interactive6},
 																																																																						_1: {
 																																																																							ctor: '::',
-																																																																							_0: {ctor: '_Tuple2', _0: 'interactive8', _1: _gicentre$elm_vega$Gallery$interactive8},
+																																																																							_0: {ctor: '_Tuple2', _0: 'interactive7', _1: _gicentre$elm_vega$Gallery$interactive7},
 																																																																							_1: {
 																																																																								ctor: '::',
-																																																																								_0: {ctor: '_Tuple2', _0: 'interactive9', _1: _gicentre$elm_vega$Gallery$interactive9},
-																																																																								_1: {ctor: '[]'}
+																																																																								_0: {ctor: '_Tuple2', _0: 'interactive8', _1: _gicentre$elm_vega$Gallery$interactive8},
+																																																																								_1: {
+																																																																									ctor: '::',
+																																																																									_0: {ctor: '_Tuple2', _0: 'interactive9', _1: _gicentre$elm_vega$Gallery$interactive9},
+																																																																									_1: {ctor: '[]'}
+																																																																								}
 																																																																							}
 																																																																						}
 																																																																					}
@@ -25491,7 +25583,7 @@ var _gicentre$elm_vega$Gallery$main = _elm_lang$core$Platform$program(
 			_1: _gicentre$elm_vega$Gallery$elmToJS(_gicentre$elm_vega$Gallery$mySpecs)
 		},
 		update: F2(
-			function (_p149, model) {
+			function (_p151, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
