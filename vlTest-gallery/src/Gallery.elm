@@ -169,6 +169,33 @@ basic10 : Spec
 basic10 =
     let
         des =
+            description "Scatterplot with Null values in grey"
+
+        data =
+            dataFromUrl "data/movies.json" []
+
+        config =
+            configure
+                << configuration (RemoveInvalid False)
+
+        enc =
+            encoding
+                << position X [ PName "IMDB_Rating", PmType Quantitative ]
+                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << color
+                    [ MDataCondition
+                        (Expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null")
+                        [ MString "#ddd" ]
+                        [ MString "#0099ee" ]
+                    ]
+    in
+    toVegaLite [ des, config [], data, mark Point [], enc [] ]
+
+
+basic11 : Spec
+basic11 =
+    let
+        des =
             description "A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size."
 
         enc =
@@ -180,8 +207,8 @@ basic10 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
-basic11 : Spec
-basic11 =
+basic12 : Spec
+basic12 =
     let
         des =
             description "A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost's blog post 'One Chart, Twelve Charting Libraries' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/)."
@@ -207,8 +234,8 @@ basic11 =
         ]
 
 
-basic12 : Spec
-basic12 =
+basic13 : Spec
+basic13 =
     let
         des =
             description "Shows the relationship between horsepower and the number of cylinders using tick marks."
@@ -221,8 +248,8 @@ basic12 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
 
 
-basic13 : Spec
-basic13 =
+basic14 : Spec
+basic14 =
     let
         des =
             description "Google's stock price over time."
@@ -238,8 +265,8 @@ basic13 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
 
 
-basic14 : Spec
-basic14 =
+basic15 : Spec
+basic15 =
     let
         des =
             description "Stock prices of 5 tech companies over time."
@@ -253,8 +280,8 @@ basic14 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
 
 
-basic15 : Spec
-basic15 =
+basic16 : Spec
+basic16 =
     let
         des =
             description "Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site."
@@ -268,8 +295,8 @@ basic15 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
 
 
-basic16 : Spec
-basic16 =
+basic17 : Spec
+basic17 =
     let
         des =
             description "Google's stock price over time (quantized as a step-chart)."
@@ -285,8 +312,8 @@ basic16 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
 
 
-basic17 : Spec
-basic17 =
+basic18 : Spec
+basic18 =
     let
         des =
             description "Unemployment over time (area chart)"
@@ -306,8 +333,8 @@ basic17 =
         ]
 
 
-basic18 : Spec
-basic18 =
+basic19 : Spec
+basic19 =
     let
         des =
             description "'Table heatmap' showing engine size/power for three countries."
@@ -321,8 +348,8 @@ basic18 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
 
 
-basic19 : Spec
-basic19 =
+basic20 : Spec
+basic20 =
     let
         des =
             description "'Binned heatmap' comparing movie ratings."
@@ -349,8 +376,8 @@ basic19 =
         ]
 
 
-basic20 : Spec
-basic20 =
+basic21 : Spec
+basic21 =
     let
         des =
             description "Table bubble plot in the style of a Github punched card."
@@ -1940,6 +1967,7 @@ mySpecs =
         , ( "basic18", basic18 )
         , ( "basic19", basic19 )
         , ( "basic20", basic20 )
+        , ( "basic21", basic21 )
         , ( "stack1", stack1 )
         , ( "stack2", stack2 )
         , ( "stack3", stack3 )
