@@ -28,6 +28,7 @@ module VegaLite
         , FilterRange(..)
         , FontWeight(..)
         , Format(..)
+        , Geometry(..)
         , HAlign(..)
         , HeaderProperty(..)
         , HyperlinkChannel(..)
@@ -92,6 +93,7 @@ module VegaLite
         , configure
         , dataColumn
         , dataFromColumns
+        , dataFromJson
         , dataFromRows
         , dataFromUrl
         , dataRow
@@ -101,6 +103,9 @@ module VegaLite
         , encoding
         , facet
         , filter
+        , geoFeatureCollection
+        , geometry
+        , geometryCollection
         , hConcat
         , height
         , hyperlink
@@ -156,12 +161,17 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromUrl
 @docs dataFromColumns
 @docs dataFromRows
+@docs dataFromJson
 @docs dataColumn
 @docs dataRow
+@docs geometry
+@docs geoFeatureCollection
+@docs geometryCollection
 @docs Data
 @docs DataColumn
 @docs DataRow
 @docs Format
+@docs Geometry
 @docs DataType
 
 
@@ -976,16 +986,36 @@ type FontWeight
     | W900
 
 
-{-| Specifies the type of format a data source uses. For details see the
+{-| Specifies the type of format a data source uses. If the format is indicated by
+the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate the
+format explicitly. However this can be useful if (a) the filename extension does not
+indicate type (e.g. `.txt`) or you wish to customise the parsing of a file. For
+example, when specifying the `JSON` format, its parameter indicates the name of
+property field containing the attribute data to extract. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
 -}
 type Format
-    = JSON
+    = JSON String
     | CSV
     | TSV
     | TopojsonFeature String
     | TopojsonMesh String
     | Parse (List ( String, DataType ))
+
+
+{-| Specifies the type and content of geometry specifications for programatically
+creating GeoShapes. These can be mapped to the
+[GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
+where the pluralised types below refer to their `Multi` prefixed equivalent in the
+GeoJSON specification.
+-}
+type Geometry
+    = GeoPoint Float Float
+    | GeoPoints (List ( Float, Float ))
+    | GeoLine (List ( Float, Float ))
+    | GeoLines (List (List ( Float, Float )))
+    | GeoPolygon (List (List ( Float, Float )))
+    | GeoPolygons (List (List (List ( Float, Float ))))
 
 
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
@@ -1341,11 +1371,12 @@ type Padding
     | PEdges Float Float Float Float
 
 
-{-| Type of position channel, `X` and `Y` represent horizontal and vertical axis dimensions on a
-plane and `X2` and `Y2` represent secondary axis dimensions where two scales are overlaid
-in the same space. Geographic positions represented by longitude and latiutude values are identified
-with `Longitude`, `Latitude` and their respected secondary equivalents. Such geographic position
-channels are subject to a map projection before being placed graphically.
+{-| Type of position channel, `X` and `Y` represent horizontal and vertical axis
+dimensions on a plane and `X2` and `Y2` represent secondary axis dimensions where
+two scales are overlaid in the same space. Geographic positions represented by
+longitude and latiutude values are identified with `Longitude`, `Latitude` and
+their respective secondary equivalents. Such geographic position channels are
+subject to a map projection before being placed graphically.
 -}
 type Position
     = X
@@ -1550,7 +1581,7 @@ type ScaleProperty
     | SRangeStep (Maybe Float)
     | SRound Bool
     | SClamp Bool
-      -- TODO:  Need to restrict set of valid scale types that work with color interpolation
+      -- TODO:  Need to restrict set of valid scale types that work with color interpolation.
     | SInterpolate CInterpolate
     | SNice ScaleNice
     | SZero Bool
@@ -2115,6 +2146,34 @@ dataFromColumns fmts cols =
         )
 
 
+{-| Declare a data source from a provided json specification.
+
+    let
+        geojson =
+            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+    in
+    toVegaLite
+        [ width 200
+        , height 200
+        , dataFromJson geojson []
+        , projection [ PType Orthographic ]
+        , mark Geoshape []
+        ]
+
+-}
+dataFromJson : Spec -> List Format -> Data
+dataFromJson json fmts =
+    if fmts == [] then
+        ( VLData, JE.object [ ( "values", JE.list [ json ] ) ] )
+    else
+        ( VLData
+        , JE.object
+            [ ( "values", JE.list [ json ] )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
+            ]
+        )
+
+
 {-| Declare a data source from a provided list of row values. Each row contains
 a list of tuples where the first value is a string representing the column name, and the
 second the column value for that row. Each column can have a value of a different type
@@ -2336,6 +2395,67 @@ filter f =
                             List.map JE.bool bs |> JE.list
             in
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
+
+
+{-| Specifies a list of geo features to be used in a geoShape specification.
+Each feature object in this collection can be created with the `geometry` function.
+
+    geojson =
+        geoFeatureCollection
+            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
+                [ ( "myRegionName", Str "Northern region" ) ]
+            , geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
+                [ ( "myRegionName", Str "Southern region" ) ]
+            ]
+
+-}
+geoFeatureCollection : List Spec -> Spec
+geoFeatureCollection geoms =
+    JE.object
+        [ ( "type", JE.string "FeatureCollection" )
+        , ( "features", JE.list geoms )
+        ]
+
+
+{-| Specifies a list of geometry objects to be used in a geoShape specification.
+Each geometry object in this collection can be created with the `geometry` function.
+
+    geojson =
+        geometryCollection
+            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            , geometry (GeoPoint -3.5 55.5) []
+            ]
+
+-}
+geometryCollection : List Spec -> Spec
+geometryCollection geoms =
+    JE.object
+        [ ( "type", JE.string "GeometryCollection" )
+        , ( "geometries", JE.list geoms )
+        ]
+
+
+{-| Specifies a geometric object to be used in a geoShape specification. The first
+parameter is the geometric type, the second an optional list of properties to be
+associated with the object.
+
+      geojson =
+          geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+
+-}
+geometry : Geometry -> List ( String, DataValue ) -> Spec
+geometry gType properties =
+    if properties == [] then
+        JE.object
+            [ ( "type", JE.string "Feature" )
+            , ( "geometry", geometryTypeSpec gType )
+            ]
+    else
+        JE.object
+            [ ( "type", JE.string "Feature" )
+            , ( "geometry", geometryTypeSpec gType )
+            , ( "properties", JE.object (List.map (\( key, val ) -> ( key, dataValueSpec val )) properties) )
+            ]
 
 
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
@@ -3970,8 +4090,11 @@ fontWeightSpec w =
 formatProperty : Format -> List LabelledSpec
 formatProperty fmt =
     case fmt of
-        JSON ->
-            [ ( "type", JE.string "json" ) ]
+        JSON propertyName ->
+            if String.trim propertyName == "" then
+                [ ( "type", JE.string "json" ) ]
+            else
+                [ ( "type", JE.string "json" ), ( "property", JE.string propertyName ) ]
 
         CSV ->
             [ ( "type", JE.string "csv" ) ]
@@ -3987,6 +4110,51 @@ formatProperty fmt =
 
         Parse fmts ->
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, dataTypeSpec fmt )) fmts ) ]
+
+
+geometryTypeSpec : Geometry -> Spec
+geometryTypeSpec gType =
+    let
+        toCoords : List ( Float, Float ) -> Spec
+        toCoords pairs =
+            JE.list <| List.map (\( x, y ) -> JE.list [ JE.float x, JE.float y ]) pairs
+    in
+    case gType of
+        GeoPoint x y ->
+            JE.object
+                [ ( "type", JE.string "Point" )
+                , ( "coordinates", JE.list [ JE.float x, JE.float y ] )
+                ]
+
+        GeoPoints coords ->
+            JE.object
+                [ ( "type", JE.string "MultiPoint" )
+                , ( "coordinates", toCoords coords )
+                ]
+
+        GeoLine coords ->
+            JE.object
+                [ ( "type", JE.string "LineString" )
+                , ( "coordinates", toCoords coords )
+                ]
+
+        GeoLines coords ->
+            JE.object
+                [ ( "type", JE.string "MultiLineString" )
+                , ( "coordinates", List.map toCoords coords |> JE.list )
+                ]
+
+        GeoPolygon coords ->
+            JE.object
+                [ ( "type", JE.string "Polygon" )
+                , ( "coordinates", List.map toCoords coords |> JE.list )
+                ]
+
+        GeoPolygons coords ->
+            JE.object
+                [ ( "type", JE.string "MultiPolygon" )
+                , ( "coordinates", List.map (\cs -> List.map toCoords cs |> JE.list) coords |> JE.list )
+                ]
 
 
 hAlignLabel : HAlign -> String
