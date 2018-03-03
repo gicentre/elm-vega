@@ -1,12 +1,11 @@
 port module Gallery exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
 
 -- NOTE: All data sources in these examples originally provided at
--- https://vega.github.io/vega-datasets/
+-- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
 
 
@@ -170,6 +169,33 @@ basic10 : Spec
 basic10 =
     let
         des =
+            description "Scatterplot with Null values in grey"
+
+        data =
+            dataFromUrl "data/movies.json" []
+
+        config =
+            configure
+                << configuration (RemoveInvalid False)
+
+        enc =
+            encoding
+                << position X [ PName "IMDB_Rating", PmType Quantitative ]
+                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << color
+                    [ MDataCondition
+                        (Expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null")
+                        [ MString "#ddd" ]
+                        [ MString "#0099ee" ]
+                    ]
+    in
+    toVegaLite [ des, config [], data, mark Point [], enc [] ]
+
+
+basic11 : Spec
+basic11 =
+    let
+        des =
             description "A bubbleplot showing horsepower on x, miles per gallons on y, and acceleration on size."
 
         enc =
@@ -181,8 +207,8 @@ basic10 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
 
 
-basic11 : Spec
-basic11 =
+basic12 : Spec
+basic12 =
     let
         des =
             description "A bubble plot showing the correlation between health and income for 187 countries in the world (modified from an example in Lisa Charlotte Rost's blog post 'One Chart, Twelve Charting Libraries' --http://lisacharlotterost.github.io/2016/05/17/one-chart-code/)."
@@ -208,8 +234,8 @@ basic11 =
         ]
 
 
-basic12 : Spec
-basic12 =
+basic13 : Spec
+basic13 =
     let
         des =
             description "Shows the relationship between horsepower and the number of cylinders using tick marks."
@@ -222,8 +248,8 @@ basic12 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
 
 
-basic13 : Spec
-basic13 =
+basic14 : Spec
+basic14 =
     let
         des =
             description "Google's stock price over time."
@@ -239,8 +265,8 @@ basic13 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
 
 
-basic14 : Spec
-basic14 =
+basic15 : Spec
+basic15 =
     let
         des =
             description "Stock prices of 5 tech companies over time."
@@ -254,8 +280,8 @@ basic14 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
 
 
-basic15 : Spec
-basic15 =
+basic16 : Spec
+basic16 =
     let
         des =
             description "Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site."
@@ -269,8 +295,8 @@ basic15 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
 
 
-basic16 : Spec
-basic16 =
+basic17 : Spec
+basic17 =
     let
         des =
             description "Google's stock price over time (quantized as a step-chart)."
@@ -286,8 +312,8 @@ basic16 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
 
 
-basic17 : Spec
-basic17 =
+basic18 : Spec
+basic18 =
     let
         des =
             description "Unemployment over time (area chart)"
@@ -307,8 +333,8 @@ basic17 =
         ]
 
 
-basic18 : Spec
-basic18 =
+basic19 : Spec
+basic19 =
     let
         des =
             description "'Table heatmap' showing engine size/power for three countries."
@@ -322,8 +348,8 @@ basic18 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
 
 
-basic19 : Spec
-basic19 =
+basic20 : Spec
+basic20 =
     let
         des =
             description "'Binned heatmap' comparing movie ratings."
@@ -350,8 +376,8 @@ basic19 =
         ]
 
 
-basic20 : Spec
-basic20 =
+basic21 : Spec
+basic21 =
     let
         des =
             description "Table bubble plot in the style of a Github punched card."
@@ -1318,6 +1344,273 @@ comp3 =
         ]
 
 
+geo1 : Spec
+geo1 =
+    toVegaLite
+        [ description "Choropleth of US unemployment rate by county"
+        , width 500
+        , height 300
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
+        , mark Geoshape []
+        , encoding <| color [ MName "rate", MmType Quantitative ] []
+        ]
+
+
+geo2 : Spec
+geo2 =
+    let
+        enc =
+            encoding
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
+                << size [ MNumber 1 ]
+                << color [ MName "digit", MmType Nominal ]
+    in
+    toVegaLite
+        [ description "US zip codes: One dot per zipcode colored by first digit"
+        , width 500
+        , height 300
+        , projection [ PType AlbersUsa ]
+        , dataFromUrl "data/zipcodes.csv" []
+        , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
+        , mark Circle []
+        , enc []
+        ]
+
+
+geo3 : Spec
+geo3 =
+    let
+        des =
+            description "One dot per airport in the US overlayed on geoshape"
+
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        overlayEnc =
+            encoding
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
+                << size [ MNumber 5 ]
+                << color [ MString "steelblue" ]
+
+        overlaySpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , overlayEnc []
+                ]
+    in
+    toVegaLite
+        [ des, width 500, height 300, layer [ backdropSpec, overlaySpec ] ]
+
+
+geo4 : Spec
+geo4 =
+    let
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        airportsEnc =
+            encoding
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
+                << size [ MNumber 5 ]
+                << color [ MString "gray" ]
+
+        airportsSpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , airportsEnc []
+                ]
+
+        trans =
+            transform
+                << filter (FEqual "origin" (Str "SEA"))
+                << lookup "origin" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+                << calculateAs "datum.latitude" "origin_latitude"
+                << calculateAs "datum.longitude" "origin_longitude"
+                << lookup "destination" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+                << calculateAs "datum.latitude" "dest_latitude"
+                << calculateAs "datum.longitude" "dest_longitude"
+
+        flightsEnc =
+            encoding
+                << position Longitude [ PName "origin_longitude" ]
+                << position Latitude [ PName "origin_latitude" ]
+                << position Longitude2 [ PName "dest_longitude" ]
+                << position Latitude2 [ PName "dest_latitude" ]
+
+        flightsSpec =
+            asSpec
+                [ dataFromUrl "data/flights-airport.csv" []
+                , trans []
+                , projection [ PType AlbersUsa ]
+                , mark Rule []
+                , flightsEnc []
+                ]
+    in
+    toVegaLite
+        [ description "Rules (line segments) connecting SEA to every airport reachable via direct flight"
+        , width 800
+        , height 500
+        , layer [ backdropSpec, airportsSpec, flightsSpec ]
+        ]
+
+
+geo5 : Spec
+geo5 =
+    let
+        enc =
+            encoding
+                << shape [ MName "geo", MmType GeoFeature ]
+                << color [ MRepeat Row, MmType Quantitative ]
+
+        spec =
+            asSpec
+                [ width 500
+                , height 300
+                , dataFromUrl "data/population_engineers_hurricanes.csv" []
+                , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , enc []
+                ]
+    in
+    toVegaLite
+        [ description "Population per state, engineers per state, and hurricanes per state"
+        , repeat [ RowFields [ "population", "engineers", "hurricanes" ] ]
+        , resolve <| resolution (RScale [ ( ChColor, Independent ) ]) []
+        , specification spec
+        ]
+
+
+geo6 : Spec
+geo6 =
+    let
+        des =
+            description "US state campitals overlayed on map of the US"
+
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#ccc" ] []
+                ]
+
+        overlayEnc =
+            encoding
+                << position Longitude [ PName "lon" ]
+                << position Latitude [ PName "lat" ]
+                << text [ TName "city", TmType Nominal ]
+
+        overlaySpec =
+            asSpec
+                [ dataFromUrl "data/us-state-capitals.json" []
+                , projection [ PType AlbersUsa ]
+                , mark Text []
+                , overlayEnc []
+                ]
+    in
+    toVegaLite
+        [ des, width 800, height 500, layer [ backdropSpec, overlaySpec ] ]
+
+
+geo7 : Spec
+geo7 =
+    let
+        backdropSpec =
+            asSpec
+                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                , projection [ PType AlbersUsa ]
+                , mark Geoshape []
+                , encoding <| color [ MString "#eee" ] []
+                ]
+
+        airportsEnc =
+            encoding
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
+                << size [ MNumber 5 ]
+                << color [ MString "gray" ]
+
+        airportsSpec =
+            asSpec
+                [ dataFromUrl "data/airports.csv" []
+                , projection [ PType AlbersUsa ]
+                , mark Circle []
+                , airportsEnc []
+                ]
+
+        itinerary =
+            dataFromColumns []
+                << dataColumn "airport" (Strings [ "SEA", "SFO", "LAX", "LAS", "DFW", "DEN", "ORD", "JFK", "ATL" ])
+                << dataColumn "order" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ])
+
+        trans =
+            transform
+                << lookup "airport" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
+
+        flightsEnc =
+            encoding
+                << position Longitude [ PName "longitude" ]
+                << position Latitude [ PName "latitude" ]
+                << order [ OName "order", OmType Ordinal ]
+
+        flightsSpec =
+            asSpec
+                [ itinerary []
+                , trans []
+                , projection [ PType AlbersUsa ]
+                , mark Line []
+                , flightsEnc []
+                ]
+    in
+    toVegaLite
+        [ description "Line drawn between airports in the U.S. simulating a flight itinerary"
+        , width 800
+        , height 500
+        , layer [ backdropSpec, airportsSpec, flightsSpec ]
+        ]
+
+
+geo8 : Spec
+geo8 =
+    let
+        enc =
+            encoding
+                << shape [ MName "geo", MmType GeoFeature ]
+                << color [ MName "pct", MmType Quantitative ]
+                << row [ FName "group", FmType Nominal ]
+    in
+    toVegaLite
+        [ description "Income in the U.S. by state, faceted over income brackets"
+        , width 500
+        , height 300
+        , dataFromUrl "data/income.json" []
+        , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+        , projection [ PType AlbersUsa ]
+        , mark Geoshape []
+        , enc []
+        ]
+
+
 interactive1 : Spec
 interactive1 =
     let
@@ -1332,7 +1625,7 @@ interactive1 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MName "Cylinders", MmType Ordinal ]
                         [ MString "grey" ]
                     ]
@@ -1354,7 +1647,7 @@ interactive2 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << size
-                    [ MCondition "myPaintbrush"
+                    [ MSelectionCondition (SelectionName "myPaintbrush")
                         [ MNumber 300 ]
                         [ MNumber 50 ]
                     ]
@@ -1406,7 +1699,7 @@ interactive4 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "CylYr"
+                    [ MSelectionCondition (SelectionName "CylYr")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -1445,7 +1738,7 @@ interactive5 =
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
                 << opacity
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MNumber 1 ]
                         [ MNumber 0.7 ]
                     ]
@@ -1573,7 +1866,7 @@ interactive8 =
                 << position X [ PRepeat Column, PmType Quantitative ]
                 << position Y [ PRepeat Row, PmType Quantitative ]
                 << color
-                    [ MCondition "myBrush"
+                    [ MSelectionCondition (SelectionName "myBrush")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -1631,7 +1924,7 @@ interactive9 =
                 << position X [ PName "Major_Genre", PmType Nominal, PAxis [ AxLabelAngle -40 ] ]
                 << position Y [ PAggregate Count, PmType Quantitative ]
                 << color
-                    [ MCondition "myPts"
+                    [ MSelectionCondition (SelectionName "myPts")
                         [ MString "steelblue" ]
                         [ MString "grey" ]
                     ]
@@ -1653,7 +1946,7 @@ interactive9 =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "basic1", basic1 )
         , ( "basic2", basic2 )
         , ( "basic3", basic3 )
@@ -1674,6 +1967,7 @@ mySpecs =
         , ( "basic18", basic18 )
         , ( "basic19", basic19 )
         , ( "basic20", basic20 )
+        , ( "basic21", basic21 )
         , ( "stack1", stack1 )
         , ( "stack2", stack2 )
         , ( "stack3", stack3 )
@@ -1708,6 +2002,14 @@ mySpecs =
         , ( "comp1", comp1 )
         , ( "comp2", comp2 )
         , ( "comp3", comp3 )
+        , ( "geo1", geo1 )
+        , ( "geo2", geo2 )
+        , ( "geo3", geo3 )
+        , ( "geo4", geo4 )
+        , ( "geo5", geo5 )
+        , ( "geo6", geo6 )
+        , ( "geo7", geo7 )
+        , ( "geo8", geo8 )
         , ( "interactive1", interactive1 )
         , ( "interactive2", interactive2 )
         , ( "interactive3", interactive3 )

@@ -1,6 +1,5 @@
 port module ShapeTests exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -188,7 +187,7 @@ scatter15 =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "defNominal", scatter1 )
         , ( "defOrdinal", scatter2 )
         , ( "size1", scatter3 )

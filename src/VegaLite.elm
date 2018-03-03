@@ -7,9 +7,13 @@ module VegaLite
         , AxisProperty(..)
         , BinProperty(..)
         , Binding(..)
+        , BooleanOp(..)
         , CInterpolate(..)
         , Channel(..)
+        , ClipRect(..)
         , ConfigurationProperty(..)
+        , Cursor(..)
+        , Data
         , DataColumn
         , DataRow
         , DataType(..)
@@ -24,8 +28,10 @@ module VegaLite
         , FilterRange(..)
         , FontWeight(..)
         , Format(..)
+        , Geometry(..)
         , HAlign(..)
         , HeaderProperty(..)
+        , HyperlinkChannel(..)
         , InputProperty(..)
         , Legend(..)
         , LegendConfig(..)
@@ -37,7 +43,7 @@ module VegaLite
         , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
-        , Measurement(..)
+        , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
         , MonthName(..)
         , Operation(..)
         , OrderChannel(..)
@@ -45,6 +51,8 @@ module VegaLite
         , Padding(..)
         , Position(..)
         , PositionChannel(..)
+        , Projection(..)
+        , ProjectionProperty(..)
         , RangeConfig(..)
         , RepeatFields(..)
         , Resolution(..)
@@ -80,10 +88,12 @@ module VegaLite
         , categoricalDomainMap
         , color
         , column
+        , combineSpecs
         , configuration
         , configure
         , dataColumn
         , dataFromColumns
+        , dataFromJson
         , dataFromRows
         , dataFromUrl
         , dataRow
@@ -93,9 +103,14 @@ module VegaLite
         , encoding
         , facet
         , filter
+        , geoFeatureCollection
+        , geometry
+        , geometryCollection
         , hConcat
         , height
+        , hyperlink
         , layer
+        , lookup
         , lookupAs
         , mark
         , name
@@ -104,6 +119,7 @@ module VegaLite
         , order
         , padding
         , position
+        , projection
         , repeat
         , resolution
         , resolve
@@ -135,6 +151,7 @@ port to some JavaScript that invokes the Vega-Lite runtime.
 @docs toVegaLite
 @docs VLProperty
 @docs Spec
+@docs combineSpecs
 
 
 # Creating the Data Specification
@@ -144,20 +161,30 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromUrl
 @docs dataFromColumns
 @docs dataFromRows
+@docs dataFromJson
 @docs dataColumn
 @docs dataRow
+@docs geometry
+@docs geoFeatureCollection
+@docs geometryCollection
+@docs Data
 @docs DataColumn
 @docs DataRow
 @docs Format
+@docs Geometry
 @docs DataType
 
 
 # Creating the Transform Specification
 
 Functions and types for declaring the transformation rules that are applied to
-data fields before they are encoded visually.
+data fields or geospatial coordinates before they are encoded visually.
 
 @docs transform
+@docs projection
+@docs ProjectionProperty
+@docs Projection
+@docs ClipRect
 
 
 ## Aggregation
@@ -189,6 +216,7 @@ data fields before they are encoded visually.
 
 ## Relational Joining (lookup)
 
+@docs lookup
 @docs lookupAs
 
 
@@ -202,23 +230,24 @@ Types and functions for declaring the type of visual marks used in the visualiza
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
+@docs Cursor
 
 
 # Creating the Encoding Specification
 
 Types and functions for declaring which data fields are mapped to which channels.
 Channels can include position on screen (e.g. `X`,`Y`), visual mark properties
-(e.g. color, size, shape), text, ordering, level of detail and facets (for nested
-visualization). All can be further customised via a series of properties for determining
-how that encoding is implemented (e.g. scaling, sorting, spacing).
+(e.g. color, size, shape), text, hyperlinks, ordering, level of detail and facets
+(for nested visualization). All can be further customised via a series of properties
+for determining how that encoding is implemented (e.g. scaling, sorting, spacing).
 
 @docs encoding
 @docs Measurement
 
 
-## Position channels
+## Position channel
 
-Channels that relate to where something appears in the visualization.
+Relates to where something appears in the visualization.
 
 @docs position
 @docs PositionChannel
@@ -236,7 +265,8 @@ Channels that relate to where something appears in the visualization.
 
 ## Mark channels
 
-Channels that relate to the appearance of the visual marks in the visualization.
+Relate to the appearance of the visual marks in the visualization such as their
+color or size.
 
 @docs size
 @docs color
@@ -251,12 +281,22 @@ Channels that relate to the appearance of the visual marks in the visualization.
 
 ## Text Channels
 
-Channels that relate to the appearance of the text and tooltip elements of the
-visualization.
+Relate to the appearance of the text and tooltip elements of the visualization.
 
 @docs text
 @docs tooltip
 @docs TextChannel
+
+
+## Hyperlink Channel
+
+Relates to a clickable URL destination of a mark. Note that unlike most other
+channels, the hyperlink channel has no direct visual expression other than the
+option of changing the cursor style when hovering, so an encoding will usually
+pair hyperlinks with other visual channels such as marks or texts.
+
+@docs hyperlink
+@docs HyperlinkChannel
 
 
 ## Order channels
@@ -367,16 +407,20 @@ For details, see the
 
 ## Making conditional channel encodings
 
-Sometimes, especially when building interaction into a visualization, it is useful
-to make channel encoding conditional on some kind of selection such as clicking
-or dragging. Once a selection has been defined and named, supplying a set of
-`MCondition` encodings allow mark encodings to become dependent on that selection.
-`MCondition` is followed firstly by the name of the selection upon which it is
-dependent, then an 'if' and an 'else' clause. Each clause is a list of mark field
-encodings that should be applied when the selection is true (the 'if clause') and
-when it is false (the 'else clause'). The color encoding below is saying "whenever
-data marks are selected with an interval mouse drag, encode the cylinder field with
-an ordinal color scheme, else make them grey".
+Sometimes it is useful to make channel encoding conditional on something. For example,
+on the result of some interaction such as clicking or dragging or some data property
+such whether null or an outlier. `MSelectionCondition` (and `TSelectionCondition`) will
+encode a mark (or text) dependent on an interactive selection. `MDataCondition`
+(and `TDataCondition`) will encode it dependening on some data property.
+
+For interaction, once a selection has been defined and named, supplying a set of
+`MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
+`MSelectionCondition` is followed firstly by a Boolean expression relating to the
+selection upon which it is dependent, then an 'if' and an 'else' clause. Each clause
+is a list of mark field encodings that should be applied when the selection is true
+(the 'if clause') and when it is false (the 'else clause'). The color encoding below
+is saying "whenever data marks are selected with an interval mouse drag, encode
+the cylinder field with an ordinal color scheme, else make them grey".
 
       sel =
           selection << select "myBrush" Interval []
@@ -386,13 +430,31 @@ an ordinal color scheme, else make them grey".
               << position X [ PName "Horsepower", PmType Quantitative ]
               << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
               << color
-                  [ MCondition "myBrush"
+                  [ MSelectionCondition (SelectionName "myBrush")
                       [ MName "Cylinders", MmType Ordinal ]
                       [ MString "grey" ]
                   ]
 
+In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
+on whether a predicate test is satisfied.
+
+      enc =
+          encoding
+              << position X [ PName "IMDB_Rating", PmType Quantitative ]
+              << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << color
+                    [ MDataCondition
+                        (Or (Expr "datum.IMDB_Rating === null")
+                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                        )
+                        [ MString "#ddd" ]
+                        [ MString "#0099ee" ]
+                    ]
+
 For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/condition.html).
+
+@docs BooleanOp
 
 
 # Global Configuration
@@ -538,22 +600,8 @@ type AxisProperty
     | AxTitleMaxLength Float
     | AxTitlePadding Float
     | AxValues (List Float)
+    | AxDates (List (List DateTime))
     | AxZIndex Int
-
-
-{-| Type of binning property to customise. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details.
--}
-type BinProperty
-    = Base Float
-    | Divide Float Float
-    | Extent Float Float
-    | MaxBins Int
-    | MinStep Float
-    | Nice Bool
-    | Step Float
-    | Steps (List Float)
 
 
 {-| Describes the binding property of a selection based on some HTML input element
@@ -576,6 +624,43 @@ type Binding
     | IDateTimeLocal String (List InputProperty)
     | ITel String (List InputProperty)
     | IColor String (List InputProperty)
+
+
+{-| Type of binning property to customise. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
+more details.
+-}
+type BinProperty
+    = Base Float
+    | Divide Float Float
+    | Extent Float Float
+    | MaxBins Int
+    | MinStep Float
+    | Nice Bool
+    | Step Float
+    | Steps (List Float)
+
+
+{-| Used for creating logical compositions. For example
+
+    color
+        [ MSelectionCondition (Or (SelectionName "alex") (SelectionName "morgan"))
+            [ MAggregate Count, MName "*", MmType Quantitative ]
+            [ MString "gray" ]
+        ]
+
+Logical compositions can be nested to any level. For example
+
+    Not (And (Expr "datum.IMDB_Rating === null") (Expr "datum.Rotten_Tomatoes_Rating === null") )
+
+-}
+type BooleanOp
+    = Expr String
+    | Selection String
+    | SelectionName String
+    | And BooleanOp BooleanOp
+    | Or BooleanOp BooleanOp
+    | Not BooleanOp
 
 
 {-| Indicates a channel type to be used in a resolution specification.
@@ -612,13 +697,22 @@ type CInterpolate
     | Rgb Float
 
 
+{-| Specifies a clipping rectangle in pixel units. In `LTRB` the order of the four
+numbers that follow are 'left', 'top', 'right' then 'bottom'. Used when defining
+the clip extent of a map projection.
+-}
+type ClipRect
+    = NoClip
+    | LTRB Float Float Float Float
+
+
 {-| Type of configuration property to customise. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
 for details.
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
-      --| Autosize (List Autosize)  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
+    | Autosize (List Autosize)
     | Axis (List AxisConfig)
     | AxisX (List AxisConfig)
     | AxisY (List AxisConfig)
@@ -639,6 +733,7 @@ type ConfigurationProperty
     | NumberFormat String
     | Padding Padding
     | PointStyle (List MarkProperty)
+    | Projection (List ProjectionProperty)
     | Range (List RangeConfig)
     | RectStyle (List MarkProperty)
     | RemoveInvalid Bool
@@ -654,6 +749,61 @@ type ConfigurationProperty
     | View (List ViewConfig)
 
 
+{-| Represents the type of cursor to display. For an explanation of each type,
+see the [CSS documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
+-}
+type Cursor
+    = CAuto
+    | CDefault
+    | CNone
+    | CContextMenu
+    | CHelp
+    | CPointer
+    | CProgress
+    | CWait
+    | CCell
+    | CCrosshair
+    | CText
+    | CVerticalText
+    | CAlias
+    | CCopy
+    | CMove
+    | CNoDrop
+    | CNotAllowed
+    | CAllScroll
+    | CColResize
+    | CRowResize
+    | CNResize
+    | CEResize
+    | CSResize
+    | CWResize
+    | CNEResize
+    | CNWResize
+    | CSEResize
+    | CSWResize
+    | CEWResize
+    | CNSResize
+    | CNESWResize
+    | CNWSEResize
+    | CZoomIn
+    | CZoomOut
+    | CGrab
+    | CGrabbing
+
+
+{-| Convenience type annotation label for use with data generation functions.
+
+    myRegion : List DataColumn -> Data
+    myRegion =
+        dataFromColumns []
+            << dataColumn "easting" (Numbers [ -3, 4, 4, -3, -3 ])
+            << dataColumn "northing" (Numbers [ 52, 52, 45, 45, 52 ])
+
+-}
+type alias Data =
+    ( VLProperty, Spec )
+
+
 {-| Represents a single column of data. Used when generating inline data with
 `dataColumn`.
 -}
@@ -666,6 +816,20 @@ type alias DataColumn =
 -}
 type alias DataRow =
     Spec
+
+
+{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
+and `FoUtc`, the formatting specification can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of dates because different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+type DataType
+    = FoNumber
+    | FoBoolean
+    | FoDate String
+    | FoUtc String
 
 
 {-| A single data value. This is used when a function can accept values of different
@@ -772,18 +936,15 @@ type FacetMapping
     | RowBy (List FacetChannel)
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
-and `FoUtc`, the formatting specification can be specified using
-[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
-or left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default parsing of dates though as different browsers can
-parse dates differently. Being explicit about the date format is usually safer.
+{-| Indicates the style in which field names are displayed. The `Verbal` style is
+'Sum of field', 'Year of date', 'field (binned)' etc. The `Function` style is
+'SUM(field)', 'YEAR(date)', 'BIN(field)' etc. The `Plain` style is just the field
+name without any additional text.
 -}
-type DataType
-    = FoNumber
-    | FoBoolean
-    | FoDate String
-    | FoUtc String
+type FieldTitleProperty
+    = Verbal
+    | Function
+    | Plain
 
 
 {-| Type of filtering operation. See the
@@ -793,6 +954,7 @@ for details.
 type Filter
     = FEqual String DataValue
     | FExpr String
+    | FCompose BooleanOp
     | FSelection String
     | FOneOf String DataValues
     | FRange String FilterRange
@@ -804,18 +966,6 @@ vale to accept and the second the inclusive maximum.
 type FilterRange
     = NumberRange Float Float
     | DateRange (List DateTime) (List DateTime)
-
-
-{-| Specifies the type of format a data source uses. For details see the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
--}
-type Format
-    = JSON
-    | CSV
-    | TSV
-    | TopojsonFeature String
-    | TopojsonMesh String
-    | Parse (List ( String, DataType ))
 
 
 {-| Indicates the weight options for a font.
@@ -836,6 +986,38 @@ type FontWeight
     | W900
 
 
+{-| Specifies the type of format a data source uses. If the format is indicated by
+the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate the
+format explicitly. However this can be useful if (a) the filename extension does not
+indicate type (e.g. `.txt`) or you wish to customise the parsing of a file. For
+example, when specifying the `JSON` format, its parameter indicates the name of
+property field containing the attribute data to extract. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
+-}
+type Format
+    = JSON String
+    | CSV
+    | TSV
+    | TopojsonFeature String
+    | TopojsonMesh String
+    | Parse (List ( String, DataType ))
+
+
+{-| Specifies the type and content of geometry specifications for programatically
+creating GeoShapes. These can be mapped to the
+[GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
+where the pluralised type names refer to their `Multi` prefixed equivalent in the
+GeoJSON specification.
+-}
+type Geometry
+    = GeoPoint Float Float
+    | GeoPoints (List ( Float, Float ))
+    | GeoLine (List ( Float, Float ))
+    | GeoLines (List (List ( Float, Float )))
+    | GeoPolygon (List (List ( Float, Float )))
+    | GeoPolygons (List (List (List ( Float, Float ))))
+
+
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
 -}
 type HAlign
@@ -852,7 +1034,21 @@ type HeaderProperty
     | HTitle String
 
 
-{-| GUI Input properties. The type of relevant proerty will depend on the type of
+{-| Types of hyperlink channel property used for linking marks or text to URLs.
+-}
+type HyperlinkChannel
+    = HName String
+    | HRepeat Arrangement
+    | HmType Measurement
+    | HBin (List BinProperty)
+    | HAggregate Operation
+    | HTimeUnit TimeUnit
+    | HSelectionCondition BooleanOp (List HyperlinkChannel) (List HyperlinkChannel)
+    | HDataCondition BooleanOp (List HyperlinkChannel) (List HyperlinkChannel)
+    | HString String
+
+
+{-| GUI Input properties. The type of relevant property will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
 max and step values; InSelect (selector) has a list of selection label options.
 For details see the
@@ -968,6 +1164,7 @@ type Mark
     = Area
     | Bar
     | Circle
+    | Geoshape
     | Line
     | Point
     | Rect
@@ -988,7 +1185,8 @@ type MarkChannel
     | MTimeUnit TimeUnit
     | MAggregate Operation
     | MLegend (List LegendProperty)
-    | MCondition String (List MarkChannel) (List MarkChannel)
+    | MSelectionCondition BooleanOp (List MarkChannel) (List MarkChannel)
+    | MDataCondition BooleanOp (List MarkChannel) (List MarkChannel)
     | MPath String
     | MNumber Float
     | MString String
@@ -1039,6 +1237,7 @@ type
     | MBinSpacing Float
     | MClip Bool
     | MColor String
+    | MCursor Cursor
     | MContinuousBandSize Float
     | MDiscreteBandSize Float
     | MdX Float
@@ -1069,17 +1268,30 @@ type
     | MThickness Float
 
 
-{-| Level of measurement to be associated with some channel. `Nominal` data are
+{-| Type of measurement to be associated with some channel. `Nominal` data are
 categories identified by name alone and which have no intrinsic order. `Ordinal`
 data are also categories, but ones which have some natural order. `Quantitative`
-data are numeric measurements typcially on a continuous scale. `Temporal` data
+data are numeric measurements typically on a continuous scale. `Temporal` data
 describe time.
+
+Geospatial types should be set to `Quantitative` when defining a measurement type for positional
+encoding and `GeoFeature` for geographically referenced features. Note that Vega-Lite 2.1 beta
+instead has `latitude` and `longitude` types for encoding with position and a `geojson` for spatial
+features, which should not be used in elm-vaga.
+
 -}
 type Measurement
     = Nominal
     | Ordinal
     | Quantitative
     | Temporal
+    | Latitude_
+    | Longitude_
+    | GeoFeature
+
+
+
+-- | GeoJson
 
 
 {-| Idntifies a month of the year.
@@ -1159,15 +1371,22 @@ type Padding
     | PEdges Float Float Float Float
 
 
-{-| Type of position channel, `X` and `Y` represent horizontal and vertical axis dimensions
-while `X2` and `Y2` represent secondary axis dimensions where two scales are overlaid
-in the same space.
+{-| Type of position channel, `X` and `Y` represent horizontal and vertical axis
+dimensions on a plane and `X2` and `Y2` represent secondary axis dimensions where
+two scales are overlaid in the same space. Geographic positions represented by
+longitude and latiutude values are identified with `Longitude`, `Latitude` and
+their respective secondary equivalents. Such geographic position channels are
+subject to a map projection before being placed graphically.
 -}
 type Position
     = X
     | Y
     | X2
     | Y2
+    | Longitude
+    | Latitude
+    | Longitude2
+    | Latitude2
 
 
 {-| Position channel properties used for creating a position channel encoding.
@@ -1185,62 +1404,52 @@ type PositionChannel
     | PStack StackProperty
 
 
-{-| Top-level Vega-Lite properties. These are the ones that define the core of the
-visualization grammar. All `VLProperties` are created by functions which can be
-arranged into seven broad groups.
-
-**Data Properties** relate to the input data to be visualized. Generated by [`dataFromColumns`](#dataFromColumns),
-[`dataFromRows`](#dataFromRows) and [`dataFromUrl`](#dataFromUrl).
-
-**Transform Properties** are those which indicate some transformation of input
-data should be applied before encoding them visually. Generated by [`transform`](#transform),
-they can include transformations such as `filter`, `binAs` and `calculateAs`.
-
-**Mark Properties** relate to the symbols used to visualize data items. Generated by [`mark`](#mark)
-they include types such as `Circle`, `Bar` and `Line`.
-
-**Encoding Properties** specify which data elements are mapped to which mark characteristics
-(known as _channels_). Generated by [`encoding`](#encoding) they include encodings
-such as `position`, `color`, `size`, `shape` and `text`.
-
-**Composition Properties** allow visualization views to be combined to form more
-complex visualizations. Generated by [`layer`](#layer), [`repeat`](#repeat),
-[`facet`](#facet), [`hConcat`](#hConcat), [`vConcat`](#vConcat), [`spec`](#spec)
-and [`resolve`](#resolve).
-
-**Interaction Properties** allow interactions such as clicking, dragging and others
-generated via a GUI or data stream to influence the visualization. Generated by
-[`selection`](#selection).
-
-**Supplementary and Configuration Properties** provide a means to add metadata and
-styling to one or more visualizations. Generated by [`name`](#name), [`title`](#title),
-[`description`](#description), [`background`](#background), [`width`](#width),
-[`height`](#height), [`padding`](#padding), [`autosize`](#autosize) and
-[`configure`](#configure).
-
+{-| Types of geographic map projection. These are based on a subset of those provided
+by the [d3-geo library](https://github.com/d3/d3-geo). For details of available
+projections see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html#projection-types).
+Additional custom projections from d3 can be defined via the
+[Vega API](https://vega.github.io/vega/docs/projections/#register) and called from
+within Elm-Vega setting the projection to `Custom proj` where `proj` is the name
+of the D3 projection to use (e.g. `winkel3`).
 -}
-type VLProperty
-    = VLName
-    | VLDescription
-    | VLTitle
-    | VLWidth
-    | VLHeight
-    | VLAutosize
-    | VLPadding
-    | VLBackground
-    | VLData
-    | VLMark
-    | VLTransform
-    | VLEncoding
-    | VLLayer
-    | VLHConcat
-    | VLVConcat
-    | VLRepeat
-    | VLFacet
-    | VLSpec
-    | VLResolve
-    | VLConfig
-    | VLSelection
+type Projection
+    = Albers
+    | AlbersUsa
+    | AzimuthalEqualArea
+    | AzimuthalEquidistant
+    | ConicConformal
+    | ConicEqualArea
+    | ConicEquidistant
+    | Custom String
+    | Equirectangular
+    | Gnomonic
+    | Mercator
+    | Orthographic
+    | Stereographic
+    | TransverseMercator
+
+
+{-| Properties for customising a geospatial projection that converts longitude/latitude
+pairs into planar (x,y) coordinate pairs for rendering and query. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
+-}
+type ProjectionProperty
+    = PType Projection
+    | PClipAngle (Maybe Float)
+    | PClipExtent ClipRect
+    | PCenter Float Float
+    | PRotate Float Float Float
+    | PPrecision Float
+    | PCoefficient Float
+    | PDistance Float
+    | PFraction Float
+    | PLobes Int
+    | PParallel Float
+    | PRadius Float
+    | PRatio Float
+    | PSpacing Float
+    | PTilt Float
 
 
 {-| Properties for customising the colors of a range. The parameter should be a
@@ -1372,7 +1581,7 @@ type ScaleProperty
     | SRangeStep (Maybe Float)
     | SRound Bool
     | SClamp Bool
-      -- TODO:  Need to restrict set of valid scale types that work with color interpolation
+      -- TODO:  Need to restrict set of valid scale types that work with color interpolation.
     | SInterpolate CInterpolate
     | SNice ScaleNice
     | SZero Bool
@@ -1468,8 +1677,9 @@ type SortProperty
     | ByRepeat Arrangement
 
 
-{-| Represents a Vega-Lite specification. Specs can be (and usually are) nested.
-They can range from a single Boolean value up to the entire Vega-Lite specification.
+{-| Represents part or all of Vega-Lite specification. Specs can be (and usually
+are) nested. They can range from a single Boolean value up to the entire Vega-Lite
+specification.
 -}
 type alias Spec =
     JE.Value
@@ -1506,11 +1716,12 @@ type TextChannel
     | TBin (List BinProperty)
     | TAggregate Operation
     | TTimeUnit TimeUnit
-    | TCondition String (List TextChannel) (List TextChannel)
+    | TSelectionCondition BooleanOp (List TextChannel) (List TextChannel)
+    | TDataCondition BooleanOp (List TextChannel) (List TextChannel)
     | TFormat String
 
 
-{-| Describes a unit of time. Useufl for encoding and transformations. See the
+{-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
 for further details.
 -}
@@ -1559,17 +1770,6 @@ type TitleConfig
     | TOrient Side
 
 
-{-| Indicates the style in which field names are displayed. The `Verbal` style is
-'Sum of field', 'Year of date', 'field (binned)' etc. The `Function` style is
-'SUM(field)', 'YEAR(date)', 'BIN(field)' etc. The `Plain` style is just the field
-name without any additional text.
--}
-type FieldTitleProperty
-    = Verbal
-    | Function
-    | Plain
-
-
 {-| Indicates the vertical alignment of some text that may be attached to a mark.
 -}
 type VAlign
@@ -1594,6 +1794,67 @@ type ViewConfig
     | StrokeWidth Float
     | StrokeDash (List Float)
     | StrokeDashOffset Float
+
+
+{-| Top-level Vega-Lite properties. These are the ones that define the core of the
+visualization grammar. All `VLProperties` are created by functions which can be
+arranged into seven broad groups.
+
+**Data Properties** relate to the input data to be visualized. Generated by [`dataFromColumns`](#dataFromColumns),
+[`dataFromRows`](#dataFromRows), [`dataFromUrl`](#dataFromUrl) and [`dataFromJson`](#dataFromJson).
+
+**Transform Properties** indicate that some transformation of input data should
+be applied before encoding them visually. Generated by [`transform`](#transform)
+and [`projection`](#projection) they can include data transformations such as `filter`,
+`binAs` and `calculateAs` and geo transformations of longitude, latitude coordinates
+used by marks such as `Geoshape`, `Point` and `Line`.
+
+**Mark Properties** relate to the symbols used to visualize data items. Generated by [`mark`](#mark)
+they include types such as `Circle`, `Bar` and `Line`.
+
+**Encoding Properties** specify which data elements are mapped to which mark characteristics
+(known as _channels_). Generated by [`encoding`](#encoding) they include encodings
+such as `position`, `color`, `size`, `shape` `text` and `hyperlink`.
+
+**Composition Properties** allow visualization views to be combined to form more
+complex visualizations. Generated by [`layer`](#layer), [`repeat`](#repeat),
+[`facet`](#facet), [`hConcat`](#hConcat), [`vConcat`](#vConcat), [`spec`](#spec)
+and [`resolve`](#resolve).
+
+**Interaction Properties** allow interactions such as clicking, dragging and others
+generated via a GUI or data stream to influence the visualization. Generated by
+[`selection`](#selection).
+
+**Supplementary and Configuration Properties** provide a means to add metadata and
+styling to one or more visualizations. Generated by [`name`](#name), [`title`](#title),
+[`description`](#description), [`background`](#background), [`width`](#width),
+[`height`](#height), [`padding`](#padding), [`autosize`](#autosize) and
+[`configure`](#configure).
+
+-}
+type VLProperty
+    = VLName
+    | VLDescription
+    | VLTitle
+    | VLWidth
+    | VLHeight
+    | VLAutosize
+    | VLPadding
+    | VLBackground
+    | VLData
+    | VLMark
+    | VLTransform
+    | VLProjection
+    | VLEncoding
+    | VLLayer
+    | VLHConcat
+    | VLVConcat
+    | VLRepeat
+    | VLFacet
+    | VLSpec
+    | VLResolve
+    | VLConfig
+    | VLSelection
 
 
 {-| Defines a set of named aggregation transformations to be used when encoding
@@ -1689,8 +1950,8 @@ bin bProps =
 
 
 {-| Create a named binning transformation that may be referenced in other Transformations
-or encodings. This works in a similar way to `bin` but reqires the name of the field
-to bin and an addtional label so it may be referenced in other expressions. The
+or encodings. This works in a similar way to `bin` but requires the name of the field
+to bin and an additional label so it may be referenced in other expressions. The
 type of binning can be customised with a list of `BinProperty` or an empty list
 to use the default binning. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
@@ -1768,7 +2029,7 @@ color markProps =
 {-| Encodes a new facet to be arranged in columns. The first parameter is a list
 of properties that define the faceting channel. This should include at least the
 name of the data field and its measurement type. The final parameter is a list of
-anyprevious channels to which this is to be added. This is usually implicit when
+any previous channels to which this is to be added. This is usually implicit when
 chaining encodings using functional composition
 
     enc =
@@ -1781,6 +2042,22 @@ chaining encodings using functional composition
 column : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 column fFields =
     (::) ( "column", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Combines a list of labelled specifications into a single specification that
+may be passed to JavaScript for rendering. This is useful when you wish to create
+a single page with multiple visulizualizations.
+
+    combineSpecs
+        [ ( "vis1", myFirstVis )
+        , ( "vis2", mySecondVis )
+        , ( "vis3", myOtherVis )
+        ]
+
+-}
+combineSpecs : List LabelledSpec -> Spec
+combineSpecs specs =
+    JE.object specs
 
 
 {-| Defines a single configuration option to be applied globally across the visualization.
@@ -1837,8 +2114,8 @@ dataColumn colName data =
 {-| Declare a data source from a provided list of column values. Each column contains
 values of the same type, but columns each with a different type are permitted.
 Columns should all contain the same number of items; if not the dataset will be
-truncated to the length of the shortest column. An optional list for field formatting
-instructions can be provided in the first parameter or an empty list to use the
+truncated to the length of the shortest column. An optional list of field formatting
+instructions can be provided as the first parameter or an empty list to use the
 default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
 for details.
@@ -1851,7 +2128,7 @@ The columns themselves are most easily generated with `dataColumn`
             << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
 
 -}
-dataFromColumns : List Format -> List DataColumn -> ( VLProperty, Spec )
+dataFromColumns : List Format -> List DataColumn -> Data
 dataFromColumns fmts cols =
     let
         dataArray =
@@ -1863,20 +2140,58 @@ dataFromColumns fmts cols =
     if fmts == [] then
         ( VLData, JE.object [ ( "values", dataArray ) ] )
     else
-        ( VLData, JE.object [ ( "values", dataArray ), ( "format", JE.object (List.concatMap format fmts) ) ] )
+        ( VLData
+        , JE.object
+            [ ( "values", dataArray )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
+            ]
+        )
+
+
+{-| Declare a data source from a provided json specification. The most likely use-case
+for specifying json inline is when creating [geojson](http://geojson.org) objects,
+when [`geometry`](#geometry), [`geometryCollection`](#geometryCollection) and
+[`geoFeatureCollection`](#geoFeatureCollection) functions may be used. For more
+general cases of json creation, consider
+[`Json.Encode`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Json-Encode).
+
+    let
+        geojson =
+            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+    in
+    toVegaLite
+        [ width 200
+        , height 200
+        , dataFromJson geojson []
+        , projection [ PType Orthographic ]
+        , mark Geoshape []
+        ]
+
+-}
+dataFromJson : Spec -> List Format -> Data
+dataFromJson json fmts =
+    if fmts == [] then
+        ( VLData, JE.object [ ( "values", JE.list [ json ] ) ] )
+    else
+        ( VLData
+        , JE.object
+            [ ( "values", JE.list [ json ] )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
+            ]
+        )
 
 
 {-| Declare a data source from a provided list of row values. Each row contains
 a list of tuples where the first value is a string representing the column name, and the
 second the column value for that row. Each column can have a value of a different type
 but you must ensure that when subsequent rows are added, they match the types of previous
-values with shared column names. An optional list for field formatting instructions can
-be provided in the first parameter or an empty list to use the default formatting. See the
+values with shared column names. An optional list of field formatting instructions can
+be provided as the first parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
 for details.
 The rows themselves are most easily generated with `dataRow`. Note though that generally
 if you are creating data inline (as opposed to reading from a file), adding data by column
-in more efficent and less error-prone.
+is more efficient and less error-prone.
 
     data =
         dataFromRows [ Parse [ ( "Year", FDate "%Y" ) ] ]
@@ -1885,7 +2200,7 @@ in more efficent and less error-prone.
             << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
 
 -}
-dataFromRows : List Format -> List DataRow -> ( VLProperty, Spec )
+dataFromRows : List Format -> List DataRow -> Data
 dataFromRows fmts rows =
     if fmts == [] then
         ( VLData, JE.object [ ( "values", JE.list rows ) ] )
@@ -1893,27 +2208,37 @@ dataFromRows fmts rows =
         ( VLData
         , JE.object
             [ ( "values", JE.list rows )
-            , ( "format", JE.object (List.concatMap format fmts) )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
             ]
         )
 
 
 {-| Declare data source from a url. The url can be a local path on a web server
 or an external http(s) url. Used to create a data ( property, specification ) pair.
-An optional list for field formatting instructions can be provided in the first
+An optional list of field formatting instructions can be provided as the second
 parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
 for details.
 
-    ( Data, dataFromUrl "data/population.json" [])
+    enc = ...
+    toVegaLite
+        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
+        , mark Line []
+        , enc []
+        ]
 
 -}
-dataFromUrl : String -> List Format -> ( VLProperty, Spec )
+dataFromUrl : String -> List Format -> Data
 dataFromUrl url fmts =
     if fmts == [] then
         ( VLData, JE.object [ ( "url", JE.string url ) ] )
     else
-        ( VLData, JE.object [ ( "url", JE.string url ), ( "format", JE.object (List.concatMap format fmts) ) ] )
+        ( VLData
+        , JE.object
+            [ ( "url", JE.string url )
+            , ( "format", JE.object (List.concatMap formatProperty fmts) )
+            ]
+        )
 
 
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
@@ -1924,7 +2249,7 @@ The final parameter is the list of any other rows to which this is added.
 -}
 dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
 dataRow row =
-    (::) (JE.object (List.map (\( colName, val ) -> ( colName, datavalue val )) row))
+    (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValueSpec val )) row))
 
 
 {-| Provides an optional description to be associated with the visualization.
@@ -2028,6 +2353,12 @@ should be added in sequence.
         transform
             << filter (FEqual "Animal" (Str "Cat"))
 
+Filter operations can combine selections and data predicates with `BooleanOp` expressions:
+
+    trans =
+        transform
+            << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
 filter f =
@@ -2035,8 +2366,11 @@ filter f =
         FExpr expr ->
             (::) ( "filter", JE.string expr )
 
+        FCompose boolExpr ->
+            (::) ( "filter", booleanOpSpec boolExpr )
+
         FEqual field val ->
-            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", datavalue val ) ] )
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", dataValueSpec val ) ] )
 
         FSelection selName ->
             (::) ( "filter", JE.object [ ( "selection", JE.string selName ) ] )
@@ -2075,6 +2409,67 @@ filter f =
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
 
 
+{-| Specifies a list of geo features to be used in a geoShape specification.
+Each feature object in this collection can be created with the `geometry` function.
+
+    geojson =
+        geoFeatureCollection
+            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
+                [ ( "myRegionName", Str "Northern region" ) ]
+            , geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
+                [ ( "myRegionName", Str "Southern region" ) ]
+            ]
+
+-}
+geoFeatureCollection : List Spec -> Spec
+geoFeatureCollection geoms =
+    JE.object
+        [ ( "type", JE.string "FeatureCollection" )
+        , ( "features", JE.list geoms )
+        ]
+
+
+{-| Specifies a list of geometry objects to be used in a geoShape specification.
+Each geometry object in this collection can be created with the `geometry` function.
+
+    geojson =
+        geometryCollection
+            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            , geometry (GeoPoint -3.5 55.5) []
+            ]
+
+-}
+geometryCollection : List Spec -> Spec
+geometryCollection geoms =
+    JE.object
+        [ ( "type", JE.string "GeometryCollection" )
+        , ( "geometries", JE.list geoms )
+        ]
+
+
+{-| Specifies a geometric object to be used in a geoShape specification. The first
+parameter is the geometric type, the second an optional list of properties to be
+associated with the object.
+
+      geojson =
+          geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+
+-}
+geometry : Geometry -> List ( String, DataValue ) -> Spec
+geometry gType properties =
+    if properties == [] then
+        JE.object
+            [ ( "type", JE.string "Feature" )
+            , ( "geometry", geometryTypeSpec gType )
+            ]
+    else
+        JE.object
+            [ ( "type", JE.string "Feature" )
+            , ( "geometry", geometryTypeSpec gType )
+            , ( "properties", JE.object (List.map (\( key, val ) -> ( key, dataValueSpec val )) properties) )
+            ]
+
+
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
 
     let
@@ -2109,6 +2504,22 @@ height h =
     ( VLHeight, JE.float h )
 
 
+{-| Encode a hyperlink channel. The first parameter is a list of hyperlink channel
+properties that characterise the hyperlinking such as the destination url and cursor
+type. The second parameter is a list of any previous encoding channels to which
+this hyperlink channel should be added.
+
+    hyperlink [ MName "Species", MmType Nominal ] []
+
+For further details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
+
+-}
+hyperlink : List HyperlinkChannel -> List LabelledSpec -> List LabelledSpec
+hyperlink hyperProps =
+    (::) ( "href", List.concatMap hyperlinkChannelProperty hyperProps |> JE.object )
+
+
 {-| Assigns a list of specifications to superposed layers in a visualization.
 
     let
@@ -2126,28 +2537,37 @@ layer specs =
     ( VLLayer, JE.list specs )
 
 
-{-| Perform a lookup between two data sources. This allows you to find values in
-one data source based on the the values in another (like a relational join). The
-first parameter is the field in the primary data source to act as key, the second
-is the secondary data source which can be specified with a call to `dataFromUrl`
-or other data generating functions. The third is the name of the field in the secondary
+{-| Perform a lookup of named fields between two data sources. This allows you to
+find values in one data source based on the values in another (like a relational
+join). The first parameter is the field in the primary data source to act as key,
+the second is the secondary data source which can be specified with a call to `dataFromUrl`
+or other data generating function. The third is the name of the field in the secondary
 data source to match values with the primary key. The fourth parameter is the list
 of fields to be stored when the keys match. As with other transformation functions,
 the final implicit parameter is a list of any other transformations to which this
-is to be added. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
+is to be added.
+
+Unlike `lookupAs`, this function will only return the specific fields named in the
+fourth parameter. If you wish to return the entire set of fields in the secondary
+data source as a single object, use `lookupAs`.
+
+See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
 for further details.
+
+The following would return the values in the `age` and `height` fields from
+`lookup_people.csv` for all rows where the value in the `name` column in that
+file matches the value of `person` in the primary data source.
 
     data =
         dataFromUrl "data/lookup_groups.csv" []
 
     trans =
         transform
-            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" [ "age", "height" ]
+            << lookup "person" (dataFromUrl "data/lookup_people.csv" []) "name" [ "age", "height" ]
 
 -}
-lookupAs : String -> ( VLProperty, Spec ) -> String -> List String -> List LabelledSpec -> List LabelledSpec
-lookupAs key1 ( vlProp, spec ) key2 fields =
+lookup : String -> ( VLProperty, Spec ) -> String -> List String -> List LabelledSpec -> List LabelledSpec
+lookup key1 ( vlProp, spec ) key2 fields =
     (::)
         ( "lookup"
         , JE.list
@@ -2155,6 +2575,49 @@ lookupAs key1 ( vlProp, spec ) key2 fields =
             , spec
             , JE.string key2
             , JE.list (List.map JE.string fields)
+            ]
+        )
+
+
+{-| Perform an object lookup between two data sources. This allows you to find
+values in one data source based on the values in another (like a relational
+join). The first parameter is the field in the primary data source to act as key,
+the second is the secondary data source which can be specified with a call to
+`dataFromUrl` or other data generating function. The third is the name of the field
+in the secondary data source to match values with the primary key. The fourth
+parameter is the name to be given to the object storing matched values. As with
+other transformation functions, the final implicit parameter is a list of any other
+transformations to which this is to be added.
+
+Unlike `lookup`, this function returns the entire set of field values from the
+secondary data source when keys match. Those fields are stored as an object with
+the name provided in the fourth parameter.
+
+See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/lookup.html)
+for further details.
+
+In the following example, `personDetails` would reference all the field values in
+`lookup_people.csv` for each row where the value in the `name` column in that
+file matches the value of `person` in the primary data source.
+
+    data =
+        dataFromUrl "data/lookup_groups.csv" []
+
+    trans =
+        transform
+            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" personDetails
+
+-}
+lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
+lookupAs key1 ( vlProp, spec ) key2 asName =
+    (::)
+        ( "lookupAs"
+        , JE.list
+            [ JE.string key1
+            , spec
+            , JE.string key2
+            , JE.string asName
             ]
         )
 
@@ -2227,7 +2690,11 @@ For further details see the
 -}
 opAs : Operation -> String -> String -> Spec
 opAs op field label =
-    JE.object [ ( "op", JE.string (opLabel op) ), ( "field", JE.string field ), ( "as", JE.string label ) ]
+    JE.object
+        [ ( "op", JE.string (operationLabel op) )
+        , ( "field", JE.string field )
+        , ( "as", JE.string label )
+        ]
 
 
 {-| Encode an order channel. The first parameter is a list of order field definitions
@@ -2263,7 +2730,7 @@ for details.
 -}
 padding : Padding -> ( VLProperty, Spec )
 padding pad =
-    ( VLPadding, paddingProperty pad )
+    ( VLPadding, paddingSpec pad )
 
 
 {-| Encode a position channel. The first parameter identifies the channel,
@@ -2280,7 +2747,56 @@ This is often implicit when chaining a series of encodings using functional comp
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
 position pos pDefs =
-    (::) ( positionLabel pos, List.map positionChannelProperty pDefs |> JE.object )
+    -- Because Vega-Lite 2.1 beta represents spatial data by setting the measurement type
+    -- rather than position channel, we need to replace the PmType with longitude or latitude
+    -- in the cases where Postion is geospatial.
+    let
+        isNotPmType pp =
+            case pp of
+                PmType t ->
+                    False
+
+                _ ->
+                    True
+    in
+    case pos of
+        X ->
+            (::) ( positionLabel X, List.map positionChannelProperty pDefs |> JE.object )
+
+        Y ->
+            (::) ( positionLabel Y, List.map positionChannelProperty pDefs |> JE.object )
+
+        X2 ->
+            (::) ( positionLabel X2, List.map positionChannelProperty pDefs |> JE.object )
+
+        Y2 ->
+            (::) ( positionLabel Y2, List.map positionChannelProperty pDefs |> JE.object )
+
+        Longitude ->
+            (::) ( positionLabel X, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+
+        Latitude ->
+            (::) ( positionLabel Y, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+
+        Longitude2 ->
+            (::) ( positionLabel X2, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+
+        Latitude2 ->
+            (::) ( positionLabel Y2, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+
+
+{-| Sets the cartographic projection used for geospatial coordinates. A projection
+defines the mapping from _(longitude,latitude)_ to an _(x,y)_ plane used for rendering.
+This is useful when using the `Geoshape` mark. For further details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
+
+    proj =
+        projection [ PType Orthographic, PRotate -40 0 0 ]
+
+-}
+projection : List ProjectionProperty -> ( VLProperty, Spec )
+projection pProps =
+    ( VLProjection, JE.object (List.map projectionProperty pProps) )
 
 
 {-| Define the fields that will be used to compose rows and columns of a set of
@@ -2301,7 +2817,7 @@ for further details.
 -}
 repeat : List RepeatFields -> ( VLProperty, Spec )
 repeat fields =
-    ( VLRepeat, JE.object (List.map repeatFields fields) )
+    ( VLRepeat, JE.object (List.map repeatFieldsProperty fields) )
 
 
 {-| Define a single resolution option to be applied when scales, axes or legends
@@ -2466,7 +2982,7 @@ to in multiple encodings. The first parameter is the 'width' of each temporal bi
 the second is the field to bin and the third is name to give the newly binned
 field. The final often implicit parameter is a list of previous transformations
 to which this is added. Note though that usually it is easer to apply the temporal
-binning directly as part of the encoding as this will autimatically format the
+binning directly as part of the encoding as this will automatically format the
 temporal axis. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html#transform)
 for further details.
@@ -2615,6 +3131,18 @@ transform transforms =
                         _ ->
                             JE.null
 
+                "lookupAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ key1, dataSpec, key2, asName ] ->
+                            JE.object
+                                [ ( "lookup", key1 )
+                                , ( "from", JE.object [ ( "data", dataSpec ), ( "key", key2 ) ] )
+                                , ( "as", asName )
+                                ]
+
+                        _ ->
+                            JE.null
+
                 "timeUnit" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
                         Ok [ tu, field, label ] ->
@@ -2695,7 +3223,7 @@ transpose ll =
 
 
 
--- Functions to convert types into their string label or JS value
+-- Functions to convert types into their string label, labelled spec or spec
 
 
 anchorLabel : APosition -> String
@@ -2743,8 +3271,8 @@ autosizeProperty asCfg =
             ( "contains", JE.string "padding" )
 
 
-axisConfig : AxisConfig -> LabelledSpec
-axisConfig axisCfg =
+axisConfigProperty : AxisConfig -> LabelledSpec
+axisConfigProperty axisCfg =
     case axisCfg of
         BandPosition x ->
             ( "bandPosition", JE.float x )
@@ -2837,7 +3365,7 @@ axisConfig axisCfg =
             ( "titleFont", JE.string f )
 
         TitleFontWeight w ->
-            ( "titleFontWeight", fontWeight w )
+            ( "titleFontWeight", fontWeightSpec w )
 
         TitleFontSize x ->
             ( "titleFontSize", JE.float x )
@@ -2910,8 +3438,10 @@ axisProperty axisProp =
             ( "tickSize", JE.float sz )
 
         AxValues vals ->
-            -- TODO: Convert data values
             ( "values", JE.list (List.map JE.float vals) )
+
+        AxDates dtss ->
+            ( "values", JE.list (List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss) )
 
         AxTitle title ->
             ( "title", JE.string title )
@@ -2929,36 +3459,8 @@ axisProperty axisProp =
             ( "titlePadding", JE.float pad )
 
 
-binProperty : BinProperty -> LabelledSpec
-binProperty binProp =
-    case binProp of
-        MaxBins n ->
-            ( "maxbins", JE.int n )
-
-        Base x ->
-            ( "base", JE.float x )
-
-        Step x ->
-            ( "step", JE.float x )
-
-        Steps xs ->
-            ( "steps", JE.list (List.map JE.float xs) )
-
-        MinStep x ->
-            ( "minstep", JE.float x )
-
-        Divide x y ->
-            ( "divide", JE.list [ JE.float x, JE.float y ] )
-
-        Extent mn mx ->
-            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
-
-        Nice b ->
-            ( "nice", JE.bool b )
-
-
-binding : Binding -> LabelledSpec
-binding bnd =
+bindingSpec : Binding -> LabelledSpec
+bindingSpec bnd =
     case bnd of
         IRange label props ->
             ( label, JE.object (( "input", JE.string "range" ) :: List.map inputProperty props) )
@@ -3000,6 +3502,56 @@ binding bnd =
             ( label, JE.object (( "input", JE.string "color" ) :: List.map inputProperty props) )
 
 
+binProperty : BinProperty -> LabelledSpec
+binProperty binProp =
+    case binProp of
+        MaxBins n ->
+            ( "maxbins", JE.int n )
+
+        Base x ->
+            ( "base", JE.float x )
+
+        Step x ->
+            ( "step", JE.float x )
+
+        Steps xs ->
+            ( "steps", JE.list (List.map JE.float xs) )
+
+        MinStep x ->
+            ( "minstep", JE.float x )
+
+        Divide x y ->
+            ( "divide", JE.list [ JE.float x, JE.float y ] )
+
+        Extent mn mx ->
+            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
+
+        Nice b ->
+            ( "nice", JE.bool b )
+
+
+booleanOpSpec : BooleanOp -> Spec
+booleanOpSpec bo =
+    case bo of
+        Expr expr ->
+            JE.string expr
+
+        SelectionName selName ->
+            JE.string selName
+
+        Selection sel ->
+            JE.object [ ( "selection", JE.string sel ) ]
+
+        And operand1 operand2 ->
+            JE.object [ ( "and", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+
+        Or operand1 operand2 ->
+            JE.object [ ( "or", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+
+        Not operand ->
+            JE.object [ ( "not", booleanOpSpec operand ) ]
+
+
 channelLabel : Channel -> String
 channelLabel ch =
     case ch of
@@ -3028,14 +3580,40 @@ channelLabel ch =
             "size"
 
 
+cInterpolateSpec : CInterpolate -> Spec
+cInterpolateSpec iType =
+    case iType of
+        Rgb gamma ->
+            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
+
+        Hsl ->
+            JE.object [ ( "type", JE.string "hsl" ) ]
+
+        HslLong ->
+            JE.object [ ( "type", JE.string "hsl-long" ) ]
+
+        Lab ->
+            JE.object [ ( "type", JE.string "lab" ) ]
+
+        Hcl ->
+            JE.object [ ( "type", JE.string "hcl" ) ]
+
+        HclLong ->
+            JE.object [ ( "type", JE.string "hcl-long" ) ]
+
+        CubeHelix gamma ->
+            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
+
+        CubeHelixLong gamma ->
+            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
+
+
 configProperty : ConfigurationProperty -> LabelledSpec
 configProperty configProp =
     case configProp of
-        -- TODO: Wait for Vega bug #1103 : https://github.com/vega/vega/issues/1103
-        -- to be fixed before enabling Autosize within Config. Workaround is simply
-        -- to place the same call using autosize outside of config.
-        -- Autosize aus ->
-        --     ( "autosize", JE.object (List.map autosizeProperty aus) )
+        Autosize aus ->
+            ( "autosize", JE.object (List.map autosizeProperty aus) )
+
         Background bg ->
             ( "background", JE.string bg )
 
@@ -3055,40 +3633,43 @@ configProperty configProp =
             ( "numberFormat", JE.string fmt )
 
         Padding pad ->
-            ( "padding", paddingProperty pad )
+            ( "padding", paddingSpec pad )
 
         TimeFormat fmt ->
             ( "timeFormat", JE.string fmt )
 
         Axis acs ->
-            ( "axis", JE.object (List.map axisConfig acs) )
+            ( "axis", JE.object (List.map axisConfigProperty acs) )
 
         AxisX acs ->
-            ( "axisX", JE.object (List.map axisConfig acs) )
+            ( "axisX", JE.object (List.map axisConfigProperty acs) )
 
         AxisY acs ->
-            ( "axisY", JE.object (List.map axisConfig acs) )
+            ( "axisY", JE.object (List.map axisConfigProperty acs) )
 
         AxisLeft acs ->
-            ( "axisLeft", JE.object (List.map axisConfig acs) )
+            ( "axisLeft", JE.object (List.map axisConfigProperty acs) )
 
         AxisRight acs ->
-            ( "axisRight", JE.object (List.map axisConfig acs) )
+            ( "axisRight", JE.object (List.map axisConfigProperty acs) )
 
         AxisTop acs ->
-            ( "axisTop", JE.object (List.map axisConfig acs) )
+            ( "axisTop", JE.object (List.map axisConfigProperty acs) )
 
         AxisBottom acs ->
-            ( "axisBottom", JE.object (List.map axisConfig acs) )
+            ( "axisBottom", JE.object (List.map axisConfigProperty acs) )
 
         AxisBand acs ->
-            ( "axisBand", JE.object (List.map axisConfig acs) )
+            ( "axisBand", JE.object (List.map axisConfigProperty acs) )
 
         Legend lcs ->
-            ( "legend", JE.object (List.map legendConfig lcs) )
+            ( "legend", JE.object (List.map legendConfigProperty lcs) )
 
         MarkStyle mps ->
             ( "mark", JE.object (List.map markProperty mps) )
+
+        Projection pps ->
+            ( "projection", JE.object (List.map projectionProperty pps) )
 
         AreaStyle mps ->
             ( "area", JE.object (List.map markProperty mps) )
@@ -3121,19 +3702,19 @@ configProperty configProp =
             ( "tick", JE.object (List.map markProperty mps) )
 
         TitleStyle tcs ->
-            ( "title", JE.object (List.map titleConfig tcs) )
+            ( "title", JE.object (List.map titleConfigSpec tcs) )
 
         NamedStyle name mps ->
             ( "style", JE.object [ ( name, JE.object (List.map markProperty mps) ) ] )
 
         Scale scs ->
-            ( "scale", JE.object (List.map scaleConfig scs) )
+            ( "scale", JE.object (List.map scaleConfigProperty scs) )
 
         Stack sp ->
             stackProperty sp
 
         Range rcs ->
-            ( "range", JE.object (List.map rangeConfig rcs) )
+            ( "range", JE.object (List.map rangeConfigProperty rcs) )
 
         SelectionStyle selConfig ->
             let
@@ -3143,7 +3724,157 @@ configProperty configProp =
             ( "selection", JE.object (List.map selProp selConfig) )
 
         View vcs ->
-            ( "view", JE.object (List.map viewConfig vcs) )
+            ( "view", JE.object (List.map viewConfigProperty vcs) )
+
+
+cursorLabel : Cursor -> String
+cursorLabel cur =
+    case cur of
+        CAuto ->
+            "auto"
+
+        CDefault ->
+            "default"
+
+        CNone ->
+            "none"
+
+        CContextMenu ->
+            "context-menu"
+
+        CHelp ->
+            "help"
+
+        CPointer ->
+            "pointer"
+
+        CProgress ->
+            "progress"
+
+        CWait ->
+            "wait"
+
+        CCell ->
+            "cell"
+
+        CCrosshair ->
+            "crosshair"
+
+        CText ->
+            "text"
+
+        CVerticalText ->
+            "vertical-text"
+
+        CAlias ->
+            "alias"
+
+        CCopy ->
+            "copy"
+
+        CMove ->
+            "move"
+
+        CNoDrop ->
+            "no-drop"
+
+        CNotAllowed ->
+            "not-allowed"
+
+        CAllScroll ->
+            "all-scroll"
+
+        CColResize ->
+            "col-resize"
+
+        CRowResize ->
+            "row-resize"
+
+        CNResize ->
+            "n-resize"
+
+        CEResize ->
+            "e-resize"
+
+        CSResize ->
+            "s-resize"
+
+        CWResize ->
+            "w-resize"
+
+        CNEResize ->
+            "ne-resize"
+
+        CNWResize ->
+            "nw-resize"
+
+        CSEResize ->
+            "se-resize"
+
+        CSWResize ->
+            "sw-resize"
+
+        CEWResize ->
+            "ew-resize"
+
+        CNSResize ->
+            "ns-resize"
+
+        CNESWResize ->
+            "nesw-resize"
+
+        CNWSEResize ->
+            "nwse-resize"
+
+        CZoomIn ->
+            "zoom-in"
+
+        CZoomOut ->
+            "zoom-out"
+
+        CGrab ->
+            "grab"
+
+        CGrabbing ->
+            "grabbing"
+
+
+dataTypeSpec : DataType -> Spec
+dataTypeSpec dType =
+    case dType of
+        FoNumber ->
+            JE.string "number"
+
+        FoBoolean ->
+            JE.string "boolean"
+
+        FoDate dateFmt ->
+            if dateFmt == "" then
+                JE.string "date"
+            else
+                JE.string ("date:'" ++ dateFmt ++ "'")
+
+        FoUtc dateFmt ->
+            if dateFmt == "" then
+                JE.string "utc"
+            else
+                JE.string ("utc:'" ++ dateFmt ++ "'")
+
+
+dataValueSpec : DataValue -> Spec
+dataValueSpec val =
+    case val of
+        Number x ->
+            JE.float x
+
+        Str s ->
+            JE.string s
+
+        Boolean b ->
+            JE.bool b
+
+        DateTime dt ->
+            JE.object (List.map dateTimeProperty dt)
 
 
 dateTimeProperty : DateTime -> LabelledSpec
@@ -3156,7 +3887,7 @@ dateTimeProperty dt =
             ( "quarter", JE.int q )
 
         DTMonth mon ->
-            ( "month", JE.string (monthLabel mon) )
+            ( "month", JE.string (monthNameLabel mon) )
 
         DTDate dt ->
             ( "date", JE.int dt )
@@ -3175,22 +3906,6 @@ dateTimeProperty dt =
 
         DTMilliseconds ms ->
             ( "milliseconds", JE.int ms )
-
-
-datavalue : DataValue -> Spec
-datavalue val =
-    case val of
-        Number x ->
-            JE.float x
-
-        Str s ->
-            JE.string s
-
-        Boolean b ->
-            JE.bool b
-
-        DateTime dt ->
-            JE.object (List.map dateTimeProperty dt)
 
 
 dayLabel : DayName -> String
@@ -3234,7 +3949,7 @@ detailChannelProperty field =
             ( "timeUnit", JE.string (timeUnitLabel tu) )
 
         DAggregate op ->
-            ( "aggregate", JE.string (opLabel op) )
+            ( "aggregate", JE.string (operationLabel op) )
 
 
 
@@ -3309,7 +4024,7 @@ facetChannelProperty fMap =
             bin bps
 
         FAggregate op ->
-            ( "aggregate", JE.string (opLabel op) )
+            ( "aggregate", JE.string (operationLabel op) )
 
         FTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
@@ -3341,18 +4056,8 @@ fieldTitleLabel ftp =
             "plain"
 
 
-headerProperty : HeaderProperty -> LabelledSpec
-headerProperty hProp =
-    case hProp of
-        HFormat fmt ->
-            ( "format", JE.string fmt )
-
-        HTitle title ->
-            ( "title", JE.string title )
-
-
-fontWeight : FontWeight -> Spec
-fontWeight w =
+fontWeightSpec : FontWeight -> Spec
+fontWeightSpec w =
     case w of
         Normal ->
             JE.string "normal"
@@ -3394,33 +4099,14 @@ fontWeight w =
             JE.float 900
 
 
-foDataType : DataType -> Spec
-foDataType dType =
-    case dType of
-        FoNumber ->
-            JE.string "number"
-
-        FoBoolean ->
-            JE.string "boolean"
-
-        FoDate dateFmt ->
-            if dateFmt == "" then
-                JE.string "date"
-            else
-                JE.string ("date:'" ++ dateFmt ++ "'")
-
-        FoUtc dateFmt ->
-            if dateFmt == "" then
-                JE.string "utc"
-            else
-                JE.string ("utc:'" ++ dateFmt ++ "'")
-
-
-format : Format -> List LabelledSpec
-format fmt =
+formatProperty : Format -> List LabelledSpec
+formatProperty fmt =
     case fmt of
-        JSON ->
-            [ ( "type", JE.string "json" ) ]
+        JSON propertyName ->
+            if String.trim propertyName == "" then
+                [ ( "type", JE.string "json" ) ]
+            else
+                [ ( "type", JE.string "json" ), ( "property", JE.string propertyName ) ]
 
         CSV ->
             [ ( "type", JE.string "csv" ) ]
@@ -3429,13 +4115,58 @@ format fmt =
             [ ( "type", JE.string "tsv" ) ]
 
         TopojsonFeature objectSet ->
-            [ ( "type", JE.string "json" ), ( "feature", JE.string objectSet ) ]
+            [ ( "type", JE.string "topojson" ), ( "feature", JE.string objectSet ) ]
 
         TopojsonMesh objectSet ->
-            [ ( "type", JE.string "json" ), ( "mesh", JE.string objectSet ) ]
+            [ ( "type", JE.string "topojson" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
-            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataType fmt )) fmts ) ]
+            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, dataTypeSpec fmt )) fmts ) ]
+
+
+geometryTypeSpec : Geometry -> Spec
+geometryTypeSpec gType =
+    let
+        toCoords : List ( Float, Float ) -> Spec
+        toCoords pairs =
+            JE.list <| List.map (\( x, y ) -> JE.list [ JE.float x, JE.float y ]) pairs
+    in
+    case gType of
+        GeoPoint x y ->
+            JE.object
+                [ ( "type", JE.string "Point" )
+                , ( "coordinates", JE.list [ JE.float x, JE.float y ] )
+                ]
+
+        GeoPoints coords ->
+            JE.object
+                [ ( "type", JE.string "MultiPoint" )
+                , ( "coordinates", toCoords coords )
+                ]
+
+        GeoLine coords ->
+            JE.object
+                [ ( "type", JE.string "LineString" )
+                , ( "coordinates", toCoords coords )
+                ]
+
+        GeoLines coords ->
+            JE.object
+                [ ( "type", JE.string "MultiLineString" )
+                , ( "coordinates", List.map toCoords coords |> JE.list )
+                ]
+
+        GeoPolygon coords ->
+            JE.object
+                [ ( "type", JE.string "Polygon" )
+                , ( "coordinates", List.map toCoords coords |> JE.list )
+                ]
+
+        GeoPolygons coords ->
+            JE.object
+                [ ( "type", JE.string "MultiPolygon" )
+                , ( "coordinates", List.map (\cs -> List.map toCoords cs |> JE.list) coords |> JE.list )
+                ]
 
 
 hAlignLabel : HAlign -> String
@@ -3449,6 +4180,49 @@ hAlignLabel align =
 
         AlignRight ->
             "right"
+
+
+headerProperty : HeaderProperty -> LabelledSpec
+headerProperty hProp =
+    case hProp of
+        HFormat fmt ->
+            ( "format", JE.string fmt )
+
+        HTitle title ->
+            ( "title", JE.string title )
+
+
+hyperlinkChannelProperty : HyperlinkChannel -> List LabelledSpec
+hyperlinkChannelProperty field =
+    case field of
+        HName s ->
+            [ ( "field", JE.string s ) ]
+
+        HRepeat arr ->
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
+
+        HmType t ->
+            [ ( "type", JE.string (measurementLabel t) ) ]
+
+        HBin bps ->
+            [ bin bps ]
+
+        HSelectionCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap hyperlinkChannelProperty ifClause) )
+                :: List.concatMap hyperlinkChannelProperty elseClause
+
+        HDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap hyperlinkChannelProperty ifClause) )
+                :: List.concatMap hyperlinkChannelProperty elseClause
+
+        HTimeUnit tu ->
+            [ ( "timeUnit", JE.string (timeUnitLabel tu) ) ]
+
+        HAggregate op ->
+            [ ( "aggregate", JE.string (operationLabel op) ) ]
+
+        HString s ->
+            [ ( "value", JE.string s ) ]
 
 
 inputProperty : InputProperty -> LabelledSpec
@@ -3479,36 +4253,8 @@ inputProperty prop =
             ( "element", JE.string el )
 
 
-interpolateProperty : CInterpolate -> Spec
-interpolateProperty iType =
-    case iType of
-        Rgb gamma ->
-            JE.object [ ( "type", JE.string "rgb" ), ( "gamma", JE.float gamma ) ]
-
-        Hsl ->
-            JE.object [ ( "type", JE.string "hsl" ) ]
-
-        HslLong ->
-            JE.object [ ( "type", JE.string "hsl-long" ) ]
-
-        Lab ->
-            JE.object [ ( "type", JE.string "lab" ) ]
-
-        Hcl ->
-            JE.object [ ( "type", JE.string "hcl" ) ]
-
-        HclLong ->
-            JE.object [ ( "type", JE.string "hcl-long" ) ]
-
-        CubeHelix gamma ->
-            JE.object [ ( "type", JE.string "cubehelix" ), ( "gamma", JE.float gamma ) ]
-
-        CubeHelixLong gamma ->
-            JE.object [ ( "type", JE.string "cubehelix-long" ), ( "gamma", JE.float gamma ) ]
-
-
-legendConfig : LegendConfig -> LabelledSpec
-legendConfig legendConfig =
+legendConfigProperty : LegendConfig -> LabelledSpec
+legendConfigProperty legendConfig =
     case legendConfig of
         CornerRadius r ->
             ( "cornerRadius", JE.float r )
@@ -3610,7 +4356,7 @@ legendConfig legendConfig =
             ( "titleFontSize", JE.float x )
 
         LeTitleFontWeight fw ->
-            ( "titleFontWeight", fontWeight fw )
+            ( "titleFontWeight", fontWeightSpec fw )
 
         LeTitleLimit x ->
             ( "titleLimit", JE.float x )
@@ -3722,15 +4468,19 @@ markChannelProperty field =
         MBin bps ->
             [ bin bps ]
 
-        MCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap markChannelProperty ifClause) )
+        MSelectionCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap markChannelProperty ifClause) )
+                :: List.concatMap markChannelProperty elseClause
+
+        MDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap markChannelProperty ifClause) )
                 :: List.concatMap markChannelProperty elseClause
 
         MTimeUnit tu ->
             [ ( "timeUnit", JE.string (timeUnitLabel tu) ) ]
 
         MAggregate op ->
-            [ ( "aggregate", JE.string (opLabel op) ) ]
+            [ ( "aggregate", JE.string (operationLabel op) ) ]
 
         MPath s ->
             [ ( "value", JE.string s ) ]
@@ -3803,6 +4553,9 @@ markLabel mark =
         Line ->
             "line"
 
+        Geoshape ->
+            "geoshape"
+
         Point ->
             "point"
 
@@ -3822,8 +4575,8 @@ markLabel mark =
             "tick"
 
 
-markOrientLabel : MarkOrientation -> String
-markOrientLabel orient =
+markOrientationLabel : MarkOrientation -> String
+markOrientationLabel orient =
     case orient of
         Horizontal ->
             "horizontal"
@@ -3843,6 +4596,9 @@ markProperty mProp =
 
         MColor col ->
             ( "color", JE.string col )
+
+        MCursor cur ->
+            ( "cursor", JE.string (cursorLabel cur) )
 
         MFill col ->
             ( "fill", JE.string col )
@@ -3878,7 +4634,7 @@ markProperty mProp =
             ( "tension", JE.float x )
 
         MOrient orient ->
-            ( "orient", JE.string (markOrientLabel orient) )
+            ( "orient", JE.string (markOrientationLabel orient) )
 
         MShape sym ->
             ( "shape", JE.string (symbolLabel sym) )
@@ -3911,7 +4667,7 @@ markProperty mProp =
             ( "fontStyle", JE.string fSty )
 
         MFontWeight w ->
-            ( "fontWeight", fontWeight w )
+            ( "fontWeight", fontWeightSpec w )
 
         MRadius x ->
             ( "radius", JE.float x )
@@ -3956,9 +4712,26 @@ measurementLabel mType =
         Temporal ->
             "temporal"
 
+        -- Vega-Lite 2.1 beta has the concept of lat/long measurement types, but elm-vega uses the more
+        -- sematically correct Quantitative type with addtional Latitude and Longitude position channels.
+        -- Hidden types with an underscore postfix are used for cases where we need to generate correct
+        -- Vega-Lite spec.
+        -- It also has a 'geojson' type for geographically referenced features, which here are renamed
+        -- to the more general `GeoFeature`.
+        Latitude_ ->
+            "latitude"
 
-monthLabel : MonthName -> String
-monthLabel mon =
+        Longitude_ ->
+            "longitude"
+
+        -- GeoJson ->
+        --     "geojson"
+        GeoFeature ->
+            "geojson"
+
+
+monthNameLabel : MonthName -> String
+monthNameLabel mon =
     case mon of
         Jan ->
             "Jan"
@@ -3997,45 +4770,8 @@ monthLabel mon =
             "Dec"
 
 
-nice : ScaleNice -> Spec
-nice ni =
-    case ni of
-        NMillisecond ->
-            JE.string "millisecond"
-
-        NSecond ->
-            JE.string "second"
-
-        NMinute ->
-            JE.string "minute"
-
-        NHour ->
-            JE.string "hour"
-
-        NDay ->
-            JE.string "day"
-
-        NWeek ->
-            JE.string "week"
-
-        NMonth ->
-            JE.string "month"
-
-        NYear ->
-            JE.string "year"
-
-        NInterval tu step ->
-            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
-
-        IsNice b ->
-            JE.bool b
-
-        NTickCount n ->
-            JE.int n
-
-
-opLabel : Operation -> String
-opLabel op =
+operationLabel : Operation -> String
+operationLabel op =
     case op of
         ArgMax ->
             "argmax"
@@ -4117,7 +4853,7 @@ orderChannelProperty oDef =
             bin bps
 
         OAggregate op ->
-            ( "aggregate", JE.string (opLabel op) )
+            ( "aggregate", JE.string (operationLabel op) )
 
         OTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
@@ -4150,8 +4886,8 @@ overlapStrategyLabel strat =
             "greedy"
 
 
-paddingProperty : Padding -> Spec
-paddingProperty pad =
+paddingSpec : Padding -> Spec
+paddingSpec pad =
     case pad of
         PSize p ->
             JE.float p
@@ -4163,6 +4899,111 @@ paddingProperty pad =
                 , ( "right", JE.float r )
                 , ( "bottom", JE.float b )
                 ]
+
+
+projectionLabel : Projection -> String
+projectionLabel proj =
+    case proj of
+        Albers ->
+            "albers"
+
+        AlbersUsa ->
+            "albersUsa"
+
+        AzimuthalEqualArea ->
+            "azimuthalEqualArea"
+
+        AzimuthalEquidistant ->
+            "azimuthalEquidistant"
+
+        ConicConformal ->
+            "conicConformal"
+
+        ConicEqualArea ->
+            "conicEqualarea"
+
+        ConicEquidistant ->
+            "conicEquidistant"
+
+        Custom pName ->
+            pName
+
+        Equirectangular ->
+            "equirectangular"
+
+        Gnomonic ->
+            "gnomonic"
+
+        Mercator ->
+            "mercator"
+
+        Orthographic ->
+            "orthographic"
+
+        Stereographic ->
+            "stereographic"
+
+        TransverseMercator ->
+            "transverseMercator"
+
+
+projectionProperty : ProjectionProperty -> LabelledSpec
+projectionProperty pp =
+    case pp of
+        PType proj ->
+            ( "type", JE.string (projectionLabel proj) )
+
+        PClipAngle numOrNull ->
+            case numOrNull of
+                Just x ->
+                    ( "clipAngle", JE.float x )
+
+                Nothing ->
+                    ( "clipAngle", JE.null )
+
+        PClipExtent rClip ->
+            case rClip of
+                NoClip ->
+                    ( "clipExtent", JE.null )
+
+                LTRB l t r b ->
+                    ( "clipExtent", JE.list (List.map JE.float [ l, t, r, b ]) )
+
+        PCenter lon lat ->
+            ( "center", JE.list [ JE.float lon, JE.float lat ] )
+
+        PRotate lambda phi gamma ->
+            ( "rotate", JE.list (List.map JE.float [ lambda, phi, gamma ]) )
+
+        PPrecision pr ->
+            ( "precision", JE.float pr )
+
+        PCoefficient x ->
+            ( "coefficient", JE.float x )
+
+        PDistance x ->
+            ( "distance", JE.float x )
+
+        PFraction x ->
+            ( "fraction", JE.float x )
+
+        PLobes n ->
+            ( "lobes", JE.int n )
+
+        PParallel x ->
+            ( "parallel", JE.float x )
+
+        PRadius x ->
+            ( "radius", JE.float x )
+
+        PRatio x ->
+            ( "ratio", JE.float x )
+
+        PSpacing x ->
+            ( "spacing", JE.float x )
+
+        PTilt x ->
+            ( "tilt", JE.float x )
 
 
 positionChannelProperty : PositionChannel -> LabelledSpec
@@ -4178,7 +5019,7 @@ positionChannelProperty pDef =
             bin bps
 
         PAggregate op ->
-            ( "aggregate", JE.string (opLabel op) )
+            ( "aggregate", JE.string (operationLabel op) )
 
         PTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
@@ -4228,37 +5069,62 @@ positionLabel pChannel =
         Y2 ->
             "y2"
 
+        -- Note: The following are approximate mappings to allow compatiblity with Vega-Lite's
+        -- model of spatial data indicates geographic coordinates with a measurement type
+        -- `longitude` rather than channel.
+        Longitude ->
+            "x"
 
-rangeConfig : RangeConfig -> LabelledSpec
-rangeConfig rangeCfg =
+        Latitude ->
+            "y"
+
+        Longitude2 ->
+            "x2"
+
+        Latitude2 ->
+            "y2"
+
+
+rangeConfigProperty : RangeConfig -> LabelledSpec
+rangeConfigProperty rangeCfg =
     case rangeCfg of
         RCategory name ->
-            ( "category", JE.object [ scheme name [] ] )
+            ( "category", JE.object [ schemeProperty name [] ] )
 
         RDiverging name ->
-            ( "diverging", JE.object [ scheme name [] ] )
+            ( "diverging", JE.object [ schemeProperty name [] ] )
 
         RHeatmap name ->
-            ( "heatmap", JE.object [ scheme name [] ] )
+            ( "heatmap", JE.object [ schemeProperty name [] ] )
 
         ROrdinal name ->
-            ( "ordinal", JE.object [ scheme name [] ] )
+            ( "ordinal", JE.object [ schemeProperty name [] ] )
 
         RRamp name ->
-            ( "ramp", JE.object [ scheme name [] ] )
+            ( "ramp", JE.object [ schemeProperty name [] ] )
 
         RSymbol name ->
-            ( "symbol", JE.object [ scheme name [] ] )
+            ( "symbol", JE.object [ schemeProperty name [] ] )
 
 
-repeatFields : RepeatFields -> LabelledSpec
-repeatFields fields =
+repeatFieldsProperty : RepeatFields -> LabelledSpec
+repeatFieldsProperty fields =
     case fields of
         RowFields fields ->
             ( "row", JE.list (List.map JE.string fields) )
 
         ColumnFields fields ->
             ( "column", JE.list (List.map JE.string fields) )
+
+
+resolutionLabel : Resolution -> String
+resolutionLabel res =
+    case res of
+        Shared ->
+            "shared"
+
+        Independent ->
+            "independent"
 
 
 resolveProperty : Resolve -> LabelledSpec
@@ -4277,31 +5143,8 @@ resolveProperty res =
             ( "scale", JE.object <| List.map (\( ch, rule ) -> ( channelLabel ch, JE.string (resolutionLabel rule) )) chRules )
 
 
-resolutionLabel : Resolution -> String
-resolutionLabel res =
-    case res of
-        Shared ->
-            "shared"
-
-        Independent ->
-            "independent"
-
-
-selectionResolutionLabel : SelectionResolution -> String
-selectionResolutionLabel res =
-    case res of
-        Global ->
-            "global"
-
-        Union ->
-            "union"
-
-        Intersection ->
-            "intersect"
-
-
-scaleConfig : ScaleConfig -> LabelledSpec
-scaleConfig scaleCfg =
+scaleConfigProperty : ScaleConfig -> LabelledSpec
+scaleConfigProperty scaleCfg =
     case scaleCfg of
         SCBandPaddingInner x ->
             ( "bandPaddingInner", JE.float x )
@@ -4363,8 +5206,8 @@ scaleConfig scaleCfg =
             ( "useUnaggregatedDomain", JE.bool b )
 
 
-scaleDomainProperty : ScaleDomain -> Spec
-scaleDomainProperty sdType =
+scaleDomainSpec : ScaleDomain -> Spec
+scaleDomainSpec sdType =
     case sdType of
         DNumbers nums ->
             JE.list (List.map JE.float nums)
@@ -4380,78 +5223,6 @@ scaleDomainProperty sdType =
 
         Unaggregated ->
             JE.string "unaggregated"
-
-
-scaleProperty : ScaleProperty -> LabelledSpec
-scaleProperty scaleProp =
-    case scaleProp of
-        SType sType ->
-            ( "type", JE.string (scaleLabel sType) )
-
-        SDomain sdType ->
-            ( "domain", scaleDomainProperty sdType )
-
-        SRange range ->
-            case range of
-                RNumbers xs ->
-                    ( "range", JE.list (List.map JE.float xs) )
-
-                RStrings ss ->
-                    ( "range", JE.list (List.map JE.string ss) )
-
-                RName s ->
-                    ( "range", JE.string s )
-
-        SScheme name extent ->
-            scheme name extent
-
-        SPadding x ->
-            ( "padding", JE.float x )
-
-        SPaddingInner x ->
-            ( "paddingInner", JE.float x )
-
-        SPaddingOuter x ->
-            ( "paddingOuter", JE.float x )
-
-        SRangeStep numOrNull ->
-            case numOrNull of
-                Just x ->
-                    ( "rangeStep", JE.float x )
-
-                Nothing ->
-                    ( "rangeStep", JE.null )
-
-        SRound b ->
-            ( "round", JE.bool b )
-
-        SClamp b ->
-            ( "clamp", JE.bool b )
-
-        SInterpolate interp ->
-            ( "interpolate", interpolateProperty interp )
-
-        SNice ni ->
-            ( "nice", nice ni )
-
-        SZero b ->
-            ( "zero", JE.bool b )
-
-        SReverse b ->
-            ( "reverse", JE.bool b )
-
-
-scaleRangeProperty : ScaleRange -> Spec
-scaleRangeProperty srType =
-    case srType of
-        RNumbers nums ->
-            JE.list (List.map JE.float nums)
-
-        RStrings cats ->
-            JE.list (List.map JE.string cats)
-
-        RName name ->
-            JE.string name
 
 
 scaleLabel : Scale -> String
@@ -4494,8 +5265,104 @@ scaleLabel scType =
             "bin-ordinal"
 
 
-scheme : String -> List Float -> LabelledSpec
-scheme name extent =
+scaleNiceSpec : ScaleNice -> Spec
+scaleNiceSpec ni =
+    case ni of
+        NMillisecond ->
+            JE.string "millisecond"
+
+        NSecond ->
+            JE.string "second"
+
+        NMinute ->
+            JE.string "minute"
+
+        NHour ->
+            JE.string "hour"
+
+        NDay ->
+            JE.string "day"
+
+        NWeek ->
+            JE.string "week"
+
+        NMonth ->
+            JE.string "month"
+
+        NYear ->
+            JE.string "year"
+
+        NInterval tu step ->
+            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
+
+        IsNice b ->
+            JE.bool b
+
+        NTickCount n ->
+            JE.int n
+
+
+scaleProperty : ScaleProperty -> LabelledSpec
+scaleProperty scaleProp =
+    case scaleProp of
+        SType sType ->
+            ( "type", JE.string (scaleLabel sType) )
+
+        SDomain sdType ->
+            ( "domain", scaleDomainSpec sdType )
+
+        SRange range ->
+            case range of
+                RNumbers xs ->
+                    ( "range", JE.list (List.map JE.float xs) )
+
+                RStrings ss ->
+                    ( "range", JE.list (List.map JE.string ss) )
+
+                RName s ->
+                    ( "range", JE.string s )
+
+        SScheme name extent ->
+            schemeProperty name extent
+
+        SPadding x ->
+            ( "padding", JE.float x )
+
+        SPaddingInner x ->
+            ( "paddingInner", JE.float x )
+
+        SPaddingOuter x ->
+            ( "paddingOuter", JE.float x )
+
+        SRangeStep numOrNull ->
+            case numOrNull of
+                Just x ->
+                    ( "rangeStep", JE.float x )
+
+                Nothing ->
+                    ( "rangeStep", JE.null )
+
+        SRound b ->
+            ( "round", JE.bool b )
+
+        SClamp b ->
+            ( "clamp", JE.bool b )
+
+        SInterpolate interp ->
+            ( "interpolate", cInterpolateSpec interp )
+
+        SNice ni ->
+            ( "nice", scaleNiceSpec ni )
+
+        SZero b ->
+            ( "zero", JE.bool b )
+
+        SReverse b ->
+            ( "reverse", JE.bool b )
+
+
+schemeProperty : String -> List Float -> LabelledSpec
+schemeProperty name extent =
     case extent of
         [ mn, mx ] ->
             ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
@@ -4567,7 +5434,7 @@ selectionProperty selProp =
             ( "bind", JE.string "scales" )
 
         Bind binds ->
-            ( "bind", JE.object (List.map binding binds) )
+            ( "bind", JE.object (List.map bindingSpec binds) )
 
         Nearest b ->
             ( "nearest", JE.bool b )
@@ -4586,6 +5453,19 @@ selectionProperty selProp =
                 ( "zoom", JE.bool False )
             else
                 ( "zoom", JE.string e )
+
+
+selectionResolutionLabel : SelectionResolution -> String
+selectionResolutionLabel res =
+    case res of
+        Global ->
+            "global"
+
+        Union ->
+            "union"
+
+        Intersection ->
+            "intersect"
 
 
 sideLabel : Side -> String
@@ -4617,10 +5497,26 @@ sortProperty sp =
             ( "field", JE.string field )
 
         Op op ->
-            ( "op", JE.string (opLabel op) )
+            ( "op", JE.string (operationLabel op) )
 
         ByRepeat arr ->
             ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
+
+
+stackProperty : StackProperty -> LabelledSpec
+stackProperty sp =
+    case sp of
+        StZero ->
+            ( "stack", JE.string "zero" )
+
+        StNormalize ->
+            ( "stack", JE.string "normalize" )
+
+        StCenter ->
+            ( "stack", JE.string "center" )
+
+        NoStack ->
+            ( "stack", JE.null )
 
 
 symbolLabel : Symbol -> String
@@ -4648,89 +5544,6 @@ symbolLabel sym =
             svgPath
 
 
-vlPropertyLabel : VLProperty -> String
-vlPropertyLabel spec =
-    case spec of
-        VLName ->
-            "name"
-
-        VLDescription ->
-            "description"
-
-        VLTitle ->
-            "title"
-
-        VLWidth ->
-            "width"
-
-        VLHeight ->
-            "height"
-
-        VLPadding ->
-            "padding"
-
-        VLAutosize ->
-            "autosize"
-
-        VLBackground ->
-            "background"
-
-        VLData ->
-            "data"
-
-        VLMark ->
-            "mark"
-
-        VLTransform ->
-            "transform"
-
-        VLEncoding ->
-            "encoding"
-
-        VLConfig ->
-            "config"
-
-        VLSelection ->
-            "selection"
-
-        VLHConcat ->
-            "hconcat"
-
-        VLVConcat ->
-            "vconcat"
-
-        VLLayer ->
-            "layer"
-
-        VLRepeat ->
-            "repeat"
-
-        VLFacet ->
-            "facet"
-
-        VLSpec ->
-            "spec"
-
-        VLResolve ->
-            "resolve"
-
-
-stackProperty : StackProperty -> LabelledSpec
-stackProperty sp =
-    case sp of
-        StZero ->
-            ( "stack", JE.string "zero" )
-
-        StNormalize ->
-            ( "stack", JE.string "normalize" )
-
-        StCenter ->
-            ( "stack", JE.string "center" )
-
-        NoStack ->
-            ( "stack", JE.null )
-
-
 textChannelProperty : TextChannel -> List LabelledSpec
 textChannelProperty tDef =
     case tDef of
@@ -4747,7 +5560,7 @@ textChannelProperty tDef =
             [ bin bps ]
 
         TAggregate op ->
-            [ ( "aggregate", JE.string (opLabel op) ) ]
+            [ ( "aggregate", JE.string (operationLabel op) ) ]
 
         TTimeUnit tu ->
             [ ( "timeUnit", JE.string (timeUnitLabel tu) ) ]
@@ -4755,43 +5568,13 @@ textChannelProperty tDef =
         TFormat fmt ->
             [ ( "format", JE.string fmt ) ]
 
-        TCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", JE.string selName ) :: List.concatMap textChannelProperty ifClause) )
+        TSelectionCondition selName ifClause elseClause ->
+            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap textChannelProperty ifClause) )
                 :: List.concatMap textChannelProperty elseClause
 
-
-titleConfig : TitleConfig -> LabelledSpec
-titleConfig titleCfg =
-    case titleCfg of
-        TAnchor an ->
-            ( "anchor", JE.string (anchorLabel an) )
-
-        TAngle x ->
-            ( "angle", JE.float x )
-
-        TBaseline va ->
-            ( "baseline", JE.string (vAlignLabel va) )
-
-        TColor clr ->
-            ( "color", JE.string clr )
-
-        TFont fnt ->
-            ( "font", JE.string fnt )
-
-        TFontSize x ->
-            ( "fontSize", JE.float x )
-
-        TFontWeight w ->
-            ( "fontWeight", fontWeight w )
-
-        TLimit x ->
-            ( "limit", JE.float x )
-
-        TOffset x ->
-            ( "offset", JE.float x )
-
-        TOrient sd ->
-            ( "orient", JE.string (sideLabel sd) )
+        TDataCondition predicate ifClause elseClause ->
+            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap textChannelProperty ifClause) )
+                :: List.concatMap textChannelProperty elseClause
 
 
 timeUnitLabel : TimeUnit -> String
@@ -4864,6 +5647,40 @@ timeUnitLabel tu =
             "milliseconds"
 
 
+titleConfigSpec : TitleConfig -> LabelledSpec
+titleConfigSpec titleCfg =
+    case titleCfg of
+        TAnchor an ->
+            ( "anchor", JE.string (anchorLabel an) )
+
+        TAngle x ->
+            ( "angle", JE.float x )
+
+        TBaseline va ->
+            ( "baseline", JE.string (vAlignLabel va) )
+
+        TColor clr ->
+            ( "color", JE.string clr )
+
+        TFont fnt ->
+            ( "font", JE.string fnt )
+
+        TFontSize x ->
+            ( "fontSize", JE.float x )
+
+        TFontWeight w ->
+            ( "fontWeight", fontWeightSpec w )
+
+        TLimit x ->
+            ( "limit", JE.float x )
+
+        TOffset x ->
+            ( "offset", JE.float x )
+
+        TOrient sd ->
+            ( "orient", JE.string (sideLabel sd) )
+
+
 vAlignLabel : VAlign -> String
 vAlignLabel align =
     case align of
@@ -4877,8 +5694,8 @@ vAlignLabel align =
             "bottom"
 
 
-viewConfig : ViewConfig -> LabelledSpec
-viewConfig viewCfg =
+viewConfigProperty : ViewConfig -> LabelledSpec
+viewConfigProperty viewCfg =
     case viewCfg of
         ViewWidth x ->
             ( "width", JE.float x )
@@ -4919,3 +5736,73 @@ viewConfig viewCfg =
 
         StrokeDashOffset x ->
             ( "strokeDashOffset", JE.float x )
+
+
+vlPropertyLabel : VLProperty -> String
+vlPropertyLabel spec =
+    case spec of
+        VLName ->
+            "name"
+
+        VLDescription ->
+            "description"
+
+        VLTitle ->
+            "title"
+
+        VLWidth ->
+            "width"
+
+        VLHeight ->
+            "height"
+
+        VLPadding ->
+            "padding"
+
+        VLAutosize ->
+            "autosize"
+
+        VLBackground ->
+            "background"
+
+        VLData ->
+            "data"
+
+        VLProjection ->
+            "projection"
+
+        VLMark ->
+            "mark"
+
+        VLTransform ->
+            "transform"
+
+        VLEncoding ->
+            "encoding"
+
+        VLConfig ->
+            "config"
+
+        VLSelection ->
+            "selection"
+
+        VLHConcat ->
+            "hconcat"
+
+        VLVConcat ->
+            "vconcat"
+
+        VLLayer ->
+            "layer"
+
+        VLRepeat ->
+            "repeat"
+
+        VLFacet ->
+            "facet"
+
+        VLSpec ->
+            "spec"
+
+        VLResolve ->
+            "resolve"

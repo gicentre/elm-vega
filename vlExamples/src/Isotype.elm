@@ -1,7 +1,6 @@
 port module Isotype exposing (elmToJS)
 
 import Dict exposing (Dict)
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -60,7 +59,7 @@ personGrid =
                 << position Y [ PName "row", PmType Ordinal, PAxis [] ]
                 << shape [ MPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
                 << color
-                    [ MCondition "highlight"
+                    [ MSelectionCondition (SelectionName "highlight")
                         [ MString "rgb(194,81,64)" ]
                         [ MString "rgb(167,165,156)" ]
                     ]
@@ -142,7 +141,7 @@ livestock =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "vis1", personGrid )
         , ( "vis2", livestock )
         ]

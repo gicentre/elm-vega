@@ -1,6 +1,5 @@
 port module ColorTests exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -184,7 +183,7 @@ gamma5 =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "defContinuous", defContinuous )
         , ( "defOrdinal", defOrdinal )
         , ( "defNominal", defNominal )
