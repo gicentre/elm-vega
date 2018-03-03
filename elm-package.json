@@ -1,5 +1,5 @@
 {
-    "version": "2.0.0",
+    "version": "2.0.1",
     "summary": "Declarative visualization with Elm and Vega / Vega-Lite",
     "repository": "https://github.com/gicentre/elm-vega.git",
     "license": "BSD3",
