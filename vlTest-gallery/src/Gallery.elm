@@ -186,7 +186,7 @@ basic10 =
                     [ MDataCondition
                         (Expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null")
                         [ MString "#ddd" ]
-                        [ MString "#0099ee" ]
+                        [ MString "rgb(76,120,168)" ]
                     ]
     in
     toVegaLite [ des, config [], data, mark Point [], enc [] ]
@@ -389,6 +389,39 @@ basic21 =
                 << size [ MName "count", MmType Quantitative, MAggregate Sum ]
     in
     toVegaLite [ des, dataFromUrl "data/github.csv" [], mark Circle [], enc [] ]
+
+
+basic22 : Spec
+basic22 =
+    let
+        des =
+            description "Visualization of global deaths from natural disasters. Copy of chart from https://ourworldindata.org/natural-catastrophes"
+
+        trans =
+            transform
+                << filter (FExpr "datum.Entity !== 'All natural disasters'")
+
+        enc =
+            encoding
+                << position X [ PName "Year", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
+                << position Y [ PName "Entity", PmType Nominal, PAxis [ AxTitle "" ] ]
+                << size
+                    [ MName "Deaths"
+                    , MmType Quantitative
+                    , MLegend [ LTitle "Annual Global Deaths" ]
+                    , MScale [ SRange (RNumbers [ 0, 5000 ]) ]
+                    ]
+                << color [ MName "Entity", MmType Nominal, MLegend [] ]
+    in
+    toVegaLite
+        [ des
+        , width 600
+        , height 400
+        , dataFromUrl "https://vega.github.io/vega-lite/data/disasters.csv" []
+        , trans []
+        , mark Circle [ MOpacity 0.8, MStroke "black", MStrokeWidth 1 ]
+        , enc []
+        ]
 
 
 stack1 : Spec
@@ -733,6 +766,68 @@ layer2 : Spec
 layer2 =
     let
         des =
+            description "Bar chart that highlights values beyond a threshold. The PM2.5 value of Beijing observed 15 days, highlighting the days when PM2.5 level is hazardous to human health. Data source https://chartaccent.github.io/chartaccent.html"
+
+        data =
+            dataFromColumns []
+                << dataColumn "Day" (List.range 1 15 |> List.map toFloat |> Numbers)
+                << dataColumn "Value" (Numbers [ 54.8, 112.1, 63.6, 37.6, 79.7, 137.9, 120.1, 103.3, 394.8, 199.5, 72.3, 51.1, 112.0, 174.5, 130.5 ])
+
+        encBar =
+            encoding
+                << position X [ PName "Day", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
+                << position Y [ PName "Value", PmType Quantitative ]
+
+        specBar =
+            asSpec [ mark Bar [], encBar [] ]
+
+        trans =
+            transform
+                << filter (FExpr "datum.Value >= 300")
+                << calculateAs "300" "baseline"
+
+        encUpperBar =
+            encoding
+                << position X [ PName "Day", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
+                << position Y [ PName "baseline", PmType Quantitative ]
+                << position Y2 [ PName "Value", PmType Quantitative ]
+                << color [ MString "#e45755" ]
+
+        specUpperBar =
+            asSpec [ trans [], mark Bar [], encUpperBar [] ]
+
+        layer0 =
+            asSpec [ data [], layer [ specBar, specUpperBar ] ]
+
+        thresholdData =
+            dataFromRows []
+                << dataRow [ ( "ThresholdValue", Number 300 ), ( "Threshold", Str "hazardous" ) ]
+
+        specRule =
+            asSpec [ mark Rule [], encRule [] ]
+
+        encRule =
+            encoding
+                << position Y [ PName "ThresholdValue", PmType Quantitative ]
+
+        specText =
+            asSpec [ mark Text [ MAlign AlignLeft, MdX 215, MdY -5 ], encText [] ]
+
+        encText =
+            encoding
+                << position Y [ PName "ThresholdValue", PmType Quantitative, PAxis [ AxTitle "PM2.5 Value" ] ]
+                << text [ TName "Threshold", TmType Ordinal ]
+
+        layer1 =
+            asSpec [ thresholdData [], layer [ specRule, specText ] ]
+    in
+    toVegaLite [ des, layer [ layer0, layer1 ] ]
+
+
+layer3 : Spec
+layer3 =
+    let
+        des =
             description "Monthly precipitation with mean value overlay."
 
         encBar =
@@ -755,8 +850,8 @@ layer2 =
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ] ]
 
 
-layer3 : Spec
-layer3 =
+layer4 : Spec
+layer4 =
     let
         des =
             description "Layering text over 'heatmap'."
@@ -788,8 +883,8 @@ layer3 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specRect, specText ], config [] ]
 
 
-layer4 : Spec
-layer4 =
+layer5 : Spec
+layer5 =
     let
         des =
             description "A vertical 2D box plot showing median, min, and max in the US population distribution of age groups in 2000."
@@ -846,8 +941,8 @@ layer4 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
-layer5 : Spec
-layer5 =
+layer6 : Spec
+layer6 =
     let
         des =
             description "A Tukey box plot showing median and interquartile range in the US population distribution of age groups in 2000. This isn't strictly a Tukey box plot as the IQR extends beyond the min/max values for some age cohorts."
@@ -902,8 +997,8 @@ layer5 =
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], layer [ specLWhisker, specUWhisker, specBox, specBoxMid ] ]
 
 
-layer6 : Spec
-layer6 =
+layer7 : Spec
+layer7 =
     let
         des =
             description "A candlestick chart inspired by Protovis (http://mbostock.github.io/protovis/ex/candlestick.html)"
@@ -951,8 +1046,8 @@ layer6 =
     toVegaLite [ des, width 320, data [], trans [], layer [ specLine, specBar ] ]
 
 
-layer7 : Spec
-layer7 =
+layer8 : Spec
+layer8 =
     let
         des =
             description "Error bars showing confidence intervals"
@@ -978,8 +1073,8 @@ layer7 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], layer [ specPoints, specCIs ] ]
 
 
-layer8 : Spec
-layer8 =
+layer9 : Spec
+layer9 =
     let
         des =
             description "Error bars showing standard deviation."
@@ -1011,8 +1106,8 @@ layer8 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], trans [], layer [ specMeans, specStdevs ] ]
 
 
-layer9 : Spec
-layer9 =
+layer10 : Spec
+layer10 =
     let
         des =
             description "Histogram with global mean overlay."
@@ -1037,8 +1132,8 @@ layer9 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], layer [ specBars, specMean ] ]
 
 
-layer10 : Spec
-layer10 =
+layer11 : Spec
+layer11 =
     let
         des =
             description "A scatterplot showing horsepower and miles per gallon for various cars with a global mean and standard deviation overlay."
@@ -1078,8 +1173,8 @@ layer10 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specPoints, specSpread ] ]
 
 
-layer11 : Spec
-layer11 =
+layer12 : Spec
+layer12 =
     let
         des =
             description "Line chart with confidence interval band."
@@ -1105,8 +1200,8 @@ layer11 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], layer [ specBand, specLine ] ]
 
 
-layer12 : Spec
-layer12 =
+layer13 : Spec
+layer13 =
     let
         des =
             description "The population of the German city of Falkensee over time with annotated time periods highlighted."
@@ -1146,8 +1241,8 @@ layer12 =
     toVegaLite [ des, width 500, data [], layer [ specRects, specLine, specPoints ] ]
 
 
-layer13 : Spec
-layer13 =
+layer14 : Spec
+layer14 =
     let
         des =
             description "A ranged dot plot that uses 'layer' to convey changing life expectancy for the five most populous countries (between 1955 and 2000)."
@@ -1181,8 +1276,8 @@ layer13 =
     toVegaLite [ des, dataFromUrl "data/countries.json" [], trans [], layer [ specLine, specPoints ] ]
 
 
-layer14 : Spec
-layer14 =
+layer15 : Spec
+layer15 =
     let
         des =
             description "Layered bar/line chart with dual axes."
@@ -1211,8 +1306,8 @@ layer14 =
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ], res [] ]
 
 
-layer15 : Spec
-layer15 =
+layer16 : Spec
+layer16 =
     let
         des =
             description "Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)"
@@ -1250,8 +1345,8 @@ layer15 =
     toVegaLite [ des, width 300, height 50, data [], layer [ specLower, specUpper ], config [] ]
 
 
-layer16 : Spec
-layer16 =
+layer17 : Spec
+layer17 =
     let
         des =
             description "Connected scatterplot showing change over time."
@@ -1269,6 +1364,76 @@ layer16 =
             asSpec [ enc [], mark Point [ MFilled True ] ]
     in
     toVegaLite [ des, dataFromUrl "data/driving.json" [], layer [ specLine, specPoint ] ]
+
+
+layer18 : Spec
+layer18 =
+    let
+        des =
+            description "Carbon dioxide in the atmosphere."
+
+        data =
+            dataFromUrl "https://vega.github.io/vega-lite/data/co2-concentration.csv" [ Parse [ ( "Date", FoUtc "%Y-%m-%d" ) ] ]
+
+        trans =
+            transform
+                << calculateAs "year(datum.Date)" "year"
+                << calculateAs "month(datum.Date)" "month"
+                << calculateAs "floor(datum.year / 10)" "decade"
+                << calculateAs "(datum.year % 10) + (datum.month / 12)" "scaled_date"
+
+        encLine =
+            encoding
+                << position X
+                    [ PName "scaled_date"
+                    , PmType Quantitative
+                    , PAxis [ AxTitle "Year into decade", AxTickCount 10, AxValues [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ] ]
+                    ]
+                << position Y
+                    [ PName "CO2"
+                    , PmType Quantitative
+                    , PScale [ SZero False ]
+                    , PAxis [ AxTitle "CO2 concentration in ppm" ]
+                    ]
+                << color [ MName "decade", MmType Nominal, MLegend [] ]
+
+        specLine =
+            asSpec [ mark Line [ MOrient Vertical ], encLine [] ]
+
+        transTextMin =
+            transform
+                << aggregate [ opAs ArgMin "scaled_date" "aggregated" ] [ "decade" ]
+                << calculateAs "datum.aggregated.scaled_date" "scaled_date"
+                << calculateAs "datum.aggregated.CO2" "CO2"
+
+        encTextMin =
+            encoding
+                << position X [ PName "scaled_date", PmType Quantitative ]
+                << position Y [ PName "CO2", PmType Quantitative ]
+                << text [ TName "aggregated.year", TmType Nominal ]
+
+        specTextMin =
+            asSpec [ transTextMin [], mark Text [ MAlign AlignLeft, MBaseline AlignTop, MdX 3, MdY 1 ], encTextMin [] ]
+
+        transTextMax =
+            transform
+                << aggregate [ opAs ArgMax "scaled_date" "aggregated" ] [ "decade" ]
+                << calculateAs "datum.aggregated.scaled_date" "scaled_date"
+                << calculateAs "datum.aggregated.CO2" "CO2"
+
+        encTextMax =
+            encoding
+                << position X [ PName "scaled_date", PmType Quantitative ]
+                << position Y [ PName "CO2", PmType Quantitative ]
+                << text [ TName "aggregated.year", TmType Nominal ]
+
+        specTextMax =
+            asSpec [ transTextMax [], mark Text [ MAlign AlignLeft, MBaseline AlignBottom, MdX 3, MdY 1 ], encTextMax [] ]
+
+        config =
+            configure << configuration (View [ Stroke Nothing ])
+    in
+    toVegaLite [ des, config [], width 800, height 500, data, trans [], layer [ specLine, specTextMin, specTextMax ] ]
 
 
 comp1 : Spec
@@ -1611,6 +1776,71 @@ geo8 =
         ]
 
 
+geo9 : Spec
+geo9 =
+    let
+        tubeLineColors =
+            categoricalDomainMap
+                [ ( "Bakerloo", "rgb(137,78,36)" )
+                , ( "Central", "rgb(220,36,30)" )
+                , ( "Circle", "rgb(255,206,0)" )
+                , ( "District", "rgb(1,114,41)" )
+                , ( "DLR", "rgb(0,175,173)" )
+                , ( "Hammersmith & City", "rgb(215,153,175)" )
+                , ( "Jubilee", "rgb(106,114,120)" )
+                , ( "Metropolitan", "rgb(114,17,84)" )
+                , ( "Northern", "rgb(0,0,0)" )
+                , ( "Piccadilly", "rgb(0,24,168)" )
+                , ( "Victoria", "rgb(0,160,226)" )
+                , ( "Waterloo & City", "rgb(106,187,170)" )
+                ]
+
+        polySpec =
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , encoding <| color [ MString "#ddc" ] []
+                ]
+
+        labelEnc =
+            encoding
+                << position Longitude [ PName "cx" ]
+                << position Latitude [ PName "cy" ]
+                << text [ TName "bLabel", TmType Nominal ]
+                << size [ MNumber 8 ]
+                << opacity [ MNumber 0.6 ]
+
+        trans =
+            transform
+                << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
+
+        labelSpec =
+            asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+
+        tubeEnc =
+            encoding
+                << color
+                    [ MName "id"
+                    , MmType Nominal
+                    , MLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , MScale tubeLineColors
+                    ]
+
+        routeSpec =
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonTubeLines.json" [ TopojsonFeature "line" ]
+                , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+                , tubeEnc []
+                ]
+    in
+    toVegaLite
+        [ width 700
+        , height 500
+        , configure <| configuration (View [ Stroke Nothing ]) []
+        , layer [ polySpec, labelSpec, routeSpec ]
+        ]
+
+
 interactive1 : Spec
 interactive1 =
     let
@@ -1940,6 +2170,54 @@ interactive9 =
     toVegaLite [ des, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
 
 
+interactive10 : Spec
+interactive10 =
+    let
+        data =
+            dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
+
+        sel =
+            selection << select "myTooltip" Single [ Nearest True, On "mouseover", Encodings [ ChX ], Empty ]
+
+        lineSpec =
+            asSpec [ mark Line [], lineEnc [] ]
+
+        pointSpec =
+            asSpec [ mark Point [], pointEnc [], sel [] ]
+
+        ruleSpec =
+            asSpec [ transform (filter (FSelection "myTooltip") []), mark Rule [ MColor "gray" ], ruleEnc [] ]
+
+        textSpec =
+            asSpec [ transform (filter (FSelection "myTooltip") []), mark Text [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
+
+        lineEnc =
+            encoding
+                << position X [ PName "date", PmType Temporal ]
+                << position Y [ PName "price", PmType Quantitative ]
+                << color [ MName "symbol", MmType Nominal ]
+
+        pointEnc =
+            encoding
+                << position X [ PName "date", PmType Temporal ]
+                << position Y [ PName "price", PmType Quantitative ]
+                << color [ MName "symbol", MmType Nominal ]
+                << opacity [ MSelectionCondition (Expr "myTooltip") [ MNumber 1 ] [ MNumber 0 ] ]
+
+        ruleEnc =
+            encoding
+                << position X [ PName "date", PmType Temporal ]
+
+        textEnc =
+            encoding
+                << position X [ PName "date", PmType Temporal ]
+                << position Y [ PName "price", PmType Quantitative ]
+                << text [ TName "price", TmType Quantitative ]
+                << color [ MName "symbol", MmType Nominal ]
+    in
+    toVegaLite [ width 600, height 300, data, layer [ lineSpec, pointSpec, ruleSpec, textSpec ] ]
+
+
 
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
@@ -1968,6 +2246,7 @@ mySpecs =
         , ( "basic19", basic19 )
         , ( "basic20", basic20 )
         , ( "basic21", basic21 )
+        , ( "basic22", basic22 )
         , ( "stack1", stack1 )
         , ( "stack2", stack2 )
         , ( "stack3", stack3 )
@@ -1999,6 +2278,8 @@ mySpecs =
         , ( "layer14", layer14 )
         , ( "layer15", layer15 )
         , ( "layer16", layer16 )
+        , ( "layer17", layer17 )
+        , ( "layer18", layer18 )
         , ( "comp1", comp1 )
         , ( "comp2", comp2 )
         , ( "comp3", comp3 )
@@ -2010,6 +2291,7 @@ mySpecs =
         , ( "geo6", geo6 )
         , ( "geo7", geo7 )
         , ( "geo8", geo8 )
+        , ( "geo9", geo9 )
         , ( "interactive1", interactive1 )
         , ( "interactive2", interactive2 )
         , ( "interactive3", interactive3 )
@@ -2019,6 +2301,7 @@ mySpecs =
         , ( "interactive7", interactive7 )
         , ( "interactive8", interactive8 )
         , ( "interactive9", interactive9 )
+        , ( "interactive10", interactive10 )
         ]
 
 
