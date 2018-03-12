@@ -2157,7 +2157,8 @@ general cases of json creation, consider
 
     let
         geojson =
-            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) [] ]
+                |> JE.list
     in
     toVegaLite
         [ width 200
@@ -2171,11 +2172,11 @@ general cases of json creation, consider
 dataFromJson : Spec -> List Format -> Data
 dataFromJson json fmts =
     if fmts == [] then
-        ( VLData, JE.object [ ( "values", JE.list [ json ] ) ] )
+        ( VLData, JE.object [ ( "values", json ) ] )
     else
         ( VLData
         , JE.object
-            [ ( "values", JE.list [ json ] )
+            [ ( "values", json )
             , ( "format", JE.object (List.concatMap formatProperty fmts) )
             ]
         )
