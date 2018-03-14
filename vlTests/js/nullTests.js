@@ -13089,6 +13089,18 @@ var _gicentre$elm_vega$VegaLite$color = function (markProps) {
 				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
 };
+var _gicentre$elm_vega$VegaLite$fill = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'fill',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
+		});
+};
 var _gicentre$elm_vega$VegaLite$opacity = function (markProps) {
 	return F2(
 		function (x, y) {
@@ -13121,6 +13133,18 @@ var _gicentre$elm_vega$VegaLite$size = function (markProps) {
 		{
 			ctor: '_Tuple2',
 			_0: 'size',
+			_1: _elm_lang$core$Json_Encode$object(
+				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
+		});
+};
+var _gicentre$elm_vega$VegaLite$stroke = function (markProps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'stroke',
 			_1: _elm_lang$core$Json_Encode$object(
 				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$markChannelProperty, markProps))
 		});
