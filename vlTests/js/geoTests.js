@@ -8166,6 +8166,8 @@ var _gicentre$elm_vega$VegaLite$vlPropertyLabel = function (spec) {
 			return 'background';
 		case 'VLData':
 			return 'data';
+		case 'VLDatasets':
+			return 'datasets';
 		case 'VLProjection':
 			return 'projection';
 		case 'VLMark':
@@ -8827,13 +8829,13 @@ var _gicentre$elm_vega$VegaLite$positionLabel = function (pChannel) {
 		case 'Y2':
 			return 'y2';
 		case 'Longitude':
-			return 'x';
+			return 'longitude';
 		case 'Latitude':
-			return 'y';
+			return 'latitude';
 		case 'Longitude2':
-			return 'x2';
+			return 'longitude2';
 		default:
-			return 'y2';
+			return 'latitude2';
 	}
 };
 var _gicentre$elm_vega$VegaLite$projectionLabel = function (proj) {
@@ -9159,10 +9161,6 @@ var _gicentre$elm_vega$VegaLite$measurementLabel = function (mType) {
 			return 'quantitative';
 		case 'Temporal':
 			return 'temporal';
-		case 'Latitude_':
-			return 'latitude';
-		case 'Longitude_':
-			return 'longitude';
 		default:
 			return 'geojson';
 	}
@@ -14546,8 +14544,6 @@ var _gicentre$elm_vega$VegaLite$MAlign = function (a) {
 	return {ctor: 'MAlign', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$GeoFeature = {ctor: 'GeoFeature'};
-var _gicentre$elm_vega$VegaLite$Longitude_ = {ctor: 'Longitude_'};
-var _gicentre$elm_vega$VegaLite$Latitude_ = {ctor: 'Latitude_'};
 var _gicentre$elm_vega$VegaLite$Temporal = {ctor: 'Temporal'};
 var _gicentre$elm_vega$VegaLite$Quantitative = {ctor: 'Quantitative'};
 var _gicentre$elm_vega$VegaLite$Ordinal = {ctor: 'Ordinal'};
@@ -14624,30 +14620,6 @@ var _gicentre$elm_vega$VegaLite$Y2 = {ctor: 'Y2'};
 var _gicentre$elm_vega$VegaLite$X2 = {ctor: 'X2'};
 var _gicentre$elm_vega$VegaLite$Y = {ctor: 'Y'};
 var _gicentre$elm_vega$VegaLite$X = {ctor: 'X'};
-var _gicentre$elm_vega$VegaLite$PStack = function (a) {
-	return {ctor: 'PStack', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PSort = function (a) {
-	return {ctor: 'PSort', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PAxis = function (a) {
-	return {ctor: 'PAxis', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PScale = function (a) {
-	return {ctor: 'PScale', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
-	return {ctor: 'PAggregate', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
-	return {ctor: 'PTimeUnit', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PBin = function (a) {
-	return {ctor: 'PBin', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$PmType = function (a) {
-	return {ctor: 'PmType', _0: a};
-};
 var _gicentre$elm_vega$VegaLite$position = F2(
 	function (pos, pDefs) {
 		var isNotPmType = function (pp) {
@@ -14711,16 +14683,9 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 					})(
 					{
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X),
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Longitude),
 						_1: _elm_lang$core$Json_Encode$object(
-							A2(
-								_elm_lang$core$List$map,
-								_gicentre$elm_vega$VegaLite$positionChannelProperty,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude_),
-									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
-								}))
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
 					});
 			case 'Latitude':
 				return F2(
@@ -14729,16 +14694,9 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 					})(
 					{
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y),
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Latitude),
 						_1: _elm_lang$core$Json_Encode$object(
-							A2(
-								_elm_lang$core$List$map,
-								_gicentre$elm_vega$VegaLite$positionChannelProperty,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude_),
-									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
-								}))
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
 					});
 			case 'Longitude2':
 				return F2(
@@ -14747,16 +14705,9 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 					})(
 					{
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$X2),
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Longitude2),
 						_1: _elm_lang$core$Json_Encode$object(
-							A2(
-								_elm_lang$core$List$map,
-								_gicentre$elm_vega$VegaLite$positionChannelProperty,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Longitude_),
-									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
-								}))
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
 					});
 			default:
 				return F2(
@@ -14765,19 +14716,36 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 					})(
 					{
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Y2),
+						_0: _gicentre$elm_vega$VegaLite$positionLabel(_gicentre$elm_vega$VegaLite$Latitude2),
 						_1: _elm_lang$core$Json_Encode$object(
-							A2(
-								_elm_lang$core$List$map,
-								_gicentre$elm_vega$VegaLite$positionChannelProperty,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Latitude_),
-									_1: A2(_elm_lang$core$List$filter, isNotPmType, pDefs)
-								}))
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$positionChannelProperty, pDefs))
 					});
 		}
 	});
+var _gicentre$elm_vega$VegaLite$PStack = function (a) {
+	return {ctor: 'PStack', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PSort = function (a) {
+	return {ctor: 'PSort', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PAxis = function (a) {
+	return {ctor: 'PAxis', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PScale = function (a) {
+	return {ctor: 'PScale', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
+	return {ctor: 'PAggregate', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
+	return {ctor: 'PTimeUnit', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PBin = function (a) {
+	return {ctor: 'PBin', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$PmType = function (a) {
+	return {ctor: 'PmType', _0: a};
+};
 var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
@@ -15570,6 +15538,39 @@ var _gicentre$elm_vega$VegaLite$mark = F2(
 			};
 		}
 	});
+var _gicentre$elm_vega$VegaLite$VLDatasets = {ctor: 'VLDatasets'};
+var _gicentre$elm_vega$VegaLite$datasets = function (namedData) {
+	var extract = function (data) {
+		var _p137 = A2(
+			_elm_lang$core$Json_Decode$decodeString,
+			_elm_lang$core$Json_Decode$keyValuePairs(_elm_lang$core$Json_Decode$value),
+			A2(_elm_lang$core$Json_Encode$encode, 0, data));
+		if ((((_p137.ctor === 'Ok') && (_p137._0.ctor === '::')) && (_p137._0._0.ctor === '_Tuple2')) && (_p137._0._1.ctor === '[]')) {
+			return _p137._0._0._1;
+		} else {
+			return data;
+		}
+	};
+	var specs = A2(
+		_elm_lang$core$List$map,
+		function (_p138) {
+			var _p139 = _p138;
+			return {
+				ctor: '_Tuple2',
+				_0: _p139._0,
+				_1: function (_p140) {
+					var _p141 = _p140;
+					return extract(_p141._1);
+				}(_p139._1)
+			};
+		},
+		namedData);
+	return {
+		ctor: '_Tuple2',
+		_0: _gicentre$elm_vega$VegaLite$VLDatasets,
+		_1: _elm_lang$core$Json_Encode$object(specs)
+	};
+};
 var _gicentre$elm_vega$VegaLite$VLData = {ctor: 'VLData'};
 var _gicentre$elm_vega$VegaLite$dataFromColumns = F2(
 	function (fmts, cols) {
@@ -15619,16 +15620,7 @@ var _gicentre$elm_vega$VegaLite$dataFromJson = F2(
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'values',
-						_1: _elm_lang$core$Json_Encode$list(
-							{
-								ctor: '::',
-								_0: json,
-								_1: {ctor: '[]'}
-							})
-					},
+					_0: {ctor: '_Tuple2', _0: 'values', _1: json},
 					_1: {ctor: '[]'}
 				})
 		} : {
@@ -15637,16 +15629,7 @@ var _gicentre$elm_vega$VegaLite$dataFromJson = F2(
 			_1: _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'values',
-						_1: _elm_lang$core$Json_Encode$list(
-							{
-								ctor: '::',
-								_0: json,
-								_1: {ctor: '[]'}
-							})
-					},
+					_0: {ctor: '_Tuple2', _0: 'values', _1: json},
 					_1: {
 						ctor: '::',
 						_0: {
@@ -15687,6 +15670,47 @@ var _gicentre$elm_vega$VegaLite$dataFromRows = F2(
 						ctor: '_Tuple2',
 						_0: 'values',
 						_1: _elm_lang$core$Json_Encode$list(rows)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'format',
+							_1: _elm_lang$core$Json_Encode$object(
+								A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$formatProperty, fmts))
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _gicentre$elm_vega$VegaLite$dataFromSource = F2(
+	function (sourceName, fmts) {
+		return _elm_lang$core$Native_Utils.eq(
+			fmts,
+			{ctor: '[]'}) ? {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLData,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'name',
+						_1: _elm_lang$core$Json_Encode$string(sourceName)
+					},
+					_1: {ctor: '[]'}
+				})
+		} : {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLData,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'name',
+						_1: _elm_lang$core$Json_Encode$string(sourceName)
 					},
 					_1: {
 						ctor: '::',
@@ -15819,13 +15843,17 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PSort(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$ByField('zip_code'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PSort(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$ByField('zip_code'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				},
 				A3(
@@ -15836,13 +15864,17 @@ var _gicentre$elm_vega$GeoTests$scribbleMap2 = function () {
 						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PSort(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$ByField('zip_code'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PSort(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$ByField('zip_code'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					},
 					A2(
@@ -16037,7 +16069,11 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
 				},
 				A3(
 					_gicentre$elm_vega$VegaLite$position,
@@ -16045,7 +16081,11 @@ var _gicentre$elm_vega$GeoTests$scribbleMap1 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
 					},
 					A2(
 						_gicentre$elm_vega$VegaLite$order,
@@ -16226,7 +16266,11 @@ var _gicentre$elm_vega$GeoTests$dotMap1 = function () {
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$VegaLite$PName('longitude'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
 				},
 				A3(
 					_gicentre$elm_vega$VegaLite$position,
@@ -16234,7 +16278,11 @@ var _gicentre$elm_vega$GeoTests$dotMap1 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PName('latitude'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
 					},
 					A2(
 						_gicentre$elm_vega$VegaLite$size,
@@ -16308,7 +16356,7 @@ var _gicentre$elm_vega$GeoTests$dotMap1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GeoTests$mapComp2 = function () {
+var _gicentre$elm_vega$GeoTests$mapComp4 = function () {
 	var rotatedSpec = function (rot) {
 		var countrySpec = _gicentre$elm_vega$VegaLite$asSpec(
 			{
@@ -16399,7 +16447,7 @@ var _gicentre$elm_vega$GeoTests$mapComp2 = function () {
 									_gicentre$elm_vega$VegaLite$Geoshape,
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MFillOpacity(1.0e-2),
+										_0: _gicentre$elm_vega$VegaLite$MFilled(false),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$VegaLite$MStroke('#411'),
@@ -16514,7 +16562,7 @@ var _gicentre$elm_vega$GeoTests$mapComp2 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GeoTests$mapComp1 = function () {
+var _gicentre$elm_vega$GeoTests$mapComp3 = function () {
 	var rotatedSpec = function (rot) {
 		var countrySpec = _gicentre$elm_vega$VegaLite$asSpec(
 			{
@@ -16605,7 +16653,7 @@ var _gicentre$elm_vega$GeoTests$mapComp1 = function () {
 									_gicentre$elm_vega$VegaLite$Geoshape,
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$MFillOpacity(1.0e-2),
+										_0: _gicentre$elm_vega$VegaLite$MFilled(false),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$VegaLite$MStroke('#411'),
@@ -16669,6 +16717,196 @@ var _gicentre$elm_vega$GeoTests$mapComp1 = function () {
 					}),
 				_1: {ctor: '[]'}
 			}
+		});
+}();
+var _gicentre$elm_vega$GeoTests$mapComp2 = function () {
+	var globe = function () {
+		var countrySpec = _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
+					'https://vega.github.io/vega-lite/data/world-110m.json',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('land'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Geoshape,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MFill('black'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MFillOpacity(0.7),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+		var graticuleSpec = _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$dataFromUrl,
+					'data/graticule.json',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('graticule'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$mark,
+						_gicentre$elm_vega$VegaLite$Geoshape,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$MFilled(false),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$MStroke('#411'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(0.1),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+		return _gicentre$elm_vega$VegaLite$asSpec(
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$width(300),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$height(300),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$projection(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$Orthographic),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$layer(
+								{
+									ctor: '::',
+									_0: graticuleSpec,
+									_1: {
+										ctor: '::',
+										_0: countrySpec,
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	}();
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$configure(
+				A2(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$View(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$Stroke(_elm_lang$core$Maybe$Nothing),
+							_1: {ctor: '[]'}
+						}),
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$hConcat(
+					{
+						ctor: '::',
+						_0: globe,
+						_1: {
+							ctor: '::',
+							_0: globe,
+							_1: {
+								ctor: '::',
+								_0: globe,
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+}();
+var _gicentre$elm_vega$GeoTests$mapComp1 = function () {
+	var globe = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$width(300),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$height(300),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$VegaLite$dataFromUrl,
+						'data/graticule.json',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$TopojsonFeature('graticule'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$projection(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$PType(_gicentre$elm_vega$VegaLite$Orthographic),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gicentre$elm_vega$VegaLite$mark,
+								_gicentre$elm_vega$VegaLite$Geoshape,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$MFilled(false),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$hConcat(
+				{
+					ctor: '::',
+					_0: globe,
+					_1: {
+						ctor: '::',
+						_0: globe,
+						_1: {
+							ctor: '::',
+							_0: globe,
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
 		});
 }();
 var _gicentre$elm_vega$GeoTests$sourceExample = _gicentre$elm_vega$GeoTests$mapComp1;
@@ -16967,7 +17205,11 @@ var _gicentre$elm_vega$GeoTests$tubeLines3 = function () {
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$VegaLite$PName('cx'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
 				},
 				A3(
 					_gicentre$elm_vega$VegaLite$position,
@@ -16975,7 +17217,11 @@ var _gicentre$elm_vega$GeoTests$tubeLines3 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PName('cy'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
 					},
 					A2(
 						_gicentre$elm_vega$VegaLite$text,
@@ -17256,7 +17502,11 @@ var _gicentre$elm_vega$GeoTests$choropleth2 = function () {
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$VegaLite$PName('cx'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
 				},
 				A3(
 					_gicentre$elm_vega$VegaLite$position,
@@ -17264,7 +17514,11 @@ var _gicentre$elm_vega$GeoTests$choropleth2 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$VegaLite$PName('cy'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
 					},
 					A2(
 						_gicentre$elm_vega$VegaLite$text,
@@ -17608,14 +17862,22 @@ var _gicentre$elm_vega$GeoTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpe
 										_0: {ctor: '_Tuple2', _0: 'mapComp2', _1: _gicentre$elm_vega$GeoTests$mapComp2},
 										_1: {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'dotMap1', _1: _gicentre$elm_vega$GeoTests$dotMap1},
+											_0: {ctor: '_Tuple2', _0: 'mapComp3', _1: _gicentre$elm_vega$GeoTests$mapComp3},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
+												_0: {ctor: '_Tuple2', _0: 'mapComp4', _1: _gicentre$elm_vega$GeoTests$mapComp4},
 												_1: {
 													ctor: '::',
-													_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
-													_1: {ctor: '[]'}
+													_0: {ctor: '_Tuple2', _0: 'dotMap1', _1: _gicentre$elm_vega$GeoTests$dotMap1},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'scribbleMap1', _1: _gicentre$elm_vega$GeoTests$scribbleMap1},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'scribbleMap2', _1: _gicentre$elm_vega$GeoTests$scribbleMap2},
+															_1: {ctor: '[]'}
+														}
+													}
 												}
 											}
 										}
