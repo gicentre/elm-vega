@@ -21,12 +21,21 @@
   <div id="elmContainer"></div>
 
 
-  <h2>Empty and null values provided to axis settings</h2>
+  <h2>Empty values provided to axis settings</h2>
 
   <figure class="cell"><div id="axis1"></div></figure>
   <div style="clear:left"></div>
 
 
+  <h2>Empty values provided to scale settings</h2>
+
+  <figure class="cell"><div id="scale0"></div><figcaption>Spec without null scales</figcaption></figure>
+  <figure class="cell"><div id="scale1"></div><figcaption>Empty list for x position scale</figcaption></figure>
+  <figure class="cell"><div id="scale2"></div><figcaption>Empty list for y position scale</figcaption></figure>
+  <figure class="cell"><div id="scale3"></div><figcaption>Empty list for colour scale</figcaption></figure>
+  <figure class="cell"><div id="scale4"></div><figcaption>Empty list for size scale</figcaption></figure>
+  <figure class="cell"><div id="scale5"></div><figcaption>Empty list for shape scale</figcaption></figure>
+  <div style="clear:left"></div>
 
   <script>
     Elm.NullTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {

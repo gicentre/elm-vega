@@ -69,8 +69,8 @@ choropleth2 =
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx" ]
-                << position Latitude [ PName "cy" ]
+                << position Longitude [ PName "cx", PmType Quantitative ]
+                << position Latitude [ PName "cy", PmType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
 
         labelSpec =
@@ -129,8 +129,8 @@ tubeLines3 =
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx" ]
-                << position Latitude [ PName "cy" ]
+                << position Longitude [ PName "cx", PmType Quantitative ]
+                << position Latitude [ PName "cy", PmType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
                 << size [ MNumber 8 ]
                 << opacity [ MNumber 0.6 ]
@@ -226,6 +226,46 @@ tubeLineColors =
 mapComp1 : Spec
 mapComp1 =
     let
+        globe =
+            asSpec
+                [ width 300
+                , height 300
+                , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                , projection [ PType Orthographic ]
+                , mark Geoshape [ MFilled False ]
+                ]
+    in
+    toVegaLite [ hConcat [ globe, globe, globe ] ]
+
+
+mapComp2 : Spec
+mapComp2 =
+    let
+        globe =
+            let
+                graticuleSpec =
+                    asSpec
+                        [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        ]
+
+                countrySpec =
+                    asSpec
+                        [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ TopojsonFeature "land" ]
+                        , mark Geoshape [ MFill "black", MFillOpacity 0.7 ]
+                        ]
+            in
+            asSpec [ width 300, height 300, projection [ PType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
+    in
+    toVegaLite
+        [ configure <| configuration (View [ Stroke Nothing ]) <| []
+        , hConcat [ globe, globe, globe ]
+        ]
+
+
+mapComp3 : Spec
+mapComp3 =
+    let
         rotatedSpec rot =
             let
                 graticuleSpec =
@@ -234,7 +274,7 @@ mapComp1 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
+                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
@@ -252,8 +292,8 @@ mapComp1 =
         [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
 
 
-mapComp2 : Spec
-mapComp2 =
+mapComp4 : Spec
+mapComp4 =
     let
         rotatedSpec rot =
             let
@@ -272,7 +312,7 @@ mapComp2 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
+                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
@@ -295,8 +335,8 @@ dotMap1 =
     let
         enc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << size [ MNumber 1 ]
                 << color [ MName "digit", MmType Nominal ]
     in
@@ -331,8 +371,8 @@ scribbleMap1 =
 
         enc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << order [ OName "zip_code", OmType Quantitative ]
                 << color [ MString "#666" ]
                 << detail [ DName "conterminous", DmType Nominal ]
@@ -370,8 +410,8 @@ scribbleMap2 =
 
         enc =
             encoding
-                << position Longitude [ PName "longitude", PSort [ ByField "zip_code" ] ]
-                << position Latitude [ PName "latitude", PSort [ ByField "zip_code" ] ]
+                << position Longitude [ PName "longitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
+                << position Latitude [ PName "latitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
                 << order [ OName "zip_code", OmType Quantitative ]
                 << color [ MName "digit3", MmType Nominal, MLegend [] ]
                 << detail [ DName "ziplen", DmType Nominal ]
@@ -410,6 +450,8 @@ mySpecs =
         , ( "linear3", tubeLines3 )
         , ( "mapComp1", mapComp1 )
         , ( "mapComp2", mapComp2 )
+        , ( "mapComp3", mapComp3 )
+        , ( "mapComp4", mapComp4 )
         , ( "dotMap1", dotMap1 )
         , ( "scribbleMap1", scribbleMap1 )
         , ( "scribbleMap2", scribbleMap2 )
