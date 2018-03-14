@@ -98,6 +98,7 @@ module VegaLite
         , dataFromSource
         , dataFromUrl
         , dataRow
+        , datasets
         , description
         , detail
         , domainRangeMap
@@ -164,6 +165,7 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromRows
 @docs dataFromJson
 @docs dataFromSource
+@docs datasets
 @docs dataColumn
 @docs dataRow
 @docs geometry
@@ -1846,6 +1848,7 @@ type VLProperty
     | VLPadding
     | VLBackground
     | VLData
+    | VLDatasets
     | VLMark
     | VLTransform
     | VLProjection
@@ -2175,11 +2178,11 @@ general cases of json creation, consider
 dataFromJson : Spec -> List Format -> Data
 dataFromJson json fmts =
     if fmts == [] then
-        ( VLData, JE.object [ ( "values", JE.list [ json ] ) ] )
+        ( VLData, JE.object [ ( "values", json ) ] )
     else
         ( VLData
         , JE.object
-            [ ( "values", JE.list [ json ] )
+            [ ( "values", json )
             , ( "format", JE.object (List.concatMap formatProperty fmts) )
             ]
         )
@@ -2225,12 +2228,11 @@ parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#named)
 for details.
 
-TODO: XXXX Complete example
-
     enc = ...
     toVegaLite
-        [ dataFromSource "XXX" []
-        , mark Line []
+        [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
+        , dataFromSource "myData" []
+        , mark Bar []
         , enc []
         ]
 
@@ -2285,6 +2287,49 @@ The final parameter is the list of any other rows to which this is added.
 dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
 dataRow row =
     (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValueSpec val )) row))
+
+
+{-| Create a dataset comprising a collection of named `Data` items. Each data item
+can be created with normal data generating functions such as `dataFromRows` or
+`dataFromJson`. These can be later referred to using `dataFromSource`.
+
+    let
+        data =
+            dataFromRows []
+                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
+                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
+        json =
+            JE.list
+                [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 120 ) ]
+                , JE.object [ ( "cat", JE.string "b" ), ( "val", JE.float 180 ) ]
+                ]
+
+        enc = ...
+
+    in
+    toVegaLite
+        [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
+        , dataFromSource "myData" []
+        , mark Bar []
+        , enc []
+        ]
+
+-}
+datasets : List ( String, Data ) -> Data
+datasets namedData =
+    let
+        extract data =
+            case JD.decodeString (JD.keyValuePairs JD.value) (JE.encode 0 data) of
+                Ok [ ( _, value ) ] ->
+                    value
+
+                _ ->
+                    data
+
+        specs =
+            List.map (\( name, data ) -> ( name, (\( _, spec ) -> extract spec) data )) namedData
+    in
+    ( VLDatasets, JE.object specs )
 
 
 {-| Provides an optional description to be associated with the visualization.
@@ -5802,6 +5847,9 @@ vlPropertyLabel spec =
 
         VLData ->
             "data"
+
+        VLDatasets ->
+            "datasets"
 
         VLProjection ->
             "projection"
