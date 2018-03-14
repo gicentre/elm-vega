@@ -4550,7 +4550,10 @@ markChannelProperty field =
             [ ( "type", JE.string (measurementLabel t) ) ]
 
         MScale sps ->
-            [ ( "scale", JE.object (List.map scaleProperty sps) ) ]
+            if sps == [] then
+                [ ( "scale", JE.null ) ]
+            else
+                [ ( "scale", JE.object (List.map scaleProperty sps) ) ]
 
         MLegend lps ->
             if lps == [] then
@@ -5120,7 +5123,10 @@ positionChannelProperty pDef =
                     ( "sort", JE.object (List.map sortProperty ops) )
 
         PScale sps ->
-            ( "scale", JE.object (List.map scaleProperty sps) )
+            if sps == [] then
+                ( "scale", JE.null )
+            else
+                ( "scale", JE.object (List.map scaleProperty sps) )
 
         PAxis aps ->
             if aps == [] then
