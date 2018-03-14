@@ -267,30 +267,23 @@ In this example we will add a layer showing the average precipitation for the en
 
 ```elm
 let
+    precipEnc =
+        encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
     barEnc =
-        encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-    barSpec =
-        asSpec [ mark Bar [], barEnc [] ]
-
-    avLineEnc =
-        encoding
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-    avLineSpec =
-        asSpec [ mark Rule [], avLineEnc [] ]
+        encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
-    , layer [ barSpec, avLineSpec ]
+    , precipEnc []
+    , layer [ asSpec [ mark Bar [], barEnc [] ], asSpec [ mark Rule [] ] ]
     ]
 ```
 
-The bar encoding is exactly as it was previously, but this time instead of passing it directly to `toVegaLite` we store it in its own specification object with `asSepc` (which we called `barSpec` in the example above).
+The bar encoding is as it was previously, but this time instead of passing it directly to `toVegaLite` we store it in its own specification object with `asSepc`.
 We add a similar average line specification but only need to encode the y-position as we wish to span the entire chart space with the `rule` mark.
 The two specifications are combined as layers with the `layer` function which we add to the list of specifications passed to `toVegaLite` in place of the original bar specification.
+Note also how we can extract the encoding common to both (as `precipEnc`) so the y position encoding only needs to be specified once.
 
 ### Concatenating views (10:47)
 
@@ -305,20 +298,14 @@ let
             << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
             << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
 
-    bar1Spec =
-        asSpec [ mark Bar [], bar1Enc [] ]
-
     bar2Enc =
         encoding
             << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
             << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
-
-    bar2Spec =
-        asSpec [ mark Bar [], bar2Enc [] ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
-    , vConcat [ bar1Spec, bar2Spec ]
+    , vConcat [ asSpec [ mark Bar [], bar1Enc [] ], asSpec [ mark Bar [], bar2Enc [] ] ]
     ]
 ```
 
