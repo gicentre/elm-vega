@@ -2635,7 +2635,7 @@
       },
       {
         "name": "Measurement",
-        "comment": " Type of measurement to be associated with some channel. `Nominal` data are\ncategories identified by name alone and which have no intrinsic order. `Ordinal`\ndata are also categories, but ones which have some natural order. `Quantitative`\ndata are numeric measurements typically on a continuous scale. `Temporal` data\ndescribe time.\n\nGeospatial types should be set to `Quantitative` when defining a measurement type for positional\nencoding and `GeoFeature` for geographically referenced features. Note that Vega-Lite 2.1 beta\ninstead has `latitude` and `longitude` types for encoding with position and a `geojson` for spatial\nfeatures, which should not be used in elm-vaga.\n\n",
+        "comment": " Type of measurement to be associated with some channel. `Nominal` data are\ncategories identified by name alone and which have no intrinsic order. `Ordinal`\ndata are also categories, but ones which have some natural order. `Quantitative`\ndata are numeric measurements typically on a continuous scale. `Temporal` data\ndescribe time.\n\nGeospatial position encoding (`Longitude` and `Latitude`) should specify the `PmType`\nas `Quantitative`. Geographically referenced features encoded as `shape` marks\nshould specify `MmType` as `GeoFeature` (Vega-Lite currently refers to this type\nas [geojson](https://vega.github.io/vega-lite/docs/encoding.html)).\n\n",
         "args": [],
         "cases": [
           [

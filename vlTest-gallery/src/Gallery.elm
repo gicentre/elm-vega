@@ -1528,8 +1528,8 @@ geo2 =
     let
         enc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << size [ MNumber 1 ]
                 << color [ MName "digit", MmType Nominal ]
     in
@@ -1561,8 +1561,8 @@ geo3 =
 
         overlayEnc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << size [ MNumber 5 ]
                 << color [ MString "steelblue" ]
 
@@ -1591,8 +1591,8 @@ geo4 =
 
         airportsEnc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << size [ MNumber 5 ]
                 << color [ MString "gray" ]
 
@@ -1616,10 +1616,10 @@ geo4 =
 
         flightsEnc =
             encoding
-                << position Longitude [ PName "origin_longitude" ]
-                << position Latitude [ PName "origin_latitude" ]
-                << position Longitude2 [ PName "dest_longitude" ]
-                << position Latitude2 [ PName "dest_latitude" ]
+                << position Longitude [ PName "origin_longitude", PmType Quantitative ]
+                << position Latitude [ PName "origin_latitude", PmType Quantitative ]
+                << position Longitude2 [ PName "dest_longitude", PmType Quantitative ]
+                << position Latitude2 [ PName "dest_latitude", PmType Quantitative ]
 
         flightsSpec =
             asSpec
@@ -1681,8 +1681,8 @@ geo6 =
 
         overlayEnc =
             encoding
-                << position Longitude [ PName "lon" ]
-                << position Latitude [ PName "lat" ]
+                << position Longitude [ PName "lon", PmType Quantitative ]
+                << position Latitude [ PName "lat", PmType Quantitative ]
                 << text [ TName "city", TmType Nominal ]
 
         overlaySpec =
@@ -1710,8 +1710,8 @@ geo7 =
 
         airportsEnc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << size [ MNumber 5 ]
                 << color [ MString "gray" ]
 
@@ -1734,8 +1734,8 @@ geo7 =
 
         flightsEnc =
             encoding
-                << position Longitude [ PName "longitude" ]
-                << position Latitude [ PName "latitude" ]
+                << position Longitude [ PName "longitude", PmType Quantitative ]
+                << position Latitude [ PName "latitude", PmType Quantitative ]
                 << order [ OName "order", OmType Ordinal ]
 
         flightsSpec =
@@ -1804,8 +1804,8 @@ geo9 =
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx" ]
-                << position Latitude [ PName "cy" ]
+                << position Longitude [ PName "cx", PmType Quantitative ]
+                << position Latitude [ PName "cy", PmType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
                 << size [ MNumber 8 ]
                 << opacity [ MNumber 0.6 ]

@@ -44,7 +44,7 @@ module VegaLite
         , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
-        , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
+        , Measurement(..)
         , MonthName(..)
         , Operation(..)
         , OrderChannel(..)
@@ -1288,10 +1288,10 @@ data are also categories, but ones which have some natural order. `Quantitative`
 data are numeric measurements typically on a continuous scale. `Temporal` data
 describe time.
 
-Geospatial types should be set to `Quantitative` when defining a measurement type for positional
-encoding and `GeoFeature` for geographically referenced features. Note that Vega-Lite 2.1 beta
-instead has `latitude` and `longitude` types for encoding with position and a `geojson` for spatial
-features, which should not be used in elm-vaga.
+Geospatial position encoding (`Longitude` and `Latitude`) should specify the `PmType`
+as `Quantitative`. Geographically referenced features encoded as `shape` marks
+should specify `MmType` as `GeoFeature` (Vega-Lite currently refers to this type
+as [geojson](https://vega.github.io/vega-lite/docs/encoding.html)).
 
 -}
 type Measurement
@@ -1299,13 +1299,7 @@ type Measurement
     | Ordinal
     | Quantitative
     | Temporal
-    | Latitude_
-    | Longitude_
     | GeoFeature
-
-
-
--- | GeoJson
 
 
 {-| Idntifies a month of the year.
@@ -2849,9 +2843,6 @@ appearing, simply provide an empty list of axis properties to `PAxis` :
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
 position pos pDefs =
-    -- Because Vega-Lite 2.1 beta represents spatial data by setting the measurement type
-    -- rather than position channel, we need to replace the PmType with longitude or latitude
-    -- in the cases where Postion is geospatial.
     let
         isNotPmType pp =
             case pp of
@@ -2875,16 +2866,20 @@ position pos pDefs =
             (::) ( positionLabel Y2, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude ->
-            (::) ( positionLabel X, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            --  (::) ( positionLabel X, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            (::) ( positionLabel Longitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude ->
-            (::) ( positionLabel Y, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            --(::) ( positionLabel Y, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            (::) ( positionLabel Latitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude2 ->
-            (::) ( positionLabel X2, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            --  (::) ( positionLabel X2, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            (::) ( positionLabel Longitude2, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude2 ->
-            (::) ( positionLabel Y2, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            --(::) ( positionLabel Y2, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
+            (::) ( positionLabel Latitude2, List.map positionChannelProperty pDefs |> JE.object )
 
 
 {-| Sets the cartographic projection used for geospatial coordinates. A projection
@@ -4810,20 +4805,8 @@ measurementLabel mType =
         Temporal ->
             "temporal"
 
-        -- Vega-Lite 2.1 beta has the concept of lat/long measurement types, but elm-vega uses the more
-        -- sematically correct Quantitative type with addtional Latitude and Longitude position channels.
-        -- Hidden types with an underscore postfix are used for cases where we need to generate correct
-        -- Vega-Lite spec.
-        -- It also has a 'geojson' type for geographically referenced features, which here are renamed
-        -- to the more general `GeoFeature`.
-        Latitude_ ->
-            "latitude"
-
-        Longitude_ ->
-            "longitude"
-
-        -- GeoJson ->
-        --     "geojson"
+        -- Vega-Lite has a 'geojson' type for geographically referenced shape
+        -- features, which here is renamed to the more general `GeoFeature`.
         GeoFeature ->
             "geojson"
 
@@ -5167,20 +5150,17 @@ positionLabel pChannel =
         Y2 ->
             "y2"
 
-        -- Note: The following are approximate mappings to allow compatiblity with Vega-Lite's
-        -- model of spatial data indicates geographic coordinates with a measurement type
-        -- `longitude` rather than channel.
         Longitude ->
-            "x"
+            "longitude"
 
         Latitude ->
-            "y"
+            "latitude"
 
         Longitude2 ->
-            "x2"
+            "longitude2"
 
         Latitude2 ->
-            "y2"
+            "latitude2"
 
 
 rangeConfigProperty : RangeConfig -> LabelledSpec
