@@ -105,6 +105,7 @@ module VegaLite
         , domainRangeMap
         , encoding
         , facet
+        , fill
         , filter
         , geoFeatureCollection
         , geometry
@@ -132,6 +133,7 @@ module VegaLite
         , shape
         , size
         , specification
+        , stroke
         , text
         , timeUnitAs
         , title
@@ -243,8 +245,8 @@ Types and functions for declaring the type of visual marks used in the visualiza
 
 Types and functions for declaring which data fields are mapped to which channels.
 Channels can include position on screen (e.g. `X`,`Y`), visual mark properties
-(e.g. color, size, shape), text, hyperlinks, ordering, level of detail and facets
-(for nested visualization). All can be further customised via a series of properties
+(e.g. color, size, stroke, shape), text, hyperlinks, ordering, level of detail and facets
+(for composed visualizations). All can be further customised via a series of properties
 for determining how that encoding is implemented (e.g. scaling, sorting, spacing).
 
 @docs encoding
@@ -276,6 +278,8 @@ color or size.
 
 @docs size
 @docs color
+@docs fill
+@docs stroke
 @docs opacity
 @docs shape
 @docs MarkChannel
@@ -1188,7 +1192,8 @@ type Mark
     | Tick
 
 
-{-| Mark channel properties used for creating a mark channel encoding.
+{-| Mark channel properties used for creating a mark channel encoding. Providing
+an empty list to `MScale`, or `MLegend` removes the scaling and legend respectively.
 -}
 type MarkChannel
     = MName String
@@ -2433,6 +2438,22 @@ facet fMaps =
     ( VLFacet, JE.object (List.map facetMappingProperty fMaps) )
 
 
+{-| Encode a fill channel. This acts in a similar way to encoding by `color` but
+only affects the interior of closed shapes. The first parameter is a list of mark
+channel properties that characterise the way a data field is encoded by fill.
+The second parameter is a list of any previous channels to which this fill channel
+should be added.
+
+    fill [ MName "Species", MmType Nominal ] []
+
+Note that if both `fill` and `color` encodings are specified, `fill` takes precedence.
+
+-}
+fill : List MarkChannel -> List LabelledSpec -> List LabelledSpec
+fill markProps =
+    (::) ( "fill", List.concatMap markChannelProperty markProps |> JE.object )
+
+
 {-| Adds the given filter operation a list of transformations that may be applied
 to a channel or field. The first parameter is the filter operation and the second,
 often implicit, parameter is the list of other filter operations to which this
@@ -3050,6 +3071,23 @@ size markProps =
 specification : Spec -> ( VLProperty, Spec )
 specification spec =
     ( VLSpec, spec )
+
+
+{-| Encode a stroke channel. This acts in a similar way to encoding by `color` but
+only affects the exterior boundary of marks. The first parameter is a list of mark
+channel properties that characterise the way a data field is encoded by stroke.
+The second parameter is a list of any previous channels to which this stroke channel
+should be added.
+
+    stroke [ MName "Species", MmType Nominal ] []
+
+Note that if both `stroke` and `color` encodings are specified, `stroke` takes
+precedence.
+
+-}
+stroke : List MarkChannel -> List LabelledSpec -> List LabelledSpec
+stroke markProps =
+    (::) ( "stroke", List.concatMap markChannelProperty markProps |> JE.object )
 
 
 {-| Encode a text channel. The first parameter is a list of text channel properties
