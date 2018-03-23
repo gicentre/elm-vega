@@ -1,7 +1,7 @@
 {
     "version": "2.1.0",
-    "summary": "Declarative visualization with Elm and Vega / Vega-Lite",
-    "repository": "https://github.com/gicentre/elm-vega.git",
+    "summary": "(Fork of) Declarative visualization with Elm and Vega / Vega-Lite",
+    "repository": "https://github.com/jeffesp/elm-vega.git",
     "license": "BSD3",
     "source-directories": [
         "./src/"
