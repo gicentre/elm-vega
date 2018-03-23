@@ -1763,6 +1763,29 @@ type
     | Seconds
     | SecondsMilliseconds
     | Milliseconds
+    | UtcYear
+    | UtcYearQuarter
+    | UtcYearQuarterMonth
+    | UtcYearMonth
+    | UtcYearMonthDate
+    | UtcYearMonthDateHours
+    | UtcYearMonthDateHoursMinutes
+    | UtcYearMonthDateHoursMinutesSeconds
+    | UtcQuarter
+    | UtcQuarterMonth
+    | UtcMonth
+    | UtcMonthDate
+    | UtcDate
+    | UtcDay
+    | UtcHours
+    | UtcHoursMinutes
+    | UtcHoursMinutesSeconds
+    | UtcMinutes
+    | UtcMinutesSeconds
+    | UtcSeconds
+    | UtcSecondsMilliseconds
+    | UtcMilliseconds
+
 
 
 {-| Title configuration properties. These are used to configure the default style
@@ -5768,6 +5791,71 @@ timeUnitLabel tu =
         Milliseconds ->
             "milliseconds"
 
+        UtcYear ->
+            "utcyear"
+
+        UtcYearQuarter ->
+            "utcyearquarter"
+
+        UtcYearQuarterMonth ->
+            "utcyearquartermonth"
+
+        UtcYearMonth ->
+            "utcyearmonth"
+
+        UtcYearMonthDate ->
+            "utcyearmonthdate"
+
+        UtcYearMonthDateHours ->
+            "utcyearmonthdatehours"
+
+        UtcYearMonthDateHoursMinutes ->
+            "utcyearmonthdatehoursminutes"
+
+        UtcYearMonthDateHoursMinutesSeconds ->
+            "utcyearmonthdatehoursminutesseconds"
+
+        UtcQuarter ->
+            "utcquarter"
+
+        UtcQuarterMonth ->
+            "utcquartermonth"
+
+        UtcMonth ->
+            "utcmonth"
+
+        UtcMonthDate ->
+            "utcmonthdate"
+
+        UtcDate ->
+            "utcdate"
+
+        UtcDay ->
+            "utcday"
+
+        UtcHours ->
+            "utchours"
+
+        UtcHoursMinutes ->
+            "utchoursminutes"
+
+        UtcHoursMinutesSeconds ->
+            "utchoursminutesseconds"
+
+        UtcMinutes ->
+            "utcminutes"
+
+        UtcMinutesSeconds ->
+            "utcminutesseconds"
+
+        UtcSeconds ->
+            "utcseconds"
+
+        UtcSecondsMilliseconds ->
+            "utcsecondsmilliseconds"
+
+        UtcMilliseconds ->
+            "utcmilliseconds"
 
 titleConfigSpec : TitleConfig -> LabelledSpec
 titleConfigSpec titleCfg =
