@@ -3994,7 +3994,7 @@
       },
       {
         "name": "TimeUnit",
-        "comment": " Describes a unit of time. Useful for encoding and transformations. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)\nfor further details.\n",
+        "comment": " Describes a unit of time. Useful for encoding and transformations. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)\nfor further details.\n\nTo encode a time as UTC (coordinated universal time, independent of local time\nzones or daylight saving), add a `Utc` type to one of the other time units.\nFor example,\n\n    encoding\n        << position X [ PName \"date\", PmType Temporal, PTimeUnit (Utc YearMonthDateHours) ]\n\n",
         "args": [],
         "cases": [
           [
@@ -4084,6 +4084,12 @@
           [
             "Milliseconds",
             []
+          ],
+          [
+            "Utc",
+            [
+              "VegaLite.TimeUnit"
+            ]
           ]
         ]
       },
