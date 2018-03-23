@@ -1,7 +1,7 @@
 {
-    "version": "3.0.0",
+    "version": "1.0.0",
     "summary": "(Fork of) Declarative visualization with Elm and Vega / Vega-Lite",
-    "repository": "https://www.nexosisdev.com/jeffesp/elm-vega.git",
+    "repository": "https://github.com/jeffesp/elm-vega.git",
     "license": "BSD3",
     "source-directories": [
         "./src/"
