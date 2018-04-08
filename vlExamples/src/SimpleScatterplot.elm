@@ -1,6 +1,5 @@
 port module SimpleScatterplot exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -26,7 +25,7 @@ scatter =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object [ ( "scatter", scatter ) ]
+    combineSpecs [ ( "scatter", scatter ) ]
 
 
 

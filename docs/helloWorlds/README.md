@@ -18,10 +18,10 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
   <meta charset="utf-8">
 
   <!-- These scripts link to the Vega-Lite runtime -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.9/vega.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.4/vega-lite.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-rc7/vega-embed.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+  
   <!-- This is the script generated from Elm -->
   <script src="js/helloWorlds.js"></script>
 </head>
@@ -61,7 +61,6 @@ Here is an example containing three visualizations:
 ```elm
 port module HelloWorlds exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -115,7 +114,7 @@ myOtherVis =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "vis1", myFirstVis )
         , ( "vis2", mySecondVis )
         , ( "vis3", myOtherVis )
@@ -143,8 +142,7 @@ port elmToJS : Spec -> Cmd msg
 The boilerplate code is the same as previously but here using the name `mySpecs` to refer to the collection of named vega-lite specifications.
 
 In this example, the main body of code comprises three functions (`myFirstVis`, `mySecondVis` and `myOtherVis`) each detailing a separate Vega-Lite specification.
-These are then combined into a single JSON object in the function `mySpecs` pairing each spec with an ID we can refer to in the HTML `<div>` containers.
-To ensure the JSON encoding works, you must also `import Json.Encode` at the top of the file.
+These are then combined (with `combineSpecs`) into a single JSON object in the function `mySpecs` pairing each spec with an ID we can refer to in the HTML `<div>` containers.
 
 ## 3. Compile the Elm-Vega into JavaScript
 

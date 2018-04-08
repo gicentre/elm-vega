@@ -1,0 +1,27 @@
+{
+  "type": "Topology",
+  "arcs": [
+    [
+      [0, 100],
+      [0, -100],
+      [100, 0],
+      [0, 100],
+      [-100, 0]
+    ]
+  ],
+  "transform": {
+    "scale": [3.5999999999999996, 1.7999999999999998],
+    "translate": [-180, -90]
+  },
+  "objects": {
+    "globe": {
+      "type": "GeometryCollection",
+      "geometries": [{
+        "arcs": [
+          [0]
+        ],
+        "type": "Polygon"
+      }]
+    }
+  }
+}

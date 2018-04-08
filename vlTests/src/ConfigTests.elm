@@ -1,6 +1,5 @@
 port module ConfigTests exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -100,7 +99,7 @@ markCfg2 =
 paddingCfg : Spec
 paddingCfg =
     configure
-        --<< configuration (Autosize [ AFit ])  Disabled until https://github.com/vega/vega/issues/1103 is fixed.
+        << configuration (Autosize [ AFit ])
         << configuration (Padding (PEdges 90 60 30 0))
         |> singleVis
 
@@ -111,7 +110,7 @@ paddingCfg =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "default", defaultCfg )
         , ( "dark", darkCfg )
         , ( "mark1", markCfg1 )

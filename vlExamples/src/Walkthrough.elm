@@ -1,6 +1,5 @@
 port module Walkthrough exposing (elmToJS)
 
-import Json.Encode
 import Platform
 import VegaLite exposing (..)
 
@@ -123,24 +122,16 @@ barChart =
 barChartWithAverage : Spec
 barChartWithAverage =
     let
+        precipEnc =
+            encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
         barEnc =
-            encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-        barSpec =
-            asSpec [ mark Bar [], barEnc [] ]
-
-        avLineEnc =
-            encoding
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-        avLineSpec =
-            asSpec [ mark Rule [], avLineEnc [] ]
+            encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
-        , layer [ barSpec, avLineSpec ]
+        , precipEnc []
+        , layer [ asSpec [ mark Bar [], barEnc [] ], asSpec [ mark Rule [] ] ]
         ]
 
 
@@ -152,20 +143,14 @@ barChartPair =
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
 
-        bar1Spec =
-            asSpec [ mark Bar [], bar1Enc [] ]
-
         bar2Enc =
             encoding
                 << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
                 << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
-
-        bar2Spec =
-            asSpec [ mark Bar [], bar2Enc [] ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
-        , vConcat [ bar1Spec, bar2Spec ]
+        , vConcat [ asSpec [ mark Bar [], bar1Enc [] ], asSpec [ mark Bar [], bar2Enc [] ] ]
         ]
 
 
@@ -322,7 +307,7 @@ scatterProps =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -439,7 +424,7 @@ coordinatedScatter1 =
                 << position X [ PRepeat Column, PmType Quantitative ]
                 << position Y [ PRepeat Row, PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -570,7 +555,7 @@ crossFilter =
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "singleView1", stripPlot )
         , ( "singleView2", histogram )
         , ( "singleView3", stackedHistogram )

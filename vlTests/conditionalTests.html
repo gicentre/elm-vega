@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Elm-Vega Conditional Tests</title>
+  <meta charset="utf-8">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+  <script src="js/conditionalTests.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} figcaption {padding-top: 0.5em;}.cell { float: left; padding:1em; border-radius: 1em; margin:1.2em; background-color: rgb(251,247,238);}</style>
+</head>
+
+<body>
+  <h1>Elm-Vega Conditional Tests</h1>
+
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
+
+  <h2>Conditional Mark Properties</h2>
+  <figure class="cell"><div id="markCondition1"></div><figcaption>Null values in grey.</figcaption></figure>
+  <div style="clear:left"></div>
+
+
+  <h2>Conditional Selection Properties</h2>
+  <figure class="cell"><div id="selectionCondition1"></div><figcaption>Two selection styles (drag and shift-drag; no effect).</figcaption></figure>
+  <figure class="cell"><div id="selectionCondition2"></div><figcaption>Two selection styles (drag and shift-drag; only intersections select).</figcaption></figure>
+  <figure class="cell"><div id="selectionCondition3"></div><figcaption>Combined data and selection condition.</figcaption></figure>
+  <div style="clear:left"></div>
+
+
+  <script>
+    Elm.ConditionalTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: true,
+          logLevel: vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+  </body>
+
+</html>

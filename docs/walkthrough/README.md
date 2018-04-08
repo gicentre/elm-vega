@@ -8,17 +8,18 @@ If you wish to follow along with their talk, timings are given by each section.
 
 _elm-vega_ is a wrapper for the [Vega-Lite visualization grammar](https://vega.github.io) which itself is based on Leland Wilkinson's [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447).
 The grammar provides an expressive way to define how data are represented graphically.
-The six key elements of the original grammar are:
+The seven key elements of the grammar as represented in elm-vega and Vega-Lite are:
 
 -   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
 -   **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
--   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar` and `Text`.
+-   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
+-   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar`,  `Text` and `GeoShape`.
 -   **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
 -   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
 -   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
 
 In common with other languages that build upon a grammar of graphics such as D3 and Vega, this grammar allows fine grain control of visualization design.
-But unlike those languages, Vega-Lite and elm-vega provide sensible default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
+But unlike those languages, Vega-Lite and elm-vega provide practical default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
 
 ## A Single View specification (3:03)
 
@@ -266,30 +267,23 @@ In this example we will add a layer showing the average precipitation for the en
 
 ```elm
 let
+    precipEnc =
+        encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+
     barEnc =
-        encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-    barSpec =
-        asSpec [ mark Bar [], barEnc [] ]
-
-    avLineEnc =
-        encoding
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-
-    avLineSpec =
-        asSpec [ mark Rule [], avLineEnc [] ]
+        encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
-    , layer [ barSpec, avLineSpec ]
+    , precipEnc []
+    , layer [ asSpec [ mark Bar [], barEnc [] ], asSpec [ mark Rule [] ] ]
     ]
 ```
 
-The bar encoding is exactly as it was previously, but this time instead of passing it directly to `toVegaLite` we store it in its own specification object with `asSepc` (which we called `barSpec` in the example above).
+The bar encoding is as it was previously, but this time instead of passing it directly to `toVegaLite` we store it in its own specification object with `asSepc`.
 We add a similar average line specification but only need to encode the y-position as we wish to span the entire chart space with the `rule` mark.
 The two specifications are combined as layers with the `layer` function which we add to the list of specifications passed to `toVegaLite` in place of the original bar specification.
+Note also how we can extract the encoding common to both (as `precipEnc`) so the y position encoding only needs to be specified once.
 
 ### Concatenating views (10:47)
 
@@ -304,20 +298,14 @@ let
             << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
             << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
 
-    bar1Spec =
-        asSpec [ mark Bar [], bar1Enc [] ]
-
     bar2Enc =
         encoding
             << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
             << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
-
-    bar2Spec =
-        asSpec [ mark Bar [], bar2Enc [] ]
 in
 toVegaLite
     [ dataFromUrl "data/seattle-weather.csv" []
-    , vConcat [ bar1Spec, bar2Spec ]
+    , vConcat [ asSpec [ mark Bar [], bar1Enc [] ], asSpec [ mark Bar [], bar2Enc [] ] ]
     ]
 ```
 
@@ -477,7 +465,7 @@ let
             << position X [ PName "Horsepower", PmType Quantitative ]
             << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
             << color
-                [ MCondition "picked"
+                [ MSelectionCondition (SelectionName "picked")
                     [ MName "Origin", MmType Nominal ]
                     [ MString "grey" ]
                 ]
@@ -494,7 +482,7 @@ toVegaLite
     ]
 ```
 
-In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MCondition` used to encode color.
+In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MSelectionCondition` used to encode color.
 
 Previously when encoding color (or any other channel) we have provided a list of properties.
 Here we provide a pair of lists – one for when the selection condition is true, the other for when it is false.
@@ -513,7 +501,7 @@ scatterProps =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << color
-                    [ MCondition "picked"
+                    [ MSelectionCondition (SelectionName "picked")
                         [ MName "Origin", MmType Nominal ]
                         [ MString "grey" ]
                     ]
@@ -680,7 +668,7 @@ let
             << position X [ PRepeat Column, PmType Quantitative ]
             << position Y [ PRepeat Row, PmType Quantitative ]
             << color
-                [ MCondition "picked"
+                [ MSelectionCondition (SelectionName "picked")
                     [ MName "Origin", MmType Nominal ]
                     [ MString "grey" ]
                 ]
