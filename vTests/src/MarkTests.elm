@@ -258,9 +258,46 @@ pathTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+rectTest : Spec
+rectTest =
+    let
+        si =
+            signals
+                << signal "x" [ SiValue (Number 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "w" [ SiValue (Number 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "h" [ SiValue (Number 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
+                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ MEncode
+                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        , Update
+                            [ MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MWidth [ VSignal (SName "w") ]
+                            , MHeight [ VSignal (SName "h") ]
+                            , MOpacity [ VNumber 1 ]
+                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
+                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
+                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    pathTest
+    rectTest
 
 
 
@@ -275,6 +312,7 @@ mySpecs =
         , ( "imageTest", imageTest )
         , ( "lineTest", lineTest )
         , ( "pathTest", pathTest )
+        , ( "rectTest", rectTest )
         ]
 
 

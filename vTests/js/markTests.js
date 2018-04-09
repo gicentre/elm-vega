@@ -12705,8 +12705,404 @@ var _user$project$Vega$VBackground = {ctor: 'VBackground'};
 var _user$project$Vega$VDescription = {ctor: 'VDescription'};
 var _user$project$Vega$VName = {ctor: 'VName'};
 
-var _user$project$MarkTests$pathTest = function () {
+var _user$project$MarkTests$rectTest = function () {
 	var mk = function (_p0) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Rect,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$MEncode(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$Enter(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$MFill(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$VString('#939597'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$MStroke(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$VString('#652c90'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$Update(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$MX(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$VSignal(
+													_user$project$Vega$SName('x')),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$MY(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VSignal(
+														_user$project$Vega$SName('y')),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$MWidth(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$VSignal(
+															_user$project$Vega$SName('w')),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$MHeight(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$VSignal(
+																_user$project$Vega$SName('h')),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$MOpacity(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$VNumber(1),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$MCornerRadius(
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$VSignal(
+																		_user$project$Vega$SName('cornerRadius')),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$MStrokeWidth(
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$VSignal(
+																			_user$project$Vega$SName('strokeWidth')),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$MFillOpacity(
+																		{
+																			ctor: '::',
+																			_0: _user$project$Vega$VSignal(
+																				_user$project$Vega$SExpr('color === \'fill\' || color === \'both\' ? 1 : 0')),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$Vega$MStrokeOpacity(
+																			{
+																				ctor: '::',
+																				_0: _user$project$Vega$VSignal(
+																					_user$project$Vega$SExpr('color === \'stroke\' || color === \'both\' ? 1 : 0')),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$Hover(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$MOpacity(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VNumber(0.5),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				_p0));
+	};
+	var si = function (_p1) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'x',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$SiValue(
+						_user$project$Vega$Number(50)),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$SiBind(
+							_user$project$Vega$IRange(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$InMin(1),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$InMax(100),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$InStep(1),
+											_1: {ctor: '[]'}
+										}
+									}
+								})),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Vega$signal,
+					'y',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$SiValue(
+							_user$project$Vega$Number(50)),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$SiBind(
+								_user$project$Vega$IRange(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$InMin(1),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$InMax(100),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$InStep(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Vega$signal,
+						'w',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$SiValue(
+								_user$project$Vega$Number(100)),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$SiBind(
+									_user$project$Vega$IRange(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$InMin(1),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$InMax(100),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$InStep(1),
+													_1: {ctor: '[]'}
+												}
+											}
+										})),
+								_1: {ctor: '[]'}
+							}
+						},
+						A3(
+							_user$project$Vega$signal,
+							'h',
+							{
+								ctor: '::',
+								_0: _user$project$Vega$SiValue(
+									_user$project$Vega$Number(100)),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$SiBind(
+										_user$project$Vega$IRange(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$InMin(1),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$InMax(100),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$InStep(1),
+														_1: {ctor: '[]'}
+													}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_user$project$Vega$signal,
+								'cornerRadius',
+								{
+									ctor: '::',
+									_0: _user$project$Vega$SiValue(
+										_user$project$Vega$Number(0)),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$SiBind(
+											_user$project$Vega$IRange(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$InMin(0),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$InMax(50),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$InStep(1),
+															_1: {ctor: '[]'}
+														}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}
+								},
+								A3(
+									_user$project$Vega$signal,
+									'strokeWidth',
+									{
+										ctor: '::',
+										_0: _user$project$Vega$SiValue(
+											_user$project$Vega$Number(4)),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$SiBind(
+												_user$project$Vega$IRange(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$InMin(0),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$InMax(10),
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}
+									},
+									A3(
+										_user$project$Vega$signal,
+										'color',
+										{
+											ctor: '::',
+											_0: _user$project$Vega$SiValue(
+												_user$project$Vega$Str('both')),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$SiBind(
+													_user$project$Vega$IRadio(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$InOptions(
+																_user$project$Vega$Strings(
+																	{
+																		ctor: '::',
+																		_0: 'fill',
+																		_1: {
+																			ctor: '::',
+																			_0: 'stroke',
+																			_1: {
+																				ctor: '::',
+																				_0: 'both',
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	})),
+															_1: {ctor: '[]'}
+														})),
+												_1: {ctor: '[]'}
+											}
+										},
+										_p1))))))));
+	};
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(200),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(200),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$padding(
+						_user$project$Vega$PSize(5)),
+					_1: {
+						ctor: '::',
+						_0: si(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: mk(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$MarkTests$sourceExample = _user$project$MarkTests$rectTest;
+var _user$project$MarkTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$MarkTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$MarkTests$pathTest = function () {
+	var mk = function (_p2) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -12828,9 +13224,9 @@ var _user$project$MarkTests$pathTest = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p0));
+				_p2));
 	};
-	var si = function (_p1) {
+	var si = function (_p3) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -12965,7 +13361,7 @@ var _user$project$MarkTests$pathTest = function () {
 										_1: {ctor: '[]'}
 									}
 								},
-								_p1))))));
+								_p3))))));
 	};
 	return _user$project$Vega$toVega(
 		{
@@ -12993,38 +13389,8 @@ var _user$project$MarkTests$pathTest = function () {
 			}
 		});
 }();
-var _user$project$MarkTests$sourceExample = _user$project$MarkTests$pathTest;
-var _user$project$MarkTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$MarkTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$MarkTests$lineTest = function () {
-	var mk = function (_p2) {
+	var mk = function (_p4) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -13172,9 +13538,9 @@ var _user$project$MarkTests$lineTest = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p2));
+				_p4));
 	};
-	var sc = function (_p3) {
+	var sc = function (_p5) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -13243,9 +13609,9 @@ var _user$project$MarkTests$lineTest = function () {
 							}
 						}
 					},
-					_p3)));
+					_p5)));
 	};
-	var table = function (_p4) {
+	var table = function (_p6) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'table',
@@ -13308,7 +13674,7 @@ var _user$project$MarkTests$lineTest = function () {
 								}
 							}
 						}),
-					_p4)));
+					_p6)));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -13321,22 +13687,22 @@ var _user$project$MarkTests$lineTest = function () {
 		return _user$project$Vega$DataValues(
 			A2(
 				_elm_lang$core$List$map,
-				function (_p5) {
-					var _p6 = _p5;
+				function (_p7) {
+					var _p8 = _p7;
 					return _user$project$Vega$Numbers(
 						{
 							ctor: '::',
-							_0: _p6._0,
+							_0: _p8._0,
 							_1: {
 								ctor: '::',
-								_0: _p6._1,
+								_0: _p8._1,
 								_1: {ctor: '[]'}
 							}
 						});
 				},
 				pairs));
 	};
-	var si = function (_p7) {
+	var si = function (_p9) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -13557,7 +13923,7 @@ var _user$project$MarkTests$lineTest = function () {
 											_1: {ctor: '[]'}
 										}
 									},
-									_p7)))))));
+									_p9)))))));
 	};
 	return _user$project$Vega$toVega(
 		{
@@ -13595,7 +13961,7 @@ var _user$project$MarkTests$lineTest = function () {
 		});
 }();
 var _user$project$MarkTests$imageTest = function () {
-	var mk = function (_p8) {
+	var mk = function (_p10) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -13718,9 +14084,9 @@ var _user$project$MarkTests$imageTest = function () {
 						}),
 					_1: {ctor: '[]'}
 				},
-				_p8));
+				_p10));
 	};
-	var si = function (_p9) {
+	var si = function (_p11) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -13911,7 +14277,7 @@ var _user$project$MarkTests$imageTest = function () {
 												_1: {ctor: '[]'}
 											}
 										},
-										_p9))))))));
+										_p11))))))));
 	};
 	return _user$project$Vega$toVega(
 		{
@@ -13940,7 +14306,7 @@ var _user$project$MarkTests$imageTest = function () {
 		});
 }();
 var _user$project$MarkTests$areaTest = function () {
-	var mk = function (_p10) {
+	var mk = function (_p12) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -14112,9 +14478,9 @@ var _user$project$MarkTests$areaTest = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p10));
+				_p12));
 	};
-	var si = function (_p11) {
+	var si = function (_p13) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -14303,9 +14669,9 @@ var _user$project$MarkTests$areaTest = function () {
 											_1: {ctor: '[]'}
 										}
 									},
-									_p11)))))));
+									_p13)))))));
 	};
-	var sc = function (_p12) {
+	var sc = function (_p14) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -14374,9 +14740,9 @@ var _user$project$MarkTests$areaTest = function () {
 							}
 						}
 					},
-					_p12)));
+					_p14)));
 	};
-	var table = function (_p13) {
+	var table = function (_p15) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'table',
@@ -14439,7 +14805,7 @@ var _user$project$MarkTests$areaTest = function () {
 								}
 							}
 						}),
-					_p13)));
+					_p15)));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -14484,7 +14850,7 @@ var _user$project$MarkTests$areaTest = function () {
 		});
 }();
 var _user$project$MarkTests$arcTest = function () {
-	var mk = function (_p14) {
+	var mk = function (_p16) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -14717,9 +15083,9 @@ var _user$project$MarkTests$arcTest = function () {
 							}),
 						_1: {ctor: '[]'}
 					},
-					_p14)));
+					_p16)));
 	};
-	var si = function (_p15) {
+	var si = function (_p17) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -14949,7 +15315,7 @@ var _user$project$MarkTests$arcTest = function () {
 															_user$project$Vega$Number(100)),
 														_1: {ctor: '[]'}
 													},
-													_p15)))))))))));
+													_p17)))))))))));
 	};
 	return _user$project$Vega$toVega(
 		{
@@ -14993,7 +15359,11 @@ var _user$project$MarkTests$mySpecs = _user$project$Vega$combineSpecs(
 					_1: {
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: 'pathTest', _1: _user$project$MarkTests$pathTest},
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'rectTest', _1: _user$project$MarkTests$rectTest},
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
@@ -15013,7 +15383,7 @@ var _user$project$MarkTests$main = _elm_lang$html$Html$program(
 		},
 		view: _user$project$MarkTests$view,
 		update: F2(
-			function (_p16, model) {
+			function (_p18, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
