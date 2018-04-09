@@ -357,15 +357,15 @@ stackExample =
             signals
                 << signal "offset"
                     [ SiValue (Str "zero")
-                    , SiBind (ISelect [ InOptions [ "zero", "center", "normalize" ] ])
+                    , SiBind (ISelect [ InOptions (Strings [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
                     [ SiValue Null
-                    , SiBind (IRadio [ InOptions [ "null", "value" ] ])
+                    , SiBind (IRadio [ InOptions (Strings [ "null", "value" ]) ])
                     ]
                 << signal "sortOrder"
                     [ SiValue (Str "ascending")
-                    , SiBind (IRadio [ InOptions [ "ascending", "descending" ] ])
+                    , SiBind (IRadio [ InOptions (Strings [ "ascending", "descending" ]) ])
                     ]
                 << signal "add"
                     [ SiValue Empty

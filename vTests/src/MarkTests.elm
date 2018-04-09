@@ -19,7 +19,7 @@ arcTest =
                 << signal "outerRadius" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
                 << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
                 << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions [ "fill", "stroke", "both" ] ]) ]
+                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
                 << signal "x" [ SiValue (Number 100) ]
                 << signal "y" [ SiValue (Number 100) ]
 
@@ -89,12 +89,12 @@ areaTest =
                 << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
                     [ SiValue (markInterpolationLabel Linear |> Str)
-                    , SiBind (ISelect [ InOptions [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ] ])
+                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
                 << signal "y2" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 20, InStep 1 ]) ]
                 << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions [ "fill", "stroke", "both" ] ]) ]
+                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -132,8 +132,8 @@ imageTest =
                 << signal "w" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
                 << signal "h" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
                 << signal "aspect" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
-                << signal "align" [ SiValue (Str "left"), SiBind (ISelect [ InOptions [ "left", "center", "right" ] ]) ]
-                << signal "baseline" [ SiValue (Str "top"), SiBind (ISelect [ InOptions [ "top", "middle", "bottom" ] ]) ]
+                << signal "align" [ SiValue (Str "left"), SiBind (ISelect [ InOptions (Strings [ "left", "center", "right" ]) ]) ]
+                << signal "baseline" [ SiValue (Str "top"), SiBind (ISelect [ InOptions (Strings [ "top", "middle", "bottom" ]) ]) ]
 
         mk =
             marks
@@ -158,6 +158,70 @@ imageTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+lineTest : Spec
+lineTest =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (Numbers [ 28, 55, 42, 34, 36, 48 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        sc =
+            scales
+                << scale "xscale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "table", DField "u" ])
+                    , SRange (RDefault RWidth)
+                    , SZero False
+                    ]
+                << scale "yscale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "table", DField "v" ])
+                    , SRange (RDefault RHeight)
+                    , SZero True
+                    , SNice (IsNice True)
+                    ]
+
+        si =
+            signals
+                << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
+                << signal "interpolate"
+                    [ SiValue (markInterpolationLabel Linear |> Str)
+                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    ]
+                << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
+                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> Str), SiBind (ISelect [ InOptions (Strings [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeDash" [ SiValues (Numbers [ 1, 0 ]), SiBind (ISelect [ InOptions (DataValues [ Numbers [ 1, 0 ], Numbers [ 8, 8 ], Numbers [ 8, 4 ], Numbers [ 4, 4 ], Numbers [ 4, 2 ], Numbers [ 2, 1 ], Numbers [ 1, 1 ] ]) ]) ]
+
+        mk =
+            marks
+                << mark Line
+                    [ MFrom (SData "table")
+                    , MEncode
+                        [ Enter [ MStroke [ VString "#652c90" ] ]
+                        , Update
+                            [ MX [ VScale (FName "xscale"), VField (FName "u") ]
+                            , MY [ VScale (FName "yscale"), VField (FName "v") ]
+                            , MDefined [ VSignal (SExpr "defined || datum.u !== 3") ]
+                            , MInterpolate [ VSignal (SName "interpolate") ]
+                            , MTension [ VSignal (SName "tension") ]
+                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            , MStrokeDash [ VSignal (SName "strokeDash") ]
+                            , MStrokeCap [ VSignal (SName "strokeCap") ]
+                            , MOpacity [ VNumber 1 ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 400, height 200, padding (PSize 5), ds, sc [], si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     imageTest
@@ -173,6 +237,7 @@ mySpecs =
         [ ( "arcTest", arcTest )
         , ( "areaTest", areaTest )
         , ( "imageTest", imageTest )
+        , ( "lineTest", lineTest )
         ]
 
 

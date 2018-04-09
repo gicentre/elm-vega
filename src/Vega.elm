@@ -469,6 +469,7 @@ type DataValues
     | DateTimes (List String)
     | Numbers (List Float)
     | Strings (List String)
+    | DataValues (List DataValues)
 
 
 {-| Indicates the charactersitcs of an encoding. For further
@@ -569,7 +570,7 @@ outside the visualization container.
 type InputProperty
     = Debounce Float
     | Element String
-    | InOptions (List String)
+    | InOptions DataValues
     | InMin Float
     | InMax Float
     | InName String
@@ -933,6 +934,7 @@ type SignalProperty
       -- TODO: SiUpdate Expression
     | SiReact Bool
     | SiValue DataValue
+    | SiValues DataValues
 
 
 {-| Allow type of sorting to be customised. For details see the
@@ -1375,6 +1377,9 @@ dataColumn colName data =
         Booleans col ->
             (::) (List.map (\b -> ( colName, JE.bool b )) col)
 
+        DataValues col ->
+            (::) (List.map (\dv -> ( colName, dataValues dv )) col)
+
 
 {-| Declare a data table from a provided list of column values. Each column contains
 values of the same type, but columns each with a different type are permitted.
@@ -1686,7 +1691,7 @@ sigWidth =
 stroke cap type. This can be used instead of specifying an stroke cap type
 as a literal string to avoid problems of mistyping its name.
 
-TODO: XXX Example
+    signal "strokeCap" [ SiValue (strokeCapLabel CRound |> Str)]
 
 -}
 strokeCapLabel : StrokeCap -> String
@@ -2040,6 +2045,25 @@ dataValue val =
             JE.null
 
 
+dataValues : DataValues -> Spec
+dataValues vals =
+    case vals of
+        Booleans bs ->
+            JE.list (List.map JE.bool bs)
+
+        DateTimes dts ->
+            JE.list (List.map JE.string dts)
+
+        Strings ss ->
+            JE.list (List.map JE.string ss)
+
+        Numbers xs ->
+            JE.list (List.map JE.float xs)
+
+        DataValues dvs ->
+            JE.list (List.map dataValues dvs)
+
+
 encodingProperty : EncodingProperty -> LabelledSpec
 encodingProperty ep =
     case ep of
@@ -2225,7 +2249,7 @@ inputProperty prop =
             ( "name", JE.string s )
 
         InOptions opts ->
-            ( "options", JE.list (List.map JE.string opts) )
+            ( "options", dataValues opts )
 
         InPlaceholder el ->
             ( "placeholder", JE.string el )
@@ -2866,6 +2890,9 @@ signalProperty sigProp =
 
         SiValue v ->
             ( "value", dataValue v )
+
+        SiValues vs ->
+            ( "value", dataValues vs )
 
 
 signalReferenceProperty : SignalReference -> LabelledSpec
