@@ -7,6 +7,11 @@ import Platform
 import Vega exposing (..)
 
 
+toValues : List ( Float, Float ) -> DataValues
+toValues pairs =
+    pairs |> List.map (\( a, b ) -> Numbers [ a, b ]) |> DataValues
+
+
 arcTest : Spec
 arcTest =
     let
@@ -161,9 +166,6 @@ imageTest =
 lineTest : Spec
 lineTest =
     let
-        toValues pairs =
-            pairs |> List.map (\( a, b ) -> Numbers [ a, b ]) |> DataValues
-
         table =
             dataFromColumns "table" []
                 << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
@@ -295,6 +297,42 @@ rectTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+ruleTest : Spec
+ruleTest =
+    let
+        si =
+            signals
+                << signal "x" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "x2" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y2" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> Str), SiBind (ISelect [ InOptions (Strings [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeDash" [ SiValues (Numbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValues [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
+
+        mk =
+            marks
+                << mark Rule
+                    [ MEncode
+                        [ Enter [ MStroke [ VString "#652c90" ] ]
+                        , Update
+                            [ MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MX2 [ VSignal (SName "x2") ]
+                            , MY2 [ VSignal (SName "y2") ]
+                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            , MStrokeDash [ VSignal (SName "strokeDash") ]
+                            , MStrokeCap [ VSignal (SName "strokeCap") ]
+                            , MOpacity [ VNumber 1 ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     rectTest
@@ -313,6 +351,7 @@ mySpecs =
         , ( "lineTest", lineTest )
         , ( "pathTest", pathTest )
         , ( "rectTest", rectTest )
+        , ( "ruleTest", ruleTest )
         ]
 
 
