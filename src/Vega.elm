@@ -6,6 +6,7 @@ module Vega
         , CInterpolate(..)
         , ColorValue(..)
         , Comparator(..)
+        , Cursor(..)
         , DataColumn
         , DataReference(..)
         , DataRow
@@ -20,8 +21,10 @@ module Vega
         , Field(..)
         , FieldValue(..)
         , Format(..)
+        , HAlign(..)
         , InputProperty(..)
         , Mark(..)
+        , MarkOrientation(..)
         , MarkProperty(..)
         , Operation(..)
         , Order(..)
@@ -45,15 +48,21 @@ module Vega
         , Spec
         , StackOffset(..)
         , StackProperty(..)
+        , StrokeCap(..)
+        , StrokeJoin(..)
+        , Symbol(..)
+        , TextDirection(..)
         , TimeUnit(..)
         , TopMarkProperty(..)
         , Transform(..)
         , TriggerProperty(..)
+        , VAlign(..)
         , VProperty
         , Value(..)
         , autosize
         , axes
         , axis
+        , combineSpecs
         , dataColumn
         , dataFromColumns
         , dataFromRows
@@ -61,6 +70,7 @@ module Vega
         , dataSource
         , height
         , mark
+        , markInterpolationSpec
         , marks
         , on
         , padding
@@ -93,6 +103,7 @@ testing purposes only.
 @docs toVega
 @docs VProperty
 @docs Spec
+@docs combineSpecs
 
 
 # Creating the Data Specification
@@ -142,10 +153,19 @@ Functions and types for declaring the input data to the visualization.
 
 @docs marks
 @docs mark
+@docs markInterpolationSpec
 @docs Mark
 @docs TopMarkProperty
 @docs MarkProperty
 @docs EncodingProperty
+@docs MarkOrientation
+@docs Cursor
+@docs HAlign
+@docs VAlign
+@docs Symbol
+@docs StrokeCap
+@docs StrokeJoin
+@docs TextDirection
 
 
 ## Signals
@@ -323,6 +343,48 @@ type Comparator
     | CoOrder (List Order)
 
 
+{-| Represents the type of cursor to display. For an explanation of each type,
+see the [CSS documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
+-}
+type Cursor
+    = CAuto
+    | CDefault
+    | CNone
+    | CContextMenu
+    | CHelp
+    | CPointer
+    | CProgress
+    | CWait
+    | CCell
+    | CCrosshair
+    | CText
+    | CVerticalText
+    | CAlias
+    | CCopy
+    | CMove
+    | CNoDrop
+    | CNotAllowed
+    | CAllScroll
+    | CColResize
+    | CRowResize
+    | CNResize
+    | CEResize
+    | CSResize
+    | CWResize
+    | CNEResize
+    | CNWResize
+    | CSEResize
+    | CSWResize
+    | CEWResize
+    | CNSResize
+    | CNESWResize
+    | CNWSEResize
+    | CZoomIn
+    | CZoomOut
+    | CGrab
+    | CGrabbing
+
+
 {-| Represents a single column of data. Used when generating inline data with
 `dataColumn`.
 -}
@@ -468,6 +530,14 @@ type Format
     | Parse (List ( String, DataType ))
 
 
+{-| Indicates the horizontal alignment of some text such as on an axis or legend.
+-}
+type HAlign
+    = AlignCenter
+    | AlignLeft
+    | AlignRight
+
+
 {-| GUI Input properties. The type of relevant proerty will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
 max and step values; InSelect (selector) has a list of selection label options.
@@ -507,37 +577,118 @@ type Mark
     | Trail
 
 
-{-| Indicates an individual property of a mark used when encoding. For further
-details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Indicates mark interpolation style.
+-}
+type MarkInterpolation
+    = Basis
+    | Cardinal
+    | CatmullRom
+    | Linear
+    | Monotone
+    | Natural
+    | Stepwise
+    | StepAfter
+    | StepBefore
+
+
+{-| Indicates desired orientation of a mark (e.g. horizontally or vertically
+oriented bars.)
+-}
+type MarkOrientation
+    = Horizontal
+    | Vertical
+
+
+{-| Indicates an individual property of a mark when encoding. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+For details of properties associated with specific mark types, see the Vega documentation
+for [arcs](https://vega.github.io/vega/docs/marks/arc/),
+[areas](https://vega.github.io/vega/docs/marks/area/),
+[groups](https://vega.github.io/vega/docs/marks/group/),
+[images](https://vega.github.io/vega/docs/marks/image/),
+[lines](https://vega.github.io/vega/docs/marks/line/),
+[paths](https://vega.github.io/vega/docs/marks/path/),
+[rects](https://vega.github.io/vega/docs/marks/rect/),
+[rules](https://vega.github.io/vega/docs/marks/rule/),
+[shapes](https://vega.github.io/vega/docs/marks/shape/),
+[symbols](https://vega.github.io/vega/docs/marks/symbol/),
+[text](https://vega.github.io/vega/docs/marks/text/) and
+[trails](https://vega.github.io/vega/docs/marks/trail/).
+
 -}
 type
     MarkProperty
-    -- TODO: The commented out props below are from https://vega.github.io/vega/docs/marks/group; should they be combined with more general properties
+    -- TODO:  Currently, most properties use the general List Value to define property values.
+    -- This gives us flexiblity to provide values through a variety of means such as signals,
+    -- transforms etc. The disadvantage is that it allows illegal value types to be provided
+    -- (e.g. an array of floats when a String is required).
+    -- Should we restrict the different Mark Properties to their relevant options?
+    -- If so, how best to do this while mimimising the complexity of the API?
     = MX (List Value)
-    | MY (List Value)
     | MX2 (List Value)
-    | MY2 (List Value)
-      -- TODO: | MXC (List Value)
+    | MXC (List Value)
     | MWidth (List Value)
+    | MY (List Value)
+    | MY2 (List Value)
+    | MYC (List Value)
     | MHeight (List Value)
-      -- TODO: | MOpacity (List Value)
+    | MOpacity (List Value)
     | MFill (List Value)
     | MFillOpacity (List Value)
     | MStroke (List Value)
-      -- TODO: | MStrokeOpacity (List Value)
+    | MStrokeOpacity (List Value)
     | MStrokeWidth (List Value)
-      -- TODO: | MStrokeCap (List Value)
-      -- TODO: | MStrokeDash (List Value)
-      -- TODO: | MStrokeDashOffset (List Value)
-      -- TODO: | MStrokeJoin (List Value)
-      -- TODO: | MStrokeMiterLimit (List Value)
-      -- TODO: | MCursor (List Value)
-      -- TODO: | MHRef (List Value)
-      -- TODO: | MTooltip (List Value)
-    | MText (List Value)
+    | MStrokeCap StrokeCap -- TODO: Would the more flexible but  error-prone List Value be better?
+    | MStrokeDash (List Value)
+    | MStrokeDashOffset (List Value)
+    | MStrokeJoin StrokeJoin -- TODO: Would the more flexible but  error-prone List Value be better?
+    | MStrokeMiterLimit (List Value)
+    | MCursor Cursor -- TODO: Would the more flexible but error-prone List Value be better?
+    | MHRef String -- TODO: Would the more flexible but error-prone List Value be better?
+    | MTooltip (List Value)
+    | MZIndex (List Value)
+      -- Properties shared by a subset of marks
+    | MAlign HAlign
+    | MBaseline VAlign
+    | MCornerRadius (List Value)
+    | MInterpolate (List Value)
+    | MTension (List Value)
+    | MDefined (List Value)
     | MSize (List Value)
-    | MAlign (List Value)
-    | MBaseline (List Value)
+      -- Arc mark specific:
+    | MStartAngle (List Value)
+    | MEndAngle (List Value)
+    | MPadAngle (List Value)
+    | MInnerRadius (List Value)
+    | MOuterRadius (List Value)
+      -- Area mark specific:
+    | MOrient MarkOrientation
+      -- Group mark specific:
+    | MGroupClip Bool
+      -- Image mark specific:
+    | MUrl (List Value)
+    | MAspect (List Value)
+      -- Path mark specific:
+    | MPath String
+      -- Shape mark specific:
+    | MShape (List Value)
+      -- Symbol mark specific:
+    | MSymbol Symbol
+      -- Text mark specific:
+    | MAngle (List Value)
+    | MDir TextDirection
+    | MdX (List Value)
+    | MdY (List Value)
+    | MEllipsis (List Value)
+    | MFont (List Value)
+    | MFontSize (List Value)
+    | MFontWeight (List Value)
+    | MFontStyle (List Value)
+    | MLimit (List Value)
+    | MRadius (List Value)
+    | MText (List Value)
+    | MTheta (List Value)
 
 
 {-| Type of aggregation operation. See the
@@ -822,6 +973,43 @@ type StackProperty
     | StAs String String
 
 
+{-| Type of stroke cap.
+-}
+type StrokeCap
+    = CButt
+    | CRound
+    | CSquare
+
+
+{-| Type of stroke join.
+-}
+type StrokeJoin
+    = JMiter
+    | JRound
+    | JBevel
+
+
+{-| Identifies the type of symbol. The `Path` symbol is used to define custom shapes
+as an SVG path description.
+-}
+type Symbol
+    = SymCircle
+    | SymSquare
+    | Cross
+    | Diamond
+    | TriangleUp
+    | TriangleDown
+    | SymPath String
+
+
+{-| Direction text is rendered. This determines which end of a text string is
+truncated if it cannot be displated within a restricted space.
+-}
+type TextDirection
+    = LeftToRight
+    | RightToLeft
+
+
 {-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative)
 for further details.
@@ -932,6 +1120,14 @@ type TriggerProperty
     | TrModifyValues Expression Expression
 
 
+{-| Indicates the vertical alignment of some text that may be attached to a mark.
+-}
+type VAlign
+    = AlignTop
+    | AlignMiddle
+    | AlignBottom
+
+
 {-| Represents a value such as a number or reference to a value such as a field label
 or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
@@ -947,6 +1143,7 @@ type Value
     | VOffset Value
     | VRound Bool
     | VNumber Float
+    | VNumbers (List Float)
     | VString String
     | VBool Bool
     | VNull
@@ -1009,6 +1206,22 @@ axis scName side aProps =
         ((AxScale scName :: AxSide side :: aProps |> List.map axisProperty)
             |> JE.object
         )
+
+
+{-| Combines a list of labelled specifications into a single specification that
+may be passed to JavaScript for rendering. This is useful when you wish to create
+a single page with multiple visulizualizations.
+
+    combineSpecs
+        [ ( "vis1", myFirstVis )
+        , ( "vis2", mySecondVis )
+        , ( "vis3", myOtherVis )
+        ]
+
+-}
+combineSpecs : List LabelledSpec -> Spec
+combineSpecs specs =
+    JE.object specs
 
 
 {-| Create a column of data. A column has a name and a list of values. The final
@@ -1153,6 +1366,41 @@ mark mark mProps =
 marks : List Spec -> ( VProperty, Spec )
 marks axs =
     ( VMarks, JE.list axs )
+
+
+{-| A spec representing a given mark interpolation type. This can be used when
+specifying an interpolation type as a `Value` to avoid problems of mistyping the
+interpolation type.
+-}
+markInterpolationSpec : MarkInterpolation -> Spec
+markInterpolationSpec interp =
+    case interp of
+        Basis ->
+            JE.string "basis"
+
+        Cardinal ->
+            JE.string "cardinal"
+
+        CatmullRom ->
+            JE.string "catmull-rom"
+
+        Linear ->
+            JE.string "linear"
+
+        Monotone ->
+            JE.string "monotone"
+
+        Natural ->
+            JE.string "natural"
+
+        Stepwise ->
+            JE.string "step"
+
+        StepAfter ->
+            JE.string "step-after"
+
+        StepBefore ->
+            JE.string "step-before"
 
 
 {-| Adds list of triggers to the given data table or mark.
@@ -1471,6 +1719,118 @@ comparatorProperty comp =
             ( "order", JE.list (List.map orderSpec os) )
 
 
+cursorLabel : Cursor -> String
+cursorLabel cur =
+    case cur of
+        CAuto ->
+            "auto"
+
+        CDefault ->
+            "default"
+
+        CNone ->
+            "none"
+
+        CContextMenu ->
+            "context-menu"
+
+        CHelp ->
+            "help"
+
+        CPointer ->
+            "pointer"
+
+        CProgress ->
+            "progress"
+
+        CWait ->
+            "wait"
+
+        CCell ->
+            "cell"
+
+        CCrosshair ->
+            "crosshair"
+
+        CText ->
+            "text"
+
+        CVerticalText ->
+            "vertical-text"
+
+        CAlias ->
+            "alias"
+
+        CCopy ->
+            "copy"
+
+        CMove ->
+            "move"
+
+        CNoDrop ->
+            "no-drop"
+
+        CNotAllowed ->
+            "not-allowed"
+
+        CAllScroll ->
+            "all-scroll"
+
+        CColResize ->
+            "col-resize"
+
+        CRowResize ->
+            "row-resize"
+
+        CNResize ->
+            "n-resize"
+
+        CEResize ->
+            "e-resize"
+
+        CSResize ->
+            "s-resize"
+
+        CWResize ->
+            "w-resize"
+
+        CNEResize ->
+            "ne-resize"
+
+        CNWResize ->
+            "nw-resize"
+
+        CSEResize ->
+            "se-resize"
+
+        CSWResize ->
+            "sw-resize"
+
+        CEWResize ->
+            "ew-resize"
+
+        CNSResize ->
+            "ns-resize"
+
+        CNESWResize ->
+            "nesw-resize"
+
+        CNWSEResize ->
+            "nwse-resize"
+
+        CZoomIn ->
+            "zoom-in"
+
+        CZoomOut ->
+            "zoom-out"
+
+        CGrab ->
+            "grab"
+
+        CGrabbing ->
+            "grabbing"
+
+
 dataRefProperty : DataReference -> LabelledSpec
 dataRefProperty dataRef =
     case dataRef of
@@ -1510,6 +1870,16 @@ dataValue val =
 
         Null ->
             JE.null
+
+
+dirLabel : TextDirection -> String
+dirLabel dir =
+    case dir of
+        LeftToRight ->
+            "ltr"
+
+        RightToLeft ->
+            "rtl"
 
 
 encodingProperty : EncodingProperty -> LabelledSpec
@@ -1650,6 +2020,19 @@ formatProperty fmt =
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
 
 
+hAlignLabel : HAlign -> String
+hAlignLabel align =
+    case align of
+        AlignLeft ->
+            "left"
+
+        AlignCenter ->
+            "center"
+
+        AlignRight ->
+            "right"
+
+
 interpolateSpec : CInterpolate -> Spec
 interpolateSpec iType =
     case iType of
@@ -1746,20 +2129,18 @@ markLabel m =
             "trail"
 
 
+markOrientationLabel : MarkOrientation -> String
+markOrientationLabel orient =
+    case orient of
+        Horizontal ->
+            "horizontal"
+
+        Vertical ->
+            "vertical"
+
+
 markProperty : MarkProperty -> LabelledSpec
 markProperty mProp =
-    let
-        valRef vs =
-            case vs of
-                [ VIfElse expr ifs elses ] ->
-                    JE.list
-                        [ JE.object (( "test", JE.string expr ) :: List.map valueProperty ifs)
-                        , JE.object (List.map valueProperty elses)
-                        ]
-
-                _ ->
-                    JE.object (List.map valueProperty vs)
-    in
     case mProp of
         MX vals ->
             ( "x", valRef vals )
@@ -1773,11 +2154,20 @@ markProperty mProp =
         MY2 vals ->
             ( "y2", valRef vals )
 
+        MXC vals ->
+            ( "xc", valRef vals )
+
+        MYC vals ->
+            ( "xc", valRef vals )
+
         MWidth vals ->
             ( "width", valRef vals )
 
         MHeight vals ->
             ( "height", valRef vals )
+
+        MOpacity vals ->
+            ( "opacity", valRef vals )
 
         MFill vals ->
             ( "fill", valRef vals )
@@ -1788,20 +2178,142 @@ markProperty mProp =
         MStroke vals ->
             ( "stroke", valRef vals )
 
+        MStrokeOpacity vals ->
+            ( "strokeOpacity", valRef vals )
+
         MStrokeWidth vals ->
             ( "strokeWidth", valRef vals )
 
+        MStrokeCap cap ->
+            ( "strokeCap", JE.string (strokeCapLabel cap) )
+
+        MStrokeDash vals ->
+            ( "strokeDash", valRef vals )
+
+        MStrokeDashOffset vals ->
+            ( "strokeDashOffset", valRef vals )
+
+        MStrokeJoin join ->
+            ( "strokeJoin", JE.string (strokeJoinLabel join) )
+
+        MStrokeMiterLimit vals ->
+            ( "strokeMiterLimit", valRef vals )
+
+        MCursor cursor ->
+            ( "cursor", JE.string (cursorLabel cursor) )
+
+        MHRef url ->
+            ( "href", JE.string url )
+
+        MTooltip vals ->
+            ( "tooltip", valRef vals )
+
+        MZIndex vals ->
+            ( "zindex", valRef vals )
+
+        -- Arc Mark specific:
+        MStartAngle vals ->
+            ( "startAngle", valRef vals )
+
+        MEndAngle vals ->
+            ( "endAngle", valRef vals )
+
+        MPadAngle vals ->
+            ( "padAngle", valRef vals )
+
+        MInnerRadius vals ->
+            ( "innerRadius", valRef vals )
+
+        MOuterRadius vals ->
+            ( "outerRadius", valRef vals )
+
+        MCornerRadius vals ->
+            ( "cornerRadius", valRef vals )
+
+        -- Area Mark specific:
+        MOrient orient ->
+            ( "orient", JE.string (markOrientationLabel orient) )
+
+        MInterpolate vals ->
+            ( "interpolate", valRef vals )
+
+        MTension vals ->
+            ( "tension", valRef vals )
+
+        MDefined vals ->
+            ( "defined", valRef vals )
+
+        -- Group Mark specific (MCornerRadius shared with other marks):
+        MGroupClip clip ->
+            ( "clip", JE.bool clip )
+
+        -- Image Mark specific:
+        MAspect vals ->
+            ( "aspect", valRef vals )
+
+        MUrl vals ->
+            ( "url", valRef vals )
+
+        -- Path Mark specific:
+        MPath path ->
+            ( "path", JE.string path )
+
+        -- Shape Mark specific:
+        MShape vals ->
+            ( "shape", valRef vals )
+
+        -- Symbol Mark specific:
         MSize vals ->
             ( "size", valRef vals )
+
+        MSymbol symbol ->
+            ( "shape", JE.string (symbolLabel symbol) )
+
+        -- Text Mark specific (MAlign shared with other marks):
+        MAlign align ->
+            ( "align", JE.string (hAlignLabel align) )
+
+        MAngle vals ->
+            ( "angle", valRef vals )
+
+        MBaseline align ->
+            ( "baseline", JE.string (vAlignLabel align) )
+
+        MDir dir ->
+            ( "dir", JE.string (dirLabel dir) )
+
+        MdX vals ->
+            ( "dx", valRef vals )
+
+        MdY vals ->
+            ( "dy", valRef vals )
+
+        MEllipsis vals ->
+            ( "ellipsis", valRef vals )
+
+        MFont vals ->
+            ( "font", valRef vals )
+
+        MFontSize vals ->
+            ( "fontSize", valRef vals )
+
+        MFontWeight vals ->
+            ( "fontWeight", valRef vals )
+
+        MFontStyle vals ->
+            ( "fontStyle", valRef vals )
+
+        MLimit vals ->
+            ( "limit", valRef vals )
+
+        MRadius vals ->
+            ( "radius", valRef vals )
 
         MText vals ->
             ( "text", valRef vals )
 
-        MAlign vals ->
-            ( "align", valRef vals )
-
-        MBaseline vals ->
-            ( "baseline", valRef vals )
+        MTheta vals ->
+            ( "theta", valRef vals )
 
 
 niceSpec : ScaleNice -> Spec
@@ -2293,6 +2805,57 @@ stackProperty sp =
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
 
 
+strokeCapLabel : StrokeCap -> String
+strokeCapLabel cap =
+    case cap of
+        CButt ->
+            "butt"
+
+        CRound ->
+            "round"
+
+        CSquare ->
+            "square"
+
+
+strokeJoinLabel : StrokeJoin -> String
+strokeJoinLabel join =
+    case join of
+        JMiter ->
+            "miter"
+
+        JRound ->
+            "round"
+
+        JBevel ->
+            "bevel"
+
+
+symbolLabel : Symbol -> String
+symbolLabel sym =
+    case sym of
+        SymCircle ->
+            "circle"
+
+        SymSquare ->
+            "square"
+
+        Cross ->
+            "cross"
+
+        Diamond ->
+            "diamond"
+
+        TriangleUp ->
+            "triangle-up"
+
+        TriangleDown ->
+            "triangle-down"
+
+        SymPath svgPath ->
+            svgPath
+
+
 timeUnitLabel : TimeUnit -> String
 timeUnitLabel tu =
     case tu of
@@ -2390,6 +2953,8 @@ topMarkProperty mProp =
         MName s ->
             ( "name", JE.string s )
 
+        -- TODO: MOn Trigger[]
+        -- TODO: MTransform Transform []
         MRole s ->
             ( "role", JE.string s )
 
@@ -2561,6 +3126,32 @@ triggerProperties trans =
             [ ( "modify", JE.string modExpr ), ( "values", JE.string valExpr ) ]
 
 
+vAlignLabel : VAlign -> String
+vAlignLabel align =
+    case align of
+        AlignTop ->
+            "top"
+
+        AlignMiddle ->
+            "middle"
+
+        AlignBottom ->
+            "bottom"
+
+
+valRef : List Value -> Spec
+valRef vs =
+    case vs of
+        [ VIfElse expr ifs elses ] ->
+            JE.list
+                [ JE.object (( "test", JE.string expr ) :: List.map valueProperty ifs)
+                , JE.object (List.map valueProperty elses)
+                ]
+
+        _ ->
+            JE.object (List.map valueProperty vs)
+
+
 valueProperty : Value -> LabelledSpec
 valueProperty val =
     let
@@ -2602,6 +3193,9 @@ valueProperty val =
 
         VNumber num ->
             ( "value", JE.float num )
+
+        VNumbers nums ->
+            ( "value", JE.list (List.map JE.float nums) )
 
         VString str ->
             ( "value", JE.string str )
@@ -2655,6 +3249,9 @@ valueSpec val =
 
         VNumber num ->
             JE.float num
+
+        VNumbers nums ->
+            JE.list (List.map JE.float nums)
 
         VString str ->
             JE.string str

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Vega Test Gallery</title>
+  <title>Vega Mark Tests</title>
   <meta charset="utf-8">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
@@ -12,29 +12,27 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
-  <script src="js/gallery.js"></script>
+  <script src="js/markTests.js"></script>
 </head>
 
 <body>
 
-  <h1>Vega Test Gallery</h1>
+  <h1>Vega Mark Tests</h1>
+
+
+
+  <h2>Arc</h2>
+  <div id="arcTest"></div>
+
+  <h2>Area</h2>
+  <div id="areaTest"></div>
+
 
   <h2>Source</h2>
   <div id="elmContainer"></div>
 
-  <h2>Bar Charts</h2>
-  <div id="barChart1"></div>
-  <div id="barChart2"></div>
-  <div id="barChart3"></div>
-
-  <h2>Transform Examples</h2>
-  <h3>Pack Transform</h2>
-  <div id="packExample"></div>
-  <h3>Stack Transform</h2>
-  <div id="stackExample"></div>
-
   <script>
-    Elm.Gallery.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
+    Elm.MarkTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
       for (let name of Object.keys(namedSpecs)) {
         vegaEmbed(`#${name}`, namedSpecs[name], {
           actions: false,

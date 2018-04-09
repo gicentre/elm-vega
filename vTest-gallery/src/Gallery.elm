@@ -23,6 +23,16 @@ barChart1 =
         ds =
             dataSource [ table [] ]
 
+        si =
+            signals
+                << signal "tooltip"
+                    [ SiValue Empty
+                    , SiOn
+                        [ [ EEvents "rect:mouseover", EUpdate "datum" ]
+                        , [ EEvents "rect:mouseout", EUpdate "" ]
+                        ]
+                    ]
+
         sc =
             scales
                 << scale "xscale"
@@ -43,23 +53,12 @@ barChart1 =
                 << axis "xscale" Bottom []
                 << axis "yscale" Left []
 
-        si =
-            signals
-                << signal "tooltip"
-                    [ SiValue Empty
-                    , SiOn
-                        [ [ EEvents "rect:mouseover", EUpdate "datum" ]
-                        , [ EEvents "rect:mouseout", EUpdate "" ]
-                        ]
-                    ]
-
         mk =
             marks
                 << mark Rect
                     [ MFrom (SData "table")
                     , MEncode
                         [ Enter
-                            -- TODO: Restrict the different Mark Properties to their relevant options?
                             [ MX [ VScale (FName "xscale"), VField (FName "category") ]
                             , MWidth [ VScale (FName "xscale"), VBand 1 ]
                             , MY [ VScale (FName "yscale"), VField (FName "amount") ]
@@ -72,8 +71,8 @@ barChart1 =
                 << mark Text
                     [ MEncode
                         [ Enter
-                            [ MAlign [ VString "center" ]
-                            , MBaseline [ VString "bottom" ]
+                            [ MAlign AlignCenter
+                            , MBaseline AlignBottom
                             , MFill [ VString "#333" ]
                             ]
                         , Update
@@ -92,28 +91,31 @@ barChart1 =
 barChart2 : Spec
 barChart2 =
     let
+        dv label num =
+            ( label, Number num )
+
         table =
             dataFromRows "table" []
-                << dataRow [ ( "x", Number 0 ), ( "y", Number 28 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 0 ), ( "y", Number 55 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 1 ), ( "y", Number 43 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 1 ), ( "y", Number 91 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 2 ), ( "y", Number 81 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 2 ), ( "y", Number 53 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 3 ), ( "y", Number 19 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 3 ), ( "y", Number 87 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 4 ), ( "y", Number 52 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 4 ), ( "y", Number 48 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 5 ), ( "y", Number 24 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 5 ), ( "y", Number 49 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 6 ), ( "y", Number 87 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 6 ), ( "y", Number 66 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 7 ), ( "y", Number 17 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 7 ), ( "y", Number 27 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 8 ), ( "y", Number 68 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 8 ), ( "y", Number 16 ), ( "c", Number 1 ) ]
-                << dataRow [ ( "x", Number 9 ), ( "y", Number 49 ), ( "c", Number 0 ) ]
-                << dataRow [ ( "x", Number 9 ), ( "y", Number 15 ), ( "c", Number 1 ) ]
+                << dataRow [ dv "x" 0, dv "y" 28, dv "c" 0 ]
+                << dataRow [ dv "x" 0, dv "y" 55, dv "c" 1 ]
+                << dataRow [ dv "x" 1, dv "y" 43, dv "c" 0 ]
+                << dataRow [ dv "x" 1, dv "y" 91, dv "c" 1 ]
+                << dataRow [ dv "x" 2, dv "y" 81, dv "c" 0 ]
+                << dataRow [ dv "x" 2, dv "y" 53, dv "c" 1 ]
+                << dataRow [ dv "x" 3, dv "y" 19, dv "c" 0 ]
+                << dataRow [ dv "x" 3, dv "y" 87, dv "c" 1 ]
+                << dataRow [ dv "x" 4, dv "y" 52, dv "c" 0 ]
+                << dataRow [ dv "x" 4, dv "y" 48, dv "c" 1 ]
+                << dataRow [ dv "x" 5, dv "y" 24, dv "c" 0 ]
+                << dataRow [ dv "x" 5, dv "y" 49, dv "c" 1 ]
+                << dataRow [ dv "x" 6, dv "y" 87, dv "c" 0 ]
+                << dataRow [ dv "x" 6, dv "y" 66, dv "c" 1 ]
+                << dataRow [ dv "x" 7, dv "y" 17, dv "c" 0 ]
+                << dataRow [ dv "x" 7, dv "y" 27, dv "c" 1 ]
+                << dataRow [ dv "x" 8, dv "y" 68, dv "c" 0 ]
+                << dataRow [ dv "x" 8, dv "y" 16, dv "c" 1 ]
+                << dataRow [ dv "x" 9, dv "y" 49, dv "c" 0 ]
+                << dataRow [ dv "x" 9, dv "y" 15, dv "c" 1 ]
 
         ds =
             dataSource
@@ -423,13 +425,18 @@ stackExample =
         [ width 300, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+sourceExample : Spec
+sourceExample =
+    barChart3
+
+
 
 {- This list comprises the specifications to be provided to the Vega runtime. -}
 
 
 mySpecs : Spec
 mySpecs =
-    Json.Encode.object
+    combineSpecs
         [ ( "barChart1", barChart1 )
         , ( "barChart2", barChart2 )
         , ( "barChart3", barChart3 )
@@ -465,7 +472,7 @@ view spec =
     div []
         [ div [ id "specSource" ] []
         , pre []
-            [ Html.text (Json.Encode.encode 2 barChart3) ]
+            [ Html.text (Json.Encode.encode 2 sourceExample) ]
         ]
 
 
