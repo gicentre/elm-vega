@@ -88,7 +88,7 @@ areaTest =
             signals
                 << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    [ SiValue (markInterpolationValue Linear)
+                    [ SiValue (markInterpolationLabel Linear |> Str)
                     , SiBind (ISelect [ InOptions [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ] ])
                     ]
                 << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
@@ -122,9 +122,45 @@ areaTest =
         [ width 400, height 200, padding (PSize 5), ds, sc [], si [], mk [] ]
 
 
+imageTest : Spec
+imageTest =
+    let
+        si =
+            signals
+                << signal "x" [ SiValue (Number 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "w" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "h" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "aspect" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
+                << signal "align" [ SiValue (Str "left"), SiBind (ISelect [ InOptions [ "left", "center", "right" ] ]) ]
+                << signal "baseline" [ SiValue (Str "top"), SiBind (ISelect [ InOptions [ "top", "middle", "bottom" ] ]) ]
+
+        mk =
+            marks
+                << mark Image
+                    [ MEncode
+                        [ Enter [ MUrl [ VString "https://vega.github.io/images/idl-logo.png" ] ]
+                        , Update
+                            [ MOpacity [ VNumber 1 ]
+                            , MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MWidth [ VSignal (SName "w") ]
+                            , MHeight [ VSignal (SName "h") ]
+                            , MAspect [ VSignal (SName "aspect") ]
+                            , MAlign [ VSignal (SName "align") ]
+                            , MBaseline [ VSignal (SName "baseline") ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    areaTest
+    imageTest
 
 
 
@@ -136,6 +172,7 @@ mySpecs =
     combineSpecs
         [ ( "arcTest", arcTest )
         , ( "areaTest", areaTest )
+        , ( "imageTest", imageTest )
         ]
 
 

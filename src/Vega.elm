@@ -64,14 +64,18 @@ module Vega
         , axes
         , axis
         , combineSpecs
+        , cursorLabel
         , dataColumn
         , dataFromColumns
         , dataFromRows
         , dataRow
         , dataSource
+        , dirLabel
+        , hAlignLabel
         , height
         , mark
-        , markInterpolationValue
+        , markInterpolationLabel
+        , markOrientationLabel
         , marks
         , on
         , padding
@@ -82,9 +86,13 @@ module Vega
         , sigWidth
         , signal
         , signals
+        , strokeCapLabel
+        , strokeJoinLabel
+        , symbolLabel
         , toVega
         , transform
         , trigger
+        , vAlignLabel
         , width
         )
 
@@ -159,15 +167,23 @@ Functions and types for declaring the input data to the visualization.
 @docs MarkProperty
 @docs EncodingProperty
 @docs MarkInterpolation
-@docs markInterpolationValue
+@docs markInterpolationLabel
 @docs MarkOrientation
+@docs markOrientationLabel
 @docs Cursor
+@docs cursorLabel
 @docs HAlign
+@docs hAlignLabel
 @docs VAlign
+@docs vAlignLabel
 @docs Symbol
+@docs symbolLabel
 @docs StrokeCap
+@docs strokeCapLabel
 @docs StrokeJoin
+@docs strokeJoinLabel
 @docs TextDirection
+@docs dirLabel
 
 
 ## Signals
@@ -619,14 +635,7 @@ for [arcs](https://vega.github.io/vega/docs/marks/arc/),
 [trails](https://vega.github.io/vega/docs/marks/trail/).
 
 -}
-type
-    MarkProperty
-    -- TODO:  Currently, most properties use the general List Value to define property values.
-    -- This gives us flexiblity to provide values through a variety of means such as signals,
-    -- transforms etc. The disadvantage is that it allows illegal value types to be provided
-    -- (e.g. an array of floats when a String is required).
-    -- Should we restrict the different Mark Properties to their relevant options?
-    -- If so, how best to do this while mimimising the complexity of the API?
+type MarkProperty
     = MX (List Value)
     | MX2 (List Value)
     | MXC (List Value)
@@ -641,18 +650,18 @@ type
     | MStroke (List Value)
     | MStrokeOpacity (List Value)
     | MStrokeWidth (List Value)
-    | MStrokeCap StrokeCap -- TODO: Would the more flexible but  error-prone List Value be better?
+    | MStrokeCap (List Value)
     | MStrokeDash (List Value)
     | MStrokeDashOffset (List Value)
-    | MStrokeJoin StrokeJoin -- TODO: Would the more flexible but  error-prone List Value be better?
+    | MStrokeJoin StrokeJoin
     | MStrokeMiterLimit (List Value)
-    | MCursor Cursor -- TODO: Would the more flexible but error-prone List Value be better?
+    | MCursor (List Value)
     | MHRef String -- TODO: Would the more flexible but error-prone List Value be better?
     | MTooltip (List Value)
     | MZIndex (List Value)
       -- Properties shared by a subset of marks
-    | MAlign HAlign
-    | MBaseline VAlign
+    | MAlign (List Value)
+    | MBaseline (List Value)
     | MCornerRadius (List Value)
     | MInterpolate (List Value)
     | MTension (List Value)
@@ -665,21 +674,21 @@ type
     | MInnerRadius (List Value)
     | MOuterRadius (List Value)
       -- Area mark specific:
-    | MOrient MarkOrientation
+    | MOrient (List Value)
       -- Group mark specific:
-    | MGroupClip Bool
+    | MGroupClip Bool -- TODO: Would the more flexible but error-prone List Value be better?
       -- Image mark specific:
     | MUrl (List Value)
     | MAspect (List Value)
       -- Path mark specific:
-    | MPath String
+    | MPath String -- TODO: Would the more flexible but error-prone List Value be better?
       -- Shape mark specific:
     | MShape (List Value)
       -- Symbol mark specific:
-    | MSymbol Symbol
+    | MSymbol (List Value)
       -- Text mark specific:
     | MAngle (List Value)
-    | MDir TextDirection
+    | MDir (List Value)
     | MdX (List Value)
     | MdY (List Value)
     | MEllipsis (List Value)
@@ -1226,6 +1235,125 @@ combineSpecs specs =
     JE.object specs
 
 
+{-| A convenience function for generating a text string representing a given cursor
+type. This can be used instead of specifying an cursor type as a literal string
+to avoid problems of mistyping its name.
+
+    TODO: XXX Provide example
+
+-}
+cursorLabel : Cursor -> String
+cursorLabel cur =
+    case cur of
+        CAuto ->
+            "auto"
+
+        CDefault ->
+            "default"
+
+        CNone ->
+            "none"
+
+        CContextMenu ->
+            "context-menu"
+
+        CHelp ->
+            "help"
+
+        CPointer ->
+            "pointer"
+
+        CProgress ->
+            "progress"
+
+        CWait ->
+            "wait"
+
+        CCell ->
+            "cell"
+
+        CCrosshair ->
+            "crosshair"
+
+        CText ->
+            "text"
+
+        CVerticalText ->
+            "vertical-text"
+
+        CAlias ->
+            "alias"
+
+        CCopy ->
+            "copy"
+
+        CMove ->
+            "move"
+
+        CNoDrop ->
+            "no-drop"
+
+        CNotAllowed ->
+            "not-allowed"
+
+        CAllScroll ->
+            "all-scroll"
+
+        CColResize ->
+            "col-resize"
+
+        CRowResize ->
+            "row-resize"
+
+        CNResize ->
+            "n-resize"
+
+        CEResize ->
+            "e-resize"
+
+        CSResize ->
+            "s-resize"
+
+        CWResize ->
+            "w-resize"
+
+        CNEResize ->
+            "ne-resize"
+
+        CNWResize ->
+            "nw-resize"
+
+        CSEResize ->
+            "se-resize"
+
+        CSWResize ->
+            "sw-resize"
+
+        CEWResize ->
+            "ew-resize"
+
+        CNSResize ->
+            "ns-resize"
+
+        CNESWResize ->
+            "nesw-resize"
+
+        CNWSEResize ->
+            "nwse-resize"
+
+        CZoomIn ->
+            "zoom-in"
+
+        CZoomOut ->
+            "zoom-out"
+
+        CGrab ->
+            "grab"
+
+        CGrabbing ->
+            "grabbing"
+
+
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
@@ -1336,6 +1464,43 @@ dataSource dataTables =
     ( VData, JE.list (List.map JE.object dataTables) )
 
 
+{-| A convenience function for generating a text string representing a given text
+direction type. This can be used instead of specifying an direction type as a
+literal string to avoid problems of mistyping its name.
+
+    TODO: XXX Provide example
+
+-}
+dirLabel : TextDirection -> String
+dirLabel dir =
+    case dir of
+        LeftToRight ->
+            "ltr"
+
+        RightToLeft ->
+            "rtl"
+
+
+{-| A convenience function for generating a text string representing a horizontal
+alignment type. This can be used instead of specifying an alignment type as a
+literal string to avoid problems of mistyping its name.
+
+      MEncode [ Enter [ MAlign [hAlignLabel AlignCenter |> VString ] ] ]
+
+-}
+hAlignLabel : HAlign -> String
+hAlignLabel align =
+    case align of
+        AlignLeft ->
+            "left"
+
+        AlignCenter ->
+            "center"
+
+        AlignRight ->
+            "right"
+
+
 {-| Override the default width of the visualization. If not specified the width
 will be calculated based on the content of the visualization.
 
@@ -1370,43 +1535,60 @@ marks axs =
     ( VMarks, JE.list axs )
 
 
-{-| A convenience function for generating a data value representing a given mark
+{-| A convenience function for generating a text string representing a given mark
 interpolation type. This can be used instead of specifying an interpolation type
-as a `Str` to avoid problems of mistyping the interpolation name.
+as a literal string to avoid problems of mistyping the interpolation name.
 
     signals
-       << signal "interp" [ SiValue (markInterpolationSpec Linear) ]
+       << signal "interp" [ SiValue (markInterpolationLabel Linear |> Str) ]
 
 -}
-markInterpolationValue : MarkInterpolation -> DataValue
-markInterpolationValue interp =
+markInterpolationLabel : MarkInterpolation -> String
+markInterpolationLabel interp =
     case interp of
         Basis ->
-            Str "basis"
+            "basis"
 
         Cardinal ->
-            Str "cardinal"
+            "cardinal"
 
         CatmullRom ->
-            Str "catmull-rom"
+            "catmull-rom"
 
         Linear ->
-            Str "linear"
+            "linear"
 
         Monotone ->
-            Str "monotone"
+            "monotone"
 
         Natural ->
-            Str "natural"
+            "natural"
 
         Stepwise ->
-            Str "step"
+            "step"
 
         StepAfter ->
-            Str "step-after"
+            "step-after"
 
         StepBefore ->
-            Str "step-before"
+            "step-before"
+
+
+{-| A convenience function for generating a text string representing a given mark
+orientation type. This can be used instead of specifying an orientation type as
+a literal string to avoid problems of mistyping its name.
+
+    TODO: XXX Add example
+
+-}
+markOrientationLabel : MarkOrientation -> String
+markOrientationLabel orient =
+    case orient of
+        Horizontal ->
+            "horizontal"
+
+        Vertical ->
+            "vertical"
 
 
 {-| Adds list of triggers to the given data table or mark.
@@ -1500,6 +1682,78 @@ sigWidth =
     SigNumRef (SName "width")
 
 
+{-| A convenience function for generating a text string representing a given
+stroke cap type. This can be used instead of specifying an stroke cap type
+as a literal string to avoid problems of mistyping its name.
+
+TODO: XXX Example
+
+-}
+strokeCapLabel : StrokeCap -> String
+strokeCapLabel cap =
+    case cap of
+        CButt ->
+            "butt"
+
+        CRound ->
+            "round"
+
+        CSquare ->
+            "square"
+
+
+{-| A convenience function for generating a text string representing a given
+stroke join type. This can be used instead of specifying an stroke join type
+as a literal string to avoid problems of mistyping its name.
+
+TODO: XXX Example
+
+-}
+strokeJoinLabel : StrokeJoin -> String
+strokeJoinLabel join =
+    case join of
+        JMiter ->
+            "miter"
+
+        JRound ->
+            "round"
+
+        JBevel ->
+            "bevel"
+
+
+{-| A convenience function for generating a text string representing a given
+symbol type. This can be used instead of specifying an symbol type as a literal
+string to avoid problems of mistyping its name.
+
+    TODO: XXX Example
+
+-}
+symbolLabel : Symbol -> String
+symbolLabel sym =
+    case sym of
+        SymCircle ->
+            "circle"
+
+        SymSquare ->
+            "square"
+
+        Cross ->
+            "cross"
+
+        Diamond ->
+            "diamond"
+
+        TriangleUp ->
+            "triangle-up"
+
+        TriangleDown ->
+            "triangle-down"
+
+        SymPath svgPath ->
+            svgPath
+
+
 {-| Convert a list of Vega specifications into a single JSON object that may be
 passed to Vega for graphics generation.
 Currently this is a placeholder only and is not available for use.
@@ -1526,6 +1780,26 @@ a list of trigger actions.
 trigger : String -> List TriggerProperty -> Spec
 trigger trName trProps =
     JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
+
+
+{-| A convenience function for generating a text string representing a vertical
+alignment type. This can be used instead of specifying an alignment type as a
+literal string to avoid problems of mistyping its name.
+
+      MEncode [ Enter [MBaseline [ vAlignLabel AlignBottom |> VString ] ] ]
+
+-}
+vAlignLabel : VAlign -> String
+vAlignLabel align =
+    case align of
+        AlignTop ->
+            "top"
+
+        AlignMiddle ->
+            "middle"
+
+        AlignBottom ->
+            "bottom"
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -1725,118 +1999,6 @@ comparatorProperty comp =
             ( "order", JE.list (List.map orderSpec os) )
 
 
-cursorLabel : Cursor -> String
-cursorLabel cur =
-    case cur of
-        CAuto ->
-            "auto"
-
-        CDefault ->
-            "default"
-
-        CNone ->
-            "none"
-
-        CContextMenu ->
-            "context-menu"
-
-        CHelp ->
-            "help"
-
-        CPointer ->
-            "pointer"
-
-        CProgress ->
-            "progress"
-
-        CWait ->
-            "wait"
-
-        CCell ->
-            "cell"
-
-        CCrosshair ->
-            "crosshair"
-
-        CText ->
-            "text"
-
-        CVerticalText ->
-            "vertical-text"
-
-        CAlias ->
-            "alias"
-
-        CCopy ->
-            "copy"
-
-        CMove ->
-            "move"
-
-        CNoDrop ->
-            "no-drop"
-
-        CNotAllowed ->
-            "not-allowed"
-
-        CAllScroll ->
-            "all-scroll"
-
-        CColResize ->
-            "col-resize"
-
-        CRowResize ->
-            "row-resize"
-
-        CNResize ->
-            "n-resize"
-
-        CEResize ->
-            "e-resize"
-
-        CSResize ->
-            "s-resize"
-
-        CWResize ->
-            "w-resize"
-
-        CNEResize ->
-            "ne-resize"
-
-        CNWResize ->
-            "nw-resize"
-
-        CSEResize ->
-            "se-resize"
-
-        CSWResize ->
-            "sw-resize"
-
-        CEWResize ->
-            "ew-resize"
-
-        CNSResize ->
-            "ns-resize"
-
-        CNESWResize ->
-            "nesw-resize"
-
-        CNWSEResize ->
-            "nwse-resize"
-
-        CZoomIn ->
-            "zoom-in"
-
-        CZoomOut ->
-            "zoom-out"
-
-        CGrab ->
-            "grab"
-
-        CGrabbing ->
-            "grabbing"
-
-
 dataRefProperty : DataReference -> LabelledSpec
 dataRefProperty dataRef =
     case dataRef of
@@ -1876,16 +2038,6 @@ dataValue val =
 
         Null ->
             JE.null
-
-
-dirLabel : TextDirection -> String
-dirLabel dir =
-    case dir of
-        LeftToRight ->
-            "ltr"
-
-        RightToLeft ->
-            "rtl"
 
 
 encodingProperty : EncodingProperty -> LabelledSpec
@@ -2026,19 +2178,6 @@ formatProperty fmt =
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
 
 
-hAlignLabel : HAlign -> String
-hAlignLabel align =
-    case align of
-        AlignLeft ->
-            "left"
-
-        AlignCenter ->
-            "center"
-
-        AlignRight ->
-            "right"
-
-
 interpolateSpec : CInterpolate -> Spec
 interpolateSpec iType =
     case iType of
@@ -2135,16 +2274,6 @@ markLabel m =
             "trail"
 
 
-markOrientationLabel : MarkOrientation -> String
-markOrientationLabel orient =
-    case orient of
-        Horizontal ->
-            "horizontal"
-
-        Vertical ->
-            "vertical"
-
-
 markProperty : MarkProperty -> LabelledSpec
 markProperty mProp =
     case mProp of
@@ -2190,8 +2319,8 @@ markProperty mProp =
         MStrokeWidth vals ->
             ( "strokeWidth", valRef vals )
 
-        MStrokeCap cap ->
-            ( "strokeCap", JE.string (strokeCapLabel cap) )
+        MStrokeCap vals ->
+            ( "strokeCap", valRef vals )
 
         MStrokeDash vals ->
             ( "strokeDash", valRef vals )
@@ -2205,8 +2334,8 @@ markProperty mProp =
         MStrokeMiterLimit vals ->
             ( "strokeMiterLimit", valRef vals )
 
-        MCursor cursor ->
-            ( "cursor", JE.string (cursorLabel cursor) )
+        MCursor vals ->
+            ( "cursor", valRef vals )
 
         MHRef url ->
             ( "href", JE.string url )
@@ -2237,8 +2366,8 @@ markProperty mProp =
             ( "cornerRadius", valRef vals )
 
         -- Area Mark specific:
-        MOrient orient ->
-            ( "orient", JE.string (markOrientationLabel orient) )
+        MOrient vals ->
+            ( "orient", valRef vals )
 
         MInterpolate vals ->
             ( "interpolate", valRef vals )
@@ -2272,21 +2401,21 @@ markProperty mProp =
         MSize vals ->
             ( "size", valRef vals )
 
-        MSymbol symbol ->
-            ( "shape", JE.string (symbolLabel symbol) )
+        MSymbol vals ->
+            ( "shape", valRef vals )
 
         -- Text Mark specific (MAlign shared with other marks):
-        MAlign align ->
-            ( "align", JE.string (hAlignLabel align) )
+        MAlign vals ->
+            ( "align", valRef vals )
 
         MAngle vals ->
             ( "angle", valRef vals )
 
-        MBaseline align ->
-            ( "baseline", JE.string (vAlignLabel align) )
+        MBaseline vals ->
+            ( "baseline", valRef vals )
 
-        MDir dir ->
-            ( "dir", JE.string (dirLabel dir) )
+        MDir vals ->
+            ( "dir", valRef vals )
 
         MdX vals ->
             ( "dx", valRef vals )
@@ -2811,57 +2940,6 @@ stackProperty sp =
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
 
 
-strokeCapLabel : StrokeCap -> String
-strokeCapLabel cap =
-    case cap of
-        CButt ->
-            "butt"
-
-        CRound ->
-            "round"
-
-        CSquare ->
-            "square"
-
-
-strokeJoinLabel : StrokeJoin -> String
-strokeJoinLabel join =
-    case join of
-        JMiter ->
-            "miter"
-
-        JRound ->
-            "round"
-
-        JBevel ->
-            "bevel"
-
-
-symbolLabel : Symbol -> String
-symbolLabel sym =
-    case sym of
-        SymCircle ->
-            "circle"
-
-        SymSquare ->
-            "square"
-
-        Cross ->
-            "cross"
-
-        Diamond ->
-            "diamond"
-
-        TriangleUp ->
-            "triangle-up"
-
-        TriangleDown ->
-            "triangle-down"
-
-        SymPath svgPath ->
-            svgPath
-
-
 timeUnitLabel : TimeUnit -> String
 timeUnitLabel tu =
     case tu of
@@ -3130,19 +3208,6 @@ triggerProperties trans =
         -- Note the one-to-many relation between this trigger property and the labelled specs it generates.
         TrModifyValues modExpr valExpr ->
             [ ( "modify", JE.string modExpr ), ( "values", JE.string valExpr ) ]
-
-
-vAlignLabel : VAlign -> String
-vAlignLabel align =
-    case align of
-        AlignTop ->
-            "top"
-
-        AlignMiddle ->
-            "middle"
-
-        AlignBottom ->
-            "bottom"
 
 
 valRef : List Value -> Spec

@@ -71,8 +71,8 @@ barChart1 =
                 << mark Text
                     [ MEncode
                         [ Enter
-                            [ MAlign AlignCenter
-                            , MBaseline AlignBottom
+                            [ MAlign [ hAlignLabel AlignCenter |> VString ]
+                            , MBaseline [ vAlignLabel AlignBottom |> VString ]
                             , MFill [ VString "#333" ]
                             ]
                         , Update
