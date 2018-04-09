@@ -682,7 +682,7 @@ type MarkProperty
     | MUrl (List Value)
     | MAspect (List Value)
       -- Path mark specific:
-    | MPath String -- TODO: Would the more flexible but error-prone List Value be better?
+    | MPath (List Value)
       -- Shape mark specific:
     | MShape (List Value)
       -- Symbol mark specific:
@@ -2414,8 +2414,8 @@ markProperty mProp =
             ( "url", valRef vals )
 
         -- Path Mark specific:
-        MPath path ->
-            ( "path", JE.string path )
+        MPath vals ->
+            ( "path", valRef vals )
 
         -- Shape Mark specific:
         MShape vals ->
