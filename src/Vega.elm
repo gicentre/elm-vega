@@ -24,6 +24,7 @@ module Vega
         , HAlign(..)
         , InputProperty(..)
         , Mark(..)
+        , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
         , Operation(..)
@@ -70,7 +71,7 @@ module Vega
         , dataSource
         , height
         , mark
-        , markInterpolationSpec
+        , markInterpolationValue
         , marks
         , on
         , padding
@@ -153,11 +154,12 @@ Functions and types for declaring the input data to the visualization.
 
 @docs marks
 @docs mark
-@docs markInterpolationSpec
 @docs Mark
 @docs TopMarkProperty
 @docs MarkProperty
 @docs EncodingProperty
+@docs MarkInterpolation
+@docs markInterpolationValue
 @docs MarkOrientation
 @docs Cursor
 @docs HAlign
@@ -1368,39 +1370,43 @@ marks axs =
     ( VMarks, JE.list axs )
 
 
-{-| A spec representing a given mark interpolation type. This can be used when
-specifying an interpolation type as a `Value` to avoid problems of mistyping the
-interpolation type.
+{-| A convenience function for generating a data value representing a given mark
+interpolation type. This can be used instead of specifying an interpolation type
+as a `Str` to avoid problems of mistyping the interpolation name.
+
+    signals
+       << signal "interp" [ SiValue (markInterpolationSpec Linear) ]
+
 -}
-markInterpolationSpec : MarkInterpolation -> Spec
-markInterpolationSpec interp =
+markInterpolationValue : MarkInterpolation -> DataValue
+markInterpolationValue interp =
     case interp of
         Basis ->
-            JE.string "basis"
+            Str "basis"
 
         Cardinal ->
-            JE.string "cardinal"
+            Str "cardinal"
 
         CatmullRom ->
-            JE.string "catmull-rom"
+            Str "catmull-rom"
 
         Linear ->
-            JE.string "linear"
+            Str "linear"
 
         Monotone ->
-            JE.string "monotone"
+            Str "monotone"
 
         Natural ->
-            JE.string "natural"
+            Str "natural"
 
         Stepwise ->
-            JE.string "step"
+            Str "step"
 
         StepAfter ->
-            JE.string "step-after"
+            Str "step-after"
 
         StepBefore ->
-            JE.string "step-before"
+            Str "step-before"
 
 
 {-| Adds list of triggers to the given data table or mark.

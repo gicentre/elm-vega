@@ -88,11 +88,7 @@ areaTest =
             signals
                 << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    -- TODO: Note that we are passing the interpolation value as a string.
-                    -- Arguably this is correct as a signal could come from any source capable of generating
-                    -- a string, but it does raise the question of whether we can provide functions to
-                    -- generate 'safe' strings for enumerated properties.
-                    [ SiValue (Str "linear")
+                    [ SiValue (markInterpolationValue Linear)
                     , SiBind (ISelect [ InOptions [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ] ])
                     ]
                 << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]

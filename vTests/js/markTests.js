@@ -10344,29 +10344,6 @@ var _user$project$Vega$on = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Vega$markInterpolationSpec = function (interp) {
-	var _p55 = interp;
-	switch (_p55.ctor) {
-		case 'Basis':
-			return _elm_lang$core$Json_Encode$string('basis');
-		case 'Cardinal':
-			return _elm_lang$core$Json_Encode$string('cardinal');
-		case 'CatmullRom':
-			return _elm_lang$core$Json_Encode$string('catmull-rom');
-		case 'Linear':
-			return _elm_lang$core$Json_Encode$string('linear');
-		case 'Monotone':
-			return _elm_lang$core$Json_Encode$string('monotone');
-		case 'Natural':
-			return _elm_lang$core$Json_Encode$string('natural');
-		case 'Stepwise':
-			return _elm_lang$core$Json_Encode$string('step');
-		case 'StepAfter':
-			return _elm_lang$core$Json_Encode$string('step-after');
-		default:
-			return _elm_lang$core$Json_Encode$string('step-before');
-	}
-};
 var _user$project$Vega$dataRow = function (row) {
 	return F2(
 		function (x, y) {
@@ -10375,12 +10352,12 @@ var _user$project$Vega$dataRow = function (row) {
 		_elm_lang$core$Json_Encode$object(
 			A2(
 				_elm_lang$core$List$map,
-				function (_p56) {
-					var _p57 = _p56;
+				function (_p55) {
+					var _p56 = _p55;
 					return {
 						ctor: '_Tuple2',
-						_0: _p57._0,
-						_1: _user$project$Vega$dataValue(_p57._1)
+						_0: _p56._0,
+						_1: _user$project$Vega$dataValue(_p56._1)
 					};
 				},
 				row)));
@@ -10458,8 +10435,8 @@ var _user$project$Vega$dataFromColumns = F3(
 	});
 var _user$project$Vega$dataColumn = F2(
 	function (colName, data) {
-		var _p58 = data;
-		switch (_p58.ctor) {
+		var _p57 = data;
+		switch (_p57.ctor) {
 			case 'Numbers':
 				return F2(
 					function (x, y) {
@@ -10474,7 +10451,7 @@ var _user$project$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$float(x)
 							};
 						},
-						_p58._0));
+						_p57._0));
 			case 'Strings':
 				return F2(
 					function (x, y) {
@@ -10489,7 +10466,7 @@ var _user$project$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$string(s)
 							};
 						},
-						_p58._0));
+						_p57._0));
 			case 'DateTimes':
 				return F2(
 					function (x, y) {
@@ -10504,7 +10481,7 @@ var _user$project$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$string(s)
 							};
 						},
-						_p58._0));
+						_p57._0));
 			default:
 				return F2(
 					function (x, y) {
@@ -10519,7 +10496,7 @@ var _user$project$Vega$dataColumn = F2(
 								_1: _elm_lang$core$Json_Encode$bool(b)
 							};
 						},
-						_p58._0));
+						_p57._0));
 		}
 	});
 var _user$project$Vega$combineSpecs = function (specs) {
@@ -10758,6 +10735,29 @@ var _user$project$Vega$Null = {ctor: 'Null'};
 var _user$project$Vega$Empty = {ctor: 'Empty'};
 var _user$project$Vega$Str = function (a) {
 	return {ctor: 'Str', _0: a};
+};
+var _user$project$Vega$markInterpolationValue = function (interp) {
+	var _p58 = interp;
+	switch (_p58.ctor) {
+		case 'Basis':
+			return _user$project$Vega$Str('basis');
+		case 'Cardinal':
+			return _user$project$Vega$Str('cardinal');
+		case 'CatmullRom':
+			return _user$project$Vega$Str('catmull-rom');
+		case 'Linear':
+			return _user$project$Vega$Str('linear');
+		case 'Monotone':
+			return _user$project$Vega$Str('monotone');
+		case 'Natural':
+			return _user$project$Vega$Str('natural');
+		case 'Stepwise':
+			return _user$project$Vega$Str('step');
+		case 'StepAfter':
+			return _user$project$Vega$Str('step-after');
+		default:
+			return _user$project$Vega$Str('step-before');
+	}
 };
 var _user$project$Vega$Number = function (a) {
 	return {ctor: 'Number', _0: a};
@@ -12864,7 +12864,7 @@ var _user$project$MarkTests$areaTest = function () {
 					{
 						ctor: '::',
 						_0: _user$project$Vega$SiValue(
-							_user$project$Vega$Str('linear')),
+							_user$project$Vega$markInterpolationValue(_user$project$Vega$Linear)),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SiBind(
