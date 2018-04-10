@@ -920,7 +920,7 @@ type SignalString
 -}
 type SignalReference
     = SName String
-    | SExpr String
+    | SExpr Expression
 
 
 {-| Individual signal property. For details see the
@@ -931,7 +931,7 @@ type SignalProperty
     | SiBind Bind
     | SiDescription String
     | SiOn (List (List EventHandler))
-      -- TODO: SiUpdate Expression
+    | SiUpdate Expression
     | SiReact Bool
     | SiValue DataValue
     | SiValues DataValues
@@ -1060,7 +1060,7 @@ details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
 
 Whole specifications can nested within the `Group` mark (including further nested
 group specifications) by specifying `MType Group` and suppyling the specification
-as a series of `MGroup` properties. For example,
+as a series of properties supplied to `MGroup`. For example,
 
     TODO: XXX MGroup example
 
@@ -1079,7 +1079,7 @@ type TopMarkProperty
       -- TODO: MTransform (List Transform) combining with Data transform functions
     | MRole String
     | MStyle (List String)
-    | MGroup ( VProperty, Spec )
+    | MGroup (List ( VProperty, Spec ))
 
 
 {-| Defines a transformation that may be applied to a data stream or mark.
@@ -1167,6 +1167,7 @@ type Value
     | VRound Bool
     | VNumber Float
     | VNumbers (List Float)
+    | VObject (List Value)
     | VString String
     | VBool Bool
     | VNull
@@ -1535,7 +1536,7 @@ height w =
 mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
 mark mark mProps =
     (::)
-        ((MType mark :: mProps |> List.map topMarkProperty)
+        ((MType mark :: mProps |> List.concatMap topMarkProperty)
             |> JE.object
         )
 
@@ -2117,6 +2118,12 @@ eventHandlerSpec ehs =
                     ( "force", JE.bool b )
     in
     JE.object (List.map eventHandler ehs)
+
+
+expressionSpec : Expression -> Spec
+expressionSpec expr =
+    -- TODO: Would be better to parse expressions for correctness
+    JE.string expr
 
 
 facetProperty : Facet -> LabelledSpec
@@ -2895,6 +2902,9 @@ signalProperty sigProp =
         SiDescription s ->
             ( "description", JE.string s )
 
+        SiUpdate expr ->
+            ( "update", expressionSpec expr )
+
         SiOn ehs ->
             ( "on", JE.list (List.map eventHandlerSpec ehs) )
 
@@ -2915,8 +2925,7 @@ signalReferenceProperty signal =
             ( "signal", JE.string sName )
 
         SExpr sExpr ->
-            -- TODO: Should we check the expression for validity in any way?
-            ( "signal", JE.string sExpr )
+            ( "signal", expressionSpec sExpr )
 
 
 sortProperty : SortProperty -> LabelledSpec
@@ -3050,46 +3059,46 @@ timeUnitLabel tu =
             "milliseconds"
 
 
-topMarkProperty : TopMarkProperty -> LabelledSpec
+topMarkProperty : TopMarkProperty -> List LabelledSpec
 topMarkProperty mProp =
     case mProp of
         MType m ->
-            ( "type", JE.string (markLabel m) )
+            [ ( "type", JE.string (markLabel m) ) ]
 
         MClip b ->
-            ( "clip", JE.bool b )
+            [ ( "clip", JE.bool b ) ]
 
         MDescription s ->
-            ( "description", JE.string s )
+            [ ( "description", JE.string s ) ]
 
         MEncode eps ->
-            ( "encode", JE.object (List.map encodingProperty eps) )
+            [ ( "encode", JE.object (List.map encodingProperty eps) ) ]
 
         MFrom src ->
-            ( "from", JE.object [ sourceProperty src ] )
+            [ ( "from", JE.object [ sourceProperty src ] ) ]
 
         MInteractive b ->
-            ( "interactive", JE.bool b )
+            [ ( "interactive", JE.bool b ) ]
 
         MKey s ->
-            ( "key", JE.string s )
+            [ ( "key", JE.string s ) ]
 
         MName s ->
-            ( "name", JE.string s )
+            [ ( "name", JE.string s ) ]
 
         -- TODO: MOn Trigger[]
         -- TODO: MTransform Transform []
         MRole s ->
-            ( "role", JE.string s )
+            [ ( "role", JE.string s ) ]
 
         MSort comp ->
-            ( "sort", JE.object (List.map comparatorProperty comp) )
+            [ ( "sort", JE.object (List.map comparatorProperty comp) ) ]
 
         MStyle ss ->
-            ( "style", JE.list (List.map JE.string ss) )
+            [ ( "style", JE.list (List.map JE.string ss) ) ]
 
-        MGroup ( vProp, spec ) ->
-            ( vPropertyLabel vProp, spec )
+        MGroup props ->
+            List.map (\( vProp, spec ) -> ( vPropertyLabel vProp, spec )) props
 
 
 transformSpec : Transform -> Spec
@@ -3237,20 +3246,20 @@ triggerProperties : TriggerProperty -> List LabelledSpec
 triggerProperties trans =
     case trans of
         TrTrigger expr ->
-            [ ( "trigger", JE.string expr ) ]
+            [ ( "trigger", expressionSpec expr ) ]
 
         TrInsert expr ->
-            [ ( "insert", JE.string expr ) ]
+            [ ( "insert", expressionSpec expr ) ]
 
         TrRemove expr ->
-            [ ( "remove", JE.string expr ) ]
+            [ ( "remove", expressionSpec expr ) ]
 
         TrToggle expr ->
-            [ ( "toggle", JE.string expr ) ]
+            [ ( "toggle", expressionSpec expr ) ]
 
         -- Note the one-to-many relation between this trigger property and the labelled specs it generates.
         TrModifyValues modExpr valExpr ->
-            [ ( "modify", JE.string modExpr ), ( "values", JE.string valExpr ) ]
+            [ ( "modify", expressionSpec modExpr ), ( "values", expressionSpec valExpr ) ]
 
 
 valRef : List Value -> Spec
@@ -3269,7 +3278,7 @@ valRef vs =
 valueProperty : Value -> LabelledSpec
 valueProperty val =
     let
-        valOrNum val =
+        evaluate val =
             case val of
                 VNumber x ->
                     JE.float x
@@ -3294,13 +3303,13 @@ valueProperty val =
             ( "band", JE.float x )
 
         VExponent val ->
-            ( "exponent", valOrNum val )
+            ( "exponent", evaluate val )
 
         VMultiply val ->
-            ( "mult", valOrNum val )
+            ( "mult", evaluate val )
 
         VOffset val ->
-            ( "offset", valOrNum val )
+            ( "offset", evaluate val )
 
         VRound b ->
             ( "round", JE.bool b )
@@ -3310,6 +3319,9 @@ valueProperty val =
 
         VNumbers nums ->
             ( "value", JE.list (List.map JE.float nums) )
+
+        VObject vals ->
+            ( "value", JE.object (List.map valueProperty vals) )
 
         VString str ->
             ( "value", JE.string str )
@@ -3366,6 +3378,9 @@ valueSpec val =
 
         VNumbers nums ->
             JE.list (List.map JE.float nums)
+
+        VObject objs ->
+            JE.object (List.map valueProperty objs)
 
         VString str ->
             JE.string str

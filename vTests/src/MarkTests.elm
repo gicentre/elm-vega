@@ -178,8 +178,7 @@ groupTest =
                             ]
                         , Hover [ MOpacity [ VNumber 0.5 ] ]
                         ]
-                    , MGroup ds
-                    , MGroup (nestedMk [])
+                    , MGroup [ ds, nestedMk [] ]
                     ]
 
         nestedMk =

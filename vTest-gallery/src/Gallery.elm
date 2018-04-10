@@ -214,53 +214,54 @@ barChart3 =
                 << axis "yscale" Left [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
                 << axis "xscale" Bottom []
 
+        nestedSi =
+            signals
+                << signal "height" [ SiUpdate "bandwidth('yscale')" ]
+
+        nestedSc =
+            scales
+                << scale "pos"
+                    [ SType ScBand
+                    , SRange (RDefault RHeight)
+                    , SDomain (DData [ DDataset "facet", DField "position" ])
+                    ]
+
+        nestedMk =
+            marks
+                << mark Rect
+                    [ MName "bars"
+                    , MFrom (SData "facet")
+                    , MEncode
+                        [ Enter
+                            [ MY [ VScale (FName "pos"), VField (FName "position") ]
+                            , MHeight [ VScale (FName "pos"), VBand 1 ]
+                            , MX [ VScale (FName "xscale"), VField (FName "value") ]
+                            , MX2 [ VScale (FName "xscale"), VBand 0 ]
+                            , MFill [ VScale (FName "color"), VField (FName "position") ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ MFrom (SData "bars")
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FName "x2"), VOffset (VNumber -5) ]
+                            , MY [ VField (FName "y"), VOffset (VObject [ VField (FName "height"), VMultiply (VNumber 0.5) ]) ]
+                            , MFill [ VString "white" ]
+                            , MAlign [ VString (hAlignLabel AlignRight) ]
+                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
+                            , MText [ VField (FName "datum.value") ]
+                            ]
+                        ]
+                    ]
+
         mk =
             marks
                 << mark Group
-                    [ MFrom
-                        (SFacet
-                            [ FaData "table"
-                            , FaName "facet"
-                            , FaGroupBy [ "category" ]
-                            ]
-                        )
-                    , MEncode
-                        [ Enter
-                            [ MY [ VScale (FName "yscale"), VField (FName "category") ] ]
-                        ]
-
-                    -- TODO: Add signals and other group specific contents
-                    --, MSignals []
+                    [ MFrom (SFacet [ FaData "table", FaName "facet", FaGroupBy [ "category" ] ])
+                    , MEncode [ Enter [ MY [ VScale (FName "yscale"), VField (FName "category") ] ] ]
+                    , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
-
-        -- << mark Rect
-        --     [ MFrom (SData "table")
-        --     , MEncode
-        --         [ Enter
-        --             [ MX [ VScale (FName "xscale"), VField (FName "category") ]
-        --             , MWidth [ VScale (FName "xscale"), VBand 1 ]
-        --             , MY [ VScale (FName "yscale"), VField (FName "amount") ]
-        --             , MY2 [ VScale (FName "yscale"), VNumber 0 ]
-        --             ]
-        --         , Update [ MFill [ VString "steelblue" ] ]
-        --         , Hover [ MFill [ VString "red" ] ]
-        --         ]
-        --     ]
-        -- << mark Text
-        --     [ MEncode
-        --         [ Enter
-        --             [ MAlign [ VString "center" ]
-        --             , MBaseline [ VString "bottom" ]
-        --             , MFill [ VString "#333" ]
-        --             ]
-        --         , Update
-        --             [ MX [ VScale (FName "xscale"), VSignal (SName "tooltip.category"), VBand 0.5 ]
-        --             , MY [ VScale (FName "yscale"), VSignal (SName "tooltip.amount"), VOffset (VNumber -2) ]
-        --             , MText [ VSignal (SName "tooltip.amount") ]
-        --             , MFillOpacity [ VIfElse "datum === tooltip" [ VNumber 0 ] [ VNumber 1 ] ]
-        --             ]
-        --         ]
-        --     ]
     in
     toVega
         [ width 300, height 240, padding (PSize 5), ds, sc [], ax [], mk [] ]
