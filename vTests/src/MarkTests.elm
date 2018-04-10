@@ -333,6 +333,61 @@ ruleTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+symbolTest : Spec
+symbolTest =
+    let
+        si =
+            signals
+                << signal "shape"
+                    [ SiValue (Str "circle")
+                    , SiBind
+                        (ISelect
+                            [ InOptions
+                                (Strings
+                                    [ "circle"
+                                    , "square"
+                                    , "cross"
+                                    , "diamond"
+                                    , "triangle-up"
+                                    , "triangle-down"
+                                    , "triangle-right"
+                                    , "triangle-left"
+                                    , "M-1,-1H1V1H-1Z"
+                                    , "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                << signal "size" [ SiValue (Number 2000), SiBind (IRange [ InMin 0, InMax 10000, InStep 100 ]) ]
+                << signal "x" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ MEncode
+                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        , Update
+                            [ MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MSize [ VSignal (SName "size") ]
+                            , MShape [ VSignal (SName "shape") ]
+                            , MOpacity [ VNumber 1 ]
+                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
+                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     rectTest
@@ -352,6 +407,7 @@ mySpecs =
         , ( "pathTest", pathTest )
         , ( "rectTest", rectTest )
         , ( "ruleTest", ruleTest )
+        , ( "symbolTest", symbolTest )
         ]
 
 
