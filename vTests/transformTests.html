@@ -1,0 +1,46 @@
+<!doctype html>
+
+<head>
+  <title>Vega Transform Tests</title>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: middle; line-height: 1.6; margin-left: 1em;}</style>
+
+  <!-- These scripts link to the Vega runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/transformTests.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Vega Transform Tests</h1>
+
+  <h2>Pack Tests</h2>
+  <div id="packTest1" class="view"></div>
+
+  <h2>Stack Tests</h2>
+  <div id="stackTest1" class="view"></div>
+
+
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
+
+  <script>
+    Elm.TransformTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: false,
+          logLevel: vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

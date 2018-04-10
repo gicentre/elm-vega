@@ -8145,7 +8145,7 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
-var _gicentre$elm_vega$Vega$vPropertyLabel = function (spec) {
+var _user$project$Vega$vPropertyLabel = function (spec) {
 	var _p0 = spec;
 	switch (_p0.ctor) {
 		case 'VName':
@@ -8184,7 +8184,7 @@ var _gicentre$elm_vega$Vega$vPropertyLabel = function (spec) {
 			return 'marks';
 	}
 };
-var _gicentre$elm_vega$Vega$transpose = function (ll) {
+var _user$project$Vega$transpose = function (ll) {
 	transpose:
 	while (true) {
 		var _p1 = ll;
@@ -8202,14 +8202,14 @@ var _gicentre$elm_vega$Vega$transpose = function (ll) {
 				return {
 					ctor: '::',
 					_0: {ctor: '::', _0: _p1._0._0, _1: heads},
-					_1: _gicentre$elm_vega$Vega$transpose(
+					_1: _user$project$Vega$transpose(
 						{ctor: '::', _0: _p1._0._1, _1: tails})
 				};
 			}
 		}
 	}
 };
-var _gicentre$elm_vega$Vega$timeUnitLabel = function (tu) {
+var _user$project$Vega$timeUnitLabel = function (tu) {
 	var _p3 = tu;
 	switch (_p3.ctor) {
 		case 'Year':
@@ -8258,7 +8258,7 @@ var _gicentre$elm_vega$Vega$timeUnitLabel = function (tu) {
 			return 'milliseconds';
 	}
 };
-var _gicentre$elm_vega$Vega$sideLabel = function (orient) {
+var _user$project$Vega$sideLabel = function (orient) {
 	var _p4 = orient;
 	switch (_p4.ctor) {
 		case 'Left':
@@ -8271,7 +8271,7 @@ var _gicentre$elm_vega$Vega$sideLabel = function (orient) {
 			return 'top';
 	}
 };
-var _gicentre$elm_vega$Vega$schemeProperty = function (sProps) {
+var _user$project$Vega$schemeProperty = function (sProps) {
 	var _p5 = sProps;
 	switch (_p5.ctor) {
 		case 'SScheme':
@@ -8303,7 +8303,7 @@ var _gicentre$elm_vega$Vega$schemeProperty = function (sProps) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$scaleLabel = function (scType) {
+var _user$project$Vega$scaleLabel = function (scType) {
 	var _p6 = scType;
 	switch (_p6.ctor) {
 		case 'ScLinear':
@@ -8338,7 +8338,7 @@ var _gicentre$elm_vega$Vega$scaleLabel = function (scType) {
 			return _p6._0;
 	}
 };
-var _gicentre$elm_vega$Vega$rangeDefaultLabel = function (rd) {
+var _user$project$Vega$rangeDefaultLabel = function (rd) {
 	var _p7 = rd;
 	switch (_p7.ctor) {
 		case 'RWidth':
@@ -8359,7 +8359,7 @@ var _gicentre$elm_vega$Vega$rangeDefaultLabel = function (rd) {
 			return 'heatmap';
 	}
 };
-var _gicentre$elm_vega$Vega$paddingSpec = function (pad) {
+var _user$project$Vega$paddingSpec = function (pad) {
 	var _p8 = pad;
 	if (_p8.ctor === 'PSize') {
 		return _elm_lang$core$Json_Encode$float(_p8._0);
@@ -8400,7 +8400,7 @@ var _gicentre$elm_vega$Vega$paddingSpec = function (pad) {
 			});
 	}
 };
-var _gicentre$elm_vega$Vega$overlapStrategyLabel = function (strat) {
+var _user$project$Vega$overlapStrategyLabel = function (strat) {
 	var _p9 = strat;
 	switch (_p9.ctor) {
 		case 'ONone':
@@ -8411,7 +8411,7 @@ var _gicentre$elm_vega$Vega$overlapStrategyLabel = function (strat) {
 			return 'greedy';
 	}
 };
-var _gicentre$elm_vega$Vega$opLabel = function (op) {
+var _user$project$Vega$opLabel = function (op) {
 	var _p10 = op;
 	switch (_p10.ctor) {
 		case 'ArgMax':
@@ -8458,7 +8458,7 @@ var _gicentre$elm_vega$Vega$opLabel = function (op) {
 			return 'variancep';
 	}
 };
-var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
+var _user$project$Vega$sortProperty = function (sp) {
 	var _p11 = sp;
 	switch (_p11.ctor) {
 		case 'Ascending':
@@ -8484,11 +8484,11 @@ var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
 				ctor: '_Tuple2',
 				_0: 'op',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$opLabel(_p11._0))
+					_user$project$Vega$opLabel(_p11._0))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$niceSpec = function (ni) {
+var _user$project$Vega$niceSpec = function (ni) {
 	var _p12 = ni;
 	switch (_p12.ctor) {
 		case 'NMillisecond':
@@ -8515,7 +8515,7 @@ var _gicentre$elm_vega$Vega$niceSpec = function (ni) {
 						ctor: '_Tuple2',
 						_0: 'interval',
 						_1: _elm_lang$core$Json_Encode$string(
-							_gicentre$elm_vega$Vega$timeUnitLabel(_p12._0))
+							_user$project$Vega$timeUnitLabel(_p12._0))
 					},
 					_1: {
 						ctor: '::',
@@ -8533,7 +8533,7 @@ var _gicentre$elm_vega$Vega$niceSpec = function (ni) {
 			return _elm_lang$core$Json_Encode$int(_p12._0);
 	}
 };
-var _gicentre$elm_vega$Vega$markLabel = function (m) {
+var _user$project$Vega$markLabel = function (m) {
 	var _p13 = m;
 	switch (_p13.ctor) {
 		case 'Arc':
@@ -8562,7 +8562,7 @@ var _gicentre$elm_vega$Vega$markLabel = function (m) {
 			return 'trail';
 	}
 };
-var _gicentre$elm_vega$Vega$interpolateSpec = function (iType) {
+var _user$project$Vega$interpolateSpec = function (iType) {
 	var _p14 = iType;
 	switch (_p14.ctor) {
 		case 'Rgb':
@@ -8679,7 +8679,7 @@ var _gicentre$elm_vega$Vega$interpolateSpec = function (iType) {
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$foDataTypeSpec = function (dType) {
+var _user$project$Vega$foDataTypeSpec = function (dType) {
 	var _p15 = dType;
 	switch (_p15.ctor) {
 		case 'FoNumber':
@@ -8702,7 +8702,7 @@ var _gicentre$elm_vega$Vega$foDataTypeSpec = function (dType) {
 					A2(_elm_lang$core$Basics_ops['++'], _p17, '\'')));
 	}
 };
-var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
+var _user$project$Vega$formatProperty = function (fmt) {
 	var _p18 = fmt;
 	switch (_p18.ctor) {
 		case 'JSON':
@@ -8803,7 +8803,7 @@ var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
 								return {
 									ctor: '_Tuple2',
 									_0: _p20._0,
-									_1: _gicentre$elm_vega$Vega$foDataTypeSpec(_p20._1)
+									_1: _user$project$Vega$foDataTypeSpec(_p20._1)
 								};
 							},
 							_p18._0))
@@ -8812,7 +8812,7 @@ var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$facetProperty = function (fct) {
+var _user$project$Vega$facetProperty = function (fct) {
 	var _p21 = fct;
 	switch (_p21.ctor) {
 		case 'FaName':
@@ -8842,7 +8842,7 @@ var _gicentre$elm_vega$Vega$facetProperty = function (fct) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$sourceProperty = function (src) {
+var _user$project$Vega$sourceProperty = function (src) {
 	var _p22 = src;
 	if (_p22.ctor === 'SData') {
 		return {
@@ -8855,14 +8855,14 @@ var _gicentre$elm_vega$Vega$sourceProperty = function (src) {
 			ctor: '_Tuple2',
 			_0: 'facet',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$facetProperty, _p22._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$facetProperty, _p22._0))
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$expressionSpec = function (expr) {
+var _user$project$Vega$expressionSpec = function (expr) {
 	return _elm_lang$core$Json_Encode$string(expr);
 };
-var _gicentre$elm_vega$Vega$signalReferenceProperty = function (signal) {
+var _user$project$Vega$signalReferenceProperty = function (signal) {
 	var _p23 = signal;
 	if (_p23.ctor === 'SName') {
 		return {
@@ -8874,11 +8874,11 @@ var _gicentre$elm_vega$Vega$signalReferenceProperty = function (signal) {
 		return {
 			ctor: '_Tuple2',
 			_0: 'signal',
-			_1: _gicentre$elm_vega$Vega$expressionSpec(_p23._0)
+			_1: _user$project$Vega$expressionSpec(_p23._0)
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$fieldValueSpec = function (fVal) {
+var _user$project$Vega$fieldValueSpec = function (fVal) {
 	var _p24 = fVal;
 	switch (_p24.ctor) {
 		case 'FName':
@@ -8887,7 +8887,7 @@ var _gicentre$elm_vega$Vega$fieldValueSpec = function (fVal) {
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p24._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p24._0),
 					_1: {ctor: '[]'}
 				});
 		case 'FDatum':
@@ -8897,7 +8897,7 @@ var _gicentre$elm_vega$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'datum',
-						_1: _gicentre$elm_vega$Vega$fieldValueSpec(_p24._0)
+						_1: _user$project$Vega$fieldValueSpec(_p24._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -8908,7 +8908,7 @@ var _gicentre$elm_vega$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'group',
-						_1: _gicentre$elm_vega$Vega$fieldValueSpec(_p24._0)
+						_1: _user$project$Vega$fieldValueSpec(_p24._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -8919,13 +8919,13 @@ var _gicentre$elm_vega$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'parent',
-						_1: _gicentre$elm_vega$Vega$fieldValueSpec(_p24._0)
+						_1: _user$project$Vega$fieldValueSpec(_p24._0)
 					},
 					_1: {ctor: '[]'}
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$signalNumSpec = function (sigNum) {
+var _user$project$Vega$signalNumSpec = function (sigNum) {
 	var _p25 = sigNum;
 	if (_p25.ctor === 'SigNum') {
 		return _elm_lang$core$Json_Encode$float(_p25._0);
@@ -8933,12 +8933,12 @@ var _gicentre$elm_vega$Vega$signalNumSpec = function (sigNum) {
 		return _elm_lang$core$Json_Encode$object(
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p25._0),
+				_0: _user$project$Vega$signalReferenceProperty(_p25._0),
 				_1: {ctor: '[]'}
 			});
 	}
 };
-var _gicentre$elm_vega$Vega$signalStrSpec = function (sigStr) {
+var _user$project$Vega$signalStrSpec = function (sigStr) {
 	var _p26 = sigStr;
 	if (_p26.ctor === 'SigStr') {
 		return _elm_lang$core$Json_Encode$string(_p26._0);
@@ -8946,12 +8946,12 @@ var _gicentre$elm_vega$Vega$signalStrSpec = function (sigStr) {
 		return _elm_lang$core$Json_Encode$object(
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p26._0),
+				_0: _user$project$Vega$signalReferenceProperty(_p26._0),
 				_1: {ctor: '[]'}
 			});
 	}
 };
-var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
+var _user$project$Vega$triggerProperties = function (trans) {
 	var _p27 = trans;
 	switch (_p27.ctor) {
 		case 'TrTrigger':
@@ -8960,7 +8960,7 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'trigger',
-					_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._0)
+					_1: _user$project$Vega$expressionSpec(_p27._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -8970,7 +8970,7 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'insert',
-					_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._0)
+					_1: _user$project$Vega$expressionSpec(_p27._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -8980,7 +8980,7 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'remove',
-					_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._0)
+					_1: _user$project$Vega$expressionSpec(_p27._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -8990,7 +8990,7 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'toggle',
-					_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._0)
+					_1: _user$project$Vega$expressionSpec(_p27._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9000,21 +9000,21 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'modify',
-					_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._0)
+					_1: _user$project$Vega$expressionSpec(_p27._0)
 				},
 				_1: {
 					ctor: '::',
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'values',
-						_1: _gicentre$elm_vega$Vega$expressionSpec(_p27._1)
+						_1: _user$project$Vega$expressionSpec(_p27._1)
 					},
 					_1: {ctor: '[]'}
 				}
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$eventHandlerSpec = function (ehs) {
+var _user$project$Vega$eventHandlerSpec = function (ehs) {
 	var eventHandler = function (eh) {
 		var _p28 = eh;
 		switch (_p28.ctor) {
@@ -9052,7 +9052,7 @@ var _gicentre$elm_vega$Vega$eventHandlerSpec = function (ehs) {
 	return _elm_lang$core$Json_Encode$object(
 		A2(_elm_lang$core$List$map, eventHandler, ehs));
 };
-var _gicentre$elm_vega$Vega$dataValues = function (vals) {
+var _user$project$Vega$dataValues = function (vals) {
 	var _p30 = vals;
 	switch (_p30.ctor) {
 		case 'Booleans':
@@ -9069,10 +9069,10 @@ var _gicentre$elm_vega$Vega$dataValues = function (vals) {
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p30._0));
 		default:
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataValues, _p30._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$dataValues, _p30._0));
 	}
 };
-var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
+var _user$project$Vega$inputProperty = function (prop) {
 	var _p31 = prop;
 	switch (_p31.ctor) {
 		case 'InMin':
@@ -9109,7 +9109,7 @@ var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'options',
-				_1: _gicentre$elm_vega$Vega$dataValues(_p31._0)
+				_1: _user$project$Vega$dataValues(_p31._0)
 			};
 		case 'InPlaceholder':
 			return {
@@ -9125,7 +9125,7 @@ var _gicentre$elm_vega$Vega$inputProperty = function (prop) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$dataValue = function (val) {
+var _user$project$Vega$dataValue = function (val) {
 	var _p32 = val;
 	switch (_p32.ctor) {
 		case 'Number':
@@ -9141,7 +9141,7 @@ var _gicentre$elm_vega$Vega$dataValue = function (val) {
 			return _elm_lang$core$Json_Encode$null;
 	}
 };
-var _gicentre$elm_vega$Vega$colorProperty = function (cVal) {
+var _user$project$Vega$colorProperty = function (cVal) {
 	var _p33 = cVal;
 	switch (_p33.ctor) {
 		case 'RGB':
@@ -9270,27 +9270,27 @@ var _gicentre$elm_vega$Vega$colorProperty = function (cVal) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$valueSpec = function (val) {
+var _user$project$Vega$valueSpec = function (val) {
 	var _p34 = val;
 	switch (_p34.ctor) {
 		case 'VSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p34._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p34._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VColor':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$colorProperty(_p34._0),
+					_0: _user$project$Vega$colorProperty(_p34._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VField':
-			return _gicentre$elm_vega$Vega$fieldValueSpec(_p34._0);
+			return _user$project$Vega$fieldValueSpec(_p34._0);
 		case 'VScale':
-			return _gicentre$elm_vega$Vega$fieldValueSpec(_p34._0);
+			return _user$project$Vega$fieldValueSpec(_p34._0);
 		case 'VBand':
 			return _elm_lang$core$Json_Encode$object(
 				{
@@ -9306,21 +9306,21 @@ var _gicentre$elm_vega$Vega$valueSpec = function (val) {
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$valueProperty(_p34._0),
+					_0: _user$project$Vega$valueProperty(_p34._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VMultiply':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$valueProperty(_p34._0),
+					_0: _user$project$Vega$valueProperty(_p34._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VOffset':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$valueProperty(_p34._0),
+					_0: _user$project$Vega$valueProperty(_p34._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VRound':
@@ -9341,7 +9341,7 @@ var _gicentre$elm_vega$Vega$valueSpec = function (val) {
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p34._0));
 		case 'VObject':
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p34._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p34._0));
 		case 'VString':
 			return _elm_lang$core$Json_Encode$string(_p34._0);
 		case 'VBool':
@@ -9352,32 +9352,32 @@ var _gicentre$elm_vega$Vega$valueSpec = function (val) {
 			return _elm_lang$core$Json_Encode$null;
 	}
 };
-var _gicentre$elm_vega$Vega$valueProperty = function (val) {
+var _user$project$Vega$valueProperty = function (val) {
 	var evaluate = function (val) {
 		var _p35 = val;
 		if (_p35.ctor === 'VNumber') {
 			return _elm_lang$core$Json_Encode$float(_p35._0);
 		} else {
-			return _gicentre$elm_vega$Vega$valueSpec(val);
+			return _user$project$Vega$valueSpec(val);
 		}
 	};
 	var _p36 = val;
 	switch (_p36.ctor) {
 		case 'VSignal':
-			return _gicentre$elm_vega$Vega$signalReferenceProperty(_p36._0);
+			return _user$project$Vega$signalReferenceProperty(_p36._0);
 		case 'VColor':
-			return _gicentre$elm_vega$Vega$colorProperty(_p36._0);
+			return _user$project$Vega$colorProperty(_p36._0);
 		case 'VField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _gicentre$elm_vega$Vega$fieldValueSpec(_p36._0)
+				_1: _user$project$Vega$fieldValueSpec(_p36._0)
 			};
 		case 'VScale':
 			return {
 				ctor: '_Tuple2',
 				_0: 'scale',
-				_1: _gicentre$elm_vega$Vega$fieldValueSpec(_p36._0)
+				_1: _user$project$Vega$fieldValueSpec(_p36._0)
 			};
 		case 'VBand':
 			return {
@@ -9427,7 +9427,7 @@ var _gicentre$elm_vega$Vega$valueProperty = function (val) {
 				ctor: '_Tuple2',
 				_0: 'value',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p36._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p36._0))
 			};
 		case 'VString':
 			return {
@@ -9464,7 +9464,7 @@ var _gicentre$elm_vega$Vega$valueProperty = function (val) {
 									ctor: '_Tuple2',
 									_0: 'if',
 									_1: _elm_lang$core$Json_Encode$object(
-										A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p36._1))
+										A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p36._1))
 								},
 								_1: {
 									ctor: '::',
@@ -9472,7 +9472,7 @@ var _gicentre$elm_vega$Vega$valueProperty = function (val) {
 										ctor: '_Tuple2',
 										_0: 'else',
 										_1: _elm_lang$core$Json_Encode$object(
-											A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p36._2))
+											A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p36._2))
 									},
 									_1: {ctor: '[]'}
 								}
@@ -9481,7 +9481,7 @@ var _gicentre$elm_vega$Vega$valueProperty = function (val) {
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$valRef = function (vs) {
+var _user$project$Vega$valRef = function (vs) {
 	var _p37 = vs;
 	if (((_p37.ctor === '::') && (_p37._0.ctor === 'VIfElse')) && (_p37._1.ctor === '[]')) {
 		return _elm_lang$core$Json_Encode$list(
@@ -9495,21 +9495,21 @@ var _gicentre$elm_vega$Vega$valRef = function (vs) {
 							_0: 'test',
 							_1: _elm_lang$core$Json_Encode$string(_p37._0._0)
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p37._0._1)
+						_1: A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p37._0._1)
 					}),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, _p37._0._2)),
+						A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p37._0._2)),
 					_1: {ctor: '[]'}
 				}
 			});
 	} else {
 		return _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueProperty, vs));
+			A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, vs));
 	}
 };
-var _gicentre$elm_vega$Vega$bindingProperty = function (bnd) {
+var _user$project$Vega$bindingProperty = function (bnd) {
 	var bSpec = F2(
 		function (iType, props) {
 			return {
@@ -9523,7 +9523,7 @@ var _gicentre$elm_vega$Vega$bindingProperty = function (bnd) {
 							_0: 'input',
 							_1: _elm_lang$core$Json_Encode$string(iType)
 						},
-						_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$inputProperty, props)
+						_1: A2(_elm_lang$core$List$map, _user$project$Vega$inputProperty, props)
 					})
 			};
 		});
@@ -9557,7 +9557,7 @@ var _gicentre$elm_vega$Vega$bindingProperty = function (bnd) {
 			return A2(bSpec, 'color', _p38._0);
 	}
 };
-var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
+var _user$project$Vega$signalProperty = function (sigProp) {
 	var _p39 = sigProp;
 	switch (_p39.ctor) {
 		case 'SiName':
@@ -9567,7 +9567,7 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 				_1: _elm_lang$core$Json_Encode$string(_p39._0)
 			};
 		case 'SiBind':
-			return _gicentre$elm_vega$Vega$bindingProperty(_p39._0);
+			return _user$project$Vega$bindingProperty(_p39._0);
 		case 'SiDescription':
 			return {
 				ctor: '_Tuple2',
@@ -9578,14 +9578,14 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'update',
-				_1: _gicentre$elm_vega$Vega$expressionSpec(_p39._0)
+				_1: _user$project$Vega$expressionSpec(_p39._0)
 			};
 		case 'SiOn':
 			return {
 				ctor: '_Tuple2',
 				_0: 'on',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$eventHandlerSpec, _p39._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$eventHandlerSpec, _p39._0))
 			};
 		case 'SiReact':
 			return {
@@ -9597,17 +9597,17 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
-				_1: _gicentre$elm_vega$Vega$dataValue(_p39._0)
+				_1: _user$project$Vega$dataValue(_p39._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
-				_1: _gicentre$elm_vega$Vega$dataValues(_p39._0)
+				_1: _user$project$Vega$dataValues(_p39._0)
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
+var _user$project$Vega$axisProperty = function (ap) {
 	var _p40 = ap;
 	switch (_p40.ctor) {
 		case 'AxScale':
@@ -9621,7 +9621,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$sideLabel(_p40._0))
+					_user$project$Vega$sideLabel(_p40._0))
 			};
 		case 'AxFormat':
 			return {
@@ -9652,7 +9652,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				ctor: '_Tuple2',
 				_0: 'labelOverlap',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$overlapStrategyLabel(_p40._0))
+					_user$project$Vega$overlapStrategyLabel(_p40._0))
 			};
 		case 'AxLabelPadding':
 			return {
@@ -9664,13 +9664,13 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'maxExtent',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p40._0)
+				_1: _user$project$Vega$valueSpec(_p40._0)
 			};
 		case 'AxMinExtent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'minExtent',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p40._0)
+				_1: _user$project$Vega$valueSpec(_p40._0)
 			};
 		case 'AxGridScale':
 			return {
@@ -9718,13 +9718,13 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p40._0)
+				_1: _user$project$Vega$valueSpec(_p40._0)
 			};
 		case 'AxPosition':
 			return {
 				ctor: '_Tuple2',
 				_0: 'position',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p40._0)
+				_1: _user$project$Vega$valueSpec(_p40._0)
 			};
 		case 'AxTicks':
 			return {
@@ -9771,7 +9771,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$autosizeProperty = function (asCfg) {
+var _user$project$Vega$autosizeProperty = function (asCfg) {
 	var _p43 = asCfg;
 	switch (_p43.ctor) {
 		case 'APad':
@@ -9812,7 +9812,7 @@ var _gicentre$elm_vega$Vega$autosizeProperty = function (asCfg) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$vAlignLabel = function (align) {
+var _user$project$Vega$vAlignLabel = function (align) {
 	var _p44 = align;
 	switch (_p44.ctor) {
 		case 'AlignTop':
@@ -9825,7 +9825,7 @@ var _gicentre$elm_vega$Vega$vAlignLabel = function (align) {
 			return 'alphabetic';
 	}
 };
-var _gicentre$elm_vega$Vega$toVega = function (spec) {
+var _user$project$Vega$toVega = function (spec) {
 	return _elm_lang$core$Json_Encode$object(
 		{
 			ctor: '::',
@@ -9840,14 +9840,14 @@ var _gicentre$elm_vega$Vega$toVega = function (spec) {
 					var _p46 = _p45;
 					return {
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$Vega$vPropertyLabel(_p46._0),
+						_0: _user$project$Vega$vPropertyLabel(_p46._0),
 						_1: _p46._1
 					};
 				},
 				spec)
 		});
 };
-var _gicentre$elm_vega$Vega$symbolLabel = function (sym) {
+var _user$project$Vega$symbolLabel = function (sym) {
 	var _p47 = sym;
 	switch (_p47.ctor) {
 		case 'SymCircle':
@@ -9866,7 +9866,7 @@ var _gicentre$elm_vega$Vega$symbolLabel = function (sym) {
 			return _p47._0;
 	}
 };
-var _gicentre$elm_vega$Vega$strokeJoinLabel = function (join) {
+var _user$project$Vega$strokeJoinLabel = function (join) {
 	var _p48 = join;
 	switch (_p48.ctor) {
 		case 'JMiter':
@@ -9877,343 +9877,343 @@ var _gicentre$elm_vega$Vega$strokeJoinLabel = function (join) {
 			return 'bevel';
 	}
 };
-var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
+var _user$project$Vega$markProperty = function (mProp) {
 	var _p49 = mProp;
 	switch (_p49.ctor) {
 		case 'MX':
 			return {
 				ctor: '_Tuple2',
 				_0: 'x',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MY':
 			return {
 				ctor: '_Tuple2',
 				_0: 'y',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MX2':
 			return {
 				ctor: '_Tuple2',
 				_0: 'x2',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MY2':
 			return {
 				ctor: '_Tuple2',
 				_0: 'y2',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MXC':
 			return {
 				ctor: '_Tuple2',
 				_0: 'xc',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MYC':
 			return {
 				ctor: '_Tuple2',
 				_0: 'xc',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MWidth':
 			return {
 				ctor: '_Tuple2',
 				_0: 'width',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MHeight':
 			return {
 				ctor: '_Tuple2',
 				_0: 'height',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'opacity',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFill':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fill',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFillOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fillOpacity',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStroke':
 			return {
 				ctor: '_Tuple2',
 				_0: 'stroke',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeOpacity',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeWidth':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeWidth',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeCap':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeCap',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeDash':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeDash',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeDashOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeDashOffset',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStrokeJoin':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeJoin',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$strokeJoinLabel(_p49._0))
+					_user$project$Vega$strokeJoinLabel(_p49._0))
 			};
 		case 'MStrokeMiterLimit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeMiterLimit',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MCursor':
 			return {
 				ctor: '_Tuple2',
 				_0: 'cursor',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MHRef':
 			return {
 				ctor: '_Tuple2',
 				_0: 'href',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MTooltip':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tooltip',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MZIndex':
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MStartAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'startAngle',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MEndAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'endAngle',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MPadAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'padAngle',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MInnerRadius':
 			return {
 				ctor: '_Tuple2',
 				_0: 'innerRadius',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MOuterRadius':
 			return {
 				ctor: '_Tuple2',
 				_0: 'outerRadius',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MCornerRadius':
 			return {
 				ctor: '_Tuple2',
 				_0: 'cornerRadius',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MOrient':
 			return {
 				ctor: '_Tuple2',
 				_0: 'orient',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MInterpolate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MTension':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tension',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MDefined':
 			return {
 				ctor: '_Tuple2',
 				_0: 'defined',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MGroupClip':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clip',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MAspect':
 			return {
 				ctor: '_Tuple2',
 				_0: 'aspect',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MUrl':
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MPath':
 			return {
 				ctor: '_Tuple2',
 				_0: 'path',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MShape':
 			return {
 				ctor: '_Tuple2',
 				_0: 'shape',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'size',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MSymbol':
 			return {
 				ctor: '_Tuple2',
 				_0: 'shape',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MAlign':
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'angle',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MBaseline':
 			return {
 				ctor: '_Tuple2',
 				_0: 'baseline',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MDir':
 			return {
 				ctor: '_Tuple2',
 				_0: 'dir',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MdX':
 			return {
 				ctor: '_Tuple2',
 				_0: 'dx',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MdY':
 			return {
 				ctor: '_Tuple2',
 				_0: 'dy',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MEllipsis':
 			return {
 				ctor: '_Tuple2',
 				_0: 'ellipsis',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFont':
 			return {
 				ctor: '_Tuple2',
 				_0: 'font',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFontSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fontSize',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFontWeight':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fontWeight',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MFontStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fontStyle',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MLimit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'limit',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MRadius':
 			return {
 				ctor: '_Tuple2',
 				_0: 'radius',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		case 'MText':
 			return {
 				ctor: '_Tuple2',
 				_0: 'text',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'theta',
-				_1: _gicentre$elm_vega$Vega$valRef(_p49._0)
+				_1: _user$project$Vega$valRef(_p49._0)
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$encodingProperty = function (ep) {
+var _user$project$Vega$encodingProperty = function (ep) {
 	var _p50 = ep;
 	switch (_p50.ctor) {
 		case 'Enter':
@@ -10221,39 +10221,39 @@ var _gicentre$elm_vega$Vega$encodingProperty = function (ep) {
 				ctor: '_Tuple2',
 				_0: 'enter',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p50._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p50._0))
 			};
 		case 'Update':
 			return {
 				ctor: '_Tuple2',
 				_0: 'update',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p50._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p50._0))
 			};
 		case 'Exit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exit',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p50._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p50._0))
 			};
 		case 'Hover':
 			return {
 				ctor: '_Tuple2',
 				_0: 'hover',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p50._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p50._0))
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: _p50._0,
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p50._1))
+					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p50._1))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$strokeCapLabel = function (cap) {
+var _user$project$Vega$strokeCapLabel = function (cap) {
 	var _p51 = cap;
 	switch (_p51.ctor) {
 		case 'CButt':
@@ -10264,7 +10264,7 @@ var _gicentre$elm_vega$Vega$strokeCapLabel = function (cap) {
 			return 'square';
 	}
 };
-var _gicentre$elm_vega$Vega$on = F2(
+var _user$project$Vega$on = F2(
 	function (triggerSpecs, dTable) {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
@@ -10279,7 +10279,7 @@ var _gicentre$elm_vega$Vega$on = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _gicentre$elm_vega$Vega$markOrientationLabel = function (orient) {
+var _user$project$Vega$markOrientationLabel = function (orient) {
 	var _p52 = orient;
 	if (_p52.ctor === 'Horizontal') {
 		return 'horizontal';
@@ -10287,7 +10287,7 @@ var _gicentre$elm_vega$Vega$markOrientationLabel = function (orient) {
 		return 'vertical';
 	}
 };
-var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
+var _user$project$Vega$markInterpolationLabel = function (interp) {
 	var _p53 = interp;
 	switch (_p53.ctor) {
 		case 'Basis':
@@ -10310,7 +10310,7 @@ var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
 			return 'step-before';
 	}
 };
-var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
+var _user$project$Vega$hAlignLabel = function (align) {
 	var _p54 = align;
 	switch (_p54.ctor) {
 		case 'AlignLeft':
@@ -10321,7 +10321,7 @@ var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
 			return 'right';
 	}
 };
-var _gicentre$elm_vega$Vega$dirLabel = function (dir) {
+var _user$project$Vega$dirLabel = function (dir) {
 	var _p55 = dir;
 	if (_p55.ctor === 'LeftToRight') {
 		return 'ltr';
@@ -10329,7 +10329,7 @@ var _gicentre$elm_vega$Vega$dirLabel = function (dir) {
 		return 'rtl';
 	}
 };
-var _gicentre$elm_vega$Vega$dataRow = function (row) {
+var _user$project$Vega$dataRow = function (row) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -10342,12 +10342,12 @@ var _gicentre$elm_vega$Vega$dataRow = function (row) {
 					return {
 						ctor: '_Tuple2',
 						_0: _p57._0,
-						_1: _gicentre$elm_vega$Vega$dataValue(_p57._1)
+						_1: _user$project$Vega$dataValue(_p57._1)
 					};
 				},
 				row)));
 };
-var _gicentre$elm_vega$Vega$dataFromRows = F3(
+var _user$project$Vega$dataFromRows = F3(
 	function (name, fmts, rows) {
 		var fmt = _elm_lang$core$Native_Utils.eq(
 			fmts,
@@ -10357,7 +10357,7 @@ var _gicentre$elm_vega$Vega$dataFromRows = F3(
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$formatProperty, fmts))
+					A2(_elm_lang$core$List$concatMap, _user$project$Vega$formatProperty, fmts))
 			},
 			_1: {ctor: '[]'}
 		};
@@ -10382,7 +10382,7 @@ var _gicentre$elm_vega$Vega$dataFromRows = F3(
 			},
 			fmt);
 	});
-var _gicentre$elm_vega$Vega$dataFromColumns = F3(
+var _user$project$Vega$dataFromColumns = F3(
 	function (name, fmts, cols) {
 		var fmt = _elm_lang$core$Native_Utils.eq(
 			fmts,
@@ -10392,7 +10392,7 @@ var _gicentre$elm_vega$Vega$dataFromColumns = F3(
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$formatProperty, fmts))
+					A2(_elm_lang$core$List$concatMap, _user$project$Vega$formatProperty, fmts))
 			},
 			_1: {ctor: '[]'}
 		};
@@ -10400,7 +10400,7 @@ var _gicentre$elm_vega$Vega$dataFromColumns = F3(
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Encode$object,
-				_gicentre$elm_vega$Vega$transpose(cols)));
+				_user$project$Vega$transpose(cols)));
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
 			{
@@ -10418,7 +10418,7 @@ var _gicentre$elm_vega$Vega$dataFromColumns = F3(
 			},
 			fmt);
 	});
-var _gicentre$elm_vega$Vega$dataColumn = F2(
+var _user$project$Vega$dataColumn = F2(
 	function (colName, data) {
 		var _p58 = data;
 		switch (_p58.ctor) {
@@ -10493,13 +10493,13 @@ var _gicentre$elm_vega$Vega$dataColumn = F2(
 							return {
 								ctor: '_Tuple2',
 								_0: colName,
-								_1: _gicentre$elm_vega$Vega$dataValues(dv)
+								_1: _user$project$Vega$dataValues(dv)
 							};
 						},
 						_p58._0));
 		}
 	});
-var _gicentre$elm_vega$Vega$cursorLabel = function (cur) {
+var _user$project$Vega$cursorLabel = function (cur) {
 	var _p59 = cur;
 	switch (_p59.ctor) {
 		case 'CAuto':
@@ -10576,85 +10576,85 @@ var _gicentre$elm_vega$Vega$cursorLabel = function (cur) {
 			return 'grabbing';
 	}
 };
-var _gicentre$elm_vega$Vega$combineSpecs = function (specs) {
+var _user$project$Vega$combineSpecs = function (specs) {
 	return _elm_lang$core$Json_Encode$object(specs);
 };
-var _gicentre$elm_vega$Vega$AResize = {ctor: 'AResize'};
-var _gicentre$elm_vega$Vega$APadding = {ctor: 'APadding'};
-var _gicentre$elm_vega$Vega$APad = {ctor: 'APad'};
-var _gicentre$elm_vega$Vega$ANone = {ctor: 'ANone'};
-var _gicentre$elm_vega$Vega$AFit = {ctor: 'AFit'};
-var _gicentre$elm_vega$Vega$AContent = {ctor: 'AContent'};
-var _gicentre$elm_vega$Vega$AxZIndex = function (a) {
+var _user$project$Vega$AResize = {ctor: 'AResize'};
+var _user$project$Vega$APadding = {ctor: 'APadding'};
+var _user$project$Vega$APad = {ctor: 'APad'};
+var _user$project$Vega$ANone = {ctor: 'ANone'};
+var _user$project$Vega$AFit = {ctor: 'AFit'};
+var _user$project$Vega$AContent = {ctor: 'AContent'};
+var _user$project$Vega$AxZIndex = function (a) {
 	return {ctor: 'AxZIndex', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxValues = function (a) {
+var _user$project$Vega$AxValues = function (a) {
 	return {ctor: 'AxValues', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitlePadding = function (a) {
+var _user$project$Vega$AxTitlePadding = function (a) {
 	return {ctor: 'AxTitlePadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTitle = function (a) {
+var _user$project$Vega$AxTitle = function (a) {
 	return {ctor: 'AxTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTickSize = function (a) {
+var _user$project$Vega$AxTickSize = function (a) {
 	return {ctor: 'AxTickSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTickCount = function (a) {
+var _user$project$Vega$AxTickCount = function (a) {
 	return {ctor: 'AxTickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxTicks = function (a) {
+var _user$project$Vega$AxTicks = function (a) {
 	return {ctor: 'AxTicks', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxPosition = function (a) {
+var _user$project$Vega$AxPosition = function (a) {
 	return {ctor: 'AxPosition', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxOffset = function (a) {
+var _user$project$Vega$AxOffset = function (a) {
 	return {ctor: 'AxOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxMaxExtent = function (a) {
+var _user$project$Vega$AxMaxExtent = function (a) {
 	return {ctor: 'AxMaxExtent', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxMinExtent = function (a) {
+var _user$project$Vega$AxMinExtent = function (a) {
 	return {ctor: 'AxMinExtent', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabelOverlap = function (a) {
+var _user$project$Vega$AxLabelOverlap = function (a) {
 	return {ctor: 'AxLabelOverlap', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabelPadding = function (a) {
+var _user$project$Vega$AxLabelPadding = function (a) {
 	return {ctor: 'AxLabelPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabelFlushOffset = function (a) {
+var _user$project$Vega$AxLabelFlushOffset = function (a) {
 	return {ctor: 'AxLabelFlushOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabelFlush = function (a) {
+var _user$project$Vega$AxLabelFlush = function (a) {
 	return {ctor: 'AxLabelFlush', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabelBound = function (a) {
+var _user$project$Vega$AxLabelBound = function (a) {
 	return {ctor: 'AxLabelBound', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxLabels = function (a) {
+var _user$project$Vega$AxLabels = function (a) {
 	return {ctor: 'AxLabels', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxGridScale = function (a) {
+var _user$project$Vega$AxGridScale = function (a) {
 	return {ctor: 'AxGridScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxGrid = function (a) {
+var _user$project$Vega$AxGrid = function (a) {
 	return {ctor: 'AxGrid', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxFormat = function (a) {
+var _user$project$Vega$AxFormat = function (a) {
 	return {ctor: 'AxFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxDomain = function (a) {
+var _user$project$Vega$AxDomain = function (a) {
 	return {ctor: 'AxDomain', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxSide = function (a) {
+var _user$project$Vega$AxSide = function (a) {
 	return {ctor: 'AxSide', _0: a};
 };
-var _gicentre$elm_vega$Vega$AxScale = function (a) {
+var _user$project$Vega$AxScale = function (a) {
 	return {ctor: 'AxScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$axis = F3(
+var _user$project$Vega$axis = F3(
 	function (scName, side, aProps) {
 		return F2(
 			function (x, y) {
@@ -10663,707 +10663,707 @@ var _gicentre$elm_vega$Vega$axis = F3(
 			_elm_lang$core$Json_Encode$object(
 				A2(
 					_elm_lang$core$List$map,
-					_gicentre$elm_vega$Vega$axisProperty,
+					_user$project$Vega$axisProperty,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$AxScale(scName),
+						_0: _user$project$Vega$AxScale(scName),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$AxSide(side),
+							_0: _user$project$Vega$AxSide(side),
 							_1: aProps
 						}
 					})));
 	});
-var _gicentre$elm_vega$Vega$IColor = function (a) {
+var _user$project$Vega$IColor = function (a) {
 	return {ctor: 'IColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$ITel = function (a) {
+var _user$project$Vega$ITel = function (a) {
 	return {ctor: 'ITel', _0: a};
 };
-var _gicentre$elm_vega$Vega$IDateTimeLocal = function (a) {
+var _user$project$Vega$IDateTimeLocal = function (a) {
 	return {ctor: 'IDateTimeLocal', _0: a};
 };
-var _gicentre$elm_vega$Vega$IWeek = function (a) {
+var _user$project$Vega$IWeek = function (a) {
 	return {ctor: 'IWeek', _0: a};
 };
-var _gicentre$elm_vega$Vega$IMonth = function (a) {
+var _user$project$Vega$IMonth = function (a) {
 	return {ctor: 'IMonth', _0: a};
 };
-var _gicentre$elm_vega$Vega$ITime = function (a) {
+var _user$project$Vega$ITime = function (a) {
 	return {ctor: 'ITime', _0: a};
 };
-var _gicentre$elm_vega$Vega$IDate = function (a) {
+var _user$project$Vega$IDate = function (a) {
 	return {ctor: 'IDate', _0: a};
 };
-var _gicentre$elm_vega$Vega$INumber = function (a) {
+var _user$project$Vega$INumber = function (a) {
 	return {ctor: 'INumber', _0: a};
 };
-var _gicentre$elm_vega$Vega$IText = function (a) {
+var _user$project$Vega$IText = function (a) {
 	return {ctor: 'IText', _0: a};
 };
-var _gicentre$elm_vega$Vega$ISelect = function (a) {
+var _user$project$Vega$ISelect = function (a) {
 	return {ctor: 'ISelect', _0: a};
 };
-var _gicentre$elm_vega$Vega$IRadio = function (a) {
+var _user$project$Vega$IRadio = function (a) {
 	return {ctor: 'IRadio', _0: a};
 };
-var _gicentre$elm_vega$Vega$ICheckbox = function (a) {
+var _user$project$Vega$ICheckbox = function (a) {
 	return {ctor: 'ICheckbox', _0: a};
 };
-var _gicentre$elm_vega$Vega$IRange = function (a) {
+var _user$project$Vega$IRange = function (a) {
 	return {ctor: 'IRange', _0: a};
 };
-var _gicentre$elm_vega$Vega$Rgb = function (a) {
+var _user$project$Vega$Rgb = function (a) {
 	return {ctor: 'Rgb', _0: a};
 };
-var _gicentre$elm_vega$Vega$Lab = {ctor: 'Lab'};
-var _gicentre$elm_vega$Vega$HslLong = {ctor: 'HslLong'};
-var _gicentre$elm_vega$Vega$Hsl = {ctor: 'Hsl'};
-var _gicentre$elm_vega$Vega$HclLong = {ctor: 'HclLong'};
-var _gicentre$elm_vega$Vega$Hcl = {ctor: 'Hcl'};
-var _gicentre$elm_vega$Vega$CubeHelixLong = function (a) {
+var _user$project$Vega$Lab = {ctor: 'Lab'};
+var _user$project$Vega$HslLong = {ctor: 'HslLong'};
+var _user$project$Vega$Hsl = {ctor: 'Hsl'};
+var _user$project$Vega$HclLong = {ctor: 'HclLong'};
+var _user$project$Vega$Hcl = {ctor: 'Hcl'};
+var _user$project$Vega$CubeHelixLong = function (a) {
 	return {ctor: 'CubeHelixLong', _0: a};
 };
-var _gicentre$elm_vega$Vega$CubeHelix = function (a) {
+var _user$project$Vega$CubeHelix = function (a) {
 	return {ctor: 'CubeHelix', _0: a};
 };
-var _gicentre$elm_vega$Vega$HCL = F3(
+var _user$project$Vega$HCL = F3(
 	function (a, b, c) {
 		return {ctor: 'HCL', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$LAB = F3(
+var _user$project$Vega$LAB = F3(
 	function (a, b, c) {
 		return {ctor: 'LAB', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$HSL = F3(
+var _user$project$Vega$HSL = F3(
 	function (a, b, c) {
 		return {ctor: 'HSL', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$RGB = F3(
+var _user$project$Vega$RGB = F3(
 	function (a, b, c) {
 		return {ctor: 'RGB', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$CoOrder = function (a) {
+var _user$project$Vega$CoOrder = function (a) {
 	return {ctor: 'CoOrder', _0: a};
 };
-var _gicentre$elm_vega$Vega$CoField = function (a) {
+var _user$project$Vega$CoField = function (a) {
 	return {ctor: 'CoField', _0: a};
 };
-var _gicentre$elm_vega$Vega$CGrabbing = {ctor: 'CGrabbing'};
-var _gicentre$elm_vega$Vega$CGrab = {ctor: 'CGrab'};
-var _gicentre$elm_vega$Vega$CZoomOut = {ctor: 'CZoomOut'};
-var _gicentre$elm_vega$Vega$CZoomIn = {ctor: 'CZoomIn'};
-var _gicentre$elm_vega$Vega$CNWSEResize = {ctor: 'CNWSEResize'};
-var _gicentre$elm_vega$Vega$CNESWResize = {ctor: 'CNESWResize'};
-var _gicentre$elm_vega$Vega$CNSResize = {ctor: 'CNSResize'};
-var _gicentre$elm_vega$Vega$CEWResize = {ctor: 'CEWResize'};
-var _gicentre$elm_vega$Vega$CSWResize = {ctor: 'CSWResize'};
-var _gicentre$elm_vega$Vega$CSEResize = {ctor: 'CSEResize'};
-var _gicentre$elm_vega$Vega$CNWResize = {ctor: 'CNWResize'};
-var _gicentre$elm_vega$Vega$CNEResize = {ctor: 'CNEResize'};
-var _gicentre$elm_vega$Vega$CWResize = {ctor: 'CWResize'};
-var _gicentre$elm_vega$Vega$CSResize = {ctor: 'CSResize'};
-var _gicentre$elm_vega$Vega$CEResize = {ctor: 'CEResize'};
-var _gicentre$elm_vega$Vega$CNResize = {ctor: 'CNResize'};
-var _gicentre$elm_vega$Vega$CRowResize = {ctor: 'CRowResize'};
-var _gicentre$elm_vega$Vega$CColResize = {ctor: 'CColResize'};
-var _gicentre$elm_vega$Vega$CAllScroll = {ctor: 'CAllScroll'};
-var _gicentre$elm_vega$Vega$CNotAllowed = {ctor: 'CNotAllowed'};
-var _gicentre$elm_vega$Vega$CNoDrop = {ctor: 'CNoDrop'};
-var _gicentre$elm_vega$Vega$CMove = {ctor: 'CMove'};
-var _gicentre$elm_vega$Vega$CCopy = {ctor: 'CCopy'};
-var _gicentre$elm_vega$Vega$CAlias = {ctor: 'CAlias'};
-var _gicentre$elm_vega$Vega$CVerticalText = {ctor: 'CVerticalText'};
-var _gicentre$elm_vega$Vega$CText = {ctor: 'CText'};
-var _gicentre$elm_vega$Vega$CCrosshair = {ctor: 'CCrosshair'};
-var _gicentre$elm_vega$Vega$CCell = {ctor: 'CCell'};
-var _gicentre$elm_vega$Vega$CWait = {ctor: 'CWait'};
-var _gicentre$elm_vega$Vega$CProgress = {ctor: 'CProgress'};
-var _gicentre$elm_vega$Vega$CPointer = {ctor: 'CPointer'};
-var _gicentre$elm_vega$Vega$CHelp = {ctor: 'CHelp'};
-var _gicentre$elm_vega$Vega$CContextMenu = {ctor: 'CContextMenu'};
-var _gicentre$elm_vega$Vega$CNone = {ctor: 'CNone'};
-var _gicentre$elm_vega$Vega$CDefault = {ctor: 'CDefault'};
-var _gicentre$elm_vega$Vega$CAuto = {ctor: 'CAuto'};
-var _gicentre$elm_vega$Vega$DSort = function (a) {
+var _user$project$Vega$CGrabbing = {ctor: 'CGrabbing'};
+var _user$project$Vega$CGrab = {ctor: 'CGrab'};
+var _user$project$Vega$CZoomOut = {ctor: 'CZoomOut'};
+var _user$project$Vega$CZoomIn = {ctor: 'CZoomIn'};
+var _user$project$Vega$CNWSEResize = {ctor: 'CNWSEResize'};
+var _user$project$Vega$CNESWResize = {ctor: 'CNESWResize'};
+var _user$project$Vega$CNSResize = {ctor: 'CNSResize'};
+var _user$project$Vega$CEWResize = {ctor: 'CEWResize'};
+var _user$project$Vega$CSWResize = {ctor: 'CSWResize'};
+var _user$project$Vega$CSEResize = {ctor: 'CSEResize'};
+var _user$project$Vega$CNWResize = {ctor: 'CNWResize'};
+var _user$project$Vega$CNEResize = {ctor: 'CNEResize'};
+var _user$project$Vega$CWResize = {ctor: 'CWResize'};
+var _user$project$Vega$CSResize = {ctor: 'CSResize'};
+var _user$project$Vega$CEResize = {ctor: 'CEResize'};
+var _user$project$Vega$CNResize = {ctor: 'CNResize'};
+var _user$project$Vega$CRowResize = {ctor: 'CRowResize'};
+var _user$project$Vega$CColResize = {ctor: 'CColResize'};
+var _user$project$Vega$CAllScroll = {ctor: 'CAllScroll'};
+var _user$project$Vega$CNotAllowed = {ctor: 'CNotAllowed'};
+var _user$project$Vega$CNoDrop = {ctor: 'CNoDrop'};
+var _user$project$Vega$CMove = {ctor: 'CMove'};
+var _user$project$Vega$CCopy = {ctor: 'CCopy'};
+var _user$project$Vega$CAlias = {ctor: 'CAlias'};
+var _user$project$Vega$CVerticalText = {ctor: 'CVerticalText'};
+var _user$project$Vega$CText = {ctor: 'CText'};
+var _user$project$Vega$CCrosshair = {ctor: 'CCrosshair'};
+var _user$project$Vega$CCell = {ctor: 'CCell'};
+var _user$project$Vega$CWait = {ctor: 'CWait'};
+var _user$project$Vega$CProgress = {ctor: 'CProgress'};
+var _user$project$Vega$CPointer = {ctor: 'CPointer'};
+var _user$project$Vega$CHelp = {ctor: 'CHelp'};
+var _user$project$Vega$CContextMenu = {ctor: 'CContextMenu'};
+var _user$project$Vega$CNone = {ctor: 'CNone'};
+var _user$project$Vega$CDefault = {ctor: 'CDefault'};
+var _user$project$Vega$CAuto = {ctor: 'CAuto'};
+var _user$project$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$DReferences = function (a) {
+var _user$project$Vega$DReferences = function (a) {
 	return {ctor: 'DReferences', _0: a};
 };
-var _gicentre$elm_vega$Vega$DFields = function (a) {
+var _user$project$Vega$DFields = function (a) {
 	return {ctor: 'DFields', _0: a};
 };
-var _gicentre$elm_vega$Vega$DField = function (a) {
+var _user$project$Vega$DField = function (a) {
 	return {ctor: 'DField', _0: a};
 };
-var _gicentre$elm_vega$Vega$DDataset = function (a) {
+var _user$project$Vega$DDataset = function (a) {
 	return {ctor: 'DDataset', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoUtc = function (a) {
+var _user$project$Vega$FoUtc = function (a) {
 	return {ctor: 'FoUtc', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoDate = function (a) {
+var _user$project$Vega$FoDate = function (a) {
 	return {ctor: 'FoDate', _0: a};
 };
-var _gicentre$elm_vega$Vega$FoBoolean = {ctor: 'FoBoolean'};
-var _gicentre$elm_vega$Vega$FoNumber = {ctor: 'FoNumber'};
-var _gicentre$elm_vega$Vega$Null = {ctor: 'Null'};
-var _gicentre$elm_vega$Vega$Empty = {ctor: 'Empty'};
-var _gicentre$elm_vega$Vega$Str = function (a) {
+var _user$project$Vega$FoBoolean = {ctor: 'FoBoolean'};
+var _user$project$Vega$FoNumber = {ctor: 'FoNumber'};
+var _user$project$Vega$Null = {ctor: 'Null'};
+var _user$project$Vega$Empty = {ctor: 'Empty'};
+var _user$project$Vega$Str = function (a) {
 	return {ctor: 'Str', _0: a};
 };
-var _gicentre$elm_vega$Vega$Number = function (a) {
+var _user$project$Vega$Number = function (a) {
 	return {ctor: 'Number', _0: a};
 };
-var _gicentre$elm_vega$Vega$Boolean = function (a) {
+var _user$project$Vega$Boolean = function (a) {
 	return {ctor: 'Boolean', _0: a};
 };
-var _gicentre$elm_vega$Vega$DataValues = function (a) {
+var _user$project$Vega$DataValues = function (a) {
 	return {ctor: 'DataValues', _0: a};
 };
-var _gicentre$elm_vega$Vega$Strings = function (a) {
+var _user$project$Vega$Strings = function (a) {
 	return {ctor: 'Strings', _0: a};
 };
-var _gicentre$elm_vega$Vega$Numbers = function (a) {
+var _user$project$Vega$Numbers = function (a) {
 	return {ctor: 'Numbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$DateTimes = function (a) {
+var _user$project$Vega$DateTimes = function (a) {
 	return {ctor: 'DateTimes', _0: a};
 };
-var _gicentre$elm_vega$Vega$Booleans = function (a) {
+var _user$project$Vega$Booleans = function (a) {
 	return {ctor: 'Booleans', _0: a};
 };
-var _gicentre$elm_vega$Vega$Custom = F2(
+var _user$project$Vega$Custom = F2(
 	function (a, b) {
 		return {ctor: 'Custom', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$Hover = function (a) {
+var _user$project$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
-var _gicentre$elm_vega$Vega$Exit = function (a) {
+var _user$project$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
-var _gicentre$elm_vega$Vega$Update = function (a) {
+var _user$project$Vega$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
-var _gicentre$elm_vega$Vega$Enter = function (a) {
+var _user$project$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
-var _gicentre$elm_vega$Vega$EForce = function (a) {
+var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
-var _gicentre$elm_vega$Vega$EEncode = function (a) {
+var _user$project$Vega$EEncode = function (a) {
 	return {ctor: 'EEncode', _0: a};
 };
-var _gicentre$elm_vega$Vega$EUpdate = function (a) {
+var _user$project$Vega$EUpdate = function (a) {
 	return {ctor: 'EUpdate', _0: a};
 };
-var _gicentre$elm_vega$Vega$EEvents = function (a) {
+var _user$project$Vega$EEvents = function (a) {
 	return {ctor: 'EEvents', _0: a};
 };
-var _gicentre$elm_vega$Vega$FaGroupBy = function (a) {
+var _user$project$Vega$FaGroupBy = function (a) {
 	return {ctor: 'FaGroupBy', _0: a};
 };
-var _gicentre$elm_vega$Vega$FaField = function (a) {
+var _user$project$Vega$FaField = function (a) {
 	return {ctor: 'FaField', _0: a};
 };
-var _gicentre$elm_vega$Vega$FaData = function (a) {
+var _user$project$Vega$FaData = function (a) {
 	return {ctor: 'FaData', _0: a};
 };
-var _gicentre$elm_vega$Vega$FaName = function (a) {
+var _user$project$Vega$FaName = function (a) {
 	return {ctor: 'FaName', _0: a};
 };
-var _gicentre$elm_vega$Vega$FieldSignal = function (a) {
+var _user$project$Vega$FieldSignal = function (a) {
 	return {ctor: 'FieldSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$FieldName = function (a) {
+var _user$project$Vega$FieldName = function (a) {
 	return {ctor: 'FieldName', _0: a};
 };
-var _gicentre$elm_vega$Vega$FParent = function (a) {
+var _user$project$Vega$FParent = function (a) {
 	return {ctor: 'FParent', _0: a};
 };
-var _gicentre$elm_vega$Vega$FGroup = function (a) {
+var _user$project$Vega$FGroup = function (a) {
 	return {ctor: 'FGroup', _0: a};
 };
-var _gicentre$elm_vega$Vega$FDatum = function (a) {
+var _user$project$Vega$FDatum = function (a) {
 	return {ctor: 'FDatum', _0: a};
 };
-var _gicentre$elm_vega$Vega$FSignal = function (a) {
+var _user$project$Vega$FSignal = function (a) {
 	return {ctor: 'FSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$FName = function (a) {
+var _user$project$Vega$FName = function (a) {
 	return {ctor: 'FName', _0: a};
 };
-var _gicentre$elm_vega$Vega$Parse = function (a) {
+var _user$project$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
-var _gicentre$elm_vega$Vega$TopojsonMesh = function (a) {
+var _user$project$Vega$TopojsonMesh = function (a) {
 	return {ctor: 'TopojsonMesh', _0: a};
 };
-var _gicentre$elm_vega$Vega$TopojsonFeature = function (a) {
+var _user$project$Vega$TopojsonFeature = function (a) {
 	return {ctor: 'TopojsonFeature', _0: a};
 };
-var _gicentre$elm_vega$Vega$DSV = function (a) {
+var _user$project$Vega$DSV = function (a) {
 	return {ctor: 'DSV', _0: a};
 };
-var _gicentre$elm_vega$Vega$TSV = {ctor: 'TSV'};
-var _gicentre$elm_vega$Vega$CSV = {ctor: 'CSV'};
-var _gicentre$elm_vega$Vega$JSON = {ctor: 'JSON'};
-var _gicentre$elm_vega$Vega$AlignRight = {ctor: 'AlignRight'};
-var _gicentre$elm_vega$Vega$AlignLeft = {ctor: 'AlignLeft'};
-var _gicentre$elm_vega$Vega$AlignCenter = {ctor: 'AlignCenter'};
-var _gicentre$elm_vega$Vega$InPlaceholder = function (a) {
+var _user$project$Vega$TSV = {ctor: 'TSV'};
+var _user$project$Vega$CSV = {ctor: 'CSV'};
+var _user$project$Vega$JSON = {ctor: 'JSON'};
+var _user$project$Vega$AlignRight = {ctor: 'AlignRight'};
+var _user$project$Vega$AlignLeft = {ctor: 'AlignLeft'};
+var _user$project$Vega$AlignCenter = {ctor: 'AlignCenter'};
+var _user$project$Vega$InPlaceholder = function (a) {
 	return {ctor: 'InPlaceholder', _0: a};
 };
-var _gicentre$elm_vega$Vega$InStep = function (a) {
+var _user$project$Vega$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$InName = function (a) {
+var _user$project$Vega$InName = function (a) {
 	return {ctor: 'InName', _0: a};
 };
-var _gicentre$elm_vega$Vega$InMax = function (a) {
+var _user$project$Vega$InMax = function (a) {
 	return {ctor: 'InMax', _0: a};
 };
-var _gicentre$elm_vega$Vega$InMin = function (a) {
+var _user$project$Vega$InMin = function (a) {
 	return {ctor: 'InMin', _0: a};
 };
-var _gicentre$elm_vega$Vega$InOptions = function (a) {
+var _user$project$Vega$InOptions = function (a) {
 	return {ctor: 'InOptions', _0: a};
 };
-var _gicentre$elm_vega$Vega$Element = function (a) {
+var _user$project$Vega$Element = function (a) {
 	return {ctor: 'Element', _0: a};
 };
-var _gicentre$elm_vega$Vega$Debounce = function (a) {
+var _user$project$Vega$Debounce = function (a) {
 	return {ctor: 'Debounce', _0: a};
 };
-var _gicentre$elm_vega$Vega$Trail = {ctor: 'Trail'};
-var _gicentre$elm_vega$Vega$Text = {ctor: 'Text'};
-var _gicentre$elm_vega$Vega$Symbol = {ctor: 'Symbol'};
-var _gicentre$elm_vega$Vega$Shape = {ctor: 'Shape'};
-var _gicentre$elm_vega$Vega$Rule = {ctor: 'Rule'};
-var _gicentre$elm_vega$Vega$Rect = {ctor: 'Rect'};
-var _gicentre$elm_vega$Vega$Path = {ctor: 'Path'};
-var _gicentre$elm_vega$Vega$Line = {ctor: 'Line'};
-var _gicentre$elm_vega$Vega$Group = {ctor: 'Group'};
-var _gicentre$elm_vega$Vega$Image = {ctor: 'Image'};
-var _gicentre$elm_vega$Vega$Area = {ctor: 'Area'};
-var _gicentre$elm_vega$Vega$Arc = {ctor: 'Arc'};
-var _gicentre$elm_vega$Vega$StepBefore = {ctor: 'StepBefore'};
-var _gicentre$elm_vega$Vega$StepAfter = {ctor: 'StepAfter'};
-var _gicentre$elm_vega$Vega$Stepwise = {ctor: 'Stepwise'};
-var _gicentre$elm_vega$Vega$Natural = {ctor: 'Natural'};
-var _gicentre$elm_vega$Vega$Monotone = {ctor: 'Monotone'};
-var _gicentre$elm_vega$Vega$Linear = {ctor: 'Linear'};
-var _gicentre$elm_vega$Vega$CatmullRom = {ctor: 'CatmullRom'};
-var _gicentre$elm_vega$Vega$Cardinal = {ctor: 'Cardinal'};
-var _gicentre$elm_vega$Vega$Basis = {ctor: 'Basis'};
-var _gicentre$elm_vega$Vega$Vertical = {ctor: 'Vertical'};
-var _gicentre$elm_vega$Vega$Horizontal = {ctor: 'Horizontal'};
-var _gicentre$elm_vega$Vega$MTheta = function (a) {
+var _user$project$Vega$Trail = {ctor: 'Trail'};
+var _user$project$Vega$Text = {ctor: 'Text'};
+var _user$project$Vega$Symbol = {ctor: 'Symbol'};
+var _user$project$Vega$Shape = {ctor: 'Shape'};
+var _user$project$Vega$Rule = {ctor: 'Rule'};
+var _user$project$Vega$Rect = {ctor: 'Rect'};
+var _user$project$Vega$Path = {ctor: 'Path'};
+var _user$project$Vega$Line = {ctor: 'Line'};
+var _user$project$Vega$Group = {ctor: 'Group'};
+var _user$project$Vega$Image = {ctor: 'Image'};
+var _user$project$Vega$Area = {ctor: 'Area'};
+var _user$project$Vega$Arc = {ctor: 'Arc'};
+var _user$project$Vega$StepBefore = {ctor: 'StepBefore'};
+var _user$project$Vega$StepAfter = {ctor: 'StepAfter'};
+var _user$project$Vega$Stepwise = {ctor: 'Stepwise'};
+var _user$project$Vega$Natural = {ctor: 'Natural'};
+var _user$project$Vega$Monotone = {ctor: 'Monotone'};
+var _user$project$Vega$Linear = {ctor: 'Linear'};
+var _user$project$Vega$CatmullRom = {ctor: 'CatmullRom'};
+var _user$project$Vega$Cardinal = {ctor: 'Cardinal'};
+var _user$project$Vega$Basis = {ctor: 'Basis'};
+var _user$project$Vega$Vertical = {ctor: 'Vertical'};
+var _user$project$Vega$Horizontal = {ctor: 'Horizontal'};
+var _user$project$Vega$MTheta = function (a) {
 	return {ctor: 'MTheta', _0: a};
 };
-var _gicentre$elm_vega$Vega$MText = function (a) {
+var _user$project$Vega$MText = function (a) {
 	return {ctor: 'MText', _0: a};
 };
-var _gicentre$elm_vega$Vega$MRadius = function (a) {
+var _user$project$Vega$MRadius = function (a) {
 	return {ctor: 'MRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$MLimit = function (a) {
+var _user$project$Vega$MLimit = function (a) {
 	return {ctor: 'MLimit', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontStyle = function (a) {
+var _user$project$Vega$MFontStyle = function (a) {
 	return {ctor: 'MFontStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontWeight = function (a) {
+var _user$project$Vega$MFontWeight = function (a) {
 	return {ctor: 'MFontWeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFontSize = function (a) {
+var _user$project$Vega$MFontSize = function (a) {
 	return {ctor: 'MFontSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFont = function (a) {
+var _user$project$Vega$MFont = function (a) {
 	return {ctor: 'MFont', _0: a};
 };
-var _gicentre$elm_vega$Vega$MEllipsis = function (a) {
+var _user$project$Vega$MEllipsis = function (a) {
 	return {ctor: 'MEllipsis', _0: a};
 };
-var _gicentre$elm_vega$Vega$MdY = function (a) {
+var _user$project$Vega$MdY = function (a) {
 	return {ctor: 'MdY', _0: a};
 };
-var _gicentre$elm_vega$Vega$MdX = function (a) {
+var _user$project$Vega$MdX = function (a) {
 	return {ctor: 'MdX', _0: a};
 };
-var _gicentre$elm_vega$Vega$MDir = function (a) {
+var _user$project$Vega$MDir = function (a) {
 	return {ctor: 'MDir', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAngle = function (a) {
+var _user$project$Vega$MAngle = function (a) {
 	return {ctor: 'MAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MSymbol = function (a) {
+var _user$project$Vega$MSymbol = function (a) {
 	return {ctor: 'MSymbol', _0: a};
 };
-var _gicentre$elm_vega$Vega$MShape = function (a) {
+var _user$project$Vega$MShape = function (a) {
 	return {ctor: 'MShape', _0: a};
 };
-var _gicentre$elm_vega$Vega$MPath = function (a) {
+var _user$project$Vega$MPath = function (a) {
 	return {ctor: 'MPath', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAspect = function (a) {
+var _user$project$Vega$MAspect = function (a) {
 	return {ctor: 'MAspect', _0: a};
 };
-var _gicentre$elm_vega$Vega$MUrl = function (a) {
+var _user$project$Vega$MUrl = function (a) {
 	return {ctor: 'MUrl', _0: a};
 };
-var _gicentre$elm_vega$Vega$MGroupClip = function (a) {
+var _user$project$Vega$MGroupClip = function (a) {
 	return {ctor: 'MGroupClip', _0: a};
 };
-var _gicentre$elm_vega$Vega$MOrient = function (a) {
+var _user$project$Vega$MOrient = function (a) {
 	return {ctor: 'MOrient', _0: a};
 };
-var _gicentre$elm_vega$Vega$MOuterRadius = function (a) {
+var _user$project$Vega$MOuterRadius = function (a) {
 	return {ctor: 'MOuterRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$MInnerRadius = function (a) {
+var _user$project$Vega$MInnerRadius = function (a) {
 	return {ctor: 'MInnerRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$MPadAngle = function (a) {
+var _user$project$Vega$MPadAngle = function (a) {
 	return {ctor: 'MPadAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MEndAngle = function (a) {
+var _user$project$Vega$MEndAngle = function (a) {
 	return {ctor: 'MEndAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStartAngle = function (a) {
+var _user$project$Vega$MStartAngle = function (a) {
 	return {ctor: 'MStartAngle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MSize = function (a) {
+var _user$project$Vega$MSize = function (a) {
 	return {ctor: 'MSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$MDefined = function (a) {
+var _user$project$Vega$MDefined = function (a) {
 	return {ctor: 'MDefined', _0: a};
 };
-var _gicentre$elm_vega$Vega$MTension = function (a) {
+var _user$project$Vega$MTension = function (a) {
 	return {ctor: 'MTension', _0: a};
 };
-var _gicentre$elm_vega$Vega$MInterpolate = function (a) {
+var _user$project$Vega$MInterpolate = function (a) {
 	return {ctor: 'MInterpolate', _0: a};
 };
-var _gicentre$elm_vega$Vega$MCornerRadius = function (a) {
+var _user$project$Vega$MCornerRadius = function (a) {
 	return {ctor: 'MCornerRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$MBaseline = function (a) {
+var _user$project$Vega$MBaseline = function (a) {
 	return {ctor: 'MBaseline', _0: a};
 };
-var _gicentre$elm_vega$Vega$MAlign = function (a) {
+var _user$project$Vega$MAlign = function (a) {
 	return {ctor: 'MAlign', _0: a};
 };
-var _gicentre$elm_vega$Vega$MZIndex = function (a) {
+var _user$project$Vega$MZIndex = function (a) {
 	return {ctor: 'MZIndex', _0: a};
 };
-var _gicentre$elm_vega$Vega$MTooltip = function (a) {
+var _user$project$Vega$MTooltip = function (a) {
 	return {ctor: 'MTooltip', _0: a};
 };
-var _gicentre$elm_vega$Vega$MHRef = function (a) {
+var _user$project$Vega$MHRef = function (a) {
 	return {ctor: 'MHRef', _0: a};
 };
-var _gicentre$elm_vega$Vega$MCursor = function (a) {
+var _user$project$Vega$MCursor = function (a) {
 	return {ctor: 'MCursor', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeMiterLimit = function (a) {
+var _user$project$Vega$MStrokeMiterLimit = function (a) {
 	return {ctor: 'MStrokeMiterLimit', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeJoin = function (a) {
+var _user$project$Vega$MStrokeJoin = function (a) {
 	return {ctor: 'MStrokeJoin', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeDashOffset = function (a) {
+var _user$project$Vega$MStrokeDashOffset = function (a) {
 	return {ctor: 'MStrokeDashOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeDash = function (a) {
+var _user$project$Vega$MStrokeDash = function (a) {
 	return {ctor: 'MStrokeDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeCap = function (a) {
+var _user$project$Vega$MStrokeCap = function (a) {
 	return {ctor: 'MStrokeCap', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeWidth = function (a) {
+var _user$project$Vega$MStrokeWidth = function (a) {
 	return {ctor: 'MStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStrokeOpacity = function (a) {
+var _user$project$Vega$MStrokeOpacity = function (a) {
 	return {ctor: 'MStrokeOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStroke = function (a) {
+var _user$project$Vega$MStroke = function (a) {
 	return {ctor: 'MStroke', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFillOpacity = function (a) {
+var _user$project$Vega$MFillOpacity = function (a) {
 	return {ctor: 'MFillOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFill = function (a) {
+var _user$project$Vega$MFill = function (a) {
 	return {ctor: 'MFill', _0: a};
 };
-var _gicentre$elm_vega$Vega$MOpacity = function (a) {
+var _user$project$Vega$MOpacity = function (a) {
 	return {ctor: 'MOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$MHeight = function (a) {
+var _user$project$Vega$MHeight = function (a) {
 	return {ctor: 'MHeight', _0: a};
 };
-var _gicentre$elm_vega$Vega$MYC = function (a) {
+var _user$project$Vega$MYC = function (a) {
 	return {ctor: 'MYC', _0: a};
 };
-var _gicentre$elm_vega$Vega$MY2 = function (a) {
+var _user$project$Vega$MY2 = function (a) {
 	return {ctor: 'MY2', _0: a};
 };
-var _gicentre$elm_vega$Vega$MY = function (a) {
+var _user$project$Vega$MY = function (a) {
 	return {ctor: 'MY', _0: a};
 };
-var _gicentre$elm_vega$Vega$MWidth = function (a) {
+var _user$project$Vega$MWidth = function (a) {
 	return {ctor: 'MWidth', _0: a};
 };
-var _gicentre$elm_vega$Vega$MXC = function (a) {
+var _user$project$Vega$MXC = function (a) {
 	return {ctor: 'MXC', _0: a};
 };
-var _gicentre$elm_vega$Vega$MX2 = function (a) {
+var _user$project$Vega$MX2 = function (a) {
 	return {ctor: 'MX2', _0: a};
 };
-var _gicentre$elm_vega$Vega$MX = function (a) {
+var _user$project$Vega$MX = function (a) {
 	return {ctor: 'MX', _0: a};
 };
-var _gicentre$elm_vega$Vega$VarianceP = {ctor: 'VarianceP'};
-var _gicentre$elm_vega$Vega$Variance = {ctor: 'Variance'};
-var _gicentre$elm_vega$Vega$Valid = {ctor: 'Valid'};
-var _gicentre$elm_vega$Vega$Sum = {ctor: 'Sum'};
-var _gicentre$elm_vega$Vega$StdevP = {ctor: 'StdevP'};
-var _gicentre$elm_vega$Vega$Stdev = {ctor: 'Stdev'};
-var _gicentre$elm_vega$Vega$Stderr = {ctor: 'Stderr'};
-var _gicentre$elm_vega$Vega$Q3 = {ctor: 'Q3'};
-var _gicentre$elm_vega$Vega$Q1 = {ctor: 'Q1'};
-var _gicentre$elm_vega$Vega$Missing = {ctor: 'Missing'};
-var _gicentre$elm_vega$Vega$Min = {ctor: 'Min'};
-var _gicentre$elm_vega$Vega$Median = {ctor: 'Median'};
-var _gicentre$elm_vega$Vega$Mean = {ctor: 'Mean'};
-var _gicentre$elm_vega$Vega$Max = {ctor: 'Max'};
-var _gicentre$elm_vega$Vega$Distinct = {ctor: 'Distinct'};
-var _gicentre$elm_vega$Vega$Count = {ctor: 'Count'};
-var _gicentre$elm_vega$Vega$CI1 = {ctor: 'CI1'};
-var _gicentre$elm_vega$Vega$CI0 = {ctor: 'CI0'};
-var _gicentre$elm_vega$Vega$Average = {ctor: 'Average'};
-var _gicentre$elm_vega$Vega$ArgMin = {ctor: 'ArgMin'};
-var _gicentre$elm_vega$Vega$ArgMax = {ctor: 'ArgMax'};
-var _gicentre$elm_vega$Vega$OGreedy = {ctor: 'OGreedy'};
-var _gicentre$elm_vega$Vega$OParity = {ctor: 'OParity'};
-var _gicentre$elm_vega$Vega$ONone = {ctor: 'ONone'};
-var _gicentre$elm_vega$Vega$PaAs = F5(
+var _user$project$Vega$VarianceP = {ctor: 'VarianceP'};
+var _user$project$Vega$Variance = {ctor: 'Variance'};
+var _user$project$Vega$Valid = {ctor: 'Valid'};
+var _user$project$Vega$Sum = {ctor: 'Sum'};
+var _user$project$Vega$StdevP = {ctor: 'StdevP'};
+var _user$project$Vega$Stdev = {ctor: 'Stdev'};
+var _user$project$Vega$Stderr = {ctor: 'Stderr'};
+var _user$project$Vega$Q3 = {ctor: 'Q3'};
+var _user$project$Vega$Q1 = {ctor: 'Q1'};
+var _user$project$Vega$Missing = {ctor: 'Missing'};
+var _user$project$Vega$Min = {ctor: 'Min'};
+var _user$project$Vega$Median = {ctor: 'Median'};
+var _user$project$Vega$Mean = {ctor: 'Mean'};
+var _user$project$Vega$Max = {ctor: 'Max'};
+var _user$project$Vega$Distinct = {ctor: 'Distinct'};
+var _user$project$Vega$Count = {ctor: 'Count'};
+var _user$project$Vega$CI1 = {ctor: 'CI1'};
+var _user$project$Vega$CI0 = {ctor: 'CI0'};
+var _user$project$Vega$Average = {ctor: 'Average'};
+var _user$project$Vega$ArgMin = {ctor: 'ArgMin'};
+var _user$project$Vega$ArgMax = {ctor: 'ArgMax'};
+var _user$project$Vega$OGreedy = {ctor: 'OGreedy'};
+var _user$project$Vega$OParity = {ctor: 'OParity'};
+var _user$project$Vega$ONone = {ctor: 'ONone'};
+var _user$project$Vega$PaAs = F5(
 	function (a, b, c, d, e) {
 		return {ctor: 'PaAs', _0: a, _1: b, _2: c, _3: d, _4: e};
 	});
-var _gicentre$elm_vega$Vega$PaPadding = function (a) {
+var _user$project$Vega$PaPadding = function (a) {
 	return {ctor: 'PaPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$PaRadius = function (a) {
+var _user$project$Vega$PaRadius = function (a) {
 	return {ctor: 'PaRadius', _0: a};
 };
-var _gicentre$elm_vega$Vega$PaSize = F2(
+var _user$project$Vega$PaSize = F2(
 	function (a, b) {
 		return {ctor: 'PaSize', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$PaSort = function (a) {
+var _user$project$Vega$PaSort = function (a) {
 	return {ctor: 'PaSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$PaField = function (a) {
+var _user$project$Vega$PaField = function (a) {
 	return {ctor: 'PaField', _0: a};
 };
-var _gicentre$elm_vega$Vega$OrderSignal = function (a) {
+var _user$project$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$Descend = {ctor: 'Descend'};
-var _gicentre$elm_vega$Vega$Ascend = {ctor: 'Ascend'};
-var _gicentre$elm_vega$Vega$PEdges = F4(
+var _user$project$Vega$Descend = {ctor: 'Descend'};
+var _user$project$Vega$Ascend = {ctor: 'Ascend'};
+var _user$project$Vega$PEdges = F4(
 	function (a, b, c, d) {
 		return {ctor: 'PEdges', _0: a, _1: b, _2: c, _3: d};
 	});
-var _gicentre$elm_vega$Vega$PSize = function (a) {
+var _user$project$Vega$PSize = function (a) {
 	return {ctor: 'PSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$RHeatmap = {ctor: 'RHeatmap'};
-var _gicentre$elm_vega$Vega$RRamp = {ctor: 'RRamp'};
-var _gicentre$elm_vega$Vega$ROrdinal = {ctor: 'ROrdinal'};
-var _gicentre$elm_vega$Vega$RDiverging = {ctor: 'RDiverging'};
-var _gicentre$elm_vega$Vega$RCategory = {ctor: 'RCategory'};
-var _gicentre$elm_vega$Vega$RSymbol = {ctor: 'RSymbol'};
-var _gicentre$elm_vega$Vega$RHeight = {ctor: 'RHeight'};
-var _gicentre$elm_vega$Vega$RWidth = {ctor: 'RWidth'};
-var _gicentre$elm_vega$Vega$ScCustom = function (a) {
+var _user$project$Vega$RHeatmap = {ctor: 'RHeatmap'};
+var _user$project$Vega$RRamp = {ctor: 'RRamp'};
+var _user$project$Vega$ROrdinal = {ctor: 'ROrdinal'};
+var _user$project$Vega$RDiverging = {ctor: 'RDiverging'};
+var _user$project$Vega$RCategory = {ctor: 'RCategory'};
+var _user$project$Vega$RSymbol = {ctor: 'RSymbol'};
+var _user$project$Vega$RHeight = {ctor: 'RHeight'};
+var _user$project$Vega$RWidth = {ctor: 'RWidth'};
+var _user$project$Vega$ScCustom = function (a) {
 	return {ctor: 'ScCustom', _0: a};
 };
-var _gicentre$elm_vega$Vega$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
-var _gicentre$elm_vega$Vega$ScBinLinear = {ctor: 'ScBinLinear'};
-var _gicentre$elm_vega$Vega$ScQuantize = {ctor: 'ScQuantize'};
-var _gicentre$elm_vega$Vega$ScQuantile = {ctor: 'ScQuantile'};
-var _gicentre$elm_vega$Vega$ScPoint = {ctor: 'ScPoint'};
-var _gicentre$elm_vega$Vega$ScBand = {ctor: 'ScBand'};
-var _gicentre$elm_vega$Vega$ScOrdinal = {ctor: 'ScOrdinal'};
-var _gicentre$elm_vega$Vega$ScSequential = {ctor: 'ScSequential'};
-var _gicentre$elm_vega$Vega$ScUtc = {ctor: 'ScUtc'};
-var _gicentre$elm_vega$Vega$ScTime = {ctor: 'ScTime'};
-var _gicentre$elm_vega$Vega$ScLog = {ctor: 'ScLog'};
-var _gicentre$elm_vega$Vega$ScSqrt = {ctor: 'ScSqrt'};
-var _gicentre$elm_vega$Vega$ScPow = {ctor: 'ScPow'};
-var _gicentre$elm_vega$Vega$ScLinear = {ctor: 'ScLinear'};
-var _gicentre$elm_vega$Vega$DData = function (a) {
+var _user$project$Vega$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
+var _user$project$Vega$ScBinLinear = {ctor: 'ScBinLinear'};
+var _user$project$Vega$ScQuantize = {ctor: 'ScQuantize'};
+var _user$project$Vega$ScQuantile = {ctor: 'ScQuantile'};
+var _user$project$Vega$ScPoint = {ctor: 'ScPoint'};
+var _user$project$Vega$ScBand = {ctor: 'ScBand'};
+var _user$project$Vega$ScOrdinal = {ctor: 'ScOrdinal'};
+var _user$project$Vega$ScSequential = {ctor: 'ScSequential'};
+var _user$project$Vega$ScUtc = {ctor: 'ScUtc'};
+var _user$project$Vega$ScTime = {ctor: 'ScTime'};
+var _user$project$Vega$ScLog = {ctor: 'ScLog'};
+var _user$project$Vega$ScSqrt = {ctor: 'ScSqrt'};
+var _user$project$Vega$ScPow = {ctor: 'ScPow'};
+var _user$project$Vega$ScLinear = {ctor: 'ScLinear'};
+var _user$project$Vega$DData = function (a) {
 	return {ctor: 'DData', _0: a};
 };
-var _gicentre$elm_vega$Vega$DSignal = function (a) {
+var _user$project$Vega$DSignal = function (a) {
 	return {ctor: 'DSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$DStrings = function (a) {
+var _user$project$Vega$DStrings = function (a) {
 	return {ctor: 'DStrings', _0: a};
 };
-var _gicentre$elm_vega$Vega$DNumbers = function (a) {
+var _user$project$Vega$DNumbers = function (a) {
 	return {ctor: 'DNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$NTickCount = function (a) {
+var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$IsNice = function (a) {
+var _user$project$Vega$IsNice = function (a) {
 	return {ctor: 'IsNice', _0: a};
 };
-var _gicentre$elm_vega$Vega$NInterval = F2(
+var _user$project$Vega$NInterval = F2(
 	function (a, b) {
 		return {ctor: 'NInterval', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$NYear = {ctor: 'NYear'};
-var _gicentre$elm_vega$Vega$NMonth = {ctor: 'NMonth'};
-var _gicentre$elm_vega$Vega$NWeek = {ctor: 'NWeek'};
-var _gicentre$elm_vega$Vega$NDay = {ctor: 'NDay'};
-var _gicentre$elm_vega$Vega$NHour = {ctor: 'NHour'};
-var _gicentre$elm_vega$Vega$NMinute = {ctor: 'NMinute'};
-var _gicentre$elm_vega$Vega$NSecond = {ctor: 'NSecond'};
-var _gicentre$elm_vega$Vega$NMillisecond = {ctor: 'NMillisecond'};
-var _gicentre$elm_vega$Vega$SRangeStep = function (a) {
+var _user$project$Vega$NYear = {ctor: 'NYear'};
+var _user$project$Vega$NMonth = {ctor: 'NMonth'};
+var _user$project$Vega$NWeek = {ctor: 'NWeek'};
+var _user$project$Vega$NDay = {ctor: 'NDay'};
+var _user$project$Vega$NHour = {ctor: 'NHour'};
+var _user$project$Vega$NMinute = {ctor: 'NMinute'};
+var _user$project$Vega$NSecond = {ctor: 'NSecond'};
+var _user$project$Vega$NMillisecond = {ctor: 'NMillisecond'};
+var _user$project$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPaddingOuter = function (a) {
+var _user$project$Vega$SPaddingOuter = function (a) {
 	return {ctor: 'SPaddingOuter', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPaddingInner = function (a) {
+var _user$project$Vega$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
-var _gicentre$elm_vega$Vega$SAlign = function (a) {
+var _user$project$Vega$SAlign = function (a) {
 	return {ctor: 'SAlign', _0: a};
 };
-var _gicentre$elm_vega$Vega$SBase = function (a) {
+var _user$project$Vega$SBase = function (a) {
 	return {ctor: 'SBase', _0: a};
 };
-var _gicentre$elm_vega$Vega$SExponent = function (a) {
+var _user$project$Vega$SExponent = function (a) {
 	return {ctor: 'SExponent', _0: a};
 };
-var _gicentre$elm_vega$Vega$SZero = function (a) {
+var _user$project$Vega$SZero = function (a) {
 	return {ctor: 'SZero', _0: a};
 };
-var _gicentre$elm_vega$Vega$SNice = function (a) {
+var _user$project$Vega$SNice = function (a) {
 	return {ctor: 'SNice', _0: a};
 };
-var _gicentre$elm_vega$Vega$SPadding = function (a) {
+var _user$project$Vega$SPadding = function (a) {
 	return {ctor: 'SPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$SInterpolate = function (a) {
+var _user$project$Vega$SInterpolate = function (a) {
 	return {ctor: 'SInterpolate', _0: a};
 };
-var _gicentre$elm_vega$Vega$SClamp = function (a) {
+var _user$project$Vega$SClamp = function (a) {
 	return {ctor: 'SClamp', _0: a};
 };
-var _gicentre$elm_vega$Vega$SRound = function (a) {
+var _user$project$Vega$SRound = function (a) {
 	return {ctor: 'SRound', _0: a};
 };
-var _gicentre$elm_vega$Vega$SReverse = function (a) {
+var _user$project$Vega$SReverse = function (a) {
 	return {ctor: 'SReverse', _0: a};
 };
-var _gicentre$elm_vega$Vega$SRange = function (a) {
+var _user$project$Vega$SRange = function (a) {
 	return {ctor: 'SRange', _0: a};
 };
-var _gicentre$elm_vega$Vega$SDomainMid = function (a) {
+var _user$project$Vega$SDomainMid = function (a) {
 	return {ctor: 'SDomainMid', _0: a};
 };
-var _gicentre$elm_vega$Vega$SDomainMin = function (a) {
+var _user$project$Vega$SDomainMin = function (a) {
 	return {ctor: 'SDomainMin', _0: a};
 };
-var _gicentre$elm_vega$Vega$SDomainMax = function (a) {
+var _user$project$Vega$SDomainMax = function (a) {
 	return {ctor: 'SDomainMax', _0: a};
 };
-var _gicentre$elm_vega$Vega$SDomain = function (a) {
+var _user$project$Vega$SDomain = function (a) {
 	return {ctor: 'SDomain', _0: a};
 };
-var _gicentre$elm_vega$Vega$SType = function (a) {
+var _user$project$Vega$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
-var _gicentre$elm_vega$Vega$RDefault = function (a) {
+var _user$project$Vega$RDefault = function (a) {
 	return {ctor: 'RDefault', _0: a};
 };
-var _gicentre$elm_vega$Vega$RStep = function (a) {
+var _user$project$Vega$RStep = function (a) {
 	return {ctor: 'RStep', _0: a};
 };
-var _gicentre$elm_vega$Vega$RData = function (a) {
+var _user$project$Vega$RData = function (a) {
 	return {ctor: 'RData', _0: a};
 };
-var _gicentre$elm_vega$Vega$RScheme = F2(
+var _user$project$Vega$RScheme = F2(
 	function (a, b) {
 		return {ctor: 'RScheme', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$RSignal = function (a) {
+var _user$project$Vega$RSignal = function (a) {
 	return {ctor: 'RSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$RStrings = function (a) {
+var _user$project$Vega$RStrings = function (a) {
 	return {ctor: 'RStrings', _0: a};
 };
-var _gicentre$elm_vega$Vega$RNumbers = function (a) {
+var _user$project$Vega$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$SExtent = F2(
+var _user$project$Vega$SExtent = F2(
 	function (a, b) {
 		return {ctor: 'SExtent', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$SCount = function (a) {
+var _user$project$Vega$SCount = function (a) {
 	return {ctor: 'SCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$SScheme = function (a) {
+var _user$project$Vega$SScheme = function (a) {
 	return {ctor: 'SScheme', _0: a};
 };
-var _gicentre$elm_vega$Vega$Bottom = {ctor: 'Bottom'};
-var _gicentre$elm_vega$Vega$Top = {ctor: 'Top'};
-var _gicentre$elm_vega$Vega$Right = {ctor: 'Right'};
-var _gicentre$elm_vega$Vega$Left = {ctor: 'Left'};
-var _gicentre$elm_vega$Vega$SigNumRef = function (a) {
+var _user$project$Vega$Bottom = {ctor: 'Bottom'};
+var _user$project$Vega$Top = {ctor: 'Top'};
+var _user$project$Vega$Right = {ctor: 'Right'};
+var _user$project$Vega$Left = {ctor: 'Left'};
+var _user$project$Vega$SigNumRef = function (a) {
 	return {ctor: 'SigNumRef', _0: a};
 };
-var _gicentre$elm_vega$Vega$SigNum = function (a) {
+var _user$project$Vega$SigNum = function (a) {
 	return {ctor: 'SigNum', _0: a};
 };
-var _gicentre$elm_vega$Vega$SigStrRef = function (a) {
+var _user$project$Vega$SigStrRef = function (a) {
 	return {ctor: 'SigStrRef', _0: a};
 };
-var _gicentre$elm_vega$Vega$SigStr = function (a) {
+var _user$project$Vega$SigStr = function (a) {
 	return {ctor: 'SigStr', _0: a};
 };
-var _gicentre$elm_vega$Vega$SExpr = function (a) {
+var _user$project$Vega$SExpr = function (a) {
 	return {ctor: 'SExpr', _0: a};
 };
-var _gicentre$elm_vega$Vega$SName = function (a) {
+var _user$project$Vega$SName = function (a) {
 	return {ctor: 'SName', _0: a};
 };
-var _gicentre$elm_vega$Vega$sigHeight = _gicentre$elm_vega$Vega$SigNumRef(
-	_gicentre$elm_vega$Vega$SName('height'));
-var _gicentre$elm_vega$Vega$sigPadding = _gicentre$elm_vega$Vega$SigNumRef(
-	_gicentre$elm_vega$Vega$SName('padding'));
-var _gicentre$elm_vega$Vega$sigWidth = _gicentre$elm_vega$Vega$SigNumRef(
-	_gicentre$elm_vega$Vega$SName('width'));
-var _gicentre$elm_vega$Vega$fieldSpec = function (f) {
+var _user$project$Vega$sigHeight = _user$project$Vega$SigNumRef(
+	_user$project$Vega$SName('height'));
+var _user$project$Vega$sigPadding = _user$project$Vega$SigNumRef(
+	_user$project$Vega$SName('padding'));
+var _user$project$Vega$sigWidth = _user$project$Vega$SigNumRef(
+	_user$project$Vega$SName('width'));
+var _user$project$Vega$fieldSpec = function (f) {
 	var _p60 = f;
 	if (_p60.ctor === 'FieldName') {
 		return _elm_lang$core$Json_Encode$string(_p60._0);
 	} else {
-		return _gicentre$elm_vega$Vega$signalStrSpec(
-			_gicentre$elm_vega$Vega$SigStrRef(
-				_gicentre$elm_vega$Vega$SName(_p60._0)));
+		return _user$project$Vega$signalStrSpec(
+			_user$project$Vega$SigStrRef(
+				_user$project$Vega$SName(_p60._0)));
 	}
 };
-var _gicentre$elm_vega$Vega$orderSpec = function (order) {
+var _user$project$Vega$orderSpec = function (order) {
 	var _p61 = order;
 	switch (_p61.ctor) {
 		case 'Ascend':
@@ -11371,44 +11371,44 @@ var _gicentre$elm_vega$Vega$orderSpec = function (order) {
 		case 'Descend':
 			return _elm_lang$core$Json_Encode$string('descending');
 		default:
-			return _gicentre$elm_vega$Vega$signalStrSpec(
-				_gicentre$elm_vega$Vega$SigStrRef(
-					_gicentre$elm_vega$Vega$SName(_p61._0)));
+			return _user$project$Vega$signalStrSpec(
+				_user$project$Vega$SigStrRef(
+					_user$project$Vega$SName(_p61._0)));
 	}
 };
-var _gicentre$elm_vega$Vega$comparatorProperty = function (comp) {
+var _user$project$Vega$comparatorProperty = function (comp) {
 	var _p62 = comp;
 	if (_p62.ctor === 'CoField') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'field',
 			_1: _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$fieldSpec, _p62._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p62._0))
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'order',
 			_1: _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$orderSpec, _p62._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$orderSpec, _p62._0))
 		};
 	}
 };
-var _gicentre$elm_vega$Vega$packProperty = function (pp) {
+var _user$project$Vega$packProperty = function (pp) {
 	var _p63 = pp;
 	switch (_p63.ctor) {
 		case 'PaField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _gicentre$elm_vega$Vega$fieldSpec(_p63._0)
+				_1: _user$project$Vega$fieldSpec(_p63._0)
 			};
 		case 'PaSort':
 			return {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$comparatorProperty, _p63._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$comparatorProperty, _p63._0))
 			};
 		case 'PaSize':
 			return {
@@ -11417,10 +11417,10 @@ var _gicentre$elm_vega$Vega$packProperty = function (pp) {
 				_1: _elm_lang$core$Json_Encode$list(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$signalNumSpec(_p63._0),
+						_0: _user$project$Vega$signalNumSpec(_p63._0),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$signalNumSpec(_p63._1),
+							_0: _user$project$Vega$signalNumSpec(_p63._1),
 							_1: {ctor: '[]'}
 						}
 					})
@@ -11431,7 +11431,7 @@ var _gicentre$elm_vega$Vega$packProperty = function (pp) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'radius',
-					_1: _gicentre$elm_vega$Vega$fieldSpec(_p64._0)
+					_1: _user$project$Vega$fieldSpec(_p64._0)
 				};
 			} else {
 				return {ctor: '_Tuple2', _0: 'radius', _1: _elm_lang$core$Json_Encode$null};
@@ -11440,7 +11440,7 @@ var _gicentre$elm_vega$Vega$packProperty = function (pp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
-				_1: _gicentre$elm_vega$Vega$signalNumSpec(_p63._0)
+				_1: _user$project$Vega$signalNumSpec(_p63._0)
 			};
 		default:
 			return {
@@ -11474,7 +11474,7 @@ var _gicentre$elm_vega$Vega$packProperty = function (pp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
+var _user$project$Vega$topMarkProperty = function (mProp) {
 	var _p65 = mProp;
 	switch (_p65.ctor) {
 		case 'MType':
@@ -11484,7 +11484,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					ctor: '_Tuple2',
 					_0: 'type',
 					_1: _elm_lang$core$Json_Encode$string(
-						_gicentre$elm_vega$Vega$markLabel(_p65._0))
+						_user$project$Vega$markLabel(_p65._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -11515,7 +11515,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					ctor: '_Tuple2',
 					_0: 'encode',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$encodingProperty, _p65._0))
+						A2(_elm_lang$core$List$map, _user$project$Vega$encodingProperty, _p65._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -11528,7 +11528,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					_1: _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sourceProperty(_p65._0),
+							_0: _user$project$Vega$sourceProperty(_p65._0),
 							_1: {ctor: '[]'}
 						})
 				},
@@ -11581,7 +11581,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					ctor: '_Tuple2',
 					_0: 'sort',
 					_1: _elm_lang$core$Json_Encode$object(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$comparatorProperty, _p65._0))
+						A2(_elm_lang$core$List$map, _user$project$Vega$comparatorProperty, _p65._0))
 				},
 				_1: {ctor: '[]'}
 			};
@@ -11603,14 +11603,14 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					var _p67 = _p66;
 					return {
 						ctor: '_Tuple2',
-						_0: _gicentre$elm_vega$Vega$vPropertyLabel(_p67._0),
+						_0: _user$project$Vega$vPropertyLabel(_p67._0),
 						_1: _p67._1
 					};
 				},
 				_p65._0);
 	}
 };
-var _gicentre$elm_vega$Vega$stackOffsetSpec = function (off) {
+var _user$project$Vega$stackOffsetSpec = function (off) {
 	var _p68 = off;
 	switch (_p68.ctor) {
 		case 'OfZero':
@@ -11620,39 +11620,39 @@ var _gicentre$elm_vega$Vega$stackOffsetSpec = function (off) {
 		case 'OfNormalize':
 			return _elm_lang$core$Json_Encode$string('normalize');
 		default:
-			return _gicentre$elm_vega$Vega$signalStrSpec(
-				_gicentre$elm_vega$Vega$SigStrRef(
-					_gicentre$elm_vega$Vega$SName(_p68._0)));
+			return _user$project$Vega$signalStrSpec(
+				_user$project$Vega$SigStrRef(
+					_user$project$Vega$SName(_p68._0)));
 	}
 };
-var _gicentre$elm_vega$Vega$stackProperty = function (sp) {
+var _user$project$Vega$stackProperty = function (sp) {
 	var _p69 = sp;
 	switch (_p69.ctor) {
 		case 'StField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _gicentre$elm_vega$Vega$fieldSpec(_p69._0)
+				_1: _user$project$Vega$fieldSpec(_p69._0)
 			};
 		case 'StGroupBy':
 			return {
 				ctor: '_Tuple2',
 				_0: 'groupby',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$fieldSpec, _p69._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p69._0))
 			};
 		case 'StSort':
 			return {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$comparatorProperty, _p69._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$comparatorProperty, _p69._0))
 			};
 		case 'StOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$stackOffsetSpec(_p69._0)
+				_1: _user$project$Vega$stackOffsetSpec(_p69._0)
 			};
 		default:
 			return {
@@ -11674,7 +11674,7 @@ var _gicentre$elm_vega$Vega$stackProperty = function (sp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
+var _user$project$Vega$transformSpec = function (trans) {
 	var _p70 = trans;
 	switch (_p70.ctor) {
 		case 'TAggregate':
@@ -11972,7 +11972,7 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('stack')
 					},
-					_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$stackProperty, _p70._0)
+					_1: A2(_elm_lang$core$List$map, _user$project$Vega$stackProperty, _p70._0)
 				});
 		case 'TForce':
 			return _elm_lang$core$Json_Encode$object(
@@ -12032,14 +12032,14 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'key',
-							_1: _gicentre$elm_vega$Vega$fieldSpec(_p70._0)
+							_1: _user$project$Vega$fieldSpec(_p70._0)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'parentKey',
-								_1: _gicentre$elm_vega$Vega$fieldSpec(_p70._1)
+								_1: _user$project$Vega$fieldSpec(_p70._1)
 							},
 							_1: {ctor: '[]'}
 						}
@@ -12065,7 +12065,7 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('pack')
 					},
-					_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$packProperty, _p70._0)
+					_1: A2(_elm_lang$core$List$map, _user$project$Vega$packProperty, _p70._0)
 				});
 		case 'TPartition':
 			return _elm_lang$core$Json_Encode$object(
@@ -12124,7 +12124,7 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 				});
 	}
 };
-var _gicentre$elm_vega$Vega$transform = F2(
+var _user$project$Vega$transform = F2(
 	function (transforms, dTable) {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
@@ -12135,36 +12135,36 @@ var _gicentre$elm_vega$Vega$transform = F2(
 					ctor: '_Tuple2',
 					_0: 'transform',
 					_1: _elm_lang$core$Json_Encode$list(
-						A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$transformSpec, transforms))
+						A2(_elm_lang$core$List$map, _user$project$Vega$transformSpec, transforms))
 				},
 				_1: {ctor: '[]'}
 			});
 	});
-var _gicentre$elm_vega$Vega$SiValues = function (a) {
+var _user$project$Vega$SiValues = function (a) {
 	return {ctor: 'SiValues', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiValue = function (a) {
+var _user$project$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiReact = function (a) {
+var _user$project$Vega$SiReact = function (a) {
 	return {ctor: 'SiReact', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiUpdate = function (a) {
+var _user$project$Vega$SiUpdate = function (a) {
 	return {ctor: 'SiUpdate', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiOn = function (a) {
+var _user$project$Vega$SiOn = function (a) {
 	return {ctor: 'SiOn', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiDescription = function (a) {
+var _user$project$Vega$SiDescription = function (a) {
 	return {ctor: 'SiDescription', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiBind = function (a) {
+var _user$project$Vega$SiBind = function (a) {
 	return {ctor: 'SiBind', _0: a};
 };
-var _gicentre$elm_vega$Vega$SiName = function (a) {
+var _user$project$Vega$SiName = function (a) {
 	return {ctor: 'SiName', _0: a};
 };
-var _gicentre$elm_vega$Vega$signal = F2(
+var _user$project$Vega$signal = F2(
 	function (sigName, sProps) {
 		return F2(
 			function (x, y) {
@@ -12173,22 +12173,22 @@ var _gicentre$elm_vega$Vega$signal = F2(
 			_elm_lang$core$Json_Encode$object(
 				A2(
 					_elm_lang$core$List$map,
-					_gicentre$elm_vega$Vega$signalProperty,
+					_user$project$Vega$signalProperty,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiName(sigName),
+						_0: _user$project$Vega$SiName(sigName),
 						_1: sProps
 					})));
 	});
-var _gicentre$elm_vega$Vega$ByField = function (a) {
+var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
-var _gicentre$elm_vega$Vega$Op = function (a) {
+var _user$project$Vega$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
-var _gicentre$elm_vega$Vega$Descending = {ctor: 'Descending'};
-var _gicentre$elm_vega$Vega$Ascending = {ctor: 'Ascending'};
-var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
+var _user$project$Vega$Descending = {ctor: 'Descending'};
+var _user$project$Vega$Ascending = {ctor: 'Ascending'};
+var _user$project$Vega$dataRefProperty = function (dataRef) {
 	var _p71 = dataRef;
 	switch (_p71.ctor) {
 		case 'DDataset':
@@ -12215,7 +12215,7 @@ var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
 				ctor: '_Tuple2',
 				_0: 'fields',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p71._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p71._0))
 			};
 		default:
 			var _p72 = _p71._0;
@@ -12223,7 +12223,7 @@ var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
 				_p72,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$Ascending,
+					_0: _user$project$Vega$Ascending,
 					_1: {ctor: '[]'}
 				}) ? {
 				ctor: '_Tuple2',
@@ -12233,11 +12233,11 @@ var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$sortProperty, _p72))
+					A2(_elm_lang$core$List$map, _user$project$Vega$sortProperty, _p72))
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$scaleDomainSpec = function (sdType) {
+var _user$project$Vega$scaleDomainSpec = function (sdType) {
 	var _p73 = sdType;
 	switch (_p73.ctor) {
 		case 'DNumbers':
@@ -12250,15 +12250,15 @@ var _gicentre$elm_vega$Vega$scaleDomainSpec = function (sdType) {
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p73._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p73._0),
 					_1: {ctor: '[]'}
 				});
 		default:
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p73._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p73._0));
 	}
 };
-var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
+var _user$project$Vega$scaleProperty = function (scaleProp) {
 	var _p74 = scaleProp;
 	switch (_p74.ctor) {
 		case 'SType':
@@ -12266,13 +12266,13 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$scaleLabel(_p74._0))
+					_user$project$Vega$scaleLabel(_p74._0))
 			};
 		case 'SDomain':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _gicentre$elm_vega$Vega$scaleDomainSpec(_p74._0)
+				_1: _user$project$Vega$scaleDomainSpec(_p74._0)
 			};
 		case 'SDomainMax':
 			return {
@@ -12316,7 +12316,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$signalReferenceProperty(_p75._0),
+								_0: _user$project$Vega$signalReferenceProperty(_p75._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -12327,10 +12327,10 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							A2(
 								_elm_lang$core$List$map,
-								_gicentre$elm_vega$Vega$schemeProperty,
+								_user$project$Vega$schemeProperty,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SScheme(_p75._0),
+									_0: _user$project$Vega$SScheme(_p75._0),
 									_1: _p75._1
 								}))
 					};
@@ -12341,7 +12341,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$dataRefProperty(_p75._0),
+								_0: _user$project$Vega$dataRefProperty(_p75._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -12365,7 +12365,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string(
-							_gicentre$elm_vega$Vega$rangeDefaultLabel(_p75._0))
+							_user$project$Vega$rangeDefaultLabel(_p75._0))
 					};
 			}
 		case 'SPadding':
@@ -12408,13 +12408,13 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
-				_1: _gicentre$elm_vega$Vega$interpolateSpec(_p74._0)
+				_1: _user$project$Vega$interpolateSpec(_p74._0)
 			};
 		case 'SNice':
 			return {
 				ctor: '_Tuple2',
 				_0: 'nice',
-				_1: _gicentre$elm_vega$Vega$niceSpec(_p74._0)
+				_1: _user$project$Vega$niceSpec(_p74._0)
 			};
 		case 'SZero':
 			return {
@@ -12448,7 +12448,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$scale = F2(
+var _user$project$Vega$scale = F2(
 	function (name, sProps) {
 		return F2(
 			function (x, y) {
@@ -12462,113 +12462,113 @@ var _gicentre$elm_vega$Vega$scale = F2(
 						_0: 'name',
 						_1: _elm_lang$core$Json_Encode$string(name)
 					},
-					_1: A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$scaleProperty, sProps)
+					_1: A2(_elm_lang$core$List$map, _user$project$Vega$scaleProperty, sProps)
 				}));
 	});
-var _gicentre$elm_vega$Vega$SFacet = function (a) {
+var _user$project$Vega$SFacet = function (a) {
 	return {ctor: 'SFacet', _0: a};
 };
-var _gicentre$elm_vega$Vega$SData = function (a) {
+var _user$project$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
-var _gicentre$elm_vega$Vega$OffsetSignal = function (a) {
+var _user$project$Vega$OffsetSignal = function (a) {
 	return {ctor: 'OffsetSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$OfNormalize = {ctor: 'OfNormalize'};
-var _gicentre$elm_vega$Vega$OfCenter = {ctor: 'OfCenter'};
-var _gicentre$elm_vega$Vega$OfZero = {ctor: 'OfZero'};
-var _gicentre$elm_vega$Vega$StAs = F2(
+var _user$project$Vega$OfNormalize = {ctor: 'OfNormalize'};
+var _user$project$Vega$OfCenter = {ctor: 'OfCenter'};
+var _user$project$Vega$OfZero = {ctor: 'OfZero'};
+var _user$project$Vega$StAs = F2(
 	function (a, b) {
 		return {ctor: 'StAs', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$StOffset = function (a) {
+var _user$project$Vega$StOffset = function (a) {
 	return {ctor: 'StOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$StSort = function (a) {
+var _user$project$Vega$StSort = function (a) {
 	return {ctor: 'StSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$StGroupBy = function (a) {
+var _user$project$Vega$StGroupBy = function (a) {
 	return {ctor: 'StGroupBy', _0: a};
 };
-var _gicentre$elm_vega$Vega$StField = function (a) {
+var _user$project$Vega$StField = function (a) {
 	return {ctor: 'StField', _0: a};
 };
-var _gicentre$elm_vega$Vega$CSquare = {ctor: 'CSquare'};
-var _gicentre$elm_vega$Vega$CRound = {ctor: 'CRound'};
-var _gicentre$elm_vega$Vega$CButt = {ctor: 'CButt'};
-var _gicentre$elm_vega$Vega$JBevel = {ctor: 'JBevel'};
-var _gicentre$elm_vega$Vega$JRound = {ctor: 'JRound'};
-var _gicentre$elm_vega$Vega$JMiter = {ctor: 'JMiter'};
-var _gicentre$elm_vega$Vega$SymPath = function (a) {
+var _user$project$Vega$CSquare = {ctor: 'CSquare'};
+var _user$project$Vega$CRound = {ctor: 'CRound'};
+var _user$project$Vega$CButt = {ctor: 'CButt'};
+var _user$project$Vega$JBevel = {ctor: 'JBevel'};
+var _user$project$Vega$JRound = {ctor: 'JRound'};
+var _user$project$Vega$JMiter = {ctor: 'JMiter'};
+var _user$project$Vega$SymPath = function (a) {
 	return {ctor: 'SymPath', _0: a};
 };
-var _gicentre$elm_vega$Vega$TriangleDown = {ctor: 'TriangleDown'};
-var _gicentre$elm_vega$Vega$TriangleUp = {ctor: 'TriangleUp'};
-var _gicentre$elm_vega$Vega$Diamond = {ctor: 'Diamond'};
-var _gicentre$elm_vega$Vega$Cross = {ctor: 'Cross'};
-var _gicentre$elm_vega$Vega$SymSquare = {ctor: 'SymSquare'};
-var _gicentre$elm_vega$Vega$SymCircle = {ctor: 'SymCircle'};
-var _gicentre$elm_vega$Vega$RightToLeft = {ctor: 'RightToLeft'};
-var _gicentre$elm_vega$Vega$LeftToRight = {ctor: 'LeftToRight'};
-var _gicentre$elm_vega$Vega$Milliseconds = {ctor: 'Milliseconds'};
-var _gicentre$elm_vega$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
-var _gicentre$elm_vega$Vega$Seconds = {ctor: 'Seconds'};
-var _gicentre$elm_vega$Vega$MinutesSeconds = {ctor: 'MinutesSeconds'};
-var _gicentre$elm_vega$Vega$Minutes = {ctor: 'Minutes'};
-var _gicentre$elm_vega$Vega$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$HoursMinutes = {ctor: 'HoursMinutes'};
-var _gicentre$elm_vega$Vega$Hours = {ctor: 'Hours'};
-var _gicentre$elm_vega$Vega$Day = {ctor: 'Day'};
-var _gicentre$elm_vega$Vega$Date = {ctor: 'Date'};
-var _gicentre$elm_vega$Vega$MonthDate = {ctor: 'MonthDate'};
-var _gicentre$elm_vega$Vega$Month = {ctor: 'Month'};
-var _gicentre$elm_vega$Vega$QuarterMonth = {ctor: 'QuarterMonth'};
-var _gicentre$elm_vega$Vega$Quarter = {ctor: 'Quarter'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
-var _gicentre$elm_vega$Vega$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
-var _gicentre$elm_vega$Vega$YearMonthDate = {ctor: 'YearMonthDate'};
-var _gicentre$elm_vega$Vega$YearMonth = {ctor: 'YearMonth'};
-var _gicentre$elm_vega$Vega$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
-var _gicentre$elm_vega$Vega$YearQuarter = {ctor: 'YearQuarter'};
-var _gicentre$elm_vega$Vega$Year = {ctor: 'Year'};
-var _gicentre$elm_vega$Vega$MGroup = function (a) {
+var _user$project$Vega$TriangleDown = {ctor: 'TriangleDown'};
+var _user$project$Vega$TriangleUp = {ctor: 'TriangleUp'};
+var _user$project$Vega$Diamond = {ctor: 'Diamond'};
+var _user$project$Vega$Cross = {ctor: 'Cross'};
+var _user$project$Vega$SymSquare = {ctor: 'SymSquare'};
+var _user$project$Vega$SymCircle = {ctor: 'SymCircle'};
+var _user$project$Vega$RightToLeft = {ctor: 'RightToLeft'};
+var _user$project$Vega$LeftToRight = {ctor: 'LeftToRight'};
+var _user$project$Vega$Milliseconds = {ctor: 'Milliseconds'};
+var _user$project$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
+var _user$project$Vega$Seconds = {ctor: 'Seconds'};
+var _user$project$Vega$MinutesSeconds = {ctor: 'MinutesSeconds'};
+var _user$project$Vega$Minutes = {ctor: 'Minutes'};
+var _user$project$Vega$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
+var _user$project$Vega$HoursMinutes = {ctor: 'HoursMinutes'};
+var _user$project$Vega$Hours = {ctor: 'Hours'};
+var _user$project$Vega$Day = {ctor: 'Day'};
+var _user$project$Vega$Date = {ctor: 'Date'};
+var _user$project$Vega$MonthDate = {ctor: 'MonthDate'};
+var _user$project$Vega$Month = {ctor: 'Month'};
+var _user$project$Vega$QuarterMonth = {ctor: 'QuarterMonth'};
+var _user$project$Vega$Quarter = {ctor: 'Quarter'};
+var _user$project$Vega$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
+var _user$project$Vega$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
+var _user$project$Vega$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
+var _user$project$Vega$YearMonthDate = {ctor: 'YearMonthDate'};
+var _user$project$Vega$YearMonth = {ctor: 'YearMonth'};
+var _user$project$Vega$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
+var _user$project$Vega$YearQuarter = {ctor: 'YearQuarter'};
+var _user$project$Vega$Year = {ctor: 'Year'};
+var _user$project$Vega$MGroup = function (a) {
 	return {ctor: 'MGroup', _0: a};
 };
-var _gicentre$elm_vega$Vega$MStyle = function (a) {
+var _user$project$Vega$MStyle = function (a) {
 	return {ctor: 'MStyle', _0: a};
 };
-var _gicentre$elm_vega$Vega$MRole = function (a) {
+var _user$project$Vega$MRole = function (a) {
 	return {ctor: 'MRole', _0: a};
 };
-var _gicentre$elm_vega$Vega$MSort = function (a) {
+var _user$project$Vega$MSort = function (a) {
 	return {ctor: 'MSort', _0: a};
 };
-var _gicentre$elm_vega$Vega$MName = function (a) {
+var _user$project$Vega$MName = function (a) {
 	return {ctor: 'MName', _0: a};
 };
-var _gicentre$elm_vega$Vega$MKey = function (a) {
+var _user$project$Vega$MKey = function (a) {
 	return {ctor: 'MKey', _0: a};
 };
-var _gicentre$elm_vega$Vega$MInteractive = function (a) {
+var _user$project$Vega$MInteractive = function (a) {
 	return {ctor: 'MInteractive', _0: a};
 };
-var _gicentre$elm_vega$Vega$MFrom = function (a) {
+var _user$project$Vega$MFrom = function (a) {
 	return {ctor: 'MFrom', _0: a};
 };
-var _gicentre$elm_vega$Vega$MEncode = function (a) {
+var _user$project$Vega$MEncode = function (a) {
 	return {ctor: 'MEncode', _0: a};
 };
-var _gicentre$elm_vega$Vega$MDescription = function (a) {
+var _user$project$Vega$MDescription = function (a) {
 	return {ctor: 'MDescription', _0: a};
 };
-var _gicentre$elm_vega$Vega$MClip = function (a) {
+var _user$project$Vega$MClip = function (a) {
 	return {ctor: 'MClip', _0: a};
 };
-var _gicentre$elm_vega$Vega$MType = function (a) {
+var _user$project$Vega$MType = function (a) {
 	return {ctor: 'MType', _0: a};
 };
-var _gicentre$elm_vega$Vega$mark = F2(
+var _user$project$Vega$mark = F2(
 	function (mark, mProps) {
 		return F2(
 			function (x, y) {
@@ -12577,720 +12577,620 @@ var _gicentre$elm_vega$Vega$mark = F2(
 			_elm_lang$core$Json_Encode$object(
 				A2(
 					_elm_lang$core$List$concatMap,
-					_gicentre$elm_vega$Vega$topMarkProperty,
+					_user$project$Vega$topMarkProperty,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MType(mark),
+						_0: _user$project$Vega$MType(mark),
 						_1: mProps
 					})));
 	});
-var _gicentre$elm_vega$Vega$TResolveFilter = {ctor: 'TResolveFilter'};
-var _gicentre$elm_vega$Vega$TCrossFilter = {ctor: 'TCrossFilter'};
-var _gicentre$elm_vega$Vega$TTreeMap = {ctor: 'TTreeMap'};
-var _gicentre$elm_vega$Vega$TTree = {ctor: 'TTree'};
-var _gicentre$elm_vega$Vega$TPartition = {ctor: 'TPartition'};
-var _gicentre$elm_vega$Vega$TPack = function (a) {
+var _user$project$Vega$TResolveFilter = {ctor: 'TResolveFilter'};
+var _user$project$Vega$TCrossFilter = {ctor: 'TCrossFilter'};
+var _user$project$Vega$TTreeMap = {ctor: 'TTreeMap'};
+var _user$project$Vega$TTree = {ctor: 'TTree'};
+var _user$project$Vega$TPartition = {ctor: 'TPartition'};
+var _user$project$Vega$TPack = function (a) {
 	return {ctor: 'TPack', _0: a};
 };
-var _gicentre$elm_vega$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
-var _gicentre$elm_vega$Vega$TStratify = F2(
+var _user$project$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
+var _user$project$Vega$TStratify = F2(
 	function (a, b) {
 		return {ctor: 'TStratify', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$TNest = {ctor: 'TNest'};
-var _gicentre$elm_vega$Vega$TWordCloud = {ctor: 'TWordCloud'};
-var _gicentre$elm_vega$Vega$TVoronoi = {ctor: 'TVoronoi'};
-var _gicentre$elm_vega$Vega$TForce = {ctor: 'TForce'};
-var _gicentre$elm_vega$Vega$TStack = function (a) {
+var _user$project$Vega$TNest = {ctor: 'TNest'};
+var _user$project$Vega$TWordCloud = {ctor: 'TWordCloud'};
+var _user$project$Vega$TVoronoi = {ctor: 'TVoronoi'};
+var _user$project$Vega$TForce = {ctor: 'TForce'};
+var _user$project$Vega$TStack = function (a) {
 	return {ctor: 'TStack', _0: a};
 };
-var _gicentre$elm_vega$Vega$TPie = {ctor: 'TPie'};
-var _gicentre$elm_vega$Vega$TLinkpath = {ctor: 'TLinkpath'};
-var _gicentre$elm_vega$Vega$TGraticule = {ctor: 'TGraticule'};
-var _gicentre$elm_vega$Vega$TGeoShape = {ctor: 'TGeoShape'};
-var _gicentre$elm_vega$Vega$TGeoPoint = {ctor: 'TGeoPoint'};
-var _gicentre$elm_vega$Vega$TGeoPath = {ctor: 'TGeoPath'};
-var _gicentre$elm_vega$Vega$TGeoJson = {ctor: 'TGeoJson'};
-var _gicentre$elm_vega$Vega$TContour = {ctor: 'TContour'};
-var _gicentre$elm_vega$Vega$TWindow = {ctor: 'TWindow'};
-var _gicentre$elm_vega$Vega$TSequence = {ctor: 'TSequence'};
-var _gicentre$elm_vega$Vega$TSample = {ctor: 'TSample'};
-var _gicentre$elm_vega$Vega$TProject = {ctor: 'TProject'};
-var _gicentre$elm_vega$Vega$TLookup = {ctor: 'TLookup'};
-var _gicentre$elm_vega$Vega$TJoinAggregate = {ctor: 'TJoinAggregate'};
-var _gicentre$elm_vega$Vega$TImpute = {ctor: 'TImpute'};
-var _gicentre$elm_vega$Vega$TIdentifier = {ctor: 'TIdentifier'};
-var _gicentre$elm_vega$Vega$TFormula = {ctor: 'TFormula'};
-var _gicentre$elm_vega$Vega$TFold = {ctor: 'TFold'};
-var _gicentre$elm_vega$Vega$TFilter = {ctor: 'TFilter'};
-var _gicentre$elm_vega$Vega$TExtent = {ctor: 'TExtent'};
-var _gicentre$elm_vega$Vega$TDensity = {ctor: 'TDensity'};
-var _gicentre$elm_vega$Vega$TCross = {ctor: 'TCross'};
-var _gicentre$elm_vega$Vega$TCountPattern = {ctor: 'TCountPattern'};
-var _gicentre$elm_vega$Vega$TCollect = {ctor: 'TCollect'};
-var _gicentre$elm_vega$Vega$TBin = {ctor: 'TBin'};
-var _gicentre$elm_vega$Vega$TAggregate = {ctor: 'TAggregate'};
-var _gicentre$elm_vega$Vega$TrModifyValues = F2(
+var _user$project$Vega$TPie = {ctor: 'TPie'};
+var _user$project$Vega$TLinkpath = {ctor: 'TLinkpath'};
+var _user$project$Vega$TGraticule = {ctor: 'TGraticule'};
+var _user$project$Vega$TGeoShape = {ctor: 'TGeoShape'};
+var _user$project$Vega$TGeoPoint = {ctor: 'TGeoPoint'};
+var _user$project$Vega$TGeoPath = {ctor: 'TGeoPath'};
+var _user$project$Vega$TGeoJson = {ctor: 'TGeoJson'};
+var _user$project$Vega$TContour = {ctor: 'TContour'};
+var _user$project$Vega$TWindow = {ctor: 'TWindow'};
+var _user$project$Vega$TSequence = {ctor: 'TSequence'};
+var _user$project$Vega$TSample = {ctor: 'TSample'};
+var _user$project$Vega$TProject = {ctor: 'TProject'};
+var _user$project$Vega$TLookup = {ctor: 'TLookup'};
+var _user$project$Vega$TJoinAggregate = {ctor: 'TJoinAggregate'};
+var _user$project$Vega$TImpute = {ctor: 'TImpute'};
+var _user$project$Vega$TIdentifier = {ctor: 'TIdentifier'};
+var _user$project$Vega$TFormula = {ctor: 'TFormula'};
+var _user$project$Vega$TFold = {ctor: 'TFold'};
+var _user$project$Vega$TFilter = {ctor: 'TFilter'};
+var _user$project$Vega$TExtent = {ctor: 'TExtent'};
+var _user$project$Vega$TDensity = {ctor: 'TDensity'};
+var _user$project$Vega$TCross = {ctor: 'TCross'};
+var _user$project$Vega$TCountPattern = {ctor: 'TCountPattern'};
+var _user$project$Vega$TCollect = {ctor: 'TCollect'};
+var _user$project$Vega$TBin = {ctor: 'TBin'};
+var _user$project$Vega$TAggregate = {ctor: 'TAggregate'};
+var _user$project$Vega$TrModifyValues = F2(
 	function (a, b) {
 		return {ctor: 'TrModifyValues', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$TrToggle = function (a) {
+var _user$project$Vega$TrToggle = function (a) {
 	return {ctor: 'TrToggle', _0: a};
 };
-var _gicentre$elm_vega$Vega$TrRemove = function (a) {
+var _user$project$Vega$TrRemove = function (a) {
 	return {ctor: 'TrRemove', _0: a};
 };
-var _gicentre$elm_vega$Vega$TrInsert = function (a) {
+var _user$project$Vega$TrInsert = function (a) {
 	return {ctor: 'TrInsert', _0: a};
 };
-var _gicentre$elm_vega$Vega$TrTrigger = function (a) {
+var _user$project$Vega$TrTrigger = function (a) {
 	return {ctor: 'TrTrigger', _0: a};
 };
-var _gicentre$elm_vega$Vega$trigger = F2(
+var _user$project$Vega$trigger = F2(
 	function (trName, trProps) {
 		return _elm_lang$core$Json_Encode$object(
 			A2(
 				_elm_lang$core$List$concatMap,
-				_gicentre$elm_vega$Vega$triggerProperties,
+				_user$project$Vega$triggerProperties,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TrTrigger(trName),
+					_0: _user$project$Vega$TrTrigger(trName),
 					_1: trProps
 				}));
 	});
-var _gicentre$elm_vega$Vega$Alphabetic = {ctor: 'Alphabetic'};
-var _gicentre$elm_vega$Vega$AlignBottom = {ctor: 'AlignBottom'};
-var _gicentre$elm_vega$Vega$AlignMiddle = {ctor: 'AlignMiddle'};
-var _gicentre$elm_vega$Vega$AlignTop = {ctor: 'AlignTop'};
-var _gicentre$elm_vega$Vega$VIfElse = F3(
+var _user$project$Vega$Alphabetic = {ctor: 'Alphabetic'};
+var _user$project$Vega$AlignBottom = {ctor: 'AlignBottom'};
+var _user$project$Vega$AlignMiddle = {ctor: 'AlignMiddle'};
+var _user$project$Vega$AlignTop = {ctor: 'AlignTop'};
+var _user$project$Vega$VIfElse = F3(
 	function (a, b, c) {
 		return {ctor: 'VIfElse', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$VNull = {ctor: 'VNull'};
-var _gicentre$elm_vega$Vega$VBool = function (a) {
+var _user$project$Vega$VNull = {ctor: 'VNull'};
+var _user$project$Vega$VBool = function (a) {
 	return {ctor: 'VBool', _0: a};
 };
-var _gicentre$elm_vega$Vega$VString = function (a) {
+var _user$project$Vega$VString = function (a) {
 	return {ctor: 'VString', _0: a};
 };
-var _gicentre$elm_vega$Vega$VObject = function (a) {
+var _user$project$Vega$VObject = function (a) {
 	return {ctor: 'VObject', _0: a};
 };
-var _gicentre$elm_vega$Vega$VNumbers = function (a) {
+var _user$project$Vega$VNumbers = function (a) {
 	return {ctor: 'VNumbers', _0: a};
 };
-var _gicentre$elm_vega$Vega$VNumber = function (a) {
+var _user$project$Vega$VNumber = function (a) {
 	return {ctor: 'VNumber', _0: a};
 };
-var _gicentre$elm_vega$Vega$VRound = function (a) {
+var _user$project$Vega$VRound = function (a) {
 	return {ctor: 'VRound', _0: a};
 };
-var _gicentre$elm_vega$Vega$VOffset = function (a) {
+var _user$project$Vega$VOffset = function (a) {
 	return {ctor: 'VOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$VMultiply = function (a) {
+var _user$project$Vega$VMultiply = function (a) {
 	return {ctor: 'VMultiply', _0: a};
 };
-var _gicentre$elm_vega$Vega$VExponent = function (a) {
+var _user$project$Vega$VExponent = function (a) {
 	return {ctor: 'VExponent', _0: a};
 };
-var _gicentre$elm_vega$Vega$VBand = function (a) {
+var _user$project$Vega$VBand = function (a) {
 	return {ctor: 'VBand', _0: a};
 };
-var _gicentre$elm_vega$Vega$VScale = function (a) {
+var _user$project$Vega$VScale = function (a) {
 	return {ctor: 'VScale', _0: a};
 };
-var _gicentre$elm_vega$Vega$VField = function (a) {
+var _user$project$Vega$VField = function (a) {
 	return {ctor: 'VField', _0: a};
 };
-var _gicentre$elm_vega$Vega$VColor = function (a) {
+var _user$project$Vega$VColor = function (a) {
 	return {ctor: 'VColor', _0: a};
 };
-var _gicentre$elm_vega$Vega$VSignal = function (a) {
+var _user$project$Vega$VSignal = function (a) {
 	return {ctor: 'VSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$VMarks = {ctor: 'VMarks'};
-var _gicentre$elm_vega$Vega$marks = function (axs) {
+var _user$project$Vega$VMarks = {ctor: 'VMarks'};
+var _user$project$Vega$marks = function (axs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VMarks,
+		_0: _user$project$Vega$VMarks,
 		_1: _elm_lang$core$Json_Encode$list(axs)
 	};
 };
-var _gicentre$elm_vega$Vega$VLegends = {ctor: 'VLegends'};
-var _gicentre$elm_vega$Vega$VAxes = {ctor: 'VAxes'};
-var _gicentre$elm_vega$Vega$axes = function (axs) {
+var _user$project$Vega$VLegends = {ctor: 'VLegends'};
+var _user$project$Vega$VAxes = {ctor: 'VAxes'};
+var _user$project$Vega$axes = function (axs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VAxes,
+		_0: _user$project$Vega$VAxes,
 		_1: _elm_lang$core$Json_Encode$list(axs)
 	};
 };
-var _gicentre$elm_vega$Vega$VProjections = {ctor: 'VProjections'};
-var _gicentre$elm_vega$Vega$VScales = {ctor: 'VScales'};
-var _gicentre$elm_vega$Vega$scales = function (scs) {
+var _user$project$Vega$VProjections = {ctor: 'VProjections'};
+var _user$project$Vega$VScales = {ctor: 'VScales'};
+var _user$project$Vega$scales = function (scs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VScales,
+		_0: _user$project$Vega$VScales,
 		_1: _elm_lang$core$Json_Encode$list(scs)
 	};
 };
-var _gicentre$elm_vega$Vega$VData = {ctor: 'VData'};
-var _gicentre$elm_vega$Vega$dataSource = function (dataTables) {
+var _user$project$Vega$VData = {ctor: 'VData'};
+var _user$project$Vega$dataSource = function (dataTables) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VData,
+		_0: _user$project$Vega$VData,
 		_1: _elm_lang$core$Json_Encode$list(
 			A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$object, dataTables))
 	};
 };
-var _gicentre$elm_vega$Vega$VSignals = {ctor: 'VSignals'};
-var _gicentre$elm_vega$Vega$signals = function (sigs) {
+var _user$project$Vega$VSignals = {ctor: 'VSignals'};
+var _user$project$Vega$signals = function (sigs) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VSignals,
+		_0: _user$project$Vega$VSignals,
 		_1: _elm_lang$core$Json_Encode$list(sigs)
 	};
 };
-var _gicentre$elm_vega$Vega$VConfig = {ctor: 'VConfig'};
-var _gicentre$elm_vega$Vega$VAutoSize = {ctor: 'VAutoSize'};
-var _gicentre$elm_vega$Vega$VPadding = {ctor: 'VPadding'};
-var _gicentre$elm_vega$Vega$padding = function (pad) {
+var _user$project$Vega$VConfig = {ctor: 'VConfig'};
+var _user$project$Vega$VAutoSize = {ctor: 'VAutoSize'};
+var _user$project$Vega$VPadding = {ctor: 'VPadding'};
+var _user$project$Vega$padding = function (pad) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VPadding,
-		_1: _gicentre$elm_vega$Vega$paddingSpec(pad)
+		_0: _user$project$Vega$VPadding,
+		_1: _user$project$Vega$paddingSpec(pad)
 	};
 };
-var _gicentre$elm_vega$Vega$VHeight = {ctor: 'VHeight'};
-var _gicentre$elm_vega$Vega$height = function (w) {
+var _user$project$Vega$VHeight = {ctor: 'VHeight'};
+var _user$project$Vega$height = function (w) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VHeight,
+		_0: _user$project$Vega$VHeight,
 		_1: _elm_lang$core$Json_Encode$float(w)
 	};
 };
-var _gicentre$elm_vega$Vega$VAutosize = {ctor: 'VAutosize'};
-var _gicentre$elm_vega$Vega$autosize = function (aus) {
+var _user$project$Vega$VAutosize = {ctor: 'VAutosize'};
+var _user$project$Vega$autosize = function (aus) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VAutosize,
+		_0: _user$project$Vega$VAutosize,
 		_1: _elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$autosizeProperty, aus))
+			A2(_elm_lang$core$List$map, _user$project$Vega$autosizeProperty, aus))
 	};
 };
-var _gicentre$elm_vega$Vega$VWidth = {ctor: 'VWidth'};
-var _gicentre$elm_vega$Vega$width = function (w) {
+var _user$project$Vega$VWidth = {ctor: 'VWidth'};
+var _user$project$Vega$width = function (w) {
 	return {
 		ctor: '_Tuple2',
-		_0: _gicentre$elm_vega$Vega$VWidth,
+		_0: _user$project$Vega$VWidth,
 		_1: _elm_lang$core$Json_Encode$float(w)
 	};
 };
-var _gicentre$elm_vega$Vega$VTitle = {ctor: 'VTitle'};
-var _gicentre$elm_vega$Vega$VBackground = {ctor: 'VBackground'};
-var _gicentre$elm_vega$Vega$VDescription = {ctor: 'VDescription'};
-var _gicentre$elm_vega$Vega$VName = {ctor: 'VName'};
+var _user$project$Vega$VTitle = {ctor: 'VTitle'};
+var _user$project$Vega$VBackground = {ctor: 'VBackground'};
+var _user$project$Vega$VDescription = {ctor: 'VDescription'};
+var _user$project$Vega$VName = {ctor: 'VName'};
 
-var _gicentre$elm_vega$Gallery$barChart3 = function () {
-	var nestedMk = function (_p0) {
-		return _gicentre$elm_vega$Vega$marks(
+var _user$project$TransformTests$stackTest1 = function () {
+	var mk = function (_p0) {
+		return _user$project$Vega$marks(
 			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
+				_user$project$Vega$mark,
+				_user$project$Vega$Rect,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MName('bars'),
+					_0: _user$project$Vega$MFrom(
+						_user$project$Vega$SData('table')),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MFrom(
-							_gicentre$elm_vega$Vega$SData('facet')),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MEncode(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Enter(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MY(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VScale(
-														_gicentre$elm_vega$Vega$FName('pos')),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VField(
-															_gicentre$elm_vega$Vega$FName('position')),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MHeight(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VScale(
-															_gicentre$elm_vega$Vega$FName('pos')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VBand(1),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VScale(
-																_gicentre$elm_vega$Vega$FName('xscale')),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VField(
-																	_gicentre$elm_vega$Vega$FName('value')),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$MX2(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VScale(
-																	_gicentre$elm_vega$Vega$FName('xscale')),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$VBand(0),
-																	_1: {ctor: '[]'}
-																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$MFill(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$VScale(
-																		_gicentre$elm_vega$Vega$FName('color')),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$VField(
-																			_gicentre$elm_vega$Vega$FName('position')),
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Text,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MFrom(
-							_gicentre$elm_vega$Vega$SData('bars')),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MEncode(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Enter(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MX(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VField(
-														_gicentre$elm_vega$Vega$FName('x2')),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VOffset(
-															_gicentre$elm_vega$Vega$VNumber(-5)),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VField(
-															_gicentre$elm_vega$Vega$FName('y')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VOffset(
-																_gicentre$elm_vega$Vega$VObject(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$VField(
-																			_gicentre$elm_vega$Vega$FName('height')),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$VMultiply(
-																				_gicentre$elm_vega$Vega$VNumber(0.5)),
-																			_1: {ctor: '[]'}
-																		}
-																	})),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MFill(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VString('white'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$MAlign(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VString(
-																	_gicentre$elm_vega$Vega$hAlignLabel(_gicentre$elm_vega$Vega$AlignRight)),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$MBaseline(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$VString(
-																		_gicentre$elm_vega$Vega$vAlignLabel(_gicentre$elm_vega$Vega$AlignMiddle)),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$MText(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$VField(
-																			_gicentre$elm_vega$Vega$FName('datum.value')),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					},
-					_p0)));
-	};
-	var nestedSc = function (_p1) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'pos',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
-							_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RHeight)),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
-								_gicentre$elm_vega$Vega$DData(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DDataset('facet'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$DField('position'),
-											_1: {ctor: '[]'}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				_p1));
-	};
-	var nestedSi = function (_p2) {
-		return _gicentre$elm_vega$Vega$signals(
-			A3(
-				_gicentre$elm_vega$Vega$signal,
-				'height',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiUpdate('bandwidth(\'yscale\')'),
-					_1: {ctor: '[]'}
-				},
-				_p2));
-	};
-	var mk = function (_p3) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Group,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFrom(
-						_gicentre$elm_vega$Vega$SFacet(
+						_0: _user$project$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$FaData('table'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FaName('facet'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$FaGroupBy(
-											{
-												ctor: '::',
-												_0: 'category',
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							})),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$Enter(
+								_0: _user$project$Vega$Enter(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MY(
+										_0: _user$project$Vega$MFill(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$VScale(
-													_gicentre$elm_vega$Vega$FName('yscale')),
+												_0: _user$project$Vega$VScale(
+													_user$project$Vega$FName('color')),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VField(
-														_gicentre$elm_vega$Vega$FName('category')),
+													_0: _user$project$Vega$VField(
+														_user$project$Vega$FName('key')),
 													_1: {ctor: '[]'}
 												}
 											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$MGroup(
-								{
-									ctor: '::',
-									_0: nestedSi(
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: nestedSc(
-											{ctor: '[]'}),
 										_1: {
 											ctor: '::',
-											_0: nestedMk(
-												{ctor: '[]'}),
-											_1: {ctor: '[]'}
+											_0: _user$project$Vega$MStroke(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VString('white'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$MStrokeWidth(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$VNumber(1),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$MX(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$VScale(
+																_user$project$Vega$FName('xscale')),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$VField(
+																	_user$project$Vega$FName('key')),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$VOffset(
+																		_user$project$Vega$VNumber(0.5)),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$MWidth(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$VScale(
+																	_user$project$Vega$FName('xscale')),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$VBand(1),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
 										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$Update(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$MY(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VScale(
+														_user$project$Vega$FName('yscale')),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$VField(
+															_user$project$Vega$FName('y0')),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$VOffset(
+																_user$project$Vega$VNumber(0.5)),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$MY2(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$VScale(
+															_user$project$Vega$FName('yscale')),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$VField(
+																_user$project$Vega$FName('y1')),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$VOffset(
+																	_user$project$Vega$VNumber(0.5)),
+																_1: {ctor: '[]'}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
 					}
 				},
-				_p3));
+				_p0));
 	};
-	var ax = function (_p4) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'yscale',
-				_gicentre$elm_vega$Vega$Left,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$AxTickSize(0),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$AxLabelPadding(4),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$AxZIndex(1),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A4(
-					_gicentre$elm_vega$Vega$axis,
-					'xscale',
-					_gicentre$elm_vega$Vega$Bottom,
-					{ctor: '[]'},
-					_p4)));
-	};
-	var sc = function (_p5) {
-		return _gicentre$elm_vega$Vega$scales(
+	var sc = function (_p1) {
+		return _user$project$Vega$scales(
 			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'yscale',
+				_user$project$Vega$scale,
+				'xscale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _user$project$Vega$SType(_user$project$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
-							_gicentre$elm_vega$Vega$DData(
+						_0: _user$project$Vega$SDomain(
+							_user$project$Vega$DStrings(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$DDataset('table'),
+									_0: 'a',
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DField('category'),
-										_1: {ctor: '[]'}
+										_0: 'b',
+										_1: {
+											ctor: '::',
+											_0: 'c',
+											_1: {ctor: '[]'}
+										}
 									}
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
-								_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RHeight)),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SPadding(0.2),
-								_1: {ctor: '[]'}
-							}
+							_0: _user$project$Vega$SRange(
+								_user$project$Vega$RDefault(_user$project$Vega$RWidth)),
+							_1: {ctor: '[]'}
 						}
 					}
 				},
 				A3(
-					_gicentre$elm_vega$Vega$scale,
-					'xscale',
+					_user$project$Vega$scale,
+					'yscale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _user$project$Vega$SType(_user$project$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
-								_gicentre$elm_vega$Vega$DData(
+							_0: _user$project$Vega$SDomain(
+								_user$project$Vega$DData(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DDataset('table'),
+										_0: _user$project$Vega$DDataset('table'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$DField('value'),
+											_0: _user$project$Vega$DField('y1'),
 											_1: {ctor: '[]'}
 										}
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
-									_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RWidth)),
+								_0: _user$project$Vega$SRange(
+									_user$project$Vega$RDefault(_user$project$Vega$RHeight)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRound(true),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(true),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SNice(
-												_gicentre$elm_vega$Vega$IsNice(true)),
-											_1: {ctor: '[]'}
-										}
-									}
+									_0: _user$project$Vega$SRound(true),
+									_1: {ctor: '[]'}
 								}
 							}
 						}
 					},
 					A3(
-						_gicentre$elm_vega$Vega$scale,
+						_user$project$Vega$scale,
 						'color',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _user$project$Vega$SType(_user$project$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
-									_gicentre$elm_vega$Vega$DData(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$DDataset('table'),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$DField('position'),
-												_1: {ctor: '[]'}
-											}
-										})),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRange(
-										A2(
-											_gicentre$elm_vega$Vega$RScheme,
-											'category20',
-											{ctor: '[]'})),
-									_1: {ctor: '[]'}
-								}
+								_0: _user$project$Vega$SRange(
+									A2(
+										_user$project$Vega$RScheme,
+										'category10',
+										{ctor: '[]'})),
+								_1: {ctor: '[]'}
 							}
 						},
-						_p5))));
+						_p1))));
 	};
-	var table = function (_p6) {
+	var si = function (_p2) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'offset',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$SiValue(
+						_user$project$Vega$Str('zero')),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$SiBind(
+							_user$project$Vega$ISelect(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$InOptions(
+										_user$project$Vega$Strings(
+											{
+												ctor: '::',
+												_0: 'zero',
+												_1: {
+													ctor: '::',
+													_0: 'center',
+													_1: {
+														ctor: '::',
+														_0: 'normalize',
+														_1: {ctor: '[]'}
+													}
+												}
+											})),
+									_1: {ctor: '[]'}
+								})),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Vega$signal,
+					'sortField',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$SiValue(_user$project$Vega$Null),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$SiBind(
+								_user$project$Vega$IRadio(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$InOptions(
+											_user$project$Vega$Strings(
+												{
+													ctor: '::',
+													_0: 'null',
+													_1: {
+														ctor: '::',
+														_0: 'value',
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									})),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Vega$signal,
+						'sortOrder',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$SiValue(
+								_user$project$Vega$Str('ascending')),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$SiBind(
+									_user$project$Vega$IRadio(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$InOptions(
+												_user$project$Vega$Strings(
+													{
+														ctor: '::',
+														_0: 'ascending',
+														_1: {
+															ctor: '::',
+															_0: 'descending',
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										})),
+								_1: {ctor: '[]'}
+							}
+						},
+						A3(
+							_user$project$Vega$signal,
+							'add',
+							{
+								ctor: '::',
+								_0: _user$project$Vega$SiValue(_user$project$Vega$Empty),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$SiOn(
+										{
+											ctor: '::',
+											_0: {
+												ctor: '::',
+												_0: _user$project$Vega$EEvents('mousedown![!event.shiftKey]'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$EUpdate('{key: invert(\'xscale\', x()), value: ~~(1 + 9 * random())}'),
+													_1: {ctor: '[]'}
+												}
+											},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_user$project$Vega$signal,
+								'rem',
+								{
+									ctor: '::',
+									_0: _user$project$Vega$SiValue(_user$project$Vega$Empty),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$SiOn(
+											{
+												ctor: '::',
+												_0: {
+													ctor: '::',
+													_0: _user$project$Vega$EEvents('rect:mousedown![event.shiftKey]'),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$EUpdate('datum'),
+														_1: {ctor: '[]'}
+													}
+												},
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								},
+								_p2))))));
+	};
+	var table = function (_p3) {
 		return A3(
-			_gicentre$elm_vega$Vega$dataFromColumns,
+			_user$project$Vega$dataFromColumns,
 			'table',
 			{ctor: '[]'},
 			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
-				'category',
-				_gicentre$elm_vega$Vega$Strings(
+				_user$project$Vega$dataColumn,
+				'key',
+				_user$project$Vega$Strings(
 					{
 						ctor: '::',
-						_0: 'A',
+						_0: 'a',
 						_1: {
 							ctor: '::',
-							_0: 'A',
+							_0: 'a',
 							_1: {
 								ctor: '::',
-								_0: 'A',
+								_0: 'a',
 								_1: {
 									ctor: '::',
-									_0: 'A',
+									_0: 'b',
 									_1: {
 										ctor: '::',
-										_0: 'B',
+										_0: 'b',
 										_1: {
 											ctor: '::',
-											_0: 'B',
+											_0: 'b',
 											_1: {
 												ctor: '::',
-												_0: 'B',
+												_0: 'c',
 												_1: {
 													ctor: '::',
-													_0: 'B',
+													_0: 'c',
 													_1: {
 														ctor: '::',
-														_0: 'C',
-														_1: {
-															ctor: '::',
-															_0: 'C',
-															_1: {
-																ctor: '::',
-																_0: 'C',
-																_1: {
-																	ctor: '::',
-																	_0: 'C',
-																	_1: {ctor: '[]'}
-																}
-															}
-														}
+														_0: 'c',
+														_1: {ctor: '[]'}
 													}
 												}
 											}
@@ -13301,49 +13201,37 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						}
 					}),
 				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
-					'position',
-					_gicentre$elm_vega$Vega$Numbers(
+					_user$project$Vega$dataColumn,
+					'value',
+					_user$project$Vega$Numbers(
 						{
 							ctor: '::',
-							_0: 0,
+							_0: 5,
 							_1: {
 								ctor: '::',
-								_0: 1,
+								_0: 8,
 								_1: {
 									ctor: '::',
-									_0: 2,
+									_0: 3,
 									_1: {
 										ctor: '::',
-										_0: 3,
+										_0: 2,
 										_1: {
 											ctor: '::',
-											_0: 0,
+											_0: 7,
 											_1: {
 												ctor: '::',
-												_0: 1,
+												_0: 4,
 												_1: {
 													ctor: '::',
-													_0: 2,
+													_0: 1,
 													_1: {
 														ctor: '::',
-														_0: 3,
+														_0: 4,
 														_1: {
 															ctor: '::',
-															_0: 0,
-															_1: {
-																ctor: '::',
-																_0: 1,
-																_1: {
-																	ctor: '::',
-																	_0: 2,
-																	_1: {
-																		ctor: '::',
-																		_0: 3,
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
+															_0: 6,
+															_1: {ctor: '[]'}
 														}
 													}
 												}
@@ -13353,89 +13241,115 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 								}
 							}
 						}),
-					A3(
-						_gicentre$elm_vega$Vega$dataColumn,
-						'value',
-						_gicentre$elm_vega$Vega$Numbers(
+					_p3)));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$on,
+				{
+					ctor: '::',
+					_0: A2(
+						_user$project$Vega$trigger,
+						'add',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$TrInsert('add'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Vega$trigger,
+							'rem',
 							{
 								ctor: '::',
-								_0: 0.1,
+								_0: _user$project$Vega$TrRemove('rem'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(
+					_user$project$Vega$transform,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$TStack(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$StField(
+									_user$project$Vega$FieldName('value')),
 								_1: {
 									ctor: '::',
-									_0: 0.6,
+									_0: _user$project$Vega$StGroupBy(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$FieldName('key'),
+											_1: {ctor: '[]'}
+										}),
 									_1: {
 										ctor: '::',
-										_0: 0.9,
+										_0: _user$project$Vega$StOffset(
+											_user$project$Vega$OffsetSignal('offset')),
 										_1: {
 											ctor: '::',
-											_0: 0.4,
-											_1: {
-												ctor: '::',
-												_0: 0.7,
-												_1: {
+											_0: _user$project$Vega$StSort(
+												{
 													ctor: '::',
-													_0: 0.2,
+													_0: _user$project$Vega$CoField(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$FieldSignal('sortField'),
+															_1: {ctor: '[]'}
+														}),
 													_1: {
 														ctor: '::',
-														_0: 1.1,
-														_1: {
-															ctor: '::',
-															_0: 0.8,
-															_1: {
+														_0: _user$project$Vega$CoOrder(
+															{
 																ctor: '::',
-																_0: 0.6,
-																_1: {
-																	ctor: '::',
-																	_0: 0.1,
-																	_1: {
-																		ctor: '::',
-																		_0: 0.2,
-																		_1: {
-																			ctor: '::',
-																			_0: 0.7,
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
+																_0: _user$project$Vega$OrderSignal('sortOrder'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
 													}
-												}
-											}
+												}),
+											_1: {ctor: '[]'}
 										}
 									}
 								}
 							}),
-						_p6))));
-	};
-	var ds = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: table(
-				{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					},
+					table(
+						{ctor: '[]'}))),
 			_1: {ctor: '[]'}
 		});
-	return _gicentre$elm_vega$Vega$toVega(
+	return _user$project$Vega$toVega(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(300),
+			_0: _user$project$Vega$width(300),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$height(240),
+				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$padding(
-						_gicentre$elm_vega$Vega$PSize(5)),
+					_0: _user$project$Vega$autosize(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$ANone,
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
 						_0: ds,
 						_1: {
 							ctor: '::',
-							_0: sc(
+							_0: si(
 								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
-								_0: ax(
+								_0: sc(
 									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
@@ -13450,8 +13364,296 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$sourceExample = _gicentre$elm_vega$Gallery$barChart3;
-var _gicentre$elm_vega$Gallery$view = function (spec) {
+var _user$project$TransformTests$packTest1 = function () {
+	var mk = function (_p4) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Symbol,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$MFrom(
+						_user$project$Vega$SData('tree')),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$MEncode(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$Enter(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$MFill(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$VScale(
+													_user$project$Vega$FName('color')),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$VField(
+														_user$project$Vega$FName('id')),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$MStroke(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VString('white'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$Update(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$MX(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$VField(
+														_user$project$Vega$FName('x')),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$MY(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$VField(
+															_user$project$Vega$FName('y')),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$MSize(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$VSignal(
+																_user$project$Vega$SExpr('4*datum.r*datum.r')),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p4));
+	};
+	var sc = function (_p5) {
+		return _user$project$Vega$scales(
+			A3(
+				_user$project$Vega$scale,
+				'color',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$SType(_user$project$Vega$ScOrdinal),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$SRange(
+							A2(
+								_user$project$Vega$RScheme,
+								'category20',
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p5));
+	};
+	var si = function (_p6) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'padding between circles',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$SiValue(
+						_user$project$Vega$Number(0)),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$SiBind(
+							_user$project$Vega$IRange(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$InMin(0),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$InMax(10),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$InStep(0.1),
+											_1: {ctor: '[]'}
+										}
+									}
+								})),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p6));
+	};
+	var table = function (_p7) {
+		return A3(
+			_user$project$Vega$dataFromColumns,
+			'tree',
+			{ctor: '[]'},
+			A3(
+				_user$project$Vega$dataColumn,
+				'id',
+				_user$project$Vega$Strings(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {
+									ctor: '::',
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Vega$dataColumn,
+					'parent',
+					_user$project$Vega$Strings(
+						{
+							ctor: '::',
+							_0: '',
+							_1: {
+								ctor: '::',
+								_0: 'A',
+								_1: {
+									ctor: '::',
+									_0: 'A',
+									_1: {
+										ctor: '::',
+										_0: 'C',
+										_1: {
+											ctor: '::',
+											_0: 'C',
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_user$project$Vega$dataColumn,
+						'value',
+						_user$project$Vega$Numbers(
+							{
+								ctor: '::',
+								_0: 0,
+								_1: {
+									ctor: '::',
+									_0: 1,
+									_1: {
+										ctor: '::',
+										_0: 0,
+										_1: {
+											ctor: '::',
+											_0: 1,
+											_1: {
+												ctor: '::',
+												_0: 1,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						_p7))));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$transform,
+				{
+					ctor: '::',
+					_0: A2(
+						_user$project$Vega$TStratify,
+						_user$project$Vega$FieldName('id'),
+						_user$project$Vega$FieldName('parent')),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$TPack(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$PaField(
+									_user$project$Vega$FieldName('value')),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$PaPadding(
+										_user$project$Vega$SigNumRef(
+											_user$project$Vega$SName('padding between circles'))),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Vega$PaSize, _user$project$Vega$sigWidth, _user$project$Vega$sigHeight),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				table(
+					{ctor: '[]'})),
+			_1: {ctor: '[]'}
+		});
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(200),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$padding(
+						_user$project$Vega$PSize(5)),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: si(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: sc(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: mk(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$TransformTests$sourceExample = _user$project$TransformTests$packTest1;
+var _user$project$TransformTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -13473,1177 +13675,47 @@ var _gicentre$elm_vega$Gallery$view = function (spec) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$Gallery$sourceExample)),
+							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TransformTests$sourceExample)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _gicentre$elm_vega$Gallery$barChart2 = function () {
-	var mk = function (_p7) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFrom(
-						_gicentre$elm_vega$Vega$SData('table')),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$Enter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MX(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$VScale(
-													_gicentre$elm_vega$Vega$FName('x')),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VField(
-														_gicentre$elm_vega$Vega$FName('x')),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MWidth(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VScale(
-														_gicentre$elm_vega$Vega$FName('x')),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VBand(1),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VOffset(
-																_gicentre$elm_vega$Vega$VNumber(-1)),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VScale(
-															_gicentre$elm_vega$Vega$FName('y')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VField(
-																_gicentre$elm_vega$Vega$FName('y0')),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MY2(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VScale(
-																_gicentre$elm_vega$Vega$FName('y')),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VField(
-																	_gicentre$elm_vega$Vega$FName('y1')),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$MFill(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VScale(
-																	_gicentre$elm_vega$Vega$FName('color')),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$VField(
-																		_gicentre$elm_vega$Vega$FName('c')),
-																	_1: {ctor: '[]'}
-																}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Update(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MFillOpacity(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VNumber(1),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Hover(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MFillOpacity(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VNumber(0.5),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				_p7));
-	};
-	var ax = function (_p8) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'x',
-				_gicentre$elm_vega$Vega$Bottom,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$AxScale('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$AxZIndex(1),
-						_1: {ctor: '[]'}
-					}
-				},
-				A4(
-					_gicentre$elm_vega$Vega$axis,
-					'yscale',
-					_gicentre$elm_vega$Vega$Left,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$AxScale('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$AxZIndex(1),
-							_1: {ctor: '[]'}
-						}
-					},
-					_p8)));
-	};
-	var sc = function (_p9) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'x',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
-							_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RWidth)),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
-								_gicentre$elm_vega$Vega$DData(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DDataset('table'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$DField('x'),
-											_1: {ctor: '[]'}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$scale,
-					'y',
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
-								_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RHeight)),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(
-									_gicentre$elm_vega$Vega$IsNice(true)),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
-											_gicentre$elm_vega$Vega$DData(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$DDataset('table'),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$DField('y1'),
-														_1: {ctor: '[]'}
-													}
-												})),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$Vega$scale,
-						'color',
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
-									_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RCategory)),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
-										_gicentre$elm_vega$Vega$DData(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$DDataset('table'),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$DField('c'),
-													_1: {ctor: '[]'}
-												}
-											})),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_p9))));
-	};
-	var dv = F2(
-		function (label, num) {
-			return {
-				ctor: '_Tuple2',
-				_0: label,
-				_1: _gicentre$elm_vega$Vega$Number(num)
-			};
-		});
-	var table = function (_p10) {
-		return A3(
-			_gicentre$elm_vega$Vega$dataFromRows,
-			'table',
-			{ctor: '[]'},
-			A2(
-				_gicentre$elm_vega$Vega$dataRow,
-				{
-					ctor: '::',
-					_0: A2(dv, 'x', 0),
-					_1: {
-						ctor: '::',
-						_0: A2(dv, 'y', 28),
-						_1: {
-							ctor: '::',
-							_0: A2(dv, 'c', 0),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$Vega$dataRow,
-					{
-						ctor: '::',
-						_0: A2(dv, 'x', 0),
-						_1: {
-							ctor: '::',
-							_0: A2(dv, 'y', 55),
-							_1: {
-								ctor: '::',
-								_0: A2(dv, 'c', 1),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$Vega$dataRow,
-						{
-							ctor: '::',
-							_0: A2(dv, 'x', 1),
-							_1: {
-								ctor: '::',
-								_0: A2(dv, 'y', 43),
-								_1: {
-									ctor: '::',
-									_0: A2(dv, 'c', 0),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$Vega$dataRow,
-							{
-								ctor: '::',
-								_0: A2(dv, 'x', 1),
-								_1: {
-									ctor: '::',
-									_0: A2(dv, 'y', 91),
-									_1: {
-										ctor: '::',
-										_0: A2(dv, 'c', 1),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$Vega$dataRow,
-								{
-									ctor: '::',
-									_0: A2(dv, 'x', 2),
-									_1: {
-										ctor: '::',
-										_0: A2(dv, 'y', 81),
-										_1: {
-											ctor: '::',
-											_0: A2(dv, 'c', 0),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								A2(
-									_gicentre$elm_vega$Vega$dataRow,
-									{
-										ctor: '::',
-										_0: A2(dv, 'x', 2),
-										_1: {
-											ctor: '::',
-											_0: A2(dv, 'y', 53),
-											_1: {
-												ctor: '::',
-												_0: A2(dv, 'c', 1),
-												_1: {ctor: '[]'}
-											}
-										}
-									},
-									A2(
-										_gicentre$elm_vega$Vega$dataRow,
-										{
-											ctor: '::',
-											_0: A2(dv, 'x', 3),
-											_1: {
-												ctor: '::',
-												_0: A2(dv, 'y', 19),
-												_1: {
-													ctor: '::',
-													_0: A2(dv, 'c', 0),
-													_1: {ctor: '[]'}
-												}
-											}
-										},
-										A2(
-											_gicentre$elm_vega$Vega$dataRow,
-											{
-												ctor: '::',
-												_0: A2(dv, 'x', 3),
-												_1: {
-													ctor: '::',
-													_0: A2(dv, 'y', 87),
-													_1: {
-														ctor: '::',
-														_0: A2(dv, 'c', 1),
-														_1: {ctor: '[]'}
-													}
-												}
-											},
-											A2(
-												_gicentre$elm_vega$Vega$dataRow,
-												{
-													ctor: '::',
-													_0: A2(dv, 'x', 4),
-													_1: {
-														ctor: '::',
-														_0: A2(dv, 'y', 52),
-														_1: {
-															ctor: '::',
-															_0: A2(dv, 'c', 0),
-															_1: {ctor: '[]'}
-														}
-													}
-												},
-												A2(
-													_gicentre$elm_vega$Vega$dataRow,
-													{
-														ctor: '::',
-														_0: A2(dv, 'x', 4),
-														_1: {
-															ctor: '::',
-															_0: A2(dv, 'y', 48),
-															_1: {
-																ctor: '::',
-																_0: A2(dv, 'c', 1),
-																_1: {ctor: '[]'}
-															}
-														}
-													},
-													A2(
-														_gicentre$elm_vega$Vega$dataRow,
-														{
-															ctor: '::',
-															_0: A2(dv, 'x', 5),
-															_1: {
-																ctor: '::',
-																_0: A2(dv, 'y', 24),
-																_1: {
-																	ctor: '::',
-																	_0: A2(dv, 'c', 0),
-																	_1: {ctor: '[]'}
-																}
-															}
-														},
-														A2(
-															_gicentre$elm_vega$Vega$dataRow,
-															{
-																ctor: '::',
-																_0: A2(dv, 'x', 5),
-																_1: {
-																	ctor: '::',
-																	_0: A2(dv, 'y', 49),
-																	_1: {
-																		ctor: '::',
-																		_0: A2(dv, 'c', 1),
-																		_1: {ctor: '[]'}
-																	}
-																}
-															},
-															A2(
-																_gicentre$elm_vega$Vega$dataRow,
-																{
-																	ctor: '::',
-																	_0: A2(dv, 'x', 6),
-																	_1: {
-																		ctor: '::',
-																		_0: A2(dv, 'y', 87),
-																		_1: {
-																			ctor: '::',
-																			_0: A2(dv, 'c', 0),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																},
-																A2(
-																	_gicentre$elm_vega$Vega$dataRow,
-																	{
-																		ctor: '::',
-																		_0: A2(dv, 'x', 6),
-																		_1: {
-																			ctor: '::',
-																			_0: A2(dv, 'y', 66),
-																			_1: {
-																				ctor: '::',
-																				_0: A2(dv, 'c', 1),
-																				_1: {ctor: '[]'}
-																			}
-																		}
-																	},
-																	A2(
-																		_gicentre$elm_vega$Vega$dataRow,
-																		{
-																			ctor: '::',
-																			_0: A2(dv, 'x', 7),
-																			_1: {
-																				ctor: '::',
-																				_0: A2(dv, 'y', 17),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(dv, 'c', 0),
-																					_1: {ctor: '[]'}
-																				}
-																			}
-																		},
-																		A2(
-																			_gicentre$elm_vega$Vega$dataRow,
-																			{
-																				ctor: '::',
-																				_0: A2(dv, 'x', 7),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(dv, 'y', 27),
-																					_1: {
-																						ctor: '::',
-																						_0: A2(dv, 'c', 1),
-																						_1: {ctor: '[]'}
-																					}
-																				}
-																			},
-																			A2(
-																				_gicentre$elm_vega$Vega$dataRow,
-																				{
-																					ctor: '::',
-																					_0: A2(dv, 'x', 8),
-																					_1: {
-																						ctor: '::',
-																						_0: A2(dv, 'y', 68),
-																						_1: {
-																							ctor: '::',
-																							_0: A2(dv, 'c', 0),
-																							_1: {ctor: '[]'}
-																						}
-																					}
-																				},
-																				A2(
-																					_gicentre$elm_vega$Vega$dataRow,
-																					{
-																						ctor: '::',
-																						_0: A2(dv, 'x', 8),
-																						_1: {
-																							ctor: '::',
-																							_0: A2(dv, 'y', 16),
-																							_1: {
-																								ctor: '::',
-																								_0: A2(dv, 'c', 1),
-																								_1: {ctor: '[]'}
-																							}
-																						}
-																					},
-																					A2(
-																						_gicentre$elm_vega$Vega$dataRow,
-																						{
-																							ctor: '::',
-																							_0: A2(dv, 'x', 9),
-																							_1: {
-																								ctor: '::',
-																								_0: A2(dv, 'y', 49),
-																								_1: {
-																									ctor: '::',
-																									_0: A2(dv, 'c', 0),
-																									_1: {ctor: '[]'}
-																								}
-																							}
-																						},
-																						A2(
-																							_gicentre$elm_vega$Vega$dataRow,
-																							{
-																								ctor: '::',
-																								_0: A2(dv, 'x', 9),
-																								_1: {
-																									ctor: '::',
-																									_0: A2(dv, 'y', 15),
-																									_1: {
-																										ctor: '::',
-																										_0: A2(dv, 'c', 1),
-																										_1: {ctor: '[]'}
-																									}
-																								}
-																							},
-																							_p10)))))))))))))))))))));
-	};
-	var ds = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$Vega$transform,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TStack(
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$StGroupBy(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$FieldName('x'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$StSort(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$CoField(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$FieldName('c'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$StField(
-										_gicentre$elm_vega$Vega$FieldName('y')),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				},
-				table(
-					{ctor: '[]'})),
-			_1: {ctor: '[]'}
-		});
-	return _gicentre$elm_vega$Vega$toVega(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(400),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$height(200),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$padding(
-						_gicentre$elm_vega$Vega$PSize(5)),
-					_1: {
-						ctor: '::',
-						_0: ds,
-						_1: {
-							ctor: '::',
-							_0: sc(
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: ax(
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: mk(
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$Gallery$barChart1 = function () {
-	var mk = function (_p11) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$MFrom(
-						_gicentre$elm_vega$Vega$SData('table')),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$Enter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MX(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$VScale(
-													_gicentre$elm_vega$Vega$FName('xscale')),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VField(
-														_gicentre$elm_vega$Vega$FName('category')),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MWidth(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VScale(
-														_gicentre$elm_vega$Vega$FName('xscale')),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VBand(1),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VScale(
-															_gicentre$elm_vega$Vega$FName('yscale')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VField(
-																_gicentre$elm_vega$Vega$FName('amount')),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MY2(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VScale(
-																_gicentre$elm_vega$Vega$FName('yscale')),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VNumber(0),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Update(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MFill(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VString('steelblue'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$Hover(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VString('red'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Text,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$MEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$Enter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$MAlign(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$VString(
-													_gicentre$elm_vega$Vega$hAlignLabel(_gicentre$elm_vega$Vega$AlignCenter)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MBaseline(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VString(
-														_gicentre$elm_vega$Vega$vAlignLabel(_gicentre$elm_vega$Vega$AlignBottom)),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VString('#333'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Update(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$MX(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$VScale(
-														_gicentre$elm_vega$Vega$FName('xscale')),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VSignal(
-															_gicentre$elm_vega$Vega$SName('tooltip.category')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VBand(0.5),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$MY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$VScale(
-															_gicentre$elm_vega$Vega$FName('yscale')),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VSignal(
-																_gicentre$elm_vega$Vega$SName('tooltip.amount')),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$VOffset(
-																	_gicentre$elm_vega$Vega$VNumber(-2)),
-																_1: {ctor: '[]'}
-															}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$MText(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$VSignal(
-																_gicentre$elm_vega$Vega$SName('tooltip.amount')),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$MFillOpacity(
-															{
-																ctor: '::',
-																_0: A3(
-																	_gicentre$elm_vega$Vega$VIfElse,
-																	'datum === tooltip',
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$VNumber(0),
-																		_1: {ctor: '[]'}
-																	},
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$VNumber(1),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					},
-					_p11)));
-	};
-	var ax = function (_p12) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'xscale',
-				_gicentre$elm_vega$Vega$Bottom,
-				{ctor: '[]'},
-				A4(
-					_gicentre$elm_vega$Vega$axis,
-					'yscale',
-					_gicentre$elm_vega$Vega$Left,
-					{ctor: '[]'},
-					_p12)));
-	};
-	var sc = function (_p13) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'xscale',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
-							_gicentre$elm_vega$Vega$DData(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$DDataset('table'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DField('category'),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
-								_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RWidth)),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SPadding(5.0e-2),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRound(true),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$scale,
-					'yscale',
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
-							_gicentre$elm_vega$Vega$DData(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$DDataset('table'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$DField('amount'),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(
-								_gicentre$elm_vega$Vega$IsNice(true)),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
-									_gicentre$elm_vega$Vega$RDefault(_gicentre$elm_vega$Vega$RHeight)),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_p13)));
-	};
-	var si = function (_p14) {
-		return _gicentre$elm_vega$Vega$signals(
-			A3(
-				_gicentre$elm_vega$Vega$signal,
-				'tooltip',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(_gicentre$elm_vega$Vega$Empty),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiOn(
-							{
-								ctor: '::',
-								_0: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$EEvents('rect:mouseover'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EUpdate('datum'),
-										_1: {ctor: '[]'}
-									}
-								},
-								_1: {
-									ctor: '::',
-									_0: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EEvents('rect:mouseout'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$EUpdate(''),
-											_1: {ctor: '[]'}
-										}
-									},
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				_p14));
-	};
-	var table = function (_p15) {
-		return A3(
-			_gicentre$elm_vega$Vega$dataFromColumns,
-			'table',
-			{ctor: '[]'},
-			A3(
-				_gicentre$elm_vega$Vega$dataColumn,
-				'category',
-				_gicentre$elm_vega$Vega$Strings(
-					{
-						ctor: '::',
-						_0: 'A',
-						_1: {
-							ctor: '::',
-							_0: 'B',
-							_1: {
-								ctor: '::',
-								_0: 'C',
-								_1: {
-									ctor: '::',
-									_0: 'D',
-									_1: {
-										ctor: '::',
-										_0: 'E',
-										_1: {
-											ctor: '::',
-											_0: 'F',
-											_1: {
-												ctor: '::',
-												_0: 'G',
-												_1: {
-													ctor: '::',
-													_0: 'H',
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}),
-				A3(
-					_gicentre$elm_vega$Vega$dataColumn,
-					'amount',
-					_gicentre$elm_vega$Vega$Numbers(
-						{
-							ctor: '::',
-							_0: 28,
-							_1: {
-								ctor: '::',
-								_0: 55,
-								_1: {
-									ctor: '::',
-									_0: 43,
-									_1: {
-										ctor: '::',
-										_0: 91,
-										_1: {
-											ctor: '::',
-											_0: 81,
-											_1: {
-												ctor: '::',
-												_0: 53,
-												_1: {
-													ctor: '::',
-													_0: 19,
-													_1: {
-														ctor: '::',
-														_0: 87,
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}),
-					_p15)));
-	};
-	var ds = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: table(
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
-		});
-	return _gicentre$elm_vega$Vega$toVega(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$width(400),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$height(200),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$padding(
-						_gicentre$elm_vega$Vega$PSize(5)),
-					_1: {
-						ctor: '::',
-						_0: ds,
-						_1: {
-							ctor: '::',
-							_0: si(
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: sc(
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: ax(
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: mk(
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$Gallery$mySpecs = _gicentre$elm_vega$Vega$combineSpecs(
+var _user$project$TransformTests$mySpecs = _user$project$Vega$combineSpecs(
 	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'barChart1', _1: _gicentre$elm_vega$Gallery$barChart1},
+		_0: {ctor: '_Tuple2', _0: 'packTest1', _1: _user$project$TransformTests$packTest1},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'barChart2', _1: _gicentre$elm_vega$Gallery$barChart2},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'barChart3', _1: _gicentre$elm_vega$Gallery$barChart3},
-				_1: {ctor: '[]'}
-			}
+			_0: {ctor: '_Tuple2', _0: 'stackTest1', _1: _user$project$TransformTests$stackTest1},
+			_1: {ctor: '[]'}
 		}
 	});
-var _gicentre$elm_vega$Gallery$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+var _user$project$TransformTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$Gallery$main = _elm_lang$html$Html$program(
+var _user$project$TransformTests$main = _elm_lang$html$Html$program(
 	{
 		init: {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$Gallery$mySpecs,
-			_1: _gicentre$elm_vega$Gallery$elmToJS(_gicentre$elm_vega$Gallery$mySpecs)
+			_0: _user$project$TransformTests$mySpecs,
+			_1: _user$project$TransformTests$elmToJS(_user$project$TransformTests$mySpecs)
 		},
-		view: _gicentre$elm_vega$Gallery$view,
+		view: _user$project$TransformTests$view,
 		update: F2(
-			function (_p16, model) {
+			function (_p8, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
 
 var Elm = {};
-Elm['Gallery'] = Elm['Gallery'] || {};
-if (typeof _gicentre$elm_vega$Gallery$main !== 'undefined') {
-    _gicentre$elm_vega$Gallery$main(Elm['Gallery'], 'Gallery', undefined);
+Elm['TransformTests'] = Elm['TransformTests'] || {};
+if (typeof _user$project$TransformTests$main !== 'undefined') {
+    _user$project$TransformTests$main(Elm['TransformTests'], 'TransformTests', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

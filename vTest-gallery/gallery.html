@@ -19,19 +19,34 @@
 
   <h1>Vega Test Gallery</h1>
 
-  <h2>Source</h2>
-  <div id="elmContainer"></div>
-
   <h2>Bar Charts</h2>
+  <p>
+    A bar chart encodes quantitative values as the extent of rectangular bars.
+    This example includes basic highlighting and tooltips on mouse hover.
+  </p>
   <div id="barChart1"></div>
+
+  <p>
+    A stacked bar chart depicts the sum of series of quantitative values using layered bars, while still enabling inspection of individual series.
+  </p>
   <div id="barChart2"></div>
+
+  <p>
+    This grouped bar chart facets the data into groups, then creates a bar chart for each sub-group.
+  </p>
   <div id="barChart3"></div>
 
-  <h2>Transform Examples</h2>
-  <h3>Pack Transform</h2>
-  <div id="packExample"></div>
-  <h3>Stack Transform</h2>
-  <div id="stackExample"></div>
+  <p>
+    This nested bar chart depicts aggregated values across multiple categories.
+    The input data is subdivided according to two fields (with uneven category membership).
+    Each sub-group is then aggregated to show the average value of a third, quantitative field.
+  </p>
+  <div id="barChart4"></div>
+
+  
+
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
 
   <script>
     Elm.Gallery.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
