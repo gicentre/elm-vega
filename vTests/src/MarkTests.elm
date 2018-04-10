@@ -7,6 +7,14 @@ import Platform
 import Vega exposing (..)
 
 
+{- These tests converted from the examples under 'Marks' on the offical Vega site:
+   https://vega.github.io/vega/docs/marks/
+-}
+
+
+{-| Convenience function for generating a list of 2-element DataValues lists used
+when generating dashed line arrays.
+-}
 toValues : List ( Float, Float ) -> DataValues
 toValues pairs =
     pairs |> List.map (\( a, b ) -> Numbers [ a, b ]) |> DataValues
@@ -388,9 +396,60 @@ symbolTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+textTest : Spec
+textTest =
+    let
+        si =
+            signals
+                << signal "x" [ SiValue (Number 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "dx" [ SiValue (Number 0), SiBind (IRange [ InMin -20, InMax 20, InStep 1 ]) ]
+                << signal "angle" [ SiValue (Number 0), SiBind (IRange [ InMin -180, InMax 180, InStep 1 ]) ]
+                << signal "fontSize" [ SiValue (Number 10), SiBind (IRange [ InMin 1, InMax 36, InStep 1 ]) ]
+                << signal "limit" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 150, InStep 1 ]) ]
+                << signal "align" [ SiValue (hAlignLabel AlignLeft |> Str), SiBind (ISelect [ InOptions (Strings [ "left", "center", "right" ]) ]) ]
+                << signal "baseline" [ SiValue (vAlignLabel Alphabetic |> Str), SiBind (ISelect [ InOptions (Strings [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
+                << signal "font" [ SiValue (Str "sans-serif"), SiBind (IRadio [ InOptions (Strings [ "sans-serif", "serif", "monospace" ]) ]) ]
+                << signal "fontWeight" [ SiValue (Str "normal"), SiBind (IRadio [ InOptions (Strings [ "normal", "bold" ]) ]) ]
+                << signal "fontStyle" [ SiValue (Str "normal"), SiBind (IRadio [ InOptions (Strings [ "normal", "italic" ]) ]) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ MInteractive False
+                    , MEncode
+                        [ Enter [ MFill [ VString "#firebrick" ], MSize [ VNumber 25 ] ]
+                        , Update [ MX [ VSignal (SName "x") ], MY [ VSignal (SName "y") ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ MEncode
+                        [ Enter [ MFill [ VString "#000" ], MText [ VString "Text Label" ] ]
+                        , Update
+                            [ MOpacity [ VNumber 1 ]
+                            , MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MdX [ VSignal (SName "dx") ]
+                            , MAngle [ VSignal (SName "angle") ]
+                            , MAlign [ VSignal (SName "align") ]
+                            , MBaseline [ VSignal (SName "baseline") ]
+                            , MFont [ VSignal (SName "font") ]
+                            , MFontSize [ VSignal (SName "fontSize") ]
+                            , MFontStyle [ VSignal (SName "fontStyle") ]
+                            , MFontWeight [ VSignal (SName "fontWeight") ]
+                            , MLimit [ VSignal (SName "limit") ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    rectTest
+    textTest
 
 
 
@@ -408,6 +467,7 @@ mySpecs =
         , ( "rectTest", rectTest )
         , ( "ruleTest", ruleTest )
         , ( "symbolTest", symbolTest )
+        , ( "textTest", textTest )
         ]
 
 

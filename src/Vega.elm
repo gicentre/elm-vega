@@ -1133,12 +1133,14 @@ type TriggerProperty
     | TrModifyValues Expression Expression
 
 
-{-| Indicates the vertical alignment of some text that may be attached to a mark.
+{-| Indicates the vertical alignment of some text or an image mark. Note that the
+`Alphabetic` type constructor applies only to text marks.
 -}
 type VAlign
     = AlignTop
     | AlignMiddle
     | AlignBottom
+    | Alphabetic
 
 
 {-| Represents a value such as a number or reference to a value such as a field label
@@ -1805,6 +1807,9 @@ vAlignLabel align =
 
         AlignBottom ->
             "bottom"
+
+        Alphabetic ->
+            "alphabetic"
 
 
 {-| Override the default width of the visualization. If not specified the width
