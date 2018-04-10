@@ -46,7 +46,7 @@ packTest1 =
         mk =
             marks
                 << mark Symbol
-                    [ MFrom (SData "tree")
+                    [ MFrom [ SData "tree" ]
                     , MEncode
                         [ Enter
                             [ MFill [ VScale (FName "color"), VField (FName "id") ]
@@ -141,7 +141,7 @@ stackTest1 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom (SData "table")
+                    [ MFrom [ SData "table" ]
                     , MEncode
                         [ Enter
                             [ MFill [ VScale (FName "color"), VField (FName "key") ]

@@ -1,6 +1,7 @@
 module Vega
     exposing
-        ( Autosize(..)
+        ( AggregateProperty(..)
+        , Autosize(..)
         , AxisProperty(..)
         , Bind(..)
         , CInterpolate(..)
@@ -21,6 +22,7 @@ module Vega
         , Field(..)
         , FieldValue(..)
         , Format(..)
+        , FormulaUpdate(..)
         , HAlign(..)
         , InputProperty(..)
         , Mark(..)
@@ -68,6 +70,7 @@ module Vega
         , dataColumn
         , dataFromColumns
         , dataFromRows
+        , dataFromSource
         , dataRow
         , dataSource
         , dirLabel
@@ -122,6 +125,7 @@ Functions and types for declaring the input data to the visualization.
 @docs dataSource
 @docs dataFromColumns
 @docs dataFromRows
+@docs dataFromSource
 @docs dataColumn
 @docs dataRow
 @docs on
@@ -140,6 +144,8 @@ Functions and types for declaring the input data to the visualization.
 ## Transformations
 
 @docs Transform
+@docs FormulaUpdate
+@docs AggregateProperty
 @docs PackProperty
 @docs StackProperty
 @docs StackOffset
@@ -258,6 +264,18 @@ import Json.Encode as JE
 
 -- TODO: Most types should have the option of representing their type from a signal
 -- See StOffset as an example
+
+
+{-| Properties of the aggregate transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/aggregate/)
+-}
+type AggregateProperty
+    = AgGroupBy (List Field)
+    | AgFields (List Field)
+    | AgOps (List Operation)
+    | AgAs (List String)
+    | AgCross Bool
+    | AgDrop Bool
 
 
 {-| Indicates the auto-sizing characteristics of the visualization such as amount
@@ -547,6 +565,15 @@ type Format
     | TopojsonFeature String
     | TopojsonMesh String
     | Parse (List ( String, DataType ))
+
+
+{-| Defines whether a formula transformation is a one-off operation (`InitOnly`)
+or is applied whenever an upstream dependency changes. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/formula/).
+-}
+type FormulaUpdate
+    = InitOnly
+    | AlwaysUpdate
 
 
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
@@ -843,7 +870,10 @@ Scale Properties characterise the fundamental data-to-visual transformations app
 by the `scale` function. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
 -}
-type ScaleProperty
+type
+    ScaleProperty
+    -- TODO: Should primitive values (Float, Bool) be replaced with Value so can
+    -- respond to signals etc.? See SPaddingInner and SPaddingOuter for examples.
     = SType Scale
     | SDomain ScaleDomain
     | SDomainMax Float
@@ -861,8 +891,8 @@ type ScaleProperty
     | SExponent Float
     | SBase Float
     | SAlign Float
-    | SPaddingInner Float
-    | SPaddingOuter Float
+    | SPaddingInner Value
+    | SPaddingOuter Value
     | SRangeStep Float
 
 
@@ -875,7 +905,7 @@ type ScaleRange
     | RSignal SignalReference
     | RScheme String (List SchemeProperty)
     | RData DataReference
-    | RStep Float
+    | RStep Value
     | RDefault RangeDefault
 
 
@@ -1070,7 +1100,7 @@ type TopMarkProperty
     | MClip Bool
     | MDescription String
     | MEncode (List EncodingProperty)
-    | MFrom Source
+    | MFrom (List Source)
     | MInteractive Bool
     | MKey String
     | MName String
@@ -1087,17 +1117,18 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/transf
 -}
 type
     Transform
-    -- TODO: Parameterise each transform
-    = TAggregate
+    -- TODO: Parameterise remaining transforms
+    = TAggregate (List AggregateProperty)
     | TBin
     | TCollect
     | TCountPattern
     | TCross
     | TDensity
-    | TExtent
+    | TExtent Field
+    | TExtentAsSignal Field String
     | TFilter
     | TFold
-    | TFormula
+    | TFormula Expression String FormulaUpdate
     | TIdentifier
     | TImpute
     | TJoinAggregate
@@ -1457,6 +1488,28 @@ dataFromRows name fmts rows =
                 [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
     in
     [ ( "name", JE.string name ), ( "values", JE.list rows ) ] ++ fmt
+
+
+{-| Declare a named data set from a named source. The source may be from named
+data sets within a specification or a named data source created via the
+[Vega View API](https://vega.github.io/vega/docs/api/view/#data).
+An optional list of field formatting instructions can be provided as the third
+parameter or an empty list to use the default formatting. See the
+[Vega documentation](https://vega.github.io/vega/docs/data/#examples) for details.
+
+    TODO: XXX Add example
+
+-}
+dataFromSource : String -> String -> List Format -> DataTable
+dataFromSource name sourceName fmts =
+    let
+        fmt =
+            if fmts == [] then
+                []
+            else
+                [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
+    in
+    [ ( "name", JE.string name ), ( "source", JE.string sourceName ) ] ++ fmt
 
 
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
@@ -1838,6 +1891,28 @@ width w =
 
 type alias LabelledSpec =
     ( String, Spec )
+
+
+aggregateProperty : AggregateProperty -> LabelledSpec
+aggregateProperty ap =
+    case ap of
+        AgGroupBy fs ->
+            ( "groupby", JE.list (List.map fieldSpec fs) )
+
+        AgFields fs ->
+            ( "fields", JE.list (List.map fieldSpec fs) )
+
+        AgOps ops ->
+            ( "ops", JE.list (List.map (\op -> opSpec op) ops) )
+
+        AgAs labels ->
+            ( "as", JE.list (List.map JE.string labels) )
+
+        AgCross b ->
+            ( "cross", JE.bool b )
+
+        AgDrop b ->
+            ( "drop", JE.bool b )
 
 
 autosizeProperty : Autosize -> LabelledSpec
@@ -2222,6 +2297,16 @@ formatProperty fmt =
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
 
 
+formulaUpdateSpec : FormulaUpdate -> Spec
+formulaUpdateSpec update =
+    case update of
+        InitOnly ->
+            JE.bool True
+
+        AlwaysUpdate ->
+            JE.bool False
+
+
 interpolateSpec : CInterpolate -> Spec
 interpolateSpec iType =
     case iType of
@@ -2532,71 +2617,71 @@ niceSpec ni =
             JE.int n
 
 
-opLabel : Operation -> String
-opLabel op =
+opSpec : Operation -> Spec
+opSpec op =
     case op of
         ArgMax ->
-            "argmax"
+            JE.string "argmax"
 
         ArgMin ->
-            "argmin"
+            JE.string "argmin"
 
         Average ->
-            "average"
+            JE.string "average"
 
         Count ->
-            "count"
+            JE.string "count"
 
         CI0 ->
-            "ci0"
+            JE.string "ci0"
 
         CI1 ->
-            "ci1"
+            JE.string "ci1"
 
         Distinct ->
-            "distinct"
+            JE.string "distinct"
 
         Max ->
-            "max"
+            JE.string "max"
 
         Mean ->
-            "mean"
+            JE.string "mean"
 
         Median ->
-            "median"
+            JE.string "median"
 
         Min ->
-            "min"
+            JE.string "min"
 
         Missing ->
-            "missing"
+            JE.string "missing"
 
         Q1 ->
-            "q1"
+            JE.string "q1"
 
         Q3 ->
-            "q3"
+            JE.string "q3"
 
         Stdev ->
-            "stdev"
+            JE.string "stdev"
 
         StdevP ->
-            "stdevp"
+            JE.string "stdevp"
 
         Sum ->
-            "sum"
+            JE.string "sum"
 
         Stderr ->
-            "stderr"
+            JE.string "stderr"
 
         Valid ->
-            "valid"
+            JE.string "valid"
 
         Variance ->
-            "variance"
+            JE.string "variance"
 
         VarianceP ->
-            "variancep"
+            JE.string "variancep"
 
 
 orderSpec : Order -> Spec
@@ -2795,8 +2880,8 @@ scaleProperty scaleProp =
                 RData dRef ->
                     ( "range", JE.object [ dataRefProperty dRef ] )
 
-                RStep step ->
-                    ( "range", JE.object [ ( "step", JE.float step ) ] )
+                RStep val ->
+                    ( "range", JE.object [ ( "step", valueSpec val ) ] )
 
                 RDefault rd ->
                     ( "range", JE.string (rangeDefaultLabel rd) )
@@ -2804,11 +2889,11 @@ scaleProperty scaleProp =
         SPadding x ->
             ( "padding", JE.float x )
 
-        SPaddingInner x ->
-            ( "paddingInner", JE.float x )
+        SPaddingInner val ->
+            ( "paddingInner", valueSpec val )
 
-        SPaddingOuter x ->
-            ( "paddingOuter", JE.float x )
+        SPaddingOuter val ->
+            ( "paddingOuter", valueSpec val )
 
         SRangeStep x ->
             ( "rangeStep", JE.float x )
@@ -2941,7 +3026,7 @@ sortProperty sp =
             ( "field", JE.string field )
 
         Op op ->
-            ( "op", JE.string (opLabel op) )
+            ( "op", opSpec op )
 
 
 sourceProperty : Source -> LabelledSpec
@@ -3075,7 +3160,7 @@ topMarkProperty mProp =
             [ ( "encode", JE.object (List.map encodingProperty eps) ) ]
 
         MFrom src ->
-            [ ( "from", JE.object [ sourceProperty src ] ) ]
+            [ ( "from", JE.object (List.map sourceProperty src) ) ]
 
         MInteractive b ->
             [ ( "interactive", JE.bool b ) ]
@@ -3104,8 +3189,8 @@ topMarkProperty mProp =
 transformSpec : Transform -> Spec
 transformSpec trans =
     case trans of
-        TAggregate ->
-            JE.object [ ( "type", JE.string "aggregate" ) ]
+        TAggregate aps ->
+            JE.object (( "type", JE.string "aggregate" ) :: List.map aggregateProperty aps)
 
         TBin ->
             JE.object [ ( "type", JE.string "bin" ) ]
@@ -3122,8 +3207,11 @@ transformSpec trans =
         TDensity ->
             JE.object [ ( "type", JE.string "density" ) ]
 
-        TExtent ->
-            JE.object [ ( "type", JE.string "extent" ) ]
+        TExtent field ->
+            JE.object [ ( "type", JE.string "extent" ), ( "field", fieldSpec field ) ]
+
+        TExtentAsSignal field sigName ->
+            JE.object [ ( "type", JE.string "extent" ), ( "field", fieldSpec field ), ( "signal", JE.string sigName ) ]
 
         TFilter ->
             JE.object [ ( "type", JE.string "filter" ) ]
@@ -3131,8 +3219,13 @@ transformSpec trans =
         TFold ->
             JE.object [ ( "type", JE.string "fold" ) ]
 
-        TFormula ->
-            JE.object [ ( "type", JE.string "formula" ) ]
+        TFormula expr name update ->
+            JE.object
+                [ ( "type", JE.string "formula" )
+                , ( "expr", expressionSpec expr )
+                , ( "as", JE.string name )
+                , ( "initonly", formulaUpdateSpec update )
+                ]
 
         TIdentifier ->
             JE.object [ ( "type", JE.string "identifier" ) ]

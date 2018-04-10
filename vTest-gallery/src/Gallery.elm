@@ -56,7 +56,7 @@ barChart1 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom (SData "table")
+                    [ MFrom [ SData "table" ]
                     , MEncode
                         [ Enter
                             [ MX [ VScale (FName "xscale"), VField (FName "category") ]
@@ -157,7 +157,7 @@ barChart2 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom (SData "table")
+                    [ MFrom [ SData "table" ]
                     , MEncode
                         [ Enter
                             [ MX [ VScale (FName "x"), VField (FName "x") ]
@@ -230,7 +230,7 @@ barChart3 =
             marks
                 << mark Rect
                     [ MName "bars"
-                    , MFrom (SData "facet")
+                    , MFrom [ SData "facet" ]
                     , MEncode
                         [ Enter
                             [ MY [ VScale (FName "pos"), VField (FName "position") ]
@@ -242,7 +242,7 @@ barChart3 =
                         ]
                     ]
                 << mark Text
-                    [ MFrom (SData "bars")
+                    [ MFrom [ SData "bars" ]
                     , MEncode
                         [ Enter
                             [ MX [ VField (FName "x2"), VOffset (VNumber -5) ]
@@ -258,7 +258,7 @@ barChart3 =
         mk =
             marks
                 << mark Group
-                    [ MFrom (SFacet [ FaData "table", FaName "facet", FaGroupBy [ "category" ] ])
+                    [ MFrom [ SFacet [ FaData "table", FaName "facet", FaGroupBy [ "category" ] ] ]
                     , MEncode [ Enter [ MY [ VScale (FName "yscale"), VField (FName "category") ] ] ]
                     , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
@@ -267,9 +267,120 @@ barChart3 =
         [ width 300, height 240, padding (PSize 5), ds, sc [], ax [], mk [] ]
 
 
+barChart4 : Spec
+barChart4 =
+    let
+        table =
+            dataFromColumns "tuples" []
+                << dataColumn "a" (Numbers [ 0, 0, 0, 0, 1, 2, 2 ])
+                << dataColumn "b" (Strings [ "a", "a", "b", "c", "b", "b", "c" ])
+                << dataColumn "c" (Numbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
+
+        agTable =
+            table []
+                |> transform
+                    [ TAggregate
+                        [ AgGroupBy [ FieldName "a", FieldName "b" ]
+                        , AgFields [ FieldName "c" ]
+                        , AgOps [ Average ]
+                        , AgAs [ "c" ]
+                        ]
+                    ]
+
+        trTable =
+            dataFromSource "trellis" "tuples" []
+                |> transform
+                    [ TAggregate [ AgGroupBy [ FieldName "a" ] ]
+                    , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
+                    , TStack [ StField (FieldName "span") ]
+                    , TExtentAsSignal (FieldName "y1") "trellisExtent"
+                    ]
+
+        ds =
+            dataSource [ agTable, trTable ]
+
+        si =
+            signals
+                << signal "rangeStep" [ SiValue (Number 20), SiBind (IRange [ InMin 5, InMax 50, InStep 1 ]) ]
+                << signal "innerPadding" [ SiValue (Number 0.1), SiBind (IRange [ InMin 0, InMax 0.7, InStep 0.01 ]) ]
+                << signal "outerPadding" [ SiValue (Number 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
+                << signal "height" [ SiUpdate "trellisExtent[1]" ]
+
+        sc =
+            scales
+                << scale "xscale"
+                    [ SDomain (DData [ DDataset "tuples", DField "c" ])
+                    , SNice (IsNice True)
+                    , SZero True
+                    , SRound True
+                    , SRange (RDefault RWidth)
+                    ]
+                << scale "color"
+                    [ SType ScOrdinal
+                    , SRange (RDefault RCategory)
+                    , SDomain (DData [ DDataset "trellis", DField "a" ])
+                    ]
+
+        ax =
+            axes << axis "xscale" Bottom [ AxDomain True ]
+
+        nestedSc =
+            scales
+                << scale "yscale"
+                    [ SType ScBand
+                    , SPaddingInner (VSignal (SName "innerPadding"))
+                    , SPaddingOuter (VSignal (SName "outerPadding"))
+                    , SRound True
+                    , SDomain (DData [ DDataset "faceted_tuples", DField "b" ])
+                    , SRange (RStep (VSignal (SName "rangeStep")))
+                    ]
+
+        nestedAx =
+            axes
+                << axis "yscale" Left [ AxTicks False, AxDomain False, AxLabelPadding 4 ]
+
+        nestedMk =
+            marks
+                << mark Rect
+                    [ MFrom [ SData "faceted_tuples" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VNumber 0 ]
+                            , MX2 [ VScale (FName "xscale"), VField (FName "c") ]
+                            , MFill [ VScale (FName "color"), VField (FName "a") ]
+                            , MStrokeWidth [ VNumber 2 ]
+                            ]
+                        , Update
+                            [ MY [ VScale (FName "yscale"), VField (FName "b") ]
+                            , MHeight [ VScale (FName "yscale"), VBand 1 ]
+                            , MStroke [ VNull ]
+                            , MZIndex [ VNumber 0 ]
+                            ]
+                        , Hover
+                            [ MStroke [ VString "firebrick" ]
+                            , MZIndex [ VNumber 1 ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Group
+                    [ MFrom [ SData "trellis", SFacet [ FaName "faceted_tuples", FaData "tuples", FaGroupBy [ "a" ] ] ]
+                    , MEncode
+                        [ Enter [ MX [ VNumber 0 ], MWidth [ VSignal (SName "width") ] ]
+                        , Update [ MY [ VField (FName "y0") ], MY2 [ VField (FName "y1") ] ]
+                        ]
+                    , MGroup [ nestedSc [], nestedAx [], nestedMk [] ]
+                    ]
+    in
+    toVega
+        [ width 300, padding (PSize 5), autosize [ APad ], ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    barChart3
+    barChart4
 
 
 
@@ -282,6 +393,7 @@ mySpecs =
         [ ( "barChart1", barChart1 )
         , ( "barChart2", barChart2 )
         , ( "barChart3", barChart3 )
+        , ( "barChart4", barChart4 )
         ]
 
 

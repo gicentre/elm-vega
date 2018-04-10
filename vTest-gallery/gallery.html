@@ -5,7 +5,7 @@
   <meta charset="utf-8">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);}</style>
+  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: top; line-height: 1.6; margin-left: 1em;}</style>
 
   <!-- These scripts link to the Vega runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
@@ -41,9 +41,9 @@
     The input data is subdivided according to two fields (with uneven category membership).
     Each sub-group is then aggregated to show the average value of a third, quantitative field.
   </p>
-  <div id="barChart4"></div>
+  <div id="barChart4" class="view"></div>
 
-  
+
 
   <h2>Source</h2>
   <div id="elmContainer"></div>
