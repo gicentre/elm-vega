@@ -447,9 +447,67 @@ textTest =
         [ width 200, height 200, padding (PSize 5), si [], mk [] ]
 
 
+trailTest : Spec
+trailTest =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (Numbers [ 28, 55, 42, 34, 36, 48 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        sc =
+            scales
+                << scale "xscale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "table", DField "u" ])
+                    , SRange (RDefault RWidth)
+                    , SZero False
+                    ]
+                << scale "yscale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "table", DField "v" ])
+                    , SRange (RDefault RHeight)
+                    , SZero True
+                    , SNice (IsNice True)
+                    ]
+                << scale "zscale"
+                    [ SType ScLinear
+                    , SRange (RNumbers [ 5, 1 ])
+                    , SDomain (DData [ DDataset "table", DField "v" ])
+                    ]
+
+        si =
+            signals
+                << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
+                << signal "size" [ SiValue (Number 5), SiBind (IRange [ InMin 1, InMax 10 ]) ]
+
+        mk =
+            marks
+                << mark Trail
+                    [ MFrom (SData "table")
+                    , MEncode
+                        [ Enter [ MFill [ VString "#939597" ] ]
+                        , Update
+                            [ MX [ VScale (FName "xscale"), VField (FName "u") ]
+                            , MY [ VScale (FName "yscale"), VField (FName "v") ]
+                            , MSize [ VScale (FName "zscale"), VField (FName "v"), VMultiply (VSignal (SName "size")) ]
+                            , MDefined [ VSignal (SExpr "defined || datum.u !== 3") ]
+                            , MOpacity [ VNumber 1 ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 400, height 200, padding (PSize 5), ds, sc [], si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    textTest
+    trailTest
 
 
 
@@ -468,6 +526,7 @@ mySpecs =
         , ( "ruleTest", ruleTest )
         , ( "symbolTest", symbolTest )
         , ( "textTest", textTest )
+        , ( "trailTest", trailTest )
         ]
 
 
