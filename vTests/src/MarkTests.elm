@@ -135,6 +135,74 @@ areaTest =
         [ width 400, height 200, padding (PSize 5), ds, sc [], si [], mk [] ]
 
 
+groupTest : Spec
+groupTest =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "x" (Numbers [ 5, -5, 60 ])
+                << dataColumn "y" (Numbers [ 5, 70, 120 ])
+                << dataColumn "w" (Numbers [ 100, 40, 100 ])
+                << dataColumn "h" (Numbers [ 30, 40, 20 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "groupClip" [ SiValue (Boolean False), SiBind (ICheckbox []) ]
+                << signal "x" [ SiValue (Number 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (Number 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "w" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "h" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
+                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+
+        mk =
+            marks
+                << mark Group
+                    [ MEncode
+                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        , Update
+                            [ MX [ VSignal (SName "x") ]
+                            , MY [ VSignal (SName "y") ]
+                            , MWidth [ VSignal (SName "w") ]
+                            , MHeight [ VSignal (SName "h") ]
+                            , MGroupClip [ VSignal (SName "groupClip") ]
+                            , MOpacity [ VNumber 1 ]
+                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
+                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
+                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            ]
+                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        ]
+                    , MGroup ds
+                    , MGroup (nestedMk [])
+                    ]
+
+        nestedMk =
+            marks
+                << mark Rect
+                    [ MFrom (SData "table")
+                    , MInteractive False
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FName "x") ]
+                            , MY [ VField (FName "y") ]
+                            , MWidth [ VField (FName "w") ]
+                            , MHeight [ VField (FName "h") ]
+                            , MFill [ VString "aliceblue" ]
+                            , MStroke [ VString "firebrick" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), si [], mk [] ]
+
+
 imageTest : Spec
 imageTest =
     let
@@ -507,7 +575,7 @@ trailTest =
 
 sourceExample : Spec
 sourceExample =
-    trailTest
+    groupTest
 
 
 
@@ -519,6 +587,7 @@ mySpecs =
     combineSpecs
         [ ( "arcTest", arcTest )
         , ( "areaTest", areaTest )
+        , ( "groupTest", groupTest )
         , ( "imageTest", imageTest )
         , ( "lineTest", lineTest )
         , ( "pathTest", pathTest )

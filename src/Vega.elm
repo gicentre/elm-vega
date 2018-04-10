@@ -657,7 +657,7 @@ type MarkProperty
     | MStrokeJoin StrokeJoin
     | MStrokeMiterLimit (List Value)
     | MCursor (List Value)
-    | MHRef String -- TODO: Would the more flexible but error-prone List Value be better?
+    | MHRef (List Value)
     | MTooltip (List Value)
     | MZIndex (List Value)
       -- Properties shared by a subset of marks
@@ -677,7 +677,7 @@ type MarkProperty
       -- Area mark specific:
     | MOrient (List Value)
       -- Group mark specific:
-    | MGroupClip Bool -- TODO: Would the more flexible but error-prone List Value be better?
+    | MGroupClip (List Value)
       -- Image mark specific:
     | MUrl (List Value)
     | MAspect (List Value)
@@ -1057,6 +1057,13 @@ type
 
 {-| Indicates the charactersitcs of a mark. For further
 details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
+
+Whole specifications can nested within the `Group` mark (including further nested
+group specifications) by specifying `MType Group` and suppyling the specification
+as a series of `MGroup` properties. For example,
+
+    TODO: XXX MGroup example
+
 -}
 type TopMarkProperty
     = MType Mark
@@ -1072,6 +1079,7 @@ type TopMarkProperty
       -- TODO: MTransform (List Transform) combining with Data transform functions
     | MRole String
     | MStyle (List String)
+    | MGroup ( VProperty, Spec )
 
 
 {-| Defines a transformation that may be applied to a data stream or mark.
@@ -2366,8 +2374,8 @@ markProperty mProp =
         MCursor vals ->
             ( "cursor", valRef vals )
 
-        MHRef url ->
-            ( "href", JE.string url )
+        MHRef vals ->
+            ( "href", valRef vals )
 
         MTooltip vals ->
             ( "tooltip", valRef vals )
@@ -2408,8 +2416,8 @@ markProperty mProp =
             ( "defined", valRef vals )
 
         -- Group Mark specific (MCornerRadius shared with other marks):
-        MGroupClip clip ->
-            ( "clip", JE.bool clip )
+        MGroupClip vals ->
+            ( "clip", valRef vals )
 
         -- Image Mark specific:
         MAspect vals ->
@@ -3079,6 +3087,9 @@ topMarkProperty mProp =
 
         MStyle ss ->
             ( "style", JE.list (List.map JE.string ss) )
+
+        MGroup ( vProp, spec ) ->
+            ( vPropertyLabel vProp, spec )
 
 
 transformSpec : Transform -> Spec
