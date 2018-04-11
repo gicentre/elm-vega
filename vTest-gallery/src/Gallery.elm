@@ -12,6 +12,11 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+dv : String -> Float -> ( String, DataValue )
+dv label num =
+    ( label, Number num )
+
+
 barChart1 : Spec
 barChart1 =
     let
@@ -91,31 +96,11 @@ barChart1 =
 barChart2 : Spec
 barChart2 =
     let
-        dv label num =
-            ( label, Number num )
-
         table =
-            dataFromRows "table" []
-                << dataRow [ dv "x" 0, dv "y" 28, dv "c" 0 ]
-                << dataRow [ dv "x" 0, dv "y" 55, dv "c" 1 ]
-                << dataRow [ dv "x" 1, dv "y" 43, dv "c" 0 ]
-                << dataRow [ dv "x" 1, dv "y" 91, dv "c" 1 ]
-                << dataRow [ dv "x" 2, dv "y" 81, dv "c" 0 ]
-                << dataRow [ dv "x" 2, dv "y" 53, dv "c" 1 ]
-                << dataRow [ dv "x" 3, dv "y" 19, dv "c" 0 ]
-                << dataRow [ dv "x" 3, dv "y" 87, dv "c" 1 ]
-                << dataRow [ dv "x" 4, dv "y" 52, dv "c" 0 ]
-                << dataRow [ dv "x" 4, dv "y" 48, dv "c" 1 ]
-                << dataRow [ dv "x" 5, dv "y" 24, dv "c" 0 ]
-                << dataRow [ dv "x" 5, dv "y" 49, dv "c" 1 ]
-                << dataRow [ dv "x" 6, dv "y" 87, dv "c" 0 ]
-                << dataRow [ dv "x" 6, dv "y" 66, dv "c" 1 ]
-                << dataRow [ dv "x" 7, dv "y" 17, dv "c" 0 ]
-                << dataRow [ dv "x" 7, dv "y" 27, dv "c" 1 ]
-                << dataRow [ dv "x" 8, dv "y" 68, dv "c" 0 ]
-                << dataRow [ dv "x" 8, dv "y" 16, dv "c" 1 ]
-                << dataRow [ dv "x" 9, dv "y" 49, dv "c" 0 ]
-                << dataRow [ dv "x" 9, dv "y" 15, dv "c" 1 ]
+            dataFromColumns "table" []
+                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -491,9 +476,209 @@ barChart5 =
         [ height 400, padding (PSize 5), ds, si [], topSc [], topMk [] ]
 
 
+lineChart1 : Spec
+lineChart1 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (Numbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
+                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "interpolate"
+                    [ SiValue (markInterpolationLabel Linear |> Str)
+                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScPoint
+                    , SRange (RDefault RWidth)
+                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRange (RDefault RHeight)
+                    , SNice (IsNice True)
+                    , SZero True
+                    , SDomain (DData [ DDataset "table", DField "y" ])
+                    ]
+                << scale "color"
+                    [ SType ScOrdinal
+                    , SRange (RDefault RCategory)
+                    , SDomain (DData [ DDataset "table", DField "c" ])
+                    ]
+
+        ax =
+            axes << axis "xScale" Bottom [] << axis "yScale" Left []
+
+        mk =
+            marks
+                << mark Group
+                    [ MFrom [ SFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
+                    , MGroup [ mkLine [] ]
+                    ]
+
+        mkLine =
+            marks
+                << mark Line
+                    [ MFrom [ SData "series" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VScale (FName "xScale"), VField (FName "x") ]
+                            , MY [ VScale (FName "yScale"), VField (FName "y") ]
+                            , MStroke [ VScale (FName "color"), VField (FName "c") ]
+                            , MStrokeWidth [ VNumber 2 ]
+                            ]
+                        , Update [ MInterpolate [ VSignal (SName "interpolate") ], MStrokeOpacity [ VNumber 1 ] ]
+                        , Hover [ MStrokeOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
+
+
+areaChart1 : Spec
+areaChart1 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "u" (List.map toFloat (List.range 1 20) |> Numbers)
+                << dataColumn "v" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "interpolate"
+                    [ SiValue (markInterpolationLabel Linear |> Str)
+                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SRange (RDefault RWidth)
+                    , SZero False
+                    , SDomain (DData [ DDataset "table", DField "u" ])
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRange (RDefault RHeight)
+                    , SNice (IsNice True)
+                    , SZero True
+                    , SDomain (DData [ DDataset "table", DField "v" ])
+                    ]
+
+        ax =
+            axes << axis "xScale" Bottom [ AxTickCount 20 ] << axis "yScale" Left []
+
+        mk =
+            marks
+                << mark Area
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VScale (FName "xScale"), VField (FName "u") ]
+                            , MY [ VScale (FName "yScale"), VField (FName "v") ]
+                            , MY2 [ VScale (FName "yScale"), VNumber 0 ]
+                            , MFill [ VString "steelblue" ]
+                            ]
+                        , Update [ MInterpolate [ VSignal (SName "interpolate") ], MFillOpacity [ VNumber 1 ] ]
+                        , Hover [ MFillOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
+
+
+areaChart2 : Spec
+areaChart2 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ TStack
+                            [ StGroupBy [ FieldName "x" ]
+                            , StSort [ CoField [ FieldName "c" ] ]
+                            , StField (FieldName "y")
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScPoint
+                    , SRange (RDefault RWidth)
+                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRange (RDefault RHeight)
+                    , SNice (IsNice True)
+                    , SZero True
+                    , SDomain (DData [ DDataset "table", DField "y1" ])
+                    ]
+                << scale "color"
+                    [ SType ScOrdinal
+                    , SRange (RDefault RCategory)
+                    , SDomain (DData [ DDataset "table", DField "c" ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" Bottom [ AxZIndex 1 ]
+                << axis "yScale" Left [ AxZIndex 1 ]
+
+        mk =
+            marks
+                << mark Group
+                    [ MFrom [ SFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
+                    , MGroup [ mkArea [] ]
+                    ]
+
+        mkArea =
+            marks
+                << mark Area
+                    [ MFrom [ SData "series" ]
+                    , MEncode
+                        [ Enter
+                            [ MInterpolate [ markInterpolationLabel Monotone |> VString ]
+                            , MX [ VScale (FName "xScale"), VField (FName "x") ]
+                            , MY [ VScale (FName "yScale"), VField (FName "y0") ]
+                            , MY2 [ VScale (FName "yScale"), VField (FName "y1") ]
+                            , MFill [ VScale (FName "color"), VField (FName "c") ]
+                            ]
+                        , Update [ MFillOpacity [ VNumber 1 ] ]
+                        , Hover [ MFillOpacity [ VNumber 0.5 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, padding (PSize 5), ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    barChart5
+    areaChart2
 
 
 
@@ -508,6 +693,9 @@ mySpecs =
         , ( "barChart3", barChart3 )
         , ( "barChart4", barChart4 )
         , ( "barChart5", barChart5 )
+        , ( "lineChart1", lineChart1 )
+        , ( "areaChart1", areaChart1 )
+        , ( "areaChart2", areaChart2 )
         ]
 
 
