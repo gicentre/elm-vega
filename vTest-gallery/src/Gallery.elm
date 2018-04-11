@@ -676,9 +676,101 @@ areaChart2 =
         [ width 500, height 200, padding (PSize 5), ds, sc [], ax [], mk [] ]
 
 
+areaChart3 : Spec
+areaChart3 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "x" (List.map toFloat (List.range 1 20) |> Numbers)
+                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+
+        layerData =
+            data "layer_indices" [ DValue (VNumbers [ 0, 1, 2, 3 ]) ]
+                |> transform
+                    [ TFilter (Expr "datum.data < layers")
+                    , TFormula "datum.data * -height" "offset" AlwaysUpdate
+                    ]
+
+        ds =
+            dataSource [ table [], layerData ]
+
+        si =
+            signals
+                << signal "layers"
+                    [ SiValue (Number 2)
+                    , SiOn [ [ EEvents "mousedown!", EUpdate "1 + (layers % 4)" ] ]
+                    , SiBind (ISelect [ InOptions (Numbers [ 1, 2, 3, 4 ]) ])
+                    ]
+                << signal "height" [ SiUpdate "floor(200 / layers)" ]
+                << signal "vheight" [ SiUpdate "height * layers" ]
+                << signal "opacity" [ SiUpdate "pow(layers, -2/3)" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SRange (RDefault RWidth)
+                    , SZero False
+                    , SRound True
+                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRange (RValues [ VSignal (SName "vheight"), VNumber 0 ])
+                    , SNice (IsNice True)
+                    , SZero True
+                    , SDomain (DData [ DDataset "table", DField "y" ])
+                    ]
+
+        ax =
+            axes << axis "xScale" Bottom [ AxTickCount 20 ]
+
+        mk =
+            marks
+                << mark Group
+                    [ MEncode
+                        [ Update
+                            [ MWidth [ VField (FGroup (FName "width")) ]
+                            , MHeight [ VField (FGroup (FName "height")) ]
+                            , MGroupClip [ VBool True ]
+                            ]
+                        ]
+                    , MGroup [ mk1 [] ]
+                    ]
+
+        mk1 =
+            marks
+                << mark Group
+                    [ MFrom [ SData "layer_indices" ]
+                    , MEncode [ Update [ MY [ VField (FName "offset") ] ] ]
+                    , MGroup [ mkArea [] ]
+                    ]
+
+        mkArea =
+            marks
+                << mark Area
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MInterpolate [ markInterpolationLabel Monotone |> VString ]
+                            , MX [ VScale (FName "xScale"), VField (FName "x") ]
+                            , MFill [ VString "steelblue" ]
+                            ]
+                        , Update
+                            [ MY [ VScale (FName "yScale"), VField (FName "y") ]
+                            , MY2 [ VScale (FName "yScale"), VNumber 0 ]
+                            , MFillOpacity [ VSignal (SName "opacity") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    areaChart2
+    areaChart3
 
 
 
@@ -696,6 +788,7 @@ mySpecs =
         , ( "lineChart1", lineChart1 )
         , ( "areaChart1", areaChart1 )
         , ( "areaChart2", areaChart2 )
+        , ( "areaChart3", areaChart3 )
         ]
 
 

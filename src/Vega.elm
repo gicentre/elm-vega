@@ -454,7 +454,7 @@ type DataProperty
     = DFormat Format
     | DSource String
     | DSources (List String)
-      -- TODO: |Values Any
+    | DValue Value
     | DOn (List Trigger)
     | DUrl String
 
@@ -2153,6 +2153,9 @@ dataProperty dProp =
 
         DUrl url ->
             ( "url", JE.string url )
+
+        DValue val ->
+            ( "values", valueSpec val )
 
 
 dataRefProperty : DataReference -> LabelledSpec
