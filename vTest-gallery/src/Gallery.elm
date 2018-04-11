@@ -288,7 +288,7 @@ barChart4 =
                     ]
 
         trTable =
-            dataFromSource "trellis" "tuples" []
+            data "trellis" [ DSource "tuples" ]
                 |> transform
                     [ TAggregate [ AgGroupBy [ FieldName "a" ] ]
                     , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
@@ -378,9 +378,122 @@ barChart4 =
         [ width 300, padding (PSize 5), autosize [ APad ], ds, si [], sc [], ax [], mk [] ]
 
 
+type Gender
+    = Male
+    | Female
+
+
+barChart5 : Spec
+barChart5 =
+    let
+        ds =
+            dataSource
+                [ data "population" [ DUrl "https://vega.github.io/vega/data/population.json" ]
+                , data "popYear" [ DSource "population" ] |> transform [ TFilter (Expr "datum.year == year") ]
+                , data "males" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
+                , data "females" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
+                , data "ageGroups" [ DSource "population" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+                ]
+
+        si =
+            signals
+                << signal "chartWidth" [ SiValue (Number 300) ]
+                << signal "chartPad" [ SiValue (Number 20) ]
+                << signal "width" [ SiUpdate "2 * chartWidth + chartPad" ]
+                << signal "year" [ SiValue (Number 2000), SiBind (IRange [ InMin 1850, InMax 2000, InStep 10 ]) ]
+
+        topSc =
+            scales
+                << scale "y"
+                    [ SType ScBand
+                    , SRange (RValues [ VSignal (SName "height"), VNumber 0 ])
+                    , SRound True
+                    , SDomain (DData [ DDataset "ageGroups", DField "age" ])
+                    ]
+                << scale "c"
+                    [ SType ScOrdinal
+                    , SDomain (DNumbers [ 1, 2 ])
+                    , SRange (RStrings [ "#1f77b4", "#e377c2" ])
+                    ]
+
+        topMk =
+            marks
+                << mark Text
+                    [ MInteractive False
+                    , MFrom [ SData "ageGroups" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VSignal (SExpr "chartWidth + chartPad / 2") ]
+                            , MY [ VScale (FName "y"), VField (FName "age"), VBand 0.5 ]
+                            , MText [ VField (FName "age") ]
+                            , MBaseline [ vAlignLabel AlignMiddle |> VString ]
+                            , MAlign [ hAlignLabel AlignCenter |> VString ]
+                            , MFill [ VString "#000" ]
+                            ]
+                        ]
+                    ]
+                << mark Group
+                    [ MEncode [ Update [ MX [ VNumber 0 ], MHeight [ VSignal (SName "height") ] ] ]
+                    , MGroup [ sc Female [], ax [], mk Female [] ]
+                    ]
+                << mark Group
+                    [ MEncode [ Update [ MX [ VSignal (SExpr "chartWidth + chartPad") ], MHeight [ VSignal (SName "height") ] ] ]
+                    , MGroup [ sc Male [], ax [], mk Male [] ]
+                    ]
+
+        sc gender =
+            let
+                range =
+                    case gender of
+                        Female ->
+                            SRange (RValues [ VSignal (SName "chartWidth"), VNumber 0 ])
+
+                        Male ->
+                            SRange (RValues [ VNumber 0, VSignal (SName "chartWidth") ])
+            in
+            scales
+                << scale "x"
+                    [ SType ScLinear
+                    , range
+                    , SNice (IsNice True)
+                    , SDomain (DData [ DDataset "population", DField "people" ])
+                    ]
+
+        mk gender =
+            let
+                genderField =
+                    case gender of
+                        Female ->
+                            "females"
+
+                        Male ->
+                            "males"
+            in
+            marks
+                << mark Rect
+                    [ MFrom [ SData genderField ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VScale (FName "x"), VField (FName "people") ]
+                            , MX2 [ VScale (FName "x"), VNumber 0 ]
+                            , MY [ VScale (FName "y"), VField (FName "age") ]
+                            , MHeight [ VScale (FName "y"), VBand 1, VOffset (VNumber -1) ]
+                            , MFillOpacity [ VNumber 0.6 ]
+                            , MFill [ VScale (FName "c"), VField (FName "sex") ]
+                            ]
+                        ]
+                    ]
+
+        ax =
+            axes << axis "x" Bottom [ AxFormat "s" ]
+    in
+    toVega
+        [ height 400, padding (PSize 5), ds, si [], topSc [], topMk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    barChart4
+    barChart5
 
 
 
@@ -394,6 +507,7 @@ mySpecs =
         , ( "barChart2", barChart2 )
         , ( "barChart3", barChart3 )
         , ( "barChart4", barChart4 )
+        , ( "barChart5", barChart5 )
         ]
 
 

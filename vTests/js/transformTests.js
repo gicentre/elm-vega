@@ -12522,7 +12522,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'step',
-									_1: _elm_lang$core$Json_Encode$float(_p77._0)
+									_1: _user$project$Vega$valueSpec(_p77._0)
 								},
 								_1: {ctor: '[]'}
 							})
@@ -12545,13 +12545,13 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingInner',
-				_1: _elm_lang$core$Json_Encode$float(_p76._0)
+				_1: _user$project$Vega$valueSpec(_p76._0)
 			};
 		case 'SPaddingOuter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingOuter',
-				_1: _elm_lang$core$Json_Encode$float(_p76._0)
+				_1: _user$project$Vega$valueSpec(_p76._0)
 			};
 		case 'SRangeStep':
 			return {

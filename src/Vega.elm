@@ -9,6 +9,7 @@ module Vega
         , Comparator(..)
         , Cursor(..)
         , DataColumn
+        , DataProperty(..)
         , DataReference(..)
         , DataRow
         , DataTable
@@ -17,6 +18,7 @@ module Vega
         , DataValues(..)
         , EncodingProperty(..)
         , EventHandler(..)
+        , Expr(..)
         , Expression
         , Facet(..)
         , Field(..)
@@ -58,6 +60,7 @@ module Vega
         , TimeUnit(..)
         , TopMarkProperty(..)
         , Transform(..)
+        , Trigger
         , TriggerProperty(..)
         , VAlign(..)
         , VProperty
@@ -67,10 +70,10 @@ module Vega
         , axis
         , combineSpecs
         , cursorLabel
+        , data
         , dataColumn
         , dataFromColumns
         , dataFromRows
-        , dataFromSource
         , dataRow
         , dataSource
         , dirLabel
@@ -125,11 +128,12 @@ Functions and types for declaring the input data to the visualization.
 @docs dataSource
 @docs dataFromColumns
 @docs dataFromRows
-@docs dataFromSource
+@docs data
 @docs dataColumn
 @docs dataRow
 @docs on
 @docs trigger
+@docs DataProperty
 @docs DataColumn
 @docs DataRow
 @docs DataTable
@@ -138,6 +142,7 @@ Functions and types for declaring the input data to the visualization.
 @docs Format
 @docs SortProperty
 @docs Source
+@docs Trigger
 @docs TriggerProperty
 
 
@@ -251,6 +256,7 @@ can carry data used in specifications.
 @docs DataValues
 @docs TimeUnit
 @docs ColorValue
+@docs Expr
 @docs Expression
 @docs Field
 @docs FieldValue
@@ -441,6 +447,18 @@ type alias DataTable =
     List LabelledSpec
 
 
+{-| Properties to customise data loading. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+type DataProperty
+    = DFormat Format
+    | DSource String
+    | DSources (List String)
+      -- TODO: |Values Any
+    | DOn (List Trigger)
+    | DUrl String
+
+
 {-| Reference to one or more sources of data such as dataset, field name or collection
 of fields. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
@@ -513,6 +531,14 @@ type
     | EUpdate String
     | EEncode String
     | EForce Bool
+
+
+{-| A vega [Expr](https://vega.github.io/vega/docs/types/#Expr) that can be either
+a field lookup or a full expression that is evaluated once per datum.
+-}
+type Expr
+    = EField String
+    | Expr Expression
 
 
 {-| Represents an expression to enable custom calculations. This should be text
@@ -902,6 +928,7 @@ type
 type ScaleRange
     = RNumbers (List Float)
     | RStrings (List String)
+    | RValues (List Value)
     | RSignal SignalReference
     | RScheme String (List SchemeProperty)
     | RData DataReference
@@ -1104,7 +1131,7 @@ type TopMarkProperty
     | MInteractive Bool
     | MKey String
     | MName String
-      -- TODO: MOn (List Trigger) combining with data trigger functions.
+    | MOn (List Trigger)
     | MSort (List Comparator)
       -- TODO: MTransform (List Transform) combining with Data transform functions
     | MRole String
@@ -1126,7 +1153,7 @@ type
     | TDensity
     | TExtent Field
     | TExtentAsSignal Field String
-    | TFilter
+    | TFilter Expr
     | TFold
     | TFormula Expression String FormulaUpdate
     | TIdentifier
@@ -1158,6 +1185,13 @@ type
     | TTreeMap
     | TCrossFilter
     | TResolveFilter
+
+
+{-| Represents a trigger enabling dynamic updates to data and marks. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/triggers/)
+-}
+type alias Trigger =
+    Spec
 
 
 {-| Defines a trigger that can cause a data stream or mark to update.
@@ -1490,26 +1524,19 @@ dataFromRows name fmts rows =
     [ ( "name", JE.string name ), ( "values", JE.list rows ) ] ++ fmt
 
 
-{-| Declare a named data set from a named source. The source may be from named
-data sets within a specification or a named data source created via the
-[Vega View API](https://vega.github.io/vega/docs/api/view/#data).
-An optional list of field formatting instructions can be provided as the third
-parameter or an empty list to use the default formatting. See the
-[Vega documentation](https://vega.github.io/vega/docs/data/#examples) for details.
+{-| Declare a named data set. Depending on the properties provided this may be
+from an external file, from a named data source or inline literal values. See the
+[Vega documentation](https://vega.github.io/vega/docs/data/#propertiess) for details.
 
-    TODO: XXX Add example
+      dataSource
+          [ data "pop" [ DUrl "data/population.json" ]
+          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          ]
 
 -}
-dataFromSource : String -> String -> List Format -> DataTable
-dataFromSource name sourceName fmts =
-    let
-        fmt =
-            if fmts == [] then
-                []
-            else
-                [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
-    in
-    [ ( "name", JE.string name ), ( "source", JE.string sourceName ) ] ++ fmt
+data : String -> List DataProperty -> DataTable
+data name dProps =
+    ( "name", JE.string name ) :: List.map dataProperty dProps
 
 
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
@@ -1527,6 +1554,15 @@ dataRow row =
 of data tables which themselves may be generated inline, loaded from a URL or the
 result of a transformation. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/data).
+
+      dataSource
+          [ data "pop" [ DUrl "data/population.json" ]
+          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "males" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
+          , data "females" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
+          , data "ageGroups" [ DSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          ]
+
 -}
 dataSource : List DataTable -> ( VProperty, Spec )
 dataSource dataTables =
@@ -1836,6 +1872,13 @@ toVega spec =
 
 {-| Applies the given ordered list of transforms to the given data table.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
+
+      dataSource
+          [ data "pop" [ DUrl "data/population.json" ]
+          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "ageGroups" [ DSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          ]
+
 -}
 transform : List Transform -> DataTable -> DataTable
 transform transforms dTable =
@@ -1846,7 +1889,7 @@ transform transforms dTable =
 The first parameter is the name of the trigger and the second
 a list of trigger actions.
 -}
-trigger : String -> List TriggerProperty -> Spec
+trigger : String -> List TriggerProperty -> Trigger
 trigger trName trProps =
     JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
 
@@ -2093,6 +2136,25 @@ comparatorProperty comp =
             ( "order", JE.list (List.map orderSpec os) )
 
 
+dataProperty : DataProperty -> LabelledSpec
+dataProperty dProp =
+    case dProp of
+        DFormat fmt ->
+            ( "format", JE.object (formatProperty fmt) )
+
+        DSource src ->
+            ( "source", JE.string src )
+
+        DSources srcs ->
+            ( "source", JE.list (List.map JE.string srcs) )
+
+        DOn triggers ->
+            ( "on", JE.list triggers )
+
+        DUrl url ->
+            ( "url", JE.string url )
+
+
 dataRefProperty : DataReference -> LabelledSpec
 dataRefProperty dataRef =
     case dataRef of
@@ -2193,6 +2255,16 @@ eventHandlerSpec ehs =
                     ( "force", JE.bool b )
     in
     JE.object (List.map eventHandler ehs)
+
+
+exprProperty : Expr -> LabelledSpec
+exprProperty expr =
+    case expr of
+        EField field ->
+            ( "field", JE.string field )
+
+        Expr expr ->
+            ( "expr", expressionSpec expr )
 
 
 expressionSpec : Expression -> Spec
@@ -2871,6 +2943,9 @@ scaleProperty scaleProp =
                 RStrings ss ->
                     ( "range", JE.list (List.map JE.string ss) )
 
+                RValues vals ->
+                    ( "range", JE.list (List.map valueSpec vals) )
+
                 RSignal sig ->
                     ( "range", JE.object [ signalReferenceProperty sig ] )
 
@@ -3171,7 +3246,9 @@ topMarkProperty mProp =
         MName s ->
             [ ( "name", JE.string s ) ]
 
-        -- TODO: MOn Trigger[]
+        MOn triggers ->
+            [ ( "on", JE.list triggers ) ]
+
         -- TODO: MTransform Transform []
         MRole s ->
             [ ( "role", JE.string s ) ]
@@ -3213,8 +3290,8 @@ transformSpec trans =
         TExtentAsSignal field sigName ->
             JE.object [ ( "type", JE.string "extent" ), ( "field", fieldSpec field ), ( "signal", JE.string sigName ) ]
 
-        TFilter ->
-            JE.object [ ( "type", JE.string "filter" ) ]
+        TFilter expr ->
+            JE.object [ ( "type", JE.string "filter" ), exprProperty expr ]
 
         TFold ->
             JE.object [ ( "type", JE.string "fold" ) ]
