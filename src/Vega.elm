@@ -2,6 +2,7 @@ module Vega
     exposing
         ( AggregateProperty(..)
         , Autosize(..)
+        , AxisElement(..)
         , AxisProperty(..)
         , Bind(..)
         , CInterpolate(..)
@@ -165,6 +166,7 @@ Functions and types for declaring the input data to the visualization.
 @docs axes
 @docs axis
 @docs AxisProperty
+@docs AxisElement
 @docs Side
 @docs OverlapStrategy
 
@@ -297,6 +299,18 @@ type Autosize
     | AResize
 
 
+{-| Encodable axis element. Used for customising some part of an axis. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/axes/#custom).
+-}
+type AxisElement
+    = EAxis
+    | ETicks
+    | EGrid
+    | ELabels
+    | ETitle
+    | EDomain
+
+
 {-| Indicates the characteristics of a chart axis such as its orientation, labels
 and ticks. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/axes)
@@ -305,7 +319,7 @@ type AxisProperty
     = AxScale String
     | AxSide Side
     | AxDomain Bool
-      --TODO: AxEncode
+    | AxEncode (List ( AxisElement, List EncodingProperty ))
     | AxFormat String
     | AxGrid Bool
     | AxGridScale String
@@ -325,8 +339,7 @@ type AxisProperty
     | AxTickSize Float
     | AxTitle String
     | AxTitlePadding Float
-      -- TODO: AxValues should allow numbers, strings and signal references
-    | AxValues (List Float)
+    | AxValues (List Value)
     | AxZIndex Int
 
 
@@ -629,6 +642,7 @@ type InputProperty
     | InName String
     | InStep Float
     | InPlaceholder String
+    | InAutocomplete Bool
 
 
 {-| Type of visual mark used to represent data in the visualization. For further
@@ -1980,6 +1994,28 @@ autosizeProperty asCfg =
             ( "contains", JE.string "padding" )
 
 
+axisElementLabel : AxisElement -> String
+axisElementLabel el =
+    case el of
+        EAxis ->
+            "axis"
+
+        ETicks ->
+            "ticks"
+
+        EGrid ->
+            "grid"
+
+        ELabels ->
+            "labels"
+
+        ETitle ->
+            "title"
+
+        EDomain ->
+            "domain"
+
+
 axisProperty : AxisProperty -> LabelledSpec
 axisProperty ap =
     case ap of
@@ -1994,6 +2030,13 @@ axisProperty ap =
 
         AxDomain b ->
             ( "domain", JE.bool b )
+
+        AxEncode elEncs ->
+            let
+                enc ( el, encProps ) =
+                    ( axisElementLabel el, JE.object (List.map encodingProperty encProps) )
+            in
+            ( "encode", JE.object (List.map enc elEncs) )
 
         AxGrid b ->
             ( "grid", JE.bool b )
@@ -2057,7 +2100,7 @@ axisProperty ap =
             ( "titlePadding", JE.float pad )
 
         AxValues vals ->
-            ( "values", JE.list (List.map JE.float vals) )
+            ( "values", JE.list (List.map valueSpec vals) )
 
         AxZIndex n ->
             ( "zindex", JE.int n )
@@ -2436,6 +2479,15 @@ inputProperty prop =
 
         Element el ->
             ( "element", JE.string el )
+
+        -- Autocomplete appears to be undocumented in https://vega.github.io/vega/docs/signals/
+        -- but is used in this example: https://vega.github.io/vega/examples/job-voyager/
+        -- TODO: Any other HTML 5 attributes missing?
+        InAutocomplete b ->
+            if b then
+                ( "autocomplete", JE.string "on" )
+            else
+                ( "autocomplete", JE.string "off" )
 
 
 markLabel : Mark -> String
