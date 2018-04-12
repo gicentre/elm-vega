@@ -2151,7 +2151,7 @@ for details.
 The columns themselves are most easily generated with `dataColumn`
 
     data =
-        dataFromColumns [ Parse [ ( "Year", FDate "%Y" ) ] ]
+        dataFromColumns [ Parse [ ( "Year", FoDate "%Y" ) ] ]
             << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
             << dataColumn "Age" (Numbers [ 28, 12, 6 ])
             << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
@@ -2223,7 +2223,7 @@ if you are creating data inline (as opposed to reading from a file), adding data
 is more efficient and less error-prone.
 
     data =
-        dataFromRows [ Parse [ ( "Year", FDate "%Y" ) ] ]
+        dataFromRows [ Parse [ ( "Year", FoDate "%Y" ) ] ]
             << dataRow [ ( "Animal", Str "Fish" ), ( "Age", Number 28 ), ( "Year", Str "2010" ) ]
             << dataRow [ ( "Animal", Str "Dog" ), ( "Age", Number 12 ), ( "Year", Str "2014" ) ]
             << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
