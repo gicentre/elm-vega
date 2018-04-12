@@ -983,6 +983,61 @@ circularChart1 =
         [ width 200, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+circularChart2 : Spec
+circularChart2 =
+    let
+        ds =
+            dataSource
+                [ data "table" [ DValue (VNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
+                    |> transform [ TPie [ PiField (FieldName "data") ] ]
+                ]
+
+        sc =
+            scales
+                << scale "rScale"
+                    [ SType ScSqrt
+                    , SDomain (DData [ DDataset "table", DField "data" ])
+                    , SRange (RNumbers [ 20, 100 ])
+                    ]
+
+        mk =
+            marks
+                << mark Arc
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
+                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
+                            , MStartAngle [ VField (FName "startAngle") ]
+                            , MEndAngle [ VField (FName "endAngle") ]
+                            , MInnerRadius [ VNumber 20 ]
+                            , MOuterRadius [ VField (FName "data"), VScale (FName "rScale") ]
+                            , MStroke [ VString "#fff" ]
+                            ]
+                        , Update [ MFill [ VString "#ccc" ] ]
+                        , Hover [ MFill [ VString "pink" ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
+                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
+                            , MRadius [ VField (FName "data"), VScale (FName "rScale"), VOffset (VNumber 8) ]
+                            , MTheta [ VSignal (SExpr "(datum.startAngle + datum.endAngle)/2") ]
+                            , MFill [ VString "#000" ]
+                            , MAlign [ hAlignLabel AlignCenter |> VString ]
+                            , MBaseline [ vAlignLabel AlignMiddle |> VString ]
+                            , MText [ VField (FName "data") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, ds, sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     circularChart1
@@ -1006,6 +1061,7 @@ mySpecs =
         , ( "areaChart3", areaChart3 )
         , ( "areaChart4", areaChart4 )
         , ( "circularChart1", circularChart1 )
+        , ( "circularChart2", circularChart2 )
         ]
 
 
