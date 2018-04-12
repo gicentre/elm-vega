@@ -28,6 +28,7 @@ module Vega
         , FormulaUpdate(..)
         , HAlign(..)
         , InputProperty(..)
+        , LegendProperty(..)
         , Mark(..)
         , MarkInterpolation(..)
         , MarkOrientation(..)
@@ -82,6 +83,8 @@ module Vega
         , dirLabel
         , hAlignLabel
         , height
+        , legend
+        , legends
         , mark
         , markInterpolationLabel
         , markOrientationLabel
@@ -172,6 +175,13 @@ Functions and types for declaring the input data to the visualization.
 @docs AxisElement
 @docs Side
 @docs OverlapStrategy
+
+
+## Legends
+
+@docs legends
+@docs legend
+@docs LegendProperty
 
 
 ## Marks
@@ -649,6 +659,14 @@ type InputProperty
     | InAutocomplete Bool
 
 
+{-| Indicates the characteristics of alegend such as its orientation and scaling
+to represent. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+type LegendProperty
+    = LeScale
+
+
 {-| Type of visual mark used to represent data in the visualization. For further
 details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#types).
 -}
@@ -915,7 +933,8 @@ type ScaleNice
     | NMonth
     | NYear
     | NInterval TimeUnit Int
-    | IsNice Bool
+    | NTrue
+    | NFalse
     | NTickCount Int
 
 
@@ -1124,7 +1143,6 @@ for further details.
 type
     -- TODO: Vega-Lite seems to have more time unit options than Vega (e.g. Quarter, Hours etc. - Check spec to see if this is a doc problem or a genuinely restricted set in Vega)
     TimeUnit
-    -- TODO: Add UTC prefix option with a utc function (see https://vega.github.io/vega-lite/docs/timeunit.html)
     = Year
     | YearQuarter
     | YearQuarterMonth
@@ -1147,6 +1165,7 @@ type
     | Seconds
     | SecondsMilliseconds
     | Milliseconds
+    | Utc TimeUnit
 
 
 {-| Indicates the charactersitcs of a mark. For further
@@ -1327,11 +1346,8 @@ axes axs =
 
 -}
 axis : String -> Side -> List AxisProperty -> List Spec -> List Spec
-axis scName side aProps =
-    (::)
-        ((AxScale scName :: AxSide side :: aProps |> List.map axisProperty)
-            |> JE.object
-        )
+axis scName side aps =
+    (::) (JE.object (AxScale scName :: AxSide side :: aps |> List.map axisProperty))
 
 
 {-| Combines a list of labelled specifications into a single specification that
@@ -1654,17 +1670,34 @@ height w =
     ( VHeight, JE.float w )
 
 
+{-| Create a single legend used to visualize a colour, size or shape mapping.
+
+    TODO: XXX
+
+-}
+legend : List LegendProperty -> List Spec -> List Spec
+legend lps =
+    (::) (JE.object (List.map legendProperty lps))
+
+
+{-| Create legends used to visualize color, size and shape mappings.
+
+    TODO: XXX
+
+-}
+legends : List Spec -> ( VProperty, Spec )
+legends lgs =
+    ( VLegends, JE.list lgs )
+
+
 {-| Create a single mark definition.
 
     TODO: XXX
 
 -}
 mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
-mark mark mProps =
-    (::)
-        ((MType mark :: mProps |> List.concatMap topMarkProperty)
-            |> JE.object
-        )
+mark mark mps =
+    (::) (JE.object (MType mark :: mps |> List.concatMap topMarkProperty))
 
 
 {-| Create the marks used in the visualization.
@@ -1760,12 +1793,8 @@ padding pad =
 
 -}
 scale : String -> List ScaleProperty -> List Spec -> List Spec
-scale name sProps =
-    (::)
-        (( "name", JE.string name )
-            :: List.map scaleProperty sProps
-            |> JE.object
-        )
+scale name sps =
+    (::) (JE.object (( "name", JE.string name ) :: List.map scaleProperty sps))
 
 
 {-| Create the scales used to map data values to visual properties.
@@ -1796,11 +1825,8 @@ For further details see the [Vega documentation](https://vega.github.io/vega/doc
 
 -}
 signal : String -> List SignalProperty -> List Spec -> List Spec
-signal sigName sProps =
-    (::)
-        ((SiName sigName :: sProps |> List.map signalProperty)
-            |> JE.object
-        )
+signal sigName sps =
+    (::) (JE.object (SiName sigName :: sps |> List.map signalProperty))
 
 
 {-| Preset signal representing the current height of the visualization.
@@ -2513,6 +2539,13 @@ inputProperty prop =
                 ( "autocomplete", JE.string "off" )
 
 
+legendProperty : LegendProperty -> LabelledSpec
+legendProperty lp =
+    case lp of
+        LeScale ->
+            ( "scale", JE.null )
+
+
 markLabel : Mark -> String
 markLabel m =
     case m of
@@ -2760,8 +2793,11 @@ niceSpec ni =
         NInterval tu step ->
             JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
 
-        IsNice b ->
-            JE.bool b
+        NTrue ->
+            JE.bool True
+
+        NFalse ->
+            JE.bool False
 
         NTickCount n ->
             JE.int n

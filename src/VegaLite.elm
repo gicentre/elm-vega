@@ -1717,6 +1717,7 @@ type Symbol
     | Diamond
     | TriangleUp
     | TriangleDown
+      -- TODO: Should we rename to SymPath to match Symbol type constructor in Vega?
     | Path String
 
 
@@ -1737,10 +1738,16 @@ type TextChannel
 {-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
 for further details.
+
+To encode a time as UTC (coordinated universal time, independent of local time
+zones or daylight saving), add a `Utc` type to one of the other time units.
+For example,
+
+    encoding
+        << position X [ PName "date", PmType Temporal, PTimeUnit (Utc YearMonthDateHours) ]
+
 -}
-type
-    TimeUnit
-    -- TODO: Add UTC prefix option with a utc function (see https://vega.github.io/vega-lite/docs/timeunit.html)
+type TimeUnit
     = Year
     | YearQuarter
     | YearQuarterMonth
@@ -1763,6 +1770,7 @@ type
     | Seconds
     | SecondsMilliseconds
     | Milliseconds
+    | Utc TimeUnit
 
 
 {-| Title configuration properties. These are used to configure the default style
@@ -5767,6 +5775,9 @@ timeUnitLabel tu =
 
         Milliseconds ->
             "milliseconds"
+
+        Utc timeUnit ->
+            "utc" ++ timeUnitLabel timeUnit
 
 
 titleConfigSpec : TitleConfig -> LabelledSpec
