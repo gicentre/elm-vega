@@ -49,7 +49,7 @@ barChart1 =
                     ]
                 << scale "yScale"
                     [ SDomain (DData [ DDataset "table", DField "amount" ])
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SRange (RDefault RHeight)
                     ]
 
@@ -76,8 +76,8 @@ barChart1 =
                 << mark Text
                     [ MEncode
                         [ Enter
-                            [ MAlign [ hAlignLabel AlignCenter |> VString ]
-                            , MBaseline [ vAlignLabel AlignBottom |> VString ]
+                            [ MAlign [ VString (hAlignLabel AlignCenter) ]
+                            , MBaseline [ VString (vAlignLabel AlignBottom) ]
                             , MFill [ VString "#333" ]
                             ]
                         , Update
@@ -124,7 +124,7 @@ barChart2 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SDomain (DData [ DDataset "table", DField "y1" ])
                     ]
@@ -186,7 +186,7 @@ barChart3 =
                     , SRange (RDefault RWidth)
                     , SRound True
                     , SZero True
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
@@ -295,7 +295,7 @@ barChart4 =
             scales
                 << scale "xScale"
                     [ SDomain (DData [ DDataset "tuples", DField "c" ])
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SRound True
                     , SRange (RDefault RWidth)
@@ -411,8 +411,8 @@ barChart5 =
                             [ MX [ VSignal (SExpr "chartWidth + chartPad / 2") ]
                             , MY [ VScale (FName "yScale"), VField (FName "age"), VBand 0.5 ]
                             , MText [ VField (FName "age") ]
-                            , MBaseline [ vAlignLabel AlignMiddle |> VString ]
-                            , MAlign [ hAlignLabel AlignCenter |> VString ]
+                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
+                            , MAlign [ VString (hAlignLabel AlignCenter) ]
                             , MFill [ VString "#000" ]
                             ]
                         ]
@@ -440,7 +440,7 @@ barChart5 =
                 << scale "xScale"
                     [ SType ScLinear
                     , range
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SDomain (DData [ DDataset "population", DField "people" ])
                     ]
 
@@ -505,7 +505,7 @@ lineChart1 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SDomain (DData [ DDataset "table", DField "y" ])
                     ]
@@ -574,7 +574,7 @@ areaChart1 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SDomain (DData [ DDataset "table", DField "v" ])
                     ]
@@ -633,7 +633,7 @@ areaChart2 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SDomain (DData [ DDataset "table", DField "y1" ])
                     ]
@@ -661,7 +661,7 @@ areaChart2 =
                     [ MFrom [ SData "series" ]
                     , MEncode
                         [ Enter
-                            [ MInterpolate [ markInterpolationLabel Monotone |> VString ]
+                            [ MInterpolate [ VString (markInterpolationLabel Monotone) ]
                             , MX [ VScale (FName "xScale"), VField (FName "x") ]
                             , MY [ VScale (FName "yScale"), VField (FName "y0") ]
                             , MY2 [ VScale (FName "yScale"), VField (FName "y1") ]
@@ -717,7 +717,7 @@ areaChart3 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RValues [ VSignal (SName "vheight"), VNumber 0 ])
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     , SZero True
                     , SDomain (DData [ DDataset "table", DField "y" ])
                     ]
@@ -752,7 +752,7 @@ areaChart3 =
                     [ MFrom [ SData "table" ]
                     , MEncode
                         [ Enter
-                            [ MInterpolate [ markInterpolationLabel Monotone |> VString ]
+                            [ MInterpolate [ VString (markInterpolationLabel Monotone) ]
                             , MX [ VScale (FName "xScale"), VField (FName "x") ]
                             , MFill [ VString "steelblue" ]
                             ]
@@ -916,7 +916,7 @@ areaChart4 =
                             , MFontSize [ VField (FName "argmax.perc"), VScale (FName "fontScale"), VOffset (VNumber 5) ]
                             , MText [ VField (FName "job") ]
                             , MAlign [ VField (FName "argmax.year"), VScale (FName "alignScale") ]
-                            , MBaseline [ vAlignLabel AlignMiddle |> VString ]
+                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
                             ]
                         ]
                     ]
@@ -1027,8 +1027,8 @@ circularChart2 =
                             , MRadius [ VField (FName "data"), VScale (FName "rScale"), VOffset (VNumber 8) ]
                             , MTheta [ VSignal (SExpr "(datum.startAngle + datum.endAngle)/2") ]
                             , MFill [ VString "#000" ]
-                            , MAlign [ hAlignLabel AlignCenter |> VString ]
-                            , MBaseline [ vAlignLabel AlignMiddle |> VString ]
+                            , MAlign [ VString (hAlignLabel AlignCenter) ]
+                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
                             , MText [ VField (FName "data") ]
                             ]
                         ]
@@ -1038,9 +1038,92 @@ circularChart2 =
         [ width 200, height 200, ds, sc [], mk [] ]
 
 
+scatterplot1 : Spec
+scatterplot1 =
+    let
+        ds =
+            dataSource
+                [ data "cars" [ DUrl "https://vega.github.io/vega/data/cars.json" ]
+                    |> transform [ TFilter (Expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NTrue
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField "Horsepower" ])
+                    , SRange (RDefault RWidth)
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NTrue
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField "Miles_per_Gallon" ])
+                    , SRange (RDefault RHeight)
+                    ]
+                << scale "sizeScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NFalse
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField "Acceleration" ])
+                    , SRange (RNumbers [ 4, 361 ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" Bottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Horsepower" ]
+                << axis "yScale" Left [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Miles per gallon" ]
+
+        lg =
+            legends
+                << legend []
+
+        mk =
+            marks
+                << mark Arc
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
+                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
+                            , MStartAngle [ VField (FName "startAngle") ]
+                            , MEndAngle [ VField (FName "endAngle") ]
+                            , MInnerRadius [ VNumber 20 ]
+                            , MOuterRadius [ VField (FName "data"), VScale (FName "rScale") ]
+                            , MStroke [ VString "#fff" ]
+                            ]
+                        , Update [ MFill [ VString "#ccc" ] ]
+                        , Hover [ MFill [ VString "pink" ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
+                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
+                            , MRadius [ VField (FName "data"), VScale (FName "rScale"), VOffset (VNumber 8) ]
+                            , MTheta [ VSignal (SExpr "(datum.startAngle + datum.endAngle)/2") ]
+                            , MFill [ VString "#000" ]
+                            , MAlign [ VString (hAlignLabel AlignCenter) ]
+                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
+                            , MText [ VField (FName "data") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding (PSize 5), ds, sc [], ax [], lg [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    circularChart1
+    scatterplot1
 
 
 
@@ -1062,6 +1145,7 @@ mySpecs =
         , ( "areaChart4", areaChart4 )
         , ( "circularChart1", circularChart1 )
         , ( "circularChart2", circularChart2 )
+        , ( "scatterplot1", scatterplot1 )
         ]
 
 

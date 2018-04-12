@@ -94,7 +94,7 @@ areaTest =
                     , SDomain (DData [ DDataset "table", DField "v" ])
                     , SRange (RDefault RHeight)
                     , SZero True
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     ]
 
         si =
@@ -262,7 +262,7 @@ lineTest =
                     , SDomain (DData [ DDataset "table", DField "v" ])
                     , SRange (RDefault RHeight)
                     , SZero True
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     ]
 
         si =
@@ -538,7 +538,7 @@ trailTest =
                     , SDomain (DData [ DDataset "table", DField "v" ])
                     , SRange (RDefault RHeight)
                     , SZero True
-                    , SNice (IsNice True)
+                    , SNice NTrue
                     ]
                 << scale "zscale"
                     [ SType ScLinear
