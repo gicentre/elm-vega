@@ -37,6 +37,7 @@ module Vega
         , OverlapStrategy(..)
         , PackProperty(..)
         , Padding(..)
+        , PieProperty(..)
         , RangeDefault(..)
         , Scale(..)
         , ScaleDomain(..)
@@ -45,6 +46,7 @@ module Vega
         , ScaleRange(..)
         , SchemeProperty(..)
         , Side(..)
+        , SignalBoolean(..)
         , SignalNumber(..)
         , SignalProperty(..)
         , SignalReference(..)
@@ -153,6 +155,7 @@ Functions and types for declaring the input data to the visualization.
 @docs FormulaUpdate
 @docs AggregateProperty
 @docs PackProperty
+@docs PieProperty
 @docs StackProperty
 @docs StackOffset
 
@@ -203,6 +206,7 @@ Functions and types for declaring the input data to the visualization.
 
 @docs signals
 @docs signal
+@docs SignalBoolean
 @docs SignalNumber
 @docs SignalString
 @docs SignalReference
@@ -821,6 +825,17 @@ type PackProperty
     | PaAs String String String String String
 
 
+{-| Properties of the pie chart transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+type PieProperty
+    = PiField Field
+    | PiStartAngle SignalNumber
+    | PiEndAngle SignalNumber
+    | PiSort SignalBoolean
+    | PiAs String String
+
+
 {-| Indicates whether an ascending or descending order is required (usually in sorting).
 -}
 type Order
@@ -968,6 +983,14 @@ type Side
     | Right
     | Top
     | Bottom
+
+
+{-| Represents a boolean value that can either be a literal `SigBool` or signal that
+references a boolean value.
+-}
+type SignalBoolean
+    = SigBool Bool
+    | SigBoolRef SignalReference
 
 
 {-| Represents a numeric value that can either be a literal `SigNum` or signal that
@@ -1185,7 +1208,7 @@ type
     | TGeoShape
     | TGraticule
     | TLinkpath
-    | TPie
+    | TPie (List PieProperty)
     | TStack (List StackProperty)
     | TForce
     | TVoronoi
@@ -2879,6 +2902,25 @@ paddingSpec pad =
                 ]
 
 
+pieProperty : PieProperty -> LabelledSpec
+pieProperty pp =
+    case pp of
+        PiField f ->
+            ( "field", fieldSpec f )
+
+        PiStartAngle x ->
+            ( "startAngle", signalNumSpec x )
+
+        PiEndAngle x ->
+            ( "endAngle", signalNumSpec x )
+
+        PiSort b ->
+            ( "sort", signalBoolSpec b )
+
+        PiAs y0 y1 ->
+            ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
+
+
 rangeDefaultLabel : RangeDefault -> String
 rangeDefaultLabel rd =
     case rd of
@@ -3083,6 +3125,16 @@ sideLabel orient =
 
         Top ->
             "top"
+
+
+signalBoolSpec : SignalBoolean -> Spec
+signalBoolSpec sigBool =
+    case sigBool of
+        SigBool b ->
+            JE.bool b
+
+        SigBoolRef sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 signalNumSpec : SignalNumber -> Spec
@@ -3404,8 +3456,8 @@ transformSpec trans =
         TLinkpath ->
             JE.object [ ( "type", JE.string "linkpath" ) ]
 
-        TPie ->
-            JE.object [ ( "type", JE.string "pie" ) ]
+        TPie pps ->
+            JE.object (( "type", JE.string "pie" ) :: List.map pieProperty pps)
 
         TStack sps ->
             JE.object (( "type", JE.string "stack" ) :: List.map stackProperty sps)

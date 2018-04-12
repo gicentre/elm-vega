@@ -464,7 +464,7 @@ barChart5 =
                             , MY [ VScale (FName "yScale"), VField (FName "age") ]
                             , MHeight [ VScale (FName "yScale"), VBand 1, VOffset (VNumber -1) ]
                             , MFillOpacity [ VNumber 0.6 ]
-                            , MFill [ VScale (FName "c"), VField (FName "sex") ]
+                            , MFill [ VScale (FName "cScale"), VField (FName "sex") ]
                             ]
                         ]
                     ]
@@ -925,9 +925,67 @@ areaChart4 =
         [ width 800, height 500, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
 
 
+circularChart1 : Spec
+circularChart1 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "id" (Numbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "field" (Numbers [ 4, 6, 10, 3, 7, 8 ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ TPie
+                            [ PiField (FieldName "field")
+                            , PiStartAngle (SigNumRef (SExpr "PI * startAngle / 180"))
+                            , PiEndAngle (SigNumRef (SExpr "PI * endAngle / 180"))
+                            , PiSort (SigBoolRef (SName "sort"))
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "startAngle" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
+                << signal "endAngle" [ SiValue (Number 360), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
+                << signal "padAngle" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ]) ]
+                << signal "innerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 90, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "sort" [ SiValue (Boolean False), SiBind (ICheckbox []) ]
+
+        sc =
+            scales << scale "cScale" [ SType ScOrdinal, SRange (RScheme "category20" []) ]
+
+        mk =
+            marks
+                << mark Arc
+                    [ MFrom [ SData "table" ]
+                    , MEncode
+                        [ Enter
+                            [ MFill [ VScale (FName "cScale"), VField (FName "id") ]
+                            , MX [ VSignal (SExpr "width / 2") ]
+                            , MY [ VSignal (SExpr "height / 2") ]
+                            ]
+                        , Update
+                            [ MStartAngle [ VField (FName "startAngle") ]
+                            , MEndAngle [ VField (FName "endAngle") ]
+                            , MPadAngle [ VSignal (SExpr "PI * padAngle / 180") ]
+                            , MInnerRadius [ VSignal (SName "innerRadius") ]
+                            , MOuterRadius [ VSignal (SExpr "width / 2") ]
+                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    areaChart3
+    circularChart1
 
 
 
@@ -947,6 +1005,7 @@ mySpecs =
         , ( "areaChart2", areaChart2 )
         , ( "areaChart3", areaChart3 )
         , ( "areaChart4", areaChart4 )
+        , ( "circularChart1", circularChart1 )
         ]
 
 
