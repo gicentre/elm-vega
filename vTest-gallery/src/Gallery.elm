@@ -42,13 +42,13 @@ barChart1 =
             scales
                 << scale "xScale"
                     [ SType ScBand
-                    , SDomain (DData [ DDataset "table", DField "category" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "category") ])
                     , SRange (RDefault RWidth)
                     , SPadding 0.05
                     , SRound True
                     ]
                 << scale "yScale"
-                    [ SDomain (DData [ DDataset "table", DField "amount" ])
+                    [ SDomain (DData [ DDataset "table", DField (VString "amount") ])
                     , SNice NTrue
                     , SRange (RDefault RHeight)
                     ]
@@ -119,19 +119,19 @@ barChart2 =
                 << scale "xScale"
                     [ SType ScBand
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "table", DField "y1" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField "c" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "c") ])
                     ]
 
         ax =
@@ -176,13 +176,13 @@ barChart3 =
             scales
                 << scale "yScale"
                     [ SType ScBand
-                    , SDomain (DData [ DDataset "table", DField "category" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "category") ])
                     , SRange (RDefault RHeight)
                     , SPadding 0.2
                     ]
                 << scale "xScale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField "value" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "value") ])
                     , SRange (RDefault RWidth)
                     , SRound True
                     , SZero True
@@ -190,7 +190,7 @@ barChart3 =
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
-                    , SDomain (DData [ DDataset "table", DField "position" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "position") ])
                     , SRange (RScheme "category20" [])
                     ]
 
@@ -208,7 +208,7 @@ barChart3 =
                 << scale "pos"
                     [ SType ScBand
                     , SRange (RDefault RHeight)
-                    , SDomain (DData [ DDataset "facet", DField "position" ])
+                    , SDomain (DData [ DDataset "facet", DField (VString "position") ])
                     ]
 
         nestedMk =
@@ -294,7 +294,7 @@ barChart4 =
         sc =
             scales
                 << scale "xScale"
-                    [ SDomain (DData [ DDataset "tuples", DField "c" ])
+                    [ SDomain (DData [ DDataset "tuples", DField (VString "c") ])
                     , SNice NTrue
                     , SZero True
                     , SRound True
@@ -303,7 +303,7 @@ barChart4 =
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "trellis", DField "a" ])
+                    , SDomain (DData [ DDataset "trellis", DField (VString "a") ])
                     ]
 
         ax =
@@ -316,7 +316,7 @@ barChart4 =
                     , SPaddingInner (VSignal (SName "innerPadding"))
                     , SPaddingOuter (VSignal (SName "outerPadding"))
                     , SRound True
-                    , SDomain (DData [ DDataset "faceted_tuples", DField "b" ])
+                    , SDomain (DData [ DDataset "faceted_tuples", DField (VString "b") ])
                     , SRange (RStep (VSignal (SName "rangeStep")))
                     ]
 
@@ -393,7 +393,7 @@ barChart5 =
                     [ SType ScBand
                     , SRange (RValues [ VSignal (SName "height"), VNumber 0 ])
                     , SRound True
-                    , SDomain (DData [ DDataset "ageGroups", DField "age" ])
+                    , SDomain (DData [ DDataset "ageGroups", DField (VString "age") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
@@ -441,7 +441,7 @@ barChart5 =
                     [ SType ScLinear
                     , range
                     , SNice NTrue
-                    , SDomain (DData [ DDataset "population", DField "people" ])
+                    , SDomain (DData [ DDataset "population", DField (VString "people") ])
                     ]
 
         mk gender =
@@ -500,19 +500,19 @@ lineChart1 =
                 << scale "xScale"
                     [ SType ScPoint
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "table", DField "y" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "y") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField "c" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "c") ])
                     ]
 
         ax =
@@ -571,14 +571,14 @@ areaChart1 =
                     [ SType ScLinear
                     , SRange (RDefault RWidth)
                     , SZero False
-                    , SDomain (DData [ DDataset "table", DField "u" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "u") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "table", DField "v" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "v") ])
                     ]
 
         ax =
@@ -632,19 +632,19 @@ areaChart2 =
                 << scale "xScale"
                     [ SType ScPoint
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "table", DField "y1" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField "c" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "c") ])
                     ]
 
         ax =
@@ -716,14 +716,14 @@ areaChart3 =
                     , SRange (RDefault RWidth)
                     , SZero False
                     , SRound True
-                    , SDomain (DData [ DDataset "table", DField "x" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RValues [ VSignal (SName "vheight"), VNumber 0 ])
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "table", DField "y" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "y") ])
                     ]
 
         ax =
@@ -822,14 +822,14 @@ areaChart4 =
                     , SRange (RDefault RWidth)
                     , SZero False
                     , SRound True
-                    , SDomain (DData [ DDataset "jobs", DField "year" ])
+                    , SDomain (DData [ DDataset "jobs", DField (VString "year") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SRound True
-                    , SDomain (DData [ DDataset "jobs", DField "y1" ])
+                    , SDomain (DData [ DDataset "jobs", DField (VString "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
@@ -839,7 +839,7 @@ areaChart4 =
                 << scale "alphaScale"
                     [ SType ScLinear
                     , SZero True
-                    , SDomain (DData [ DDataset "series", DField "sum" ])
+                    , SDomain (DData [ DDataset "series", DField (VString "sum") ])
                     , SRange (RNumbers [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
@@ -847,12 +847,12 @@ areaChart4 =
                     , SRange (RNumbers [ 0, 20 ])
                     , SZero True
                     , SRound True
-                    , SDomain (DData [ DDataset "series", DField "argmax.perc" ])
+                    , SDomain (DData [ DDataset "series", DField (VString "argmax.perc") ])
                     ]
                 << scale "opacityScale"
                     [ SType ScQuantile
                     , SRange (RNumbers [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
-                    , SDomain (DData [ DDataset "series", DField "argmax.perc" ])
+                    , SDomain (DData [ DDataset "series", DField (VString "argmax.perc") ])
                     ]
                 << scale "alignScale"
                     [ SType ScQuantize
@@ -1000,7 +1000,7 @@ circularChart2 =
             scales
                 << scale "rScale"
                     [ SType ScSqrt
-                    , SDomain (DData [ DDataset "table", DField "data" ])
+                    , SDomain (DData [ DDataset "table", DField (VString "data") ])
                     , SRange (RNumbers [ 20, 100 ])
                     ]
 
@@ -1058,7 +1058,7 @@ scatterplot1 =
                     , SRound True
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "cars", DField "Horsepower" ])
+                    , SDomain (DData [ DDataset "cars", DField (VString "Horsepower") ])
                     , SRange (RDefault RWidth)
                     ]
                 << scale "yScale"
@@ -1066,7 +1066,7 @@ scatterplot1 =
                     , SRound True
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ DDataset "cars", DField "Miles_per_Gallon" ])
+                    , SDomain (DData [ DDataset "cars", DField (VString "Miles_per_Gallon") ])
                     , SRange (RDefault RHeight)
                     ]
                 << scale "sizeScale"
@@ -1074,14 +1074,14 @@ scatterplot1 =
                     , SRound True
                     , SNice NFalse
                     , SZero True
-                    , SDomain (DData [ DDataset "cars", DField "Acceleration" ])
+                    , SDomain (DData [ DDataset "cars", DField (VString "Acceleration") ])
                     , SRange (RNumbers [ 4, 361 ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Horsepower" ]
-                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Miles per gallon" ]
+                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (VString "Horsepower") ]
+                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (VString "Miles per gallon") ]
 
         shapeEncoding =
             [ MStrokeWidth [ VNumber 2 ]
@@ -1118,9 +1118,130 @@ scatterplot1 =
         [ width 200, height 200, padding (PSize 5), ds, sc [], ax [], lg [], mk [] ]
 
 
+scatterplot2 : Spec
+scatterplot2 =
+    let
+        ds =
+            dataSource
+                [ data "movies" [ DUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                , data "valid" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] != null") ]
+                , data "nullXY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
+                , data "nullY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] == null") ]
+                , data "nullX" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] != null") ]
+                ]
+
+        si =
+            signals
+                << signal "yField" [ SiValue (Str "IMDB_Rating"), SiBind (ISelect [ InOptions (Strings [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "xField" [ SiValue (Str "Rotten_Tomatoes_Rating"), SiBind (ISelect [ InOptions (Strings [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "nullSize" [ SiValue (Number 8) ]
+                << signal "nullGap" [ SiUpdate "nullSize + 10" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SNice NTrue
+                    , SRange (RValues [ VSignal (SName "nullGap"), VSignal (SName "width") ])
+                    , SDomain (DData [ DDataset "valid", DField (VSignal (SName "xField")) ])
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SNice NTrue
+                    , SRange (RValues [ VSignal (SName "height - nullGap"), VNumber 0 ])
+                    , SDomain (DData [ DDataset "valid", DField (VSignal (SName "yField")) ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ AxOffset (VNumber 5), AxFormat "s", AxTitle (VSignal (SName "xField")) ]
+                << axis "yScale" SLeft [ AxOffset (VNumber 5), AxFormat "s", AxTitle (VSignal (SName "yField")) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ MFrom [ SData "valid" ]
+                    , MEncode
+                        [ Enter
+                            [ MSize [ VNumber 50 ]
+                            , MTooltip [ VField (FName "tooltip") ]
+                            ]
+                        , Update
+                            [ MX [ VScale (FName "xScale"), VField (FSignal (SName "xField")) ]
+                            , MY [ VScale (FName "yScale"), VField (FSignal (SName "yField")) ]
+                            , MFill [ VString "steelblue" ]
+                            , MFillOpacity [ VNumber 0.5 ]
+                            , MZIndex [ VNumber 0 ]
+                            ]
+                        , Hover
+                            [ MFill [ VString "firebrick" ]
+                            , MFillOpacity [ VNumber 1 ]
+                            , MZIndex [ VNumber 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ MFrom [ SData "nullY" ]
+                    , MEncode
+                        [ Enter
+                            [ MSize [ VNumber 50 ]
+                            , MTooltip [ VField (FName "tooltip") ]
+                            ]
+                        , Update
+                            [ MX [ VScale (FName "xScale"), VField (FSignal (SName "xField")) ]
+                            , MY [ VSignal (SExpr "height - nullSize/2") ]
+                            , MFill [ VString "#aaa" ]
+                            , MFillOpacity [ VNumber 0.2 ]
+                            ]
+                        , Hover
+                            [ MFill [ VString "firebrick" ]
+                            , MFillOpacity [ VNumber 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ MFrom [ SData "nullX" ]
+                    , MEncode
+                        [ Enter
+                            [ MSize [ VNumber 50 ]
+                            , MTooltip [ VField (FName "tooltip") ]
+                            ]
+                        , Update
+                            [ MX [ VSignal (SExpr "nullSize/2") ]
+                            , MY [ VScale (FName "yScale"), VField (FSignal (SName "yField")) ]
+                            , MFill [ VString "#aaa" ]
+                            , MFillOpacity [ VNumber 0.2 ]
+                            , MZIndex [ VNumber 1 ]
+                            ]
+                        , Hover
+                            [ MFill [ VString "firebrick" ]
+                            , MFillOpacity [ VNumber 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ MInteractive False
+                    , MFrom [ SData "nullXY" ]
+                    , MEncode
+                        [ Update
+                            [ MX [ VSignal (SName "nullSize"), VOffset (VNumber -4) ]
+                            , MY [ VSignal (SName "height"), VOffset (VNumber 13) ]
+                            , MText [ VSignal (SExpr "datum.count + ' null'") ]
+                            , MAlign [ hAlignLabel AlignRight |> VString ]
+                            , MBaseline [ vAlignLabel AlignTop |> VString ]
+                            , MFill [ VString "#999" ]
+                            , MFontSize [ VNumber 9 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 450, height 450, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    scatterplot1
+    scatterplot2
 
 
 
@@ -1143,6 +1264,7 @@ mySpecs =
         , ( "circularChart1", circularChart1 )
         , ( "circularChart2", circularChart2 )
         , ( "scatterplot1", scatterplot1 )
+        , ( "scatterplot2", scatterplot2 )
         ]
 
 
