@@ -358,7 +358,7 @@ type AxisProperty
       -- TODO: Need to account for temporal units and intervals
     | AxTickCount Int
     | AxTickSize Float
-    | AxTitle String
+    | AxTitle Value
     | AxTitlePadding Float
     | AxValues (List Value)
     | AxZIndex Int
@@ -499,8 +499,8 @@ of fields. For details see the
 -}
 type DataReference
     = DDataset String
-    | DField String
-    | DFields (List String)
+    | DField Value
+    | DFields (List Value)
     | DReferences (List DataReference)
     | DSort (List SortProperty)
 
@@ -2201,8 +2201,8 @@ axisProperty ap =
         AxTickSize sz ->
             ( "tickSize", JE.float sz )
 
-        AxTitle title ->
-            ( "title", JE.string title )
+        AxTitle val ->
+            ( "title", valueSpec val )
 
         AxTitlePadding pad ->
             ( "titlePadding", JE.float pad )
@@ -2315,11 +2315,11 @@ dataRefProperty dataRef =
         DDataset ds ->
             ( "data", JE.string ds )
 
-        DField df ->
-            ( "field", JE.string df )
+        DField val ->
+            ( "field", valueSpec val )
 
-        DFields dfs ->
-            ( "fields", JE.list (List.map JE.string dfs) )
+        DFields vals ->
+            ( "fields", JE.list (List.map valueSpec vals) )
 
         DReferences drs ->
             ( "fields", JE.object (List.map dataRefProperty drs) )
