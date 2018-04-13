@@ -22,7 +22,7 @@ module Vega
         , Expr(..)
         , Expression
         , Facet(..)
-        , Field(..)
+        , Field
         , FieldValue(..)
         , Format(..)
         , FormulaUpdate(..)
@@ -53,7 +53,6 @@ module Vega
         , SignalBoolean(..)
         , SignalNumber(..)
         , SignalProperty(..)
-        , SignalReference(..)
         , SignalString(..)
         , SortProperty(..)
         , Source(..)
@@ -71,7 +70,7 @@ module Vega
         , TriggerProperty(..)
         , VAlign(..)
         , VProperty
-        , Value(..)
+        , Value
         , autosize
         , axes
         , axis
@@ -86,6 +85,7 @@ module Vega
         , dirLabel
         , hAlignLabel
         , height
+        , ifElse
         , legend
         , legends
         , mark
@@ -108,6 +108,21 @@ module Vega
         , transform
         , trigger
         , vAlignLabel
+        , vBand
+        , vBool
+        , vColor
+        , vExponent
+        , vField
+        , vMultiply
+        , vNull
+        , vNumber
+        , vNumbers
+        , vObject
+        , vOffset
+        , vRound
+        , vScale
+        , vSignal
+        , vStr
         , width
         )
 
@@ -222,17 +237,16 @@ Functions and types for declaring the input data to the visualization.
 
 @docs signals
 @docs signal
+@docs sigHeight
+@docs sigWidth
+@docs sigPadding
 @docs SignalBoolean
 @docs SignalNumber
 @docs SignalString
-@docs SignalReference
 @docs SignalProperty
 @docs Bind
 @docs InputProperty
 @docs EventHandler
-@docs sigWidth
-@docs sigHeight
-@docs sigPadding
 
 
 ## Scaling
@@ -284,6 +298,23 @@ can carry data used in specifications.
 @docs FieldValue
 @docs Value
 @docs Facet
+
+@docs vSignal
+@docs vColor
+@docs vBand
+@docs vField
+@docs vNumber
+@docs vNumbers
+@docs vStr
+@docs vBool
+@docs vObject
+@docs ifElse
+@docs vNull
+@docs vMultiply
+@docs vExponent
+@docs vOffset
+@docs vRound
+@docs vScale
 
 -}
 
@@ -597,9 +628,8 @@ type Facet
 {-| Represents a field name. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Field)
 -}
-type Field
-    = FieldName String
-    | FieldSignal String
+type alias Field =
+    String
 
 
 {-| Represents a field value. Rather than a simple field name this can be used to
@@ -608,7 +638,7 @@ see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
 -}
 type FieldValue
     = FName String
-    | FSignal SignalReference
+    | FSignal String
     | FDatum FieldValue
     | FGroup FieldValue
     | FParent FieldValue
@@ -896,7 +926,7 @@ type OverlapStrategy
 type PackProperty
     = PaField Field
     | PaSort (List Comparator)
-    | PaSize SignalNumber SignalNumber
+    | PaSize Value Value
     | PaRadius (Maybe Field)
     | PaPadding SignalNumber
     | PaAs String String String String String
@@ -975,7 +1005,7 @@ type ScaleDomain
     | DStrings (List String)
       -- TODO: Can we have DateTimes as literals?
       -- TODO: Documentation implies array literals can include signal references as elements. How do we add these?
-    | DSignal SignalReference
+    | DSignal String
     | DData (List DataReference)
 
 
@@ -1036,7 +1066,7 @@ type ScaleRange
     = RNumbers (List Float)
     | RStrings (List String)
     | RValues (List Value)
-    | RSignal SignalReference
+    | RSignal String
     | RScheme String (List SchemeProperty)
     | RData DataReference
     | RStep Value
@@ -1068,7 +1098,7 @@ references a boolean value.
 -}
 type SignalBoolean
     = SigBool Bool
-    | SigBoolRef SignalReference
+    | SigBoolRef String
 
 
 {-| Represents a numeric value that can either be a literal `SigNum` or signal that
@@ -1076,7 +1106,7 @@ references a number.
 -}
 type SignalNumber
     = SigNum Float
-    | SigNumRef SignalReference
+    | SigNumRef String
 
 
 {-| Represents a string value that can either be a literal `SigStr` or signal that
@@ -1084,15 +1114,7 @@ references a string.
 -}
 type SignalString
     = SigStr String
-    | SigStrRef SignalReference
-
-
-{-| Represents a signal name or expression. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/types/#Signal).
--}
-type SignalReference
-    = SName String
-    | SExpr Expression
+    | SigStrRef String
 
 
 {-| Individual signal property. For details see the
@@ -1336,7 +1358,7 @@ or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
 -}
 type Value
-    = VSignal SignalReference
+    = VSignal String
     | VColor ColorValue
     | VField FieldValue
     | VScale FieldValue
@@ -1348,7 +1370,7 @@ type Value
     | VNumber Float
     | VNumbers (List Float)
     | VObject (List Value)
-    | VString String
+    | VStr String
     | VBool Bool
     | VNull
     | VIfElse String (List Value) (List Value)
@@ -1729,6 +1751,15 @@ height w =
     ( VHeight, JE.float w )
 
 
+{-| A conditional list of values depending on whether an expression (first parameter)
+evaluates as true. The second and third parameters represent the 'then' and 'else'
+branches of the test.
+-}
+ifElse : String -> List Value -> List Value -> Value
+ifElse condition thenVals elseVals =
+    VIfElse condition thenVals elseVals
+
+
 {-| Create a single legend used to visualize a colour, size or shape mapping.
 
     TODO: XXX
@@ -1890,23 +1921,23 @@ signal sigName sps =
 
 {-| Preset signal representing the current height of the visualization.
 -}
-sigHeight : SignalNumber
+sigHeight : Value
 sigHeight =
-    SigNumRef (SName "height")
+    VSignal "height"
 
 
 {-| Preset signal representing the current padding setting of the visualization.
 -}
-sigPadding : SignalNumber
+sigPadding : Value
 sigPadding =
-    SigNumRef (SName "padding")
+    VSignal "padding"
 
 
 {-| Preset signal representing the current width of the visualization.
 -}
-sigWidth : SignalNumber
+sigWidth : Value
 sigWidth =
-    SigNumRef (SName "width")
+    VSignal "width"
 
 
 {-| A convenience function for generating a text string representing a given
@@ -2037,6 +2068,114 @@ vAlignLabel align =
 
         Alphabetic ->
             "alphabetic"
+
+
+{-| A value representing a band number.
+-}
+vBand : Float -> Value
+vBand =
+    VBand
+
+
+{-| A value representing either True or False.
+-}
+vBool : Bool -> Value
+vBool =
+    VBool
+
+
+{-| A value representing a color.
+-}
+vColor : ColorValue -> Value
+vColor =
+    VColor
+
+
+{-| A value representing an exponential value modifier.
+-}
+vExponent : Value -> Value
+vExponent =
+    VExponent
+
+
+{-| A value representing a field either by its name or indirectly via a signal,
+parent etc.
+-}
+vField : FieldValue -> Value
+vField =
+    VField
+
+
+{-| A value representing a multiplication value modifier.
+-}
+vMultiply : Value -> Value
+vMultiply =
+    VMultiply
+
+
+{-| A representation of a null value
+-}
+vNull : Value
+vNull =
+    VNull
+
+
+{-| A numeric value.
+-}
+vNumber : Float -> Value
+vNumber =
+    VNumber
+
+
+{-| A value representing a list of numbers
+-}
+vNumbers : List Float -> Value
+vNumbers =
+    VNumbers
+
+
+{-| Represents an object containing a list of values.
+-}
+vObject : List Value -> Value
+vObject =
+    VObject
+
+
+{-| A value representing an additive value modifier.
+-}
+vOffset : Value -> Value
+vOffset =
+    VOffset
+
+
+{-| A value representing a rounding value modifier. Rounding is applied after
+all other modifiers.
+-}
+vRound : Bool -> Value
+vRound =
+    VRound
+
+
+{-| A value representing a scale either by its name or indirectly via a signal,
+parent etc.
+-}
+vScale : FieldValue -> Value
+vScale =
+    VScale
+
+
+{-| A value representing a signal by its name.
+-}
+vSignal : String -> Value
+vSignal sigRef =
+    VSignal sigRef
+
+
+{-| A string value.
+-}
+vStr : String -> Value
+vStr =
+    VStr
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -2445,16 +2584,7 @@ facetProperty fct =
 
 fieldSpec : Field -> Spec
 fieldSpec f =
-    case f of
-        FieldName s ->
-            JE.string s
-
-        FieldSignal sigName ->
-            signalStrSpec (SigStrRef (SName sigName))
-
-
-
---signalStrSpec
+    JE.string f
 
 
 fieldValueSpec : FieldValue -> Spec
@@ -3050,7 +3180,7 @@ orderSpec order =
             JE.string "descending"
 
         OrderSignal sigName ->
-            signalStrSpec (SigStrRef (SName sigName))
+            JE.object [ signalReferenceProperty sigName ]
 
 
 overlapStrategyLabel : OverlapStrategy -> String
@@ -3076,7 +3206,7 @@ packProperty pp =
             ( "sort", JE.object (List.map comparatorProperty comp) )
 
         PaSize w h ->
-            ( "size", JE.list [ signalNumSpec w, signalNumSpec h ] )
+            ( "size", JE.list [ valueSpec w, valueSpec h ] )
 
         PaRadius fOrNull ->
             case fOrNull of
@@ -3391,14 +3521,9 @@ signalProperty sigProp =
             ( "value", dataValues vs )
 
 
-signalReferenceProperty : SignalReference -> LabelledSpec
-signalReferenceProperty signal =
-    case signal of
-        SName sName ->
-            ( "signal", JE.string sName )
-
-        SExpr sExpr ->
-            ( "signal", expressionSpec sExpr )
+signalReferenceProperty : String -> LabelledSpec
+signalReferenceProperty sigRef =
+    ( "signal", JE.string sigRef )
 
 
 sortProperty : SortProperty -> LabelledSpec
@@ -3440,7 +3565,7 @@ stackOffsetSpec off =
             JE.string "normalize"
 
         OffsetSignal sigName ->
-            signalStrSpec (SigStrRef (SName sigName))
+            JE.object [ signalReferenceProperty sigName ]
 
 
 stackProperty : StackProperty -> LabelledSpec
@@ -3809,7 +3934,7 @@ valueProperty val =
         VObject vals ->
             ( "value", JE.object (List.map valueProperty vals) )
 
-        VString str ->
+        VStr str ->
             ( "value", JE.string str )
 
         VBool b ->
@@ -3868,7 +3993,7 @@ valueSpec val =
         VObject objs ->
             JE.object (List.map valueProperty objs)
 
-        VString str ->
+        VStr str ->
             JE.string str
 
         VBool b ->

@@ -41,28 +41,28 @@ arcTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ Enter [ MFill [ VString "firebrick" ], MSize [ VNumber 25 ] ]
-                        , Update [ MX [ VSignal (SName "x") ], MY [ VSignal (SName "y") ] ]
+                        [ Enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
+                        , Update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Arc
                     [ MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MStartAngle [ VSignal (SName "startAngle") ]
-                            , MEndAngle [ VSignal (SName "endAngle") ]
-                            , MInnerRadius [ VSignal (SName "innerRadius") ]
-                            , MOuterRadius [ VSignal (SName "outerRadius") ]
-                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
-                            , MPadAngle [ VSignal (SName "padAngle") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MStartAngle [ vSignal "startAngle" ]
+                            , MEndAngle [ vSignal "endAngle" ]
+                            , MInnerRadius [ vSignal "innerRadius" ]
+                            , MOuterRadius [ vSignal "outerRadius" ]
+                            , MCornerRadius [ vSignal "cornerRadius" ]
+                            , MPadAngle [ vSignal "padAngle" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -85,13 +85,13 @@ areaTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "u") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "v") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -114,20 +114,20 @@ areaTest =
                 << mark Area
                     [ MFrom [ SData "table" ]
                     , MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VScale (FName "xscale"), VField (FName "u") ]
-                            , MY [ VScale (FName "yscale"), VField (FName "v") ]
-                            , MY2 [ VScale (FName "yscale"), VSignal (SName "y2") ]
-                            , MDefined [ VSignal (SExpr "defined || datum.u !== 3") ]
-                            , MInterpolate [ VSignal (SName "interpolate") ]
-                            , MTension [ VSignal (SName "tension") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
+                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
+                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
+                            , MY2 [ vScale (FName "yscale"), vSignal "y2" ]
+                            , MDefined [ vSignal "defined || datum.u !== 3" ]
+                            , MInterpolate [ vSignal "interpolate" ]
+                            , MTension [ vSignal "tension" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -163,20 +163,20 @@ groupTest =
             marks
                 << mark Group
                     [ MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MWidth [ VSignal (SName "w") ]
-                            , MHeight [ VSignal (SName "h") ]
-                            , MGroupClip [ VSignal (SName "groupClip") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MWidth [ vSignal "w" ]
+                            , MHeight [ vSignal "h" ]
+                            , MGroupClip [ vSignal "groupClip" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MCornerRadius [ vSignal "cornerRadius" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     , MGroup [ ds, nestedMk [] ]
                     ]
@@ -188,12 +188,12 @@ groupTest =
                     , MInteractive False
                     , MEncode
                         [ Enter
-                            [ MX [ VField (FName "x") ]
-                            , MY [ VField (FName "y") ]
-                            , MWidth [ VField (FName "w") ]
-                            , MHeight [ VField (FName "h") ]
-                            , MFill [ VString "aliceblue" ]
-                            , MStroke [ VString "firebrick" ]
+                            [ MX [ vField (FName "x") ]
+                            , MY [ vField (FName "y") ]
+                            , MWidth [ vField (FName "w") ]
+                            , MHeight [ vField (FName "h") ]
+                            , MFill [ vStr "aliceblue" ]
+                            , MStroke [ vStr "firebrick" ]
                             ]
                         ]
                     ]
@@ -219,18 +219,18 @@ imageTest =
             marks
                 << mark Image
                     [ MEncode
-                        [ Enter [ MUrl [ VString "https://vega.github.io/images/idl-logo.png" ] ]
+                        [ Enter [ MUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
                         , Update
-                            [ MOpacity [ VNumber 1 ]
-                            , MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MWidth [ VSignal (SName "w") ]
-                            , MHeight [ VSignal (SName "h") ]
-                            , MAspect [ VSignal (SName "aspect") ]
-                            , MAlign [ VSignal (SName "align") ]
-                            , MBaseline [ VSignal (SName "baseline") ]
+                            [ MOpacity [ vNumber 1 ]
+                            , MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MWidth [ vSignal "w" ]
+                            , MHeight [ vSignal "h" ]
+                            , MAspect [ vSignal "aspect" ]
+                            , MAlign [ vSignal "align" ]
+                            , MBaseline [ vSignal "baseline" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -253,13 +253,13 @@ lineTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "u") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "v") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -282,19 +282,19 @@ lineTest =
                 << mark Line
                     [ MFrom [ SData "table" ]
                     , MEncode
-                        [ Enter [ MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VScale (FName "xscale"), VField (FName "u") ]
-                            , MY [ VScale (FName "yscale"), VField (FName "v") ]
-                            , MDefined [ VSignal (SExpr "defined || datum.u !== 3") ]
-                            , MInterpolate [ VSignal (SName "interpolate") ]
-                            , MTension [ VSignal (SName "tension") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MStrokeDash [ VSignal (SName "strokeDash") ]
-                            , MStrokeCap [ VSignal (SName "strokeCap") ]
-                            , MOpacity [ VNumber 1 ]
+                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
+                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
+                            , MDefined [ vSignal "defined || datum.u !== 3" ]
+                            , MInterpolate [ vSignal "interpolate" ]
+                            , MTension [ vSignal "tension" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MStrokeDash [ vSignal "strokeDash" ]
+                            , MStrokeCap [ vSignal "strokeCap" ]
+                            , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -317,17 +317,17 @@ pathTest =
             marks
                 << mark Path
                     [ MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MPath [ VSignal (SName "path") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MPath [ vSignal "path" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -352,19 +352,19 @@ rectTest =
             marks
                 << mark Rect
                     [ MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MWidth [ VSignal (SName "w") ]
-                            , MHeight [ VSignal (SName "h") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MCornerRadius [ VSignal (SName "cornerRadius") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MWidth [ vSignal "w" ]
+                            , MHeight [ vSignal "h" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MCornerRadius [ vSignal "cornerRadius" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -389,18 +389,18 @@ ruleTest =
             marks
                 << mark Rule
                     [ MEncode
-                        [ Enter [ MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MX2 [ VSignal (SName "x2") ]
-                            , MY2 [ VSignal (SName "y2") ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MStrokeDash [ VSignal (SName "strokeDash") ]
-                            , MStrokeCap [ VSignal (SName "strokeCap") ]
-                            , MOpacity [ VNumber 1 ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MX2 [ vSignal "x2" ]
+                            , MY2 [ vSignal "y2" ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MStrokeDash [ vSignal "strokeDash" ]
+                            , MStrokeCap [ vSignal "strokeCap" ]
+                            , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -444,18 +444,18 @@ symbolTest =
             marks
                 << mark Symbol
                     [ MEncode
-                        [ Enter [ MFill [ VString "#939597" ], MStroke [ VString "#652c90" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , Update
-                            [ MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MSize [ VSignal (SName "size") ]
-                            , MShape [ VSignal (SName "shape") ]
-                            , MOpacity [ VNumber 1 ]
-                            , MStrokeWidth [ VSignal (SName "strokeWidth") ]
-                            , MFillOpacity [ VSignal (SExpr "color === 'fill' || color === 'both' ? 1 : 0") ]
-                            , MStrokeOpacity [ VSignal (SExpr "color === 'stroke' || color === 'both' ? 1 : 0") ]
+                            [ MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MSize [ vSignal "size" ]
+                            , MShape [ vSignal "shape" ]
+                            , MOpacity [ vNumber 1 ]
+                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -485,28 +485,28 @@ textTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ Enter [ MFill [ VString "#firebrick" ], MSize [ VNumber 25 ] ]
-                        , Update [ MX [ VSignal (SName "x") ], MY [ VSignal (SName "y") ] ]
+                        [ Enter [ MFill [ vStr "#firebrick" ], MSize [ vNumber 25 ] ]
+                        , Update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Text
                     [ MEncode
-                        [ Enter [ MFill [ VString "#000" ], MText [ VString "Text Label" ] ]
+                        [ Enter [ MFill [ vStr "#000" ], MText [ vStr "Text Label" ] ]
                         , Update
-                            [ MOpacity [ VNumber 1 ]
-                            , MX [ VSignal (SName "x") ]
-                            , MY [ VSignal (SName "y") ]
-                            , MdX [ VSignal (SName "dx") ]
-                            , MAngle [ VSignal (SName "angle") ]
-                            , MAlign [ VSignal (SName "align") ]
-                            , MBaseline [ VSignal (SName "baseline") ]
-                            , MFont [ VSignal (SName "font") ]
-                            , MFontSize [ VSignal (SName "fontSize") ]
-                            , MFontStyle [ VSignal (SName "fontStyle") ]
-                            , MFontWeight [ VSignal (SName "fontWeight") ]
-                            , MLimit [ VSignal (SName "limit") ]
+                            [ MOpacity [ vNumber 1 ]
+                            , MX [ vSignal "x" ]
+                            , MY [ vSignal "y" ]
+                            , MdX [ vSignal "dx" ]
+                            , MAngle [ vSignal "angle" ]
+                            , MAlign [ vSignal "align" ]
+                            , MBaseline [ vSignal "baseline" ]
+                            , MFont [ vSignal "font" ]
+                            , MFontSize [ vSignal "fontSize" ]
+                            , MFontStyle [ vSignal "fontStyle" ]
+                            , MFontWeight [ vSignal "fontWeight" ]
+                            , MLimit [ vSignal "limit" ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -529,13 +529,13 @@ trailTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "u") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "v") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -543,7 +543,7 @@ trailTest =
                 << scale "zscale"
                     [ SType ScLinear
                     , SRange (RNumbers [ 5, 1 ])
-                    , SDomain (DData [ DDataset "table", DField (VString "v") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "v") ])
                     ]
 
         si =
@@ -556,15 +556,15 @@ trailTest =
                 << mark Trail
                     [ MFrom [ SData "table" ]
                     , MEncode
-                        [ Enter [ MFill [ VString "#939597" ] ]
+                        [ Enter [ MFill [ vStr "#939597" ] ]
                         , Update
-                            [ MX [ VScale (FName "xscale"), VField (FName "u") ]
-                            , MY [ VScale (FName "yscale"), VField (FName "v") ]
-                            , MSize [ VScale (FName "zscale"), VField (FName "v"), VMultiply (VSignal (SName "size")) ]
-                            , MDefined [ VSignal (SExpr "defined || datum.u !== 3") ]
-                            , MOpacity [ VNumber 1 ]
+                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
+                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
+                            , MSize [ vScale (FName "zscale"), vField (FName "v"), vMultiply (vSignal "size") ]
+                            , MDefined [ vSignal "defined || datum.u !== 3" ]
+                            , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ VNumber 0.5 ] ]
+                        , Hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in

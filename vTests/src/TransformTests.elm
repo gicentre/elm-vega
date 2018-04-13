@@ -20,10 +20,10 @@ packTest1 =
             dataSource
                 [ table []
                     |> transform
-                        [ TStratify (FieldName "id") (FieldName "parent")
+                        [ TStratify "id" "parent"
                         , TPack
-                            [ PaField (FieldName "value")
-                            , PaPadding (SigNumRef (SName "padding between circles"))
+                            [ PaField "value"
+                            , PaPadding (SigNumRef "padding between circles")
                             , PaSize sigWidth sigHeight
                             ]
                         ]
@@ -49,13 +49,13 @@ packTest1 =
                     [ MFrom [ SData "tree" ]
                     , MEncode
                         [ Enter
-                            [ MFill [ VScale (FName "color"), VField (FName "id") ]
-                            , MStroke [ VString "white" ]
+                            [ MFill [ vScale (FName "color"), vField (FName "id") ]
+                            , MStroke [ vStr "white" ]
                             ]
                         , Update
-                            [ MX [ VField (FName "x") ]
-                            , MY [ VField (FName "y") ]
-                            , MSize [ VSignal (SExpr "4*datum.r*datum.r") ]
+                            [ MX [ vField (FName "x") ]
+                            , MY [ vField (FName "y") ]
+                            , MSize [ vSignal "4*datum.r*datum.r" ]
                             ]
                         ]
                     ]
@@ -77,10 +77,10 @@ stackTest1 =
                 [ table []
                     |> transform
                         [ TStack
-                            [ StField (FieldName "value")
-                            , StGroupBy [ FieldName "key" ]
+                            [ StField "value"
+                            , StGroupBy [ "key" ]
                             , StOffset (OffsetSignal "offset")
-                            , StSort [ CoField [ FieldSignal "sortField" ], CoOrder [ OrderSignal "sortOrder" ] ]
+                            , StSort [ CoField [ "sortField" ], CoOrder [ OrderSignal "sortOrder" ] ]
                             ]
                         ]
                     |> on
@@ -129,7 +129,7 @@ stackTest1 =
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (VString "y1") ])
+                    , SDomain (DData [ DDataset "table", DField (vStr "y1") ])
                     , SRange (RDefault RHeight)
                     , SRound True
                     ]
@@ -144,15 +144,15 @@ stackTest1 =
                     [ MFrom [ SData "table" ]
                     , MEncode
                         [ Enter
-                            [ MFill [ VScale (FName "color"), VField (FName "key") ]
-                            , MStroke [ VString "white" ]
-                            , MStrokeWidth [ VNumber 1 ]
-                            , MX [ VScale (FName "xscale"), VField (FName "key"), VOffset (VNumber 0.5) ]
-                            , MWidth [ VScale (FName "xscale"), VBand 1 ]
+                            [ MFill [ vScale (FName "color"), vField (FName "key") ]
+                            , MStroke [ vStr "white" ]
+                            , MStrokeWidth [ vNumber 1 ]
+                            , MX [ vScale (FName "xscale"), vField (FName "key"), vOffset (vNumber 0.5) ]
+                            , MWidth [ vScale (FName "xscale"), vBand 1 ]
                             ]
                         , Update
-                            [ MY [ VScale (FName "yscale"), VField (FName "y0"), VOffset (VNumber 0.5) ]
-                            , MY2 [ VScale (FName "yscale"), VField (FName "y1"), VOffset (VNumber 0.5) ]
+                            [ MY [ vScale (FName "yscale"), vField (FName "y0"), vOffset (vNumber 0.5) ]
+                            , MY2 [ vScale (FName "yscale"), vField (FName "y1"), vOffset (vNumber 0.5) ]
                             ]
                         ]
                     ]
