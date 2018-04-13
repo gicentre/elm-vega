@@ -28,7 +28,10 @@ module Vega
         , FormulaUpdate(..)
         , HAlign(..)
         , InputProperty(..)
+        , LegendEncoding(..)
+        , LegendOrientation(..)
         , LegendProperty(..)
+        , LegendType(..)
         , Mark(..)
         , MarkInterpolation(..)
         , MarkOrientation(..)
@@ -182,6 +185,9 @@ Functions and types for declaring the input data to the visualization.
 @docs legends
 @docs legend
 @docs LegendProperty
+@docs LegendType
+@docs LegendOrientation
+@docs LegendEncoding
 
 
 ## Marks
@@ -349,6 +355,7 @@ type AxisProperty
     | AxOffset Value
     | AxPosition Value
     | AxTicks Bool
+      -- TODO: Need to account for temporal units and intervals
     | AxTickCount Int
     | AxTickSize Float
     | AxTitle String
@@ -659,12 +666,64 @@ type InputProperty
     | InAutocomplete Bool
 
 
+{-| Indicates the position of a legend relative to the visualization it describes.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/legends/#orientation)
+-}
+type LegendOrientation
+    = Left
+    | TopLeft
+    | Top
+    | TopRight
+    | Right
+    | BottomRight
+    | Bottom
+    | BottomLeft
+    | None
+
+
 {-| Indicates the characteristics of alegend such as its orientation and scaling
 to represent. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
 type LegendProperty
-    = LeScale
+    = LeType LegendType
+    | LOrient LegendOrientation
+    | LFill String
+    | LOpacity String
+    | LShape String
+    | LSize String
+    | LStroke String
+    | LStrokeDash String
+    | LEncode (List LegendEncoding)
+    | LEntryPadding Value
+    | LFormat String
+    | LOffset Value
+    | LPadding Value
+      -- TODO: Need to account for temporal units and intervals
+    | LTickCount Int
+    | LTitlePadding Value
+    | LTitle String
+    | LValues (List Value)
+    | LZIndex Int
+
+
+{-| Type of custom legend encoding. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+type LegendEncoding
+    = EnLegend (List EncodingProperty)
+    | EnTitle (List EncodingProperty)
+    | EnLabels (List EncodingProperty)
+    | EnSymbols (List EncodingProperty)
+    | EnGradient (List EncodingProperty)
+
+
+{-| Type of legend. `LSymbol` representing legends with discrete items and `LGradient`
+for those representing continuous data.
+-}
+type LegendType
+    = LSymbol
+    | LGradient
 
 
 {-| Type of visual mark used to represent data in the visualization. For further
@@ -998,10 +1057,10 @@ type SchemeProperty
 for more details.
 -}
 type Side
-    = Left
-    | Right
-    | Top
-    | Bottom
+    = SLeft
+    | SRight
+    | STop
+    | SBottom
 
 
 {-| Represents a boolean value that can either be a literal `SigBool` or signal that
@@ -2539,11 +2598,122 @@ inputProperty prop =
                 ( "autocomplete", JE.string "off" )
 
 
+legendEncodingProperty : LegendEncoding -> LabelledSpec
+legendEncodingProperty le =
+    case le of
+        EnLegend eps ->
+            ( "legend", JE.object (List.map encodingProperty eps) )
+
+        EnTitle eps ->
+            ( "title", JE.object (List.map encodingProperty eps) )
+
+        EnLabels eps ->
+            ( "labels", JE.object (List.map encodingProperty eps) )
+
+        EnSymbols eps ->
+            ( "symbols", JE.object (List.map encodingProperty eps) )
+
+        EnGradient eps ->
+            ( "gradient", JE.object (List.map encodingProperty eps) )
+
+
 legendProperty : LegendProperty -> LabelledSpec
 legendProperty lp =
     case lp of
-        LeScale ->
-            ( "scale", JE.null )
+        LeType lt ->
+            ( "type", JE.string (legendTypeLabel lt) )
+
+        LOrient lo ->
+            ( "orient", JE.string (legendOrientLabel lo) )
+
+        LFill fScale ->
+            ( "fill", JE.string fScale )
+
+        LOpacity oScale ->
+            ( "opacity", JE.string oScale )
+
+        LShape sScale ->
+            ( "shape", JE.string sScale )
+
+        LSize sScale ->
+            ( "size", JE.string sScale )
+
+        LStroke sScale ->
+            ( "stroke", JE.string sScale )
+
+        LStrokeDash sdScale ->
+            ( "strokeDash", JE.string sdScale )
+
+        LEncode les ->
+            ( "encode", JE.object (List.map legendEncodingProperty les) )
+
+        LEntryPadding val ->
+            ( "entryPadding", valueSpec val )
+
+        LFormat f ->
+            ( "format", JE.string f )
+
+        LOffset val ->
+            ( "offset", valueSpec val )
+
+        LPadding val ->
+            ( "padding", valueSpec val )
+
+        LTickCount n ->
+            ( "tickCount", JE.int n )
+
+        LTitlePadding val ->
+            ( "titlePadding", valueSpec val )
+
+        LTitle t ->
+            ( "title", JE.string t )
+
+        LValues vals ->
+            ( "values", JE.list (List.map valueSpec vals) )
+
+        LZIndex n ->
+            ( "zindex", JE.int n )
+
+
+legendOrientLabel : LegendOrientation -> String
+legendOrientLabel orient =
+    case orient of
+        Left ->
+            "left"
+
+        TopLeft ->
+            "top-left"
+
+        Top ->
+            "top"
+
+        TopRight ->
+            "top-right"
+
+        Right ->
+            "right"
+
+        BottomRight ->
+            "bottom-right"
+
+        Bottom ->
+            "bottom"
+
+        BottomLeft ->
+            "bottom-left"
+
+        None ->
+            "none"
+
+
+legendTypeLabel : LegendType -> String
+legendTypeLabel lt =
+    case lt of
+        LSymbol ->
+            "symbol"
+
+        LGradient ->
+            "gradient"
 
 
 markLabel : Mark -> String
@@ -3150,16 +3320,16 @@ schemeProperty sProps =
 sideLabel : Side -> String
 sideLabel orient =
     case orient of
-        Left ->
+        SLeft ->
             "left"
 
-        Bottom ->
+        SBottom ->
             "bottom"
 
-        Right ->
+        SRight ->
             "right"
 
-        Top ->
+        STop ->
             "top"
 
 
@@ -3360,6 +3530,9 @@ timeUnitLabel tu =
 
         Milliseconds ->
             "milliseconds"
+
+        Utc timeUnit ->
+            "utc" ++ timeUnitLabel timeUnit
 
 
 topMarkProperty : TopMarkProperty -> List LabelledSpec

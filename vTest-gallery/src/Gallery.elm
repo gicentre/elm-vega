@@ -55,8 +55,8 @@ barChart1 =
 
         ax =
             axes
-                << axis "xScale" Bottom []
-                << axis "yScale" Left []
+                << axis "xScale" SBottom []
+                << axis "yScale" SLeft []
 
         mk =
             marks
@@ -136,8 +136,8 @@ barChart2 =
 
         ax =
             axes
-                << axis "xScale" Bottom [ AxZIndex 1 ]
-                << axis "yScale" Left [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ AxZIndex 1 ]
+                << axis "yScale" SLeft [ AxZIndex 1 ]
 
         mk =
             marks
@@ -196,8 +196,8 @@ barChart3 =
 
         ax =
             axes
-                << axis "yScale" Left [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
-                << axis "xScale" Bottom []
+                << axis "yScale" SLeft [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
+                << axis "xScale" SBottom []
 
         nestedSi =
             signals
@@ -307,7 +307,7 @@ barChart4 =
                     ]
 
         ax =
-            axes << axis "xScale" Bottom [ AxDomain True ]
+            axes << axis "xScale" SBottom [ AxDomain True ]
 
         nestedSc =
             scales
@@ -322,7 +322,7 @@ barChart4 =
 
         nestedAx =
             axes
-                << axis "yScale" Left [ AxTicks False, AxDomain False, AxLabelPadding 4 ]
+                << axis "yScale" SLeft [ AxTicks False, AxDomain False, AxLabelPadding 4 ]
 
         nestedMk =
             marks
@@ -470,7 +470,7 @@ barChart5 =
                     ]
 
         ax =
-            axes << axis "xScale" Bottom [ AxFormat "s" ]
+            axes << axis "xScale" SBottom [ AxFormat "s" ]
     in
     toVega
         [ height 400, padding (PSize 5), ds, si [], topSc [], topMk [] ]
@@ -516,7 +516,9 @@ lineChart1 =
                     ]
 
         ax =
-            axes << axis "xScale" Bottom [] << axis "yScale" Left []
+            axes
+                << axis "xScale" SBottom []
+                << axis "yScale" SLeft []
 
         mk =
             marks
@@ -580,7 +582,9 @@ areaChart1 =
                     ]
 
         ax =
-            axes << axis "xScale" Bottom [ AxTickCount 20 ] << axis "yScale" Left []
+            axes
+                << axis "xScale" SBottom [ AxTickCount 20 ]
+                << axis "yScale" SLeft []
 
         mk =
             marks
@@ -645,8 +649,8 @@ areaChart2 =
 
         ax =
             axes
-                << axis "xScale" Bottom [ AxZIndex 1 ]
-                << axis "yScale" Left [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ AxZIndex 1 ]
+                << axis "yScale" SLeft [ AxZIndex 1 ]
 
         mk =
             marks
@@ -723,7 +727,7 @@ areaChart3 =
                     ]
 
         ax =
-            axes << axis "xScale" Bottom [ AxTickCount 20 ]
+            axes << axis "xScale" SBottom [ AxTickCount 20 ]
 
         mk =
             marks
@@ -865,9 +869,9 @@ areaChart4 =
 
         ax =
             axes
-                << axis "xScale" Bottom [ AxFormat "d", AxTickCount 15 ]
+                << axis "xScale" SBottom [ AxFormat "d", AxTickCount 15 ]
                 << axis "yScale"
-                    Right
+                    SRight
                     [ AxFormat "%"
                     , AxGrid True
                     , AxDomain False
@@ -1076,44 +1080,37 @@ scatterplot1 =
 
         ax =
             axes
-                << axis "xScale" Bottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Horsepower" ]
-                << axis "yScale" Left [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Miles per gallon" ]
+                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Horsepower" ]
+                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle "Miles per gallon" ]
+
+        shapeEncoding =
+            [ MStrokeWidth [ VNumber 2 ]
+            , MOpacity [ VNumber 0.5 ]
+            , MStroke [ VString "#4682b4" ]
+            , MShape [ symbolLabel SymCircle |> VString ]
+            , MFill [ VString "transparent" ]
+            ]
 
         lg =
             legends
-                << legend []
+                << legend
+                    [ LSize "sizeScale"
+                    , LTitle "Acceleration"
+                    , LFormat "s"
+                    , LEncode [ EnSymbols [ Update shapeEncoding ] ]
+                    ]
 
         mk =
             marks
-                << mark Arc
-                    [ MFrom [ SData "table" ]
+                << mark Symbol
+                    [ MFrom [ SData "cars" ]
                     , MEncode
-                        [ Enter
-                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
-                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
-                            , MStartAngle [ VField (FName "startAngle") ]
-                            , MEndAngle [ VField (FName "endAngle") ]
-                            , MInnerRadius [ VNumber 20 ]
-                            , MOuterRadius [ VField (FName "data"), VScale (FName "rScale") ]
-                            , MStroke [ VString "#fff" ]
+                        [ Update <|
+                            [ MX [ VScale (FName "xScale"), VField (FName "Horsepower") ]
+                            , MY [ VScale (FName "yScale"), VField (FName "Miles_per_Gallon") ]
+                            , MSize [ VScale (FName "sizeScale"), VField (FName "Acceleration") ]
                             ]
-                        , Update [ MFill [ VString "#ccc" ] ]
-                        , Hover [ MFill [ VString "pink" ] ]
-                        ]
-                    ]
-                << mark Text
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ VField (FGroup (FName "width")), VMultiply (VNumber 0.5) ]
-                            , MY [ VField (FGroup (FName "height")), VMultiply (VNumber 0.5) ]
-                            , MRadius [ VField (FName "data"), VScale (FName "rScale"), VOffset (VNumber 8) ]
-                            , MTheta [ VSignal (SExpr "(datum.startAngle + datum.endAngle)/2") ]
-                            , MFill [ VString "#000" ]
-                            , MAlign [ VString (hAlignLabel AlignCenter) ]
-                            , MBaseline [ VString (vAlignLabel AlignMiddle) ]
-                            , MText [ VField (FName "data") ]
-                            ]
+                                ++ shapeEncoding
                         ]
                     ]
     in
