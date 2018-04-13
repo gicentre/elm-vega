@@ -1225,9 +1225,157 @@ scatterplot2 =
         [ width 450, height 450, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
 
 
+scatterplot3 : Spec
+scatterplot3 =
+    let
+        ds =
+            dataSource [ data "drive" [ DUrl "https://vega.github.io/vega/data/driving.json" ] ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "drive", DField (vStr "miles") ])
+                    , SRange (RDefault RWidth)
+                    , SNice NTrue
+                    , SZero False
+                    , SRound True
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SDomain (DData [ DDataset "drive", DField (vStr "gas") ])
+                    , SRange (RDefault RHeight)
+                    , SNice NTrue
+                    , SZero False
+                    , SRound True
+                    ]
+                << scale "alignScale"
+                    [ SType ScOrdinal
+                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SRange (RStrings [ "right", "left", "center", "center" ])
+                    ]
+                << scale "baseScale"
+                    [ SType ScOrdinal
+                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SRange (RStrings [ "middle", "middle", "bottom", "top" ])
+                    ]
+                << scale "dx"
+                    [ SType ScOrdinal
+                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SRange (RNumbers [ -7, 6, 0, 0 ])
+                    ]
+                << scale "dy"
+                    [ SType ScOrdinal
+                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SRange (RNumbers [ 1, 1, -5, 6 ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    STop
+                    [ AxTickCount 5
+                    , AxTickSize 0
+                    , AxGrid True
+                    , AxDomain False
+                    , AxEncode
+                        [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
+                        , ( ELabels
+                          , [ Enter
+                                [ MAlign [ hAlignLabel AlignLeft |> vStr ]
+                                , MBaseline [ vAlignLabel AlignTop |> vStr ]
+                                , MFontSize [ vNumber 12 ]
+                                , MFontWeight [ vStr "bold" ]
+                                ]
+                            ]
+                          )
+                        ]
+                    ]
+                << axis "xScale"
+                    SBottom
+                    [ AxTitle (vStr "Miles driven per capita each year")
+                    , AxDomain False
+                    , AxTicks False
+                    , AxLabels False
+                    ]
+                << axis "yScale"
+                    SLeft
+                    [ AxTickCount 5
+                    , AxTickSize 0
+                    , AxGrid True
+                    , AxDomain False
+                    , AxFormat "$0.2f"
+                    , AxEncode
+                        [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
+                        , ( ELabels
+                          , [ Enter
+                                [ MAlign [ hAlignLabel AlignLeft |> vStr ]
+                                , MBaseline [ vAlignLabel AlignBottom |> vStr ]
+                                , MFontSize [ vNumber 12 ]
+                                , MFontWeight [ vStr "bold" ]
+                                ]
+                            ]
+                          )
+                        ]
+                    ]
+                << axis "yScale"
+                    SRight
+                    [ AxTitle (vStr "Price of a gallon of gasoline (adjusted for inflation)")
+                    , AxDomain False
+                    , AxTicks False
+                    , AxLabels False
+                    ]
+
+        mk =
+            marks
+                << mark Line
+                    [ MFrom [ SData "drive" ]
+                    , MEncode
+                        [ Enter
+                            [ MInterpolate [ markInterpolationLabel Cardinal |> vStr ]
+                            , MX [ vScale (FName "xScale"), vField (FName "miles") ]
+                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
+                            , MStroke [ vStr "#000" ]
+                            , MStrokeWidth [ vNumber 3 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ MFrom [ SData "drive" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
+                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
+                            , MFill [ vStr "#fff" ]
+                            , MStroke [ vStr "#000" ]
+                            , MStrokeWidth [ vNumber 1 ]
+                            , MSize [ vNumber 49 ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ MFrom [ SData "drive" ]
+                    , MEncode
+                        [ Enter
+                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
+                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
+                            , MdX [ vScale (FName "dx"), vField (FName "side") ]
+                            , MdY [ vScale (FName "dy"), vField (FName "side") ]
+                            , MFill [ vStr "#000" ]
+                            , MText [ vField (FName "year") ]
+                            , MAlign [ vScale (FName "alignScale"), vField (FName "side") ]
+                            , MBaseline [ vScale (FName "baseScale"), vField (FName "side") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 500, padding (PSize 5), ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    scatterplot2
+    scatterplot3
 
 
 
@@ -1251,6 +1399,7 @@ mySpecs =
         , ( "circularChart2", circularChart2 )
         , ( "scatterplot1", scatterplot1 )
         , ( "scatterplot2", scatterplot2 )
+        , ( "scatterplot3", scatterplot3 )
         ]
 
 
