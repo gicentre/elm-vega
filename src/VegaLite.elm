@@ -83,6 +83,7 @@ module VegaLite
         , asSpec
         , autosize
         , background
+          -- TODO: Make bin private in next major version.
         , bin
         , binAs
         , calculateAs
@@ -1954,11 +1955,14 @@ the default binning. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
 more details.
 
-    position X [ PName "IMDB_Rating", PmType Quantitative , bin [] ]
+    position X [ PName "IMDB_Rating", PmType Quantitative , PBin [] ]
 
 -}
 bin : List BinProperty -> LabelledSpec
 bin bProps =
+    -- TODO: This should need to be exposed - only maintained for backward
+    -- compatiblity after it's previous function was renamed to binAs. In next
+    -- major version, make private.
     if bProps == [] then
         ( "bin", JE.bool True )
     else
@@ -2242,6 +2246,8 @@ parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#named)
 for details.
 
+    data = ...
+    json = ...
     enc = ...
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
@@ -2716,7 +2722,7 @@ file matches the value of `person` in the primary data source.
 
     trans =
         transform
-            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" personDetails
+            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" "personDetails"
 
 -}
 lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
