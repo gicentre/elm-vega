@@ -2404,7 +2404,7 @@ domain and range values.
     color
         [ MName "year"
         , MmType Ordinal
-        , MScale <| domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )
+        , MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
         ]
 
 -}
@@ -2634,7 +2634,7 @@ properties that characterise the hyperlinking such as the destination url and cu
 type. The second parameter is a list of any previous encoding channels to which
 this hyperlink channel should be added.
 
-    hyperlink [ MName "Species", MmType Nominal ] []
+    hyperlink [ HName "Species", HmType Nominal ] []
 
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
@@ -2736,6 +2736,8 @@ file matches the value of `person` in the primary data source.
 -}
 lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
 lookupAs key1 ( vlProp, spec ) key2 asName =
+    -- TODO: Change sig to use Data rather than (VLProperty, Spec) for next major releaase.
+    -- Not sure why substituting with an alias bumps up by a major release.
     (::)
         ( "lookupAs"
         , JE.list
@@ -2867,14 +2869,14 @@ This is often implicit when chaining a series of encodings using functional comp
 
       enc =
           encoding
-            << position X [ PName "Animal", PmTyoe Ordinal ]
+            << position X [ PName "Animal", PmType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
 appearing, simply provide an empty list of axis properties to `PAxis` :
 
      enc =
          encoding
-           << position X [ PName "Animal", PmTyoe Ordinal, PAxis [] ]
+           << position X [ PName "Animal", PmType Ordinal, PAxis [] ]
 
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
