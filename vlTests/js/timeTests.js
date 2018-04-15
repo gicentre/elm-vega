@@ -15199,6 +15199,9 @@ var _gicentre$elm_vega$VegaLite$TName = function (a) {
 var _gicentre$elm_vega$VegaLite$Utc = function (a) {
 	return {ctor: 'Utc', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$utc = function (tu) {
+	return _gicentre$elm_vega$VegaLite$Utc(tu);
+};
 var _gicentre$elm_vega$VegaLite$Milliseconds = {ctor: 'Milliseconds'};
 var _gicentre$elm_vega$VegaLite$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
 var _gicentre$elm_vega$VegaLite$Seconds = {ctor: 'Seconds'};
@@ -15899,7 +15902,7 @@ var _gicentre$elm_vega$TimeTests$parseTime = function (dType) {
 			return _gicentre$elm_vega$VegaLite$PTimeUnit(_gicentre$elm_vega$VegaLite$YearMonthDateHours);
 		} else {
 			return _gicentre$elm_vega$VegaLite$PTimeUnit(
-				_gicentre$elm_vega$VegaLite$Utc(_gicentre$elm_vega$VegaLite$YearMonthDateHours));
+				_gicentre$elm_vega$VegaLite$utc(_gicentre$elm_vega$VegaLite$YearMonthDateHours));
 		}
 	}();
 	var enc = function (_p2) {

@@ -74,7 +74,7 @@ module VegaLite
         , StackProperty(..)
         , Symbol(..)
         , TextChannel(..)
-        , TimeUnit(..)
+        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
         , VAlign(..)
         , VLProperty
@@ -140,6 +140,7 @@ module VegaLite
         , toVegaLite
         , tooltip
         , transform
+        , utc
         , vConcat
         , width
         )
@@ -269,6 +270,7 @@ Relates to where something appears in the visualization.
 @docs VAlign
 @docs FontWeight
 @docs TimeUnit
+@docs utc
 
 
 ## Mark channels
@@ -1739,11 +1741,11 @@ type TextChannel
 for further details.
 
 To encode a time as UTC (coordinated universal time, independent of local time
-zones or daylight saving), add a `Utc` type to one of the other time units.
+zones or daylight saving), provide a time unit to the `utc` function.
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (Utc YearMonthDateHours) ]
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
 
 -}
 type TimeUnit
@@ -3300,6 +3302,19 @@ transform transforms =
         ( VLTransform, JE.null )
     else
         ( VLTransform, JE.list (List.map assemble transforms) )
+
+
+{-| Provides a UTC version of a given a time (coordinated universal time, independent
+of local time zones or daylight saving).
+For example,
+
+    encoding
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+
+-}
+utc : TimeUnit -> TimeUnit
+utc tu =
+    Utc tu
 
 
 {-| Assigns a list of specifications to be juxtaposed vertically in a visualization.

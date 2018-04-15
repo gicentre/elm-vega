@@ -123,7 +123,7 @@ parseTime dType =
                     PTimeUnit YearMonthDateHours
 
                 UTC ->
-                    PTimeUnit (Utc YearMonthDateHours)
+                    PTimeUnit (utc YearMonthDateHours)
 
         timeScale =
             case dType of
