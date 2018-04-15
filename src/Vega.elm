@@ -61,7 +61,7 @@ module Vega
         , StrokeJoin(..)
         , Symbol(..)
         , TextDirection(..)
-        , TimeUnit(..)
+        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TopMarkProperty(..)
         , Transform(..)
         , Trigger
@@ -106,6 +106,7 @@ module Vega
         , toVega
         , transform
         , trigger
+        , utc
         , vAlignLabel
         , vBand
         , vBool
@@ -291,6 +292,7 @@ In addition to more general data types like integers and strings, the following 
 can carry data used in specifications.
 
 @docs TimeUnit
+@docs utc
 @docs ColorValue
 @docs Expr
 @docs Expression
@@ -2059,6 +2061,18 @@ a list of trigger actions.
 trigger : String -> List TriggerProperty -> Trigger
 trigger trName trProps =
     JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
+
+
+{-| Provides a UTC version of a given a time (coordinated universal time, independent
+of local time zones or daylight saving).
+For example,
+
+    TODO: Provide example
+
+-}
+utc : TimeUnit -> TimeUnit
+utc tu =
+    Utc tu
 
 
 {-| A convenience function for generating a text string representing a vertical
