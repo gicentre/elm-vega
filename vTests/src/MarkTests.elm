@@ -15,9 +15,9 @@ import Vega exposing (..)
 {-| Convenience function for generating a list of 2-element DataValues lists used
 when generating dashed line arrays.
 -}
-toValues : List ( Float, Float ) -> DataValues
-toValues pairs =
-    pairs |> List.map (\( a, b ) -> Numbers [ a, b ]) |> DataValues
+toValue : List ( Float, Float ) -> Value
+toValue pairs =
+    pairs |> List.map (\( a, b ) -> vNumbers [ a, b ]) |> vValues
 
 
 arcTest : Spec
@@ -25,16 +25,16 @@ arcTest =
     let
         si =
             signals
-                << signal "startAngle" [ SiValue (Number -0.73), SiBind (IRange [ InMin -6.28, InMax 6.28 ]) ]
-                << signal "endAngle" [ SiValue (Number 0.73), SiBind (IRange [ InMin -6.28, InMax 6.28 ]) ]
-                << signal "padAngle" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1.57 ]) ]
-                << signal "innerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
-                << signal "outerRadius" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
-                << signal "x" [ SiValue (Number 100) ]
-                << signal "y" [ SiValue (Number 100) ]
+                << signal "startAngle" [ SiValue (vNumber -0.73), SiBind (IRange [ InMin -6.28, InMax 6.28 ]) ]
+                << signal "endAngle" [ SiValue (vNumber 0.73), SiBind (IRange [ InMin -6.28, InMax 6.28 ]) ]
+                << signal "padAngle" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 1.57 ]) ]
+                << signal "innerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "outerRadius" [ SiValue (vNumber 50), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
+                << signal "x" [ SiValue (vNumber 100) ]
+                << signal "y" [ SiValue (vNumber 100) ]
 
         mk =
             marks
@@ -75,8 +75,8 @@ areaTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (Numbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -99,15 +99,15 @@ areaTest =
 
         si =
             signals
-                << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
+                << signal "defined" [ SiValue (vBool True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> Str)
-                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
-                << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
-                << signal "y2" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 20, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+                << signal "tension" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
+                << signal "y2" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 20, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -140,24 +140,24 @@ groupTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (Numbers [ 5, -5, 60 ])
-                << dataColumn "y" (Numbers [ 5, 70, 120 ])
-                << dataColumn "w" (Numbers [ 100, 40, 100 ])
-                << dataColumn "h" (Numbers [ 30, 40, 20 ])
+                << dataColumn "x" (vNumbers [ 5, -5, 60 ])
+                << dataColumn "y" (vNumbers [ 5, 70, 120 ])
+                << dataColumn "w" (vNumbers [ 100, 40, 100 ])
+                << dataColumn "h" (vNumbers [ 30, 40, 20 ])
 
         ds =
             dataSource [ table [] ]
 
         si =
             signals
-                << signal "groupClip" [ SiValue (Boolean False), SiBind (ICheckbox []) ]
-                << signal "x" [ SiValue (Number 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "w" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "h" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+                << signal "groupClip" [ SiValue (vBool False), SiBind (ICheckbox []) ]
+                << signal "x" [ SiValue (vNumber 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 25), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "w" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "h" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -207,13 +207,13 @@ imageTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (Number 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
-                << signal "w" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "h" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "aspect" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
-                << signal "align" [ SiValue (Str "left"), SiBind (ISelect [ InOptions (Strings [ "left", "center", "right" ]) ]) ]
-                << signal "baseline" [ SiValue (Str "top"), SiBind (ISelect [ InOptions (Strings [ "top", "middle", "bottom" ]) ]) ]
+                << signal "x" [ SiValue (vNumber 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 75), SiBind (IRange [ InMin 0, InMax 100, InStep 1 ]) ]
+                << signal "w" [ SiValue (vNumber 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "h" [ SiValue (vNumber 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "aspect" [ SiValue (vBool True), SiBind (ICheckbox []) ]
+                << signal "align" [ SiValue (vStr "left"), SiBind (ISelect [ InOptions (vStrs [ "left", "center", "right" ]) ]) ]
+                << signal "baseline" [ SiValue (vStr "top"), SiBind (ISelect [ InOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
 
         mk =
             marks
@@ -243,8 +243,8 @@ lineTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (Numbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -267,15 +267,15 @@ lineTest =
 
         si =
             signals
-                << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
+                << signal "defined" [ SiValue (vBool True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> Str)
-                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
-                << signal "tension" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> Str), SiBind (ISelect [ InOptions (Strings [ "butt", "round", "square" ]) ]) ]
-                << signal "strokeDash" [ SiValues (Numbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValues [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
+                << signal "tension" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> vStr), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
@@ -307,11 +307,11 @@ pathTest =
     let
         si =
             signals
-                << signal "path" [ SiValue (Str "M-50,-50 L50,50 V-50 L-50,50 Z"), SiBind (IText [ InPlaceholder "SVG path string" ]) ]
-                << signal "x" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+                << signal "path" [ SiValue (vStr "M-50,-50 L50,50 V-50 L-50,50 Z"), SiBind (IText [ InPlaceholder "SVG path string" ]) ]
+                << signal "x" [ SiValue (vNumber 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -340,13 +340,13 @@ rectTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (Number 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
-                << signal "w" [ SiValue (Number 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
-                << signal "h" [ SiValue (Number 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+                << signal "x" [ SiValue (vNumber 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 50), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "w" [ SiValue (vNumber 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "h" [ SiValue (vNumber 100), SiBind (IRange [ InMin 1, InMax 100, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 50, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -377,13 +377,13 @@ ruleTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "x2" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "y2" [ SiValue (Number 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> Str), SiBind (ISelect [ InOptions (Strings [ "butt", "round", "square" ]) ]) ]
-                << signal "strokeDash" [ SiValues (Numbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValues [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
+                << signal "x" [ SiValue (vNumber 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 50), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "x2" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y2" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> vStr), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
@@ -414,11 +414,11 @@ symbolTest =
         si =
             signals
                 << signal "shape"
-                    [ SiValue (Str "circle")
+                    [ SiValue (vStr "circle")
                     , SiBind
                         (ISelect
                             [ InOptions
-                                (Strings
+                                (vStrs
                                     [ "circle"
                                     , "square"
                                     , "cross"
@@ -434,11 +434,11 @@ symbolTest =
                             ]
                         )
                     ]
-                << signal "size" [ SiValue (Number 2000), SiBind (IRange [ InMin 0, InMax 10000, InStep 100 ]) ]
-                << signal "x" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (Number 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "color" [ SiValue (Str "both"), SiBind (IRadio [ InOptions (Strings [ "fill", "stroke", "both" ]) ]) ]
+                << signal "size" [ SiValue (vNumber 2000), SiBind (IRange [ InMin 0, InMax 10000, InStep 100 ]) ]
+                << signal "x" [ SiValue (vNumber 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 100), SiBind (IRange [ InMin 10, InMax 190, InStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "color" [ SiValue (vStr "both"), SiBind (IRadio [ InOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
             marks
@@ -468,24 +468,24 @@ textTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (Number 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "y" [ SiValue (Number 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
-                << signal "dx" [ SiValue (Number 0), SiBind (IRange [ InMin -20, InMax 20, InStep 1 ]) ]
-                << signal "angle" [ SiValue (Number 0), SiBind (IRange [ InMin -180, InMax 180, InStep 1 ]) ]
-                << signal "fontSize" [ SiValue (Number 10), SiBind (IRange [ InMin 1, InMax 36, InStep 1 ]) ]
-                << signal "limit" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 150, InStep 1 ]) ]
-                << signal "align" [ SiValue (hAlignLabel AlignLeft |> Str), SiBind (ISelect [ InOptions (Strings [ "left", "center", "right" ]) ]) ]
-                << signal "baseline" [ SiValue (vAlignLabel Alphabetic |> Str), SiBind (ISelect [ InOptions (Strings [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
-                << signal "font" [ SiValue (Str "sans-serif"), SiBind (IRadio [ InOptions (Strings [ "sans-serif", "serif", "monospace" ]) ]) ]
-                << signal "fontWeight" [ SiValue (Str "normal"), SiBind (IRadio [ InOptions (Strings [ "normal", "bold" ]) ]) ]
-                << signal "fontStyle" [ SiValue (Str "normal"), SiBind (IRadio [ InOptions (Strings [ "normal", "italic" ]) ]) ]
+                << signal "x" [ SiValue (vNumber 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "y" [ SiValue (vNumber 100), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
+                << signal "dx" [ SiValue (vNumber 0), SiBind (IRange [ InMin -20, InMax 20, InStep 1 ]) ]
+                << signal "angle" [ SiValue (vNumber 0), SiBind (IRange [ InMin -180, InMax 180, InStep 1 ]) ]
+                << signal "fontSize" [ SiValue (vNumber 10), SiBind (IRange [ InMin 1, InMax 36, InStep 1 ]) ]
+                << signal "limit" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 150, InStep 1 ]) ]
+                << signal "align" [ SiValue (hAlignLabel AlignLeft |> vStr), SiBind (ISelect [ InOptions (vStrs [ "left", "center", "right" ]) ]) ]
+                << signal "baseline" [ SiValue (vAlignLabel Alphabetic |> vStr), SiBind (ISelect [ InOptions (vStrs [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
+                << signal "font" [ SiValue (vStr "sans-serif"), SiBind (IRadio [ InOptions (vStrs [ "sans-serif", "serif", "monospace" ]) ]) ]
+                << signal "fontWeight" [ SiValue (vStr "normal"), SiBind (IRadio [ InOptions (vStrs [ "normal", "bold" ]) ]) ]
+                << signal "fontStyle" [ SiValue (vStr "normal"), SiBind (IRadio [ InOptions (vStrs [ "normal", "italic" ]) ]) ]
 
         mk =
             marks
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ Enter [ MFill [ vStr "#firebrick" ], MSize [ vNumber 25 ] ]
+                        [ Enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
                         , Update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
                         ]
                     ]
@@ -519,8 +519,8 @@ trailTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (Numbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (Numbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -548,8 +548,8 @@ trailTest =
 
         si =
             signals
-                << signal "defined" [ SiValue (Boolean True), SiBind (ICheckbox []) ]
-                << signal "size" [ SiValue (Number 5), SiBind (IRange [ InMin 1, InMax 10 ]) ]
+                << signal "defined" [ SiValue (vBool True), SiBind (ICheckbox []) ]
+                << signal "size" [ SiValue (vNumber 5), SiBind (IRange [ InMin 1, InMax 10 ]) ]
 
         mk =
             marks

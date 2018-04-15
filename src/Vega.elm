@@ -15,8 +15,6 @@ module Vega
         , DataRow
         , DataTable
         , DataType(..)
-        , DataValue(..)
-        , DataValues(..)
         , EncodingProperty(..)
         , EventHandler(..)
         , Expr(..)
@@ -110,6 +108,7 @@ module Vega
         , vAlignLabel
         , vBand
         , vBool
+        , vBools
         , vColor
         , vExponent
         , vField
@@ -123,6 +122,8 @@ module Vega
         , vScale
         , vSignal
         , vStr
+        , vStrs
+        , vValues
         , width
         )
 
@@ -288,8 +289,6 @@ to the data and transform options described above.
 In addition to more general data types like integers and strings, the following types
 can carry data used in specifications.
 
-@docs DataValue
-@docs DataValues
 @docs TimeUnit
 @docs ColorValue
 @docs Expr
@@ -306,8 +305,11 @@ can carry data used in specifications.
 @docs vNumber
 @docs vNumbers
 @docs vStr
+@docs vStrs
 @docs vBool
+@docs vBools
 @docs vObject
+@docs vValues
 @docs ifElse
 @docs vNull
 @docs vMultiply
@@ -550,27 +552,28 @@ type DataType
     | FoUtc String
 
 
-{-| A single data value. This is used when a function can accept values of different
-types (e.g. either a number or a string).
--}
-type DataValue
-    = Boolean Bool
-    | Number Float
-    | Str String
-    | Empty
-    | Null
 
-
-{-| A list of data values. This is used when a function can accept lists of
-different types (e.g. either a list of numbers or a list of strings).
-TODO: Check DateTimes only accept strings.
--}
-type DataValues
-    = Booleans (List Bool)
-    | DateTimes (List String)
-    | Numbers (List Float)
-    | Strings (List String)
-    | DataValues (List DataValues)
+-- {-| A single data value. This is used when a function can accept values of different
+-- types (e.g. either a number or a string).
+-- -}
+-- type DataValue
+--     = Boolean Bool
+--     | Number Float
+--     | Str String
+--     | Empty
+--     | Null
+--
+--
+-- {-| A list of data values. This is used when a function can accept lists of
+-- different types (e.g. either a list of numbers or a list of strings).
+-- TODO: Check DateTimes only accept strings.
+-- -}
+-- type DataValues
+--     = Booleans (List Bool)
+--     | DateTimes (List String)
+--     | Numbers (List Float)
+--     | Strings (List String)
+--     | DataValues (List DataValues)
 
 
 {-| Indicates the charactersitcs of an encoding. For further
@@ -687,7 +690,7 @@ outside the visualization container.
 type InputProperty
     = Debounce Float
     | Element String
-    | InOptions DataValues
+    | InOptions Value
     | InMin Float
     | InMax Float
     | InName String
@@ -1127,8 +1130,7 @@ type SignalProperty
     | SiOn (List (List EventHandler))
     | SiUpdate Expression
     | SiReact Bool
-    | SiValue DataValue
-    | SiValues DataValues
+    | SiValue Value
 
 
 {-| Allow type of sorting to be customised. For details see the
@@ -1358,7 +1360,15 @@ or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
 -}
 type Value
-    = VSignal String
+    = VStr String
+    | VStrs (List String)
+    | VNumber Float
+    | VNumbers (List Float)
+    | VBool Bool
+    | VBools (List Bool)
+    | VObject (List Value)
+    | Values (List Value)
+    | VSignal String
     | VColor ColorValue
     | VField FieldValue
     | VScale FieldValue
@@ -1367,11 +1377,6 @@ type Value
     | VMultiply Value
     | VOffset Value
     | VRound Bool
-    | VNumber Float
-    | VNumbers (List Float)
-    | VObject (List Value)
-    | VStr String
-    | VBool Bool
     | VNull
     | VIfElse String (List Value) (List Value)
 
@@ -1569,26 +1574,26 @@ cursorLabel cur =
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
-    dataColumn "Animal" (Strings [ "Cat", "Dog", "Mouse"]) []
+    dataColumn "Animal" (vStrs [ "Cat", "Dog", "Mouse"]) []
 
 -}
-dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
+dataColumn : String -> Value -> List DataColumn -> List DataColumn
 dataColumn colName data =
     case data of
-        Numbers col ->
+        VStrs col ->
+            (::) (List.map (\s -> ( colName, JE.string s )) col)
+
+        VNumbers col ->
             (::) (List.map (\x -> ( colName, JE.float x )) col)
 
-        Strings col ->
-            (::) (List.map (\s -> ( colName, JE.string s )) col)
-
-        DateTimes col ->
-            (::) (List.map (\s -> ( colName, JE.string s )) col)
-
-        Booleans col ->
+        VBools col ->
             (::) (List.map (\b -> ( colName, JE.bool b )) col)
 
-        DataValues col ->
-            (::) (List.map (\dv -> ( colName, dataValues dv )) col)
+        Values col ->
+            (::) (List.map (\v -> ( colName, valueSpec v )) col)
+
+        _ ->
+            (::) [] |> Debug.log "Warning: Ignored value. Can only create a dataColumn from strings, numbers or bools"
 
 
 {-| Declare a data table from a provided list of column values. Each column contains
@@ -1676,12 +1681,12 @@ data name dProps =
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
 The final parameter is the list of any other rows to which this is added.
 
-    dataRow [("Animal", Str "Fish"),("Age",Number 28),("Year", Str "2010")] []
+    dataRow [("Animal", vStr "Fish"),("Age", vNumber 28),("Year", vStr "2010")] []
 
 -}
-dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
+dataRow : List ( String, Value ) -> List DataRow -> List DataRow
 dataRow row =
-    (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValue val )) row))
+    (::) (JE.object (List.map (\( colName, val ) -> ( colName, valueSpec val )) row))
 
 
 {-| Specify a data source to be used in the visualization. A data source is a collection
@@ -2084,6 +2089,13 @@ vBool =
     VBool
 
 
+{-| A list of Boolean values.
+-}
+vBools : List Bool -> Value
+vBools =
+    VBools
+
+
 {-| A value representing a color.
 -}
 vColor : ColorValue -> Value
@@ -2141,6 +2153,14 @@ vObject =
     VObject
 
 
+{-| Represents an a list of values. This can be used for nesting collections of
+values.
+-}
+vValues : List Value -> Value
+vValues =
+    Values
+
+
 {-| A value representing an additive value modifier.
 -}
 vOffset : Value -> Value
@@ -2176,6 +2196,13 @@ vSignal sigRef =
 vStr : String -> Value
 vStr =
     VStr
+
+
+{-| A list of string values.
+-}
+vStrs : List String -> Value
+vStrs =
+    VStrs
 
 
 {-| Override the default width of the visualization. If not specified the width
@@ -2470,44 +2497,6 @@ dataRefProperty dataRef =
                 ( "sort", JE.object (List.map sortProperty sps) )
 
 
-dataValue : DataValue -> Spec
-dataValue val =
-    case val of
-        Number x ->
-            JE.float x
-
-        Str s ->
-            JE.string s
-
-        Boolean b ->
-            JE.bool b
-
-        Empty ->
-            JE.object []
-
-        Null ->
-            JE.null
-
-
-dataValues : DataValues -> Spec
-dataValues vals =
-    case vals of
-        Booleans bs ->
-            JE.list (List.map JE.bool bs)
-
-        DateTimes dts ->
-            JE.list (List.map JE.string dts)
-
-        Strings ss ->
-            JE.list (List.map JE.string ss)
-
-        Numbers xs ->
-            JE.list (List.map JE.float xs)
-
-        DataValues dvs ->
-            JE.list (List.map dataValues dvs)
-
-
 encodingProperty : EncodingProperty -> LabelledSpec
 encodingProperty ep =
     case ep of
@@ -2710,7 +2699,7 @@ inputProperty prop =
             ( "name", JE.string s )
 
         InOptions opts ->
-            ( "options", dataValues opts )
+            ( "options", valueSpec opts )
 
         InPlaceholder el ->
             ( "placeholder", JE.string el )
@@ -3515,10 +3504,7 @@ signalProperty sigProp =
             ( "react", JE.bool b )
 
         SiValue v ->
-            ( "value", dataValue v )
-
-        SiValues vs ->
-            ( "value", dataValues vs )
+            ( "value", valueSpec v )
 
 
 signalReferenceProperty : String -> LabelledSpec
@@ -3934,11 +3920,20 @@ valueProperty val =
         VObject vals ->
             ( "value", JE.object (List.map valueProperty vals) )
 
+        Values vals ->
+            ( "value", JE.list (List.map valueSpec vals) )
+
         VStr str ->
             ( "value", JE.string str )
 
+        VStrs strs ->
+            ( "value", JE.list (List.map JE.string strs) )
+
         VBool b ->
             ( "value", JE.bool b )
+
+        VBools bs ->
+            ( "value", JE.list (List.map JE.bool bs) )
 
         VNull ->
             ( "value", JE.null )
@@ -3993,11 +3988,20 @@ valueSpec val =
         VObject objs ->
             JE.object (List.map valueProperty objs)
 
+        Values objs ->
+            JE.list (List.map valueSpec objs)
+
         VStr str ->
             JE.string str
 
+        VStrs strs ->
+            JE.list (List.map JE.string strs)
+
         VBool b ->
             JE.bool b
+
+        VBools bs ->
+            JE.list (List.map JE.bool bs)
 
         VNull ->
             JE.null

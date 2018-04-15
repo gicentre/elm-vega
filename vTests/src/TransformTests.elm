@@ -12,9 +12,9 @@ packTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (Strings [ "A", "B", "C", "D", "E" ])
-                << dataColumn "parent" (Strings [ "", "A", "A", "C", "C" ])
-                << dataColumn "value" (Numbers [ 0, 1, 0, 1, 1 ])
+                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (vStrs [ "", "A", "A", "C", "C" ])
+                << dataColumn "value" (vNumbers [ 0, 1, 0, 1, 1 ])
 
         ds =
             dataSource
@@ -32,7 +32,7 @@ packTest1 =
         si =
             signals
                 << signal "padding between circles"
-                    [ SiValue (Number 0)
+                    [ SiValue (vNumber 0)
                     , SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ])
                     ]
 
@@ -69,8 +69,8 @@ stackTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "key" (Strings [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
-                << dataColumn "value" (Numbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
+                << dataColumn "key" (vStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
+                << dataColumn "value" (vNumbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
 
         ds =
             dataSource
@@ -92,19 +92,19 @@ stackTest1 =
         si =
             signals
                 << signal "offset"
-                    [ SiValue (Str "zero")
-                    , SiBind (ISelect [ InOptions (Strings [ "zero", "center", "normalize" ]) ])
+                    [ SiValue (vStr "zero")
+                    , SiBind (ISelect [ InOptions (vStrs [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
-                    [ SiValue Null
-                    , SiBind (IRadio [ InOptions (Strings [ "null", "value" ]) ])
+                    [ SiValue vNull
+                    , SiBind (IRadio [ InOptions (vStrs [ "null", "value" ]) ])
                     ]
                 << signal "sortOrder"
-                    [ SiValue (Str "ascending")
-                    , SiBind (IRadio [ InOptions (Strings [ "ascending", "descending" ]) ])
+                    [ SiValue (vStr "ascending")
+                    , SiBind (IRadio [ InOptions (vStrs [ "ascending", "descending" ]) ])
                     ]
                 << signal "add"
-                    [ SiValue Empty
+                    [ SiValue (vObject [])
                     , SiOn
                         [ [ EEvents "mousedown![!event.shiftKey]"
                           , EUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}"
@@ -112,7 +112,7 @@ stackTest1 =
                         ]
                     ]
                 << signal "rem"
-                    [ SiValue Empty
+                    [ SiValue (vObject [])
                     , SiOn
                         [ [ EEvents "rect:mousedown![event.shiftKey]"
                           , EUpdate "datum"

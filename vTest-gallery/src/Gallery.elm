@@ -12,9 +12,9 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
-dv : String -> Float -> ( String, DataValue )
+dv : String -> Float -> ( String, Value )
 dv label num =
-    ( label, Number num )
+    ( label, vNumber num )
 
 
 barChart1 : Spec
@@ -22,8 +22,8 @@ barChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (Strings [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                << dataColumn "amount" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "amount" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87 ])
 
         ds =
             dataSource [ table [] ]
@@ -31,7 +31,7 @@ barChart1 =
         si =
             signals
                 << signal "tooltip"
-                    [ SiValue Empty
+                    [ SiValue (vObject [])
                     , SiOn
                         [ [ EEvents "rect:mouseover", EUpdate "datum" ]
                         , [ EEvents "rect:mouseout", EUpdate "" ]
@@ -98,9 +98,9 @@ barChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -165,9 +165,9 @@ barChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (Strings [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
-                << dataColumn "position" (Numbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
-                << dataColumn "value" (Numbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
+                << dataColumn "category" (vStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
+                << dataColumn "position" (vNumbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
+                << dataColumn "value" (vNumbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
 
         ds =
             dataSource [ table [] ]
@@ -257,9 +257,9 @@ barChart4 =
     let
         table =
             dataFromColumns "tuples" []
-                << dataColumn "a" (Numbers [ 0, 0, 0, 0, 1, 2, 2 ])
-                << dataColumn "b" (Strings [ "a", "a", "b", "c", "b", "b", "c" ])
-                << dataColumn "c" (Numbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
+                << dataColumn "a" (vNumbers [ 0, 0, 0, 0, 1, 2, 2 ])
+                << dataColumn "b" (vStrs [ "a", "a", "b", "c", "b", "b", "c" ])
+                << dataColumn "c" (vNumbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
 
         agTable =
             table []
@@ -280,9 +280,9 @@ barChart4 =
 
         si =
             signals
-                << signal "rangeStep" [ SiValue (Number 20), SiBind (IRange [ InMin 5, InMax 50, InStep 1 ]) ]
-                << signal "innerPadding" [ SiValue (Number 0.1), SiBind (IRange [ InMin 0, InMax 0.7, InStep 0.01 ]) ]
-                << signal "outerPadding" [ SiValue (Number 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
+                << signal "rangeStep" [ SiValue (vNumber 20), SiBind (IRange [ InMin 5, InMax 50, InStep 1 ]) ]
+                << signal "innerPadding" [ SiValue (vNumber 0.1), SiBind (IRange [ InMin 0, InMax 0.7, InStep 0.01 ]) ]
+                << signal "outerPadding" [ SiValue (vNumber 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
                 << signal "height" [ SiUpdate "trellisExtent[1]" ]
 
         sc =
@@ -376,10 +376,10 @@ barChart5 =
 
         si =
             signals
-                << signal "chartWidth" [ SiValue (Number 300) ]
-                << signal "chartPad" [ SiValue (Number 20) ]
+                << signal "chartWidth" [ SiValue (vNumber 300) ]
+                << signal "chartPad" [ SiValue (vNumber 20) ]
                 << signal "width" [ SiUpdate "2 * chartWidth + chartPad" ]
-                << signal "year" [ SiValue (Number 2000), SiBind (IRange [ InMin 1850, InMax 2000, InStep 10 ]) ]
+                << signal "year" [ SiValue (vNumber 2000), SiBind (IRange [ InMin 1850, InMax 2000, InStep 10 ]) ]
 
         topSc =
             scales
@@ -475,9 +475,9 @@ lineChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (Numbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
-                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (vNumbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
+                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource [ table [] ]
@@ -485,8 +485,8 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> Str)
-                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
@@ -546,8 +546,8 @@ areaChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (List.map toFloat (List.range 1 20) |> Numbers)
-                << dataColumn "v" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "u" (List.map toFloat (List.range 1 20) |> vNumbers)
+                << dataColumn "v" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         ds =
             dataSource [ table [] ]
@@ -555,8 +555,8 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> Str)
-                    , SiBind (ISelect [ InOptions (Strings [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
@@ -605,9 +605,9 @@ areaChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (Numbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (Numbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -671,8 +671,8 @@ areaChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (List.map toFloat (List.range 1 20) |> Numbers)
-                << dataColumn "y" (Numbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "x" (List.map toFloat (List.range 1 20) |> vNumbers)
+                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         layerData =
             data "layer_indices" [ DValue (vNumbers [ 0, 1, 2, 3 ]) ]
@@ -687,9 +687,9 @@ areaChart3 =
         si =
             signals
                 << signal "layers"
-                    [ SiValue (Number 2)
+                    [ SiValue (vNumber 2)
                     , SiOn [ [ EEvents "mousedown!", EUpdate "1 + (layers % 4)" ] ]
-                    , SiBind (ISelect [ InOptions (Numbers [ 1, 2, 3, 4 ]) ])
+                    , SiBind (ISelect [ InOptions (vNumbers [ 1, 2, 3, 4 ]) ])
                     ]
                 << signal "height" [ SiUpdate "floor(200 / layers)" ]
                 << signal "vheight" [ SiUpdate "height * layers" ]
@@ -789,11 +789,11 @@ areaChart4 =
         si =
             signals
                 << signal "sex"
-                    [ SiValue (Str "all")
-                    , SiBind (IRadio [ InOptions (Strings [ "men", "women", "all" ]) ])
+                    [ SiValue (vStr "all")
+                    , SiBind (IRadio [ InOptions (vStrs [ "men", "women", "all" ]) ])
                     ]
                 << signal "query"
-                    [ SiValue (Str "")
+                    [ SiValue (vStr "")
                     , SiOn
                         [ [ EEvents "area:click!", EUpdate "datum.job" ]
                         , [ EEvents "dblclick!", EUpdate "''" ]
@@ -920,8 +920,8 @@ circularChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "id" (Numbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "field" (Numbers [ 4, 6, 10, 3, 7, 8 ])
+                << dataColumn "id" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "field" (vNumbers [ 4, 6, 10, 3, 7, 8 ])
 
         ds =
             dataSource
@@ -938,12 +938,12 @@ circularChart1 =
 
         si =
             signals
-                << signal "startAngle" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
-                << signal "endAngle" [ SiValue (Number 360), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
-                << signal "padAngle" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ]) ]
-                << signal "innerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 90, InStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (Number 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "sort" [ SiValue (Boolean False), SiBind (ICheckbox []) ]
+                << signal "startAngle" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
+                << signal "endAngle" [ SiValue (vNumber 360), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
+                << signal "padAngle" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ]) ]
+                << signal "innerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 90, InStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
+                << signal "sort" [ SiValue (vBool False), SiBind (ICheckbox []) ]
 
         sc =
             scales << scale "cScale" [ SType ScOrdinal, SRange (RScheme "category20" []) ]
@@ -1118,9 +1118,9 @@ scatterplot2 =
 
         si =
             signals
-                << signal "yField" [ SiValue (Str "IMDB_Rating"), SiBind (ISelect [ InOptions (Strings [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "xField" [ SiValue (Str "Rotten_Tomatoes_Rating"), SiBind (ISelect [ InOptions (Strings [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "nullSize" [ SiValue (Number 8) ]
+                << signal "yField" [ SiValue (vStr "IMDB_Rating"), SiBind (ISelect [ InOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "xField" [ SiValue (vStr "Rotten_Tomatoes_Rating"), SiBind (ISelect [ InOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "nullSize" [ SiValue (vNumber 8) ]
                 << signal "nullGap" [ SiUpdate "nullSize + 10" ]
 
         sc =
@@ -1373,6 +1373,95 @@ scatterplot3 =
         [ width 800, height 500, padding (PSize 5), ds, sc [], ax [], mk [] ]
 
 
+scatterplot4 : Spec
+scatterplot4 =
+    let
+        ds =
+            dataSource
+                [ data "barley" [ DUrl "https://vega.github.io/vega/data/barley.json" ]
+                , data "summary" [ DSource "barley" ]
+                    |> transform
+                        [ TAggregate
+                            [ AgGroupBy [ "variety" ]
+                            , AgFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
+                            , AgOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
+                            , AgAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
+                            ]
+                        , TFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
+                        , TFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
+                        , TFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
+                        , TFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "errorMeasure"
+                    [ SiValue (vStr "95% Confidence Interval")
+                    , SiBind (ISelect [ InOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
+                    ]
+                << signal "lookup" [ SiValue (vStrs []) ]
+                << signal "outerPadding" [ SiValue (vNumber 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
+                << signal "height" [ SiUpdate "trellisExtent[1]" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NTrue
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField (vStr "Horsepower") ])
+                    , SRange (RDefault RWidth)
+                    ]
+                << scale "yScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NTrue
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField (vStr "Miles_per_Gallon") ])
+                    , SRange (RDefault RHeight)
+                    ]
+                << scale "sizeScale"
+                    [ SType ScLinear
+                    , SRound True
+                    , SNice NFalse
+                    , SZero True
+                    , SDomain (DData [ DDataset "cars", DField (vStr "Acceleration") ])
+                    , SRange (RNumbers [ 4, 361 ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Horsepower") ]
+                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Miles per gallon") ]
+
+        shapeEncoding =
+            [ MStrokeWidth [ vNumber 2 ]
+            , MOpacity [ vNumber 0.5 ]
+            , MStroke [ vStr "#4682b4" ]
+            , MShape [ symbolLabel SymCircle |> vStr ]
+            , MFill [ vStr "transparent" ]
+            ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ MFrom [ SData "cars" ]
+                    , MEncode
+                        [ Update <|
+                            [ MX [ vScale (FName "xScale"), vField (FName "Horsepower") ]
+                            , MY [ vScale (FName "yScale"), vField (FName "Miles_per_Gallon") ]
+                            , MSize [ vScale (FName "sizeScale"), vField (FName "Acceleration") ]
+                            ]
+                                ++ shapeEncoding
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 160, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     scatterplot3
@@ -1400,6 +1489,7 @@ mySpecs =
         , ( "scatterplot1", scatterplot1 )
         , ( "scatterplot2", scatterplot2 )
         , ( "scatterplot3", scatterplot3 )
+        , ( "scatterplot4", scatterplot4 )
         ]
 
 
