@@ -74,7 +74,7 @@ module VegaLite
         , StackProperty(..)
         , Symbol(..)
         , TextChannel(..)
-        , TimeUnit(..)
+        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
         , VAlign(..)
         , VLProperty
@@ -141,6 +141,7 @@ module VegaLite
         , toVegaLite
         , tooltip
         , transform
+        , utc
         , vConcat
         , width
         )
@@ -270,6 +271,7 @@ Relates to where something appears in the visualization.
 @docs VAlign
 @docs FontWeight
 @docs TimeUnit
+@docs utc
 
 
 ## Mark channels
@@ -1738,10 +1740,16 @@ type TextChannel
 {-| Describes a unit of time. Useful for encoding and transformations. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
 for further details.
+
+To encode a time as UTC (coordinated universal time, independent of local time
+zones or daylight saving), provide a time unit to the `utc` function.
+For example,
+
+    encoding
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+
 -}
-type
-    TimeUnit
-    -- TODO: Add UTC prefix option with a utc function (see https://vega.github.io/vega-lite/docs/timeunit.html)
+type TimeUnit
     = Year
     | YearQuarter
     | YearQuarterMonth
@@ -1764,6 +1772,7 @@ type
     | Seconds
     | SecondsMilliseconds
     | Milliseconds
+    | Utc TimeUnit
 
 
 {-| Title configuration properties. These are used to configure the default style
@@ -3299,6 +3308,19 @@ transform transforms =
         ( VLTransform, JE.null )
     else
         ( VLTransform, JE.list (List.map assemble transforms) )
+
+
+{-| Provides a UTC version of a given a time (coordinated universal time, independent
+of local time zones or daylight saving).
+For example,
+
+    encoding
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+
+-}
+utc : TimeUnit -> TimeUnit
+utc tu =
+    Utc tu
 
 
 {-| Assigns a list of specifications to be juxtaposed vertically in a visualization.
@@ -5773,6 +5795,9 @@ timeUnitLabel tu =
 
         Milliseconds ->
             "milliseconds"
+
+        Utc timeUnit ->
+            "utc" ++ timeUnitLabel timeUnit
 
 
 titleConfigSpec : TitleConfig -> LabelledSpec
