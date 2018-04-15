@@ -84,6 +84,7 @@ module Vega
         , hAlignLabel
         , height
         , ifElse
+        , keyValue
         , legend
         , legends
         , mark
@@ -309,6 +310,7 @@ can carry data used in specifications.
 @docs vBool
 @docs vBools
 @docs vObject
+@docs keyValue
 @docs vValues
 @docs ifElse
 @docs vNull
@@ -1367,6 +1369,7 @@ type Value
     | VBool Bool
     | VBools (List Bool)
     | VObject (List Value)
+    | VKeyValue String Value
     | Values (List Value)
     | VSignal String
     | VColor ColorValue
@@ -1381,8 +1384,7 @@ type Value
     | VIfElse String (List Value) (List Value)
 
 
-{-| Top-level Vega properties. These are for testing purposes only prior to full
-Vega spec generatation being made available.
+{-| Top-level Vega properties.
 -}
 type VProperty
     = VName
@@ -1763,6 +1765,13 @@ branches of the test.
 ifElse : String -> List Value -> List Value -> Value
 ifElse condition thenVals elseVals =
     VIfElse condition thenVals elseVals
+
+
+{-| Represents a custom key-value pair to be stored in an object.
+-}
+keyValue : String -> Value -> Value
+keyValue =
+    VKeyValue
 
 
 {-| Create a single legend used to visualize a colour, size or shape mapping.
@@ -2187,8 +2196,8 @@ vScale =
 {-| A value representing a signal by its name.
 -}
 vSignal : String -> Value
-vSignal sigRef =
-    VSignal sigRef
+vSignal =
+    VSignal
 
 
 {-| A string value.
@@ -3874,15 +3883,6 @@ valRef vs =
 
 valueProperty : Value -> LabelledSpec
 valueProperty val =
-    let
-        evaluate val =
-            case val of
-                VNumber x ->
-                    JE.float x
-
-                _ ->
-                    valueSpec val
-    in
     case val of
         VSignal sig ->
             signalReferenceProperty sig
@@ -3896,17 +3896,20 @@ valueProperty val =
         VScale fVal ->
             ( "scale", fieldValueSpec fVal )
 
+        VKeyValue key val ->
+            ( key, valueSpec val )
+
         VBand x ->
             ( "band", JE.float x )
 
         VExponent val ->
-            ( "exponent", evaluate val )
+            ( "exponent", valueSpec val )
 
         VMultiply val ->
-            ( "mult", evaluate val )
+            ( "mult", valueSpec val )
 
         VOffset val ->
-            ( "offset", evaluate val )
+            ( "offset", valueSpec val )
 
         VRound b ->
             ( "round", JE.bool b )
@@ -3984,6 +3987,9 @@ valueSpec val =
 
         VNumbers nums ->
             JE.list (List.map JE.float nums)
+
+        VKeyValue key val ->
+            JE.object [ ( key, valueSpec val ) ]
 
         VObject objs ->
             JE.object (List.map valueProperty objs)

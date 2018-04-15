@@ -1400,61 +1400,60 @@ scatterplot4 =
                     [ SiValue (vStr "95% Confidence Interval")
                     , SiBind (ISelect [ InOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
                     ]
-                << signal "lookup" [ SiValue (vStrs []) ]
-                << signal "outerPadding" [ SiValue (vNumber 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
-                << signal "height" [ SiUpdate "trellisExtent[1]" ]
+                << signal "lookup"
+                    [ SiValue
+                        (vObject
+                            [ keyValue "95% Confidence Interval" (vStr "ci")
+                            , keyValue "Standard Deviation" (vStr "stdev")
+                            , keyValue "Standard Error" (vStr "stderr")
+                            , keyValue "Interquartile Range" (vStr "iqr")
+                            ]
+                        )
+                    ]
+                << signal "measure" [ SiUpdate "lookup[errorMeasure]" ]
 
         sc =
             scales
                 << scale "xScale"
                     [ SType ScLinear
+                    , SRange (RDefault RWidth)
+                    , SDomain (DData [ DDataset "summary", DFields [ vStr "stdev0", vStr "stdev1" ] ])
                     , SRound True
                     , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Horsepower") ])
-                    , SRange (RDefault RWidth)
+                    , SZero False
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRound True
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Miles_per_Gallon") ])
+                    [ SType ScBand
                     , SRange (RDefault RHeight)
-                    ]
-                << scale "sizeScale"
-                    [ SType ScLinear
-                    , SRound True
-                    , SNice NFalse
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Acceleration") ])
-                    , SRange (RNumbers [ 4, 361 ])
+                    , SDomain (DData [ DDataset "summary", DField (vStr "variety"), DSort [ Op Max, ByField "mean", Descending ] ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Horsepower") ]
-                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Miles per gallon") ]
-
-        shapeEncoding =
-            [ MStrokeWidth [ vNumber 2 ]
-            , MOpacity [ vNumber 0.5 ]
-            , MStroke [ vStr "#4682b4" ]
-            , MShape [ symbolLabel SymCircle |> vStr ]
-            , MFill [ vStr "transparent" ]
-            ]
+                << axis "xScale" SBottom [ AxZIndex 1, AxTitle (vStr "Barley Yield") ]
+                << axis "yScale" SLeft [ AxTickCount 5, AxZIndex 1 ]
 
         mk =
             marks
-                << mark Symbol
-                    [ MFrom [ SData "cars" ]
+                << mark Rect
+                    [ MFrom [ SData "summary" ]
                     , MEncode
-                        [ Update <|
-                            [ MX [ vScale (FName "xScale"), vField (FName "Horsepower") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "Miles_per_Gallon") ]
-                            , MSize [ vScale (FName "sizeScale"), vField (FName "Acceleration") ]
+                        [ Enter [ MFill [ vStr "black" ], MHeight [ vNumber 1 ] ]
+                        , Update
+                            [ MX [ vScale (FName "xScale"), vSignal "datum[measure+'0']" ]
+                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
+                            , MX2 [ vScale (FName "xScale"), vSignal "datum[measure+'1']" ]
                             ]
-                                ++ shapeEncoding
+                        ]
+                    ]
+                << mark Symbol
+                    [ MFrom [ SData "summary" ]
+                    , MEncode
+                        [ Enter [ MFill [ vStr "back" ], MSize [ vNumber 40 ] ]
+                        , Update
+                            [ MX [ vScale (FName "xScale"), vField (FName "mean") ]
+                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
+                            ]
                         ]
                     ]
     in
