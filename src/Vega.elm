@@ -3,7 +3,7 @@ module Vega
         ( AggregateProperty
         , Autosize(..)
         , AxisElement(..)
-        , AxisProperty(..)
+        , AxisProperty
         , Bind(..)
         , CInterpolate(..)
         , ColorValue(..)
@@ -81,6 +81,28 @@ module Vega
         , argMin
         , autosize
         , average
+        , axDomain
+        , axEncode
+        , axFormat
+        , axGrid
+        , axGridScale
+        , axLabelBound
+        , axLabelFlush
+        , axLabelFlushOffset
+        , axLabelOverlap
+        , axLabelPadding
+        , axLabels
+        , axMaxExtent
+        , axMinExtent
+        , axOffset
+        , axPosition
+        , axTickCount
+        , axTickSize
+        , axTicks
+        , axTitle
+        , axTitlePadding
+        , axValues
+        , axZIndex
         , axes
         , axis
         , byField
@@ -305,6 +327,28 @@ Functions and types for declaring the input data to the visualization.
 @docs axes
 @docs axis
 @docs AxisProperty
+@docs axDomain
+@docs axEncode
+@docs axFormat
+@docs axGrid
+@docs axGridScale
+@docs axLabels
+@docs axLabelBound
+@docs axLabelFlush
+@docs axLabelFlushOffset
+@docs axLabelPadding
+@docs axLabelOverlap
+@docs axMinExtent
+@docs axMaxExtent
+@docs axOffset
+@docs axPosition
+@docs axTicks
+@docs axTickCount
+@docs axTickSize
+@docs axTitle
+@docs axTitlePadding
+@docs axValues
+@docs axZIndex
 @docs AxisElement
 @docs Side
 @docs OverlapStrategy
@@ -507,7 +551,6 @@ type AxisProperty
     | AxGrid Bool
     | AxGridScale String
     | AxLabels Bool
-      -- TODO: Check that AxLabelBound and Flush set to True is equivalent to setting to 1
     | AxLabelBound (Maybe Float)
     | AxLabelFlush (Maybe Float)
     | AxLabelFlushOffset Float
@@ -722,6 +765,184 @@ output field names provided by `agFields` and `agAs`. For details see the
 agOps : List Operation -> AggregateProperty
 agOps =
     AgOps
+
+
+{-| Indicates if the domain (the axis baseline) should be included as part of
+the axis
+-}
+axDomain : Bool -> AxisProperty
+axDomain =
+    AxDomain
+
+
+{-| Mark encodings for custom axis styling. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/axes/#custom).
+-}
+axEncode : List ( AxisElement, List EncodingProperty ) -> AxisProperty
+axEncode =
+    AxEncode
+
+
+{-| The format specifier pattern for axis labels. For numerical values, must be
+a legal [d3-format specifier](https://github.com/d3/d3-format#locale_format).
+For date-time values, must be a legal
+[d3-time-format](https://github.com/d3/d3-time-format#locale_format) specifier.
+-}
+axFormat : String -> AxisProperty
+axFormat =
+    AxFormat
+
+
+{-| Indicates if grid lines should be included as part of the axis.
+-}
+axGrid : Bool -> AxisProperty
+axGrid =
+    AxGrid
+
+
+{-| Name of the scale to use for including grid lines. By default grid lines are
+driven by the same scale as the ticks and labels.
+-}
+axGridScale : String -> AxisProperty
+axGridScale =
+    AxGridScale
+
+
+{-| Indicates if labels should be hidden if they exceed the axis range. If the
+parameter is `Nothing`, no check for label size is made. A `Just` value specifies
+the permitted overlow in pixels that can be tolerated.
+-}
+axLabelBound : Maybe Float -> AxisProperty
+axLabelBound =
+    AxLabelBound
+
+
+{-| Indicates if labels at the beginning or end of the axis should be aligned
+flush with the scale range. If `Just` a pixel distance threshold, labels with
+anchor coordinates within the threshold distance for an axis end-point will be
+flush-adjusted. If `Nothing`, no flush alignment will be applied.
+-}
+axLabelFlush : Maybe Float -> AxisProperty
+axLabelFlush =
+    AxLabelFlush
+
+
+{-| Indicates the number of pixels by which to offset flush-adjusted labels
+(default 0). For example, a value of 2 will push flush-adjusted labels 2 pixels
+outward from the centre of the axis. Offsets can help the labels better visually
+group with corresponding axis ticks.
+-}
+axLabelFlushOffset : Float -> AxisProperty
+axLabelFlushOffset =
+    AxLabelFlushOffset
+
+
+{-| The strategy to use for resolving overlap of axis labels.
+-}
+axLabelOverlap : OverlapStrategy -> AxisProperty
+axLabelOverlap =
+    AxLabelOverlap
+
+
+{-| The padding in pixels between labels and ticks.
+-}
+axLabelPadding : Float -> AxisProperty
+axLabelPadding =
+    AxLabelPadding
+
+
+{-| A boolean flag indicating if labels should be included as part of the axis.
+-}
+axLabels : Bool -> AxisProperty
+axLabels =
+    AxLabels
+
+
+{-| The maximum extent in pixels that axis ticks and labels should use. This
+determines a maximum offset value for axis titles.
+-}
+axMaxExtent : Num -> AxisProperty
+axMaxExtent =
+    AxMaxExtent
+
+
+{-| The minimum extent in pixels that axis ticks and labels should use. This
+determines a minimum offset value for axis titles.
+-}
+axMinExtent : Num -> AxisProperty
+axMinExtent =
+    AxMinExtent
+
+
+{-| The orthogonal offset in pixels by which to displace the axis from its position
+along the edge of the chart.
+-}
+axOffset : Num -> AxisProperty
+axOffset =
+    AxOffset
+
+
+{-| The anchor position of the axis in pixels. For x-axes with top or bottom
+orientation, this sets the axis group x coordinate. For y-axes with left or right
+orientation, this sets the axis group y coordinate.
+-}
+axPosition : Num -> AxisProperty
+axPosition =
+    AxPosition
+
+
+{-| Indicates if ticks should be included as part of the axis.
+-}
+axTicks : Bool -> AxisProperty
+axTicks =
+    AxTicks
+
+
+{-| A desired number of ticks, for axes visualizing quantitative scales. The
+resulting number may be different so that values are “nice” (multiples of 2, 5, 10)
+and lie within the underlying scale’s range.
+-}
+axTickCount : Int -> AxisProperty
+axTickCount =
+    AxTickCount
+
+
+{-| The size in pixels of axis ticks.
+-}
+axTickSize : Float -> AxisProperty
+axTickSize =
+    AxTickSize
+
+
+{-| A title for the axis.
+-}
+axTitle : Str -> AxisProperty
+axTitle =
+    AxTitle
+
+
+{-| The offset in pixels between the axis labels and axis title.
+-}
+axTitlePadding : Float -> AxisProperty
+axTitlePadding =
+    AxTitlePadding
+
+
+{-| Explicitly set axis tick and label values.
+-}
+axValues : List Value -> AxisProperty
+axValues =
+    AxValues
+
+
+{-| The z-index indicating the layering of the axis group relative to other axis,
+mark and legend groups. The default value is 0 and axes and grid lines are drawn
+behind any marks defined in the same specification level. Higher values (1) will
+cause axes and grid lines to be drawn on top of marks.
+-}
+axZIndex : Int -> AxisProperty
+axZIndex =
+    AxZIndex
 
 
 {-| Specify the data format when loading or generating a data set. For details see the

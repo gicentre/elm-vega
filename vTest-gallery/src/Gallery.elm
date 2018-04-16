@@ -136,8 +136,8 @@ barChart2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1 ]
-                << axis "yScale" SLeft [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "yScale" SLeft [ axZIndex 1 ]
 
         mk =
             marks
@@ -196,7 +196,7 @@ barChart3 =
 
         ax =
             axes
-                << axis "yScale" SLeft [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
+                << axis "yScale" SLeft [ axTickSize 0, axLabelPadding 4, axZIndex 1 ]
                 << axis "xScale" SBottom []
 
         nestedSi =
@@ -301,7 +301,7 @@ barChart4 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxDomain True ]
+            axes << axis "xScale" SBottom [ axDomain True ]
 
         nestedSc =
             scales
@@ -316,7 +316,7 @@ barChart4 =
 
         nestedAx =
             axes
-                << axis "yScale" SLeft [ AxTicks False, AxDomain False, AxLabelPadding 4 ]
+                << axis "yScale" SLeft [ axTicks False, axDomain False, axLabelPadding 4 ]
 
         nestedMk =
             marks
@@ -464,7 +464,7 @@ barChart5 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxFormat "s" ]
+            axes << axis "xScale" SBottom [ axFormat "s" ]
     in
     toVega
         [ height 400, padding (PSize 5), ds, si [], topSc [], topMk [] ]
@@ -577,7 +577,7 @@ areaChart1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxTickCount 20 ]
+                << axis "xScale" SBottom [ axTickCount 20 ]
                 << axis "yScale" SLeft []
 
         mk =
@@ -635,8 +635,8 @@ areaChart2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1 ]
-                << axis "yScale" SLeft [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "yScale" SLeft [ axZIndex 1 ]
 
         mk =
             marks
@@ -713,7 +713,7 @@ areaChart3 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxTickCount 20 ]
+            axes << axis "xScale" SBottom [ axTickCount 20 ]
 
         mk =
             marks
@@ -855,14 +855,14 @@ areaChart4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxFormat "d", AxTickCount 15 ]
+                << axis "xScale" SBottom [ axFormat "d", axTickCount 15 ]
                 << axis "yScale"
                     SRight
-                    [ AxFormat "%"
-                    , AxGrid True
-                    , AxDomain False
-                    , AxTickSize 12
-                    , AxEncode
+                    [ axFormat "%"
+                    , axGrid True
+                    , axDomain False
+                    , axTickSize 12
+                    , axEncode
                         [ ( EGrid, [ Enter [ MStroke [ vStr "#ccc" ] ] ] )
                         , ( ETicks, [ Enter [ MStroke [ vStr "#ccc" ] ] ] )
                         ]
@@ -1066,8 +1066,8 @@ scatterplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (str "Horsepower") ]
-                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (str "Miles per gallon") ]
+                << axis "xScale" SBottom [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Horsepower") ]
+                << axis "yScale" SLeft [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Miles per gallon") ]
 
         shapeEncoding =
             [ MStrokeWidth [ vNumber 2 ]
@@ -1140,8 +1140,8 @@ scatterplot2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxOffset (num 5), AxFormat "s", AxTitle (strSignal "xField") ]
-                << axis "yScale" SLeft [ AxOffset (num 5), AxFormat "s", AxTitle (strSignal "yField") ]
+                << axis "xScale" SBottom [ axOffset (num 5), axFormat "s", axTitle (strSignal "xField") ]
+                << axis "yScale" SLeft [ axOffset (num 5), axFormat "s", axTitle (strSignal "yField") ]
 
         mk =
             marks
@@ -1274,11 +1274,11 @@ scatterplot3 =
             axes
                 << axis "xScale"
                     STop
-                    [ AxTickCount 5
-                    , AxTickSize 0
-                    , AxGrid True
-                    , AxDomain False
-                    , AxEncode
+                    [ axTickCount 5
+                    , axTickSize 0
+                    , axGrid True
+                    , axDomain False
+                    , axEncode
                         [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ Enter
@@ -1293,19 +1293,19 @@ scatterplot3 =
                     ]
                 << axis "xScale"
                     SBottom
-                    [ AxTitle (str "Miles driven per capita each year")
-                    , AxDomain False
-                    , AxTicks False
-                    , AxLabels False
+                    [ axTitle (str "Miles driven per capita each year")
+                    , axDomain False
+                    , axTicks False
+                    , axLabels False
                     ]
                 << axis "yScale"
                     SLeft
-                    [ AxTickCount 5
-                    , AxTickSize 0
-                    , AxGrid True
-                    , AxDomain False
-                    , AxFormat "$0.2f"
-                    , AxEncode
+                    [ axTickCount 5
+                    , axTickSize 0
+                    , axGrid True
+                    , axDomain False
+                    , axFormat "$0.2f"
+                    , axEncode
                         [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ Enter
@@ -1320,10 +1320,10 @@ scatterplot3 =
                     ]
                 << axis "yScale"
                     SRight
-                    [ AxTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
-                    , AxDomain False
-                    , AxTicks False
-                    , AxLabels False
+                    [ axTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
+                    , axDomain False
+                    , axTicks False
+                    , axLabels False
                     ]
 
         mk =
@@ -1430,8 +1430,8 @@ scatterplot4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1, AxTitle (str "Barley Yield") ]
-                << axis "yScale" SLeft [ AxTickCount 5, AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1, axTitle (str "Barley Yield") ]
+                << axis "yScale" SLeft [ axTickCount 5, axZIndex 1 ]
 
         mk =
             marks
