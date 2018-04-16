@@ -11,10 +11,10 @@ module Vega
         , Cursor(..)
         , DataColumn
         , DataProperty(..)
-        , DataReference(..)
+        , DataReference
         , DataRow
         , DataTable
-        , DataType(..)
+        , DataType
         , EncodingProperty(..)
         , EventHandler(..)
         , Expr(..)
@@ -48,7 +48,7 @@ module Vega
         , ScaleRange(..)
         , SchemeProperty(..)
         , Side(..)
-        , SignalBoolean(..)
+        , SignalBool(..)
         , SignalNumber(..)
         , SignalProperty(..)
         , SignalString(..)
@@ -74,6 +74,11 @@ module Vega
         , axis
         , combineSpecs
         , cursorLabel
+        , dDataset
+        , dField
+        , dFields
+        , dReferences
+        , dSort
         , data
         , dataColumn
         , dataFromColumns
@@ -81,6 +86,10 @@ module Vega
         , dataRow
         , dataSource
         , dirLabel
+        , foBool
+        , foDate
+        , foNumber
+        , foUtc
         , hAlignLabel
         , height
         , ifElse
@@ -165,7 +174,16 @@ Functions and types for declaring the input data to the visualization.
 @docs DataRow
 @docs DataTable
 @docs DataReference
+@docs dDataset
+@docs dField
+@docs dFields
+@docs dReferences
+@docs dSort
 @docs DataType
+@docs foBool
+@docs foNumber
+@docs foDate
+@docs foUtc
 @docs Format
 @docs SortProperty
 @docs Source
@@ -243,7 +261,7 @@ Functions and types for declaring the input data to the visualization.
 @docs sigHeight
 @docs sigWidth
 @docs sigPadding
-@docs SignalBoolean
+@docs SignalBool
 @docs SignalNumber
 @docs SignalString
 @docs SignalProperty
@@ -551,42 +569,13 @@ type DataReference
     | DSort (List SortProperty)
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
-and `FoUtc`, the formatting specification can be specified using
-[D3's formatting specifiers](https://github.com/d3/d3-time-format#locale_format) or
-left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default parsing of dates though as different browsers can
-parse dates differently. Being explicit about the date format is usually safer.
+{-| Indicates the type of data to be parsed when reading input data.
 -}
 type DataType
     = FoNumber
-    | FoBoolean
+    | FoBool
     | FoDate String
     | FoUtc String
-
-
-
--- {-| A single data value. This is used when a function can accept values of different
--- types (e.g. either a number or a string).
--- -}
--- type DataValue
---     = Boolean Bool
---     | Number Float
---     | Str String
---     | Empty
---     | Null
---
---
--- {-| A list of data values. This is used when a function can accept lists of
--- different types (e.g. either a list of numbers or a list of strings).
--- TODO: Check DateTimes only accept strings.
--- -}
--- type DataValues
---     = Booleans (List Bool)
---     | DateTimes (List String)
---     | Numbers (List Float)
---     | Strings (List String)
---     | DataValues (List DataValues)
 
 
 {-| Indicates the charactersitcs of an encoding. For further
@@ -955,7 +944,7 @@ type PieProperty
     = PiField Field
     | PiStartAngle SignalNumber
     | PiEndAngle SignalNumber
-    | PiSort SignalBoolean
+    | PiSort SignalBool
     | PiAs String String
 
 
@@ -1112,7 +1101,7 @@ type Side
 {-| Represents a boolean value that can either be a literal `SigBool` or signal that
 references a boolean value.
 -}
-type SignalBoolean
+type SignalBool
     = SigBool Bool
     | SigBoolRef String
 
@@ -1451,7 +1440,7 @@ axis scName side aps =
 
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
-a single page with multiple visulizualizations.
+a single page with multiple visualizations.
 
     combineSpecs
         [ ( "vis1", myFirstVis )
@@ -1721,6 +1710,46 @@ dataSource dataTables =
     ( VData, JE.list (List.map JE.object dataTables) )
 
 
+{-| Reference a dataset with the given name. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+dDataset : String -> DataReference
+dDataset =
+    DDataset
+
+
+{-| Reference a data field with the given value. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+dField : Value -> DataReference
+dField =
+    DField
+
+
+{-| Reference a collection of data fields with the given values. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+dFields : List Value -> DataReference
+dFields =
+    DFields
+
+
+{-| Reference a collection of nested data references. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+dReferences : List DataReference -> DataReference
+dReferences =
+    DReferences
+
+
+{-| Sort a data reference. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+dSort : List SortProperty -> DataReference
+dSort =
+    DSort
+
+
 {-| A convenience function for generating a text string representing a given text
 direction type. This can be used instead of specifying an direction type as a
 literal string to avoid problems of mistyping its name.
@@ -1736,6 +1765,42 @@ dirLabel dir =
 
         RightToLeft ->
             "rtl"
+
+
+{-| Indicate a boolean format for parsing data.
+-}
+foBool : DataType
+foBool =
+    FoBool
+
+
+{-| Indicate a date format for parsing data. For details of how to specify a date, see
+[D3's formatting specifiers](https://github.com/d3/d3-time-format#locale_format). An empty
+string will indicate detault date formatting should be applied, but note that care should be
+taken as different browsers may have different default date parsing. Being explicit about the
+date format is usually safer.
+-}
+foDate : String -> DataType
+foDate =
+    FoDate
+
+
+{-| Indicate a numeric format for parsing data.
+-}
+foNumber : DataType
+foNumber =
+    FoNumber
+
+
+{-| Indicate a utc date format for parsing data. For details of how to specify a date, see
+[D3's formatting specifiers](https://github.com/d3/d3-time-format#locale_format). An empty
+string will indicate detault date formatting should be applied, but note that care should be
+taken as different browsers may have different default date parsing. Being explicit about the
+date format is usually safer.
+-}
+foUtc : String -> DataType
+foUtc =
+    FoUtc
 
 
 {-| A convenience function for generating a text string representing a horizontal
@@ -2633,7 +2698,7 @@ foDataTypeSpec dType =
         FoNumber ->
             JE.string "number"
 
-        FoBoolean ->
+        FoBool ->
             JE.string "boolean"
 
         FoDate dateFmt ->
@@ -3484,7 +3549,7 @@ sideLabel orient =
             "top"
 
 
-signalBoolSpec : SignalBoolean -> Spec
+signalBoolSpec : SignalBool -> Spec
 signalBoolSpec sigBool =
     case sigBool of
         SigBool b ->

@@ -129,7 +129,7 @@ stackTest1 =
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (vStr "y1") ])
+                    , SDomain (DData [ dDataset "table", dField (vStr "y1") ])
                     , SRange (RDefault RHeight)
                     , SRound True
                     ]
