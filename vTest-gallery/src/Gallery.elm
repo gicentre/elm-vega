@@ -264,7 +264,7 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ TAggregate [ AgGroupBy [ "a", "b" ], AgFields [ "c" ], AgOps [ Average ], AgAs [ "c" ] ] ]
+                    [ TAggregate [ AgGroupBy [ "a", "b" ], AgFields [ "c" ], AgOps [ average ], AgAs [ "c" ] ] ]
 
         trTable =
             data "trellis" [ dSource "tuples" ]
@@ -778,7 +778,7 @@ areaChart4 =
                     [ TAggregate
                         [ AgGroupBy [ "job", "sex" ]
                         , AgFields [ "perc", "perc" ]
-                        , AgOps [ Sum, ArgMax ]
+                        , AgOps [ sum, argMax ]
                         , AgAs [ "sum", "argmax" ]
                         ]
                     ]
@@ -1384,7 +1384,7 @@ scatterplot4 =
                         [ TAggregate
                             [ AgGroupBy [ "variety" ]
                             , AgFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
-                            , AgOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
+                            , AgOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
                             , AgAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
                         , TFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
@@ -1425,7 +1425,7 @@ scatterplot4 =
                 << scale "yScale"
                     [ SType ScBand
                     , SRange (RDefault RHeight)
-                    , SDomain (DoData [ dDataset "summary", dField (str "variety"), dSort [ Op Max, ByField "mean", Descending ] ])
+                    , SDomain (DoData [ dDataset "summary", dField (str "variety"), dSort [ op maximum, byField (str "mean"), Descending ] ])
                     ]
 
         ax =

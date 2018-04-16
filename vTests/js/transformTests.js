@@ -8546,7 +8546,7 @@ var _user$project$Vega$opSpec = function (op) {
 			return _elm_lang$core$Json_Encode$string('q3');
 		case 'Stdev':
 			return _elm_lang$core$Json_Encode$string('stdev');
-		case 'StdevP':
+		case 'Stdevp':
 			return _elm_lang$core$Json_Encode$string('stdevp');
 		case 'Sum':
 			return _elm_lang$core$Json_Encode$string('sum');
@@ -8579,7 +8579,7 @@ var _user$project$Vega$sortProperty = function (sp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p17._0)
+				_1: _user$project$Vega$strSpec(_p17._0)
 			};
 		default:
 			return {
@@ -12213,18 +12213,25 @@ var _user$project$Vega$FName = function (a) {
 var _user$project$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
+var _user$project$Vega$parse = _user$project$Vega$Parse;
 var _user$project$Vega$TopojsonMesh = function (a) {
 	return {ctor: 'TopojsonMesh', _0: a};
 };
+var _user$project$Vega$topojsonMesh = _user$project$Vega$TopojsonMesh;
 var _user$project$Vega$TopojsonFeature = function (a) {
 	return {ctor: 'TopojsonFeature', _0: a};
 };
+var _user$project$Vega$topojsonFeature = _user$project$Vega$TopojsonFeature;
 var _user$project$Vega$DSV = function (a) {
 	return {ctor: 'DSV', _0: a};
 };
+var _user$project$Vega$dsv = _user$project$Vega$DSV;
 var _user$project$Vega$TSV = {ctor: 'TSV'};
+var _user$project$Vega$tsv = _user$project$Vega$TSV;
 var _user$project$Vega$CSV = {ctor: 'CSV'};
+var _user$project$Vega$csv = _user$project$Vega$CSV;
 var _user$project$Vega$JSON = {ctor: 'JSON'};
+var _user$project$Vega$json = _user$project$Vega$JSON;
 var _user$project$Vega$AlwaysUpdate = {ctor: 'AlwaysUpdate'};
 var _user$project$Vega$InitOnly = {ctor: 'InitOnly'};
 var _user$project$Vega$AlignRight = {ctor: 'AlignRight'};
@@ -12525,27 +12532,48 @@ var _user$project$Vega$MX2 = function (a) {
 var _user$project$Vega$MX = function (a) {
 	return {ctor: 'MX', _0: a};
 };
-var _user$project$Vega$VarianceP = {ctor: 'VarianceP'};
+var _user$project$Vega$Variancep = {ctor: 'Variancep'};
+var _user$project$Vega$variancep = _user$project$Vega$Variancep;
 var _user$project$Vega$Variance = {ctor: 'Variance'};
+var _user$project$Vega$variance = _user$project$Vega$Variance;
 var _user$project$Vega$Valid = {ctor: 'Valid'};
+var _user$project$Vega$valid = _user$project$Vega$Valid;
 var _user$project$Vega$Sum = {ctor: 'Sum'};
-var _user$project$Vega$StdevP = {ctor: 'StdevP'};
+var _user$project$Vega$sum = _user$project$Vega$Sum;
+var _user$project$Vega$Stdevp = {ctor: 'Stdevp'};
+var _user$project$Vega$stdevp = _user$project$Vega$Stdevp;
 var _user$project$Vega$Stdev = {ctor: 'Stdev'};
+var _user$project$Vega$stdev = _user$project$Vega$Stdev;
 var _user$project$Vega$Stderr = {ctor: 'Stderr'};
+var _user$project$Vega$stderr = _user$project$Vega$Stderr;
 var _user$project$Vega$Q3 = {ctor: 'Q3'};
+var _user$project$Vega$q3 = _user$project$Vega$Q3;
 var _user$project$Vega$Q1 = {ctor: 'Q1'};
+var _user$project$Vega$q1 = _user$project$Vega$Q1;
 var _user$project$Vega$Missing = {ctor: 'Missing'};
+var _user$project$Vega$missing = _user$project$Vega$Missing;
 var _user$project$Vega$Min = {ctor: 'Min'};
+var _user$project$Vega$minimum = _user$project$Vega$Min;
 var _user$project$Vega$Median = {ctor: 'Median'};
+var _user$project$Vega$median = _user$project$Vega$Median;
 var _user$project$Vega$Mean = {ctor: 'Mean'};
+var _user$project$Vega$mean = _user$project$Vega$Mean;
 var _user$project$Vega$Max = {ctor: 'Max'};
+var _user$project$Vega$maximum = _user$project$Vega$Max;
 var _user$project$Vega$Distinct = {ctor: 'Distinct'};
+var _user$project$Vega$distinct = _user$project$Vega$Distinct;
 var _user$project$Vega$Count = {ctor: 'Count'};
+var _user$project$Vega$count = _user$project$Vega$Count;
 var _user$project$Vega$CI1 = {ctor: 'CI1'};
+var _user$project$Vega$ci1 = _user$project$Vega$CI1;
 var _user$project$Vega$CI0 = {ctor: 'CI0'};
+var _user$project$Vega$ci0 = _user$project$Vega$CI0;
 var _user$project$Vega$Average = {ctor: 'Average'};
+var _user$project$Vega$average = _user$project$Vega$Average;
 var _user$project$Vega$ArgMin = {ctor: 'ArgMin'};
+var _user$project$Vega$argMin = _user$project$Vega$ArgMin;
 var _user$project$Vega$ArgMax = {ctor: 'ArgMax'};
+var _user$project$Vega$argMax = _user$project$Vega$ArgMax;
 var _user$project$Vega$OGreedy = {ctor: 'OGreedy'};
 var _user$project$Vega$OParity = {ctor: 'OParity'};
 var _user$project$Vega$ONone = {ctor: 'ONone'};
@@ -12805,9 +12833,11 @@ var _user$project$Vega$signal = F2(
 var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
+var _user$project$Vega$byField = _user$project$Vega$ByField;
 var _user$project$Vega$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
+var _user$project$Vega$op = _user$project$Vega$Op;
 var _user$project$Vega$Descending = {ctor: 'Descending'};
 var _user$project$Vega$Ascending = {ctor: 'Ascending'};
 var _user$project$Vega$dataRefProperty = function (dataRef) {

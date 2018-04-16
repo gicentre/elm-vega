@@ -8546,7 +8546,7 @@ var _gicentre$elm_vega$Vega$opSpec = function (op) {
 			return _elm_lang$core$Json_Encode$string('q3');
 		case 'Stdev':
 			return _elm_lang$core$Json_Encode$string('stdev');
-		case 'StdevP':
+		case 'Stdevp':
 			return _elm_lang$core$Json_Encode$string('stdevp');
 		case 'Sum':
 			return _elm_lang$core$Json_Encode$string('sum');
@@ -8579,7 +8579,7 @@ var _gicentre$elm_vega$Vega$sortProperty = function (sp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p17._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p17._0)
 			};
 		default:
 			return {
@@ -12213,18 +12213,25 @@ var _gicentre$elm_vega$Vega$FName = function (a) {
 var _gicentre$elm_vega$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
+var _gicentre$elm_vega$Vega$parse = _gicentre$elm_vega$Vega$Parse;
 var _gicentre$elm_vega$Vega$TopojsonMesh = function (a) {
 	return {ctor: 'TopojsonMesh', _0: a};
 };
+var _gicentre$elm_vega$Vega$topojsonMesh = _gicentre$elm_vega$Vega$TopojsonMesh;
 var _gicentre$elm_vega$Vega$TopojsonFeature = function (a) {
 	return {ctor: 'TopojsonFeature', _0: a};
 };
+var _gicentre$elm_vega$Vega$topojsonFeature = _gicentre$elm_vega$Vega$TopojsonFeature;
 var _gicentre$elm_vega$Vega$DSV = function (a) {
 	return {ctor: 'DSV', _0: a};
 };
+var _gicentre$elm_vega$Vega$dsv = _gicentre$elm_vega$Vega$DSV;
 var _gicentre$elm_vega$Vega$TSV = {ctor: 'TSV'};
+var _gicentre$elm_vega$Vega$tsv = _gicentre$elm_vega$Vega$TSV;
 var _gicentre$elm_vega$Vega$CSV = {ctor: 'CSV'};
+var _gicentre$elm_vega$Vega$csv = _gicentre$elm_vega$Vega$CSV;
 var _gicentre$elm_vega$Vega$JSON = {ctor: 'JSON'};
+var _gicentre$elm_vega$Vega$json = _gicentre$elm_vega$Vega$JSON;
 var _gicentre$elm_vega$Vega$AlwaysUpdate = {ctor: 'AlwaysUpdate'};
 var _gicentre$elm_vega$Vega$InitOnly = {ctor: 'InitOnly'};
 var _gicentre$elm_vega$Vega$AlignRight = {ctor: 'AlignRight'};
@@ -12525,27 +12532,48 @@ var _gicentre$elm_vega$Vega$MX2 = function (a) {
 var _gicentre$elm_vega$Vega$MX = function (a) {
 	return {ctor: 'MX', _0: a};
 };
-var _gicentre$elm_vega$Vega$VarianceP = {ctor: 'VarianceP'};
+var _gicentre$elm_vega$Vega$Variancep = {ctor: 'Variancep'};
+var _gicentre$elm_vega$Vega$variancep = _gicentre$elm_vega$Vega$Variancep;
 var _gicentre$elm_vega$Vega$Variance = {ctor: 'Variance'};
+var _gicentre$elm_vega$Vega$variance = _gicentre$elm_vega$Vega$Variance;
 var _gicentre$elm_vega$Vega$Valid = {ctor: 'Valid'};
+var _gicentre$elm_vega$Vega$valid = _gicentre$elm_vega$Vega$Valid;
 var _gicentre$elm_vega$Vega$Sum = {ctor: 'Sum'};
-var _gicentre$elm_vega$Vega$StdevP = {ctor: 'StdevP'};
+var _gicentre$elm_vega$Vega$sum = _gicentre$elm_vega$Vega$Sum;
+var _gicentre$elm_vega$Vega$Stdevp = {ctor: 'Stdevp'};
+var _gicentre$elm_vega$Vega$stdevp = _gicentre$elm_vega$Vega$Stdevp;
 var _gicentre$elm_vega$Vega$Stdev = {ctor: 'Stdev'};
+var _gicentre$elm_vega$Vega$stdev = _gicentre$elm_vega$Vega$Stdev;
 var _gicentre$elm_vega$Vega$Stderr = {ctor: 'Stderr'};
+var _gicentre$elm_vega$Vega$stderr = _gicentre$elm_vega$Vega$Stderr;
 var _gicentre$elm_vega$Vega$Q3 = {ctor: 'Q3'};
+var _gicentre$elm_vega$Vega$q3 = _gicentre$elm_vega$Vega$Q3;
 var _gicentre$elm_vega$Vega$Q1 = {ctor: 'Q1'};
+var _gicentre$elm_vega$Vega$q1 = _gicentre$elm_vega$Vega$Q1;
 var _gicentre$elm_vega$Vega$Missing = {ctor: 'Missing'};
+var _gicentre$elm_vega$Vega$missing = _gicentre$elm_vega$Vega$Missing;
 var _gicentre$elm_vega$Vega$Min = {ctor: 'Min'};
+var _gicentre$elm_vega$Vega$minimum = _gicentre$elm_vega$Vega$Min;
 var _gicentre$elm_vega$Vega$Median = {ctor: 'Median'};
+var _gicentre$elm_vega$Vega$median = _gicentre$elm_vega$Vega$Median;
 var _gicentre$elm_vega$Vega$Mean = {ctor: 'Mean'};
+var _gicentre$elm_vega$Vega$mean = _gicentre$elm_vega$Vega$Mean;
 var _gicentre$elm_vega$Vega$Max = {ctor: 'Max'};
+var _gicentre$elm_vega$Vega$maximum = _gicentre$elm_vega$Vega$Max;
 var _gicentre$elm_vega$Vega$Distinct = {ctor: 'Distinct'};
+var _gicentre$elm_vega$Vega$distinct = _gicentre$elm_vega$Vega$Distinct;
 var _gicentre$elm_vega$Vega$Count = {ctor: 'Count'};
+var _gicentre$elm_vega$Vega$count = _gicentre$elm_vega$Vega$Count;
 var _gicentre$elm_vega$Vega$CI1 = {ctor: 'CI1'};
+var _gicentre$elm_vega$Vega$ci1 = _gicentre$elm_vega$Vega$CI1;
 var _gicentre$elm_vega$Vega$CI0 = {ctor: 'CI0'};
+var _gicentre$elm_vega$Vega$ci0 = _gicentre$elm_vega$Vega$CI0;
 var _gicentre$elm_vega$Vega$Average = {ctor: 'Average'};
+var _gicentre$elm_vega$Vega$average = _gicentre$elm_vega$Vega$Average;
 var _gicentre$elm_vega$Vega$ArgMin = {ctor: 'ArgMin'};
+var _gicentre$elm_vega$Vega$argMin = _gicentre$elm_vega$Vega$ArgMin;
 var _gicentre$elm_vega$Vega$ArgMax = {ctor: 'ArgMax'};
+var _gicentre$elm_vega$Vega$argMax = _gicentre$elm_vega$Vega$ArgMax;
 var _gicentre$elm_vega$Vega$OGreedy = {ctor: 'OGreedy'};
 var _gicentre$elm_vega$Vega$OParity = {ctor: 'OParity'};
 var _gicentre$elm_vega$Vega$ONone = {ctor: 'ONone'};
@@ -12805,9 +12833,11 @@ var _gicentre$elm_vega$Vega$signal = F2(
 var _gicentre$elm_vega$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
+var _gicentre$elm_vega$Vega$byField = _gicentre$elm_vega$Vega$ByField;
 var _gicentre$elm_vega$Vega$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
+var _gicentre$elm_vega$Vega$op = _gicentre$elm_vega$Vega$Op;
 var _gicentre$elm_vega$Vega$Descending = {ctor: 'Descending'};
 var _gicentre$elm_vega$Vega$Ascending = {ctor: 'Ascending'};
 var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
@@ -13810,10 +13840,11 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 													_0: _gicentre$elm_vega$Vega$dSort(
 														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$Op(_gicentre$elm_vega$Vega$Max),
+															_0: _gicentre$elm_vega$Vega$op(_gicentre$elm_vega$Vega$maximum),
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$ByField('mean'),
+																_0: _gicentre$elm_vega$Vega$byField(
+																	_gicentre$elm_vega$Vega$str('mean')),
 																_1: {
 																	ctor: '::',
 																	_0: _gicentre$elm_vega$Vega$Descending,
@@ -13981,25 +14012,25 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 										_0: _gicentre$elm_vega$Vega$AgOps(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Mean,
+												_0: _gicentre$elm_vega$Vega$mean,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$Stdev,
+													_0: _gicentre$elm_vega$Vega$stdev,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$Stderr,
+														_0: _gicentre$elm_vega$Vega$stderr,
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$CI0,
+															_0: _gicentre$elm_vega$Vega$ci0,
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$CI1,
+																_0: _gicentre$elm_vega$Vega$ci1,
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$Q1,
+																	_0: _gicentre$elm_vega$Vega$q1,
 																	_1: {
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$Q3,
+																		_0: _gicentre$elm_vega$Vega$q3,
 																		_1: {ctor: '[]'}
 																	}
 																}
@@ -17975,10 +18006,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 							_0: _gicentre$elm_vega$Vega$AgOps(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Sum,
+									_0: _gicentre$elm_vega$Vega$sum,
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$ArgMax,
+										_0: _gicentre$elm_vega$Vega$argMax,
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -21077,7 +21108,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 							_0: _gicentre$elm_vega$Vega$AgOps(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$Average,
+									_0: _gicentre$elm_vega$Vega$average,
 									_1: {ctor: '[]'}
 								}),
 							_1: {

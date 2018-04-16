@@ -22,7 +22,7 @@ module Vega
         , Facet(..)
         , Field
         , FieldValue(..)
-        , Format(..)
+        , Format
         , FormulaUpdate(..)
         , HAlign(..)
         , InputProperty(..)
@@ -35,7 +35,7 @@ module Vega
         , MarkOrientation(..)
         , MarkProperty(..)
         , Num
-        , Operation(..)
+        , Operation
         , Order(..)
         , OverlapStrategy(..)
         , PackProperty(..)
@@ -53,7 +53,7 @@ module Vega
         , SignalNumber(..)
         , SignalProperty(..)
         , SignalString(..)
-        , SortProperty(..)
+        , SortProperty(Ascending, Descending)
         , Source(..)
         , Spec
         , StackOffset(..)
@@ -71,10 +71,18 @@ module Vega
         , VAlign(..)
         , VProperty
         , Value
+        , argMax
+        , argMin
         , autosize
+        , average
         , axes
         , axis
+        , byField
+        , ci0
+        , ci1
         , combineSpecs
+        , count
+        , csv
         , cursorLabel
         , dDataset
         , dField
@@ -95,6 +103,8 @@ module Vega
         , dataRow
         , dataSource
         , dirLabel
+        , distinct
+        , dsv
         , foBool
         , foDate
         , foNumber
@@ -109,10 +119,19 @@ module Vega
         , markInterpolationLabel
         , markOrientationLabel
         , marks
+        , maximum
+        , mean
+        , median
+        , minimum
+        , missing
         , num
         , nums
         , on
+        , op
         , padding
+        , parse
+        , q1
+        , q3
         , scale
         , scales
         , sigHeight
@@ -120,15 +139,22 @@ module Vega
         , sigWidth
         , signal
         , signals
+        , stderr
+        , stdev
+        , stdevp
         , str
         , strSignal
         , strokeCapLabel
         , strokeJoinLabel
         , strs
+        , sum
         , symbolLabel
         , toVega
+        , topojsonFeature
+        , topojsonMesh
         , transform
         , trigger
+        , tsv
         , utc
         , vAlignLabel
         , vBand
@@ -149,6 +175,9 @@ module Vega
         , vStr
         , vStrs
         , vValues
+        , valid
+        , variance
+        , variancep
         , width
         )
 
@@ -198,12 +227,20 @@ Functions and types for declaring the input data to the visualization.
 @docs dFields
 @docs dReferences
 @docs dSort
+@docs op
+@docs byField
 @docs DataType
 @docs foBool
 @docs foNumber
 @docs foDate
 @docs foUtc
 @docs Format
+@docs csv
+@docs tsv
+@docs dsv
+@docs topojsonMesh
+@docs topojsonFeature
+@docs parse
 @docs SortProperty
 @docs Source
 @docs Trigger
@@ -223,6 +260,29 @@ Functions and types for declaring the input data to the visualization.
 @docs transform
 @docs Order
 @docs Comparator
+
+@docs op
+@docs argMax
+@docs argMin
+@docs average
+@docs ci0
+@docs ci1
+@docs count
+@docs distinct
+@docs maximum
+@docs mean
+@docs median
+@docs minimum
+@docs missing
+@docs q1
+@docs q3
+@docs stderr
+@docs stdev
+@docs stdevp
+@docs sum
+@docs valid
+@docs variance
+@docs variancep
 
 
 ## Axes
@@ -985,11 +1045,167 @@ type Operation
     | Q3
     | Stderr
     | Stdev
-    | StdevP
+    | Stdevp
     | Sum
     | Valid
     | Variance
-    | VarianceP
+    | Variancep
+
+
+{-| An aggregating operation providing an input data object containing the
+maximum field value.
+-}
+argMax : Operation
+argMax =
+    ArgMax
+
+
+{-| An aggregating operation providing an input data object containing the
+minimum field value.
+-}
+argMin : Operation
+argMin =
+    ArgMin
+
+
+{-| An aggregating operation to calculate the mean of a field. Synonymous with `mean`.
+-}
+average : Operation
+average =
+    Average
+
+
+{-| An aggregating operation to calculate the lower boundary of the bootstrapped
+95% confidence interval of the mean field value
+-}
+ci0 : Operation
+ci0 =
+    CI0
+
+
+{-| An aggregating operation to calculate the upper boundary of the bootstrapped
+95% confidence interval of the mean field value
+-}
+ci1 : Operation
+ci1 =
+    CI1
+
+
+{-| An aggregating operation to calculate the total number of values in a group.
+-}
+count : Operation
+count =
+    Count
+
+
+{-| An aggregating operation to calculate the number of distinct values in a group.
+-}
+distinct : Operation
+distinct =
+    Distinct
+
+
+{-| An aggregating operation to calculate the maximum value in a field.
+-}
+maximum : Operation
+maximum =
+    Max
+
+
+{-| An aggregating operation to calculate the mean of a field. Synonymous with `average`.
+-}
+mean : Operation
+mean =
+    Mean
+
+
+{-| An aggregating operation to calculate the median of a field.
+-}
+median : Operation
+median =
+    Median
+
+
+{-| An aggregating operation to calculate the minimum value in a field.
+-}
+minimum : Operation
+minimum =
+    Min
+
+
+{-| An aggregating operation to calculate the number of missing values in a field.
+-}
+missing : Operation
+missing =
+    Missing
+
+
+{-| An aggregating operation to calculate the lower quartile boundary of field values.
+-}
+q1 : Operation
+q1 =
+    Q1
+
+
+{-| An aggregating operation to calculate the lower quartile boundary of field values.
+-}
+q3 : Operation
+q3 =
+    Q3
+
+
+{-| An aggregating operation to calculate the standard error of the values in a field.
+-}
+stderr : Operation
+stderr =
+    Stderr
+
+
+{-| An aggregating operation to calculate the sample standard deviation of the
+values in a field.
+-}
+stdev : Operation
+stdev =
+    Stdev
+
+
+{-| An aggregating operation to calculate the population standard deviation of the
+values in a field.
+-}
+stdevp : Operation
+stdevp =
+    Stdevp
+
+
+{-| An aggregating operation to calculate the sum of the values in a field.
+-}
+sum : Operation
+sum =
+    Sum
+
+
+{-| An aggregating operation to calculate the number of valid values in a group.
+A valid value is considered one that is not `null`, not `undefined` and not `NaN`.
+-}
+valid : Operation
+valid =
+    Valid
+
+
+{-| An aggregating operation to calculate the sample variance of the values in
+a field.
+-}
+variance : Operation
+variance =
+    Variance
+
+
+{-| An aggregating operation to calculate the population variance of the values
+in a field.
+-}
+variancep : Operation
+variancep =
+    Variancep
 
 
 {-| Type of overlap strategy to be applied when there is not space to show all
@@ -1221,10 +1437,10 @@ type SortProperty
     = Ascending
     | Descending
     | Op Operation
-    | ByField String
+    | ByField Str
 
 
-{-| Indicates the data source for a set of marks. For details see the
+{-| The data source for a set of marks. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#from).
 -}
 type Source
@@ -1232,7 +1448,7 @@ type Source
     | SFacet (List Facet)
 
 
-{-| Represents a Vega specification. Specs can be (and usually are) nested.
+{-| A Vega specification. Specs can be (and usually are) nested.
 They can range from a single Boolean value up to the entire Vega specification.
 -}
 type alias Spec =
@@ -1546,6 +1762,13 @@ axis scName side aps =
     (::) (JE.object (AxScale scName :: AxSide side :: aps |> List.map axisProperty))
 
 
+{-| The field to be used when sorting.
+-}
+byField : Str -> SortProperty
+byField =
+    ByField
+
+
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
 a single page with multiple visualizations.
@@ -1560,6 +1783,14 @@ a single page with multiple visualizations.
 combineSpecs : List LabelledSpec -> Spec
 combineSpecs specs =
     JE.object specs
+
+
+{-| Indicates a CSV (comma separated value) format. Typically used when
+specifying a data url.
+-}
+csv : Format
+csv =
+    CSV
 
 
 {-| A convenience function for generating a text string representing a given cursor
@@ -1724,12 +1955,11 @@ to use the default formatting. See the
 for details.
 The columns themselves are most easily generated with `dataColumn`
 
-    TODO: Update example to use latest spec
     dataTable =
-        dataFromColumns "animals" [ Parse [ ( "Year", FDate "%Y" ) ] ]
-            << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
-            << dataColumn "Age" (Numbers [ 28, 12, 6 ])
-            << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
+        dataFromColumns "animals" [ parse [ ( "Year", FDate "%Y" ) ] ]
+            << dataColumn "Animal" (dStrs [ "Fish", "Dog", "Cat" ])
+            << dataColumn "Age" (dNumbers [ 28, 12, 6 ])
+            << dataColumn "Year" (dStrs [ "2010", "2014", "2015" ])
 
 -}
 dataFromColumns : String -> List Format -> List DataColumn -> DataTable
@@ -1763,10 +1993,10 @@ if you are creating data inline (as opposed to reading from a file), adding data
 in more efficent and less error-prone.
 
     dataTable =
-        dataFromRows "animals" [ Parse [ ( "Year", FDate "%Y" ) ] ]
-            << dataRow [ ( "Animal", Str "Fish" ), ( "Age", Number 28 ), ( "Year", Str "2010" ) ]
-            << dataRow [ ( "Animal", Str "Dog" ), ( "Age", Number 12 ), ( "Year", Str "2014" ) ]
-            << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
+        dataFromRows "animals" [ parse [ ( "Year", FDate "%Y" ) ] ]
+            << dataRow [ ( "Animal", vStr "Fish" ), ( "Age", vNumber 28 ), ( "Year", vStr "2010" ) ]
+            << dataRow [ ( "Animal", vStr "Dog" ), ( "Age", vNumber 12 ), ( "Year", vStr "2014" ) ]
+            << dataRow [ ( "Animal", vStr "Cat" ), ( "Age", vNumber 6 ), ( "Year", vStr "2015" ) ]
 
 -}
 dataFromRows : String -> List Format -> List DataRow -> DataTable
@@ -1786,8 +2016,8 @@ from an external file, from a named data source or inline literal values. See th
 [Vega documentation](https://vega.github.io/vega/docs/data/#propertiess) for details.
 
       dataSource
-          [ data "pop" [ DUrl "data/population.json" ]
-          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          [ data "pop" [ dUrl "data/population.json" ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
           ]
 
 -}
@@ -1814,11 +2044,11 @@ result of a transformation. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/data).
 
       dataSource
-          [ data "pop" [ DUrl "data/population.json" ]
-          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
-          , data "males" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
-          , data "females" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
-          , data "ageGroups" [ DSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          [ data "pop" [ dUrl "data/population.json" ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "males" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
+          , data "females" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
+          , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 
 -}
@@ -1851,6 +2081,23 @@ dFields =
     DFields
 
 
+{-| A convenience function for generating a text string representing a given text
+direction type. This can be used instead of specifying an direction type as a
+literal string to avoid problems of mistyping its name.
+
+    TODO: XXX Provide example
+
+-}
+dirLabel : TextDirection -> String
+dirLabel dir =
+    case dir of
+        LeftToRight ->
+            "ltr"
+
+        RightToLeft ->
+            "rtl"
+
+
 {-| Reference a collection of nested data references. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
 -}
@@ -1867,21 +2114,12 @@ dSort =
     DSort
 
 
-{-| A convenience function for generating a text string representing a given text
-direction type. This can be used instead of specifying an direction type as a
-literal string to avoid problems of mistyping its name.
-
-    TODO: XXX Provide example
-
+{-| Indicates a DSV (delimited separated value) format with a custom delimeter.
+Typically used when specifying a data url.
 -}
-dirLabel : TextDirection -> String
-dirLabel dir =
-    case dir of
-        LeftToRight ->
-            "ltr"
-
-        RightToLeft ->
-            "rtl"
+dsv : String -> Format
+dsv =
+    DSV
 
 
 {-| Indicate a boolean format for parsing data.
@@ -1958,6 +2196,13 @@ branches of the test.
 ifElse : String -> List Value -> List Value -> Value
 ifElse condition thenVals elseVals =
     VIfElse condition thenVals elseVals
+
+
+{-| Indicates a JSON format. Typically used when specifying a data url.
+-}
+json : Format
+json =
+    JSON
 
 
 {-| Represents a custom key-value pair to be stored in an object.
@@ -2085,6 +2330,13 @@ on triggerSpecs dTable =
     dTable ++ [ ( "on", JE.list triggerSpecs ) ]
 
 
+{-| A sorting operation.
+-}
+op : Operation -> SortProperty
+op =
+    Op
+
+
 {-| Set the padding around the visualization in pixel units. The way padding is
 interpreted will depend on the `autosize` properties. See the
 [Vega documentation](https://vega.github.io/vega/docs/specification/)
@@ -2096,6 +2348,15 @@ for details.
 padding : Padding -> ( VProperty, Spec )
 padding pad =
     ( VPadding, paddingSpec pad )
+
+
+{-| Indicates the parsing rules when processing some data text. The parameter is
+a list of tuples where each corresponds to a field name paired with its desired
+data type. Typically used when specifying a data url.
+-}
+parse : List ( String, DataType ) -> Format
+parse =
+    Parse
 
 
 {-| Create a single scale used to map data values to visual properties.
@@ -2247,6 +2508,24 @@ symbolLabel sym =
             svgPath
 
 
+{-| Indicates a topoJSON feature format. The first parameter should be the name
+of the object set to extract. Typically used when specifying a data url.
+-}
+topojsonFeature : String -> Format
+topojsonFeature =
+    TopojsonFeature
+
+
+{-| Indicates a topoJSON mesh format. The first parameter should be the name
+of the object set to extract. Unlike the `topojsonFeature`, the corresponding
+geo data are returned as a single, unified mesh instance, not as individual
+GeoJSON features. Typically used when specifying a data url.
+-}
+topojsonMesh : String -> Format
+topojsonMesh =
+    TopojsonMesh
+
+
 {-| Convert a list of Vega specifications into a single JSON object that may be
 passed to Vega for graphics generation.
 Currently this is a placeholder only and is not available for use.
@@ -2262,9 +2541,9 @@ toVega spec =
 For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
 
       dataSource
-          [ data "pop" [ DUrl "data/population.json" ]
-          , data "popYear" [ DSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
-          , data "ageGroups" [ DSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          [ data "pop" [ dUrl "data/population.json" ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 
 -}
@@ -2280,6 +2559,14 @@ a list of trigger actions.
 trigger : String -> List TriggerProperty -> Trigger
 trigger trName trProps =
     JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
+
+
+{-| Indicates a TSV (tab separated value) format. Typically used when specifying
+a data url.
+-}
+tsv : Format
+tsv =
+    TSV
 
 
 {-| Provides a UTC version of a given a time (coordinated universal time, independent
@@ -3416,7 +3703,7 @@ opSpec op =
         Stdev ->
             JE.string "stdev"
 
-        StdevP ->
+        Stdevp ->
             JE.string "stdevp"
 
         Sum ->
@@ -3431,7 +3718,7 @@ opSpec op =
         Variance ->
             JE.string "variance"
 
-        VarianceP ->
+        Variancep ->
             JE.string "variancep"
 
 
@@ -3798,7 +4085,7 @@ sortProperty sp =
             ( "order", JE.string "descending" )
 
         ByField field ->
-            ( "field", JE.string field )
+            ( "field", strSpec field )
 
         Op op ->
             ( "op", opSpec op )
