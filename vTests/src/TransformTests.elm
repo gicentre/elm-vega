@@ -33,7 +33,7 @@ packTest1 =
             signals
                 << signal "padding between circles"
                     [ SiValue (vNumber 0)
-                    , SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ])
+                    , SiBind (iRange [ InMin 0, InMax 10, InStep 0.1 ])
                     ]
 
         sc =
@@ -93,15 +93,15 @@ stackTest1 =
             signals
                 << signal "offset"
                     [ SiValue (vStr "zero")
-                    , SiBind (ISelect [ InOptions (vStrs [ "zero", "center", "normalize" ]) ])
+                    , SiBind (iSelect [ InOptions (vStrs [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
                     [ SiValue vNull
-                    , SiBind (IRadio [ InOptions (vStrs [ "null", "value" ]) ])
+                    , SiBind (iRadio [ InOptions (vStrs [ "null", "value" ]) ])
                     ]
                 << signal "sortOrder"
                     [ SiValue (vStr "ascending")
-                    , SiBind (IRadio [ InOptions (vStrs [ "ascending", "descending" ]) ])
+                    , SiBind (iRadio [ InOptions (vStrs [ "ascending", "descending" ]) ])
                     ]
                 << signal "add"
                     [ SiValue (vObject [])

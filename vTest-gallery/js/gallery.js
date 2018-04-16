@@ -11861,42 +11861,55 @@ var _gicentre$elm_vega$Vega$axis = F3(
 var _gicentre$elm_vega$Vega$IColor = function (a) {
 	return {ctor: 'IColor', _0: a};
 };
+var _gicentre$elm_vega$Vega$iColor = _gicentre$elm_vega$Vega$IColor;
 var _gicentre$elm_vega$Vega$ITel = function (a) {
 	return {ctor: 'ITel', _0: a};
 };
+var _gicentre$elm_vega$Vega$iTel = _gicentre$elm_vega$Vega$ITel;
 var _gicentre$elm_vega$Vega$IDateTimeLocal = function (a) {
 	return {ctor: 'IDateTimeLocal', _0: a};
 };
+var _gicentre$elm_vega$Vega$iDateTimeLocal = _gicentre$elm_vega$Vega$IDateTimeLocal;
 var _gicentre$elm_vega$Vega$IWeek = function (a) {
 	return {ctor: 'IWeek', _0: a};
 };
+var _gicentre$elm_vega$Vega$iWeek = _gicentre$elm_vega$Vega$IWeek;
 var _gicentre$elm_vega$Vega$IMonth = function (a) {
 	return {ctor: 'IMonth', _0: a};
 };
+var _gicentre$elm_vega$Vega$iMonth = _gicentre$elm_vega$Vega$IMonth;
 var _gicentre$elm_vega$Vega$ITime = function (a) {
 	return {ctor: 'ITime', _0: a};
 };
+var _gicentre$elm_vega$Vega$iTime = _gicentre$elm_vega$Vega$ITime;
 var _gicentre$elm_vega$Vega$IDate = function (a) {
 	return {ctor: 'IDate', _0: a};
 };
+var _gicentre$elm_vega$Vega$iDate = _gicentre$elm_vega$Vega$IDate;
 var _gicentre$elm_vega$Vega$INumber = function (a) {
 	return {ctor: 'INumber', _0: a};
 };
+var _gicentre$elm_vega$Vega$iNumber = _gicentre$elm_vega$Vega$INumber;
 var _gicentre$elm_vega$Vega$IText = function (a) {
 	return {ctor: 'IText', _0: a};
 };
+var _gicentre$elm_vega$Vega$iText = _gicentre$elm_vega$Vega$IText;
 var _gicentre$elm_vega$Vega$ISelect = function (a) {
 	return {ctor: 'ISelect', _0: a};
 };
+var _gicentre$elm_vega$Vega$iSelect = _gicentre$elm_vega$Vega$ISelect;
 var _gicentre$elm_vega$Vega$IRadio = function (a) {
 	return {ctor: 'IRadio', _0: a};
 };
+var _gicentre$elm_vega$Vega$iRadio = _gicentre$elm_vega$Vega$IRadio;
 var _gicentre$elm_vega$Vega$ICheckbox = function (a) {
 	return {ctor: 'ICheckbox', _0: a};
 };
+var _gicentre$elm_vega$Vega$iCheckbox = _gicentre$elm_vega$Vega$ICheckbox;
 var _gicentre$elm_vega$Vega$IRange = function (a) {
 	return {ctor: 'IRange', _0: a};
 };
+var _gicentre$elm_vega$Vega$iRange = _gicentre$elm_vega$Vega$IRange;
 var _gicentre$elm_vega$Vega$Rgb = function (a) {
 	return {ctor: 'Rgb', _0: a};
 };
@@ -13934,7 +13947,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$ISelect(
+							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InOptions(
@@ -15755,7 +15768,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$ISelect(
+							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InOptions(
@@ -15792,7 +15805,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SiBind(
-								_gicentre$elm_vega$Vega$ISelect(
+								_gicentre$elm_vega$Vega$iSelect(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$InOptions(
@@ -16916,7 +16929,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$IRange(
+							_gicentre$elm_vega$Vega$iRange(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -16943,7 +16956,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SiBind(
-								_gicentre$elm_vega$Vega$IRange(
+								_gicentre$elm_vega$Vega$iRange(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -16970,7 +16983,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SiBind(
-									_gicentre$elm_vega$Vega$IRange(
+									_gicentre$elm_vega$Vega$iRange(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -16997,7 +17010,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SiBind(
-										_gicentre$elm_vega$Vega$IRange(
+										_gicentre$elm_vega$Vega$iRange(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -17024,7 +17037,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$SiBind(
-											_gicentre$elm_vega$Vega$IRange(
+											_gicentre$elm_vega$Vega$iRange(
 												{
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -17051,7 +17064,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$SiBind(
-												_gicentre$elm_vega$Vega$ICheckbox(
+												_gicentre$elm_vega$Vega$iCheckbox(
 													{ctor: '[]'})),
 											_1: {ctor: '[]'}
 										}
@@ -17964,7 +17977,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$IRadio(
+							_gicentre$elm_vega$Vega$iRadio(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InOptions(
@@ -18025,7 +18038,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SiBind(
-									_gicentre$elm_vega$Vega$IText(
+									_gicentre$elm_vega$Vega$iText(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$InPlaceholder('search'),
@@ -18563,7 +18576,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SiBind(
-								_gicentre$elm_vega$Vega$ISelect(
+								_gicentre$elm_vega$Vega$iSelect(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$InOptions(
@@ -19652,7 +19665,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$ISelect(
+							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InOptions(
@@ -20131,7 +20144,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$ISelect(
+							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InOptions(
@@ -20910,7 +20923,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$SiBind(
-							_gicentre$elm_vega$Vega$IRange(
+							_gicentre$elm_vega$Vega$iRange(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$InMin(5),
@@ -20937,7 +20950,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SiBind(
-								_gicentre$elm_vega$Vega$IRange(
+								_gicentre$elm_vega$Vega$iRange(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -20964,7 +20977,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SiBind(
-									_gicentre$elm_vega$Vega$IRange(
+									_gicentre$elm_vega$Vega$iRange(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$InMin(0),
@@ -23539,7 +23552,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SiBind(
-										_gicentre$elm_vega$Vega$IRange(
+										_gicentre$elm_vega$Vega$iRange(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$InMin(1850),

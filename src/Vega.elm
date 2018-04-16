@@ -4,7 +4,7 @@ module Vega
         , Autosize(..)
         , AxisElement(..)
         , AxisProperty
-        , Bind(..)
+        , Bind
         , CInterpolate(..)
         , ColorValue(..)
         , Comparator(..)
@@ -141,6 +141,19 @@ module Vega
         , foUtc
         , hAlignLabel
         , height
+        , iCheckbox
+        , iColor
+        , iDate
+        , iDateTimeLocal
+        , iMonth
+        , iNumber
+        , iRadio
+        , iRange
+        , iSelect
+        , iTel
+        , iText
+        , iTime
+        , iWeek
         , ifElse
         , keyValue
         , legend
@@ -409,6 +422,20 @@ Functions and types for declaring the input data to the visualization.
 @docs SignalString
 @docs SignalProperty
 @docs Bind
+@docs iCheckbox
+@docs iText
+@docs iNumber
+@docs iDate
+@docs iDateTimeLocal
+@docs iTime
+@docs iMonth
+@docs iWeek
+@docs iRadio
+@docs iRange
+@docs iSelect
+@docs iTel
+@docs iColor
+
 @docs InputProperty
 @docs EventHandler
 
@@ -587,6 +614,97 @@ type Bind
     | IDateTimeLocal (List InputProperty)
     | ITel (List InputProperty)
     | IColor (List InputProperty)
+
+
+{-| A checkbox input element.
+-}
+iCheckbox : List InputProperty -> Bind
+iCheckbox =
+    ICheckbox
+
+
+{-| A color selector input element.
+-}
+iColor : List InputProperty -> Bind
+iColor =
+    IColor
+
+
+{-| A date selector input element.
+-}
+iDate : List InputProperty -> Bind
+iDate =
+    IDate
+
+
+{-| A local data time selector input element.
+-}
+iDateTimeLocal : List InputProperty -> Bind
+iDateTimeLocal =
+    IDateTimeLocal
+
+
+{-| A month selector input element.
+-}
+iMonth : List InputProperty -> Bind
+iMonth =
+    IMonth
+
+
+{-| A numeric input element.
+-}
+iNumber : List InputProperty -> Bind
+iNumber =
+    INumber
+
+
+{-| A radio buttons input element.
+-}
+iRadio : List InputProperty -> Bind
+iRadio =
+    IRadio
+
+
+{-| A slider input element.
+-}
+iRange : List InputProperty -> Bind
+iRange =
+    IRange
+
+
+{-| A drop-down list input element.
+-}
+iSelect : List InputProperty -> Bind
+iSelect =
+    ISelect
+
+
+{-| A telephone number input element.
+-}
+iTel : List InputProperty -> Bind
+iTel =
+    ITel
+
+
+{-| A free text input element.
+-}
+iText : List InputProperty -> Bind
+iText =
+    IText
+
+
+{-| A time selector input element.
+-}
+iTime : List InputProperty -> Bind
+iTime =
+    ITime
+
+
+{-| A week selector input element.
+-}
+iWeek : List InputProperty -> Bind
+iWeek =
+    IWeek
 
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
