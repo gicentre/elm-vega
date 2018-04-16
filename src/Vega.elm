@@ -498,6 +498,15 @@ type Cursor
     | CGrabbing
 
 
+{-| Convenience type annotation label for use with data generation functions.
+
+    TODO: Add example
+
+-}
+type alias Data =
+    ( VProperty, Spec )
+
+
 {-| Represents a single column of data. Used when generating inline data with
 `dataColumn`.
 -}
@@ -1707,7 +1716,7 @@ result of a transformation. For details see the
           ]
 
 -}
-dataSource : List DataTable -> ( VProperty, Spec )
+dataSource : List DataTable -> Data
 dataSource dataTables =
     ( VData, JE.list (List.map JE.object dataTables) )
 
