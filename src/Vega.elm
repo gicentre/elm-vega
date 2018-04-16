@@ -19,7 +19,7 @@ module Vega
         , EventHandler(..)
         , Expr(..)
         , Expression
-        , Facet(..)
+        , Facet
         , Field
         , FieldValue(..)
         , Format
@@ -105,6 +105,8 @@ module Vega
         , dirLabel
         , distinct
         , dsv
+        , faField
+        , faGroupBy
         , foBool
         , foDate
         , foNumber
@@ -313,7 +315,10 @@ Functions and types for declaring the input data to the visualization.
 @docs Mark
 @docs TopMarkProperty
 @docs sData
+@docs Facet
 @docs sFacet
+@docs faField
+@docs faGroupBy
 @docs MarkProperty
 @docs EncodingProperty
 @docs MarkInterpolation
@@ -401,7 +406,6 @@ can carry data used in specifications.
 @docs Value
 @docs Str
 @docs Num
-@docs Facet
 
 @docs vSignal
 @docs strSignal
@@ -767,7 +771,7 @@ type Facet
     = FaName String
     | FaData String
     | FaField String
-      --TODO: | FaAggregate
+      --TODO: FaAggregate type and faAggregate function
     | FaGroupBy (List String)
 
 
@@ -1055,162 +1059,6 @@ type Operation
     | Variancep
 
 
-{-| An aggregating operation providing an input data object containing the
-maximum field value.
--}
-argMax : Operation
-argMax =
-    ArgMax
-
-
-{-| An aggregating operation providing an input data object containing the
-minimum field value.
--}
-argMin : Operation
-argMin =
-    ArgMin
-
-
-{-| An aggregating operation to calculate the mean of a field. Synonymous with `mean`.
--}
-average : Operation
-average =
-    Average
-
-
-{-| An aggregating operation to calculate the lower boundary of the bootstrapped
-95% confidence interval of the mean field value
--}
-ci0 : Operation
-ci0 =
-    CI0
-
-
-{-| An aggregating operation to calculate the upper boundary of the bootstrapped
-95% confidence interval of the mean field value
--}
-ci1 : Operation
-ci1 =
-    CI1
-
-
-{-| An aggregating operation to calculate the total number of values in a group.
--}
-count : Operation
-count =
-    Count
-
-
-{-| An aggregating operation to calculate the number of distinct values in a group.
--}
-distinct : Operation
-distinct =
-    Distinct
-
-
-{-| An aggregating operation to calculate the maximum value in a field.
--}
-maximum : Operation
-maximum =
-    Max
-
-
-{-| An aggregating operation to calculate the mean of a field. Synonymous with `average`.
--}
-mean : Operation
-mean =
-    Mean
-
-
-{-| An aggregating operation to calculate the median of a field.
--}
-median : Operation
-median =
-    Median
-
-
-{-| An aggregating operation to calculate the minimum value in a field.
--}
-minimum : Operation
-minimum =
-    Min
-
-
-{-| An aggregating operation to calculate the number of missing values in a field.
--}
-missing : Operation
-missing =
-    Missing
-
-
-{-| An aggregating operation to calculate the lower quartile boundary of field values.
--}
-q1 : Operation
-q1 =
-    Q1
-
-
-{-| An aggregating operation to calculate the lower quartile boundary of field values.
--}
-q3 : Operation
-q3 =
-    Q3
-
-
-{-| An aggregating operation to calculate the standard error of the values in a field.
--}
-stderr : Operation
-stderr =
-    Stderr
-
-
-{-| An aggregating operation to calculate the sample standard deviation of the
-values in a field.
--}
-stdev : Operation
-stdev =
-    Stdev
-
-
-{-| An aggregating operation to calculate the population standard deviation of the
-values in a field.
--}
-stdevp : Operation
-stdevp =
-    Stdevp
-
-
-{-| An aggregating operation to calculate the sum of the values in a field.
--}
-sum : Operation
-sum =
-    Sum
-
-
-{-| An aggregating operation to calculate the number of valid values in a group.
-A valid value is considered one that is not `null`, not `undefined` and not `NaN`.
--}
-valid : Operation
-valid =
-    Valid
-
-
-{-| An aggregating operation to calculate the sample variance of the values in
-a field.
--}
-variance : Operation
-variance =
-    Variance
-
-
-{-| An aggregating operation to calculate the population variance of the values
-in a field.
--}
-variancep : Operation
-variancep =
-    Variancep
-
-
 {-| Type of overlap strategy to be applied when there is not space to show all
 items on an axis. See the
 [Vega documentation](https://vega.github.io/vega/docs/axes)
@@ -1448,7 +1296,7 @@ type SortProperty
 -}
 type Source
     = SData Str
-    | SFacet (List Facet)
+    | SFacet String String (List Facet)
 
 
 {-| A Vega specification. Specs can be (and usually are) nested.
@@ -1733,6 +1581,22 @@ type VProperty
     | VMarks
 
 
+{-| An aggregating operation providing an input data object containing the
+maximum field value.
+-}
+argMax : Operation
+argMax =
+    ArgMax
+
+
+{-| An aggregating operation providing an input data object containing the
+minimum field value.
+-}
+argMin : Operation
+argMin =
+    ArgMin
+
+
 {-| Declare the way the view is sized. See the
 [Vega documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
 for details.
@@ -1743,6 +1607,13 @@ for details.
 autosize : List Autosize -> ( VProperty, Spec )
 autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
+
+
+{-| An aggregating operation to calculate the mean of a field. Synonymous with `mean`.
+-}
+average : Operation
+average =
+    Average
 
 
 {-| Create the axes used to visualize spatial scale mappings.
@@ -1772,6 +1643,22 @@ byField =
     ByField
 
 
+{-| An aggregating operation to calculate the lower boundary of the bootstrapped
+95% confidence interval of the mean field value
+-}
+ci0 : Operation
+ci0 =
+    CI0
+
+
+{-| An aggregating operation to calculate the upper boundary of the bootstrapped
+95% confidence interval of the mean field value
+-}
+ci1 : Operation
+ci1 =
+    CI1
+
+
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
 a single page with multiple visualizations.
@@ -1786,6 +1673,13 @@ a single page with multiple visualizations.
 combineSpecs : List LabelledSpec -> Spec
 combineSpecs specs =
     JE.object specs
+
+
+{-| An aggregating operation to calculate the total number of values in a group.
+-}
+count : Operation
+count =
+    Count
 
 
 {-| Indicates a CSV (comma separated value) format. Typically used when
@@ -2101,6 +1995,13 @@ dirLabel dir =
             "rtl"
 
 
+{-| An aggregating operation to calculate the number of distinct values in a group.
+-}
+distinct : Operation
+distinct =
+    Distinct
+
+
 {-| Reference a collection of nested data references. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
 -}
@@ -2123,6 +2024,22 @@ Typically used when specifying a data url.
 dsv : String -> Format
 dsv =
     DSV
+
+
+{-| For pre-faceted data, the name of the data field containing an array of data
+values to use as the local partition. This is required if using pre-faceted data.
+-}
+faField : String -> Facet
+faField =
+    FaField
+
+
+{-| For data-driven facets, an array of field names by which to partition the data.
+This is required if using pre-faceted data.
+-}
+faGroupBy : List String -> Facet
+faGroupBy =
+    FaGroupBy
 
 
 {-| Indicate a boolean format for parsing data.
@@ -2311,6 +2228,41 @@ markOrientationLabel orient =
             "vertical"
 
 
+{-| An aggregating operation to calculate the maximum value in a field.
+-}
+maximum : Operation
+maximum =
+    Max
+
+
+{-| An aggregating operation to calculate the mean of a field. Synonymous with `average`.
+-}
+mean : Operation
+mean =
+    Mean
+
+
+{-| An aggregating operation to calculate the median of a field.
+-}
+median : Operation
+median =
+    Median
+
+
+{-| An aggregating operation to calculate the minimum value in a field.
+-}
+minimum : Operation
+minimum =
+    Min
+
+
+{-| An aggregating operation to calculate the number of missing values in a field.
+-}
+missing : Operation
+missing =
+    Missing
+
+
 {-| A numeric value. This can be a numeric literal or a signal that generates a number.
 -}
 num : Float -> Num
@@ -2362,6 +2314,20 @@ parse =
     Parse
 
 
+{-| An aggregating operation to calculate the lower quartile boundary of field values.
+-}
+q1 : Operation
+q1 =
+    Q1
+
+
+{-| An aggregating operation to calculate the lower quartile boundary of field values.
+-}
+q3 : Operation
+q3 =
+    Q3
+
+
 {-| Create a single scale used to map data values to visual properties.
 
     TODO: XXX
@@ -2390,12 +2356,16 @@ sData =
     SData
 
 
-{-| Name of the source to be faceted for a set of marks. For details see the
+{-| Create a facet directive for a set of marks. The first parameter is the name
+of the source data set from which the facet partitions are to be generated. The
+second parameter is the name to be given to the generated facet source. Marks
+defined with the faceted `group` mark can reference this data source name to
+visualizae the local data partition. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#from)
 -}
-sFacet : List Facet -> Source
-sFacet =
-    SFacet
+sFacet : String -> String -> List Facet -> Source
+sFacet d name =
+    SFacet d name
 
 
 {-| Create the signals used to add dynamism to the visualization.
@@ -2439,6 +2409,29 @@ sigPadding =
 sigWidth : Value
 sigWidth =
     VSignal "width"
+
+
+{-| An aggregating operation to calculate the standard error of the values in a field.
+-}
+stderr : Operation
+stderr =
+    Stderr
+
+
+{-| An aggregating operation to calculate the sample standard deviation of the
+values in a field.
+-}
+stdev : Operation
+stdev =
+    Stdev
+
+
+{-| An aggregating operation to calculate the population standard deviation of the
+values in a field.
+-}
+stdevp : Operation
+stdevp =
+    Stdevp
 
 
 {-| A string value. This can be a string literal or a signal that generates a string.
@@ -2493,6 +2486,13 @@ strokeJoinLabel join =
 
         JBevel ->
             "bevel"
+
+
+{-| An aggregating operation to calculate the sum of the values in a field.
+-}
+sum : Operation
+sum =
+    Sum
 
 
 {-| A convenience function for generating a text string representing a given
@@ -2600,6 +2600,14 @@ utc tu =
     Utc tu
 
 
+{-| An aggregating operation to calculate the number of valid values in a group.
+A valid value is considered one that is not `null`, not `undefined` and not `NaN`.
+-}
+valid : Operation
+valid =
+    Valid
+
+
 {-| A convenience function for generating a text string representing a vertical
 alignment type. This can be used instead of specifying an alignment type as a
 literal string to avoid problems of mistyping its name.
@@ -2621,6 +2629,22 @@ vAlignLabel align =
 
         Alphabetic ->
             "alphabetic"
+
+
+{-| An aggregating operation to calculate the sample variance of the values in
+a field.
+-}
+variance : Operation
+variance =
+    Variance
+
+
+{-| An aggregating operation to calculate the population variance of the values
+in a field.
+-}
+variancep : Operation
+variancep =
+    Variancep
 
 
 {-| A value representing a band number.
@@ -4116,8 +4140,8 @@ sourceProperty src =
         SData sName ->
             ( "data", strSpec sName )
 
-        SFacet fcts ->
-            ( "facet", JE.object (List.map facetProperty fcts) )
+        SFacet d name fcts ->
+            ( "facet", JE.object (List.map facetProperty (FaData d :: FaName name :: fcts)) )
 
 
 stackOffsetSpec : StackOffset -> Spec

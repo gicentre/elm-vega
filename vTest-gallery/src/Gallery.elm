@@ -243,7 +243,7 @@ barChart3 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet [ FaData "table", FaName "facet", FaGroupBy [ "category" ] ] ]
+                    [ MFrom [ sFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
                     , MEncode [ Enter [ MY [ vScale (FName "yScale"), vField (FName "category") ] ] ]
                     , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
@@ -345,7 +345,7 @@ barChart4 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sData (str "trellis"), sFacet [ FaName "faceted_tuples", FaData "tuples", FaGroupBy [ "a" ] ] ]
+                    [ MFrom [ sData (str "trellis"), sFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
                     , MEncode
                         [ Enter [ MX [ vNumber 0 ], MWidth [ vSignal "width" ] ]
                         , Update [ MY [ vField (FName "y0") ], MY2 [ vField (FName "y1") ] ]
@@ -517,7 +517,7 @@ lineChart1 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
+                    [ MFrom [ sFacet "table" "series" [ faGroupBy [ "c" ] ] ]
                     , MGroup [ mkLine [] ]
                     ]
 
@@ -641,7 +641,7 @@ areaChart2 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
+                    [ MFrom [ sFacet "table" "series" [ faGroupBy [ "c" ] ] ]
                     , MGroup [ mkArea [] ]
                     ]
 
@@ -889,7 +889,7 @@ areaChart4 =
                 << mark Group
                     [ MFrom
                         [ sData (str "series")
-                        , sFacet [ FaData "jobs", FaName "facet", FaGroupBy [ "job", "sex" ] ]
+                        , sFacet "jobs" "facet" [ faGroupBy [ "job", "sex" ] ]
                         ]
                     , MGroup [ mkArea [] ]
                     ]
