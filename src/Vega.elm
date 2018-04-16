@@ -54,7 +54,7 @@ module Vega
         , SignalProperty(..)
         , SignalString(..)
         , SortProperty(Ascending, Descending)
-        , Source(..)
+        , Source
         , Spec
         , StackOffset(..)
         , StackProperty(..)
@@ -132,6 +132,8 @@ module Vega
         , parse
         , q1
         , q3
+        , sData
+        , sFacet
         , scale
         , scales
         , sigHeight
@@ -227,8 +229,6 @@ Functions and types for declaring the input data to the visualization.
 @docs dFields
 @docs dReferences
 @docs dSort
-@docs op
-@docs byField
 @docs DataType
 @docs foBool
 @docs foNumber
@@ -242,6 +242,8 @@ Functions and types for declaring the input data to the visualization.
 @docs topojsonFeature
 @docs parse
 @docs SortProperty
+@docs op
+@docs byField
 @docs Source
 @docs Trigger
 @docs TriggerProperty
@@ -261,7 +263,6 @@ Functions and types for declaring the input data to the visualization.
 @docs Order
 @docs Comparator
 
-@docs op
 @docs argMax
 @docs argMin
 @docs average
@@ -311,6 +312,8 @@ Functions and types for declaring the input data to the visualization.
 @docs mark
 @docs Mark
 @docs TopMarkProperty
+@docs sData
+@docs sFacet
 @docs MarkProperty
 @docs EncodingProperty
 @docs MarkInterpolation
@@ -1444,7 +1447,7 @@ type SortProperty
 [Vega documentation](https://vega.github.io/vega/docs/marks/#from).
 -}
 type Source
-    = SData String
+    = SData Str
     | SFacet (List Facet)
 
 
@@ -2377,6 +2380,22 @@ scale name sps =
 scales : List Spec -> ( VProperty, Spec )
 scales scs =
     ( VScales, JE.list scs )
+
+
+{-| Name of the source for a set of marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
+-}
+sData : Str -> Source
+sData =
+    SData
+
+
+{-| Name of the source to be faceted for a set of marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
+-}
+sFacet : List Facet -> Source
+sFacet =
+    SFacet
 
 
 {-| Create the signals used to add dynamism to the visualization.
@@ -4095,7 +4114,7 @@ sourceProperty : Source -> LabelledSpec
 sourceProperty src =
     case src of
         SData sName ->
-            ( "data", JE.string sName )
+            ( "data", strSpec sName )
 
         SFacet fcts ->
             ( "facet", JE.object (List.map facetProperty fcts) )

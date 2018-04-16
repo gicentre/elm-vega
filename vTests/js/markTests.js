@@ -9104,7 +9104,7 @@ var _user$project$Vega$sourceProperty = function (src) {
 		return {
 			ctor: '_Tuple2',
 			_0: 'data',
-			_1: _elm_lang$core$Json_Encode$string(_p34._0)
+			_1: _user$project$Vega$strSpec(_p34._0)
 		};
 	} else {
 		return {
@@ -13126,9 +13126,11 @@ var _user$project$Vega$scale = F2(
 var _user$project$Vega$SFacet = function (a) {
 	return {ctor: 'SFacet', _0: a};
 };
+var _user$project$Vega$sFacet = _user$project$Vega$SFacet;
 var _user$project$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
+var _user$project$Vega$sData = _user$project$Vega$SData;
 var _user$project$Vega$OffsetSignal = function (a) {
 	return {ctor: 'OffsetSignal', _0: a};
 };
@@ -13565,7 +13567,8 @@ var _user$project$MarkTests$trailTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SData('table'),
+							_0: _user$project$Vega$sData(
+								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -15863,7 +15866,8 @@ var _user$project$MarkTests$groupTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SData('table'),
+							_0: _user$project$Vega$sData(
+								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -16460,7 +16464,8 @@ var _user$project$MarkTests$areaTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SData('table'),
+							_0: _user$project$Vega$sData(
+								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -17502,7 +17507,8 @@ var _user$project$MarkTests$lineTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SData('table'),
+							_0: _user$project$Vega$sData(
+								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
