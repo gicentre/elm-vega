@@ -108,7 +108,7 @@ barChart2 =
                     |> transform
                         [ TStack
                             [ StGroupBy [ "x" ]
-                            , StSort [ CoField [ "c" ] ]
+                            , StSort [ coField [ "c" ] ]
                             , StField "y"
                             ]
                         ]
@@ -611,7 +611,7 @@ areaChart2 =
 
         ds =
             dataSource
-                [ table [] |> transform [ TStack [ StGroupBy [ "x" ], StSort [ CoField [ "c" ] ], StField "y" ] ] ]
+                [ table [] |> transform [ TStack [ StGroupBy [ "x" ], StSort [ coField [ "c" ] ], StField "y" ] ] ]
 
         sc =
             scales
@@ -767,7 +767,7 @@ areaChart4 =
                     [ TFilter (Expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , TStack
                         [ StGroupBy [ "year" ]
-                        , StSort [ CoField [ "job", "sex" ], CoOrder [ Descend, Descend ] ]
+                        , StSort [ coField [ "job", "sex" ], coOrder [ Descend, Descend ] ]
                         , StField "perc"
                         ]
                     ]

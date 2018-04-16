@@ -7,7 +7,7 @@ module Vega
         , Bind
         , CInterpolate
         , ColorValue
-        , Comparator(..)
+        , Comparator
         , Cursor(..)
         , DataColumn
         , DataProperty
@@ -112,6 +112,8 @@ module Vega
         , cRGB
         , ci0
         , ci1
+        , coField
+        , coOrder
         , combineSpecs
         , count
         , csv
@@ -323,6 +325,8 @@ Functions and types for declaring the input data to the visualization.
 @docs transform
 @docs Order
 @docs Comparator
+@docs coField
+@docs coOrder
 
 @docs argMax
 @docs argMin
@@ -2066,6 +2070,14 @@ cLAB =
     LAB
 
 
+{-| The fields to sort when defining a sorting operation. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Compare)
+-}
+coField : List Field -> Comparator
+coField =
+    CoField
+
+
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
 a single page with multiple visualizations.
@@ -2080,6 +2092,14 @@ a single page with multiple visualizations.
 combineSpecs : List LabelledSpec -> Spec
 combineSpecs specs =
     JE.object specs
+
+
+{-| The ordering of the fields in a sorting operation. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/types/#Compare)
+-}
+coOrder : List Order -> Comparator
+coOrder =
+    CoOrder
 
 
 {-| An aggregating operation to calculate the total number of values in a group.

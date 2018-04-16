@@ -80,7 +80,7 @@ stackTest1 =
                             [ StField "value"
                             , StGroupBy [ "key" ]
                             , StOffset (OffsetSignal "offset")
-                            , StSort [ CoField [ "sortField" ], CoOrder [ OrderSignal "sortOrder" ] ]
+                            , StSort [ coField [ "sortField" ], coOrder [ OrderSignal "sortOrder" ] ]
                             ]
                         ]
                     |> on
