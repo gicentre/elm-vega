@@ -267,7 +267,7 @@ barChart4 =
                     [ TAggregate [ AgGroupBy [ "a", "b" ], AgFields [ "c" ], AgOps [ Average ], AgAs [ "c" ] ] ]
 
         trTable =
-            data "trellis" [ DSource "tuples" ]
+            data "trellis" [ dSource "tuples" ]
                 |> transform
                     [ TAggregate [ AgGroupBy [ "a" ] ]
                     , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
@@ -367,11 +367,11 @@ barChart5 =
     let
         ds =
             dataSource
-                [ data "population" [ DUrl "https://vega.github.io/vega/data/population.json" ]
-                , data "popYear" [ DSource "population" ] |> transform [ TFilter (Expr "datum.year == year") ]
-                , data "males" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
-                , data "females" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
-                , data "ageGroups" [ DSource "population" ] |> transform [ TAggregate [ AgGroupBy [ "age" ] ] ]
+                [ data "population" [ dUrl "https://vega.github.io/vega/data/population.json" ]
+                , data "popYear" [ dSource "population" ] |> transform [ TFilter (Expr "datum.year == year") ]
+                , data "males" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
+                , data "females" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
+                , data "ageGroups" [ dSource "population" ] |> transform [ TAggregate [ AgGroupBy [ "age" ] ] ]
                 ]
 
         si =
@@ -675,7 +675,7 @@ areaChart3 =
                 << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         layerData =
-            data "layer_indices" [ DValue (vNumbers [ 0, 1, 2, 3 ]) ]
+            data "layer_indices" [ dValue (vNumbers [ 0, 1, 2, 3 ]) ]
                 |> transform
                     [ TFilter (Expr "datum.data < layers")
                     , TFormula "datum.data * -height" "offset" AlwaysUpdate
@@ -762,7 +762,7 @@ areaChart4 : Spec
 areaChart4 =
     let
         table =
-            data "jobs" [ DUrl "https://vega.github.io/vega/data/jobs.json" ]
+            data "jobs" [ dUrl "https://vega.github.io/vega/data/jobs.json" ]
                 |> transform
                     [ TFilter (Expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , TStack
@@ -773,7 +773,7 @@ areaChart4 =
                     ]
 
         series =
-            data "series" [ DSource "jobs" ]
+            data "series" [ dSource "jobs" ]
                 |> transform
                     [ TAggregate
                         [ AgGroupBy [ "job", "sex" ]
@@ -978,7 +978,7 @@ circularChart2 =
     let
         ds =
             dataSource
-                [ data "table" [ DValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
+                [ data "table" [ dValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
                     |> transform [ TPie [ PiField "data" ] ]
                 ]
 
@@ -1033,7 +1033,7 @@ scatterplot1 =
     let
         ds =
             dataSource
-                [ data "cars" [ DUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "cars" [ dUrl "https://vega.github.io/vega/data/cars.json" ]
                     |> transform [ TFilter (Expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
@@ -1109,11 +1109,11 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ DUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
-                , data "valid" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] != null") ]
-                , data "nullXY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
-                , data "nullY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] == null") ]
-                , data "nullX" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] != null") ]
+                [ data "movies" [ dUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                , data "valid" [ dSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] != null") ]
+                , data "nullXY" [ dSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
+                , data "nullY" [ dSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] == null") ]
+                , data "nullX" [ dSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] != null") ]
                 ]
 
         si =
@@ -1229,7 +1229,7 @@ scatterplot3 : Spec
 scatterplot3 =
     let
         ds =
-            dataSource [ data "drive" [ DUrl "https://vega.github.io/vega/data/driving.json" ] ]
+            dataSource [ data "drive" [ dUrl "https://vega.github.io/vega/data/driving.json" ] ]
 
         sc =
             scales
@@ -1378,8 +1378,8 @@ scatterplot4 =
     let
         ds =
             dataSource
-                [ data "barley" [ DUrl "https://vega.github.io/vega/data/barley.json" ]
-                , data "summary" [ DSource "barley" ]
+                [ data "barley" [ dUrl "https://vega.github.io/vega/data/barley.json" ]
+                , data "summary" [ dSource "barley" ]
                     |> transform
                         [ TAggregate
                             [ AgGroupBy [ "variety" ]

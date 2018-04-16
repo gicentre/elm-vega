@@ -10,7 +10,7 @@ module Vega
         , Comparator(..)
         , Cursor(..)
         , DataColumn
-        , DataProperty(..)
+        , DataProperty
         , DataReference
         , DataRow
         , DataTable
@@ -77,8 +77,13 @@ module Vega
         , dDataset
         , dField
         , dFields
+        , dFormat
+        , dOn
         , dReferences
         , dSort
+        , dSource
+        , dUrl
+        , dValue
         , data
         , dataColumn
         , dataFromColumns
@@ -170,6 +175,11 @@ Functions and types for declaring the input data to the visualization.
 @docs on
 @docs trigger
 @docs DataProperty
+@docs dUrl
+@docs dFormat
+@docs dSource
+@docs dValue
+@docs dOn
 @docs DataColumn
 @docs DataRow
 @docs DataTable
@@ -555,6 +565,55 @@ type DataProperty
     | DValue Value
     | DOn (List Trigger)
     | DUrl String
+
+
+{-| Specify the data format when loading or generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dFormat : Format -> DataProperty
+dFormat =
+    DFormat
+
+
+{-| Specify updates to insert, remove, and toggle data values, or clear the data in a data set
+when trigger conditions are met. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dOn : List Trigger -> DataProperty
+dOn =
+    DOn
+
+
+{-| Specify a named data source when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dSource : String -> DataProperty
+dSource =
+    DSource
+
+
+{-| Specify a collection of named data sources when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dSources : List String -> DataProperty
+dSources =
+    DSources
+
+
+{-| Specify the name of a data file to be loaded when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dUrl : String -> DataProperty
+dUrl =
+    DUrl
+
+
+{-| Specify some inline data value(s) when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+dValue : Value -> DataProperty
+dValue =
+    DValue
 
 
 {-| Reference to one or more sources of data such as dataset, field name or collection
