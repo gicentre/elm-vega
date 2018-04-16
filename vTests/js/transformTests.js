@@ -12074,6 +12074,7 @@ var _user$project$Vega$custom = function (name) {
 var _user$project$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
+var _user$project$Vega$hover = _user$project$Vega$Hover;
 var _user$project$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
@@ -12086,7 +12087,6 @@ var _user$project$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
 var _user$project$Vega$enter = _user$project$Vega$Enter;
-var _user$project$Vega$hover = _user$project$Vega$Enter;
 var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };

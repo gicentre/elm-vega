@@ -12074,6 +12074,7 @@ var _gicentre$elm_vega$Vega$custom = function (name) {
 var _gicentre$elm_vega$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
+var _gicentre$elm_vega$Vega$hover = _gicentre$elm_vega$Vega$Hover;
 var _gicentre$elm_vega$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
@@ -12086,7 +12087,6 @@ var _gicentre$elm_vega$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
 var _gicentre$elm_vega$Vega$enter = _gicentre$elm_vega$Vega$Enter;
-var _gicentre$elm_vega$Vega$hover = _gicentre$elm_vega$Vega$Enter;
 var _gicentre$elm_vega$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };

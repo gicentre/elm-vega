@@ -2582,7 +2582,7 @@ For further details see the
 -}
 hover : List MarkProperty -> EncodingProperty
 hover =
-    Enter
+    Hover
 
 
 {-| Hue-saturation-lightness color interpolation.
