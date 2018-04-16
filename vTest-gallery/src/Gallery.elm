@@ -264,12 +264,12 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ TAggregate [ AgGroupBy [ "a", "b" ], AgFields [ "c" ], AgOps [ average ], AgAs [ "c" ] ] ]
+                    [ TAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
 
         trTable =
             data "trellis" [ dSource "tuples" ]
                 |> transform
-                    [ TAggregate [ AgGroupBy [ "a" ] ]
+                    [ TAggregate [ agGroupBy [ "a" ] ]
                     , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
                     , TStack [ StField "span" ]
                     , TExtentAsSignal "y1" "trellisExtent"
@@ -371,7 +371,7 @@ barChart5 =
                 , data "popYear" [ dSource "population" ] |> transform [ TFilter (Expr "datum.year == year") ]
                 , data "males" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
                 , data "females" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
-                , data "ageGroups" [ dSource "population" ] |> transform [ TAggregate [ AgGroupBy [ "age" ] ] ]
+                , data "ageGroups" [ dSource "population" ] |> transform [ TAggregate [ agGroupBy [ "age" ] ] ]
                 ]
 
         si =
@@ -776,10 +776,10 @@ areaChart4 =
             data "series" [ dSource "jobs" ]
                 |> transform
                     [ TAggregate
-                        [ AgGroupBy [ "job", "sex" ]
-                        , AgFields [ "perc", "perc" ]
-                        , AgOps [ sum, argMax ]
-                        , AgAs [ "sum", "argmax" ]
+                        [ agGroupBy [ "job", "sex" ]
+                        , agFields [ "perc", "perc" ]
+                        , agOps [ sum, argMax ]
+                        , agAs [ "sum", "argmax" ]
                         ]
                     ]
 
@@ -1382,10 +1382,10 @@ scatterplot4 =
                 , data "summary" [ dSource "barley" ]
                     |> transform
                         [ TAggregate
-                            [ AgGroupBy [ "variety" ]
-                            , AgFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
-                            , AgOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
-                            , AgAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
+                            [ agGroupBy [ "variety" ]
+                            , agFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
+                            , agOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
+                            , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
                         , TFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
                         , TFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
