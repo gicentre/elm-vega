@@ -12,9 +12,9 @@ packTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E" ])
-                << dataColumn "parent" (vStrs [ "", "A", "A", "C", "C" ])
-                << dataColumn "value" (vNumbers [ 0, 1, 0, 1, 1 ])
+                << dataColumn "id" (dStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (dStrs [ "", "A", "A", "C", "C" ])
+                << dataColumn "value" (dNumbers [ 0, 1, 0, 1, 1 ])
 
         ds =
             dataSource
@@ -69,8 +69,8 @@ stackTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "key" (vStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
-                << dataColumn "value" (vNumbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
+                << dataColumn "key" (dStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
+                << dataColumn "value" (dNumbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
 
         ds =
             dataSource
@@ -124,12 +124,12 @@ stackTest1 =
             scales
                 << scale "xscale"
                     [ SType ScBand
-                    , SDomain (DStrings [ "a", "b", "c" ])
+                    , SDomain (DoStrs [ "a", "b", "c" ])
                     , SRange (RDefault RWidth)
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "y1") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "y1") ])
                     , SRange (RDefault RHeight)
                     , SRound True
                     ]

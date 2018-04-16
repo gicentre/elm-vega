@@ -75,8 +75,8 @@ areaTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -85,13 +85,13 @@ areaTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "u") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "v") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -101,7 +101,7 @@ areaTest =
             signals
                 << signal "defined" [ SiValue (vBool True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
@@ -140,10 +140,10 @@ groupTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 5, -5, 60 ])
-                << dataColumn "y" (vNumbers [ 5, 70, 120 ])
-                << dataColumn "w" (vNumbers [ 100, 40, 100 ])
-                << dataColumn "h" (vNumbers [ 30, 40, 20 ])
+                << dataColumn "x" (dNumbers [ 5, -5, 60 ])
+                << dataColumn "y" (dNumbers [ 5, 70, 120 ])
+                << dataColumn "w" (dNumbers [ 100, 40, 100 ])
+                << dataColumn "h" (dNumbers [ 30, 40, 20 ])
 
         ds =
             dataSource [ table [] ]
@@ -243,8 +243,8 @@ lineTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -253,13 +253,13 @@ lineTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "u") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "v") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -269,12 +269,12 @@ lineTest =
             signals
                 << signal "defined" [ SiValue (vBool True), SiBind (ICheckbox []) ]
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 1, InStep 0.05 ]) ]
                 << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> vStr), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ SiValue (vStr (strokeCapLabel CButt)), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
@@ -382,7 +382,7 @@ ruleTest =
                 << signal "x2" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
                 << signal "y2" [ SiValue (vNumber 150), SiBind (IRange [ InMin 0, InMax 200, InStep 1 ]) ]
                 << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "strokeCap" [ SiValue (strokeCapLabel CButt |> vStr), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ SiValue (vStr (strokeCapLabel CButt)), SiBind (ISelect [ InOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (ISelect [ InOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
@@ -474,8 +474,8 @@ textTest =
                 << signal "angle" [ SiValue (vNumber 0), SiBind (IRange [ InMin -180, InMax 180, InStep 1 ]) ]
                 << signal "fontSize" [ SiValue (vNumber 10), SiBind (IRange [ InMin 1, InMax 36, InStep 1 ]) ]
                 << signal "limit" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 150, InStep 1 ]) ]
-                << signal "align" [ SiValue (hAlignLabel AlignLeft |> vStr), SiBind (ISelect [ InOptions (vStrs [ "left", "center", "right" ]) ]) ]
-                << signal "baseline" [ SiValue (vAlignLabel Alphabetic |> vStr), SiBind (ISelect [ InOptions (vStrs [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
+                << signal "align" [ SiValue (vStr (hAlignLabel AlignLeft)), SiBind (ISelect [ InOptions (vStrs [ "left", "center", "right" ]) ]) ]
+                << signal "baseline" [ SiValue (vStr (vAlignLabel Alphabetic)), SiBind (ISelect [ InOptions (vStrs [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
                 << signal "font" [ SiValue (vStr "sans-serif"), SiBind (IRadio [ InOptions (vStrs [ "sans-serif", "serif", "monospace" ]) ]) ]
                 << signal "fontWeight" [ SiValue (vStr "normal"), SiBind (IRadio [ InOptions (vStrs [ "normal", "bold" ]) ]) ]
                 << signal "fontStyle" [ SiValue (vStr "normal"), SiBind (IRadio [ InOptions (vStrs [ "normal", "italic" ]) ]) ]
@@ -519,8 +519,8 @@ trailTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (vNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -529,13 +529,13 @@ trailTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "u") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "v") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -543,7 +543,7 @@ trailTest =
                 << scale "zscale"
                     [ SType ScLinear
                     , SRange (RNumbers [ 5, 1 ])
-                    , SDomain (DData [ dDataset "table", dField (vStr "v") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
                     ]
 
         si =

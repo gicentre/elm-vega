@@ -57,6 +57,7 @@ module Vega
         , Spec
         , StackOffset(..)
         , StackProperty(..)
+        , Str
         , StrokeCap(..)
         , StrokeJoin(..)
         , Symbol(..)
@@ -78,10 +79,12 @@ module Vega
         , dField
         , dFields
         , dFormat
+        , dNumbers
         , dOn
         , dReferences
         , dSort
         , dSource
+        , dStrs
         , dUrl
         , dValue
         , data
@@ -114,8 +117,11 @@ module Vega
         , sigWidth
         , signal
         , signals
+        , str
+        , strSignal
         , strokeCapLabel
         , strokeJoinLabel
+        , strs
         , symbolLabel
         , toVega
         , transform
@@ -327,16 +333,22 @@ can carry data used in specifications.
 @docs Field
 @docs FieldValue
 @docs Value
+@docs Str
 @docs Facet
 
 @docs vSignal
+@docs strSignal
 @docs vColor
 @docs vBand
 @docs vField
 @docs vNumber
 @docs vNumbers
+@docs dNumbers
+@docs str
+@docs strs
 @docs vStr
 @docs vStrs
+@docs dStrs
 @docs vBool
 @docs vBools
 @docs vObject
@@ -356,7 +368,8 @@ import Json.Encode as JE
 
 
 -- TODO: Most types should have the option of representing their type from a signal
--- See StOffset as an example
+-- Where possible, these should use the type/signal specific types, but in cases
+-- where mixed types are assembled in lists, we can use the more generic Value
 
 
 {-| Properties of the aggregate transformation. For details see the
@@ -622,8 +635,8 @@ of fields. For details see the
 -}
 type DataReference
     = DDataset String
-    | DField Value
-    | DFields (List Value)
+    | DField Str
+    | DFields Str
     | DReferences (List DataReference)
     | DSort (List SortProperty)
 
@@ -1065,12 +1078,12 @@ type Scale
 [Vega documentation](https://vega.github.io/vega/docs/scales/#domain).
 -}
 type ScaleDomain
-    = DNumbers (List Float)
-    | DStrings (List String)
+    = DoNumbers (List Float)
+    | DoStrs (List String)
       -- TODO: Can we have DateTimes as literals?
       -- TODO: Documentation implies array literals can include signal references as elements. How do we add these?
-    | DSignal String
-    | DData (List DataReference)
+    | DoSignal String
+    | DoData (List DataReference)
 
 
 {-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
@@ -1099,8 +1112,9 @@ by the `scale` function. For more details see the
 -}
 type
     ScaleProperty
-    -- TODO: Should primitive values (Float, Bool) be replaced with Value so can
-    -- respond to signals etc.? See SPaddingInner and SPaddingOuter for examples.
+    -- TODO: Replace primitive values (Float, Bool) with their type-specific value
+    -- (StrSignal etc.) so can respond to signals.
+    -- TODO: Replace generic Value for SPaddingInner/Outer with numeric signal type.
     = SType Scale
     | SDomain ScaleDomain
     | SDomainMax Float
@@ -1128,7 +1142,7 @@ type
 -}
 type ScaleRange
     = RNumbers (List Float)
-    | RStrings (List String)
+    | RStrs (List String)
     | RValues (List Value)
     | RSignal String
     | RScheme String (List SchemeProperty)
@@ -1416,6 +1430,25 @@ type VAlign
     | Alphabetic
 
 
+{-| Represents a list of primitive data types such as strings and numbers.
+-}
+type DataValues
+    = DStrs (List String)
+      --TODO: Do we need nested lists and objects? | DValues (List DataValues)
+    | DNumbers (List Float)
+    | DBools (List Bool)
+
+
+{-| Represents string-related values such as a string literal, a list of strings
+or a signal that generates a string.
+-}
+type Str
+    = Str String
+      --TODO: Do we need nested lists of Str values so that a list can contain mixed string literals and signals?
+    | Strs (List String)
+    | StrSignal String
+
+
 {-| Represents a value such as a number or reference to a value such as a field label
 or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
@@ -1635,26 +1668,33 @@ cursorLabel cur =
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
-    dataColumn "Animal" (vStrs [ "Cat", "Dog", "Mouse"]) []
+     dataColumn "Animal" (dStrs [ "Cat", "Dog", "Mouse"]) []
 
 -}
-dataColumn : String -> Value -> List DataColumn -> List DataColumn
+dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
 dataColumn colName data =
     case data of
-        VStrs col ->
+        -- VStrs col ->
+        --    (::) (List.map (\s -> ( colName, JE.string s )) col)
+        -- VNumbers col ->
+        --     (::) (List.map (\x -> ( colName, JE.float x )) col)
+        --
+        -- VBools col ->
+        --     (::) (List.map (\b -> ( colName, JE.bool b )) col)
+        --
+        -- Values col ->
+        --     (::) (List.map (\v -> ( colName, valueSpec v )) col)
+        --
+        -- _ ->
+        --     (::) [] |> Debug.log "Warning: Ignored value. Can only create a dataColumn from strings, numbers or bools"
+        DStrs col ->
             (::) (List.map (\s -> ( colName, JE.string s )) col)
 
-        VNumbers col ->
+        DNumbers col ->
             (::) (List.map (\x -> ( colName, JE.float x )) col)
 
-        VBools col ->
+        DBools col ->
             (::) (List.map (\b -> ( colName, JE.bool b )) col)
-
-        Values col ->
-            (::) (List.map (\v -> ( colName, valueSpec v )) col)
-
-        _ ->
-            (::) [] |> Debug.log "Warning: Ignored value. Can only create a dataColumn from strings, numbers or bools"
 
 
 {-| Declare a data table from a provided list of column values. Each column contains
@@ -1668,6 +1708,7 @@ to use the default formatting. See the
 for details.
 The columns themselves are most easily generated with `dataColumn`
 
+    TODO: Update example to use latest spec
     dataTable =
         dataFromColumns "animals" [ Parse [ ( "Year", FDate "%Y" ) ] ]
             << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
@@ -1742,6 +1783,7 @@ data name dProps =
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
 The final parameter is the list of any other rows to which this is added.
 
+    TODO: Check this is the current syntax:
     dataRow [("Animal", vStr "Fish"),("Age", vNumber 28),("Year", vStr "2010")] []
 
 -}
@@ -1780,7 +1822,7 @@ dDataset =
 {-| Reference a data field with the given value. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
 -}
-dField : Value -> DataReference
+dField : Str -> DataReference
 dField =
     DField
 
@@ -1788,7 +1830,7 @@ dField =
 {-| Reference a collection of data fields with the given values. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
 -}
-dFields : List Value -> DataReference
+dFields : Str -> DataReference
 dFields =
     DFields
 
@@ -2295,11 +2337,25 @@ vNumber =
     VNumber
 
 
-{-| A value representing a list of numbers
+{-| A value representing a list of numbers.
 -}
 vNumbers : List Float -> Value
 vNumbers =
     VNumbers
+
+
+{-| A data value representing a list of numbers.
+-}
+dNumbers : List Float -> DataValues
+dNumbers =
+    DNumbers
+
+
+{-| A data value representing a list of strings.
+-}
+dStrs : List String -> DataValues
+dStrs =
+    DStrs
 
 
 {-| Represents an object containing a list of values.
@@ -2340,21 +2396,42 @@ vScale =
     VScale
 
 
-{-| A value representing a signal by its name.
+{-| Specify the name of a generic signal.
 -}
 vSignal : String -> Value
 vSignal =
     VSignal
 
 
-{-| A string value.
+{-| Specify the name of signal that generates strings.
+-}
+strSignal : String -> Str
+strSignal =
+    StrSignal
+
+
+{-| A string value. This can be a string literal or a signal that generates a string.
+-}
+str : String -> Str
+str =
+    Str
+
+
+{-| A list of string values. These can be string literals or signals that generate strings.
+-}
+strs : List String -> Str
+strs =
+    Strs
+
+
+{-| A string value. Used for providing parameters that can be of any value type.
 -}
 vStr : String -> Value
 vStr =
     VStr
 
 
-{-| A list of string values.
+{-| A list of string values. Used for providing parameters that can be of any value type.
 -}
 vStrs : List String -> Value
 vStrs =
@@ -2637,11 +2714,11 @@ dataRefProperty dataRef =
         DDataset ds ->
             ( "data", JE.string ds )
 
-        DField val ->
-            ( "field", valueSpec val )
+        DField str ->
+            ( "field", strSpec str )
 
-        DFields vals ->
-            ( "fields", JE.list (List.map valueSpec vals) )
+        DFields str ->
+            ( "fields", strSpec str )
 
         DReferences drs ->
             ( "fields", JE.object (List.map dataRefProperty drs) )
@@ -3433,16 +3510,16 @@ rangeDefaultLabel rd =
 scaleDomainSpec : ScaleDomain -> Spec
 scaleDomainSpec sdType =
     case sdType of
-        DNumbers nums ->
+        DoNumbers nums ->
             JE.list (List.map JE.float nums)
 
-        DStrings cats ->
+        DoStrs cats ->
             JE.list (List.map JE.string cats)
 
-        DSignal signal ->
+        DoSignal signal ->
             JE.object [ signalReferenceProperty signal ]
 
-        DData dataRef ->
+        DoData dataRef ->
             JE.object (List.map dataRefProperty dataRef)
 
 
@@ -3518,7 +3595,7 @@ scaleProperty scaleProp =
                 RNumbers xs ->
                     ( "range", JE.list (List.map JE.float xs) )
 
-                RStrings ss ->
+                RStrs ss ->
                     ( "range", JE.list (List.map JE.string ss) )
 
                 RValues vals ->
@@ -4031,6 +4108,12 @@ valRef vs =
 valueProperty : Value -> LabelledSpec
 valueProperty val =
     case val of
+        VStr str ->
+            ( "value", JE.string str )
+
+        VStrs strs ->
+            ( "value", JE.list (List.map JE.string strs) )
+
         VSignal sig ->
             signalReferenceProperty sig
 
@@ -4073,12 +4156,6 @@ valueProperty val =
         Values vals ->
             ( "value", JE.list (List.map valueSpec vals) )
 
-        VStr str ->
-            ( "value", JE.string str )
-
-        VStrs strs ->
-            ( "value", JE.list (List.map JE.string strs) )
-
         VBool b ->
             ( "value", JE.bool b )
 
@@ -4099,9 +4176,28 @@ valueProperty val =
                 |> Debug.log "Unexpected production rule passed to valueProperty"
 
 
+strSpec : Str -> Spec
+strSpec str =
+    case str of
+        Str str ->
+            JE.string str
+
+        Strs strs ->
+            JE.list (List.map JE.string strs)
+
+        StrSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+
 valueSpec : Value -> Spec
 valueSpec val =
     case val of
+        VStr str ->
+            JE.string str
+
+        VStrs strs ->
+            JE.list (List.map JE.string strs)
+
         VSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
@@ -4143,12 +4239,6 @@ valueSpec val =
 
         Values objs ->
             JE.list (List.map valueSpec objs)
-
-        VStr str ->
-            JE.string str
-
-        VStrs strs ->
-            JE.list (List.map JE.string strs)
 
         VBool b ->
             JE.bool b

@@ -8288,23 +8288,27 @@ var _user$project$Vega$stackOffsetSpec = function (off) {
 				});
 	}
 };
-var _user$project$Vega$signalStrSpec = function (sigStr) {
-	var _p5 = sigStr;
-	if (_p5.ctor === 'SigStr') {
-		return _elm_lang$core$Json_Encode$string(_p5._0);
-	} else {
-		return _elm_lang$core$Json_Encode$object(
-			{
-				ctor: '::',
-				_0: _user$project$Vega$signalReferenceProperty(_p5._0),
-				_1: {ctor: '[]'}
-			});
+var _user$project$Vega$strSpec = function (str) {
+	var _p5 = str;
+	switch (_p5.ctor) {
+		case 'Str':
+			return _elm_lang$core$Json_Encode$string(_p5._0);
+		case 'Strs':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p5._0));
+		default:
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: _user$project$Vega$signalReferenceProperty(_p5._0),
+					_1: {ctor: '[]'}
+				});
 	}
 };
-var _user$project$Vega$signalNumSpec = function (sigNum) {
-	var _p6 = sigNum;
-	if (_p6.ctor === 'SigNum') {
-		return _elm_lang$core$Json_Encode$float(_p6._0);
+var _user$project$Vega$signalStrSpec = function (sigStr) {
+	var _p6 = sigStr;
+	if (_p6.ctor === 'SigStr') {
+		return _elm_lang$core$Json_Encode$string(_p6._0);
 	} else {
 		return _elm_lang$core$Json_Encode$object(
 			{
@@ -8314,10 +8318,10 @@ var _user$project$Vega$signalNumSpec = function (sigNum) {
 			});
 	}
 };
-var _user$project$Vega$signalBoolSpec = function (sigBool) {
-	var _p7 = sigBool;
-	if (_p7.ctor === 'SigBool') {
-		return _elm_lang$core$Json_Encode$bool(_p7._0);
+var _user$project$Vega$signalNumSpec = function (sigNum) {
+	var _p7 = sigNum;
+	if (_p7.ctor === 'SigNum') {
+		return _elm_lang$core$Json_Encode$float(_p7._0);
 	} else {
 		return _elm_lang$core$Json_Encode$object(
 			{
@@ -8327,9 +8331,22 @@ var _user$project$Vega$signalBoolSpec = function (sigBool) {
 			});
 	}
 };
+var _user$project$Vega$signalBoolSpec = function (sigBool) {
+	var _p8 = sigBool;
+	if (_p8.ctor === 'SigBool') {
+		return _elm_lang$core$Json_Encode$bool(_p8._0);
+	} else {
+		return _elm_lang$core$Json_Encode$object(
+			{
+				ctor: '::',
+				_0: _user$project$Vega$signalReferenceProperty(_p8._0),
+				_1: {ctor: '[]'}
+			});
+	}
+};
 var _user$project$Vega$sideLabel = function (orient) {
-	var _p8 = orient;
-	switch (_p8.ctor) {
+	var _p9 = orient;
+	switch (_p9.ctor) {
 		case 'SLeft':
 			return 'left';
 		case 'SBottom':
@@ -8341,19 +8358,19 @@ var _user$project$Vega$sideLabel = function (orient) {
 	}
 };
 var _user$project$Vega$schemeProperty = function (sProps) {
-	var _p9 = sProps;
-	switch (_p9.ctor) {
+	var _p10 = sProps;
+	switch (_p10.ctor) {
 		case 'SScheme':
 			return {
 				ctor: '_Tuple2',
 				_0: 'scheme',
-				_1: _elm_lang$core$Json_Encode$string(_p9._0)
+				_1: _elm_lang$core$Json_Encode$string(_p10._0)
 			};
 		case 'SCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'count',
-				_1: _elm_lang$core$Json_Encode$float(_p9._0)
+				_1: _elm_lang$core$Json_Encode$float(_p10._0)
 			};
 		default:
 			return {
@@ -8362,10 +8379,10 @@ var _user$project$Vega$schemeProperty = function (sProps) {
 				_1: _elm_lang$core$Json_Encode$list(
 					{
 						ctor: '::',
-						_0: _elm_lang$core$Json_Encode$float(_p9._0),
+						_0: _elm_lang$core$Json_Encode$float(_p10._0),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$core$Json_Encode$float(_p9._1),
+							_0: _elm_lang$core$Json_Encode$float(_p10._1),
 							_1: {ctor: '[]'}
 						}
 					})
@@ -8373,8 +8390,8 @@ var _user$project$Vega$schemeProperty = function (sProps) {
 	}
 };
 var _user$project$Vega$scaleLabel = function (scType) {
-	var _p10 = scType;
-	switch (_p10.ctor) {
+	var _p11 = scType;
+	switch (_p11.ctor) {
 		case 'ScLinear':
 			return 'linear';
 		case 'ScPow':
@@ -8404,12 +8421,12 @@ var _user$project$Vega$scaleLabel = function (scType) {
 		case 'ScQuantize':
 			return 'quantize';
 		default:
-			return _p10._0;
+			return _p11._0;
 	}
 };
 var _user$project$Vega$rangeDefaultLabel = function (rd) {
-	var _p11 = rd;
-	switch (_p11.ctor) {
+	var _p12 = rd;
+	switch (_p12.ctor) {
 		case 'RWidth':
 			return 'width';
 		case 'RHeight':
@@ -8429,9 +8446,9 @@ var _user$project$Vega$rangeDefaultLabel = function (rd) {
 	}
 };
 var _user$project$Vega$paddingSpec = function (pad) {
-	var _p12 = pad;
-	if (_p12.ctor === 'PSize') {
-		return _elm_lang$core$Json_Encode$float(_p12._0);
+	var _p13 = pad;
+	if (_p13.ctor === 'PSize') {
+		return _elm_lang$core$Json_Encode$float(_p13._0);
 	} else {
 		return _elm_lang$core$Json_Encode$object(
 			{
@@ -8439,28 +8456,28 @@ var _user$project$Vega$paddingSpec = function (pad) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'left',
-					_1: _elm_lang$core$Json_Encode$float(_p12._0)
+					_1: _elm_lang$core$Json_Encode$float(_p13._0)
 				},
 				_1: {
 					ctor: '::',
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'top',
-						_1: _elm_lang$core$Json_Encode$float(_p12._1)
+						_1: _elm_lang$core$Json_Encode$float(_p13._1)
 					},
 					_1: {
 						ctor: '::',
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'right',
-							_1: _elm_lang$core$Json_Encode$float(_p12._2)
+							_1: _elm_lang$core$Json_Encode$float(_p13._2)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'bottom',
-								_1: _elm_lang$core$Json_Encode$float(_p12._3)
+								_1: _elm_lang$core$Json_Encode$float(_p13._3)
 							},
 							_1: {ctor: '[]'}
 						}
@@ -8470,8 +8487,8 @@ var _user$project$Vega$paddingSpec = function (pad) {
 	}
 };
 var _user$project$Vega$overlapStrategyLabel = function (strat) {
-	var _p13 = strat;
-	switch (_p13.ctor) {
+	var _p14 = strat;
+	switch (_p14.ctor) {
 		case 'ONone':
 			return 'false';
 		case 'OParity':
@@ -8481,8 +8498,8 @@ var _user$project$Vega$overlapStrategyLabel = function (strat) {
 	}
 };
 var _user$project$Vega$orderSpec = function (order) {
-	var _p14 = order;
-	switch (_p14.ctor) {
+	var _p15 = order;
+	switch (_p15.ctor) {
 		case 'Ascend':
 			return _elm_lang$core$Json_Encode$string('ascending');
 		case 'Descend':
@@ -8491,14 +8508,14 @@ var _user$project$Vega$orderSpec = function (order) {
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$signalReferenceProperty(_p14._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p15._0),
 					_1: {ctor: '[]'}
 				});
 	}
 };
 var _user$project$Vega$opSpec = function (op) {
-	var _p15 = op;
-	switch (_p15.ctor) {
+	var _p16 = op;
+	switch (_p16.ctor) {
 		case 'ArgMax':
 			return _elm_lang$core$Json_Encode$string('argmax');
 		case 'ArgMin':
@@ -8544,8 +8561,8 @@ var _user$project$Vega$opSpec = function (op) {
 	}
 };
 var _user$project$Vega$sortProperty = function (sp) {
-	var _p16 = sp;
-	switch (_p16.ctor) {
+	var _p17 = sp;
+	switch (_p17.ctor) {
 		case 'Ascending':
 			return {
 				ctor: '_Tuple2',
@@ -8562,19 +8579,19 @@ var _user$project$Vega$sortProperty = function (sp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p16._0)
+				_1: _elm_lang$core$Json_Encode$string(_p17._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'op',
-				_1: _user$project$Vega$opSpec(_p16._0)
+				_1: _user$project$Vega$opSpec(_p17._0)
 			};
 	}
 };
 var _user$project$Vega$niceSpec = function (ni) {
-	var _p17 = ni;
-	switch (_p17.ctor) {
+	var _p18 = ni;
+	switch (_p18.ctor) {
 		case 'NMillisecond':
 			return _elm_lang$core$Json_Encode$string('millisecond');
 		case 'NSecond':
@@ -8599,14 +8616,14 @@ var _user$project$Vega$niceSpec = function (ni) {
 						ctor: '_Tuple2',
 						_0: 'interval',
 						_1: _elm_lang$core$Json_Encode$string(
-							_user$project$Vega$timeUnitLabel(_p17._0))
+							_user$project$Vega$timeUnitLabel(_p18._0))
 					},
 					_1: {
 						ctor: '::',
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'step',
-							_1: _elm_lang$core$Json_Encode$int(_p17._1)
+							_1: _elm_lang$core$Json_Encode$int(_p18._1)
 						},
 						_1: {ctor: '[]'}
 					}
@@ -8616,12 +8633,12 @@ var _user$project$Vega$niceSpec = function (ni) {
 		case 'NFalse':
 			return _elm_lang$core$Json_Encode$bool(false);
 		default:
-			return _elm_lang$core$Json_Encode$int(_p17._0);
+			return _elm_lang$core$Json_Encode$int(_p18._0);
 	}
 };
 var _user$project$Vega$markLabel = function (m) {
-	var _p18 = m;
-	switch (_p18.ctor) {
+	var _p19 = m;
+	switch (_p19.ctor) {
 		case 'Arc':
 			return 'arc';
 		case 'Area':
@@ -8649,16 +8666,16 @@ var _user$project$Vega$markLabel = function (m) {
 	}
 };
 var _user$project$Vega$legendTypeLabel = function (lt) {
-	var _p19 = lt;
-	if (_p19.ctor === 'LSymbol') {
+	var _p20 = lt;
+	if (_p20.ctor === 'LSymbol') {
 		return 'symbol';
 	} else {
 		return 'gradient';
 	}
 };
 var _user$project$Vega$legendOrientLabel = function (orient) {
-	var _p20 = orient;
-	switch (_p20.ctor) {
+	var _p21 = orient;
+	switch (_p21.ctor) {
 		case 'Left':
 			return 'left';
 		case 'TopLeft':
@@ -8680,8 +8697,8 @@ var _user$project$Vega$legendOrientLabel = function (orient) {
 	}
 };
 var _user$project$Vega$interpolateSpec = function (iType) {
-	var _p21 = iType;
-	switch (_p21.ctor) {
+	var _p22 = iType;
+	switch (_p22.ctor) {
 		case 'Rgb':
 			return _elm_lang$core$Json_Encode$object(
 				{
@@ -8696,7 +8713,7 @@ var _user$project$Vega$interpolateSpec = function (iType) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'gamma',
-							_1: _elm_lang$core$Json_Encode$float(_p21._0)
+							_1: _elm_lang$core$Json_Encode$float(_p22._0)
 						},
 						_1: {ctor: '[]'}
 					}
@@ -8770,7 +8787,7 @@ var _user$project$Vega$interpolateSpec = function (iType) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'gamma',
-							_1: _elm_lang$core$Json_Encode$float(_p21._0)
+							_1: _elm_lang$core$Json_Encode$float(_p22._0)
 						},
 						_1: {ctor: '[]'}
 					}
@@ -8789,7 +8806,7 @@ var _user$project$Vega$interpolateSpec = function (iType) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'gamma',
-							_1: _elm_lang$core$Json_Encode$float(_p21._0)
+							_1: _elm_lang$core$Json_Encode$float(_p22._0)
 						},
 						_1: {ctor: '[]'}
 					}
@@ -8797,39 +8814,39 @@ var _user$project$Vega$interpolateSpec = function (iType) {
 	}
 };
 var _user$project$Vega$formulaUpdateSpec = function (update) {
-	var _p22 = update;
-	if (_p22.ctor === 'InitOnly') {
+	var _p23 = update;
+	if (_p23.ctor === 'InitOnly') {
 		return _elm_lang$core$Json_Encode$bool(true);
 	} else {
 		return _elm_lang$core$Json_Encode$bool(false);
 	}
 };
 var _user$project$Vega$foDataTypeSpec = function (dType) {
-	var _p23 = dType;
-	switch (_p23.ctor) {
+	var _p24 = dType;
+	switch (_p24.ctor) {
 		case 'FoNumber':
 			return _elm_lang$core$Json_Encode$string('number');
-		case 'FoBoolean':
+		case 'FoBool':
 			return _elm_lang$core$Json_Encode$string('boolean');
 		case 'FoDate':
-			var _p24 = _p23._0;
-			return _elm_lang$core$Native_Utils.eq(_p24, '') ? _elm_lang$core$Json_Encode$string('date') : _elm_lang$core$Json_Encode$string(
+			var _p25 = _p24._0;
+			return _elm_lang$core$Native_Utils.eq(_p25, '') ? _elm_lang$core$Json_Encode$string('date') : _elm_lang$core$Json_Encode$string(
 				A2(
 					_elm_lang$core$Basics_ops['++'],
 					'date:\'',
-					A2(_elm_lang$core$Basics_ops['++'], _p24, '\'')));
+					A2(_elm_lang$core$Basics_ops['++'], _p25, '\'')));
 		default:
-			var _p25 = _p23._0;
-			return _elm_lang$core$Native_Utils.eq(_p25, '') ? _elm_lang$core$Json_Encode$string('utc') : _elm_lang$core$Json_Encode$string(
+			var _p26 = _p24._0;
+			return _elm_lang$core$Native_Utils.eq(_p26, '') ? _elm_lang$core$Json_Encode$string('utc') : _elm_lang$core$Json_Encode$string(
 				A2(
 					_elm_lang$core$Basics_ops['++'],
 					'utc:\'',
-					A2(_elm_lang$core$Basics_ops['++'], _p25, '\'')));
+					A2(_elm_lang$core$Basics_ops['++'], _p26, '\'')));
 	}
 };
 var _user$project$Vega$formatProperty = function (fmt) {
-	var _p26 = fmt;
-	switch (_p26.ctor) {
+	var _p27 = fmt;
+	switch (_p27.ctor) {
 		case 'JSON':
 			return {
 				ctor: '::',
@@ -8873,7 +8890,7 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'delimeter',
-						_1: _elm_lang$core$Json_Encode$string(_p26._0)
+						_1: _elm_lang$core$Json_Encode$string(_p27._0)
 					},
 					_1: {ctor: '[]'}
 				}
@@ -8891,7 +8908,7 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'feature',
-						_1: _elm_lang$core$Json_Encode$string(_p26._0)
+						_1: _elm_lang$core$Json_Encode$string(_p27._0)
 					},
 					_1: {ctor: '[]'}
 				}
@@ -8909,7 +8926,7 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'mesh',
-						_1: _elm_lang$core$Json_Encode$string(_p26._0)
+						_1: _elm_lang$core$Json_Encode$string(_p27._0)
 					},
 					_1: {ctor: '[]'}
 				}
@@ -8923,30 +8940,30 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					_1: _elm_lang$core$Json_Encode$object(
 						A2(
 							_elm_lang$core$List$map,
-							function (_p27) {
-								var _p28 = _p27;
+							function (_p28) {
+								var _p29 = _p28;
 								return {
 									ctor: '_Tuple2',
-									_0: _p28._0,
-									_1: _user$project$Vega$foDataTypeSpec(_p28._1)
+									_0: _p29._0,
+									_1: _user$project$Vega$foDataTypeSpec(_p29._1)
 								};
 							},
-							_p26._0))
+							_p27._0))
 				},
 				_1: {ctor: '[]'}
 			};
 	}
 };
 var _user$project$Vega$fieldValueSpec = function (fVal) {
-	var _p29 = fVal;
-	switch (_p29.ctor) {
+	var _p30 = fVal;
+	switch (_p30.ctor) {
 		case 'FName':
-			return _elm_lang$core$Json_Encode$string(_p29._0);
+			return _elm_lang$core$Json_Encode$string(_p30._0);
 		case 'FSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$signalReferenceProperty(_p29._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p30._0),
 					_1: {ctor: '[]'}
 				});
 		case 'FDatum':
@@ -8956,7 +8973,7 @@ var _user$project$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'datum',
-						_1: _user$project$Vega$fieldValueSpec(_p29._0)
+						_1: _user$project$Vega$fieldValueSpec(_p30._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -8967,7 +8984,7 @@ var _user$project$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'group',
-						_1: _user$project$Vega$fieldValueSpec(_p29._0)
+						_1: _user$project$Vega$fieldValueSpec(_p30._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -8978,7 +8995,7 @@ var _user$project$Vega$fieldValueSpec = function (fVal) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'parent',
-						_1: _user$project$Vega$fieldValueSpec(_p29._0)
+						_1: _user$project$Vega$fieldValueSpec(_p30._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -8988,31 +9005,31 @@ var _user$project$Vega$fieldSpec = function (f) {
 	return _elm_lang$core$Json_Encode$string(f);
 };
 var _user$project$Vega$pieProperty = function (pp) {
-	var _p30 = pp;
-	switch (_p30.ctor) {
+	var _p31 = pp;
+	switch (_p31.ctor) {
 		case 'PiField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _user$project$Vega$fieldSpec(_p30._0)
+				_1: _user$project$Vega$fieldSpec(_p31._0)
 			};
 		case 'PiStartAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'startAngle',
-				_1: _user$project$Vega$signalNumSpec(_p30._0)
+				_1: _user$project$Vega$signalNumSpec(_p31._0)
 			};
 		case 'PiEndAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'endAngle',
-				_1: _user$project$Vega$signalNumSpec(_p30._0)
+				_1: _user$project$Vega$signalNumSpec(_p31._0)
 			};
 		case 'PiSort':
 			return {
 				ctor: '_Tuple2',
 				_0: 'sort',
-				_1: _user$project$Vega$signalBoolSpec(_p30._0)
+				_1: _user$project$Vega$signalBoolSpec(_p31._0)
 			};
 		default:
 			return {
@@ -9024,10 +9041,10 @@ var _user$project$Vega$pieProperty = function (pp) {
 						_elm_lang$core$Json_Encode$string,
 						{
 							ctor: '::',
-							_0: _p30._0,
+							_0: _p31._0,
 							_1: {
 								ctor: '::',
-								_0: _p30._1,
+								_0: _p31._1,
 								_1: {ctor: '[]'}
 							}
 						}))
@@ -9035,49 +9052,49 @@ var _user$project$Vega$pieProperty = function (pp) {
 	}
 };
 var _user$project$Vega$facetProperty = function (fct) {
-	var _p31 = fct;
-	switch (_p31.ctor) {
+	var _p32 = fct;
+	switch (_p32.ctor) {
 		case 'FaName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p31._0)
+				_1: _elm_lang$core$Json_Encode$string(_p32._0)
 			};
 		case 'FaData':
 			return {
 				ctor: '_Tuple2',
 				_0: 'data',
-				_1: _elm_lang$core$Json_Encode$string(_p31._0)
+				_1: _elm_lang$core$Json_Encode$string(_p32._0)
 			};
 		case 'FaField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _elm_lang$core$Json_Encode$string(_p31._0)
+				_1: _elm_lang$core$Json_Encode$string(_p32._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'groupby',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p31._0))
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p32._0))
 			};
 	}
 };
 var _user$project$Vega$sourceProperty = function (src) {
-	var _p32 = src;
-	if (_p32.ctor === 'SData') {
+	var _p33 = src;
+	if (_p33.ctor === 'SData') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'data',
-			_1: _elm_lang$core$Json_Encode$string(_p32._0)
+			_1: _elm_lang$core$Json_Encode$string(_p33._0)
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'facet',
 			_1: _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _user$project$Vega$facetProperty, _p32._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$facetProperty, _p33._0))
 		};
 	}
 };
@@ -9085,15 +9102,15 @@ var _user$project$Vega$expressionSpec = function (expr) {
 	return _elm_lang$core$Json_Encode$string(expr);
 };
 var _user$project$Vega$triggerProperties = function (trans) {
-	var _p33 = trans;
-	switch (_p33.ctor) {
+	var _p34 = trans;
+	switch (_p34.ctor) {
 		case 'TrTrigger':
 			return {
 				ctor: '::',
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'trigger',
-					_1: _user$project$Vega$expressionSpec(_p33._0)
+					_1: _user$project$Vega$expressionSpec(_p34._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9103,7 +9120,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'insert',
-					_1: _user$project$Vega$expressionSpec(_p33._0)
+					_1: _user$project$Vega$expressionSpec(_p34._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9113,7 +9130,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'remove',
-					_1: _user$project$Vega$expressionSpec(_p33._0)
+					_1: _user$project$Vega$expressionSpec(_p34._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9123,7 +9140,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'toggle',
-					_1: _user$project$Vega$expressionSpec(_p33._0)
+					_1: _user$project$Vega$expressionSpec(_p34._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -9133,14 +9150,14 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'modify',
-					_1: _user$project$Vega$expressionSpec(_p33._0)
+					_1: _user$project$Vega$expressionSpec(_p34._0)
 				},
 				_1: {
 					ctor: '::',
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'values',
-						_1: _user$project$Vega$expressionSpec(_p33._1)
+						_1: _user$project$Vega$expressionSpec(_p34._1)
 					},
 					_1: {ctor: '[]'}
 				}
@@ -9148,53 +9165,53 @@ var _user$project$Vega$triggerProperties = function (trans) {
 	}
 };
 var _user$project$Vega$exprProperty = function (expr) {
-	var _p34 = expr;
-	if (_p34.ctor === 'EField') {
+	var _p35 = expr;
+	if (_p35.ctor === 'EField') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'field',
-			_1: _elm_lang$core$Json_Encode$string(_p34._0)
+			_1: _elm_lang$core$Json_Encode$string(_p35._0)
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'expr',
-			_1: _user$project$Vega$expressionSpec(_p34._0)
+			_1: _user$project$Vega$expressionSpec(_p35._0)
 		};
 	}
 };
 var _user$project$Vega$eventHandlerSpec = function (ehs) {
 	var eventHandler = function (eh) {
-		var _p35 = eh;
-		switch (_p35.ctor) {
+		var _p36 = eh;
+		switch (_p36.ctor) {
 			case 'EEvents':
 				return {
 					ctor: '_Tuple2',
 					_0: 'events',
-					_1: _elm_lang$core$Json_Encode$string(_p35._0)
+					_1: _elm_lang$core$Json_Encode$string(_p36._0)
 				};
 			case 'EUpdate':
-				var _p36 = _p35._0;
-				return _elm_lang$core$Native_Utils.eq(_p36, '') ? {
+				var _p37 = _p36._0;
+				return _elm_lang$core$Native_Utils.eq(_p37, '') ? {
 					ctor: '_Tuple2',
 					_0: 'update',
 					_1: _elm_lang$core$Json_Encode$string('{}')
 				} : {
 					ctor: '_Tuple2',
 					_0: 'update',
-					_1: _elm_lang$core$Json_Encode$string(_p36)
+					_1: _elm_lang$core$Json_Encode$string(_p37)
 				};
 			case 'EEncode':
 				return {
 					ctor: '_Tuple2',
 					_0: 'encode',
-					_1: _elm_lang$core$Json_Encode$string(_p35._0)
+					_1: _elm_lang$core$Json_Encode$string(_p36._0)
 				};
 			default:
 				return {
 					ctor: '_Tuple2',
 					_0: 'force',
-					_1: _elm_lang$core$Json_Encode$bool(_p35._0)
+					_1: _elm_lang$core$Json_Encode$bool(_p36._0)
 				};
 		}
 	};
@@ -9202,51 +9219,51 @@ var _user$project$Vega$eventHandlerSpec = function (ehs) {
 		A2(_elm_lang$core$List$map, eventHandler, ehs));
 };
 var _user$project$Vega$comparatorProperty = function (comp) {
-	var _p37 = comp;
-	if (_p37.ctor === 'CoField') {
+	var _p38 = comp;
+	if (_p38.ctor === 'CoField') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'field',
 			_1: _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p37._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p38._0))
 		};
 	} else {
 		return {
 			ctor: '_Tuple2',
 			_0: 'order',
 			_1: _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _user$project$Vega$orderSpec, _p37._0))
+				A2(_elm_lang$core$List$map, _user$project$Vega$orderSpec, _p38._0))
 		};
 	}
 };
 var _user$project$Vega$stackProperty = function (sp) {
-	var _p38 = sp;
-	switch (_p38.ctor) {
+	var _p39 = sp;
+	switch (_p39.ctor) {
 		case 'StField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _user$project$Vega$fieldSpec(_p38._0)
+				_1: _user$project$Vega$fieldSpec(_p39._0)
 			};
 		case 'StGroupBy':
 			return {
 				ctor: '_Tuple2',
 				_0: 'groupby',
 				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p38._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p39._0))
 			};
 		case 'StSort':
 			return {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _user$project$Vega$comparatorProperty, _p38._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$comparatorProperty, _p39._0))
 			};
 		case 'StOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _user$project$Vega$stackOffsetSpec(_p38._0)
+				_1: _user$project$Vega$stackOffsetSpec(_p39._0)
 			};
 		default:
 			return {
@@ -9258,10 +9275,10 @@ var _user$project$Vega$stackProperty = function (sp) {
 						_elm_lang$core$Json_Encode$string,
 						{
 							ctor: '::',
-							_0: _p38._0,
+							_0: _p39._0,
 							_1: {
 								ctor: '::',
-								_0: _p38._1,
+								_0: _p39._1,
 								_1: {ctor: '[]'}
 							}
 						}))
@@ -9269,8 +9286,8 @@ var _user$project$Vega$stackProperty = function (sp) {
 	}
 };
 var _user$project$Vega$colorProperty = function (cVal) {
-	var _p39 = cVal;
-	switch (_p39.ctor) {
+	var _p40 = cVal;
+	switch (_p40.ctor) {
 		case 'RGB':
 			return {
 				ctor: '_Tuple2',
@@ -9281,21 +9298,21 @@ var _user$project$Vega$colorProperty = function (cVal) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'r',
-							_1: _elm_lang$core$Json_Encode$float(_p39._0)
+							_1: _elm_lang$core$Json_Encode$float(_p40._0)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'g',
-								_1: _elm_lang$core$Json_Encode$float(_p39._1)
+								_1: _elm_lang$core$Json_Encode$float(_p40._1)
 							},
 							_1: {
 								ctor: '::',
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'b',
-									_1: _elm_lang$core$Json_Encode$float(_p39._2)
+									_1: _elm_lang$core$Json_Encode$float(_p40._2)
 								},
 								_1: {ctor: '[]'}
 							}
@@ -9312,21 +9329,21 @@ var _user$project$Vega$colorProperty = function (cVal) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'h',
-							_1: _elm_lang$core$Json_Encode$float(_p39._0)
+							_1: _elm_lang$core$Json_Encode$float(_p40._0)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 's',
-								_1: _elm_lang$core$Json_Encode$float(_p39._1)
+								_1: _elm_lang$core$Json_Encode$float(_p40._1)
 							},
 							_1: {
 								ctor: '::',
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'l',
-									_1: _elm_lang$core$Json_Encode$float(_p39._2)
+									_1: _elm_lang$core$Json_Encode$float(_p40._2)
 								},
 								_1: {ctor: '[]'}
 							}
@@ -9343,21 +9360,21 @@ var _user$project$Vega$colorProperty = function (cVal) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'l',
-							_1: _elm_lang$core$Json_Encode$float(_p39._0)
+							_1: _elm_lang$core$Json_Encode$float(_p40._0)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'a',
-								_1: _elm_lang$core$Json_Encode$float(_p39._1)
+								_1: _elm_lang$core$Json_Encode$float(_p40._1)
 							},
 							_1: {
 								ctor: '::',
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'b',
-									_1: _elm_lang$core$Json_Encode$float(_p39._2)
+									_1: _elm_lang$core$Json_Encode$float(_p40._2)
 								},
 								_1: {ctor: '[]'}
 							}
@@ -9374,21 +9391,21 @@ var _user$project$Vega$colorProperty = function (cVal) {
 						_0: {
 							ctor: '_Tuple2',
 							_0: 'h',
-							_1: _elm_lang$core$Json_Encode$float(_p39._0)
+							_1: _elm_lang$core$Json_Encode$float(_p40._0)
 						},
 						_1: {
 							ctor: '::',
 							_0: {
 								ctor: '_Tuple2',
 								_0: 'c',
-								_1: _elm_lang$core$Json_Encode$float(_p39._1)
+								_1: _elm_lang$core$Json_Encode$float(_p40._1)
 							},
 							_1: {
 								ctor: '::',
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'l',
-									_1: _elm_lang$core$Json_Encode$float(_p39._2)
+									_1: _elm_lang$core$Json_Encode$float(_p40._2)
 								},
 								_1: {ctor: '[]'}
 							}
@@ -9398,26 +9415,31 @@ var _user$project$Vega$colorProperty = function (cVal) {
 	}
 };
 var _user$project$Vega$valueSpec = function (val) {
-	var _p40 = val;
-	switch (_p40.ctor) {
+	var _p41 = val;
+	switch (_p41.ctor) {
+		case 'VStr':
+			return _elm_lang$core$Json_Encode$string(_p41._0);
+		case 'VStrs':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p41._0));
 		case 'VSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$signalReferenceProperty(_p40._0),
+					_0: _user$project$Vega$signalReferenceProperty(_p41._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VColor':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$colorProperty(_p40._0),
+					_0: _user$project$Vega$colorProperty(_p41._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VField':
-			return _user$project$Vega$fieldValueSpec(_p40._0);
+			return _user$project$Vega$fieldValueSpec(_p41._0);
 		case 'VScale':
-			return _user$project$Vega$fieldValueSpec(_p40._0);
+			return _user$project$Vega$fieldValueSpec(_p41._0);
 		case 'VBand':
 			return _elm_lang$core$Json_Encode$object(
 				{
@@ -9425,7 +9447,7 @@ var _user$project$Vega$valueSpec = function (val) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'band',
-						_1: _elm_lang$core$Json_Encode$float(_p40._0)
+						_1: _elm_lang$core$Json_Encode$float(_p41._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -9433,21 +9455,21 @@ var _user$project$Vega$valueSpec = function (val) {
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$valueProperty(_p40._0),
+					_0: _user$project$Vega$valueProperty(_p41._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VMultiply':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$valueProperty(_p40._0),
+					_0: _user$project$Vega$valueProperty(_p41._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VOffset':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
-					_0: _user$project$Vega$valueProperty(_p40._0),
+					_0: _user$project$Vega$valueProperty(_p41._0),
 					_1: {ctor: '[]'}
 				});
 		case 'VRound':
@@ -9457,31 +9479,37 @@ var _user$project$Vega$valueSpec = function (val) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'round',
-						_1: _elm_lang$core$Json_Encode$bool(_p40._0)
+						_1: _elm_lang$core$Json_Encode$bool(_p41._0)
 					},
 					_1: {ctor: '[]'}
 				});
 		case 'VNumber':
-			return _elm_lang$core$Json_Encode$float(_p40._0);
+			return _elm_lang$core$Json_Encode$float(_p41._0);
 		case 'VNumbers':
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p40._0));
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p41._0));
+		case 'VKeyValue':
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _p41._0,
+						_1: _user$project$Vega$valueSpec(_p41._1)
+					},
+					_1: {ctor: '[]'}
+				});
 		case 'VObject':
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p40._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$valueProperty, _p41._0));
 		case 'Values':
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p40._0));
-		case 'VStr':
-			return _elm_lang$core$Json_Encode$string(_p40._0);
-		case 'VStrs':
-			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p40._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p41._0));
 		case 'VBool':
-			return _elm_lang$core$Json_Encode$bool(_p40._0);
+			return _elm_lang$core$Json_Encode$bool(_p41._0);
 		case 'VBools':
 			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$bool, _p40._0));
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$bool, _p41._0));
 		case 'VNull':
 			return _elm_lang$core$Json_Encode$null;
 		default:
@@ -9489,16 +9517,21 @@ var _user$project$Vega$valueSpec = function (val) {
 	}
 };
 var _user$project$Vega$valueProperty = function (val) {
-	var evaluate = function (val) {
-		var _p41 = val;
-		if (_p41.ctor === 'VNumber') {
-			return _elm_lang$core$Json_Encode$float(_p41._0);
-		} else {
-			return _user$project$Vega$valueSpec(val);
-		}
-	};
 	var _p42 = val;
 	switch (_p42.ctor) {
+		case 'VStr':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string(_p42._0)
+			};
+		case 'VStrs':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p42._0))
+			};
 		case 'VSignal':
 			return _user$project$Vega$signalReferenceProperty(_p42._0);
 		case 'VColor':
@@ -9515,6 +9548,12 @@ var _user$project$Vega$valueProperty = function (val) {
 				_0: 'scale',
 				_1: _user$project$Vega$fieldValueSpec(_p42._0)
 			};
+		case 'VKeyValue':
+			return {
+				ctor: '_Tuple2',
+				_0: _p42._0,
+				_1: _user$project$Vega$valueSpec(_p42._1)
+			};
 		case 'VBand':
 			return {
 				ctor: '_Tuple2',
@@ -9525,19 +9564,19 @@ var _user$project$Vega$valueProperty = function (val) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'exponent',
-				_1: evaluate(_p42._0)
+				_1: _user$project$Vega$valueSpec(_p42._0)
 			};
 		case 'VMultiply':
 			return {
 				ctor: '_Tuple2',
 				_0: 'mult',
-				_1: evaluate(_p42._0)
+				_1: _user$project$Vega$valueSpec(_p42._0)
 			};
 		case 'VOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: evaluate(_p42._0)
+				_1: _user$project$Vega$valueSpec(_p42._0)
 			};
 		case 'VRound':
 			return {
@@ -9571,19 +9610,6 @@ var _user$project$Vega$valueProperty = function (val) {
 				_0: 'value',
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p42._0))
-			};
-		case 'VStr':
-			return {
-				ctor: '_Tuple2',
-				_0: 'value',
-				_1: _elm_lang$core$Json_Encode$string(_p42._0)
-			};
-		case 'VStrs':
-			return {
-				ctor: '_Tuple2',
-				_0: 'value',
-				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p42._0))
 			};
 		case 'VBool':
 			return {
@@ -11690,7 +11716,7 @@ var _user$project$Vega$dataColumn = F2(
 	function (colName, data) {
 		var _p78 = data;
 		switch (_p78.ctor) {
-			case 'VStrs':
+			case 'DStrs':
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -11705,7 +11731,7 @@ var _user$project$Vega$dataColumn = F2(
 							};
 						},
 						_p78._0));
-			case 'VNumbers':
+			case 'DNumbers':
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -11720,7 +11746,7 @@ var _user$project$Vega$dataColumn = F2(
 							};
 						},
 						_p78._0));
-			case 'VBools':
+			default:
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -11735,30 +11761,6 @@ var _user$project$Vega$dataColumn = F2(
 							};
 						},
 						_p78._0));
-			case 'Values':
-				return F2(
-					function (x, y) {
-						return {ctor: '::', _0: x, _1: y};
-					})(
-					A2(
-						_elm_lang$core$List$map,
-						function (v) {
-							return {
-								ctor: '_Tuple2',
-								_0: colName,
-								_1: _user$project$Vega$valueSpec(v)
-							};
-						},
-						_p78._0));
-			default:
-				return A2(
-					_elm_lang$core$Debug$log,
-					'Warning: Ignored value. Can only create a dataColumn from strings, numbers or bools',
-					F2(
-						function (x, y) {
-							return {ctor: '::', _0: x, _1: y};
-						})(
-						{ctor: '[]'}));
 		}
 	});
 var _user$project$Vega$cursorLabel = function (cur) {
@@ -12077,44 +12079,59 @@ var _user$project$Vega$CAuto = {ctor: 'CAuto'};
 var _user$project$Vega$DUrl = function (a) {
 	return {ctor: 'DUrl', _0: a};
 };
+var _user$project$Vega$dUrl = _user$project$Vega$DUrl;
 var _user$project$Vega$DOn = function (a) {
 	return {ctor: 'DOn', _0: a};
 };
+var _user$project$Vega$dOn = _user$project$Vega$DOn;
 var _user$project$Vega$DValue = function (a) {
 	return {ctor: 'DValue', _0: a};
 };
+var _user$project$Vega$dValue = _user$project$Vega$DValue;
 var _user$project$Vega$DSources = function (a) {
 	return {ctor: 'DSources', _0: a};
 };
+var _user$project$Vega$dSources = _user$project$Vega$DSources;
 var _user$project$Vega$DSource = function (a) {
 	return {ctor: 'DSource', _0: a};
 };
+var _user$project$Vega$dSource = _user$project$Vega$DSource;
 var _user$project$Vega$DFormat = function (a) {
 	return {ctor: 'DFormat', _0: a};
 };
+var _user$project$Vega$dFormat = _user$project$Vega$DFormat;
 var _user$project$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
+var _user$project$Vega$dSort = _user$project$Vega$DSort;
 var _user$project$Vega$DReferences = function (a) {
 	return {ctor: 'DReferences', _0: a};
 };
+var _user$project$Vega$dReferences = _user$project$Vega$DReferences;
 var _user$project$Vega$DFields = function (a) {
 	return {ctor: 'DFields', _0: a};
 };
+var _user$project$Vega$dFields = _user$project$Vega$DFields;
 var _user$project$Vega$DField = function (a) {
 	return {ctor: 'DField', _0: a};
 };
+var _user$project$Vega$dField = _user$project$Vega$DField;
 var _user$project$Vega$DDataset = function (a) {
 	return {ctor: 'DDataset', _0: a};
 };
+var _user$project$Vega$dDataset = _user$project$Vega$DDataset;
 var _user$project$Vega$FoUtc = function (a) {
 	return {ctor: 'FoUtc', _0: a};
 };
+var _user$project$Vega$foUtc = _user$project$Vega$FoUtc;
 var _user$project$Vega$FoDate = function (a) {
 	return {ctor: 'FoDate', _0: a};
 };
-var _user$project$Vega$FoBoolean = {ctor: 'FoBoolean'};
+var _user$project$Vega$foDate = _user$project$Vega$FoDate;
+var _user$project$Vega$FoBool = {ctor: 'FoBool'};
+var _user$project$Vega$foBool = _user$project$Vega$FoBool;
 var _user$project$Vega$FoNumber = {ctor: 'FoNumber'};
+var _user$project$Vega$foNumber = _user$project$Vega$FoNumber;
 var _user$project$Vega$Custom = F2(
 	function (a, b) {
 		return {ctor: 'Custom', _0: a, _1: b};
@@ -12588,17 +12605,17 @@ var _user$project$Vega$ScLog = {ctor: 'ScLog'};
 var _user$project$Vega$ScSqrt = {ctor: 'ScSqrt'};
 var _user$project$Vega$ScPow = {ctor: 'ScPow'};
 var _user$project$Vega$ScLinear = {ctor: 'ScLinear'};
-var _user$project$Vega$DData = function (a) {
-	return {ctor: 'DData', _0: a};
+var _user$project$Vega$DoData = function (a) {
+	return {ctor: 'DoData', _0: a};
 };
-var _user$project$Vega$DSignal = function (a) {
-	return {ctor: 'DSignal', _0: a};
+var _user$project$Vega$DoSignal = function (a) {
+	return {ctor: 'DoSignal', _0: a};
 };
-var _user$project$Vega$DStrings = function (a) {
-	return {ctor: 'DStrings', _0: a};
+var _user$project$Vega$DoStrs = function (a) {
+	return {ctor: 'DoStrs', _0: a};
 };
-var _user$project$Vega$DNumbers = function (a) {
-	return {ctor: 'DNumbers', _0: a};
+var _user$project$Vega$DoNumbers = function (a) {
+	return {ctor: 'DoNumbers', _0: a};
 };
 var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
@@ -12693,8 +12710,8 @@ var _user$project$Vega$RSignal = function (a) {
 var _user$project$Vega$RValues = function (a) {
 	return {ctor: 'RValues', _0: a};
 };
-var _user$project$Vega$RStrings = function (a) {
-	return {ctor: 'RStrings', _0: a};
+var _user$project$Vega$RStrs = function (a) {
+	return {ctor: 'RStrs', _0: a};
 };
 var _user$project$Vega$RNumbers = function (a) {
 	return {ctor: 'RNumbers', _0: a};
@@ -12789,14 +12806,13 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _user$project$Vega$valueSpec(_p80._0)
+				_1: _user$project$Vega$strSpec(_p80._0)
 			};
 		case 'DFields':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fields',
-				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p80._0))
+				_1: _user$project$Vega$strSpec(_p80._0)
 			};
 		case 'DReferences':
 			return {
@@ -12828,13 +12844,13 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 var _user$project$Vega$scaleDomainSpec = function (sdType) {
 	var _p82 = sdType;
 	switch (_p82.ctor) {
-		case 'DNumbers':
+		case 'DoNumbers':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p82._0));
-		case 'DStrings':
+		case 'DoStrs':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p82._0));
-		case 'DSignal':
+		case 'DoSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
@@ -12890,7 +12906,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$list(
 							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p84._0))
 					};
-				case 'RStrings':
+				case 'RStrs':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
@@ -13108,6 +13124,9 @@ var _user$project$Vega$LeftToRight = {ctor: 'LeftToRight'};
 var _user$project$Vega$Utc = function (a) {
 	return {ctor: 'Utc', _0: a};
 };
+var _user$project$Vega$utc = function (tu) {
+	return _user$project$Vega$Utc(tu);
+};
 var _user$project$Vega$Milliseconds = {ctor: 'Milliseconds'};
 var _user$project$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
 var _user$project$Vega$Seconds = {ctor: 'Seconds'};
@@ -13278,6 +13297,29 @@ var _user$project$Vega$Alphabetic = {ctor: 'Alphabetic'};
 var _user$project$Vega$AlignBottom = {ctor: 'AlignBottom'};
 var _user$project$Vega$AlignMiddle = {ctor: 'AlignMiddle'};
 var _user$project$Vega$AlignTop = {ctor: 'AlignTop'};
+var _user$project$Vega$DBools = function (a) {
+	return {ctor: 'DBools', _0: a};
+};
+var _user$project$Vega$DNumbers = function (a) {
+	return {ctor: 'DNumbers', _0: a};
+};
+var _user$project$Vega$dNumbers = _user$project$Vega$DNumbers;
+var _user$project$Vega$DStrs = function (a) {
+	return {ctor: 'DStrs', _0: a};
+};
+var _user$project$Vega$dStrs = _user$project$Vega$DStrs;
+var _user$project$Vega$StrSignal = function (a) {
+	return {ctor: 'StrSignal', _0: a};
+};
+var _user$project$Vega$strSignal = _user$project$Vega$StrSignal;
+var _user$project$Vega$Strs = function (a) {
+	return {ctor: 'Strs', _0: a};
+};
+var _user$project$Vega$strs = _user$project$Vega$Strs;
+var _user$project$Vega$Str = function (a) {
+	return {ctor: 'Str', _0: a};
+};
+var _user$project$Vega$str = _user$project$Vega$Str;
 var _user$project$Vega$VIfElse = F3(
 	function (a, b, c) {
 		return {ctor: 'VIfElse', _0: a, _1: b, _2: c};
@@ -13326,13 +13368,16 @@ var _user$project$Vega$VSignal = function (a) {
 var _user$project$Vega$sigHeight = _user$project$Vega$VSignal('height');
 var _user$project$Vega$sigPadding = _user$project$Vega$VSignal('padding');
 var _user$project$Vega$sigWidth = _user$project$Vega$VSignal('width');
-var _user$project$Vega$vSignal = function (sigRef) {
-	return _user$project$Vega$VSignal(sigRef);
-};
+var _user$project$Vega$vSignal = _user$project$Vega$VSignal;
 var _user$project$Vega$Values = function (a) {
 	return {ctor: 'Values', _0: a};
 };
 var _user$project$Vega$vValues = _user$project$Vega$Values;
+var _user$project$Vega$VKeyValue = F2(
+	function (a, b) {
+		return {ctor: 'VKeyValue', _0: a, _1: b};
+	});
+var _user$project$Vega$keyValue = _user$project$Vega$VKeyValue;
 var _user$project$Vega$VObject = function (a) {
 	return {ctor: 'VObject', _0: a};
 };
@@ -13628,14 +13673,14 @@ var _user$project$MarkTests$trailTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DData(
+							_user$project$Vega$DoData(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$DDataset('table'),
+									_0: _user$project$Vega$dDataset('table'),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$DField(
-											_user$project$Vega$vStr('u')),
+										_0: _user$project$Vega$dField(
+											_user$project$Vega$str('u')),
 										_1: {ctor: '[]'}
 									}
 								})),
@@ -13660,14 +13705,14 @@ var _user$project$MarkTests$trailTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DData(
+								_user$project$Vega$DoData(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$DDataset('table'),
+										_0: _user$project$Vega$dDataset('table'),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$DField(
-												_user$project$Vega$vStr('v')),
+											_0: _user$project$Vega$dField(
+												_user$project$Vega$str('v')),
 											_1: {ctor: '[]'}
 										}
 									})),
@@ -13709,14 +13754,14 @@ var _user$project$MarkTests$trailTest = function () {
 								_1: {
 									ctor: '::',
 									_0: _user$project$Vega$SDomain(
-										_user$project$Vega$DData(
+										_user$project$Vega$DoData(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$DDataset('table'),
+												_0: _user$project$Vega$dDataset('table'),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$DField(
-														_user$project$Vega$vStr('v')),
+													_0: _user$project$Vega$dField(
+														_user$project$Vega$str('v')),
 													_1: {ctor: '[]'}
 												}
 											})),
@@ -13734,7 +13779,7 @@ var _user$project$MarkTests$trailTest = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'u',
-				_user$project$Vega$vNumbers(
+				_user$project$Vega$dNumbers(
 					{
 						ctor: '::',
 						_0: 1,
@@ -13763,7 +13808,7 @@ var _user$project$MarkTests$trailTest = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'v',
-					_user$project$Vega$vNumbers(
+					_user$project$Vega$dNumbers(
 						{
 							ctor: '::',
 							_0: 28,
@@ -16057,7 +16102,7 @@ var _user$project$MarkTests$groupTest = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'x',
-				_user$project$Vega$vNumbers(
+				_user$project$Vega$dNumbers(
 					{
 						ctor: '::',
 						_0: 5,
@@ -16074,7 +16119,7 @@ var _user$project$MarkTests$groupTest = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'y',
-					_user$project$Vega$vNumbers(
+					_user$project$Vega$dNumbers(
 						{
 							ctor: '::',
 							_0: 5,
@@ -16091,7 +16136,7 @@ var _user$project$MarkTests$groupTest = function () {
 					A3(
 						_user$project$Vega$dataColumn,
 						'w',
-						_user$project$Vega$vNumbers(
+						_user$project$Vega$dNumbers(
 							{
 								ctor: '::',
 								_0: 100,
@@ -16108,7 +16153,7 @@ var _user$project$MarkTests$groupTest = function () {
 						A3(
 							_user$project$Vega$dataColumn,
 							'h',
-							_user$project$Vega$vNumbers(
+							_user$project$Vega$dNumbers(
 								{
 									ctor: '::',
 									_0: 30,
@@ -16720,14 +16765,14 @@ var _user$project$MarkTests$areaTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DData(
+							_user$project$Vega$DoData(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$DDataset('table'),
+									_0: _user$project$Vega$dDataset('table'),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$DField(
-											_user$project$Vega$vStr('u')),
+										_0: _user$project$Vega$dField(
+											_user$project$Vega$str('u')),
 										_1: {ctor: '[]'}
 									}
 								})),
@@ -16752,14 +16797,14 @@ var _user$project$MarkTests$areaTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DData(
+								_user$project$Vega$DoData(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$DDataset('table'),
+										_0: _user$project$Vega$dDataset('table'),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$DField(
-												_user$project$Vega$vStr('v')),
+											_0: _user$project$Vega$dField(
+												_user$project$Vega$str('v')),
 											_1: {ctor: '[]'}
 										}
 									})),
@@ -16789,7 +16834,7 @@ var _user$project$MarkTests$areaTest = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'u',
-				_user$project$Vega$vNumbers(
+				_user$project$Vega$dNumbers(
 					{
 						ctor: '::',
 						_0: 1,
@@ -16818,7 +16863,7 @@ var _user$project$MarkTests$areaTest = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'v',
-					_user$project$Vega$vNumbers(
+					_user$project$Vega$dNumbers(
 						{
 							ctor: '::',
 							_0: 28,
@@ -17771,14 +17816,14 @@ var _user$project$MarkTests$lineTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DData(
+							_user$project$Vega$DoData(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$DDataset('table'),
+									_0: _user$project$Vega$dDataset('table'),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$DField(
-											_user$project$Vega$vStr('u')),
+										_0: _user$project$Vega$dField(
+											_user$project$Vega$str('u')),
 										_1: {ctor: '[]'}
 									}
 								})),
@@ -17803,14 +17848,14 @@ var _user$project$MarkTests$lineTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DData(
+								_user$project$Vega$DoData(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$DDataset('table'),
+										_0: _user$project$Vega$dDataset('table'),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$DField(
-												_user$project$Vega$vStr('v')),
+											_0: _user$project$Vega$dField(
+												_user$project$Vega$str('v')),
 											_1: {ctor: '[]'}
 										}
 									})),
@@ -17840,7 +17885,7 @@ var _user$project$MarkTests$lineTest = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'u',
-				_user$project$Vega$vNumbers(
+				_user$project$Vega$dNumbers(
 					{
 						ctor: '::',
 						_0: 1,
@@ -17869,7 +17914,7 @@ var _user$project$MarkTests$lineTest = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'v',
-					_user$project$Vega$vNumbers(
+					_user$project$Vega$dNumbers(
 						{
 							ctor: '::',
 							_0: 28,

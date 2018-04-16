@@ -22,8 +22,8 @@ barChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                << dataColumn "amount" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+                << dataColumn "category" (dStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "amount" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87 ])
 
         ds =
             dataSource [ table [] ]
@@ -42,13 +42,13 @@ barChart1 =
             scales
                 << scale "xScale"
                     [ SType ScBand
-                    , SDomain (DData [ dDataset "table", dField (vStr "category") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "category") ])
                     , SRange (RDefault RWidth)
                     , SPadding 0.05
                     , SRound True
                     ]
                 << scale "yScale"
-                    [ SDomain (DData [ dDataset "table", dField (vStr "amount") ])
+                    [ SDomain (DoData [ dDataset "table", dField (str "amount") ])
                     , SNice NTrue
                     , SRange (RDefault RHeight)
                     ]
@@ -98,9 +98,9 @@ barChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (dNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (dNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -119,19 +119,19 @@ barChart2 =
                 << scale "xScale"
                     [ SType ScBand
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ dDataset "table", dField (vStr "x") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "table", dField (vStr "y1") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ dDataset "table", dField (vStr "c") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
@@ -165,9 +165,9 @@ barChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (vStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
-                << dataColumn "position" (vNumbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
-                << dataColumn "value" (vNumbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
+                << dataColumn "category" (dStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
+                << dataColumn "position" (dNumbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
+                << dataColumn "value" (dNumbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
 
         ds =
             dataSource [ table [] ]
@@ -176,13 +176,13 @@ barChart3 =
             scales
                 << scale "yScale"
                     [ SType ScBand
-                    , SDomain (DData [ dDataset "table", dField (vStr "category") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "category") ])
                     , SRange (RDefault RHeight)
                     , SPadding 0.2
                     ]
                 << scale "xScale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "table", dField (vStr "value") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "value") ])
                     , SRange (RDefault RWidth)
                     , SRound True
                     , SZero True
@@ -190,7 +190,7 @@ barChart3 =
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
-                    , SDomain (DData [ dDataset "table", dField (vStr "position") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "position") ])
                     , SRange (RScheme "category20" [])
                     ]
 
@@ -208,7 +208,7 @@ barChart3 =
                 << scale "pos"
                     [ SType ScBand
                     , SRange (RDefault RHeight)
-                    , SDomain (DData [ dDataset "facet", dField (vStr "position") ])
+                    , SDomain (DoData [ dDataset "facet", dField (str "position") ])
                     ]
 
         nestedMk =
@@ -257,9 +257,9 @@ barChart4 =
     let
         table =
             dataFromColumns "tuples" []
-                << dataColumn "a" (vNumbers [ 0, 0, 0, 0, 1, 2, 2 ])
-                << dataColumn "b" (vStrs [ "a", "a", "b", "c", "b", "b", "c" ])
-                << dataColumn "c" (vNumbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
+                << dataColumn "a" (dNumbers [ 0, 0, 0, 0, 1, 2, 2 ])
+                << dataColumn "b" (dStrs [ "a", "a", "b", "c", "b", "b", "c" ])
+                << dataColumn "c" (dNumbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
 
         agTable =
             table []
@@ -288,7 +288,7 @@ barChart4 =
         sc =
             scales
                 << scale "xScale"
-                    [ SDomain (DData [ dDataset "tuples", dField (vStr "c") ])
+                    [ SDomain (DoData [ dDataset "tuples", dField (str "c") ])
                     , SNice NTrue
                     , SZero True
                     , SRound True
@@ -297,7 +297,7 @@ barChart4 =
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ dDataset "trellis", dField (vStr "a") ])
+                    , SDomain (DoData [ dDataset "trellis", dField (str "a") ])
                     ]
 
         ax =
@@ -310,7 +310,7 @@ barChart4 =
                     , SPaddingInner (vSignal "innerPadding")
                     , SPaddingOuter (vSignal "outerPadding")
                     , SRound True
-                    , SDomain (DData [ dDataset "faceted_tuples", dField (vStr "b") ])
+                    , SDomain (DoData [ dDataset "faceted_tuples", dField (str "b") ])
                     , SRange (RStep (vSignal "rangeStep"))
                     ]
 
@@ -387,12 +387,12 @@ barChart5 =
                     [ SType ScBand
                     , SRange (RValues [ vSignal "height", vNumber 0 ])
                     , SRound True
-                    , SDomain (DData [ dDataset "ageGroups", dField (vStr "age") ])
+                    , SDomain (DoData [ dDataset "ageGroups", dField (str "age") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
-                    , SDomain (DNumbers [ 1, 2 ])
-                    , SRange (RStrings [ "#1f77b4", "#e377c2" ])
+                    , SDomain (DoNumbers [ 1, 2 ])
+                    , SRange (RStrs [ "#1f77b4", "#e377c2" ])
                     ]
 
         topMk =
@@ -435,7 +435,7 @@ barChart5 =
                     [ SType ScLinear
                     , range
                     , SNice NTrue
-                    , SDomain (DData [ dDataset "population", dField (vStr "people") ])
+                    , SDomain (DoData [ dDataset "population", dField (str "people") ])
                     ]
 
         mk gender =
@@ -475,9 +475,9 @@ lineChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (dNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (dNumbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
+                << dataColumn "c" (dNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource [ table [] ]
@@ -494,19 +494,19 @@ lineChart1 =
                 << scale "xScale"
                     [ SType ScPoint
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ dDataset "table", dField (vStr "x") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "table", dField (vStr "y") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "y") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ dDataset "table", dField (vStr "c") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
@@ -546,8 +546,8 @@ areaChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (List.map toFloat (List.range 1 20) |> vNumbers)
-                << dataColumn "v" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "u" (List.map toFloat (List.range 1 20) |> dNumbers)
+                << dataColumn "v" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         ds =
             dataSource [ table [] ]
@@ -565,14 +565,14 @@ areaChart1 =
                     [ SType ScLinear
                     , SRange (RDefault RWidth)
                     , SZero False
-                    , SDomain (DData [ dDataset "table", dField (vStr "u") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "table", dField (vStr "v") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
                     ]
 
         ax =
@@ -605,9 +605,9 @@ areaChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (dNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (dNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -618,19 +618,19 @@ areaChart2 =
                 << scale "xScale"
                     [ SType ScPoint
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ dDataset "table", dField (vStr "x") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "table", dField (vStr "y1") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
                     , SRange (RDefault RCategory)
-                    , SDomain (DData [ dDataset "table", dField (vStr "c") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
@@ -671,8 +671,8 @@ areaChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (List.map toFloat (List.range 1 20) |> vNumbers)
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "x" (List.map toFloat (List.range 1 20) |> dNumbers)
+                << dataColumn "y" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         layerData =
             data "layer_indices" [ dValue (vNumbers [ 0, 1, 2, 3 ]) ]
@@ -702,14 +702,14 @@ areaChart3 =
                     , SRange (RDefault RWidth)
                     , SZero False
                     , SRound True
-                    , SDomain (DData [ dDataset "table", dField (vStr "x") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RValues [ vSignal "vheight", vNumber 0 ])
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "table", dField (vStr "y") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "y") ])
                     ]
 
         ax =
@@ -808,24 +808,24 @@ areaChart4 =
                     , SRange (RDefault RWidth)
                     , SZero False
                     , SRound True
-                    , SDomain (DData [ dDataset "jobs", dField (vStr "year") ])
+                    , SDomain (DoData [ dDataset "jobs", dField (str "year") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SRound True
-                    , SDomain (DData [ dDataset "jobs", dField (vStr "y1") ])
+                    , SDomain (DoData [ dDataset "jobs", dField (str "y1") ])
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
-                    , SDomain (DStrings [ "men", "women" ])
-                    , SRange (RStrings [ "#33f", "#f33" ])
+                    , SDomain (DoStrs [ "men", "women" ])
+                    , SRange (RStrs [ "#33f", "#f33" ])
                     ]
                 << scale "alphaScale"
                     [ SType ScLinear
                     , SZero True
-                    , SDomain (DData [ dDataset "series", dField (vStr "sum") ])
+                    , SDomain (DoData [ dDataset "series", dField (str "sum") ])
                     , SRange (RNumbers [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
@@ -833,24 +833,24 @@ areaChart4 =
                     , SRange (RNumbers [ 0, 20 ])
                     , SZero True
                     , SRound True
-                    , SDomain (DData [ dDataset "series", dField (vStr "argmax.perc") ])
+                    , SDomain (DoData [ dDataset "series", dField (str "argmax.perc") ])
                     ]
                 << scale "opacityScale"
                     [ SType ScQuantile
                     , SRange (RNumbers [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
-                    , SDomain (DData [ dDataset "series", dField (vStr "argmax.perc") ])
+                    , SDomain (DoData [ dDataset "series", dField (str "argmax.perc") ])
                     ]
                 << scale "alignScale"
                     [ SType ScQuantize
-                    , SRange (RStrings [ "left", "center", "right" ])
+                    , SRange (RStrs [ "left", "center", "right" ])
                     , SZero False
-                    , SDomain (DNumbers [ 1730, 2130 ])
+                    , SDomain (DoNumbers [ 1730, 2130 ])
                     ]
                 << scale "offsetScale"
                     [ SType ScQuantize
                     , SRange (RNumbers [ 6, 0, -6 ])
                     , SZero False
-                    , SDomain (DNumbers [ 1730, 2130 ])
+                    , SDomain (DoNumbers [ 1730, 2130 ])
                     ]
 
         ax =
@@ -920,8 +920,8 @@ circularChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "id" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "field" (vNumbers [ 4, 6, 10, 3, 7, 8 ])
+                << dataColumn "id" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "field" (dNumbers [ 4, 6, 10, 3, 7, 8 ])
 
         ds =
             dataSource
@@ -986,7 +986,7 @@ circularChart2 =
             scales
                 << scale "rScale"
                     [ SType ScSqrt
-                    , SDomain (DData [ dDataset "table", dField (vStr "data") ])
+                    , SDomain (DoData [ dDataset "table", dField (str "data") ])
                     , SRange (RNumbers [ 20, 100 ])
                     ]
 
@@ -1044,7 +1044,7 @@ scatterplot1 =
                     , SRound True
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "cars", dField (vStr "Horsepower") ])
+                    , SDomain (DoData [ dDataset "cars", dField (str "Horsepower") ])
                     , SRange (RDefault RWidth)
                     ]
                 << scale "yScale"
@@ -1052,7 +1052,7 @@ scatterplot1 =
                     , SRound True
                     , SNice NTrue
                     , SZero True
-                    , SDomain (DData [ dDataset "cars", dField (vStr "Miles_per_Gallon") ])
+                    , SDomain (DoData [ dDataset "cars", dField (str "Miles_per_Gallon") ])
                     , SRange (RDefault RHeight)
                     ]
                 << scale "sizeScale"
@@ -1060,7 +1060,7 @@ scatterplot1 =
                     , SRound True
                     , SNice NFalse
                     , SZero True
-                    , SDomain (DData [ dDataset "cars", dField (vStr "Acceleration") ])
+                    , SDomain (DoData [ dDataset "cars", dField (str "Acceleration") ])
                     , SRange (RNumbers [ 4, 361 ])
                     ]
 
@@ -1129,13 +1129,13 @@ scatterplot2 =
                     [ SType ScLinear
                     , SNice NTrue
                     , SRange (RValues [ vSignal "nullGap", vSignal "width" ])
-                    , SDomain (DData [ dDataset "valid", dField (vSignal "xField") ])
+                    , SDomain (DoData [ dDataset "valid", dField (strSignal "xField") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
                     , SNice NTrue
                     , SRange (RValues [ vSignal "height - nullGap", vNumber 0 ])
-                    , SDomain (DData [ dDataset "valid", dField (vSignal "yField") ])
+                    , SDomain (DoData [ dDataset "valid", dField (strSignal "yField") ])
                     ]
 
         ax =
@@ -1235,7 +1235,7 @@ scatterplot3 =
             scales
                 << scale "xScale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "drive", dField (vStr "miles") ])
+                    , SDomain (DoData [ dDataset "drive", dField (str "miles") ])
                     , SRange (RDefault RWidth)
                     , SNice NTrue
                     , SZero False
@@ -1243,7 +1243,7 @@ scatterplot3 =
                     ]
                 << scale "yScale"
                     [ SType ScLinear
-                    , SDomain (DData [ dDataset "drive", dField (vStr "gas") ])
+                    , SDomain (DoData [ dDataset "drive", dField (str "gas") ])
                     , SRange (RDefault RHeight)
                     , SNice NTrue
                     , SZero False
@@ -1251,22 +1251,22 @@ scatterplot3 =
                     ]
                 << scale "alignScale"
                     [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RStrings [ "right", "left", "center", "center" ])
+                    , SDomain (DoStrs [ "left", "right", "top", "bottom" ])
+                    , SRange (RStrs [ "right", "left", "center", "center" ])
                     ]
                 << scale "baseScale"
                     [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RStrings [ "middle", "middle", "bottom", "top" ])
+                    , SDomain (DoStrs [ "left", "right", "top", "bottom" ])
+                    , SRange (RStrs [ "middle", "middle", "bottom", "top" ])
                     ]
                 << scale "dx"
                     [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SDomain (DoStrs [ "left", "right", "top", "bottom" ])
                     , SRange (RNumbers [ -7, 6, 0, 0 ])
                     ]
                 << scale "dy"
                     [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
+                    , SDomain (DoStrs [ "left", "right", "top", "bottom" ])
                     , SRange (RNumbers [ 1, 1, -5, 6 ])
                     ]
 
@@ -1417,7 +1417,7 @@ scatterplot4 =
                 << scale "xScale"
                     [ SType ScLinear
                     , SRange (RDefault RWidth)
-                    , SDomain (DData [ dDataset "summary", dFields [ vStr "stdev0", vStr "stdev1" ] ])
+                    , SDomain (DoData [ dDataset "summary", dFields (strs [ "stdev0", "stdev1" ]) ])
                     , SRound True
                     , SNice NTrue
                     , SZero False
@@ -1425,7 +1425,7 @@ scatterplot4 =
                 << scale "yScale"
                     [ SType ScBand
                     , SRange (RDefault RHeight)
-                    , SDomain (DData [ dDataset "summary", dField (vStr "variety"), dSort [ Op Max, ByField "mean", Descending ] ])
+                    , SDomain (DoData [ dDataset "summary", dField (str "variety"), dSort [ Op Max, ByField "mean", Descending ] ])
                     ]
 
         ax =
