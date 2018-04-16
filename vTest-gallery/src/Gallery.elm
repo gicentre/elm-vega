@@ -1066,8 +1066,8 @@ scatterplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Horsepower") ]
-                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Miles per gallon") ]
+                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (str "Horsepower") ]
+                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (str "Miles per gallon") ]
 
         shapeEncoding =
             [ MStrokeWidth [ vNumber 2 ]
@@ -1140,8 +1140,8 @@ scatterplot2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxOffset (vNumber 5), AxFormat "s", AxTitle (vSignal "xField") ]
-                << axis "yScale" SLeft [ AxOffset (vNumber 5), AxFormat "s", AxTitle (vSignal "yField") ]
+                << axis "xScale" SBottom [ AxOffset (num 5), AxFormat "s", AxTitle (strSignal "xField") ]
+                << axis "yScale" SLeft [ AxOffset (num 5), AxFormat "s", AxTitle (strSignal "yField") ]
 
         mk =
             marks
@@ -1293,7 +1293,7 @@ scatterplot3 =
                     ]
                 << axis "xScale"
                     SBottom
-                    [ AxTitle (vStr "Miles driven per capita each year")
+                    [ AxTitle (str "Miles driven per capita each year")
                     , AxDomain False
                     , AxTicks False
                     , AxLabels False
@@ -1320,7 +1320,7 @@ scatterplot3 =
                     ]
                 << axis "yScale"
                     SRight
-                    [ AxTitle (vStr "Price of a gallon of gasoline (adjusted for inflation)")
+                    [ AxTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
                     , AxDomain False
                     , AxTicks False
                     , AxLabels False
@@ -1430,7 +1430,7 @@ scatterplot4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1, AxTitle (vStr "Barley Yield") ]
+                << axis "xScale" SBottom [ AxZIndex 1, AxTitle (str "Barley Yield") ]
                 << axis "yScale" SLeft [ AxTickCount 5, AxZIndex 1 ]
 
         mk =

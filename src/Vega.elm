@@ -34,6 +34,7 @@ module Vega
         , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
+        , Num
         , Operation(..)
         , Order(..)
         , OverlapStrategy(..)
@@ -108,6 +109,8 @@ module Vega
         , markInterpolationLabel
         , markOrientationLabel
         , marks
+        , num
+        , nums
         , on
         , padding
         , scale
@@ -334,6 +337,7 @@ can carry data used in specifications.
 @docs FieldValue
 @docs Value
 @docs Str
+@docs Num
 @docs Facet
 
 @docs vSignal
@@ -346,6 +350,8 @@ can carry data used in specifications.
 @docs dNumbers
 @docs str
 @docs strs
+@docs num
+@docs nums
 @docs vStr
 @docs vStrs
 @docs dStrs
@@ -428,15 +434,15 @@ type AxisProperty
     | AxLabelFlushOffset Float
     | AxLabelPadding Float
     | AxLabelOverlap OverlapStrategy
-    | AxMinExtent Value
-    | AxMaxExtent Value
-    | AxOffset Value
-    | AxPosition Value
+    | AxMinExtent Num
+    | AxMaxExtent Num
+    | AxOffset Num
+    | AxPosition Num
     | AxTicks Bool
       -- TODO: Need to account for temporal units and intervals
     | AxTickCount Int
     | AxTickSize Float
-    | AxTitle Value
+    | AxTitle Str
     | AxTitlePadding Float
     | AxValues (List Value)
     | AxZIndex Int
@@ -1449,6 +1455,16 @@ type Str
     | StrSignal String
 
 
+{-| Represents number-related values such as a numeric literal, a list of numbers
+or a signal that generates a number.
+-}
+type Num
+    = Num Float
+      --TODO: Do we need nested lists of Num values so that a list can contain mixed numeric literals and signals?
+    | Nums (List Float)
+    | NumSignal String
+
+
 {-| Represents a value such as a number or reference to a value such as a field label
 or transformed value. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/types/#Value)
@@ -2047,6 +2063,20 @@ markOrientationLabel orient =
             "vertical"
 
 
+{-| A numeric value. This can be a numeric literal or a signal that generates a number.
+-}
+num : Float -> Num
+num =
+    Num
+
+
+{-| A list of number values. These can be numeric literals or signals that generate numbers.
+-}
+nums : List Float -> Num
+nums =
+    Nums
+
+
 {-| Adds list of triggers to the given data table or mark.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/triggers).
 -}
@@ -2129,6 +2159,20 @@ sigPadding =
 sigWidth : Value
 sigWidth =
     VSignal "width"
+
+
+{-| A string value. This can be a string literal or a signal that generates a string.
+-}
+str : String -> Str
+str =
+    Str
+
+
+{-| A list of string values. These can be string literals or signals that generate strings.
+-}
+strs : List String -> Str
+strs =
+    Strs
 
 
 {-| A convenience function for generating a text string representing a given
@@ -2410,20 +2454,6 @@ strSignal =
     StrSignal
 
 
-{-| A string value. This can be a string literal or a signal that generates a string.
--}
-str : String -> Str
-str =
-    Str
-
-
-{-| A list of string values. These can be string literals or signals that generate strings.
--}
-strs : List String -> Str
-strs =
-    Strs
-
-
 {-| A string value. Used for providing parameters that can be of any value type.
 -}
 vStr : String -> Value
@@ -2557,11 +2587,11 @@ axisProperty ap =
         AxLabelPadding pad ->
             ( "labelPadding", JE.float pad )
 
-        AxMaxExtent val ->
-            ( "maxExtent", valueSpec val )
+        AxMaxExtent num ->
+            ( "maxExtent", numSpec num )
 
-        AxMinExtent val ->
-            ( "minExtent", valueSpec val )
+        AxMinExtent num ->
+            ( "minExtent", numSpec num )
 
         AxGridScale scName ->
             ( "gridScale", JE.string scName )
@@ -2585,11 +2615,11 @@ axisProperty ap =
         AxLabelFlushOffset pad ->
             ( "labelFlushOffset", JE.float pad )
 
-        AxOffset val ->
-            ( "offset", valueSpec val )
+        AxOffset num ->
+            ( "offset", numSpec num )
 
-        AxPosition val ->
-            ( "position", valueSpec val )
+        AxPosition num ->
+            ( "position", numSpec num )
 
         AxTicks b ->
             ( "ticks", JE.bool b )
@@ -2600,8 +2630,8 @@ axisProperty ap =
         AxTickSize sz ->
             ( "tickSize", JE.float sz )
 
-        AxTitle val ->
-            ( "title", valueSpec val )
+        AxTitle str ->
+            ( "title", strSpec str )
 
         AxTitlePadding pad ->
             ( "titlePadding", JE.float pad )
@@ -3325,6 +3355,19 @@ niceSpec ni =
             JE.int n
 
 
+numSpec : Num -> Spec
+numSpec num =
+    case num of
+        Num num ->
+            JE.float num
+
+        Nums nums ->
+            JE.list (List.map JE.float nums)
+
+        NumSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+
 opSpec : Operation -> Spec
 opSpec op =
     case op of
@@ -3806,6 +3849,19 @@ stackProperty sp =
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
 
 
+strSpec : Str -> Spec
+strSpec str =
+    case str of
+        Str str ->
+            JE.string str
+
+        Strs strs ->
+            JE.list (List.map JE.string strs)
+
+        StrSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+
 timeUnitLabel : TimeUnit -> String
 timeUnitLabel tu =
     case tu of
@@ -4174,19 +4230,6 @@ valueProperty val =
                 ]
             )
                 |> Debug.log "Unexpected production rule passed to valueProperty"
-
-
-strSpec : Str -> Spec
-strSpec str =
-    case str of
-        Str str ->
-            JE.string str
-
-        Strs strs ->
-            JE.list (List.map JE.string strs)
-
-        StrSignal sig ->
-            JE.object [ signalReferenceProperty sig ]
 
 
 valueSpec : Value -> Spec
