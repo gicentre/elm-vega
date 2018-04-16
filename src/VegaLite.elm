@@ -74,7 +74,7 @@ module VegaLite
         , StackProperty(..)
         , Symbol(..)
         , TextChannel(..)
-        , TimeUnit(..)
+        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
         , VAlign(..)
         , VLProperty
@@ -83,6 +83,7 @@ module VegaLite
         , asSpec
         , autosize
         , background
+          -- TODO: Make bin private in next major version.
         , bin
         , binAs
         , calculateAs
@@ -140,6 +141,7 @@ module VegaLite
         , toVegaLite
         , tooltip
         , transform
+        , utc
         , vConcat
         , width
         )
@@ -269,6 +271,7 @@ Relates to where something appears in the visualization.
 @docs VAlign
 @docs FontWeight
 @docs TimeUnit
+@docs utc
 
 
 ## Mark channels
@@ -1717,7 +1720,6 @@ type Symbol
     | Diamond
     | TriangleUp
     | TriangleDown
-      -- TODO: Should we rename to SymPath to match Symbol type constructor in Vega?
     | Path String
 
 
@@ -1740,11 +1742,11 @@ type TextChannel
 for further details.
 
 To encode a time as UTC (coordinated universal time, independent of local time
-zones or daylight saving), add a `Utc` type to one of the other time units.
+zones or daylight saving), provide a time unit to the `utc` function.
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (Utc YearMonthDateHours) ]
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
 
 -}
 type TimeUnit
@@ -1962,11 +1964,14 @@ the default binning. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
 more details.
 
-    position X [ PName "IMDB_Rating", PmType Quantitative , bin [] ]
+    position X [ PName "IMDB_Rating", PmType Quantitative , PBin [] ]
 
 -}
 bin : List BinProperty -> LabelledSpec
 bin bProps =
+    -- TODO: This should need to be exposed - only maintained for backward
+    -- compatiblity after it's previous function was renamed to binAs. In next
+    -- major version, make private.
     if bProps == [] then
         ( "bin", JE.bool True )
     else
@@ -2250,6 +2255,8 @@ parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#named)
 for details.
 
+    data = ...
+    json = ...
     enc = ...
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
@@ -2397,7 +2404,7 @@ domain and range values.
     color
         [ MName "year"
         , MmType Ordinal
-        , MScale <| domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )
+        , MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
         ]
 
 -}
@@ -2627,7 +2634,7 @@ properties that characterise the hyperlinking such as the destination url and cu
 type. The second parameter is a list of any previous encoding channels to which
 this hyperlink channel should be added.
 
-    hyperlink [ MName "Species", MmType Nominal ] []
+    hyperlink [ HName "Species", HmType Nominal ] []
 
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
@@ -2724,11 +2731,13 @@ file matches the value of `person` in the primary data source.
 
     trans =
         transform
-            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" personDetails
+            << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" "personDetails"
 
 -}
 lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
 lookupAs key1 ( vlProp, spec ) key2 asName =
+    -- TODO: Change sig to use Data rather than (VLProperty, Spec) for next major releaase.
+    -- Not sure why substituting with an alias bumps up by a major release.
     (::)
         ( "lookupAs"
         , JE.list
@@ -2860,14 +2869,14 @@ This is often implicit when chaining a series of encodings using functional comp
 
       enc =
           encoding
-            << position X [ PName "Animal", PmTyoe Ordinal ]
+            << position X [ PName "Animal", PmType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
 appearing, simply provide an empty list of axis properties to `PAxis` :
 
      enc =
          encoding
-           << position X [ PName "Animal", PmTyoe Ordinal, PAxis [] ]
+           << position X [ PName "Animal", PmType Ordinal, PAxis [] ]
 
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
@@ -3301,6 +3310,19 @@ transform transforms =
         ( VLTransform, JE.null )
     else
         ( VLTransform, JE.list (List.map assemble transforms) )
+
+
+{-| Provides a UTC version of a given a time (coordinated universal time, independent
+of local time zones or daylight saving).
+For example,
+
+    encoding
+        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+
+-}
+utc : TimeUnit -> TimeUnit
+utc tu =
+    Utc tu
 
 
 {-| Assigns a list of specifications to be juxtaposed vertically in a visualization.
