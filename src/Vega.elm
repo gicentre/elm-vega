@@ -15,7 +15,7 @@ module Vega
         , DataRow
         , DataTable
         , DataType
-        , EncodingProperty(..)
+        , EncodingProperty
         , EventHandler(..)
         , Expr(..)
         , Expression
@@ -120,6 +120,7 @@ module Vega
         , cubeHelix
         , cubeHelixLong
         , cursorLabel
+        , custom
         , dDataset
         , dField
         , dFields
@@ -141,6 +142,8 @@ module Vega
         , dirLabel
         , distinct
         , dsv
+        , enter
+        , exit
         , faField
         , faGroupBy
         , foBool
@@ -151,6 +154,7 @@ module Vega
         , hcl
         , hclLong
         , height
+        , hover
         , hsl
         , hslLong
         , iCheckbox
@@ -214,6 +218,7 @@ module Vega
         , transform
         , trigger
         , tsv
+        , update
         , utc
         , vAlignLabel
         , vBand
@@ -406,6 +411,11 @@ Functions and types for declaring the input data to the visualization.
 @docs faGroupBy
 @docs MarkProperty
 @docs EncodingProperty
+@docs enter
+@docs update
+@docs hover
+@docs exit
+@docs custom
 @docs MarkInterpolation
 @docs markInterpolationLabel
 @docs MarkOrientation
@@ -644,97 +654,6 @@ type Bind
     | IColor (List InputProperty)
 
 
-{-| A checkbox input element.
--}
-iCheckbox : List InputProperty -> Bind
-iCheckbox =
-    ICheckbox
-
-
-{-| A color selector input element.
--}
-iColor : List InputProperty -> Bind
-iColor =
-    IColor
-
-
-{-| A date selector input element.
--}
-iDate : List InputProperty -> Bind
-iDate =
-    IDate
-
-
-{-| A local data time selector input element.
--}
-iDateTimeLocal : List InputProperty -> Bind
-iDateTimeLocal =
-    IDateTimeLocal
-
-
-{-| A month selector input element.
--}
-iMonth : List InputProperty -> Bind
-iMonth =
-    IMonth
-
-
-{-| A numeric input element.
--}
-iNumber : List InputProperty -> Bind
-iNumber =
-    INumber
-
-
-{-| A radio buttons input element.
--}
-iRadio : List InputProperty -> Bind
-iRadio =
-    IRadio
-
-
-{-| A slider input element.
--}
-iRange : List InputProperty -> Bind
-iRange =
-    IRange
-
-
-{-| A drop-down list input element.
--}
-iSelect : List InputProperty -> Bind
-iSelect =
-    ISelect
-
-
-{-| A telephone number input element.
--}
-iTel : List InputProperty -> Bind
-iTel =
-    ITel
-
-
-{-| A free text input element.
--}
-iText : List InputProperty -> Bind
-iText =
-    IText
-
-
-{-| A time selector input element.
--}
-iTime : List InputProperty -> Bind
-iTime =
-    ITime
-
-
-{-| A week selector input element.
--}
-iWeek : List InputProperty -> Bind
-iWeek =
-    IWeek
-
-
 {-| Indicates the type of color interpolation to apply, when mapping a data field
 onto a color scale. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative).
@@ -875,7 +794,6 @@ type DataType
 
 {-| Indicates the charactersitcs of an encoding. For further
 details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
-TODO: Need to expand this doc comment.
 -}
 type EncodingProperty
     = Enter (List MarkProperty)
@@ -2260,6 +2178,15 @@ cursorLabel cur =
             "grabbing"
 
 
+{-| The properties with a named custom encoding set. To envoke the custom set a
+signal event handler with an `encode` directive should be defined. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+custom : String -> List MarkProperty -> EncodingProperty
+custom name =
+    Custom name
+
+
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
@@ -2526,6 +2453,24 @@ dValue =
     DValue
 
 
+{-| The properties to be encoded when a mark item is first instantiated or a
+visualization is resized. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+enter : List MarkProperty -> EncodingProperty
+enter =
+    Enter
+
+
+{-| The properties to be encoded when the data backing a mark item is removed.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+exit : List MarkProperty -> EncodingProperty
+exit =
+    Exit
+
+
 {-| For data-driven facets, a list aggregate transform properties for the
 aggregate data values generated for each facet group item.
 -}
@@ -2631,6 +2576,15 @@ height w =
     ( VHeight, JE.float w )
 
 
+{-| The properties to be encoded when a pointer hovers over a mark item.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+hover : List MarkProperty -> EncodingProperty
+hover =
+    Enter
+
+
 {-| Hue-saturation-lightness color interpolation.
 -}
 hsl : CInterpolate
@@ -2645,6 +2599,34 @@ hslLong =
     HslLong
 
 
+{-| A checkbox input element.
+-}
+iCheckbox : List InputProperty -> Bind
+iCheckbox =
+    ICheckbox
+
+
+{-| A color selector input element.
+-}
+iColor : List InputProperty -> Bind
+iColor =
+    IColor
+
+
+{-| A date selector input element.
+-}
+iDate : List InputProperty -> Bind
+iDate =
+    IDate
+
+
+{-| A local data time selector input element.
+-}
+iDateTimeLocal : List InputProperty -> Bind
+iDateTimeLocal =
+    IDateTimeLocal
+
+
 {-| A conditional list of values depending on whether an expression (first parameter)
 evaluates as true. The second and third parameters represent the 'then' and 'else'
 branches of the test.
@@ -2652,6 +2634,69 @@ branches of the test.
 ifElse : String -> List Value -> List Value -> Value
 ifElse condition thenVals elseVals =
     VIfElse condition thenVals elseVals
+
+
+{-| A month selector input element.
+-}
+iMonth : List InputProperty -> Bind
+iMonth =
+    IMonth
+
+
+{-| A numeric input element.
+-}
+iNumber : List InputProperty -> Bind
+iNumber =
+    INumber
+
+
+{-| A radio buttons input element.
+-}
+iRadio : List InputProperty -> Bind
+iRadio =
+    IRadio
+
+
+{-| A slider input element.
+-}
+iRange : List InputProperty -> Bind
+iRange =
+    IRange
+
+
+{-| A drop-down list input element.
+-}
+iSelect : List InputProperty -> Bind
+iSelect =
+    ISelect
+
+
+{-| A telephone number input element.
+-}
+iTel : List InputProperty -> Bind
+iTel =
+    ITel
+
+
+{-| A free text input element.
+-}
+iText : List InputProperty -> Bind
+iText =
+    IText
+
+
+{-| A time selector input element.
+-}
+iTime : List InputProperty -> Bind
+iTime =
+    ITime
+
+
+{-| A week selector input element.
+-}
+iWeek : List InputProperty -> Bind
+iWeek =
+    IWeek
 
 
 {-| Indicates a JSON format. Typically used when specifying a data url.
@@ -3137,6 +3182,15 @@ a data url.
 tsv : Format
 tsv =
     TSV
+
+
+{-| The properties to be encoded when a mark item is updated such as in response
+to a signal change. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+update : List MarkProperty -> EncodingProperty
+update =
+    Update
 
 
 {-| Provides a UTC version of a given a time (coordinated universal time, independent

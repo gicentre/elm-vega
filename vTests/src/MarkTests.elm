@@ -41,14 +41,14 @@ arcTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ Enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
-                        , Update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
+                        [ enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
+                        , update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Arc
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MStartAngle [ vSignal "startAngle" ]
@@ -62,7 +62,7 @@ arcTest =
                             , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -114,8 +114,8 @@ areaTest =
                 << mark Area
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vScale (FName "xscale"), vField (FName "u") ]
                             , MY [ vScale (FName "yscale"), vField (FName "v") ]
                             , MY2 [ vScale (FName "yscale"), vSignal "y2" ]
@@ -127,7 +127,7 @@ areaTest =
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             , MStrokeWidth [ vSignal "strokeWidth" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -163,8 +163,8 @@ groupTest =
             marks
                 << mark Group
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MWidth [ vSignal "w" ]
@@ -176,7 +176,7 @@ groupTest =
                             , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     , MGroup [ ds, nestedMk [] ]
                     ]
@@ -187,7 +187,7 @@ groupTest =
                     [ MFrom [ sData (str "table") ]
                     , MInteractive False
                     , MEncode
-                        [ Enter
+                        [ enter
                             [ MX [ vField (FName "x") ]
                             , MY [ vField (FName "y") ]
                             , MWidth [ vField (FName "w") ]
@@ -219,8 +219,8 @@ imageTest =
             marks
                 << mark Image
                     [ MEncode
-                        [ Enter [ MUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
-                        , Update
+                        [ enter [ MUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
+                        , update
                             [ MOpacity [ vNumber 1 ]
                             , MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
@@ -230,7 +230,7 @@ imageTest =
                             , MAlign [ vSignal "align" ]
                             , MBaseline [ vSignal "baseline" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -282,8 +282,8 @@ lineTest =
                 << mark Line
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ Enter [ MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vScale (FName "xscale"), vField (FName "u") ]
                             , MY [ vScale (FName "yscale"), vField (FName "v") ]
                             , MDefined [ vSignal "defined || datum.u !== 3" ]
@@ -294,7 +294,7 @@ lineTest =
                             , MStrokeCap [ vSignal "strokeCap" ]
                             , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -317,8 +317,8 @@ pathTest =
             marks
                 << mark Path
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MPath [ vSignal "path" ]
@@ -327,7 +327,7 @@ pathTest =
                             , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -352,8 +352,8 @@ rectTest =
             marks
                 << mark Rect
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MWidth [ vSignal "w" ]
@@ -364,7 +364,7 @@ rectTest =
                             , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -389,8 +389,8 @@ ruleTest =
             marks
                 << mark Rule
                     [ MEncode
-                        [ Enter [ MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MX2 [ vSignal "x2" ]
@@ -400,7 +400,7 @@ ruleTest =
                             , MStrokeCap [ vSignal "strokeCap" ]
                             , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -444,8 +444,8 @@ symbolTest =
             marks
                 << mark Symbol
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        , update
                             [ MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
                             , MSize [ vSignal "size" ]
@@ -455,7 +455,7 @@ symbolTest =
                             , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -485,14 +485,14 @@ textTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ Enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
-                        , Update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
+                        [ enter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
+                        , update [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Text
                     [ MEncode
-                        [ Enter [ MFill [ vStr "#000" ], MText [ vStr "Text Label" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#000" ], MText [ vStr "Text Label" ] ]
+                        , update
                             [ MOpacity [ vNumber 1 ]
                             , MX [ vSignal "x" ]
                             , MY [ vSignal "y" ]
@@ -506,7 +506,7 @@ textTest =
                             , MFontWeight [ vSignal "fontWeight" ]
                             , MLimit [ vSignal "limit" ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -556,15 +556,15 @@ trailTest =
                 << mark Trail
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ Enter [ MFill [ vStr "#939597" ] ]
-                        , Update
+                        [ enter [ MFill [ vStr "#939597" ] ]
+                        , update
                             [ MX [ vScale (FName "xscale"), vField (FName "u") ]
                             , MY [ vScale (FName "yscale"), vField (FName "v") ]
                             , MSize [ vScale (FName "zscale"), vField (FName "v"), vMultiply (vSignal "size") ]
                             , MDefined [ vSignal "defined || datum.u !== 3" ]
                             , MOpacity [ vNumber 1 ]
                             ]
-                        , Hover [ MOpacity [ vNumber 0.5 ] ]
+                        , hover [ MOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in

@@ -12068,18 +12068,25 @@ var _user$project$Vega$Custom = F2(
 	function (a, b) {
 		return {ctor: 'Custom', _0: a, _1: b};
 	});
+var _user$project$Vega$custom = function (name) {
+	return _user$project$Vega$Custom(name);
+};
 var _user$project$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
 var _user$project$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
+var _user$project$Vega$exit = _user$project$Vega$Exit;
 var _user$project$Vega$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
+var _user$project$Vega$update = _user$project$Vega$Update;
 var _user$project$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
+var _user$project$Vega$enter = _user$project$Vega$Enter;
+var _user$project$Vega$hover = _user$project$Vega$Enter;
 var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
@@ -13671,7 +13678,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_0: _user$project$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$Enter(
+								_0: _user$project$Vega$enter(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$MFill(
@@ -13742,7 +13749,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$Update(
+									_0: _user$project$Vega$update(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$MY(
@@ -14252,7 +14259,7 @@ var _user$project$TransformTests$packTest1 = function () {
 						_0: _user$project$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$Enter(
+								_0: _user$project$Vega$enter(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$MFill(
@@ -14280,7 +14287,7 @@ var _user$project$TransformTests$packTest1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$Update(
+									_0: _user$project$Vega$update(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$MX(
