@@ -63,24 +63,24 @@ barChart1 =
                 << mark Rect
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "category") ]
                             , MWidth [ vScale (fName "xScale"), vBand 1 ]
                             , MY [ vScale (fName "yScale"), vField (fName "amount") ]
                             , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             ]
-                        , update [ MFill [ vStr "steelblue" ] ]
-                        , hover [ MFill [ vStr "red" ] ]
+                        , enUpdate [ MFill [ vStr "steelblue" ] ]
+                        , enHover [ MFill [ vStr "red" ] ]
                         ]
                     ]
                 << mark Text
                     [ MEncode
-                        [ enter
+                        [ enEnter
                             [ MAlign [ vStr (hAlignLabel AlignCenter) ]
                             , MBaseline [ vStr (vAlignLabel AlignBottom) ]
                             , MFill [ vStr "#333" ]
                             ]
-                        , update
+                        , enUpdate
                             [ MX [ vScale (fName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
                             , MY [ vScale (fName "yScale"), vSignal "tooltip.amount", vOffset (vNumber -2) ]
                             , MText [ vSignal "tooltip.amount" ]
@@ -144,15 +144,15 @@ barChart2 =
                 << mark Rect
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "x") ]
                             , MWidth [ vScale (fName "xScale"), vBand 1, vOffset (vNumber -1) ]
                             , MY [ vScale (fName "yScale"), vField (fName "y0") ]
                             , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
                             , MFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
-                        , update [ MFillOpacity [ vNumber 1 ] ]
-                        , hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ MFillOpacity [ vNumber 1 ] ]
+                        , enHover [ MFillOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -217,7 +217,7 @@ barChart3 =
                     [ MName "bars"
                     , MFrom [ sData (str "facet") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MY [ vScale (fName "pos"), vField (fName "position") ]
                             , MHeight [ vScale (fName "pos"), vBand 1 ]
                             , MX [ vScale (fName "xScale"), vField (fName "value") ]
@@ -229,7 +229,7 @@ barChart3 =
                 << mark Text
                     [ MFrom [ sData (str "bars") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vField (fName "x2"), vOffset (vNumber -5) ]
                             , MY [ vField (fName "y"), vOffset (vObject [ vField (fName "height"), vMultiply (vNumber 0.5) ]) ]
                             , MFill [ vStr "white" ]
@@ -244,7 +244,7 @@ barChart3 =
             marks
                 << mark Group
                     [ MFrom [ sFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
-                    , MEncode [ enter [ MY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
+                    , MEncode [ enEnter [ MY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
                     , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
     in
@@ -267,7 +267,7 @@ barChart4 =
                     [ TAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
 
         trTable =
-            data "trellis" [ dSource "tuples" ]
+            data "trellis" [ daSource "tuples" ]
                 |> transform
                     [ TAggregate [ agGroupBy [ "a" ] ]
                     , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
@@ -323,19 +323,19 @@ barChart4 =
                 << mark Rect
                     [ MFrom [ sData (str "faceted_tuples") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vNumber 0 ]
                             , MX2 [ vScale (fName "xScale"), vField (fName "c") ]
                             , MFill [ vScale (fName "cScale"), vField (fName "a") ]
                             , MStrokeWidth [ vNumber 2 ]
                             ]
-                        , update
+                        , enUpdate
                             [ MY [ vScale (fName "yScale"), vField (fName "b") ]
                             , MHeight [ vScale (fName "yScale"), vBand 1 ]
                             , MStroke [ vNull ]
                             , MZIndex [ vNumber 0 ]
                             ]
-                        , hover
+                        , enHover
                             [ MStroke [ vStr "firebrick" ]
                             , MZIndex [ vNumber 1 ]
                             ]
@@ -347,8 +347,8 @@ barChart4 =
                 << mark Group
                     [ MFrom [ sData (str "trellis"), sFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
                     , MEncode
-                        [ enter [ MX [ vNumber 0 ], MWidth [ vSignal "width" ] ]
-                        , update [ MY [ vField (fName "y0") ], MY2 [ vField (fName "y1") ] ]
+                        [ enEnter [ MX [ vNumber 0 ], MWidth [ vSignal "width" ] ]
+                        , enUpdate [ MY [ vField (fName "y0") ], MY2 [ vField (fName "y1") ] ]
                         ]
                     , MGroup [ nestedSc [], nestedAx [], nestedMk [] ]
                     ]
@@ -367,11 +367,11 @@ barChart5 =
     let
         ds =
             dataSource
-                [ data "population" [ dUrl "https://vega.github.io/vega/data/population.json" ]
-                , data "popYear" [ dSource "population" ] |> transform [ TFilter (expr "datum.year == year") ]
-                , data "males" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
-                , data "females" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
-                , data "ageGroups" [ dSource "population" ] |> transform [ TAggregate [ agGroupBy [ "age" ] ] ]
+                [ data "population" [ daUrl "https://vega.github.io/vega/data/population.json" ]
+                , data "popYear" [ daSource "population" ] |> transform [ TFilter (expr "datum.year == year") ]
+                , data "males" [ daSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
+                , data "females" [ daSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
+                , data "ageGroups" [ daSource "population" ] |> transform [ TAggregate [ agGroupBy [ "age" ] ] ]
                 ]
 
         si =
@@ -401,7 +401,7 @@ barChart5 =
                     [ MInteractive False
                     , MFrom [ sData (str "ageGroups") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vSignal "chartWidth + chartPad / 2" ]
                             , MY [ vScale (fName "yScale"), vField (fName "age"), vBand 0.5 ]
                             , MText [ vField (fName "age") ]
@@ -412,11 +412,11 @@ barChart5 =
                         ]
                     ]
                 << mark Group
-                    [ MEncode [ update [ MX [ vNumber 0 ], MHeight [ vSignal "height" ] ] ]
+                    [ MEncode [ enUpdate [ MX [ vNumber 0 ], MHeight [ vSignal "height" ] ] ]
                     , MGroup [ sc Female [], ax [], mk Female [] ]
                     ]
                 << mark Group
-                    [ MEncode [ update [ MX [ vSignal "chartWidth + chartPad" ], MHeight [ vSignal "height" ] ] ]
+                    [ MEncode [ enUpdate [ MX [ vSignal "chartWidth + chartPad" ], MHeight [ vSignal "height" ] ] ]
                     , MGroup [ sc Male [], ax [], mk Male [] ]
                     ]
 
@@ -452,7 +452,7 @@ barChart5 =
                 << mark Rect
                     [ MFrom [ sData (str genderField) ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "people") ]
                             , MX2 [ vScale (fName "xScale"), vNumber 0 ]
                             , MY [ vScale (fName "yScale"), vField (fName "age") ]
@@ -526,14 +526,14 @@ lineChart1 =
                 << mark Line
                     [ MFrom [ sData (str "series") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "x") ]
                             , MY [ vScale (fName "yScale"), vField (fName "y") ]
                             , MStroke [ vScale (fName "cScale"), vField (fName "c") ]
                             , MStrokeWidth [ vNumber 2 ]
                             ]
-                        , update [ MInterpolate [ vSignal "interpolate" ], MStrokeOpacity [ vNumber 1 ] ]
-                        , hover [ MStrokeOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ MInterpolate [ vSignal "interpolate" ], MStrokeOpacity [ vNumber 1 ] ]
+                        , enHover [ MStrokeOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -585,14 +585,14 @@ areaChart1 =
                 << mark Area
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "u") ]
                             , MY [ vScale (fName "yScale"), vField (fName "v") ]
                             , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             , MFill [ vStr "steelblue" ]
                             ]
-                        , update [ MInterpolate [ vSignal "interpolate" ], MFillOpacity [ vNumber 1 ] ]
-                        , hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ MInterpolate [ vSignal "interpolate" ], MFillOpacity [ vNumber 1 ] ]
+                        , enHover [ MFillOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -650,15 +650,15 @@ areaChart2 =
                 << mark Area
                     [ MFrom [ sData (str "series") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
                             , MX [ vScale (fName "xScale"), vField (fName "x") ]
                             , MY [ vScale (fName "yScale"), vField (fName "y0") ]
                             , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
                             , MFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
-                        , update [ MFillOpacity [ vNumber 1 ] ]
-                        , hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ MFillOpacity [ vNumber 1 ] ]
+                        , enHover [ MFillOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -675,7 +675,7 @@ areaChart3 =
                 << dataColumn "y" (dNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         layerData =
-            data "layer_indices" [ dValue (vNumbers [ 0, 1, 2, 3 ]) ]
+            data "layer_indices" [ daValue (vNumbers [ 0, 1, 2, 3 ]) ]
                 |> transform
                     [ TFilter (expr "datum.data < layers")
                     , TFormula "datum.data * -height" "offset" AlwaysUpdate
@@ -719,7 +719,7 @@ areaChart3 =
             marks
                 << mark Group
                     [ MEncode
-                        [ update
+                        [ enUpdate
                             [ MWidth [ vField (fGroup (fName "width")) ]
                             , MHeight [ vField (fGroup (fName "height")) ]
                             , MGroupClip [ vBool True ]
@@ -732,7 +732,7 @@ areaChart3 =
             marks
                 << mark Group
                     [ MFrom [ sData (str "layer_indices") ]
-                    , MEncode [ update [ MY [ vField (fName "offset") ] ] ]
+                    , MEncode [ enUpdate [ MY [ vField (fName "offset") ] ] ]
                     , MGroup [ mkArea [] ]
                     ]
 
@@ -741,12 +741,12 @@ areaChart3 =
                 << mark Area
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
                             , MX [ vScale (fName "xScale"), vField (fName "x") ]
                             , MFill [ vStr "steelblue" ]
                             ]
-                        , update
+                        , enUpdate
                             [ MY [ vScale (fName "yScale"), vField (fName "y") ]
                             , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             , MFillOpacity [ vSignal "opacity" ]
@@ -762,7 +762,7 @@ areaChart4 : Spec
 areaChart4 =
     let
         table =
-            data "jobs" [ dUrl "https://vega.github.io/vega/data/jobs.json" ]
+            data "jobs" [ daUrl "https://vega.github.io/vega/data/jobs.json" ]
                 |> transform
                     [ TFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , TStack
@@ -773,7 +773,7 @@ areaChart4 =
                     ]
 
         series =
-            data "series" [ dSource "jobs" ]
+            data "series" [ daSource "jobs" ]
                 |> transform
                     [ TAggregate
                         [ agGroupBy [ "job", "sex" ]
@@ -842,7 +842,7 @@ areaChart4 =
                     ]
                 << scale "alignScale"
                     [ SType ScQuantize
-                    , SRange (RStrs [ "left", "center", "right" ])
+                    , SRange (RStrs [ "left", "cenEnter", "right" ])
                     , SZero False
                     , SDomain (DoNumbers [ 1730, 2130 ])
                     ]
@@ -863,8 +863,8 @@ areaChart4 =
                     , axDomain False
                     , axTickSize 12
                     , axEncode
-                        [ ( EGrid, [ enter [ MStroke [ vStr "#ccc" ] ] ] )
-                        , ( ETicks, [ enter [ MStroke [ vStr "#ccc" ] ] ] )
+                        [ ( EGrid, [ enEnter [ MStroke [ vStr "#ccc" ] ] ] )
+                        , ( ETicks, [ enEnter [ MStroke [ vStr "#ccc" ] ] ] )
                         ]
                     ]
 
@@ -873,14 +873,14 @@ areaChart4 =
                 << mark Area
                     [ MFrom [ sData (str "facet") ]
                     , MEncode
-                        [ update
+                        [ enUpdate
                             [ MX [ vScale (fName "xScale"), vField (fName "year") ]
                             , MY [ vScale (fName "yScale"), vField (fName "y0") ]
                             , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
                             , MFill [ vScale (fName "cScale"), vField (fName "sex") ]
                             , MFillOpacity [ vScale (fName "alphaScale"), vField (fParent (fName "sum")) ]
                             ]
-                        , hover [ MFillOpacity [ vNumber 0.2 ] ]
+                        , enHover [ MFillOpacity [ vNumber 0.2 ] ]
                         ]
                     ]
 
@@ -897,7 +897,7 @@ areaChart4 =
                     [ MFrom [ sData (str "series") ]
                     , MInteractive False
                     , MEncode
-                        [ update
+                        [ enUpdate
                             [ MX [ vField (fName "argmax.year"), vScale (fName "xScale") ]
                             , MdX [ vField (fName "argmax.year"), vScale (fName "offsetScale") ]
                             , MY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
@@ -953,12 +953,12 @@ circularChart1 =
                 << mark Arc
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MFill [ vScale (fName "cScale"), vField (fName "id") ]
                             , MX [ vSignal "width / 2" ]
                             , MY [ vSignal "height / 2" ]
                             ]
-                        , update
+                        , enUpdate
                             [ MStartAngle [ vField (fName "startAngle") ]
                             , MEndAngle [ vField (fName "endAngle") ]
                             , MPadAngle [ vSignal "PI * padAngle / 180" ]
@@ -978,7 +978,7 @@ circularChart2 =
     let
         ds =
             dataSource
-                [ data "table" [ dValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
+                [ data "table" [ daValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
                     |> transform [ TPie [ PiField "data" ] ]
                 ]
 
@@ -995,7 +995,7 @@ circularChart2 =
                 << mark Arc
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
                             , MY [ vField (fGroup (fName "height")), vMultiply (vNumber 0.5) ]
                             , MStartAngle [ vField (fName "startAngle") ]
@@ -1004,14 +1004,14 @@ circularChart2 =
                             , MOuterRadius [ vField (fName "data"), vScale (fName "rScale") ]
                             , MStroke [ vStr "#fff" ]
                             ]
-                        , update [ MFill [ vStr "#ccc" ] ]
-                        , hover [ MFill [ vStr "pink" ] ]
+                        , enUpdate [ MFill [ vStr "#ccc" ] ]
+                        , enHover [ MFill [ vStr "pink" ] ]
                         ]
                     ]
                 << mark Text
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
                             , MY [ vField (fGroup (fName "height")), vMultiply (vNumber 0.5) ]
                             , MRadius [ vField (fName "data"), vScale (fName "rScale"), vOffset (vNumber 8) ]
@@ -1033,7 +1033,7 @@ scatterplot1 =
     let
         ds =
             dataSource
-                [ data "cars" [ dUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "cars" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
                     |> transform [ TFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
@@ -1080,10 +1080,10 @@ scatterplot1 =
         lg =
             legends
                 << legend
-                    [ LSize "sizeScale"
-                    , LTitle "Acceleration"
-                    , LFormat "s"
-                    , LEncode [ enSymbols [ update shapeEncoding ] ]
+                    [ leSize "sizeScale"
+                    , leTitle "Acceleration"
+                    , leFormat "s"
+                    , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
 
         mk =
@@ -1091,7 +1091,7 @@ scatterplot1 =
                 << mark Symbol
                     [ MFrom [ sData (str "cars") ]
                     , MEncode
-                        [ update <|
+                        [ enUpdate <|
                             [ MX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
                             , MY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
                             , MSize [ vScale (fName "sizeScale"), vField (fName "Acceleration") ]
@@ -1109,11 +1109,11 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ dUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
-                , data "valid" [ dSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] != null") ]
-                , data "nullXY" [ dSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
-                , data "nullY" [ dSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] == null") ]
-                , data "nullX" [ dSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] != null") ]
+                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                , data "valid" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] != null") ]
+                , data "nullXY" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
+                , data "nullY" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] == null") ]
+                , data "nullX" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] != null") ]
                 ]
 
         si =
@@ -1148,18 +1148,18 @@ scatterplot2 =
                 << mark Symbol
                     [ MFrom [ sData (str "valid") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MSize [ vNumber 50 ]
                             , MTooltip [ vField (fName "tooltip") ]
                             ]
-                        , update
+                        , enUpdate
                             [ MX [ vScale (fName "xScale"), vField (fSignal "xField") ]
                             , MY [ vScale (fName "yScale"), vField (fSignal "yField") ]
                             , MFill [ vStr "steelblue" ]
                             , MFillOpacity [ vNumber 0.5 ]
                             , MZIndex [ vNumber 0 ]
                             ]
-                        , hover
+                        , enHover
                             [ MFill [ vStr "firebrick" ]
                             , MFillOpacity [ vNumber 1 ]
                             , MZIndex [ vNumber 1 ]
@@ -1169,17 +1169,17 @@ scatterplot2 =
                 << mark Symbol
                     [ MFrom [ sData (str "nullY") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MSize [ vNumber 50 ]
                             , MTooltip [ vField (fName "tooltip") ]
                             ]
-                        , update
+                        , enUpdate
                             [ MX [ vScale (fName "xScale"), vField (fSignal "xField") ]
                             , MY [ vSignal "height - nullSize/2" ]
                             , MFill [ vStr "#aaa" ]
                             , MFillOpacity [ vNumber 0.2 ]
                             ]
-                        , hover
+                        , enHover
                             [ MFill [ vStr "firebrick" ]
                             , MFillOpacity [ vNumber 1 ]
                             ]
@@ -1188,18 +1188,18 @@ scatterplot2 =
                 << mark Symbol
                     [ MFrom [ sData (str "nullX") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MSize [ vNumber 50 ]
                             , MTooltip [ vField (fName "tooltip") ]
                             ]
-                        , update
+                        , enUpdate
                             [ MX [ vSignal "nullSize/2" ]
                             , MY [ vScale (fName "yScale"), vField (fSignal "yField") ]
                             , MFill [ vStr "#aaa" ]
                             , MFillOpacity [ vNumber 0.2 ]
                             , MZIndex [ vNumber 1 ]
                             ]
-                        , hover
+                        , enHover
                             [ MFill [ vStr "firebrick" ]
                             , MFillOpacity [ vNumber 1 ]
                             ]
@@ -1209,7 +1209,7 @@ scatterplot2 =
                     [ MInteractive False
                     , MFrom [ sData (str "nullXY") ]
                     , MEncode
-                        [ update
+                        [ enUpdate
                             [ MX [ vSignal "nullSize", vOffset (vNumber -4) ]
                             , MY [ vSignal "height", vOffset (vNumber 13) ]
                             , MText [ vSignal "datum.count + ' null'" ]
@@ -1229,7 +1229,7 @@ scatterplot3 : Spec
 scatterplot3 =
     let
         ds =
-            dataSource [ data "drive" [ dUrl "https://vega.github.io/vega/data/driving.json" ] ]
+            dataSource [ data "drive" [ daUrl "https://vega.github.io/vega/data/driving.json" ] ]
 
         sc =
             scales
@@ -1252,7 +1252,7 @@ scatterplot3 =
                 << scale "alignScale"
                     [ SType ScOrdinal
                     , SDomain (DoStrs [ "left", "right", "top", "bottom" ])
-                    , SRange (RStrs [ "right", "left", "center", "center" ])
+                    , SRange (RStrs [ "right", "left", "cenEnter", "cenEnter" ])
                     ]
                 << scale "baseScale"
                     [ SType ScOrdinal
@@ -1279,9 +1279,9 @@ scatterplot3 =
                     , axGrid True
                     , axDomain False
                     , axEncode
-                        [ ( EDomain, [ enter [ MStroke [ vStr "transparent" ] ] ] )
+                        [ ( EDomain, [ enEnter [ MStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
-                          , [ enter
+                          , [ enEnter
                                 [ MAlign [ hAlignLabel AlignLeft |> vStr ]
                                 , MBaseline [ vAlignLabel AlignTop |> vStr ]
                                 , MFontSize [ vNumber 12 ]
@@ -1306,9 +1306,9 @@ scatterplot3 =
                     , axDomain False
                     , axFormat "$0.2f"
                     , axEncode
-                        [ ( EDomain, [ enter [ MStroke [ vStr "transparent" ] ] ] )
+                        [ ( EDomain, [ enEnter [ MStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
-                          , [ enter
+                          , [ enEnter
                                 [ MAlign [ hAlignLabel AlignLeft |> vStr ]
                                 , MBaseline [ vAlignLabel AlignBottom |> vStr ]
                                 , MFontSize [ vNumber 12 ]
@@ -1331,7 +1331,7 @@ scatterplot3 =
                 << mark Line
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MInterpolate [ markInterpolationLabel Cardinal |> vStr ]
                             , MX [ vScale (fName "xScale"), vField (fName "miles") ]
                             , MY [ vScale (fName "yScale"), vField (fName "gas") ]
@@ -1343,7 +1343,7 @@ scatterplot3 =
                 << mark Symbol
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "miles") ]
                             , MY [ vScale (fName "yScale"), vField (fName "gas") ]
                             , MFill [ vStr "#fff" ]
@@ -1356,7 +1356,7 @@ scatterplot3 =
                 << mark Text
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MX [ vScale (fName "xScale"), vField (fName "miles") ]
                             , MY [ vScale (fName "yScale"), vField (fName "gas") ]
                             , MdX [ vScale (fName "dx"), vField (fName "side") ]
@@ -1378,8 +1378,8 @@ scatterplot4 =
     let
         ds =
             dataSource
-                [ data "barley" [ dUrl "https://vega.github.io/vega/data/barley.json" ]
-                , data "summary" [ dSource "barley" ]
+                [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ]
+                , data "summary" [ daSource "barley" ]
                     |> transform
                         [ TAggregate
                             [ agGroupBy [ "variety" ]
@@ -1425,7 +1425,7 @@ scatterplot4 =
                 << scale "yScale"
                     [ SType ScBand
                     , SRange (RDefault RHeight)
-                    , SDomain (DoData [ dDataset "summary", dField (str "variety"), dSort [ op maximum, byField (str "mean"), Descending ] ])
+                    , SDomain (DoData [ dDataset "summary", dField (str "variety"), dSort [ soOp maximum, soByField (str "mean"), Descending ] ])
                     ]
 
         ax =
@@ -1438,8 +1438,8 @@ scatterplot4 =
                 << mark Rect
                     [ MFrom [ sData (str "summary") ]
                     , MEncode
-                        [ enter [ MFill [ vStr "black" ], MHeight [ vNumber 1 ] ]
-                        , update
+                        [ enEnter [ MFill [ vStr "black" ], MHeight [ vNumber 1 ] ]
+                        , enUpdate
                             [ MX [ vScale (fName "xScale"), vSignal "datum[measure+'0']" ]
                             , MY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
                             , MX2 [ vScale (fName "xScale"), vSignal "datum[measure+'1']" ]
@@ -1449,8 +1449,8 @@ scatterplot4 =
                 << mark Symbol
                     [ MFrom [ sData (str "summary") ]
                     , MEncode
-                        [ enter [ MFill [ vStr "back" ], MSize [ vNumber 40 ] ]
-                        , update
+                        [ enEnter [ MFill [ vStr "back" ], MSize [ vNumber 40 ] ]
+                        , enUpdate
                             [ MX [ vScale (fName "xScale"), vField (fName "mean") ]
                             , MY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
                             ]

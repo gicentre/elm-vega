@@ -11291,99 +11291,99 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 				_1: _elm_lang$core$Json_Encode$string(
 					_gicentre$elm_vega$Vega$legendTypeLabel(_p67._0))
 			};
-		case 'LOrient':
+		case 'LeOrient':
 			return {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
 					_gicentre$elm_vega$Vega$legendOrientLabel(_p67._0))
 			};
-		case 'LFill':
+		case 'LeFill':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fill',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LOpacity':
+		case 'LeOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'opacity',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LShape':
+		case 'LeShape':
 			return {
 				ctor: '_Tuple2',
 				_0: 'shape',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LSize':
+		case 'LeSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'size',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LStroke':
+		case 'LeStroke':
 			return {
 				ctor: '_Tuple2',
 				_0: 'stroke',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LStrokeDash':
+		case 'LeStrokeDash':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeDash',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LEncode':
+		case 'LeEncode':
 			return {
 				ctor: '_Tuple2',
 				_0: 'encode',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendEncodingProperty, _p67._0))
 			};
-		case 'LEntryPadding':
+		case 'LeEntryPadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'entryPadding',
 				_1: _gicentre$elm_vega$Vega$valueSpec(_p67._0)
 			};
-		case 'LFormat':
+		case 'LeFormat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LOffset':
+		case 'LeOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
 				_1: _gicentre$elm_vega$Vega$valueSpec(_p67._0)
 			};
-		case 'LPadding':
+		case 'LePadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
 				_1: _gicentre$elm_vega$Vega$valueSpec(_p67._0)
 			};
-		case 'LTickCount':
+		case 'LeTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
 				_1: _elm_lang$core$Json_Encode$int(_p67._0)
 			};
-		case 'LTitlePadding':
+		case 'LeTitlePadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
 				_1: _gicentre$elm_vega$Vega$valueSpec(_p67._0)
 			};
-		case 'LTitle':
+		case 'LeTitle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LValues':
+		case 'LeValues':
 			return {
 				ctor: '_Tuple2',
 				_0: 'values',
@@ -12005,27 +12005,27 @@ var _gicentre$elm_vega$Vega$CAuto = {ctor: 'CAuto'};
 var _gicentre$elm_vega$Vega$DUrl = function (a) {
 	return {ctor: 'DUrl', _0: a};
 };
-var _gicentre$elm_vega$Vega$dUrl = _gicentre$elm_vega$Vega$DUrl;
+var _gicentre$elm_vega$Vega$daUrl = _gicentre$elm_vega$Vega$DUrl;
 var _gicentre$elm_vega$Vega$DOn = function (a) {
 	return {ctor: 'DOn', _0: a};
 };
-var _gicentre$elm_vega$Vega$dOn = _gicentre$elm_vega$Vega$DOn;
+var _gicentre$elm_vega$Vega$daOn = _gicentre$elm_vega$Vega$DOn;
 var _gicentre$elm_vega$Vega$DValue = function (a) {
 	return {ctor: 'DValue', _0: a};
 };
-var _gicentre$elm_vega$Vega$dValue = _gicentre$elm_vega$Vega$DValue;
+var _gicentre$elm_vega$Vega$daValue = _gicentre$elm_vega$Vega$DValue;
 var _gicentre$elm_vega$Vega$DSources = function (a) {
 	return {ctor: 'DSources', _0: a};
 };
-var _gicentre$elm_vega$Vega$dSources = _gicentre$elm_vega$Vega$DSources;
+var _gicentre$elm_vega$Vega$daSources = _gicentre$elm_vega$Vega$DSources;
 var _gicentre$elm_vega$Vega$DSource = function (a) {
 	return {ctor: 'DSource', _0: a};
 };
-var _gicentre$elm_vega$Vega$dSource = _gicentre$elm_vega$Vega$DSource;
+var _gicentre$elm_vega$Vega$daSource = _gicentre$elm_vega$Vega$DSource;
 var _gicentre$elm_vega$Vega$DFormat = function (a) {
 	return {ctor: 'DFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$dFormat = _gicentre$elm_vega$Vega$DFormat;
+var _gicentre$elm_vega$Vega$daFormat = _gicentre$elm_vega$Vega$DFormat;
 var _gicentre$elm_vega$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
@@ -12062,25 +12062,25 @@ var _gicentre$elm_vega$Vega$Custom = F2(
 	function (a, b) {
 		return {ctor: 'Custom', _0: a, _1: b};
 	});
-var _gicentre$elm_vega$Vega$custom = function (name) {
+var _gicentre$elm_vega$Vega$enCustom = function (name) {
 	return _gicentre$elm_vega$Vega$Custom(name);
 };
 var _gicentre$elm_vega$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
-var _gicentre$elm_vega$Vega$hover = _gicentre$elm_vega$Vega$Hover;
+var _gicentre$elm_vega$Vega$enHover = _gicentre$elm_vega$Vega$Hover;
 var _gicentre$elm_vega$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
-var _gicentre$elm_vega$Vega$exit = _gicentre$elm_vega$Vega$Exit;
+var _gicentre$elm_vega$Vega$enExit = _gicentre$elm_vega$Vega$Exit;
 var _gicentre$elm_vega$Vega$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
-var _gicentre$elm_vega$Vega$update = _gicentre$elm_vega$Vega$Update;
+var _gicentre$elm_vega$Vega$enUpdate = _gicentre$elm_vega$Vega$Update;
 var _gicentre$elm_vega$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
-var _gicentre$elm_vega$Vega$enter = _gicentre$elm_vega$Vega$Enter;
+var _gicentre$elm_vega$Vega$enEnter = _gicentre$elm_vega$Vega$Enter;
 var _gicentre$elm_vega$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
@@ -12388,60 +12388,78 @@ var _gicentre$elm_vega$Vega$TopRight = {ctor: 'TopRight'};
 var _gicentre$elm_vega$Vega$Top = {ctor: 'Top'};
 var _gicentre$elm_vega$Vega$TopLeft = {ctor: 'TopLeft'};
 var _gicentre$elm_vega$Vega$Left = {ctor: 'Left'};
-var _gicentre$elm_vega$Vega$LZIndex = function (a) {
-	return {ctor: 'LZIndex', _0: a};
+var _gicentre$elm_vega$Vega$LeZIndex = function (a) {
+	return {ctor: 'LeZIndex', _0: a};
 };
-var _gicentre$elm_vega$Vega$LValues = function (a) {
-	return {ctor: 'LValues', _0: a};
+var _gicentre$elm_vega$Vega$leZIndex = _gicentre$elm_vega$Vega$LeZIndex;
+var _gicentre$elm_vega$Vega$LeValues = function (a) {
+	return {ctor: 'LeValues', _0: a};
 };
-var _gicentre$elm_vega$Vega$LTitle = function (a) {
-	return {ctor: 'LTitle', _0: a};
+var _gicentre$elm_vega$Vega$leValues = _gicentre$elm_vega$Vega$LeValues;
+var _gicentre$elm_vega$Vega$LeTitle = function (a) {
+	return {ctor: 'LeTitle', _0: a};
 };
-var _gicentre$elm_vega$Vega$LTitlePadding = function (a) {
-	return {ctor: 'LTitlePadding', _0: a};
+var _gicentre$elm_vega$Vega$leTitle = _gicentre$elm_vega$Vega$LeTitle;
+var _gicentre$elm_vega$Vega$LeTitlePadding = function (a) {
+	return {ctor: 'LeTitlePadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$LTickCount = function (a) {
-	return {ctor: 'LTickCount', _0: a};
+var _gicentre$elm_vega$Vega$leTitlePadding = _gicentre$elm_vega$Vega$LeTitlePadding;
+var _gicentre$elm_vega$Vega$LeTickCount = function (a) {
+	return {ctor: 'LeTickCount', _0: a};
 };
-var _gicentre$elm_vega$Vega$LPadding = function (a) {
-	return {ctor: 'LPadding', _0: a};
+var _gicentre$elm_vega$Vega$leTickCount = _gicentre$elm_vega$Vega$LeTickCount;
+var _gicentre$elm_vega$Vega$LePadding = function (a) {
+	return {ctor: 'LePadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$LOffset = function (a) {
-	return {ctor: 'LOffset', _0: a};
+var _gicentre$elm_vega$Vega$lePadding = _gicentre$elm_vega$Vega$LePadding;
+var _gicentre$elm_vega$Vega$LeOffset = function (a) {
+	return {ctor: 'LeOffset', _0: a};
 };
-var _gicentre$elm_vega$Vega$LFormat = function (a) {
-	return {ctor: 'LFormat', _0: a};
+var _gicentre$elm_vega$Vega$leOffset = _gicentre$elm_vega$Vega$LeOffset;
+var _gicentre$elm_vega$Vega$LeFormat = function (a) {
+	return {ctor: 'LeFormat', _0: a};
 };
-var _gicentre$elm_vega$Vega$LEntryPadding = function (a) {
-	return {ctor: 'LEntryPadding', _0: a};
+var _gicentre$elm_vega$Vega$leFormat = _gicentre$elm_vega$Vega$LeFormat;
+var _gicentre$elm_vega$Vega$LeEntryPadding = function (a) {
+	return {ctor: 'LeEntryPadding', _0: a};
 };
-var _gicentre$elm_vega$Vega$LEncode = function (a) {
-	return {ctor: 'LEncode', _0: a};
+var _gicentre$elm_vega$Vega$leEntryPadding = _gicentre$elm_vega$Vega$LeEntryPadding;
+var _gicentre$elm_vega$Vega$LeEncode = function (a) {
+	return {ctor: 'LeEncode', _0: a};
 };
-var _gicentre$elm_vega$Vega$LStrokeDash = function (a) {
-	return {ctor: 'LStrokeDash', _0: a};
+var _gicentre$elm_vega$Vega$leEncode = _gicentre$elm_vega$Vega$LeEncode;
+var _gicentre$elm_vega$Vega$LeStrokeDash = function (a) {
+	return {ctor: 'LeStrokeDash', _0: a};
 };
-var _gicentre$elm_vega$Vega$LStroke = function (a) {
-	return {ctor: 'LStroke', _0: a};
+var _gicentre$elm_vega$Vega$leStrokeDash = _gicentre$elm_vega$Vega$LeStrokeDash;
+var _gicentre$elm_vega$Vega$LeStroke = function (a) {
+	return {ctor: 'LeStroke', _0: a};
 };
-var _gicentre$elm_vega$Vega$LSize = function (a) {
-	return {ctor: 'LSize', _0: a};
+var _gicentre$elm_vega$Vega$leStroke = _gicentre$elm_vega$Vega$LeStroke;
+var _gicentre$elm_vega$Vega$LeSize = function (a) {
+	return {ctor: 'LeSize', _0: a};
 };
-var _gicentre$elm_vega$Vega$LShape = function (a) {
-	return {ctor: 'LShape', _0: a};
+var _gicentre$elm_vega$Vega$leSize = _gicentre$elm_vega$Vega$LeSize;
+var _gicentre$elm_vega$Vega$LeShape = function (a) {
+	return {ctor: 'LeShape', _0: a};
 };
-var _gicentre$elm_vega$Vega$LOpacity = function (a) {
-	return {ctor: 'LOpacity', _0: a};
+var _gicentre$elm_vega$Vega$leShape = _gicentre$elm_vega$Vega$LeShape;
+var _gicentre$elm_vega$Vega$LeOpacity = function (a) {
+	return {ctor: 'LeOpacity', _0: a};
 };
-var _gicentre$elm_vega$Vega$LFill = function (a) {
-	return {ctor: 'LFill', _0: a};
+var _gicentre$elm_vega$Vega$leOpacity = _gicentre$elm_vega$Vega$LeOpacity;
+var _gicentre$elm_vega$Vega$LeFill = function (a) {
+	return {ctor: 'LeFill', _0: a};
 };
-var _gicentre$elm_vega$Vega$LOrient = function (a) {
-	return {ctor: 'LOrient', _0: a};
+var _gicentre$elm_vega$Vega$leFill = _gicentre$elm_vega$Vega$LeFill;
+var _gicentre$elm_vega$Vega$LeOrient = function (a) {
+	return {ctor: 'LeOrient', _0: a};
 };
+var _gicentre$elm_vega$Vega$leOrient = _gicentre$elm_vega$Vega$LeOrient;
 var _gicentre$elm_vega$Vega$LeType = function (a) {
 	return {ctor: 'LeType', _0: a};
 };
+var _gicentre$elm_vega$Vega$leType = _gicentre$elm_vega$Vega$LeType;
 var _gicentre$elm_vega$Vega$EnGradient = function (a) {
 	return {ctor: 'EnGradient', _0: a};
 };
@@ -12953,11 +12971,11 @@ var _gicentre$elm_vega$Vega$signal = F2(
 var _gicentre$elm_vega$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
-var _gicentre$elm_vega$Vega$byField = _gicentre$elm_vega$Vega$ByField;
+var _gicentre$elm_vega$Vega$soByField = _gicentre$elm_vega$Vega$ByField;
 var _gicentre$elm_vega$Vega$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
-var _gicentre$elm_vega$Vega$op = _gicentre$elm_vega$Vega$Op;
+var _gicentre$elm_vega$Vega$soOp = _gicentre$elm_vega$Vega$Op;
 var _gicentre$elm_vega$Vega$Descending = {ctor: 'Descending'};
 var _gicentre$elm_vega$Vega$Ascending = {ctor: 'Ascending'};
 var _gicentre$elm_vega$Vega$dataRefProperty = function (dataRef) {
@@ -13700,7 +13718,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MFill(
@@ -13722,7 +13740,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -13794,7 +13812,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFill(
@@ -13816,7 +13834,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$update(
+										_0: _gicentre$elm_vega$Vega$enUpdate(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MX(
@@ -13968,10 +13986,10 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 													_0: _gicentre$elm_vega$Vega$dSort(
 														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$op(_gicentre$elm_vega$Vega$maximum),
+															_0: _gicentre$elm_vega$Vega$soOp(_gicentre$elm_vega$Vega$maximum),
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$byField(
+																_0: _gicentre$elm_vega$Vega$soByField(
 																	_gicentre$elm_vega$Vega$str('mean')),
 																_1: {
 																	ctor: '::',
@@ -14085,7 +14103,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 				'barley',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/barley.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/barley.json'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -14227,7 +14245,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 						'summary',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$dSource('barley'),
+							_0: _gicentre$elm_vega$Vega$daSource('barley'),
 							_1: {ctor: '[]'}
 						})),
 				_1: {ctor: '[]'}
@@ -14293,7 +14311,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MInterpolate(
@@ -14375,7 +14393,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -14465,7 +14483,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 								_0: _gicentre$elm_vega$Vega$MEncode(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enter(
+										_0: _gicentre$elm_vega$Vega$enEnter(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MX(
@@ -14611,7 +14629,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 												_0: _gicentre$elm_vega$Vega$EDomain,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$enter(
+													_0: _gicentre$elm_vega$Vega$enEnter(
 														{
 															ctor: '::',
 															_0: _gicentre$elm_vega$Vega$MStroke(
@@ -14632,7 +14650,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 													_0: _gicentre$elm_vega$Vega$ELabels,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$enter(
+														_0: _gicentre$elm_vega$Vega$enEnter(
 															{
 																ctor: '::',
 																_0: _gicentre$elm_vega$Vega$MAlign(
@@ -14735,7 +14753,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 															_0: _gicentre$elm_vega$Vega$EDomain,
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$enter(
+																_0: _gicentre$elm_vega$Vega$enEnter(
 																	{
 																		ctor: '::',
 																		_0: _gicentre$elm_vega$Vega$MStroke(
@@ -14756,7 +14774,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 																_0: _gicentre$elm_vega$Vega$ELabels,
 																_1: {
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$enter(
+																	_0: _gicentre$elm_vega$Vega$enEnter(
 																		{
 																			ctor: '::',
 																			_0: _gicentre$elm_vega$Vega$MAlign(
@@ -14954,10 +14972,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 													_0: 'left',
 													_1: {
 														ctor: '::',
-														_0: 'center',
+														_0: 'cenEnter',
 														_1: {
 															ctor: '::',
-															_0: 'center',
+															_0: 'cenEnter',
 															_1: {ctor: '[]'}
 														}
 													}
@@ -15133,7 +15151,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 				'drive',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/driving.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/driving.json'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -15223,7 +15241,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MSize(
@@ -15246,7 +15264,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -15307,7 +15325,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFill(
@@ -15360,7 +15378,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MSize(
@@ -15383,7 +15401,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$update(
+										_0: _gicentre$elm_vega$Vega$enUpdate(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MX(
@@ -15429,7 +15447,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$hover(
+											_0: _gicentre$elm_vega$Vega$enHover(
 												{
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$MFill(
@@ -15473,7 +15491,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 								_0: _gicentre$elm_vega$Vega$MEncode(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enter(
+										_0: _gicentre$elm_vega$Vega$enEnter(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MSize(
@@ -15496,7 +15514,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$update(
+											_0: _gicentre$elm_vega$Vega$enUpdate(
 												{
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$MX(
@@ -15551,7 +15569,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$hover(
+												_0: _gicentre$elm_vega$Vega$enHover(
 													{
 														ctor: '::',
 														_0: _gicentre$elm_vega$Vega$MFill(
@@ -15598,7 +15616,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 										_0: _gicentre$elm_vega$Vega$MEncode(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$update(
+												_0: _gicentre$elm_vega$Vega$enUpdate(
 													{
 														ctor: '::',
 														_0: _gicentre$elm_vega$Vega$MX(
@@ -15921,7 +15939,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					'movies',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/movies.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/movies.json'),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -15939,7 +15957,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						'valid',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$dSource('movies'),
+							_0: _gicentre$elm_vega$Vega$daSource('movies'),
 							_1: {ctor: '[]'}
 						})),
 				_1: {
@@ -15962,7 +15980,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							'nullXY',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$dSource('movies'),
+								_0: _gicentre$elm_vega$Vega$daSource('movies'),
 								_1: {ctor: '[]'}
 							})),
 					_1: {
@@ -15980,7 +15998,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 								'nullY',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$dSource('movies'),
+									_0: _gicentre$elm_vega$Vega$daSource('movies'),
 									_1: {ctor: '[]'}
 								})),
 						_1: {
@@ -15998,7 +16016,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 									'nullX',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$dSource('movies'),
+										_0: _gicentre$elm_vega$Vega$daSource('movies'),
 										_1: {ctor: '[]'}
 									})),
 							_1: {ctor: '[]'}
@@ -16101,22 +16119,22 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 				_gicentre$elm_vega$Vega$legend,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$LSize('sizeScale'),
+					_0: _gicentre$elm_vega$Vega$leSize('sizeScale'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$LTitle('Acceleration'),
+						_0: _gicentre$elm_vega$Vega$leTitle('Acceleration'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$LFormat('s'),
+							_0: _gicentre$elm_vega$Vega$leFormat('s'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$LEncode(
+								_0: _gicentre$elm_vega$Vega$leEncode(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$enSymbols(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$update(shapeEncoding),
+												_0: _gicentre$elm_vega$Vega$enUpdate(shapeEncoding),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -16147,7 +16165,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$update(
+								_0: _gicentre$elm_vega$Vega$enUpdate(
 									A2(
 										_elm_lang$core$Basics_ops['++'],
 										{
@@ -16401,7 +16419,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 					'cars',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -16466,7 +16484,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -16555,7 +16573,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFill(
@@ -16568,7 +16586,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFill(
@@ -16603,7 +16621,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -16773,7 +16791,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 					'table',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$dValue(
+						_0: _gicentre$elm_vega$Vega$daValue(
 							_gicentre$elm_vega$Vega$vNumbers(
 								{
 									ctor: '::',
@@ -16849,7 +16867,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MFill(
@@ -16886,7 +16904,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MStartAngle(
@@ -17284,7 +17302,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$update(
+								_0: _gicentre$elm_vega$Vega$enUpdate(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -17364,7 +17382,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$hover(
+									_0: _gicentre$elm_vega$Vega$enHover(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -17450,7 +17468,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 								_0: _gicentre$elm_vega$Vega$MEncode(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$update(
+										_0: _gicentre$elm_vega$Vega$enUpdate(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MX(
@@ -17619,7 +17637,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 													_0: _gicentre$elm_vega$Vega$EGrid,
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$enter(
+														_0: _gicentre$elm_vega$Vega$enEnter(
 															{
 																ctor: '::',
 																_0: _gicentre$elm_vega$Vega$MStroke(
@@ -17640,7 +17658,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 														_0: _gicentre$elm_vega$Vega$ETicks,
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$enter(
+															_0: _gicentre$elm_vega$Vega$enEnter(
 																{
 																	ctor: '::',
 																	_0: _gicentre$elm_vega$Vega$MStroke(
@@ -17945,7 +17963,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 															_0: 'left',
 															_1: {
 																ctor: '::',
-																_0: 'center',
+																_0: 'cenEnter',
 																_1: {
 																	ctor: '::',
 																	_0: 'right',
@@ -18172,7 +18190,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 			'series',
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$dSource('jobs'),
+				_0: _gicentre$elm_vega$Vega$daSource('jobs'),
 				_1: {ctor: '[]'}
 			}));
 	var table = A2(
@@ -18237,7 +18255,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 			'jobs',
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/jobs.json'),
+				_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/jobs.json'),
 				_1: {ctor: '[]'}
 			}));
 	var ds = _gicentre$elm_vega$Vega$dataSource(
@@ -18310,7 +18328,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MInterpolate(
@@ -18348,7 +18366,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MY(
@@ -18415,7 +18433,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$update(
+								_0: _gicentre$elm_vega$Vega$enUpdate(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MY(
@@ -18454,7 +18472,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 					_0: _gicentre$elm_vega$Vega$MEncode(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$update(
+							_0: _gicentre$elm_vega$Vega$enUpdate(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$MWidth(
@@ -18699,7 +18717,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 			'layer_indices',
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$dValue(
+				_0: _gicentre$elm_vega$Vega$daValue(
 					_gicentre$elm_vega$Vega$vNumbers(
 						{
 							ctor: '::',
@@ -18891,7 +18909,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MInterpolate(
@@ -18965,7 +18983,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -18978,7 +18996,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -19515,7 +19533,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -19572,7 +19590,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MInterpolate(
@@ -19594,7 +19612,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -19933,7 +19951,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -19991,7 +20009,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MInterpolate(
@@ -20013,7 +20031,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MStrokeOpacity(
@@ -20574,7 +20592,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -20626,7 +20644,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MY(
@@ -20677,7 +20695,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MStroke(
@@ -20810,7 +20828,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -20832,7 +20850,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MY(
@@ -21095,7 +21113,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 			'trellis',
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$dSource('tuples'),
+				_0: _gicentre$elm_vega$Vega$daSource('tuples'),
 				_1: {ctor: '[]'}
 			}));
 	var table = function (_p56) {
@@ -21332,7 +21350,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MY(
@@ -21430,7 +21448,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -21594,7 +21612,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MY(
@@ -21999,7 +22017,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -22082,7 +22100,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -22095,7 +22113,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFillOpacity(
@@ -22592,7 +22610,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -22654,7 +22672,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MFill(
@@ -22667,7 +22685,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$hover(
+										_0: _gicentre$elm_vega$Vega$enHover(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$MFill(
@@ -22693,7 +22711,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enter(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MAlign(
@@ -22726,7 +22744,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -23110,7 +23128,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -23294,7 +23312,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enter(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -23377,7 +23395,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						_0: _gicentre$elm_vega$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$update(
+								_0: _gicentre$elm_vega$Vega$enUpdate(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$MX(
@@ -23433,7 +23451,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							_0: _gicentre$elm_vega$Vega$MEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$update(
+									_0: _gicentre$elm_vega$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$MX(
@@ -23629,7 +23647,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 				'population',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$dUrl('https://vega.github.io/vega/data/population.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/population.json'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -23647,7 +23665,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						'popYear',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$dSource('population'),
+							_0: _gicentre$elm_vega$Vega$daSource('population'),
 							_1: {ctor: '[]'}
 						})),
 				_1: {
@@ -23665,7 +23683,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							'males',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$dSource('popYear'),
+								_0: _gicentre$elm_vega$Vega$daSource('popYear'),
 								_1: {ctor: '[]'}
 							})),
 					_1: {
@@ -23683,7 +23701,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 								'females',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$dSource('popYear'),
+									_0: _gicentre$elm_vega$Vega$daSource('popYear'),
 									_1: {ctor: '[]'}
 								})),
 						_1: {
@@ -23710,7 +23728,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 									'ageGroups',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$dSource('population'),
+										_0: _gicentre$elm_vega$Vega$daSource('population'),
 										_1: {ctor: '[]'}
 									})),
 							_1: {ctor: '[]'}

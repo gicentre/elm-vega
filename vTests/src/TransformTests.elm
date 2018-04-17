@@ -48,11 +48,11 @@ packTest1 =
                 << mark Symbol
                     [ MFrom [ sData (str "tree") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MFill [ vScale (fName "color"), vField (fName "id") ]
                             , MStroke [ vStr "white" ]
                             ]
-                        , update
+                        , enUpdate
                             [ MX [ vField (fName "x") ]
                             , MY [ vField (fName "y") ]
                             , MSize [ vSignal "4*datum.r*datum.r" ]
@@ -93,7 +93,7 @@ stackTest1 =
             signals
                 << signal "offset"
                     [ SiValue (vStr "zero")
-                    , SiBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
+                    , SiBind (iSelect [ inOptions (vStrs [ "zero", "cenEnter", "normalize" ]) ])
                     ]
                 << signal "sortField"
                     [ SiValue vNull
@@ -135,14 +135,14 @@ stackTest1 =
                 << mark Rect
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enter
+                        [ enEnter
                             [ MFill [ vScale (fName "color"), vField (fName "key") ]
                             , MStroke [ vStr "white" ]
                             , MStrokeWidth [ vNumber 1 ]
                             , MX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNumber 0.5) ]
                             , MWidth [ vScale (fName "xscale"), vBand 1 ]
                             ]
-                        , update
+                        , enUpdate
                             [ MY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNumber 0.5) ]
                             , MY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNumber 0.5) ]
                             ]

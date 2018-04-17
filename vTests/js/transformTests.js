@@ -11291,99 +11291,99 @@ var _user$project$Vega$legendProperty = function (lp) {
 				_1: _elm_lang$core$Json_Encode$string(
 					_user$project$Vega$legendTypeLabel(_p67._0))
 			};
-		case 'LOrient':
+		case 'LeOrient':
 			return {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
 					_user$project$Vega$legendOrientLabel(_p67._0))
 			};
-		case 'LFill':
+		case 'LeFill':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fill',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LOpacity':
+		case 'LeOpacity':
 			return {
 				ctor: '_Tuple2',
 				_0: 'opacity',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LShape':
+		case 'LeShape':
 			return {
 				ctor: '_Tuple2',
 				_0: 'shape',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LSize':
+		case 'LeSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'size',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LStroke':
+		case 'LeStroke':
 			return {
 				ctor: '_Tuple2',
 				_0: 'stroke',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LStrokeDash':
+		case 'LeStrokeDash':
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeDash',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LEncode':
+		case 'LeEncode':
 			return {
 				ctor: '_Tuple2',
 				_0: 'encode',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _user$project$Vega$legendEncodingProperty, _p67._0))
 			};
-		case 'LEntryPadding':
+		case 'LeEntryPadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'entryPadding',
 				_1: _user$project$Vega$valueSpec(_p67._0)
 			};
-		case 'LFormat':
+		case 'LeFormat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LOffset':
+		case 'LeOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
 				_1: _user$project$Vega$valueSpec(_p67._0)
 			};
-		case 'LPadding':
+		case 'LePadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
 				_1: _user$project$Vega$valueSpec(_p67._0)
 			};
-		case 'LTickCount':
+		case 'LeTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
 				_1: _elm_lang$core$Json_Encode$int(_p67._0)
 			};
-		case 'LTitlePadding':
+		case 'LeTitlePadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
 				_1: _user$project$Vega$valueSpec(_p67._0)
 			};
-		case 'LTitle':
+		case 'LeTitle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
 				_1: _elm_lang$core$Json_Encode$string(_p67._0)
 			};
-		case 'LValues':
+		case 'LeValues':
 			return {
 				ctor: '_Tuple2',
 				_0: 'values',
@@ -12005,27 +12005,27 @@ var _user$project$Vega$CAuto = {ctor: 'CAuto'};
 var _user$project$Vega$DUrl = function (a) {
 	return {ctor: 'DUrl', _0: a};
 };
-var _user$project$Vega$dUrl = _user$project$Vega$DUrl;
+var _user$project$Vega$daUrl = _user$project$Vega$DUrl;
 var _user$project$Vega$DOn = function (a) {
 	return {ctor: 'DOn', _0: a};
 };
-var _user$project$Vega$dOn = _user$project$Vega$DOn;
+var _user$project$Vega$daOn = _user$project$Vega$DOn;
 var _user$project$Vega$DValue = function (a) {
 	return {ctor: 'DValue', _0: a};
 };
-var _user$project$Vega$dValue = _user$project$Vega$DValue;
+var _user$project$Vega$daValue = _user$project$Vega$DValue;
 var _user$project$Vega$DSources = function (a) {
 	return {ctor: 'DSources', _0: a};
 };
-var _user$project$Vega$dSources = _user$project$Vega$DSources;
+var _user$project$Vega$daSources = _user$project$Vega$DSources;
 var _user$project$Vega$DSource = function (a) {
 	return {ctor: 'DSource', _0: a};
 };
-var _user$project$Vega$dSource = _user$project$Vega$DSource;
+var _user$project$Vega$daSource = _user$project$Vega$DSource;
 var _user$project$Vega$DFormat = function (a) {
 	return {ctor: 'DFormat', _0: a};
 };
-var _user$project$Vega$dFormat = _user$project$Vega$DFormat;
+var _user$project$Vega$daFormat = _user$project$Vega$DFormat;
 var _user$project$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
@@ -12062,25 +12062,25 @@ var _user$project$Vega$Custom = F2(
 	function (a, b) {
 		return {ctor: 'Custom', _0: a, _1: b};
 	});
-var _user$project$Vega$custom = function (name) {
+var _user$project$Vega$enCustom = function (name) {
 	return _user$project$Vega$Custom(name);
 };
 var _user$project$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
-var _user$project$Vega$hover = _user$project$Vega$Hover;
+var _user$project$Vega$enHover = _user$project$Vega$Hover;
 var _user$project$Vega$Exit = function (a) {
 	return {ctor: 'Exit', _0: a};
 };
-var _user$project$Vega$exit = _user$project$Vega$Exit;
+var _user$project$Vega$enExit = _user$project$Vega$Exit;
 var _user$project$Vega$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
-var _user$project$Vega$update = _user$project$Vega$Update;
+var _user$project$Vega$enUpdate = _user$project$Vega$Update;
 var _user$project$Vega$Enter = function (a) {
 	return {ctor: 'Enter', _0: a};
 };
-var _user$project$Vega$enter = _user$project$Vega$Enter;
+var _user$project$Vega$enEnter = _user$project$Vega$Enter;
 var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
@@ -12388,75 +12388,98 @@ var _user$project$Vega$TopRight = {ctor: 'TopRight'};
 var _user$project$Vega$Top = {ctor: 'Top'};
 var _user$project$Vega$TopLeft = {ctor: 'TopLeft'};
 var _user$project$Vega$Left = {ctor: 'Left'};
-var _user$project$Vega$LZIndex = function (a) {
-	return {ctor: 'LZIndex', _0: a};
+var _user$project$Vega$LeZIndex = function (a) {
+	return {ctor: 'LeZIndex', _0: a};
 };
-var _user$project$Vega$LValues = function (a) {
-	return {ctor: 'LValues', _0: a};
+var _user$project$Vega$leZIndex = _user$project$Vega$LeZIndex;
+var _user$project$Vega$LeValues = function (a) {
+	return {ctor: 'LeValues', _0: a};
 };
-var _user$project$Vega$LTitle = function (a) {
-	return {ctor: 'LTitle', _0: a};
+var _user$project$Vega$leValues = _user$project$Vega$LeValues;
+var _user$project$Vega$LeTitle = function (a) {
+	return {ctor: 'LeTitle', _0: a};
 };
-var _user$project$Vega$LTitlePadding = function (a) {
-	return {ctor: 'LTitlePadding', _0: a};
+var _user$project$Vega$leTitle = _user$project$Vega$LeTitle;
+var _user$project$Vega$LeTitlePadding = function (a) {
+	return {ctor: 'LeTitlePadding', _0: a};
 };
-var _user$project$Vega$LTickCount = function (a) {
-	return {ctor: 'LTickCount', _0: a};
+var _user$project$Vega$leTitlePadding = _user$project$Vega$LeTitlePadding;
+var _user$project$Vega$LeTickCount = function (a) {
+	return {ctor: 'LeTickCount', _0: a};
 };
-var _user$project$Vega$LPadding = function (a) {
-	return {ctor: 'LPadding', _0: a};
+var _user$project$Vega$leTickCount = _user$project$Vega$LeTickCount;
+var _user$project$Vega$LePadding = function (a) {
+	return {ctor: 'LePadding', _0: a};
 };
-var _user$project$Vega$LOffset = function (a) {
-	return {ctor: 'LOffset', _0: a};
+var _user$project$Vega$lePadding = _user$project$Vega$LePadding;
+var _user$project$Vega$LeOffset = function (a) {
+	return {ctor: 'LeOffset', _0: a};
 };
-var _user$project$Vega$LFormat = function (a) {
-	return {ctor: 'LFormat', _0: a};
+var _user$project$Vega$leOffset = _user$project$Vega$LeOffset;
+var _user$project$Vega$LeFormat = function (a) {
+	return {ctor: 'LeFormat', _0: a};
 };
-var _user$project$Vega$LEntryPadding = function (a) {
-	return {ctor: 'LEntryPadding', _0: a};
+var _user$project$Vega$leFormat = _user$project$Vega$LeFormat;
+var _user$project$Vega$LeEntryPadding = function (a) {
+	return {ctor: 'LeEntryPadding', _0: a};
 };
-var _user$project$Vega$LEncode = function (a) {
-	return {ctor: 'LEncode', _0: a};
+var _user$project$Vega$leEntryPadding = _user$project$Vega$LeEntryPadding;
+var _user$project$Vega$LeEncode = function (a) {
+	return {ctor: 'LeEncode', _0: a};
 };
-var _user$project$Vega$LStrokeDash = function (a) {
-	return {ctor: 'LStrokeDash', _0: a};
+var _user$project$Vega$leEncode = _user$project$Vega$LeEncode;
+var _user$project$Vega$LeStrokeDash = function (a) {
+	return {ctor: 'LeStrokeDash', _0: a};
 };
-var _user$project$Vega$LStroke = function (a) {
-	return {ctor: 'LStroke', _0: a};
+var _user$project$Vega$leStrokeDash = _user$project$Vega$LeStrokeDash;
+var _user$project$Vega$LeStroke = function (a) {
+	return {ctor: 'LeStroke', _0: a};
 };
-var _user$project$Vega$LSize = function (a) {
-	return {ctor: 'LSize', _0: a};
+var _user$project$Vega$leStroke = _user$project$Vega$LeStroke;
+var _user$project$Vega$LeSize = function (a) {
+	return {ctor: 'LeSize', _0: a};
 };
-var _user$project$Vega$LShape = function (a) {
-	return {ctor: 'LShape', _0: a};
+var _user$project$Vega$leSize = _user$project$Vega$LeSize;
+var _user$project$Vega$LeShape = function (a) {
+	return {ctor: 'LeShape', _0: a};
 };
-var _user$project$Vega$LOpacity = function (a) {
-	return {ctor: 'LOpacity', _0: a};
+var _user$project$Vega$leShape = _user$project$Vega$LeShape;
+var _user$project$Vega$LeOpacity = function (a) {
+	return {ctor: 'LeOpacity', _0: a};
 };
-var _user$project$Vega$LFill = function (a) {
-	return {ctor: 'LFill', _0: a};
+var _user$project$Vega$leOpacity = _user$project$Vega$LeOpacity;
+var _user$project$Vega$LeFill = function (a) {
+	return {ctor: 'LeFill', _0: a};
 };
-var _user$project$Vega$LOrient = function (a) {
-	return {ctor: 'LOrient', _0: a};
+var _user$project$Vega$leFill = _user$project$Vega$LeFill;
+var _user$project$Vega$LeOrient = function (a) {
+	return {ctor: 'LeOrient', _0: a};
 };
+var _user$project$Vega$leOrient = _user$project$Vega$LeOrient;
 var _user$project$Vega$LeType = function (a) {
 	return {ctor: 'LeType', _0: a};
 };
+var _user$project$Vega$leType = _user$project$Vega$LeType;
 var _user$project$Vega$EnGradient = function (a) {
 	return {ctor: 'EnGradient', _0: a};
 };
+var _user$project$Vega$enGradient = _user$project$Vega$EnGradient;
 var _user$project$Vega$EnSymbols = function (a) {
 	return {ctor: 'EnSymbols', _0: a};
 };
+var _user$project$Vega$enSymbols = _user$project$Vega$EnSymbols;
 var _user$project$Vega$EnLabels = function (a) {
 	return {ctor: 'EnLabels', _0: a};
 };
+var _user$project$Vega$enLabels = _user$project$Vega$EnLabels;
 var _user$project$Vega$EnTitle = function (a) {
 	return {ctor: 'EnTitle', _0: a};
 };
+var _user$project$Vega$enTitle = _user$project$Vega$EnTitle;
 var _user$project$Vega$EnLegend = function (a) {
 	return {ctor: 'EnLegend', _0: a};
 };
+var _user$project$Vega$enLegend = _user$project$Vega$EnLegend;
 var _user$project$Vega$LGradient = {ctor: 'LGradient'};
 var _user$project$Vega$LSymbol = {ctor: 'LSymbol'};
 var _user$project$Vega$Trail = {ctor: 'Trail'};
@@ -12948,11 +12971,11 @@ var _user$project$Vega$signal = F2(
 var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
-var _user$project$Vega$byField = _user$project$Vega$ByField;
+var _user$project$Vega$soByField = _user$project$Vega$ByField;
 var _user$project$Vega$Op = function (a) {
 	return {ctor: 'Op', _0: a};
 };
-var _user$project$Vega$op = _user$project$Vega$Op;
+var _user$project$Vega$soOp = _user$project$Vega$Op;
 var _user$project$Vega$Descending = {ctor: 'Descending'};
 var _user$project$Vega$Ascending = {ctor: 'Ascending'};
 var _user$project$Vega$dataRefProperty = function (dataRef) {
@@ -13695,7 +13718,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_0: _user$project$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$enter(
+								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$MFill(
@@ -13766,7 +13789,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$update(
+									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$MY(
@@ -13921,7 +13944,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 												_0: 'zero',
 												_1: {
 													ctor: '::',
-													_0: 'center',
+													_0: 'cenEnter',
 													_1: {
 														ctor: '::',
 														_0: 'normalize',
@@ -14274,7 +14297,7 @@ var _user$project$TransformTests$packTest1 = function () {
 						_0: _user$project$Vega$MEncode(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$enter(
+								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$MFill(
@@ -14302,7 +14325,7 @@ var _user$project$TransformTests$packTest1 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$update(
+									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$MX(

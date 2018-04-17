@@ -27,7 +27,7 @@ module Vega
         , InputProperty
         , LegendEncoding
         , LegendOrientation(..)
-        , LegendProperty(..)
+        , LegendProperty
         , LegendType(..)
         , Mark(..)
         , MarkInterpolation(..)
@@ -104,7 +104,6 @@ module Vega
         , axZIndex
         , axes
         , axis
-        , byField
         , cHCL
         , cHSL
         , cLAB
@@ -119,19 +118,19 @@ module Vega
         , cubeHelix
         , cubeHelixLong
         , cursorLabel
-        , custom
         , dDataset
         , dField
         , dFields
-        , dFormat
         , dNumbers
-        , dOn
         , dReferences
         , dSort
-        , dSource
         , dStrs
-        , dUrl
-        , dValue
+        , daFormat
+        , daOn
+        , daSource
+        , daSources
+        , daUrl
+        , daValue
         , data
         , dataColumn
         , dataFromColumns
@@ -145,14 +144,17 @@ module Vega
         , eField
         , eForce
         , eUpdate
+        , enCustom
+        , enEnter
+        , enExit
         , enGradient
+        , enHover
         , enLabels
         , enLegend
         , enSymbols
         , enTitle
-        , enter
+        , enUpdate
         , eventHandler
-        , exit
         , expr
         , fDatum
         , fGroup
@@ -169,7 +171,6 @@ module Vega
         , hcl
         , hclLong
         , height
-        , hover
         , hsl
         , hslLong
         , iCheckbox
@@ -196,6 +197,24 @@ module Vega
         , inStep
         , keyValue
         , lab
+        , leEncode
+        , leEntryPadding
+        , leFill
+        , leFormat
+        , leOffset
+        , leOpacity
+        , leOrient
+        , lePadding
+        , leShape
+        , leSize
+        , leStroke
+        , leStrokeDash
+        , leTickCount
+        , leTitle
+        , leTitlePadding
+        , leType
+        , leValues
+        , leZIndex
         , legend
         , legends
         , mark
@@ -210,7 +229,6 @@ module Vega
         , num
         , nums
         , on
-        , op
         , padding
         , parse
         , q1
@@ -225,6 +243,8 @@ module Vega
         , sigWidth
         , signal
         , signals
+        , soByField
+        , soOp
         , stderr
         , stdev
         , stdevp
@@ -241,7 +261,6 @@ module Vega
         , transform
         , trigger
         , tsv
-        , update
         , utc
         , vAlignLabel
         , vBand
@@ -300,11 +319,12 @@ Functions and types for declaring the input data to the visualization.
 @docs on
 @docs trigger
 @docs DataProperty
-@docs dUrl
-@docs dFormat
-@docs dSource
-@docs dValue
-@docs dOn
+@docs daUrl
+@docs daFormat
+@docs daSource
+@docs daSources
+@docs daValue
+@docs daOn
 @docs DataColumn
 @docs DataRow
 @docs DataTable
@@ -327,8 +347,8 @@ Functions and types for declaring the input data to the visualization.
 @docs topojsonFeature
 @docs parse
 @docs SortProperty
-@docs op
-@docs byField
+@docs soOp
+@docs soByField
 @docs Source
 @docs Trigger
 @docs TriggerProperty
@@ -416,6 +436,24 @@ Functions and types for declaring the input data to the visualization.
 @docs legends
 @docs legend
 @docs LegendProperty
+@docs leType
+@docs leOrient
+@docs leFill
+@docs leOpacity
+@docs leShape
+@docs leSize
+@docs leStroke
+@docs leStrokeDash
+@docs leEncode
+@docs leEntryPadding
+@docs leFormat
+@docs leOffset
+@docs lePadding
+@docs leTickCount
+@docs leTitlePadding
+@docs leTitle
+@docs leValues
+@docs leZIndex
 @docs LegendType
 @docs LegendOrientation
 @docs LegendEncoding
@@ -439,11 +477,11 @@ Functions and types for declaring the input data to the visualization.
 @docs faGroupBy
 @docs MarkProperty
 @docs EncodingProperty
-@docs enter
-@docs update
-@docs hover
-@docs exit
-@docs custom
+@docs enEnter
+@docs enUpdate
+@docs enHover
+@docs enExit
+@docs enCustom
 @docs MarkInterpolation
 @docs markInterpolationLabel
 @docs MarkOrientation
@@ -976,24 +1014,24 @@ to represent. For more details see the
 -}
 type LegendProperty
     = LeType LegendType
-    | LOrient LegendOrientation
-    | LFill String
-    | LOpacity String
-    | LShape String
-    | LSize String
-    | LStroke String
-    | LStrokeDash String
-    | LEncode (List LegendEncoding)
-    | LEntryPadding Value
-    | LFormat String
-    | LOffset Value
-    | LPadding Value
+    | LeOrient LegendOrientation
+    | LeFill String
+    | LeOpacity String
+    | LeShape String
+    | LeSize String
+    | LeStroke String
+    | LeStrokeDash String
+    | LeEncode (List LegendEncoding)
+    | LeEntryPadding Value
+    | LeFormat String
+    | LeOffset Value
+    | LePadding Value
       -- TODO: Need to account for temporal units and intervals
-    | LTickCount Int
-    | LTitlePadding Value
-    | LTitle String
-    | LValues (List Value)
-    | LZIndex Int
+    | LeTickCount Int
+    | LeTitlePadding Value
+    | LeTitle String
+    | LeValues (List Value)
+    | LeZIndex Int
 
 
 {-| Type of custom legend encoding. For more details see the
@@ -2024,8 +2062,8 @@ axZIndex =
 
 {-| The field to be used when sorting.
 -}
-byField : Str -> SortProperty
-byField =
+soByField : Str -> SortProperty
+soByField =
     ByField
 
 
@@ -2263,8 +2301,8 @@ cursorLabel cur =
 signal event handler with an `encode` directive should be defined. For further
 details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
-custom : String -> List MarkProperty -> EncodingProperty
-custom name =
+enCustom : String -> List MarkProperty -> EncodingProperty
+enCustom name =
     Custom name
 
 
@@ -2372,7 +2410,7 @@ from an external file, from a named data source or inline literal values. See th
 [Vega documentation](https://vega.github.io/vega/docs/data/#propertiess) for details.
 
       dataSource
-          [ data "pop" [ dUrl "data/population.json" ]
+          [ data "pop" [ daUrl "data/population.json" ]
           , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
           ]
 
@@ -2400,7 +2438,7 @@ result of a transformation. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/data).
 
       dataSource
-          [ data "pop" [ dUrl "data/population.json" ]
+          [ data "pop" [ daUrl "data/population.json" ]
           , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
           , data "males" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
           , data "females" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
@@ -2411,6 +2449,22 @@ result of a transformation. For details see the
 dataSource : List DataTable -> Data
 dataSource dataTables =
     ( VData, JE.list (List.map JE.object dataTables) )
+
+
+{-| Specify the name of a data file to be loaded when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daUrl : String -> DataProperty
+daUrl =
+    DUrl
+
+
+{-| Specify some inline data value(s) when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daValue : Value -> DataProperty
+daValue =
+    DValue
 
 
 {-| Reference a dataset with the given name. For details see the
@@ -2440,9 +2494,34 @@ dFields =
 {-| Specify the data format when loading or generating a data set. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/data/#properties)
 -}
-dFormat : Format -> DataProperty
-dFormat =
+daFormat : Format -> DataProperty
+daFormat =
     DFormat
+
+
+{-| Specify updates to insert, remove, and toggle data values, or clear the data in a data set
+when trigger conditions are met. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daOn : List Trigger -> DataProperty
+daOn =
+    DOn
+
+
+{-| Specify a named data source when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daSource : String -> DataProperty
+daSource =
+    DSource
+
+
+{-| Specify a collection of named data sources when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daSources : List String -> DataProperty
+daSources =
+    DSources
 
 
 {-| A convenience function for generating a text string representing a given text
@@ -2469,15 +2548,6 @@ distinct =
     Distinct
 
 
-{-| Specify updates to insert, remove, and toggle data values, or clear the data in a data set
-when trigger conditions are met. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-dOn : List Trigger -> DataProperty
-dOn =
-    DOn
-
-
 {-| Reference a collection of nested data references. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
 -}
@@ -2494,44 +2564,12 @@ dSort =
     DSort
 
 
-{-| Specify a named data source when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-dSource : String -> DataProperty
-dSource =
-    DSource
-
-
-{-| Specify a collection of named data sources when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-dSources : List String -> DataProperty
-dSources =
-    DSources
-
-
 {-| Indicates a DSV (delimited separated value) format with a custom delimeter.
 Typically used when specifying a data url.
 -}
 dsv : String -> Format
 dsv =
     DSV
-
-
-{-| Specify the name of a data file to be loaded when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-dUrl : String -> DataProperty
-dUrl =
-    DUrl
-
-
-{-| Specify some inline data value(s) when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-dValue : Value -> DataProperty
-dValue =
-    DValue
 
 
 {-| Name of a mark property encoding set to re-evaluate for the mark item that is
@@ -2566,8 +2604,8 @@ eForce =
 visualization is resized. For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
-enter : List MarkProperty -> EncodingProperty
-enter =
+enEnter : List MarkProperty -> EncodingProperty
+enEnter =
     Enter
 
 
@@ -2603,8 +2641,8 @@ eventHandler eStr eHandlers =
 For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
-exit : List MarkProperty -> EncodingProperty
-exit =
+enExit : List MarkProperty -> EncodingProperty
+enExit =
     Exit
 
 
@@ -2767,8 +2805,8 @@ height w =
 For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
-hover : List MarkProperty -> EncodingProperty
-hover =
+enHover : List MarkProperty -> EncodingProperty
+enHover =
     Hover
 
 
@@ -2977,6 +3015,42 @@ lab =
     Lab
 
 
+{-| Mark encodings for custom legend styling. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leEncode : List LegendEncoding -> LegendProperty
+leEncode =
+    LeEncode
+
+
+{-| The padding between entries in a symbol legend. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leEntryPadding : Value -> LegendProperty
+leEntryPadding =
+    LeEntryPadding
+
+
+{-| The name of the scale that maps to the legend symbols' fill colors. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leFill : String -> LegendProperty
+leFill =
+    LeFill
+
+
+{-| The format specifier pattern for legend labels. For numerical values this should
+be a [d3-format specifier](https://github.com/d3/d3-format#locale_format). For
+date-time values this should be a
+[d3-time-format specifier](https://github.com/d3/d3-time-format#locale_format).
+For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leFormat : String -> LegendProperty
+leFormat =
+    LeFormat
+
+
 {-| Create a single legend used to visualize a colour, size or shape mapping.
 
     TODO: XXX
@@ -2995,6 +3069,121 @@ legend lps =
 legends : List Spec -> ( VProperty, Spec )
 legends lgs =
     ( VLegends, JE.list lgs )
+
+
+{-| The offset in pixels by which to displace the legend from the data rectangle
+and axes. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leOffset : Value -> LegendProperty
+leOffset =
+    LeOffset
+
+
+{-| The name of the scale that maps to the legend symbols' opacities. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leOpacity : String -> LegendProperty
+leOpacity =
+    LeOpacity
+
+
+{-| The orientation of the legend, determining where the legend is placed
+relative to a chart’s data rectangle. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leOrient : LegendOrientation -> LegendProperty
+leOrient =
+    LeOrient
+
+
+{-| The padding between the border and content of the legend group. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+lePadding : Value -> LegendProperty
+lePadding =
+    LePadding
+
+
+{-| The name of the scale that maps to the legend symbols' shapes. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leShape : String -> LegendProperty
+leShape =
+    LeShape
+
+
+{-| The name of the scale that maps to the legend symbols' sizes. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSize : String -> LegendProperty
+leSize =
+    LeSize
+
+
+{-| The name of the scale that maps to the legend symbols' strokes. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leStroke : String -> LegendProperty
+leStroke =
+    LeStroke
+
+
+{-| The name of the scale that maps to the legend symbols' stroke dashing. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leStrokeDash : String -> LegendProperty
+leStrokeDash =
+    LeStrokeDash
+
+
+{-| The desired number of tick values for quantitative legends. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTickCount : Int -> LegendProperty
+leTickCount =
+    LeTickCount
+
+
+{-| The title for the legend (none by default). For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitle : String -> LegendProperty
+leTitle =
+    LeTitle
+
+
+{-| The padding between the legend title and entries. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitlePadding : Value -> LegendProperty
+leTitlePadding =
+    LeTitlePadding
+
+
+{-| The type of legend to specify. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leType : LegendType -> LegendProperty
+leType =
+    LeType
+
+
+{-| Explicitly set visible legend values. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leValues : List Value -> LegendProperty
+leValues =
+    LeValues
+
+
+{-| The integer z-index indicating the layering of the legend group relative to
+other axis, mark and legend groups. The default value is 0.For more details see
+the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leZIndex : Int -> LegendProperty
+leZIndex =
+    LeZIndex
 
 
 {-| Create a single mark definition.
@@ -3132,8 +3321,8 @@ on triggerSpecs dTable =
 
 {-| A sorting operation.
 -}
-op : Operation -> SortProperty
-op =
+soOp : Operation -> SortProperty
+soOp =
     Op
 
 
@@ -3445,8 +3634,8 @@ tsv =
 to a signal change. For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
-update : List MarkProperty -> EncodingProperty
-update =
+enUpdate : List MarkProperty -> EncodingProperty
+enUpdate =
     Update
 
 
@@ -4221,55 +4410,55 @@ legendProperty lp =
         LeType lt ->
             ( "type", JE.string (legendTypeLabel lt) )
 
-        LOrient lo ->
+        LeOrient lo ->
             ( "orient", JE.string (legendOrientLabel lo) )
 
-        LFill fScale ->
+        LeFill fScale ->
             ( "fill", JE.string fScale )
 
-        LOpacity oScale ->
+        LeOpacity oScale ->
             ( "opacity", JE.string oScale )
 
-        LShape sScale ->
+        LeShape sScale ->
             ( "shape", JE.string sScale )
 
-        LSize sScale ->
+        LeSize sScale ->
             ( "size", JE.string sScale )
 
-        LStroke sScale ->
+        LeStroke sScale ->
             ( "stroke", JE.string sScale )
 
-        LStrokeDash sdScale ->
+        LeStrokeDash sdScale ->
             ( "strokeDash", JE.string sdScale )
 
-        LEncode les ->
+        LeEncode les ->
             ( "encode", JE.object (List.map legendEncodingProperty les) )
 
-        LEntryPadding val ->
+        LeEntryPadding val ->
             ( "entryPadding", valueSpec val )
 
-        LFormat f ->
+        LeFormat f ->
             ( "format", JE.string f )
 
-        LOffset val ->
+        LeOffset val ->
             ( "offset", valueSpec val )
 
-        LPadding val ->
+        LePadding val ->
             ( "padding", valueSpec val )
 
-        LTickCount n ->
+        LeTickCount n ->
             ( "tickCount", JE.int n )
 
-        LTitlePadding val ->
+        LeTitlePadding val ->
             ( "titlePadding", valueSpec val )
 
-        LTitle t ->
+        LeTitle t ->
             ( "title", JE.string t )
 
-        LValues vals ->
+        LeValues vals ->
             ( "values", JE.list (List.map valueSpec vals) )
 
-        LZIndex n ->
+        LeZIndex n ->
             ( "zindex", JE.int n )
 
 
