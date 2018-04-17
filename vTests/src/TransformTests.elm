@@ -49,12 +49,12 @@ packTest1 =
                     [ MFrom [ sData (str "tree") ]
                     , MEncode
                         [ enter
-                            [ MFill [ vScale (FName "color"), vField (FName "id") ]
+                            [ MFill [ vScale (fName "color"), vField (fName "id") ]
                             , MStroke [ vStr "white" ]
                             ]
                         , update
-                            [ MX [ vField (FName "x") ]
-                            , MY [ vField (FName "y") ]
+                            [ MX [ vField (fName "x") ]
+                            , MY [ vField (fName "y") ]
                             , MSize [ vSignal "4*datum.r*datum.r" ]
                             ]
                         ]
@@ -136,15 +136,15 @@ stackTest1 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MFill [ vScale (FName "color"), vField (FName "key") ]
+                            [ MFill [ vScale (fName "color"), vField (fName "key") ]
                             , MStroke [ vStr "white" ]
                             , MStrokeWidth [ vNumber 1 ]
-                            , MX [ vScale (FName "xscale"), vField (FName "key"), vOffset (vNumber 0.5) ]
-                            , MWidth [ vScale (FName "xscale"), vBand 1 ]
+                            , MX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNumber 0.5) ]
+                            , MWidth [ vScale (fName "xscale"), vBand 1 ]
                             ]
                         , update
-                            [ MY [ vScale (FName "yscale"), vField (FName "y0"), vOffset (vNumber 0.5) ]
-                            , MY2 [ vScale (FName "yscale"), vField (FName "y1"), vOffset (vNumber 0.5) ]
+                            [ MY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNumber 0.5) ]
+                            , MY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNumber 0.5) ]
                             ]
                         ]
                     ]

@@ -12113,9 +12113,11 @@ var _user$project$Vega$eventHandler = F2(
 var _user$project$Vega$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
+var _user$project$Vega$expr = _user$project$Vega$Expr;
 var _user$project$Vega$EField = function (a) {
 	return {ctor: 'EField', _0: a};
 };
+var _user$project$Vega$eField = _user$project$Vega$EField;
 var _user$project$Vega$FaGroupBy = function (a) {
 	return {ctor: 'FaGroupBy', _0: a};
 };
@@ -12307,18 +12309,23 @@ var _user$project$Vega$topMarkProperty = function (mProp) {
 var _user$project$Vega$FParent = function (a) {
 	return {ctor: 'FParent', _0: a};
 };
+var _user$project$Vega$fParent = _user$project$Vega$FParent;
 var _user$project$Vega$FGroup = function (a) {
 	return {ctor: 'FGroup', _0: a};
 };
+var _user$project$Vega$fGroup = _user$project$Vega$FGroup;
 var _user$project$Vega$FDatum = function (a) {
 	return {ctor: 'FDatum', _0: a};
 };
+var _user$project$Vega$fDatum = _user$project$Vega$FDatum;
 var _user$project$Vega$FSignal = function (a) {
 	return {ctor: 'FSignal', _0: a};
 };
+var _user$project$Vega$fSignal = _user$project$Vega$FSignal;
 var _user$project$Vega$FName = function (a) {
 	return {ctor: 'FName', _0: a};
 };
+var _user$project$Vega$fName = _user$project$Vega$FName;
 var _user$project$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
@@ -13696,11 +13703,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vScale(
-													_user$project$Vega$FName('color')),
+													_user$project$Vega$fName('color')),
 												_1: {
 													ctor: '::',
 													_0: _user$project$Vega$vField(
-														_user$project$Vega$FName('key')),
+														_user$project$Vega$fName('key')),
 													_1: {ctor: '[]'}
 												}
 											}),
@@ -13726,11 +13733,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vScale(
-																_user$project$Vega$FName('xscale')),
+																_user$project$Vega$fName('xscale')),
 															_1: {
 																ctor: '::',
 																_0: _user$project$Vega$vField(
-																	_user$project$Vega$FName('key')),
+																	_user$project$Vega$fName('key')),
 																_1: {
 																	ctor: '::',
 																	_0: _user$project$Vega$vOffset(
@@ -13745,7 +13752,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vScale(
-																	_user$project$Vega$FName('xscale')),
+																	_user$project$Vega$fName('xscale')),
 																_1: {
 																	ctor: '::',
 																	_0: _user$project$Vega$vBand(1),
@@ -13767,11 +13774,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vScale(
-														_user$project$Vega$FName('yscale')),
+														_user$project$Vega$fName('yscale')),
 													_1: {
 														ctor: '::',
 														_0: _user$project$Vega$vField(
-															_user$project$Vega$FName('y0')),
+															_user$project$Vega$fName('y0')),
 														_1: {
 															ctor: '::',
 															_0: _user$project$Vega$vOffset(
@@ -13786,11 +13793,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vScale(
-															_user$project$Vega$FName('yscale')),
+															_user$project$Vega$fName('yscale')),
 														_1: {
 															ctor: '::',
 															_0: _user$project$Vega$vField(
-																_user$project$Vega$FName('y1')),
+																_user$project$Vega$fName('y1')),
 															_1: {
 																ctor: '::',
 																_0: _user$project$Vega$vOffset(
@@ -14275,11 +14282,11 @@ var _user$project$TransformTests$packTest1 = function () {
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vScale(
-													_user$project$Vega$FName('color')),
+													_user$project$Vega$fName('color')),
 												_1: {
 													ctor: '::',
 													_0: _user$project$Vega$vField(
-														_user$project$Vega$FName('id')),
+														_user$project$Vega$fName('id')),
 													_1: {ctor: '[]'}
 												}
 											}),
@@ -14303,7 +14310,7 @@ var _user$project$TransformTests$packTest1 = function () {
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vField(
-														_user$project$Vega$FName('x')),
+														_user$project$Vega$fName('x')),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
@@ -14312,7 +14319,7 @@ var _user$project$TransformTests$packTest1 = function () {
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vField(
-															_user$project$Vega$FName('y')),
+															_user$project$Vega$fName('y')),
 														_1: {ctor: '[]'}
 													}),
 												_1: {

@@ -20,7 +20,7 @@ module Vega
         , Expr
         , Facet
         , Field
-        , FieldValue(..)
+        , FieldValue
         , Format
         , FormulaUpdate(..)
         , HAlign(..)
@@ -149,6 +149,11 @@ module Vega
         , eventHandler
         , exit
         , expr
+        , fDatum
+        , fGroup
+        , fName
+        , fParent
+        , fSignal
         , faField
         , faGroupBy
         , foBool
@@ -534,6 +539,11 @@ can carry data used in specifications.
 @docs eField
 @docs Field
 @docs FieldValue
+@docs fName
+@docs fSignal
+@docs fDatum
+@docs fGroup
+@docs fParent
 @docs Value
 @docs Str
 @docs Num
@@ -2573,6 +2583,30 @@ faGroupBy =
     FaGroupBy
 
 
+{-| Perform a lookup on the current data object using the given field value.
+Once evaluated this is similar to simply providing a string value. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
+-}
+fDatum : FieldValue -> FieldValue
+fDatum =
+    FDatum
+
+
+{-| Reference a property of the enclosing group mark instance as a field value. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
+-}
+fGroup : FieldValue -> FieldValue
+fGroup =
+    FGroup
+
+
+{-| The name of a field to reference.
+-}
+fName : String -> FieldValue
+fName =
+    FName
+
+
 {-| Indicate a boolean format for parsing data.
 -}
 foBool : DataType
@@ -2607,6 +2641,22 @@ date format is usually safer.
 foUtc : String -> DataType
 foUtc =
     FoUtc
+
+
+{-| Reference a field of the enclosing group mark’s data object as a field value. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
+-}
+fParent : FieldValue -> FieldValue
+fParent =
+    FParent
+
+
+{-| A signal to evaluate which should generate a field name to reference. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
+-}
+fSignal : String -> FieldValue
+fSignal =
+    FSignal
 
 
 {-| A convenience function for generating a text string representing a horizontal

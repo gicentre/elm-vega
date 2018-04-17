@@ -64,10 +64,10 @@ barChart1 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "category") ]
-                            , MWidth [ vScale (FName "xScale"), vBand 1 ]
-                            , MY [ vScale (FName "yScale"), vField (FName "amount") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "category") ]
+                            , MWidth [ vScale (fName "xScale"), vBand 1 ]
+                            , MY [ vScale (fName "yScale"), vField (fName "amount") ]
+                            , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             ]
                         , update [ MFill [ vStr "steelblue" ] ]
                         , hover [ MFill [ vStr "red" ] ]
@@ -81,8 +81,8 @@ barChart1 =
                             , MFill [ vStr "#333" ]
                             ]
                         , update
-                            [ MX [ vScale (FName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
-                            , MY [ vScale (FName "yScale"), vSignal "tooltip.amount", vOffset (vNumber -2) ]
+                            [ MX [ vScale (fName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
+                            , MY [ vScale (fName "yScale"), vSignal "tooltip.amount", vOffset (vNumber -2) ]
                             , MText [ vSignal "tooltip.amount" ]
                             , MFillOpacity [ ifElse "datum === tooltip" [ vNumber 0 ] [ vNumber 1 ] ]
                             ]
@@ -145,11 +145,11 @@ barChart2 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MWidth [ vScale (FName "xScale"), vBand 1, vOffset (vNumber -1) ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "c") ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , MWidth [ vScale (fName "xScale"), vBand 1, vOffset (vNumber -1) ]
+                            , MY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
                         , update [ MFillOpacity [ vNumber 1 ] ]
                         , hover [ MFillOpacity [ vNumber 0.5 ] ]
@@ -218,11 +218,11 @@ barChart3 =
                     , MFrom [ sData (str "facet") ]
                     , MEncode
                         [ enter
-                            [ MY [ vScale (FName "pos"), vField (FName "position") ]
-                            , MHeight [ vScale (FName "pos"), vBand 1 ]
-                            , MX [ vScale (FName "xScale"), vField (FName "value") ]
-                            , MX2 [ vScale (FName "xScale"), vBand 0 ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "position") ]
+                            [ MY [ vScale (fName "pos"), vField (fName "position") ]
+                            , MHeight [ vScale (fName "pos"), vBand 1 ]
+                            , MX [ vScale (fName "xScale"), vField (fName "value") ]
+                            , MX2 [ vScale (fName "xScale"), vBand 0 ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "position") ]
                             ]
                         ]
                     ]
@@ -230,12 +230,12 @@ barChart3 =
                     [ MFrom [ sData (str "bars") ]
                     , MEncode
                         [ enter
-                            [ MX [ vField (FName "x2"), vOffset (vNumber -5) ]
-                            , MY [ vField (FName "y"), vOffset (vObject [ vField (FName "height"), vMultiply (vNumber 0.5) ]) ]
+                            [ MX [ vField (fName "x2"), vOffset (vNumber -5) ]
+                            , MY [ vField (fName "y"), vOffset (vObject [ vField (fName "height"), vMultiply (vNumber 0.5) ]) ]
                             , MFill [ vStr "white" ]
                             , MAlign [ vStr (hAlignLabel AlignRight) ]
                             , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , MText [ vField (FName "datum.value") ]
+                            , MText [ vField (fName "datum.value") ]
                             ]
                         ]
                     ]
@@ -244,7 +244,7 @@ barChart3 =
             marks
                 << mark Group
                     [ MFrom [ sFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
-                    , MEncode [ enter [ MY [ vScale (FName "yScale"), vField (FName "category") ] ] ]
+                    , MEncode [ enter [ MY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
                     , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
     in
@@ -325,13 +325,13 @@ barChart4 =
                     , MEncode
                         [ enter
                             [ MX [ vNumber 0 ]
-                            , MX2 [ vScale (FName "xScale"), vField (FName "c") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "a") ]
+                            , MX2 [ vScale (fName "xScale"), vField (fName "c") ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "a") ]
                             , MStrokeWidth [ vNumber 2 ]
                             ]
                         , update
-                            [ MY [ vScale (FName "yScale"), vField (FName "b") ]
-                            , MHeight [ vScale (FName "yScale"), vBand 1 ]
+                            [ MY [ vScale (fName "yScale"), vField (fName "b") ]
+                            , MHeight [ vScale (fName "yScale"), vBand 1 ]
                             , MStroke [ vNull ]
                             , MZIndex [ vNumber 0 ]
                             ]
@@ -348,7 +348,7 @@ barChart4 =
                     [ MFrom [ sData (str "trellis"), sFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
                     , MEncode
                         [ enter [ MX [ vNumber 0 ], MWidth [ vSignal "width" ] ]
-                        , update [ MY [ vField (FName "y0") ], MY2 [ vField (FName "y1") ] ]
+                        , update [ MY [ vField (fName "y0") ], MY2 [ vField (fName "y1") ] ]
                         ]
                     , MGroup [ nestedSc [], nestedAx [], nestedMk [] ]
                     ]
@@ -403,8 +403,8 @@ barChart5 =
                     , MEncode
                         [ enter
                             [ MX [ vSignal "chartWidth + chartPad / 2" ]
-                            , MY [ vScale (FName "yScale"), vField (FName "age"), vBand 0.5 ]
-                            , MText [ vField (FName "age") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "age"), vBand 0.5 ]
+                            , MText [ vField (fName "age") ]
                             , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , MAlign [ vStr (hAlignLabel AlignCenter) ]
                             , MFill [ vStr "#000" ]
@@ -453,12 +453,12 @@ barChart5 =
                     [ MFrom [ sData (str genderField) ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "people") ]
-                            , MX2 [ vScale (FName "xScale"), vNumber 0 ]
-                            , MY [ vScale (FName "yScale"), vField (FName "age") ]
-                            , MHeight [ vScale (FName "yScale"), vBand 1, vOffset (vNumber -1) ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "people") ]
+                            , MX2 [ vScale (fName "xScale"), vNumber 0 ]
+                            , MY [ vScale (fName "yScale"), vField (fName "age") ]
+                            , MHeight [ vScale (fName "yScale"), vBand 1, vOffset (vNumber -1) ]
                             , MFillOpacity [ vNumber 0.6 ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "sex") ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "sex") ]
                             ]
                         ]
                     ]
@@ -527,9 +527,9 @@ lineChart1 =
                     [ MFrom [ sData (str "series") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y") ]
-                            , MStroke [ vScale (FName "cScale"), vField (FName "c") ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "y") ]
+                            , MStroke [ vScale (fName "cScale"), vField (fName "c") ]
                             , MStrokeWidth [ vNumber 2 ]
                             ]
                         , update [ MInterpolate [ vSignal "interpolate" ], MStrokeOpacity [ vNumber 1 ] ]
@@ -586,9 +586,9 @@ areaChart1 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "u") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "v") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "u") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "v") ]
+                            , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             , MFill [ vStr "steelblue" ]
                             ]
                         , update [ MInterpolate [ vSignal "interpolate" ], MFillOpacity [ vNumber 1 ] ]
@@ -652,10 +652,10 @@ areaChart2 =
                     , MEncode
                         [ enter
                             [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "c") ]
+                            , MX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
                         , update [ MFillOpacity [ vNumber 1 ] ]
                         , hover [ MFillOpacity [ vNumber 0.5 ] ]
@@ -720,8 +720,8 @@ areaChart3 =
                 << mark Group
                     [ MEncode
                         [ update
-                            [ MWidth [ vField (FGroup (FName "width")) ]
-                            , MHeight [ vField (FGroup (FName "height")) ]
+                            [ MWidth [ vField (fGroup (fName "width")) ]
+                            , MHeight [ vField (fGroup (fName "height")) ]
                             , MGroupClip [ vBool True ]
                             ]
                         ]
@@ -732,7 +732,7 @@ areaChart3 =
             marks
                 << mark Group
                     [ MFrom [ sData (str "layer_indices") ]
-                    , MEncode [ update [ MY [ vField (FName "offset") ] ] ]
+                    , MEncode [ update [ MY [ vField (fName "offset") ] ] ]
                     , MGroup [ mkArea [] ]
                     ]
 
@@ -743,12 +743,12 @@ areaChart3 =
                     , MEncode
                         [ enter
                             [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , MX [ vScale (FName "xScale"), vField (FName "x") ]
+                            , MX [ vScale (fName "xScale"), vField (fName "x") ]
                             , MFill [ vStr "steelblue" ]
                             ]
                         , update
-                            [ MY [ vScale (FName "yScale"), vField (FName "y") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
+                            [ MY [ vScale (fName "yScale"), vField (fName "y") ]
+                            , MY2 [ vScale (fName "yScale"), vNumber 0 ]
                             , MFillOpacity [ vSignal "opacity" ]
                             ]
                         ]
@@ -874,11 +874,11 @@ areaChart4 =
                     [ MFrom [ sData (str "facet") ]
                     , MEncode
                         [ update
-                            [ MX [ vScale (FName "xScale"), vField (FName "year") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "sex") ]
-                            , MFillOpacity [ vScale (FName "alphaScale"), vField (FParent (FName "sum")) ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "year") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , MY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , MFill [ vScale (fName "cScale"), vField (fName "sex") ]
+                            , MFillOpacity [ vScale (fName "alphaScale"), vField (fParent (fName "sum")) ]
                             ]
                         , hover [ MFillOpacity [ vNumber 0.2 ] ]
                         ]
@@ -898,14 +898,14 @@ areaChart4 =
                     , MInteractive False
                     , MEncode
                         [ update
-                            [ MX [ vField (FName "argmax.year"), vScale (FName "xScale") ]
-                            , MdX [ vField (FName "argmax.year"), vScale (FName "offsetScale") ]
+                            [ MX [ vField (fName "argmax.year"), vScale (fName "xScale") ]
+                            , MdX [ vField (fName "argmax.year"), vScale (fName "offsetScale") ]
                             , MY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
                             , MFill [ vStr "#000" ]
-                            , MFillOpacity [ vField (FName "argmax.perc"), vScale (FName "opacityScale") ]
-                            , MFontSize [ vField (FName "argmax.perc"), vScale (FName "fontScale"), vOffset (vNumber 5) ]
-                            , MText [ vField (FName "job") ]
-                            , MAlign [ vField (FName "argmax.year"), vScale (FName "alignScale") ]
+                            , MFillOpacity [ vField (fName "argmax.perc"), vScale (fName "opacityScale") ]
+                            , MFontSize [ vField (fName "argmax.perc"), vScale (fName "fontScale"), vOffset (vNumber 5) ]
+                            , MText [ vField (fName "job") ]
+                            , MAlign [ vField (fName "argmax.year"), vScale (fName "alignScale") ]
                             , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         ]
@@ -954,13 +954,13 @@ circularChart1 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MFill [ vScale (FName "cScale"), vField (FName "id") ]
+                            [ MFill [ vScale (fName "cScale"), vField (fName "id") ]
                             , MX [ vSignal "width / 2" ]
                             , MY [ vSignal "height / 2" ]
                             ]
                         , update
-                            [ MStartAngle [ vField (FName "startAngle") ]
-                            , MEndAngle [ vField (FName "endAngle") ]
+                            [ MStartAngle [ vField (fName "startAngle") ]
+                            , MEndAngle [ vField (fName "endAngle") ]
                             , MPadAngle [ vSignal "PI * padAngle / 180" ]
                             , MInnerRadius [ vSignal "innerRadius" ]
                             , MOuterRadius [ vSignal "width / 2" ]
@@ -996,12 +996,12 @@ circularChart2 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MX [ vField (FGroup (FName "width")), vMultiply (vNumber 0.5) ]
-                            , MY [ vField (FGroup (FName "height")), vMultiply (vNumber 0.5) ]
-                            , MStartAngle [ vField (FName "startAngle") ]
-                            , MEndAngle [ vField (FName "endAngle") ]
+                            [ MX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
+                            , MY [ vField (fGroup (fName "height")), vMultiply (vNumber 0.5) ]
+                            , MStartAngle [ vField (fName "startAngle") ]
+                            , MEndAngle [ vField (fName "endAngle") ]
                             , MInnerRadius [ vNumber 20 ]
-                            , MOuterRadius [ vField (FName "data"), vScale (FName "rScale") ]
+                            , MOuterRadius [ vField (fName "data"), vScale (fName "rScale") ]
                             , MStroke [ vStr "#fff" ]
                             ]
                         , update [ MFill [ vStr "#ccc" ] ]
@@ -1012,14 +1012,14 @@ circularChart2 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enter
-                            [ MX [ vField (FGroup (FName "width")), vMultiply (vNumber 0.5) ]
-                            , MY [ vField (FGroup (FName "height")), vMultiply (vNumber 0.5) ]
-                            , MRadius [ vField (FName "data"), vScale (FName "rScale"), vOffset (vNumber 8) ]
+                            [ MX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
+                            , MY [ vField (fGroup (fName "height")), vMultiply (vNumber 0.5) ]
+                            , MRadius [ vField (fName "data"), vScale (fName "rScale"), vOffset (vNumber 8) ]
                             , MTheta [ vSignal "(datum.startAngle + datum.endAngle)/2" ]
                             , MFill [ vStr "#000" ]
                             , MAlign [ vStr (hAlignLabel AlignCenter) ]
                             , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , MText [ vField (FName "data") ]
+                            , MText [ vField (fName "data") ]
                             ]
                         ]
                     ]
@@ -1092,9 +1092,9 @@ scatterplot1 =
                     [ MFrom [ sData (str "cars") ]
                     , MEncode
                         [ update <|
-                            [ MX [ vScale (FName "xScale"), vField (FName "Horsepower") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "Miles_per_Gallon") ]
-                            , MSize [ vScale (FName "sizeScale"), vField (FName "Acceleration") ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
+                            , MSize [ vScale (fName "sizeScale"), vField (fName "Acceleration") ]
                             ]
                                 ++ shapeEncoding
                         ]
@@ -1150,11 +1150,11 @@ scatterplot2 =
                     , MEncode
                         [ enter
                             [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
+                            , MTooltip [ vField (fName "tooltip") ]
                             ]
                         , update
-                            [ MX [ vScale (FName "xScale"), vField (FSignal "xField") ]
-                            , MY [ vScale (FName "yScale"), vField (FSignal "yField") ]
+                            [ MX [ vScale (fName "xScale"), vField (fSignal "xField") ]
+                            , MY [ vScale (fName "yScale"), vField (fSignal "yField") ]
                             , MFill [ vStr "steelblue" ]
                             , MFillOpacity [ vNumber 0.5 ]
                             , MZIndex [ vNumber 0 ]
@@ -1171,10 +1171,10 @@ scatterplot2 =
                     , MEncode
                         [ enter
                             [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
+                            , MTooltip [ vField (fName "tooltip") ]
                             ]
                         , update
-                            [ MX [ vScale (FName "xScale"), vField (FSignal "xField") ]
+                            [ MX [ vScale (fName "xScale"), vField (fSignal "xField") ]
                             , MY [ vSignal "height - nullSize/2" ]
                             , MFill [ vStr "#aaa" ]
                             , MFillOpacity [ vNumber 0.2 ]
@@ -1190,11 +1190,11 @@ scatterplot2 =
                     , MEncode
                         [ enter
                             [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
+                            , MTooltip [ vField (fName "tooltip") ]
                             ]
                         , update
                             [ MX [ vSignal "nullSize/2" ]
-                            , MY [ vScale (FName "yScale"), vField (FSignal "yField") ]
+                            , MY [ vScale (fName "yScale"), vField (fSignal "yField") ]
                             , MFill [ vStr "#aaa" ]
                             , MFillOpacity [ vNumber 0.2 ]
                             , MZIndex [ vNumber 1 ]
@@ -1333,8 +1333,8 @@ scatterplot3 =
                     , MEncode
                         [ enter
                             [ MInterpolate [ markInterpolationLabel Cardinal |> vStr ]
-                            , MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
+                            , MX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "gas") ]
                             , MStroke [ vStr "#000" ]
                             , MStrokeWidth [ vNumber 3 ]
                             ]
@@ -1344,8 +1344,8 @@ scatterplot3 =
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "gas") ]
                             , MFill [ vStr "#fff" ]
                             , MStroke [ vStr "#000" ]
                             , MStrokeWidth [ vNumber 1 ]
@@ -1357,14 +1357,14 @@ scatterplot3 =
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
                         [ enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
-                            , MdX [ vScale (FName "dx"), vField (FName "side") ]
-                            , MdY [ vScale (FName "dy"), vField (FName "side") ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            , MdX [ vScale (fName "dx"), vField (fName "side") ]
+                            , MdY [ vScale (fName "dy"), vField (fName "side") ]
                             , MFill [ vStr "#000" ]
-                            , MText [ vField (FName "year") ]
-                            , MAlign [ vScale (FName "alignScale"), vField (FName "side") ]
-                            , MBaseline [ vScale (FName "baseScale"), vField (FName "side") ]
+                            , MText [ vField (fName "year") ]
+                            , MAlign [ vScale (fName "alignScale"), vField (fName "side") ]
+                            , MBaseline [ vScale (fName "baseScale"), vField (fName "side") ]
                             ]
                         ]
                     ]
@@ -1440,9 +1440,9 @@ scatterplot4 =
                     , MEncode
                         [ enter [ MFill [ vStr "black" ], MHeight [ vNumber 1 ] ]
                         , update
-                            [ MX [ vScale (FName "xScale"), vSignal "datum[measure+'0']" ]
-                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
-                            , MX2 [ vScale (FName "xScale"), vSignal "datum[measure+'1']" ]
+                            [ MX [ vScale (fName "xScale"), vSignal "datum[measure+'0']" ]
+                            , MY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
+                            , MX2 [ vScale (fName "xScale"), vSignal "datum[measure+'1']" ]
                             ]
                         ]
                     ]
@@ -1451,8 +1451,8 @@ scatterplot4 =
                     , MEncode
                         [ enter [ MFill [ vStr "back" ], MSize [ vNumber 40 ] ]
                         , update
-                            [ MX [ vScale (FName "xScale"), vField (FName "mean") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
+                            [ MX [ vScale (fName "xScale"), vField (fName "mean") ]
+                            , MY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
                             ]
                         ]
                     ]

@@ -116,9 +116,9 @@ areaTest =
                     , MEncode
                         [ enter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
                         , update
-                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
-                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
-                            , MY2 [ vScale (FName "yscale"), vSignal "y2" ]
+                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
+                            , MY2 [ vScale (fName "yscale"), vSignal "y2" ]
                             , MDefined [ vSignal "defined || datum.u !== 3" ]
                             , MInterpolate [ vSignal "interpolate" ]
                             , MTension [ vSignal "tension" ]
@@ -188,10 +188,10 @@ groupTest =
                     , MInteractive False
                     , MEncode
                         [ enter
-                            [ MX [ vField (FName "x") ]
-                            , MY [ vField (FName "y") ]
-                            , MWidth [ vField (FName "w") ]
-                            , MHeight [ vField (FName "h") ]
+                            [ MX [ vField (fName "x") ]
+                            , MY [ vField (fName "y") ]
+                            , MWidth [ vField (fName "w") ]
+                            , MHeight [ vField (fName "h") ]
                             , MFill [ vStr "aliceblue" ]
                             , MStroke [ vStr "firebrick" ]
                             ]
@@ -284,8 +284,8 @@ lineTest =
                     , MEncode
                         [ enter [ MStroke [ vStr "#652c90" ] ]
                         , update
-                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
-                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
+                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
                             , MDefined [ vSignal "defined || datum.u !== 3" ]
                             , MInterpolate [ vSignal "interpolate" ]
                             , MTension [ vSignal "tension" ]
@@ -558,9 +558,9 @@ trailTest =
                     , MEncode
                         [ enter [ MFill [ vStr "#939597" ] ]
                         , update
-                            [ MX [ vScale (FName "xscale"), vField (FName "u") ]
-                            , MY [ vScale (FName "yscale"), vField (FName "v") ]
-                            , MSize [ vScale (FName "zscale"), vField (FName "v"), vMultiply (vSignal "size") ]
+                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
+                            , MSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
                             , MDefined [ vSignal "defined || datum.u !== 3" ]
                             , MOpacity [ vNumber 1 ]
                             ]
