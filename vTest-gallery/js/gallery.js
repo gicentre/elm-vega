@@ -12113,9 +12113,11 @@ var _gicentre$elm_vega$Vega$eventHandler = F2(
 var _gicentre$elm_vega$Vega$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
+var _gicentre$elm_vega$Vega$expr = _gicentre$elm_vega$Vega$Expr;
 var _gicentre$elm_vega$Vega$EField = function (a) {
 	return {ctor: 'EField', _0: a};
 };
+var _gicentre$elm_vega$Vega$eField = _gicentre$elm_vega$Vega$EField;
 var _gicentre$elm_vega$Vega$FaGroupBy = function (a) {
 	return {ctor: 'FaGroupBy', _0: a};
 };
@@ -15920,7 +15922,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$TFilter(
-							_gicentre$elm_vega$Vega$Expr('datum[xField] != null && datum[yField] != null')),
+							_gicentre$elm_vega$Vega$expr('datum[xField] != null && datum[yField] != null')),
 						_1: {ctor: '[]'}
 					},
 					A2(
@@ -15938,7 +15940,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$TFilter(
-								_gicentre$elm_vega$Vega$Expr('datum[xField] == null && datum[yField] == null')),
+								_gicentre$elm_vega$Vega$expr('datum[xField] == null && datum[yField] == null')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$TAggregate(
@@ -15961,7 +15963,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							{
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$TFilter(
-									_gicentre$elm_vega$Vega$Expr('datum[xField] != null && datum[yField] == null')),
+									_gicentre$elm_vega$Vega$expr('datum[xField] != null && datum[yField] == null')),
 								_1: {ctor: '[]'}
 							},
 							A2(
@@ -15979,7 +15981,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$TFilter(
-										_gicentre$elm_vega$Vega$Expr('datum[xField] == null && datum[yField] != null')),
+										_gicentre$elm_vega$Vega$expr('datum[xField] == null && datum[yField] != null')),
 									_1: {ctor: '[]'}
 								},
 								A2(
@@ -16382,7 +16384,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$Vega$TFilter(
-						_gicentre$elm_vega$Vega$Expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null')),
+						_gicentre$elm_vega$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null')),
 					_1: {ctor: '[]'}
 				},
 				A2(
@@ -18169,7 +18171,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 		{
 			ctor: '::',
 			_0: _gicentre$elm_vega$Vega$TFilter(
-				_gicentre$elm_vega$Vega$Expr('(sex === \'all\' || datum.sex === sex) && (!query || test(regexp(query,\'i\'), datum.job))')),
+				_gicentre$elm_vega$Vega$expr('(sex === \'all\' || datum.sex === sex) && (!query || test(regexp(query,\'i\'), datum.job))')),
 			_1: {
 				ctor: '::',
 				_0: _gicentre$elm_vega$Vega$TStack(
@@ -18676,7 +18678,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 		{
 			ctor: '::',
 			_0: _gicentre$elm_vega$Vega$TFilter(
-				_gicentre$elm_vega$Vega$Expr('datum.data < layers')),
+				_gicentre$elm_vega$Vega$expr('datum.data < layers')),
 			_1: {
 				ctor: '::',
 				_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.data * -height', 'offset', _gicentre$elm_vega$Vega$AlwaysUpdate),
@@ -23628,7 +23630,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$TFilter(
-							_gicentre$elm_vega$Vega$Expr('datum.year == year')),
+							_gicentre$elm_vega$Vega$expr('datum.year == year')),
 						_1: {ctor: '[]'}
 					},
 					A2(
@@ -23646,7 +23648,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$TFilter(
-								_gicentre$elm_vega$Vega$Expr('datum.sex == 1')),
+								_gicentre$elm_vega$Vega$expr('datum.sex == 1')),
 							_1: {ctor: '[]'}
 						},
 						A2(
@@ -23664,7 +23666,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							{
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$TFilter(
-									_gicentre$elm_vega$Vega$Expr('datum.sex == 2')),
+									_gicentre$elm_vega$Vega$expr('datum.sex == 2')),
 								_1: {ctor: '[]'}
 							},
 							A2(
