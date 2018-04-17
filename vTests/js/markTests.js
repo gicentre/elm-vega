@@ -8214,48 +8214,20 @@ var _user$project$Vega$timeUnitLabel = function (tu) {
 	switch (_p3.ctor) {
 		case 'Year':
 			return 'year';
-		case 'YearQuarter':
-			return 'yearquarter';
-		case 'YearQuarterMonth':
-			return 'yearquartermonth';
-		case 'YearMonth':
-			return 'yearmonth';
-		case 'YearMonthDate':
-			return 'yearmonthdate';
-		case 'YearMonthDateHours':
-			return 'yearmonthdatehours';
-		case 'YearMonthDateHoursMinutes':
-			return 'yearmonthdatehoursminutes';
-		case 'YearMonthDateHoursMinutesSeconds':
-			return 'yearmonthdatehoursminutesseconds';
-		case 'Quarter':
-			return 'quarter';
-		case 'QuarterMonth':
-			return 'quartermonth';
 		case 'Month':
 			return 'month';
-		case 'MonthDate':
-			return 'monthdate';
-		case 'Date':
-			return 'date';
+		case 'Week':
+			return 'week';
 		case 'Day':
 			return 'day';
-		case 'Hours':
-			return 'hours';
-		case 'HoursMinutes':
-			return 'hoursminutes';
-		case 'HoursMinutesSeconds':
-			return 'hoursminutesseconds';
-		case 'Minutes':
-			return 'minutes';
-		case 'MinutesSeconds':
-			return 'minutesseconds';
-		case 'Seconds':
-			return 'seconds';
-		case 'SecondsMilliseconds':
-			return 'secondsmilliseconds';
-		case 'Milliseconds':
-			return 'milliseconds';
+		case 'Hour':
+			return 'hour';
+		case 'Minute':
+			return 'minute';
+		case 'Second':
+			return 'second';
+		case 'Millisecond':
+			return 'millisecond';
 		default:
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
@@ -12846,6 +12818,7 @@ var _user$project$Vega$RWidth = {ctor: 'RWidth'};
 var _user$project$Vega$ScCustom = function (a) {
 	return {ctor: 'ScCustom', _0: a};
 };
+var _user$project$Vega$scCustom = _user$project$Vega$ScCustom;
 var _user$project$Vega$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
 var _user$project$Vega$ScBinLinear = {ctor: 'ScBinLinear'};
 var _user$project$Vega$ScQuantize = {ctor: 'ScQuantize'};
@@ -13319,14 +13292,14 @@ var _user$project$Vega$SFacet = F3(
 	function (a, b, c) {
 		return {ctor: 'SFacet', _0: a, _1: b, _2: c};
 	});
-var _user$project$Vega$sFacet = F2(
+var _user$project$Vega$srFacet = F2(
 	function (d, name) {
 		return A2(_user$project$Vega$SFacet, d, name);
 	});
 var _user$project$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
-var _user$project$Vega$sData = _user$project$Vega$SData;
+var _user$project$Vega$srData = _user$project$Vega$SData;
 var _user$project$Vega$OffsetSignal = function (a) {
 	return {ctor: 'OffsetSignal', _0: a};
 };
@@ -13374,27 +13347,13 @@ var _user$project$Vega$Utc = function (a) {
 var _user$project$Vega$utc = function (tu) {
 	return _user$project$Vega$Utc(tu);
 };
-var _user$project$Vega$Milliseconds = {ctor: 'Milliseconds'};
-var _user$project$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
-var _user$project$Vega$Seconds = {ctor: 'Seconds'};
-var _user$project$Vega$MinutesSeconds = {ctor: 'MinutesSeconds'};
-var _user$project$Vega$Minutes = {ctor: 'Minutes'};
-var _user$project$Vega$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
-var _user$project$Vega$HoursMinutes = {ctor: 'HoursMinutes'};
-var _user$project$Vega$Hours = {ctor: 'Hours'};
+var _user$project$Vega$Millisecond = {ctor: 'Millisecond'};
+var _user$project$Vega$Second = {ctor: 'Second'};
+var _user$project$Vega$Minute = {ctor: 'Minute'};
+var _user$project$Vega$Hour = {ctor: 'Hour'};
 var _user$project$Vega$Day = {ctor: 'Day'};
-var _user$project$Vega$Date = {ctor: 'Date'};
-var _user$project$Vega$MonthDate = {ctor: 'MonthDate'};
+var _user$project$Vega$Week = {ctor: 'Week'};
 var _user$project$Vega$Month = {ctor: 'Month'};
-var _user$project$Vega$QuarterMonth = {ctor: 'QuarterMonth'};
-var _user$project$Vega$Quarter = {ctor: 'Quarter'};
-var _user$project$Vega$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
-var _user$project$Vega$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
-var _user$project$Vega$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
-var _user$project$Vega$YearMonthDate = {ctor: 'YearMonthDate'};
-var _user$project$Vega$YearMonth = {ctor: 'YearMonth'};
-var _user$project$Vega$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
-var _user$project$Vega$YearQuarter = {ctor: 'YearQuarter'};
 var _user$project$Vega$Year = {ctor: 'Year'};
 var _user$project$Vega$MGroup = function (a) {
 	return {ctor: 'MGroup', _0: a};
@@ -13766,7 +13725,7 @@ var _user$project$MarkTests$trailTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$sData(
+							_0: _user$project$Vega$srData(
 								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -16065,7 +16024,7 @@ var _user$project$MarkTests$groupTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$sData(
+							_0: _user$project$Vega$srData(
 								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -16663,7 +16622,7 @@ var _user$project$MarkTests$areaTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$sData(
+							_0: _user$project$Vega$srData(
 								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -17706,7 +17665,7 @@ var _user$project$MarkTests$lineTest = function () {
 					_0: _user$project$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _user$project$Vega$sData(
+							_0: _user$project$Vega$srData(
 								_user$project$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),

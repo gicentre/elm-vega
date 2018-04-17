@@ -8214,48 +8214,20 @@ var _gicentre$elm_vega$Vega$timeUnitLabel = function (tu) {
 	switch (_p3.ctor) {
 		case 'Year':
 			return 'year';
-		case 'YearQuarter':
-			return 'yearquarter';
-		case 'YearQuarterMonth':
-			return 'yearquartermonth';
-		case 'YearMonth':
-			return 'yearmonth';
-		case 'YearMonthDate':
-			return 'yearmonthdate';
-		case 'YearMonthDateHours':
-			return 'yearmonthdatehours';
-		case 'YearMonthDateHoursMinutes':
-			return 'yearmonthdatehoursminutes';
-		case 'YearMonthDateHoursMinutesSeconds':
-			return 'yearmonthdatehoursminutesseconds';
-		case 'Quarter':
-			return 'quarter';
-		case 'QuarterMonth':
-			return 'quartermonth';
 		case 'Month':
 			return 'month';
-		case 'MonthDate':
-			return 'monthdate';
-		case 'Date':
-			return 'date';
+		case 'Week':
+			return 'week';
 		case 'Day':
 			return 'day';
-		case 'Hours':
-			return 'hours';
-		case 'HoursMinutes':
-			return 'hoursminutes';
-		case 'HoursMinutesSeconds':
-			return 'hoursminutesseconds';
-		case 'Minutes':
-			return 'minutes';
-		case 'MinutesSeconds':
-			return 'minutesseconds';
-		case 'Seconds':
-			return 'seconds';
-		case 'SecondsMilliseconds':
-			return 'secondsmilliseconds';
-		case 'Milliseconds':
-			return 'milliseconds';
+		case 'Hour':
+			return 'hour';
+		case 'Minute':
+			return 'minute';
+		case 'Second':
+			return 'second';
+		case 'Millisecond':
+			return 'millisecond';
 		default:
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
@@ -12846,6 +12818,7 @@ var _gicentre$elm_vega$Vega$RWidth = {ctor: 'RWidth'};
 var _gicentre$elm_vega$Vega$ScCustom = function (a) {
 	return {ctor: 'ScCustom', _0: a};
 };
+var _gicentre$elm_vega$Vega$scCustom = _gicentre$elm_vega$Vega$ScCustom;
 var _gicentre$elm_vega$Vega$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
 var _gicentre$elm_vega$Vega$ScBinLinear = {ctor: 'ScBinLinear'};
 var _gicentre$elm_vega$Vega$ScQuantize = {ctor: 'ScQuantize'};
@@ -13319,14 +13292,14 @@ var _gicentre$elm_vega$Vega$SFacet = F3(
 	function (a, b, c) {
 		return {ctor: 'SFacet', _0: a, _1: b, _2: c};
 	});
-var _gicentre$elm_vega$Vega$sFacet = F2(
+var _gicentre$elm_vega$Vega$srFacet = F2(
 	function (d, name) {
 		return A2(_gicentre$elm_vega$Vega$SFacet, d, name);
 	});
 var _gicentre$elm_vega$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
-var _gicentre$elm_vega$Vega$sData = _gicentre$elm_vega$Vega$SData;
+var _gicentre$elm_vega$Vega$srData = _gicentre$elm_vega$Vega$SData;
 var _gicentre$elm_vega$Vega$OffsetSignal = function (a) {
 	return {ctor: 'OffsetSignal', _0: a};
 };
@@ -13374,27 +13347,13 @@ var _gicentre$elm_vega$Vega$Utc = function (a) {
 var _gicentre$elm_vega$Vega$utc = function (tu) {
 	return _gicentre$elm_vega$Vega$Utc(tu);
 };
-var _gicentre$elm_vega$Vega$Milliseconds = {ctor: 'Milliseconds'};
-var _gicentre$elm_vega$Vega$SecondsMilliseconds = {ctor: 'SecondsMilliseconds'};
-var _gicentre$elm_vega$Vega$Seconds = {ctor: 'Seconds'};
-var _gicentre$elm_vega$Vega$MinutesSeconds = {ctor: 'MinutesSeconds'};
-var _gicentre$elm_vega$Vega$Minutes = {ctor: 'Minutes'};
-var _gicentre$elm_vega$Vega$HoursMinutesSeconds = {ctor: 'HoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$HoursMinutes = {ctor: 'HoursMinutes'};
-var _gicentre$elm_vega$Vega$Hours = {ctor: 'Hours'};
+var _gicentre$elm_vega$Vega$Millisecond = {ctor: 'Millisecond'};
+var _gicentre$elm_vega$Vega$Second = {ctor: 'Second'};
+var _gicentre$elm_vega$Vega$Minute = {ctor: 'Minute'};
+var _gicentre$elm_vega$Vega$Hour = {ctor: 'Hour'};
 var _gicentre$elm_vega$Vega$Day = {ctor: 'Day'};
-var _gicentre$elm_vega$Vega$Date = {ctor: 'Date'};
-var _gicentre$elm_vega$Vega$MonthDate = {ctor: 'MonthDate'};
+var _gicentre$elm_vega$Vega$Week = {ctor: 'Week'};
 var _gicentre$elm_vega$Vega$Month = {ctor: 'Month'};
-var _gicentre$elm_vega$Vega$QuarterMonth = {ctor: 'QuarterMonth'};
-var _gicentre$elm_vega$Vega$Quarter = {ctor: 'Quarter'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutesSeconds = {ctor: 'YearMonthDateHoursMinutesSeconds'};
-var _gicentre$elm_vega$Vega$YearMonthDateHoursMinutes = {ctor: 'YearMonthDateHoursMinutes'};
-var _gicentre$elm_vega$Vega$YearMonthDateHours = {ctor: 'YearMonthDateHours'};
-var _gicentre$elm_vega$Vega$YearMonthDate = {ctor: 'YearMonthDate'};
-var _gicentre$elm_vega$Vega$YearMonth = {ctor: 'YearMonth'};
-var _gicentre$elm_vega$Vega$YearQuarterMonth = {ctor: 'YearQuarterMonth'};
-var _gicentre$elm_vega$Vega$YearQuarter = {ctor: 'YearQuarter'};
 var _gicentre$elm_vega$Vega$Year = {ctor: 'Year'};
 var _gicentre$elm_vega$Vega$MGroup = function (a) {
 	return {ctor: 'MGroup', _0: a};
@@ -13766,7 +13725,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('summary')),
 							_1: {ctor: '[]'}
 						}),
@@ -13860,7 +13819,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('summary')),
 								_1: {ctor: '[]'}
 							}),
@@ -14359,7 +14318,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('drive')),
 							_1: {ctor: '[]'}
 						}),
@@ -14441,7 +14400,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('drive')),
 								_1: {ctor: '[]'}
 							}),
@@ -14531,7 +14490,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 							_0: _gicentre$elm_vega$Vega$MFrom(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$sData(
+									_0: _gicentre$elm_vega$Vega$srData(
 										_gicentre$elm_vega$Vega$str('drive')),
 									_1: {ctor: '[]'}
 								}),
@@ -15289,7 +15248,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('valid')),
 							_1: {ctor: '[]'}
 						}),
@@ -15426,7 +15385,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('nullY')),
 								_1: {ctor: '[]'}
 							}),
@@ -15539,7 +15498,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							_0: _gicentre$elm_vega$Vega$MFrom(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$sData(
+									_0: _gicentre$elm_vega$Vega$srData(
 										_gicentre$elm_vega$Vega$str('nullX')),
 									_1: {ctor: '[]'}
 								}),
@@ -15664,7 +15623,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 									_0: _gicentre$elm_vega$Vega$MFrom(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$sData(
+											_0: _gicentre$elm_vega$Vega$srData(
 												_gicentre$elm_vega$Vega$str('nullXY')),
 											_1: {ctor: '[]'}
 										}),
@@ -16213,7 +16172,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('cars')),
 							_1: {ctor: '[]'}
 						}),
@@ -16532,7 +16491,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -16669,7 +16628,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('table')),
 								_1: {ctor: '[]'}
 							}),
@@ -16915,7 +16874,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -17350,7 +17309,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('facet')),
 							_1: {ctor: '[]'}
 						}),
@@ -17468,12 +17427,12 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('series')),
 							_1: {
 								ctor: '::',
 								_0: A3(
-									_gicentre$elm_vega$Vega$sFacet,
+									_gicentre$elm_vega$Vega$srFacet,
 									'jobs',
 									'facet',
 									{
@@ -17513,7 +17472,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('series')),
 								_1: {ctor: '[]'}
 							}),
@@ -18376,7 +18335,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -18481,7 +18440,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('layer_indices')),
 							_1: {ctor: '[]'}
 						}),
@@ -18957,7 +18916,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('series')),
 							_1: {ctor: '[]'}
 						}),
@@ -19084,7 +19043,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$sFacet,
+								_gicentre$elm_vega$Vega$srFacet,
 								'table',
 								'series',
 								{
@@ -19581,7 +19540,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -19999,7 +19958,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('series')),
 							_1: {ctor: '[]'}
 						}),
@@ -20119,7 +20078,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$sFacet,
+								_gicentre$elm_vega$Vega$srFacet,
 								'table',
 								'series',
 								{
@@ -20640,7 +20599,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('faceted_tuples')),
 							_1: {ctor: '[]'}
 						}),
@@ -20859,12 +20818,12 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('trellis')),
 							_1: {
 								ctor: '::',
 								_0: A3(
-									_gicentre$elm_vega$Vega$sFacet,
+									_gicentre$elm_vega$Vega$srFacet,
 									'tuples',
 									'faceted_tuples',
 									{
@@ -21398,7 +21357,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('facet')),
 								_1: {ctor: '[]'}
 							}),
@@ -21496,7 +21455,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('bars')),
 								_1: {ctor: '[]'}
 							}),
@@ -21649,7 +21608,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						{
 							ctor: '::',
 							_0: A3(
-								_gicentre$elm_vega$Vega$sFacet,
+								_gicentre$elm_vega$Vega$srFacet,
 								'table',
 								'facet',
 								{
@@ -22065,7 +22024,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -22658,7 +22617,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 					_0: _gicentre$elm_vega$Vega$MFrom(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$sData(
+							_0: _gicentre$elm_vega$Vega$srData(
 								_gicentre$elm_vega$Vega$str('table')),
 							_1: {ctor: '[]'}
 						}),
@@ -23176,7 +23135,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str(genderField)),
 								_1: {ctor: '[]'}
 							}),
@@ -23360,7 +23319,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						_0: _gicentre$elm_vega$Vega$MFrom(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$sData(
+								_0: _gicentre$elm_vega$Vega$srData(
 									_gicentre$elm_vega$Vega$str('ageGroups')),
 								_1: {ctor: '[]'}
 							}),

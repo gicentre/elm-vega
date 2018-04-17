@@ -41,8 +41,8 @@ module Vega
         , PackProperty
         , Padding(PEdges, PSize)
         , PieProperty
-        , RangeDefault(..)
-        , Scale(..)
+        , RangeDefault(RCategory, RDiverging, RHeatmap, RHeight, ROrdinal, RRamp, RSymbol, RWidth)
+        , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleDomain(..)
         , ScaleNice(..)
         , ScaleProperty(..)
@@ -60,7 +60,7 @@ module Vega
         , StrokeJoin(..)
         , Symbol(..)
         , TextDirection(..)
-        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
+        , TimeUnit(Day, Hour, Millisecond, Minute, Month, Second, Week, Year)
         , TopMarkProperty(..)
         , Transform(..)
         , Trigger
@@ -305,8 +305,7 @@ module Vega
         , q1
         , q3
         , rgb
-        , sData
-        , sFacet
+        , scCustom
         , scale
         , scales
         , sigHeight
@@ -316,6 +315,8 @@ module Vega
         , signals
         , soByField
         , soOp
+        , srData
+        , srFacet
         , stderr
         , stdev
         , stdevp
@@ -555,9 +556,9 @@ Functions and types for declaring the input data to the visualization.
 @docs mark
 @docs Mark
 @docs TopMarkProperty
-@docs sData
+@docs srData
 @docs Facet
-@docs sFacet
+@docs srFacet
 @docs faField
 @docs faGroupBy
 
@@ -692,6 +693,7 @@ The mapping of data values to their visual expression.
 @docs RangeDefault
 @docs ScaleProperty
 @docs Scale
+@docs scCustom
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
@@ -1689,31 +1691,15 @@ type TextDirection
 [Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative)
 for further details.
 -}
-type
-    -- TODO: Vega-Lite seems to have more time unit options than Vega (e.g. Quarter, Hours etc. - Check spec to see if this is a doc problem or a genuinely restricted set in Vega)
-    TimeUnit
+type TimeUnit
     = Year
-    | YearQuarter
-    | YearQuarterMonth
-    | YearMonth
-    | YearMonthDate
-    | YearMonthDateHours
-    | YearMonthDateHoursMinutes
-    | YearMonthDateHoursMinutesSeconds
-    | Quarter
-    | QuarterMonth
     | Month
-    | MonthDate
-    | Date
+    | Week
     | Day
-    | Hours
-    | HoursMinutes
-    | HoursMinutesSeconds
-    | Minutes
-    | MinutesSeconds
-    | Seconds
-    | SecondsMilliseconds
-    | Milliseconds
+    | Hour
+    | Minute
+    | Second
+    | Millisecond
     | Utc TimeUnit
 
 
@@ -4246,24 +4232,12 @@ scales scs =
     ( VScales, JE.list scs )
 
 
-{-| Name of the source for a set of marks. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
+{-| Specify a custom named scale. For detaisl see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#types)
 -}
-sData : Str -> Source
-sData =
-    SData
-
-
-{-| Create a facet directive for a set of marks. The first parameter is the name
-of the source data set from which the facet partitions are to be generated. The
-second parameter is the name to be given to the generated facet source. Marks
-defined with the faceted `group` mark can reference this data source name to
-visualizae the local data partition. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
--}
-sFacet : String -> String -> List Facet -> Source
-sFacet d name =
-    SFacet d name
+scCustom : String -> Scale
+scCustom =
+    ScCustom
 
 
 {-| Create the signals used to add dynamism to the visualization.
@@ -4321,6 +4295,26 @@ soByField =
 soOp : Operation -> SortProperty
 soOp =
     Op
+
+
+{-| Name of the source for a set of marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
+-}
+srData : Str -> Source
+srData =
+    SData
+
+
+{-| Create a facet directive for a set of marks. The first parameter is the name
+of the source data set from which the facet partitions are to be generated. The
+second parameter is the name to be given to the generated facet source. Marks
+defined with the faceted `group` mark can reference this data source name to
+visualizae the local data partition. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#from)
+-}
+srFacet : String -> String -> List Facet -> Source
+srFacet d name =
+    SFacet d name
 
 
 {-| An aggregating operation to calculate the standard error of the values in a field.
@@ -6132,68 +6126,26 @@ timeUnitLabel tu =
         Year ->
             "year"
 
-        YearQuarter ->
-            "yearquarter"
-
-        YearQuarterMonth ->
-            "yearquartermonth"
-
-        YearMonth ->
-            "yearmonth"
-
-        YearMonthDate ->
-            "yearmonthdate"
-
-        YearMonthDateHours ->
-            "yearmonthdatehours"
-
-        YearMonthDateHoursMinutes ->
-            "yearmonthdatehoursminutes"
-
-        YearMonthDateHoursMinutesSeconds ->
-            "yearmonthdatehoursminutesseconds"
-
-        Quarter ->
-            "quarter"
-
-        QuarterMonth ->
-            "quartermonth"
-
         Month ->
             "month"
 
-        MonthDate ->
-            "monthdate"
-
-        Date ->
-            "date"
+        Week ->
+            "week"
 
         Day ->
             "day"
 
-        Hours ->
-            "hours"
+        Hour ->
+            "hour"
 
-        HoursMinutes ->
-            "hoursminutes"
+        Minute ->
+            "minute"
 
-        HoursMinutesSeconds ->
-            "hoursminutesseconds"
+        Second ->
+            "second"
 
-        Minutes ->
-            "minutes"
-
-        MinutesSeconds ->
-            "minutesseconds"
-
-        Seconds ->
-            "seconds"
-
-        SecondsMilliseconds ->
-            "secondsmilliseconds"
-
-        Milliseconds ->
-            "milliseconds"
+        Millisecond ->
+            "millisecond"
 
         Utc timeUnit ->
             "utc" ++ timeUnitLabel timeUnit

@@ -61,7 +61,7 @@ barChart1 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "category") ]
@@ -142,7 +142,7 @@ barChart2 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "x") ]
@@ -215,7 +215,7 @@ barChart3 =
             marks
                 << mark Rect
                     [ MName "bars"
-                    , MFrom [ sData (str "facet") ]
+                    , MFrom [ srData (str "facet") ]
                     , MEncode
                         [ enEnter
                             [ maY [ vScale (fName "pos"), vField (fName "position") ]
@@ -227,7 +227,7 @@ barChart3 =
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ sData (str "bars") ]
+                    [ MFrom [ srData (str "bars") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vField (fName "x2"), vOffset (vNumber -5) ]
@@ -243,7 +243,7 @@ barChart3 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
+                    [ MFrom [ srFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
                     , MEncode [ enEnter [ maY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
                     , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
@@ -321,7 +321,7 @@ barChart4 =
         nestedMk =
             marks
                 << mark Rect
-                    [ MFrom [ sData (str "faceted_tuples") ]
+                    [ MFrom [ srData (str "faceted_tuples") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vNumber 0 ]
@@ -345,7 +345,7 @@ barChart4 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sData (str "trellis"), sFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
+                    [ MFrom [ srData (str "trellis"), srFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
                     , MEncode
                         [ enEnter [ maX [ vNumber 0 ], maWidth [ vSignal "width" ] ]
                         , enUpdate [ maY [ vField (fName "y0") ], maY2 [ vField (fName "y1") ] ]
@@ -399,7 +399,7 @@ barChart5 =
             marks
                 << mark Text
                     [ MInteractive False
-                    , MFrom [ sData (str "ageGroups") ]
+                    , MFrom [ srData (str "ageGroups") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vSignal "chartWidth + chartPad / 2" ]
@@ -450,7 +450,7 @@ barChart5 =
             in
             marks
                 << mark Rect
-                    [ MFrom [ sData (str genderField) ]
+                    [ MFrom [ srData (str genderField) ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "people") ]
@@ -517,14 +517,14 @@ lineChart1 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    [ MFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
                     , MGroup [ mkLine [] ]
                     ]
 
         mkLine =
             marks
                 << mark Line
-                    [ MFrom [ sData (str "series") ]
+                    [ MFrom [ srData (str "series") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "x") ]
@@ -583,7 +583,7 @@ areaChart1 =
         mk =
             marks
                 << mark Area
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "u") ]
@@ -641,14 +641,14 @@ areaChart2 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ sFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    [ MFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
                     , MGroup [ mkArea [] ]
                     ]
 
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ sData (str "series") ]
+                    [ MFrom [ srData (str "series") ]
                     , MEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
@@ -731,7 +731,7 @@ areaChart3 =
         mk1 =
             marks
                 << mark Group
-                    [ MFrom [ sData (str "layer_indices") ]
+                    [ MFrom [ srData (str "layer_indices") ]
                     , MEncode [ enUpdate [ maY [ vField (fName "offset") ] ] ]
                     , MGroup [ mkArea [] ]
                     ]
@@ -739,7 +739,7 @@ areaChart3 =
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
@@ -871,7 +871,7 @@ areaChart4 =
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ sData (str "facet") ]
+                    [ MFrom [ srData (str "facet") ]
                     , MEncode
                         [ enUpdate
                             [ maX [ vScale (fName "xScale"), vField (fName "year") ]
@@ -888,13 +888,13 @@ areaChart4 =
             marks
                 << mark Group
                     [ MFrom
-                        [ sData (str "series")
-                        , sFacet "jobs" "facet" [ faGroupBy [ "job", "sex" ] ]
+                        [ srData (str "series")
+                        , srFacet "jobs" "facet" [ faGroupBy [ "job", "sex" ] ]
                         ]
                     , MGroup [ mkArea [] ]
                     ]
                 << mark Text
-                    [ MFrom [ sData (str "series") ]
+                    [ MFrom [ srData (str "series") ]
                     , MInteractive False
                     , MEncode
                         [ enUpdate
@@ -951,7 +951,7 @@ circularChart1 =
         mk =
             marks
                 << mark Arc
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maFill [ vScale (fName "cScale"), vField (fName "id") ]
@@ -993,7 +993,7 @@ circularChart2 =
         mk =
             marks
                 << mark Arc
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
@@ -1009,7 +1009,7 @@ circularChart2 =
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vField (fGroup (fName "width")), vMultiply (vNumber 0.5) ]
@@ -1089,7 +1089,7 @@ scatterplot1 =
         mk =
             marks
                 << mark Symbol
-                    [ MFrom [ sData (str "cars") ]
+                    [ MFrom [ srData (str "cars") ]
                     , MEncode
                         [ enUpdate <|
                             [ maX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
@@ -1146,7 +1146,7 @@ scatterplot2 =
         mk =
             marks
                 << mark Symbol
-                    [ MFrom [ sData (str "valid") ]
+                    [ MFrom [ srData (str "valid") ]
                     , MEncode
                         [ enEnter
                             [ maSize [ vNumber 50 ]
@@ -1167,7 +1167,7 @@ scatterplot2 =
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ sData (str "nullY") ]
+                    [ MFrom [ srData (str "nullY") ]
                     , MEncode
                         [ enEnter
                             [ maSize [ vNumber 50 ]
@@ -1186,7 +1186,7 @@ scatterplot2 =
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ sData (str "nullX") ]
+                    [ MFrom [ srData (str "nullX") ]
                     , MEncode
                         [ enEnter
                             [ maSize [ vNumber 50 ]
@@ -1207,7 +1207,7 @@ scatterplot2 =
                     ]
                 << mark Text
                     [ MInteractive False
-                    , MFrom [ sData (str "nullXY") ]
+                    , MFrom [ srData (str "nullXY") ]
                     , MEncode
                         [ enUpdate
                             [ maX [ vSignal "nullSize", vOffset (vNumber -4) ]
@@ -1329,7 +1329,7 @@ scatterplot3 =
         mk =
             marks
                 << mark Line
-                    [ MFrom [ sData (str "drive") ]
+                    [ MFrom [ srData (str "drive") ]
                     , MEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
@@ -1341,7 +1341,7 @@ scatterplot3 =
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ sData (str "drive") ]
+                    [ MFrom [ srData (str "drive") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
@@ -1354,7 +1354,7 @@ scatterplot3 =
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ sData (str "drive") ]
+                    [ MFrom [ srData (str "drive") ]
                     , MEncode
                         [ enEnter
                             [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
@@ -1436,7 +1436,7 @@ scatterplot4 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ sData (str "summary") ]
+                    [ MFrom [ srData (str "summary") ]
                     , MEncode
                         [ enEnter [ maFill [ vStr "black" ], maHeight [ vNumber 1 ] ]
                         , enUpdate
@@ -1447,7 +1447,7 @@ scatterplot4 =
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ sData (str "summary") ]
+                    [ MFrom [ srData (str "summary") ]
                     , MEncode
                         [ enEnter [ maFill [ vStr "back" ], maSize [ vNumber 40 ] ]
                         , enUpdate

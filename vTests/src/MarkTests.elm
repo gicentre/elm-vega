@@ -112,7 +112,7 @@ areaTest =
         mk =
             marks
                 << mark Area
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -184,7 +184,7 @@ groupTest =
         nestedMk =
             marks
                 << mark Rect
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MInteractive False
                     , MEncode
                         [ enEnter
@@ -280,7 +280,7 @@ lineTest =
         mk =
             marks
                 << mark Line
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -554,7 +554,7 @@ trailTest =
         mk =
             marks
                 << mark Trail
-                    [ MFrom [ sData (str "table") ]
+                    [ MFrom [ srData (str "table") ]
                     , MEncode
                         [ enEnter [ maFill [ vStr "#939597" ] ]
                         , enUpdate
