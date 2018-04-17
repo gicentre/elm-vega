@@ -2452,19 +2452,6 @@ parameter is the list of any other columns to which this is added.
 dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
 dataColumn colName data =
     case data of
-        -- VStrs col ->
-        --    (::) (List.map (\s -> ( colName, JE.string s )) col)
-        -- VNumbers col ->
-        --     (::) (List.map (\x -> ( colName, JE.float x )) col)
-        --
-        -- VBools col ->
-        --     (::) (List.map (\b -> ( colName, JE.bool b )) col)
-        --
-        -- Values col ->
-        --     (::) (List.map (\v -> ( colName, valueSpec v )) col)
-        --
-        -- _ ->
-        --     (::) [] |> Debug.log "Warning: Ignored value. Can only create a dataColumn from strings, numbers or bools"
         DStrs col ->
             (::) (List.map (\s -> ( colName, JE.string s )) col)
 
