@@ -16,9 +16,8 @@ module Vega
         , DataTable
         , DataType
         , EncodingProperty
-        , EventHandler(..)
+        , EventHandler
         , Expr(..)
-        , Expression
         , Facet
         , Field
         , FieldValue(..)
@@ -142,7 +141,11 @@ module Vega
         , dirLabel
         , distinct
         , dsv
+        , eEncode
+        , eForce
+        , eUpdate
         , enter
+        , eventHandler
         , exit
         , faField
         , faGroupBy
@@ -464,6 +467,10 @@ Functions and types for declaring the input data to the visualization.
 
 @docs InputProperty
 @docs EventHandler
+@docs eventHandler
+@docs eUpdate
+@docs eEncode
+@docs eForce
 
 
 ## Scaling
@@ -521,7 +528,6 @@ can carry data used in specifications.
 @docs cLAB
 @docs cRGB
 @docs Expr
-@docs Expression
 @docs Field
 @docs FieldValue
 @docs Value
@@ -807,13 +813,47 @@ type EncodingProperty
 update or encode as a result. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
-type
-    EventHandler
-    -- TODO: Replace EEvents strings with full event stream types.
-    = EEvents String
-    | EUpdate String
+type EventHandler
+    = EEvents EventStream
+    | EUpdate Expression
     | EEncode String
     | EForce Bool
+
+
+{-| Expression to be evaluated when an event occurs, the result of which becomes
+the new signal value. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
+-}
+eUpdate : Expression -> EventHandler
+eUpdate =
+    EUpdate
+
+
+{-| Name of a mark property encoding set to re-evaluate for the mark item that is
+the source of an input event. This is required if `eUpdate` is not specified. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
+-}
+eEncode : String -> EventHandler
+eEncode =
+    EEncode
+
+
+{-| Indicates whether or not updates that do not change a signal value should propagate.
+For example, if true and an input stream update sets the signal to its current value,
+downstream signals will still be notified of an update. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
+-}
+eForce : Bool -> EventHandler
+eForce =
+    EForce
+
+
+{-| Represents an event stream for modelling user input. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/event-streams/).
+-}
+type alias EventStream =
+    -- TODO: Model event streams by creating a parser that generates valid stream text.
+    String
 
 
 {-| A vega [Expr](https://vega.github.io/vega/docs/types/#Expr) that can be either
@@ -2460,6 +2500,25 @@ visualization is resized. For further details see the
 enter : List MarkProperty -> EncodingProperty
 enter =
     Enter
+
+
+{-| Generates a list of event handlers. The first parameter represents the events
+to respond to. The second a list of handlers that respond to the event. For example,
+
+    signal "tooltip"
+        [ SiValue (vObject [])
+        , SiOn
+            [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
+            , eventHandler "rect:mouseout" [ eUpdate "" ]
+            ]
+        ]
+
+For details see the [Vega documentation](https://vega.github.io/vega/docs/event-streams/).
+
+-}
+eventHandler : String -> List EventHandler -> List EventHandler
+eventHandler eStr eHandlers =
+    EEvents eStr :: eHandlers
 
 
 {-| The properties to be encoded when the data backing a mark item is removed.

@@ -12090,15 +12090,26 @@ var _user$project$Vega$enter = _user$project$Vega$Enter;
 var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
+var _user$project$Vega$eForce = _user$project$Vega$EForce;
 var _user$project$Vega$EEncode = function (a) {
 	return {ctor: 'EEncode', _0: a};
 };
+var _user$project$Vega$eEncode = _user$project$Vega$EEncode;
 var _user$project$Vega$EUpdate = function (a) {
 	return {ctor: 'EUpdate', _0: a};
 };
+var _user$project$Vega$eUpdate = _user$project$Vega$EUpdate;
 var _user$project$Vega$EEvents = function (a) {
 	return {ctor: 'EEvents', _0: a};
 };
+var _user$project$Vega$eventHandler = F2(
+	function (eStr, eHandlers) {
+		return {
+			ctor: '::',
+			_0: _user$project$Vega$EEvents(eStr),
+			_1: eHandlers
+		};
+	});
 var _user$project$Vega$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
@@ -13987,15 +13998,14 @@ var _user$project$TransformTests$stackTest1 = function () {
 									_0: _user$project$Vega$SiOn(
 										{
 											ctor: '::',
-											_0: {
-												ctor: '::',
-												_0: _user$project$Vega$EEvents('mousedown![!event.shiftKey]'),
-												_1: {
+											_0: A2(
+												_user$project$Vega$eventHandler,
+												'mousedown![!event.shiftKey]',
+												{
 													ctor: '::',
-													_0: _user$project$Vega$EUpdate('{key: invert(\'xscale\', x()), value: ~~(1 + 9 * random())}'),
+													_0: _user$project$Vega$eUpdate('{key: invert(\'xscale\', x()), value: ~~(1 + 9 * random())}'),
 													_1: {ctor: '[]'}
-												}
-											},
+												}),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -14014,15 +14024,14 @@ var _user$project$TransformTests$stackTest1 = function () {
 										_0: _user$project$Vega$SiOn(
 											{
 												ctor: '::',
-												_0: {
-													ctor: '::',
-													_0: _user$project$Vega$EEvents('rect:mousedown![event.shiftKey]'),
-													_1: {
+												_0: A2(
+													_user$project$Vega$eventHandler,
+													'rect:mousedown![event.shiftKey]',
+													{
 														ctor: '::',
-														_0: _user$project$Vega$EUpdate('datum'),
+														_0: _user$project$Vega$eUpdate('datum'),
 														_1: {ctor: '[]'}
-													}
-												},
+													}),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

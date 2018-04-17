@@ -33,8 +33,8 @@ barChart1 =
                 << signal "tooltip"
                     [ SiValue (vObject [])
                     , SiOn
-                        [ [ EEvents "rect:mouseover", EUpdate "datum" ]
-                        , [ EEvents "rect:mouseout", EUpdate "" ]
+                        [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
+                        , eventHandler "rect:mouseout" [ eUpdate "" ]
                         ]
                     ]
 
@@ -688,7 +688,7 @@ areaChart3 =
             signals
                 << signal "layers"
                     [ SiValue (vNumber 2)
-                    , SiOn [ [ EEvents "mousedown!", EUpdate "1 + (layers % 4)" ] ]
+                    , SiOn [ eventHandler "mousedown!" [ eUpdate "1 + (layers % 4)" ] ]
                     , SiBind (iSelect [ InOptions (vNumbers [ 1, 2, 3, 4 ]) ])
                     ]
                 << signal "height" [ SiUpdate "floor(200 / layers)" ]
@@ -795,8 +795,8 @@ areaChart4 =
                 << signal "query"
                     [ SiValue (vStr "")
                     , SiOn
-                        [ [ EEvents "area:click!", EUpdate "datum.job" ]
-                        , [ EEvents "dblclick!", EUpdate "''" ]
+                        [ eventHandler "area:click!" [ eUpdate "datum.job" ]
+                        , eventHandler "dblclick!" [ eUpdate "''" ]
                         ]
                     , SiBind (iText [ InPlaceholder "search", InAutocomplete False ])
                     ]

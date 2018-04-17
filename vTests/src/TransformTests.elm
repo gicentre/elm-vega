@@ -105,19 +105,11 @@ stackTest1 =
                     ]
                 << signal "add"
                     [ SiValue (vObject [])
-                    , SiOn
-                        [ [ EEvents "mousedown![!event.shiftKey]"
-                          , EUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}"
-                          ]
-                        ]
+                    , SiOn [ eventHandler "mousedown![!event.shiftKey]" [ eUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}" ] ]
                     ]
                 << signal "rem"
                     [ SiValue (vObject [])
-                    , SiOn
-                        [ [ EEvents "rect:mousedown![event.shiftKey]"
-                          , EUpdate "datum"
-                          ]
-                        ]
+                    , SiOn [ eventHandler "rect:mousedown![event.shiftKey]" [ eUpdate "datum" ] ]
                     ]
 
         sc =

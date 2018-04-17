@@ -12090,15 +12090,26 @@ var _gicentre$elm_vega$Vega$enter = _gicentre$elm_vega$Vega$Enter;
 var _gicentre$elm_vega$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
+var _gicentre$elm_vega$Vega$eForce = _gicentre$elm_vega$Vega$EForce;
 var _gicentre$elm_vega$Vega$EEncode = function (a) {
 	return {ctor: 'EEncode', _0: a};
 };
+var _gicentre$elm_vega$Vega$eEncode = _gicentre$elm_vega$Vega$EEncode;
 var _gicentre$elm_vega$Vega$EUpdate = function (a) {
 	return {ctor: 'EUpdate', _0: a};
 };
+var _gicentre$elm_vega$Vega$eUpdate = _gicentre$elm_vega$Vega$EUpdate;
 var _gicentre$elm_vega$Vega$EEvents = function (a) {
 	return {ctor: 'EEvents', _0: a};
 };
+var _gicentre$elm_vega$Vega$eventHandler = F2(
+	function (eStr, eHandlers) {
+		return {
+			ctor: '::',
+			_0: _gicentre$elm_vega$Vega$EEvents(eStr),
+			_1: eHandlers
+		};
+	});
 var _gicentre$elm_vega$Vega$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
@@ -18045,26 +18056,24 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 							_0: _gicentre$elm_vega$Vega$SiOn(
 								{
 									ctor: '::',
-									_0: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EEvents('area:click!'),
-										_1: {
+									_0: A2(
+										_gicentre$elm_vega$Vega$eventHandler,
+										'area:click!',
+										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$EUpdate('datum.job'),
+											_0: _gicentre$elm_vega$Vega$eUpdate('datum.job'),
 											_1: {ctor: '[]'}
-										}
-									},
+										}),
 									_1: {
 										ctor: '::',
-										_0: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$EEvents('dblclick!'),
-											_1: {
+										_0: A2(
+											_gicentre$elm_vega$Vega$eventHandler,
+											'dblclick!',
+											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$EUpdate('\'\''),
+												_0: _gicentre$elm_vega$Vega$eUpdate('\'\''),
 												_1: {ctor: '[]'}
-											}
-										},
+											}),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -18595,15 +18604,14 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 						_0: _gicentre$elm_vega$Vega$SiOn(
 							{
 								ctor: '::',
-								_0: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$EEvents('mousedown!'),
-									_1: {
+								_0: A2(
+									_gicentre$elm_vega$Vega$eventHandler,
+									'mousedown!',
+									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EUpdate('1 + (layers % 4)'),
+										_0: _gicentre$elm_vega$Vega$eUpdate('1 + (layers % 4)'),
 										_1: {ctor: '[]'}
-									}
-								},
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -22880,26 +22888,24 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 						_0: _gicentre$elm_vega$Vega$SiOn(
 							{
 								ctor: '::',
-								_0: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$EEvents('rect:mouseover'),
-									_1: {
+								_0: A2(
+									_gicentre$elm_vega$Vega$eventHandler,
+									'rect:mouseover',
+									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EUpdate('datum'),
+										_0: _gicentre$elm_vega$Vega$eUpdate('datum'),
 										_1: {ctor: '[]'}
-									}
-								},
+									}),
 								_1: {
 									ctor: '::',
-									_0: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EEvents('rect:mouseout'),
-										_1: {
+									_0: A2(
+										_gicentre$elm_vega$Vega$eventHandler,
+										'rect:mouseout',
+										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$EUpdate(''),
+											_0: _gicentre$elm_vega$Vega$eUpdate(''),
 											_1: {ctor: '[]'}
-										}
-									},
+										}),
 									_1: {ctor: '[]'}
 								}
 							}),
