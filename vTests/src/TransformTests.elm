@@ -49,13 +49,13 @@ packTest1 =
                     [ MFrom [ sData (str "tree") ]
                     , MEncode
                         [ enEnter
-                            [ MFill [ vScale (fName "color"), vField (fName "id") ]
-                            , MStroke [ vStr "white" ]
+                            [ maFill [ vScale (fName "color"), vField (fName "id") ]
+                            , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
-                            [ MX [ vField (fName "x") ]
-                            , MY [ vField (fName "y") ]
-                            , MSize [ vSignal "4*datum.r*datum.r" ]
+                            [ maX [ vField (fName "x") ]
+                            , maY [ vField (fName "y") ]
+                            , maSize [ vSignal "4*datum.r*datum.r" ]
                             ]
                         ]
                     ]
@@ -136,15 +136,15 @@ stackTest1 =
                     [ MFrom [ sData (str "table") ]
                     , MEncode
                         [ enEnter
-                            [ MFill [ vScale (fName "color"), vField (fName "key") ]
-                            , MStroke [ vStr "white" ]
-                            , MStrokeWidth [ vNumber 1 ]
-                            , MX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNumber 0.5) ]
-                            , MWidth [ vScale (fName "xscale"), vBand 1 ]
+                            [ maFill [ vScale (fName "color"), vField (fName "key") ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNumber 1 ]
+                            , maX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNumber 0.5) ]
+                            , maWidth [ vScale (fName "xscale"), vBand 1 ]
                             ]
                         , enUpdate
-                            [ MY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNumber 0.5) ]
-                            , MY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNumber 0.5) ]
+                            [ maY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNumber 0.5) ]
+                            , maY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNumber 0.5) ]
                             ]
                         ]
                     ]

@@ -32,7 +32,7 @@ module Vega
         , Mark(..)
         , MarkInterpolation(..)
         , MarkOrientation(..)
-        , MarkProperty(..)
+        , MarkProperty
         , Num
         , Operation
         , Order(..)
@@ -217,6 +217,61 @@ module Vega
         , leZIndex
         , legend
         , legends
+        , maAlign
+        , maAngle
+        , maAspect
+        , maBaseline
+        , maCornerRadius
+        , maCursor
+        , maDefined
+        , maDir
+        , maDx
+        , maDy
+        , maEllipsis
+        , maEndAngle
+        , maFill
+        , maFillOpacity
+        , maFont
+        , maFontSize
+        , maFontStyle
+        , maFontWeight
+        , maGroupClip
+        , maHRef
+        , maHeight
+        , maInnerRadius
+        , maInterpolate
+        , maLimit
+        , maOpacity
+        , maOrient
+        , maOuterRadius
+        , maPadAngle
+        , maPath
+        , maRadius
+        , maShape
+        , maSize
+        , maStartAngle
+        , maStroke
+        , maStrokeCap
+        , maStrokeDash
+        , maStrokeDashOffset
+        , maStrokeJoin
+        , maStrokeMiterLimit
+        , maStrokeOpacity
+        , maStrokeWidth
+        , maSymbol
+        , maTension
+        , maText
+        , maTheta
+        , maTooltip
+        , maUrl
+        , maWidth
+        , maX
+        , maX2
+        , maXC
+        , maY
+        , maY2
+        , maYC
+        , maZIndex
         , mark
         , markInterpolationLabel
         , markOrientationLabel
@@ -475,7 +530,64 @@ Functions and types for declaring the input data to the visualization.
 @docs sFacet
 @docs faField
 @docs faGroupBy
+
 @docs MarkProperty
+@docs maX
+@docs maX2
+@docs maXC
+@docs maWidth
+@docs maY
+@docs maY2
+@docs maYC
+@docs maHeight
+@docs maOpacity
+@docs maFill
+@docs maFillOpacity
+@docs maStroke
+@docs maStrokeOpacity
+@docs maStrokeWidth
+@docs maStrokeCap
+@docs maStrokeDash
+@docs maStrokeDashOffset
+@docs maStrokeJoin
+@docs maStrokeMiterLimit
+@docs maCursor
+@docs maHRef
+@docs maTooltip
+@docs maZIndex
+@docs maAlign
+@docs maBaseline
+@docs maCornerRadius
+@docs maInterpolate
+@docs maTension
+@docs maDefined
+@docs maSize
+@docs maStartAngle
+@docs maEndAngle
+@docs maPadAngle
+@docs maInnerRadius
+@docs maOuterRadius
+@docs maOrient
+@docs maGroupClip
+@docs maUrl
+@docs maAspect
+@docs maPath
+@docs maShape
+@docs maSymbol
+@docs maAngle
+@docs maDir
+@docs maDx
+@docs maDy
+@docs maEllipsis
+@docs maFont
+@docs maFontSize
+@docs maFontWeight
+@docs maFontStyle
+@docs maLimit
+@docs maRadius
+@docs maText
+@docs maTheta
+
 @docs EncodingProperty
 @docs enEnter
 @docs enUpdate
@@ -1533,16 +1645,18 @@ type StrokeJoin
     | JBevel
 
 
-{-| Identifies the type of symbol. The `Path` symbol is used to define custom shapes
-as an SVG path description.
+{-| Identifies a type of symbol. The `SymPath` is used to define custom shapes as an
+[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
 -}
 type Symbol
     = SymCircle
     | SymSquare
-    | Cross
-    | Diamond
-    | TriangleUp
-    | TriangleDown
+    | SymCross
+    | SymDiamond
+    | SymTriangleUp
+    | SymTriangleDown
+    | SymTriangleLeft
+    | SymTriangleRight
     | SymPath String
 
 
@@ -2058,13 +2172,6 @@ cause axes and grid lines to be drawn on top of marks.
 axZIndex : Int -> AxisProperty
 axZIndex =
     AxZIndex
-
-
-{-| The field to be used when sorting.
--}
-soByField : Str -> SortProperty
-soByField =
-    ByField
 
 
 {-| Define a colour in HCL space. Each of the three triplet values can be a numeric
@@ -3186,6 +3293,335 @@ leZIndex =
     LeZIndex
 
 
+{-| The horizontal alignment of a text or image mark. This may be specified directly,
+via a field, a signal or any other text-generating value. To guarantee valid
+alignment type names, use `hAlignLabel`. For example:
+
+    TODO: Add hAlignLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maAlign : List Value -> MarkProperty
+maAlign =
+    MAlign
+
+
+{-| The rotation angle of the text in degrees in a text mark. This may be specified
+directly, via a field, a signal or any other number-generating value. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maAngle : List Value -> MarkProperty
+maAngle =
+    MAngle
+
+
+{-| Indicates whether the image aspect ratio should be preserved in an image mark.
+This may be specified directly, via a field, a signal or any other boolean-generating
+value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/image/).
+-}
+maAspect : List Value -> MarkProperty
+maAspect =
+    MAspect
+
+
+{-| The vertical baseline of a text or image mark. This may be specified directly,
+via a field, a signal or any other text-generating value. To guarantee valid
+alignment type names, use `vAlignLabel`. For example:
+
+    TODO: Add vAlignLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maBaseline : List Value -> MarkProperty
+maBaseline =
+    MBaseline
+
+
+{-| The corner radius in pixels of an arc or rect mark. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maCornerRadius : List Value -> MarkProperty
+maCornerRadius =
+    MCornerRadius
+
+
+{-| The mouse cursor used over the mark. This may be specified directly, via a
+field, a signal or any other text-generating value. To guarantee valid cursor type
+names, use `cursorLabel`. For example:
+
+    TODO: Add cursorLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maCursor : List Value -> MarkProperty
+maCursor =
+    MCursor
+
+
+{-| Indicates if the current data point in a linear mark is defined. If false, the
+corresponding line/trail segment will be omitted, creating a “break”. This may be
+specified directly, via a field, a signal or any other boolean-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maDefined : List Value -> MarkProperty
+maDefined =
+    MDefined
+
+
+{-| The direction text is rendered in a text mark. This determines which side is
+truncated in response to the text size exceeding the value of the limit parameter.
+This may be specified directly, via a field, a signal or any other string-generating
+value. To guarantee valid direction type names, use `dirLabel`. For example:
+
+    TODO: Add dirLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+
+-}
+maDir : List Value -> MarkProperty
+maDir =
+    MDir
+
+
+{-| The horizontal offset in pixels (before rotation), between the text and anchor
+point of a text mark. This may be specified directly, via a field, a signal or any
+other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maDx : List Value -> MarkProperty
+maDx =
+    MdX
+
+
+{-| The vertical offset in pixels (before rotation), between the text and anchor
+point of a text mark. This may be specified directly, via a field, a signal or any
+other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maDy : List Value -> MarkProperty
+maDy =
+    MdY
+
+
+{-| The ellipsis string for text truncated in response to the limit parameter of
+a text mark. This may be specified directly, via a field, a signal or any other
+string-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maEllipsis : List Value -> MarkProperty
+maEllipsis =
+    MEllipsis
+
+
+{-| The end angle in radians clockwise from north for an arc mark. This may be
+specified directly, via a field, a signal or any other number-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/arc/).
+-}
+maEndAngle : List Value -> MarkProperty
+maEndAngle =
+    MEndAngle
+
+
+{-| The fill color of a mark. This may be specified directly, via a field,
+a signal or any other color-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maFill : List Value -> MarkProperty
+maFill =
+    MFill
+
+
+{-| The fill opacity of a mark in the range [0 1]. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maFillOpacity : List Value -> MarkProperty
+maFillOpacity =
+    MFillOpacity
+
+
+{-| The typeface used by a text mark. This can be a generic font description such
+as `sans-serif`, `monospace` or any specific font name made accessible via a css
+font definition. This may be specified directly, via a field, a signal or any other
+string-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maFont : List Value -> MarkProperty
+maFont =
+    MFont
+
+
+{-| The font size in pixels used by a text mark. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maFontSize : List Value -> MarkProperty
+maFontSize =
+    MFontSize
+
+
+{-| The font style, such as `normal` or `italic` used by a text mark. This may be
+specified directly, via a field, a signal or any other string-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maFontStyle : List Value -> MarkProperty
+maFontStyle =
+    MFontStyle
+
+
+{-| The font weight, such as `normal` or `bold` used by a text mark. This may be
+specified directly, via a field, a signal or any other string-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maFontWeight : List Value -> MarkProperty
+maFontWeight =
+    MFontWeight
+
+
+{-| Indicates if the visible group content should be clipped to the group’s
+specified width and height. This may be specified directly, via a field, a signal
+or any other boolean-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/group/).
+-}
+maGroupClip : List Value -> MarkProperty
+maGroupClip =
+    MGroupClip
+
+
+{-| The width of a mark in pixels. This may be specified directly, via a field,
+a signal or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maHeight : List Value -> MarkProperty
+maHeight =
+    MHeight
+
+
+{-| A URL to load upon mouse click. If defined, the mark acts as a hyperlink. This
+may be specified directly, via a field, a signal or any other text-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maHRef : List Value -> MarkProperty
+maHRef =
+    MHRef
+
+
+{-| The inner radius in pixel units of an arc mark. This may be
+specified directly, via a field, a signal or any other number-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/arc/).
+-}
+maInnerRadius : List Value -> MarkProperty
+maInnerRadius =
+    MInnerRadius
+
+
+{-| The interpolation style of a linear mark. This may be specified directly,
+via a field, a signal or any other text-generating value. To guarantee valid
+interpolation type names, use `markInterpolationLabel`. For example:
+
+    TODO: Add markInterpolationLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maInterpolate : List Value -> MarkProperty
+maInterpolate =
+    MInterpolate
+
+
+{-| The maximum length of a text mark in pixels (default 0, indicating no limit).
+The text value will be automatically truncated if the rendered size exceeds this
+limit. It may be specified directly, via a field, a signal or any other
+number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maLimit : List Value -> MarkProperty
+maLimit =
+    MLimit
+
+
+{-| The opacity of a mark in the range [0 1]. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maOpacity : List Value -> MarkProperty
+maOpacity =
+    MOpacity
+
+
+{-| The orientation of an area mark. With a vertical orientation, an area mark is
+defined by the x, y, and (y2 or height) properties; with a horizontal orientation,
+the y, x and (x2 or width) properties must be specified instead. The orientation
+may be specified directly, via a field, a signal or any other text-generating value.
+To guarantee valid orientation type names, use `markOrientationLabel`. For example:
+
+    TODO: Add markOrientationLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/area/).
+
+-}
+maOrient : List Value -> MarkProperty
+maOrient =
+    MOrient
+
+
+{-| The outer radius in pixel units of an arc mark. This may be
+specified directly, via a field, a signal or any other number-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/arc/).
+-}
+maOuterRadius : List Value -> MarkProperty
+maOuterRadius =
+    MOuterRadius
+
+
+{-| The padding angle in radians clockwise from north for an arc mark. This may be
+specified directly, via a field, a signal or any other number-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/arc/).
+-}
+maPadAngle : List Value -> MarkProperty
+maPadAngle =
+    MPadAngle
+
+
+{-| The [SVG path string](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
+describing the geometry of a path mark. This may be specified directly, via a field,
+a signal or any other text-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/path/).
+-}
+maPath : List Value -> MarkProperty
+maPath =
+    MPath
+
+
+{-| Polar coordinate radial offset in pixels, relative to the origin determined
+by the x and y properties of a text mark. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maRadius : List Value -> MarkProperty
+maRadius =
+    MRadius
+
+
 {-| Create a single mark definition.
 
     TODO: XXX
@@ -3262,11 +3698,270 @@ markOrientationLabel orient =
             "vertical"
 
 
+{-| A shape instance that provides a drawing method to invoke within the renderer.
+Shape instances can not be specified directly, they must be generated by a data
+transform such as geoshape. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/shape/).
+-}
+maShape : List Value -> MarkProperty
+maShape =
+    -- TODO: Specify how a shape generator can be stored in a Value
+    MShape
+
+
+{-| The area in pixels of the bounding box of point-based mark such as a symbol.
+Note that this value sets the area of the mark; the side lengths will increase with
+the square root of this value. This may be specified directly, via a field, a signal
+or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maSize : List Value -> MarkProperty
+maSize =
+    MSize
+
+
+{-| The start angle in radians clockwise from north for an arc mark. This may be
+specified directly, via a field, a signal or any other number-generating value.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/arc/).
+-}
+maStartAngle : List Value -> MarkProperty
+maStartAngle =
+    MStartAngle
+
+
+{-| The stroke color of a mark. This may be specified directly, via a field,
+a signal or any other color-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStroke : List Value -> MarkProperty
+maStroke =
+    MStroke
+
+
+{-| The stroke cap ending style for a mark. This may be specified directly, via a
+field, a signal or any other text-generating value. To guarantee valid stroke cap
+names, use `strokeCapLabel`. For example:
+
+    TODO: Add strokeCapLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maStrokeCap : List Value -> MarkProperty
+maStrokeCap =
+    MStrokeCap
+
+
+{-| The stroke dash style of a mark. This may be specified directly, via a
+field, a signal or any other number array-generating value. The array should consist
+of alternating dash-gap lengths in pixels. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStrokeDash : List Value -> MarkProperty
+maStrokeDash =
+    MStrokeDash
+
+
+{-| A mark's offset of the first stroke dash in pixels. This may be specified
+directly, via a field, a signal or any other number-generating value. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStrokeDashOffset : List Value -> MarkProperty
+maStrokeDashOffset =
+    MStrokeDashOffset
+
+
+{-| The stroke join method for a mark. This may be specified directly, via a
+field, a signal or any other text-generating value. To guarantee valid stroke join
+names, use `strokeJoinLabel`. For example:
+
+    TODO: Add strokeJoinLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+-}
+maStrokeJoin : StrokeJoin -> MarkProperty
+maStrokeJoin =
+    MStrokeJoin
+
+
+{-| The miter limit at which to bevel a line join for a mark. This may be specified
+directly, via a field, a signal or any other number-generating value. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStrokeMiterLimit : List Value -> MarkProperty
+maStrokeMiterLimit =
+    MStrokeMiterLimit
+
+
+{-| The stroke opacity of a mark in the range [0 1]. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStrokeOpacity : List Value -> MarkProperty
+maStrokeOpacity =
+    MStrokeOpacity
+
+
+{-| The stroke width of a mark in pixels. This may be specified directly, via a
+field, a signal or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maStrokeWidth : List Value -> MarkProperty
+maStrokeWidth =
+    MStrokeWidth
+
+
+{-| A symbol shape that describes a symbol mark. For correct sizing, custom shape
+paths should be defined within a square with coordinates ranging from -1 to 1 along
+both the x and y dimensions. Symbol definitions may be specified directly, via a
+field, a signal or any other text-generating value. To guarantee valid symbol type
+names, use `symbolLabel`. For example:
+
+    TODO: Add symbolLabel example once API confirmed
+
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/symbol/).
+
+-}
+maSymbol : List Value -> MarkProperty
+maSymbol =
+    MSymbol
+
+
+{-| The interpolation tension in the range [0, 1] of a linear mark. Applies only
+to cardinal and catmull-rom interpolators. This may be specified directly, via a
+field, a signal or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maTension : List Value -> MarkProperty
+maTension =
+    MTension
+
+
+{-| The text to display in a text mark. This may be specified directly,
+via a field, a signal or any other string-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maText : List Value -> MarkProperty
+maText =
+    MText
+
+
+{-| Polar coordinate angle in radians, relative to the origin determined by the
+x and y properties of a text mark. This may be specified directly, via a field,
+a signal or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/text/).
+-}
+maTheta : List Value -> MarkProperty
+maTheta =
+    MTheta
+
+
+{-| The tooltip text to show upon mouse hover over a mark. This may be specified
+directly, via a field, a signal or any other text-generating value. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maTooltip : List Value -> MarkProperty
+maTooltip =
+    MTooltip
+
+
+{-| The URL of an image file to be displayed as an image mark. This may be specified
+directly, via a field, a signal or any other text-generating value. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks/image/).
+-}
+maUrl : List Value -> MarkProperty
+maUrl =
+    MUrl
+
+
+{-| The width of a mark in pixels. This may be specified directly, via a field,
+a signal or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maWidth : List Value -> MarkProperty
+maWidth =
+    MWidth
+
+
+{-| The primary x-coordinate of a mark in pixels. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maX : List Value -> MarkProperty
+maX =
+    MX
+
+
+{-| The secondary x-coordinate of a mark in pixels. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maX2 : List Value -> MarkProperty
+maX2 =
+    MX2
+
+
+{-| The centre x-coordinate of a mark in pixels. This is an alternative to `maX`
+or `maX2`, not an addition. It may be specified directly, via a field, a signal
+or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maXC : List Value -> MarkProperty
+maXC =
+    MXC
+
+
 {-| An aggregating operation to calculate the maximum value in a field.
 -}
 maximum : Operation
 maximum =
     Max
+
+
+{-| The primary y-coordinate of a mark in pixels. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maY : List Value -> MarkProperty
+maY =
+    MY
+
+
+{-| The secondary y-coordinate of a mark in pixels. This may be specified directly,
+via a field, a signal or any other number-generating value. For further details
+see the [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maY2 : List Value -> MarkProperty
+maY2 =
+    MY2
+
+
+{-| The centre y-coordinate of a mark in pixels. This is an alternative to `maY`
+or `maY2`, not an addition. It may be specified directly, via a field, a signal
+or any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maYC : List Value -> MarkProperty
+maYC =
+    MYC
+
+
+{-| An integer z-index indicating the layering order of sibling mark items. The
+default value is 0. Higher values (1) will cause marks to be drawn on top of those
+with lower z-index values. Setting the z-index as an encoding property only affects
+ordering among sibling mark items; it will not change the layering relative to other
+mark definitions. The z-index may be specified directly, via a field, a signal or
+any other number-generating value. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+maZIndex : List Value -> MarkProperty
+maZIndex =
+    MZIndex
 
 
 {-| An aggregating operation to calculate the mean of a field. Synonymous with `average`.
@@ -3317,13 +4012,6 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/trigge
 on : List Spec -> DataTable -> DataTable
 on triggerSpecs dTable =
     dTable ++ [ ( "on", JE.list triggerSpecs ) ]
-
-
-{-| A sorting operation.
--}
-soOp : Operation -> SortProperty
-soOp =
-    Op
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is
@@ -3453,6 +4141,20 @@ sigWidth =
     VSignal "width"
 
 
+{-| The field to be used when sorting.
+-}
+soByField : Str -> SortProperty
+soByField =
+    ByField
+
+
+{-| A sorting operation.
+-}
+soOp : Operation -> SortProperty
+soOp =
+    Op
+
+
 {-| An aggregating operation to calculate the standard error of the values in a field.
 -}
 stderr : Operation
@@ -3553,17 +4255,23 @@ symbolLabel sym =
         SymSquare ->
             "square"
 
-        Cross ->
+        SymCross ->
             "cross"
 
-        Diamond ->
+        SymDiamond ->
             "diamond"
 
-        TriangleUp ->
+        SymTriangleUp ->
             "triangle-up"
 
-        TriangleDown ->
+        SymTriangleDown ->
             "triangle-down"
+
+        SymTriangleRight ->
+            "triangle-right"
+
+        SymTriangleLeft ->
+            "triangle-left"
 
         SymPath svgPath ->
             svgPath

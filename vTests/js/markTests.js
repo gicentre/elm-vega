@@ -10662,14 +10662,18 @@ var _user$project$Vega$symbolLabel = function (sym) {
 			return 'circle';
 		case 'SymSquare':
 			return 'square';
-		case 'Cross':
+		case 'SymCross':
 			return 'cross';
-		case 'Diamond':
+		case 'SymDiamond':
 			return 'diamond';
-		case 'TriangleUp':
+		case 'SymTriangleUp':
 			return 'triangle-up';
-		case 'TriangleDown':
+		case 'SymTriangleDown':
 			return 'triangle-down';
+		case 'SymTriangleRight':
+			return 'triangle-right';
+		case 'SymTriangleLeft':
+			return 'triangle-left';
 		default:
 			return _p57._0;
 	}
@@ -12508,168 +12512,223 @@ var _user$project$Vega$Horizontal = {ctor: 'Horizontal'};
 var _user$project$Vega$MTheta = function (a) {
 	return {ctor: 'MTheta', _0: a};
 };
+var _user$project$Vega$maTheta = _user$project$Vega$MTheta;
 var _user$project$Vega$MText = function (a) {
 	return {ctor: 'MText', _0: a};
 };
+var _user$project$Vega$maText = _user$project$Vega$MText;
 var _user$project$Vega$MRadius = function (a) {
 	return {ctor: 'MRadius', _0: a};
 };
+var _user$project$Vega$maRadius = _user$project$Vega$MRadius;
 var _user$project$Vega$MLimit = function (a) {
 	return {ctor: 'MLimit', _0: a};
 };
+var _user$project$Vega$maLimit = _user$project$Vega$MLimit;
 var _user$project$Vega$MFontStyle = function (a) {
 	return {ctor: 'MFontStyle', _0: a};
 };
+var _user$project$Vega$maFontStyle = _user$project$Vega$MFontStyle;
 var _user$project$Vega$MFontWeight = function (a) {
 	return {ctor: 'MFontWeight', _0: a};
 };
+var _user$project$Vega$maFontWeight = _user$project$Vega$MFontWeight;
 var _user$project$Vega$MFontSize = function (a) {
 	return {ctor: 'MFontSize', _0: a};
 };
+var _user$project$Vega$maFontSize = _user$project$Vega$MFontSize;
 var _user$project$Vega$MFont = function (a) {
 	return {ctor: 'MFont', _0: a};
 };
+var _user$project$Vega$maFont = _user$project$Vega$MFont;
 var _user$project$Vega$MEllipsis = function (a) {
 	return {ctor: 'MEllipsis', _0: a};
 };
+var _user$project$Vega$maEllipsis = _user$project$Vega$MEllipsis;
 var _user$project$Vega$MdY = function (a) {
 	return {ctor: 'MdY', _0: a};
 };
+var _user$project$Vega$maDy = _user$project$Vega$MdY;
 var _user$project$Vega$MdX = function (a) {
 	return {ctor: 'MdX', _0: a};
 };
+var _user$project$Vega$maDx = _user$project$Vega$MdX;
 var _user$project$Vega$MDir = function (a) {
 	return {ctor: 'MDir', _0: a};
 };
+var _user$project$Vega$maDir = _user$project$Vega$MDir;
 var _user$project$Vega$MAngle = function (a) {
 	return {ctor: 'MAngle', _0: a};
 };
+var _user$project$Vega$maAngle = _user$project$Vega$MAngle;
 var _user$project$Vega$MSymbol = function (a) {
 	return {ctor: 'MSymbol', _0: a};
 };
+var _user$project$Vega$maSymbol = _user$project$Vega$MSymbol;
 var _user$project$Vega$MShape = function (a) {
 	return {ctor: 'MShape', _0: a};
 };
+var _user$project$Vega$maShape = _user$project$Vega$MShape;
 var _user$project$Vega$MPath = function (a) {
 	return {ctor: 'MPath', _0: a};
 };
+var _user$project$Vega$maPath = _user$project$Vega$MPath;
 var _user$project$Vega$MAspect = function (a) {
 	return {ctor: 'MAspect', _0: a};
 };
+var _user$project$Vega$maAspect = _user$project$Vega$MAspect;
 var _user$project$Vega$MUrl = function (a) {
 	return {ctor: 'MUrl', _0: a};
 };
+var _user$project$Vega$maUrl = _user$project$Vega$MUrl;
 var _user$project$Vega$MGroupClip = function (a) {
 	return {ctor: 'MGroupClip', _0: a};
 };
+var _user$project$Vega$maGroupClip = _user$project$Vega$MGroupClip;
 var _user$project$Vega$MOrient = function (a) {
 	return {ctor: 'MOrient', _0: a};
 };
+var _user$project$Vega$maOrient = _user$project$Vega$MOrient;
 var _user$project$Vega$MOuterRadius = function (a) {
 	return {ctor: 'MOuterRadius', _0: a};
 };
+var _user$project$Vega$maOuterRadius = _user$project$Vega$MOuterRadius;
 var _user$project$Vega$MInnerRadius = function (a) {
 	return {ctor: 'MInnerRadius', _0: a};
 };
+var _user$project$Vega$maInnerRadius = _user$project$Vega$MInnerRadius;
 var _user$project$Vega$MPadAngle = function (a) {
 	return {ctor: 'MPadAngle', _0: a};
 };
+var _user$project$Vega$maPadAngle = _user$project$Vega$MPadAngle;
 var _user$project$Vega$MEndAngle = function (a) {
 	return {ctor: 'MEndAngle', _0: a};
 };
+var _user$project$Vega$maEndAngle = _user$project$Vega$MEndAngle;
 var _user$project$Vega$MStartAngle = function (a) {
 	return {ctor: 'MStartAngle', _0: a};
 };
+var _user$project$Vega$maStartAngle = _user$project$Vega$MStartAngle;
 var _user$project$Vega$MSize = function (a) {
 	return {ctor: 'MSize', _0: a};
 };
+var _user$project$Vega$maSize = _user$project$Vega$MSize;
 var _user$project$Vega$MDefined = function (a) {
 	return {ctor: 'MDefined', _0: a};
 };
+var _user$project$Vega$maDefined = _user$project$Vega$MDefined;
 var _user$project$Vega$MTension = function (a) {
 	return {ctor: 'MTension', _0: a};
 };
+var _user$project$Vega$maTension = _user$project$Vega$MTension;
 var _user$project$Vega$MInterpolate = function (a) {
 	return {ctor: 'MInterpolate', _0: a};
 };
+var _user$project$Vega$maInterpolate = _user$project$Vega$MInterpolate;
 var _user$project$Vega$MCornerRadius = function (a) {
 	return {ctor: 'MCornerRadius', _0: a};
 };
+var _user$project$Vega$maCornerRadius = _user$project$Vega$MCornerRadius;
 var _user$project$Vega$MBaseline = function (a) {
 	return {ctor: 'MBaseline', _0: a};
 };
+var _user$project$Vega$maBaseline = _user$project$Vega$MBaseline;
 var _user$project$Vega$MAlign = function (a) {
 	return {ctor: 'MAlign', _0: a};
 };
+var _user$project$Vega$maAlign = _user$project$Vega$MAlign;
 var _user$project$Vega$MZIndex = function (a) {
 	return {ctor: 'MZIndex', _0: a};
 };
+var _user$project$Vega$maZIndex = _user$project$Vega$MZIndex;
 var _user$project$Vega$MTooltip = function (a) {
 	return {ctor: 'MTooltip', _0: a};
 };
+var _user$project$Vega$maTooltip = _user$project$Vega$MTooltip;
 var _user$project$Vega$MHRef = function (a) {
 	return {ctor: 'MHRef', _0: a};
 };
+var _user$project$Vega$maHRef = _user$project$Vega$MHRef;
 var _user$project$Vega$MCursor = function (a) {
 	return {ctor: 'MCursor', _0: a};
 };
+var _user$project$Vega$maCursor = _user$project$Vega$MCursor;
 var _user$project$Vega$MStrokeMiterLimit = function (a) {
 	return {ctor: 'MStrokeMiterLimit', _0: a};
 };
+var _user$project$Vega$maStrokeMiterLimit = _user$project$Vega$MStrokeMiterLimit;
 var _user$project$Vega$MStrokeJoin = function (a) {
 	return {ctor: 'MStrokeJoin', _0: a};
 };
+var _user$project$Vega$maStrokeJoin = _user$project$Vega$MStrokeJoin;
 var _user$project$Vega$MStrokeDashOffset = function (a) {
 	return {ctor: 'MStrokeDashOffset', _0: a};
 };
+var _user$project$Vega$maStrokeDashOffset = _user$project$Vega$MStrokeDashOffset;
 var _user$project$Vega$MStrokeDash = function (a) {
 	return {ctor: 'MStrokeDash', _0: a};
 };
+var _user$project$Vega$maStrokeDash = _user$project$Vega$MStrokeDash;
 var _user$project$Vega$MStrokeCap = function (a) {
 	return {ctor: 'MStrokeCap', _0: a};
 };
+var _user$project$Vega$maStrokeCap = _user$project$Vega$MStrokeCap;
 var _user$project$Vega$MStrokeWidth = function (a) {
 	return {ctor: 'MStrokeWidth', _0: a};
 };
+var _user$project$Vega$maStrokeWidth = _user$project$Vega$MStrokeWidth;
 var _user$project$Vega$MStrokeOpacity = function (a) {
 	return {ctor: 'MStrokeOpacity', _0: a};
 };
+var _user$project$Vega$maStrokeOpacity = _user$project$Vega$MStrokeOpacity;
 var _user$project$Vega$MStroke = function (a) {
 	return {ctor: 'MStroke', _0: a};
 };
+var _user$project$Vega$maStroke = _user$project$Vega$MStroke;
 var _user$project$Vega$MFillOpacity = function (a) {
 	return {ctor: 'MFillOpacity', _0: a};
 };
+var _user$project$Vega$maFillOpacity = _user$project$Vega$MFillOpacity;
 var _user$project$Vega$MFill = function (a) {
 	return {ctor: 'MFill', _0: a};
 };
+var _user$project$Vega$maFill = _user$project$Vega$MFill;
 var _user$project$Vega$MOpacity = function (a) {
 	return {ctor: 'MOpacity', _0: a};
 };
+var _user$project$Vega$maOpacity = _user$project$Vega$MOpacity;
 var _user$project$Vega$MHeight = function (a) {
 	return {ctor: 'MHeight', _0: a};
 };
+var _user$project$Vega$maHeight = _user$project$Vega$MHeight;
 var _user$project$Vega$MYC = function (a) {
 	return {ctor: 'MYC', _0: a};
 };
+var _user$project$Vega$maYC = _user$project$Vega$MYC;
 var _user$project$Vega$MY2 = function (a) {
 	return {ctor: 'MY2', _0: a};
 };
+var _user$project$Vega$maY2 = _user$project$Vega$MY2;
 var _user$project$Vega$MY = function (a) {
 	return {ctor: 'MY', _0: a};
 };
+var _user$project$Vega$maY = _user$project$Vega$MY;
 var _user$project$Vega$MWidth = function (a) {
 	return {ctor: 'MWidth', _0: a};
 };
+var _user$project$Vega$maWidth = _user$project$Vega$MWidth;
 var _user$project$Vega$MXC = function (a) {
 	return {ctor: 'MXC', _0: a};
 };
+var _user$project$Vega$maXC = _user$project$Vega$MXC;
 var _user$project$Vega$MX2 = function (a) {
 	return {ctor: 'MX2', _0: a};
 };
+var _user$project$Vega$maX2 = _user$project$Vega$MX2;
 var _user$project$Vega$MX = function (a) {
 	return {ctor: 'MX', _0: a};
 };
+var _user$project$Vega$maX = _user$project$Vega$MX;
 var _user$project$Vega$Variancep = {ctor: 'Variancep'};
 var _user$project$Vega$variancep = _user$project$Vega$Variancep;
 var _user$project$Vega$Variance = {ctor: 'Variance'};
@@ -13304,10 +13363,12 @@ var _user$project$Vega$JMiter = {ctor: 'JMiter'};
 var _user$project$Vega$SymPath = function (a) {
 	return {ctor: 'SymPath', _0: a};
 };
-var _user$project$Vega$TriangleDown = {ctor: 'TriangleDown'};
-var _user$project$Vega$TriangleUp = {ctor: 'TriangleUp'};
-var _user$project$Vega$Diamond = {ctor: 'Diamond'};
-var _user$project$Vega$Cross = {ctor: 'Cross'};
+var _user$project$Vega$SymTriangleRight = {ctor: 'SymTriangleRight'};
+var _user$project$Vega$SymTriangleLeft = {ctor: 'SymTriangleLeft'};
+var _user$project$Vega$SymTriangleDown = {ctor: 'SymTriangleDown'};
+var _user$project$Vega$SymTriangleUp = {ctor: 'SymTriangleUp'};
+var _user$project$Vega$SymDiamond = {ctor: 'SymDiamond'};
+var _user$project$Vega$SymCross = {ctor: 'SymCross'};
 var _user$project$Vega$SymSquare = {ctor: 'SymSquare'};
 var _user$project$Vega$SymCircle = {ctor: 'SymCircle'};
 var _user$project$Vega$RightToLeft = {ctor: 'RightToLeft'};
@@ -13721,7 +13782,7 @@ var _user$project$MarkTests$trailTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#939597'),
@@ -13734,7 +13795,7 @@ var _user$project$MarkTests$trailTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vScale(
@@ -13748,7 +13809,7 @@ var _user$project$MarkTests$trailTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vScale(
@@ -13762,7 +13823,7 @@ var _user$project$MarkTests$trailTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MSize(
+													_0: _user$project$Vega$maSize(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vScale(
@@ -13781,7 +13842,7 @@ var _user$project$MarkTests$trailTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MDefined(
+														_0: _user$project$Vega$maDefined(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('defined || datum.u !== 3'),
@@ -13789,7 +13850,7 @@ var _user$project$MarkTests$trailTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MOpacity(
+															_0: _user$project$Vega$maOpacity(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vNumber(1),
@@ -13806,7 +13867,7 @@ var _user$project$MarkTests$trailTest = function () {
 										_0: _user$project$Vega$enHover(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$MOpacity(
+												_0: _user$project$Vega$maOpacity(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vNumber(0.5),
@@ -14098,7 +14159,7 @@ var _user$project$MarkTests$textTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('firebrick'),
@@ -14106,7 +14167,7 @@ var _user$project$MarkTests$textTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MSize(
+											_0: _user$project$Vega$maSize(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(25),
@@ -14120,7 +14181,7 @@ var _user$project$MarkTests$textTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('x'),
@@ -14128,7 +14189,7 @@ var _user$project$MarkTests$textTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('y'),
@@ -14154,7 +14215,7 @@ var _user$project$MarkTests$textTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#000'),
@@ -14162,7 +14223,7 @@ var _user$project$MarkTests$textTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MText(
+											_0: _user$project$Vega$maText(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vStr('Text Label'),
@@ -14176,7 +14237,7 @@ var _user$project$MarkTests$textTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(1),
@@ -14184,7 +14245,7 @@ var _user$project$MarkTests$textTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MX(
+												_0: _user$project$Vega$maX(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('x'),
@@ -14192,7 +14253,7 @@ var _user$project$MarkTests$textTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MY(
+													_0: _user$project$Vega$maY(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('y'),
@@ -14200,7 +14261,7 @@ var _user$project$MarkTests$textTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MdX(
+														_0: _user$project$Vega$maDx(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('dx'),
@@ -14208,7 +14269,7 @@ var _user$project$MarkTests$textTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MAngle(
+															_0: _user$project$Vega$maAngle(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('angle'),
@@ -14216,7 +14277,7 @@ var _user$project$MarkTests$textTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MAlign(
+																_0: _user$project$Vega$maAlign(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('align'),
@@ -14224,7 +14285,7 @@ var _user$project$MarkTests$textTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MBaseline(
+																	_0: _user$project$Vega$maBaseline(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('baseline'),
@@ -14232,7 +14293,7 @@ var _user$project$MarkTests$textTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MFont(
+																		_0: _user$project$Vega$maFont(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('font'),
@@ -14240,7 +14301,7 @@ var _user$project$MarkTests$textTest = function () {
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _user$project$Vega$MFontSize(
+																			_0: _user$project$Vega$maFontSize(
 																				{
 																					ctor: '::',
 																					_0: _user$project$Vega$vSignal('fontSize'),
@@ -14248,7 +14309,7 @@ var _user$project$MarkTests$textTest = function () {
 																				}),
 																			_1: {
 																				ctor: '::',
-																				_0: _user$project$Vega$MFontStyle(
+																				_0: _user$project$Vega$maFontStyle(
 																					{
 																						ctor: '::',
 																						_0: _user$project$Vega$vSignal('fontStyle'),
@@ -14256,7 +14317,7 @@ var _user$project$MarkTests$textTest = function () {
 																					}),
 																				_1: {
 																					ctor: '::',
-																					_0: _user$project$Vega$MFontWeight(
+																					_0: _user$project$Vega$maFontWeight(
 																						{
 																							ctor: '::',
 																							_0: _user$project$Vega$vSignal('fontWeight'),
@@ -14264,7 +14325,7 @@ var _user$project$MarkTests$textTest = function () {
 																						}),
 																					_1: {
 																						ctor: '::',
-																						_0: _user$project$Vega$MLimit(
+																						_0: _user$project$Vega$maLimit(
 																							{
 																								ctor: '::',
 																								_0: _user$project$Vega$vSignal('limit'),
@@ -14288,7 +14349,7 @@ var _user$project$MarkTests$textTest = function () {
 										_0: _user$project$Vega$enHover(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$MOpacity(
+												_0: _user$project$Vega$maOpacity(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vNumber(0.5),
@@ -14673,7 +14734,7 @@ var _user$project$MarkTests$symbolTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MFill(
+									_0: _user$project$Vega$maFill(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('#939597'),
@@ -14681,7 +14742,7 @@ var _user$project$MarkTests$symbolTest = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$MStroke(
+										_0: _user$project$Vega$maStroke(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#652c90'),
@@ -14695,7 +14756,7 @@ var _user$project$MarkTests$symbolTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MX(
+										_0: _user$project$Vega$maX(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vSignal('x'),
@@ -14703,7 +14764,7 @@ var _user$project$MarkTests$symbolTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MY(
+											_0: _user$project$Vega$maY(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('y'),
@@ -14711,7 +14772,7 @@ var _user$project$MarkTests$symbolTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MSize(
+												_0: _user$project$Vega$maSize(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('size'),
@@ -14719,7 +14780,7 @@ var _user$project$MarkTests$symbolTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MShape(
+													_0: _user$project$Vega$maShape(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('shape'),
@@ -14727,7 +14788,7 @@ var _user$project$MarkTests$symbolTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MOpacity(
+														_0: _user$project$Vega$maOpacity(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vNumber(1),
@@ -14735,7 +14796,7 @@ var _user$project$MarkTests$symbolTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MStrokeWidth(
+															_0: _user$project$Vega$maStrokeWidth(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -14743,7 +14804,7 @@ var _user$project$MarkTests$symbolTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MFillOpacity(
+																_0: _user$project$Vega$maFillOpacity(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -14751,7 +14812,7 @@ var _user$project$MarkTests$symbolTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MStrokeOpacity(
+																	_0: _user$project$Vega$maStrokeOpacity(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -14771,7 +14832,7 @@ var _user$project$MarkTests$symbolTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),
@@ -14806,28 +14867,28 @@ var _user$project$MarkTests$symbolTest = function () {
 										_user$project$Vega$vStrs(
 											{
 												ctor: '::',
-												_0: 'circle',
+												_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymCircle),
 												_1: {
 													ctor: '::',
-													_0: 'square',
+													_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymSquare),
 													_1: {
 														ctor: '::',
-														_0: 'cross',
+														_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymCross),
 														_1: {
 															ctor: '::',
-															_0: 'diamond',
+															_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymDiamond),
 															_1: {
 																ctor: '::',
-																_0: 'triangle-up',
+																_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymTriangleUp),
 																_1: {
 																	ctor: '::',
-																	_0: 'triangle-down',
+																	_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymTriangleDown),
 																	_1: {
 																		ctor: '::',
-																		_0: 'triangle-right',
+																		_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymTriangleRight),
 																		_1: {
 																			ctor: '::',
-																			_0: 'triangle-left',
+																			_0: _user$project$Vega$symbolLabel(_user$project$Vega$SymTriangleLeft),
 																			_1: {
 																				ctor: '::',
 																				_0: 'M-1,-1H1V1H-1Z',
@@ -15033,7 +15094,7 @@ var _user$project$MarkTests$rectTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MFill(
+									_0: _user$project$Vega$maFill(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('#939597'),
@@ -15041,7 +15102,7 @@ var _user$project$MarkTests$rectTest = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$MStroke(
+										_0: _user$project$Vega$maStroke(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#652c90'),
@@ -15055,7 +15116,7 @@ var _user$project$MarkTests$rectTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MX(
+										_0: _user$project$Vega$maX(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vSignal('x'),
@@ -15063,7 +15124,7 @@ var _user$project$MarkTests$rectTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MY(
+											_0: _user$project$Vega$maY(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('y'),
@@ -15071,7 +15132,7 @@ var _user$project$MarkTests$rectTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MWidth(
+												_0: _user$project$Vega$maWidth(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('w'),
@@ -15079,7 +15140,7 @@ var _user$project$MarkTests$rectTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MHeight(
+													_0: _user$project$Vega$maHeight(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('h'),
@@ -15087,7 +15148,7 @@ var _user$project$MarkTests$rectTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MOpacity(
+														_0: _user$project$Vega$maOpacity(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vNumber(1),
@@ -15095,7 +15156,7 @@ var _user$project$MarkTests$rectTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MCornerRadius(
+															_0: _user$project$Vega$maCornerRadius(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('cornerRadius'),
@@ -15103,7 +15164,7 @@ var _user$project$MarkTests$rectTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MStrokeWidth(
+																_0: _user$project$Vega$maStrokeWidth(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -15111,7 +15172,7 @@ var _user$project$MarkTests$rectTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MFillOpacity(
+																	_0: _user$project$Vega$maFillOpacity(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -15119,7 +15180,7 @@ var _user$project$MarkTests$rectTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MStrokeOpacity(
+																		_0: _user$project$Vega$maStrokeOpacity(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -15140,7 +15201,7 @@ var _user$project$MarkTests$rectTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),
@@ -15391,7 +15452,7 @@ var _user$project$MarkTests$pathTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MFill(
+									_0: _user$project$Vega$maFill(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('#939597'),
@@ -15399,7 +15460,7 @@ var _user$project$MarkTests$pathTest = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$MStroke(
+										_0: _user$project$Vega$maStroke(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#652c90'),
@@ -15413,7 +15474,7 @@ var _user$project$MarkTests$pathTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MX(
+										_0: _user$project$Vega$maX(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vSignal('x'),
@@ -15421,7 +15482,7 @@ var _user$project$MarkTests$pathTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MY(
+											_0: _user$project$Vega$maY(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('y'),
@@ -15429,7 +15490,7 @@ var _user$project$MarkTests$pathTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MPath(
+												_0: _user$project$Vega$maPath(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('path'),
@@ -15437,7 +15498,7 @@ var _user$project$MarkTests$pathTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MOpacity(
+													_0: _user$project$Vega$maOpacity(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vNumber(1),
@@ -15445,7 +15506,7 @@ var _user$project$MarkTests$pathTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MStrokeWidth(
+														_0: _user$project$Vega$maStrokeWidth(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -15453,7 +15514,7 @@ var _user$project$MarkTests$pathTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MFillOpacity(
+															_0: _user$project$Vega$maFillOpacity(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -15461,7 +15522,7 @@ var _user$project$MarkTests$pathTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MStrokeOpacity(
+																_0: _user$project$Vega$maStrokeOpacity(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -15480,7 +15541,7 @@ var _user$project$MarkTests$pathTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),
@@ -15673,7 +15734,7 @@ var _user$project$MarkTests$imageTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MUrl(
+									_0: _user$project$Vega$maUrl(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('https://vega.github.io/images/idl-logo.png'),
@@ -15686,7 +15747,7 @@ var _user$project$MarkTests$imageTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MOpacity(
+										_0: _user$project$Vega$maOpacity(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vNumber(1),
@@ -15694,7 +15755,7 @@ var _user$project$MarkTests$imageTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('x'),
@@ -15702,7 +15763,7 @@ var _user$project$MarkTests$imageTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('y'),
@@ -15710,7 +15771,7 @@ var _user$project$MarkTests$imageTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MWidth(
+													_0: _user$project$Vega$maWidth(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('w'),
@@ -15718,7 +15779,7 @@ var _user$project$MarkTests$imageTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MHeight(
+														_0: _user$project$Vega$maHeight(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('h'),
@@ -15726,7 +15787,7 @@ var _user$project$MarkTests$imageTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MAspect(
+															_0: _user$project$Vega$maAspect(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('aspect'),
@@ -15734,7 +15795,7 @@ var _user$project$MarkTests$imageTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MAlign(
+																_0: _user$project$Vega$maAlign(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('align'),
@@ -15742,7 +15803,7 @@ var _user$project$MarkTests$imageTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MBaseline(
+																	_0: _user$project$Vega$maBaseline(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('baseline'),
@@ -15762,7 +15823,7 @@ var _user$project$MarkTests$imageTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),
@@ -16023,7 +16084,7 @@ var _user$project$MarkTests$groupTest = function () {
 									_0: _user$project$Vega$enEnter(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vField(
@@ -16032,7 +16093,7 @@ var _user$project$MarkTests$groupTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vField(
@@ -16041,7 +16102,7 @@ var _user$project$MarkTests$groupTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MWidth(
+													_0: _user$project$Vega$maWidth(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vField(
@@ -16050,7 +16111,7 @@ var _user$project$MarkTests$groupTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MHeight(
+														_0: _user$project$Vega$maHeight(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vField(
@@ -16059,7 +16120,7 @@ var _user$project$MarkTests$groupTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MFill(
+															_0: _user$project$Vega$maFill(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vStr('aliceblue'),
@@ -16067,7 +16128,7 @@ var _user$project$MarkTests$groupTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MStroke(
+																_0: _user$project$Vega$maStroke(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vStr('firebrick'),
@@ -16393,7 +16454,7 @@ var _user$project$MarkTests$groupTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MFill(
+									_0: _user$project$Vega$maFill(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('#939597'),
@@ -16401,7 +16462,7 @@ var _user$project$MarkTests$groupTest = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$MStroke(
+										_0: _user$project$Vega$maStroke(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#652c90'),
@@ -16415,7 +16476,7 @@ var _user$project$MarkTests$groupTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MX(
+										_0: _user$project$Vega$maX(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vSignal('x'),
@@ -16423,7 +16484,7 @@ var _user$project$MarkTests$groupTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MY(
+											_0: _user$project$Vega$maY(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('y'),
@@ -16431,7 +16492,7 @@ var _user$project$MarkTests$groupTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MWidth(
+												_0: _user$project$Vega$maWidth(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('w'),
@@ -16439,7 +16500,7 @@ var _user$project$MarkTests$groupTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MHeight(
+													_0: _user$project$Vega$maHeight(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('h'),
@@ -16447,7 +16508,7 @@ var _user$project$MarkTests$groupTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MGroupClip(
+														_0: _user$project$Vega$maGroupClip(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('groupClip'),
@@ -16455,7 +16516,7 @@ var _user$project$MarkTests$groupTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MOpacity(
+															_0: _user$project$Vega$maOpacity(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vNumber(1),
@@ -16463,7 +16524,7 @@ var _user$project$MarkTests$groupTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MCornerRadius(
+																_0: _user$project$Vega$maCornerRadius(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('cornerRadius'),
@@ -16471,7 +16532,7 @@ var _user$project$MarkTests$groupTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MStrokeWidth(
+																	_0: _user$project$Vega$maStrokeWidth(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -16479,7 +16540,7 @@ var _user$project$MarkTests$groupTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MFillOpacity(
+																		_0: _user$project$Vega$maFillOpacity(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -16487,7 +16548,7 @@ var _user$project$MarkTests$groupTest = function () {
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _user$project$Vega$MStrokeOpacity(
+																			_0: _user$project$Vega$maStrokeOpacity(
 																				{
 																					ctor: '::',
 																					_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -16509,7 +16570,7 @@ var _user$project$MarkTests$groupTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),
@@ -16618,7 +16679,7 @@ var _user$project$MarkTests$areaTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#939597'),
@@ -16626,7 +16687,7 @@ var _user$project$MarkTests$areaTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MStroke(
+											_0: _user$project$Vega$maStroke(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vStr('#652c90'),
@@ -16640,7 +16701,7 @@ var _user$project$MarkTests$areaTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vScale(
@@ -16654,7 +16715,7 @@ var _user$project$MarkTests$areaTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vScale(
@@ -16668,7 +16729,7 @@ var _user$project$MarkTests$areaTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MY2(
+													_0: _user$project$Vega$maY2(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vScale(
@@ -16681,7 +16742,7 @@ var _user$project$MarkTests$areaTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MDefined(
+														_0: _user$project$Vega$maDefined(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('defined || datum.u !== 3'),
@@ -16689,7 +16750,7 @@ var _user$project$MarkTests$areaTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MInterpolate(
+															_0: _user$project$Vega$maInterpolate(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('interpolate'),
@@ -16697,7 +16758,7 @@ var _user$project$MarkTests$areaTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MTension(
+																_0: _user$project$Vega$maTension(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('tension'),
@@ -16705,7 +16766,7 @@ var _user$project$MarkTests$areaTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MOpacity(
+																	_0: _user$project$Vega$maOpacity(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vNumber(1),
@@ -16713,7 +16774,7 @@ var _user$project$MarkTests$areaTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MFillOpacity(
+																		_0: _user$project$Vega$maFillOpacity(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -16721,7 +16782,7 @@ var _user$project$MarkTests$areaTest = function () {
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _user$project$Vega$MStrokeOpacity(
+																			_0: _user$project$Vega$maStrokeOpacity(
 																				{
 																					ctor: '::',
 																					_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -16729,7 +16790,7 @@ var _user$project$MarkTests$areaTest = function () {
 																				}),
 																			_1: {
 																				ctor: '::',
-																				_0: _user$project$Vega$MStrokeWidth(
+																				_0: _user$project$Vega$maStrokeWidth(
 																					{
 																						ctor: '::',
 																						_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -16751,7 +16812,7 @@ var _user$project$MarkTests$areaTest = function () {
 										_0: _user$project$Vega$enHover(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$MOpacity(
+												_0: _user$project$Vega$maOpacity(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vNumber(0.5),
@@ -17155,7 +17216,7 @@ var _user$project$MarkTests$arcTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('firebrick'),
@@ -17163,7 +17224,7 @@ var _user$project$MarkTests$arcTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MSize(
+											_0: _user$project$Vega$maSize(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(25),
@@ -17177,7 +17238,7 @@ var _user$project$MarkTests$arcTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('x'),
@@ -17185,7 +17246,7 @@ var _user$project$MarkTests$arcTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('y'),
@@ -17211,7 +17272,7 @@ var _user$project$MarkTests$arcTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MFill(
+										_0: _user$project$Vega$maFill(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#939597'),
@@ -17219,7 +17280,7 @@ var _user$project$MarkTests$arcTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MStroke(
+											_0: _user$project$Vega$maStroke(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vStr('#652c90'),
@@ -17233,7 +17294,7 @@ var _user$project$MarkTests$arcTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('x'),
@@ -17241,7 +17302,7 @@ var _user$project$MarkTests$arcTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('y'),
@@ -17249,7 +17310,7 @@ var _user$project$MarkTests$arcTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MStartAngle(
+													_0: _user$project$Vega$maStartAngle(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('startAngle'),
@@ -17257,7 +17318,7 @@ var _user$project$MarkTests$arcTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MEndAngle(
+														_0: _user$project$Vega$maEndAngle(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('endAngle'),
@@ -17265,7 +17326,7 @@ var _user$project$MarkTests$arcTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MInnerRadius(
+															_0: _user$project$Vega$maInnerRadius(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('innerRadius'),
@@ -17273,7 +17334,7 @@ var _user$project$MarkTests$arcTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MOuterRadius(
+																_0: _user$project$Vega$maOuterRadius(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('outerRadius'),
@@ -17281,7 +17342,7 @@ var _user$project$MarkTests$arcTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MCornerRadius(
+																	_0: _user$project$Vega$maCornerRadius(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('cornerRadius'),
@@ -17289,7 +17350,7 @@ var _user$project$MarkTests$arcTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MPadAngle(
+																		_0: _user$project$Vega$maPadAngle(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('padAngle'),
@@ -17297,7 +17358,7 @@ var _user$project$MarkTests$arcTest = function () {
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _user$project$Vega$MStrokeWidth(
+																			_0: _user$project$Vega$maStrokeWidth(
 																				{
 																					ctor: '::',
 																					_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -17305,7 +17366,7 @@ var _user$project$MarkTests$arcTest = function () {
 																				}),
 																			_1: {
 																				ctor: '::',
-																				_0: _user$project$Vega$MOpacity(
+																				_0: _user$project$Vega$maOpacity(
 																					{
 																						ctor: '::',
 																						_0: _user$project$Vega$vNumber(1),
@@ -17313,7 +17374,7 @@ var _user$project$MarkTests$arcTest = function () {
 																					}),
 																				_1: {
 																					ctor: '::',
-																					_0: _user$project$Vega$MFillOpacity(
+																					_0: _user$project$Vega$maFillOpacity(
 																						{
 																							ctor: '::',
 																							_0: _user$project$Vega$vSignal('color === \'fill\' || color === \'both\' ? 1 : 0'),
@@ -17321,7 +17382,7 @@ var _user$project$MarkTests$arcTest = function () {
 																						}),
 																					_1: {
 																						ctor: '::',
-																						_0: _user$project$Vega$MStrokeOpacity(
+																						_0: _user$project$Vega$maStrokeOpacity(
 																							{
 																								ctor: '::',
 																								_0: _user$project$Vega$vSignal('color === \'stroke\' || color === \'both\' ? 1 : 0'),
@@ -17345,7 +17406,7 @@ var _user$project$MarkTests$arcTest = function () {
 										_0: _user$project$Vega$enHover(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$MOpacity(
+												_0: _user$project$Vega$maOpacity(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vNumber(0.5),
@@ -17661,7 +17722,7 @@ var _user$project$MarkTests$lineTest = function () {
 								_0: _user$project$Vega$enEnter(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MStroke(
+										_0: _user$project$Vega$maStroke(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vStr('#652c90'),
@@ -17674,7 +17735,7 @@ var _user$project$MarkTests$lineTest = function () {
 									_0: _user$project$Vega$enUpdate(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MX(
+											_0: _user$project$Vega$maX(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vScale(
@@ -17688,7 +17749,7 @@ var _user$project$MarkTests$lineTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MY(
+												_0: _user$project$Vega$maY(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vScale(
@@ -17702,7 +17763,7 @@ var _user$project$MarkTests$lineTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MDefined(
+													_0: _user$project$Vega$maDefined(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('defined || datum.u !== 3'),
@@ -17710,7 +17771,7 @@ var _user$project$MarkTests$lineTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MInterpolate(
+														_0: _user$project$Vega$maInterpolate(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('interpolate'),
@@ -17718,7 +17779,7 @@ var _user$project$MarkTests$lineTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MTension(
+															_0: _user$project$Vega$maTension(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('tension'),
@@ -17726,7 +17787,7 @@ var _user$project$MarkTests$lineTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MStrokeWidth(
+																_0: _user$project$Vega$maStrokeWidth(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -17734,7 +17795,7 @@ var _user$project$MarkTests$lineTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MStrokeDash(
+																	_0: _user$project$Vega$maStrokeDash(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vSignal('strokeDash'),
@@ -17742,7 +17803,7 @@ var _user$project$MarkTests$lineTest = function () {
 																		}),
 																	_1: {
 																		ctor: '::',
-																		_0: _user$project$Vega$MStrokeCap(
+																		_0: _user$project$Vega$maStrokeCap(
 																			{
 																				ctor: '::',
 																				_0: _user$project$Vega$vSignal('strokeCap'),
@@ -17750,7 +17811,7 @@ var _user$project$MarkTests$lineTest = function () {
 																			}),
 																		_1: {
 																			ctor: '::',
-																			_0: _user$project$Vega$MOpacity(
+																			_0: _user$project$Vega$maOpacity(
 																				{
 																					ctor: '::',
 																					_0: _user$project$Vega$vNumber(1),
@@ -17771,7 +17832,7 @@ var _user$project$MarkTests$lineTest = function () {
 										_0: _user$project$Vega$enHover(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$MOpacity(
+												_0: _user$project$Vega$maOpacity(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vNumber(0.5),
@@ -18204,7 +18265,7 @@ var _user$project$MarkTests$ruleTest = function () {
 							_0: _user$project$Vega$enEnter(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$MStroke(
+									_0: _user$project$Vega$maStroke(
 										{
 											ctor: '::',
 											_0: _user$project$Vega$vStr('#652c90'),
@@ -18217,7 +18278,7 @@ var _user$project$MarkTests$ruleTest = function () {
 								_0: _user$project$Vega$enUpdate(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$MX(
+										_0: _user$project$Vega$maX(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vSignal('x'),
@@ -18225,7 +18286,7 @@ var _user$project$MarkTests$ruleTest = function () {
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$MY(
+											_0: _user$project$Vega$maY(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vSignal('y'),
@@ -18233,7 +18294,7 @@ var _user$project$MarkTests$ruleTest = function () {
 												}),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$MX2(
+												_0: _user$project$Vega$maX2(
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vSignal('x2'),
@@ -18241,7 +18302,7 @@ var _user$project$MarkTests$ruleTest = function () {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$MY2(
+													_0: _user$project$Vega$maY2(
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vSignal('y2'),
@@ -18249,7 +18310,7 @@ var _user$project$MarkTests$ruleTest = function () {
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$MStrokeWidth(
+														_0: _user$project$Vega$maStrokeWidth(
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vSignal('strokeWidth'),
@@ -18257,7 +18318,7 @@ var _user$project$MarkTests$ruleTest = function () {
 															}),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$MStrokeDash(
+															_0: _user$project$Vega$maStrokeDash(
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$vSignal('strokeDash'),
@@ -18265,7 +18326,7 @@ var _user$project$MarkTests$ruleTest = function () {
 																}),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$MStrokeCap(
+																_0: _user$project$Vega$maStrokeCap(
 																	{
 																		ctor: '::',
 																		_0: _user$project$Vega$vSignal('strokeCap'),
@@ -18273,7 +18334,7 @@ var _user$project$MarkTests$ruleTest = function () {
 																	}),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$MOpacity(
+																	_0: _user$project$Vega$maOpacity(
 																		{
 																			ctor: '::',
 																			_0: _user$project$Vega$vNumber(1),
@@ -18293,7 +18354,7 @@ var _user$project$MarkTests$ruleTest = function () {
 									_0: _user$project$Vega$enHover(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$MOpacity(
+											_0: _user$project$Vega$maOpacity(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vNumber(0.5),

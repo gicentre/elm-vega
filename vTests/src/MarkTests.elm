@@ -41,28 +41,28 @@ arcTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ enEnter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
-                        , enUpdate [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
+                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNumber 25 ] ]
+                        , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Arc
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MStartAngle [ vSignal "startAngle" ]
-                            , MEndAngle [ vSignal "endAngle" ]
-                            , MInnerRadius [ vSignal "innerRadius" ]
-                            , MOuterRadius [ vSignal "outerRadius" ]
-                            , MCornerRadius [ vSignal "cornerRadius" ]
-                            , MPadAngle [ vSignal "padAngle" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maStartAngle [ vSignal "startAngle" ]
+                            , maEndAngle [ vSignal "endAngle" ]
+                            , maInnerRadius [ vSignal "innerRadius" ]
+                            , maOuterRadius [ vSignal "outerRadius" ]
+                            , maCornerRadius [ vSignal "cornerRadius" ]
+                            , maPadAngle [ vSignal "padAngle" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -114,20 +114,20 @@ areaTest =
                 << mark Area
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , MY2 [ vScale (fName "yscale"), vSignal "y2" ]
-                            , MDefined [ vSignal "defined || datum.u !== 3" ]
-                            , MInterpolate [ vSignal "interpolate" ]
-                            , MTension [ vSignal "tension" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
+                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
+                            , maY2 [ vScale (fName "yscale"), vSignal "y2" ]
+                            , maDefined [ vSignal "defined || datum.u !== 3" ]
+                            , maInterpolate [ vSignal "interpolate" ]
+                            , maTension [ vSignal "tension" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -163,20 +163,20 @@ groupTest =
             marks
                 << mark Group
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MWidth [ vSignal "w" ]
-                            , MHeight [ vSignal "h" ]
-                            , MGroupClip [ vSignal "groupClip" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MCornerRadius [ vSignal "cornerRadius" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maWidth [ vSignal "w" ]
+                            , maHeight [ vSignal "h" ]
+                            , maGroupClip [ vSignal "groupClip" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maCornerRadius [ vSignal "cornerRadius" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     , MGroup [ ds, nestedMk [] ]
                     ]
@@ -188,12 +188,12 @@ groupTest =
                     , MInteractive False
                     , MEncode
                         [ enEnter
-                            [ MX [ vField (fName "x") ]
-                            , MY [ vField (fName "y") ]
-                            , MWidth [ vField (fName "w") ]
-                            , MHeight [ vField (fName "h") ]
-                            , MFill [ vStr "aliceblue" ]
-                            , MStroke [ vStr "firebrick" ]
+                            [ maX [ vField (fName "x") ]
+                            , maY [ vField (fName "y") ]
+                            , maWidth [ vField (fName "w") ]
+                            , maHeight [ vField (fName "h") ]
+                            , maFill [ vStr "aliceblue" ]
+                            , maStroke [ vStr "firebrick" ]
                             ]
                         ]
                     ]
@@ -219,18 +219,18 @@ imageTest =
             marks
                 << mark Image
                     [ MEncode
-                        [ enEnter [ MUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
+                        [ enEnter [ maUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
                         , enUpdate
-                            [ MOpacity [ vNumber 1 ]
-                            , MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MWidth [ vSignal "w" ]
-                            , MHeight [ vSignal "h" ]
-                            , MAspect [ vSignal "aspect" ]
-                            , MAlign [ vSignal "align" ]
-                            , MBaseline [ vSignal "baseline" ]
+                            [ maOpacity [ vNumber 1 ]
+                            , maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maWidth [ vSignal "w" ]
+                            , maHeight [ vSignal "h" ]
+                            , maAspect [ vSignal "aspect" ]
+                            , maAlign [ vSignal "align" ]
+                            , maBaseline [ vSignal "baseline" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -282,19 +282,19 @@ lineTest =
                 << mark Line
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enEnter [ MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , MDefined [ vSignal "defined || datum.u !== 3" ]
-                            , MInterpolate [ vSignal "interpolate" ]
-                            , MTension [ vSignal "tension" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MStrokeDash [ vSignal "strokeDash" ]
-                            , MStrokeCap [ vSignal "strokeCap" ]
-                            , MOpacity [ vNumber 1 ]
+                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
+                            , maDefined [ vSignal "defined || datum.u !== 3" ]
+                            , maInterpolate [ vSignal "interpolate" ]
+                            , maTension [ vSignal "tension" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maStrokeDash [ vSignal "strokeDash" ]
+                            , maStrokeCap [ vSignal "strokeCap" ]
+                            , maOpacity [ vNumber 1 ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -317,17 +317,17 @@ pathTest =
             marks
                 << mark Path
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MPath [ vSignal "path" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maPath [ vSignal "path" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -352,19 +352,19 @@ rectTest =
             marks
                 << mark Rect
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MWidth [ vSignal "w" ]
-                            , MHeight [ vSignal "h" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MCornerRadius [ vSignal "cornerRadius" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maWidth [ vSignal "w" ]
+                            , maHeight [ vSignal "h" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maCornerRadius [ vSignal "cornerRadius" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -389,18 +389,18 @@ ruleTest =
             marks
                 << mark Rule
                     [ MEncode
-                        [ enEnter [ MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MX2 [ vSignal "x2" ]
-                            , MY2 [ vSignal "y2" ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MStrokeDash [ vSignal "strokeDash" ]
-                            , MStrokeCap [ vSignal "strokeCap" ]
-                            , MOpacity [ vNumber 1 ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maX2 [ vSignal "x2" ]
+                            , maY2 [ vSignal "y2" ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maStrokeDash [ vSignal "strokeDash" ]
+                            , maStrokeCap [ vSignal "strokeCap" ]
+                            , maOpacity [ vNumber 1 ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -419,14 +419,14 @@ symbolTest =
                         (iSelect
                             [ inOptions
                                 (vStrs
-                                    [ "circle"
-                                    , "square"
-                                    , "cross"
-                                    , "diamond"
-                                    , "triangle-up"
-                                    , "triangle-down"
-                                    , "triangle-right"
-                                    , "triangle-left"
+                                    [ symbolLabel SymCircle
+                                    , symbolLabel SymSquare
+                                    , symbolLabel SymCross
+                                    , symbolLabel SymDiamond
+                                    , symbolLabel SymTriangleUp
+                                    , symbolLabel SymTriangleDown
+                                    , symbolLabel SymTriangleRight
+                                    , symbolLabel SymTriangleLeft
                                     , "M-1,-1H1V1H-1Z"
                                     , "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z"
                                     ]
@@ -444,18 +444,18 @@ symbolTest =
             marks
                 << mark Symbol
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ], MStroke [ vStr "#652c90" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MSize [ vSignal "size" ]
-                            , MShape [ vSignal "shape" ]
-                            , MOpacity [ vNumber 1 ]
-                            , MStrokeWidth [ vSignal "strokeWidth" ]
-                            , MFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
-                            , MStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
+                            [ maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maSize [ vSignal "size" ]
+                            , maShape [ vSignal "shape" ]
+                            , maOpacity [ vNumber 1 ]
+                            , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
+                            , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -485,28 +485,28 @@ textTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ enEnter [ MFill [ vStr "firebrick" ], MSize [ vNumber 25 ] ]
-                        , enUpdate [ MX [ vSignal "x" ], MY [ vSignal "y" ] ]
+                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNumber 25 ] ]
+                        , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Text
                     [ MEncode
-                        [ enEnter [ MFill [ vStr "#000" ], MText [ vStr "Text Label" ] ]
+                        [ enEnter [ maFill [ vStr "#000" ], maText [ vStr "Text Label" ] ]
                         , enUpdate
-                            [ MOpacity [ vNumber 1 ]
-                            , MX [ vSignal "x" ]
-                            , MY [ vSignal "y" ]
-                            , MdX [ vSignal "dx" ]
-                            , MAngle [ vSignal "angle" ]
-                            , MAlign [ vSignal "align" ]
-                            , MBaseline [ vSignal "baseline" ]
-                            , MFont [ vSignal "font" ]
-                            , MFontSize [ vSignal "fontSize" ]
-                            , MFontStyle [ vSignal "fontStyle" ]
-                            , MFontWeight [ vSignal "fontWeight" ]
-                            , MLimit [ vSignal "limit" ]
+                            [ maOpacity [ vNumber 1 ]
+                            , maX [ vSignal "x" ]
+                            , maY [ vSignal "y" ]
+                            , maDx [ vSignal "dx" ]
+                            , maAngle [ vSignal "angle" ]
+                            , maAlign [ vSignal "align" ]
+                            , maBaseline [ vSignal "baseline" ]
+                            , maFont [ vSignal "font" ]
+                            , maFontSize [ vSignal "fontSize" ]
+                            , maFontStyle [ vSignal "fontStyle" ]
+                            , maFontWeight [ vSignal "fontWeight" ]
+                            , maLimit [ vSignal "limit" ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
@@ -556,15 +556,15 @@ trailTest =
                 << mark Trail
                     [ MFrom [ sData (str "table") ]
                     , MEncode
-                        [ enEnter [ MFill [ vStr "#939597" ] ]
+                        [ enEnter [ maFill [ vStr "#939597" ] ]
                         , enUpdate
-                            [ MX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , MY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , MSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
-                            , MDefined [ vSignal "defined || datum.u !== 3" ]
-                            , MOpacity [ vNumber 1 ]
+                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
+                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
+                            , maSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
+                            , maDefined [ vSignal "defined || datum.u !== 3" ]
+                            , maOpacity [ vNumber 1 ]
                             ]
-                        , enHover [ MOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNumber 0.5 ] ]
                         ]
                     ]
     in
