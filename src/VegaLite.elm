@@ -3025,7 +3025,7 @@ composition.
 
     sel =
         selection
-            << select "view" Interval [ Bind Scales ] []
+            << select "view" Interval [ BindScales ] []
             << select "myBrush" Interval []
             << select "myPaintbrush" Multi [ On "mouseover", Nearest True ]
 
@@ -3044,7 +3044,7 @@ select name sType options =
 see the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html).
 
     selection =
-        selection << select "view" Interval [ Bind Scales ]
+        selection << select "view" Interval [ BindScales ]
 
 -}
 selection : List LabelledSpec -> ( VLProperty, Spec )
