@@ -12445,18 +12445,23 @@ var _gicentre$elm_vega$Vega$LeType = function (a) {
 var _gicentre$elm_vega$Vega$EnGradient = function (a) {
 	return {ctor: 'EnGradient', _0: a};
 };
+var _gicentre$elm_vega$Vega$enGradient = _gicentre$elm_vega$Vega$EnGradient;
 var _gicentre$elm_vega$Vega$EnSymbols = function (a) {
 	return {ctor: 'EnSymbols', _0: a};
 };
+var _gicentre$elm_vega$Vega$enSymbols = _gicentre$elm_vega$Vega$EnSymbols;
 var _gicentre$elm_vega$Vega$EnLabels = function (a) {
 	return {ctor: 'EnLabels', _0: a};
 };
+var _gicentre$elm_vega$Vega$enLabels = _gicentre$elm_vega$Vega$EnLabels;
 var _gicentre$elm_vega$Vega$EnTitle = function (a) {
 	return {ctor: 'EnTitle', _0: a};
 };
+var _gicentre$elm_vega$Vega$enTitle = _gicentre$elm_vega$Vega$EnTitle;
 var _gicentre$elm_vega$Vega$EnLegend = function (a) {
 	return {ctor: 'EnLegend', _0: a};
 };
+var _gicentre$elm_vega$Vega$enLegend = _gicentre$elm_vega$Vega$EnLegend;
 var _gicentre$elm_vega$Vega$LGradient = {ctor: 'LGradient'};
 var _gicentre$elm_vega$Vega$LSymbol = {ctor: 'LSymbol'};
 var _gicentre$elm_vega$Vega$Trail = {ctor: 'Trail'};
@@ -16108,7 +16113,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 								_0: _gicentre$elm_vega$Vega$LEncode(
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$EnSymbols(
+										_0: _gicentre$elm_vega$Vega$enSymbols(
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$update(shapeEncoding),

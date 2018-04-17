@@ -25,7 +25,7 @@ module Vega
         , FormulaUpdate(..)
         , HAlign(..)
         , InputProperty
-        , LegendEncoding(..)
+        , LegendEncoding
         , LegendOrientation(..)
         , LegendProperty(..)
         , LegendType(..)
@@ -145,6 +145,11 @@ module Vega
         , eField
         , eForce
         , eUpdate
+        , enGradient
+        , enLabels
+        , enLegend
+        , enSymbols
+        , enTitle
         , enter
         , eventHandler
         , exit
@@ -414,6 +419,11 @@ Functions and types for declaring the input data to the visualization.
 @docs LegendType
 @docs LegendOrientation
 @docs LegendEncoding
+@docs enLegend
+@docs enTitle
+@docs enLabels
+@docs enSymbols
+@docs enGradient
 
 
 ## Marks
@@ -931,14 +941,8 @@ type HAlign
 
 
 {-| GUI Input properties. The type of relevant proerty will depend on the type of
-input element selected. For example an `InRange` (slider) can have numeric min,
-max and step values; InSelect (selector) has a list of selection label options.
-For details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind).
-The `debounce` property, available for all input types allows a delay in input event
-handling to be added in order to avoid unnecessary event broadcasting. The `Element`
-property is an optional CSS selector indicating the parent element to which the
-input element should be added. This allows the option of the input element to be
-outside the visualization container.
+input element selected. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind).
 -}
 type InputProperty
     = InDebounce Float
@@ -1001,6 +1005,46 @@ type LegendEncoding
     | EnLabels (List EncodingProperty)
     | EnSymbols (List EncodingProperty)
     | EnGradient (List EncodingProperty)
+
+
+{-| Custom encoding for gradient (continuous) legends. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enGradient : List EncodingProperty -> LegendEncoding
+enGradient =
+    EnGradient
+
+
+{-| Custom encoding for legend labels. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enLabels : List EncodingProperty -> LegendEncoding
+enLabels =
+    EnLabels
+
+
+{-| Custom encoding for a legend group mark. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enLegend : List EncodingProperty -> LegendEncoding
+enLegend =
+    EnLegend
+
+
+{-| Custom encoding for symbol (discrete) legends. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enSymbols : List EncodingProperty -> LegendEncoding
+enSymbols =
+    EnSymbols
+
+
+{-| Custom ecoding for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enTitle : List EncodingProperty -> LegendEncoding
+enTitle =
+    EnTitle
 
 
 {-| Type of legend. `LSymbol` representing legends with discrete items and `LGradient`
@@ -2805,8 +2849,9 @@ inDebounce =
 
 
 {-| A CSS selector string indicating the parent element to which the input element
-should be added. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+should be added. This allows the option of the input element to be outside the
+visualization container, which could be used for linking separate visualizations.
+For more details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
 -}
 inElement : String -> InputProperty
 inElement =

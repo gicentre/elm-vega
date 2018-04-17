@@ -1083,7 +1083,7 @@ scatterplot1 =
                     [ LSize "sizeScale"
                     , LTitle "Acceleration"
                     , LFormat "s"
-                    , LEncode [ EnSymbols [ update shapeEncoding ] ]
+                    , LEncode [ enSymbols [ update shapeEncoding ] ]
                     ]
 
         mk =
