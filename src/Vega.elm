@@ -1,14 +1,14 @@
 module Vega
     exposing
         ( AggregateProperty
-        , Autosize(..)
-        , AxisElement(..)
+        , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
+        , AxisElement(EAxis, EDomain, EGrid, ELabels, ETicks, ETitle)
         , AxisProperty
         , Bind
         , CInterpolate
         , ColorValue
         , Comparator
-        , Cursor(..)
+        , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , DataColumn
         , DataProperty
         , DataReference
@@ -22,21 +22,21 @@ module Vega
         , Field
         , FieldValue
         , Format
-        , FormulaUpdate(..)
-        , HAlign(..)
+        , FormulaUpdate(AlwaysUpdate, InitOnly)
+        , HAlign(AlignCenter, AlignLeft, AlignRight)
         , InputProperty
         , LegendEncoding
-        , LegendOrientation(..)
+        , LegendOrientation(Bottom, BottomLeft, BottomRight, Left, None, Right, Top, TopLeft, TopRight)
         , LegendProperty
-        , LegendType(..)
-        , Mark(..)
-        , MarkInterpolation(..)
-        , MarkOrientation(..)
+        , LegendType(LGradient, LSymbol)
+        , Mark(Arc, Area, Group, Image, Line, Path, Rect, Rule, Shape, Symbol, Text, Trail)
+        , MarkInterpolation(Basis, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
+        , MarkOrientation(Horizontal, Vertical)
         , MarkProperty
         , Num
         , Operation
-        , Order(..)
-        , OverlapStrategy(..)
+        , Order
+        , OverlapStrategy(OGreedy, ONone, OParity)
         , PackProperty(..)
         , Padding(..)
         , PieProperty(..)
@@ -284,6 +284,9 @@ module Vega
         , num
         , nums
         , on
+        , orAscending
+        , orDescending
+        , orSignal
         , padding
         , parse
         , q1
@@ -427,6 +430,9 @@ Functions and types for declaring the input data to the visualization.
 
 @docs transform
 @docs Order
+@docs orAscending
+@docs orDescending
+@docs orSignal
 @docs Comparator
 @docs coField
 @docs coOrder
@@ -1392,7 +1398,7 @@ type PieProperty
     | PiAs String String
 
 
-{-| Indicates whether an ascending or descending order is required (usually in sorting).
+{-| Indicate an ordering, usually when sorting.
 -}
 type Order
     = Ascend
@@ -4012,6 +4018,30 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/trigge
 on : List Spec -> DataTable -> DataTable
 on triggerSpecs dTable =
     dTable ++ [ ( "on", JE.list triggerSpecs ) ]
+
+
+{-| Indicates an ascending sort order for comparison operations. For details see
+the [Vega documentation](https://vega.github.io/vega/docs/types/#Compare).
+-}
+orAscending : Order
+orAscending =
+    Ascend
+
+
+{-| Indicates an descending sort order for comparison operations. For details see
+the [Vega documentation](https://vega.github.io/vega/docs/types/#Compare).
+-}
+orDescending : Order
+orDescending =
+    Descend
+
+
+{-| Indicates an sort order determined by a named signal for comparison operations.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/types/#Compare).
+-}
+orSignal : String -> Order
+orSignal =
+    OrderSignal
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is

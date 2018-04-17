@@ -12813,8 +12813,11 @@ var _user$project$Vega$PiField = function (a) {
 var _user$project$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
+var _user$project$Vega$orSignal = _user$project$Vega$OrderSignal;
 var _user$project$Vega$Descend = {ctor: 'Descend'};
+var _user$project$Vega$orDescending = _user$project$Vega$Descend;
 var _user$project$Vega$Ascend = {ctor: 'Ascend'};
+var _user$project$Vega$orAscending = _user$project$Vega$Ascend;
 var _user$project$Vega$PEdges = F4(
 	function (a, b, c, d) {
 		return {ctor: 'PEdges', _0: a, _1: b, _2: c, _3: d};

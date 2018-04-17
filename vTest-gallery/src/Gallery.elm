@@ -485,7 +485,7 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
@@ -555,7 +555,7 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
+                    [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
@@ -767,7 +767,7 @@ areaChart4 =
                     [ TFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , TStack
                         [ StGroupBy [ "year" ]
-                        , StSort [ coField [ "job", "sex" ], coOrder [ Descend, Descend ] ]
+                        , StSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
                         , StField "perc"
                         ]
                     ]
@@ -1213,8 +1213,8 @@ scatterplot2 =
                             [ maX [ vSignal "nullSize", vOffset (vNumber -4) ]
                             , maY [ vSignal "height", vOffset (vNumber 13) ]
                             , maText [ vSignal "datum.count + ' null'" ]
-                            , maAlign [ hAlignLabel AlignRight |> vStr ]
-                            , maBaseline [ vAlignLabel AlignTop |> vStr ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            , maBaseline [ vStr (vAlignLabel AlignTop) ]
                             , maFill [ vStr "#999" ]
                             , maFontSize [ vNumber 9 ]
                             ]
@@ -1282,8 +1282,8 @@ scatterplot3 =
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ enEnter
-                                [ maAlign [ hAlignLabel AlignLeft |> vStr ]
-                                , maBaseline [ vAlignLabel AlignTop |> vStr ]
+                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
+                                , maBaseline [ vStr (vAlignLabel AlignTop) ]
                                 , maFontSize [ vNumber 12 ]
                                 , maFontWeight [ vStr "bold" ]
                                 ]
@@ -1309,8 +1309,8 @@ scatterplot3 =
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ enEnter
-                                [ maAlign [ hAlignLabel AlignLeft |> vStr ]
-                                , maBaseline [ vAlignLabel AlignBottom |> vStr ]
+                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
+                                , maBaseline [ vStr (vAlignLabel AlignBottom) ]
                                 , maFontSize [ vNumber 12 ]
                                 , maFontWeight [ vStr "bold" ]
                                 ]
@@ -1332,7 +1332,7 @@ scatterplot3 =
                     [ MFrom [ sData (str "drive") ]
                     , MEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Cardinal |> vStr ]
+                            [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
                             , maX [ vScale (fName "xScale"), vField (fName "miles") ]
                             , maY [ vScale (fName "yScale"), vField (fName "gas") ]
                             , maStroke [ vStr "#000" ]

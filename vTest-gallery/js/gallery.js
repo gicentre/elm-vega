@@ -12813,8 +12813,11 @@ var _gicentre$elm_vega$Vega$PiField = function (a) {
 var _gicentre$elm_vega$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
+var _gicentre$elm_vega$Vega$orSignal = _gicentre$elm_vega$Vega$OrderSignal;
 var _gicentre$elm_vega$Vega$Descend = {ctor: 'Descend'};
+var _gicentre$elm_vega$Vega$orDescending = _gicentre$elm_vega$Vega$Descend;
 var _gicentre$elm_vega$Vega$Ascend = {ctor: 'Ascend'};
+var _gicentre$elm_vega$Vega$orAscending = _gicentre$elm_vega$Vega$Ascend;
 var _gicentre$elm_vega$Vega$PEdges = F4(
 	function (a, b, c, d) {
 		return {ctor: 'PEdges', _0: a, _1: b, _2: c, _3: d};
@@ -18291,10 +18294,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 										_0: _gicentre$elm_vega$Vega$coOrder(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$Descend,
+												_0: _gicentre$elm_vega$Vega$orDescending,
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$Descend,
+													_0: _gicentre$elm_vega$Vega$orDescending,
 													_1: {ctor: '[]'}
 												}
 											}),
