@@ -2304,7 +2304,7 @@ from an external file, from a named data source or inline literal values. See th
 
       dataSource
           [ data "pop" [ dUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
           ]
 
 -}
@@ -2332,9 +2332,9 @@ result of a transformation. For details see the
 
       dataSource
           [ data "pop" [ dUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
-          , data "males" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
-          , data "females" [ dSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
+          , data "males" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
+          , data "females" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
           , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 
@@ -3235,7 +3235,7 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/transf
 
       dataSource
           [ data "pop" [ dUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (Expr "datum.year == year") ]
+          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
           , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 

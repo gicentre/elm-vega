@@ -7308,7 +7308,7 @@
       },
       {
         "name": "data",
-        "comment": " Declare a named data set. Depending on the properties provided this may be\nfrom an external file, from a named data source or inline literal values. See the\n[Vega documentation](https://vega.github.io/vega/docs/data/#propertiess) for details.\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (Expr \"datum.year == year\") ]\n          ]\n\n",
+        "comment": " Declare a named data set. Depending on the properties provided this may be\nfrom an external file, from a named data source or inline literal values. See the\n[Vega documentation](https://vega.github.io/vega/docs/data/#propertiess) for details.\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (expr \"datum.year == year\") ]\n          ]\n\n",
         "type": "String -> List Vega.DataProperty -> Vega.DataTable"
       },
       {
@@ -7333,7 +7333,7 @@
       },
       {
         "name": "dataSource",
-        "comment": " Specify a data source to be used in the visualization. A data source is a collection\nof data tables which themselves may be generated inline, loaded from a URL or the\nresult of a transformation. For details see the\n[Vega documentation](https://vega.github.io/vega/docs/data).\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (Expr \"datum.year == year\") ]\n          , data \"males\" [ dSource \"popYear\" ] |> transform [ TFilter (Expr \"datum.sex == 1\") ]\n          , data \"females\" [ dSource \"popYear\" ] |> transform [ TFilter (Expr \"datum.sex == 2\") ]\n          , data \"ageGroups\" [ dSource \"pop\" ] |> transform [ TAggregate [ AgGroupBy [ FieldName \"age\" ] ] ]\n          ]\n\n",
+        "comment": " Specify a data source to be used in the visualization. A data source is a collection\nof data tables which themselves may be generated inline, loaded from a URL or the\nresult of a transformation. For details see the\n[Vega documentation](https://vega.github.io/vega/docs/data).\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (expr \"datum.year == year\") ]\n          , data \"males\" [ dSource \"popYear\" ] |> transform [ TFilter (expr \"datum.sex == 1\") ]\n          , data \"females\" [ dSource \"popYear\" ] |> transform [ TFilter (expr \"datum.sex == 2\") ]\n          , data \"ageGroups\" [ dSource \"pop\" ] |> transform [ TAggregate [ AgGroupBy [ FieldName \"age\" ] ] ]\n          ]\n\n",
         "type": "List Vega.DataTable -> Vega.Data"
       },
       {
@@ -7748,7 +7748,7 @@
       },
       {
         "name": "transform",
-        "comment": " Applies the given ordered list of transforms to the given data table.\nFor details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (Expr \"datum.year == year\") ]\n          , data \"ageGroups\" [ dSource \"pop\" ] |> transform [ TAggregate [ AgGroupBy [ FieldName \"age\" ] ] ]\n          ]\n\n",
+        "comment": " Applies the given ordered list of transforms to the given data table.\nFor details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).\n\n      dataSource\n          [ data \"pop\" [ dUrl \"data/population.json\" ]\n          , data \"popYear\" [ dSource \"pop\" ] |> transform [ TFilter (expr \"datum.year == year\") ]\n          , data \"ageGroups\" [ dSource \"pop\" ] |> transform [ TAggregate [ AgGroupBy [ FieldName \"age\" ] ] ]\n          ]\n\n",
         "type": "List Vega.Transform -> Vega.DataTable -> Vega.DataTable"
       },
       {
