@@ -12836,15 +12836,15 @@ var _user$project$Vega$ScLinear = {ctor: 'ScLinear'};
 var _user$project$Vega$DoData = function (a) {
 	return {ctor: 'DoData', _0: a};
 };
-var _user$project$Vega$DoSignal = function (a) {
-	return {ctor: 'DoSignal', _0: a};
-};
+var _user$project$Vega$doData = _user$project$Vega$DoData;
 var _user$project$Vega$DoStrs = function (a) {
 	return {ctor: 'DoStrs', _0: a};
 };
-var _user$project$Vega$DoNumbers = function (a) {
-	return {ctor: 'DoNumbers', _0: a};
+var _user$project$Vega$doStrs = _user$project$Vega$DoStrs;
+var _user$project$Vega$DoNums = function (a) {
+	return {ctor: 'DoNums', _0: a};
 };
+var _user$project$Vega$doNums = _user$project$Vega$DoNums;
 var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
@@ -13056,19 +13056,10 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 var _user$project$Vega$scaleDomainSpec = function (sdType) {
 	var _p81 = sdType;
 	switch (_p81.ctor) {
-		case 'DoNumbers':
-			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p81._0));
+		case 'DoNums':
+			return _user$project$Vega$numSpec(_p81._0);
 		case 'DoStrs':
-			return _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p81._0));
-		case 'DoSignal':
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: _user$project$Vega$signalReferenceProperty(_p81._0),
-					_1: {ctor: '[]'}
-				});
+			return _user$project$Vega$strSpec(_p81._0);
 		default:
 			return _elm_lang$core$Json_Encode$object(
 				A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p81._0));
@@ -13892,7 +13883,7 @@ var _user$project$MarkTests$trailTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DoData(
+							_user$project$Vega$doData(
 								{
 									ctor: '::',
 									_0: _user$project$Vega$dDataset('table'),
@@ -13924,7 +13915,7 @@ var _user$project$MarkTests$trailTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DoData(
+								_user$project$Vega$doData(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$dDataset('table'),
@@ -13973,7 +13964,7 @@ var _user$project$MarkTests$trailTest = function () {
 								_1: {
 									ctor: '::',
 									_0: _user$project$Vega$SDomain(
-										_user$project$Vega$DoData(
+										_user$project$Vega$doData(
 											{
 												ctor: '::',
 												_0: _user$project$Vega$dDataset('table'),
@@ -16986,7 +16977,7 @@ var _user$project$MarkTests$areaTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DoData(
+							_user$project$Vega$doData(
 								{
 									ctor: '::',
 									_0: _user$project$Vega$dDataset('table'),
@@ -17018,7 +17009,7 @@ var _user$project$MarkTests$areaTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DoData(
+								_user$project$Vega$doData(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$dDataset('table'),
@@ -18038,7 +18029,7 @@ var _user$project$MarkTests$lineTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SDomain(
-							_user$project$Vega$DoData(
+							_user$project$Vega$doData(
 								{
 									ctor: '::',
 									_0: _user$project$Vega$dDataset('table'),
@@ -18070,7 +18061,7 @@ var _user$project$MarkTests$lineTest = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SDomain(
-								_user$project$Vega$DoData(
+								_user$project$Vega$doData(
 									{
 										ctor: '::',
 										_0: _user$project$Vega$dDataset('table'),

@@ -43,7 +43,7 @@ module Vega
         , PieProperty
         , RangeDefault(RCategory, RDiverging, RHeatmap, RHeight, ROrdinal, RRamp, RSymbol, RWidth)
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
-        , ScaleDomain(..)
+        , ScaleDomain
         , ScaleNice(..)
         , ScaleProperty(..)
         , ScaleRange(..)
@@ -140,6 +140,9 @@ module Vega
         , dataSource
         , dirLabel
         , distinct
+        , doData
+        , doNums
+        , doStrs
         , dsv
         , eEncode
         , eField
@@ -695,6 +698,9 @@ The mapping of data values to their visual expression.
 @docs Scale
 @docs scCustom
 @docs ScaleDomain
+@docs doNums
+@docs doStrs
+@docs doData
 @docs ScaleRange
 @docs ScaleNice
 @docs SchemeProperty
@@ -1493,11 +1499,11 @@ type Scale
 [Vega documentation](https://vega.github.io/vega/docs/scales/#domain).
 -}
 type ScaleDomain
-    = DoNumbers (List Float)
-    | DoStrs (List String)
+    = DoNums Num
+    | DoStrs Str
+      -- TODO: Array can contain signals (ie. not just a single signal referencing an array).
+      -- Should we add an array of signals to basic Num and Str types?
       -- TODO: Can we have DateTimes as literals?
-      -- TODO: Documentation implies array literals can include signal references as elements. How do we add these?
-    | DoSignal String
     | DoData (List DataReference)
 
 
@@ -2677,6 +2683,32 @@ dirLabel dir =
 distinct : Operation
 distinct =
     Distinct
+
+
+{-| A [data reference object](https://vega.github.io/vega/docs/scales/#dataref)
+that specifies field values in one or more data sets to define a scale domain.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#domain)
+-}
+doData : List DataReference -> ScaleDomain
+doData =
+    DoData
+
+
+{-| An numeric array literal (`Nums`) representing a scale domain. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#domain)
+-}
+doNums : Num -> ScaleDomain
+doNums =
+    DoNums
+
+
+{-| An string array literal (`Strs`) representing a scale domain. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#domain)
+-}
+doStrs : Str -> ScaleDomain
+doStrs =
+    DoStrs
 
 
 {-| Reference a collection of nested data references. For details see the
@@ -5841,14 +5873,11 @@ rangeDefaultLabel rd =
 scaleDomainSpec : ScaleDomain -> Spec
 scaleDomainSpec sdType =
     case sdType of
-        DoNumbers nums ->
-            JE.list (List.map JE.float nums)
+        DoNums nums ->
+            numSpec nums
 
         DoStrs cats ->
-            JE.list (List.map JE.string cats)
-
-        DoSignal signal ->
-            JE.object [ signalReferenceProperty signal ]
+            strSpec cats
 
         DoData dataRef ->
             JE.object (List.map dataRefProperty dataRef)

@@ -85,13 +85,13 @@ areaTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
+                    , SDomain (doData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
+                    , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -253,13 +253,13 @@ lineTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
+                    , SDomain (doData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
+                    , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -529,13 +529,13 @@ trailTest =
             scales
                 << scale "xscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "u") ])
+                    , SDomain (doData [ dDataset "table", dField (str "u") ])
                     , SRange (RDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
+                    , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (RDefault RHeight)
                     , SZero True
                     , SNice NTrue
@@ -543,7 +543,7 @@ trailTest =
                 << scale "zscale"
                     [ SType ScLinear
                     , SRange (RNumbers [ 5, 1 ])
-                    , SDomain (DoData [ dDataset "table", dField (str "v") ])
+                    , SDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
 
         si =

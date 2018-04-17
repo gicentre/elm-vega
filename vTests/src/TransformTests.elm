@@ -116,12 +116,12 @@ stackTest1 =
             scales
                 << scale "xscale"
                     [ SType ScBand
-                    , SDomain (DoStrs [ "a", "b", "c" ])
+                    , SDomain (doStrs (strs [ "a", "b", "c" ]))
                     , SRange (RDefault RWidth)
                     ]
                 << scale "yscale"
                     [ SType ScLinear
-                    , SDomain (DoData [ dDataset "table", dField (str "y1") ])
+                    , SDomain (doData [ dDataset "table", dField (str "y1") ])
                     , SRange (RDefault RHeight)
                     , SRound True
                     ]
