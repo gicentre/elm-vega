@@ -39,8 +39,8 @@ module Vega
         , Order
         , OverlapStrategy(OGreedy, ONone, OParity)
         , PackProperty
-        , Padding(..)
-        , PieProperty(..)
+        , Padding(PEdges, PSize)
+        , PieProperty
         , RangeDefault(..)
         , Scale(..)
         , ScaleDomain(..)
@@ -297,6 +297,11 @@ module Vega
         , paSort
         , padding
         , parse
+        , piAs
+        , piEndAngle
+        , piField
+        , piSort
+        , piStartAngle
         , q1
         , q3
         , rgb
@@ -439,6 +444,11 @@ Functions and types for declaring the input data to the visualization.
 @docs paPadding
 @docs paAs
 @docs PieProperty
+@docs piField
+@docs piStartAngle
+@docs piEndAngle
+@docs piSort
+@docs piAs
 @docs StackProperty
 @docs StackOffset
 
@@ -739,13 +749,7 @@ can carry data used in specifications.
 @docs fParent
 @docs Value
 
-@docs BoolSig
-@docs boolean
-@docs bools
-@docs boolSignal
-
 @docs vSignal
-@docs strSignal
 @docs vColor
 @docs vBand
 @docs vField
@@ -755,10 +759,15 @@ can carry data used in specifications.
 @docs Str
 @docs str
 @docs strs
+@docs strSignal
 @docs Num
 @docs num
 @docs nums
 @docs numSignal
+@docs BoolSig
+@docs boolean
+@docs bools
+@docs boolSignal
 @docs vStr
 @docs vStrs
 @docs dStrs
@@ -4150,6 +4159,49 @@ the [Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
 paSort : List Comparator -> PackProperty
 paSort =
     PaSort
+
+
+{-| The output fields for the computed start and end angles for each arc in a pie
+transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+piAs : String -> String -> PieProperty
+piAs start end =
+    PiAs start end
+
+
+{-| The end angle in radians in a pie chart transform. The default is 2 PI
+indicating the final slice ends 'north'. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+piEndAngle : Num -> PieProperty
+piEndAngle =
+    PiEndAngle
+
+
+{-| The field to encode with angular spans in a pie chart transform. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+piField : Field -> PieProperty
+piField =
+    PiField
+
+
+{-| Indicates whether or not pie slices should be stored in angular size order. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+piSort : BoolSig -> PieProperty
+piSort =
+    PiSort
+
+
+{-| The starting angle in radians in a pie chart transform. The default is 0
+indicating that the first slice starts 'north'. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pie/)
+-}
+piStartAngle : Num -> PieProperty
+piStartAngle =
+    PiStartAngle
 
 
 {-| An aggregating operation to calculate the lower quartile boundary of field values.

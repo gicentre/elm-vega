@@ -928,10 +928,10 @@ circularChart1 =
                 [ table []
                     |> transform
                         [ TPie
-                            [ PiField "field"
-                            , PiStartAngle (numSignal "PI * startAngle / 180")
-                            , PiEndAngle (numSignal "PI * endAngle / 180")
-                            , PiSort (boolSignal "sort")
+                            [ piField "field"
+                            , piStartAngle (numSignal "PI * startAngle / 180")
+                            , piEndAngle (numSignal "PI * endAngle / 180")
+                            , piSort (boolSignal "sort")
                             ]
                         ]
                 ]
@@ -979,7 +979,7 @@ circularChart2 =
         ds =
             dataSource
                 [ data "table" [ daValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
-                    |> transform [ TPie [ PiField "data" ] ]
+                    |> transform [ TPie [ piField "data" ] ]
                 ]
 
         sc =

@@ -12800,18 +12800,26 @@ var _gicentre$elm_vega$Vega$PiAs = F2(
 	function (a, b) {
 		return {ctor: 'PiAs', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$piAs = F2(
+	function (start, end) {
+		return A2(_gicentre$elm_vega$Vega$PiAs, start, end);
+	});
 var _gicentre$elm_vega$Vega$PiSort = function (a) {
 	return {ctor: 'PiSort', _0: a};
 };
+var _gicentre$elm_vega$Vega$piSort = _gicentre$elm_vega$Vega$PiSort;
 var _gicentre$elm_vega$Vega$PiEndAngle = function (a) {
 	return {ctor: 'PiEndAngle', _0: a};
 };
+var _gicentre$elm_vega$Vega$piEndAngle = _gicentre$elm_vega$Vega$PiEndAngle;
 var _gicentre$elm_vega$Vega$PiStartAngle = function (a) {
 	return {ctor: 'PiStartAngle', _0: a};
 };
+var _gicentre$elm_vega$Vega$piStartAngle = _gicentre$elm_vega$Vega$PiStartAngle;
 var _gicentre$elm_vega$Vega$PiField = function (a) {
 	return {ctor: 'PiField', _0: a};
 };
+var _gicentre$elm_vega$Vega$piField = _gicentre$elm_vega$Vega$PiField;
 var _gicentre$elm_vega$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
@@ -16830,7 +16838,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$TPie(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PiField('data'),
+							_0: _gicentre$elm_vega$Vega$piField('data'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -17268,18 +17276,18 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 					_0: _gicentre$elm_vega$Vega$TPie(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$PiField('field'),
+							_0: _gicentre$elm_vega$Vega$piField('field'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$PiStartAngle(
+								_0: _gicentre$elm_vega$Vega$piStartAngle(
 									_gicentre$elm_vega$Vega$numSignal('PI * startAngle / 180')),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$PiEndAngle(
+									_0: _gicentre$elm_vega$Vega$piEndAngle(
 										_gicentre$elm_vega$Vega$numSignal('PI * endAngle / 180')),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$PiSort(
+										_0: _gicentre$elm_vega$Vega$piSort(
 											_gicentre$elm_vega$Vega$boolSignal('sort')),
 										_1: {ctor: '[]'}
 									}

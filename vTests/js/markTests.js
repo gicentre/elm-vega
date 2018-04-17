@@ -12800,18 +12800,26 @@ var _user$project$Vega$PiAs = F2(
 	function (a, b) {
 		return {ctor: 'PiAs', _0: a, _1: b};
 	});
+var _user$project$Vega$piAs = F2(
+	function (start, end) {
+		return A2(_user$project$Vega$PiAs, start, end);
+	});
 var _user$project$Vega$PiSort = function (a) {
 	return {ctor: 'PiSort', _0: a};
 };
+var _user$project$Vega$piSort = _user$project$Vega$PiSort;
 var _user$project$Vega$PiEndAngle = function (a) {
 	return {ctor: 'PiEndAngle', _0: a};
 };
+var _user$project$Vega$piEndAngle = _user$project$Vega$PiEndAngle;
 var _user$project$Vega$PiStartAngle = function (a) {
 	return {ctor: 'PiStartAngle', _0: a};
 };
+var _user$project$Vega$piStartAngle = _user$project$Vega$PiStartAngle;
 var _user$project$Vega$PiField = function (a) {
 	return {ctor: 'PiField', _0: a};
 };
+var _user$project$Vega$piField = _user$project$Vega$PiField;
 var _user$project$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
