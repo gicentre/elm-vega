@@ -929,9 +929,9 @@ circularChart1 =
                     |> transform
                         [ TPie
                             [ PiField "field"
-                            , PiStartAngle (SigNumRef "PI * startAngle / 180")
-                            , PiEndAngle (SigNumRef "PI * endAngle / 180")
-                            , PiSort (SigBoolRef "sort")
+                            , PiStartAngle (numSignal "PI * startAngle / 180")
+                            , PiEndAngle (numSignal "PI * endAngle / 180")
+                            , PiSort (boolSignal "sort")
                             ]
                         ]
                 ]

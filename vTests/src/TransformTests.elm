@@ -22,9 +22,9 @@ packTest1 =
                     |> transform
                         [ TStratify "id" "parent"
                         , TPack
-                            [ PaField "value"
-                            , PaPadding (SigNumRef "padding between circles")
-                            , PaSize sigWidth sigHeight
+                            [ paField "value"
+                            , paPadding (numSignal "padding between circles")
+                            , paSize sigWidth sigHeight
                             ]
                         ]
                 ]

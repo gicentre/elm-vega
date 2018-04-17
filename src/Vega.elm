@@ -5,6 +5,7 @@ module Vega
         , AxisElement(EAxis, EDomain, EGrid, ELabels, ETicks, ETitle)
         , AxisProperty
         , Bind
+        , BoolSig
         , CInterpolate
         , ColorValue
         , Comparator
@@ -37,7 +38,7 @@ module Vega
         , Operation
         , Order
         , OverlapStrategy(OGreedy, ONone, OParity)
-        , PackProperty(..)
+        , PackProperty
         , Padding(..)
         , PieProperty(..)
         , RangeDefault(..)
@@ -48,10 +49,7 @@ module Vega
         , ScaleRange(..)
         , SchemeProperty(..)
         , Side(..)
-        , SignalBool(..)
-        , SignalNumber(..)
         , SignalProperty(..)
-        , SignalString(..)
         , SortProperty(Ascending, Descending)
         , Source
         , Spec
@@ -104,6 +102,9 @@ module Vega
         , axZIndex
         , axes
         , axis
+        , boolSignal
+        , boolean
+        , bools
         , cHCL
         , cHSL
         , cLAB
@@ -282,11 +283,18 @@ module Vega
         , minimum
         , missing
         , num
+        , numSignal
         , nums
         , on
         , orAscending
         , orDescending
         , orSignal
+        , paAs
+        , paField
+        , paPadding
+        , paRadius
+        , paSize
+        , paSort
         , padding
         , parse
         , q1
@@ -424,6 +432,12 @@ Functions and types for declaring the input data to the visualization.
 @docs agCross
 @docs agDrop
 @docs PackProperty
+@docs paField
+@docs paSort
+@docs paSize
+@docs paRadius
+@docs paPadding
+@docs paAs
 @docs PieProperty
 @docs StackProperty
 @docs StackOffset
@@ -627,9 +641,6 @@ Functions and types for declaring the input data to the visualization.
 @docs sigHeight
 @docs sigWidth
 @docs sigPadding
-@docs SignalBool
-@docs SignalNumber
-@docs SignalString
 @docs SignalProperty
 @docs Bind
 @docs iCheckbox
@@ -727,8 +738,11 @@ can carry data used in specifications.
 @docs fGroup
 @docs fParent
 @docs Value
-@docs Str
-@docs Num
+
+@docs BoolSig
+@docs boolean
+@docs bools
+@docs boolSignal
 
 @docs vSignal
 @docs strSignal
@@ -738,10 +752,13 @@ can carry data used in specifications.
 @docs vNumber
 @docs vNumbers
 @docs dNumbers
+@docs Str
 @docs str
 @docs strs
+@docs Num
 @docs num
 @docs nums
+@docs numSignal
 @docs vStr
 @docs vStrs
 @docs dStrs
@@ -854,6 +871,15 @@ type Bind
     | IDateTimeLocal (List InputProperty)
     | ITel (List InputProperty)
     | IColor (List InputProperty)
+
+
+{-| Represents boolean-related values such as a boolean literal, a list of booleans
+or a signal that generates a boolean value.
+-}
+type BoolSig
+    = Boolean Bool
+    | Bools (List Bool)
+    | BoolSignal String
 
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
@@ -1383,7 +1409,7 @@ type PackProperty
     | PaSort (List Comparator)
     | PaSize Value Value
     | PaRadius (Maybe Field)
-    | PaPadding SignalNumber
+    | PaPadding Num
     | PaAs String String String String String
 
 
@@ -1392,9 +1418,9 @@ type PackProperty
 -}
 type PieProperty
     = PiField Field
-    | PiStartAngle SignalNumber
-    | PiEndAngle SignalNumber
-    | PiSort SignalBool
+    | PiStartAngle Num
+    | PiEndAngle Num
+    | PiSort BoolSig
     | PiAs String String
 
 
@@ -1547,30 +1573,6 @@ type Side
     | SRight
     | STop
     | SBottom
-
-
-{-| Represents a boolean value that can either be a literal `SigBool` or signal that
-references a boolean value.
--}
-type SignalBool
-    = SigBool Bool
-    | SigBoolRef String
-
-
-{-| Represents a numeric value that can either be a literal `SigNum` or signal that
-references a number.
--}
-type SignalNumber
-    = SigNum Float
-    | SigNumRef String
-
-
-{-| Represents a string value that can either be a literal `SigStr` or signal that
-references a string.
--}
-type SignalString
-    = SigStr String
-    | SigStrRef String
 
 
 {-| Individual signal property. For details see the
@@ -2178,6 +2180,27 @@ cause axes and grid lines to be drawn on top of marks.
 axZIndex : Int -> AxisProperty
 axZIndex =
     AxZIndex
+
+
+{-| A boolean literal used for functions that can accept a literal or signal.
+-}
+boolean : Bool -> BoolSig
+boolean =
+    Boolean
+
+
+{-| A list of boolean literals used for functions that can accept literals or signal.
+-}
+bools : List Bool -> BoolSig
+bools =
+    Bools
+
+
+{-| A signal that will provide a string value.
+-}
+boolSignal : String -> BoolSig
+boolSignal =
+    BoolSignal
 
 
 {-| Define a colour in HCL space. Each of the three triplet values can be a numeric
@@ -3998,18 +4021,25 @@ missing =
     Missing
 
 
-{-| A numeric value. This can be a numeric literal or a signal that generates a number.
+{-| A numeric literal used for functions that can accept a literal or signal.
 -}
 num : Float -> Num
 num =
     Num
 
 
-{-| A list of number values. These can be numeric literals or signals that generate numbers.
+{-| A list of numeric literals used for functions that can accept literals or signal.
 -}
 nums : List Float -> Num
 nums =
     Nums
+
+
+{-| A signal that will provide a numeric value.
+-}
+numSignal : String -> Num
+numSignal =
+    NumSignal
 
 
 {-| Adds list of triggers to the given data table or mark.
@@ -4044,6 +4074,17 @@ orSignal =
     OrderSignal
 
 
+{-| The names to give the output fields of a packing transform. The default is
+["x", "y", "r", "depth", "children"], where x and y are the layout coordinates,
+r is the node radius, depth is the tree depth, and children is the count of a
+node’s children in the tree. For more details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paAs : String -> String -> String -> String -> String -> PackProperty
+paAs x y r depth children =
+    PaAs x y r depth children
+
+
 {-| Set the padding around the visualization in pixel units. The way padding is
 interpreted will depend on the `autosize` properties. See the
 [Vega documentation](https://vega.github.io/vega/docs/specification/)
@@ -4057,6 +4098,34 @@ padding pad =
     ( VPadding, paddingSpec pad )
 
 
+{-| The data field corresponding to a numeric value for the node in a packing
+transform. The sum of values for a node and all its descendants is available on
+the node object as the value property. If radius is null, this field determines
+the node size. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paField : Field -> PackProperty
+paField =
+    PaField
+
+
+{-| The approximate padding to include between packed circles. For details, see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paPadding : Num -> PackProperty
+paPadding =
+    PaPadding
+
+
+{-| An explicit node radius to use in a packing transform. If null (the default),
+the radius of each leaf circle is derived from the field value. For details, see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paRadius : Maybe Field -> PackProperty
+paRadius =
+    PaRadius
+
+
 {-| Indicates the parsing rules when processing some data text. The parameter is
 a list of tuples where each corresponds to a field name paired with its desired
 data type. Typically used when specifying a data url.
@@ -4064,6 +4133,23 @@ data type. Typically used when specifying a data url.
 parse : List ( String, DataType ) -> Format
 parse =
     Parse
+
+
+{-| The size of a packing layout, provided as in width height order. For details,
+see the [Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paSize : Value -> Value -> PackProperty
+paSize w h =
+    PaSize w h
+
+
+{-| A comparator for sorting sibling nodes in a packing transform. The inputs to
+the comparator are tree node objects, not input data objects. For details, see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/pack/)
+-}
+paSort : List Comparator -> PackProperty
+paSort =
+    PaSort
 
 
 {-| An aggregating operation to calculate the lower quartile boundary of field values.
@@ -4208,18 +4294,25 @@ stdevp =
     Stdevp
 
 
-{-| A string value. This can be a string literal or a signal that generates a string.
+{-| A string literal used for functions that can accept a literal or signal.
 -}
 str : String -> Str
 str =
     Str
 
 
-{-| A list of string values. These can be string literals or signals that generate strings.
+{-| A list of string literals used for functions that can accept literals or signal.
 -}
 strs : List String -> Str
 strs =
     Strs
+
+
+{-| A signal that will provide a string value.
+-}
+strSignal : String -> Str
+strSignal =
+    StrSignal
 
 
 {-| A convenience function for generating a text string representing a given
@@ -4566,13 +4659,6 @@ vSignal =
     VSignal
 
 
-{-| Specify the name of signal that generates strings.
--}
-strSignal : String -> Str
-strSignal =
-    StrSignal
-
-
 {-| A string value. Used for providing parameters that can be of any value type.
 -}
 vStr : String -> Value
@@ -4807,6 +4893,19 @@ bindingProperty bnd =
 
         IColor props ->
             bSpec "color" props
+
+
+boolSpec : BoolSig -> Spec
+boolSpec b =
+    case b of
+        Boolean b ->
+            JE.bool b
+
+        Bools bs ->
+            JE.list (List.map JE.bool bs)
+
+        BoolSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 colorProperty : ColorValue -> LabelledSpec
@@ -5625,7 +5724,7 @@ packProperty pp =
                     ( "radius", JE.null )
 
         PaPadding padSize ->
-            ( "padding", signalNumSpec padSize )
+            ( "padding", numSpec padSize )
 
         PaAs x y r depth children ->
             ( "as", JE.list (List.map JE.string [ x, y, r, depth, children ]) )
@@ -5653,13 +5752,13 @@ pieProperty pp =
             ( "field", fieldSpec f )
 
         PiStartAngle x ->
-            ( "startAngle", signalNumSpec x )
+            ( "startAngle", numSpec x )
 
         PiEndAngle x ->
-            ( "endAngle", signalNumSpec x )
+            ( "endAngle", numSpec x )
 
         PiSort b ->
-            ( "sort", signalBoolSpec b )
+            ( "sort", boolSpec b )
 
         PiAs y0 y1 ->
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
@@ -5869,36 +5968,6 @@ sideLabel orient =
 
         STop ->
             "top"
-
-
-signalBoolSpec : SignalBool -> Spec
-signalBoolSpec sigBool =
-    case sigBool of
-        SigBool b ->
-            JE.bool b
-
-        SigBoolRef sig ->
-            JE.object [ signalReferenceProperty sig ]
-
-
-signalNumSpec : SignalNumber -> Spec
-signalNumSpec sigNum =
-    case sigNum of
-        SigNum x ->
-            JE.float x
-
-        SigNumRef sig ->
-            JE.object [ signalReferenceProperty sig ]
-
-
-signalStrSpec : SignalString -> Spec
-signalStrSpec sigStr =
-    case sigStr of
-        SigStr s ->
-            JE.string s
-
-        SigStrRef sig ->
-            JE.object [ signalReferenceProperty sig ]
 
 
 signalProperty : SignalProperty -> LabelledSpec
