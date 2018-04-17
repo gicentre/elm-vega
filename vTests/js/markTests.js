@@ -9710,17 +9710,11 @@ var _user$project$Vega$inputProperty = function (prop) {
 				_0: 'step',
 				_1: _elm_lang$core$Json_Encode$float(_p43._0)
 			};
-		case 'Debounce':
+		case 'InDebounce':
 			return {
 				ctor: '_Tuple2',
 				_0: 'debounce',
 				_1: _elm_lang$core$Json_Encode$float(_p43._0)
-			};
-		case 'InName':
-			return {
-				ctor: '_Tuple2',
-				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p43._0)
 			};
 		case 'InOptions':
 			return {
@@ -9734,7 +9728,7 @@ var _user$project$Vega$inputProperty = function (prop) {
 				_0: 'placeholder',
 				_1: _elm_lang$core$Json_Encode$string(_p43._0)
 			};
-		case 'Element':
+		case 'InElement':
 			return {
 				ctor: '_Tuple2',
 				_0: 'element',
@@ -12356,30 +12350,35 @@ var _user$project$Vega$AlignCenter = {ctor: 'AlignCenter'};
 var _user$project$Vega$InAutocomplete = function (a) {
 	return {ctor: 'InAutocomplete', _0: a};
 };
+var _user$project$Vega$inAutocomplete = _user$project$Vega$InAutocomplete;
 var _user$project$Vega$InPlaceholder = function (a) {
 	return {ctor: 'InPlaceholder', _0: a};
 };
+var _user$project$Vega$inPlaceholder = _user$project$Vega$InPlaceholder;
 var _user$project$Vega$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
 };
-var _user$project$Vega$InName = function (a) {
-	return {ctor: 'InName', _0: a};
-};
+var _user$project$Vega$inStep = _user$project$Vega$InStep;
 var _user$project$Vega$InMax = function (a) {
 	return {ctor: 'InMax', _0: a};
 };
+var _user$project$Vega$inMax = _user$project$Vega$InMax;
 var _user$project$Vega$InMin = function (a) {
 	return {ctor: 'InMin', _0: a};
 };
+var _user$project$Vega$inMin = _user$project$Vega$InMin;
 var _user$project$Vega$InOptions = function (a) {
 	return {ctor: 'InOptions', _0: a};
 };
-var _user$project$Vega$Element = function (a) {
-	return {ctor: 'Element', _0: a};
+var _user$project$Vega$inOptions = _user$project$Vega$InOptions;
+var _user$project$Vega$InElement = function (a) {
+	return {ctor: 'InElement', _0: a};
 };
-var _user$project$Vega$Debounce = function (a) {
-	return {ctor: 'Debounce', _0: a};
+var _user$project$Vega$inElement = _user$project$Vega$InElement;
+var _user$project$Vega$InDebounce = function (a) {
+	return {ctor: 'InDebounce', _0: a};
 };
+var _user$project$Vega$inDebounce = _user$project$Vega$InDebounce;
 var _user$project$Vega$None = {ctor: 'None'};
 var _user$project$Vega$BottomLeft = {ctor: 'BottomLeft'};
 var _user$project$Vega$Bottom = {ctor: 'Bottom'};
@@ -13831,10 +13830,10 @@ var _user$project$MarkTests$trailTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(1),
+										_0: _user$project$Vega$inMin(1),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(10),
+											_0: _user$project$Vega$inMax(10),
 											_1: {ctor: '[]'}
 										}
 									})),
@@ -14297,13 +14296,13 @@ var _user$project$MarkTests$textTest = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(0),
+									_0: _user$project$Vega$inMin(0),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(200),
+										_0: _user$project$Vega$inMax(200),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InStep(1),
+											_0: _user$project$Vega$inStep(1),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -14324,13 +14323,13 @@ var _user$project$MarkTests$textTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(0),
+										_0: _user$project$Vega$inMin(0),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(200),
+											_0: _user$project$Vega$inMax(200),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -14351,13 +14350,13 @@ var _user$project$MarkTests$textTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(-20),
+											_0: _user$project$Vega$inMin(-20),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(20),
+												_0: _user$project$Vega$inMax(20),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -14378,13 +14377,13 @@ var _user$project$MarkTests$textTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(-180),
+												_0: _user$project$Vega$inMin(-180),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(180),
+													_0: _user$project$Vega$inMax(180),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -14405,13 +14404,13 @@ var _user$project$MarkTests$textTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(1),
+													_0: _user$project$Vega$inMin(1),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(36),
+														_0: _user$project$Vega$inMax(36),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(1),
+															_0: _user$project$Vega$inStep(1),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -14432,13 +14431,13 @@ var _user$project$MarkTests$textTest = function () {
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InMin(0),
+														_0: _user$project$Vega$inMin(0),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InMax(150),
+															_0: _user$project$Vega$inMax(150),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$InStep(1),
+																_0: _user$project$Vega$inStep(1),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -14460,7 +14459,7 @@ var _user$project$MarkTests$textTest = function () {
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InOptions(
+															_0: _user$project$Vega$inOptions(
 																_user$project$Vega$vStrs(
 																	{
 																		ctor: '::',
@@ -14494,7 +14493,7 @@ var _user$project$MarkTests$textTest = function () {
 														_user$project$Vega$iSelect(
 															{
 																ctor: '::',
-																_0: _user$project$Vega$InOptions(
+																_0: _user$project$Vega$inOptions(
 																	_user$project$Vega$vStrs(
 																		{
 																			ctor: '::',
@@ -14531,7 +14530,7 @@ var _user$project$MarkTests$textTest = function () {
 															_user$project$Vega$iRadio(
 																{
 																	ctor: '::',
-																	_0: _user$project$Vega$InOptions(
+																	_0: _user$project$Vega$inOptions(
 																		_user$project$Vega$vStrs(
 																			{
 																				ctor: '::',
@@ -14564,7 +14563,7 @@ var _user$project$MarkTests$textTest = function () {
 																_user$project$Vega$iRadio(
 																	{
 																		ctor: '::',
-																		_0: _user$project$Vega$InOptions(
+																		_0: _user$project$Vega$inOptions(
 																			_user$project$Vega$vStrs(
 																				{
 																					ctor: '::',
@@ -14593,7 +14592,7 @@ var _user$project$MarkTests$textTest = function () {
 																	_user$project$Vega$iRadio(
 																		{
 																			ctor: '::',
-																			_0: _user$project$Vega$InOptions(
+																			_0: _user$project$Vega$inOptions(
 																				_user$project$Vega$vStrs(
 																					{
 																						ctor: '::',
@@ -14780,7 +14779,7 @@ var _user$project$MarkTests$symbolTest = function () {
 							_user$project$Vega$iSelect(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InOptions(
+									_0: _user$project$Vega$inOptions(
 										_user$project$Vega$vStrs(
 											{
 												ctor: '::',
@@ -14841,13 +14840,13 @@ var _user$project$MarkTests$symbolTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(0),
+										_0: _user$project$Vega$inMin(0),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(10000),
+											_0: _user$project$Vega$inMax(10000),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(100),
+												_0: _user$project$Vega$inStep(100),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -14868,13 +14867,13 @@ var _user$project$MarkTests$symbolTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(10),
+											_0: _user$project$Vega$inMin(10),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(190),
+												_0: _user$project$Vega$inMax(190),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -14895,13 +14894,13 @@ var _user$project$MarkTests$symbolTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(10),
+												_0: _user$project$Vega$inMin(10),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(190),
+													_0: _user$project$Vega$inMax(190),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -14922,13 +14921,13 @@ var _user$project$MarkTests$symbolTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(10),
+														_0: _user$project$Vega$inMax(10),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(0.5),
+															_0: _user$project$Vega$inStep(0.5),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -14949,7 +14948,7 @@ var _user$project$MarkTests$symbolTest = function () {
 												_user$project$Vega$iRadio(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InOptions(
+														_0: _user$project$Vega$inOptions(
 															_user$project$Vega$vStrs(
 																{
 																	ctor: '::',
@@ -15149,13 +15148,13 @@ var _user$project$MarkTests$rectTest = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(1),
+									_0: _user$project$Vega$inMin(1),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(100),
+										_0: _user$project$Vega$inMax(100),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InStep(1),
+											_0: _user$project$Vega$inStep(1),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -15176,13 +15175,13 @@ var _user$project$MarkTests$rectTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(1),
+										_0: _user$project$Vega$inMin(1),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(100),
+											_0: _user$project$Vega$inMax(100),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -15203,13 +15202,13 @@ var _user$project$MarkTests$rectTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(1),
+											_0: _user$project$Vega$inMin(1),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(100),
+												_0: _user$project$Vega$inMax(100),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -15230,13 +15229,13 @@ var _user$project$MarkTests$rectTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(1),
+												_0: _user$project$Vega$inMin(1),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(100),
+													_0: _user$project$Vega$inMax(100),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -15257,13 +15256,13 @@ var _user$project$MarkTests$rectTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(50),
+														_0: _user$project$Vega$inMax(50),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(1),
+															_0: _user$project$Vega$inStep(1),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -15284,10 +15283,10 @@ var _user$project$MarkTests$rectTest = function () {
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InMin(0),
+														_0: _user$project$Vega$inMin(0),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InMax(10),
+															_0: _user$project$Vega$inMax(10),
 															_1: {ctor: '[]'}
 														}
 													})),
@@ -15307,7 +15306,7 @@ var _user$project$MarkTests$rectTest = function () {
 													_user$project$Vega$iRadio(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InOptions(
+															_0: _user$project$Vega$inOptions(
 																_user$project$Vega$vStrs(
 																	{
 																		ctor: '::',
@@ -15489,7 +15488,7 @@ var _user$project$MarkTests$pathTest = function () {
 							_user$project$Vega$iText(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InPlaceholder('SVG path string'),
+									_0: _user$project$Vega$inPlaceholder('SVG path string'),
 									_1: {ctor: '[]'}
 								})),
 						_1: {ctor: '[]'}
@@ -15508,13 +15507,13 @@ var _user$project$MarkTests$pathTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(10),
+										_0: _user$project$Vega$inMin(10),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(190),
+											_0: _user$project$Vega$inMax(190),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -15535,13 +15534,13 @@ var _user$project$MarkTests$pathTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(10),
+											_0: _user$project$Vega$inMin(10),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(190),
+												_0: _user$project$Vega$inMax(190),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -15562,13 +15561,13 @@ var _user$project$MarkTests$pathTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(10),
+													_0: _user$project$Vega$inMax(10),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(0.5),
+														_0: _user$project$Vega$inStep(0.5),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -15589,7 +15588,7 @@ var _user$project$MarkTests$pathTest = function () {
 											_user$project$Vega$iRadio(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InOptions(
+													_0: _user$project$Vega$inOptions(
 														_user$project$Vega$vStrs(
 															{
 																ctor: '::',
@@ -15771,13 +15770,13 @@ var _user$project$MarkTests$imageTest = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(0),
+									_0: _user$project$Vega$inMin(0),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(100),
+										_0: _user$project$Vega$inMax(100),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InStep(1),
+											_0: _user$project$Vega$inStep(1),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -15798,13 +15797,13 @@ var _user$project$MarkTests$imageTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(0),
+										_0: _user$project$Vega$inMin(0),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(100),
+											_0: _user$project$Vega$inMax(100),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -15825,13 +15824,13 @@ var _user$project$MarkTests$imageTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(200),
+												_0: _user$project$Vega$inMax(200),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -15852,13 +15851,13 @@ var _user$project$MarkTests$imageTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(200),
+													_0: _user$project$Vega$inMax(200),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -15894,7 +15893,7 @@ var _user$project$MarkTests$imageTest = function () {
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InOptions(
+														_0: _user$project$Vega$inOptions(
 															_user$project$Vega$vStrs(
 																{
 																	ctor: '::',
@@ -15927,7 +15926,7 @@ var _user$project$MarkTests$imageTest = function () {
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InOptions(
+															_0: _user$project$Vega$inOptions(
 																_user$project$Vega$vStrs(
 																	{
 																		ctor: '::',
@@ -16096,13 +16095,13 @@ var _user$project$MarkTests$groupTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(0),
+										_0: _user$project$Vega$inMin(0),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(200),
+											_0: _user$project$Vega$inMax(200),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -16123,13 +16122,13 @@ var _user$project$MarkTests$groupTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(200),
+												_0: _user$project$Vega$inMax(200),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -16150,13 +16149,13 @@ var _user$project$MarkTests$groupTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(200),
+													_0: _user$project$Vega$inMax(200),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -16177,13 +16176,13 @@ var _user$project$MarkTests$groupTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(200),
+														_0: _user$project$Vega$inMax(200),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(1),
+															_0: _user$project$Vega$inStep(1),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -16204,13 +16203,13 @@ var _user$project$MarkTests$groupTest = function () {
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InMin(0),
+														_0: _user$project$Vega$inMin(0),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InMax(50),
+															_0: _user$project$Vega$inMax(50),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$InStep(1),
+																_0: _user$project$Vega$inStep(1),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -16231,10 +16230,10 @@ var _user$project$MarkTests$groupTest = function () {
 													_user$project$Vega$iRange(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InMin(0),
+															_0: _user$project$Vega$inMin(0),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$InMax(10),
+																_0: _user$project$Vega$inMax(10),
 																_1: {ctor: '[]'}
 															}
 														})),
@@ -16254,7 +16253,7 @@ var _user$project$MarkTests$groupTest = function () {
 														_user$project$Vega$iRadio(
 															{
 																ctor: '::',
-																_0: _user$project$Vega$InOptions(
+																_0: _user$project$Vega$inOptions(
 																	_user$project$Vega$vStrs(
 																		{
 																			ctor: '::',
@@ -16777,7 +16776,7 @@ var _user$project$MarkTests$areaTest = function () {
 								_user$project$Vega$iSelect(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InOptions(
+										_0: _user$project$Vega$inOptions(
 											_user$project$Vega$vStrs(
 												{
 													ctor: '::',
@@ -16834,13 +16833,13 @@ var _user$project$MarkTests$areaTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(1),
+												_0: _user$project$Vega$inMax(1),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(5.0e-2),
+													_0: _user$project$Vega$inStep(5.0e-2),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -16861,13 +16860,13 @@ var _user$project$MarkTests$areaTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(20),
+													_0: _user$project$Vega$inMax(20),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -16888,13 +16887,13 @@ var _user$project$MarkTests$areaTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(10),
+														_0: _user$project$Vega$inMax(10),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(0.5),
+															_0: _user$project$Vega$inStep(0.5),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -16915,7 +16914,7 @@ var _user$project$MarkTests$areaTest = function () {
 												_user$project$Vega$iRadio(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InOptions(
+														_0: _user$project$Vega$inOptions(
 															_user$project$Vega$vStrs(
 																{
 																	ctor: '::',
@@ -17354,10 +17353,10 @@ var _user$project$MarkTests$arcTest = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(-6.28),
+									_0: _user$project$Vega$inMin(-6.28),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(6.28),
+										_0: _user$project$Vega$inMax(6.28),
 										_1: {ctor: '[]'}
 									}
 								})),
@@ -17377,10 +17376,10 @@ var _user$project$MarkTests$arcTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(-6.28),
+										_0: _user$project$Vega$inMin(-6.28),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(6.28),
+											_0: _user$project$Vega$inMax(6.28),
 											_1: {ctor: '[]'}
 										}
 									})),
@@ -17400,10 +17399,10 @@ var _user$project$MarkTests$arcTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(1.57),
+												_0: _user$project$Vega$inMax(1.57),
 												_1: {ctor: '[]'}
 											}
 										})),
@@ -17423,13 +17422,13 @@ var _user$project$MarkTests$arcTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(100),
+													_0: _user$project$Vega$inMax(100),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -17450,13 +17449,13 @@ var _user$project$MarkTests$arcTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(100),
+														_0: _user$project$Vega$inMax(100),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(1),
+															_0: _user$project$Vega$inStep(1),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -17477,13 +17476,13 @@ var _user$project$MarkTests$arcTest = function () {
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InMin(0),
+														_0: _user$project$Vega$inMin(0),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InMax(50),
+															_0: _user$project$Vega$inMax(50),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$InStep(1),
+																_0: _user$project$Vega$inStep(1),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -17504,13 +17503,13 @@ var _user$project$MarkTests$arcTest = function () {
 													_user$project$Vega$iRange(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InMin(0),
+															_0: _user$project$Vega$inMin(0),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$InMax(10),
+																_0: _user$project$Vega$inMax(10),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$InStep(0.5),
+																	_0: _user$project$Vega$inStep(0.5),
 																	_1: {ctor: '[]'}
 																}
 															}
@@ -17531,7 +17530,7 @@ var _user$project$MarkTests$arcTest = function () {
 														_user$project$Vega$iRadio(
 															{
 																ctor: '::',
-																_0: _user$project$Vega$InOptions(
+																_0: _user$project$Vega$inOptions(
 																	_user$project$Vega$vStrs(
 																		{
 																			ctor: '::',
@@ -17797,7 +17796,7 @@ var _user$project$MarkTests$lineTest = function () {
 								_user$project$Vega$iSelect(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InOptions(
+										_0: _user$project$Vega$inOptions(
 											_user$project$Vega$vStrs(
 												{
 													ctor: '::',
@@ -17854,13 +17853,13 @@ var _user$project$MarkTests$lineTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(1),
+												_0: _user$project$Vega$inMax(1),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(5.0e-2),
+													_0: _user$project$Vega$inStep(5.0e-2),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -17881,13 +17880,13 @@ var _user$project$MarkTests$lineTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(10),
+													_0: _user$project$Vega$inMax(10),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(0.5),
+														_0: _user$project$Vega$inStep(0.5),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -17909,7 +17908,7 @@ var _user$project$MarkTests$lineTest = function () {
 											_user$project$Vega$iSelect(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InOptions(
+													_0: _user$project$Vega$inOptions(
 														_user$project$Vega$vStrs(
 															{
 																ctor: '::',
@@ -17951,7 +17950,7 @@ var _user$project$MarkTests$lineTest = function () {
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InOptions(
+														_0: _user$project$Vega$inOptions(
 															_user$project$MarkTests$toValue(
 																{
 																	ctor: '::',
@@ -18302,13 +18301,13 @@ var _user$project$MarkTests$ruleTest = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(0),
+									_0: _user$project$Vega$inMin(0),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(200),
+										_0: _user$project$Vega$inMax(200),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InStep(1),
+											_0: _user$project$Vega$inStep(1),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -18329,13 +18328,13 @@ var _user$project$MarkTests$ruleTest = function () {
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InMin(0),
+										_0: _user$project$Vega$inMin(0),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InMax(200),
+											_0: _user$project$Vega$inMax(200),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InStep(1),
+												_0: _user$project$Vega$inStep(1),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -18356,13 +18355,13 @@ var _user$project$MarkTests$ruleTest = function () {
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InMin(0),
+											_0: _user$project$Vega$inMin(0),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$InMax(200),
+												_0: _user$project$Vega$inMax(200),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InStep(1),
+													_0: _user$project$Vega$inStep(1),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -18383,13 +18382,13 @@ var _user$project$MarkTests$ruleTest = function () {
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$InMin(0),
+												_0: _user$project$Vega$inMin(0),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$InMax(200),
+													_0: _user$project$Vega$inMax(200),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InStep(1),
+														_0: _user$project$Vega$inStep(1),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -18410,13 +18409,13 @@ var _user$project$MarkTests$ruleTest = function () {
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$InMin(0),
+													_0: _user$project$Vega$inMin(0),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$InMax(10),
+														_0: _user$project$Vega$inMax(10),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$InStep(0.5),
+															_0: _user$project$Vega$inStep(0.5),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -18438,7 +18437,7 @@ var _user$project$MarkTests$ruleTest = function () {
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$InOptions(
+														_0: _user$project$Vega$inOptions(
 															_user$project$Vega$vStrs(
 																{
 																	ctor: '::',
@@ -18480,7 +18479,7 @@ var _user$project$MarkTests$ruleTest = function () {
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',
-															_0: _user$project$Vega$InOptions(
+															_0: _user$project$Vega$inOptions(
 																_user$project$MarkTests$toValue(
 																	{
 																		ctor: '::',

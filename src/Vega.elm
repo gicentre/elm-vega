@@ -24,7 +24,7 @@ module Vega
         , Format
         , FormulaUpdate(..)
         , HAlign(..)
-        , InputProperty(..)
+        , InputProperty
         , LegendEncoding(..)
         , LegendOrientation(..)
         , LegendProperty(..)
@@ -181,6 +181,14 @@ module Vega
         , iTime
         , iWeek
         , ifElse
+        , inAutocomplete
+        , inDebounce
+        , inElement
+        , inMax
+        , inMin
+        , inOptions
+        , inPlaceholder
+        , inStep
         , keyValue
         , lab
         , legend
@@ -473,6 +481,14 @@ Functions and types for declaring the input data to the visualization.
 @docs iColor
 
 @docs InputProperty
+@docs inDebounce
+@docs inElement
+@docs inOptions
+@docs inMin
+@docs inMax
+@docs inStep
+@docs inPlaceholder
+@docs inAutocomplete
 @docs EventHandler
 @docs eventHandler
 @docs eUpdate
@@ -925,12 +941,11 @@ input element should be added. This allows the option of the input element to be
 outside the visualization container.
 -}
 type InputProperty
-    = Debounce Float
-    | Element String
+    = InDebounce Float
+    | InElement String
     | InOptions Value
     | InMin Float
     | InMax Float
-    | InName String
     | InStep Float
     | InPlaceholder String
     | InAutocomplete Bool
@@ -2771,6 +2786,75 @@ iMonth =
     IMonth
 
 
+{-| Determines if autocomplete should be turned on or off for intput elements
+that support it. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inAutocomplete : Bool -> InputProperty
+inAutocomplete =
+    InAutocomplete
+
+
+{-| Specify that event handling should be delayed until the specified milliseconds
+have elapsed since the last event was fired. This helps to limit event broadcasting.
+For more details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inDebounce : Float -> InputProperty
+inDebounce =
+    InDebounce
+
+
+{-| A CSS selector string indicating the parent element to which the input element
+should be added. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inElement : String -> InputProperty
+inElement =
+    InElement
+
+
+{-| The maximum value for a range slider input element. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMax : Float -> InputProperty
+inMax =
+    InMax
+
+
+{-| The minimum value for a range slider input element. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMin : Float -> InputProperty
+inMin =
+    InMin
+
+
+{-| A collection of options to be selected from by Radio or Select input elements.
+For more details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inOptions : Value -> InputProperty
+inOptions =
+    InOptions
+
+
+{-| The placehold text for input elemements before any value has been entered
+(for example initial text in a text field). For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inPlaceholder : String -> InputProperty
+inPlaceholder =
+    InPlaceholder
+
+
+{-| The step value (increment between adjacent selectable values) for a range
+slider input element. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inStep : Float -> InputProperty
+inStep =
+    InStep
+
+
 {-| A numeric input element.
 -}
 iNumber : List InputProperty -> Bind
@@ -4045,11 +4129,8 @@ inputProperty prop =
         InStep x ->
             ( "step", JE.float x )
 
-        Debounce x ->
+        InDebounce x ->
             ( "debounce", JE.float x )
-
-        InName s ->
-            ( "name", JE.string s )
 
         InOptions opts ->
             ( "options", valueSpec opts )
@@ -4057,7 +4138,7 @@ inputProperty prop =
         InPlaceholder el ->
             ( "placeholder", JE.string el )
 
-        Element el ->
+        InElement el ->
             ( "element", JE.string el )
 
         -- Autocomplete appears to be undocumented in https://vega.github.io/vega/docs/signals/

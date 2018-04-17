@@ -9710,17 +9710,11 @@ var _user$project$Vega$inputProperty = function (prop) {
 				_0: 'step',
 				_1: _elm_lang$core$Json_Encode$float(_p43._0)
 			};
-		case 'Debounce':
+		case 'InDebounce':
 			return {
 				ctor: '_Tuple2',
 				_0: 'debounce',
 				_1: _elm_lang$core$Json_Encode$float(_p43._0)
-			};
-		case 'InName':
-			return {
-				ctor: '_Tuple2',
-				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p43._0)
 			};
 		case 'InOptions':
 			return {
@@ -9734,7 +9728,7 @@ var _user$project$Vega$inputProperty = function (prop) {
 				_0: 'placeholder',
 				_1: _elm_lang$core$Json_Encode$string(_p43._0)
 			};
-		case 'Element':
+		case 'InElement':
 			return {
 				ctor: '_Tuple2',
 				_0: 'element',
@@ -12356,30 +12350,35 @@ var _user$project$Vega$AlignCenter = {ctor: 'AlignCenter'};
 var _user$project$Vega$InAutocomplete = function (a) {
 	return {ctor: 'InAutocomplete', _0: a};
 };
+var _user$project$Vega$inAutocomplete = _user$project$Vega$InAutocomplete;
 var _user$project$Vega$InPlaceholder = function (a) {
 	return {ctor: 'InPlaceholder', _0: a};
 };
+var _user$project$Vega$inPlaceholder = _user$project$Vega$InPlaceholder;
 var _user$project$Vega$InStep = function (a) {
 	return {ctor: 'InStep', _0: a};
 };
-var _user$project$Vega$InName = function (a) {
-	return {ctor: 'InName', _0: a};
-};
+var _user$project$Vega$inStep = _user$project$Vega$InStep;
 var _user$project$Vega$InMax = function (a) {
 	return {ctor: 'InMax', _0: a};
 };
+var _user$project$Vega$inMax = _user$project$Vega$InMax;
 var _user$project$Vega$InMin = function (a) {
 	return {ctor: 'InMin', _0: a};
 };
+var _user$project$Vega$inMin = _user$project$Vega$InMin;
 var _user$project$Vega$InOptions = function (a) {
 	return {ctor: 'InOptions', _0: a};
 };
-var _user$project$Vega$Element = function (a) {
-	return {ctor: 'Element', _0: a};
+var _user$project$Vega$inOptions = _user$project$Vega$InOptions;
+var _user$project$Vega$InElement = function (a) {
+	return {ctor: 'InElement', _0: a};
 };
-var _user$project$Vega$Debounce = function (a) {
-	return {ctor: 'Debounce', _0: a};
+var _user$project$Vega$inElement = _user$project$Vega$InElement;
+var _user$project$Vega$InDebounce = function (a) {
+	return {ctor: 'InDebounce', _0: a};
 };
+var _user$project$Vega$inDebounce = _user$project$Vega$InDebounce;
 var _user$project$Vega$None = {ctor: 'None'};
 var _user$project$Vega$BottomLeft = {ctor: 'BottomLeft'};
 var _user$project$Vega$Bottom = {ctor: 'Bottom'};
@@ -13915,7 +13914,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 							_user$project$Vega$iSelect(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InOptions(
+									_0: _user$project$Vega$inOptions(
 										_user$project$Vega$vStrs(
 											{
 												ctor: '::',
@@ -13947,7 +13946,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 								_user$project$Vega$iRadio(
 									{
 										ctor: '::',
-										_0: _user$project$Vega$InOptions(
+										_0: _user$project$Vega$inOptions(
 											_user$project$Vega$vStrs(
 												{
 													ctor: '::',
@@ -13976,7 +13975,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									_user$project$Vega$iRadio(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$InOptions(
+											_0: _user$project$Vega$inOptions(
 												_user$project$Vega$vStrs(
 													{
 														ctor: '::',
@@ -14377,13 +14376,13 @@ var _user$project$TransformTests$packTest1 = function () {
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$InMin(0),
+									_0: _user$project$Vega$inMin(0),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$InMax(10),
+										_0: _user$project$Vega$inMax(10),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$InStep(0.1),
+											_0: _user$project$Vega$inStep(0.1),
 											_1: {ctor: '[]'}
 										}
 									}
