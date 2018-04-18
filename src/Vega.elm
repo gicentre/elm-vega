@@ -7,6 +7,7 @@ module Vega
         , Bind
         , BoolSig
         , CInterpolate
+        , Clip
         , ColorSchemeProperty
         , ColorValue
         , Comparator
@@ -56,16 +57,16 @@ module Vega
         , StackOffset(OfCenter, OfNormalize, OfZero)
         , StackProperty
         , Str
-        , StrokeCap(..)
-        , StrokeJoin(..)
-        , Symbol(..)
-        , TextDirection(..)
+        , StrokeCap(CButt, CRound, CSquare)
+        , StrokeJoin(JBevel, JMiter, JRound)
+        , Symbol(SymCircle, SymCross, SymDiamond, SymSquare, SymTriangleDown, SymTriangleLeft, SymTriangleRight, SymTriangleUp)
+        , TextDirection(LeftToRight, RightToLeft)
         , TimeUnit(Day, Hour, Millisecond, Minute, Month, Second, Week, Year)
-        , TopMarkProperty(..)
+        , TopMarkProperty
         , Transform(..)
         , Trigger
         , TriggerProperty(..)
-        , VAlign(..)
+        , VAlign(AlignBottom, AlignMiddle, AlignTop, Alphabetic)
         , VProperty
         , Value
         , agAs
@@ -111,6 +112,9 @@ module Vega
         , cRGB
         , ci0
         , ci1
+        , clEnabled
+        , clPath
+        , clSphere
         , coField
         , coOrder
         , combineSpecs
@@ -225,6 +229,18 @@ module Vega
         , leZIndex
         , legend
         , legends
+        , mClip
+        , mDescription
+        , mEncode
+        , mFrom
+        , mGroup
+        , mInteractive
+        , mKey
+        , mName
+        , mOn
+        , mSort
+        , mStyle
+        , mTransform
         , maAlign
         , maAngle
         , maAspect
@@ -386,6 +402,7 @@ module Vega
         , strokeJoinLabel
         , strs
         , sum
+        , symPath
         , symbolLabel
         , toVega
         , topojsonFeature
@@ -622,6 +639,22 @@ Functions and types for declaring the input data to the visualization.
 @docs mark
 @docs Mark
 @docs TopMarkProperty
+@docs mClip
+@docs mDescription
+@docs mEncode
+@docs mFrom
+@docs mInteractive
+@docs mKey
+@docs mName
+@docs mOn
+@docs mSort
+@docs mTransform
+@docs mStyle
+@docs mGroup
+@docs Clip
+@docs clEnabled
+@docs clPath
+@docs clSphere
 @docs srData
 @docs Facet
 @docs srFacet
@@ -702,6 +735,7 @@ Functions and types for declaring the input data to the visualization.
 @docs VAlign
 @docs vAlignLabel
 @docs Symbol
+@docs symPath
 @docs symbolLabel
 @docs StrokeCap
 @docs strokeCapLabel
@@ -1026,6 +1060,15 @@ type CInterpolate
     | HslLong
     | Lab
     | Rgb Float
+
+
+{-| Specify a clip property to limit the area in which a set of marks is visible.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#clip).
+-}
+type Clip
+    = ClEnabled BoolSig
+    | ClPath Str
+    | ClSphere Str
 
 
 {-| Defines a custom colour value. Can use a variety of colour spaces such as RGB,
@@ -1823,8 +1866,7 @@ type StrokeJoin
     | JBevel
 
 
-{-| Identifies a type of symbol. The `SymPath` is used to define custom shapes as an
-[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+{-| Identifies a type of symbol.
 -}
 type Symbol
     = SymCircle
@@ -1864,27 +1906,20 @@ type TimeUnit
 
 {-| Indicates the charactersitcs of a mark. For further
 details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
-
-Whole specifications can nested within the `Group` mark (including further nested
-group specifications) by specifying `MType Group` and suppyling the specification
-as a series of properties supplied to `MGroup`. For example,
-
-    TODO: XXX MGroup example
-
 -}
 type TopMarkProperty
     = MType Mark
-    | MClip Bool
+    | MClip Clip
     | MDescription String
     | MEncode (List EncodingProperty)
     | MFrom (List Source)
-    | MInteractive Bool
-    | MKey String
+    | MInteractive BoolSig
+    | MKey Field
     | MName String
     | MOn (List Trigger)
     | MSort (List Comparator)
-      -- TODO: MTransform (List Transform) combining with Data transform functions
-    | MRole String
+    | MTransform (List Transform)
+    | MRole String -- Note: Vega docs recommend this is not set explicitly
     | MStyle (List String)
     | MGroup (List ( VProperty, Spec ))
 
@@ -2395,6 +2430,36 @@ literal, a signal, or subject to some scale.
 cLAB : List Value -> List Value -> List Value -> ColorValue
 cLAB =
     LAB
+
+
+{-| Specify whether or not clipping should be applied to a set of marks within a
+group mark. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#clip).
+-}
+clEnabled : BoolSig -> Clip
+clEnabled =
+    ClEnabled
+
+
+{-| Specify an arbitrary clipping path to be applied to a set of marks within a
+region. The path should be a valid
+[SVG path string](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+For details see the [Vega documentation](https://vega.github.io/vega/docs/marks/#clip).
+-}
+clPath : Str -> Clip
+clPath =
+    ClPath
+
+
+{-| Specify a cartogrpahic projection with which to clip all marks to a projected
+sphere of the globe. This is useful in conjunction with map projections that
+otherwise included projected content (such as graticule lines) outside the bounds
+of the globe. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#clip).
+-}
+clSphere : Str -> Clip
+clSphere =
+    ClSphere
 
 
 {-| The fields to sort when defining a sorting operation. For details, see the
@@ -4188,6 +4253,23 @@ maZIndex =
     MZIndex
 
 
+{-| Indicates whether or how marks should be clipped to a specified shape.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mClip : Clip -> TopMarkProperty
+mClip =
+    MClip
+
+
+{-| Specify a description of a mark, useful for inline comments. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mDescription : String -> TopMarkProperty
+mDescription =
+    MDescription
+
+
 {-| An aggregating operation to calculate the mean of a field. Synonymous with `average`.
 -}
 mean : Operation
@@ -4202,6 +4284,46 @@ median =
     Median
 
 
+{-| Specify a set of visual encoding rules for a mark. For further details see
+the [Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mEncode : List EncodingProperty -> TopMarkProperty
+mEncode =
+    MEncode
+
+
+{-| Specify the data source to be visualized by a mark. If not specified, a single
+element data set containing an empty object is assumed. The source can either be
+a data set to use or a faceting directive to subdivide a data set across a set
+of group marks. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mFrom : List Source -> TopMarkProperty
+mFrom =
+    MFrom
+
+
+{-| Assemble a group of top-level marks. This can be used to create nested groups
+of marks within a `Group` mark (including further nested group specifications) by
+suppyling the specification as a series of properties. For example,
+
+TODO: Check for valid syntax in example.
+
+    marks
+        << mark Group
+            [ mFrom [ srData (str "myData") ]
+            , mGroup [ mkGroup1 [], mkGroup2 [], mkGroup3 [] ]
+            ]
+
+For details on the group mark see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/group/).
+
+-}
+mGroup : List ( VProperty, Spec ) -> TopMarkProperty
+mGroup =
+    MGroup
+
+
 {-| An aggregating operation to calculate the minimum value in a field.
 -}
 minimum : Operation
@@ -4214,6 +4336,82 @@ minimum =
 missing : Operation
 missing =
     Missing
+
+
+{-| Specify whether a mark can serve as an input event source. If false, no
+mouse or touch events corresponding to the mark will be generated. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mInteractive : BoolSig -> TopMarkProperty
+mInteractive =
+    MInteractive
+
+
+{-| Specify a data field to use as a unique key for data binding. When a
+visualization’s data is updated, the key value will be used to match data elements
+to existing mark instances. Use a key field to enable object constancy for
+transitions over dynamic data. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mKey : Field -> TopMarkProperty
+mKey =
+    MKey
+
+
+{-| Specify a unique name for a mark. This name can be used to refer to the mark
+within an event stream definition. SVG renderers will add this name value as a
+CSS class name on the enclosing SVG group (g) element containing the mark instances.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mName : String -> TopMarkProperty
+mName =
+    MName
+
+
+{-| Specify a set of triggers for modifying a mark's properties in response to
+signal changes. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mOn : List Trigger -> TopMarkProperty
+mOn =
+    MOn
+
+
+{-| Specify a comparator for sorting mark items. The sort order will determine
+the default rendering order. The comparator is defined over generated scenegraph
+items and sorting is performed after encodings are computed, allowing items to
+be sorted by size or position. To sort by underlying data properties in addition
+to mark item properties, append the prefix `datum` to a field name. For further
+details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mSort : List Comparator -> TopMarkProperty
+mSort =
+    MSort
+
+
+{-| Specifye the names of custom styles to apply to a mark. A style is a named
+collection of mark property defaults defined within the configuration. These
+properties will be applied to the mark’s enter encoding set, with later styles
+overriding earlier styles. Any properties explicitly defined within the mark’s
+`encode` block will override a style default. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mStyle : List String -> TopMarkProperty
+mStyle =
+    MStyle
+
+
+{-| Specify a set of post-encoding transforms to be applied after any encode
+blocks, that operate directly on mark scenegraph items (not backing data objects).
+These can be useful for performing layout with transforms that can set x, y,
+width, height, etc. properties. Only data transforms that do not generate or
+filter data objects should be used. For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks).
+-}
+mTransform : List Transform -> TopMarkProperty
+mTransform =
+    MTransform
 
 
 {-| Scale a temporal range to use human-friendly 'nice' day values. For full
@@ -5062,6 +5260,14 @@ symbolLabel sym =
             svgPath
 
 
+{-| Specity a custom symbol shape as an
+[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+-}
+symPath : String -> Symbol
+symPath =
+    SymPath
+
+
 {-| Indicates a topoJSON feature format. The first parameter should be the name
 of the object set to extract. Typically used when specifying a data url.
 -}
@@ -5575,6 +5781,19 @@ boolSpec b =
 
         BoolSignal sig ->
             JE.object [ signalReferenceProperty sig ]
+
+
+clipSpec : Clip -> Spec
+clipSpec clip =
+    case clip of
+        ClEnabled b ->
+            boolSpec b
+
+        ClPath p ->
+            JE.object [ ( "path", strSpec p ) ]
+
+        ClSphere s ->
+            JE.object [ ( "sphere", strSpec s ) ]
 
 
 colorProperty : ColorValue -> LabelledSpec
@@ -6780,8 +6999,8 @@ topMarkProperty mProp =
         MType m ->
             [ ( "type", JE.string (markLabel m) ) ]
 
-        MClip b ->
-            [ ( "clip", JE.bool b ) ]
+        MClip clip ->
+            [ ( "clip", clipSpec clip ) ]
 
         MDescription s ->
             [ ( "description", JE.string s ) ]
@@ -6793,10 +7012,10 @@ topMarkProperty mProp =
             [ ( "from", JE.object (List.map sourceProperty src) ) ]
 
         MInteractive b ->
-            [ ( "interactive", JE.bool b ) ]
+            [ ( "interactive", boolSpec b ) ]
 
-        MKey s ->
-            [ ( "key", JE.string s ) ]
+        MKey f ->
+            [ ( "key", fieldSpec f ) ]
 
         MName s ->
             [ ( "name", JE.string s ) ]
@@ -6810,6 +7029,9 @@ topMarkProperty mProp =
 
         MSort comp ->
             [ ( "sort", JE.object (List.map comparatorProperty comp) ) ]
+
+        MTransform trans ->
+            [ ( "transform", JE.list (List.map transformSpec trans) ) ]
 
         MStyle ss ->
             [ ( "style", JE.list (List.map JE.string ss) ) ]

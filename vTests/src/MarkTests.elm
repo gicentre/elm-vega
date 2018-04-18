@@ -39,14 +39,14 @@ arcTest =
         mk =
             marks
                 << mark Symbol
-                    [ MInteractive False
-                    , MEncode
+                    [ mInteractive (boolean False)
+                    , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Arc
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -112,8 +112,8 @@ areaTest =
         mk =
             marks
                 << mark Area
-                    [ MFrom [ srData (str "table") ]
-                    , MEncode
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vScale (fName "xscale"), vField (fName "u") ]
@@ -162,7 +162,7 @@ groupTest =
         mk =
             marks
                 << mark Group
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -178,15 +178,15 @@ groupTest =
                             ]
                         , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
-                    , MGroup [ ds, nestedMk [] ]
+                    , mGroup [ ds, nestedMk [] ]
                     ]
 
         nestedMk =
             marks
                 << mark Rect
-                    [ MFrom [ srData (str "table") ]
-                    , MInteractive False
-                    , MEncode
+                    [ mFrom [ srData (str "table") ]
+                    , mInteractive (boolean False)
+                    , mEncode
                         [ enEnter
                             [ maX [ vField (fName "x") ]
                             , maY [ vField (fName "y") ]
@@ -218,7 +218,7 @@ imageTest =
         mk =
             marks
                 << mark Image
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
                         , enUpdate
                             [ maOpacity [ vNum 1 ]
@@ -280,8 +280,8 @@ lineTest =
         mk =
             marks
                 << mark Line
-                    [ MFrom [ srData (str "table") ]
-                    , MEncode
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vScale (fName "xscale"), vField (fName "u") ]
@@ -316,7 +316,7 @@ pathTest =
         mk =
             marks
                 << mark Path
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -351,7 +351,7 @@ rectTest =
         mk =
             marks
                 << mark Rect
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -388,7 +388,7 @@ ruleTest =
         mk =
             marks
                 << mark Rule
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -443,7 +443,7 @@ symbolTest =
         mk =
             marks
                 << mark Symbol
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
@@ -483,14 +483,14 @@ textTest =
         mk =
             marks
                 << mark Symbol
-                    [ MInteractive False
-                    , MEncode
+                    [ mInteractive (boolean False)
+                    , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
                 << mark Text
-                    [ MEncode
+                    [ mEncode
                         [ enEnter [ maFill [ vStr "#000" ], maText [ vStr "Text Label" ] ]
                         , enUpdate
                             [ maOpacity [ vNum 1 ]
@@ -554,8 +554,8 @@ trailTest =
         mk =
             marks
                 << mark Trail
-                    [ MFrom [ srData (str "table") ]
-                    , MEncode
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ] ]
                         , enUpdate
                             [ maX [ vScale (fName "xscale"), vField (fName "u") ]
