@@ -17,7 +17,7 @@ when generating dashed line arrays.
 -}
 toValue : List ( Float, Float ) -> Value
 toValue pairs =
-    pairs |> List.map (\( a, b ) -> vNumbers [ a, b ]) |> vValues
+    pairs |> List.map (\( a, b ) -> vNums [ a, b ]) |> vValues
 
 
 arcTest : Spec
@@ -25,23 +25,23 @@ arcTest =
     let
         si =
             signals
-                << signal "startAngle" [ SiValue (vNumber -0.73), SiBind (iRange [ inMin -6.28, inMax 6.28 ]) ]
-                << signal "endAngle" [ SiValue (vNumber 0.73), SiBind (iRange [ inMin -6.28, inMax 6.28 ]) ]
-                << signal "padAngle" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 1.57 ]) ]
-                << signal "innerRadius" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
-                << signal "outerRadius" [ SiValue (vNumber 50), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "startAngle" [ SiValue (vNum -0.73), SiBind (iRange [ inMin -6.28, inMax 6.28 ]) ]
+                << signal "endAngle" [ SiValue (vNum 0.73), SiBind (iRange [ inMin -6.28, inMax 6.28 ]) ]
+                << signal "padAngle" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 1.57 ]) ]
+                << signal "innerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
+                << signal "outerRadius" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
-                << signal "x" [ SiValue (vNumber 100) ]
-                << signal "y" [ SiValue (vNumber 100) ]
+                << signal "x" [ SiValue (vNum 100) ]
+                << signal "y" [ SiValue (vNum 100) ]
 
         mk =
             marks
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNumber 25 ] ]
+                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
@@ -58,11 +58,11 @@ arcTest =
                             , maCornerRadius [ vSignal "cornerRadius" ]
                             , maPadAngle [ vSignal "padAngle" ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -75,8 +75,8 @@ areaTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -86,13 +86,13 @@ areaTest =
                 << scale "xscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (RDefault RWidth)
+                    , SRange (raDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (RDefault RHeight)
+                    , SRange (raDefault RHeight)
                     , SZero True
                     , SNice NTrue
                     ]
@@ -104,9 +104,9 @@ areaTest =
                     [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
-                << signal "tension" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
-                << signal "y2" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 20, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "tension" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
+                << signal "y2" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 20, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -122,12 +122,12 @@ areaTest =
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maInterpolate [ vSignal "interpolate" ]
                             , maTension [ vSignal "tension" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -140,10 +140,10 @@ groupTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (dNumbers [ 5, -5, 60 ])
-                << dataColumn "y" (dNumbers [ 5, 70, 120 ])
-                << dataColumn "w" (dNumbers [ 100, 40, 100 ])
-                << dataColumn "h" (dNumbers [ 30, 40, 20 ])
+                << dataColumn "x" (daNums [ 5, -5, 60 ])
+                << dataColumn "y" (daNums [ 5, 70, 120 ])
+                << dataColumn "w" (daNums [ 100, 40, 100 ])
+                << dataColumn "h" (daNums [ 30, 40, 20 ])
 
         ds =
             dataSource [ table [] ]
@@ -151,12 +151,12 @@ groupTest =
         si =
             signals
                 << signal "groupClip" [ SiValue (vBool False), SiBind (iCheckbox []) ]
-                << signal "x" [ SiValue (vNumber 25), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 25), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "w" [ SiValue (vNumber 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "h" [ SiValue (vNumber 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10 ]) ]
+                << signal "x" [ SiValue (vNum 25), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 25), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "w" [ SiValue (vNum 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "h" [ SiValue (vNum 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -170,13 +170,13 @@ groupTest =
                             , maWidth [ vSignal "w" ]
                             , maHeight [ vSignal "h" ]
                             , maGroupClip [ vSignal "groupClip" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maCornerRadius [ vSignal "cornerRadius" ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     , MGroup [ ds, nestedMk [] ]
                     ]
@@ -207,10 +207,10 @@ imageTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (vNumber 75), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 75), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
-                << signal "w" [ SiValue (vNumber 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "h" [ SiValue (vNumber 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "x" [ SiValue (vNum 75), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 75), SiBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
+                << signal "w" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "h" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "aspect" [ SiValue (vBool True), SiBind (iCheckbox []) ]
                 << signal "align" [ SiValue (vStr "left"), SiBind (iSelect [ inOptions (vStrs [ "left", "cenEnter", "right" ]) ]) ]
                 << signal "baseline" [ SiValue (vStr "top"), SiBind (iSelect [ inOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
@@ -221,7 +221,7 @@ imageTest =
                     [ MEncode
                         [ enEnter [ maUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
                         , enUpdate
-                            [ maOpacity [ vNumber 1 ]
+                            [ maOpacity [ vNum 1 ]
                             , maX [ vSignal "x" ]
                             , maY [ vSignal "y" ]
                             , maWidth [ vSignal "w" ]
@@ -230,7 +230,7 @@ imageTest =
                             , maAlign [ vSignal "align" ]
                             , maBaseline [ vSignal "baseline" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -243,8 +243,8 @@ lineTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -254,13 +254,13 @@ lineTest =
                 << scale "xscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (RDefault RWidth)
+                    , SRange (raDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (RDefault RHeight)
+                    , SRange (raDefault RHeight)
                     , SZero True
                     , SNice NTrue
                     ]
@@ -272,10 +272,10 @@ lineTest =
                     [ SiValue (vStr (markInterpolationLabel Linear))
                     , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
-                << signal "tension" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "tension" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "strokeCap" [ SiValue (vStr (strokeCapLabel CButt)), SiBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
-                << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
+                << signal "strokeDash" [ SiValue (vNums [ 1, 0 ]), SiBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
@@ -292,9 +292,9 @@ lineTest =
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maStrokeDash [ vSignal "strokeDash" ]
                             , maStrokeCap [ vSignal "strokeCap" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -308,9 +308,9 @@ pathTest =
         si =
             signals
                 << signal "path" [ SiValue (vStr "M-50,-50 L50,50 V-50 L-50,50 Z"), SiBind (iText [ inPlaceholder "SVG path string" ]) ]
-                << signal "x" [ SiValue (vNumber 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "x" [ SiValue (vNum 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -322,12 +322,12 @@ pathTest =
                             [ maX [ vSignal "x" ]
                             , maY [ vSignal "y" ]
                             , maPath [ vSignal "path" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -340,12 +340,12 @@ rectTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (vNumber 50), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 50), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
-                << signal "w" [ SiValue (vNumber 100), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
-                << signal "h" [ SiValue (vNumber 100), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10 ]) ]
+                << signal "x" [ SiValue (vNum 50), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 50), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
+                << signal "w" [ SiValue (vNum 100), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
+                << signal "h" [ SiValue (vNum 100), SiBind (iRange [ inMin 1, inMax 100, inStep 1 ]) ]
+                << signal "cornerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 50, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -358,13 +358,13 @@ rectTest =
                             , maY [ vSignal "y" ]
                             , maWidth [ vSignal "w" ]
                             , maHeight [ vSignal "h" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maCornerRadius [ vSignal "cornerRadius" ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -377,13 +377,13 @@ ruleTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (vNumber 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "x2" [ SiValue (vNumber 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "y2" [ SiValue (vNumber 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "x" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "x2" [ SiValue (vNum 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "y2" [ SiValue (vNum 150), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "strokeCap" [ SiValue (vStr (strokeCapLabel CButt)), SiBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
-                << signal "strokeDash" [ SiValue (vNumbers [ 1, 0 ]), SiBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
+                << signal "strokeDash" [ SiValue (vNums [ 1, 0 ]), SiBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
@@ -398,9 +398,9 @@ ruleTest =
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maStrokeDash [ vSignal "strokeDash" ]
                             , maStrokeCap [ vSignal "strokeCap" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -434,10 +434,10 @@ symbolTest =
                             ]
                         )
                     ]
-                << signal "size" [ SiValue (vNumber 2000), SiBind (iRange [ inMin 0, inMax 10000, inStep 100 ]) ]
-                << signal "x" [ SiValue (vNumber 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
-                << signal "strokeWidth" [ SiValue (vNumber 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "size" [ SiValue (vNum 2000), SiBind (iRange [ inMin 0, inMax 10000, inStep 100 ]) ]
+                << signal "x" [ SiValue (vNum 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 100), SiBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
+                << signal "strokeWidth" [ SiValue (vNum 4), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "color" [ SiValue (vStr "both"), SiBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -450,12 +450,12 @@ symbolTest =
                             , maY [ vSignal "y" ]
                             , maSize [ vSignal "size" ]
                             , maShape [ vSignal "shape" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -468,12 +468,12 @@ textTest =
     let
         si =
             signals
-                << signal "x" [ SiValue (vNumber 100), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "y" [ SiValue (vNumber 100), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "dx" [ SiValue (vNumber 0), SiBind (iRange [ inMin -20, inMax 20, inStep 1 ]) ]
-                << signal "angle" [ SiValue (vNumber 0), SiBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
-                << signal "fontSize" [ SiValue (vNumber 10), SiBind (iRange [ inMin 1, inMax 36, inStep 1 ]) ]
-                << signal "limit" [ SiValue (vNumber 0), SiBind (iRange [ inMin 0, inMax 150, inStep 1 ]) ]
+                << signal "x" [ SiValue (vNum 100), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "y" [ SiValue (vNum 100), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
+                << signal "dx" [ SiValue (vNum 0), SiBind (iRange [ inMin -20, inMax 20, inStep 1 ]) ]
+                << signal "angle" [ SiValue (vNum 0), SiBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "fontSize" [ SiValue (vNum 10), SiBind (iRange [ inMin 1, inMax 36, inStep 1 ]) ]
+                << signal "limit" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 150, inStep 1 ]) ]
                 << signal "align" [ SiValue (vStr (hAlignLabel AlignLeft)), SiBind (iSelect [ inOptions (vStrs [ "left", "cenEnter", "right" ]) ]) ]
                 << signal "baseline" [ SiValue (vStr (vAlignLabel Alphabetic)), SiBind (iSelect [ inOptions (vStrs [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
                 << signal "font" [ SiValue (vStr "sans-serif"), SiBind (iRadio [ inOptions (vStrs [ "sans-serif", "serif", "monospace" ]) ]) ]
@@ -485,7 +485,7 @@ textTest =
                 << mark Symbol
                     [ MInteractive False
                     , MEncode
-                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNumber 25 ] ]
+                        [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
@@ -493,7 +493,7 @@ textTest =
                     [ MEncode
                         [ enEnter [ maFill [ vStr "#000" ], maText [ vStr "Text Label" ] ]
                         , enUpdate
-                            [ maOpacity [ vNumber 1 ]
+                            [ maOpacity [ vNum 1 ]
                             , maX [ vSignal "x" ]
                             , maY [ vSignal "y" ]
                             , maDx [ vSignal "dx" ]
@@ -506,7 +506,7 @@ textTest =
                             , maFontWeight [ vSignal "fontWeight" ]
                             , maLimit [ vSignal "limit" ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -519,8 +519,8 @@ trailTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (dNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (dNumbers [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -530,26 +530,26 @@ trailTest =
                 << scale "xscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (RDefault RWidth)
+                    , SRange (raDefault RWidth)
                     , SZero False
                     ]
                 << scale "yscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (RDefault RHeight)
+                    , SRange (raDefault RHeight)
                     , SZero True
                     , SNice NTrue
                     ]
                 << scale "zscale"
                     [ SType ScLinear
-                    , SRange (RNumbers [ 5, 1 ])
+                    , SRange (raNums [ 5, 1 ])
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
 
         si =
             signals
                 << signal "defined" [ SiValue (vBool True), SiBind (iCheckbox []) ]
-                << signal "size" [ SiValue (vNumber 5), SiBind (iRange [ inMin 1, inMax 10 ]) ]
+                << signal "size" [ SiValue (vNum 5), SiBind (iRange [ inMin 1, inMax 10 ]) ]
 
         mk =
             marks
@@ -562,9 +562,9 @@ trailTest =
                             , maY [ vScale (fName "yscale"), vField (fName "v") ]
                             , maSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
-                            , maOpacity [ vNumber 1 ]
+                            , maOpacity [ vNum 1 ]
                             ]
-                        , enHover [ maOpacity [ vNumber 0.5 ] ]
+                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in

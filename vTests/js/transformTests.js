@@ -9350,13 +9350,13 @@ var _user$project$Vega$valueProperty = function (val) {
 				_0: 'round',
 				_1: _elm_lang$core$Json_Encode$bool(_p36._0)
 			};
-		case 'VNumber':
+		case 'VNum':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
 				_1: _elm_lang$core$Json_Encode$float(_p36._0)
 			};
-		case 'VNumbers':
+		case 'VNums':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
@@ -9499,9 +9499,9 @@ var _user$project$Vega$valueSpec = function (val) {
 					},
 					_1: {ctor: '[]'}
 				});
-		case 'VNumber':
+		case 'VNum':
 			return _elm_lang$core$Json_Encode$float(_p37._0);
-		case 'VNumbers':
+		case 'VNums':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p37._0));
 		case 'VKeyValue':
@@ -11556,7 +11556,7 @@ var _user$project$Vega$dataColumn = F2(
 							};
 						},
 						_p73._0));
-			case 'DNumbers':
+			case 'DNums':
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -12922,28 +12922,38 @@ var _user$project$Vega$SType = function (a) {
 var _user$project$Vega$RDefault = function (a) {
 	return {ctor: 'RDefault', _0: a};
 };
+var _user$project$Vega$raDefault = _user$project$Vega$RDefault;
 var _user$project$Vega$RStep = function (a) {
 	return {ctor: 'RStep', _0: a};
 };
+var _user$project$Vega$raStep = _user$project$Vega$RStep;
 var _user$project$Vega$RData = function (a) {
 	return {ctor: 'RData', _0: a};
 };
+var _user$project$Vega$raData = _user$project$Vega$RData;
 var _user$project$Vega$RScheme = F2(
 	function (a, b) {
 		return {ctor: 'RScheme', _0: a, _1: b};
 	});
+var _user$project$Vega$raScheme = function (s) {
+	return _user$project$Vega$RScheme(s);
+};
 var _user$project$Vega$RSignal = function (a) {
 	return {ctor: 'RSignal', _0: a};
 };
+var _user$project$Vega$raSignal = _user$project$Vega$RSignal;
 var _user$project$Vega$RValues = function (a) {
 	return {ctor: 'RValues', _0: a};
 };
+var _user$project$Vega$raValues = _user$project$Vega$RValues;
 var _user$project$Vega$RStrs = function (a) {
 	return {ctor: 'RStrs', _0: a};
 };
-var _user$project$Vega$RNumbers = function (a) {
-	return {ctor: 'RNumbers', _0: a};
+var _user$project$Vega$raStrs = _user$project$Vega$RStrs;
+var _user$project$Vega$RNums = function (a) {
+	return {ctor: 'RNums', _0: a};
 };
+var _user$project$Vega$raNums = _user$project$Vega$RNums;
 var _user$project$Vega$SExtent = F2(
 	function (a, b) {
 		return {ctor: 'SExtent', _0: a, _1: b};
@@ -13102,7 +13112,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 		case 'SRange':
 			var _p83 = _p82._0;
 			switch (_p83.ctor) {
-				case 'RNumbers':
+				case 'RNums':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
@@ -13497,14 +13507,15 @@ var _user$project$Vega$AlignTop = {ctor: 'AlignTop'};
 var _user$project$Vega$DBools = function (a) {
 	return {ctor: 'DBools', _0: a};
 };
-var _user$project$Vega$DNumbers = function (a) {
-	return {ctor: 'DNumbers', _0: a};
+var _user$project$Vega$daBools = _user$project$Vega$DBools;
+var _user$project$Vega$DNums = function (a) {
+	return {ctor: 'DNums', _0: a};
 };
-var _user$project$Vega$dNumbers = _user$project$Vega$DNumbers;
+var _user$project$Vega$daNums = _user$project$Vega$DNums;
 var _user$project$Vega$DStrs = function (a) {
 	return {ctor: 'DStrs', _0: a};
 };
-var _user$project$Vega$dStrs = _user$project$Vega$DStrs;
+var _user$project$Vega$daStrs = _user$project$Vega$DStrs;
 var _user$project$Vega$StrSignal = function (a) {
 	return {ctor: 'StrSignal', _0: a};
 };
@@ -13599,14 +13610,14 @@ var _user$project$Vega$VBool = function (a) {
 	return {ctor: 'VBool', _0: a};
 };
 var _user$project$Vega$vBool = _user$project$Vega$VBool;
-var _user$project$Vega$VNumbers = function (a) {
-	return {ctor: 'VNumbers', _0: a};
+var _user$project$Vega$VNums = function (a) {
+	return {ctor: 'VNums', _0: a};
 };
-var _user$project$Vega$vNumbers = _user$project$Vega$VNumbers;
-var _user$project$Vega$VNumber = function (a) {
-	return {ctor: 'VNumber', _0: a};
+var _user$project$Vega$vNums = _user$project$Vega$VNums;
+var _user$project$Vega$VNum = function (a) {
+	return {ctor: 'VNum', _0: a};
 };
-var _user$project$Vega$vNumber = _user$project$Vega$VNumber;
+var _user$project$Vega$vNum = _user$project$Vega$VNum;
 var _user$project$Vega$VStrs = function (a) {
 	return {ctor: 'VStrs', _0: a};
 };
@@ -13753,7 +13764,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 												_0: _user$project$Vega$maStrokeWidth(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$vNumber(1),
+														_0: _user$project$Vega$vNum(1),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
@@ -13770,7 +13781,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 																_1: {
 																	ctor: '::',
 																	_0: _user$project$Vega$vOffset(
-																		_user$project$Vega$vNumber(0.5)),
+																		_user$project$Vega$vNum(0.5)),
 																	_1: {ctor: '[]'}
 																}
 															}
@@ -13811,7 +13822,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 														_1: {
 															ctor: '::',
 															_0: _user$project$Vega$vOffset(
-																_user$project$Vega$vNumber(0.5)),
+																_user$project$Vega$vNum(0.5)),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -13830,7 +13841,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 															_1: {
 																ctor: '::',
 																_0: _user$project$Vega$vOffset(
-																	_user$project$Vega$vNumber(0.5)),
+																	_user$project$Vega$vNum(0.5)),
 																_1: {ctor: '[]'}
 															}
 														}
@@ -13875,7 +13886,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$SRange(
-								_user$project$Vega$RDefault(_user$project$Vega$RWidth)),
+								_user$project$Vega$raDefault(_user$project$Vega$RWidth)),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -13903,7 +13914,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 							_1: {
 								ctor: '::',
 								_0: _user$project$Vega$SRange(
-									_user$project$Vega$RDefault(_user$project$Vega$RHeight)),
+									_user$project$Vega$raDefault(_user$project$Vega$RHeight)),
 								_1: {
 									ctor: '::',
 									_0: _user$project$Vega$SRound(true),
@@ -13922,7 +13933,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 								ctor: '::',
 								_0: _user$project$Vega$SRange(
 									A2(
-										_user$project$Vega$RScheme,
+										_user$project$Vega$raScheme,
 										'category10',
 										{ctor: '[]'})),
 								_1: {ctor: '[]'}
@@ -14084,7 +14095,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'key',
-				_user$project$Vega$dStrs(
+				_user$project$Vega$daStrs(
 					{
 						ctor: '::',
 						_0: 'a',
@@ -14125,7 +14136,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'value',
-					_user$project$Vega$dNumbers(
+					_user$project$Vega$daNums(
 						{
 							ctor: '::',
 							_0: 5,
@@ -14384,7 +14395,7 @@ var _user$project$TransformTests$packTest1 = function () {
 						ctor: '::',
 						_0: _user$project$Vega$SRange(
 							A2(
-								_user$project$Vega$RScheme,
+								_user$project$Vega$raScheme,
 								'category20',
 								{ctor: '[]'})),
 						_1: {ctor: '[]'}
@@ -14400,7 +14411,7 @@ var _user$project$TransformTests$packTest1 = function () {
 				{
 					ctor: '::',
 					_0: _user$project$Vega$SiValue(
-						_user$project$Vega$vNumber(0)),
+						_user$project$Vega$vNum(0)),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$SiBind(
@@ -14431,7 +14442,7 @@ var _user$project$TransformTests$packTest1 = function () {
 			A3(
 				_user$project$Vega$dataColumn,
 				'id',
-				_user$project$Vega$dStrs(
+				_user$project$Vega$daStrs(
 					{
 						ctor: '::',
 						_0: 'A',
@@ -14456,7 +14467,7 @@ var _user$project$TransformTests$packTest1 = function () {
 				A3(
 					_user$project$Vega$dataColumn,
 					'parent',
-					_user$project$Vega$dStrs(
+					_user$project$Vega$daStrs(
 						{
 							ctor: '::',
 							_0: '',
@@ -14481,7 +14492,7 @@ var _user$project$TransformTests$packTest1 = function () {
 					A3(
 						_user$project$Vega$dataColumn,
 						'value',
-						_user$project$Vega$dNumbers(
+						_user$project$Vega$daNums(
 							{
 								ctor: '::',
 								_0: 0,

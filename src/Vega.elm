@@ -46,7 +46,7 @@ module Vega
         , ScaleDomain
         , ScaleNice(..)
         , ScaleProperty(..)
-        , ScaleRange(..)
+        , ScaleRange
         , SchemeProperty(..)
         , Side(..)
         , SignalProperty(..)
@@ -122,14 +122,15 @@ module Vega
         , dDataset
         , dField
         , dFields
-        , dNumbers
         , dReferences
         , dSort
-        , dStrs
+        , daBools
         , daFormat
+        , daNums
         , daOn
         , daSource
         , daSources
+        , daStrs
         , daUrl
         , daValue
         , data
@@ -307,6 +308,14 @@ module Vega
         , piStartAngle
         , q1
         , q3
+        , raData
+        , raDefault
+        , raNums
+        , raScheme
+        , raSignal
+        , raStep
+        , raStrs
+        , raValues
         , rgb
         , scCustom
         , scale
@@ -346,8 +355,8 @@ module Vega
         , vField
         , vMultiply
         , vNull
-        , vNumber
-        , vNumbers
+        , vNum
+        , vNums
         , vObject
         , vOffset
         , vRound
@@ -702,6 +711,14 @@ The mapping of data values to their visual expression.
 @docs doStrs
 @docs doData
 @docs ScaleRange
+@docs raNums
+@docs raStrs
+@docs raValues
+@docs raSignal
+@docs raScheme
+@docs raData
+@docs raStep
+@docs raDefault
 @docs ScaleNice
 @docs SchemeProperty
 @docs CInterpolate
@@ -761,9 +778,9 @@ can carry data used in specifications.
 @docs vColor
 @docs vBand
 @docs vField
-@docs vNumber
-@docs vNumbers
-@docs dNumbers
+@docs vNum
+@docs vNums
+@docs daNums
 @docs Str
 @docs str
 @docs strs
@@ -778,9 +795,10 @@ can carry data used in specifications.
 @docs boolSignal
 @docs vStr
 @docs vStrs
-@docs dStrs
+@docs daStrs
 @docs vBool
 @docs vBools
+@docs daBools
 @docs vObject
 @docs keyValue
 @docs vValues
@@ -1541,7 +1559,7 @@ type
     | SDomainMax Float
     | SDomainMin Float
     | SDomainMid Float
-      -- TODO: Do we need domainRaw? Why not just use SDomain DNumbers [1,2,3] etc.?
+      -- TODO: Do we need domainRaw? Why not just use SDomain DNums [1,2,3] etc.?
     | SRange ScaleRange
     | SReverse Bool
     | SRound Bool
@@ -1562,7 +1580,7 @@ type
 [Vega documentation](https://vega.github.io/vega/docs/scales/#range).
 -}
 type ScaleRange
-    = RNumbers (List Float)
+    = RNums (List Float)
     | RStrs (List String)
     | RValues (List Value)
     | RSignal String
@@ -1818,7 +1836,7 @@ type VAlign
 type DataValues
     = DStrs (List String)
       --TODO: Do we need nested lists and objects? | DValues (List DataValues)
-    | DNumbers (List Float)
+    | DNums (List Float)
     | DBools (List Bool)
 
 
@@ -1849,8 +1867,8 @@ or transformed value. For details, see the
 type Value
     = VStr String
     | VStrs (List String)
-    | VNumber Float
-    | VNumbers (List Float)
+    | VNum Float
+    | VNums (List Float)
     | VBool Bool
     | VBools (List Bool)
     | VObject (List Value)
@@ -2446,7 +2464,7 @@ enCustom name =
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
-     dataColumn "Animal" (dStrs [ "Cat", "Dog", "Mouse"]) []
+     dataColumn "Animal" (daStrs [ "Cat", "Dog", "Mouse"]) []
 
 -}
 dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
@@ -2455,7 +2473,7 @@ dataColumn colName data =
         DStrs col ->
             (::) (List.map (\s -> ( colName, JE.string s )) col)
 
-        DNumbers col ->
+        DNums col ->
             (::) (List.map (\x -> ( colName, JE.float x )) col)
 
         DBools col ->
@@ -2475,9 +2493,9 @@ The columns themselves are most easily generated with `dataColumn`
 
     dataTable =
         dataFromColumns "animals" [ parse [ ( "Year", FDate "%Y" ) ] ]
-            << dataColumn "Animal" (dStrs [ "Fish", "Dog", "Cat" ])
-            << dataColumn "Age" (dNumbers [ 28, 12, 6 ])
-            << dataColumn "Year" (dStrs [ "2010", "2014", "2015" ])
+            << dataColumn "Animal" (daStrs [ "Fish", "Dog", "Cat" ])
+            << dataColumn "Age" (daNums [ 28, 12, 6 ])
+            << dataColumn "Year" (daStrs [ "2010", "2014", "2015" ])
 
 -}
 dataFromColumns : String -> List Format -> List DataColumn -> DataTable
@@ -2512,9 +2530,9 @@ in more efficent and less error-prone.
 
     dataTable =
         dataFromRows "animals" [ parse [ ( "Year", FDate "%Y" ) ] ]
-            << dataRow [ ( "Animal", vStr "Fish" ), ( "Age", vNumber 28 ), ( "Year", vStr "2010" ) ]
-            << dataRow [ ( "Animal", vStr "Dog" ), ( "Age", vNumber 12 ), ( "Year", vStr "2014" ) ]
-            << dataRow [ ( "Animal", vStr "Cat" ), ( "Age", vNumber 6 ), ( "Year", vStr "2015" ) ]
+            << dataRow [ ( "Animal", vStr "Fish" ), ( "Age", vNum 28 ), ( "Year", vStr "2010" ) ]
+            << dataRow [ ( "Animal", vStr "Dog" ), ( "Age", vNum 12 ), ( "Year", vStr "2014" ) ]
+            << dataRow [ ( "Animal", vStr "Cat" ), ( "Age", vNum 6 ), ( "Year", vStr "2015" ) ]
 
 -}
 dataFromRows : String -> List Format -> List DataRow -> DataTable
@@ -2548,7 +2566,7 @@ data name dProps =
 The final parameter is the list of any other rows to which this is added.
 
     TODO: Check this is the current syntax:
-    dataRow [("Animal", vStr "Fish"),("Age", vNumber 28),("Year", vStr "2010")] []
+    dataRow [("Animal", vStr "Fish"),("Age", vNum 28),("Year", vStr "2010")] []
 
 -}
 dataRow : List ( String, Value ) -> List DataRow -> List DataRow
@@ -4223,6 +4241,71 @@ q3 =
     Q3
 
 
+{-| A scale range specified as a data reference object. This is used for specifying
+ordinal scale ranges as a series of distinct field values. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raData : DataReference -> ScaleRange
+raData =
+    RData
+
+
+{-| The range default for a scale range. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+raDefault : RangeDefault -> ScaleRange
+raDefault =
+    RDefault
+
+
+{-| A scale range specified as a list of numbers. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raNums : List Float -> ScaleRange
+raNums =
+    RNums
+
+
+{-| A scale range specified as a list of colour schemes. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raScheme : String -> List SchemeProperty -> ScaleRange
+raScheme s =
+    RScheme s
+
+
+{-| A signal name used to generate a scale range. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raSignal : String -> ScaleRange
+raSignal =
+    RSignal
+
+
+{-| The step size for a band scale range. For details see the
+[Band Scales Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+raStep : Value -> ScaleRange
+raStep =
+    RStep
+
+
+{-| A scale range specified as a list of strings. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raStrs : List String -> ScaleRange
+raStrs =
+    RStrs
+
+
+{-| A scale range specified as a list of values. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+raValues : List Value -> ScaleRange
+raValues =
+    RValues
+
+
 {-| RGB color interpolation. The parameter is a gamma value to control the
 brighness of the colour trajectory.
 -}
@@ -4653,29 +4736,36 @@ vNull =
 
 {-| A numeric value.
 -}
-vNumber : Float -> Value
-vNumber =
-    VNumber
+vNum : Float -> Value
+vNum =
+    VNum
 
 
 {-| A value representing a list of numbers.
 -}
-vNumbers : List Float -> Value
-vNumbers =
-    VNumbers
+vNums : List Float -> Value
+vNums =
+    VNums
+
+
+{-| A data value representing a list of Booleans.
+-}
+daBools : List Bool -> DataValues
+daBools =
+    DBools
 
 
 {-| A data value representing a list of numbers.
 -}
-dNumbers : List Float -> DataValues
-dNumbers =
-    DNumbers
+daNums : List Float -> DataValues
+daNums =
+    DNums
 
 
 {-| A data value representing a list of strings.
 -}
-dStrs : List String -> DataValues
-dStrs =
+daStrs : List String -> DataValues
+daStrs =
     DStrs
 
 
@@ -5939,7 +6029,7 @@ scaleProperty scaleProp =
 
         SRange range ->
             case range of
-                RNumbers xs ->
+                RNums xs ->
                     ( "range", JE.list (List.map JE.float xs) )
 
                 RStrs ss ->
@@ -6432,10 +6522,10 @@ valueProperty val =
         VRound b ->
             ( "round", JE.bool b )
 
-        VNumber num ->
+        VNum num ->
             ( "value", JE.float num )
 
-        VNumbers nums ->
+        VNums nums ->
             ( "value", JE.list (List.map JE.float nums) )
 
         VObject vals ->
@@ -6500,10 +6590,10 @@ valueSpec val =
         VRound b ->
             JE.object [ ( "round", JE.bool b ) ]
 
-        VNumber num ->
+        VNum num ->
             JE.float num
 
-        VNumbers nums ->
+        VNums nums ->
             JE.list (List.map JE.float nums)
 
         VKeyValue key val ->

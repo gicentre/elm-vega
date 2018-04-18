@@ -12,9 +12,9 @@ packTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (dStrs [ "A", "B", "C", "D", "E" ])
-                << dataColumn "parent" (dStrs [ "", "A", "A", "C", "C" ])
-                << dataColumn "value" (dNumbers [ 0, 1, 0, 1, 1 ])
+                << dataColumn "id" (daStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (daStrs [ "", "A", "A", "C", "C" ])
+                << dataColumn "value" (daNums [ 0, 1, 0, 1, 1 ])
 
         ds =
             dataSource
@@ -32,7 +32,7 @@ packTest1 =
         si =
             signals
                 << signal "padding between circles"
-                    [ SiValue (vNumber 0)
+                    [ SiValue (vNum 0)
                     , SiBind (iRange [ inMin 0, inMax 10, inStep 0.1 ])
                     ]
 
@@ -40,7 +40,7 @@ packTest1 =
             scales
                 << scale "color"
                     [ SType ScOrdinal
-                    , SRange (RScheme "category20" [])
+                    , SRange (raScheme "category20" [])
                     ]
 
         mk =
@@ -69,8 +69,8 @@ stackTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "key" (dStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
-                << dataColumn "value" (dNumbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
+                << dataColumn "key" (daStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
+                << dataColumn "value" (daNums [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
 
         ds =
             dataSource
@@ -117,17 +117,17 @@ stackTest1 =
                 << scale "xscale"
                     [ SType ScBand
                     , SDomain (doStrs (strs [ "a", "b", "c" ]))
-                    , SRange (RDefault RWidth)
+                    , SRange (raDefault RWidth)
                     ]
                 << scale "yscale"
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "table", dField (str "y1") ])
-                    , SRange (RDefault RHeight)
+                    , SRange (raDefault RHeight)
                     , SRound True
                     ]
                 << scale "color"
                     [ SType ScOrdinal
-                    , SRange (RScheme "category10" [])
+                    , SRange (raScheme "category10" [])
                     ]
 
         mk =
@@ -138,13 +138,13 @@ stackTest1 =
                         [ enEnter
                             [ maFill [ vScale (fName "color"), vField (fName "key") ]
                             , maStroke [ vStr "white" ]
-                            , maStrokeWidth [ vNumber 1 ]
-                            , maX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNumber 0.5) ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNum 0.5) ]
                             , maWidth [ vScale (fName "xscale"), vBand 1 ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNumber 0.5) ]
-                            , maY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNumber 0.5) ]
+                            [ maY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNum 0.5) ]
+                            , maY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNum 0.5) ]
                             ]
                         ]
                     ]
