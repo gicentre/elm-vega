@@ -12848,20 +12848,35 @@ var _gicentre$elm_vega$Vega$doNums = _gicentre$elm_vega$Vega$DoNums;
 var _gicentre$elm_vega$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
+var _gicentre$elm_vega$Vega$niTickCount = _gicentre$elm_vega$Vega$NTickCount;
 var _gicentre$elm_vega$Vega$NFalse = {ctor: 'NFalse'};
+var _gicentre$elm_vega$Vega$niFalse = _gicentre$elm_vega$Vega$NFalse;
 var _gicentre$elm_vega$Vega$NTrue = {ctor: 'NTrue'};
+var _gicentre$elm_vega$Vega$niTrue = _gicentre$elm_vega$Vega$NTrue;
 var _gicentre$elm_vega$Vega$NInterval = F2(
 	function (a, b) {
 		return {ctor: 'NInterval', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$niInterval = F2(
+	function (tu, step) {
+		return A2(_gicentre$elm_vega$Vega$NInterval, tu, step);
+	});
 var _gicentre$elm_vega$Vega$NYear = {ctor: 'NYear'};
+var _gicentre$elm_vega$Vega$niYear = _gicentre$elm_vega$Vega$NYear;
 var _gicentre$elm_vega$Vega$NMonth = {ctor: 'NMonth'};
+var _gicentre$elm_vega$Vega$niMonth = _gicentre$elm_vega$Vega$NMonth;
 var _gicentre$elm_vega$Vega$NWeek = {ctor: 'NWeek'};
+var _gicentre$elm_vega$Vega$niWeek = _gicentre$elm_vega$Vega$NWeek;
 var _gicentre$elm_vega$Vega$NDay = {ctor: 'NDay'};
+var _gicentre$elm_vega$Vega$niDay = _gicentre$elm_vega$Vega$NDay;
 var _gicentre$elm_vega$Vega$NHour = {ctor: 'NHour'};
+var _gicentre$elm_vega$Vega$niHour = _gicentre$elm_vega$Vega$NHour;
 var _gicentre$elm_vega$Vega$NMinute = {ctor: 'NMinute'};
+var _gicentre$elm_vega$Vega$niMinute = _gicentre$elm_vega$Vega$NMinute;
 var _gicentre$elm_vega$Vega$NSecond = {ctor: 'NSecond'};
+var _gicentre$elm_vega$Vega$niSecond = _gicentre$elm_vega$Vega$NSecond;
 var _gicentre$elm_vega$Vega$NMillisecond = {ctor: 'NMillisecond'};
+var _gicentre$elm_vega$Vega$niMillisecond = _gicentre$elm_vega$Vega$NMillisecond;
 var _gicentre$elm_vega$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
@@ -13967,7 +13982,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 								_0: _gicentre$elm_vega$Vega$SRound(true),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$SZero(false),
@@ -14897,7 +14912,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(false),
@@ -14937,7 +14952,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$SZero(false),
@@ -15775,7 +15790,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SRange(
@@ -15816,7 +15831,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SRange(
@@ -16305,7 +16320,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 						_0: _gicentre$elm_vega$Vega$SRound(true),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -16345,7 +16360,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$SRound(true),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -16385,7 +16400,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 								_0: _gicentre$elm_vega$Vega$SRound(true),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NFalse),
+									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niFalse),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -18618,7 +18633,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -19145,7 +19160,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -19721,7 +19736,7 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -20172,7 +20187,7 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -20959,7 +20974,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 							})),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -21773,7 +21788,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 										_0: _gicentre$elm_vega$Vega$SZero(true),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+											_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -22222,7 +22237,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SZero(true),
@@ -22916,7 +22931,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$SRange(
@@ -23292,7 +23307,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							_0: range,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$NTrue),
+								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$SDomain(

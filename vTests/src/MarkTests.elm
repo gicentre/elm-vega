@@ -94,7 +94,7 @@ areaTest =
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (raDefault RHeight)
                     , SZero True
-                    , SNice NTrue
+                    , SNice niTrue
                     ]
 
         si =
@@ -262,7 +262,7 @@ lineTest =
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (raDefault RHeight)
                     , SZero True
-                    , SNice NTrue
+                    , SNice niTrue
                     ]
 
         si =
@@ -538,7 +538,7 @@ trailTest =
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
                     , SRange (raDefault RHeight)
                     , SZero True
-                    , SNice NTrue
+                    , SNice niTrue
                     ]
                 << scale "zscale"
                     [ SType ScLinear

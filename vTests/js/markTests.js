@@ -12848,20 +12848,35 @@ var _user$project$Vega$doNums = _user$project$Vega$DoNums;
 var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
+var _user$project$Vega$niTickCount = _user$project$Vega$NTickCount;
 var _user$project$Vega$NFalse = {ctor: 'NFalse'};
+var _user$project$Vega$niFalse = _user$project$Vega$NFalse;
 var _user$project$Vega$NTrue = {ctor: 'NTrue'};
+var _user$project$Vega$niTrue = _user$project$Vega$NTrue;
 var _user$project$Vega$NInterval = F2(
 	function (a, b) {
 		return {ctor: 'NInterval', _0: a, _1: b};
 	});
+var _user$project$Vega$niInterval = F2(
+	function (tu, step) {
+		return A2(_user$project$Vega$NInterval, tu, step);
+	});
 var _user$project$Vega$NYear = {ctor: 'NYear'};
+var _user$project$Vega$niYear = _user$project$Vega$NYear;
 var _user$project$Vega$NMonth = {ctor: 'NMonth'};
+var _user$project$Vega$niMonth = _user$project$Vega$NMonth;
 var _user$project$Vega$NWeek = {ctor: 'NWeek'};
+var _user$project$Vega$niWeek = _user$project$Vega$NWeek;
 var _user$project$Vega$NDay = {ctor: 'NDay'};
+var _user$project$Vega$niDay = _user$project$Vega$NDay;
 var _user$project$Vega$NHour = {ctor: 'NHour'};
+var _user$project$Vega$niHour = _user$project$Vega$NHour;
 var _user$project$Vega$NMinute = {ctor: 'NMinute'};
+var _user$project$Vega$niMinute = _user$project$Vega$NMinute;
 var _user$project$Vega$NSecond = {ctor: 'NSecond'};
+var _user$project$Vega$niSecond = _user$project$Vega$NSecond;
 var _user$project$Vega$NMillisecond = {ctor: 'NMillisecond'};
+var _user$project$Vega$niMillisecond = _user$project$Vega$NMillisecond;
 var _user$project$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
@@ -13946,7 +13961,7 @@ var _user$project$MarkTests$trailTest = function () {
 									_0: _user$project$Vega$SZero(true),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SNice(_user$project$Vega$NTrue),
+										_0: _user$project$Vega$SNice(_user$project$Vega$niTrue),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -17040,7 +17055,7 @@ var _user$project$MarkTests$areaTest = function () {
 									_0: _user$project$Vega$SZero(true),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SNice(_user$project$Vega$NTrue),
+										_0: _user$project$Vega$SNice(_user$project$Vega$niTrue),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -18092,7 +18107,7 @@ var _user$project$MarkTests$lineTest = function () {
 									_0: _user$project$Vega$SZero(true),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SNice(_user$project$Vega$NTrue),
+										_0: _user$project$Vega$SNice(_user$project$Vega$niTrue),
 										_1: {ctor: '[]'}
 									}
 								}

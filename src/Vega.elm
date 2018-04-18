@@ -44,7 +44,7 @@ module Vega
         , RangeDefault(RCategory, RDiverging, RHeatmap, RHeight, ROrdinal, RRamp, RSymbol, RWidth)
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleDomain
-        , ScaleNice(..)
+        , ScaleNice
         , ScaleProperty(..)
         , ScaleRange
         , SchemeProperty(..)
@@ -286,6 +286,18 @@ module Vega
         , median
         , minimum
         , missing
+        , niDay
+        , niFalse
+        , niHour
+        , niInterval
+        , niMillisecond
+        , niMinute
+        , niMonth
+        , niSecond
+        , niTickCount
+        , niTrue
+        , niWeek
+        , niYear
         , num
         , numSignal
         , nums
@@ -720,6 +732,18 @@ The mapping of data values to their visual expression.
 @docs raStep
 @docs raDefault
 @docs ScaleNice
+@docs niMillisecond
+@docs niSecond
+@docs niMinute
+@docs niHour
+@docs niDay
+@docs niWeek
+@docs niMonth
+@docs niYear
+@docs niInterval
+@docs niTrue
+@docs niFalse
+@docs niTickCount
 @docs SchemeProperty
 @docs CInterpolate
 @docs cubeHelix
@@ -1526,7 +1550,7 @@ type ScaleDomain
 
 
 {-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#quantitative).
+[Vega documentation](https://vega.github.io/vega/docs/scales/).
 -}
 type ScaleNice
     = NMillisecond
@@ -4051,6 +4075,102 @@ minimum =
 missing : Operation
 missing =
     Missing
+
+
+{-| Scale a temporal range to use human-friendly 'nice' day values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niDay : ScaleNice
+niDay =
+    NDay
+
+
+{-| Disable 'nice' scaling (e.g. to nearest 10) of a range. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niFalse : ScaleNice
+niFalse =
+    NFalse
+
+
+{-| Scale a temporal range to use human-friendly 'nice' hour values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niHour : ScaleNice
+niHour =
+    NHour
+
+
+{-| Specify a desired 'nice' temporal interval between labelled tick points. For
+full details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niInterval : TimeUnit -> Int -> ScaleNice
+niInterval tu step =
+    NInterval tu step
+
+
+{-| Scale a temporal range to use human-friendly 'nice' millisecond values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niMillisecond : ScaleNice
+niMillisecond =
+    NMillisecond
+
+
+{-| Scale a temporal range to use human-friendly 'nice' minute values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niMinute : ScaleNice
+niMinute =
+    NMinute
+
+
+{-| Scale a temporal range to use human-friendly 'nice' month values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niMonth : ScaleNice
+niMonth =
+    NMonth
+
+
+{-| Scale a temporal range to use human-friendly 'nice' second values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niSecond : ScaleNice
+niSecond =
+    NSecond
+
+
+{-| Specify a desired tick count for a human-friendly 'nice' scale range. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niTickCount : Int -> ScaleNice
+niTickCount =
+    NTickCount
+
+
+{-| Enable automatic 'nice' scaling (e.g. to nearest 10) of a range. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niTrue : ScaleNice
+niTrue =
+    NTrue
+
+
+{-| Scale a temporal range to use human-friendly 'nice' week values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niWeek : ScaleNice
+niWeek =
+    NWeek
+
+
+{-| Scale a temporal range to use human-friendly 'nice' year values. For full
+details see the [Vega documentation](https://vega.github.io/vega/docs/scales/).
+-}
+niYear : ScaleNice
+niYear =
+    NYear
 
 
 {-| A numeric literal used for functions that can accept a literal or signal.

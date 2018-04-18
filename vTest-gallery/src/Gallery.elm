@@ -49,7 +49,7 @@ barChart1 =
                     ]
                 << scale "yScale"
                     [ SDomain (doData [ dDataset "table", dField (str "amount") ])
-                    , SNice NTrue
+                    , SNice niTrue
                     , SRange (raDefault RHeight)
                     ]
 
@@ -124,7 +124,7 @@ barChart2 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (raDefault RHeight)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
@@ -186,7 +186,7 @@ barChart3 =
                     , SRange (raDefault RWidth)
                     , SRound True
                     , SZero True
-                    , SNice NTrue
+                    , SNice niTrue
                     ]
                 << scale "cScale"
                     [ SType ScOrdinal
@@ -289,7 +289,7 @@ barChart4 =
             scales
                 << scale "xScale"
                     [ SDomain (doData [ dDataset "tuples", dField (str "c") ])
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SRound True
                     , SRange (raDefault RWidth)
@@ -434,7 +434,7 @@ barChart5 =
                 << scale "xScale"
                     [ SType ScLinear
                     , range
-                    , SNice NTrue
+                    , SNice niTrue
                     , SDomain (doData [ dDataset "population", dField (str "people") ])
                     ]
 
@@ -499,7 +499,7 @@ lineChart1 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (raDefault RHeight)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
@@ -570,7 +570,7 @@ areaChart1 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (raDefault RHeight)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
@@ -623,7 +623,7 @@ areaChart2 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (raDefault RHeight)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
@@ -707,7 +707,7 @@ areaChart3 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRange (raValues [ vSignal "vheight", vNum 0 ])
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
@@ -1042,7 +1042,7 @@ scatterplot1 =
                 << scale "xScale"
                     [ SType ScLinear
                     , SRound True
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "cars", dField (str "Horsepower") ])
                     , SRange (raDefault RWidth)
@@ -1050,7 +1050,7 @@ scatterplot1 =
                 << scale "yScale"
                     [ SType ScLinear
                     , SRound True
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero True
                     , SDomain (doData [ dDataset "cars", dField (str "Miles_per_Gallon") ])
                     , SRange (raDefault RHeight)
@@ -1058,7 +1058,7 @@ scatterplot1 =
                 << scale "sizeScale"
                     [ SType ScLinear
                     , SRound True
-                    , SNice NFalse
+                    , SNice niFalse
                     , SZero True
                     , SDomain (doData [ dDataset "cars", dField (str "Acceleration") ])
                     , SRange (raNums [ 4, 361 ])
@@ -1127,13 +1127,13 @@ scatterplot2 =
             scales
                 << scale "xScale"
                     [ SType ScLinear
-                    , SNice NTrue
+                    , SNice niTrue
                     , SRange (raValues [ vSignal "nullGap", vSignal "width" ])
                     , SDomain (doData [ dDataset "valid", dField (strSignal "xField") ])
                     ]
                 << scale "yScale"
                     [ SType ScLinear
-                    , SNice NTrue
+                    , SNice niTrue
                     , SRange (raValues [ vSignal "height - nullGap", vNum 0 ])
                     , SDomain (doData [ dDataset "valid", dField (strSignal "yField") ])
                     ]
@@ -1237,7 +1237,7 @@ scatterplot3 =
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "drive", dField (str "miles") ])
                     , SRange (raDefault RWidth)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero False
                     , SRound True
                     ]
@@ -1245,7 +1245,7 @@ scatterplot3 =
                     [ SType ScLinear
                     , SDomain (doData [ dDataset "drive", dField (str "gas") ])
                     , SRange (raDefault RHeight)
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero False
                     , SRound True
                     ]
@@ -1419,7 +1419,7 @@ scatterplot4 =
                     , SRange (raDefault RWidth)
                     , SDomain (doData [ dDataset "summary", dFields (strs [ "stdev0", "stdev1" ]) ])
                     , SRound True
-                    , SNice NTrue
+                    , SNice niTrue
                     , SZero False
                     ]
                 << scale "yScale"
