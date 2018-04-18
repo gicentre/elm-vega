@@ -53,7 +53,7 @@ module Vega
         , SortProperty(Ascending, Descending)
         , Source
         , Spec
-        , StackOffset(..)
+        , StackOffset(OfCenter, OfNormalize, OfZero)
         , StackProperty(..)
         , Str
         , StrokeCap(..)
@@ -304,6 +304,7 @@ module Vega
         , num
         , numSignal
         , nums
+        , ofSignal
         , on
         , orAscending
         , orDescending
@@ -506,6 +507,7 @@ Functions and types for declaring the input data to the visualization.
 @docs piAs
 @docs StackProperty
 @docs StackOffset
+@docs ofSignal
 
 @docs transform
 @docs Order
@@ -1730,7 +1732,7 @@ type alias Spec =
 
 {-| Indicates the type of offsetting to apply when stacking. `OfZero` uses a baseline
 at the foot of a stack, `OfCenter` uses a central baseline with stacking both above
-and below it, while `OfNormalize` rescales stack to a common height while preserving
+and below it. `OfNormalize` rescales the stack to a common height while preserving
 the relative size of stacked quantities. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/transforms/stack)
 -}
@@ -1738,7 +1740,7 @@ type StackOffset
     = OfZero
     | OfCenter
     | OfNormalize
-    | OffsetSignal String
+    | OfSignal String
 
 
 {-| Properties of the stacking transformation. For details see the
@@ -4278,6 +4280,15 @@ numSignal =
     NumSignal
 
 
+{-| Specify a named signal to drive the type of offsetting to apply when
+performing a stack transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack)
+-}
+ofSignal : String -> StackOffset
+ofSignal =
+    OfSignal
+
+
 {-| Adds list of triggers to the given data table or mark.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/triggers).
 -}
@@ -6643,7 +6654,7 @@ stackOffsetSpec off =
         OfNormalize ->
             JE.string "normalize"
 
-        OffsetSignal sigName ->
+        OfSignal sigName ->
             JE.object [ signalReferenceProperty sigName ]
 
 

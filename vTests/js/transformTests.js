@@ -13358,9 +13358,10 @@ var _user$project$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
 var _user$project$Vega$srData = _user$project$Vega$SData;
-var _user$project$Vega$OffsetSignal = function (a) {
-	return {ctor: 'OffsetSignal', _0: a};
+var _user$project$Vega$OfSignal = function (a) {
+	return {ctor: 'OfSignal', _0: a};
 };
+var _user$project$Vega$ofSignal = _user$project$Vega$OfSignal;
 var _user$project$Vega$OfNormalize = {ctor: 'OfNormalize'};
 var _user$project$Vega$OfCenter = {ctor: 'OfCenter'};
 var _user$project$Vega$OfZero = {ctor: 'OfZero'};
@@ -14281,7 +14282,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									_1: {
 										ctor: '::',
 										_0: _user$project$Vega$StOffset(
-											_user$project$Vega$OffsetSignal('offset')),
+											_user$project$Vega$ofSignal('offset')),
 										_1: {
 											ctor: '::',
 											_0: _user$project$Vega$StSort(

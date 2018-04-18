@@ -79,7 +79,7 @@ stackTest1 =
                         [ TStack
                             [ StField "value"
                             , StGroupBy [ "key" ]
-                            , StOffset (OffsetSignal "offset")
+                            , StOffset (ofSignal "offset")
                             , StSort [ coField [ "sortField" ], coOrder [ orSignal "sortOrder" ] ]
                             ]
                         ]
