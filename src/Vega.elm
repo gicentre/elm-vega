@@ -65,7 +65,7 @@ module Vega
         , TopMarkProperty
         , Transform(..)
         , Trigger
-        , TriggerProperty(..)
+        , TriggerProperty
         , VAlign(AlignBottom, AlignMiddle, AlignTop, Alphabetic)
         , VProperty
         , Value
@@ -407,6 +407,11 @@ module Vega
         , toVega
         , topojsonFeature
         , topojsonMesh
+        , trInsert
+        , trModifyValues
+        , trRemove
+        , trRemoveAll
+        , trToggle
         , transform
         , trigger
         , tsv
@@ -501,6 +506,11 @@ Functions and types for declaring the input data to the visualization.
 @docs Source
 @docs Trigger
 @docs TriggerProperty
+@docs trInsert
+@docs trRemove
+@docs trRemoveAll
+@docs trToggle
+@docs trModifyValues
 
 
 ## Transformations
@@ -1985,8 +1995,8 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/trigge
 type TriggerProperty
     = TrTrigger Expression
     | TrInsert Expression
-      -- TODO: Do we need the boolean option here or is an expression `true` sufficient?
     | TrRemove Expression
+    | TrRemoveAll
     | TrToggle Expression
     | TrModifyValues Expression Expression
 
@@ -5321,6 +5331,66 @@ trigger trName trProps =
     JE.object (List.concatMap triggerProperties (TrTrigger trName :: trProps))
 
 
+{-| Specify an expression that evaluates to data objects to insert as triggers.
+A trigger enables dynmic updates to a visualization. Insert operations are only
+applicable to data sets, not marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/triggers/)
+-}
+trInsert : Expression -> TriggerProperty
+trInsert =
+    TrInsert
+
+
+{-| Specify a data or mark modification trigger. The first parameter is an
+expression that evaluates to data objects to modify and the second parameter an
+expression that evaluates to an object of name-value pairs, indicating the field
+values that should be updated. For example:
+
+TODO: Check this is syntactically correct:
+
+    trigger "myDragSignal" [trModifyValues "dragged" "{fx: x(), fy: y()}"]
+
+would set the `fx` and `fy` properties on mark items referenced by `myDragSignal`
+to the current mouse pointer position.
+
+Modify operations are applicable to both data sets and marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/triggers/)
+
+-}
+trModifyValues : Expression -> Expression -> TriggerProperty
+trModifyValues key val =
+    TrModifyValues key val
+
+
+{-| Specify an expression that evaluates to data objects to remove.
+A trigger enables dynmic updates to a visualization. Remove operations are only
+applicable to data sets, not marks. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/triggers/)
+-}
+trRemove : Expression -> TriggerProperty
+trRemove =
+    TrRemove
+
+
+{-| Remove all data objects. A trigger enables dynmic updates to a visualization.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/triggers/)
+-}
+trRemoveAll : TriggerProperty
+trRemoveAll =
+    TrRemoveAll
+
+
+{-| Specify an expression that evaluates to data objects to toggle. Toggled
+objects are inserted or removed depending on whether they are already in the
+data set. Toggle operations are only applicable to data sets, not marks. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/triggers/)
+-}
+trToggle : Expression -> TriggerProperty
+trToggle =
+    TrToggle
+
+
 {-| Indicates a TSV (tab separated value) format. Typically used when specifying
 a data url.
 -}
@@ -7200,6 +7270,9 @@ triggerProperties trans =
 
         TrRemove expr ->
             [ ( "remove", expressionSpec expr ) ]
+
+        TrRemoveAll ->
+            [ ( "remove", JE.bool True ) ]
 
         TrToggle expr ->
             [ ( "toggle", expressionSpec expr ) ]

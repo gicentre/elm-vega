@@ -8990,6 +8990,16 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'TrRemoveAll':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'remove',
+					_1: _elm_lang$core$Json_Encode$bool(true)
+				},
+				_1: {ctor: '[]'}
+			};
 		case 'TrToggle':
 			return {
 				ctor: '::',
@@ -13610,15 +13620,24 @@ var _user$project$Vega$TrModifyValues = F2(
 	function (a, b) {
 		return {ctor: 'TrModifyValues', _0: a, _1: b};
 	});
+var _user$project$Vega$trModifyValues = F2(
+	function (key, val) {
+		return A2(_user$project$Vega$TrModifyValues, key, val);
+	});
 var _user$project$Vega$TrToggle = function (a) {
 	return {ctor: 'TrToggle', _0: a};
 };
+var _user$project$Vega$trToggle = _user$project$Vega$TrToggle;
+var _user$project$Vega$TrRemoveAll = {ctor: 'TrRemoveAll'};
+var _user$project$Vega$trRemoveAll = _user$project$Vega$TrRemoveAll;
 var _user$project$Vega$TrRemove = function (a) {
 	return {ctor: 'TrRemove', _0: a};
 };
+var _user$project$Vega$trRemove = _user$project$Vega$TrRemove;
 var _user$project$Vega$TrInsert = function (a) {
 	return {ctor: 'TrInsert', _0: a};
 };
+var _user$project$Vega$trInsert = _user$project$Vega$TrInsert;
 var _user$project$Vega$TrTrigger = function (a) {
 	return {ctor: 'TrTrigger', _0: a};
 };

@@ -8990,6 +8990,16 @@ var _gicentre$elm_vega$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'TrRemoveAll':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'remove',
+					_1: _elm_lang$core$Json_Encode$bool(true)
+				},
+				_1: {ctor: '[]'}
+			};
 		case 'TrToggle':
 			return {
 				ctor: '::',
@@ -13610,15 +13620,24 @@ var _gicentre$elm_vega$Vega$TrModifyValues = F2(
 	function (a, b) {
 		return {ctor: 'TrModifyValues', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$trModifyValues = F2(
+	function (key, val) {
+		return A2(_gicentre$elm_vega$Vega$TrModifyValues, key, val);
+	});
 var _gicentre$elm_vega$Vega$TrToggle = function (a) {
 	return {ctor: 'TrToggle', _0: a};
 };
+var _gicentre$elm_vega$Vega$trToggle = _gicentre$elm_vega$Vega$TrToggle;
+var _gicentre$elm_vega$Vega$TrRemoveAll = {ctor: 'TrRemoveAll'};
+var _gicentre$elm_vega$Vega$trRemoveAll = _gicentre$elm_vega$Vega$TrRemoveAll;
 var _gicentre$elm_vega$Vega$TrRemove = function (a) {
 	return {ctor: 'TrRemove', _0: a};
 };
+var _gicentre$elm_vega$Vega$trRemove = _gicentre$elm_vega$Vega$TrRemove;
 var _gicentre$elm_vega$Vega$TrInsert = function (a) {
 	return {ctor: 'TrInsert', _0: a};
 };
+var _gicentre$elm_vega$Vega$trInsert = _gicentre$elm_vega$Vega$TrInsert;
 var _gicentre$elm_vega$Vega$TrTrigger = function (a) {
 	return {ctor: 'TrTrigger', _0: a};
 };

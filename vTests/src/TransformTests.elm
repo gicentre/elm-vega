@@ -84,8 +84,8 @@ stackTest1 =
                             ]
                         ]
                     |> on
-                        [ trigger "add" [ TrInsert "add" ]
-                        , trigger "rem" [ TrRemove "rem" ]
+                        [ trigger "add" [ trInsert "add" ]
+                        , trigger "rem" [ trRemove "rem" ]
                         ]
                 ]
 
