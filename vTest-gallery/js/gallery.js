@@ -12880,60 +12880,83 @@ var _gicentre$elm_vega$Vega$niMillisecond = _gicentre$elm_vega$Vega$NMillisecond
 var _gicentre$elm_vega$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
+var _gicentre$elm_vega$Vega$scRangeStep = _gicentre$elm_vega$Vega$SRangeStep;
 var _gicentre$elm_vega$Vega$SPaddingOuter = function (a) {
 	return {ctor: 'SPaddingOuter', _0: a};
 };
+var _gicentre$elm_vega$Vega$scPaddingOuter = _gicentre$elm_vega$Vega$SPaddingOuter;
 var _gicentre$elm_vega$Vega$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
+var _gicentre$elm_vega$Vega$scPaddingInner = _gicentre$elm_vega$Vega$SPaddingInner;
 var _gicentre$elm_vega$Vega$SAlign = function (a) {
 	return {ctor: 'SAlign', _0: a};
 };
+var _gicentre$elm_vega$Vega$scAlign = _gicentre$elm_vega$Vega$SAlign;
 var _gicentre$elm_vega$Vega$SBase = function (a) {
 	return {ctor: 'SBase', _0: a};
 };
+var _gicentre$elm_vega$Vega$scBase = _gicentre$elm_vega$Vega$SBase;
 var _gicentre$elm_vega$Vega$SExponent = function (a) {
 	return {ctor: 'SExponent', _0: a};
 };
+var _gicentre$elm_vega$Vega$scExponent = _gicentre$elm_vega$Vega$SExponent;
 var _gicentre$elm_vega$Vega$SZero = function (a) {
 	return {ctor: 'SZero', _0: a};
 };
+var _gicentre$elm_vega$Vega$scZero = _gicentre$elm_vega$Vega$SZero;
 var _gicentre$elm_vega$Vega$SNice = function (a) {
 	return {ctor: 'SNice', _0: a};
 };
+var _gicentre$elm_vega$Vega$scNice = _gicentre$elm_vega$Vega$SNice;
 var _gicentre$elm_vega$Vega$SPadding = function (a) {
 	return {ctor: 'SPadding', _0: a};
 };
+var _gicentre$elm_vega$Vega$scPadding = _gicentre$elm_vega$Vega$SPadding;
 var _gicentre$elm_vega$Vega$SInterpolate = function (a) {
 	return {ctor: 'SInterpolate', _0: a};
 };
+var _gicentre$elm_vega$Vega$scInterpolate = _gicentre$elm_vega$Vega$SInterpolate;
 var _gicentre$elm_vega$Vega$SClamp = function (a) {
 	return {ctor: 'SClamp', _0: a};
 };
+var _gicentre$elm_vega$Vega$scClamp = _gicentre$elm_vega$Vega$SClamp;
 var _gicentre$elm_vega$Vega$SRound = function (a) {
 	return {ctor: 'SRound', _0: a};
 };
+var _gicentre$elm_vega$Vega$scRound = _gicentre$elm_vega$Vega$SRound;
 var _gicentre$elm_vega$Vega$SReverse = function (a) {
 	return {ctor: 'SReverse', _0: a};
 };
+var _gicentre$elm_vega$Vega$scReverse = _gicentre$elm_vega$Vega$SReverse;
 var _gicentre$elm_vega$Vega$SRange = function (a) {
 	return {ctor: 'SRange', _0: a};
 };
+var _gicentre$elm_vega$Vega$scRange = _gicentre$elm_vega$Vega$SRange;
+var _gicentre$elm_vega$Vega$SDomainRaw = function (a) {
+	return {ctor: 'SDomainRaw', _0: a};
+};
+var _gicentre$elm_vega$Vega$scDomainRaw = _gicentre$elm_vega$Vega$SDomainRaw;
 var _gicentre$elm_vega$Vega$SDomainMid = function (a) {
 	return {ctor: 'SDomainMid', _0: a};
 };
+var _gicentre$elm_vega$Vega$scDomainMid = _gicentre$elm_vega$Vega$SDomainMid;
 var _gicentre$elm_vega$Vega$SDomainMin = function (a) {
 	return {ctor: 'SDomainMin', _0: a};
 };
+var _gicentre$elm_vega$Vega$scDomainMin = _gicentre$elm_vega$Vega$SDomainMin;
 var _gicentre$elm_vega$Vega$SDomainMax = function (a) {
 	return {ctor: 'SDomainMax', _0: a};
 };
+var _gicentre$elm_vega$Vega$scDomainMax = _gicentre$elm_vega$Vega$SDomainMax;
 var _gicentre$elm_vega$Vega$SDomain = function (a) {
 	return {ctor: 'SDomain', _0: a};
 };
+var _gicentre$elm_vega$Vega$scDomain = _gicentre$elm_vega$Vega$SDomain;
 var _gicentre$elm_vega$Vega$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
+var _gicentre$elm_vega$Vega$scType = _gicentre$elm_vega$Vega$SType;
 var _gicentre$elm_vega$Vega$RDefault = function (a) {
 	return {ctor: 'RDefault', _0: a};
 };
@@ -13110,19 +13133,25 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMax',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SDomainMin':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMin',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SDomainMid':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMid',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'SDomainRaw':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainRaw',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
 			};
 		case 'SRange':
 			var _p83 = _p82._0;
@@ -13211,37 +13240,37 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SPaddingInner':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingInner',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SPaddingOuter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingOuter',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SRangeStep':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rangeStep',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SRound':
 			return {
 				ctor: '_Tuple2',
 				_0: 'round',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _gicentre$elm_vega$Vega$boolSpec(_p82._0)
 			};
 		case 'SClamp':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clamp',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _gicentre$elm_vega$Vega$boolSpec(_p82._0)
 			};
 		case 'SInterpolate':
 			return {
@@ -13259,31 +13288,31 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zero',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _gicentre$elm_vega$Vega$boolSpec(_p82._0)
 			};
 		case 'SReverse':
 			return {
 				ctor: '_Tuple2',
 				_0: 'reverse',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _gicentre$elm_vega$Vega$boolSpec(_p82._0)
 			};
 		case 'SExponent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exponent',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		case 'SBase':
 			return {
 				ctor: '_Tuple2',
 				_0: 'base',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
 			};
 	}
 };
@@ -13949,14 +13978,14 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -13979,13 +14008,15 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$Vega$scZero(
+											_gicentre$elm_vega$Vega$boolean(false)),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -13998,14 +14029,14 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -14891,10 +14922,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
+						_0: _gicentre$elm_vega$Vega$scDomain(
 							_gicentre$elm_vega$Vega$doData(
 								{
 									ctor: '::',
@@ -14908,17 +14939,19 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(false),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(false)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRound(true),
+										_0: _gicentre$elm_vega$Vega$scRound(
+											_gicentre$elm_vega$Vega$boolean(true)),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -14931,10 +14964,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -14948,17 +14981,19 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(false),
+										_0: _gicentre$elm_vega$Vega$scZero(
+											_gicentre$elm_vega$Vega$boolean(false)),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRound(true),
+											_0: _gicentre$elm_vega$Vega$scRound(
+												_gicentre$elm_vega$Vega$boolean(true)),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -14971,10 +15006,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 						'alignScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doStrs(
 										_gicentre$elm_vega$Vega$strs(
 											{
@@ -14996,7 +15031,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 											}))),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRange(
+									_0: _gicentre$elm_vega$Vega$scRange(
 										_gicentre$elm_vega$Vega$raStrs(
 											{
 												ctor: '::',
@@ -15006,10 +15041,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 													_0: 'left',
 													_1: {
 														ctor: '::',
-														_0: 'cenEnter',
+														_0: 'center',
 														_1: {
 															ctor: '::',
-															_0: 'cenEnter',
+															_0: 'center',
 															_1: {ctor: '[]'}
 														}
 													}
@@ -15024,10 +15059,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 							'baseScale',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+								_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doStrs(
 											_gicentre$elm_vega$Vega$strs(
 												{
@@ -15049,7 +15084,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 												}))),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRange(
+										_0: _gicentre$elm_vega$Vega$scRange(
 											_gicentre$elm_vega$Vega$raStrs(
 												{
 													ctor: '::',
@@ -15077,10 +15112,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 								'dx',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+									_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doStrs(
 												_gicentre$elm_vega$Vega$strs(
 													{
@@ -15102,7 +15137,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 													}))),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
+											_0: _gicentre$elm_vega$Vega$scRange(
 												_gicentre$elm_vega$Vega$raNums(
 													{
 														ctor: '::',
@@ -15130,10 +15165,10 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 									'dy',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+										_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SDomain(
+											_0: _gicentre$elm_vega$Vega$scDomain(
 												_gicentre$elm_vega$Vega$doStrs(
 													_gicentre$elm_vega$Vega$strs(
 														{
@@ -15155,7 +15190,7 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 														}))),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SRange(
+												_0: _gicentre$elm_vega$Vega$scRange(
 													_gicentre$elm_vega$Vega$raNums(
 														{
 															ctor: '::',
@@ -15228,36 +15263,6 @@ var _gicentre$elm_vega$Gallery$scatterplot3 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$Gallery$sourceExample = _gicentre$elm_vega$Gallery$scatterplot3;
-var _gicentre$elm_vega$Gallery$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$Gallery$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 	var mk = function (_p7) {
 		return _gicentre$elm_vega$Vega$marks(
@@ -15787,13 +15792,13 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+						_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raValues(
 									{
 										ctor: '::',
@@ -15806,7 +15811,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -15828,13 +15833,13 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+							_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raValues(
 										{
 											ctor: '::',
@@ -15847,7 +15852,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -16314,19 +16319,21 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRound(true),
+						_0: _gicentre$elm_vega$Vega$scRound(
+							_gicentre$elm_vega$Vega$boolean(true)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+							_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SZero(true),
+								_0: _gicentre$elm_vega$Vega$scZero(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -16340,7 +16347,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRange(
+										_0: _gicentre$elm_vega$Vega$scRange(
 											_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 										_1: {ctor: '[]'}
 									}
@@ -16354,19 +16361,21 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRound(true),
+							_0: _gicentre$elm_vega$Vega$scRound(
+								_gicentre$elm_vega$Vega$boolean(true)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -16380,7 +16389,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 												})),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
+											_0: _gicentre$elm_vega$Vega$scRange(
 												_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 											_1: {ctor: '[]'}
 										}
@@ -16394,19 +16403,21 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 						'sizeScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niFalse),
+									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niFalse),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(true),
+										_0: _gicentre$elm_vega$Vega$scZero(
+											_gicentre$elm_vega$Vega$boolean(true)),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SDomain(
+											_0: _gicentre$elm_vega$Vega$scDomain(
 												_gicentre$elm_vega$Vega$doData(
 													{
 														ctor: '::',
@@ -16420,7 +16431,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 													})),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SRange(
+												_0: _gicentre$elm_vega$Vega$scRange(
 													_gicentre$elm_vega$Vega$raNums(
 														{
 															ctor: '::',
@@ -16774,10 +16785,10 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 				'rScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScSqrt),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScSqrt),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
+						_0: _gicentre$elm_vega$Vega$scDomain(
 							_gicentre$elm_vega$Vega$doData(
 								{
 									ctor: '::',
@@ -16791,7 +16802,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raNums(
 									{
 										ctor: '::',
@@ -17014,10 +17025,10 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 				'cScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							A2(
 								_gicentre$elm_vega$Vega$raScheme,
 								'category20',
@@ -17727,20 +17738,22 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SZero(false),
+							_0: _gicentre$elm_vega$Vega$scZero(
+								_gicentre$elm_vega$Vega$boolean(false)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -17763,20 +17776,22 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SZero(true),
+								_0: _gicentre$elm_vega$Vega$scZero(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRound(true),
+									_0: _gicentre$elm_vega$Vega$scRound(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -17799,10 +17814,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 						'cScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doStrs(
 										_gicentre$elm_vega$Vega$strs(
 											{
@@ -17816,7 +17831,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 											}))),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRange(
+									_0: _gicentre$elm_vega$Vega$scRange(
 										_gicentre$elm_vega$Vega$raStrs(
 											{
 												ctor: '::',
@@ -17836,13 +17851,14 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 							'alphaScale',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+								_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -17856,7 +17872,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 												})),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
+											_0: _gicentre$elm_vega$Vega$scRange(
 												_gicentre$elm_vega$Vega$raNums(
 													{
 														ctor: '::',
@@ -17877,10 +17893,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 								'fontScale',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScSqrt),
+									_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScSqrt),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRange(
+										_0: _gicentre$elm_vega$Vega$scRange(
 											_gicentre$elm_vega$Vega$raNums(
 												{
 													ctor: '::',
@@ -17893,13 +17909,15 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 												})),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SZero(true),
+											_0: _gicentre$elm_vega$Vega$scZero(
+												_gicentre$elm_vega$Vega$boolean(true)),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SRound(true),
+												_0: _gicentre$elm_vega$Vega$scRound(
+													_gicentre$elm_vega$Vega$boolean(true)),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$SDomain(
+													_0: _gicentre$elm_vega$Vega$scDomain(
 														_gicentre$elm_vega$Vega$doData(
 															{
 																ctor: '::',
@@ -17922,10 +17940,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 									'opacityScale',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScQuantile),
+										_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScQuantile),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SRange(
+											_0: _gicentre$elm_vega$Vega$scRange(
 												_gicentre$elm_vega$Vega$raNums(
 													{
 														ctor: '::',
@@ -17970,7 +17988,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 													})),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SDomain(
+												_0: _gicentre$elm_vega$Vega$scDomain(
 													_gicentre$elm_vega$Vega$doData(
 														{
 															ctor: '::',
@@ -17991,17 +18009,17 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 										'alignScale',
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScQuantize),
+											_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScQuantize),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SRange(
+												_0: _gicentre$elm_vega$Vega$scRange(
 													_gicentre$elm_vega$Vega$raStrs(
 														{
 															ctor: '::',
 															_0: 'left',
 															_1: {
 																ctor: '::',
-																_0: 'cenEnter',
+																_0: 'center',
 																_1: {
 																	ctor: '::',
 																	_0: 'right',
@@ -18011,10 +18029,11 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 														})),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$SZero(false),
+													_0: _gicentre$elm_vega$Vega$scZero(
+														_gicentre$elm_vega$Vega$boolean(false)),
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$SDomain(
+														_0: _gicentre$elm_vega$Vega$scDomain(
 															_gicentre$elm_vega$Vega$doNums(
 																_gicentre$elm_vega$Vega$nums(
 																	{
@@ -18036,10 +18055,10 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 											'offsetScale',
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScQuantize),
+												_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScQuantize),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$SRange(
+													_0: _gicentre$elm_vega$Vega$scRange(
 														_gicentre$elm_vega$Vega$raNums(
 															{
 																ctor: '::',
@@ -18056,10 +18075,11 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 															})),
 													_1: {
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$SZero(false),
+														_0: _gicentre$elm_vega$Vega$scZero(
+															_gicentre$elm_vega$Vega$boolean(false)),
 														_1: {
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$SDomain(
+															_0: _gicentre$elm_vega$Vega$scDomain(
 																_gicentre$elm_vega$Vega$doNums(
 																	_gicentre$elm_vega$Vega$nums(
 																		{
@@ -18348,6 +18368,36 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 			}
 		});
 }();
+var _gicentre$elm_vega$Gallery$sourceExample = _gicentre$elm_vega$Gallery$areaChart4;
+var _gicentre$elm_vega$Gallery$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$Gallery$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 	var mkArea = function (_p26) {
 		return _gicentre$elm_vega$Vega$marks(
@@ -18581,20 +18631,22 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SZero(false),
+							_0: _gicentre$elm_vega$Vega$scZero(
+								_gicentre$elm_vega$Vega$boolean(false)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -18617,10 +18669,10 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raValues(
 									{
 										ctor: '::',
@@ -18633,13 +18685,14 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -19125,14 +19178,14 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScPoint),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScPoint),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -19153,20 +19206,21 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -19189,14 +19243,14 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 						'cScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RCategory)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -19697,17 +19751,18 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SZero(false),
+							_0: _gicentre$elm_vega$Vega$scZero(
+								_gicentre$elm_vega$Vega$boolean(false)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -19729,20 +19784,21 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -20152,14 +20208,14 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScPoint),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScPoint),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -20180,20 +20236,21 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -20216,14 +20273,14 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 						'cScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RCategory)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -20792,21 +20849,22 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 				'yScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SPaddingInner(
-							_gicentre$elm_vega$Vega$vSignal('innerPadding')),
+						_0: _gicentre$elm_vega$Vega$scPaddingInner(
+							_gicentre$elm_vega$Vega$numSignal('innerPadding')),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SPaddingOuter(
-								_gicentre$elm_vega$Vega$vSignal('outerPadding')),
+							_0: _gicentre$elm_vega$Vega$scPaddingOuter(
+								_gicentre$elm_vega$Vega$numSignal('outerPadding')),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -20820,7 +20878,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SRange(
+										_0: _gicentre$elm_vega$Vega$scRange(
 											_gicentre$elm_vega$Vega$raStep(
 												_gicentre$elm_vega$Vega$vSignal('rangeStep'))),
 										_1: {ctor: '[]'}
@@ -20960,7 +21018,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SDomain(
+					_0: _gicentre$elm_vega$Vega$scDomain(
 						_gicentre$elm_vega$Vega$doData(
 							{
 								ctor: '::',
@@ -20974,16 +21032,18 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 							})),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+						_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SZero(true),
+							_0: _gicentre$elm_vega$Vega$scZero(
+								_gicentre$elm_vega$Vega$boolean(true)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRound(true),
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boolean(true)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRange(
+									_0: _gicentre$elm_vega$Vega$scRange(
 										_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 									_1: {ctor: '[]'}
 								}
@@ -20996,14 +21056,14 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					'cScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RCategory)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -21584,14 +21644,14 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 				'pos',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -21729,10 +21789,10 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 				'yScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
+						_0: _gicentre$elm_vega$Vega$scDomain(
 							_gicentre$elm_vega$Vega$doData(
 								{
 									ctor: '::',
@@ -21746,11 +21806,12 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SPadding(0.2),
+								_0: _gicentre$elm_vega$Vega$scPadding(
+									_gicentre$elm_vega$Vega$num(0.2)),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -21761,10 +21822,10 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 					'xScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -21778,17 +21839,19 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRound(true),
+									_0: _gicentre$elm_vega$Vega$scRound(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SZero(true),
+										_0: _gicentre$elm_vega$Vega$scZero(
+											_gicentre$elm_vega$Vega$boolean(true)),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+											_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -21801,10 +21864,10 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 						'cScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -21818,7 +21881,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRange(
+									_0: _gicentre$elm_vega$Vega$scRange(
 										A2(
 											_gicentre$elm_vega$Vega$raScheme,
 											'category20',
@@ -22202,14 +22265,14 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doData(
 									{
 										ctor: '::',
@@ -22230,20 +22293,21 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SZero(true),
+									_0: _gicentre$elm_vega$Vega$scZero(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SDomain(
+										_0: _gicentre$elm_vega$Vega$scDomain(
 											_gicentre$elm_vega$Vega$doData(
 												{
 													ctor: '::',
@@ -22266,14 +22330,14 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 						'cScale',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RCategory)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -22881,10 +22945,10 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 				'xScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
+						_0: _gicentre$elm_vega$Vega$scDomain(
 							_gicentre$elm_vega$Vega$doData(
 								{
 									ctor: '::',
@@ -22898,14 +22962,16 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRange(
+							_0: _gicentre$elm_vega$Vega$scRange(
 								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SPadding(5.0e-2),
+								_0: _gicentre$elm_vega$Vega$scPadding(
+									_gicentre$elm_vega$Vega$num(5.0e-2)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SRound(true),
+									_0: _gicentre$elm_vega$Vega$scRound(
+										_gicentre$elm_vega$Vega$boolean(true)),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -22917,7 +22983,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 					'yScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SDomain(
+						_0: _gicentre$elm_vega$Vega$scDomain(
 							_gicentre$elm_vega$Vega$doData(
 								{
 									ctor: '::',
@@ -22931,10 +22997,10 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+							_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
 								_1: {ctor: '[]'}
 							}
@@ -23269,7 +23335,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 		var range = function () {
 			var _p76 = gender;
 			if (_p76.ctor === 'Female') {
-				return _gicentre$elm_vega$Vega$SRange(
+				return _gicentre$elm_vega$Vega$scRange(
 					_gicentre$elm_vega$Vega$raValues(
 						{
 							ctor: '::',
@@ -23281,7 +23347,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							}
 						}));
 			} else {
-				return _gicentre$elm_vega$Vega$SRange(
+				return _gicentre$elm_vega$Vega$scRange(
 					_gicentre$elm_vega$Vega$raValues(
 						{
 							ctor: '::',
@@ -23301,16 +23367,16 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 					'xScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScLinear),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
 							_0: range,
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SNice(_gicentre$elm_vega$Vega$niTrue),
+								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$niTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SDomain(
+									_0: _gicentre$elm_vega$Vega$scDomain(
 										_gicentre$elm_vega$Vega$doData(
 											{
 												ctor: '::',
@@ -23548,10 +23614,10 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 				'yScale',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SRange(
+						_0: _gicentre$elm_vega$Vega$scRange(
 							_gicentre$elm_vega$Vega$raValues(
 								{
 									ctor: '::',
@@ -23564,10 +23630,11 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SRound(true),
+							_0: _gicentre$elm_vega$Vega$scRound(
+								_gicentre$elm_vega$Vega$boolean(true)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SDomain(
+								_0: _gicentre$elm_vega$Vega$scDomain(
 									_gicentre$elm_vega$Vega$doData(
 										{
 											ctor: '::',
@@ -23589,10 +23656,10 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 					'cScale',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SType(_gicentre$elm_vega$Vega$ScOrdinal),
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SDomain(
+							_0: _gicentre$elm_vega$Vega$scDomain(
 								_gicentre$elm_vega$Vega$doNums(
 									_gicentre$elm_vega$Vega$nums(
 										{
@@ -23606,7 +23673,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 										}))),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SRange(
+								_0: _gicentre$elm_vega$Vega$scRange(
 									_gicentre$elm_vega$Vega$raStrs(
 										{
 											ctor: '::',

@@ -12880,60 +12880,83 @@ var _user$project$Vega$niMillisecond = _user$project$Vega$NMillisecond;
 var _user$project$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
+var _user$project$Vega$scRangeStep = _user$project$Vega$SRangeStep;
 var _user$project$Vega$SPaddingOuter = function (a) {
 	return {ctor: 'SPaddingOuter', _0: a};
 };
+var _user$project$Vega$scPaddingOuter = _user$project$Vega$SPaddingOuter;
 var _user$project$Vega$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
+var _user$project$Vega$scPaddingInner = _user$project$Vega$SPaddingInner;
 var _user$project$Vega$SAlign = function (a) {
 	return {ctor: 'SAlign', _0: a};
 };
+var _user$project$Vega$scAlign = _user$project$Vega$SAlign;
 var _user$project$Vega$SBase = function (a) {
 	return {ctor: 'SBase', _0: a};
 };
+var _user$project$Vega$scBase = _user$project$Vega$SBase;
 var _user$project$Vega$SExponent = function (a) {
 	return {ctor: 'SExponent', _0: a};
 };
+var _user$project$Vega$scExponent = _user$project$Vega$SExponent;
 var _user$project$Vega$SZero = function (a) {
 	return {ctor: 'SZero', _0: a};
 };
+var _user$project$Vega$scZero = _user$project$Vega$SZero;
 var _user$project$Vega$SNice = function (a) {
 	return {ctor: 'SNice', _0: a};
 };
+var _user$project$Vega$scNice = _user$project$Vega$SNice;
 var _user$project$Vega$SPadding = function (a) {
 	return {ctor: 'SPadding', _0: a};
 };
+var _user$project$Vega$scPadding = _user$project$Vega$SPadding;
 var _user$project$Vega$SInterpolate = function (a) {
 	return {ctor: 'SInterpolate', _0: a};
 };
+var _user$project$Vega$scInterpolate = _user$project$Vega$SInterpolate;
 var _user$project$Vega$SClamp = function (a) {
 	return {ctor: 'SClamp', _0: a};
 };
+var _user$project$Vega$scClamp = _user$project$Vega$SClamp;
 var _user$project$Vega$SRound = function (a) {
 	return {ctor: 'SRound', _0: a};
 };
+var _user$project$Vega$scRound = _user$project$Vega$SRound;
 var _user$project$Vega$SReverse = function (a) {
 	return {ctor: 'SReverse', _0: a};
 };
+var _user$project$Vega$scReverse = _user$project$Vega$SReverse;
 var _user$project$Vega$SRange = function (a) {
 	return {ctor: 'SRange', _0: a};
 };
+var _user$project$Vega$scRange = _user$project$Vega$SRange;
+var _user$project$Vega$SDomainRaw = function (a) {
+	return {ctor: 'SDomainRaw', _0: a};
+};
+var _user$project$Vega$scDomainRaw = _user$project$Vega$SDomainRaw;
 var _user$project$Vega$SDomainMid = function (a) {
 	return {ctor: 'SDomainMid', _0: a};
 };
+var _user$project$Vega$scDomainMid = _user$project$Vega$SDomainMid;
 var _user$project$Vega$SDomainMin = function (a) {
 	return {ctor: 'SDomainMin', _0: a};
 };
+var _user$project$Vega$scDomainMin = _user$project$Vega$SDomainMin;
 var _user$project$Vega$SDomainMax = function (a) {
 	return {ctor: 'SDomainMax', _0: a};
 };
+var _user$project$Vega$scDomainMax = _user$project$Vega$SDomainMax;
 var _user$project$Vega$SDomain = function (a) {
 	return {ctor: 'SDomain', _0: a};
 };
+var _user$project$Vega$scDomain = _user$project$Vega$SDomain;
 var _user$project$Vega$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
+var _user$project$Vega$scType = _user$project$Vega$SType;
 var _user$project$Vega$RDefault = function (a) {
 	return {ctor: 'RDefault', _0: a};
 };
@@ -13110,19 +13133,25 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMax',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SDomainMin':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMin',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SDomainMid':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMid',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
+			};
+		case 'SDomainRaw':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainRaw',
+				_1: _user$project$Vega$valueSpec(_p82._0)
 			};
 		case 'SRange':
 			var _p83 = _p82._0;
@@ -13211,37 +13240,37 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SPaddingInner':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingInner',
-				_1: _user$project$Vega$valueSpec(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SPaddingOuter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingOuter',
-				_1: _user$project$Vega$valueSpec(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SRangeStep':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rangeStep',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SRound':
 			return {
 				ctor: '_Tuple2',
 				_0: 'round',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _user$project$Vega$boolSpec(_p82._0)
 			};
 		case 'SClamp':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clamp',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _user$project$Vega$boolSpec(_p82._0)
 			};
 		case 'SInterpolate':
 			return {
@@ -13259,31 +13288,31 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zero',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _user$project$Vega$boolSpec(_p82._0)
 			};
 		case 'SReverse':
 			return {
 				ctor: '_Tuple2',
 				_0: 'reverse',
-				_1: _elm_lang$core$Json_Encode$bool(_p82._0)
+				_1: _user$project$Vega$boolSpec(_p82._0)
 			};
 		case 'SExponent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exponent',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		case 'SBase':
 			return {
 				ctor: '_Tuple2',
 				_0: 'base',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: _elm_lang$core$Json_Encode$float(_p82._0)
+				_1: _user$project$Vega$numSpec(_p82._0)
 			};
 	}
 };
@@ -13879,10 +13908,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 				'xscale',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SType(_user$project$Vega$ScBand),
+					_0: _user$project$Vega$scType(_user$project$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SDomain(
+						_0: _user$project$Vega$scDomain(
 							_user$project$Vega$doStrs(
 								_user$project$Vega$strs(
 									{
@@ -13900,7 +13929,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									}))),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SRange(
+							_0: _user$project$Vega$scRange(
 								_user$project$Vega$raDefault(_user$project$Vega$RWidth)),
 							_1: {ctor: '[]'}
 						}
@@ -13911,10 +13940,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 					'yscale',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SType(_user$project$Vega$ScLinear),
+						_0: _user$project$Vega$scType(_user$project$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SDomain(
+							_0: _user$project$Vega$scDomain(
 								_user$project$Vega$doData(
 									{
 										ctor: '::',
@@ -13928,11 +13957,12 @@ var _user$project$TransformTests$stackTest1 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SRange(
+								_0: _user$project$Vega$scRange(
 									_user$project$Vega$raDefault(_user$project$Vega$RHeight)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SRound(true),
+									_0: _user$project$Vega$scRound(
+										_user$project$Vega$boolean(true)),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -13943,10 +13973,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 						'color',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SType(_user$project$Vega$ScOrdinal),
+							_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SRange(
+								_0: _user$project$Vega$scRange(
 									A2(
 										_user$project$Vega$raScheme,
 										'category10',
@@ -13978,7 +14008,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 												_0: 'zero',
 												_1: {
 													ctor: '::',
-													_0: 'cenEnter',
+													_0: 'center',
 													_1: {
 														ctor: '::',
 														_0: 'normalize',
@@ -14405,10 +14435,10 @@ var _user$project$TransformTests$packTest1 = function () {
 				'color',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SType(_user$project$Vega$ScOrdinal),
+					_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SRange(
+						_0: _user$project$Vega$scRange(
 							A2(
 								_user$project$Vega$raScheme,
 								'category20',

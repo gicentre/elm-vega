@@ -39,8 +39,8 @@ packTest1 =
         sc =
             scales
                 << scale "color"
-                    [ SType ScOrdinal
-                    , SRange (raScheme "category20" [])
+                    [ scType ScOrdinal
+                    , scRange (raScheme "category20" [])
                     ]
 
         mk =
@@ -93,7 +93,7 @@ stackTest1 =
             signals
                 << signal "offset"
                     [ SiValue (vStr "zero")
-                    , SiBind (iSelect [ inOptions (vStrs [ "zero", "cenEnter", "normalize" ]) ])
+                    , SiBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
                     [ SiValue vNull
@@ -115,19 +115,19 @@ stackTest1 =
         sc =
             scales
                 << scale "xscale"
-                    [ SType ScBand
-                    , SDomain (doStrs (strs [ "a", "b", "c" ]))
-                    , SRange (raDefault RWidth)
+                    [ scType ScBand
+                    , scDomain (doStrs (strs [ "a", "b", "c" ]))
+                    , scRange (raDefault RWidth)
                     ]
                 << scale "yscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "y1") ])
-                    , SRange (raDefault RHeight)
-                    , SRound True
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "y1") ])
+                    , scRange (raDefault RHeight)
+                    , scRound (boolean True)
                     ]
                 << scale "color"
-                    [ SType ScOrdinal
-                    , SRange (raScheme "category10" [])
+                    [ scType ScOrdinal
+                    , scRange (raScheme "category10" [])
                     ]
 
         mk =

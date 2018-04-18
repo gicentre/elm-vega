@@ -45,7 +45,7 @@ module Vega
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleDomain
         , ScaleNice
-        , ScaleProperty(..)
+        , ScaleProperty
         , ScaleRange
         , SchemeProperty(..)
         , Side(..)
@@ -329,7 +329,27 @@ module Vega
         , raStrs
         , raValues
         , rgb
+        , scAlign
+        , scBase
+        , scClamp
         , scCustom
+        , scDomain
+        , scDomainMax
+        , scDomainMid
+        , scDomainMin
+        , scDomainRaw
+        , scExponent
+        , scInterpolate
+        , scNice
+        , scPadding
+        , scPaddingInner
+        , scPaddingOuter
+        , scRange
+        , scRangeStep
+        , scReverse
+        , scRound
+        , scType
+        , scZero
         , scale
         , scales
         , sigHeight
@@ -716,6 +736,26 @@ The mapping of data values to their visual expression.
 @docs scale
 @docs RangeDefault
 @docs ScaleProperty
+@docs scType
+@docs scDomain
+@docs scDomainMax
+@docs scDomainMin
+@docs scDomainMid
+@docs scDomainRaw
+@docs scRange
+@docs scReverse
+@docs scRound
+@docs scClamp
+@docs scInterpolate
+@docs scPadding
+@docs scNice
+@docs scZero
+@docs scExponent
+@docs scBase
+@docs scAlign
+@docs scPaddingInner
+@docs scPaddingOuter
+@docs scRangeStep
 @docs Scale
 @docs scCustom
 @docs ScaleDomain
@@ -1573,31 +1613,27 @@ Scale Properties characterise the fundamental data-to-visual transformations app
 by the `scale` function. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
 -}
-type
-    ScaleProperty
-    -- TODO: Replace primitive values (Float, Bool) with their type-specific value
-    -- (StrSignal etc.) so can respond to signals.
-    -- TODO: Replace generic Value for SPaddingInner/Outer with numeric signal type.
+type ScaleProperty
     = SType Scale
     | SDomain ScaleDomain
-    | SDomainMax Float
-    | SDomainMin Float
-    | SDomainMid Float
-      -- TODO: Do we need domainRaw? Why not just use SDomain DNums [1,2,3] etc.?
+    | SDomainMax Num
+    | SDomainMin Num
+    | SDomainMid Num
+    | SDomainRaw Value
     | SRange ScaleRange
-    | SReverse Bool
-    | SRound Bool
-    | SClamp Bool
+    | SReverse BoolSig
+    | SRound BoolSig
+    | SClamp BoolSig
     | SInterpolate CInterpolate
-    | SPadding Float
+    | SPadding Num
     | SNice ScaleNice
-    | SZero Bool
-    | SExponent Float
-    | SBase Float
-    | SAlign Float
-    | SPaddingInner Value
-    | SPaddingOuter Value
-    | SRangeStep Float
+    | SZero BoolSig
+    | SExponent Num
+    | SBase Num
+    | SAlign Num
+    | SPaddingInner Num
+    | SPaddingOuter Num
+    | SRangeStep Num
 
 
 {-| Describes a scale range of scale output values. For full details see the
@@ -4454,12 +4490,192 @@ scales scs =
     ( VScales, JE.list scs )
 
 
+{-| Specify the alignment of elements within each step of a band scale, as a
+fraction of the step size. Should be in the range [0,1]. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scAlign : Num -> ScaleProperty
+scAlign =
+    SAlign
+
+
+{-| Specify the base of the logorithm used in a logarithmic scale. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scBase : Num -> ScaleProperty
+scBase =
+    SBase
+
+
+{-| Specify whether output values should be clamped to when using a quantitative
+scale range (default false). If clamping is disabled and the scale is passed a
+value outside the domain, the scale may return a value outside the range through
+extrapolation. If clamping is enabled, the output value of the scale is always
+within the scale’s range. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scClamp : BoolSig -> ScaleProperty
+scClamp =
+    SClamp
+
+
 {-| Specify a custom named scale. For detaisl see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#types)
 -}
 scCustom : String -> Scale
 scCustom =
     ScCustom
+
+
+{-| Specify the domain of input data values for a scale. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scDomain : ScaleDomain -> ScaleProperty
+scDomain =
+    SDomain
+
+
+{-| Specify the maximum value of a scale domain, overriding a `scDomain` setting.
+This is only intended for use with scales having continuous domains. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scDomainMax : Num -> ScaleProperty
+scDomainMax =
+    SDomainMax
+
+
+{-| Specify the minimum value of a scale domain, overriding a `scDomain` setting.
+This is only intended for use with scales having continuous domains. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scDomainMin : Num -> ScaleProperty
+scDomainMin =
+    SDomainMin
+
+
+{-| Insert a single mid-point value into a two-element scale domain. The mid-point
+value must lie between the domain minimum and maximum values. This can be useful
+for setting a midpoint for diverging color scales. It is only intended for use
+with scales having continuous, piecewise domains. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scDomainMid : Num -> ScaleProperty
+scDomainMid =
+    SDomainMid
+
+
+{-| Specify an array value that directly overrides the domain of a scale. This is
+useful for supporting interactions such as panning or zooming a scale. The scale
+may be initially determined using a data-driven domain, then modified in response
+to user input by using this rawDomain function. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scDomainRaw : Value -> ScaleProperty
+scDomainRaw =
+    SDomainRaw
+
+
+{-| Specify the exponent to be used in power scale. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scExponent : Num -> ScaleProperty
+scExponent =
+    SExponent
+
+
+{-| Specify the interpolation method for a quantitative scale. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scInterpolate : CInterpolate -> ScaleProperty
+scInterpolate =
+    SInterpolate
+
+
+{-| Extend the range of a scale domain so it starts and ends on 'nice' round
+values. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scNice : ScaleNice -> ScaleProperty
+scNice =
+    SNice
+
+
+{-| Expand a scale domain to accommodate the specified number of pixels on each
+end of a quantitative scale range or the padding between bands in a band scale.
+For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scPadding : Num -> ScaleProperty
+scPadding =
+    SPadding
+
+
+{-| Expand a scale domain to accommodate the specified number of pixels
+between inner bands in a band scale. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scPaddingInner : Num -> ScaleProperty
+scPaddingInner =
+    SPaddingInner
+
+
+{-| Expand a scale domain to accommodate the specified number of pixels
+outside the outer bands in a band scale. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scPaddingOuter : Num -> ScaleProperty
+scPaddingOuter =
+    SPaddingOuter
+
+
+{-| Specify the range of a scale representing the set of visual values. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scRange : ScaleRange -> ScaleProperty
+scRange =
+    SRange
+
+
+{-| Specify the step size for band and point scales. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scRangeStep : Num -> ScaleProperty
+scRangeStep =
+    SRangeStep
+
+
+{-| Reverse the order of a scale range. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scReverse : BoolSig -> ScaleProperty
+scReverse =
+    SReverse
+
+
+{-| Specify whether to round numeric output values to integers. Helpful for
+snapping to the pixel grid. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scRound : BoolSig -> ScaleProperty
+scRound =
+    SRound
+
+
+{-| Specify the type of a named scale. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scType : Scale -> ScaleProperty
+scType =
+    SType
+
+
+{-| Specify whether or not a scale domain should include zero. The default is
+true for linear, sqrt and power scales and false for all others. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/scales/#properties)
+-}
+scZero : BoolSig -> ScaleProperty
+scZero =
+    SZero
 
 
 {-| Create the signals used to add dynamism to the visualization.
@@ -6139,13 +6355,16 @@ scaleProperty scaleProp =
             ( "domain", scaleDomainSpec sdType )
 
         SDomainMax sdMax ->
-            ( "domainMax", JE.float sdMax )
+            ( "domainMax", numSpec sdMax )
 
         SDomainMin sdMin ->
-            ( "domainMin", JE.float sdMin )
+            ( "domainMin", numSpec sdMin )
 
         SDomainMid sdMid ->
-            ( "domainMid", JE.float sdMid )
+            ( "domainMid", numSpec sdMid )
+
+        SDomainRaw sdRaw ->
+            ( "domainRaw", valueSpec sdRaw )
 
         SRange range ->
             case range of
@@ -6174,22 +6393,22 @@ scaleProperty scaleProp =
                     ( "range", JE.string (rangeDefaultLabel rd) )
 
         SPadding x ->
-            ( "padding", JE.float x )
+            ( "padding", numSpec x )
 
-        SPaddingInner val ->
-            ( "paddingInner", valueSpec val )
+        SPaddingInner x ->
+            ( "paddingInner", numSpec x )
 
-        SPaddingOuter val ->
-            ( "paddingOuter", valueSpec val )
+        SPaddingOuter x ->
+            ( "paddingOuter", numSpec x )
 
         SRangeStep x ->
-            ( "rangeStep", JE.float x )
+            ( "rangeStep", numSpec x )
 
         SRound b ->
-            ( "round", JE.bool b )
+            ( "round", boolSpec b )
 
         SClamp b ->
-            ( "clamp", JE.bool b )
+            ( "clamp", boolSpec b )
 
         SInterpolate interp ->
             ( "interpolate", interpolateSpec interp )
@@ -6198,19 +6417,19 @@ scaleProperty scaleProp =
             ( "nice", niceSpec ni )
 
         SZero b ->
-            ( "zero", JE.bool b )
+            ( "zero", boolSpec b )
 
         SReverse b ->
-            ( "reverse", JE.bool b )
+            ( "reverse", boolSpec b )
 
         SExponent x ->
-            ( "exponent", JE.float x )
+            ( "exponent", numSpec x )
 
         SBase x ->
-            ( "base", JE.float x )
+            ( "base", numSpec x )
 
         SAlign x ->
-            ( "align", JE.float x )
+            ( "align", numSpec x )
 
 
 schemeProperty : SchemeProperty -> LabelledSpec

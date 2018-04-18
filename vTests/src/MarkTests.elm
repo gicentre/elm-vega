@@ -84,17 +84,17 @@ areaTest =
         sc =
             scales
                 << scale "xscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (raDefault RWidth)
-                    , SZero False
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "u") ])
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
                     ]
                 << scale "yscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (raDefault RHeight)
-                    , SZero True
-                    , SNice niTrue
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "v") ])
+                    , scRange (raDefault RHeight)
+                    , scZero (boolean True)
+                    , scNice niTrue
                     ]
 
         si =
@@ -212,7 +212,7 @@ imageTest =
                 << signal "w" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "h" [ SiValue (vNum 50), SiBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "aspect" [ SiValue (vBool True), SiBind (iCheckbox []) ]
-                << signal "align" [ SiValue (vStr "left"), SiBind (iSelect [ inOptions (vStrs [ "left", "cenEnter", "right" ]) ]) ]
+                << signal "align" [ SiValue (vStr "left"), SiBind (iSelect [ inOptions (vStrs [ "left", "center", "right" ]) ]) ]
                 << signal "baseline" [ SiValue (vStr "top"), SiBind (iSelect [ inOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
 
         mk =
@@ -252,17 +252,17 @@ lineTest =
         sc =
             scales
                 << scale "xscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (raDefault RWidth)
-                    , SZero False
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "u") ])
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
                     ]
                 << scale "yscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (raDefault RHeight)
-                    , SZero True
-                    , SNice niTrue
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "v") ])
+                    , scRange (raDefault RHeight)
+                    , scZero (boolean True)
+                    , scNice niTrue
                     ]
 
         si =
@@ -474,7 +474,7 @@ textTest =
                 << signal "angle" [ SiValue (vNum 0), SiBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
                 << signal "fontSize" [ SiValue (vNum 10), SiBind (iRange [ inMin 1, inMax 36, inStep 1 ]) ]
                 << signal "limit" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 150, inStep 1 ]) ]
-                << signal "align" [ SiValue (vStr (hAlignLabel AlignLeft)), SiBind (iSelect [ inOptions (vStrs [ "left", "cenEnter", "right" ]) ]) ]
+                << signal "align" [ SiValue (vStr (hAlignLabel AlignLeft)), SiBind (iSelect [ inOptions (vStrs [ "left", "center", "right" ]) ]) ]
                 << signal "baseline" [ SiValue (vStr (vAlignLabel Alphabetic)), SiBind (iSelect [ inOptions (vStrs [ "alphabetic", "top", "middle", "bottom" ]) ]) ]
                 << signal "font" [ SiValue (vStr "sans-serif"), SiBind (iRadio [ inOptions (vStrs [ "sans-serif", "serif", "monospace" ]) ]) ]
                 << signal "fontWeight" [ SiValue (vStr "normal"), SiBind (iRadio [ inOptions (vStrs [ "normal", "bold" ]) ]) ]
@@ -528,22 +528,22 @@ trailTest =
         sc =
             scales
                 << scale "xscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "u") ])
-                    , SRange (raDefault RWidth)
-                    , SZero False
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "u") ])
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
                     ]
                 << scale "yscale"
-                    [ SType ScLinear
-                    , SDomain (doData [ dDataset "table", dField (str "v") ])
-                    , SRange (raDefault RHeight)
-                    , SZero True
-                    , SNice niTrue
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "v") ])
+                    , scRange (raDefault RHeight)
+                    , scZero (boolean True)
+                    , scNice niTrue
                     ]
                 << scale "zscale"
-                    [ SType ScLinear
-                    , SRange (raNums [ 5, 1 ])
-                    , SDomain (doData [ dDataset "table", dField (str "v") ])
+                    [ scType ScLinear
+                    , scRange (raNums [ 5, 1 ])
+                    , scDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
 
         si =
