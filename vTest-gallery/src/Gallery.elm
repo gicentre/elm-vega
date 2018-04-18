@@ -14,7 +14,7 @@ import Vega exposing (..)
 
 dv : String -> Float -> ( String, Value )
 dv label num =
-    ( label, vNumber num )
+    ( label, vNum num )
 
 
 barChart1 : Spec
@@ -22,8 +22,8 @@ barChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                << dataColumn "amount" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+                << dataColumn "category" (daStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "amount" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
 
         ds =
             dataSource [ table [] ]
@@ -31,26 +31,26 @@ barChart1 =
         si =
             signals
                 << signal "tooltip"
-                    [ SiValue (vObject [])
-                    , SiOn
-                        [ [ EEvents "rect:mouseover", EUpdate "datum" ]
-                        , [ EEvents "rect:mouseout", EUpdate "" ]
+                    [ siValue (vObject [])
+                    , siOn
+                        [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
+                        , eventHandler "rect:mouseout" [ eUpdate "" ]
                         ]
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScBand
-                    , SDomain (DData [ DDataset "table", DField (vStr "category") ])
-                    , SRange (RDefault RWidth)
-                    , SPadding 0.05
-                    , SRound True
+                    [ scType ScBand
+                    , scDomain (doData [ dDataset "table", dField (str "category") ])
+                    , scRange (raDefault RWidth)
+                    , scPadding (num 0.05)
+                    , scRound (boolean True)
                     ]
                 << scale "yScale"
-                    [ SDomain (DData [ DDataset "table", DField (vStr "amount") ])
-                    , SNice NTrue
-                    , SRange (RDefault RHeight)
+                    [ scDomain (doData [ dDataset "table", dField (str "amount") ])
+                    , scNice niTrue
+                    , scRange (raDefault RHeight)
                     ]
 
         ax =
@@ -61,30 +61,30 @@ barChart1 =
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "category") ]
-                            , MWidth [ vScale (FName "xScale"), vBand 1 ]
-                            , MY [ vScale (FName "yScale"), vField (FName "amount") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "category") ]
+                            , maWidth [ vScale (fName "xScale"), vBand 1 ]
+                            , maY [ vScale (fName "yScale"), vField (fName "amount") ]
+                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
                             ]
-                        , Update [ MFill [ vStr "steelblue" ] ]
-                        , Hover [ MFill [ vStr "red" ] ]
+                        , enUpdate [ maFill [ vStr "steelblue" ] ]
+                        , enHover [ maFill [ vStr "red" ] ]
                         ]
                     ]
                 << mark Text
-                    [ MEncode
-                        [ Enter
-                            [ MAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , MBaseline [ vStr (vAlignLabel AlignBottom) ]
-                            , MFill [ vStr "#333" ]
+                    [ mEncode
+                        [ enEnter
+                            [ maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maFill [ vStr "#333" ]
                             ]
-                        , Update
-                            [ MX [ vScale (FName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
-                            , MY [ vScale (FName "yScale"), vSignal "tooltip.amount", vOffset (vNumber -2) ]
-                            , MText [ vSignal "tooltip.amount" ]
-                            , MFillOpacity [ ifElse "datum === tooltip" [ vNumber 0 ] [ vNumber 1 ] ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
+                            , maY [ vScale (fName "yScale"), vSignal "tooltip.amount", vOffset (vNum -2) ]
+                            , maText [ vSignal "tooltip.amount" ]
+                            , maFillOpacity [ ifElse "datum === tooltip" [ vNum 0 ] [ vNum 1 ] ]
                             ]
                         ]
                     ]
@@ -98,18 +98,18 @@ barChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (daNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (daNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
                 [ table []
                     |> transform
-                        [ TStack
-                            [ StGroupBy [ "x" ]
-                            , StSort [ CoField [ "c" ] ]
-                            , StField "y"
+                        [ trStack
+                            [ stGroupBy [ "x" ]
+                            , stSort [ coField [ "c" ] ]
+                            , stField "y"
                             ]
                         ]
                 ]
@@ -117,42 +117,42 @@ barChart2 =
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScBand
-                    , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField (vStr "x") ])
+                    [ scType ScBand
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RHeight)
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "table", DField (vStr "y1") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField (vStr "c") ])
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1 ]
-                << axis "yScale" SLeft [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "yScale" SLeft [ axZIndex 1 ]
 
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MWidth [ vScale (FName "xScale"), vBand 1, vOffset (vNumber -1) ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "c") ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , maWidth [ vScale (fName "xScale"), vBand 1, vOffset (vNum -1) ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
-                        , Update [ MFillOpacity [ vNumber 1 ] ]
-                        , Hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ maFillOpacity [ vNum 1 ] ]
+                        , enHover [ maFillOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -165,9 +165,9 @@ barChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (vStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
-                << dataColumn "position" (vNumbers [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
-                << dataColumn "value" (vNumbers [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
+                << dataColumn "category" (daStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
+                << dataColumn "position" (daNums [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
+                << dataColumn "value" (daNums [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
 
         ds =
             dataSource [ table [] ]
@@ -175,67 +175,67 @@ barChart3 =
         sc =
             scales
                 << scale "yScale"
-                    [ SType ScBand
-                    , SDomain (DData [ DDataset "table", DField (vStr "category") ])
-                    , SRange (RDefault RHeight)
-                    , SPadding 0.2
+                    [ scType ScBand
+                    , scDomain (doData [ dDataset "table", dField (str "category") ])
+                    , scRange (raDefault RHeight)
+                    , scPadding (num 0.2)
                     ]
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (vStr "value") ])
-                    , SRange (RDefault RWidth)
-                    , SRound True
-                    , SZero True
-                    , SNice NTrue
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "value") ])
+                    , scRange (raDefault RWidth)
+                    , scRound (boolean True)
+                    , scZero (boolean True)
+                    , scNice niTrue
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SDomain (DData [ DDataset "table", DField (vStr "position") ])
-                    , SRange (RScheme "category20" [])
+                    [ scType ScOrdinal
+                    , scDomain (doData [ dDataset "table", dField (str "position") ])
+                    , scRange (raScheme "category20" [])
                     ]
 
         ax =
             axes
-                << axis "yScale" SLeft [ AxTickSize 0, AxLabelPadding 4, AxZIndex 1 ]
+                << axis "yScale" SLeft [ axTickSize 0, axLabelPadding 4, axZIndex 1 ]
                 << axis "xScale" SBottom []
 
         nestedSi =
             signals
-                << signal "height" [ SiUpdate "bandwidth('yScale')" ]
+                << signal "height" [ siUpdate "bandwidth('yScale')" ]
 
         nestedSc =
             scales
                 << scale "pos"
-                    [ SType ScBand
-                    , SRange (RDefault RHeight)
-                    , SDomain (DData [ DDataset "facet", DField (vStr "position") ])
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ dDataset "facet", dField (str "position") ])
                     ]
 
         nestedMk =
             marks
                 << mark Rect
-                    [ MName "bars"
-                    , MFrom [ SData "facet" ]
-                    , MEncode
-                        [ Enter
-                            [ MY [ vScale (FName "pos"), vField (FName "position") ]
-                            , MHeight [ vScale (FName "pos"), vBand 1 ]
-                            , MX [ vScale (FName "xScale"), vField (FName "value") ]
-                            , MX2 [ vScale (FName "xScale"), vBand 0 ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "position") ]
+                    [ mName "bars"
+                    , mFrom [ srData (str "facet") ]
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vScale (fName "pos"), vField (fName "position") ]
+                            , maHeight [ vScale (fName "pos"), vBand 1 ]
+                            , maX [ vScale (fName "xScale"), vField (fName "value") ]
+                            , maX2 [ vScale (fName "xScale"), vBand 0 ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "position") ]
                             ]
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ SData "bars" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vField (FName "x2"), vOffset (vNumber -5) ]
-                            , MY [ vField (FName "y"), vOffset (vObject [ vField (FName "height"), vMultiply (vNumber 0.5) ]) ]
-                            , MFill [ vStr "white" ]
-                            , MAlign [ vStr (hAlignLabel AlignRight) ]
-                            , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , MText [ vField (FName "datum.value") ]
+                    [ mFrom [ srData (str "bars") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vField (fName "x2"), vOffset (vNum -5) ]
+                            , maY [ vField (fName "y"), vOffset (vObject [ vField (fName "height"), vMultiply (vNum 0.5) ]) ]
+                            , maFill [ vStr "white" ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maText [ vField (fName "datum.value") ]
                             ]
                         ]
                     ]
@@ -243,9 +243,9 @@ barChart3 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ SFacet [ FaData "table", FaName "facet", FaGroupBy [ "category" ] ] ]
-                    , MEncode [ Enter [ MY [ vScale (FName "yScale"), vField (FName "category") ] ] ]
-                    , MGroup [ nestedSi [], nestedSc [], nestedMk [] ]
+                    [ mFrom [ srFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
+                    , mEncode [ enEnter [ maY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
+                    , mGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
     in
     toVega
@@ -257,22 +257,22 @@ barChart4 =
     let
         table =
             dataFromColumns "tuples" []
-                << dataColumn "a" (vNumbers [ 0, 0, 0, 0, 1, 2, 2 ])
-                << dataColumn "b" (vStrs [ "a", "a", "b", "c", "b", "b", "c" ])
-                << dataColumn "c" (vNumbers [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
+                << dataColumn "a" (daNums [ 0, 0, 0, 0, 1, 2, 2 ])
+                << dataColumn "b" (daStrs [ "a", "a", "b", "c", "b", "b", "c" ])
+                << dataColumn "c" (daNums [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
 
         agTable =
             table []
                 |> transform
-                    [ TAggregate [ AgGroupBy [ "a", "b" ], AgFields [ "c" ], AgOps [ Average ], AgAs [ "c" ] ] ]
+                    [ trAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
 
         trTable =
-            data "trellis" [ DSource "tuples" ]
+            data "trellis" [ daSource "tuples" ]
                 |> transform
-                    [ TAggregate [ AgGroupBy [ "a" ] ]
-                    , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
-                    , TStack [ StField "span" ]
-                    , TExtentAsSignal "y1" "trellisExtent"
+                    [ trAggregate [ agGroupBy [ "a" ] ]
+                    , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
+                    , trStack [ stField "span" ]
+                    , trExtentAsSignal "y1" "trellisExtent"
                     ]
 
         ds =
@@ -280,64 +280,64 @@ barChart4 =
 
         si =
             signals
-                << signal "rangeStep" [ SiValue (vNumber 20), SiBind (IRange [ InMin 5, InMax 50, InStep 1 ]) ]
-                << signal "innerPadding" [ SiValue (vNumber 0.1), SiBind (IRange [ InMin 0, InMax 0.7, InStep 0.01 ]) ]
-                << signal "outerPadding" [ SiValue (vNumber 0.2), SiBind (IRange [ InMin 0, InMax 0.4, InStep 0.01 ]) ]
-                << signal "height" [ SiUpdate "trellisExtent[1]" ]
+                << signal "rangeStep" [ siValue (vNum 20), siBind (iRange [ inMin 5, inMax 50, inStep 1 ]) ]
+                << signal "innerPadding" [ siValue (vNum 0.1), siBind (iRange [ inMin 0, inMax 0.7, inStep 0.01 ]) ]
+                << signal "outerPadding" [ siValue (vNum 0.2), siBind (iRange [ inMin 0, inMax 0.4, inStep 0.01 ]) ]
+                << signal "height" [ siUpdate "trellisExtent[1]" ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SDomain (DData [ DDataset "tuples", DField (vStr "c") ])
-                    , SNice NTrue
-                    , SZero True
-                    , SRound True
-                    , SRange (RDefault RWidth)
+                    [ scDomain (doData [ dDataset "tuples", dField (str "c") ])
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scRound (boolean True)
+                    , scRange (raDefault RWidth)
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "trellis", DField (vStr "a") ])
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ dDataset "trellis", dField (str "a") ])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxDomain True ]
+            axes << axis "xScale" SBottom [ axDomain True ]
 
         nestedSc =
             scales
                 << scale "yScale"
-                    [ SType ScBand
-                    , SPaddingInner (vSignal "innerPadding")
-                    , SPaddingOuter (vSignal "outerPadding")
-                    , SRound True
-                    , SDomain (DData [ DDataset "faceted_tuples", DField (vStr "b") ])
-                    , SRange (RStep (vSignal "rangeStep"))
+                    [ scType ScBand
+                    , scPaddingInner (numSignal "innerPadding")
+                    , scPaddingOuter (numSignal "outerPadding")
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "faceted_tuples", dField (str "b") ])
+                    , scRange (raStep (vSignal "rangeStep"))
                     ]
 
         nestedAx =
             axes
-                << axis "yScale" SLeft [ AxTicks False, AxDomain False, AxLabelPadding 4 ]
+                << axis "yScale" SLeft [ axTicks False, axDomain False, axLabelPadding 4 ]
 
         nestedMk =
             marks
                 << mark Rect
-                    [ MFrom [ SData "faceted_tuples" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vNumber 0 ]
-                            , MX2 [ vScale (FName "xScale"), vField (FName "c") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "a") ]
-                            , MStrokeWidth [ vNumber 2 ]
+                    [ mFrom [ srData (str "faceted_tuples") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 0 ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "c") ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "a") ]
+                            , maStrokeWidth [ vNum 2 ]
                             ]
-                        , Update
-                            [ MY [ vScale (FName "yScale"), vField (FName "b") ]
-                            , MHeight [ vScale (FName "yScale"), vBand 1 ]
-                            , MStroke [ vNull ]
-                            , MZIndex [ vNumber 0 ]
+                        , enUpdate
+                            [ maY [ vScale (fName "yScale"), vField (fName "b") ]
+                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            , maStroke [ vNull ]
+                            , maZIndex [ vNum 0 ]
                             ]
-                        , Hover
-                            [ MStroke [ vStr "firebrick" ]
-                            , MZIndex [ vNumber 1 ]
+                        , enHover
+                            [ maStroke [ vStr "firebrick" ]
+                            , maZIndex [ vNum 1 ]
                             ]
                         ]
                     ]
@@ -345,12 +345,12 @@ barChart4 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ SData "trellis", SFacet [ FaName "faceted_tuples", FaData "tuples", FaGroupBy [ "a" ] ] ]
-                    , MEncode
-                        [ Enter [ MX [ vNumber 0 ], MWidth [ vSignal "width" ] ]
-                        , Update [ MY [ vField (FName "y0") ], MY2 [ vField (FName "y1") ] ]
+                    [ mFrom [ srData (str "trellis"), srFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
+                    , mEncode
+                        [ enEnter [ maX [ vNum 0 ], maWidth [ vSignal "width" ] ]
+                        , enUpdate [ maY [ vField (fName "y0") ], maY2 [ vField (fName "y1") ] ]
                         ]
-                    , MGroup [ nestedSc [], nestedAx [], nestedMk [] ]
+                    , mGroup [ nestedSc [], nestedAx [], nestedMk [] ]
                     ]
     in
     toVega
@@ -367,57 +367,57 @@ barChart5 =
     let
         ds =
             dataSource
-                [ data "population" [ DUrl "https://vega.github.io/vega/data/population.json" ]
-                , data "popYear" [ DSource "population" ] |> transform [ TFilter (Expr "datum.year == year") ]
-                , data "males" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 1") ]
-                , data "females" [ DSource "popYear" ] |> transform [ TFilter (Expr "datum.sex == 2") ]
-                , data "ageGroups" [ DSource "population" ] |> transform [ TAggregate [ AgGroupBy [ "age" ] ] ]
+                [ data "population" [ daUrl "https://vega.github.io/vega/data/population.json" ]
+                , data "popYear" [ daSource "population" ] |> transform [ trFilter (expr "datum.year == year") ]
+                , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
+                , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
+                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
                 ]
 
         si =
             signals
-                << signal "chartWidth" [ SiValue (vNumber 300) ]
-                << signal "chartPad" [ SiValue (vNumber 20) ]
-                << signal "width" [ SiUpdate "2 * chartWidth + chartPad" ]
-                << signal "year" [ SiValue (vNumber 2000), SiBind (IRange [ InMin 1850, InMax 2000, InStep 10 ]) ]
+                << signal "chartWidth" [ siValue (vNum 300) ]
+                << signal "chartPad" [ siValue (vNum 20) ]
+                << signal "width" [ siUpdate "2 * chartWidth + chartPad" ]
+                << signal "year" [ siValue (vNum 2000), siBind (iRange [ inMin 1850, inMax 2000, inStep 10 ]) ]
 
         topSc =
             scales
                 << scale "yScale"
-                    [ SType ScBand
-                    , SRange (RValues [ vSignal "height", vNumber 0 ])
-                    , SRound True
-                    , SDomain (DData [ DDataset "ageGroups", DField (vStr "age") ])
+                    [ scType ScBand
+                    , scRange (raValues [ vSignal "height", vNum 0 ])
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "ageGroups", dField (str "age") ])
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SDomain (DNumbers [ 1, 2 ])
-                    , SRange (RStrings [ "#1f77b4", "#e377c2" ])
+                    [ scType ScOrdinal
+                    , scDomain (doNums (nums [ 1, 2 ]))
+                    , scRange (raStrs [ "#1f77b4", "#e377c2" ])
                     ]
 
         topMk =
             marks
                 << mark Text
-                    [ MInteractive False
-                    , MFrom [ SData "ageGroups" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vSignal "chartWidth + chartPad / 2" ]
-                            , MY [ vScale (FName "yScale"), vField (FName "age"), vBand 0.5 ]
-                            , MText [ vField (FName "age") ]
-                            , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , MAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , MFill [ vStr "#000" ]
+                    [ mInteractive (boolean False)
+                    , mFrom [ srData (str "ageGroups") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vSignal "chartWidth + chartPad / 2" ]
+                            , maY [ vScale (fName "yScale"), vField (fName "age"), vBand 0.5 ]
+                            , maText [ vField (fName "age") ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maFill [ vStr "#000" ]
                             ]
                         ]
                     ]
                 << mark Group
-                    [ MEncode [ Update [ MX [ vNumber 0 ], MHeight [ vSignal "height" ] ] ]
-                    , MGroup [ sc Female [], ax [], mk Female [] ]
+                    [ mEncode [ enUpdate [ maX [ vNum 0 ], maHeight [ vSignal "height" ] ] ]
+                    , mGroup [ sc Female [], ax [], mk Female [] ]
                     ]
                 << mark Group
-                    [ MEncode [ Update [ MX [ vSignal "chartWidth + chartPad" ], MHeight [ vSignal "height" ] ] ]
-                    , MGroup [ sc Male [], ax [], mk Male [] ]
+                    [ mEncode [ enUpdate [ maX [ vSignal "chartWidth + chartPad" ], maHeight [ vSignal "height" ] ] ]
+                    , mGroup [ sc Male [], ax [], mk Male [] ]
                     ]
 
         sc gender =
@@ -425,17 +425,17 @@ barChart5 =
                 range =
                     case gender of
                         Female ->
-                            SRange (RValues [ vSignal "chartWidth", vNumber 0 ])
+                            scRange (raValues [ vSignal "chartWidth", vNum 0 ])
 
                         Male ->
-                            SRange (RValues [ vNumber 0, vSignal "chartWidth" ])
+                            scRange (raValues [ vNum 0, vSignal "chartWidth" ])
             in
             scales
                 << scale "xScale"
-                    [ SType ScLinear
+                    [ scType ScLinear
                     , range
-                    , SNice NTrue
-                    , SDomain (DData [ DDataset "population", DField (vStr "people") ])
+                    , scNice niTrue
+                    , scDomain (doData [ dDataset "population", dField (str "people") ])
                     ]
 
         mk gender =
@@ -450,21 +450,21 @@ barChart5 =
             in
             marks
                 << mark Rect
-                    [ MFrom [ SData genderField ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "people") ]
-                            , MX2 [ vScale (FName "xScale"), vNumber 0 ]
-                            , MY [ vScale (FName "yScale"), vField (FName "age") ]
-                            , MHeight [ vScale (FName "yScale"), vBand 1, vOffset (vNumber -1) ]
-                            , MFillOpacity [ vNumber 0.6 ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "sex") ]
+                    [ mFrom [ srData (str genderField) ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "people") ]
+                            , maX2 [ vScale (fName "xScale"), vNum 0 ]
+                            , maY [ vScale (fName "yScale"), vField (fName "age") ]
+                            , maHeight [ vScale (fName "yScale"), vBand 1, vOffset (vNum -1) ]
+                            , maFillOpacity [ vNum 0.6 ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "sex") ]
                             ]
                         ]
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxFormat "s" ]
+            axes << axis "xScale" SBottom [ axFormat "s" ]
     in
     toVega
         [ height 400, padding (PSize 5), ds, si [], topSc [], topMk [] ]
@@ -475,9 +475,9 @@ lineChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (daNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (daNums [ 28, 20, 43, 35, 81, 10, 19, 15, 52, 48, 24, 28, 87, 66, 17, 27, 68, 16, 49, 25 ])
+                << dataColumn "c" (daNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource [ table [] ]
@@ -485,28 +485,28 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
-                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ siValue (vStr (markInterpolationLabel Linear))
+                    , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScPoint
-                    , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField (vStr "x") ])
+                    [ scType ScPoint
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RHeight)
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "table", DField (vStr "y") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField (vStr "c") ])
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
@@ -517,23 +517,23 @@ lineChart1 =
         mk =
             marks
                 << mark Group
-                    [ MFrom [ SFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
-                    , MGroup [ mkLine [] ]
+                    [ mFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    , mGroup [ mkLine [] ]
                     ]
 
         mkLine =
             marks
                 << mark Line
-                    [ MFrom [ SData "series" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y") ]
-                            , MStroke [ vScale (FName "cScale"), vField (FName "c") ]
-                            , MStrokeWidth [ vNumber 2 ]
+                    [ mFrom [ srData (str "series") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y") ]
+                            , maStroke [ vScale (fName "cScale"), vField (fName "c") ]
+                            , maStrokeWidth [ vNum 2 ]
                             ]
-                        , Update [ MInterpolate [ vSignal "interpolate" ], MStrokeOpacity [ vNumber 1 ] ]
-                        , Hover [ MStrokeOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ maInterpolate [ vSignal "interpolate" ], maStrokeOpacity [ vNum 1 ] ]
+                        , enHover [ maStrokeOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -546,8 +546,8 @@ areaChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (List.map toFloat (List.range 1 20) |> vNumbers)
-                << dataColumn "v" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "u" (List.map toFloat (List.range 1 20) |> daNums)
+                << dataColumn "v" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         ds =
             dataSource [ table [] ]
@@ -555,44 +555,44 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (markInterpolationLabel Linear |> vStr)
-                    , SiBind (ISelect [ InOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ siValue (vStr (markInterpolationLabel Linear))
+                    , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RWidth)
-                    , SZero False
-                    , SDomain (DData [ DDataset "table", DField (vStr "u") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
+                    , scDomain (doData [ dDataset "table", dField (str "u") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RHeight)
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "table", DField (vStr "v") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxTickCount 20 ]
+                << axis "xScale" SBottom [ axTickCount 20 ]
                 << axis "yScale" SLeft []
 
         mk =
             marks
                 << mark Area
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "u") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "v") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
-                            , MFill [ vStr "steelblue" ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "v") ]
+                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            , maFill [ vStr "steelblue" ]
                             ]
-                        , Update [ MInterpolate [ vSignal "interpolate" ], MFillOpacity [ vNumber 1 ] ]
-                        , Hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ maInterpolate [ vSignal "interpolate" ], maFillOpacity [ vNum 1 ] ]
+                        , enHover [ maFillOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -605,60 +605,60 @@ areaChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (vNumbers [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (vNumbers [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (daNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (daNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
-                [ table [] |> transform [ TStack [ StGroupBy [ "x" ], StSort [ CoField [ "c" ] ], StField "y" ] ] ]
+                [ table [] |> transform [ trStack [ stGroupBy [ "x" ], stSort [ coField [ "c" ] ], stField "y" ] ] ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScPoint
-                    , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "table", DField (vStr "x") ])
+                    [ scType ScPoint
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RHeight)
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "table", DField (vStr "y1") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SRange (RDefault RCategory)
-                    , SDomain (DData [ DDataset "table", DField (vStr "c") ])
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ dDataset "table", dField (str "c") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1 ]
-                << axis "yScale" SLeft [ AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "yScale" SLeft [ axZIndex 1 ]
 
         mk =
             marks
                 << mark Group
-                    [ MFrom [ SFacet [ FaData "table", FaName "series", FaGroupBy [ "c" ] ] ]
-                    , MGroup [ mkArea [] ]
+                    [ mFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    , mGroup [ mkArea [] ]
                     ]
 
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ SData "series" ]
-                    , MEncode
-                        [ Enter
-                            [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "c") ]
+                    [ mFrom [ srData (str "series") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
+                            , maX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "c") ]
                             ]
-                        , Update [ MFillOpacity [ vNumber 1 ] ]
-                        , Hover [ MFillOpacity [ vNumber 0.5 ] ]
+                        , enUpdate [ maFillOpacity [ vNum 1 ] ]
+                        , enHover [ maFillOpacity [ vNum 0.5 ] ]
                         ]
                     ]
     in
@@ -671,14 +671,14 @@ areaChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (List.map toFloat (List.range 1 20) |> vNumbers)
-                << dataColumn "y" (vNumbers [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "x" (List.map toFloat (List.range 1 20) |> daNums)
+                << dataColumn "y" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
 
         layerData =
-            data "layer_indices" [ DValue (vNumbers [ 0, 1, 2, 3 ]) ]
+            data "layer_indices" [ daValue (vNums [ 0, 1, 2, 3 ]) ]
                 |> transform
-                    [ TFilter (Expr "datum.data < layers")
-                    , TFormula "datum.data * -height" "offset" AlwaysUpdate
+                    [ trFilter (expr "datum.data < layers")
+                    , trFormula "datum.data * -height" "offset" AlwaysUpdate
                     ]
 
         ds =
@@ -687,69 +687,69 @@ areaChart3 =
         si =
             signals
                 << signal "layers"
-                    [ SiValue (vNumber 2)
-                    , SiOn [ [ EEvents "mousedown!", EUpdate "1 + (layers % 4)" ] ]
-                    , SiBind (ISelect [ InOptions (vNumbers [ 1, 2, 3, 4 ]) ])
+                    [ siValue (vNum 2)
+                    , siOn [ eventHandler "mousedown!" [ eUpdate "1 + (layers % 4)" ] ]
+                    , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
                     ]
-                << signal "height" [ SiUpdate "floor(200 / layers)" ]
-                << signal "vheight" [ SiUpdate "height * layers" ]
-                << signal "opacity" [ SiUpdate "pow(layers, -2/3)" ]
+                << signal "height" [ siUpdate "floor(200 / layers)" ]
+                << signal "vheight" [ siUpdate "height * layers" ]
+                << signal "opacity" [ siUpdate "pow(layers, -2/3)" ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RWidth)
-                    , SZero False
-                    , SRound True
-                    , SDomain (DData [ DDataset "table", DField (vStr "x") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RValues [ vSignal "vheight", vNumber 0 ])
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "table", DField (vStr "y") ])
+                    [ scType ScLinear
+                    , scRange (raValues [ vSignal "vheight", vNum 0 ])
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ AxTickCount 20 ]
+            axes << axis "xScale" SBottom [ axTickCount 20 ]
 
         mk =
             marks
                 << mark Group
-                    [ MEncode
-                        [ Update
-                            [ MWidth [ vField (FGroup (FName "width")) ]
-                            , MHeight [ vField (FGroup (FName "height")) ]
-                            , MGroupClip [ vBool True ]
+                    [ mEncode
+                        [ enUpdate
+                            [ maWidth [ vField (fGroup (fName "width")) ]
+                            , maHeight [ vField (fGroup (fName "height")) ]
+                            , maGroupClip [ vBool True ]
                             ]
                         ]
-                    , MGroup [ mk1 [] ]
+                    , mGroup [ mk1 [] ]
                     ]
 
         mk1 =
             marks
                 << mark Group
-                    [ MFrom [ SData "layer_indices" ]
-                    , MEncode [ Update [ MY [ vField (FName "offset") ] ] ]
-                    , MGroup [ mkArea [] ]
+                    [ mFrom [ srData (str "layer_indices") ]
+                    , mEncode [ enUpdate [ maY [ vField (fName "offset") ] ] ]
+                    , mGroup [ mkArea [] ]
                     ]
 
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , MX [ vScale (FName "xScale"), vField (FName "x") ]
-                            , MFill [ vStr "steelblue" ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
+                            , maX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , maFill [ vStr "steelblue" ]
                             ]
-                        , Update
-                            [ MY [ vScale (FName "yScale"), vField (FName "y") ]
-                            , MY2 [ vScale (FName "yScale"), vNumber 0 ]
-                            , MFillOpacity [ vSignal "opacity" ]
+                        , enUpdate
+                            [ maY [ vScale (fName "yScale"), vField (fName "y") ]
+                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            , maFillOpacity [ vSignal "opacity" ]
                             ]
                         ]
                     ]
@@ -762,24 +762,24 @@ areaChart4 : Spec
 areaChart4 =
     let
         table =
-            data "jobs" [ DUrl "https://vega.github.io/vega/data/jobs.json" ]
+            data "jobs" [ daUrl "https://vega.github.io/vega/data/jobs.json" ]
                 |> transform
-                    [ TFilter (Expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
-                    , TStack
-                        [ StGroupBy [ "year" ]
-                        , StSort [ CoField [ "job", "sex" ], CoOrder [ Descend, Descend ] ]
-                        , StField "perc"
+                    [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
+                    , trStack
+                        [ stGroupBy [ "year" ]
+                        , stSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
+                        , stField "perc"
                         ]
                     ]
 
         series =
-            data "series" [ DSource "jobs" ]
+            data "series" [ daSource "jobs" ]
                 |> transform
-                    [ TAggregate
-                        [ AgGroupBy [ "job", "sex" ]
-                        , AgFields [ "perc", "perc" ]
-                        , AgOps [ Sum, ArgMax ]
-                        , AgAs [ "sum", "argmax" ]
+                    [ trAggregate
+                        [ agGroupBy [ "job", "sex" ]
+                        , agFields [ "perc", "perc" ]
+                        , agOps [ sum, argMax ]
+                        , agAs [ "sum", "argmax" ]
                         ]
                     ]
 
@@ -789,124 +789,124 @@ areaChart4 =
         si =
             signals
                 << signal "sex"
-                    [ SiValue (vStr "all")
-                    , SiBind (IRadio [ InOptions (vStrs [ "men", "women", "all" ]) ])
+                    [ siValue (vStr "all")
+                    , siBind (iRadio [ inOptions (vStrs [ "men", "women", "all" ]) ])
                     ]
                 << signal "query"
-                    [ SiValue (vStr "")
-                    , SiOn
-                        [ [ EEvents "area:click!", EUpdate "datum.job" ]
-                        , [ EEvents "dblclick!", EUpdate "''" ]
+                    [ siValue (vStr "")
+                    , siOn
+                        [ eventHandler "area:click!" [ eUpdate "datum.job" ]
+                        , eventHandler "dblclick!" [ eUpdate "''" ]
                         ]
-                    , SiBind (IText [ InPlaceholder "search", InAutocomplete False ])
+                    , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RWidth)
-                    , SZero False
-                    , SRound True
-                    , SDomain (DData [ DDataset "jobs", DField (vStr "year") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scZero (boolean False)
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "jobs", dField (str "year") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RHeight)
-                    , SZero True
-                    , SRound True
-                    , SDomain (DData [ DDataset "jobs", DField (vStr "y1") ])
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scZero (boolean True)
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "jobs", dField (str "y1") ])
                     ]
                 << scale "cScale"
-                    [ SType ScOrdinal
-                    , SDomain (DStrings [ "men", "women" ])
-                    , SRange (RStrings [ "#33f", "#f33" ])
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "men", "women" ]))
+                    , scRange (raStrs [ "#33f", "#f33" ])
                     ]
                 << scale "alphaScale"
-                    [ SType ScLinear
-                    , SZero True
-                    , SDomain (DData [ DDataset "series", DField (vStr "sum") ])
-                    , SRange (RNumbers [ 0.4, 0.8 ])
+                    [ scType ScLinear
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "series", dField (str "sum") ])
+                    , scRange (raNums [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
-                    [ SType ScSqrt
-                    , SRange (RNumbers [ 0, 20 ])
-                    , SZero True
-                    , SRound True
-                    , SDomain (DData [ DDataset "series", DField (vStr "argmax.perc") ])
+                    [ scType ScSqrt
+                    , scRange (raNums [ 0, 20 ])
+                    , scZero (boolean True)
+                    , scRound (boolean True)
+                    , scDomain (doData [ dDataset "series", dField (str "argmax.perc") ])
                     ]
                 << scale "opacityScale"
-                    [ SType ScQuantile
-                    , SRange (RNumbers [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
-                    , SDomain (DData [ DDataset "series", DField (vStr "argmax.perc") ])
+                    [ scType ScQuantile
+                    , scRange (raNums [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
+                    , scDomain (doData [ dDataset "series", dField (str "argmax.perc") ])
                     ]
                 << scale "alignScale"
-                    [ SType ScQuantize
-                    , SRange (RStrings [ "left", "center", "right" ])
-                    , SZero False
-                    , SDomain (DNumbers [ 1730, 2130 ])
+                    [ scType ScQuantize
+                    , scRange (raStrs [ "left", "center", "right" ])
+                    , scZero (boolean False)
+                    , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
                 << scale "offsetScale"
-                    [ SType ScQuantize
-                    , SRange (RNumbers [ 6, 0, -6 ])
-                    , SZero False
-                    , SDomain (DNumbers [ 1730, 2130 ])
+                    [ scType ScQuantize
+                    , scRange (raNums [ 6, 0, -6 ])
+                    , scZero (boolean False)
+                    , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxFormat "d", AxTickCount 15 ]
+                << axis "xScale" SBottom [ axFormat "d", axTickCount 15 ]
                 << axis "yScale"
                     SRight
-                    [ AxFormat "%"
-                    , AxGrid True
-                    , AxDomain False
-                    , AxTickSize 12
-                    , AxEncode
-                        [ ( EGrid, [ Enter [ MStroke [ vStr "#ccc" ] ] ] )
-                        , ( ETicks, [ Enter [ MStroke [ vStr "#ccc" ] ] ] )
+                    [ axFormat "%"
+                    , axGrid True
+                    , axDomain False
+                    , axTickSize 12
+                    , axEncode
+                        [ ( EGrid, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
+                        , ( ETicks, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
                         ]
                     ]
 
         mkArea =
             marks
                 << mark Area
-                    [ MFrom [ SData "facet" ]
-                    , MEncode
-                        [ Update
-                            [ MX [ vScale (FName "xScale"), vField (FName "year") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "y0") ]
-                            , MY2 [ vScale (FName "yScale"), vField (FName "y1") ]
-                            , MFill [ vScale (FName "cScale"), vField (FName "sex") ]
-                            , MFillOpacity [ vScale (FName "alphaScale"), vField (FParent (FName "sum")) ]
+                    [ mFrom [ srData (str "facet") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "year") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "sex") ]
+                            , maFillOpacity [ vScale (fName "alphaScale"), vField (fParent (fName "sum")) ]
                             ]
-                        , Hover [ MFillOpacity [ vNumber 0.2 ] ]
+                        , enHover [ maFillOpacity [ vNum 0.2 ] ]
                         ]
                     ]
 
         mk =
             marks
                 << mark Group
-                    [ MFrom
-                        [ SData "series"
-                        , SFacet [ FaData "jobs", FaName "facet", FaGroupBy [ "job", "sex" ] ]
+                    [ mFrom
+                        [ srData (str "series")
+                        , srFacet "jobs" "facet" [ faGroupBy [ "job", "sex" ] ]
                         ]
-                    , MGroup [ mkArea [] ]
+                    , mGroup [ mkArea [] ]
                     ]
                 << mark Text
-                    [ MFrom [ SData "series" ]
-                    , MInteractive False
-                    , MEncode
-                        [ Update
-                            [ MX [ vField (FName "argmax.year"), vScale (FName "xScale") ]
-                            , MdX [ vField (FName "argmax.year"), vScale (FName "offsetScale") ]
-                            , MY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
-                            , MFill [ vStr "#000" ]
-                            , MFillOpacity [ vField (FName "argmax.perc"), vScale (FName "opacityScale") ]
-                            , MFontSize [ vField (FName "argmax.perc"), vScale (FName "fontScale"), vOffset (vNumber 5) ]
-                            , MText [ vField (FName "job") ]
-                            , MAlign [ vField (FName "argmax.year"), vScale (FName "alignScale") ]
-                            , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                    [ mFrom [ srData (str "series") ]
+                    , mInteractive (boolean False)
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vField (fName "argmax.year"), vScale (fName "xScale") ]
+                            , maDx [ vField (fName "argmax.year"), vScale (fName "offsetScale") ]
+                            , maY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
+                            , maFill [ vStr "#000" ]
+                            , maFillOpacity [ vField (fName "argmax.perc"), vScale (fName "opacityScale") ]
+                            , maFontSize [ vField (fName "argmax.perc"), vScale (fName "fontScale"), vOffset (vNum 5) ]
+                            , maText [ vField (fName "job") ]
+                            , maAlign [ vField (fName "argmax.year"), vScale (fName "alignScale") ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         ]
                     ]
@@ -920,51 +920,51 @@ circularChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "id" (vNumbers [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "field" (vNumbers [ 4, 6, 10, 3, 7, 8 ])
+                << dataColumn "id" (daNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "field" (daNums [ 4, 6, 10, 3, 7, 8 ])
 
         ds =
             dataSource
                 [ table []
                     |> transform
-                        [ TPie
-                            [ PiField "field"
-                            , PiStartAngle (SigNumRef "PI * startAngle / 180")
-                            , PiEndAngle (SigNumRef "PI * endAngle / 180")
-                            , PiSort (SigBoolRef "sort")
+                        [ trPie
+                            [ piField "field"
+                            , piStartAngle (numSignal "PI * startAngle / 180")
+                            , piEndAngle (numSignal "PI * endAngle / 180")
+                            , piSort (boolSignal "sort")
                             ]
                         ]
                 ]
 
         si =
             signals
-                << signal "startAngle" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
-                << signal "endAngle" [ SiValue (vNumber 360), SiBind (IRange [ InMin 0, InMax 360, InStep 1 ]) ]
-                << signal "padAngle" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ]) ]
-                << signal "innerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 90, InStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (vNumber 0), SiBind (IRange [ InMin 0, InMax 10, InStep 0.5 ]) ]
-                << signal "sort" [ SiValue (vBool False), SiBind (ICheckbox []) ]
+                << signal "startAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "endAngle" [ siValue (vNum 360), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "padAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
+                << signal "innerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
+                << signal "cornerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "sort" [ siValue (vBool False), siBind (iCheckbox []) ]
 
         sc =
-            scales << scale "cScale" [ SType ScOrdinal, SRange (RScheme "category20" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
 
         mk =
             marks
                 << mark Arc
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MFill [ vScale (FName "cScale"), vField (FName "id") ]
-                            , MX [ vSignal "width / 2" ]
-                            , MY [ vSignal "height / 2" ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale (fName "cScale"), vField (fName "id") ]
+                            , maX [ vSignal "width / 2" ]
+                            , maY [ vSignal "height / 2" ]
                             ]
-                        , Update
-                            [ MStartAngle [ vField (FName "startAngle") ]
-                            , MEndAngle [ vField (FName "endAngle") ]
-                            , MPadAngle [ vSignal "PI * padAngle / 180" ]
-                            , MInnerRadius [ vSignal "innerRadius" ]
-                            , MOuterRadius [ vSignal "width / 2" ]
-                            , MCornerRadius [ vSignal "cornerRadius" ]
+                        , enUpdate
+                            [ maStartAngle [ vField (fName "startAngle") ]
+                            , maEndAngle [ vField (fName "endAngle") ]
+                            , maPadAngle [ vSignal "PI * padAngle / 180" ]
+                            , maInnerRadius [ vSignal "innerRadius" ]
+                            , maOuterRadius [ vSignal "width / 2" ]
+                            , maCornerRadius [ vSignal "cornerRadius" ]
                             ]
                         ]
                     ]
@@ -978,48 +978,48 @@ circularChart2 =
     let
         ds =
             dataSource
-                [ data "table" [ DValue (vNumbers [ 12, 23, 47, 6, 52, 19 ]) ]
-                    |> transform [ TPie [ PiField "data" ] ]
+                [ data "table" [ daValue (vNums [ 12, 23, 47, 6, 52, 19 ]) ]
+                    |> transform [ trPie [ piField "data" ] ]
                 ]
 
         sc =
             scales
                 << scale "rScale"
-                    [ SType ScSqrt
-                    , SDomain (DData [ DDataset "table", DField (vStr "data") ])
-                    , SRange (RNumbers [ 20, 100 ])
+                    [ scType ScSqrt
+                    , scDomain (doData [ dDataset "table", dField (str "data") ])
+                    , scRange (raNums [ 20, 100 ])
                     ]
 
         mk =
             marks
                 << mark Arc
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vField (FGroup (FName "width")), vMultiply (vNumber 0.5) ]
-                            , MY [ vField (FGroup (FName "height")), vMultiply (vNumber 0.5) ]
-                            , MStartAngle [ vField (FName "startAngle") ]
-                            , MEndAngle [ vField (FName "endAngle") ]
-                            , MInnerRadius [ vNumber 20 ]
-                            , MOuterRadius [ vField (FName "data"), vScale (FName "rScale") ]
-                            , MStroke [ vStr "#fff" ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vField (fGroup (fName "width")), vMultiply (vNum 0.5) ]
+                            , maY [ vField (fGroup (fName "height")), vMultiply (vNum 0.5) ]
+                            , maStartAngle [ vField (fName "startAngle") ]
+                            , maEndAngle [ vField (fName "endAngle") ]
+                            , maInnerRadius [ vNum 20 ]
+                            , maOuterRadius [ vField (fName "data"), vScale (fName "rScale") ]
+                            , maStroke [ vStr "#fff" ]
                             ]
-                        , Update [ MFill [ vStr "#ccc" ] ]
-                        , Hover [ MFill [ vStr "pink" ] ]
+                        , enUpdate [ maFill [ vStr "#ccc" ] ]
+                        , enHover [ maFill [ vStr "pink" ] ]
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vField (FGroup (FName "width")), vMultiply (vNumber 0.5) ]
-                            , MY [ vField (FGroup (FName "height")), vMultiply (vNumber 0.5) ]
-                            , MRadius [ vField (FName "data"), vScale (FName "rScale"), vOffset (vNumber 8) ]
-                            , MTheta [ vSignal "(datum.startAngle + datum.endAngle)/2" ]
-                            , MFill [ vStr "#000" ]
-                            , MAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , MBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , MText [ vField (FName "data") ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vField (fGroup (fName "width")), vMultiply (vNum 0.5) ]
+                            , maY [ vField (fGroup (fName "height")), vMultiply (vNum 0.5) ]
+                            , maRadius [ vField (fName "data"), vScale (fName "rScale"), vOffset (vNum 8) ]
+                            , maTheta [ vSignal "(datum.startAngle + datum.endAngle)/2" ]
+                            , maFill [ vStr "#000" ]
+                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maText [ vField (fName "data") ]
                             ]
                         ]
                     ]
@@ -1033,68 +1033,68 @@ scatterplot1 =
     let
         ds =
             dataSource
-                [ data "cars" [ DUrl "https://vega.github.io/vega/data/cars.json" ]
-                    |> transform [ TFilter (Expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
+                [ data "cars" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SRound True
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Horsepower") ])
-                    , SRange (RDefault RWidth)
+                    [ scType ScLinear
+                    , scRound (boolean True)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "cars", dField (str "Horsepower") ])
+                    , scRange (raDefault RWidth)
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SRound True
-                    , SNice NTrue
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Miles_per_Gallon") ])
-                    , SRange (RDefault RHeight)
+                    [ scType ScLinear
+                    , scRound (boolean True)
+                    , scNice niTrue
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "cars", dField (str "Miles_per_Gallon") ])
+                    , scRange (raDefault RHeight)
                     ]
                 << scale "sizeScale"
-                    [ SType ScLinear
-                    , SRound True
-                    , SNice NFalse
-                    , SZero True
-                    , SDomain (DData [ DDataset "cars", DField (vStr "Acceleration") ])
-                    , SRange (RNumbers [ 4, 361 ])
+                    [ scType ScLinear
+                    , scRound (boolean True)
+                    , scNice niFalse
+                    , scZero (boolean True)
+                    , scDomain (doData [ dDataset "cars", dField (str "Acceleration") ])
+                    , scRange (raNums [ 4, 361 ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Horsepower") ]
-                << axis "yScale" SLeft [ AxGrid True, AxDomain False, AxTickCount 5, AxTitle (vStr "Miles per gallon") ]
+                << axis "xScale" SBottom [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Horsepower") ]
+                << axis "yScale" SLeft [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Miles per gallon") ]
 
         shapeEncoding =
-            [ MStrokeWidth [ vNumber 2 ]
-            , MOpacity [ vNumber 0.5 ]
-            , MStroke [ vStr "#4682b4" ]
-            , MShape [ symbolLabel SymCircle |> vStr ]
-            , MFill [ vStr "transparent" ]
+            [ maStrokeWidth [ vNum 2 ]
+            , maOpacity [ vNum 0.5 ]
+            , maStroke [ vStr "#4682b4" ]
+            , maShape [ vStr (symbolLabel SymCircle) ]
+            , maFill [ vStr "transparent" ]
             ]
 
         lg =
             legends
                 << legend
-                    [ LSize "sizeScale"
-                    , LTitle "Acceleration"
-                    , LFormat "s"
-                    , LEncode [ EnSymbols [ Update shapeEncoding ] ]
+                    [ leSize "sizeScale"
+                    , leTitle "Acceleration"
+                    , leFormat "s"
+                    , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
 
         mk =
             marks
                 << mark Symbol
-                    [ MFrom [ SData "cars" ]
-                    , MEncode
-                        [ Update <|
-                            [ MX [ vScale (FName "xScale"), vField (FName "Horsepower") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "Miles_per_Gallon") ]
-                            , MSize [ vScale (FName "sizeScale"), vField (FName "Acceleration") ]
+                    [ mFrom [ srData (str "cars") ]
+                    , mEncode
+                        [ enUpdate <|
+                            [ maX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
+                            , maSize [ vScale (fName "sizeScale"), vField (fName "Acceleration") ]
                             ]
                                 ++ shapeEncoding
                         ]
@@ -1109,114 +1109,114 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ DUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
-                , data "valid" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] != null") ]
-                , data "nullXY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
-                , data "nullY" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] != null && datum[yField] == null") ]
-                , data "nullX" [ DSource "movies" ] |> transform [ TFilter (Expr "datum[xField] == null && datum[yField] != null") ]
+                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                , data "valid" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] != null") ]
+                , data "nullXY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] == null"), trAggregate [] ]
+                , data "nullY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] == null") ]
+                , data "nullX" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] != null") ]
                 ]
 
         si =
             signals
-                << signal "yField" [ SiValue (vStr "IMDB_Rating"), SiBind (ISelect [ InOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "xField" [ SiValue (vStr "Rotten_Tomatoes_Rating"), SiBind (ISelect [ InOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "nullSize" [ SiValue (vNumber 8) ]
-                << signal "nullGap" [ SiUpdate "nullSize + 10" ]
+                << signal "yField" [ siValue (vStr "IMDB_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "xField" [ siValue (vStr "Rotten_Tomatoes_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "nullSize" [ siValue (vNum 8) ]
+                << signal "nullGap" [ siUpdate "nullSize + 10" ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SNice NTrue
-                    , SRange (RValues [ vSignal "nullGap", vSignal "width" ])
-                    , SDomain (DData [ DDataset "valid", DField (vSignal "xField") ])
+                    [ scType ScLinear
+                    , scNice niTrue
+                    , scRange (raValues [ vSignal "nullGap", vSignal "width" ])
+                    , scDomain (doData [ dDataset "valid", dField (strSignal "xField") ])
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SNice NTrue
-                    , SRange (RValues [ vSignal "height - nullGap", vNumber 0 ])
-                    , SDomain (DData [ DDataset "valid", DField (vSignal "yField") ])
+                    [ scType ScLinear
+                    , scNice niTrue
+                    , scRange (raValues [ vSignal "height - nullGap", vNum 0 ])
+                    , scDomain (doData [ dDataset "valid", dField (strSignal "yField") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxOffset (vNumber 5), AxFormat "s", AxTitle (vSignal "xField") ]
-                << axis "yScale" SLeft [ AxOffset (vNumber 5), AxFormat "s", AxTitle (vSignal "yField") ]
+                << axis "xScale" SBottom [ axOffset (num 5), axFormat "s", axTitle (strSignal "xField") ]
+                << axis "yScale" SLeft [ axOffset (num 5), axFormat "s", axTitle (strSignal "yField") ]
 
         mk =
             marks
                 << mark Symbol
-                    [ MFrom [ SData "valid" ]
-                    , MEncode
-                        [ Enter
-                            [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
+                    [ mFrom [ srData (str "valid") ]
+                    , mEncode
+                        [ enEnter
+                            [ maSize [ vNum 50 ]
+                            , maTooltip [ vField (fName "tooltip") ]
                             ]
-                        , Update
-                            [ MX [ vScale (FName "xScale"), vField (FSignal "xField") ]
-                            , MY [ vScale (FName "yScale"), vField (FSignal "yField") ]
-                            , MFill [ vStr "steelblue" ]
-                            , MFillOpacity [ vNumber 0.5 ]
-                            , MZIndex [ vNumber 0 ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fSignal "xField") ]
+                            , maY [ vScale (fName "yScale"), vField (fSignal "yField") ]
+                            , maFill [ vStr "steelblue" ]
+                            , maFillOpacity [ vNum 0.5 ]
+                            , maZIndex [ vNum 0 ]
                             ]
-                        , Hover
-                            [ MFill [ vStr "firebrick" ]
-                            , MFillOpacity [ vNumber 1 ]
-                            , MZIndex [ vNumber 1 ]
-                            ]
-                        ]
-                    ]
-                << mark Symbol
-                    [ MFrom [ SData "nullY" ]
-                    , MEncode
-                        [ Enter
-                            [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
-                            ]
-                        , Update
-                            [ MX [ vScale (FName "xScale"), vField (FSignal "xField") ]
-                            , MY [ vSignal "height - nullSize/2" ]
-                            , MFill [ vStr "#aaa" ]
-                            , MFillOpacity [ vNumber 0.2 ]
-                            ]
-                        , Hover
-                            [ MFill [ vStr "firebrick" ]
-                            , MFillOpacity [ vNumber 1 ]
+                        , enHover
+                            [ maFill [ vStr "firebrick" ]
+                            , maFillOpacity [ vNum 1 ]
+                            , maZIndex [ vNum 1 ]
                             ]
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ SData "nullX" ]
-                    , MEncode
-                        [ Enter
-                            [ MSize [ vNumber 50 ]
-                            , MTooltip [ vField (FName "tooltip") ]
+                    [ mFrom [ srData (str "nullY") ]
+                    , mEncode
+                        [ enEnter
+                            [ maSize [ vNum 50 ]
+                            , maTooltip [ vField (fName "tooltip") ]
                             ]
-                        , Update
-                            [ MX [ vSignal "nullSize/2" ]
-                            , MY [ vScale (FName "yScale"), vField (FSignal "yField") ]
-                            , MFill [ vStr "#aaa" ]
-                            , MFillOpacity [ vNumber 0.2 ]
-                            , MZIndex [ vNumber 1 ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fSignal "xField") ]
+                            , maY [ vSignal "height - nullSize/2" ]
+                            , maFill [ vStr "#aaa" ]
+                            , maFillOpacity [ vNum 0.2 ]
                             ]
-                        , Hover
-                            [ MFill [ vStr "firebrick" ]
-                            , MFillOpacity [ vNumber 1 ]
+                        , enHover
+                            [ maFill [ vStr "firebrick" ]
+                            , maFillOpacity [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "nullX") ]
+                    , mEncode
+                        [ enEnter
+                            [ maSize [ vNum 50 ]
+                            , maTooltip [ vField (fName "tooltip") ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "nullSize/2" ]
+                            , maY [ vScale (fName "yScale"), vField (fSignal "yField") ]
+                            , maFill [ vStr "#aaa" ]
+                            , maFillOpacity [ vNum 0.2 ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        , enHover
+                            [ maFill [ vStr "firebrick" ]
+                            , maFillOpacity [ vNum 1 ]
                             ]
                         ]
                     ]
                 << mark Text
-                    [ MInteractive False
-                    , MFrom [ SData "nullXY" ]
-                    , MEncode
-                        [ Update
-                            [ MX [ vSignal "nullSize", vOffset (vNumber -4) ]
-                            , MY [ vSignal "height", vOffset (vNumber 13) ]
-                            , MText [ vSignal "datum.count + ' null'" ]
-                            , MAlign [ hAlignLabel AlignRight |> vStr ]
-                            , MBaseline [ vAlignLabel AlignTop |> vStr ]
-                            , MFill [ vStr "#999" ]
-                            , MFontSize [ vNumber 9 ]
+                    [ mInteractive (boolean False)
+                    , mFrom [ srData (str "nullXY") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vSignal "nullSize", vOffset (vNum -4) ]
+                            , maY [ vSignal "height", vOffset (vNum 13) ]
+                            , maText [ vSignal "datum.count + ' null'" ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            , maBaseline [ vStr (vAlignLabel AlignTop) ]
+                            , maFill [ vStr "#999" ]
+                            , maFontSize [ vNum 9 ]
                             ]
                         ]
                     ]
@@ -1229,63 +1229,63 @@ scatterplot3 : Spec
 scatterplot3 =
     let
         ds =
-            dataSource [ data "drive" [ DUrl "https://vega.github.io/vega/data/driving.json" ] ]
+            dataSource [ data "drive" [ daUrl "https://vega.github.io/vega/data/driving.json" ] ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SDomain (DData [ DDataset "drive", DField (vStr "miles") ])
-                    , SRange (RDefault RWidth)
-                    , SNice NTrue
-                    , SZero False
-                    , SRound True
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "drive", dField (str "miles") ])
+                    , scRange (raDefault RWidth)
+                    , scNice niTrue
+                    , scZero (boolean False)
+                    , scRound (boolean True)
                     ]
                 << scale "yScale"
-                    [ SType ScLinear
-                    , SDomain (DData [ DDataset "drive", DField (vStr "gas") ])
-                    , SRange (RDefault RHeight)
-                    , SNice NTrue
-                    , SZero False
-                    , SRound True
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "drive", dField (str "gas") ])
+                    , scRange (raDefault RHeight)
+                    , scNice niTrue
+                    , scZero (boolean False)
+                    , scRound (boolean True)
                     ]
                 << scale "alignScale"
-                    [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RStrings [ "right", "left", "center", "center" ])
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
+                    , scRange (raStrs [ "right", "left", "center", "center" ])
                     ]
                 << scale "baseScale"
-                    [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RStrings [ "middle", "middle", "bottom", "top" ])
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
+                    , scRange (raStrs [ "middle", "middle", "bottom", "top" ])
                     ]
                 << scale "dx"
-                    [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RNumbers [ -7, 6, 0, 0 ])
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
+                    , scRange (raNums [ -7, 6, 0, 0 ])
                     ]
                 << scale "dy"
-                    [ SType ScOrdinal
-                    , SDomain (DStrings [ "left", "right", "top", "bottom" ])
-                    , SRange (RNumbers [ 1, 1, -5, 6 ])
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
+                    , scRange (raNums [ 1, 1, -5, 6 ])
                     ]
 
         ax =
             axes
                 << axis "xScale"
                     STop
-                    [ AxTickCount 5
-                    , AxTickSize 0
-                    , AxGrid True
-                    , AxDomain False
-                    , AxEncode
-                        [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
+                    [ axTickCount 5
+                    , axTickSize 0
+                    , axGrid True
+                    , axDomain False
+                    , axEncode
+                        [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
-                          , [ Enter
-                                [ MAlign [ hAlignLabel AlignLeft |> vStr ]
-                                , MBaseline [ vAlignLabel AlignTop |> vStr ]
-                                , MFontSize [ vNumber 12 ]
-                                , MFontWeight [ vStr "bold" ]
+                          , [ enEnter
+                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
+                                , maBaseline [ vStr (vAlignLabel AlignTop) ]
+                                , maFontSize [ vNum 12 ]
+                                , maFontWeight [ vStr "bold" ]
                                 ]
                             ]
                           )
@@ -1293,26 +1293,26 @@ scatterplot3 =
                     ]
                 << axis "xScale"
                     SBottom
-                    [ AxTitle (vStr "Miles driven per capita each year")
-                    , AxDomain False
-                    , AxTicks False
-                    , AxLabels False
+                    [ axTitle (str "Miles driven per capita each year")
+                    , axDomain False
+                    , axTicks False
+                    , axLabels False
                     ]
                 << axis "yScale"
                     SLeft
-                    [ AxTickCount 5
-                    , AxTickSize 0
-                    , AxGrid True
-                    , AxDomain False
-                    , AxFormat "$0.2f"
-                    , AxEncode
-                        [ ( EDomain, [ Enter [ MStroke [ vStr "transparent" ] ] ] )
+                    [ axTickCount 5
+                    , axTickSize 0
+                    , axGrid True
+                    , axDomain False
+                    , axFormat "$0.2f"
+                    , axEncode
+                        [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
-                          , [ Enter
-                                [ MAlign [ hAlignLabel AlignLeft |> vStr ]
-                                , MBaseline [ vAlignLabel AlignBottom |> vStr ]
-                                , MFontSize [ vNumber 12 ]
-                                , MFontWeight [ vStr "bold" ]
+                          , [ enEnter
+                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
+                                , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                                , maFontSize [ vNum 12 ]
+                                , maFontWeight [ vStr "bold" ]
                                 ]
                             ]
                           )
@@ -1320,51 +1320,51 @@ scatterplot3 =
                     ]
                 << axis "yScale"
                     SRight
-                    [ AxTitle (vStr "Price of a gallon of gasoline (adjusted for inflation)")
-                    , AxDomain False
-                    , AxTicks False
-                    , AxLabels False
+                    [ axTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
+                    , axDomain False
+                    , axTicks False
+                    , axLabels False
                     ]
 
         mk =
             marks
                 << mark Line
-                    [ MFrom [ SData "drive" ]
-                    , MEncode
-                        [ Enter
-                            [ MInterpolate [ markInterpolationLabel Cardinal |> vStr ]
-                            , MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
-                            , MStroke [ vStr "#000" ]
-                            , MStrokeWidth [ vNumber 3 ]
+                    [ mFrom [ srData (str "drive") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
+                            , maX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            , maStroke [ vStr "#000" ]
+                            , maStrokeWidth [ vNum 3 ]
                             ]
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ SData "drive" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
-                            , MFill [ vStr "#fff" ]
-                            , MStroke [ vStr "#000" ]
-                            , MStrokeWidth [ vNumber 1 ]
-                            , MSize [ vNumber 49 ]
+                    [ mFrom [ srData (str "drive") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            , maFill [ vStr "#fff" ]
+                            , maStroke [ vStr "#000" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maSize [ vNum 49 ]
                             ]
                         ]
                     ]
                 << mark Text
-                    [ MFrom [ SData "drive" ]
-                    , MEncode
-                        [ Enter
-                            [ MX [ vScale (FName "xScale"), vField (FName "miles") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "gas") ]
-                            , MdX [ vScale (FName "dx"), vField (FName "side") ]
-                            , MdY [ vScale (FName "dy"), vField (FName "side") ]
-                            , MFill [ vStr "#000" ]
-                            , MText [ vField (FName "year") ]
-                            , MAlign [ vScale (FName "alignScale"), vField (FName "side") ]
-                            , MBaseline [ vScale (FName "baseScale"), vField (FName "side") ]
+                    [ mFrom [ srData (str "drive") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            , maDx [ vScale (fName "dx"), vField (fName "side") ]
+                            , maDy [ vScale (fName "dy"), vField (fName "side") ]
+                            , maFill [ vStr "#000" ]
+                            , maText [ vField (fName "year") ]
+                            , maAlign [ vScale (fName "alignScale"), vField (fName "side") ]
+                            , maBaseline [ vScale (fName "baseScale"), vField (fName "side") ]
                             ]
                         ]
                     ]
@@ -1378,30 +1378,30 @@ scatterplot4 =
     let
         ds =
             dataSource
-                [ data "barley" [ DUrl "https://vega.github.io/vega/data/barley.json" ]
-                , data "summary" [ DSource "barley" ]
+                [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ]
+                , data "summary" [ daSource "barley" ]
                     |> transform
-                        [ TAggregate
-                            [ AgGroupBy [ "variety" ]
-                            , AgFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
-                            , AgOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
-                            , AgAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
+                        [ trAggregate
+                            [ agGroupBy [ "variety" ]
+                            , agFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
+                            , agOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
+                            , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
-                        , TFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
-                        , TFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
-                        , TFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
-                        , TFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
+                        , trFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
+                        , trFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
+                        , trFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
+                        , trFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
                         ]
                 ]
 
         si =
             signals
                 << signal "errorMeasure"
-                    [ SiValue (vStr "95% Confidence Interval")
-                    , SiBind (ISelect [ InOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
+                    [ siValue (vStr "95% Confidence Interval")
+                    , siBind (iSelect [ inOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
                     ]
                 << signal "lookup"
-                    [ SiValue
+                    [ siValue
                         (vObject
                             [ keyValue "95% Confidence Interval" (vStr "ci")
                             , keyValue "Standard Deviation" (vStr "stdev")
@@ -1410,49 +1410,49 @@ scatterplot4 =
                             ]
                         )
                     ]
-                << signal "measure" [ SiUpdate "lookup[errorMeasure]" ]
+                << signal "measure" [ siUpdate "lookup[errorMeasure]" ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ SType ScLinear
-                    , SRange (RDefault RWidth)
-                    , SDomain (DData [ DDataset "summary", DFields [ vStr "stdev0", vStr "stdev1" ] ])
-                    , SRound True
-                    , SNice NTrue
-                    , SZero False
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ dDataset "summary", dFields (strs [ "stdev0", "stdev1" ]) ])
+                    , scRound (boolean True)
+                    , scNice niTrue
+                    , scZero (boolean False)
                     ]
                 << scale "yScale"
-                    [ SType ScBand
-                    , SRange (RDefault RHeight)
-                    , SDomain (DData [ DDataset "summary", DField (vStr "variety"), DSort [ Op Max, ByField "mean", Descending ] ])
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ dDataset "summary", dField (str "variety"), dSort [ soOp maximum, soByField (str "mean"), Descending ] ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ AxZIndex 1, AxTitle (vStr "Barley Yield") ]
-                << axis "yScale" SLeft [ AxTickCount 5, AxZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex 1, axTitle (str "Barley Yield") ]
+                << axis "yScale" SLeft [ axTickCount 5, axZIndex 1 ]
 
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ SData "summary" ]
-                    , MEncode
-                        [ Enter [ MFill [ vStr "black" ], MHeight [ vNumber 1 ] ]
-                        , Update
-                            [ MX [ vScale (FName "xScale"), vSignal "datum[measure+'0']" ]
-                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
-                            , MX2 [ vScale (FName "xScale"), vSignal "datum[measure+'1']" ]
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter [ maFill [ vStr "black" ], maHeight [ vNum 1 ] ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vSignal "datum[measure+'0']" ]
+                            , maY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
+                            , maX2 [ vScale (fName "xScale"), vSignal "datum[measure+'1']" ]
                             ]
                         ]
                     ]
                 << mark Symbol
-                    [ MFrom [ SData "summary" ]
-                    , MEncode
-                        [ Enter [ MFill [ vStr "back" ], MSize [ vNumber 40 ] ]
-                        , Update
-                            [ MX [ vScale (FName "xScale"), vField (FName "mean") ]
-                            , MY [ vScale (FName "yScale"), vField (FName "variety"), vBand 0.5 ]
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter [ maFill [ vStr "back" ], maSize [ vNum 40 ] ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "mean") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
                             ]
                         ]
                     ]
@@ -1463,7 +1463,7 @@ scatterplot4 =
 
 sourceExample : Spec
 sourceExample =
-    scatterplot3
+    areaChart4
 
 
 

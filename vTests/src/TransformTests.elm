@@ -12,19 +12,19 @@ packTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E" ])
-                << dataColumn "parent" (vStrs [ "", "A", "A", "C", "C" ])
-                << dataColumn "value" (vNumbers [ 0, 1, 0, 1, 1 ])
+                << dataColumn "id" (daStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (daStrs [ "", "A", "A", "C", "C" ])
+                << dataColumn "value" (daNums [ 0, 1, 0, 1, 1 ])
 
         ds =
             dataSource
                 [ table []
                     |> transform
-                        [ TStratify "id" "parent"
-                        , TPack
-                            [ PaField "value"
-                            , PaPadding (SigNumRef "padding between circles")
-                            , PaSize sigWidth sigHeight
+                        [ trStratify "id" "parent"
+                        , trPack
+                            [ paField "value"
+                            , paPadding (numSignal "padding between circles")
+                            , paSize sigWidth sigHeight
                             ]
                         ]
                 ]
@@ -32,30 +32,30 @@ packTest1 =
         si =
             signals
                 << signal "padding between circles"
-                    [ SiValue (vNumber 0)
-                    , SiBind (IRange [ InMin 0, InMax 10, InStep 0.1 ])
+                    [ siValue (vNum 0)
+                    , siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ])
                     ]
 
         sc =
             scales
                 << scale "color"
-                    [ SType ScOrdinal
-                    , SRange (RScheme "category20" [])
+                    [ scType ScOrdinal
+                    , scRange (raScheme "category20" [])
                     ]
 
         mk =
             marks
                 << mark Symbol
-                    [ MFrom [ SData "tree" ]
-                    , MEncode
-                        [ Enter
-                            [ MFill [ vScale (FName "color"), vField (FName "id") ]
-                            , MStroke [ vStr "white" ]
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale (fName "color"), vField (fName "id") ]
+                            , maStroke [ vStr "white" ]
                             ]
-                        , Update
-                            [ MX [ vField (FName "x") ]
-                            , MY [ vField (FName "y") ]
-                            , MSize [ vSignal "4*datum.r*datum.r" ]
+                        , enUpdate
+                            [ maX [ vField (fName "x") ]
+                            , maY [ vField (fName "y") ]
+                            , maSize [ vSignal "4*datum.r*datum.r" ]
                             ]
                         ]
                     ]
@@ -69,90 +69,82 @@ stackTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "key" (vStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
-                << dataColumn "value" (vNumbers [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
+                << dataColumn "key" (daStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
+                << dataColumn "value" (daNums [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
 
         ds =
             dataSource
                 [ table []
                     |> transform
-                        [ TStack
-                            [ StField "value"
-                            , StGroupBy [ "key" ]
-                            , StOffset (OffsetSignal "offset")
-                            , StSort [ CoField [ "sortField" ], CoOrder [ OrderSignal "sortOrder" ] ]
+                        [ trStack
+                            [ stField "value"
+                            , stGroupBy [ "key" ]
+                            , stOffset (ofSignal "offset")
+                            , stSort [ coField [ "sortField" ], coOrder [ orSignal "sortOrder" ] ]
                             ]
                         ]
                     |> on
-                        [ trigger "add" [ TrInsert "add" ]
-                        , trigger "rem" [ TrRemove "rem" ]
+                        [ trigger "add" [ trInsert "add" ]
+                        , trigger "rem" [ trRemove "rem" ]
                         ]
                 ]
 
         si =
             signals
                 << signal "offset"
-                    [ SiValue (vStr "zero")
-                    , SiBind (ISelect [ InOptions (vStrs [ "zero", "center", "normalize" ]) ])
+                    [ siValue (vStr "zero")
+                    , siBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
-                    [ SiValue vNull
-                    , SiBind (IRadio [ InOptions (vStrs [ "null", "value" ]) ])
+                    [ siValue vNull
+                    , siBind (iRadio [ inOptions (vStrs [ "null", "value" ]) ])
                     ]
                 << signal "sortOrder"
-                    [ SiValue (vStr "ascending")
-                    , SiBind (IRadio [ InOptions (vStrs [ "ascending", "descending" ]) ])
+                    [ siValue (vStr "ascending")
+                    , siBind (iRadio [ inOptions (vStrs [ "ascending", "descending" ]) ])
                     ]
                 << signal "add"
-                    [ SiValue (vObject [])
-                    , SiOn
-                        [ [ EEvents "mousedown![!event.shiftKey]"
-                          , EUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}"
-                          ]
-                        ]
+                    [ siValue (vObject [])
+                    , siOn [ eventHandler "mousedown![!event.shiftKey]" [ eUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}" ] ]
                     ]
                 << signal "rem"
-                    [ SiValue (vObject [])
-                    , SiOn
-                        [ [ EEvents "rect:mousedown![event.shiftKey]"
-                          , EUpdate "datum"
-                          ]
-                        ]
+                    [ siValue (vObject [])
+                    , siOn [ eventHandler "rect:mousedown![event.shiftKey]" [ eUpdate "datum" ] ]
                     ]
 
         sc =
             scales
                 << scale "xscale"
-                    [ SType ScBand
-                    , SDomain (DStrings [ "a", "b", "c" ])
-                    , SRange (RDefault RWidth)
+                    [ scType ScBand
+                    , scDomain (doStrs (strs [ "a", "b", "c" ]))
+                    , scRange (raDefault RWidth)
                     ]
                 << scale "yscale"
-                    [ SType ScLinear
-                    , SDomain (DData [ DDataset "table", DField (vStr "y1") ])
-                    , SRange (RDefault RHeight)
-                    , SRound True
+                    [ scType ScLinear
+                    , scDomain (doData [ dDataset "table", dField (str "y1") ])
+                    , scRange (raDefault RHeight)
+                    , scRound (boolean True)
                     ]
                 << scale "color"
-                    [ SType ScOrdinal
-                    , SRange (RScheme "category10" [])
+                    [ scType ScOrdinal
+                    , scRange (raScheme "category10" [])
                     ]
 
         mk =
             marks
                 << mark Rect
-                    [ MFrom [ SData "table" ]
-                    , MEncode
-                        [ Enter
-                            [ MFill [ vScale (FName "color"), vField (FName "key") ]
-                            , MStroke [ vStr "white" ]
-                            , MStrokeWidth [ vNumber 1 ]
-                            , MX [ vScale (FName "xscale"), vField (FName "key"), vOffset (vNumber 0.5) ]
-                            , MWidth [ vScale (FName "xscale"), vBand 1 ]
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale (fName "color"), vField (fName "key") ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNum 0.5) ]
+                            , maWidth [ vScale (fName "xscale"), vBand 1 ]
                             ]
-                        , Update
-                            [ MY [ vScale (FName "yscale"), vField (FName "y0"), vOffset (vNumber 0.5) ]
-                            , MY2 [ vScale (FName "yscale"), vField (FName "y1"), vOffset (vNumber 0.5) ]
+                        , enUpdate
+                            [ maY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNum 0.5) ]
+                            , maY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNum 0.5) ]
                             ]
                         ]
                     ]
