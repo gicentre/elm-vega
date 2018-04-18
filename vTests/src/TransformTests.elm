@@ -20,8 +20,8 @@ packTest1 =
             dataSource
                 [ table []
                     |> transform
-                        [ TStratify "id" "parent"
-                        , TPack
+                        [ trStratify "id" "parent"
+                        , trPack
                             [ paField "value"
                             , paPadding (numSignal "padding between circles")
                             , paSize sigWidth sigHeight
@@ -76,7 +76,7 @@ stackTest1 =
             dataSource
                 [ table []
                     |> transform
-                        [ TStack
+                        [ trStack
                             [ stField "value"
                             , stGroupBy [ "key" ]
                             , stOffset (ofSignal "offset")

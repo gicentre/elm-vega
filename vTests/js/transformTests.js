@@ -13563,10 +13563,15 @@ var _user$project$Vega$TPartition = {ctor: 'TPartition'};
 var _user$project$Vega$TPack = function (a) {
 	return {ctor: 'TPack', _0: a};
 };
+var _user$project$Vega$trPack = _user$project$Vega$TPack;
 var _user$project$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
 var _user$project$Vega$TStratify = F2(
 	function (a, b) {
 		return {ctor: 'TStratify', _0: a, _1: b};
+	});
+var _user$project$Vega$trStratify = F2(
+	function (key, parent) {
+		return A2(_user$project$Vega$TStratify, key, parent);
 	});
 var _user$project$Vega$TNest = {ctor: 'TNest'};
 var _user$project$Vega$TWordCloud = {ctor: 'TWordCloud'};
@@ -13575,9 +13580,11 @@ var _user$project$Vega$TForce = {ctor: 'TForce'};
 var _user$project$Vega$TStack = function (a) {
 	return {ctor: 'TStack', _0: a};
 };
+var _user$project$Vega$trStack = _user$project$Vega$TStack;
 var _user$project$Vega$TPie = function (a) {
 	return {ctor: 'TPie', _0: a};
 };
+var _user$project$Vega$trPie = _user$project$Vega$TPie;
 var _user$project$Vega$TLinkpath = {ctor: 'TLinkpath'};
 var _user$project$Vega$TGraticule = {ctor: 'TGraticule'};
 var _user$project$Vega$TGeoShape = {ctor: 'TGeoShape'};
@@ -13597,17 +13604,27 @@ var _user$project$Vega$TFormula = F3(
 	function (a, b, c) {
 		return {ctor: 'TFormula', _0: a, _1: b, _2: c};
 	});
+var _user$project$Vega$trFormula = F2(
+	function (ex, out) {
+		return A2(_user$project$Vega$TFormula, ex, out);
+	});
 var _user$project$Vega$TFold = {ctor: 'TFold'};
 var _user$project$Vega$TFilter = function (a) {
 	return {ctor: 'TFilter', _0: a};
 };
+var _user$project$Vega$trFilter = _user$project$Vega$TFilter;
 var _user$project$Vega$TExtentAsSignal = F2(
 	function (a, b) {
 		return {ctor: 'TExtentAsSignal', _0: a, _1: b};
 	});
+var _user$project$Vega$trExtentAsSignal = F2(
+	function (f, sigName) {
+		return A2(_user$project$Vega$TExtentAsSignal, f, sigName);
+	});
 var _user$project$Vega$TExtent = function (a) {
 	return {ctor: 'TExtent', _0: a};
 };
+var _user$project$Vega$trExtent = _user$project$Vega$TExtent;
 var _user$project$Vega$TDensity = {ctor: 'TDensity'};
 var _user$project$Vega$TCross = {ctor: 'TCross'};
 var _user$project$Vega$TCountPattern = {ctor: 'TCountPattern'};
@@ -13616,6 +13633,7 @@ var _user$project$Vega$TBin = {ctor: 'TBin'};
 var _user$project$Vega$TAggregate = function (a) {
 	return {ctor: 'TAggregate', _0: a};
 };
+var _user$project$Vega$trAggregate = _user$project$Vega$TAggregate;
 var _user$project$Vega$TrModifyValues = F2(
 	function (a, b) {
 		return {ctor: 'TrModifyValues', _0: a, _1: b};
@@ -14362,7 +14380,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 					_user$project$Vega$transform,
 					{
 						ctor: '::',
-						_0: _user$project$Vega$TStack(
+						_0: _user$project$Vega$trStack(
 							{
 								ctor: '::',
 								_0: _user$project$Vega$stField('value'),
@@ -14677,10 +14695,10 @@ var _user$project$TransformTests$packTest1 = function () {
 				_user$project$Vega$transform,
 				{
 					ctor: '::',
-					_0: A2(_user$project$Vega$TStratify, 'id', 'parent'),
+					_0: A2(_user$project$Vega$trStratify, 'id', 'parent'),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$TPack(
+						_0: _user$project$Vega$trPack(
 							{
 								ctor: '::',
 								_0: _user$project$Vega$paField('value'),

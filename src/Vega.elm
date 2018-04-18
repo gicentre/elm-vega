@@ -63,7 +63,7 @@ module Vega
         , TextDirection(LeftToRight, RightToLeft)
         , TimeUnit(Day, Hour, Millisecond, Minute, Month, Second, Week, Year)
         , TopMarkProperty
-        , Transform(..)
+        , Transform
         , Trigger
         , TriggerProperty
         , VAlign(AlignBottom, AlignMiddle, AlignTop, Alphabetic)
@@ -407,10 +407,19 @@ module Vega
         , toVega
         , topojsonFeature
         , topojsonMesh
+        , trAggregate
+        , trExtent
+        , trExtentAsSignal
+        , trFilter
+        , trFormula
         , trInsert
         , trModifyValues
+        , trPack
+        , trPie
         , trRemove
         , trRemoveAll
+        , trStack
+        , trStratify
         , trToggle
         , transform
         , trigger
@@ -516,6 +525,15 @@ Functions and types for declaring the input data to the visualization.
 ## Transformations
 
 @docs Transform
+@docs trAggregate
+@docs trExtent
+@docs trExtentAsSignal
+@docs trFilter
+@docs trFormula
+@docs trPack
+@docs trPie
+@docs trStack
+@docs trStratify
 @docs FormulaUpdate
 @docs AggregateProperty
 @docs agGroupBy
@@ -1937,10 +1955,9 @@ type TopMarkProperty
 {-| Defines a transformation that may be applied to a data stream or mark.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
 -}
-type
-    Transform
-    -- TODO: Parameterise remaining transforms
+type Transform
     = TAggregate (List AggregateProperty)
+      -- TODO: Parameterise remaining transforms and create accesor functions for them
     | TBin
     | TCollect
     | TCountPattern
@@ -5307,6 +5324,17 @@ toVega spec =
         |> JE.object
 
 
+{-| Specify an aggregation transform to group and summarize an input data stream
+to produce a derived output stream. Aggregate transforms can be used to compute
+counts, sums, averages and other descriptive statistics over groups of data objects.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/aggregate/).
+-}
+trAggregate : List AggregateProperty -> Transform
+trAggregate =
+    TAggregate
+
+
 {-| Applies the given ordered list of transforms to the given data table.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms).
 
@@ -5320,6 +5348,44 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/transf
 transform : List Transform -> DataTable -> DataTable
 transform transforms dTable =
     dTable ++ [ ( "transform", JE.list (List.map transformSpec transforms) ) ]
+
+
+{-| Compute the minimum and maximum values for a data field, producing a [min, max]
+array. This transform does not change the input data stream. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/extent/).
+-}
+trExtent : Field -> Transform
+trExtent =
+    TExtent
+
+
+{-| Compute the minimum and maximum values for a given data field and bind it to a
+signal with the given name. This transform does not change the input data stream but
+the signal can be used, for example, as a parameter for a bin transform. For details
+see the [Vega documentation](https://vega.github.io/vega/docs/transforms/extent/)
+-}
+trExtentAsSignal : Field -> String -> Transform
+trExtentAsSignal f sigName =
+    TExtentAsSignal f sigName
+
+
+{-| Perform a filter transform that removes objects from a data stream based on
+the given filter expression. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/filter/).
+-}
+trFilter : Expr -> Transform
+trFilter =
+    TFilter
+
+
+{-| Extend a data object with new values according to the given
+[Vega expression](https://vega.github.io/vega/docs/expressions/). The second
+parameter is a new field name to give the result of the evaluated expression.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms/formula).
+-}
+trFormula : Expression -> String -> FormulaUpdate -> Transform
+trFormula ex out =
+    TFormula ex out
 
 
 {-| Creates a trigger that may be applied to a data table or mark.
@@ -5362,6 +5428,29 @@ trModifyValues key val =
     TrModifyValues key val
 
 
+{-| Perform a pack transform on some data to computes an enclosure diagram that
+uses containment (nesting) to represent a hierarchy. The size of the leaf circles
+encodes a quantitative dimension of the data. The enclosing circles show the
+approximate cumulative size of each subtree, but due to wasted space there is some
+distortion; only the leaf nodes can be compared accurately. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pack/).
+-}
+trPack : List PackProperty -> Transform
+trPack =
+    TPack
+
+
+{-| Perform a pie transform that calculates the angular extents of arc segments
+laid out in a circle. The most common use case is to create pie charts and donut
+charts. This transform writes two properties to each datum, indicating the starting
+and ending angles (in radians) of an arc. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/pie/).
+-}
+trPie : List PieProperty -> Transform
+trPie =
+    TPie
+
+
 {-| Specify an expression that evaluates to data objects to remove.
 A trigger enables dynmic updates to a visualization. Remove operations are only
 applicable to data sets, not marks. For details see the
@@ -5379,6 +5468,29 @@ For details see the
 trRemoveAll : TriggerProperty
 trRemoveAll =
     TrRemoveAll
+
+
+{-| Perform a stack transform that computes a layout by stacking groups of values.
+The most common use case is to create stacked graphs, including stacked bar charts
+and stream graphs. This transform writes two properties to each datum, indicating
+the starting and ending stack values. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/).
+-}
+trStack : List StackProperty -> Transform
+trStack =
+    TStack
+
+
+{-| Perform a stratify transform that generates a hierarchical (tree) data structure
+from input data objects, based on key fields that match parent (first parameter)
+and children (second parameter) nodes. Internally, this transform generates a set
+of tree node objects that can then be processed by tree layout methods such as
+tree, treemap, pack, and partition. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stratify/).
+-}
+trStratify : Field -> Field -> Transform
+trStratify key parent =
+    TStratify key parent
 
 
 {-| Specify an expression that evaluates to data objects to toggle. Toggled

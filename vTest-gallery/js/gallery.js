@@ -13563,10 +13563,15 @@ var _gicentre$elm_vega$Vega$TPartition = {ctor: 'TPartition'};
 var _gicentre$elm_vega$Vega$TPack = function (a) {
 	return {ctor: 'TPack', _0: a};
 };
+var _gicentre$elm_vega$Vega$trPack = _gicentre$elm_vega$Vega$TPack;
 var _gicentre$elm_vega$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
 var _gicentre$elm_vega$Vega$TStratify = F2(
 	function (a, b) {
 		return {ctor: 'TStratify', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$Vega$trStratify = F2(
+	function (key, parent) {
+		return A2(_gicentre$elm_vega$Vega$TStratify, key, parent);
 	});
 var _gicentre$elm_vega$Vega$TNest = {ctor: 'TNest'};
 var _gicentre$elm_vega$Vega$TWordCloud = {ctor: 'TWordCloud'};
@@ -13575,9 +13580,11 @@ var _gicentre$elm_vega$Vega$TForce = {ctor: 'TForce'};
 var _gicentre$elm_vega$Vega$TStack = function (a) {
 	return {ctor: 'TStack', _0: a};
 };
+var _gicentre$elm_vega$Vega$trStack = _gicentre$elm_vega$Vega$TStack;
 var _gicentre$elm_vega$Vega$TPie = function (a) {
 	return {ctor: 'TPie', _0: a};
 };
+var _gicentre$elm_vega$Vega$trPie = _gicentre$elm_vega$Vega$TPie;
 var _gicentre$elm_vega$Vega$TLinkpath = {ctor: 'TLinkpath'};
 var _gicentre$elm_vega$Vega$TGraticule = {ctor: 'TGraticule'};
 var _gicentre$elm_vega$Vega$TGeoShape = {ctor: 'TGeoShape'};
@@ -13597,17 +13604,27 @@ var _gicentre$elm_vega$Vega$TFormula = F3(
 	function (a, b, c) {
 		return {ctor: 'TFormula', _0: a, _1: b, _2: c};
 	});
+var _gicentre$elm_vega$Vega$trFormula = F2(
+	function (ex, out) {
+		return A2(_gicentre$elm_vega$Vega$TFormula, ex, out);
+	});
 var _gicentre$elm_vega$Vega$TFold = {ctor: 'TFold'};
 var _gicentre$elm_vega$Vega$TFilter = function (a) {
 	return {ctor: 'TFilter', _0: a};
 };
+var _gicentre$elm_vega$Vega$trFilter = _gicentre$elm_vega$Vega$TFilter;
 var _gicentre$elm_vega$Vega$TExtentAsSignal = F2(
 	function (a, b) {
 		return {ctor: 'TExtentAsSignal', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$trExtentAsSignal = F2(
+	function (f, sigName) {
+		return A2(_gicentre$elm_vega$Vega$TExtentAsSignal, f, sigName);
+	});
 var _gicentre$elm_vega$Vega$TExtent = function (a) {
 	return {ctor: 'TExtent', _0: a};
 };
+var _gicentre$elm_vega$Vega$trExtent = _gicentre$elm_vega$Vega$TExtent;
 var _gicentre$elm_vega$Vega$TDensity = {ctor: 'TDensity'};
 var _gicentre$elm_vega$Vega$TCross = {ctor: 'TCross'};
 var _gicentre$elm_vega$Vega$TCountPattern = {ctor: 'TCountPattern'};
@@ -13616,6 +13633,7 @@ var _gicentre$elm_vega$Vega$TBin = {ctor: 'TBin'};
 var _gicentre$elm_vega$Vega$TAggregate = function (a) {
 	return {ctor: 'TAggregate', _0: a};
 };
+var _gicentre$elm_vega$Vega$trAggregate = _gicentre$elm_vega$Vega$TAggregate;
 var _gicentre$elm_vega$Vega$TrModifyValues = F2(
 	function (a, b) {
 		return {ctor: 'TrModifyValues', _0: a, _1: b};
@@ -14285,7 +14303,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 					_gicentre$elm_vega$Vega$transform,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$TAggregate(
+						_0: _gicentre$elm_vega$Vega$trAggregate(
 							{
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$agGroupBy(
@@ -14397,16 +14415,16 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.mean - datum.stdev', 'stdev0', _gicentre$elm_vega$Vega$AlwaysUpdate),
+							_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.mean - datum.stdev', 'stdev0', _gicentre$elm_vega$Vega$AlwaysUpdate),
 							_1: {
 								ctor: '::',
-								_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.mean + datum.stdev', 'stdev1', _gicentre$elm_vega$Vega$AlwaysUpdate),
+								_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.mean + datum.stdev', 'stdev1', _gicentre$elm_vega$Vega$AlwaysUpdate),
 								_1: {
 									ctor: '::',
-									_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.mean - datum.stderr', 'stderr0', _gicentre$elm_vega$Vega$AlwaysUpdate),
+									_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.mean - datum.stderr', 'stderr0', _gicentre$elm_vega$Vega$AlwaysUpdate),
 									_1: {
 										ctor: '::',
-										_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.mean + datum.stderr', 'stderr1', _gicentre$elm_vega$Vega$AlwaysUpdate),
+										_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.mean + datum.stderr', 'stderr1', _gicentre$elm_vega$Vega$AlwaysUpdate),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -16083,7 +16101,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.Title + \' (\' + (year(datum.Release_Date) || \'?\') + \')\'', 'tooltip', _gicentre$elm_vega$Vega$AlwaysUpdate),
+					_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.Title + \' (\' + (year(datum.Release_Date) || \'?\') + \')\'', 'tooltip', _gicentre$elm_vega$Vega$AlwaysUpdate),
 					_1: {ctor: '[]'}
 				},
 				A2(
@@ -16100,7 +16118,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					_gicentre$elm_vega$Vega$transform,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$TFilter(
+						_0: _gicentre$elm_vega$Vega$trFilter(
 							_gicentre$elm_vega$Vega$expr('datum[xField] != null && datum[yField] != null')),
 						_1: {ctor: '[]'}
 					},
@@ -16118,11 +16136,11 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						_gicentre$elm_vega$Vega$transform,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$TFilter(
+							_0: _gicentre$elm_vega$Vega$trFilter(
 								_gicentre$elm_vega$Vega$expr('datum[xField] == null && datum[yField] == null')),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$TAggregate(
+								_0: _gicentre$elm_vega$Vega$trAggregate(
 									{ctor: '[]'}),
 								_1: {ctor: '[]'}
 							}
@@ -16141,7 +16159,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							_gicentre$elm_vega$Vega$transform,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$TFilter(
+								_0: _gicentre$elm_vega$Vega$trFilter(
 									_gicentre$elm_vega$Vega$expr('datum[xField] != null && datum[yField] == null')),
 								_1: {ctor: '[]'}
 							},
@@ -16159,7 +16177,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 								_gicentre$elm_vega$Vega$transform,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$TFilter(
+									_0: _gicentre$elm_vega$Vega$trFilter(
 										_gicentre$elm_vega$Vega$expr('datum[xField] == null && datum[yField] != null')),
 									_1: {ctor: '[]'}
 								},
@@ -16568,7 +16586,7 @@ var _gicentre$elm_vega$Gallery$scatterplot1 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TFilter(
+					_0: _gicentre$elm_vega$Vega$trFilter(
 						_gicentre$elm_vega$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null')),
 					_1: {ctor: '[]'}
 				},
@@ -16936,7 +16954,7 @@ var _gicentre$elm_vega$Gallery$circularChart2 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TPie(
+					_0: _gicentre$elm_vega$Vega$trPie(
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$piField('data'),
@@ -17374,7 +17392,7 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TPie(
+					_0: _gicentre$elm_vega$Vega$trPie(
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$piField('field'),
@@ -18300,7 +18318,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 		_gicentre$elm_vega$Vega$transform,
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$TAggregate(
+			_0: _gicentre$elm_vega$Vega$trAggregate(
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$Vega$agGroupBy(
@@ -18368,11 +18386,11 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 		_gicentre$elm_vega$Vega$transform,
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$TFilter(
+			_0: _gicentre$elm_vega$Vega$trFilter(
 				_gicentre$elm_vega$Vega$expr('(sex === \'all\' || datum.sex === sex) && (!query || test(regexp(query,\'i\'), datum.job))')),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$TStack(
+				_0: _gicentre$elm_vega$Vega$trStack(
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$stGroupBy(
@@ -18908,11 +18926,11 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 		_gicentre$elm_vega$Vega$transform,
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$TFilter(
+			_0: _gicentre$elm_vega$Vega$trFilter(
 				_gicentre$elm_vega$Vega$expr('datum.data < layers')),
 			_1: {
 				ctor: '::',
-				_0: A3(_gicentre$elm_vega$Vega$TFormula, 'datum.data * -height', 'offset', _gicentre$elm_vega$Vega$AlwaysUpdate),
+				_0: A3(_gicentre$elm_vega$Vega$trFormula, 'datum.data * -height', 'offset', _gicentre$elm_vega$Vega$AlwaysUpdate),
 				_1: {ctor: '[]'}
 			}
 		},
@@ -19648,7 +19666,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TStack(
+					_0: _gicentre$elm_vega$Vega$trStack(
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$stGroupBy(
@@ -21289,7 +21307,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 		_gicentre$elm_vega$Vega$transform,
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$TAggregate(
+			_0: _gicentre$elm_vega$Vega$trAggregate(
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$Vega$agGroupBy(
@@ -21302,10 +21320,10 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 				}),
 			_1: {
 				ctor: '::',
-				_0: A3(_gicentre$elm_vega$Vega$TFormula, 'rangeStep * bandspace(datum.count, innerPadding, outerPadding)', 'span', _gicentre$elm_vega$Vega$AlwaysUpdate),
+				_0: A3(_gicentre$elm_vega$Vega$trFormula, 'rangeStep * bandspace(datum.count, innerPadding, outerPadding)', 'span', _gicentre$elm_vega$Vega$AlwaysUpdate),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TStack(
+					_0: _gicentre$elm_vega$Vega$trStack(
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$stField('span'),
@@ -21313,7 +21331,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 						}),
 					_1: {
 						ctor: '::',
-						_0: A2(_gicentre$elm_vega$Vega$TExtentAsSignal, 'y1', 'trellisExtent'),
+						_0: A2(_gicentre$elm_vega$Vega$trExtentAsSignal, 'y1', 'trellisExtent'),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -21437,7 +21455,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 		_gicentre$elm_vega$Vega$transform,
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$Vega$TAggregate(
+			_0: _gicentre$elm_vega$Vega$trAggregate(
 				{
 					ctor: '::',
 					_0: _gicentre$elm_vega$Vega$agGroupBy(
@@ -22735,7 +22753,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$TStack(
+					_0: _gicentre$elm_vega$Vega$trStack(
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$stGroupBy(
@@ -23876,7 +23894,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 					_gicentre$elm_vega$Vega$transform,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$TFilter(
+						_0: _gicentre$elm_vega$Vega$trFilter(
 							_gicentre$elm_vega$Vega$expr('datum.year == year')),
 						_1: {ctor: '[]'}
 					},
@@ -23894,7 +23912,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						_gicentre$elm_vega$Vega$transform,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$TFilter(
+							_0: _gicentre$elm_vega$Vega$trFilter(
 								_gicentre$elm_vega$Vega$expr('datum.sex == 1')),
 							_1: {ctor: '[]'}
 						},
@@ -23912,7 +23930,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							_gicentre$elm_vega$Vega$transform,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$TFilter(
+								_0: _gicentre$elm_vega$Vega$trFilter(
 									_gicentre$elm_vega$Vega$expr('datum.sex == 2')),
 								_1: {ctor: '[]'}
 							},
@@ -23930,7 +23948,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 								_gicentre$elm_vega$Vega$transform,
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$TAggregate(
+									_0: _gicentre$elm_vega$Vega$trAggregate(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$agGroupBy(

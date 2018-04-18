@@ -106,7 +106,7 @@ barChart2 =
             dataSource
                 [ table []
                     |> transform
-                        [ TStack
+                        [ trStack
                             [ stGroupBy [ "x" ]
                             , stSort [ coField [ "c" ] ]
                             , stField "y"
@@ -264,15 +264,15 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ TAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
+                    [ trAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
 
         trTable =
             data "trellis" [ daSource "tuples" ]
                 |> transform
-                    [ TAggregate [ agGroupBy [ "a" ] ]
-                    , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
-                    , TStack [ stField "span" ]
-                    , TExtentAsSignal "y1" "trellisExtent"
+                    [ trAggregate [ agGroupBy [ "a" ] ]
+                    , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
+                    , trStack [ stField "span" ]
+                    , trExtentAsSignal "y1" "trellisExtent"
                     ]
 
         ds =
@@ -368,10 +368,10 @@ barChart5 =
         ds =
             dataSource
                 [ data "population" [ daUrl "https://vega.github.io/vega/data/population.json" ]
-                , data "popYear" [ daSource "population" ] |> transform [ TFilter (expr "datum.year == year") ]
-                , data "males" [ daSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
-                , data "females" [ daSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
-                , data "ageGroups" [ daSource "population" ] |> transform [ TAggregate [ agGroupBy [ "age" ] ] ]
+                , data "popYear" [ daSource "population" ] |> transform [ trFilter (expr "datum.year == year") ]
+                , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
+                , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
+                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
                 ]
 
         si =
@@ -611,7 +611,7 @@ areaChart2 =
 
         ds =
             dataSource
-                [ table [] |> transform [ TStack [ stGroupBy [ "x" ], stSort [ coField [ "c" ] ], stField "y" ] ] ]
+                [ table [] |> transform [ trStack [ stGroupBy [ "x" ], stSort [ coField [ "c" ] ], stField "y" ] ] ]
 
         sc =
             scales
@@ -677,8 +677,8 @@ areaChart3 =
         layerData =
             data "layer_indices" [ daValue (vNums [ 0, 1, 2, 3 ]) ]
                 |> transform
-                    [ TFilter (expr "datum.data < layers")
-                    , TFormula "datum.data * -height" "offset" AlwaysUpdate
+                    [ trFilter (expr "datum.data < layers")
+                    , trFormula "datum.data * -height" "offset" AlwaysUpdate
                     ]
 
         ds =
@@ -764,8 +764,8 @@ areaChart4 =
         table =
             data "jobs" [ daUrl "https://vega.github.io/vega/data/jobs.json" ]
                 |> transform
-                    [ TFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
-                    , TStack
+                    [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
+                    , trStack
                         [ stGroupBy [ "year" ]
                         , stSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
                         , stField "perc"
@@ -775,7 +775,7 @@ areaChart4 =
         series =
             data "series" [ daSource "jobs" ]
                 |> transform
-                    [ TAggregate
+                    [ trAggregate
                         [ agGroupBy [ "job", "sex" ]
                         , agFields [ "perc", "perc" ]
                         , agOps [ sum, argMax ]
@@ -927,7 +927,7 @@ circularChart1 =
             dataSource
                 [ table []
                     |> transform
-                        [ TPie
+                        [ trPie
                             [ piField "field"
                             , piStartAngle (numSignal "PI * startAngle / 180")
                             , piEndAngle (numSignal "PI * endAngle / 180")
@@ -979,7 +979,7 @@ circularChart2 =
         ds =
             dataSource
                 [ data "table" [ daValue (vNums [ 12, 23, 47, 6, 52, 19 ]) ]
-                    |> transform [ TPie [ piField "data" ] ]
+                    |> transform [ trPie [ piField "data" ] ]
                 ]
 
         sc =
@@ -1034,7 +1034,7 @@ scatterplot1 =
         ds =
             dataSource
                 [ data "cars" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
-                    |> transform [ TFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
         sc =
@@ -1109,11 +1109,11 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ TFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
-                , data "valid" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] != null") ]
-                , data "nullXY" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] == null"), TAggregate [] ]
-                , data "nullY" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] != null && datum[yField] == null") ]
-                , data "nullX" [ daSource "movies" ] |> transform [ TFilter (expr "datum[xField] == null && datum[yField] != null") ]
+                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                , data "valid" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] != null") ]
+                , data "nullXY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] == null"), trAggregate [] ]
+                , data "nullY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] == null") ]
+                , data "nullX" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] != null") ]
                 ]
 
         si =
@@ -1381,16 +1381,16 @@ scatterplot4 =
                 [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ]
                 , data "summary" [ daSource "barley" ]
                     |> transform
-                        [ TAggregate
+                        [ trAggregate
                             [ agGroupBy [ "variety" ]
                             , agFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
                             , agOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
-                        , TFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
-                        , TFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
-                        , TFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
-                        , TFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
+                        , trFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
+                        , trFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
+                        , trFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
+                        , trFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
                         ]
                 ]
 
