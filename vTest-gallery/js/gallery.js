@@ -12996,12 +12996,18 @@ var _gicentre$elm_vega$Vega$SExtent = F2(
 	function (a, b) {
 		return {ctor: 'SExtent', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$csExtent = F2(
+	function (mn, mx) {
+		return A2(_gicentre$elm_vega$Vega$SExtent, mn, mx);
+	});
 var _gicentre$elm_vega$Vega$SCount = function (a) {
 	return {ctor: 'SCount', _0: a};
 };
+var _gicentre$elm_vega$Vega$csCount = _gicentre$elm_vega$Vega$SCount;
 var _gicentre$elm_vega$Vega$SScheme = function (a) {
 	return {ctor: 'SScheme', _0: a};
 };
+var _gicentre$elm_vega$Vega$csScheme = _gicentre$elm_vega$Vega$SScheme;
 var _gicentre$elm_vega$Vega$SBottom = {ctor: 'SBottom'};
 var _gicentre$elm_vega$Vega$STop = {ctor: 'STop'};
 var _gicentre$elm_vega$Vega$SRight = {ctor: 'SRight'};
@@ -13009,21 +13015,27 @@ var _gicentre$elm_vega$Vega$SLeft = {ctor: 'SLeft'};
 var _gicentre$elm_vega$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
+var _gicentre$elm_vega$Vega$siValue = _gicentre$elm_vega$Vega$SiValue;
 var _gicentre$elm_vega$Vega$SiReact = function (a) {
 	return {ctor: 'SiReact', _0: a};
 };
+var _gicentre$elm_vega$Vega$siReact = _gicentre$elm_vega$Vega$SiReact;
 var _gicentre$elm_vega$Vega$SiUpdate = function (a) {
 	return {ctor: 'SiUpdate', _0: a};
 };
+var _gicentre$elm_vega$Vega$siUpdate = _gicentre$elm_vega$Vega$SiUpdate;
 var _gicentre$elm_vega$Vega$SiOn = function (a) {
 	return {ctor: 'SiOn', _0: a};
 };
+var _gicentre$elm_vega$Vega$siOn = _gicentre$elm_vega$Vega$SiOn;
 var _gicentre$elm_vega$Vega$SiDescription = function (a) {
 	return {ctor: 'SiDescription', _0: a};
 };
+var _gicentre$elm_vega$Vega$siDescription = _gicentre$elm_vega$Vega$SiDescription;
 var _gicentre$elm_vega$Vega$SiBind = function (a) {
 	return {ctor: 'SiBind', _0: a};
 };
+var _gicentre$elm_vega$Vega$siBind = _gicentre$elm_vega$Vega$SiBind;
 var _gicentre$elm_vega$Vega$SiName = function (a) {
 	return {ctor: 'SiName', _0: a};
 };
@@ -13043,6 +13055,7 @@ var _gicentre$elm_vega$Vega$signal = F2(
 						_1: sps
 					})));
 	});
+var _gicentre$elm_vega$Vega$siName = _gicentre$elm_vega$Vega$SiName;
 var _gicentre$elm_vega$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
@@ -14079,11 +14092,11 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 				'errorMeasure',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vStr('95% Confidence Interval')),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
@@ -14116,7 +14129,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 					'lookup',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vObject(
 								{
 									ctor: '::',
@@ -14154,7 +14167,7 @@ var _gicentre$elm_vega$Gallery$scatterplot4 = function () {
 						'measure',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiUpdate('lookup[errorMeasure]'),
+							_0: _gicentre$elm_vega$Vega$siUpdate('lookup[errorMeasure]'),
 							_1: {ctor: '[]'}
 						},
 						_p3))));
@@ -15878,11 +15891,11 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 				'yField',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vStr('IMDB_Rating')),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
@@ -15915,11 +15928,11 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 					'xField',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vStr('Rotten_Tomatoes_Rating')),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiBind(
+							_0: _gicentre$elm_vega$Vega$siBind(
 								_gicentre$elm_vega$Vega$iSelect(
 									{
 										ctor: '::',
@@ -15952,7 +15965,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 						'nullSize',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiValue(
+							_0: _gicentre$elm_vega$Vega$siValue(
 								_gicentre$elm_vega$Vega$vNum(8)),
 							_1: {ctor: '[]'}
 						},
@@ -15961,7 +15974,7 @@ var _gicentre$elm_vega$Gallery$scatterplot2 = function () {
 							'nullGap',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiUpdate('nullSize + 10'),
+								_0: _gicentre$elm_vega$Vega$siUpdate('nullSize + 10'),
 								_1: {ctor: '[]'}
 							},
 							_p10)))));
@@ -17045,11 +17058,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 				'startAngle',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vNum(0)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iRange(
 								{
 									ctor: '::',
@@ -17072,11 +17085,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 					'endAngle',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vNum(360)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiBind(
+							_0: _gicentre$elm_vega$Vega$siBind(
 								_gicentre$elm_vega$Vega$iRange(
 									{
 										ctor: '::',
@@ -17099,11 +17112,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 						'padAngle',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiValue(
+							_0: _gicentre$elm_vega$Vega$siValue(
 								_gicentre$elm_vega$Vega$vNum(0)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiBind(
+								_0: _gicentre$elm_vega$Vega$siBind(
 									_gicentre$elm_vega$Vega$iRange(
 										{
 											ctor: '::',
@@ -17126,11 +17139,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 							'innerRadius',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiValue(
+								_0: _gicentre$elm_vega$Vega$siValue(
 									_gicentre$elm_vega$Vega$vNum(0)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SiBind(
+									_0: _gicentre$elm_vega$Vega$siBind(
 										_gicentre$elm_vega$Vega$iRange(
 											{
 												ctor: '::',
@@ -17153,11 +17166,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 								'cornerRadius',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SiValue(
+									_0: _gicentre$elm_vega$Vega$siValue(
 										_gicentre$elm_vega$Vega$vNum(0)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SiBind(
+										_0: _gicentre$elm_vega$Vega$siBind(
 											_gicentre$elm_vega$Vega$iRange(
 												{
 													ctor: '::',
@@ -17180,11 +17193,11 @@ var _gicentre$elm_vega$Gallery$circularChart1 = function () {
 									'sort',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$SiValue(
+										_0: _gicentre$elm_vega$Vega$siValue(
 											_gicentre$elm_vega$Vega$vBool(false)),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$SiBind(
+											_0: _gicentre$elm_vega$Vega$siBind(
 												_gicentre$elm_vega$Vega$iCheckbox(
 													{ctor: '[]'})),
 											_1: {ctor: '[]'}
@@ -18105,11 +18118,11 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 				'sex',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vStr('all')),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iRadio(
 								{
 									ctor: '::',
@@ -18138,11 +18151,11 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 					'query',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vStr('')),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiOn(
+							_0: _gicentre$elm_vega$Vega$siOn(
 								{
 									ctor: '::',
 									_0: A2(
@@ -18168,7 +18181,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiBind(
+								_0: _gicentre$elm_vega$Vega$siBind(
 									_gicentre$elm_vega$Vega$iText(
 										{
 											ctor: '::',
@@ -18719,11 +18732,11 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 				'layers',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vNum(2)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiOn(
+						_0: _gicentre$elm_vega$Vega$siOn(
 							{
 								ctor: '::',
 								_0: A2(
@@ -18738,7 +18751,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiBind(
+							_0: _gicentre$elm_vega$Vega$siBind(
 								_gicentre$elm_vega$Vega$iSelect(
 									{
 										ctor: '::',
@@ -18772,7 +18785,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 					'height',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiUpdate('floor(200 / layers)'),
+						_0: _gicentre$elm_vega$Vega$siUpdate('floor(200 / layers)'),
 						_1: {ctor: '[]'}
 					},
 					A3(
@@ -18780,7 +18793,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 						'vheight',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiUpdate('height * layers'),
+							_0: _gicentre$elm_vega$Vega$siUpdate('height * layers'),
 							_1: {ctor: '[]'}
 						},
 						A3(
@@ -18788,7 +18801,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 							'opacity',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiUpdate('pow(layers, -2/3)'),
+								_0: _gicentre$elm_vega$Vega$siUpdate('pow(layers, -2/3)'),
 								_1: {ctor: '[]'}
 							},
 							_p31)))));
@@ -19825,12 +19838,12 @@ var _gicentre$elm_vega$Gallery$areaChart1 = function () {
 				'interpolate',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vStr(
 							_gicentre$elm_vega$Vega$markInterpolationLabel(_gicentre$elm_vega$Vega$Linear))),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
@@ -20305,12 +20318,12 @@ var _gicentre$elm_vega$Gallery$lineChart1 = function () {
 				'interpolate',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vStr(
 							_gicentre$elm_vega$Vega$markInterpolationLabel(_gicentre$elm_vega$Vega$Linear))),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iSelect(
 								{
 									ctor: '::',
@@ -21088,11 +21101,11 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 				'rangeStep',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vNum(20)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiBind(
+						_0: _gicentre$elm_vega$Vega$siBind(
 							_gicentre$elm_vega$Vega$iRange(
 								{
 									ctor: '::',
@@ -21115,11 +21128,11 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					'innerPadding',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vNum(0.1)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiBind(
+							_0: _gicentre$elm_vega$Vega$siBind(
 								_gicentre$elm_vega$Vega$iRange(
 									{
 										ctor: '::',
@@ -21142,11 +21155,11 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 						'outerPadding',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiValue(
+							_0: _gicentre$elm_vega$Vega$siValue(
 								_gicentre$elm_vega$Vega$vNum(0.2)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiBind(
+								_0: _gicentre$elm_vega$Vega$siBind(
 									_gicentre$elm_vega$Vega$iRange(
 										{
 											ctor: '::',
@@ -21169,7 +21182,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 							'height',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiUpdate('trellisExtent[1]'),
+								_0: _gicentre$elm_vega$Vega$siUpdate('trellisExtent[1]'),
 								_1: {ctor: '[]'}
 							},
 							_p55)))));
@@ -21676,7 +21689,7 @@ var _gicentre$elm_vega$Gallery$barChart3 = function () {
 				'height',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiUpdate('bandwidth(\'yScale\')'),
+					_0: _gicentre$elm_vega$Vega$siUpdate('bandwidth(\'yScale\')'),
 					_1: {ctor: '[]'}
 				},
 				_p59));
@@ -23015,12 +23028,12 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 				'tooltip',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vObject(
 							{ctor: '[]'})),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiOn(
+						_0: _gicentre$elm_vega$Vega$siOn(
 							{
 								ctor: '::',
 								_0: A2(
@@ -23697,7 +23710,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 				'chartWidth',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$SiValue(
+					_0: _gicentre$elm_vega$Vega$siValue(
 						_gicentre$elm_vega$Vega$vNum(300)),
 					_1: {ctor: '[]'}
 				},
@@ -23706,7 +23719,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 					'chartPad',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$SiValue(
+						_0: _gicentre$elm_vega$Vega$siValue(
 							_gicentre$elm_vega$Vega$vNum(20)),
 						_1: {ctor: '[]'}
 					},
@@ -23715,7 +23728,7 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 						'width',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$SiUpdate('2 * chartWidth + chartPad'),
+							_0: _gicentre$elm_vega$Vega$siUpdate('2 * chartWidth + chartPad'),
 							_1: {ctor: '[]'}
 						},
 						A3(
@@ -23723,11 +23736,11 @@ var _gicentre$elm_vega$Gallery$barChart5 = function () {
 							'year',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$SiValue(
+								_0: _gicentre$elm_vega$Vega$siValue(
 									_gicentre$elm_vega$Vega$vNum(2000)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$SiBind(
+									_0: _gicentre$elm_vega$Vega$siBind(
 										_gicentre$elm_vega$Vega$iRange(
 											{
 												ctor: '::',

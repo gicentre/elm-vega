@@ -32,8 +32,8 @@ packTest1 =
         si =
             signals
                 << signal "padding between circles"
-                    [ SiValue (vNum 0)
-                    , SiBind (iRange [ inMin 0, inMax 10, inStep 0.1 ])
+                    [ siValue (vNum 0)
+                    , siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ])
                     ]
 
         sc =
@@ -92,24 +92,24 @@ stackTest1 =
         si =
             signals
                 << signal "offset"
-                    [ SiValue (vStr "zero")
-                    , SiBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
+                    [ siValue (vStr "zero")
+                    , siBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
                     ]
                 << signal "sortField"
-                    [ SiValue vNull
-                    , SiBind (iRadio [ inOptions (vStrs [ "null", "value" ]) ])
+                    [ siValue vNull
+                    , siBind (iRadio [ inOptions (vStrs [ "null", "value" ]) ])
                     ]
                 << signal "sortOrder"
-                    [ SiValue (vStr "ascending")
-                    , SiBind (iRadio [ inOptions (vStrs [ "ascending", "descending" ]) ])
+                    [ siValue (vStr "ascending")
+                    , siBind (iRadio [ inOptions (vStrs [ "ascending", "descending" ]) ])
                     ]
                 << signal "add"
-                    [ SiValue (vObject [])
-                    , SiOn [ eventHandler "mousedown![!event.shiftKey]" [ eUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}" ] ]
+                    [ siValue (vObject [])
+                    , siOn [ eventHandler "mousedown![!event.shiftKey]" [ eUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}" ] ]
                     ]
                 << signal "rem"
-                    [ SiValue (vObject [])
-                    , SiOn [ eventHandler "rect:mousedown![event.shiftKey]" [ eUpdate "datum" ] ]
+                    [ siValue (vObject [])
+                    , siOn [ eventHandler "rect:mousedown![event.shiftKey]" [ eUpdate "datum" ] ]
                     ]
 
         sc =

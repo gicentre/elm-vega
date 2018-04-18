@@ -31,8 +31,8 @@ barChart1 =
         si =
             signals
                 << signal "tooltip"
-                    [ SiValue (vObject [])
-                    , SiOn
+                    [ siValue (vObject [])
+                    , siOn
                         [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
                         , eventHandler "rect:mouseout" [ eUpdate "" ]
                         ]
@@ -201,7 +201,7 @@ barChart3 =
 
         nestedSi =
             signals
-                << signal "height" [ SiUpdate "bandwidth('yScale')" ]
+                << signal "height" [ siUpdate "bandwidth('yScale')" ]
 
         nestedSc =
             scales
@@ -280,10 +280,10 @@ barChart4 =
 
         si =
             signals
-                << signal "rangeStep" [ SiValue (vNum 20), SiBind (iRange [ inMin 5, inMax 50, inStep 1 ]) ]
-                << signal "innerPadding" [ SiValue (vNum 0.1), SiBind (iRange [ inMin 0, inMax 0.7, inStep 0.01 ]) ]
-                << signal "outerPadding" [ SiValue (vNum 0.2), SiBind (iRange [ inMin 0, inMax 0.4, inStep 0.01 ]) ]
-                << signal "height" [ SiUpdate "trellisExtent[1]" ]
+                << signal "rangeStep" [ siValue (vNum 20), siBind (iRange [ inMin 5, inMax 50, inStep 1 ]) ]
+                << signal "innerPadding" [ siValue (vNum 0.1), siBind (iRange [ inMin 0, inMax 0.7, inStep 0.01 ]) ]
+                << signal "outerPadding" [ siValue (vNum 0.2), siBind (iRange [ inMin 0, inMax 0.4, inStep 0.01 ]) ]
+                << signal "height" [ siUpdate "trellisExtent[1]" ]
 
         sc =
             scales
@@ -376,10 +376,10 @@ barChart5 =
 
         si =
             signals
-                << signal "chartWidth" [ SiValue (vNum 300) ]
-                << signal "chartPad" [ SiValue (vNum 20) ]
-                << signal "width" [ SiUpdate "2 * chartWidth + chartPad" ]
-                << signal "year" [ SiValue (vNum 2000), SiBind (iRange [ inMin 1850, inMax 2000, inStep 10 ]) ]
+                << signal "chartWidth" [ siValue (vNum 300) ]
+                << signal "chartPad" [ siValue (vNum 20) ]
+                << signal "width" [ siUpdate "2 * chartWidth + chartPad" ]
+                << signal "year" [ siValue (vNum 2000), siBind (iRange [ inMin 1850, inMax 2000, inStep 10 ]) ]
 
         topSc =
             scales
@@ -485,8 +485,8 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (vStr (markInterpolationLabel Linear))
-                    , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ siValue (vStr (markInterpolationLabel Linear))
+                    , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
@@ -555,8 +555,8 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ SiValue (vStr (markInterpolationLabel Linear))
-                    , SiBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
+                    [ siValue (vStr (markInterpolationLabel Linear))
+                    , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
@@ -687,13 +687,13 @@ areaChart3 =
         si =
             signals
                 << signal "layers"
-                    [ SiValue (vNum 2)
-                    , SiOn [ eventHandler "mousedown!" [ eUpdate "1 + (layers % 4)" ] ]
-                    , SiBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
+                    [ siValue (vNum 2)
+                    , siOn [ eventHandler "mousedown!" [ eUpdate "1 + (layers % 4)" ] ]
+                    , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
                     ]
-                << signal "height" [ SiUpdate "floor(200 / layers)" ]
-                << signal "vheight" [ SiUpdate "height * layers" ]
-                << signal "opacity" [ SiUpdate "pow(layers, -2/3)" ]
+                << signal "height" [ siUpdate "floor(200 / layers)" ]
+                << signal "vheight" [ siUpdate "height * layers" ]
+                << signal "opacity" [ siUpdate "pow(layers, -2/3)" ]
 
         sc =
             scales
@@ -789,16 +789,16 @@ areaChart4 =
         si =
             signals
                 << signal "sex"
-                    [ SiValue (vStr "all")
-                    , SiBind (iRadio [ inOptions (vStrs [ "men", "women", "all" ]) ])
+                    [ siValue (vStr "all")
+                    , siBind (iRadio [ inOptions (vStrs [ "men", "women", "all" ]) ])
                     ]
                 << signal "query"
-                    [ SiValue (vStr "")
-                    , SiOn
+                    [ siValue (vStr "")
+                    , siOn
                         [ eventHandler "area:click!" [ eUpdate "datum.job" ]
                         , eventHandler "dblclick!" [ eUpdate "''" ]
                         ]
-                    , SiBind (iText [ inPlaceholder "search", inAutocomplete False ])
+                    , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
 
         sc =
@@ -938,12 +938,12 @@ circularChart1 =
 
         si =
             signals
-                << signal "startAngle" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
-                << signal "endAngle" [ SiValue (vNum 360), SiBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
-                << signal "padAngle" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
-                << signal "innerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
-                << signal "cornerRadius" [ SiValue (vNum 0), SiBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "sort" [ SiValue (vBool False), SiBind (iCheckbox []) ]
+                << signal "startAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "endAngle" [ siValue (vNum 360), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "padAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
+                << signal "innerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
+                << signal "cornerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "sort" [ siValue (vBool False), siBind (iCheckbox []) ]
 
         sc =
             scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
@@ -1118,10 +1118,10 @@ scatterplot2 =
 
         si =
             signals
-                << signal "yField" [ SiValue (vStr "IMDB_Rating"), SiBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "xField" [ SiValue (vStr "Rotten_Tomatoes_Rating"), SiBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
-                << signal "nullSize" [ SiValue (vNum 8) ]
-                << signal "nullGap" [ SiUpdate "nullSize + 10" ]
+                << signal "yField" [ siValue (vStr "IMDB_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "xField" [ siValue (vStr "Rotten_Tomatoes_Rating"), siBind (iSelect [ inOptions (vStrs [ "IMDB_Rating", "Rotten_Tomatoes_Rating", "US_Gross", "Worldwide_Gross" ]) ]) ]
+                << signal "nullSize" [ siValue (vNum 8) ]
+                << signal "nullGap" [ siUpdate "nullSize + 10" ]
 
         sc =
             scales
@@ -1397,11 +1397,11 @@ scatterplot4 =
         si =
             signals
                 << signal "errorMeasure"
-                    [ SiValue (vStr "95% Confidence Interval")
-                    , SiBind (iSelect [ inOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
+                    [ siValue (vStr "95% Confidence Interval")
+                    , siBind (iSelect [ inOptions (vStrs [ "95% Confidence Interval", "Standard Error", "Standard Deviation", "Interquartile Range" ]) ])
                     ]
                 << signal "lookup"
-                    [ SiValue
+                    [ siValue
                         (vObject
                             [ keyValue "95% Confidence Interval" (vStr "ci")
                             , keyValue "Standard Deviation" (vStr "stdev")
@@ -1410,7 +1410,7 @@ scatterplot4 =
                             ]
                         )
                     ]
-                << signal "measure" [ SiUpdate "lookup[errorMeasure]" ]
+                << signal "measure" [ siUpdate "lookup[errorMeasure]" ]
 
         sc =
             scales

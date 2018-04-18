@@ -12996,12 +12996,18 @@ var _user$project$Vega$SExtent = F2(
 	function (a, b) {
 		return {ctor: 'SExtent', _0: a, _1: b};
 	});
+var _user$project$Vega$csExtent = F2(
+	function (mn, mx) {
+		return A2(_user$project$Vega$SExtent, mn, mx);
+	});
 var _user$project$Vega$SCount = function (a) {
 	return {ctor: 'SCount', _0: a};
 };
+var _user$project$Vega$csCount = _user$project$Vega$SCount;
 var _user$project$Vega$SScheme = function (a) {
 	return {ctor: 'SScheme', _0: a};
 };
+var _user$project$Vega$csScheme = _user$project$Vega$SScheme;
 var _user$project$Vega$SBottom = {ctor: 'SBottom'};
 var _user$project$Vega$STop = {ctor: 'STop'};
 var _user$project$Vega$SRight = {ctor: 'SRight'};
@@ -13009,21 +13015,27 @@ var _user$project$Vega$SLeft = {ctor: 'SLeft'};
 var _user$project$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
+var _user$project$Vega$siValue = _user$project$Vega$SiValue;
 var _user$project$Vega$SiReact = function (a) {
 	return {ctor: 'SiReact', _0: a};
 };
+var _user$project$Vega$siReact = _user$project$Vega$SiReact;
 var _user$project$Vega$SiUpdate = function (a) {
 	return {ctor: 'SiUpdate', _0: a};
 };
+var _user$project$Vega$siUpdate = _user$project$Vega$SiUpdate;
 var _user$project$Vega$SiOn = function (a) {
 	return {ctor: 'SiOn', _0: a};
 };
+var _user$project$Vega$siOn = _user$project$Vega$SiOn;
 var _user$project$Vega$SiDescription = function (a) {
 	return {ctor: 'SiDescription', _0: a};
 };
+var _user$project$Vega$siDescription = _user$project$Vega$SiDescription;
 var _user$project$Vega$SiBind = function (a) {
 	return {ctor: 'SiBind', _0: a};
 };
+var _user$project$Vega$siBind = _user$project$Vega$SiBind;
 var _user$project$Vega$SiName = function (a) {
 	return {ctor: 'SiName', _0: a};
 };
@@ -13043,6 +13055,7 @@ var _user$project$Vega$signal = F2(
 						_1: sps
 					})));
 	});
+var _user$project$Vega$siName = _user$project$Vega$SiName;
 var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
@@ -13993,11 +14006,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 				'offset',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vStr('zero')),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iSelect(
 								{
 									ctor: '::',
@@ -14026,10 +14039,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 					'sortField',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(_user$project$Vega$vNull),
+						_0: _user$project$Vega$siValue(_user$project$Vega$vNull),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRadio(
 									{
 										ctor: '::',
@@ -14054,11 +14067,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 						'sortOrder',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vStr('ascending')),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRadio(
 										{
 											ctor: '::',
@@ -14083,12 +14096,12 @@ var _user$project$TransformTests$stackTest1 = function () {
 							'add',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vObject(
 										{ctor: '[]'})),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiOn(
+									_0: _user$project$Vega$siOn(
 										{
 											ctor: '::',
 											_0: A2(
@@ -14109,12 +14122,12 @@ var _user$project$TransformTests$stackTest1 = function () {
 								'rem',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vObject(
 											{ctor: '[]'})),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiOn(
+										_0: _user$project$Vega$siOn(
 											{
 												ctor: '::',
 												_0: A2(
@@ -14455,11 +14468,11 @@ var _user$project$TransformTests$packTest1 = function () {
 				'padding between circles',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(0)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',

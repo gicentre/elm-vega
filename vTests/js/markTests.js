@@ -12996,12 +12996,18 @@ var _user$project$Vega$SExtent = F2(
 	function (a, b) {
 		return {ctor: 'SExtent', _0: a, _1: b};
 	});
+var _user$project$Vega$csExtent = F2(
+	function (mn, mx) {
+		return A2(_user$project$Vega$SExtent, mn, mx);
+	});
 var _user$project$Vega$SCount = function (a) {
 	return {ctor: 'SCount', _0: a};
 };
+var _user$project$Vega$csCount = _user$project$Vega$SCount;
 var _user$project$Vega$SScheme = function (a) {
 	return {ctor: 'SScheme', _0: a};
 };
+var _user$project$Vega$csScheme = _user$project$Vega$SScheme;
 var _user$project$Vega$SBottom = {ctor: 'SBottom'};
 var _user$project$Vega$STop = {ctor: 'STop'};
 var _user$project$Vega$SRight = {ctor: 'SRight'};
@@ -13009,21 +13015,27 @@ var _user$project$Vega$SLeft = {ctor: 'SLeft'};
 var _user$project$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
+var _user$project$Vega$siValue = _user$project$Vega$SiValue;
 var _user$project$Vega$SiReact = function (a) {
 	return {ctor: 'SiReact', _0: a};
 };
+var _user$project$Vega$siReact = _user$project$Vega$SiReact;
 var _user$project$Vega$SiUpdate = function (a) {
 	return {ctor: 'SiUpdate', _0: a};
 };
+var _user$project$Vega$siUpdate = _user$project$Vega$SiUpdate;
 var _user$project$Vega$SiOn = function (a) {
 	return {ctor: 'SiOn', _0: a};
 };
+var _user$project$Vega$siOn = _user$project$Vega$SiOn;
 var _user$project$Vega$SiDescription = function (a) {
 	return {ctor: 'SiDescription', _0: a};
 };
+var _user$project$Vega$siDescription = _user$project$Vega$SiDescription;
 var _user$project$Vega$SiBind = function (a) {
 	return {ctor: 'SiBind', _0: a};
 };
+var _user$project$Vega$siBind = _user$project$Vega$SiBind;
 var _user$project$Vega$SiName = function (a) {
 	return {ctor: 'SiName', _0: a};
 };
@@ -13043,6 +13055,7 @@ var _user$project$Vega$signal = F2(
 						_1: sps
 					})));
 	});
+var _user$project$Vega$siName = _user$project$Vega$SiName;
 var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
@@ -13892,11 +13905,11 @@ var _user$project$MarkTests$trailTest = function () {
 				'defined',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vBool(true)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iCheckbox(
 								{ctor: '[]'})),
 						_1: {ctor: '[]'}
@@ -13907,11 +13920,11 @@ var _user$project$MarkTests$trailTest = function () {
 					'size',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(5)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -14375,11 +14388,11 @@ var _user$project$MarkTests$textTest = function () {
 				'x',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(100)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
@@ -14402,11 +14415,11 @@ var _user$project$MarkTests$textTest = function () {
 					'y',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(100)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -14429,11 +14442,11 @@ var _user$project$MarkTests$textTest = function () {
 						'dx',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(0)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -14456,11 +14469,11 @@ var _user$project$MarkTests$textTest = function () {
 							'angle',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(0)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -14483,11 +14496,11 @@ var _user$project$MarkTests$textTest = function () {
 								'fontSize',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(10)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -14510,11 +14523,11 @@ var _user$project$MarkTests$textTest = function () {
 									'limit',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vNum(0)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
@@ -14537,12 +14550,12 @@ var _user$project$MarkTests$textTest = function () {
 										'align',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vStr(
 													_user$project$Vega$hAlignLabel(_user$project$Vega$AlignLeft))),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',
@@ -14571,12 +14584,12 @@ var _user$project$MarkTests$textTest = function () {
 											'baseline',
 											{
 												ctor: '::',
-												_0: _user$project$Vega$SiValue(
+												_0: _user$project$Vega$siValue(
 													_user$project$Vega$vStr(
 														_user$project$Vega$vAlignLabel(_user$project$Vega$Alphabetic))),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$SiBind(
+													_0: _user$project$Vega$siBind(
 														_user$project$Vega$iSelect(
 															{
 																ctor: '::',
@@ -14609,11 +14622,11 @@ var _user$project$MarkTests$textTest = function () {
 												'font',
 												{
 													ctor: '::',
-													_0: _user$project$Vega$SiValue(
+													_0: _user$project$Vega$siValue(
 														_user$project$Vega$vStr('sans-serif')),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$SiBind(
+														_0: _user$project$Vega$siBind(
 															_user$project$Vega$iRadio(
 																{
 																	ctor: '::',
@@ -14642,11 +14655,11 @@ var _user$project$MarkTests$textTest = function () {
 													'fontWeight',
 													{
 														ctor: '::',
-														_0: _user$project$Vega$SiValue(
+														_0: _user$project$Vega$siValue(
 															_user$project$Vega$vStr('normal')),
 														_1: {
 															ctor: '::',
-															_0: _user$project$Vega$SiBind(
+															_0: _user$project$Vega$siBind(
 																_user$project$Vega$iRadio(
 																	{
 																		ctor: '::',
@@ -14671,11 +14684,11 @@ var _user$project$MarkTests$textTest = function () {
 														'fontStyle',
 														{
 															ctor: '::',
-															_0: _user$project$Vega$SiValue(
+															_0: _user$project$Vega$siValue(
 																_user$project$Vega$vStr('normal')),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$SiBind(
+																_0: _user$project$Vega$siBind(
 																	_user$project$Vega$iRadio(
 																		{
 																			ctor: '::',
@@ -14858,11 +14871,11 @@ var _user$project$MarkTests$symbolTest = function () {
 				'shape',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vStr('circle')),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iSelect(
 								{
 									ctor: '::',
@@ -14919,11 +14932,11 @@ var _user$project$MarkTests$symbolTest = function () {
 					'size',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(2000)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -14946,11 +14959,11 @@ var _user$project$MarkTests$symbolTest = function () {
 						'x',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(100)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -14973,11 +14986,11 @@ var _user$project$MarkTests$symbolTest = function () {
 							'y',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(100)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -15000,11 +15013,11 @@ var _user$project$MarkTests$symbolTest = function () {
 								'strokeWidth',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(4)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -15027,11 +15040,11 @@ var _user$project$MarkTests$symbolTest = function () {
 									'color',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vStr('both')),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRadio(
 													{
 														ctor: '::',
@@ -15227,11 +15240,11 @@ var _user$project$MarkTests$rectTest = function () {
 				'x',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(50)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
@@ -15254,11 +15267,11 @@ var _user$project$MarkTests$rectTest = function () {
 					'y',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(50)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -15281,11 +15294,11 @@ var _user$project$MarkTests$rectTest = function () {
 						'w',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(100)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -15308,11 +15321,11 @@ var _user$project$MarkTests$rectTest = function () {
 							'h',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(100)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -15335,11 +15348,11 @@ var _user$project$MarkTests$rectTest = function () {
 								'cornerRadius',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(0)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -15362,11 +15375,11 @@ var _user$project$MarkTests$rectTest = function () {
 									'strokeWidth',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vNum(4)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
@@ -15385,11 +15398,11 @@ var _user$project$MarkTests$rectTest = function () {
 										'color',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vStr('both')),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iRadio(
 														{
 															ctor: '::',
@@ -15567,11 +15580,11 @@ var _user$project$MarkTests$pathTest = function () {
 				'path',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vStr('M-50,-50 L50,50 V-50 L-50,50 Z')),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iText(
 								{
 									ctor: '::',
@@ -15586,11 +15599,11 @@ var _user$project$MarkTests$pathTest = function () {
 					'x',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(100)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -15613,11 +15626,11 @@ var _user$project$MarkTests$pathTest = function () {
 						'y',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(100)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -15640,11 +15653,11 @@ var _user$project$MarkTests$pathTest = function () {
 							'strokeWidth',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(4)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -15667,11 +15680,11 @@ var _user$project$MarkTests$pathTest = function () {
 								'color',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vStr('both')),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRadio(
 												{
 													ctor: '::',
@@ -15849,11 +15862,11 @@ var _user$project$MarkTests$imageTest = function () {
 				'x',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(75)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
@@ -15876,11 +15889,11 @@ var _user$project$MarkTests$imageTest = function () {
 					'y',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(75)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -15903,11 +15916,11 @@ var _user$project$MarkTests$imageTest = function () {
 						'w',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(50)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -15930,11 +15943,11 @@ var _user$project$MarkTests$imageTest = function () {
 							'h',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(50)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -15957,11 +15970,11 @@ var _user$project$MarkTests$imageTest = function () {
 								'aspect',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vBool(true)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iCheckbox(
 												{ctor: '[]'})),
 										_1: {ctor: '[]'}
@@ -15972,11 +15985,11 @@ var _user$project$MarkTests$imageTest = function () {
 									'align',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vStr('left')),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
@@ -16005,11 +16018,11 @@ var _user$project$MarkTests$imageTest = function () {
 										'baseline',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vStr('top')),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',
@@ -16159,11 +16172,11 @@ var _user$project$MarkTests$groupTest = function () {
 				'groupClip',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vBool(false)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iCheckbox(
 								{ctor: '[]'})),
 						_1: {ctor: '[]'}
@@ -16174,11 +16187,11 @@ var _user$project$MarkTests$groupTest = function () {
 					'x',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(25)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -16201,11 +16214,11 @@ var _user$project$MarkTests$groupTest = function () {
 						'y',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(25)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -16228,11 +16241,11 @@ var _user$project$MarkTests$groupTest = function () {
 							'w',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(150)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -16255,11 +16268,11 @@ var _user$project$MarkTests$groupTest = function () {
 								'h',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(150)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -16282,11 +16295,11 @@ var _user$project$MarkTests$groupTest = function () {
 									'cornerRadius',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vNum(0)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
@@ -16309,11 +16322,11 @@ var _user$project$MarkTests$groupTest = function () {
 										'strokeWidth',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vNum(4)),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iRange(
 														{
 															ctor: '::',
@@ -16332,11 +16345,11 @@ var _user$project$MarkTests$groupTest = function () {
 											'color',
 											{
 												ctor: '::',
-												_0: _user$project$Vega$SiValue(
+												_0: _user$project$Vega$siValue(
 													_user$project$Vega$vStr('both')),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$SiBind(
+													_0: _user$project$Vega$siBind(
 														_user$project$Vega$iRadio(
 															{
 																ctor: '::',
@@ -16839,11 +16852,11 @@ var _user$project$MarkTests$areaTest = function () {
 				'defined',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vBool(true)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iCheckbox(
 								{ctor: '[]'})),
 						_1: {ctor: '[]'}
@@ -16854,12 +16867,12 @@ var _user$project$MarkTests$areaTest = function () {
 					'interpolate',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vStr(
 								_user$project$Vega$markInterpolationLabel(_user$project$Vega$Linear))),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iSelect(
 									{
 										ctor: '::',
@@ -16912,11 +16925,11 @@ var _user$project$MarkTests$areaTest = function () {
 						'tension',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(0)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -16939,11 +16952,11 @@ var _user$project$MarkTests$areaTest = function () {
 							'y2',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(0)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -16966,11 +16979,11 @@ var _user$project$MarkTests$areaTest = function () {
 								'strokeWidth',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(4)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -16993,11 +17006,11 @@ var _user$project$MarkTests$areaTest = function () {
 									'color',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vStr('both')),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRadio(
 													{
 														ctor: '::',
@@ -17434,11 +17447,11 @@ var _user$project$MarkTests$arcTest = function () {
 				'startAngle',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(-0.73)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
@@ -17457,11 +17470,11 @@ var _user$project$MarkTests$arcTest = function () {
 					'endAngle',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(0.73)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -17480,11 +17493,11 @@ var _user$project$MarkTests$arcTest = function () {
 						'padAngle',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(0)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -17503,11 +17516,11 @@ var _user$project$MarkTests$arcTest = function () {
 							'innerRadius',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(0)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -17530,11 +17543,11 @@ var _user$project$MarkTests$arcTest = function () {
 								'outerRadius',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(50)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -17557,11 +17570,11 @@ var _user$project$MarkTests$arcTest = function () {
 									'cornerRadius',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vNum(0)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iRange(
 													{
 														ctor: '::',
@@ -17584,11 +17597,11 @@ var _user$project$MarkTests$arcTest = function () {
 										'strokeWidth',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vNum(4)),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iRange(
 														{
 															ctor: '::',
@@ -17611,11 +17624,11 @@ var _user$project$MarkTests$arcTest = function () {
 											'color',
 											{
 												ctor: '::',
-												_0: _user$project$Vega$SiValue(
+												_0: _user$project$Vega$siValue(
 													_user$project$Vega$vStr('both')),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$SiBind(
+													_0: _user$project$Vega$siBind(
 														_user$project$Vega$iRadio(
 															{
 																ctor: '::',
@@ -17644,7 +17657,7 @@ var _user$project$MarkTests$arcTest = function () {
 												'x',
 												{
 													ctor: '::',
-													_0: _user$project$Vega$SiValue(
+													_0: _user$project$Vega$siValue(
 														_user$project$Vega$vNum(100)),
 													_1: {ctor: '[]'}
 												},
@@ -17653,7 +17666,7 @@ var _user$project$MarkTests$arcTest = function () {
 													'y',
 													{
 														ctor: '::',
-														_0: _user$project$Vega$SiValue(
+														_0: _user$project$Vega$siValue(
 															_user$project$Vega$vNum(100)),
 														_1: {ctor: '[]'}
 													},
@@ -17861,11 +17874,11 @@ var _user$project$MarkTests$lineTest = function () {
 				'defined',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vBool(true)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iCheckbox(
 								{ctor: '[]'})),
 						_1: {ctor: '[]'}
@@ -17876,12 +17889,12 @@ var _user$project$MarkTests$lineTest = function () {
 					'interpolate',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vStr(
 								_user$project$Vega$markInterpolationLabel(_user$project$Vega$Linear))),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iSelect(
 									{
 										ctor: '::',
@@ -17934,11 +17947,11 @@ var _user$project$MarkTests$lineTest = function () {
 						'tension',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(0)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -17961,11 +17974,11 @@ var _user$project$MarkTests$lineTest = function () {
 							'strokeWidth',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(4)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -17988,12 +18001,12 @@ var _user$project$MarkTests$lineTest = function () {
 								'strokeCap',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vStr(
 											_user$project$Vega$strokeCapLabel(_user$project$Vega$CButt))),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iSelect(
 												{
 													ctor: '::',
@@ -18022,7 +18035,7 @@ var _user$project$MarkTests$lineTest = function () {
 									'strokeDash',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vNums(
 												{
 													ctor: '::',
@@ -18035,7 +18048,7 @@ var _user$project$MarkTests$lineTest = function () {
 												})),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
@@ -18384,11 +18397,11 @@ var _user$project$MarkTests$ruleTest = function () {
 				'x',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$SiValue(
+					_0: _user$project$Vega$siValue(
 						_user$project$Vega$vNum(50)),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$SiBind(
+						_0: _user$project$Vega$siBind(
 							_user$project$Vega$iRange(
 								{
 									ctor: '::',
@@ -18411,11 +18424,11 @@ var _user$project$MarkTests$ruleTest = function () {
 					'y',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$SiValue(
+						_0: _user$project$Vega$siValue(
 							_user$project$Vega$vNum(50)),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$SiBind(
+							_0: _user$project$Vega$siBind(
 								_user$project$Vega$iRange(
 									{
 										ctor: '::',
@@ -18438,11 +18451,11 @@ var _user$project$MarkTests$ruleTest = function () {
 						'x2',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$SiValue(
+							_0: _user$project$Vega$siValue(
 								_user$project$Vega$vNum(150)),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$SiBind(
+								_0: _user$project$Vega$siBind(
 									_user$project$Vega$iRange(
 										{
 											ctor: '::',
@@ -18465,11 +18478,11 @@ var _user$project$MarkTests$ruleTest = function () {
 							'y2',
 							{
 								ctor: '::',
-								_0: _user$project$Vega$SiValue(
+								_0: _user$project$Vega$siValue(
 									_user$project$Vega$vNum(150)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$SiBind(
+									_0: _user$project$Vega$siBind(
 										_user$project$Vega$iRange(
 											{
 												ctor: '::',
@@ -18492,11 +18505,11 @@ var _user$project$MarkTests$ruleTest = function () {
 								'strokeWidth',
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SiValue(
+									_0: _user$project$Vega$siValue(
 										_user$project$Vega$vNum(4)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$SiBind(
+										_0: _user$project$Vega$siBind(
 											_user$project$Vega$iRange(
 												{
 													ctor: '::',
@@ -18519,12 +18532,12 @@ var _user$project$MarkTests$ruleTest = function () {
 									'strokeCap',
 									{
 										ctor: '::',
-										_0: _user$project$Vega$SiValue(
+										_0: _user$project$Vega$siValue(
 											_user$project$Vega$vStr(
 												_user$project$Vega$strokeCapLabel(_user$project$Vega$CButt))),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$SiBind(
+											_0: _user$project$Vega$siBind(
 												_user$project$Vega$iSelect(
 													{
 														ctor: '::',
@@ -18553,7 +18566,7 @@ var _user$project$MarkTests$ruleTest = function () {
 										'strokeDash',
 										{
 											ctor: '::',
-											_0: _user$project$Vega$SiValue(
+											_0: _user$project$Vega$siValue(
 												_user$project$Vega$vNums(
 													{
 														ctor: '::',
@@ -18566,7 +18579,7 @@ var _user$project$MarkTests$ruleTest = function () {
 													})),
 											_1: {
 												ctor: '::',
-												_0: _user$project$Vega$SiBind(
+												_0: _user$project$Vega$siBind(
 													_user$project$Vega$iSelect(
 														{
 															ctor: '::',

@@ -7,6 +7,7 @@ module Vega
         , Bind
         , BoolSig
         , CInterpolate
+        , ColorSchemeProperty
         , ColorValue
         , Comparator
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
@@ -47,9 +48,8 @@ module Vega
         , ScaleNice
         , ScaleProperty
         , ScaleRange
-        , SchemeProperty(..)
-        , Side(..)
-        , SignalProperty(..)
+        , Side(SBottom, SLeft, SRight, STop)
+        , SignalProperty
         , SortProperty(Ascending, Descending)
         , Source
         , Spec
@@ -115,6 +115,9 @@ module Vega
         , coOrder
         , combineSpecs
         , count
+        , csCount
+        , csExtent
+        , csScheme
         , csv
         , cubeHelix
         , cubeHelixLong
@@ -352,6 +355,13 @@ module Vega
         , scZero
         , scale
         , scales
+        , siBind
+        , siDescription
+        , siName
+        , siOn
+        , siReact
+        , siUpdate
+        , siValue
         , sigHeight
         , sigPadding
         , sigWidth
@@ -697,6 +707,13 @@ Functions and types for declaring the input data to the visualization.
 @docs sigWidth
 @docs sigPadding
 @docs SignalProperty
+@docs siName
+@docs siBind
+@docs siDescription
+@docs siOn
+@docs siUpdate
+@docs siReact
+@docs siValue
 @docs Bind
 @docs iCheckbox
 @docs iText
@@ -784,7 +801,10 @@ The mapping of data values to their visual expression.
 @docs niTrue
 @docs niFalse
 @docs niTickCount
-@docs SchemeProperty
+@docs ColorSchemeProperty
+@docs csScheme
+@docs csCount
+@docs csExtent
 @docs CInterpolate
 @docs cubeHelix
 @docs cubeHelixLong
@@ -1644,7 +1664,7 @@ type ScaleRange
     | RStrs (List String)
     | RValues (List Value)
     | RSignal String
-    | RScheme String (List SchemeProperty)
+    | RScheme String (List ColorSchemeProperty)
     | RData DataReference
     | RStep Value
     | RDefault RangeDefault
@@ -1653,7 +1673,7 @@ type ScaleRange
 {-| Describes a color scheme. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/schemes/).
 -}
-type SchemeProperty
+type ColorSchemeProperty
     = SScheme String
     | SCount Float
     | SExtent Float Float
@@ -2367,6 +2387,34 @@ literal, a signal, or subject to some scale.
 cRGB : List Value -> List Value -> List Value -> ColorValue
 cRGB =
     RGB
+
+
+{-| Specify the number of colors to use in a colour scheme. This can be useful
+for scale types such as quantize, which use the length of the scale range to
+determine the number of discrete bins for the scale domain. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/schemes/).
+-}
+csCount : Float -> ColorSchemeProperty
+csCount =
+    SCount
+
+
+{-| Specify the extent of the color range to use in sequential and diverging color
+schemes. For example [0.2, 1] will rescale the color scheme such that color values
+in the range [0, 0.2] are excluded from the scheme. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/schemes/).
+-}
+csExtent : Float -> Float -> ColorSchemeProperty
+csExtent mn mx =
+    SExtent mn mx
+
+
+{-| Specify the name of a color scheme to use. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/schemes/).
+-}
+csScheme : String -> ColorSchemeProperty
+csScheme =
+    SScheme
 
 
 {-| Indicates a CSV (comma separated value) format. Typically used when
@@ -4425,7 +4473,7 @@ raNums =
 {-| A scale range specified as a list of colour schemes. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/scales/#range).
 -}
-raScheme : String -> List SchemeProperty -> ScaleRange
+raScheme : String -> List ColorSchemeProperty -> ScaleRange
 raScheme s =
     RScheme s
 
@@ -4678,6 +4726,24 @@ scZero =
     SZero
 
 
+{-| Bind a signal to an external input element such as a slider, selection list
+or radio button group. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siBind : Bind -> SignalProperty
+siBind =
+    SiBind
+
+
+{-| Specify a text description of a signal, useful for inline documentation.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siDescription : String -> SignalProperty
+siDescription =
+    SiDescription
+
+
 {-| Create the signals used to add dynamism to the visualization.
 For further details see the [Vega documentation](https://vega.github.io/vega/docs/signals)
 
@@ -4719,6 +4785,54 @@ sigPadding =
 sigWidth : Value
 sigWidth =
     VSignal "width"
+
+
+{-| A unique name to be given to a signal. Signal names should be contain only
+alphanumeric characters (or “$”, or “_”) and may not start with a digit. Reserved
+keywords that may not be used as signal names are "datum", "event", "item", and
+"parent". For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siName : String -> SignalProperty
+siName =
+    SiName
+
+
+{-| Specify event stream handlers for updating a signal value in response to
+input events. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siOn : List (List EventHandler) -> SignalProperty
+siOn =
+    SiOn
+
+
+{-| Specify whether a signal update expression should be automatically re-evaluated
+when any upstream signal dependencies update. If false, the update expression will
+only be run upon initialization. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siReact : Bool -> SignalProperty
+siReact =
+    SiReact
+
+
+{-| Specify an update expression for a signal which may include other signals,
+in which case the signal will automatically update in response to upstream signal
+changes, so long as its react property is not false. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siUpdate : Expression -> SignalProperty
+siUpdate =
+    SiUpdate
+
+
+{-| Specify the initial value of a signal. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals).
+-}
+siValue : Value -> SignalProperty
+siValue =
+    SiValue
 
 
 {-| The field to be used when sorting.
@@ -6432,7 +6546,7 @@ scaleProperty scaleProp =
             ( "align", numSpec x )
 
 
-schemeProperty : SchemeProperty -> LabelledSpec
+schemeProperty : ColorSchemeProperty -> LabelledSpec
 schemeProperty sProps =
     case sProps of
         SScheme sName ->
