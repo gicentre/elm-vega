@@ -13358,9 +13358,10 @@ var _gicentre$elm_vega$Vega$SData = function (a) {
 	return {ctor: 'SData', _0: a};
 };
 var _gicentre$elm_vega$Vega$srData = _gicentre$elm_vega$Vega$SData;
-var _gicentre$elm_vega$Vega$OffsetSignal = function (a) {
-	return {ctor: 'OffsetSignal', _0: a};
+var _gicentre$elm_vega$Vega$OfSignal = function (a) {
+	return {ctor: 'OfSignal', _0: a};
 };
+var _gicentre$elm_vega$Vega$ofSignal = _gicentre$elm_vega$Vega$OfSignal;
 var _gicentre$elm_vega$Vega$OfNormalize = {ctor: 'OfNormalize'};
 var _gicentre$elm_vega$Vega$OfCenter = {ctor: 'OfCenter'};
 var _gicentre$elm_vega$Vega$OfZero = {ctor: 'OfZero'};
@@ -13368,18 +13369,26 @@ var _gicentre$elm_vega$Vega$StAs = F2(
 	function (a, b) {
 		return {ctor: 'StAs', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$Vega$stAs = F2(
+	function (y0, y1) {
+		return A2(_gicentre$elm_vega$Vega$StAs, y0, y1);
+	});
 var _gicentre$elm_vega$Vega$StOffset = function (a) {
 	return {ctor: 'StOffset', _0: a};
 };
+var _gicentre$elm_vega$Vega$stOffset = _gicentre$elm_vega$Vega$StOffset;
 var _gicentre$elm_vega$Vega$StSort = function (a) {
 	return {ctor: 'StSort', _0: a};
 };
+var _gicentre$elm_vega$Vega$stSort = _gicentre$elm_vega$Vega$StSort;
 var _gicentre$elm_vega$Vega$StGroupBy = function (a) {
 	return {ctor: 'StGroupBy', _0: a};
 };
+var _gicentre$elm_vega$Vega$stGroupBy = _gicentre$elm_vega$Vega$StGroupBy;
 var _gicentre$elm_vega$Vega$StField = function (a) {
 	return {ctor: 'StField', _0: a};
 };
+var _gicentre$elm_vega$Vega$stField = _gicentre$elm_vega$Vega$StField;
 var _gicentre$elm_vega$Vega$CSquare = {ctor: 'CSquare'};
 var _gicentre$elm_vega$Vega$CRound = {ctor: 'CRound'};
 var _gicentre$elm_vega$Vega$CButt = {ctor: 'CButt'};
@@ -18277,7 +18286,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 				_0: _gicentre$elm_vega$Vega$TStack(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$StGroupBy(
+						_0: _gicentre$elm_vega$Vega$stGroupBy(
 							{
 								ctor: '::',
 								_0: 'year',
@@ -18285,7 +18294,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$StSort(
+							_0: _gicentre$elm_vega$Vega$stSort(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$coField(
@@ -18315,7 +18324,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$StField('perc'),
+								_0: _gicentre$elm_vega$Vega$stField('perc'),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -19553,7 +19562,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$TStack(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$StGroupBy(
+							_0: _gicentre$elm_vega$Vega$stGroupBy(
 								{
 									ctor: '::',
 									_0: 'x',
@@ -19561,7 +19570,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$StSort(
+								_0: _gicentre$elm_vega$Vega$stSort(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$coField(
@@ -19574,7 +19583,7 @@ var _gicentre$elm_vega$Gallery$areaChart2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$StField('y'),
+									_0: _gicentre$elm_vega$Vega$stField('y'),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -21210,7 +21219,7 @@ var _gicentre$elm_vega$Gallery$barChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$TStack(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$StField('span'),
+							_0: _gicentre$elm_vega$Vega$stField('span'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -22640,7 +22649,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 					_0: _gicentre$elm_vega$Vega$TStack(
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$StGroupBy(
+							_0: _gicentre$elm_vega$Vega$stGroupBy(
 								{
 									ctor: '::',
 									_0: 'x',
@@ -22648,7 +22657,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$StSort(
+								_0: _gicentre$elm_vega$Vega$stSort(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$coField(
@@ -22661,7 +22670,7 @@ var _gicentre$elm_vega$Gallery$barChart2 = function () {
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$StField('y'),
+									_0: _gicentre$elm_vega$Vega$stField('y'),
 									_1: {ctor: '[]'}
 								}
 							}

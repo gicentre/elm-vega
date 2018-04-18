@@ -13369,18 +13369,26 @@ var _user$project$Vega$StAs = F2(
 	function (a, b) {
 		return {ctor: 'StAs', _0: a, _1: b};
 	});
+var _user$project$Vega$stAs = F2(
+	function (y0, y1) {
+		return A2(_user$project$Vega$StAs, y0, y1);
+	});
 var _user$project$Vega$StOffset = function (a) {
 	return {ctor: 'StOffset', _0: a};
 };
+var _user$project$Vega$stOffset = _user$project$Vega$StOffset;
 var _user$project$Vega$StSort = function (a) {
 	return {ctor: 'StSort', _0: a};
 };
+var _user$project$Vega$stSort = _user$project$Vega$StSort;
 var _user$project$Vega$StGroupBy = function (a) {
 	return {ctor: 'StGroupBy', _0: a};
 };
+var _user$project$Vega$stGroupBy = _user$project$Vega$StGroupBy;
 var _user$project$Vega$StField = function (a) {
 	return {ctor: 'StField', _0: a};
 };
+var _user$project$Vega$stField = _user$project$Vega$StField;
 var _user$project$Vega$CSquare = {ctor: 'CSquare'};
 var _user$project$Vega$CRound = {ctor: 'CRound'};
 var _user$project$Vega$CButt = {ctor: 'CButt'};
@@ -14270,10 +14278,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_0: _user$project$Vega$TStack(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$StField('value'),
+								_0: _user$project$Vega$stField('value'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$StGroupBy(
+									_0: _user$project$Vega$stGroupBy(
 										{
 											ctor: '::',
 											_0: 'key',
@@ -14281,11 +14289,11 @@ var _user$project$TransformTests$stackTest1 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$StOffset(
+										_0: _user$project$Vega$stOffset(
 											_user$project$Vega$ofSignal('offset')),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$StSort(
+											_0: _user$project$Vega$stSort(
 												{
 													ctor: '::',
 													_0: _user$project$Vega$coField(

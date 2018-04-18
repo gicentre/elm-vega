@@ -107,9 +107,9 @@ barChart2 =
                 [ table []
                     |> transform
                         [ TStack
-                            [ StGroupBy [ "x" ]
-                            , StSort [ coField [ "c" ] ]
-                            , StField "y"
+                            [ stGroupBy [ "x" ]
+                            , stSort [ coField [ "c" ] ]
+                            , stField "y"
                             ]
                         ]
                 ]
@@ -271,7 +271,7 @@ barChart4 =
                 |> transform
                     [ TAggregate [ agGroupBy [ "a" ] ]
                     , TFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
-                    , TStack [ StField "span" ]
+                    , TStack [ stField "span" ]
                     , TExtentAsSignal "y1" "trellisExtent"
                     ]
 
@@ -611,7 +611,7 @@ areaChart2 =
 
         ds =
             dataSource
-                [ table [] |> transform [ TStack [ StGroupBy [ "x" ], StSort [ coField [ "c" ] ], StField "y" ] ] ]
+                [ table [] |> transform [ TStack [ stGroupBy [ "x" ], stSort [ coField [ "c" ] ], stField "y" ] ] ]
 
         sc =
             scales
@@ -766,9 +766,9 @@ areaChart4 =
                 |> transform
                     [ TFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , TStack
-                        [ StGroupBy [ "year" ]
-                        , StSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
-                        , StField "perc"
+                        [ stGroupBy [ "year" ]
+                        , stSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
+                        , stField "perc"
                         ]
                     ]
 

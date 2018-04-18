@@ -54,7 +54,7 @@ module Vega
         , Source
         , Spec
         , StackOffset(OfCenter, OfNormalize, OfZero)
-        , StackProperty(..)
+        , StackProperty
         , Str
         , StrokeCap(..)
         , StrokeJoin(..)
@@ -372,6 +372,11 @@ module Vega
         , soOp
         , srData
         , srFacet
+        , stAs
+        , stField
+        , stGroupBy
+        , stOffset
+        , stSort
         , stderr
         , stdev
         , stdevp
@@ -506,6 +511,11 @@ Functions and types for declaring the input data to the visualization.
 @docs piSort
 @docs piAs
 @docs StackProperty
+@docs stField
+@docs stGroupBy
+@docs stSort
+@docs stOffset
+@docs stAs
 @docs StackOffset
 @docs ofSignal
 
@@ -1752,6 +1762,49 @@ type StackProperty
     | StSort (List Comparator)
     | StOffset StackOffset
     | StAs String String
+
+
+{-| Specify the names of the output fields for the computed start and end stack
+values of a stack transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+stAs : String -> String -> StackProperty
+stAs y0 y1 =
+    StAs y0 y1
+
+
+{-| Specify the data field that determines the stack heights in a stack transform.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+stField : Field -> StackProperty
+stField =
+    StField
+
+
+{-| Specify a grouping of fields with which to partition data into separate stacks
+in a stack transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+stGroupBy : List Field -> StackProperty
+stGroupBy =
+    StGroupBy
+
+
+{-| Specify the baseline offset used in a stack transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+stOffset : StackOffset -> StackProperty
+stOffset =
+    StOffset
+
+
+{-| Specify the criteria for sorting values in a stack transform. For details see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/stack/)
+-}
+stSort : List Comparator -> StackProperty
+stSort =
+    StSort
 
 
 {-| Type of stroke cap.

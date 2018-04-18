@@ -77,10 +77,10 @@ stackTest1 =
                 [ table []
                     |> transform
                         [ TStack
-                            [ StField "value"
-                            , StGroupBy [ "key" ]
-                            , StOffset (ofSignal "offset")
-                            , StSort [ coField [ "sortField" ], coOrder [ orSignal "sortOrder" ] ]
+                            [ stField "value"
+                            , stGroupBy [ "key" ]
+                            , stOffset (ofSignal "offset")
+                            , stSort [ coField [ "sortField" ], coOrder [ orSignal "sortOrder" ] ]
                             ]
                         ]
                     |> on
