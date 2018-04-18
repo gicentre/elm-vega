@@ -33,8 +33,8 @@ barChart1 =
                 << signal "tooltip"
                     [ siValue (vObject [])
                     , siOn
-                        [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
-                        , eventHandler "rect:mouseout" [ eUpdate "" ]
+                        [ eventHandler "rect:mouseover" [ evUpdate "datum" ]
+                        , eventHandler "rect:mouseout" [ evUpdate "" ]
                         ]
                     ]
 
@@ -688,7 +688,7 @@ areaChart3 =
             signals
                 << signal "layers"
                     [ siValue (vNum 2)
-                    , siOn [ eventHandler "mousedown!" [ eUpdate "1 + (layers % 4)" ] ]
+                    , siOn [ eventHandler "mousedown!" [ evUpdate "1 + (layers % 4)" ] ]
                     , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
                     ]
                 << signal "height" [ siUpdate "floor(200 / layers)" ]
@@ -795,8 +795,8 @@ areaChart4 =
                 << signal "query"
                     [ siValue (vStr "")
                     , siOn
-                        [ eventHandler "area:click!" [ eUpdate "datum.job" ]
-                        , eventHandler "dblclick!" [ eUpdate "''" ]
+                        [ eventHandler "area:click!" [ evUpdate "datum.job" ]
+                        , eventHandler "dblclick!" [ evUpdate "''" ]
                         ]
                     , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
@@ -1461,9 +1461,71 @@ scatterplot4 =
         [ width 500, height 160, padding (PSize 5), ds, si [], sc [], ax [], mk [] ]
 
 
+geo1 : Spec
+geo1 =
+    let
+        ds =
+            dataSource
+                [ data "unemp" [ daUrl "https://vega.github.io/vega/data/unemployment.tsv" ]
+                , data "counties"
+                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    , daFormat (topojsonFeature "counties")
+                    ]
+                    |> transform
+                        [ trLookup "unemp" "id" [ "id" ] [ luValues [ "rate" ] ]
+                        , trFilter (expr "datum.rate != null")
+                        ]
+                ]
+
+        pr =
+            -- TODO: Add projection functionality
+            projections
+
+        sc =
+            scales
+                << scale "cScale"
+                    [ scType ScQuantize
+                    , scDomain (doNums (nums [ 0, 0.15 ]))
+                    , scRange (raScheme "blues-9" [])
+                    ]
+
+        shapeEncoding =
+            [ maShape [ vStr (symbolLabel SymSquare) ]
+            , maStroke [ vStr "#ccc" ]
+            , maStrokeWidth [ vNum 0.2 ]
+            ]
+
+        lg =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leOrient BottomRight
+                    , leTitle "Unemployment"
+                    , leFormat "0.1%"
+                    , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
+                    ]
+
+        mk =
+            marks
+                << mark Shape
+                    [ mFrom [ srData (str "counties") ]
+                    , mEncode
+                        [ enEnter [ maTooltip [ vSignal "format(datum.rate, '0.1%')" ] ]
+                        , enUpdate [ maFill [ vScale (fName "cScale"), vField (fName "rate") ] ]
+                        , enHover [ maFill [ vStr "red" ] ]
+                        ]
+
+                    -- TODO: Add geoshape and projection transforms
+                    , mTransform []
+                    ]
+    in
+    toVega
+        [ width 960, height 500, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    areaChart4
+    geo1
 
 
 
@@ -1489,6 +1551,7 @@ mySpecs =
         , ( "scatterplot2", scatterplot2 )
         , ( "scatterplot3", scatterplot3 )
         , ( "scatterplot4", scatterplot4 )
+        , ( "geo1", geo1 )
         ]
 
 

@@ -32,6 +32,7 @@ module Vega
         , LegendOrientation(Bottom, BottomLeft, BottomRight, Left, None, Right, Top, TopLeft, TopRight)
         , LegendProperty
         , LegendType(LGradient, LSymbol)
+        , LookupProperty
         , Mark(Arc, Area, Group, Image, Line, Path, Rect, Rule, Shape, Symbol, Text, Trail)
         , MarkInterpolation(Basis, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
         , MarkOrientation(Horizontal, Vertical)
@@ -152,10 +153,7 @@ module Vega
         , doNums
         , doStrs
         , dsv
-        , eEncode
         , eField
-        , eForce
-        , eUpdate
         , enCustom
         , enEnter
         , enExit
@@ -166,6 +164,9 @@ module Vega
         , enSymbols
         , enTitle
         , enUpdate
+        , evEncode
+        , evForce
+        , evUpdate
         , eventHandler
         , expr
         , fDatum
@@ -229,6 +230,9 @@ module Vega
         , leZIndex
         , legend
         , legends
+        , luAs
+        , luDefault
+        , luValues
         , mClip
         , mDescription
         , mEncode
@@ -338,6 +342,7 @@ module Vega
         , piField
         , piSort
         , piStartAngle
+        , projections
         , q1
         , q3
         , raData
@@ -413,6 +418,7 @@ module Vega
         , trFilter
         , trFormula
         , trInsert
+        , trLookup
         , trModifyValues
         , trPack
         , trPie
@@ -534,6 +540,13 @@ Functions and types for declaring the input data to the visualization.
 @docs trPie
 @docs trStack
 @docs trStratify
+
+@docs trLookup
+@docs LookupProperty
+@docs luAs
+@docs luValues
+@docs luDefault
+
 @docs FormulaUpdate
 @docs AggregateProperty
 @docs agGroupBy
@@ -594,6 +607,11 @@ Functions and types for declaring the input data to the visualization.
 @docs valid
 @docs variance
 @docs variancep
+
+
+## Projections
+
+@docs projections
 
 
 ## Axes
@@ -814,9 +832,9 @@ Functions and types for declaring the input data to the visualization.
 @docs inAutocomplete
 @docs EventHandler
 @docs eventHandler
-@docs eUpdate
-@docs eEncode
-@docs eForce
+@docs evUpdate
+@docs evEncode
+@docs evForce
 
 
 ## Scaling
@@ -1391,52 +1409,21 @@ type LegendEncoding
     | EnGradient (List EncodingProperty)
 
 
-{-| Custom encoding for gradient (continuous) legends. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
--}
-enGradient : List EncodingProperty -> LegendEncoding
-enGradient =
-    EnGradient
-
-
-{-| Custom encoding for legend labels. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
--}
-enLabels : List EncodingProperty -> LegendEncoding
-enLabels =
-    EnLabels
-
-
-{-| Custom encoding for a legend group mark. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
--}
-enLegend : List EncodingProperty -> LegendEncoding
-enLegend =
-    EnLegend
-
-
-{-| Custom encoding for symbol (discrete) legends. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
--}
-enSymbols : List EncodingProperty -> LegendEncoding
-enSymbols =
-    EnSymbols
-
-
-{-| Custom ecoding for a legend title. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
--}
-enTitle : List EncodingProperty -> LegendEncoding
-enTitle =
-    EnTitle
-
-
 {-| Type of legend. `LSymbol` representing legends with discrete items and `LGradient`
 for those representing continuous data.
 -}
 type LegendType
     = LSymbol
     | LGradient
+
+
+{-| Lookup references used in a lookup transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
+-}
+type LookupProperty
+    = LValues (List Field)
+    | LAs (List String)
+    | LDefault Value
 
 
 {-| Type of visual mark used to represent data in the visualization. For further
@@ -1971,7 +1958,7 @@ type Transform
     | TIdentifier
     | TImpute
     | TJoinAggregate
-    | TLookup
+    | TLookup String Field (List Field) (List LookupProperty)
     | TProject
     | TSample
     | TSequence
@@ -2836,10 +2823,10 @@ result of a transformation. For details see the
 
       dataSource
           [ data "pop" [ daUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
-          , data "males" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 1") ]
-          , data "females" [ dSource "popYear" ] |> transform [ TFilter (expr "datum.sex == 2") ]
-          , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          , data "popYear" [ dSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
+          , data "males" [ dSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
+          , data "females" [ dSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
+          , data "ageGroups" [ dSource "pop" ] |> transform [ trAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 
 -}
@@ -2995,15 +2982,6 @@ dsv =
     DSV
 
 
-{-| Name of a mark property encoding set to re-evaluate for the mark item that is
-the source of an input event. This is required if `eUpdate` is not specified. For
-details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
--}
-eEncode : String -> EventHandler
-eEncode =
-    EEncode
-
-
 {-| A field lookup that forms a vega [Expr](https://vega.github.io/vega/docs/types/#Expr).
 In contrast to an expression generated by `expr`, a field lookup is applied once
 to an entire field rather than evaluated once per datum.
@@ -3011,16 +2989,6 @@ to an entire field rather than evaluated once per datum.
 eField : String -> Expr
 eField =
     EField
-
-
-{-| Indicates whether or not updates that do not change a signal value should propagate.
-For example, if true and an input stream update sets the signal to its current value,
-downstream signals will still be notified of an update. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
--}
-eForce : Bool -> EventHandler
-eForce =
-    EForce
 
 
 {-| The properties to be encoded when a mark item is first instantiated or a
@@ -3032,12 +3000,70 @@ enEnter =
     Enter
 
 
+{-| The properties to be encoded when the data backing a mark item is removed.
+For further details see the
+[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+-}
+enExit : List MarkProperty -> EncodingProperty
+enExit =
+    Exit
+
+
+{-| Custom encoding for gradient (continuous) legends. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enGradient : List EncodingProperty -> LegendEncoding
+enGradient =
+    EnGradient
+
+
+{-| Custom encoding for legend labels. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enLabels : List EncodingProperty -> LegendEncoding
+enLabels =
+    EnLabels
+
+
+{-| Custom encoding for a legend group mark. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enLegend : List EncodingProperty -> LegendEncoding
+enLegend =
+    EnLegend
+
+
+{-| Custom encoding for symbol (discrete) legends. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enSymbols : List EncodingProperty -> LegendEncoding
+enSymbols =
+    EnSymbols
+
+
+{-| Custom ecoding for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/#custom)
+-}
+enTitle : List EncodingProperty -> LegendEncoding
+enTitle =
+    EnTitle
+
+
+{-| Name of a mark property encoding set to re-evaluate for the mark item that is
+the source of an input event. This is required if `eUpdate` is not specified. For
+details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
+-}
+evEncode : String -> EventHandler
+evEncode =
+    EEncode
+
+
 {-| Expression to be evaluated when an event occurs, the result of which becomes
 the new signal value. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
-eUpdate : String -> EventHandler
-eUpdate =
+evUpdate : String -> EventHandler
+evUpdate =
     EUpdate
 
 
@@ -3060,13 +3086,14 @@ eventHandler eStr eHandlers =
     EEvents eStr :: eHandlers
 
 
-{-| The properties to be encoded when the data backing a mark item is removed.
-For further details see the
-[Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Indicates whether or not updates that do not change a signal value should propagate.
+For example, if true and an input stream update sets the signal to its current value,
+downstream signals will still be notified of an update. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
-enExit : List MarkProperty -> EncodingProperty
-enExit =
-    Exit
+evForce : Bool -> EventHandler
+evForce =
+    EForce
 
 
 {-| Represents an expression to enable custom calculations. This should be text
@@ -3607,6 +3634,34 @@ the [Vega documentation](https://vega.github.io/vega/docs/legends/)
 leZIndex : Int -> LegendProperty
 leZIndex =
     LeZIndex
+
+
+{-| Specify the output fields in which to write data found in the secondary
+stream of a lookup. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
+-}
+luAs : List String -> LookupProperty
+luAs =
+    LAs
+
+
+{-| Specify the default value to assign if lookup fails in a lookup transformation.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
+-}
+luDefault : Value -> LookupProperty
+luDefault =
+    LDefault
+
+
+{-| Specify the data fields to copy from the secondary stream to the primary
+stream in a lookup transformation. If not specified, a reference to the full data
+record is copied.. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
+-}
+luValues : List Field -> LookupProperty
+luValues =
+    LValues
 
 
 {-| The horizontal alignment of a text or image mark. This may be specified directly,
@@ -4720,6 +4775,16 @@ piStartAngle =
     PiStartAngle
 
 
+{-| Create the projections used to map geographic data onto a plane.
+
+    TODO: XXX
+
+-}
+projections : List Spec -> ( VProperty, Spec )
+projections prs =
+    ( VProjections, JE.list prs )
+
+
 {-| An aggregating operation to calculate the lower quartile boundary of field values.
 -}
 q1 : Operation
@@ -5340,8 +5405,8 @@ For details see the [Vega documentation](https://vega.github.io/vega/docs/transf
 
       dataSource
           [ data "pop" [ dUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
-          , data "ageGroups" [ dSource "pop" ] |> transform [ TAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          , data "popYear" [ dSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
+          , data "ageGroups" [ dSource "pop" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
           ]
 
 -}
@@ -5405,6 +5470,20 @@ applicable to data sets, not marks. For details see the
 trInsert : Expression -> TriggerProperty
 trInsert =
     TrInsert
+
+
+{-| Perform a lookup transform that extends a primary data stream by looking up
+values on a secondary data stream. The first parameter is the name of the secondary
+data stream upon which to perform the lookup. The second parameter is the key field
+in that secondary stream. The third is the set of key fields from the primary data
+stream, each of which are then searched for in a single key field of
+the secondary data stream. Optional customisation can be provided as a list of
+properties in the final parameter. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/).
+-}
+trLookup : String -> Field -> List Field -> List LookupProperty -> Transform
+trLookup from key fields =
+    TLookup from key fields
 
 
 {-| Specify a data or mark modification trigger. The first parameter is an
@@ -6410,6 +6489,19 @@ legendTypeLabel lt =
             "gradient"
 
 
+lookupProperty : LookupProperty -> LabelledSpec
+lookupProperty luProp =
+    case luProp of
+        LValues fields ->
+            ( "values", JE.list (List.map fieldSpec fields) )
+
+        LAs fields ->
+            ( "as", JE.list (List.map JE.string fields) )
+
+        LDefault val ->
+            ( "default", valueSpec val )
+
+
 markLabel : Mark -> String
 markLabel m =
     case m of
@@ -7272,8 +7364,14 @@ transformSpec trans =
         TJoinAggregate ->
             JE.object [ ( "type", JE.string "joinaggregate" ) ]
 
-        TLookup ->
-            JE.object [ ( "type", JE.string "lookup" ) ]
+        TLookup from key fields lups ->
+            JE.object
+                (( "type", JE.string "lookup" )
+                    :: ( "from", JE.string from )
+                    :: ( "key", fieldSpec key )
+                    :: ( "fields", JE.list (List.map fieldSpec fields) )
+                    :: List.map lookupProperty lups
+                )
 
         TProject ->
             JE.object [ ( "type", JE.string "project" ) ]
