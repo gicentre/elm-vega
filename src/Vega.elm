@@ -328,6 +328,7 @@ module Vega
         , niYear
         , num
         , numSignal
+        , numSignals
         , nums
         , ofSignal
         , on
@@ -428,6 +429,7 @@ module Vega
         , stdevp
         , str
         , strSignal
+        , strSignals
         , strokeCapLabel
         , strokeJoinLabel
         , strs
@@ -1014,10 +1016,12 @@ can carry data used in specifications.
 @docs str
 @docs strs
 @docs strSignal
+@docs strSignals
 @docs Num
 @docs num
 @docs nums
 @docs numSignal
+@docs numSignals
 @docs BoolSig
 @docs boolean
 @docs bools
@@ -1709,7 +1713,7 @@ type Projection
     | Orthographic
     | Stereographic
     | TransverseMercator
-    | Proj String
+    | Proj Str
 
 
 {-| Optional properties of a global map projection specification. For details see the
@@ -2314,6 +2318,7 @@ type Str
       --TODO: Do we need nested lists of Str values so that a list can contain mixed string literals and signals?
     | Strs (List String)
     | StrSignal String
+    | StrSignals (List String)
 
 
 {-| Represents number-related values such as a numeric literal, a list of numbers
@@ -2324,6 +2329,7 @@ type Num
       --TODO: Do we need nested lists of Num values so that a list can contain mixed numeric literals and signals?
     | Nums (List Float)
     | NumSignal String
+    | NumSignals (List String)
     | NumExpr Expr
 
 
@@ -4911,6 +4917,13 @@ numSignal =
     NumSignal
 
 
+{-| A list of signals that will provide numeric values.
+-}
+numSignals : List String -> Num
+numSignals =
+    NumSignals
+
+
 {-| Specify a named signal to drive the type of offsetting to apply when
 performing a stack transform. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/transforms/stack)
@@ -5077,7 +5090,7 @@ piStartAngle =
 with the vega runtime. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/projections/#register)
 -}
-prCustom : String -> Projection
+prCustom : Str -> Projection
 prCustom =
     Proj
 
@@ -5582,6 +5595,13 @@ strs =
 strSignal : String -> Str
 strSignal =
     StrSignal
+
+
+{-| A list of signals that will provide string values.
+-}
+strSignals : List String -> Str
+strSignals =
+    StrSignals
 
 
 {-| A convenience function for generating a text string representing a given
@@ -7120,6 +7140,9 @@ numSpec num =
         NumSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
+        NumSignals sigs ->
+            JE.list (List.map (\sig -> JE.object [ signalReferenceProperty sig ]) sigs)
+
         NumExpr expr ->
             JE.object [ exprProperty expr ]
 
@@ -7278,57 +7301,57 @@ pieProperty pp =
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
 
 
-projectionLabel : Projection -> String
-projectionLabel proj =
+projectionSpec : Projection -> Spec
+projectionSpec proj =
     case proj of
         Albers ->
-            "Albers"
+            JE.string "Albers"
 
         AlbersUsa ->
-            "AlbersUsa"
+            JE.string "AlbersUsa"
 
         AzimuthalEqualArea ->
-            "AzimuthalEqualArea"
+            JE.string "AzimuthalEqualArea"
 
         AzimuthalEquidistant ->
-            "AzimuthalEquidistant"
+            JE.string "AzimuthalEquidistant"
 
         ConicConformal ->
-            "ConicConformal"
+            JE.string "ConicConformal"
 
         ConicEqualArea ->
-            "ConicEqualArea"
+            JE.string "ConicEqualArea"
 
         ConicEquidistant ->
-            "ConicEquidistant"
+            JE.string "ConicEquidistant"
 
         Equirectangular ->
-            "Equirectangular"
+            JE.string "Equirectangular"
 
         Gnomonic ->
-            "Gnomonic"
+            JE.string "Gnomonic"
 
         Mercator ->
-            "Mercator"
+            JE.string "Mercator"
 
         Orthographic ->
-            "Orthographic"
+            JE.string "Orthographic"
 
         Stereographic ->
-            "Stereographic"
+            JE.string "Stereographic"
 
         TransverseMercator ->
-            "TransverseMercator"
+            JE.string "TransverseMercator"
 
-        Proj name ->
-            name
+        Proj str ->
+            strSpec str
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
 projectionProperty projProp =
     case projProp of
         PrType pType ->
-            ( "type", JE.string (projectionLabel pType) )
+            ( "type", projectionSpec pType )
 
         PrClipAngle n ->
             -- TODO: Check that a clip angle of 0 can be used to indicate antimeridian cutting
@@ -7342,7 +7365,10 @@ projectionProperty projProp =
         PrClipExtent n ->
             case n of
                 Nums [ x0, y0, x1, y1 ] ->
-                    ( "clipExtent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x0, JE.float y0 ] ] )
+                    ( "clipExtent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x1, JE.float y1 ] ] )
+
+                NumSignals [ sigX0, sigY0, sigX1, sigY1 ] ->
+                    ( "clipExtent", JE.list [ numSpec (NumSignals [ sigX0, sigY0 ]), numSpec (NumSignals [ sigX1, sigY1 ]) ] )
 
                 _ ->
                     ( "clipExtent", JE.null ) |> Debug.log ("Warning: prClipExtent expecting array of 4 numbers but was given " ++ toString n)
@@ -7354,6 +7380,9 @@ projectionProperty projProp =
             case n of
                 Nums [ tx, ty ] ->
                     ( "translate", JE.list [ JE.float tx, JE.float ty ] )
+
+                NumSignals [ sigTx, sigTy ] ->
+                    ( "translate", numSpec (NumSignals [ sigTx, sigTy ]) )
 
                 _ ->
                     ( "translate", JE.null ) |> Debug.log ("Warning: prTranslate expecting array of 2 numbers but was given " ++ toString n)
@@ -7368,6 +7397,12 @@ projectionProperty projProp =
 
                 Nums [ lambda, phi, gamma ] ->
                     ( "rotate", JE.list [ JE.float lambda, JE.float phi, JE.float gamma ] )
+
+                NumSignals [ sigLambda, sigPhi ] ->
+                    ( "rotate", numSpec (NumSignals [ sigLambda, sigPhi ]) )
+
+                NumSignals [ sigLambda, sigPhi, sigGamma ] ->
+                    ( "rotate", numSpec (NumSignals [ sigLambda, sigPhi, sigGamma ]) )
 
                 _ ->
                     ( "rotate", JE.null ) |> Debug.log ("Warning: prRotate expecting array of 2 or 3 numbers but was given " ++ toString n)
@@ -7723,6 +7758,9 @@ strSpec str =
 
         StrSignal sig ->
             JE.object [ signalReferenceProperty sig ]
+
+        StrSignals sigs ->
+            JE.list (List.map (\sig -> JE.object [ signalReferenceProperty sig ]) sigs)
 
 
 timeUnitLabel : TimeUnit -> String
