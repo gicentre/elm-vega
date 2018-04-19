@@ -26,6 +26,7 @@ module Vega
         , FieldValue
         , Format
         , FormulaUpdate(AlwaysUpdate, InitOnly)
+        , GeoPathProperty
         , HAlign(AlignCenter, AlignLeft, AlignRight)
         , InputProperty
         , LegendEncoding
@@ -180,6 +181,9 @@ module Vega
         , foDate
         , foNumber
         , foUtc
+        , gpAs
+        , gpField
+        , gpPointRadius
         , hAlignLabel
         , hcl
         , hclLong
@@ -417,6 +421,8 @@ module Vega
         , trExtentAsSignal
         , trFilter
         , trFormula
+        , trGeoPath
+        , trGeoShape
         , trInsert
         , trLookup
         , trModifyValues
@@ -546,6 +552,13 @@ Functions and types for declaring the input data to the visualization.
 @docs luAs
 @docs luValues
 @docs luDefault
+
+@docs trGeoShape
+@docs trGeoPath
+@docs GeoPathProperty
+@docs gpField
+@docs gpPointRadius
+@docs gpAs
 
 @docs FormulaUpdate
 @docs AggregateProperty
@@ -1334,6 +1347,15 @@ type FormulaUpdate
     | AlwaysUpdate
 
 
+{-| Optional properties of a geoShape or geoPath transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/).
+-}
+type GeoPathProperty
+    = GField Field
+    | GPointRadius Num
+    | GAs String
+
+
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
 -}
 type HAlign
@@ -1965,9 +1987,9 @@ type Transform
     | TWindow
     | TContour
     | TGeoJson
-    | TGeoPath
+    | TGeoPath String (List GeoPathProperty)
     | TGeoPoint
-    | TGeoShape
+    | TGeoShape String (List GeoPathProperty)
     | TGraticule
     | TLinkpath
     | TPie (List PieProperty)
@@ -2042,6 +2064,7 @@ type Num
       --TODO: Do we need nested lists of Num values so that a list can contain mixed numeric literals and signals?
     | Nums (List Float)
     | NumSignal String
+    | NumExpr Expr
 
 
 {-| Represents a value such as a number or reference to a value such as a field label
@@ -3204,6 +3227,36 @@ see the [Vega documentation](https://vega.github.io/vega/docs/types/#FieldValue)
 fSignal : String -> FieldValue
 fSignal =
     FSignal
+
+
+{-| Specify the output field in which to write a generated shape instance following
+a geoShape or geoPath transformation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/)
+-}
+gpAs : String -> GeoPathProperty
+gpAs =
+    GAs
+
+
+{-| Specify the data field containing GeoJSON data when applying a geoShape or
+geoPath transformation. If unspecified, the full input data object will be used.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/)
+-}
+gpField : Field -> GeoPathProperty
+gpField =
+    GField
+
+
+{-| Specify the default radius (in pixels) to use when drawing GeoJSON Point and
+MultiPoint geometries following a geoShape or geoPath transformation. An expression
+value may be used to set the point radius as a function of properties of the input
+GeoJSON. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/)
+-}
+gpPointRadius : Num -> GeoPathProperty
+gpPointRadius =
+    GPointRadius
 
 
 {-| A convenience function for generating a text string representing a horizontal
@@ -5453,6 +5506,33 @@ trFormula ex out =
     TFormula ex out
 
 
+{-| Perform a geopath transform that maps GeoJSON features to SVG path strings
+according to a provided cartographic projection. It is intended for use with the
+path mark type. This transform is similar in functionality to the geoshape transform,
+but immediately generates SVG path strings, rather than producing a shape instance
+that delays projection until the rendering stage. The geoshape transform may have
+better performance for the case of canvas-rendered dynamic maps. For details see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/).
+-}
+trGeoPath : String -> List GeoPathProperty -> Transform
+trGeoPath pName gpProps =
+    TGeoPath pName gpProps
+
+
+{-| Perform a geoShape transform generating a renderer instance that maps GeoJSON
+features to a shape instance that issues drawing commands. It is intended for use
+solely with the shape mark type. This transform is similar in functionality to the
+geopath transform, but rather than generate intermediate SVG path strings, this
+transform produces a shape instance that directly generates drawing commands during
+rendering. This transform can result in improved performance when using canvas
+rendering for dynamic maps. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/geoshape/).
+-}
+trGeoShape : String -> List GeoPathProperty -> Transform
+trGeoShape pName gsProps =
+    TGeoShape pName gsProps
+
+
 {-| Creates a trigger that may be applied to a data table or mark.
 The first parameter is the name of the trigger and the second
 a list of trigger actions.
@@ -6309,6 +6389,19 @@ formulaUpdateSpec update =
             JE.bool False
 
 
+geoPathProperty : GeoPathProperty -> LabelledSpec
+geoPathProperty gpProp =
+    case gpProp of
+        GField field ->
+            ( "field", fieldSpec field )
+
+        GPointRadius num ->
+            ( "pointRadius", numSpec num )
+
+        GAs s ->
+            ( "as", JE.string s )
+
+
 interpolateSpec : CInterpolate -> Spec
 interpolateSpec iType =
     case iType of
@@ -6770,6 +6863,9 @@ numSpec num =
 
         NumSignal sig ->
             JE.object [ signalReferenceProperty sig ]
+
+        NumExpr expr ->
+            JE.object [ exprProperty expr ]
 
 
 opSpec : Operation -> Spec
@@ -7391,14 +7487,22 @@ transformSpec trans =
         TGeoJson ->
             JE.object [ ( "type", JE.string "geojson" ) ]
 
-        TGeoPath ->
-            JE.object [ ( "type", JE.string "geopath" ) ]
+        TGeoPath pName gsps ->
+            JE.object
+                (( "type", JE.string "geopath" )
+                    :: ( "projection", JE.string pName )
+                    :: List.map geoPathProperty gsps
+                )
 
         TGeoPoint ->
             JE.object [ ( "type", JE.string "geopoint" ) ]
 
-        TGeoShape ->
-            JE.object [ ( "type", JE.string "geoshape" ) ]
+        TGeoShape pName gsps ->
+            JE.object
+                (( "type", JE.string "geoshape" )
+                    :: ( "projection", JE.string pName )
+                    :: List.map geoPathProperty gsps
+                )
 
         TGraticule ->
             JE.object [ ( "type", JE.string "graticule" ) ]

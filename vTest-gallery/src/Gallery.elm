@@ -1514,9 +1514,7 @@ geo1 =
                         , enUpdate [ maFill [ vScale (fName "cScale"), vField (fName "rate") ] ]
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
-
-                    -- TODO: Add geoshape and projection transforms
-                    , mTransform []
+                    , mTransform [ trGeoShape "myProjection" [] ]
                     ]
     in
     toVega
