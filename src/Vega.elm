@@ -24,7 +24,7 @@ module Vega
         , Facet
         , Field
         , FieldValue
-        , Format
+        , Format(CSV, JSON, TSV)
         , FormulaUpdate(AlwaysUpdate, InitOnly)
         , GeoPathProperty
         , HAlign(AlignCenter, AlignLeft, AlignRight)
@@ -45,6 +45,8 @@ module Vega
         , PackProperty
         , Padding(PEdges, PSize)
         , PieProperty
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , ProjectionProperty
         , RangeDefault(RCategory, RDiverging, RHeatmap, RHeight, ROrdinal, RRamp, RSymbol, RWidth)
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleDomain
@@ -124,7 +126,6 @@ module Vega
         , csCount
         , csExtent
         , csScheme
-        , csv
         , cubeHelix
         , cubeHelixLong
         , cursorLabel
@@ -346,6 +347,26 @@ module Vega
         , piField
         , piSort
         , piStartAngle
+        , prCenter
+        , prClipAngle
+        , prClipExtent
+        , prCoefficient
+        , prCustom
+        , prDistance
+        , prFraction
+        , prLobes
+        , prParallel
+        , prPointRadius
+        , prPrecision
+        , prRadius
+        , prRatio
+        , prRotate
+        , prScale
+        , prSpacing
+        , prTilt
+        , prTranslate
+        , prType
+        , projection
         , projections
         , q1
         , q3
@@ -435,7 +456,6 @@ module Vega
         , trToggle
         , transform
         , trigger
-        , tsv
         , utc
         , vAlignLabel
         , vBand
@@ -515,8 +535,6 @@ Functions and types for declaring the input data to the visualization.
 @docs foDate
 @docs foUtc
 @docs Format
-@docs csv
-@docs tsv
 @docs dsv
 @docs topojsonMesh
 @docs topojsonFeature
@@ -625,6 +643,28 @@ Functions and types for declaring the input data to the visualization.
 ## Projections
 
 @docs projections
+@docs projection
+@docs Projection
+@docs prCustom
+@docs ProjectionProperty
+@docs prType
+@docs prClipAngle
+@docs prClipExtent
+@docs prScale
+@docs prTranslate
+@docs prCenter
+@docs prRotate
+@docs prPointRadius
+@docs prPrecision
+@docs prCoefficient
+@docs prDistance
+@docs prFraction
+@docs prLobes
+@docs prParallel
+@docs prRadius
+@docs prRatio
+@docs prSpacing
+@docs prTilt
 
 
 ## Axes
@@ -1652,6 +1692,226 @@ type Padding
     | PEdges Float Float Float Float
 
 
+{-| Represents a global map projection type. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections).
+-}
+type Projection
+    = Albers
+    | AlbersUsa
+    | AzimuthalEqualArea
+    | AzimuthalEquidistant
+    | ConicConformal
+    | ConicEqualArea
+    | ConicEquidistant
+    | Equirectangular
+    | Gnomonic
+    | Mercator
+    | Orthographic
+    | Stereographic
+    | TransverseMercator
+    | Proj String
+
+
+{-| Optional properties of a global map projection specification. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties).
+-}
+type ProjectionProperty
+    = PrType Projection
+    | PrClipAngle Num -- TODO: Allow a value of 0 to indicate 'null' antimeridian cutting
+    | PrClipExtent Num
+    | PrScale Num
+    | PrTranslate Num
+    | PrCenter Num
+    | PrRotate Num
+    | PrPointRadius Num
+    | PrPrecision Num
+    | PrFit -- TODO:
+    | PrExtent -- TODO:
+    | PrSize -- TODO:
+    | PrCoefficient Num
+    | PrDistance Num
+    | PrFraction Num
+    | PrLobes Num
+    | PrParallel Num
+    | PrRadius Num
+    | PrRatio Num
+    | PrSpacing Num
+    | PrTilt Num
+
+
+{-| Specify the type of global map projection to use in a projection transformation.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/projections/#types)
+-}
+prType : Projection -> ProjectionProperty
+prType =
+    PrType
+
+
+{-| Specify a projection’s center, a two-element array of longitude and latitude
+in degrees. The default value is [0, 0]. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prCenter : Num -> ProjectionProperty
+prCenter =
+    PrCenter
+
+
+{-| Specify a projection’s clipping circle radius to the specified angle in degrees.
+A value of zero will switches to antimeridian cutting rather than small-circle
+clipping. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prClipAngle : Num -> ProjectionProperty
+prClipAngle =
+    PrClipAngle
+
+
+{-| Specify a projection’s viewport clip extent to the specified bounds in pixels.
+The extent bounds should be specified as an array of four numbers in [x0, y0, x1, y1]
+order where x0 is the left-side of the viewport, y0 is the top, x1 is the right
+and y1 is the bottom. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prClipExtent : Num -> ProjectionProperty
+prClipExtent =
+    PrClipExtent
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prCoefficient : Num -> ProjectionProperty
+prCoefficient =
+    PrCoefficient
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prDistance : Num -> ProjectionProperty
+prDistance =
+    PrDistance
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prFraction : Num -> ProjectionProperty
+prFraction =
+    PrFraction
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prLobes : Num -> ProjectionProperty
+prLobes =
+    PrLobes
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prParallel : Num -> ProjectionProperty
+prParallel =
+    PrParallel
+
+
+{-| Specify the default radius (in pixels) to use when drawing projected GeoJSON
+Point and MultiPoint geometries. The default value is 4.5. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prPointRadius : Num -> ProjectionProperty
+prPointRadius =
+    PrPointRadius
+
+
+{-| Specify a threshold for the projection’s adaptive resampling in pixels. This
+corresponds to the Douglas–Peucker distance. If precision is not specified, the
+projection’s current resampling precision which defaults to √0.5 ≅ 0.70710 is used.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prPrecision : Num -> ProjectionProperty
+prPrecision =
+    PrPrecision
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prRadius : Num -> ProjectionProperty
+prRadius =
+    PrRadius
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prRatio : Num -> ProjectionProperty
+prRatio =
+    PrRatio
+
+
+{-| Specify a projection’s three-axis rotation angle. This should be a two- or
+three-element array of numbers [lambda, phi, gamma] specifying the rotation angles
+in degrees about each spherical axis. (These correspond to yaw, pitch and roll.).
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prRotate : Num -> ProjectionProperty
+prRotate =
+    PrRotate
+
+
+{-| Specify a projection’s the projection’s scale factor to the specified value.
+The default scale is projection-specific. The scale factor corresponds linearly
+to the distance between projected points; however, scale factor values are not
+equivalent across projections. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prScale : Num -> ProjectionProperty
+prScale =
+    PrScale
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prSpacing : Num -> ProjectionProperty
+prSpacing =
+    PrSpacing
+
+
+{-| TODO: Add comments for function.
+For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prTilt : Num -> ProjectionProperty
+prTilt =
+    PrTilt
+
+
+{-| Specify a translation offset to the specified two-element array [tx, ty]. If
+not specified as a two element array, returns the current translation offset which
+defaults to [480, 250]. The translation offset determines the pixel coordinates
+of the projection’s center. The default translation offset places (0°,0°) at the
+center of a 960×500 area. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+-}
+prTranslate : Num -> ProjectionProperty
+prTranslate =
+    PrTranslate
+
+
 {-| Type of scale range. Can be used to set the default type of range to use
 in a scale. The value of the default for each type can be set separately via
 config settings. For details see the
@@ -2574,14 +2834,6 @@ csScheme =
     SScheme
 
 
-{-| Indicates a CSV (comma separated value) format. Typically used when
-specifying a data url.
--}
-csv : Format
-csv =
-    CSV
-
-
 {-| Cube-helix color interpolation. The parameter is a gamma value to control the
 brighness of the colour trajectory.
 -}
@@ -3495,13 +3747,6 @@ iTime =
 iWeek : List InputProperty -> Bind
 iWeek =
     IWeek
-
-
-{-| Indicates a JSON format. Typically used when specifying a data url.
--}
-json : Format
-json =
-    JSON
 
 
 {-| Represents a custom key-value pair to be stored in an object.
@@ -4828,6 +5073,25 @@ piStartAngle =
     PiStartAngle
 
 
+{-| Specify a custom map projection type. Custom types need to be registered
+with the vega runtime. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/projections/#register)
+-}
+prCustom : String -> Projection
+prCustom =
+    Proj
+
+
+{-| Create a single map projection for transforming geo data onto a plane.
+
+    TODO: XXX
+
+-}
+projection : String -> List ProjectionProperty -> List Spec -> List Spec
+projection name pps =
+    (::) (JE.object (( "name", JE.string name ) :: List.map projectionProperty pps))
+
+
 {-| Create the projections used to map geographic data onto a plane.
 
     TODO: XXX
@@ -5662,14 +5926,6 @@ trToggle =
     TrToggle
 
 
-{-| Indicates a TSV (tab separated value) format. Typically used when specifying
-a data url.
--}
-tsv : Format
-tsv =
-    TSV
-
-
 {-| The properties to be encoded when a mark item is updated such as in response
 to a signal change. For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -6370,10 +6626,10 @@ formatProperty fmt =
             [ ( "type", JE.string "dsv" ), ( "delimeter", JE.string delim ) ]
 
         TopojsonFeature objectSet ->
-            [ ( "type", JE.string "json" ), ( "feature", JE.string objectSet ) ]
+            [ ( "type", JE.string "topojson" ), ( "feature", JE.string objectSet ) ]
 
         TopojsonMesh objectSet ->
-            [ ( "type", JE.string "json" ), ( "mesh", JE.string objectSet ) ]
+            [ ( "type", JE.string "topojson" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
@@ -7020,6 +7276,143 @@ pieProperty pp =
 
         PiAs y0 y1 ->
             ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
+
+
+projectionLabel : Projection -> String
+projectionLabel proj =
+    case proj of
+        Albers ->
+            "Albers"
+
+        AlbersUsa ->
+            "AlbersUsa"
+
+        AzimuthalEqualArea ->
+            "AzimuthalEqualArea"
+
+        AzimuthalEquidistant ->
+            "AzimuthalEquidistant"
+
+        ConicConformal ->
+            "ConicConformal"
+
+        ConicEqualArea ->
+            "ConicEqualArea"
+
+        ConicEquidistant ->
+            "ConicEquidistant"
+
+        Equirectangular ->
+            "Equirectangular"
+
+        Gnomonic ->
+            "Gnomonic"
+
+        Mercator ->
+            "Mercator"
+
+        Orthographic ->
+            "Orthographic"
+
+        Stereographic ->
+            "Stereographic"
+
+        TransverseMercator ->
+            "TransverseMercator"
+
+        Proj name ->
+            name
+
+
+projectionProperty : ProjectionProperty -> LabelledSpec
+projectionProperty projProp =
+    case projProp of
+        PrType pType ->
+            ( "type", JE.string (projectionLabel pType) )
+
+        PrClipAngle n ->
+            -- TODO: Check that a clip angle of 0 can be used to indicate antimeridian cutting
+            case n of
+                Num 0 ->
+                    ( "clipAngle", JE.null )
+
+                _ ->
+                    ( "clipAngle", numSpec n )
+
+        PrClipExtent n ->
+            case n of
+                Nums [ x0, y0, x1, y1 ] ->
+                    ( "clipExtent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x0, JE.float y0 ] ] )
+
+                _ ->
+                    ( "clipExtent", JE.null ) |> Debug.log ("Warning: prClipExtent expecting array of 4 numbers but was given " ++ toString n)
+
+        PrScale n ->
+            ( "scale", numSpec n )
+
+        PrTranslate n ->
+            case n of
+                Nums [ tx, ty ] ->
+                    ( "translate", JE.list [ JE.float tx, JE.float ty ] )
+
+                _ ->
+                    ( "translate", JE.null ) |> Debug.log ("Warning: prTranslate expecting array of 2 numbers but was given " ++ toString n)
+
+        PrCenter n ->
+            ( "center", numSpec n )
+
+        PrRotate n ->
+            case n of
+                Nums [ lambda, phi ] ->
+                    ( "rotate", JE.list [ JE.float lambda, JE.float phi ] )
+
+                Nums [ lambda, phi, gamma ] ->
+                    ( "rotate", JE.list [ JE.float lambda, JE.float phi, JE.float gamma ] )
+
+                _ ->
+                    ( "rotate", JE.null ) |> Debug.log ("Warning: prRotate expecting array of 2 or 3 numbers but was given " ++ toString n)
+
+        PrPointRadius n ->
+            ( "pointRadius", numSpec n )
+
+        PrPrecision n ->
+            ( "precision", numSpec n )
+
+        PrFit ->
+            ( "fit", JE.null )
+
+        PrExtent ->
+            ( "extent", JE.null )
+
+        PrSize ->
+            ( "size", JE.null )
+
+        PrCoefficient n ->
+            ( "coefficient", numSpec n )
+
+        PrDistance n ->
+            ( "distance", numSpec n )
+
+        PrFraction n ->
+            ( "fraction", numSpec n )
+
+        PrLobes n ->
+            ( "lobes", numSpec n )
+
+        PrParallel n ->
+            ( "parallel", numSpec n )
+
+        PrRadius n ->
+            ( "radius", numSpec n )
+
+        PrRatio n ->
+            ( "ratio", numSpec n )
+
+        PrSpacing n ->
+            ( "spacing", numSpec n )
+
+        PrTilt n ->
+            ( "tilt", numSpec n )
 
 
 rangeDefaultLabel : RangeDefault -> String

@@ -1466,7 +1466,7 @@ geo1 =
     let
         ds =
             dataSource
-                [ data "unemp" [ daUrl "https://vega.github.io/vega/data/unemployment.tsv" ]
+                [ data "unemp" [ daUrl "https://vega.github.io/vega/data/unemployment.tsv", daFormat TSV ]
                 , data "counties"
                     [ daUrl "https://vega.github.io/vega/data/us-10m.json"
                     , daFormat (topojsonFeature "counties")
@@ -1478,8 +1478,8 @@ geo1 =
                 ]
 
         pr =
-            -- TODO: Add projection functionality
             projections
+                << projection "myProjection" [ prType AlbersUsa ]
 
         sc =
             scales
