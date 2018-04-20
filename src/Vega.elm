@@ -18,6 +18,7 @@ module Vega
         , DataRow
         , DataTable
         , DataType
+        , DataValues
         , EncodingProperty
         , EventHandler
         , Expr
@@ -27,6 +28,7 @@ module Vega
         , Format(CSV, JSON, TSV)
         , FormulaUpdate(AlwaysUpdate, InitOnly)
         , GeoPathProperty
+        , GraticuleProperty
         , HAlign(AlignCenter, AlignLeft, AlignRight)
         , InputProperty
         , LegendEncoding
@@ -446,6 +448,7 @@ module Vega
         , trFormula
         , trGeoPath
         , trGeoShape
+        , trGraticule
         , trInsert
         , trLookup
         , trModifyValues
@@ -508,6 +511,7 @@ testing purposes only.
 Functions and types for declaring the input data to the visualization.
 
 @docs dataSource
+@docs DataValues
 @docs dataFromColumns
 @docs dataFromRows
 @docs data
@@ -579,6 +583,8 @@ Functions and types for declaring the input data to the visualization.
 @docs gpField
 @docs gpPointRadius
 @docs gpAs
+@docs trGraticule
+@docs GraticuleProperty
 
 @docs FormulaUpdate
 @docs AggregateProperty
@@ -1395,9 +1401,23 @@ type FormulaUpdate
 [Vega documentation](https://vega.github.io/vega/docs/transforms/geopath/).
 -}
 type GeoPathProperty
-    = GField Field
-    | GPointRadius Num
-    | GAs String
+    = GeField Field
+    | GePointRadius Num
+    | GeAs String
+
+
+{-| Optional properties of a graticule transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/graticule/).
+-}
+type GraticuleProperty
+    = GrField Field
+    | GrExtentMajor Num
+    | GrExtentMinor Num
+    | GrExtent Num
+    | GrStepMajor Num
+    | GrStepMinor Num
+    | GrStep Num
+    | GrPrecision Num
 
 
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
@@ -2254,7 +2274,7 @@ type Transform
     | TGeoPath String (List GeoPathProperty)
     | TGeoPoint
     | TGeoShape String (List GeoPathProperty)
-    | TGraticule
+    | TGraticule (List GraticuleProperty)
     | TLinkpath
     | TPie (List PieProperty)
     | TStack (List StackProperty)
@@ -3493,7 +3513,7 @@ a geoShape or geoPath transformation. For details see the
 -}
 gpAs : String -> GeoPathProperty
 gpAs =
-    GAs
+    GeAs
 
 
 {-| Specify the data field containing GeoJSON data when applying a geoShape or
@@ -3503,7 +3523,7 @@ For details see the
 -}
 gpField : Field -> GeoPathProperty
 gpField =
-    GField
+    GeField
 
 
 {-| Specify the default radius (in pixels) to use when drawing GeoJSON Point and
@@ -3514,7 +3534,7 @@ GeoJSON. For details see the
 -}
 gpPointRadius : Num -> GeoPathProperty
 gpPointRadius =
-    GPointRadius
+    GePointRadius
 
 
 {-| A convenience function for generating a text string representing a horizontal
@@ -5817,6 +5837,22 @@ trGeoShape pName gsProps =
     TGeoShape pName gsProps
 
 
+{-| Perform a graticule transform that generates a reference grid for cartographic
+maps. A graticule is a uniform grid of meridians and parallels. The default graticule
+has meridians and parallels every 10° between ±80° latitude; for the polar regions,
+there are meridians every 90°.
+
+This transform generates a new data stream containing a single GeoJSON data object
+for the graticule, which can subsequently be drawn using the geopath or geoshape
+transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/graticule/).
+
+-}
+trGraticule : List GraticuleProperty -> Transform
+trGraticule grProps =
+    TGraticule grProps
+
+
 {-| Creates a trigger that may be applied to a data table or mark.
 The first parameter is the name of the trigger and the second
 a list of trigger actions.
@@ -6668,14 +6704,90 @@ formulaUpdateSpec update =
 geoPathProperty : GeoPathProperty -> LabelledSpec
 geoPathProperty gpProp =
     case gpProp of
-        GField field ->
+        GeField field ->
             ( "field", fieldSpec field )
 
-        GPointRadius num ->
+        GePointRadius num ->
             ( "pointRadius", numSpec num )
 
-        GAs s ->
+        GeAs s ->
             ( "as", JE.string s )
+
+
+graticuleProperty : GraticuleProperty -> LabelledSpec
+graticuleProperty grProp =
+    case grProp of
+        GrField field ->
+            ( "field", fieldSpec field )
+
+        GrExtentMajor n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "extentMajor", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "extentMajor", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "extentMajor", JE.null ) |> Debug.log ("Warning: grExtentMajor expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrExtentMinor n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "extentMinor", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "extentMinor", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "extentMinor", JE.null ) |> Debug.log ("Warning: grExtentMinor expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrExtent n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "extent", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "extent", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "extent", JE.null ) |> Debug.log ("Warning: grExtent expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrStepMajor n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "stepMajor", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "stepMajor", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "stepMajor", JE.null ) |> Debug.log ("Warning: grStepMajor expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrStepMinor n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "stepMinor", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "stepMinor", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "stepMinor", JE.null ) |> Debug.log ("Warning: grStepMinor expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrStep n ->
+            case n of
+                Nums [ lat, lng ] ->
+                    ( "step", JE.list [ JE.float lat, JE.float lng ] )
+
+                NumSignals [ lat, lng ] ->
+                    ( "step", numSpec (NumSignals [ lat, lng ]) )
+
+                _ ->
+                    ( "step", JE.null ) |> Debug.log ("Warning: grStep expecting array of 2 numbers or signals but was given " ++ toString n)
+
+        GrPrecision n ->
+            ( "precision", numSpec n )
 
 
 interpolateSpec : CInterpolate -> Spec
@@ -7354,9 +7466,9 @@ projectionProperty projProp =
             ( "type", projectionSpec pType )
 
         PrClipAngle n ->
-            -- TODO: Check that a clip angle of 0 can be used to indicate antimeridian cutting
             case n of
                 Num 0 ->
+                    -- Anitmeridian cutting
                     ( "clipAngle", JE.null )
 
                 _ ->
@@ -7918,11 +8030,11 @@ transformSpec trans =
         TGeoJson ->
             JE.object [ ( "type", JE.string "geojson" ) ]
 
-        TGeoPath pName gsps ->
+        TGeoPath pName gpps ->
             JE.object
                 (( "type", JE.string "geopath" )
                     :: ( "projection", JE.string pName )
-                    :: List.map geoPathProperty gsps
+                    :: List.map geoPathProperty gpps
                 )
 
         TGeoPoint ->
@@ -7935,8 +8047,8 @@ transformSpec trans =
                     :: List.map geoPathProperty gsps
                 )
 
-        TGraticule ->
-            JE.object [ ( "type", JE.string "graticule" ) ]
+        TGraticule grps ->
+            JE.object (( "type", JE.string "graticule" ) :: List.map graticuleProperty grps)
 
         TLinkpath ->
             JE.object [ ( "type", JE.string "linkpath" ) ]

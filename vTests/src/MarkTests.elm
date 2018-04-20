@@ -338,18 +338,39 @@ pathTest =
 shapeTest : Spec
 shapeTest =
     let
-        table =
-            dataFromColumns "table" []
-                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
+        projs =
+            inOptions <|
+                vStrs
+                    [ "albers"
+                    , "albersUsa"
+                    , "azimuthalEqualArea"
+                    , "azimuthalEquidistant"
+                    , "conicConformal"
+                    , "conicEqualArea"
+                    , "conicEquidistant"
+                    , "equirectangular"
+                    , "gnomonic"
+                    , "mercator"
+                    , "orthographic"
+                    , "stereographic"
+                    , "transverseMercator"
+                    ]
 
         ds =
-            dataSource [ table [] ]
+            dataSource
+                [ data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat (topojsonFeature "countries")
+                    ]
+                    |> transform [ trFilter (expr "pType !== 'albersUsa' || datum.id === 840") ]
+                , data "graticule" [] |> transform [ trGraticule [] ]
+                ]
 
         pr =
             projections
                 << projection "myProjection"
                     [ prType (prCustom (strSignal "pType"))
+                    , prClipAngle (numSignal "pClipAngle")
                     , prScale (numSignal "pScale")
                     , prRotate (numSignals [ "rotate0", "rotate1", "rotate2" ])
                     , prCenter (numSignals [ "center0", "center1" ])
@@ -358,24 +379,46 @@ shapeTest =
 
         si =
             signals
-                << signal "defined" [ siValue (vBool True), siBind (iCheckbox []) ]
-                << signal "size" [ siValue (vNum 5), siBind (iRange [ inMin 1, inMax 10 ]) ]
+                << signal "pType" [ siValue (vStr "mercator"), siBind (iSelect [ projs ]) ]
+                << signal "pScale" [ siValue (vNum 72), siBind (iRange [ inMin 50, inMax 1000, inStep 1 ]) ]
+                << signal "pClipAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
+                << signal "rotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "rotate1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
+                << signal "rotate2" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "center0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "center1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
+                << signal "translate0" [ siUpdate "width /2" ]
+                << signal "translate1" [ siUpdate "height /2" ]
 
         mk =
             marks
-                << mark Trail
-                    [ mFrom [ srData (str "table") ]
+                << mark Shape
+                    [ mFrom [ srData (str "graticule") ]
                     , mEncode
-                        [ enEnter [ maFill [ vStr "#939597" ] ]
-                        , enUpdate
-                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , maSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
-                            , maDefined [ vSignal "defined || datum.u !== 3" ]
-                            , maOpacity [ vNum 1 ]
+                        [ enUpdate
+                            [ maStrokeWidth [ vNum 1 ]
+                            , maStroke [ vStr "#ddd" ]
+                            , maFill [ vNull ]
                             ]
-                        , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "world") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStrokeWidth [ vNum 0.5 ]
+                            , maStroke [ vStr "#bbb" ]
+                            , maFill [ vStr "#000" ]
+                            , maZIndex [ vNum 0 ]
+                            ]
+                        , enHover
+                            [ maStrokeWidth [ vNum 1 ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
                     ]
     in
     toVega
