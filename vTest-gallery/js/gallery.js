@@ -8838,6 +8838,24 @@ var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'JSONProperty':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string('json')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'property',
+						_1: _elm_lang$core$Json_Encode$string(_p25._0)
+					},
+					_1: {ctor: '[]'}
+				}
+			};
 		case 'CSV':
 			return {
 				ctor: '::',
@@ -9315,7 +9333,7 @@ var _gicentre$elm_vega$Vega$eventHandlerSpec = function (ehs) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'events',
-					_1: _elm_lang$core$Json_Encode$string(_p35._0)
+					_1: _gicentre$elm_vega$Vega$strSpec(_p35._0)
 				};
 			case 'EUpdate':
 				var _p36 = _p35._0;
@@ -12058,12 +12076,14 @@ var _gicentre$elm_vega$Vega$FCollide = function (a) {
 var _gicentre$elm_vega$Vega$FCenter = function (a) {
 	return {ctor: 'FCenter', _0: a};
 };
-var _gicentre$elm_vega$Vega$FPDistance = function (a) {
-	return {ctor: 'FPDistance', _0: a};
+var _gicentre$elm_vega$Vega$FpDistance = function (a) {
+	return {ctor: 'FpDistance', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpDistance = _gicentre$elm_vega$Vega$FpDistance;
 var _gicentre$elm_vega$Vega$FpId = function (a) {
 	return {ctor: 'FpId', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpId = _gicentre$elm_vega$Vega$FpId;
 var _gicentre$elm_vega$Vega$FpLinks = function (a) {
 	return {ctor: 'FpLinks', _0: a};
 };
@@ -12079,18 +12099,23 @@ var _gicentre$elm_vega$Vega$foLink = F2(
 var _gicentre$elm_vega$Vega$FpDistanceMax = function (a) {
 	return {ctor: 'FpDistanceMax', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpDistanceMax = _gicentre$elm_vega$Vega$FpDistanceMax;
 var _gicentre$elm_vega$Vega$FpDistanceMin = function (a) {
 	return {ctor: 'FpDistanceMin', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpDistanceMin = _gicentre$elm_vega$Vega$FpDistanceMin;
 var _gicentre$elm_vega$Vega$FpTheta = function (a) {
 	return {ctor: 'FpTheta', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpTheta = _gicentre$elm_vega$Vega$FpTheta;
 var _gicentre$elm_vega$Vega$FpIterations = function (a) {
 	return {ctor: 'FpIterations', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpIterations = _gicentre$elm_vega$Vega$FpIterations;
 var _gicentre$elm_vega$Vega$FpStrength = function (a) {
 	return {ctor: 'FpStrength', _0: a};
 };
+var _gicentre$elm_vega$Vega$fpStrength = _gicentre$elm_vega$Vega$FpStrength;
 var _gicentre$elm_vega$Vega$FpRadius = function (a) {
 	return {ctor: 'FpRadius', _0: a};
 };
@@ -12186,6 +12211,10 @@ var _gicentre$elm_vega$Vega$DSV = function (a) {
 var _gicentre$elm_vega$Vega$dsv = _gicentre$elm_vega$Vega$DSV;
 var _gicentre$elm_vega$Vega$TSV = {ctor: 'TSV'};
 var _gicentre$elm_vega$Vega$CSV = {ctor: 'CSV'};
+var _gicentre$elm_vega$Vega$JSONProperty = function (a) {
+	return {ctor: 'JSONProperty', _0: a};
+};
+var _gicentre$elm_vega$Vega$jsonProperty = _gicentre$elm_vega$Vega$JSONProperty;
 var _gicentre$elm_vega$Vega$JSON = {ctor: 'JSON'};
 var _gicentre$elm_vega$Vega$AlwaysUpdate = {ctor: 'AlwaysUpdate'};
 var _gicentre$elm_vega$Vega$InitOnly = {ctor: 'InitOnly'};
@@ -20563,7 +20592,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 									ctor: '::',
 									_0: A2(
 										_gicentre$elm_vega$Vega$eventHandler,
-										'area:click!',
+										_gicentre$elm_vega$Vega$str('area:click!'),
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$evUpdate('datum.job'),
@@ -20573,7 +20602,7 @@ var _gicentre$elm_vega$Gallery$areaChart4 = function () {
 										ctor: '::',
 										_0: A2(
 											_gicentre$elm_vega$Vega$eventHandler,
-											'dblclick!',
+											_gicentre$elm_vega$Vega$str('dblclick!'),
 											{
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$evUpdate('\'\''),
@@ -21114,7 +21143,7 @@ var _gicentre$elm_vega$Gallery$areaChart3 = function () {
 								ctor: '::',
 								_0: A2(
 									_gicentre$elm_vega$Vega$eventHandler,
-									'mousedown!',
+									_gicentre$elm_vega$Vega$str('mousedown!'),
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$evUpdate('1 + (layers % 4)'),
@@ -25411,7 +25440,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 								ctor: '::',
 								_0: A2(
 									_gicentre$elm_vega$Vega$eventHandler,
-									'rect:mouseover',
+									_gicentre$elm_vega$Vega$str('rect:mouseover'),
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$evUpdate('datum'),
@@ -25421,7 +25450,7 @@ var _gicentre$elm_vega$Gallery$barChart1 = function () {
 									ctor: '::',
 									_0: A2(
 										_gicentre$elm_vega$Vega$eventHandler,
-										'rect:mouseout',
+										_gicentre$elm_vega$Vega$str('rect:mouseout'),
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$evUpdate(''),

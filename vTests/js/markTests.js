@@ -8838,6 +8838,24 @@ var _user$project$Vega$formatProperty = function (fmt) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'JSONProperty':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string('json')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'property',
+						_1: _elm_lang$core$Json_Encode$string(_p25._0)
+					},
+					_1: {ctor: '[]'}
+				}
+			};
 		case 'CSV':
 			return {
 				ctor: '::',
@@ -9315,7 +9333,7 @@ var _user$project$Vega$eventHandlerSpec = function (ehs) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'events',
-					_1: _elm_lang$core$Json_Encode$string(_p35._0)
+					_1: _user$project$Vega$strSpec(_p35._0)
 				};
 			case 'EUpdate':
 				var _p36 = _p35._0;
@@ -12058,12 +12076,14 @@ var _user$project$Vega$FCollide = function (a) {
 var _user$project$Vega$FCenter = function (a) {
 	return {ctor: 'FCenter', _0: a};
 };
-var _user$project$Vega$FPDistance = function (a) {
-	return {ctor: 'FPDistance', _0: a};
+var _user$project$Vega$FpDistance = function (a) {
+	return {ctor: 'FpDistance', _0: a};
 };
+var _user$project$Vega$fpDistance = _user$project$Vega$FpDistance;
 var _user$project$Vega$FpId = function (a) {
 	return {ctor: 'FpId', _0: a};
 };
+var _user$project$Vega$fpId = _user$project$Vega$FpId;
 var _user$project$Vega$FpLinks = function (a) {
 	return {ctor: 'FpLinks', _0: a};
 };
@@ -12079,18 +12099,23 @@ var _user$project$Vega$foLink = F2(
 var _user$project$Vega$FpDistanceMax = function (a) {
 	return {ctor: 'FpDistanceMax', _0: a};
 };
+var _user$project$Vega$fpDistanceMax = _user$project$Vega$FpDistanceMax;
 var _user$project$Vega$FpDistanceMin = function (a) {
 	return {ctor: 'FpDistanceMin', _0: a};
 };
+var _user$project$Vega$fpDistanceMin = _user$project$Vega$FpDistanceMin;
 var _user$project$Vega$FpTheta = function (a) {
 	return {ctor: 'FpTheta', _0: a};
 };
+var _user$project$Vega$fpTheta = _user$project$Vega$FpTheta;
 var _user$project$Vega$FpIterations = function (a) {
 	return {ctor: 'FpIterations', _0: a};
 };
+var _user$project$Vega$fpIterations = _user$project$Vega$FpIterations;
 var _user$project$Vega$FpStrength = function (a) {
 	return {ctor: 'FpStrength', _0: a};
 };
+var _user$project$Vega$fpStrength = _user$project$Vega$FpStrength;
 var _user$project$Vega$FpRadius = function (a) {
 	return {ctor: 'FpRadius', _0: a};
 };
@@ -12186,6 +12211,10 @@ var _user$project$Vega$DSV = function (a) {
 var _user$project$Vega$dsv = _user$project$Vega$DSV;
 var _user$project$Vega$TSV = {ctor: 'TSV'};
 var _user$project$Vega$CSV = {ctor: 'CSV'};
+var _user$project$Vega$JSONProperty = function (a) {
+	return {ctor: 'JSONProperty', _0: a};
+};
+var _user$project$Vega$jsonProperty = _user$project$Vega$JSONProperty;
 var _user$project$Vega$JSON = {ctor: 'JSON'};
 var _user$project$Vega$AlwaysUpdate = {ctor: 'AlwaysUpdate'};
 var _user$project$Vega$InitOnly = {ctor: 'InitOnly'};

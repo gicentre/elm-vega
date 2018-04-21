@@ -8838,6 +8838,24 @@ var _user$project$Vega$formatProperty = function (fmt) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'JSONProperty':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'type',
+					_1: _elm_lang$core$Json_Encode$string('json')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'property',
+						_1: _elm_lang$core$Json_Encode$string(_p25._0)
+					},
+					_1: {ctor: '[]'}
+				}
+			};
 		case 'CSV':
 			return {
 				ctor: '::',
@@ -9315,7 +9333,7 @@ var _user$project$Vega$eventHandlerSpec = function (ehs) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'events',
-					_1: _elm_lang$core$Json_Encode$string(_p35._0)
+					_1: _user$project$Vega$strSpec(_p35._0)
 				};
 			case 'EUpdate':
 				var _p36 = _p35._0;
@@ -12058,12 +12076,14 @@ var _user$project$Vega$FCollide = function (a) {
 var _user$project$Vega$FCenter = function (a) {
 	return {ctor: 'FCenter', _0: a};
 };
-var _user$project$Vega$FPDistance = function (a) {
-	return {ctor: 'FPDistance', _0: a};
+var _user$project$Vega$FpDistance = function (a) {
+	return {ctor: 'FpDistance', _0: a};
 };
+var _user$project$Vega$fpDistance = _user$project$Vega$FpDistance;
 var _user$project$Vega$FpId = function (a) {
 	return {ctor: 'FpId', _0: a};
 };
+var _user$project$Vega$fpId = _user$project$Vega$FpId;
 var _user$project$Vega$FpLinks = function (a) {
 	return {ctor: 'FpLinks', _0: a};
 };
@@ -12079,18 +12099,23 @@ var _user$project$Vega$foLink = F2(
 var _user$project$Vega$FpDistanceMax = function (a) {
 	return {ctor: 'FpDistanceMax', _0: a};
 };
+var _user$project$Vega$fpDistanceMax = _user$project$Vega$FpDistanceMax;
 var _user$project$Vega$FpDistanceMin = function (a) {
 	return {ctor: 'FpDistanceMin', _0: a};
 };
+var _user$project$Vega$fpDistanceMin = _user$project$Vega$FpDistanceMin;
 var _user$project$Vega$FpTheta = function (a) {
 	return {ctor: 'FpTheta', _0: a};
 };
+var _user$project$Vega$fpTheta = _user$project$Vega$FpTheta;
 var _user$project$Vega$FpIterations = function (a) {
 	return {ctor: 'FpIterations', _0: a};
 };
+var _user$project$Vega$fpIterations = _user$project$Vega$FpIterations;
 var _user$project$Vega$FpStrength = function (a) {
 	return {ctor: 'FpStrength', _0: a};
 };
+var _user$project$Vega$fpStrength = _user$project$Vega$FpStrength;
 var _user$project$Vega$FpRadius = function (a) {
 	return {ctor: 'FpRadius', _0: a};
 };
@@ -12186,6 +12211,10 @@ var _user$project$Vega$DSV = function (a) {
 var _user$project$Vega$dsv = _user$project$Vega$DSV;
 var _user$project$Vega$TSV = {ctor: 'TSV'};
 var _user$project$Vega$CSV = {ctor: 'CSV'};
+var _user$project$Vega$JSONProperty = function (a) {
+	return {ctor: 'JSONProperty', _0: a};
+};
+var _user$project$Vega$jsonProperty = _user$project$Vega$JSONProperty;
 var _user$project$Vega$JSON = {ctor: 'JSON'};
 var _user$project$Vega$AlwaysUpdate = {ctor: 'AlwaysUpdate'};
 var _user$project$Vega$InitOnly = {ctor: 'InitOnly'};
@@ -15352,8 +15381,617 @@ var _user$project$Vega$VBackground = {ctor: 'VBackground'};
 var _user$project$Vega$VDescription = {ctor: 'VDescription'};
 var _user$project$Vega$VName = {ctor: 'VName'};
 
-var _user$project$TransformTests$stackTest1 = function () {
+var _user$project$TransformTests$forceTest1 = function () {
 	var mk = function (_p0) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Symbol,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$mName('nodes'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$srData(
+									_user$project$Vega$str('node-data')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$mOn(
+								{
+									ctor: '::',
+									_0: A2(
+										_user$project$Vega$trigger,
+										'fix',
+										{
+											ctor: '::',
+											_0: A2(_user$project$Vega$trModifyValues, 'node', 'fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_user$project$Vega$trigger,
+											'!fix',
+											{
+												ctor: '::',
+												_0: A2(_user$project$Vega$trModifyValues, 'node', '{fx: null, fy: null}'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$maFill(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vScale(
+															_user$project$Vega$fName('cScale')),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$vField(
+																_user$project$Vega$fName('group')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maStroke(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vStr('white'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$enUpdate(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$maSize(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vSignal('2 * collideRadius * collideRadius'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maCursor(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vStr(
+																	_user$project$Vega$cursorLabel(_user$project$Vega$CPointer)),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$mTransform(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$trForce(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$fsIterations(
+														_user$project$Vega$num(300)),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$fsVelocityDecay(
+															_user$project$Vega$numSignal('velocityDecay')),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$fsRestart(
+																_user$project$Vega$boolSignal('restart')),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$fsStatic(
+																	_user$project$Vega$boolSignal('static')),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$fsForces(
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_user$project$Vega$foCenter,
+																				_user$project$Vega$numSignal('cx'),
+																				_user$project$Vega$numSignal('cy')),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_user$project$Vega$foCollide,
+																					_user$project$Vega$numSignal('collideRadius'),
+																					{ctor: '[]'}),
+																				_1: {
+																					ctor: '::',
+																					_0: _user$project$Vega$foNBody(
+																						{
+																							ctor: '::',
+																							_0: _user$project$Vega$fpStrength(
+																								_user$project$Vega$numSignal('nbodyStrength')),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_user$project$Vega$foLink,
+																							'link-data',
+																							{
+																								ctor: '::',
+																								_0: _user$project$Vega$fpDistance(
+																									_user$project$Vega$numSignal('linkDistance')),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A3(
+					_user$project$Vega$mark,
+					_user$project$Vega$Path,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$srData(
+									_user$project$Vega$str('link-data')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$mInteractive(
+								_user$project$Vega$boolean(false)),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$enUpdate(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$maStroke(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vStr('#ccc'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maStrokeWidth(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vNum(0.5),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$mTransform(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_p0)));
+	};
+	var sc = function (_p1) {
+		return _user$project$Vega$scales(
+			A3(
+				_user$project$Vega$scale,
+				'cScale',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$scRange(
+							A2(
+								_user$project$Vega$raScheme,
+								'category20c',
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p1));
+	};
+	var si = function (_p2) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'cx',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$siUpdate('width /2'),
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_user$project$Vega$signal,
+					'cy',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$siUpdate('height /2'),
+						_1: {ctor: '[]'}
+					},
+					A3(
+						_user$project$Vega$signal,
+						'collideRadius',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$siValue(
+								_user$project$Vega$vNum(5)),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$siBind(
+									_user$project$Vega$iRange(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$inMin(3),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$inMax(20),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$inStep(1),
+													_1: {ctor: '[]'}
+												}
+											}
+										})),
+								_1: {ctor: '[]'}
+							}
+						},
+						A3(
+							_user$project$Vega$signal,
+							'nbodyStrength',
+							{
+								ctor: '::',
+								_0: _user$project$Vega$siValue(
+									_user$project$Vega$vNum(-10)),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$siBind(
+										_user$project$Vega$iRange(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$inMin(50),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$inMax(10),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$inStep(1),
+														_1: {ctor: '[]'}
+													}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_user$project$Vega$signal,
+								'linkDistance',
+								{
+									ctor: '::',
+									_0: _user$project$Vega$siValue(
+										_user$project$Vega$vNum(15)),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$siBind(
+											_user$project$Vega$iRange(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$inMin(5),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$inMax(100),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$inStep(1),
+															_1: {ctor: '[]'}
+														}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}
+								},
+								A3(
+									_user$project$Vega$signal,
+									'velocityDecay',
+									{
+										ctor: '::',
+										_0: _user$project$Vega$siValue(
+											_user$project$Vega$vNum(0.4)),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$siBind(
+												_user$project$Vega$iRange(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$inMin(0),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$inMax(1),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$inStep(1.0e-2),
+																_1: {ctor: '[]'}
+															}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}
+									},
+									A3(
+										_user$project$Vega$signal,
+										'static',
+										{
+											ctor: '::',
+											_0: _user$project$Vega$siValue(
+												_user$project$Vega$vBool(true)),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$siBind(
+													_user$project$Vega$iCheckbox(
+														{ctor: '[]'})),
+												_1: {ctor: '[]'}
+											}
+										},
+										A3(
+											_user$project$Vega$signal,
+											'fix',
+											{
+												ctor: '::',
+												_0: _user$project$Vega$siDescription('State variable for active node fix status.'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$siValue(
+														_user$project$Vega$vNum(0)),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$siOn(
+															{
+																ctor: '::',
+																_0: A2(
+																	_user$project$Vega$eventHandler,
+																	_user$project$Vega$str('symbol:mouseout[!event.buttons], window:mouseup'),
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$evUpdate('0'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_user$project$Vega$eventHandler,
+																		_user$project$Vega$str('symbol:mouseover'),
+																		{
+																			ctor: '::',
+																			_0: _user$project$Vega$evUpdate('fix || 1'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_user$project$Vega$eventHandler,
+																			_user$project$Vega$str('[symbol:mousedown, window:mouseup] > window:mousemove!'),
+																			{
+																				ctor: '::',
+																				_0: _user$project$Vega$evUpdate('2'),
+																				_1: {
+																					ctor: '::',
+																					_0: _user$project$Vega$evForce(true),
+																					_1: {ctor: '[]'}
+																				}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											A3(
+												_user$project$Vega$signal,
+												'node',
+												{
+													ctor: '::',
+													_0: _user$project$Vega$siDescription('Graph node most recently interacted with.'),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$siValue(_user$project$Vega$vNull),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$siOn(
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_user$project$Vega$eventHandler,
+																		_user$project$Vega$str('symbol:mouseover'),
+																		{
+																			ctor: '::',
+																			_0: _user$project$Vega$evUpdate('fix === 1 ? item() : node'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												},
+												A3(
+													_user$project$Vega$signal,
+													'restart',
+													{
+														ctor: '::',
+														_0: _user$project$Vega$siDescription('Flag to restart Force simulation upon data changes.'),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$siValue(
+																_user$project$Vega$vBool(false)),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$siOn(
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_user$project$Vega$eventHandler,
+																			_user$project$Vega$strSignal('fix'),
+																			{
+																				ctor: '::',
+																				_0: _user$project$Vega$evUpdate('fix > 1 '),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													},
+													_p2)))))))))));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$data,
+				'node-data',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$daFormat(
+							_user$project$Vega$jsonProperty('nodes')),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Vega$data,
+					'link-data',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$daFormat(
+								_user$project$Vega$jsonProperty('links')),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(400),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(275),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$autosize(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$ANone,
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: si(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: sc(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: mk(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$TransformTests$sourceExample = _user$project$TransformTests$forceTest1;
+var _user$project$TransformTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TransformTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$TransformTests$stackTest1 = function () {
+	var mk = function (_p3) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -15379,7 +16017,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vScale(
-													_user$project$Vega$fName('color')),
+													_user$project$Vega$fName('cScale')),
 												_1: {
 													ctor: '::',
 													_0: _user$project$Vega$vField(
@@ -15409,7 +16047,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 														{
 															ctor: '::',
 															_0: _user$project$Vega$vScale(
-																_user$project$Vega$fName('xscale')),
+																_user$project$Vega$fName('xScale')),
 															_1: {
 																ctor: '::',
 																_0: _user$project$Vega$vField(
@@ -15428,7 +16066,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 															{
 																ctor: '::',
 																_0: _user$project$Vega$vScale(
-																	_user$project$Vega$fName('xscale')),
+																	_user$project$Vega$fName('xScale')),
 																_1: {
 																	ctor: '::',
 																	_0: _user$project$Vega$vBand(1),
@@ -15450,7 +16088,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 												{
 													ctor: '::',
 													_0: _user$project$Vega$vScale(
-														_user$project$Vega$fName('yscale')),
+														_user$project$Vega$fName('yScale')),
 													_1: {
 														ctor: '::',
 														_0: _user$project$Vega$vField(
@@ -15469,7 +16107,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 													{
 														ctor: '::',
 														_0: _user$project$Vega$vScale(
-															_user$project$Vega$fName('yscale')),
+															_user$project$Vega$fName('yScale')),
 														_1: {
 															ctor: '::',
 															_0: _user$project$Vega$vField(
@@ -15491,13 +16129,13 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p0));
+				_p3));
 	};
-	var sc = function (_p1) {
+	var sc = function (_p4) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
-				'xscale',
+				'xScale',
 				{
 					ctor: '::',
 					_0: _user$project$Vega$scType(_user$project$Vega$ScBand),
@@ -15529,7 +16167,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 				},
 				A3(
 					_user$project$Vega$scale,
-					'yscale',
+					'yScale',
 					{
 						ctor: '::',
 						_0: _user$project$Vega$scType(_user$project$Vega$ScLinear),
@@ -15562,7 +16200,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 					},
 					A3(
 						_user$project$Vega$scale,
-						'color',
+						'cScale',
 						{
 							ctor: '::',
 							_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
@@ -15576,9 +16214,9 @@ var _user$project$TransformTests$stackTest1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p1))));
+						_p4))));
 	};
-	var si = function (_p2) {
+	var si = function (_p5) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -15685,10 +16323,10 @@ var _user$project$TransformTests$stackTest1 = function () {
 											ctor: '::',
 											_0: A2(
 												_user$project$Vega$eventHandler,
-												'mousedown![!event.shiftKey]',
+												_user$project$Vega$str('mousedown![!event.shiftKey]'),
 												{
 													ctor: '::',
-													_0: _user$project$Vega$evUpdate('{key: invert(\'xscale\', x()), value: ~~(1 + 9 * random())}'),
+													_0: _user$project$Vega$evUpdate('{key: invert(\'xScale\', x()), value: ~~(1 + 9 * random())}'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
@@ -15711,7 +16349,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 												ctor: '::',
 												_0: A2(
 													_user$project$Vega$eventHandler,
-													'rect:mousedown![event.shiftKey]',
+													_user$project$Vega$str('rect:mousedown![event.shiftKey]'),
 													{
 														ctor: '::',
 														_0: _user$project$Vega$evUpdate('datum'),
@@ -15722,9 +16360,9 @@ var _user$project$TransformTests$stackTest1 = function () {
 										_1: {ctor: '[]'}
 									}
 								},
-								_p2))))));
+								_p5))))));
 	};
-	var table = function (_p3) {
+	var table = function (_p6) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'table',
@@ -15811,7 +16449,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 								}
 							}
 						}),
-					_p3)));
+					_p6)));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -15934,7 +16572,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 		});
 }();
 var _user$project$TransformTests$packTest1 = function () {
-	var mk = function (_p4) {
+	var mk = function (_p7) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -15960,7 +16598,7 @@ var _user$project$TransformTests$packTest1 = function () {
 											{
 												ctor: '::',
 												_0: _user$project$Vega$vScale(
-													_user$project$Vega$fName('color')),
+													_user$project$Vega$fName('cScale')),
 												_1: {
 													ctor: '::',
 													_0: _user$project$Vega$vField(
@@ -16018,13 +16656,13 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p4));
+				_p7));
 	};
-	var sc = function (_p5) {
+	var sc = function (_p8) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
-				'color',
+				'cScale',
 				{
 					ctor: '::',
 					_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
@@ -16038,9 +16676,9 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p5));
+				_p8));
 	};
-	var si = function (_p6) {
+	var si = function (_p9) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -16069,9 +16707,9 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p6));
+				_p9));
 	};
-	var table = function (_p7) {
+	var table = function (_p10) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'tree',
@@ -16151,7 +16789,7 @@ var _user$project$TransformTests$packTest1 = function () {
 									}
 								}
 							}),
-						_p7))));
+						_p10))));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -16220,36 +16858,6 @@ var _user$project$TransformTests$packTest1 = function () {
 			}
 		});
 }();
-var _user$project$TransformTests$sourceExample = _user$project$TransformTests$packTest1;
-var _user$project$TransformTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TransformTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$TransformTests$mySpecs = _user$project$Vega$combineSpecs(
 	{
 		ctor: '::',
@@ -16257,7 +16865,11 @@ var _user$project$TransformTests$mySpecs = _user$project$Vega$combineSpecs(
 		_1: {
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'stackTest1', _1: _user$project$TransformTests$stackTest1},
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'forceTest1', _1: _user$project$TransformTests$forceTest1},
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _user$project$TransformTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
@@ -16274,7 +16886,7 @@ var _user$project$TransformTests$main = _elm_lang$html$Html$program(
 		},
 		view: _user$project$TransformTests$view,
 		update: F2(
-			function (_p8, model) {
+			function (_p11, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

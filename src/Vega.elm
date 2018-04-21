@@ -193,6 +193,13 @@ module Vega
         , foUtc
         , foX
         , foY
+        , fpDistance
+        , fpDistanceMax
+        , fpDistanceMin
+        , fpId
+        , fpIterations
+        , fpStrength
+        , fpTheta
         , fsAlpha
         , fsAlphaMin
         , fsAlphaTarget
@@ -233,6 +240,7 @@ module Vega
         , inOptions
         , inPlaceholder
         , inStep
+        , jsonProperty
         , keyValue
         , lab
         , leEncode
@@ -562,6 +570,7 @@ Functions and types for declaring the input data to the visualization.
 @docs foUtc
 @docs Format
 @docs dsv
+@docs jsonProperty
 @docs topojsonMesh
 @docs topojsonFeature
 @docs parse
@@ -622,6 +631,13 @@ Functions and types for declaring the input data to the visualization.
 @docs fsVelocityDecay
 @docs fsForces
 @docs fsAs
+@docs fpStrength
+@docs fpDistance
+@docs fpIterations
+@docs fpTheta
+@docs fpDistanceMin
+@docs fpDistanceMax
+@docs fpId
 
 
 ### Geographic Transformations
@@ -1380,7 +1396,7 @@ type EventHandler
 -}
 type alias EventStream =
     -- TODO: Model event streams by creating a parser that generates valid stream text.
-    String
+    Str
 
 
 {-| A vega [Expr](https://vega.github.io/vega/docs/types/#Expr) that can be either
@@ -1438,7 +1454,7 @@ type Force
 
 
 {-| Optional properties of a force. These properties describe how individual forces
-within a simlation are to behave. For details see the
+within a simulation are to behave. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/transforms/force).
 -}
 type ForceProperty
@@ -1454,7 +1470,72 @@ type ForceProperty
     | FpDistanceMax Num
     | FpLinks String
     | FpId Field
-    | FPDistance Num
+    | FpDistance Num
+
+
+{-| Specify the distance in pixels by which the link constraint should separate
+nodes (default 30). For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#link)
+-}
+fpDistance : Num -> ForceProperty
+fpDistance =
+    FpDistance
+
+
+{-| Specify the maximum distance over which an n-body force acts. If two nodes
+exceed this value, they will not exert forces on each other. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#nbody)
+-}
+fpDistanceMax : Num -> ForceProperty
+fpDistanceMax =
+    FpDistanceMax
+
+
+{-| Specify the minimum distance over which an n-body force acts. If two nodes
+are closer than this value, the exerted forces will be as if they are distanceMin
+apart (default 1). For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#nbody)
+-}
+fpDistanceMin : Num -> ForceProperty
+fpDistanceMin =
+    FpDistanceMin
+
+
+{-| Specify an optional data field for a node’s unique identifier. If provided,
+the source and target fields of each link should use these values to indicate
+nodes. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#link)
+-}
+fpId : Field -> ForceProperty
+fpId =
+    FpId
+
+
+{-| Specify the number of iterations to run collision detection or link constraints
+(default 1) in a force directed sumulation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#collide)
+-}
+fpIterations : Num -> ForceProperty
+fpIterations =
+    FpIterations
+
+
+{-| Specify the relative strength of a force or link constraint in a force
+simulation. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#collide)
+-}
+fpStrength : Num -> ForceProperty
+fpStrength =
+    FpStrength
+
+
+{-| Specify the approximation parameter for aggregating more distance forces in
+a force-directed simulation (default 0.9). For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/force/#nbody)
+-}
+fpTheta : Num -> ForceProperty
+fpTheta =
+    FpTheta
 
 
 {-| Optional properties of a force simulation transform. These properties describe
@@ -1478,6 +1559,7 @@ type ForceSimulationProperty
 -}
 type Format
     = JSON
+    | JSONProperty String
     | CSV
     | TSV
     | DSV String
@@ -2329,6 +2411,8 @@ details see the [Vega documentation](https://vega.github.io/vega/docs/marks).
 -}
 type TopMarkProperty
     = MType Mark
+      -- TODO: https://vega.github.io/vega/docs/transforms/force.vg.json uses zindex
+      -- as a top level mark, but appears undocumented. Should we include it here?
     | MClip Clip
     | MDescription String
     | MEncode (List EncodingProperty)
@@ -3450,7 +3534,7 @@ enTitle =
 
 
 {-| Name of a mark property encoding set to re-evaluate for the mark item that is
-the source of an input event. This is required if `eUpdate` is not specified. For
+the source of an input event. This is required if `evUpdate` is not specified. For
 details see the [Vega documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
 evEncode : String -> EventHandler
@@ -3473,15 +3557,15 @@ to respond to. The second a list of handlers that respond to the event. For exam
     signal "tooltip"
         [ SiValue (vObject [])
         , SiOn
-            [ eventHandler "rect:mouseover" [ eUpdate "datum" ]
-            , eventHandler "rect:mouseout" [ eUpdate "" ]
+            [ eventHandler "rect:mouseover" [ evUpdate "datum" ]
+            , eventHandler "rect:mouseout" [ evUpdate "" ]
             ]
         ]
 
 For details see the [Vega documentation](https://vega.github.io/vega/docs/event-streams/).
 
 -}
-eventHandler : String -> List EventHandler -> List EventHandler
+eventHandler : Str -> List EventHandler -> List EventHandler
 eventHandler eStr eHandlers =
     EEvents eStr :: eHandlers
 
@@ -4018,6 +4102,17 @@ iTime =
 iWeek : List InputProperty -> Bind
 iWeek =
     IWeek
+
+
+{-| Indicates a JSON file format from which a given property is to be extracted
+when it it has some surrounding structure or meta-data. For example, specifying
+the property `values.features` is equivalent to retrieving `json.values.features`
+from the loaded JSON object.with a custom delimeter. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#format).
+-}
+jsonProperty : String -> Format
+jsonProperty =
+    JSONProperty
 
 
 {-| Represents a custom key-value pair to be stored in an object.
@@ -6839,7 +6934,7 @@ eventHandlerSpec ehs =
         eventHandler eh =
             case eh of
                 EEvents s ->
-                    ( "events", JE.string s )
+                    ( "events", strSpec s )
 
                 EUpdate s ->
                     if s == "" then
@@ -6974,6 +7069,9 @@ formatProperty fmt =
         JSON ->
             [ ( "type", JE.string "json" ) ]
 
+        JSONProperty prop ->
+            [ ( "type", JE.string "json" ), ( "property", JE.string prop ) ]
+
         CSV ->
             [ ( "type", JE.string "csv" ) ]
 
@@ -7032,7 +7130,7 @@ forceProperty fp =
         FpId f ->
             ( "id", fieldSpec f )
 
-        FPDistance n ->
+        FpDistance n ->
             ( "distance", numSpec n )
 
 

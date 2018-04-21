@@ -38,7 +38,7 @@ packTest1 =
 
         sc =
             scales
-                << scale "color"
+                << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raScheme "category20" [])
                     ]
@@ -49,7 +49,7 @@ packTest1 =
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "color"), vField (fName "id") ]
+                            [ maFill [ vScale (fName "cScale"), vField (fName "id") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
@@ -105,27 +105,27 @@ stackTest1 =
                     ]
                 << signal "add"
                     [ siValue (vObject [])
-                    , siOn [ eventHandler "mousedown![!event.shiftKey]" [ evUpdate "{key: invert('xscale', x()), value: ~~(1 + 9 * random())}" ] ]
+                    , siOn [ eventHandler (str "mousedown![!event.shiftKey]") [ evUpdate "{key: invert('xScale', x()), value: ~~(1 + 9 * random())}" ] ]
                     ]
                 << signal "rem"
                     [ siValue (vObject [])
-                    , siOn [ eventHandler "rect:mousedown![event.shiftKey]" [ evUpdate "datum" ] ]
+                    , siOn [ eventHandler (str "rect:mousedown![event.shiftKey]") [ evUpdate "datum" ] ]
                     ]
 
         sc =
             scales
-                << scale "xscale"
+                << scale "xScale"
                     [ scType ScBand
                     , scDomain (doStrs (strs [ "a", "b", "c" ]))
                     , scRange (raDefault RWidth)
                     ]
-                << scale "yscale"
+                << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     , scRange (raDefault RHeight)
                     , scRound (boolean True)
                     ]
-                << scale "color"
+                << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raScheme "category10" [])
                     ]
@@ -136,15 +136,15 @@ stackTest1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "color"), vField (fName "key") ]
+                            [ maFill [ vScale (fName "cScale"), vField (fName "key") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1 ]
-                            , maX [ vScale (fName "xscale"), vField (fName "key"), vOffset (vNum 0.5) ]
-                            , maWidth [ vScale (fName "xscale"), vBand 1 ]
+                            , maX [ vScale (fName "xScale"), vField (fName "key"), vOffset (vNum 0.5) ]
+                            , maWidth [ vScale (fName "xScale"), vBand 1 ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (fName "yscale"), vField (fName "y0"), vOffset (vNum 0.5) ]
-                            , maY2 [ vScale (fName "yscale"), vField (fName "y1"), vOffset (vNum 0.5) ]
+                            [ maY [ vScale (fName "yScale"), vField (fName "y0"), vOffset (vNum 0.5) ]
+                            , maY2 [ vScale (fName "yScale"), vField (fName "y1"), vOffset (vNum 0.5) ]
                             ]
                         ]
                     ]
@@ -153,9 +153,123 @@ stackTest1 =
         [ width 300, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+forceTest1 : Spec
+forceTest1 =
+    let
+        ds =
+            dataSource
+                [ data "node-data"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "nodes")
+                    ]
+                , data "link-data"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "links")
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "cx" [ siUpdate "width /2" ]
+                << signal "cy" [ siUpdate "height /2" ]
+                << signal "collideRadius"
+                    [ siValue (vNum 5)
+                    , siBind (iRange [ inMin 3, inMax 20, inStep 1 ])
+                    ]
+                << signal "nbodyStrength"
+                    [ siValue (vNum -10)
+                    , siBind (iRange [ inMin 50, inMax 10, inStep 1 ])
+                    ]
+                << signal "linkDistance"
+                    [ siValue (vNum 15)
+                    , siBind (iRange [ inMin 5, inMax 100, inStep 1 ])
+                    ]
+                << signal "velocityDecay"
+                    [ siValue (vNum 0.4)
+                    , siBind (iRange [ inMin 0, inMax 1, inStep 0.01 ])
+                    ]
+                << signal "static"
+                    [ siValue (vBool True)
+                    , siBind (iCheckbox [])
+                    ]
+                << signal "fix"
+                    [ siDescription "State variable for active node fix status."
+                    , siValue (vNum 0)
+                    , siOn
+                        [ eventHandler (str "symbol:mouseout[!event.buttons], window:mouseup") [ evUpdate "0" ]
+                        , eventHandler (str "symbol:mouseover") [ evUpdate "fix || 1" ]
+                        , eventHandler (str "[symbol:mousedown, window:mouseup] > window:mousemove!") [ evUpdate "2", evForce True ]
+                        ]
+                    ]
+                << signal "node"
+                    [ siDescription "Graph node most recently interacted with."
+                    , siValue vNull
+                    , siOn [ eventHandler (str "symbol:mouseover") [ evUpdate "fix === 1 ? item() : node" ] ]
+                    ]
+                << signal "restart"
+                    [ siDescription "Flag to restart Force simulation upon data changes."
+                    , siValue (vBool False)
+                    , siOn [ eventHandler (strSignal "fix") [ evUpdate "fix > 1 " ] ]
+                    ]
+
+        sc =
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20c" []) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "nodes"
+                    , mFrom [ srData (str "node-data") ]
+                    , mOn
+                        [ trigger "fix" [ trModifyValues "node" "fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}" ]
+                        , trigger "!fix" [ trModifyValues "node" "{fx: null, fy: null}" ]
+                        ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale (fName "cScale"), vField (fName "group") ]
+                            , maStroke [ vStr "white" ]
+                            ]
+                        , enUpdate
+                            [ maSize [ vSignal "2 * collideRadius * collideRadius" ]
+                            , maCursor [ vStr (cursorLabel CPointer) ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trForce
+                            [ fsIterations (num 300)
+                            , fsVelocityDecay (numSignal "velocityDecay")
+                            , fsRestart (boolSignal "restart")
+                            , fsStatic (boolSignal "static")
+                            , fsForces
+                                [ foCenter (numSignal "cx") (numSignal "cy")
+                                , foCollide (numSignal "collideRadius") []
+                                , foNBody [ fpStrength (numSignal "nbodyStrength") ]
+                                , foLink "link-data" [ fpDistance (numSignal "linkDistance") ]
+                                ]
+                            ]
+                        ]
+                    ]
+                << mark Path
+                    [ mFrom [ srData (str "link-data") ]
+                    , mInteractive (boolean False)
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "#ccc" ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        ]
+                    , mTransform
+                        -- TODO: LinkPath transform
+                        []
+                    ]
+    in
+    toVega
+        [ width 400, height 275, autosize [ ANone ], ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    packTest1
+    forceTest1
 
 
 
@@ -167,6 +281,7 @@ mySpecs =
     combineSpecs
         [ ( "packTest1", packTest1 )
         , ( "stackTest1", stackTest1 )
+        , ( "forceTest1", forceTest1 )
         ]
 
 
