@@ -178,7 +178,7 @@ forceTest1 =
                     ]
                 << signal "nbodyStrength"
                     [ siValue (vNum -10)
-                    , siBind (iRange [ inMin 50, inMax 10, inStep 1 ])
+                    , siBind (iRange [ inMin -50, inMax 10, inStep 1 ])
                     ]
                 << signal "linkDistance"
                     [ siValue (vNum 15)
@@ -259,8 +259,14 @@ forceTest1 =
                             ]
                         ]
                     , mTransform
-                        -- TODO: LinkPath transform
-                        []
+                        [ trLinkPath
+                            [ lpShape (str (linkShapeLabel LinkDiagonal))
+                            , lpSourceX "datum.source.x"
+                            , lpSourceY "datum.source.y"
+                            , lpTargetX "datum.target.x"
+                            , lpTargetY "datum.target.y"
+                            ]
+                        ]
                     ]
     in
     toVega

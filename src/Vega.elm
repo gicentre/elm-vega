@@ -38,14 +38,16 @@ module Vega
         , LegendOrientation(Bottom, BottomLeft, BottomRight, Left, None, Right, Top, TopLeft, TopRight)
         , LegendProperty
         , LegendType(LGradient, LSymbol)
+        , LinkPathProperty
+        , LinkShape(LinkArc, LinkCurve, LinkDiagonal, LinkLine, LinkOrthogonal)
         , LookupProperty
         , Mark(Arc, Area, Group, Image, Line, Path, Rect, Rule, Shape, Symbol, Text, Trail)
         , MarkInterpolation(Basis, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
-        , MarkOrientation(Horizontal, Vertical)
         , MarkProperty
         , Num
         , Operation
         , Order
+        , Orientation(Horizontal, Radial, Vertical)
         , OverlapStrategy(OGreedy, ONone, OParity)
         , PackProperty
         , Padding(PEdges, PSize)
@@ -263,6 +265,14 @@ module Vega
         , leZIndex
         , legend
         , legends
+        , linkShapeLabel
+        , lpAs
+        , lpOrient
+        , lpShape
+        , lpSourceX
+        , lpSourceY
+        , lpTargetX
+        , lpTargetY
         , luAs
         , luDefault
         , luValues
@@ -478,6 +488,7 @@ module Vega
         , trGeoShape
         , trGraticule
         , trInsert
+        , trLinkPath
         , trLookup
         , trModifyValues
         , trPack
@@ -650,6 +661,21 @@ Functions and types for declaring the input data to the visualization.
 @docs gpAs
 @docs trGraticule
 @docs GraticuleProperty
+
+
+### LinkPath Transformations
+
+@docs trLinkPath
+@docs LinkPathProperty
+@docs lpSourceX
+@docs lpSourceY
+@docs lpTargetX
+@docs lpTargetY
+@docs lpOrient
+@docs lpShape
+@docs lpAs
+@docs LinkShape
+@docs linkShapeLabel
 
 @docs FormulaUpdate
 @docs AggregateProperty
@@ -898,7 +924,7 @@ Functions and types for declaring the input data to the visualization.
 @docs enCustom
 @docs MarkInterpolation
 @docs markInterpolationLabel
-@docs MarkOrientation
+@docs Orientation
 @docs markOrientationLabel
 @docs Cursor
 @docs cursorLabel
@@ -1683,6 +1709,29 @@ type LegendType
     | LGradient
 
 
+{-| Optional properties of a linkPath transform. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/).
+-}
+type LinkPathProperty
+    = LPSourceX Field
+    | LPSourceY Field
+    | LPTargetX Field
+    | LPTargetY Field
+    | LPOrient Str
+    | LPShape Str
+    | LPAs String
+
+
+{-| Shape of a line indicating path between nodes.
+-}
+type LinkShape
+    = LinkLine
+    | LinkArc
+    | LinkCurve
+    | LinkDiagonal
+    | LinkOrthogonal
+
+
 {-| Lookup references used in a lookup transform. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
 -}
@@ -1724,12 +1773,13 @@ type MarkInterpolation
     | StepBefore
 
 
-{-| Indicates desired orientation of a mark (e.g. horizontally or vertically
-oriented bars.)
+{-| Indicates desired orientation of a mark or link path (e.g. horizontally or vertically
+oriented bars).
 -}
-type MarkOrientation
+type Orientation
     = Horizontal
     | Vertical
+    | Radial
 
 
 {-| Indicates an individual property of a mark when encoding. For further details
@@ -1843,6 +1893,14 @@ type Operation
     | Valid
     | Variance
     | Variancep
+
+
+{-| Indicates an orientation, for example, for a link path.
+-}
+type Orient
+    = OHorizontal
+    | OVertical
+    | ORadial
 
 
 {-| Type of overlap strategy to be applied when there is not space to show all
@@ -2458,7 +2516,7 @@ type Transform
     | TGeoPoint
     | TGeoShape String (List GeoPathProperty)
     | TGraticule (List GraticuleProperty)
-    | TLinkpath
+    | TLinkPath (List LinkPathProperty)
     | TPie (List PieProperty)
     | TStack (List StackProperty)
     | TForce (List ForceSimulationProperty)
@@ -4300,6 +4358,93 @@ leZIndex =
     LeZIndex
 
 
+{-| Convenience function to provide a textual version of a link shape used in a
+LinkPath transformation.
+-}
+linkShapeLabel : LinkShape -> String
+linkShapeLabel ls =
+    case ls of
+        LinkLine ->
+            "line"
+
+        LinkArc ->
+            "arc"
+
+        LinkCurve ->
+            "curve"
+
+        LinkDiagonal ->
+            "diagonal"
+
+        LinkOrthogonal ->
+            "orthogonal"
+
+
+{-| Specify the name for the output field of a link path in a linkPath transformation.
+If not specified, the default is "path". For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpAs : String -> LinkPathProperty
+lpAs =
+    LPAs
+
+
+{-| Specify the orientation of a link path in a linkPath transformation. One of
+`vertical` (default), `horizontal` or `radial`. If a radial orientation is specified,
+x and y coordinate parameters will instead be interpreted as an angle (in radians)
+and radius, respectively. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpOrient : Str -> LinkPathProperty
+lpOrient =
+    LPOrient
+
+
+{-| Specify the shape of a link path in a linkPath transformation. One of `line`
+(default), `arc`, `curve`, `diagonal`, or `orthogonal`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpShape : Str -> LinkPathProperty
+lpShape =
+    LPShape
+
+
+{-| Specify the data field for the source x-coordinate in a linkPath transformation.
+The default is `source.x`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpSourceX : Field -> LinkPathProperty
+lpSourceX =
+    LPSourceX
+
+
+{-| Specify the data field for the source y-coordinate in a linkPath transformation.
+The default is `source.y`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpSourceY : Field -> LinkPathProperty
+lpSourceY =
+    LPSourceY
+
+
+{-| Specify the data field for the target x-coordinate in a linkPath transformation.
+The default is `target.x`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpTargetX : Field -> LinkPathProperty
+lpTargetX =
+    LPTargetX
+
+
+{-| Specify the data field for the target y-coordinate in a linkPath transformation.
+The default is `target.y`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
+-}
+lpTargetY : Field -> LinkPathProperty
+lpTargetY =
+    LPTargetY
+
+
 {-| Specify the output fields in which to write data found in the secondary
 stream of a lookup. For details see the
 [Vega documentation](https://vega.github.io/vega/docs/transforms/lookup/)
@@ -4723,7 +4868,7 @@ a literal string to avoid problems of mistyping its name.
     TODO: XXX Add example
 
 -}
-markOrientationLabel : MarkOrientation -> String
+markOrientationLabel : Orientation -> String
 markOrientationLabel orient =
     case orient of
         Horizontal ->
@@ -4731,6 +4876,9 @@ markOrientationLabel orient =
 
         Vertical ->
             "vertical"
+
+        Radial ->
+            "radial"
 
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
@@ -6238,6 +6386,19 @@ trInsert =
     TrInsert
 
 
+{-| Perform a linkpath transform used to route a visual link between two nodes.
+The most common use case is to draw edges in a tree or network layout. By default
+links are simply straight lines between source and target nodes; however, with
+additional shape and orientation information, a variety of link paths can be
+expressed. This transform writes one property to each datum, providing an SVG path
+string for the link path. For details see
+the [Vega documentation](https://vega.github.io/vega/docs/transforms/linkpath/).
+-}
+trLinkPath : List LinkPathProperty -> Transform
+trLinkPath lpProps =
+    TLinkPath lpProps
+
+
 {-| Perform a lookup transform that extends a primary data stream by looking up
 values on a secondary data stream. The first parameter is the name of the secondary
 data stream upon which to perform the lookup. The second parameter is the key field
@@ -7435,6 +7596,31 @@ legendTypeLabel lt =
             "gradient"
 
 
+linkPathProperty : LinkPathProperty -> LabelledSpec
+linkPathProperty lpProp =
+    case lpProp of
+        LPSourceX field ->
+            ( "sourceX", fieldSpec field )
+
+        LPSourceY field ->
+            ( "sourceY", fieldSpec field )
+
+        LPTargetX field ->
+            ( "targetX", fieldSpec field )
+
+        LPTargetY field ->
+            ( "targetY", fieldSpec field )
+
+        LPOrient s ->
+            ( "orient", strSpec s )
+
+        LPShape s ->
+            ( "shape", strSpec s )
+
+        LPAs s ->
+            ( "as", JE.string s )
+
+
 lookupProperty : LookupProperty -> LabelledSpec
 lookupProperty luProp =
     case luProp of
@@ -8518,8 +8704,8 @@ transformSpec trans =
         TGraticule grps ->
             JE.object (( "type", JE.string "graticule" ) :: List.map graticuleProperty grps)
 
-        TLinkpath ->
-            JE.object [ ( "type", JE.string "linkpath" ) ]
+        TLinkPath lpps ->
+            JE.object (( "type", JE.string "linkpath" ) :: List.map linkPathProperty lpps)
 
         TPie pps ->
             JE.object (( "type", JE.string "pie" ) :: List.map pieProperty pps)
