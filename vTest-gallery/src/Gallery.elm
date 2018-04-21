@@ -1375,6 +1375,7 @@ scatterplot3 =
 
 scatterplot4 : Spec
 scatterplot4 =
+    -- TODO: Add config
     let
         ds =
             dataSource
@@ -1463,6 +1464,7 @@ scatterplot4 =
 
 geo1 : Spec
 geo1 =
+    -- TODO: Add config
     let
         ds =
             dataSource
@@ -1521,9 +1523,108 @@ geo1 =
         [ width 960, height 500, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
 
 
+geo2 : Spec
+geo2 =
+    -- TODO: Add config
+    let
+        ds =
+            dataSource
+                [ data "states"
+                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    , daFormat (topojsonFeature "states")
+                    ]
+                , data "obesity"
+                    [ daUrl "https://vega.github.io/vega/data/obesity.json" ]
+                    |> transform
+                        [ trLookup "states" "id" [ "id" ] [ luAs [ "geo" ] ]
+                        , trFilter (expr "datum.geo")
+                        , trFormula "geoCentroid('myProjection', datum.geo)" "centroid" AlwaysUpdate
+                        ]
+                ]
+
+        pr =
+            projections
+                << projection "myProjection"
+                    [ prType AlbersUsa
+                    , prScale (num 1100)
+                    , prTranslate (numSignals [ "width / 2", "height / 2" ])
+                    ]
+
+        sc =
+            scales
+                << scale "sizeScale"
+                    [ scDomain (doData [ dDataset "obesity", dField (str "rate") ])
+                    , scRange (raNums [ 0, 5000 ])
+                    ]
+                << scale "cScale"
+                    [ scType ScSequential
+                    , scNice niTrue
+                    , scDomain (doData [ dDataset "obesity", dField (str "rate") ])
+                    , scRange (raDefault RRamp)
+                    ]
+
+        lg =
+            legends
+                << legend
+                    [ leTitle "Percentage of Obese Adults"
+                    , leFill "cScale"
+                    , leOrient BottomRight
+                    , leType LGradient
+                    , leFormat "%"
+                    ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "circles"
+                    , mFrom [ srData (str "obesity") ]
+                    , mEncode
+                        [ enEnter
+                            [ maSize [ vScale (fName "sizeScale"), vField (fName "rate") ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "rate") ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 1.5 ]
+                            , maX [ vField (fName "centroid[0]") ]
+                            , maY [ vField (fName "centroid[1]") ]
+                            , maTooltip [ vSignal "'Obesity Rate: ' + format(datum.rate, '.1%')" ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trForce
+                            [ fsStatic (boolean True)
+                            , fsForces
+                                [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
+                                , foX "datum.centroid[0]" []
+                                , foY "datum.centroid[1]" []
+                                ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mInteractive (boolean False)
+                    , mFrom [ srData (str "circles") ]
+                    , mEncode
+                        [ enEnter
+                            [ maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maFontSize [ vNum 13 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vField (fName "datum.state") ]
+                            ]
+                        , enUpdate
+                            [ maX [ vField (fName "x") ]
+                            , maY [ vField (fName "y") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 900, height 520, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    geo1
+    geo2
 
 
 
@@ -1550,6 +1651,7 @@ mySpecs =
         , ( "scatterplot3", scatterplot3 )
         , ( "scatterplot4", scatterplot4 )
         , ( "geo1", geo1 )
+        , ( "geo2", geo2 )
         ]
 
 
