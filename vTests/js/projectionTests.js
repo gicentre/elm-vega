@@ -9035,9 +9035,7 @@ var _user$project$Vega$fieldValueSpec = function (fVal) {
 				});
 	}
 };
-var _user$project$Vega$fieldSpec = function (f) {
-	return _elm_lang$core$Json_Encode$string(f);
-};
+var _user$project$Vega$fieldSpec = _user$project$Vega$strSpec;
 var _user$project$Vega$linkPathProperty = function (lpProp) {
 	var _p30 = lpProp;
 	switch (_p30.ctor) {

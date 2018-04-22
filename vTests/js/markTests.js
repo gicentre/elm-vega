@@ -9035,9 +9035,7 @@ var _user$project$Vega$fieldValueSpec = function (fVal) {
 				});
 	}
 };
-var _user$project$Vega$fieldSpec = function (f) {
-	return _elm_lang$core$Json_Encode$string(f);
-};
+var _user$project$Vega$fieldSpec = _user$project$Vega$strSpec;
 var _user$project$Vega$linkPathProperty = function (lpProp) {
 	var _p30 = lpProp;
 	switch (_p30.ctor) {
@@ -15211,6 +15209,10 @@ var _user$project$Vega$mark = F2(
 						_1: mps
 					})));
 	});
+var _user$project$Vega$NumSignal = function (a) {
+	return {ctor: 'NumSignal', _0: a};
+};
+var _user$project$Vega$numSignal = _user$project$Vega$NumSignal;
 var _user$project$Vega$projectionProperty = function (projProp) {
 	var _p109 = projProp;
 	switch (_p109.ctor) {
@@ -15235,7 +15237,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 		case 'PrClipExtent':
 			var _p113 = _p109._0;
 			var _p112 = _p113;
-			_v96_2:
+			_v96_3:
 			do {
 				switch (_p112.ctor) {
 					case 'Nums':
@@ -15273,8 +15275,15 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 									})
 							};
 						} else {
-							break _v96_2;
+							break _v96_3;
 						}
+					case 'NumSignal':
+						return {
+							ctor: '_Tuple2',
+							_0: 'clipExtent',
+							_1: _user$project$Vega$numSpec(
+								_user$project$Vega$NumSignal(_p112._0))
+						};
 					case 'NumSignals':
 						if (((((_p112._0.ctor === '::') && (_p112._0._1.ctor === '::')) && (_p112._0._1._1.ctor === '::')) && (_p112._0._1._1._1.ctor === '::')) && (_p112._0._1._1._1._1.ctor === '[]')) {
 							return {
@@ -15312,10 +15321,10 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 									})
 							};
 						} else {
-							break _v96_2;
+							break _v96_3;
 						}
 					default:
-						break _v96_2;
+						break _v96_3;
 				}
 			} while(false);
 			return A2(
@@ -15334,7 +15343,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 		case 'PrTranslate':
 			var _p115 = _p109._0;
 			var _p114 = _p115;
-			_v97_2:
+			_v97_3:
 			do {
 				switch (_p114.ctor) {
 					case 'Nums':
@@ -15354,8 +15363,15 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 									})
 							};
 						} else {
-							break _v97_2;
+							break _v97_3;
 						}
+					case 'NumSignal':
+						return {
+							ctor: '_Tuple2',
+							_0: 'translate',
+							_1: _user$project$Vega$numSpec(
+								_user$project$Vega$NumSignal(_p114._0))
+						};
 					case 'NumSignals':
 						if (((_p114._0.ctor === '::') && (_p114._0._1.ctor === '::')) && (_p114._0._1._1.ctor === '[]')) {
 							return {
@@ -15374,10 +15390,10 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 										}))
 							};
 						} else {
-							break _v97_2;
+							break _v97_3;
 						}
 					default:
-						break _v97_2;
+						break _v97_3;
 				}
 			} while(false);
 			return A2(
@@ -15396,7 +15412,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 		case 'PrRotate':
 			var _p117 = _p109._0;
 			var _p116 = _p117;
-			_v98_4:
+			_v98_5:
 			do {
 				switch (_p116.ctor) {
 					case 'Nums':
@@ -15437,12 +15453,19 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 											})
 									};
 								} else {
-									break _v98_4;
+									break _v98_5;
 								}
 							}
 						} else {
-							break _v98_4;
+							break _v98_5;
 						}
+					case 'NumSignal':
+						return {
+							ctor: '_Tuple2',
+							_0: 'rotate',
+							_1: _user$project$Vega$numSpec(
+								_user$project$Vega$NumSignal(_p116._0))
+						};
 					case 'NumSignals':
 						if ((_p116._0.ctor === '::') && (_p116._0._1.ctor === '::')) {
 							if (_p116._0._1._1.ctor === '[]') {
@@ -15483,14 +15506,14 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 												}))
 									};
 								} else {
-									break _v98_4;
+									break _v98_5;
 								}
 							}
 						} else {
-							break _v98_4;
+							break _v98_5;
 						}
 					default:
-						break _v98_4;
+						break _v98_5;
 				}
 			} while(false);
 			return A2(
@@ -15591,10 +15614,6 @@ var _user$project$Vega$projection = F2(
 					_1: A2(_elm_lang$core$List$map, _user$project$Vega$projectionProperty, pps)
 				}));
 	});
-var _user$project$Vega$NumSignal = function (a) {
-	return {ctor: 'NumSignal', _0: a};
-};
-var _user$project$Vega$numSignal = _user$project$Vega$NumSignal;
 var _user$project$Vega$Nums = function (a) {
 	return {ctor: 'Nums', _0: a};
 };

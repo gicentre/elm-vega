@@ -1501,7 +1501,7 @@ type Facet
 [Vega documentation](https://vega.github.io/vega/docs/types/#Field)
 -}
 type alias Field =
-    String
+    Str
 
 
 {-| Represents a field value. Rather than a simple field name this can be used to
@@ -7385,8 +7385,8 @@ facetProperty fct =
 
 
 fieldSpec : Field -> Spec
-fieldSpec f =
-    JE.string f
+fieldSpec =
+    strSpec
 
 
 fieldValueSpec : FieldValue -> Spec

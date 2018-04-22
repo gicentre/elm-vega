@@ -107,9 +107,9 @@ barChart2 =
                 [ table []
                     |> transform
                         [ trStack
-                            [ stGroupBy [ "x" ]
-                            , stSort [ coField [ "c" ] ]
-                            , stField "y"
+                            [ stGroupBy [ str "x" ]
+                            , stSort [ coField [ str "c" ] ]
+                            , stField (str "y")
                             ]
                         ]
                 ]
@@ -264,15 +264,15 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ trAggregate [ agGroupBy [ "a", "b" ], agFields [ "c" ], agOps [ average ], agAs [ "c" ] ] ]
+                    [ trAggregate [ agGroupBy [ str "a", str "b" ], agFields [ str "c" ], agOps [ average ], agAs [ "c" ] ] ]
 
         trTable =
             data "trellis" [ daSource "tuples" ]
                 |> transform
-                    [ trAggregate [ agGroupBy [ "a" ] ]
+                    [ trAggregate [ agGroupBy [ str "a" ] ]
                     , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
-                    , trStack [ stField "span" ]
-                    , trExtentAsSignal "y1" "trellisExtent"
+                    , trStack [ stField (str "span") ]
+                    , trExtentAsSignal (str "y1") "trellisExtent"
                     ]
 
         ds =
@@ -371,7 +371,7 @@ barChart5 =
                 , data "popYear" [ daSource "population" ] |> transform [ trFilter (expr "datum.year == year") ]
                 , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
                 , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
-                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
+                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ str "age" ] ] ]
                 ]
 
         si =
@@ -611,7 +611,7 @@ areaChart2 =
 
         ds =
             dataSource
-                [ table [] |> transform [ trStack [ stGroupBy [ "x" ], stSort [ coField [ "c" ] ], stField "y" ] ] ]
+                [ table [] |> transform [ trStack [ stGroupBy [ str "x" ], stSort [ coField [ str "c" ] ], stField (str "y") ] ] ]
 
         sc =
             scales
@@ -766,9 +766,9 @@ areaChart4 =
                 |> transform
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack
-                        [ stGroupBy [ "year" ]
-                        , stSort [ coField [ "job", "sex" ], coOrder [ orDescending, orDescending ] ]
-                        , stField "perc"
+                        [ stGroupBy [ str "year" ]
+                        , stSort [ coField [ str "job", str "sex" ], coOrder [ orDescending, orDescending ] ]
+                        , stField (str "perc")
                         ]
                     ]
 
@@ -776,8 +776,8 @@ areaChart4 =
             data "series" [ daSource "jobs" ]
                 |> transform
                     [ trAggregate
-                        [ agGroupBy [ "job", "sex" ]
-                        , agFields [ "perc", "perc" ]
+                        [ agGroupBy [ str "job", str "sex" ]
+                        , agFields [ str "perc", str "perc" ]
                         , agOps [ sum, argMax ]
                         , agAs [ "sum", "argmax" ]
                         ]
@@ -928,7 +928,7 @@ circularChart1 =
                 [ table []
                     |> transform
                         [ trPie
-                            [ piField "field"
+                            [ piField (str "field")
                             , piStartAngle (numSignal "PI * startAngle / 180")
                             , piEndAngle (numSignal "PI * endAngle / 180")
                             , piSort (boolSignal "sort")
@@ -979,7 +979,7 @@ circularChart2 =
         ds =
             dataSource
                 [ data "table" [ daValue (vNums [ 12, 23, 47, 6, 52, 19 ]) ]
-                    |> transform [ trPie [ piField "data" ] ]
+                    |> transform [ trPie [ piField (str "data") ] ]
                 ]
 
         sc =
@@ -1383,8 +1383,8 @@ scatterplot4 =
                 , data "summary" [ daSource "barley" ]
                     |> transform
                         [ trAggregate
-                            [ agGroupBy [ "variety" ]
-                            , agFields [ "yield", "yield", "yield", "yield", "yield", "yield", "yield" ]
+                            [ agGroupBy [ str "variety" ]
+                            , agFields (List.repeat 7 (str "yield"))
                             , agOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
@@ -1474,7 +1474,7 @@ geo1 =
                     , daFormat (topojsonFeature "counties")
                     ]
                     |> transform
-                        [ trLookup "unemp" "id" [ "id" ] [ luValues [ "rate" ] ]
+                        [ trLookup "unemp" (str "id") [ str "id" ] [ luValues [ str "rate" ] ]
                         , trFilter (expr "datum.rate != null")
                         ]
                 ]
@@ -1536,7 +1536,7 @@ geo2 =
                 , data "obesity"
                     [ daUrl "https://vega.github.io/vega/data/obesity.json" ]
                     |> transform
-                        [ trLookup "states" "id" [ "id" ] [ luAs [ "geo" ] ]
+                        [ trLookup "states" (str "id") [ str "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
                         , trFormula "geoCentroid('myProjection', datum.geo)" "centroid" AlwaysUpdate
                         ]
@@ -1594,8 +1594,8 @@ geo2 =
                             [ fsStatic (boolean True)
                             , fsForces
                                 [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
-                                , foX "datum.centroid[0]" []
-                                , foY "datum.centroid[1]" []
+                                , foX (str "datum.centroid[0]") []
+                                , foY (str "datum.centroid[1]") []
                                 ]
                             ]
                         ]

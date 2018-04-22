@@ -20,9 +20,9 @@ packTest1 =
             dataSource
                 [ table []
                     |> transform
-                        [ trStratify "id" "parent"
+                        [ trStratify (str "id") (str "parent")
                         , trPack
-                            [ paField "value"
+                            [ paField (str "value")
                             , paPadding (numSignal "padding between circles")
                             , paSize sigWidth sigHeight
                             ]
@@ -77,10 +77,10 @@ stackTest1 =
                 [ table []
                     |> transform
                         [ trStack
-                            [ stField "value"
-                            , stGroupBy [ "key" ]
+                            [ stField (str "value")
+                            , stGroupBy [ str "key" ]
                             , stOffset (ofSignal "offset")
-                            , stSort [ coField [ "sortField" ], coOrder [ orSignal "sortOrder" ] ]
+                            , stSort [ coField [ strSignal "sortField" ], coOrder [ orSignal "sortOrder" ] ]
                             ]
                         ]
                     |> on
@@ -261,10 +261,10 @@ forceTest1 =
                     , mTransform
                         [ trLinkPath
                             [ lpShape (str (linkShapeLabel LinkDiagonal))
-                            , lpSourceX "datum.source.x"
-                            , lpSourceY "datum.source.y"
-                            , lpTargetX "datum.target.x"
-                            , lpTargetY "datum.target.y"
+                            , lpSourceX (str "datum.source.x")
+                            , lpSourceY (str "datum.source.y")
+                            , lpTargetX (str "datum.target.x")
+                            , lpTargetY (str "datum.target.y")
                             ]
                         ]
                     ]
@@ -275,7 +275,7 @@ forceTest1 =
 
 sourceExample : Spec
 sourceExample =
-    forceTest1
+    stackTest1
 
 
 
