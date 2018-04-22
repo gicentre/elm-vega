@@ -6,6 +6,7 @@ module Vega
         , AxisProperty
         , Bind
         , BoolSig
+        , BoundsCalculation(Flush, Full)
         , CInterpolate
         , Clip
         , ColorSchemeProperty
@@ -32,8 +33,10 @@ module Vega
         , FormulaUpdate(AlwaysUpdate, InitOnly)
         , GeoPathProperty
         , GraticuleProperty
+        , GridAlign(AlignAll, AlignColumn, AlignEach, AlignNone, AlignRow)
         , HAlign(AlignCenter, AlignLeft, AlignRight)
         , InputProperty
+        , LayoutProperty
         , LegendEncoding
         , LegendOrientation(Bottom, BottomLeft, BottomRight, Left, None, Right, Top, TopLeft, TopRight)
         , LegendProperty
@@ -245,6 +248,7 @@ module Vega
         , jsonProperty
         , keyValue
         , lab
+        , layout
         , leEncode
         , leEntryPadding
         , leFill
@@ -266,6 +270,19 @@ module Vega
         , legend
         , legends
         , linkShapeLabel
+        , loAlign
+        , loBounds
+        , loColumns
+        , loFooterBand
+        , loFooterBandRC
+        , loHeaderBand
+        , loHeaderBandRC
+        , loOffset
+        , loOffsetRC
+        , loPadding
+        , loPaddingRC
+        , loTitleBand
+        , loTitleBandRC
         , lpAs
         , lpOrient
         , lpShape
@@ -943,6 +960,27 @@ Functions and types for declaring the input data to the visualization.
 @docs dirLabel
 
 
+## Layout
+
+@docs layout
+@docs LayoutProperty
+@docs GridAlign
+@docs BoundsCalculation
+@docs loAlign
+@docs loBounds
+@docs loColumns
+@docs loPadding
+@docs loPaddingRC
+@docs loOffset
+@docs loOffsetRC
+@docs loHeaderBand
+@docs loHeaderBandRC
+@docs loFooterBand
+@docs loFooterBandRC
+@docs loTitleBand
+@docs loTitleBandRC
+
+
 ## Signals
 
 @docs signals
@@ -1246,6 +1284,17 @@ type BoolSig
     = Boolean Bool
     | Bools (List Bool)
     | BoolSignal String
+
+
+{-| The bounds calculation method to determine the extent of a sub-plot in a grid
+layout. `Full` indicates the entire calculated bounds (including axes, title, and
+legend) will be used. `Flush` indicates only the specified width and height values
+for the group mark will be used. The flush setting can be useful when attempting
+to place sub-plots without axes or legends into a uniform grid structure.
+-}
+type BoundsCalculation
+    = Full
+    | Flush
 
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
@@ -1626,6 +1675,23 @@ type GraticuleProperty
     | GrPrecision Num
 
 
+{-| Specify a type of layout alignment to apply to grid rows and columns. `AlignNone`
+indicates a flow layout will be used, in which adjacent plots are simply placed
+one after the other. `AlignEach` indicates elements will be aligned into a clean
+grid structure, but each row or column may be of variable size. `AlignAll` indicates
+elements will be aligned and each row or column will be sized identically based
+on the maximum observed size. To used different row and column layouts, use `AlignRow`
+and `AlignColumn`. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/).
+-}
+type GridAlign
+    = AlignAll
+    | AlignEach
+    | AlignNone
+    | AlignRow GridAlign
+    | AlignColumn GridAlign
+
+
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
 -}
 type HAlign
@@ -1647,6 +1713,155 @@ type InputProperty
     | InStep Float
     | InPlaceholder String
     | InAutocomplete Bool
+
+
+{-| Specify a layout of a collection of group marks within a grid. For details,
+see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/).
+-}
+type LayoutProperty
+    = LAlign GridAlign
+    | LBounds BoundsCalculation
+    | LColumns Num
+    | LPadding Num
+    | LPaddingRC Num Num
+    | LOffset Num
+    | LOffsetRC Num Num
+    | LHeaderBand Num
+    | LHeaderBandRC Num Num
+    | LFooterBand Num
+    | LFooterBandRC Num Num
+    | LTitleBand Num
+    | LTitleBandRC Num Num
+
+
+{-| Specify the alignment to apply to grid rows and columns in a grid layout.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loAlign : GridAlign -> LayoutProperty
+loAlign =
+    LAlign
+
+
+{-| Specify the bounds calculation method to use for determining the extent of a
+sub-plot in a grid layout. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loBounds : BoundsCalculation -> LayoutProperty
+loBounds =
+    LBounds
+
+
+{-| Specify the number of columns to include in a grid layout. If unspecified, a
+single row with unlimited columns will be assumed. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loColumns : Num -> LayoutProperty
+loColumns =
+    LColumns
+
+
+{-| Specify the band positioning in the interval [0,1] indicating where in a cell
+a footer should be placed in a grid layout. For a column footer, 0 maps to the left
+edge of the footer cell and 1 to right edge. For a row footer, the range maps from
+top to bottom. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loFooterBand : Num -> LayoutProperty
+loFooterBand =
+    LFooterBand
+
+
+{-| Specify the band positioning in the interval [0,1] indicating where in a cell
+a footer should be placed in a grid layout. For a column footer, 0 maps to the left
+edge of the footer cell and 1 to right edge. For a row footer, the range maps from
+top to bottom. This version allows row and column settings to be specified separately.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loFooterBandRC : Num -> Num -> LayoutProperty
+loFooterBandRC r c =
+    LFooterBandRC r c
+
+
+{-| Specify the band positioning in the interval [0,1] indicating where in a cell
+a header should be placed in a grid layout. For a column header, 0 maps to the left
+edge of the header cell and 1 to right edge. For a row footer, the range maps from
+top to bottom. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loHeaderBand : Num -> LayoutProperty
+loHeaderBand =
+    LHeaderBand
+
+
+{-| Specify the band positioning in the interval [0,1] indicating where in a cell
+a header should be placed in a grid layout. For a column header, 0 maps to the left
+edge of the footer cell and 1 to right edge. For a row header, the range maps from
+top to bottom. This version allows row and column settings to be specified separately.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loHeaderBandRC : Num -> Num -> LayoutProperty
+loHeaderBandRC r c =
+    LHeaderBandRC r c
+
+
+{-| Specify the orthogonal offset in pixels by which to displace grid header, footer
+and title cells from their position along the edge of a grid layout.
+For details see the [Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loOffset : Num -> LayoutProperty
+loOffset =
+    LOffset
+
+
+{-| Specify the orthogonal offset in pixels by which to displace grid header, footer
+and title cells from their position along the edge of a grid layout. This version
+allows row and column settings to be specified separately. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loOffsetRC : Num -> Num -> LayoutProperty
+loOffsetRC r c =
+    LOffsetRC r c
+
+
+{-| Specify the padding in pixels to add between elements within rows and columns
+of a grid layout. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loPadding : Num -> LayoutProperty
+loPadding =
+    LPadding
+
+
+{-| Specify the padding in pixels to add between elements within rows and columns
+of a grid layout. This version allows row and column settings to be specified
+separately. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loPaddingRC : Num -> Num -> LayoutProperty
+loPaddingRC r c =
+    LPaddingRC r c
+
+
+{-| Specify where in a cell of a grid layout, a title should be placed. For a
+column title, 0 maps to the left edge of the title cell and 1 to right edge. The
+default value is 0.5, indicating a centered position. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loTitleBand : Num -> LayoutProperty
+loTitleBand =
+    LTitleBand
+
+
+{-| Specify where in a cell of a grid layout, a title should be placed. For a
+column title, 0 maps to the left edge of the title cell and 1 to right edge. The
+default value is 0.5, indicating a centered position. This version allows row
+and column settings to be specified separately. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/)
+-}
+loTitleBandRC : Num -> Num -> LayoutProperty
+loTitleBandRC r c =
+    LTitleBandRC r c
 
 
 {-| Indicates the position of a legend relative to the visualization it describes.
@@ -2592,6 +2807,7 @@ type Num
     | NumSignal String
     | NumSignals (List String)
     | NumExpr Expr
+    | NumNull
 
 
 {-| Represents a value such as a number or reference to a value such as a field label
@@ -2641,6 +2857,7 @@ type VProperty
     | VAxes
     | VLegends
     | VMarks
+    | VLayout
 
 
 {-| The output field names generated when performing an aggregation transformation.
@@ -4185,6 +4402,16 @@ keyValue =
 lab : CInterpolate
 lab =
     Lab
+
+
+{-| Create a layout used in the visualization.
+
+    TODO: XXX
+
+-}
+layout : List LayoutProperty -> ( VProperty, Spec )
+layout lps =
+    ( VLayout, JE.object (List.map layoutProperty lps) )
 
 
 {-| Mark encodings for custom legend styling. For more details see the
@@ -6963,6 +7190,16 @@ boolSpec b =
             JE.object [ signalReferenceProperty sig ]
 
 
+boundsCalculationLabel : BoundsCalculation -> String
+boundsCalculationLabel bc =
+    case bc of
+        Full ->
+            "full"
+
+        Flush ->
+            "flush"
+
+
 clipSpec : Clip -> Spec
 clipSpec clip =
     case clip of
@@ -7416,6 +7653,25 @@ graticuleProperty grProp =
             ( "precision", numSpec n )
 
 
+gridAlignSpec : GridAlign -> Spec
+gridAlignSpec ga =
+    case ga of
+        AlignAll ->
+            JE.string "all"
+
+        AlignEach ->
+            JE.string "each"
+
+        AlignNone ->
+            JE.string "none"
+
+        AlignRow align ->
+            JE.object [ ( "row", gridAlignSpec align ) ]
+
+        AlignColumn align ->
+            JE.object [ ( "column", gridAlignSpec align ) ]
+
+
 interpolateSpec : CInterpolate -> Spec
 interpolateSpec iType =
     case iType of
@@ -7476,6 +7732,49 @@ inputProperty prop =
                 ( "autocomplete", JE.string "on" )
             else
                 ( "autocomplete", JE.string "off" )
+
+
+layoutProperty : LayoutProperty -> LabelledSpec
+layoutProperty prop =
+    case prop of
+        LAlign ga ->
+            ( "align", gridAlignSpec ga )
+
+        LBounds bc ->
+            ( "bounds", JE.string (boundsCalculationLabel bc) )
+
+        LColumns n ->
+            ( "columns", numSpec n )
+
+        LPadding n ->
+            ( "padding", numSpec n )
+
+        LPaddingRC r c ->
+            ( "padding", JE.object [ ( "row", numSpec r ), ( "col", numSpec c ) ] )
+
+        LOffset n ->
+            ( "offset", numSpec n )
+
+        LOffsetRC r c ->
+            ( "offset", JE.object [ ( "row", numSpec r ), ( "col", numSpec c ) ] )
+
+        LHeaderBand n ->
+            ( "headerBand", numSpec n )
+
+        LHeaderBandRC r c ->
+            ( "headerBand", JE.object [ ( "row", numSpec r ), ( "col", numSpec c ) ] )
+
+        LFooterBand n ->
+            ( "footerBand", numSpec n )
+
+        LFooterBandRC r c ->
+            ( "footerBand", JE.object [ ( "row", numSpec r ), ( "col", numSpec c ) ] )
+
+        LTitleBand n ->
+            ( "titleBand", numSpec n )
+
+        LTitleBandRC r c ->
+            ( "titleBand", JE.object [ ( "row", numSpec r ), ( "col", numSpec c ) ] )
 
 
 legendEncodingProperty : LegendEncoding -> LabelledSpec
@@ -7909,6 +8208,9 @@ numSpec num =
         NumExpr expr ->
             JE.object [ exprProperty expr ]
 
+        NumNull ->
+            JE.null
+
 
 opSpec : Operation -> Spec
 opSpec op =
@@ -8130,6 +8432,9 @@ projectionProperty projProp =
                 Nums [ x0, y0, x1, y1 ] ->
                     ( "clipExtent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x1, JE.float y1 ] ] )
 
+                NumSignal sig ->
+                    ( "clipExtent", numSpec (NumSignal sig) )
+
                 NumSignals [ sigX0, sigY0, sigX1, sigY1 ] ->
                     ( "clipExtent", JE.list [ numSpec (NumSignals [ sigX0, sigY0 ]), numSpec (NumSignals [ sigX1, sigY1 ]) ] )
 
@@ -8143,6 +8448,9 @@ projectionProperty projProp =
             case n of
                 Nums [ tx, ty ] ->
                     ( "translate", JE.list [ JE.float tx, JE.float ty ] )
+
+                NumSignal sig ->
+                    ( "translate", numSpec (NumSignal sig) )
 
                 NumSignals [ sigTx, sigTy ] ->
                     ( "translate", numSpec (NumSignals [ sigTx, sigTy ]) )
@@ -8160,6 +8468,9 @@ projectionProperty projProp =
 
                 Nums [ lambda, phi, gamma ] ->
                     ( "rotate", JE.list [ JE.float lambda, JE.float phi, JE.float gamma ] )
+
+                NumSignal sig ->
+                    ( "rotate", numSpec (NumSignal sig) )
 
                 NumSignals [ sigLambda, sigPhi ] ->
                     ( "rotate", numSpec (NumSignals [ sigLambda, sigPhi ]) )
@@ -8994,3 +9305,8 @@ vPropertyLabel spec =
 
         VMarks ->
             "marks"
+
+        --TODO: Why isn't layout listed as a top-level specification property at
+        -- https://vega.github.io/vega/docs/specification/
+        VLayout ->
+            "layout"
