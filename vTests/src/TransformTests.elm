@@ -123,7 +123,7 @@ stackTest1 =
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     , scRange (raDefault RHeight)
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
@@ -189,7 +189,7 @@ forceTest1 =
                     , siBind (iRange [ inMin 0, inMax 1, inStep 0.01 ])
                     ]
                 << signal "static"
-                    [ siValue (vBool True)
+                    [ siValue (vBoo True)
                     , siBind (iCheckbox [])
                     ]
                 << signal "fix"
@@ -208,7 +208,7 @@ forceTest1 =
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
-                    , siValue (vBool False)
+                    , siValue (vBoo False)
                     , siOn [ eventHandler (strSignal "fix") [ evUpdate "fix > 1 " ] ]
                     ]
 
@@ -238,8 +238,8 @@ forceTest1 =
                         [ trForce
                             [ fsIterations (num 300)
                             , fsVelocityDecay (numSignal "velocityDecay")
-                            , fsRestart (boolSignal "restart")
-                            , fsStatic (boolSignal "static")
+                            , fsRestart (booSignal "restart")
+                            , fsStatic (booSignal "static")
                             , fsForces
                                 [ foCenter (numSignal "cx") (numSignal "cy")
                                 , foCollide (numSignal "collideRadius") []
@@ -251,7 +251,7 @@ forceTest1 =
                     ]
                 << mark Path
                     [ mFrom [ srData (str "link-data") ]
-                    , mInteractive (boolean False)
+                    , mInteractive (boo False)
                     , mEncode
                         [ enUpdate
                             [ maStroke [ vStr "#ccc" ]

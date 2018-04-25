@@ -93,7 +93,7 @@ projTest =
                         [ enEnter
                             [ maWidth [ vSignal "mapWidth" ]
                             , maHeight [ vSignal "mapHeight" ]
-                            , maGroupClip [ vBool True ]
+                            , maGroupClip [ vBoo True ]
                             ]
                         ]
                     , mGroup [ nestedSi [], nestedPr [], nestedMk [] ]
@@ -109,7 +109,7 @@ projTest =
                 << mark Shape
                     [ mFrom [ srData (str "graticule") ]
                     , mClip (clSphere (str "myProjection"))
-                    , mInteractive (boolean False)
+                    , mInteractive (boo False)
                     , mEncode
                         [ enEnter
                             [ maStrokeWidth [ vNum 1 ]

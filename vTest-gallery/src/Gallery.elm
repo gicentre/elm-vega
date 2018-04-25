@@ -45,7 +45,7 @@ barChart1 =
                     , scDomain (doData [ dDataset "table", dField (str "category") ])
                     , scRange (raDefault RWidth)
                     , scPadding (num 0.05)
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     ]
                 << scale "yScale"
                     [ scDomain (doData [ dDataset "table", dField (str "amount") ])
@@ -125,7 +125,7 @@ barChart2 =
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
@@ -184,8 +184,8 @@ barChart3 =
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "value") ])
                     , scRange (raDefault RWidth)
-                    , scRound (boolean True)
-                    , scZero (boolean True)
+                    , scRound (boo True)
+                    , scZero (boo True)
                     , scNice niTrue
                     ]
                 << scale "cScale"
@@ -290,8 +290,8 @@ barChart4 =
                 << scale "xScale"
                     [ scDomain (doData [ dDataset "tuples", dField (str "c") ])
                     , scNice niTrue
-                    , scZero (boolean True)
-                    , scRound (boolean True)
+                    , scZero (boo True)
+                    , scRound (boo True)
                     , scRange (raDefault RWidth)
                     ]
                 << scale "cScale"
@@ -309,7 +309,7 @@ barChart4 =
                     [ scType ScBand
                     , scPaddingInner (numSignal "innerPadding")
                     , scPaddingOuter (numSignal "outerPadding")
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "faceted_tuples", dField (str "b") ])
                     , scRange (raStep (vSignal "rangeStep"))
                     ]
@@ -386,7 +386,7 @@ barChart5 =
                 << scale "yScale"
                     [ scType ScBand
                     , scRange (raValues [ vSignal "height", vNum 0 ])
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "ageGroups", dField (str "age") ])
                     ]
                 << scale "cScale"
@@ -398,7 +398,7 @@ barChart5 =
         topMk =
             marks
                 << mark Text
-                    [ mInteractive (boolean False)
+                    [ mInteractive (boo False)
                     , mFrom [ srData (str "ageGroups") ]
                     , mEncode
                         [ enEnter
@@ -500,7 +500,7 @@ lineChart1 =
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
                 << scale "cScale"
@@ -564,14 +564,14 @@ areaChart1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     , scDomain (doData [ dDataset "table", dField (str "u") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "v") ])
                     ]
 
@@ -624,7 +624,7 @@ areaChart2 =
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "y1") ])
                     ]
                 << scale "cScale"
@@ -700,15 +700,15 @@ areaChart3 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
-                    , scRound (boolean True)
+                    , scZero (boo False)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raValues [ vSignal "vheight", vNum 0 ])
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "table", dField (str "y") ])
                     ]
 
@@ -722,7 +722,7 @@ areaChart3 =
                         [ enUpdate
                             [ maWidth [ vField (fGroup (fName "width")) ]
                             , maHeight [ vField (fGroup (fName "height")) ]
-                            , maGroupClip [ vBool True ]
+                            , maGroupClip [ vBoo True ]
                             ]
                         ]
                     , mGroup [ mk1 [] ]
@@ -806,15 +806,15 @@ areaChart4 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
-                    , scRound (boolean True)
+                    , scZero (boo False)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "jobs", dField (str "year") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scZero (boolean True)
-                    , scRound (boolean True)
+                    , scZero (boo True)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "jobs", dField (str "y1") ])
                     ]
                 << scale "cScale"
@@ -824,15 +824,15 @@ areaChart4 =
                     ]
                 << scale "alphaScale"
                     [ scType ScLinear
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "series", dField (str "sum") ])
                     , scRange (raNums [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
                     [ scType ScSqrt
                     , scRange (raNums [ 0, 20 ])
-                    , scZero (boolean True)
-                    , scRound (boolean True)
+                    , scZero (boo True)
+                    , scRound (boo True)
                     , scDomain (doData [ dDataset "series", dField (str "argmax.perc") ])
                     ]
                 << scale "opacityScale"
@@ -843,13 +843,13 @@ areaChart4 =
                 << scale "alignScale"
                     [ scType ScQuantize
                     , scRange (raStrs [ "left", "center", "right" ])
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
                 << scale "offsetScale"
                     [ scType ScQuantize
                     , scRange (raNums [ 6, 0, -6 ])
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
 
@@ -895,7 +895,7 @@ areaChart4 =
                     ]
                 << mark Text
                     [ mFrom [ srData (str "series") ]
-                    , mInteractive (boolean False)
+                    , mInteractive (boo False)
                     , mEncode
                         [ enUpdate
                             [ maX [ vField (fName "argmax.year"), vScale (fName "xScale") ]
@@ -931,7 +931,7 @@ circularChart1 =
                             [ piField (str "field")
                             , piStartAngle (numSignal "PI * startAngle / 180")
                             , piEndAngle (numSignal "PI * endAngle / 180")
-                            , piSort (boolSignal "sort")
+                            , piSort (booSignal "sort")
                             ]
                         ]
                 ]
@@ -943,7 +943,7 @@ circularChart1 =
                 << signal "padAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
                 << signal "innerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
                 << signal "cornerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "sort" [ siValue (vBool False), siBind (iCheckbox []) ]
+                << signal "sort" [ siValue (vBoo False), siBind (iCheckbox []) ]
 
         sc =
             scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
@@ -1041,25 +1041,25 @@ scatterplot1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "cars", dField (str "Horsepower") ])
                     , scRange (raDefault RWidth)
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scNice niTrue
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "cars", dField (str "Miles_per_Gallon") ])
                     , scRange (raDefault RHeight)
                     ]
                 << scale "sizeScale"
                     [ scType ScLinear
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scNice niFalse
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scDomain (doData [ dDataset "cars", dField (str "Acceleration") ])
                     , scRange (raNums [ 4, 361 ])
                     ]
@@ -1206,7 +1206,7 @@ scatterplot2 =
                         ]
                     ]
                 << mark Text
-                    [ mInteractive (boolean False)
+                    [ mInteractive (boo False)
                     , mFrom [ srData (str "nullXY") ]
                     , mEncode
                         [ enUpdate
@@ -1238,16 +1238,16 @@ scatterplot3 =
                     , scDomain (doData [ dDataset "drive", dField (str "miles") ])
                     , scRange (raDefault RWidth)
                     , scNice niTrue
-                    , scZero (boolean False)
-                    , scRound (boolean True)
+                    , scZero (boo False)
+                    , scRound (boo True)
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "drive", dField (str "gas") ])
                     , scRange (raDefault RHeight)
                     , scNice niTrue
-                    , scZero (boolean False)
-                    , scRound (boolean True)
+                    , scZero (boo False)
+                    , scRound (boo True)
                     ]
                 << scale "alignScale"
                     [ scType ScOrdinal
@@ -1419,9 +1419,9 @@ scatterplot4 =
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
                     , scDomain (doData [ dDataset "summary", dFields (strs [ "stdev0", "stdev1" ]) ])
-                    , scRound (boolean True)
+                    , scRound (boo True)
                     , scNice niTrue
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     ]
                 << scale "yScale"
                     [ scType ScBand
@@ -1591,7 +1591,7 @@ geo2 =
                         ]
                     , mTransform
                         [ trForce
-                            [ fsStatic (boolean True)
+                            [ fsStatic (boo True)
                             , fsForces
                                 [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
                                 , foX (str "datum.centroid[0]") []
@@ -1601,7 +1601,7 @@ geo2 =
                         ]
                     ]
                 << mark Text
-                    [ mInteractive (boolean False)
+                    [ mInteractive (boo False)
                     , mFrom [ srData (str "circles") ]
                     , mEncode
                         [ enEnter

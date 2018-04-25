@@ -39,7 +39,7 @@ arcTest =
         mk =
             marks
                 << mark Symbol
-                    [ mInteractive (boolean False)
+                    [ mInteractive (boo False)
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
@@ -87,19 +87,19 @@ areaTest =
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "u") ])
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "v") ])
                     , scRange (raDefault RHeight)
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scNice niTrue
                     ]
 
         si =
             signals
-                << signal "defined" [ siValue (vBool True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
                 << signal "interpolate"
                     [ siValue (vStr (markInterpolationLabel Linear))
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
@@ -150,7 +150,7 @@ groupTest =
 
         si =
             signals
-                << signal "groupClip" [ siValue (vBool False), siBind (iCheckbox []) ]
+                << signal "groupClip" [ siValue (vBoo False), siBind (iCheckbox []) ]
                 << signal "x" [ siValue (vNum 25), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "y" [ siValue (vNum 25), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "w" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
@@ -185,7 +185,7 @@ groupTest =
             marks
                 << mark Rect
                     [ mFrom [ srData (str "table") ]
-                    , mInteractive (boolean False)
+                    , mInteractive (boo False)
                     , mEncode
                         [ enEnter
                             [ maX [ vField (fName "x") ]
@@ -211,7 +211,7 @@ imageTest =
                 << signal "y" [ siValue (vNum 75), siBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
                 << signal "w" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "h" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "aspect" [ siValue (vBool True), siBind (iCheckbox []) ]
+                << signal "aspect" [ siValue (vBoo True), siBind (iCheckbox []) ]
                 << signal "align" [ siValue (vStr "left"), siBind (iSelect [ inOptions (vStrs [ "left", "center", "right" ]) ]) ]
                 << signal "baseline" [ siValue (vStr "top"), siBind (iSelect [ inOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
 
@@ -255,19 +255,19 @@ lineTest =
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "u") ])
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "v") ])
                     , scRange (raDefault RHeight)
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scNice niTrue
                     ]
 
         si =
             signals
-                << signal "defined" [ siValue (vBool True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
                 << signal "interpolate"
                     [ siValue (vStr (markInterpolationLabel Linear))
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
@@ -573,7 +573,7 @@ textTest =
         mk =
             marks
                 << mark Symbol
-                    [ mInteractive (boolean False)
+                    [ mInteractive (boo False)
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
@@ -621,13 +621,13 @@ trailTest =
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "u") ])
                     , scRange (raDefault RWidth)
-                    , scZero (boolean False)
+                    , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ dDataset "table", dField (str "v") ])
                     , scRange (raDefault RHeight)
-                    , scZero (boolean True)
+                    , scZero (boo True)
                     , scNice niTrue
                     ]
                 << scale "zscale"
@@ -638,7 +638,7 @@ trailTest =
 
         si =
             signals
-                << signal "defined" [ siValue (vBool True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
                 << signal "size" [ siValue (vNum 5), siBind (iRange [ inMin 1, inMax 10 ]) ]
 
         mk =
