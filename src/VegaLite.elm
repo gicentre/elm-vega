@@ -24,6 +24,7 @@ module VegaLite
         , DetailChannel(..)
         , FacetChannel(..)
         , FacetMapping(..)
+        , FieldTitleProperty(..)
         , Filter(..)
         , FilterRange(..)
         , FontWeight(..)
@@ -495,7 +496,7 @@ to the data and transform options described above.
 @docs APosition
 @docs ViewConfig
 @docs RangeConfig
-
+@docs FieldTitleProperty
 
 # General Data types
 
