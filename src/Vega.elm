@@ -567,6 +567,9 @@ visualization.
 # Creating A Vega Specification
 
 @docs toVega
+@docs Spec
+@docs combineSpecs
+
 @docs VProperty
 
 
@@ -647,6 +650,31 @@ types.
 @docs vScale
 
 
+## Indirect References
+
+@docs Expr
+@docs expr
+@docs eField
+@docs Field
+@docs FieldValue
+@docs fName
+@docs fSignal
+@docs fDatum
+@docs fGroup
+@docs fParent
+
+
+## Thematic Data Types
+
+@docs TimeUnit
+@docs utc
+@docs ColorValue
+@docs cHCL
+@docs cHSL
+@docs cLAB
+@docs cRGB
+
+
 # Creating a Data Specification
 
 Functions for declaring the input data to a visualization.
@@ -682,7 +710,22 @@ Functions for declaring the input data to a visualization.
 @docs daField
 @docs daFields
 @docs daReferences
+
+
+## Data Sorting
+
 @docs daSort
+@docs SortProperty
+@docs soOp
+@docs soByField
+
+@docs Order
+@docs orAscending
+@docs orDescending
+@docs orSignal
+@docs Comparator
+@docs coField
+@docs coOrder
 
 
 ## Data Formatting
@@ -730,6 +773,29 @@ more of the functions described below.
 @docs agAs
 @docs agCross
 @docs agDrop
+
+@docs Operation
+@docs argMax
+@docs argMin
+@docs average
+@docs ci0
+@docs ci1
+@docs count
+@docs distinct
+@docs maximum
+@docs mean
+@docs median
+@docs minimum
+@docs missing
+@docs q1
+@docs q3
+@docs stderr
+@docs stdev
+@docs stdevp
+@docs sum
+@docs valid
+@docs variance
+@docs variancep
 
 TODO: add joinAggregate functions.
 TODO: add pivot functions.
@@ -939,7 +1005,7 @@ TODO: add function (wordcloud)
 ## Cross-Filter Transforms
 
 
-# Signals and Interaction Events
+# Signals, Triggers and Interaction Events
 
 
 ## Signals
@@ -990,6 +1056,19 @@ TODO: add function (wordcloud)
 @docs evUpdate
 @docs evEncode
 @docs evForce
+
+
+## Triggers
+
+@docs Trigger
+@docs on
+@docs trigger
+@docs TriggerProperty
+@docs trInsert
+@docs trRemove
+@docs trRemoveAll
+@docs trToggle
+@docs trModifyValues
 
 
 # Specifying Scales
@@ -1208,11 +1287,13 @@ TODO: add function (wordcloud)
 @docs mTransform
 @docs mStyle
 @docs mGroup
+
 @docs Clip
 @docs clEnabled
 @docs clPath
 @docs clSphere
 @docs srData
+@docs Source
 @docs Facet
 @docs srFacet
 @docs faField
@@ -1323,79 +1404,6 @@ to the data and transform options described above.
 @docs Autosize
 @docs Padding
 @docs background
-
-**############################################################################**
-
-@docs Spec
-@docs combineSpecs
-
-@docs on
-@docs trigger
-
-@docs SortProperty
-@docs soOp
-@docs soByField
-@docs Source
-@docs Trigger
-@docs TriggerProperty
-@docs trInsert
-@docs trRemove
-@docs trRemoveAll
-@docs trToggle
-@docs trModifyValues
-
-@docs Order
-@docs orAscending
-@docs orDescending
-@docs orSignal
-@docs Comparator
-@docs coField
-@docs coOrder
-
-@docs argMax
-@docs argMin
-@docs average
-@docs ci0
-@docs ci1
-@docs count
-@docs distinct
-@docs maximum
-@docs mean
-@docs median
-@docs minimum
-@docs missing
-@docs q1
-@docs q3
-@docs stderr
-@docs stdev
-@docs stdevp
-@docs sum
-@docs valid
-@docs variance
-@docs variancep
-
-@docs Operation
-
-
-# General Data types
-
-@docs TimeUnit
-@docs utc
-@docs ColorValue
-@docs cHCL
-@docs cHSL
-@docs cLAB
-@docs cRGB
-@docs Expr
-@docs expr
-@docs eField
-@docs Field
-@docs FieldValue
-@docs fName
-@docs fSignal
-@docs fDatum
-@docs fGroup
-@docs fParent
 
 -}
 
@@ -3937,7 +3945,7 @@ from an external file, from a named data source or inline literal values. See th
 
       dataSource
           [ data "pop" [ daUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
+          , data "popYear" [ daSource "pop" ] |> transform [ TFilter (expr "datum.year == year") ]
           ]
 
 -}
@@ -3965,10 +3973,10 @@ result of a transformation. For details see the
 
       dataSource
           [ data "pop" [ daUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
-          , data "males" [ dSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
-          , data "females" [ dSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
-          , data "ageGroups" [ dSource "pop" ] |> transform [ trAggregate [ AgGroupBy [ FieldName "age" ] ] ]
+          , data "popYear" [ daSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
+          , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
+          , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
+          , data "ageGroups" [ daSource "pop" ] |> transform [ trAggregate [ AgGroupBy [ FieldName "age" ] ] ]
           ]
 
 -}
@@ -5989,10 +5997,10 @@ ofSignal =
     OfSignal
 
 
-{-| Adds list of triggers to the given data table or mark.
+{-| Adds list of triggers to the given data table.
 For details see the [Vega documentation](https://vega.github.io/vega/docs/triggers).
 -}
-on : List Spec -> DataTable -> DataTable
+on : List Trigger -> DataTable -> DataTable
 on triggerSpecs dTable =
     dTable ++ [ ( "on", JE.list triggerSpecs ) ]
 
@@ -6931,8 +6939,8 @@ TODO: Check syntax with current API
 
       dataSource
           [ data "pop" [ dUrl "data/population.json" ]
-          , data "popYear" [ dSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
-          , data "ageGroups" [ dSource "pop" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
+          , data "popYear" [ daSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
+          , data "ageGroups" [ daSource "pop" ] |> transform [ trAggregate [ agGroupBy [ "age" ] ] ]
           ]
 
 -}

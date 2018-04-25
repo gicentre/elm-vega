@@ -6376,13 +6376,13 @@ var _user$project$Vega$valueProperty = function (val) {
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p42._0))
 			};
-		case 'VBool':
+		case 'VBoo':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
 				_1: _elm_lang$core$Json_Encode$bool(_p42._0)
 			};
-		case 'VBools':
+		case 'VBoos':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
@@ -6520,9 +6520,9 @@ var _user$project$Vega$valueSpec = function (val) {
 		case 'Values':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p43._0));
-		case 'VBool':
+		case 'VBoo':
 			return _elm_lang$core$Json_Encode$bool(_p43._0);
-		case 'VBools':
+		case 'VBoos':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$bool, _p43._0));
 		case 'VNull':
@@ -6944,16 +6944,36 @@ var _user$project$Vega$layoutProperty = function (prop) {
 var _user$project$Vega$boolSpec = function (b) {
 	var _p52 = b;
 	switch (_p52.ctor) {
-		case 'Boolean':
+		case 'Boo':
 			return _elm_lang$core$Json_Encode$bool(_p52._0);
-		case 'Bools':
+		case 'Boos':
 			return _elm_lang$core$Json_Encode$list(
 				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$bool, _p52._0));
-		default:
+		case 'BooSignal':
 			return _elm_lang$core$Json_Encode$object(
 				{
 					ctor: '::',
 					_0: _user$project$Vega$signalReferenceProperty(_p52._0),
+					_1: {ctor: '[]'}
+				});
+		case 'BooSignals':
+			return _elm_lang$core$Json_Encode$list(
+				A2(
+					_elm_lang$core$List$map,
+					function (sig) {
+						return _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$signalReferenceProperty(sig),
+								_1: {ctor: '[]'}
+							});
+					},
+					_p52._0));
+		default:
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: _user$project$Vega$exprProperty(_p52._0),
 					_1: {ctor: '[]'}
 				});
 	}
@@ -8736,18 +8756,26 @@ var _user$project$Vega$IRange = function (a) {
 	return {ctor: 'IRange', _0: a};
 };
 var _user$project$Vega$iRange = _user$project$Vega$IRange;
-var _user$project$Vega$BoolSignal = function (a) {
-	return {ctor: 'BoolSignal', _0: a};
+var _user$project$Vega$BooExpr = function (a) {
+	return {ctor: 'BooExpr', _0: a};
 };
-var _user$project$Vega$boolSignal = _user$project$Vega$BoolSignal;
-var _user$project$Vega$Bools = function (a) {
-	return {ctor: 'Bools', _0: a};
+var _user$project$Vega$booExpr = _user$project$Vega$BooExpr;
+var _user$project$Vega$BooSignals = function (a) {
+	return {ctor: 'BooSignals', _0: a};
 };
-var _user$project$Vega$bools = _user$project$Vega$Bools;
-var _user$project$Vega$Boolean = function (a) {
-	return {ctor: 'Boolean', _0: a};
+var _user$project$Vega$booSignals = _user$project$Vega$BooSignals;
+var _user$project$Vega$BooSignal = function (a) {
+	return {ctor: 'BooSignal', _0: a};
 };
-var _user$project$Vega$boolean = _user$project$Vega$Boolean;
+var _user$project$Vega$booSignal = _user$project$Vega$BooSignal;
+var _user$project$Vega$Boos = function (a) {
+	return {ctor: 'Boos', _0: a};
+};
+var _user$project$Vega$boos = _user$project$Vega$Boos;
+var _user$project$Vega$Boo = function (a) {
+	return {ctor: 'Boo', _0: a};
+};
+var _user$project$Vega$boo = _user$project$Vega$Boo;
 var _user$project$Vega$Flush = {ctor: 'Flush'};
 var _user$project$Vega$Full = {ctor: 'Full'};
 var _user$project$Vega$Rgb = function (a) {
@@ -8875,23 +8903,23 @@ var _user$project$Vega$daFormat = _user$project$Vega$DFormat;
 var _user$project$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
-var _user$project$Vega$dSort = _user$project$Vega$DSort;
+var _user$project$Vega$daSort = _user$project$Vega$DSort;
 var _user$project$Vega$DReferences = function (a) {
 	return {ctor: 'DReferences', _0: a};
 };
-var _user$project$Vega$dReferences = _user$project$Vega$DReferences;
+var _user$project$Vega$daReferences = _user$project$Vega$DReferences;
 var _user$project$Vega$DFields = function (a) {
 	return {ctor: 'DFields', _0: a};
 };
-var _user$project$Vega$dFields = _user$project$Vega$DFields;
+var _user$project$Vega$daFields = _user$project$Vega$DFields;
 var _user$project$Vega$DField = function (a) {
 	return {ctor: 'DField', _0: a};
 };
-var _user$project$Vega$dField = _user$project$Vega$DField;
+var _user$project$Vega$daField = _user$project$Vega$DField;
 var _user$project$Vega$DDataset = function (a) {
 	return {ctor: 'DDataset', _0: a};
 };
-var _user$project$Vega$dDataset = _user$project$Vega$DDataset;
+var _user$project$Vega$daDataset = _user$project$Vega$DDataset;
 var _user$project$Vega$FoUtc = function (a) {
 	return {ctor: 'FoUtc', _0: a};
 };
@@ -12414,14 +12442,14 @@ var _user$project$Vega$VObject = function (a) {
 	return {ctor: 'VObject', _0: a};
 };
 var _user$project$Vega$vObject = _user$project$Vega$VObject;
-var _user$project$Vega$VBools = function (a) {
-	return {ctor: 'VBools', _0: a};
+var _user$project$Vega$VBoos = function (a) {
+	return {ctor: 'VBoos', _0: a};
 };
-var _user$project$Vega$vBools = _user$project$Vega$VBools;
-var _user$project$Vega$VBool = function (a) {
-	return {ctor: 'VBool', _0: a};
+var _user$project$Vega$vBoos = _user$project$Vega$VBoos;
+var _user$project$Vega$VBoo = function (a) {
+	return {ctor: 'VBoo', _0: a};
 };
-var _user$project$Vega$vBool = _user$project$Vega$VBool;
+var _user$project$Vega$vBoo = _user$project$Vega$VBoo;
 var _user$project$Vega$VNums = function (a) {
 	return {ctor: 'VNums', _0: a};
 };
@@ -12630,10 +12658,10 @@ var _user$project$HelloWorld$helloWorld = function () {
 						_user$project$Vega$doData(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$dDataset('table'),
+								_0: _user$project$Vega$daDataset('table'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$dField(
+									_0: _user$project$Vega$daField(
 										_user$project$Vega$str('x')),
 									_1: {ctor: '[]'}
 								}
@@ -12701,21 +12729,16 @@ var _user$project$HelloWorld$helloWorld = function () {
 			_0: _user$project$Vega$width(100),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Vega$background(
-					_user$project$Vega$str('#f00')),
+				_0: ds,
 				_1: {
 					ctor: '::',
-					_0: ds,
+					_0: sc(
+						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: sc(
+						_0: mk(
 							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: mk(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				}
 			}

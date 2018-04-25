@@ -121,7 +121,7 @@ stackTest1 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scDomain (doData [ dDataset "table", dField (str "y1") ])
+                    , scDomain (doData [ daDataset "table", daField (str "y1") ])
                     , scRange (raDefault RHeight)
                     , scRound (boo True)
                     ]
