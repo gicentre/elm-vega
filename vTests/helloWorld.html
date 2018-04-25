@@ -1,0 +1,39 @@
+<!doctype html>
+
+<head>
+  <title>Vega Hello World</title>
+  <meta charset="utf-8">
+
+  <!-- These scripts link to the Vega runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/helloWorld.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Hello from Vega</h1>
+
+  <!-- The vega visualization will appear in the div with an id matching that named in elm-vega -->
+  <div id="helloWorld"></div>
+
+  <!-- This is the boilerplate that links this page with elm-vega. The only thing
+       that need be changed is the name HelloWorld in order to match the Elm module
+       you create. -->
+  <script>
+    Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {
+          actions: false,
+          logLevel: vega.Warn
+        }).catch(console.warn);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
