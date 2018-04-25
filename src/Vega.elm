@@ -634,12 +634,29 @@ types.
 @docs vColor
 @docs vBand
 
+
+# Creating a Data Specification
+
+Functions for declaring the input data to a visualization.
+
+@docs dataSource
+@docs dataFromColumns
+@docs dataFromRows
+@docs data
+@docs dataColumn
+@docs dataRow
+
+@docs DataValues
+@docs daNums
+@docs daStrs
+@docs daBools
+
 **############################################################################**
+
+TODO: Arrange
 
 @docs Spec
 @docs combineSpecs
-
-TODO: Arrange
 
 @docs Anchor
 @docs TitleProperty
@@ -653,18 +670,6 @@ TODO: Arrange
 @docs tiZIndex
 @docs background
 
-
-# Creating the Data Specification
-
-Functions and types for declaring the input data to the visualization.
-
-@docs dataSource
-@docs DataValues
-@docs dataFromColumns
-@docs dataFromRows
-@docs data
-@docs dataColumn
-@docs dataRow
 @docs on
 @docs trigger
 @docs DataProperty
@@ -1231,10 +1236,6 @@ can carry data used in specifications.
 @docs fGroup
 @docs fParent
 
-@docs daNums
-
-@docs daStrs
-@docs daBools
 @docs vObject
 @docs keyValue
 @docs vValues
@@ -7091,14 +7092,16 @@ variancep =
     Variancep
 
 
-{-| A value representing a band number.
+{-| A value representing a band number or fraction of a band number. Band scales
+are used when aggregating data into discrete categories such as in a frequency
+historgram.
 -}
 vBand : Float -> Value
 vBand =
     VBand
 
 
-{-| A value representing either True or False.
+{-| A Boolean value representing either True or False.
 -}
 vBoo : Bool -> Value
 vBoo =
