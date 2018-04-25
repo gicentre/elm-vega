@@ -14,6 +14,7 @@ module Vega
         , ColorValue
         , Comparator
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
+        , Data
         , DataColumn
         , DataProperty
         , DataReference
@@ -144,15 +145,15 @@ module Vega
         , cubeHelix
         , cubeHelixLong
         , cursorLabel
-        , dDataset
-        , dField
-        , dFields
-        , dReferences
-        , dSort
         , daBools
+        , daDataset
+        , daField
+        , daFields
         , daFormat
         , daNums
         , daOn
+        , daReferences
+        , daSort
         , daSource
         , daSources
         , daStrs
@@ -634,44 +635,35 @@ types.
 @docs vColor
 @docs vBand
 
+@docs vObject
+@docs keyValue
+@docs vValues
+@docs ifElse
+@docs vNull
+@docs vMultiply
+@docs vExponent
+@docs vOffset
+@docs vRound
+@docs vScale
+
 
 # Creating a Data Specification
 
 Functions for declaring the input data to a visualization.
 
 @docs dataSource
-@docs dataFromColumns
-@docs dataFromRows
+@docs DataTable
+@docs Data
 @docs data
+
+@docs dataFromColumns
+@docs DataColumn
 @docs dataColumn
+
+@docs dataFromRows
+@docs DataRow
 @docs dataRow
 
-@docs DataValues
-@docs daNums
-@docs daStrs
-@docs daBools
-
-**############################################################################**
-
-TODO: Arrange
-
-@docs Spec
-@docs combineSpecs
-
-@docs Anchor
-@docs TitleProperty
-@docs tiAnchor
-@docs tiEncode
-@docs tiInteractive
-@docs tiName
-@docs tiOffset
-@docs tiOrient
-@docs tiStyle
-@docs tiZIndex
-@docs background
-
-@docs on
-@docs trigger
 @docs DataProperty
 @docs daUrl
 @docs daFormat
@@ -679,54 +671,120 @@ TODO: Arrange
 @docs daSources
 @docs daValue
 @docs daOn
-@docs DataColumn
-@docs DataRow
-@docs DataTable
+
+@docs DataValues
+@docs daNums
+@docs daStrs
+@docs daBools
+
 @docs DataReference
-@docs dDataset
-@docs dField
-@docs dFields
-@docs dReferences
-@docs dSort
-@docs DataType
-@docs foBool
-@docs foNumber
-@docs foDate
-@docs foUtc
+@docs daDataset
+@docs daField
+@docs daFields
+@docs daReferences
+@docs daSort
+
+
+## Data Formatting
+
+Functions for parsing input data and specifying their format.
+
 @docs Format
 @docs dsv
 @docs jsonProperty
 @docs topojsonMesh
 @docs topojsonFeature
+
+@docs DataType
 @docs parse
-@docs SortProperty
-@docs soOp
-@docs soByField
-@docs Source
-@docs Trigger
-@docs TriggerProperty
-@docs trInsert
-@docs trRemove
-@docs trRemoveAll
-@docs trToggle
-@docs trModifyValues
+@docs foBool
+@docs foNumber
+@docs foDate
+@docs foUtc
 
 
-## Transformations
+# Transforming Data
 
+Transforms are essential in order to use the full range of data visualization types
+in Vega. They can be applied to data streams and to marks.
+
+Applying a transform to a data stream can filter or generate new fields in the stream,
+or derive new data streams. This is done by piping (`|>`) the stream into the
+`transform` function and specifying the type of transform to apply via one or
+more of the functions described below.
+
+@docs transform
 @docs Transform
+
+
+## Basic Transforms
+
+
+### Aggregation
+
 @docs trAggregate
+@docs AggregateProperty
+@docs agGroupBy
+@docs agFields
+@docs agOps
+@docs agAs
+@docs agCross
+@docs agDrop
+
+TODO: add joinAggregate functions.
+TODO: add pivot functions.
+
+
+### Binning
+
+TODO: add functions (bin)
+
+
+### Collection
+
+TODO: functions (collect)
+
+
+### Text Pattern Counting
+
+TODO: add functions (countpattern)
+
+
+### Cross Product
+
+TODO: add functions (cross)
+
+
+### Probability Density Function Calc ulation
+
+TODO: add functions (density)
+
+
+### Range calculation
+
 @docs trExtent
 @docs trExtentAsSignal
+
+
+### Filtering
+
 @docs trFilter
+
+
+### Flattening
+
+TODO: add functions (flatten)
+
+
+### Folding
+
+TODO: add functions (fold)
+
+
+### Deriving New Fields
+
 @docs trFormula
-@docs trPack
-@docs trPie
-@docs trStack
-@docs trStratify
-
-
-### Loookup transformation
+@docs FormulaUpdate
 
 @docs trLookup
 @docs LookupProperty
@@ -734,38 +792,37 @@ TODO: Arrange
 @docs luValues
 @docs luDefault
 
-
-### Force simulation transformation
-
-@docs ForceSimulationProperty
-@docs Force
-@docs trForce
-@docs foCenter
-@docs foCollide
-@docs foNBody
-@docs foLink
-@docs foX
-@docs foY
-@docs ForceProperty
-@docs fsStatic
-@docs fsRestart
-@docs fsIterations
-@docs fsAlpha
-@docs fsAlphaMin
-@docs fsAlphaTarget
-@docs fsVelocityDecay
-@docs fsForces
-@docs fsAs
-@docs fpStrength
-@docs fpDistance
-@docs fpIterations
-@docs fpTheta
-@docs fpDistanceMin
-@docs fpDistanceMax
-@docs fpId
+TODO: add functions (identifier)
+TODO: add functions (project)
+TODO: add functions (window)
 
 
-### Geographic Transformations
+### Handling Missing Values
+
+TODO: add functions (impute)
+
+
+### Sampling
+
+TODO: add functions (sample)
+
+
+### Data Generation
+
+TODO: add function (sequence)
+
+
+## Geographic Transforms
+
+
+### Contouring
+
+TODO: add function (contour)
+
+
+### GeoJSON transformation
+
+TODO: add function (geojson)
 
 @docs trGeoShape
 @docs trGeoPath
@@ -773,11 +830,18 @@ TODO: Arrange
 @docs gpField
 @docs gpPointRadius
 @docs gpAs
+
+
+### Graticule Generation
+
 @docs trGraticule
 @docs GraticuleProperty
 
 
-### LinkPath Transformations
+## Layout Transforms
+
+
+### Link Paths
 
 @docs trLinkPath
 @docs LinkPathProperty
@@ -791,27 +855,21 @@ TODO: Arrange
 @docs LinkShape
 @docs linkShapeLabel
 
-@docs FormulaUpdate
-@docs AggregateProperty
-@docs agGroupBy
-@docs agFields
-@docs agOps
-@docs agAs
-@docs agCross
-@docs agDrop
-@docs PackProperty
-@docs paField
-@docs paSort
-@docs paSize
-@docs paRadius
-@docs paPadding
-@docs paAs
+
+### Angular Layouts
+
+@docs trPie
 @docs PieProperty
 @docs piField
 @docs piStartAngle
 @docs piEndAngle
 @docs piSort
 @docs piAs
+
+
+### Stacked Layouts
+
+@docs trStack
 @docs StackProperty
 @docs stField
 @docs stGroupBy
@@ -821,261 +879,67 @@ TODO: Arrange
 @docs StackOffset
 @docs ofSignal
 
-@docs transform
-@docs Order
-@docs orAscending
-@docs orDescending
-@docs orSignal
-@docs Comparator
-@docs coField
-@docs coOrder
 
-@docs argMax
-@docs argMin
-@docs average
-@docs ci0
-@docs ci1
-@docs count
-@docs distinct
-@docs maximum
-@docs mean
-@docs median
-@docs minimum
-@docs missing
-@docs q1
-@docs q3
-@docs stderr
-@docs stdev
-@docs stdevp
-@docs sum
-@docs valid
-@docs variance
-@docs variancep
+### Force-Generated Layouts
 
+@docs trForce
 
-## Projections
+@docs ForceSimulationProperty
+@docs fsStatic
+@docs fsRestart
+@docs fsIterations
+@docs fsAlpha
+@docs fsAlphaMin
+@docs fsAlphaTarget
+@docs fsVelocityDecay
+@docs fsForces
+@docs fsAs
 
-@docs projections
-@docs projection
-@docs Projection
-@docs prCustom
-@docs ProjectionProperty
-@docs prType
-@docs prClipAngle
-@docs prClipExtent
-@docs prScale
-@docs prTranslate
-@docs prCenter
-@docs prRotate
-@docs prPointRadius
-@docs prPrecision
-@docs prCoefficient
-@docs prDistance
-@docs prFraction
-@docs prLobes
-@docs prParallel
-@docs prRadius
-@docs prRatio
-@docs prSpacing
-@docs prTilt
+@docs Force
+@docs foCenter
+@docs foCollide
+@docs foNBody
+@docs foLink
+@docs foX
+@docs foY
+@docs ForceProperty
+@docs fpStrength
+@docs fpDistance
+@docs fpIterations
+@docs fpTheta
+@docs fpDistanceMin
+@docs fpDistanceMax
+@docs fpId
 
 
-## Axes
+### Voronoi Diagram
 
-@docs axes
-@docs axis
-@docs AxisProperty
-@docs axDomain
-@docs axEncode
-@docs axFormat
-@docs axGrid
-@docs axGridScale
-@docs axLabels
-@docs axLabelBound
-@docs axLabelFlush
-@docs axLabelFlushOffset
-@docs axLabelPadding
-@docs axLabelOverlap
-@docs axMinExtent
-@docs axMaxExtent
-@docs axOffset
-@docs axPosition
-@docs axTicks
-@docs axTickCount
-@docs axTickSize
-@docs axTitle
-@docs axTitlePadding
-@docs axValues
-@docs axZIndex
-@docs AxisElement
-@docs Side
-@docs OverlapStrategy
+TODO: add function (voronoi)
 
 
-## Legends
+### Word Cloud layout
 
-@docs legends
-@docs legend
-@docs LegendProperty
-@docs leType
-@docs leOrient
-@docs leFill
-@docs leOpacity
-@docs leShape
-@docs leSize
-@docs leStroke
-@docs leStrokeDash
-@docs leEncode
-@docs leEntryPadding
-@docs leFormat
-@docs leOffset
-@docs lePadding
-@docs leTickCount
-@docs leTitlePadding
-@docs leTitle
-@docs leValues
-@docs leZIndex
-@docs LegendType
-@docs LegendOrientation
-@docs LegendEncoding
-@docs enLegend
-@docs enTitle
-@docs enLabels
-@docs enSymbols
-@docs enGradient
+TODO: add function (wordcloud)
 
 
-## Marks
+## Hierarchy Transforms
 
-@docs marks
-@docs mark
-@docs Mark
-@docs TopMarkProperty
-@docs mClip
-@docs mDescription
-@docs mEncode
-@docs mFrom
-@docs mInteractive
-@docs mKey
-@docs mName
-@docs mOn
-@docs mSort
-@docs mTransform
-@docs mStyle
-@docs mGroup
-@docs Clip
-@docs clEnabled
-@docs clPath
-@docs clSphere
-@docs srData
-@docs Facet
-@docs srFacet
-@docs faField
-@docs faGroupBy
+@docs trStratify
 
-@docs MarkProperty
-@docs maX
-@docs maX2
-@docs maXC
-@docs maWidth
-@docs maY
-@docs maY2
-@docs maYC
-@docs maHeight
-@docs maOpacity
-@docs maFill
-@docs maFillOpacity
-@docs maStroke
-@docs maStrokeOpacity
-@docs maStrokeWidth
-@docs maStrokeCap
-@docs maStrokeDash
-@docs maStrokeDashOffset
-@docs maStrokeJoin
-@docs maStrokeMiterLimit
-@docs maCursor
-@docs maHRef
-@docs maTooltip
-@docs maZIndex
-@docs maAlign
-@docs maBaseline
-@docs maCornerRadius
-@docs maInterpolate
-@docs maTension
-@docs maDefined
-@docs maSize
-@docs maStartAngle
-@docs maEndAngle
-@docs maPadAngle
-@docs maInnerRadius
-@docs maOuterRadius
-@docs maOrient
-@docs maGroupClip
-@docs maUrl
-@docs maAspect
-@docs maPath
-@docs maShape
-@docs maSymbol
-@docs maAngle
-@docs maDir
-@docs maDx
-@docs maDy
-@docs maEllipsis
-@docs maFont
-@docs maFontSize
-@docs maFontWeight
-@docs maFontStyle
-@docs maLimit
-@docs maRadius
-@docs maText
-@docs maTheta
-
-@docs EncodingProperty
-@docs enEnter
-@docs enUpdate
-@docs enHover
-@docs enExit
-@docs enCustom
-@docs MarkInterpolation
-@docs markInterpolationLabel
-@docs Orientation
-@docs markOrientationLabel
-@docs Cursor
-@docs cursorLabel
-@docs HAlign
-@docs hAlignLabel
-@docs VAlign
-@docs vAlignLabel
-@docs Symbol
-@docs symPath
-@docs symbolLabel
-@docs StrokeCap
-@docs strokeCapLabel
-@docs StrokeJoin
-@docs strokeJoinLabel
-@docs TextDirection
-@docs dirLabel
+@docs trPack
+@docs PackProperty
+@docs paField
+@docs paSort
+@docs paSize
+@docs paRadius
+@docs paPadding
+@docs paAs
 
 
-## Layout
+## Cross-Filter Transforms
 
-@docs layout
-@docs LayoutProperty
-@docs GridAlign
-@docs BoundsCalculation
-@docs loAlign
-@docs loBounds
-@docs loColumns
-@docs loPadding
-@docs loPaddingRC
-@docs loOffset
-@docs loOffsetRC
-@docs loHeaderBand
-@docs loHeaderBandRC
-@docs loFooterBand
-@docs loFooterBandRC
-@docs loTitleBand
-@docs loTitleBandRC
+
+# Signals and Interaction Events
 
 
 ## Signals
@@ -1093,6 +957,10 @@ TODO: Arrange
 @docs siUpdate
 @docs siReact
 @docs siValue
+
+
+## User Interface Inputs
+
 @docs Bind
 @docs iCheckbox
 @docs iText
@@ -1124,9 +992,7 @@ TODO: Arrange
 @docs evForce
 
 
-## Scaling
-
-The mapping of data values to their visual expression.
+# Specifying Scales
 
 @docs scales
 @docs scale
@@ -1195,14 +1061,259 @@ The mapping of data values to their visual expression.
 @docs rgb
 
 
-## Aggregation
+# Specifying Projections
 
-@docs Operation
+@docs projections
+@docs projection
+@docs Projection
+@docs prCustom
+@docs ProjectionProperty
+@docs prType
+@docs prClipAngle
+@docs prClipExtent
+@docs prScale
+@docs prTranslate
+@docs prCenter
+@docs prRotate
+@docs prPointRadius
+@docs prPrecision
+@docs prCoefficient
+@docs prDistance
+@docs prFraction
+@docs prLobes
+@docs prParallel
+@docs prRadius
+@docs prRatio
+@docs prSpacing
+@docs prTilt
 
 
-# Global Configuration
+# Specifying Axes
 
-Configuration options that affect the entire visualization. These are in addition
+@docs axes
+@docs axis
+@docs AxisProperty
+@docs axDomain
+@docs axEncode
+@docs axFormat
+@docs axGrid
+@docs axGridScale
+@docs axLabels
+@docs axLabelBound
+@docs axLabelFlush
+@docs axLabelFlushOffset
+@docs axLabelPadding
+@docs axLabelOverlap
+@docs axMinExtent
+@docs axMaxExtent
+@docs axOffset
+@docs axPosition
+@docs axTicks
+@docs axTickCount
+@docs axTickSize
+@docs axTitle
+@docs axTitlePadding
+@docs axValues
+@docs axZIndex
+@docs AxisElement
+@docs Side
+@docs OverlapStrategy
+
+
+# Specifying Legends
+
+@docs legends
+@docs legend
+@docs LegendProperty
+@docs leType
+@docs leOrient
+@docs leFill
+@docs leOpacity
+@docs leShape
+@docs leSize
+@docs leStroke
+@docs leStrokeDash
+@docs leEncode
+@docs leEntryPadding
+@docs leFormat
+@docs leOffset
+@docs lePadding
+@docs leTickCount
+@docs leTitlePadding
+@docs leTitle
+@docs leValues
+@docs leZIndex
+@docs LegendType
+@docs LegendOrientation
+@docs LegendEncoding
+@docs enLegend
+@docs enTitle
+@docs enLabels
+@docs enSymbols
+@docs enGradient
+
+
+# Specifying Titles
+
+@docs TitleProperty
+@docs tiAnchor
+@docs Anchor
+@docs tiEncode
+@docs tiInteractive
+@docs tiName
+@docs tiOffset
+@docs tiOrient
+@docs tiStyle
+@docs tiZIndex
+
+
+# Specifying Layout
+
+@docs layout
+@docs LayoutProperty
+@docs GridAlign
+@docs BoundsCalculation
+@docs loAlign
+@docs loBounds
+@docs loColumns
+@docs loPadding
+@docs loPaddingRC
+@docs loOffset
+@docs loOffsetRC
+@docs loHeaderBand
+@docs loHeaderBandRC
+@docs loFooterBand
+@docs loFooterBandRC
+@docs loTitleBand
+@docs loTitleBandRC
+
+
+# Specifying Marks
+
+## Top-Level Marks
+
+@docs marks
+@docs mark
+@docs Mark
+@docs TopMarkProperty
+@docs mClip
+@docs mDescription
+@docs mEncode
+@docs mFrom
+@docs mInteractive
+@docs mKey
+@docs mName
+@docs mOn
+@docs mSort
+@docs mTransform
+@docs mStyle
+@docs mGroup
+@docs Clip
+@docs clEnabled
+@docs clPath
+@docs clSphere
+@docs srData
+@docs Facet
+@docs srFacet
+@docs faField
+@docs faGroupBy
+
+
+## Lower-level Mark Properties
+
+@docs MarkProperty
+@docs maX
+@docs maX2
+@docs maXC
+@docs maWidth
+@docs maY
+@docs maY2
+@docs maYC
+@docs maHeight
+@docs maOpacity
+@docs maFill
+@docs maFillOpacity
+@docs maStroke
+@docs maStrokeOpacity
+@docs maStrokeWidth
+@docs maStrokeCap
+@docs maStrokeDash
+@docs maStrokeDashOffset
+@docs maStrokeJoin
+@docs maStrokeMiterLimit
+@docs maCursor
+@docs maHRef
+@docs maTooltip
+@docs maZIndex
+@docs maAlign
+@docs maBaseline
+@docs maCornerRadius
+@docs maInterpolate
+@docs maTension
+@docs maDefined
+@docs maSize
+@docs maStartAngle
+@docs maEndAngle
+@docs maPadAngle
+@docs maInnerRadius
+@docs maOuterRadius
+@docs maOrient
+@docs maGroupClip
+@docs maUrl
+@docs maAspect
+@docs maPath
+@docs maShape
+@docs maSymbol
+@docs maAngle
+@docs maDir
+@docs maDx
+@docs maDy
+@docs maEllipsis
+@docs maFont
+@docs maFontSize
+@docs maFontWeight
+@docs maFontStyle
+@docs maLimit
+@docs maRadius
+@docs maText
+@docs maTheta
+
+
+## Encoding
+
+@docs EncodingProperty
+@docs enEnter
+@docs enUpdate
+@docs enHover
+@docs enExit
+@docs enCustom
+@docs MarkInterpolation
+@docs markInterpolationLabel
+@docs Orientation
+@docs markOrientationLabel
+@docs Cursor
+@docs cursorLabel
+@docs HAlign
+@docs hAlignLabel
+@docs VAlign
+@docs vAlignLabel
+@docs Symbol
+@docs symPath
+@docs symbolLabel
+@docs StrokeCap
+@docs strokeCapLabel
+@docs StrokeJoin
+@docs strokeJoinLabel
+@docs TextDirection
+@docs dirLabel
+
+
+# Configuring Visualization Appearance
+
+
+# Specifying Supplementary Properties
+
+Options that affect the entire visualization. These are in addition
 to the data and transform options described above.
 
 @docs autosize
@@ -1211,12 +1322,62 @@ to the data and transform options described above.
 @docs width
 @docs Autosize
 @docs Padding
+@docs background
+
+**############################################################################**
+
+@docs Spec
+@docs combineSpecs
+
+@docs on
+@docs trigger
+
+@docs SortProperty
+@docs soOp
+@docs soByField
+@docs Source
+@docs Trigger
+@docs TriggerProperty
+@docs trInsert
+@docs trRemove
+@docs trRemoveAll
+@docs trToggle
+@docs trModifyValues
+
+@docs Order
+@docs orAscending
+@docs orDescending
+@docs orSignal
+@docs Comparator
+@docs coField
+@docs coOrder
+
+@docs argMax
+@docs argMin
+@docs average
+@docs ci0
+@docs ci1
+@docs count
+@docs distinct
+@docs maximum
+@docs mean
+@docs median
+@docs minimum
+@docs missing
+@docs q1
+@docs q3
+@docs stderr
+@docs stdev
+@docs stdevp
+@docs sum
+@docs valid
+@docs variance
+@docs variancep
+
+@docs Operation
 
 
 # General Data types
-
-In addition to more general data types like integers and strings, the following types
-can carry data used in specifications.
 
 @docs TimeUnit
 @docs utc
@@ -1235,17 +1396,6 @@ can carry data used in specifications.
 @docs fDatum
 @docs fGroup
 @docs fParent
-
-@docs vObject
-@docs keyValue
-@docs vValues
-@docs ifElse
-@docs vNull
-@docs vMultiply
-@docs vExponent
-@docs vOffset
-@docs vRound
-@docs vScale
 
 -}
 
@@ -3622,6 +3772,79 @@ enCustom name =
     Custom name
 
 
+{-| Reference a dataset with the given name. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+daDataset : String -> DataReference
+daDataset =
+    DDataset
+
+
+{-| Reference a data field with the given value. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+daField : Str -> DataReference
+daField =
+    DField
+
+
+{-| Reference a collection of data fields with the given values. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+daFields : Str -> DataReference
+daFields =
+    DFields
+
+
+{-| Specify the data format when loading or generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daFormat : Format -> DataProperty
+daFormat =
+    DFormat
+
+
+{-| Specify updates to insert, remove, and toggle data values, or clear the data in a data set
+when trigger conditions are met. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daOn : List Trigger -> DataProperty
+daOn =
+    DOn
+
+
+{-| Reference a collection of nested data references. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+daReferences : List DataReference -> DataReference
+daReferences =
+    DReferences
+
+
+{-| Sort a data reference. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
+-}
+daSort : List SortProperty -> DataReference
+daSort =
+    DSort
+
+
+{-| Specify a named data source when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daSource : String -> DataProperty
+daSource =
+    DSource
+
+
+{-| Specify a collection of named data sources when generating a data set. For details see the
+[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
+-}
+daSources : List String -> DataProperty
+daSources =
+    DSources
+
+
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
@@ -3770,63 +3993,6 @@ daValue =
     DValue
 
 
-{-| Reference a dataset with the given name. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
--}
-dDataset : String -> DataReference
-dDataset =
-    DDataset
-
-
-{-| Reference a data field with the given value. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
--}
-dField : Str -> DataReference
-dField =
-    DField
-
-
-{-| Reference a collection of data fields with the given values. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
--}
-dFields : Str -> DataReference
-dFields =
-    DFields
-
-
-{-| Specify the data format when loading or generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-daFormat : Format -> DataProperty
-daFormat =
-    DFormat
-
-
-{-| Specify updates to insert, remove, and toggle data values, or clear the data in a data set
-when trigger conditions are met. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-daOn : List Trigger -> DataProperty
-daOn =
-    DOn
-
-
-{-| Specify a named data source when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-daSource : String -> DataProperty
-daSource =
-    DSource
-
-
-{-| Specify a collection of named data sources when generating a data set. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/data/#properties)
--}
-daSources : List String -> DataProperty
-daSources =
-    DSources
-
-
 {-| Provide a text description of the visualization.
 -}
 description : String -> ( VProperty, Spec )
@@ -3882,22 +4048,6 @@ see the [Vega documentation](https://vega.github.io/vega/docs/scales/#domain)
 doStrs : Str -> ScaleDomain
 doStrs =
     DoStrs
-
-
-{-| Reference a collection of nested data references. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
--}
-dReferences : List DataReference -> DataReference
-dReferences =
-    DReferences
-
-
-{-| Sort a data reference. For details see the
-[Vega documentation](https://vega.github.io/vega/docs/scales/#dataref)
--}
-dSort : List SortProperty -> DataReference
-dSort =
-    DSort
 
 
 {-| Indicates a DSV (delimited separated value) format with a custom delimeter.
