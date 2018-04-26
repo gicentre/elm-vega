@@ -70,7 +70,7 @@ module VegaLite
         , SelectionProperty(..)
         , SelectionResolution(..)
         , Side(..)
-        , SortProperty(..)
+        , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
         , Spec
         , StackProperty(..)
         , Symbol(..)
@@ -497,6 +497,7 @@ to the data and transform options described above.
 @docs ViewConfig
 @docs RangeConfig
 @docs FieldTitleProperty
+
 
 # General Data types
 
