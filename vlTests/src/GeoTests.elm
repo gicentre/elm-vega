@@ -19,7 +19,7 @@ defaultSize1 =
         [ description "Default map size"
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
-        , mark Geoshape []
+        , geoshape []
         , encoding <| color [ MString "black" ] []
         ]
 
@@ -31,7 +31,7 @@ defaultSize2 =
         , configure <| configuration (View [ ViewWidth 500, ViewHeight 300 ]) <| []
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
-        , mark Geoshape []
+        , geoshape []
         , encoding <| color [ MString "black" ] []
         ]
 
@@ -43,7 +43,7 @@ choropleth1 =
         , height 500
         , configure <| configuration (View [ Stroke Nothing ]) []
         , dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-        , mark Geoshape [ MStrokeOpacity 0 ]
+        , geoshape [ MStrokeOpacity 0 ]
         , encoding <| color [ MName "id", MmType Nominal ] []
         ]
 
@@ -63,7 +63,7 @@ choropleth2 =
         polySpec =
             asSpec
                 [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , polyEnc []
                 ]
 
@@ -74,7 +74,7 @@ choropleth2 =
                 << text [ TName "bLabel", TmType Nominal ]
 
         labelSpec =
-            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
     in
     toVegaLite
         [ width 1200
@@ -90,7 +90,7 @@ tubeLines1 =
         [ width 700
         , height 500
         , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-        , mark Geoshape [ MFilled False ]
+        , geoshape [ MFilled False ]
         , encoding <| color [ MName "id", MmType Nominal ] []
         ]
 
@@ -112,7 +112,7 @@ tubeLines2 =
         , height 500
         , configure <| configuration (View [ Stroke Nothing ]) []
         , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-        , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+        , geoshape [ MFilled False, MStrokeWidth 2 ]
         , enc []
         ]
 
@@ -123,7 +123,7 @@ tubeLines3 =
         polySpec =
             asSpec
                 [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , encoding <| color [ MString "#ddc" ] []
                 ]
 
@@ -140,7 +140,7 @@ tubeLines3 =
                 << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
 
         labelSpec =
-            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
 
         tubeEnc =
             encoding
@@ -154,7 +154,7 @@ tubeLines3 =
         routeSpec =
             asSpec
                 [ dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-                , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+                , geoshape [ MFilled False, MStrokeWidth 2 ]
                 , tubeEnc []
                 ]
     in
@@ -232,7 +232,7 @@ mapComp1 =
                 , height 300
                 , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
                 , projection [ PType Orthographic ]
-                , mark Geoshape [ MFilled False ]
+                , geoshape [ MFilled False ]
                 ]
     in
     toVegaLite [ hConcat [ globe, globe, globe ] ]
@@ -246,13 +246,13 @@ mapComp2 =
                 graticuleSpec =
                     asSpec
                         [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
                     asSpec
                         [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ TopojsonFeature "land" ]
-                        , mark Geoshape [ MFill "black", MFillOpacity 0.7 ]
+                        , geoshape [ MFill "black", MFillOpacity 0.7 ]
                         ]
             in
             asSpec [ width 300, height 300, projection [ PType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
@@ -274,7 +274,7 @@ mapComp3 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
@@ -283,7 +283,7 @@ mapComp3 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                        , mark Geoshape [ MStroke "white", MFill "black", MStrokeWidth 0.5 ]
+                        , geoshape [ MStroke "white", MFill "black", MStrokeWidth 0.5 ]
                         ]
             in
             asSpec [ layer [ graticuleSpec, countrySpec ] ]
@@ -303,7 +303,7 @@ mapComp4 =
                         , height 300
                         , projection [ PType Orthographic, PRotate 0 0 0 ]
                         , dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
-                        , mark Geoshape [ MFill "#c1e7f5", MStrokeOpacity 0 ]
+                        , geoshape [ MFill "#c1e7f5", MStrokeOpacity 0 ]
                         ]
 
                 graticuleSpec =
@@ -312,7 +312,7 @@ mapComp4 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
@@ -321,7 +321,7 @@ mapComp4 =
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
                         , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                        , mark Geoshape [ MStroke "white", MFill "#242", MStrokeWidth 0.1 ]
+                        , geoshape [ MStroke "white", MFill "#242", MStrokeWidth 0.1 ]
                         ]
             in
             asSpec [ layer [ seaSpec, graticuleSpec, countrySpec ] ]
@@ -347,7 +347,7 @@ dotMap1 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
-        , mark Circle []
+        , circle []
         , enc []
         ]
 
@@ -385,7 +385,7 @@ scribbleMap1 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , mark Line [ MStrokeWidth 0.2, MInterpolate Monotone ]
+        , line [ MStrokeWidth 0.2, MInterpolate Monotone ]
         , enc []
         ]
 
@@ -424,7 +424,7 @@ scribbleMap2 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , mark Line [ MStrokeWidth 0.2, MInterpolate Monotone ]
+        , line [ MStrokeWidth 0.2, MInterpolate Monotone ]
         , enc []
         ]
 

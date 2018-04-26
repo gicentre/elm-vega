@@ -9,7 +9,7 @@ myVis =
     toVegaLite
         [ title "Hello, World!"
         , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
-        , mark Circle []
+        , circle []
         , encoding <| position X [ PName "x", PmType Quantitative ] []
         ]
 

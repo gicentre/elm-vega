@@ -9,7 +9,7 @@ chart des enc =
     toVegaLite
         [ description des
         , dataFromUrl "data/cars.json" []
-        , mark Circle []
+        , circle []
         , (encoding
             << position X [ PName "Horsepower", PmType Quantitative ]
             << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
@@ -194,10 +194,10 @@ mySpecs =
         , ( "customContinuous", customContinuous )
         , ( "customDiscrete", customDiscrete )
         , ( "scale1", scale1 )
-        , ( "scale1", scale2 )
-        , ( "scale1", scale3 )
-        , ( "scale1", scale4 )
-        , ( "scale1", scale5 )
+        , ( "scale2", scale2 )
+        , ( "scale3", scale3 )
+        , ( "scale4", scale4 )
+        , ( "scale5", scale5 )
         , ( "interp1", interp1 )
         , ( "interp2", interp2 )
         , ( "interp3", interp3 )

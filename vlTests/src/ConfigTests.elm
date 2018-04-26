@@ -18,7 +18,7 @@ singleVis config =
                 << shape [ MName "Origin", MmType Nominal ]
                 << size [ MNumber 100 ]
     in
-    toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, mark Point [], scatterEnc [] ]
+    toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, point [], scatterEnc [] ]
 
 
 compositeVis : (List a -> ( VLProperty, Spec )) -> Spec
@@ -36,7 +36,7 @@ compositeVis config =
                 << size [ MNumber 100 ]
 
         scatterSpec =
-            asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), mark Point [], scatterEnc [] ]
+            asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), point [], scatterEnc [] ]
 
         barEnc =
             encoding
@@ -51,10 +51,10 @@ compositeVis config =
                 << color [ MName "Origin", MmType Nominal ]
 
         barSpec =
-            asSpec [ title "Car Histogram", width 200, height 200, padding (PSize 20), mark Bar [], barEnc [] ]
+            asSpec [ title "Car Histogram", width 200, height 200, padding (PSize 20), bar [], barEnc [] ]
 
         streamSpec =
-            asSpec [ title "Car Streamgraph", width 200, height 200, padding (PSize 20), mark Area [], streamEnc [] ]
+            asSpec [ title "Car Streamgraph", width 200, height 200, padding (PSize 20), area [], streamEnc [] ]
 
         res =
             resolve

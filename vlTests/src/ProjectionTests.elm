@@ -34,7 +34,7 @@ worldMapTemplate tText projProps =
 
         --, dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
         , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.5 ]
+        , geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.5 ]
         , enc []
         ]
     )
@@ -81,7 +81,7 @@ configExample =
         globeSpec =
             asSpec
                 [ dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#c1e7f5" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]
@@ -90,7 +90,7 @@ configExample =
         graticuleSpec =
             asSpec
                 [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
+                , geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
                 , encoding <| color [ MString "#black" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]
@@ -99,7 +99,7 @@ configExample =
         countrySpec =
             asSpec
                 [ dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#708E71" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]

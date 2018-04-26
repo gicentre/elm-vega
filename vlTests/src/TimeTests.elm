@@ -17,7 +17,7 @@ timeByUnit tu =
                 << position X [ PName "date", PmType Temporal, PTimeUnit tu ]
                 << position Y [ PName "temperature", PmType Quantitative, PAggregate Mean, PScale [ SZero False ] ]
     in
-    toVegaLite [ width 800, data, enc [], mark Line [ MStrokeWidth 0.2 ] ]
+    toVegaLite [ width 800, data, enc [], line [ MStrokeWidth 0.2 ] ]
 
 
 timeYear : Spec
@@ -144,7 +144,7 @@ parseTime dType =
                 << position Y [ PName "value", PmType Quantitative ]
                 << size [ MNumber 500 ]
     in
-    toVegaLite [ width 800, data [], enc [], mark Circle [] ]
+    toVegaLite [ width 800, data [], enc [], circle [] ]
 
 
 localTime : Spec

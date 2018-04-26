@@ -30,12 +30,7 @@ markCondition1 =
                         [ MString "#0099ee" ]
                     ]
     in
-    toVegaLite
-        [ config []
-        , data
-        , mark Point []
-        , enc []
-        ]
+    toVegaLite [ config [], data, point [], enc [] ]
 
 
 selectionCondition1 : Spec
@@ -65,7 +60,7 @@ selectionCondition1 =
                 << color [ MAggregate Count, MName "*", MmType Quantitative ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ MCursor CGrab ], enc [] ]
 
 
 selectionCondition2 : Spec
@@ -99,7 +94,7 @@ selectionCondition2 =
                     ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ MCursor CGrab ], enc [] ]
 
 
 selectionCondition3 : Spec
@@ -122,7 +117,7 @@ selectionCondition3 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
 
         spec1 =
-            asSpec [ sel [], mark Point [], enc1 [] ]
+            asSpec [ sel [], point [], enc1 [] ]
 
         enc2 =
             encoding
@@ -130,7 +125,7 @@ selectionCondition3 =
                 << position Y [ PName "Displacement", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 500 ]) ] ]
 
         spec2 =
-            asSpec [ trans [], mark Point [], enc2 [] ]
+            asSpec [ trans [], point [], enc2 [] ]
     in
     toVegaLite
         [ data, vConcat [ spec1, spec2 ] ]

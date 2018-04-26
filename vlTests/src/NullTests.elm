@@ -21,7 +21,7 @@ axis1 =
                 << position Y [ PName "y", PmType Quantitative, PAxis [] ]
                 << order [ OName "order", OmType Ordinal ]
     in
-    toVegaLite [ data [], enc [], mark Line [] ]
+    toVegaLite [ data [], enc [], line [] ]
 
 
 scaleEncode : ( VLProperty, Spec ) -> Spec
@@ -34,7 +34,7 @@ scaleEncode enc =
                 << dataColumn "val" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
                 << dataColumn "cat" (Strings [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ])
     in
-    toVegaLite [ width 400, height 400, data [], enc, mark Point [] ]
+    toVegaLite [ width 400, height 400, data [], enc, point [] ]
 
 
 scale0 : Spec

@@ -9,7 +9,7 @@ myFirstVis =
     toVegaLite
         [ title "Hello, World!"
         , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
-        , mark Circle []
+        , circle []
         , encoding <| position X [ PName "x", PmType Quantitative ] []
         ]
 
@@ -23,8 +23,8 @@ mySecondVis =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Circle []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , circle []
         , enc []
         ]
 
@@ -38,8 +38,8 @@ myOtherVis =
                 << position Y [ PName "Miles_per_Gallon", PAggregate Average, PmType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , bar []
         , enc []
         ]
 

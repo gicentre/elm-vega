@@ -10,13 +10,14 @@ _elm-vega_ is a wrapper for the [Vega-Lite visualization grammar](https://vega.g
 The grammar provides an expressive way to define how data are represented graphically.
 The seven key elements of the grammar as represented in elm-vega and Vega-Lite are:
 
--   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
--   **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
--   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
--   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega types:_ `Line`, `Circle`, `Bar`,  `Text` and `GeoShape`.
--   **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
--   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
--   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
+*   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl
+`, `dataFromColumns` and `dataFromRows`.
+*   **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
+*   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
+*   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega functions:_ `line`, `circle`, `bar`, `textMark` and `geoshape`.
+*   **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
+*   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
+*   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
 
 In common with other languages that build upon a grammar of graphics such as D3 and Vega, this grammar allows fine grain control of visualization design.
 But unlike those languages, Vega-Lite and elm-vega provide practical default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
@@ -42,8 +43,8 @@ With elm-vega, we do the following to create this visualization expression:
 
 ```elm
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Tick []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , tick []
     , encoding (position X [ PName "temp_max", PmType Quantitative ] [])
     ]
 ```
@@ -72,8 +73,8 @@ let
         encoding << position X [ PName "temp_max", PmType Quantitative ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Tick []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , tick []
     , enc []
     ]
 ```
@@ -92,8 +93,8 @@ let
             << position Y [ PAggregate Count, PmType Quantitative ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Bar []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , bar []
     , enc []
     ]
 ```
@@ -119,8 +120,8 @@ let
             << color [ MName "weather", MmType Nominal ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Bar []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , bar []
     , enc []
     ]
 ```
@@ -131,7 +132,7 @@ And once again, simply by declaring the measurement type, Vega-Lite determines a
 
 Notice how that with elm-vega we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
 Types used to customise various channels all start with an uppercase letter indicating the type of channel affected.
-So the name of the data field use to encode _position_ is `PName`, its measurement type, `PmType`  and its positional aggregation is `PAggregate`, whereas the name of the data field for encoding color is indicated by `MName` and its measurement type `MmType` (where `M` is short for _mark_).
+So the name of the data field use to encode _position_ is `PName`, its measurement type, `PmType` and its positional aggregation is `PAggregate`, whereas the name of the data field for encoding color is indicated by `MName` and its measurement type `MmType` (where `M` is short for _mark_).
 
 ### Stacked Histogram with Customised Colors (7:20)
 
@@ -159,8 +160,8 @@ let
             << color [ MName "weather", MmType Nominal, MScale weatherColors ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Bar []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , bar []
     , enc []
     ]
 ```
@@ -169,7 +170,7 @@ The mapping between the values in the domain (weather types `sun`, `fog` etc.) a
 
 Notice how we never needed to state explicitly that we wished our bars to be stacked.
 This was reasoned directly by Vega-Lite based on the combination of bar marks and color channel encoding.
-If we were to change just the mark type from `Bar` to `Line`, Vega-Lite produces an unstacked series of lines, which makes sense because unlike bars, lines do not occlude one another to the same extent.
+If we were to change just the mark function from `bar` to `line`, Vega-Lite produces an unstacked series of lines, which makes sense because unlike bars, lines do not occlude one another to the same extent.
 
 ![Unstacked distributions of Seattle daily maximum temperature grouped by dominant weather type](images/lineChart.png)
 
@@ -182,8 +183,8 @@ let
             << color [ MName "weather", MmType Nominal, MScale weatherColors ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Line []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , line []
     , enc []
     ]
 ```
@@ -207,8 +208,8 @@ let
             << column [ FName "weather", FmType Nominal ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Bar []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , bar []
     , enc []
     ]
 ```
@@ -223,17 +224,17 @@ The second, minor change, is to include an `MLegend` specification in the color 
 
 There are four ways in which multiple views may be combined:
 
--   The **facet operator** takes subsets of a dataset (facets) and separately applies the same view specification to each of those facets (as seen with the `column` function above).
+*   The **facet operator** takes subsets of a dataset (facets) and separately applies the same view specification to each of those facets (as seen with the `column` function above).
     elm-vega functions to create faceted views: `column`, `row`, `facet` and `specification`.
 
--   The **layer operator** creates different views of the data but each is layered (superposed) on the same same space, for example a trend line layered on top of a scatterplot.
+*   The **layer operator** creates different views of the data but each is layered (superposed) on the same same space, for example a trend line layered on top of a scatterplot.
     elm-vega functions to create a layered view: `layer` and `asSpec`.
 
--   The **concatenation operator** allows arbitrary views (potentially with different datasets) to be assembled in rows or columns.
+*   The **concatenation operator** allows arbitrary views (potentially with different datasets) to be assembled in rows or columns.
     This allows 'dashboards' to be built.
     elm-vega functions to create concatenated views: `vConcat`, `hConcat` and `asSpec`.
 
--   The **repeat operator** is a concise way of combining multiple views with only small data-driven differences in each view.
+*   The **repeat operator** is a concise way of combining multiple views with only small data-driven differences in each view.
     elm-vega functions for repeated views: `repeat` and `specification`.
 
 ## Composition Example: Precipitation in Seattle (9:40)
@@ -250,8 +251,8 @@ let
             << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , mark Bar []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , bar []
     , enc []
     ]
 ```
@@ -274,9 +275,9 @@ let
         encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
     , precipEnc []
-    , layer [ asSpec [ mark Bar [], barEnc [] ], asSpec [ mark Rule [] ] ]
+    , layer [ asSpec [ bar [], barEnc [] ], asSpec [ rule [] ] ]
     ]
 ```
 
@@ -304,8 +305,8 @@ let
             << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
-    , vConcat [ asSpec [ mark Bar [], bar1Enc [] ], asSpec [ mark Bar [], bar2Enc [] ] ]
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+    , vConcat [ asSpec [ bar [], bar1Enc [] ], asSpec [ bar [], bar2Enc [] ] ]
     ]
 ```
 
@@ -326,7 +327,10 @@ let
             << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
 
     spec =
-        asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+        asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+               , bar []
+               , enc []
+               ]
 in
 toVegaLite
     [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
@@ -348,7 +352,9 @@ let
             << position Y [ PRepeat Row, PmType Quantitative ]
 
     spec =
-        asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Point [], enc [] ]
+        asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+               , point []
+               , enc [] ]
 in
 toVegaLite
     [ repeat
@@ -383,7 +389,7 @@ let
             << column [ FName "weather", FmType Nominal ]
 
     histoSpec =
-        asSpec [ mark Bar [], histoEnc [] ]
+        asSpec [ bar [], histoEnc [] ]
 
     scatterEnc =
         encoding
@@ -391,7 +397,7 @@ let
             << position Y [ PRepeat Row, PmType Quantitative ]
 
     scatterSpec =
-        asSpec [ mark Point [], scatterEnc [] ]
+        asSpec [ point [], scatterEnc [] ]
 
     barEnc =
         encoding
@@ -405,8 +411,8 @@ let
     layerSpec =
         asSpec
             [ layer
-                [ asSpec [ mark Bar [], barEnc [] ]
-                , asSpec [ mark Rule [], annotationEnc [] ]
+                [ asSpec [ bar [], barEnc [] ]
+                , asSpec [ rule [], annotationEnc [] ]
                 ]
             ]
 
@@ -426,7 +432,7 @@ let
             ]
 in
 toVegaLite
-    [ dataFromUrl "data/seattle-weather.csv" []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
     , vConcat
         [ asSpec [ hConcat [ splomSpec, barsSpec ] ]
         , histoSpec
@@ -448,11 +454,11 @@ It would be trivial to concatenate these two specifications to allow a Seattle â
 Interaction is enabled by creating _selections_ that may be combined with the kinds of specifications already described.
 Selections involve three components:
 
--   **Events** are those actions that trigger the interaction such as clicking at a location on screen or pressing a key.
+*   **Events** are those actions that trigger the interaction such as clicking at a location on screen or pressing a key.
 
--   **Points of interest** are the elements of the visualization with which the interaction occurs, for example, a set of points selected on a scatterplot.
+*   **Points of interest** are the elements of the visualization with which the interaction occurs, for example, a set of points selected on a scatterplot.
 
--   **Predicates** (i.e. Boolean functions) identify whether or not something is included in the selection. These need not be limited to only those parts of the visualization directly selected through interaction (see _selection projection_ below).
+*   **Predicates** (i.e. Boolean functions) identify whether or not something is included in the selection. These need not be limited to only those parts of the visualization directly selected through interaction (see _selection projection_ below).
 
 By way of an example consider this colored scatterplot where any point can be selected and all non-selected points are turned grey (_see [examples/walkthrough.html](../../examples/walkthrough.html) for the interactive version of the visualization; below a click is symbolised by the highlighting circle._):
 
@@ -475,8 +481,8 @@ let
             << select "picked" Single []
 in
 toVegaLite
-    [ dataFromUrl "data/cars.json" []
-    , mark Circle []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+    , circle []
     , enc []
     , sel []
     ]
@@ -506,7 +512,10 @@ scatterProps =
                         [ MString "grey" ]
                     ]
     in
-    [ dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+    , circle []
+    , enc []
+    ]
 ```
 
 This allows us to add the selection specification separately.
@@ -678,7 +687,11 @@ let
             << select "picked" Interval [ Encodings [ ChX ] ]
 
     spec =
-        asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+        asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+               , circle []
+               , enc []
+               , sel []
+               ]
 in
 toVegaLite
     [ repeat
@@ -709,7 +722,11 @@ let
             << select "picked" Interval [ BindScales ]
 
     spec =
-        asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+        asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+               , circle []
+               , enc []
+               , sel []
+               ]
 in
 toVegaLite
     [ repeat
@@ -743,7 +760,7 @@ let
                 ]
 
     specContext =
-        asSpec [ width 400, height 80, sel [], mark Area [], encContext [] ]
+        asSpec [ width 400, height 80, sel [], area [], encContext [] ]
 
     encDetail =
         encoding
@@ -756,10 +773,10 @@ let
             << position Y [ PName "price", PmType Quantitative ]
 
     specDetail =
-        asSpec [ width 400, mark Area [], encDetail [] ]
+        asSpec [ width 400, area [], encDetail [] ]
 in
 toVegaLite
-    [ dataFromUrl "data/sp500.csv" []
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/sp500.csv" []
     , vConcat [ specContext, specDetail ]
     ]
 ```
@@ -802,11 +819,12 @@ toVegaLite
     [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
     , specification <|
         asSpec
-            [ dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FoDate "%Y/%m/%d %H:%M" ) ] ]
+            [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"
+                [ Parse [ ( "date", FoDate "%Y/%m/%d %H:%M" ) ] ]
             , hourTrans []
             , layer
-                [ asSpec [ mark Bar [], totalEnc [] ]
-                , asSpec [ sel [], filterTrans [], mark Bar [], selectedEnc [] ]
+                [ asSpec [ bar [], totalEnc [] ]
+                , asSpec [ sel [], filterTrans [], bar [], selectedEnc [] ]
                 ]
             ]
     ]

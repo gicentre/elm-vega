@@ -9201,8 +9201,10 @@ var _gicentre$elm_vega$VegaLite$markLabel = function (mark) {
 			return 'square';
 		case 'Text':
 			return 'text';
-		default:
+		case 'Tick':
 			return 'tick';
+		default:
+			return 'trail';
 	}
 };
 var _gicentre$elm_vega$VegaLite$markInterpolationLabel = function (interp) {
@@ -12007,12 +12009,19 @@ var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, selProp, _p87._0))
 			};
-		default:
+		case 'View':
 			return {
 				ctor: '_Tuple2',
 				_0: 'view',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$viewConfigProperty, _p87._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'trail',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p87._0))
 			};
 	}
 };
@@ -13896,6 +13905,17 @@ var _gicentre$elm_vega$VegaLite$LTRB = F4(
 		return {ctor: 'LTRB', _0: a, _1: b, _2: c, _3: d};
 	});
 var _gicentre$elm_vega$VegaLite$NoClip = {ctor: 'NoClip'};
+var _gicentre$elm_vega$VegaLite$TrailStyle = function (a) {
+	return {ctor: 'TrailStyle', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$trailConfig = function (mps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		_gicentre$elm_vega$VegaLite$configProperty(
+			_gicentre$elm_vega$VegaLite$TrailStyle(mps)));
+};
 var _gicentre$elm_vega$VegaLite$View = function (a) {
 	return {ctor: 'View', _0: a};
 };
@@ -14442,6 +14462,7 @@ var _gicentre$elm_vega$VegaLite$LNumbers = function (a) {
 var _gicentre$elm_vega$VegaLite$LDateTimes = function (a) {
 	return {ctor: 'LDateTimes', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$Trail = {ctor: 'Trail'};
 var _gicentre$elm_vega$VegaLite$Tick = {ctor: 'Tick'};
 var _gicentre$elm_vega$VegaLite$Text = {ctor: 'Text'};
 var _gicentre$elm_vega$VegaLite$Square = {ctor: 'Square'};
@@ -15625,6 +15646,18 @@ var _gicentre$elm_vega$VegaLite$mark = F2(
 			};
 		}
 	});
+var _gicentre$elm_vega$VegaLite$area = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Area);
+var _gicentre$elm_vega$VegaLite$bar = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Bar);
+var _gicentre$elm_vega$VegaLite$circle = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Circle);
+var _gicentre$elm_vega$VegaLite$geoshape = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Geoshape);
+var _gicentre$elm_vega$VegaLite$line = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Line);
+var _gicentre$elm_vega$VegaLite$point = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Point);
+var _gicentre$elm_vega$VegaLite$rect = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Rect);
+var _gicentre$elm_vega$VegaLite$rule = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Rule);
+var _gicentre$elm_vega$VegaLite$square = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Square);
+var _gicentre$elm_vega$VegaLite$textMark = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Text);
+var _gicentre$elm_vega$VegaLite$tick = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Tick);
+var _gicentre$elm_vega$VegaLite$trail = _gicentre$elm_vega$VegaLite$mark(_gicentre$elm_vega$VegaLite$Trail);
 var _gicentre$elm_vega$VegaLite$VLDatasets = {ctor: 'VLDatasets'};
 var _gicentre$elm_vega$VegaLite$datasets = function (namedData) {
 	var extract = function (data) {
@@ -16046,9 +16079,7 @@ var _gicentre$elm_vega$SortTests$sortCustom = function () {
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$mark,
-						_gicentre$elm_vega$VegaLite$Bar,
+					_0: _gicentre$elm_vega$VegaLite$bar(
 						{ctor: '[]'}),
 					_1: {ctor: '[]'}
 				}
@@ -16200,9 +16231,7 @@ var _gicentre$elm_vega$SortTests$sortQuant = F2(
 							{ctor: '[]'}),
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_gicentre$elm_vega$VegaLite$mark,
-								_gicentre$elm_vega$VegaLite$Line,
+							_0: _gicentre$elm_vega$VegaLite$line(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$VegaLite$MStrokeWidth(0.5),

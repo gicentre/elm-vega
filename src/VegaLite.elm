@@ -11,7 +11,7 @@ module VegaLite
         , CInterpolate(..)
         , Channel(..)
         , ClipRect(..)
-        , ConfigurationProperty(..)
+        , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , Cursor(..)
         , Data
         , DataColumn
@@ -40,7 +40,7 @@ module VegaLite
         , LegendOrientation(..)
         , LegendProperty(..)
         , LegendValues(..)
-        , Mark(..)
+        , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
         , MarkChannel(..)
         , MarkInterpolation(..)
         , MarkOrientation(..)
@@ -81,14 +81,17 @@ module VegaLite
         , VLProperty
         , ViewConfig(..)
         , aggregate
+        , area
         , asSpec
         , autosize
         , background
           -- TODO: Make bin private in next major version.
+        , bar
         , bin
         , binAs
         , calculateAs
         , categoricalDomainMap
+        , circle
         , color
         , column
         , combineSpecs
@@ -113,10 +116,12 @@ module VegaLite
         , geoFeatureCollection
         , geometry
         , geometryCollection
+        , geoshape
         , hConcat
         , height
         , hyperlink
         , layer
+        , line
         , lookup
         , lookupAs
         , mark
@@ -125,23 +130,31 @@ module VegaLite
         , opacity
         , order
         , padding
+        , point
         , position
         , projection
+        , rect
         , repeat
         , resolution
         , resolve
         , row
+        , rule
         , select
         , selection
         , shape
         , size
         , specification
+        , square
         , stroke
         , text
+        , textMark
+        , tick
         , timeUnitAs
         , title
         , toVegaLite
         , tooltip
+        , trail
+        , trailConfig
         , transform
         , utc
         , vConcat
@@ -234,15 +247,33 @@ data fields or geospatial coordinates before they are encoded visually.
 
 # Creating the Mark Specification
 
-Types and functions for declaring the type of visual marks used in the visualization.
+Functions and types for declaring the type of visual marks used in the visualization.
+The preferred method of specifying mark types is to call the relevant mark function
+(e.g. `bar`, `line` etc.) rather than `mark Bar`, `mark Line` etc.
 
-@docs mark
-@docs Mark
+@docs area
+@docs bar
+@docs circle
+@docs geoshape
+@docs line
+@docs point
+@docs rect
+@docs rule
+@docs square
+@docs textMark
+@docs tick
+@docs trail
+
 @docs MarkProperty
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
 @docs Cursor
+
+The following are deprecated and will be removed in a future major version release.
+
+@docs mark
+@docs Mark
 
 
 # Creating the Encoding Specification
@@ -489,6 +520,7 @@ to the data and transform options described above.
 @docs configure
 @docs configuration
 @docs ConfigurationProperty
+@docs trailConfig
 @docs Autosize
 @docs Padding
 @docs AxisConfig
@@ -764,6 +796,9 @@ type ConfigurationProperty
     | TitleStyle (List TitleConfig)
     | TimeFormat String
     | View (List ViewConfig)
+      -- Note: Trails appear unusual in having their own top-level config
+      -- (see https://vega.github.io/vega-lite/docs/trail.html#config)
+    | TrailStyle (List MarkProperty)
 
 
 {-| Represents the type of cursor to display. For an explanation of each type,
@@ -1197,6 +1232,7 @@ type Mark
     | Square
     | Text
     | Tick
+    | Trail
 
 
 {-| Mark channel properties used for creating a mark channel encoding. Providing
@@ -1911,6 +1947,18 @@ aggregate ops groups =
     (::) ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] )
 
 
+{-| Specify an area mark. An area mark is used for representing a series of data
+elements, such as in a stacked area chart or streamgraph. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/area.html).
+
+    area [ MStroke "white" ]
+
+-}
+area : List MarkProperty -> ( VLProperty, Spec )
+area =
+    mark Area
+
+
 {-| Create a specification sufficient to define an element in a composed visualization
 such as a superposed layer or juxtaposed facet. Typically a layer will contain a
 full set of specifications that define a visualization with
@@ -1964,6 +2012,18 @@ be transparent.
 background : String -> ( VLProperty, Spec )
 background colour =
     ( VLBackground, JE.string colour )
+
+
+{-| Specify an bar mark. Bars are used for histograms, bar charts etc. for showing
+the magnitude of values in categories. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/bar.html).
+
+    bar [ MFill "black", MStroke "white", MStrokeWeight 2 ]
+
+-}
+bar : List MarkProperty -> ( VLProperty, Spec )
+bar =
+    mark Bar
 
 
 {-| Create a binning transformation to be applied directly to a channel. The type
@@ -2049,6 +2109,17 @@ categoricalDomainMap scaleDomainPairs =
             List.unzip scaleDomainPairs
     in
     [ SDomain (DStrings domain), SRange (RStrings range) ]
+
+
+{-| Specify a circle mark for symbolising points. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/circle.html).
+
+    circle [ MStroke "red", MStrokeWeight 2 ]
+
+-}
+circle : List MarkProperty -> ( VLProperty, Spec )
+circle =
+    mark Circle
 
 
 {-| Encode a color channel. The first parameter is a list of mark channel properties
@@ -2629,6 +2700,18 @@ geometry gType properties =
             ]
 
 
+{-| Specify a an arbitrary shape determined by georaphically referenced
+coordinates. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/geoshape.html).
+
+    geoshape [ MFill "blue", MStroke "white" ]
+
+-}
+geoshape : List MarkProperty -> ( VLProperty, Spec )
+geoshape =
+    mark Geoshape
+
+
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
 
     let
@@ -2694,6 +2777,17 @@ hyperlink hyperProps =
 layer : List Spec -> ( VLProperty, Spec )
 layer specs =
     ( VLLayer, JE.list specs )
+
+
+{-| Specify a line mark for symbolising a sequence of values. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/line.html).
+
+    line [MStroke "red", MStrokeDash [1, 2] ]
+
+-}
+line : List MarkProperty -> ( VLProperty, Spec )
+line =
+    mark Line
 
 
 {-| Perform a lookup of named fields between two data sources. This allows you to
@@ -2894,6 +2988,17 @@ padding pad =
     ( VLPadding, paddingSpec pad )
 
 
+{-| Specify a point mark for symbolising a data point with a symbol. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/point.html).
+
+    point [ MFill "black", MStroke "red" ]
+
+-}
+point : List MarkProperty -> ( VLProperty, Spec )
+point =
+    mark Point
+
+
 {-| Encode a position channel. The first parameter identifies the channel,
 the second a list of qualifying options. Usually these will include at least the
 name of the data field associated with it and its measurement type (either the field
@@ -2966,6 +3071,17 @@ This is useful when using the `Geoshape` mark. For further details see the
 projection : List ProjectionProperty -> ( VLProperty, Spec )
 projection pProps =
     ( VLProjection, JE.object (List.map projectionProperty pProps) )
+
+
+{-| Specify an arbitrary rectangle. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rect.html).
+
+    rect [ MFill "black", MStroke "red" ]
+
+-}
+rect : List MarkProperty -> ( VLProperty, Spec )
+rect =
+    mark Rect
 
 
 {-| Define the fields that will be used to compose rows and columns of a set of
@@ -3050,6 +3166,18 @@ row fFields =
     (::) ( "row", JE.object (List.map facetChannelProperty fFields) )
 
 
+{-| Specify a line seqment connecting two vertices. Can either be used to span the
+entire width or height of a view, or to connect two arbitrary positions. For details
+see the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rule.html).
+
+    rule [ MStroke "red" ]
+
+-}
+rule : List MarkProperty -> ( VLProperty, Spec )
+rule =
+    mark Rule
+
+
 {-| Create a single named selection that may be applied to a data query or transformation.
 The first two parameters specify the name to be given to the selection for later reference
 and the type of selection made. The third allows additional selection options to
@@ -3124,6 +3252,17 @@ specification spec =
     ( VLSpec, spec )
 
 
+{-| Specify a square mark for symbolising points. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/square.html).
+
+    square [ MStroke "red", MStrokeWeight 2 ]
+
+-}
+square : List MarkProperty -> ( VLProperty, Spec )
+square =
+    mark Square
+
+
 {-| Encode a stroke channel. This acts in a similar way to encoding by `color` but
 only affects the exterior boundary of marks. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by stroke.
@@ -3160,6 +3299,28 @@ for formatting the appearance of the text.
 text : List TextChannel -> List LabelledSpec -> List LabelledSpec
 text tDefs =
     (::) ( "text", List.concatMap textChannelProperty tDefs |> JE.object )
+
+
+{-| Specify a text mark to be displayed at some point location. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/text.html).
+
+    textMark [ MFontSize 18 ]
+
+-}
+textMark : List MarkProperty -> ( VLProperty, Spec )
+textMark =
+    mark Text
+
+
+{-| Specify a short line mark for symbolising point locations. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/tick.html).
+
+    tick [ MStroke "blue", MStrokeWeight 0.5 ]
+
+-}
+tick : List MarkProperty -> ( VLProperty, Spec )
+tick =
+    mark Tick
 
 
 {-| Creates a new data field based on the given temporal binning. Unlike the
@@ -3260,6 +3421,31 @@ toVegaLite spec =
     ( "$schema", JE.string "https://vega.github.io/schema/vega-lite/v2.json" )
         :: List.map (\( s, v ) -> ( vlPropertyLabel s, v )) spec
         |> JE.object
+
+
+{-| Specify a trail mark. A trail is a line that can vary in thickness along its
+length. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/trail.html).
+
+    trail [ MInterpolate StepAfter ]
+
+-}
+trail : List MarkProperty -> ( VLProperty, Spec )
+trail =
+    mark Trail
+
+
+{-| Specify the style for all trail marks.
+
+    config =
+        configure << trailConfig [ MOpacity 0.5, MStrokeDash [ 1, 2 ] ]
+
+-}
+trailConfig : List MarkProperty -> List LabelledSpec -> List LabelledSpec
+trailConfig mps =
+    -- NOTE: This is the first config option to have an opaque type and public function.
+    -- In preparation for next major version where we will replace many types with functions.
+    (::) (configProperty (TrailStyle mps))
 
 
 {-| Create a single transform from a list of transformation specifications. Note
@@ -3920,6 +4106,9 @@ configProperty configProp =
 
         View vcs ->
             ( "view", JE.object (List.map viewConfigProperty vcs) )
+
+        TrailStyle mps ->
+            ( "trail", JE.object (List.map markProperty mps) )
 
 
 cursorLabel : Cursor -> String
@@ -4787,6 +4976,9 @@ markLabel mark =
 
         Tick ->
             "tick"
+
+        Trail ->
+            "trail"
 
 
 markOrientationLabel : MarkOrientation -> String

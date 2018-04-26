@@ -29,13 +29,11 @@ hyperlink1 =
                 << color [ MString "white" ]
                 << size [ MNumber 16 ]
 
-        --<< hyperlink [ HName "url", HmType Nominal ]
         symbolSpec =
-            asSpec [ mark Circle [ MCursor CPointer ], encCircle [] ]
+            asSpec [ circle [ MCursor CPointer ], encCircle [] ]
 
         labelSpec =
-            --  asSpec [ mark Text [ MCursor CPointer ], encLabel [] ]
-            asSpec [ mark Text [], encLabel [] ]
+            asSpec [ textMark [], encLabel [] ]
     in
     toVegaLite
         [ data [], layer [ symbolSpec, labelSpec ] ]
@@ -53,11 +51,7 @@ hyperlink2 =
                 << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
                 << hyperlink [ HString "http://www.imdb.com" ]
     in
-    toVegaLite
-        [ data
-        , mark Point [ MCursor CPointer ]
-        , enc []
-        ]
+    toVegaLite [ data, point [ MCursor CPointer ], enc [] ]
 
 
 hyperlink3 : Spec
@@ -81,11 +75,7 @@ hyperlink3 =
                         [ HString "https://www.rottentomatoes.com" ]
                     ]
     in
-    toVegaLite
-        [ data
-        , mark Point [ MCursor CPointer ]
-        , enc []
-        ]
+    toVegaLite [ data, point [ MCursor CPointer ], enc [] ]
 
 
 

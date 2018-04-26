@@ -25,7 +25,7 @@ basic1 =
                 << position X [ PName "a", PmType Ordinal ]
                 << position Y [ PName "b", PmType Quantitative ]
     in
-    toVegaLite [ des, data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], bar [], enc [] ]
 
 
 basic2 : Spec
@@ -42,7 +42,7 @@ basic2 =
                 << position X [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "population" ] ]
                 << position Y [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
     in
-    toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [] ]
 
 
 basic3 : Spec
@@ -56,7 +56,7 @@ basic3 =
                 << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [] ]
                 << position Y [ PmType Quantitative, PAggregate Count ]
     in
-    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], bar [], enc [] ]
 
 
 basic4 : Spec
@@ -77,7 +77,7 @@ basic4 =
                 << position X [ PName "start", PmType Quantitative ]
                 << position X2 [ PName "end", PmType Quantitative ]
     in
-    toVegaLite [ des, data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], bar [], enc [] ]
 
 
 basic5 : Spec
@@ -103,7 +103,7 @@ basic5 =
                 << configuration (Axis [ DomainWidth 1 ])
                 << configuration (View [ Stroke Nothing ])
     in
-    toVegaLite [ des, dataFromUrl "data/population.json" [], mark Bar [], trans [], enc [], config [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [], config [] ]
 
 
 basic6 : Spec
@@ -117,7 +117,7 @@ basic6 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
 
 basic7 : Spec
@@ -131,7 +131,7 @@ basic7 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], circle [], enc [] ]
 
 
 basic8 : Spec
@@ -146,7 +146,7 @@ basic8 =
                 << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
                 << size [ MAggregate Count, MmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], circle [], enc [] ]
 
 
 basic9 : Spec
@@ -162,7 +162,7 @@ basic9 =
                 << color [ MName "Origin", MmType Nominal ]
                 << shape [ MName "Origin", MmType Nominal ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
 
 basic10 : Spec
@@ -189,7 +189,7 @@ basic10 =
                         [ MString "rgb(76,120,168)" ]
                     ]
     in
-    toVegaLite [ des, config [], data, mark Point [], enc [] ]
+    toVegaLite [ des, config [], data, point [], enc [] ]
 
 
 basic11 : Spec
@@ -204,7 +204,7 @@ basic11 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
                 << size [ MName "Acceleration", MmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
 
 basic12 : Spec
@@ -228,7 +228,7 @@ basic12 =
         , width 500
         , height 300
         , dataFromUrl "data/gapminder-health-income.csv" []
-        , mark Circle []
+        , circle []
         , enc []
         , sel []
         ]
@@ -245,7 +245,7 @@ basic13 =
                 << position X [ PName "Horsepower", PmType Quantitative ]
                 << position Y [ PName "Cylinders", PmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Tick [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], tick [], enc [] ]
 
 
 basic14 : Spec
@@ -262,7 +262,7 @@ basic14 =
                 << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
                 << position Y [ PName "price", PmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [], enc [] ]
 
 
 basic15 : Spec
@@ -277,7 +277,7 @@ basic15 =
                 << position Y [ PName "price", PmType Quantitative ]
                 << color [ MName "symbol", MmType Nominal ]
     in
-    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], line [], enc [] ]
 
 
 basic16 : Spec
@@ -292,7 +292,7 @@ basic16 =
                 << position Y [ PName "yield", PmType Quantitative, PAggregate Median ]
                 << color [ MName "site", MmType Nominal ]
     in
-    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Line [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], line [], enc [] ]
 
 
 basic17 : Spec
@@ -309,7 +309,7 @@ basic17 =
                 << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
                 << position Y [ PName "price", PmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], mark Line [ MInterpolate StepAfter ], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [ MInterpolate StepAfter ], enc [] ]
 
 
 basic18 : Spec
@@ -328,7 +328,7 @@ basic18 =
         , width 300
         , height 200
         , dataFromUrl "data/unemployment-across-industries.json" []
-        , mark Area []
+        , area []
         , enc []
         ]
 
@@ -345,7 +345,7 @@ basic19 =
                 << position Y [ PName "Origin", PmType Nominal ]
                 << color [ MName "Horsepower", MmType Quantitative, MAggregate Mean ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Rect [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], rect [], enc [] ]
 
 
 basic20 : Spec
@@ -370,7 +370,7 @@ basic20 =
         , width 300
         , height 200
         , dataFromUrl "data/movies.json" []
-        , mark Rect []
+        , rect []
         , enc []
         , config []
         ]
@@ -388,7 +388,7 @@ basic21 =
                 << position Y [ PName "time", PmType Ordinal, PTimeUnit Day ]
                 << size [ MName "count", MmType Quantitative, MAggregate Sum ]
     in
-    toVegaLite [ des, dataFromUrl "data/github.csv" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/github.csv" [], circle [], enc [] ]
 
 
 basic22 : Spec
@@ -419,7 +419,7 @@ basic22 =
         , height 400
         , dataFromUrl "https://vega.github.io/vega-lite/data/disasters.csv" []
         , trans []
-        , mark Circle [ MOpacity 0.8, MStroke "black", MStrokeWidth 1 ]
+        , circle [ MOpacity 0.8, MStroke "black", MStrokeWidth 1 ]
         , enc []
         ]
 
@@ -448,7 +448,7 @@ stack1 =
                     , MLegend [ LTitle "Weather type" ]
                     ]
     in
-    toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], bar [], enc [] ]
 
 
 stack2 : Spec
@@ -463,7 +463,7 @@ stack2 =
                 << position Y [ PName "variety", PmType Nominal ]
                 << color [ MName "site", MmType Nominal ]
     in
-    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], bar [], enc [] ]
 
 
 stack3 : Spec
@@ -483,7 +483,7 @@ stack3 =
                 << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Population" ], PStack StNormalize ]
                 << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
     in
-    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], bar [], enc [] ]
 
 
 stack4 : Spec
@@ -498,7 +498,7 @@ stack4 =
                 << position Y [ PName "count", PmType Quantitative, PAggregate Sum ]
                 << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
     in
-    toVegaLite [ des, dataFromUrl "data/unemployment-across-industries.json" [], mark Area [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/unemployment-across-industries.json" [], area [], enc [] ]
 
 
 stack5 : Spec
@@ -518,7 +518,7 @@ stack5 =
         , width 300
         , height 200
         , dataFromUrl "data/unemployment-across-industries.json" []
-        , mark Area []
+        , area []
         , enc []
         ]
 
@@ -540,7 +540,7 @@ stack6 =
         , width 300
         , height 200
         , dataFromUrl "data/unemployment-across-industries.json" []
-        , mark Area []
+        , area []
         , enc []
         ]
 
@@ -563,7 +563,7 @@ stack7 =
                 << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#e377c2", "#1f77b4" ]) ] ]
                 << opacity [ MNumber 0.7 ]
     in
-    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], bar [], enc [] ]
 
 
 stack8 : Spec
@@ -601,7 +601,7 @@ stack8 =
                                 ]
                     ]
     in
-    toVegaLite [ des, data [], mark Bar [], enc [] ]
+    toVegaLite [ des, data [], bar [], enc [] ]
 
 
 trellis1 : Spec
@@ -617,7 +617,7 @@ trellis1 =
                 << opacity [ MNumber 1 ]
                 << column [ FName "Series", FmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/anscombe.json" [], mark Circle [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/anscombe.json" [], circle [], enc [] ]
 
 
 trellis2 : Spec
@@ -642,7 +642,7 @@ trellis2 =
         [ des
         , dataFromUrl "data/population.json" []
         , trans []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -660,7 +660,7 @@ trellis3 =
                 << color [ MName "site", MmType Nominal ]
                 << column [ FName "year", FmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], bar [], enc [] ]
 
 
 trellis4 : Spec
@@ -675,7 +675,7 @@ trellis4 =
                 << position Y [ PName "US_DVD_Sales", PmType Quantitative ]
                 << column [ FName "MPAA_Rating", FmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/movies.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], point [], enc [] ]
 
 
 trellis5 : Spec
@@ -690,7 +690,7 @@ trellis5 =
                 << position Y [ PmType Quantitative, PAggregate Count ]
                 << row [ FName "Origin", FmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], bar [], enc [] ]
 
 
 trellis6 : Spec
@@ -706,7 +706,7 @@ trellis6 =
                 << color [ MName "year", MmType Nominal ]
                 << row [ FName "site", FmType Ordinal ]
     in
-    toVegaLite [ des, dataFromUrl "data/barley.json" [], mark Point [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/barley.json" [], point [], enc [] ]
 
 
 trellis7 : Spec
@@ -725,7 +725,7 @@ trellis7 =
                 << color [ MName "symbol", MmType Nominal, MLegend [] ]
                 << row [ FName "symbol", FmType Nominal, FHeader [ HTitle "Company" ] ]
     in
-    toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], mark Area [], enc [] ]
+    toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], area [], enc [] ]
 
 
 layer1 : Spec
@@ -745,10 +745,10 @@ layer1 =
                 << position Y [ PName "a", PmType Ordinal ]
 
         specBar =
-            asSpec [ mark Bar [] ]
+            asSpec [ bar [] ]
 
         specText =
-            asSpec [ mark Text [ MStyle [ "label" ] ], encoding (text [ TName "b", TmType Quantitative ] []) ]
+            asSpec [ textMark [ MStyle [ "label" ] ], encoding (text [ TName "b", TmType Quantitative ] []) ]
 
         config =
             configure << configuration (NamedStyle "label" [ MAlign AlignLeft, MBaseline AlignMiddle, MdX 3 ])
@@ -773,7 +773,7 @@ layer2 =
                 << position Y [ PName "Value", PmType Quantitative ]
 
         specBar =
-            asSpec [ mark Bar [], encBar [] ]
+            asSpec [ bar [], encBar [] ]
 
         trans =
             transform
@@ -788,7 +788,7 @@ layer2 =
                 << color [ MString "#e45755" ]
 
         specUpperBar =
-            asSpec [ trans [], mark Bar [], encUpperBar [] ]
+            asSpec [ trans [], bar [], encUpperBar [] ]
 
         layer0 =
             asSpec [ data [], layer [ specBar, specUpperBar ] ]
@@ -798,14 +798,14 @@ layer2 =
                 << dataRow [ ( "ThresholdValue", Number 300 ), ( "Threshold", Str "hazardous" ) ]
 
         specRule =
-            asSpec [ mark Rule [], encRule [] ]
+            asSpec [ rule [], encRule [] ]
 
         encRule =
             encoding
                 << position Y [ PName "ThresholdValue", PmType Quantitative ]
 
         specText =
-            asSpec [ mark Text [ MAlign AlignLeft, MdX 215, MdY -5 ], encText [] ]
+            asSpec [ textMark [ MAlign AlignLeft, MdX 215, MdY -5 ], encText [] ]
 
         encText =
             encoding
@@ -830,7 +830,7 @@ layer3 =
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
 
         specBar =
-            asSpec [ mark Bar [], encBar [] ]
+            asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
@@ -839,7 +839,7 @@ layer3 =
                 << size [ MNumber 3 ]
 
         specLine =
-            asSpec [ mark Rule [], encLine [] ]
+            asSpec [ rule [], encLine [] ]
     in
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], layer [ specBar, specLine ] ]
 
@@ -860,7 +860,7 @@ layer4 =
                 << color [ MName "*", MmType Quantitative, MAggregate Count ]
 
         specRect =
-            asSpec [ mark Rect [], encRect [] ]
+            asSpec [ rect [], encRect [] ]
 
         encText =
             encoding
@@ -868,7 +868,7 @@ layer4 =
                 << text [ TName "*", TmType Quantitative, TAggregate Count ]
 
         specText =
-            asSpec [ mark Text [], encText [] ]
+            asSpec [ textMark [], encText [] ]
 
         config =
             configure
@@ -904,7 +904,7 @@ layer5 =
                 << position Y2 [ PName "lowerBox", PmType Quantitative ]
 
         specLWhisker =
-            asSpec [ mark Rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
+            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
@@ -912,7 +912,7 @@ layer5 =
                 << position Y2 [ PName "upperWhisker", PmType Quantitative ]
 
         specUWhisker =
-            asSpec [ mark Rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
+            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
 
         encBox =
             encoding
@@ -921,7 +921,7 @@ layer5 =
                 << size [ MNumber 5 ]
 
         specBox =
-            asSpec [ mark Bar [ MStyle [ "box" ] ], encBox [] ]
+            asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
@@ -930,7 +930,7 @@ layer5 =
                 << size [ MNumber 5 ]
 
         specBoxMid =
-            asSpec [ mark Tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
+            asSpec [ tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
     in
     toVegaLite
         [ des
@@ -963,7 +963,7 @@ layer6 =
                 << position Y2 [ PName "lowerBox", PmType Quantitative ]
 
         specLWhisker =
-            asSpec [ mark Rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
+            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
@@ -972,7 +972,7 @@ layer6 =
 
         specUWhisker =
             asSpec
-                [ mark Rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
+                [ rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
 
         encBox =
             encoding
@@ -981,7 +981,7 @@ layer6 =
                 << size [ MNumber 5 ]
 
         specBox =
-            asSpec [ mark Bar [ MStyle [ "box" ] ], encBox [] ]
+            asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
@@ -991,7 +991,7 @@ layer6 =
 
         specBoxMid =
             asSpec
-                [ mark Tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
+                [ tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
     in
     toVegaLite
         [ des
@@ -1035,7 +1035,7 @@ layer7 =
                 << color [ MName "isIncrease", MmType Nominal, MLegend [], MScale [ SRange (RStrings [ "#ae1325", "#06982d" ]) ] ]
 
         specLine =
-            asSpec [ mark Rule [], encLine [] ]
+            asSpec [ rule [], encLine [] ]
 
         encBar =
             encoding
@@ -1046,7 +1046,7 @@ layer7 =
                 << color [ MName "isIncrease", MmType Nominal, MLegend [] ]
 
         specBar =
-            asSpec [ mark Bar [], encBar [] ]
+            asSpec [ bar [], encBar [] ]
     in
     toVegaLite [ des, width 320, data [], trans [], layer [ specLine, specBar ] ]
 
@@ -1066,7 +1066,7 @@ layer8 =
                 << color [ MString "black" ]
 
         specPoints =
-            asSpec [ mark Point [ MFilled True ], encPoints [] ]
+            asSpec [ point [ MFilled True ], encPoints [] ]
 
         encCIs =
             encoding
@@ -1074,7 +1074,7 @@ layer8 =
                 << position X2 [ PName "yield", PmType Quantitative, PAggregate CI1 ]
 
         specCIs =
-            asSpec [ mark Rule [], encCIs [] ]
+            asSpec [ rule [], encCIs [] ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], encVariety [], layer [ specPoints, specCIs ] ]
 
@@ -1100,7 +1100,7 @@ layer9 =
                 << color [ MString "black" ]
 
         specMeans =
-            asSpec [ mark Point [ MFilled True ], encMeans [] ]
+            asSpec [ point [ MFilled True ], encMeans [] ]
 
         encStdevs =
             encoding
@@ -1108,7 +1108,7 @@ layer9 =
                 << position X2 [ PName "lower", PmType Quantitative ]
 
         specStdevs =
-            asSpec [ mark Rule [], encStdevs [] ]
+            asSpec [ rule [], encStdevs [] ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], trans [], encVariety [], layer [ specMeans, specStdevs ] ]
 
@@ -1125,7 +1125,7 @@ layer10 =
                 << position Y [ PmType Quantitative, PAggregate Count ]
 
         specBars =
-            asSpec [ mark Bar [], encBars [] ]
+            asSpec [ bar [], encBars [] ]
 
         encMean =
             encoding
@@ -1134,7 +1134,7 @@ layer10 =
                 << size [ MNumber 5 ]
 
         specMean =
-            asSpec [ mark Rule [], encMean [] ]
+            asSpec [ rule [], encMean [] ]
     in
     toVegaLite [ des, dataFromUrl "data/movies.json" [], layer [ specBars, specMean ] ]
 
@@ -1151,7 +1151,7 @@ layer11 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
 
         specPoints =
-            asSpec [ mark Point [], encPoints [] ]
+            asSpec [ point [], encPoints [] ]
 
         trans =
             transform
@@ -1163,7 +1163,7 @@ layer11 =
             encoding << position Y [ PName "mean_MPG", PmType Quantitative ]
 
         specMean =
-            asSpec [ mark Rule [], encMean [] ]
+            asSpec [ rule [], encMean [] ]
 
         encRect =
             encoding
@@ -1172,7 +1172,7 @@ layer11 =
                 << opacity [ MNumber 0.2 ]
 
         specRect =
-            asSpec [ mark Rect [], encRect [] ]
+            asSpec [ rect [], encRect [] ]
 
         specSpread =
             asSpec [ trans [], layer [ specMean, specRect ] ]
@@ -1196,14 +1196,14 @@ layer12 =
                 << opacity [ MNumber 0.3 ]
 
         specBand =
-            asSpec [ mark Area [], encBand [] ]
+            asSpec [ area [], encBand [] ]
 
         encLine =
             encoding
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PAggregate Mean ]
 
         specLine =
-            asSpec [ mark Line [], encLine [] ]
+            asSpec [ line [], encLine [] ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], encTime [], layer [ specBand, specLine ] ]
 
@@ -1232,7 +1232,7 @@ layer13 =
                 << color [ MName "event", MmType Nominal ]
 
         specRects =
-            asSpec [ highlights [], mark Rect [], encRects [] ]
+            asSpec [ highlights [], rect [], encRects [] ]
 
         encPopulation =
             encoding
@@ -1241,10 +1241,10 @@ layer13 =
                 << color [ MString "#333" ]
 
         specLine =
-            asSpec [ mark Line [], encPopulation [] ]
+            asSpec [ line [], encPopulation [] ]
 
         specPoints =
-            asSpec [ mark Point [], encPopulation [] ]
+            asSpec [ point [], encPopulation [] ]
     in
     toVegaLite [ des, width 500, data [], layer [ specRects, specLine, specPoints ] ]
 
@@ -1270,7 +1270,7 @@ layer14 =
                 << color [ MString "#db646f" ]
 
         specLine =
-            asSpec [ mark Line [], encLine [] ]
+            asSpec [ line [], encLine [] ]
 
         encPoints =
             encoding
@@ -1280,7 +1280,7 @@ layer14 =
                 << opacity [ MNumber 1 ]
 
         specPoints =
-            asSpec [ mark Point [ MFilled True ], encPoints [] ]
+            asSpec [ point [ MFilled True ], encPoints [] ]
     in
     toVegaLite [ des, dataFromUrl "data/countries.json" [], trans [], encCountry [], layer [ specLine, specPoints ] ]
 
@@ -1299,7 +1299,7 @@ layer15 =
                 << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean, PAxis [ AxGrid False ] ]
 
         specBar =
-            asSpec [ mark Bar [], encBar [] ]
+            asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
@@ -1307,7 +1307,7 @@ layer15 =
                 << color [ MString "firebrick" ]
 
         specLine =
-            asSpec [ mark Line [], encLine [] ]
+            asSpec [ line [], encLine [] ]
 
         res =
             resolve
@@ -1339,7 +1339,7 @@ layer16 =
                 << opacity [ MNumber 0.6 ]
 
         specLower =
-            asSpec [ mark Area [ MClip True ], encLower [] ]
+            asSpec [ area [ MClip True ], encLower [] ]
 
         encUpper =
             encoding
@@ -1347,7 +1347,7 @@ layer16 =
                 << opacity [ MNumber 0.3 ]
 
         specUpper =
-            asSpec [ trans [], mark Area [ MClip True ], encUpper [] ]
+            asSpec [ trans [], area [ MClip True ], encUpper [] ]
 
         config =
             configure
@@ -1369,10 +1369,10 @@ layer17 =
                 << order [ OName "year", OmType Temporal ]
 
         specLine =
-            asSpec [ mark Line [] ]
+            asSpec [ line [] ]
 
         specPoint =
-            asSpec [ mark Point [ MFilled True ] ]
+            asSpec [ point [ MFilled True ] ]
     in
     toVegaLite [ des, dataFromUrl "data/driving.json" [], enc [], layer [ specLine, specPoint ] ]
 
@@ -1412,7 +1412,7 @@ layer18 =
                 << color [ MName "decade", MmType Nominal, MLegend [] ]
 
         specLine =
-            asSpec [ mark Line [ MOrient Vertical ], encLine [] ]
+            asSpec [ line [ MOrient Vertical ], encLine [] ]
 
         transTextMin =
             transform
@@ -1425,7 +1425,7 @@ layer18 =
                 << text [ TName "aggregated.year", TmType Nominal ]
 
         specTextMin =
-            asSpec [ transTextMin [], mark Text [ MAlign AlignLeft, MBaseline AlignTop, MdX 3, MdY 1 ], encTextMin [] ]
+            asSpec [ transTextMin [], textMark [ MAlign AlignLeft, MBaseline AlignTop, MdX 3, MdY 1 ], encTextMin [] ]
 
         transTextMax =
             transform
@@ -1438,7 +1438,7 @@ layer18 =
                 << text [ TName "aggregated.year", TmType Nominal ]
 
         specTextMax =
-            asSpec [ transTextMax [], mark Text [ MAlign AlignLeft, MBaseline AlignBottom, MdX 3, MdY 1 ], encTextMax [] ]
+            asSpec [ transTextMax [], textMark [ MAlign AlignLeft, MBaseline AlignBottom, MdX 3, MdY 1 ], encTextMax [] ]
 
         config =
             configure << configuration (View [ Stroke Nothing ])
@@ -1470,7 +1470,7 @@ comp1 =
                 << opacity [ MNumber 0.2 ]
 
         spec1 =
-            asSpec [ mark Line [], enc1 [] ]
+            asSpec [ line [], enc1 [] ]
 
         enc2 =
             encoding
@@ -1479,7 +1479,7 @@ comp1 =
                 << color [ MName "location", MmType Nominal ]
 
         spec2 =
-            asSpec [ mark Line [], enc2 [] ]
+            asSpec [ line [], enc2 [] ]
 
         spec =
             asSpec [ layer [ spec1, spec2 ] ]
@@ -1502,7 +1502,7 @@ comp2 =
                 << color [ MName "Origin", MmType Nominal ]
 
         spec =
-            asSpec [ dataFromUrl "data/cars.json" [], mark Bar [], enc [] ]
+            asSpec [ dataFromUrl "data/cars.json" [], bar [], enc [] ]
     in
     toVegaLite
         [ repeat [ ColumnFields [ "Horsepower", "Miles_per_Gallon", "Acceleration" ] ]
@@ -1520,7 +1520,7 @@ comp3 =
                 << color [ MName "Origin", MmType Nominal, MLegend [] ]
 
         spec =
-            asSpec [ mark Bar [], enc [] ]
+            asSpec [ bar [], enc [] ]
     in
     toVegaLite
         [ dataFromUrl "data/cars.json" []
@@ -1538,7 +1538,7 @@ geo1 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
-        , mark Geoshape []
+        , geoshape []
         , encoding <| color [ MName "rate", MmType Quantitative ] []
         ]
 
@@ -1560,7 +1560,7 @@ geo2 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
-        , mark Circle []
+        , circle []
         , enc []
         ]
 
@@ -1574,7 +1574,7 @@ geo3 =
         backdropSpec =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#eee" ] []
                 ]
 
@@ -1588,7 +1588,7 @@ geo3 =
         overlaySpec =
             asSpec
                 [ dataFromUrl "data/airports.csv" []
-                , mark Circle []
+                , circle []
                 , overlayEnc []
                 ]
     in
@@ -1607,7 +1607,7 @@ geo4 =
         backdropSpec =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#eee" ] []
                 ]
 
@@ -1621,7 +1621,7 @@ geo4 =
         airportsSpec =
             asSpec
                 [ dataFromUrl "data/airports.csv" []
-                , mark Circle []
+                , circle []
                 , airportsEnc []
                 ]
 
@@ -1646,7 +1646,7 @@ geo4 =
             asSpec
                 [ dataFromUrl "data/flights-airport.csv" []
                 , trans []
-                , mark Rule []
+                , rule []
                 , flightsEnc []
                 ]
     in
@@ -1674,7 +1674,7 @@ geo5 =
                 , dataFromUrl "data/population_engineers_hurricanes.csv" []
                 , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
                 , projection [ PType AlbersUsa ]
-                , mark Geoshape []
+                , geoshape []
                 , enc []
                 ]
     in
@@ -1695,7 +1695,7 @@ geo6 =
         backdropSpec =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#ccc" ] []
                 ]
 
@@ -1708,7 +1708,7 @@ geo6 =
         overlaySpec =
             asSpec
                 [ dataFromUrl "data/us-state-capitals.json" []
-                , mark Text []
+                , textMark []
                 , overlayEnc []
                 ]
     in
@@ -1727,7 +1727,7 @@ geo7 =
         backdropSpec =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
-                , mark Geoshape []
+                , geoshape []
                 , encoding <| color [ MString "#eee" ] []
                 ]
 
@@ -1741,7 +1741,7 @@ geo7 =
         airportsSpec =
             asSpec
                 [ dataFromUrl "data/airports.csv" []
-                , mark Circle []
+                , circle []
                 , airportsEnc []
                 ]
 
@@ -1764,7 +1764,7 @@ geo7 =
             asSpec
                 [ itinerary []
                 , trans []
-                , mark Line []
+                , line []
                 , flightsEnc []
                 ]
     in
@@ -1793,7 +1793,7 @@ geo8 =
         , dataFromUrl "data/income.json" []
         , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
         , projection [ PType AlbersUsa ]
-        , mark Geoshape []
+        , geoshape []
         , enc []
         ]
 
@@ -1820,7 +1820,7 @@ geo9 =
         polySpec =
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , encoding <| color [ MString "#ddc" ] []
                 ]
 
@@ -1837,7 +1837,7 @@ geo9 =
                 << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
 
         labelSpec =
-            asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+            asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
 
         tubeEnc =
             encoding
@@ -1851,7 +1851,7 @@ geo9 =
         routeSpec =
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/londonTubeLines.json" [ TopojsonFeature "line" ]
-                , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+                , geoshape [ MFilled False, MStrokeWidth 2 ]
                 , tubeEnc []
                 ]
     in
@@ -1882,7 +1882,7 @@ interactive1 =
                         [ MString "grey" ]
                     ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], sel [], enc [] ]
 
 
 interactive2 : Spec
@@ -1904,7 +1904,7 @@ interactive2 =
                         [ MNumber 50 ]
                     ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], sel [], enc [] ]
 
 
 interactive3 : Spec
@@ -1922,7 +1922,7 @@ interactive3 =
                 << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PScale [ SDomain (DNumbers [ 20, 40 ]) ] ]
                 << size [ MName "Cylinders", MmType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/cars.json" [], mark Circle [], sel [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/cars.json" [], circle [], sel [], enc [] ]
 
 
 interactive4 : Spec
@@ -1960,7 +1960,7 @@ interactive4 =
                     ]
 
         spec1 =
-            asSpec [ sel1 [], mark Circle [], enc1 [] ]
+            asSpec [ sel1 [], circle [], enc1 [] ]
 
         trans2 =
             transform
@@ -1972,7 +1972,7 @@ interactive4 =
                 << size [ MNumber 100 ]
 
         spec2 =
-            asSpec [ trans2 [], mark Circle [], enc2 [] ]
+            asSpec [ trans2 [], circle [], enc2 [] ]
     in
     toVegaLite
         [ des
@@ -2005,7 +2005,7 @@ interactive5 =
                     ]
 
         spec1 =
-            asSpec [ sel [], mark Bar [], enc1 [] ]
+            asSpec [ sel [], bar [], enc1 [] ]
 
         trans =
             transform
@@ -2017,7 +2017,7 @@ interactive5 =
                 << size [ MNumber 3 ]
 
         spec2 =
-            asSpec [ des, trans [], mark Rule [], enc2 [] ]
+            asSpec [ des, trans [], rule [], enc2 [] ]
     in
     toVegaLite
         [ dataFromUrl "data/seattle-weather.csv" []
@@ -2041,7 +2041,7 @@ interactive6 =
                 << position Y [ PName "price", PmType Quantitative ]
 
         spec1 =
-            asSpec [ width 500, mark Area [], enc1 [] ]
+            asSpec [ width 500, area [], enc1 [] ]
 
         enc2 =
             encoding
@@ -2049,7 +2049,7 @@ interactive6 =
                 << position Y [ PName "price", PmType Quantitative, PAxis [ AxTickCount 3, AxGrid False ] ]
 
         spec2 =
-            asSpec [ width 480, height 60, sel [], mark Area [], enc2 [] ]
+            asSpec [ width 480, height 60, sel [], area [], enc2 [] ]
     in
     toVegaLite [ des, dataFromUrl "data/sp500.csv" [], vConcat [ spec1, spec2 ] ]
 
@@ -2077,10 +2077,10 @@ interactive7 =
                 << position Y [ PAggregate Count, PmType Quantitative ]
 
         spec1 =
-            asSpec [ sel [], mark Bar [] ]
+            asSpec [ sel [], bar [] ]
 
         spec2 =
-            asSpec [ selTrans [], mark Bar [], encoding (color [ MString "goldenrod" ] []) ]
+            asSpec [ selTrans [], bar [], encoding (color [ MString "goldenrod" ] []) ]
 
         spec =
             asSpec
@@ -2131,7 +2131,7 @@ interactive8 =
                     ]
 
         spec =
-            asSpec [ dataFromUrl "data/cars.json" [], mark Point [], sel [], enc [] ]
+            asSpec [ dataFromUrl "data/cars.json" [], point [], sel [], enc [] ]
     in
     toVegaLite
         [ des
@@ -2160,7 +2160,7 @@ interactive9 =
                 << color [ MAggregate Count, MmType Quantitative, MLegend [ LTitle "" ] ]
 
         spec1 =
-            asSpec [ width 300, mark Rect [], enc1 [] ]
+            asSpec [ width 300, rect [], enc1 [] ]
 
         enc2 =
             encoding
@@ -2168,7 +2168,7 @@ interactive9 =
                 << color [ MString "#666" ]
 
         spec2 =
-            asSpec [ selTrans [], mark Point [], enc2 [] ]
+            asSpec [ selTrans [], point [], enc2 [] ]
 
         heatSpec =
             asSpec [ encPosition [], layer [ spec1, spec2 ] ]
@@ -2177,7 +2177,7 @@ interactive9 =
             selection << select "myPts" Single [ Encodings [ ChX ] ]
 
         barSpec =
-            asSpec [ width 420, height 120, mark Bar [], sel [], encBar [] ]
+            asSpec [ width 420, height 120, bar [], sel [], encBar [] ]
 
         encBar =
             encoding
@@ -2229,10 +2229,10 @@ interactive10 =
         , data
         , enc []
         , layer
-            [ asSpec [ mark Line [] ]
-            , asSpec [ mark Point [], pointEnc [], sel [] ]
-            , asSpec [ transform (filter (FSelection "myTooltip") []), mark Rule [ MColor "gray" ] ]
-            , asSpec [ transform (filter (FSelection "myTooltip") []), mark Text [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
+            [ asSpec [ line [] ]
+            , asSpec [ point [], pointEnc [], sel [] ]
+            , asSpec [ transform (filter (FSelection "myTooltip") []), rule [ MColor "gray" ] ]
+            , asSpec [ transform (filter (FSelection "myTooltip") []), textMark [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
             ]
         ]
 

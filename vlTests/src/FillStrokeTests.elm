@@ -27,7 +27,7 @@ encChart extraEnc =
                 << size [ MNumber 2000 ]
                 << extraEnc
     in
-    toVegaLite [ width 200, height 200, data [], enc [], mark Circle [ MStroke "black" ] ]
+    toVegaLite [ width 200, height 200, data [], enc [], circle [ MStroke "black" ] ]
 
 
 defChart : Spec
@@ -93,7 +93,7 @@ geo1 =
         [ width 300
         , height 300
         , dataFromJson geojson []
-        , mark Geoshape []
+        , geoshape []
         ]
 
 
@@ -106,7 +106,7 @@ geo2 =
                 , geometry (GeoLine [ ( 4, 52 ), ( 4, 59 ), ( -3, 59 ) ]) []
                 ]
 
-        -- NOTE: There is a bug in Vega-Lite that prevents accessing items nested in arrays, so this does not yet work.
+        -- NOTE: There is a bug in Vega-Lite that prevents nested geometry from being read correctly.
         enc =
             encoding << color [ MName "features.geometry.type", MmType Nominal ]
     in
@@ -115,7 +115,7 @@ geo2 =
         , height 300
         , enc []
         , dataFromJson geojson []
-        , mark Geoshape []
+        , geoshape []
         ]
 
 
@@ -142,8 +142,7 @@ mySpecs =
         , ( "combined2", combined2 )
         , ( "combined3", combined3 )
         , ( "geo1", geo1 )
-
-        --  , ( "geo2", geo2 )
+        , ( "geo2", geo2 )
         ]
 
 

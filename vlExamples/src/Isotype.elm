@@ -65,7 +65,7 @@ personGrid =
                     ]
                 << size [ MNumber 90 ]
     in
-    toVegaLite [ config [], width 400, height 400, data [], trans [], mark Point [ MFilled True ], enc [], sel [] ]
+    toVegaLite [ config [], width 400, height 400, data [], trans [], point [ MFilled True ], enc [], sel [] ]
 
 
 toRows : String -> List ( String, Int ) -> List DataRow -> List DataRow
@@ -132,7 +132,7 @@ livestock =
                 << opacity [ MNumber 1 ]
                 << size [ MNumber 200 ]
     in
-    toVegaLite [ config [], width 800, height 200, data [], mark Point [ MFilled True ], enc [] ]
+    toVegaLite [ config [], width 800, height 200, data [], point [ MFilled True ], enc [] ]
 
 
 
