@@ -94,6 +94,7 @@ module VegaLite
         , combineSpecs
         , configuration
         , configure
+        , customSort
         , dataColumn
         , dataFromColumns
         , dataFromJson
@@ -264,6 +265,7 @@ Relates to where something appears in the visualization.
 @docs PositionChannel
 @docs Position
 @docs SortProperty
+@docs customSort
 @docs StackProperty
 @docs AxisProperty
 @docs OverlapStrategy
@@ -1690,9 +1692,13 @@ type Side
 type SortProperty
     = Ascending
     | Descending
-    | Op Operation
+      -- TODO: If ByField or ByRepeat is used, Op must also be specified. Therefore
+      -- in future versions, make Op a second tag for these and remove it as a separate option.
+      -- Should not do this yet until major version upgrate as it will break previous versions.
     | ByField String
     | ByRepeat Arrangement
+    | Op Operation
+    | CustomSort DataValues
 
 
 {-| Represents part or all of Vega-Lite specification. Specs can be (and usually
@@ -2123,6 +2129,32 @@ more details.
 configure : List LabelledSpec -> ( VLProperty, Spec )
 configure configs =
     ( VLConfig, JE.object configs )
+
+
+{-| Provide a custom sort order by listing data values explicitly. This can be
+used in place of lists of [SortProperty](#SortProperty). For example,
+
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "a" (Strings [ "A", "B", "C" ])
+                << dataColumn "b" (Numbers [ 28, 55, 43 ])
+
+        enc =
+            encoding
+                << position X
+                    [ PName "a"
+                    , PmType Ordinal
+                    , PSort [ customSort (Strings [ "B", "A", "C" ]) ]
+                    ]
+                << position Y [ PName "b", PmType Quantitative ]
+    in
+    toVegaLite [ data [], enc [], mark Bar [] ]
+
+-}
+customSort : DataValues -> SortProperty
+customSort =
+    CustomSort
 
 
 {-| Create a column of data. A column has a name and a list of values. The final
@@ -4040,6 +4072,22 @@ dataValueSpec val =
             JE.object (List.map dateTimeProperty dt)
 
 
+dataValuesSpecs : DataValues -> List Spec
+dataValuesSpecs dvs =
+    case dvs of
+        Numbers xs ->
+            List.map JE.float xs
+
+        Strings ss ->
+            List.map JE.string ss
+
+        DateTimes dtss ->
+            List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss
+
+        Booleans bs ->
+            List.map JE.bool bs
+
+
 dateTimeProperty : DateTime -> LabelledSpec
 dateTimeProperty dt =
     case dt of
@@ -5023,6 +5071,9 @@ orderChannelProperty oDef =
                 [ Descending ] ->
                     ( "sort", JE.string "descending" )
 
+                [ CustomSort dvs ] ->
+                    ( "sort", JE.list (dataValuesSpecs dvs) )
+
                 _ ->
                     ( "sort", JE.object (List.map sortProperty ops) )
 
@@ -5188,6 +5239,9 @@ positionChannelProperty pDef =
 
                 [ Descending ] ->
                     ( "sort", JE.string "descending" )
+
+                [ CustomSort dvs ] ->
+                    ( "sort", JE.list (dataValuesSpecs dvs) )
 
                 _ ->
                     ( "sort", JE.object (List.map sortProperty ops) )
@@ -5655,6 +5709,9 @@ sortProperty sp =
 
         ByRepeat arr ->
             ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
+
+        CustomSort dvs ->
+            ( "custom", JE.null ) |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
 
 
 stackProperty : StackProperty -> LabelledSpec
