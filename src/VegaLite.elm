@@ -1289,8 +1289,8 @@ type MarkOrientation
 type
     MarkProperty
     -- Note some of the following properties are specific options for particular
-    -- types of mark (Bar, Text and Tick) but for simplicity of the API, carry over
-    -- for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
+    -- types of mark (e.g. `bar`, `textMark` and `tick`) but for simplicity of the API,
+    --  carry over for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
     -- MDiscreteBandSize, MShortTimeLabels and  MThickness.
     = MAlign HAlign
     | MAngle Float
@@ -1967,7 +1967,7 @@ layer. Whereas for repeated and faceted specs, the entire specification is provi
 
     enc1 = ...
     spec1 =
-        asSpec [ enc1, mark Line [] ]
+        asSpec [ enc1, line [] ]
 
 -}
 asSpec : List ( VLProperty, Spec ) -> Spec
@@ -1986,7 +1986,7 @@ for details.
         , height 300
         , autosize [ AFit, APadding, AResize ]
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2004,7 +2004,7 @@ be transparent.
     toVegaLite
         [ background "rgb(251,247,238)"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2220,7 +2220,7 @@ used in place of lists of [SortProperty](#SortProperty). For example,
                     ]
                 << position Y [ PName "b", PmType Quantitative ]
     in
-    toVegaLite [ data [], enc [], mark Bar [] ]
+    toVegaLite [ data [], enc [], bar [] ]
 
 -}
 customSort : DataValues -> SortProperty
@@ -2303,7 +2303,7 @@ general cases of json creation, consider
         , height 200
         , dataFromJson geojson []
         , projection [ PType Orthographic ]
-        , mark Geoshape []
+        , geoshape []
         ]
 
 -}
@@ -2366,7 +2366,7 @@ for details.
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
         , dataFromSource "myData" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2394,7 +2394,7 @@ for details.
     enc = ...
     toVegaLite
         [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
-        , mark Line []
+        , line []
         , enc []
         ]
 
@@ -2444,7 +2444,7 @@ can be created with normal data generating functions such as `dataFromRows` or
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
         , dataFromSource "myData" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2472,7 +2472,7 @@ datasets namedData =
     toVegaLite
         [ description "Population change of key regions since 1900"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2736,7 +2736,7 @@ will be calculated based on the content of the visualization.
     toVegaLite
         [ height 300
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2877,7 +2877,8 @@ lookupAs key1 ( vlProp, spec ) key2 asName =
         )
 
 
-{-| Create a mark specification. All marks must have a type (first parameter) and
+{-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
+Create a mark specification. All marks must have a type (first parameter) and
 can optionally be customised with a list of mark properties such as interpolation
 style for lines. To keep the default style for the mark, just provide an empty list
 for the second parameter.
@@ -2906,7 +2907,7 @@ mark mark mProps =
     toVegaLite
         [ name "PopGrowth"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2978,7 +2979,7 @@ for details.
         [ width 500
         , padding (PEdges 20 10 5 15)
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -3358,7 +3359,7 @@ timeUnitAs tu field label =
     toVegaLite
         [ title "Population Growth"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -3393,7 +3394,7 @@ tooltip tDefs =
 passed to Vega-Lite for graphics generation. Commonly these will include at least
 a data, mark and encoding specification.
 
-While simple properties like `mark` may be provided directly, it is usually clearer
+While simple functions like `bar` may be provided directly, it is usually clearer
 to label more complex ones such as encodings as separate expressions. This becomes
 increasingly helpful for visualizations that involve composition of layers, repeats
 and facets.
@@ -3413,7 +3414,7 @@ allows this to be done compactly.
                 << position X [ PName "a", PmType Nominal ]
                 << position Y [ PName "b", PmType Quantitative, PAggregate Mean ]
     in
-    toVegaLite [ data [], mark Bar [], enc [] ]
+    toVegaLite [ data [], bar [], enc [] ]
 
 -}
 toVegaLite : List ( VLProperty, Spec ) -> Spec
@@ -3569,7 +3570,7 @@ will be calculated based on the content of the visualization.
     toVegaLite
         [ width 500
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 

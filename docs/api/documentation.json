@@ -4258,17 +4258,17 @@
       },
       {
         "name": "asSpec",
-        "comment": " Create a specification sufficient to define an element in a composed visualization\nsuch as a superposed layer or juxtaposed facet. Typically a layer will contain a\nfull set of specifications that define a visualization with\nthe exception of the data specification which is usually defined outside of any one\nlayer. Whereas for repeated and faceted specs, the entire specification is provided.\n\n    enc1 = ...\n    spec1 =\n        asSpec [ enc1, mark Line [] ]\n\n",
+        "comment": " Create a specification sufficient to define an element in a composed visualization\nsuch as a superposed layer or juxtaposed facet. Typically a layer will contain a\nfull set of specifications that define a visualization with\nthe exception of the data specification which is usually defined outside of any one\nlayer. Whereas for repeated and faceted specs, the entire specification is provided.\n\n    enc1 = ...\n    spec1 =\n        asSpec [ enc1, line [] ]\n\n",
         "type": "List ( VegaLite.VLProperty, VegaLite.Spec ) -> VegaLite.Spec"
       },
       {
         "name": "autosize",
-        "comment": " Declare the way the view is sized. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/size.html#autosize)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ width 250\n        , height 300\n        , autosize [ AFit, APadding, AResize ]\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Declare the way the view is sized. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/size.html#autosize)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ width 250\n        , height 300\n        , autosize [ AFit, APadding, AResize ]\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "List VegaLite.Autosize -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
         "name": "background",
-        "comment": " Set the background color of the visualization. Should be specified with a CSS\nstring such as `#ffe` or `rgb(200,20,150)`. If not specified the background will\nbe transparent.\n\n    enc = ...\n    toVegaLite\n        [ background \"rgb(251,247,238)\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Set the background color of the visualization. Should be specified with a CSS\nstring such as `#ffe` or `rgb(200,20,150)`. If not specified the background will\nbe transparent.\n\n    enc = ...\n    toVegaLite\n        [ background \"rgb(251,247,238)\"\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
@@ -4328,7 +4328,7 @@
       },
       {
         "name": "customSort",
-        "comment": " Provide a custom sort order by listing data values explicitly. This can be\nused in place of lists of [SortProperty](#SortProperty). For example,\n\n    let\n        data =\n            dataFromColumns []\n                << dataColumn \"a\" (Strings [ \"A\", \"B\", \"C\" ])\n                << dataColumn \"b\" (Numbers [ 28, 55, 43 ])\n\n        enc =\n            encoding\n                << position X\n                    [ PName \"a\"\n                    , PmType Ordinal\n                    , PSort [ customSort (Strings [ \"B\", \"A\", \"C\" ]) ]\n                    ]\n                << position Y [ PName \"b\", PmType Quantitative ]\n    in\n    toVegaLite [ data [], enc [], mark Bar [] ]\n\n",
+        "comment": " Provide a custom sort order by listing data values explicitly. This can be\nused in place of lists of [SortProperty](#SortProperty). For example,\n\n    let\n        data =\n            dataFromColumns []\n                << dataColumn \"a\" (Strings [ \"A\", \"B\", \"C\" ])\n                << dataColumn \"b\" (Numbers [ 28, 55, 43 ])\n\n        enc =\n            encoding\n                << position X\n                    [ PName \"a\"\n                    , PmType Ordinal\n                    , PSort [ customSort (Strings [ \"B\", \"A\", \"C\" ]) ]\n                    ]\n                << position Y [ PName \"b\", PmType Quantitative ]\n    in\n    toVegaLite [ data [], enc [], bar [] ]\n\n",
         "type": "VegaLite.DataValues -> VegaLite.SortProperty"
       },
       {
@@ -4343,7 +4343,7 @@
       },
       {
         "name": "dataFromJson",
-        "comment": " Declare a data source from a provided json specification. The most likely use-case\nfor specifying json inline is when creating [geojson](http://geojson.org) objects,\nwhen [`geometry`](#geometry), [`geometryCollection`](#geometryCollection) and\n[`geoFeatureCollection`](#geoFeatureCollection) functions may be used. For more\ngeneral cases of json creation, consider\n[`Json.Encode`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Json-Encode).\n\n    let\n        geojson =\n            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []\n    in\n    toVegaLite\n        [ width 200\n        , height 200\n        , dataFromJson geojson []\n        , projection [ PType Orthographic ]\n        , mark Geoshape []\n        ]\n\n",
+        "comment": " Declare a data source from a provided json specification. The most likely use-case\nfor specifying json inline is when creating [geojson](http://geojson.org) objects,\nwhen [`geometry`](#geometry), [`geometryCollection`](#geometryCollection) and\n[`geoFeatureCollection`](#geoFeatureCollection) functions may be used. For more\ngeneral cases of json creation, consider\n[`Json.Encode`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Json-Encode).\n\n    let\n        geojson =\n            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []\n    in\n    toVegaLite\n        [ width 200\n        , height 200\n        , dataFromJson geojson []\n        , projection [ PType Orthographic ]\n        , geoshape []\n        ]\n\n",
         "type": "VegaLite.Spec -> List VegaLite.Format -> VegaLite.Data"
       },
       {
@@ -4353,12 +4353,12 @@
       },
       {
         "name": "dataFromSource",
-        "comment": " Declare data from a named source. The source may be from named `datasets` within\na specification or a named data source created via the\n[Vega View API](https://vega.github.io/vega/docs/api/view/#data).\nAn optional list of field formatting instructions can be provided as the second\nparameter or an empty list to use the default formatting. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#named)\nfor details.\n\n    data = ...\n    json = ...\n    enc = ...\n    toVegaLite\n        [ datasets [ ( \"myData\", data [] ),  ( \"myJson\", dataFromJson json [] ) ]\n        , dataFromSource \"myData\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Declare data from a named source. The source may be from named `datasets` within\na specification or a named data source created via the\n[Vega View API](https://vega.github.io/vega/docs/api/view/#data).\nAn optional list of field formatting instructions can be provided as the second\nparameter or an empty list to use the default formatting. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#named)\nfor details.\n\n    data = ...\n    json = ...\n    enc = ...\n    toVegaLite\n        [ datasets [ ( \"myData\", data [] ),  ( \"myJson\", dataFromJson json [] ) ]\n        , dataFromSource \"myData\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "String -> List VegaLite.Format -> VegaLite.Data"
       },
       {
         "name": "dataFromUrl",
-        "comment": " Declare data source from a url. The url can be a local path on a web server\nor an external http(s) url. Used to create a data ( property, specification ) pair.\nAn optional list of field formatting instructions can be provided as the second\nparameter or an empty list to use the default formatting. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ dataFromUrl \"data/weather.csv\" [ Parse [ ( \"date\", FoDate \"%Y-%m-%d %H:%M\" ) ] ]\n        , mark Line []\n        , enc []\n        ]\n\n",
+        "comment": " Declare data source from a url. The url can be a local path on a web server\nor an external http(s) url. Used to create a data ( property, specification ) pair.\nAn optional list of field formatting instructions can be provided as the second\nparameter or an empty list to use the default formatting. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ dataFromUrl \"data/weather.csv\" [ Parse [ ( \"date\", FoDate \"%Y-%m-%d %H:%M\" ) ] ]\n        , line []\n        , enc []\n        ]\n\n",
         "type": "String -> List VegaLite.Format -> VegaLite.Data"
       },
       {
@@ -4368,12 +4368,12 @@
       },
       {
         "name": "datasets",
-        "comment": " Create a dataset comprising a collection of named `Data` items. Each data item\ncan be created with normal data generating functions such as `dataFromRows` or\n`dataFromJson`. These can be later referred to using `dataFromSource`.\n\n    let\n        data =\n            dataFromRows []\n                << dataRow [ ( \"cat\", Str \"a\" ), ( \"val\", Number 10 ) ]\n                << dataRow [ ( \"cat\", Str \"b\" ), ( \"val\", Number 18 ) ]\n        json =\n            JE.list\n                [ JE.object [ ( \"cat\", JE.string \"a\" ), ( \"val\", JE.float 120 ) ]\n                , JE.object [ ( \"cat\", JE.string \"b\" ), ( \"val\", JE.float 180 ) ]\n                ]\n\n        enc = ...\n\n    in\n    toVegaLite\n        [ datasets [ ( \"myData\", data [] ),  ( \"myJson\", dataFromJson json [] ) ]\n        , dataFromSource \"myData\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Create a dataset comprising a collection of named `Data` items. Each data item\ncan be created with normal data generating functions such as `dataFromRows` or\n`dataFromJson`. These can be later referred to using `dataFromSource`.\n\n    let\n        data =\n            dataFromRows []\n                << dataRow [ ( \"cat\", Str \"a\" ), ( \"val\", Number 10 ) ]\n                << dataRow [ ( \"cat\", Str \"b\" ), ( \"val\", Number 18 ) ]\n        json =\n            JE.list\n                [ JE.object [ ( \"cat\", JE.string \"a\" ), ( \"val\", JE.float 120 ) ]\n                , JE.object [ ( \"cat\", JE.string \"b\" ), ( \"val\", JE.float 180 ) ]\n                ]\n\n        enc = ...\n\n    in\n    toVegaLite\n        [ datasets [ ( \"myData\", data [] ),  ( \"myJson\", dataFromJson json [] ) ]\n        , dataFromSource \"myData\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "List ( String, VegaLite.Data ) -> VegaLite.Data"
       },
       {
         "name": "description",
-        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ description \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Provides an optional description to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ description \"Population change of key regions since 1900\"\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
@@ -4433,7 +4433,7 @@
       },
       {
         "name": "height",
-        "comment": " Overrides the default height of the visualization. If not specified the height\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ height 300\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Overrides the default height of the visualization. If not specified the height\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ height 300\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "Float -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
@@ -4463,12 +4463,12 @@
       },
       {
         "name": "mark",
-        "comment": " Create a mark specification. All marks must have a type (first parameter) and\ncan optionally be customised with a list of mark properties such as interpolation\nstyle for lines. To keep the default style for the mark, just provide an empty list\nfor the second parameter.\n\n    mark Circle []\n    mark Line [ MInterpolate StepAfter ]\n\n",
+        "comment": " _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._\nCreate a mark specification. All marks must have a type (first parameter) and\ncan optionally be customised with a list of mark properties such as interpolation\nstyle for lines. To keep the default style for the mark, just provide an empty list\nfor the second parameter.\n\n    mark Circle []\n    mark Line [ MInterpolate StepAfter ]\n\n",
         "type": "VegaLite.Mark -> List VegaLite.MarkProperty -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
         "name": "name",
-        "comment": " Provides an optional name to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ name \"PopGrowth\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Provides an optional name to be associated with the visualization.\n\n    enc = ...\n    toVegaLite\n        [ name \"PopGrowth\"\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
@@ -4488,7 +4488,7 @@
       },
       {
         "name": "padding",
-        "comment": " Set the padding around the visualization in pixel units. The way padding is\ninterpreted will depend on the `autosize` properties. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#top-level-specifications)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , padding (PEdges 20 10 5 15)\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Set the padding around the visualization in pixel units. The way padding is\ninterpreted will depend on the `autosize` properties. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#top-level-specifications)\nfor details.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , padding (PEdges 20 10 5 15)\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "VegaLite.Padding -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
@@ -4593,12 +4593,12 @@
       },
       {
         "name": "title",
-        "comment": " Provide an optional title to be displayed in the visualization.\n\n    enc = ...\n    toVegaLite\n        [ title \"Population Growth\"\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Provide an optional title to be displayed in the visualization.\n\n    enc = ...\n    toVegaLite\n        [ title \"Population Growth\"\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "String -> ( VegaLite.VLProperty, VegaLite.Spec )"
       },
       {
         "name": "toVegaLite",
-        "comment": " Convert a list of Vega-Lite specifications into a single JSON object that may be\npassed to Vega-Lite for graphics generation. Commonly these will include at least\na data, mark and encoding specification.\n\nWhile simple properties like `mark` may be provided directly, it is usually clearer\nto label more complex ones such as encodings as separate expressions. This becomes\nincreasingly helpful for visualizations that involve composition of layers, repeats\nand facets.\n\nSpecifications can be built up by chaining a series of functions (such as `dataColumn`\nor `position` in the example below). Functional composition using the `<<` operator\nallows this to be done compactly.\n\n    let\n        data =\n            dataFromColumns []\n                << dataColumn \"a\" (Strings [ \"C\", \"C\", \"D\", \"D\", \"E\", \"E\" ])\n                << dataColumn \"b\" (Numbers [ 2, 7, 1, 2, 6, 8 ])\n\n        enc =\n            encoding\n                << position X [ PName \"a\", PmType Nominal ]\n                << position Y [ PName \"b\", PmType Quantitative, PAggregate Mean ]\n    in\n    toVegaLite [ data [], mark Bar [], enc [] ]\n\n",
+        "comment": " Convert a list of Vega-Lite specifications into a single JSON object that may be\npassed to Vega-Lite for graphics generation. Commonly these will include at least\na data, mark and encoding specification.\n\nWhile simple functions like `bar` may be provided directly, it is usually clearer\nto label more complex ones such as encodings as separate expressions. This becomes\nincreasingly helpful for visualizations that involve composition of layers, repeats\nand facets.\n\nSpecifications can be built up by chaining a series of functions (such as `dataColumn`\nor `position` in the example below). Functional composition using the `<<` operator\nallows this to be done compactly.\n\n    let\n        data =\n            dataFromColumns []\n                << dataColumn \"a\" (Strings [ \"C\", \"C\", \"D\", \"D\", \"E\", \"E\" ])\n                << dataColumn \"b\" (Numbers [ 2, 7, 1, 2, 6, 8 ])\n\n        enc =\n            encoding\n                << position X [ PName \"a\", PmType Nominal ]\n                << position Y [ PName \"b\", PmType Quantitative, PAggregate Mean ]\n    in\n    toVegaLite [ data [], bar [], enc [] ]\n\n",
         "type": "List ( VegaLite.VLProperty, VegaLite.Spec ) -> VegaLite.Spec"
       },
       {
@@ -4633,7 +4633,7 @@
       },
       {
         "name": "width",
-        "comment": " Override the default width of the visualization. If not specified the width\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , dataFromUrl \"data/population.json\" []\n        , mark Bar []\n        , enc []\n        ]\n\n",
+        "comment": " Override the default width of the visualization. If not specified the width\nwill be calculated based on the content of the visualization.\n\n    enc = ...\n    toVegaLite\n        [ width 500\n        , dataFromUrl \"data/population.json\" []\n        , bar []\n        , enc []\n        ]\n\n",
         "type": "Float -> ( VegaLite.VLProperty, VegaLite.Spec )"
       }
     ],
