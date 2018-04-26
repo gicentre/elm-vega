@@ -523,7 +523,7 @@ type APosition
     | AEnd
 
 
-{-| Idenfies whether a repeated/faceted view is arranged in rows or columns.
+{-| Identifies whether a repeated/faceted view is arranged in rows or columns.
 -}
 type Arrangement
     = Column
@@ -2944,7 +2944,7 @@ to apply to each of those fields using `asSpec`.
     spec = ...
     toVegaLite
         [ repeat [ ColumnFields [ "Cat", "Dog", "Fish" ] ]
-        , ( Spec, asSpec spec )
+        , specification (asSpec spec)
         ]
 
 See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/repeat.html)
