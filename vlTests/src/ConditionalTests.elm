@@ -19,15 +19,15 @@ markCondition1 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition
+                    [ mDataCondition
                         (Or (Expr "datum.IMDB_Rating === null")
                             (Expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ MString "#ddd" ]
-                        [ MString "#0099ee" ]
+                        [ mString "#ddd" ]
+                        [ mString "#0099ee" ]
                     ]
     in
     toVegaLite [ config [], data, point [], enc [] ]
@@ -55,9 +55,9 @@ selectionCondition1 =
 
         enc =
             encoding
-                << position Y [ PName "Origin", PmType Ordinal ]
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << color [ MAggregate Count, MName "*", MmType Quantitative ]
+                << position Y [ pName "Origin", pMType Ordinal ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << color [ mAggregate Count, mName "*", mMType Quantitative ]
     in
     toVegaLite
         [ data, sel [], rect [ MCursor CGrab ], enc [] ]
@@ -85,12 +85,12 @@ selectionCondition2 =
 
         enc =
             encoding
-                << position Y [ PName "Origin", PmType Ordinal ]
-                << position X [ PName "Cylinders", PmType Ordinal ]
+                << position Y [ pName "Origin", pMType Ordinal ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
                 << color
-                    [ MSelectionCondition (And (SelectionName "alex") (SelectionName "morgan"))
-                        [ MAggregate Count, MName "*", MmType Quantitative ]
-                        [ MString "gray" ]
+                    [ mSelectionCondition (And (selectionName "alex") (selectionName "morgan"))
+                        [ mAggregate Count, mName "*", mMType Quantitative ]
+                        [ mString "gray" ]
                     ]
     in
     toVegaLite
@@ -113,16 +113,16 @@ selectionCondition3 =
 
         enc1 =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
 
         spec1 =
             asSpec [ sel [], point [], enc1 [] ]
 
         enc2 =
             encoding
-                << position X [ PName "Acceleration", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 25 ]) ] ]
-                << position Y [ PName "Displacement", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 500 ]) ] ]
+                << position X [ pName "Acceleration", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 25 ]) ] ]
+                << position Y [ pName "Displacement", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 500 ]) ] ]
 
         spec2 =
             asSpec [ trans [], point [], enc2 [] ]

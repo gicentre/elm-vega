@@ -10,7 +10,7 @@ myFirstVis =
         [ title "Hello, World!"
         , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
         , circle []
-        , encoding <| position X [ PName "x", PmType Quantitative ] []
+        , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]
 
 
@@ -19,8 +19,8 @@ mySecondVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
     in
     toVegaLite
         [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -34,8 +34,8 @@ myOtherVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PAggregate Average, PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pAggregate Average, pMType Quantitative ]
     in
     toVegaLite
         [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []

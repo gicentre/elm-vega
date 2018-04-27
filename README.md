@@ -20,9 +20,9 @@ let
 
     enc =
         encoding
-            << position X [ PName "Horsepower", PmType Quantitative ]
-            << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-            << color [ MName "Origin", MmType Nominal ]
+            << position X [ pName "Horsepower", pMType Quantitative ]
+            << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+            << color [ mName "Origin", mTType Nominal ]
 in
 toVegaLite [ cars, circle [], enc [] ]
 ```

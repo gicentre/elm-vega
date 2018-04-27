@@ -14,8 +14,8 @@ timeByUnit tu =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit tu ]
-                << position Y [ PName "temperature", PmType Quantitative, PAggregate Mean, PScale [ SZero False ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit tu ]
+                << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ SZero False ] ]
     in
     toVegaLite [ width 800, data, enc [], line [ MStrokeWidth 0.2 ] ]
 
@@ -120,18 +120,18 @@ parseTime dType =
         tu =
             case dType of
                 Local ->
-                    PTimeUnit YearMonthDateHours
+                    pTimeUnit YearMonthDateHours
 
                 UTC ->
-                    PTimeUnit (utc YearMonthDateHours)
+                    pTimeUnit (utc YearMonthDateHours)
 
         timeScale =
             case dType of
                 Local ->
-                    PScale [ SType ScTime ]
+                    pScale [ SType ScTime ]
 
                 UTC ->
-                    PScale [ SType ScUtc ]
+                    pScale [ SType ScUtc ]
 
         data =
             dataFromColumns [ Parse [ ( "date", format ) ] ]
@@ -140,9 +140,9 @@ parseTime dType =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, tu, timeScale, PAxis [ AxFormat "%d %b %H:%M" ] ]
-                << position Y [ PName "value", PmType Quantitative ]
-                << size [ MNumber 500 ]
+                << position X [ pName "date", pMType Temporal, tu, timeScale, pAxis [ AxFormat "%d %b %H:%M" ] ]
+                << position Y [ pName "value", pMType Quantitative ]
+                << size [ mNumber 500 ]
     in
     toVegaLite [ width 800, data [], enc [], circle [] ]
 

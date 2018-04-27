@@ -13861,23 +13861,35 @@ var _gicentre$elm_vega$VegaLite$Base = function (a) {
 var _gicentre$elm_vega$VegaLite$Not = function (a) {
 	return {ctor: 'Not', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$not = _gicentre$elm_vega$VegaLite$Not;
 var _gicentre$elm_vega$VegaLite$Or = F2(
 	function (a, b) {
 		return {ctor: 'Or', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$or = F2(
+	function (op1, op2) {
+		return A2(_gicentre$elm_vega$VegaLite$Or, op1, op2);
 	});
 var _gicentre$elm_vega$VegaLite$And = F2(
 	function (a, b) {
 		return {ctor: 'And', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$VegaLite$and = F2(
+	function (op1, op2) {
+		return A2(_gicentre$elm_vega$VegaLite$And, op1, op2);
+	});
 var _gicentre$elm_vega$VegaLite$SelectionName = function (a) {
 	return {ctor: 'SelectionName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$selectionName = _gicentre$elm_vega$VegaLite$SelectionName;
 var _gicentre$elm_vega$VegaLite$Selection = function (a) {
 	return {ctor: 'Selection', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$selected = _gicentre$elm_vega$VegaLite$Selection;
 var _gicentre$elm_vega$VegaLite$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$expr = _gicentre$elm_vega$VegaLite$Expr;
 var _gicentre$elm_vega$VegaLite$ChSize = {ctor: 'ChSize'};
 var _gicentre$elm_vega$VegaLite$ChShape = {ctor: 'ChShape'};
 var _gicentre$elm_vega$VegaLite$ChOpacity = {ctor: 'ChOpacity'};
@@ -14477,47 +14489,67 @@ var _gicentre$elm_vega$VegaLite$Area = {ctor: 'Area'};
 var _gicentre$elm_vega$VegaLite$MBoolean = function (a) {
 	return {ctor: 'MBoolean', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mBoolean = _gicentre$elm_vega$VegaLite$MBoolean;
 var _gicentre$elm_vega$VegaLite$MString = function (a) {
 	return {ctor: 'MString', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mString = _gicentre$elm_vega$VegaLite$MString;
 var _gicentre$elm_vega$VegaLite$MNumber = function (a) {
 	return {ctor: 'MNumber', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mNumber = _gicentre$elm_vega$VegaLite$MNumber;
 var _gicentre$elm_vega$VegaLite$MPath = function (a) {
 	return {ctor: 'MPath', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mPath = _gicentre$elm_vega$VegaLite$MPath;
 var _gicentre$elm_vega$VegaLite$MDataCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MDataCondition', _0: a, _1: b, _2: c};
+	});
+var _gicentre$elm_vega$VegaLite$mDataCondition = F3(
+	function (op, tMks, fMks) {
+		return A3(_gicentre$elm_vega$VegaLite$MDataCondition, op, tMks, fMks);
 	});
 var _gicentre$elm_vega$VegaLite$MSelectionCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MSelectionCondition', _0: a, _1: b, _2: c};
 	});
+var _gicentre$elm_vega$VegaLite$mSelectionCondition = F3(
+	function (op, tMks, fMks) {
+		return A3(_gicentre$elm_vega$VegaLite$MSelectionCondition, op, tMks, fMks);
+	});
 var _gicentre$elm_vega$VegaLite$MLegend = function (a) {
 	return {ctor: 'MLegend', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mLegend = _gicentre$elm_vega$VegaLite$MLegend;
 var _gicentre$elm_vega$VegaLite$MAggregate = function (a) {
 	return {ctor: 'MAggregate', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mAggregate = _gicentre$elm_vega$VegaLite$MAggregate;
 var _gicentre$elm_vega$VegaLite$MTimeUnit = function (a) {
 	return {ctor: 'MTimeUnit', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mTimeUnit = _gicentre$elm_vega$VegaLite$MTimeUnit;
 var _gicentre$elm_vega$VegaLite$MBin = function (a) {
 	return {ctor: 'MBin', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mBin = _gicentre$elm_vega$VegaLite$MBin;
 var _gicentre$elm_vega$VegaLite$MScale = function (a) {
 	return {ctor: 'MScale', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mScale = _gicentre$elm_vega$VegaLite$MScale;
 var _gicentre$elm_vega$VegaLite$MmType = function (a) {
 	return {ctor: 'MmType', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mMType = _gicentre$elm_vega$VegaLite$MmType;
 var _gicentre$elm_vega$VegaLite$MRepeat = function (a) {
 	return {ctor: 'MRepeat', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mRepeat = _gicentre$elm_vega$VegaLite$MRepeat;
 var _gicentre$elm_vega$VegaLite$MName = function (a) {
 	return {ctor: 'MName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mName = _gicentre$elm_vega$VegaLite$MName;
 var _gicentre$elm_vega$VegaLite$Stepwise = {ctor: 'Stepwise'};
 var _gicentre$elm_vega$VegaLite$StepBefore = {ctor: 'StepBefore'};
 var _gicentre$elm_vega$VegaLite$StepAfter = {ctor: 'StepAfter'};
@@ -14823,33 +14855,43 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 var _gicentre$elm_vega$VegaLite$PStack = function (a) {
 	return {ctor: 'PStack', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pStack = _gicentre$elm_vega$VegaLite$PStack;
 var _gicentre$elm_vega$VegaLite$PSort = function (a) {
 	return {ctor: 'PSort', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pSort = _gicentre$elm_vega$VegaLite$PSort;
 var _gicentre$elm_vega$VegaLite$PAxis = function (a) {
 	return {ctor: 'PAxis', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pAxis = _gicentre$elm_vega$VegaLite$PAxis;
 var _gicentre$elm_vega$VegaLite$PScale = function (a) {
 	return {ctor: 'PScale', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pScale = _gicentre$elm_vega$VegaLite$PScale;
 var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
 	return {ctor: 'PAggregate', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pAggregate = _gicentre$elm_vega$VegaLite$PAggregate;
 var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
 	return {ctor: 'PTimeUnit', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pTimeUnit = _gicentre$elm_vega$VegaLite$PTimeUnit;
 var _gicentre$elm_vega$VegaLite$PBin = function (a) {
 	return {ctor: 'PBin', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pBin = _gicentre$elm_vega$VegaLite$PBin;
 var _gicentre$elm_vega$VegaLite$PmType = function (a) {
 	return {ctor: 'PmType', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pMType = _gicentre$elm_vega$VegaLite$PmType;
 var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pRepeat = _gicentre$elm_vega$VegaLite$PRepeat;
 var _gicentre$elm_vega$VegaLite$PName = function (a) {
 	return {ctor: 'PName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pName = _gicentre$elm_vega$VegaLite$PName;
 var _gicentre$elm_vega$VegaLite$TransverseMercator = {ctor: 'TransverseMercator'};
 var _gicentre$elm_vega$VegaLite$Stereographic = {ctor: 'Stereographic'};
 var _gicentre$elm_vega$VegaLite$Orthographic = {ctor: 'Orthographic'};
@@ -15959,10 +16001,10 @@ var _gicentre$elm_vega$FillStrokeTests$geo2 = function () {
 				_gicentre$elm_vega$VegaLite$color,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$MName('features.geometry.type'),
+					_0: _gicentre$elm_vega$VegaLite$mName('features.geometry.type'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+						_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -16136,10 +16178,10 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('x'),
+					_0: _gicentre$elm_vega$VegaLite$pName('x'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -16148,10 +16190,10 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('y'),
+						_0: _gicentre$elm_vega$VegaLite$pName('y'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -16159,10 +16201,10 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$MName('cat'),
+							_0: _gicentre$elm_vega$VegaLite$mName('cat'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Nominal),
+								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -16170,7 +16212,7 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 							_gicentre$elm_vega$VegaLite$size,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$MNumber(2000),
+								_0: _gicentre$elm_vega$VegaLite$mNumber(2000),
 								_1: {ctor: '[]'}
 							},
 							extraEnc(_p1))))));
@@ -16335,10 +16377,10 @@ var _gicentre$elm_vega$FillStrokeTests$fill2 = _gicentre$elm_vega$FillStrokeTest
 	_gicentre$elm_vega$VegaLite$fill(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$MName('y'),
+			_0: _gicentre$elm_vega$VegaLite$mName('y'),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
+				_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
 				_1: {ctor: '[]'}
 			}
 		}));
@@ -16346,7 +16388,7 @@ var _gicentre$elm_vega$FillStrokeTests$fill3 = _gicentre$elm_vega$FillStrokeTest
 	_gicentre$elm_vega$VegaLite$fill(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$MString('red'),
+			_0: _gicentre$elm_vega$VegaLite$mString('red'),
 			_1: {ctor: '[]'}
 		}));
 var _gicentre$elm_vega$FillStrokeTests$stroke1 = _gicentre$elm_vega$FillStrokeTests$encChart(
@@ -16356,10 +16398,10 @@ var _gicentre$elm_vega$FillStrokeTests$stroke2 = _gicentre$elm_vega$FillStrokeTe
 	_gicentre$elm_vega$VegaLite$stroke(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$MName('y'),
+			_0: _gicentre$elm_vega$VegaLite$mName('y'),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
+				_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
 				_1: {ctor: '[]'}
 			}
 		}));
@@ -16367,7 +16409,7 @@ var _gicentre$elm_vega$FillStrokeTests$stroke3 = _gicentre$elm_vega$FillStrokeTe
 	_gicentre$elm_vega$VegaLite$stroke(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$MString('red'),
+			_0: _gicentre$elm_vega$VegaLite$mString('red'),
 			_1: {ctor: '[]'}
 		}));
 var _gicentre$elm_vega$FillStrokeTests$combined1 = _gicentre$elm_vega$FillStrokeTests$encChart(
@@ -16386,10 +16428,10 @@ var _gicentre$elm_vega$FillStrokeTests$combined2 = _gicentre$elm_vega$FillStroke
 			_gicentre$elm_vega$VegaLite$stroke,
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$MName('y'),
+				_0: _gicentre$elm_vega$VegaLite$mName('y'),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
+					_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -16397,7 +16439,7 @@ var _gicentre$elm_vega$FillStrokeTests$combined2 = _gicentre$elm_vega$FillStroke
 				_gicentre$elm_vega$VegaLite$fill,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$MString('red'),
+					_0: _gicentre$elm_vega$VegaLite$mString('red'),
 					_1: {ctor: '[]'}
 				},
 				_p4));
@@ -16408,17 +16450,17 @@ var _gicentre$elm_vega$FillStrokeTests$combined3 = _gicentre$elm_vega$FillStroke
 			_gicentre$elm_vega$VegaLite$stroke,
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$MString('red'),
+				_0: _gicentre$elm_vega$VegaLite$mString('red'),
 				_1: {ctor: '[]'}
 			},
 			A2(
 				_gicentre$elm_vega$VegaLite$fill,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$MName('y'),
+					_0: _gicentre$elm_vega$VegaLite$mName('y'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$MmType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},

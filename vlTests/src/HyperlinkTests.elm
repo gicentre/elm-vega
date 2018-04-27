@@ -17,17 +17,17 @@ hyperlink1 =
 
         encCircle =
             encoding
-                << position X [ PName "label", PmType Nominal, PAxis [] ]
-                << size [ MNumber 8000 ]
-                << color [ MName "label", MmType Nominal, MLegend [] ]
+                << position X [ pName "label", pMType Nominal, pAxis [] ]
+                << size [ mNumber 8000 ]
+                << color [ mName "label", mMType Nominal, mLegend [] ]
                 << hyperlink [ HName "url", HmType Nominal ]
 
         encLabel =
             encoding
-                << position X [ PName "label", PmType Nominal, PAxis [] ]
+                << position X [ pName "label", pMType Nominal, pAxis [] ]
                 << text [ TName "label", TmType Nominal ]
-                << color [ MString "white" ]
-                << size [ MNumber 16 ]
+                << color [ mString "white" ]
+                << size [ mNumber 16 ]
 
         symbolSpec =
             asSpec [ circle [ MCursor CPointer ], encCircle [] ]
@@ -47,8 +47,8 @@ hyperlink2 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << hyperlink [ HString "http://www.imdb.com" ]
     in
     toVegaLite [ data, point [ MCursor CPointer ], enc [] ]
@@ -62,12 +62,12 @@ hyperlink3 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ MString "steelblue" ]
-                        [ MString "red" ]
+                    [ mDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
+                        [ mString "steelblue" ]
+                        [ mString "red" ]
                     ]
                 << hyperlink
                     [ HDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")

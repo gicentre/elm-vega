@@ -12,11 +12,11 @@ singleVis config =
 
         scatterEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Cylinders", MmType Ordinal ]
-                << shape [ MName "Origin", MmType Nominal ]
-                << size [ MNumber 100 ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Cylinders", mMType Ordinal ]
+                << shape [ mName "Origin", mMType Nominal ]
+                << size [ mNumber 100 ]
     in
     toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, point [], scatterEnc [] ]
 
@@ -29,26 +29,26 @@ compositeVis config =
 
         scatterEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Cylinders", MmType Ordinal ]
-                << shape [ MName "Origin", MmType Nominal ]
-                << size [ MNumber 100 ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Cylinders", mMType Ordinal ]
+                << shape [ mName "Origin", mMType Nominal ]
+                << size [ mNumber 100 ]
 
         scatterSpec =
             asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), point [], scatterEnc [] ]
 
         barEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
 
         streamEnc =
             encoding
-                << position X [ PName "Year", PmType Temporal, PTimeUnit Year ]
-                << position Y [ PAggregate Count, PmType Quantitative, PStack StCenter, PAxis [] ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+                << position Y [ pAggregate Count, pMType Quantitative, pStack StCenter, pAxis [] ]
+                << color [ mName "Origin", mMType Nominal ]
 
         barSpec =
             asSpec [ title "Car Histogram", width 200, height 200, padding (PSize 20), bar [], barEnc [] ]

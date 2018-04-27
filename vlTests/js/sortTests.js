@@ -13861,23 +13861,35 @@ var _gicentre$elm_vega$VegaLite$Base = function (a) {
 var _gicentre$elm_vega$VegaLite$Not = function (a) {
 	return {ctor: 'Not', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$not = _gicentre$elm_vega$VegaLite$Not;
 var _gicentre$elm_vega$VegaLite$Or = F2(
 	function (a, b) {
 		return {ctor: 'Or', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$or = F2(
+	function (op1, op2) {
+		return A2(_gicentre$elm_vega$VegaLite$Or, op1, op2);
 	});
 var _gicentre$elm_vega$VegaLite$And = F2(
 	function (a, b) {
 		return {ctor: 'And', _0: a, _1: b};
 	});
+var _gicentre$elm_vega$VegaLite$and = F2(
+	function (op1, op2) {
+		return A2(_gicentre$elm_vega$VegaLite$And, op1, op2);
+	});
 var _gicentre$elm_vega$VegaLite$SelectionName = function (a) {
 	return {ctor: 'SelectionName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$selectionName = _gicentre$elm_vega$VegaLite$SelectionName;
 var _gicentre$elm_vega$VegaLite$Selection = function (a) {
 	return {ctor: 'Selection', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$selected = _gicentre$elm_vega$VegaLite$Selection;
 var _gicentre$elm_vega$VegaLite$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$expr = _gicentre$elm_vega$VegaLite$Expr;
 var _gicentre$elm_vega$VegaLite$ChSize = {ctor: 'ChSize'};
 var _gicentre$elm_vega$VegaLite$ChShape = {ctor: 'ChShape'};
 var _gicentre$elm_vega$VegaLite$ChOpacity = {ctor: 'ChOpacity'};
@@ -14477,47 +14489,67 @@ var _gicentre$elm_vega$VegaLite$Area = {ctor: 'Area'};
 var _gicentre$elm_vega$VegaLite$MBoolean = function (a) {
 	return {ctor: 'MBoolean', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mBoolean = _gicentre$elm_vega$VegaLite$MBoolean;
 var _gicentre$elm_vega$VegaLite$MString = function (a) {
 	return {ctor: 'MString', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mString = _gicentre$elm_vega$VegaLite$MString;
 var _gicentre$elm_vega$VegaLite$MNumber = function (a) {
 	return {ctor: 'MNumber', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mNumber = _gicentre$elm_vega$VegaLite$MNumber;
 var _gicentre$elm_vega$VegaLite$MPath = function (a) {
 	return {ctor: 'MPath', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mPath = _gicentre$elm_vega$VegaLite$MPath;
 var _gicentre$elm_vega$VegaLite$MDataCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MDataCondition', _0: a, _1: b, _2: c};
+	});
+var _gicentre$elm_vega$VegaLite$mDataCondition = F3(
+	function (op, tMks, fMks) {
+		return A3(_gicentre$elm_vega$VegaLite$MDataCondition, op, tMks, fMks);
 	});
 var _gicentre$elm_vega$VegaLite$MSelectionCondition = F3(
 	function (a, b, c) {
 		return {ctor: 'MSelectionCondition', _0: a, _1: b, _2: c};
 	});
+var _gicentre$elm_vega$VegaLite$mSelectionCondition = F3(
+	function (op, tMks, fMks) {
+		return A3(_gicentre$elm_vega$VegaLite$MSelectionCondition, op, tMks, fMks);
+	});
 var _gicentre$elm_vega$VegaLite$MLegend = function (a) {
 	return {ctor: 'MLegend', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mLegend = _gicentre$elm_vega$VegaLite$MLegend;
 var _gicentre$elm_vega$VegaLite$MAggregate = function (a) {
 	return {ctor: 'MAggregate', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mAggregate = _gicentre$elm_vega$VegaLite$MAggregate;
 var _gicentre$elm_vega$VegaLite$MTimeUnit = function (a) {
 	return {ctor: 'MTimeUnit', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mTimeUnit = _gicentre$elm_vega$VegaLite$MTimeUnit;
 var _gicentre$elm_vega$VegaLite$MBin = function (a) {
 	return {ctor: 'MBin', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mBin = _gicentre$elm_vega$VegaLite$MBin;
 var _gicentre$elm_vega$VegaLite$MScale = function (a) {
 	return {ctor: 'MScale', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mScale = _gicentre$elm_vega$VegaLite$MScale;
 var _gicentre$elm_vega$VegaLite$MmType = function (a) {
 	return {ctor: 'MmType', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mMType = _gicentre$elm_vega$VegaLite$MmType;
 var _gicentre$elm_vega$VegaLite$MRepeat = function (a) {
 	return {ctor: 'MRepeat', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mRepeat = _gicentre$elm_vega$VegaLite$MRepeat;
 var _gicentre$elm_vega$VegaLite$MName = function (a) {
 	return {ctor: 'MName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$mName = _gicentre$elm_vega$VegaLite$MName;
 var _gicentre$elm_vega$VegaLite$Stepwise = {ctor: 'Stepwise'};
 var _gicentre$elm_vega$VegaLite$StepBefore = {ctor: 'StepBefore'};
 var _gicentre$elm_vega$VegaLite$StepAfter = {ctor: 'StepAfter'};
@@ -14823,33 +14855,43 @@ var _gicentre$elm_vega$VegaLite$position = F2(
 var _gicentre$elm_vega$VegaLite$PStack = function (a) {
 	return {ctor: 'PStack', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pStack = _gicentre$elm_vega$VegaLite$PStack;
 var _gicentre$elm_vega$VegaLite$PSort = function (a) {
 	return {ctor: 'PSort', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pSort = _gicentre$elm_vega$VegaLite$PSort;
 var _gicentre$elm_vega$VegaLite$PAxis = function (a) {
 	return {ctor: 'PAxis', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pAxis = _gicentre$elm_vega$VegaLite$PAxis;
 var _gicentre$elm_vega$VegaLite$PScale = function (a) {
 	return {ctor: 'PScale', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pScale = _gicentre$elm_vega$VegaLite$PScale;
 var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
 	return {ctor: 'PAggregate', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pAggregate = _gicentre$elm_vega$VegaLite$PAggregate;
 var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
 	return {ctor: 'PTimeUnit', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pTimeUnit = _gicentre$elm_vega$VegaLite$PTimeUnit;
 var _gicentre$elm_vega$VegaLite$PBin = function (a) {
 	return {ctor: 'PBin', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pBin = _gicentre$elm_vega$VegaLite$PBin;
 var _gicentre$elm_vega$VegaLite$PmType = function (a) {
 	return {ctor: 'PmType', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pMType = _gicentre$elm_vega$VegaLite$PmType;
 var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pRepeat = _gicentre$elm_vega$VegaLite$PRepeat;
 var _gicentre$elm_vega$VegaLite$PName = function (a) {
 	return {ctor: 'PName', _0: a};
 };
+var _gicentre$elm_vega$VegaLite$pName = _gicentre$elm_vega$VegaLite$PName;
 var _gicentre$elm_vega$VegaLite$TransverseMercator = {ctor: 'TransverseMercator'};
 var _gicentre$elm_vega$VegaLite$Stereographic = {ctor: 'Stereographic'};
 var _gicentre$elm_vega$VegaLite$Orthographic = {ctor: 'Orthographic'};
@@ -15960,13 +16002,13 @@ var _gicentre$elm_vega$SortTests$sortCustom = function () {
 				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$PName('a'),
+					_0: _gicentre$elm_vega$VegaLite$pName('a'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PSort(
+							_0: _gicentre$elm_vega$VegaLite$pSort(
 								{
 									ctor: '::',
 									_0: _gicentre$elm_vega$VegaLite$customSort(
@@ -15995,10 +16037,10 @@ var _gicentre$elm_vega$SortTests$sortCustom = function () {
 					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('b'),
+						_0: _gicentre$elm_vega$VegaLite$pName('b'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -16125,13 +16167,13 @@ var _gicentre$elm_vega$SortTests$sortQuant = F2(
 					_gicentre$elm_vega$VegaLite$X,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$PName('Horsepower'),
+						_0: _gicentre$elm_vega$VegaLite$pName('Horsepower'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PSort(sps),
+								_0: _gicentre$elm_vega$VegaLite$pSort(sps),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -16141,10 +16183,10 @@ var _gicentre$elm_vega$SortTests$sortQuant = F2(
 						_gicentre$elm_vega$VegaLite$Y,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$PName(yField),
+							_0: _gicentre$elm_vega$VegaLite$pName(yField),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$PmType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 								_1: {ctor: '[]'}
 							}
 						},

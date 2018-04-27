@@ -10,7 +10,7 @@ myVis =
         [ title "Hello, World!"
         , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
         , circle []
-        , encoding <| position X [ PName "x", PmType Quantitative ] []
+        , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]
 
 

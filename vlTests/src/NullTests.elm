@@ -17,8 +17,8 @@ axis1 =
 
         enc =
             encoding
-                << position X [ PName "x", PmType Quantitative, PAxis [] ]
-                << position Y [ PName "y", PmType Quantitative, PAxis [] ]
+                << position X [ pName "x", pMType Quantitative, pAxis [] ]
+                << position Y [ pName "y", pMType Quantitative, pAxis [] ]
                 << order [ OName "order", OmType Ordinal ]
     in
     toVegaLite [ data [], enc [], line [] ]
@@ -40,11 +40,11 @@ scaleEncode enc =
 scale0 : Spec
 scale0 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -53,11 +53,11 @@ scale0 =
 scale1 : Spec
 scale1 =
     (encoding
-        << position X [ PName "x", PmType Quantitative, PScale [] ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative, pScale [] ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -66,11 +66,11 @@ scale1 =
 scale2 : Spec
 scale2 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative, PScale [] ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative, pScale [] ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -79,11 +79,11 @@ scale2 =
 scale3 : Spec
 scale3 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal, MScale [] ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal, mScale [] ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -92,11 +92,11 @@ scale3 =
 scale4 : Spec
 scale4 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative, MScale [] ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative, mScale [] ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -105,11 +105,11 @@ scale4 =
 scale5 : Spec
 scale5 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal, MScale [] ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal, mScale [] ]
     )
         []
         |> scaleEncode

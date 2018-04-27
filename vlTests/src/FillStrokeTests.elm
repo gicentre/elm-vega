@@ -21,10 +21,10 @@ encChart extraEnc =
 
         enc =
             encoding
-                << position X [ PName "x", PmType Quantitative ]
-                << position Y [ PName "y", PmType Quantitative ]
-                << color [ MName "cat", MmType Nominal ]
-                << size [ MNumber 2000 ]
+                << position X [ pName "x", pMType Quantitative ]
+                << position Y [ pName "y", pMType Quantitative ]
+                << color [ mName "cat", mMType Nominal ]
+                << size [ mNumber 2000 ]
                 << extraEnc
     in
     toVegaLite [ width 200, height 200, data [], enc [], circle [ MStroke "black" ] ]
@@ -42,12 +42,12 @@ fill1 =
 
 fill2 : Spec
 fill2 =
-    encChart (fill [ MName "y", MmType Ordinal ])
+    encChart (fill [ mName "y", mMType Ordinal ])
 
 
 fill3 : Spec
 fill3 =
-    encChart (fill [ MString "red" ])
+    encChart (fill [ mString "red" ])
 
 
 stroke1 : Spec
@@ -57,12 +57,12 @@ stroke1 =
 
 stroke2 : Spec
 stroke2 =
-    encChart (stroke [ MName "y", MmType Ordinal ])
+    encChart (stroke [ mName "y", mMType Ordinal ])
 
 
 stroke3 : Spec
 stroke3 =
-    encChart (stroke [ MString "red" ])
+    encChart (stroke [ mString "red" ])
 
 
 combined1 : Spec
@@ -72,12 +72,12 @@ combined1 =
 
 combined2 : Spec
 combined2 =
-    encChart (stroke [ MName "y", MmType Ordinal ] << fill [ MString "red" ])
+    encChart (stroke [ mName "y", mMType Ordinal ] << fill [ mString "red" ])
 
 
 combined3 : Spec
 combined3 =
-    encChart (stroke [ MString "red" ] << fill [ MName "y", MmType Ordinal ])
+    encChart (stroke [ mString "red" ] << fill [ mName "y", mMType Ordinal ])
 
 
 geo1 : Spec
@@ -108,7 +108,7 @@ geo2 =
 
         -- NOTE: There is a bug in Vega-Lite that prevents nested geometry from being read correctly.
         enc =
-            encoding << color [ MName "features.geometry.type", MmType Nominal ]
+            encoding << color [ mName "features.geometry.type", mMType Nominal ]
     in
     toVegaLite
         [ width 300

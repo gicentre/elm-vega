@@ -21,8 +21,8 @@ worldMapTemplate tText projProps =
     let
         enc =
             encoding
-                << color [ MString "#010" ]
-                << opacity [ MNumber 0.7 ]
+                << color [ mString "#010" ]
+                << opacity [ mNumber 0.7 ]
     in
     ( tText
     , toVegaLite
@@ -82,7 +82,7 @@ configExample =
             asSpec
                 [ dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
                 , geoshape []
-                , encoding <| color [ MString "#c1e7f5" ] <| []
+                , encoding <| color [ mString "#c1e7f5" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]
                 ]
@@ -91,7 +91,7 @@ configExample =
             asSpec
                 [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
                 , geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
-                , encoding <| color [ MString "#black" ] <| []
+                , encoding <| color [ mString "#black" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]
                 ]
@@ -100,7 +100,7 @@ configExample =
             asSpec
                 [ dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
                 , geoshape []
-                , encoding <| color [ MString "#708E71" ] <| []
+                , encoding <| color [ mString "#708E71" ] <| []
 
                 --, projection [ PType Orthographic, PRotate 0 0 0 ]
                 ]

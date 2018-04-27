@@ -11,8 +11,8 @@ showData data =
     let
         enc =
             encoding
-                << position X [ PName "cat", PmType Nominal ]
-                << position Y [ PName "val", PmType Quantitative ]
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
     in
     toVegaLite [ data, enc [], bar [] ]
 
@@ -91,8 +91,8 @@ dataSource name =
 
         enc =
             encoding
-                << position X [ PName "cat", PmType Nominal ]
-                << position Y [ PName "val", PmType Quantitative ]
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
     in
     toVegaLite
         [ datasets
@@ -129,7 +129,7 @@ geodata1 =
         , configure <| configuration (View [ Stroke Nothing ]) []
         , dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
         , geoshape []
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -148,7 +148,7 @@ geodata2 =
         , configure <| configuration (View [ Stroke Nothing ]) []
         , dataFromJson geojson [ JSON "features" ]
         , projection [ PType Orthographic ]
-        , encoding (color [ MName "properties.Region", MmType Nominal, MLegend [ LTitle "" ] ] [])
+        , encoding (color [ mName "properties.Region", mMType Nominal, mLegend [ LTitle "" ] ] [])
         , geoshape []
         ]
 

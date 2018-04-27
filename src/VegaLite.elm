@@ -7,10 +7,11 @@ module VegaLite
         , AxisProperty(..)
         , BinProperty(..)
         , Binding(..)
-        , BooleanOp(..)
+        , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
         , CInterpolate(..)
         , Channel(..)
         , ClipRect(..)
+          -- TODO: create functions for access to ConfigurationProperty type constructors
         , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , Cursor(..)
         , Data
@@ -41,7 +42,7 @@ module VegaLite
         , LegendProperty(..)
         , LegendValues(..)
         , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
-        , MarkChannel(..)
+        , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
         , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
@@ -52,7 +53,7 @@ module VegaLite
         , OverlapStrategy(..)
         , Padding(..)
         , Position(..)
-        , PositionChannel(..)
+        , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
         , Projection(..)
         , ProjectionProperty(..)
         , RangeConfig(..)
@@ -81,6 +82,7 @@ module VegaLite
         , VLProperty
         , ViewConfig(..)
         , aggregate
+        , and
         , area
         , asSpec
         , autosize
@@ -110,6 +112,7 @@ module VegaLite
         , detail
         , domainRangeMap
         , encoding
+        , expr
         , facet
         , fill
         , filter
@@ -124,11 +127,37 @@ module VegaLite
         , line
         , lookup
         , lookupAs
+        , mAggregate
+        , mBin
+        , mBoolean
+        , mDataCondition
+        , mLegend
+        , mMType
+        , mName
+        , mNumber
+        , mPath
+        , mRepeat
+        , mScale
+        , mSelectionCondition
+        , mString
+        , mTimeUnit
         , mark
         , name
+        , not
         , opAs
         , opacity
+        , or
         , order
+        , pAggregate
+        , pAxis
+        , pBin
+        , pMType
+        , pName
+        , pRepeat
+        , pScale
+        , pSort
+        , pStack
+        , pTimeUnit
         , padding
         , point
         , position
@@ -140,7 +169,9 @@ module VegaLite
         , row
         , rule
         , select
+        , selected
         , selection
+        , selectionName
         , shape
         , size
         , specification
@@ -293,8 +324,25 @@ for determining how that encoding is implemented (e.g. scaling, sorting, spacing
 Relates to where something appears in the visualization.
 
 @docs position
-@docs PositionChannel
 @docs Position
+
+
+### Position Channel Properties
+
+@docs pName
+@docs pRepeat
+@docs pMType
+@docs pBin
+@docs pTimeUnit
+@docs pAggregate
+@docs pScale
+@docs pAxis
+@docs pSort
+@docs pStack
+
+
+## Properties Used by Position Channels
+
 @docs SortProperty
 @docs customSort
 @docs StackProperty
@@ -306,6 +354,8 @@ Relates to where something appears in the visualization.
 @docs FontWeight
 @docs TimeUnit
 @docs utc
+
+@docs PositionChannel
 
 
 ## Mark channels
@@ -319,11 +369,34 @@ color or size.
 @docs stroke
 @docs opacity
 @docs shape
-@docs MarkChannel
+
+
+### Mark Channel Properties
+
+@docs mName
+@docs mRepeat
+@docs mMType
+@docs mScale
+@docs mBin
+@docs mTimeUnit
+@docs mAggregate
+@docs mLegend
+@docs mSelectionCondition
+@docs mDataCondition
+@docs mPath
+@docs mNumber
+@docs mString
+@docs mBoolean
+
+
+### Properties Used By Mark Channels
+
 @docs LegendProperty
 @docs Legend
 @docs LegendOrientation
 @docs LegendValues
+
+@docs MarkChannel
 
 
 ## Text Channels
@@ -474,12 +547,12 @@ the cylinder field with an ordinal color scheme, else make them grey".
 
       enc =
           encoding
-              << position X [ PName "Horsepower", PmType Quantitative ]
-              << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
               << color
-                  [ MSelectionCondition (SelectionName "myBrush")
-                      [ MName "Cylinders", MmType Ordinal ]
-                      [ MString "grey" ]
+                  [ mSelectionCondition (selectionName "myBrush")
+                      [ mName "Cylinders", mMType Ordinal ]
+                      [ mString "grey" ]
                   ]
 
 In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
@@ -487,19 +560,26 @@ on whether a predicate test is satisfied.
 
       enc =
           encoding
-              << position X [ PName "IMDB_Rating", PmType Quantitative ]
-              << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+              << position X [ pName "IMDB_Rating", pMType Quantitative ]
+              << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition
-                        (Or (Expr "datum.IMDB_Rating === null")
-                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                    [ mDataCondition
+                        (or (expr "datum.IMDB_Rating === null")
+                            (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ MString "#ddd" ]
-                        [ MString "#0099ee" ]
+                        [ mString "#ddd" ]
+                        [ mString "#0099ee" ]
                     ]
 
 For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/condition.html).
+
+@docs and
+@docs or
+@docs not
+@docs expr
+@docs selected
+@docs selectionName
 
 @docs BooleanOp
 
@@ -693,14 +773,14 @@ type BinProperty
 {-| Used for creating logical compositions. For example
 
     color
-        [ MSelectionCondition (Or (SelectionName "alex") (SelectionName "morgan"))
-            [ MAggregate Count, MName "*", MmType Quantitative ]
-            [ MString "gray" ]
+        [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
+            [ mAggregate Count, mName "*", mMType Quantitative ]
+            [ mString "gray" ]
         ]
 
 Logical compositions can be nested to any level. For example
 
-    Not (And (Expr "datum.IMDB_Rating === null") (Expr "datum.Rotten_Tomatoes_Rating === null") )
+    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
 
 -}
 type BooleanOp
@@ -1219,6 +1299,8 @@ type LegendValues
 
 
 {-| Type of visual mark used to represent data in the visualization.
+_Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is
+deprecated in favour of calling mark functions (`area`, `bar` etc.)_
 -}
 type Mark
     = Area
@@ -1235,8 +1317,9 @@ type Mark
     | Trail
 
 
-{-| Mark channel properties used for creating a mark channel encoding. Providing
-an empty list to `MScale`, or `MLegend` removes the scaling and legend respectively.
+{-| Mark channel properties used for creating a mark channel encoding.
+_Note: referencing mark channel type constructors (`MName`, `MRepeat` etc.) is
+deprecated in favour of calling mark channel functions (`mName`, `mRepeat` etc.)_
 -}
 type MarkChannel
     = MName String
@@ -1336,9 +1419,9 @@ data are also categories, but ones which have some natural order. `Quantitative`
 data are numeric measurements typically on a continuous scale. `Temporal` data
 describe time.
 
-Geospatial position encoding (`Longitude` and `Latitude`) should specify the `PmType`
+Geospatial position encoding (`Longitude` and `Latitude`) should specify the `pMType`
 as `Quantitative`. Geographically referenced features encoded as `shape` marks
-should specify `MmType` as `GeoFeature` (Vega-Lite currently refers to this type
+should specify `mMType` as `GeoFeature` (Vega-Lite currently refers to this type
 as [geojson](https://vega.github.io/vega-lite/docs/encoding.html)).
 
 -}
@@ -1446,6 +1529,8 @@ type Position
 
 
 {-| Position channel properties used for creating a position channel encoding.
+_Note: referencing position channel type constructors (`PName`, `PRepeat` etc.) is
+deprecated in favour of calling position channel functions (`pName`, `pRepeat` etc.)_
 -}
 type PositionChannel
     = PName String
@@ -1790,7 +1875,7 @@ zones or daylight saving), provide a time unit to the `utc` function.
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+        << position X [ pName "date", pMType Temporal, pTimeUnit (utc YearMonthDateHours) ]
 
 -}
 type TimeUnit
@@ -1947,6 +2032,16 @@ aggregate ops groups =
     (::) ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] )
 
 
+{-| Apply an 'and' Boolean operation as part of a logical composition.
+
+    and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null")
+
+-}
+and : BooleanOp -> BooleanOp -> BooleanOp
+and op1 op2 =
+    And op1 op2
+
+
 {-| Specify an area mark. An area mark is used for representing a series of data
 elements, such as in a stacked area chart or streamgraph. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/area.html).
@@ -2032,7 +2127,7 @@ the default binning. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
 more details.
 
-    position X [ PName "IMDB_Rating", PmType Quantitative , PBin [] ]
+    position X [ pName "IMDB_Rating", pMType Quantitative , pBin [] ]
 
 -}
 bin : List BinProperty -> LabelledSpec
@@ -2091,9 +2186,9 @@ to specifying separate `SDomain` and `SRange` lists and is safer as it guarantee
 a one-to-one correspondence between domain and range values.
 
     color
-        [ MName "weather"
-        , MmType Nominal
-        , MScale <|
+        [ mName "weather"
+        , mMType Nominal
+        , mScale <|
             categoricalDomainMap
                 [ ( "sun", "yellow" )
                 , ( "rain", "blue" )
@@ -2126,12 +2221,12 @@ circle =
 that characterise the way a data field is encoded by color. The second parameter
 is a list of any previous channels to which this color channel should be added.
 
-    color [ MName "Species", MmType Nominal ] []
+    color [ mName "Species", mMType Nominal ] []
 
 Encoding a color channel will generate a legend by default. To stop the legend
 appearing, just supply an empty list of legend properties to `MLegend` :
 
-    color [ MName "Species", MmType Nominal, MLegend [] ] []
+    color [ mName "Species", mMType Nominal, mLegend [] ] []
 
 -}
 color : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -2147,9 +2242,9 @@ chaining encodings using functional composition
 
     enc =
         encoding
-            << position X [ PName "people", PmType Quantitative ]
-            << position Y [ PName "gender", PmType Nominal ]
-            << column [ FName "age", FmType Ordinal ]
+            << position X [ pName "people", pMType Quantitative ]
+            << position Y [ pName "gender", pMType Nominal ]
+            << column [ fName "age", fMType Ordinal ]
 
 -}
 column : List FacetChannel -> List LabelledSpec -> List LabelledSpec
@@ -2214,11 +2309,11 @@ used in place of lists of [SortProperty](#SortProperty). For example,
         enc =
             encoding
                 << position X
-                    [ PName "a"
-                    , PmType Ordinal
-                    , PSort [ customSort (Strings [ "B", "A", "C" ]) ]
+                    [ pName "a"
+                    , pMType Ordinal
+                    , pSort [ customSort (Strings [ "B", "A", "C" ]) ]
                     ]
-                << position Y [ PName "b", PmType Quantitative ]
+                << position Y [ pName "b", pMType Quantitative ]
     in
     toVegaLite [ data [], enc [], bar [] ]
 
@@ -2507,9 +2602,9 @@ and `SRange` lists and is safer as it guarantees a one-to-one correspondence bet
 domain and range values.
 
     color
-        [ MName "year"
-        , MmType Ordinal
-        , MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
+        [ mName "year"
+        , mMType Ordinal
+        , mScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
         ]
 
 -}
@@ -2526,15 +2621,23 @@ domainRangeMap lowerMap upperMap =
 
     enc =
         encoding
-            << position X [ PName "Animal", PmType Ordinal ]
-            << position Y [ PName "Age", PmType Quantitative ]
-            << shape [ MName "Species", MmType Nominal ]
-            << size [ MName "Population", MmType Quantitative ]
+            << position X [ pName "Animal", pMType Ordinal ]
+            << position Y [ pName "Age", pMType Quantitative ]
+            << shape [ mName "Species", mMType Nominal ]
+            << size [ mName "Population", mMType Quantitative ]
 
 -}
 encoding : List LabelledSpec -> ( VLProperty, Spec )
 encoding channels =
     ( VLEncoding, JE.object channels )
+
+
+{-| Specify an expression that should evaluate to either true or false. Can use
+any valid [Vega expression](https://vega.github.io/vega/docs/expressions/).
+-}
+expr : String -> BooleanOp
+expr =
+    Expr
 
 
 {-| Defines the fields that will be used to facet a view in rows or columns to create
@@ -2564,7 +2667,7 @@ channel properties that characterise the way a data field is encoded by fill.
 The second parameter is a list of any previous channels to which this fill channel
 should be added.
 
-    fill [ MName "Species", MmType Nominal ] []
+    fill [ mName "Species", mMType Nominal ] []
 
 Note that if both `fill` and `color` encodings are specified, `fill` takes precedence.
 
@@ -2587,7 +2690,7 @@ Filter operations can combine selections and data predicates with `BooleanOp` ex
 
     trans =
         transform
-            << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+            << filter (FCompose (And (expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
 
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
@@ -2877,6 +2980,16 @@ lookupAs key1 ( vlProp, spec ) key2 asName =
         )
 
 
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+mark property channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+mAggregate : Operation -> MarkChannel
+mAggregate =
+    MAggregate
+
+
 {-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
 Create a mark specification. All marks must have a type (first parameter) and
 can optionally be customised with a list of mark properties such as interpolation
@@ -2901,6 +3014,142 @@ mark mark mProps =
             )
 
 
+{-| Discretizes a series of numeric values into bins when encoding with a
+mark property channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+mBin : List BinProperty -> MarkChannel
+mBin =
+    MBin
+
+
+{-| Provide a literal Boolean value when encoding with a mark property channel.
+-}
+mBoolean : Bool -> MarkChannel
+mBoolean =
+    MBoolean
+
+
+{-| Specify the properties of a mark channel conditional some predicate expression.
+The first parameter provides the expression to evaluate, the second the encoding
+to apply if the expression is true, the third the encoding if the expression is
+false.
+
+    color
+        [ mDataCondition
+            (expr "datum.IMDB_Rating === null")
+            [ mString "#ddd" ]
+            [ mString "rgb(76,120,168)" ]
+        ]
+
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+
+-}
+mDataCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
+mDataCondition op tMks fMks =
+    MDataCondition op tMks fMks
+
+
+{-| Specify the properties of a legend that describes a mark's encoding. To stop
+a legend from appearing provide an empty list as a parameter.
+
+    color [ mName "Animal", mMType Nominal, mLegend [] ]
+
+For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/encoding.html#mark-prop-field-def)
+
+-}
+mLegend : List LegendProperty -> MarkChannel
+mLegend =
+    MLegend
+
+
+{-| Specify the field type (level of measurement) when encoding with a mark
+property channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+mMType : Measurement -> MarkChannel
+mMType =
+    MmType
+
+
+{-| Provide the name of the field used for encoding with a mark property channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+mName : String -> MarkChannel
+mName =
+    MName
+
+
+{-| Provide a literal numeric value when encoding with a mark property channel.
+-}
+mNumber : Float -> MarkChannel
+mNumber =
+    MNumber
+
+
+{-| Provide an SVG path string when encoding with a mark property channel. Useful
+when providing custom shapes.
+-}
+mPath : String -> MarkChannel
+mPath =
+    MPath
+
+
+{-| Determine whether marks subject to repeated view composition should be laid
+out in rows or columns.
+-}
+mRepeat : Arrangement -> MarkChannel
+mRepeat =
+    MRepeat
+
+
+{-| Specify the scaling applied to a field when encoding with a mark property channel.
+The scale will transform a field's value into a color, shape, size etc. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+mScale : List ScaleProperty -> MarkChannel
+mScale =
+    MScale
+
+
+{-| Specify the properties of a mark channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the mark has been selected, the third the encoding if it is not selected.
+
+    color
+        [ mSelectionCondition (selectionName "myBrush")
+            [ mName "Cylinders", mMType Ordinal ]
+            [ mString "grey" ]
+        ]
+
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+
+-}
+mSelectionCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
+mSelectionCondition op tMks fMks =
+    MSelectionCondition op tMks fMks
+
+
+{-| Provide a literal string value when encoding with a mark property channel.
+-}
+mString : String -> MarkChannel
+mString =
+    MString
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a mark property channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+mTimeUnit : TimeUnit -> MarkChannel
+mTimeUnit =
+    MTimeUnit
+
+
 {-| Provides an optional name to be associated with the visualization.
 
     enc = ...
@@ -2917,11 +3166,21 @@ name s =
     ( VLName, JE.string s )
 
 
+{-| Apply an 'and' Boolean operation as part of a logical composition.
+
+    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
+
+-}
+not : BooleanOp -> BooleanOp
+not =
+    Not
+
+
 {-| Encode an opacity channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by opacity. The second parameter
 is a list of any previous channels to which this opacity channel should be added.
 
-    opacity [ MName "Age", MmType Quantitative ] []
+    opacity [ mName "Age", mMType Quantitative ] []
 
 -}
 opacity : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -2953,14 +3212,28 @@ opAs op field label =
         ]
 
 
+{-| Apply an 'or' Boolean operation as part of a logical composition.
+
+    color
+        [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
+            [ mAggregate Count, mName "*", mMType Quantitative ]
+            [ mString "gray" ]
+        ]
+
+-}
+or : BooleanOp -> BooleanOp -> BooleanOp
+or op1 op2 =
+    Or op1 op2
+
+
 {-| Encode an order channel. The first parameter is a list of order field definitions
 to define the channel. The second parameter is a list of any previous channels to
 which this order channel is to be added.
 
     enc =
         encoding
-            << position X [ PName "miles", PmType Quantitative ]
-            << position Y [ PName "gas", PmType Quantitative ]
+            << position X [ pName "miles", pMType Quantitative ]
+            << position Y [ pName "gas", pMType Quantitative ]
             << order [ OName "year", OmType Temporal ]
 
 -}
@@ -2989,6 +3262,43 @@ padding pad =
     ( VLPadding, paddingSpec pad )
 
 
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+postion channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+pAggregate : Operation -> PositionChannel
+pAggregate =
+    PAggregate
+
+
+{-| Specify the axis properties used when encoding with a position channel.
+For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pAxis : List AxisProperty -> PositionChannel
+pAxis =
+    PAxis
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+position channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+pBin : List BinProperty -> PositionChannel
+pBin =
+    PBin
+
+
+{-| Specify the field type (level of measurement) when encoding with a position
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+pMType : Measurement -> PositionChannel
+pMType =
+    PmType
+
+
 {-| Specify a point mark for symbolising a data point with a symbol. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/point.html).
 
@@ -3009,14 +3319,14 @@ This is often implicit when chaining a series of encodings using functional comp
 
       enc =
           encoding
-            << position X [ PName "Animal", PmType Ordinal ]
+            << position X [ pName "Animal", pmType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
 appearing, simply provide an empty list of axis properties to `PAxis` :
 
      enc =
          encoding
-           << position X [ PName "Animal", PmType Ordinal, PAxis [] ]
+           << position X [ pName "Animal", pMType Ordinal, pAxis [] ]
 
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
@@ -3044,20 +3354,34 @@ position pos pDefs =
             (::) ( positionLabel Y2, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude ->
-            --  (::) ( positionLabel X, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Longitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude ->
-            --(::) ( positionLabel Y, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Latitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude2 ->
-            --  (::) ( positionLabel X2, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Longitude2, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude2 ->
-            --(::) ( positionLabel Y2, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Latitude2, List.map positionChannelProperty pDefs |> JE.object )
+
+
+{-| Provide the name of the field used for encoding with a position channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+pName : String -> PositionChannel
+pName =
+    PName
+
+
+{-| Provide the name of the fields from a repeat operator used for encoding
+with a position channel. For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+pRepeat : Arrangement -> PositionChannel
+pRepeat =
+    PRepeat
 
 
 {-| Sets the cartographic projection used for geospatial coordinates. A projection
@@ -3072,6 +3396,42 @@ This is useful when using the `Geoshape` mark. For further details see the
 projection : List ProjectionProperty -> ( VLProperty, Spec )
 projection pProps =
     ( VLProjection, JE.object (List.map projectionProperty pProps) )
+
+
+{-| Specify the scaling applied to a field when encoding with a position channel.
+The scale will transform a field's value into a position along one axis. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pScale : List ScaleProperty -> PositionChannel
+pScale =
+    PScale
+
+
+{-| Specify the sort order for field when encoding with a position channel.
+For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pSort : List SortProperty -> PositionChannel
+pSort =
+    PSort
+
+
+{-| Specify the type of stacking offset for field when encoding with a position
+channel. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pStack : StackProperty -> PositionChannel
+pStack =
+    PStack
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a position channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+pTimeUnit : TimeUnit -> PositionChannel
+pTimeUnit =
+    PTimeUnit
 
 
 {-| Specify an arbitrary rectangle. For details see
@@ -3157,9 +3517,9 @@ when chaining encodings using functional composition
 
     enc =
         encoding
-            << position X [ PName "people", PmType Quantitative ]
-            << position Y [ PName "gender", PmType Nominal ]
-            << row [ FName "age", FmType Ordinal ]
+            << position X [ pName "people", pMType Quantitative ]
+            << position Y [ pName "gender", pMType Nominal ]
+            << row [ fName "age", fMType Ordinal ]
 
 -}
 row : List FacetChannel -> List LabelledSpec -> List LabelledSpec
@@ -3203,6 +3563,19 @@ select name sType options =
     (::) ( name, JE.object selProps )
 
 
+{-| Provide an interactive selection that will be true or false as part of a
+logical composition. For example, to filter a dataset so that only items selected
+interactively and that have a weight of more than 30:
+
+    transform
+        << filter (fCompose (and (selected "brush") (expr "datum.weight > 30")))
+
+-}
+selected : String -> BooleanOp
+selected =
+    Selection
+
+
 {-| Create a full selection specification from a list of selections. For details
 see the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html).
 
@@ -3215,11 +3588,25 @@ selection sels =
     ( VLSelection, JE.object sels )
 
 
+{-| Provide the name of a selection that is used as part of a conditional encoding.
+
+    color
+        [ mSelectionCondition (selectionName "myBrush")
+            [ mName "Origin", mMType Nominal ]
+            [ mString "grey" ]
+        ]
+
+-}
+selectionName : String -> BooleanOp
+selectionName =
+    SelectionName
+
+
 {-| Encode a shape channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by shape. The second parameter
 is a list of any previous channels to which this shape channel should be added.
 
-    shape [ MName "Species", MmType Nominal ] []
+    shape [ mName "Species", mMType Nominal ] []
 
 -}
 shape : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -3231,7 +3618,7 @@ shape markProps =
 that characterise the way a data field is encoded by size. The second parameter
 is a list of any previous channels to which this size channel should be added.
 
-    size [ MName "Age", MmType Quantitative ] []
+    size [ mName "Age", mMType Quantitative ] []
 
 -}
 size : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -3270,7 +3657,7 @@ channel properties that characterise the way a data field is encoded by stroke.
 The second parameter is a list of any previous channels to which this stroke channel
 should be added.
 
-    stroke [ MName "Species", MmType Nominal ] []
+    stroke [ mName "Species", mMType Nominal ] []
 
 Note that if both `stroke` and `color` encodings are specified, `stroke` takes
 precedence.
@@ -3292,9 +3679,9 @@ for formatting the appearance of the text.
 
     enc =
         encoding
-            << position X [ PName "miles", PmType Quantitative ]
-            << position Y [ PName "gas", PmType Quantitative ]
-            << text [ TName "miles", TmType Quantitative ]
+            << position X [ pName "miles", pMType Quantitative ]
+            << position Y [ pName "gas", pMType Quantitative ]
+            << text [ tName "miles", tMType Quantitative ]
 
 -}
 text : List TextChannel -> List LabelledSpec -> List LabelledSpec
@@ -3343,9 +3730,9 @@ grouping by month.
 
     enc =
         encoding
-            << position X [ PName "date", PmType Temporal, PTimeUnit Day ]
-            << position Y [ PAggregate Sum, PmType Quantitative ]
-            << detail [ DName "monthly", DmType Temporal ]
+            << position X [ pName "date", pMType Temporal, pTimeUnit Day ]
+            << position Y [ pAggregate Sum, pMType Quantitative ]
+            << detail [ dName "monthly", dMType Temporal ]
 
 -}
 timeUnitAs : TimeUnit -> String -> String -> List LabelledSpec -> List LabelledSpec
@@ -3380,9 +3767,9 @@ for formatting the appearance of the text.
 
       enc =
           encoding
-              << position X [ PName "Horsepower", PmType Quantitative ]
-              << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-              << tooltip [ TName "Year", TmType Temporal, TFormat "%Y" ]
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+              << tooltip [ tName "Year", tMType Temporal, tFormat "%Y" ]
 
 -}
 tooltip : List TextChannel -> List LabelledSpec -> List LabelledSpec
@@ -3411,8 +3798,8 @@ allows this to be done compactly.
 
         enc =
             encoding
-                << position X [ PName "a", PmType Nominal ]
-                << position Y [ PName "b", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "a", pMType Nominal ]
+                << position Y [ pName "b", pMType Quantitative, pAggregate Mean ]
     in
     toVegaLite [ data [], bar [], enc [] ]
 
@@ -3538,7 +3925,7 @@ of local time zones or daylight saving).
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+        << position X [ pName "date", pMType Temporal, pTimeUnit (utc YearMonthDateHours) ]
 
 -}
 utc : TimeUnit -> TimeUnit

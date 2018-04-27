@@ -55,15 +55,15 @@ personGrid =
 
         enc =
             encoding
-                << position X [ PName "col", PmType Ordinal, PAxis [] ]
-                << position Y [ PName "row", PmType Ordinal, PAxis [] ]
-                << shape [ MPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
+                << position X [ pName "col", pMType Ordinal, pAxis [] ]
+                << position Y [ pName "row", pMType Ordinal, pAxis [] ]
+                << shape [ mPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
                 << color
-                    [ MSelectionCondition (SelectionName "highlight")
-                        [ MString "rgb(194,81,64)" ]
-                        [ MString "rgb(167,165,156)" ]
+                    [ mSelectionCondition (selectionName "highlight")
+                        [ mString "rgb(194,81,64)" ]
+                        [ mString "rgb(167,165,156)" ]
                     ]
-                << size [ MNumber 90 ]
+                << size [ mNumber 90 ]
     in
     toVegaLite [ config [], width 400, height 400, data [], trans [], point [ MFilled True ], enc [], sel [] ]
 
@@ -102,26 +102,26 @@ livestock =
 
         enc =
             encoding
-                << position X [ PName "col", PmType Ordinal, PAxis [] ]
-                << position Y [ PName "animal", PmType Ordinal, PAxis [] ]
+                << position X [ pName "col", pMType Ordinal, pAxis [] ]
+                << position Y [ pName "animal", pMType Ordinal, pAxis [] ]
                 << row [ FName "country", FmType Nominal, FHeader [ HTitle "" ] ]
                 << shape
-                    [ MName "animal"
-                    , MmType Nominal
-                    , MScale <|
+                    [ mName "animal"
+                    , mMType Nominal
+                    , mScale <|
                         categoricalDomainMap
                             [ ( "person", Dict.get "person" isotypes |> Maybe.withDefault "circle" )
                             , ( "cattle", Dict.get "cow" isotypes |> Maybe.withDefault "circle" )
                             , ( "pigs", Dict.get "pig" isotypes |> Maybe.withDefault "circle" )
                             , ( "sheep", Dict.get "sheep" isotypes |> Maybe.withDefault "circle" )
                             ]
-                    , MLegend []
+                    , mLegend []
                     ]
                 << color
-                    [ MName "animal"
-                    , MmType Nominal
-                    , MLegend []
-                    , MScale <|
+                    [ mName "animal"
+                    , mMType Nominal
+                    , mLegend []
+                    , mScale <|
                         categoricalDomainMap
                             [ ( "person", "rgb(162,160,152)" )
                             , ( "cattle", "rgb(194,81,64)" )
@@ -129,8 +129,8 @@ livestock =
                             , ( "sheep", "rgb(91,131,149)" )
                             ]
                     ]
-                << opacity [ MNumber 1 ]
-                << size [ MNumber 200 ]
+                << opacity [ mNumber 1 ]
+                << size [ mNumber 200 ]
     in
     toVegaLite [ config [], width 800, height 200, data [], point [ MFilled True ], enc [] ]
 

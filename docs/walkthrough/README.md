@@ -10,8 +10,7 @@ _elm-vega_ is a wrapper for the [Vega-Lite visualization grammar](https://vega.g
 The grammar provides an expressive way to define how data are represented graphically.
 The seven key elements of the grammar as represented in elm-vega and Vega-Lite are:
 
-*   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl
-`, `dataFromColumns` and `dataFromRows`.
+*   **Data**: The input to visualize. _Example elm-vega functions:_ `dataFromUrl`, `dataFromColumns` and `dataFromRows`.
 *   **Transform**: Functions to change the data before they are visualized. _Example elm-vega functions:_ `filter`, `calculateAs` and `binAs`.
 *   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
 *   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega functions:_ `line`, `circle`, `bar`, `textMark` and `geoshape`.
@@ -45,7 +44,7 @@ With elm-vega, we do the following to create this visualization expression:
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
     , tick []
-    , encoding (position X [ PName "temp_max", PmType Quantitative ] [])
+    , encoding (position X [ pName "temp_max", pMType Quantitative ] [])
     ]
 ```
 
@@ -70,7 +69,7 @@ The example above coded in this way would be
 ```elm
 let
     enc =
-        encoding << position X [ PName "temp_max", PmType Quantitative ]
+        encoding << position X [ pName "temp_max", pMType Quantitative ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -89,8 +88,8 @@ While the strip plot shows the range of temperatures, it is hard to see how many
 let
     enc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -99,7 +98,7 @@ toVegaLite
     ]
 ```
 
-The code now contains two chained `position` encodings: one for the x-position, which is now binned, and one for the y-position which is aggregated by providing `PAggregate Count` instead of a data field name.
+The code now contains two chained `position` encodings: one for the x-position, which is now binned, and one for the y-position which is aggregated by providing `pAggregate Count` instead of a data field name.
 
 Notice again that sensible defaults are provided for the parts of the specification we didn't specify such as axis titles, colors and number of bins.
 
@@ -115,9 +114,9 @@ The overall shape of the histogram is the same, but now can get some idea of the
 let
     enc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mName "weather", mMType Nominal ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -132,7 +131,7 @@ And once again, simply by declaring the measurement type, Vega-Lite determines a
 
 Notice how that with elm-vega we make frequent use of _union types_ (always indicated by names starting with an uppercase letter).
 Types used to customise various channels all start with an uppercase letter indicating the type of channel affected.
-So the name of the data field use to encode _position_ is `PName`, its measurement type, `PmType` and its positional aggregation is `PAggregate`, whereas the name of the data field for encoding color is indicated by `MName` and its measurement type `MmType` (where `M` is short for _mark_).
+So the name of the data field use to encode _position_ is `pName`, its measurement type, `pMType` and its positional aggregation is `pAggregate`, whereas the name of the data field for encoding color is indicated by `mName` and its measurement type `mMType` (where `M` is short for _mark_).
 
 ### Stacked Histogram with Customised Colors (7:20)
 
@@ -155,9 +154,9 @@ weatherColors =
 let
     enc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MScale weatherColors ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mName "weather", mMType Nominal, mScale weatherColors ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -178,9 +177,9 @@ If we were to change just the mark function from `bar` to `line`, Vega-Lite prod
 let
     enc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MScale weatherColors ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mName "weather", mMType Nominal, mScale weatherColors ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -202,9 +201,9 @@ To show our weather distributions next to each other rather than stacked on top 
 let
     enc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
             << column [ FName "weather", FmType Nominal ]
 in
 toVegaLite
@@ -218,7 +217,7 @@ There are only two additions in order to create these small multiples.
 Firstly we have an extra encoding with the `column` function specifying the `weather` data field as the one to determine which column each data item gets mapped to.
 Note that the `F` prefix for `FName` and `FmType` refers to _facet_ – a form of data selection and grouping standard in data visualization.
 
-The second, minor change, is to include an `MLegend` specification in the color encoding. The legend can be customised with its parametmer list but here by providing an empty list, we declare we do not wish the default legend to appear (the arrangement into columns with color encoding and default column labels make the legend redundant).
+The second, minor change, is to include an `mLegend` specification in the color encoding. The legend can be customised with its parametmer list but here by providing an empty list, we declare we do not wish the default legend to appear (the arrangement into columns with color encoding and default column labels make the legend redundant).
 
 ### Multi-view Composition Operators (9:00)
 
@@ -247,8 +246,8 @@ As a basis for discussing view composition, let's start with a single bar chart 
 let
     enc =
         encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+            << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -269,10 +268,10 @@ In this example we will add a layer showing the average precipitation for the en
 ```elm
 let
     precipEnc =
-        encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+        encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
     barEnc =
-        encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+        encoding << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -296,13 +295,13 @@ Instead of layering one view on top of another (superposition), we can place the
 let
     bar1Enc =
         encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+            << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
     bar2Enc =
         encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
+            << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            << position Y [ pName "temp_max", pMType Quantitative, pAggregate Mean ]
 in
 toVegaLite
     [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -323,8 +322,8 @@ We might, for example, wish to show three data fields from the Seattle weather d
 let
     enc =
         encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+            << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
     spec =
         asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -338,7 +337,7 @@ toVegaLite
     ]
 ```
 
-This more compact specification replaces the data field name (`PName "precipitation"` etc.) with a reference to the repeating field (`PRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `RowFields` (or `ColumnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
+This more compact specification replaces the data field name (`pName "precipitation"` etc.) with a reference to the repeating field (`pRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `RowFields` (or `ColumnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
 
 We can combine repeated rows and repeated columns to create a grid of views, such as a scatterplot matrix (or SPLOM for short):
 
@@ -348,8 +347,8 @@ We can combine repeated rows and repeated columns to create a grid of views, suc
 let
     enc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PRepeat Row, PmType Quantitative ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pRepeat Row, pMType Quantitative ]
 
     spec =
         asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -383,9 +382,9 @@ This allows us to create a nested dashboard of views:
 let
     histoEnc =
         encoding
-            << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
+            << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
             << column [ FName "weather", FmType Nominal ]
 
     histoSpec =
@@ -393,20 +392,20 @@ let
 
     scatterEnc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PRepeat Row, PmType Quantitative ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pRepeat Row, pMType Quantitative ]
 
     scatterSpec =
         asSpec [ point [], scatterEnc [] ]
 
     barEnc =
         encoding
-            << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+            << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
     annotationEnc =
         encoding
-            << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+            << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
     layerSpec =
         asSpec
@@ -468,12 +467,13 @@ By way of an example consider this colored scatterplot where any point can be se
 let
     enc =
         encoding
-            << position X [ PName "Horsepower", PmType Quantitative ]
-            << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+            << position X [ pName "Horsepower", pMType Quantitative ]
+            << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
             << color
-                [ MSelectionCondition (SelectionName "picked")
-                    [ MName "Origin", MmType Nominal ]
-                    [ MString "grey" ]
+                [ mSelect
+ionCondition (selectionName "picked")
+                    [ mName "Origin", mMType Nominal ]
+                    [ mString "grey" ]
                 ]
 
     sel =
@@ -488,7 +488,7 @@ toVegaLite
     ]
 ```
 
-In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `MSelectionCondition` used to encode color.
+In comparison to the static specifications we have already seen, the addition here is the new function `selection` that is added to the spec passed to Vega-Lite and a new `mSelectionCondition` used to encode color.
 
 Previously when encoding color (or any other channel) we have provided a list of properties.
 Here we provide a pair of lists – one for when the selection condition is true, the other for when it is false.
@@ -504,12 +504,12 @@ scatterProps =
     let
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "picked")
-                        [ MName "Origin", MmType Nominal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "picked")
+                        [ mName "Origin", mMType Nominal ]
+                        [ mString "grey" ]
                     ]
     in
     [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -674,12 +674,12 @@ One of the more powerful aspects of selection-based interaction is in coordinati
 let
     enc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PRepeat Row, PmType Quantitative ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pRepeat Row, pMType Quantitative ]
             << color
-                [ MSelectionCondition (SelectionName "picked")
-                    [ MName "Origin", MmType Nominal ]
-                    [ MString "grey" ]
+                [ mSelectionCondition (selectionName "picked")
+                    [ mName "Origin", mMType Nominal ]
+                    [ mString "grey" ]
                 ]
 
     sel =
@@ -713,9 +713,9 @@ It is a simple step to bind the scales of the scatterplots in the same way to co
 let
     enc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PRepeat Row, PmType Quantitative ]
-            << color [ MName "Origin", MmType Nominal ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pRepeat Row, pMType Quantitative ]
+            << color [ mName "Origin", mMType Nominal ]
 
     sel =
         selection
@@ -752,11 +752,11 @@ let
 
     encContext =
         encoding
-            << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
+            << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
             << position Y
-                [ PName "price"
-                , PmType Quantitative
-                , PAxis [ AxTickCount 3, AxGrid False ]
+                [ pName "price"
+                , pMType Quantitative
+                , pAxis [ AxTickCount 3, AxGrid False ]
                 ]
 
     specContext =
@@ -765,12 +765,12 @@ let
     encDetail =
         encoding
             << position X
-                [ PName "date"
-                , PmType Temporal
-                , PScale [ SDomain (DSelection "brush") ]
-                , PAxis [ AxTitle "" ]
+                [ pName "date"
+                , pMType Temporal
+                , pScale [ SDomain (DSelection "brush") ]
+                , pAxis [ AxTitle "" ]
                 ]
-            << position Y [ PName "price", PmType Quantitative ]
+            << position Y [ pName "price", pMType Quantitative ]
 
     specDetail =
         asSpec [ width 400, area [], encDetail [] ]
@@ -806,14 +806,14 @@ let
 
     totalEnc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
 
     selectedEnc =
         encoding
-            << position X [ PRepeat Column, PmType Quantitative ]
-            << position Y [ PAggregate Count, PmType Quantitative ]
-            << color [ MString "goldenrod" ]
+            << position X [ pRepeat Column, pMType Quantitative ]
+            << position Y [ pAggregate Count, pMType Quantitative ]
+            << color [ mString "goldenrod" ]
 in
 toVegaLite
     [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]

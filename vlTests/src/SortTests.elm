@@ -17,8 +17,8 @@ sortQuant yField sps =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative, PSort sps ]
-                << position Y [ PName yField, PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative, pSort sps ]
+                << position Y [ pName yField, pMType Quantitative ]
                 << order [ OName yField, OmType Ordinal ]
     in
     toVegaLite [ height 300, data [], enc [], line [ MStrokeWidth 0.5 ] ]
@@ -50,11 +50,11 @@ sortCustom =
         enc =
             encoding
                 << position X
-                    [ PName "a"
-                    , PmType Ordinal
-                    , PSort [ customSort (Strings [ "B", "A", "C" ]) ]
+                    [ pName "a"
+                    , pMType Ordinal
+                    , pSort [ customSort (Strings [ "B", "A", "C" ]) ]
                     ]
-                << position Y [ PName "b", PmType Quantitative ]
+                << position Y [ pName "b", pMType Quantitative ]
     in
     toVegaLite [ data [], enc [], bar [] ]
 

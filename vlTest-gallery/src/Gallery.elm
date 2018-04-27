@@ -22,8 +22,8 @@ basic1 =
 
         enc =
             encoding
-                << position X [ PName "a", PmType Ordinal ]
-                << position Y [ PName "b", PmType Quantitative ]
+                << position X [ pName "a", pMType Ordinal ]
+                << position Y [ pName "b", pMType Quantitative ]
     in
     toVegaLite [ des, data [], bar [], enc [] ]
 
@@ -39,8 +39,8 @@ basic2 =
 
         enc =
             encoding
-                << position X [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "population" ] ]
-                << position Y [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
+                << position X [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "population" ] ]
+                << position Y [ pName "age", pMType Ordinal, pScale [ SRangeStep (Just 17) ] ]
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [] ]
 
@@ -53,8 +53,8 @@ basic3 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [] ]
+                << position Y [ pMType Quantitative, pAggregate Count ]
     in
     toVegaLite [ des, dataFromUrl "data/movies.json" [], bar [], enc [] ]
 
@@ -73,9 +73,9 @@ basic4 =
 
         enc =
             encoding
-                << position Y [ PName "task", PmType Ordinal ]
-                << position X [ PName "start", PmType Quantitative ]
-                << position X2 [ PName "end", PmType Quantitative ]
+                << position Y [ pName "task", pMType Ordinal ]
+                << position X [ pName "start", pMType Quantitative ]
+                << position X2 [ pName "end", pMType Quantitative ]
     in
     toVegaLite [ des, data [], bar [], enc [] ]
 
@@ -93,10 +93,10 @@ basic5 =
 
         enc =
             encoding
-                << position X [ PName "gender", PmType Nominal, PScale [ SRangeStep (Just 12) ], PAxis [ AxTitle "" ] ]
-                << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "population", AxGrid False ] ]
+                << position X [ pName "gender", pMType Nominal, pScale [ SRangeStep (Just 12) ], pAxis [ AxTitle "" ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "population", AxGrid False ] ]
                 << column [ FName "age", FmType Ordinal ]
-                << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
+                << color [ mName "gender", mMType Nominal, mScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
 
         config =
             configure
@@ -114,8 +114,8 @@ basic6 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
@@ -128,8 +128,8 @@ basic7 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], circle [], enc [] ]
 
@@ -142,9 +142,9 @@ basic8 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
-                << size [ MAggregate Count, MmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [ MaxBins 10 ] ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [ MaxBins 10 ] ]
+                << size [ mAggregate Count, mMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/movies.json" [], circle [], enc [] ]
 
@@ -157,10 +157,10 @@ basic9 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal ]
-                << shape [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
+                << shape [ mName "Origin", mMType Nominal ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
@@ -180,13 +180,13 @@ basic10 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition
-                        (Expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null")
-                        [ MString "#ddd" ]
-                        [ MString "rgb(76,120,168)" ]
+                    [ mDataCondition
+                        (expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null")
+                        [ mString "#ddd" ]
+                        [ mString "rgb(76,120,168)" ]
                     ]
     in
     toVegaLite [ des, config [], data, point [], enc [] ]
@@ -200,9 +200,9 @@ basic11 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << size [ MName "Acceleration", MmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << size [ mName "Acceleration", mMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], enc [] ]
 
@@ -215,10 +215,10 @@ basic12 =
 
         enc =
             encoding
-                << position X [ PName "income", PmType Quantitative, PScale [ SType ScLog ] ]
-                << position Y [ PName "health", PmType Quantitative, PScale [ SZero False ] ]
-                << size [ MName "population", MmType Quantitative ]
-                << color [ MString "#000" ]
+                << position X [ pName "income", pMType Quantitative, pScale [ SType ScLog ] ]
+                << position Y [ pName "health", pMType Quantitative, pScale [ SZero False ] ]
+                << size [ mName "population", mMType Quantitative ]
+                << color [ mString "#000" ]
 
         sel =
             selection << select "view" Interval [ BindScales ]
@@ -242,8 +242,8 @@ basic13 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Cylinders", PmType Ordinal ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Cylinders", pMType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], tick [], enc [] ]
 
@@ -259,8 +259,8 @@ basic14 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "price", PmType Quantitative ]
+                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "price", pMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [], enc [] ]
 
@@ -273,9 +273,9 @@ basic15 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "price", PmType Quantitative ]
-                << color [ MName "symbol", MmType Nominal ]
+                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "price", pMType Quantitative ]
+                << color [ mName "symbol", mMType Nominal ]
     in
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], line [], enc [] ]
 
@@ -288,9 +288,9 @@ basic16 =
 
         enc =
             encoding
-                << position X [ PName "year", PmType Ordinal, PScale [ SRangeStep (Just 50), SPadding 0.5 ] ]
-                << position Y [ PName "yield", PmType Quantitative, PAggregate Median ]
-                << color [ MName "site", MmType Nominal ]
+                << position X [ pName "year", pMType Ordinal, pScale [ SRangeStep (Just 50), SPadding 0.5 ] ]
+                << position Y [ pName "yield", pMType Quantitative, pAggregate Median ]
+                << color [ mName "site", mMType Nominal ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], line [], enc [] ]
 
@@ -306,8 +306,8 @@ basic17 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "price", PmType Quantitative ]
+                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "price", pMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [ MInterpolate StepAfter ], enc [] ]
 
@@ -320,8 +320,8 @@ basic18 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Count" ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "Count" ] ]
     in
     toVegaLite
         [ des
@@ -341,9 +341,9 @@ basic19 =
 
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Origin", PmType Nominal ]
-                << color [ MName "Horsepower", MmType Quantitative, MAggregate Mean ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Origin", pMType Nominal ]
+                << color [ mName "Horsepower", mMType Quantitative, mAggregate Mean ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], rect [], enc [] ]
 
@@ -356,9 +356,9 @@ basic20 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [ MaxBins 60 ] ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative, PBin [ MaxBins 40 ] ]
-                << color [ MmType Quantitative, MAggregate Count ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [ MaxBins 60 ] ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [ MaxBins 40 ] ]
+                << color [ mMType Quantitative, mAggregate Count ]
 
         config =
             configure
@@ -384,9 +384,9 @@ basic21 =
 
         enc =
             encoding
-                << position X [ PName "time", PmType Ordinal, PTimeUnit Hours ]
-                << position Y [ PName "time", PmType Ordinal, PTimeUnit Day ]
-                << size [ MName "count", MmType Quantitative, MAggregate Sum ]
+                << position X [ pName "time", pMType Ordinal, pTimeUnit Hours ]
+                << position Y [ pName "time", pMType Ordinal, pTimeUnit Day ]
+                << size [ mName "count", mMType Quantitative, mAggregate Sum ]
     in
     toVegaLite [ des, dataFromUrl "data/github.csv" [], circle [], enc [] ]
 
@@ -403,15 +403,15 @@ basic22 =
 
         enc =
             encoding
-                << position X [ PName "Year", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
-                << position Y [ PName "Entity", PmType Nominal, PAxis [ AxTitle "" ] ]
+                << position X [ pName "Year", pMType Ordinal, pAxis [ AxLabelAngle 0 ] ]
+                << position Y [ pName "Entity", pMType Nominal, pAxis [ AxTitle "" ] ]
                 << size
-                    [ MName "Deaths"
-                    , MmType Quantitative
-                    , MLegend [ LTitle "Annual Global Deaths" ]
-                    , MScale [ SRange (RNumbers [ 0, 5000 ]) ]
+                    [ mName "Deaths"
+                    , mMType Quantitative
+                    , mLegend [ LTitle "Annual Global Deaths" ]
+                    , mScale [ SRange (RNumbers [ 0, 5000 ]) ]
                     ]
-                << color [ MName "Entity", MmType Nominal, MLegend [] ]
+                << color [ mName "Entity", mMType Nominal, mLegend [] ]
     in
     toVegaLite
         [ des
@@ -432,12 +432,12 @@ stack1 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month, PAxis [ AxTitle "Month of the year" ] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month, pAxis [ AxTitle "Month of the year" ] ]
+                << position Y [ pMType Quantitative, pAggregate Count ]
                 << color
-                    [ MName "weather"
-                    , MmType Nominal
-                    , MScale <|
+                    [ mName "weather"
+                    , mMType Nominal
+                    , mScale <|
                         categoricalDomainMap
                             [ ( "sun", "#e7ba52" )
                             , ( "fog", "#c7c7c7" )
@@ -445,7 +445,7 @@ stack1 =
                             , ( "rain", "#1f77b4" )
                             , ( "snow", "#9467bd" )
                             ]
-                    , MLegend [ LTitle "Weather type" ]
+                    , mLegend [ LTitle "Weather type" ]
                     ]
     in
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], bar [], enc [] ]
@@ -459,9 +459,9 @@ stack2 =
 
         enc =
             encoding
-                << position X [ PName "yield", PmType Quantitative, PAggregate Sum ]
-                << position Y [ PName "variety", PmType Nominal ]
-                << color [ MName "site", MmType Nominal ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate Sum ]
+                << position Y [ pName "variety", pMType Nominal ]
+                << color [ mName "site", mMType Nominal ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], bar [], enc [] ]
 
@@ -479,9 +479,9 @@ stack3 =
 
         enc =
             encoding
-                << position X [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
-                << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Population" ], PStack StNormalize ]
-                << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
+                << position X [ pName "age", pMType Ordinal, pScale [ SRangeStep (Just 17) ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "Population" ], pStack StNormalize ]
+                << color [ mName "gender", mMType Nominal, mScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], bar [], enc [] ]
 
@@ -494,9 +494,9 @@ stack4 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate Sum ]
+                << color [ mName "series", mMType Nominal, mScale [ SScheme "category20b" [] ] ]
     in
     toVegaLite [ des, dataFromUrl "data/unemployment-across-industries.json" [], area [], enc [] ]
 
@@ -509,9 +509,9 @@ stack5 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ AxDomain False, AxFormat "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StNormalize ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ AxDomain False, AxFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [], pStack StNormalize ]
+                << color [ mName "series", mMType Nominal, mScale [ SScheme "category20b" [] ] ]
     in
     toVegaLite
         [ des
@@ -531,9 +531,9 @@ stack6 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonth, PAxis [ AxDomain False, AxFormat "%Y" ] ]
-                << position Y [ PName "count", PmType Quantitative, PAggregate Sum, PAxis [], PStack StCenter ]
-                << color [ MName "series", MmType Nominal, MScale [ SScheme "category20b" [] ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ AxDomain False, AxFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [], pStack StCenter ]
+                << color [ mName "series", mMType Nominal, mScale [ SScheme "category20b" [] ] ]
     in
     toVegaLite
         [ des
@@ -558,10 +558,10 @@ stack7 =
 
         enc =
             encoding
-                << position X [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
-                << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Population" ], PStack NoStack ]
-                << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#e377c2", "#1f77b4" ]) ] ]
-                << opacity [ MNumber 0.7 ]
+                << position X [ pName "age", pMType Ordinal, pScale [ SRangeStep (Just 17) ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "Population" ], pStack NoStack ]
+                << color [ mName "gender", mMType Nominal, mScale [ SRange (RStrings [ "#e377c2", "#1f77b4" ]) ] ]
+                << opacity [ mNumber 0.7 ]
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], trans [], bar [], enc [] ]
 
@@ -583,14 +583,14 @@ stack8 =
 
         enc =
             encoding
-                << position X [ PName "percentage_start", PmType Quantitative, PAxis [ AxTitle "Percentage" ] ]
-                << position X2 [ PName "percentage_end", PmType Quantitative ]
-                << position Y [ PName "question", PmType Nominal, PAxis [ AxTitle "Question", AxOffset 5, AxTicks False, AxMinExtent 60, AxDomain False ] ]
+                << position X [ pName "percentage_start", pMType Quantitative, pAxis [ AxTitle "Percentage" ] ]
+                << position X2 [ pName "percentage_end", pMType Quantitative ]
+                << position Y [ pName "question", pMType Nominal, pAxis [ AxTitle "Question", AxOffset 5, AxTicks False, AxMinExtent 60, AxDomain False ] ]
                 << color
-                    [ MName "type"
-                    , MmType Nominal
-                    , MLegend [ LTitle "Response" ]
-                    , MScale <|
+                    [ mName "type"
+                    , mMType Nominal
+                    , mLegend [ LTitle "Response" ]
+                    , mScale <|
                         SType ScOrdinal
                             :: categoricalDomainMap
                                 [ ( "Strongly disagree", "#c30d24" )
@@ -612,9 +612,9 @@ trellis1 =
 
         enc =
             encoding
-                << position X [ PName "X", PmType Quantitative, PScale [ SZero False ] ]
-                << position Y [ PName "Y", PmType Quantitative, PScale [ SZero False ] ]
-                << opacity [ MNumber 1 ]
+                << position X [ pName "X", pMType Quantitative, pScale [ SZero False ] ]
+                << position Y [ pName "Y", pMType Quantitative, pScale [ SZero False ] ]
+                << opacity [ mNumber 1 ]
                 << column [ FName "Series", FmType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/anscombe.json" [], circle [], enc [] ]
@@ -633,9 +633,9 @@ trellis2 =
 
         enc =
             encoding
-                << position X [ PName "age", PmType Ordinal, PScale [ SRangeStep (Just 17) ] ]
-                << position Y [ PName "people", PmType Quantitative, PAggregate Sum, PAxis [ AxTitle "Population" ] ]
-                << color [ MName "gender", MmType Nominal, MScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
+                << position X [ pName "age", pMType Ordinal, pScale [ SRangeStep (Just 17) ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ AxTitle "Population" ] ]
+                << color [ mName "gender", mMType Nominal, mScale [ SRange (RStrings [ "#EA98D2", "#659CCA" ]) ] ]
                 << row [ FName "gender", FmType Nominal ]
     in
     toVegaLite
@@ -655,9 +655,9 @@ trellis3 =
 
         enc =
             encoding
-                << position X [ PName "yield", PmType Quantitative, PAggregate Sum ]
-                << position Y [ PName "variety", PmType Nominal ]
-                << color [ MName "site", MmType Nominal ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate Sum ]
+                << position Y [ pName "variety", pMType Nominal ]
+                << color [ mName "site", mMType Nominal ]
                 << column [ FName "year", FmType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], bar [], enc [] ]
@@ -671,8 +671,8 @@ trellis4 =
 
         enc =
             encoding
-                << position X [ PName "Worldwide_Gross", PmType Quantitative ]
-                << position Y [ PName "US_DVD_Sales", PmType Quantitative ]
+                << position X [ pName "Worldwide_Gross", pMType Quantitative ]
+                << position Y [ pName "US_DVD_Sales", pMType Quantitative ]
                 << column [ FName "MPAA_Rating", FmType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/movies.json" [], point [], enc [] ]
@@ -686,8 +686,8 @@ trellis5 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative, PBin [ MaxBins 15 ] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
+                << position X [ pName "Horsepower", pMType Quantitative, pBin [ MaxBins 15 ] ]
+                << position Y [ pMType Quantitative, pAggregate Count ]
                 << row [ FName "Origin", FmType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], bar [], enc [] ]
@@ -701,9 +701,9 @@ trellis6 =
 
         enc =
             encoding
-                << position X [ PName "yield", PmType Quantitative, PAggregate Median, PScale [ SZero False ] ]
-                << position Y [ PName "variety", PmType Ordinal, PSort [ ByField "Horsepower", Op Mean, Descending ], PScale [ SRangeStep (Just 12) ] ]
-                << color [ MName "year", MmType Nominal ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate Median, pScale [ SZero False ] ]
+                << position Y [ pName "variety", pMType Ordinal, pSort [ ByField "Horsepower", Op Mean, Descending ], pScale [ SRangeStep (Just 12) ] ]
+                << color [ mName "year", mMType Nominal ]
                 << row [ FName "site", FmType Ordinal ]
     in
     toVegaLite [ des, dataFromUrl "data/barley.json" [], point [], enc [] ]
@@ -720,9 +720,9 @@ trellis7 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y", AxTitle "Time", AxGrid False ] ]
-                << position Y [ PName "price", PmType Quantitative, PAxis [ AxTitle "Time", AxGrid False ] ]
-                << color [ MName "symbol", MmType Nominal, MLegend [] ]
+                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y", AxTitle "Time", AxGrid False ] ]
+                << position Y [ pName "price", pMType Quantitative, pAxis [ AxTitle "Time", AxGrid False ] ]
+                << color [ mName "symbol", mMType Nominal, mLegend [] ]
                 << row [ FName "symbol", FmType Nominal, FHeader [ HTitle "Company" ] ]
     in
     toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], area [], enc [] ]
@@ -741,8 +741,8 @@ layer1 =
 
         enc =
             encoding
-                << position X [ PName "b", PmType Quantitative ]
-                << position Y [ PName "a", PmType Ordinal ]
+                << position X [ pName "b", pMType Quantitative ]
+                << position Y [ pName "a", pMType Ordinal ]
 
         specBar =
             asSpec [ bar [] ]
@@ -769,8 +769,8 @@ layer2 =
 
         encBar =
             encoding
-                << position X [ PName "Day", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
-                << position Y [ PName "Value", PmType Quantitative ]
+                << position X [ pName "Day", pMType Ordinal, pAxis [ AxLabelAngle 0 ] ]
+                << position Y [ pName "Value", pMType Quantitative ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
@@ -782,10 +782,10 @@ layer2 =
 
         encUpperBar =
             encoding
-                << position X [ PName "Day", PmType Ordinal, PAxis [ AxLabelAngle 0 ] ]
-                << position Y [ PName "baseline", PmType Quantitative ]
-                << position Y2 [ PName "Value", PmType Quantitative ]
-                << color [ MString "#e45755" ]
+                << position X [ pName "Day", pMType Ordinal, pAxis [ AxLabelAngle 0 ] ]
+                << position Y [ pName "baseline", pMType Quantitative ]
+                << position Y2 [ pName "Value", pMType Quantitative ]
+                << color [ mString "#e45755" ]
 
         specUpperBar =
             asSpec [ trans [], bar [], encUpperBar [] ]
@@ -802,14 +802,14 @@ layer2 =
 
         encRule =
             encoding
-                << position Y [ PName "ThresholdValue", PmType Quantitative ]
+                << position Y [ pName "ThresholdValue", pMType Quantitative ]
 
         specText =
             asSpec [ textMark [ MAlign AlignLeft, MdX 215, MdY -5 ], encText [] ]
 
         encText =
             encoding
-                << position Y [ PName "ThresholdValue", PmType Quantitative, PAxis [ AxTitle "PM2.5 Value" ] ]
+                << position Y [ pName "ThresholdValue", pMType Quantitative, pAxis [ AxTitle "PM2.5 Value" ] ]
                 << text [ TName "Threshold", TmType Ordinal ]
 
         layer1 =
@@ -826,17 +826,17 @@ layer3 =
 
         encBar =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
-                << color [ MString "red" ]
-                << size [ MNumber 3 ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
+                << color [ mString "red" ]
+                << size [ mNumber 3 ]
 
         specLine =
             asSpec [ rule [], encLine [] ]
@@ -852,19 +852,19 @@ layer4 =
 
         encPosition =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Origin", PmType Ordinal ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Origin", pMType Ordinal ]
 
         encRect =
             encoding
-                << color [ MName "*", MmType Quantitative, MAggregate Count ]
+                << color [ mName "*", mMType Quantitative, mAggregate Count ]
 
         specRect =
             asSpec [ rect [], encRect [] ]
 
         encText =
             encoding
-                << color [ MString "white" ]
+                << color [ mString "white" ]
                 << text [ TName "*", TmType Quantitative, TAggregate Count ]
 
         specText =
@@ -896,38 +896,38 @@ layer5 =
                     [ "age" ]
 
         encAge =
-            encoding << position X [ PName "age", PmType Ordinal ]
+            encoding << position X [ pName "age", pMType Ordinal ]
 
         encLWhisker =
             encoding
-                << position Y [ PName "lowerWhisker", PmType Quantitative, PAxis [ AxTitle "Population" ] ]
-                << position Y2 [ PName "lowerBox", PmType Quantitative ]
+                << position Y [ pName "lowerWhisker", pMType Quantitative, pAxis [ AxTitle "Population" ] ]
+                << position Y2 [ pName "lowerBox", pMType Quantitative ]
 
         specLWhisker =
             asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
-                << position Y [ PName "upperBox", PmType Quantitative ]
-                << position Y2 [ PName "upperWhisker", PmType Quantitative ]
+                << position Y [ pName "upperBox", pMType Quantitative ]
+                << position Y2 [ pName "upperWhisker", pMType Quantitative ]
 
         specUWhisker =
             asSpec [ rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
 
         encBox =
             encoding
-                << position Y [ PName "lowerBox", PmType Quantitative ]
-                << position Y2 [ PName "upperBox", PmType Quantitative ]
-                << size [ MNumber 5 ]
+                << position Y [ pName "lowerBox", pMType Quantitative ]
+                << position Y2 [ pName "upperBox", pMType Quantitative ]
+                << size [ mNumber 5 ]
 
         specBox =
             asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
-                << position Y [ PName "midBox", PmType Quantitative ]
-                << color [ MString "white" ]
-                << size [ MNumber 5 ]
+                << position Y [ pName "midBox", pMType Quantitative ]
+                << color [ mString "white" ]
+                << size [ mNumber 5 ]
 
         specBoxMid =
             asSpec [ tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
@@ -955,20 +955,20 @@ layer6 =
                 << calculateAs "max(0,datum.lowerBox - datum.IQR *1.5)" "lowerWhisker"
 
         encAge =
-            encoding << position X [ PName "age", PmType Ordinal ]
+            encoding << position X [ pName "age", pMType Ordinal ]
 
         encLWhisker =
             encoding
-                << position Y [ PName "lowerWhisker", PmType Quantitative, PAxis [ AxTitle "Population" ] ]
-                << position Y2 [ PName "lowerBox", PmType Quantitative ]
+                << position Y [ pName "lowerWhisker", pMType Quantitative, pAxis [ AxTitle "Population" ] ]
+                << position Y2 [ pName "lowerBox", pMType Quantitative ]
 
         specLWhisker =
             asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
-                << position Y [ PName "upperBox", PmType Quantitative ]
-                << position Y2 [ PName "upperWhisker", PmType Quantitative ]
+                << position Y [ pName "upperBox", pMType Quantitative ]
+                << position Y2 [ pName "upperWhisker", pMType Quantitative ]
 
         specUWhisker =
             asSpec
@@ -976,18 +976,18 @@ layer6 =
 
         encBox =
             encoding
-                << position Y [ PName "lowerBox", PmType Quantitative ]
-                << position Y2 [ PName "upperBox", PmType Quantitative ]
-                << size [ MNumber 5 ]
+                << position Y [ pName "lowerBox", pMType Quantitative ]
+                << position Y2 [ pName "upperBox", pMType Quantitative ]
+                << size [ mNumber 5 ]
 
         specBox =
             asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
-                << position Y [ PName "midBox", PmType Quantitative ]
-                << color [ MString "white" ]
-                << size [ MNumber 5 ]
+                << position Y [ pName "midBox", pMType Quantitative ]
+                << color [ mString "white" ]
+                << size [ mNumber 5 ]
 
         specBoxMid =
             asSpec
@@ -1024,26 +1024,26 @@ layer7 =
         encLine =
             encoding
                 << position X
-                    [ PName "date"
-                    , PmType Temporal
-                    , PTimeUnit YearMonthDate
-                    , PScale [ SDomain (DDateTimes [ [ DTMonth May, DTDate 31, DTYear 2009 ], [ DTMonth Jul, DTDate 1, DTYear 2009 ] ]) ]
-                    , PAxis [ AxTitle "Date in 2009", AxFormat "%m/%d" ]
+                    [ pName "date"
+                    , pMType Temporal
+                    , pTimeUnit YearMonthDate
+                    , pScale [ SDomain (DDateTimes [ [ DTMonth May, DTDate 31, DTYear 2009 ], [ DTMonth Jul, DTDate 1, DTYear 2009 ] ]) ]
+                    , pAxis [ AxTitle "Date in 2009", AxFormat "%m/%d" ]
                     ]
-                << position Y [ PName "low", PmType Quantitative, PScale [ SZero False ] ]
-                << position Y2 [ PName "high", PmType Quantitative ]
-                << color [ MName "isIncrease", MmType Nominal, MLegend [], MScale [ SRange (RStrings [ "#ae1325", "#06982d" ]) ] ]
+                << position Y [ pName "low", pMType Quantitative, pScale [ SZero False ] ]
+                << position Y2 [ pName "high", pMType Quantitative ]
+                << color [ mName "isIncrease", mMType Nominal, mLegend [], mScale [ SRange (RStrings [ "#ae1325", "#06982d" ]) ] ]
 
         specLine =
             asSpec [ rule [], encLine [] ]
 
         encBar =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit YearMonthDate ]
-                << position Y [ PName "open", PmType Quantitative ]
-                << position Y2 [ PName "close", PmType Quantitative ]
-                << size [ MNumber 5 ]
-                << color [ MName "isIncrease", MmType Nominal, MLegend [] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonthDate ]
+                << position Y [ pName "open", pMType Quantitative ]
+                << position Y2 [ pName "close", pMType Quantitative ]
+                << size [ mNumber 5 ]
+                << color [ mName "isIncrease", mMType Nominal, mLegend [] ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
@@ -1058,20 +1058,20 @@ layer8 =
             description "Error bars showing confidence intervals"
 
         encVariety =
-            encoding << position Y [ PName "variety", PmType Ordinal ]
+            encoding << position Y [ pName "variety", pMType Ordinal ]
 
         encPoints =
             encoding
-                << position X [ PName "yield", PmType Quantitative, PAggregate Mean, PScale [ SZero False ], PAxis [ AxTitle "Barley Yield" ] ]
-                << color [ MString "black" ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate Mean, pScale [ SZero False ], pAxis [ AxTitle "Barley Yield" ] ]
+                << color [ mString "black" ]
 
         specPoints =
             asSpec [ point [ MFilled True ], encPoints [] ]
 
         encCIs =
             encoding
-                << position X [ PName "yield", PmType Quantitative, PAggregate CI0 ]
-                << position X2 [ PName "yield", PmType Quantitative, PAggregate CI1 ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate CI0 ]
+                << position X2 [ pName "yield", pMType Quantitative, pAggregate CI1 ]
 
         specCIs =
             asSpec [ rule [], encCIs [] ]
@@ -1092,20 +1092,20 @@ layer9 =
                 << calculateAs "datum.mean+datum.stdev" "upper"
 
         encVariety =
-            encoding << position Y [ PName "variety", PmType Ordinal ]
+            encoding << position Y [ pName "variety", pMType Ordinal ]
 
         encMeans =
             encoding
-                << position X [ PName "mean", PmType Quantitative, PScale [ SZero False ], PAxis [ AxTitle "Barley Yield" ] ]
-                << color [ MString "black" ]
+                << position X [ pName "mean", pMType Quantitative, pScale [ SZero False ], pAxis [ AxTitle "Barley Yield" ] ]
+                << color [ mString "black" ]
 
         specMeans =
             asSpec [ point [ MFilled True ], encMeans [] ]
 
         encStdevs =
             encoding
-                << position X [ PName "upper", PmType Quantitative ]
-                << position X2 [ PName "lower", PmType Quantitative ]
+                << position X [ pName "upper", pMType Quantitative ]
+                << position X2 [ pName "lower", pMType Quantitative ]
 
         specStdevs =
             asSpec [ rule [], encStdevs [] ]
@@ -1121,17 +1121,17 @@ layer10 =
 
         encBars =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [], PAxis [] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [], pAxis [] ]
+                << position Y [ pMType Quantitative, pAggregate Count ]
 
         specBars =
             asSpec [ bar [], encBars [] ]
 
         encMean =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PAggregate Mean ]
-                << color [ MString "red" ]
-                << size [ MNumber 5 ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pAggregate Mean ]
+                << color [ mString "red" ]
+                << size [ mNumber 5 ]
 
         specMean =
             asSpec [ rule [], encMean [] ]
@@ -1147,8 +1147,8 @@ layer11 =
 
         encPoints =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
 
         specPoints =
             asSpec [ point [], encPoints [] ]
@@ -1160,16 +1160,16 @@ layer11 =
                 << calculateAs "datum.mean_MPG-datum.dev_MPG" "lower"
 
         encMean =
-            encoding << position Y [ PName "mean_MPG", PmType Quantitative ]
+            encoding << position Y [ pName "mean_MPG", pMType Quantitative ]
 
         specMean =
             asSpec [ rule [], encMean [] ]
 
         encRect =
             encoding
-                << position Y [ PName "lower", PmType Quantitative ]
-                << position Y2 [ PName "upper", PmType Quantitative ]
-                << opacity [ MNumber 0.2 ]
+                << position Y [ pName "lower", pMType Quantitative ]
+                << position Y2 [ pName "upper", pMType Quantitative ]
+                << opacity [ mNumber 0.2 ]
 
         specRect =
             asSpec [ rect [], encRect [] ]
@@ -1187,20 +1187,20 @@ layer12 =
             description "Line chart with confidence interval band."
 
         encTime =
-            encoding << position X [ PName "Year", PmType Temporal, PTimeUnit Year ]
+            encoding << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
 
         encBand =
             encoding
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PAggregate CI0, PAxis [ AxTitle "Miles/Gallon" ] ]
-                << position Y2 [ PName "Miles_per_Gallon", PmType Quantitative, PAggregate CI1 ]
-                << opacity [ MNumber 0.3 ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative, pAggregate CI0, pAxis [ AxTitle "Miles/Gallon" ] ]
+                << position Y2 [ pName "Miles_per_Gallon", pMType Quantitative, pAggregate CI1 ]
+                << opacity [ mNumber 0.3 ]
 
         specBand =
             asSpec [ area [], encBand [] ]
 
         encLine =
             encoding
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PAggregate Mean ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative, pAggregate Mean ]
 
         specLine =
             asSpec [ line [], encLine [] ]
@@ -1227,18 +1227,18 @@ layer13 =
 
         encRects =
             encoding
-                << position X [ PName "start", PmType Temporal, PTimeUnit Year, PAxis [] ]
-                << position X2 [ PName "end", PmType Temporal, PTimeUnit Year ]
-                << color [ MName "event", MmType Nominal ]
+                << position X [ pName "start", pMType Temporal, pTimeUnit Year, pAxis [] ]
+                << position X2 [ pName "end", pMType Temporal, pTimeUnit Year ]
+                << color [ mName "event", mMType Nominal ]
 
         specRects =
             asSpec [ highlights [], rect [], encRects [] ]
 
         encPopulation =
             encoding
-                << position X [ PName "year", PmType Temporal, PTimeUnit Year, PAxis [ AxTitle "" ] ]
-                << position Y [ PName "population", PmType Quantitative ]
-                << color [ MString "#333" ]
+                << position X [ pName "year", pMType Temporal, pTimeUnit Year, pAxis [ AxTitle "" ] ]
+                << position Y [ pName "population", pMType Quantitative ]
+                << color [ mString "#333" ]
 
         specLine =
             asSpec [ line [], encPopulation [] ]
@@ -1261,23 +1261,23 @@ layer14 =
                 << filter (FOneOf "year" (Numbers [ 1955, 2000 ]))
 
         encCountry =
-            encoding << position Y [ PName "country", PmType Nominal, PAxis [ AxTitle "Country", AxOffset 5, AxTicks False, AxMinExtent 70, AxDomain False ] ]
+            encoding << position Y [ pName "country", pMType Nominal, pAxis [ AxTitle "Country", AxOffset 5, AxTicks False, AxMinExtent 70, AxDomain False ] ]
 
         encLine =
             encoding
-                << position X [ PName "life_expect", PmType Quantitative ]
+                << position X [ pName "life_expect", pMType Quantitative ]
                 << detail [ DName "country", DmType Nominal ]
-                << color [ MString "#db646f" ]
+                << color [ mString "#db646f" ]
 
         specLine =
             asSpec [ line [], encLine [] ]
 
         encPoints =
             encoding
-                << position X [ PName "life_expect", PmType Quantitative, PAxis [ AxTitle "Life Expectanct (years)" ] ]
-                << color [ MName "year", MmType Ordinal, MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )), MLegend [ LTitle "Year" ] ]
-                << size [ MNumber 100 ]
-                << opacity [ MNumber 1 ]
+                << position X [ pName "life_expect", pMType Quantitative, pAxis [ AxTitle "Life Expectanct (years)" ] ]
+                << color [ mName "year", mMType Ordinal, mScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )), mLegend [ LTitle "Year" ] ]
+                << size [ mNumber 100 ]
+                << opacity [ mNumber 1 ]
 
         specPoints =
             asSpec [ point [ MFilled True ], encPoints [] ]
@@ -1292,19 +1292,19 @@ layer15 =
             description "Layered bar/line chart with dual axes."
 
         encTime =
-            encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            encoding << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
 
         encBar =
             encoding
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean, PAxis [ AxGrid False ] ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean, pAxis [ AxGrid False ] ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
-                << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean, PAxis [ AxGrid False ], PScale [ SZero False ] ]
-                << color [ MString "firebrick" ]
+                << position Y [ pName "temp_max", pMType Quantitative, pAggregate Mean, pAxis [ AxGrid False ], pScale [ SZero False ] ]
+                << color [ mString "firebrick" ]
 
         specLine =
             asSpec [ line [], encLine [] ]
@@ -1331,20 +1331,20 @@ layer16 =
             transform << calculateAs "datum.y - 50" "ny"
 
         encX =
-            encoding << position X [ PName "x", PmType Quantitative, PScale [ SZero False, SNice (IsNice False) ] ]
+            encoding << position X [ pName "x", pMType Quantitative, pScale [ SZero False, SNice (IsNice False) ] ]
 
         encLower =
             encoding
-                << position Y [ PName "y", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 50 ]) ] ]
-                << opacity [ MNumber 0.6 ]
+                << position Y [ pName "y", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 50 ]) ] ]
+                << opacity [ mNumber 0.6 ]
 
         specLower =
             asSpec [ area [ MClip True ], encLower [] ]
 
         encUpper =
             encoding
-                << position Y [ PName "ny", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 50 ]) ], PAxis [ AxTitle "y" ] ]
-                << opacity [ MNumber 0.3 ]
+                << position Y [ pName "ny", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 50 ]) ], pAxis [ AxTitle "y" ] ]
+                << opacity [ mNumber 0.3 ]
 
         specUpper =
             asSpec [ trans [], area [ MClip True ], encUpper [] ]
@@ -1364,8 +1364,8 @@ layer17 =
 
         enc =
             encoding
-                << position X [ PName "miles", PmType Quantitative, PScale [ SZero False ] ]
-                << position Y [ PName "gas", PmType Quantitative, PScale [ SZero False ] ]
+                << position X [ pName "miles", pMType Quantitative, pScale [ SZero False ] ]
+                << position Y [ pName "gas", pMType Quantitative, pScale [ SZero False ] ]
                 << order [ OName "year", OmType Temporal ]
 
         specLine =
@@ -1396,20 +1396,20 @@ layer18 =
         encPosition =
             encoding
                 << position X
-                    [ PName "scaled_date"
-                    , PmType Quantitative
-                    , PAxis [ AxTitle "Year into decade", AxTickCount 10, AxValues [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ] ]
+                    [ pName "scaled_date"
+                    , pMType Quantitative
+                    , pAxis [ AxTitle "Year into decade", AxTickCount 10, AxValues [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ] ]
                     ]
                 << position Y
-                    [ PName "CO2"
-                    , PmType Quantitative
-                    , PScale [ SZero False ]
-                    , PAxis [ AxTitle "CO2 concentration in ppm" ]
+                    [ pName "CO2"
+                    , pMType Quantitative
+                    , pScale [ SZero False ]
+                    , pAxis [ AxTitle "CO2 concentration in ppm" ]
                     ]
 
         encLine =
             encoding
-                << color [ MName "decade", MmType Nominal, MLegend [] ]
+                << color [ mName "decade", mMType Nominal, mLegend [] ]
 
         specLine =
             asSpec [ line [ MOrient Vertical ], encLine [] ]
@@ -1463,20 +1463,20 @@ comp1 =
 
         enc1 =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PRepeat Column, PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pRepeat Column, pMType Quantitative, pAggregate Mean ]
                 << detail [ DName "date", DmType Temporal, DTimeUnit Year ]
-                << color [ MName "location", MmType Nominal ]
-                << opacity [ MNumber 0.2 ]
+                << color [ mName "location", mMType Nominal ]
+                << opacity [ mNumber 0.2 ]
 
         spec1 =
             asSpec [ line [], enc1 [] ]
 
         enc2 =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PRepeat Column, PmType Quantitative, PAggregate Mean ]
-                << color [ MName "location", MmType Nominal ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pRepeat Column, pMType Quantitative, pAggregate Mean ]
+                << color [ mName "location", mMType Nominal ]
 
         spec2 =
             asSpec [ line [], enc2 [] ]
@@ -1497,9 +1497,9 @@ comp2 =
     let
         enc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative, PBin [] ]
-                << position Y [ PmType Quantitative, PAggregate Count ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pRepeat Column, pMType Quantitative, pBin [] ]
+                << position Y [ pMType Quantitative, pAggregate Count ]
+                << color [ mName "Origin", mMType Nominal ]
 
         spec =
             asSpec [ dataFromUrl "data/cars.json" [], bar [], enc [] ]
@@ -1515,9 +1515,9 @@ comp3 =
     let
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative, PBin [ MaxBins 15 ] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal, MLegend [] ]
+                << position X [ pName "Horsepower", pMType Quantitative, pBin [ MaxBins 15 ] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal, mLegend [] ]
 
         spec =
             asSpec [ bar [], enc [] ]
@@ -1539,7 +1539,7 @@ geo1 =
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
         , geoshape []
-        , encoding <| color [ MName "rate", MmType Quantitative ] []
+        , encoding <| color [ mName "rate", mMType Quantitative ] []
         ]
 
 
@@ -1548,10 +1548,10 @@ geo2 =
     let
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 1 ]
-                << color [ MName "digit", MmType Nominal ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNumber 1 ]
+                << color [ mName "digit", mMType Nominal ]
     in
     toVegaLite
         [ description "US zip codes: One dot per zipcode colored by first digit"
@@ -1575,15 +1575,15 @@ geo3 =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
                 , geoshape []
-                , encoding <| color [ MString "#eee" ] []
+                , encoding <| color [ mString "#eee" ] []
                 ]
 
         overlayEnc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 5 ]
-                << color [ MString "steelblue" ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNumber 5 ]
+                << color [ mString "steelblue" ]
 
         overlaySpec =
             asSpec
@@ -1608,15 +1608,15 @@ geo4 =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
                 , geoshape []
-                , encoding <| color [ MString "#eee" ] []
+                , encoding <| color [ mString "#eee" ] []
                 ]
 
         airportsEnc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 5 ]
-                << color [ MString "gray" ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNumber 5 ]
+                << color [ mString "gray" ]
 
         airportsSpec =
             asSpec
@@ -1637,10 +1637,10 @@ geo4 =
 
         flightsEnc =
             encoding
-                << position Longitude [ PName "origin_longitude", PmType Quantitative ]
-                << position Latitude [ PName "origin_latitude", PmType Quantitative ]
-                << position Longitude2 [ PName "dest_longitude", PmType Quantitative ]
-                << position Latitude2 [ PName "dest_latitude", PmType Quantitative ]
+                << position Longitude [ pName "origin_longitude", pMType Quantitative ]
+                << position Latitude [ pName "origin_latitude", pMType Quantitative ]
+                << position Longitude2 [ pName "dest_longitude", pMType Quantitative ]
+                << position Latitude2 [ pName "dest_latitude", pMType Quantitative ]
 
         flightsSpec =
             asSpec
@@ -1664,8 +1664,8 @@ geo5 =
     let
         enc =
             encoding
-                << shape [ MName "geo", MmType GeoFeature ]
-                << color [ MRepeat Row, MmType Quantitative ]
+                << shape [ mName "geo", mMType GeoFeature ]
+                << color [ mRepeat Row, mMType Quantitative ]
 
         spec =
             asSpec
@@ -1696,13 +1696,13 @@ geo6 =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
                 , geoshape []
-                , encoding <| color [ MString "#ccc" ] []
+                , encoding <| color [ mString "#ccc" ] []
                 ]
 
         overlayEnc =
             encoding
-                << position Longitude [ PName "lon", PmType Quantitative ]
-                << position Latitude [ PName "lat", PmType Quantitative ]
+                << position Longitude [ pName "lon", pMType Quantitative ]
+                << position Latitude [ pName "lat", pMType Quantitative ]
                 << text [ TName "city", TmType Nominal ]
 
         overlaySpec =
@@ -1728,15 +1728,15 @@ geo7 =
             asSpec
                 [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
                 , geoshape []
-                , encoding <| color [ MString "#eee" ] []
+                , encoding <| color [ mString "#eee" ] []
                 ]
 
         airportsEnc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 5 ]
-                << color [ MString "gray" ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNumber 5 ]
+                << color [ mString "gray" ]
 
         airportsSpec =
             asSpec
@@ -1756,8 +1756,8 @@ geo7 =
 
         flightsEnc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
                 << order [ OName "order", OmType Ordinal ]
 
         flightsSpec =
@@ -1782,8 +1782,8 @@ geo8 =
     let
         enc =
             encoding
-                << shape [ MName "geo", MmType GeoFeature ]
-                << color [ MName "pct", MmType Quantitative ]
+                << shape [ mName "geo", mMType GeoFeature ]
+                << color [ mName "pct", mMType Quantitative ]
                 << row [ FName "group", FmType Nominal ]
     in
     toVegaLite
@@ -1821,16 +1821,16 @@ geo9 =
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
-                , encoding <| color [ MString "#ddc" ] []
+                , encoding <| color [ mString "#ddc" ] []
                 ]
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx", PmType Quantitative ]
-                << position Latitude [ PName "cy", PmType Quantitative ]
+                << position Longitude [ pName "cx", pMType Quantitative ]
+                << position Latitude [ pName "cy", pMType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
-                << size [ MNumber 8 ]
-                << opacity [ MNumber 0.6 ]
+                << size [ mNumber 8 ]
+                << opacity [ mNumber 0.6 ]
 
         trans =
             transform
@@ -1842,10 +1842,10 @@ geo9 =
         tubeEnc =
             encoding
                 << color
-                    [ MName "id"
-                    , MmType Nominal
-                    , MLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
-                    , MScale tubeLineColors
+                    [ mName "id"
+                    , mMType Nominal
+                    , mLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , mScale tubeLineColors
                     ]
 
         routeSpec =
@@ -1874,12 +1874,12 @@ interactive1 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "myBrush")
-                        [ MName "Cylinders", MmType Ordinal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "myBrush")
+                        [ mName "Cylinders", mMType Ordinal ]
+                        [ mString "grey" ]
                     ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], sel [], enc [] ]
@@ -1896,12 +1896,12 @@ interactive2 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << size
-                    [ MSelectionCondition (SelectionName "myPaintbrush")
-                        [ MNumber 300 ]
-                        [ MNumber 50 ]
+                    [ mSelectionCondition (selectionName "myPaintbrush")
+                        [ mNumber 300 ]
+                        [ mNumber 50 ]
                     ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], point [], sel [], enc [] ]
@@ -1918,9 +1918,9 @@ interactive3 =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative, PScale [ SDomain (DNumbers [ 75, 150 ]) ] ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative, PScale [ SDomain (DNumbers [ 20, 40 ]) ] ]
-                << size [ MName "Cylinders", MmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative, pScale [ SDomain (DNumbers [ 75, 150 ]) ] ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative, pScale [ SDomain (DNumbers [ 20, 40 ]) ] ]
+                << size [ mName "Cylinders", mMType Quantitative ]
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], circle [], sel [], enc [] ]
 
@@ -1948,15 +1948,15 @@ interactive4 =
 
         encPosition =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
 
         enc1 =
             encoding
                 << color
-                    [ MSelectionCondition (SelectionName "CylYr")
-                        [ MName "Origin", MmType Nominal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "CylYr")
+                        [ mName "Origin", mMType Nominal ]
+                        [ mString "grey" ]
                     ]
 
         spec1 =
@@ -1968,8 +1968,8 @@ interactive4 =
 
         enc2 =
             encoding
-                << color [ MName "Origin", MmType Nominal ]
-                << size [ MNumber 100 ]
+                << color [ mName "Origin", mMType Nominal ]
+                << size [ mNumber 100 ]
 
         spec2 =
             asSpec [ trans2 [], circle [], enc2 [] ]
@@ -1993,15 +1993,15 @@ interactive5 =
             selection << select "myBrush" Interval [ Encodings [ ChX ] ]
 
         encPosition =
-            encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+            encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
         enc1 =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
                 << opacity
-                    [ MSelectionCondition (SelectionName "myBrush")
-                        [ MNumber 1 ]
-                        [ MNumber 0.7 ]
+                    [ mSelectionCondition (selectionName "myBrush")
+                        [ mNumber 1 ]
+                        [ mNumber 0.7 ]
                     ]
 
         spec1 =
@@ -2013,8 +2013,8 @@ interactive5 =
 
         enc2 =
             encoding
-                << color [ MString "firebrick" ]
-                << size [ MNumber 3 ]
+                << color [ mString "firebrick" ]
+                << size [ mNumber 3 ]
 
         spec2 =
             asSpec [ des, trans [], rule [], enc2 [] ]
@@ -2037,16 +2037,16 @@ interactive6 =
 
         enc1 =
             encoding
-                << position X [ PName "date", PmType Temporal, PScale [ SDomain (DSelection "myBrush") ], PAxis [ AxTitle "" ] ]
-                << position Y [ PName "price", PmType Quantitative ]
+                << position X [ pName "date", pMType Temporal, pScale [ SDomain (DSelection "myBrush") ], pAxis [ AxTitle "" ] ]
+                << position Y [ pName "price", pMType Quantitative ]
 
         spec1 =
             asSpec [ width 500, area [], enc1 [] ]
 
         enc2 =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
-                << position Y [ PName "price", PmType Quantitative, PAxis [ AxTickCount 3, AxGrid False ] ]
+                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+                << position Y [ pName "price", pMType Quantitative, pAxis [ AxTickCount 3, AxGrid False ] ]
 
         spec2 =
             asSpec [ width 480, height 60, sel [], area [], enc2 [] ]
@@ -2073,14 +2073,14 @@ interactive7 =
 
         encPosition =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative, PBin [ MaxBins 20 ] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative, pBin [ MaxBins 20 ] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
 
         spec1 =
             asSpec [ sel [], bar [] ]
 
         spec2 =
-            asSpec [ selTrans [], bar [], encoding (color [ MString "goldenrod" ] []) ]
+            asSpec [ selTrans [], bar [], encoding (color [ mString "goldenrod" ] []) ]
 
         spec =
             asSpec
@@ -2122,12 +2122,12 @@ interactive8 =
 
         enc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PRepeat Row, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pRepeat Row, pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "myBrush")
-                        [ MName "Origin", MmType Nominal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "myBrush")
+                        [ mName "Origin", mMType Nominal ]
+                        [ mString "grey" ]
                     ]
 
         spec =
@@ -2152,20 +2152,20 @@ interactive9 =
 
         encPosition =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative, PBin [ MaxBins 10 ] ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [ MaxBins 10 ] ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [ MaxBins 10 ] ]
 
         enc1 =
             encoding
-                << color [ MAggregate Count, MmType Quantitative, MLegend [ LTitle "" ] ]
+                << color [ mAggregate Count, mMType Quantitative, mLegend [ LTitle "" ] ]
 
         spec1 =
             asSpec [ width 300, rect [], enc1 [] ]
 
         enc2 =
             encoding
-                << size [ MAggregate Count, MmType Quantitative, MLegend [ LTitle "In Selected Category" ] ]
-                << color [ MString "#666" ]
+                << size [ mAggregate Count, mMType Quantitative, mLegend [ LTitle "In Selected Category" ] ]
+                << color [ mString "#666" ]
 
         spec2 =
             asSpec [ selTrans [], point [], enc2 [] ]
@@ -2181,12 +2181,12 @@ interactive9 =
 
         encBar =
             encoding
-                << position X [ PName "Major_Genre", PmType Nominal, PAxis [ AxLabelAngle -40 ] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
+                << position X [ pName "Major_Genre", pMType Nominal, pAxis [ AxLabelAngle -40 ] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "myPts")
-                        [ MString "steelblue" ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "myPts")
+                        [ mString "steelblue" ]
+                        [ mString "grey" ]
                     ]
 
         config =
@@ -2211,14 +2211,14 @@ interactive10 =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal ]
-                << position Y [ PName "price", PmType Quantitative ]
-                << color [ MName "symbol", MmType Nominal ]
+                << position X [ pName "date", pMType Temporal ]
+                << position Y [ pName "price", pMType Quantitative ]
+                << color [ mName "symbol", mMType Nominal ]
 
         pointEnc =
             encoding
-                << color [ MName "symbol", MmType Nominal ]
-                << opacity [ MSelectionCondition (Expr "myTooltip") [ MNumber 1 ] [ MNumber 0 ] ]
+                << color [ mName "symbol", mMType Nominal ]
+                << opacity [ mSelectionCondition (expr "myTooltip") [ mNumber 1 ] [ mNumber 0 ] ]
 
         textEnc =
             encoding << text [ TName "price", TmType Quantitative ]

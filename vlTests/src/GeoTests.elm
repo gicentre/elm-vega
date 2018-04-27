@@ -20,7 +20,7 @@ defaultSize1 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , geoshape []
-        , encoding <| color [ MString "black" ] []
+        , encoding <| color [ mString "black" ] []
         ]
 
 
@@ -32,7 +32,7 @@ defaultSize2 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , geoshape []
-        , encoding <| color [ MString "black" ] []
+        , encoding <| color [ mString "black" ] []
         ]
 
 
@@ -44,7 +44,7 @@ choropleth1 =
         , configure <| configuration (View [ Stroke Nothing ]) []
         , dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
         , geoshape [ MStrokeOpacity 0 ]
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -57,8 +57,8 @@ choropleth2 =
 
         polyEnc =
             encoding
-                << color [ MName "id", MmType Nominal, MScale boroughColors, MLegend [] ]
-                << opacity [ MNumber 1 ]
+                << color [ mName "id", mMType Nominal, mScale boroughColors, mLegend [] ]
+                << opacity [ mNumber 1 ]
 
         polySpec =
             asSpec
@@ -69,8 +69,8 @@ choropleth2 =
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx", PmType Quantitative ]
-                << position Latitude [ PName "cy", PmType Quantitative ]
+                << position Longitude [ pName "cx", pMType Quantitative ]
+                << position Latitude [ pName "cy", pMType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
 
         labelSpec =
@@ -91,7 +91,7 @@ tubeLines1 =
         , height 500
         , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
         , geoshape [ MFilled False ]
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -101,10 +101,10 @@ tubeLines2 =
         enc =
             encoding
                 << color
-                    [ MName "id"
-                    , MmType Nominal
-                    , MLegend [ LTitle "", LOrient BottomRight ]
-                    , MScale tubeLineColors
+                    [ mName "id"
+                    , mMType Nominal
+                    , mLegend [ LTitle "", LOrient BottomRight ]
+                    , mScale tubeLineColors
                     ]
     in
     toVegaLite
@@ -124,16 +124,16 @@ tubeLines3 =
             asSpec
                 [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
-                , encoding <| color [ MString "#ddc" ] []
+                , encoding <| color [ mString "#ddc" ] []
                 ]
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx", PmType Quantitative ]
-                << position Latitude [ PName "cy", PmType Quantitative ]
+                << position Longitude [ pName "cx", pMType Quantitative ]
+                << position Latitude [ pName "cy", pMType Quantitative ]
                 << text [ TName "bLabel", TmType Nominal ]
-                << size [ MNumber 8 ]
-                << opacity [ MNumber 0.6 ]
+                << size [ mNumber 8 ]
+                << opacity [ mNumber 0.6 ]
 
         trans =
             transform
@@ -145,10 +145,10 @@ tubeLines3 =
         tubeEnc =
             encoding
                 << color
-                    [ MName "id"
-                    , MmType Nominal
-                    , MLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
-                    , MScale tubeLineColors
+                    [ mName "id"
+                    , mMType Nominal
+                    , mLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , mScale tubeLineColors
                     ]
 
         routeSpec =
@@ -335,10 +335,10 @@ dotMap1 =
     let
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 1 ]
-                << color [ MName "digit", MmType Nominal ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNumber 1 ]
+                << color [ mName "digit", mMType Nominal ]
     in
     toVegaLite
         [ description "US zip codes: One dot per zipcode colored by first digit"
@@ -371,10 +371,10 @@ scribbleMap1 =
 
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
                 << order [ OName "zip_code", OmType Quantitative ]
-                << color [ MString "#666" ]
+                << color [ mString "#666" ]
                 << detail [ DName "conterminous", DmType Nominal ]
     in
     toVegaLite
@@ -410,10 +410,10 @@ scribbleMap2 =
 
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
-                << position Latitude [ PName "latitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
+                << position Longitude [ pName "longitude", pMType Quantitative, pSort [ ByField "zip_code" ] ]
+                << position Latitude [ pName "latitude", pMType Quantitative, pSort [ ByField "zip_code" ] ]
                 << order [ OName "zip_code", OmType Quantitative ]
-                << color [ MName "digit3", MmType Nominal, MLegend [] ]
+                << color [ mName "digit3", mMType Nominal, mLegend [] ]
                 << detail [ DName "ziplen", DmType Nominal ]
     in
     toVegaLite
