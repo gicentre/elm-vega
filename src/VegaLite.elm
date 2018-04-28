@@ -21,7 +21,7 @@ module VegaLite
         , Data
         , DataColumn
         , DataRow
-        , DataType(..)
+        , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
         , DataValue(..)
         , DataValues(..)
         , DateTime(..)
@@ -178,6 +178,9 @@ module VegaLite
         , facet
         , fill
         , filter
+        , foDate
+        , foUtc
+          --, DataType(FoNumber, FoBoolean)
         , geoFeatureCollection
         , geometry
         , geometryCollection
@@ -332,6 +335,8 @@ Functions and types for declaring the input data to the visualization.
 @docs Format
 @docs Geometry
 @docs DataType
+@docs foDate
+@docs foUtc
 
 
 # Creating the Transform Specification
@@ -1255,12 +1260,9 @@ type alias DataRow =
     Spec
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
-and `FoUtc`, the formatting specification can be specified using
-[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
-or left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default parsing of dates because different browsers can
-parse dates differently. Being explicit about the date format is usually safer.
+{-| Indicates the type of data to be parsed when reading input data. When parsing
+dates, you should use the `foDate` or `foUtc` functions rather than their
+equivalent (deprecated) type constructors.
 -}
 type DataType
     = FoNumber
@@ -3414,6 +3416,28 @@ channel. For details, see the
 fMType : Measurement -> FacetChannel
 fMType =
     FmType
+
+
+{-| Specity a date format for parsing input data. Formatting can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of dates because different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+foDate : String -> DataType
+foDate =
+    FoDate
+
+
+{-| Specity a UTC date format for parsing input data. Formatting can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of UTC dates because different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+foUtc : String -> DataType
+foUtc =
+    FoUtc
 
 
 {-| Specify the form of time unit aggregation of field values when encoding
