@@ -6,7 +6,7 @@ module VegaLite
         , AxisConfig(..)
         , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
           --, AxisProperty
-        , BinProperty(..)
+        , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
         , Binding(..)
         , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
           --TODO: Replace with the following in next major release: , BooleanOp
@@ -124,6 +124,15 @@ module VegaLite
         , background
         , bar
           -- TODO: Make bin private in next major version.
+        , biBase
+        , biDivide
+        , biExtent
+        , biMaxBins
+        , biMinStep
+        , biNice
+        , biStep
+        , biSteps
+          --, BinProperty
         , bin
         , binAs
         , calculateAs
@@ -328,7 +337,14 @@ data fields or geospatial coordinates before they are encoded visually.
 ## Binning
 
 @docs binAs
-@docs BinProperty
+@docs biBase
+@docs biDivide
+@docs biExtent
+@docs biMaxBins
+@docs biMinStep
+@docs biNice
+@docs biStep
+@docs biSteps
 
 
 ## Data Calculation
@@ -783,6 +799,7 @@ instead of `PAggregate` use `pAggregate` etc.
 @docs bin
 
 @docs AxisProperty
+@docs BinProperty
 
 -}
 
@@ -920,19 +937,100 @@ type Binding
     | IColor String (List InputProperty)
 
 
-{-| Type of binning property to customise. See the
+{-| _Note: specifying binning properties with type constructors (`Base`,
+`Extent` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`biBase`, `biExtent` etc.)_
+
+Type of binning property to customise. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
 more details.
+
 -}
 type BinProperty
     = Base Float
-    | Divide Float Float
+    | Divide Float Float -- Note when made private in next major release, this option will disappear in favour of more general list of possible divisors
+    | Divides (List Float)
     | Extent Float Float
     | MaxBins Int
     | MinStep Float
     | Nice Bool
     | Step Float
     | Steps (List Float)
+
+
+{-| Specify the number base to use for automatic bin determination (default is
+base 10). For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biBase : Float -> BinProperty
+biBase =
+    Base
+
+
+{-| Specify the scale factors indicating allowable subdivisions for binning.
+The default value is [5, 2], which indicates that for base 10 numbers (the
+default base), binning will consider dividing bin sizes by 5 and/or 2.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biDivide : List Float -> BinProperty
+biDivide =
+    Divides
+
+
+{-| Specify the desired range of bin values when binning a collection of values.
+The first and second parameters indicate the minumum and maximum range values
+respectively. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biExtent : Float -> Float -> BinProperty
+biExtent =
+    Extent
+
+
+{-| Specify the maximum number of bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biMaxBins : Int -> BinProperty
+biMaxBins =
+    MaxBins
+
+
+{-| Specify the step size between bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biMinStep : Float -> BinProperty
+biMinStep =
+    MinStep
+
+
+{-| Specify whether or not binning boundaries use human-friendly values such as
+multiples of ten. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biNice : Bool -> BinProperty
+biNice =
+    Nice
+
+
+{-| Specify an exact step size between bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biStep : Float -> BinProperty
+biStep =
+    Step
+
+
+{-| Specify the allowable step sizes between bins when binning a collection of
+values. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biSteps : List Float -> BinProperty
+biSteps =
+    Steps
 
 
 {-| Used for creating logical compositions. _Note referencing BooleanOp type
@@ -2536,17 +2634,17 @@ bin bProps =
 
 
 {-| Create a named binning transformation that may be referenced in other Transformations
-or encodings. This works in a similar way to `bin` but requires the name of the field
-to bin and an additional label so it may be referenced in other expressions. The
-type of binning can be customised with a list of `BinProperty` or an empty list
-to use the default binning. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details. Note that usually, direct binning within an encoding is preferred
-over this form of bin transformation.
+or encodings. The type of binning can be customised with a list of `BinProperty`
+generating functions (`biBase`, `biDivide` etc.) or an empty list to use the default
+binning. For more details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html).
 
     trans =
         transform
             << binAs [ MaxBins 3 ] "IMDB_Rating" "ratingGroup"
+
+Note that usually, direct binning within an encoding is preferred over this form
+of bin transformation.
 
 -}
 binAs : List BinProperty -> String -> String -> List LabelledSpec -> List LabelledSpec
@@ -5068,6 +5166,9 @@ binProperty binProp =
 
         Divide x y ->
             ( "divide", JE.list [ JE.float x, JE.float y ] )
+
+        Divides xs ->
+            ( "divide", JE.list (List.map JE.float xs) )
 
         Extent mn mx ->
             ( "extent", JE.list [ JE.float mn, JE.float mx ] )
