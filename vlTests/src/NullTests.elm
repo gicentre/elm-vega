@@ -19,7 +19,7 @@ axis1 =
             encoding
                 << position X [ pName "x", pMType Quantitative, pAxis [] ]
                 << position Y [ pName "y", pMType Quantitative, pAxis [] ]
-                << order [ OName "order", OmType Ordinal ]
+                << order [ oName "order", oMType Ordinal ]
     in
     toVegaLite [ data [], enc [], line [] ]
 

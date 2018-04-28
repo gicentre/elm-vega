@@ -23,8 +23,8 @@ markCondition1 =
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
                     [ mDataCondition
-                        (Or (Expr "datum.IMDB_Rating === null")
-                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                        (or (expr "datum.IMDB_Rating === null")
+                            (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
                         [ mString "#ddd" ]
                         [ mString "#0099ee" ]
@@ -88,7 +88,7 @@ selectionCondition2 =
                 << position Y [ pName "Origin", pMType Ordinal ]
                 << position X [ pName "Cylinders", pMType Ordinal ]
                 << color
-                    [ mSelectionCondition (And (selectionName "alex") (selectionName "morgan"))
+                    [ mSelectionCondition (and (selectionName "alex") (selectionName "morgan"))
                         [ mAggregate Count, mName "*", mMType Quantitative ]
                         [ mString "gray" ]
                     ]
@@ -105,7 +105,7 @@ selectionCondition3 =
 
         trans =
             transform
-                << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+                << filter (FCompose (and (selected "brush") (expr "datum.Weight_in_lbs > 3000")))
 
         sel =
             selection

@@ -20,12 +20,12 @@ hyperlink1 =
                 << position X [ pName "label", pMType Nominal, pAxis [] ]
                 << size [ mNumber 8000 ]
                 << color [ mName "label", mMType Nominal, mLegend [] ]
-                << hyperlink [ HName "url", HmType Nominal ]
+                << hyperlink [ hName "url", hMType Nominal ]
 
         encLabel =
             encoding
                 << position X [ pName "label", pMType Nominal, pAxis [] ]
-                << text [ TName "label", TmType Nominal ]
+                << text [ tName "label", tMType Nominal ]
                 << color [ mString "white" ]
                 << size [ mNumber 16 ]
 
@@ -49,7 +49,7 @@ hyperlink2 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
-                << hyperlink [ HString "http://www.imdb.com" ]
+                << hyperlink [ hString "http://www.imdb.com" ]
     in
     toVegaLite [ data, point [ MCursor CPointer ], enc [] ]
 
@@ -65,14 +65,14 @@ hyperlink3 =
                 << position X [ pName "IMDB_Rating", pMType Quantitative ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ mDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
+                    [ mDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
                         [ mString "steelblue" ]
                         [ mString "red" ]
                     ]
                 << hyperlink
-                    [ HDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ HString "http://www.imdb.com" ]
-                        [ HString "https://www.rottentomatoes.com" ]
+                    [ hDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
+                        [ hString "http://www.imdb.com" ]
+                        [ hString "https://www.rottentomatoes.com" ]
                     ]
     in
     toVegaLite [ data, point [ MCursor CPointer ], enc [] ]

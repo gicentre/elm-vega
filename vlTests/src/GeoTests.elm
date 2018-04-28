@@ -71,7 +71,7 @@ choropleth2 =
             encoding
                 << position Longitude [ pName "cx", pMType Quantitative ]
                 << position Latitude [ pName "cy", pMType Quantitative ]
-                << text [ TName "bLabel", TmType Nominal ]
+                << text [ tName "bLabel", tMType Nominal ]
 
         labelSpec =
             asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
@@ -131,7 +131,7 @@ tubeLines3 =
             encoding
                 << position Longitude [ pName "cx", pMType Quantitative ]
                 << position Latitude [ pName "cy", pMType Quantitative ]
-                << text [ TName "bLabel", TmType Nominal ]
+                << text [ tName "bLabel", tMType Nominal ]
                 << size [ mNumber 8 ]
                 << opacity [ mNumber 0.6 ]
 
@@ -373,9 +373,9 @@ scribbleMap1 =
             encoding
                 << position Longitude [ pName "longitude", pMType Quantitative ]
                 << position Latitude [ pName "latitude", pMType Quantitative ]
-                << order [ OName "zip_code", OmType Quantitative ]
+                << order [ oName "zip_code", oMType Quantitative ]
                 << color [ mString "#666" ]
-                << detail [ DName "conterminous", DmType Nominal ]
+                << detail [ dName "conterminous", dMType Nominal ]
     in
     toVegaLite
         [ title "US connected zip codes"
@@ -412,9 +412,9 @@ scribbleMap2 =
             encoding
                 << position Longitude [ pName "longitude", pMType Quantitative, pSort [ ByField "zip_code" ] ]
                 << position Latitude [ pName "latitude", pMType Quantitative, pSort [ ByField "zip_code" ] ]
-                << order [ OName "zip_code", OmType Quantitative ]
+                << order [ oName "zip_code", oMType Quantitative ]
                 << color [ mName "digit3", mMType Nominal, mLegend [] ]
-                << detail [ DName "ziplen", DmType Nominal ]
+                << detail [ dName "ziplen", dMType Nominal ]
     in
     toVegaLite
         [ title "US connected zip codes, coloured by first three digits"

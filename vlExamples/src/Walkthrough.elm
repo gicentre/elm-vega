@@ -95,7 +95,7 @@ multiBar =
                 << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
                 << position Y [ pAggregate Count, pMType Quantitative ]
                 << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
-                << column [ FName "weather", FmType Nominal ]
+                << column [ fName "weather", fMType Nominal ]
     in
     toVegaLite
         [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
@@ -247,7 +247,7 @@ dashboard2 =
                 << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
                 << position Y [ pAggregate Count, pMType Quantitative ]
                 << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
-                << column [ FName "weather", FmType Nominal ]
+                << column [ fName "weather", fMType Nominal ]
 
         histoSpec =
             asSpec [ bar [], histoEnc [] ]

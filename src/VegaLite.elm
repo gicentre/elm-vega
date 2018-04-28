@@ -8,6 +8,7 @@ module VegaLite
         , BinProperty(..)
         , Binding(..)
         , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
+          --, BooleanOp
         , CInterpolate(..)
         , Channel(..)
         , ClipRect(..)
@@ -22,8 +23,10 @@ module VegaLite
         , DataValues(..)
         , DateTime(..)
         , DayName(..)
-        , DetailChannel(..)
-        , FacetChannel(..)
+        , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
+          --, DetailChannel
+        , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
+          --, FacetChannel
         , FacetMapping(..)
         , FieldTitleProperty(..)
         , Filter(..)
@@ -33,7 +36,8 @@ module VegaLite
         , Geometry(..)
         , HAlign(..)
         , HeaderProperty(..)
-        , HyperlinkChannel(..)
+        , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
+          --, HyperlinkChannel
         , InputProperty(..)
         , LabelledSpec
         , Legend(..)
@@ -42,18 +46,22 @@ module VegaLite
         , LegendProperty(..)
         , LegendValues(..)
         , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
+          --, Mark
         , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
+          --, MarkChannel
         , MarkInterpolation(..)
         , MarkOrientation(..)
         , MarkProperty(..)
         , Measurement(..)
         , MonthName(..)
         , Operation(..)
-        , OrderChannel(..)
+        , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
+          --, OrderChannel
         , OverlapStrategy(..)
         , Padding(..)
         , Position(..)
         , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
+          --, PositionChannel
         , Projection(..)
         , ProjectionProperty(..)
         , RangeConfig(..)
@@ -75,7 +83,8 @@ module VegaLite
         , Spec
         , StackProperty(..)
         , Symbol(..)
-        , TextChannel(..)
+        , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
+          --, TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
         , VAlign(..)
@@ -87,8 +96,8 @@ module VegaLite
         , asSpec
         , autosize
         , background
-          -- TODO: Make bin private in next major version.
         , bar
+          -- TODO: Make bin private in next major version.
         , bin
         , binAs
         , calculateAs
@@ -100,6 +109,11 @@ module VegaLite
         , configuration
         , configure
         , customSort
+        , dAggregate
+        , dBin
+        , dMType
+        , dName
+        , dTimeUnit
         , dataColumn
         , dataFromColumns
         , dataFromJson
@@ -113,6 +127,12 @@ module VegaLite
         , domainRangeMap
         , encoding
         , expr
+        , fAggregate
+        , fBin
+        , fHeader
+        , fMType
+        , fName
+        , fTimeUnit
         , facet
         , fill
         , filter
@@ -120,7 +140,16 @@ module VegaLite
         , geometry
         , geometryCollection
         , geoshape
+        , hAggregate
+        , hBin
         , hConcat
+        , hDataCondition
+        , hMType
+        , hName
+        , hRepeat
+        , hSelectionCondition
+        , hString
+        , hTimeUnit
         , height
         , hyperlink
         , layer
@@ -144,6 +173,13 @@ module VegaLite
         , mark
         , name
         , not
+        , oAggregate
+        , oBin
+        , oMType
+        , oName
+        , oRepeat
+        , oSort
+        , oTimeUnit
         , opAs
         , opacity
         , or
@@ -177,6 +213,15 @@ module VegaLite
         , specification
         , square
         , stroke
+        , tAggregate
+        , tBin
+        , tDataCondition
+        , tFormat
+        , tMType
+        , tName
+        , tRepeat
+        , tSelectionCondition
+        , tTimeUnit
         , text
         , textMark
         , tick
@@ -253,7 +298,6 @@ data fields or geospatial coordinates before they are encoded visually.
 
 ## Binning
 
-@docs bin
 @docs binAs
 @docs BinProperty
 
@@ -300,11 +344,6 @@ The preferred method of specifying mark types is to call the relevant mark funct
 @docs MarkInterpolation
 @docs Symbol
 @docs Cursor
-
-The following are deprecated and will be removed in a future major version release.
-
-@docs mark
-@docs Mark
 
 
 # Creating the Encoding Specification
@@ -355,8 +394,6 @@ Relates to where something appears in the visualization.
 @docs TimeUnit
 @docs utc
 
-@docs PositionChannel
-
 
 ## Mark channels
 
@@ -396,8 +433,6 @@ color or size.
 @docs LegendOrientation
 @docs LegendValues
 
-@docs MarkChannel
-
 
 ## Text Channels
 
@@ -405,7 +440,15 @@ Relate to the appearance of the text and tooltip elements of the visualization.
 
 @docs text
 @docs tooltip
-@docs TextChannel
+@docs tName
+@docs tRepeat
+@docs tMType
+@docs tBin
+@docs tAggregate
+@docs tTimeUnit
+@docs tSelectionCondition
+@docs tDataCondition
+@docs tFormat
 
 
 ## Hyperlink Channel
@@ -416,7 +459,15 @@ option of changing the cursor style when hovering, so an encoding will usually
 pair hyperlinks with other visual channels such as marks or texts.
 
 @docs hyperlink
-@docs HyperlinkChannel
+@docs hName
+@docs hRepeat
+@docs hMType
+@docs hBin
+@docs hAggregate
+@docs hTimeUnit
+@docs hDataCondition
+@docs hSelectionCondition
+@docs hString
 
 
 ## Order channels
@@ -427,7 +478,13 @@ or order of data points in a connected scatterplot. See the
 for further details.
 
 @docs order
-@docs OrderChannel
+@docs oName
+@docs oRepeat
+@docs oMType
+@docs oBin
+@docs oAggregate
+@docs oSort
+@docs oTimeUnit
 
 
 ## Facet channels
@@ -453,7 +510,11 @@ a line chart with multiple lines to be created – one for each group. See the
 for more information.
 
 @docs detail
-@docs DetailChannel
+@docs dName
+@docs dMType
+@docs dAggregate
+@docs dBin
+@docs dTimeUnit
 
 
 ## Scaling
@@ -501,7 +562,14 @@ arrangement (in rows or columns). For details see the
 @docs RepeatFields
 @docs facet
 @docs FacetMapping
-@docs FacetChannel
+
+@docs fName
+@docs fMType
+@docs fAggregate
+@docs fBin
+@docs fHeader
+@docs fTimeUnit
+
 @docs asSpec
 @docs specification
 @docs Arrangement
@@ -581,8 +649,6 @@ For details, see the
 @docs selected
 @docs selectionName
 
-@docs BooleanOp
-
 
 # Global Configuration
 
@@ -613,7 +679,7 @@ to the data and transform options described above.
 @docs FieldTitleProperty
 
 
-# General Data types
+# General Data Types
 
 In addition to more general data types like integers and string, the following types
 can carry data used in specifications.
@@ -623,6 +689,31 @@ can carry data used in specifications.
 @docs DateTime
 @docs MonthName
 @docs DayName
+
+---
+
+
+# Deprecated Types and functions
+
+The following are deprecated and will be removed in a future major version release.
+Generally, the constructors of each type should be replaced with a function of
+the same name. For example, instead of the `Rule` type use the `rule` function;
+instead of `PAggregate` use `pAggregate` etc.
+
+@docs PositionChannel
+@docs MarkChannel
+@docs DetailChannel
+@docs FacetChannel
+@docs HyperlinkChannel
+@docs OrderChannel
+@docs TextChannel
+
+@docs Mark
+@docs mark
+
+@docs BooleanOp
+
+@docs bin
 
 -}
 
@@ -770,18 +861,9 @@ type BinProperty
     | Steps (List Float)
 
 
-{-| Used for creating logical compositions. For example
-
-    color
-        [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
-            [ mAggregate Count, mName "*", mMType Quantitative ]
-            [ mString "gray" ]
-        ]
-
-Logical compositions can be nested to any level. For example
-
-    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
-
+{-| Used for creating logical compositions. _Note referencing BooleanOp type
+constructors (`And`, `Not`, `Expr` etc.) is deprecated in favour of calling their
+equivalent Boolean operation functions (`and`, `not`, `expr` etc.)_
 -}
 type BooleanOp
     = Expr String
@@ -1012,7 +1094,14 @@ type DayName
     | Sun
 
 
-{-| Level of detail channel properties used for creating a grouped channel encoding.
+{-| _Note: referencing detail channel type constructors (`DName`, `DBin` etc.)
+is deprecated in favour of calling their equivalent detail channel functions
+(`dName`, `dBin` etc.)_
+
+Level of detail channel properties used for creating a grouped channel encoding.
+For details see the
+[Vega-Lite level of detail channel documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
+
 -}
 type DetailChannel
     = DName String
@@ -1047,8 +1136,13 @@ type DetailChannel
 --     | Wheel
 
 
-{-| Types of facet channel property used for creating a composed facet view of small
+{-| _Note: referencing facet channel type constructors (`FName`, `FBin` etc.) is
+deprecated in favour of calling their equivalent facet channel functions
+(`fName`, `fBin` etc.)_
+
+Types of facet channel property used for creating a composed facet view of small
 multiples.
+
 -}
 type FacetChannel
     = FName String
@@ -1166,7 +1260,12 @@ type HeaderProperty
     | HTitle String
 
 
-{-| Types of hyperlink channel property used for linking marks or text to URLs.
+{-| _Note: referencing hyperlink channel type constructors (`HName`, `HBin` etc.)
+is deprecated in favour of calling their equivalent hyperlink channel functions
+(`hName`, `hBin` etc.)_
+
+Types of hyperlink channel property used for linking marks or text to URLs.
+
 -}
 type HyperlinkChannel
     = HName String
@@ -1298,9 +1397,11 @@ type LegendValues
     | LStrings (List String)
 
 
-{-| Type of visual mark used to represent data in the visualization.
-_Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is
-deprecated in favour of calling mark functions (`area`, `bar` etc.)_
+{-| _Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is
+deprecated in favour of calling their equivalent mark functions (`area`, `bar` etc.)_
+
+Type of visual mark used to represent data in the visualization.
+
 -}
 type Mark
     = Area
@@ -1317,9 +1418,12 @@ type Mark
     | Trail
 
 
-{-| Mark channel properties used for creating a mark channel encoding.
-_Note: referencing mark channel type constructors (`MName`, `MRepeat` etc.) is
-deprecated in favour of calling mark channel functions (`mName`, `mRepeat` etc.)_
+{-| _Note: referencing mark channel type constructors (`MName`, `MBin` etc.) is
+deprecated in favour of calling their equivalent mark channel functions
+(`mName`, `mBin` etc.)_
+
+Mark channel properties used for creating a mark channel encoding.
+
 -}
 type MarkChannel
     = MName String
@@ -1478,7 +1582,12 @@ type Operation
     | VarianceP
 
 
-{-| Properties of an ordering channel used for sorting data fields.
+{-| _Note: referencing order channel type constructors (`OName`, `OBin` etc.) is
+deprecated in favour of calling their equivalent order channel functions
+(`oName`, `oBin` etc.)_
+
+Properties of an ordering channel used for sorting data fields.
+
 -}
 type OrderChannel
     = OName String
@@ -1528,9 +1637,12 @@ type Position
     | Latitude2
 
 
-{-| Position channel properties used for creating a position channel encoding.
-_Note: referencing position channel type constructors (`PName`, `PRepeat` etc.) is
-deprecated in favour of calling position channel functions (`pName`, `pRepeat` etc.)_
+{-| _Note: referencing position channel type constructors (`PName`, `PBin` etc.) is
+deprecated in favour of calling their equivalent position channel functions
+(`pName`, `pBin` etc.)_
+
+Position channel properties used for creating a position channel encoding.
+
 -}
 type PositionChannel
     = PName String
@@ -1852,7 +1964,12 @@ type Symbol
     | Path String
 
 
-{-| Types of text channel property used for displaying text as part of the visualization.
+{-| _Note: referencing text channel type constructors (`TName`, `TBin` etc.) is
+deprecated in favour of calling their equivalent text channel functions
+(`tName`, `tBin` etc.)_
+
+Types of text channel property used for displaying text as part of the visualization.
+
 -}
 type TextChannel
     = TName String
@@ -2048,6 +2165,10 @@ elements, such as in a stacked area chart or streamgraph. For details see the
 
     area [ MStroke "white" ]
 
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    area []
+
 -}
 area : List MarkProperty -> ( VLProperty, Spec )
 area =
@@ -2115,25 +2236,22 @@ the magnitude of values in categories. For details see the
 
     bar [ MFill "black", MStroke "white", MStrokeWeight 2 ]
 
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    bar []
+
 -}
 bar : List MarkProperty -> ( VLProperty, Spec )
 bar =
     mark Bar
 
 
-{-| Create a binning transformation to be applied directly to a channel. The type
-of binning can be customised with a list of `BinProperty` or an empty list to use
-the default binning. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details.
-
-    position X [ pName "IMDB_Rating", pMType Quantitative , pBin [] ]
-
+{-| _Deprecated in favour of channel-specific binning (e.g. `pBin`, `oBin` etc.)_
 -}
 bin : List BinProperty -> LabelledSpec
 bin bProps =
-    -- TODO: This should need to be exposed - only maintained for backward
-    -- compatiblity after it's previous function was renamed to binAs. In next
+    -- TODO: This should not need to be exposed - only maintained for backward
+    -- compatiblity after its previous function was renamed to binAs. In next
     -- major version, make private.
     if bProps == [] then
         ( "bin", JE.bool True )
@@ -2210,6 +2328,10 @@ categoricalDomainMap scaleDomainPairs =
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/circle.html).
 
     circle [ MStroke "red", MStrokeWeight 2 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    circle []
 
 -}
 circle : List MarkProperty -> ( VLProperty, Spec )
@@ -2321,6 +2443,16 @@ used in place of lists of [SortProperty](#SortProperty). For example,
 customSort : DataValues -> SortProperty
 customSort =
     CustomSort
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+level of detail (grouping) channel. The type of aggregation is determined by the
+given operation parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+dAggregate : Operation -> DetailChannel
+dAggregate =
+    DAggregate
 
 
 {-| Create a column of data. A column has a name and a list of values. The final
@@ -2561,6 +2693,15 @@ datasets namedData =
     ( VLDatasets, JE.object specs )
 
 
+{-| Discretizes a series of numeric values into bins when encoding with a level
+of detail (grouping) channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+dBin : List BinProperty -> DetailChannel
+dBin =
+    DBin
+
+
 {-| Provides an optional description to be associated with the visualization.
 
     enc = ...
@@ -2584,12 +2725,30 @@ is a list of any previous channels to which this detail channel should be added.
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
 for details.
 
-    detail [ DName "Species", DmType Nominal ] []
+    detail [ dName "Species", dMType Nominal ] []
 
 -}
 detail : List DetailChannel -> List LabelledSpec -> List LabelledSpec
 detail detailProps =
     (::) ( "detail", List.map detailChannelProperty detailProps |> JE.object )
+
+
+{-| Provide the name of the field used for encoding with a level of detail
+(grouping) channel. For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+dName : String -> DetailChannel
+dName =
+    DName
+
+
+{-| Specify the field type (level of measurement) when encoding with a level of
+detail (grouping) channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+dMType : Measurement -> DetailChannel
+dMType =
+    DmType
 
 
 {-| Create a pair of continuous domain to color mappings suitable for customising
@@ -2615,6 +2774,15 @@ domainRangeMap lowerMap upperMap =
             List.unzip [ lowerMap, upperMap ]
     in
     [ SDomain (DNumbers domain), SRange (RStrings range) ]
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a level of detail (grouping) channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+dTimeUnit : TimeUnit -> DetailChannel
+dTimeUnit =
+    DTimeUnit
 
 
 {-| Create an encoding specification from a list of channel encodings.
@@ -2648,7 +2816,7 @@ to apply to each of those facets using `asSpec`.
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ FName "Origin", FmType Nominal ] ]
+        [ facet [ RowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -2659,6 +2827,35 @@ for further details.
 facet : List FacetMapping -> ( VLProperty, Spec )
 facet fMaps =
     ( VLFacet, JE.object (List.map facetMappingProperty fMaps) )
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+facet channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+fAggregate : Operation -> FacetChannel
+fAggregate =
+    FAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+facet channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+fBin : List BinProperty -> FacetChannel
+fBin =
+    FBin
+
+
+{-| Specify the 'axis' for a series of faceted plots. This is the guide that spans
+the collection of faceted plots, each of which may have their own axes. For details,
+see the
+[Vega-Lite facet header documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+fHeader : List HeaderProperty -> FacetChannel
+fHeader =
+    FHeader
 
 
 {-| Encode a fill channel. This acts in a similar way to encoding by `color` but
@@ -2742,7 +2939,34 @@ filter f =
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
 
 
-{-| Specifies a list of geo features to be used in a geoShape specification.
+{-| Provide the name of the field used for encoding with a facet channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+fName : String -> FacetChannel
+fName =
+    FName
+
+
+{-| Specify the field type (level of measurement) when encoding with a facet
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+fMType : Measurement -> FacetChannel
+fMType =
+    FmType
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a facet channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+fTimeUnit : TimeUnit -> FacetChannel
+fTimeUnit =
+    FTimeUnit
+
+
+{-| Specifies a list of geo features to be used in a `geoshape` specification.
 Each feature object in this collection can be created with the `geometry` function.
 
     geojson =
@@ -2762,7 +2986,7 @@ geoFeatureCollection geoms =
         ]
 
 
-{-| Specifies a list of geometry objects to be used in a geoShape specification.
+{-| Specifies a list of geometry objects to be used in a `geoshape` specification.
 Each geometry object in this collection can be created with the `geometry` function.
 
     geojson =
@@ -2780,9 +3004,9 @@ geometryCollection geoms =
         ]
 
 
-{-| Specifies a geometric object to be used in a geoShape specification. The first
-parameter is the geometric type, the second an optional list of properties to be
-associated with the object.
+{-| Specifies a geometric object to be used in a `geoshape` specification. The
+first parameter is the geometric type, the second an optional list of properties
+to be associated with the object.
 
       geojson =
           geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
@@ -2815,6 +3039,25 @@ geoshape =
     mark Geoshape
 
 
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+hyperlink channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+hAggregate : Operation -> HyperlinkChannel
+hAggregate =
+    HAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+hyperlink channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+hBin : List BinProperty -> HyperlinkChannel
+hBin =
+    HBin
+
+
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
 
     let
@@ -2830,6 +3073,17 @@ geoshape =
 hConcat : List Spec -> ( VLProperty, Spec )
 hConcat specs =
     ( VLHConcat, JE.list specs )
+
+
+{-| Specify the properties of a hyperlink channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second the encoding
+to apply if the expression is true, the third the encoding if the expression is
+false. For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+hDataCondition : BooleanOp -> List HyperlinkChannel -> List HyperlinkChannel -> HyperlinkChannel
+hDataCondition op tCh fCh =
+    HDataCondition op tCh fCh
 
 
 {-| Overrides the default height of the visualization. If not specified the height
@@ -2849,12 +3103,66 @@ height h =
     ( VLHeight, JE.float h )
 
 
+{-| Specify the field type (level of measurement) when encoding with a hyperlink
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+hMType : Measurement -> HyperlinkChannel
+hMType =
+    HmType
+
+
+{-| Provide the name of the field used for encoding with a hyperlink channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+hName : String -> HyperlinkChannel
+hName =
+    HName
+
+
+{-| Reference in a hyperlink channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields being laid out
+in columns or in rows.
+-}
+hRepeat : Arrangement -> HyperlinkChannel
+hRepeat =
+    HRepeat
+
+
+{-| Specify the properties of a hyperlink channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the hyperlink has been selected, the third the encoding if it is not selected.
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+hSelectionCondition : BooleanOp -> List HyperlinkChannel -> List HyperlinkChannel -> HyperlinkChannel
+hSelectionCondition op tCh fCh =
+    HSelectionCondition op tCh fCh
+
+
+{-| Provide a literal string value when encoding with a hyperlink channel.
+-}
+hString : String -> HyperlinkChannel
+hString =
+    HString
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a hyperlink channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+hTimeUnit : TimeUnit -> HyperlinkChannel
+hTimeUnit =
+    HTimeUnit
+
+
 {-| Encode a hyperlink channel. The first parameter is a list of hyperlink channel
 properties that characterise the hyperlinking such as the destination url and cursor
 type. The second parameter is a list of any previous encoding channels to which
 this hyperlink channel should be added.
 
-    hyperlink [ HName "Species", HmType Nominal ] []
+    hyperlink [ hName "Species", hMType Nominal ] []
 
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
@@ -2886,6 +3194,10 @@ layer specs =
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/line.html).
 
     line [MStroke "red", MStrokeDash [1, 2] ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    line []
 
 -}
 line : List MarkProperty -> ( VLProperty, Spec )
@@ -2991,13 +3303,10 @@ mAggregate =
 
 
 {-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
+
 Create a mark specification. All marks must have a type (first parameter) and
 can optionally be customised with a list of mark properties such as interpolation
-style for lines. To keep the default style for the mark, just provide an empty list
-for the second parameter.
-
-    mark Circle []
-    mark Line [ MInterpolate StepAfter ]
+style for lines.
 
 -}
 mark : Mark -> List MarkProperty -> ( VLProperty, Spec )
@@ -3030,10 +3339,10 @@ mBoolean =
     MBoolean
 
 
-{-| Specify the properties of a mark channel conditional some predicate expression.
-The first parameter provides the expression to evaluate, the second the encoding
-to apply if the expression is true, the third the encoding if the expression is
-false.
+{-| Specify the properties of a mark channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second
+the encoding to apply if the expression is true, the third the encoding if the
+expression is false.
 
     color
         [ mDataCondition
@@ -3098,8 +3407,9 @@ mPath =
     MPath
 
 
-{-| Determine whether marks subject to repeated view composition should be laid
-out in rows or columns.
+{-| Reference in a mark channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
 -}
 mRepeat : Arrangement -> MarkChannel
 mRepeat =
@@ -3166,7 +3476,8 @@ name s =
     ( VLName, JE.string s )
 
 
-{-| Apply an 'and' Boolean operation as part of a logical composition.
+{-| Apply a negation Boolean operation as part of a logical composition. Boolean
+operations can be nested to any level, for example:
 
     not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
 
@@ -3174,6 +3485,43 @@ name s =
 not : BooleanOp -> BooleanOp
 not =
     Not
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with an
+order channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+oAggregate : Operation -> OrderChannel
+oAggregate =
+    OAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with an order
+channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+oBin : List BinProperty -> OrderChannel
+oBin =
+    OBin
+
+
+{-| Specify the field type (level of measurement) when encoding with an order
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+oMType : Measurement -> OrderChannel
+oMType =
+    OmType
+
+
+{-| Provide the name of the field used for encoding with an order channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+oName : String -> OrderChannel
+oName =
+    OName
 
 
 {-| Encode an opacity channel. The first parameter is a list of mark channel properties
@@ -3234,12 +3582,38 @@ which this order channel is to be added.
         encoding
             << position X [ pName "miles", pMType Quantitative ]
             << position Y [ pName "gas", pMType Quantitative ]
-            << order [ OName "year", OmType Temporal ]
+            << order [ oName "year", oMType Temporal ]
 
 -}
 order : List OrderChannel -> List LabelledSpec -> List LabelledSpec
 order oDefs =
     (::) ( "order", List.map orderChannelProperty oDefs |> JE.object )
+
+
+{-| Reference in a order channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
+-}
+oRepeat : Arrangement -> OrderChannel
+oRepeat =
+    ORepeat
+
+
+{-| Specify the sort order to be used by an order channel.
+[Vega-Lite order field documentation](https://vega.github.io/vega-lite/docs/encoding.html#order-field-definition)
+-}
+oSort : List SortProperty -> OrderChannel
+oSort =
+    OSort
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with an order channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+oTimeUnit : TimeUnit -> OrderChannel
+oTimeUnit =
+    OTimeUnit
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is
@@ -3303,6 +3677,10 @@ pMType =
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/point.html).
 
     point [ MFill "black", MStroke "red" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    point []
 
 -}
 point : List MarkProperty -> ( VLProperty, Spec )
@@ -3439,6 +3817,10 @@ the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rect.html).
 
     rect [ MFill "black", MStroke "red" ]
 
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    rect []
+
 -}
 rect : List MarkProperty -> ( VLProperty, Spec )
 rect =
@@ -3532,6 +3914,10 @@ entire width or height of a view, or to connect two arbitrary positions. For det
 see the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rule.html).
 
     rule [ MStroke "red" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    rule []
 
 -}
 rule : List MarkProperty -> ( VLProperty, Spec )
@@ -3630,7 +4016,7 @@ size markProps =
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ FName "Origin", FmType Nominal ] ]
+        [ facet [ RowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -3644,6 +4030,10 @@ specification spec =
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/square.html).
 
     square [ MStroke "red", MStrokeWeight 2 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    square []
 
 -}
 square : List MarkProperty -> ( VLProperty, Spec )
@@ -3666,6 +4056,36 @@ precedence.
 stroke : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 stroke markProps =
     (::) ( "stroke", List.concatMap markChannelProperty markProps |> JE.object )
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+text channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+tAggregate : Operation -> TextChannel
+tAggregate =
+    TAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a text
+channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+tBin : List BinProperty -> TextChannel
+tBin =
+    TBin
+
+
+{-| Specify the properties of a text channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second
+the encoding to apply if the expression is true, the third the encoding if the
+expression is false. For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+tDataCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
+tDataCondition op tCh fCh =
+    TDataCondition op tCh fCh
 
 
 {-| Encode a text channel. The first parameter is a list of text channel properties
@@ -3694,16 +4114,32 @@ the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/text.html).
 
     textMark [ MFontSize 18 ]
 
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    textMark []
+
 -}
 textMark : List MarkProperty -> ( VLProperty, Spec )
 textMark =
     mark Text
 
 
+{-| Provide a [formatting pattern](https://vega.github.io/vega-lite/docs/format.html)
+for a field when encoding with a text channel.
+-}
+tFormat : String -> TextChannel
+tFormat =
+    TFormat
+
+
 {-| Specify a short line mark for symbolising point locations. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/tick.html).
 
     tick [ MStroke "blue", MStrokeWeight 0.5 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    tick []
 
 -}
 tick : List MarkProperty -> ( VLProperty, Spec )
@@ -3754,6 +4190,33 @@ timeUnitAs tu field label =
 title : String -> ( VLProperty, Spec )
 title s =
     ( VLTitle, JE.string s )
+
+
+{-| Specify the field type (level of measurement) when encoding with a text
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+tMType : Measurement -> TextChannel
+tMType =
+    TmType
+
+
+{-| Provide the name of the field used for encoding with a text channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+tName : String -> TextChannel
+tName =
+    TName
+
+
+{-| Reference in a text channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
+-}
+tRepeat : Arrangement -> TextChannel
+tRepeat =
+    TRepeat
 
 
 {-| Encode a tooltip channel. The first parameter is a list of text channel properties
@@ -3918,6 +4381,26 @@ transform transforms =
         ( VLTransform, JE.null )
     else
         ( VLTransform, JE.list (List.map assemble transforms) )
+
+
+{-| Specify the properties of a text channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the text has been selected, the third the encoding if it is not selected.
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+tSelectionCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
+tSelectionCondition op tCh fCh =
+    TSelectionCondition op tCh fCh
+
+
+{-| Specify the form of time unit aggregation of field values when encoding with
+a text channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+tTimeUnit : TimeUnit -> TextChannel
+tTimeUnit =
+    TTimeUnit
 
 
 {-| Provides a UTC version of a given a time (coordinated universal time, independent
