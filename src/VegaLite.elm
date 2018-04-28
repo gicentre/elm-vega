@@ -1,20 +1,21 @@
 module VegaLite
     exposing
-        ( APosition(..)
-        , Arrangement(..)
-        , Autosize(..)
+        ( APosition(AEnd, AMiddle, AStart)
+        , Arrangement(Column, Row)
+        , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
         , AxisConfig(..)
-        , AxisProperty(..)
+        , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
+          --, AxisProperty
         , BinProperty(..)
         , Binding(..)
         , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
-          --, BooleanOp
+          --TODO: Replace with the following in next major release: , BooleanOp
         , CInterpolate(..)
-        , Channel(..)
+        , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
         , ClipRect(..)
           -- TODO: create functions for access to ConfigurationProperty type constructors
         , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
-        , Cursor(..)
+        , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
         , DataRow
@@ -22,72 +23,74 @@ module VegaLite
         , DataValue(..)
         , DataValues(..)
         , DateTime(..)
-        , DayName(..)
+        , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
         , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
-          --, DetailChannel
+          --TODO: Replace with the following in next major release: , DetailChannel
         , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
-          --, FacetChannel
+          --TODO: Replace with the following in next major release: , FacetChannel
         , FacetMapping(..)
-        , FieldTitleProperty(..)
+        , FieldTitleProperty(Function, Plain, Verbal)
         , Filter(..)
         , FilterRange(..)
-        , FontWeight(..)
+        , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
         , Format(..)
         , Geometry(..)
-        , HAlign(..)
+        , HAlign(AlignCenter, AlignLeft, AlignRight)
         , HeaderProperty(..)
         , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
-          --, HyperlinkChannel
+          --TODO: Replace with the following in next major release: , HyperlinkChannel
         , InputProperty(..)
         , LabelledSpec
-        , Legend(..)
+        , Legend(Gradient, Symbol)
         , LegendConfig(..)
-        , LegendOrientation(..)
+        , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
         , LegendProperty(..)
         , LegendValues(..)
         , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
-          --, Mark
+          --TODO: Replace with the following in next major release:, Mark
         , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
-          --, MarkChannel
-        , MarkInterpolation(..)
-        , MarkOrientation(..)
+          --TODO: Replace with the following in next major release: , MarkChannel
+        , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
+        , MarkOrientation(Horizontal, Vertical)
         , MarkProperty(..)
-        , Measurement(..)
-        , MonthName(..)
-        , Operation(..)
+        , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
+        , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
+        , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
         , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
-          --, OrderChannel
-        , OverlapStrategy(..)
+          --TODO: Replace with the following in next major release: , OrderChannel
+        , OverlapStrategy(OGreedy, ONone, OParity)
         , Padding(..)
-        , Position(..)
+        , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
         , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
-          --, PositionChannel
-        , Projection(..)
+          --TODO: Replace with the following in next major release: , PositionChannel
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+          --TODO: Replace with the following in next major release: , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
         , ProjectionProperty(..)
         , RangeConfig(..)
         , RepeatFields(..)
-        , Resolution(..)
+        , Resolution(Independent, Shared)
         , Resolve(..)
-        , Scale(..)
+        , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleConfig(..)
         , ScaleDomain(..)
         , ScaleNice(..)
         , ScaleProperty(..)
         , ScaleRange(..)
-        , Selection(..)
+        , Selection(Interval, Multi, Single)
         , SelectionMarkProperty(..)
         , SelectionProperty(..)
-        , SelectionResolution(..)
-        , Side(..)
+        , SelectionResolution(Global, Intersection, Union)
+        , Side(SBottom, SLeft, SRight, STop)
         , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
         , Spec
-        , StackProperty(..)
-        , Symbol(..)
+        , StackProperty(NoStack, StCenter, StNormalize, StZero)
+        , Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
+          --TODO: Replace with the following in next major release: , Symbol(SymCircle, SymSquare, Cross, Diamond, TriangleUp, TriangleDown)
         , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
-          --, TextChannel
+          --TODO: Replace with the following in next major release: , TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
-        , VAlign(..)
+        , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
         , ViewConfig(..)
         , aggregate
@@ -95,6 +98,29 @@ module VegaLite
         , area
         , asSpec
         , autosize
+        , axDates
+        , axDomain
+        , axFormat
+        , axGrid
+        , axLabelAngle
+        , axLabelOverlap
+        , axLabelPadding
+        , axLabels
+        , axMaxExtent
+        , axMinExtent
+        , axOffset
+        , axOrient
+        , axPosition
+        , axTickCount
+        , axTickSize
+        , axTicks
+        , axTitle
+        , axTitleAlign
+        , axTitleAngle
+        , axTitleMaxLength
+        , axTitlePadding
+        , axValues
+        , axZIndex
         , background
         , bar
           -- TODO: Make bin private in next major version.
@@ -108,6 +134,7 @@ module VegaLite
         , combineSpecs
         , configuration
         , configure
+        , customProjection
         , customSort
         , dAggregate
         , dBin
@@ -213,6 +240,7 @@ module VegaLite
         , specification
         , square
         , stroke
+        , symbolPath
         , tAggregate
         , tBin
         , tDataCondition
@@ -285,6 +313,7 @@ data fields or geospatial coordinates before they are encoded visually.
 @docs projection
 @docs ProjectionProperty
 @docs Projection
+@docs customProjection
 @docs ClipRect
 
 
@@ -343,6 +372,7 @@ The preferred method of specifying mark types is to call the relevant mark funct
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
+@docs symbolPath
 @docs Cursor
 
 
@@ -382,10 +412,47 @@ Relates to where something appears in the visualization.
 
 ## Properties Used by Position Channels
 
+
+## Sorting Properties
+
 @docs SortProperty
 @docs customSort
+
+
+## Stacking Properties
+
 @docs StackProperty
-@docs AxisProperty
+
+
+## Axis Properties
+
+@docs axDomain
+@docs axFormat
+@docs axGrid
+@docs axLabelAngle
+@docs axLabelOverlap
+@docs axLabelPadding
+@docs axLabels
+@docs axMaxExtent
+@docs axMinExtent
+@docs axOffset
+@docs axOrient
+@docs axPosition
+@docs axTicks
+@docs axTickCount
+@docs axTickSize
+@docs axTitle
+@docs axTitleAlign
+@docs axTitleAngle
+@docs axTitleMaxLength
+@docs axTitlePadding
+@docs axValues
+@docs axDates
+@docs axZIndex
+
+
+## Positioning Constants
+
 @docs OverlapStrategy
 @docs Side
 @docs HAlign
@@ -715,6 +782,8 @@ instead of `PAggregate` use `pAggregate` etc.
 
 @docs bin
 
+@docs AxisProperty
+
 -}
 
 import Json.Decode as JD
@@ -793,10 +862,15 @@ type AxisConfig
     | TitleY Float
 
 
-{-| Axis customisation properties. These are used for customising individual axes.
+{-| _Note: specifying axis properties with type constructors (`AxDomain`,
+`AxFormat` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`axDomain`, `axFormat` etc.)_
+
+Axis customisation properties. These are used for customising individual axes.
 To configure all axes, use `AxisConfig` with a `configuration` instead. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
 for more details.
+
 -}
 type AxisProperty
     = AxDomain Bool
@@ -1661,10 +1735,10 @@ type PositionChannel
 by the [d3-geo library](https://github.com/d3/d3-geo). For details of available
 projections see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html#projection-types).
-Additional custom projections from d3 can be defined via the
-[Vega API](https://vega.github.io/vega/docs/projections/#register) and called from
-within Elm-Vega setting the projection to `Custom proj` where `proj` is the name
-of the D3 projection to use (e.g. `winkel3`).
+
+_Note: The use of the `Custom` type constructor is deprecated in favour of the
+`customProjection` function._
+
 -}
 type Projection
     = Albers
@@ -1951,8 +2025,11 @@ type StackProperty
     | NoStack
 
 
-{-| Identifies the type of symbol. The `Path` symbol is used to define custom shapes
-as an SVG path description.
+{-| Identifies the type of symbol.
+
+_Note: The use of the `Path` type constructor is deprecated in favour of the
+`symbolPath` function._
+
 -}
 type Symbol
     = SymCircle
@@ -2212,6 +2289,205 @@ autosize aus =
     ( VLAutosize, JE.object (List.map autosizeProperty aus) )
 
 
+{-| Specify the date/times to appear along an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axDates : List (List DateTime) -> AxisProperty
+axDates =
+    AxDates
+
+
+{-| Specify whether or not the axis baseline (domain) should be included as part
+of an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axDomain : Bool -> AxisProperty
+axDomain =
+    AxDomain
+
+
+{-| Specify the [format](https://vega.github.io/vega-lite/docs/format.html)
+to apply to labels on an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axFormat : String -> AxisProperty
+axFormat =
+    AxFormat
+
+
+{-| Specify whether or not grid lones should be included as part of an axis.
+For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axGrid : Bool -> AxisProperty
+axGrid =
+    AxGrid
+
+
+{-| Specify the rotation angle in degrees of axis lables. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelAngle : Float -> AxisProperty
+axLabelAngle =
+    AxLabelAngle
+
+
+{-| Specify the overlap strategy for labels when they are too large to fit within
+the space devoted to an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelOverlap : OverlapStrategy -> AxisProperty
+axLabelOverlap =
+    AxLabelOverlap
+
+
+{-| Specify the padding in pixels between an axis and its text labels. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelPadding : Float -> AxisProperty
+axLabelPadding =
+    AxLabelPadding
+
+
+{-| Specify whether or not axis labels should be displayed. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabels : Bool -> AxisProperty
+axLabels =
+    AxLabels
+
+
+{-| Specify the maximum extent in pixels that axis ticks and labels should use.
+This determines a maximum offset value for axis titles. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axMaxExtent : Float -> AxisProperty
+axMaxExtent =
+    AxMaxExtent
+
+
+{-| Specify the minimum extent in pixels that axis ticks and labels should use.
+This determines a minimum offset value for axis titles. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axMinExtent : Float -> AxisProperty
+axMinExtent =
+    AxMinExtent
+
+
+{-| Specify the offset, in pixels, by which to displace the axis from the edge
+of the enclosing group or data rectangle. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axOffset : Float -> AxisProperty
+axOffset =
+    AxOffset
+
+
+{-| Specify the orientation of an axis relative to the plot it is describing. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axOrient : Side -> AxisProperty
+axOrient =
+    AxOrient
+
+
+{-| Specify the anchor position of the axis in pixels. For x-axis with top or
+bottom orientation, this sets the axis group x coordinate. For y-axis with left
+or right orientation, this sets the axis group y coordinate. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axPosition : Float -> AxisProperty
+axPosition =
+    AxPosition
+
+
+{-| Specify whether or not an axis should include tick marks. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTicks : Bool -> AxisProperty
+axTicks =
+    AxTicks
+
+
+{-| Specify the desired number of ticks, for axes visualizing quantitative scales.
+The resulting number may be different so that values are “nice” (multiples of 2, 5, 10)
+and lie within the underlying scale’s range. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTickCount : Int -> AxisProperty
+axTickCount =
+    AxTickCount
+
+
+{-| Specify the tick mark size in pixels. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTickSize : Float -> AxisProperty
+axTickSize =
+    AxTickSize
+
+
+{-| Specify the title to display as part of an axis. An empty string can be used
+to prevent a title being displayed. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitle : String -> AxisProperty
+axTitle =
+    AxTitle
+
+
+{-| Specify the horizontal alignment of an axis title. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleAlign : HAlign -> AxisProperty
+axTitleAlign =
+    AxTitleAlign
+
+
+{-| Specify the angle in degrees of an axis title. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleAngle : Float -> AxisProperty
+axTitleAngle =
+    AxTitleAngle
+
+
+{-| Specify the maximum length for an axis title for cases where the title is
+automatically generated from a field’s description. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleMaxLength : Float -> AxisProperty
+axTitleMaxLength =
+    AxTitleMaxLength
+
+
+{-| Specify the padding in pixels between a title and axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitlePadding : Float -> AxisProperty
+axTitlePadding =
+    AxTitlePadding
+
+
+{-| Specify the numeric values to appear along an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axValues : List Float -> AxisProperty
+axValues =
+    AxValues
+
+
+{-| Specify the drawing order of the axis relative to the other chart elements.
+A value of 1 indicates axis is drawn in front of chart marks, 0 indicates it is
+drawn behind them. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axZIndex : Int -> AxisProperty
+axZIndex =
+    AxZIndex
+
+
 {-| Set the background color of the visualization. Should be specified with a CSS
 string such as `#ffe` or `rgb(200,20,150)`. If not specified the background will
 be transparent.
@@ -2417,6 +2693,16 @@ more details.
 configure : List LabelledSpec -> ( VLProperty, Spec )
 configure configs =
     ( VLConfig, JE.object configs )
+
+
+{-| Specify a custom projection type. Additional custom projections from d3 can
+be defined via the [Vega API](https://vega.github.io/vega/docs/projections/#register)
+and called from with this function where the parameter is the name of the D3
+projection to use (e.g. `customProjection winkel3`).
+-}
+customProjection : String -> Projection
+customProjection =
+    Custom
 
 
 {-| Provide a custom sort order by listing data values explicitly. This can be
@@ -3700,7 +3986,7 @@ This is often implicit when chaining a series of encodings using functional comp
             << position X [ pName "Animal", pmType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
-appearing, simply provide an empty list of axis properties to `PAxis` :
+appearing, simply provide an empty list of axis properties to `pAxis` :
 
      enc =
          encoding
@@ -4056,6 +4342,14 @@ precedence.
 stroke : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 stroke markProps =
     (::) ( "stroke", List.concatMap markChannelProperty markProps |> JE.object )
+
+
+{-| Specify a custom symbol shape with an
+[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+-}
+symbolPath : String -> Symbol
+symbolPath =
+    Path
 
 
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
