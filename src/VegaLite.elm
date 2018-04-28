@@ -7,13 +7,15 @@ module VegaLite
         , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
           --, AxisProperty
         , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
-        , Binding(..)
+          --, BinProperty
+        , Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
+          --, Binding
         , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
-          --TODO: Replace with the following in next major release: , BooleanOp
-        , CInterpolate(..)
+        , CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
+          --, CInterpolate(Hcl,HclLong,Hsl,HslLong,Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-        , ClipRect(..)
-          -- TODO: create functions for access to ConfigurationProperty type constructors
+        , ClipRect(LTRB, NoClip)
+          --,ClipRect(NoClip)
         , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
@@ -138,11 +140,15 @@ module VegaLite
         , calculateAs
         , categoricalDomainMap
         , circle
+        , clipRect
+          -- TODO: create functions for access to ConfigurationProperty type constructors
         , color
         , column
         , combineSpecs
         , configuration
         , configure
+        , cubeHelix
+        , cubeHelixLong
         , customProjection
         , customSort
         , dAggregate
@@ -188,6 +194,19 @@ module VegaLite
         , hTimeUnit
         , height
         , hyperlink
+        , iCheckbox
+        , iColor
+        , iDate
+        , iDateTimeLocal
+        , iMonth
+        , iNumber
+        , iRadio
+        , iRange
+        , iSelect
+        , iTel
+        , iText
+        , iTime
+        , iWeek
         , layer
         , line
         , lookup
@@ -238,6 +257,8 @@ module VegaLite
         , repeat
         , resolution
         , resolve
+        , rgb
+          --TODO: Replace with the following in next major release: , BooleanOp
         , row
         , rule
         , select
@@ -324,6 +345,7 @@ data fields or geospatial coordinates before they are encoded visually.
 @docs Projection
 @docs customProjection
 @docs ClipRect
+@docs clipRect
 
 
 ## Aggregation
@@ -611,7 +633,14 @@ Used to specify how the encoding of a data field should be applied.
 @docs ScaleDomain
 @docs ScaleRange
 @docs ScaleNice
+
+
+### Color Scaling
+
 @docs CInterpolate
+@docs cubeHelix
+@docs cubeHelixLong
+@docs rgb
 
 
 # Creating view compositions
@@ -670,7 +699,21 @@ For details, see the
 @docs select
 @docs Selection
 @docs SelectionProperty
-@docs Binding
+
+@docs iRange
+@docs iCheckbox
+@docs iRadio
+@docs iSelect
+@docs iText
+@docs iNumber
+@docs iDate
+@docs iTime
+@docs iMonth
+@docs iWeek
+@docs iDateTimeLocal
+@docs iTel
+@docs iColor
+
 @docs InputProperty
 @docs SelectionResolution
 @docs SelectionMarkProperty
@@ -795,8 +838,8 @@ instead of `PAggregate` use `pAggregate` etc.
 @docs mark
 
 @docs BooleanOp
-
 @docs bin
+@docs Binding
 
 @docs AxisProperty
 @docs BinProperty
@@ -915,10 +958,15 @@ type AxisProperty
     | AxZIndex Int
 
 
-{-| Describes the binding property of a selection based on some HTML input element
+{-| _Note: specifying binding elements with type constructors (`IRange`,
+`ICheckbox` etc.) is deprecated in favour of calling their equivalent input binding
+functions (`iRange`, `iCheckbox` etc.)_
+
+Describes the binding property of a selection based on some HTML input element
 such as a checkbox or radio button. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)
 and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+
 -}
 type Binding
     = IRange String (List InputProperty)
@@ -1061,11 +1109,14 @@ type Channel
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
 onto a color scale. Note that color interpolation cannot be applied with the default
-`sequential` color scale, so additionally, you should set the `SType` to another
+`sequential` color scale, so additionally, you should set the `sType` to another
 continuous scale such as `linear`, `pow` etc.
 
-Of the interpolation options below `Rgb`, `CubeHelix` and `CubeHelixLong` also require
-a `gamma` value (with 1 being a recommended default to provide). For details see the
+Several of the interpolation options also require a `gamma` value (with 1 being
+a recommended default to provide). These should be generated with the named functions
+`cubeHelix`, `cubeHelixLong` and `rgb` rather than with a (deprecated) type constructor.
+
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
 
 -}
@@ -1080,9 +1131,9 @@ type CInterpolate
     | Rgb Float
 
 
-{-| Specifies a clipping rectangle in pixel units. In `LTRB` the order of the four
-numbers that follow are 'left', 'top', 'right' then 'bottom'. Used when defining
-the clip extent of a map projection.
+{-| Specifies whether or not a clipping rectangle is to be applied. If it is, the
+function `clipRect` should be called rather than the (deprecated) type constructor
+`LTRB`.
 -}
 type ClipRect
     = NoClip
@@ -2713,6 +2764,14 @@ circle =
     mark Circle
 
 
+{-| Specify a clipping rectangle in pixel units. The four parameters are respectively
+'left', 'top', 'right' and 'bottom' of the rectangular clipping bounds.
+-}
+clipRect : Float -> Float -> Float -> Float -> ClipRect
+clipRect l t r b =
+    LTRB l t r b
+
+
 {-| Encode a color channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by color. The second parameter
 is a list of any previous channels to which this color channel should be added.
@@ -2791,6 +2850,22 @@ more details.
 configure : List LabelledSpec -> ( VLProperty, Spec )
 configure configs =
     ( VLConfig, JE.object configs )
+
+
+{-| Specify a cube helix color interpolation for continuous color scales. The
+parameter is the gamma value to use in interpolation (anchored at 1).
+-}
+cubeHelix : Float -> CInterpolate
+cubeHelix =
+    CubeHelix
+
+
+{-| Specify a long-path cube helix color interpolation for continuous color scales.
+The parameter is the gamma value to use in interpolation (anchored at 1).
+-}
+cubeHelixLong : Float -> CInterpolate
+cubeHelixLong =
+    CubeHelixLong
 
 
 {-| Specify a custom projection type. Additional custom projections from d3 can
@@ -3557,6 +3632,136 @@ hyperlink hyperProps =
     (::) ( "href", List.concatMap hyperlinkChannelProperty hyperProps |> JE.object )
 
 
+{-| Specify a checkbox input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iCheckbox : String -> List InputProperty -> Binding
+iCheckbox f =
+    ICheckbox f
+
+
+{-| Specify a color input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iColor : String -> List InputProperty -> Binding
+iColor f =
+    IColor f
+
+
+{-| Specify a date input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iDate : String -> List InputProperty -> Binding
+iDate f =
+    IDate f
+
+
+{-| Specify a local time input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iDateTimeLocal : String -> List InputProperty -> Binding
+iDateTimeLocal f =
+    IDateTimeLocal f
+
+
+{-| Specify a month input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iMonth : String -> List InputProperty -> Binding
+iMonth f =
+    IMonth f
+
+
+{-| Specify a number input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iNumber : String -> List InputProperty -> Binding
+iNumber f =
+    INumber f
+
+
+{-| Specify a radio box input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iRadio : String -> List InputProperty -> Binding
+iRadio f =
+    IRadio f
+
+
+{-| Specify a range slider input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iRange : String -> List InputProperty -> Binding
+iRange f =
+    IRange f
+
+
+{-| Specify a select input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iSelect : String -> List InputProperty -> Binding
+iSelect f =
+    ISelect f
+
+
+{-| Specify a telephone number input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iTel : String -> List InputProperty -> Binding
+iTel f =
+    ITel f
+
+
+{-| Specify a text input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iText : String -> List InputProperty -> Binding
+iText f =
+    IText f
+
+
+{-| Specify a time input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iTime : String -> List InputProperty -> Binding
+iTime f =
+    ITime f
+
+
+{-| Specify a week input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iWeek : String -> List InputProperty -> Binding
+iWeek f =
+    IWeek f
+
+
 {-| Assigns a list of specifications to superposed layers in a visualization.
 
     let
@@ -4273,6 +4478,14 @@ For more information see the
 resolve : List LabelledSpec -> ( VLProperty, Spec )
 resolve res =
     ( VLResolve, JE.object res )
+
+
+{-| Specify an RGB color interpolation for continuous color scales. The parameter
+is the gamma value to use in interpolation (anchored at 1).
+-}
+rgb : Float -> CInterpolate
+rgb =
+    Rgb
 
 
 {-| Encode a new facet to be arranged in rows. The first parameter is a list of
