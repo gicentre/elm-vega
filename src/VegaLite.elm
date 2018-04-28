@@ -22,9 +22,13 @@ module VegaLite
         , DataColumn
         , DataRow
         , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
-        , DataValue(..)
-        , DataValues(..)
-        , DateTime(..)
+          --, DataType(FoBoolean,  FoNumber)
+        , DataValue(Boolean, DateTime, Number, Str)
+          -- ,DataValue
+        , DataValues(Booleans, DateTimes, Numbers, Strings)
+          --, DataValues
+        , DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
+          --,DateTime
         , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
         , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
           --TODO: Replace with the following in next major release: , DetailChannel
@@ -137,6 +141,8 @@ module VegaLite
           --, BinProperty
         , bin
         , binAs
+        , boo
+        , boos
         , calculateAs
         , categoricalDomainMap
         , circle
@@ -167,6 +173,17 @@ module VegaLite
         , description
         , detail
         , domainRangeMap
+        , dt
+        , dtDate
+        , dtDay
+        , dtHour
+        , dtMillisecond
+        , dtMinute
+        , dtMonth
+        , dtQuarter
+        , dtSecond
+        , dtYear
+        , dts
         , encoding
         , expr
         , fAggregate
@@ -231,6 +248,8 @@ module VegaLite
         , mark
         , name
         , not
+        , num
+        , nums
         , oAggregate
         , oBin
         , oMType
@@ -272,7 +291,10 @@ module VegaLite
         , size
         , specification
         , square
+        , str
+          --, DataValue
         , stroke
+        , strs
         , symbolPath
         , tAggregate
         , tBin
@@ -815,9 +837,27 @@ to the data and transform options described above.
 In addition to more general data types like integers and string, the following types
 can carry data used in specifications.
 
-@docs DataValue
-@docs DataValues
-@docs DateTime
+@docs boo
+@docs dt
+@docs num
+@docs str
+@docs boos
+@docs dts
+@docs nums
+@docs strs
+
+
+## Temporal Data Types
+
+@docs dtYear
+@docs dtQuarter
+@docs dtMonth
+@docs dtDate
+@docs dtDay
+@docs dtHour
+@docs dtMinute
+@docs dtSecond
+@docs dtMillisecond
 @docs MonthName
 @docs DayName
 
@@ -848,6 +888,10 @@ instead of `PAggregate` use `pAggregate` etc.
 
 @docs AxisProperty
 @docs BinProperty
+
+@docs DataValue
+@docs DataValues
+@docs DateTime
 
 -}
 
@@ -1271,8 +1315,13 @@ type DataType
     | FoUtc String
 
 
-{-| A single data value. This is used when a function can accept values of different
+{-| _Note: referencing data types with type constructors (`Boolean`, `DateTime`,
+`Number` and `Str`) is deprecated in favour of calling their equivalent data value
+functions (`boo`, `dt`, `num` and `str`)._
+
+A single data value. This is used when a function can accept values of different
 types (e.g. either a number or a string).
+
 -}
 type DataValue
     = Boolean Bool
@@ -1281,8 +1330,13 @@ type DataValue
     | Str String
 
 
-{-| A list of data values. This is used when a function can accept lists of
+{-| _Note: referencing lists of data types with type constructors (`Booleans`,
+`DateTimes`, `Numbers` and `Strings`) is deprecated in favour of calling their
+equivalent data value list functions (`boos`, `dts`, `nums` and `strs`)._
+
+A list of data values. This is used when a function can accept lists of
 different types (e.g. either a list of numbers or a list of strings).
+
 -}
 type DataValues
     = Booleans (List Bool)
@@ -1291,9 +1345,15 @@ type DataValues
     | Strings (List String)
 
 
-{-| Allows a date or time to be represented. This is typically part of a list of
-`DateTime` items to provide a specific point in time. For details see the
+{-| _Note: referencing dateTime type constructors (`DTYear`, `DTHours` etc.)
+is deprecated in favour of calling their equivalent dateTime functions
+(`dtYear`, `dtHour` etc.)_
+
+Allows a date or time to be represented. This is typically part of a list of
+functions that each generate a `DateTime` item to provide a specific point in
+time. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/types.html#datetime).
+
 -}
 type DateTime
     = DTYear Int
@@ -2708,6 +2768,22 @@ binAs bProps field label =
         (::) ( "bin", JE.list [ bProps |> List.map binProperty |> JE.object, JE.string field, JE.string label ] )
 
 
+{-| Specify a boolean data value. This is used when a function can accept values
+of different types.
+-}
+boo : Bool -> DataValue
+boo =
+    Boolean
+
+
+{-| Specify a list of boolean data values. This is used when a function can
+accept lists of different types.
+-}
+boos : List Bool -> DataValues
+boos =
+    Booleans
+
+
 {-| Creates a new data field based on calculations from existing fields.
 The first parameter is an expression representing the calculation and the second
 is the name to give the newly calculated field. This third parameter is a list of
@@ -3237,6 +3313,38 @@ domainRangeMap lowerMap upperMap =
     [ SDomain (DNumbers domain), SRange (RStrings range) ]
 
 
+{-| Specify a date-time data value. This is used when a function can accept values
+of different types.
+-}
+dt : List DateTime -> DataValue
+dt =
+    DateTime
+
+
+{-| Specify a day of the month as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtDate : Int -> DateTime
+dtDate =
+    DTDate
+
+
+{-| Specify a day of the week. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtDay : DayName -> DateTime
+dtDay =
+    DTDay
+
+
+{-| Specify an hour of the day (0=midnight, 1=1am, 23=11pm etc.) an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtHour : Int -> DateTime
+dtHour =
+    DTHours
+
+
 {-| Specify the form of time unit aggregation of field values when encoding
 with a level of detail (grouping) channel. For details, see the
 [Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
@@ -3244,6 +3352,62 @@ with a level of detail (grouping) channel. For details, see the
 dTimeUnit : TimeUnit -> DetailChannel
 dTimeUnit =
     DTimeUnit
+
+
+{-| Specify a millisecond of a second (0-999). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMillisecond : Int -> DateTime
+dtMillisecond =
+    DTMilliseconds
+
+
+{-| Specify a minute of an hour (0-59). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMinute : Int -> DateTime
+dtMinute =
+    DTMinutes
+
+
+{-| Specify a month as an integer (1=January, 2=February etc.). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMonth : MonthName -> DateTime
+dtMonth =
+    DTMonth
+
+
+{-| Specify a year quarter as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtQuarter : Int -> DateTime
+dtQuarter =
+    DTQuarter
+
+
+{-| Specify a list of date-time data values. This is used when a function can
+accept lists of different types.
+-}
+dts : List (List DateTime) -> DataValues
+dts =
+    DateTimes
+
+
+{-| Specify a second of a minute (0-59). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtSecond : Int -> DateTime
+dtSecond =
+    DTSeconds
+
+
+{-| Specify a year as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtYear : Int -> DateTime
+dtYear =
+    DTYear
 
 
 {-| Create an encoding specification from a list of channel encodings.
@@ -4100,6 +4264,22 @@ not =
     Not
 
 
+{-| Specify a numeric data value. This is used when a function can accept values
+of different types.
+-}
+num : Float -> DataValue
+num =
+    Number
+
+
+{-| Specify a list of numeric data values. This is used when a function can
+accept lists of different types.
+-}
+nums : List Float -> DataValues
+nums =
+    Numbers
+
+
 {-| Compute some aggregate summaray statistics for a field to be encoded with an
 order channel. The type of aggregation is determined by the given operation
 parameter. For details, see the
@@ -4662,6 +4842,14 @@ square =
     mark Square
 
 
+{-| Specify a string data value. This is used when a function can accept values
+of different types.
+-}
+str : String -> DataValue
+str =
+    Str
+
+
 {-| Encode a stroke channel. This acts in a similar way to encoding by `color` but
 only affects the exterior boundary of marks. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by stroke.
@@ -4677,6 +4865,14 @@ precedence.
 stroke : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 stroke markProps =
     (::) ( "stroke", List.concatMap markChannelProperty markProps |> JE.object )
+
+
+{-| Specify a string data value. This is used when a function can accept values
+of different types.
+-}
+strs : List String -> DataValues
+strs =
+    Strings
 
 
 {-| Specify a custom symbol shape with an
