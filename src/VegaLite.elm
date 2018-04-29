@@ -42,8 +42,10 @@ module VegaLite
           --, FilterRange(NumberRange,DateRange)
         , FilterRange
         , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
-        , Format(..)
-        , Geometry(..)
+          --, Format(CSV,TSV,JSON,TopojsonFeature,TopojsonMesh,Parse)
+        , Format(CSV, TSV)
+          --, Geometry(GeoPoint,GeoPoints ,GeoLine ,GeoLines ,GeoPolygon,GeoPolygons)
+        , Geometry
         , HAlign(AlignCenter, AlignLeft, AlignRight)
         , HeaderProperty(..)
         , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
@@ -217,6 +219,12 @@ module VegaLite
         , foDate
         , foUtc
         , geoFeatureCollection
+        , geoLine
+        , geoLines
+        , geoPoint
+        , geoPoints
+        , geoPolygon
+        , geoPolygons
         , geometry
         , geometryCollection
         , geoshape
@@ -253,6 +261,7 @@ module VegaLite
         , inOptions
         , inPlaceholder
         , inStep
+        , jsonProperty
         , layer
         , line
         , lookup
@@ -299,6 +308,7 @@ module VegaLite
         , pStack
         , pTimeUnit
         , padding
+        , parse
         , point
         , position
         , projection
@@ -361,6 +371,8 @@ module VegaLite
         , title
         , toVegaLite
         , tooltip
+        , topojsonFeature
+        , topojsonMesh
         , trail
         , trailConfig
         , transform
@@ -397,15 +409,33 @@ Functions and types for declaring the input data to the visualization.
 @docs datasets
 @docs dataColumn
 @docs dataRow
-@docs geometry
-@docs geoFeatureCollection
-@docs geometryCollection
 @docs Data
 @docs DataColumn
 @docs DataRow
-@docs Format
-@docs Geometry
+
+
+## Geographic Data
+
+@docs geometry
+@docs geoFeatureCollection
+@docs geometryCollection
+@docs geoPoint
+@docs geoPoints
+@docs geoLine
+@docs geoLines
+@docs geoPolygon
+@docs geoPolygons
 @docs DataType
+
+
+## Formating Input Data
+
+@docs Format
+@docs jsonProperty
+@docs topojsonFeature
+@docs topojsonMesh
+@docs parse
+
 @docs foDate
 @docs foUtc
 
@@ -983,6 +1013,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs DataValue
 @docs DataValues
 @docs DateTime
+@docs Geometry
 
 @docs FacetMapping
 @docs Filter
@@ -1611,10 +1642,10 @@ type FontWeight
 
 {-| Specifies the type of format a data source uses. If the format is indicated by
 the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate the
-format explicitly. However this can be useful if (a) the filename extension does not
-indicate type (e.g. `.txt`) or you wish to customise the parsing of a file. For
-example, when specifying the `JSON` format, its parameter indicates the name of
-property field containing the attribute data to extract. For details see the
+format explicitly. However this can be useful if the filename extension does not
+indicate type (e.g. `.txt`). To customise the parsing of a file use one of the
+functions `parse`, `jsonProperty`, `topojsonFeature` or `topojsonMesh` in preference
+to their (depcrecated) type constructor eqivalents. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
 -}
 type Format
@@ -1626,11 +1657,16 @@ type Format
     | Parse (List ( String, DataType ))
 
 
-{-| Specifies the type and content of geometry specifications for programatically
+{-| _Note: referencing geometry type constructors (`GeoPoint`, `GeoLine` etc.)
+is deprecated in favour of calling their equivalent geometry functions
+(`geoPoint`, `geoLine` etc.)_
+
+Specifies the type and content of geometry specifications for programatically
 creating GeoShapes. These can be mapped to the
 [GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
 where the pluralised type names refer to their `Multi` prefixed equivalent in the
 GeoJSON specification.
+
 -}
 type Geometry
     = GeoPoint Float Float
@@ -3870,6 +3906,24 @@ geoFeatureCollection geoms =
         ]
 
 
+{-| Specify line geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoLine : List ( Float, Float ) -> Geometry
+geoLine =
+    GeoLine
+
+
+{-| Specify multi-line geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoLines : List (List ( Float, Float )) -> Geometry
+geoLines =
+    GeoLines
+
+
 {-| Specifies a list of geometry objects to be used in a `geoshape` specification.
 Each geometry object in this collection can be created with the `geometry` function.
 
@@ -3909,6 +3963,42 @@ geometry gType properties =
             , ( "geometry", geometryTypeSpec gType )
             , ( "properties", JE.object (List.map (\( key, val ) -> ( key, dataValueSpec val )) properties) )
             ]
+
+
+{-| Specify point geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPoint : Float -> Float -> Geometry
+geoPoint =
+    GeoPoint
+
+
+{-| Specify multi-point geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPoints : List ( Float, Float ) -> Geometry
+geoPoints =
+    GeoPoints
+
+
+{-| Specify polygon geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPolygon : List (List ( Float, Float )) -> Geometry
+geoPolygon =
+    GeoPolygon
+
+
+{-| Specify multi-polygon geometry for programatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPolygons : List (List (List ( Float, Float ))) -> Geometry
+geoPolygons =
+    GeoPolygons
 
 
 {-| Specify a an arbitrary shape determined by georaphically referenced
@@ -4257,6 +4347,17 @@ and the [Vega input binding documentation](https://vega.github.io/vega/docs/sign
 iWeek : String -> List InputProperty -> Binding
 iWeek f =
     IWeek f
+
+
+{-| Indicates a JSON file format from which a given property is to be extracted
+when it has some surrounding structure or meta-data. For example, specifying
+the property `values.features` is equivalent to retrieving `json.values.features`
+from the loaded JSON object.with a custom delimeter. For details, see the
+[Vega-Lite JSON documentation](https://vega.github.io/vega-lite/docs/data.html#json).
+-}
+jsonProperty : String -> Format
+jsonProperty =
+    JSON
 
 
 {-| Assigns a list of specifications to superposed layers in a visualization.
@@ -4753,6 +4854,15 @@ parameter. For details, see the
 pAggregate : Operation -> PositionChannel
 pAggregate =
     PAggregate
+
+
+{-| Indicates the parsing rules when processing some data text. The parameter is
+a list of tuples where each corresponds to a field name paired with its desired
+data type. Typically used when specifying a data url.
+-}
+parse : List ( String, DataType ) -> Format
+parse =
+    Parse
 
 
 {-| Specify the axis properties used when encoding with a position channel.
@@ -5557,6 +5667,24 @@ for formatting the appearance of the text.
 tooltip : List TextChannel -> List LabelledSpec -> List LabelledSpec
 tooltip tDefs =
     (::) ( "tooltip", List.concatMap textChannelProperty tDefs |> JE.object )
+
+
+{-| Indicates a topoJSON feature format. The first parameter should be the name
+of the object set to extract. Typically used when specifying a data url.
+-}
+topojsonFeature : String -> Format
+topojsonFeature =
+    TopojsonFeature
+
+
+{-| Indicates a topoJSON mesh format. The first parameter should be the name
+of the object set to extract. Unlike the `topojsonFeature`, the corresponding
+geo data are returned as a single, unified mesh instance, not as individual
+GeoJSON features. Typically used when specifying a data url.
+-}
+topojsonMesh : String -> Format
+topojsonMesh =
+    TopojsonMesh
 
 
 {-| Convert a list of Vega-Lite specifications into a single JSON object that may be

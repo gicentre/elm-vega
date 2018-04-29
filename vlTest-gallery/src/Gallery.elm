@@ -35,7 +35,7 @@ basic2 =
             description "A bar chart showing the US population distribution of age groups in 2000."
 
         trans =
-            transform << filter (FExpr "datum.year == 2000")
+            transform << filter (fiExpr "datum.year == 2000")
 
         enc =
             encoding
@@ -88,7 +88,7 @@ basic5 =
 
         trans =
             transform
-                << filter (FExpr "datum.year == 2000")
+                << filter (fiExpr "datum.year == 2000")
                 << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
@@ -255,7 +255,7 @@ basic14 =
             description "Google's stock price over time."
 
         trans =
-            transform << filter (FExpr "datum.symbol === 'GOOG'")
+            transform << filter (fiExpr "datum.symbol === 'GOOG'")
 
         enc =
             encoding
@@ -302,7 +302,7 @@ basic17 =
             description "Google's stock price over time (quantized as a step-chart)."
 
         trans =
-            transform << filter (FExpr "datum.symbol === 'GOOG'")
+            transform << filter (fiExpr "datum.symbol === 'GOOG'")
 
         enc =
             encoding
@@ -399,7 +399,7 @@ basic22 =
 
         trans =
             transform
-                << filter (FExpr "datum.Entity !== 'All natural disasters'")
+                << filter (fiExpr "datum.Entity !== 'All natural disasters'")
 
         enc =
             encoding
@@ -474,7 +474,7 @@ stack3 =
 
         trans =
             transform
-                << filter (FExpr "datum.year == 2000")
+                << filter (fiExpr "datum.year == 2000")
                 << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
@@ -553,7 +553,7 @@ stack7 =
 
         trans =
             transform
-                << filter (FExpr "datum.year == 2000")
+                << filter (fiExpr "datum.year == 2000")
                 << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
@@ -628,7 +628,7 @@ trellis2 =
 
         trans =
             transform
-                << filter (FExpr "datum.year == 2000")
+                << filter (fiExpr "datum.year == 2000")
                 << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
         enc =
@@ -716,7 +716,7 @@ trellis7 =
             description "Stock prices of four large companies as a small multiples of area charts."
 
         trans =
-            transform << filter (FExpr "datum.symbol !== 'GOOG'")
+            transform << filter (fiExpr "datum.symbol !== 'GOOG'")
 
         enc =
             encoding
@@ -777,7 +777,7 @@ layer2 =
 
         trans =
             transform
-                << filter (FExpr "datum.Value >= 300")
+                << filter (fiExpr "datum.Value >= 300")
                 << calculateAs "300" "baseline"
 
         encUpperBar =
@@ -1215,12 +1215,12 @@ layer13 =
             description "The population of the German city of Falkensee over time with annotated time periods highlighted."
 
         data =
-            dataFromColumns [ Parse [ ( "year", foDate "%Y" ) ] ]
+            dataFromColumns [ parse [ ( "year", foDate "%Y" ) ] ]
                 << dataColumn "year" (strs [ "1875", "1890", "1910", "1925", "1933", "1939", "1946", "1950", "1964", "1971", "1981", "1985", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014" ])
                 << dataColumn "population" (nums [ 1309, 1558, 4512, 8180, 15915, 24824, 28275, 29189, 29881, 26007, 24029, 23340, 22307, 22087, 22139, 22105, 22242, 22801, 24273, 25640, 27393, 29505, 32124, 33791, 35297, 36179, 36829, 37493, 38376, 39008, 39366, 39821, 40179, 40511, 40465, 40905, 41258, 41777 ])
 
         highlights =
-            dataFromColumns [ Parse [ ( "start", foDate "%Y" ), ( "end", foDate "%Y" ) ] ]
+            dataFromColumns [ parse [ ( "start", foDate "%Y" ), ( "end", foDate "%Y" ) ] ]
                 << dataColumn "start" (strs [ "1933", "1948" ])
                 << dataColumn "end" (strs [ "1945", "1989" ])
                 << dataColumn "event" (strs [ "Nazi Rule", "GDR (East Germany)" ])
@@ -1257,8 +1257,8 @@ layer14 =
 
         trans =
             transform
-                << filter (FOneOf "country" (strs [ "China", "India", "United States", "Indonesia", "Brazil" ]))
-                << filter (FOneOf "year" (nums [ 1955, 2000 ]))
+                << filter (fiOneOf "country" (strs [ "China", "India", "United States", "Indonesia", "Brazil" ]))
+                << filter (fiOneOf "year" (nums [ 1955, 2000 ]))
 
         encCountry =
             encoding << position Y [ pName "country", pMType Nominal, pAxis [ axTitle "Country", axOffset 5, axTicks False, axMinExtent 70, axDomain False ] ]
@@ -1384,7 +1384,7 @@ layer18 =
             description "Carbon dioxide in the atmosphere."
 
         data =
-            dataFromUrl "https://vega.github.io/vega-lite/data/co2-concentration.csv" [ Parse [ ( "Date", foUtc "%Y-%m-%d" ) ] ]
+            dataFromUrl "https://vega.github.io/vega-lite/data/co2-concentration.csv" [ parse [ ( "Date", foUtc "%Y-%m-%d" ) ] ]
 
         trans =
             transform
@@ -1486,7 +1486,7 @@ comp1 =
     in
     toVegaLite
         [ des
-        , dataFromUrl "data/weather.csv" [ Parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
+        , dataFromUrl "data/weather.csv" [ parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
         , repeat [ ColumnFields [ "temp_max", "precipitation", "wind" ] ]
         , specification spec
         ]
@@ -1524,7 +1524,7 @@ comp3 =
     in
     toVegaLite
         [ dataFromUrl "data/cars.json" []
-        , facet [ RowBy [ fName "Origin", fMType Nominal ] ]
+        , facet [ rowBy [ fName "Origin", fMType Nominal ] ]
         , specification spec
         ]
 
@@ -1536,7 +1536,7 @@ geo1 =
         , width 500
         , height 300
         , projection [ PType AlbersUsa ]
-        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
         , geoshape []
         , encoding <| color [ mName "rate", mMType Quantitative ] []
@@ -1573,7 +1573,7 @@ geo3 =
 
         backdropSpec =
             asSpec
-                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                [ dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]
                 , geoshape []
                 , encoding <| color [ mStr "#eee" ] []
                 ]
@@ -1606,7 +1606,7 @@ geo4 =
     let
         backdropSpec =
             asSpec
-                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                [ dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]
                 , geoshape []
                 , encoding <| color [ mStr "#eee" ] []
                 ]
@@ -1627,7 +1627,7 @@ geo4 =
 
         trans =
             transform
-                << filter (FEqual "origin" (str "SEA"))
+                << filter (fiEqual "origin" (str "SEA"))
                 << lookup "origin" (dataFromUrl "data/airports.csv" []) "iata" [ "latitude", "longitude" ]
                 << calculateAs "datum.latitude" "origin_latitude"
                 << calculateAs "datum.longitude" "origin_longitude"
@@ -1672,7 +1672,7 @@ geo5 =
                 [ width 500
                 , height 300
                 , dataFromUrl "data/population_engineers_hurricanes.csv" []
-                , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+                , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
                 , projection [ PType AlbersUsa ]
                 , geoshape []
                 , enc []
@@ -1694,7 +1694,7 @@ geo6 =
 
         backdropSpec =
             asSpec
-                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                [ dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]
                 , geoshape []
                 , encoding <| color [ mStr "#ccc" ] []
                 ]
@@ -1726,7 +1726,7 @@ geo7 =
     let
         backdropSpec =
             asSpec
-                [ dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]
+                [ dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]
                 , geoshape []
                 , encoding <| color [ mStr "#eee" ] []
                 ]
@@ -1791,7 +1791,7 @@ geo8 =
         , width 500
         , height 300
         , dataFromUrl "data/income.json" []
-        , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ TopojsonFeature "states" ]) "id" "geo" []
+        , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
         , projection [ PType AlbersUsa ]
         , geoshape []
         , enc []
@@ -1819,7 +1819,7 @@ geo9 =
 
         polySpec =
             asSpec
-                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , encoding <| color [ mStr "#ddc" ] []
                 ]
@@ -1850,7 +1850,7 @@ geo9 =
 
         routeSpec =
             asSpec
-                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonTubeLines.json" [ TopojsonFeature "line" ]
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/londonTubeLines.json" [ topojsonFeature "line" ]
                 , geoshape [ MFilled False, MStrokeWidth 2 ]
                 , tubeEnc []
                 ]
@@ -1964,7 +1964,7 @@ interactive4 =
 
         trans2 =
             transform
-                << filter (FSelection "CylYr")
+                << filter (fiSelection "CylYr")
 
         enc2 =
             encoding
@@ -2009,7 +2009,7 @@ interactive5 =
 
         trans =
             transform
-                << filter (FSelection "myBrush")
+                << filter (fiSelection "myBrush")
 
         enc2 =
             encoding
@@ -2069,7 +2069,7 @@ interactive7 =
 
         selTrans =
             transform
-                << filter (FSelection "myBrush")
+                << filter (fiSelection "myBrush")
 
         encPosition =
             encoding
@@ -2085,7 +2085,7 @@ interactive7 =
         spec =
             asSpec
                 [ des
-                , dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", foDate "" ) ] ]
+                , dataFromUrl "data/flights-2k.json" [ parse [ ( "date", foDate "" ) ] ]
                 , trans []
                 , encPosition []
                 , layer [ spec1, spec2 ]
@@ -2148,7 +2148,7 @@ interactive9 =
 
         selTrans =
             transform
-                << filter (FSelection "myPts")
+                << filter (fiSelection "myPts")
 
         encPosition =
             encoding
@@ -2231,8 +2231,8 @@ interactive10 =
         , layer
             [ asSpec [ line [] ]
             , asSpec [ point [], pointEnc [], sel [] ]
-            , asSpec [ transform (filter (FSelection "myTooltip") []), rule [ MColor "gray" ] ]
-            , asSpec [ transform (filter (FSelection "myTooltip") []), textMark [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
+            , asSpec [ transform (filter (fiSelection "myTooltip") []), rule [ MColor "gray" ] ]
+            , asSpec [ transform (filter (fiSelection "myTooltip") []), textMark [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
             ]
         ]
 
