@@ -10,12 +10,14 @@ module VegaLite
         , BinProperty
           --Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
         , Binding
-        , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
+          --, BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
+        , BooleanOp
           --CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
         , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
           --, ClipRect(LTRB, NoClip)
         , ClipRect(NoClip)
+          -- TODO: create functions for access to ConfigurationProperty type constructors
         , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
@@ -67,7 +69,8 @@ module VegaLite
         , MarkChannel
         , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
         , MarkOrientation(Horizontal, Vertical)
-        , MarkProperty(..)
+          --, MarkProperty(MAlign, MAngle, MBandSize, MBaseline, MBinSpacing, MClip, MColor, MContinuousBandSize, MCursor, MDiscreteBandSize, MFill, MFillOpacity, MFilled, MFont, MFontSize, MFontStyle, MFontWeight, MInterpolate, MOpacity, MOrient, MRadius, MShape, MShortTimeLabels, MSize, MStroke, MStrokeDash, MStrokeDashOffset, MStrokeOpacity, MStrokeWidth, MStyle, MTension, MText, MTheta, MThickness, MdX, MdY)
+        , MarkProperty
         , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
         , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
         , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
@@ -93,6 +96,7 @@ module VegaLite
         , ScaleDomain(Unaggregated)
           --, ScaleNice(NMillisecond, NSecond, NMinute, NHour, NDay, NWeek, NMonth, NYear, NInterval,IsNice,NTickCount)
         , ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+          --, ScaleProperty(SType,SDomain ,SRange , SScheme , SPadding , SPaddingInner , SPaddingOuter , SRangeStep , SRound , SClamp ,SInterpolate, SNice , SZero , SReverse )
         , ScaleProperty
           --, ScaleRange(RNumbers,RStrings,RName)
         , ScaleRange
@@ -144,7 +148,6 @@ module VegaLite
         , axZIndex
         , background
         , bar
-          -- TODO: Make bin private in next major version.
         , biBase
         , biDivide
         , biExtent
@@ -153,8 +156,8 @@ module VegaLite
         , biNice
         , biStep
         , biSteps
-          --, BinProperty
         , bin
+          -- TODO: Make bin private in next major version.
         , binAs
         , boo
         , boos
@@ -162,7 +165,6 @@ module VegaLite
         , categoricalDomainMap
         , circle
         , clipRect
-          -- TODO: create functions for access to ConfigurationProperty type constructors
         , color
         , column
         , columnBy
@@ -300,6 +302,42 @@ module VegaLite
         , mSelectionCondition
         , mStr
         , mTimeUnit
+        , maAlign
+        , maAngle
+        , maBandSize
+        , maBaseline
+        , maBinSpacing
+        , maClip
+        , maColor
+        , maContinuousBandSize
+        , maCursor
+        , maDiscreteBandSize
+        , maDx
+        , maDy
+        , maFill
+        , maFillOpacity
+        , maFilled
+        , maFont
+        , maFontSize
+        , maFontStyle
+        , maFontWeight
+        , maInterpolate
+        , maOpacity
+        , maOrient
+        , maRadius
+        , maShape
+        , maShortTimeLabels
+        , maSize
+        , maStroke
+        , maStrokeDash
+        , maStrokeDashOffset
+        , maStrokeOpacity
+        , maStrokeWidth
+        , maStyle
+        , maTension
+        , maText
+        , maTheta
+        , maThickness
         , mark
         , name
         , not
@@ -345,7 +383,6 @@ module VegaLite
         , resolution
         , resolve
         , rgb
-          --TODO: Replace with the following in next major release: , BooleanOp
         , row
         , rowBy
         , rule
@@ -356,7 +393,6 @@ module VegaLite
         , scNice
         , scNiceInterval
         , scNiceTickCount
-          --, ScaleProperty(SType,SDomain ,SRange , SScheme , SPadding , SPaddingInner , SPaddingOuter , SRangeStep , SRound , SClamp ,SInterpolate, SNice , SZero , SReverse )
         , scPadding
         , scPaddingInner
         , scPaddingOuter
@@ -379,7 +415,6 @@ module VegaLite
         , specification
         , square
         , str
-          --, DataValue
         , stroke
         , strs
         , symbolPath
@@ -547,7 +582,49 @@ The preferred method of specifying mark types is to call the relevant mark funct
 @docs tick
 @docs trail
 
-@docs MarkProperty
+
+## Mark Properties
+
+@docs maAlign
+@docs maAngle
+@docs maBandSize
+@docs maBaseline
+@docs maBinSpacing
+@docs maClip
+@docs maColor
+@docs maCursor
+@docs maContinuousBandSize
+@docs maDiscreteBandSize
+@docs maDx
+@docs maDy
+@docs maFill
+@docs maFilled
+@docs maFillOpacity
+@docs maFont
+@docs maFontSize
+@docs maFontStyle
+@docs maFontWeight
+@docs maInterpolate
+@docs maOpacity
+@docs maOrient
+@docs maRadius
+@docs maShape
+@docs maShortTimeLabels
+@docs maSize
+@docs maStroke
+@docs maStrokeDash
+@docs maStrokeDashOffset
+@docs maStrokeOpacity
+@docs maStrokeWidth
+@docs maStyle
+@docs maTension
+@docs maText
+@docs maTheta
+@docs maThickness
+
+
+### Used by Mark Properties
+
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
@@ -1046,6 +1123,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 
 @docs Mark
 @docs mark
+@docs MarkProperty
 
 @docs BooleanOp
 @docs bin
@@ -1986,8 +2064,13 @@ type MarkOrientation
     | Vertical
 
 
-{-| Properties for customising the appearance of a mark. For details see the
+{-| _Note: referencing mark property type constructors (`MAlign`, `MFill` etc.)
+is deprecated in favour of calling their equivalent mark property functions
+(`maAlign`, `maFill` etc.)_
+
+Properties for customising the appearance of a mark. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).
+
 -}
 type
     MarkProperty
@@ -3851,13 +3934,13 @@ should be added in sequence.
 
     trans =
         transform
-            << filter (FEqual "Animal" (str "Cat"))
+            << filter (fiEqual "Animal" (str "Cat"))
 
 Filter operations can combine selections and data predicates with `BooleanOp` expressions:
 
     trans =
         transform
-            << filter (FCompose (And (expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+            << filter (fiCompose (and (expr "datum.Weight_in_lbs > 3000") (fiSelection "brush")))
 
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
@@ -4681,6 +4764,165 @@ lookupAs key1 ( vlProp, spec ) key2 asName =
         )
 
 
+{-| Specify the horizontal alignment of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maAlign : HAlign -> MarkProperty
+maAlign =
+    MAlign
+
+
+{-| Specify the rotation angle in degrees of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maAngle : Float -> MarkProperty
+maAngle =
+    MAngle
+
+
+{-| Specify the band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maBandSize : Float -> MarkProperty
+maBandSize =
+    MBandSize
+
+
+{-| Specify the vertical alignment of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maBaseline : VAlign -> MarkProperty
+maBaseline =
+    MBaseline
+
+
+{-| Specify the offset between bars for a binned field using a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html#properties)
+-}
+maBinSpacing : Float -> MarkProperty
+maBinSpacing =
+    MBinSpacing
+
+
+{-| Specify whether or not a makr should be clipped to the enclosing group's
+dimensions. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maClip : Bool -> MarkProperty
+maClip =
+    MClip
+
+
+{-| Specify the default color of a mark. Note that `maFill` and `maStroke` have
+higher precedence and will override this if specified. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maColor : String -> MarkProperty
+maColor =
+    MColor
+
+
+{-| Specify the cursor to be associated with a hyperlink mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maCursor : Cursor -> MarkProperty
+maCursor =
+    MCursor
+
+
+{-| Specify the continuous band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maContinuousBandSize : Float -> MarkProperty
+maContinuousBandSize =
+    MContinuousBandSize
+
+
+{-| Specify the discrete band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maDiscreteBandSize : Float -> MarkProperty
+maDiscreteBandSize =
+    MDiscreteBandSize
+
+
+{-| Specify the horizontal offset in pixels between a text mark and its anchor.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maDx : Float -> MarkProperty
+maDx =
+    MdX
+
+
+{-| Specify the vertical offset in pixels between a text mark and its anchor.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maDy : Float -> MarkProperty
+maDy =
+    MdY
+
+
+{-| Specify the default fill colour of a mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFill : String -> MarkProperty
+maFill =
+    MFill
+
+
+{-| Specify whether or not a mark's color should be used as the fill colour
+instead of stroke color. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFilled : Bool -> MarkProperty
+maFilled =
+    MFilled
+
+
+{-| Specify the
+For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFillOpacity : Float -> MarkProperty
+maFillOpacity =
+    MFillOpacity
+
+
+{-| Specify the font of a text mark. This can be any font name made accessible via
+a css file (or one of the generic fonts `serif`, `monospace` etc.). For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFont : String -> MarkProperty
+maFont =
+    MFont
+
+
+{-| Specify the font size in pixels used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontSize : Float -> MarkProperty
+maFontSize =
+    MFontSize
+
+
+{-| Specify the font style (e.g. `italic`) used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontStyle : String -> MarkProperty
+maFontStyle =
+    MFontStyle
+
+
+{-| Specify the font wight used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontWeight : FontWeight -> MarkProperty
+maFontWeight =
+    MFontWeight
+
+
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
 mark property channel. The type of aggregation is determined by the given operation
 parameter. For details, see the
@@ -4689,6 +4931,40 @@ parameter. For details, see the
 mAggregate : Operation -> MarkChannel
 mAggregate =
     MAggregate
+
+
+{-| Specify the interpolation method used by line and area marks. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maInterpolate : MarkInterpolation -> MarkProperty
+maInterpolate =
+    MInterpolate
+
+
+{-| Specify the overal opacity of a mark in the range [0, 1]. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maOpacity : Float -> MarkProperty
+maOpacity =
+    MOpacity
+
+
+{-| Specify the orientation of a non-stacked bar, tick, area or line mark.
+For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maOrient : MarkOrientation -> MarkProperty
+maOrient =
+    MOrient
+
+
+{-| Specify the polar coordinate radial offset of a text mark from its origin.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maRadius : Float -> MarkProperty
+maRadius =
+    MRadius
 
 
 {-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
@@ -4710,6 +4986,119 @@ mark mark mProps =
                 :: List.map markProperty mProps
                 |> JE.object
             )
+
+
+{-| Specify the shape of a point mark. For details see the
+[Vega-Lite point mark property documentation](https://vega.github.io/vega-lite/docs/point.html#properties)
+-}
+maShape : Symbol -> MarkProperty
+maShape =
+    MShape
+
+
+{-| Specify whether or not month and weekday names are abbreviated in a text mark.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html#config)
+-}
+maShortTimeLabels : Bool -> MarkProperty
+maShortTimeLabels =
+    MShortTimeLabels
+
+
+{-| Specify the size of a mark. For details see, for example, the
+[Vega-Lite circle mark property documentation](https://vega.github.io/vega-lite/docs/circle.html#properties)
+-}
+maSize : Float -> MarkProperty
+maSize =
+    MSize
+
+
+{-| Specify the default stroke colour of a mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStroke : String -> MarkProperty
+maStroke =
+    MStroke
+
+
+{-| Specify the stroke dash style used by a mark. A stroke dash style is determined
+by an alternating 'on-off' sequence of line lengths in pixel units. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeDash : List Float -> MarkProperty
+maStrokeDash =
+    MStrokeDash
+
+
+{-| Specify the stroke dash offset used by a mark. This is the number of pixels
+before which the first line dash is drawn. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeDashOffset : Float -> MarkProperty
+maStrokeDashOffset =
+    MStrokeDashOffset
+
+
+{-| Specify the stroke opacity of a mark in the range [0, 1]. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeOpacity : Float -> MarkProperty
+maStrokeOpacity =
+    MStrokeOpacity
+
+
+{-| Specify the stroke width of a mark in pixel units.
+For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeWidth : Float -> MarkProperty
+maStrokeWidth =
+    MStrokeWidth
+
+
+{-| Specify the names of custom styles to apply to the mark. Each name should
+refer to a named style defined in a separate style configuration. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStyle : List String -> MarkProperty
+maStyle =
+    MStyle
+
+
+{-| Specify the interpolation tension used if interpolating line and area marks. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maTension : Float -> MarkProperty
+maTension =
+    MTension
+
+
+{-| Specify the placeholder text for a text mark for when a text channel is not specified.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html#properties)
+-}
+maText : String -> MarkProperty
+maText =
+    MText
+
+
+{-| Specify the polar coordinate angle, in radians, of a text mark from the
+origin determined by its x and y properties. Values for theta follow the same
+convention of arc mark `startAngle` and `endAngle` properties: angles are
+measured in radians, with 0 indicating “north”. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maTheta : Float -> MarkProperty
+maTheta =
+    MTheta
+
+
+{-| Specify the thickness of a tick mark. For details see the
+[Vega-Lite tick mark property documentation](https://vega.github.io/vega-lite/docs/tick.html#config)
+-}
+maThickness : Float -> MarkProperty
+maThickness =
+    MThickness
 
 
 {-| Discretizes a series of numeric values into bins when encoding with a

@@ -21,7 +21,7 @@ sortQuant yField sps =
                 << position Y [ pName yField, pMType Quantitative ]
                 << order [ oName yField, oMType Ordinal ]
     in
-    toVegaLite [ height 300, data [], enc [], line [ MStrokeWidth 0.5 ] ]
+    toVegaLite [ height 300, data [], enc [], line [ maStrokeWidth 0.5 ] ]
 
 
 sortAsc : Spec

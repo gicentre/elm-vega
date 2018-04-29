@@ -309,7 +309,7 @@ basic17 =
                 << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
                 << position Y [ pName "price", pMType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [ MInterpolate StepAfter ], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [ maInterpolate StepAfter ], enc [] ]
 
 
 basic18 : Spec
@@ -419,7 +419,7 @@ basic22 =
         , height 400
         , dataFromUrl "https://vega.github.io/vega-lite/data/disasters.csv" []
         , trans []
-        , circle [ MOpacity 0.8, MStroke "black", MStrokeWidth 1 ]
+        , circle [ maOpacity 0.8, maStroke "black", maStrokeWidth 1 ]
         , enc []
         ]
 
@@ -748,10 +748,10 @@ layer1 =
             asSpec [ bar [] ]
 
         specText =
-            asSpec [ textMark [ MStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
+            asSpec [ textMark [ maStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
 
         config =
-            configure << configuration (NamedStyle "label" [ MAlign AlignLeft, MBaseline AlignMiddle, MdX 3 ])
+            configure << configuration (NamedStyle "label" [ maAlign AlignLeft, maBaseline AlignMiddle, maDx 3 ])
     in
     toVegaLite [ des, data [], enc [], layer [ specBar, specText ], config [] ]
 
@@ -805,7 +805,7 @@ layer2 =
                 << position Y [ pName "ThresholdValue", pMType Quantitative ]
 
         specText =
-            asSpec [ textMark [ MAlign AlignLeft, MdX 215, MdY -5 ], encText [] ]
+            asSpec [ textMark [ maAlign AlignLeft, maDx 215, maDy -5 ], encText [] ]
 
         encText =
             encoding
@@ -873,7 +873,7 @@ layer4 =
         config =
             configure
                 << configuration (Scale [ SCBandPaddingInner 0, SCBandPaddingOuter 0 ])
-                << configuration (TextStyle [ MBaseline AlignMiddle ])
+                << configuration (TextStyle [ maBaseline AlignMiddle ])
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], encPosition [], layer [ specRect, specText ], config [] ]
 
@@ -904,7 +904,7 @@ layer5 =
                 << position Y2 [ pName "lowerBox", pMType Quantitative ]
 
         specLWhisker =
-            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
+            asSpec [ rule [ maStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
@@ -912,7 +912,7 @@ layer5 =
                 << position Y2 [ pName "upperWhisker", pMType Quantitative ]
 
         specUWhisker =
-            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
+            asSpec [ rule [ maStyle [ "boxWhisker" ] ], encUWhisker [] ]
 
         encBox =
             encoding
@@ -921,7 +921,7 @@ layer5 =
                 << size [ mNum 5 ]
 
         specBox =
-            asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
+            asSpec [ bar [ maStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
@@ -930,7 +930,7 @@ layer5 =
                 << size [ mNum 5 ]
 
         specBoxMid =
-            asSpec [ tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
+            asSpec [ tick [ maStyle [ "boxMid" ] ], encBoxMid [] ]
     in
     toVegaLite
         [ des
@@ -963,7 +963,7 @@ layer6 =
                 << position Y2 [ pName "lowerBox", pMType Quantitative ]
 
         specLWhisker =
-            asSpec [ rule [ MStyle [ "boxWhisker" ] ], encLWhisker [] ]
+            asSpec [ rule [ maStyle [ "boxWhisker" ] ], encLWhisker [] ]
 
         encUWhisker =
             encoding
@@ -972,7 +972,7 @@ layer6 =
 
         specUWhisker =
             asSpec
-                [ rule [ MStyle [ "boxWhisker" ] ], encUWhisker [] ]
+                [ rule [ maStyle [ "boxWhisker" ] ], encUWhisker [] ]
 
         encBox =
             encoding
@@ -981,7 +981,7 @@ layer6 =
                 << size [ mNum 5 ]
 
         specBox =
-            asSpec [ bar [ MStyle [ "box" ] ], encBox [] ]
+            asSpec [ bar [ maStyle [ "box" ] ], encBox [] ]
 
         encBoxMid =
             encoding
@@ -991,7 +991,7 @@ layer6 =
 
         specBoxMid =
             asSpec
-                [ tick [ MStyle [ "boxMid" ] ], encBoxMid [] ]
+                [ tick [ maStyle [ "boxMid" ] ], encBoxMid [] ]
     in
     toVegaLite
         [ des
@@ -1066,7 +1066,7 @@ layer8 =
                 << color [ mStr "black" ]
 
         specPoints =
-            asSpec [ point [ MFilled True ], encPoints [] ]
+            asSpec [ point [ maFilled True ], encPoints [] ]
 
         encCIs =
             encoding
@@ -1100,7 +1100,7 @@ layer9 =
                 << color [ mStr "black" ]
 
         specMeans =
-            asSpec [ point [ MFilled True ], encMeans [] ]
+            asSpec [ point [ maFilled True ], encMeans [] ]
 
         encStdevs =
             encoding
@@ -1280,7 +1280,7 @@ layer14 =
                 << opacity [ mNum 1 ]
 
         specPoints =
-            asSpec [ point [ MFilled True ], encPoints [] ]
+            asSpec [ point [ maFilled True ], encPoints [] ]
     in
     toVegaLite [ des, dataFromUrl "data/countries.json" [], trans [], encCountry [], layer [ specLine, specPoints ] ]
 
@@ -1339,7 +1339,7 @@ layer16 =
                 << opacity [ mNum 0.6 ]
 
         specLower =
-            asSpec [ area [ MClip True ], encLower [] ]
+            asSpec [ area [ maClip True ], encLower [] ]
 
         encUpper =
             encoding
@@ -1347,11 +1347,11 @@ layer16 =
                 << opacity [ mNum 0.3 ]
 
         specUpper =
-            asSpec [ trans [], area [ MClip True ], encUpper [] ]
+            asSpec [ trans [], area [ maClip True ], encUpper [] ]
 
         config =
             configure
-                << configuration (AreaStyle [ MInterpolate Monotone, MOrient Vertical ])
+                << configuration (AreaStyle [ maInterpolate Monotone, maOrient Vertical ])
     in
     toVegaLite [ des, width 300, height 50, data [], encX [], layer [ specLower, specUpper ], config [] ]
 
@@ -1372,7 +1372,7 @@ layer17 =
             asSpec [ line [] ]
 
         specPoint =
-            asSpec [ point [ MFilled True ] ]
+            asSpec [ point [ maFilled True ] ]
     in
     toVegaLite [ des, dataFromUrl "data/driving.json" [], enc [], layer [ specLine, specPoint ] ]
 
@@ -1412,7 +1412,7 @@ layer18 =
                 << color [ mName "decade", mMType Nominal, mLegend [] ]
 
         specLine =
-            asSpec [ line [ MOrient Vertical ], encLine [] ]
+            asSpec [ line [ maOrient Vertical ], encLine [] ]
 
         transTextMin =
             transform
@@ -1425,7 +1425,7 @@ layer18 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMin =
-            asSpec [ transTextMin [], textMark [ MAlign AlignLeft, MBaseline AlignTop, MdX 3, MdY 1 ], encTextMin [] ]
+            asSpec [ transTextMin [], textMark [ maAlign AlignLeft, maBaseline AlignTop, maDx 3, maDy 1 ], encTextMin [] ]
 
         transTextMax =
             transform
@@ -1438,7 +1438,7 @@ layer18 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMax =
-            asSpec [ transTextMax [], textMark [ MAlign AlignLeft, MBaseline AlignBottom, MdX 3, MdY 1 ], encTextMax [] ]
+            asSpec [ transTextMax [], textMark [ maAlign AlignLeft, maBaseline AlignBottom, maDx 3, maDy 1 ], encTextMax [] ]
 
         config =
             configure << configuration (View [ Stroke Nothing ])
@@ -1820,7 +1820,7 @@ geo9 =
         polySpec =
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
-                , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                , geoshape [ maStroke "rgb(251,247,238)", maStrokeWidth 2 ]
                 , encoding <| color [ mStr "#ddc" ] []
                 ]
 
@@ -1851,7 +1851,7 @@ geo9 =
         routeSpec =
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/londonTubeLines.json" [ topojsonFeature "line" ]
-                , geoshape [ MFilled False, MStrokeWidth 2 ]
+                , geoshape [ maFilled False, maStrokeWidth 2 ]
                 , tubeEnc []
                 ]
     in
@@ -2231,8 +2231,8 @@ interactive10 =
         , layer
             [ asSpec [ line [] ]
             , asSpec [ point [], pointEnc [], sel [] ]
-            , asSpec [ transform (filter (fiSelection "myTooltip") []), rule [ MColor "gray" ] ]
-            , asSpec [ transform (filter (fiSelection "myTooltip") []), textMark [ MAlign AlignLeft, MdX 5, MdY -5 ], textEnc [] ]
+            , asSpec [ transform (filter (fiSelection "myTooltip") []), rule [ maColor "gray" ] ]
+            , asSpec [ transform (filter (fiSelection "myTooltip") []), textMark [ maAlign AlignLeft, maDx 5, maDy -5 ], textEnc [] ]
             ]
         ]
 
