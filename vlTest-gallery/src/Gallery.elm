@@ -1311,7 +1311,7 @@ layer15 =
 
         res =
             resolve
-                << resolution (RScale [ ( ChY, Independent ) ])
+                << resolution (reScale [ ( ChY, Independent ) ])
     in
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], encTime [], layer [ specBar, specLine ], res [] ]
 
@@ -1681,7 +1681,7 @@ geo5 =
     toVegaLite
         [ description "Population per state, engineers per state, and hurricanes per state"
         , repeat [ RowFields [ "population", "engineers", "hurricanes" ] ]
-        , resolve <| resolution (RScale [ ( ChColor, Independent ) ]) []
+        , resolve <| resolution (reScale [ ( ChColor, Independent ) ]) []
         , specification spec
         ]
 
@@ -2195,7 +2195,7 @@ interactive9 =
 
         res =
             resolve
-                << resolution (RLegend [ ( ChColor, Independent ), ( ChSize, Independent ) ])
+                << resolution (reLegend [ ( ChColor, Independent ), ( ChSize, Independent ) ])
     in
     toVegaLite [ des, dataFromUrl "data/movies.json" [], vConcat [ heatSpec, barSpec ], res [], config [] ]
 

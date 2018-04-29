@@ -30,10 +30,10 @@ module VegaLite
           --, DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
         , DateTime
         , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
-        , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
-          --TODO: Replace with the following in next major release: , DetailChannel
-        , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
-          --TODO: Replace with the following in next major release: , FacetChannel
+          --, DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
+        , DetailChannel
+          --, FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
+        , FacetChannel
           --, FacetMapping(ColumnBy, RowBy)
         , FacetMapping
         , FieldTitleProperty(Function, Plain, Verbal)
@@ -49,8 +49,8 @@ module VegaLite
         , HAlign(AlignCenter, AlignLeft, AlignRight)
           --, HeaderProperty(HFormat,HTitle)
         , HeaderProperty
-        , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
-          --TODO: Replace with the following in next major release: , HyperlinkChannel
+          --, HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
+        , HyperlinkChannel
           --, InputProperty(Debounce, Element, InOptions, InMin , InMax ,InName ,InStep ,InPlaceholder)
         , InputProperty
         , LabelledSpec
@@ -61,31 +61,32 @@ module VegaLite
         , LegendProperty
           --, LegendValues(LDateTimes,LNumbers,LStrings)
         , LegendValues
-        , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
-          --TODO: Replace with the following in next major release:, Mark
-        , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
-          --TODO: Replace with the following in next major release: , MarkChannel
+          --, Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
+        , Mark
+          --, MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
+        , MarkChannel
         , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
         , MarkOrientation(Horizontal, Vertical)
         , MarkProperty(..)
         , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
         , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
         , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
-        , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
-          --TODO: Replace with the following in next major release: , OrderChannel
+          --, OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
+        , OrderChannel
         , OverlapStrategy(OGreedy, ONone, OParity)
           --, Padding(PSize,PEdges)
         , Padding
         , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
-        , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
-          --TODO: Replace with the following in next major release: , PositionChannel
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-          --TODO: Replace with the following in next major release: , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+          --, PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
+        , PositionChannel
+          --, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
         , ProjectionProperty(..)
         , RangeConfig(..)
         , RepeatFields(..)
         , Resolution(Independent, Shared)
-        , Resolve(..)
+          --, Resolve(RAxis,RLegend,RScale)
+        , Resolve
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleConfig(..)
           --, ScaleDomain(DNumbers,DStrings ,DDateTimes ,DSelection,Unaggregated)
@@ -103,10 +104,10 @@ module VegaLite
         , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
         , Spec
         , StackProperty(NoStack, StCenter, StNormalize, StZero)
-        , Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
-          --TODO: Replace with the following in next major release: , Symbol(SymCircle, SymSquare, Cross, Diamond, TriangleUp, TriangleDown)
-        , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
-          --TODO: Replace with the following in next major release: , TextChannel
+          --, Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
+        , Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
+          --, TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
+        , TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
         , TitleConfig(..)
         , VAlign(AlignBottom, AlignMiddle, AlignTop)
@@ -336,6 +337,9 @@ module VegaLite
         , raName
         , raNums
         , raStrs
+        , reAxis
+        , reLegend
+        , reScale
         , rect
         , repeat
         , resolution
@@ -827,7 +831,9 @@ For details of creating composite views see the
 @docs vConcat
 @docs resolve
 @docs resolution
-@docs Resolve
+@docs reAxis
+@docs reLegend
+@docs reScale
 @docs Channel
 @docs Resolution
 
@@ -1056,6 +1062,8 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs FacetMapping
 @docs Filter
 @docs FilterRange
+
+@docs Resolve
 
 @docs Padding
 @docs ScaleRange
@@ -2245,15 +2253,50 @@ type Resolution
     | Independent
 
 
-{-| Used to determine how a channel's axis, scale or legend domains should be resolved
+{-| _Note: specifying resolve items with type constructors (`RAxis`,
+`RLegend` and `RScale`) is deprecated in favour of calling their equivalent
+resolve functions (`reAxis`, `reLegend` and `reScale`)_
+
+Used to determine how a channel's axis, scale or legend domains should be resolved
 if defined in more than one view in a composite visualization. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
 details.
+
 -}
 type Resolve
     = RAxis (List ( Channel, Resolution ))
     | RLegend (List ( Channel, Resolution ))
     | RScale (List ( Channel, Resolution ))
+
+
+{-| Specify how a channel's axes should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reAxis : List ( Channel, Resolution ) -> Resolve
+reAxis =
+    RAxis
+
+
+{-| Specify how a channel's legends should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reLegend : List ( Channel, Resolution ) -> Resolve
+reLegend =
+    RLegend
+
+
+{-| Specify how a channel's scales should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reScale : List ( Channel, Resolution ) -> Resolve
+reScale =
+    RScale
 
 
 {-| Used to indicate the type of scale transformation to apply.
