@@ -1892,7 +1892,7 @@ interactive2 =
             description "Mouse over individual points or select multiple points with the shift key."
 
         sel =
-            selection << select "myPaintbrush" Multi [ On "mouseover", Nearest True ]
+            selection << select "myPaintbrush" Multi [ seOn "mouseover", seNearest True ]
 
         enc =
             encoding
@@ -1939,8 +1939,8 @@ interactive4 =
             selection
                 << select "CylYr"
                     Single
-                    [ Fields [ "Cylinders", "Year" ]
-                    , Bind
+                    [ seFields [ "Cylinders", "Year" ]
+                    , seBind
                         [ iRange "Cylinders" [ inName "Cylinders ", inMin 3, inMax 8, inStep 1 ]
                         , iRange "Year" [ inName "Year ", inMin 1969, inMax 1981, inStep 1 ]
                         ]
@@ -1990,7 +1990,7 @@ interactive5 =
             description "Drag over bars to update selection average."
 
         sel =
-            selection << select "myBrush" Interval [ Encodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
 
         encPosition =
             encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
@@ -2033,7 +2033,7 @@ interactive6 =
             description "Drag over lower chart to update detailed view in upper chart."
 
         sel =
-            selection << select "myBrush" Interval [ Encodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
 
         enc1 =
             encoding
@@ -2065,7 +2065,7 @@ interactive7 =
                 << calculateAs "hours(datum.date)" "time"
 
         sel =
-            selection << select "myBrush" Interval [ Encodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
 
         selTrans =
             transform
@@ -2107,17 +2107,17 @@ interactive8 =
             selection
                 << select "myBrush"
                     Interval
-                    [ On "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
-                    , Translate "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
-                    , Zoom "wheel![event.shiftKey]"
-                    , ResolveSelections Union
+                    [ seOn "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
+                    , seTranslate "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
+                    , seZoom "wheel![event.shiftKey]"
+                    , seResolve Union
                     ]
                 << select ""
                     Interval
                     [ BindScales
-                    , Translate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
-                    , Zoom "wheel![event.shiftKey]"
-                    , ResolveSelections Global
+                    , seTranslate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
+                    , seZoom "wheel![event.shiftKey]"
+                    , seResolve Global
                     ]
 
         enc =
@@ -2174,7 +2174,7 @@ interactive9 =
             asSpec [ encPosition [], layer [ spec1, spec2 ] ]
 
         sel =
-            selection << select "myPts" Single [ Encodings [ ChX ] ]
+            selection << select "myPts" Single [ seEncodings [ ChX ] ]
 
         barSpec =
             asSpec [ width 420, height 120, bar [], sel [], encBar [] ]
@@ -2207,7 +2207,7 @@ interactive10 =
             dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
 
         sel =
-            selection << select "myTooltip" Single [ Nearest True, On "mouseover", Encodings [ ChX ], Empty ]
+            selection << select "myTooltip" Single [ seNearest True, seOn "mouseover", seEncodings [ ChX ], Empty ]
 
         enc =
             encoding

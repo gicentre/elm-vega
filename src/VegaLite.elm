@@ -102,8 +102,10 @@ module VegaLite
           --, ScaleRange(RNumbers,RStrings,RName)
         , ScaleRange
         , Selection(Interval, Multi, Single)
-        , SelectionMarkProperty(..)
-        , SelectionProperty(..)
+          --, SelectionMarkProperty(SMFill, SMFillOpacity, SMStroke, SMStrokeDash, SMStrokeDashOffset, SMStrokeOpacity, SMStrokeWidth)
+        , SelectionMarkProperty
+          --, SelectionProperty(Bind, BindScales, Empty, Encodings, Fields, Nearest, On, ResolveSelections, SelectionMark, Toggle, Translate, Zoom)
+        , SelectionProperty(BindScales, Empty)
         , SelectionResolution(Global, Intersection, Union)
         , Side(SBottom, SLeft, SRight, STop)
           --, SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
@@ -419,12 +421,29 @@ module VegaLite
         , scScheme
         , scType
         , scZero
+        , seBind
+        , seEncodings
+        , seFields
+        , seNearest
+        , seOn
+        , seResolve
+        , seSelectionMark
+        , seToggle
+        , seTranslate
+        , seZoom
         , select
         , selected
         , selection
         , selectionName
         , shape
         , size
+        , smFill
+        , smFillOpacity
+        , smStroke
+        , smStrokeDash
+        , smStrokeDashOffset
+        , smStrokeOpacity
+        , smStrokeWidth
         , soByField
         , soByRepeat
         , soCustom
@@ -994,6 +1013,16 @@ For details, see the
 @docs select
 @docs Selection
 @docs SelectionProperty
+@docs seBind
+@docs seEncodings
+@docs seFields
+@docs seNearest
+@docs seOn
+@docs seResolve
+@docs seSelectionMark
+@docs seToggle
+@docs seTranslate
+@docs seZoom
 
 @docs iRange
 @docs iCheckbox
@@ -1019,7 +1048,14 @@ For details, see the
 @docs inPlaceholder
 
 @docs SelectionResolution
-@docs SelectionMarkProperty
+
+@docs smFill
+@docs smFillOpacity
+@docs smStroke
+@docs smStrokeDash
+@docs smStrokeDashOffset
+@docs smStrokeOpacity
+@docs smStrokeWidth
 
 
 ## Making conditional channel encodings
@@ -1173,6 +1209,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs LegendValues
 @docs ProjectionProperty
 @docs ScaleProperty
+@docs SelectionMarkProperty
 
 @docs DataValue
 @docs DataValues
@@ -2564,9 +2601,14 @@ type Selection
     | Interval
 
 
-{-| Properties for customising the appearance of an interval selection mark (dragged
+{-| _Note: specifying selection mark properties with type constructors (`SMFill`,
+`SMStroke` etc.) is deprecated in favour of calling their equivalent functions
+(`smFill`, `smStroke` etc.)_
+
+Properties for customising the appearance of an interval selection mark (dragged
 rectangle). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+
 -}
 type SelectionMarkProperty
     = SMFill String
@@ -2578,25 +2620,22 @@ type SelectionMarkProperty
     | SMStrokeDashOffset Float
 
 
-{-| Properties for customising the nature of the selection. See the
+{-| Properties for customising the nature of an interactive selection. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
-for details. When linking a selection property to an event stream with `On`, `Translate`
-or `Zoom`, a String should be provided describing the event stream as detailed in the
-[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams).
-If an empty string is provided, the property is set to `false`. The `Toggle` option
-expects a [Vega expression](https://vega.github.io/vega/docs/expressions) that evaluates
-to either true or false.
+for details. For parameterised properties use relevant functions (e.g. `seOn`,
+`seEncodings`, `seBind` etc.) rather than the (deprecated) type constructors
+(On, Encodings, Bind etc.).
 -}
 type SelectionProperty
-    = On String
+    = Empty
+    | BindScales
+    | On String
     | Translate String
     | Zoom String
     | Fields (List String)
     | Encodings (List Channel)
-    | Empty
     | ResolveSelections SelectionResolution
     | SelectionMark (List SelectionMarkProperty)
-    | BindScales
     | Bind (List Binding)
     | Nearest Bool
     | Toggle String
@@ -6109,6 +6148,32 @@ scZero =
     SZero
 
 
+{-| Specify a binding to some input elements as part of a named selection.
+For details, see the
+[Vega-Lite bind documentation](https://vega.github.io/vega-lite/docs/bind.html)
+-}
+seBind : List Binding -> SelectionProperty
+seBind =
+    Bind
+
+
+{-| Specify a encoding channels that form a named selection.
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seEncodings : List Channel -> SelectionProperty
+seEncodings =
+    Encodings
+
+
+{-| Specify the field names for projecting a selection. For details, see the
+[Vega-Lite projection selection documentation](https://vega.github.io/vega-lite/docs/project.html)
+-}
+seFields : List String -> SelectionProperty
+seFields =
+    Fields
+
+
 {-| Create a single named selection that may be applied to a data query or transformation.
 The first two parameters specify the name to be given to the selection for later reference
 and the type of selection made. The third allows additional selection options to
@@ -6172,6 +6237,71 @@ selectionName =
     SelectionName
 
 
+{-| Specify whether or not a selection should capture nearest marks to a pointer
+rather than an exact position match. This allows 'accelerated' selection for
+discrete marks. For details, see the
+[Vega-Lite nearest documentation](https://vega.github.io/vega-lite/docs/nearest.html)
+-}
+seNearest : Bool -> SelectionProperty
+seNearest =
+    Nearest
+
+
+{-| Specify a [Vega event stream](https://vega.github.io/vega/docs/event-streams)
+that triggers a selection. For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
+-}
+seOn : String -> SelectionProperty
+seOn =
+    On
+
+
+{-| Specify a strategy that determines how selections’ data queries are resolved
+when applied in a filter transform, conditional encoding rule, or scale domain.
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seResolve : SelectionResolution -> SelectionProperty
+seResolve =
+    ResolveSelections
+
+
+{-| Specify the appearance of an interval selection mark (dragged rectangle).
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seSelectionMark : List SelectionMarkProperty -> SelectionProperty
+seSelectionMark =
+    SelectionMark
+
+
+{-| Specify a predicate expression that determines a toggled selection.
+For details, see the
+[Vega-Lite toggle documentation](https://vega.github.io/vega-lite/docs/toggle.html)
+-}
+seToggle : String -> SelectionProperty
+seToggle =
+    Toggle
+
+
+{-| Specify a translation selection transformation used for panning a view.
+For details, see the
+[Vega-Lite selection translate documentation](https://vega.github.io/vega-lite/docs/translate.html)
+-}
+seTranslate : String -> SelectionProperty
+seTranslate =
+    Translate
+
+
+{-| Specify a zooming selection transformation used for zooming a view.
+For details, see the
+[Vega-Lite selection zoom documentation](https://vega.github.io/vega-lite/docs/zoom.html)
+-}
+seZoom : String -> SelectionProperty
+seZoom =
+    Zoom
+
+
 {-| Encode a shape channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by shape. The second parameter
 is a list of any previous channels to which this shape channel should be added.
@@ -6194,6 +6324,69 @@ is a list of any previous channels to which this size channel should be added.
 size : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 size markProps =
     (::) ( "size", List.concatMap markChannelProperty markProps |> JE.object )
+
+
+{-| Specify the fill colour of the interval selection mark (dragged recangular area).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smFill : String -> SelectionMarkProperty
+smFill =
+    SMFill
+
+
+{-| Specify the fill opacity of the interval selection mark (dragged recangular area)
+in the range [0, 1]. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smFillOpacity : Float -> SelectionMarkProperty
+smFillOpacity =
+    SMFillOpacity
+
+
+{-| Specify the stroke colour of the interval selection mark (dragged recangular area).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStroke : String -> SelectionMarkProperty
+smStroke =
+    SMStroke
+
+
+{-| Specify the stroke opacity of the interval selection mark (dragged recangular
+area) in the range [0, 1]. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeOpacity : Float -> SelectionMarkProperty
+smStrokeOpacity =
+    SMStrokeOpacity
+
+
+{-| Specify the stroke width of the interval selection mark (dragged recangular
+area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeWidth : Float -> SelectionMarkProperty
+smStrokeWidth =
+    SMStrokeWidth
+
+
+{-| Specify the stroke dash style of the interval selection mark (dragged
+recangular area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeDash : List Float -> SelectionMarkProperty
+smStrokeDash =
+    SMStrokeDash
+
+
+{-| Specify the stroke dash offset of the interval selection mark (dragged
+recangular area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeDashOffset : Float -> SelectionMarkProperty
+smStrokeDashOffset =
+    SMStrokeDashOffset
 
 
 {-| Specify a sorting by the aggregated summary of a given field using a given
