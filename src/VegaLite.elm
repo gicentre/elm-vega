@@ -34,10 +34,13 @@ module VegaLite
           --TODO: Replace with the following in next major release: , DetailChannel
         , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
           --TODO: Replace with the following in next major release: , FacetChannel
-        , FacetMapping(..)
+          --, FacetMapping(ColumnBy, RowBy)
+        , FacetMapping
         , FieldTitleProperty(Function, Plain, Verbal)
-        , Filter(..)
-        , FilterRange(..)
+          --, Filter(FEqual,FExpr ,FCompose,FSelection,FOneOf ,FRange)
+        , Filter
+          --, FilterRange(NumberRange,DateRange)
+        , FilterRange
         , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
         , Format(..)
         , Geometry(..)
@@ -154,6 +157,7 @@ module VegaLite
           -- TODO: create functions for access to ConfigurationProperty type constructors
         , color
         , column
+        , columnBy
         , combineSpecs
         , configuration
         , configure
@@ -189,6 +193,7 @@ module VegaLite
         , dtMinute
         , dtMonth
         , dtQuarter
+        , dtRange
         , dtSecond
         , dtYear
         , dts
@@ -201,6 +206,12 @@ module VegaLite
         , fName
         , fTimeUnit
         , facet
+        , fiCompose
+        , fiEqual
+        , fiExpr
+        , fiOneOf
+        , fiRange
+        , fiSelection
         , fill
         , filter
         , foDate
@@ -264,6 +275,7 @@ module VegaLite
         , name
         , not
         , num
+        , numRange
         , nums
         , oAggregate
         , oBin
@@ -300,6 +312,7 @@ module VegaLite
         , rgb
           --TODO: Replace with the following in next major release: , BooleanOp
         , row
+        , rowBy
         , rule
         , scClamp
         , scDomain
@@ -440,8 +453,15 @@ data fields or geospatial coordinates before they are encoded visually.
 ## Filtering
 
 @docs filter
-@docs Filter
-@docs FilterRange
+
+@docs fiEqual
+@docs fiExpr
+@docs fiCompose
+@docs fiSelection
+@docs fiOneOf
+@docs fiRange
+@docs numRange
+@docs dtRange
 
 
 ## Relational Joining (lookup)
@@ -760,7 +780,8 @@ arrangement (in rows or columns). For details see the
 @docs repeat
 @docs RepeatFields
 @docs facet
-@docs FacetMapping
+@docs columnBy
+@docs rowBy
 
 @docs fName
 @docs fMType
@@ -962,6 +983,10 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs DataValue
 @docs DataValues
 @docs DateTime
+
+@docs FacetMapping
+@docs Filter
+@docs FilterRange
 
 @docs ScaleRange
 
@@ -1493,7 +1518,7 @@ type DetailChannel
 --     | Wheel
 
 
-{-| _Note: referencing facet channel type constructors (`FName`, `FBin` etc.) is
+{-| _Note: facet channel type constructors (`FName`, `FBin` etc.) are
 deprecated in favour of calling their equivalent facet channel functions
 (`fName`, `fBin` etc.)_
 
@@ -1510,9 +1535,14 @@ type FacetChannel
     | FHeader (List HeaderProperty)
 
 
-{-| Provides details of the mapping between a row or column and its field
+{-| _Note: facet mapping type constructors (`ColumnBy` and `RowBy` ) are
+deprecated in favour of calling their equivalent facet mapping functions
+(`columnBy` and `rowBy`)_
+
+Provides details of the mapping between a row or column and its field
 definitions in a set of faceted small multiples. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+
 -}
 type FacetMapping
     = ColumnBy (List FacetChannel)
@@ -1530,9 +1560,14 @@ type FieldTitleProperty
     | Plain
 
 
-{-| Type of filtering operation. See the
+{-| _Note: referencing filter type constructors (`FEqual`, `FExpr` etc.)
+is deprecated in favour of calling their equivalent filtering functions
+(`fiEqual`, `fiExpr` etc.)_
+
+Type of filtering operation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
 for details.
+
 -}
 type Filter
     = FEqual String DataValue
@@ -1543,8 +1578,13 @@ type Filter
     | FRange String FilterRange
 
 
-{-| A pair of filter range data values. The first argument is the inclusive minimum
+{-| _Note: referencing filter range type constructors (`NumberRange` and `DateRange`)
+is deprecated in favour of calling their equivalent filtering range functions
+(`numRange` and `dtRange`.)_
+
+A pair of filter range data values. The first argument is the inclusive minimum
 vale to accept and the second the inclusive maximum.
+
 -}
 type FilterRange
     = NumberRange Float Float
@@ -2978,6 +3018,15 @@ column fFields =
     (::) ( "column", JE.object (List.map facetChannelProperty fFields) )
 
 
+{-| Specify the mapping between a column and its field definitions in a set of
+faceted small multiples. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+-}
+columnBy : List FacetChannel -> FacetMapping
+columnBy =
+    ColumnBy
+
+
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
 a single page with multiple visulizualizations.
@@ -3513,6 +3562,13 @@ dtQuarter =
     DTQuarter
 
 
+{-| Specify the min max date-time range to be used in data filtering.
+-}
+dtRange : List DateTime -> List DateTime -> FilterRange
+dtRange =
+    DateRange
+
+
 {-| Specify a list of date-time data values. This is used when a function can
 accept lists of different types.
 -}
@@ -3610,6 +3666,33 @@ fHeader =
     FHeader
 
 
+{-| Build up a filtering predicate through logical composition (`and`, `or` etc.).
+See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
+for details.
+-}
+fiCompose : BooleanOp -> Filter
+fiCompose =
+    FCompose
+
+
+{-| Filter a data stream so that only data in a given field equal to the given
+value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiEqual : String -> DataValue -> Filter
+fiEqual =
+    FEqual
+
+
+{-| Filter a data stream so that only data that satisfy the given predicate
+expression are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiExpr : String -> Filter
+fiExpr =
+    FExpr
+
+
 {-| Encode a fill channel. This acts in a similar way to encoding by `color` but
 only affects the interior of closed shapes. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by fill.
@@ -3689,6 +3772,33 @@ filter f =
                             List.map JE.bool bs |> JE.list
             in
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
+
+
+{-| Filter a data stream so that only data in a given field contained in the given
+list of values are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiOneOf : String -> DataValues -> Filter
+fiOneOf =
+    FOneOf
+
+
+{-| Filter a data stream so that only data in a given field that are within the
+given range are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiRange : String -> FilterRange -> Filter
+fiRange =
+    FRange
+
+
+{-| Filter a data stream so that only data in a given field that are within the
+given interactive selection are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiSelection : String -> Filter
+fiSelection =
+    FSelection
 
 
 {-| Provide the name of the field used for encoding with a facet channel.
@@ -4471,6 +4581,13 @@ num =
     Number
 
 
+{-| Specify the min max number range to be used in data filtering.
+-}
+numRange : Float -> Float -> FilterRange
+numRange =
+    NumberRange
+
+
 {-| Specify a list of numeric data values. This is used when a function can
 accept lists of different types.
 -}
@@ -4933,6 +5050,15 @@ when chaining encodings using functional composition
 row : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 row fFields =
     (::) ( "row", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Specify the mapping between a row and its field definitions in a set of
+faceted small multiples. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+-}
+rowBy : List FacetChannel -> FacetMapping
+rowBy =
+    RowBy
 
 
 {-| Specify a line seqment connecting two vertices. Can either be used to span the
