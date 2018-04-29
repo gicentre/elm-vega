@@ -12,13 +12,13 @@ hyperlink1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "label" (Strings [ "Vega", "Vega-Lite" ])
-                << dataColumn "url" (Strings [ "https://vega.github.io/vega", "https://vega.github.io/vega-lite" ])
+                << dataColumn "label" (strs [ "Vega", "Vega-Lite" ])
+                << dataColumn "url" (strs [ "https://vega.github.io/vega", "https://vega.github.io/vega-lite" ])
 
         encCircle =
             encoding
                 << position X [ pName "label", pMType Nominal, pAxis [] ]
-                << size [ mNumber 8000 ]
+                << size [ mNum 8000 ]
                 << color [ mName "label", mMType Nominal, mLegend [] ]
                 << hyperlink [ hName "url", hMType Nominal ]
 
@@ -26,8 +26,8 @@ hyperlink1 =
             encoding
                 << position X [ pName "label", pMType Nominal, pAxis [] ]
                 << text [ tName "label", tMType Nominal ]
-                << color [ mString "white" ]
-                << size [ mNumber 16 ]
+                << color [ mStr "white" ]
+                << size [ mNum 16 ]
 
         symbolSpec =
             asSpec [ circle [ MCursor CPointer ], encCircle [] ]
@@ -49,7 +49,7 @@ hyperlink2 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
-                << hyperlink [ hString "http://www.imdb.com" ]
+                << hyperlink [ hStr "http://www.imdb.com" ]
     in
     toVegaLite [ data, point [ MCursor CPointer ], enc [] ]
 
@@ -66,13 +66,13 @@ hyperlink3 =
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
                     [ mDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ mString "steelblue" ]
-                        [ mString "red" ]
+                        [ mStr "steelblue" ]
+                        [ mStr "red" ]
                     ]
                 << hyperlink
                     [ hDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ hString "http://www.imdb.com" ]
-                        [ hString "https://www.rottentomatoes.com" ]
+                        [ hStr "http://www.imdb.com" ]
+                        [ hStr "https://www.rottentomatoes.com" ]
                     ]
     in
     toVegaLite [ data, point [ MCursor CPointer ], enc [] ]

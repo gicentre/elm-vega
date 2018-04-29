@@ -12,8 +12,8 @@ sortQuant yField sps =
         data =
             -- dataFromUrl "https://vega.github.io/vega-lite/data/cars.json"
             dataFromColumns []
-                << dataColumn "Horsepower" (Numbers [ 1, 5, 2, 3, 4 ])
-                << dataColumn "Weight_in_lbs" (Numbers [ 19, 21, 58, 12, 13 ])
+                << dataColumn "Horsepower" (nums [ 1, 5, 2, 3, 4 ])
+                << dataColumn "Weight_in_lbs" (nums [ 19, 21, 58, 12, 13 ])
 
         enc =
             encoding
@@ -44,15 +44,15 @@ sortCustom =
     let
         data =
             dataFromColumns []
-                << dataColumn "a" (Strings [ "A", "B", "C", "Z", "Y", "X" ])
-                << dataColumn "b" (Numbers [ 28, 55, 43, 91, 81, 53 ])
+                << dataColumn "a" (strs [ "A", "B", "C", "Z", "Y", "X" ])
+                << dataColumn "b" (nums [ 28, 55, 43, 91, 81, 53 ])
 
         enc =
             encoding
                 << position X
                     [ pName "a"
                     , pMType Ordinal
-                    , pSort [ customSort (Strings [ "B", "A", "C" ]) ]
+                    , pSort [ customSort (strs [ "B", "A", "C" ]) ]
                     ]
                 << position Y [ pName "b", pMType Quantitative ]
     in

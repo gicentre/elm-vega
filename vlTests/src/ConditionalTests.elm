@@ -26,8 +26,8 @@ markCondition1 =
                         (or (expr "datum.IMDB_Rating === null")
                             (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ mString "#ddd" ]
-                        [ mString "#0099ee" ]
+                        [ mStr "#ddd" ]
+                        [ mStr "#0099ee" ]
                     ]
     in
     toVegaLite [ config [], data, point [], enc [] ]
@@ -90,7 +90,7 @@ selectionCondition2 =
                 << color
                     [ mSelectionCondition (and (selectionName "alex") (selectionName "morgan"))
                         [ mAggregate Count, mName "*", mMType Quantitative ]
-                        [ mString "gray" ]
+                        [ mStr "gray" ]
                     ]
     in
     toVegaLite
@@ -121,8 +121,8 @@ selectionCondition3 =
 
         enc2 =
             encoding
-                << position X [ pName "Acceleration", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 25 ]) ] ]
-                << position Y [ pName "Displacement", pMType Quantitative, pScale [ SDomain (DNumbers [ 0, 500 ]) ] ]
+                << position X [ pName "Acceleration", pMType Quantitative, pScale [ scDomain (doNums [ 0, 25 ]) ] ]
+                << position Y [ pName "Displacement", pMType Quantitative, pScale [ scDomain (doNums [ 0, 500 ]) ] ]
 
         spec2 =
             asSpec [ trans [], point [], enc2 [] ]

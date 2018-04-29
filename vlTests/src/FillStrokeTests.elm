@@ -14,17 +14,17 @@ encChart extraEnc =
     let
         data =
             dataFromColumns []
-                << dataColumn "x" (Numbers [ 10, 20, 30, 36 ])
-                << dataColumn "y" (Numbers [ 1, 2, 3, 4 ])
-                << dataColumn "val" (Numbers [ 1, 2, 3, 4 ])
-                << dataColumn "cat" (Strings [ "a", "b", "c", "d" ])
+                << dataColumn "x" (nums [ 10, 20, 30, 36 ])
+                << dataColumn "y" (nums [ 1, 2, 3, 4 ])
+                << dataColumn "val" (nums [ 1, 2, 3, 4 ])
+                << dataColumn "cat" (strs [ "a", "b", "c", "d" ])
 
         enc =
             encoding
                 << position X [ pName "x", pMType Quantitative ]
                 << position Y [ pName "y", pMType Quantitative ]
                 << color [ mName "cat", mMType Nominal ]
-                << size [ mNumber 2000 ]
+                << size [ mNum 2000 ]
                 << extraEnc
     in
     toVegaLite [ width 200, height 200, data [], enc [], circle [ MStroke "black" ] ]
@@ -47,7 +47,7 @@ fill2 =
 
 fill3 : Spec
 fill3 =
-    encChart (fill [ mString "red" ])
+    encChart (fill [ mStr "red" ])
 
 
 stroke1 : Spec
@@ -62,7 +62,7 @@ stroke2 =
 
 stroke3 : Spec
 stroke3 =
-    encChart (stroke [ mString "red" ])
+    encChart (stroke [ mStr "red" ])
 
 
 combined1 : Spec
@@ -72,12 +72,12 @@ combined1 =
 
 combined2 : Spec
 combined2 =
-    encChart (stroke [ mName "y", mMType Ordinal ] << fill [ mString "red" ])
+    encChart (stroke [ mName "y", mMType Ordinal ] << fill [ mStr "red" ])
 
 
 combined3 : Spec
 combined3 =
-    encChart (stroke [ mString "red" ] << fill [ mName "y", mMType Ordinal ])
+    encChart (stroke [ mStr "red" ] << fill [ mName "y", mMType Ordinal ])
 
 
 geo1 : Spec

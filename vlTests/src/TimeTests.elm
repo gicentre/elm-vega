@@ -15,7 +15,7 @@ timeByUnit tu =
         enc =
             encoding
                 << position X [ pName "date", pMType Temporal, pTimeUnit tu ]
-                << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ SZero False ] ]
+                << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ scZero False ] ]
     in
     toVegaLite [ width 800, data, enc [], line [ MStrokeWidth 0.2 ] ]
 
@@ -112,10 +112,10 @@ parseTime dType =
         format =
             case dType of
                 Local ->
-                    FoDate "%d %b %Y %H:%M"
+                    foDate "%d %b %Y %H:%M"
 
                 UTC ->
-                    FoUtc "%d %b %Y %H:%M"
+                    foUtc "%d %b %Y %H:%M"
 
         tu =
             case dType of
@@ -128,21 +128,21 @@ parseTime dType =
         timeScale =
             case dType of
                 Local ->
-                    pScale [ SType ScTime ]
+                    pScale [ scType ScTime ]
 
                 UTC ->
-                    pScale [ SType ScUtc ]
+                    pScale [ scType ScUtc ]
 
         data =
             dataFromColumns [ Parse [ ( "date", format ) ] ]
-                << dataColumn "date" (Strings [ "28 Oct 2017 22:00", "28 Oct 2017 23:00", "29 Oct 2017 00:00", "29 Oct 2017 01:00", "29 Oct 2017 02:00", "29 Oct 2017 03:00", "29 Oct 2017 04:00" ])
-                << dataColumn "value" (Numbers [ 1, 2, 3, 4, 5, 6, 7 ])
+                << dataColumn "date" (strs [ "28 Oct 2017 22:00", "28 Oct 2017 23:00", "29 Oct 2017 00:00", "29 Oct 2017 01:00", "29 Oct 2017 02:00", "29 Oct 2017 03:00", "29 Oct 2017 04:00" ])
+                << dataColumn "value" (nums [ 1, 2, 3, 4, 5, 6, 7 ])
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, tu, timeScale, pAxis [ AxFormat "%d %b %H:%M" ] ]
+                << position X [ pName "date", pMType Temporal, tu, timeScale, pAxis [ axFormat "%d %b %H:%M" ] ]
                 << position Y [ pName "value", pMType Quantitative ]
-                << size [ mNumber 500 ]
+                << size [ mNum 500 ]
     in
     toVegaLite [ width 800, data [], enc [], circle [] ]
 

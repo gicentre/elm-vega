@@ -15,8 +15,8 @@ The seven key elements of the grammar as represented in elm-vega and Vega-Lite a
 *   **Projection**: The mapping of 3d global geospatial locations onto a 2d plane . _Example elm-vega function:_ `projection`.
 *   **Mark**: The visual symbol(s) that represent the data. _Example elm-vega functions:_ `line`, `circle`, `bar`, `textMark` and `geoshape`.
 *   **Encoding**: The specification of which data elements are mapped to which mark characteristics (commonly known as _channels_). _Example elm-vega functions:_ `position`, `shape`, `size` and `color`.
-*   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega types:_ `SDomain`, `SPadding` and `SInterpolate`.
-*   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega types:_ `Axis` (for position encodings) and `Legend` (for color, size and shape encodings).
+*   **Scale**: Descriptions of the way encoded marks represent the data. _Example elm-vega functions:_ `scDomain`, `scPadding` and `scInterpolate`.
+*   **Guides**: Supplementary visual elements that support interpreting the visualization. _Example elm-vega functions:_ `axDomain` (for position encodings) and `leTitle` (for legend color, size and shape encodings).
 
 In common with other languages that build upon a grammar of graphics such as D3 and Vega, this grammar allows fine grain control of visualization design.
 But unlike those languages, Vega-Lite and elm-vega provide practical default specifications for most of the grammar, allowing for a much more compact high-level form of expression.
@@ -473,7 +473,7 @@ let
                 [ mSelect
 ionCondition (selectionName "picked")
                     [ mName "Origin", mMType Nominal ]
-                    [ mString "grey" ]
+                    [ mStr "grey" ]
                 ]
 
     sel =
@@ -509,7 +509,7 @@ scatterProps =
                 << color
                     [ mSelectionCondition (selectionName "picked")
                         [ mName "Origin", mMType Nominal ]
-                        [ mString "grey" ]
+                        [ mStr "grey" ]
                     ]
     in
     [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -591,7 +591,7 @@ let
             << select "picked"
                 Single
                 [ Fields [ "Cylinders" ]
-                , Bind [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ] ]
+                , Bind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                 ]
 in
 toVegaLite <| sel [] :: scatterProps
@@ -614,8 +614,8 @@ let
                 Single
                 [ Fields [ "Cylinders", "Year" ]
                 , Bind
-                    [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
-                    , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                    [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ]
+                    , iRange "Year" [ inMin 1969, inMax 1981, inStep 1 ]
                     ]
                 ]
 in
@@ -679,7 +679,7 @@ let
             << color
                 [ mSelectionCondition (selectionName "picked")
                     [ mName "Origin", mMType Nominal ]
-                    [ mString "grey" ]
+                    [ mStr "grey" ]
                 ]
 
     sel =
@@ -752,11 +752,11 @@ let
 
     encContext =
         encoding
-            << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+            << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
             << position Y
                 [ pName "price"
                 , pMType Quantitative
-                , pAxis [ AxTickCount 3, AxGrid False ]
+                , pAxis [ axTickCount 3, axGrid False ]
                 ]
 
     specContext =
@@ -767,8 +767,8 @@ let
             << position X
                 [ pName "date"
                 , pMType Temporal
-                , pScale [ SDomain (DSelection "brush") ]
-                , pAxis [ AxTitle "" ]
+                , pScale [ scDomain (doSelection "brush") ]
+                , pAxis [ axTitle "" ]
                 ]
             << position Y [ pName "price", pMType Quantitative ]
 
@@ -813,14 +813,14 @@ let
         encoding
             << position X [ pRepeat Column, pMType Quantitative ]
             << position Y [ pAggregate Count, pMType Quantitative ]
-            << color [ mString "goldenrod" ]
+            << color [ mStr "goldenrod" ]
 in
 toVegaLite
     [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
     , specification <|
         asSpec
             [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"
-                [ Parse [ ( "date", FoDate "%Y/%m/%d %H:%M" ) ] ]
+                [ Parse [ ( "date", foDate "%Y/%m/%d %H:%M" ) ] ]
             , hourTrans []
             , layer
                 [ asSpec [ bar [], totalEnc [] ]

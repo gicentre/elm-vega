@@ -228,7 +228,7 @@ dashboard1 =
 
         annotationEnc =
             encoding
-                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean, pScale [ SDomain (DNumbers [ 0, 5.5 ]) ] ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean, pScale [ scDomain (doNums [ 0, 5.5 ]) ] ]
 
         annotationSpec =
             asSpec [ title "Annotation", width 200, rule [], annotationEnc [] ]
@@ -317,7 +317,7 @@ scatterProps =
                 << color
                     [ mSelectionCondition (selectionName "picked")
                         [ mName "Origin", mMType Nominal ]
-                        [ mString "grey" ]
+                        [ mStr "grey" ]
                     ]
     in
     [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -375,7 +375,7 @@ interactiveScatter5 =
                 << select "picked"
                     Single
                     [ Fields [ "Cylinders" ]
-                    , Bind [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ] ]
+                    , Bind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                     ]
     in
     toVegaLite <| sel [] :: scatterProps
@@ -390,8 +390,8 @@ interactiveScatter6 =
                     Single
                     [ Fields [ "Cylinders", "Year" ]
                     , Bind
-                        [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
-                        , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                        [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ]
+                        , iRange "Year" [ inMin 1969, inMax 1981, inStep 1 ]
                         ]
                     ]
     in
@@ -438,7 +438,7 @@ coordinatedScatter1 =
                 << color
                     [ mSelectionCondition (selectionName "picked")
                         [ mName "Origin", mMType Nominal ]
-                        [ mString "grey" ]
+                        [ mStr "grey" ]
                     ]
 
         sel =
@@ -500,11 +500,11 @@ contextAndFocus =
 
         encContext =
             encoding
-                << position X [ pName "date", pMType Temporal, pAxis [ AxFormat "%Y" ] ]
+                << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
                 << position Y
                     [ pName "price"
                     , pMType Quantitative
-                    , pAxis [ AxTickCount 3, AxGrid False ]
+                    , pAxis [ axTickCount 3, axGrid False ]
                     ]
 
         specContext =
@@ -515,8 +515,8 @@ contextAndFocus =
                 << position X
                     [ pName "date"
                     , pMType Temporal
-                    , pScale [ SDomain (DSelection "brush") ]
-                    , pAxis [ AxTitle "" ]
+                    , pScale [ scDomain (doSelection "brush") ]
+                    , pAxis [ axTitle "" ]
                     ]
                 << position Y [ pName "price", pMType Quantitative ]
 
@@ -553,14 +553,14 @@ crossFilter =
             encoding
                 << position X [ pRepeat Column, pMType Quantitative ]
                 << position Y [ pAggregate Count, pMType Quantitative ]
-                << color [ mString "goldenrod" ]
+                << color [ mStr "goldenrod" ]
     in
     toVegaLite
         [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
         , specification <|
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"
-                    [ Parse [ ( "date", FoDate "%Y/%m/%d %H:%M" ) ] ]
+                    [ Parse [ ( "date", foDate "%Y/%m/%d %H:%M" ) ] ]
                 , hourTrans []
                 , layer
                     [ asSpec [ bar [], totalEnc [] ]

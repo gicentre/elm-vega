@@ -4,31 +4,31 @@ module VegaLite
         , Arrangement(Column, Row)
         , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
         , AxisConfig(..)
-        , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
-          --, AxisProperty
-        , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
-          --, BinProperty
-        , Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
-          --, Binding
+          -- AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
+        , AxisProperty
+          --, BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
+        , BinProperty
+          --Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
+        , Binding
         , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
-        , CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
-          --, CInterpolate(Hcl,HclLong,Hsl,HslLong,Lab)
+          --CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
+        , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-        , ClipRect(LTRB, NoClip)
-          --,ClipRect(NoClip)
+          --, ClipRect(LTRB, NoClip)
+        , ClipRect(NoClip)
         , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
         , DataRow
-        , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
-          --, DataType(FoBoolean,  FoNumber)
-        , DataValue(Boolean, DateTime, Number, Str)
-          -- ,DataValue
-        , DataValues(Booleans, DateTimes, Numbers, Strings)
-          --, DataValues
-        , DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
-          --,DateTime
+          --, DataType(FoBoolean, FoDate, FoNumber, FoUtc)
+        , DataType(FoBoolean, FoNumber)
+          --, DataValue(Boolean, DateTime, Number, Str)
+        , DataValue
+          --, DataValues(Booleans, DateTimes, Numbers, Strings)
+        , DataValues
+          --, DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
+        , DateTime
         , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
         , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
           --TODO: Replace with the following in next major release: , DetailChannel
@@ -45,7 +45,8 @@ module VegaLite
         , HeaderProperty(..)
         , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
           --TODO: Replace with the following in next major release: , HyperlinkChannel
-        , InputProperty(..)
+          --, InputProperty(Debounce, Element, InOptions, InMin , InMax ,InName ,InStep ,InPlaceholder)
+        , InputProperty
         , LabelledSpec
         , Legend(Gradient, Symbol)
         , LegendConfig(..)
@@ -78,10 +79,13 @@ module VegaLite
         , Resolve(..)
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleConfig(..)
-        , ScaleDomain(..)
-        , ScaleNice(..)
-        , ScaleProperty(..)
-        , ScaleRange(..)
+          --, ScaleDomain(DNumbers,DStrings ,DDateTimes ,DSelection,Unaggregated)
+        , ScaleDomain(Unaggregated)
+          --, ScaleNice(NMillisecond, NSecond, NMinute, NHour, NDay, NWeek, NMonth, NYear, NInterval,IsNice,NTickCount)
+        , ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+        , ScaleProperty
+          --, ScaleRange(RNumbers,RStrings,RName)
+        , ScaleRange
         , Selection(Interval, Multi, Single)
         , SelectionMarkProperty(..)
         , SelectionProperty(..)
@@ -172,6 +176,10 @@ module VegaLite
         , datasets
         , description
         , detail
+        , doDts
+        , doNums
+        , doSelection
+        , doStrs
         , domainRangeMap
         , dt
         , dtDate
@@ -197,7 +205,6 @@ module VegaLite
         , filter
         , foDate
         , foUtc
-          --, DataType(FoNumber, FoBoolean)
         , geoFeatureCollection
         , geometry
         , geometryCollection
@@ -210,7 +217,7 @@ module VegaLite
         , hName
         , hRepeat
         , hSelectionCondition
-        , hString
+        , hStr
         , hTimeUnit
         , height
         , hyperlink
@@ -227,23 +234,31 @@ module VegaLite
         , iText
         , iTime
         , iWeek
+        , inDebounce
+        , inElement
+        , inMax
+        , inMin
+        , inName
+        , inOptions
+        , inPlaceholder
+        , inStep
         , layer
         , line
         , lookup
         , lookupAs
         , mAggregate
         , mBin
-        , mBoolean
+        , mBoo
         , mDataCondition
         , mLegend
         , mMType
         , mName
-        , mNumber
+        , mNum
         , mPath
         , mRepeat
         , mScale
         , mSelectionCondition
-        , mString
+        , mStr
         , mTimeUnit
         , mark
         , name
@@ -275,6 +290,9 @@ module VegaLite
         , point
         , position
         , projection
+        , raName
+        , raNums
+        , raStrs
         , rect
         , repeat
         , resolution
@@ -283,6 +301,24 @@ module VegaLite
           --TODO: Replace with the following in next major release: , BooleanOp
         , row
         , rule
+        , scClamp
+        , scDomain
+        , scInterpolate
+        , scIsNice
+        , scNice
+        , scNiceInterval
+        , scNiceTickCount
+          --, ScaleProperty(SType,SDomain ,SRange , SScheme , SPadding , SPaddingInner , SPaddingOuter , SRangeStep , SRound , SClamp ,SInterpolate, SNice , SZero , SReverse )
+        , scPadding
+        , scPaddingInner
+        , scPaddingOuter
+        , scRange
+        , scRangeStep
+        , scReverse
+        , scRound
+        , scScheme
+        , scType
+        , scZero
         , select
         , selected
         , selection
@@ -553,9 +589,9 @@ color or size.
 @docs mSelectionCondition
 @docs mDataCondition
 @docs mPath
-@docs mNumber
-@docs mString
-@docs mBoolean
+@docs mNum
+@docs mStr
+@docs mBoo
 
 
 ### Properties Used By Mark Channels
@@ -599,7 +635,7 @@ pair hyperlinks with other visual channels such as marks or texts.
 @docs hTimeUnit
 @docs hDataCondition
 @docs hSelectionCondition
-@docs hString
+@docs hStr
 
 
 ## Order channels
@@ -653,13 +689,37 @@ for more information.
 
 Used to specify how the encoding of a data field should be applied.
 
-@docs ScaleProperty
+@docs scType
+@docs scDomain
+@docs scRange
+@docs scScheme
+@docs scPadding
+@docs scPaddingInner
+@docs scPaddingOuter
+@docs scRangeStep
+@docs scRound
+@docs scClamp
+@docs scInterpolate
+@docs scNice
+@docs scZero
+@docs scReverse
+
 @docs Scale
+@docs raName
+@docs raNums
+@docs raStrs
 @docs categoricalDomainMap
 @docs domainRangeMap
 @docs ScaleDomain
-@docs ScaleRange
+@docs doNums
+@docs doStrs
+@docs doDts
+@docs doSelection
+
 @docs ScaleNice
+@docs scIsNice
+@docs scNiceTickCount
+@docs scNiceInterval
 
 
 ### Color Scaling
@@ -741,7 +801,15 @@ For details, see the
 @docs iTel
 @docs iColor
 
-@docs InputProperty
+@docs inDebounce
+@docs inElement
+@docs inOptions
+@docs inMin
+@docs inMax
+@docs inName
+@docs inStep
+@docs inPlaceholder
+
 @docs SelectionResolution
 @docs SelectionMarkProperty
 
@@ -773,7 +841,7 @@ the cylinder field with an ordinal color scheme, else make them grey".
               << color
                   [ mSelectionCondition (selectionName "myBrush")
                       [ mName "Cylinders", mMType Ordinal ]
-                      [ mString "grey" ]
+                      [ mStr "grey" ]
                   ]
 
 In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
@@ -788,8 +856,8 @@ on whether a predicate test is satisfied.
                         (or (expr "datum.IMDB_Rating === null")
                             (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ mString "#ddd" ]
-                        [ mString "#0099ee" ]
+                        [ mStr "#ddd" ]
+                        [ mStr "#0099ee" ]
                     ]
 
 For details, see the
@@ -868,8 +936,8 @@ can carry data used in specifications.
 
 The following are deprecated and will be removed in a future major version release.
 Generally, the constructors of each type should be replaced with a function of
-the same name. For example, instead of the `Rule` type use the `rule` function;
-instead of `PAggregate` use `pAggregate` etc.
+a similar name. For example, instead of the `Rule` type use the `rule` function;
+instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 
 @docs PositionChannel
 @docs MarkChannel
@@ -888,10 +956,14 @@ instead of `PAggregate` use `pAggregate` etc.
 
 @docs AxisProperty
 @docs BinProperty
+@docs InputProperty
+@docs ScaleProperty
 
 @docs DataValue
 @docs DataValues
 @docs DateTime
+
+@docs ScaleRange
 
 -}
 
@@ -1282,8 +1354,8 @@ type Cursor
     myRegion : List DataColumn -> Data
     myRegion =
         dataFromColumns []
-            << dataColumn "easting" (Numbers [ -3, 4, 4, -3, -3 ])
-            << dataColumn "northing" (Numbers [ 52, 52, 45, 45, 52 ])
+            << dataColumn "easting" (nums [ -3, 4, 4, -3, -3 ])
+            << dataColumn "northing" (nums [ 52, 52, 45, 45, 52 ])
 
 -}
 type alias Data =
@@ -1564,16 +1636,16 @@ type HyperlinkChannel
     | HString String
 
 
-{-| GUI Input properties. The type of relevant property will depend on the type of
+{-| _Note: specifying input properties with type constructors (`InMin`,
+`InOptions` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`inMin`, `inOptions` etc.)_
+
+GUI Input properties. The type of relevant property will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
 max and step values; InSelect (selector) has a list of selection label options.
 For details see the
 [Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
-The `debounce` property, available for all input types allows a delay in input event
-handling to be added in order to avoid unnecessary event broadcasting. The `Element`
-property is an optional CSS selector indicating the parent element to which the
-input element should be added. This allows the option of the input element to be
-outside the visualization container.
+
 -}
 type InputProperty
     = Debounce Float
@@ -2075,8 +2147,13 @@ type ScaleConfig
     | SCUseUnaggregatedDomain Bool
 
 
-{-| Describes the scale domain (type of data in scale). For full details see the
+{-| Describes a scale domain (type of data in scale). To specify scale domain
+values explicitly, use the functions `doNums`, `doStrs`, `doDts` or `doSelection`
+rather than their (deprecated) type constructor equivalents.
+
+For full details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+
 -}
 type ScaleDomain
     = DNumbers (List Float)
@@ -2086,8 +2163,15 @@ type ScaleDomain
     | Unaggregated
 
 
-{-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
+{-| Describes the way a scale can be rounded to 'nice' numbers. To specify nice
+time intervals use `scNiceInterval` rather then the deprecated type constructor
+`NInterval`; to switch nice scaling on or off use `scIsNice` rather than the
+deprecated type constructor `IsNice`; and to set a nice tick count use the
+`scNiceTickCount` function rather than the deprecated `NTickCount` type constructor.
+
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+
 -}
 type ScaleNice
     = NMillisecond
@@ -2103,10 +2187,15 @@ type ScaleNice
     | NTickCount Int
 
 
-{-| Individual scale property. These are used to customise an individual scale
+{-| _Note: specifying scale properties with type constructors (`SDomain`,
+`SRange` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`scDomain`, `scRange` etc.)_
+
+Individual scale property. These are used to customise an individual scale
 transformation. To customise all scales use `config` and supply relevant
 `ScaleConfig` values. For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html)
+
 -}
 type ScaleProperty
     = SType Scale
@@ -2123,12 +2212,16 @@ type ScaleProperty
     | SInterpolate CInterpolate
     | SNice ScaleNice
     | SZero Bool
-      -- TODO: Check: This is a Vega, not Vega-Lite property so can generate a warning if validated against the Vega-Lite spec.
     | SReverse Bool
 
 
-{-| Describes a scale range of scale output values. For full details see the
+{-| _Note: specifying scale ranges with type constructors (`RNumbers`,
+`RStrings` and `RName`) is deprecated in favour of calling their equivalent
+functions (`raNums`, `raStrs` and `raName`.)_
+
+Describes a scale range of scale output values. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range).
+
 -}
 type ScaleRange
     = RNumbers (List Float)
@@ -2962,8 +3055,8 @@ used in place of lists of [SortProperty](#SortProperty). For example,
     let
         data =
             dataFromColumns []
-                << dataColumn "a" (Strings [ "A", "B", "C" ])
-                << dataColumn "b" (Numbers [ 28, 55, 43 ])
+                << dataColumn "a" (strs [ "A", "B", "C" ])
+                << dataColumn "b" (nums [ 28, 55, 43 ])
 
         enc =
             encoding
@@ -3025,10 +3118,10 @@ for details.
 The columns themselves are most easily generated with `dataColumn`
 
     data =
-        dataFromColumns [ Parse [ ( "Year", FoDate "%Y" ) ] ]
-            << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
-            << dataColumn "Age" (Numbers [ 28, 12, 6 ])
-            << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
+        dataFromColumns [ Parse [ ( "Year", foDate "%Y" ) ] ]
+            << dataColumn "Animal" (strs [ "Fish", "Dog", "Cat" ])
+            << dataColumn "Age" (nums [ 28, 12, 6 ])
+            << dataColumn "Year" (strs [ "2010", "2014", "2015" ])
 
 -}
 dataFromColumns : List Format -> List DataColumn -> Data
@@ -3097,10 +3190,10 @@ if you are creating data inline (as opposed to reading from a file), adding data
 is more efficient and less error-prone.
 
     data =
-        dataFromRows [ Parse [ ( "Year", FoDate "%Y" ) ] ]
-            << dataRow [ ( "Animal", Str "Fish" ), ( "Age", Number 28 ), ( "Year", Str "2010" ) ]
-            << dataRow [ ( "Animal", Str "Dog" ), ( "Age", Number 12 ), ( "Year", Str "2014" ) ]
-            << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
+        dataFromRows [ Parse [ ( "Year", foDate "%Y" ) ] ]
+            << dataRow [ ( "Animal", str "Fish" ), ( "Age", num 28 ), ( "Year", str "2010" ) ]
+            << dataRow [ ( "Animal", str "Dog" ), ( "Age", num 12 ), ( "Year", str "2014" ) ]
+            << dataRow [ ( "Animal", str "Cat" ), ( "Age", num 6 ), ( "Year", str "2015" ) ]
 
 -}
 dataFromRows : List Format -> List DataRow -> Data
@@ -3157,7 +3250,7 @@ for details.
 
     enc = ...
     toVegaLite
-        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
+        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
         , line []
         , enc []
         ]
@@ -3179,7 +3272,7 @@ dataFromUrl url fmts =
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
 The final parameter is the list of any other rows to which this is added.
 
-    dataRow [("Animal", Str "Fish"),("Age",Number 28),("Year", Str "2010")] []
+    dataRow [ ("Animal", str "Fish"), ("Age", num 28), ("Year", str "2010") ] []
 
 -}
 dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
@@ -3191,11 +3284,13 @@ dataRow row =
 can be created with normal data generating functions such as `dataFromRows` or
 `dataFromJson`. These can be later referred to using `dataFromSource`.
 
+    import Json.Encode as JE
+
     let
         data =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
         json =
             JE.list
                 [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 120 ) ]
@@ -3288,6 +3383,14 @@ dMType =
     DmType
 
 
+{-| Specify the date-time values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doDts : List (List DateTime) -> ScaleDomain
+doDts =
+    DDateTimes
+
+
 {-| Create a pair of continuous domain to color mappings suitable for customising
 ordered scales. The first parameter is a tuple representing the mapping of the lowest
 numeric value in the domain to its equivalent color; the second tuple the mapping
@@ -3311,6 +3414,30 @@ domainRangeMap lowerMap upperMap =
             List.unzip [ lowerMap, upperMap ]
     in
     [ SDomain (DNumbers domain), SRange (RStrings range) ]
+
+
+{-| Specify the numeric values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doNums : List Float -> ScaleDomain
+doNums =
+    DNumbers
+
+
+{-| Specify a scale domain based on a named ineractive selection. For full details see
+the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doSelection : String -> ScaleDomain
+doSelection =
+    DSelection
+
+
+{-| Specify the string values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doStrs : List String -> ScaleDomain
+doStrs =
+    DStrings
 
 
 {-| Specify a date-time data value. This is used when a function can accept values
@@ -3506,7 +3633,7 @@ should be added in sequence.
 
     trans =
         transform
-            << filter (FEqual "Animal" (Str "Cat"))
+            << filter (FEqual "Animal" (str "Cat"))
 
 Filter operations can combine selections and data predicates with `BooleanOp` expressions:
 
@@ -3619,9 +3746,9 @@ Each feature object in this collection can be created with the `geometry` functi
     geojson =
         geoFeatureCollection
             [ geometry (GeoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
-                [ ( "myRegionName", Str "Northern region" ) ]
+                [ ( "myRegionName", str "Northern region" ) ]
             , geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
-                [ ( "myRegionName", Str "Southern region" ) ]
+                [ ( "myRegionName", str "Southern region" ) ]
             ]
 
 -}
@@ -3790,8 +3917,8 @@ hSelectionCondition op tCh fCh =
 
 {-| Provide a literal string value when encoding with a hyperlink channel.
 -}
-hString : String -> HyperlinkChannel
-hString =
+hStr : String -> HyperlinkChannel
+hStr =
     HString
 
 
@@ -3868,6 +3995,78 @@ and the [Vega input binding documentation](https://vega.github.io/vega/docs/sign
 iMonth : String -> List InputProperty -> Binding
 iMonth f =
     IMonth f
+
+
+{-| Specify the delay in input event handling when processing input events in
+order to avoid unnecessary event broadcasting. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inDebounce : Float -> InputProperty
+inDebounce =
+    Debounce
+
+
+{-| Specify an optional CSS selector indicating the parent element to which an
+input element should be added. This allows the option of the input element to be
+outside the visualization container. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inElement : String -> InputProperty
+inElement =
+    Element
+
+
+{-| Specify the maximum slider value for a range input element. Defaults to the
+larger of the signal value and 100. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMax : Float -> InputProperty
+inMax =
+    InMax
+
+
+{-| Specify the minimum slider value for a range input element. Defaults to the
+smaller of the signal value and 0. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMin : Float -> InputProperty
+inMin =
+    InMin
+
+
+{-| Specify a custom label for a radio or select input element. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inName : String -> InputProperty
+inName =
+    InName
+
+
+{-| Specify a range of options for a radio or select input element. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inOptions : List String -> InputProperty
+inOptions =
+    InOptions
+
+
+{-| Specify the initial placeholding text for input elements such as text fields.
+For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inPlaceholder : String -> InputProperty
+inPlaceholder =
+    InPlaceholder
+
+
+{-| Specify the the minimum input element range slider increment. If undefined,
+the step size will be automatically determined based on the min and max values.
+For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inStep : Float -> InputProperty
+inStep =
+    InStep
 
 
 {-| Specify a number input element that can bound to a named field value (first
@@ -4111,8 +4310,8 @@ mBin =
 
 {-| Provide a literal Boolean value when encoding with a mark property channel.
 -}
-mBoolean : Bool -> MarkChannel
-mBoolean =
+mBoo : Bool -> MarkChannel
+mBoo =
     MBoolean
 
 
@@ -4124,8 +4323,8 @@ expression is false.
     color
         [ mDataCondition
             (expr "datum.IMDB_Rating === null")
-            [ mString "#ddd" ]
-            [ mString "rgb(76,120,168)" ]
+            [ mStr "#ddd" ]
+            [ mStr "rgb(76,120,168)" ]
         ]
 
 For details, see the
@@ -4171,8 +4370,8 @@ mName =
 
 {-| Provide a literal numeric value when encoding with a mark property channel.
 -}
-mNumber : Float -> MarkChannel
-mNumber =
+mNum : Float -> MarkChannel
+mNum =
     MNumber
 
 
@@ -4209,7 +4408,7 @@ to apply if the mark has been selected, the third the encoding if it is not sele
     color
         [ mSelectionCondition (selectionName "myBrush")
             [ mName "Cylinders", mMType Ordinal ]
-            [ mString "grey" ]
+            [ mStr "grey" ]
         ]
 
 For details, see the
@@ -4223,8 +4422,8 @@ mSelectionCondition op tMks fMks =
 
 {-| Provide a literal string value when encoding with a mark property channel.
 -}
-mString : String -> MarkChannel
-mString =
+mStr : String -> MarkChannel
+mStr =
     MString
 
 
@@ -4358,7 +4557,7 @@ opAs op field label =
     color
         [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
             [ mAggregate Count, mName "*", mMType Quantitative ]
-            [ mString "gray" ]
+            [ mStr "gray" ]
         ]
 
 -}
@@ -4605,6 +4804,32 @@ pTimeUnit =
     PTimeUnit
 
 
+{-| Specify the name of a pre-defined scale range (e.g. `symbol` or `diverging`).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raName : String -> ScaleRange
+raName =
+    RName
+
+
+{-| Specify a numeric scale range. Depending on the scaling this may be a min,max
+pair, or a list of explicit numerical values. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raNums : List Float -> ScaleRange
+raNums =
+    RNumbers
+
+
+{-| Specify a text scale range for discrete scales. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raStrs : List String -> ScaleRange
+raStrs =
+    RStrings
+
+
 {-| Specify an arbitrary rectangle. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rect.html).
 
@@ -4726,6 +4951,149 @@ rule =
     mark Rule
 
 
+{-| Specify that when scaling, values outside the data domain are clamped to the
+minumum or maximum value. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scClamp : Bool -> ScaleProperty
+scClamp =
+    SClamp
+
+
+{-| Specify a custom scaling domain. For details see the
+[Vega-Lite scale domain documentation](https://vega.github.io/vega-lite/docs/scale.html#domain)
+-}
+scDomain : ScaleDomain -> ScaleProperty
+scDomain =
+    SDomain
+
+
+{-| Specify an interpolation method for scaling range values. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scInterpolate : CInterpolate -> ScaleProperty
+scInterpolate =
+    SInterpolate
+
+
+{-| Specify whether or not a scaling should use 'nice' values. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scIsNice : Bool -> ScaleNice
+scIsNice =
+    IsNice
+
+
+{-| Specify 'nice' minimum and maximum values in a scaling (e.g. multiples of 10).
+For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scNice : ScaleNice -> ScaleProperty
+scNice =
+    SNice
+
+
+{-| Specify the 'nice' temporal interval values when scaling. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scNiceInterval : TimeUnit -> Int -> ScaleNice
+scNiceInterval =
+    NInterval
+
+
+{-| Specify the desired number of tick marks in a 'nice' scaling. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scNiceTickCount : Int -> ScaleNice
+scNiceTickCount =
+    NTickCount
+
+
+{-| Specify the padding in pixels to apply to a scaling. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scPadding : Float -> ScaleProperty
+scPadding =
+    SPadding
+
+
+{-| Specify the inner padding in pixels to apply to a band scaling. For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scPaddingInner : Float -> ScaleProperty
+scPaddingInner =
+    SPaddingInner
+
+
+{-| Specify the outer padding in pixels to apply to a band scaling. For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scPaddingOuter : Float -> ScaleProperty
+scPaddingOuter =
+    SPaddingOuter
+
+
+{-| Specify the range of a scaling. The type of range depends on the encoding
+channel. For details see the
+[Vega-Lite scale range documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+scRange : ScaleRange -> ScaleProperty
+scRange =
+    SRange
+
+
+{-| Specify the distance in pixels between the starts of adjacent bands in a band
+scaling. If `Nothing` is provided the distance is determined automatically.
+For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scRangeStep : Maybe Float -> ScaleProperty
+scRangeStep =
+    SRangeStep
+
+
+{-| Reverse the order of a scaling. For details see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/)
+-}
+scReverse : Bool -> ScaleProperty
+scReverse =
+    SReverse
+
+
+{-| Specify whether or not numeric values in a scaling are rounded to integers.
+For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scRound : Bool -> ScaleProperty
+scRound =
+    SRound
+
+
+{-| Specify the color scheme used by a color scaling. For details see the
+[Vega-Lite scale color scheme documentation](https://vega.github.io/vega-lite/docs/scale.html#scheme)
+-}
+scScheme : String -> List Float -> ScaleProperty
+scScheme name =
+    SScheme name
+
+
+{-| Specify the type of scaling to apply. For details see the
+[Vega-Lite scale type documentation](https://vega.github.io/vega-lite/docs/scale.html#type)
+-}
+scType : Scale -> ScaleProperty
+scType =
+    SType
+
+
+{-| Specify whether or not a numeric scaling should be forced to include a zero
+value. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scZero : Bool -> ScaleProperty
+scZero =
+    SZero
+
+
 {-| Create a single named selection that may be applied to a data query or transformation.
 The first two parameters specify the name to be given to the selection for later reference
 and the type of selection made. The third allows additional selection options to
@@ -4780,7 +5148,7 @@ selection sels =
     color
         [ mSelectionCondition (selectionName "myBrush")
             [ mName "Origin", mMType Nominal ]
-            [ mString "grey" ]
+            [ mStr "grey" ]
         ]
 
 -}
@@ -5081,8 +5449,8 @@ allows this to be done compactly.
     let
         data =
             dataFromColumns []
-                << dataColumn "a" (Strings [ "C", "C", "D", "D", "E", "E" ])
-                << dataColumn "b" (Numbers [ 2, 7, 1, 2, 6, 8 ])
+                << dataColumn "a" (strs [ "C", "C", "D", "D", "E", "E" ])
+                << dataColumn "b" (nums [ 2, 7, 1, 2, 6, 8 ])
 
         enc =
             encoding

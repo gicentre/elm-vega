@@ -69,7 +69,7 @@ myFirstVis : Spec
 myFirstVis =
     toVegaLite
         [ title "Hello, World!"
-        , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
+        , dataFromColumns [] <| dataColumn "x" (nums [ 10, 20, 30 ]) []
         , circle []
         , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]

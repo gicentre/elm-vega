@@ -22,8 +22,8 @@ data1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "cat" (Strings [ "a", "b", "c" ])
-                << dataColumn "val" (Numbers [ 10, 18, 12 ])
+                << dataColumn "cat" (strs [ "a", "b", "c" ])
+                << dataColumn "val" (nums [ 10, 18, 12 ])
     in
     showData (data [])
 
@@ -33,9 +33,9 @@ data2 =
     let
         data =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
-                << dataRow [ ( "cat", Str "c" ), ( "val", Number 12 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
+                << dataRow [ ( "cat", str "c" ), ( "val", num 12 ) ]
     in
     showData (data [])
 
@@ -73,14 +73,14 @@ dataSource name =
     let
         dataColumns =
             dataFromColumns []
-                << dataColumn "cat" (Strings [ "a", "b", "c" ])
-                << dataColumn "val" (Numbers [ 10, 18, 12 ])
+                << dataColumn "cat" (strs [ "a", "b", "c" ])
+                << dataColumn "val" (nums [ 10, 18, 12 ])
 
         dataRows =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
-                << dataRow [ ( "cat", Str "c" ), ( "val", Number 12 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
+                << dataRow [ ( "cat", str "c" ), ( "val", num 12 ) ]
 
         json =
             JE.list
@@ -138,8 +138,8 @@ geodata2 =
     let
         geojson =
             geoFeatureCollection
-                [ geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", Str "Southsville" ) ]
-                , geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", Str "Northerton" ) ]
+                [ geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", str "Southsville" ) ]
+                , geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", str "Northerton" ) ]
                 ]
     in
     toVegaLite

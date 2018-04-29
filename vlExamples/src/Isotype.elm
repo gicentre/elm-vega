@@ -42,7 +42,7 @@ personGrid =
 
         data =
             dataFromColumns []
-                << dataColumn "id" (Numbers <| List.map toFloat (List.range 1 100))
+                << dataColumn "id" (nums <| List.map toFloat (List.range 1 100))
 
         trans =
             transform
@@ -60,12 +60,21 @@ personGrid =
                 << shape [ mPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
                 << color
                     [ mSelectionCondition (selectionName "highlight")
-                        [ mString "rgb(194,81,64)" ]
-                        [ mString "rgb(167,165,156)" ]
+                        [ mStr "rgb(194,81,64)" ]
+                        [ mStr "rgb(167,165,156)" ]
                     ]
-                << size [ mNumber 90 ]
+                << size [ mNum 90 ]
     in
-    toVegaLite [ config [], width 400, height 400, data [], trans [], point [ MFilled True ], enc [], sel [] ]
+    toVegaLite
+        [ config []
+        , width 400
+        , height 400
+        , data []
+        , trans []
+        , point [ MFilled True ]
+        , enc []
+        , sel []
+        ]
 
 
 toRows : String -> List ( String, Int ) -> List DataRow -> List DataRow
@@ -73,7 +82,7 @@ toRows country animalFreqs =
     let
         toRow animal n =
             dataRow
-                [ ( "country", Str country ), ( "animal", Str animal ), ( "col", Number <| toFloat n ) ]
+                [ ( "country", str country ), ( "animal", str animal ), ( "col", num <| toFloat n ) ]
 
         fToCol ( animal, f ) =
             List.foldl (\n -> toRow animal n) [] (List.range 1 f)
@@ -129,8 +138,8 @@ livestock =
                             , ( "sheep", "rgb(91,131,149)" )
                             ]
                     ]
-                << opacity [ mNumber 1 ]
-                << size [ mNumber 200 ]
+                << opacity [ mNum 1 ]
+                << size [ mNum 200 ]
     in
     toVegaLite [ config [], width 800, height 200, data [], point [ MFilled True ], enc [] ]
 

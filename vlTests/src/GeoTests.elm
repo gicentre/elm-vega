@@ -20,7 +20,7 @@ defaultSize1 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , geoshape []
-        , encoding <| color [ mString "black" ] []
+        , encoding <| color [ mStr "black" ] []
         ]
 
 
@@ -32,7 +32,7 @@ defaultSize2 =
         , projection [ PType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
         , geoshape []
-        , encoding <| color [ mString "black" ] []
+        , encoding <| color [ mStr "black" ] []
         ]
 
 
@@ -58,7 +58,7 @@ choropleth2 =
         polyEnc =
             encoding
                 << color [ mName "id", mMType Nominal, mScale boroughColors, mLegend [] ]
-                << opacity [ mNumber 1 ]
+                << opacity [ mNum 1 ]
 
         polySpec =
             asSpec
@@ -124,7 +124,7 @@ tubeLines3 =
             asSpec
                 [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
-                , encoding <| color [ mString "#ddc" ] []
+                , encoding <| color [ mStr "#ddc" ] []
                 ]
 
         labelEnc =
@@ -132,8 +132,8 @@ tubeLines3 =
                 << position Longitude [ pName "cx", pMType Quantitative ]
                 << position Latitude [ pName "cy", pMType Quantitative ]
                 << text [ tName "bLabel", tMType Nominal ]
-                << size [ mNumber 8 ]
-                << opacity [ mNumber 0.6 ]
+                << size [ mNum 8 ]
+                << opacity [ mNum 0.6 ]
 
         trans =
             transform
@@ -337,7 +337,7 @@ dotMap1 =
             encoding
                 << position Longitude [ pName "longitude", pMType Quantitative ]
                 << position Latitude [ pName "latitude", pMType Quantitative ]
-                << size [ mNumber 1 ]
+                << size [ mNum 1 ]
                 << color [ mName "digit", mMType Nominal ]
     in
     toVegaLite
@@ -374,7 +374,7 @@ scribbleMap1 =
                 << position Longitude [ pName "longitude", pMType Quantitative ]
                 << position Latitude [ pName "latitude", pMType Quantitative ]
                 << order [ oName "zip_code", oMType Quantitative ]
-                << color [ mString "#666" ]
+                << color [ mStr "#666" ]
                 << detail [ dName "conterminous", dMType Nominal ]
     in
     toVegaLite

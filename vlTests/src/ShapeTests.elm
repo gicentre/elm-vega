@@ -18,7 +18,7 @@ chart des enc =
         , (encoding
             << position X [ pName "Horsepower", pMType Quantitative ]
             << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
-            << opacity [ mNumber 0.6 ]
+            << opacity [ mNum 0.6 ]
             << enc
           )
             []
@@ -66,7 +66,7 @@ scatter3 : Spec
 scatter3 =
     chart "Enlarged shapes (but legend shapes should remain same size)"
         (shape [ mName "Origin", mMType Nominal ]
-            << size [ mNumber 200 ]
+            << size [ mNum 200 ]
         )
 
 
@@ -74,7 +74,7 @@ scatter4 : Spec
 scatter4 =
     chart "Reduced shapes (but legend shapes should remain same size)"
         (shape [ mName "Origin", mMType Nominal ]
-            << size [ mNumber 20 ]
+            << size [ mNum 20 ]
         )
 
 

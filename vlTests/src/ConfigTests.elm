@@ -16,7 +16,7 @@ singleVis config =
                 << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << color [ mName "Cylinders", mMType Ordinal ]
                 << shape [ mName "Origin", mMType Nominal ]
-                << size [ mNumber 100 ]
+                << size [ mNum 100 ]
     in
     toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, point [], scatterEnc [] ]
 
@@ -33,7 +33,7 @@ compositeVis config =
                 << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << color [ mName "Cylinders", mMType Ordinal ]
                 << shape [ mName "Origin", mMType Nominal ]
-                << size [ mNumber 100 ]
+                << size [ mNum 100 ]
 
         scatterSpec =
             asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), point [], scatterEnc [] ]

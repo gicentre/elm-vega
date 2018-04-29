@@ -13,8 +13,8 @@ chart des enc =
         , (encoding
             << position X [ pName "Horsepower", pMType Quantitative ]
             << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
-            << size [ mNumber 60 ]
-            << opacity [ mNumber 1 ]
+            << size [ mNum 60 ]
+            << opacity [ mNum 1 ]
             << enc
           )
             []
@@ -42,139 +42,139 @@ defNominal =
 namedContinuous1 : Spec
 namedContinuous1 =
     chart "Continuous colour scale based on named vega schame. Should use the entire plasma colour scheme."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SScheme "plasma" [] ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scScheme "plasma" [] ] ])
 
 
 namedContinuous2 : Spec
 namedContinuous2 =
     chart "Continuous colour scale based on named vega schame. Should use the upper half of the plasma colour scheme."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SScheme "plasma" [ 0.5, 1 ] ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scScheme "plasma" [ 0.5, 1 ] ] ])
 
 
 namedContinuous3 : Spec
 namedContinuous3 =
     chart "Continuous colour scale based on named vega schame. Should use the flipped plasma colour scheme (i.e. red to orange)."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SScheme "plasma" [], SReverse True ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scScheme "plasma" [], scReverse True ] ])
 
 
 namedContinuous4 : Spec
 namedContinuous4 =
     chart "Continuous colour scale based on named vega schame. Should use the first half of the flipped plasma colour scheme (i.e. red to orange)."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SScheme "plasma" [ 0, 0.5 ], SReverse True ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scScheme "plasma" [ 0, 0.5 ], scReverse True ] ])
 
 
 customContinuous : Spec
 customContinuous =
     chart "Custom continuous colour scheme (red to blue ramp)."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SRange (RStrings [ "#f33", "#33f" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scRange (raStrs [ "#f33", "#33f" ]) ] ])
 
 
 customDiscrete : Spec
 customDiscrete =
     chart "Custom discrete colours (red, green, blue)."
-        (color [ mName "Origin", mMType Nominal, mScale [ SRange (RStrings [ "#e33", "#3a3", "#33d" ]) ] ])
+        (color [ mName "Origin", mMType Nominal, mScale [ scRange (raStrs [ "#e33", "#3a3", "#33d" ]) ] ])
 
 
 scale1 : Spec
 scale1 =
     chart "Sequential (default) colour scale."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SType ScSequential, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scType ScSequential, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 scale2 : Spec
 scale2 =
     chart "Linear colour scale."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 scale3 : Spec
 scale3 =
     chart "Power colour scale."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SType ScPow, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scType ScPow, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 scale4 : Spec
 scale4 =
     chart "Square root colour scale."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SType ScSqrt, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scType ScSqrt, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 scale5 : Spec
 scale5 =
     chart "Log colour scale."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SType ScLog, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scType ScLog, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp1 : Spec
 interp1 =
     chart "HSL interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate Hsl, SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate Hsl, scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp2 : Spec
 interp2 =
     chart "HSL-long interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate HslLong, SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate HslLong, scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp3 : Spec
 interp3 =
     chart "Lab interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate Lab, SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate Lab, scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp4 : Spec
 interp4 =
     chart "HCL interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate Hcl, SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate Hcl, scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp5 : Spec
 interp5 =
     chart "HCL-long interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate HclLong, SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate HclLong, scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp6 : Spec
 interp6 =
-    chart "Cube-helix interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelix 1), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix interpolation."
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelix 1), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 interp7 : Spec
 interp7 =
-    chart "Cube-helix-long interpolation."
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong 1), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation."
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong 1), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 gamma1 : Spec
 gamma1 =
-    chart "Cube-helix-long interpolation, gamma of -0.1"
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong -0.1), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation, gamma of -0.1"
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong -0.1), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 gamma2 : Spec
 gamma2 =
-    chart "Cube-helix-long interpolation, gamma of 0"
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong 0), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation, gamma of 0"
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong 0), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 gamma3 : Spec
 gamma3 =
-    chart "Cube-helix-long interpolation with default gamma value of 1"
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong 1), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation with default gamma value of 1"
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong 1), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 gamma4 : Spec
 gamma4 =
-    chart "Cube-helix-long interpolation, gamma of 2"
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong 2), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation, gamma of 2"
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong 2), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 gamma5 : Spec
 gamma5 =
-    chart "Cube-helix-long interpolation, gamma of 10"
-        (color [ mName "Acceleration", mMType Quantitative, mScale [ SInterpolate (CubeHelixLong 10), SType ScLinear, SRange (RStrings [ "yellow", "red" ]) ] ])
+    chart "cube-helix-long interpolation, gamma of 10"
+        (color [ mName "Acceleration", mMType Quantitative, mScale [ scInterpolate (cubeHelixLong 10), scType ScLinear, scRange (raStrs [ "yellow", "red" ]) ] ])
 
 
 

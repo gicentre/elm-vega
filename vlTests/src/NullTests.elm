@@ -11,9 +11,9 @@ axis1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "x" (Numbers [ 0, 1000, 1000, 0, 0, 1000 ])
-                << dataColumn "y" (Numbers [ 1000, 1000, 0, 0, 1000, 0 ])
-                << dataColumn "order" (Numbers <| List.map toFloat <| List.range 1 6)
+                << dataColumn "x" (nums [ 0, 1000, 1000, 0, 0, 1000 ])
+                << dataColumn "y" (nums [ 1000, 1000, 0, 0, 1000, 0 ])
+                << dataColumn "order" (List.range 1 6 |> List.map toFloat |> nums)
 
         enc =
             encoding
@@ -29,10 +29,10 @@ scaleEncode enc =
     let
         data =
             dataFromColumns []
-                << dataColumn "x" (Numbers [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 ])
-                << dataColumn "y" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
-                << dataColumn "val" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
-                << dataColumn "cat" (Strings [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ])
+                << dataColumn "x" (nums [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 ])
+                << dataColumn "y" (nums [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
+                << dataColumn "val" (nums [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
+                << dataColumn "cat" (strs [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ])
     in
     toVegaLite [ width 400, height 400, data [], enc, point [] ]
 
