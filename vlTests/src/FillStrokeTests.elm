@@ -85,8 +85,8 @@ geo1 =
     let
         geojson =
             geoFeatureCollection
-                [ geometry (GeoPolygon [ [ ( -2, 58 ), ( 3, 58 ), ( 3, 53 ), ( -2, 53 ), ( -2, 58 ) ] ]) []
-                , geometry (GeoLine [ ( 4, 52 ), ( 4, 59 ), ( -3, 59 ) ]) []
+                [ geometry (geoPolygon [ [ ( -2, 58 ), ( 3, 58 ), ( 3, 53 ), ( -2, 53 ), ( -2, 58 ) ] ]) []
+                , geometry (geoLine [ ( 4, 52 ), ( 4, 59 ), ( -3, 59 ) ]) []
                 ]
     in
     toVegaLite
@@ -102,8 +102,8 @@ geo2 =
     let
         geojson =
             geoFeatureCollection
-                [ geometry (GeoPolygon [ [ ( -2, 58 ), ( 3, 58 ), ( 3, 53 ), ( -2, 53 ), ( -2, 58 ) ] ]) []
-                , geometry (GeoLine [ ( 4, 52 ), ( 4, 59 ), ( -3, 59 ) ]) []
+                [ geometry (geoPolygon [ [ ( -2, 58 ), ( 3, 58 ), ( 3, 53 ), ( -2, 53 ), ( -2, 58 ) ] ]) []
+                , geometry (geoLine [ ( 4, 52 ), ( 4, 59 ), ( -3, 59 ) ]) []
                 ]
 
         -- NOTE: There is a bug in Vega-Lite that prevents nested geometry from being read correctly.

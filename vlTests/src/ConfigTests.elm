@@ -36,7 +36,7 @@ compositeVis config =
                 << size [ mNum 100 ]
 
         scatterSpec =
-            asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), point [], scatterEnc [] ]
+            asSpec [ title "Car Scatter", width 200, height 200, padding (paSize 20), point [], scatterEnc [] ]
 
         barEnc =
             encoding
@@ -51,10 +51,10 @@ compositeVis config =
                 << color [ mName "Origin", mMType Nominal ]
 
         barSpec =
-            asSpec [ title "Car Histogram", width 200, height 200, padding (PSize 20), bar [], barEnc [] ]
+            asSpec [ title "Car Histogram", width 200, height 200, padding (paSize 20), bar [], barEnc [] ]
 
         streamSpec =
-            asSpec [ title "Car Streamgraph", width 200, height 200, padding (PSize 20), area [], streamEnc [] ]
+            asSpec [ title "Car Streamgraph", width 200, height 200, padding (paSize 20), area [], streamEnc [] ]
 
         res =
             resolve
@@ -100,7 +100,7 @@ paddingCfg : Spec
 paddingCfg =
     configure
         << configuration (Autosize [ AFit ])
-        << configuration (Padding (PEdges 90 60 30 0))
+        << configuration (Padding (paEdges 90 60 30 0))
         |> singleVis
 
 

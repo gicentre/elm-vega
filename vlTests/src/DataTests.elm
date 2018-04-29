@@ -127,7 +127,7 @@ geodata1 =
         [ width 700
         , height 500
         , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+        , dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
         , geoshape []
         , encoding <| color [ mName "id", mMType Nominal ] []
         ]
@@ -138,17 +138,17 @@ geodata2 =
     let
         geojson =
             geoFeatureCollection
-                [ geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", str "Southsville" ) ]
-                , geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", str "Northerton" ) ]
+                [ geometry (geoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", str "Southsville" ) ]
+                , geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", str "Northerton" ) ]
                 ]
     in
     toVegaLite
         [ width 300
         , height 400
         , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromJson geojson [ JSON "features" ]
+        , dataFromJson geojson [ jsonProperty "features" ]
         , projection [ PType Orthographic ]
-        , encoding (color [ mName "properties.Region", mMType Nominal, mLegend [ LTitle "" ] ] [])
+        , encoding (color [ mName "properties.Region", mMType Nominal, mLegend [ leTitle "" ] ] [])
         , geoshape []
         ]
 

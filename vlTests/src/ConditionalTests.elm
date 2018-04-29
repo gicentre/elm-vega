@@ -105,7 +105,7 @@ selectionCondition3 =
 
         trans =
             transform
-                << filter (FCompose (and (selected "brush") (expr "datum.Weight_in_lbs > 3000")))
+                << filter (fiCompose (and (selected "brush") (expr "datum.Weight_in_lbs > 3000")))
 
         sel =
             selection

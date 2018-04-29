@@ -33,7 +33,7 @@ worldMapTemplate tText projProps =
         , projection projProps
 
         --, dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
         , geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.5 ]
         , enc []
         ]
@@ -80,7 +80,7 @@ configExample =
 
         globeSpec =
             asSpec
-                [ dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
+                [ dataFromUrl "data/globe.json" [ topojsonFeature "globe" ]
                 , geoshape []
                 , encoding <| color [ mStr "#c1e7f5" ] <| []
 
@@ -89,7 +89,7 @@ configExample =
 
         graticuleSpec =
             asSpec
-                [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                [ dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                 , geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
                 , encoding <| color [ mStr "#black" ] <| []
 
@@ -98,7 +98,7 @@ configExample =
 
         countrySpec =
             asSpec
-                [ dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
+                [ dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
                 , geoshape []
                 , encoding <| color [ mStr "#708E71" ] <| []
 

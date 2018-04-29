@@ -113,7 +113,7 @@ livestock =
             encoding
                 << position X [ pName "col", pMType Ordinal, pAxis [] ]
                 << position Y [ pName "animal", pMType Ordinal, pAxis [] ]
-                << row [ fName "country", fMType Nominal, fHeader [ HTitle "" ] ]
+                << row [ fName "country", fMType Nominal, fHeader [ hdTitle "" ] ]
                 << shape
                     [ mName "animal"
                     , mMType Nominal

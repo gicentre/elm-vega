@@ -802,7 +802,7 @@ let
 
     filterTrans =
         transform
-            << filter (FSelection "brush")
+            << filter (fiSelection "brush")
 
     totalEnc =
         encoding
@@ -820,7 +820,7 @@ toVegaLite
     , specification <|
         asSpec
             [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"
-                [ Parse [ ( "date", foDate "%Y/%m/%d %H:%M" ) ] ]
+                [ parse [ ( "date", foDate "%Y/%m/%d %H:%M" ) ] ]
             , hourTrans []
             , layer
                 [ asSpec [ bar [], totalEnc [] ]

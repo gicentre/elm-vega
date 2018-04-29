@@ -18,7 +18,7 @@ defaultSize1 =
     toVegaLite
         [ description "Default map size"
         , projection [ PType AlbersUsa ]
-        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , geoshape []
         , encoding <| color [ mStr "black" ] []
         ]
@@ -30,7 +30,7 @@ defaultSize2 =
         [ description "Default map size with view width and height specified in config."
         , configure <| configuration (View [ ViewWidth 500, ViewHeight 300 ]) <| []
         , projection [ PType AlbersUsa ]
-        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
+        , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , geoshape []
         , encoding <| color [ mStr "black" ] []
         ]
@@ -42,7 +42,7 @@ choropleth1 =
         [ width 900
         , height 500
         , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+        , dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
         , geoshape [ MStrokeOpacity 0 ]
         , encoding <| color [ mName "id", mMType Nominal ] []
         ]
@@ -62,7 +62,7 @@ choropleth2 =
 
         polySpec =
             asSpec
-                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                [ dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , polyEnc []
                 ]
@@ -89,7 +89,7 @@ tubeLines1 =
     toVegaLite
         [ width 700
         , height 500
-        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+        , dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
         , geoshape [ MFilled False ]
         , encoding <| color [ mName "id", mMType Nominal ] []
         ]
@@ -103,7 +103,7 @@ tubeLines2 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ LTitle "", LOrient BottomRight ]
+                    , mLegend [ leTitle "", leOrient BottomRight ]
                     , mScale tubeLineColors
                     ]
     in
@@ -111,7 +111,7 @@ tubeLines2 =
         [ width 700
         , height 500
         , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+        , dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
         , geoshape [ MFilled False, MStrokeWidth 2 ]
         , enc []
         ]
@@ -122,7 +122,7 @@ tubeLines3 =
     let
         polySpec =
             asSpec
-                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
+                [ dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
                 , geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
                 , encoding <| color [ mStr "#ddc" ] []
                 ]
@@ -147,13 +147,13 @@ tubeLines3 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , mLegend [ leTitle "", leOrient BottomRight, leOffset 0 ]
                     , mScale tubeLineColors
                     ]
 
         routeSpec =
             asSpec
-                [ dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
+                [ dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
                 , geoshape [ MFilled False, MStrokeWidth 2 ]
                 , tubeEnc []
                 ]
@@ -230,7 +230,7 @@ mapComp1 =
             asSpec
                 [ width 300
                 , height 300
-                , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                 , projection [ PType Orthographic ]
                 , geoshape [ MFilled False ]
                 ]
@@ -245,13 +245,13 @@ mapComp2 =
             let
                 graticuleSpec =
                     asSpec
-                        [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        [ dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                         , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
                     asSpec
-                        [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ TopojsonFeature "land" ]
+                        [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ topojsonFeature "land" ]
                         , geoshape [ MFill "black", MFillOpacity 0.7 ]
                         ]
             in
@@ -273,7 +273,7 @@ mapComp3 =
                         [ width 300
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                         , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
@@ -282,7 +282,7 @@ mapComp3 =
                         [ width 300
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
+                        , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
                         , geoshape [ MStroke "white", MFill "black", MStrokeWidth 0.5 ]
                         ]
             in
@@ -302,7 +302,7 @@ mapComp4 =
                         [ width 300
                         , height 300
                         , projection [ PType Orthographic, PRotate 0 0 0 ]
-                        , dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
+                        , dataFromUrl "data/globe.json" [ topojsonFeature "globe" ]
                         , geoshape [ MFill "#c1e7f5", MStrokeOpacity 0 ]
                         ]
 
@@ -311,7 +311,7 @@ mapComp4 =
                         [ width 300
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
+                        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                         , geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
                         ]
 
@@ -320,7 +320,7 @@ mapComp4 =
                         [ width 300
                         , height 300
                         , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
+                        , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
                         , geoshape [ MStroke "white", MFill "#242", MStrokeWidth 0.1 ]
                         ]
             in
@@ -366,7 +366,7 @@ scribbleMap1 =
 
         trans =
             transform
-                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> FExpr)
+                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> fiExpr)
                 << calculateAs "datum.state == 'HI' ? 'hi' : (datum.state == 'AK' ? 'ak' : 'continent')" "conterminous"
 
         enc =
@@ -404,7 +404,7 @@ scribbleMap2 =
 
         trans =
             transform
-                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> FExpr)
+                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> fiExpr)
                 << calculateAs "substring(datum.zip_code, 0, 3)" "digit3"
                 << calculateAs "length(datum.zip_code+' ')" "ziplen"
 

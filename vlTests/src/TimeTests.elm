@@ -134,7 +134,7 @@ parseTime dType =
                     pScale [ scType ScUtc ]
 
         data =
-            dataFromColumns [ Parse [ ( "date", format ) ] ]
+            dataFromColumns [ parse [ ( "date", format ) ] ]
                 << dataColumn "date" (strs [ "28 Oct 2017 22:00", "28 Oct 2017 23:00", "29 Oct 2017 00:00", "29 Oct 2017 01:00", "29 Oct 2017 02:00", "29 Oct 2017 03:00", "29 Oct 2017 04:00" ])
                 << dataColumn "value" (nums [ 1, 2, 3, 4, 5, 6, 7 ])
 

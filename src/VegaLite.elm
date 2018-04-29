@@ -74,7 +74,8 @@ module VegaLite
         , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
           --TODO: Replace with the following in next major release: , OrderChannel
         , OverlapStrategy(OGreedy, ONone, OParity)
-        , Padding(..)
+          --, Padding(PSize,PEdges)
+        , Padding
         , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
         , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
           --TODO: Replace with the following in next major release: , PositionChannel
@@ -325,6 +326,8 @@ module VegaLite
         , pSort
         , pStack
         , pTimeUnit
+        , paEdges
+        , paSize
         , padding
         , parse
         , point
@@ -963,6 +966,8 @@ to the data and transform options described above.
 @docs height
 @docs width
 @docs padding
+@docs paSize
+@docs paEdges
 @docs autosize
 @docs background
 @docs configure
@@ -970,7 +975,7 @@ to the data and transform options described above.
 @docs ConfigurationProperty
 @docs trailConfig
 @docs Autosize
-@docs Padding
+
 @docs AxisConfig
 @docs LegendConfig
 @docs ScaleConfig
@@ -1052,6 +1057,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs Filter
 @docs FilterRange
 
+@docs Padding
 @docs ScaleRange
 
 -}
@@ -2107,9 +2113,14 @@ type OverlapStrategy
     | OGreedy
 
 
-{-| Represents padding dimensions in pixel units. `PSize` will set the same value
+{-| _Note: referencing padding type constructors (`PSize` and `PEdges`) is
+deprecated in favour of calling their equivalent padding functions
+(`paSize` and `paEdges`)_
+
+Represents padding dimensions in pixel units. `PSize` will set the same value
 on all four edges of a rectangular container while `PEdges` can be used to specify
 different sizes on each edge in order _left_, _top_, _right_, _bottom_.
+
 -}
 type Padding
     = PSize Float
@@ -5013,6 +5024,14 @@ padding pad =
     ( VLPadding, paddingSpec pad )
 
 
+{-| Specify padding around a visualization in pixel units. The four parameters
+refer to _left_, _top_, _right_, and _bottom_ edges respectively.
+-}
+paEdges : Float -> Float -> Float -> Float -> Padding
+paEdges =
+    PEdges
+
+
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
 postion channel. The type of aggregation is determined by the given operation
 parameter. For details, see the
@@ -5030,6 +5049,13 @@ data type. Typically used when specifying a data url.
 parse : List ( String, DataType ) -> Format
 parse =
     Parse
+
+
+{-| Specify a uniform padding around a visualization in pixel units.
+-}
+paSize : Float -> Padding
+paSize =
+    PSize
 
 
 {-| Specify the axis properties used when encoding with a position channel.
