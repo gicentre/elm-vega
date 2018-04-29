@@ -87,7 +87,8 @@ module VegaLite
           --, ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
         , ProjectionProperty
         , RangeConfig(..)
-        , RepeatFields(..)
+          --, RepeatFields(RowFields,ColumnFields)
+        , RepeatFields
         , Resolution(Independent, Shared)
           --, Resolve(RAxis,RLegend,RScale)
         , Resolve
@@ -171,6 +172,7 @@ module VegaLite
         , color
         , column
         , columnBy
+        , columnFields
         , combineSpecs
         , configuration
         , configure
@@ -403,6 +405,7 @@ module VegaLite
         , rgb
         , row
         , rowBy
+        , rowFields
         , rule
         , scClamp
         , scDomain
@@ -983,7 +986,8 @@ arrangement (in rows or columns). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html)
 
 @docs repeat
-@docs RepeatFields
+@docs rowFields
+@docs columnFields
 @docs facet
 @docs columnBy
 @docs rowBy
@@ -1217,6 +1221,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs Geometry
 
 @docs FacetMapping
+@docs RepeatFields
 @docs Filter
 @docs FilterRange
 
@@ -2401,9 +2406,14 @@ type RangeConfig
     | RSymbol String
 
 
-{-| Create a list of fields to use in set of repeated small multiples. The list of
-fields named here can be referenced in an encoding with `PRepeat Column`, `PRepeat Row`
+{-| _Note: specifying repeat fields with type constructors (`RowFields` and
+`ColumnFields` ) is deprecated in favour of calling their equivalent functions
+(`rowFields`, `columnFields`)_
+
+Create a list of fields to use in set of repeated small multiples. The list of
+fields named here can be referenced in an encoding with `pRepeat Column`, `pRepeat Row`
 etc.
+
 -}
 type RepeatFields
     = RowFields (List String)
@@ -3350,6 +3360,15 @@ faceted small multiples. For details see the
 columnBy : List FacetChannel -> FacetMapping
 columnBy =
     ColumnBy
+
+
+{-| Create a list of fields to use in set of repeated small multiples arranged in
+columns. The list of fields named here can be referenced in an encoding with
+`pRepeat Column`, `mRepeat Column` etc.
+-}
+columnFields : List String -> RepeatFields
+columnFields =
+    ColumnFields
 
 
 {-| Combines a list of labelled specifications into a single specification that
@@ -5987,6 +6006,15 @@ faceted small multiples. For details see the
 rowBy : List FacetChannel -> FacetMapping
 rowBy =
     RowBy
+
+
+{-| Create a list of fields to use in set of repeated small multiples arranged in
+rows. The list of fields named here can be referenced in an encoding with
+`pRepeat Row`, `mRepeat Row` etc.
+-}
+rowFields : List String -> RepeatFields
+rowFields =
+    RowFields
 
 
 {-| Specify a line seqment connecting two vertices. Can either be used to span the

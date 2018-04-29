@@ -1487,7 +1487,7 @@ comp1 =
     toVegaLite
         [ des
         , dataFromUrl "data/weather.csv" [ parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
-        , repeat [ ColumnFields [ "temp_max", "precipitation", "wind" ] ]
+        , repeat [ columnFields [ "temp_max", "precipitation", "wind" ] ]
         , specification spec
         ]
 
@@ -1505,7 +1505,7 @@ comp2 =
             asSpec [ dataFromUrl "data/cars.json" [], bar [], enc [] ]
     in
     toVegaLite
-        [ repeat [ ColumnFields [ "Horsepower", "Miles_per_Gallon", "Acceleration" ] ]
+        [ repeat [ columnFields [ "Horsepower", "Miles_per_Gallon", "Acceleration" ] ]
         , specification spec
         ]
 
@@ -1680,7 +1680,7 @@ geo5 =
     in
     toVegaLite
         [ description "Population per state, engineers per state, and hurricanes per state"
-        , repeat [ RowFields [ "population", "engineers", "hurricanes" ] ]
+        , repeat [ rowFields [ "population", "engineers", "hurricanes" ] ]
         , resolve <| resolution (reScale [ ( ChColor, Independent ) ]) []
         , specification spec
         ]
@@ -2092,7 +2092,7 @@ interactive7 =
                 ]
     in
     toVegaLite
-        [ repeat [ ColumnFields [ "distance", "delay", "time" ] ]
+        [ repeat [ columnFields [ "distance", "delay", "time" ] ]
         , specification spec
         ]
 
@@ -2135,7 +2135,10 @@ interactive8 =
     in
     toVegaLite
         [ des
-        , repeat [ RowFields [ "Horsepower", "Acceleration", "Miles_per_Gallon" ], ColumnFields [ "Miles_per_Gallon", "Acceleration", "Horsepower" ] ]
+        , repeat
+            [ rowFields [ "Horsepower", "Acceleration", "Miles_per_Gallon" ]
+            , columnFields [ "Miles_per_Gallon", "Acceleration", "Horsepower" ]
+            ]
         , specification spec
         ]
 

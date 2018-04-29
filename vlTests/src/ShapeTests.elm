@@ -14,7 +14,7 @@ chart des enc =
             << filter (fiExpr "datum.YearOfManufacture == 1970")
           )
             []
-        , point [ MFilled True ]
+        , point [ maFilled True ]
         , (encoding
             << position X [ pName "Horsepower", pMType Quantitative ]
             << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]

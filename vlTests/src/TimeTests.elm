@@ -17,7 +17,7 @@ timeByUnit tu =
                 << position X [ pName "date", pMType Temporal, pTimeUnit tu ]
                 << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ scZero False ] ]
     in
-    toVegaLite [ width 800, data, enc [], line [ MStrokeWidth 0.2 ] ]
+    toVegaLite [ width 800, data, enc [], line [ maStrokeWidth 0.2 ] ]
 
 
 timeYear : Spec

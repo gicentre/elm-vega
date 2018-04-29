@@ -43,14 +43,14 @@ selectionCondition1 =
             selection
                 << select "alex"
                     Interval
-                    [ On "[mousedown[!event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
                     Interval
-                    [ On "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , SelectionMark [ SMFill "#fdbb84", SMFillOpacity 0.5, SMStroke "#e34a33" ]
+                    [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
                     ]
 
         enc =
@@ -60,7 +60,7 @@ selectionCondition1 =
                 << color [ mAggregate Count, mName "*", mMType Quantitative ]
     in
     toVegaLite
-        [ data, sel [], rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ maCursor CGrab ], enc [] ]
 
 
 selectionCondition2 : Spec
@@ -73,14 +73,14 @@ selectionCondition2 =
             selection
                 << select "alex"
                     Interval
-                    [ On "[mousedown[!event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
                     Interval
-                    [ On "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , SelectionMark [ SMFill "#fdbb84", SMFillOpacity 0.5, SMStroke "#e34a33" ]
+                    [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
                     ]
 
         enc =
@@ -94,7 +94,7 @@ selectionCondition2 =
                     ]
     in
     toVegaLite
-        [ data, sel [], rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ maCursor CGrab ], enc [] ]
 
 
 selectionCondition3 : Spec

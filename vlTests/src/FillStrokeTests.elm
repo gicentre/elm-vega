@@ -27,7 +27,7 @@ encChart extraEnc =
                 << size [ mNum 2000 ]
                 << extraEnc
     in
-    toVegaLite [ width 200, height 200, data [], enc [], circle [ MStroke "black" ] ]
+    toVegaLite [ width 200, height 200, data [], enc [], circle [ maStroke "black" ] ]
 
 
 defChart : Spec

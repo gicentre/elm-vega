@@ -170,7 +170,7 @@ barChartTriplet =
                 ]
     in
     toVegaLite
-        [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+        [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
         , specification spec
         ]
 
@@ -192,8 +192,8 @@ splom =
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "temp_max", "precipitation", "wind" ]
-            , ColumnFields [ "wind", "precipitation", "temp_max" ]
+            [ rowFields [ "temp_max", "precipitation", "wind" ]
+            , columnFields [ "wind", "precipitation", "temp_max" ]
             ]
         , specification spec
         ]
@@ -279,15 +279,15 @@ dashboard2 =
 
         barsSpec =
             asSpec
-                [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+                [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
                 , specification layerSpec
                 ]
 
         splomSpec =
             asSpec
                 [ repeat
-                    [ RowFields [ "temp_max", "precipitation", "wind" ]
-                    , ColumnFields [ "wind", "precipitation", "temp_max" ]
+                    [ rowFields [ "temp_max", "precipitation", "wind" ]
+                    , columnFields [ "wind", "precipitation", "temp_max" ]
                     ]
                 , specification scatterSpec
                 ]
@@ -352,7 +352,7 @@ interactiveScatter3 =
     let
         sel =
             selection
-                << select "picked" Multi [ On "mouseover" ]
+                << select "picked" Multi [ seOn "mouseover" ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -362,7 +362,7 @@ interactiveScatter4 =
     let
         sel =
             selection
-                << select "picked" Single [ Empty, Fields [ "Cylinders" ] ]
+                << select "picked" Single [ Empty, seFields [ "Cylinders" ] ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -374,8 +374,8 @@ interactiveScatter5 =
             selection
                 << select "picked"
                     Single
-                    [ Fields [ "Cylinders" ]
-                    , Bind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
+                    [ seFields [ "Cylinders" ]
+                    , seBind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                     ]
     in
     toVegaLite <| sel [] :: scatterProps
@@ -388,8 +388,8 @@ interactiveScatter6 =
             selection
                 << select "picked"
                     Single
-                    [ Fields [ "Cylinders", "Year" ]
-                    , Bind
+                    [ seFields [ "Cylinders", "Year" ]
+                    , seBind
                         [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ]
                         , iRange "Year" [ inMin 1969, inMax 1981, inStep 1 ]
                         ]
@@ -413,7 +413,7 @@ interactiveScatter8 =
     let
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ] ]
+                << select "picked" Interval [ seEncodings [ ChX ] ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -423,7 +423,7 @@ interactiveScatter9 =
     let
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ], BindScales ]
+                << select "picked" Interval [ seEncodings [ ChX ], BindScales ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -443,7 +443,7 @@ coordinatedScatter1 =
 
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ] ]
+                << select "picked" Interval [ seEncodings [ ChX ] ]
 
         spec =
             asSpec
@@ -455,8 +455,8 @@ coordinatedScatter1 =
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-            , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+            [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+            , columnFields [ "Horsepower", "Miles_per_Gallon" ]
             ]
         , specification spec
         ]
@@ -485,8 +485,8 @@ coordinatedScatter2 =
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-            , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+            [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+            , columnFields [ "Horsepower", "Miles_per_Gallon" ]
             ]
         , specification spec
         ]
@@ -496,7 +496,7 @@ contextAndFocus : Spec
 contextAndFocus =
     let
         sel =
-            selection << select "brush" Interval [ Encodings [ ChX ] ]
+            selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
         encContext =
             encoding
@@ -538,7 +538,7 @@ crossFilter =
                 << calculateAs "hours(datum.date)" "hour"
 
         sel =
-            selection << select "brush" Interval [ Encodings [ ChX ] ]
+            selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
         filterTrans =
             transform
@@ -556,7 +556,7 @@ crossFilter =
                 << color [ mStr "goldenrod" ]
     in
     toVegaLite
-        [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
+        [ repeat [ columnFields [ "hour", "delay", "distance" ] ]
         , specification <|
             asSpec
                 [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"

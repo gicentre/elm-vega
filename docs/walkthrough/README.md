@@ -332,12 +332,12 @@ let
                ]
 in
 toVegaLite
-    [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+    [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
     , specification spec
     ]
 ```
 
-This more compact specification replaces the data field name (`pName "precipitation"` etc.) with a reference to the repeating field (`pRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `RowFields` (or `ColumnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
+This more compact specification replaces the data field name (`pName "precipitation"` etc.) with a reference to the repeating field (`pRepeat`) either as a `Row` or `Column` depending on the desired layout. We then compose the specifications by providing a set of `rowFields` (or `columnFields`) containing a list of the fields to which we wish to apply the specification (identified with the function `specification` which should follow the `repeat` function provided to `toVegaLite`).
 
 We can combine repeated rows and repeated columns to create a grid of views, such as a scatterplot matrix (or SPLOM for short):
 
@@ -357,8 +357,8 @@ let
 in
 toVegaLite
     [ repeat
-        [ RowFields [ "temp_max", "precipitation", "wind" ]
-        , ColumnFields [ "wind", "precipitation", "temp_max" ]
+        [ rowFields [ "temp_max", "precipitation", "wind" ]
+        , columnFields [ "wind", "precipitation", "temp_max" ]
         ]
     , specification spec
     ]
@@ -417,15 +417,15 @@ let
 
     barsSpec =
         asSpec
-            [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+            [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
             , specification layerSpec
             ]
 
     splomSpec =
         asSpec
             [ repeat
-                [ RowFields [ "temp_max", "precipitation", "wind" ]
-                , ColumnFields [ "wind", "precipitation", "temp_max" ]
+                [ rowFields [ "temp_max", "precipitation", "wind" ]
+                , columnFields [ "wind", "precipitation", "temp_max" ]
                 ]
             , specification scatterSpec
             ]
@@ -644,12 +644,12 @@ Projecting the selection onto a position channel can be used to select all marks
 let
     sel =
         selection
-            << select "picked" Interval [ Encodings [ ChX ] ]
+            << select "picked" Interval [ seEncodings [ ChX ] ]
 in
 toVegaLite <| sel [] :: scatterProps
 ```
 
-Notice here that to project the selection we parameterise `Interval` not with a field name as we have done previously but with a channel encoding using the union type `Encodings` (here parameterised with the X-position channel `ChX`).
+Notice here that to project the selection we parameterise `Interval` not with a field name as we have done previously but with a channel encoding using the function `seEncodings` (here parameterised with the X-position channel `ChX`).
 
 If we further _bind_ that selection to the _scale_ transformation of X-position, we have created the ability to pan and zoom the view as the scaling is determined interactively depending on the extent and position of the interval selection:
 
@@ -659,7 +659,7 @@ If we further _bind_ that selection to the _scale_ transformation of X-position,
 let
     sel =
         selection
-            << select "picked" Interval [ Encodings [ ChX ], BindScales ]
+            << select "picked" Interval [ seEncodings [ ChX ], BindScales ]
 in
 toVegaLite <| sel [] :: scatterProps
 ```
@@ -684,7 +684,7 @@ let
 
     sel =
         selection
-            << select "picked" Interval [ Encodings [ ChX ] ]
+            << select "picked" Interval [ seEncodings [ ChX ] ]
 
     spec =
         asSpec [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -695,8 +695,8 @@ let
 in
 toVegaLite
     [ repeat
-        [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-        , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+        [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+        , columnFields [ "Horsepower", "Miles_per_Gallon" ]
         ]
     , specification spec
     ]
@@ -730,8 +730,8 @@ let
 in
 toVegaLite
     [ repeat
-        [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-        , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+        [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+        , columnFields [ "Horsepower", "Miles_per_Gallon" ]
         ]
     , specification spec
     ]
@@ -748,7 +748,7 @@ The detail view is updated whenever the selected region is changed through inter
 ```elm
 let
     sel =
-        selection << select "brush" Interval [ Encodings [ ChX ] ]
+        selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
     encContext =
         encoding
@@ -798,7 +798,7 @@ let
             << calculateAs "hours(datum.date)" "hour"
 
     sel =
-        selection << select "brush" Interval [ Encodings [ ChX ] ]
+        selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
     filterTrans =
         transform
@@ -816,7 +816,7 @@ let
             << color [ mStr "goldenrod" ]
 in
 toVegaLite
-    [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
+    [ repeat [ columnFields [ "hour", "delay", "distance" ] ]
     , specification <|
         asSpec
             [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"

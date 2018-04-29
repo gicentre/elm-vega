@@ -58,7 +58,7 @@ compositeVis config =
 
         res =
             resolve
-                << resolution (RScale [ ( ChColor, Independent ), ( ChShape, Independent ) ])
+                << resolution (reScale [ ( ChColor, Independent ), ( ChShape, Independent ) ])
     in
     toVegaLite [ config [], cars, hConcat [ scatterSpec, barSpec, streamSpec ], res [] ]
 
@@ -82,17 +82,17 @@ darkCfg =
 markCfg1 : Spec
 markCfg1 =
     configure
-        << configuration (MarkStyle [ MFilled False ])
+        << configuration (MarkStyle [ maFilled False ])
         |> compositeVis
 
 
 markCfg2 : Spec
 markCfg2 =
     configure
-        << configuration (MarkStyle [ MFilled True, MFill "black", MOpacity 1 ])
-        << configuration (BarStyle [ MFilled True ])
-        << configuration (AreaStyle [ MFilled False ])
-        << configuration (PointStyle [ MFilled True, MStroke "white", MStrokeOpacity 0.2 ])
+        << configuration (MarkStyle [ maFilled True, maFill "black", maOpacity 1 ])
+        << configuration (BarStyle [ maFilled True ])
+        << configuration (AreaStyle [ maFilled False ])
+        << configuration (PointStyle [ maFilled True, maStroke "white", maStrokeOpacity 0.2 ])
         |> compositeVis
 
 
