@@ -84,7 +84,8 @@ module VegaLite
         , PositionChannel
           --, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
         , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-        , ProjectionProperty(..)
+          --, ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
+        , ProjectionProperty
         , RangeConfig(..)
         , RepeatFields(..)
         , Resolution(Independent, Shared)
@@ -371,6 +372,21 @@ module VegaLite
         , parse
         , point
         , position
+        , prCenter
+        , prClipAngle
+        , prClipExtent
+        , prCoefficient
+        , prDistance
+        , prFraction
+        , prLobes
+        , prParallel
+        , prPrecision
+        , prRadius
+        , prRatio
+        , prRotate
+        , prSpacing
+        , prTilt
+        , prType
         , projection
         , raName
         , raNums
@@ -509,8 +525,28 @@ Functions and types for declaring the transformation rules that are applied to
 data fields or geospatial coordinates before they are encoded visually.
 
 @docs transform
+
+
+## Map Projections
+
 @docs projection
-@docs ProjectionProperty
+
+@docs prType
+@docs prClipAngle
+@docs prClipExtent
+@docs prCenter
+@docs prRotate
+@docs prPrecision
+@docs prCoefficient
+@docs prDistance
+@docs prFraction
+@docs prLobes
+@docs prParallel
+@docs prRadius
+@docs prRatio
+@docs prSpacing
+@docs prTilt
+
 @docs Projection
 @docs customProjection
 @docs ClipRect
@@ -1135,6 +1171,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs HeaderProperty
 @docs LegendProperty
 @docs LegendValues
+@docs ProjectionProperty
 @docs ScaleProperty
 
 @docs DataValue
@@ -2287,9 +2324,14 @@ type Projection
     | TransverseMercator
 
 
-{-| Properties for customising a geospatial projection that converts longitude/latitude
+{-| _Note: specifying projection properties with type constructors (`PType`,
+`PClipAngle` etc.) is deprecated in favour of calling their equivalent
+projection property functions (`prType`, `prClipAngle` etc.)_
+
+Properties for customising a geospatial projection that converts longitude/latitude
 pairs into planar (x,y) coordinate pairs for rendering and query. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
+
 -}
 type ProjectionProperty
     = PType Projection
@@ -5578,6 +5620,59 @@ pName =
     PName
 
 
+{-| Specify the type of global map projection to use in a projection transformation.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prType : Projection -> ProjectionProperty
+prType =
+    PType
+
+
+{-| Specify a projection’s center as longitude and latitude in degrees. The default
+value is `0,0`. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prCenter : Float -> Float -> ProjectionProperty
+prCenter =
+    PCenter
+
+
+{-| Specify a projection’s clipping circle radius to the specified angle in degrees.
+A value of `Nothing` will switch to antimeridian cutting rather than small-circle
+clipping. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prClipAngle : Maybe Float -> ProjectionProperty
+prClipAngle =
+    PClipAngle
+
+
+{-| Specify a projection’s viewport clip extent to the specified bounds in pixels.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prClipExtent : ClipRect -> ProjectionProperty
+prClipExtent =
+    PClipExtent
+
+
+{-| Specify a 'Hammer' map projection coefficient. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prCoefficient : Float -> ProjectionProperty
+prCoefficient =
+    PCoefficient
+
+
+{-| Specify a 'Satellite' map projection distance. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prDistance : Float -> ProjectionProperty
+prDistance =
+    PDistance
+
+
 {-| Provide the name of the fields from a repeat operator used for encoding
 with a position channel. For details, see the
 [Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
@@ -5585,6 +5680,58 @@ with a position channel. For details, see the
 pRepeat : Arrangement -> PositionChannel
 pRepeat =
     PRepeat
+
+
+{-| Specify a `Bottomley` map projection fraction. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prFraction : Float -> ProjectionProperty
+prFraction =
+    PFraction
+
+
+{-| Specify the number of lobes in lobed map projections such as the 'Berghaus star'.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prLobes : Int -> ProjectionProperty
+prLobes =
+    PLobes
+
+
+{-| Specify a parallel for map projections such as the 'Armadillo'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prParallel : Float -> ProjectionProperty
+prParallel =
+    PParallel
+
+
+{-| Specify a threshold for the projection’s adaptive resampling in pixels. This
+corresponds to the Douglas–Peucker distance. If precision is not specified, the
+projection’s current resampling precision which defaults to √0.5 ≅ 0.70710 is used.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prPrecision : Float -> ProjectionProperty
+prPrecision =
+    PPrecision
+
+
+{-| Specify a radius value for map projections such as the 'Gingery'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRadius : Float -> ProjectionProperty
+prRadius =
+    PRadius
+
+
+{-| Specify a ratio value for map projections such as the 'Hill'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRatio : Float -> ProjectionProperty
+prRatio =
+    PRatio
 
 
 {-| Sets the cartographic projection used for geospatial coordinates. A projection
@@ -5599,6 +5746,32 @@ This is useful when using the `Geoshape` mark. For further details see the
 projection : List ProjectionProperty -> ( VLProperty, Spec )
 projection pProps =
     ( VLProjection, JE.object (List.map projectionProperty pProps) )
+
+
+{-| Specify a projection’s three-axis rotation angle. This should be in order
+_lambda phi gamma_ specifying the rotation angles in degrees about each
+spherical axis (corresponding to yaw, pitch and roll.). For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRotate : Float -> Float -> Float -> ProjectionProperty
+prRotate =
+    PRotate
+
+
+{-| Specify a spacing value for map projections such as the 'Lagrange'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prSpacing : Float -> ProjectionProperty
+prSpacing =
+    PSpacing
+
+
+{-| Specify a 'Satellite' map projection tilt. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prTilt : Float -> ProjectionProperty
+prTilt =
+    PTilt
 
 
 {-| Specify the scaling applied to a field when encoding with a position channel.

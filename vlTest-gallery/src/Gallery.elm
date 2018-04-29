@@ -1535,7 +1535,7 @@ geo1 =
         [ description "Choropleth of US unemployment rate by county"
         , width 500
         , height 300
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , transform <| lookup "id" (dataFromUrl "data/unemployment.tsv" []) "id" [ "rate" ] <| []
         , geoshape []
@@ -1557,7 +1557,7 @@ geo2 =
         [ description "US zip codes: One dot per zipcode colored by first digit"
         , width 500
         , height 300
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
         , circle []
@@ -1596,7 +1596,7 @@ geo3 =
         [ des
         , width 500
         , height 300
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , layer [ backdropSpec, overlaySpec ]
         ]
 
@@ -1654,7 +1654,7 @@ geo4 =
         [ description "Rules (line segments) connecting SEA to every airport reachable via direct flight"
         , width 800
         , height 500
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , layer [ backdropSpec, airportsSpec, flightsSpec ]
         ]
 
@@ -1673,7 +1673,7 @@ geo5 =
                 , height 300
                 , dataFromUrl "data/population_engineers_hurricanes.csv" []
                 , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
-                , projection [ PType AlbersUsa ]
+                , projection [ prType AlbersUsa ]
                 , geoshape []
                 , enc []
                 ]
@@ -1716,7 +1716,7 @@ geo6 =
         [ des
         , width 800
         , height 500
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , layer [ backdropSpec, overlaySpec ]
         ]
 
@@ -1772,7 +1772,7 @@ geo7 =
         [ description "Line drawn between airports in the U.S. simulating a flight itinerary"
         , width 800
         , height 500
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , layer [ backdropSpec, airportsSpec, flightsSpec ]
         ]
 
@@ -1792,7 +1792,7 @@ geo8 =
         , height 300
         , dataFromUrl "data/income.json" []
         , transform <| lookupAs "id" (dataFromUrl "data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , geoshape []
         , enc []
         ]
