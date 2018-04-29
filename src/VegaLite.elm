@@ -101,7 +101,8 @@ module VegaLite
         , SelectionProperty(..)
         , SelectionResolution(Global, Intersection, Union)
         , Side(SBottom, SLeft, SRight, STop)
-        , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
+          --, SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
+        , SortProperty(Ascending, Descending)
         , Spec
         , StackProperty(NoStack, StCenter, StNormalize, StZero)
           --, Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
@@ -171,7 +172,6 @@ module VegaLite
         , cubeHelix
         , cubeHelixLong
         , customProjection
-        , customSort
         , dAggregate
         , dBin
         , dMType
@@ -373,6 +373,9 @@ module VegaLite
         , selectionName
         , shape
         , size
+        , soByField
+        , soByRepeat
+        , soCustom
         , specification
         , square
         , str
@@ -592,7 +595,9 @@ Relates to where something appears in the visualization.
 ## Sorting Properties
 
 @docs SortProperty
-@docs customSort
+@docs soByField
+@docs soByRepeat
+@docs soCustom
 
 
 ## Stacking Properties
@@ -2491,17 +2496,19 @@ type Side
     | SRight
 
 
-{-| Allow type of sorting to be customised. For details see the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/sort.html).
+{-| Allow type of sorting to be customised. To sort a field by the aggregated
+values of another use the `soByField` or `soByRepeat` functions rather than their
+deprecated type constructor equivalents `ByField` and `ByRepeat`.
+
+For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+
 -}
 type SortProperty
     = Ascending
     | Descending
-      -- TODO: If ByField or ByRepeat is used, Op must also be specified. Therefore
-      -- in future versions, make Op a second tag for these and remove it as a separate option.
-      -- Should not do this yet until major version upgrate as it will break previous versions.
-    | ByField String
-    | ByRepeat Arrangement
+    | ByField String Operation
+    | ByRepeat Arrangement Operation
     | Op Operation
     | CustomSort DataValues
 
@@ -3250,32 +3257,6 @@ projection to use (e.g. `customProjection winkel3`).
 customProjection : String -> Projection
 customProjection =
     Custom
-
-
-{-| Provide a custom sort order by listing data values explicitly. This can be
-used in place of lists of [SortProperty](#SortProperty). For example,
-
-    let
-        data =
-            dataFromColumns []
-                << dataColumn "a" (strs [ "A", "B", "C" ])
-                << dataColumn "b" (nums [ 28, 55, 43 ])
-
-        enc =
-            encoding
-                << position X
-                    [ pName "a"
-                    , pMType Ordinal
-                    , pSort [ customSort (Strings [ "B", "A", "C" ]) ]
-                    ]
-                << position Y [ pName "b", pMType Quantitative ]
-    in
-    toVegaLite [ data [], enc [], bar [] ]
-
--}
-customSort : DataValues -> SortProperty
-customSort =
-    CustomSort
 
 
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
@@ -5653,6 +5634,59 @@ size markProps =
     (::) ( "size", List.concatMap markChannelProperty markProps |> JE.object )
 
 
+{-| Specify a sorting by the aggregated summary of a given field using a given
+aggregation operation. For example, the following sorts the categorical data
+field `variety` by the mean age of the data in each variety category.
+
+    position Y [ pName "variety"
+               , pMType Ordinal
+               , pSort [ soByField "age" Mean, Descending ]
+               ]
+
+For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+
+-}
+soByField : String -> Operation -> SortProperty
+soByField =
+    ByField
+
+
+{-| Specify a sorting by the aggregated summaries of the given fields (referenced
+by a repeat iteration) using a given aggregation operation. For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+-}
+soByRepeat : Arrangement -> Operation -> SortProperty
+soByRepeat =
+    ByRepeat
+
+
+{-| Provide a custom sort order by listing data values explicitly. This can be
+used in place of lists of [SortProperty](#SortProperty). For example,
+
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "a" (strs [ "A", "B", "C" ])
+                << dataColumn "b" (nums [ 28, 55, 43 ])
+
+        enc =
+            encoding
+                << position X
+                    [ pName "a"
+                    , pMType Ordinal
+                    , pSort [ soCustom (strs [ "B", "A", "C" ]) ]
+                    ]
+                << position Y [ pName "b", pMType Quantitative ]
+    in
+    toVegaLite [ data [], enc [], bar [] ]
+
+-}
+soCustom : DataValues -> SortProperty
+soCustom =
+    CustomSort
+
+
 {-| Defines a specification object for use with faceted and repeated small multiples.
 
     spec = ...
@@ -7809,8 +7843,8 @@ orderChannelProperty oDef =
         OTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
 
-        OSort ops ->
-            case ops of
+        OSort sps ->
+            case sps of
                 [] ->
                     ( "sort", JE.null )
 
@@ -7823,8 +7857,14 @@ orderChannelProperty oDef =
                 [ CustomSort dvs ] ->
                     ( "sort", JE.list (dataValuesSpecs dvs) )
 
+                [ ByField name op ] ->
+                    ( "sort", JE.object [ sortProperty (ByField name op), sortProperty (Op op) ] )
+
+                [ ByRepeat arng op ] ->
+                    ( "sort", JE.object [ sortProperty (ByRepeat arng op), sortProperty (Op op) ] )
+
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty ops) )
+                    ( "sort", JE.object (List.map sortProperty sps) )
 
 
 overlapStrategyLabel : OverlapStrategy -> String
@@ -7978,8 +8018,8 @@ positionChannelProperty pDef =
         PTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
 
-        PSort ops ->
-            case ops of
+        PSort sps ->
+            case sps of
                 [] ->
                     ( "sort", JE.null )
 
@@ -7992,8 +8032,14 @@ positionChannelProperty pDef =
                 [ CustomSort dvs ] ->
                     ( "sort", JE.list (dataValuesSpecs dvs) )
 
+                [ ByField name op ] ->
+                    ( "sort", JE.object [ sortProperty (ByField name op), sortProperty (Op op) ] )
+
+                [ ByRepeat arng op ] ->
+                    ( "sort", JE.object [ sortProperty (ByRepeat arng op), sortProperty (Op op) ] )
+
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty ops) )
+                    ( "sort", JE.object (List.map sortProperty sps) )
 
         PScale sps ->
             if sps == [] then
@@ -8450,13 +8496,13 @@ sortProperty sp =
         Descending ->
             ( "order", JE.string "descending" )
 
-        ByField field ->
-            ( "field", JE.string field )
-
         Op op ->
             ( "op", JE.string (operationLabel op) )
 
-        ByRepeat arr ->
+        ByField field _ ->
+            ( "field", JE.string field )
+
+        ByRepeat arr _ ->
             ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
 
         CustomSort dvs ->

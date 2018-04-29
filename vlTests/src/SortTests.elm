@@ -36,7 +36,7 @@ sortDesc =
 
 sortWeight : Spec
 sortWeight =
-    sortQuant "Weight_in_lbs" [ ByField "Weight_in_lbs", Op Mean ]
+    sortQuant "Weight_in_lbs" [ soByField "Weight_in_lbs" Mean ]
 
 
 sortCustom : Spec
@@ -52,7 +52,7 @@ sortCustom =
                 << position X
                     [ pName "a"
                     , pMType Ordinal
-                    , pSort [ customSort (strs [ "B", "A", "C" ]) ]
+                    , pSort [ soCustom (strs [ "B", "A", "C" ]) ]
                     ]
                 << position Y [ pName "b", pMType Quantitative ]
     in

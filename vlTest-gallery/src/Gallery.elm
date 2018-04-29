@@ -702,7 +702,7 @@ trellis6 =
         enc =
             encoding
                 << position X [ pName "yield", pMType Quantitative, pAggregate Median, pScale [ scZero False ] ]
-                << position Y [ pName "variety", pMType Ordinal, pSort [ ByField "Horsepower", Op Mean, Descending ], pScale [ scRangeStep (Just 12) ] ]
+                << position Y [ pName "variety", pMType Ordinal, pSort [ soByField "Horsepower" Mean, Descending ], pScale [ scRangeStep (Just 12) ] ]
                 << color [ mName "year", mMType Nominal ]
                 << row [ fName "site", fMType Ordinal ]
     in
