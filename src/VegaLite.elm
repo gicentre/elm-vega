@@ -47,7 +47,8 @@ module VegaLite
           --, Geometry(GeoPoint,GeoPoints ,GeoLine ,GeoLines ,GeoPolygon,GeoPolygons)
         , Geometry
         , HAlign(AlignCenter, AlignLeft, AlignRight)
-        , HeaderProperty(..)
+          --, HeaderProperty(HFormat,HTitle)
+        , HeaderProperty
         , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
           --TODO: Replace with the following in next major release: , HyperlinkChannel
           --, InputProperty(Debounce, Element, InOptions, InMin , InMax ,InName ,InStep ,InPlaceholder)
@@ -240,6 +241,8 @@ module VegaLite
         , hSelectionCondition
         , hStr
         , hTimeUnit
+        , hdFormat
+        , hdTitle
         , height
         , hyperlink
         , iCheckbox
@@ -849,7 +852,8 @@ arrangement (in rows or columns). For details see the
 @docs asSpec
 @docs specification
 @docs Arrangement
-@docs HeaderProperty
+@docs hdTitle
+@docs hdFormat
 
 
 # Creating Selections for Interaction
@@ -1034,6 +1038,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs AxisProperty
 @docs BinProperty
 @docs InputProperty
+@docs HeaderProperty
 @docs LegendProperty
 @docs LegendValues
 @docs ScaleProperty
@@ -1713,12 +1718,33 @@ type HAlign
     | AlignRight
 
 
-{-| Represents a facet header property. For details, see the
+{-| _Note: referencing header property type constructors (`HFormat` and `HTitle`)
+is deprecated in favour of calling their equivalent header property functions
+(`hdFormat`, `hdTitle` etc.)_
+
+Represents a facet header property. For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+
 -}
 type HeaderProperty
     = HFormat String
     | HTitle String
+
+
+{-| Header format specifier for a faceted view. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+hdFormat : String -> HeaderProperty
+hdFormat =
+    HFormat
+
+
+{-| Specify a header title in a faceted view. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+hdTitle : String -> HeaderProperty
+hdTitle =
+    HTitle
 
 
 {-| _Note: referencing hyperlink channel type constructors (`HName`, `HBin` etc.)

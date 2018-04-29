@@ -723,7 +723,7 @@ trellis7 =
                 << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y", axTitle "Time", axGrid False ] ]
                 << position Y [ pName "price", pMType Quantitative, pAxis [ axTitle "Time", axGrid False ] ]
                 << color [ mName "symbol", mMType Nominal, mLegend [] ]
-                << row [ fName "symbol", fMType Nominal, fHeader [ HTitle "Company" ] ]
+                << row [ fName "symbol", fMType Nominal, fHeader [ hdTitle "Company" ] ]
     in
     toVegaLite [ des, width 300, height 40, dataFromUrl "data/stocks.csv" [], trans [], area [], enc [] ]
 
