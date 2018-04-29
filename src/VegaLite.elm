@@ -56,8 +56,10 @@ module VegaLite
         , Legend(Gradient, Symbol)
         , LegendConfig(..)
         , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
-        , LegendProperty(..)
-        , LegendValues(..)
+          --, LegendProperty(LEntryPadding ,LFormat ,LOffset ,LOrient ,LPadding ,LTickCount ,LTitle ,LType ,LValues ,LZIndex)
+        , LegendProperty
+          --, LegendValues(LDateTimes,LNumbers,LStrings)
+        , LegendValues
         , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
           --TODO: Replace with the following in next major release:, Mark
         , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
@@ -263,6 +265,19 @@ module VegaLite
         , inStep
         , jsonProperty
         , layer
+        , leDts
+        , leEntryPadding
+        , leFormat
+        , leNums
+        , leOffset
+        , leOrient
+        , lePadding
+        , leStrs
+        , leTickCount
+        , leTitle
+        , leType
+        , leValues
+        , leZIndex
         , line
         , lookup
         , lookupAs
@@ -644,12 +659,23 @@ color or size.
 @docs mBoo
 
 
-### Properties Used By Mark Channels
+### Mark Legends
 
-@docs LegendProperty
+@docs leEntryPadding
+@docs leFormat
+@docs leOffset
+@docs leOrient
+@docs lePadding
+@docs leTickCount
+@docs leTitle
+@docs leType
+@docs leValues
+@docs leZIndex
 @docs Legend
 @docs LegendOrientation
-@docs LegendValues
+@docs leNums
+@docs leStrs
+@docs leDts
 
 
 ## Text Channels
@@ -1008,6 +1034,8 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs AxisProperty
 @docs BinProperty
 @docs InputProperty
+@docs LegendProperty
+@docs LegendValues
 @docs ScaleProperty
 
 @docs DataValue
@@ -1806,8 +1834,13 @@ type LegendOrientation
     | TopRight
 
 
-{-| Legend properties. For more detail see the
+{-| _Note: referencing legend property type constructors (`LFormat`, lTitle`etc.)
+is deprecated in favour of calling their equivalent legend property functions
+(`leFormat`,`leTitle` etc.)_
+
+Legend properties for customising a mark legend. For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+
 -}
 type LegendProperty
     = LEntryPadding Float
@@ -1822,7 +1855,12 @@ type LegendProperty
     | LZIndex Int
 
 
-{-| A list of data values suitable for setting legend values.
+{-| _Note: referencing legend value type constructors (`LNumbers`, `LStrings`
+and `LDateTimes`) is deprecated in favour of calling their equivalent legend value
+functions (`leNums`, `leStrs` and `leDts`)_
+
+A list of data values suitable for setting legend values.
+
 -}
 type LegendValues
     = LDateTimes (List (List DateTime))
@@ -4375,6 +4413,109 @@ jsonProperty =
 layer : List Spec -> ( VLProperty, Spec )
 layer specs =
     ( VLLayer, JE.list specs )
+
+
+{-| Specify a set of legend date-times explicitly.
+-}
+leDts : List (List DateTime) -> LegendValues
+leDts =
+    LDateTimes
+
+
+{-| Specify the padding in pixels between legend entries. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leEntryPadding : Float -> LegendProperty
+leEntryPadding =
+    LEntryPadding
+
+
+{-| Specify the formatting pattern for legend labels. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leFormat : String -> LegendProperty
+leFormat =
+    LFormat
+
+
+{-| Specify a set of legend numeric values explicitly.
+-}
+leNums : List Float -> LegendValues
+leNums =
+    LNumbers
+
+
+{-| Specify the offset in pixels of a legend from the edge of its enclosing group
+/ data rectangle. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leOffset : Float -> LegendProperty
+leOffset =
+    LOffset
+
+
+{-| Specify the position of a legend in a scene. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leOrient : LegendOrientation -> LegendProperty
+leOrient =
+    LOrient
+
+
+{-| Specify the padding in pixels between a legend and axis. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+lePadding : Float -> LegendProperty
+lePadding =
+    LPadding
+
+
+{-| Specify a set of legend strings explicitly.
+-}
+leStrs : List String -> LegendValues
+leStrs =
+    LStrings
+
+
+{-| Specify the number of tick marks in a quantitative legend. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leTickCount : Float -> LegendProperty
+leTickCount =
+    LTickCount
+
+
+{-| Specify the title of a legend. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leTitle : String -> LegendProperty
+leTitle =
+    LTitle
+
+
+{-| Specify the type of legend (discrete symbols or continuous gradients). For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leType : Legend -> LegendProperty
+leType =
+    LType
+
+
+{-| Specify the legend values explicitly. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leValues : LegendValues -> LegendProperty
+leValues =
+    LValues
+
+
+{-| Specify the drawing order of a legend relative to other chart elements. To
+place a legend in front of others use a positive integer, or 0 to draw behind. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leZIndex : Int -> LegendProperty
+leZIndex =
+    LZIndex
 
 
 {-| Specify a line mark for symbolising a sequence of values. For details see

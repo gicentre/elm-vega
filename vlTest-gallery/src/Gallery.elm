@@ -408,7 +408,7 @@ basic22 =
                 << size
                     [ mName "Deaths"
                     , mMType Quantitative
-                    , mLegend [ LTitle "Annual Global Deaths" ]
+                    , mLegend [ leTitle "Annual Global Deaths" ]
                     , mScale [ scRange (raNums [ 0, 5000 ]) ]
                     ]
                 << color [ mName "Entity", mMType Nominal, mLegend [] ]
@@ -445,7 +445,7 @@ stack1 =
                             , ( "rain", "#1f77b4" )
                             , ( "snow", "#9467bd" )
                             ]
-                    , mLegend [ LTitle "Weather type" ]
+                    , mLegend [ leTitle "Weather type" ]
                     ]
     in
     toVegaLite [ des, dataFromUrl "data/seattle-weather.csv" [], bar [], enc [] ]
@@ -589,7 +589,7 @@ stack8 =
                 << color
                     [ mName "type"
                     , mMType Nominal
-                    , mLegend [ LTitle "Response" ]
+                    , mLegend [ leTitle "Response" ]
                     , mScale <|
                         scType ScOrdinal
                             :: categoricalDomainMap
@@ -1275,7 +1275,7 @@ layer14 =
         encPoints =
             encoding
                 << position X [ pName "life_expect", pMType Quantitative, pAxis [ axTitle "Life Expectanct (years)" ] ]
-                << color [ mName "year", mMType Ordinal, mScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )), mLegend [ LTitle "Year" ] ]
+                << color [ mName "year", mMType Ordinal, mScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" )), mLegend [ leTitle "Year" ] ]
                 << size [ mNum 100 ]
                 << opacity [ mNum 1 ]
 
@@ -1844,7 +1844,7 @@ geo9 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
+                    , mLegend [ leTitle "", leOrient BottomRight, leOffset 0 ]
                     , mScale tubeLineColors
                     ]
 
@@ -2157,14 +2157,14 @@ interactive9 =
 
         enc1 =
             encoding
-                << color [ mAggregate Count, mMType Quantitative, mLegend [ LTitle "" ] ]
+                << color [ mAggregate Count, mMType Quantitative, mLegend [ leTitle "" ] ]
 
         spec1 =
             asSpec [ width 300, rect [], enc1 [] ]
 
         enc2 =
             encoding
-                << size [ mAggregate Count, mMType Quantitative, mLegend [ LTitle "In Selected Category" ] ]
+                << size [ mAggregate Count, mMType Quantitative, mLegend [ leTitle "In Selected Category" ] ]
                 << color [ mStr "#666" ]
 
         spec2 =
