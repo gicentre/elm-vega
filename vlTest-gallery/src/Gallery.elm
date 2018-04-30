@@ -56,7 +56,7 @@ basic3 =
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [] ]
                 << position Y [ pMType Quantitative, pAggregate Count ]
     in
-    toVegaLite [ des, dataFromUrl "data/movies.json" [], bar [], enc [] ]
+    toVegaLite [ des, dataFromUrl "data/movies.json" [], bar [ maBinSpacing 0 ], enc [] ]
 
 
 basic4 : Spec
@@ -262,11 +262,40 @@ basic14 =
                 << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
                 << position Y [ pName "price", pMType Quantitative ]
     in
-    toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [], enc [] ]
+    toVegaLite
+        [ des
+        , dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
+        , trans []
+        , line []
+        , enc []
+        ]
 
 
 basic15 : Spec
 basic15 =
+    let
+        des =
+            description "Google's stock price over time with point markers."
+
+        trans =
+            transform << filter (fiExpr "datum.symbol === 'GOOG'")
+
+        enc =
+            encoding
+                << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
+                << position Y [ pName "price", pMType Quantitative ]
+    in
+    toVegaLite
+        [ des
+        , dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
+        , trans []
+        , line [ maColor "green", maPoint (pmMarker [ maColor "purple" ]) ]
+        , enc []
+        ]
+
+
+basic16 : Spec
+basic16 =
     let
         des =
             description "Stock prices of 5 tech companies over time."
@@ -280,8 +309,8 @@ basic15 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], line [], enc [] ]
 
 
-basic16 : Spec
-basic16 =
+basic17 : Spec
+basic17 =
     let
         des =
             description "Slope graph showing the change in yield for different barley sites. It shows the error in the year labels for the Morris site."
@@ -295,8 +324,8 @@ basic16 =
     toVegaLite [ des, dataFromUrl "data/barley.json" [], line [], enc [] ]
 
 
-basic17 : Spec
-basic17 =
+basic18 : Spec
+basic18 =
     let
         des =
             description "Google's stock price over time (quantized as a step-chart)."
@@ -312,8 +341,8 @@ basic17 =
     toVegaLite [ des, dataFromUrl "data/stocks.csv" [], trans [], line [ maInterpolate StepAfter ], enc [] ]
 
 
-basic18 : Spec
-basic18 =
+basic19 : Spec
+basic19 =
     let
         des =
             description "Unemployment over time (area chart)"
@@ -333,8 +362,8 @@ basic18 =
         ]
 
 
-basic19 : Spec
-basic19 =
+basic20 : Spec
+basic20 =
     let
         des =
             description "'Table heatmap' showing engine size/power for three countries."
@@ -348,8 +377,8 @@ basic19 =
     toVegaLite [ des, dataFromUrl "data/cars.json" [], rect [], enc [] ]
 
 
-basic20 : Spec
-basic20 =
+basic21 : Spec
+basic21 =
     let
         des =
             description "'Binned heatmap' comparing movie ratings."
@@ -376,8 +405,8 @@ basic20 =
         ]
 
 
-basic21 : Spec
-basic21 =
+basic22 : Spec
+basic22 =
     let
         des =
             description "Table bubble plot in the style of a Github punched card."
@@ -391,8 +420,8 @@ basic21 =
     toVegaLite [ des, dataFromUrl "data/github.csv" [], circle [], enc [] ]
 
 
-basic22 : Spec
-basic22 =
+basic23 : Spec
+basic23 =
     let
         des =
             description "Visualization of global deaths from natural disasters. Copy of chart from https://ourworldindata.org/natural-catastrophes"
@@ -2268,6 +2297,7 @@ mySpecs =
         , ( "basic20", basic20 )
         , ( "basic21", basic21 )
         , ( "basic22", basic22 )
+        , ( "basic23", basic23 )
         , ( "stack1", stack1 )
         , ( "stack2", stack2 )
         , ( "stack3", stack3 )

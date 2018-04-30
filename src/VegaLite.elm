@@ -18,7 +18,6 @@ module VegaLite
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
           --, ClipRect(LTRB, NoClip)
         , ClipRect(NoClip)
-          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , ConfigurationProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
@@ -81,6 +80,7 @@ module VegaLite
         , OverlapStrategy(OGreedy, ONone, OParity)
           --, Padding(PSize,PEdges)
         , Padding
+        , PointMarker(PMNone, PMTransparent)
         , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
           --, PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
         , PositionChannel
@@ -446,6 +446,8 @@ module VegaLite
         , maInterpolate
         , maOpacity
         , maOrient
+        , maPoint
+          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , maRadius
         , maShape
         , maShortTimeLabels
@@ -491,6 +493,7 @@ module VegaLite
         , paSize
         , padding
         , parse
+        , pmMarker
         , point
         , position
         , prCenter
@@ -825,6 +828,7 @@ The preferred method of specifying mark types is to call the relevant mark funct
 @docs maInterpolate
 @docs maOpacity
 @docs maOrient
+@docs maPoint
 @docs maRadius
 @docs maShape
 @docs maShortTimeLabels
@@ -848,6 +852,8 @@ The preferred method of specifying mark types is to call the relevant mark funct
 @docs Symbol
 @docs symbolPath
 @docs Cursor
+@docs PointMarker
+@docs pmMarker
 
 
 # Creating the Encoding Specification
@@ -2840,6 +2846,7 @@ type
     | MInterpolate MarkInterpolation
     | MOpacity Float
     | MOrient MarkOrientation
+    | MPoint PointMarker
     | MRadius Float
     | MShape Symbol
     | MShortTimeLabels Bool
@@ -2961,6 +2968,16 @@ different sizes on each edge in order _left_, _top_, _right_, _bottom_.
 type Padding
     = PSize Float
     | PEdges Float Float Float Float
+
+
+{-| Specify the appearance of a point marker that is overlaid on a line or area
+mark. For details see the
+[Vega-Lite point property documentation](https://vega.github.io/vega-lite/docs/line.html#properties).
+-}
+type PointMarker
+    = PMTransparent
+    | PMNone
+    | PMMarker (List MarkProperty)
 
 
 {-| Type of position channel, `X` and `Y` represent horizontal and vertical axis
@@ -6344,6 +6361,15 @@ maOrient =
     MOrient
 
 
+{-| Specify the appearance of a point marker placed on the vertices of a line
+or area mark. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maPoint : PointMarker -> MarkProperty
+maPoint =
+    MPoint
+
+
 {-| Specify the polar coordinate radial offset of a text mark from its origin.
 For details see the
 [Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
@@ -6873,6 +6899,15 @@ position channel. For details, see the
 pBin : List BinProperty -> PositionChannel
 pBin =
     PBin
+
+
+{-| Specify the properties of a point marker that is overlaid on a line or area
+mark. For details see the
+[Vega-Lite point property documentation](https://vega.github.io/vega-lite/docs/line.html#properties).
+-}
+pmMarker : List MarkProperty -> PointMarker
+pmMarker =
+    PMMarker
 
 
 {-| Specify the field type (level of measurement) when encoding with a position
@@ -10140,6 +10175,9 @@ markProperty mProp =
         MThickness x ->
             ( "thickness", JE.float x )
 
+        MPoint pm ->
+            ( "point", pointMarkerSpec pm )
+
 
 measurementLabel : Measurement -> String
 measurementLabel mType =
@@ -10340,6 +10378,19 @@ paddingSpec pad =
                 , ( "right", JE.float r )
                 , ( "bottom", JE.float b )
                 ]
+
+
+pointMarkerSpec : PointMarker -> Spec
+pointMarkerSpec pm =
+    case pm of
+        PMTransparent ->
+            JE.string "transparent"
+
+        PMNone ->
+            JE.bool False
+
+        PMMarker mps ->
+            JE.object (List.map markProperty mps)
 
 
 projectionLabel : Projection -> String
