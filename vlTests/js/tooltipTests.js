@@ -16580,194 +16580,18 @@ var _gicentre$elm_vega$VegaLite$name = function (s) {
 	};
 };
 
-var _gicentre$elm_vega$FillStrokeTests$geo2 = function () {
+var _gicentre$elm_vega$TooltipTests$tooltip2 = function () {
 	var enc = function (_p0) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A2(
-				_gicentre$elm_vega$VegaLite$color,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$mName('features.geometry.type'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-						_1: {ctor: '[]'}
-					}
-				},
-				_p0));
-	};
-	var geojson = _gicentre$elm_vega$VegaLite$geoFeatureCollection(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$geometry,
-				_gicentre$elm_vega$VegaLite$geoPolygon(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: -2, _1: 58},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 3, _1: 58},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 3, _1: 53},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: -2, _1: 53},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: -2, _1: 58},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						},
-						_1: {ctor: '[]'}
-					}),
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$elm_vega$VegaLite$geometry,
-					_gicentre$elm_vega$VegaLite$geoLine(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 4, _1: 52},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 4, _1: 59},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: -3, _1: 59},
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(300),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(300),
-				_1: {
-					ctor: '::',
-					_0: enc(
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_gicentre$elm_vega$VegaLite$dataFromJson,
-							geojson,
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$geoshape(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$FillStrokeTests$geo1 = function () {
-	var geojson = _gicentre$elm_vega$VegaLite$geoFeatureCollection(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$VegaLite$geometry,
-				_gicentre$elm_vega$VegaLite$geoPolygon(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: -2, _1: 58},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 3, _1: 58},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 3, _1: 53},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: -2, _1: 53},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: -2, _1: 58},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						},
-						_1: {ctor: '[]'}
-					}),
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$elm_vega$VegaLite$geometry,
-					_gicentre$elm_vega$VegaLite$geoLine(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 4, _1: 52},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 4, _1: 59},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: -3, _1: 59},
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			}
-		});
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(300),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(300),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$VegaLite$dataFromJson,
-						geojson,
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$geoshape(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-}();
-var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
-	var enc = function (_p1) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
 				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
+					_0: _gicentre$elm_vega$VegaLite$pName('a'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -16776,7 +16600,7 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
+						_0: _gicentre$elm_vega$VegaLite$pName('b'),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
@@ -16784,150 +16608,288 @@ var _gicentre$elm_vega$FillStrokeTests$encChart = function (extraEnc) {
 						}
 					},
 					A2(
-						_gicentre$elm_vega$VegaLite$color,
+						_gicentre$elm_vega$VegaLite$tooltips,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('cat'),
+							_0: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tName('a'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Ordinal),
+									_1: {ctor: '[]'}
+								}
+							},
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+								_0: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$tName('b'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Quantitative),
+										_1: {ctor: '[]'}
+									}
+								},
 								_1: {ctor: '[]'}
 							}
 						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mNum(2000),
-								_1: {ctor: '[]'}
-							},
-							extraEnc(_p1))))));
+						_p0))));
 	};
-	var data = function (_p2) {
+	var data = function (_p1) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
 				_gicentre$elm_vega$VegaLite$dataColumn,
-				'x',
-				_gicentre$elm_vega$VegaLite$nums(
+				'a',
+				_gicentre$elm_vega$VegaLite$strs(
 					{
 						ctor: '::',
-						_0: 10,
+						_0: 'A',
 						_1: {
 							ctor: '::',
-							_0: 20,
+							_0: 'B',
 							_1: {
 								ctor: '::',
-								_0: 30,
+								_0: 'C',
 								_1: {
 									ctor: '::',
-									_0: 36,
-									_1: {ctor: '[]'}
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {
+											ctor: '::',
+											_0: 'F',
+											_1: {
+												ctor: '::',
+												_0: 'G',
+												_1: {
+													ctor: '::',
+													_0: 'H',
+													_1: {
+														ctor: '::',
+														_0: 'I',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
 								}
 							}
 						}
 					}),
 				A3(
 					_gicentre$elm_vega$VegaLite$dataColumn,
-					'y',
+					'b',
 					_gicentre$elm_vega$VegaLite$nums(
 						{
 							ctor: '::',
-							_0: 1,
+							_0: 28,
 							_1: {
 								ctor: '::',
-								_0: 2,
+								_0: 55,
 								_1: {
 									ctor: '::',
-									_0: 3,
+									_0: 43,
 									_1: {
 										ctor: '::',
-										_0: 4,
-										_1: {ctor: '[]'}
+										_0: 91,
+										_1: {
+											ctor: '::',
+											_0: 81,
+											_1: {
+												ctor: '::',
+												_0: 53,
+												_1: {
+													ctor: '::',
+													_0: 19,
+													_1: {
+														ctor: '::',
+														_0: 87,
+														_1: {
+															ctor: '::',
+															_0: 52,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
 									}
 								}
 							}
 						}),
-					A3(
-						_gicentre$elm_vega$VegaLite$dataColumn,
-						'val',
-						_gicentre$elm_vega$VegaLite$nums(
-							{
-								ctor: '::',
-								_0: 1,
-								_1: {
-									ctor: '::',
-									_0: 2,
-									_1: {
-										ctor: '::',
-										_0: 3,
-										_1: {
-											ctor: '::',
-											_0: 4,
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						A3(
-							_gicentre$elm_vega$VegaLite$dataColumn,
-							'cat',
-							_gicentre$elm_vega$VegaLite$strs(
-								{
-									ctor: '::',
-									_0: 'a',
-									_1: {
-										ctor: '::',
-										_0: 'b',
-										_1: {
-											ctor: '::',
-											_0: 'c',
-											_1: {
-												ctor: '::',
-												_0: 'd',
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}),
-							_p2)))));
+					_p1)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
 			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(200),
+			_0: data(
+				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(200),
+				_0: _gicentre$elm_vega$VegaLite$bar(
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: data(
+					_0: enc(
 						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: enc(
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$circle(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$maStroke('black'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		});
-};
-var _gicentre$elm_vega$FillStrokeTests$defChart = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_elm_lang$core$Basics$always(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$FillStrokeTests$sourceExample = _gicentre$elm_vega$FillStrokeTests$defChart;
-var _gicentre$elm_vega$FillStrokeTests$view = function (spec) {
+}();
+var _gicentre$elm_vega$TooltipTests$tooltip1 = function () {
+	var enc = function (_p2) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('a'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('b'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$tooltip,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$tName('b'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p2))));
+	};
+	var data = function (_p3) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'a',
+				_gicentre$elm_vega$VegaLite$strs(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {
+									ctor: '::',
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {
+											ctor: '::',
+											_0: 'F',
+											_1: {
+												ctor: '::',
+												_0: 'G',
+												_1: {
+													ctor: '::',
+													_0: 'H',
+													_1: {
+														ctor: '::',
+														_0: 'I',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'b',
+					_gicentre$elm_vega$VegaLite$nums(
+						{
+							ctor: '::',
+							_0: 28,
+							_1: {
+								ctor: '::',
+								_0: 55,
+								_1: {
+									ctor: '::',
+									_0: 43,
+									_1: {
+										ctor: '::',
+										_0: 91,
+										_1: {
+											ctor: '::',
+											_0: 81,
+											_1: {
+												ctor: '::',
+												_0: 53,
+												_1: {
+													ctor: '::',
+													_0: 19,
+													_1: {
+														ctor: '::',
+														_0: 87,
+														_1: {
+															ctor: '::',
+															_0: 52,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p3)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$VegaLite$bar(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$TooltipTests$sourceExample = _gicentre$elm_vega$TooltipTests$tooltip1;
+var _gicentre$elm_vega$TooltipTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -16949,183 +16911,47 @@ var _gicentre$elm_vega$FillStrokeTests$view = function (spec) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$FillStrokeTests$sourceExample)),
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$TooltipTests$sourceExample)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _gicentre$elm_vega$FillStrokeTests$fill1 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$fill(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$FillStrokeTests$fill2 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$fill(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$mName('y'),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-				_1: {ctor: '[]'}
-			}
-		}));
-var _gicentre$elm_vega$FillStrokeTests$fill3 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$fill(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$mStr('red'),
-			_1: {ctor: '[]'}
-		}));
-var _gicentre$elm_vega$FillStrokeTests$stroke1 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$stroke(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$FillStrokeTests$stroke2 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$stroke(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$mName('y'),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-				_1: {ctor: '[]'}
-			}
-		}));
-var _gicentre$elm_vega$FillStrokeTests$stroke3 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	_gicentre$elm_vega$VegaLite$stroke(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$mStr('red'),
-			_1: {ctor: '[]'}
-		}));
-var _gicentre$elm_vega$FillStrokeTests$combined1 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	function (_p3) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$stroke,
-			{ctor: '[]'},
-			A2(
-				_gicentre$elm_vega$VegaLite$fill,
-				{ctor: '[]'},
-				_p3));
-	});
-var _gicentre$elm_vega$FillStrokeTests$combined2 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	function (_p4) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$stroke,
-			{
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$mName('y'),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-					_1: {ctor: '[]'}
-				}
-			},
-			A2(
-				_gicentre$elm_vega$VegaLite$fill,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$mStr('red'),
-					_1: {ctor: '[]'}
-				},
-				_p4));
-	});
-var _gicentre$elm_vega$FillStrokeTests$combined3 = _gicentre$elm_vega$FillStrokeTests$encChart(
-	function (_p5) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$stroke,
-			{
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$mStr('red'),
-				_1: {ctor: '[]'}
-			},
-			A2(
-				_gicentre$elm_vega$VegaLite$fill,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$mName('y'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-						_1: {ctor: '[]'}
-					}
-				},
-				_p5));
-	});
-var _gicentre$elm_vega$FillStrokeTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
+var _gicentre$elm_vega$TooltipTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
 	{
 		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'default', _1: _gicentre$elm_vega$FillStrokeTests$defChart},
+		_0: {ctor: '_Tuple2', _0: 'tooltip1', _1: _gicentre$elm_vega$TooltipTests$tooltip1},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'fill1', _1: _gicentre$elm_vega$FillStrokeTests$fill1},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'fill2', _1: _gicentre$elm_vega$FillStrokeTests$fill2},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'fill3', _1: _gicentre$elm_vega$FillStrokeTests$fill3},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'stroke1', _1: _gicentre$elm_vega$FillStrokeTests$stroke1},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'stroke2', _1: _gicentre$elm_vega$FillStrokeTests$stroke2},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'stroke3', _1: _gicentre$elm_vega$FillStrokeTests$stroke3},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'combined1', _1: _gicentre$elm_vega$FillStrokeTests$combined1},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'combined2', _1: _gicentre$elm_vega$FillStrokeTests$combined2},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'combined3', _1: _gicentre$elm_vega$FillStrokeTests$combined3},
-											_1: {
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'geo1', _1: _gicentre$elm_vega$FillStrokeTests$geo1},
-												_1: {
-													ctor: '::',
-													_0: {ctor: '_Tuple2', _0: 'geo2', _1: _gicentre$elm_vega$FillStrokeTests$geo2},
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+			_0: {ctor: '_Tuple2', _0: 'tooltip2', _1: _gicentre$elm_vega$TooltipTests$tooltip2},
+			_1: {ctor: '[]'}
 		}
 	});
-var _gicentre$elm_vega$FillStrokeTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+var _gicentre$elm_vega$TooltipTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$FillStrokeTests$main = _elm_lang$html$Html$program(
+var _gicentre$elm_vega$TooltipTests$main = _elm_lang$html$Html$program(
 	{
 		init: {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$FillStrokeTests$mySpecs,
-			_1: _gicentre$elm_vega$FillStrokeTests$elmToJS(_gicentre$elm_vega$FillStrokeTests$mySpecs)
+			_0: _gicentre$elm_vega$TooltipTests$mySpecs,
+			_1: _gicentre$elm_vega$TooltipTests$elmToJS(_gicentre$elm_vega$TooltipTests$mySpecs)
 		},
-		view: _gicentre$elm_vega$FillStrokeTests$view,
+		view: _gicentre$elm_vega$TooltipTests$view,
 		update: F2(
-			function (_p6, model) {
+			function (_p4, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
 
 var Elm = {};
-Elm['FillStrokeTests'] = Elm['FillStrokeTests'] || {};
-if (typeof _gicentre$elm_vega$FillStrokeTests$main !== 'undefined') {
-    _gicentre$elm_vega$FillStrokeTests$main(Elm['FillStrokeTests'], 'FillStrokeTests', undefined);
+Elm['TooltipTests'] = Elm['TooltipTests'] || {};
+if (typeof _gicentre$elm_vega$TooltipTests$main !== 'undefined') {
+    _gicentre$elm_vega$TooltipTests$main(Elm['TooltipTests'], 'TooltipTests', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

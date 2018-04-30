@@ -626,6 +626,7 @@ module VegaLite
         , title
         , toVegaLite
         , tooltip
+        , tooltips
         , topojsonFeature
         , topojsonMesh
         , trail
@@ -997,6 +998,7 @@ Relate to the appearance of the text and tooltip elements of the visualization.
 
 @docs text
 @docs tooltip
+@docs tooltips
 @docs tName
 @docs tRepeat
 @docs tMType
@@ -8336,10 +8338,35 @@ for formatting the appearance of the text.
               << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
               << tooltip [ tName "Year", tMType Temporal, tFormat "%Y" ]
 
+To encode multiple tooltip values with a mark, use `tooltips`
+
 -}
 tooltip : List TextChannel -> List LabelledSpec -> List LabelledSpec
 tooltip tDefs =
-    (::) ( "tooltip", List.concatMap textChannelProperty tDefs |> JE.object )
+    (::) ( "tooltip", JE.object (List.concatMap textChannelProperty tDefs) )
+
+
+{-| Encode a tooltip channel with multiple tooltips. The first parameter is a
+list of the multiple tooltips, each of which is a list of text channel properties
+that define the channel. The second parameter is a list of any previous channels to
+which this channel is to be added. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#text)
+for further details on the text and tooltip channels and
+[Vega-Lite formatting documentation](https://vega.github.io/vega-lite/docs/format.html)
+for formatting the appearance of the text.
+
+      enc =
+          encoding
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+              << tooltips [ [ tName "Year", tMType Temporal, tFormat "%Y" ]
+                          , [ tName "Cylinders", tMType Quantitative ]
+                          ]
+
+-}
+tooltips : List (List TextChannel) -> List LabelledSpec -> List LabelledSpec
+tooltips tDefss =
+    (::) ( "tooltip", JE.list (List.map (\tDefs -> JE.object (List.concatMap textChannelProperty tDefs)) tDefss) )
 
 
 {-| Indicates a topoJSON feature format. The first parameter should be the name

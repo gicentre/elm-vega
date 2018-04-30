@@ -10977,6 +10977,24 @@ var _gicentre$elm_vega$VegaLite$tooltip = function (tDefs) {
 				A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, tDefs))
 		});
 };
+var _gicentre$elm_vega$VegaLite$tooltips = function (tDefss) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'tooltip',
+			_1: _elm_lang$core$Json_Encode$list(
+				A2(
+					_elm_lang$core$List$map,
+					function (tDefs) {
+						return _elm_lang$core$Json_Encode$object(
+							A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$VegaLite$textChannelProperty, tDefs));
+					},
+					tDefss))
+		});
+};
 var _gicentre$elm_vega$VegaLite$asSpec = function (specs) {
 	return _elm_lang$core$Json_Encode$object(
 		A2(
