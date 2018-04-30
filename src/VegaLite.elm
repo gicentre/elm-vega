@@ -57,7 +57,8 @@ module VegaLite
         , InputProperty
         , LabelledSpec
         , Legend(Gradient, Symbol)
-        , LegendConfig(..)
+          --, LegendConfig(CornerRadius, EntryPadding, FillColor, GradientHeight, GradientLabelBaseline, GradientLabelLimit, GradientLabelOffset, GradientStrokeColor, GradientStrokeWidth, GradientWidth, LeLabelAlign, LeLabelBaseline, LeLabelColor, LeLabelFont, LeLabelFontSize, LeLabelLimit, LeLabelOffset, LePadding, LeShortTimeLabels, LeStrokeDash, LeStrokeWidth, LeTitleAlign, LeTitleBaseline, LeTitleColor, LeTitleFont, LeTitleFontSize, LeTitleFontWeight, LeTitleLimit, LeTitlePadding, Offset, Orient, StrokeColor, SymbolColor, SymbolSize, SymbolStrokeWidth, SymbolType)
+        , LegendConfig
         , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
           --, LegendProperty(LEntryPadding ,LFormat ,LOffset ,LOrient ,LPadding ,LTickCount ,LTitle ,LType ,LValues ,LZIndex)
         , LegendProperty
@@ -366,6 +367,42 @@ module VegaLite
         , leType
         , leValues
         , leZIndex
+        , lecoCornerRadius
+        , lecoEntryPadding
+        , lecoFillColor
+        , lecoGradientHeight
+        , lecoGradientLabelBaseline
+        , lecoGradientLabelLimit
+        , lecoGradientLabelOffset
+        , lecoGradientStrokeColor
+        , lecoGradientStrokeWidth
+        , lecoGradientWidth
+        , lecoLabelAlign
+        , lecoLabelBaseline
+        , lecoLabelColor
+        , lecoLabelFont
+        , lecoLabelFontSize
+        , lecoLabelLimit
+        , lecoLabelOffset
+        , lecoOffset
+        , lecoOrient
+        , lecoPadding
+        , lecoShortTimeLabels
+        , lecoStrokeColor
+        , lecoStrokeDash
+        , lecoStrokeWidth
+        , lecoSymbolColor
+        , lecoSymbolSize
+        , lecoSymbolStrokeWidth
+        , lecoSymbolType
+        , lecoTitleAlign
+        , lecoTitleBaseline
+        , lecoTitleColor
+        , lecoTitleFont
+        , lecoTitleFontSize
+        , lecoTitleFontWeight
+        , lecoTitleLimit
+        , lecoTitlePadding
         , line
         , lookup
         , lookupAs
@@ -1297,7 +1334,46 @@ to the data and transform options described above.
 @docs axcoTitleX
 @docs axcoTitleY
 
-@docs LegendConfig
+
+## Legend Configuration Options
+
+@docs lecoCornerRadius
+@docs lecoFillColor
+@docs lecoOrient
+@docs lecoOffset
+@docs lecoStrokeColor
+@docs lecoStrokeDash
+@docs lecoStrokeWidth
+@docs lecoPadding
+@docs lecoGradientLabelBaseline
+@docs lecoGradientLabelLimit
+@docs lecoGradientLabelOffset
+@docs lecoGradientStrokeColor
+@docs lecoGradientStrokeWidth
+@docs lecoGradientHeight
+@docs lecoGradientWidth
+@docs lecoLabelAlign
+@docs lecoLabelBaseline
+@docs lecoLabelColor
+@docs lecoLabelFont
+@docs lecoLabelFontSize
+@docs lecoLabelLimit
+@docs lecoLabelOffset
+@docs lecoShortTimeLabels
+@docs lecoEntryPadding
+@docs lecoSymbolColor
+@docs lecoSymbolType
+@docs lecoSymbolSize
+@docs lecoSymbolStrokeWidth
+@docs lecoTitleAlign
+@docs lecoTitleBaseline
+@docs lecoTitleColor
+@docs lecoTitleFont
+@docs lecoTitleFontSize
+@docs lecoTitleFontWeight
+@docs lecoTitleLimit
+@docs lecoTitlePadding
+
 @docs ScaleConfig
 @docs TitleConfig
 @docs APosition
@@ -1367,6 +1443,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs ConfigurationProperty
 @docs InputProperty
 @docs HeaderProperty
+@docs LegendConfig
 @docs LegendProperty
 @docs LegendValues
 @docs ProjectionProperty
@@ -2448,8 +2525,14 @@ type Legend
     | Symbol
 
 
-{-| Legend configuration options. For more detail see the
+{-| _Note: specifying legend configuration properties with type constructors
+(`CornerRadius`, `FillColor`, `LePadding` etc.) is deprecated in favour of
+calling their equivalent property specifying functions (`lecoCornerRadius`,
+`lecoFillColor`, `lecoPadding` etc.)_
+
+Legend configuration options. For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+
 -}
 type LegendConfig
     = CornerRadius Float
@@ -5434,6 +5517,303 @@ jsonProperty =
 layer : List Spec -> ( VLProperty, Spec )
 layer specs =
     ( VLLayer, JE.list specs )
+
+
+{-| Specify a default legend corner radius. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoCornerRadius : Float -> LegendConfig
+lecoCornerRadius =
+    CornerRadius
+
+
+{-| Specify a default spacing between legend items. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoEntryPadding : Float -> LegendConfig
+lecoEntryPadding =
+    EntryPadding
+
+
+{-| Specify a default background legend color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoFillColor : String -> LegendConfig
+lecoFillColor =
+    FillColor
+
+
+{-| Specify a default vertical alignment for labels in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelBaseline : VAlign -> LegendConfig
+lecoGradientLabelBaseline =
+    GradientLabelBaseline
+
+
+{-| Specify a default maximum allowable length for labels in a color ramp legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelLimit : Float -> LegendConfig
+lecoGradientLabelLimit =
+    GradientLabelLimit
+
+
+{-| Specify a default vertical offset in pixel units for labels in a color ramp legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelOffset : Float -> LegendConfig
+lecoGradientLabelOffset =
+    GradientLabelOffset
+
+
+{-| Specify a default color for strokes in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientStrokeColor : String -> LegendConfig
+lecoGradientStrokeColor =
+    GradientStrokeColor
+
+
+{-| Specify a default width for strokes in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientStrokeWidth : Float -> LegendConfig
+lecoGradientStrokeWidth =
+    GradientStrokeWidth
+
+
+{-| Specify a default height of a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientHeight : Float -> LegendConfig
+lecoGradientHeight =
+    GradientHeight
+
+
+{-| Specify a default width of a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientWidth : Float -> LegendConfig
+lecoGradientWidth =
+    GradientWidth
+
+
+{-| Specify a default horizontal alignment of legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelAlign : HAlign -> LegendConfig
+lecoLabelAlign =
+    LeLabelAlign
+
+
+{-| Specify a default vertical alignment of legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelBaseline : VAlign -> LegendConfig
+lecoLabelBaseline =
+    LeLabelBaseline
+
+
+{-| Specify a default color for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelColor : String -> LegendConfig
+lecoLabelColor =
+    LeLabelColor
+
+
+{-| Specify a default font for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelFont : String -> LegendConfig
+lecoLabelFont =
+    LeLabelFont
+
+
+{-| Specify a default font size legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelFontSize : Float -> LegendConfig
+lecoLabelFontSize =
+    LeLabelFontSize
+
+
+{-| Specify a default maximum width for legend labels in pixel units.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelLimit : Float -> LegendConfig
+lecoLabelLimit =
+    LeLabelLimit
+
+
+{-| Specify a default offset for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelOffset : Float -> LegendConfig
+lecoLabelOffset =
+    LeLabelOffset
+
+
+{-| Specify a default offset in pixel units between the legend and the enclosing
+group or data rectangle. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoOffset : Float -> LegendConfig
+lecoOffset =
+    Offset
+
+
+{-| Specify a default legend position relative to the main plot content.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoOrient : LegendOrientation -> LegendConfig
+lecoOrient =
+    Orient
+
+
+{-| Specify a default spacing in pixel units between a legend and axis.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoPadding : Float -> LegendConfig
+lecoPadding =
+    LePadding
+
+
+{-| Specify whether or not time labels are abbreviated by default in a legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoShortTimeLabels : Bool -> LegendConfig
+lecoShortTimeLabels =
+    LeShortTimeLabels
+
+
+{-| Specify a default legend border color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeColor : String -> LegendConfig
+lecoStrokeColor =
+    StrokeColor
+
+
+{-| Specify a default legend border stroke dash style. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeDash : List Float -> LegendConfig
+lecoStrokeDash =
+    LeStrokeDash
+
+
+{-| Specify a default legend border stroke width. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeWidth : Float -> LegendConfig
+lecoStrokeWidth =
+    LeStrokeWidth
+
+
+{-| Specify a default legend symbol color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolColor : String -> LegendConfig
+lecoSymbolColor =
+    SymbolColor
+
+
+{-| Specify a default legend symbol type. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolType : Symbol -> LegendConfig
+lecoSymbolType =
+    SymbolType
+
+
+{-| Specify a default legend symbol size. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolSize : Float -> LegendConfig
+lecoSymbolSize =
+    SymbolSize
+
+
+{-| Specify a default legend symbol stroke width. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolStrokeWidth : Float -> LegendConfig
+lecoSymbolStrokeWidth =
+    SymbolStrokeWidth
+
+
+{-| Specify a default horizontal alignment for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoTitleAlign : HAlign -> LegendConfig
+lecoTitleAlign =
+    LeTitleAlign
+
+
+{-| Specify a default vertical alignment for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleBaseline : VAlign -> LegendConfig
+lecoTitleBaseline =
+    LeTitleBaseline
+
+
+{-| Specify a default color legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleColor : String -> LegendConfig
+lecoTitleColor =
+    LeTitleColor
+
+
+{-| Specify a default font for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFont : String -> LegendConfig
+lecoTitleFont =
+    LeTitleFont
+
+
+{-| Specify a default font size for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFontSize : Float -> LegendConfig
+lecoTitleFontSize =
+    LeTitleFontSize
+
+
+{-| Specify a default font weight for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFontWeight : FontWeight -> LegendConfig
+lecoTitleFontWeight =
+    LeTitleFontWeight
+
+
+{-| Specify a default maximum size in pixel units for legend titles.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleLimit : Float -> LegendConfig
+lecoTitleLimit =
+    LeTitleLimit
+
+
+{-| Specify a default spacing in pixel units between title and legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitlePadding : Float -> LegendConfig
+lecoTitlePadding =
+    LeTitlePadding
 
 
 {-| Specify a set of legend date-times explicitly.
