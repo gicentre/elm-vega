@@ -100,7 +100,7 @@ basic5 =
 
         config =
             configure
-                << configuration (coAxis [ DomainWidth 1 ])
+                << configuration (coAxis [ axcoDomainWidth 1 ])
                 << configuration (coView [ Stroke Nothing ])
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [], config [] ]

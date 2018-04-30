@@ -3,7 +3,8 @@ module VegaLite
         ( APosition(AEnd, AMiddle, AStart)
         , Arrangement(Column, Row)
         , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
-        , AxisConfig(..)
+          --, AxisConfig(BandPosition, Domain, DomainColor, DomainWidth, Grid, GridColor, GridDash, GridOpacity, GridWidth, LabelAngle, LabelColor, LabelFont, LabelFontSize, LabelLimit, LabelOverlap, LabelPadding, Labels, MaxExtent, MinExtent, ShortTimeLabels, TickColor, TickRound, TickSize, TickWidth, Ticks, TitleAlign, TitleAngle, TitleBaseline, TitleColor, TitleFont, TitleFontSize, TitleFontWeight, TitleLimit, TitleMaxLength, TitlePadding, TitleX, TitleY)
+        , AxisConfig
           -- AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
         , AxisProperty
           --, BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
@@ -149,6 +150,43 @@ module VegaLite
         , axTitlePadding
         , axValues
         , axZIndex
+        , axcoBandPosition
+        , axcoDomain
+        , axcoDomainColor
+        , axcoDomainWidth
+        , axcoGrid
+        , axcoGridColor
+        , axcoGridDash
+        , axcoGridOpacity
+        , axcoGridWidth
+        , axcoLabelAngle
+        , axcoLabelColor
+        , axcoLabelFont
+        , axcoLabelFontSize
+        , axcoLabelLimit
+        , axcoLabelOverlap
+        , axcoLabelPadding
+        , axcoLabels
+        , axcoMaxExtent
+        , axcoMinExtent
+        , axcoShortTimeLabels
+        , axcoTickColor
+        , axcoTickRound
+        , axcoTickSize
+        , axcoTickWidth
+        , axcoTicks
+        , axcoTitleAlign
+        , axcoTitleAngle
+        , axcoTitleBaseline
+        , axcoTitleColor
+        , axcoTitleFont
+        , axcoTitleFontSize
+        , axcoTitleFontWeight
+        , axcoTitleLimit
+        , axcoTitleMaxLength
+        , axcoTitlePadding
+        , axcoTitleX
+        , axcoTitleY
         , background
         , bar
         , biBase
@@ -1217,7 +1255,48 @@ to the data and transform options described above.
 @docs coView
 
 @docs Autosize
-@docs AxisConfig
+
+
+## Axis Configuration Options
+
+@docs axcoBandPosition
+@docs axcoDomain
+@docs axcoDomainColor
+@docs axcoDomainWidth
+@docs axcoMaxExtent
+@docs axcoMinExtent
+@docs axcoGrid
+@docs axcoGridColor
+@docs axcoGridDash
+@docs axcoGridOpacity
+@docs axcoGridWidth
+@docs axcoLabels
+@docs axcoLabelAngle
+@docs axcoLabelColor
+@docs axcoLabelFont
+@docs axcoLabelFontSize
+@docs axcoLabelLimit
+@docs axcoLabelOverlap
+@docs axcoLabelPadding
+@docs axcoShortTimeLabels
+@docs axcoTicks
+@docs axcoTickColor
+@docs axcoTickRound
+@docs axcoTickSize
+@docs axcoTickWidth
+@docs axcoTitleAlign
+@docs axcoTitleAngle
+@docs axcoTitleBaseline
+@docs axcoTitleColor
+@docs axcoTitleFont
+@docs axcoTitleFontWeight
+@docs axcoTitleFontSize
+@docs axcoTitleLimit
+@docs axcoTitleMaxLength
+@docs axcoTitlePadding
+@docs axcoTitleX
+@docs axcoTitleY
+
 @docs LegendConfig
 @docs ScaleConfig
 @docs TitleConfig
@@ -1283,6 +1362,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs Binding
 
 @docs AxisProperty
+@docs AxisConfig
 @docs BinProperty
 @docs ConfigurationProperty
 @docs InputProperty
@@ -1342,9 +1422,14 @@ type Autosize
     | AResize
 
 
-{-| Axis configuration options for customising all axes. See the
+{-| _Note: specifying axis configuration properties with type constructors (`BandPosition`,
+`Domain`, `Grid` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`axcoBandPosition`, `axcoDomain`, `axcoGrid` etc.)_
+
+Axis configuration options for customising all axes. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config)
 for more details.
+
 -}
 type AxisConfig
     = BandPosition Float
@@ -1384,6 +1469,305 @@ type AxisConfig
     | TitlePadding Float
     | TitleX Float
     | TitleY Float
+
+
+{-| Specify a default axis band position. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoBandPosition : Float -> AxisConfig
+axcoBandPosition =
+    BandPosition
+
+
+{-| Specify whether or not an axis domain should be displayed by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomain : Bool -> AxisConfig
+axcoDomain =
+    Domain
+
+
+{-| Specify a default axis domain colour. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomainColor : String -> AxisConfig
+axcoDomainColor =
+    DomainColor
+
+
+{-| Specify a default axis domain width style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomainWidth : Float -> AxisConfig
+axcoDomainWidth =
+    DomainWidth
+
+
+{-| Specify a default maximum extent style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoMaxExtent : Float -> AxisConfig
+axcoMaxExtent =
+    MaxExtent
+
+
+{-| Specify a default minimum extent style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoMinExtent : Float -> AxisConfig
+axcoMinExtent =
+    MinExtent
+
+
+{-| Specify whether or not an axis grid is displayed by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGrid : Bool -> AxisConfig
+axcoGrid =
+    Grid
+
+
+{-| Specify a default axis grid color style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridColor : String -> AxisConfig
+axcoGridColor =
+    GridColor
+
+
+{-| Specify a default axis line dash style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridDash : List Float -> AxisConfig
+axcoGridDash =
+    GridDash
+
+
+{-| Specify a default axis grid line opacity. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridOpacity : Float -> AxisConfig
+axcoGridOpacity =
+    GridOpacity
+
+
+{-| Specify a default axis grid line width. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridWidth : Float -> AxisConfig
+axcoGridWidth =
+    GridWidth
+
+
+{-| Specify whether or not an axis has labels by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabels : Bool -> AxisConfig
+axcoLabels =
+    Labels
+
+
+{-| Specify a default axis label angle. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelAngle : Float -> AxisConfig
+axcoLabelAngle =
+    LabelAngle
+
+
+{-| Specify a default axis label color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelColor : String -> AxisConfig
+axcoLabelColor =
+    LabelColor
+
+
+{-| Specify a default axis label font. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelFont : String -> AxisConfig
+axcoLabelFont =
+    LabelFont
+
+
+{-| Specify a default axis label font size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelFontSize : Float -> AxisConfig
+axcoLabelFontSize =
+    LabelFontSize
+
+
+{-| Specify a default axis label limit (how much a label can extend beyond the
+left/bottom or right/top of the axis line). For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelLimit : Float -> AxisConfig
+axcoLabelLimit =
+    LabelLimit
+
+
+{-| Specify a default axis label overlap strategy for cases where lables cannot
+fit within the alotted space. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelOverlap : OverlapStrategy -> AxisConfig
+axcoLabelOverlap =
+    LabelOverlap
+
+
+{-| Specify a default axis label padding (space between labels in pixels). For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelPadding : Float -> AxisConfig
+axcoLabelPadding =
+    LabelPadding
+
+
+{-| Specify whether or not an axis should use short time labels by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoShortTimeLabels : Bool -> AxisConfig
+axcoShortTimeLabels =
+    ShortTimeLabels
+
+
+{-| Specify whether or not an axis should show ticks by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTicks : Bool -> AxisConfig
+axcoTicks =
+    Ticks
+
+
+{-| Specify a default axis tick mark color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickColor : String -> AxisConfig
+axcoTickColor =
+    TickColor
+
+
+{-| Specify whether or not axis tick labels use rounded values by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickRound : Bool -> AxisConfig
+axcoTickRound =
+    TickRound
+
+
+{-| Specify a default axis tick mark size in pixel units. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickSize : Float -> AxisConfig
+axcoTickSize =
+    TickSize
+
+
+{-| Specify a default axis tick mark width in pixel units. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickWidth : Float -> AxisConfig
+axcoTickWidth =
+    TickWidth
+
+
+{-| Specify a default axis tick label horizontal aligment. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleAlign : HAlign -> AxisConfig
+axcoTitleAlign =
+    TitleAlign
+
+
+{-| Specify a default axis title angle. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleAngle : Float -> AxisConfig
+axcoTitleAngle =
+    TitleAngle
+
+
+{-| Specify a default axis title vertical alignment. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleBaseline : VAlign -> AxisConfig
+axcoTitleBaseline =
+    TitleBaseline
+
+
+{-| Specify a default axis title color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleColor : String -> AxisConfig
+axcoTitleColor =
+    TitleColor
+
+
+{-| Specify a default axis title font. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFont : String -> AxisConfig
+axcoTitleFont =
+    TitleFont
+
+
+{-| Specify a default axis title font weight. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFontWeight : FontWeight -> AxisConfig
+axcoTitleFontWeight =
+    TitleFontWeight
+
+
+{-| Specify a default axis title font size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFontSize : Float -> AxisConfig
+axcoTitleFontSize =
+    TitleFontSize
+
+
+{-| Specify a default axis title maximum size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleLimit : Float -> AxisConfig
+axcoTitleLimit =
+    TitleLimit
+
+
+{-| Specify a default axis title maximum length when generated automatically from
+a field's description. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleMaxLength : Float -> AxisConfig
+axcoTitleMaxLength =
+    TitleMaxLength
+
+
+{-| Specify a default axis title padding between axis line and text. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitlePadding : Float -> AxisConfig
+axcoTitlePadding =
+    TitlePadding
+
+
+{-| Specify a default axis x-position relative to the axis group. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleX : Float -> AxisConfig
+axcoTitleX =
+    TitleX
+
+
+{-| Specify a default axis y-position relative to the axis group. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleY : Float -> AxisConfig
+axcoTitleY =
+    TitleY
 
 
 {-| _Note: specifying axis properties with type constructors (`AxDomain`,
