@@ -15,10 +15,9 @@ module VegaLite
           --CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
         , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-          --, ClipRect(LTRB, NoClip)
         , ClipRect(NoClip)
-          -- TODO: create functions for access to ConfigurationProperty type constructors
-        , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
+          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
+        , ConfigurationProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
@@ -169,6 +168,45 @@ module VegaLite
         , categoricalDomainMap
         , circle
         , clipRect
+        , coArea
+        , coAutosize
+        , coAxis
+        , coAxisBand
+        , coAxisBottom
+        , coAxisLeft
+        , coAxisRight
+        , coAxisTop
+        , coAxisX
+        , coAxisY
+        , coBackground
+        , coBar
+        , coCircle
+        , coCountTitle
+        , coFieldTitle
+        , coGeoshape
+          --, ClipRect(LTRB, NoClip)
+        , coLegend
+        , coLine
+        , coMark
+        , coNamedStyle
+        , coNumberFormat
+        , coPadding
+        , coPoint
+        , coProjection
+        , coRange
+        , coRect
+        , coRemoveInvalid
+        , coRule
+        , coScale
+        , coSelection
+        , coSquare
+        , coStack
+        , coText
+        , coTick
+        , coTimeFormat
+        , coTitle
+        , coTrail
+        , coView
         , color
         , column
         , columnBy
@@ -475,7 +513,6 @@ module VegaLite
         , topojsonFeature
         , topojsonMesh
         , trail
-        , trailConfig
         , transform
         , utc
         , vConcat
@@ -1136,10 +1173,50 @@ to the data and transform options described above.
 @docs background
 @docs configure
 @docs configuration
-@docs ConfigurationProperty
-@docs trailConfig
-@docs Autosize
 
+
+## Style Setting
+
+@docs coArea
+@docs coAutosize
+@docs coAxis
+@docs coAxisX
+@docs coAxisY
+@docs coAxisLeft
+@docs coAxisRight
+@docs coAxisTop
+@docs coAxisBottom
+@docs coAxisBand
+@docs coBackground
+@docs coBar
+@docs coCircle
+@docs coCountTitle
+@docs coFieldTitle
+@docs coGeoshape
+@docs coLegend
+@docs coLine
+@docs coMark
+@docs coNamedStyle
+@docs coNumberFormat
+@docs coPadding
+@docs coPoint
+@docs coProjection
+@docs coRange
+@docs coRect
+@docs coRemoveInvalid
+@docs coRule
+@docs coScale
+@docs coSelection
+@docs coSquare
+@docs coStack
+@docs coText
+@docs coTick
+@docs coTitle
+@docs coTimeFormat
+@docs coTrail
+@docs coView
+
+@docs Autosize
 @docs AxisConfig
 @docs LegendConfig
 @docs ScaleConfig
@@ -1207,6 +1284,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 
 @docs AxisProperty
 @docs BinProperty
+@docs ConfigurationProperty
 @docs InputProperty
 @docs HeaderProperty
 @docs LegendProperty
@@ -1526,9 +1604,14 @@ type ClipRect
     | LTRB Float Float Float Float
 
 
-{-| Type of configuration property to customise. See the
+{-| _Note: referencing configuration properties with type constructors (`AreaStyle`,
+`Autosize`, `Axis` etc.) is deprecated in favour of calling their equivalent
+configuration functions (`coArea`, `coAutosize`, `coAxis` etc.)._
+
+Type of configuration property to customise. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
 for details.
+
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
@@ -1546,6 +1629,7 @@ type ConfigurationProperty
     | CircleStyle (List MarkProperty)
     | CountTitle String
     | FieldTitle FieldTitleProperty
+    | GeoshapeStyle (List MarkProperty)
     | Legend (List LegendConfig)
     | LineStyle (List MarkProperty)
     | MarkStyle (List MarkProperty)
@@ -1566,10 +1650,10 @@ type ConfigurationProperty
     | TickStyle (List MarkProperty)
     | TitleStyle (List TitleConfig)
     | TimeFormat String
-    | View (List ViewConfig)
       -- Note: Trails appear unusual in having their own top-level config
       -- (see https://vega.github.io/vega-lite/docs/trail.html#config)
     | TrailStyle (List MarkProperty)
+    | View (List ViewConfig)
 
 
 {-| Represents the type of cursor to display. For an explanation of each type,
@@ -2919,7 +3003,7 @@ and op1 op2 =
 elements, such as in a stacked area chart or streamgraph. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/area.html).
 
-    area [ MStroke "white" ]
+    area [ maStroke "white" ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -3189,7 +3273,7 @@ background colour =
 the magnitude of values in categories. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/bar.html).
 
-    bar [ MFill "black", MStroke "white", MStrokeWeight 2 ]
+    bar [ maFill "black", maStroke "white", maStrokeWeight 2 ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -3298,7 +3382,7 @@ categoricalDomainMap scaleDomainPairs =
 {-| Specify a circle mark for symbolising points. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/circle.html).
 
-    circle [ MStroke "red", MStrokeWeight 2 ]
+    circle [ maStroke "red", maStrokeWeight 2 ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -3316,6 +3400,150 @@ circle =
 clipRect : Float -> Float -> Float -> Float -> ClipRect
 clipRect l t r b =
     LTRB l t r b
+
+
+{-| Configure the default appearance of area marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coArea : List MarkProperty -> ConfigurationProperty
+coArea =
+    AreaStyle
+
+
+{-| Configure the default sizing of visualizations. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coAutosize : List Autosize -> ConfigurationProperty
+coAutosize =
+    Autosize
+
+
+{-| Configure the default appearance of axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxis : List AxisConfig -> ConfigurationProperty
+coAxis =
+    Axis
+
+
+{-| Configure the default appearance of x-axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisX : List AxisConfig -> ConfigurationProperty
+coAxisX =
+    AxisX
+
+
+{-| Configure the default appearance of y-axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisY : List AxisConfig -> ConfigurationProperty
+coAxisY =
+    AxisY
+
+
+{-| Configure the default appearance of left-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisLeft : List AxisConfig -> ConfigurationProperty
+coAxisLeft =
+    AxisLeft
+
+
+{-| Configure the default appearance of right-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisRight : List AxisConfig -> ConfigurationProperty
+coAxisRight =
+    AxisRight
+
+
+{-| Configure the default appearance of top-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisTop : List AxisConfig -> ConfigurationProperty
+coAxisTop =
+    AxisTop
+
+
+{-| Configure the default appearance of bottom-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisBottom : List AxisConfig -> ConfigurationProperty
+coAxisBottom =
+    AxisBottom
+
+
+{-| Configure the default appearance of axes with band scaling. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisBand : List AxisConfig -> ConfigurationProperty
+coAxisBand =
+    AxisBand
+
+
+{-| Configure the default background colour of visualizations. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coBackground : String -> ConfigurationProperty
+coBackground =
+    Background
+
+
+{-| Configure the default appearance of bar marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coBar : List MarkProperty -> ConfigurationProperty
+coBar =
+    BarStyle
+
+
+{-| Configure the default appearance of circle marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coCircle : List MarkProperty -> ConfigurationProperty
+coCircle =
+    CircleStyle
+
+
+{-| Configure the default title style for count fields. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coCountTitle : String -> ConfigurationProperty
+coCountTitle =
+    CountTitle
+
+
+{-| Configure the default title generation style for fields. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coFieldTitle : FieldTitleProperty -> ConfigurationProperty
+coFieldTitle =
+    FieldTitle
+
+
+{-| Configure the default appearance of geoshape marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coGeoshape : List MarkProperty -> ConfigurationProperty
+coGeoshape =
+    GeoshapeStyle
+
+
+{-| Configure the default appearance of legends. For details, see the
+[Vega-Lite legend configuration documentation](https://vega.github.io/vega-lite/docs/config.html#legend-config)
+-}
+coLegend : List LegendConfig -> ConfigurationProperty
+coLegend =
+    Legend
+
+
+{-| Configure the default appearance of line marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coLine : List MarkProperty -> ConfigurationProperty
+coLine =
+    LineStyle
 
 
 {-| Encode a color channel. The first parameter is a list of mark channel properties
@@ -3371,6 +3599,14 @@ columnFields =
     ColumnFields
 
 
+{-| Configure the default mark appearance. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coMark : List MarkProperty -> ConfigurationProperty
+coMark =
+    MarkStyle
+
+
 {-| Combines a list of labelled specifications into a single specification that
 may be passed to JavaScript for rendering. This is useful when you wish to create
 a single page with multiple visulizualizations.
@@ -3385,6 +3621,14 @@ a single page with multiple visulizualizations.
 combineSpecs : List LabelledSpec -> Spec
 combineSpecs specs =
     JE.object specs
+
+
+{-| Configure the default appearance of a named style. For details, see the
+[Vega-Lite mark style configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coNamedStyle : String -> List MarkProperty -> ConfigurationProperty
+coNamedStyle =
+    NamedStyle
 
 
 {-| Defines a single configuration option to be applied globally across the visualization.
@@ -3414,6 +3658,155 @@ more details.
 configure : List LabelledSpec -> ( VLProperty, Spec )
 configure configs =
     ( VLConfig, JE.object configs )
+
+
+{-| Configure the default number formatting for axis and text labels. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coNumberFormat : String -> ConfigurationProperty
+coNumberFormat =
+    NumberFormat
+
+
+{-| Configure the default padding in pixels from the edge of the of visualization
+to the data rectangle. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coPadding : Padding -> ConfigurationProperty
+coPadding =
+    Padding
+
+
+{-| Configure the default appearance of point marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coPoint : List MarkProperty -> ConfigurationProperty
+coPoint =
+    PointStyle
+
+
+{-| Configure the default style of map projections. For details, see the
+[Vega-Lite projection configuration documentation](https://vega.github.io/vega-lite/docs/config.html#projection-config)
+-}
+coProjection : List ProjectionProperty -> ConfigurationProperty
+coProjection =
+    Projection
+
+
+{-| Configure the default range properties used when scaling. For details, see the
+[Vega-Lite scale range configuration documentation](https://vega.github.io/vega-lite/docs/config.html#scale-config)
+-}
+coRange : List RangeConfig -> ConfigurationProperty
+coRange =
+    Range
+
+
+{-| Configure the default appearance of rectangle marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRect : List MarkProperty -> ConfigurationProperty
+coRect =
+    RectStyle
+
+
+{-| Configure the default handling of invalid (`null` and `NaN`) values. If `true`,
+invalid values are skipped or filtered out when represented as marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRemoveInvalid : Bool -> ConfigurationProperty
+coRemoveInvalid =
+    RemoveInvalid
+
+
+{-| Configure the default appearance of rule marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRule : List MarkProperty -> ConfigurationProperty
+coRule =
+    RuleStyle
+
+
+{-| Configure the default scale properties used when scaling. For details, see the
+[Vega-Lite scale configuration documentation](https://vega.github.io/vega-lite/docs/config.html#scale-config)
+-}
+coScale : List ScaleConfig -> ConfigurationProperty
+coScale =
+    Scale
+
+
+{-| Configure the default appearance of selection marks. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
+-}
+coSelection : List ( Selection, List SelectionProperty ) -> ConfigurationProperty
+coSelection =
+    SelectionStyle
+
+
+{-| Configure the default appearance of square marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coSquare : List MarkProperty -> ConfigurationProperty
+coSquare =
+    SquareStyle
+
+
+{-| Configure the default stack offset style for stackable marks. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coStack : StackProperty -> ConfigurationProperty
+coStack =
+    Stack
+
+
+{-| Configure the default appearance of text marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coText : List MarkProperty -> ConfigurationProperty
+coText =
+    TextStyle
+
+
+{-| Configure the default appearance of tick marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coTick : List MarkProperty -> ConfigurationProperty
+coTick =
+    TickStyle
+
+
+{-| Configure the default style of visualization titles. For details, see the
+[Vega-Lite title configuration documentation](https://vega.github.io/vega-lite/docs/config.html#title-config)
+-}
+coTitle : List TitleConfig -> ConfigurationProperty
+coTitle =
+    TitleStyle
+
+
+{-| Configure the default time format for axis and legend labels. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coTimeFormat : String -> ConfigurationProperty
+coTimeFormat =
+    TimeFormat
+
+
+{-| Specify the default style of trail marks.
+
+    config =
+        configure << coTrail [ maOpacity 0.5, maStrokeDash [ 1, 2 ] ]
+
+-}
+coTrail : List MarkProperty -> List LabelledSpec -> List LabelledSpec
+coTrail mps =
+    (::) (configProperty (TrailStyle mps))
+
+
+{-| Configure the default single view style. For details, see the
+[Vega-Lite view configuration documentation](https://vega.github.io/vega-lite/docs/config.html#view-configuration)
+-}
+coView : List ViewConfig -> ConfigurationProperty
+coView =
+    View
 
 
 {-| Specify a cube helix color interpolation for continuous color scales. The
@@ -3520,13 +3913,13 @@ general cases of json creation, consider
 
     let
         geojson =
-            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
     in
     toVegaLite
         [ width 200
         , height 200
         , dataFromJson geojson []
-        , projection [ PType Orthographic ]
+        , projection [ prType Orthographic ]
         , geoshape []
         ]
 
@@ -4173,9 +4566,9 @@ Each feature object in this collection can be created with the `geometry` functi
 
     geojson =
         geoFeatureCollection
-            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
+            [ geometry (geoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
                 [ ( "myRegionName", str "Northern region" ) ]
-            , geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
+            , geometry (geoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
                 [ ( "myRegionName", str "Southern region" ) ]
             ]
 
@@ -4211,8 +4604,8 @@ Each geometry object in this collection can be created with the `geometry` funct
 
     geojson =
         geometryCollection
-            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
-            , geometry (GeoPoint -3.5 55.5) []
+            [ geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            , geometry (geoPoint -3.5 55.5) []
             ]
 
 -}
@@ -4229,7 +4622,7 @@ first parameter is the geometric type, the second an optional list of properties
 to be associated with the object.
 
       geojson =
-          geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+          geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
 
 -}
 geometry : Geometry -> List ( String, DataValue ) -> Spec
@@ -4287,7 +4680,7 @@ geoPolygons =
 coordinates. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/geoshape.html).
 
-    geoshape [ MFill "blue", MStroke "white" ]
+    geoshape [ maFill "blue", maStroke "white" ]
 
 -}
 geoshape : List MarkProperty -> ( VLProperty, Spec )
@@ -4765,7 +5158,7 @@ leZIndex =
 {-| Specify a line mark for symbolising a sequence of values. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/line.html).
 
-    line [MStroke "red", MStrokeDash [1, 2] ]
+    line [maStroke "red", maStrokeDash [1, 2] ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -5601,7 +5994,7 @@ pMType =
 {-| Specify a point mark for symbolising a data point with a symbol. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/point.html).
 
-    point [ MFill "black", MStroke "red" ]
+    point [ maFill "black", maStroke "red" ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -5798,7 +6191,7 @@ This is useful when using the `Geoshape` mark. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
 
     proj =
-        projection [ PType Orthographic, PRotate -40 0 0 ]
+        projection [ prType Orthographic, prRotate -40 0 0 ]
 
 -}
 projection : List ProjectionProperty -> ( VLProperty, Spec )
@@ -5897,7 +6290,7 @@ raStrs =
 {-| Specify an arbitrary rectangle. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rect.html).
 
-    rect [ MFill "black", MStroke "red" ]
+    rect [ maFill "black", maStroke "red" ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -6021,7 +6414,7 @@ rowFields =
 entire width or height of a view, or to connect two arbitrary positions. For details
 see the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rule.html).
 
-    rule [ MStroke "red" ]
+    rule [ maStroke "red" ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -6487,7 +6880,7 @@ specification spec =
 {-| Specify a square mark for symbolising points. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/square.html).
 
-    square [ MStroke "red", MStrokeWeight 2 ]
+    square [ maStroke "red", maStrokeWeight 2 ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -6617,7 +7010,7 @@ tFormat =
 {-| Specify a short line mark for symbolising point locations. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/tick.html).
 
-    tick [ MStroke "blue", MStrokeWeight 0.5 ]
+    tick [ maStroke "blue", maStrokeWeight 0.5 ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -6778,25 +7171,12 @@ toVegaLite spec =
 length. For details see the
 [Vega Lite documentation](https://vega.github.io/vega-lite/docs/trail.html).
 
-    trail [ MInterpolate StepAfter ]
+    trail [ maInterpolate StepAfter ]
 
 -}
 trail : List MarkProperty -> ( VLProperty, Spec )
 trail =
     mark Trail
-
-
-{-| Specify the style for all trail marks.
-
-    config =
-        configure << trailConfig [ MOpacity 0.5, MStrokeDash [ 1, 2 ] ]
-
--}
-trailConfig : List MarkProperty -> List LabelledSpec -> List LabelledSpec
-trailConfig mps =
-    -- NOTE: This is the first config option to have an opaque type and public function.
-    -- In preparation for next major version where we will replace many types with functions.
-    (::) (configProperty (TrailStyle mps))
 
 
 {-| Create a single transform from a list of transformation specifications. Note
@@ -6807,7 +7187,7 @@ provide the transformations in the order intended in a clear manner.
 
     trans =
         transform
-            << filter (FExpr "datum.year == 2010")
+            << filter (fiExpr "datum.year == 2010")
             << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
 -}
@@ -7434,6 +7814,9 @@ configProperty configProp =
 
         CircleStyle mps ->
             ( "circle", JE.object (List.map markProperty mps) )
+
+        GeoshapeStyle mps ->
+            ( "geoshape", JE.object (List.map markProperty mps) )
 
         LineStyle mps ->
             ( "line", JE.object (List.map markProperty mps) )

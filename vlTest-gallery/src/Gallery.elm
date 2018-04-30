@@ -100,8 +100,8 @@ basic5 =
 
         config =
             configure
-                << configuration (Axis [ DomainWidth 1 ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coAxis [ DomainWidth 1 ])
+                << configuration (coView [ Stroke Nothing ])
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [], config [] ]
 
@@ -176,7 +176,7 @@ basic10 =
 
         config =
             configure
-                << configuration (RemoveInvalid False)
+                << configuration (coRemoveInvalid False)
 
         enc =
             encoding
@@ -362,8 +362,8 @@ basic20 =
 
         config =
             configure
-                << configuration (Range [ RHeatmap "greenblue" ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coRange [ RHeatmap "greenblue" ])
+                << configuration (coView [ Stroke Nothing ])
     in
     toVegaLite
         [ des
@@ -751,7 +751,7 @@ layer1 =
             asSpec [ textMark [ maStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
 
         config =
-            configure << configuration (NamedStyle "label" [ maAlign AlignLeft, maBaseline AlignMiddle, maDx 3 ])
+            configure << configuration (coNamedStyle "label" [ maAlign AlignLeft, maBaseline AlignMiddle, maDx 3 ])
     in
     toVegaLite [ des, data [], enc [], layer [ specBar, specText ], config [] ]
 
@@ -872,8 +872,8 @@ layer4 =
 
         config =
             configure
-                << configuration (Scale [ SCBandPaddingInner 0, SCBandPaddingOuter 0 ])
-                << configuration (TextStyle [ maBaseline AlignMiddle ])
+                << configuration (coScale [ SCBandPaddingInner 0, SCBandPaddingOuter 0 ])
+                << configuration (coText [ maBaseline AlignMiddle ])
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], encPosition [], layer [ specRect, specText ], config [] ]
 
@@ -1351,7 +1351,7 @@ layer16 =
 
         config =
             configure
-                << configuration (AreaStyle [ maInterpolate Monotone, maOrient Vertical ])
+                << configuration (coArea [ maInterpolate Monotone, maOrient Vertical ])
     in
     toVegaLite [ des, width 300, height 50, data [], encX [], layer [ specLower, specUpper ], config [] ]
 
@@ -1441,7 +1441,7 @@ layer18 =
             asSpec [ transTextMax [], textMark [ maAlign AlignLeft, maBaseline AlignBottom, maDx 3, maDy 1 ], encTextMax [] ]
 
         config =
-            configure << configuration (View [ Stroke Nothing ])
+            configure << configuration (coView [ Stroke Nothing ])
     in
     toVegaLite
         [ des
@@ -1858,7 +1858,7 @@ geo9 =
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ Stroke Nothing ]) []
         , layer [ polySpec, labelSpec, routeSpec ]
         ]
 
@@ -2194,7 +2194,7 @@ interactive9 =
 
         config =
             configure
-                << configuration (Range [ RHeatmap "greenblue" ])
+                << configuration (coRange [ RHeatmap "greenblue" ])
 
         res =
             resolve
