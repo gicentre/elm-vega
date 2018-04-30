@@ -410,8 +410,8 @@ scribbleMap2 =
 
         enc =
             encoding
-                << position Longitude [ pName "longitude", pMType Quantitative, pSort [ soByField "zip_code" ] ]
-                << position Latitude [ pName "latitude", pMType Quantitative, pSort [ soByField "zip_code" ] ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
                 << order [ oName "zip_code", oMType Quantitative ]
                 << color [ mName "digit3", mMType Nominal, mLegend [] ]
                 << detail [ dName "ziplen", dMType Nominal ]
