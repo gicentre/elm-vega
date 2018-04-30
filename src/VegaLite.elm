@@ -933,9 +933,6 @@ Relates to where something appears in the visualization.
 @docs Side
 @docs HAlign
 @docs VAlign
-@docs FontWeight
-@docs TimeUnit
-@docs utc
 
 
 ## Mark channels
@@ -1003,6 +1000,7 @@ Relate to the appearance of the text and tooltip elements of the visualization.
 @docs tSelectionCondition
 @docs tDataCondition
 @docs tFormat
+@docs FontWeight
 
 
 ## Hyperlink Channel
@@ -1228,7 +1226,7 @@ Sometimes it is useful to make channel encoding conditional on something. For ex
 on the result of some interaction such as clicking or dragging or some data property
 such whether null or an outlier. `MSelectionCondition` (and `TSelectionCondition`) will
 encode a mark (or text) dependent on an interactive selection. `MDataCondition`
-(and `TDataCondition`) will encode it dependening on some data property.
+(and `TDataCondition`) will encode it depending on some data property.
 
 For interaction, once a selection has been defined and named, supplying a set of
 `MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
@@ -1487,7 +1485,7 @@ to the data and transform options described above.
 @docs FieldTitleProperty
 
 
-# General Data Types
+# General Data functions
 
 In addition to more general data types like integers and string, the following types
 can carry data used in specifications.
@@ -1502,7 +1500,7 @@ can carry data used in specifications.
 @docs strs
 
 
-## Temporal Data Types
+## Temporal Data
 
 @docs dtYear
 @docs dtQuarter
@@ -1515,6 +1513,9 @@ can carry data used in specifications.
 @docs dtMillisecond
 @docs MonthName
 @docs DayName
+
+@docs TimeUnit
+@docs utc
 
 ---
 
@@ -1673,7 +1674,7 @@ axcoDomain =
     Domain
 
 
-{-| Specify a default axis domain colour. For more details, see the
+{-| Specify a default axis domain color. For more details, see the
 [Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
 -}
 axcoDomainColor : String -> AxisConfig
@@ -1794,8 +1795,8 @@ axcoLabelLimit =
     LabelLimit
 
 
-{-| Specify a default axis label overlap strategy for cases where lables cannot
-fit within the alotted space. For more details, see the
+{-| Specify a default axis label overlap strategy for cases where labels cannot
+fit within the allotted space. For more details, see the
 [Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
 -}
 axcoLabelOverlap : OverlapStrategy -> AxisConfig
@@ -1859,7 +1860,7 @@ axcoTickWidth =
     TickWidth
 
 
-{-| Specify a default axis tick label horizontal aligment. For more details, see the
+{-| Specify a default axis tick label horizontal alignment. For more details, see the
 [Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
 -}
 axcoTitleAlign : HAlign -> AxisConfig
@@ -2061,7 +2062,7 @@ biDivide =
 
 
 {-| Specify the desired range of bin values when binning a collection of values.
-The first and second parameters indicate the minumum and maximum range values
+The first and second parameters indicate the minimum and maximum range values
 respectively. For more details, see the
 [Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
 -}
@@ -2508,7 +2509,7 @@ the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate t
 format explicitly. However this can be useful if the filename extension does not
 indicate type (e.g. `.txt`). To customise the parsing of a file use one of the
 functions `parse`, `jsonProperty`, `topojsonFeature` or `topojsonMesh` in preference
-to their (depcrecated) type constructor eqivalents. For details see the
+to their (depcrecated) type constructor equivalents. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
 -}
 type Format
@@ -2524,7 +2525,7 @@ type Format
 is deprecated in favour of calling their equivalent geometry functions
 (`geoPoint`, `geoLine` etc.)_
 
-Specifies the type and content of geometry specifications for programatically
+Specifies the type and content of geometry specifications for programmatically
 creating GeoShapes. These can be mapped to the
 [GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
 where the pluralised type names refer to their `Multi` prefixed equivalent in the
@@ -2965,7 +2966,7 @@ type Padding
 {-| Type of position channel, `X` and `Y` represent horizontal and vertical axis
 dimensions on a plane and `X2` and `Y2` represent secondary axis dimensions where
 two scales are overlaid in the same space. Geographic positions represented by
-longitude and latiutude values are identified with `Longitude`, `Latitude` and
+longitude and latitude values are identified with `Longitude`, `Latitude` and
 their respective secondary equivalents. Such geographic position channels are
 subject to a map projection before being placed graphically.
 -}
@@ -3682,7 +3683,7 @@ axGrid =
     AxGrid
 
 
-{-| Specify the rotation angle in degrees of axis lables. For details see the
+{-| Specify the rotation angle in degrees of axis labels. For details see the
 [Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
 -}
 axLabelAngle : Float -> AxisProperty
@@ -4077,7 +4078,7 @@ coAxisBand =
     AxisBand
 
 
-{-| Configure the default background colour of visualizations. For details, see the
+{-| Configure the default background color of visualizations. For details, see the
 [Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
 -}
 coBackground : String -> ConfigurationProperty
@@ -4230,7 +4231,7 @@ coNamedStyle =
 The first parameter identifies the type of configuration, the second a list of previous
 configurations to which this one may be added.
 
-    configuration (Axis [ DomainWidth 4 ]) []
+    configuration (coAxis [ axcoDomainWidth 4 ]) []
 
 -}
 configuration : ConfigurationProperty -> List LabelledSpec -> List LabelledSpec
@@ -4245,9 +4246,9 @@ more details.
 
     config =
         configure
-            << configuration (Axis [ DomainWidth 1 ])
-            << configuration (View [ Stroke (Just "transparent") ])
-            << configuration (SelectionStyle [ ( Single, [ On "dblclick" ] ) ])
+            << configuration (coAxis [ axcoDomainWidth 1 ])
+            << configuration (coView [ vicoStroke Nothing ])
+            << configuration (coSelection [ ( Single, [ seOn "dblclick" ] ) ])
 
 -}
 configure : List LabelledSpec -> ( VLProperty, Spec )
@@ -4423,7 +4424,7 @@ cubeHelixLong =
 {-| Specify a custom projection type. Additional custom projections from d3 can
 be defined via the [Vega API](https://vega.github.io/vega/docs/projections/#register)
 and called from with this function where the parameter is the name of the D3
-projection to use (e.g. `customProjection winkel3`).
+projection to use (e.g. `customProjection "winkel3"`).
 -}
 customProjection : String -> Projection
 customProjection =
@@ -4443,7 +4444,7 @@ dAggregate =
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
-    dataColumn "Animal" (Strings [ "Cat", "Dog", "Mouse"]) []
+    dataColumn "Animal" (strs [ "Cat", "Dog", "Mouse"]) []
 
 -}
 dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
@@ -4473,7 +4474,7 @@ for details.
 The columns themselves are most easily generated with `dataColumn`
 
     data =
-        dataFromColumns [ Parse [ ( "Year", foDate "%Y" ) ] ]
+        dataFromColumns [ parse [ ( "Year", foDate "%Y" ) ] ]
             << dataColumn "Animal" (strs [ "Fish", "Dog", "Cat" ])
             << dataColumn "Age" (nums [ 28, 12, 6 ])
             << dataColumn "Year" (strs [ "2010", "2014", "2015" ])
@@ -4545,7 +4546,7 @@ if you are creating data inline (as opposed to reading from a file), adding data
 is more efficient and less error-prone.
 
     data =
-        dataFromRows [ Parse [ ( "Year", foDate "%Y" ) ] ]
+        dataFromRows [ parse [ ( "Year", foDate "%Y" ) ] ]
             << dataRow [ ( "Animal", str "Fish" ), ( "Age", num 28 ), ( "Year", str "2010" ) ]
             << dataRow [ ( "Animal", str "Dog" ), ( "Age", num 12 ), ( "Year", str "2014" ) ]
             << dataRow [ ( "Animal", str "Cat" ), ( "Age", num 6 ), ( "Year", str "2015" ) ]
@@ -4596,8 +4597,8 @@ dataFromSource sourceName fmts =
         )
 
 
-{-| Declare data source from a url. The url can be a local path on a web server
-or an external http(s) url. Used to create a data ( property, specification ) pair.
+{-| Declare data source from a url. The URL can be a local path on a web server
+or an external http(s) URL. Used to create a data ( property, specification ) pair.
 An optional list of field formatting instructions can be provided as the second
 parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
@@ -4605,7 +4606,7 @@ for details.
 
     enc = ...
     toVegaLite
-        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
+        [ dataFromUrl "data/weather.csv" [ parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
         , line []
         , enc []
         ]
@@ -4779,7 +4780,7 @@ doNums =
     DNumbers
 
 
-{-| Specify a scale domain based on a named ineractive selection. For full details see
+{-| Specify a scale domain based on a named interactive selection. For full details see
 the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
 -}
 doSelection : String -> ScaleDomain
@@ -4930,7 +4931,7 @@ to apply to each of those facets using `asSpec`.
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ fName "Origin", fMType Nominal ] ]
+        [ facet [ rowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -5176,7 +5177,7 @@ geoFeatureCollection geoms =
         ]
 
 
-{-| Specify line geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify line geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5185,7 +5186,7 @@ geoLine =
     GeoLine
 
 
-{-| Specify multi-line geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify multi-line geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `multi-line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5235,7 +5236,7 @@ geometry gType properties =
             ]
 
 
-{-| Specify point geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify point geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5244,7 +5245,7 @@ geoPoint =
     GeoPoint
 
 
-{-| Specify multi-point geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify multi-point geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `multi-point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5253,7 +5254,7 @@ geoPoints =
     GeoPoints
 
 
-{-| Specify polygon geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify polygon geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5262,7 +5263,7 @@ geoPolygon =
     GeoPolygon
 
 
-{-| Specify multi-polygon geometry for programatically creating GeoShapes. This is equivalent
+{-| Specify multi-polygon geometry for programmatically creating GeoShapes. This is equivalent
 to the [GeoJson geometry `multi-polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
 in the GeoJSON specification.
 -}
@@ -5402,7 +5403,7 @@ hTimeUnit =
 
 
 {-| Encode a hyperlink channel. The first parameter is a list of hyperlink channel
-properties that characterise the hyperlinking such as the destination url and cursor
+properties that characterise the hyperlinking such as the destination URL and cursor
 type. The second parameter is a list of any previous encoding channels to which
 this hyperlink channel should be added.
 
@@ -5529,7 +5530,7 @@ inPlaceholder =
     InPlaceholder
 
 
-{-| Specify the the minimum input element range slider increment. If undefined,
+{-| Specify the minimum input element range slider increment. If undefined,
 the step size will be automatically determined based on the min and max values.
 For details see the
 [Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
@@ -5622,7 +5623,7 @@ iWeek f =
 {-| Indicates a JSON file format from which a given property is to be extracted
 when it has some surrounding structure or meta-data. For example, specifying
 the property `values.features` is equivalent to retrieving `json.values.features`
-from the loaded JSON object.with a custom delimeter. For details, see the
+from the loaded JSON object with a custom delimeter. For details, see the
 [Vega-Lite JSON documentation](https://vega.github.io/vega-lite/docs/data.html#json).
 -}
 jsonProperty : String -> Format
@@ -6249,7 +6250,7 @@ maDy =
     MdY
 
 
-{-| Specify the default fill colour of a mark. For details see the
+{-| Specify the default fill color of a mark. For details see the
 [Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
 -}
 maFill : String -> MarkProperty
@@ -6257,7 +6258,7 @@ maFill =
     MFill
 
 
-{-| Specify whether or not a mark's color should be used as the fill colour
+{-| Specify whether or not a mark's color should be used as the fill color
 instead of stroke color. For details see the
 [Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
 -}
@@ -6398,7 +6399,7 @@ maSize =
     MSize
 
 
-{-| Specify the default stroke colour of a mark. For details see the
+{-| Specify the default stroke color of a mark. For details see the
 [Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
 -}
 maStroke : String -> MarkProperty
@@ -6810,7 +6811,7 @@ for details.
     enc = ...
     toVegaLite
         [ width 500
-        , padding (PEdges 20 10 5 15)
+        , padding (paEdges 20 10 5 15)
         , dataFromUrl "data/population.json" []
         , bar []
         , enc []
@@ -6831,7 +6832,7 @@ paEdges =
 
 
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
-postion channel. The type of aggregation is determined by the given operation
+position channel. The type of aggregation is determined by the given operation
 parameter. For details, see the
 [Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
 -}
@@ -6907,7 +6908,7 @@ This is often implicit when chaining a series of encodings using functional comp
 
       enc =
           encoding
-            << position X [ pName "Animal", pmType Ordinal ]
+            << position X [ pName "Animal", pMType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
 appearing, simply provide an empty list of axis properties to `pAxis` :
@@ -7250,7 +7251,7 @@ to apply to each of those fields using `asSpec`.
 
     spec = ...
     toVegaLite
-        [ repeat [ ColumnFields [ "Cat", "Dog", "Fish" ] ]
+        [ repeat [ columnFields [ "Cat", "Dog", "Fish" ] ]
         , specification (asSpec spec)
         ]
 
@@ -7272,7 +7273,7 @@ The first parameter identifies the type of resolution, the second a list of prev
 resolutions to which this one may be added.
 
     resolve
-        << resolution (RScale [ ( ChY, Independent ) ])
+        << resolution (reScale [ ( ChY, Independent ) ])
 
 -}
 resolution : Resolve -> List LabelledSpec -> List LabelledSpec
@@ -7289,7 +7290,7 @@ applies and the rule type.
     let
         res =
             resolve
-                << resolution (RLegend [ ( ChColor, Independent ) ])
+                << resolution (reLegend [ ( ChColor, Independent ) ])
     in
     toVegaLite
         [ dataFromUrl "data/movies.json" []
@@ -7528,7 +7529,7 @@ sacoUseUnaggregatedDomain =
 
 
 {-| Specify that when scaling, values outside the data domain are clamped to the
-minumum or maximum value. For details see the
+minimum or maximum value. For details see the
 [Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
 -}
 scClamp : Bool -> ScaleProperty
@@ -7848,7 +7849,7 @@ size markProps =
     (::) ( "size", List.concatMap markChannelProperty markProps |> JE.object )
 
 
-{-| Specify the fill colour of the interval selection mark (dragged recangular area).
+{-| Specify the fill color of the interval selection mark (dragged rectangular area).
 For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
@@ -7857,7 +7858,7 @@ smFill =
     SMFill
 
 
-{-| Specify the fill opacity of the interval selection mark (dragged recangular area)
+{-| Specify the fill opacity of the interval selection mark (dragged rectangular area)
 in the range [0, 1]. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
@@ -7866,7 +7867,7 @@ smFillOpacity =
     SMFillOpacity
 
 
-{-| Specify the stroke colour of the interval selection mark (dragged recangular area).
+{-| Specify the stroke color of the interval selection mark (dragged rectangular area).
 For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
@@ -7875,7 +7876,7 @@ smStroke =
     SMStroke
 
 
-{-| Specify the stroke opacity of the interval selection mark (dragged recangular
+{-| Specify the stroke opacity of the interval selection mark (dragged rectangular
 area) in the range [0, 1]. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
@@ -7884,7 +7885,7 @@ smStrokeOpacity =
     SMStrokeOpacity
 
 
-{-| Specify the stroke width of the interval selection mark (dragged recangular
+{-| Specify the stroke width of the interval selection mark (dragged rectangular
 area). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
@@ -7894,7 +7895,7 @@ smStrokeWidth =
 
 
 {-| Specify the stroke dash style of the interval selection mark (dragged
-recangular area). For details see the
+rectangular area). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
 smStrokeDash : List Float -> SelectionMarkProperty
@@ -7903,7 +7904,7 @@ smStrokeDash =
 
 
 {-| Specify the stroke dash offset of the interval selection mark (dragged
-recangular area). For details see the
+rectangular area). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
 -}
 smStrokeDashOffset : Float -> SelectionMarkProperty
@@ -7968,7 +7969,7 @@ soCustom =
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ fName "Origin", fMType Nominal ] ]
+        [ facet [ rowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -8088,7 +8089,7 @@ text tDefs =
 {-| Specify a text mark to be displayed at some point location. For details see
 the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/text.html).
 
-    textMark [ MFontSize 18 ]
+    textMark [ maFontSize 18 ]
 
 To keep the default style for the mark, just provide an empty list as the parameter.
 
@@ -8217,7 +8218,7 @@ ticoOrient =
 direct encoding binning, this transformation is named and so can be referred
 to in multiple encodings. The first parameter is the 'width' of each temporal bin,
 the second is the field to bin and the third is name to give the newly binned
-field. The final often implicit parameter is a list of previous transformations
+field. The final, often implicit, parameter is a list of previous transformations
 to which this is added. Note though that usually it is easer to apply the temporal
 binning directly as part of the encoding as this will automatically format the
 temporal axis. See the
