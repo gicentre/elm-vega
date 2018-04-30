@@ -872,7 +872,7 @@ layer4 =
 
         config =
             configure
-                << configuration (coScale [ SCBandPaddingInner 0, SCBandPaddingOuter 0 ])
+                << configuration (coScale [ sacoBandPaddingInner 0, sacoBandPaddingOuter 0 ])
                 << configuration (coText [ maBaseline AlignMiddle ])
     in
     toVegaLite [ des, dataFromUrl "data/cars.json" [], encPosition [], layer [ specRect, specText ], config [] ]

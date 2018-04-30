@@ -95,7 +95,8 @@ module VegaLite
           --, Resolve(RAxis,RLegend,RScale)
         , Resolve
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
-        , ScaleConfig(..)
+          --, ScaleConfig(SCBandPaddingInner, SCBandPaddingOuter, SCClamp, SCMaxBandSize, SCMaxFontSize, SCMaxOpacity, SCMaxSize, SCMaxStrokeWidth, SCMinBandSize, SCMinFontSize, SCMinOpacity, SCMinSize, SCMinStrokeWidth, SCPointPadding, SCRangeStep, SCRound, SCTextXRangeStep, SCUseUnaggregatedDomain)
+        , ScaleConfig
           --, ScaleDomain(DNumbers,DStrings ,DDateTimes ,DSelection,Unaggregated)
         , ScaleDomain(Unaggregated)
           --, ScaleNice(NMillisecond, NSecond, NMinute, NHour, NDay, NWeek, NMonth, NYear, NInterval,IsNice,NTickCount)
@@ -527,6 +528,24 @@ module VegaLite
         , rowBy
         , rowFields
         , rule
+        , sacoBandPaddingInner
+        , sacoBandPaddingOuter
+        , sacoClamp
+        , sacoMaxBandSize
+        , sacoMaxFontSize
+        , sacoMaxOpacity
+        , sacoMaxSize
+        , sacoMaxStrokeWidth
+        , sacoMinBandSize
+        , sacoMinFontSize
+        , sacoMinOpacity
+        , sacoMinSize
+        , sacoMinStrokeWidth
+        , sacoPointPadding
+        , sacoRangeStep
+        , sacoRound
+        , sacoTextXRangeStep
+        , sacoUseUnaggregatedDomain
         , scClamp
         , scDomain
         , scInterpolate
@@ -1384,7 +1403,24 @@ to the data and transform options described above.
 
 ## Scale Configuration Options
 
-@docs ScaleConfig
+@docs sacoBandPaddingInner
+@docs sacoBandPaddingOuter
+@docs sacoClamp
+@docs sacoMaxBandSize
+@docs sacoMinBandSize
+@docs sacoMaxFontSize
+@docs sacoMinFontSize
+@docs sacoMaxOpacity
+@docs sacoMinOpacity
+@docs sacoMaxSize
+@docs sacoMinSize
+@docs sacoMaxStrokeWidth
+@docs sacoMinStrokeWidth
+@docs sacoPointPadding
+@docs sacoRangeStep
+@docs sacoRound
+@docs sacoTextXRangeStep
+@docs sacoUseUnaggregatedDomain
 
 
 ## Scale Range Configuration Options
@@ -1469,6 +1505,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs LegendValues
 @docs ProjectionProperty
 @docs ScaleProperty
+@docs ScaleConfig
 @docs RangeConfig
 @docs SelectionMarkProperty
 
@@ -3071,9 +3108,14 @@ type Scale
     | ScBinOrdinal
 
 
-{-| Scale configuration property. These are used to configure all scales.
+{-| _Note: specifying scale configuration properties with type constructors
+(`SCBandPaddingInner`, `SCClamp`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`socoBandPaddingInner`,`sacoClamp`, etc.)_
+
+Scale configuration property. These are used to configure all scales.
 For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+
 -}
 type ScaleConfig
     = SCBandPaddingInner Float
@@ -7263,6 +7305,167 @@ To keep the default style for the mark, just provide an empty list as the parame
 rule : List MarkProperty -> ( VLProperty, Spec )
 rule =
     mark Rule
+
+
+{-| Specify the default inner padding for x and y band-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoBandPaddingInner : Float -> ScaleConfig
+sacoBandPaddingInner =
+    SCBandPaddingInner
+
+
+{-| Specify the default outer padding for x and y band-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoBandPaddingOuter : Float -> ScaleConfig
+sacoBandPaddingOuter =
+    SCBandPaddingOuter
+
+
+{-| Specify whether or not by default values that exceed the data domain are
+clamped to the min/max range value. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoClamp : Bool -> ScaleConfig
+sacoClamp =
+    SCClamp
+
+
+{-| Specify the default maximum value for mapping quantitative fields to a bar's
+size/bandSize. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxBandSize : Float -> ScaleConfig
+sacoMaxBandSize =
+    SCMaxBandSize
+
+
+{-| Specify the default maximum value for mapping a quantitative field to a text
+mark's size. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxFontSize : Float -> ScaleConfig
+sacoMaxFontSize =
+    SCMaxFontSize
+
+
+{-| Specify the default maximum opacity (in the range [0, 1]) for mapping a field
+to opacity. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxOpacity : Float -> ScaleConfig
+sacoMaxOpacity =
+    SCMaxOpacity
+
+
+{-| Specify the default maximum size for point-based scales. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxSize : Float -> ScaleConfig
+sacoMaxSize =
+    SCMaxSize
+
+
+{-| Specify the default maximum stroke width for rule, line and trail marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxStrokeWidth : Float -> ScaleConfig
+sacoMaxStrokeWidth =
+    SCMaxStrokeWidth
+
+
+{-| Specify the default minimum value for mapping quantitative fields to a bar's
+size/bandSize. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinBandSize : Float -> ScaleConfig
+sacoMinBandSize =
+    SCMinBandSize
+
+
+{-| Specify the default minimum value for mapping a quantitative field to a text
+mark's size. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinFontSize : Float -> ScaleConfig
+sacoMinFontSize =
+    SCMinFontSize
+
+
+{-| Specify the default minimum opacity (in the range [0, 1]) for mapping a field
+to opacity. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinOpacity : Float -> ScaleConfig
+sacoMinOpacity =
+    SCMinOpacity
+
+
+{-| Specify the default minimum size for point-based scales (when not forced to
+start at zero). For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinSize : Float -> ScaleConfig
+sacoMinSize =
+    SCMinSize
+
+
+{-| Specify the default minimum stroke width for rule, line and trail marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinStrokeWidth : Float -> ScaleConfig
+sacoMinStrokeWidth =
+    SCMinStrokeWidth
+
+
+{-| Specify the default padding for point-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoPointPadding : Float -> ScaleConfig
+sacoPointPadding =
+    SCPointPadding
+
+
+{-| Specify the default range step for band and point scales when the mark is
+not text. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoRangeStep : Maybe Float -> ScaleConfig
+sacoRangeStep =
+    SCRangeStep
+
+
+{-| Specify whether or not by default numeric values are rounded to integers
+when scaling. Useful for snapping to the pixel grid. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoRound : Bool -> ScaleConfig
+sacoRound =
+    SCRound
+
+
+{-| Specify the default range step for x band and point scales of text marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoTextXRangeStep : Float -> ScaleConfig
+sacoTextXRangeStep =
+    SCTextXRangeStep
+
+
+{-| Specify whether or not to use the source data range before aggregation.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoUseUnaggregatedDomain : Bool -> ScaleConfig
+sacoUseUnaggregatedDomain =
+    SCUseUnaggregatedDomain
 
 
 {-| Specify that when scaling, values outside the data domain are clamped to the
