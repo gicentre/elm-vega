@@ -15,7 +15,7 @@ markCondition1 =
 
         config =
             configure
-                << configuration (RemoveInvalid False)
+                << configuration (coRemoveInvalid False)
 
         enc =
             encoding

@@ -28,7 +28,7 @@ defaultSize2 : Spec
 defaultSize2 =
     toVegaLite
         [ description "Default map size with view width and height specified in config."
-        , configure <| configuration (View [ ViewWidth 500, ViewHeight 300 ]) <| []
+        , configure <| configuration (coView [ vicoWidth 500, vicoHeight 300 ]) <| []
         , projection [ prType AlbersUsa ]
         , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , geoshape []
@@ -41,7 +41,7 @@ choropleth1 =
     toVegaLite
         [ width 900
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
         , geoshape [ maStrokeOpacity 0 ]
         , encoding <| color [ mName "id", mMType Nominal ] []
@@ -79,7 +79,7 @@ choropleth2 =
     toVegaLite
         [ width 1200
         , height 700
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , layer [ polySpec, labelSpec ]
         ]
 
@@ -110,7 +110,7 @@ tubeLines2 =
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
         , geoshape [ maFilled False, maStrokeWidth 2 ]
         , enc []
@@ -161,7 +161,7 @@ tubeLines3 =
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , layer [ polySpec, labelSpec, routeSpec ]
         ]
 
@@ -258,7 +258,7 @@ mapComp2 =
             asSpec [ width 300, height 300, projection [ prType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| []
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| []
         , hConcat [ globe, globe, globe ]
         ]
 
@@ -289,7 +289,7 @@ mapComp3 =
             asSpec [ layer [ graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
 
 
 mapComp4 : Spec
@@ -327,7 +327,7 @@ mapComp4 =
             asSpec [ layer [ seaSpec, graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec 0, rotatedSpec -40 ] ]
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| [], hConcat [ rotatedSpec 0, rotatedSpec -40 ] ]
 
 
 dotMap1 : Spec
@@ -361,8 +361,8 @@ scribbleMap1 =
 
         config =
             configure
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W300, TFontSize 28 ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W300, ticoFontSize 28 ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         trans =
             transform
@@ -399,8 +399,8 @@ scribbleMap2 =
 
         config =
             configure
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W300, TFontSize 28 ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W300, ticoFontSize 28 ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         trans =
             transform

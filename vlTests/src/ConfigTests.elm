@@ -72,35 +72,35 @@ defaultCfg =
 darkCfg : Spec
 darkCfg =
     configure
-        << configuration (Background "black")
-        << configuration (TitleStyle [ TFont "Roboto", TColor "#fff" ])
-        << configuration (Axis [ DomainColor "yellow", GridColor "rgb(255,255,200)", GridOpacity 0.2, LabelColor "#fcf", TickColor "white", TitleColor "rgb(200,255,200)", LabelFont "Roboto", TitleFont "Roboto" ])
-        << configuration (Legend [ FillColor "#333", StrokeColor "#444", LeTitleColor "rgb(200,200,200)", LeLabelColor "white", SymbolColor "red", GradientStrokeColor "yellow", LeLabelFont "Roboto", LeTitleFont "Roboto" ])
+        << configuration (coBackground "black")
+        << configuration (coTitle [ ticoFont "Roboto", ticoColor "#fff" ])
+        << configuration (coAxis [ axcoDomainColor "yellow", axcoGridColor "rgb(255,255,200)", axcoGridOpacity 0.2, axcoLabelColor "#fcf", axcoTickColor "white", axcoTitleColor "rgb(200,255,200)", axcoLabelFont "Roboto", axcoTitleFont "Roboto" ])
+        << configuration (coLegend [ lecoFillColor "#333", lecoStrokeColor "#444", lecoTitleColor "rgb(200,200,200)", lecoLabelColor "white", lecoSymbolColor "red", lecoGradientStrokeColor "yellow", lecoLabelFont "Roboto", lecoTitleFont "Roboto" ])
         |> compositeVis
 
 
 markCfg1 : Spec
 markCfg1 =
     configure
-        << configuration (MarkStyle [ maFilled False ])
+        << configuration (coMark [ maFilled False ])
         |> compositeVis
 
 
 markCfg2 : Spec
 markCfg2 =
     configure
-        << configuration (MarkStyle [ maFilled True, maFill "black", maOpacity 1 ])
-        << configuration (BarStyle [ maFilled True ])
-        << configuration (AreaStyle [ maFilled False ])
-        << configuration (PointStyle [ maFilled True, maStroke "white", maStrokeOpacity 0.2 ])
+        << configuration (coMark [ maFilled True, maFill "black", maOpacity 1 ])
+        << configuration (coBar [ maFilled True ])
+        << configuration (coArea [ maFilled False ])
+        << configuration (coPoint [ maFilled True, maStroke "white", maStrokeOpacity 0.2 ])
         |> compositeVis
 
 
 paddingCfg : Spec
 paddingCfg =
     configure
-        << configuration (Autosize [ AFit ])
-        << configuration (Padding (paEdges 90 60 30 0))
+        << configuration (coAutosize [ AFit ])
+        << configuration (coPadding (paEdges 90 60 30 0))
         |> singleVis
 
 

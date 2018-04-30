@@ -38,7 +38,7 @@ personGrid =
     let
         config =
             configure
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         data =
             dataFromColumns []
@@ -102,7 +102,7 @@ livestock =
     let
         config =
             configure
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         data =
             dataFromRows []

@@ -72,11 +72,11 @@ configExample =
     let
         config =
             configure
-                << configuration (Background "rgb(251,247,238)")
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W600, TFontSize 18 ])
-                << configuration (View [ ViewWidth 500, ViewHeight 300, Stroke Nothing ])
-                << configuration (Autosize [ AFit ])
-                << configuration (Projection [ prType Orthographic, prRotate 0 0 0 ])
+                << configuration (coBackground "rgb(251,247,238)")
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W600, ticoFontSize 18 ])
+                << configuration (coView [ vicoWidth 500, vicoHeight 300, vicoStroke Nothing ])
+                << configuration (coAutosize [ AFit ])
+                << configuration (coProjection [ prType Orthographic, prRotate 0 0 0 ])
 
         globeSpec =
             asSpec

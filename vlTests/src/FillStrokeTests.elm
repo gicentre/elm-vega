@@ -6,9 +6,6 @@ import Json.Encode
 import VegaLite exposing (..)
 
 
--- defChart : Spec
-
-
 encChart : (List a -> List LabelledSpec) -> Spec
 encChart extraEnc =
     let
