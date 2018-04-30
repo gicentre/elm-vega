@@ -101,7 +101,7 @@ basic5 =
         config =
             configure
                 << configuration (coAxis [ axcoDomainWidth 1 ])
-                << configuration (coView [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
     in
     toVegaLite [ des, dataFromUrl "data/population.json" [], bar [], trans [], enc [], config [] ]
 
@@ -363,7 +363,7 @@ basic20 =
         config =
             configure
                 << configuration (coRange [ racoHeatmap "greenblue" ])
-                << configuration (coView [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
     in
     toVegaLite
         [ des
@@ -1441,7 +1441,7 @@ layer18 =
             asSpec [ transTextMax [], textMark [ maAlign AlignLeft, maBaseline AlignBottom, maDx 3, maDy 1 ], encTextMax [] ]
 
         config =
-            configure << configuration (coView [ Stroke Nothing ])
+            configure << configuration (coView [ vicoStroke Nothing ])
     in
     toVegaLite
         [ des
@@ -1858,7 +1858,7 @@ geo9 =
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (coView [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , layer [ polySpec, labelSpec, routeSpec ]
         ]
 

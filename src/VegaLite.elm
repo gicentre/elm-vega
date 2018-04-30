@@ -16,6 +16,7 @@ module VegaLite
           --CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
         , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
+          --, ClipRect(LTRB, NoClip)
         , ClipRect(NoClip)
           --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , ConfigurationProperty
@@ -125,7 +126,8 @@ module VegaLite
         , TitleConfig
         , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
-        , ViewConfig(..)
+          --, ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
+        , ViewConfig
         , aggregate
         , and
         , area
@@ -226,7 +228,6 @@ module VegaLite
         , coCountTitle
         , coFieldTitle
         , coGeoshape
-          --, ClipRect(LTRB, NoClip)
         , coLegend
         , coLine
         , coMark
@@ -628,6 +629,16 @@ module VegaLite
         , transform
         , utc
         , vConcat
+        , vicoClip
+        , vicoFill
+        , vicoFillOpacity
+        , vicoHeight
+        , vicoStroke
+        , vicoStrokeDash
+        , vicoStrokeDashOffset
+        , vicoStrokeOpacity
+        , vicoStrokeWidth
+        , vicoWidth
         , width
         )
 
@@ -1457,8 +1468,21 @@ to the data and transform options described above.
 @docs ticoOffset
 @docs ticoOrient
 
+
+## View Configuration Options
+
+@docs vicoWidth
+@docs vicoHeight
+@docs vicoClip
+@docs vicoFill
+@docs vicoFillOpacity
+@docs vicoStroke
+@docs vicoStrokeOpacity
+@docs vicoStrokeWidth
+@docs vicoStrokeDash
+@docs vicoStrokeDashOffset
+
 @docs APosition
-@docs ViewConfig
 
 @docs FieldTitleProperty
 
@@ -1533,6 +1557,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs RangeConfig
 @docs SelectionMarkProperty
 @docs TitleConfig
+@docs ViewConfig
 
 @docs DataValue
 @docs DataValues
@@ -3452,10 +3477,15 @@ type VAlign
     | AlignBottom
 
 
-{-| View configuration property. These are used to configure the style of a single
+{-| _Note: specifying view configuration properties with type constructors
+(`Clip`, `ViewWidth`, `ViewHeight` etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`vicoClip`,`vicoWidth`, `vicoHeight` etc.)_
+
+View configuration property. These are used to configure the style of a single
 view within a visualization such as its size and default fill and stroke colors.
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+
 -}
 type ViewConfig
     = ViewWidth Float
@@ -8472,6 +8502,95 @@ utc tu =
 vConcat : List Spec -> ( VLProperty, Spec )
 vConcat specs =
     ( VLVConcat, JE.list specs )
+
+
+{-| Specify whether or not by default single views should be clipped.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoClip : Bool -> ViewConfig
+vicoClip =
+    Clip
+
+
+{-| Specify the default fill color for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoFill : Maybe String -> ViewConfig
+vicoFill =
+    Fill
+
+
+{-| Specify the default fill opacity for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoFillOpacity : Float -> ViewConfig
+vicoFillOpacity =
+    FillOpacity
+
+
+{-| Specify the default height of single views (e.g. each view in a trellis plot).
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoHeight : Float -> ViewConfig
+vicoHeight =
+    ViewWidth
+
+
+{-| Specify the default stroke color for single views. If `Nothing` is provided,
+no strokes are drawn around the view. For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStroke : Maybe String -> ViewConfig
+vicoStroke =
+    Stroke
+
+
+{-| Specify the default stroke dash style for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeDash : List Float -> ViewConfig
+vicoStrokeDash =
+    StrokeDash
+
+
+{-| Specify the default stroke dash offset for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeDashOffset : Float -> ViewConfig
+vicoStrokeDashOffset =
+    StrokeDashOffset
+
+
+{-| Specify the default stroke opacity for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeOpacity : Float -> ViewConfig
+vicoStrokeOpacity =
+    StrokeOpacity
+
+
+{-| Specify the default stroke width of single views. For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeWidth : Float -> ViewConfig
+vicoStrokeWidth =
+    StrokeWidth
+
+
+{-| Specify the default width of single views (e.g. each view in a trellis plot).
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoWidth : Float -> ViewConfig
+vicoWidth =
+    ViewWidth
 
 
 {-| Override the default width of the visualization. If not specified the width
