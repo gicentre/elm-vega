@@ -121,7 +121,8 @@ module VegaLite
           --, TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
         , TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
-        , TitleConfig(..)
+          --, TitleConfig(TAnchor, TAngle, TBaseline, TColor, TFont, TFontSize, TFontWeight, TLimit, TOffset, TOrient)
+        , TitleConfig
         , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
         , ViewConfig(..)
@@ -607,6 +608,16 @@ module VegaLite
         , text
         , textMark
         , tick
+        , ticoAnchor
+        , ticoAngle
+        , ticoBaseline
+        , ticoColor
+        , ticoFont
+        , ticoFontSize
+        , ticoFontWeight
+        , ticoLimit
+        , ticoOffset
+        , ticoOrient
         , timeUnitAs
         , title
         , toVegaLite
@@ -1432,7 +1443,20 @@ to the data and transform options described above.
 @docs racoRamp
 @docs racoSymbol
 
-@docs TitleConfig
+
+## Title Configuration Options
+
+@docs ticoAnchor
+@docs ticoAngle
+@docs ticoBaseline
+@docs ticoColor
+@docs ticoFont
+@docs ticoFontSize
+@docs ticoFontWeight
+@docs ticoLimit
+@docs ticoOffset
+@docs ticoOrient
+
 @docs APosition
 @docs ViewConfig
 
@@ -1508,6 +1532,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs ScaleConfig
 @docs RangeConfig
 @docs SelectionMarkProperty
+@docs TitleConfig
 
 @docs DataValue
 @docs DataValues
@@ -3397,10 +3422,14 @@ type TimeUnit
     | Utc TimeUnit
 
 
-{-| Title configuration properties. These are used to configure the default style
-of all titles within a visualization.
-For further details see the
+{-| _Note: specifying title configuration properties with type constructors
+(`TAnchor`, `TAngle`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`ticoAnchor`,`ticoAngle`, etc.)_
+
+Title configuration properties. These are used to configure the default style
+of all titles within a visualization. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+
 -}
 type TitleConfig
     = TAnchor APosition
@@ -8062,6 +8091,96 @@ To keep the default style for the mark, just provide an empty list as the parame
 tick : List MarkProperty -> ( VLProperty, Spec )
 tick =
     mark Tick
+
+
+{-| Specify the default anchor position when placing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoAnchor : APosition -> TitleConfig
+ticoAnchor =
+    TAnchor
+
+
+{-| Specify the default angle when orientating titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoAngle : Float -> TitleConfig
+ticoAngle =
+    TAngle
+
+
+{-| Specify the default vertical alignment when placing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoBaseline : VAlign -> TitleConfig
+ticoBaseline =
+    TBaseline
+
+
+{-| Specify the default color when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoColor : String -> TitleConfig
+ticoColor =
+    TColor
+
+
+{-| Specify the default font when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFont : String -> TitleConfig
+ticoFont =
+    TFont
+
+
+{-| Specify the default font size when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFontSize : Float -> TitleConfig
+ticoFontSize =
+    TFontSize
+
+
+{-| Specify the default font weight when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFontWeight : FontWeight -> TitleConfig
+ticoFontWeight =
+    TFontWeight
+
+
+{-| Specify the default maximim length in pixel units when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoLimit : Float -> TitleConfig
+ticoLimit =
+    TLimit
+
+
+{-| Specify the default offset in pixel units of titles relative to the chart body.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoOffset : Float -> TitleConfig
+ticoOffset =
+    TOffset
+
+
+{-| Specify the default placement of titles relative to the chart body.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoOrient : Side -> TitleConfig
+ticoOrient =
+    TOrient
 
 
 {-| Creates a new data field based on the given temporal binning. Unlike the
