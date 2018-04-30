@@ -87,7 +87,8 @@ module VegaLite
         , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
           --, ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
         , ProjectionProperty
-        , RangeConfig(..)
+          --, RangeConfig(RCategory, RDiverging, RHeatmap, ROrdinal, RRamp, RSymbol)
+        , RangeConfig
           --, RepeatFields(RowFields,ColumnFields)
         , RepeatFields
         , Resolution(Independent, Shared)
@@ -508,6 +509,12 @@ module VegaLite
         , raName
         , raNums
         , raStrs
+        , racoCategory
+        , racoDiverging
+        , racoHeatmap
+        , racoOrdinal
+        , racoRamp
+        , racoSymbol
         , reAxis
         , reLegend
         , reScale
@@ -1374,11 +1381,25 @@ to the data and transform options described above.
 @docs lecoTitleLimit
 @docs lecoTitlePadding
 
+
+## Scale Configuration Options
+
 @docs ScaleConfig
+
+
+## Scale Range Configuration Options
+
+@docs racoCategory
+@docs racoDiverging
+@docs racoHeatmap
+@docs racoOrdinal
+@docs racoRamp
+@docs racoSymbol
+
 @docs TitleConfig
 @docs APosition
 @docs ViewConfig
-@docs RangeConfig
+
 @docs FieldTitleProperty
 
 
@@ -1448,6 +1469,7 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs LegendValues
 @docs ProjectionProperty
 @docs ScaleProperty
+@docs RangeConfig
 @docs SelectionMarkProperty
 
 @docs DataValue
@@ -2944,9 +2966,14 @@ type ProjectionProperty
     | PTilt Float
 
 
-{-| Properties for customising the colors of a range. The parameter should be a
+{-| _Note: specifying range configuration properties with type constructors
+(`RCategory`, `RDiverging`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`racoCategory`,`racoDiverging`, etc.)_
+
+Properties for customising the colors of a range. The parameter should be a
 named color scheme such as `accent` or `purpleorange-11`. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+
 -}
 type RangeConfig
     = RCategory String
@@ -7023,6 +7050,54 @@ with a position channel. For details, see the
 pTimeUnit : TimeUnit -> PositionChannel
 pTimeUnit =
     PTimeUnit
+
+
+{-| Specify the default color scheme for categorical ranges. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoCategory : String -> RangeConfig
+racoCategory =
+    RCategory
+
+
+{-| Specify the default diverging color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoDiverging : String -> RangeConfig
+racoDiverging =
+    RDiverging
+
+
+{-| Specify the default 'heatmap' color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoHeatmap : String -> RangeConfig
+racoHeatmap =
+    RHeatmap
+
+
+{-| Specify the default ordinal color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoOrdinal : String -> RangeConfig
+racoOrdinal =
+    ROrdinal
+
+
+{-| Specify the default ramp (contnuous) color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoRamp : String -> RangeConfig
+racoRamp =
+    RRamp
+
+
+{-| Specify the default color scheme symbols. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoSymbol : String -> RangeConfig
+racoSymbol =
+    RSymbol
 
 
 {-| Specify the name of a pre-defined scale range (e.g. `symbol` or `diverging`).

@@ -362,7 +362,7 @@ basic20 =
 
         config =
             configure
-                << configuration (coRange [ RHeatmap "greenblue" ])
+                << configuration (coRange [ racoHeatmap "greenblue" ])
                 << configuration (coView [ Stroke Nothing ])
     in
     toVegaLite
@@ -2193,8 +2193,7 @@ interactive9 =
                     ]
 
         config =
-            configure
-                << configuration (coRange [ RHeatmap "greenblue" ])
+            configure << configuration (coRange [ racoHeatmap "greenblue" ])
 
         res =
             resolve
