@@ -8,9 +8,9 @@ myFirstVis : Spec
 myFirstVis =
     toVegaLite
         [ title "Hello, World!"
-        , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
-        , mark Circle []
-        , encoding <| position X [ PName "x", PmType Quantitative ] []
+        , dataFromColumns [] <| dataColumn "x" (nums [ 10, 20, 30 ]) []
+        , circle []
+        , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]
 
 
@@ -19,12 +19,12 @@ mySecondVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Circle []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , circle []
         , enc []
         ]
 
@@ -34,12 +34,12 @@ myOtherVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PAggregate Average, PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pAggregate Average, pMType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , bar []
         , enc []
         ]
 

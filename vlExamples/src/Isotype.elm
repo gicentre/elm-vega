@@ -38,11 +38,11 @@ personGrid =
     let
         config =
             configure
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         data =
             dataFromColumns []
-                << dataColumn "id" (Numbers <| List.map toFloat (List.range 1 100))
+                << dataColumn "id" (nums <| List.map toFloat (List.range 1 100))
 
         trans =
             transform
@@ -55,17 +55,26 @@ personGrid =
 
         enc =
             encoding
-                << position X [ PName "col", PmType Ordinal, PAxis [] ]
-                << position Y [ PName "row", PmType Ordinal, PAxis [] ]
-                << shape [ MPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
+                << position X [ pName "col", pMType Ordinal, pAxis [] ]
+                << position Y [ pName "row", pMType Ordinal, pAxis [] ]
+                << shape [ mPath <| Maybe.withDefault "circle" <| Dict.get "person" isotypes ]
                 << color
-                    [ MSelectionCondition (SelectionName "highlight")
-                        [ MString "rgb(194,81,64)" ]
-                        [ MString "rgb(167,165,156)" ]
+                    [ mSelectionCondition (selectionName "highlight")
+                        [ mStr "rgb(194,81,64)" ]
+                        [ mStr "rgb(167,165,156)" ]
                     ]
-                << size [ MNumber 90 ]
+                << size [ mNum 90 ]
     in
-    toVegaLite [ config [], width 400, height 400, data [], trans [], mark Point [ MFilled True ], enc [], sel [] ]
+    toVegaLite
+        [ config []
+        , width 400
+        , height 400
+        , data []
+        , trans []
+        , point [ maFilled True ]
+        , enc []
+        , sel []
+        ]
 
 
 toRows : String -> List ( String, Int ) -> List DataRow -> List DataRow
@@ -73,7 +82,7 @@ toRows country animalFreqs =
     let
         toRow animal n =
             dataRow
-                [ ( "country", Str country ), ( "animal", Str animal ), ( "col", Number <| toFloat n ) ]
+                [ ( "country", str country ), ( "animal", str animal ), ( "col", num <| toFloat n ) ]
 
         fToCol ( animal, f ) =
             List.foldl (\n -> toRow animal n) [] (List.range 1 f)
@@ -93,7 +102,7 @@ livestock =
     let
         config =
             configure
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         data =
             dataFromRows []
@@ -102,26 +111,26 @@ livestock =
 
         enc =
             encoding
-                << position X [ PName "col", PmType Ordinal, PAxis [] ]
-                << position Y [ PName "animal", PmType Ordinal, PAxis [] ]
-                << row [ FName "country", FmType Nominal, FHeader [ HTitle "" ] ]
+                << position X [ pName "col", pMType Ordinal, pAxis [] ]
+                << position Y [ pName "animal", pMType Ordinal, pAxis [] ]
+                << row [ fName "country", fMType Nominal, fHeader [ hdTitle "" ] ]
                 << shape
-                    [ MName "animal"
-                    , MmType Nominal
-                    , MScale <|
+                    [ mName "animal"
+                    , mMType Nominal
+                    , mScale <|
                         categoricalDomainMap
                             [ ( "person", Dict.get "person" isotypes |> Maybe.withDefault "circle" )
                             , ( "cattle", Dict.get "cow" isotypes |> Maybe.withDefault "circle" )
                             , ( "pigs", Dict.get "pig" isotypes |> Maybe.withDefault "circle" )
                             , ( "sheep", Dict.get "sheep" isotypes |> Maybe.withDefault "circle" )
                             ]
-                    , MLegend []
+                    , mLegend []
                     ]
                 << color
-                    [ MName "animal"
-                    , MmType Nominal
-                    , MLegend []
-                    , MScale <|
+                    [ mName "animal"
+                    , mMType Nominal
+                    , mLegend []
+                    , mScale <|
                         categoricalDomainMap
                             [ ( "person", "rgb(162,160,152)" )
                             , ( "cattle", "rgb(194,81,64)" )
@@ -129,10 +138,10 @@ livestock =
                             , ( "sheep", "rgb(91,131,149)" )
                             ]
                     ]
-                << opacity [ MNumber 1 ]
-                << size [ MNumber 200 ]
+                << opacity [ mNum 1 ]
+                << size [ mNum 200 ]
     in
-    toVegaLite [ config [], width 800, height 200, data [], mark Point [ MFilled True ], enc [] ]
+    toVegaLite [ config [], width 800, height 200, data [], point [ maFilled True ], enc [] ]
 
 
 

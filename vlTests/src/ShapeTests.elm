@@ -11,14 +11,14 @@ chart des enc =
         , dataFromUrl "data/cars.json" []
         , (transform
             << calculateAs "year(datum.Year)" "YearOfManufacture"
-            << filter (FExpr "datum.YearOfManufacture == 1970")
+            << filter (fiExpr "datum.YearOfManufacture == 1970")
           )
             []
-        , mark Point [ MFilled True ]
+        , point [ maFilled True ]
         , (encoding
-            << position X [ PName "Horsepower", PmType Quantitative ]
-            << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-            << opacity [ MNumber 0.6 ]
+            << position X [ pName "Horsepower", pMType Quantitative ]
+            << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+            << opacity [ mNum 0.6 ]
             << enc
           )
             []
@@ -53,67 +53,67 @@ cross =
 scatter1 : Spec
 scatter1 =
     chart "Default nominal shapes."
-        (shape [ MName "Origin", MmType Nominal ])
+        (shape [ mName "Origin", mMType Nominal ])
 
 
 scatter2 : Spec
 scatter2 =
     chart "Default ordinal shapes."
-        (shape [ MName "Cylinders", MmType Ordinal ])
+        (shape [ mName "Cylinders", mMType Ordinal ])
 
 
 scatter3 : Spec
 scatter3 =
     chart "Enlarged shapes (but legend shapes should remain same size)"
-        (shape [ MName "Origin", MmType Nominal ]
-            << size [ MNumber 200 ]
+        (shape [ mName "Origin", mMType Nominal ]
+            << size [ mNum 200 ]
         )
 
 
 scatter4 : Spec
 scatter4 =
     chart "Reduced shapes (but legend shapes should remain same size)"
-        (shape [ MName "Origin", MmType Nominal ]
-            << size [ MNumber 20 ]
+        (shape [ mName "Origin", mMType Nominal ]
+            << size [ mNum 20 ]
         )
 
 
 scatter5 : Spec
 scatter5 =
     chart "Fixed shape, sized by number of cylinder category"
-        (size [ MName "Cylinders", MmType Ordinal ])
+        (size [ mName "Cylinders", mMType Ordinal ])
 
 
 scatter6 : Spec
 scatter6 =
     chart "Sized by number of cylinders, shape by origin"
-        (shape [ MName "Origin", MmType Nominal ]
-            << size [ MName "Cylinders", MmType Ordinal ]
+        (shape [ mName "Origin", mMType Nominal ]
+            << size [ mName "Cylinders", mMType Ordinal ]
         )
 
 
 scatter7 : Spec
 scatter7 =
     chart "Sized and shaped by number of cylinders (should only have a single set of legend items)"
-        (shape [ MName "Cylinders", MmType Ordinal ]
-            << size [ MName "Cylinders", MmType Ordinal ]
+        (shape [ mName "Cylinders", mMType Ordinal ]
+            << size [ mName "Cylinders", mMType Ordinal ]
         )
 
 
 scatter8 : Spec
 scatter8 =
     chart "Sized, shaped and coloured by number of cylinders (should only have a single set of legend items)"
-        (shape [ MName "Cylinders", MmType Ordinal ]
-            << size [ MName "Cylinders", MmType Ordinal ]
-            << color [ MName "Cylinders", MmType Ordinal ]
+        (shape [ mName "Cylinders", mMType Ordinal ]
+            << size [ mName "Cylinders", mMType Ordinal ]
+            << color [ mName "Cylinders", mMType Ordinal ]
         )
 
 
 scatter9 : Spec
 scatter9 =
     chart "Custom-shaped and coloured by origin (should only have a single set of legend items)"
-        (shape [ MName "Origin", MmType Nominal ]
-            << color [ MName "Origin", MmType Nominal ]
+        (shape [ mName "Origin", mMType Nominal ]
+            << color [ mName "Origin", mMType Nominal ]
         )
 
 
@@ -121,47 +121,47 @@ scatter10 : Spec
 scatter10 =
     chart "Custom-shaped and coloured by origin (should only have a single set of legend items)"
         (shape
-            [ MName "Origin"
-            , MmType Nominal
-            , MScale <|
+            [ mName "Origin"
+            , mMType Nominal
+            , mScale <|
                 categoricalDomainMap
                     [ ( "Europe", square )
                     , ( "Japan", cross )
                     , ( "USA", tri )
                     ]
             ]
-            << color [ MName "Origin", MmType Nominal ]
+            << color [ mName "Origin", mMType Nominal ]
         )
 
 
 scatter11 : Spec
 scatter11 =
     chart "Sized, shaped and coloured by number of cylinders (should have two sets of legend items)"
-        (shape [ MName "Cylinders", MmType Ordinal ]
-            << size [ MName "Cylinders", MmType Ordinal ]
-            << color [ MName "Origin", MmType Nominal ]
+        (shape [ mName "Cylinders", mMType Ordinal ]
+            << size [ mName "Cylinders", mMType Ordinal ]
+            << color [ mName "Origin", mMType Nominal ]
         )
 
 
 scatter12 : Spec
 scatter12 =
     chart "Custom nominal shape with unit area."
-        (shape [ MPath unitSquare ])
+        (shape [ mPath unitSquare ])
 
 
 scatter13 : Spec
 scatter13 =
     chart "Custom nominal shape with unit area sized by Cylinders."
-        (shape [ MPath unitSquare ]
-            << size [ MName "Cylinders", MmType Ordinal ]
+        (shape [ mPath unitSquare ]
+            << size [ mName "Cylinders", mMType Ordinal ]
         )
 
 
 scatter14 : Spec
 scatter14 =
     chart "Custom nominal shape with area of 10x10 pixel units."
-        (shape [ MPath largeSquare ]
-            << color [ MName "Origin", MmType Nominal ]
+        (shape [ mPath largeSquare ]
+            << color [ mName "Origin", mMType Nominal ]
         )
 
 
@@ -169,9 +169,9 @@ scatter15 : Spec
 scatter15 =
     chart "Custom shape sets encoding origin."
         (shape
-            [ MName "Origin"
-            , MmType Nominal
-            , MScale <|
+            [ mName "Origin"
+            , mMType Nominal
+            , mScale <|
                 categoricalDomainMap
                     [ ( "Europe", square )
                     , ( "Japan", cross )

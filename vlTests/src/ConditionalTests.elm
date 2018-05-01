@@ -15,27 +15,22 @@ markCondition1 =
 
         config =
             configure
-                << configuration (RemoveInvalid False)
+                << configuration (coRemoveInvalid False)
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition
-                        (Or (Expr "datum.IMDB_Rating === null")
-                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                    [ mDataCondition
+                        (or (expr "datum.IMDB_Rating === null")
+                            (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ MString "#ddd" ]
-                        [ MString "#0099ee" ]
+                        [ mStr "#ddd" ]
+                        [ mStr "#0099ee" ]
                     ]
     in
-    toVegaLite
-        [ config []
-        , data
-        , mark Point []
-        , enc []
-        ]
+    toVegaLite [ config [], data, point [], enc [] ]
 
 
 selectionCondition1 : Spec
@@ -48,24 +43,24 @@ selectionCondition1 =
             selection
                 << select "alex"
                     Interval
-                    [ On "[mousedown[!event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
                     Interval
-                    [ On "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , SelectionMark [ SMFill "#fdbb84", SMFillOpacity 0.5, SMStroke "#e34a33" ]
+                    [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
                     ]
 
         enc =
             encoding
-                << position Y [ PName "Origin", PmType Ordinal ]
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << color [ MAggregate Count, MName "*", MmType Quantitative ]
+                << position Y [ pName "Origin", pMType Ordinal ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << color [ mAggregate Count, mName "*", mMType Quantitative ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ maCursor CGrab ], enc [] ]
 
 
 selectionCondition2 : Spec
@@ -78,28 +73,28 @@ selectionCondition2 =
             selection
                 << select "alex"
                     Interval
-                    [ On "[mousedown[!event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
                     Interval
-                    [ On "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , Translate "[mousedown[event.shiftKey], mouseup] > mousemove"
-                    , SelectionMark [ SMFill "#fdbb84", SMFillOpacity 0.5, SMStroke "#e34a33" ]
+                    [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
+                    , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
                     ]
 
         enc =
             encoding
-                << position Y [ PName "Origin", PmType Ordinal ]
-                << position X [ PName "Cylinders", PmType Ordinal ]
+                << position Y [ pName "Origin", pMType Ordinal ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
                 << color
-                    [ MSelectionCondition (And (SelectionName "alex") (SelectionName "morgan"))
-                        [ MAggregate Count, MName "*", MmType Quantitative ]
-                        [ MString "gray" ]
+                    [ mSelectionCondition (and (selectionName "alex") (selectionName "morgan"))
+                        [ mAggregate Count, mName "*", mMType Quantitative ]
+                        [ mStr "gray" ]
                     ]
     in
     toVegaLite
-        [ data, sel [], mark Rect [ MCursor CGrab ], enc [] ]
+        [ data, sel [], rect [ maCursor CGrab ], enc [] ]
 
 
 selectionCondition3 : Spec
@@ -110,7 +105,7 @@ selectionCondition3 =
 
         trans =
             transform
-                << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+                << filter (fiCompose (and (selected "brush") (expr "datum.Weight_in_lbs > 3000")))
 
         sel =
             selection
@@ -118,19 +113,19 @@ selectionCondition3 =
 
         enc1 =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
 
         spec1 =
-            asSpec [ sel [], mark Point [], enc1 [] ]
+            asSpec [ sel [], point [], enc1 [] ]
 
         enc2 =
             encoding
-                << position X [ PName "Acceleration", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 25 ]) ] ]
-                << position Y [ PName "Displacement", PmType Quantitative, PScale [ SDomain (DNumbers [ 0, 500 ]) ] ]
+                << position X [ pName "Acceleration", pMType Quantitative, pScale [ scDomain (doNums [ 0, 25 ]) ] ]
+                << position Y [ pName "Displacement", pMType Quantitative, pScale [ scDomain (doNums [ 0, 500 ]) ] ]
 
         spec2 =
-            asSpec [ trans [], mark Point [], enc2 [] ]
+            asSpec [ trans [], point [], enc2 [] ]
     in
     toVegaLite
         [ data, vConcat [ spec1, spec2 ] ]

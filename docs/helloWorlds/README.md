@@ -4,7 +4,7 @@
 
 In many cases you may wish to embed more than one visualization created by elm-vega inside a single page.
 The template to do this can be very similar to the simple [HelloWorld](../helloWorld/README.md) example.
-The  difference being that instead of a single `<div>` into which a visualization is inserted, you provide a sequence of `<div>` containers each with some unique id.
+The difference being that instead of a single `<div>` into which a visualization is inserted, you provide a sequence of `<div>` containers each with some unique id.
 
 There is also a minor change to the `vegeEmbed` function call so it references a collection of named specifications corresponding to each of the unique IDs of the `<div>` containers.
 
@@ -21,7 +21,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
   <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
-  
+
   <!-- This is the script generated from Elm -->
   <script src="js/helloWorlds.js"></script>
 </head>
@@ -69,9 +69,9 @@ myFirstVis : Spec
 myFirstVis =
     toVegaLite
         [ title "Hello, World!"
-        , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
-        , mark Circle []
-        , encoding <| position X [ PName "x", PmType Quantitative ] []
+        , dataFromColumns [] <| dataColumn "x" (nums [ 10, 20, 30 ]) []
+        , circle []
+        , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]
 
 
@@ -80,12 +80,12 @@ mySecondVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Circle []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , circle []
         , enc []
         ]
 
@@ -95,12 +95,12 @@ myOtherVis =
     let
         enc =
             encoding
-                << position X [ PName "Cylinders", PmType Ordinal ]
-                << position Y [ PName "Miles_per_Gallon", PAggregate Average, PmType Quantitative ]
+                << position X [ pName "Cylinders", pMType Ordinal ]
+                << position Y [ pName "Miles_per_Gallon", pAggregate Average, pMType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/cars.json" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+        , bar []
         , enc []
         ]
 
@@ -163,6 +163,6 @@ The result should look similar to this:
 You should now have the ability to embed single or multiple visualizations in your web pages.
 To understand more about how Elm-Vega itself works, and how to encode different visualization specifications, have a look at
 
--   the [Elm-Vega Walkthrough](../walkthrough/README.md)
--   the [simple examples](../../vlExamples) included in the `vlExamples` folder.
--   the [vlTest-gallery](../../vlTest-gallery) for a full range of examples.
+*   the [Elm-Vega Walkthrough](../walkthrough/README.md)
+*   the [simple examples](../../vlExamples) included in the `vlExamples` folder.
+*   the [vlTest-gallery](../../vlTest-gallery) for a full range of examples.

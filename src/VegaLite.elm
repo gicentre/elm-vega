@@ -1,99 +1,275 @@
 module VegaLite
     exposing
-        ( APosition(..)
-        , Arrangement(..)
-        , Autosize(..)
-        , AxisConfig(..)
-        , AxisProperty(..)
-        , BinProperty(..)
-        , Binding(..)
-        , BooleanOp(..)
-        , CInterpolate(..)
-        , Channel(..)
-        , ClipRect(..)
-        , ConfigurationProperty(..)
-        , Cursor(..)
+        ( APosition(AEnd, AMiddle, AStart)
+        , Arrangement(Column, Row)
+        , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
+        , AxisConfig(BandPosition, Domain, DomainColor, DomainWidth, Grid, GridColor, GridDash, GridOpacity, GridWidth, LabelAngle, LabelColor, LabelFont, LabelFontSize, LabelLimit, LabelOverlap, LabelPadding, Labels, MaxExtent, MinExtent, ShortTimeLabels, TickColor, TickRound, TickSize, TickWidth, Ticks, TitleAlign, TitleAngle, TitleBaseline, TitleColor, TitleFont, TitleFontSize, TitleFontWeight, TitleLimit, TitleMaxLength, TitlePadding, TitleX, TitleY)
+          -- TODO: Make this the default exposure in V.3.x, AxisConfig
+        , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
+          -- TODO: Make this the default exposure in V.3.x, AxisProperty
+        , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
+          -- TODO: Make this the default exposure in V.3.x, BinProperty
+        , Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
+          -- TODO: Make this the default exposure in V.3.x, Binding
+        , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
+          -- TODO: Make this the default exposure in V.3.x, BooleanOp
+        , CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
+          -- TODO: Make this the default exposure in V.3.x, CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
+        , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
+        , ClipRect(LTRB, NoClip)
+          -- TODO: Make this the default exposure in V.3.x, ClipRect(NoClip)
+        , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
+          -- TODO: Make this the default exposure in V.3.x , ConfigurationProperty
+        , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
         , DataRow
-        , DataType(..)
-        , DataValue(..)
-        , DataValues(..)
-        , DateTime(..)
-        , DayName(..)
-        , DetailChannel(..)
-        , FacetChannel(..)
-        , FacetMapping(..)
-        , FieldTitleProperty(..)
-        , Filter(..)
-        , FilterRange(..)
-        , FontWeight(..)
-        , Format(..)
-        , Geometry(..)
-        , HAlign(..)
-        , HeaderProperty(..)
-        , HyperlinkChannel(..)
-        , InputProperty(..)
+        , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
+          -- TODO: Make this the default exposure in V.3.x, DataType(FoBoolean, FoNumber)
+        , DataValue(Boolean, DateTime, Number, Str)
+          -- TODO: Make this the default exposure in V.3.x, DataValue
+        , DataValues(Booleans, DateTimes, Numbers, Strings)
+          -- TODO: Make this the default exposure in V.3.x , DataValues
+        , DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
+          -- TODO: Make this the default exposure in V.3.x, DateTime
+        , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
+        , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
+          -- TODO: Make this the default exposure in V.3.x, DetailChannel
+        , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
+          -- TODO: Make this the default exposure in V.3.x, FacetChannel
+        , FacetMapping(ColumnBy, RowBy)
+          -- TODO: Make this the default exposure in V.3.x, FacetMapping
+        , FieldTitleProperty(Function, Plain, Verbal)
+        , Filter(FCompose, FEqual, FExpr, FOneOf, FRange, FSelection)
+          -- TODO: Make this the default exposure in V.3.x, Filter
+        , FilterRange(DateRange, NumberRange)
+          -- TODO: Make this the default exposure in V.3.x, FilterRange
+        , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
+        , Format(CSV, JSON, Parse, TSV, TopojsonFeature, TopojsonMesh)
+          -- TODO: Make this the default exposure in V.3.x, Format(CSV, TSV)
+        , Geometry(GeoLine, GeoLines, GeoPoint, GeoPoints, GeoPolygon, GeoPolygons)
+          -- TODO: Make this the default exposure in V.3.x, Geometry
+        , HAlign(AlignCenter, AlignLeft, AlignRight)
+        , HeaderProperty(HFormat, HTitle)
+          -- TODO: Make this the default exposure in V.3.x, HeaderProperty
+        , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
+          -- TODO: Make this the default exposure in V.3.x, HyperlinkChannel
+        , InputProperty(Debounce, Element, InMax, InMin, InName, InOptions, InPlaceholder, InStep)
+          -- TODO: Make this the default exposure in V.3.x, InputProperty
         , LabelledSpec
-        , Legend(..)
-        , LegendConfig(..)
-        , LegendOrientation(..)
-        , LegendProperty(..)
-        , LegendValues(..)
-        , Mark(..)
-        , MarkChannel(..)
-        , MarkInterpolation(..)
-        , MarkOrientation(..)
-        , MarkProperty(..)
-        , Measurement(..)
-        , MonthName(..)
-        , Operation(..)
-        , OrderChannel(..)
-        , OverlapStrategy(..)
-        , Padding(..)
-        , Position(..)
-        , PositionChannel(..)
-        , Projection(..)
-        , ProjectionProperty(..)
-        , RangeConfig(..)
-        , RepeatFields(..)
-        , Resolution(..)
-        , Resolve(..)
-        , Scale(..)
-        , ScaleConfig(..)
-        , ScaleDomain(..)
-        , ScaleNice(..)
-        , ScaleProperty(..)
-        , ScaleRange(..)
-        , Selection(..)
-        , SelectionMarkProperty(..)
-        , SelectionProperty(..)
-        , SelectionResolution(..)
-        , Side(..)
+        , Legend(Gradient, Symbol)
+        , LegendConfig(CornerRadius, EntryPadding, FillColor, GradientHeight, GradientLabelBaseline, GradientLabelLimit, GradientLabelOffset, GradientStrokeColor, GradientStrokeWidth, GradientWidth, LeLabelAlign, LeLabelBaseline, LeLabelColor, LeLabelFont, LeLabelFontSize, LeLabelLimit, LeLabelOffset, LePadding, LeShortTimeLabels, LeStrokeDash, LeStrokeWidth, LeTitleAlign, LeTitleBaseline, LeTitleColor, LeTitleFont, LeTitleFontSize, LeTitleFontWeight, LeTitleLimit, LeTitlePadding, Offset, Orient, StrokeColor, SymbolColor, SymbolSize, SymbolStrokeWidth, SymbolType)
+          -- TODO: Make this the default exposure in V.3.x, LegendConfig
+        , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
+        , LegendProperty(LEntryPadding, LFormat, LOffset, LOrient, LPadding, LTickCount, LTitle, LType, LValues, LZIndex)
+          -- TODO: Make this the default exposure in V.3.x, LegendProperty
+        , LegendValues(LDateTimes, LNumbers, LStrings)
+          -- TODO: Make this the default exposure in V.3.x, LegendValues
+        , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
+          -- TODO: Make this the default exposure in V.3.x, Mark
+        , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
+          -- TODO: Make this the default exposure in V.3.x, MarkChannel
+        , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
+        , MarkOrientation(Horizontal, Vertical)
+        , MarkProperty(MAlign, MAngle, MBandSize, MBaseline, MBinSpacing, MClip, MColor, MContinuousBandSize, MCursor, MDiscreteBandSize, MFill, MFillOpacity, MFilled, MFont, MFontSize, MFontStyle, MFontWeight, MInterpolate, MOpacity, MOrient, MRadius, MShape, MShortTimeLabels, MSize, MStroke, MStrokeDash, MStrokeDashOffset, MStrokeOpacity, MStrokeWidth, MStyle, MTension, MText, MTheta, MThickness, MdX, MdY)
+          -- TODO: Make this the default exposure in V.3.x, MarkProperty
+        , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
+        , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
+        , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
+        , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
+          -- TODO: Make this the default exposure in V.3.x, OrderChannel
+        , OverlapStrategy(OGreedy, ONone, OParity)
+        , Padding(PEdges, PSize)
+          -- TODO: Make this the default exposure in V.3.x, Padding
+        , PointMarker(PMNone, PMTransparent)
+        , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
+        , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
+          -- TODO: Make this the default exposure in V.3.x, PositionChannel
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+          -- TODO: Make this the default exposure in V.3.x, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
+          -- TODO: Make this the default exposure in V.3.x, ProjectionProperty
+        , RangeConfig(RCategory, RDiverging, RHeatmap, ROrdinal, RRamp, RSymbol)
+          -- TODO: Make this the default exposure in V.3.x, RangeConfig
+        , RepeatFields(ColumnFields, RowFields)
+          -- TODO: Make this the default exposure in V.3.x, RepeatFields
+        , Resolution(Independent, Shared)
+        , Resolve(RAxis, RLegend, RScale)
+          -- TODO: Make this the default exposure in V.3.x, Resolve
+        , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
+        , ScaleConfig(SCBandPaddingInner, SCBandPaddingOuter, SCClamp, SCMaxBandSize, SCMaxFontSize, SCMaxOpacity, SCMaxSize, SCMaxStrokeWidth, SCMinBandSize, SCMinFontSize, SCMinOpacity, SCMinSize, SCMinStrokeWidth, SCPointPadding, SCRangeStep, SCRound, SCTextXRangeStep, SCUseUnaggregatedDomain)
+          -- TODO: Make this the default exposure in V.3.x, ScaleConfig
+        , ScaleDomain(DDateTimes, DNumbers, DSelection, DStrings, Unaggregated)
+          -- TODO: Make this the default exposure in V.3.x, ScaleDomain(Unaggregated)
+        , ScaleNice(IsNice, NDay, NHour, NInterval, NMillisecond, NMinute, NMonth, NSecond, NTickCount, NWeek, NYear)
+          -- TODO: Make this the default exposure in V.3.x, ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+        , ScaleProperty(SClamp, SDomain, SInterpolate, SNice, SPadding, SPaddingInner, SPaddingOuter, SRange, SRangeStep, SReverse, SRound, SScheme, SType, SZero)
+          -- TODO: Make this the default exposure in V.3.x, ScaleProperty
+        , ScaleRange(RName, RNumbers, RStrings)
+          -- TODO: Make this the default exposure in V.3.x, ScaleRange
+        , Selection(Interval, Multi, Single)
+        , SelectionMarkProperty(SMFill, SMFillOpacity, SMStroke, SMStrokeDash, SMStrokeDashOffset, SMStrokeOpacity, SMStrokeWidth)
+          -- TODO: Make this the default exposure in V.3.x, SelectionMarkProperty
+        , SelectionProperty(Bind, BindScales, Empty, Encodings, Fields, Nearest, On, ResolveSelections, SelectionMark, Toggle, Translate, Zoom)
+          -- TODO: Make this the default exposure in V.3.x, SelectionProperty(BindScales, Empty)
+        , SelectionResolution(Global, Intersection, Union)
+        , Side(SBottom, SLeft, SRight, STop)
         , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
+          -- TODO: Make this the default exposure in V.3.x, SortProperty(Ascending, Descending)
         , Spec
-        , StackProperty(..)
-        , Symbol(..)
-        , TextChannel(..)
+        , StackProperty(NoStack, StCenter, StNormalize, StZero)
+        , Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
+          -- TODO: Make this the default exposure in V.3.x, Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
+        , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
+          -- TODO: Make this the default exposure in V.3.x, TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
-        , TitleConfig(..)
-        , VAlign(..)
+        , TitleConfig(TAnchor, TAngle, TBaseline, TColor, TFont, TFontSize, TFontWeight, TLimit, TOffset, TOrient)
+          -- TODO: Make this the default exposure in V.3.x, TitleConfig
+        , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
-        , ViewConfig(..)
+        , ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
+          -- TODO: Make this the default exposure in V.3.x, ViewConfig
+        , Window
+        , WindowOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
+        , WindowProperty
+        , WindowSortField
         , aggregate
+        , and
+        , area
         , asSpec
         , autosize
+        , axDates
+        , axDomain
+        , axFormat
+        , axGrid
+        , axLabelAngle
+        , axLabelOverlap
+        , axLabelPadding
+        , axLabels
+        , axMaxExtent
+        , axMinExtent
+        , axOffset
+        , axOrient
+        , axPosition
+        , axTickCount
+        , axTickSize
+        , axTicks
+        , axTitle
+        , axTitleAlign
+        , axTitleAngle
+        , axTitleMaxLength
+        , axTitlePadding
+        , axValues
+        , axZIndex
+        , axcoBandPosition
+        , axcoDomain
+        , axcoDomainColor
+        , axcoDomainWidth
+        , axcoGrid
+        , axcoGridColor
+        , axcoGridDash
+        , axcoGridOpacity
+        , axcoGridWidth
+        , axcoLabelAngle
+        , axcoLabelColor
+        , axcoLabelFont
+        , axcoLabelFontSize
+        , axcoLabelLimit
+        , axcoLabelOverlap
+        , axcoLabelPadding
+        , axcoLabels
+        , axcoMaxExtent
+        , axcoMinExtent
+        , axcoShortTimeLabels
+        , axcoTickColor
+        , axcoTickRound
+        , axcoTickSize
+        , axcoTickWidth
+        , axcoTicks
+        , axcoTitleAlign
+        , axcoTitleAngle
+        , axcoTitleBaseline
+        , axcoTitleColor
+        , axcoTitleFont
+        , axcoTitleFontSize
+        , axcoTitleFontWeight
+        , axcoTitleLimit
+        , axcoTitleMaxLength
+        , axcoTitlePadding
+        , axcoTitleX
+        , axcoTitleY
         , background
-          -- TODO: Make bin private in next major version.
+        , bar
+        , biBase
+        , biDivide
+        , biExtent
+        , biMaxBins
+        , biMinStep
+        , biNice
+        , biStep
+        , biSteps
         , bin
+          -- TODO: Make bin private in next major version.
         , binAs
+        , boo
+        , boos
         , calculateAs
         , categoricalDomainMap
+        , circle
+        , clipRect
+        , coArea
+        , coAutosize
+        , coAxis
+        , coAxisBand
+        , coAxisBottom
+        , coAxisLeft
+        , coAxisRight
+        , coAxisTop
+        , coAxisX
+        , coAxisY
+        , coBackground
+        , coBar
+        , coCircle
+        , coCountTitle
+        , coFieldTitle
+        , coGeoshape
+        , coLegend
+        , coLine
+        , coMark
+        , coNamedStyle
+        , coNumberFormat
+        , coPadding
+        , coPoint
+        , coProjection
+        , coRange
+        , coRect
+        , coRemoveInvalid
+        , coRule
+        , coScale
+        , coSelection
+        , coSquare
+        , coStack
+        , coText
+        , coTick
+        , coTimeFormat
+        , coTitle
+        , coTrail
+        , coView
         , color
         , column
+        , columnBy
+        , columnFields
         , combineSpecs
         , configuration
         , configure
+        , cubeHelix
+        , cubeHelixLong
+        , customProjection
+        , dAggregate
+        , dBin
+        , dMType
+        , dName
+        , dTimeUnit
         , dataColumn
         , dataFromColumns
         , dataFromJson
@@ -104,47 +280,385 @@ module VegaLite
         , datasets
         , description
         , detail
+        , doDts
+        , doNums
+        , doSelection
+        , doStrs
         , domainRangeMap
+        , dt
+        , dtDate
+        , dtDay
+        , dtHour
+        , dtMillisecond
+        , dtMinute
+        , dtMonth
+        , dtQuarter
+        , dtRange
+        , dtSecond
+        , dtYear
+        , dts
         , encoding
+        , expr
+        , fAggregate
+        , fBin
+        , fHeader
+        , fMType
+        , fName
+        , fTimeUnit
         , facet
+        , fiCompose
+        , fiEqual
+        , fiExpr
+        , fiOneOf
+        , fiRange
+        , fiSelection
         , fill
         , filter
+        , foDate
+        , foUtc
         , geoFeatureCollection
+        , geoLine
+        , geoLines
+        , geoPoint
+        , geoPoints
+        , geoPolygon
+        , geoPolygons
         , geometry
         , geometryCollection
+        , geoshape
+        , hAggregate
+        , hBin
         , hConcat
+        , hDataCondition
+        , hMType
+        , hName
+        , hRepeat
+        , hSelectionCondition
+        , hStr
+        , hTimeUnit
+        , hdFormat
+        , hdTitle
         , height
         , hyperlink
+        , iCheckbox
+        , iColor
+        , iDate
+        , iDateTimeLocal
+        , iMonth
+        , iNumber
+        , iRadio
+        , iRange
+        , iSelect
+        , iTel
+        , iText
+        , iTime
+        , iWeek
+        , inDebounce
+        , inElement
+        , inMax
+        , inMin
+        , inName
+        , inOptions
+        , inPlaceholder
+        , inStep
+        , jsonProperty
         , layer
+        , leDts
+        , leEntryPadding
+        , leFormat
+        , leNums
+        , leOffset
+        , leOrient
+        , lePadding
+        , leStrs
+        , leTickCount
+        , leTitle
+        , leType
+        , leValues
+        , leZIndex
+        , lecoCornerRadius
+        , lecoEntryPadding
+        , lecoFillColor
+        , lecoGradientHeight
+        , lecoGradientLabelBaseline
+        , lecoGradientLabelLimit
+        , lecoGradientLabelOffset
+        , lecoGradientStrokeColor
+        , lecoGradientStrokeWidth
+        , lecoGradientWidth
+        , lecoLabelAlign
+        , lecoLabelBaseline
+        , lecoLabelColor
+        , lecoLabelFont
+        , lecoLabelFontSize
+        , lecoLabelLimit
+        , lecoLabelOffset
+        , lecoOffset
+        , lecoOrient
+        , lecoPadding
+        , lecoShortTimeLabels
+        , lecoStrokeColor
+        , lecoStrokeDash
+        , lecoStrokeWidth
+        , lecoSymbolColor
+        , lecoSymbolSize
+        , lecoSymbolStrokeWidth
+        , lecoSymbolType
+        , lecoTitleAlign
+        , lecoTitleBaseline
+        , lecoTitleColor
+        , lecoTitleFont
+        , lecoTitleFontSize
+        , lecoTitleFontWeight
+        , lecoTitleLimit
+        , lecoTitlePadding
+        , line
         , lookup
         , lookupAs
+        , mAggregate
+        , mBin
+        , mBoo
+        , mDataCondition
+        , mLegend
+        , mMType
+        , mName
+        , mNum
+        , mPath
+        , mRepeat
+        , mScale
+        , mSelectionCondition
+        , mStr
+        , mTimeUnit
+        , maAlign
+        , maAngle
+        , maBandSize
+        , maBaseline
+        , maBinSpacing
+        , maClip
+        , maColor
+        , maContinuousBandSize
+        , maCursor
+        , maDiscreteBandSize
+        , maDx
+        , maDy
+        , maFill
+        , maFillOpacity
+        , maFilled
+        , maFont
+        , maFontSize
+        , maFontStyle
+        , maFontWeight
+        , maInterpolate
+        , maOpacity
+        , maOrient
+        , maPoint
+        , maRadius
+        , maShape
+        , maShortTimeLabels
+        , maSize
+        , maStroke
+        , maStrokeDash
+        , maStrokeDashOffset
+        , maStrokeOpacity
+        , maStrokeWidth
+        , maStyle
+        , maTension
+        , maText
+        , maTheta
+        , maThickness
         , mark
         , name
+        , not
+        , num
+        , numRange
+        , nums
+        , oAggregate
+        , oBin
+        , oMType
+        , oName
+        , oRepeat
+        , oSort
+        , oTimeUnit
         , opAs
         , opacity
+        , or
         , order
+        , pAggregate
+        , pAxis
+        , pBin
+        , pMType
+        , pName
+        , pRepeat
+        , pScale
+        , pSort
+        , pStack
+        , pTimeUnit
+        , paEdges
+        , paSize
         , padding
+        , parse
+        , pmMarker
+        , point
         , position
+        , prCenter
+        , prClipAngle
+        , prClipExtent
+        , prCoefficient
+        , prDistance
+        , prFraction
+        , prLobes
+        , prParallel
+        , prPrecision
+        , prRadius
+        , prRatio
+        , prRotate
+        , prSpacing
+        , prTilt
+        , prType
         , projection
+        , raName
+        , raNums
+        , raStrs
+        , racoCategory
+        , racoDiverging
+        , racoHeatmap
+        , racoOrdinal
+        , racoRamp
+        , racoSymbol
+        , reAxis
+        , reLegend
+        , reScale
+        , rect
         , repeat
         , resolution
         , resolve
+        , rgb
         , row
+        , rowBy
+        , rowFields
+        , rule
+        , sacoBandPaddingInner
+        , sacoBandPaddingOuter
+        , sacoClamp
+        , sacoMaxBandSize
+        , sacoMaxFontSize
+        , sacoMaxOpacity
+        , sacoMaxSize
+        , sacoMaxStrokeWidth
+        , sacoMinBandSize
+        , sacoMinFontSize
+        , sacoMinOpacity
+        , sacoMinSize
+        , sacoMinStrokeWidth
+        , sacoPointPadding
+        , sacoRangeStep
+        , sacoRound
+        , sacoTextXRangeStep
+        , sacoUseUnaggregatedDomain
+        , scClamp
+        , scDomain
+        , scInterpolate
+        , scIsNice
+        , scNice
+        , scNiceInterval
+        , scNiceTickCount
+        , scPadding
+        , scPaddingInner
+        , scPaddingOuter
+        , scRange
+        , scRangeStep
+        , scReverse
+        , scRound
+        , scScheme
+        , scType
+        , scZero
+        , seBind
+        , seEncodings
+        , seFields
+        , seNearest
+        , seOn
+        , seResolve
+        , seSelectionMark
+        , seToggle
+        , seTranslate
+        , seZoom
         , select
+        , selected
         , selection
+        , selectionName
         , shape
         , size
+        , smFill
+        , smFillOpacity
+        , smStroke
+        , smStrokeDash
+        , smStrokeDashOffset
+        , smStrokeOpacity
+        , smStrokeWidth
+        , soByField
+        , soByRepeat
+        , soCustom
         , specification
+        , square
+        , str
         , stroke
+        , strs
+        , symbolPath
+        , tAggregate
+        , tBin
+        , tDataCondition
+        , tFormat
+        , tMType
+        , tName
+        , tRepeat
+        , tSelectionCondition
+        , tTimeUnit
         , text
+        , textMark
+        , tick
+        , ticoAnchor
+        , ticoAngle
+        , ticoBaseline
+        , ticoColor
+        , ticoFont
+        , ticoFontSize
+        , ticoFontWeight
+        , ticoLimit
+        , ticoOffset
+        , ticoOrient
         , timeUnitAs
         , title
         , toVegaLite
         , tooltip
+        , tooltips
+        , topojsonFeature
+        , topojsonMesh
+        , trail
         , transform
         , utc
         , vConcat
+        , vicoClip
+        , vicoFill
+        , vicoFillOpacity
+        , vicoHeight
+        , vicoStroke
+        , vicoStrokeDash
+        , vicoStrokeDashOffset
+        , vicoStrokeOpacity
+        , vicoStrokeWidth
+        , vicoWidth
+        , wiAggregateOp
+        , wiAscending
+        , wiDescending
+        , wiField
+        , wiFrame
+        , wiGroupBy
+        , wiIgnorePeers
+        , wiOp
+        , wiParam
+        , wiSort
         , width
+        , windowAs
         )
 
 {-| This module allows you to create Vega-Lite specifications in Elm. A specification
@@ -175,15 +689,35 @@ Functions and types for declaring the input data to the visualization.
 @docs datasets
 @docs dataColumn
 @docs dataRow
-@docs geometry
-@docs geoFeatureCollection
-@docs geometryCollection
 @docs Data
 @docs DataColumn
 @docs DataRow
-@docs Format
-@docs Geometry
+
+
+## Geographic Data
+
+@docs geometry
+@docs geoFeatureCollection
+@docs geometryCollection
+@docs geoPoint
+@docs geoPoints
+@docs geoLine
+@docs geoLines
+@docs geoPolygon
+@docs geoPolygons
 @docs DataType
+
+
+## Formating Input Data
+
+@docs Format
+@docs jsonProperty
+@docs topojsonFeature
+@docs topojsonMesh
+@docs parse
+
+@docs foDate
+@docs foUtc
 
 
 # Creating the Transform Specification
@@ -192,10 +726,32 @@ Functions and types for declaring the transformation rules that are applied to
 data fields or geospatial coordinates before they are encoded visually.
 
 @docs transform
+
+
+## Map Projections
+
 @docs projection
-@docs ProjectionProperty
+
+@docs prType
+@docs prClipAngle
+@docs prClipExtent
+@docs prCenter
+@docs prRotate
+@docs prPrecision
+@docs prCoefficient
+@docs prDistance
+@docs prFraction
+@docs prLobes
+@docs prParallel
+@docs prRadius
+@docs prRatio
+@docs prSpacing
+@docs prTilt
+
 @docs Projection
+@docs customProjection
 @docs ClipRect
+@docs clipRect
 
 
 ## Aggregation
@@ -208,9 +764,15 @@ data fields or geospatial coordinates before they are encoded visually.
 
 ## Binning
 
-@docs bin
 @docs binAs
-@docs BinProperty
+@docs biBase
+@docs biDivide
+@docs biExtent
+@docs biMaxBins
+@docs biMinStep
+@docs biNice
+@docs biStep
+@docs biSteps
 
 
 ## Data Calculation
@@ -221,8 +783,15 @@ data fields or geospatial coordinates before they are encoded visually.
 ## Filtering
 
 @docs filter
-@docs Filter
-@docs FilterRange
+
+@docs fiEqual
+@docs fiExpr
+@docs fiCompose
+@docs fiSelection
+@docs fiOneOf
+@docs fiRange
+@docs numRange
+@docs dtRange
 
 
 ## Relational Joining (lookup)
@@ -231,17 +800,97 @@ data fields or geospatial coordinates before they are encoded visually.
 @docs lookupAs
 
 
+## Window Transformations
+
+@docs windowAs
+@docs wiAggregateOp
+@docs wiOp
+@docs wiParam
+@docs wiField
+
+@docs wiFrame
+@docs wiIgnorePeers
+@docs wiGroupBy
+@docs wiSort
+@docs wiAscending
+@docs wiDescending
+
+@docs Window
+@docs WindowOperation
+@docs WindowProperty
+@docs WindowSortField
+
+
 # Creating the Mark Specification
 
-Types and functions for declaring the type of visual marks used in the visualization.
+Functions and types for declaring the type of visual marks used in the visualization.
+The preferred method of specifying mark types is to call the relevant mark function
+(e.g. `bar`, `line` etc.) rather than `mark Bar`, `mark Line` etc.
 
-@docs mark
-@docs Mark
-@docs MarkProperty
+@docs area
+@docs bar
+@docs circle
+@docs geoshape
+@docs line
+@docs point
+@docs rect
+@docs rule
+@docs square
+@docs textMark
+@docs tick
+@docs trail
+
+
+## Mark Properties
+
+@docs maAlign
+@docs maAngle
+@docs maBandSize
+@docs maBaseline
+@docs maBinSpacing
+@docs maClip
+@docs maColor
+@docs maCursor
+@docs maContinuousBandSize
+@docs maDiscreteBandSize
+@docs maDx
+@docs maDy
+@docs maFill
+@docs maFilled
+@docs maFillOpacity
+@docs maFont
+@docs maFontSize
+@docs maFontStyle
+@docs maFontWeight
+@docs maInterpolate
+@docs maOpacity
+@docs maOrient
+@docs maPoint
+@docs maRadius
+@docs maShape
+@docs maShortTimeLabels
+@docs maSize
+@docs maStroke
+@docs maStrokeDash
+@docs maStrokeDashOffset
+@docs maStrokeOpacity
+@docs maStrokeWidth
+@docs maStyle
+@docs maTension
+@docs maText
+@docs maTheta
+@docs maThickness
+
+
+### Used by Mark Properties
+
 @docs MarkOrientation
 @docs MarkInterpolation
 @docs Symbol
+@docs symbolPath
 @docs Cursor
+@docs PointMarker
+@docs pmMarker
 
 
 # Creating the Encoding Specification
@@ -261,18 +910,72 @@ for determining how that encoding is implemented (e.g. scaling, sorting, spacing
 Relates to where something appears in the visualization.
 
 @docs position
-@docs PositionChannel
 @docs Position
+
+
+### Position Channel Properties
+
+@docs pName
+@docs pRepeat
+@docs pMType
+@docs pBin
+@docs pTimeUnit
+@docs pAggregate
+@docs pScale
+@docs pAxis
+@docs pSort
+@docs pStack
+
+
+## Properties Used by Position Channels
+
+
+## Sorting Properties
+
 @docs SortProperty
+@docs soByField
+@docs soByRepeat
+@docs soCustom
+
+
+## Stacking Properties
+
 @docs StackProperty
-@docs AxisProperty
+
+
+## Axis Properties
+
+@docs axDomain
+@docs axFormat
+@docs axGrid
+@docs axLabelAngle
+@docs axLabelOverlap
+@docs axLabelPadding
+@docs axLabels
+@docs axMaxExtent
+@docs axMinExtent
+@docs axOffset
+@docs axOrient
+@docs axPosition
+@docs axTicks
+@docs axTickCount
+@docs axTickSize
+@docs axTitle
+@docs axTitleAlign
+@docs axTitleAngle
+@docs axTitleMaxLength
+@docs axTitlePadding
+@docs axValues
+@docs axDates
+@docs axZIndex
+
+
+## Positioning Constants
+
 @docs OverlapStrategy
 @docs Side
 @docs HAlign
 @docs VAlign
-@docs FontWeight
-@docs TimeUnit
-@docs utc
 
 
 ## Mark channels
@@ -286,11 +989,43 @@ color or size.
 @docs stroke
 @docs opacity
 @docs shape
-@docs MarkChannel
-@docs LegendProperty
+
+
+### Mark Channel Properties
+
+@docs mName
+@docs mRepeat
+@docs mMType
+@docs mScale
+@docs mBin
+@docs mTimeUnit
+@docs mAggregate
+@docs mLegend
+@docs mSelectionCondition
+@docs mDataCondition
+@docs mPath
+@docs mNum
+@docs mStr
+@docs mBoo
+
+
+### Mark Legends
+
+@docs leEntryPadding
+@docs leFormat
+@docs leOffset
+@docs leOrient
+@docs lePadding
+@docs leTickCount
+@docs leTitle
+@docs leType
+@docs leValues
+@docs leZIndex
 @docs Legend
 @docs LegendOrientation
-@docs LegendValues
+@docs leNums
+@docs leStrs
+@docs leDts
 
 
 ## Text Channels
@@ -299,7 +1034,17 @@ Relate to the appearance of the text and tooltip elements of the visualization.
 
 @docs text
 @docs tooltip
-@docs TextChannel
+@docs tooltips
+@docs tName
+@docs tRepeat
+@docs tMType
+@docs tBin
+@docs tAggregate
+@docs tTimeUnit
+@docs tSelectionCondition
+@docs tDataCondition
+@docs tFormat
+@docs FontWeight
 
 
 ## Hyperlink Channel
@@ -310,7 +1055,15 @@ option of changing the cursor style when hovering, so an encoding will usually
 pair hyperlinks with other visual channels such as marks or texts.
 
 @docs hyperlink
-@docs HyperlinkChannel
+@docs hName
+@docs hRepeat
+@docs hMType
+@docs hBin
+@docs hAggregate
+@docs hTimeUnit
+@docs hDataCondition
+@docs hSelectionCondition
+@docs hStr
 
 
 ## Order channels
@@ -321,7 +1074,13 @@ or order of data points in a connected scatterplot. See the
 for further details.
 
 @docs order
-@docs OrderChannel
+@docs oName
+@docs oRepeat
+@docs oMType
+@docs oBin
+@docs oAggregate
+@docs oSort
+@docs oTimeUnit
 
 
 ## Facet channels
@@ -347,21 +1106,56 @@ a line chart with multiple lines to be created – one for each group. See the
 for more information.
 
 @docs detail
-@docs DetailChannel
+@docs dName
+@docs dMType
+@docs dAggregate
+@docs dBin
+@docs dTimeUnit
 
 
 ## Scaling
 
 Used to specify how the encoding of a data field should be applied.
 
-@docs ScaleProperty
+@docs scType
+@docs scDomain
+@docs scRange
+@docs scScheme
+@docs scPadding
+@docs scPaddingInner
+@docs scPaddingOuter
+@docs scRangeStep
+@docs scRound
+@docs scClamp
+@docs scInterpolate
+@docs scNice
+@docs scZero
+@docs scReverse
+
 @docs Scale
+@docs raName
+@docs raNums
+@docs raStrs
 @docs categoricalDomainMap
 @docs domainRangeMap
 @docs ScaleDomain
-@docs ScaleRange
+@docs doNums
+@docs doStrs
+@docs doDts
+@docs doSelection
+
 @docs ScaleNice
+@docs scIsNice
+@docs scNiceTickCount
+@docs scNiceInterval
+
+
+### Color Scaling
+
 @docs CInterpolate
+@docs cubeHelix
+@docs cubeHelixLong
+@docs rgb
 
 
 # Creating view compositions
@@ -379,7 +1173,9 @@ For details of creating composite views see the
 @docs vConcat
 @docs resolve
 @docs resolution
-@docs Resolve
+@docs reAxis
+@docs reLegend
+@docs reScale
 @docs Channel
 @docs Resolution
 
@@ -392,14 +1188,24 @@ arrangement (in rows or columns). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html)
 
 @docs repeat
-@docs RepeatFields
+@docs rowFields
+@docs columnFields
 @docs facet
-@docs FacetMapping
-@docs FacetChannel
+@docs columnBy
+@docs rowBy
+
+@docs fName
+@docs fMType
+@docs fAggregate
+@docs fBin
+@docs fHeader
+@docs fTimeUnit
+
 @docs asSpec
 @docs specification
 @docs Arrangement
-@docs HeaderProperty
+@docs hdTitle
+@docs hdFormat
 
 
 # Creating Selections for Interaction
@@ -413,10 +1219,49 @@ For details, see the
 @docs select
 @docs Selection
 @docs SelectionProperty
-@docs Binding
-@docs InputProperty
+@docs seBind
+@docs seEncodings
+@docs seFields
+@docs seNearest
+@docs seOn
+@docs seResolve
+@docs seSelectionMark
+@docs seToggle
+@docs seTranslate
+@docs seZoom
+
+@docs iRange
+@docs iCheckbox
+@docs iRadio
+@docs iSelect
+@docs iText
+@docs iNumber
+@docs iDate
+@docs iTime
+@docs iMonth
+@docs iWeek
+@docs iDateTimeLocal
+@docs iTel
+@docs iColor
+
+@docs inDebounce
+@docs inElement
+@docs inOptions
+@docs inMin
+@docs inMax
+@docs inName
+@docs inStep
+@docs inPlaceholder
+
 @docs SelectionResolution
-@docs SelectionMarkProperty
+
+@docs smFill
+@docs smFillOpacity
+@docs smStroke
+@docs smStrokeDash
+@docs smStrokeDashOffset
+@docs smStrokeOpacity
+@docs smStrokeWidth
 
 
 ## Making conditional channel encodings
@@ -425,7 +1270,7 @@ Sometimes it is useful to make channel encoding conditional on something. For ex
 on the result of some interaction such as clicking or dragging or some data property
 such whether null or an outlier. `MSelectionCondition` (and `TSelectionCondition`) will
 encode a mark (or text) dependent on an interactive selection. `MDataCondition`
-(and `TDataCondition`) will encode it dependening on some data property.
+(and `TDataCondition`) will encode it depending on some data property.
 
 For interaction, once a selection has been defined and named, supplying a set of
 `MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
@@ -441,12 +1286,12 @@ the cylinder field with an ordinal color scheme, else make them grey".
 
       enc =
           encoding
-              << position X [ PName "Horsepower", PmType Quantitative ]
-              << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
               << color
-                  [ MSelectionCondition (SelectionName "myBrush")
-                      [ MName "Cylinders", MmType Ordinal ]
-                      [ MString "grey" ]
+                  [ mSelectionCondition (selectionName "myBrush")
+                      [ mName "Cylinders", mMType Ordinal ]
+                      [ mStr "grey" ]
                   ]
 
 In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
@@ -454,21 +1299,26 @@ on whether a predicate test is satisfied.
 
       enc =
           encoding
-              << position X [ PName "IMDB_Rating", PmType Quantitative ]
-              << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+              << position X [ pName "IMDB_Rating", pMType Quantitative ]
+              << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition
-                        (Or (Expr "datum.IMDB_Rating === null")
-                            (Expr "datum.Rotten_Tomatoes_Rating === null")
+                    [ mDataCondition
+                        (or (expr "datum.IMDB_Rating === null")
+                            (expr "datum.Rotten_Tomatoes_Rating === null")
                         )
-                        [ MString "#ddd" ]
-                        [ MString "#0099ee" ]
+                        [ mStr "#ddd" ]
+                        [ mStr "#0099ee" ]
                     ]
 
 For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/condition.html).
 
-@docs BooleanOp
+@docs and
+@docs or
+@docs not
+@docs expr
+@docs selected
+@docs selectionName
 
 
 # Global Configuration
@@ -482,33 +1332,292 @@ to the data and transform options described above.
 @docs height
 @docs width
 @docs padding
+@docs paSize
+@docs paEdges
 @docs autosize
 @docs background
 @docs configure
 @docs configuration
-@docs ConfigurationProperty
+
+
+## Style Setting
+
+@docs coArea
+@docs coAutosize
+@docs coAxis
+@docs coAxisX
+@docs coAxisY
+@docs coAxisLeft
+@docs coAxisRight
+@docs coAxisTop
+@docs coAxisBottom
+@docs coAxisBand
+@docs coBackground
+@docs coBar
+@docs coCircle
+@docs coCountTitle
+@docs coFieldTitle
+@docs coGeoshape
+@docs coLegend
+@docs coLine
+@docs coMark
+@docs coNamedStyle
+@docs coNumberFormat
+@docs coPadding
+@docs coPoint
+@docs coProjection
+@docs coRange
+@docs coRect
+@docs coRemoveInvalid
+@docs coRule
+@docs coScale
+@docs coSelection
+@docs coSquare
+@docs coStack
+@docs coText
+@docs coTick
+@docs coTitle
+@docs coTimeFormat
+@docs coTrail
+@docs coView
+
 @docs Autosize
-@docs Padding
-@docs AxisConfig
-@docs LegendConfig
-@docs ScaleConfig
-@docs TitleConfig
+
+
+## Axis Configuration Options
+
+@docs axcoBandPosition
+@docs axcoDomain
+@docs axcoDomainColor
+@docs axcoDomainWidth
+@docs axcoMaxExtent
+@docs axcoMinExtent
+@docs axcoGrid
+@docs axcoGridColor
+@docs axcoGridDash
+@docs axcoGridOpacity
+@docs axcoGridWidth
+@docs axcoLabels
+@docs axcoLabelAngle
+@docs axcoLabelColor
+@docs axcoLabelFont
+@docs axcoLabelFontSize
+@docs axcoLabelLimit
+@docs axcoLabelOverlap
+@docs axcoLabelPadding
+@docs axcoShortTimeLabels
+@docs axcoTicks
+@docs axcoTickColor
+@docs axcoTickRound
+@docs axcoTickSize
+@docs axcoTickWidth
+@docs axcoTitleAlign
+@docs axcoTitleAngle
+@docs axcoTitleBaseline
+@docs axcoTitleColor
+@docs axcoTitleFont
+@docs axcoTitleFontWeight
+@docs axcoTitleFontSize
+@docs axcoTitleLimit
+@docs axcoTitleMaxLength
+@docs axcoTitlePadding
+@docs axcoTitleX
+@docs axcoTitleY
+
+
+## Legend Configuration Options
+
+@docs lecoCornerRadius
+@docs lecoFillColor
+@docs lecoOrient
+@docs lecoOffset
+@docs lecoStrokeColor
+@docs lecoStrokeDash
+@docs lecoStrokeWidth
+@docs lecoPadding
+@docs lecoGradientLabelBaseline
+@docs lecoGradientLabelLimit
+@docs lecoGradientLabelOffset
+@docs lecoGradientStrokeColor
+@docs lecoGradientStrokeWidth
+@docs lecoGradientHeight
+@docs lecoGradientWidth
+@docs lecoLabelAlign
+@docs lecoLabelBaseline
+@docs lecoLabelColor
+@docs lecoLabelFont
+@docs lecoLabelFontSize
+@docs lecoLabelLimit
+@docs lecoLabelOffset
+@docs lecoShortTimeLabels
+@docs lecoEntryPadding
+@docs lecoSymbolColor
+@docs lecoSymbolType
+@docs lecoSymbolSize
+@docs lecoSymbolStrokeWidth
+@docs lecoTitleAlign
+@docs lecoTitleBaseline
+@docs lecoTitleColor
+@docs lecoTitleFont
+@docs lecoTitleFontSize
+@docs lecoTitleFontWeight
+@docs lecoTitleLimit
+@docs lecoTitlePadding
+
+
+## Scale Configuration Options
+
+@docs sacoBandPaddingInner
+@docs sacoBandPaddingOuter
+@docs sacoClamp
+@docs sacoMaxBandSize
+@docs sacoMinBandSize
+@docs sacoMaxFontSize
+@docs sacoMinFontSize
+@docs sacoMaxOpacity
+@docs sacoMinOpacity
+@docs sacoMaxSize
+@docs sacoMinSize
+@docs sacoMaxStrokeWidth
+@docs sacoMinStrokeWidth
+@docs sacoPointPadding
+@docs sacoRangeStep
+@docs sacoRound
+@docs sacoTextXRangeStep
+@docs sacoUseUnaggregatedDomain
+
+
+## Scale Range Configuration Options
+
+@docs racoCategory
+@docs racoDiverging
+@docs racoHeatmap
+@docs racoOrdinal
+@docs racoRamp
+@docs racoSymbol
+
+
+## Title Configuration Options
+
+@docs ticoAnchor
+@docs ticoAngle
+@docs ticoBaseline
+@docs ticoColor
+@docs ticoFont
+@docs ticoFontSize
+@docs ticoFontWeight
+@docs ticoLimit
+@docs ticoOffset
+@docs ticoOrient
+
+
+## View Configuration Options
+
+@docs vicoWidth
+@docs vicoHeight
+@docs vicoClip
+@docs vicoFill
+@docs vicoFillOpacity
+@docs vicoStroke
+@docs vicoStrokeOpacity
+@docs vicoStrokeWidth
+@docs vicoStrokeDash
+@docs vicoStrokeDashOffset
+
 @docs APosition
-@docs ViewConfig
-@docs RangeConfig
+
 @docs FieldTitleProperty
 
 
-# General Data types
+# General Data functions
 
 In addition to more general data types like integers and string, the following types
 can carry data used in specifications.
 
+@docs boo
+@docs dt
+@docs num
+@docs str
+@docs boos
+@docs dts
+@docs nums
+@docs strs
+
+
+## Temporal Data
+
+@docs dtYear
+@docs dtQuarter
+@docs dtMonth
+@docs dtDate
+@docs dtDay
+@docs dtHour
+@docs dtMinute
+@docs dtSecond
+@docs dtMillisecond
+@docs MonthName
+@docs DayName
+
+@docs TimeUnit
+@docs utc
+
+---
+
+
+# Deprecated Types and functions
+
+The following are deprecated and will be removed in a future major version release.
+Generally, the constructors of each type should be replaced with a function of
+a similar name. For example, instead of the `Rule` type use the `rule` function;
+instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
+
+@docs PositionChannel
+@docs MarkChannel
+@docs DetailChannel
+@docs FacetChannel
+@docs HyperlinkChannel
+@docs OrderChannel
+@docs TextChannel
+
+@docs Mark
+@docs mark
+@docs MarkProperty
+
+@docs BooleanOp
+@docs bin
+@docs Binding
+
+@docs AxisProperty
+@docs AxisConfig
+@docs BinProperty
+@docs ConfigurationProperty
+@docs InputProperty
+@docs HeaderProperty
+@docs LegendConfig
+@docs LegendProperty
+@docs LegendValues
+@docs ProjectionProperty
+@docs ScaleProperty
+@docs ScaleConfig
+@docs RangeConfig
+@docs SelectionMarkProperty
+@docs TitleConfig
+@docs ViewConfig
+
 @docs DataValue
 @docs DataValues
 @docs DateTime
-@docs MonthName
-@docs DayName
+@docs Geometry
+
+@docs FacetMapping
+@docs RepeatFields
+@docs Filter
+@docs FilterRange
+
+@docs Resolve
+
+@docs Padding
+@docs ScaleRange
 
 -}
 
@@ -544,9 +1653,14 @@ type Autosize
     | AResize
 
 
-{-| Axis configuration options for customising all axes. See the
+{-| _Note: specifying axis configuration properties with type constructors (`BandPosition`,
+`Domain`, `Grid` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`axcoBandPosition`, `axcoDomain`, `axcoGrid` etc.)_
+
+Axis configuration options for customising all axes. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config)
 for more details.
+
 -}
 type AxisConfig
     = BandPosition Float
@@ -588,10 +1702,314 @@ type AxisConfig
     | TitleY Float
 
 
-{-| Axis customisation properties. These are used for customising individual axes.
+{-| Specify a default axis band position. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoBandPosition : Float -> AxisConfig
+axcoBandPosition =
+    BandPosition
+
+
+{-| Specify whether or not an axis domain should be displayed by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomain : Bool -> AxisConfig
+axcoDomain =
+    Domain
+
+
+{-| Specify a default axis domain color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomainColor : String -> AxisConfig
+axcoDomainColor =
+    DomainColor
+
+
+{-| Specify a default axis domain width style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoDomainWidth : Float -> AxisConfig
+axcoDomainWidth =
+    DomainWidth
+
+
+{-| Specify a default maximum extent style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoMaxExtent : Float -> AxisConfig
+axcoMaxExtent =
+    MaxExtent
+
+
+{-| Specify a default minimum extent style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoMinExtent : Float -> AxisConfig
+axcoMinExtent =
+    MinExtent
+
+
+{-| Specify whether or not an axis grid is displayed by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGrid : Bool -> AxisConfig
+axcoGrid =
+    Grid
+
+
+{-| Specify a default axis grid color style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridColor : String -> AxisConfig
+axcoGridColor =
+    GridColor
+
+
+{-| Specify a default axis line dash style. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridDash : List Float -> AxisConfig
+axcoGridDash =
+    GridDash
+
+
+{-| Specify a default axis grid line opacity. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridOpacity : Float -> AxisConfig
+axcoGridOpacity =
+    GridOpacity
+
+
+{-| Specify a default axis grid line width. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoGridWidth : Float -> AxisConfig
+axcoGridWidth =
+    GridWidth
+
+
+{-| Specify whether or not an axis has labels by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabels : Bool -> AxisConfig
+axcoLabels =
+    Labels
+
+
+{-| Specify a default axis label angle. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelAngle : Float -> AxisConfig
+axcoLabelAngle =
+    LabelAngle
+
+
+{-| Specify a default axis label color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelColor : String -> AxisConfig
+axcoLabelColor =
+    LabelColor
+
+
+{-| Specify a default axis label font. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelFont : String -> AxisConfig
+axcoLabelFont =
+    LabelFont
+
+
+{-| Specify a default axis label font size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelFontSize : Float -> AxisConfig
+axcoLabelFontSize =
+    LabelFontSize
+
+
+{-| Specify a default axis label limit (how much a label can extend beyond the
+left/bottom or right/top of the axis line). For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelLimit : Float -> AxisConfig
+axcoLabelLimit =
+    LabelLimit
+
+
+{-| Specify a default axis label overlap strategy for cases where labels cannot
+fit within the allotted space. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelOverlap : OverlapStrategy -> AxisConfig
+axcoLabelOverlap =
+    LabelOverlap
+
+
+{-| Specify a default axis label padding (space between labels in pixels). For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoLabelPadding : Float -> AxisConfig
+axcoLabelPadding =
+    LabelPadding
+
+
+{-| Specify whether or not an axis should use short time labels by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoShortTimeLabels : Bool -> AxisConfig
+axcoShortTimeLabels =
+    ShortTimeLabels
+
+
+{-| Specify whether or not an axis should show ticks by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTicks : Bool -> AxisConfig
+axcoTicks =
+    Ticks
+
+
+{-| Specify a default axis tick mark color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickColor : String -> AxisConfig
+axcoTickColor =
+    TickColor
+
+
+{-| Specify whether or not axis tick labels use rounded values by default. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickRound : Bool -> AxisConfig
+axcoTickRound =
+    TickRound
+
+
+{-| Specify a default axis tick mark size in pixel units. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickSize : Float -> AxisConfig
+axcoTickSize =
+    TickSize
+
+
+{-| Specify a default axis tick mark width in pixel units. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTickWidth : Float -> AxisConfig
+axcoTickWidth =
+    TickWidth
+
+
+{-| Specify a default axis tick label horizontal alignment. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleAlign : HAlign -> AxisConfig
+axcoTitleAlign =
+    TitleAlign
+
+
+{-| Specify a default axis title angle. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleAngle : Float -> AxisConfig
+axcoTitleAngle =
+    TitleAngle
+
+
+{-| Specify a default axis title vertical alignment. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleBaseline : VAlign -> AxisConfig
+axcoTitleBaseline =
+    TitleBaseline
+
+
+{-| Specify a default axis title color. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleColor : String -> AxisConfig
+axcoTitleColor =
+    TitleColor
+
+
+{-| Specify a default axis title font. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFont : String -> AxisConfig
+axcoTitleFont =
+    TitleFont
+
+
+{-| Specify a default axis title font weight. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFontWeight : FontWeight -> AxisConfig
+axcoTitleFontWeight =
+    TitleFontWeight
+
+
+{-| Specify a default axis title font size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleFontSize : Float -> AxisConfig
+axcoTitleFontSize =
+    TitleFontSize
+
+
+{-| Specify a default axis title maximum size. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleLimit : Float -> AxisConfig
+axcoTitleLimit =
+    TitleLimit
+
+
+{-| Specify a default axis title maximum length when generated automatically from
+a field's description. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleMaxLength : Float -> AxisConfig
+axcoTitleMaxLength =
+    TitleMaxLength
+
+
+{-| Specify a default axis title padding between axis line and text. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitlePadding : Float -> AxisConfig
+axcoTitlePadding =
+    TitlePadding
+
+
+{-| Specify a default axis x-position relative to the axis group. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleX : Float -> AxisConfig
+axcoTitleX =
+    TitleX
+
+
+{-| Specify a default axis y-position relative to the axis group. For more details, see the
+[Vega-Lite axis config documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config).
+-}
+axcoTitleY : Float -> AxisConfig
+axcoTitleY =
+    TitleY
+
+
+{-| _Note: specifying axis properties with type constructors (`AxDomain`,
+`AxFormat` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`axDomain`, `axFormat` etc.)_
+
+Axis customisation properties. These are used for customising individual axes.
 To configure all axes, use `AxisConfig` with a `configuration` instead. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
 for more details.
+
 -}
 type AxisProperty
     = AxDomain Bool
@@ -619,10 +2037,15 @@ type AxisProperty
     | AxZIndex Int
 
 
-{-| Describes the binding property of a selection based on some HTML input element
+{-| _Note: specifying binding elements with type constructors (`IRange`,
+`ICheckbox` etc.) is deprecated in favour of calling their equivalent input binding
+functions (`iRange`, `iCheckbox` etc.)_
+
+Describes the binding property of a selection based on some HTML input element
 such as a checkbox or radio button. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)
 and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+
 -}
 type Binding
     = IRange String (List InputProperty)
@@ -641,13 +2064,19 @@ type Binding
     | IColor String (List InputProperty)
 
 
-{-| Type of binning property to customise. See the
+{-| _Note: specifying binning properties with type constructors (`Base`,
+`Extent` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`biBase`, `biExtent` etc.)_
+
+Type of binning property to customise. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
 more details.
+
 -}
 type BinProperty
     = Base Float
-    | Divide Float Float
+    | Divide Float Float -- Note when made private in next major release, this option will disappear in favour of more general list of possible divisors
+    | Divides (List Float)
     | Extent Float Float
     | MaxBins Int
     | MinStep Float
@@ -656,18 +2085,84 @@ type BinProperty
     | Steps (List Float)
 
 
-{-| Used for creating logical compositions. For example
+{-| Specify the number base to use for automatic bin determination (default is
+base 10). For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biBase : Float -> BinProperty
+biBase =
+    Base
 
-    color
-        [ MSelectionCondition (Or (SelectionName "alex") (SelectionName "morgan"))
-            [ MAggregate Count, MName "*", MmType Quantitative ]
-            [ MString "gray" ]
-        ]
 
-Logical compositions can be nested to any level. For example
+{-| Specify the scale factors indicating allowable subdivisions for binning.
+The default value is [5, 2], which indicates that for base 10 numbers (the
+default base), binning will consider dividing bin sizes by 5 and/or 2.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biDivide : List Float -> BinProperty
+biDivide =
+    Divides
 
-    Not (And (Expr "datum.IMDB_Rating === null") (Expr "datum.Rotten_Tomatoes_Rating === null") )
 
+{-| Specify the desired range of bin values when binning a collection of values.
+The first and second parameters indicate the minimum and maximum range values
+respectively. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biExtent : Float -> Float -> BinProperty
+biExtent =
+    Extent
+
+
+{-| Specify the maximum number of bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biMaxBins : Int -> BinProperty
+biMaxBins =
+    MaxBins
+
+
+{-| Specify the step size between bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biMinStep : Float -> BinProperty
+biMinStep =
+    MinStep
+
+
+{-| Specify whether or not binning boundaries use human-friendly values such as
+multiples of ten. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biNice : Bool -> BinProperty
+biNice =
+    Nice
+
+
+{-| Specify an exact step size between bins when binning a collection of values.
+For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biStep : Float -> BinProperty
+biStep =
+    Step
+
+
+{-| Specify the allowable step sizes between bins when binning a collection of
+values. For more details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+biSteps : List Float -> BinProperty
+biSteps =
+    Steps
+
+
+{-| Used for creating logical compositions. _Note referencing BooleanOp type
+constructors (`And`, `Not`, `Expr` etc.) is deprecated in favour of calling their
+equivalent Boolean operation functions (`and`, `not`, `expr` etc.)_
 -}
 type BooleanOp
     = Expr String
@@ -693,11 +2188,14 @@ type Channel
 
 {-| Indicates the type of color interpolation to apply, when mapping a data field
 onto a color scale. Note that color interpolation cannot be applied with the default
-`sequential` color scale, so additionally, you should set the `SType` to another
+`sequential` color scale, so additionally, you should set the `sType` to another
 continuous scale such as `linear`, `pow` etc.
 
-Of the interpolation options below `Rgb`, `CubeHelix` and `CubeHelixLong` also require
-a `gamma` value (with 1 being a recommended default to provide). For details see the
+Several of the interpolation options also require a `gamma` value (with 1 being
+a recommended default to provide). These should be generated with the named functions
+`cubeHelix`, `cubeHelixLong` and `rgb` rather than with a (deprecated) type constructor.
+
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
 
 -}
@@ -712,18 +2210,23 @@ type CInterpolate
     | Rgb Float
 
 
-{-| Specifies a clipping rectangle in pixel units. In `LTRB` the order of the four
-numbers that follow are 'left', 'top', 'right' then 'bottom'. Used when defining
-the clip extent of a map projection.
+{-| Specifies whether or not a clipping rectangle is to be applied. If it is, the
+function `clipRect` should be called rather than the (deprecated) type constructor
+`LTRB`.
 -}
 type ClipRect
     = NoClip
     | LTRB Float Float Float Float
 
 
-{-| Type of configuration property to customise. See the
+{-| _Note: referencing configuration properties with type constructors (`AreaStyle`,
+`Autosize`, `Axis` etc.) is deprecated in favour of calling their equivalent
+configuration functions (`coArea`, `coAutosize`, `coAxis` etc.)._
+
+Type of configuration property to customise. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
 for details.
+
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
@@ -741,6 +2244,7 @@ type ConfigurationProperty
     | CircleStyle (List MarkProperty)
     | CountTitle String
     | FieldTitle FieldTitleProperty
+    | GeoshapeStyle (List MarkProperty)
     | Legend (List LegendConfig)
     | LineStyle (List MarkProperty)
     | MarkStyle (List MarkProperty)
@@ -761,6 +2265,9 @@ type ConfigurationProperty
     | TickStyle (List MarkProperty)
     | TitleStyle (List TitleConfig)
     | TimeFormat String
+      -- Note: Trails appear unusual in having their own top-level config
+      -- (see https://vega.github.io/vega-lite/docs/trail.html#config)
+    | TrailStyle (List MarkProperty)
     | View (List ViewConfig)
 
 
@@ -811,8 +2318,8 @@ type Cursor
     myRegion : List DataColumn -> Data
     myRegion =
         dataFromColumns []
-            << dataColumn "easting" (Numbers [ -3, 4, 4, -3, -3 ])
-            << dataColumn "northing" (Numbers [ 52, 52, 45, 45, 52 ])
+            << dataColumn "easting" (nums [ -3, 4, 4, -3, -3 ])
+            << dataColumn "northing" (nums [ 52, 52, 45, 45, 52 ])
 
 -}
 type alias Data =
@@ -833,12 +2340,9 @@ type alias DataRow =
     Spec
 
 
-{-| Indicates the type of data to be parsed when reading input data. For `FoDate`
-and `FoUtc`, the formatting specification can be specified using
-[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
-or left as an empty string if default date formatting is to be applied. Care should
-be taken when assuming default parsing of dates because different browsers can
-parse dates differently. Being explicit about the date format is usually safer.
+{-| Indicates the type of data to be parsed when reading input data. When parsing
+dates, you should use the `foDate` or `foUtc` functions rather than their
+equivalent (deprecated) type constructors.
 -}
 type DataType
     = FoNumber
@@ -847,8 +2351,13 @@ type DataType
     | FoUtc String
 
 
-{-| A single data value. This is used when a function can accept values of different
+{-| _Note: referencing data types with type constructors (`Boolean`, `DateTime`,
+`Number` and `Str`) is deprecated in favour of calling their equivalent data value
+functions (`boo`, `dt`, `num` and `str`)._
+
+A single data value. This is used when a function can accept values of different
 types (e.g. either a number or a string).
+
 -}
 type DataValue
     = Boolean Bool
@@ -857,8 +2366,13 @@ type DataValue
     | Str String
 
 
-{-| A list of data values. This is used when a function can accept lists of
+{-| _Note: referencing lists of data types with type constructors (`Booleans`,
+`DateTimes`, `Numbers` and `Strings`) is deprecated in favour of calling their
+equivalent data value list functions (`boos`, `dts`, `nums` and `strs`)._
+
+A list of data values. This is used when a function can accept lists of
 different types (e.g. either a list of numbers or a list of strings).
+
 -}
 type DataValues
     = Booleans (List Bool)
@@ -867,9 +2381,15 @@ type DataValues
     | Strings (List String)
 
 
-{-| Allows a date or time to be represented. This is typically part of a list of
-`DateTime` items to provide a specific point in time. For details see the
+{-| _Note: referencing dateTime type constructors (`DTYear`, `DTHours` etc.)
+is deprecated in favour of calling their equivalent dateTime functions
+(`dtYear`, `dtHour` etc.)_
+
+Allows a date or time to be represented. This is typically part of a list of
+functions that each generate a `DateTime` item to provide a specific point in
+time. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/types.html#datetime).
+
 -}
 type DateTime
     = DTYear Int
@@ -895,7 +2415,14 @@ type DayName
     | Sun
 
 
-{-| Level of detail channel properties used for creating a grouped channel encoding.
+{-| _Note: referencing detail channel type constructors (`DName`, `DBin` etc.)
+is deprecated in favour of calling their equivalent detail channel functions
+(`dName`, `dBin` etc.)_
+
+Level of detail channel properties used for creating a grouped channel encoding.
+For details see the
+[Vega-Lite level of detail channel documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
+
 -}
 type DetailChannel
     = DName String
@@ -930,8 +2457,13 @@ type DetailChannel
 --     | Wheel
 
 
-{-| Types of facet channel property used for creating a composed facet view of small
+{-| _Note: facet channel type constructors (`FName`, `FBin` etc.) are
+deprecated in favour of calling their equivalent facet channel functions
+(`fName`, `fBin` etc.)_
+
+Types of facet channel property used for creating a composed facet view of small
 multiples.
+
 -}
 type FacetChannel
     = FName String
@@ -942,9 +2474,14 @@ type FacetChannel
     | FHeader (List HeaderProperty)
 
 
-{-| Provides details of the mapping between a row or column and its field
+{-| _Note: facet mapping type constructors (`ColumnBy` and `RowBy` ) are
+deprecated in favour of calling their equivalent facet mapping functions
+(`columnBy` and `rowBy`)_
+
+Provides details of the mapping between a row or column and its field
 definitions in a set of faceted small multiples. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+
 -}
 type FacetMapping
     = ColumnBy (List FacetChannel)
@@ -962,9 +2499,14 @@ type FieldTitleProperty
     | Plain
 
 
-{-| Type of filtering operation. See the
+{-| _Note: referencing filter type constructors (`FEqual`, `FExpr` etc.)
+is deprecated in favour of calling their equivalent filtering functions
+(`fiEqual`, `fiExpr` etc.)_
+
+Type of filtering operation. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
 for details.
+
 -}
 type Filter
     = FEqual String DataValue
@@ -975,8 +2517,13 @@ type Filter
     | FRange String FilterRange
 
 
-{-| A pair of filter range data values. The first argument is the inclusive minimum
+{-| _Note: referencing filter range type constructors (`NumberRange` and `DateRange`)
+is deprecated in favour of calling their equivalent filtering range functions
+(`numRange` and `dtRange`.)_
+
+A pair of filter range data values. The first argument is the inclusive minimum
 vale to accept and the second the inclusive maximum.
+
 -}
 type FilterRange
     = NumberRange Float Float
@@ -1003,10 +2550,10 @@ type FontWeight
 
 {-| Specifies the type of format a data source uses. If the format is indicated by
 the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate the
-format explicitly. However this can be useful if (a) the filename extension does not
-indicate type (e.g. `.txt`) or you wish to customise the parsing of a file. For
-example, when specifying the `JSON` format, its parameter indicates the name of
-property field containing the attribute data to extract. For details see the
+format explicitly. However this can be useful if the filename extension does not
+indicate type (e.g. `.txt`). To customise the parsing of a file use one of the
+functions `parse`, `jsonProperty`, `topojsonFeature` or `topojsonMesh` in preference
+to their (depcrecated) type constructor equivalents. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
 -}
 type Format
@@ -1018,11 +2565,16 @@ type Format
     | Parse (List ( String, DataType ))
 
 
-{-| Specifies the type and content of geometry specifications for programatically
+{-| _Note: referencing geometry type constructors (`GeoPoint`, `GeoLine` etc.)
+is deprecated in favour of calling their equivalent geometry functions
+(`geoPoint`, `geoLine` etc.)_
+
+Specifies the type and content of geometry specifications for programmatically
 creating GeoShapes. These can be mapped to the
 [GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
 where the pluralised type names refer to their `Multi` prefixed equivalent in the
 GeoJSON specification.
+
 -}
 type Geometry
     = GeoPoint Float Float
@@ -1041,15 +2593,41 @@ type HAlign
     | AlignRight
 
 
-{-| Represents a facet header property. For details, see the
+{-| _Note: referencing header property type constructors (`HFormat` and `HTitle`)
+is deprecated in favour of calling their equivalent header property functions
+(`hdFormat`, `hdTitle` etc.)_
+
+Represents a facet header property. For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+
 -}
 type HeaderProperty
     = HFormat String
     | HTitle String
 
 
-{-| Types of hyperlink channel property used for linking marks or text to URLs.
+{-| Header format specifier for a faceted view. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+hdFormat : String -> HeaderProperty
+hdFormat =
+    HFormat
+
+
+{-| Specify a header title in a faceted view. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+hdTitle : String -> HeaderProperty
+hdTitle =
+    HTitle
+
+
+{-| _Note: referencing hyperlink channel type constructors (`HName`, `HBin` etc.)
+is deprecated in favour of calling their equivalent hyperlink channel functions
+(`hName`, `hBin` etc.)_
+
+Types of hyperlink channel property used for linking marks or text to URLs.
+
 -}
 type HyperlinkChannel
     = HName String
@@ -1063,16 +2641,16 @@ type HyperlinkChannel
     | HString String
 
 
-{-| GUI Input properties. The type of relevant property will depend on the type of
+{-| _Note: specifying input properties with type constructors (`InMin`,
+`InOptions` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`inMin`, `inOptions` etc.)_
+
+GUI Input properties. The type of relevant property will depend on the type of
 input element selected. For example an `InRange` (slider) can have numeric min,
 max and step values; InSelect (selector) has a list of selection label options.
 For details see the
 [Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
-The `debounce` property, available for all input types allows a delay in input event
-handling to be added in order to avoid unnecessary event broadcasting. The `Element`
-property is an optional CSS selector indicating the parent element to which the
-input element should be added. This allows the option of the input element to be
-outside the visualization container.
+
 -}
 type InputProperty
     = Debounce Float
@@ -1101,8 +2679,14 @@ type Legend
     | Symbol
 
 
-{-| Legend configuration options. For more detail see the
+{-| _Note: specifying legend configuration properties with type constructors
+(`CornerRadius`, `FillColor`, `LePadding` etc.) is deprecated in favour of
+calling their equivalent property specifying functions (`lecoCornerRadius`,
+`lecoFillColor`, `lecoPadding` etc.)_
+
+Legend configuration options. For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+
 -}
 type LegendConfig
     = CornerRadius Float
@@ -1157,8 +2741,13 @@ type LegendOrientation
     | TopRight
 
 
-{-| Legend properties. For more detail see the
+{-| _Note: referencing legend property type constructors (`LFormat`, lTitle`etc.)
+is deprecated in favour of calling their equivalent legend property functions
+(`leFormat`,`leTitle` etc.)_
+
+Legend properties for customising a mark legend. For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+
 -}
 type LegendProperty
     = LEntryPadding Float
@@ -1173,7 +2762,12 @@ type LegendProperty
     | LZIndex Int
 
 
-{-| A list of data values suitable for setting legend values.
+{-| _Note: referencing legend value type constructors (`LNumbers`, `LStrings`
+and `LDateTimes`) is deprecated in favour of calling their equivalent legend value
+functions (`leNums`, `leStrs` and `leDts`)_
+
+A list of data values suitable for setting legend values.
+
 -}
 type LegendValues
     = LDateTimes (List (List DateTime))
@@ -1181,7 +2775,11 @@ type LegendValues
     | LStrings (List String)
 
 
-{-| Type of visual mark used to represent data in the visualization.
+{-| _Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is
+deprecated in favour of calling their equivalent mark functions (`area`, `bar` etc.)_
+
+Type of visual mark used to represent data in the visualization.
+
 -}
 type Mark
     = Area
@@ -1195,10 +2793,15 @@ type Mark
     | Square
     | Text
     | Tick
+    | Trail
 
 
-{-| Mark channel properties used for creating a mark channel encoding. Providing
-an empty list to `MScale`, or `MLegend` removes the scaling and legend respectively.
+{-| _Note: referencing mark channel type constructors (`MName`, `MBin` etc.) is
+deprecated in favour of calling their equivalent mark channel functions
+(`mName`, `mBin` etc.)_
+
+Mark channel properties used for creating a mark channel encoding.
+
 -}
 type MarkChannel
     = MName String
@@ -1245,14 +2848,19 @@ type MarkOrientation
     | Vertical
 
 
-{-| Properties for customising the appearance of a mark. For details see the
+{-| _Note: referencing mark property type constructors (`MAlign`, `MFill` etc.)
+is deprecated in favour of calling their equivalent mark property functions
+(`maAlign`, `maFill` etc.)_
+
+Properties for customising the appearance of a mark. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).
+
 -}
 type
     MarkProperty
     -- Note some of the following properties are specific options for particular
-    -- types of mark (Bar, Text and Tick) but for simplicity of the API, carry over
-    -- for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
+    -- types of mark (e.g. `bar`, `textMark` and `tick`) but for simplicity of the API,
+    --  carry over for the general case: MBandSize, MBinSpacing, MClip, MContinuousBandSize,
     -- MDiscreteBandSize, MShortTimeLabels and  MThickness.
     = MAlign HAlign
     | MAngle Float
@@ -1276,6 +2884,7 @@ type
     | MInterpolate MarkInterpolation
     | MOpacity Float
     | MOrient MarkOrientation
+    | MPoint PointMarker
     | MRadius Float
     | MShape Symbol
     | MShortTimeLabels Bool
@@ -1298,9 +2907,9 @@ data are also categories, but ones which have some natural order. `Quantitative`
 data are numeric measurements typically on a continuous scale. `Temporal` data
 describe time.
 
-Geospatial position encoding (`Longitude` and `Latitude`) should specify the `PmType`
+Geospatial position encoding (`Longitude` and `Latitude`) should specify the `pMType`
 as `Quantitative`. Geographically referenced features encoded as `shape` marks
-should specify `MmType` as `GeoFeature` (Vega-Lite currently refers to this type
+should specify `mMType` as `GeoFeature` (Vega-Lite currently refers to this type
 as [geojson](https://vega.github.io/vega-lite/docs/encoding.html)).
 
 -}
@@ -1357,7 +2966,12 @@ type Operation
     | VarianceP
 
 
-{-| Properties of an ordering channel used for sorting data fields.
+{-| _Note: referencing order channel type constructors (`OName`, `OBin` etc.) is
+deprecated in favour of calling their equivalent order channel functions
+(`oName`, `oBin` etc.)_
+
+Properties of an ordering channel used for sorting data fields.
+
 -}
 type OrderChannel
     = OName String
@@ -1380,19 +2994,34 @@ type OverlapStrategy
     | OGreedy
 
 
-{-| Represents padding dimensions in pixel units. `PSize` will set the same value
+{-| _Note: referencing padding type constructors (`PSize` and `PEdges`) is
+deprecated in favour of calling their equivalent padding functions
+(`paSize` and `paEdges`)_
+
+Represents padding dimensions in pixel units. `PSize` will set the same value
 on all four edges of a rectangular container while `PEdges` can be used to specify
 different sizes on each edge in order _left_, _top_, _right_, _bottom_.
+
 -}
 type Padding
     = PSize Float
     | PEdges Float Float Float Float
 
 
+{-| Specify the appearance of a point marker that is overlaid on a line or area
+mark. For details see the
+[Vega-Lite point property documentation](https://vega.github.io/vega-lite/docs/line.html#properties).
+-}
+type PointMarker
+    = PMTransparent
+    | PMNone
+    | PMMarker (List MarkProperty)
+
+
 {-| Type of position channel, `X` and `Y` represent horizontal and vertical axis
 dimensions on a plane and `X2` and `Y2` represent secondary axis dimensions where
 two scales are overlaid in the same space. Geographic positions represented by
-longitude and latiutude values are identified with `Longitude`, `Latitude` and
+longitude and latitude values are identified with `Longitude`, `Latitude` and
 their respective secondary equivalents. Such geographic position channels are
 subject to a map projection before being placed graphically.
 -}
@@ -1407,7 +3036,12 @@ type Position
     | Latitude2
 
 
-{-| Position channel properties used for creating a position channel encoding.
+{-| _Note: referencing position channel type constructors (`PName`, `PBin` etc.) is
+deprecated in favour of calling their equivalent position channel functions
+(`pName`, `pBin` etc.)_
+
+Position channel properties used for creating a position channel encoding.
+
 -}
 type PositionChannel
     = PName String
@@ -1426,10 +3060,10 @@ type PositionChannel
 by the [d3-geo library](https://github.com/d3/d3-geo). For details of available
 projections see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html#projection-types).
-Additional custom projections from d3 can be defined via the
-[Vega API](https://vega.github.io/vega/docs/projections/#register) and called from
-within Elm-Vega setting the projection to `Custom proj` where `proj` is the name
-of the D3 projection to use (e.g. `winkel3`).
+
+_Note: The use of the `Custom` type constructor is deprecated in favour of the
+`customProjection` function._
+
 -}
 type Projection
     = Albers
@@ -1448,9 +3082,14 @@ type Projection
     | TransverseMercator
 
 
-{-| Properties for customising a geospatial projection that converts longitude/latitude
+{-| _Note: specifying projection properties with type constructors (`PType`,
+`PClipAngle` etc.) is deprecated in favour of calling their equivalent
+projection property functions (`prType`, `prClipAngle` etc.)_
+
+Properties for customising a geospatial projection that converts longitude/latitude
 pairs into planar (x,y) coordinate pairs for rendering and query. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
+
 -}
 type ProjectionProperty
     = PType Projection
@@ -1470,9 +3109,14 @@ type ProjectionProperty
     | PTilt Float
 
 
-{-| Properties for customising the colors of a range. The parameter should be a
+{-| _Note: specifying range configuration properties with type constructors
+(`RCategory`, `RDiverging`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`racoCategory`,`racoDiverging`, etc.)_
+
+Properties for customising the colors of a range. The parameter should be a
 named color scheme such as `accent` or `purpleorange-11`. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+
 -}
 type RangeConfig
     = RCategory String
@@ -1483,9 +3127,14 @@ type RangeConfig
     | RSymbol String
 
 
-{-| Create a list of fields to use in set of repeated small multiples. The list of
-fields named here can be referenced in an encoding with `PRepeat Column`, `PRepeat Row`
+{-| _Note: specifying repeat fields with type constructors (`RowFields` and
+`ColumnFields` ) is deprecated in favour of calling their equivalent functions
+(`rowFields`, `columnFields`)_
+
+Create a list of fields to use in set of repeated small multiples. The list of
+fields named here can be referenced in an encoding with `pRepeat Column`, `pRepeat Row`
 etc.
+
 -}
 type RepeatFields
     = RowFields (List String)
@@ -1502,15 +3151,50 @@ type Resolution
     | Independent
 
 
-{-| Used to determine how a channel's axis, scale or legend domains should be resolved
+{-| _Note: specifying resolve items with type constructors (`RAxis`,
+`RLegend` and `RScale`) is deprecated in favour of calling their equivalent
+resolve functions (`reAxis`, `reLegend` and `reScale`)_
+
+Used to determine how a channel's axis, scale or legend domains should be resolved
 if defined in more than one view in a composite visualization. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
 details.
+
 -}
 type Resolve
     = RAxis (List ( Channel, Resolution ))
     | RLegend (List ( Channel, Resolution ))
     | RScale (List ( Channel, Resolution ))
+
+
+{-| Specify how a channel's axes should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reAxis : List ( Channel, Resolution ) -> Resolve
+reAxis =
+    RAxis
+
+
+{-| Specify how a channel's legends should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reLegend : List ( Channel, Resolution ) -> Resolve
+reLegend =
+    RLegend
+
+
+{-| Specify how a channel's scales should be resolved when defined in more
+than one view in a composite visualization. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
+details.
+-}
+reScale : List ( Channel, Resolution ) -> Resolve
+reScale =
+    RScale
 
 
 {-| Used to indicate the type of scale transformation to apply.
@@ -1530,9 +3214,14 @@ type Scale
     | ScBinOrdinal
 
 
-{-| Scale configuration property. These are used to configure all scales.
+{-| _Note: specifying scale configuration properties with type constructors
+(`SCBandPaddingInner`, `SCClamp`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`socoBandPaddingInner`,`sacoClamp`, etc.)_
+
+Scale configuration property. These are used to configure all scales.
 For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+
 -}
 type ScaleConfig
     = SCBandPaddingInner Float
@@ -1555,8 +3244,13 @@ type ScaleConfig
     | SCUseUnaggregatedDomain Bool
 
 
-{-| Describes the scale domain (type of data in scale). For full details see the
+{-| Describes a scale domain (type of data in scale). To specify scale domain
+values explicitly, use the functions `doNums`, `doStrs`, `doDts` or `doSelection`
+rather than their (deprecated) type constructor equivalents.
+
+For full details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+
 -}
 type ScaleDomain
     = DNumbers (List Float)
@@ -1566,8 +3260,15 @@ type ScaleDomain
     | Unaggregated
 
 
-{-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
+{-| Describes the way a scale can be rounded to 'nice' numbers. To specify nice
+time intervals use `scNiceInterval` rather then the deprecated type constructor
+`NInterval`; to switch nice scaling on or off use `scIsNice` rather than the
+deprecated type constructor `IsNice`; and to set a nice tick count use the
+`scNiceTickCount` function rather than the deprecated `NTickCount` type constructor.
+
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+
 -}
 type ScaleNice
     = NMillisecond
@@ -1583,10 +3284,15 @@ type ScaleNice
     | NTickCount Int
 
 
-{-| Individual scale property. These are used to customise an individual scale
+{-| _Note: specifying scale properties with type constructors (`SDomain`,
+`SRange` etc.) is deprecated in favour of calling their equivalent property
+specifying functions (`scDomain`, `scRange` etc.)_
+
+Individual scale property. These are used to customise an individual scale
 transformation. To customise all scales use `config` and supply relevant
 `ScaleConfig` values. For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html)
+
 -}
 type ScaleProperty
     = SType Scale
@@ -1603,12 +3309,16 @@ type ScaleProperty
     | SInterpolate CInterpolate
     | SNice ScaleNice
     | SZero Bool
-      -- TODO: Check: This is a Vega, not Vega-Lite property so can generate a warning if validated against the Vega-Lite spec.
     | SReverse Bool
 
 
-{-| Describes a scale range of scale output values. For full details see the
+{-| _Note: specifying scale ranges with type constructors (`RNumbers`,
+`RStrings` and `RName`) is deprecated in favour of calling their equivalent
+functions (`raNums`, `raStrs` and `raName`.)_
+
+Describes a scale range of scale output values. For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range).
+
 -}
 type ScaleRange
     = RNumbers (List Float)
@@ -1627,9 +3337,14 @@ type Selection
     | Interval
 
 
-{-| Properties for customising the appearance of an interval selection mark (dragged
+{-| _Note: specifying selection mark properties with type constructors (`SMFill`,
+`SMStroke` etc.) is deprecated in favour of calling their equivalent functions
+(`smFill`, `smStroke` etc.)_
+
+Properties for customising the appearance of an interval selection mark (dragged
 rectangle). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+
 -}
 type SelectionMarkProperty
     = SMFill String
@@ -1641,25 +3356,22 @@ type SelectionMarkProperty
     | SMStrokeDashOffset Float
 
 
-{-| Properties for customising the nature of the selection. See the
+{-| Properties for customising the nature of an interactive selection. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
-for details. When linking a selection property to an event stream with `On`, `Translate`
-or `Zoom`, a String should be provided describing the event stream as detailed in the
-[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams).
-If an empty string is provided, the property is set to `false`. The `Toggle` option
-expects a [Vega expression](https://vega.github.io/vega/docs/expressions) that evaluates
-to either true or false.
+for details. For parameterised properties use relevant functions (e.g. `seOn`,
+`seEncodings`, `seBind` etc.) rather than the (deprecated) type constructors
+(On, Encodings, Bind etc.).
 -}
 type SelectionProperty
-    = On String
+    = Empty
+    | BindScales
+    | On String
     | Translate String
     | Zoom String
     | Fields (List String)
     | Encodings (List Channel)
-    | Empty
     | ResolveSelections SelectionResolution
     | SelectionMark (List SelectionMarkProperty)
-    | BindScales
     | Bind (List Binding)
     | Nearest Bool
     | Toggle String
@@ -1684,15 +3396,23 @@ type Side
     | SRight
 
 
-{-| Allow type of sorting to be customised. For details see the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/sort.html).
+{-| Allow type of sorting to be customised. To sort a field by the aggregated
+values of another use the `soByField` or `soByRepeat` functions rather than their
+deprecated type constructor equivalents `ByField` and `ByRepeat`.
+
+For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+
 -}
 type SortProperty
     = Ascending
     | Descending
-    | Op Operation
     | ByField String
     | ByRepeat Arrangement
+    | Op Operation
+    | CustomSort DataValues
+    | ByRepeatOp Arrangement Operation
+    | ByFieldOp String Operation
 
 
 {-| Represents part or all of Vega-Lite specification. Specs can be (and usually
@@ -1712,8 +3432,11 @@ type StackProperty
     | NoStack
 
 
-{-| Identifies the type of symbol. The `Path` symbol is used to define custom shapes
-as an SVG path description.
+{-| Identifies the type of symbol.
+
+_Note: The use of the `Path` type constructor is deprecated in favour of the
+`symbolPath` function._
+
 -}
 type Symbol
     = SymCircle
@@ -1725,7 +3448,12 @@ type Symbol
     | Path String
 
 
-{-| Types of text channel property used for displaying text as part of the visualization.
+{-| _Note: referencing text channel type constructors (`TName`, `TBin` etc.) is
+deprecated in favour of calling their equivalent text channel functions
+(`tName`, `tBin` etc.)_
+
+Types of text channel property used for displaying text as part of the visualization.
+
 -}
 type TextChannel
     = TName String
@@ -1748,7 +3476,7 @@ zones or daylight saving), provide a time unit to the `utc` function.
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+        << position X [ pName "date", pMType Temporal, pTimeUnit (utc YearMonthDateHours) ]
 
 -}
 type TimeUnit
@@ -1777,10 +3505,14 @@ type TimeUnit
     | Utc TimeUnit
 
 
-{-| Title configuration properties. These are used to configure the default style
-of all titles within a visualization.
-For further details see the
+{-| _Note: specifying title configuration properties with type constructors
+(`TAnchor`, `TAngle`, etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`ticoAnchor`,`ticoAngle`, etc.)_
+
+Title configuration properties. These are used to configure the default style
+of all titles within a visualization. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+
 -}
 type TitleConfig
     = TAnchor APosition
@@ -1803,10 +3535,15 @@ type VAlign
     | AlignBottom
 
 
-{-| View configuration property. These are used to configure the style of a single
+{-| _Note: specifying view configuration properties with type constructors
+(`Clip`, `ViewWidth`, `ViewHeight` etc.) is deprecated in favour of calling their
+equivalent property specifying functions (`vicoClip`,`vicoWidth`, `vicoHeight` etc.)_
+
+View configuration property. These are used to configure the style of a single
 view within a visualization such as its size and default fill and stroke colors.
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+
 -}
 type ViewConfig
     = ViewWidth Float
@@ -1834,10 +3571,10 @@ arranged into seven broad groups.
 be applied before encoding them visually. Generated by [`transform`](#transform)
 and [`projection`](#projection) they can include data transformations such as `filter`,
 `binAs` and `calculateAs` and geo transformations of longitude, latitude coordinates
-used by marks such as `Geoshape`, `Point` and `Line`.
+used by marks such as those generated by `geoshape`, `point` and `line`.
 
-**Mark Properties** relate to the symbols used to visualize data items. Generated by [`mark`](#mark)
-they include types such as `Circle`, `Bar` and `Line`.
+**Mark Functions** relate to the symbols used to visualize data items. Generated
+by functions such as [`circle`](#circle), [`bar`](#bar) and [`line`](#line).
 
 **Encoding Properties** specify which data elements are mapped to which mark characteristics
 (known as _channels_). Generated by [`encoding`](#encoding) they include encodings
@@ -1885,6 +3622,53 @@ type VLProperty
     | VLSelection
 
 
+{-| Window transform field definition. For details see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+type Window
+    = WAggregateOp Operation
+    | WOp WindowOperation
+    | WParam Int
+    | WField String
+
+
+{-| Operations that may be applied during a window transformation. For details see the
+[Vega-Lite window operation documentation](https://vega.github.io/vega-lite/docs/window.html#ops).
+-}
+type WindowOperation
+    = RowNumber
+    | Rank
+    | DenseRank
+    | PercentRank
+    | CumeDist
+    | Ntile
+    | Lag
+    | Lead
+    | FirstValue
+    | LastValue
+    | NthValue
+
+
+{-| Window transform properties for performing calculations over sorted groups.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+type WindowProperty
+    = WFrame (Maybe Int) (Maybe Int)
+    | WIgnorePeers Bool
+    | WGroupBy (List String)
+    | WSort (List WindowSortField)
+
+
+{-| A named field with either an ascending or descending sort direction. Used by
+the window transform for performing calculations over sorted groups. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+type WindowSortField
+    = WAscending String
+    | WDescending String
+
+
 {-| Defines a set of named aggregation transformations to be used when encoding
 channels. This is useful when, for example, you wish to apply the same transformation
 to a number of channels but do not want to define it each time. The first parameter is
@@ -1905,6 +3689,32 @@ aggregate ops groups =
     (::) ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] )
 
 
+{-| Apply an 'and' Boolean operation as part of a logical composition.
+
+    and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null")
+
+-}
+and : BooleanOp -> BooleanOp -> BooleanOp
+and op1 op2 =
+    And op1 op2
+
+
+{-| Specify an area mark. An area mark is used for representing a series of data
+elements, such as in a stacked area chart or streamgraph. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/area.html).
+
+    area [ maStroke "white" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    area []
+
+-}
+area : List MarkProperty -> ( VLProperty, Spec )
+area =
+    mark Area
+
+
 {-| Create a specification sufficient to define an element in a composed visualization
 such as a superposed layer or juxtaposed facet. Typically a layer will contain a
 full set of specifications that define a visualization with
@@ -1913,7 +3723,7 @@ layer. Whereas for repeated and faceted specs, the entire specification is provi
 
     enc1 = ...
     spec1 =
-        asSpec [ enc1, mark Line [] ]
+        asSpec [ enc1, line [] ]
 
 -}
 asSpec : List ( VLProperty, Spec ) -> Spec
@@ -1932,7 +3742,7 @@ for details.
         , height 300
         , autosize [ AFit, APadding, AResize ]
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -1940,6 +3750,205 @@ for details.
 autosize : List Autosize -> ( VLProperty, Spec )
 autosize aus =
     ( VLAutosize, JE.object (List.map autosizeProperty aus) )
+
+
+{-| Specify the date/times to appear along an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axDates : List (List DateTime) -> AxisProperty
+axDates =
+    AxDates
+
+
+{-| Specify whether or not the axis baseline (domain) should be included as part
+of an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axDomain : Bool -> AxisProperty
+axDomain =
+    AxDomain
+
+
+{-| Specify the [format](https://vega.github.io/vega-lite/docs/format.html)
+to apply to labels on an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axFormat : String -> AxisProperty
+axFormat =
+    AxFormat
+
+
+{-| Specify whether or not grid lones should be included as part of an axis.
+For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axGrid : Bool -> AxisProperty
+axGrid =
+    AxGrid
+
+
+{-| Specify the rotation angle in degrees of axis labels. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelAngle : Float -> AxisProperty
+axLabelAngle =
+    AxLabelAngle
+
+
+{-| Specify the overlap strategy for labels when they are too large to fit within
+the space devoted to an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelOverlap : OverlapStrategy -> AxisProperty
+axLabelOverlap =
+    AxLabelOverlap
+
+
+{-| Specify the padding in pixels between an axis and its text labels. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabelPadding : Float -> AxisProperty
+axLabelPadding =
+    AxLabelPadding
+
+
+{-| Specify whether or not axis labels should be displayed. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axLabels : Bool -> AxisProperty
+axLabels =
+    AxLabels
+
+
+{-| Specify the maximum extent in pixels that axis ticks and labels should use.
+This determines a maximum offset value for axis titles. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axMaxExtent : Float -> AxisProperty
+axMaxExtent =
+    AxMaxExtent
+
+
+{-| Specify the minimum extent in pixels that axis ticks and labels should use.
+This determines a minimum offset value for axis titles. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axMinExtent : Float -> AxisProperty
+axMinExtent =
+    AxMinExtent
+
+
+{-| Specify the offset, in pixels, by which to displace the axis from the edge
+of the enclosing group or data rectangle. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axOffset : Float -> AxisProperty
+axOffset =
+    AxOffset
+
+
+{-| Specify the orientation of an axis relative to the plot it is describing. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axOrient : Side -> AxisProperty
+axOrient =
+    AxOrient
+
+
+{-| Specify the anchor position of the axis in pixels. For x-axis with top or
+bottom orientation, this sets the axis group x coordinate. For y-axis with left
+or right orientation, this sets the axis group y coordinate. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axPosition : Float -> AxisProperty
+axPosition =
+    AxPosition
+
+
+{-| Specify whether or not an axis should include tick marks. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTicks : Bool -> AxisProperty
+axTicks =
+    AxTicks
+
+
+{-| Specify the desired number of ticks, for axes visualizing quantitative scales.
+The resulting number may be different so that values are “nice” (multiples of 2, 5, 10)
+and lie within the underlying scale’s range. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTickCount : Int -> AxisProperty
+axTickCount =
+    AxTickCount
+
+
+{-| Specify the tick mark size in pixels. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTickSize : Float -> AxisProperty
+axTickSize =
+    AxTickSize
+
+
+{-| Specify the title to display as part of an axis. An empty string can be used
+to prevent a title being displayed. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitle : String -> AxisProperty
+axTitle =
+    AxTitle
+
+
+{-| Specify the horizontal alignment of an axis title. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleAlign : HAlign -> AxisProperty
+axTitleAlign =
+    AxTitleAlign
+
+
+{-| Specify the angle in degrees of an axis title. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleAngle : Float -> AxisProperty
+axTitleAngle =
+    AxTitleAngle
+
+
+{-| Specify the maximum length for an axis title for cases where the title is
+automatically generated from a field’s description. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitleMaxLength : Float -> AxisProperty
+axTitleMaxLength =
+    AxTitleMaxLength
+
+
+{-| Specify the padding in pixels between a title and axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axTitlePadding : Float -> AxisProperty
+axTitlePadding =
+    AxTitlePadding
+
+
+{-| Specify the numeric values to appear along an axis. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axValues : List Float -> AxisProperty
+axValues =
+    AxValues
+
+
+{-| Specify the drawing order of the axis relative to the other chart elements.
+A value of 1 indicates axis is drawn in front of chart marks, 0 indicates it is
+drawn behind them. For details see the
+[Vega axis property documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
+-}
+axZIndex : Int -> AxisProperty
+axZIndex =
+    AxZIndex
 
 
 {-| Set the background color of the visualization. Should be specified with a CSS
@@ -1950,7 +3959,7 @@ be transparent.
     toVegaLite
         [ background "rgb(251,247,238)"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -1960,19 +3969,28 @@ background colour =
     ( VLBackground, JE.string colour )
 
 
-{-| Create a binning transformation to be applied directly to a channel. The type
-of binning can be customised with a list of `BinProperty` or an empty list to use
-the default binning. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details.
+{-| Specify an bar mark. Bars are used for histograms, bar charts etc. for showing
+the magnitude of values in categories. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/bar.html).
 
-    position X [ PName "IMDB_Rating", PmType Quantitative , PBin [] ]
+    bar [ maFill "black", maStroke "white", maStrokeWeight 2 ]
 
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    bar []
+
+-}
+bar : List MarkProperty -> ( VLProperty, Spec )
+bar =
+    mark Bar
+
+
+{-| _Deprecated in favour of channel-specific binning (e.g. `pBin`, `oBin` etc.)_
 -}
 bin : List BinProperty -> LabelledSpec
 bin bProps =
-    -- TODO: This should need to be exposed - only maintained for backward
-    -- compatiblity after it's previous function was renamed to binAs. In next
+    -- TODO: This should not need to be exposed - only maintained for backward
+    -- compatiblity after its previous function was renamed to binAs. In next
     -- major version, make private.
     if bProps == [] then
         ( "bin", JE.bool True )
@@ -1981,17 +3999,17 @@ bin bProps =
 
 
 {-| Create a named binning transformation that may be referenced in other Transformations
-or encodings. This works in a similar way to `bin` but requires the name of the field
-to bin and an additional label so it may be referenced in other expressions. The
-type of binning can be customised with a list of `BinProperty` or an empty list
-to use the default binning. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details. Note that usually, direct binning within an encoding is preferred
-over this form of bin transformation.
+or encodings. The type of binning can be customised with a list of `BinProperty`
+generating functions (`biBase`, `biDivide` etc.) or an empty list to use the default
+binning. For more details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html).
 
     trans =
         transform
             << binAs [ MaxBins 3 ] "IMDB_Rating" "ratingGroup"
+
+Note that usually, direct binning within an encoding is preferred over this form
+of bin transformation.
 
 -}
 binAs : List BinProperty -> String -> String -> List LabelledSpec -> List LabelledSpec
@@ -2000,6 +4018,22 @@ binAs bProps field label =
         (::) ( "bin", JE.list [ JE.bool True, JE.string field, JE.string label ] )
     else
         (::) ( "bin", JE.list [ bProps |> List.map binProperty |> JE.object, JE.string field, JE.string label ] )
+
+
+{-| Specify a boolean data value. This is used when a function can accept values
+of different types.
+-}
+boo : Bool -> DataValue
+boo =
+    Boolean
+
+
+{-| Specify a list of boolean data values. This is used when a function can
+accept lists of different types.
+-}
+boos : List Bool -> DataValues
+boos =
+    Booleans
 
 
 {-| Creates a new data field based on calculations from existing fields.
@@ -2025,9 +4059,9 @@ to specifying separate `SDomain` and `SRange` lists and is safer as it guarantee
 a one-to-one correspondence between domain and range values.
 
     color
-        [ MName "weather"
-        , MmType Nominal
-        , MScale <|
+        [ mName "weather"
+        , mMType Nominal
+        , mScale <|
             categoricalDomainMap
                 [ ( "sun", "yellow" )
                 , ( "rain", "blue" )
@@ -2045,16 +4079,183 @@ categoricalDomainMap scaleDomainPairs =
     [ SDomain (DStrings domain), SRange (RStrings range) ]
 
 
+{-| Specify a circle mark for symbolising points. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/circle.html).
+
+    circle [ maStroke "red", maStrokeWeight 2 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    circle []
+
+-}
+circle : List MarkProperty -> ( VLProperty, Spec )
+circle =
+    mark Circle
+
+
+{-| Specify a clipping rectangle in pixel units. The four parameters are respectively
+'left', 'top', 'right' and 'bottom' of the rectangular clipping bounds.
+-}
+clipRect : Float -> Float -> Float -> Float -> ClipRect
+clipRect l t r b =
+    LTRB l t r b
+
+
+{-| Configure the default appearance of area marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coArea : List MarkProperty -> ConfigurationProperty
+coArea =
+    AreaStyle
+
+
+{-| Configure the default sizing of visualizations. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coAutosize : List Autosize -> ConfigurationProperty
+coAutosize =
+    Autosize
+
+
+{-| Configure the default appearance of axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxis : List AxisConfig -> ConfigurationProperty
+coAxis =
+    Axis
+
+
+{-| Configure the default appearance of x-axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisX : List AxisConfig -> ConfigurationProperty
+coAxisX =
+    AxisX
+
+
+{-| Configure the default appearance of y-axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisY : List AxisConfig -> ConfigurationProperty
+coAxisY =
+    AxisY
+
+
+{-| Configure the default appearance of left-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisLeft : List AxisConfig -> ConfigurationProperty
+coAxisLeft =
+    AxisLeft
+
+
+{-| Configure the default appearance of right-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisRight : List AxisConfig -> ConfigurationProperty
+coAxisRight =
+    AxisRight
+
+
+{-| Configure the default appearance of top-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisTop : List AxisConfig -> ConfigurationProperty
+coAxisTop =
+    AxisTop
+
+
+{-| Configure the default appearance of bottom-side axes. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisBottom : List AxisConfig -> ConfigurationProperty
+coAxisBottom =
+    AxisBottom
+
+
+{-| Configure the default appearance of axes with band scaling. For details, see the
+[Vega-Lite axis configuration documentation](https://vega.github.io/vega-lite/docs/config.html#axis-config)
+-}
+coAxisBand : List AxisConfig -> ConfigurationProperty
+coAxisBand =
+    AxisBand
+
+
+{-| Configure the default background color of visualizations. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coBackground : String -> ConfigurationProperty
+coBackground =
+    Background
+
+
+{-| Configure the default appearance of bar marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coBar : List MarkProperty -> ConfigurationProperty
+coBar =
+    BarStyle
+
+
+{-| Configure the default appearance of circle marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coCircle : List MarkProperty -> ConfigurationProperty
+coCircle =
+    CircleStyle
+
+
+{-| Configure the default title style for count fields. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coCountTitle : String -> ConfigurationProperty
+coCountTitle =
+    CountTitle
+
+
+{-| Configure the default title generation style for fields. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coFieldTitle : FieldTitleProperty -> ConfigurationProperty
+coFieldTitle =
+    FieldTitle
+
+
+{-| Configure the default appearance of geoshape marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coGeoshape : List MarkProperty -> ConfigurationProperty
+coGeoshape =
+    GeoshapeStyle
+
+
+{-| Configure the default appearance of legends. For details, see the
+[Vega-Lite legend configuration documentation](https://vega.github.io/vega-lite/docs/config.html#legend-config)
+-}
+coLegend : List LegendConfig -> ConfigurationProperty
+coLegend =
+    Legend
+
+
+{-| Configure the default appearance of line marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coLine : List MarkProperty -> ConfigurationProperty
+coLine =
+    LineStyle
+
+
 {-| Encode a color channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by color. The second parameter
 is a list of any previous channels to which this color channel should be added.
 
-    color [ MName "Species", MmType Nominal ] []
+    color [ mName "Species", mMType Nominal ] []
 
 Encoding a color channel will generate a legend by default. To stop the legend
 appearing, just supply an empty list of legend properties to `MLegend` :
 
-    color [ MName "Species", MmType Nominal, MLegend [] ] []
+    color [ mName "Species", mMType Nominal, mLegend [] ] []
 
 -}
 color : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -2070,14 +4271,40 @@ chaining encodings using functional composition
 
     enc =
         encoding
-            << position X [ PName "people", PmType Quantitative ]
-            << position Y [ PName "gender", PmType Nominal ]
-            << column [ FName "age", FmType Ordinal ]
+            << position X [ pName "people", pMType Quantitative ]
+            << position Y [ pName "gender", pMType Nominal ]
+            << column [ fName "age", fMType Ordinal ]
 
 -}
 column : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 column fFields =
     (::) ( "column", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Specify the mapping between a column and its field definitions in a set of
+faceted small multiples. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+-}
+columnBy : List FacetChannel -> FacetMapping
+columnBy =
+    ColumnBy
+
+
+{-| Create a list of fields to use in set of repeated small multiples arranged in
+columns. The list of fields named here can be referenced in an encoding with
+`pRepeat Column`, `mRepeat Column` etc.
+-}
+columnFields : List String -> RepeatFields
+columnFields =
+    ColumnFields
+
+
+{-| Configure the default mark appearance. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coMark : List MarkProperty -> ConfigurationProperty
+coMark =
+    MarkStyle
 
 
 {-| Combines a list of labelled specifications into a single specification that
@@ -2096,11 +4323,19 @@ combineSpecs specs =
     JE.object specs
 
 
+{-| Configure the default appearance of a named style. For details, see the
+[Vega-Lite mark style configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coNamedStyle : String -> List MarkProperty -> ConfigurationProperty
+coNamedStyle =
+    NamedStyle
+
+
 {-| Defines a single configuration option to be applied globally across the visualization.
 The first parameter identifies the type of configuration, the second a list of previous
 configurations to which this one may be added.
 
-    configuration (Axis [ DomainWidth 4 ]) []
+    configuration (coAxis [ axcoDomainWidth 4 ]) []
 
 -}
 configuration : ConfigurationProperty -> List LabelledSpec -> List LabelledSpec
@@ -2115,9 +4350,9 @@ more details.
 
     config =
         configure
-            << configuration (Axis [ DomainWidth 1 ])
-            << configuration (View [ Stroke (Just "transparent") ])
-            << configuration (SelectionStyle [ ( Single, [ On "dblclick" ] ) ])
+            << configuration (coAxis [ axcoDomainWidth 1 ])
+            << configuration (coView [ vicoStroke Nothing ])
+            << configuration (coSelection [ ( Single, [ seOn "dblclick" ] ) ])
 
 -}
 configure : List LabelledSpec -> ( VLProperty, Spec )
@@ -2125,10 +4360,195 @@ configure configs =
     ( VLConfig, JE.object configs )
 
 
+{-| Configure the default number formatting for axis and text labels. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coNumberFormat : String -> ConfigurationProperty
+coNumberFormat =
+    NumberFormat
+
+
+{-| Configure the default padding in pixels from the edge of the of visualization
+to the data rectangle. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coPadding : Padding -> ConfigurationProperty
+coPadding =
+    Padding
+
+
+{-| Configure the default appearance of point marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coPoint : List MarkProperty -> ConfigurationProperty
+coPoint =
+    PointStyle
+
+
+{-| Configure the default style of map projections. For details, see the
+[Vega-Lite projection configuration documentation](https://vega.github.io/vega-lite/docs/config.html#projection-config)
+-}
+coProjection : List ProjectionProperty -> ConfigurationProperty
+coProjection =
+    Projection
+
+
+{-| Configure the default range properties used when scaling. For details, see the
+[Vega-Lite scale range configuration documentation](https://vega.github.io/vega-lite/docs/config.html#scale-config)
+-}
+coRange : List RangeConfig -> ConfigurationProperty
+coRange =
+    Range
+
+
+{-| Configure the default appearance of rectangle marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRect : List MarkProperty -> ConfigurationProperty
+coRect =
+    RectStyle
+
+
+{-| Configure the default handling of invalid (`null` and `NaN`) values. If `true`,
+invalid values are skipped or filtered out when represented as marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRemoveInvalid : Bool -> ConfigurationProperty
+coRemoveInvalid =
+    RemoveInvalid
+
+
+{-| Configure the default appearance of rule marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coRule : List MarkProperty -> ConfigurationProperty
+coRule =
+    RuleStyle
+
+
+{-| Configure the default scale properties used when scaling. For details, see the
+[Vega-Lite scale configuration documentation](https://vega.github.io/vega-lite/docs/config.html#scale-config)
+-}
+coScale : List ScaleConfig -> ConfigurationProperty
+coScale =
+    Scale
+
+
+{-| Configure the default appearance of selection marks. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
+-}
+coSelection : List ( Selection, List SelectionProperty ) -> ConfigurationProperty
+coSelection =
+    SelectionStyle
+
+
+{-| Configure the default appearance of square marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coSquare : List MarkProperty -> ConfigurationProperty
+coSquare =
+    SquareStyle
+
+
+{-| Configure the default stack offset style for stackable marks. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coStack : StackProperty -> ConfigurationProperty
+coStack =
+    Stack
+
+
+{-| Configure the default appearance of text marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coText : List MarkProperty -> ConfigurationProperty
+coText =
+    TextStyle
+
+
+{-| Configure the default appearance of tick marks. For details, see the
+[Vega-Lite mark configuration documentation](https://vega.github.io/vega-lite/docs/config.html#mark-config)
+-}
+coTick : List MarkProperty -> ConfigurationProperty
+coTick =
+    TickStyle
+
+
+{-| Configure the default style of visualization titles. For details, see the
+[Vega-Lite title configuration documentation](https://vega.github.io/vega-lite/docs/config.html#title-config)
+-}
+coTitle : List TitleConfig -> ConfigurationProperty
+coTitle =
+    TitleStyle
+
+
+{-| Configure the default time format for axis and legend labels. For details, see the
+[Vega-Lite top-level configuration documentation](https://vega.github.io/vega-lite/docs/config.html#top-level-config)
+-}
+coTimeFormat : String -> ConfigurationProperty
+coTimeFormat =
+    TimeFormat
+
+
+{-| Specify the default style of trail marks.
+
+    config =
+        configure << coTrail [ maOpacity 0.5, maStrokeDash [ 1, 2 ] ]
+
+-}
+coTrail : List MarkProperty -> List LabelledSpec -> List LabelledSpec
+coTrail mps =
+    (::) (configProperty (TrailStyle mps))
+
+
+{-| Configure the default single view style. For details, see the
+[Vega-Lite view configuration documentation](https://vega.github.io/vega-lite/docs/config.html#view-configuration)
+-}
+coView : List ViewConfig -> ConfigurationProperty
+coView =
+    View
+
+
+{-| Specify a cube helix color interpolation for continuous color scales. The
+parameter is the gamma value to use in interpolation (anchored at 1).
+-}
+cubeHelix : Float -> CInterpolate
+cubeHelix =
+    CubeHelix
+
+
+{-| Specify a long-path cube helix color interpolation for continuous color scales.
+The parameter is the gamma value to use in interpolation (anchored at 1).
+-}
+cubeHelixLong : Float -> CInterpolate
+cubeHelixLong =
+    CubeHelixLong
+
+
+{-| Specify a custom projection type. Additional custom projections from d3 can
+be defined via the [Vega API](https://vega.github.io/vega/docs/projections/#register)
+and called from with this function where the parameter is the name of the D3
+projection to use (e.g. `customProjection "winkel3"`).
+-}
+customProjection : String -> Projection
+customProjection =
+    Custom
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+level of detail (grouping) channel. The type of aggregation is determined by the
+given operation parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+dAggregate : Operation -> DetailChannel
+dAggregate =
+    DAggregate
+
+
 {-| Create a column of data. A column has a name and a list of values. The final
 parameter is the list of any other columns to which this is added.
 
-    dataColumn "Animal" (Strings [ "Cat", "Dog", "Mouse"]) []
+    dataColumn "Animal" (strs [ "Cat", "Dog", "Mouse"]) []
 
 -}
 dataColumn : String -> DataValues -> List DataColumn -> List DataColumn
@@ -2158,10 +4578,10 @@ for details.
 The columns themselves are most easily generated with `dataColumn`
 
     data =
-        dataFromColumns [ Parse [ ( "Year", FoDate "%Y" ) ] ]
-            << dataColumn "Animal" (Strings [ "Fish", "Dog", "Cat" ])
-            << dataColumn "Age" (Numbers [ 28, 12, 6 ])
-            << dataColumn "Year" (Strings [ "2010", "2014", "2015" ])
+        dataFromColumns [ parse [ ( "Year", foDate "%Y" ) ] ]
+            << dataColumn "Animal" (strs [ "Fish", "Dog", "Cat" ])
+            << dataColumn "Age" (nums [ 28, 12, 6 ])
+            << dataColumn "Year" (strs [ "2010", "2014", "2015" ])
 
 -}
 dataFromColumns : List Format -> List DataColumn -> Data
@@ -2193,14 +4613,14 @@ general cases of json creation, consider
 
     let
         geojson =
-            geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
     in
     toVegaLite
         [ width 200
         , height 200
         , dataFromJson geojson []
-        , projection [ PType Orthographic ]
-        , mark Geoshape []
+        , projection [ prType Orthographic ]
+        , geoshape []
         ]
 
 -}
@@ -2230,10 +4650,10 @@ if you are creating data inline (as opposed to reading from a file), adding data
 is more efficient and less error-prone.
 
     data =
-        dataFromRows [ Parse [ ( "Year", FoDate "%Y" ) ] ]
-            << dataRow [ ( "Animal", Str "Fish" ), ( "Age", Number 28 ), ( "Year", Str "2010" ) ]
-            << dataRow [ ( "Animal", Str "Dog" ), ( "Age", Number 12 ), ( "Year", Str "2014" ) ]
-            << dataRow [ ( "Animal", Str "Cat" ), ( "Age", Number 6 ), ( "Year", Str "2015" ) ]
+        dataFromRows [ parse [ ( "Year", foDate "%Y" ) ] ]
+            << dataRow [ ( "Animal", str "Fish" ), ( "Age", num 28 ), ( "Year", str "2010" ) ]
+            << dataRow [ ( "Animal", str "Dog" ), ( "Age", num 12 ), ( "Year", str "2014" ) ]
+            << dataRow [ ( "Animal", str "Cat" ), ( "Age", num 6 ), ( "Year", str "2015" ) ]
 
 -}
 dataFromRows : List Format -> List DataRow -> Data
@@ -2263,7 +4683,7 @@ for details.
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
         , dataFromSource "myData" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2281,8 +4701,8 @@ dataFromSource sourceName fmts =
         )
 
 
-{-| Declare data source from a url. The url can be a local path on a web server
-or an external http(s) url. Used to create a data ( property, specification ) pair.
+{-| Declare data source from a url. The URL can be a local path on a web server
+or an external http(s) URL. Used to create a data ( property, specification ) pair.
 An optional list of field formatting instructions can be provided as the second
 parameter or an empty list to use the default formatting. See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format)
@@ -2290,8 +4710,8 @@ for details.
 
     enc = ...
     toVegaLite
-        [ dataFromUrl "data/weather.csv" [ Parse [ ( "date", FoDate "%Y-%m-%d %H:%M" ) ] ]
-        , mark Line []
+        [ dataFromUrl "data/weather.csv" [ parse [ ( "date", foDate "%Y-%m-%d %H:%M" ) ] ]
+        , line []
         , enc []
         ]
 
@@ -2312,7 +4732,7 @@ dataFromUrl url fmts =
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
 The final parameter is the list of any other rows to which this is added.
 
-    dataRow [("Animal", Str "Fish"),("Age",Number 28),("Year", Str "2010")] []
+    dataRow [ ("Animal", str "Fish"), ("Age", num 28), ("Year", str "2010") ] []
 
 -}
 dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
@@ -2324,11 +4744,13 @@ dataRow row =
 can be created with normal data generating functions such as `dataFromRows` or
 `dataFromJson`. These can be later referred to using `dataFromSource`.
 
+    import Json.Encode as JE
+
     let
         data =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
         json =
             JE.list
                 [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 120 ) ]
@@ -2341,7 +4763,7 @@ can be created with normal data generating functions such as `dataFromRows` or
     toVegaLite
         [ datasets [ ( "myData", data [] ),  ( "myJson", dataFromJson json [] ) ]
         , dataFromSource "myData" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2363,13 +4785,22 @@ datasets namedData =
     ( VLDatasets, JE.object specs )
 
 
+{-| Discretizes a series of numeric values into bins when encoding with a level
+of detail (grouping) channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+dBin : List BinProperty -> DetailChannel
+dBin =
+    DBin
+
+
 {-| Provides an optional description to be associated with the visualization.
 
     enc = ...
     toVegaLite
         [ description "Population change of key regions since 1900"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2386,12 +4817,38 @@ is a list of any previous channels to which this detail channel should be added.
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
 for details.
 
-    detail [ DName "Species", DmType Nominal ] []
+    detail [ dName "Species", dMType Nominal ] []
 
 -}
 detail : List DetailChannel -> List LabelledSpec -> List LabelledSpec
 detail detailProps =
     (::) ( "detail", List.map detailChannelProperty detailProps |> JE.object )
+
+
+{-| Provide the name of the field used for encoding with a level of detail
+(grouping) channel. For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+dName : String -> DetailChannel
+dName =
+    DName
+
+
+{-| Specify the field type (level of measurement) when encoding with a level of
+detail (grouping) channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+dMType : Measurement -> DetailChannel
+dMType =
+    DmType
+
+
+{-| Specify the date-time values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doDts : List (List DateTime) -> ScaleDomain
+doDts =
+    DDateTimes
 
 
 {-| Create a pair of continuous domain to color mappings suitable for customising
@@ -2404,9 +4861,9 @@ and `SRange` lists and is safer as it guarantees a one-to-one correspondence bet
 domain and range values.
 
     color
-        [ MName "year"
-        , MmType Ordinal
-        , MScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
+        [ mName "year"
+        , mMType Ordinal
+        , mScale (domainRangeMap ( 1955, "#e6959c" ) ( 2000, "#911a24" ))
         ]
 
 -}
@@ -2419,19 +4876,156 @@ domainRangeMap lowerMap upperMap =
     [ SDomain (DNumbers domain), SRange (RStrings range) ]
 
 
+{-| Specify the numeric values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doNums : List Float -> ScaleDomain
+doNums =
+    DNumbers
+
+
+{-| Specify a scale domain based on a named interactive selection. For full details see
+the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doSelection : String -> ScaleDomain
+doSelection =
+    DSelection
+
+
+{-| Specify the string values that define a scale domain. For full details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
+-}
+doStrs : List String -> ScaleDomain
+doStrs =
+    DStrings
+
+
+{-| Specify a date-time data value. This is used when a function can accept values
+of different types.
+-}
+dt : List DateTime -> DataValue
+dt =
+    DateTime
+
+
+{-| Specify a day of the month as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtDate : Int -> DateTime
+dtDate =
+    DTDate
+
+
+{-| Specify a day of the week. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtDay : DayName -> DateTime
+dtDay =
+    DTDay
+
+
+{-| Specify an hour of the day (0=midnight, 1=1am, 23=11pm etc.) an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtHour : Int -> DateTime
+dtHour =
+    DTHours
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a level of detail (grouping) channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+dTimeUnit : TimeUnit -> DetailChannel
+dTimeUnit =
+    DTimeUnit
+
+
+{-| Specify a millisecond of a second (0-999). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMillisecond : Int -> DateTime
+dtMillisecond =
+    DTMilliseconds
+
+
+{-| Specify a minute of an hour (0-59). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMinute : Int -> DateTime
+dtMinute =
+    DTMinutes
+
+
+{-| Specify a month as an integer (1=January, 2=February etc.). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtMonth : MonthName -> DateTime
+dtMonth =
+    DTMonth
+
+
+{-| Specify a year quarter as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtQuarter : Int -> DateTime
+dtQuarter =
+    DTQuarter
+
+
+{-| Specify the min max date-time range to be used in data filtering. If either
+parameter is an empty list, it is assumed to be unbounded.
+-}
+dtRange : List DateTime -> List DateTime -> FilterRange
+dtRange =
+    DateRange
+
+
+{-| Specify a list of date-time data values. This is used when a function can
+accept lists of different types.
+-}
+dts : List (List DateTime) -> DataValues
+dts =
+    DateTimes
+
+
+{-| Specify a second of a minute (0-59). For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtSecond : Int -> DateTime
+dtSecond =
+    DTSeconds
+
+
+{-| Specify a year as an integer. For details, see the
+[Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+-}
+dtYear : Int -> DateTime
+dtYear =
+    DTYear
+
+
 {-| Create an encoding specification from a list of channel encodings.
 
     enc =
         encoding
-            << position X [ PName "Animal", PmType Ordinal ]
-            << position Y [ PName "Age", PmType Quantitative ]
-            << shape [ MName "Species", MmType Nominal ]
-            << size [ MName "Population", MmType Quantitative ]
+            << position X [ pName "Animal", pMType Ordinal ]
+            << position Y [ pName "Age", pMType Quantitative ]
+            << shape [ mName "Species", mMType Nominal ]
+            << size [ mName "Population", mMType Quantitative ]
 
 -}
 encoding : List LabelledSpec -> ( VLProperty, Spec )
 encoding channels =
     ( VLEncoding, JE.object channels )
+
+
+{-| Specify an expression that should evaluate to either true or false. Can use
+any valid [Vega expression](https://vega.github.io/vega/docs/expressions/).
+-}
+expr : String -> BooleanOp
+expr =
+    Expr
 
 
 {-| Defines the fields that will be used to facet a view in rows or columns to create
@@ -2442,7 +5036,7 @@ to apply to each of those facets using `asSpec`.
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ FName "Origin", FmType Nominal ] ]
+        [ facet [ rowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -2455,13 +5049,69 @@ facet fMaps =
     ( VLFacet, JE.object (List.map facetMappingProperty fMaps) )
 
 
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+facet channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+fAggregate : Operation -> FacetChannel
+fAggregate =
+    FAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+facet channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+fBin : List BinProperty -> FacetChannel
+fBin =
+    FBin
+
+
+{-| Specify the 'axis' for a series of faceted plots. This is the guide that spans
+the collection of faceted plots, each of which may have their own axes. For details,
+see the
+[Vega-Lite facet header documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
+-}
+fHeader : List HeaderProperty -> FacetChannel
+fHeader =
+    FHeader
+
+
+{-| Build up a filtering predicate through logical composition (`and`, `or` etc.).
+See the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
+for details.
+-}
+fiCompose : BooleanOp -> Filter
+fiCompose =
+    FCompose
+
+
+{-| Filter a data stream so that only data in a given field equal to the given
+value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiEqual : String -> DataValue -> Filter
+fiEqual =
+    FEqual
+
+
+{-| Filter a data stream so that only data that satisfy the given predicate
+expression are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiExpr : String -> Filter
+fiExpr =
+    FExpr
+
+
 {-| Encode a fill channel. This acts in a similar way to encoding by `color` but
 only affects the interior of closed shapes. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by fill.
 The second parameter is a list of any previous channels to which this fill channel
 should be added.
 
-    fill [ MName "Species", MmType Nominal ] []
+    fill [ mName "Species", mMType Nominal ] []
 
 Note that if both `fill` and `color` encodings are specified, `fill` takes precedence.
 
@@ -2478,13 +5128,13 @@ should be added in sequence.
 
     trans =
         transform
-            << filter (FEqual "Animal" (Str "Cat"))
+            << filter (fiEqual "Animal" (str "Cat"))
 
 Filter operations can combine selections and data predicates with `BooleanOp` expressions:
 
     trans =
         transform
-            << filter (FCompose (And (Expr "datum.Weight_in_lbs > 3000") (Selection "brush")))
+            << filter (fiCompose (and (expr "datum.Weight_in_lbs > 3000") (fiSelection "brush")))
 
 -}
 filter : Filter -> List LabelledSpec -> List LabelledSpec
@@ -2508,6 +5158,15 @@ filter f =
                     case vals of
                         NumberRange mn mx ->
                             JE.list [ JE.float mn, JE.float mx ]
+
+                        DateRange [] [] ->
+                            JE.list [ JE.null, JE.null ]
+
+                        DateRange [] dMax ->
+                            JE.list [ JE.null, JE.object (List.map dateTimeProperty dMax) ]
+
+                        DateRange dMin [] ->
+                            JE.list [ JE.object (List.map dateTimeProperty dMin), JE.null ]
 
                         DateRange dMin dMax ->
                             JE.list
@@ -2536,15 +5195,91 @@ filter f =
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
 
 
-{-| Specifies a list of geo features to be used in a geoShape specification.
+{-| Filter a data stream so that only data in a given field contained in the given
+list of values are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiOneOf : String -> DataValues -> Filter
+fiOneOf =
+    FOneOf
+
+
+{-| Filter a data stream so that only data in a given field that are within the
+given range are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiRange : String -> FilterRange -> Filter
+fiRange =
+    FRange
+
+
+{-| Filter a data stream so that only data in a given field that are within the
+given interactive selection are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiSelection : String -> Filter
+fiSelection =
+    FSelection
+
+
+{-| Provide the name of the field used for encoding with a facet channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+fName : String -> FacetChannel
+fName =
+    FName
+
+
+{-| Specify the field type (level of measurement) when encoding with a facet
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+fMType : Measurement -> FacetChannel
+fMType =
+    FmType
+
+
+{-| Specity a date format for parsing input data. Formatting can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of dates because different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+foDate : String -> DataType
+foDate =
+    FoDate
+
+
+{-| Specity a UTC date format for parsing input data. Formatting can be specified using
+[D3's formatting specifiers](https://vega.github.io/vega-lite/docs/data.html#format)
+or left as an empty string if default date formatting is to be applied. Care should
+be taken when assuming default parsing of UTC dates because different browsers can
+parse dates differently. Being explicit about the date format is usually safer.
+-}
+foUtc : String -> DataType
+foUtc =
+    FoUtc
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a facet channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+fTimeUnit : TimeUnit -> FacetChannel
+fTimeUnit =
+    FTimeUnit
+
+
+{-| Specifies a list of geo features to be used in a `geoshape` specification.
 Each feature object in this collection can be created with the `geometry` function.
 
     geojson =
         geoFeatureCollection
-            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
-                [ ( "myRegionName", Str "Northern region" ) ]
-            , geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
-                [ ( "myRegionName", Str "Southern region" ) ]
+            [ geometry (geoPolygon [ [ ( -3, 59 ), ( -3, 52 ), ( 4, 52 ), ( -3, 59 ) ] ])
+                [ ( "myRegionName", str "Northern region" ) ]
+            , geometry (geoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 52 ) ] ])
+                [ ( "myRegionName", str "Southern region" ) ]
             ]
 
 -}
@@ -2556,13 +5291,31 @@ geoFeatureCollection geoms =
         ]
 
 
-{-| Specifies a list of geometry objects to be used in a geoShape specification.
+{-| Specify line geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoLine : List ( Float, Float ) -> Geometry
+geoLine =
+    GeoLine
+
+
+{-| Specify multi-line geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-line` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoLines : List (List ( Float, Float )) -> Geometry
+geoLines =
+    GeoLines
+
+
+{-| Specifies a list of geometry objects to be used in a `geoshape` specification.
 Each geometry object in this collection can be created with the `geometry` function.
 
     geojson =
         geometryCollection
-            [ geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
-            , geometry (GeoPoint -3.5 55.5) []
+            [ geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+            , geometry (geoPoint -3.5 55.5) []
             ]
 
 -}
@@ -2574,12 +5327,12 @@ geometryCollection geoms =
         ]
 
 
-{-| Specifies a geometric object to be used in a geoShape specification. The first
-parameter is the geometric type, the second an optional list of properties to be
-associated with the object.
+{-| Specifies a geometric object to be used in a `geoshape` specification. The
+first parameter is the geometric type, the second an optional list of properties
+to be associated with the object.
 
       geojson =
-          geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
+          geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 59 ) ] ]) []
 
 -}
 geometry : Geometry -> List ( String, DataValue ) -> Spec
@@ -2595,6 +5348,73 @@ geometry gType properties =
             , ( "geometry", geometryTypeSpec gType )
             , ( "properties", JE.object (List.map (\( key, val ) -> ( key, dataValueSpec val )) properties) )
             ]
+
+
+{-| Specify point geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPoint : Float -> Float -> Geometry
+geoPoint =
+    GeoPoint
+
+
+{-| Specify multi-point geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-point` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPoints : List ( Float, Float ) -> Geometry
+geoPoints =
+    GeoPoints
+
+
+{-| Specify polygon geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPolygon : List (List ( Float, Float )) -> Geometry
+geoPolygon =
+    GeoPolygon
+
+
+{-| Specify multi-polygon geometry for programmatically creating GeoShapes. This is equivalent
+to the [GeoJson geometry `multi-polygon` type](https://tools.ietf.org/html/rfc7946#section-3.1)
+in the GeoJSON specification.
+-}
+geoPolygons : List (List (List ( Float, Float ))) -> Geometry
+geoPolygons =
+    GeoPolygons
+
+
+{-| Specify a an arbitrary shape determined by georaphically referenced
+coordinates. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/geoshape.html).
+
+    geoshape [ maFill "blue", maStroke "white" ]
+
+-}
+geoshape : List MarkProperty -> ( VLProperty, Spec )
+geoshape =
+    mark Geoshape
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+hyperlink channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+hAggregate : Operation -> HyperlinkChannel
+hAggregate =
+    HAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+hyperlink channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+hBin : List BinProperty -> HyperlinkChannel
+hBin =
+    HBin
 
 
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
@@ -2614,6 +5434,17 @@ hConcat specs =
     ( VLHConcat, JE.list specs )
 
 
+{-| Specify the properties of a hyperlink channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second the encoding
+to apply if the expression is true, the third the encoding if the expression is
+false. For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+hDataCondition : BooleanOp -> List HyperlinkChannel -> List HyperlinkChannel -> HyperlinkChannel
+hDataCondition op tCh fCh =
+    HDataCondition op tCh fCh
+
+
 {-| Overrides the default height of the visualization. If not specified the height
 will be calculated based on the content of the visualization.
 
@@ -2621,7 +5452,7 @@ will be calculated based on the content of the visualization.
     toVegaLite
         [ height 300
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2631,12 +5462,66 @@ height h =
     ( VLHeight, JE.float h )
 
 
+{-| Specify the field type (level of measurement) when encoding with a hyperlink
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+hMType : Measurement -> HyperlinkChannel
+hMType =
+    HmType
+
+
+{-| Provide the name of the field used for encoding with a hyperlink channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+hName : String -> HyperlinkChannel
+hName =
+    HName
+
+
+{-| Reference in a hyperlink channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields being laid out
+in columns or in rows.
+-}
+hRepeat : Arrangement -> HyperlinkChannel
+hRepeat =
+    HRepeat
+
+
+{-| Specify the properties of a hyperlink channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the hyperlink has been selected, the third the encoding if it is not selected.
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+hSelectionCondition : BooleanOp -> List HyperlinkChannel -> List HyperlinkChannel -> HyperlinkChannel
+hSelectionCondition op tCh fCh =
+    HSelectionCondition op tCh fCh
+
+
+{-| Provide a literal string value when encoding with a hyperlink channel.
+-}
+hStr : String -> HyperlinkChannel
+hStr =
+    HString
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a hyperlink channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+hTimeUnit : TimeUnit -> HyperlinkChannel
+hTimeUnit =
+    HTimeUnit
+
+
 {-| Encode a hyperlink channel. The first parameter is a list of hyperlink channel
-properties that characterise the hyperlinking such as the destination url and cursor
+properties that characterise the hyperlinking such as the destination URL and cursor
 type. The second parameter is a list of any previous encoding channels to which
 this hyperlink channel should be added.
 
-    hyperlink [ HName "Species", HmType Nominal ] []
+    hyperlink [ hName "Species", hMType Nominal ] []
 
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#href)
@@ -2645,6 +5530,219 @@ For further details see the
 hyperlink : List HyperlinkChannel -> List LabelledSpec -> List LabelledSpec
 hyperlink hyperProps =
     (::) ( "href", List.concatMap hyperlinkChannelProperty hyperProps |> JE.object )
+
+
+{-| Specify a checkbox input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iCheckbox : String -> List InputProperty -> Binding
+iCheckbox f =
+    ICheckbox f
+
+
+{-| Specify a color input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iColor : String -> List InputProperty -> Binding
+iColor f =
+    IColor f
+
+
+{-| Specify a date input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iDate : String -> List InputProperty -> Binding
+iDate f =
+    IDate f
+
+
+{-| Specify a local time input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iDateTimeLocal : String -> List InputProperty -> Binding
+iDateTimeLocal f =
+    IDateTimeLocal f
+
+
+{-| Specify a month input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iMonth : String -> List InputProperty -> Binding
+iMonth f =
+    IMonth f
+
+
+{-| Specify the delay in input event handling when processing input events in
+order to avoid unnecessary event broadcasting. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inDebounce : Float -> InputProperty
+inDebounce =
+    Debounce
+
+
+{-| Specify an optional CSS selector indicating the parent element to which an
+input element should be added. This allows the option of the input element to be
+outside the visualization container. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inElement : String -> InputProperty
+inElement =
+    Element
+
+
+{-| Specify the maximum slider value for a range input element. Defaults to the
+larger of the signal value and 100. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMax : Float -> InputProperty
+inMax =
+    InMax
+
+
+{-| Specify the minimum slider value for a range input element. Defaults to the
+smaller of the signal value and 0. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inMin : Float -> InputProperty
+inMin =
+    InMin
+
+
+{-| Specify a custom label for a radio or select input element. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inName : String -> InputProperty
+inName =
+    InName
+
+
+{-| Specify a range of options for a radio or select input element. For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inOptions : List String -> InputProperty
+inOptions =
+    InOptions
+
+
+{-| Specify the initial placeholding text for input elements such as text fields.
+For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inPlaceholder : String -> InputProperty
+inPlaceholder =
+    InPlaceholder
+
+
+{-| Specify the minimum input element range slider increment. If undefined,
+the step size will be automatically determined based on the min and max values.
+For details see the
+[Vega-Lite input element documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+inStep : Float -> InputProperty
+inStep =
+    InStep
+
+
+{-| Specify a number input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iNumber : String -> List InputProperty -> Binding
+iNumber f =
+    INumber f
+
+
+{-| Specify a radio box input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iRadio : String -> List InputProperty -> Binding
+iRadio f =
+    IRadio f
+
+
+{-| Specify a range slider input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iRange : String -> List InputProperty -> Binding
+iRange f =
+    IRange f
+
+
+{-| Specify a select input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iSelect : String -> List InputProperty -> Binding
+iSelect f =
+    ISelect f
+
+
+{-| Specify a telephone number input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iTel : String -> List InputProperty -> Binding
+iTel f =
+    ITel f
+
+
+{-| Specify a text input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iText : String -> List InputProperty -> Binding
+iText f =
+    IText f
+
+
+{-| Specify a time input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iTime : String -> List InputProperty -> Binding
+iTime f =
+    ITime f
+
+
+{-| Specify a week input element that can bound to a named field value (first
+parameter. For details see the
+[Vega-Lite input element binding documentation](https://vega.github.io/vega-lite/docs/bind.html#input-element-binding)
+and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+-}
+iWeek : String -> List InputProperty -> Binding
+iWeek f =
+    IWeek f
+
+
+{-| Indicates a JSON file format from which a given property is to be extracted
+when it has some surrounding structure or meta-data. For example, specifying
+the property `values.features` is equivalent to retrieving `json.values.features`
+from the loaded JSON object with a custom delimeter. For details, see the
+[Vega-Lite JSON documentation](https://vega.github.io/vega-lite/docs/data.html#json).
+-}
+jsonProperty : String -> Format
+jsonProperty =
+    JSON
 
 
 {-| Assigns a list of specifications to superposed layers in a visualization.
@@ -2662,6 +5760,421 @@ hyperlink hyperProps =
 layer : List Spec -> ( VLProperty, Spec )
 layer specs =
     ( VLLayer, JE.list specs )
+
+
+{-| Specify a default legend corner radius. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoCornerRadius : Float -> LegendConfig
+lecoCornerRadius =
+    CornerRadius
+
+
+{-| Specify a default spacing between legend items. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoEntryPadding : Float -> LegendConfig
+lecoEntryPadding =
+    EntryPadding
+
+
+{-| Specify a default background legend color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoFillColor : String -> LegendConfig
+lecoFillColor =
+    FillColor
+
+
+{-| Specify a default vertical alignment for labels in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelBaseline : VAlign -> LegendConfig
+lecoGradientLabelBaseline =
+    GradientLabelBaseline
+
+
+{-| Specify a default maximum allowable length for labels in a color ramp legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelLimit : Float -> LegendConfig
+lecoGradientLabelLimit =
+    GradientLabelLimit
+
+
+{-| Specify a default vertical offset in pixel units for labels in a color ramp legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientLabelOffset : Float -> LegendConfig
+lecoGradientLabelOffset =
+    GradientLabelOffset
+
+
+{-| Specify a default color for strokes in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientStrokeColor : String -> LegendConfig
+lecoGradientStrokeColor =
+    GradientStrokeColor
+
+
+{-| Specify a default width for strokes in a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientStrokeWidth : Float -> LegendConfig
+lecoGradientStrokeWidth =
+    GradientStrokeWidth
+
+
+{-| Specify a default height of a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientHeight : Float -> LegendConfig
+lecoGradientHeight =
+    GradientHeight
+
+
+{-| Specify a default width of a color ramp legend. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoGradientWidth : Float -> LegendConfig
+lecoGradientWidth =
+    GradientWidth
+
+
+{-| Specify a default horizontal alignment of legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelAlign : HAlign -> LegendConfig
+lecoLabelAlign =
+    LeLabelAlign
+
+
+{-| Specify a default vertical alignment of legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelBaseline : VAlign -> LegendConfig
+lecoLabelBaseline =
+    LeLabelBaseline
+
+
+{-| Specify a default color for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelColor : String -> LegendConfig
+lecoLabelColor =
+    LeLabelColor
+
+
+{-| Specify a default font for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelFont : String -> LegendConfig
+lecoLabelFont =
+    LeLabelFont
+
+
+{-| Specify a default font size legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelFontSize : Float -> LegendConfig
+lecoLabelFontSize =
+    LeLabelFontSize
+
+
+{-| Specify a default maximum width for legend labels in pixel units.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelLimit : Float -> LegendConfig
+lecoLabelLimit =
+    LeLabelLimit
+
+
+{-| Specify a default offset for legend labels. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#labels).
+-}
+lecoLabelOffset : Float -> LegendConfig
+lecoLabelOffset =
+    LeLabelOffset
+
+
+{-| Specify a default offset in pixel units between the legend and the enclosing
+group or data rectangle. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoOffset : Float -> LegendConfig
+lecoOffset =
+    Offset
+
+
+{-| Specify a default legend position relative to the main plot content.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoOrient : LegendOrientation -> LegendConfig
+lecoOrient =
+    Orient
+
+
+{-| Specify a default spacing in pixel units between a legend and axis.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoPadding : Float -> LegendConfig
+lecoPadding =
+    LePadding
+
+
+{-| Specify whether or not time labels are abbreviated by default in a legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoShortTimeLabels : Bool -> LegendConfig
+lecoShortTimeLabels =
+    LeShortTimeLabels
+
+
+{-| Specify a default legend border color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeColor : String -> LegendConfig
+lecoStrokeColor =
+    StrokeColor
+
+
+{-| Specify a default legend border stroke dash style. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeDash : List Float -> LegendConfig
+lecoStrokeDash =
+    LeStrokeDash
+
+
+{-| Specify a default legend border stroke width. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#general).
+-}
+lecoStrokeWidth : Float -> LegendConfig
+lecoStrokeWidth =
+    LeStrokeWidth
+
+
+{-| Specify a default legend symbol color. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolColor : String -> LegendConfig
+lecoSymbolColor =
+    SymbolColor
+
+
+{-| Specify a default legend symbol type. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolType : Symbol -> LegendConfig
+lecoSymbolType =
+    SymbolType
+
+
+{-| Specify a default legend symbol size. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolSize : Float -> LegendConfig
+lecoSymbolSize =
+    SymbolSize
+
+
+{-| Specify a default legend symbol stroke width. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#symbols).
+-}
+lecoSymbolStrokeWidth : Float -> LegendConfig
+lecoSymbolStrokeWidth =
+    SymbolStrokeWidth
+
+
+{-| Specify a default horizontal alignment for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
+-}
+lecoTitleAlign : HAlign -> LegendConfig
+lecoTitleAlign =
+    LeTitleAlign
+
+
+{-| Specify a default vertical alignment for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleBaseline : VAlign -> LegendConfig
+lecoTitleBaseline =
+    LeTitleBaseline
+
+
+{-| Specify a default color legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleColor : String -> LegendConfig
+lecoTitleColor =
+    LeTitleColor
+
+
+{-| Specify a default font for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFont : String -> LegendConfig
+lecoTitleFont =
+    LeTitleFont
+
+
+{-| Specify a default font size for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFontSize : Float -> LegendConfig
+lecoTitleFontSize =
+    LeTitleFontSize
+
+
+{-| Specify a default font weight for legend titles. For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleFontWeight : FontWeight -> LegendConfig
+lecoTitleFontWeight =
+    LeTitleFontWeight
+
+
+{-| Specify a default maximum size in pixel units for legend titles.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitleLimit : Float -> LegendConfig
+lecoTitleLimit =
+    LeTitleLimit
+
+
+{-| Specify a default spacing in pixel units between title and legend.
+For more detail see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#title).
+-}
+lecoTitlePadding : Float -> LegendConfig
+lecoTitlePadding =
+    LeTitlePadding
+
+
+{-| Specify a set of legend date-times explicitly.
+-}
+leDts : List (List DateTime) -> LegendValues
+leDts =
+    LDateTimes
+
+
+{-| Specify the padding in pixels between legend entries. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leEntryPadding : Float -> LegendProperty
+leEntryPadding =
+    LEntryPadding
+
+
+{-| Specify the formatting pattern for legend labels. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leFormat : String -> LegendProperty
+leFormat =
+    LFormat
+
+
+{-| Specify a set of legend numeric values explicitly.
+-}
+leNums : List Float -> LegendValues
+leNums =
+    LNumbers
+
+
+{-| Specify the offset in pixels of a legend from the edge of its enclosing group
+/ data rectangle. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leOffset : Float -> LegendProperty
+leOffset =
+    LOffset
+
+
+{-| Specify the position of a legend in a scene. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leOrient : LegendOrientation -> LegendProperty
+leOrient =
+    LOrient
+
+
+{-| Specify the padding in pixels between a legend and axis. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+lePadding : Float -> LegendProperty
+lePadding =
+    LPadding
+
+
+{-| Specify a set of legend strings explicitly.
+-}
+leStrs : List String -> LegendValues
+leStrs =
+    LStrings
+
+
+{-| Specify the number of tick marks in a quantitative legend. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leTickCount : Float -> LegendProperty
+leTickCount =
+    LTickCount
+
+
+{-| Specify the title of a legend. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leTitle : String -> LegendProperty
+leTitle =
+    LTitle
+
+
+{-| Specify the type of legend (discrete symbols or continuous gradients). For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leType : Legend -> LegendProperty
+leType =
+    LType
+
+
+{-| Specify the legend values explicitly. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leValues : LegendValues -> LegendProperty
+leValues =
+    LValues
+
+
+{-| Specify the drawing order of a legend relative to other chart elements. To
+place a legend in front of others use a positive integer, or 0 to draw behind. For more detail see the
+[Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
+-}
+leZIndex : Int -> LegendProperty
+leZIndex =
+    LZIndex
+
+
+{-| Specify a line mark for symbolising a sequence of values. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/line.html).
+
+    line [maStroke "red", maStrokeDash [1, 2] ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    line []
+
+-}
+line : List MarkProperty -> ( VLProperty, Spec )
+line =
+    mark Line
 
 
 {-| Perform a lookup of named fields between two data sources. This allows you to
@@ -2751,13 +6264,223 @@ lookupAs key1 ( vlProp, spec ) key2 asName =
         )
 
 
-{-| Create a mark specification. All marks must have a type (first parameter) and
-can optionally be customised with a list of mark properties such as interpolation
-style for lines. To keep the default style for the mark, just provide an empty list
-for the second parameter.
+{-| Specify the horizontal alignment of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maAlign : HAlign -> MarkProperty
+maAlign =
+    MAlign
 
-    mark Circle []
-    mark Line [ MInterpolate StepAfter ]
+
+{-| Specify the rotation angle in degrees of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maAngle : Float -> MarkProperty
+maAngle =
+    MAngle
+
+
+{-| Specify the band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maBandSize : Float -> MarkProperty
+maBandSize =
+    MBandSize
+
+
+{-| Specify the vertical alignment of a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maBaseline : VAlign -> MarkProperty
+maBaseline =
+    MBaseline
+
+
+{-| Specify the offset between bars for a binned field using a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html#properties)
+-}
+maBinSpacing : Float -> MarkProperty
+maBinSpacing =
+    MBinSpacing
+
+
+{-| Specify whether or not a makr should be clipped to the enclosing group's
+dimensions. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maClip : Bool -> MarkProperty
+maClip =
+    MClip
+
+
+{-| Specify the default color of a mark. Note that `maFill` and `maStroke` have
+higher precedence and will override this if specified. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maColor : String -> MarkProperty
+maColor =
+    MColor
+
+
+{-| Specify the cursor to be associated with a hyperlink mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maCursor : Cursor -> MarkProperty
+maCursor =
+    MCursor
+
+
+{-| Specify the continuous band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maContinuousBandSize : Float -> MarkProperty
+maContinuousBandSize =
+    MContinuousBandSize
+
+
+{-| Specify the discrete band size in pixels of a bar mark. For details see the
+[Vega-Lite bar mark property documentation](https://vega.github.io/vega-lite/docs/bar.html)
+-}
+maDiscreteBandSize : Float -> MarkProperty
+maDiscreteBandSize =
+    MDiscreteBandSize
+
+
+{-| Specify the horizontal offset in pixels between a text mark and its anchor.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maDx : Float -> MarkProperty
+maDx =
+    MdX
+
+
+{-| Specify the vertical offset in pixels between a text mark and its anchor.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maDy : Float -> MarkProperty
+maDy =
+    MdY
+
+
+{-| Specify the default fill color of a mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFill : String -> MarkProperty
+maFill =
+    MFill
+
+
+{-| Specify whether or not a mark's color should be used as the fill color
+instead of stroke color. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFilled : Bool -> MarkProperty
+maFilled =
+    MFilled
+
+
+{-| Specify the
+For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maFillOpacity : Float -> MarkProperty
+maFillOpacity =
+    MFillOpacity
+
+
+{-| Specify the font of a text mark. This can be any font name made accessible via
+a css file (or one of the generic fonts `serif`, `monospace` etc.). For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFont : String -> MarkProperty
+maFont =
+    MFont
+
+
+{-| Specify the font size in pixels used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontSize : Float -> MarkProperty
+maFontSize =
+    MFontSize
+
+
+{-| Specify the font style (e.g. `italic`) used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontStyle : String -> MarkProperty
+maFontStyle =
+    MFontStyle
+
+
+{-| Specify the font wight used by a text mark. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maFontWeight : FontWeight -> MarkProperty
+maFontWeight =
+    MFontWeight
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+mark property channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+mAggregate : Operation -> MarkChannel
+mAggregate =
+    MAggregate
+
+
+{-| Specify the interpolation method used by line and area marks. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maInterpolate : MarkInterpolation -> MarkProperty
+maInterpolate =
+    MInterpolate
+
+
+{-| Specify the overal opacity of a mark in the range [0, 1]. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maOpacity : Float -> MarkProperty
+maOpacity =
+    MOpacity
+
+
+{-| Specify the orientation of a non-stacked bar, tick, area or line mark.
+For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maOrient : MarkOrientation -> MarkProperty
+maOrient =
+    MOrient
+
+
+{-| Specify the appearance of a point marker placed on the vertices of a line
+or area mark. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maPoint : PointMarker -> MarkProperty
+maPoint =
+    MPoint
+
+
+{-| Specify the polar coordinate radial offset of a text mark from its origin.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maRadius : Float -> MarkProperty
+maRadius =
+    MRadius
+
+
+{-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
+
+Create a mark specification. All marks must have a type (first parameter) and
+can optionally be customised with a list of mark properties such as interpolation
+style for lines.
 
 -}
 mark : Mark -> List MarkProperty -> ( VLProperty, Spec )
@@ -2774,13 +6497,263 @@ mark mark mProps =
             )
 
 
+{-| Specify the shape of a point mark. For details see the
+[Vega-Lite point mark property documentation](https://vega.github.io/vega-lite/docs/point.html#properties)
+-}
+maShape : Symbol -> MarkProperty
+maShape =
+    MShape
+
+
+{-| Specify whether or not month and weekday names are abbreviated in a text mark.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html#config)
+-}
+maShortTimeLabels : Bool -> MarkProperty
+maShortTimeLabels =
+    MShortTimeLabels
+
+
+{-| Specify the size of a mark. For details see, for example, the
+[Vega-Lite circle mark property documentation](https://vega.github.io/vega-lite/docs/circle.html#properties)
+-}
+maSize : Float -> MarkProperty
+maSize =
+    MSize
+
+
+{-| Specify the default stroke color of a mark. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStroke : String -> MarkProperty
+maStroke =
+    MStroke
+
+
+{-| Specify the stroke dash style used by a mark. A stroke dash style is determined
+by an alternating 'on-off' sequence of line lengths in pixel units. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeDash : List Float -> MarkProperty
+maStrokeDash =
+    MStrokeDash
+
+
+{-| Specify the stroke dash offset used by a mark. This is the number of pixels
+before which the first line dash is drawn. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeDashOffset : Float -> MarkProperty
+maStrokeDashOffset =
+    MStrokeDashOffset
+
+
+{-| Specify the stroke opacity of a mark in the range [0, 1]. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeOpacity : Float -> MarkProperty
+maStrokeOpacity =
+    MStrokeOpacity
+
+
+{-| Specify the stroke width of a mark in pixel units.
+For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStrokeWidth : Float -> MarkProperty
+maStrokeWidth =
+    MStrokeWidth
+
+
+{-| Specify the names of custom styles to apply to the mark. Each name should
+refer to a named style defined in a separate style configuration. For details see the
+[Vega-Lite mark property documentation](https://vega.github.io/vega-lite/docs/mark.html#general-mark-properties)
+-}
+maStyle : List String -> MarkProperty
+maStyle =
+    MStyle
+
+
+{-| Specify the interpolation tension used if interpolating line and area marks. For details see the
+[Vega-Lite line mark property documentation](https://vega.github.io/vega-lite/docs/line.html#properties)
+-}
+maTension : Float -> MarkProperty
+maTension =
+    MTension
+
+
+{-| Specify the placeholder text for a text mark for when a text channel is not specified.
+For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html#properties)
+-}
+maText : String -> MarkProperty
+maText =
+    MText
+
+
+{-| Specify the polar coordinate angle, in radians, of a text mark from the
+origin determined by its x and y properties. Values for theta follow the same
+convention of arc mark `startAngle` and `endAngle` properties: angles are
+measured in radians, with 0 indicating “north”. For details see the
+[Vega-Lite text mark property documentation](https://vega.github.io/vega-lite/docs/text.html)
+-}
+maTheta : Float -> MarkProperty
+maTheta =
+    MTheta
+
+
+{-| Specify the thickness of a tick mark. For details see the
+[Vega-Lite tick mark property documentation](https://vega.github.io/vega-lite/docs/tick.html#config)
+-}
+maThickness : Float -> MarkProperty
+maThickness =
+    MThickness
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+mark property channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+mBin : List BinProperty -> MarkChannel
+mBin =
+    MBin
+
+
+{-| Provide a literal Boolean value when encoding with a mark property channel.
+-}
+mBoo : Bool -> MarkChannel
+mBoo =
+    MBoolean
+
+
+{-| Specify the properties of a mark channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second
+the encoding to apply if the expression is true, the third the encoding if the
+expression is false.
+
+    color
+        [ mDataCondition
+            (expr "datum.IMDB_Rating === null")
+            [ mStr "#ddd" ]
+            [ mStr "rgb(76,120,168)" ]
+        ]
+
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+
+-}
+mDataCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
+mDataCondition op tMks fMks =
+    MDataCondition op tMks fMks
+
+
+{-| Specify the properties of a legend that describes a mark's encoding. To stop
+a legend from appearing provide an empty list as a parameter.
+
+    color [ mName "Animal", mMType Nominal, mLegend [] ]
+
+For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/encoding.html#mark-prop-field-def)
+
+-}
+mLegend : List LegendProperty -> MarkChannel
+mLegend =
+    MLegend
+
+
+{-| Specify the field type (level of measurement) when encoding with a mark
+property channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+mMType : Measurement -> MarkChannel
+mMType =
+    MmType
+
+
+{-| Provide the name of the field used for encoding with a mark property channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+mName : String -> MarkChannel
+mName =
+    MName
+
+
+{-| Provide a literal numeric value when encoding with a mark property channel.
+-}
+mNum : Float -> MarkChannel
+mNum =
+    MNumber
+
+
+{-| Provide an SVG path string when encoding with a mark property channel. Useful
+when providing custom shapes.
+-}
+mPath : String -> MarkChannel
+mPath =
+    MPath
+
+
+{-| Reference in a mark channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
+-}
+mRepeat : Arrangement -> MarkChannel
+mRepeat =
+    MRepeat
+
+
+{-| Specify the scaling applied to a field when encoding with a mark property channel.
+The scale will transform a field's value into a color, shape, size etc. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+mScale : List ScaleProperty -> MarkChannel
+mScale =
+    MScale
+
+
+{-| Specify the properties of a mark channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the mark has been selected, the third the encoding if it is not selected.
+
+    color
+        [ mSelectionCondition (selectionName "myBrush")
+            [ mName "Cylinders", mMType Ordinal ]
+            [ mStr "grey" ]
+        ]
+
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+
+-}
+mSelectionCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
+mSelectionCondition op tMks fMks =
+    MSelectionCondition op tMks fMks
+
+
+{-| Provide a literal string value when encoding with a mark property channel.
+-}
+mStr : String -> MarkChannel
+mStr =
+    MString
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a mark property channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+mTimeUnit : TimeUnit -> MarkChannel
+mTimeUnit =
+    MTimeUnit
+
+
 {-| Provides an optional name to be associated with the visualization.
 
     enc = ...
     toVegaLite
         [ name "PopGrowth"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2790,11 +6763,82 @@ name s =
     ( VLName, JE.string s )
 
 
+{-| Apply a negation Boolean operation as part of a logical composition. Boolean
+operations can be nested to any level, for example:
+
+    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
+
+-}
+not : BooleanOp -> BooleanOp
+not =
+    Not
+
+
+{-| Specify a numeric data value. This is used when a function can accept values
+of different types.
+-}
+num : Float -> DataValue
+num =
+    Number
+
+
+{-| Specify the min max number range to be used in data filtering.
+-}
+numRange : Float -> Float -> FilterRange
+numRange =
+    NumberRange
+
+
+{-| Specify a list of numeric data values. This is used when a function can
+accept lists of different types.
+-}
+nums : List Float -> DataValues
+nums =
+    Numbers
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with an
+order channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+oAggregate : Operation -> OrderChannel
+oAggregate =
+    OAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with an order
+channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+oBin : List BinProperty -> OrderChannel
+oBin =
+    OBin
+
+
+{-| Specify the field type (level of measurement) when encoding with an order
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+oMType : Measurement -> OrderChannel
+oMType =
+    OmType
+
+
+{-| Provide the name of the field used for encoding with an order channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+oName : String -> OrderChannel
+oName =
+    OName
+
+
 {-| Encode an opacity channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by opacity. The second parameter
 is a list of any previous channels to which this opacity channel should be added.
 
-    opacity [ MName "Age", MmType Quantitative ] []
+    opacity [ mName "Age", mMType Quantitative ] []
 
 -}
 opacity : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -2826,20 +6870,60 @@ opAs op field label =
         ]
 
 
+{-| Apply an 'or' Boolean operation as part of a logical composition.
+
+    color
+        [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
+            [ mAggregate Count, mName "*", mMType Quantitative ]
+            [ mStr "gray" ]
+        ]
+
+-}
+or : BooleanOp -> BooleanOp -> BooleanOp
+or op1 op2 =
+    Or op1 op2
+
+
 {-| Encode an order channel. The first parameter is a list of order field definitions
 to define the channel. The second parameter is a list of any previous channels to
 which this order channel is to be added.
 
     enc =
         encoding
-            << position X [ PName "miles", PmType Quantitative ]
-            << position Y [ PName "gas", PmType Quantitative ]
-            << order [ OName "year", OmType Temporal ]
+            << position X [ pName "miles", pMType Quantitative ]
+            << position Y [ pName "gas", pMType Quantitative ]
+            << order [ oName "year", oMType Temporal ]
 
 -}
 order : List OrderChannel -> List LabelledSpec -> List LabelledSpec
 order oDefs =
     (::) ( "order", List.map orderChannelProperty oDefs |> JE.object )
+
+
+{-| Reference in a order channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
+-}
+oRepeat : Arrangement -> OrderChannel
+oRepeat =
+    ORepeat
+
+
+{-| Specify the sort order to be used by an order channel.
+[Vega-Lite order field documentation](https://vega.github.io/vega-lite/docs/encoding.html#order-field-definition)
+-}
+oSort : List SortProperty -> OrderChannel
+oSort =
+    OSort
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with an order channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+oTimeUnit : TimeUnit -> OrderChannel
+oTimeUnit =
+    OTimeUnit
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is
@@ -2850,9 +6934,9 @@ for details.
     enc = ...
     toVegaLite
         [ width 500
-        , padding (PEdges 20 10 5 15)
+        , padding (paEdges 20 10 5 15)
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -2860,6 +6944,91 @@ for details.
 padding : Padding -> ( VLProperty, Spec )
 padding pad =
     ( VLPadding, paddingSpec pad )
+
+
+{-| Specify padding around a visualization in pixel units. The four parameters
+refer to _left_, _top_, _right_, and _bottom_ edges respectively.
+-}
+paEdges : Float -> Float -> Float -> Float -> Padding
+paEdges =
+    PEdges
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+position channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+pAggregate : Operation -> PositionChannel
+pAggregate =
+    PAggregate
+
+
+{-| Indicates the parsing rules when processing some data text. The parameter is
+a list of tuples where each corresponds to a field name paired with its desired
+data type. Typically used when specifying a data url.
+-}
+parse : List ( String, DataType ) -> Format
+parse =
+    Parse
+
+
+{-| Specify a uniform padding around a visualization in pixel units.
+-}
+paSize : Float -> Padding
+paSize =
+    PSize
+
+
+{-| Specify the axis properties used when encoding with a position channel.
+For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pAxis : List AxisProperty -> PositionChannel
+pAxis =
+    PAxis
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a
+position channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+pBin : List BinProperty -> PositionChannel
+pBin =
+    PBin
+
+
+{-| Specify the properties of a point marker that is overlaid on a line or area
+mark. For details see the
+[Vega-Lite point property documentation](https://vega.github.io/vega-lite/docs/line.html#properties).
+-}
+pmMarker : List MarkProperty -> PointMarker
+pmMarker =
+    PMMarker
+
+
+{-| Specify the field type (level of measurement) when encoding with a position
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+pMType : Measurement -> PositionChannel
+pMType =
+    PmType
+
+
+{-| Specify a point mark for symbolising a data point with a symbol. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/point.html).
+
+    point [ maFill "black", maStroke "red" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    point []
+
+-}
+point : List MarkProperty -> ( VLProperty, Spec )
+point =
+    mark Point
 
 
 {-| Encode a position channel. The first parameter identifies the channel,
@@ -2871,14 +7040,14 @@ This is often implicit when chaining a series of encodings using functional comp
 
       enc =
           encoding
-            << position X [ PName "Animal", PmType Ordinal ]
+            << position X [ pName "Animal", pMType Ordinal ]
 
 Encoding by position will generate an axis by default. To prevent the axis from
-appearing, simply provide an empty list of axis properties to `PAxis` :
+appearing, simply provide an empty list of axis properties to `pAxis` :
 
      enc =
          encoding
-           << position X [ PName "Animal", PmType Ordinal, PAxis [] ]
+           << position X [ pName "Animal", pMType Ordinal, pAxis [] ]
 
 -}
 position : Position -> List PositionChannel -> List LabelledSpec -> List LabelledSpec
@@ -2906,20 +7075,139 @@ position pos pDefs =
             (::) ( positionLabel Y2, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude ->
-            --  (::) ( positionLabel X, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Longitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude ->
-            --(::) ( positionLabel Y, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Latitude, List.map positionChannelProperty pDefs |> JE.object )
 
         Longitude2 ->
-            --  (::) ( positionLabel X2, List.map positionChannelProperty (PmType Longitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Longitude2, List.map positionChannelProperty pDefs |> JE.object )
 
         Latitude2 ->
-            --(::) ( positionLabel Y2, List.map positionChannelProperty (PmType Latitude_ :: List.filter isNotPmType pDefs) |> JE.object )
             (::) ( positionLabel Latitude2, List.map positionChannelProperty pDefs |> JE.object )
+
+
+{-| Provide the name of the field used for encoding with a position channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+pName : String -> PositionChannel
+pName =
+    PName
+
+
+{-| Specify the type of global map projection to use in a projection transformation.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prType : Projection -> ProjectionProperty
+prType =
+    PType
+
+
+{-| Specify a projection’s center as longitude and latitude in degrees. The default
+value is `0,0`. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prCenter : Float -> Float -> ProjectionProperty
+prCenter =
+    PCenter
+
+
+{-| Specify a projection’s clipping circle radius to the specified angle in degrees.
+A value of `Nothing` will switch to antimeridian cutting rather than small-circle
+clipping. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prClipAngle : Maybe Float -> ProjectionProperty
+prClipAngle =
+    PClipAngle
+
+
+{-| Specify a projection’s viewport clip extent to the specified bounds in pixels.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prClipExtent : ClipRect -> ProjectionProperty
+prClipExtent =
+    PClipExtent
+
+
+{-| Specify a 'Hammer' map projection coefficient. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prCoefficient : Float -> ProjectionProperty
+prCoefficient =
+    PCoefficient
+
+
+{-| Specify a 'Satellite' map projection distance. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prDistance : Float -> ProjectionProperty
+prDistance =
+    PDistance
+
+
+{-| Provide the name of the fields from a repeat operator used for encoding
+with a position channel. For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+pRepeat : Arrangement -> PositionChannel
+pRepeat =
+    PRepeat
+
+
+{-| Specify a `Bottomley` map projection fraction. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prFraction : Float -> ProjectionProperty
+prFraction =
+    PFraction
+
+
+{-| Specify the number of lobes in lobed map projections such as the 'Berghaus star'.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prLobes : Int -> ProjectionProperty
+prLobes =
+    PLobes
+
+
+{-| Specify a parallel for map projections such as the 'Armadillo'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prParallel : Float -> ProjectionProperty
+prParallel =
+    PParallel
+
+
+{-| Specify a threshold for the projection’s adaptive resampling in pixels. This
+corresponds to the Douglas–Peucker distance. If precision is not specified, the
+projection’s current resampling precision which defaults to √0.5 ≅ 0.70710 is used.
+For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prPrecision : Float -> ProjectionProperty
+prPrecision =
+    PPrecision
+
+
+{-| Specify a radius value for map projections such as the 'Gingery'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRadius : Float -> ProjectionProperty
+prRadius =
+    PRadius
+
+
+{-| Specify a ratio value for map projections such as the 'Hill'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRatio : Float -> ProjectionProperty
+prRatio =
+    PRatio
 
 
 {-| Sets the cartographic projection used for geospatial coordinates. A projection
@@ -2928,12 +7216,163 @@ This is useful when using the `Geoshape` mark. For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
 
     proj =
-        projection [ PType Orthographic, PRotate -40 0 0 ]
+        projection [ prType Orthographic, prRotate -40 0 0 ]
 
 -}
 projection : List ProjectionProperty -> ( VLProperty, Spec )
 projection pProps =
     ( VLProjection, JE.object (List.map projectionProperty pProps) )
+
+
+{-| Specify a projection’s three-axis rotation angle. This should be in order
+_lambda phi gamma_ specifying the rotation angles in degrees about each
+spherical axis (corresponding to yaw, pitch and roll.). For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prRotate : Float -> Float -> Float -> ProjectionProperty
+prRotate =
+    PRotate
+
+
+{-| Specify a spacing value for map projections such as the 'Lagrange'. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prSpacing : Float -> ProjectionProperty
+prSpacing =
+    PSpacing
+
+
+{-| Specify a 'Satellite' map projection tilt. For details see the
+[Vega-Lite projection documentation](https://vega.github.io/vega-lite/docs/projection.html#properties)
+-}
+prTilt : Float -> ProjectionProperty
+prTilt =
+    PTilt
+
+
+{-| Specify the scaling applied to a field when encoding with a position channel.
+The scale will transform a field's value into a position along one axis. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pScale : List ScaleProperty -> PositionChannel
+pScale =
+    PScale
+
+
+{-| Specify the sort order for field when encoding with a position channel.
+For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pSort : List SortProperty -> PositionChannel
+pSort =
+    PSort
+
+
+{-| Specify the type of stacking offset for field when encoding with a position
+channel. For details, see the
+[Vega-Lite position field documentation](https://vega.github.io/vega-lite/docs/encoding.html#position)
+-}
+pStack : StackProperty -> PositionChannel
+pStack =
+    PStack
+
+
+{-| Specify the form of time unit aggregation of field values when encoding
+with a position channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+pTimeUnit : TimeUnit -> PositionChannel
+pTimeUnit =
+    PTimeUnit
+
+
+{-| Specify the default color scheme for categorical ranges. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoCategory : String -> RangeConfig
+racoCategory =
+    RCategory
+
+
+{-| Specify the default diverging color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoDiverging : String -> RangeConfig
+racoDiverging =
+    RDiverging
+
+
+{-| Specify the default 'heatmap' color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoHeatmap : String -> RangeConfig
+racoHeatmap =
+    RHeatmap
+
+
+{-| Specify the default ordinal color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoOrdinal : String -> RangeConfig
+racoOrdinal =
+    ROrdinal
+
+
+{-| Specify the default ramp (contnuous) color scheme. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoRamp : String -> RangeConfig
+racoRamp =
+    RRamp
+
+
+{-| Specify the default color scheme symbols. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
+-}
+racoSymbol : String -> RangeConfig
+racoSymbol =
+    RSymbol
+
+
+{-| Specify the name of a pre-defined scale range (e.g. `symbol` or `diverging`).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raName : String -> ScaleRange
+raName =
+    RName
+
+
+{-| Specify a numeric scale range. Depending on the scaling this may be a min,max
+pair, or a list of explicit numerical values. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raNums : List Float -> ScaleRange
+raNums =
+    RNumbers
+
+
+{-| Specify a text scale range for discrete scales. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+raStrs : List String -> ScaleRange
+raStrs =
+    RStrings
+
+
+{-| Specify an arbitrary rectangle. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rect.html).
+
+    rect [ maFill "black", maStroke "red" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    rect []
+
+-}
+rect : List MarkProperty -> ( VLProperty, Spec )
+rect =
+    mark Rect
 
 
 {-| Define the fields that will be used to compose rows and columns of a set of
@@ -2944,7 +7383,7 @@ to apply to each of those fields using `asSpec`.
 
     spec = ...
     toVegaLite
-        [ repeat [ ColumnFields [ "Cat", "Dog", "Fish" ] ]
+        [ repeat [ columnFields [ "Cat", "Dog", "Fish" ] ]
         , specification (asSpec spec)
         ]
 
@@ -2966,7 +7405,7 @@ The first parameter identifies the type of resolution, the second a list of prev
 resolutions to which this one may be added.
 
     resolve
-        << resolution (RScale [ ( ChY, Independent ) ])
+        << resolution (reScale [ ( ChY, Independent ) ])
 
 -}
 resolution : Resolve -> List LabelledSpec -> List LabelledSpec
@@ -2983,7 +7422,7 @@ applies and the rule type.
     let
         res =
             resolve
-                << resolution (RLegend [ ( ChColor, Independent ) ])
+                << resolution (reLegend [ ( ChColor, Independent ) ])
     in
     toVegaLite
         [ dataFromUrl "data/movies.json" []
@@ -3000,6 +7439,14 @@ resolve res =
     ( VLResolve, JE.object res )
 
 
+{-| Specify an RGB color interpolation for continuous color scales. The parameter
+is the gamma value to use in interpolation (anchored at 1).
+-}
+rgb : Float -> CInterpolate
+rgb =
+    Rgb
+
+
 {-| Encode a new facet to be arranged in rows. The first parameter is a list of
 facet properties that define the faceting channel. This should include at least
 the name of data the field and its measurement type. The final parameter is a list
@@ -3008,14 +7455,378 @@ when chaining encodings using functional composition
 
     enc =
         encoding
-            << position X [ PName "people", PmType Quantitative ]
-            << position Y [ PName "gender", PmType Nominal ]
-            << row [ FName "age", FmType Ordinal ]
+            << position X [ pName "people", pMType Quantitative ]
+            << position Y [ pName "gender", pMType Nominal ]
+            << row [ fName "age", fMType Ordinal ]
 
 -}
 row : List FacetChannel -> List LabelledSpec -> List LabelledSpec
 row fFields =
     (::) ( "row", JE.object (List.map facetChannelProperty fFields) )
+
+
+{-| Specify the mapping between a row and its field definitions in a set of
+faceted small multiples. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
+-}
+rowBy : List FacetChannel -> FacetMapping
+rowBy =
+    RowBy
+
+
+{-| Create a list of fields to use in set of repeated small multiples arranged in
+rows. The list of fields named here can be referenced in an encoding with
+`pRepeat Row`, `mRepeat Row` etc.
+-}
+rowFields : List String -> RepeatFields
+rowFields =
+    RowFields
+
+
+{-| Specify a line seqment connecting two vertices. Can either be used to span the
+entire width or height of a view, or to connect two arbitrary positions. For details
+see the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/rule.html).
+
+    rule [ maStroke "red" ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    rule []
+
+-}
+rule : List MarkProperty -> ( VLProperty, Spec )
+rule =
+    mark Rule
+
+
+{-| Specify the default inner padding for x and y band-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoBandPaddingInner : Float -> ScaleConfig
+sacoBandPaddingInner =
+    SCBandPaddingInner
+
+
+{-| Specify the default outer padding for x and y band-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoBandPaddingOuter : Float -> ScaleConfig
+sacoBandPaddingOuter =
+    SCBandPaddingOuter
+
+
+{-| Specify whether or not by default values that exceed the data domain are
+clamped to the min/max range value. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoClamp : Bool -> ScaleConfig
+sacoClamp =
+    SCClamp
+
+
+{-| Specify the default maximum value for mapping quantitative fields to a bar's
+size/bandSize. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxBandSize : Float -> ScaleConfig
+sacoMaxBandSize =
+    SCMaxBandSize
+
+
+{-| Specify the default maximum value for mapping a quantitative field to a text
+mark's size. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxFontSize : Float -> ScaleConfig
+sacoMaxFontSize =
+    SCMaxFontSize
+
+
+{-| Specify the default maximum opacity (in the range [0, 1]) for mapping a field
+to opacity. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxOpacity : Float -> ScaleConfig
+sacoMaxOpacity =
+    SCMaxOpacity
+
+
+{-| Specify the default maximum size for point-based scales. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxSize : Float -> ScaleConfig
+sacoMaxSize =
+    SCMaxSize
+
+
+{-| Specify the default maximum stroke width for rule, line and trail marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMaxStrokeWidth : Float -> ScaleConfig
+sacoMaxStrokeWidth =
+    SCMaxStrokeWidth
+
+
+{-| Specify the default minimum value for mapping quantitative fields to a bar's
+size/bandSize. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinBandSize : Float -> ScaleConfig
+sacoMinBandSize =
+    SCMinBandSize
+
+
+{-| Specify the default minimum value for mapping a quantitative field to a text
+mark's size. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinFontSize : Float -> ScaleConfig
+sacoMinFontSize =
+    SCMinFontSize
+
+
+{-| Specify the default minimum opacity (in the range [0, 1]) for mapping a field
+to opacity. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinOpacity : Float -> ScaleConfig
+sacoMinOpacity =
+    SCMinOpacity
+
+
+{-| Specify the default minimum size for point-based scales (when not forced to
+start at zero). For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinSize : Float -> ScaleConfig
+sacoMinSize =
+    SCMinSize
+
+
+{-| Specify the default minimum stroke width for rule, line and trail marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoMinStrokeWidth : Float -> ScaleConfig
+sacoMinStrokeWidth =
+    SCMinStrokeWidth
+
+
+{-| Specify the default padding for point-ordinal scales.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoPointPadding : Float -> ScaleConfig
+sacoPointPadding =
+    SCPointPadding
+
+
+{-| Specify the default range step for band and point scales when the mark is
+not text. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoRangeStep : Maybe Float -> ScaleConfig
+sacoRangeStep =
+    SCRangeStep
+
+
+{-| Specify whether or not by default numeric values are rounded to integers
+when scaling. Useful for snapping to the pixel grid. For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoRound : Bool -> ScaleConfig
+sacoRound =
+    SCRound
+
+
+{-| Specify the default range step for x band and point scales of text marks.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoTextXRangeStep : Float -> ScaleConfig
+sacoTextXRangeStep =
+    SCTextXRangeStep
+
+
+{-| Specify whether or not to use the source data range before aggregation.
+For more details see the
+[Vega-Lite scale config documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
+-}
+sacoUseUnaggregatedDomain : Bool -> ScaleConfig
+sacoUseUnaggregatedDomain =
+    SCUseUnaggregatedDomain
+
+
+{-| Specify that when scaling, values outside the data domain are clamped to the
+minimum or maximum value. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scClamp : Bool -> ScaleProperty
+scClamp =
+    SClamp
+
+
+{-| Specify a custom scaling domain. For details see the
+[Vega-Lite scale domain documentation](https://vega.github.io/vega-lite/docs/scale.html#domain)
+-}
+scDomain : ScaleDomain -> ScaleProperty
+scDomain =
+    SDomain
+
+
+{-| Specify an interpolation method for scaling range values. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scInterpolate : CInterpolate -> ScaleProperty
+scInterpolate =
+    SInterpolate
+
+
+{-| Specify whether or not a scaling should use 'nice' values. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scIsNice : Bool -> ScaleNice
+scIsNice =
+    IsNice
+
+
+{-| Specify 'nice' minimum and maximum values in a scaling (e.g. multiples of 10).
+For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scNice : ScaleNice -> ScaleProperty
+scNice =
+    SNice
+
+
+{-| Specify the 'nice' temporal interval values when scaling. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scNiceInterval : TimeUnit -> Int -> ScaleNice
+scNiceInterval =
+    NInterval
+
+
+{-| Specify the desired number of tick marks in a 'nice' scaling. For details see
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+-}
+scNiceTickCount : Int -> ScaleNice
+scNiceTickCount =
+    NTickCount
+
+
+{-| Specify the padding in pixels to apply to a scaling. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scPadding : Float -> ScaleProperty
+scPadding =
+    SPadding
+
+
+{-| Specify the inner padding in pixels to apply to a band scaling. For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scPaddingInner : Float -> ScaleProperty
+scPaddingInner =
+    SPaddingInner
+
+
+{-| Specify the outer padding in pixels to apply to a band scaling. For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scPaddingOuter : Float -> ScaleProperty
+scPaddingOuter =
+    SPaddingOuter
+
+
+{-| Specify the range of a scaling. The type of range depends on the encoding
+channel. For details see the
+[Vega-Lite scale range documentation](https://vega.github.io/vega-lite/docs/scale.html#range)
+-}
+scRange : ScaleRange -> ScaleProperty
+scRange =
+    SRange
+
+
+{-| Specify the distance in pixels between the starts of adjacent bands in a band
+scaling. If `Nothing` is provided the distance is determined automatically.
+For details see the
+[Vega-Lite band scale documentation](https://vega.github.io/vega-lite/docs/scale.html#bands)
+-}
+scRangeStep : Maybe Float -> ScaleProperty
+scRangeStep =
+    SRangeStep
+
+
+{-| Reverse the order of a scaling. For details see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/)
+-}
+scReverse : Bool -> ScaleProperty
+scReverse =
+    SReverse
+
+
+{-| Specify whether or not numeric values in a scaling are rounded to integers.
+For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scRound : Bool -> ScaleProperty
+scRound =
+    SRound
+
+
+{-| Specify the color scheme used by a color scaling. For details see the
+[Vega-Lite scale color scheme documentation](https://vega.github.io/vega-lite/docs/scale.html#scheme)
+-}
+scScheme : String -> List Float -> ScaleProperty
+scScheme name =
+    SScheme name
+
+
+{-| Specify the type of scaling to apply. For details see the
+[Vega-Lite scale type documentation](https://vega.github.io/vega-lite/docs/scale.html#type)
+-}
+scType : Scale -> ScaleProperty
+scType =
+    SType
+
+
+{-| Specify whether or not a numeric scaling should be forced to include a zero
+value. For details see the
+[Vega-Lite scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous)
+-}
+scZero : Bool -> ScaleProperty
+scZero =
+    SZero
+
+
+{-| Specify a binding to some input elements as part of a named selection.
+For details, see the
+[Vega-Lite bind documentation](https://vega.github.io/vega-lite/docs/bind.html)
+-}
+seBind : List Binding -> SelectionProperty
+seBind =
+    Bind
+
+
+{-| Specify a encoding channels that form a named selection.
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seEncodings : List Channel -> SelectionProperty
+seEncodings =
+    Encodings
+
+
+{-| Specify the field names for projecting a selection. For details, see the
+[Vega-Lite projection selection documentation](https://vega.github.io/vega-lite/docs/project.html)
+-}
+seFields : List String -> SelectionProperty
+seFields =
+    Fields
 
 
 {-| Create a single named selection that may be applied to a data query or transformation.
@@ -3042,6 +7853,19 @@ select name sType options =
     (::) ( name, JE.object selProps )
 
 
+{-| Provide an interactive selection that will be true or false as part of a
+logical composition. For example, to filter a dataset so that only items selected
+interactively and that have a weight of more than 30:
+
+    transform
+        << filter (fCompose (and (selected "brush") (expr "datum.weight > 30")))
+
+-}
+selected : String -> BooleanOp
+selected =
+    Selection
+
+
 {-| Create a full selection specification from a list of selections. For details
 see the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html).
 
@@ -3054,11 +7878,90 @@ selection sels =
     ( VLSelection, JE.object sels )
 
 
+{-| Provide the name of a selection that is used as part of a conditional encoding.
+
+    color
+        [ mSelectionCondition (selectionName "myBrush")
+            [ mName "Origin", mMType Nominal ]
+            [ mStr "grey" ]
+        ]
+
+-}
+selectionName : String -> BooleanOp
+selectionName =
+    SelectionName
+
+
+{-| Specify whether or not a selection should capture nearest marks to a pointer
+rather than an exact position match. This allows 'accelerated' selection for
+discrete marks. For details, see the
+[Vega-Lite nearest documentation](https://vega.github.io/vega-lite/docs/nearest.html)
+-}
+seNearest : Bool -> SelectionProperty
+seNearest =
+    Nearest
+
+
+{-| Specify a [Vega event stream](https://vega.github.io/vega/docs/event-streams)
+that triggers a selection. For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
+-}
+seOn : String -> SelectionProperty
+seOn =
+    On
+
+
+{-| Specify a strategy that determines how selections’ data queries are resolved
+when applied in a filter transform, conditional encoding rule, or scale domain.
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seResolve : SelectionResolution -> SelectionProperty
+seResolve =
+    ResolveSelections
+
+
+{-| Specify the appearance of an interval selection mark (dragged rectangle).
+For details, see the
+[Vega-Lite selection documentation](https://vega.github.io/vega-lite/docs/selection.html#type)
+-}
+seSelectionMark : List SelectionMarkProperty -> SelectionProperty
+seSelectionMark =
+    SelectionMark
+
+
+{-| Specify a predicate expression that determines a toggled selection.
+For details, see the
+[Vega-Lite toggle documentation](https://vega.github.io/vega-lite/docs/toggle.html)
+-}
+seToggle : String -> SelectionProperty
+seToggle =
+    Toggle
+
+
+{-| Specify a translation selection transformation used for panning a view.
+For details, see the
+[Vega-Lite selection translate documentation](https://vega.github.io/vega-lite/docs/translate.html)
+-}
+seTranslate : String -> SelectionProperty
+seTranslate =
+    Translate
+
+
+{-| Specify a zooming selection transformation used for zooming a view.
+For details, see the
+[Vega-Lite selection zoom documentation](https://vega.github.io/vega-lite/docs/zoom.html)
+-}
+seZoom : String -> SelectionProperty
+seZoom =
+    Zoom
+
+
 {-| Encode a shape channel. The first parameter is a list of mark channel properties
 that characterise the way a data field is encoded by shape. The second parameter
 is a list of any previous channels to which this shape channel should be added.
 
-    shape [ MName "Species", MmType Nominal ] []
+    shape [ mName "Species", mMType Nominal ] []
 
 -}
 shape : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -3070,7 +7973,7 @@ shape markProps =
 that characterise the way a data field is encoded by size. The second parameter
 is a list of any previous channels to which this size channel should be added.
 
-    size [ MName "Age", MmType Quantitative ] []
+    size [ mName "Age", mMType Quantitative ] []
 
 -}
 size : List MarkChannel -> List LabelledSpec -> List LabelledSpec
@@ -3078,11 +7981,127 @@ size markProps =
     (::) ( "size", List.concatMap markChannelProperty markProps |> JE.object )
 
 
+{-| Specify the fill color of the interval selection mark (dragged rectangular area).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smFill : String -> SelectionMarkProperty
+smFill =
+    SMFill
+
+
+{-| Specify the fill opacity of the interval selection mark (dragged rectangular area)
+in the range [0, 1]. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smFillOpacity : Float -> SelectionMarkProperty
+smFillOpacity =
+    SMFillOpacity
+
+
+{-| Specify the stroke color of the interval selection mark (dragged rectangular area).
+For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStroke : String -> SelectionMarkProperty
+smStroke =
+    SMStroke
+
+
+{-| Specify the stroke opacity of the interval selection mark (dragged rectangular
+area) in the range [0, 1]. For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeOpacity : Float -> SelectionMarkProperty
+smStrokeOpacity =
+    SMStrokeOpacity
+
+
+{-| Specify the stroke width of the interval selection mark (dragged rectangular
+area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeWidth : Float -> SelectionMarkProperty
+smStrokeWidth =
+    SMStrokeWidth
+
+
+{-| Specify the stroke dash style of the interval selection mark (dragged
+rectangular area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeDash : List Float -> SelectionMarkProperty
+smStrokeDash =
+    SMStrokeDash
+
+
+{-| Specify the stroke dash offset of the interval selection mark (dragged
+rectangular area). For details see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
+-}
+smStrokeDashOffset : Float -> SelectionMarkProperty
+smStrokeDashOffset =
+    SMStrokeDashOffset
+
+
+{-| Specify a sorting by the aggregated summary of a given field using a given
+aggregation operation. For example, the following sorts the categorical data
+field `variety` by the mean age of the data in each variety category.
+
+    position Y [ pName "variety"
+               , pMType Ordinal
+               , pSort [ soByField "age" Mean, Descending ]
+               ]
+
+For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+
+-}
+soByField : String -> Operation -> SortProperty
+soByField =
+    ByFieldOp
+
+
+{-| Specify a sorting by the aggregated summaries of the given fields (referenced
+by a repeat iteration) using a given aggregation operation. For details see the
+[Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
+-}
+soByRepeat : Arrangement -> Operation -> SortProperty
+soByRepeat =
+    ByRepeatOp
+
+
+{-| Provide a custom sort order by listing data values explicitly. This can be
+used in place of lists of [SortProperty](#SortProperty). For example,
+
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "a" (strs [ "A", "B", "C" ])
+                << dataColumn "b" (nums [ 28, 55, 43 ])
+
+        enc =
+            encoding
+                << position X
+                    [ pName "a"
+                    , pMType Ordinal
+                    , pSort [ soCustom (strs [ "B", "A", "C" ]) ]
+                    ]
+                << position Y [ pName "b", pMType Quantitative ]
+    in
+    toVegaLite [ data [], enc [], bar [] ]
+
+-}
+soCustom : DataValues -> SortProperty
+soCustom =
+    CustomSort
+
+
 {-| Defines a specification object for use with faceted and repeated small multiples.
 
     spec = ...
     toVegaLite
-        [ facet [ RowBy [ FName "Origin", FmType Nominal ] ]
+        [ facet [ rowBy [ fName "Origin", fMType Nominal ] ]
         , specifcation spec
         ]
 
@@ -3092,13 +8111,36 @@ specification spec =
     ( VLSpec, spec )
 
 
+{-| Specify a square mark for symbolising points. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/square.html).
+
+    square [ maStroke "red", maStrokeWeight 2 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    square []
+
+-}
+square : List MarkProperty -> ( VLProperty, Spec )
+square =
+    mark Square
+
+
+{-| Specify a string data value. This is used when a function can accept values
+of different types.
+-}
+str : String -> DataValue
+str =
+    Str
+
+
 {-| Encode a stroke channel. This acts in a similar way to encoding by `color` but
 only affects the exterior boundary of marks. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by stroke.
 The second parameter is a list of any previous channels to which this stroke channel
 should be added.
 
-    stroke [ MName "Species", MmType Nominal ] []
+    stroke [ mName "Species", mMType Nominal ] []
 
 Note that if both `stroke` and `color` encodings are specified, `stroke` takes
 precedence.
@@ -3107,6 +8149,52 @@ precedence.
 stroke : List MarkChannel -> List LabelledSpec -> List LabelledSpec
 stroke markProps =
     (::) ( "stroke", List.concatMap markChannelProperty markProps |> JE.object )
+
+
+{-| Specify a string data value. This is used when a function can accept values
+of different types.
+-}
+strs : List String -> DataValues
+strs =
+    Strings
+
+
+{-| Specify a custom symbol shape with an
+[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+-}
+symbolPath : String -> Symbol
+symbolPath =
+    Path
+
+
+{-| Compute some aggregate summaray statistics for a field to be encoded with a
+text channel. The type of aggregation is determined by the given operation
+parameter. For details, see the
+[Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html)
+-}
+tAggregate : Operation -> TextChannel
+tAggregate =
+    TAggregate
+
+
+{-| Discretizes a series of numeric values into bins when encoding with a text
+channel. For details, see the
+[Vega-Lite binning documentation](https://vega.github.io/vega-lite/docs/bin.html)
+-}
+tBin : List BinProperty -> TextChannel
+tBin =
+    TBin
+
+
+{-| Specify the properties of a text channel conditional on some predicate
+expression. The first parameter provides the expression to evaluate, the second
+the encoding to apply if the expression is true, the third the encoding if the
+expression is false. For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+tDataCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
+tDataCondition op tCh fCh =
+    TDataCondition op tCh fCh
 
 
 {-| Encode a text channel. The first parameter is a list of text channel properties
@@ -3120,9 +8208,9 @@ for formatting the appearance of the text.
 
     enc =
         encoding
-            << position X [ PName "miles", PmType Quantitative ]
-            << position Y [ PName "gas", PmType Quantitative ]
-            << text [ TName "miles", TmType Quantitative ]
+            << position X [ pName "miles", pMType Quantitative ]
+            << position Y [ pName "gas", pMType Quantitative ]
+            << text [ tName "miles", tMType Quantitative ]
 
 -}
 text : List TextChannel -> List LabelledSpec -> List LabelledSpec
@@ -3130,11 +8218,139 @@ text tDefs =
     (::) ( "text", List.concatMap textChannelProperty tDefs |> JE.object )
 
 
+{-| Specify a text mark to be displayed at some point location. For details see
+the [Vega Lite documentation](https://vega.github.io/vega-lite/docs/text.html).
+
+    textMark [ maFontSize 18 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    textMark []
+
+-}
+textMark : List MarkProperty -> ( VLProperty, Spec )
+textMark =
+    mark Text
+
+
+{-| Provide a [formatting pattern](https://vega.github.io/vega-lite/docs/format.html)
+for a field when encoding with a text channel.
+-}
+tFormat : String -> TextChannel
+tFormat =
+    TFormat
+
+
+{-| Specify a short line mark for symbolising point locations. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/tick.html).
+
+    tick [ maStroke "blue", maStrokeWeight 0.5 ]
+
+To keep the default style for the mark, just provide an empty list as the parameter.
+
+    tick []
+
+-}
+tick : List MarkProperty -> ( VLProperty, Spec )
+tick =
+    mark Tick
+
+
+{-| Specify the default anchor position when placing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoAnchor : APosition -> TitleConfig
+ticoAnchor =
+    TAnchor
+
+
+{-| Specify the default angle when orientating titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoAngle : Float -> TitleConfig
+ticoAngle =
+    TAngle
+
+
+{-| Specify the default vertical alignment when placing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoBaseline : VAlign -> TitleConfig
+ticoBaseline =
+    TBaseline
+
+
+{-| Specify the default color when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoColor : String -> TitleConfig
+ticoColor =
+    TColor
+
+
+{-| Specify the default font when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFont : String -> TitleConfig
+ticoFont =
+    TFont
+
+
+{-| Specify the default font size when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFontSize : Float -> TitleConfig
+ticoFontSize =
+    TFontSize
+
+
+{-| Specify the default font weight when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoFontWeight : FontWeight -> TitleConfig
+ticoFontWeight =
+    TFontWeight
+
+
+{-| Specify the default maximim length in pixel units when showing titles.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoLimit : Float -> TitleConfig
+ticoLimit =
+    TLimit
+
+
+{-| Specify the default offset in pixel units of titles relative to the chart body.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoOffset : Float -> TitleConfig
+ticoOffset =
+    TOffset
+
+
+{-| Specify the default placement of titles relative to the chart body.
+For further details see the
+[Vega-Lite title config documentation](https://vega.github.io/vega-lite/docs/title.html#config)
+-}
+ticoOrient : Side -> TitleConfig
+ticoOrient =
+    TOrient
+
+
 {-| Creates a new data field based on the given temporal binning. Unlike the
 direct encoding binning, this transformation is named and so can be referred
 to in multiple encodings. The first parameter is the 'width' of each temporal bin,
 the second is the field to bin and the third is name to give the newly binned
-field. The final often implicit parameter is a list of previous transformations
+field. The final, often implicit, parameter is a list of previous transformations
 to which this is added. Note though that usually it is easer to apply the temporal
 binning directly as part of the encoding as this will automatically format the
 temporal axis. See the
@@ -3149,9 +8365,9 @@ grouping by month.
 
     enc =
         encoding
-            << position X [ PName "date", PmType Temporal, PTimeUnit Day ]
-            << position Y [ PAggregate Sum, PmType Quantitative ]
-            << detail [ DName "monthly", DmType Temporal ]
+            << position X [ pName "date", pMType Temporal, pTimeUnit Day ]
+            << position Y [ pAggregate Sum, pMType Quantitative ]
+            << detail [ dName "monthly", dMType Temporal ]
 
 -}
 timeUnitAs : TimeUnit -> String -> String -> List LabelledSpec -> List LabelledSpec
@@ -3165,7 +8381,7 @@ timeUnitAs tu field label =
     toVegaLite
         [ title "Population Growth"
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -3173,6 +8389,33 @@ timeUnitAs tu field label =
 title : String -> ( VLProperty, Spec )
 title s =
     ( VLTitle, JE.string s )
+
+
+{-| Specify the field type (level of measurement) when encoding with a text
+channel. For details, see the
+[Vega-Lite type documentation](https://vega.github.io/vega-lite/docs/type.html)
+-}
+tMType : Measurement -> TextChannel
+tMType =
+    TmType
+
+
+{-| Provide the name of the field used for encoding with a text channel.
+For details, see the
+[Vega-Lite field documentation](https://vega.github.io/vega-lite/docs/field.html)
+-}
+tName : String -> TextChannel
+tName =
+    TName
+
+
+{-| Reference in a text channel to a field name generated by `repeat`. The
+parameter identifies whether reference is being made to fields that are to be
+laid out in columns or in rows.
+-}
+tRepeat : Arrangement -> TextChannel
+tRepeat =
+    TRepeat
 
 
 {-| Encode a tooltip channel. The first parameter is a list of text channel properties
@@ -3186,21 +8429,64 @@ for formatting the appearance of the text.
 
       enc =
           encoding
-              << position X [ PName "Horsepower", PmType Quantitative ]
-              << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-              << tooltip [ TName "Year", TmType Temporal, TFormat "%Y" ]
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+              << tooltip [ tName "Year", tMType Temporal, tFormat "%Y" ]
+
+To encode multiple tooltip values with a mark, use `tooltips`
 
 -}
 tooltip : List TextChannel -> List LabelledSpec -> List LabelledSpec
 tooltip tDefs =
-    (::) ( "tooltip", List.concatMap textChannelProperty tDefs |> JE.object )
+    (::) ( "tooltip", JE.object (List.concatMap textChannelProperty tDefs) )
+
+
+{-| Encode a tooltip channel with multiple tooltips. The first parameter is a
+list of the multiple tooltips, each of which is a list of text channel properties
+that define the channel. The second parameter is a list of any previous channels to
+which this channel is to be added. See the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/encoding.html#text)
+for further details on the text and tooltip channels and
+[Vega-Lite formatting documentation](https://vega.github.io/vega-lite/docs/format.html)
+for formatting the appearance of the text.
+
+      enc =
+          encoding
+              << position X [ pName "Horsepower", pMType Quantitative ]
+              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+              << tooltips [ [ tName "Year", tMType Temporal, tFormat "%Y" ]
+                          , [ tName "Cylinders", tMType Quantitative ]
+                          ]
+
+-}
+tooltips : List (List TextChannel) -> List LabelledSpec -> List LabelledSpec
+tooltips tDefss =
+    (::) ( "tooltip", JE.list (List.map (\tDefs -> JE.object (List.concatMap textChannelProperty tDefs)) tDefss) )
+
+
+{-| Indicates a topoJSON feature format. The first parameter should be the name
+of the object set to extract. Typically used when specifying a data url.
+-}
+topojsonFeature : String -> Format
+topojsonFeature =
+    TopojsonFeature
+
+
+{-| Indicates a topoJSON mesh format. The first parameter should be the name
+of the object set to extract. Unlike the `topojsonFeature`, the corresponding
+geo data are returned as a single, unified mesh instance, not as individual
+GeoJSON features. Typically used when specifying a data url.
+-}
+topojsonMesh : String -> Format
+topojsonMesh =
+    TopojsonMesh
 
 
 {-| Convert a list of Vega-Lite specifications into a single JSON object that may be
 passed to Vega-Lite for graphics generation. Commonly these will include at least
 a data, mark and encoding specification.
 
-While simple properties like `mark` may be provided directly, it is usually clearer
+While simple functions like `bar` may be provided directly, it is usually clearer
 to label more complex ones such as encodings as separate expressions. This becomes
 increasingly helpful for visualizations that involve composition of layers, repeats
 and facets.
@@ -3212,15 +8498,15 @@ allows this to be done compactly.
     let
         data =
             dataFromColumns []
-                << dataColumn "a" (Strings [ "C", "C", "D", "D", "E", "E" ])
-                << dataColumn "b" (Numbers [ 2, 7, 1, 2, 6, 8 ])
+                << dataColumn "a" (strs [ "C", "C", "D", "D", "E", "E" ])
+                << dataColumn "b" (nums [ 2, 7, 1, 2, 6, 8 ])
 
         enc =
             encoding
-                << position X [ PName "a", PmType Nominal ]
-                << position Y [ PName "b", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "a", pMType Nominal ]
+                << position Y [ pName "b", pMType Quantitative, pAggregate Mean ]
     in
-    toVegaLite [ data [], mark Bar [], enc [] ]
+    toVegaLite [ data [], bar [], enc [] ]
 
 -}
 toVegaLite : List ( VLProperty, Spec ) -> Spec
@@ -3228,6 +8514,18 @@ toVegaLite spec =
     ( "$schema", JE.string "https://vega.github.io/schema/vega-lite/v2.json" )
         :: List.map (\( s, v ) -> ( vlPropertyLabel s, v )) spec
         |> JE.object
+
+
+{-| Specify a trail mark. A trail is a line that can vary in thickness along its
+length. For details see the
+[Vega Lite documentation](https://vega.github.io/vega-lite/docs/trail.html).
+
+    trail [ maInterpolate StepAfter ]
+
+-}
+trail : List MarkProperty -> ( VLProperty, Spec )
+trail =
+    mark Trail
 
 
 {-| Create a single transform from a list of transformation specifications. Note
@@ -3238,7 +8536,7 @@ provide the transformations in the order intended in a clear manner.
 
     trans =
         transform
-            << filter (FExpr "datum.year == 2010")
+            << filter (fiExpr "datum.year == 2010")
             << calculateAs "datum.sex == 2 ? 'Female' : 'Male'" "gender"
 
 -}
@@ -3305,6 +8603,36 @@ transform transforms =
                         _ ->
                             JE.null
 
+                "windowAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ winObj, frameObj, peersObj, groupbyObj, sortObj ] ->
+                            ([ ( "window", JE.list [ winObj ] ) ]
+                                ++ (if frameObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "frame", frameObj ) ]
+                                   )
+                                ++ (if peersObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "ignorePeers", peersObj ) ]
+                                   )
+                                ++ (if groupbyObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "groupby", groupbyObj ) ]
+                                   )
+                                ++ (if sortObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "sort", sortObj ) ]
+                                   )
+                            )
+                                |> JE.object
+
+                        _ ->
+                            JE.null
+
                 _ ->
                     JE.object [ ( str, val ) ]
     in
@@ -3314,12 +8642,32 @@ transform transforms =
         ( VLTransform, JE.list (List.map assemble transforms) )
 
 
+{-| Specify the properties of a text channel conditional on interactive selection.
+The first parameter provides the selection to evaluate, the second the encoding
+to apply if the text has been selected, the third the encoding if it is not selected.
+For details, see the
+[Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
+-}
+tSelectionCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
+tSelectionCondition op tCh fCh =
+    TSelectionCondition op tCh fCh
+
+
+{-| Specify the form of time unit aggregation of field values when encoding with
+a text channel. For details, see the
+[Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html)
+-}
+tTimeUnit : TimeUnit -> TextChannel
+tTimeUnit =
+    TTimeUnit
+
+
 {-| Provides a UTC version of a given a time (coordinated universal time, independent
 of local time zones or daylight saving).
 For example,
 
     encoding
-        << position X [ PName "date", PmType Temporal, PTimeUnit (utc YearMonthDateHours) ]
+        << position X [ pName "date", pMType Temporal, pTimeUnit (utc YearMonthDateHours) ]
 
 -}
 utc : TimeUnit -> TimeUnit
@@ -3344,6 +8692,105 @@ vConcat specs =
     ( VLVConcat, JE.list specs )
 
 
+{-| Specify whether or not by default single views should be clipped.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoClip : Bool -> ViewConfig
+vicoClip =
+    Clip
+
+
+{-| Specify the default fill color for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoFill : Maybe String -> ViewConfig
+vicoFill =
+    Fill
+
+
+{-| Specify the default fill opacity for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoFillOpacity : Float -> ViewConfig
+vicoFillOpacity =
+    FillOpacity
+
+
+{-| Specify the default height of single views (e.g. each view in a trellis plot).
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoHeight : Float -> ViewConfig
+vicoHeight =
+    ViewWidth
+
+
+{-| Specify the default stroke color for single views. If `Nothing` is provided,
+no strokes are drawn around the view. For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStroke : Maybe String -> ViewConfig
+vicoStroke =
+    Stroke
+
+
+{-| Specify the default stroke dash style for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeDash : List Float -> ViewConfig
+vicoStrokeDash =
+    StrokeDash
+
+
+{-| Specify the default stroke dash offset for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeDashOffset : Float -> ViewConfig
+vicoStrokeDashOffset =
+    StrokeDashOffset
+
+
+{-| Specify the default stroke opacity for single views.
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeOpacity : Float -> ViewConfig
+vicoStrokeOpacity =
+    StrokeOpacity
+
+
+{-| Specify the default stroke width of single views. For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoStrokeWidth : Float -> ViewConfig
+vicoStrokeWidth =
+    StrokeWidth
+
+
+{-| Specify the default width of single views (e.g. each view in a trellis plot).
+For further details see the
+[Vega-Lite view config documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
+-}
+vicoWidth : Float -> ViewConfig
+vicoWidth =
+    ViewWidth
+
+
+{-| Specify an aggregrate operation as part of a window transformation.
+A window transformation must specify either one of these aggregate operations or
+a window-only transformation (`wiOp`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiAggregateOp : Operation -> Window
+wiAggregateOp =
+    WAggregateOp
+
+
 {-| Override the default width of the visualization. If not specified the width
 will be calculated based on the content of the visualization.
 
@@ -3351,7 +8798,7 @@ will be calculated based on the content of the visualization.
     toVegaLite
         [ width 500
         , dataFromUrl "data/population.json" []
-        , mark Bar []
+        , bar []
         , enc []
         ]
 
@@ -3359,6 +8806,132 @@ will be calculated based on the content of the visualization.
 width : Float -> ( VLProperty, Spec )
 width w =
     ( VLWidth, JE.float w )
+
+
+{-| Specify that the given field should be sorted in ascending order when performing
+a window transform. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiAscending : String -> WindowSortField
+wiAscending =
+    WAscending
+
+
+{-| Specify that the given field should be sorted in descending order when performing
+a window transform. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiDescending : String -> WindowSortField
+wiDescending =
+    WDescending
+
+
+{-| Specify an data field for which to compute an operation. This is not needed
+for operations that do not apply to fields such as `Count`, `Rank` and `DenseRank`.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiField : String -> Window
+wiField =
+    WField
+
+
+{-| Specify a sliding window should be produced for use by a window transform.
+The two parameters should either be a `Just` a number indicating the offset from
+the current data object, or `Nothing` to indicate unbounded rows preceding or
+following the current data object. The default value is equivalent to `Nothing (Just 0)`,
+indicating that the sliding window includes the current object and all preceding
+objects. The value `(Just 5) (Just 5)` indicates that the window should include
+five objects preceding and five objects following the current object. Finally,
+`Nothing Nothing` indicates that the window frame should always include all data
+objects. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiFrame : Maybe Int -> Maybe Int -> WindowProperty
+wiFrame =
+    WFrame
+
+
+{-| Specify the data fields for partioning data objects in a window transform
+into separate windows. If unspecified, all points will be in a single group.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiGroupBy : List String -> WindowProperty
+wiGroupBy =
+    WGroupBy
+
+
+{-| Specify whether or not the sliding window frame in a window transform should
+ignore peer values (those considered identical by the sort criteria). The default
+is false, causing the window frame to expand to include all peer values. If set
+to be true, the window frame will be defined by offset values only. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiIgnorePeers : Bool -> WindowProperty
+wiIgnorePeers =
+    WIgnorePeers
+
+
+{-| Adds the window transform to a list of transformations that may be applied
+to a data stream. The window transform performs calculations over sorted groups
+of data objects. These calculations including ranking, lead/lag analysis, and
+aggregates such as running sums and averages. Calculated values are written back
+to the input data stream.
+
+The first parameter is the name to give the transformed output. The second is the
+[window transform field definition](https://vega.github.io/vega-lite/docs/window.html#field-def).
+The third the [window transform definition](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition).
+
+    trans =
+        transform
+            << windowAs "TotalTime"
+                [ wiAggregateOp Sum, wiField "Time" ]
+                [ wiFrame Nothing Nothing ]
+
+-}
+windowAs : String -> List Window -> List WindowProperty -> List LabelledSpec -> List LabelledSpec
+windowAs fName ws wProps =
+    (::)
+        ( "windowAs"
+        , JE.list
+            [ JE.object (( "as", JE.string fName ) :: List.map windowAsProperty ws)
+            , windowPropertySpec "frame" wProps
+            , windowPropertySpec "ignorePeers" wProps
+            , windowPropertySpec "groupby" wProps
+            , windowPropertySpec "sort" wProps
+            ]
+        )
+
+
+{-| Specify an window-specific operation as part of a window transformation.
+A window transformation must specify either one of these window-only operations
+or an aggregate transformation (`wiAggregateOp`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiOp : WindowOperation -> Window
+wiOp =
+    WOp
+
+
+{-| Specify the numeric parameter for those window-only operations that can be
+parameterised (`Ntile`, `Lag`, `Lead` and `NthValue`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiParam : Int -> Window
+wiParam =
+    WParam
+
+
+{-| Specify a comparator for sorting data objects within a window transform. If
+two data objects are considered equal by the comparator, they are considered `peer`
+values of equal rank. If not specified, data objects are processed in the order
+they are observed and none are considered peers. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiSort : List WindowSortField -> WindowProperty
+wiSort =
+    WSort
 
 
 
@@ -3686,6 +9259,9 @@ binProperty binProp =
         Divide x y ->
             ( "divide", JE.list [ JE.float x, JE.float y ] )
 
+        Divides xs ->
+            ( "divide", JE.list (List.map JE.float xs) )
+
         Extent mn mx ->
             ( "extent", JE.list [ JE.float mn, JE.float mx ] )
 
@@ -3843,6 +9419,9 @@ configProperty configProp =
         CircleStyle mps ->
             ( "circle", JE.object (List.map markProperty mps) )
 
+        GeoshapeStyle mps ->
+            ( "geoshape", JE.object (List.map markProperty mps) )
+
         LineStyle mps ->
             ( "line", JE.object (List.map markProperty mps) )
 
@@ -3888,6 +9467,9 @@ configProperty configProp =
 
         View vcs ->
             ( "view", JE.object (List.map viewConfigProperty vcs) )
+
+        TrailStyle mps ->
+            ( "trail", JE.object (List.map markProperty mps) )
 
 
 cursorLabel : Cursor -> String
@@ -4038,6 +9620,22 @@ dataValueSpec val =
 
         DateTime dt ->
             JE.object (List.map dateTimeProperty dt)
+
+
+dataValuesSpecs : DataValues -> List Spec
+dataValuesSpecs dvs =
+    case dvs of
+        Numbers xs ->
+            List.map JE.float xs
+
+        Strings ss ->
+            List.map JE.string ss
+
+        DateTimes dtss ->
+            List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss
+
+        Booleans bs ->
+            List.map JE.bool bs
 
 
 dateTimeProperty : DateTime -> LabelledSpec
@@ -4740,6 +10338,9 @@ markLabel mark =
         Tick ->
             "tick"
 
+        Trail ->
+            "trail"
+
 
 markOrientationLabel : MarkOrientation -> String
 markOrientationLabel orient =
@@ -4861,6 +10462,9 @@ markProperty mProp =
 
         MThickness x ->
             ( "thickness", JE.float x )
+
+        MPoint pm ->
+            ( "point", pointMarkerSpec pm )
 
 
 measurementLabel : Measurement -> String
@@ -5012,8 +10616,8 @@ orderChannelProperty oDef =
         OTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
 
-        OSort ops ->
-            case ops of
+        OSort sps ->
+            case sps of
                 [] ->
                     ( "sort", JE.null )
 
@@ -5023,8 +10627,11 @@ orderChannelProperty oDef =
                 [ Descending ] ->
                     ( "sort", JE.string "descending" )
 
+                [ CustomSort dvs ] ->
+                    ( "sort", JE.list (dataValuesSpecs dvs) )
+
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty ops) )
+                    ( "sort", JE.object (List.concatMap sortProperty sps) )
 
 
 overlapStrategyLabel : OverlapStrategy -> String
@@ -5053,6 +10660,19 @@ paddingSpec pad =
                 , ( "right", JE.float r )
                 , ( "bottom", JE.float b )
                 ]
+
+
+pointMarkerSpec : PointMarker -> Spec
+pointMarkerSpec pm =
+    case pm of
+        PMTransparent ->
+            JE.string "transparent"
+
+        PMNone ->
+            JE.bool False
+
+        PMMarker mps ->
+            JE.object (List.map markProperty mps)
 
 
 projectionLabel : Projection -> String
@@ -5178,8 +10798,8 @@ positionChannelProperty pDef =
         PTimeUnit tu ->
             ( "timeUnit", JE.string (timeUnitLabel tu) )
 
-        PSort ops ->
-            case ops of
+        PSort sps ->
+            case sps of
                 [] ->
                     ( "sort", JE.null )
 
@@ -5189,8 +10809,11 @@ positionChannelProperty pDef =
                 [ Descending ] ->
                     ( "sort", JE.string "descending" )
 
+                [ CustomSort dvs ] ->
+                    ( "sort", JE.list (dataValuesSpecs dvs) )
+
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty ops) )
+                    ( "sort", JE.object (List.concatMap sortProperty sps) )
 
         PScale sps ->
             if sps == [] then
@@ -5638,23 +11261,32 @@ sideLabel side =
             "right"
 
 
-sortProperty : SortProperty -> LabelledSpec
+sortProperty : SortProperty -> List LabelledSpec
 sortProperty sp =
     case sp of
         Ascending ->
-            ( "order", JE.string "ascending" )
+            [ ( "order", JE.string "ascending" ) ]
 
         Descending ->
-            ( "order", JE.string "descending" )
-
-        ByField field ->
-            ( "field", JE.string field )
+            [ ( "order", JE.string "descending" ) ]
 
         Op op ->
-            ( "op", JE.string (operationLabel op) )
+            [ ( "op", JE.string (operationLabel op) ) ]
+
+        ByField field ->
+            [ ( "field", JE.string field ) ]
+
+        ByFieldOp field op ->
+            [ ( "field", JE.string field ), ( "op", JE.string (operationLabel op) ) ]
 
         ByRepeat arr ->
-            ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
+
+        ByRepeatOp arr op ->
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ), ( "op", JE.string (operationLabel op) ) ]
+
+        CustomSort dvs ->
+            [] |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
 
 
 stackProperty : StackProperty -> LabelledSpec
@@ -5966,3 +11598,126 @@ vlPropertyLabel spec =
 
         VLResolve ->
             "resolve"
+
+
+wOperationLabel : WindowOperation -> String
+wOperationLabel op =
+    case op of
+        RowNumber ->
+            "row_number"
+
+        Rank ->
+            "rank"
+
+        DenseRank ->
+            "dense_rank"
+
+        PercentRank ->
+            "percent_rank"
+
+        CumeDist ->
+            "cume_dist"
+
+        Ntile ->
+            "ntile"
+
+        Lag ->
+            "lag"
+
+        Lead ->
+            "lead"
+
+        FirstValue ->
+            "first_value"
+
+        LastValue ->
+            "last_value"
+
+        NthValue ->
+            "nth_value"
+
+
+windowAsProperty : Window -> LabelledSpec
+windowAsProperty w =
+    case w of
+        WAggregateOp op ->
+            ( "op", JE.string (operationLabel op) )
+
+        WOp op ->
+            ( "op", JE.string (wOperationLabel op) )
+
+        WParam n ->
+            ( "param", JE.int n )
+
+        WField f ->
+            ( "field", JE.string f )
+
+
+windowPropertySpec : String -> List WindowProperty -> Spec
+windowPropertySpec wpName wps =
+    let
+        wpSpec wp =
+            case wpName of
+                "frame" ->
+                    case wp of
+                        WFrame (Just n1) (Just n2) ->
+                            JE.list [ JE.int n1, JE.int n2 ]
+
+                        WFrame Nothing (Just n2) ->
+                            JE.list [ JE.null, JE.int n2 ]
+
+                        WFrame (Just n1) Nothing ->
+                            JE.list [ JE.int n1, JE.null ]
+
+                        WFrame Nothing Nothing ->
+                            JE.list [ JE.null, JE.null ]
+
+                        _ ->
+                            JE.null
+
+                "ignorePeers" ->
+                    case wp of
+                        WIgnorePeers b ->
+                            JE.bool b
+
+                        _ ->
+                            JE.null
+
+                "groupby" ->
+                    case wp of
+                        WGroupBy fs ->
+                            JE.list (List.map JE.string fs)
+
+                        _ ->
+                            JE.null
+
+                "sort" ->
+                    case wp of
+                        WSort sfs ->
+                            JE.list (List.map windowSortFieldSpec sfs)
+
+                        _ ->
+                            JE.null
+
+                _ ->
+                    JE.null |> Debug.log ("Unexpected window property name " ++ toString wpName)
+
+        specList =
+            List.map wpSpec wps |> List.filter (\x -> x /= JE.null)
+    in
+    case specList of
+        [ spec ] ->
+            spec
+
+        _ ->
+            JE.null
+
+
+windowSortFieldSpec : WindowSortField -> Spec
+windowSortFieldSpec wsf =
+    case wsf of
+        WAscending f ->
+            JE.object [ ( "field", JE.string f ), ( "order", JE.string "ascending" ) ]
+
+        WDescending f ->
+            JE.object [ ( "field", JE.string f ), ( "order", JE.string "descending" ) ]

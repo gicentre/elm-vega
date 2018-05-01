@@ -11,17 +11,17 @@ axis1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "x" (Numbers [ 0, 1000, 1000, 0, 0, 1000 ])
-                << dataColumn "y" (Numbers [ 1000, 1000, 0, 0, 1000, 0 ])
-                << dataColumn "order" (Numbers <| List.map toFloat <| List.range 1 6)
+                << dataColumn "x" (nums [ 0, 1000, 1000, 0, 0, 1000 ])
+                << dataColumn "y" (nums [ 1000, 1000, 0, 0, 1000, 0 ])
+                << dataColumn "order" (List.range 1 6 |> List.map toFloat |> nums)
 
         enc =
             encoding
-                << position X [ PName "x", PmType Quantitative, PAxis [] ]
-                << position Y [ PName "y", PmType Quantitative, PAxis [] ]
-                << order [ OName "order", OmType Ordinal ]
+                << position X [ pName "x", pMType Quantitative, pAxis [] ]
+                << position Y [ pName "y", pMType Quantitative, pAxis [] ]
+                << order [ oName "order", oMType Ordinal ]
     in
-    toVegaLite [ data [], enc [], mark Line [] ]
+    toVegaLite [ data [], enc [], line [] ]
 
 
 scaleEncode : ( VLProperty, Spec ) -> Spec
@@ -29,22 +29,22 @@ scaleEncode enc =
     let
         data =
             dataFromColumns []
-                << dataColumn "x" (Numbers [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 ])
-                << dataColumn "y" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
-                << dataColumn "val" (Numbers [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
-                << dataColumn "cat" (Strings [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ])
+                << dataColumn "x" (nums [ 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 ])
+                << dataColumn "y" (nums [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
+                << dataColumn "val" (nums [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ])
+                << dataColumn "cat" (strs [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ])
     in
-    toVegaLite [ width 400, height 400, data [], enc, mark Point [] ]
+    toVegaLite [ width 400, height 400, data [], enc, point [] ]
 
 
 scale0 : Spec
 scale0 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -53,11 +53,11 @@ scale0 =
 scale1 : Spec
 scale1 =
     (encoding
-        << position X [ PName "x", PmType Quantitative, PScale [] ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative, pScale [] ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -66,11 +66,11 @@ scale1 =
 scale2 : Spec
 scale2 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative, PScale [] ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative, pScale [] ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -79,11 +79,11 @@ scale2 =
 scale3 : Spec
 scale3 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal, MScale [] ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal, mScale [] ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -92,11 +92,11 @@ scale3 =
 scale4 : Spec
 scale4 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative, MScale [] ]
-        << shape [ MName "cat", MmType Nominal ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative, mScale [] ]
+        << shape [ mName "cat", mMType Nominal ]
     )
         []
         |> scaleEncode
@@ -105,11 +105,11 @@ scale4 =
 scale5 : Spec
 scale5 =
     (encoding
-        << position X [ PName "x", PmType Quantitative ]
-        << position Y [ PName "y", PmType Quantitative ]
-        << color [ MName "val", MmType Ordinal ]
-        << size [ MName "val", MmType Quantitative ]
-        << shape [ MName "cat", MmType Nominal, MScale [] ]
+        << position X [ pName "x", pMType Quantitative ]
+        << position Y [ pName "y", pMType Quantitative ]
+        << color [ mName "val", mMType Ordinal ]
+        << size [ mName "val", mMType Quantitative ]
+        << shape [ mName "cat", mMType Nominal, mScale [] ]
     )
         []
         |> scaleEncode

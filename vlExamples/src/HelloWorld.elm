@@ -8,9 +8,9 @@ myVis : Spec
 myVis =
     toVegaLite
         [ title "Hello, World!"
-        , dataFromColumns [] <| dataColumn "x" (Numbers [ 10, 20, 30 ]) []
-        , mark Circle []
-        , encoding <| position X [ PName "x", PmType Quantitative ] []
+        , dataFromColumns [] <| dataColumn "x" (nums [ 10, 20, 30 ]) []
+        , circle []
+        , encoding <| position X [ pName "x", pMType Quantitative ] []
         ]
 
 

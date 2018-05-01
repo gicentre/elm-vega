@@ -8,15 +8,15 @@ scatter : Spec
 scatter =
     let
         cars =
-            dataFromUrl "data/cars.json" []
+            dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
     in
-    toVegaLite [ cars, mark Circle [], enc [] ]
+    toVegaLite [ cars, circle [], enc [] ]
 
 
 

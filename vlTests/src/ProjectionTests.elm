@@ -21,8 +21,8 @@ worldMapTemplate tText projProps =
     let
         enc =
             encoding
-                << color [ MString "#010" ]
-                << opacity [ MNumber 0.7 ]
+                << color [ mStr "#010" ]
+                << opacity [ mNum 0.7 ]
     in
     ( tText
     , toVegaLite
@@ -33,8 +33,8 @@ worldMapTemplate tText projProps =
         , projection projProps
 
         --, dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-        , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.5 ]
+        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+        , geoshape [ maFillOpacity 0.01, maStroke "#411", maStrokeWidth 0.5 ]
         , enc []
         ]
     )
@@ -42,18 +42,18 @@ worldMapTemplate tText projProps =
 
 standardProjs : List ( String, Spec )
 standardProjs =
-    [ worldMapTemplate "Albers" [ PType Albers ]
-    , worldMapTemplate "AzimuthalEqualArea" [ PType AzimuthalEqualArea ]
-    , worldMapTemplate "AzimuthalEquidistant" [ PType AzimuthalEquidistant ]
-    , worldMapTemplate "ConicConformal" [ PType ConicConformal, PClipAngle (Just 65) ]
-    , worldMapTemplate "ConicEqualArea" [ PType ConicEqualArea ]
-    , worldMapTemplate "ConicEquidistant" [ PType ConicEquidistant ]
-    , worldMapTemplate "Equirectangular" [ PType Equirectangular ]
-    , worldMapTemplate "Gnomonic" [ PType Gnomonic ]
-    , worldMapTemplate "Mercator" [ PType Mercator ]
-    , worldMapTemplate "Orthographic" [ PType Orthographic ]
-    , worldMapTemplate "Stereographic" [ PType Stereographic ]
-    , worldMapTemplate "TransverseMercator" [ PType TransverseMercator ]
+    [ worldMapTemplate "Albers" [ prType Albers ]
+    , worldMapTemplate "AzimuthalEqualArea" [ prType AzimuthalEqualArea ]
+    , worldMapTemplate "AzimuthalEquidistant" [ prType AzimuthalEquidistant ]
+    , worldMapTemplate "ConicConformal" [ prType ConicConformal, prClipAngle (Just 65) ]
+    , worldMapTemplate "ConicEqualArea" [ prType ConicEqualArea ]
+    , worldMapTemplate "ConicEquidistant" [ prType ConicEquidistant ]
+    , worldMapTemplate "Equirectangular" [ prType Equirectangular ]
+    , worldMapTemplate "Gnomonic" [ prType Gnomonic ]
+    , worldMapTemplate "Mercator" [ prType Mercator ]
+    , worldMapTemplate "Orthographic" [ prType Orthographic ]
+    , worldMapTemplate "Stereographic" [ prType Stereographic ]
+    , worldMapTemplate "TransverseMercator" [ prType TransverseMercator ]
     ]
 
 
@@ -62,7 +62,7 @@ d3Projections =
     -- Note these require registering via JavaScript in the hosting page.
     let
         customSpec pText =
-            worldMapTemplate pText [ PType (Custom pText), PClipAngle (Just 179.999), PRotate 20 -90 0, PPrecision 0.1 ]
+            worldMapTemplate pText [ prType (customProjection pText), prClipAngle (Just 179.999), prRotate 20 -90 0, prPrecision 0.1 ]
     in
     List.map customSpec [ "airy", "aitoff", "armadillo", "august", "baker", "berghaus", "bertin1953", "boggs", "bonne", "bottomley", "collignon", "craig", "craster", "cylindricalequalarea", "cylindricalstereographic", "eckert1", "eckert2", "eckert3", "eckert4", "eckert5", "eckert6", "eisenlohr", "fahey", "foucaut", "gingery", "winkel3" ]
 
@@ -72,37 +72,37 @@ configExample =
     let
         config =
             configure
-                << configuration (Background "rgb(251,247,238)")
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W600, TFontSize 18 ])
-                << configuration (View [ ViewWidth 500, ViewHeight 300, Stroke Nothing ])
-                << configuration (Autosize [ AFit ])
-                << configuration (Projection [ PType Orthographic, PRotate 0 0 0 ])
+                << configuration (coBackground "rgb(251,247,238)")
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W600, ticoFontSize 18 ])
+                << configuration (coView [ vicoWidth 500, vicoHeight 300, vicoStroke Nothing ])
+                << configuration (coAutosize [ AFit ])
+                << configuration (coProjection [ prType Orthographic, prRotate 0 0 0 ])
 
         globeSpec =
             asSpec
-                [ dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
-                , mark Geoshape []
-                , encoding <| color [ MString "#c1e7f5" ] <| []
+                [ dataFromUrl "data/globe.json" [ topojsonFeature "globe" ]
+                , geoshape []
+                , encoding <| color [ mStr "#c1e7f5" ] <| []
 
-                --, projection [ PType Orthographic, PRotate 0 0 0 ]
+                --, projection [ prType Orthographic, PRotate 0 0 0 ]
                 ]
 
         graticuleSpec =
             asSpec
-                [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                , mark Geoshape [ MFillOpacity 0.01, MStroke "#411", MStrokeWidth 0.1 ]
-                , encoding <| color [ MString "#black" ] <| []
+                [ dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+                , geoshape [ maFillOpacity 0.01, maStroke "#411", maStrokeWidth 0.1 ]
+                , encoding <| color [ mStr "#black" ] <| []
 
-                --, projection [ PType Orthographic, PRotate 0 0 0 ]
+                --, projection [ prType Orthographic, PRotate 0 0 0 ]
                 ]
 
         countrySpec =
             asSpec
-                [ dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                , mark Geoshape []
-                , encoding <| color [ MString "#708E71" ] <| []
+                [ dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
+                , geoshape []
+                , encoding <| color [ mStr "#708E71" ] <| []
 
-                --, projection [ PType Orthographic, PRotate 0 0 0 ]
+                --, projection [ prType Orthographic, PRotate 0 0 0 ]
                 ]
     in
     ( "configExample"

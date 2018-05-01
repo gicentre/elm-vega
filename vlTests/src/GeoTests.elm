@@ -17,10 +17,10 @@ defaultSize1 : Spec
 defaultSize1 =
     toVegaLite
         [ description "Default map size"
-        , projection [ PType AlbersUsa ]
-        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
-        , mark Geoshape []
-        , encoding <| color [ MString "black" ] []
+        , projection [ prType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
+        , geoshape []
+        , encoding <| color [ mStr "black" ] []
         ]
 
 
@@ -28,11 +28,11 @@ defaultSize2 : Spec
 defaultSize2 =
     toVegaLite
         [ description "Default map size with view width and height specified in config."
-        , configure <| configuration (View [ ViewWidth 500, ViewHeight 300 ]) <| []
-        , projection [ PType AlbersUsa ]
-        , dataFromUrl "data/us-10m.json" [ TopojsonFeature "counties" ]
-        , mark Geoshape []
-        , encoding <| color [ MString "black" ] []
+        , configure <| configuration (coView [ vicoWidth 500, vicoHeight 300 ]) <| []
+        , projection [ prType AlbersUsa ]
+        , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
+        , geoshape []
+        , encoding <| color [ mStr "black" ] []
         ]
 
 
@@ -41,10 +41,10 @@ choropleth1 =
     toVegaLite
         [ width 900
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-        , mark Geoshape [ MStrokeOpacity 0 ]
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
+        , dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
+        , geoshape [ maStrokeOpacity 0 ]
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -57,29 +57,29 @@ choropleth2 =
 
         polyEnc =
             encoding
-                << color [ MName "id", MmType Nominal, MScale boroughColors, MLegend [] ]
-                << opacity [ MNumber 1 ]
+                << color [ mName "id", mMType Nominal, mScale boroughColors, mLegend [] ]
+                << opacity [ mNum 1 ]
 
         polySpec =
             asSpec
-                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
+                [ dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
+                , geoshape [ maStroke "rgb(251,247,238)", maStrokeWidth 2 ]
                 , polyEnc []
                 ]
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx", PmType Quantitative ]
-                << position Latitude [ PName "cy", PmType Quantitative ]
-                << text [ TName "bLabel", TmType Nominal ]
+                << position Longitude [ pName "cx", pMType Quantitative ]
+                << position Latitude [ pName "cy", pMType Quantitative ]
+                << text [ tName "bLabel", tMType Nominal ]
 
         labelSpec =
-            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
     in
     toVegaLite
         [ width 1200
         , height 700
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , layer [ polySpec, labelSpec ]
         ]
 
@@ -89,9 +89,9 @@ tubeLines1 =
     toVegaLite
         [ width 700
         , height 500
-        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-        , mark Geoshape [ MFilled False ]
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
+        , geoshape [ maFilled False ]
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -101,18 +101,18 @@ tubeLines2 =
         enc =
             encoding
                 << color
-                    [ MName "id"
-                    , MmType Nominal
-                    , MLegend [ LTitle "", LOrient BottomRight ]
-                    , MScale tubeLineColors
+                    [ mName "id"
+                    , mMType Nominal
+                    , mLegend [ leTitle "", leOrient BottomRight ]
+                    , mScale tubeLineColors
                     ]
     in
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-        , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
+        , dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
+        , geoshape [ maFilled False, maStrokeWidth 2 ]
         , enc []
         ]
 
@@ -122,46 +122,46 @@ tubeLines3 =
     let
         polySpec =
             asSpec
-                [ dataFromUrl "data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-                , mark Geoshape [ MStroke "rgb(251,247,238)", MStrokeWidth 2 ]
-                , encoding <| color [ MString "#ddc" ] []
+                [ dataFromUrl "data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
+                , geoshape [ maStroke "rgb(251,247,238)", maStrokeWidth 2 ]
+                , encoding <| color [ mStr "#ddc" ] []
                 ]
 
         labelEnc =
             encoding
-                << position Longitude [ PName "cx", PmType Quantitative ]
-                << position Latitude [ PName "cy", PmType Quantitative ]
-                << text [ TName "bLabel", TmType Nominal ]
-                << size [ MNumber 8 ]
-                << opacity [ MNumber 0.6 ]
+                << position Longitude [ pName "cx", pMType Quantitative ]
+                << position Latitude [ pName "cy", pMType Quantitative ]
+                << text [ tName "bLabel", tMType Nominal ]
+                << size [ mNum 8 ]
+                << opacity [ mNum 0.6 ]
 
         trans =
             transform
                 << calculateAs "indexof (datum.name,' ') > 0  ? substring(datum.name,0,indexof(datum.name, ' ')) : datum.name" "bLabel"
 
         labelSpec =
-            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], mark Text [], labelEnc [] ]
+            asSpec [ dataFromUrl "data/londonCentroids.json" [], trans [], textMark [], labelEnc [] ]
 
         tubeEnc =
             encoding
                 << color
-                    [ MName "id"
-                    , MmType Nominal
-                    , MLegend [ LTitle "", LOrient BottomRight, LOffset 0 ]
-                    , MScale tubeLineColors
+                    [ mName "id"
+                    , mMType Nominal
+                    , mLegend [ leTitle "", leOrient BottomRight, leOffset 0 ]
+                    , mScale tubeLineColors
                     ]
 
         routeSpec =
             asSpec
-                [ dataFromUrl "data/londonTubeLines.json" [ TopojsonFeature "line" ]
-                , mark Geoshape [ MFilled False, MStrokeWidth 2 ]
+                [ dataFromUrl "data/londonTubeLines.json" [ topojsonFeature "line" ]
+                , geoshape [ maFilled False, maStrokeWidth 2 ]
                 , tubeEnc []
                 ]
     in
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , layer [ polySpec, labelSpec, routeSpec ]
         ]
 
@@ -230,9 +230,9 @@ mapComp1 =
             asSpec
                 [ width 300
                 , height 300
-                , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                , projection [ PType Orthographic ]
-                , mark Geoshape [ MFilled False ]
+                , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+                , projection [ prType Orthographic ]
+                , geoshape [ maFilled False ]
                 ]
     in
     toVegaLite [ hConcat [ globe, globe, globe ] ]
@@ -245,20 +245,20 @@ mapComp2 =
             let
                 graticuleSpec =
                     asSpec
-                        [ dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        [ dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+                        , geoshape [ maFilled False, maStroke "#411", maStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
                     asSpec
-                        [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ TopojsonFeature "land" ]
-                        , mark Geoshape [ MFill "black", MFillOpacity 0.7 ]
+                        [ dataFromUrl "https://vega.github.io/vega-lite/data/world-110m.json" [ topojsonFeature "land" ]
+                        , geoshape [ maFill "black", maFillOpacity 0.7 ]
                         ]
             in
-            asSpec [ width 300, height 300, projection [ PType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
+            asSpec [ width 300, height 300, projection [ prType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| []
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| []
         , hConcat [ globe, globe, globe ]
         ]
 
@@ -272,24 +272,24 @@ mapComp3 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+                        , geoshape [ maFilled False, maStroke "#411", maStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                        , mark Geoshape [ MStroke "white", MFill "black", MStrokeWidth 0.5 ]
+                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
+                        , geoshape [ maStroke "white", maFill "black", maStrokeWidth 0.5 ]
                         ]
             in
             asSpec [ layer [ graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| [], hConcat [ rotatedSpec -65, rotatedSpec 115, rotatedSpec -65 ] ]
 
 
 mapComp4 : Spec
@@ -301,33 +301,33 @@ mapComp4 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ PType Orthographic, PRotate 0 0 0 ]
-                        , dataFromUrl "data/globe.json" [ TopojsonFeature "globe" ]
-                        , mark Geoshape [ MFill "#c1e7f5", MStrokeOpacity 0 ]
+                        , projection [ prType Orthographic, prRotate 0 0 0 ]
+                        , dataFromUrl "data/globe.json" [ topojsonFeature "globe" ]
+                        , geoshape [ maFill "#c1e7f5", maStrokeOpacity 0 ]
                         ]
 
                 graticuleSpec =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/graticule.json" [ TopojsonFeature "graticule" ]
-                        , mark Geoshape [ MFilled False, MStroke "#411", MStrokeWidth 0.1 ]
+                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
+                        , geoshape [ maFilled False, maStroke "#411", maStrokeWidth 0.1 ]
                         ]
 
                 countrySpec =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ PType Orthographic, PRotate rot 0 0 ]
-                        , dataFromUrl "data/world-110m.json" [ TopojsonFeature "countries1" ]
-                        , mark Geoshape [ MStroke "white", MFill "#242", MStrokeWidth 0.1 ]
+                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
+                        , geoshape [ maStroke "white", maFill "#242", maStrokeWidth 0.1 ]
                         ]
             in
             asSpec [ layer [ seaSpec, graticuleSpec, countrySpec ] ]
     in
     toVegaLite
-        [ configure <| configuration (View [ Stroke Nothing ]) <| [], hConcat [ rotatedSpec 0, rotatedSpec -40 ] ]
+        [ configure <| configuration (coView [ vicoStroke Nothing ]) <| [], hConcat [ rotatedSpec 0, rotatedSpec -40 ] ]
 
 
 dotMap1 : Spec
@@ -335,19 +335,19 @@ dotMap1 =
     let
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << size [ MNumber 1 ]
-                << color [ MName "digit", MmType Nominal ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << size [ mNum 1 ]
+                << color [ mName "digit", mMType Nominal ]
     in
     toVegaLite
         [ description "US zip codes: One dot per zipcode colored by first digit"
         , width 500
         , height 300
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
-        , mark Circle []
+        , circle []
         , enc []
         ]
 
@@ -361,31 +361,31 @@ scribbleMap1 =
 
         config =
             configure
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W300, TFontSize 28 ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W300, ticoFontSize 28 ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         trans =
             transform
-                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> FExpr)
+                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> fiExpr)
                 << calculateAs "datum.state == 'HI' ? 'hi' : (datum.state == 'AK' ? 'ak' : 'continent')" "conterminous"
 
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative ]
-                << position Latitude [ PName "latitude", PmType Quantitative ]
-                << order [ OName "zip_code", OmType Quantitative ]
-                << color [ MString "#666" ]
-                << detail [ DName "conterminous", DmType Nominal ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << order [ oName "zip_code", oMType Quantitative ]
+                << color [ mStr "#666" ]
+                << detail [ dName "conterminous", dMType Nominal ]
     in
     toVegaLite
         [ title "US connected zip codes"
         , config []
         , width 1000
         , height 600
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , mark Line [ MStrokeWidth 0.2, MInterpolate Monotone ]
+        , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
         , enc []
         ]
 
@@ -399,32 +399,32 @@ scribbleMap2 =
 
         config =
             configure
-                << configuration (TitleStyle [ TFont "Roboto", TFontWeight W300, TFontSize 28 ])
-                << configuration (View [ Stroke Nothing ])
+                << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W300, ticoFontSize 28 ])
+                << configuration (coView [ vicoStroke Nothing ])
 
         trans =
             transform
-                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> FExpr)
+                << filter ("datum.latitude != '' && datum.county != 'Honolulu' " ++ stateCondition |> fiExpr)
                 << calculateAs "substring(datum.zip_code, 0, 3)" "digit3"
                 << calculateAs "length(datum.zip_code+' ')" "ziplen"
 
         enc =
             encoding
-                << position Longitude [ PName "longitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
-                << position Latitude [ PName "latitude", PmType Quantitative, PSort [ ByField "zip_code" ] ]
-                << order [ OName "zip_code", OmType Quantitative ]
-                << color [ MName "digit3", MmType Nominal, MLegend [] ]
-                << detail [ DName "ziplen", DmType Nominal ]
+                << position Longitude [ pName "longitude", pMType Quantitative ]
+                << position Latitude [ pName "latitude", pMType Quantitative ]
+                << order [ oName "zip_code", oMType Quantitative ]
+                << color [ mName "digit3", mMType Nominal, mLegend [] ]
+                << detail [ dName "ziplen", dMType Nominal ]
     in
     toVegaLite
         [ title "US connected zip codes, coloured by first three digits"
         , config []
         , width 1000
         , height 600
-        , projection [ PType AlbersUsa ]
+        , projection [ prType AlbersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , mark Line [ MStrokeWidth 0.2, MInterpolate Monotone ]
+        , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
         , enc []
         ]
 

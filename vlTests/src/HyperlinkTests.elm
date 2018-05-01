@@ -12,30 +12,28 @@ hyperlink1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "label" (Strings [ "Vega", "Vega-Lite" ])
-                << dataColumn "url" (Strings [ "https://vega.github.io/vega", "https://vega.github.io/vega-lite" ])
+                << dataColumn "label" (strs [ "Vega", "Vega-Lite" ])
+                << dataColumn "url" (strs [ "https://vega.github.io/vega", "https://vega.github.io/vega-lite" ])
 
         encCircle =
             encoding
-                << position X [ PName "label", PmType Nominal, PAxis [] ]
-                << size [ MNumber 8000 ]
-                << color [ MName "label", MmType Nominal, MLegend [] ]
-                << hyperlink [ HName "url", HmType Nominal ]
+                << position X [ pName "label", pMType Nominal, pAxis [] ]
+                << size [ mNum 8000 ]
+                << color [ mName "label", mMType Nominal, mLegend [] ]
+                << hyperlink [ hName "url", hMType Nominal ]
 
         encLabel =
             encoding
-                << position X [ PName "label", PmType Nominal, PAxis [] ]
-                << text [ TName "label", TmType Nominal ]
-                << color [ MString "white" ]
-                << size [ MNumber 16 ]
+                << position X [ pName "label", pMType Nominal, pAxis [] ]
+                << text [ tName "label", tMType Nominal ]
+                << color [ mStr "white" ]
+                << size [ mNum 16 ]
 
-        --<< hyperlink [ HName "url", HmType Nominal ]
         symbolSpec =
-            asSpec [ mark Circle [ MCursor CPointer ], encCircle [] ]
+            asSpec [ circle [ maCursor CPointer ], encCircle [] ]
 
         labelSpec =
-            --  asSpec [ mark Text [ MCursor CPointer ], encLabel [] ]
-            asSpec [ mark Text [], encLabel [] ]
+            asSpec [ textMark [], encLabel [] ]
     in
     toVegaLite
         [ data [], layer [ symbolSpec, labelSpec ] ]
@@ -49,15 +47,11 @@ hyperlink2 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
-                << hyperlink [ HString "http://www.imdb.com" ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
+                << hyperlink [ hStr "http://www.imdb.com" ]
     in
-    toVegaLite
-        [ data
-        , mark Point [ MCursor CPointer ]
-        , enc []
-        ]
+    toVegaLite [ data, point [ maCursor CPointer ], enc [] ]
 
 
 hyperlink3 : Spec
@@ -68,24 +62,20 @@ hyperlink3 =
 
         enc =
             encoding
-                << position X [ PName "IMDB_Rating", PmType Quantitative ]
-                << position Y [ PName "Rotten_Tomatoes_Rating", PmType Quantitative ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ MDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ MString "steelblue" ]
-                        [ MString "red" ]
+                    [ mDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
+                        [ mStr "steelblue" ]
+                        [ mStr "red" ]
                     ]
                 << hyperlink
-                    [ HDataCondition (Expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ HString "http://www.imdb.com" ]
-                        [ HString "https://www.rottentomatoes.com" ]
+                    [ hDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
+                        [ hStr "http://www.imdb.com" ]
+                        [ hStr "https://www.rottentomatoes.com" ]
                     ]
     in
-    toVegaLite
-        [ data
-        , mark Point [ MCursor CPointer ]
-        , enc []
-        ]
+    toVegaLite [ data, point [ maCursor CPointer ], enc [] ]
 
 
 

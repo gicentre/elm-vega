@@ -14,10 +14,10 @@ timeByUnit tu =
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, PTimeUnit tu ]
-                << position Y [ PName "temperature", PmType Quantitative, PAggregate Mean, PScale [ SZero False ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit tu ]
+                << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ scZero False ] ]
     in
-    toVegaLite [ width 800, data, enc [], mark Line [ MStrokeWidth 0.2 ] ]
+    toVegaLite [ width 800, data, enc [], line [ maStrokeWidth 0.2 ] ]
 
 
 timeYear : Spec
@@ -112,39 +112,39 @@ parseTime dType =
         format =
             case dType of
                 Local ->
-                    FoDate "%d %b %Y %H:%M"
+                    foDate "%d %b %Y %H:%M"
 
                 UTC ->
-                    FoUtc "%d %b %Y %H:%M"
+                    foUtc "%d %b %Y %H:%M"
 
         tu =
             case dType of
                 Local ->
-                    PTimeUnit YearMonthDateHours
+                    pTimeUnit YearMonthDateHours
 
                 UTC ->
-                    PTimeUnit (utc YearMonthDateHours)
+                    pTimeUnit (utc YearMonthDateHours)
 
         timeScale =
             case dType of
                 Local ->
-                    PScale [ SType ScTime ]
+                    pScale [ scType ScTime ]
 
                 UTC ->
-                    PScale [ SType ScUtc ]
+                    pScale [ scType ScUtc ]
 
         data =
-            dataFromColumns [ Parse [ ( "date", format ) ] ]
-                << dataColumn "date" (Strings [ "28 Oct 2017 22:00", "28 Oct 2017 23:00", "29 Oct 2017 00:00", "29 Oct 2017 01:00", "29 Oct 2017 02:00", "29 Oct 2017 03:00", "29 Oct 2017 04:00" ])
-                << dataColumn "value" (Numbers [ 1, 2, 3, 4, 5, 6, 7 ])
+            dataFromColumns [ parse [ ( "date", format ) ] ]
+                << dataColumn "date" (strs [ "28 Oct 2017 22:00", "28 Oct 2017 23:00", "29 Oct 2017 00:00", "29 Oct 2017 01:00", "29 Oct 2017 02:00", "29 Oct 2017 03:00", "29 Oct 2017 04:00" ])
+                << dataColumn "value" (nums [ 1, 2, 3, 4, 5, 6, 7 ])
 
         enc =
             encoding
-                << position X [ PName "date", PmType Temporal, tu, timeScale, PAxis [ AxFormat "%d %b %H:%M" ] ]
-                << position Y [ PName "value", PmType Quantitative ]
-                << size [ MNumber 500 ]
+                << position X [ pName "date", pMType Temporal, tu, timeScale, pAxis [ axFormat "%d %b %H:%M" ] ]
+                << position Y [ pName "value", pMType Quantitative ]
+                << size [ mNum 500 ]
     in
-    toVegaLite [ width 800, data [], enc [], mark Circle [] ]
+    toVegaLite [ width 800, data [], enc [], circle [] ]
 
 
 localTime : Spec

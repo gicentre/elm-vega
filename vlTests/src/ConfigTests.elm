@@ -12,13 +12,13 @@ singleVis config =
 
         scatterEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Cylinders", MmType Ordinal ]
-                << shape [ MName "Origin", MmType Nominal ]
-                << size [ MNumber 100 ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Cylinders", mMType Ordinal ]
+                << shape [ mName "Origin", mMType Nominal ]
+                << size [ mNum 100 ]
     in
-    toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, mark Point [], scatterEnc [] ]
+    toVegaLite [ title "Car Scatter", config [], cars, width 200, height 200, point [], scatterEnc [] ]
 
 
 compositeVis : (List a -> ( VLProperty, Spec )) -> Spec
@@ -29,36 +29,36 @@ compositeVis config =
 
         scatterEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
-                << color [ MName "Cylinders", MmType Ordinal ]
-                << shape [ MName "Origin", MmType Nominal ]
-                << size [ MNumber 100 ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+                << color [ mName "Cylinders", mMType Ordinal ]
+                << shape [ mName "Origin", mMType Nominal ]
+                << size [ mNum 100 ]
 
         scatterSpec =
-            asSpec [ title "Car Scatter", width 200, height 200, padding (PSize 20), mark Point [], scatterEnc [] ]
+            asSpec [ title "Car Scatter", width 200, height 200, padding (paSize 20), point [], scatterEnc [] ]
 
         barEnc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
 
         streamEnc =
             encoding
-                << position X [ PName "Year", PmType Temporal, PTimeUnit Year ]
-                << position Y [ PAggregate Count, PmType Quantitative, PStack StCenter, PAxis [] ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+                << position Y [ pAggregate Count, pMType Quantitative, pStack StCenter, pAxis [] ]
+                << color [ mName "Origin", mMType Nominal ]
 
         barSpec =
-            asSpec [ title "Car Histogram", width 200, height 200, padding (PSize 20), mark Bar [], barEnc [] ]
+            asSpec [ title "Car Histogram", width 200, height 200, padding (paSize 20), bar [], barEnc [] ]
 
         streamSpec =
-            asSpec [ title "Car Streamgraph", width 200, height 200, padding (PSize 20), mark Area [], streamEnc [] ]
+            asSpec [ title "Car Streamgraph", width 200, height 200, padding (paSize 20), area [], streamEnc [] ]
 
         res =
             resolve
-                << resolution (RScale [ ( ChColor, Independent ), ( ChShape, Independent ) ])
+                << resolution (reScale [ ( ChColor, Independent ), ( ChShape, Independent ) ])
     in
     toVegaLite [ config [], cars, hConcat [ scatterSpec, barSpec, streamSpec ], res [] ]
 
@@ -72,35 +72,35 @@ defaultCfg =
 darkCfg : Spec
 darkCfg =
     configure
-        << configuration (Background "black")
-        << configuration (TitleStyle [ TFont "Roboto", TColor "#fff" ])
-        << configuration (Axis [ DomainColor "yellow", GridColor "rgb(255,255,200)", GridOpacity 0.2, LabelColor "#fcf", TickColor "white", TitleColor "rgb(200,255,200)", LabelFont "Roboto", TitleFont "Roboto" ])
-        << configuration (Legend [ FillColor "#333", StrokeColor "#444", LeTitleColor "rgb(200,200,200)", LeLabelColor "white", SymbolColor "red", GradientStrokeColor "yellow", LeLabelFont "Roboto", LeTitleFont "Roboto" ])
+        << configuration (coBackground "black")
+        << configuration (coTitle [ ticoFont "Roboto", ticoColor "#fff" ])
+        << configuration (coAxis [ axcoDomainColor "yellow", axcoGridColor "rgb(255,255,200)", axcoGridOpacity 0.2, axcoLabelColor "#fcf", axcoTickColor "white", axcoTitleColor "rgb(200,255,200)", axcoLabelFont "Roboto", axcoTitleFont "Roboto" ])
+        << configuration (coLegend [ lecoFillColor "#333", lecoStrokeColor "#444", lecoTitleColor "rgb(200,200,200)", lecoLabelColor "white", lecoSymbolColor "red", lecoGradientStrokeColor "yellow", lecoLabelFont "Roboto", lecoTitleFont "Roboto" ])
         |> compositeVis
 
 
 markCfg1 : Spec
 markCfg1 =
     configure
-        << configuration (MarkStyle [ MFilled False ])
+        << configuration (coMark [ maFilled False ])
         |> compositeVis
 
 
 markCfg2 : Spec
 markCfg2 =
     configure
-        << configuration (MarkStyle [ MFilled True, MFill "black", MOpacity 1 ])
-        << configuration (BarStyle [ MFilled True ])
-        << configuration (AreaStyle [ MFilled False ])
-        << configuration (PointStyle [ MFilled True, MStroke "white", MStrokeOpacity 0.2 ])
+        << configuration (coMark [ maFilled True, maFill "black", maOpacity 1 ])
+        << configuration (coBar [ maFilled True ])
+        << configuration (coArea [ maFilled False ])
+        << configuration (coPoint [ maFilled True, maStroke "white", maStrokeOpacity 0.2 ])
         |> compositeVis
 
 
 paddingCfg : Spec
 paddingCfg =
     configure
-        << configuration (Autosize [ AFit ])
-        << configuration (Padding (PEdges 90 60 30 0))
+        << configuration (coAutosize [ AFit ])
+        << configuration (coPadding (paEdges 90 60 30 0))
         |> singleVis
 
 

@@ -11,10 +11,10 @@ showData data =
     let
         enc =
             encoding
-                << position X [ PName "cat", PmType Nominal ]
-                << position Y [ PName "val", PmType Quantitative ]
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
     in
-    toVegaLite [ data, enc [], mark Bar [] ]
+    toVegaLite [ data, enc [], bar [] ]
 
 
 data1 : Spec
@@ -22,8 +22,8 @@ data1 =
     let
         data =
             dataFromColumns []
-                << dataColumn "cat" (Strings [ "a", "b", "c" ])
-                << dataColumn "val" (Numbers [ 10, 18, 12 ])
+                << dataColumn "cat" (strs [ "a", "b", "c" ])
+                << dataColumn "val" (nums [ 10, 18, 12 ])
     in
     showData (data [])
 
@@ -33,9 +33,9 @@ data2 =
     let
         data =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
-                << dataRow [ ( "cat", Str "c" ), ( "val", Number 12 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
+                << dataRow [ ( "cat", str "c" ), ( "val", num 12 ) ]
     in
     showData (data [])
 
@@ -73,14 +73,14 @@ dataSource name =
     let
         dataColumns =
             dataFromColumns []
-                << dataColumn "cat" (Strings [ "a", "b", "c" ])
-                << dataColumn "val" (Numbers [ 10, 18, 12 ])
+                << dataColumn "cat" (strs [ "a", "b", "c" ])
+                << dataColumn "val" (nums [ 10, 18, 12 ])
 
         dataRows =
             dataFromRows []
-                << dataRow [ ( "cat", Str "a" ), ( "val", Number 10 ) ]
-                << dataRow [ ( "cat", Str "b" ), ( "val", Number 18 ) ]
-                << dataRow [ ( "cat", Str "c" ), ( "val", Number 12 ) ]
+                << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
+                << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
+                << dataRow [ ( "cat", str "c" ), ( "val", num 12 ) ]
 
         json =
             JE.list
@@ -91,8 +91,8 @@ dataSource name =
 
         enc =
             encoding
-                << position X [ PName "cat", PmType Nominal ]
-                << position Y [ PName "val", PmType Quantitative ]
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
     in
     toVegaLite
         [ datasets
@@ -102,7 +102,7 @@ dataSource name =
             ]
         , dataFromSource name []
         , enc []
-        , mark Bar []
+        , bar []
         ]
 
 
@@ -126,10 +126,10 @@ geodata1 =
     toVegaLite
         [ width 700
         , height 500
-        , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ TopojsonFeature "boroughs" ]
-        , mark Geoshape []
-        , encoding <| color [ MName "id", MmType Nominal ] []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
+        , dataFromUrl "https://vega.github.io/vega-lite/data/londonBoroughs.json" [ topojsonFeature "boroughs" ]
+        , geoshape []
+        , encoding <| color [ mName "id", mMType Nominal ] []
         ]
 
 
@@ -138,18 +138,18 @@ geodata2 =
     let
         geojson =
             geoFeatureCollection
-                [ geometry (GeoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", Str "Southsville" ) ]
-                , geometry (GeoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", Str "Northerton" ) ]
+                [ geometry (geoPolygon [ [ ( -3, 52 ), ( 4, 52 ), ( 4, 45 ), ( -3, 45 ), ( -3, 52 ) ] ]) [ ( "Region", str "Southsville" ) ]
+                , geometry (geoPolygon [ [ ( -3, 59 ), ( 4, 59 ), ( 4, 52 ), ( -3, 52 ), ( -3, 59 ) ] ]) [ ( "Region", str "Northerton" ) ]
                 ]
     in
     toVegaLite
         [ width 300
         , height 400
-        , configure <| configuration (View [ Stroke Nothing ]) []
-        , dataFromJson geojson [ JSON "features" ]
-        , projection [ PType Orthographic ]
-        , encoding (color [ MName "properties.Region", MmType Nominal, MLegend [ LTitle "" ] ] [])
-        , mark Geoshape []
+        , configure <| configuration (coView [ vicoStroke Nothing ]) []
+        , dataFromJson geojson [ jsonProperty "features" ]
+        , projection [ prType Orthographic ]
+        , encoding (color [ mName "properties.Region", mMType Nominal, mLegend [ leTitle "" ] ] [])
+        , geoshape []
         ]
 
 

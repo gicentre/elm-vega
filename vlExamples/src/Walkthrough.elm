@@ -7,9 +7,9 @@ import VegaLite exposing (..)
 stripPlot : Spec
 stripPlot =
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Tick []
-        , encoding (position X [ PName "temp_max", PmType Quantitative ] [])
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , tick []
+        , encoding (position X [ pName "temp_max", pMType Quantitative ] [])
         ]
 
 
@@ -18,12 +18,12 @@ histogram =
     let
         enc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , bar []
         , enc []
         ]
 
@@ -33,13 +33,13 @@ stackedHistogram =
     let
         enc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "weather", MmType Nominal ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "weather", mMType Nominal ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , bar []
         , enc []
         ]
 
@@ -60,13 +60,13 @@ stackedHistogram2 =
     let
         enc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "weather", MmType Nominal, MScale weatherColors ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "weather", mMType Nominal, mScale weatherColors ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , bar []
         , enc []
         ]
 
@@ -76,13 +76,13 @@ lineChart =
     let
         enc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "weather", MmType Nominal, MScale weatherColors ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "weather", mMType Nominal, mScale weatherColors ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Line []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , line []
         , enc []
         ]
 
@@ -92,14 +92,14 @@ multiBar =
     let
         enc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
-                << column [ FName "weather", FmType Nominal ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
+                << column [ fName "weather", fMType Nominal ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , bar []
         , enc []
         ]
 
@@ -109,12 +109,12 @@ barChart =
     let
         enc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , mark Bar []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , bar []
         , enc []
         ]
 
@@ -123,15 +123,15 @@ barChartWithAverage : Spec
 barChartWithAverage =
     let
         precipEnc =
-            encoding << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+            encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
         barEnc =
-            encoding << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
+            encoding << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
         , precipEnc []
-        , layer [ asSpec [ mark Bar [], barEnc [] ], asSpec [ mark Rule [] ] ]
+        , layer [ asSpec [ bar [], barEnc [] ], asSpec [ rule [] ] ]
         ]
 
 
@@ -140,17 +140,17 @@ barChartPair =
     let
         bar1Enc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
         bar2Enc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "temp_max", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pName "temp_max", pMType Quantitative, pAggregate Mean ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
-        , vConcat [ asSpec [ mark Bar [], bar1Enc [] ], asSpec [ mark Bar [], bar2Enc [] ] ]
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+        , vConcat [ asSpec [ bar [], bar1Enc [] ], asSpec [ bar [], bar2Enc [] ] ]
         ]
 
 
@@ -159,14 +159,18 @@ barChartTriplet =
     let
         enc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
         spec =
-            asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Bar [], enc [] ]
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+                , bar []
+                , enc []
+                ]
     in
     toVegaLite
-        [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+        [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
         , specification spec
         ]
 
@@ -176,16 +180,20 @@ splom =
     let
         enc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PRepeat Row, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pRepeat Row, pMType Quantitative ]
 
         spec =
-            asSpec [ dataFromUrl "data/seattle-weather.csv" [], mark Point [], enc [] ]
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
+                , point []
+                , enc []
+                ]
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "temp_max", "precipitation", "wind" ]
-            , ColumnFields [ "wind", "precipitation", "temp_max" ]
+            [ rowFields [ "temp_max", "precipitation", "wind" ]
+            , columnFields [ "wind", "precipitation", "temp_max" ]
             ]
         , specification spec
         ]
@@ -196,37 +204,37 @@ dashboard1 =
     let
         histoEnc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
 
         histoSpec =
-            asSpec [ title "Frequency histogram", mark Bar [], histoEnc [] ]
+            asSpec [ title "Frequency histogram", bar [], histoEnc [] ]
 
         scatterEnc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative ]
-                << position Y [ PName "precipitation", PmType Quantitative ]
+                << position X [ pName "temp_max", pMType Quantitative ]
+                << position Y [ pName "precipitation", pMType Quantitative ]
 
         scatterSpec =
-            asSpec [ title "Scatterplot", mark Point [], scatterEnc [] ]
+            asSpec [ title "Scatterplot", point [], scatterEnc [] ]
 
         barEnc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
 
         barSpec =
-            asSpec [ title "Bar chart", mark Bar [], barEnc [] ]
+            asSpec [ title "Bar chart", bar [], barEnc [] ]
 
         annotationEnc =
             encoding
-                << position Y [ PName "precipitation", PmType Quantitative, PAggregate Mean, PScale [ SDomain (DNumbers [ 0, 5.5 ]) ] ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean, pScale [ scDomain (doNums [ 0, 5.5 ]) ] ]
 
         annotationSpec =
-            asSpec [ title "Annotation", width 200, mark Rule [], annotationEnc [] ]
+            asSpec [ title "Annotation", width 200, rule [], annotationEnc [] ]
     in
     toVegaLite
-        [ dataFromUrl "data/seattle-weather.csv" []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
         , hConcat [ histoSpec, scatterSpec, barSpec, annotationSpec ]
         ]
 
@@ -236,57 +244,57 @@ dashboard2 =
     let
         histoEnc =
             encoding
-                << position X [ PName "temp_max", PmType Quantitative, PBin [] ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MName "weather", MmType Nominal, MLegend [], MScale weatherColors ]
-                << column [ FName "weather", FmType Nominal ]
+                << position X [ pName "temp_max", pMType Quantitative, pBin [] ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mName "weather", mMType Nominal, mLegend [], mScale weatherColors ]
+                << column [ fName "weather", fMType Nominal ]
 
         histoSpec =
-            asSpec [ mark Bar [], histoEnc [] ]
+            asSpec [ bar [], histoEnc [] ]
 
         scatterEnc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PRepeat Row, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pRepeat Row, pMType Quantitative ]
 
         scatterSpec =
-            asSpec [ mark Point [], scatterEnc [] ]
+            asSpec [ point [], scatterEnc [] ]
 
         barEnc =
             encoding
-                << position X [ PName "date", PmType Ordinal, PTimeUnit Month ]
-                << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
         annotationEnc =
             encoding
-                << position Y [ PRepeat Row, PmType Quantitative, PAggregate Mean ]
+                << position Y [ pRepeat Row, pMType Quantitative, pAggregate Mean ]
 
         layerSpec =
             asSpec
                 [ layer
-                    [ asSpec [ mark Bar [], barEnc [] ]
-                    , asSpec [ mark Rule [], annotationEnc [] ]
+                    [ asSpec [ bar [], barEnc [] ]
+                    , asSpec [ rule [], annotationEnc [] ]
                     ]
                 ]
 
         barsSpec =
             asSpec
-                [ repeat [ RowFields [ "precipitation", "temp_max", "wind" ] ]
+                [ repeat [ rowFields [ "precipitation", "temp_max", "wind" ] ]
                 , specification layerSpec
                 ]
 
         splomSpec =
             asSpec
                 [ repeat
-                    [ RowFields [ "temp_max", "precipitation", "wind" ]
-                    , ColumnFields [ "wind", "precipitation", "temp_max" ]
+                    [ rowFields [ "temp_max", "precipitation", "wind" ]
+                    , columnFields [ "wind", "precipitation", "temp_max" ]
                     ]
                 , specification scatterSpec
                 ]
     in
     toVegaLite
-        [ --  dataFromUrl "data/newYork-weather.csv" []
-          dataFromUrl "data/seattle-weather.csv" []
+        [ --  dataFromUrl "https://vega.github.io/vega-lite/data/newYork-weather.csv" []
+          dataFromUrl "https://vega.github.io/vega-lite/data/seattle-weather.csv" []
         , vConcat
             [ asSpec [ hConcat [ splomSpec, barsSpec ] ]
             , histoSpec
@@ -304,15 +312,19 @@ scatterProps =
 
         enc =
             encoding
-                << position X [ PName "Horsepower", PmType Quantitative ]
-                << position Y [ PName "Miles_per_Gallon", PmType Quantitative ]
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "picked")
-                        [ MName "Origin", MmType Nominal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "picked")
+                        [ mName "Origin", mMType Nominal ]
+                        [ mStr "grey" ]
                     ]
     in
-    [ dataFromUrl "data/cars.json" [], trans [], mark Circle [], enc [] ]
+    [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+    , trans []
+    , circle []
+    , enc []
+    ]
 
 
 interactiveScatter1 : Spec
@@ -340,7 +352,7 @@ interactiveScatter3 =
     let
         sel =
             selection
-                << select "picked" Multi [ On "mouseover" ]
+                << select "picked" Multi [ seOn "mouseover" ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -350,7 +362,7 @@ interactiveScatter4 =
     let
         sel =
             selection
-                << select "picked" Single [ Empty, Fields [ "Cylinders" ] ]
+                << select "picked" Single [ Empty, seFields [ "Cylinders" ] ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -362,8 +374,8 @@ interactiveScatter5 =
             selection
                 << select "picked"
                     Single
-                    [ Fields [ "Cylinders" ]
-                    , Bind [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ] ]
+                    [ seFields [ "Cylinders" ]
+                    , seBind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                     ]
     in
     toVegaLite <| sel [] :: scatterProps
@@ -376,10 +388,10 @@ interactiveScatter6 =
             selection
                 << select "picked"
                     Single
-                    [ Fields [ "Cylinders", "Year" ]
-                    , Bind
-                        [ IRange "Cylinders" [ InMin 3, InMax 8, InStep 1 ]
-                        , IRange "Year" [ InMin 1969, InMax 1981, InStep 1 ]
+                    [ seFields [ "Cylinders", "Year" ]
+                    , seBind
+                        [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ]
+                        , iRange "Year" [ inMin 1969, inMax 1981, inStep 1 ]
                         ]
                     ]
     in
@@ -401,7 +413,7 @@ interactiveScatter8 =
     let
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ] ]
+                << select "picked" Interval [ seEncodings [ ChX ] ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -411,7 +423,7 @@ interactiveScatter9 =
     let
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ], BindScales ]
+                << select "picked" Interval [ seEncodings [ ChX ], BindScales ]
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -421,25 +433,30 @@ coordinatedScatter1 =
     let
         enc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PRepeat Row, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pRepeat Row, pMType Quantitative ]
                 << color
-                    [ MSelectionCondition (SelectionName "picked")
-                        [ MName "Origin", MmType Nominal ]
-                        [ MString "grey" ]
+                    [ mSelectionCondition (selectionName "picked")
+                        [ mName "Origin", mMType Nominal ]
+                        [ mStr "grey" ]
                     ]
 
         sel =
             selection
-                << select "picked" Interval [ Encodings [ ChX ] ]
+                << select "picked" Interval [ seEncodings [ ChX ] ]
 
         spec =
-            asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+                , circle []
+                , enc []
+                , sel []
+                ]
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-            , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+            [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+            , columnFields [ "Horsepower", "Miles_per_Gallon" ]
             ]
         , specification spec
         ]
@@ -450,21 +467,26 @@ coordinatedScatter2 =
     let
         enc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PRepeat Row, PmType Quantitative ]
-                << color [ MName "Origin", MmType Nominal ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pRepeat Row, pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
 
         sel =
             selection
                 << select "picked" Interval [ BindScales ]
 
         spec =
-            asSpec [ dataFromUrl "data/cars.json" [], mark Circle [], enc [], sel [] ]
+            asSpec
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+                , circle []
+                , enc []
+                , sel []
+                ]
     in
     toVegaLite
         [ repeat
-            [ RowFields [ "Displacement", "Miles_per_Gallon" ]
-            , ColumnFields [ "Horsepower", "Miles_per_Gallon" ]
+            [ rowFields [ "Displacement", "Miles_per_Gallon" ]
+            , columnFields [ "Horsepower", "Miles_per_Gallon" ]
             ]
         , specification spec
         ]
@@ -474,35 +496,35 @@ contextAndFocus : Spec
 contextAndFocus =
     let
         sel =
-            selection << select "brush" Interval [ Encodings [ ChX ] ]
+            selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
         encContext =
             encoding
-                << position X [ PName "date", PmType Temporal, PAxis [ AxFormat "%Y" ] ]
+                << position X [ pName "date", pMType Temporal, pAxis [ axFormat "%Y" ] ]
                 << position Y
-                    [ PName "price"
-                    , PmType Quantitative
-                    , PAxis [ AxTickCount 3, AxGrid False ]
+                    [ pName "price"
+                    , pMType Quantitative
+                    , pAxis [ axTickCount 3, axGrid False ]
                     ]
 
         specContext =
-            asSpec [ width 400, height 80, sel [], mark Area [], encContext [] ]
+            asSpec [ width 400, height 80, sel [], area [], encContext [] ]
 
         encDetail =
             encoding
                 << position X
-                    [ PName "date"
-                    , PmType Temporal
-                    , PScale [ SDomain (DSelection "brush") ]
-                    , PAxis [ AxTitle "" ]
+                    [ pName "date"
+                    , pMType Temporal
+                    , pScale [ scDomain (doSelection "brush") ]
+                    , pAxis [ axTitle "" ]
                     ]
-                << position Y [ PName "price", PmType Quantitative ]
+                << position Y [ pName "price", pMType Quantitative ]
 
         specDetail =
-            asSpec [ width 400, mark Area [], encDetail [] ]
+            asSpec [ width 400, area [], encDetail [] ]
     in
     toVegaLite
-        [ dataFromUrl "data/sp500.csv" []
+        [ dataFromUrl "https://vega.github.io/vega-lite/data/sp500.csv" []
         , vConcat [ specContext, specDetail ]
         ]
 
@@ -516,32 +538,33 @@ crossFilter =
                 << calculateAs "hours(datum.date)" "hour"
 
         sel =
-            selection << select "brush" Interval [ Encodings [ ChX ] ]
+            selection << select "brush" Interval [ seEncodings [ ChX ] ]
 
         filterTrans =
             transform
-                << filter (FSelection "brush")
+                << filter (fiSelection "brush")
 
         totalEnc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
 
         selectedEnc =
             encoding
-                << position X [ PRepeat Column, PmType Quantitative ]
-                << position Y [ PAggregate Count, PmType Quantitative ]
-                << color [ MString "goldenrod" ]
+                << position X [ pRepeat Column, pMType Quantitative ]
+                << position Y [ pAggregate Count, pMType Quantitative ]
+                << color [ mStr "goldenrod" ]
     in
     toVegaLite
-        [ repeat [ ColumnFields [ "hour", "delay", "distance" ] ]
+        [ repeat [ columnFields [ "hour", "delay", "distance" ] ]
         , specification <|
             asSpec
-                [ dataFromUrl "data/flights-2k.json" [ Parse [ ( "date", FoDate "%Y/%m/%d %H:%M" ) ] ]
+                [ dataFromUrl "https://vega.github.io/vega-lite/data/flights-2k.json"
+                    [ parse [ ( "date", foDate "%Y/%m/%d %H:%M" ) ] ]
                 , hourTrans []
                 , layer
-                    [ asSpec [ mark Bar [], totalEnc [] ]
-                    , asSpec [ sel [], filterTrans [], mark Bar [], selectedEnc [] ]
+                    [ asSpec [ bar [], totalEnc [] ]
+                    , asSpec [ sel [], filterTrans [], bar [], selectedEnc [] ]
                     ]
                 ]
         ]
