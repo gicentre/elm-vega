@@ -18,6 +18,7 @@ module VegaLite
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
           --, ClipRect(LTRB, NoClip)
         , ClipRect(NoClip)
+          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , ConfigurationProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
@@ -128,6 +129,10 @@ module VegaLite
         , VLProperty
           --, ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
         , ViewConfig
+        , Window
+        , WindowOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
+        , WindowProperty
+        , WindowSortField
         , aggregate
         , and
         , area
@@ -447,7 +452,6 @@ module VegaLite
         , maOpacity
         , maOrient
         , maPoint
-          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
         , maRadius
         , maShape
         , maShortTimeLabels
@@ -643,7 +647,18 @@ module VegaLite
         , vicoStrokeOpacity
         , vicoStrokeWidth
         , vicoWidth
+        , wiAggregateOp
+        , wiAscending
+        , wiDescending
+        , wiField
+        , wiFrame
+        , wiGroupBy
+        , wiIgnorePeers
+        , wiOp
+        , wiParam
+        , wiSort
         , width
+        , windowAs
         )
 
 {-| This module allows you to create Vega-Lite specifications in Elm. A specification
@@ -783,6 +798,27 @@ data fields or geospatial coordinates before they are encoded visually.
 
 @docs lookup
 @docs lookupAs
+
+
+## Window Transformations
+
+@docs windowAs
+@docs wiAggregateOp
+@docs wiOp
+@docs wiParam
+@docs wiField
+
+@docs wiFrame
+@docs wiIgnorePeers
+@docs wiGroupBy
+@docs wiSort
+@docs wiAscending
+@docs wiDescending
+
+@docs Window
+@docs WindowOperation
+@docs WindowProperty
+@docs WindowSortField
 
 
 # Creating the Mark Specification
@@ -3371,10 +3407,12 @@ For details see the
 type SortProperty
     = Ascending
     | Descending
-    | ByField String Operation
-    | ByRepeat Arrangement Operation
+    | ByField String
+    | ByRepeat Arrangement
     | Op Operation
     | CustomSort DataValues
+    | ByRepeatOp Arrangement Operation
+    | ByFieldOp String Operation
 
 
 {-| Represents part or all of Vega-Lite specification. Specs can be (and usually
@@ -3582,6 +3620,53 @@ type VLProperty
     | VLResolve
     | VLConfig
     | VLSelection
+
+
+{-| Window transform field definition. For details see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+type Window
+    = WAggregateOp Operation
+    | WOp WindowOperation
+    | WParam Int
+    | WField String
+
+
+{-| Operations that may be applied during a window transformation. For details see the
+[Vega-Lite window operation documentation](https://vega.github.io/vega-lite/docs/window.html#ops).
+-}
+type WindowOperation
+    = RowNumber
+    | Rank
+    | DenseRank
+    | PercentRank
+    | CumeDist
+    | Ntile
+    | Lag
+    | Lead
+    | FirstValue
+    | LastValue
+    | NthValue
+
+
+{-| Window transform properties for performing calculations over sorted groups.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+type WindowProperty
+    = WFrame (Maybe Int) (Maybe Int)
+    | WIgnorePeers Bool
+    | WGroupBy (List String)
+    | WSort (List WindowSortField)
+
+
+{-| A named field with either an ascending or descending sort direction. Used by
+the window transform for performing calculations over sorted groups. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+type WindowSortField
+    = WAscending String
+    | WDescending String
 
 
 {-| Defines a set of named aggregation transformations to be used when encoding
@@ -4888,7 +4973,8 @@ dtQuarter =
     DTQuarter
 
 
-{-| Specify the min max date-time range to be used in data filtering.
+{-| Specify the min max date-time range to be used in data filtering. If either
+parameter is an empty list, it is assumed to be unbounded.
 -}
 dtRange : List DateTime -> List DateTime -> FilterRange
 dtRange =
@@ -5072,6 +5158,15 @@ filter f =
                     case vals of
                         NumberRange mn mx ->
                             JE.list [ JE.float mn, JE.float mx ]
+
+                        DateRange [] [] ->
+                            JE.list [ JE.null, JE.null ]
+
+                        DateRange [] dMax ->
+                            JE.list [ JE.null, JE.object (List.map dateTimeProperty dMax) ]
+
+                        DateRange dMin [] ->
+                            JE.list [ JE.object (List.map dateTimeProperty dMin), JE.null ]
 
                         DateRange dMin dMax ->
                             JE.list
@@ -7964,7 +8059,7 @@ For details see the
 -}
 soByField : String -> Operation -> SortProperty
 soByField =
-    ByField
+    ByFieldOp
 
 
 {-| Specify a sorting by the aggregated summaries of the given fields (referenced
@@ -7973,7 +8068,7 @@ by a repeat iteration) using a given aggregation operation. For details see the
 -}
 soByRepeat : Arrangement -> Operation -> SortProperty
 soByRepeat =
-    ByRepeat
+    ByRepeatOp
 
 
 {-| Provide a custom sort order by listing data values explicitly. This can be
@@ -8508,6 +8603,36 @@ transform transforms =
                         _ ->
                             JE.null
 
+                "windowAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ winObj, frameObj, peersObj, groupbyObj, sortObj ] ->
+                            ([ ( "window", JE.list [ winObj ] ) ]
+                                ++ (if frameObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "frame", frameObj ) ]
+                                   )
+                                ++ (if peersObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "ignorePeers", peersObj ) ]
+                                   )
+                                ++ (if groupbyObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "groupby", groupbyObj ) ]
+                                   )
+                                ++ (if sortObj == JE.null then
+                                        []
+                                    else
+                                        [ ( "sort", sortObj ) ]
+                                   )
+                            )
+                                |> JE.object
+
+                        _ ->
+                            JE.null
+
                 _ ->
                     JE.object [ ( str, val ) ]
     in
@@ -8656,6 +8781,16 @@ vicoWidth =
     ViewWidth
 
 
+{-| Specify an aggregrate operation as part of a window transformation.
+A window transformation must specify either one of these aggregate operations or
+a window-only transformation (`wiOp`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiAggregateOp : Operation -> Window
+wiAggregateOp =
+    WAggregateOp
+
+
 {-| Override the default width of the visualization. If not specified the width
 will be calculated based on the content of the visualization.
 
@@ -8671,6 +8806,132 @@ will be calculated based on the content of the visualization.
 width : Float -> ( VLProperty, Spec )
 width w =
     ( VLWidth, JE.float w )
+
+
+{-| Specify that the given field should be sorted in ascending order when performing
+a window transform. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiAscending : String -> WindowSortField
+wiAscending =
+    WAscending
+
+
+{-| Specify that the given field should be sorted in descending order when performing
+a window transform. For details, see the
+[Vega-Lite window transform field documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiDescending : String -> WindowSortField
+wiDescending =
+    WDescending
+
+
+{-| Specify an data field for which to compute an operation. This is not needed
+for operations that do not apply to fields such as `Count`, `Rank` and `DenseRank`.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiField : String -> Window
+wiField =
+    WField
+
+
+{-| Specify a sliding window should be produced for use by a window transform.
+The two parameters should either be a `Just` a number indicating the offset from
+the current data object, or `Nothing` to indicate unbounded rows preceding or
+following the current data object. The default value is equivalent to `Nothing (Just 0)`,
+indicating that the sliding window includes the current object and all preceding
+objects. The value `(Just 5) (Just 5)` indicates that the window should include
+five objects preceding and five objects following the current object. Finally,
+`Nothing Nothing` indicates that the window frame should always include all data
+objects. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiFrame : Maybe Int -> Maybe Int -> WindowProperty
+wiFrame =
+    WFrame
+
+
+{-| Specify the data fields for partioning data objects in a window transform
+into separate windows. If unspecified, all points will be in a single group.
+For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiGroupBy : List String -> WindowProperty
+wiGroupBy =
+    WGroupBy
+
+
+{-| Specify whether or not the sliding window frame in a window transform should
+ignore peer values (those considered identical by the sort criteria). The default
+is false, causing the window frame to expand to include all peer values. If set
+to be true, the window frame will be defined by offset values only. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiIgnorePeers : Bool -> WindowProperty
+wiIgnorePeers =
+    WIgnorePeers
+
+
+{-| Adds the window transform to a list of transformations that may be applied
+to a data stream. The window transform performs calculations over sorted groups
+of data objects. These calculations including ranking, lead/lag analysis, and
+aggregates such as running sums and averages. Calculated values are written back
+to the input data stream.
+
+The first parameter is the name to give the transformed output. The second is the
+[window transform field definition](https://vega.github.io/vega-lite/docs/window.html#field-def).
+The third the [window transform definition](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition).
+
+    trans =
+        transform
+            << windowAs "TotalTime"
+                [ wiAggregateOp Sum, wiField "Time" ]
+                [ wiFrame Nothing Nothing ]
+
+-}
+windowAs : String -> List Window -> List WindowProperty -> List LabelledSpec -> List LabelledSpec
+windowAs fName ws wProps =
+    (::)
+        ( "windowAs"
+        , JE.list
+            [ JE.object (( "as", JE.string fName ) :: List.map windowAsProperty ws)
+            , windowPropertySpec "frame" wProps
+            , windowPropertySpec "ignorePeers" wProps
+            , windowPropertySpec "groupby" wProps
+            , windowPropertySpec "sort" wProps
+            ]
+        )
+
+
+{-| Specify an window-specific operation as part of a window transformation.
+A window transformation must specify either one of these window-only operations
+or an aggregate transformation (`wiAggregateOp`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiOp : WindowOperation -> Window
+wiOp =
+    WOp
+
+
+{-| Specify the numeric parameter for those window-only operations that can be
+parameterised (`Ntile`, `Lag`, `Lead` and `NthValue`). For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#field-def)
+-}
+wiParam : Int -> Window
+wiParam =
+    WParam
+
+
+{-| Specify a comparator for sorting data objects within a window transform. If
+two data objects are considered equal by the comparator, they are considered `peer`
+values of equal rank. If not specified, data objects are processed in the order
+they are observed and none are considered peers. For details see the
+[Vega-Lite window transform documentation](https://vega.github.io/vega-lite/docs/window.html#window-transform-definition)
+-}
+wiSort : List WindowSortField -> WindowProperty
+wiSort =
+    WSort
 
 
 
@@ -10369,14 +10630,8 @@ orderChannelProperty oDef =
                 [ CustomSort dvs ] ->
                     ( "sort", JE.list (dataValuesSpecs dvs) )
 
-                [ ByField name op ] ->
-                    ( "sort", JE.object [ sortProperty (ByField name op), sortProperty (Op op) ] )
-
-                [ ByRepeat arng op ] ->
-                    ( "sort", JE.object [ sortProperty (ByRepeat arng op), sortProperty (Op op) ] )
-
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty sps) )
+                    ( "sort", JE.object (List.concatMap sortProperty sps) )
 
 
 overlapStrategyLabel : OverlapStrategy -> String
@@ -10557,14 +10812,8 @@ positionChannelProperty pDef =
                 [ CustomSort dvs ] ->
                     ( "sort", JE.list (dataValuesSpecs dvs) )
 
-                [ ByField name op ] ->
-                    ( "sort", JE.object [ sortProperty (ByField name op), sortProperty (Op op) ] )
-
-                [ ByRepeat arng op ] ->
-                    ( "sort", JE.object [ sortProperty (ByRepeat arng op), sortProperty (Op op) ] )
-
                 _ ->
-                    ( "sort", JE.object (List.map sortProperty sps) )
+                    ( "sort", JE.object (List.concatMap sortProperty sps) )
 
         PScale sps ->
             if sps == [] then
@@ -11012,26 +11261,32 @@ sideLabel side =
             "right"
 
 
-sortProperty : SortProperty -> LabelledSpec
+sortProperty : SortProperty -> List LabelledSpec
 sortProperty sp =
     case sp of
         Ascending ->
-            ( "order", JE.string "ascending" )
+            [ ( "order", JE.string "ascending" ) ]
 
         Descending ->
-            ( "order", JE.string "descending" )
+            [ ( "order", JE.string "descending" ) ]
 
         Op op ->
-            ( "op", JE.string (operationLabel op) )
+            [ ( "op", JE.string (operationLabel op) ) ]
 
-        ByField field _ ->
-            ( "field", JE.string field )
+        ByField field ->
+            [ ( "field", JE.string field ) ]
 
-        ByRepeat arr _ ->
-            ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] )
+        ByFieldOp field op ->
+            [ ( "field", JE.string field ), ( "op", JE.string (operationLabel op) ) ]
+
+        ByRepeat arr ->
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
+
+        ByRepeatOp arr op ->
+            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ), ( "op", JE.string (operationLabel op) ) ]
 
         CustomSort dvs ->
-            ( "custom", JE.null ) |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
+            [] |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
 
 
 stackProperty : StackProperty -> LabelledSpec
@@ -11343,3 +11598,126 @@ vlPropertyLabel spec =
 
         VLResolve ->
             "resolve"
+
+
+wOperationLabel : WindowOperation -> String
+wOperationLabel op =
+    case op of
+        RowNumber ->
+            "row_number"
+
+        Rank ->
+            "rank"
+
+        DenseRank ->
+            "dense_rank"
+
+        PercentRank ->
+            "percent_rank"
+
+        CumeDist ->
+            "cume_dist"
+
+        Ntile ->
+            "ntile"
+
+        Lag ->
+            "lag"
+
+        Lead ->
+            "lead"
+
+        FirstValue ->
+            "first_value"
+
+        LastValue ->
+            "last_value"
+
+        NthValue ->
+            "nth_value"
+
+
+windowAsProperty : Window -> LabelledSpec
+windowAsProperty w =
+    case w of
+        WAggregateOp op ->
+            ( "op", JE.string (operationLabel op) )
+
+        WOp op ->
+            ( "op", JE.string (wOperationLabel op) )
+
+        WParam n ->
+            ( "param", JE.int n )
+
+        WField f ->
+            ( "field", JE.string f )
+
+
+windowPropertySpec : String -> List WindowProperty -> Spec
+windowPropertySpec wpName wps =
+    let
+        wpSpec wp =
+            case wpName of
+                "frame" ->
+                    case wp of
+                        WFrame (Just n1) (Just n2) ->
+                            JE.list [ JE.int n1, JE.int n2 ]
+
+                        WFrame Nothing (Just n2) ->
+                            JE.list [ JE.null, JE.int n2 ]
+
+                        WFrame (Just n1) Nothing ->
+                            JE.list [ JE.int n1, JE.null ]
+
+                        WFrame Nothing Nothing ->
+                            JE.list [ JE.null, JE.null ]
+
+                        _ ->
+                            JE.null
+
+                "ignorePeers" ->
+                    case wp of
+                        WIgnorePeers b ->
+                            JE.bool b
+
+                        _ ->
+                            JE.null
+
+                "groupby" ->
+                    case wp of
+                        WGroupBy fs ->
+                            JE.list (List.map JE.string fs)
+
+                        _ ->
+                            JE.null
+
+                "sort" ->
+                    case wp of
+                        WSort sfs ->
+                            JE.list (List.map windowSortFieldSpec sfs)
+
+                        _ ->
+                            JE.null
+
+                _ ->
+                    JE.null |> Debug.log ("Unexpected window property name " ++ toString wpName)
+
+        specList =
+            List.map wpSpec wps |> List.filter (\x -> x /= JE.null)
+    in
+    case specList of
+        [ spec ] ->
+            spec
+
+        _ ->
+            JE.null
+
+
+windowSortFieldSpec : WindowSortField -> Spec
+windowSortFieldSpec wsf =
+    case wsf of
+        WAscending f ->
+            JE.object [ ( "field", JE.string f ), ( "order", JE.string "ascending" ) ]
+
+        WDescending f ->
+            JE.object [ ( "field", JE.string f ), ( "order", JE.string "descending" ) ]
