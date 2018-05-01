@@ -3,132 +3,132 @@ module VegaLite
         ( APosition(AEnd, AMiddle, AStart)
         , Arrangement(Column, Row)
         , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
-          --, AxisConfig(BandPosition, Domain, DomainColor, DomainWidth, Grid, GridColor, GridDash, GridOpacity, GridWidth, LabelAngle, LabelColor, LabelFont, LabelFontSize, LabelLimit, LabelOverlap, LabelPadding, Labels, MaxExtent, MinExtent, ShortTimeLabels, TickColor, TickRound, TickSize, TickWidth, Ticks, TitleAlign, TitleAngle, TitleBaseline, TitleColor, TitleFont, TitleFontSize, TitleFontWeight, TitleLimit, TitleMaxLength, TitlePadding, TitleX, TitleY)
-        , AxisConfig
-          -- AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
-        , AxisProperty
-          --, BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
-        , BinProperty
-          --Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
-        , Binding
-          --, BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
-        , BooleanOp
-          --CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
-        , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
+        , AxisConfig(BandPosition, Domain, DomainColor, DomainWidth, Grid, GridColor, GridDash, GridOpacity, GridWidth, LabelAngle, LabelColor, LabelFont, LabelFontSize, LabelLimit, LabelOverlap, LabelPadding, Labels, MaxExtent, MinExtent, ShortTimeLabels, TickColor, TickRound, TickSize, TickWidth, Ticks, TitleAlign, TitleAngle, TitleBaseline, TitleColor, TitleFont, TitleFontSize, TitleFontWeight, TitleLimit, TitleMaxLength, TitlePadding, TitleX, TitleY)
+          -- TODO: Make this the default exposure in V.3.x, AxisConfig
+        , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
+          -- TODO: Make this the default exposure in V.3.x, AxisProperty
+        , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
+          -- TODO: Make this the default exposure in V.3.x, BinProperty
+        , Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
+          -- TODO: Make this the default exposure in V.3.x, Binding
+        , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
+          -- TODO: Make this the default exposure in V.3.x, BooleanOp
+        , CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
+          -- TODO: Make this the default exposure in V.3.x, CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-          --, ClipRect(LTRB, NoClip)
-        , ClipRect(NoClip)
-          --, ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
-        , ConfigurationProperty
+        , ClipRect(LTRB, NoClip)
+          -- TODO: Make this the default exposure in V.3.x, ClipRect(NoClip)
+        , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
+          -- TODO: Make this the default exposure in V.3.x , ConfigurationProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
         , DataRow
-          --, DataType(FoBoolean, FoDate, FoNumber, FoUtc)
-        , DataType(FoBoolean, FoNumber)
-          --, DataValue(Boolean, DateTime, Number, Str)
-        , DataValue
-          --, DataValues(Booleans, DateTimes, Numbers, Strings)
-        , DataValues
-          --, DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
-        , DateTime
+        , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
+          -- TODO: Make this the default exposure in V.3.x, DataType(FoBoolean, FoNumber)
+        , DataValue(Boolean, DateTime, Number, Str)
+          -- TODO: Make this the default exposure in V.3.x, DataValue
+        , DataValues(Booleans, DateTimes, Numbers, Strings)
+          -- TODO: Make this the default exposure in V.3.x , DataValues
+        , DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
+          -- TODO: Make this the default exposure in V.3.x, DateTime
         , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
-          --, DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
-        , DetailChannel
-          --, FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
-        , FacetChannel
-          --, FacetMapping(ColumnBy, RowBy)
-        , FacetMapping
+        , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
+          -- TODO: Make this the default exposure in V.3.x, DetailChannel
+        , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
+          -- TODO: Make this the default exposure in V.3.x, FacetChannel
+        , FacetMapping(ColumnBy, RowBy)
+          -- TODO: Make this the default exposure in V.3.x, FacetMapping
         , FieldTitleProperty(Function, Plain, Verbal)
-          --, Filter(FEqual,FExpr ,FCompose,FSelection,FOneOf ,FRange)
-        , Filter
-          --, FilterRange(NumberRange,DateRange)
-        , FilterRange
+        , Filter(FCompose, FEqual, FExpr, FOneOf, FRange, FSelection)
+          -- TODO: Make this the default exposure in V.3.x, Filter
+        , FilterRange(DateRange, NumberRange)
+          -- TODO: Make this the default exposure in V.3.x, FilterRange
         , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
-          --, Format(CSV,TSV,JSON,TopojsonFeature,TopojsonMesh,Parse)
-        , Format(CSV, TSV)
-          --, Geometry(GeoPoint,GeoPoints ,GeoLine ,GeoLines ,GeoPolygon,GeoPolygons)
-        , Geometry
+        , Format(CSV, JSON, Parse, TSV, TopojsonFeature, TopojsonMesh)
+          -- TODO: Make this the default exposure in V.3.x, Format(CSV, TSV)
+        , Geometry(GeoLine, GeoLines, GeoPoint, GeoPoints, GeoPolygon, GeoPolygons)
+          -- TODO: Make this the default exposure in V.3.x, Geometry
         , HAlign(AlignCenter, AlignLeft, AlignRight)
-          --, HeaderProperty(HFormat,HTitle)
-        , HeaderProperty
-          --, HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
-        , HyperlinkChannel
-          --, InputProperty(Debounce, Element, InOptions, InMin , InMax ,InName ,InStep ,InPlaceholder)
-        , InputProperty
+        , HeaderProperty(HFormat, HTitle)
+          -- TODO: Make this the default exposure in V.3.x, HeaderProperty
+        , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
+          -- TODO: Make this the default exposure in V.3.x, HyperlinkChannel
+        , InputProperty(Debounce, Element, InMax, InMin, InName, InOptions, InPlaceholder, InStep)
+          -- TODO: Make this the default exposure in V.3.x, InputProperty
         , LabelledSpec
         , Legend(Gradient, Symbol)
-          --, LegendConfig(CornerRadius, EntryPadding, FillColor, GradientHeight, GradientLabelBaseline, GradientLabelLimit, GradientLabelOffset, GradientStrokeColor, GradientStrokeWidth, GradientWidth, LeLabelAlign, LeLabelBaseline, LeLabelColor, LeLabelFont, LeLabelFontSize, LeLabelLimit, LeLabelOffset, LePadding, LeShortTimeLabels, LeStrokeDash, LeStrokeWidth, LeTitleAlign, LeTitleBaseline, LeTitleColor, LeTitleFont, LeTitleFontSize, LeTitleFontWeight, LeTitleLimit, LeTitlePadding, Offset, Orient, StrokeColor, SymbolColor, SymbolSize, SymbolStrokeWidth, SymbolType)
-        , LegendConfig
+        , LegendConfig(CornerRadius, EntryPadding, FillColor, GradientHeight, GradientLabelBaseline, GradientLabelLimit, GradientLabelOffset, GradientStrokeColor, GradientStrokeWidth, GradientWidth, LeLabelAlign, LeLabelBaseline, LeLabelColor, LeLabelFont, LeLabelFontSize, LeLabelLimit, LeLabelOffset, LePadding, LeShortTimeLabels, LeStrokeDash, LeStrokeWidth, LeTitleAlign, LeTitleBaseline, LeTitleColor, LeTitleFont, LeTitleFontSize, LeTitleFontWeight, LeTitleLimit, LeTitlePadding, Offset, Orient, StrokeColor, SymbolColor, SymbolSize, SymbolStrokeWidth, SymbolType)
+          -- TODO: Make this the default exposure in V.3.x, LegendConfig
         , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
-          --, LegendProperty(LEntryPadding ,LFormat ,LOffset ,LOrient ,LPadding ,LTickCount ,LTitle ,LType ,LValues ,LZIndex)
-        , LegendProperty
-          --, LegendValues(LDateTimes,LNumbers,LStrings)
-        , LegendValues
-          --, Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
-        , Mark
-          --, MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
-        , MarkChannel
+        , LegendProperty(LEntryPadding, LFormat, LOffset, LOrient, LPadding, LTickCount, LTitle, LType, LValues, LZIndex)
+          -- TODO: Make this the default exposure in V.3.x, LegendProperty
+        , LegendValues(LDateTimes, LNumbers, LStrings)
+          -- TODO: Make this the default exposure in V.3.x, LegendValues
+        , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
+          -- TODO: Make this the default exposure in V.3.x, Mark
+        , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
+          -- TODO: Make this the default exposure in V.3.x, MarkChannel
         , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
         , MarkOrientation(Horizontal, Vertical)
-          --, MarkProperty(MAlign, MAngle, MBandSize, MBaseline, MBinSpacing, MClip, MColor, MContinuousBandSize, MCursor, MDiscreteBandSize, MFill, MFillOpacity, MFilled, MFont, MFontSize, MFontStyle, MFontWeight, MInterpolate, MOpacity, MOrient, MRadius, MShape, MShortTimeLabels, MSize, MStroke, MStrokeDash, MStrokeDashOffset, MStrokeOpacity, MStrokeWidth, MStyle, MTension, MText, MTheta, MThickness, MdX, MdY)
-        , MarkProperty
+        , MarkProperty(MAlign, MAngle, MBandSize, MBaseline, MBinSpacing, MClip, MColor, MContinuousBandSize, MCursor, MDiscreteBandSize, MFill, MFillOpacity, MFilled, MFont, MFontSize, MFontStyle, MFontWeight, MInterpolate, MOpacity, MOrient, MRadius, MShape, MShortTimeLabels, MSize, MStroke, MStrokeDash, MStrokeDashOffset, MStrokeOpacity, MStrokeWidth, MStyle, MTension, MText, MTheta, MThickness, MdX, MdY)
+          -- TODO: Make this the default exposure in V.3.x, MarkProperty
         , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
         , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
         , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
-          --, OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
-        , OrderChannel
+        , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
+          -- TODO: Make this the default exposure in V.3.x, OrderChannel
         , OverlapStrategy(OGreedy, ONone, OParity)
-          --, Padding(PSize,PEdges)
-        , Padding
+        , Padding(PEdges, PSize)
+          -- TODO: Make this the default exposure in V.3.x, Padding
         , PointMarker(PMNone, PMTransparent)
         , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
-          --, PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
-        , PositionChannel
-          --, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-          --, ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
-        , ProjectionProperty
-          --, RangeConfig(RCategory, RDiverging, RHeatmap, ROrdinal, RRamp, RSymbol)
-        , RangeConfig
-          --, RepeatFields(RowFields,ColumnFields)
-        , RepeatFields
+        , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
+          -- TODO: Make this the default exposure in V.3.x, PositionChannel
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+          -- TODO: Make this the default exposure in V.3.x, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
+          -- TODO: Make this the default exposure in V.3.x, ProjectionProperty
+        , RangeConfig(RCategory, RDiverging, RHeatmap, ROrdinal, RRamp, RSymbol)
+          -- TODO: Make this the default exposure in V.3.x, RangeConfig
+        , RepeatFields(ColumnFields, RowFields)
+          -- TODO: Make this the default exposure in V.3.x, RepeatFields
         , Resolution(Independent, Shared)
-          --, Resolve(RAxis,RLegend,RScale)
-        , Resolve
+        , Resolve(RAxis, RLegend, RScale)
+          -- TODO: Make this the default exposure in V.3.x, Resolve
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
-          --, ScaleConfig(SCBandPaddingInner, SCBandPaddingOuter, SCClamp, SCMaxBandSize, SCMaxFontSize, SCMaxOpacity, SCMaxSize, SCMaxStrokeWidth, SCMinBandSize, SCMinFontSize, SCMinOpacity, SCMinSize, SCMinStrokeWidth, SCPointPadding, SCRangeStep, SCRound, SCTextXRangeStep, SCUseUnaggregatedDomain)
-        , ScaleConfig
-          --, ScaleDomain(DNumbers,DStrings ,DDateTimes ,DSelection,Unaggregated)
-        , ScaleDomain(Unaggregated)
-          --, ScaleNice(NMillisecond, NSecond, NMinute, NHour, NDay, NWeek, NMonth, NYear, NInterval,IsNice,NTickCount)
-        , ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
-          --, ScaleProperty(SType,SDomain ,SRange , SScheme , SPadding , SPaddingInner , SPaddingOuter , SRangeStep , SRound , SClamp ,SInterpolate, SNice , SZero , SReverse )
-        , ScaleProperty
-          --, ScaleRange(RNumbers,RStrings,RName)
-        , ScaleRange
+        , ScaleConfig(SCBandPaddingInner, SCBandPaddingOuter, SCClamp, SCMaxBandSize, SCMaxFontSize, SCMaxOpacity, SCMaxSize, SCMaxStrokeWidth, SCMinBandSize, SCMinFontSize, SCMinOpacity, SCMinSize, SCMinStrokeWidth, SCPointPadding, SCRangeStep, SCRound, SCTextXRangeStep, SCUseUnaggregatedDomain)
+          -- TODO: Make this the default exposure in V.3.x, ScaleConfig
+        , ScaleDomain(DDateTimes, DNumbers, DSelection, DStrings, Unaggregated)
+          -- TODO: Make this the default exposure in V.3.x, ScaleDomain(Unaggregated)
+        , ScaleNice(IsNice, NDay, NHour, NInterval, NMillisecond, NMinute, NMonth, NSecond, NTickCount, NWeek, NYear)
+          -- TODO: Make this the default exposure in V.3.x, ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+        , ScaleProperty(SClamp, SDomain, SInterpolate, SNice, SPadding, SPaddingInner, SPaddingOuter, SRange, SRangeStep, SReverse, SRound, SScheme, SType, SZero)
+          -- TODO: Make this the default exposure in V.3.x, ScaleProperty
+        , ScaleRange(RName, RNumbers, RStrings)
+          -- TODO: Make this the default exposure in V.3.x, ScaleRange
         , Selection(Interval, Multi, Single)
-          --, SelectionMarkProperty(SMFill, SMFillOpacity, SMStroke, SMStrokeDash, SMStrokeDashOffset, SMStrokeOpacity, SMStrokeWidth)
-        , SelectionMarkProperty
-          --, SelectionProperty(Bind, BindScales, Empty, Encodings, Fields, Nearest, On, ResolveSelections, SelectionMark, Toggle, Translate, Zoom)
-        , SelectionProperty(BindScales, Empty)
+        , SelectionMarkProperty(SMFill, SMFillOpacity, SMStroke, SMStrokeDash, SMStrokeDashOffset, SMStrokeOpacity, SMStrokeWidth)
+          -- TODO: Make this the default exposure in V.3.x, SelectionMarkProperty
+        , SelectionProperty(Bind, BindScales, Empty, Encodings, Fields, Nearest, On, ResolveSelections, SelectionMark, Toggle, Translate, Zoom)
+          -- TODO: Make this the default exposure in V.3.x, SelectionProperty(BindScales, Empty)
         , SelectionResolution(Global, Intersection, Union)
         , Side(SBottom, SLeft, SRight, STop)
-          --, SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
-        , SortProperty(Ascending, Descending)
+        , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
+          -- TODO: Make this the default exposure in V.3.x, SortProperty(Ascending, Descending)
         , Spec
         , StackProperty(NoStack, StCenter, StNormalize, StZero)
-          --, Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
-        , Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
-          --, TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
-        , TextChannel
+        , Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
+          -- TODO: Make this the default exposure in V.3.x, Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
+        , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
+          -- TODO: Make this the default exposure in V.3.x, TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
-          --, TitleConfig(TAnchor, TAngle, TBaseline, TColor, TFont, TFontSize, TFontWeight, TLimit, TOffset, TOrient)
-        , TitleConfig
+        , TitleConfig(TAnchor, TAngle, TBaseline, TColor, TFont, TFontSize, TFontWeight, TLimit, TOffset, TOrient)
+          -- TODO: Make this the default exposure in V.3.x, TitleConfig
         , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
-          --, ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
-        , ViewConfig
+        , ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
+          -- TODO: Make this the default exposure in V.3.x, ViewConfig
         , Window
         , WindowOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
         , WindowProperty

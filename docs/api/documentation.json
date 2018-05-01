@@ -104,37 +104,593 @@
         "name": "AxisConfig",
         "comment": " _Note: specifying axis configuration properties with type constructors (`BandPosition`,\n`Domain`, `Grid` etc.) is deprecated in favour of calling their equivalent property\nspecifying functions (`axcoBandPosition`, `axcoDomain`, `axcoGrid` etc.)_\n\nAxis configuration options for customising all axes. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config)\nfor more details.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "BandPosition",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Domain",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "DomainColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "DomainWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MaxExtent",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MinExtent",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Grid",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "GridColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "GridDash",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "GridOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GridWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Labels",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "LabelAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LabelColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LabelFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LabelFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LabelLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LabelOverlap",
+            [
+              "VegaLite.OverlapStrategy"
+            ]
+          ],
+          [
+            "LabelPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "ShortTimeLabels",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "Ticks",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "TickColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TickRound",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "TickSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TickWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleAlign",
+            [
+              "VegaLite.HAlign"
+            ]
+          ],
+          [
+            "TitleAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "TitleColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TitleFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TitleFontWeight",
+            [
+              "VegaLite.FontWeight"
+            ]
+          ],
+          [
+            "TitleFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleMaxLength",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitlePadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleX",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TitleY",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "AxisProperty",
         "comment": " _Note: specifying axis properties with type constructors (`AxDomain`,\n`AxFormat` etc.) is deprecated in favour of calling their equivalent property\nspecifying functions (`axDomain`, `axFormat` etc.)_\n\nAxis customisation properties. These are used for customising individual axes.\nTo configure all axes, use `AxisConfig` with a `configuration` instead. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)\nfor more details.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "AxDomain",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "AxFormat",
+            [
+              "String"
+            ]
+          ],
+          [
+            "AxGrid",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "AxLabelAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxLabelOverlap",
+            [
+              "VegaLite.OverlapStrategy"
+            ]
+          ],
+          [
+            "AxLabelPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxLabels",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "AxMaxExtent",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxMinExtent",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxOrient",
+            [
+              "VegaLite.Side"
+            ]
+          ],
+          [
+            "AxPosition",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxTicks",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "AxTickCount",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "AxTickSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxTitle",
+            [
+              "String"
+            ]
+          ],
+          [
+            "AxTitleAlign",
+            [
+              "VegaLite.HAlign"
+            ]
+          ],
+          [
+            "AxTitleAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxTitleMaxLength",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxTitlePadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "AxValues",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "AxDates",
+            [
+              "List (List VegaLite.DateTime)"
+            ]
+          ],
+          [
+            "AxZIndex",
+            [
+              "Int"
+            ]
+          ]
+        ]
       },
       {
         "name": "BinProperty",
         "comment": " _Note: specifying binning properties with type constructors (`Base`,\n`Extent` etc.) is deprecated in favour of calling their equivalent property\nspecifying functions (`biBase`, `biExtent` etc.)_\n\nType of binning property to customise. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for\nmore details.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Base",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Divide",
+            [
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "Extent",
+            [
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "MaxBins",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "MinStep",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Nice",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "Step",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Steps",
+            [
+              "List Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "Binding",
         "comment": " _Note: specifying binding elements with type constructors (`IRange`,\n`ICheckbox` etc.) is deprecated in favour of calling their equivalent input binding\nfunctions (`iRange`, `iCheckbox` etc.)_\n\nDescribes the binding property of a selection based on some HTML input element\nsuch as a checkbox or radio button. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)\nand the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "IRange",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "ICheckbox",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IRadio",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "ISelect",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IText",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "INumber",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IDate",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "ITime",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IMonth",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IWeek",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IDateTimeLocal",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "ITel",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ],
+          [
+            "IColor",
+            [
+              "String",
+              "List VegaLite.InputProperty"
+            ]
+          ]
+        ]
       },
       {
         "name": "BooleanOp",
         "comment": " Used for creating logical compositions. _Note referencing BooleanOp type\nconstructors (`And`, `Not`, `Expr` etc.) is deprecated in favour of calling their\nequivalent Boolean operation functions (`and`, `not`, `expr` etc.)_\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Expr",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Selection",
+            [
+              "String"
+            ]
+          ],
+          [
+            "SelectionName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "And",
+            [
+              "VegaLite.BooleanOp",
+              "VegaLite.BooleanOp"
+            ]
+          ],
+          [
+            "Or",
+            [
+              "VegaLite.BooleanOp",
+              "VegaLite.BooleanOp"
+            ]
+          ],
+          [
+            "Not",
+            [
+              "VegaLite.BooleanOp"
+            ]
+          ]
+        ]
       },
       {
         "name": "CInterpolate",
         "comment": " Indicates the type of color interpolation to apply, when mapping a data field\nonto a color scale. Note that color interpolation cannot be applied with the default\n`sequential` color scale, so additionally, you should set the `sType` to another\ncontinuous scale such as `linear`, `pow` etc.\n\nSeveral of the interpolation options also require a `gamma` value (with 1 being\na recommended default to provide). These should be generated with the named functions\n`cubeHelix`, `cubeHelixLong` and `rgb` rather than with a (deprecated) type constructor.\n\nFor details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).\n\n",
         "args": [],
         "cases": [
+          [
+            "CubeHelix",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "CubeHelixLong",
+            [
+              "Float"
+            ]
+          ],
           [
             "Hcl",
             []
@@ -154,6 +710,12 @@
           [
             "Lab",
             []
+          ],
+          [
+            "Rgb",
+            [
+              "Float"
+            ]
           ]
         ]
       },
@@ -204,6 +766,15 @@
           [
             "NoClip",
             []
+          ],
+          [
+            "LTRB",
+            [
+              "Float",
+              "Float",
+              "Float",
+              "Float"
+            ]
           ]
         ]
       },
@@ -211,7 +782,225 @@
         "name": "ConfigurationProperty",
         "comment": " _Note: referencing configuration properties with type constructors (`AreaStyle`,\n`Autosize`, `Axis` etc.) is deprecated in favour of calling their equivalent\nconfiguration functions (`coArea`, `coAutosize`, `coAxis` etc.)._\n\nType of configuration property to customise. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)\nfor details.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "AreaStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "Autosize",
+            [
+              "List VegaLite.Autosize"
+            ]
+          ],
+          [
+            "Axis",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisX",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisY",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisLeft",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisRight",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisTop",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisBottom",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "AxisBand",
+            [
+              "List VegaLite.AxisConfig"
+            ]
+          ],
+          [
+            "Background",
+            [
+              "String"
+            ]
+          ],
+          [
+            "BarStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "CircleStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "CountTitle",
+            [
+              "String"
+            ]
+          ],
+          [
+            "FieldTitle",
+            [
+              "VegaLite.FieldTitleProperty"
+            ]
+          ],
+          [
+            "Legend",
+            [
+              "List VegaLite.LegendConfig"
+            ]
+          ],
+          [
+            "LineStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "MarkStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "NamedStyle",
+            [
+              "String",
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "NumberFormat",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Padding",
+            [
+              "VegaLite.Padding"
+            ]
+          ],
+          [
+            "PointStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "Projection",
+            [
+              "List VegaLite.ProjectionProperty"
+            ]
+          ],
+          [
+            "Range",
+            [
+              "List VegaLite.RangeConfig"
+            ]
+          ],
+          [
+            "RectStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "RemoveInvalid",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "RuleStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "Scale",
+            [
+              "List VegaLite.ScaleConfig"
+            ]
+          ],
+          [
+            "SelectionStyle",
+            [
+              "List ( VegaLite.Selection, List VegaLite.SelectionProperty )"
+            ]
+          ],
+          [
+            "SquareStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "Stack",
+            [
+              "VegaLite.StackProperty"
+            ]
+          ],
+          [
+            "TextStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "TickStyle",
+            [
+              "List VegaLite.MarkProperty"
+            ]
+          ],
+          [
+            "TitleStyle",
+            [
+              "List VegaLite.TitleConfig"
+            ]
+          ],
+          [
+            "TimeFormat",
+            [
+              "String"
+            ]
+          ],
+          [
+            "View",
+            [
+              "List VegaLite.ViewConfig"
+            ]
+          ]
+        ]
       },
       {
         "name": "Cursor",
@@ -376,6 +1165,18 @@
           [
             "FoBoolean",
             []
+          ],
+          [
+            "FoDate",
+            [
+              "String"
+            ]
+          ],
+          [
+            "FoUtc",
+            [
+              "String"
+            ]
           ]
         ]
       },
@@ -383,19 +1184,124 @@
         "name": "DataValue",
         "comment": " _Note: referencing data types with type constructors (`Boolean`, `DateTime`,\n`Number` and `Str`) is deprecated in favour of calling their equivalent data value\nfunctions (`boo`, `dt`, `num` and `str`)._\n\nA single data value. This is used when a function can accept values of different\ntypes (e.g. either a number or a string).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Boolean",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "DateTime",
+            [
+              "List VegaLite.DateTime"
+            ]
+          ],
+          [
+            "Number",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Str",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "DataValues",
         "comment": " _Note: referencing lists of data types with type constructors (`Booleans`,\n`DateTimes`, `Numbers` and `Strings`) is deprecated in favour of calling their\nequivalent data value list functions (`boos`, `dts`, `nums` and `strs`)._\n\nA list of data values. This is used when a function can accept lists of\ndifferent types (e.g. either a list of numbers or a list of strings).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Booleans",
+            [
+              "List Bool"
+            ]
+          ],
+          [
+            "DateTimes",
+            [
+              "List (List VegaLite.DateTime)"
+            ]
+          ],
+          [
+            "Numbers",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "Strings",
+            [
+              "List String"
+            ]
+          ]
+        ]
       },
       {
         "name": "DateTime",
         "comment": " _Note: referencing dateTime type constructors (`DTYear`, `DTHours` etc.)\nis deprecated in favour of calling their equivalent dateTime functions\n(`dtYear`, `dtHour` etc.)_\n\nAllows a date or time to be represented. This is typically part of a list of\nfunctions that each generate a `DateTime` item to provide a specific point in\ntime. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/types.html#datetime).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "DTYear",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTQuarter",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTMonth",
+            [
+              "VegaLite.MonthName"
+            ]
+          ],
+          [
+            "DTDate",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTDay",
+            [
+              "VegaLite.DayName"
+            ]
+          ],
+          [
+            "DTHours",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTMinutes",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTSeconds",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "DTMilliseconds",
+            [
+              "Int"
+            ]
+          ]
+        ]
       },
       {
         "name": "DayName",
@@ -436,19 +1342,100 @@
         "name": "DetailChannel",
         "comment": " _Note: referencing detail channel type constructors (`DName`, `DBin` etc.)\nis deprecated in favour of calling their equivalent detail channel functions\n(`dName`, `dBin` etc.)_\n\nLevel of detail channel properties used for creating a grouped channel encoding.\nFor details see the\n[Vega-Lite level of detail channel documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "DName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "DmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "DBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "DTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "DAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ]
+        ]
       },
       {
         "name": "FacetChannel",
         "comment": " _Note: facet channel type constructors (`FName`, `FBin` etc.) are\ndeprecated in favour of calling their equivalent facet channel functions\n(`fName`, `fBin` etc.)_\n\nTypes of facet channel property used for creating a composed facet view of small\nmultiples.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "FName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "FmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "FBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "FAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "FTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "FHeader",
+            [
+              "List VegaLite.HeaderProperty"
+            ]
+          ]
+        ]
       },
       {
         "name": "FacetMapping",
         "comment": " _Note: facet mapping type constructors (`ColumnBy` and `RowBy` ) are\ndeprecated in favour of calling their equivalent facet mapping functions\n(`columnBy` and `rowBy`)_\n\nProvides details of the mapping between a row or column and its field\ndefinitions in a set of faceted small multiples. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "ColumnBy",
+            [
+              "List VegaLite.FacetChannel"
+            ]
+          ],
+          [
+            "RowBy",
+            [
+              "List VegaLite.FacetChannel"
+            ]
+          ]
+        ]
       },
       {
         "name": "FieldTitleProperty",
@@ -473,13 +1460,68 @@
         "name": "Filter",
         "comment": " _Note: referencing filter type constructors (`FEqual`, `FExpr` etc.)\nis deprecated in favour of calling their equivalent filtering functions\n(`fiEqual`, `fiExpr` etc.)_\n\nType of filtering operation. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)\nfor details.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "FEqual",
+            [
+              "String",
+              "VegaLite.DataValue"
+            ]
+          ],
+          [
+            "FExpr",
+            [
+              "String"
+            ]
+          ],
+          [
+            "FCompose",
+            [
+              "VegaLite.BooleanOp"
+            ]
+          ],
+          [
+            "FSelection",
+            [
+              "String"
+            ]
+          ],
+          [
+            "FOneOf",
+            [
+              "String",
+              "VegaLite.DataValues"
+            ]
+          ],
+          [
+            "FRange",
+            [
+              "String",
+              "VegaLite.FilterRange"
+            ]
+          ]
+        ]
       },
       {
         "name": "FilterRange",
         "comment": " _Note: referencing filter range type constructors (`NumberRange` and `DateRange`)\nis deprecated in favour of calling their equivalent filtering range functions\n(`numRange` and `dtRange`.)_\n\nA pair of filter range data values. The first argument is the inclusive minimum\nvale to accept and the second the inclusive maximum.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "NumberRange",
+            [
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "DateRange",
+            [
+              "List VegaLite.DateTime",
+              "List VegaLite.DateTime"
+            ]
+          ]
+        ]
       },
       {
         "name": "FontWeight",
@@ -546,12 +1588,36 @@
         "args": [],
         "cases": [
           [
+            "JSON",
+            [
+              "String"
+            ]
+          ],
+          [
             "CSV",
             []
           ],
           [
             "TSV",
             []
+          ],
+          [
+            "TopojsonFeature",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TopojsonMesh",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Parse",
+            [
+              "List ( String, VegaLite.DataType )"
+            ]
           ]
         ]
       },
@@ -559,7 +1625,45 @@
         "name": "Geometry",
         "comment": " _Note: referencing geometry type constructors (`GeoPoint`, `GeoLine` etc.)\nis deprecated in favour of calling their equivalent geometry functions\n(`geoPoint`, `geoLine` etc.)_\n\nSpecifies the type and content of geometry specifications for programmatically\ncreating GeoShapes. These can be mapped to the\n[GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)\nwhere the pluralised type names refer to their `Multi` prefixed equivalent in the\nGeoJSON specification.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "GeoPoint",
+            [
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "GeoPoints",
+            [
+              "List ( Float, Float )"
+            ]
+          ],
+          [
+            "GeoLine",
+            [
+              "List ( Float, Float )"
+            ]
+          ],
+          [
+            "GeoLines",
+            [
+              "List (List ( Float, Float ))"
+            ]
+          ],
+          [
+            "GeoPolygon",
+            [
+              "List (List ( Float, Float ))"
+            ]
+          ],
+          [
+            "GeoPolygons",
+            [
+              "List (List (List ( Float, Float )))"
+            ]
+          ]
+        ]
       },
       {
         "name": "HAlign",
@@ -584,19 +1688,140 @@
         "name": "HeaderProperty",
         "comment": " _Note: referencing header property type constructors (`HFormat` and `HTitle`)\nis deprecated in favour of calling their equivalent header property functions\n(`hdFormat`, `hdTitle` etc.)_\n\nRepresents a facet header property. For details, see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "HFormat",
+            [
+              "String"
+            ]
+          ],
+          [
+            "HTitle",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "HyperlinkChannel",
         "comment": " _Note: referencing hyperlink channel type constructors (`HName`, `HBin` etc.)\nis deprecated in favour of calling their equivalent hyperlink channel functions\n(`hName`, `hBin` etc.)_\n\nTypes of hyperlink channel property used for linking marks or text to URLs.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "HName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "HRepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "HmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "HBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "HAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "HTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "HSelectionCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.HyperlinkChannel",
+              "List VegaLite.HyperlinkChannel"
+            ]
+          ],
+          [
+            "HDataCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.HyperlinkChannel",
+              "List VegaLite.HyperlinkChannel"
+            ]
+          ],
+          [
+            "HString",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "InputProperty",
         "comment": " _Note: specifying input properties with type constructors (`InMin`,\n`InOptions` etc.) is deprecated in favour of calling their equivalent property\nspecifying functions (`inMin`, `inOptions` etc.)_\n\nGUI Input properties. The type of relevant property will depend on the type of\ninput element selected. For example an `InRange` (slider) can have numeric min,\nmax and step values; InSelect (selector) has a list of selection label options.\nFor details see the\n[Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Debounce",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Element",
+            [
+              "String"
+            ]
+          ],
+          [
+            "InOptions",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "InMin",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "InMax",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "InName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "InStep",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "InPlaceholder",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "Legend",
@@ -617,7 +1842,224 @@
         "name": "LegendConfig",
         "comment": " _Note: specifying legend configuration properties with type constructors\n(`CornerRadius`, `FillColor`, `LePadding` etc.) is deprecated in favour of\ncalling their equivalent property specifying functions (`lecoCornerRadius`,\n`lecoFillColor`, `lecoPadding` etc.)_\n\nLegend configuration options. For more detail see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "CornerRadius",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "FillColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Orient",
+            [
+              "VegaLite.LegendOrientation"
+            ]
+          ],
+          [
+            "Offset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "StrokeColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LeStrokeDash",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "LeStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LePadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GradientLabelBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "GradientLabelLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GradientLabelOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GradientStrokeColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "GradientStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GradientHeight",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "GradientWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeLabelAlign",
+            [
+              "VegaLite.HAlign"
+            ]
+          ],
+          [
+            "LeLabelBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "LeLabelColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LeLabelFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LeLabelFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeLabelLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeLabelOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeShortTimeLabels",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "EntryPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SymbolColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "SymbolType",
+            [
+              "VegaLite.Symbol"
+            ]
+          ],
+          [
+            "SymbolSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SymbolStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeTitleAlign",
+            [
+              "VegaLite.HAlign"
+            ]
+          ],
+          [
+            "LeTitleBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "LeTitleColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LeTitleFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LeTitleFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeTitleFontWeight",
+            [
+              "VegaLite.FontWeight"
+            ]
+          ],
+          [
+            "LeTitleLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LeTitlePadding",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "LegendOrientation",
@@ -658,25 +2100,239 @@
         "name": "LegendProperty",
         "comment": " _Note: referencing legend property type constructors (`LFormat`, lTitle`etc.)\nis deprecated in favour of calling their equivalent legend property functions\n(`leFormat`,`leTitle` etc.)_\n\nLegend properties for customising a mark legend. For more detail see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "LEntryPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LFormat",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LOrient",
+            [
+              "VegaLite.LegendOrientation"
+            ]
+          ],
+          [
+            "LPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LTickCount",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "LTitle",
+            [
+              "String"
+            ]
+          ],
+          [
+            "LType",
+            [
+              "VegaLite.Legend"
+            ]
+          ],
+          [
+            "LValues",
+            [
+              "VegaLite.LegendValues"
+            ]
+          ],
+          [
+            "LZIndex",
+            [
+              "Int"
+            ]
+          ]
+        ]
       },
       {
         "name": "LegendValues",
         "comment": " _Note: referencing legend value type constructors (`LNumbers`, `LStrings`\nand `LDateTimes`) is deprecated in favour of calling their equivalent legend value\nfunctions (`leNums`, `leStrs` and `leDts`)_\n\nA list of data values suitable for setting legend values.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "LDateTimes",
+            [
+              "List (List VegaLite.DateTime)"
+            ]
+          ],
+          [
+            "LNumbers",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "LStrings",
+            [
+              "List String"
+            ]
+          ]
+        ]
       },
       {
         "name": "Mark",
         "comment": " _Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is\ndeprecated in favour of calling their equivalent mark functions (`area`, `bar` etc.)_\n\nType of visual mark used to represent data in the visualization.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "Area",
+            []
+          ],
+          [
+            "Bar",
+            []
+          ],
+          [
+            "Circle",
+            []
+          ],
+          [
+            "Geoshape",
+            []
+          ],
+          [
+            "Line",
+            []
+          ],
+          [
+            "Point",
+            []
+          ],
+          [
+            "Rect",
+            []
+          ],
+          [
+            "Rule",
+            []
+          ],
+          [
+            "Square",
+            []
+          ],
+          [
+            "Text",
+            []
+          ],
+          [
+            "Tick",
+            []
+          ]
+        ]
       },
       {
         "name": "MarkChannel",
         "comment": " _Note: referencing mark channel type constructors (`MName`, `MBin` etc.) is\ndeprecated in favour of calling their equivalent mark channel functions\n(`mName`, `mBin` etc.)_\n\nMark channel properties used for creating a mark channel encoding.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "MName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MRepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "MmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "MScale",
+            [
+              "List VegaLite.ScaleProperty"
+            ]
+          ],
+          [
+            "MBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "MTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "MAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "MLegend",
+            [
+              "List VegaLite.LegendProperty"
+            ]
+          ],
+          [
+            "MSelectionCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.MarkChannel",
+              "List VegaLite.MarkChannel"
+            ]
+          ],
+          [
+            "MDataCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.MarkChannel",
+              "List VegaLite.MarkChannel"
+            ]
+          ],
+          [
+            "MPath",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MNumber",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MString",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MBoolean",
+            [
+              "Bool"
+            ]
+          ]
+        ]
       },
       {
         "name": "MarkInterpolation",
@@ -756,7 +2412,224 @@
         "name": "MarkProperty",
         "comment": " _Note: referencing mark property type constructors (`MAlign`, `MFill` etc.)\nis deprecated in favour of calling their equivalent mark property functions\n(`maAlign`, `maFill` etc.)_\n\nProperties for customising the appearance of a mark. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "MAlign",
+            [
+              "VegaLite.HAlign"
+            ]
+          ],
+          [
+            "MAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MBandSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "MBinSpacing",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MClip",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "MColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MCursor",
+            [
+              "VegaLite.Cursor"
+            ]
+          ],
+          [
+            "MContinuousBandSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MDiscreteBandSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MdX",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MdY",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MFill",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MFilled",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "MFillOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MFontStyle",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MFontWeight",
+            [
+              "VegaLite.FontWeight"
+            ]
+          ],
+          [
+            "MInterpolate",
+            [
+              "VegaLite.MarkInterpolation"
+            ]
+          ],
+          [
+            "MOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MOrient",
+            [
+              "VegaLite.MarkOrientation"
+            ]
+          ],
+          [
+            "MRadius",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MShape",
+            [
+              "VegaLite.Symbol"
+            ]
+          ],
+          [
+            "MShortTimeLabels",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "MSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MStroke",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MStrokeDash",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "MStrokeDashOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MStrokeOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MStyle",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "MTension",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MText",
+            [
+              "String"
+            ]
+          ],
+          [
+            "MTheta",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "MThickness",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "Measurement",
@@ -935,7 +2808,50 @@
         "name": "OrderChannel",
         "comment": " _Note: referencing order channel type constructors (`OName`, `OBin` etc.) is\ndeprecated in favour of calling their equivalent order channel functions\n(`oName`, `oBin` etc.)_\n\nProperties of an ordering channel used for sorting data fields.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "OName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "ORepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "OmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "OBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "OAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "OTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "OSort",
+            [
+              "List VegaLite.SortProperty"
+            ]
+          ]
+        ]
       },
       {
         "name": "OverlapStrategy",
@@ -960,7 +2876,23 @@
         "name": "Padding",
         "comment": " _Note: referencing padding type constructors (`PSize` and `PEdges`) is\ndeprecated in favour of calling their equivalent padding functions\n(`paSize` and `paEdges`)_\n\nRepresents padding dimensions in pixel units. `PSize` will set the same value\non all four edges of a rectangular container while `PEdges` can be used to specify\ndifferent sizes on each edge in order _left_, _top_, _right_, _bottom_.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "PSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PEdges",
+            [
+              "Float",
+              "Float",
+              "Float",
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "PointMarker",
@@ -1020,7 +2952,68 @@
         "name": "PositionChannel",
         "comment": " _Note: referencing position channel type constructors (`PName`, `PBin` etc.) is\ndeprecated in favour of calling their equivalent position channel functions\n(`pName`, `pBin` etc.)_\n\nPosition channel properties used for creating a position channel encoding.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "PName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "PRepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "PmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "PBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "PTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "PAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "PScale",
+            [
+              "List VegaLite.ScaleProperty"
+            ]
+          ],
+          [
+            "PAxis",
+            [
+              "List VegaLite.AxisProperty"
+            ]
+          ],
+          [
+            "PSort",
+            [
+              "List VegaLite.SortProperty"
+            ]
+          ],
+          [
+            "PStack",
+            [
+              "VegaLite.StackProperty"
+            ]
+          ]
+        ]
       },
       {
         "name": "Projection",
@@ -1056,6 +3049,12 @@
             []
           ],
           [
+            "Custom",
+            [
+              "String"
+            ]
+          ],
+          [
             "Equirectangular",
             []
           ],
@@ -1085,19 +3084,163 @@
         "name": "ProjectionProperty",
         "comment": " _Note: specifying projection properties with type constructors (`PType`,\n`PClipAngle` etc.) is deprecated in favour of calling their equivalent\nprojection property functions (`prType`, `prClipAngle` etc.)_\n\nProperties for customising a geospatial projection that converts longitude/latitude\npairs into planar (x,y) coordinate pairs for rendering and query. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "PType",
+            [
+              "VegaLite.Projection"
+            ]
+          ],
+          [
+            "PClipAngle",
+            [
+              "Maybe.Maybe Float"
+            ]
+          ],
+          [
+            "PClipExtent",
+            [
+              "VegaLite.ClipRect"
+            ]
+          ],
+          [
+            "PCenter",
+            [
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "PRotate",
+            [
+              "Float",
+              "Float",
+              "Float"
+            ]
+          ],
+          [
+            "PPrecision",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PCoefficient",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PDistance",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PFraction",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PLobes",
+            [
+              "Int"
+            ]
+          ],
+          [
+            "PParallel",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PRadius",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PRatio",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PSpacing",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "PTilt",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "RangeConfig",
         "comment": " _Note: specifying range configuration properties with type constructors\n(`RCategory`, `RDiverging`, etc.) is deprecated in favour of calling their\nequivalent property specifying functions (`racoCategory`,`racoDiverging`, etc.)_\n\nProperties for customising the colors of a range. The parameter should be a\nnamed color scheme such as `accent` or `purpleorange-11`. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "RCategory",
+            [
+              "String"
+            ]
+          ],
+          [
+            "RDiverging",
+            [
+              "String"
+            ]
+          ],
+          [
+            "RHeatmap",
+            [
+              "String"
+            ]
+          ],
+          [
+            "ROrdinal",
+            [
+              "String"
+            ]
+          ],
+          [
+            "RRamp",
+            [
+              "String"
+            ]
+          ],
+          [
+            "RSymbol",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "RepeatFields",
         "comment": " _Note: specifying repeat fields with type constructors (`RowFields` and\n`ColumnFields` ) is deprecated in favour of calling their equivalent functions\n(`rowFields`, `columnFields`)_\n\nCreate a list of fields to use in set of repeated small multiples. The list of\nfields named here can be referenced in an encoding with `pRepeat Column`, `pRepeat Row`\netc.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "RowFields",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "ColumnFields",
+            [
+              "List String"
+            ]
+          ]
+        ]
       },
       {
         "name": "Resolution",
@@ -1118,7 +3261,26 @@
         "name": "Resolve",
         "comment": " _Note: specifying resolve items with type constructors (`RAxis`,\n`RLegend` and `RScale`) is deprecated in favour of calling their equivalent\nresolve functions (`reAxis`, `reLegend` and `reScale`)_\n\nUsed to determine how a channel's axis, scale or legend domains should be resolved\nif defined in more than one view in a composite visualization. See the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for\ndetails.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "RAxis",
+            [
+              "List ( VegaLite.Channel, VegaLite.Resolution )"
+            ]
+          ],
+          [
+            "RLegend",
+            [
+              "List ( VegaLite.Channel, VegaLite.Resolution )"
+            ]
+          ],
+          [
+            "RScale",
+            [
+              "List ( VegaLite.Channel, VegaLite.Resolution )"
+            ]
+          ]
+        ]
       },
       {
         "name": "Scale",
@@ -1179,13 +3341,146 @@
         "name": "ScaleConfig",
         "comment": " _Note: specifying scale configuration properties with type constructors\n(`SCBandPaddingInner`, `SCClamp`, etc.) is deprecated in favour of calling their\nequivalent property specifying functions (`socoBandPaddingInner`,`sacoClamp`, etc.)_\n\nScale configuration property. These are used to configure all scales.\nFor more details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "SCBandPaddingInner",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCBandPaddingOuter",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCClamp",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "SCMaxBandSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMinBandSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMaxFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMinFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMaxOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMinOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMaxSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMinSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMaxStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCMinStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCPointPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCRangeStep",
+            [
+              "Maybe.Maybe Float"
+            ]
+          ],
+          [
+            "SCRound",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "SCTextXRangeStep",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SCUseUnaggregatedDomain",
+            [
+              "Bool"
+            ]
+          ]
+        ]
       },
       {
         "name": "ScaleDomain",
         "comment": " Describes a scale domain (type of data in scale). To specify scale domain\nvalues explicitly, use the functions `doNums`, `doStrs`, `doDts` or `doSelection`\nrather than their (deprecated) type constructor equivalents.\n\nFor full details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).\n\n",
         "args": [],
         "cases": [
+          [
+            "DNumbers",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "DStrings",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "DDateTimes",
+            [
+              "List (List VegaLite.DateTime)"
+            ]
+          ],
+          [
+            "DSelection",
+            [
+              "String"
+            ]
+          ],
           [
             "Unaggregated",
             []
@@ -1228,6 +3523,25 @@
           [
             "NYear",
             []
+          ],
+          [
+            "NInterval",
+            [
+              "VegaLite.TimeUnit",
+              "Int"
+            ]
+          ],
+          [
+            "IsNice",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "NTickCount",
+            [
+              "Int"
+            ]
           ]
         ]
       },
@@ -1235,13 +3549,118 @@
         "name": "ScaleProperty",
         "comment": " _Note: specifying scale properties with type constructors (`SDomain`,\n`SRange` etc.) is deprecated in favour of calling their equivalent property\nspecifying functions (`scDomain`, `scRange` etc.)_\n\nIndividual scale property. These are used to customise an individual scale\ntransformation. To customise all scales use `config` and supply relevant\n`ScaleConfig` values. For more details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "SType",
+            [
+              "VegaLite.Scale"
+            ]
+          ],
+          [
+            "SDomain",
+            [
+              "VegaLite.ScaleDomain"
+            ]
+          ],
+          [
+            "SRange",
+            [
+              "VegaLite.ScaleRange"
+            ]
+          ],
+          [
+            "SScheme",
+            [
+              "String",
+              "List Float"
+            ]
+          ],
+          [
+            "SPadding",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SPaddingInner",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SPaddingOuter",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SRangeStep",
+            [
+              "Maybe.Maybe Float"
+            ]
+          ],
+          [
+            "SRound",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "SClamp",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "SInterpolate",
+            [
+              "VegaLite.CInterpolate"
+            ]
+          ],
+          [
+            "SNice",
+            [
+              "VegaLite.ScaleNice"
+            ]
+          ],
+          [
+            "SZero",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "SReverse",
+            [
+              "Bool"
+            ]
+          ]
+        ]
       },
       {
         "name": "ScaleRange",
         "comment": " _Note: specifying scale ranges with type constructors (`RNumbers`,\n`RStrings` and `RName`) is deprecated in favour of calling their equivalent\nfunctions (`raNums`, `raStrs` and `raName`.)_\n\nDescribes a scale range of scale output values. For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "RNumbers",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "RStrings",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "RName",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "Selection",
@@ -1266,7 +3685,50 @@
         "name": "SelectionMarkProperty",
         "comment": " _Note: specifying selection mark properties with type constructors (`SMFill`,\n`SMStroke` etc.) is deprecated in favour of calling their equivalent functions\n(`smFill`, `smStroke` etc.)_\n\nProperties for customising the appearance of an interval selection mark (dragged\nrectangle). For details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "SMFill",
+            [
+              "String"
+            ]
+          ],
+          [
+            "SMFillOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SMStroke",
+            [
+              "String"
+            ]
+          ],
+          [
+            "SMStrokeOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SMStrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "SMStrokeDash",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "SMStrokeDashOffset",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "SelectionProperty",
@@ -1280,6 +3742,66 @@
           [
             "BindScales",
             []
+          ],
+          [
+            "On",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Translate",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Zoom",
+            [
+              "String"
+            ]
+          ],
+          [
+            "Fields",
+            [
+              "List String"
+            ]
+          ],
+          [
+            "Encodings",
+            [
+              "List VegaLite.Channel"
+            ]
+          ],
+          [
+            "ResolveSelections",
+            [
+              "VegaLite.SelectionResolution"
+            ]
+          ],
+          [
+            "SelectionMark",
+            [
+              "List VegaLite.SelectionMarkProperty"
+            ]
+          ],
+          [
+            "Bind",
+            [
+              "List VegaLite.Binding"
+            ]
+          ],
+          [
+            "Nearest",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "Toggle",
+            [
+              "String"
+            ]
           ]
         ]
       },
@@ -1337,6 +3859,24 @@
           [
             "Descending",
             []
+          ],
+          [
+            "ByField",
+            [
+              "String"
+            ]
+          ],
+          [
+            "ByRepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "Op",
+            [
+              "VegaLite.Operation"
+            ]
           ]
         ]
       },
@@ -1391,6 +3931,12 @@
           [
             "TriangleDown",
             []
+          ],
+          [
+            "Path",
+            [
+              "String"
+            ]
           ]
         ]
       },
@@ -1398,7 +3944,66 @@
         "name": "TextChannel",
         "comment": " _Note: referencing text channel type constructors (`TName`, `TBin` etc.) is\ndeprecated in favour of calling their equivalent text channel functions\n(`tName`, `tBin` etc.)_\n\nTypes of text channel property used for displaying text as part of the visualization.\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "TName",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TRepeat",
+            [
+              "VegaLite.Arrangement"
+            ]
+          ],
+          [
+            "TmType",
+            [
+              "VegaLite.Measurement"
+            ]
+          ],
+          [
+            "TBin",
+            [
+              "List VegaLite.BinProperty"
+            ]
+          ],
+          [
+            "TAggregate",
+            [
+              "VegaLite.Operation"
+            ]
+          ],
+          [
+            "TTimeUnit",
+            [
+              "VegaLite.TimeUnit"
+            ]
+          ],
+          [
+            "TSelectionCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.TextChannel",
+              "List VegaLite.TextChannel"
+            ]
+          ],
+          [
+            "TDataCondition",
+            [
+              "VegaLite.BooleanOp",
+              "List VegaLite.TextChannel",
+              "List VegaLite.TextChannel"
+            ]
+          ],
+          [
+            "TFormat",
+            [
+              "String"
+            ]
+          ]
+        ]
       },
       {
         "name": "TimeUnit",
@@ -1499,7 +4104,68 @@
         "name": "TitleConfig",
         "comment": " _Note: specifying title configuration properties with type constructors\n(`TAnchor`, `TAngle`, etc.) is deprecated in favour of calling their\nequivalent property specifying functions (`ticoAnchor`,`ticoAngle`, etc.)_\n\nTitle configuration properties. These are used to configure the default style\nof all titles within a visualization. For further details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/title.html#config)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "TAnchor",
+            [
+              "VegaLite.APosition"
+            ]
+          ],
+          [
+            "TAngle",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TBaseline",
+            [
+              "VegaLite.VAlign"
+            ]
+          ],
+          [
+            "TColor",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TFont",
+            [
+              "String"
+            ]
+          ],
+          [
+            "TFontSize",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TFontWeight",
+            [
+              "VegaLite.FontWeight"
+            ]
+          ],
+          [
+            "TLimit",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TOffset",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "TOrient",
+            [
+              "VegaLite.Side"
+            ]
+          ]
+        ]
       },
       {
         "name": "VAlign",
@@ -1530,7 +4196,68 @@
         "name": "ViewConfig",
         "comment": " _Note: specifying view configuration properties with type constructors\n(`Clip`, `ViewWidth`, `ViewHeight` etc.) is deprecated in favour of calling their\nequivalent property specifying functions (`vicoClip`,`vicoWidth`, `vicoHeight` etc.)_\n\nView configuration property. These are used to configure the style of a single\nview within a visualization such as its size and default fill and stroke colors.\nFor further details see the\n[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#config)\n\n",
         "args": [],
-        "cases": []
+        "cases": [
+          [
+            "ViewWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "ViewHeight",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Clip",
+            [
+              "Bool"
+            ]
+          ],
+          [
+            "Fill",
+            [
+              "Maybe.Maybe String"
+            ]
+          ],
+          [
+            "FillOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "Stroke",
+            [
+              "Maybe.Maybe String"
+            ]
+          ],
+          [
+            "StrokeOpacity",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "StrokeWidth",
+            [
+              "Float"
+            ]
+          ],
+          [
+            "StrokeDash",
+            [
+              "List Float"
+            ]
+          ],
+          [
+            "StrokeDashOffset",
+            [
+              "Float"
+            ]
+          ]
+        ]
       },
       {
         "name": "Window",
