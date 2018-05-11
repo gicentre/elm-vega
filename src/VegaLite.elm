@@ -8725,7 +8725,7 @@ For further details see the
 -}
 vicoHeight : Float -> ViewConfig
 vicoHeight =
-    ViewWidth
+    ViewHeight
 
 
 {-| Specify the default stroke color for single views. If `Nothing` is provided,
