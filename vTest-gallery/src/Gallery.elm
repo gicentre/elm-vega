@@ -1554,7 +1554,8 @@ geo2 =
             scales
                 << scale "sizeScale"
                     [ scDomain (doData [ daDataset "obesity", daField (str "rate") ])
-                    , scRange (raNums [ 0, 5000 ])
+                    , scZero (boo False)
+                    , scRange (raNums [ 1000, 5000 ])
                     ]
                 << scale "cScale"
                     [ scType ScSequential
@@ -1567,10 +1568,12 @@ geo2 =
             legends
                 << legend
                     [ leTitle "Percentage of Obese Adults"
-                    , leFill "cScale"
                     , leOrient BottomRight
-                    , leType LGradient
-                    , leFormat "%"
+                    , leType LSymbol
+                    , leSize "sizeScale"
+                    , leFill "cScale"
+                    , leFormat ".1%"
+                    , leClipHeight (num 16)
                     ]
 
         mk =

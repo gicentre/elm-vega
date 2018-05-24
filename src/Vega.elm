@@ -255,20 +255,55 @@ module Vega
         , keyValue
         , lab
         , layout
+        , leClipHeight
+        , leColumnPadding
+        , leColumns
+        , leCornerRadius
+        , leDirection
         , leEncode
-        , leEntryPadding
         , leFill
+        , leFillColor
         , leFormat
+        , leGradientLength
+        , leGradientStrokeColor
+        , leGradientStrokeWidth
+        , leGradientThickness
+        , leGridAlign
+        , leLabelAlign
+        , leLabelBaseline
+        , leLabelColor
+        , leLabelFont
+        , leLabelFontSize
+        , leLabelFontWeight
+        , leLabelLimit
+        , leLabelOffset
+        , leLabelOverlap
         , leOffset
         , leOpacity
         , leOrient
         , lePadding
+        , leRowPadding
         , leShape
         , leSize
         , leStroke
+        , leStrokeColor
         , leStrokeDash
+        , leStrokeWidth
+        , leSymbolFillColor
+        , leSymbolOffset
+        , leSymbolSize
+        , leSymbolStrokeColor
+        , leSymbolStrokeWidth
+        , leSymbolType
         , leTickCount
         , leTitle
+        , leTitleAlign
+        , leTitleBaseline
+        , leTitleColor
+        , leTitleFont
+        , leTitleFontSize
+        , leTitleFontWeight
+        , leTitleLimit
         , leTitlePadding
         , leType
         , leValues
@@ -1205,6 +1240,7 @@ TODO: add function (wordcloud)
 @docs legend
 @docs LegendProperty
 @docs leType
+@docs leDirection
 @docs leOrient
 @docs leFill
 @docs leOpacity
@@ -1213,13 +1249,47 @@ TODO: add function (wordcloud)
 @docs leStroke
 @docs leStrokeDash
 @docs leEncode
-@docs leEntryPadding
 @docs leFormat
+@docs leGridAlign
+@docs leClipHeight
+@docs leColumns
+@docs leColumnPadding
+@docs leRowPadding
+@docs leCornerRadius
+@docs leFillColor
 @docs leOffset
 @docs lePadding
+@docs leStrokeColor
+@docs leStrokeWidth
+@docs leGradientLength
+@docs leGradientThickness
+@docs leGradientStrokeColor
+@docs leGradientStrokeWidth
+@docs leLabelAlign
+@docs leLabelBaseline
+@docs leLabelColor
+@docs leLabelFont
+@docs leLabelFontSize
+@docs leLabelFontWeight
+@docs leLabelLimit
+@docs leLabelOffset
+@docs leLabelOverlap
+@docs leSymbolFillColor
+@docs leSymbolOffset
+@docs leSymbolSize
+@docs leSymbolStrokeColor
+@docs leSymbolStrokeWidth
+@docs leSymbolType
 @docs leTickCount
-@docs leTitlePadding
 @docs leTitle
+@docs leTitleAlign
+@docs leTitleBaseline
+@docs leTitleColor
+@docs leTitleFont
+@docs leTitleFontSize
+@docs leTitleFontWeight
+@docs leTitleLimit
+@docs leTitlePadding
 @docs leValues
 @docs leZIndex
 @docs LegendType
@@ -1413,6 +1483,8 @@ import Json.Encode as JE
 -- TODO: Most types should have the option of representing their type from a signal
 -- Where possible, these should use the type/signal specific types, but in cases
 -- where mixed types are assembled in lists, we can use the more generic Value
+-- TODO: Should we represent colors with their own type or perhaps Str type rather than String?
+-- This would allow colours to be generated via signal but does make the API a little more cumbersome.
 
 
 {-| Properties of the aggregate transformation. For details see the
@@ -2120,6 +2192,7 @@ to represent. For more details see the
 -}
 type LegendProperty
     = LeType LegendType
+    | LeDirection Orientation
     | LeOrient LegendOrientation
     | LeFill String
     | LeOpacity String
@@ -2128,14 +2201,48 @@ type LegendProperty
     | LeStroke String
     | LeStrokeDash String
     | LeEncode (List LegendEncoding)
-    | LeEntryPadding Value
     | LeFormat String
+    | LeGridAlign GridAlign
+    | LeClipHeight Num
+    | LeColumns Num
+    | LeColumnPadding Num
+    | LeRowPadding Num
+    | LeCornerRadius Num
+    | LeFillColor String
     | LeOffset Value
     | LePadding Value
-      -- TODO: Need to account for temporal units and intervals
+    | LeStrokeColor String
+    | LeStrokeWidth Num
+    | LeGradientLength Num
+    | LeGradientThickness Num
+    | LeGradientStrokeColor String
+    | LeGradientStrokeWidth Num
+    | LeLabelAlign HAlign
+    | LeLabelBaseline VAlign
+    | LeLabelColor String
+    | LeLabelFont String
+    | LeLabelFontSize Num
+    | LeLabelFontWeight Value
+    | LeLabelLimit Num
+    | LeLabelOffset Num
+    | LeLabelOverlap OverlapStrategy
+    | LeSymbolFillColor String
+    | LeSymbolOffset Num
+    | LeSymbolSize Num
+    | LeSymbolStrokeColor String
+    | LeSymbolStrokeWidth Num
+    | LeSymbolType Symbol
+      -- TODO: Need to account for temporal units and intervals for ticks
     | LeTickCount Int
-    | LeTitlePadding Value
     | LeTitle String
+    | LeTitleAlign HAlign
+    | LeTitleBaseline VAlign
+    | LeTitleColor String
+    | LeTitleFont String
+    | LeTitleFontSize Num
+    | LeTitleFontWeight Value
+    | LeTitleLimit Num
+    | LeTitlePadding Value
     | LeValues (List Value)
     | LeZIndex Int
 
@@ -2223,8 +2330,8 @@ type MarkInterpolation
     | StepBefore
 
 
-{-| Indicates desired orientation of a mark or link path (e.g. horizontally or vertically
-oriented bars).
+{-| Indicates desired orientation of a mark, legend or link path (e.g. horizontally or vertically
+oriented bars). Note that not all can use `Radial` orientation.
 -}
 type Orientation
     = Horizontal
@@ -4736,6 +4843,49 @@ layout lps =
     ( VLayout, JE.object (List.map layoutProperty lps) )
 
 
+{-| Specify the height in pixels to clip a symbol legend entries and limit its size.
+By default no clipping is performed. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leClipHeight : Num -> LegendProperty
+leClipHeight =
+    LeClipHeight
+
+
+{-| Specify the horizontal padding between entries in a symbol legend. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leColumnPadding : Num -> LegendProperty
+leColumnPadding =
+    LeColumnPadding
+
+
+{-| Specify the number of columns in which to arrange symbol legend entries. A
+value of 0 or lower indicates a single row with one column per entry. The default
+is 0 for horizontal symbol legends and 1 for vertical symbol legends. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leColumns : Num -> LegendProperty
+leColumns =
+    LeColumns
+
+
+{-| Specify the corner radius for an enclosing legend rectangle. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leCornerRadius : Num -> LegendProperty
+leCornerRadius =
+    LeCornerRadius
+
+
+{-| Specify the direction of a legend. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leDirection : Orientation -> LegendProperty
+leDirection =
+    LeDirection
+
+
 {-| Mark encodings for custom legend styling. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
@@ -4744,20 +4894,20 @@ leEncode =
     LeEncode
 
 
-{-| The padding between entries in a symbol legend. For more details see the
-[Vega documentation](https://vega.github.io/vega/docs/legends/)
--}
-leEntryPadding : Value -> LegendProperty
-leEntryPadding =
-    LeEntryPadding
-
-
 {-| The name of the scale that maps to the legend symbols' fill colors. For more
 details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
 leFill : String -> LegendProperty
 leFill =
     LeFill
+
+
+{-| Specify the background colour of an enclosing legend rectangle. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leFillColor : String -> LegendProperty
+leFillColor =
+    LeFillColor
 
 
 {-| The format specifier pattern for legend labels. For numerical values this should
@@ -4790,6 +4940,123 @@ legend lps =
 legends : List Spec -> ( VProperty, Spec )
 legends lgs =
     ( VLegends, JE.list lgs )
+
+
+{-| Specify the color of a legend's color gradient border. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leGradientStrokeColor : String -> LegendProperty
+leGradientStrokeColor =
+    LeGradientStrokeColor
+
+
+{-| Specify the width of a legend's color gradient border. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leGradientStrokeWidth : Num -> LegendProperty
+leGradientStrokeWidth =
+    LeGradientStrokeWidth
+
+
+{-| Specify the thickness in pixels of the color gradient in a legend. This value
+corresponds to the width of a vertical gradient or the height of a horizontal
+gradient. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leGradientThickness : Num -> LegendProperty
+leGradientThickness =
+    LeGradientThickness
+
+
+{-| Specify the length in pixels of the primary axis of a color gradient in a
+legend. This value corresponds to the height of a vertical gradient or the width
+of a horizontal gradient. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leGradientLength : Num -> LegendProperty
+leGradientLength =
+    LeGradientLength
+
+
+{-| Specify the alignment to apply to symbol legends rows and columns. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leGridAlign : GridAlign -> LegendProperty
+leGridAlign =
+    LeGridAlign
+
+
+{-| Specify the horizontal text alignment for a legend label. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelAlign : HAlign -> LegendProperty
+leLabelAlign =
+    LeLabelAlign
+
+
+{-| Specify the vertical text alignment for a legend label. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelBaseline : VAlign -> LegendProperty
+leLabelBaseline =
+    LeLabelBaseline
+
+
+{-| Specify the text color for legend labels. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelColor : String -> LegendProperty
+leLabelColor =
+    LeLabelColor
+
+
+{-| Specify the text font for legend labels. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelFont : String -> LegendProperty
+leLabelFont =
+    LeLabelFont
+
+
+{-| Specify the font size in pixels for legend labels. For more details see
+the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelFontSize : Num -> LegendProperty
+leLabelFontSize =
+    LeLabelFontSize
+
+
+{-| Specify the font weight for legend labels. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelFontWeight : Value -> LegendProperty
+leLabelFontWeight =
+    LeLabelFontWeight
+
+
+{-| Specify the maximum allowed length in pixels of a legend label. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelLimit : Num -> LegendProperty
+leLabelLimit =
+    LeLabelLimit
+
+
+{-| Specify the horizontal pixel offset for a legend's symbols. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelOffset : Num -> LegendProperty
+leLabelOffset =
+    LeLabelOffset
+
+
+{-| Specify the strategy to use for resolving overlap of labels in gradient
+legends. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leLabelOverlap : OverlapStrategy -> LegendProperty
+leLabelOverlap =
+    LeLabelOverlap
 
 
 {-| The offset in pixels by which to displace the legend from the data rectangle
@@ -4826,6 +5093,14 @@ lePadding =
     LePadding
 
 
+{-| The vertical padding between entries in a symbol legend. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leRowPadding : Num -> LegendProperty
+leRowPadding =
+    LeRowPadding
+
+
 {-| The name of the scale that maps to the legend symbols' shapes. For more
 details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
@@ -4850,6 +5125,71 @@ leStroke =
     LeStroke
 
 
+{-| Specify the border colour of an enclosing legend rectangle. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leStrokeColor : String -> LegendProperty
+leStrokeColor =
+    LeStrokeColor
+
+
+{-| Specify the stroke width of the color of a legend's gradient border. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leStrokeWidth : Num -> LegendProperty
+leStrokeWidth =
+    LeStrokeWidth
+
+
+{-| Specify the fill colour for legend symbols. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolFillColor : String -> LegendProperty
+leSymbolFillColor =
+    LeSymbolFillColor
+
+
+{-| Specify the offset in pixels between legend labels their corresponding symbol
+or gradient. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolOffset : Num -> LegendProperty
+leSymbolOffset =
+    LeSymbolOffset
+
+
+{-| Specify the default symbol area size in square pixel units. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolSize : Num -> LegendProperty
+leSymbolSize =
+    LeSymbolSize
+
+
+{-| Specify the border colour for legend symbols. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolStrokeColor : String -> LegendProperty
+leSymbolStrokeColor =
+    LeSymbolStrokeColor
+
+
+{-| Specify the default symbol border width used in a legend. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolStrokeWidth : Num -> LegendProperty
+leSymbolStrokeWidth =
+    LeSymbolStrokeWidth
+
+
+{-| Specify the default symbol shape used in a legend. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolType : Symbol -> LegendProperty
+leSymbolType =
+    LeSymbolType
+
+
 {-| The name of the scale that maps to the legend symbols' stroke dashing. For more
 details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
@@ -4866,7 +5206,7 @@ leTickCount =
     LeTickCount
 
 
-{-| The title for the legend (none by default). For more details see the
+{-| Specify the title for the legend (none by default). For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
 leTitle : String -> LegendProperty
@@ -4874,7 +5214,63 @@ leTitle =
     LeTitle
 
 
-{-| The padding between the legend title and entries. For more details see the
+{-| Specify the horizontal alignment for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleAlign : HAlign -> LegendProperty
+leTitleAlign =
+    LeTitleAlign
+
+
+{-| Specify the vertical alignment for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleBaseline : VAlign -> LegendProperty
+leTitleBaseline =
+    LeTitleBaseline
+
+
+{-| Specify the text colour for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleColor : String -> LegendProperty
+leTitleColor =
+    LeTitleColor
+
+
+{-| Specify the text font for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleFont : String -> LegendProperty
+leTitleFont =
+    LeTitleFont
+
+
+{-| Specify the font size in pixel units for a legend title. For more details
+see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleFontSize : Num -> LegendProperty
+leTitleFontSize =
+    LeTitleFontSize
+
+
+{-| Specify the font weight for a legend title. For more details see the
+[Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleFontWeight : Value -> LegendProperty
+leTitleFontWeight =
+    LeTitleFontWeight
+
+
+{-| Specify the maximum allowed length in pixels of a legend title. For more
+details see the [Vega documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leTitleLimit : Num -> LegendProperty
+leTitleLimit =
+    LeTitleLimit
+
+
+{-| Specify the padding between the legend title and entries. For more details see the
 [Vega documentation](https://vega.github.io/vega/docs/legends/)
 -}
 leTitlePadding : Value -> LegendProperty
@@ -5211,8 +5607,8 @@ maFontStyle =
 
 
 {-| The font weight, such as `normal` or `bold` used by a text mark. This may be
-specified directly, via a field, a signal or any other string-generating value.
-For further details see the
+specified directly, via a field, a signal or any other string- or number-generating
+value. For further details see the
 [Vega documentation](https://vega.github.io/vega/docs/marks/text/).
 -}
 maFontWeight : List Value -> MarkProperty
@@ -6914,7 +7310,7 @@ function `toVega`. For example,
 -}
 toVega : List ( VProperty, Spec ) -> Spec
 toVega spec =
-    ( "$schema", JE.string "https://vega.github.io/schema/vega/v3.0.json" )
+    ( "$schema", JE.string "https://vega.github.io/schema/vega/v4.0.json" )
         :: List.map (\( s, v ) -> ( vPropertyLabel s, v )) spec
         |> JE.object
 
@@ -8266,6 +8662,9 @@ legendProperty lp =
         LeType lt ->
             ( "type", JE.string (legendTypeLabel lt) )
 
+        LeDirection ld ->
+            ( "direction", JE.string (markOrientationLabel ld) )
+
         LeOrient lo ->
             ( "orient", JE.string (legendOrientLabel lo) )
 
@@ -8290,17 +8689,98 @@ legendProperty lp =
         LeEncode les ->
             ( "encode", JE.object (List.map legendEncodingProperty les) )
 
-        LeEntryPadding val ->
-            ( "entryPadding", valueSpec val )
-
         LeFormat f ->
             ( "format", JE.string f )
+
+        LeGridAlign ga ->
+            ( "gridAlign", gridAlignSpec ga )
+
+        LeClipHeight h ->
+            ( "clipHeight", numSpec h )
+
+        LeColumns n ->
+            ( "columns", numSpec n )
+
+        LeColumnPadding x ->
+            ( "columnPadding", numSpec x )
+
+        LeRowPadding x ->
+            ( "rowPadding", numSpec x )
+
+        LeCornerRadius x ->
+            ( "cornerRadius", numSpec x )
+
+        LeFillColor c ->
+            ( "fillColor", JE.string c )
 
         LeOffset val ->
             ( "offset", valueSpec val )
 
         LePadding val ->
             ( "padding", valueSpec val )
+
+        LeStrokeColor c ->
+            ( "strokeColor", JE.string c )
+
+        LeStrokeWidth x ->
+            ( "strokeWidth", numSpec x )
+
+        LeGradientLength x ->
+            ( "gradientLength", numSpec x )
+
+        LeGradientThickness x ->
+            ( "gradientThickness", numSpec x )
+
+        LeGradientStrokeColor c ->
+            ( "gradientStrokeColor", JE.string c )
+
+        LeGradientStrokeWidth x ->
+            ( "gradientStrokeWidth", numSpec x )
+
+        LeLabelAlign ha ->
+            ( "labelAlign", JE.string (hAlignLabel ha) )
+
+        LeLabelBaseline va ->
+            ( "labelBaseline", JE.string (vAlignLabel va) )
+
+        LeLabelColor c ->
+            ( "labelColor", JE.string c )
+
+        LeLabelFont f ->
+            ( "labelFont", JE.string f )
+
+        LeLabelFontSize x ->
+            ( "labelFontSize", numSpec x )
+
+        LeLabelFontWeight val ->
+            ( "labelFontWeight", valueSpec val )
+
+        LeLabelLimit x ->
+            ( "labelLimit", numSpec x )
+
+        LeLabelOffset x ->
+            ( "labelOffset", numSpec x )
+
+        LeLabelOverlap os ->
+            ( "labelOverlap", JE.string (overlapStrategyLabel os) )
+
+        LeSymbolFillColor c ->
+            ( "symbolFillColor", JE.string c )
+
+        LeSymbolOffset x ->
+            ( "symbolOffset", numSpec x )
+
+        LeSymbolSize x ->
+            ( "symbolSize", numSpec x )
+
+        LeSymbolStrokeColor c ->
+            ( "symbolStrokeColor", JE.string c )
+
+        LeSymbolStrokeWidth x ->
+            ( "symbolStokeWidth", numSpec x )
+
+        LeSymbolType s ->
+            ( "symbolType", JE.string (symbolLabel s) )
 
         LeTickCount n ->
             ( "tickCount", JE.int n )
@@ -8310,6 +8790,27 @@ legendProperty lp =
 
         LeTitle t ->
             ( "title", JE.string t )
+
+        LeTitleAlign ha ->
+            ( "titleAlign", JE.string (hAlignLabel ha) )
+
+        LeTitleBaseline va ->
+            ( "titleBaseline", JE.string (vAlignLabel va) )
+
+        LeTitleColor c ->
+            ( "titleColor", JE.string c )
+
+        LeTitleFont f ->
+            ( "titleFont", JE.string f )
+
+        LeTitleFontSize x ->
+            ( "titleFontSize", numSpec x )
+
+        LeTitleFontWeight val ->
+            ( "titleFontWeight", valueSpec val )
+
+        LeTitleLimit x ->
+            ( "titleLimit", numSpec x )
 
         LeValues vals ->
             ( "values", JE.list (List.map valueSpec vals) )

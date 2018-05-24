@@ -9,7 +9,9 @@
   <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: top; line-height: 1.6; margin-left: 1em;}</style>
 
   <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <!-- TODO: When Vega 4 fully released, link to npm package <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  -->
+  <script src="https://vega.github.io/vega/vega.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -135,7 +137,7 @@
   <p>
     A Dorling cartogram is a thematic map that uses sized circles to represent a quantity of interest per geographic region.
     This example visualizes the ratio of obese adults (BMI >= 30) by U.S. state in 2008.
-    A double encoding uses both circle area and fill color to convey the obesity rate. 
+    A double encoding uses both circle area and fill color to convey the obesity rate.
     Vega’s force transform and geoCentroid expression function are used to compute the layout.
   </p>
   <div id="geo2" class="view"></div>
@@ -146,15 +148,17 @@
   </details>
 
   <script>
-    Elm.Gallery.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: false,
-          logLevel: vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+  Elm.Gallery.embed(
+  document.getElementById("elmContainer")
+).ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: false,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
 
 </body>
 

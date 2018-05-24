@@ -10767,7 +10767,7 @@ var _gicentre$elm_vega$Vega$toVega = function (spec) {
 			_0: {
 				ctor: '_Tuple2',
 				_0: '$schema',
-				_1: _elm_lang$core$Json_Encode$string('https://vega.github.io/schema/vega/v3.0.json')
+				_1: _elm_lang$core$Json_Encode$string('https://vega.github.io/schema/vega/v4.0.json')
 			},
 			_1: A2(
 				_elm_lang$core$List$map,
@@ -11412,182 +11412,65 @@ var _gicentre$elm_vega$Vega$legendEncodingProperty = function (le) {
 			};
 	}
 };
-var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
-	var _p76 = lp;
-	switch (_p76.ctor) {
-		case 'LeType':
-			return {
-				ctor: '_Tuple2',
-				_0: 'type',
-				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$legendTypeLabel(_p76._0))
-			};
-		case 'LeOrient':
-			return {
-				ctor: '_Tuple2',
-				_0: 'orient',
-				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$legendOrientLabel(_p76._0))
-			};
-		case 'LeFill':
-			return {
-				ctor: '_Tuple2',
-				_0: 'fill',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeOpacity':
-			return {
-				ctor: '_Tuple2',
-				_0: 'opacity',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeShape':
-			return {
-				ctor: '_Tuple2',
-				_0: 'shape',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeSize':
-			return {
-				ctor: '_Tuple2',
-				_0: 'size',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeStroke':
-			return {
-				ctor: '_Tuple2',
-				_0: 'stroke',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeStrokeDash':
-			return {
-				ctor: '_Tuple2',
-				_0: 'strokeDash',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeEncode':
-			return {
-				ctor: '_Tuple2',
-				_0: 'encode',
-				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendEncodingProperty, _p76._0))
-			};
-		case 'LeEntryPadding':
-			return {
-				ctor: '_Tuple2',
-				_0: 'entryPadding',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p76._0)
-			};
-		case 'LeFormat':
-			return {
-				ctor: '_Tuple2',
-				_0: 'format',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeOffset':
-			return {
-				ctor: '_Tuple2',
-				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p76._0)
-			};
-		case 'LePadding':
-			return {
-				ctor: '_Tuple2',
-				_0: 'padding',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p76._0)
-			};
-		case 'LeTickCount':
-			return {
-				ctor: '_Tuple2',
-				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p76._0)
-			};
-		case 'LeTitlePadding':
-			return {
-				ctor: '_Tuple2',
-				_0: 'titlePadding',
-				_1: _gicentre$elm_vega$Vega$valueSpec(_p76._0)
-			};
-		case 'LeTitle':
-			return {
-				ctor: '_Tuple2',
-				_0: 'title',
-				_1: _elm_lang$core$Json_Encode$string(_p76._0)
-			};
-		case 'LeValues':
-			return {
-				ctor: '_Tuple2',
-				_0: 'values',
-				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueSpec, _p76._0))
-			};
-		default:
-			return {
-				ctor: '_Tuple2',
-				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p76._0)
-			};
-	}
-};
 var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
-	var _p77 = tProp;
-	switch (_p77.ctor) {
+	var _p76 = tProp;
+	switch (_p76.ctor) {
 		case 'TOrient':
 			return {
 				ctor: '_Tuple2',
 				_0: 'orient',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$sideLabel(_p77._0))
+					_gicentre$elm_vega$Vega$sideLabel(_p76._0))
 			};
 		case 'TAnchor':
 			return {
 				ctor: '_Tuple2',
 				_0: 'anchor',
 				_1: _elm_lang$core$Json_Encode$string(
-					_gicentre$elm_vega$Vega$anchorLabel(_p77._0))
+					_gicentre$elm_vega$Vega$anchorLabel(_p76._0))
 			};
 		case 'TEncode':
 			return {
 				ctor: '_Tuple2',
 				_0: 'encode',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$encodingProperty, _p77._0))
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$encodingProperty, _p76._0))
 			};
 		case 'TInteractive':
 			return {
 				ctor: '_Tuple2',
 				_0: 'interactive',
-				_1: _gicentre$elm_vega$Vega$boolSpec(_p77._0)
+				_1: _gicentre$elm_vega$Vega$boolSpec(_p76._0)
 			};
 		case 'TName':
 			return {
 				ctor: '_Tuple2',
 				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(_p77._0)
+				_1: _elm_lang$core$Json_Encode$string(_p76._0)
 			};
 		case 'TStyle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'style',
-				_1: _gicentre$elm_vega$Vega$strSpec(_p77._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p76._0)
 			};
 		case 'TOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p77._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p76._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p77._0)
+				_1: _elm_lang$core$Json_Encode$int(_p76._0)
 			};
 	}
 };
 var _gicentre$elm_vega$Vega$strokeCapLabel = function (cap) {
-	var _p78 = cap;
-	switch (_p78.ctor) {
+	var _p77 = cap;
+	switch (_p77.ctor) {
 		case 'CButt':
 			return 'butt';
 		case 'CRound':
@@ -11612,8 +11495,8 @@ var _gicentre$elm_vega$Vega$on = F2(
 			});
 	});
 var _gicentre$elm_vega$Vega$markOrientationLabel = function (orient) {
-	var _p79 = orient;
-	switch (_p79.ctor) {
+	var _p78 = orient;
+	switch (_p78.ctor) {
 		case 'Horizontal':
 			return 'horizontal';
 		case 'Vertical':
@@ -11623,8 +11506,8 @@ var _gicentre$elm_vega$Vega$markOrientationLabel = function (orient) {
 	}
 };
 var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
-	var _p80 = interp;
-	switch (_p80.ctor) {
+	var _p79 = interp;
+	switch (_p79.ctor) {
 		case 'Basis':
 			return 'basis';
 		case 'Cardinal':
@@ -11646,8 +11529,8 @@ var _gicentre$elm_vega$Vega$markInterpolationLabel = function (interp) {
 	}
 };
 var _gicentre$elm_vega$Vega$linkShapeLabel = function (ls) {
-	var _p81 = ls;
-	switch (_p81.ctor) {
+	var _p80 = ls;
+	switch (_p80.ctor) {
 		case 'LinkLine':
 			return 'line';
 		case 'LinkArc':
@@ -11660,17 +11543,9 @@ var _gicentre$elm_vega$Vega$linkShapeLabel = function (ls) {
 			return 'orthogonal';
 	}
 };
-var _gicentre$elm_vega$Vega$legend = function (lps) {
-	return F2(
-		function (x, y) {
-			return {ctor: '::', _0: x, _1: y};
-		})(
-		_elm_lang$core$Json_Encode$object(
-			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendProperty, lps)));
-};
 var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
-	var _p82 = align;
-	switch (_p82.ctor) {
+	var _p81 = align;
+	switch (_p81.ctor) {
 		case 'AlignLeft':
 			return 'left';
 		case 'AlignCenter':
@@ -11678,6 +11553,348 @@ var _gicentre$elm_vega$Vega$hAlignLabel = function (align) {
 		default:
 			return 'right';
 	}
+};
+var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
+	var _p82 = lp;
+	switch (_p82.ctor) {
+		case 'LeType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$legendTypeLabel(_p82._0))
+			};
+		case 'LeDirection':
+			return {
+				ctor: '_Tuple2',
+				_0: 'direction',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$markOrientationLabel(_p82._0))
+			};
+		case 'LeOrient':
+			return {
+				ctor: '_Tuple2',
+				_0: 'orient',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$legendOrientLabel(_p82._0))
+			};
+		case 'LeFill':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fill',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'opacity',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeShape':
+			return {
+				ctor: '_Tuple2',
+				_0: 'shape',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'size',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeStroke':
+			return {
+				ctor: '_Tuple2',
+				_0: 'stroke',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeStrokeDash':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeDash',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeEncode':
+			return {
+				ctor: '_Tuple2',
+				_0: 'encode',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendEncodingProperty, _p82._0))
+			};
+		case 'LeFormat':
+			return {
+				ctor: '_Tuple2',
+				_0: 'format',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeGridAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gridAlign',
+				_1: _gicentre$elm_vega$Vega$gridAlignSpec(_p82._0)
+			};
+		case 'LeClipHeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'clipHeight',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeColumns':
+			return {
+				ctor: '_Tuple2',
+				_0: 'columns',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeColumnPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'columnPadding',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeRowPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'rowPadding',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeCornerRadius':
+			return {
+				ctor: '_Tuple2',
+				_0: 'cornerRadius',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'offset',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+			};
+		case 'LePadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'padding',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+			};
+		case 'LeStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeWidth',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeGradientLength':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientLength',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeGradientThickness':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientThickness',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeGradientStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientStrokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeGradientStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientStrokeWidth',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeLabelAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$hAlignLabel(_p82._0))
+			};
+		case 'LeLabelBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$vAlignLabel(_p82._0))
+			};
+		case 'LeLabelColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeLabelFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFont',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeLabelFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFontSize',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeLabelFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFontWeight',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+			};
+		case 'LeLabelLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelLimit',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeLabelOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOffset',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeLabelOverlap':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOverlap',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$overlapStrategyLabel(_p82._0))
+			};
+		case 'LeSymbolFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolFillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeSymbolOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolOffset',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeSymbolSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolSize',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeSymbolStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolStrokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeSymbolStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolStokeWidth',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeSymbolType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolType',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$symbolLabel(_p82._0))
+			};
+		case 'LeTickCount':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickCount',
+				_1: _elm_lang$core$Json_Encode$int(_p82._0)
+			};
+		case 'LeTitlePadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titlePadding',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+			};
+		case 'LeTitle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'title',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeTitleAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$hAlignLabel(_p82._0))
+			};
+		case 'LeTitleBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$vAlignLabel(_p82._0))
+			};
+		case 'LeTitleColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleColor',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeTitleFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFont',
+				_1: _elm_lang$core$Json_Encode$string(_p82._0)
+			};
+		case 'LeTitleFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontSize',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeTitleFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontWeight',
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p82._0)
+			};
+		case 'LeTitleLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleLimit',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p82._0)
+			};
+		case 'LeValues':
+			return {
+				ctor: '_Tuple2',
+				_0: 'values',
+				_1: _elm_lang$core$Json_Encode$list(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$valueSpec, _p82._0))
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'zindex',
+				_1: _elm_lang$core$Json_Encode$int(_p82._0)
+			};
+	}
+};
+var _gicentre$elm_vega$Vega$legend = function (lps) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		_elm_lang$core$Json_Encode$object(
+			A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$legendProperty, lps)));
 };
 var _gicentre$elm_vega$Vega$dirLabel = function (dir) {
 	var _p83 = dir;
@@ -12760,18 +12977,130 @@ var _gicentre$elm_vega$Vega$LeValues = function (a) {
 	return {ctor: 'LeValues', _0: a};
 };
 var _gicentre$elm_vega$Vega$leValues = _gicentre$elm_vega$Vega$LeValues;
-var _gicentre$elm_vega$Vega$LeTitle = function (a) {
-	return {ctor: 'LeTitle', _0: a};
-};
-var _gicentre$elm_vega$Vega$leTitle = _gicentre$elm_vega$Vega$LeTitle;
 var _gicentre$elm_vega$Vega$LeTitlePadding = function (a) {
 	return {ctor: 'LeTitlePadding', _0: a};
 };
 var _gicentre$elm_vega$Vega$leTitlePadding = _gicentre$elm_vega$Vega$LeTitlePadding;
+var _gicentre$elm_vega$Vega$LeTitleLimit = function (a) {
+	return {ctor: 'LeTitleLimit', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleLimit = _gicentre$elm_vega$Vega$LeTitleLimit;
+var _gicentre$elm_vega$Vega$LeTitleFontWeight = function (a) {
+	return {ctor: 'LeTitleFontWeight', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleFontWeight = _gicentre$elm_vega$Vega$LeTitleFontWeight;
+var _gicentre$elm_vega$Vega$LeTitleFontSize = function (a) {
+	return {ctor: 'LeTitleFontSize', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleFontSize = _gicentre$elm_vega$Vega$LeTitleFontSize;
+var _gicentre$elm_vega$Vega$LeTitleFont = function (a) {
+	return {ctor: 'LeTitleFont', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleFont = _gicentre$elm_vega$Vega$LeTitleFont;
+var _gicentre$elm_vega$Vega$LeTitleColor = function (a) {
+	return {ctor: 'LeTitleColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleColor = _gicentre$elm_vega$Vega$LeTitleColor;
+var _gicentre$elm_vega$Vega$LeTitleBaseline = function (a) {
+	return {ctor: 'LeTitleBaseline', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleBaseline = _gicentre$elm_vega$Vega$LeTitleBaseline;
+var _gicentre$elm_vega$Vega$LeTitleAlign = function (a) {
+	return {ctor: 'LeTitleAlign', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleAlign = _gicentre$elm_vega$Vega$LeTitleAlign;
+var _gicentre$elm_vega$Vega$LeTitle = function (a) {
+	return {ctor: 'LeTitle', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitle = _gicentre$elm_vega$Vega$LeTitle;
 var _gicentre$elm_vega$Vega$LeTickCount = function (a) {
 	return {ctor: 'LeTickCount', _0: a};
 };
 var _gicentre$elm_vega$Vega$leTickCount = _gicentre$elm_vega$Vega$LeTickCount;
+var _gicentre$elm_vega$Vega$LeSymbolType = function (a) {
+	return {ctor: 'LeSymbolType', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolType = _gicentre$elm_vega$Vega$LeSymbolType;
+var _gicentre$elm_vega$Vega$LeSymbolStrokeWidth = function (a) {
+	return {ctor: 'LeSymbolStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolStrokeWidth = _gicentre$elm_vega$Vega$LeSymbolStrokeWidth;
+var _gicentre$elm_vega$Vega$LeSymbolStrokeColor = function (a) {
+	return {ctor: 'LeSymbolStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolStrokeColor = _gicentre$elm_vega$Vega$LeSymbolStrokeColor;
+var _gicentre$elm_vega$Vega$LeSymbolSize = function (a) {
+	return {ctor: 'LeSymbolSize', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolSize = _gicentre$elm_vega$Vega$LeSymbolSize;
+var _gicentre$elm_vega$Vega$LeSymbolOffset = function (a) {
+	return {ctor: 'LeSymbolOffset', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolOffset = _gicentre$elm_vega$Vega$LeSymbolOffset;
+var _gicentre$elm_vega$Vega$LeSymbolFillColor = function (a) {
+	return {ctor: 'LeSymbolFillColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolFillColor = _gicentre$elm_vega$Vega$LeSymbolFillColor;
+var _gicentre$elm_vega$Vega$LeLabelOverlap = function (a) {
+	return {ctor: 'LeLabelOverlap', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelOverlap = _gicentre$elm_vega$Vega$LeLabelOverlap;
+var _gicentre$elm_vega$Vega$LeLabelOffset = function (a) {
+	return {ctor: 'LeLabelOffset', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelOffset = _gicentre$elm_vega$Vega$LeLabelOffset;
+var _gicentre$elm_vega$Vega$LeLabelLimit = function (a) {
+	return {ctor: 'LeLabelLimit', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelLimit = _gicentre$elm_vega$Vega$LeLabelLimit;
+var _gicentre$elm_vega$Vega$LeLabelFontWeight = function (a) {
+	return {ctor: 'LeLabelFontWeight', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelFontWeight = _gicentre$elm_vega$Vega$LeLabelFontWeight;
+var _gicentre$elm_vega$Vega$LeLabelFontSize = function (a) {
+	return {ctor: 'LeLabelFontSize', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelFontSize = _gicentre$elm_vega$Vega$LeLabelFontSize;
+var _gicentre$elm_vega$Vega$LeLabelFont = function (a) {
+	return {ctor: 'LeLabelFont', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelFont = _gicentre$elm_vega$Vega$LeLabelFont;
+var _gicentre$elm_vega$Vega$LeLabelColor = function (a) {
+	return {ctor: 'LeLabelColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelColor = _gicentre$elm_vega$Vega$LeLabelColor;
+var _gicentre$elm_vega$Vega$LeLabelBaseline = function (a) {
+	return {ctor: 'LeLabelBaseline', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelBaseline = _gicentre$elm_vega$Vega$LeLabelBaseline;
+var _gicentre$elm_vega$Vega$LeLabelAlign = function (a) {
+	return {ctor: 'LeLabelAlign', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelAlign = _gicentre$elm_vega$Vega$LeLabelAlign;
+var _gicentre$elm_vega$Vega$LeGradientStrokeWidth = function (a) {
+	return {ctor: 'LeGradientStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGradientStrokeWidth = _gicentre$elm_vega$Vega$LeGradientStrokeWidth;
+var _gicentre$elm_vega$Vega$LeGradientStrokeColor = function (a) {
+	return {ctor: 'LeGradientStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGradientStrokeColor = _gicentre$elm_vega$Vega$LeGradientStrokeColor;
+var _gicentre$elm_vega$Vega$LeGradientThickness = function (a) {
+	return {ctor: 'LeGradientThickness', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGradientThickness = _gicentre$elm_vega$Vega$LeGradientThickness;
+var _gicentre$elm_vega$Vega$LeGradientLength = function (a) {
+	return {ctor: 'LeGradientLength', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGradientLength = _gicentre$elm_vega$Vega$LeGradientLength;
+var _gicentre$elm_vega$Vega$LeStrokeWidth = function (a) {
+	return {ctor: 'LeStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$Vega$leStrokeWidth = _gicentre$elm_vega$Vega$LeStrokeWidth;
+var _gicentre$elm_vega$Vega$LeStrokeColor = function (a) {
+	return {ctor: 'LeStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leStrokeColor = _gicentre$elm_vega$Vega$LeStrokeColor;
 var _gicentre$elm_vega$Vega$LePadding = function (a) {
 	return {ctor: 'LePadding', _0: a};
 };
@@ -12780,14 +13109,38 @@ var _gicentre$elm_vega$Vega$LeOffset = function (a) {
 	return {ctor: 'LeOffset', _0: a};
 };
 var _gicentre$elm_vega$Vega$leOffset = _gicentre$elm_vega$Vega$LeOffset;
+var _gicentre$elm_vega$Vega$LeFillColor = function (a) {
+	return {ctor: 'LeFillColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leFillColor = _gicentre$elm_vega$Vega$LeFillColor;
+var _gicentre$elm_vega$Vega$LeCornerRadius = function (a) {
+	return {ctor: 'LeCornerRadius', _0: a};
+};
+var _gicentre$elm_vega$Vega$leCornerRadius = _gicentre$elm_vega$Vega$LeCornerRadius;
+var _gicentre$elm_vega$Vega$LeRowPadding = function (a) {
+	return {ctor: 'LeRowPadding', _0: a};
+};
+var _gicentre$elm_vega$Vega$leRowPadding = _gicentre$elm_vega$Vega$LeRowPadding;
+var _gicentre$elm_vega$Vega$LeColumnPadding = function (a) {
+	return {ctor: 'LeColumnPadding', _0: a};
+};
+var _gicentre$elm_vega$Vega$leColumnPadding = _gicentre$elm_vega$Vega$LeColumnPadding;
+var _gicentre$elm_vega$Vega$LeColumns = function (a) {
+	return {ctor: 'LeColumns', _0: a};
+};
+var _gicentre$elm_vega$Vega$leColumns = _gicentre$elm_vega$Vega$LeColumns;
+var _gicentre$elm_vega$Vega$LeClipHeight = function (a) {
+	return {ctor: 'LeClipHeight', _0: a};
+};
+var _gicentre$elm_vega$Vega$leClipHeight = _gicentre$elm_vega$Vega$LeClipHeight;
+var _gicentre$elm_vega$Vega$LeGridAlign = function (a) {
+	return {ctor: 'LeGridAlign', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGridAlign = _gicentre$elm_vega$Vega$LeGridAlign;
 var _gicentre$elm_vega$Vega$LeFormat = function (a) {
 	return {ctor: 'LeFormat', _0: a};
 };
 var _gicentre$elm_vega$Vega$leFormat = _gicentre$elm_vega$Vega$LeFormat;
-var _gicentre$elm_vega$Vega$LeEntryPadding = function (a) {
-	return {ctor: 'LeEntryPadding', _0: a};
-};
-var _gicentre$elm_vega$Vega$leEntryPadding = _gicentre$elm_vega$Vega$LeEntryPadding;
 var _gicentre$elm_vega$Vega$LeEncode = function (a) {
 	return {ctor: 'LeEncode', _0: a};
 };
@@ -12820,6 +13173,10 @@ var _gicentre$elm_vega$Vega$LeOrient = function (a) {
 	return {ctor: 'LeOrient', _0: a};
 };
 var _gicentre$elm_vega$Vega$leOrient = _gicentre$elm_vega$Vega$LeOrient;
+var _gicentre$elm_vega$Vega$LeDirection = function (a) {
+	return {ctor: 'LeDirection', _0: a};
+};
+var _gicentre$elm_vega$Vega$leDirection = _gicentre$elm_vega$Vega$LeDirection;
 var _gicentre$elm_vega$Vega$LeType = function (a) {
 	return {ctor: 'LeType', _0: a};
 };
@@ -16224,17 +16581,26 @@ var _gicentre$elm_vega$Gallery$geo2 = function () {
 					_0: _gicentre$elm_vega$Vega$leTitle('Percentage of Obese Adults'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$leFill('cScale'),
+						_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$BottomRight),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$BottomRight),
+							_0: _gicentre$elm_vega$Vega$leType(_gicentre$elm_vega$Vega$LSymbol),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$leType(_gicentre$elm_vega$Vega$LGradient),
+								_0: _gicentre$elm_vega$Vega$leSize('sizeScale'),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$leFormat('%'),
-									_1: {ctor: '[]'}
+									_0: _gicentre$elm_vega$Vega$leFill('cScale'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$leFormat('.1%'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$leClipHeight(
+												_gicentre$elm_vega$Vega$num(16)),
+											_1: {ctor: '[]'}
+										}
+									}
 								}
 							}
 						}
@@ -16263,18 +16629,23 @@ var _gicentre$elm_vega$Gallery$geo2 = function () {
 							})),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(
-							_gicentre$elm_vega$Vega$raNums(
-								{
-									ctor: '::',
-									_0: 0,
-									_1: {
+						_0: _gicentre$elm_vega$Vega$scZero(
+							_gicentre$elm_vega$Vega$boo(false)),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scRange(
+								_gicentre$elm_vega$Vega$raNums(
+									{
 										ctor: '::',
-										_0: 5000,
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {ctor: '[]'}
+										_0: 1000,
+										_1: {
+											ctor: '::',
+											_0: 5000,
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
 					}
 				},
 				A3(
