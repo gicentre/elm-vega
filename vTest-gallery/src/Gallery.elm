@@ -1806,9 +1806,156 @@ geo4 =
         [ width 450, height 450, padding 10, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
 
 
+geo5 : Spec
+geo5 =
+    let
+        mapWidth =
+            200
+
+        mapHeight =
+            133
+
+        projScale =
+            25
+
+        ds =
+            dataSource
+                [ data "projections"
+                    [ daValue
+                        (vStrs
+                            [ "azimuthalEquidistant"
+                            , "conicConformal"
+                            , "gnomonic"
+                            , "mercator"
+                            , "stereographic"
+                            , "airy"
+                            , "armadillo"
+                            , "baker"
+                            , "berghaus"
+                            , "bottomley"
+                            , "collignon"
+                            , "eckert1"
+                            , "guyou"
+                            , "hammer"
+                            , "littrow"
+                            , "mollweide"
+                            , "wagner6"
+                            , "wiechel"
+                            , "winkel3"
+                            , "interruptedSinusoidal"
+                            , "interruptedMollweide"
+                            , "interruptedMollweideHemispheres"
+                            , "polyhedralButterfly"
+                            , "peirceQuincuncial"
+                            ]
+                        )
+                    ]
+                , data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat (topojsonFeature "countries")
+                    ]
+                , data "graticule" [] |> transform [ trGraticule [] ]
+                , dataFromRows "sphere" [] (dataRow [ ( "type", vStr "Sphere" ) ] [])
+                , dataFromColumns "labelOffsets"
+                    []
+                    (dataColumn "dx" (daNums [ -1, -1, 1, 1 ]) <|
+                        dataColumn "dy" (daNums [ -1, 1, -1, 1 ]) []
+                    )
+                ]
+
+        lo =
+            layout [ loColumns (num 3), loPadding (num 20) ]
+
+        nestedPr =
+            projections
+                << projection "myProjection"
+                    [ prType (prCustom (strSignal "parent.data"))
+                    , prScale (num projScale)
+                    , prTranslate (nums [ mapWidth / 2, mapHeight / 2 ])
+                    ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mFrom [ srData (str "projections") ]
+                    , mEncode
+                        [ enEnter
+                            [ maWidth [ vNum mapWidth ]
+                            , maHeight [ vNum mapHeight ]
+                            , maGroupClip [ vBoo True ]
+                            ]
+                        ]
+                    , mGroup [ nestedPr [], nestedMk [] ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark Shape
+                    [ mFrom [ srData (str "sphere") ]
+                    , mEncode [ enEnter [ maFill [ vStr "aliceblue" ] ] ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "graticule") ]
+                    , mClip (clSphere (str "myProjection"))
+                    , mInteractive (boo False)
+                    , mEncode
+                        [ enEnter
+                            [ maStrokeWidth [ vNum 1 ]
+                            , maStroke [ vStr "#ddd" ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "world") ]
+                    , mClip (clSphere (str "myProjection"))
+                    , mEncode
+                        [ enEnter
+                            [ maStrokeWidth [ vNum 0.25 ]
+                            , maStroke [ vStr "#888" ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "labelOffsets") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "white" ]
+                            , maDx [ vField (fName "dx") ]
+                            , maDy [ vField (fName "dy") ]
+                            , maX [ vNum 5 ]
+                            , maY [ vNum (mapHeight - 5) ]
+                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maFontSize [ vNum 14 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vSignal "parent.data" ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mEncode
+                        [ enEnter
+                            [ maFill [ vStr "black" ]
+                            , maX [ vNum 5 ]
+                            , maY [ vNum (mapHeight - 5) ]
+                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maFontSize [ vNum 14 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vSignal "parent.data" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ autosize [ APad ], ds, lo, mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    geo4
+    geo5
 
 
 
@@ -1838,6 +1985,7 @@ mySpecs =
         , ( "geo2", geo2 )
         , ( "geo3", geo3 )
         , ( "geo4", geo4 )
+        , ( "geo5", geo5 )
         ]
 
 
