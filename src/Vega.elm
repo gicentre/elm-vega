@@ -155,6 +155,7 @@ module Vega
         , daSort
         , daSource
         , daSources
+        , daSphere
         , daStrs
         , daUrl
         , daValue
@@ -736,6 +737,7 @@ Functions for declaring the input data to a visualization.
 @docs daSource
 @docs daSources
 @docs daValue
+@docs daSphere
 @docs daOn
 
 @docs DataValues
@@ -1732,6 +1734,7 @@ type DataProperty
     | DSource String
     | DSources (List String)
     | DValue Value
+    | DSphere
     | DOn (List Trigger)
     | DUrl String
 
@@ -4156,6 +4159,24 @@ daUrl =
 daValue : Value -> DataProperty
 daValue =
     DValue
+
+
+{-| Specify a geo sphere as a data value. Useful for generating boundary for global
+map projections.
+
+    ds =
+        dataSource
+            [ data "mySphere" [ daSphere ]
+            , data "world"
+                [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                , daFormat (topojsonFeature "countries")
+                ]
+            ]
+
+-}
+daSphere : DataProperty
+daSphere =
+    DSphere
 
 
 {-| Provide a text description of the visualization.
@@ -8219,6 +8240,9 @@ dataProperty dProp =
 
         DValue val ->
             ( "values", valueSpec val )
+
+        DSphere ->
+            ( "values", JE.object [ ( "type", JE.string "Sphere" ) ] )
 
 
 dataRefProperty : DataReference -> LabelledSpec
