@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vega Test Gallery: Radial Charts</title>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link href="css/gallery.css" type="text/css"  rel="stylesheet">
+
+
+  <!-- These scripts link to the Vega runtime -->
+  <!-- TODO: When Vega 4 fully released, link to npm package <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  -->
+  <script src="https://vega.github.io/vega/vega.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/galleryRadial.js"></script>
+</head>
+
+<body>
+
+  <h1>Vega Test Gallery</h1>
+
+  <ul>
+      <li><a href="bar.html">bar charts</a></li>
+      <li><a href="lineArea.html">line and area charts</a></li>
+      <li><b>radial charts</b></li>
+      <li><a href="scatter.html">dot and scatterplots</a></li>
+      <li><a href="geo.html">geographic maps</a></li>
+  </ul>
+
+  <h2>Circular Charts</h2>
+  <p>
+    Pie and donut charts encode proportional differences among a set of numeric values as the angular extent and in area of a circular slice.
+  </p>
+  <div id="circularChart1" class="view"></div>
+
+  <p>
+    This radial plot uses both angular and radial extent to convey multiple dimensions of data.
+    However, this approach is not perceptually effective, as viewers will most likely be drawn to the total area of the shape, conflating the two dimensions.
+    This example also demonstrates one way to add labels to circular plots.
+  </p>
+  <div id="circularChart2" class="view"></div>
+
+
+  <h2>Source</h2>
+  <details><summary>click to see code</summary>
+    <div id="elmContainer"></div>
+  </details>
+
+
+
+  <script>
+  Elm.GalleryRadial.embed(
+  document.getElementById("elmContainer")
+).ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: false,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
+
+</body>
+
+</html>
