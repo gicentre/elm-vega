@@ -90,7 +90,7 @@ barChart1 =
                     ]
     in
     toVega
-        [ width 400, height 200, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 400, height 200, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 barChart2 : Spec
@@ -157,7 +157,7 @@ barChart2 =
                     ]
     in
     toVega
-        [ width 400, height 200, padding (pdSize 5), ds, sc [], ax [], mk [] ]
+        [ width 400, height 200, padding 5, ds, sc [], ax [], mk [] ]
 
 
 barChart3 : Spec
@@ -249,7 +249,7 @@ barChart3 =
                     ]
     in
     toVega
-        [ width 300, height 240, padding (pdSize 5), ds, sc [], ax [], mk [] ]
+        [ width 300, height 240, padding 5, ds, sc [], ax [], mk [] ]
 
 
 barChart4 : Spec
@@ -354,7 +354,7 @@ barChart4 =
                     ]
     in
     toVega
-        [ width 300, padding (pdSize 5), autosize [ APad ], ds, si [], sc [], ax [], mk [] ]
+        [ width 300, padding 5, autosize [ APad ], ds, si [], sc [], ax [], mk [] ]
 
 
 type Gender
@@ -467,7 +467,7 @@ barChart5 =
             axes << axis "xScale" SBottom [ axFormat "s" ]
     in
     toVega
-        [ height 400, padding (pdSize 5), ds, si [], topSc [], topMk [] ]
+        [ height 400, padding 5, ds, si [], topSc [], topMk [] ]
 
 
 lineChart1 : Spec
@@ -538,7 +538,7 @@ lineChart1 =
                     ]
     in
     toVega
-        [ width 500, height 200, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 areaChart1 : Spec
@@ -597,7 +597,7 @@ areaChart1 =
                     ]
     in
     toVega
-        [ width 500, height 200, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 areaChart2 : Spec
@@ -663,7 +663,7 @@ areaChart2 =
                     ]
     in
     toVega
-        [ width 500, height 200, padding (pdSize 5), ds, sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, ds, sc [], ax [], mk [] ]
 
 
 areaChart3 : Spec
@@ -755,7 +755,7 @@ areaChart3 =
                     ]
     in
     toVega
-        [ width 500, height 200, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 areaChart4 : Spec
@@ -912,7 +912,7 @@ areaChart4 =
                     ]
     in
     toVega
-        [ width 800, height 500, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 800, height 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 circularChart1 : Spec
@@ -1101,7 +1101,7 @@ scatterplot1 =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), ds, sc [], ax [], lg [], mk [] ]
+        [ width 200, height 200, padding 5, ds, sc [], ax [], lg [], mk [] ]
 
 
 scatterplot2 : Spec
@@ -1222,7 +1222,7 @@ scatterplot2 =
                     ]
     in
     toVega
-        [ width 450, height 450, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 450, height 450, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 scatterplot3 : Spec
@@ -1370,7 +1370,7 @@ scatterplot3 =
                     ]
     in
     toVega
-        [ width 800, height 500, padding (pdSize 5), ds, sc [], ax [], mk [] ]
+        [ width 800, height 500, padding 5, ds, sc [], ax [], mk [] ]
 
 
 scatterplot4 : Spec
@@ -1459,7 +1459,7 @@ scatterplot4 =
                     ]
     in
     toVega
-        [ width 500, height 160, padding (pdSize 5), ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 160, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 geo1 : Spec
@@ -1727,9 +1727,111 @@ geo3 =
         [ width 900, height 500, autosize [ ANone ], enc, ds, si [], pr [], mk [] ]
 
 
+geo4 : Spec
+geo4 =
+    let
+        ds =
+            dataSource
+                [ data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat (topojsonFeature "countries")
+                    ]
+                , data "graticule" []
+                    |> transform [ trGraticule [] ]
+                ]
+
+        -- TODO: Add top-level encoding for background
+        si =
+            signals
+                << signal "pType"
+                    [ siValue (vStr "mercator")
+                    , siBind
+                        (iSelect
+                            [ inOptions
+                                (vStrs
+                                    [ "albers"
+                                    , "albersUsa"
+                                    , "azimuthalEqualArea"
+                                    , "azimuthalEquidistant"
+                                    , "conicConformal"
+                                    , "conicEqualArea"
+                                    , "conicEquidistant"
+                                    , "equirectangular"
+                                    , "gnomonic"
+                                    , "mercator"
+                                    , "orthographic"
+                                    , "stereographic"
+                                    , "transverseMercator"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
+                << signal "pRotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "pRotate1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
+                << signal "pRotate2" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "pCentre0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "pCentre1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
+                << signal "pTranslate0" [ siUpdate "width /2" ]
+                << signal "pTranslate1" [ siUpdate "height /2" ]
+                << signal "graticuleDash" [ siValue (vNum 0), siBind (iRadio [ inOptions (vNums [ 0, 3, 5, 10 ]) ]) ]
+                << signal "borderWidth" [ siValue (vNum 1), siBind (iText []) ]
+                << signal "background" [ siValue (vStr "#ffffff"), siBind (iColor []) ]
+                << signal "invert" [ siValue (vBoo False), siBind (iCheckbox []) ]
+
+        pr =
+            projections
+                << projection "myProjection"
+                    [ prType (prCustom (strSignal "pType"))
+                    , prScale (numSignal "pScale")
+                    , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
+                    , prCenter (numSignals [ "pCentre0", "pCentre1" ])
+                    , prTranslate (numSignals [ "pTranslate0", "pTranslate1" ])
+                    ]
+
+        mk =
+            marks
+                << mark Shape
+                    [ mFrom [ srData (str "graticule") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStrokeWidth [ vNum 1 ]
+                            , maStrokeDash [ vSignal "[+graticuleDash, +graticuleDash]" ]
+                            , maStroke [ vSignal "invert ? '#444' : '#ddd'" ]
+                            , maFill []
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "world") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStrokeWidth [ vSignal "+borderWidth" ]
+                            , maStroke [ vSignal "invert ? '#777' : '#bbb'" ]
+                            , maFill [ vSignal "invert ? '#fff' : '#000'" ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        , enHover
+                            [ maStrokeWidth [ vSignal "+borderWidth + 1" ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+
+        enc =
+            encode [ enUpdate [ maFill [ vSignal "background" ] ] ]
+    in
+    toVega
+        [ width 450, height 450, padding 10, autosize [ ANone ], enc, ds, si [], pr [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    geo2
+    geo4
 
 
 
@@ -1758,6 +1860,7 @@ mySpecs =
         , ( "geo1", geo1 )
         , ( "geo2", geo2 )
         , ( "geo3", geo3 )
+        , ( "geo4", geo4 )
         ]
 
 

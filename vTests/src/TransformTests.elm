@@ -61,7 +61,7 @@ packTest1 =
                     ]
     in
     toVega
-        [ width 300, height 200, padding (pdSize 5), ds, si [], sc [], mk [] ]
+        [ width 300, height 200, padding 5, ds, si [], sc [], mk [] ]
 
 
 stackTest1 : Spec

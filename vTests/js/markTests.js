@@ -13612,11 +13612,9 @@ var _user$project$Vega$PEdges = F4(
 	function (a, b, c, d) {
 		return {ctor: 'PEdges', _0: a, _1: b, _2: c, _3: d};
 	});
-var _user$project$Vega$pdEdges = _user$project$Vega$PEdges;
 var _user$project$Vega$PSize = function (a) {
 	return {ctor: 'PSize', _0: a};
 };
-var _user$project$Vega$pdSize = _user$project$Vega$PSize;
 var _user$project$Vega$Proj = function (a) {
 	return {ctor: 'Proj', _0: a};
 };
@@ -16293,13 +16291,23 @@ var _user$project$Vega$autosize = function (aus) {
 	};
 };
 var _user$project$Vega$VPadding = {ctor: 'VPadding'};
-var _user$project$Vega$padding = function (pad) {
+var _user$project$Vega$padding = function (p) {
 	return {
 		ctor: '_Tuple2',
 		_0: _user$project$Vega$VPadding,
-		_1: _user$project$Vega$paddingSpec(pad)
+		_1: _user$project$Vega$paddingSpec(
+			_user$project$Vega$PSize(p))
 	};
 };
+var _user$project$Vega$paddings = F4(
+	function (l, t, r, b) {
+		return {
+			ctor: '_Tuple2',
+			_0: _user$project$Vega$VPadding,
+			_1: _user$project$Vega$paddingSpec(
+				A4(_user$project$Vega$PEdges, l, t, r, b))
+		};
+	});
 var _user$project$Vega$VHeight = {ctor: 'VHeight'};
 var _user$project$Vega$height = function (w) {
 	return {
@@ -16692,8 +16700,7 @@ var _user$project$MarkTests$trailTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: ds,
@@ -17280,8 +17287,7 @@ var _user$project$MarkTests$textTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -17640,8 +17646,7 @@ var _user$project$MarkTests$symbolTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -17998,8 +18003,7 @@ var _user$project$MarkTests$rectTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -18915,8 +18919,7 @@ var _user$project$MarkTests$pathTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -19253,8 +19256,7 @@ var _user$project$MarkTests$imageTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -19822,8 +19824,7 @@ var _user$project$MarkTests$groupTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -20358,8 +20359,7 @@ var _user$project$MarkTests$areaTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: ds,
@@ -20849,8 +20849,7 @@ var _user$project$MarkTests$arcTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(
@@ -21413,8 +21412,7 @@ var _user$project$MarkTests$lineTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: ds,
@@ -21798,8 +21796,7 @@ var _user$project$MarkTests$ruleTest = function () {
 				_0: _user$project$Vega$height(200),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Vega$padding(
-						_user$project$Vega$pdSize(5)),
+					_0: _user$project$Vega$padding(5),
 					_1: {
 						ctor: '::',
 						_0: si(

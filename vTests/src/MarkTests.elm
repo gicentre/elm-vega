@@ -67,7 +67,7 @@ arcTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 areaTest : Spec
@@ -132,7 +132,7 @@ areaTest =
                     ]
     in
     toVega
-        [ width 400, height 200, padding (pdSize 5), ds, sc [], si [], mk [] ]
+        [ width 400, height 200, padding 5, ds, sc [], si [], mk [] ]
 
 
 groupTest : Spec
@@ -199,7 +199,7 @@ groupTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 imageTest : Spec
@@ -235,7 +235,7 @@ imageTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 lineTest : Spec
@@ -299,7 +299,7 @@ lineTest =
                     ]
     in
     toVega
-        [ width 400, height 200, padding (pdSize 5), ds, sc [], si [], mk [] ]
+        [ width 400, height 200, padding 5, ds, sc [], si [], mk [] ]
 
 
 pathTest : Spec
@@ -332,7 +332,7 @@ pathTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 shapeTest : Spec
@@ -459,7 +459,7 @@ rectTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 ruleTest : Spec
@@ -495,7 +495,7 @@ ruleTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 symbolTest : Spec
@@ -550,7 +550,7 @@ symbolTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 textTest : Spec
@@ -601,7 +601,7 @@ textTest =
                     ]
     in
     toVega
-        [ width 200, height 200, padding (pdSize 5), si [], mk [] ]
+        [ width 200, height 200, padding 5, si [], mk [] ]
 
 
 trailTest : Spec
@@ -659,7 +659,7 @@ trailTest =
                     ]
     in
     toVega
-        [ width 400, height 200, padding (pdSize 5), ds, sc [], si [], mk [] ]
+        [ width 400, height 200, padding 5, ds, sc [], si [], mk [] ]
 
 
 sourceExample : Spec
