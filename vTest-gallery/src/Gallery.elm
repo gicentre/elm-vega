@@ -1638,7 +1638,6 @@ geo3 =
                     |> transform [ trGraticule [] ]
                 ]
 
-        -- TODO: Add top-level encoding for background
         si =
             signals
                 << signal "pType"
@@ -1732,74 +1731,49 @@ geo4 =
     let
         ds =
             dataSource
-                [ data "world"
+                [ data "sphere" [ daSphere ]
+                , data "world"
                     [ daUrl "https://vega.github.io/vega/data/world-110m.json"
                     , daFormat (topojsonFeature "countries")
                     ]
-                , data "graticule" []
-                    |> transform [ trGraticule [] ]
+                , data "earthquakes"
+                    [ daUrl "https://vega.github.io/vega/data/earthquakes.json"
+                    , daFormat (jsonProperty "features")
+                    ]
                 ]
 
-        -- TODO: Add top-level encoding for background
         si =
             signals
-                << signal "pType"
-                    [ siValue (vStr "mercator")
-                    , siBind
-                        (iSelect
-                            [ inOptions
-                                (vStrs
-                                    [ "albers"
-                                    , "albersUsa"
-                                    , "azimuthalEqualArea"
-                                    , "azimuthalEquidistant"
-                                    , "conicConformal"
-                                    , "conicEqualArea"
-                                    , "conicEquidistant"
-                                    , "equirectangular"
-                                    , "gnomonic"
-                                    , "mercator"
-                                    , "orthographic"
-                                    , "stereographic"
-                                    , "transverseMercator"
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
-                << signal "pRotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
-                << signal "pRotate1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
-                << signal "pRotate2" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
-                << signal "pCentre0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
-                << signal "pCentre1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
-                << signal "pTranslate0" [ siUpdate "width /2" ]
-                << signal "pTranslate1" [ siUpdate "height /2" ]
-                << signal "graticuleDash" [ siValue (vNum 0), siBind (iRadio [ inOptions (vNums [ 0, 3, 5, 10 ]) ]) ]
-                << signal "borderWidth" [ siValue (vNum 1), siBind (iText []) ]
-                << signal "background" [ siValue (vStr "#ffffff"), siBind (iColor []) ]
-                << signal "invert" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "quakeSize" [ siValue (vNum 6), siBind (iRange [ inMin 0, inMax 12 ]) ]
+                << signal "pRotate0" [ siValue (vNum 90), siBind (iRange [ inMin -180, inMax 180 ]) ]
+                << signal "pRotate1" [ siValue (vNum -5), siBind (iRange [ inMin -180, inMax 180 ]) ]
 
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (strSignal "pType"))
-                    , prScale (numSignal "pScale")
-                    , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
-                    , prCenter (numSignals [ "pCentre0", "pCentre1" ])
-                    , prTranslate (numSignals [ "pTranslate0", "pTranslate1" ])
+                    [ prType Orthographic
+                    , prScale (num 225)
+                    , prRotate (numSignals [ "pRotate0", "pRotate1", "0" ])
+                    , prTranslate (numSignals [ "width/2", "height/2" ])
+                    ]
+
+        sc =
+            scales
+                << scale "scSize"
+                    [ scType ScSqrt
+                    , scRange (raValues [ vNum 0, vSignal "quakeSize" ])
+                    , scDomain (doNums (nums [ 0, 100 ]))
                     ]
 
         mk =
             marks
                 << mark Shape
-                    [ mFrom [ srData (str "graticule") ]
+                    [ mFrom [ srData (str "sphere") ]
                     , mEncode
                         [ enUpdate
-                            [ maStrokeWidth [ vNum 1 ]
-                            , maStrokeDash [ vSignal "[+graticuleDash, +graticuleDash]" ]
-                            , maStroke [ vSignal "invert ? '#444' : '#ddd'" ]
-                            , maFill []
+                            [ maFill [ vStr "aliceblue" ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 1.5 ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -1808,25 +1782,28 @@ geo4 =
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
-                            [ maStrokeWidth [ vSignal "+borderWidth" ]
-                            , maStroke [ vSignal "invert ? '#777' : '#bbb'" ]
-                            , maFill [ vSignal "invert ? '#fff' : '#000'" ]
-                            , maZIndex [ vNum 1 ]
-                            ]
-                        , enHover
-                            [ maStrokeWidth [ vSignal "+borderWidth + 1" ]
-                            , maStroke [ vStr "firebrick" ]
-                            , maZIndex [ vNum 1 ]
+                            [ maFill [ vStr "mintcream" ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 0.35 ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-
-        enc =
-            encode [ enUpdate [ maFill [ vSignal "background" ] ] ]
+                << mark Shape
+                    [ mFrom [ srData (str "earthquakes") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vStr "red" ]
+                            , maOpacity [ vNum 0.25 ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trGeoShape "myProjection" [ gpPointRadius (numExpr (expr "scale('scSize', exp(datum.properties.mag))")) ]
+                        ]
+                    ]
     in
     toVega
-        [ width 450, height 450, padding 10, autosize [ ANone ], enc, ds, si [], pr [], mk [] ]
+        [ width 450, height 450, padding 10, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
 
 
 sourceExample : Spec
