@@ -35,7 +35,7 @@ module Vega
         , FormulaUpdate(AlwaysUpdate, InitOnly)
         , GeoPathProperty
         , GraticuleProperty
-        , GridAlign(AlignAll, AlignColumn, AlignEach, AlignNone, AlignRow)
+        , GridAlign(AlignAll, AlignEach, AlignNone)
         , HAlign(AlignCenter, AlignLeft, AlignRight)
         , InputProperty
         , LayoutProperty
@@ -55,7 +55,7 @@ module Vega
         , Orientation(Horizontal, Radial, Vertical)
         , OverlapStrategy(OGreedy, ONone, OParity)
         , PackProperty
-        , Padding(PEdges, PSize)
+        , Padding
         , PieProperty
         , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
         , ProjectionProperty
@@ -182,6 +182,7 @@ module Vega
         , enSymbols
         , enTitle
         , enUpdate
+        , encode
         , evEncode
         , evForce
         , evUpdate
@@ -223,6 +224,8 @@ module Vega
         , gpAs
         , gpField
         , gpPointRadius
+        , grAlignColumn
+        , grAlignRow
         , hAlignLabel
         , hcl
         , hclLong
@@ -440,6 +443,8 @@ module Vega
         , paSort
         , padding
         , parse
+        , pdEdges
+        , pdSize
         , piAs
         , piEndAngle
         , piField
@@ -1321,6 +1326,8 @@ TODO: add function (wordcloud)
 @docs layout
 @docs LayoutProperty
 @docs GridAlign
+@docs grAlignRow
+@docs grAlignColumn
 @docs BoundsCalculation
 @docs loAlign
 @docs loBounds
@@ -1470,10 +1477,13 @@ to the data and transform options described above.
 @docs autosize
 @docs height
 @docs padding
+@docs pdSize
+@docs pdEdges
 @docs width
 @docs Autosize
 @docs Padding
 @docs background
+@docs encode
 
 -}
 
@@ -1987,8 +1997,8 @@ indicates a flow layout will be used, in which adjacent plots are simply placed
 one after the other. `AlignEach` indicates elements will be aligned into a clean
 grid structure, but each row or column may be of variable size. `AlignAll` indicates
 elements will be aligned and each row or column will be sized identically based
-on the maximum observed size. To used different row and column layouts, use `AlignRow`
-and `AlignColumn`. For details, see the
+on the maximum observed size. To used different row and column layouts, use `grAlignRow`
+and `grAlignColumn`. For details, see the
 [Vega documentation](https://vega.github.io/vega/docs/layout/).
 -}
 type GridAlign
@@ -1997,6 +2007,24 @@ type GridAlign
     | AlignNone
     | AlignRow GridAlign
     | AlignColumn GridAlign
+
+
+{-| Specify a type of layout alignment to apply to grid rows. This can be used in
+cases when alignment rules are different for rows and columns. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/).
+-}
+grAlignRow : GridAlign -> GridAlign
+grAlignRow =
+    AlignRow
+
+
+{-| Specify a type of layout alignment to apply to grid columns. This can be used in
+cases when alignment rules are different for rows and columns. For details, see the
+[Vega documentation](https://vega.github.io/vega/docs/layout/).
+-}
+grAlignColumn : GridAlign -> GridAlign
+grAlignColumn =
+    AlignColumn
 
 
 {-| Indicates the horizontal alignment of some text such as on an axis or legend.
@@ -2502,9 +2530,7 @@ type Order
     | OrderSignal String
 
 
-{-| Represents padding dimensions in pixel units. `PSize` will set the same value
-on all four edges of a rectangular container while `PEdges` can be used to specify
-different sizes on each edge in order _left_, _top_, _right_, _bottom_.
+{-| Represents padding dimensions of a rectangular area in pixel units.
 -}
 type Padding
     = PSize Float
@@ -2558,8 +2584,36 @@ type ProjectionProperty
     | PrTilt Num
 
 
+{-| Specify the padding in pixel units of a rectangular container in _left_, _top_,
+_right_, _bottom_ order.
+-}
+pdEdges : Float -> Float -> Float -> Float -> Padding
+pdEdges =
+    PEdges
+
+
+{-| Specify the padding in pixel units for all four edges of a rectangular container.
+-}
+pdSize : Float -> Padding
+pdSize =
+    PSize
+
+
 {-| Specify the type of global map projection to use in a projection transformation.
+
+    pr =
+        projections
+            << projection "myProj" [ prType Orthographic ]
+
+If the projection type is to be generated from a signal, use the `prCustom` type
+and specify the label of the signal to use.
+
+    pr =
+        projections
+            << projection "myProj" [ prType (prCustom (strSignal "mySignal")) ]
+
 For details see the [Vega documentation](https://vega.github.io/vega/docs/projections/#types)
+
 -}
 prType : Projection -> ProjectionProperty
 prType =
@@ -2567,8 +2621,18 @@ prType =
 
 
 {-| Specify a projection’s center, a two-element array of longitude and latitude
-in degrees. The default value is [0, 0]. For details see the
+in degrees. The default value is [0, 0].
+
+    pr =
+        projections
+            << projection "myProjection"
+                [ prType Mercator
+                , prCenter (nums [ 40, -20 ])
+                ]
+
+For details see the
 [Vega documentation](https://vega.github.io/vega/docs/projections/#properties)
+
 -}
 prCenter : Num -> ProjectionProperty
 prCenter =
@@ -3230,6 +3294,10 @@ Generated by the function [`layout`](#layout).
 such as points, lines, rectangles and other symbols. Top-level marks are generated
 by the function [`marks`](#marks).
 
+**Top-level group encodings** can be used to specify the appearance of the chart's
+data rectangle. For example setting the background color if the plotting area.
+Generated by the function [`encode`](#encode).
+
 **Config properties** specify ... TODO: Add config.
 
 **Supplementary properties** provide a means to add metadata and some styling to
@@ -3242,8 +3310,15 @@ For further details on these top-level properties, see the
 
 -}
 type VProperty
-    = VData
+    = VDescription
+    | VBackground
+    | VWidth
+    | VHeight
+    | VPadding
+    | VAutosize
+    | VConfig
     | VSignals
+    | VData
     | VScales
     | VProjections
     | VAxes
@@ -3251,13 +3326,7 @@ type VProperty
     | VTitle
     | VLayout
     | VMarks
-    | VConfig
-    | VWidth
-    | VHeight
-    | VAutosize
-    | VPadding
-    | VBackground
-    | VDescription
+    | VEncode
 
 
 {-| The output field names generated when performing an aggregation transformation.
@@ -4189,6 +4258,15 @@ visualization is resized. For further details see the
 enEnter : List MarkProperty -> EncodingProperty
 enEnter =
     Enter
+
+
+{-| Specify the encoding directives for the visual properties of the top-level
+group mark representing a chart’s data rectangle. For example, this can be used
+to set a background fill color for the plotting area, rather than the entire view.
+-}
+encode : List EncodingProperty -> ( VProperty, Spec )
+encode eps =
+    ( VEncode, JE.object (List.map encodingProperty eps) )
 
 
 {-| The properties to be encoded when the data backing a mark item is removed.
@@ -6567,7 +6645,10 @@ projection name pps =
 
 {-| Create the projections used to map geographic data onto a plane.
 
-    TODO: XXX
+    pr =
+        projections
+            << projection "myProj" [ prType Orthographic ]
+            << projection "myProj2" [ prType Albers, prRotate (nums [ -20, 15 ]) ]
 
 -}
 projections : List Spec -> ( VProperty, Spec )
@@ -10292,6 +10373,9 @@ vPropertyLabel spec =
 
         VMarks ->
             "marks"
+
+        VEncode ->
+            "encode"
 
         --TODO: Why isn't layout listed as a top-level specification property at
         -- https://vega.github.io/vega/docs/specification/
