@@ -503,9 +503,88 @@ geo5 =
         [ autosize [ APad ], ds, lo, mk [] ]
 
 
+geo6 : Spec
+geo6 =
+    let
+        ds =
+            dataSource
+                [ data "sphere" [ daSphere ]
+                , data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat (topojsonFeature "countries")
+                    ]
+                , data "graticule" []
+                    |> transform [ trGraticule [] ]
+                ]
+
+        si =
+            signals
+                << signal "tx" [ siUpdate "width / 2" ]
+                << signal "ty" [ siUpdate "height / 2" ]
+                << signal "scale"
+                    [ siValue (vNum 150)
+                    , siOn
+                        [ evHandler (esObject [ esType Wheel ])
+                            [ evUpdate "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)" ]
+                        ]
+                    ]
+                << signal "quakeSize" [ siValue (vNum 6), siBind (iRange [ inMin 0, inMax 12 ]) ]
+                << signal "pRotate0" [ siValue (vNum 90), siBind (iRange [ inMin -180, inMax 180 ]) ]
+                << signal "pRotate1" [ siValue (vNum -5), siBind (iRange [ inMin -180, inMax 180 ]) ]
+
+        pr =
+            projections
+                << projection "myProjection"
+                    [ prType Orthographic
+                    , prScale (num 225)
+                    , prRotate (numSignals [ "pRotate0", "pRotate1", "0" ])
+                    , prTranslate (numSignals [ "width/2", "height/2" ])
+                    ]
+
+        mk =
+            marks
+                << mark Shape
+                    [ mFrom [ srData (str "sphere") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vStr "aliceblue" ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 1.5 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "world") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vStr "mintcream" ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 0.35 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark Shape
+                    [ mFrom [ srData (str "earthquakes") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vStr "red" ]
+                            , maOpacity [ vNum 0.25 ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trGeoShape "myProjection" [ gpPointRadius (numExpr (expr "scale('scSize', exp(datum.properties.mag))")) ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    geo1
+    geo6
 
 
 
@@ -520,6 +599,7 @@ mySpecs =
         , ( "geo3", geo3 )
         , ( "geo4", geo4 )
         , ( "geo5", geo5 )
+        , ( "geo6", geo6 )
         ]
 
 

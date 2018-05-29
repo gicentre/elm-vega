@@ -28,8 +28,8 @@ barChart1 =
                 << signal "tooltip"
                     [ siValue (vObject [])
                     , siOn
-                        [ eventHandler (str "rect:mouseover") [ evUpdate "datum" ]
-                        , eventHandler (str "rect:mouseout") [ evUpdate "" ]
+                        [ evHandler (esObject [ esMark Rect, esType MouseOver ]) [ evUpdate "datum" ]
+                        , evHandler (esObject [ esMark Rect, esType MouseOut ]) [ evUpdate "" ]
                         ]
                     ]
 

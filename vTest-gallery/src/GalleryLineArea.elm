@@ -230,7 +230,10 @@ areaChart3 =
             signals
                 << signal "layers"
                     [ siValue (vNum 2)
-                    , siOn [ eventHandler (str "mousedown!") [ evUpdate "1 + (layers % 4)" ] ]
+                    , siOn
+                        [ evHandler (esObject [ esType MouseDown, esConsume True ])
+                            [ evUpdate "1 + (layers % 4)" ]
+                        ]
                     , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
                     ]
                 << signal "height" [ siUpdate "floor(200 / layers)" ]
@@ -337,8 +340,8 @@ areaChart4 =
                 << signal "query"
                     [ siValue (vStr "")
                     , siOn
-                        [ eventHandler (str "area:click!") [ evUpdate "datum.job" ]
-                        , eventHandler (str "dblclick!") [ evUpdate "''" ]
+                        [ evHandler (esObject [ esMark Area, esType Click, esConsume True ]) [ evUpdate "datum.job" ]
+                        , evHandler (esObject [ esType DblClick, esConsume True ]) [ evUpdate "''" ]
                         ]
                     , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
@@ -459,7 +462,7 @@ areaChart4 =
 
 sourceExample : Spec
 sourceExample =
-    lineChart1
+    areaChart4
 
 
 

@@ -105,11 +105,30 @@ stackTest1 =
                     ]
                 << signal "add"
                     [ siValue (vObject [])
-                    , siOn [ eventHandler (str "mousedown![!event.shiftKey]") [ evUpdate "{key: invert('xScale', x()), value: ~~(1 + 9 * random())}" ] ]
+                    , siOn
+                        [ evHandler
+                            (esObject
+                                [ esType MouseDown
+                                , esConsume True
+                                , esFilter [ "!event.shiftKey" ]
+                                ]
+                            )
+                            [ evUpdate "{key: invert('xScale', x()), value: ~~(1 + 9 * random())}" ]
+                        ]
                     ]
                 << signal "rem"
                     [ siValue (vObject [])
-                    , siOn [ eventHandler (str "rect:mousedown![event.shiftKey]") [ evUpdate "datum" ] ]
+                    , siOn
+                        [ evHandler
+                            (esObject
+                                [ esMark Rect
+                                , esType MouseDown
+                                , esConsume True
+                                , esFilter [ "event.shiftKey" ]
+                                ]
+                            )
+                            [ evUpdate "datum" ]
+                        ]
                     ]
 
         sc =
@@ -196,20 +215,34 @@ forceTest1 =
                     [ siDescription "State variable for active node fix status."
                     , siValue (vNum 0)
                     , siOn
-                        [ eventHandler (str "symbol:mouseout[!event.buttons], window:mouseup") [ evUpdate "0" ]
-                        , eventHandler (str "symbol:mouseover") [ evUpdate "fix || 1" ]
-                        , eventHandler (str "[symbol:mousedown, window:mouseup] > window:mousemove!") [ evUpdate "2", evForce True ]
+                        [ evHandler
+                            (esMerge
+                                [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
+                                , esObject [ esSource ESWindow, esType MouseUp ]
+                                ]
+                            )
+                            [ evUpdate "0" ]
+                        , evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix || 1" ]
+                        , evHandler
+                            (esObject
+                                [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esSource ESWindow
+                                , esType MouseMove
+                                , esConsume True
+                                ]
+                            )
+                            [ evUpdate "2", evForce True ]
                         ]
                     ]
                 << signal "node"
                     [ siDescription "Graph node most recently interacted with."
                     , siValue vNull
-                    , siOn [ eventHandler (str "symbol:mouseover") [ evUpdate "fix === 1 ? item() : node" ] ]
+                    , siOn [ evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix === 1 ? item() : node" ] ]
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
                     , siValue (vBoo False)
-                    , siOn [ eventHandler (strSignal "fix") [ evUpdate "fix > 1 " ] ]
+                    , siOn [ evHandler (esSelector (strSignal "fix")) [ evUpdate "fix > 1 " ] ]
                     ]
 
         sc =
@@ -275,7 +308,7 @@ forceTest1 =
 
 sourceExample : Spec
 sourceExample =
-    stackTest1
+    forceTest1
 
 
 
