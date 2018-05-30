@@ -312,7 +312,7 @@ areaChart4 =
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack
                         [ stGroupBy [ str "year" ]
-                        , stSort [ coField [ str "job", str "sex" ], coOrder [ orDescending, orDescending ] ]
+                        , stSort [ coField [ str "job", str "sex" ], coOrder [ Descend, Descend ] ]
                         , stField (str "perc")
                         ]
                     ]
@@ -323,7 +323,7 @@ areaChart4 =
                     [ trAggregate
                         [ agGroupBy [ str "job", str "sex" ]
                         , agFields [ str "perc", str "perc" ]
-                        , agOps [ sum, argMax ]
+                        , agOps [ Sum, ArgMax ]
                         , agAs [ "sum", "argmax" ]
                         ]
                     ]

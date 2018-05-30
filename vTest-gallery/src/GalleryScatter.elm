@@ -369,7 +369,7 @@ scatterplot4 =
                         [ trAggregate
                             [ agGroupBy [ str "variety" ]
                             , agFields (List.repeat 7 (str "yield"))
-                            , agOps [ mean, stdev, stderr, ci0, ci1, q1, q3 ]
+                            , agOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
                         , trFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
@@ -410,7 +410,7 @@ scatterplot4 =
                 << scale "yScale"
                     [ scType ScBand
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "summary", daField (str "variety"), daSort [ soOp maximum, soByField (str "mean"), Descending ] ])
+                    , scDomain (doData [ daDataset "summary", daField (str "variety"), daSort [ soOp Max, soByField (str "mean"), Descending ] ])
                     ]
 
         ax =

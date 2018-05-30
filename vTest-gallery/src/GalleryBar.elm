@@ -259,7 +259,7 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ trAggregate [ agGroupBy [ str "a", str "b" ], agFields [ str "c" ], agOps [ average ], agAs [ "c" ] ] ]
+                    [ trAggregate [ agGroupBy [ str "a", str "b" ], agFields [ str "c" ], agOps [ Average ], agAs [ "c" ] ] ]
 
         trTable =
             data "trellis" [ daSource "tuples" ]
