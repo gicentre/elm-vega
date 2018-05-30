@@ -44,7 +44,7 @@ barChart1 =
                     ]
                 << scale "yScale"
                     [ scDomain (doData [ daDataset "table", daField (str "amount") ])
-                    , scNice niTrue
+                    , scNice NTrue
                     , scRange (raDefault RHeight)
                     ]
 
@@ -119,7 +119,7 @@ barChart2 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (str "y1") ])
                     ]
@@ -181,7 +181,7 @@ barChart3 =
                     , scRange (raDefault RWidth)
                     , scRound (boo True)
                     , scZero (boo True)
-                    , scNice niTrue
+                    , scNice NTrue
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
@@ -284,7 +284,7 @@ barChart4 =
             scales
                 << scale "xScale"
                     [ scDomain (doData [ daDataset "tuples", daField (str "c") ])
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scRound (boo True)
                     , scRange (raDefault RWidth)
@@ -429,7 +429,7 @@ barChart5 =
                 << scale "xScale"
                     [ scType ScLinear
                     , range
-                    , scNice niTrue
+                    , scNice NTrue
                     , scDomain (doData [ daDataset "population", daField (str "people") ])
                     ]
 

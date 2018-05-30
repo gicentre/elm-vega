@@ -15020,11 +15020,170 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 				_1: _user$project$Vega$numSpec(_p113._0)
 			};
 		case 'PrFit':
-			return {ctor: '_Tuple2', _0: 'fit', _1: _elm_lang$core$Json_Encode$null};
+			return {ctor: '_Tuple2', _0: 'fit', _1: _p113._0};
 		case 'PrExtent':
-			return {ctor: '_Tuple2', _0: 'extent', _1: _elm_lang$core$Json_Encode$null};
+			var _p123 = _p113._0;
+			var _p122 = _p123;
+			_v103_3:
+			do {
+				switch (_p122.ctor) {
+					case 'Nums':
+						if (((((_p122._0.ctor === '::') && (_p122._0._1.ctor === '::')) && (_p122._0._1._1.ctor === '::')) && (_p122._0._1._1._1.ctor === '::')) && (_p122._0._1._1._1._1.ctor === '[]')) {
+							return {
+								ctor: '_Tuple2',
+								_0: 'extent',
+								_1: _elm_lang$core$Json_Encode$list(
+									{
+										ctor: '::',
+										_0: _elm_lang$core$Json_Encode$list(
+											{
+												ctor: '::',
+												_0: _elm_lang$core$Json_Encode$float(_p122._0._0),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$core$Json_Encode$float(_p122._0._1._0),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Json_Encode$list(
+												{
+													ctor: '::',
+													_0: _elm_lang$core$Json_Encode$float(_p122._0._1._1._0),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$core$Json_Encode$float(_p122._0._1._1._1._0),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+						} else {
+							break _v103_3;
+						}
+					case 'NumSignal':
+						return {
+							ctor: '_Tuple2',
+							_0: 'extent',
+							_1: _user$project$Vega$numSpec(
+								_user$project$Vega$NumSignal(_p122._0))
+						};
+					case 'NumSignals':
+						if (((((_p122._0.ctor === '::') && (_p122._0._1.ctor === '::')) && (_p122._0._1._1.ctor === '::')) && (_p122._0._1._1._1.ctor === '::')) && (_p122._0._1._1._1._1.ctor === '[]')) {
+							return {
+								ctor: '_Tuple2',
+								_0: 'extent',
+								_1: _elm_lang$core$Json_Encode$list(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$numSpec(
+											_user$project$Vega$NumSignals(
+												{
+													ctor: '::',
+													_0: _p122._0._0,
+													_1: {
+														ctor: '::',
+														_0: _p122._0._1._0,
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$numSpec(
+												_user$project$Vega$NumSignals(
+													{
+														ctor: '::',
+														_0: _p122._0._1._1._0,
+														_1: {
+															ctor: '::',
+															_0: _p122._0._1._1._1._0,
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+						} else {
+							break _v103_3;
+						}
+					default:
+						break _v103_3;
+				}
+			} while(false);
+			return A2(
+				_elm_lang$core$Debug$log,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Warning: prExtent expecting array of 4 numbers but was given ',
+					_elm_lang$core$Basics$toString(_p123)),
+				{ctor: '_Tuple2', _0: 'extent', _1: _elm_lang$core$Json_Encode$null});
 		case 'PrSize':
-			return {ctor: '_Tuple2', _0: 'size', _1: _elm_lang$core$Json_Encode$null};
+			var _p125 = _p113._0;
+			var _p124 = _p125;
+			_v104_3:
+			do {
+				switch (_p124.ctor) {
+					case 'Nums':
+						if (((_p124._0.ctor === '::') && (_p124._0._1.ctor === '::')) && (_p124._0._1._1.ctor === '[]')) {
+							return {
+								ctor: '_Tuple2',
+								_0: 'size',
+								_1: _elm_lang$core$Json_Encode$list(
+									{
+										ctor: '::',
+										_0: _elm_lang$core$Json_Encode$float(_p124._0._0),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Json_Encode$float(_p124._0._1._0),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+						} else {
+							break _v104_3;
+						}
+					case 'NumSignal':
+						return {
+							ctor: '_Tuple2',
+							_0: 'size',
+							_1: _user$project$Vega$numSpec(
+								_user$project$Vega$NumSignal(_p124._0))
+						};
+					case 'NumSignals':
+						if (((_p124._0.ctor === '::') && (_p124._0._1.ctor === '::')) && (_p124._0._1._1.ctor === '[]')) {
+							return {
+								ctor: '_Tuple2',
+								_0: 'size',
+								_1: _user$project$Vega$numSpec(
+									_user$project$Vega$NumSignals(
+										{
+											ctor: '::',
+											_0: _p124._0._0,
+											_1: {
+												ctor: '::',
+												_0: _p124._0._1._0,
+												_1: {ctor: '[]'}
+											}
+										}))
+							};
+						} else {
+							break _v104_3;
+						}
+					default:
+						break _v104_3;
+				}
+			} while(false);
+			return A2(
+				_elm_lang$core$Debug$log,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Warning: prSize expecting array of 2 numbers but was given ',
+					_elm_lang$core$Basics$toString(_p125)),
+				{ctor: '_Tuple2', _0: 'size', _1: _elm_lang$core$Json_Encode$null});
 		case 'PrCoefficient':
 			return {
 				ctor: '_Tuple2',
@@ -15106,6 +15265,146 @@ var _user$project$Vega$Num = function (a) {
 	return {ctor: 'Num', _0: a};
 };
 var _user$project$Vega$num = _user$project$Vega$Num;
+var _user$project$Vega$PaAs = F5(
+	function (a, b, c, d, e) {
+		return {ctor: 'PaAs', _0: a, _1: b, _2: c, _3: d, _4: e};
+	});
+var _user$project$Vega$paAs = F5(
+	function (x, y, r, depth, children) {
+		return A5(_user$project$Vega$PaAs, x, y, r, depth, children);
+	});
+var _user$project$Vega$PaPadding = function (a) {
+	return {ctor: 'PaPadding', _0: a};
+};
+var _user$project$Vega$paPadding = _user$project$Vega$PaPadding;
+var _user$project$Vega$PaRadius = function (a) {
+	return {ctor: 'PaRadius', _0: a};
+};
+var _user$project$Vega$paRadius = _user$project$Vega$PaRadius;
+var _user$project$Vega$PaSize = F2(
+	function (a, b) {
+		return {ctor: 'PaSize', _0: a, _1: b};
+	});
+var _user$project$Vega$paSize = F2(
+	function (w, h) {
+		return A2(_user$project$Vega$PaSize, w, h);
+	});
+var _user$project$Vega$PaSort = function (a) {
+	return {ctor: 'PaSort', _0: a};
+};
+var _user$project$Vega$paSort = _user$project$Vega$PaSort;
+var _user$project$Vega$PaField = function (a) {
+	return {ctor: 'PaField', _0: a};
+};
+var _user$project$Vega$paField = _user$project$Vega$PaField;
+var _user$project$Vega$PiAs = F2(
+	function (a, b) {
+		return {ctor: 'PiAs', _0: a, _1: b};
+	});
+var _user$project$Vega$piAs = F2(
+	function (start, end) {
+		return A2(_user$project$Vega$PiAs, start, end);
+	});
+var _user$project$Vega$PiSort = function (a) {
+	return {ctor: 'PiSort', _0: a};
+};
+var _user$project$Vega$piSort = _user$project$Vega$PiSort;
+var _user$project$Vega$PiEndAngle = function (a) {
+	return {ctor: 'PiEndAngle', _0: a};
+};
+var _user$project$Vega$piEndAngle = _user$project$Vega$PiEndAngle;
+var _user$project$Vega$PiStartAngle = function (a) {
+	return {ctor: 'PiStartAngle', _0: a};
+};
+var _user$project$Vega$piStartAngle = _user$project$Vega$PiStartAngle;
+var _user$project$Vega$PiField = function (a) {
+	return {ctor: 'PiField', _0: a};
+};
+var _user$project$Vega$piField = _user$project$Vega$PiField;
+var _user$project$Vega$PrTilt = function (a) {
+	return {ctor: 'PrTilt', _0: a};
+};
+var _user$project$Vega$prTilt = _user$project$Vega$PrTilt;
+var _user$project$Vega$PrSpacing = function (a) {
+	return {ctor: 'PrSpacing', _0: a};
+};
+var _user$project$Vega$prSpacing = _user$project$Vega$PrSpacing;
+var _user$project$Vega$PrRatio = function (a) {
+	return {ctor: 'PrRatio', _0: a};
+};
+var _user$project$Vega$prRatio = _user$project$Vega$PrRatio;
+var _user$project$Vega$PrRadius = function (a) {
+	return {ctor: 'PrRadius', _0: a};
+};
+var _user$project$Vega$prRadius = _user$project$Vega$PrRadius;
+var _user$project$Vega$PrParallel = function (a) {
+	return {ctor: 'PrParallel', _0: a};
+};
+var _user$project$Vega$prParallel = _user$project$Vega$PrParallel;
+var _user$project$Vega$PrLobes = function (a) {
+	return {ctor: 'PrLobes', _0: a};
+};
+var _user$project$Vega$prLobes = _user$project$Vega$PrLobes;
+var _user$project$Vega$PrFraction = function (a) {
+	return {ctor: 'PrFraction', _0: a};
+};
+var _user$project$Vega$prFraction = _user$project$Vega$PrFraction;
+var _user$project$Vega$PrDistance = function (a) {
+	return {ctor: 'PrDistance', _0: a};
+};
+var _user$project$Vega$prDistance = _user$project$Vega$PrDistance;
+var _user$project$Vega$PrCoefficient = function (a) {
+	return {ctor: 'PrCoefficient', _0: a};
+};
+var _user$project$Vega$prCoefficient = _user$project$Vega$PrCoefficient;
+var _user$project$Vega$PrSize = function (a) {
+	return {ctor: 'PrSize', _0: a};
+};
+var _user$project$Vega$prSize = _user$project$Vega$PrSize;
+var _user$project$Vega$PrExtent = function (a) {
+	return {ctor: 'PrExtent', _0: a};
+};
+var _user$project$Vega$prExtent = _user$project$Vega$PrExtent;
+var _user$project$Vega$PrFit = function (a) {
+	return {ctor: 'PrFit', _0: a};
+};
+var _user$project$Vega$prFit = _user$project$Vega$PrFit;
+var _user$project$Vega$PrPrecision = function (a) {
+	return {ctor: 'PrPrecision', _0: a};
+};
+var _user$project$Vega$prPrecision = _user$project$Vega$PrPrecision;
+var _user$project$Vega$PrPointRadius = function (a) {
+	return {ctor: 'PrPointRadius', _0: a};
+};
+var _user$project$Vega$prPointRadius = _user$project$Vega$PrPointRadius;
+var _user$project$Vega$PrRotate = function (a) {
+	return {ctor: 'PrRotate', _0: a};
+};
+var _user$project$Vega$prRotate = _user$project$Vega$PrRotate;
+var _user$project$Vega$PrCenter = function (a) {
+	return {ctor: 'PrCenter', _0: a};
+};
+var _user$project$Vega$prCenter = _user$project$Vega$PrCenter;
+var _user$project$Vega$PrTranslate = function (a) {
+	return {ctor: 'PrTranslate', _0: a};
+};
+var _user$project$Vega$prTranslate = _user$project$Vega$PrTranslate;
+var _user$project$Vega$PrScale = function (a) {
+	return {ctor: 'PrScale', _0: a};
+};
+var _user$project$Vega$prScale = _user$project$Vega$PrScale;
+var _user$project$Vega$PrClipExtent = function (a) {
+	return {ctor: 'PrClipExtent', _0: a};
+};
+var _user$project$Vega$prClipExtent = _user$project$Vega$PrClipExtent;
+var _user$project$Vega$PrClipAngle = function (a) {
+	return {ctor: 'PrClipAngle', _0: a};
+};
+var _user$project$Vega$prClipAngle = _user$project$Vega$PrClipAngle;
+var _user$project$Vega$PrType = function (a) {
+	return {ctor: 'PrType', _0: a};
+};
+var _user$project$Vega$prType = _user$project$Vega$PrType;
 var _user$project$Vega$StrSignals = function (a) {
 	return {ctor: 'StrSignals', _0: a};
 };
@@ -15423,62 +15722,6 @@ var _user$project$Vega$OHorizontal = {ctor: 'OHorizontal'};
 var _user$project$Vega$OGreedy = {ctor: 'OGreedy'};
 var _user$project$Vega$OParity = {ctor: 'OParity'};
 var _user$project$Vega$ONone = {ctor: 'ONone'};
-var _user$project$Vega$PaAs = F5(
-	function (a, b, c, d, e) {
-		return {ctor: 'PaAs', _0: a, _1: b, _2: c, _3: d, _4: e};
-	});
-var _user$project$Vega$paAs = F5(
-	function (x, y, r, depth, children) {
-		return A5(_user$project$Vega$PaAs, x, y, r, depth, children);
-	});
-var _user$project$Vega$PaPadding = function (a) {
-	return {ctor: 'PaPadding', _0: a};
-};
-var _user$project$Vega$paPadding = _user$project$Vega$PaPadding;
-var _user$project$Vega$PaRadius = function (a) {
-	return {ctor: 'PaRadius', _0: a};
-};
-var _user$project$Vega$paRadius = _user$project$Vega$PaRadius;
-var _user$project$Vega$PaSize = F2(
-	function (a, b) {
-		return {ctor: 'PaSize', _0: a, _1: b};
-	});
-var _user$project$Vega$paSize = F2(
-	function (w, h) {
-		return A2(_user$project$Vega$PaSize, w, h);
-	});
-var _user$project$Vega$PaSort = function (a) {
-	return {ctor: 'PaSort', _0: a};
-};
-var _user$project$Vega$paSort = _user$project$Vega$PaSort;
-var _user$project$Vega$PaField = function (a) {
-	return {ctor: 'PaField', _0: a};
-};
-var _user$project$Vega$paField = _user$project$Vega$PaField;
-var _user$project$Vega$PiAs = F2(
-	function (a, b) {
-		return {ctor: 'PiAs', _0: a, _1: b};
-	});
-var _user$project$Vega$piAs = F2(
-	function (start, end) {
-		return A2(_user$project$Vega$PiAs, start, end);
-	});
-var _user$project$Vega$PiSort = function (a) {
-	return {ctor: 'PiSort', _0: a};
-};
-var _user$project$Vega$piSort = _user$project$Vega$PiSort;
-var _user$project$Vega$PiEndAngle = function (a) {
-	return {ctor: 'PiEndAngle', _0: a};
-};
-var _user$project$Vega$piEndAngle = _user$project$Vega$PiEndAngle;
-var _user$project$Vega$PiStartAngle = function (a) {
-	return {ctor: 'PiStartAngle', _0: a};
-};
-var _user$project$Vega$piStartAngle = _user$project$Vega$PiStartAngle;
-var _user$project$Vega$PiField = function (a) {
-	return {ctor: 'PiField', _0: a};
-};
-var _user$project$Vega$piField = _user$project$Vega$PiField;
 var _user$project$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
@@ -15509,81 +15752,6 @@ var _user$project$Vega$AzimuthalEquidistant = {ctor: 'AzimuthalEquidistant'};
 var _user$project$Vega$AzimuthalEqualArea = {ctor: 'AzimuthalEqualArea'};
 var _user$project$Vega$AlbersUsa = {ctor: 'AlbersUsa'};
 var _user$project$Vega$Albers = {ctor: 'Albers'};
-var _user$project$Vega$PrTilt = function (a) {
-	return {ctor: 'PrTilt', _0: a};
-};
-var _user$project$Vega$prTilt = _user$project$Vega$PrTilt;
-var _user$project$Vega$PrSpacing = function (a) {
-	return {ctor: 'PrSpacing', _0: a};
-};
-var _user$project$Vega$prSpacing = _user$project$Vega$PrSpacing;
-var _user$project$Vega$PrRatio = function (a) {
-	return {ctor: 'PrRatio', _0: a};
-};
-var _user$project$Vega$prRatio = _user$project$Vega$PrRatio;
-var _user$project$Vega$PrRadius = function (a) {
-	return {ctor: 'PrRadius', _0: a};
-};
-var _user$project$Vega$prRadius = _user$project$Vega$PrRadius;
-var _user$project$Vega$PrParallel = function (a) {
-	return {ctor: 'PrParallel', _0: a};
-};
-var _user$project$Vega$prParallel = _user$project$Vega$PrParallel;
-var _user$project$Vega$PrLobes = function (a) {
-	return {ctor: 'PrLobes', _0: a};
-};
-var _user$project$Vega$prLobes = _user$project$Vega$PrLobes;
-var _user$project$Vega$PrFraction = function (a) {
-	return {ctor: 'PrFraction', _0: a};
-};
-var _user$project$Vega$prFraction = _user$project$Vega$PrFraction;
-var _user$project$Vega$PrDistance = function (a) {
-	return {ctor: 'PrDistance', _0: a};
-};
-var _user$project$Vega$prDistance = _user$project$Vega$PrDistance;
-var _user$project$Vega$PrCoefficient = function (a) {
-	return {ctor: 'PrCoefficient', _0: a};
-};
-var _user$project$Vega$prCoefficient = _user$project$Vega$PrCoefficient;
-var _user$project$Vega$PrSize = {ctor: 'PrSize'};
-var _user$project$Vega$PrExtent = {ctor: 'PrExtent'};
-var _user$project$Vega$PrFit = {ctor: 'PrFit'};
-var _user$project$Vega$PrPrecision = function (a) {
-	return {ctor: 'PrPrecision', _0: a};
-};
-var _user$project$Vega$prPrecision = _user$project$Vega$PrPrecision;
-var _user$project$Vega$PrPointRadius = function (a) {
-	return {ctor: 'PrPointRadius', _0: a};
-};
-var _user$project$Vega$prPointRadius = _user$project$Vega$PrPointRadius;
-var _user$project$Vega$PrRotate = function (a) {
-	return {ctor: 'PrRotate', _0: a};
-};
-var _user$project$Vega$prRotate = _user$project$Vega$PrRotate;
-var _user$project$Vega$PrCenter = function (a) {
-	return {ctor: 'PrCenter', _0: a};
-};
-var _user$project$Vega$prCenter = _user$project$Vega$PrCenter;
-var _user$project$Vega$PrTranslate = function (a) {
-	return {ctor: 'PrTranslate', _0: a};
-};
-var _user$project$Vega$prTranslate = _user$project$Vega$PrTranslate;
-var _user$project$Vega$PrScale = function (a) {
-	return {ctor: 'PrScale', _0: a};
-};
-var _user$project$Vega$prScale = _user$project$Vega$PrScale;
-var _user$project$Vega$PrClipExtent = function (a) {
-	return {ctor: 'PrClipExtent', _0: a};
-};
-var _user$project$Vega$prClipExtent = _user$project$Vega$PrClipExtent;
-var _user$project$Vega$PrClipAngle = function (a) {
-	return {ctor: 'PrClipAngle', _0: a};
-};
-var _user$project$Vega$prClipAngle = _user$project$Vega$PrClipAngle;
-var _user$project$Vega$PrType = function (a) {
-	return {ctor: 'PrType', _0: a};
-};
-var _user$project$Vega$prType = _user$project$Vega$PrType;
 var _user$project$Vega$RCustom = function (a) {
 	return {ctor: 'RCustom', _0: a};
 };
@@ -15629,35 +15797,25 @@ var _user$project$Vega$doNums = _user$project$Vega$DoNums;
 var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
-var _user$project$Vega$niTickCount = _user$project$Vega$NTickCount;
+var _user$project$Vega$nTickCount = _user$project$Vega$NTickCount;
 var _user$project$Vega$NFalse = {ctor: 'NFalse'};
-var _user$project$Vega$niFalse = _user$project$Vega$NFalse;
 var _user$project$Vega$NTrue = {ctor: 'NTrue'};
-var _user$project$Vega$niTrue = _user$project$Vega$NTrue;
 var _user$project$Vega$NInterval = F2(
 	function (a, b) {
 		return {ctor: 'NInterval', _0: a, _1: b};
 	});
-var _user$project$Vega$niInterval = F2(
+var _user$project$Vega$nInterval = F2(
 	function (tu, step) {
 		return A2(_user$project$Vega$NInterval, tu, step);
 	});
 var _user$project$Vega$NYear = {ctor: 'NYear'};
-var _user$project$Vega$niYear = _user$project$Vega$NYear;
 var _user$project$Vega$NMonth = {ctor: 'NMonth'};
-var _user$project$Vega$niMonth = _user$project$Vega$NMonth;
 var _user$project$Vega$NWeek = {ctor: 'NWeek'};
-var _user$project$Vega$niWeek = _user$project$Vega$NWeek;
 var _user$project$Vega$NDay = {ctor: 'NDay'};
-var _user$project$Vega$niDay = _user$project$Vega$NDay;
 var _user$project$Vega$NHour = {ctor: 'NHour'};
-var _user$project$Vega$niHour = _user$project$Vega$NHour;
 var _user$project$Vega$NMinute = {ctor: 'NMinute'};
-var _user$project$Vega$niMinute = _user$project$Vega$NMinute;
 var _user$project$Vega$NSecond = {ctor: 'NSecond'};
-var _user$project$Vega$niSecond = _user$project$Vega$NSecond;
 var _user$project$Vega$NMillisecond = {ctor: 'NMillisecond'};
-var _user$project$Vega$niMillisecond = _user$project$Vega$NMillisecond;
 var _user$project$Vega$SRangeStep = function (a) {
 	return {ctor: 'SRangeStep', _0: a};
 };
@@ -15848,37 +16006,37 @@ var _user$project$Vega$soOp = _user$project$Vega$Op;
 var _user$project$Vega$Descending = {ctor: 'Descending'};
 var _user$project$Vega$Ascending = {ctor: 'Ascending'};
 var _user$project$Vega$dataRefProperty = function (dataRef) {
-	var _p122 = dataRef;
-	switch (_p122.ctor) {
+	var _p126 = dataRef;
+	switch (_p126.ctor) {
 		case 'DDataset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'data',
-				_1: _elm_lang$core$Json_Encode$string(_p122._0)
+				_1: _elm_lang$core$Json_Encode$string(_p126._0)
 			};
 		case 'DField':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
-				_1: _user$project$Vega$strSpec(_p122._0)
+				_1: _user$project$Vega$strSpec(_p126._0)
 			};
 		case 'DFields':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fields',
-				_1: _user$project$Vega$strSpec(_p122._0)
+				_1: _user$project$Vega$strSpec(_p126._0)
 			};
 		case 'DReferences':
 			return {
 				ctor: '_Tuple2',
 				_0: 'fields',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p122._0))
+					A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p126._0))
 			};
 		default:
-			var _p123 = _p122._0;
+			var _p127 = _p126._0;
 			return _elm_lang$core$Native_Utils.eq(
-				_p123,
+				_p127,
 				{
 					ctor: '::',
 					_0: _user$project$Vega$Ascending,
@@ -15891,85 +16049,85 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$object(
-					A2(_elm_lang$core$List$map, _user$project$Vega$sortProperty, _p123))
+					A2(_elm_lang$core$List$map, _user$project$Vega$sortProperty, _p127))
 			};
 	}
 };
 var _user$project$Vega$scaleDomainSpec = function (sdType) {
-	var _p124 = sdType;
-	switch (_p124.ctor) {
+	var _p128 = sdType;
+	switch (_p128.ctor) {
 		case 'DoNums':
-			return _user$project$Vega$numSpec(_p124._0);
+			return _user$project$Vega$numSpec(_p128._0);
 		case 'DoStrs':
-			return _user$project$Vega$strSpec(_p124._0);
+			return _user$project$Vega$strSpec(_p128._0);
 		default:
 			return _elm_lang$core$Json_Encode$object(
-				A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p124._0));
+				A2(_elm_lang$core$List$map, _user$project$Vega$dataRefProperty, _p128._0));
 	}
 };
 var _user$project$Vega$scaleProperty = function (scaleProp) {
-	var _p125 = scaleProp;
-	switch (_p125.ctor) {
+	var _p129 = scaleProp;
+	switch (_p129.ctor) {
 		case 'SType':
 			return {
 				ctor: '_Tuple2',
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string(
-					_user$project$Vega$scaleLabel(_p125._0))
+					_user$project$Vega$scaleLabel(_p129._0))
 			};
 		case 'SDomain':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _user$project$Vega$scaleDomainSpec(_p125._0)
+				_1: _user$project$Vega$scaleDomainSpec(_p129._0)
 			};
 		case 'SDomainMax':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMax',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SDomainMin':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMin',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SDomainMid':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainMid',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SDomainRaw':
 			return {
 				ctor: '_Tuple2',
 				_0: 'domainRaw',
-				_1: _user$project$Vega$valueSpec(_p125._0)
+				_1: _user$project$Vega$valueSpec(_p129._0)
 			};
 		case 'SRange':
-			var _p126 = _p125._0;
-			switch (_p126.ctor) {
+			var _p130 = _p129._0;
+			switch (_p130.ctor) {
 				case 'RNums':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$list(
-							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p126._0))
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$float, _p130._0))
 					};
 				case 'RStrs':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$list(
-							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p126._0))
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p130._0))
 					};
 				case 'RValues':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$list(
-							A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p126._0))
+							A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p130._0))
 					};
 				case 'RSignal':
 					return {
@@ -15978,7 +16136,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$signalReferenceProperty(_p126._0),
+								_0: _user$project$Vega$signalReferenceProperty(_p130._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -15992,8 +16150,8 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 								_user$project$Vega$schemeProperty,
 								{
 									ctor: '::',
-									_0: _user$project$Vega$SScheme(_p126._0),
-									_1: _p126._1
+									_0: _user$project$Vega$SScheme(_p130._0),
+									_1: _p130._1
 								}))
 					};
 				case 'RData':
@@ -16003,7 +16161,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 						_1: _elm_lang$core$Json_Encode$object(
 							{
 								ctor: '::',
-								_0: _user$project$Vega$dataRefProperty(_p126._0),
+								_0: _user$project$Vega$dataRefProperty(_p130._0),
 								_1: {ctor: '[]'}
 							})
 					};
@@ -16017,7 +16175,7 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 								_0: {
 									ctor: '_Tuple2',
 									_0: 'step',
-									_1: _user$project$Vega$valueSpec(_p126._0)
+									_1: _user$project$Vega$valueSpec(_p130._0)
 								},
 								_1: {ctor: '[]'}
 							})
@@ -16027,86 +16185,86 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string(
-							_user$project$Vega$rangeDefaultLabel(_p126._0))
+							_user$project$Vega$rangeDefaultLabel(_p130._0))
 					};
 			}
 		case 'SPadding':
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SPaddingInner':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingInner',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SPaddingOuter':
 			return {
 				ctor: '_Tuple2',
 				_0: 'paddingOuter',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SRangeStep':
 			return {
 				ctor: '_Tuple2',
 				_0: 'rangeStep',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SRound':
 			return {
 				ctor: '_Tuple2',
 				_0: 'round',
-				_1: _user$project$Vega$boolSpec(_p125._0)
+				_1: _user$project$Vega$boolSpec(_p129._0)
 			};
 		case 'SClamp':
 			return {
 				ctor: '_Tuple2',
 				_0: 'clamp',
-				_1: _user$project$Vega$boolSpec(_p125._0)
+				_1: _user$project$Vega$boolSpec(_p129._0)
 			};
 		case 'SInterpolate':
 			return {
 				ctor: '_Tuple2',
 				_0: 'interpolate',
-				_1: _user$project$Vega$interpolateSpec(_p125._0)
+				_1: _user$project$Vega$interpolateSpec(_p129._0)
 			};
 		case 'SNice':
 			return {
 				ctor: '_Tuple2',
 				_0: 'nice',
-				_1: _user$project$Vega$niceSpec(_p125._0)
+				_1: _user$project$Vega$niceSpec(_p129._0)
 			};
 		case 'SZero':
 			return {
 				ctor: '_Tuple2',
 				_0: 'zero',
-				_1: _user$project$Vega$boolSpec(_p125._0)
+				_1: _user$project$Vega$boolSpec(_p129._0)
 			};
 		case 'SReverse':
 			return {
 				ctor: '_Tuple2',
 				_0: 'reverse',
-				_1: _user$project$Vega$boolSpec(_p125._0)
+				_1: _user$project$Vega$boolSpec(_p129._0)
 			};
 		case 'SExponent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'exponent',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		case 'SBase':
 			return {
 				ctor: '_Tuple2',
 				_0: 'base',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 		default:
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
-				_1: _user$project$Vega$numSpec(_p125._0)
+				_1: _user$project$Vega$numSpec(_p129._0)
 			};
 	}
 };
@@ -16838,7 +16996,7 @@ var _user$project$MarkTests$trailTest = function () {
 										_user$project$Vega$boo(true)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$scNice(_user$project$Vega$niTrue),
+										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20534,7 +20692,7 @@ var _user$project$MarkTests$areaTest = function () {
 										_user$project$Vega$boo(true)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$scNice(_user$project$Vega$niTrue),
+										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -21587,7 +21745,7 @@ var _user$project$MarkTests$lineTest = function () {
 										_user$project$Vega$boo(true)),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Vega$scNice(_user$project$Vega$niTrue),
+										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
 										_1: {ctor: '[]'}
 									}
 								}

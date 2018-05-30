@@ -41,7 +41,7 @@ lineChart1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (str "y") ])
                     ]
@@ -112,7 +112,7 @@ areaChart1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (str "v") ])
                     ]
@@ -165,7 +165,7 @@ areaChart2 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (str "y1") ])
                     ]
@@ -252,7 +252,7 @@ areaChart3 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raValues [ vSignal "vheight", vNum 0 ])
-                    , scNice niTrue
+                    , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (str "y") ])
                     ]

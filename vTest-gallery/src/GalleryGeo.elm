@@ -109,7 +109,7 @@ geo2 =
                     ]
                 << scale "cScale"
                     [ scType ScSequential
-                    , scNice niTrue
+                    , scNice NTrue
                     , scDomain (doData [ daDataset "obesity", daField (str "rate") ])
                     , scRange (raDefault RRamp)
                     ]
