@@ -16775,7 +16775,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$srData(
-								_gicentre$elm_vega$Vega$str('sphere')),
+								_gicentre$elm_vega$Vega$str('graticule')),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -16783,13 +16783,13 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 						_0: _gicentre$elm_vega$Vega$mEncode(
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enUpdate(
+								_0: _gicentre$elm_vega$Vega$enEnter(
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$maFill(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$vStr('aliceblue'),
+												_0: _gicentre$elm_vega$Vega$vNull,
 												_1: {ctor: '[]'}
 											}),
 										_1: {
@@ -16797,7 +16797,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 											_0: _gicentre$elm_vega$Vega$maStroke(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vStr('black'),
+													_0: _gicentre$elm_vega$Vega$vStr('#ddd'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
@@ -16805,7 +16805,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 												_0: _gicentre$elm_vega$Vega$maStrokeWidth(
 													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vNum(1.5),
+														_0: _gicentre$elm_vega$Vega$vNum(1),
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}
@@ -16846,13 +16846,13 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 							_0: _gicentre$elm_vega$Vega$mEncode(
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enUpdate(
+									_0: _gicentre$elm_vega$Vega$enEnter(
 										{
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$maFill(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vStr('mintcream'),
+													_0: _gicentre$elm_vega$Vega$vStr('#e5e8d3'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {
@@ -16860,7 +16860,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 												_0: _gicentre$elm_vega$Vega$maStroke(
 													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('black'),
+														_0: _gicentre$elm_vega$Vega$vStr('#bbb'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
@@ -16868,7 +16868,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 													_0: _gicentre$elm_vega$Vega$maStrokeWidth(
 														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vNum(0.35),
+															_0: _gicentre$elm_vega$Vega$vNum(0.5),
 															_1: {ctor: '[]'}
 														}),
 													_1: {ctor: '[]'}
@@ -16892,67 +16892,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 							}
 						}
 					},
-					A3(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Shape,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mFrom(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$srData(
-										_gicentre$elm_vega$Vega$str('earthquakes')),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enUpdate(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('red'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maOpacity(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vNum(0.25),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mTransform(
-										{
-											ctor: '::',
-											_0: A2(
-												_gicentre$elm_vega$Vega$trGeoShape,
-												'myProjection',
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$gpPointRadius(
-														_gicentre$elm_vega$Vega$numExpr(
-															_gicentre$elm_vega$Vega$expr('scale(\'scSize\', exp(datum.properties.mag))'))),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_p0))));
+					_p0)));
 	};
 	var pr = function (_p1) {
 		return _gicentre$elm_vega$Vega$projections(
@@ -16961,21 +16901,21 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 				'myProjection',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$prType(_gicentre$elm_vega$Vega$Orthographic),
+					_0: _gicentre$elm_vega$Vega$prType(_gicentre$elm_vega$Vega$Mercator),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$prScale(
-							_gicentre$elm_vega$Vega$num(225)),
+							_gicentre$elm_vega$Vega$numSignal('myScale')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$prRotate(
 								_gicentre$elm_vega$Vega$numSignals(
 									{
 										ctor: '::',
-										_0: 'pRotate0',
+										_0: 'rotateX',
 										_1: {
 											ctor: '::',
-											_0: 'pRotate1',
+											_0: '0',
 											_1: {
 												ctor: '::',
 												_0: '0',
@@ -16985,18 +16925,32 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$prTranslate(
+								_0: _gicentre$elm_vega$Vega$prCenter(
 									_gicentre$elm_vega$Vega$numSignals(
 										{
 											ctor: '::',
-											_0: 'width/2',
+											_0: '0',
 											_1: {
 												ctor: '::',
-												_0: 'height/2',
+												_0: 'centerY',
 												_1: {ctor: '[]'}
 											}
 										})),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$prTranslate(
+										_gicentre$elm_vega$Vega$numSignals(
+											{
+												ctor: '::',
+												_0: 'tx',
+												_1: {
+													ctor: '::',
+													_0: 'ty',
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}
@@ -17023,7 +16977,7 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 					},
 					A3(
 						_gicentre$elm_vega$Vega$signal,
-						'scale',
+						'myScale',
 						{
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$siValue(
@@ -17039,11 +16993,15 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 												{
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$Wheel),
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$esConsume(true),
+														_1: {ctor: '[]'}
+													}
 												}),
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$evUpdate('clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)'),
+												_0: _gicentre$elm_vega$Vega$evUpdate('clamp(myScale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -17053,117 +17011,277 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 						},
 						A3(
 							_gicentre$elm_vega$Vega$signal,
-							'quakeSize',
+							'angles',
 							{
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$siValue(
-									_gicentre$elm_vega$Vega$vNum(6)),
+									_gicentre$elm_vega$Vega$vNums(
+										{
+											ctor: '::',
+											_0: 0,
+											_1: {
+												ctor: '::',
+												_0: 0,
+												_1: {ctor: '[]'}
+											}
+										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$siBind(
-										_gicentre$elm_vega$Vega$iRange(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$inMin(0),
-												_1: {
+									_0: _gicentre$elm_vega$Vega$siOn(
+										{
+											ctor: '::',
+											_0: A2(
+												_gicentre$elm_vega$Vega$evHandler,
+												_gicentre$elm_vega$Vega$esObject(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseDown),
+														_1: {ctor: '[]'}
+													}),
+												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$inMax(12),
+													_0: _gicentre$elm_vega$Vega$evUpdate('[rotateX,centerY]'),
 													_1: {ctor: '[]'}
-												}
-											})),
+												}),
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}
 							},
 							A3(
 								_gicentre$elm_vega$Vega$signal,
-								'pRotate0',
+								'cloned',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$siValue(
-										_gicentre$elm_vega$Vega$vNum(90)),
+									_0: _gicentre$elm_vega$Vega$siValue(_gicentre$elm_vega$Vega$vNull),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$siBind(
-											_gicentre$elm_vega$Vega$iRange(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$inMin(-180),
-													_1: {
+										_0: _gicentre$elm_vega$Vega$siOn(
+											{
+												ctor: '::',
+												_0: A2(
+													_gicentre$elm_vega$Vega$evHandler,
+													_gicentre$elm_vega$Vega$esObject(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseDown),
+															_1: {ctor: '[]'}
+														}),
+													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$inMax(180),
+														_0: _gicentre$elm_vega$Vega$evUpdate('copy(\'myProjection\')'),
 														_1: {ctor: '[]'}
-													}
-												})),
+													}),
+												_1: {ctor: '[]'}
+											}),
 										_1: {ctor: '[]'}
 									}
 								},
 								A3(
 									_gicentre$elm_vega$Vega$signal,
-									'pRotate1',
+									'start',
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$siValue(
-											_gicentre$elm_vega$Vega$vNum(-5)),
+										_0: _gicentre$elm_vega$Vega$siValue(_gicentre$elm_vega$Vega$vNull),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$siBind(
-												_gicentre$elm_vega$Vega$iRange(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$inMin(-180),
-														_1: {
+											_0: _gicentre$elm_vega$Vega$siOn(
+												{
+													ctor: '::',
+													_0: A2(
+														_gicentre$elm_vega$Vega$evHandler,
+														_gicentre$elm_vega$Vega$esObject(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseDown),
+																_1: {ctor: '[]'}
+															}),
+														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$inMax(180),
+															_0: _gicentre$elm_vega$Vega$evUpdate('invert(cloned, xy())'),
 															_1: {ctor: '[]'}
-														}
-													})),
+														}),
+													_1: {ctor: '[]'}
+												}),
 											_1: {ctor: '[]'}
 										}
 									},
-									_p2)))))));
+									A3(
+										_gicentre$elm_vega$Vega$signal,
+										'drag',
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$siValue(_gicentre$elm_vega$Vega$vNull),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$siOn(
+													{
+														ctor: '::',
+														_0: A2(
+															_gicentre$elm_vega$Vega$evHandler,
+															_gicentre$elm_vega$Vega$esObject(
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_gicentre$elm_vega$Vega$esBetween,
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseDown),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$esSource(_gicentre$elm_vega$Vega$ESWindow),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseUp),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$esSource(_gicentre$elm_vega$Vega$ESWindow),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$esType(_gicentre$elm_vega$Vega$MouseMove),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}),
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$evUpdate('invert(cloned, xy())'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										},
+										A3(
+											_gicentre$elm_vega$Vega$signal,
+											'delta',
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$siValue(_gicentre$elm_vega$Vega$vNull),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$siOn(
+														{
+															ctor: '::',
+															_0: A2(
+																_gicentre$elm_vega$Vega$evHandler,
+																_gicentre$elm_vega$Vega$esSelector(
+																	_gicentre$elm_vega$Vega$strSignal('drag')),
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$evUpdate('[drag[0] - start[0], start[1] - drag[1]]'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											},
+											A3(
+												_gicentre$elm_vega$Vega$signal,
+												'rotateX',
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$siValue(
+														_gicentre$elm_vega$Vega$vNum(0)),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$siOn(
+															{
+																ctor: '::',
+																_0: A2(
+																	_gicentre$elm_vega$Vega$evHandler,
+																	_gicentre$elm_vega$Vega$esSelector(
+																		_gicentre$elm_vega$Vega$strSignal('drag')),
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$evUpdate('angles[0] + delta[0]'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												},
+												A3(
+													_gicentre$elm_vega$Vega$signal,
+													'centerY',
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$siValue(
+															_gicentre$elm_vega$Vega$vNum(0)),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$siOn(
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_gicentre$elm_vega$Vega$evHandler,
+																		_gicentre$elm_vega$Vega$esSelector(
+																			_gicentre$elm_vega$Vega$strSignal('drag')),
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$evUpdate('clamp(angles[1] + delta[1], -60, 60)'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													},
+													_p2)))))))))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
 			ctor: '::',
 			_0: A2(
 				_gicentre$elm_vega$Vega$data,
-				'sphere',
+				'world',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$DaSphere,
-					_1: {ctor: '[]'}
+					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$daFormat(
+							_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_gicentre$elm_vega$Vega$data,
-					'world',
+					_gicentre$elm_vega$Vega$transform,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daFormat(
-								_gicentre$elm_vega$Vega$topojsonFeature('countries')),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$Vega$transform,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$trGraticule(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_gicentre$elm_vega$Vega$data,
-							'graticule',
-							{ctor: '[]'})),
-					_1: {ctor: '[]'}
-				}
+						_0: _gicentre$elm_vega$Vega$trGraticule(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$grStep(
+									_gicentre$elm_vega$Vega$nums(
+										{
+											ctor: '::',
+											_0: 15,
+											_1: {
+												ctor: '::',
+												_0: 15,
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_gicentre$elm_vega$Vega$data,
+						'graticule',
+						{ctor: '[]'})),
+				_1: {ctor: '[]'}
 			}
 		});
 	return _gicentre$elm_vega$Vega$toVega(

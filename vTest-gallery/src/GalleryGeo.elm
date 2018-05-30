@@ -508,48 +508,82 @@ geo6 =
     let
         ds =
             dataSource
-                [ data "sphere" [ DaSphere ]
-                , data "world"
+                [ data "world"
                     [ daUrl "https://vega.github.io/vega/data/world-110m.json"
                     , daFormat (topojsonFeature "countries")
                     ]
                 , data "graticule" []
-                    |> transform [ trGraticule [] ]
+                    |> transform [ trGraticule [ grStep (nums [ 15, 15 ]) ] ]
                 ]
 
         si =
             signals
                 << signal "tx" [ siUpdate "width / 2" ]
                 << signal "ty" [ siUpdate "height / 2" ]
-                << signal "scale"
+                << signal "myScale"
                     [ siValue (vNum 150)
                     , siOn
-                        [ evHandler (esObject [ esType Wheel ])
-                            [ evUpdate "clamp(scale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)" ]
+                        [ evHandler (esObject [ esType Wheel, esConsume True ])
+                            [ evUpdate "clamp(myScale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)" ]
                         ]
                     ]
-                << signal "quakeSize" [ siValue (vNum 6), siBind (iRange [ inMin 0, inMax 12 ]) ]
-                << signal "pRotate0" [ siValue (vNum 90), siBind (iRange [ inMin -180, inMax 180 ]) ]
-                << signal "pRotate1" [ siValue (vNum -5), siBind (iRange [ inMin -180, inMax 180 ]) ]
+                << signal "angles"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "[rotateX,centerY]" ] ]
+                    ]
+                << signal "cloned"
+                    [ siValue vNull
+                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "copy('myProjection')" ] ]
+                    ]
+                << signal "start"
+                    [ siValue vNull
+                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "invert(cloned, xy())" ] ]
+                    ]
+                << signal "drag"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler
+                            (esObject
+                                [ esBetween [ esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esSource ESWindow
+                                , esType MouseMove
+                                ]
+                            )
+                            [ evUpdate "invert(cloned, xy())" ]
+                        ]
+                    ]
+                << signal "delta"
+                    [ siValue vNull
+                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "[drag[0] - start[0], start[1] - drag[1]]" ] ]
+                    ]
+                << signal "rotateX"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "angles[0] + delta[0]" ] ]
+                    ]
+                << signal "centerY"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "clamp(angles[1] + delta[1], -60, 60)" ] ]
+                    ]
 
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
-                    , prScale (num 225)
-                    , prRotate (numSignals [ "pRotate0", "pRotate1", "0" ])
-                    , prTranslate (numSignals [ "width/2", "height/2" ])
+                    [ prType Mercator
+                    , prScale (numSignal "myScale")
+                    , prRotate (numSignals [ "rotateX", "0", "0" ])
+                    , prCenter (numSignals [ "0", "centerY" ])
+                    , prTranslate (numSignals [ "tx", "ty" ])
                     ]
 
         mk =
             marks
                 << mark Shape
-                    [ mFrom [ srData (str "sphere") ]
+                    [ mFrom [ srData (str "graticule") ]
                     , mEncode
-                        [ enUpdate
-                            [ maFill [ vStr "aliceblue" ]
-                            , maStroke [ vStr "black" ]
-                            , maStrokeWidth [ vNum 1.5 ]
+                        [ enEnter
+                            [ maFill [ vNull ]
+                            , maStroke [ vStr "#ddd" ]
+                            , maStrokeWidth [ vNum 1 ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -557,25 +591,13 @@ geo6 =
                 << mark Shape
                     [ mFrom [ srData (str "world") ]
                     , mEncode
-                        [ enUpdate
-                            [ maFill [ vStr "mintcream" ]
-                            , maStroke [ vStr "black" ]
-                            , maStrokeWidth [ vNum 0.35 ]
+                        [ enEnter
+                            [ maFill [ vStr "#e5e8d3" ]
+                            , maStroke [ vStr "#bbb" ]
+                            , maStrokeWidth [ vNum 0.5 ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
-                    ]
-                << mark Shape
-                    [ mFrom [ srData (str "earthquakes") ]
-                    , mEncode
-                        [ enUpdate
-                            [ maFill [ vStr "red" ]
-                            , maOpacity [ vNum 0.25 ]
-                            ]
-                        ]
-                    , mTransform
-                        [ trGeoShape "myProjection" [ gpPointRadius (numExpr (expr "scale('scSize', exp(datum.properties.mag))")) ]
-                        ]
                     ]
     in
     toVega
