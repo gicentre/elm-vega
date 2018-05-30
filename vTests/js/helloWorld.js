@@ -5735,7 +5735,7 @@ var _user$project$Vega$expressionSpec = function (expr) {
 var _user$project$Vega$triggerProperties = function (trans) {
 	var _p32 = trans;
 	switch (_p32.ctor) {
-		case 'TrTrigger':
+		case 'TgTrigger':
 			return {
 				ctor: '::',
 				_0: {
@@ -5745,7 +5745,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
-		case 'TrInsert':
+		case 'TgInsert':
 			return {
 				ctor: '::',
 				_0: {
@@ -5755,7 +5755,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
-		case 'TrRemove':
+		case 'TgRemove':
 			return {
 				ctor: '::',
 				_0: {
@@ -5765,7 +5765,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
-		case 'TrRemoveAll':
+		case 'TgRemoveAll':
 			return {
 				ctor: '::',
 				_0: {
@@ -5775,7 +5775,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 				},
 				_1: {ctor: '[]'}
 			};
-		case 'TrToggle':
+		case 'TgToggle':
 			return {
 				ctor: '::',
 				_0: {
@@ -5807,7 +5807,7 @@ var _user$project$Vega$triggerProperties = function (trans) {
 };
 var _user$project$Vega$exprProperty = function (expr) {
 	var _p33 = expr;
-	if (_p33.ctor === 'EField') {
+	if (_p33.ctor === 'ExField') {
 		return {
 			ctor: '_Tuple2',
 			_0: 'field',
@@ -6723,39 +6723,39 @@ var _user$project$Vega$valueSpec = function (val) {
 var _user$project$Vega$dataProperty = function (dProp) {
 	var _p51 = dProp;
 	switch (_p51.ctor) {
-		case 'DFormat':
+		case 'DaFormat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$object(
 					_user$project$Vega$formatProperty(_p51._0))
 			};
-		case 'DSource':
+		case 'DaSource':
 			return {
 				ctor: '_Tuple2',
 				_0: 'source',
 				_1: _elm_lang$core$Json_Encode$string(_p51._0)
 			};
-		case 'DSources':
+		case 'DaSources':
 			return {
 				ctor: '_Tuple2',
 				_0: 'source',
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, _p51._0))
 			};
-		case 'DOn':
+		case 'DaOn':
 			return {
 				ctor: '_Tuple2',
 				_0: 'on',
 				_1: _elm_lang$core$Json_Encode$list(_p51._0)
 			};
-		case 'DUrl':
+		case 'DaUrl':
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
 				_1: _elm_lang$core$Json_Encode$string(_p51._0)
 			};
-		case 'DValue':
+		case 'DaValue':
 			return {
 				ctor: '_Tuple2',
 				_0: 'values',
@@ -8758,18 +8758,6 @@ var _user$project$Vega$dataRow = function (row) {
 				},
 				row)));
 };
-var _user$project$Vega$data = F2(
-	function (name, dProps) {
-		return {
-			ctor: '::',
-			_0: {
-				ctor: '_Tuple2',
-				_0: 'name',
-				_1: _elm_lang$core$Json_Encode$string(name)
-			},
-			_1: A2(_elm_lang$core$List$map, _user$project$Vega$dataProperty, dProps)
-		};
-	});
 var _user$project$Vega$dataFromRows = F3(
 	function (name, fmts, rows) {
 		var fmt = _elm_lang$core$Native_Utils.eq(
@@ -8845,7 +8833,7 @@ var _user$project$Vega$dataColumn = F2(
 	function (colName, data) {
 		var _p93 = data;
 		switch (_p93.ctor) {
-			case 'DStrs':
+			case 'DaStrs':
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -8860,7 +8848,7 @@ var _user$project$Vega$dataColumn = F2(
 							};
 						},
 						_p93._0));
-			case 'DNums':
+			case 'DaNums':
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
@@ -8891,6 +8879,18 @@ var _user$project$Vega$dataColumn = F2(
 						},
 						_p93._0));
 		}
+	});
+var _user$project$Vega$data = F2(
+	function (name, dProps) {
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(name)
+			},
+			_1: A2(_elm_lang$core$List$map, _user$project$Vega$dataProperty, dProps)
+		};
 	});
 var _user$project$Vega$cursorLabel = function (cur) {
 	var _p94 = cur;
@@ -9194,6 +9194,22 @@ var _user$project$Vega$ClEnabled = function (a) {
 	return {ctor: 'ClEnabled', _0: a};
 };
 var _user$project$Vega$clEnabled = _user$project$Vega$ClEnabled;
+var _user$project$Vega$SExtent = F2(
+	function (a, b) {
+		return {ctor: 'SExtent', _0: a, _1: b};
+	});
+var _user$project$Vega$csExtent = F2(
+	function (mn, mx) {
+		return A2(_user$project$Vega$SExtent, mn, mx);
+	});
+var _user$project$Vega$SCount = function (a) {
+	return {ctor: 'SCount', _0: a};
+};
+var _user$project$Vega$csCount = _user$project$Vega$SCount;
+var _user$project$Vega$SScheme = function (a) {
+	return {ctor: 'SScheme', _0: a};
+};
+var _user$project$Vega$csScheme = _user$project$Vega$SScheme;
 var _user$project$Vega$HCL = F3(
 	function (a, b, c) {
 		return {ctor: 'HCL', _0: a, _1: b, _2: c};
@@ -9222,32 +9238,6 @@ var _user$project$Vega$CoField = function (a) {
 	return {ctor: 'CoField', _0: a};
 };
 var _user$project$Vega$coField = _user$project$Vega$CoField;
-var _user$project$Vega$DUrl = function (a) {
-	return {ctor: 'DUrl', _0: a};
-};
-var _user$project$Vega$daUrl = _user$project$Vega$DUrl;
-var _user$project$Vega$DOn = function (a) {
-	return {ctor: 'DOn', _0: a};
-};
-var _user$project$Vega$daOn = _user$project$Vega$DOn;
-var _user$project$Vega$DSphere = {ctor: 'DSphere'};
-var _user$project$Vega$daSphere = _user$project$Vega$DSphere;
-var _user$project$Vega$DValue = function (a) {
-	return {ctor: 'DValue', _0: a};
-};
-var _user$project$Vega$daValue = _user$project$Vega$DValue;
-var _user$project$Vega$DSources = function (a) {
-	return {ctor: 'DSources', _0: a};
-};
-var _user$project$Vega$daSources = _user$project$Vega$DSources;
-var _user$project$Vega$DSource = function (a) {
-	return {ctor: 'DSource', _0: a};
-};
-var _user$project$Vega$daSource = _user$project$Vega$DSource;
-var _user$project$Vega$DFormat = function (a) {
-	return {ctor: 'DFormat', _0: a};
-};
-var _user$project$Vega$daFormat = _user$project$Vega$DFormat;
 var _user$project$Vega$DSort = function (a) {
 	return {ctor: 'DSort', _0: a};
 };
@@ -9268,18 +9258,18 @@ var _user$project$Vega$DDataset = function (a) {
 	return {ctor: 'DDataset', _0: a};
 };
 var _user$project$Vega$daDataset = _user$project$Vega$DDataset;
-var _user$project$Vega$DBoos = function (a) {
-	return {ctor: 'DBoos', _0: a};
+var _user$project$Vega$DaBoos = function (a) {
+	return {ctor: 'DaBoos', _0: a};
 };
-var _user$project$Vega$daBoos = _user$project$Vega$DBoos;
-var _user$project$Vega$DNums = function (a) {
-	return {ctor: 'DNums', _0: a};
+var _user$project$Vega$daBoos = _user$project$Vega$DaBoos;
+var _user$project$Vega$DaNums = function (a) {
+	return {ctor: 'DaNums', _0: a};
 };
-var _user$project$Vega$daNums = _user$project$Vega$DNums;
-var _user$project$Vega$DStrs = function (a) {
-	return {ctor: 'DStrs', _0: a};
+var _user$project$Vega$daNums = _user$project$Vega$DaNums;
+var _user$project$Vega$DaStrs = function (a) {
+	return {ctor: 'DaStrs', _0: a};
 };
-var _user$project$Vega$daStrs = _user$project$Vega$DStrs;
+var _user$project$Vega$daStrs = _user$project$Vega$DaStrs;
 var _user$project$Vega$EForce = function (a) {
 	return {ctor: 'EForce', _0: a};
 };
@@ -9384,10 +9374,10 @@ var _user$project$Vega$Expr = function (a) {
 	return {ctor: 'Expr', _0: a};
 };
 var _user$project$Vega$expr = _user$project$Vega$Expr;
-var _user$project$Vega$EField = function (a) {
-	return {ctor: 'EField', _0: a};
+var _user$project$Vega$ExField = function (a) {
+	return {ctor: 'ExField', _0: a};
 };
-var _user$project$Vega$eField = _user$project$Vega$EField;
+var _user$project$Vega$exField = _user$project$Vega$ExField;
 var _user$project$Vega$FaGroupBy = function (a) {
 	return {ctor: 'FaGroupBy', _0: a};
 };
@@ -12037,6 +12027,213 @@ var _user$project$Vega$PrType = function (a) {
 	return {ctor: 'PrType', _0: a};
 };
 var _user$project$Vega$prType = _user$project$Vega$PrType;
+var _user$project$Vega$DoData = function (a) {
+	return {ctor: 'DoData', _0: a};
+};
+var _user$project$Vega$doData = _user$project$Vega$DoData;
+var _user$project$Vega$DoStrs = function (a) {
+	return {ctor: 'DoStrs', _0: a};
+};
+var _user$project$Vega$doStrs = _user$project$Vega$DoStrs;
+var _user$project$Vega$DoNums = function (a) {
+	return {ctor: 'DoNums', _0: a};
+};
+var _user$project$Vega$doNums = _user$project$Vega$DoNums;
+var _user$project$Vega$SRangeStep = function (a) {
+	return {ctor: 'SRangeStep', _0: a};
+};
+var _user$project$Vega$scRangeStep = _user$project$Vega$SRangeStep;
+var _user$project$Vega$SPaddingOuter = function (a) {
+	return {ctor: 'SPaddingOuter', _0: a};
+};
+var _user$project$Vega$scPaddingOuter = _user$project$Vega$SPaddingOuter;
+var _user$project$Vega$SPaddingInner = function (a) {
+	return {ctor: 'SPaddingInner', _0: a};
+};
+var _user$project$Vega$scPaddingInner = _user$project$Vega$SPaddingInner;
+var _user$project$Vega$SAlign = function (a) {
+	return {ctor: 'SAlign', _0: a};
+};
+var _user$project$Vega$scAlign = _user$project$Vega$SAlign;
+var _user$project$Vega$SBase = function (a) {
+	return {ctor: 'SBase', _0: a};
+};
+var _user$project$Vega$scBase = _user$project$Vega$SBase;
+var _user$project$Vega$SExponent = function (a) {
+	return {ctor: 'SExponent', _0: a};
+};
+var _user$project$Vega$scExponent = _user$project$Vega$SExponent;
+var _user$project$Vega$SZero = function (a) {
+	return {ctor: 'SZero', _0: a};
+};
+var _user$project$Vega$scZero = _user$project$Vega$SZero;
+var _user$project$Vega$SNice = function (a) {
+	return {ctor: 'SNice', _0: a};
+};
+var _user$project$Vega$scNice = _user$project$Vega$SNice;
+var _user$project$Vega$SPadding = function (a) {
+	return {ctor: 'SPadding', _0: a};
+};
+var _user$project$Vega$scPadding = _user$project$Vega$SPadding;
+var _user$project$Vega$SInterpolate = function (a) {
+	return {ctor: 'SInterpolate', _0: a};
+};
+var _user$project$Vega$scInterpolate = _user$project$Vega$SInterpolate;
+var _user$project$Vega$SClamp = function (a) {
+	return {ctor: 'SClamp', _0: a};
+};
+var _user$project$Vega$scClamp = _user$project$Vega$SClamp;
+var _user$project$Vega$SRound = function (a) {
+	return {ctor: 'SRound', _0: a};
+};
+var _user$project$Vega$scRound = _user$project$Vega$SRound;
+var _user$project$Vega$SReverse = function (a) {
+	return {ctor: 'SReverse', _0: a};
+};
+var _user$project$Vega$scReverse = _user$project$Vega$SReverse;
+var _user$project$Vega$SRange = function (a) {
+	return {ctor: 'SRange', _0: a};
+};
+var _user$project$Vega$scRange = _user$project$Vega$SRange;
+var _user$project$Vega$SDomainRaw = function (a) {
+	return {ctor: 'SDomainRaw', _0: a};
+};
+var _user$project$Vega$scDomainRaw = _user$project$Vega$SDomainRaw;
+var _user$project$Vega$SDomainMid = function (a) {
+	return {ctor: 'SDomainMid', _0: a};
+};
+var _user$project$Vega$scDomainMid = _user$project$Vega$SDomainMid;
+var _user$project$Vega$SDomainMin = function (a) {
+	return {ctor: 'SDomainMin', _0: a};
+};
+var _user$project$Vega$scDomainMin = _user$project$Vega$SDomainMin;
+var _user$project$Vega$SDomainMax = function (a) {
+	return {ctor: 'SDomainMax', _0: a};
+};
+var _user$project$Vega$scDomainMax = _user$project$Vega$SDomainMax;
+var _user$project$Vega$SDomain = function (a) {
+	return {ctor: 'SDomain', _0: a};
+};
+var _user$project$Vega$scDomain = _user$project$Vega$SDomain;
+var _user$project$Vega$SType = function (a) {
+	return {ctor: 'SType', _0: a};
+};
+var _user$project$Vega$scType = _user$project$Vega$SType;
+var _user$project$Vega$RDefault = function (a) {
+	return {ctor: 'RDefault', _0: a};
+};
+var _user$project$Vega$raDefault = _user$project$Vega$RDefault;
+var _user$project$Vega$RStep = function (a) {
+	return {ctor: 'RStep', _0: a};
+};
+var _user$project$Vega$raStep = _user$project$Vega$RStep;
+var _user$project$Vega$RData = function (a) {
+	return {ctor: 'RData', _0: a};
+};
+var _user$project$Vega$raData = _user$project$Vega$RData;
+var _user$project$Vega$RScheme = F2(
+	function (a, b) {
+		return {ctor: 'RScheme', _0: a, _1: b};
+	});
+var _user$project$Vega$raScheme = function (s) {
+	return _user$project$Vega$RScheme(s);
+};
+var _user$project$Vega$RSignal = function (a) {
+	return {ctor: 'RSignal', _0: a};
+};
+var _user$project$Vega$raSignal = _user$project$Vega$RSignal;
+var _user$project$Vega$RValues = function (a) {
+	return {ctor: 'RValues', _0: a};
+};
+var _user$project$Vega$raValues = _user$project$Vega$RValues;
+var _user$project$Vega$RStrs = function (a) {
+	return {ctor: 'RStrs', _0: a};
+};
+var _user$project$Vega$raStrs = _user$project$Vega$RStrs;
+var _user$project$Vega$RNums = function (a) {
+	return {ctor: 'RNums', _0: a};
+};
+var _user$project$Vega$raNums = _user$project$Vega$RNums;
+var _user$project$Vega$SiValue = function (a) {
+	return {ctor: 'SiValue', _0: a};
+};
+var _user$project$Vega$siValue = _user$project$Vega$SiValue;
+var _user$project$Vega$SiReact = function (a) {
+	return {ctor: 'SiReact', _0: a};
+};
+var _user$project$Vega$siReact = _user$project$Vega$SiReact;
+var _user$project$Vega$SiUpdate = function (a) {
+	return {ctor: 'SiUpdate', _0: a};
+};
+var _user$project$Vega$siUpdate = _user$project$Vega$SiUpdate;
+var _user$project$Vega$SiOn = function (a) {
+	return {ctor: 'SiOn', _0: a};
+};
+var _user$project$Vega$siOn = _user$project$Vega$SiOn;
+var _user$project$Vega$SiDescription = function (a) {
+	return {ctor: 'SiDescription', _0: a};
+};
+var _user$project$Vega$siDescription = _user$project$Vega$SiDescription;
+var _user$project$Vega$SiBind = function (a) {
+	return {ctor: 'SiBind', _0: a};
+};
+var _user$project$Vega$siBind = _user$project$Vega$SiBind;
+var _user$project$Vega$SiName = function (a) {
+	return {ctor: 'SiName', _0: a};
+};
+var _user$project$Vega$signal = F2(
+	function (sigName, sps) {
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			_elm_lang$core$Json_Encode$object(
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$Vega$signalProperty,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$SiName(sigName),
+						_1: sps
+					})));
+	});
+var _user$project$Vega$siName = _user$project$Vega$SiName;
+var _user$project$Vega$SFacet = F3(
+	function (a, b, c) {
+		return {ctor: 'SFacet', _0: a, _1: b, _2: c};
+	});
+var _user$project$Vega$srFacet = F2(
+	function (d, name) {
+		return A2(_user$project$Vega$SFacet, d, name);
+	});
+var _user$project$Vega$SData = function (a) {
+	return {ctor: 'SData', _0: a};
+};
+var _user$project$Vega$srData = _user$project$Vega$SData;
+var _user$project$Vega$StAs = F2(
+	function (a, b) {
+		return {ctor: 'StAs', _0: a, _1: b};
+	});
+var _user$project$Vega$stAs = F2(
+	function (y0, y1) {
+		return A2(_user$project$Vega$StAs, y0, y1);
+	});
+var _user$project$Vega$StOffset = function (a) {
+	return {ctor: 'StOffset', _0: a};
+};
+var _user$project$Vega$stOffset = _user$project$Vega$StOffset;
+var _user$project$Vega$StSort = function (a) {
+	return {ctor: 'StSort', _0: a};
+};
+var _user$project$Vega$stSort = _user$project$Vega$StSort;
+var _user$project$Vega$StGroupBy = function (a) {
+	return {ctor: 'StGroupBy', _0: a};
+};
+var _user$project$Vega$stGroupBy = _user$project$Vega$StGroupBy;
+var _user$project$Vega$StField = function (a) {
+	return {ctor: 'StField', _0: a};
+};
+var _user$project$Vega$stField = _user$project$Vega$StField;
 var _user$project$Vega$StrSignals = function (a) {
 	return {ctor: 'StrSignals', _0: a};
 };
@@ -12053,6 +12250,258 @@ var _user$project$Vega$Str = function (a) {
 	return {ctor: 'Str', _0: a};
 };
 var _user$project$Vega$str = _user$project$Vega$Str;
+var _user$project$Vega$TZIndex = function (a) {
+	return {ctor: 'TZIndex', _0: a};
+};
+var _user$project$Vega$tiZIndex = _user$project$Vega$TZIndex;
+var _user$project$Vega$TOffset = function (a) {
+	return {ctor: 'TOffset', _0: a};
+};
+var _user$project$Vega$tiOffset = _user$project$Vega$TOffset;
+var _user$project$Vega$TStyle = function (a) {
+	return {ctor: 'TStyle', _0: a};
+};
+var _user$project$Vega$tiStyle = _user$project$Vega$TStyle;
+var _user$project$Vega$TName = function (a) {
+	return {ctor: 'TName', _0: a};
+};
+var _user$project$Vega$tiName = _user$project$Vega$TName;
+var _user$project$Vega$TInteractive = function (a) {
+	return {ctor: 'TInteractive', _0: a};
+};
+var _user$project$Vega$tiInteractive = _user$project$Vega$TInteractive;
+var _user$project$Vega$TEncode = function (a) {
+	return {ctor: 'TEncode', _0: a};
+};
+var _user$project$Vega$tiEncode = _user$project$Vega$TEncode;
+var _user$project$Vega$TAnchor = function (a) {
+	return {ctor: 'TAnchor', _0: a};
+};
+var _user$project$Vega$tiAnchor = _user$project$Vega$TAnchor;
+var _user$project$Vega$TOrient = function (a) {
+	return {ctor: 'TOrient', _0: a};
+};
+var _user$project$Vega$tiOrient = _user$project$Vega$TOrient;
+var _user$project$Vega$MGroup = function (a) {
+	return {ctor: 'MGroup', _0: a};
+};
+var _user$project$Vega$mGroup = _user$project$Vega$MGroup;
+var _user$project$Vega$MStyle = function (a) {
+	return {ctor: 'MStyle', _0: a};
+};
+var _user$project$Vega$mStyle = _user$project$Vega$MStyle;
+var _user$project$Vega$MRole = function (a) {
+	return {ctor: 'MRole', _0: a};
+};
+var _user$project$Vega$MTransform = function (a) {
+	return {ctor: 'MTransform', _0: a};
+};
+var _user$project$Vega$mTransform = _user$project$Vega$MTransform;
+var _user$project$Vega$MSort = function (a) {
+	return {ctor: 'MSort', _0: a};
+};
+var _user$project$Vega$mSort = _user$project$Vega$MSort;
+var _user$project$Vega$MOn = function (a) {
+	return {ctor: 'MOn', _0: a};
+};
+var _user$project$Vega$mOn = _user$project$Vega$MOn;
+var _user$project$Vega$MName = function (a) {
+	return {ctor: 'MName', _0: a};
+};
+var _user$project$Vega$mName = _user$project$Vega$MName;
+var _user$project$Vega$MKey = function (a) {
+	return {ctor: 'MKey', _0: a};
+};
+var _user$project$Vega$mKey = _user$project$Vega$MKey;
+var _user$project$Vega$MInteractive = function (a) {
+	return {ctor: 'MInteractive', _0: a};
+};
+var _user$project$Vega$mInteractive = _user$project$Vega$MInteractive;
+var _user$project$Vega$MFrom = function (a) {
+	return {ctor: 'MFrom', _0: a};
+};
+var _user$project$Vega$mFrom = _user$project$Vega$MFrom;
+var _user$project$Vega$MEncode = function (a) {
+	return {ctor: 'MEncode', _0: a};
+};
+var _user$project$Vega$mEncode = _user$project$Vega$MEncode;
+var _user$project$Vega$MDescription = function (a) {
+	return {ctor: 'MDescription', _0: a};
+};
+var _user$project$Vega$mDescription = _user$project$Vega$MDescription;
+var _user$project$Vega$MClip = function (a) {
+	return {ctor: 'MClip', _0: a};
+};
+var _user$project$Vega$mClip = _user$project$Vega$MClip;
+var _user$project$Vega$MType = function (a) {
+	return {ctor: 'MType', _0: a};
+};
+var _user$project$Vega$mark = F2(
+	function (mark, mps) {
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			_elm_lang$core$Json_Encode$object(
+				A2(
+					_elm_lang$core$List$concatMap,
+					_user$project$Vega$topMarkProperty,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$MType(mark),
+						_1: mps
+					})));
+	});
+var _user$project$Vega$TResolveFilter = {ctor: 'TResolveFilter'};
+var _user$project$Vega$TCrossFilter = {ctor: 'TCrossFilter'};
+var _user$project$Vega$TTreeMap = {ctor: 'TTreeMap'};
+var _user$project$Vega$TTree = {ctor: 'TTree'};
+var _user$project$Vega$TPartition = {ctor: 'TPartition'};
+var _user$project$Vega$TPack = function (a) {
+	return {ctor: 'TPack', _0: a};
+};
+var _user$project$Vega$trPack = _user$project$Vega$TPack;
+var _user$project$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
+var _user$project$Vega$TStratify = F2(
+	function (a, b) {
+		return {ctor: 'TStratify', _0: a, _1: b};
+	});
+var _user$project$Vega$trStratify = F2(
+	function (key, parent) {
+		return A2(_user$project$Vega$TStratify, key, parent);
+	});
+var _user$project$Vega$TNest = {ctor: 'TNest'};
+var _user$project$Vega$TWordCloud = {ctor: 'TWordCloud'};
+var _user$project$Vega$TVoronoi = {ctor: 'TVoronoi'};
+var _user$project$Vega$TForce = function (a) {
+	return {ctor: 'TForce', _0: a};
+};
+var _user$project$Vega$trForce = _user$project$Vega$TForce;
+var _user$project$Vega$TStack = function (a) {
+	return {ctor: 'TStack', _0: a};
+};
+var _user$project$Vega$trStack = _user$project$Vega$TStack;
+var _user$project$Vega$TPie = function (a) {
+	return {ctor: 'TPie', _0: a};
+};
+var _user$project$Vega$trPie = _user$project$Vega$TPie;
+var _user$project$Vega$TLinkPath = function (a) {
+	return {ctor: 'TLinkPath', _0: a};
+};
+var _user$project$Vega$trLinkPath = function (lpProps) {
+	return _user$project$Vega$TLinkPath(lpProps);
+};
+var _user$project$Vega$TGraticule = function (a) {
+	return {ctor: 'TGraticule', _0: a};
+};
+var _user$project$Vega$trGraticule = function (grProps) {
+	return _user$project$Vega$TGraticule(grProps);
+};
+var _user$project$Vega$TGeoShape = F2(
+	function (a, b) {
+		return {ctor: 'TGeoShape', _0: a, _1: b};
+	});
+var _user$project$Vega$trGeoShape = F2(
+	function (pName, gsProps) {
+		return A2(_user$project$Vega$TGeoShape, pName, gsProps);
+	});
+var _user$project$Vega$TGeoPoint = {ctor: 'TGeoPoint'};
+var _user$project$Vega$TGeoPath = F2(
+	function (a, b) {
+		return {ctor: 'TGeoPath', _0: a, _1: b};
+	});
+var _user$project$Vega$trGeoPath = F2(
+	function (pName, gpProps) {
+		return A2(_user$project$Vega$TGeoPath, pName, gpProps);
+	});
+var _user$project$Vega$TGeoJson = {ctor: 'TGeoJson'};
+var _user$project$Vega$TContour = {ctor: 'TContour'};
+var _user$project$Vega$TWindow = {ctor: 'TWindow'};
+var _user$project$Vega$TSequence = {ctor: 'TSequence'};
+var _user$project$Vega$TSample = {ctor: 'TSample'};
+var _user$project$Vega$TProject = {ctor: 'TProject'};
+var _user$project$Vega$TLookup = F4(
+	function (a, b, c, d) {
+		return {ctor: 'TLookup', _0: a, _1: b, _2: c, _3: d};
+	});
+var _user$project$Vega$trLookup = F3(
+	function (from, key, fields) {
+		return A3(_user$project$Vega$TLookup, from, key, fields);
+	});
+var _user$project$Vega$TJoinAggregate = {ctor: 'TJoinAggregate'};
+var _user$project$Vega$TImpute = {ctor: 'TImpute'};
+var _user$project$Vega$TIdentifier = {ctor: 'TIdentifier'};
+var _user$project$Vega$TFormula = F3(
+	function (a, b, c) {
+		return {ctor: 'TFormula', _0: a, _1: b, _2: c};
+	});
+var _user$project$Vega$trFormula = F2(
+	function (ex, out) {
+		return A2(_user$project$Vega$TFormula, ex, out);
+	});
+var _user$project$Vega$TFold = {ctor: 'TFold'};
+var _user$project$Vega$TFilter = function (a) {
+	return {ctor: 'TFilter', _0: a};
+};
+var _user$project$Vega$trFilter = _user$project$Vega$TFilter;
+var _user$project$Vega$TExtentAsSignal = F2(
+	function (a, b) {
+		return {ctor: 'TExtentAsSignal', _0: a, _1: b};
+	});
+var _user$project$Vega$trExtentAsSignal = F2(
+	function (f, sigName) {
+		return A2(_user$project$Vega$TExtentAsSignal, f, sigName);
+	});
+var _user$project$Vega$TExtent = function (a) {
+	return {ctor: 'TExtent', _0: a};
+};
+var _user$project$Vega$trExtent = _user$project$Vega$TExtent;
+var _user$project$Vega$TDensity = {ctor: 'TDensity'};
+var _user$project$Vega$TCross = {ctor: 'TCross'};
+var _user$project$Vega$TCountPattern = {ctor: 'TCountPattern'};
+var _user$project$Vega$TCollect = {ctor: 'TCollect'};
+var _user$project$Vega$TBin = {ctor: 'TBin'};
+var _user$project$Vega$TAggregate = function (a) {
+	return {ctor: 'TAggregate', _0: a};
+};
+var _user$project$Vega$trAggregate = _user$project$Vega$TAggregate;
+var _user$project$Vega$TgModifyValues = F2(
+	function (a, b) {
+		return {ctor: 'TgModifyValues', _0: a, _1: b};
+	});
+var _user$project$Vega$tgModifyValues = F2(
+	function (key, val) {
+		return A2(_user$project$Vega$TgModifyValues, key, val);
+	});
+var _user$project$Vega$TgToggle = function (a) {
+	return {ctor: 'TgToggle', _0: a};
+};
+var _user$project$Vega$tgToggle = _user$project$Vega$TgToggle;
+var _user$project$Vega$TgRemoveAll = {ctor: 'TgRemoveAll'};
+var _user$project$Vega$tgRemoveAll = _user$project$Vega$TgRemoveAll;
+var _user$project$Vega$TgRemove = function (a) {
+	return {ctor: 'TgRemove', _0: a};
+};
+var _user$project$Vega$tgRemove = _user$project$Vega$TgRemove;
+var _user$project$Vega$TgInsert = function (a) {
+	return {ctor: 'TgInsert', _0: a};
+};
+var _user$project$Vega$tgInsert = _user$project$Vega$TgInsert;
+var _user$project$Vega$TgTrigger = function (a) {
+	return {ctor: 'TgTrigger', _0: a};
+};
+var _user$project$Vega$trigger = F2(
+	function (trName, trProps) {
+		return _elm_lang$core$Json_Encode$object(
+			A2(
+				_elm_lang$core$List$concatMap,
+				_user$project$Vega$triggerProperties,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$TgTrigger(trName),
+					_1: trProps
+				}));
+	});
 var _user$project$Vega$VIfElse = F3(
 	function (a, b, c) {
 		return {ctor: 'VIfElse', _0: a, _1: b, _2: c};
@@ -12211,6 +12660,31 @@ var _user$project$Vega$CContextMenu = {ctor: 'CContextMenu'};
 var _user$project$Vega$CNone = {ctor: 'CNone'};
 var _user$project$Vega$CDefault = {ctor: 'CDefault'};
 var _user$project$Vega$CAuto = {ctor: 'CAuto'};
+var _user$project$Vega$DaUrl = function (a) {
+	return {ctor: 'DaUrl', _0: a};
+};
+var _user$project$Vega$daUrl = _user$project$Vega$DaUrl;
+var _user$project$Vega$DaOn = function (a) {
+	return {ctor: 'DaOn', _0: a};
+};
+var _user$project$Vega$daOn = _user$project$Vega$DaOn;
+var _user$project$Vega$DaSphere = {ctor: 'DaSphere'};
+var _user$project$Vega$DaValue = function (a) {
+	return {ctor: 'DaValue', _0: a};
+};
+var _user$project$Vega$daValue = _user$project$Vega$DaValue;
+var _user$project$Vega$DaSources = function (a) {
+	return {ctor: 'DaSources', _0: a};
+};
+var _user$project$Vega$daSources = _user$project$Vega$DaSources;
+var _user$project$Vega$DaSource = function (a) {
+	return {ctor: 'DaSource', _0: a};
+};
+var _user$project$Vega$daSource = _user$project$Vega$DaSource;
+var _user$project$Vega$DaFormat = function (a) {
+	return {ctor: 'DaFormat', _0: a};
+};
+var _user$project$Vega$daFormat = _user$project$Vega$DaFormat;
 var _user$project$Vega$FoUtc = function (a) {
 	return {ctor: 'FoUtc', _0: a};
 };
@@ -12324,9 +12798,6 @@ var _user$project$Vega$Linear = {ctor: 'Linear'};
 var _user$project$Vega$CatmullRom = {ctor: 'CatmullRom'};
 var _user$project$Vega$Cardinal = {ctor: 'Cardinal'};
 var _user$project$Vega$Basis = {ctor: 'Basis'};
-var _user$project$Vega$Radial = {ctor: 'Radial'};
-var _user$project$Vega$Vertical = {ctor: 'Vertical'};
-var _user$project$Vega$Horizontal = {ctor: 'Horizontal'};
 var _user$project$Vega$Variancep = {ctor: 'Variancep'};
 var _user$project$Vega$Variance = {ctor: 'Variance'};
 var _user$project$Vega$Valid = {ctor: 'Valid'};
@@ -12348,18 +12819,21 @@ var _user$project$Vega$CI0 = {ctor: 'CI0'};
 var _user$project$Vega$Average = {ctor: 'Average'};
 var _user$project$Vega$ArgMin = {ctor: 'ArgMin'};
 var _user$project$Vega$ArgMax = {ctor: 'ArgMax'};
-var _user$project$Vega$ORadial = {ctor: 'ORadial'};
-var _user$project$Vega$OVertical = {ctor: 'OVertical'};
-var _user$project$Vega$OHorizontal = {ctor: 'OHorizontal'};
-var _user$project$Vega$OGreedy = {ctor: 'OGreedy'};
-var _user$project$Vega$OParity = {ctor: 'OParity'};
-var _user$project$Vega$ONone = {ctor: 'ONone'};
 var _user$project$Vega$OrderSignal = function (a) {
 	return {ctor: 'OrderSignal', _0: a};
 };
 var _user$project$Vega$orSignal = _user$project$Vega$OrderSignal;
 var _user$project$Vega$Descend = {ctor: 'Descend'};
 var _user$project$Vega$Ascend = {ctor: 'Ascend'};
+var _user$project$Vega$ORadial = {ctor: 'ORadial'};
+var _user$project$Vega$OVertical = {ctor: 'OVertical'};
+var _user$project$Vega$OHorizontal = {ctor: 'OHorizontal'};
+var _user$project$Vega$Radial = {ctor: 'Radial'};
+var _user$project$Vega$Vertical = {ctor: 'Vertical'};
+var _user$project$Vega$Horizontal = {ctor: 'Horizontal'};
+var _user$project$Vega$OGreedy = {ctor: 'OGreedy'};
+var _user$project$Vega$OParity = {ctor: 'OParity'};
+var _user$project$Vega$ONone = {ctor: 'ONone'};
 var _user$project$Vega$PEdges = F4(
 	function (a, b, c, d) {
 		return {ctor: 'PEdges', _0: a, _1: b, _2: c, _3: d};
@@ -12414,18 +12888,6 @@ var _user$project$Vega$ScLog = {ctor: 'ScLog'};
 var _user$project$Vega$ScSqrt = {ctor: 'ScSqrt'};
 var _user$project$Vega$ScPow = {ctor: 'ScPow'};
 var _user$project$Vega$ScLinear = {ctor: 'ScLinear'};
-var _user$project$Vega$DoData = function (a) {
-	return {ctor: 'DoData', _0: a};
-};
-var _user$project$Vega$doData = _user$project$Vega$DoData;
-var _user$project$Vega$DoStrs = function (a) {
-	return {ctor: 'DoStrs', _0: a};
-};
-var _user$project$Vega$doStrs = _user$project$Vega$DoStrs;
-var _user$project$Vega$DoNums = function (a) {
-	return {ctor: 'DoNums', _0: a};
-};
-var _user$project$Vega$doNums = _user$project$Vega$DoNums;
 var _user$project$Vega$NTickCount = function (a) {
 	return {ctor: 'NTickCount', _0: a};
 };
@@ -12448,185 +12910,10 @@ var _user$project$Vega$NHour = {ctor: 'NHour'};
 var _user$project$Vega$NMinute = {ctor: 'NMinute'};
 var _user$project$Vega$NSecond = {ctor: 'NSecond'};
 var _user$project$Vega$NMillisecond = {ctor: 'NMillisecond'};
-var _user$project$Vega$SRangeStep = function (a) {
-	return {ctor: 'SRangeStep', _0: a};
-};
-var _user$project$Vega$scRangeStep = _user$project$Vega$SRangeStep;
-var _user$project$Vega$SPaddingOuter = function (a) {
-	return {ctor: 'SPaddingOuter', _0: a};
-};
-var _user$project$Vega$scPaddingOuter = _user$project$Vega$SPaddingOuter;
-var _user$project$Vega$SPaddingInner = function (a) {
-	return {ctor: 'SPaddingInner', _0: a};
-};
-var _user$project$Vega$scPaddingInner = _user$project$Vega$SPaddingInner;
-var _user$project$Vega$SAlign = function (a) {
-	return {ctor: 'SAlign', _0: a};
-};
-var _user$project$Vega$scAlign = _user$project$Vega$SAlign;
-var _user$project$Vega$SBase = function (a) {
-	return {ctor: 'SBase', _0: a};
-};
-var _user$project$Vega$scBase = _user$project$Vega$SBase;
-var _user$project$Vega$SExponent = function (a) {
-	return {ctor: 'SExponent', _0: a};
-};
-var _user$project$Vega$scExponent = _user$project$Vega$SExponent;
-var _user$project$Vega$SZero = function (a) {
-	return {ctor: 'SZero', _0: a};
-};
-var _user$project$Vega$scZero = _user$project$Vega$SZero;
-var _user$project$Vega$SNice = function (a) {
-	return {ctor: 'SNice', _0: a};
-};
-var _user$project$Vega$scNice = _user$project$Vega$SNice;
-var _user$project$Vega$SPadding = function (a) {
-	return {ctor: 'SPadding', _0: a};
-};
-var _user$project$Vega$scPadding = _user$project$Vega$SPadding;
-var _user$project$Vega$SInterpolate = function (a) {
-	return {ctor: 'SInterpolate', _0: a};
-};
-var _user$project$Vega$scInterpolate = _user$project$Vega$SInterpolate;
-var _user$project$Vega$SClamp = function (a) {
-	return {ctor: 'SClamp', _0: a};
-};
-var _user$project$Vega$scClamp = _user$project$Vega$SClamp;
-var _user$project$Vega$SRound = function (a) {
-	return {ctor: 'SRound', _0: a};
-};
-var _user$project$Vega$scRound = _user$project$Vega$SRound;
-var _user$project$Vega$SReverse = function (a) {
-	return {ctor: 'SReverse', _0: a};
-};
-var _user$project$Vega$scReverse = _user$project$Vega$SReverse;
-var _user$project$Vega$SRange = function (a) {
-	return {ctor: 'SRange', _0: a};
-};
-var _user$project$Vega$scRange = _user$project$Vega$SRange;
-var _user$project$Vega$SDomainRaw = function (a) {
-	return {ctor: 'SDomainRaw', _0: a};
-};
-var _user$project$Vega$scDomainRaw = _user$project$Vega$SDomainRaw;
-var _user$project$Vega$SDomainMid = function (a) {
-	return {ctor: 'SDomainMid', _0: a};
-};
-var _user$project$Vega$scDomainMid = _user$project$Vega$SDomainMid;
-var _user$project$Vega$SDomainMin = function (a) {
-	return {ctor: 'SDomainMin', _0: a};
-};
-var _user$project$Vega$scDomainMin = _user$project$Vega$SDomainMin;
-var _user$project$Vega$SDomainMax = function (a) {
-	return {ctor: 'SDomainMax', _0: a};
-};
-var _user$project$Vega$scDomainMax = _user$project$Vega$SDomainMax;
-var _user$project$Vega$SDomain = function (a) {
-	return {ctor: 'SDomain', _0: a};
-};
-var _user$project$Vega$scDomain = _user$project$Vega$SDomain;
-var _user$project$Vega$SType = function (a) {
-	return {ctor: 'SType', _0: a};
-};
-var _user$project$Vega$scType = _user$project$Vega$SType;
-var _user$project$Vega$RDefault = function (a) {
-	return {ctor: 'RDefault', _0: a};
-};
-var _user$project$Vega$raDefault = _user$project$Vega$RDefault;
-var _user$project$Vega$RStep = function (a) {
-	return {ctor: 'RStep', _0: a};
-};
-var _user$project$Vega$raStep = _user$project$Vega$RStep;
-var _user$project$Vega$RData = function (a) {
-	return {ctor: 'RData', _0: a};
-};
-var _user$project$Vega$raData = _user$project$Vega$RData;
-var _user$project$Vega$RScheme = F2(
-	function (a, b) {
-		return {ctor: 'RScheme', _0: a, _1: b};
-	});
-var _user$project$Vega$raScheme = function (s) {
-	return _user$project$Vega$RScheme(s);
-};
-var _user$project$Vega$RSignal = function (a) {
-	return {ctor: 'RSignal', _0: a};
-};
-var _user$project$Vega$raSignal = _user$project$Vega$RSignal;
-var _user$project$Vega$RValues = function (a) {
-	return {ctor: 'RValues', _0: a};
-};
-var _user$project$Vega$raValues = _user$project$Vega$RValues;
-var _user$project$Vega$RStrs = function (a) {
-	return {ctor: 'RStrs', _0: a};
-};
-var _user$project$Vega$raStrs = _user$project$Vega$RStrs;
-var _user$project$Vega$RNums = function (a) {
-	return {ctor: 'RNums', _0: a};
-};
-var _user$project$Vega$raNums = _user$project$Vega$RNums;
-var _user$project$Vega$SExtent = F2(
-	function (a, b) {
-		return {ctor: 'SExtent', _0: a, _1: b};
-	});
-var _user$project$Vega$csExtent = F2(
-	function (mn, mx) {
-		return A2(_user$project$Vega$SExtent, mn, mx);
-	});
-var _user$project$Vega$SCount = function (a) {
-	return {ctor: 'SCount', _0: a};
-};
-var _user$project$Vega$csCount = _user$project$Vega$SCount;
-var _user$project$Vega$SScheme = function (a) {
-	return {ctor: 'SScheme', _0: a};
-};
-var _user$project$Vega$csScheme = _user$project$Vega$SScheme;
 var _user$project$Vega$SBottom = {ctor: 'SBottom'};
 var _user$project$Vega$STop = {ctor: 'STop'};
 var _user$project$Vega$SRight = {ctor: 'SRight'};
 var _user$project$Vega$SLeft = {ctor: 'SLeft'};
-var _user$project$Vega$SiValue = function (a) {
-	return {ctor: 'SiValue', _0: a};
-};
-var _user$project$Vega$siValue = _user$project$Vega$SiValue;
-var _user$project$Vega$SiReact = function (a) {
-	return {ctor: 'SiReact', _0: a};
-};
-var _user$project$Vega$siReact = _user$project$Vega$SiReact;
-var _user$project$Vega$SiUpdate = function (a) {
-	return {ctor: 'SiUpdate', _0: a};
-};
-var _user$project$Vega$siUpdate = _user$project$Vega$SiUpdate;
-var _user$project$Vega$SiOn = function (a) {
-	return {ctor: 'SiOn', _0: a};
-};
-var _user$project$Vega$siOn = _user$project$Vega$SiOn;
-var _user$project$Vega$SiDescription = function (a) {
-	return {ctor: 'SiDescription', _0: a};
-};
-var _user$project$Vega$siDescription = _user$project$Vega$SiDescription;
-var _user$project$Vega$SiBind = function (a) {
-	return {ctor: 'SiBind', _0: a};
-};
-var _user$project$Vega$siBind = _user$project$Vega$SiBind;
-var _user$project$Vega$SiName = function (a) {
-	return {ctor: 'SiName', _0: a};
-};
-var _user$project$Vega$signal = F2(
-	function (sigName, sps) {
-		return F2(
-			function (x, y) {
-				return {ctor: '::', _0: x, _1: y};
-			})(
-			_elm_lang$core$Json_Encode$object(
-				A2(
-					_elm_lang$core$List$map,
-					_user$project$Vega$signalProperty,
-					{
-						ctor: '::',
-						_0: _user$project$Vega$SiName(sigName),
-						_1: sps
-					})));
-	});
-var _user$project$Vega$siName = _user$project$Vega$SiName;
 var _user$project$Vega$ByField = function (a) {
 	return {ctor: 'ByField', _0: a};
 };
@@ -12917,18 +13204,6 @@ var _user$project$Vega$scale = F2(
 					_1: A2(_elm_lang$core$List$map, _user$project$Vega$scaleProperty, sps)
 				}));
 	});
-var _user$project$Vega$SFacet = F3(
-	function (a, b, c) {
-		return {ctor: 'SFacet', _0: a, _1: b, _2: c};
-	});
-var _user$project$Vega$srFacet = F2(
-	function (d, name) {
-		return A2(_user$project$Vega$SFacet, d, name);
-	});
-var _user$project$Vega$SData = function (a) {
-	return {ctor: 'SData', _0: a};
-};
-var _user$project$Vega$srData = _user$project$Vega$SData;
 var _user$project$Vega$OfSignal = function (a) {
 	return {ctor: 'OfSignal', _0: a};
 };
@@ -12936,30 +13211,6 @@ var _user$project$Vega$ofSignal = _user$project$Vega$OfSignal;
 var _user$project$Vega$OfNormalize = {ctor: 'OfNormalize'};
 var _user$project$Vega$OfCenter = {ctor: 'OfCenter'};
 var _user$project$Vega$OfZero = {ctor: 'OfZero'};
-var _user$project$Vega$StAs = F2(
-	function (a, b) {
-		return {ctor: 'StAs', _0: a, _1: b};
-	});
-var _user$project$Vega$stAs = F2(
-	function (y0, y1) {
-		return A2(_user$project$Vega$StAs, y0, y1);
-	});
-var _user$project$Vega$StOffset = function (a) {
-	return {ctor: 'StOffset', _0: a};
-};
-var _user$project$Vega$stOffset = _user$project$Vega$StOffset;
-var _user$project$Vega$StSort = function (a) {
-	return {ctor: 'StSort', _0: a};
-};
-var _user$project$Vega$stSort = _user$project$Vega$StSort;
-var _user$project$Vega$StGroupBy = function (a) {
-	return {ctor: 'StGroupBy', _0: a};
-};
-var _user$project$Vega$stGroupBy = _user$project$Vega$StGroupBy;
-var _user$project$Vega$StField = function (a) {
-	return {ctor: 'StField', _0: a};
-};
-var _user$project$Vega$stField = _user$project$Vega$StField;
 var _user$project$Vega$CSquare = {ctor: 'CSquare'};
 var _user$project$Vega$CRound = {ctor: 'CRound'};
 var _user$project$Vega$CButt = {ctor: 'CButt'};
@@ -12994,258 +13245,6 @@ var _user$project$Vega$Day = {ctor: 'Day'};
 var _user$project$Vega$Week = {ctor: 'Week'};
 var _user$project$Vega$Month = {ctor: 'Month'};
 var _user$project$Vega$Year = {ctor: 'Year'};
-var _user$project$Vega$TZIndex = function (a) {
-	return {ctor: 'TZIndex', _0: a};
-};
-var _user$project$Vega$tiZIndex = _user$project$Vega$TZIndex;
-var _user$project$Vega$TOffset = function (a) {
-	return {ctor: 'TOffset', _0: a};
-};
-var _user$project$Vega$tiOffset = _user$project$Vega$TOffset;
-var _user$project$Vega$TStyle = function (a) {
-	return {ctor: 'TStyle', _0: a};
-};
-var _user$project$Vega$tiStyle = _user$project$Vega$TStyle;
-var _user$project$Vega$TName = function (a) {
-	return {ctor: 'TName', _0: a};
-};
-var _user$project$Vega$tiName = _user$project$Vega$TName;
-var _user$project$Vega$TInteractive = function (a) {
-	return {ctor: 'TInteractive', _0: a};
-};
-var _user$project$Vega$tiInteractive = _user$project$Vega$TInteractive;
-var _user$project$Vega$TEncode = function (a) {
-	return {ctor: 'TEncode', _0: a};
-};
-var _user$project$Vega$tiEncode = _user$project$Vega$TEncode;
-var _user$project$Vega$TAnchor = function (a) {
-	return {ctor: 'TAnchor', _0: a};
-};
-var _user$project$Vega$tiAnchor = _user$project$Vega$TAnchor;
-var _user$project$Vega$TOrient = function (a) {
-	return {ctor: 'TOrient', _0: a};
-};
-var _user$project$Vega$tiOrient = _user$project$Vega$TOrient;
-var _user$project$Vega$MGroup = function (a) {
-	return {ctor: 'MGroup', _0: a};
-};
-var _user$project$Vega$mGroup = _user$project$Vega$MGroup;
-var _user$project$Vega$MStyle = function (a) {
-	return {ctor: 'MStyle', _0: a};
-};
-var _user$project$Vega$mStyle = _user$project$Vega$MStyle;
-var _user$project$Vega$MRole = function (a) {
-	return {ctor: 'MRole', _0: a};
-};
-var _user$project$Vega$MTransform = function (a) {
-	return {ctor: 'MTransform', _0: a};
-};
-var _user$project$Vega$mTransform = _user$project$Vega$MTransform;
-var _user$project$Vega$MSort = function (a) {
-	return {ctor: 'MSort', _0: a};
-};
-var _user$project$Vega$mSort = _user$project$Vega$MSort;
-var _user$project$Vega$MOn = function (a) {
-	return {ctor: 'MOn', _0: a};
-};
-var _user$project$Vega$mOn = _user$project$Vega$MOn;
-var _user$project$Vega$MName = function (a) {
-	return {ctor: 'MName', _0: a};
-};
-var _user$project$Vega$mName = _user$project$Vega$MName;
-var _user$project$Vega$MKey = function (a) {
-	return {ctor: 'MKey', _0: a};
-};
-var _user$project$Vega$mKey = _user$project$Vega$MKey;
-var _user$project$Vega$MInteractive = function (a) {
-	return {ctor: 'MInteractive', _0: a};
-};
-var _user$project$Vega$mInteractive = _user$project$Vega$MInteractive;
-var _user$project$Vega$MFrom = function (a) {
-	return {ctor: 'MFrom', _0: a};
-};
-var _user$project$Vega$mFrom = _user$project$Vega$MFrom;
-var _user$project$Vega$MEncode = function (a) {
-	return {ctor: 'MEncode', _0: a};
-};
-var _user$project$Vega$mEncode = _user$project$Vega$MEncode;
-var _user$project$Vega$MDescription = function (a) {
-	return {ctor: 'MDescription', _0: a};
-};
-var _user$project$Vega$mDescription = _user$project$Vega$MDescription;
-var _user$project$Vega$MClip = function (a) {
-	return {ctor: 'MClip', _0: a};
-};
-var _user$project$Vega$mClip = _user$project$Vega$MClip;
-var _user$project$Vega$MType = function (a) {
-	return {ctor: 'MType', _0: a};
-};
-var _user$project$Vega$mark = F2(
-	function (mark, mps) {
-		return F2(
-			function (x, y) {
-				return {ctor: '::', _0: x, _1: y};
-			})(
-			_elm_lang$core$Json_Encode$object(
-				A2(
-					_elm_lang$core$List$concatMap,
-					_user$project$Vega$topMarkProperty,
-					{
-						ctor: '::',
-						_0: _user$project$Vega$MType(mark),
-						_1: mps
-					})));
-	});
-var _user$project$Vega$TResolveFilter = {ctor: 'TResolveFilter'};
-var _user$project$Vega$TCrossFilter = {ctor: 'TCrossFilter'};
-var _user$project$Vega$TTreeMap = {ctor: 'TTreeMap'};
-var _user$project$Vega$TTree = {ctor: 'TTree'};
-var _user$project$Vega$TPartition = {ctor: 'TPartition'};
-var _user$project$Vega$TPack = function (a) {
-	return {ctor: 'TPack', _0: a};
-};
-var _user$project$Vega$trPack = _user$project$Vega$TPack;
-var _user$project$Vega$TTreeLinks = {ctor: 'TTreeLinks'};
-var _user$project$Vega$TStratify = F2(
-	function (a, b) {
-		return {ctor: 'TStratify', _0: a, _1: b};
-	});
-var _user$project$Vega$trStratify = F2(
-	function (key, parent) {
-		return A2(_user$project$Vega$TStratify, key, parent);
-	});
-var _user$project$Vega$TNest = {ctor: 'TNest'};
-var _user$project$Vega$TWordCloud = {ctor: 'TWordCloud'};
-var _user$project$Vega$TVoronoi = {ctor: 'TVoronoi'};
-var _user$project$Vega$TForce = function (a) {
-	return {ctor: 'TForce', _0: a};
-};
-var _user$project$Vega$trForce = _user$project$Vega$TForce;
-var _user$project$Vega$TStack = function (a) {
-	return {ctor: 'TStack', _0: a};
-};
-var _user$project$Vega$trStack = _user$project$Vega$TStack;
-var _user$project$Vega$TPie = function (a) {
-	return {ctor: 'TPie', _0: a};
-};
-var _user$project$Vega$trPie = _user$project$Vega$TPie;
-var _user$project$Vega$TLinkPath = function (a) {
-	return {ctor: 'TLinkPath', _0: a};
-};
-var _user$project$Vega$trLinkPath = function (lpProps) {
-	return _user$project$Vega$TLinkPath(lpProps);
-};
-var _user$project$Vega$TGraticule = function (a) {
-	return {ctor: 'TGraticule', _0: a};
-};
-var _user$project$Vega$trGraticule = function (grProps) {
-	return _user$project$Vega$TGraticule(grProps);
-};
-var _user$project$Vega$TGeoShape = F2(
-	function (a, b) {
-		return {ctor: 'TGeoShape', _0: a, _1: b};
-	});
-var _user$project$Vega$trGeoShape = F2(
-	function (pName, gsProps) {
-		return A2(_user$project$Vega$TGeoShape, pName, gsProps);
-	});
-var _user$project$Vega$TGeoPoint = {ctor: 'TGeoPoint'};
-var _user$project$Vega$TGeoPath = F2(
-	function (a, b) {
-		return {ctor: 'TGeoPath', _0: a, _1: b};
-	});
-var _user$project$Vega$trGeoPath = F2(
-	function (pName, gpProps) {
-		return A2(_user$project$Vega$TGeoPath, pName, gpProps);
-	});
-var _user$project$Vega$TGeoJson = {ctor: 'TGeoJson'};
-var _user$project$Vega$TContour = {ctor: 'TContour'};
-var _user$project$Vega$TWindow = {ctor: 'TWindow'};
-var _user$project$Vega$TSequence = {ctor: 'TSequence'};
-var _user$project$Vega$TSample = {ctor: 'TSample'};
-var _user$project$Vega$TProject = {ctor: 'TProject'};
-var _user$project$Vega$TLookup = F4(
-	function (a, b, c, d) {
-		return {ctor: 'TLookup', _0: a, _1: b, _2: c, _3: d};
-	});
-var _user$project$Vega$trLookup = F3(
-	function (from, key, fields) {
-		return A3(_user$project$Vega$TLookup, from, key, fields);
-	});
-var _user$project$Vega$TJoinAggregate = {ctor: 'TJoinAggregate'};
-var _user$project$Vega$TImpute = {ctor: 'TImpute'};
-var _user$project$Vega$TIdentifier = {ctor: 'TIdentifier'};
-var _user$project$Vega$TFormula = F3(
-	function (a, b, c) {
-		return {ctor: 'TFormula', _0: a, _1: b, _2: c};
-	});
-var _user$project$Vega$trFormula = F2(
-	function (ex, out) {
-		return A2(_user$project$Vega$TFormula, ex, out);
-	});
-var _user$project$Vega$TFold = {ctor: 'TFold'};
-var _user$project$Vega$TFilter = function (a) {
-	return {ctor: 'TFilter', _0: a};
-};
-var _user$project$Vega$trFilter = _user$project$Vega$TFilter;
-var _user$project$Vega$TExtentAsSignal = F2(
-	function (a, b) {
-		return {ctor: 'TExtentAsSignal', _0: a, _1: b};
-	});
-var _user$project$Vega$trExtentAsSignal = F2(
-	function (f, sigName) {
-		return A2(_user$project$Vega$TExtentAsSignal, f, sigName);
-	});
-var _user$project$Vega$TExtent = function (a) {
-	return {ctor: 'TExtent', _0: a};
-};
-var _user$project$Vega$trExtent = _user$project$Vega$TExtent;
-var _user$project$Vega$TDensity = {ctor: 'TDensity'};
-var _user$project$Vega$TCross = {ctor: 'TCross'};
-var _user$project$Vega$TCountPattern = {ctor: 'TCountPattern'};
-var _user$project$Vega$TCollect = {ctor: 'TCollect'};
-var _user$project$Vega$TBin = {ctor: 'TBin'};
-var _user$project$Vega$TAggregate = function (a) {
-	return {ctor: 'TAggregate', _0: a};
-};
-var _user$project$Vega$trAggregate = _user$project$Vega$TAggregate;
-var _user$project$Vega$TrModifyValues = F2(
-	function (a, b) {
-		return {ctor: 'TrModifyValues', _0: a, _1: b};
-	});
-var _user$project$Vega$trModifyValues = F2(
-	function (key, val) {
-		return A2(_user$project$Vega$TrModifyValues, key, val);
-	});
-var _user$project$Vega$TrToggle = function (a) {
-	return {ctor: 'TrToggle', _0: a};
-};
-var _user$project$Vega$trToggle = _user$project$Vega$TrToggle;
-var _user$project$Vega$TrRemoveAll = {ctor: 'TrRemoveAll'};
-var _user$project$Vega$trRemoveAll = _user$project$Vega$TrRemoveAll;
-var _user$project$Vega$TrRemove = function (a) {
-	return {ctor: 'TrRemove', _0: a};
-};
-var _user$project$Vega$trRemove = _user$project$Vega$TrRemove;
-var _user$project$Vega$TrInsert = function (a) {
-	return {ctor: 'TrInsert', _0: a};
-};
-var _user$project$Vega$trInsert = _user$project$Vega$TrInsert;
-var _user$project$Vega$TrTrigger = function (a) {
-	return {ctor: 'TrTrigger', _0: a};
-};
-var _user$project$Vega$trigger = F2(
-	function (trName, trProps) {
-		return _elm_lang$core$Json_Encode$object(
-			A2(
-				_elm_lang$core$List$concatMap,
-				_user$project$Vega$triggerProperties,
-				{
-					ctor: '::',
-					_0: _user$project$Vega$TrTrigger(trName),
-					_1: trProps
-				}));
-	});
 var _user$project$Vega$Alphabetic = {ctor: 'Alphabetic'};
 var _user$project$Vega$AlignBottom = {ctor: 'AlignBottom'};
 var _user$project$Vega$AlignMiddle = {ctor: 'AlignMiddle'};

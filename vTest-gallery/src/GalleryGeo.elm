@@ -281,7 +281,7 @@ geo4 =
     let
         ds =
             dataSource
-                [ data "sphere" [ daSphere ]
+                [ data "sphere" [ DaSphere ]
                 , data "world"
                     [ daUrl "https://vega.github.io/vega/data/world-110m.json"
                     , daFormat (topojsonFeature "countries")
@@ -508,7 +508,7 @@ geo6 =
     let
         ds =
             dataSource
-                [ data "sphere" [ daSphere ]
+                [ data "sphere" [ DaSphere ]
                 , data "world"
                     [ daUrl "https://vega.github.io/vega/data/world-110m.json"
                     , daFormat (topojsonFeature "countries")

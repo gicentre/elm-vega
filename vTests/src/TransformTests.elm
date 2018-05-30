@@ -84,8 +84,8 @@ stackTest1 =
                             ]
                         ]
                     |> on
-                        [ trigger "add" [ trInsert "add" ]
-                        , trigger "rem" [ trRemove "rem" ]
+                        [ trigger "add" [ tgInsert "add" ]
+                        , trigger "rem" [ tgRemove "rem" ]
                         ]
                 ]
 
@@ -254,8 +254,8 @@ forceTest1 =
                     [ mName "nodes"
                     , mFrom [ srData (str "node-data") ]
                     , mOn
-                        [ trigger "fix" [ trModifyValues "node" "fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}" ]
-                        , trigger "!fix" [ trModifyValues "node" "{fx: null, fy: null}" ]
+                        [ trigger "fix" [ tgModifyValues "node" "fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}" ]
+                        , trigger "!fix" [ tgModifyValues "node" "{fx: null, fy: null}" ]
                         ]
                     , mEncode
                         [ enEnter
