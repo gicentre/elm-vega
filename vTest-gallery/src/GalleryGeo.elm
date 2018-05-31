@@ -12,6 +12,26 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
+standardProjections : Value
+standardProjections =
+    List.map projectionLabel
+        [ Albers
+        , AlbersUsa
+        , AzimuthalEqualArea
+        , AzimuthalEquidistant
+        , ConicConformal
+        , ConicEqualArea
+        , ConicEquidistant
+        , Equirectangular
+        , Gnomonic
+        , Mercator
+        , Orthographic
+        , Stereographic
+        , TransverseMercator
+        ]
+        |> vStrs
+
+
 geo1 : Spec
 geo1 =
     -- TODO: Add config
@@ -88,7 +108,7 @@ geo2 =
                     |> transform
                         [ trLookup "states" (str "id") [ str "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
-                        , trFormula "geoCentroid('myProjection', datum.geo)" "centroid" AlwaysUpdate
+                        , trFormula "geoCentroid('myProjection', datum.geo)" "myCentroid" AlwaysUpdate
                         ]
                 ]
 
@@ -137,8 +157,8 @@ geo2 =
                             , maFill [ vScale (fName "cScale"), vField (fName "rate") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1.5 ]
-                            , maX [ vField (fName "centroid[0]") ]
-                            , maY [ vField (fName "centroid[1]") ]
+                            , maX [ vField (fName "myCentroid[0]") ]
+                            , maY [ vField (fName "myCentroid[1]") ]
                             , maTooltip [ vSignal "'Obesity Rate: ' + format(datum.rate, '.1%')" ]
                             ]
                         ]
@@ -147,8 +167,8 @@ geo2 =
                             [ fsStatic (boo True)
                             , fsForces
                                 [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
-                                , foX (str "datum.centroid[0]") []
-                                , foY (str "datum.centroid[1]") []
+                                , foX (str "datum.myCentroid[0]") []
+                                , foY (str "datum.myCentroid[1]") []
                                 ]
                             ]
                         ]
@@ -191,28 +211,8 @@ geo3 =
         si =
             signals
                 << signal "pType"
-                    [ siValue (vStr "mercator")
-                    , siBind
-                        (iSelect
-                            [ inOptions
-                                (vStrs
-                                    [ "albers"
-                                    , "albersUsa"
-                                    , "azimuthalEqualArea"
-                                    , "azimuthalEquidistant"
-                                    , "conicConformal"
-                                    , "conicEqualArea"
-                                    , "conicEquidistant"
-                                    , "equirectangular"
-                                    , "gnomonic"
-                                    , "mercator"
-                                    , "orthographic"
-                                    , "stereographic"
-                                    , "transverseMercator"
-                                    ]
-                                )
-                            ]
-                        )
+                    [ siValue (projectionLabel Mercator |> vStr)
+                    , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
                 << signal "pRotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
@@ -373,11 +373,11 @@ geo5 =
                 [ data "projections"
                     [ daValue
                         (vStrs
-                            [ "azimuthalEquidistant"
-                            , "conicConformal"
-                            , "gnomonic"
-                            , "mercator"
-                            , "stereographic"
+                            [ projectionLabel AzimuthalEquidistant
+                            , projectionLabel ConicConformal
+                            , projectionLabel Gnomonic
+                            , projectionLabel Mercator
+                            , projectionLabel Stereographic
                             , "airy"
                             , "armadillo"
                             , "baker"
@@ -604,6 +604,144 @@ geo6 =
         [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
 
 
+geo7 : Spec
+geo7 =
+    let
+        ds =
+            dataSource
+                [ data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat (topojsonFeature "countries")
+                    ]
+                    |> transform
+                        [ trFormula "geoCentroid('projection1', datum)" "myCentroid" AlwaysUpdate
+                        , trFormula "geoArea('projection1', datum)" "area1" AlwaysUpdate
+                        , trFormula "geoArea('projection2', datum)" "area2" AlwaysUpdate
+                        ]
+                , data "graticule" [] |> transform [ trGraticule [] ]
+                ]
+
+        si =
+            signals
+                << signal "baseProjection"
+                    [ siValue (projectionLabel AzimuthalEqualArea |> vStr)
+                    , siBind (iSelect [ inOptions standardProjections ])
+                    ]
+                << signal "altProjection"
+                    [ siValue (projectionLabel Mercator |> vStr)
+                    , siBind (iSelect [ inOptions standardProjections ])
+                    ]
+                << signal "baseColor"
+                    [ siValue (vStr "#bb8800")
+                    , siBind (iColor [])
+                    ]
+                << signal "altColor"
+                    [ siValue (vStr "#0088bb")
+                    , siBind (iColor [])
+                    ]
+                << signal "myOpacity"
+                    [ siValue (vNum 0.15)
+                    , siBind (iRange [ inMin 0, inMax 1, inStep 0.05 ])
+                    ]
+                << signal "scaleFactor"
+                    [ siValue (vNum 1)
+                    , siBind (iRange [ inMin 0.05, inMax 2, inStep 0.05 ])
+                    ]
+
+        pr =
+            projections
+                << projection "projection1"
+                    [ prType (prCustom (strSignal "baseProjection"))
+                    , prScale (num 150)
+                    , prRotate (nums [ 0, 0, 0 ])
+                    , prCenter (nums [ 0, 0 ])
+                    , prTranslate (numSignals [ "width / 2", "height / 2" ])
+                    ]
+                << projection "projection2"
+                    [ prType (prCustom (strSignal "altProjection"))
+                    , prScale (num 150)
+                    , prRotate (nums [ 0, 0, 0 ])
+                    , prCenter (nums [ 0, 0 ])
+                    , prTranslate (numSignals [ "width / 2", "height / 2" ])
+                    ]
+
+        mk =
+            marks
+                << mark Shape
+                    [ mFrom [ srData (str "graticule") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vNull ]
+                            , maStroke [ vStr "#ddd" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "projection1" [] ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "world") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vSignal "altColor" ]
+                            , maStroke [ vStr "#bbb" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maFillOpacity [ vSignal "myOpacity" ]
+                            , maZIndex [ vNum 0 ]
+                            , maX [ vField (fName "myCentroid[0]") ]
+                            , maY [ vField (fName "myCentroid[1]") ]
+                            , maSize [ vField (fName "area2"), vMultiply (vSignal "scaleFactor") ]
+                            ]
+                        , enHover
+                            [ maStrokeWidth [ vNum 2 ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "world") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vSignal "baseColor" ]
+                            , maStroke [ vStr "#bbb" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maFillOpacity [ vSignal "myOpacity" ]
+                            , maZIndex [ vNum 0 ]
+                            , maX [ vField (fName "myCentroid[0]") ]
+                            , maY [ vField (fName "myCentroid[1]") ]
+                            , maSize [ vField (fName "area1"), vMultiply (vSignal "scaleFactor") ]
+                            ]
+                        , enHover
+                            [ maStrokeWidth [ vNum 2 ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
+
+
+geo8 : Spec
+geo8 =
+    let
+        ds =
+            dataSource []
+
+        si =
+            signals
+
+        pr =
+            projections
+
+        mk =
+            marks
+    in
+    toVega
+        [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     geo6
@@ -622,6 +760,8 @@ mySpecs =
         , ( "geo4", geo4 )
         , ( "geo5", geo5 )
         , ( "geo6", geo6 )
+        , ( "geo7", geo7 )
+        , ( "geo8", geo8 )
         ]
 
 

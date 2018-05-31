@@ -469,6 +469,7 @@ module Vega
         , prTranslate
         , prType
         , projection
+        , projectionLabel
         , projections
         , raData
         , raDefault
@@ -1133,6 +1134,7 @@ for details on the modelling of event streams.
 @docs projections
 @docs projection
 @docs Projection
+@docs projectionLabel
 @docs prCustom
 @docs prType
 @docs prClipAngle
@@ -3054,7 +3056,7 @@ type Cursor
 
 
 {-| A convenience function for generating a text string representing a given cursor
-type. This can be used instead of specifying an cursor type as a literal string
+type. This can be used instead of specifying a cursor type as a literal string
 to avoid problems of mistyping its name.
 
     TODO: XXX Provide example
@@ -6559,6 +6561,59 @@ projection name pps =
     (::) (JE.object (( "name", JE.string name ) :: List.map projectionProperty pps))
 
 
+{-| A convenience function for generating a string representing a given projection
+type. This can be used instead of specifying a projection type as a literal string
+to avoid problems of mistyping its name.
+
+    TODO: XXX Provide example
+
+-}
+projectionLabel : Projection -> String
+projectionLabel proj =
+    case proj of
+        Albers ->
+            "Albers"
+
+        AlbersUsa ->
+            "AlbersUsa"
+
+        AzimuthalEqualArea ->
+            "AzimuthalEqualArea"
+
+        AzimuthalEquidistant ->
+            "AzimuthalEquidistant"
+
+        ConicConformal ->
+            "ConicConformal"
+
+        ConicEqualArea ->
+            "ConicEqualArea"
+
+        ConicEquidistant ->
+            "ConicEquidistant"
+
+        Equirectangular ->
+            "Equirectangular"
+
+        Gnomonic ->
+            "Gnomonic"
+
+        Mercator ->
+            "Mercator"
+
+        Orthographic ->
+            "Orthographic"
+
+        Stereographic ->
+            "Stereographic"
+
+        TransverseMercator ->
+            "TransverseMercator"
+
+        Proj str ->
+            strString str
+
+
 {-| Create the projections used to map geographic data onto a plane.
 
     pr =
@@ -7659,7 +7714,19 @@ trForce =
 {-| Extend a data object with new values according to the given
 [Vega expression](https://vega.github.io/vega/docs/expressions/). The second
 parameter is a new field name to give the result of the evaluated expression.
+The third determines whether or not the formula is reapplied if the data changes.
+
+    dataSource
+        [ data "world"
+            [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+            , daFormat (topojsonFeature "countries")
+            ]
+            |> transform
+                [ trFormula "geoCentroid('myProj', datum)" "myCentroid" AlwaysUpdate ]
+        ]
+
 For details see the [Vega documentation](https://vega.github.io/vega/docs/transforms/formula).
+
 -}
 trFormula : Expression -> String -> FormulaUpdate -> Transform
 trFormula ex out =
@@ -9785,47 +9852,11 @@ pieProperty pp =
 projectionSpec : Projection -> Spec
 projectionSpec proj =
     case proj of
-        Albers ->
-            JE.string "Albers"
-
-        AlbersUsa ->
-            JE.string "AlbersUsa"
-
-        AzimuthalEqualArea ->
-            JE.string "AzimuthalEqualArea"
-
-        AzimuthalEquidistant ->
-            JE.string "AzimuthalEquidistant"
-
-        ConicConformal ->
-            JE.string "ConicConformal"
-
-        ConicEqualArea ->
-            JE.string "ConicEqualArea"
-
-        ConicEquidistant ->
-            JE.string "ConicEquidistant"
-
-        Equirectangular ->
-            JE.string "Equirectangular"
-
-        Gnomonic ->
-            JE.string "Gnomonic"
-
-        Mercator ->
-            JE.string "Mercator"
-
-        Orthographic ->
-            JE.string "Orthographic"
-
-        Stereographic ->
-            JE.string "Stereographic"
-
-        TransverseMercator ->
-            JE.string "TransverseMercator"
-
         Proj str ->
             strSpec str
+
+        _ ->
+            JE.string (projectionLabel proj)
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
