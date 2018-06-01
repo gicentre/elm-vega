@@ -2681,9 +2681,13 @@ axGridScale =
     AxGridScale
 
 
-{-| Create a single axis used to visualize a spatial scale mapping.
+{-| Create a single axis used to visualize a spatial scale mapping. The first
+parameter is the name of the scale backing this axis, the second the position of
+the axis relative to the data rectangle and the third a list of optional axis
+properties. For example,
 
-    TODO: XXX
+      axes
+          << axis "xScale" SBottom [ axTitle "Population", axZIndex 1 ]
 
 -}
 axis : String -> Side -> List AxisProperty -> List Spec -> List Spec

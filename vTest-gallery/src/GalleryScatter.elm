@@ -446,9 +446,144 @@ scatterplot4 =
         [ width 500, height 160, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+scatterplot5 : Spec
+scatterplot5 =
+    let
+        ds =
+            dataSource [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ] ]
+
+        si =
+            signals
+                << signal "offset" [ siValue (vNum 15) ]
+                << signal "cellHeight" [ siValue (vNum 100) ]
+                << signal "height" [ siUpdate "6 * (offset + cellHeight)" ]
+
+        sc =
+            scales
+                << scale "gScale"
+                    [ scType ScBand
+                    , scRange (raValues [ vNum 0, vSignal "height" ])
+                    , scRound (boo True)
+                    , scDomain
+                        (doData
+                            [ daDataset "barley"
+                            , daField (str "site")
+                            , daSort [ soByField (str "yield"), soOp Median, Descending ]
+                            ]
+                        )
+                    , scNice NTrue
+                    , scZero (boo False)
+                    ]
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scNice NTrue
+                    , scRange (raDefault RWidth)
+                    , scRound (boo True)
+                    , scDomain (doData [ daDataset "barley", daField (str "yield") ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ daDataset "barley", daField (str "year") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axZIndex 1 ]
+
+        nestedAx =
+            axes
+                << axis "yScale"
+                    SLeft
+                    [ axTickSize 0
+                    , axDomain False
+                    , axGrid True
+                    , axEncode [ ( EGrid, [ enEnter [ maStrokeDash [ vNums [ 3, 3 ] ] ] ] ) ]
+                    ]
+                << axis "yScale" SRight [ axTickSize 0, axDomain False ]
+
+        nestedMk =
+            marks
+                << mark Symbol
+                    [ mFrom [ srData (str "sites") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "yield") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "variety") ]
+                            , maStroke [ vScale (fName "cScale"), vField (fName "year") ]
+                            , maStrokeWidth [ vNum 2 ]
+                            , maSize [ vNum 50 ]
+                            ]
+                        ]
+                    ]
+
+        nestedSc =
+            scales
+                << scale "yScale"
+                    [ scType ScPoint
+                    , scRange (raValues [ vNum 0, vSignal "cellHeight" ])
+                    , scPadding (num 1)
+                    , scRound (boo True)
+                    , scDomain
+                        (doData
+                            [ daDataset "barley"
+                            , daField (str "variety")
+                            , daSort [ soByField (str "yield"), soOp Median, Descending ]
+                            ]
+                        )
+                    ]
+
+        le =
+            legends
+                << legend
+                    [ leStroke "cScale"
+                    , leTitle "Year"
+                    , lePadding (vNum 4)
+                    , leEncode [ enSymbols [ enEnter [ maStrokeWidth [ vNum 2 ], maSize [ vNum 50 ] ] ] ]
+                    ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mName "site"
+                    , mFrom [ srFacet "barley" "sites" [ faGroupBy [ "site" ] ] ]
+                    , mEncode
+                        [ enEnter
+                            [ maY
+                                [ vScale (fName "gScale")
+                                , vField (fName "site")
+                                , vOffset (vSignal "offset")
+                                ]
+                            , maHeight [ vSignal "cellHeight" ]
+                            , maWidth [ vSignal "width" ]
+                            , maStroke [ vStr "#ccc" ]
+                            ]
+                        ]
+                    , mGroup [ nestedSc [], nestedAx [], nestedMk [] ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "site") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vField (fName "width"), vMultiply (vNum 0.5) ]
+                            , maY [ vField (fName "y") ]
+                            , maFontSize [ vNum 11 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vField (fName "datum.site") ]
+                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    scatterplot1
+    scatterplot5
 
 
 
@@ -462,6 +597,7 @@ mySpecs =
         , ( "scatterplot2", scatterplot2 )
         , ( "scatterplot3", scatterplot3 )
         , ( "scatterplot4", scatterplot4 )
+        , ( "scatterplot5", scatterplot5 )
         ]
 
 
