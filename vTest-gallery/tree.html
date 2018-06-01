@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vega Test Gallery: Radial Charts</title>
+  <title>Vega Test Gallery: Tree Diagrams</title>
   <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One" rel="stylesheet">
   <link href="css/gallery.css" type="text/css" rel="stylesheet">
@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
-  <script src="js/galleryRadial.js"></script>
+  <script src="js/galleryTree.js"></script>
 </head>
 
 <body>
@@ -23,29 +23,22 @@
   <ul>
       <li><a href="bar.html">bar charts</a></li>
       <li><a href="lineArea.html">line and area charts</a></li>
-      <li><b>radial charts</b></li>
+      <li><a href="radial.html">radial charts</a></li>
       <li><a href="scatter.html">dot and scatterplots</a></li>
       <li><a href="dist.html">distribution charts</a></li>
       <li><a href="geo.html">geographic maps</a></li>
-      <li><a href="tree.html">tree diagrams</a></li>
+      <li><b>tree diagrams</b></li>
       <li><a href="network.html">network diagrams</a></li>
       <li><a href="other.html">other chart types</a></li>
       <li><a href="custom.html">custom visual designs</a></li>
       <li><a href="interaction.html">interaction techniques</a></li>
   </ul>
 
-  <h2>Circular Charts</h2>
+  <h2>Tree Diagrams</h2>
   <p>
-    Pie and donut charts encode proportional differences among a set of numeric values as the angular extent and in area of a circular slice.
+    xxx
   </p>
-  <div id="circularChart1" class="view"></div>
-
-  <p>
-    This radial plot uses both angular and radial extent to convey multiple dimensions of data.
-    However, this approach is not perceptually effective, as viewers will most likely be drawn to the total area of the shape, conflating the two dimensions.
-    This example also demonstrates one way to add labels to circular plots.
-  </p>
-  <div id="circularChart2" class="view"></div>
+  <div id="xxx" class="view"></div>
 
 
   <h2>Source</h2>
@@ -53,10 +46,8 @@
     <div id="elmContainer"></div>
   </details>
 
-
-
   <script>
-  Elm.GalleryRadial.embed(
+  Elm.GalleryTree.embed(
   document.getElementById("elmContainer")
 ).ports.elmToJS.subscribe(function(namedSpecs) {
   for (let name of Object.keys(namedSpecs)) {
