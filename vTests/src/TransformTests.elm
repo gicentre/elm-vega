@@ -24,7 +24,7 @@ packTest1 =
                         , trPack
                             [ paField (str "value")
                             , paPadding (numSignal "padding between circles")
-                            , paSize sigWidth sigHeight
+                            , paSize (vSignal "width") (vSignal "height")
                             ]
                         ]
                 ]
