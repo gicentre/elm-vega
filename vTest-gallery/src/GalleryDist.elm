@@ -198,12 +198,125 @@ histo2 =
                     ]
     in
     toVega
-        [ width 400, height 200, padding 5, autosize [ AFit, AResize ], ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, autosize [ AFit, AResize ], ds, si [], sc [], ax [], mk [] ]
+
+
+density1 : Spec
+density1 =
+    let
+        ds =
+            dataSource
+                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                , data "summary" [ daSource "points" ]
+                    |> transform
+                        [ trAggregate
+                            [ agFields [ str "u", str "u" ]
+                            , agOps [ Mean, Stdev ]
+                            , agAs [ "mean", "stdev" ]
+                            ]
+                        ]
+                , data "density" [ daSource "points" ]
+                    |> transform
+                        [ trDensity (diKde "points" (str "u") (numSignal "bandWidth"))
+                            [ dnExtent (numSignal "domain('xScale')")
+                            , dnSteps (numSignal "steps")
+                            , dnMethodAsSignal "method"
+                            ]
+                        ]
+                , data "normal" []
+                    |> transform
+                        [ trDensity (diNormal (numSignal "data('summary')[0].mean") (numSignal "data('summary')[0].stdev"))
+                            [ dnExtent (numSignal "domain('xScale')")
+                            , dnSteps (numSignal "steps")
+                            , dnMethodAsSignal "method"
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "bandWidth" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 0.1, inStep 0.001 ]) ]
+                << signal "steps" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
+                << signal "method" [ siValue (vStr "pdf"), siBind (iRadio [ inOptions (vStrs [ "pdf", "cdf" ]) ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "points", daField (str "u") ])
+                    , scNice NTrue
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scRound (boo True)
+                    , scDomain
+                        (doData
+                            [ daReferences
+                                [ [ daDataset "density", daField (str "density") ]
+                                , [ daDataset "normal", daField (str "density") ]
+                                ]
+                            ]
+                        )
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scDomain (doStrs (strs [ "Normal Estimate", "Kernel Density Estimate" ]))
+                    , scRange (raStrs [ "#444", "steelblue" ])
+                    ]
+
+        ax =
+            axes << axis "xScale" SBottom [ axZIndex 1 ]
+
+        le =
+            legends << legend [ leOrient TopLeft, leOffset (vNum 0), leZIndex 1, leFill "cScale" ]
+
+        mk =
+            marks
+                << mark Area
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "density") ]
+                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            , maFill [ vSignal "scale('cScale', 'Kernel Density Estimate')" ]
+                            ]
+                        ]
+                    ]
+                << mark Line
+                    [ mFrom [ srData (str "normal") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "density") ]
+                            , maStroke [ vSignal "scale('cScale', 'Normal Estimate')" ]
+                            , maStrokeWidth [ vNum 2 ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "points") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
+                            , maWidth [ vNum 1 ]
+                            , maY [ vNum 25, vOffset (vSignal "height") ]
+                            , maHeight [ vNum 5 ]
+                            , maFill [ vStr "steelblue" ]
+                            , maOpacity [ vNum 0.4 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 100, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
 
 
 sourceExample : Spec
 sourceExample =
-    histo2
+    density1
 
 
 
@@ -215,6 +328,7 @@ mySpecs =
     combineSpecs
         [ ( "histo1", histo1 )
         , ( "histo2", histo2 )
+        , ( "density1", density1 )
         ]
 
 
