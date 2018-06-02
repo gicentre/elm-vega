@@ -428,9 +428,140 @@ boxplot1 =
         [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+violinplot1 : Spec
+violinplot1 =
+    -- TODO: Add config
+    let
+        ds =
+            dataSource
+                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                    |> transform [ trFoldAs (strSignal "fields") "organ" "value" ]
+                ]
+
+        si =
+            signals
+                << signal "fields" [ siValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
+                << signal "plotWidth" [ siValue (vNum 60) ]
+                << signal "height" [ siUpdate "(plotWidth + 10) * length(fields)" ]
+                << signal "bandWidth" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 0.5, inStep 0.005 ]) ]
+                << signal "steps" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
+
+        sc =
+            scales
+                << scale "layout"
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ daDataset "iris", daField (str "organ") ])
+                    ]
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scRound (boo True)
+                    , scDomain (doData [ daDataset "iris", daField (str "value") ])
+                    , scZero (boo True)
+                    , scNice NTrue
+                    ]
+                << scale "cScale" [ scType ScOrdinal, scRange (raDefault RCategory) ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "layout" SLeft [ axTickCount 5, axZIndex 1 ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
+                    , mEncode
+                        [ enEnter
+                            [ maYC [ vScale (fName "layout"), vField (fName "organ"), vBand 0.5 ]
+                            , maHeight [ vSignal "plotWidth" ]
+                            , maWidth [ vSignal "width" ]
+                            ]
+                        ]
+                    , mGroup [ nestedDs, nestedSc [], nestedMk [] ]
+                    ]
+
+        nestedDs =
+            dataSource
+                [ data "density" []
+                    |> transform
+                        [ trDensity (diKde "organs" (str "value") (numSignal "bandWidth"))
+                            [ dnSteps (numSignal "steps") ]
+                        , trStack
+                            [ stGroupBy [ str "value" ]
+                            , stField (str "density")
+                            , stOffset OfCenter
+                            , stAs "y0" "y1"
+                            ]
+                        ]
+                , data "summary" [ daSource "organs" ]
+                    |> transform
+                        [ trAggregate
+                            [ agFields [ str "value", str "value", str "value" ]
+                            , agOps [ Q1, Median, Q3 ]
+                            , agAs [ "q1", "median", "q3" ]
+                            ]
+                        ]
+                ]
+
+        nestedSc =
+            scales
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raValues [ vNum 0, vSignal "plotWidth" ])
+                    , scDomain (doData [ daDataset "density", daField (str "density") ])
+                    ]
+
+        nestedMk =
+            marks
+                << mark Area
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enEnter [ maFill [ vScale (fName "cScale"), vField (fParent (fName "organ")) ] ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "black" ]
+                            , maHeight [ vNum 2 ]
+                            ]
+                        , enUpdate
+                            [ maYC [ vSignal "plotWidth / 2" ]
+                            , maX [ vScale (fName "xScale"), vField (fName "q1") ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "q3") ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "black" ]
+                            , maWidth [ vNum 2 ]
+                            , maHeight [ vNum 8 ]
+                            ]
+                        , enUpdate
+                            [ maYC [ vSignal "plotWidth / 2" ]
+                            , maX [ vScale (fName "xScale"), vField (fName "median") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    boxplot1
+    violinplot1
 
 
 
@@ -444,6 +575,7 @@ mySpecs =
         , ( "histo2", histo2 )
         , ( "density1", density1 )
         , ( "boxplot1", boxplot1 )
+        , ( "violinplot1", violinplot1 )
         ]
 
 

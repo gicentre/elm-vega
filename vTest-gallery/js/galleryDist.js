@@ -17511,8 +17511,834 @@ var _gicentre$elm_vega$Vega$description = function (s) {
 	};
 };
 
-var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
+var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 	var nestedMk = function (_p0) {
+		return _gicentre$elm_vega$Vega$marks(
+			A3(
+				_gicentre$elm_vega$Vega$mark,
+				_gicentre$elm_vega$Vega$Area,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$srData(
+								_gicentre$elm_vega$Vega$str('density')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$maFill(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vScale(
+													_gicentre$elm_vega$Vega$fName('cScale')),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vField(
+														_gicentre$elm_vega$Vega$fParent(
+															_gicentre$elm_vega$Vega$fName('organ'))),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$enUpdate(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maX(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vScale(
+														_gicentre$elm_vega$Vega$fName('xScale')),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vField(
+															_gicentre$elm_vega$Vega$fName('value')),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maY(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale(
+															_gicentre$elm_vega$Vega$fName('yScale')),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vField(
+																_gicentre$elm_vega$Vega$fName('y0')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY2(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale(
+																_gicentre$elm_vega$Vega$fName('yScale')),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$fName('y1')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$mark,
+					_gicentre$elm_vega$Vega$Rect,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$srData(
+									_gicentre$elm_vega$Vega$str('summary')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mEncode(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$enEnter(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maFill(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vStr('black'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maHeight(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vNum(2),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$enUpdate(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maYC(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vSignal('plotWidth / 2'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maX(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale(
+																_gicentre$elm_vega$Vega$fName('xScale')),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$fName('q1')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX2(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale(
+																	_gicentre$elm_vega$Vega$fName('xScale')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$fName('q3')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$mark,
+						_gicentre$elm_vega$Vega$Rect,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mFrom(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$srData(
+										_gicentre$elm_vega$Vega$str('summary')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maFill(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vStr('black'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maWidth(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vNum(2),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maHeight(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vNum(8),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enUpdate(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maYC(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vSignal('plotWidth / 2'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale(
+																	_gicentre$elm_vega$Vega$fName('xScale')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$fName('median')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p0))));
+	};
+	var nestedSc = function (_p1) {
+		return _gicentre$elm_vega$Vega$scales(
+			A3(
+				_gicentre$elm_vega$Vega$scale,
+				'yScale',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scRange(
+							_gicentre$elm_vega$Vega$raValues(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$vNum(0),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$vSignal('plotWidth'),
+										_1: {ctor: '[]'}
+									}
+								})),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scDomain(
+								_gicentre$elm_vega$Vega$doData(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$daDataset('density'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daField(
+												_gicentre$elm_vega$Vega$str('density')),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_p1));
+	};
+	var nestedDs = _gicentre$elm_vega$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$Vega$transform,
+				{
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$Vega$trDensity,
+						A3(
+							_gicentre$elm_vega$Vega$diKde,
+							'organs',
+							_gicentre$elm_vega$Vega$str('value'),
+							_gicentre$elm_vega$Vega$numSignal('bandWidth')),
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$dnSteps(
+								_gicentre$elm_vega$Vega$numSignal('steps')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$trStack(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$stGroupBy(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$str('value'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$stField(
+										_gicentre$elm_vega$Vega$str('density')),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$stOffset(_gicentre$elm_vega$Vega$OfCenter),
+										_1: {
+											ctor: '::',
+											_0: A2(_gicentre$elm_vega$Vega$stAs, 'y0', 'y1'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$Vega$data,
+					'density',
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$Vega$transform,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$trAggregate(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$agFields(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$str('value'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$str('value'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$str('value'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$agOps(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$Q1,
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$Median,
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$Q3,
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$agAs(
+											{
+												ctor: '::',
+												_0: 'q1',
+												_1: {
+													ctor: '::',
+													_0: 'median',
+													_1: {
+														ctor: '::',
+														_0: 'q3',
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_gicentre$elm_vega$Vega$data,
+						'summary',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$daSource('organs'),
+							_1: {ctor: '[]'}
+						})),
+				_1: {ctor: '[]'}
+			}
+		});
+	var mk = function (_p2) {
+		return _gicentre$elm_vega$Vega$marks(
+			A3(
+				_gicentre$elm_vega$Vega$mark,
+				_gicentre$elm_vega$Vega$Group,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: A3(
+								_gicentre$elm_vega$Vega$srFacet,
+								'iris',
+								'organs',
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$faGroupBy(
+										{
+											ctor: '::',
+											_0: 'organ',
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$maYC(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vScale(
+													_gicentre$elm_vega$Vega$fName('layout')),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vField(
+														_gicentre$elm_vega$Vega$fName('organ')),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vBand(0.5),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maHeight(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vSignal('plotWidth'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maWidth(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vSignal('width'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mGroup(
+								{
+									ctor: '::',
+									_0: nestedDs,
+									_1: {
+										ctor: '::',
+										_0: nestedSc(
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: nestedMk(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_p2));
+	};
+	var ax = function (_p3) {
+		return _gicentre$elm_vega$Vega$axes(
+			A4(
+				_gicentre$elm_vega$Vega$axis,
+				'xScale',
+				_gicentre$elm_vega$Vega$SBottom,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$axZIndex(1),
+					_1: {ctor: '[]'}
+				},
+				A4(
+					_gicentre$elm_vega$Vega$axis,
+					'layout',
+					_gicentre$elm_vega$Vega$SLeft,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$axTickCount(5),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$axZIndex(1),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p3)));
+	};
+	var sc = function (_p4) {
+		return _gicentre$elm_vega$Vega$scales(
+			A3(
+				_gicentre$elm_vega$Vega$scale,
+				'layout',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scRange(
+							_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RHeight)),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scDomain(
+								_gicentre$elm_vega$Vega$doData(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$daDataset('iris'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daField(
+												_gicentre$elm_vega$Vega$str('organ')),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$scale,
+					'xScale',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scRange(
+								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scRound(
+									_gicentre$elm_vega$Vega$boo(true)),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$scDomain(
+										_gicentre$elm_vega$Vega$doData(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$daDataset('iris'),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$daField(
+														_gicentre$elm_vega$Vega$str('value')),
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$scZero(
+											_gicentre$elm_vega$Vega$boo(true)),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$scale,
+						'cScale',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scRange(
+									_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RCategory)),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p4))));
+	};
+	var si = function (_p5) {
+		return _gicentre$elm_vega$Vega$signals(
+			A3(
+				_gicentre$elm_vega$Vega$signal,
+				'fields',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$siValue(
+						_gicentre$elm_vega$Vega$vStrs(
+							{
+								ctor: '::',
+								_0: 'petalWidth',
+								_1: {
+									ctor: '::',
+									_0: 'petalLength',
+									_1: {
+										ctor: '::',
+										_0: 'sepalWidth',
+										_1: {
+											ctor: '::',
+											_0: 'sepalLength',
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							})),
+					_1: {ctor: '[]'}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$signal,
+					'plotWidth',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$siValue(
+							_gicentre$elm_vega$Vega$vNum(60)),
+						_1: {ctor: '[]'}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$signal,
+						'height',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$siUpdate('(plotWidth + 10) * length(fields)'),
+							_1: {ctor: '[]'}
+						},
+						A3(
+							_gicentre$elm_vega$Vega$signal,
+							'bandWidth',
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$siValue(
+									_gicentre$elm_vega$Vega$vNum(0)),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$siBind(
+										_gicentre$elm_vega$Vega$iRange(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$inMin(0),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$inMax(0.5),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$inStep(5.0e-3),
+														_1: {ctor: '[]'}
+													}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_gicentre$elm_vega$Vega$signal,
+								'steps',
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$siValue(
+										_gicentre$elm_vega$Vega$vNum(100)),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$siBind(
+											_gicentre$elm_vega$Vega$iRange(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$inMin(10),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$inMax(500),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$inStep(1),
+															_1: {ctor: '[]'}
+														}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}
+								},
+								_p5))))));
+	};
+	var ds = _gicentre$elm_vega$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$Vega$transform,
+				{
+					ctor: '::',
+					_0: A3(
+						_gicentre$elm_vega$Vega$trFoldAs,
+						_gicentre$elm_vega$Vega$strSignal('fields'),
+						'organ',
+						'value'),
+					_1: {ctor: '[]'}
+				},
+				A2(
+					_gicentre$elm_vega$Vega$data,
+					'iris',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/iris.json'),
+						_1: {ctor: '[]'}
+					})),
+			_1: {ctor: '[]'}
+		});
+	return _gicentre$elm_vega$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$Vega$width(500),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$padding(5),
+				_1: {
+					ctor: '::',
+					_0: ds,
+					_1: {
+						ctor: '::',
+						_0: si(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: sc(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: ax(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: mk(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GalleryDist$sourceExample = _gicentre$elm_vega$GalleryDist$violinplot1;
+var _gicentre$elm_vega$GalleryDist$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryDist$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
+	var nestedMk = function (_p6) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -17780,7 +18606,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p0))));
+						_p6))));
 	};
 	var nestedDs = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -17878,7 +18704,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 					})),
 			_1: {ctor: '[]'}
 		});
-	var mk = function (_p1) {
+	var mk = function (_p7) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -17967,9 +18793,9 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 						}
 					}
 				},
-				_p1));
+				_p7));
 	};
-	var ax = function (_p2) {
+	var ax = function (_p8) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -17993,9 +18819,9 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p2)));
+					_p8)));
 	};
-	var sc = function (_p3) {
+	var sc = function (_p9) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -18080,9 +18906,9 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p3))));
+						_p9))));
 	};
-	var si = function (_p4) {
+	var si = function (_p10) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -18127,7 +18953,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$siUpdate('(plotWidth + 10) * length(fields)'),
 							_1: {ctor: '[]'}
 						},
-						_p4))));
+						_p10))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -18188,38 +19014,8 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GalleryDist$sourceExample = _gicentre$elm_vega$GalleryDist$boxplot1;
-var _gicentre$elm_vega$GalleryDist$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryDist$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _gicentre$elm_vega$GalleryDist$density1 = function () {
-	var mk = function (_p5) {
+	var mk = function (_p11) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -18459,9 +19255,9 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p5))));
+						_p11))));
 	};
-	var le = function (_p6) {
+	var le = function (_p12) {
 		return _gicentre$elm_vega$Vega$legends(
 			A2(
 				_gicentre$elm_vega$Vega$legend,
@@ -18483,9 +19279,9 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 						}
 					}
 				},
-				_p6));
+				_p12));
 	};
-	var ax = function (_p7) {
+	var ax = function (_p13) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -18496,9 +19292,9 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 					_0: _gicentre$elm_vega$Vega$axZIndex(1),
 					_1: {ctor: '[]'}
 				},
-				_p7));
+				_p13));
 	};
-	var sc = function (_p8) {
+	var sc = function (_p14) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -18624,9 +19420,9 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 								}
 							}
 						},
-						_p8))));
+						_p14))));
 	};
-	var si = function (_p9) {
+	var si = function (_p15) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -18711,7 +19507,7 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p9))));
+						_p15))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -18902,7 +19698,7 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryDist$histo2 = function () {
-	var mk = function (_p10) {
+	var mk = function (_p16) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19124,9 +19920,9 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p10)));
+					_p16)));
 	};
-	var ax = function (_p11) {
+	var ax = function (_p17) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -19156,9 +19952,9 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p11))));
+						_p17))));
 	};
-	var sc = function (_p12) {
+	var sc = function (_p18) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -19290,9 +20086,9 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 								}
 							}
 						},
-						_p12))));
+						_p18))));
 	};
-	var si = function (_p13) {
+	var si = function (_p19) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -19352,7 +20148,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 								_0: _gicentre$elm_vega$Vega$siUpdate('(width - nullGap) / binDomain.length'),
 								_1: {ctor: '[]'}
 							},
-							_p13)))));
+							_p19)))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -19508,7 +20304,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryDist$histo1 = function () {
-	var mk = function (_p14) {
+	var mk = function (_p20) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19710,9 +20506,9 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p14)));
+					_p20)));
 	};
-	var ax = function (_p15) {
+	var ax = function (_p21) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -19736,9 +20532,9 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p15)));
+					_p21)));
 	};
-	var sc = function (_p16) {
+	var sc = function (_p22) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -19810,9 +20606,9 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 							}
 						}
 					},
-					_p16)));
+					_p22)));
 	};
-	var si = function (_p17) {
+	var si = function (_p23) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -19864,7 +20660,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p17)));
+					_p23)));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -20018,7 +20814,11 @@ var _gicentre$elm_vega$GalleryDist$mySpecs = _gicentre$elm_vega$Vega$combineSpec
 				_1: {
 					ctor: '::',
 					_0: {ctor: '_Tuple2', _0: 'boxplot1', _1: _gicentre$elm_vega$GalleryDist$boxplot1},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'violinplot1', _1: _gicentre$elm_vega$GalleryDist$violinplot1},
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		}
@@ -20037,7 +20837,7 @@ var _gicentre$elm_vega$GalleryDist$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GalleryDist$view,
 		update: F2(
-			function (_p18, model) {
+			function (_p24, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
