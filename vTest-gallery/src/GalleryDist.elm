@@ -314,9 +314,123 @@ density1 =
         [ width 500, height 100, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
 
 
+boxplot1 : Spec
+boxplot1 =
+    -- TODO: Add config
+    let
+        ds =
+            dataSource
+                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                    |> transform [ trFoldAs (strSignal "fields") "organ" "value" ]
+                ]
+
+        si =
+            signals
+                << signal "fields" [ siValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
+                << signal "plotWidth" [ siValue (vNum 60) ]
+                << signal "height" [ siUpdate "(plotWidth + 10) * length(fields)" ]
+
+        sc =
+            scales
+                << scale "layout"
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ daDataset "iris", daField (str "organ") ])
+                    ]
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scRound (boo True)
+                    , scDomain (doData [ daDataset "iris", daField (str "value") ])
+                    , scZero (boo True)
+                    , scNice NTrue
+                    ]
+                << scale "cScale" [ scType ScOrdinal, scRange (raDefault RCategory) ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "layout" SLeft [ axTickCount 5, axZIndex 1 ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
+                    , mEncode
+                        [ enEnter
+                            [ maYC [ vScale (fName "layout"), vField (fName "organ"), vBand 0.5 ]
+                            , maHeight [ vSignal "plotWidth" ]
+                            , maWidth [ vSignal "width" ]
+                            ]
+                        ]
+                    , mGroup [ nestedDs, nestedMk [] ]
+                    ]
+
+        nestedDs =
+            dataSource
+                [ data "summary" [ daSource "organs" ]
+                    |> transform
+                        [ trAggregate
+                            [ agFields [ str "value", str "value", str "value", str "value", str "value" ]
+                            , agOps [ Min, Q1, Median, Q3, Max ]
+                            , agAs [ "min", "q1", "median", "q3", "max" ]
+                            ]
+                        ]
+                ]
+
+        nestedMk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "black" ]
+                            , maHeight [ vNum 1 ]
+                            ]
+                        , enUpdate
+                            [ maYC [ vSignal "plotWidth / 2", vOffset (vNum -0.5) ]
+                            , maX [ vScale (fName "xScale"), vField (fName "min") ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "max") ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "steelblue" ]
+                            , maCornerRadius [ vNum 4 ]
+                            ]
+                        , enUpdate
+                            [ maYC [ vSignal "plotWidth / 2" ]
+                            , maHeight [ vSignal "plotWidth / 2" ]
+                            , maX [ vScale (fName "xScale"), vField (fName "q1") ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "q3") ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "aliceblue" ]
+                            , maWidth [ vNum 2 ]
+                            ]
+                        , enUpdate
+                            [ maYC [ vSignal "plotWidth / 2" ]
+                            , maHeight [ vSignal "plotWidth / 2" ]
+                            , maX [ vScale (fName "xScale"), vField (fName "median") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    density1
+    boxplot1
 
 
 
@@ -329,6 +443,7 @@ mySpecs =
         [ ( "histo1", histo1 )
         , ( "histo2", histo2 )
         , ( "density1", density1 )
+        , ( "boxplot1", boxplot1 )
         ]
 
 

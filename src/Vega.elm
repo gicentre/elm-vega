@@ -586,6 +586,8 @@ module Vega
         , trExtent
         , trExtentAsSignal
         , trFilter
+        , trFold
+        , trFoldAs
         , trForce
         , trFormula
         , trGeoPath
@@ -886,7 +888,8 @@ TODO: add functions (flatten)
 
 ### Folding
 
-TODO: add functions (fold)
+@docs trFold
+@docs trFoldAs
 
 
 ### Deriving New Fields
@@ -2516,60 +2519,61 @@ type TopMarkProperty
 by [trAggregate](#trAggregate), [trBin](#trBin), [trCollect](#trCollect),
 [trCountPattern](#trCountPattern), [trCross](#trCross), [trDensity](#trDensity),
 [trExtent](#trExtent), [trExtentAsSignal](#trExtentAsSignal), [trFilter](#trFilter),
-[trFold](#trFold), [trFormula](#trFormula), [trIdentifier](#trIdentifier), [trImpute](#trImpute),
-[trJoinAggregate](#trJoinAggregate), [trLookup](#trLookup), [trProject](#trProject),
-[trSample](#trSample), [trSequence](#trSequence), [trWindow](#trWindow), [trContour](#trContour),
-[trGeoJson](#trGeoJson), [trGeoPath](#trGeoPath), [trGeoPoint](#trGeoPoint),
-[trGeoShape](#trGeoShape), [trGraticule](#trGraticule), [trLinkPath](#trLinkPath),
-[trPie](#trPie), [trStack](#trStack), [trForce](#trForce), [trVoronoi](#trVoronoi),
-[trWordCloud](#trWordCloud), [trNest](#trNest), [trStratify](#trStratify),
-[trTreeLinks](#trTreeLinks), [trPack](#trPack), [trPartition](#trPartition), [trTree](#trTree),
-[trTreeMap](#trTreeMap), [trCrossFilter](#trCrossFilter) and
-[trResolveFilter](#trResolveFilter). For details see the
+[trFold](#trFold), [trFoldAs](#trFoldAs), [trFormula](#trFormula), [trIdentifier](#trIdentifier),
+[trImpute](#trImpute), [trJoinAggregate](#trJoinAggregate), [trLookup](#trLookup),
+[trProject](#trProject), [trSample](#trSample), [trSequence](#trSequence), [trWindow](#trWindow),
+[trContour](#trContour), [trGeoJson](#trGeoJson), [trGeoPath](#trGeoPath),
+[trGeoPoint](#trGeoPoint), [trGeoShape](#trGeoShape), [trGraticule](#trGraticule),
+[trLinkPath](#trLinkPath), [trPie](#trPie), [trStack](#trStack), [trForce](#trForce),
+[trVoronoi](#trVoronoi), [trWordCloud](#trWordCloud), [trNest](#trNest),
+[trStratify](#trStratify), [trTreeLinks](#trTreeLinks), [trPack](#trPack),
+[trPartition](#trPartition), [trTree](#trTree), [trTreeMap](#trTreeMap),
+[trCrossFilter](#trCrossFilter) and [trResolveFilter](#trResolveFilter).
+For details see the
 [Vega transform documentation](https://vega.github.io/vega/docs/transforms).
 -}
 type Transform
     = TAggregate (List AggregateProperty)
-      -- TODO: Parameterise remaining transforms and create accesor functions for them
     | TBin Field Num (List BinProperty)
-    | TCollect
-    | TCountPattern
-    | TCross
+    | TCollect -- TODO Add transform functions
+    | TCountPattern -- TODO Add transform functions
+    | TCross -- TODO Add transform functions
     | TDensity Distribution (List DensityProperty)
     | TExtent Field
     | TExtentAsSignal Field String
     | TFilter Expr
-    | TFold
+    | TFold Field
+    | TFoldAs Field String String
     | TFormula Expression String FormulaUpdate
-    | TIdentifier
-    | TImpute
-    | TJoinAggregate
+    | TIdentifier -- TODO Add transform functions
+    | TImpute -- TODO Add transform functions
+    | TJoinAggregate -- TODO Add transform functions
     | TLookup String Field (List Field) (List LookupProperty)
-    | TProject
-    | TSample
-    | TSequence
-    | TWindow
+    | TProject -- TODO Add transform functions
+    | TSample -- TODO Add transform functions
+    | TSequence -- TODO Add transform functions
+    | TWindow -- TODO Add transform functions
     | TContour Num Num (List ContourProperty)
-    | TGeoJson
+    | TGeoJson -- TODO Add transform functions
     | TGeoPath String (List GeoPathProperty)
-    | TGeoPoint
+    | TGeoPoint -- TODO Add transform functions
     | TGeoShape String (List GeoPathProperty)
     | TGraticule (List GraticuleProperty)
     | TLinkPath (List LinkPathProperty)
     | TPie (List PieProperty)
     | TStack (List StackProperty)
     | TForce (List ForceSimulationProperty)
-    | TVoronoi
-    | TWordCloud
-    | TNest
+    | TVoronoi -- TODO Add transform functions
+    | TWordCloud -- TODO Add transform functions
+    | TNest -- TODO Add transform functions
     | TStratify Field Field
-    | TTreeLinks
+    | TTreeLinks -- TODO Add transform functions
     | TPack (List PackProperty)
-    | TPartition
-    | TTree
-    | TTreeMap
-    | TCrossFilter
-    | TResolveFilter
+    | TPartition -- TODO Add transform functions
+    | TTree -- TODO Add transform functions
+    | TTreeMap -- TODO Add transform functions
+    | TCrossFilter -- TODO Add transform functions
+    | TResolveFilter -- TODO Add transform functions
 
 
 {-| Represents a trigger enabling dynamic updates to data and marks. Generated
@@ -8188,6 +8192,29 @@ trFilter =
     TFilter
 
 
+{-| Perform a fold transform that collapses (or “folds”) one or more data fields
+into two properties: a _key_ containing the original data field name and a _value_
+containing the data value. This version generates the two output fields with names
+`key` and `value`. To customise the names of these fields use [trFoldAs](#trFoldAs).
+For details see the
+[Vega fold transform documentation](https://vega.github.io/vega/docs/transforms/fold/).
+-}
+trFold : Field -> Transform
+trFold =
+    TFold
+
+
+{-| Perform a fold transform that collapses (or “folds”) one or more data fields
+into two properties: a _key_ containing the original data field name and a _value_
+containing the data value. This version names the key and value fields based on
+the second and third parameters. For details see the
+[Vega fold transform documentation](https://vega.github.io/vega/docs/transforms/fold/).
+-}
+trFoldAs : Field -> String -> String -> Transform
+trFoldAs =
+    TFoldAs
+
+
 {-| Compute a force-directed layout. This layout transformation uses a model in
 which data objects act as charged particles (or nodes), optionally connected by
 a set of edges (or links). A set of forces is used to drive a physics simulation
@@ -10156,7 +10183,7 @@ markProperty mProp =
             ( "xc", valRef vals )
 
         MYC vals ->
-            ( "xc", valRef vals )
+            ( "yc", valRef vals )
 
         MWidth vals ->
             ( "width", valRef vals )
@@ -11176,8 +11203,33 @@ transformSpec trans =
         TFilter expr ->
             JE.object [ ( "type", JE.string "filter" ), exprProperty expr ]
 
-        TFold ->
-            JE.object [ ( "type", JE.string "fold" ) ]
+        TFold fs ->
+            let
+                fSpec =
+                    case fs of
+                        Str s ->
+                            JE.list [ JE.string s ]
+
+                        _ ->
+                            strSpec fs
+            in
+            JE.object [ ( "type", JE.string "fold" ), ( "fields", fSpec ) ]
+
+        TFoldAs fs k v ->
+            let
+                fSpec =
+                    case fs of
+                        Str s ->
+                            JE.list [ JE.string s ]
+
+                        _ ->
+                            strSpec fs
+            in
+            JE.object
+                [ ( "type", JE.string "fold" )
+                , ( "fields", fSpec )
+                , ( "as", JE.list [ JE.string k, JE.string v ] )
+                ]
 
         TFormula expr name update ->
             JE.object
