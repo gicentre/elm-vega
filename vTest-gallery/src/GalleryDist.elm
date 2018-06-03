@@ -559,9 +559,202 @@ violinplot1 =
         [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+window1 : Spec
+window1 =
+    let
+        ds =
+            dataSource
+                [ data "directors" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
+                    |> transform
+                        [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
+                        , trAggregate
+                            [ agGroupBy [ str "Director" ]
+                            , agOps [ opSignal "op" ]
+                            , agFields [ str "Worldwide_Gross" ]
+                            , agAs [ "Gross" ]
+                            ]
+                        , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
+                            [ wnSort
+                                [ coField [ str "Gross" ]
+                                , coOrder [ Descend ]
+                                ]
+                            ]
+                        , trFilter (expr "datum.rank <= k")
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "k"
+                    [ siValue (vNum 20)
+                    , siBind (iRange [ inMin 10, inMax 30, inStep 1 ])
+                    ]
+                << signal "op"
+                    [ siValue (vStr "average")
+                    , siBind (iSelect [ inOptions (vStrs [ "average", "median", "sum" ]) ])
+                    ]
+                << signal "label"
+                    [ siValue
+                        (vObject
+                            [ keyValue "average" (vStr "Average")
+                            , keyValue "median" (vStr "Median")
+                            , keyValue "sum" (vStr "Total")
+                            ]
+                        )
+                    ]
+
+        ti =
+            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor Start ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "directors", daField (str "Gross") ])
+                    , scNice NTrue
+                    ]
+                << scale "yScale"
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain
+                        (doData
+                            [ daDataset "directors"
+                            , daField (str "Director")
+                            , daSort [ soOp Max, soByField (str "Gross"), Descending ]
+                            ]
+                        )
+                    , scPadding (num 0.1)
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axFormat "$,d", axTickCount 5 ]
+                << axis "yScale" SLeft []
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "directors") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vNum 0 ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "Gross") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "Director") ]
+                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 410, padding 5, autosize [ AFit ], ti, ds, si [], sc [], ax [], mk [] ]
+
+
+window2 : Spec
+window2 =
+    let
+        ds =
+            dataSource
+                [ data "source" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
+                    |> transform [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null") ]
+                , data "ranks" [ daSource "source" ]
+                    |> transform
+                        [ trAggregate
+                            [ agGroupBy [ str "Director" ]
+                            , agOps [ opSignal "op" ]
+                            , agFields [ str "Worldwide_Gross" ]
+                            , agAs [ "Gross" ]
+                            ]
+                        , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
+                            [ wnSort
+                                [ coField [ str "Gross" ]
+                                , coOrder [ Descend ]
+                                ]
+                            ]
+                        ]
+                , data "directors" [ daSource "source" ]
+                    |> transform
+                        [ trLookup "ranks" (str "Director") [ str "Director" ] [ luValues [ str "rank" ] ]
+                        , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category" AlwaysUpdate
+                        , trAggregate
+                            [ agGroupBy [ str "Category" ]
+                            , agOps [ opSignal "op" ]
+                            , agFields [ str "Worldwide_Gross" ]
+                            , agAs [ "Gross" ]
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "k"
+                    [ siValue (vNum 20)
+                    , siBind (iRange [ inMin 10, inMax 30, inStep 1 ])
+                    ]
+                << signal "op"
+                    [ siValue (vStr "average")
+                    , siBind (iSelect [ inOptions (vStrs [ "average", "median", "sum" ]) ])
+                    ]
+                << signal "label"
+                    [ siValue
+                        (vObject
+                            [ keyValue "average" (vStr "Average")
+                            , keyValue "median" (vStr "Median")
+                            , keyValue "sum" (vStr "Total")
+                            ]
+                        )
+                    ]
+
+        ti =
+            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor Start ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "directors", daField (str "Gross") ])
+                    , scNice NTrue
+                    ]
+                << scale "yScale"
+                    [ scType ScBand
+                    , scRange (raDefault RHeight)
+                    , scDomain
+                        (doData
+                            [ daDataset "directors"
+                            , daField (str "Category")
+                            , daSort [ soOp Max, soByField (str "Gross"), Descending ]
+                            ]
+                        )
+                    , scPadding (num 0.1)
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axFormat "$,d", axTickCount 5 ]
+                << axis "yScale" SLeft []
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "directors") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vNum 0 ]
+                            , maX2 [ vScale (fName "xScale"), vField (fName "Gross") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "Category") ]
+                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 410, padding 5, autosize [ AFit ], ti, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    violinplot1
+    window2
 
 
 
@@ -576,6 +769,8 @@ mySpecs =
         , ( "density1", density1 )
         , ( "boxplot1", boxplot1 )
         , ( "violinplot1", violinplot1 )
+        , ( "window1", window1 )
+        , ( "window2", window2 )
         ]
 
 

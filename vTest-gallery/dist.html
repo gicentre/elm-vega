@@ -70,7 +70,20 @@
   </p>
   <div id="violinplot1" class="view"></div>
 
+  <p>
+    A plot of the top-k film directors by aggregate worldwide gross.
+    Performs an aggregation of all directors, ranks them, and filters to only the top results, using the 'window' transform.
+  </p>
+  <div id="window1" class="view"></div>
 
+
+  <p>
+    A plot of the top-k film directors, plus all other directors, by aggregate worldwide gross.
+    Unlike the previous example, this chart includes a category of all other directors aggregated together.
+    The visualization spec first computes aggregates for all directors and ranks them.
+    It then copies these ranks back to the source data using a lookup transform, and determines which directors belong in the “other” category before performing a final aggregation.
+  </p>
+  <div id="window2" class="view"></div>
 
 
   <h2>Source</h2>
