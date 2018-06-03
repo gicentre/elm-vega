@@ -191,7 +191,7 @@ barChart3 =
 
         ax =
             axes
-                << axis "yScale" SLeft [ axTickSize 0, axLabelPadding 4, axZIndex 1 ]
+                << axis "yScale" SLeft [ axTickSize (num 0), axLabelPadding (num 4), axZIndex 1 ]
                 << axis "xScale" SBottom []
 
         nestedSi =
@@ -296,7 +296,7 @@ barChart4 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axDomain True ]
+            axes << axis "xScale" SBottom [ axDomain (boo True) ]
 
         nestedSc =
             scales
@@ -311,7 +311,7 @@ barChart4 =
 
         nestedAx =
             axes
-                << axis "yScale" SLeft [ axTicks False, axDomain False, axLabelPadding 4 ]
+                << axis "yScale" SLeft [ axTicks (boo False), axDomain (boo False), axLabelPadding (num 4) ]
 
         nestedMk =
             marks

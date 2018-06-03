@@ -65,7 +65,7 @@ histo1 =
         ax =
             axes
                 << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "yScale" SLeft [ axTickCount 5, axZIndex 1 ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex 1 ]
 
         mk =
             marks
@@ -164,9 +164,9 @@ histo2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount 10 ]
+                << axis "xScale" SBottom [ axTickCount (num 10) ]
                 << axis "xScaleNull" SBottom []
-                << axis "yScale" SLeft [ axTickCount 5, axOffset (num 5) ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axOffset (num 5) ]
 
         mk =
             marks
@@ -350,7 +350,7 @@ boxplot1 =
         ax =
             axes
                 << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "layout" SLeft [ axTickCount 5, axZIndex 1 ]
+                << axis "layout" SLeft [ axTickCount (num 5), axZIndex 1 ]
 
         mk =
             marks
@@ -466,7 +466,7 @@ violinplot1 =
         ax =
             axes
                 << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "layout" SLeft [ axTickCount 5, axZIndex 1 ]
+                << axis "layout" SLeft [ axTickCount (num 5), axZIndex 1 ]
 
         mk =
             marks
@@ -629,7 +629,7 @@ window1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "$,d", axTickCount 5 ]
+                << axis "xScale" SBottom [ axFormat "$,d", axTickCount (num 5) ]
                 << axis "yScale" SLeft []
 
         mk =
@@ -731,7 +731,7 @@ window2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "$,d", axTickCount 5 ]
+                << axis "xScale" SBottom [ axFormat "$,d", axTickCount (num 5) ]
                 << axis "yScale" SLeft []
 
         mk =
@@ -752,9 +752,106 @@ window2 =
         [ width 500, height 410, padding 5, autosize [ AFit ], ti, ds, si [], sc [], ax [], mk [] ]
 
 
+scatter1 : Spec
+scatter1 =
+    let
+        ds =
+            dataSource
+                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
+                , data "summary" [ daSource "source" ]
+                    |> transform
+                        [ trExtentAsSignal (str "Horsepower") "hp_extent"
+                        , trBin (str "Horsepower") (numSignal "hp_extent") [ bnMaxBins (num 10), bnAs "hp0" "hp1" ]
+                        , trExtentAsSignal (str "Miles_per_Gallon") "mpg_extent"
+                        , trBin (str "Miles_per_Gallon") (numSignal "mpg_extent") [ bnMaxBins (num 10), bnAs "mpg0" "mpg1" ]
+                        , trAggregate [ agGroupBy [ str "hp0", str "hp1", str "mpg0", str "mpg1" ] ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "source", daField (str "Horsepower") ])
+                    , scRound (boo True)
+                    , scNice NTrue
+                    , scZero (boo True)
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ daDataset "source", daField (str "Miles_per_Gallon") ])
+                    , scRound (boo True)
+                    , scNice NTrue
+                    , scZero (boo True)
+                    ]
+                << scale "sizeScale"
+                    [ scType ScLinear
+                    , scDomain (doData [ daDataset "summary", daField (str "count") ])
+                    , scRange (raNums [ 0, 360 ])
+                    , scZero (boo True)
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    SBottom
+                    [ axGrid (boo True)
+                    , axDomain (boo False)
+                    , axTickCount (num 5)
+                    , axTitle (str "Horsepower")
+                    ]
+                << axis "yScale"
+                    SLeft
+                    [ axGrid (boo True)
+                    , axDomain (boo False)
+                    , axTitlePadding (num 5)
+                    , axTitle (str "Miles per gallon")
+                    ]
+
+        le =
+            legends
+                << legend
+                    [ leSize "sizeScale"
+                    , leTitle "Count"
+                    , leEncode
+                        [ enSymbols
+                            [ enUpdate
+                                [ maStrokeWidth [ vNum 2 ]
+                                , maStroke [ vStr "#4682b4" ]
+                                , maShape [ vStr "circle" ]
+                                ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "marks"
+                    , mFrom [ srData (str "summary") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vSignal "(datum.hp0 + datum.hp1) / 2" ]
+                            , maY [ vScale (fName "yScale"), vSignal "(datum.mpg0 + datum.mpg1) / 2" ]
+                            , maSize [ vScale (fName "sizeScale"), vField (fName "count") ]
+                            , maShape [ vStr "circle" ]
+                            , maStrokeWidth [ vNum 2 ]
+                            , maStroke [ vStr "#4682b4" ]
+                            , maFill [ vStr "transparent" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding 5, autosize [ APad ], ds, sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    window2
+    scatter1
 
 
 
@@ -771,6 +868,7 @@ mySpecs =
         , ( "violinplot1", violinplot1 )
         , ( "window1", window1 )
         , ( "window2", window2 )
+        , ( "scatter1", scatter1 )
         ]
 
 

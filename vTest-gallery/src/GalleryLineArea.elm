@@ -119,7 +119,7 @@ areaChart1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount 20 ]
+                << axis "xScale" SBottom [ axTickCount (num 20) ]
                 << axis "yScale" SLeft []
 
         mk =
@@ -258,7 +258,7 @@ areaChart3 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axTickCount 20 ]
+            axes << axis "xScale" SBottom [ axTickCount (num 20) ]
 
         mk =
             marks
@@ -400,13 +400,13 @@ areaChart4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "d", axTickCount 15 ]
+                << axis "xScale" SBottom [ axFormat "d", axTickCount (num 15) ]
                 << axis "yScale"
                     SRight
                     [ axFormat "%"
-                    , axGrid True
-                    , axDomain False
-                    , axTickSize 12
+                    , axGrid (boo True)
+                    , axDomain (boo False)
+                    , axTickSize (num 12)
                     , axEncode
                         [ ( EGrid, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
                         , ( ETicks, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )

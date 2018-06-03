@@ -50,8 +50,8 @@ scatterplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Horsepower") ]
-                << axis "yScale" SLeft [ axGrid True, axDomain False, axTickCount 5, axTitle (str "Miles per gallon") ]
+                << axis "xScale" SBottom [ axGrid (boo True), axDomain (boo False), axTickCount (num 5), axTitle (str "Horsepower") ]
+                << axis "yScale" SLeft [ axGrid (boo True), axDomain (boo False), axTickCount (num 5), axTitle (str "Miles per gallon") ]
 
         shapeEncoding =
             [ maStrokeWidth [ vNum 2 ]
@@ -258,10 +258,10 @@ scatterplot3 =
             axes
                 << axis "xScale"
                     STop
-                    [ axTickCount 5
-                    , axTickSize 0
-                    , axGrid True
-                    , axDomain False
+                    [ axTickCount (num 5)
+                    , axTickSize (num 0)
+                    , axGrid (boo True)
+                    , axDomain (boo False)
                     , axEncode
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
@@ -278,16 +278,16 @@ scatterplot3 =
                 << axis "xScale"
                     SBottom
                     [ axTitle (str "Miles driven per capita each year")
-                    , axDomain False
-                    , axTicks False
-                    , axLabels False
+                    , axDomain (boo False)
+                    , axTicks (boo False)
+                    , axLabels (boo False)
                     ]
                 << axis "yScale"
                     SLeft
-                    [ axTickCount 5
-                    , axTickSize 0
-                    , axGrid True
-                    , axDomain False
+                    [ axTickCount (num 5)
+                    , axTickSize (num 0)
+                    , axGrid (boo True)
+                    , axDomain (boo False)
                     , axFormat "$0.2f"
                     , axEncode
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
@@ -305,9 +305,9 @@ scatterplot3 =
                 << axis "yScale"
                     SRight
                     [ axTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
-                    , axDomain False
-                    , axTicks False
-                    , axLabels False
+                    , axDomain (boo False)
+                    , axTicks (boo False)
+                    , axLabels (boo False)
                     ]
 
         mk =
@@ -416,7 +416,7 @@ scatterplot4 =
         ax =
             axes
                 << axis "xScale" SBottom [ axZIndex 1, axTitle (str "Barley Yield") ]
-                << axis "yScale" SLeft [ axTickCount 5, axZIndex 1 ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex 1 ]
 
         mk =
             marks
@@ -495,12 +495,12 @@ scatterplot5 =
             axes
                 << axis "yScale"
                     SLeft
-                    [ axTickSize 0
-                    , axDomain False
-                    , axGrid True
+                    [ axTickSize (num 0)
+                    , axDomain (boo False)
+                    , axGrid (boo True)
                     , axEncode [ ( EGrid, [ enEnter [ maStrokeDash [ vNums [ 3, 3 ] ] ] ] ) ]
                     ]
-                << axis "yScale" SRight [ axTickSize 0, axDomain False ]
+                << axis "yScale" SRight [ axTickSize (num 0), axDomain (boo False) ]
 
         nestedMk =
             marks

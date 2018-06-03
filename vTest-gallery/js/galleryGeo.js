@@ -12647,7 +12647,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxEncode':
 			var enc = function (_p94) {
@@ -12669,13 +12669,13 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'grid',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabels':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labels',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabelOverlap':
 			return {
@@ -12688,7 +12688,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelPadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxMaxExtent':
 			return {
@@ -12742,7 +12742,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFlushOffset',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxOffset':
 			return {
@@ -12760,19 +12760,19 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'ticks',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTickSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickSize',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTitle':
 			return {
@@ -12784,7 +12784,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxValues':
 			return {

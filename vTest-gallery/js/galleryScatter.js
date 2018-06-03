@@ -11874,7 +11874,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxEncode':
 			var enc = function (_p94) {
@@ -11896,13 +11896,13 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'grid',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabels':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labels',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabelOverlap':
 			return {
@@ -11915,7 +11915,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelPadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxMaxExtent':
 			return {
@@ -11969,7 +11969,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFlushOffset',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxOffset':
 			return {
@@ -11987,19 +11987,19 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'ticks',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTickSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickSize',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTitle':
 			return {
@@ -12011,7 +12011,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxValues':
 			return {
@@ -18015,13 +18015,16 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 				_gicentre$elm_vega$Vega$SLeft,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axTickSize(0),
+					_0: _gicentre$elm_vega$Vega$axTickSize(
+						_gicentre$elm_vega$Vega$num(0)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(false),
+						_0: _gicentre$elm_vega$Vega$axDomain(
+							_gicentre$elm_vega$Vega$boo(false)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axGrid(true),
+							_0: _gicentre$elm_vega$Vega$axGrid(
+								_gicentre$elm_vega$Vega$boo(true)),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axEncode(
@@ -18068,10 +18071,12 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 					_gicentre$elm_vega$Vega$SRight,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axTickSize(0),
+						_0: _gicentre$elm_vega$Vega$axTickSize(
+							_gicentre$elm_vega$Vega$num(0)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(false),
+							_0: _gicentre$elm_vega$Vega$axDomain(
+								_gicentre$elm_vega$Vega$boo(false)),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -18760,7 +18765,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot4 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axTickCount(5),
+						_0: _gicentre$elm_vega$Vega$axTickCount(
+							_gicentre$elm_vega$Vega$num(5)),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$axZIndex(1),
@@ -19445,16 +19451,20 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 				_gicentre$elm_vega$Vega$STop,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axTickCount(5),
+					_0: _gicentre$elm_vega$Vega$axTickCount(
+						_gicentre$elm_vega$Vega$num(5)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axTickSize(0),
+						_0: _gicentre$elm_vega$Vega$axTickSize(
+							_gicentre$elm_vega$Vega$num(0)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axGrid(true),
+							_0: _gicentre$elm_vega$Vega$axGrid(
+								_gicentre$elm_vega$Vega$boo(true)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axDomain(false),
+								_0: _gicentre$elm_vega$Vega$axDomain(
+									_gicentre$elm_vega$Vega$boo(false)),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$axEncode(
@@ -19548,13 +19558,16 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 							_gicentre$elm_vega$Vega$str('Miles driven per capita each year')),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(false),
+							_0: _gicentre$elm_vega$Vega$axDomain(
+								_gicentre$elm_vega$Vega$boo(false)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axTicks(false),
+								_0: _gicentre$elm_vega$Vega$axTicks(
+									_gicentre$elm_vega$Vega$boo(false)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axLabels(false),
+									_0: _gicentre$elm_vega$Vega$axLabels(
+										_gicentre$elm_vega$Vega$boo(false)),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -19566,16 +19579,20 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 						_gicentre$elm_vega$Vega$SLeft,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axTickCount(5),
+							_0: _gicentre$elm_vega$Vega$axTickCount(
+								_gicentre$elm_vega$Vega$num(5)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axTickSize(0),
+								_0: _gicentre$elm_vega$Vega$axTickSize(
+									_gicentre$elm_vega$Vega$num(0)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axGrid(true),
+									_0: _gicentre$elm_vega$Vega$axGrid(
+										_gicentre$elm_vega$Vega$boo(true)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$axDomain(false),
+										_0: _gicentre$elm_vega$Vega$axDomain(
+											_gicentre$elm_vega$Vega$boo(false)),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$axFormat('$0.2f'),
@@ -19673,13 +19690,16 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 									_gicentre$elm_vega$Vega$str('Price of a gallon of gasoline (adjusted for inflation)')),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axDomain(false),
+									_0: _gicentre$elm_vega$Vega$axDomain(
+										_gicentre$elm_vega$Vega$boo(false)),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$axTicks(false),
+										_0: _gicentre$elm_vega$Vega$axTicks(
+											_gicentre$elm_vega$Vega$boo(false)),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$axLabels(false),
+											_0: _gicentre$elm_vega$Vega$axLabels(
+												_gicentre$elm_vega$Vega$boo(false)),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -21043,13 +21063,16 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axGrid(true),
+					_0: _gicentre$elm_vega$Vega$axGrid(
+						_gicentre$elm_vega$Vega$boo(true)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(false),
+						_0: _gicentre$elm_vega$Vega$axDomain(
+							_gicentre$elm_vega$Vega$boo(false)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axTickCount(5),
+							_0: _gicentre$elm_vega$Vega$axTickCount(
+								_gicentre$elm_vega$Vega$num(5)),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axTitle(
@@ -21065,13 +21088,16 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axGrid(true),
+						_0: _gicentre$elm_vega$Vega$axGrid(
+							_gicentre$elm_vega$Vega$boo(true)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(false),
+							_0: _gicentre$elm_vega$Vega$axDomain(
+								_gicentre$elm_vega$Vega$boo(false)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axTickCount(5),
+								_0: _gicentre$elm_vega$Vega$axTickCount(
+									_gicentre$elm_vega$Vega$num(5)),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$axTitle(

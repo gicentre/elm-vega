@@ -11874,7 +11874,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'domain',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxEncode':
 			var enc = function (_p94) {
@@ -11896,13 +11896,13 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'grid',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabels':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labels',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxLabelOverlap':
 			return {
@@ -11915,7 +11915,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelPadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxMaxExtent':
 			return {
@@ -11969,7 +11969,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFlushOffset',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxOffset':
 			return {
@@ -11987,19 +11987,19 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'ticks',
-				_1: _elm_lang$core$Json_Encode$bool(_p93._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p93._0)
 			};
 		case 'AxTickCount':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTickSize':
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickSize',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxTitle':
 			return {
@@ -12011,7 +12011,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
-				_1: _elm_lang$core$Json_Encode$float(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 		case 'AxValues':
 			return {
@@ -18119,7 +18119,8 @@ var _gicentre$elm_vega$GalleryLineArea$areaChart4 = function () {
 					_0: _gicentre$elm_vega$Vega$axFormat('d'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axTickCount(15),
+						_0: _gicentre$elm_vega$Vega$axTickCount(
+							_gicentre$elm_vega$Vega$num(15)),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -18132,13 +18133,16 @@ var _gicentre$elm_vega$GalleryLineArea$areaChart4 = function () {
 						_0: _gicentre$elm_vega$Vega$axFormat('%'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axGrid(true),
+							_0: _gicentre$elm_vega$Vega$axGrid(
+								_gicentre$elm_vega$Vega$boo(true)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axDomain(false),
+								_0: _gicentre$elm_vega$Vega$axDomain(
+									_gicentre$elm_vega$Vega$boo(false)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axTickSize(12),
+									_0: _gicentre$elm_vega$Vega$axTickSize(
+										_gicentre$elm_vega$Vega$num(12)),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$axEncode(
@@ -19105,7 +19109,8 @@ var _gicentre$elm_vega$GalleryLineArea$areaChart3 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axTickCount(20),
+					_0: _gicentre$elm_vega$Vega$axTickCount(
+						_gicentre$elm_vega$Vega$num(20)),
 					_1: {ctor: '[]'}
 				},
 				_p8));
@@ -20228,7 +20233,8 @@ var _gicentre$elm_vega$GalleryLineArea$areaChart1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axTickCount(20),
+					_0: _gicentre$elm_vega$Vega$axTickCount(
+						_gicentre$elm_vega$Vega$num(20)),
 					_1: {ctor: '[]'}
 				},
 				A4(
