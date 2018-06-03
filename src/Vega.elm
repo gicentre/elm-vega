@@ -101,6 +101,8 @@ module Vega
         , agGroupBy
         , agKey
         , agOps
+        , anSignal
+        , asSignal
         , autosize
         , axDomain
         , axEncode
@@ -127,6 +129,7 @@ module Vega
         , axes
         , axis
         , background
+        , bcSignal
         , bnAnchor
         , bnAs
         , bnBase
@@ -465,6 +468,7 @@ module Vega
         , nums
         , ofSignal
         , on
+        , opSignal
         , orSignal
         , paAs
         , paField
@@ -820,6 +824,7 @@ more of the functions described below.
 @docs agKey
 
 @docs Operation
+@docs opSignal
 
 TODO: add joinAggregate functions.
 TODO: add pivot functions.
@@ -1326,6 +1331,7 @@ for details on the modelling of event streams.
 
 @docs tiAnchor
 @docs Anchor
+@docs anSignal
 @docs tiEncode
 @docs tiInteractive
 @docs tiName
@@ -1342,6 +1348,7 @@ for details on the modelling of event streams.
 @docs grAlignRow
 @docs grAlignColumn
 @docs BoundsCalculation
+@docs bcSignal
 @docs loAlign
 @docs loBounds
 @docs loColumns
@@ -1488,6 +1495,7 @@ to the data and transform options described above.
 @docs paddings
 @docs width
 @docs Autosize
+@docs asSignal
 @docs background
 @docs encode
 
@@ -1565,6 +1573,8 @@ import Json.Encode as JE
 -- TODO: Most types should have the option of representing their type from a signal
 -- Where possible, these should use the type/signal specific types, but in cases
 -- where mixed types are assembled in lists, we can use the more generic Value
+-- TODO: For exposed (parameterless) types we should add a hidden type constructor
+-- that allows it to be defined with a signal (see OrderSignal for an exmple).
 -- TODO: Should we represent colors with their own type or perhaps Str type rather than String?
 -- This would allow colors to be generated via signal but does make the API a little more cumbersome.
 -- Opaque Types
@@ -2728,6 +2738,23 @@ type Anchor
     = Start
     | Middle
     | End
+    | AnchorSignal String
+
+
+{-| Indicates an anchor position is to be determined by a named signal.
+The signal should generate one of "start", "middle" or "end".
+-}
+anSignal : String -> Anchor
+anSignal =
+    AnchorSignal
+
+
+{-| Indicates an auto-sizing rule is to be determined by a named signal. For details see the
+[Vega autosize documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
+-}
+asSignal : String -> Autosize
+asSignal =
+    AutosizeSignal
 
 
 {-| Indicates the auto-sizing characteristics of the visualization such as amount
@@ -2741,6 +2768,7 @@ type Autosize
     | APad
     | APadding
     | AResize
+    | AutosizeSignal String
 
 
 {-| Declare the way the view is sized. For details, see the
@@ -2981,6 +3009,13 @@ background s =
     ( VBackground, strSpec s )
 
 
+{-| Indicates a bounds calculation type is to be determined by a named signal.
+-}
+bcSignal : String -> BoundsCalculation
+bcSignal =
+    BoundsCalculationSignal
+
+
 {-| Specify the value in the binned domain at which to anchor the bins of a bin
 transform, shifting the bin boundaries if necessary to ensure that a boundary aligns
 with the anchor value. If not specified, the minimum bin extent value serves as
@@ -3121,6 +3156,7 @@ to place sub-plots without axes or legends into a uniform grid structure.
 type BoundsCalculation
     = Full
     | Flush
+    | BoundsCalculationSignal String
 
 
 {-| Define a color in HCL space. Each of the three triplet values can be a numeric
@@ -6713,6 +6749,16 @@ type Operation
     | Valid
     | Variance
     | Variancep
+    | OperationSignal String
+
+
+{-| Indicates an aggregation operation is to be determined by a named signal. The
+signal should generate the name of a valid operation (e.g. `average`). For details see the
+[Vega aggregate documentation](https://vega.github.io/vega/docs/transforms/aggregate/#ops)
+-}
+opSignal : String -> Operation
+opSignal =
+    OperationSignal
 
 
 {-| Indicate an ordering, usually when sorting.
@@ -6740,7 +6786,7 @@ type Orientation
     | Radial
 
 
-{-| Indicates an sort order determined by a named signal for comparison operations.
+{-| Indicates a sort order determined by a named signal for comparison operations.
 For details see the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
 orSignal : String -> Order
@@ -8778,17 +8824,20 @@ aggregateProperty ap =
             ( "key", fieldSpec f )
 
 
-anchorLabel : Anchor -> String
-anchorLabel anchor =
+anchorSpec : Anchor -> Spec
+anchorSpec anchor =
     case anchor of
         Start ->
-            "start"
+            JE.string "start"
 
         Middle ->
-            "middle"
+            JE.string "middle"
 
         End ->
-            "end"
+            JE.string "end"
+
+        AnchorSignal sigName ->
+            JE.object [ signalReferenceProperty sigName ]
 
 
 autosizeProperty : Autosize -> LabelledSpec
@@ -8811,6 +8860,9 @@ autosizeProperty asCfg =
 
         APadding ->
             ( "contains", JE.string "padding" )
+
+        AutosizeSignal sigName ->
+            signalReferenceProperty sigName
 
 
 axisElementLabel : AxisElement -> String
@@ -9033,14 +9085,17 @@ booSpec b =
             JE.object [ exprProperty expr ]
 
 
-boundsCalculationLabel : BoundsCalculation -> String
-boundsCalculationLabel bc =
+boundsCalculationSpec : BoundsCalculation -> Spec
+boundsCalculationSpec bc =
     case bc of
         Full ->
-            "full"
+            JE.string "full"
 
         Flush ->
-            "flush"
+            JE.string "flush"
+
+        BoundsCalculationSignal sigName ->
+            JE.object [ signalReferenceProperty sigName ]
 
 
 clipSpec : Clip -> Spec
@@ -9851,7 +9906,7 @@ layoutProperty prop =
             ( "align", gridAlignSpec ga )
 
         LBounds bc ->
-            ( "bounds", JE.string (boundsCalculationLabel bc) )
+            ( "bounds", boundsCalculationSpec bc )
 
         LColumns n ->
             ( "columns", numSpec n )
@@ -10495,6 +10550,9 @@ opSpec op =
         Variancep ->
             JE.string "variancep"
 
+        OperationSignal sigName ->
+            JE.object [ signalReferenceProperty sigName ]
+
 
 orderSpec : Order -> Spec
 orderSpec order =
@@ -11101,7 +11159,7 @@ titleProperty tProp =
             ( "orient", JE.string (sideLabel s) )
 
         TAnchor a ->
-            ( "anchor", JE.string (anchorLabel a) )
+            ( "anchor", anchorSpec a )
 
         TEncode eps ->
             ( "encode", JE.object (List.map encodingProperty eps) )
