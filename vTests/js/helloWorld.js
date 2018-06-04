@@ -8661,8 +8661,7 @@ var _user$project$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'values',
-				_1: _elm_lang$core$Json_Encode$list(
-					A2(_elm_lang$core$List$map, _user$project$Vega$valueSpec, _p93._0))
+				_1: _user$project$Vega$valueSpec(_p93._0)
 			};
 		default:
 			return {

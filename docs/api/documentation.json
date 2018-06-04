@@ -6347,7 +6347,7 @@
       {
         "name": "axValues",
         "comment": " Explicitly set axis tick and label values.\n",
-        "type": "List Vega.Value -> Vega.AxisProperty"
+        "type": "Vega.Value -> Vega.AxisProperty"
       },
       {
         "name": "axZIndex",

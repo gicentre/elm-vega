@@ -1662,7 +1662,7 @@ type AxisProperty
     | AxTickSize Num
     | AxTitle Str
     | AxTitlePadding Num
-    | AxValues (List Value)
+    | AxValues Value
     | AxZIndex Num
 
 
@@ -3129,7 +3129,7 @@ axTitlePadding =
 
 {-| Explicitly set axis tick and label values.
 -}
-axValues : List Value -> AxisProperty
+axValues : Value -> AxisProperty
 axValues =
     AxValues
 
@@ -9215,7 +9215,7 @@ axisProperty ap =
             ( "titlePadding", numSpec pad )
 
         AxValues vals ->
-            ( "values", JE.list (List.map valueSpec vals) )
+            ( "values", valueSpec vals )
 
         AxZIndex n ->
             ( "zindex", numSpec n )
