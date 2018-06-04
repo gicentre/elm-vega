@@ -64,8 +64,8 @@ histo1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
@@ -267,7 +267,7 @@ density1 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axZIndex 1 ]
+            axes << axis "xScale" SBottom [ axZIndex (num 1) ]
 
         le =
             legends << legend [ leOrient TopLeft, leOffset (vNum 0), leZIndex 1, leFill "cScale" ]
@@ -349,8 +349,8 @@ boxplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "layout" SLeft [ axTickCount (num 5), axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "layout" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
@@ -465,8 +465,8 @@ violinplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "layout" SLeft [ axTickCount (num 5), axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "layout" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
@@ -947,9 +947,93 @@ contour1 =
         [ width 500, height 400, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
+wheat1 : Spec
+wheat1 =
+    let
+        ds =
+            dataSource
+                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                    |> transform
+                        [ trBin (str "u")
+                            (nums [ -1, 1 ])
+                            [ bnAnchor (numSignal "binOffset")
+                            , bnStep (numSignal "binStep")
+                            , bnNice (boo False)
+                            , bnSignal "bins"
+                            ]
+                        , trStack [ stGroupBy [ str "bin0" ], stSort [ coField [ str "u" ] ] ]
+                        , trExtentAsSignal (str "y1") "extent"
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "symbolDiameter"
+                    [ siValue (vNum 4)
+                    , siBind (iRange [ inMin 1, inMax 8, inStep 0.25 ])
+                    ]
+                << signal "binOffset"
+                    [ siValue (vNum 0)
+                    , siBind (iRange [ inMin -0.1, inMax 0.1 ])
+                    ]
+                << signal "binStep"
+                    [ siValue (vNum 0.075)
+                    , siBind (iRange [ inMin -0.001, inMax 0.2, inStep 0.001 ])
+                    ]
+                << signal "height" [ siUpdate "extent[1] * (1 + symbolDiameter)" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doNums (nums [ -1, 1 ]))
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scDomain (doNums (numList [ num 0, numSignal "extent[1]" ]))
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    SBottom
+                    [ axValues (vSignal "sequence(bins.start, bins.stop + bins.step, bins.step)")
+                    , axDomain (boo False)
+                    , axTicks (boo False)
+                    , axLabels (boo False)
+                    , axGrid (boo True)
+                    , axZIndex (num 0)
+                    ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mFrom [ srData (str "points") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "transparent" ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            , maSize [ vSignal "symbolDiameter * symbolDiameter" ]
+                            , maStroke [ vStr "steelblue" ]
+                            ]
+                        , enHover [ maStroke [ vStr "firebrick" ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    contour1
+    wheat1
 
 
 
@@ -968,6 +1052,7 @@ mySpecs =
         , ( "window2", window2 )
         , ( "scatter1", scatter1 )
         , ( "contour1", contour1 )
+        , ( "wheat1", wheat1 )
         ]
 
 
