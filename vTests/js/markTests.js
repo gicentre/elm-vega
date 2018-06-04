@@ -9129,6 +9129,9 @@ var _user$project$Vega$numSpec = function (num) {
 					_0: _user$project$Vega$exprProperty(_p31._0),
 					_1: {ctor: '[]'}
 				});
+		case 'NumList':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _user$project$Vega$numSpec, _p31._0));
 		default:
 			return _elm_lang$core$Json_Encode$null;
 	}
@@ -14233,6 +14236,10 @@ var _user$project$Vega$NumExpr = function (a) {
 	return {ctor: 'NumExpr', _0: a};
 };
 var _user$project$Vega$numExpr = _user$project$Vega$NumExpr;
+var _user$project$Vega$NumList = function (a) {
+	return {ctor: 'NumList', _0: a};
+};
+var _user$project$Vega$numList = _user$project$Vega$NumList;
 var _user$project$Vega$NumSignals = function (a) {
 	return {ctor: 'NumSignals', _0: a};
 };

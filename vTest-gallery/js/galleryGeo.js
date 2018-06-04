@@ -9902,6 +9902,9 @@ var _gicentre$elm_vega$Vega$numSpec = function (num) {
 					_0: _gicentre$elm_vega$Vega$exprProperty(_p31._0),
 					_1: {ctor: '[]'}
 				});
+		case 'NumList':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$numSpec, _p31._0));
 		default:
 			return _elm_lang$core$Json_Encode$null;
 	}
@@ -15006,6 +15009,10 @@ var _gicentre$elm_vega$Vega$NumExpr = function (a) {
 	return {ctor: 'NumExpr', _0: a};
 };
 var _gicentre$elm_vega$Vega$numExpr = _gicentre$elm_vega$Vega$NumExpr;
+var _gicentre$elm_vega$Vega$NumList = function (a) {
+	return {ctor: 'NumList', _0: a};
+};
+var _gicentre$elm_vega$Vega$numList = _gicentre$elm_vega$Vega$NumList;
 var _gicentre$elm_vega$Vega$NumSignals = function (a) {
 	return {ctor: 'NumSignals', _0: a};
 };
@@ -19063,16 +19070,16 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$prRotate(
-								_gicentre$elm_vega$Vega$numSignals(
+								_gicentre$elm_vega$Vega$numList(
 									{
 										ctor: '::',
-										_0: 'rotateX',
+										_0: _gicentre$elm_vega$Vega$numSignal('rotateX'),
 										_1: {
 											ctor: '::',
-											_0: '0',
+											_0: _gicentre$elm_vega$Vega$num(0),
 											_1: {
 												ctor: '::',
-												_0: '0',
+												_0: _gicentre$elm_vega$Vega$num(0),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -19080,13 +19087,13 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$prCenter(
-									_gicentre$elm_vega$Vega$numSignals(
+									_gicentre$elm_vega$Vega$numList(
 										{
 											ctor: '::',
-											_0: '0',
+											_0: _gicentre$elm_vega$Vega$num(0),
 											_1: {
 												ctor: '::',
-												_0: 'centerY',
+												_0: _gicentre$elm_vega$Vega$numSignal('centerY'),
 												_1: {ctor: '[]'}
 											}
 										})),
@@ -20448,16 +20455,16 @@ var _gicentre$elm_vega$GalleryGeo$geo4 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$prRotate(
-								_gicentre$elm_vega$Vega$numSignals(
+								_gicentre$elm_vega$Vega$numList(
 									{
 										ctor: '::',
-										_0: 'pRotate0',
+										_0: _gicentre$elm_vega$Vega$numSignal('pRotate0'),
 										_1: {
 											ctor: '::',
-											_0: 'pRotate1',
+											_0: _gicentre$elm_vega$Vega$numSignal('pRotate1'),
 											_1: {
 												ctor: '::',
-												_0: '0',
+												_0: _gicentre$elm_vega$Vega$num(0),
 												_1: {ctor: '[]'}
 											}
 										}

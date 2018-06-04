@@ -9129,6 +9129,9 @@ var _gicentre$elm_vega$Vega$numSpec = function (num) {
 					_0: _gicentre$elm_vega$Vega$exprProperty(_p31._0),
 					_1: {ctor: '[]'}
 				});
+		case 'NumList':
+			return _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$numSpec, _p31._0));
 		default:
 			return _elm_lang$core$Json_Encode$null;
 	}
@@ -14233,6 +14236,10 @@ var _gicentre$elm_vega$Vega$NumExpr = function (a) {
 	return {ctor: 'NumExpr', _0: a};
 };
 var _gicentre$elm_vega$Vega$numExpr = _gicentre$elm_vega$Vega$NumExpr;
+var _gicentre$elm_vega$Vega$NumList = function (a) {
+	return {ctor: 'NumList', _0: a};
+};
+var _gicentre$elm_vega$Vega$numList = _gicentre$elm_vega$Vega$NumList;
 var _gicentre$elm_vega$Vega$NumSignals = function (a) {
 	return {ctor: 'NumSignals', _0: a};
 };

@@ -304,7 +304,7 @@ geo4 =
                 << projection "myProjection"
                     [ prType Orthographic
                     , prScale (num 225)
-                    , prRotate (numSignals [ "pRotate0", "pRotate1", "0" ])
+                    , prRotate (numList [ numSignal "pRotate0", numSignal "pRotate1", num 0 ])
                     , prTranslate (numSignals [ "width/2", "height/2" ])
                     ]
 
@@ -571,8 +571,8 @@ geo6 =
                 << projection "myProjection"
                     [ prType Mercator
                     , prScale (numSignal "myScale")
-                    , prRotate (numSignals [ "rotateX", "0", "0" ])
-                    , prCenter (numSignals [ "0", "centerY" ])
+                    , prRotate (numList [ numSignal "rotateX", num 0, num 0 ])
+                    , prCenter (numList [ num 0, numSignal "centerY" ])
                     , prTranslate (numSignals [ "tx", "ty" ])
                     ]
 
