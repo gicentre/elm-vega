@@ -758,7 +758,7 @@ scatter1 =
         ds =
             dataSource
                 [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
-                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "summary" [ daSource "source" ]
                     |> transform
                         [ trExtentAsSignal (str "Horsepower") "hp_extent"
@@ -849,9 +849,107 @@ scatter1 =
         [ width 200, height 200, padding 5, autosize [ APad ], ds, sc [], ax [], le [], mk [] ]
 
 
+contour1 : Spec
+contour1 =
+    -- TODO: Add config.
+    let
+        ds =
+            dataSource
+                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
+                , data "contours" [ daSource "source" ]
+                    |> transform
+                        [ trContour (numSignal "width")
+                            (numSignal "height")
+                            [ cnX (strExpr (expr "scale('xScale', datum.Horsepower)"))
+                            , cnY (strExpr (expr "scale('yScale', datum.Miles_per_Gallon)"))
+                            , cnCount (numSignal "count")
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "count" [ siValue (vNum 10), siBind (iSelect [ inOptions (vNums [ 1, 5, 10, 20 ]) ]) ]
+                << signal "points" [ siValue (vBoo True), siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "source", daField (str "Horsepower") ])
+                    , scRound (boo True)
+                    , scNice NTrue
+                    , scZero (boo False)
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raDefault RHeight)
+                    , scDomain (doData [ daDataset "source", daField (str "Miles_per_Gallon") ])
+                    , scRound (boo True)
+                    , scNice NTrue
+                    , scZero (boo False)
+                    ]
+                << scale "cScale"
+                    [ scType ScSequential
+                    , scDomain (doData [ daDataset "contours", daField (str "value") ])
+                    , scRange (raDefault RHeatmap)
+                    , scZero (boo True)
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    SBottom
+                    [ axGrid (boo True)
+                    , axDomain (boo False)
+                    , axTitle (str "Horsepower")
+                    ]
+                << axis "yScale"
+                    SLeft
+                    [ axGrid (boo True)
+                    , axDomain (boo False)
+                    , axTitle (str "Miles per gallon")
+                    ]
+
+        le =
+            legends << legend [ leFill "cScale", leType LGradient ]
+
+        mk =
+            marks
+                << mark Path
+                    [ mFrom [ srData (str "contours") ]
+                    , mEncode
+                        [ enEnter
+                            [ maStroke [ vStr "#888" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "value") ]
+                            , maFillOpacity [ vNum 0.35 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoPath "" [ gpField (str "datum") ] ]
+                    ]
+                << mark Symbol
+                    [ mName "marks"
+                    , mFrom [ srData (str "source") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
+                            , maY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
+                            , maSize [ vNum 4 ]
+                            , maFill [ ifElse "points" [ vStr "black" ] [ vStr "transparent" ] ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 400, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    scatter1
+    contour1
 
 
 
@@ -869,6 +967,7 @@ mySpecs =
         , ( "window1", window1 )
         , ( "window2", window2 )
         , ( "scatter1", scatter1 )
+        , ( "contour1", contour1 )
         ]
 
 
