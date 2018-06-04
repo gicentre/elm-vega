@@ -1663,7 +1663,7 @@ type AxisProperty
     | AxTitle Str
     | AxTitlePadding Num
     | AxValues (List Value)
-    | AxZIndex Int
+    | AxZIndex Num
 
 
 {-| Describes a binding to some HTML input element such as a checkbox or radio button.
@@ -3139,7 +3139,7 @@ mark and legend groups. The default value is 0 and axes and grid lines are drawn
 behind any marks defined in the same specification level. Higher values (1) will
 cause axes and grid lines to be drawn on top of marks.
 -}
-axZIndex : Int -> AxisProperty
+axZIndex : Num -> AxisProperty
 axZIndex =
     AxZIndex
 
@@ -9218,7 +9218,7 @@ axisProperty ap =
             ( "values", JE.list (List.map valueSpec vals) )
 
         AxZIndex n ->
-            ( "zindex", JE.int n )
+            ( "zindex", numSpec n )
 
 
 bindingProperty : Bind -> LabelledSpec

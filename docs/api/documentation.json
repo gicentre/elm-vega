@@ -6352,7 +6352,7 @@
       {
         "name": "axZIndex",
         "comment": " The z-index indicating the layering of the axis group relative to other axis,\nmark and legend groups. The default value is 0 and axes and grid lines are drawn\nbehind any marks defined in the same specification level. Higher values (1) will\ncause axes and grid lines to be drawn on top of marks.\n",
-        "type": "Int -> Vega.AxisProperty"
+        "type": "Vega.Num -> Vega.AxisProperty"
       },
       {
         "name": "axes",

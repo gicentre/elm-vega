@@ -177,8 +177,8 @@ areaChart2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1 ]
-                << axis "yScale" SLeft [ axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "yScale" SLeft [ axZIndex (num 1) ]
 
         mk =
             marks

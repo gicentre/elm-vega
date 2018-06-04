@@ -12036,7 +12036,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p93._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p93._0)
 			};
 	}
 };
@@ -18359,7 +18359,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axZIndex(1),
+					_0: _gicentre$elm_vega$Vega$axZIndex(
+						_gicentre$elm_vega$Vega$num(1)),
 					_1: {ctor: '[]'}
 				},
 				_p5));
@@ -18803,7 +18804,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot4 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axZIndex(1),
+					_0: _gicentre$elm_vega$Vega$axZIndex(
+						_gicentre$elm_vega$Vega$num(1)),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$axTitle(
@@ -18821,7 +18823,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot4 = function () {
 							_gicentre$elm_vega$Vega$num(5)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axZIndex(1),
+							_0: _gicentre$elm_vega$Vega$axZIndex(
+								_gicentre$elm_vega$Vega$num(1)),
 							_1: {ctor: '[]'}
 						}
 					},

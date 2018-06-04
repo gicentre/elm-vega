@@ -415,8 +415,8 @@ scatterplot4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1, axTitle (str "Barley Yield") ]
-                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1), axTitle (str "Barley Yield") ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
@@ -489,7 +489,7 @@ scatterplot5 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex 1 ]
+                << axis "xScale" SBottom [ axZIndex (num 1) ]
 
         nestedAx =
             axes

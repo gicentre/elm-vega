@@ -8668,7 +8668,7 @@ var _user$project$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p93._0)
+				_1: _user$project$Vega$numSpec(_p93._0)
 			};
 	}
 };
