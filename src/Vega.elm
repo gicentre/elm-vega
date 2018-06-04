@@ -9560,17 +9560,11 @@ contourProperty cnProp =
     case cnProp of
         CnValues n ->
             case n of
-                Nums _ ->
-                    ( "values", numSpec n )
-
-                NumSignal _ ->
-                    ( "values", numSpec n )
-
-                NumSignals _ ->
-                    ( "values", numSpec n )
+                Num _ ->
+                    ( "values", JE.null ) |> Debug.log ("Warning: cnValues expecting array of numbers or signals but was given " ++ toString n)
 
                 _ ->
-                    ( "values", JE.null ) |> Debug.log ("Warning: cnValues expecting array numbers or signals but was given " ++ toString n)
+                    ( "values", numSpec n )
 
         CnX f ->
             ( "x", fieldSpec f )
@@ -9589,17 +9583,11 @@ contourProperty cnProp =
 
         CnThresholds n ->
             case n of
-                Nums _ ->
-                    ( "thresholds", numSpec n )
-
-                NumSignal _ ->
-                    ( "thresholds", numSpec n )
-
-                NumSignals _ ->
-                    ( "thresholds", numSpec n )
+                Num _ ->
+                    ( "thresholds", JE.null ) |> Debug.log ("Warning: cnThresholds expecting array of numbers or signals but was given " ++ toString n)
 
                 _ ->
-                    ( "thresholds", JE.null ) |> Debug.log ("Warning: cnThresholds expecting array numbers or signals but was given " ++ toString n)
+                    ( "thresholds", numSpec n )
 
         CnCount n ->
             ( "count", numSpec n )
@@ -9659,18 +9647,7 @@ densityProperty : DensityProperty -> LabelledSpec
 densityProperty dnp =
     case dnp of
         DnExtent ns ->
-            case ns of
-                Nums [ mn, mx ] ->
-                    ( "extent", JE.list [ JE.float mn, JE.float mx ] )
-
-                NumSignal sig ->
-                    ( "extent", numSpec (NumSignal sig) )
-
-                NumSignals [ sigMx, sigMn ] ->
-                    ( "extent", JE.list [ numSpec (NumSignals [ sigMx, sigMn ]) ] )
-
-                _ ->
-                    ( "extent", JE.null ) |> Debug.log ("Warning: dnExtent expecting array of 2 numbers but was given " ++ toString ns)
+            numArrayProperty 2 "extent" ns
 
         DnMethod df ->
             case df of
@@ -10143,70 +10120,22 @@ graticuleProperty grProp =
             ( "field", fieldSpec field )
 
         GrExtentMajor n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "extentMajor", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "extentMajor", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "extentMajor", JE.null ) |> Debug.log ("Warning: grExtentMajor expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "extentMajor" n
 
         GrExtentMinor n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "extentMinor", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "extentMinor", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "extentMinor", JE.null ) |> Debug.log ("Warning: grExtentMinor expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "extentMinor" n
 
         GrExtent n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "extent", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "extent", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "extent", JE.null ) |> Debug.log ("Warning: grExtent expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "extentr" n
 
         GrStepMajor n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "stepMajor", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "stepMajor", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "stepMajor", JE.null ) |> Debug.log ("Warning: grStepMajor expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "stepMajor" n
 
         GrStepMinor n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "stepMinor", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "stepMinor", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "stepMinor", JE.null ) |> Debug.log ("Warning: grStepMinor expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "stepMinor" n
 
         GrStep n ->
-            case n of
-                Nums [ lat, lng ] ->
-                    ( "step", JE.list [ JE.float lat, JE.float lng ] )
-
-                NumSignals [ lat, lng ] ->
-                    ( "step", numSpec (NumSignals [ lat, lng ]) )
-
-                _ ->
-                    ( "step", JE.null ) |> Debug.log ("Warning: grStep expecting array of 2 numbers or signals but was given " ++ toString n)
+            numArrayProperty 2 "step" n
 
         GrPrecision n ->
             ( "precision", numSpec n )
@@ -10854,6 +10783,38 @@ niceSpec ni =
             JE.int n
 
 
+{-| For filtering Nums that represent an array of numbers of a given length.
+Note that a signal can in in theory represent any value and cannot be validated
+by elm, this is only partially type safe.
+-}
+numArrayProperty : Int -> String -> Num -> LabelledSpec
+numArrayProperty len name n =
+    case n of
+        Nums ns ->
+            if List.length ns == len then
+                ( name, JE.list (List.map JE.float ns) )
+            else
+                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting array of " ++ toString len ++ " numbers but was given " ++ toString ns)
+
+        NumSignal sig ->
+            ( name, numSpec (NumSignal sig) )
+
+        NumSignals sigs ->
+            if List.length sigs == len then
+                ( name, numSpec (NumSignals sigs) )
+            else
+                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting array of " ++ toString len ++ " signals but was given " ++ toString sigs)
+
+        NumList ns ->
+            if List.length ns == len then
+                ( name, JE.list (List.map numSpec ns) )
+            else
+                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting array of " ++ toString len ++ " nums but was given " ++ toString ns)
+
+        _ ->
+            ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting array of 2 numbers but was given " ++ toString n)
+
+
 numSpec : Num -> Spec
 numSpec num =
     case num of
@@ -11079,18 +11040,7 @@ projectionProperty projProp =
             ( "scale", numSpec n )
 
         PrTranslate n ->
-            case n of
-                Nums [ tx, ty ] ->
-                    ( "translate", JE.list [ JE.float tx, JE.float ty ] )
-
-                NumSignal sig ->
-                    ( "translate", numSpec (NumSignal sig) )
-
-                NumSignals [ sigTx, sigTy ] ->
-                    ( "translate", numSpec (NumSignals [ sigTx, sigTy ]) )
-
-                _ ->
-                    ( "translate", JE.null ) |> Debug.log ("Warning: prTranslate expecting array of 2 numbers but was given " ++ toString n)
+            numArrayProperty 2 "translate" n
 
         PrCenter n ->
             ( "center", numSpec n )
@@ -11111,6 +11061,12 @@ projectionProperty projProp =
 
                 NumSignals [ sigLambda, sigPhi, sigGamma ] ->
                     ( "rotate", numSpec (NumSignals [ sigLambda, sigPhi, sigGamma ]) )
+
+                NumList [ numLambda, numPhi ] ->
+                    ( "rotate", numSpec (NumList [ numLambda, numPhi ]) )
+
+                NumList [ numLambda, numPhi, numGamma ] ->
+                    ( "rotate", numSpec (NumList [ numLambda, numPhi, numGamma ]) )
 
                 _ ->
                     ( "rotate", JE.null ) |> Debug.log ("Warning: prRotate expecting array of 2 or 3 numbers but was given " ++ toString n)
@@ -11140,18 +11096,7 @@ projectionProperty projProp =
                     ( "extent", JE.null ) |> Debug.log ("Warning: prExtent expecting array of 4 numbers but was given " ++ toString n)
 
         PrSize n ->
-            case n of
-                Nums [ w, h ] ->
-                    ( "size", JE.list [ JE.float w, JE.float h ] )
-
-                NumSignal sig ->
-                    ( "size", numSpec (NumSignal sig) )
-
-                NumSignals [ sigW, sigH ] ->
-                    ( "size", numSpec (NumSignals [ sigW, sigH ]) )
-
-                _ ->
-                    ( "size", JE.null ) |> Debug.log ("Warning: prSize expecting array of 2 numbers but was given " ++ toString n)
+            numArrayProperty 2 "size" n
 
         PrCoefficient n ->
             ( "coefficient", numSpec n )
@@ -11657,17 +11602,11 @@ transformSpec trans =
             let
                 extSpec =
                     case extent of
-                        Nums _ ->
-                            numSpec extent
-
-                        NumSignal _ ->
-                            numSpec extent
-
-                        NumSignals _ ->
-                            numSpec extent
+                        Num _ ->
+                            JE.null |> Debug.log ("trBin expecting an extent array but was given " ++ toString extent)
 
                         _ ->
-                            JE.null |> Debug.log ("trBin expecting an extent array but was given " ++ toString extent)
+                            numSpec extent
             in
             JE.object
                 (( "type", JE.string "bin" )
@@ -11903,32 +11842,10 @@ treeProperty tp =
             ( "method", teMethodSpec m )
 
         TeSize n ->
-            case n of
-                Nums [ w, h ] ->
-                    ( "size", JE.list [ JE.float w, JE.float h ] )
-
-                NumSignal sig ->
-                    ( "size", numSpec (NumSignal sig) )
-
-                NumSignals [ sigW, sigH ] ->
-                    ( "size", numSpec (NumSignals [ sigW, sigH ]) )
-
-                _ ->
-                    ( "size", JE.null ) |> Debug.log ("Warning: teSize expecting array of 2 numbers but was given " ++ toString n)
+            numArrayProperty 2 "size" n
 
         TeNodeSize n ->
-            case n of
-                Nums [ w, h ] ->
-                    ( "nodeSize", JE.list [ JE.float w, JE.float h ] )
-
-                NumSignal sig ->
-                    ( "nodeSize", numSpec (NumSignal sig) )
-
-                NumSignals [ sigW, sigH ] ->
-                    ( "nodeSize", numSpec (NumSignals [ sigW, sigH ]) )
-
-                _ ->
-                    ( "nodeSize", JE.null ) |> Debug.log ("Warning: teNodeSize expecting array of 2 numbers but was given " ++ toString n)
+            numArrayProperty 2 "nodeSize" n
 
         TeAs x y depth children ->
             ( "as", JE.list [ JE.string x, JE.string y, JE.string depth, JE.string children ] )
@@ -12264,18 +12181,7 @@ windowProperty wp =
             ( "groupby", JE.list (List.map fieldSpec fs) )
 
         WnFrame n ->
-            case n of
-                Nums [ n1, n2 ] ->
-                    ( "frame", JE.list [ JE.float n1, JE.float n2 ] )
-
-                NumSignal sig ->
-                    ( "frame", numSpec (NumSignal sig) )
-
-                NumSignals [ sigN1, sigN2 ] ->
-                    ( "frame", numSpec (NumSignals [ sigN1, sigN2 ]) )
-
-                _ ->
-                    ( "frame", JE.null ) |> Debug.log ("Warning: wnFrame expecting array of 2 numbers but was given " ++ toString n)
+            numArrayProperty 2 "frame" n
 
         WnIgnorePeers b ->
             ( "ignorePeers", booSpec b )
