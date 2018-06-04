@@ -207,7 +207,7 @@ tree3 =
                         [ trStratify (str "id") (str "parent")
                         , trTreemap
                             [ tmField (str "size")
-                            , tmSort (coField [ str "value" ])
+                            , tmSort [ ( str "value", Ascend ) ]
                             , tmRound (boo True)
                             , tmMethod (tmMethodSignal "layout")
                             , tmRatio (numSignal "aspectRatio")
@@ -299,9 +299,53 @@ tree3 =
         [ width 960, height 500, padding 2.5, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+tree4 : Spec
+tree4 =
+    let
+        ds =
+            dataSource
+                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                    |> transform
+                        [ trStratify (str "id") (str "parent")
+                        , trPack
+                            [ paField (str "size")
+                            , paSort [ ( str "value", Ascend ) ]
+                            , paSize (numSignals [ "width", "height" ])
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maShape [ vStr "circle" ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vField (fName "x") ]
+                            , maY [ vField (fName "y") ]
+                            , maSize [ vSignal "4 * datum.r * datum.r" ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        , enHover [ maStroke [ vStr "red" ], maStrokeWidth [ vNum 2 ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 600, height 600, padding 5, autosize [ ANone ], ds, sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    tree3
+    tree4
 
 
 
@@ -314,6 +358,7 @@ mySpecs =
         [ ( "tree1", tree1 )
         , ( "tree2", tree2 )
         , ( "tree3", tree3 )
+        , ( "tree4", tree4 )
         ]
 
 
