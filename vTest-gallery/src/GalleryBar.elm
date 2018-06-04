@@ -103,7 +103,7 @@ barChart2 =
                     |> transform
                         [ trStack
                             [ stGroupBy [ str "x" ]
-                            , stSort [ coField [ str "c" ] ]
+                            , stSort [ ( str "c", Ascend ) ]
                             , stField (str "y")
                             ]
                         ]

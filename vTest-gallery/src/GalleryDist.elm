@@ -574,11 +574,7 @@ window1 =
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
-                            [ wnSort
-                                [ coField [ str "Gross" ]
-                                , coOrder [ Descend ]
-                                ]
-                            ]
+                            [ wnSort [ ( str "Gross", Descend ) ] ]
                         , trFilter (expr "datum.rank <= k")
                         ]
                 ]
@@ -666,11 +662,7 @@ window2 =
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
-                            [ wnSort
-                                [ coField [ str "Gross" ]
-                                , coOrder [ Descend ]
-                                ]
-                            ]
+                            [ wnSort [ ( str "Gross", Descend ) ] ]
                         ]
                 , data "directors" [ daSource "source" ]
                     |> transform
@@ -961,7 +953,7 @@ wheat1 =
                             , bnNice (boo False)
                             , bnSignal "bins"
                             ]
-                        , trStack [ stGroupBy [ str "bin0" ], stSort [ coField [ str "u" ] ] ]
+                        , trStack [ stGroupBy [ str "bin0" ], stSort [ ( str "u", Ascend ) ] ]
                         , trExtentAsSignal (str "y1") "extent"
                         ]
                 ]

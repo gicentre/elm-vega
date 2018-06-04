@@ -24,7 +24,7 @@ packTest1 =
                         , trPack
                             [ paField (str "value")
                             , paPadding (numSignal "padding between circles")
-                            , paSize (vSignal "width") (vSignal "height")
+                            , paSize (numSignals [ "width", "height" ])
                             ]
                         ]
                 ]
@@ -80,7 +80,7 @@ stackTest1 =
                             [ stField (str "value")
                             , stGroupBy [ str "key" ]
                             , stOffset (ofSignal "offset")
-                            , stSort [ coField [ strSignal "sortField" ], coOrder [ orSignal "sortOrder" ] ]
+                            , stSort [ ( strSignal "sortField", orSignal "sortOrder" ) ]
                             ]
                         ]
                     |> on

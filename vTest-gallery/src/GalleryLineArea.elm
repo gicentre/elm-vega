@@ -153,7 +153,15 @@ areaChart2 =
 
         ds =
             dataSource
-                [ table [] |> transform [ trStack [ stGroupBy [ str "x" ], stSort [ coField [ str "c" ] ], stField (str "y") ] ] ]
+                [ table []
+                    |> transform
+                        [ trStack
+                            [ stGroupBy [ str "x" ]
+                            , stSort [ ( str "c", Ascend ) ]
+                            , stField (str "y")
+                            ]
+                        ]
+                ]
 
         sc =
             scales
@@ -312,7 +320,7 @@ areaChart4 =
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack
                         [ stGroupBy [ str "year" ]
-                        , stSort [ coField [ str "job", str "sex" ], coOrder [ Descend, Descend ] ]
+                        , stSort [ ( str "job", Descend ), ( str "sex", Descend ) ]
                         , stField (str "perc")
                         ]
                     ]
