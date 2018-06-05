@@ -155,9 +155,126 @@ bundle1 =
         [ width 720, height 720, padding 5, autosize [ ANone ], ds, si [], sc [], le [], mk [] ]
 
 
+force1 : Spec
+force1 =
+    let
+        ds =
+            dataSource
+                [ data "node-data"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "nodes")
+                    ]
+                , data "link-data"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "links")
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "cx" [ siUpdate "width /2" ]
+                << signal "cy" [ siUpdate "height /2" ]
+                << signal "nodeRadius" [ siValue (vNum 8), siBind (iRange [ inMin 1, inMax 50, inStep 1 ]) ]
+                << signal "nodeCharge" [ siValue (vNum -30), siBind (iRange [ inMin -100, inMax 10, inStep 1 ]) ]
+                << signal "linkDistance" [ siValue (vNum 30), siBind (iRange [ inMin 5, inMax 100, inStep 1 ]) ]
+                << signal "static" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "fix"
+                    [ siDescription "State variable for active node fix status."
+                    , siValue (vNum 0)
+                    , siOn
+                        [ evHandler
+                            (esMerge
+                                [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
+                                , esObject [ esSource ESWindow, esType MouseUp ]
+                                ]
+                            )
+                            [ evUpdate "0" ]
+                        , evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix || 1" ]
+                        , evHandler
+                            (esObject
+                                [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esSource ESWindow
+                                , esType MouseMove
+                                , esConsume True
+                                ]
+                            )
+                            [ evUpdate "2", evForce True ]
+                        ]
+                    ]
+                << signal "node"
+                    [ siDescription "Graph node most recently interacted with."
+                    , siValue vNull
+                    , siOn [ evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix === 1 ? item() : node" ] ]
+                    ]
+                << signal "restart"
+                    [ siDescription "Flag to restart Force simulation upon data changes."
+                    , siValue (vBoo False)
+                    , siOn [ evHandler (esSelector (strSignal "fix")) [ evUpdate "fix > 1 " ] ]
+                    ]
+
+        sc =
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20c" []) ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "nodes"
+                    , mFrom [ srData (str "node-data") ]
+                    , mOn
+                        [ trigger "fix" [ tgModifyValues "node" "fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}" ]
+                        , trigger "!fix" [ tgModifyValues "node" "{fx: null, fy: null}" ]
+                        ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale (fName "cScale"), vField (fName "group") ]
+                            , maStroke [ vStr "white" ]
+                            ]
+                        , enUpdate
+                            [ maSize [ vSignal "2 * nodeRadius * nodeRadius" ]
+                            , maCursor [ vStr (cursorLabel CPointer) ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trForce
+                            [ fsIterations (num 300)
+                            , fsRestart (booSignal "restart")
+                            , fsStatic (booSignal "static")
+                            , fsForces
+                                [ foCenter (numSignal "cx") (numSignal "cy")
+                                , foCollide (numSignal "nodeRadius") []
+                                , foNBody [ fpStrength (numSignal "nodeCharge") ]
+                                , foLink "link-data" [ fpDistance (numSignal "linkDistance") ]
+                                ]
+                            ]
+                        ]
+                    ]
+                << mark Path
+                    [ mFrom [ srData (str "link-data") ]
+                    , mInteractive (boo False)
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "#ccc" ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trLinkPath
+                            [ lpShape (str (linkShapeLabel LinkLine))
+                            , lpSourceX (str "datum.source.x")
+                            , lpSourceY (str "datum.source.y")
+                            , lpTargetX (str "datum.target.x")
+                            , lpTargetY (str "datum.target.y")
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 700, height 500, padding 0, autosize [ ANone ], ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    bundle1
+    force1
 
 
 
@@ -168,6 +285,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "bundle1", bundle1 )
+        , ( "force1", force1 )
         ]
 
 
