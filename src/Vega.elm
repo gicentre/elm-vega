@@ -55,7 +55,7 @@ module Vega
         , LinkShape(LinkArc, LinkCurve, LinkDiagonal, LinkLine, LinkOrthogonal)
         , LookupProperty
         , Mark(Arc, Area, Group, Image, Line, Path, Rect, Rule, Shape, Symbol, Text, Trail)
-        , MarkInterpolation(Basis, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
+        , MarkInterpolation(Basis, Bundle, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
         , MarkProperty
         , Num
         , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, Stdevp, Sum, Valid, Variance, Variancep)
@@ -5369,8 +5369,17 @@ leDirection =
     LeDirection
 
 
-{-| Mark encodings for custom legend styling. For more details see the
+{-| Mark encodings for custom legend styling. For example, to create a horiztonal
+dash symbol (using a simple SVG path) for each legend item:
+
+    legend
+        [ leEncode [ enSymbols [ enEnter [ maShape [ vStr "M-0.5,0H1" ] ] ] ]
+        , leStroke "myColourScale"
+        ]
+
+For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+
 -}
 leEncode : List LegendEncoding -> LegendProperty
 leEncode =
@@ -6440,6 +6449,7 @@ mark mark mps =
 -}
 type MarkInterpolation
     = Basis
+    | Bundle
     | Cardinal
     | CatmullRom
     | Linear
@@ -6463,6 +6473,9 @@ markInterpolationLabel interp =
     case interp of
         Basis ->
             "basis"
+
+        Bundle ->
+            "bundle"
 
         Cardinal ->
             "cardinal"
@@ -9802,36 +9815,36 @@ colorProperty cVal =
         RGB r g b ->
             ( "color"
             , JE.object
-                [ ( "r", JE.object (List.map valueProperty r) )
-                , ( "g", JE.object (List.map valueProperty g) )
-                , ( "b", JE.object (List.map valueProperty b) )
+                [ ( "r", JE.object (List.concatMap valueProperties r) )
+                , ( "g", JE.object (List.concatMap valueProperties g) )
+                , ( "b", JE.object (List.concatMap valueProperties b) )
                 ]
             )
 
         HSL h s l ->
             ( "color"
             , JE.object
-                [ ( "h", JE.object (List.map valueProperty h) )
-                , ( "s", JE.object (List.map valueProperty s) )
-                , ( "l", JE.object (List.map valueProperty l) )
+                [ ( "h", JE.object (List.concatMap valueProperties h) )
+                , ( "s", JE.object (List.concatMap valueProperties s) )
+                , ( "l", JE.object (List.concatMap valueProperties l) )
                 ]
             )
 
         LAB l a b ->
             ( "color"
             , JE.object
-                [ ( "l", JE.object (List.map valueProperty l) )
-                , ( "a", JE.object (List.map valueProperty a) )
-                , ( "b", JE.object (List.map valueProperty b) )
+                [ ( "l", JE.object (List.concatMap valueProperties l) )
+                , ( "a", JE.object (List.concatMap valueProperties a) )
+                , ( "b", JE.object (List.concatMap valueProperties b) )
                 ]
             )
 
         HCL h c l ->
             ( "color"
             , JE.object
-                [ ( "h", JE.object (List.map valueProperty h) )
-                , ( "c", JE.object (List.map valueProperty c) )
-                , ( "l", JE.object (List.map valueProperty l) )
+                [ ( "h", JE.object (List.concatMap valueProperties h) )
+                , ( "c", JE.object (List.concatMap valueProperties c) )
+                , ( "l", JE.object (List.concatMap valueProperties l) )
                 ]
             )
 
@@ -12258,88 +12271,99 @@ triggerProperties trans =
             [ ( "modify", expressionSpec modExpr ), ( "values", expressionSpec valExpr ) ]
 
 
+valIfElse : String -> List Value -> List Value -> List Spec -> List Spec
+valIfElse ex ifVals elseVals ifSpecs =
+    case elseVals of
+        [ VIfElse ex2 ifVals2 elseVals2 ] ->
+            valIfElse ex2 ifVals2 elseVals2 (ifSpecs ++ [ JE.object (( "test", JE.string ex2 ) :: List.concatMap valueProperties ifVals2) ])
+
+        _ ->
+            ifSpecs ++ [ valRef elseVals ]
+
+
 valRef : List Value -> Spec
 valRef vs =
     case vs of
-        [ VIfElse expr ifs elses ] ->
-            JE.list
-                [ JE.object (( "test", JE.string expr ) :: List.map valueProperty ifs)
-                , JE.object (List.map valueProperty elses)
-                ]
+        [ VIfElse ex ifs elses ] ->
+            JE.list (valIfElse ex ifs elses [ JE.object (( "test", JE.string ex ) :: List.concatMap valueProperties ifs) ])
 
         _ ->
-            JE.object (List.map valueProperty vs)
+            JE.object (List.concatMap valueProperties vs)
 
 
-valueProperty : Value -> LabelledSpec
-valueProperty val =
+valueProperties : Value -> List LabelledSpec
+valueProperties val =
     case val of
         VStr str ->
-            ( "value", JE.string str )
+            [ ( "value", JE.string str ) ]
 
         VStrs strs ->
-            ( "value", JE.list (List.map JE.string strs) )
+            [ ( "value", JE.list (List.map JE.string strs) ) ]
 
         VSignal sig ->
-            signalReferenceProperty sig
+            [ signalReferenceProperty sig ]
 
         VColor cVal ->
-            colorProperty cVal
+            [ colorProperty cVal ]
 
         VField fVal ->
-            ( "field", fieldValueSpec fVal )
+            [ ( "field", fieldValueSpec fVal ) ]
 
         VScale fVal ->
-            ( "scale", fieldValueSpec fVal )
+            [ ( "scale", fieldValueSpec fVal ) ]
 
         VKeyValue key val ->
-            ( key, valueSpec val )
+            [ ( key, valueSpec val ) ]
 
         VBand x ->
-            ( "band", JE.float x )
+            [ ( "band", JE.float x ) ]
 
         VExponent val ->
-            ( "exponent", valueSpec val )
+            [ ( "exponent", valueSpec val ) ]
 
         VMultiply val ->
-            ( "mult", valueSpec val )
+            [ ( "mult", valueSpec val ) ]
 
         VOffset val ->
-            ( "offset", valueSpec val )
+            [ ( "offset", valueSpec val ) ]
 
         VRound b ->
-            ( "round", JE.bool b )
+            [ ( "round", JE.bool b ) ]
 
         VNum num ->
-            ( "value", JE.float num )
+            [ ( "value", JE.float num ) ]
 
         VNums nums ->
-            ( "value", JE.list (List.map JE.float nums) )
+            [ ( "value", JE.list (List.map JE.float nums) ) ]
 
         VObject vals ->
-            ( "value", JE.object (List.map valueProperty vals) )
+            [ ( "value", JE.object (List.concatMap valueProperties vals) ) ]
 
         Values vals ->
-            ( "value", JE.list (List.map valueSpec vals) )
+            [ ( "value", JE.list (List.map valueSpec vals) ) ]
 
         VBoo b ->
-            ( "value", JE.bool b )
+            [ ( "value", JE.bool b ) ]
 
         VBoos bs ->
-            ( "value", JE.list (List.map JE.bool bs) )
+            [ ( "value", JE.list (List.map JE.bool bs) ) ]
 
         VNull ->
-            ( "value", JE.null )
+            [ ( "value", JE.null ) ]
 
         VIfElse expr ifs elses ->
-            ( "productionRule"
-            , JE.object
-                [ ( "test", JE.string expr )
-                , ( "if", JE.object (List.map valueProperty ifs) )
-                , ( "else", JE.object (List.map valueProperty elses) )
-                ]
-            )
-                |> Debug.log "Unexpected production rule passed to valueProperty"
+            ( "test", JE.string expr ) :: List.concatMap valueProperties ifs
+
+
+
+-- ( "productionRule"
+-- , JE.object
+--     [ ( "test", JE.string expr )
+--     , ( "if", JE.object (List.concatMap valueProperties ifs) )
+--     , ( "else", JE.object (List.concatMap valueProperties elses) )
+--     ]
+-- )
+--     |> Debug.log "Unexpected production rule passed to valueProperty"
 
 
 valueSpec : Value -> Spec
@@ -12367,13 +12391,13 @@ valueSpec val =
             JE.object [ ( "band", JE.float x ) ]
 
         VExponent val ->
-            JE.object [ valueProperty val ]
+            JE.object (valueProperties val)
 
         VMultiply val ->
-            JE.object [ valueProperty val ]
+            JE.object (valueProperties val)
 
         VOffset val ->
-            JE.object [ valueProperty val ]
+            JE.object (valueProperties val)
 
         VRound b ->
             JE.object [ ( "round", JE.bool b ) ]
@@ -12388,7 +12412,7 @@ valueSpec val =
             JE.object [ ( key, valueSpec val ) ]
 
         VObject objs ->
-            JE.object (List.map valueProperty objs)
+            JE.object (List.concatMap valueProperties objs)
 
         Values objs ->
             JE.list (List.map valueSpec objs)
@@ -12404,6 +12428,10 @@ valueSpec val =
 
         VIfElse expr ifs elses ->
             JE.null
+
+
+
+--JE.object (valRefNested val)
 
 
 vPropertyLabel : VProperty -> String

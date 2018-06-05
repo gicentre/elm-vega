@@ -868,6 +868,10 @@
             []
           ],
           [
+            "Bundle",
+            []
+          ],
+          [
             "Cardinal",
             []
           ],
@@ -2793,7 +2797,7 @@
       },
       {
         "name": "leEncode",
-        "comment": " Mark encodings for custom legend styling. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
+        "comment": " Mark encodings for custom legend styling. For example, to create a horiztonal\ndash symbol (using a simple SVG path) for each legend item:\n\n    legend\n        [ leEncode [ enSymbols [ enEnter [ maShape [ vStr \"M-0.5,0H1\" ] ] ] ]\n        , leStroke \"myColourScale\"\n        ]\n\nFor more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n\n",
         "type": "List Vega.LegendEncoding -> Vega.LegendProperty"
       },
       {
