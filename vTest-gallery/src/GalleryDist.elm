@@ -573,7 +573,7 @@ window1 =
                             , agFields [ str "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
-                        , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
+                        , trWindow [ wnOperation RowNumber "rank" ]
                             [ wnSort [ ( str "Gross", Descend ) ] ]
                         , trFilter (expr "datum.rank <= k")
                         ]
@@ -661,7 +661,7 @@ window2 =
                             , agFields [ str "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
-                        , trWindow [ wnOperation RowNumber Nothing strNull "rank" ]
+                        , trWindow [ wnOperation RowNumber "rank" ]
                             [ wnSort [ ( str "Gross", Descend ) ] ]
                         ]
                 , data "directors" [ daSource "source" ]
