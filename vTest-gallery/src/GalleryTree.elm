@@ -343,6 +343,58 @@ tree4 =
         [ width 600, height 600, padding 5, autosize [ ANone ], ds, sc [], mk [] ]
 
 
+tree5 : Spec
+tree5 =
+    let
+        ds =
+            dataSource
+                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                    |> transform
+                        [ trStratify (str "id") (str "parent")
+                        , trPartition
+                            [ ptField (str "size")
+                            , ptSort [ ( str "value", Ascend ) ]
+                            , ptSize (numSignals [ "2 * PI", "width / 2" ])
+                            , ptAs "a0" "r0" "a1" "r1" "depth" "children"
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "tableau20" []) ]
+
+        mk =
+            marks
+                << mark Arc
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vSignal "width / 2" ]
+                            , maY [ vSignal "height / 2" ]
+                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
+                            ]
+                        , enUpdate
+                            [ maStartAngle [ vField (fName "a0") ]
+                            , maEndAngle [ vField (fName "a1") ]
+                            , maInnerRadius [ vField (fName "r0") ]
+                            , maOuterRadius [ vField (fName "r1") ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            , maZIndex [ vNum 0 ]
+                            ]
+                        , enHover
+                            [ maStroke [ vStr "red" ]
+                            , maStrokeWidth [ vNum 2 ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 600, height 600, padding 5, autosize [ ANone ], ds, sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
     tree4
@@ -359,6 +411,7 @@ mySpecs =
         , ( "tree2", tree2 )
         , ( "tree3", tree3 )
         , ( "tree4", tree4 )
+        , ( "tree5", tree5 )
         ]
 
 
