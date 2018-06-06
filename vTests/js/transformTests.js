@@ -10610,6 +10610,10 @@ var _user$project$Vega$DReferences = function (a) {
 	return {ctor: 'DReferences', _0: a};
 };
 var _user$project$Vega$daReferences = _user$project$Vega$DReferences;
+var _user$project$Vega$DSignal = function (a) {
+	return {ctor: 'DSignal', _0: a};
+};
+var _user$project$Vega$daSignal = _user$project$Vega$DSignal;
 var _user$project$Vega$DFields = function (a) {
 	return {ctor: 'DFields', _0: a};
 };
@@ -13822,19 +13826,43 @@ var _user$project$Vega$valueSpec = function (val) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'band',
-						_1: _elm_lang$core$Json_Encode$float(_p109._0)
+						_1: _user$project$Vega$numSpec(_p109._0)
 					},
 					_1: {ctor: '[]'}
 				});
 		case 'VExponent':
 			return _elm_lang$core$Json_Encode$object(
-				_user$project$Vega$valueProperties(_p109._0));
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'exponent',
+						_1: _user$project$Vega$valueSpec(_p109._0)
+					},
+					_1: {ctor: '[]'}
+				});
 		case 'VMultiply':
 			return _elm_lang$core$Json_Encode$object(
-				_user$project$Vega$valueProperties(_p109._0));
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'mult',
+						_1: _user$project$Vega$valueSpec(_p109._0)
+					},
+					_1: {ctor: '[]'}
+				});
 		case 'VOffset':
 			return _elm_lang$core$Json_Encode$object(
-				_user$project$Vega$valueProperties(_p109._0));
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'offset',
+						_1: _user$project$Vega$valueSpec(_p109._0)
+					},
+					_1: {ctor: '[]'}
+				});
 		case 'VRound':
 			return _elm_lang$core$Json_Encode$object(
 				{
@@ -13842,7 +13870,7 @@ var _user$project$Vega$valueSpec = function (val) {
 					_0: {
 						ctor: '_Tuple2',
 						_0: 'round',
-						_1: _elm_lang$core$Json_Encode$bool(_p109._0)
+						_1: _user$project$Vega$booSpec(_p109._0)
 					},
 					_1: {ctor: '[]'}
 				});
@@ -14092,7 +14120,7 @@ var _user$project$Vega$valueProperties = function (val) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'band',
-					_1: _elm_lang$core$Json_Encode$float(_p111._0)
+					_1: _user$project$Vega$numSpec(_p111._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -14132,7 +14160,7 @@ var _user$project$Vega$valueProperties = function (val) {
 				_0: {
 					ctor: '_Tuple2',
 					_0: 'round',
-					_1: _elm_lang$core$Json_Encode$bool(_p111._0)
+					_1: _user$project$Vega$booSpec(_p111._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -17486,6 +17514,12 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 				_1: _elm_lang$core$Json_Encode$list(
 					A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p162._0))
 			};
+		case 'DSignal':
+			return {
+				ctor: '_Tuple2',
+				_0: 'signal',
+				_1: _elm_lang$core$Json_Encode$string(_p162._0)
+			};
 		case 'DReferences':
 			return {
 				ctor: '_Tuple2',
@@ -17501,13 +17535,15 @@ var _user$project$Vega$dataRefProperty = function (dataRef) {
 			};
 		default:
 			var _p163 = _p162._0;
-			return _elm_lang$core$Native_Utils.eq(
+			return (_elm_lang$core$Native_Utils.eq(
 				_p163,
 				{
 					ctor: '::',
 					_0: _user$project$Vega$Ascending,
 					_1: {ctor: '[]'}
-				}) ? {
+				}) || _elm_lang$core$Native_Utils.eq(
+				_p163,
+				{ctor: '[]'})) ? {
 				ctor: '_Tuple2',
 				_0: 'sort',
 				_1: _elm_lang$core$Json_Encode$bool(true)
@@ -18790,7 +18826,8 @@ var _user$project$TransformTests$stackTest1 = function () {
 																	_user$project$Vega$field('xScale')),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$vBand(1),
+																	_0: _user$project$Vega$vBand(
+																		_user$project$Vega$num(1)),
 																	_1: {ctor: '[]'}
 																}
 															}),

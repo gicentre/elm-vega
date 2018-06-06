@@ -188,7 +188,7 @@ histo2 =
                     , mEncode
                         [ enUpdate
                             [ maX [ vScale (field "xScaleNull"), vNull, vOffset (vNum 1) ]
-                            , maX2 [ vScale (field "xScaleNull"), vBand 1 ]
+                            , maX2 [ vScale (field "xScaleNull"), vBand (num 1) ]
                             , maY [ vScale (field "yScale"), vField (field "count") ]
                             , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vStr "#aaa" ]
@@ -358,7 +358,7 @@ boxplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand 0.5 ]
+                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand (num 0.5) ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -474,7 +474,7 @@ violinplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand 0.5 ]
+                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand (num 0.5) ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -637,7 +637,7 @@ window1 =
                             [ maX [ vScale (field "xScale"), vNum 0 ]
                             , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
                             , maY [ vScale (field "yScale"), vField (field "Director") ]
-                            , maHeight [ vScale (field "yScale"), vBand 1 ]
+                            , maHeight [ vScale (field "yScale"), vBand (num 1) ]
                             ]
                         ]
                     ]
@@ -735,7 +735,7 @@ window2 =
                             [ maX [ vScale (field "xScale"), vNum 0 ]
                             , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
                             , maY [ vScale (field "yScale"), vField (field "Category") ]
-                            , maHeight [ vScale (field "yScale"), vBand 1 ]
+                            , maHeight [ vScale (field "yScale"), vBand (num 1) ]
                             ]
                         ]
                     ]

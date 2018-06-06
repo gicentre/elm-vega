@@ -159,7 +159,7 @@ stackTest1 =
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1 ]
                             , maX [ vScale (field "xScale"), vField (field "key"), vOffset (vNum 0.5) ]
-                            , maWidth [ vScale (field "xScale"), vBand 1 ]
+                            , maWidth [ vScale (field "xScale"), vBand (num 1) ]
                             ]
                         , enUpdate
                             [ maY [ vScale (field "yScale"), vField (field "y0"), vOffset (vNum 0.5) ]

@@ -432,7 +432,7 @@ scatterplot4 =
                         [ enEnter [ maFill [ vStr "black" ], maHeight [ vNum 1 ] ]
                         , enUpdate
                             [ maX [ vScale (field "xScale"), vSignal "datum[measure+'0']" ]
-                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand 0.5 ]
+                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand (num 0.5) ]
                             , maX2 [ vScale (field "xScale"), vSignal "datum[measure+'1']" ]
                             ]
                         ]
@@ -443,7 +443,7 @@ scatterplot4 =
                         [ enEnter [ maFill [ vStr "back" ], maSize [ vNum 40 ] ]
                         , enUpdate
                             [ maX [ vScale (field "xScale"), vField (field "mean") ]
-                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand 0.5 ]
+                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand (num 0.5) ]
                             ]
                         ]
                     ]

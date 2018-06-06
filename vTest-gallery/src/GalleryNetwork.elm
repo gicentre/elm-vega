@@ -19,7 +19,7 @@ bundle1 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trTree
                             [ teMethod (teMethodSignal "layout")
                             , teSize (nums [ 1, 1 ])
@@ -83,12 +83,12 @@ bundle1 =
                     [ mFrom [ srData (str "leaves") ]
                     , mEncode
                         [ enEnter
-                            [ maText [ vField (fName "name") ]
+                            [ maText [ vField (field "name") ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             , maDx [ vSignal "textOffset * (datum.leftside ? -1 : 1)" ]
                             , maAngle [ vSignal "datum.leftside ? datum.angle - 180 : datum.angle" ]
                             , maAlign [ vSignal "datum.leftside ? 'right' : 'left'" ]
@@ -145,8 +145,8 @@ bundle1 =
                                     [ vNum 0.2 ]
                                 ]
                             , maTension [ vSignal "tension" ]
-                            , maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            , maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             ]
                         ]
                     ]
@@ -226,7 +226,7 @@ force1 =
                         ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "group") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "group") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
@@ -260,10 +260,10 @@ force1 =
                     , mTransform
                         [ trLinkPath
                             [ lpShape (str (linkShapeLabel LinkLine))
-                            , lpSourceX (str "datum.source.x")
-                            , lpSourceY (str "datum.source.y")
-                            , lpTargetX (str "datum.target.x")
-                            , lpTargetY (str "datum.target.y")
+                            , lpSourceX (field "datum.source.x")
+                            , lpSourceY (field "datum.source.y")
+                            , lpTargetX (field "datum.target.x")
+                            , lpTargetY (field "datum.target.y")
                             ]
                         ]
                     ]
@@ -272,9 +272,161 @@ force1 =
         [ width 700, height 500, padding 0, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+matrix1 : Spec
+matrix1 =
+    let
+        ds =
+            dataSource
+                [ data "nodes"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "nodes")
+                    ]
+                    |> transform
+                        [ trFormula "datum.group" "order" AlwaysUpdate
+                        , trFormula "dest >= 0 && datum === src ? dest : datum.order" "score" AlwaysUpdate
+                        , trWindow [ wnOperation RowNumber "order" ] [ wnSort [ ( field "score", Ascend ) ] ]
+                        ]
+                , data "edges"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "links")
+                    ]
+                    |> transform
+                        [ trLookup "nodes" (field "index") [ field "source", field "target" ] [ luAs [ "sourceNode", "targetNode" ] ]
+                        , trFormula "datum.sourceNode.group === datum.targetNode.group ? datum.sourceNode.group : count" "group" AlwaysUpdate
+                        ]
+                , data "cross" [ daSource "nodes" ] |> transform [ trCross [] ]
+                ]
+
+        si =
+            signals
+                << signal "cellSize" [ siValue (vNum 10) ]
+                << signal "count" [ siUpdate "length(data('nodes'))" ]
+                << signal "width" [ siUpdate "span(range('position'))" ]
+                << signal "height" [ siUpdate "width" ]
+                << signal "src"
+                    [ siValue (vObject [])
+                    , siOn
+                        [ evHandler (esObject [ esMark Text, esType MouseDown ]) [ evUpdate "datum" ]
+                        , evHandler (esObject [ esType MouseUp ]) [ evUpdate "{}" ]
+                        ]
+                    ]
+                << signal "dest"
+                    [ siValue (vNum -1)
+                    , siOn
+                        [ evHandler
+                            (esObject
+                                [ esBetween [ esMarkName "columns", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esSource ESWindow
+                                , esType MouseMove
+                                ]
+                            )
+                            [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(x(), 0, width) / width) : dest" ]
+                        , evHandler
+                            (esObject
+                                [ esBetween [ esMarkName "rows", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esSource ESWindow
+                                , esType MouseMove
+                                ]
+                            )
+                            [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(y(), 0, height) / height) : dest" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "position"
+                    [ scType ScBand
+                    , scDomain (doData [ daDataset "nodes", daField (field "order"), daSort [] ])
+                    , scRange (raStep (vSignal "cellSize"))
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain
+                        (doData
+                            [ daReferences [ [ daDataset "nodes", daField (field "group") ], [ daSignal "count" ] ]
+                            , daSort []
+                            ]
+                        )
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "cross") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (field "position"), vField (field "a.order") ]
+                            , maY [ vScale (field "position"), vField (field "b.order") ]
+                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ ifElse "datum.a === src || datum.b === src" [ vStr "#ddd" ] [ vStr "#f5f5f5" ] ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "edges") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (field "position"), vField (field "sourceNode.order") ]
+                            , maY [ vScale (field "position"), vField (field "targetNode.order") ]
+                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "edges") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maY [ vScale (field "position"), vField (field "sourceNode.order") ]
+                            , maX [ vScale (field "position"), vField (field "targetNode.order") ]
+                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mName "columns"
+                    , mFrom [ srData (str "nodes") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (field "position"), vField (field "order"), vBand (num 1) ]
+                            , maY [ vOffset (vNum -2) ]
+                            , maText [ vField (field "name") ]
+                            , maFontSize [ vNum 10 ]
+                            , maAngle [ vNum -90 ]
+                            , maAlign [ vStr (hAlignLabel AlignLeft) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ vStr "black" ] ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mName "rows"
+                    , mFrom [ srData (str "nodes") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maY [ vScale (field "position"), vField (field "order"), vBand (num 0.5) ]
+                            , maX [ vOffset (vNum -2) ]
+                            , maText [ vField (field "name") ]
+                            , maFontSize [ vNum 10 ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ vStr "black" ] ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 720, height 720, padding 5, ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    force1
+    matrix1
 
 
 
@@ -286,6 +438,7 @@ mySpecs =
     combineSpecs
         [ ( "bundle1", bundle1 )
         , ( "force1", force1 )
+        , ( "matrix1", matrix1 )
         ]
 
 

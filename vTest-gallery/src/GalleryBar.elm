@@ -60,7 +60,7 @@ barChart1 =
                     , mEncode
                         [ enEnter
                             [ maX [ vScale (field "xScale"), vField (field "category") ]
-                            , maWidth [ vScale (field "xScale"), vBand 1 ]
+                            , maWidth [ vScale (field "xScale"), vBand (num 1) ]
                             , maY [ vScale (field "yScale"), vField (field "amount") ]
                             , maY2 [ vScale (field "yScale"), vNum 0 ]
                             ]
@@ -76,7 +76,7 @@ barChart1 =
                             , maFill [ vStr "#333" ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vSignal "tooltip.category", vBand 0.5 ]
+                            [ maX [ vScale (field "xScale"), vSignal "tooltip.category", vBand (num 0.5) ]
                             , maY [ vScale (field "yScale"), vSignal "tooltip.amount", vOffset (vNum -2) ]
                             , maText [ vSignal "tooltip.amount" ]
                             , maFillOpacity [ ifElse "datum === tooltip" [ vNum 0 ] [ vNum 1 ] ]
@@ -141,7 +141,7 @@ barChart2 =
                     , mEncode
                         [ enEnter
                             [ maX [ vScale (field "xScale"), vField (field "x") ]
-                            , maWidth [ vScale (field "xScale"), vBand 1, vOffset (vNum -1) ]
+                            , maWidth [ vScale (field "xScale"), vBand (num 1), vOffset (vNum -1) ]
                             , maY [ vScale (field "yScale"), vField (field "y0") ]
                             , maY2 [ vScale (field "yScale"), vField (field "y1") ]
                             , maFill [ vScale (field "cScale"), vField (field "c") ]
@@ -214,9 +214,9 @@ barChart3 =
                     , mEncode
                         [ enEnter
                             [ maY [ vScale (field "pos"), vField (field "position") ]
-                            , maHeight [ vScale (field "pos"), vBand 1 ]
+                            , maHeight [ vScale (field "pos"), vBand (num 1) ]
                             , maX [ vScale (field "xScale"), vField (field "value") ]
-                            , maX2 [ vScale (field "xScale"), vBand 0 ]
+                            , maX2 [ vScale (field "xScale"), vBand (num 0) ]
                             , maFill [ vScale (field "cScale"), vField (field "position") ]
                             ]
                         ]
@@ -332,7 +332,7 @@ barChart4 =
                             ]
                         , enUpdate
                             [ maY [ vScale (field "yScale"), vField (field "b") ]
-                            , maHeight [ vScale (field "yScale"), vBand 1 ]
+                            , maHeight [ vScale (field "yScale"), vBand (num 1) ]
                             , maStroke [ vNull ]
                             , maZIndex [ vNum 0 ]
                             ]
@@ -404,7 +404,7 @@ barChart5 =
                     , mEncode
                         [ enEnter
                             [ maX [ vSignal "chartWidth + chartPad / 2" ]
-                            , maY [ vScale (field "yScale"), vField (field "age"), vBand 0.5 ]
+                            , maY [ vScale (field "yScale"), vField (field "age"), vBand (num 0.5) ]
                             , maText [ vField (field "age") ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]
@@ -457,7 +457,7 @@ barChart5 =
                             [ maX [ vScale (field "xScale"), vField (field "people") ]
                             , maX2 [ vScale (field "xScale"), vNum 0 ]
                             , maY [ vScale (field "yScale"), vField (field "age") ]
-                            , maHeight [ vScale (field "yScale"), vBand 1, vOffset (vNum -1) ]
+                            , maHeight [ vScale (field "yScale"), vBand (num 1), vOffset (vNum -1) ]
                             , maFillOpacity [ vNum 0.6 ]
                             , maFill [ vScale (field "cScale"), vField (field "sex") ]
                             ]
