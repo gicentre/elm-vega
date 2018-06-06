@@ -628,8 +628,11 @@ module Vega
         , topojsonMesh
         , trAggregate
         , trBin
+        , trCollect
         , trContour
         , trCross
+        , trCrossFilter
+        , trCrossFilterAsSignal
         , trDensity
         , trExtent
         , trExtentAsSignal
@@ -639,13 +642,17 @@ module Vega
         , trForce
         , trFormula
         , trGeoPath
+        , trGeoPoint
+        , trGeoPointAs
         , trGeoShape
         , trGraticule
+        , trIdentifier
         , trLinkPath
         , trLookup
         , trPack
         , trPartition
         , trPie
+        , trResolveFilter
         , trStack
         , trStratify
         , trTree
@@ -907,7 +914,7 @@ TODO: add pivot functions.
 
 ### Collection
 
-TODO: functions (collect)
+@docs trCollect
 
 
 ### Text Pattern Counting
@@ -947,6 +954,9 @@ TODO: add functions (countpattern)
 ### Filtering
 
 @docs trFilter
+@docs trCrossFilter
+@docs trCrossFilterAsSignal
+@docs trResolveFilter
 
 
 ### Flattening
@@ -970,7 +980,8 @@ TODO: add functions (flatten)
 @docs luValues
 @docs luDefault
 
-TODO: add functions (identifier)
+@docs trIdentifier
+
 TODO: add functions (project)
 
 @docs trWindow
@@ -1026,6 +1037,9 @@ TODO: add function (geojson)
 @docs gpField
 @docs gpPointRadius
 @docs gpAs
+
+@docs trGeoPoint
+@docs trGeoPointAs
 
 
 ### Graticule Generation
@@ -2658,63 +2672,65 @@ type TopMarkProperty
 
 {-| Defines a transformation that may be applied to a data stream or mark. Generated
 by [trAggregate](#trAggregate), [trBin](#trBin), [trCollect](#trCollect),
-[trCountPattern](#trCountPattern), [trCross](#trCross), [trDensity](#trDensity),
+[trCountPattern](#trCountPattern), [trCross](#trCross), [trCrossFilter](#trCrossFilter),
+[trCrossFilterAsSignal](#trCrossFilterAsSignal), [trDensity](#trDensity),
 [trExtent](#trExtent), [trExtentAsSignal](#trExtentAsSignal), [trFilter](#trFilter),
 [trFold](#trFold), [trFoldAs](#trFoldAs), [trFormula](#trFormula), [trIdentifier](#trIdentifier),
 [trImpute](#trImpute), [trJoinAggregate](#trJoinAggregate), [trLookup](#trLookup),
 [trProject](#trProject), [trSample](#trSample), [trSequence](#trSequence), [trWindow](#trWindow),
 [trContour](#trContour), [trGeoJson](#trGeoJson), [trGeoPath](#trGeoPath),
-[trGeoPoint](#trGeoPoint), [trGeoShape](#trGeoShape), [trGraticule](#trGraticule),
-[trLinkPath](#trLinkPath), [trPie](#trPie), [trStack](#trStack), [trForce](#trForce),
-[trVoronoi](#trVoronoi), [trWordCloud](#trWordCloud), [trNest](#trNest),
+[trGeoPoint](#trGeoPoint), [trGeoPointAs](#trGeoPointAs), [trGeoShape](#trGeoShape),
+[trGraticule](#trGraticule), [trLinkPath](#trLinkPath), [trPie](#trPie), [trStack](#trStack),
+[trForce](#trForce), [trVoronoi](#trVoronoi), [trWordCloud](#trWordCloud), [trNest](#trNest),
 [trStratify](#trStratify), [trTreeLinks](#trTreeLinks), [trPack](#trPack),
-[trPartition](#trPartition), [trTree](#trTree), [trTreemap](#trTreemap),
-[trCrossFilter](#trCrossFilter) and [trResolveFilter](#trResolveFilter).
+[trPartition](#trPartition), [trTree](#trTree), [trTreemap](#trTreemap) and [trResolveFilter](#trResolveFilter).
 For details see the
 [Vega transform documentation](https://vega.github.io/vega/docs/transforms).
 -}
 type Transform
     = TAggregate (List AggregateProperty)
     | TBin Field Num (List BinProperty)
-    | TCollect -- TODO Add transform functions
+    | TCollect (List ( Field, Order ))
+    | TContour Num Num (List ContourProperty)
     | TCountPattern -- TODO Add transform functions
     | TCross (List CrossProperty)
+    | TCrossFilter (List ( Field, Num ))
+    | TCrossFilterAsSignal (List ( Field, Num )) String
     | TDensity Distribution (List DensityProperty)
     | TExtent Field
     | TExtentAsSignal Field String
     | TFilter Expr
     | TFold (List Field)
     | TFoldAs (List Field) String String
+    | TForce (List ForceSimulationProperty)
     | TFormula Expression String FormulaUpdate
-    | TIdentifier -- TODO Add transform functions
-    | TImpute -- TODO Add transform functions
-    | TJoinAggregate -- TODO Add transform functions
-    | TLookup String Field (List Field) (List LookupProperty)
-    | TProject -- TODO Add transform functions
-    | TSample -- TODO Add transform functions
-    | TSequence -- TODO Add transform functions
-    | TWindow (List WindowOperation) (List WindowProperty)
-    | TContour Num Num (List ContourProperty)
     | TGeoJson -- TODO Add transform functions
     | TGeoPath String (List GeoPathProperty)
-    | TGeoPoint -- TODO Add transform functions
+    | TGeoPoint String Field Field
+    | TGeoPointAs String Field Field String String
     | TGeoShape String (List GeoPathProperty)
     | TGraticule (List GraticuleProperty)
+    | TIdentifier String
+    | TImpute -- TODO Add transform functions
+    | TJoinAggregate -- TODO Add transform functions
     | TLinkPath (List LinkPathProperty)
-    | TPie (List PieProperty)
-    | TStack (List StackProperty)
-    | TForce (List ForceSimulationProperty)
-    | TVoronoi -- TODO Add transform functions
-    | TWordCloud -- TODO Add transform functions
+    | TLookup String Field (List Field) (List LookupProperty)
     | TNest -- TODO Add transform functions
-    | TStratify Field Field
-    | TTreeLinks -- (no parameters required)
     | TPack (List PackProperty)
     | TPartition (List PartitionProperty)
+    | TPie (List PieProperty)
+    | TProject -- TODO Add transform functions
     | TTree (List TreeProperty)
     | TTreemap (List TreemapProperty)
-    | TCrossFilter -- TODO Add transform functions
-    | TResolveFilter -- TODO Add transform functions
+    | TResolveFilter String Num
+    | TSample -- TODO Add transform functions
+    | TSequence -- TODO Add transform functions
+    | TStack (List StackProperty)
+    | TStratify Field Field
+    | TTreeLinks -- (no parameters required)
+    | TVoronoi -- TODO Add transform functions
+    | TWindow (List WindowOperation) (List WindowProperty)
+    | TWordCloud -- TODO Add transform functions
 
 
 {-| Characteristic of a treemap transform that will compute a hierarchical treemap
@@ -8907,6 +8923,15 @@ trBin =
     TBin
 
 
+{-| Perform a collect transform that collects all the objects in a data stream
+within a single array, allowing sorting by data field values. For details see the
+[Vega collect transform documentation](https://vega.github.io/vega/docs/transforms/collect/).
+-}
+trCollect : List ( Field, Order ) -> Transform
+trCollect =
+    TCollect
+
+
 {-| Perform a contour transform that generates a set of contour (iso) lines at a set
 of discrete levels. Commonly used to visualize density estimates for 2D point data.
 
@@ -8931,6 +8956,33 @@ with itself. For details see the
 trCross : List CrossProperty -> Transform
 trCross =
     TCross
+
+
+{-| Perform a crossfilter transform which maintains a filter mask for multiple
+dimensional queries, using a set of sorted indices. The parameter is a list of
+(field,range) pairs indicating which fields to filter and the numeric range of
+values in the form of a `num` that resolves to a [min (inclusive), max (exclusive)]
+pair. For details see the
+[Vega crossfilter transform documentation](https://vega.github.io/vega/docs/transforms/crossfilter/).
+-}
+trCrossFilter : List ( Field, Num ) -> Transform
+trCrossFilter =
+    TCrossFilter
+
+
+{-| Perform a crossfilter transform which maintains a filter mask for multiple
+dimensional queries, using a set of sorted indices. This version can be used in
+conjunction with [trResolvefilter](#trResolveFilter) to enable fast interactive
+querying over large data sets. The parameter is a list of (field,range) pairs indicating
+which fields to filter and the numeric range of values in the form of a `num` that
+resolves to a [min (inclusive), max (exclusive)] pair. The final parameter is the
+name of a new signal with which to bind the results of the filter (which can then
+be referenced by [trResolveFilter](#trResolveFilter)). For details see the
+[Vega crossfilter transform documentation](https://vega.github.io/vega/docs/transforms/crossfilter/).
+-}
+trCrossFilterAsSignal : List ( Field, Num ) -> String -> Transform
+trCrossFilterAsSignal =
+    TCrossFilterAsSignal
 
 
 {-| Compute ta new data stream of uniformly-spaced samples drawn from a one-dimensional
@@ -9074,6 +9126,41 @@ trGeoPath =
     TGeoPath
 
 
+{-| Perform a geoPoint transform that projects a longitude, latitude pair to
+(x,y) coordinates according to the given map projection. The first parameter is
+the name of the map projection to use, the second and third the fields containing
+the longitude and latitude values respectively. This version generates
+two new fields with the name `x` and `y` holding the projected coordinates.
+
+    TODO: XXX Add example
+
+For details see the
+[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).
+
+-}
+trGeoPoint : String -> Field -> Field -> Transform
+trGeoPoint =
+    TGeoPoint
+
+
+{-| Perform a geoPoint transform that projects a longitude, latitude pair to
+(x,y) coordinates according to the given map projection. The first parameter is
+the name of the map projection to use, the second and third the fields containing
+the longitude and latitude values respectively. This version generates
+two new fields holding the projected coordinates with the names given by the last
+two parameters.
+
+    TODO: XXX Add example
+
+For details see the
+[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).
+
+-}
+trGeoPointAs : String -> Field -> Field -> String -> String -> Transform
+trGeoPointAs =
+    TGeoPointAs
+
+
 {-| Perform a geoShape transform generating a renderer instance that maps GeoJSON
 features to a shape instance that issues drawing commands. It is intended for use
 solely with the shape mark type. This transform is similar in functionality to the
@@ -9111,6 +9198,22 @@ transform. For details see the
 trGraticule : List GraticuleProperty -> Transform
 trGraticule =
     TGraticule
+
+
+{-| Extend a data object with a globally unique key value. Identifier values are
+assigned using an internal counter. This counter is shared across all instances
+of this transform within a single Vega view, including different data sources,
+but not across different Vega views.
+
+    TODO: Add example.
+
+For details see the
+[Vega identifier transform documentation](https://vega.github.io/vega/docs/transforms/identifier/).
+
+-}
+trIdentifier : String -> Transform
+trIdentifier =
+    TIdentifier
 
 
 {-| Creates a trigger that may be applied to a data table or mark.
@@ -9203,6 +9306,28 @@ and ending angles (in radians) of an arc. For details see the
 trPie : List PieProperty -> Transform
 trPie =
     TPie
+
+
+{-| Perform a resolvefilter transform that uses the filter mask generated by a
+crossfilter transform to efficiently generate filtered data streams. The first
+prarameter is the signal created by <trCrossFilterAsSignal>
+and the second a bit mask indicating which fields in the crossfilter should be
+ignored. Each bit corresponds to a field and query in the crossfilter transform’s
+fields and query arrays. If the corresponding bit is on, that field and query will
+be ignored when resolving the filter. All other queries must pass the filter for
+a tuple to be included down stream.
+
+    TODO: Add example demonstrating bitmasking.
+
+A single crossfilter instance can be used to support cross-filtering over multiple
+charts; the filtered data streams for each individual chart are generated by using
+one resolvefilter transform per chart. For details see the
+[Vega crossfilter transform documentation](https://vega.github.io/vega/docs/transforms/crossfilter/).
+
+-}
+trResolveFilter : String -> Num -> Transform
+trResolveFilter =
+    TResolveFilter
 
 
 {-| Perform a stack transform that computes a layout by stacking groups of values.
@@ -12064,14 +12189,37 @@ transformSpec trans =
                     :: List.map binProperty bps
                 )
 
-        TCollect ->
-            JE.object [ ( "type", JE.string "collect" ) ]
+        TCollect comp ->
+            JE.object [ ( "type", JE.string "collect" ), ( "sort", JE.object (comparatorProperties comp) ) ]
 
         TCountPattern ->
             JE.object [ ( "type", JE.string "countpattern" ) ]
 
         TCross cps ->
             JE.object (( "type", JE.string "cross" ) :: List.map crossProperty cps)
+
+        TCrossFilter tuples ->
+            let
+                ( fs, nums ) =
+                    List.unzip tuples
+            in
+            JE.object
+                [ ( "type", JE.string "crossfilter" )
+                , ( "fields", JE.list (List.map fieldSpec fs) )
+                , ( "query", JE.list (List.map (\n -> JE.object [ numArrayProperty 2 "query" n ]) nums) )
+                ]
+
+        TCrossFilterAsSignal tuples s ->
+            let
+                ( fs, nums ) =
+                    List.unzip tuples
+            in
+            JE.object
+                [ ( "type", JE.string "crossfilter" )
+                , ( "fields", JE.list (List.map fieldSpec fs) )
+                , ( "query", JE.list (List.map (\n -> JE.object [ numArrayProperty 2 "query" n ]) nums) )
+                , ( "signal", JE.string s )
+                ]
 
         TDensity dist dnps ->
             JE.object
@@ -12128,8 +12276,8 @@ transformSpec trans =
                 , ( "initonly", formulaUpdateSpec update )
                 ]
 
-        TIdentifier ->
-            JE.object [ ( "type", JE.string "identifier" ) ]
+        TIdentifier s ->
+            JE.object [ ( "type", JE.string "identifier" ), ( "as", JE.string s ) ]
 
         TImpute ->
             JE.object [ ( "type", JE.string "impute" ) ]
@@ -12187,8 +12335,20 @@ transformSpec trans =
                             :: List.map geoPathProperty gpps
                         )
 
-        TGeoPoint ->
-            JE.object [ ( "type", JE.string "geopoint" ) ]
+        TGeoPoint pName fLon fLat ->
+            JE.object
+                [ ( "type", JE.string "geopoint" )
+                , ( "projection", JE.string pName )
+                , ( "fields", JE.list [ fieldSpec fLon, fieldSpec fLat ] )
+                ]
+
+        TGeoPointAs pName fLon fLat asLon asLat ->
+            JE.object
+                [ ( "type", JE.string "geopoint" )
+                , ( "projection", JE.string pName )
+                , ( "fields", JE.list [ fieldSpec fLon, fieldSpec fLat ] )
+                , ( "as", JE.list [ JE.string asLon, JE.string asLat ] )
+                ]
 
         TGeoShape pName gsps ->
             case pName of
@@ -12247,11 +12407,12 @@ transformSpec trans =
         TTreemap tps ->
             JE.object (( "type", JE.string "treemap" ) :: List.map treemapProperty tps)
 
-        TCrossFilter ->
-            JE.object [ ( "type", JE.string "crossfilter" ) ]
-
-        TResolveFilter ->
-            JE.object [ ( "type", JE.string "resolvefilter" ) ]
+        TResolveFilter sig bitmask ->
+            JE.object
+                [ ( "type", JE.string "resolvefilter" )
+                , ( "filter", JE.object [ ( "signal", JE.string sig ) ] )
+                , ( "ignore", numSpec bitmask )
+                ]
 
 
 transpose : List (List a) -> List (List a)
