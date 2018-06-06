@@ -20,9 +20,9 @@ packTest1 =
             dataSource
                 [ table []
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trPack
-                            [ paField (str "value")
+                            [ paField (field "value")
                             , paPadding (numSignal "padding between circles")
                             , paSize (numSignals [ "width", "height" ])
                             ]
@@ -49,12 +49,12 @@ packTest1 =
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "id") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "id") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             , maSize [ vSignal "4*datum.r*datum.r" ]
                             ]
                         ]
@@ -77,10 +77,10 @@ stackTest1 =
                 [ table []
                     |> transform
                         [ trStack
-                            [ stField (str "value")
-                            , stGroupBy [ str "key" ]
+                            [ stField (field "value")
+                            , stGroupBy [ field "key" ]
                             , stOffset (ofSignal "offset")
-                            , stSort [ ( strSignal "sortField", orSignal "sortOrder" ) ]
+                            , stSort [ ( fSignal "sortField", orSignal "sortOrder" ) ]
                             ]
                         ]
                     |> on
@@ -140,7 +140,7 @@ stackTest1 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "y1") ])
+                    , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     , scRange (raDefault RHeight)
                     , scRound (boo True)
                     ]
@@ -155,15 +155,15 @@ stackTest1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "key") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "key") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1 ]
-                            , maX [ vScale (fName "xScale"), vField (fName "key"), vOffset (vNum 0.5) ]
-                            , maWidth [ vScale (fName "xScale"), vBand 1 ]
+                            , maX [ vScale (field "xScale"), vField (field "key"), vOffset (vNum 0.5) ]
+                            , maWidth [ vScale (field "xScale"), vBand 1 ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (fName "yScale"), vField (fName "y0"), vOffset (vNum 0.5) ]
-                            , maY2 [ vScale (fName "yScale"), vField (fName "y1"), vOffset (vNum 0.5) ]
+                            [ maY [ vScale (field "yScale"), vField (field "y0"), vOffset (vNum 0.5) ]
+                            , maY2 [ vScale (field "yScale"), vField (field "y1"), vOffset (vNum 0.5) ]
                             ]
                         ]
                     ]
@@ -259,7 +259,7 @@ forceTest1 =
                         ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "group") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "group") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
@@ -294,10 +294,10 @@ forceTest1 =
                     , mTransform
                         [ trLinkPath
                             [ lpShape (str (linkShapeLabel LinkDiagonal))
-                            , lpSourceX (str "datum.source.x")
-                            , lpSourceY (str "datum.source.y")
-                            , lpTargetX (str "datum.target.x")
-                            , lpTargetY (str "datum.target.y")
+                            , lpSourceX (field "datum.source.x")
+                            , lpSourceY (field "datum.source.y")
+                            , lpTargetX (field "datum.target.x")
+                            , lpTargetY (field "datum.target.y")
                             ]
                         ]
                     ]

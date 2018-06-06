@@ -37,13 +37,13 @@ barChart1 =
             scales
                 << scale "xScale"
                     [ scType ScBand
-                    , scDomain (doData [ daDataset "table", daField (str "category") ])
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
                     , scRange (raDefault RWidth)
                     , scPadding (num 0.05)
                     , scRound (boo True)
                     ]
                 << scale "yScale"
-                    [ scDomain (doData [ daDataset "table", daField (str "amount") ])
+                    [ scDomain (doData [ daDataset "table", daField (field "amount") ])
                     , scNice NTrue
                     , scRange (raDefault RHeight)
                     ]
@@ -59,10 +59,10 @@ barChart1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "category") ]
-                            , maWidth [ vScale (fName "xScale"), vBand 1 ]
-                            , maY [ vScale (fName "yScale"), vField (fName "amount") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScale"), vField (field "category") ]
+                            , maWidth [ vScale (field "xScale"), vBand 1 ]
+                            , maY [ vScale (field "yScale"), vField (field "amount") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             ]
                         , enUpdate [ maFill [ vStr "steelblue" ] ]
                         , enHover [ maFill [ vStr "red" ] ]
@@ -76,8 +76,8 @@ barChart1 =
                             , maFill [ vStr "#333" ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vSignal "tooltip.category", vBand 0.5 ]
-                            , maY [ vScale (fName "yScale"), vSignal "tooltip.amount", vOffset (vNum -2) ]
+                            [ maX [ vScale (field "xScale"), vSignal "tooltip.category", vBand 0.5 ]
+                            , maY [ vScale (field "yScale"), vSignal "tooltip.amount", vOffset (vNum -2) ]
                             , maText [ vSignal "tooltip.amount" ]
                             , maFillOpacity [ ifElse "datum === tooltip" [ vNum 0 ] [ vNum 1 ] ]
                             ]
@@ -102,9 +102,9 @@ barChart2 =
                 [ table []
                     |> transform
                         [ trStack
-                            [ stGroupBy [ str "x" ]
-                            , stSort [ ( str "c", Ascend ) ]
-                            , stField (str "y")
+                            [ stGroupBy [ field "x" ]
+                            , stSort [ ( field "c", Ascend ) ]
+                            , stField (field "y")
                             ]
                         ]
                 ]
@@ -114,19 +114,19 @@ barChart2 =
                 << scale "xScale"
                     [ scType ScBand
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "table", daField (str "x") ])
+                    , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "y1") ])
+                    , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raDefault RCategory)
-                    , scDomain (doData [ daDataset "table", daField (str "c") ])
+                    , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
@@ -140,11 +140,11 @@ barChart2 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "x") ]
-                            , maWidth [ vScale (fName "xScale"), vBand 1, vOffset (vNum -1) ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
-                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "c") ]
+                            [ maX [ vScale (field "xScale"), vField (field "x") ]
+                            , maWidth [ vScale (field "xScale"), vBand 1, vOffset (vNum -1) ]
+                            , maY [ vScale (field "yScale"), vField (field "y0") ]
+                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
+                            , maFill [ vScale (field "cScale"), vField (field "c") ]
                             ]
                         , enUpdate [ maFillOpacity [ vNum 1 ] ]
                         , enHover [ maFillOpacity [ vNum 0.5 ] ]
@@ -171,13 +171,13 @@ barChart3 =
             scales
                 << scale "yScale"
                     [ scType ScBand
-                    , scDomain (doData [ daDataset "table", daField (str "category") ])
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
                     , scRange (raDefault RHeight)
                     , scPadding (num 0.2)
                     ]
                 << scale "xScale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "value") ])
+                    , scDomain (doData [ daDataset "table", daField (field "value") ])
                     , scRange (raDefault RWidth)
                     , scRound (boo True)
                     , scZero (boo True)
@@ -185,7 +185,7 @@ barChart3 =
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scDomain (doData [ daDataset "table", daField (str "position") ])
+                    , scDomain (doData [ daDataset "table", daField (field "position") ])
                     , scRange (raScheme "category20" [])
                     ]
 
@@ -203,7 +203,7 @@ barChart3 =
                 << scale "pos"
                     [ scType ScBand
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "facet", daField (str "position") ])
+                    , scDomain (doData [ daDataset "facet", daField (field "position") ])
                     ]
 
         nestedMk =
@@ -213,11 +213,11 @@ barChart3 =
                     , mFrom [ srData (str "facet") ]
                     , mEncode
                         [ enEnter
-                            [ maY [ vScale (fName "pos"), vField (fName "position") ]
-                            , maHeight [ vScale (fName "pos"), vBand 1 ]
-                            , maX [ vScale (fName "xScale"), vField (fName "value") ]
-                            , maX2 [ vScale (fName "xScale"), vBand 0 ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "position") ]
+                            [ maY [ vScale (field "pos"), vField (field "position") ]
+                            , maHeight [ vScale (field "pos"), vBand 1 ]
+                            , maX [ vScale (field "xScale"), vField (field "value") ]
+                            , maX2 [ vScale (field "xScale"), vBand 0 ]
+                            , maFill [ vScale (field "cScale"), vField (field "position") ]
                             ]
                         ]
                     ]
@@ -225,12 +225,12 @@ barChart3 =
                     [ mFrom [ srData (str "bars") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vField (fName "x2"), vOffset (vNum -5) ]
-                            , maY [ vField (fName "y"), vOffset (vObject [ vField (fName "height"), vMultiply (vNum 0.5) ]) ]
+                            [ maX [ vField (field "x2"), vOffset (vNum -5) ]
+                            , maY [ vField (field "y"), vOffset (vObject [ vField (field "height"), vMultiply (vNum 0.5) ]) ]
                             , maFill [ vStr "white" ]
                             , maAlign [ vStr (hAlignLabel AlignRight) ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , maText [ vField (fName "datum.value") ]
+                            , maText [ vField (field "datum.value") ]
                             ]
                         ]
                     ]
@@ -239,7 +239,7 @@ barChart3 =
             marks
                 << mark Group
                     [ mFrom [ srFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
-                    , mEncode [ enEnter [ maY [ vScale (fName "yScale"), vField (fName "category") ] ] ]
+                    , mEncode [ enEnter [ maY [ vScale (field "yScale"), vField (field "category") ] ] ]
                     , mGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
     in
@@ -259,15 +259,21 @@ barChart4 =
         agTable =
             table []
                 |> transform
-                    [ trAggregate [ agGroupBy [ str "a", str "b" ], agFields [ str "c" ], agOps [ Average ], agAs [ "c" ] ] ]
+                    [ trAggregate
+                        [ agGroupBy [ field "a", field "b" ]
+                        , agFields [ field "c" ]
+                        , agOps [ Average ]
+                        , agAs [ "c" ]
+                        ]
+                    ]
 
         trTable =
             data "trellis" [ daSource "tuples" ]
                 |> transform
-                    [ trAggregate [ agGroupBy [ str "a" ] ]
+                    [ trAggregate [ agGroupBy [ field "a" ] ]
                     , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
-                    , trStack [ stField (str "span") ]
-                    , trExtentAsSignal (str "y1") "trellisExtent"
+                    , trStack [ stField (field "span") ]
+                    , trExtentAsSignal (field "y1") "trellisExtent"
                     ]
 
         ds =
@@ -283,7 +289,7 @@ barChart4 =
         sc =
             scales
                 << scale "xScale"
-                    [ scDomain (doData [ daDataset "tuples", daField (str "c") ])
+                    [ scDomain (doData [ daDataset "tuples", daField (field "c") ])
                     , scNice NTrue
                     , scZero (boo True)
                     , scRound (boo True)
@@ -292,7 +298,7 @@ barChart4 =
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raDefault RCategory)
-                    , scDomain (doData [ daDataset "trellis", daField (str "a") ])
+                    , scDomain (doData [ daDataset "trellis", daField (field "a") ])
                     ]
 
         ax =
@@ -305,7 +311,7 @@ barChart4 =
                     , scPaddingInner (numSignal "innerPadding")
                     , scPaddingOuter (numSignal "outerPadding")
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "faceted_tuples", daField (str "b") ])
+                    , scDomain (doData [ daDataset "faceted_tuples", daField (field "b") ])
                     , scRange (raStep (vSignal "rangeStep"))
                     ]
 
@@ -320,13 +326,13 @@ barChart4 =
                     , mEncode
                         [ enEnter
                             [ maX [ vNum 0 ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "c") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "a") ]
+                            , maX2 [ vScale (field "xScale"), vField (field "c") ]
+                            , maFill [ vScale (field "cScale"), vField (field "a") ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (fName "yScale"), vField (fName "b") ]
-                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            [ maY [ vScale (field "yScale"), vField (field "b") ]
+                            , maHeight [ vScale (field "yScale"), vBand 1 ]
                             , maStroke [ vNull ]
                             , maZIndex [ vNum 0 ]
                             ]
@@ -343,7 +349,7 @@ barChart4 =
                     [ mFrom [ srData (str "trellis"), srFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
                     , mEncode
                         [ enEnter [ maX [ vNum 0 ], maWidth [ vSignal "width" ] ]
-                        , enUpdate [ maY [ vField (fName "y0") ], maY2 [ vField (fName "y1") ] ]
+                        , enUpdate [ maY [ vField (field "y0") ], maY2 [ vField (field "y1") ] ]
                         ]
                     , mGroup [ nestedSc [], nestedAx [], nestedMk [] ]
                     ]
@@ -366,7 +372,7 @@ barChart5 =
                 , data "popYear" [ daSource "population" ] |> transform [ trFilter (expr "datum.year == year") ]
                 , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
                 , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
-                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ str "age" ] ] ]
+                , data "ageGroups" [ daSource "population" ] |> transform [ trAggregate [ agGroupBy [ field "age" ] ] ]
                 ]
 
         si =
@@ -382,7 +388,7 @@ barChart5 =
                     [ scType ScBand
                     , scRange (raValues [ vSignal "height", vNum 0 ])
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "ageGroups", daField (str "age") ])
+                    , scDomain (doData [ daDataset "ageGroups", daField (field "age") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
@@ -398,8 +404,8 @@ barChart5 =
                     , mEncode
                         [ enEnter
                             [ maX [ vSignal "chartWidth + chartPad / 2" ]
-                            , maY [ vScale (fName "yScale"), vField (fName "age"), vBand 0.5 ]
-                            , maText [ vField (fName "age") ]
+                            , maY [ vScale (field "yScale"), vField (field "age"), vBand 0.5 ]
+                            , maText [ vField (field "age") ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]
                             , maFill [ vStr "#000" ]
@@ -430,7 +436,7 @@ barChart5 =
                     [ scType ScLinear
                     , range
                     , scNice NTrue
-                    , scDomain (doData [ daDataset "population", daField (str "people") ])
+                    , scDomain (doData [ daDataset "population", daField (field "people") ])
                     ]
 
         mk gender =
@@ -448,12 +454,12 @@ barChart5 =
                     [ mFrom [ srData (str genderField) ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "people") ]
-                            , maX2 [ vScale (fName "xScale"), vNum 0 ]
-                            , maY [ vScale (fName "yScale"), vField (fName "age") ]
-                            , maHeight [ vScale (fName "yScale"), vBand 1, vOffset (vNum -1) ]
+                            [ maX [ vScale (field "xScale"), vField (field "people") ]
+                            , maX2 [ vScale (field "xScale"), vNum 0 ]
+                            , maY [ vScale (field "yScale"), vField (field "age") ]
+                            , maHeight [ vScale (field "yScale"), vBand 1, vOffset (vNum -1) ]
                             , maFillOpacity [ vNum 0.6 ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "sex") ]
+                            , maFill [ vScale (field "cScale"), vField (field "sex") ]
                             ]
                         ]
                     ]

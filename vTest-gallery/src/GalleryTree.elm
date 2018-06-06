@@ -19,7 +19,7 @@ tree1 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trTree
                             [ teMethod (teMethodSignal "layout")
                             , teSize (numSignals [ "height", "width-100" ])
@@ -52,7 +52,7 @@ tree1 =
             scales
                 << scale "cScale"
                     [ scType ScSequential
-                    , scDomain (doData [ daDataset "tree", daField (str "depth") ])
+                    , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme "magma" [])
                     , scZero (boo True)
                     ]
@@ -62,16 +62,16 @@ tree1 =
                 << mark Path
                     [ mFrom [ srData (str "links") ]
                     , mEncode
-                        [ enUpdate [ maPath [ vField (fName "path") ], maStroke [ vStr "#ccc" ] ] ]
+                        [ enUpdate [ maPath [ vField (field "path") ], maStroke [ vStr "#ccc" ] ] ]
                     ]
                 << mark Symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter [ maSize [ vNum 100 ], maStroke [ vStr "#fff" ] ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
                             ]
                         ]
                     ]
@@ -79,13 +79,13 @@ tree1 =
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
-                            [ maText [ vField (fName "name") ]
+                            [ maText [ vField (field "name") ]
                             , maFontSize [ vNum 9 ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             , maDx [ vSignal "datum.children ? -7 : 7" ]
                             , maAlign [ vSignal "datum.children ? 'right' : 'left'" ]
                             , maOpacity [ vSignal "labels ? 1 : 0" ]
@@ -104,7 +104,7 @@ tree2 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trTree
                             [ teMethod (teMethodSignal "layout")
                             , teSize (numList [ num 1, numSignal "radius" ])
@@ -122,10 +122,10 @@ tree2 =
                         , trLinkPath
                             [ lpShape (strSignal "links")
                             , lpOrient (markOrientationLabel Radial |> str)
-                            , lpSourceX (str "source.radians")
-                            , lpSourceY (str "source.radius")
-                            , lpTargetX (str "target.radians")
-                            , lpTargetY (str "target.radius")
+                            , lpSourceX (field "source.radians")
+                            , lpSourceY (field "source.radius")
+                            , lpTargetX (field "target.radians")
+                            , lpTargetY (field "target.radius")
                             ]
                         ]
                 ]
@@ -145,7 +145,7 @@ tree2 =
             scales
                 << scale "cScale"
                     [ scType ScSequential
-                    , scDomain (doData [ daDataset "tree", daField (str "depth") ])
+                    , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme "magma" [])
                     , scZero (boo True)
                     ]
@@ -158,7 +158,7 @@ tree2 =
                         [ enUpdate
                             [ maX [ vSignal "originX" ]
                             , maY [ vSignal "originY" ]
-                            , maPath [ vField (fName "path") ]
+                            , maPath [ vField (field "path") ]
                             , maStroke [ vStr "#ccc" ]
                             ]
                         ]
@@ -168,9 +168,9 @@ tree2 =
                     , mEncode
                         [ enEnter [ maSize [ vNum 100 ], maStroke [ vStr "#fff" ] ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
                             ]
                         ]
                     ]
@@ -178,13 +178,13 @@ tree2 =
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
-                            [ maText [ vField (fName "name") ]
+                            [ maText [ vField (field "name") ]
                             , maFontSize [ vNum 9 ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             , maDx [ vSignal "(datum.leftside ? -1 : 1) * 6" ]
                             , maAngle [ vSignal "datum.leftside ? datum.angle - 180 : datum.angle" ]
                             , maAlign [ vSignal "datum.children ? 'right' : 'left'" ]
@@ -204,10 +204,10 @@ tree3 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trTreemap
-                            [ tmField (str "size")
-                            , tmSort [ ( str "value", Ascend ) ]
+                            [ tmField (field "size")
+                            , tmSort [ ( field "value", Ascend ) ]
                             , tmRound (boo True)
                             , tmMethod (tmMethodSignal "layout")
                             , tmRatio (numSignal "aspectRatio")
@@ -252,12 +252,12 @@ tree3 =
                     , mInteractive (boo False)
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "name") ] ]
+                            [ maFill [ vScale (field "cScale"), vField (field "name") ] ]
                         , enUpdate
-                            [ maX [ vField (fName "x0") ]
-                            , maY [ vField (fName "y0") ]
-                            , maX2 [ vField (fName "x1") ]
-                            , maY2 [ vField (fName "y1") ]
+                            [ maX [ vField (field "x0") ]
+                            , maY [ vField (field "y0") ]
+                            , maX2 [ vField (field "x1") ]
+                            , maY2 [ vField (field "y1") ]
                             ]
                         ]
                     ]
@@ -266,10 +266,10 @@ tree3 =
                     , mEncode
                         [ enEnter [ maStroke [ vStr "white" ] ]
                         , enUpdate
-                            [ maX [ vField (fName "x0") ]
-                            , maY [ vField (fName "y0") ]
-                            , maX2 [ vField (fName "x1") ]
-                            , maY2 [ vField (fName "y1") ]
+                            [ maX [ vField (field "x0") ]
+                            , maY [ vField (field "y0") ]
+                            , maX2 [ vField (field "x1") ]
+                            , maY2 [ vField (field "y1") ]
                             , maFill [ vStr "transparent" ]
                             ]
                         , enHover [ maFill [ vStr "red" ] ]
@@ -284,9 +284,9 @@ tree3 =
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , maFill [ vStr "black" ]
-                            , maText [ vField (fName "name") ]
-                            , maFontSize [ vScale (fName "size"), vField (fName "depth") ]
-                            , maFillOpacity [ vScale (fName "opacity"), vField (fName "depth") ]
+                            , maText [ vField (field "name") ]
+                            , maFontSize [ vScale (field "size"), vField (field "depth") ]
+                            , maFillOpacity [ vScale (field "opacity"), vField (field "depth") ]
                             ]
                         , enUpdate
                             [ maX [ vSignal "0.5 * (datum.x0 + datum.x1)" ]
@@ -306,10 +306,10 @@ tree4 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trPack
-                            [ paField (str "size")
-                            , paSort [ ( str "value", Ascend ) ]
+                            [ paField (field "size")
+                            , paSort [ ( field "value", Ascend ) ]
                             , paSize (numSignals [ "width", "height" ])
                             ]
                         ]
@@ -325,12 +325,12 @@ tree4 =
                     , mEncode
                         [ enEnter
                             [ maShape [ vStr "circle" ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
                             , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             , maSize [ vSignal "4 * datum.r * datum.r" ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 0.5 ]
@@ -350,10 +350,10 @@ tree5 =
             dataSource
                 [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
                     |> transform
-                        [ trStratify (str "id") (str "parent")
+                        [ trStratify (field "id") (field "parent")
                         , trPartition
-                            [ ptField (str "size")
-                            , ptSort [ ( str "value", Ascend ) ]
+                            [ ptField (field "size")
+                            , ptSort [ ( field "value", Ascend ) ]
                             , ptSize (numSignals [ "2 * PI", "width / 2" ])
                             , ptAs "a0" "r0" "a1" "r1" "depth" "children"
                             ]
@@ -371,14 +371,14 @@ tree5 =
                         [ enEnter
                             [ maX [ vSignal "width / 2" ]
                             , maY [ vSignal "height / 2" ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "depth") ]
+                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
                             , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
                             ]
                         , enUpdate
-                            [ maStartAngle [ vField (fName "a0") ]
-                            , maEndAngle [ vField (fName "a1") ]
-                            , maInnerRadius [ vField (fName "r0") ]
-                            , maOuterRadius [ vField (fName "r1") ]
+                            [ maStartAngle [ vField (field "a0") ]
+                            , maEndAngle [ vField (field "a1") ]
+                            , maInnerRadius [ vField (field "r0") ]
+                            , maOuterRadius [ vField (field "r1") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 0.5 ]
                             , maZIndex [ vNum 0 ]

@@ -36,19 +36,19 @@ lineChart1 =
                 << scale "xScale"
                     [ scType ScPoint
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "table", daField (str "x") ])
+                    , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "y") ])
+                    , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raDefault RCategory)
-                    , scDomain (doData [ daDataset "table", daField (str "c") ])
+                    , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
@@ -69,9 +69,9 @@ lineChart1 =
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "x") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y") ]
-                            , maStroke [ vScale (fName "cScale"), vField (fName "c") ]
+                            [ maX [ vScale (field "xScale"), vField (field "x") ]
+                            , maY [ vScale (field "yScale"), vField (field "y") ]
+                            , maStroke [ vScale (field "cScale"), vField (field "c") ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
                         , enUpdate [ maInterpolate [ vSignal "interpolate" ], maStrokeOpacity [ vNum 1 ] ]
@@ -107,14 +107,14 @@ areaChart1 =
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
-                    , scDomain (doData [ daDataset "table", daField (str "u") ])
+                    , scDomain (doData [ daDataset "table", daField (field "u") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "v") ])
+                    , scDomain (doData [ daDataset "table", daField (field "v") ])
                     ]
 
         ax =
@@ -128,9 +128,9 @@ areaChart1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "v") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScale"), vField (field "u") ]
+                            , maY [ vScale (field "yScale"), vField (field "v") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enUpdate [ maInterpolate [ vSignal "interpolate" ], maFillOpacity [ vNum 1 ] ]
@@ -156,9 +156,9 @@ areaChart2 =
                 [ table []
                     |> transform
                         [ trStack
-                            [ stGroupBy [ str "x" ]
-                            , stSort [ ( str "c", Ascend ) ]
-                            , stField (str "y")
+                            [ stGroupBy [ field "x" ]
+                            , stSort [ ( field "c", Ascend ) ]
+                            , stField (field "y")
                             ]
                         ]
                 ]
@@ -168,19 +168,19 @@ areaChart2 =
                 << scale "xScale"
                     [ scType ScPoint
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "table", daField (str "x") ])
+                    , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "y1") ])
+                    , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raDefault RCategory)
-                    , scDomain (doData [ daDataset "table", daField (str "c") ])
+                    , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
@@ -202,10 +202,10 @@ areaChart2 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , maX [ vScale (fName "xScale"), vField (fName "x") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
-                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "c") ]
+                            , maX [ vScale (field "xScale"), vField (field "x") ]
+                            , maY [ vScale (field "yScale"), vField (field "y0") ]
+                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
+                            , maFill [ vScale (field "cScale"), vField (field "c") ]
                             ]
                         , enUpdate [ maFillOpacity [ vNum 1 ] ]
                         , enHover [ maFillOpacity [ vNum 0.5 ] ]
@@ -255,14 +255,14 @@ areaChart3 =
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "x") ])
+                    , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raValues [ vSignal "vheight", vNum 0 ])
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "table", daField (str "y") ])
+                    , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
 
         ax =
@@ -273,8 +273,8 @@ areaChart3 =
                 << mark Group
                     [ mEncode
                         [ enUpdate
-                            [ maWidth [ vField (fGroup (fName "width")) ]
-                            , maHeight [ vField (fGroup (fName "height")) ]
+                            [ maWidth [ vField (fGroup (field "width")) ]
+                            , maHeight [ vField (fGroup (field "height")) ]
                             , maGroupClip [ vBoo True ]
                             ]
                         ]
@@ -285,7 +285,7 @@ areaChart3 =
             marks
                 << mark Group
                     [ mFrom [ srData (str "layer_indices") ]
-                    , mEncode [ enUpdate [ maY [ vField (fName "offset") ] ] ]
+                    , mEncode [ enUpdate [ maY [ vField (field "offset") ] ] ]
                     , mGroup [ mkArea [] ]
                     ]
 
@@ -296,12 +296,12 @@ areaChart3 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , maX [ vScale (fName "xScale"), vField (fName "x") ]
+                            , maX [ vScale (field "xScale"), vField (field "x") ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (fName "yScale"), vField (fName "y") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maY [ vScale (field "yScale"), vField (field "y") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFillOpacity [ vSignal "opacity" ]
                             ]
                         ]
@@ -319,9 +319,9 @@ areaChart4 =
                 |> transform
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack
-                        [ stGroupBy [ str "year" ]
-                        , stSort [ ( str "job", Descend ), ( str "sex", Descend ) ]
-                        , stField (str "perc")
+                        [ stGroupBy [ field "year" ]
+                        , stSort [ ( field "job", Descend ), ( field "sex", Descend ) ]
+                        , stField (field "perc")
                         ]
                     ]
 
@@ -329,8 +329,8 @@ areaChart4 =
             data "series" [ daSource "jobs" ]
                 |> transform
                     [ trAggregate
-                        [ agGroupBy [ str "job", str "sex" ]
-                        , agFields [ str "perc", str "perc" ]
+                        [ agGroupBy [ field "job", field "sex" ]
+                        , agFields [ field "perc", field "perc" ]
                         , agOps [ Sum, ArgMax ]
                         , agAs [ "sum", "argmax" ]
                         ]
@@ -361,14 +361,14 @@ areaChart4 =
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "jobs", daField (str "year") ])
+                    , scDomain (doData [ daDataset "jobs", daField (field "year") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scZero (boo True)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "jobs", daField (str "y1") ])
+                    , scDomain (doData [ daDataset "jobs", daField (field "y1") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
@@ -378,7 +378,7 @@ areaChart4 =
                 << scale "alphaScale"
                     [ scType ScLinear
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "series", daField (str "sum") ])
+                    , scDomain (doData [ daDataset "series", daField (field "sum") ])
                     , scRange (raNums [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
@@ -386,12 +386,12 @@ areaChart4 =
                     , scRange (raNums [ 0, 20 ])
                     , scZero (boo True)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "series", daField (str "argmax.perc") ])
+                    , scDomain (doData [ daDataset "series", daField (field "argmax.perc") ])
                     ]
                 << scale "opacityScale"
                     [ scType ScQuantile
                     , scRange (raNums [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
-                    , scDomain (doData [ daDataset "series", daField (str "argmax.perc") ])
+                    , scDomain (doData [ daDataset "series", daField (field "argmax.perc") ])
                     ]
                 << scale "alignScale"
                     [ scType ScQuantize
@@ -427,11 +427,11 @@ areaChart4 =
                     [ mFrom [ srData (str "facet") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "year") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
-                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "sex") ]
-                            , maFillOpacity [ vScale (fName "alphaScale"), vField (fParent (fName "sum")) ]
+                            [ maX [ vScale (field "xScale"), vField (field "year") ]
+                            , maY [ vScale (field "yScale"), vField (field "y0") ]
+                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
+                            , maFill [ vScale (field "cScale"), vField (field "sex") ]
+                            , maFillOpacity [ vScale (field "alphaScale"), vField (fParent (field "sum")) ]
                             ]
                         , enHover [ maFillOpacity [ vNum 0.2 ] ]
                         ]
@@ -451,14 +451,14 @@ areaChart4 =
                     , mInteractive (boo False)
                     , mEncode
                         [ enUpdate
-                            [ maX [ vField (fName "argmax.year"), vScale (fName "xScale") ]
-                            , maDx [ vField (fName "argmax.year"), vScale (fName "offsetScale") ]
+                            [ maX [ vField (field "argmax.year"), vScale (field "xScale") ]
+                            , maDx [ vField (field "argmax.year"), vScale (field "offsetScale") ]
                             , maY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
                             , maFill [ vStr "#000" ]
-                            , maFillOpacity [ vField (fName "argmax.perc"), vScale (fName "opacityScale") ]
-                            , maFontSize [ vField (fName "argmax.perc"), vScale (fName "fontScale"), vOffset (vNum 5) ]
-                            , maText [ vField (fName "job") ]
-                            , maAlign [ vField (fName "argmax.year"), vScale (fName "alignScale") ]
+                            , maFillOpacity [ vField (field "argmax.perc"), vScale (field "opacityScale") ]
+                            , maFontSize [ vField (field "argmax.perc"), vScale (field "fontScale"), vOffset (vNum 5) ]
+                            , maText [ vField (field "job") ]
+                            , maAlign [ vField (field "argmax.year"), vScale (field "alignScale") ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         ]

@@ -45,7 +45,7 @@ geo1 =
                     , daFormat (topojsonFeature "counties")
                     ]
                     |> transform
-                        [ trLookup "unemp" (str "id") [ str "id" ] [ luValues [ str "rate" ] ]
+                        [ trLookup "unemp" (field "id") [ field "id" ] [ luValues [ field "rate" ] ]
                         , trFilter (expr "datum.rate != null")
                         ]
                 ]
@@ -84,7 +84,7 @@ geo1 =
                     [ mFrom [ srData (str "counties") ]
                     , mEncode
                         [ enEnter [ maTooltip [ vSignal "format(datum.rate, '0.1%')" ] ]
-                        , enUpdate [ maFill [ vScale (fName "cScale"), vField (fName "rate") ] ]
+                        , enUpdate [ maFill [ vScale (field "cScale"), vField (field "rate") ] ]
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -107,7 +107,7 @@ geo2 =
                 , data "obesity"
                     [ daUrl "https://vega.github.io/vega/data/obesity.json" ]
                     |> transform
-                        [ trLookup "states" (str "id") [ str "id" ] [ luAs [ "geo" ] ]
+                        [ trLookup "states" (field "id") [ field "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
                         , trFormula "geoCentroid('myProjection', datum.geo)" "myCentroid" AlwaysUpdate
                         ]
@@ -124,14 +124,14 @@ geo2 =
         sc =
             scales
                 << scale "sizeScale"
-                    [ scDomain (doData [ daDataset "obesity", daField (str "rate") ])
+                    [ scDomain (doData [ daDataset "obesity", daField (field "rate") ])
                     , scZero (boo False)
                     , scRange (raNums [ 1000, 5000 ])
                     ]
                 << scale "cScale"
                     [ scType ScSequential
                     , scNice NTrue
-                    , scDomain (doData [ daDataset "obesity", daField (str "rate") ])
+                    , scDomain (doData [ daDataset "obesity", daField (field "rate") ])
                     , scRange (raDefault RRamp)
                     ]
 
@@ -154,12 +154,12 @@ geo2 =
                     , mFrom [ srData (str "obesity") ]
                     , mEncode
                         [ enEnter
-                            [ maSize [ vScale (fName "sizeScale"), vField (fName "rate") ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "rate") ]
+                            [ maSize [ vScale (field "sizeScale"), vField (field "rate") ]
+                            , maFill [ vScale (field "cScale"), vField (field "rate") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1.5 ]
-                            , maX [ vField (fName "myCentroid[0]") ]
-                            , maY [ vField (fName "myCentroid[1]") ]
+                            , maX [ vField (field "myCentroid[0]") ]
+                            , maY [ vField (field "myCentroid[1]") ]
                             , maTooltip [ vSignal "'Obesity Rate: ' + format(datum.rate, '.1%')" ]
                             ]
                         ]
@@ -168,8 +168,8 @@ geo2 =
                             [ fsStatic (boo True)
                             , fsForces
                                 [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
-                                , foX (str "datum.myCentroid[0]") []
-                                , foY (str "datum.myCentroid[1]") []
+                                , foX (field "datum.myCentroid[0]") []
+                                , foY (field "datum.myCentroid[1]") []
                                 ]
                             ]
                         ]
@@ -183,11 +183,11 @@ geo2 =
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , maFontSize [ vNum 13 ]
                             , maFontWeight [ vStr "bold" ]
-                            , maText [ vField (fName "datum.state") ]
+                            , maText [ vField (field "datum.state") ]
                             ]
                         , enUpdate
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
                             ]
                         ]
                     ]
@@ -475,8 +475,8 @@ geo5 =
                     , mEncode
                         [ enEnter
                             [ maFill [ vStr "white" ]
-                            , maDx [ vField (fName "dx") ]
-                            , maDy [ vField (fName "dy") ]
+                            , maDx [ vField (field "dx") ]
+                            , maDy [ vField (field "dy") ]
                             , maX [ vNum 5 ]
                             , maY [ vNum (mapHeight - 5) ]
                             , maBaseline [ vStr (vAlignLabel AlignBottom) ]
@@ -688,9 +688,9 @@ geo7 =
                             , maStrokeWidth [ vNum 1 ]
                             , maFillOpacity [ vSignal "myOpacity" ]
                             , maZIndex [ vNum 0 ]
-                            , maX [ vField (fName "myCentroid[0]") ]
-                            , maY [ vField (fName "myCentroid[1]") ]
-                            , maSize [ vField (fName "area2"), vMultiply (vSignal "scaleFactor") ]
+                            , maX [ vField (field "myCentroid[0]") ]
+                            , maY [ vField (field "myCentroid[1]") ]
+                            , maSize [ vField (field "area2"), vMultiply (vSignal "scaleFactor") ]
                             ]
                         , enHover
                             [ maStrokeWidth [ vNum 2 ]
@@ -708,9 +708,9 @@ geo7 =
                             , maStrokeWidth [ vNum 1 ]
                             , maFillOpacity [ vSignal "myOpacity" ]
                             , maZIndex [ vNum 0 ]
-                            , maX [ vField (fName "myCentroid[0]") ]
-                            , maY [ vField (fName "myCentroid[1]") ]
-                            , maSize [ vField (fName "area1"), vMultiply (vSignal "scaleFactor") ]
+                            , maX [ vField (field "myCentroid[0]") ]
+                            , maY [ vField (field "myCentroid[1]") ]
+                            , maSize [ vField (field "area1"), vMultiply (vSignal "scaleFactor") ]
                             ]
                         , enHover
                             [ maStrokeWidth [ vNum 2 ]
@@ -777,12 +777,12 @@ geo8 inData =
                     [ mFrom [ srData (str "contours") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "value") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "value") ]
                             , maStroke [ vStr "#bbb" ]
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         ]
-                    , mTransform [ trGeoPath "myProjection" [ gpField (str "datum") ] ]
+                    , mTransform [ trGeoPath "myProjection" [ gpField (field "datum") ] ]
                     ]
     in
     toVega

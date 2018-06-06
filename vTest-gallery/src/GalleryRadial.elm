@@ -25,7 +25,7 @@ circularChart1 =
                 [ table []
                     |> transform
                         [ trPie
-                            [ piField (str "field")
+                            [ piField (field "field")
                             , piStartAngle (numSignal "PI * startAngle / 180")
                             , piEndAngle (numSignal "PI * endAngle / 180")
                             , piSort (booSignal "sort")
@@ -51,13 +51,13 @@ circularChart1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (fName "cScale"), vField (fName "id") ]
+                            [ maFill [ vScale (field "cScale"), vField (field "id") ]
                             , maX [ vSignal "width / 2" ]
                             , maY [ vSignal "height / 2" ]
                             ]
                         , enUpdate
-                            [ maStartAngle [ vField (fName "startAngle") ]
-                            , maEndAngle [ vField (fName "endAngle") ]
+                            [ maStartAngle [ vField (field "startAngle") ]
+                            , maEndAngle [ vField (field "endAngle") ]
                             , maPadAngle [ vSignal "PI * padAngle / 180" ]
                             , maInnerRadius [ vSignal "innerRadius" ]
                             , maOuterRadius [ vSignal "width / 2" ]
@@ -76,14 +76,14 @@ circularChart2 =
         ds =
             dataSource
                 [ data "table" [ daValue (vNums [ 12, 23, 47, 6, 52, 19 ]) ]
-                    |> transform [ trPie [ piField (str "data") ] ]
+                    |> transform [ trPie [ piField (field "data") ] ]
                 ]
 
         sc =
             scales
                 << scale "rScale"
                     [ scType ScSqrt
-                    , scDomain (doData [ daDataset "table", daField (str "data") ])
+                    , scDomain (doData [ daDataset "table", daField (field "data") ])
                     , scRange (raNums [ 20, 100 ])
                     ]
 
@@ -93,12 +93,12 @@ circularChart2 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vField (fGroup (fName "width")), vMultiply (vNum 0.5) ]
-                            , maY [ vField (fGroup (fName "height")), vMultiply (vNum 0.5) ]
-                            , maStartAngle [ vField (fName "startAngle") ]
-                            , maEndAngle [ vField (fName "endAngle") ]
+                            [ maX [ vField (fGroup (field "width")), vMultiply (vNum 0.5) ]
+                            , maY [ vField (fGroup (field "height")), vMultiply (vNum 0.5) ]
+                            , maStartAngle [ vField (field "startAngle") ]
+                            , maEndAngle [ vField (field "endAngle") ]
                             , maInnerRadius [ vNum 20 ]
-                            , maOuterRadius [ vField (fName "data"), vScale (fName "rScale") ]
+                            , maOuterRadius [ vField (field "data"), vScale (field "rScale") ]
                             , maStroke [ vStr "#fff" ]
                             ]
                         , enUpdate [ maFill [ vStr "#ccc" ] ]
@@ -109,14 +109,14 @@ circularChart2 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vField (fGroup (fName "width")), vMultiply (vNum 0.5) ]
-                            , maY [ vField (fGroup (fName "height")), vMultiply (vNum 0.5) ]
-                            , maRadius [ vField (fName "data"), vScale (fName "rScale"), vOffset (vNum 8) ]
+                            [ maX [ vField (fGroup (field "width")), vMultiply (vNum 0.5) ]
+                            , maY [ vField (fGroup (field "height")), vMultiply (vNum 0.5) ]
+                            , maRadius [ vField (field "data"), vScale (field "rScale"), vOffset (vNum 8) ]
                             , maTheta [ vSignal "(datum.startAngle + datum.endAngle)/2" ]
                             , maFill [ vStr "#000" ]
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , maText [ vField (fName "data") ]
+                            , maText [ vField (field "data") ]
                             ]
                         ]
                     ]

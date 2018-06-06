@@ -20,15 +20,15 @@ histo1 =
                 [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
                 , data "binned" [ daSource "points" ]
                     |> transform
-                        [ trBin (str "u")
+                        [ trBin (field "u")
                             (nums [ -1, 1 ])
                             [ bnAnchor (numSignal "binOffset")
                             , bnStep (numSignal "binStep")
                             , bnNice (boo False)
                             ]
                         , trAggregate
-                            [ agKey (str "bin0")
-                            , agGroupBy [ str "bin0", str "bin1" ]
+                            [ agKey (field "bin0")
+                            , agGroupBy [ field "bin0", field "bin1" ]
                             , agOps [ Count ]
                             , agAs [ "count" ]
                             ]
@@ -57,7 +57,7 @@ histo1 =
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "binned", daField (str "count") ])
+                    , scDomain (doData [ daDataset "binned", daField (field "count") ])
                     , scZero (boo True)
                     , scNice NTrue
                     ]
@@ -73,10 +73,10 @@ histo1 =
                     [ mFrom [ srData (str "binned") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "bin0") ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "bin1"), vOffset (vSignal "binStep > 0.02 ? -0.5 : 0") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "count") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScale"), vField (field "bin0") ]
+                            , maX2 [ vScale (field "xScale"), vField (field "bin1"), vOffset (vSignal "binStep > 0.02 ? -0.5 : 0") ]
+                            , maY [ vScale (field "yScale"), vField (field "count") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -86,7 +86,7 @@ histo1 =
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
+                            [ maX [ vScale (field "xScale"), vField (field "u") ]
                             , maWidth [ vNum 1 ]
                             , maY [ vNum 25, vOffset (vSignal "height") ]
                             , maHeight [ vNum 5 ]
@@ -107,8 +107,8 @@ histo2 =
             dataSource
                 [ data "table" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
                     |> transform
-                        [ trExtentAsSignal (str "IMDB_Rating") "extent"
-                        , trBin (str "IMDB_Rating")
+                        [ trExtentAsSignal (field "IMDB_Rating") "extent"
+                        , trBin (field "IMDB_Rating")
                             (numSignal "extent")
                             [ bnSignal "bins"
                             , bnMaxBins (numSignal "maxBins")
@@ -117,7 +117,7 @@ histo2 =
                 , data "counts" [ daSource "table" ]
                     |> transform
                         [ trFilter (expr "datum['IMDB_Rating'] != null")
-                        , trAggregate [ agGroupBy [ str "bin0", str "bin1" ] ]
+                        , trAggregate [ agGroupBy [ field "bin0", field "bin1" ] ]
                         ]
                 , data "nulls" [ daSource "table" ]
                     |> transform
@@ -155,8 +155,8 @@ histo2 =
                     , scDomain
                         (doData
                             [ daReferences
-                                [ [ daDataset "counts", daField (str "count") ]
-                                , [ daDataset "nulls", daField (str "count") ]
+                                [ [ daDataset "counts", daField (field "count") ]
+                                , [ daDataset "nulls", daField (field "count") ]
                                 ]
                             ]
                         )
@@ -174,10 +174,10 @@ histo2 =
                     [ mFrom [ srData (str "counts") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "bin0"), vOffset (vNum 1) ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "bin1") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "count") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScale"), vField (field "bin0"), vOffset (vNum 1) ]
+                            , maX2 [ vScale (field "xScale"), vField (field "bin1") ]
+                            , maY [ vScale (field "yScale"), vField (field "count") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -187,10 +187,10 @@ histo2 =
                     [ mFrom [ srData (str "nulls") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScaleNull"), vNull, vOffset (vNum 1) ]
-                            , maX2 [ vScale (fName "xScaleNull"), vBand 1 ]
-                            , maY [ vScale (fName "yScale"), vField (fName "count") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScaleNull"), vNull, vOffset (vNum 1) ]
+                            , maX2 [ vScale (field "xScaleNull"), vBand 1 ]
+                            , maY [ vScale (field "yScale"), vField (field "count") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vStr "#aaa" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -210,14 +210,14 @@ density1 =
                 , data "summary" [ daSource "points" ]
                     |> transform
                         [ trAggregate
-                            [ agFields [ str "u", str "u" ]
+                            [ agFields [ field "u", field "u" ]
                             , agOps [ Mean, Stdev ]
                             , agAs [ "mean", "stdev" ]
                             ]
                         ]
                 , data "density" [ daSource "points" ]
                     |> transform
-                        [ trDensity (diKde "points" (str "u") (numSignal "bandWidth"))
+                        [ trDensity (diKde "points" (field "u") (numSignal "bandWidth"))
                             [ dnExtent (numSignal "domain('xScale')")
                             , dnSteps (numSignal "steps")
                             , dnMethodAsSignal "method"
@@ -244,7 +244,7 @@ density1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "points", daField (str "u") ])
+                    , scDomain (doData [ daDataset "points", daField (field "u") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
@@ -254,8 +254,8 @@ density1 =
                     , scDomain
                         (doData
                             [ daReferences
-                                [ [ daDataset "density", daField (str "density") ]
-                                , [ daDataset "normal", daField (str "density") ]
+                                [ [ daDataset "density", daField (field "density") ]
+                                , [ daDataset "normal", daField (field "density") ]
                                 ]
                             ]
                         )
@@ -278,9 +278,9 @@ density1 =
                     [ mFrom [ srData (str "density") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "density") ]
-                            , maY2 [ vScale (fName "yScale"), vNum 0 ]
+                            [ maX [ vScale (field "xScale"), vField (field "value") ]
+                            , maY [ vScale (field "yScale"), vField (field "density") ]
+                            , maY2 [ vScale (field "yScale"), vNum 0 ]
                             , maFill [ vSignal "scale('cScale', 'Kernel Density Estimate')" ]
                             ]
                         ]
@@ -289,8 +289,8 @@ density1 =
                     [ mFrom [ srData (str "normal") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "density") ]
+                            [ maX [ vScale (field "xScale"), vField (field "value") ]
+                            , maY [ vScale (field "yScale"), vField (field "density") ]
                             , maStroke [ vSignal "scale('cScale', 'Normal Estimate')" ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
@@ -300,7 +300,7 @@ density1 =
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
+                            [ maX [ vScale (field "xScale"), vField (field "u") ]
                             , maWidth [ vNum 1 ]
                             , maY [ vNum 25, vOffset (vSignal "height") ]
                             , maHeight [ vNum 5 ]
@@ -321,7 +321,7 @@ boxplot1 =
         ds =
             dataSource
                 [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
-                    |> transform [ trFoldAs (strSignal "fields") "organ" "value" ]
+                    |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
         si =
@@ -335,13 +335,13 @@ boxplot1 =
                 << scale "layout"
                     [ scType ScBand
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "iris", daField (str "organ") ])
+                    , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "iris", daField (str "value") ])
+                    , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero (boo True)
                     , scNice NTrue
                     ]
@@ -358,7 +358,7 @@ boxplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (fName "layout"), vField (fName "organ"), vBand 0.5 ]
+                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand 0.5 ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -371,7 +371,7 @@ boxplot1 =
                 [ data "summary" [ daSource "organs" ]
                     |> transform
                         [ trAggregate
-                            [ agFields [ str "value", str "value", str "value", str "value", str "value" ]
+                            [ agFields (List.repeat 5 (field "value"))
                             , agOps [ Min, Q1, Median, Q3, Max ]
                             , agAs [ "min", "q1", "median", "q3", "max" ]
                             ]
@@ -389,8 +389,8 @@ boxplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2", vOffset (vNum -0.5) ]
-                            , maX [ vScale (fName "xScale"), vField (fName "min") ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "max") ]
+                            , maX [ vScale (field "xScale"), vField (field "min") ]
+                            , maX2 [ vScale (field "xScale"), vField (field "max") ]
                             ]
                         ]
                     ]
@@ -404,8 +404,8 @@ boxplot1 =
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
                             , maHeight [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (fName "xScale"), vField (fName "q1") ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "q3") ]
+                            , maX [ vScale (field "xScale"), vField (field "q1") ]
+                            , maX2 [ vScale (field "xScale"), vField (field "q3") ]
                             ]
                         ]
                     ]
@@ -419,7 +419,7 @@ boxplot1 =
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
                             , maHeight [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (fName "xScale"), vField (fName "median") ]
+                            , maX [ vScale (field "xScale"), vField (field "median") ]
                             ]
                         ]
                     ]
@@ -435,7 +435,7 @@ violinplot1 =
         ds =
             dataSource
                 [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
-                    |> transform [ trFoldAs (strSignal "fields") "organ" "value" ]
+                    |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
         si =
@@ -451,13 +451,13 @@ violinplot1 =
                 << scale "layout"
                     [ scType ScBand
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "iris", daField (str "organ") ])
+                    , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "iris", daField (str "value") ])
+                    , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero (boo True)
                     , scNice NTrue
                     ]
@@ -474,7 +474,7 @@ violinplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (fName "layout"), vField (fName "organ"), vBand 0.5 ]
+                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand 0.5 ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -486,11 +486,11 @@ violinplot1 =
             dataSource
                 [ data "density" []
                     |> transform
-                        [ trDensity (diKde "organs" (str "value") (numSignal "bandWidth"))
+                        [ trDensity (diKde "organs" (field "value") (numSignal "bandWidth"))
                             [ dnSteps (numSignal "steps") ]
                         , trStack
-                            [ stGroupBy [ str "value" ]
-                            , stField (str "density")
+                            [ stGroupBy [ field "value" ]
+                            , stField (field "density")
                             , stOffset OfCenter
                             , stAs "y0" "y1"
                             ]
@@ -498,7 +498,7 @@ violinplot1 =
                 , data "summary" [ daSource "organs" ]
                     |> transform
                         [ trAggregate
-                            [ agFields [ str "value", str "value", str "value" ]
+                            [ agFields (List.map field [ "value", "value", "value" ])
                             , agOps [ Q1, Median, Q3 ]
                             , agAs [ "q1", "median", "q3" ]
                             ]
@@ -510,7 +510,7 @@ violinplot1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raValues [ vNum 0, vSignal "plotWidth" ])
-                    , scDomain (doData [ daDataset "density", daField (str "density") ])
+                    , scDomain (doData [ daDataset "density", daField (field "density") ])
                     ]
 
         nestedMk =
@@ -518,11 +518,11 @@ violinplot1 =
                 << mark Area
                     [ mFrom [ srData (str "density") ]
                     , mEncode
-                        [ enEnter [ maFill [ vScale (fName "cScale"), vField (fParent (fName "organ")) ] ]
+                        [ enEnter [ maFill [ vScale (field "cScale"), vField (fParent (field "organ")) ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "value") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
-                            , maY2 [ vScale (fName "yScale"), vField (fName "y1") ]
+                            [ maX [ vScale (field "xScale"), vField (field "value") ]
+                            , maY [ vScale (field "yScale"), vField (field "y0") ]
+                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
                             ]
                         ]
                     ]
@@ -535,8 +535,8 @@ violinplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (fName "xScale"), vField (fName "q1") ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "q3") ]
+                            , maX [ vScale (field "xScale"), vField (field "q1") ]
+                            , maX2 [ vScale (field "xScale"), vField (field "q3") ]
                             ]
                         ]
                     ]
@@ -550,7 +550,7 @@ violinplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (fName "xScale"), vField (fName "median") ]
+                            , maX [ vScale (field "xScale"), vField (field "median") ]
                             ]
                         ]
                     ]
@@ -568,13 +568,13 @@ window1 =
                     |> transform
                         [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
                         , trAggregate
-                            [ agGroupBy [ str "Director" ]
+                            [ agGroupBy [ field "Director" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ str "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation RowNumber "rank" ]
-                            [ wnSort [ ( str "Gross", Descend ) ] ]
+                            [ wnSort [ ( field "Gross", Descend ) ] ]
                         , trFilter (expr "datum.rank <= k")
                         ]
                 ]
@@ -607,7 +607,7 @@ window1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "directors", daField (str "Gross") ])
+                    , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
@@ -616,7 +616,7 @@ window1 =
                     , scDomain
                         (doData
                             [ daDataset "directors"
-                            , daField (str "Director")
+                            , daField (field "Director")
                             , daSort [ soOp Max, soByField (str "Gross"), Descending ]
                             ]
                         )
@@ -634,10 +634,10 @@ window1 =
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vNum 0 ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "Gross") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "Director") ]
-                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            [ maX [ vScale (field "xScale"), vNum 0 ]
+                            , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
+                            , maY [ vScale (field "yScale"), vField (field "Director") ]
+                            , maHeight [ vScale (field "yScale"), vBand 1 ]
                             ]
                         ]
                     ]
@@ -656,22 +656,22 @@ window2 =
                 , data "ranks" [ daSource "source" ]
                     |> transform
                         [ trAggregate
-                            [ agGroupBy [ str "Director" ]
+                            [ agGroupBy [ field "Director" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ str "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         , trWindow [ wnOperation RowNumber "rank" ]
-                            [ wnSort [ ( str "Gross", Descend ) ] ]
+                            [ wnSort [ ( field "Gross", Descend ) ] ]
                         ]
                 , data "directors" [ daSource "source" ]
                     |> transform
-                        [ trLookup "ranks" (str "Director") [ str "Director" ] [ luValues [ str "rank" ] ]
+                        [ trLookup "ranks" (field "Director") [ field "Director" ] [ luValues [ field "rank" ] ]
                         , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category" AlwaysUpdate
                         , trAggregate
-                            [ agGroupBy [ str "Category" ]
+                            [ agGroupBy [ field "Category" ]
                             , agOps [ opSignal "op" ]
-                            , agFields [ str "Worldwide_Gross" ]
+                            , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
                         ]
@@ -705,7 +705,7 @@ window2 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "directors", daField (str "Gross") ])
+                    , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
@@ -714,7 +714,7 @@ window2 =
                     , scDomain
                         (doData
                             [ daDataset "directors"
-                            , daField (str "Category")
+                            , daField (field "Category")
                             , daSort [ soOp Max, soByField (str "Gross"), Descending ]
                             ]
                         )
@@ -732,10 +732,10 @@ window2 =
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vNum 0 ]
-                            , maX2 [ vScale (fName "xScale"), vField (fName "Gross") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "Category") ]
-                            , maHeight [ vScale (fName "yScale"), vBand 1 ]
+                            [ maX [ vScale (field "xScale"), vNum 0 ]
+                            , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
+                            , maY [ vScale (field "yScale"), vField (field "Category") ]
+                            , maHeight [ vScale (field "yScale"), vBand 1 ]
                             ]
                         ]
                     ]
@@ -753,11 +753,11 @@ scatter1 =
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "summary" [ daSource "source" ]
                     |> transform
-                        [ trExtentAsSignal (str "Horsepower") "hp_extent"
-                        , trBin (str "Horsepower") (numSignal "hp_extent") [ bnMaxBins (num 10), bnAs "hp0" "hp1" ]
-                        , trExtentAsSignal (str "Miles_per_Gallon") "mpg_extent"
-                        , trBin (str "Miles_per_Gallon") (numSignal "mpg_extent") [ bnMaxBins (num 10), bnAs "mpg0" "mpg1" ]
-                        , trAggregate [ agGroupBy [ str "hp0", str "hp1", str "mpg0", str "mpg1" ] ]
+                        [ trExtentAsSignal (field "Horsepower") "hp_extent"
+                        , trBin (field "Horsepower") (numSignal "hp_extent") [ bnMaxBins (num 10), bnAs "hp0" "hp1" ]
+                        , trExtentAsSignal (field "Miles_per_Gallon") "mpg_extent"
+                        , trBin (field "Miles_per_Gallon") (numSignal "mpg_extent") [ bnMaxBins (num 10), bnAs "mpg0" "mpg1" ]
+                        , trAggregate [ agGroupBy (List.map field [ "hp0", "hp1", "mpg0", "mpg1" ]) ]
                         ]
                 ]
 
@@ -766,7 +766,7 @@ scatter1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "source", daField (str "Horsepower") ])
+                    , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo True)
@@ -774,14 +774,14 @@ scatter1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "source", daField (str "Miles_per_Gallon") ])
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo True)
                     ]
                 << scale "sizeScale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "summary", daField (str "count") ])
+                    , scDomain (doData [ daDataset "summary", daField (field "count") ])
                     , scRange (raNums [ 0, 360 ])
                     , scZero (boo True)
                     ]
@@ -826,9 +826,9 @@ scatter1 =
                     , mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vSignal "(datum.hp0 + datum.hp1) / 2" ]
-                            , maY [ vScale (fName "yScale"), vSignal "(datum.mpg0 + datum.mpg1) / 2" ]
-                            , maSize [ vScale (fName "sizeScale"), vField (fName "count") ]
+                            [ maX [ vScale (field "xScale"), vSignal "(datum.hp0 + datum.hp1) / 2" ]
+                            , maY [ vScale (field "yScale"), vSignal "(datum.mpg0 + datum.mpg1) / 2" ]
+                            , maSize [ vScale (field "sizeScale"), vField (field "count") ]
                             , maShape [ vStr "circle" ]
                             , maStrokeWidth [ vNum 2 ]
                             , maStroke [ vStr "#4682b4" ]
@@ -853,8 +853,8 @@ contour1 =
                     |> transform
                         [ trContour (numSignal "width")
                             (numSignal "height")
-                            [ cnX (strExpr (expr "scale('xScale', datum.Horsepower)"))
-                            , cnY (strExpr (expr "scale('yScale', datum.Miles_per_Gallon)"))
+                            [ cnX (fExpr "scale('xScale', datum.Horsepower)")
+                            , cnY (fExpr "scale('yScale', datum.Miles_per_Gallon)")
                             , cnCount (numSignal "count")
                             ]
                         ]
@@ -870,7 +870,7 @@ contour1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "source", daField (str "Horsepower") ])
+                    , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo False)
@@ -878,14 +878,14 @@ contour1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "source", daField (str "Miles_per_Gallon") ])
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo False)
                     ]
                 << scale "cScale"
                     [ scType ScSequential
-                    , scDomain (doData [ daDataset "contours", daField (str "value") ])
+                    , scDomain (doData [ daDataset "contours", daField (field "value") ])
                     , scRange (raDefault RHeatmap)
                     , scZero (boo True)
                     ]
@@ -916,19 +916,19 @@ contour1 =
                         [ enEnter
                             [ maStroke [ vStr "#888" ]
                             , maStrokeWidth [ vNum 1 ]
-                            , maFill [ vScale (fName "cScale"), vField (fName "value") ]
+                            , maFill [ vScale (field "cScale"), vField (field "value") ]
                             , maFillOpacity [ vNum 0.35 ]
                             ]
                         ]
-                    , mTransform [ trGeoPath "" [ gpField (str "datum") ] ]
+                    , mTransform [ trGeoPath "" [ gpField (field "datum") ] ]
                     ]
                 << mark Symbol
                     [ mName "marks"
                     , mFrom [ srData (str "source") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
+                            [ maX [ vScale (field "xScale"), vField (field "Horsepower") ]
+                            , maY [ vScale (field "yScale"), vField (field "Miles_per_Gallon") ]
                             , maSize [ vNum 4 ]
                             , maFill [ ifElse "points" [ vStr "black" ] [ vStr "transparent" ] ]
                             ]
@@ -946,15 +946,15 @@ wheat1 =
             dataSource
                 [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
                     |> transform
-                        [ trBin (str "u")
+                        [ trBin (field "u")
                             (nums [ -1, 1 ])
                             [ bnAnchor (numSignal "binOffset")
                             , bnStep (numSignal "binStep")
                             , bnNice (boo False)
                             , bnSignal "bins"
                             ]
-                        , trStack [ stGroupBy [ str "bin0" ], stSort [ ( str "u", Ascend ) ] ]
-                        , trExtentAsSignal (str "y1") "extent"
+                        , trStack [ stGroupBy [ field "bin0" ], stSort [ ( field "u", Ascend ) ] ]
+                        , trExtentAsSignal (field "y1") "extent"
                         ]
                 ]
 
@@ -1010,8 +1010,8 @@ wheat1 =
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "y0") ]
+                            [ maX [ vScale (field "xScale"), vField (field "u") ]
+                            , maY [ vScale (field "yScale"), vField (field "y0") ]
                             , maSize [ vSignal "symbolDiameter * symbolDiameter" ]
                             , maStroke [ vStr "steelblue" ]
                             ]
@@ -1025,7 +1025,7 @@ wheat1 =
 
 sourceExample : Spec
 sourceExample =
-    wheat1
+    violinplot1
 
 
 

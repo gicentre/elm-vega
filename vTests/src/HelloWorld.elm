@@ -18,7 +18,7 @@ helloWorld =
         sc =
             scales
                 << scale "xscale"
-                    [ scDomain (doData [ daDataset "table", daField (str "x") ])
+                    [ scDomain (doData [ daDataset "table", daField (field "x") ])
                     , scRange (raDefault RWidth)
                     ]
 
@@ -28,8 +28,8 @@ helloWorld =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xscale"), vField (fName "x") ]
-                            , maText [ vField (fName "label") ]
+                            [ maX [ vScale (field "xscale"), vField (field "x") ]
+                            , maText [ vField (field "label") ]
                             ]
                         ]
                     ]

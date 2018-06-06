@@ -85,13 +85,13 @@ areaTest =
             scales
                 << scale "xscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "u") ])
+                    , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "v") ])
+                    , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange (raDefault RHeight)
                     , scZero (boo True)
                     , scNice NTrue
@@ -116,9 +116,9 @@ areaTest =
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , maY2 [ vScale (fName "yscale"), vSignal "y2" ]
+                            [ maX [ vScale (field "xscale"), vField (field "u") ]
+                            , maY [ vScale (field "yscale"), vField (field "v") ]
+                            , maY2 [ vScale (field "yscale"), vSignal "y2" ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maInterpolate [ vSignal "interpolate" ]
                             , maTension [ vSignal "tension" ]
@@ -188,10 +188,10 @@ groupTest =
                     , mInteractive (boo False)
                     , mEncode
                         [ enEnter
-                            [ maX [ vField (fName "x") ]
-                            , maY [ vField (fName "y") ]
-                            , maWidth [ vField (fName "w") ]
-                            , maHeight [ vField (fName "h") ]
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            , maWidth [ vField (field "w") ]
+                            , maHeight [ vField (field "h") ]
                             , maFill [ vStr "aliceblue" ]
                             , maStroke [ vStr "firebrick" ]
                             ]
@@ -253,13 +253,13 @@ lineTest =
             scales
                 << scale "xscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "u") ])
+                    , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "v") ])
+                    , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange (raDefault RHeight)
                     , scZero (boo True)
                     , scNice NTrue
@@ -284,8 +284,8 @@ lineTest =
                     , mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
+                            [ maX [ vScale (field "xscale"), vField (field "u") ]
+                            , maY [ vScale (field "yscale"), vField (field "v") ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maInterpolate [ vSignal "interpolate" ]
                             , maTension [ vSignal "tension" ]
@@ -619,13 +619,13 @@ trailTest =
             scales
                 << scale "xscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "u") ])
+                    , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange (raDefault RWidth)
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "table", daField (str "v") ])
+                    , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange (raDefault RHeight)
                     , scZero (boo True)
                     , scNice NTrue
@@ -633,7 +633,7 @@ trailTest =
                 << scale "zscale"
                     [ scType ScLinear
                     , scRange (raNums [ 5, 1 ])
-                    , scDomain (doData [ daDataset "table", daField (str "v") ])
+                    , scDomain (doData [ daDataset "table", daField (field "v") ])
                     ]
 
         si =
@@ -648,9 +648,9 @@ trailTest =
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xscale"), vField (fName "u") ]
-                            , maY [ vScale (fName "yscale"), vField (fName "v") ]
-                            , maSize [ vScale (fName "zscale"), vField (fName "v"), vMultiply (vSignal "size") ]
+                            [ maX [ vScale (field "xscale"), vField (field "u") ]
+                            , maY [ vScale (field "yscale"), vField (field "v") ]
+                            , maSize [ vScale (field "zscale"), vField (field "v"), vMultiply (vSignal "size") ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maOpacity [ vNum 1 ]
                             ]

@@ -28,7 +28,7 @@ scatterplot1 =
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "cars", daField (str "Horsepower") ])
+                    , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
                     , scRange (raDefault RWidth)
                     ]
                 << scale "yScale"
@@ -36,7 +36,7 @@ scatterplot1 =
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "cars", daField (str "Miles_per_Gallon") ])
+                    , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
                     , scRange (raDefault RHeight)
                     ]
                 << scale "sizeScale"
@@ -44,7 +44,7 @@ scatterplot1 =
                     , scRound (boo True)
                     , scNice NFalse
                     , scZero (boo True)
-                    , scDomain (doData [ daDataset "cars", daField (str "Acceleration") ])
+                    , scDomain (doData [ daDataset "cars", daField (field "Acceleration") ])
                     , scRange (raNums [ 4, 361 ])
                     ]
 
@@ -76,9 +76,9 @@ scatterplot1 =
                     [ mFrom [ srData (str "cars") ]
                     , mEncode
                         [ enUpdate <|
-                            [ maX [ vScale (fName "xScale"), vField (fName "Horsepower") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "Miles_per_Gallon") ]
-                            , maSize [ vScale (fName "sizeScale"), vField (fName "Acceleration") ]
+                            [ maX [ vScale (field "xScale"), vField (field "Horsepower") ]
+                            , maY [ vScale (field "yScale"), vField (field "Miles_per_Gallon") ]
+                            , maSize [ vScale (field "sizeScale"), vField (field "Acceleration") ]
                             ]
                                 ++ shapeEncoding
                         ]
@@ -113,13 +113,13 @@ scatterplot2 =
                     [ scType ScLinear
                     , scNice NTrue
                     , scRange (raValues [ vSignal "nullGap", vSignal "width" ])
-                    , scDomain (doData [ daDataset "valid", daField (strSignal "xField") ])
+                    , scDomain (doData [ daDataset "valid", daField (fSignal "xField") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scNice NTrue
                     , scRange (raValues [ vSignal "height - nullGap", vNum 0 ])
-                    , scDomain (doData [ daDataset "valid", daField (strSignal "yField") ])
+                    , scDomain (doData [ daDataset "valid", daField (fSignal "yField") ])
                     ]
 
         ax =
@@ -134,11 +134,11 @@ scatterplot2 =
                     , mEncode
                         [ enEnter
                             [ maSize [ vNum 50 ]
-                            , maTooltip [ vField (fName "tooltip") ]
+                            , maTooltip [ vField (field "tooltip") ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fSignal "xField") ]
-                            , maY [ vScale (fName "yScale"), vField (fSignal "yField") ]
+                            [ maX [ vScale (field "xScale"), vField (fSignal "xField") ]
+                            , maY [ vScale (field "yScale"), vField (fSignal "yField") ]
                             , maFill [ vStr "steelblue" ]
                             , maFillOpacity [ vNum 0.5 ]
                             , maZIndex [ vNum 0 ]
@@ -155,10 +155,10 @@ scatterplot2 =
                     , mEncode
                         [ enEnter
                             [ maSize [ vNum 50 ]
-                            , maTooltip [ vField (fName "tooltip") ]
+                            , maTooltip [ vField (field "tooltip") ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fSignal "xField") ]
+                            [ maX [ vScale (field "xScale"), vField (fSignal "xField") ]
                             , maY [ vSignal "height - nullSize/2" ]
                             , maFill [ vStr "#aaa" ]
                             , maFillOpacity [ vNum 0.2 ]
@@ -174,11 +174,11 @@ scatterplot2 =
                     , mEncode
                         [ enEnter
                             [ maSize [ vNum 50 ]
-                            , maTooltip [ vField (fName "tooltip") ]
+                            , maTooltip [ vField (field "tooltip") ]
                             ]
                         , enUpdate
                             [ maX [ vSignal "nullSize/2" ]
-                            , maY [ vScale (fName "yScale"), vField (fSignal "yField") ]
+                            , maY [ vScale (field "yScale"), vField (fSignal "yField") ]
                             , maFill [ vStr "#aaa" ]
                             , maFillOpacity [ vNum 0.2 ]
                             , maZIndex [ vNum 1 ]
@@ -219,7 +219,7 @@ scatterplot3 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "drive", daField (str "miles") ])
+                    , scDomain (doData [ daDataset "drive", daField (field "miles") ])
                     , scRange (raDefault RWidth)
                     , scNice NTrue
                     , scZero (boo False)
@@ -227,7 +227,7 @@ scatterplot3 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scDomain (doData [ daDataset "drive", daField (str "gas") ])
+                    , scDomain (doData [ daDataset "drive", daField (field "gas") ])
                     , scRange (raDefault RHeight)
                     , scNice NTrue
                     , scZero (boo False)
@@ -317,8 +317,8 @@ scatterplot3 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
-                            , maX [ vScale (fName "xScale"), vField (fName "miles") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            , maX [ vScale (field "xScale"), vField (field "miles") ]
+                            , maY [ vScale (field "yScale"), vField (field "gas") ]
                             , maStroke [ vStr "#000" ]
                             , maStrokeWidth [ vNum 3 ]
                             ]
@@ -328,8 +328,8 @@ scatterplot3 =
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
+                            [ maX [ vScale (field "xScale"), vField (field "miles") ]
+                            , maY [ vScale (field "yScale"), vField (field "gas") ]
                             , maFill [ vStr "#fff" ]
                             , maStroke [ vStr "#000" ]
                             , maStrokeWidth [ vNum 1 ]
@@ -341,14 +341,14 @@ scatterplot3 =
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "miles") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "gas") ]
-                            , maDx [ vScale (fName "dx"), vField (fName "side") ]
-                            , maDy [ vScale (fName "dy"), vField (fName "side") ]
+                            [ maX [ vScale (field "xScale"), vField (field "miles") ]
+                            , maY [ vScale (field "yScale"), vField (field "gas") ]
+                            , maDx [ vScale (field "dx"), vField (field "side") ]
+                            , maDy [ vScale (field "dy"), vField (field "side") ]
                             , maFill [ vStr "#000" ]
-                            , maText [ vField (fName "year") ]
-                            , maAlign [ vScale (fName "alignScale"), vField (fName "side") ]
-                            , maBaseline [ vScale (fName "baseScale"), vField (fName "side") ]
+                            , maText [ vField (field "year") ]
+                            , maAlign [ vScale (field "alignScale"), vField (field "side") ]
+                            , maBaseline [ vScale (field "baseScale"), vField (field "side") ]
                             ]
                         ]
                     ]
@@ -367,8 +367,8 @@ scatterplot4 =
                 , data "summary" [ daSource "barley" ]
                     |> transform
                         [ trAggregate
-                            [ agGroupBy [ str "variety" ]
-                            , agFields (List.repeat 7 (str "yield"))
+                            [ agGroupBy [ field "variety" ]
+                            , agFields (List.repeat 7 (field "yield"))
                             , agOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
@@ -402,7 +402,7 @@ scatterplot4 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange (raDefault RWidth)
-                    , scDomain (doData [ daDataset "summary", daFields (strs [ "stdev0", "stdev1" ]) ])
+                    , scDomain (doData [ daDataset "summary", daFields [ field "stdev0", field "stdev1" ] ])
                     , scRound (boo True)
                     , scNice NTrue
                     , scZero (boo False)
@@ -410,7 +410,13 @@ scatterplot4 =
                 << scale "yScale"
                     [ scType ScBand
                     , scRange (raDefault RHeight)
-                    , scDomain (doData [ daDataset "summary", daField (str "variety"), daSort [ soOp Max, soByField (str "mean"), Descending ] ])
+                    , scDomain
+                        (doData
+                            [ daDataset "summary"
+                            , daField (field "variety")
+                            , daSort [ soOp Max, soByField (str "mean"), Descending ]
+                            ]
+                        )
                     ]
 
         ax =
@@ -425,9 +431,9 @@ scatterplot4 =
                     , mEncode
                         [ enEnter [ maFill [ vStr "black" ], maHeight [ vNum 1 ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vSignal "datum[measure+'0']" ]
-                            , maY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
-                            , maX2 [ vScale (fName "xScale"), vSignal "datum[measure+'1']" ]
+                            [ maX [ vScale (field "xScale"), vSignal "datum[measure+'0']" ]
+                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand 0.5 ]
+                            , maX2 [ vScale (field "xScale"), vSignal "datum[measure+'1']" ]
                             ]
                         ]
                     ]
@@ -436,8 +442,8 @@ scatterplot4 =
                     , mEncode
                         [ enEnter [ maFill [ vStr "back" ], maSize [ vNum 40 ] ]
                         , enUpdate
-                            [ maX [ vScale (fName "xScale"), vField (fName "mean") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "variety"), vBand 0.5 ]
+                            [ maX [ vScale (field "xScale"), vField (field "mean") ]
+                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand 0.5 ]
                             ]
                         ]
                     ]
@@ -467,7 +473,7 @@ scatterplot5 =
                     , scDomain
                         (doData
                             [ daDataset "barley"
-                            , daField (str "site")
+                            , daField (field "site")
                             , daSort [ soByField (str "yield"), soOp Median, Descending ]
                             ]
                         )
@@ -479,12 +485,12 @@ scatterplot5 =
                     , scNice NTrue
                     , scRange (raDefault RWidth)
                     , scRound (boo True)
-                    , scDomain (doData [ daDataset "barley", daField (str "yield") ])
+                    , scDomain (doData [ daDataset "barley", daField (field "yield") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scRange (raDefault RCategory)
-                    , scDomain (doData [ daDataset "barley", daField (str "year") ])
+                    , scDomain (doData [ daDataset "barley", daField (field "year") ])
                     ]
 
         ax =
@@ -508,9 +514,9 @@ scatterplot5 =
                     [ mFrom [ srData (str "sites") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (fName "xScale"), vField (fName "yield") ]
-                            , maY [ vScale (fName "yScale"), vField (fName "variety") ]
-                            , maStroke [ vScale (fName "cScale"), vField (fName "year") ]
+                            [ maX [ vScale (field "xScale"), vField (field "yield") ]
+                            , maY [ vScale (field "yScale"), vField (field "variety") ]
+                            , maStroke [ vScale (field "cScale"), vField (field "year") ]
                             , maStrokeWidth [ vNum 2 ]
                             , maSize [ vNum 50 ]
                             ]
@@ -527,7 +533,7 @@ scatterplot5 =
                     , scDomain
                         (doData
                             [ daDataset "barley"
-                            , daField (str "variety")
+                            , daField (field "variety")
                             , daSort [ soByField (str "yield"), soOp Median, Descending ]
                             ]
                         )
@@ -550,8 +556,8 @@ scatterplot5 =
                     , mEncode
                         [ enEnter
                             [ maY
-                                [ vScale (fName "gScale")
-                                , vField (fName "site")
+                                [ vScale (field "gScale")
+                                , vField (field "site")
                                 , vOffset (vSignal "offset")
                                 ]
                             , maHeight [ vSignal "cellHeight" ]
@@ -565,11 +571,11 @@ scatterplot5 =
                     [ mFrom [ srData (str "site") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vField (fName "width"), vMultiply (vNum 0.5) ]
-                            , maY [ vField (fName "y") ]
+                            [ maX [ vField (field "width"), vMultiply (vNum 0.5) ]
+                            , maY [ vField (field "y") ]
                             , maFontSize [ vNum 11 ]
                             , maFontWeight [ vStr "bold" ]
-                            , maText [ vField (fName "datum.site") ]
+                            , maText [ vField (field "datum.site") ]
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]
                             , maBaseline [ vStr (vAlignLabel AlignBottom) ]
                             , maFill [ vStr "black" ]

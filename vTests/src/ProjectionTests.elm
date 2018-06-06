@@ -135,8 +135,8 @@ projTest =
                     , mEncode
                         [ enEnter
                             [ maFill [ vStr "white" ]
-                            , maDx [ vField (fName "dx") ]
-                            , maDy [ vField (fName "dy") ]
+                            , maDx [ vField (field "dx") ]
+                            , maDy [ vField (field "dy") ]
                             , maX [ vNum 5 ]
                             , maY [ vSignal "mapHeight -5" ]
                             , maBaseline [ vStr (vAlignLabel AlignBottom) ]
