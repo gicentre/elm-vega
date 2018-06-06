@@ -4597,7 +4597,7 @@
       },
       {
         "name": "wnOperation",
-        "comment": " Specify a window-specific operation to be applied during a window transformation.\nThis version is suitable for operations without parameters (e.g. `RowNumber`) and\nthat are not applied to a specific field.\n\nThe parameters are the operation to apply and the name to give to the field which\nwill contain the results of the calculation.\n\n    trWindow [ wnOperation RowNumber \"rank\" ]\n        [ wnSort\n            [ coField [ field \"Gross\" ]\n            , coOrder [ Descend ]\n            ]\n        ]\n\nFor details see the\n[Vega window transform documentation](https://vega.github.io/vega/docs/transforms/window/)\n\n",
+        "comment": " Specify a window-specific operation to be applied during a window transformation.\nThis version is suitable for operations without parameters (e.g. `RowNumber`) and\nthat are not applied to a specific field.\n\nThe parameters are the operation to apply and the name to give to the field which\nwill contain the results of the calculation.\n\n    trWindow [ wnOperation Rank \"order\" ]\n        [ wnSort\n            [ coField [ field \"Gross\" ]\n            , coOrder [ Descend ]\n            ]\n        ]\n\nFor details see the\n[Vega window transform documentation](https://vega.github.io/vega/docs/transforms/window/)\n\n",
         "type": "Vega.WOperation -> String -> Vega.WindowOperation"
       },
       {

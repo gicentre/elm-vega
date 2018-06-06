@@ -424,9 +424,122 @@ matrix1 =
         [ width 720, height 720, padding 5, ds, si [], sc [], mk [] ]
 
 
+arc1 : Spec
+arc1 =
+    let
+        ds =
+            dataSource
+                [ data "edges"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "links")
+                    ]
+                , data "sourceDegree" [ daSource "edges" ]
+                    |> transform [ trAggregate [ agGroupBy [ field "source" ] ] ]
+                , data "targetDegree" [ daSource "edges" ]
+                    |> transform [ trAggregate [ agGroupBy [ field "target" ] ] ]
+                , data "nodes"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat (jsonProperty "nodes")
+                    ]
+                    |> transform
+                        [ trWindow [ wnOperation Rank "order" ] []
+                        , trLookup "sourceDegree"
+                            (field "source")
+                            [ field "index" ]
+                            [ luAs [ "sourceDegree" ], luDefault (vObject [ keyValue "count" (vNum 0) ]) ]
+                        , trLookup "targetDegree"
+                            (field "target")
+                            [ field "index" ]
+                            [ luAs [ "targetDegree" ], luDefault (vObject [ keyValue "count" (vNum 0) ]) ]
+                        , trFormula "datum.sourceDegree.count + datum.targetDegree.count" "degree" AlwaysUpdate
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "position"
+                    [ scType ScBand
+                    , scDomain (doData [ daDataset "nodes", daField (field "order"), daSort [] ])
+                    , scRange (raDefault RWidth)
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raDefault RCategory)
+                    , scDomain (doData [ daDataset "nodes", daField (field "group") ])
+                    ]
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "layout"
+                    , mInteractive (boo False)
+                    , mFrom [ srData (str "nodes") ]
+                    , mEncode
+                        [ enEnter [ maOpacity [ vNum 0 ] ]
+                        , enUpdate
+                            [ maX [ vScale (field "position"), vField (field "order") ]
+                            , maY [ vNum 0 ]
+                            , maSize [ vField (field "degree"), vMultiply (vNum 5), vOffset (vNum 10) ]
+                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            ]
+                        ]
+                    ]
+                << mark Path
+                    [ mFrom [ srData (str "edges") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "black" ]
+                            , maStrokeOpacity [ vNum 0.2 ]
+                            , maStrokeWidth [ vField (field "value") ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trLookup "layout"
+                            (field "datum.index")
+                            [ field "datum.source", field "datum.target" ]
+                            [ luAs [ "sourceNode", "targetNode" ] ]
+                        , trLinkPath
+                            [ lpSourceX (fExpr "min(datum.sourceNode.x, datum.targetNode.x)")
+                            , lpTargetX (fExpr "max(datum.sourceNode.x, datum.targetNode.x)")
+                            , lpSourceY (fExpr "0")
+                            , lpTargetY (fExpr "0")
+                            , lpShape (linkShapeLabel LinkArc |> str)
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "layout") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            , maFill [ vField (field "fill") ]
+                            , maSize [ vField (field "size") ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "nodes") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale (field "position"), vField (field "order") ]
+                            , maY [ vNum 7 ]
+                            , maText [ vField (field "name") ]
+                            , maFontSize [ vNum 9 ]
+                            , maAngle [ vNum -90 ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 770, padding 5, ds, sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    matrix1
+    arc1
 
 
 
@@ -439,6 +552,7 @@ mySpecs =
         [ ( "bundle1", bundle1 )
         , ( "force1", force1 )
         , ( "matrix1", matrix1 )
+        , ( "arc1", arc1 )
         ]
 
 

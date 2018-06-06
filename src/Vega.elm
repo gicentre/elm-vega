@@ -2863,7 +2863,7 @@ that are not applied to a specific field.
 The parameters are the operation to apply and the name to give to the field which
 will contain the results of the calculation.
 
-    trWindow [ wnOperation RowNumber "rank" ]
+    trWindow [ wnOperation Rank "order" ]
         [ wnSort
             [ coField [ field "Gross" ]
             , coOrder [ Descend ]
