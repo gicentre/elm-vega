@@ -162,11 +162,11 @@ force1 =
             dataSource
                 [ data "node-data"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "nodes")
+                    , daFormat [ jsonProperty "nodes" ]
                     ]
                 , data "link-data"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "links")
+                    , daFormat [ jsonProperty "links" ]
                     ]
                 ]
 
@@ -279,7 +279,7 @@ matrix1 =
             dataSource
                 [ data "nodes"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "nodes")
+                    , daFormat [ jsonProperty "nodes" ]
                     ]
                     |> transform
                         [ trFormula "datum.group" "order" AlwaysUpdate
@@ -288,7 +288,7 @@ matrix1 =
                         ]
                 , data "edges"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "links")
+                    , daFormat [ jsonProperty "links" ]
                     ]
                     |> transform
                         [ trLookup "nodes" (field "index") [ field "source", field "target" ] [ luAs [ "sourceNode", "targetNode" ] ]
@@ -431,7 +431,7 @@ arc1 =
             dataSource
                 [ data "edges"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "links")
+                    , daFormat [ jsonProperty "links" ]
                     ]
                 , data "sourceDegree" [ daSource "edges" ]
                     |> transform [ trAggregate [ agGroupBy [ field "source" ] ] ]
@@ -439,7 +439,7 @@ arc1 =
                     |> transform [ trAggregate [ agGroupBy [ field "target" ] ] ]
                 , data "nodes"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "nodes")
+                    , daFormat [ jsonProperty "nodes" ]
                     ]
                     |> transform
                         [ trWindow [ wnOperation Rank "order" ] []
@@ -537,9 +537,141 @@ arc1 =
         [ width 770, padding 5, ds, sc [], mk [] ]
 
 
+map1 : Spec
+map1 =
+    let
+        ds =
+            dataSource
+                [ data "states"
+                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    , daFormat [ topojsonFeature "states" ]
+                    ]
+                    |> transform [ trGeoPath "myProjection" [] ]
+                , data "traffic"
+                    [ daUrl "https://vega.github.io/vega/data/flights-airport.csv", daFormat [ CSV, ParseAuto ] ]
+                    |> transform
+                        [ trAggregate
+                            [ agGroupBy [ field "origin" ]
+                            , agOps [ Sum ]
+                            , agFields [ field "count" ]
+                            , agAs [ "flights" ]
+                            ]
+                        ]
+                , data "airports" [ daUrl "https://vega.github.io/vega/data/airports.csv", daFormat [ CSV, ParseAuto ] ]
+                    |> transform
+                        [ trLookup "traffic" (field "origin") [ field "iata" ] [ luAs [ "traffic" ] ]
+                        , trFilter (expr "datum.traffic != null")
+                        , trGeoPoint "myProjection" (field "longitude") (field "latitude")
+                        , trFilter (expr "datum.x != null && datum.y != null")
+                        , trVoronoi (field "x") (field "y") []
+                        , trCollect [ ( field "traffic.flights", Descend ) ]
+                        ]
+                , data "routes" [ daUrl "https://vega.github.io/vega/data/flights-airport.csv", daFormat [ CSV, ParseAuto ] ]
+                    |> transform
+                        [ trFilter (expr "hover && hover.iata == datum.origin")
+                        , trLookup "airports" (field "iata") [ field "origin", field "destination" ] [ luAs [ "source", "target" ] ]
+                        , trFilter (expr "datum.source && datum.target")
+                        , trLinkPath [ lpShape (strSignal "shape") ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "pScale" [ siValue (vNum 1200), siBind (iRange [ inMin 500, inMax 3000 ]) ]
+                << signal "pTranslateX" [ siValue (vNum 450), siBind (iRange [ inMin -500, inMax 1200 ]) ]
+                << signal "pTranslateY" [ siValue (vNum 260), siBind (iRange [ inMin -300, inMax 700 ]) ]
+                << signal "shape" [ siValue (vStr "line"), siBind (iRadio [ inOptions (vStrs [ "line", "curve" ]) ]) ]
+                << signal "hover"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler (esObject [ esMarkName "cell", esType MouseOver ]) [ evUpdate "datum" ]
+                        , evHandler (esObject [ esMarkName "cell", esType MouseOut ]) [ evUpdate "{}" ]
+                        ]
+                    ]
+                << signal "title"
+                    [ siValue (vStr "U.S. Airports, 2008")
+                    , siUpdate "hover ? hover.name + ' (' + hover.iata + ')' : 'U.S. Airports, 2008'"
+                    ]
+                << signal "cell_stroke"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler (esObject [ esType DblClick ]) [ evUpdate "cell_stroke ? null : 'brown'" ]
+                        , evHandler (esObject [ esType MouseDown, esConsume True ]) [ evUpdate "cell_stroke" ]
+                        ]
+                    ]
+
+        pr =
+            projections
+                << projection "myProjection"
+                    [ prType AlbersUsa
+                    , prScale (numSignal "pScale")
+                    , prTranslate (numSignals [ "pTranslateX", "pTranslateY" ])
+                    ]
+
+        sc =
+            scales
+                << scale "size"
+                    [ scType ScLinear
+                    , scDomain (doData [ daDataset "traffic", daField (field "flights") ])
+                    , scRange (raNums [ 16, 1000 ])
+                    ]
+
+        mk =
+            marks
+                << mark Path
+                    [ mFrom [ srData (str "states") ]
+                    , mEncode
+                        [ enEnter [ maFill [ vStr "#dedede" ], maStroke [ vStr "white" ] ]
+                        , enUpdate [ maPath [ vField (field "path") ] ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "airports") ]
+                    , mEncode
+                        [ enEnter
+                            [ maSize [ vScale (field "size"), vField (field "traffic.flights") ]
+                            , maFill [ vStr "steelblue" ]
+                            , maFillOpacity [ vNum 0.8 ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 1.5 ]
+                            ]
+                        , enUpdate [ maX [ vField (field "x") ], maY [ vField (field "y") ] ]
+                        ]
+                    ]
+                << mark Path
+                    [ mName "cell"
+                    , mFrom [ srData (str "airports") ]
+                    , mEncode
+                        [ enEnter [ maFill [ vStr "transparent" ], maStrokeWidth [ vNum 0.35 ] ]
+                        , enUpdate [ maPath [ vField (field "path") ], maStroke [ vSignal "cell_stroke" ] ]
+                        ]
+                    ]
+                << mark Path
+                    [ mInteractive (boo False)
+                    , mFrom [ srData (str "routes") ]
+                    , mEncode [ enEnter [ maPath [ vField (field "path") ], maStroke [ vStr "black" ], maStrokeOpacity [ vNum 0.35 ] ] ]
+                    ]
+                << mark Text
+                    [ mInteractive (boo False)
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 895 ]
+                            , maY [ vNum 0 ]
+                            , maFill [ vStr "black" ]
+                            , maFontSize [ vNum 20 ]
+                            , maAlign [ vStr (hAlignLabel AlignRight) ]
+                            ]
+                        , enUpdate [ maText [ vSignal "title" ] ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 900, height 560, paddings 0 25 0 0, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    arc1
+    map1
 
 
 
@@ -553,6 +685,7 @@ mySpecs =
         , ( "force1", force1 )
         , ( "matrix1", matrix1 )
         , ( "arc1", arc1 )
+        , ( "map1", map1 )
         ]
 
 
