@@ -9745,7 +9745,7 @@ var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
 					_1: {ctor: '[]'}
 				}
 			};
-		default:
+		case 'Parse':
 			return {
 				ctor: '::',
 				_0: {
@@ -9763,6 +9763,16 @@ var _gicentre$elm_vega$Vega$formatProperty = function (fmt) {
 								};
 							},
 							_p27._0))
+				},
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'parse',
+					_1: _elm_lang$core$Json_Encode$string('auto')
 				},
 				_1: {ctor: '[]'}
 			};
@@ -15114,7 +15124,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$object(
-					_gicentre$elm_vega$Vega$formatProperty(_p116._0))
+					A2(_elm_lang$core$List$concatMap, _gicentre$elm_vega$Vega$formatProperty, _p116._0))
 			};
 		case 'DaSource':
 			return {
@@ -18388,6 +18398,7 @@ var _gicentre$elm_vega$Vega$DragLeave = {ctor: 'DragLeave'};
 var _gicentre$elm_vega$Vega$DragEnter = {ctor: 'DragEnter'};
 var _gicentre$elm_vega$Vega$DblClick = {ctor: 'DblClick'};
 var _gicentre$elm_vega$Vega$Click = {ctor: 'Click'};
+var _gicentre$elm_vega$Vega$ParseAuto = {ctor: 'ParseAuto'};
 var _gicentre$elm_vega$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
@@ -19911,7 +19922,11 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
-							_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$topojsonFeature('countries'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -20118,7 +20133,11 @@ var _gicentre$elm_vega$GalleryGeo$geo5 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
-								_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$topojsonFeature('countries'),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -21085,7 +21104,11 @@ var _gicentre$elm_vega$GalleryGeo$geo4 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
-								_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$topojsonFeature('countries'),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -21100,7 +21123,11 @@ var _gicentre$elm_vega$GalleryGeo$geo4 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
-									_gicentre$elm_vega$Vega$jsonProperty('features')),
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$jsonProperty('features'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -21563,7 +21590,11 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
-							_gicentre$elm_vega$Vega$topojsonFeature('states')),
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$topojsonFeature('states'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -21866,7 +21897,12 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/unemployment.tsv'),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daFormat(_gicentre$elm_vega$Vega$TSV),
+						_0: _gicentre$elm_vega$Vega$daFormat(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$TSV,
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -21911,7 +21947,11 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
-									_gicentre$elm_vega$Vega$topojsonFeature('counties')),
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$topojsonFeature('counties'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}
 						})),
@@ -22573,7 +22613,11 @@ var _gicentre$elm_vega$GalleryGeo$geo3 = function () {
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
-							_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$topojsonFeature('countries'),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -23258,7 +23302,11 @@ var _gicentre$elm_vega$GalleryGeo$geo7 = function () {
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
-								_gicentre$elm_vega$Vega$topojsonFeature('countries')),
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$topojsonFeature('countries'),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					})),

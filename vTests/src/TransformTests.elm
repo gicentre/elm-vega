@@ -179,11 +179,11 @@ forceTest1 =
             dataSource
                 [ data "node-data"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "nodes")
+                    , daFormat [ jsonProperty "nodes" ]
                     ]
                 , data "link-data"
                     [ daUrl "https://vega.github.io/vega/data/miserables.json"
-                    , daFormat (jsonProperty "links")
+                    , daFormat [ jsonProperty "links" ]
                     ]
                 ]
 

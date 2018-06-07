@@ -5604,7 +5604,7 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					_1: {ctor: '[]'}
 				}
 			};
-		default:
+		case 'Parse':
 			return {
 				ctor: '::',
 				_0: {
@@ -5622,6 +5622,16 @@ var _user$project$Vega$formatProperty = function (fmt) {
 								};
 							},
 							_p27._0))
+				},
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'parse',
+					_1: _elm_lang$core$Json_Encode$string('auto')
 				},
 				_1: {ctor: '[]'}
 			};
@@ -10973,7 +10983,7 @@ var _user$project$Vega$dataProperty = function (dProp) {
 				ctor: '_Tuple2',
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$object(
-					_user$project$Vega$formatProperty(_p116._0))
+					A2(_elm_lang$core$List$concatMap, _user$project$Vega$formatProperty, _p116._0))
 			};
 		case 'DaSource':
 			return {
@@ -14247,6 +14257,7 @@ var _user$project$Vega$DragLeave = {ctor: 'DragLeave'};
 var _user$project$Vega$DragEnter = {ctor: 'DragEnter'};
 var _user$project$Vega$DblClick = {ctor: 'DblClick'};
 var _user$project$Vega$Click = {ctor: 'Click'};
+var _user$project$Vega$ParseAuto = {ctor: 'ParseAuto'};
 var _user$project$Vega$Parse = function (a) {
 	return {ctor: 'Parse', _0: a};
 };
