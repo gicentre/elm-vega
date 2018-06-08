@@ -51,7 +51,7 @@ circularChart1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "id") ]
+                            [ maFill [ vScale "cScale", vField (field "id") ]
                             , maX [ vSignal "width / 2" ]
                             , maY [ vSignal "height / 2" ]
                             ]
@@ -98,7 +98,7 @@ circularChart2 =
                             , maStartAngle [ vField (field "startAngle") ]
                             , maEndAngle [ vField (field "endAngle") ]
                             , maInnerRadius [ vNum 20 ]
-                            , maOuterRadius [ vField (field "data"), vScale (field "rScale") ]
+                            , maOuterRadius [ vField (field "data"), vScale "rScale" ]
                             , maStroke [ vStr "#fff" ]
                             ]
                         , enUpdate [ maFill [ vStr "#ccc" ] ]
@@ -111,7 +111,7 @@ circularChart2 =
                         [ enEnter
                             [ maX [ vField (fGroup (field "width")), vMultiply (vNum 0.5) ]
                             , maY [ vField (fGroup (field "height")), vMultiply (vNum 0.5) ]
-                            , maRadius [ vField (field "data"), vScale (field "rScale"), vOffset (vNum 8) ]
+                            , maRadius [ vField (field "data"), vScale "rScale", vOffset (vNum 8) ]
                             , maTheta [ vSignal "(datum.startAngle + datum.endAngle)/2" ]
                             , maFill [ vStr "#000" ]
                             , maAlign [ vStr (hAlignLabel AlignCenter) ]

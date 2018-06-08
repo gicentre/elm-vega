@@ -10,10 +10,12 @@ module Vega
         , Boo
         , BoundsCalculation(Flush, Full)
         , CInterpolate(Hcl, Hsl, Lab)
+        , Case(Lowercase, Mixedcase, Uppercase)
         , Clip
         , ColorSchemeProperty
         , ColorValue
         , ContourProperty
+        , CountPatternProperty
         , CrossProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
@@ -197,6 +199,10 @@ module Vega
         , cnX
         , cnY
         , combineSpecs
+        , cpAs
+        , cpCase
+        , cpPattern
+        , cpStopwords
         , crAs
         , crFilter
         , csCount
@@ -666,6 +672,7 @@ module Vega
         , trBin
         , trCollect
         , trContour
+        , trCountPattern
         , trCross
         , trCrossFilter
         , trCrossFilterAsSignal
@@ -714,6 +721,7 @@ module Vega
         , vOffset
         , vRound
         , vScale
+        , vScaleField
         , vSignal
         , vStr
         , vStrs
@@ -820,6 +828,7 @@ can be generated with the following functions.
 @docs vOffset
 @docs vRound
 @docs vScale
+@docs vScaleField
 
 
 ## Indirect References
@@ -959,7 +968,12 @@ TODO: add pivot functions.
 
 ### Text Pattern Counting
 
-TODO: add functions (countpattern)
+@docs trCountPattern
+@docs cpPattern
+@docs cpCase
+@docs Case
+@docs cpStopwords
+@docs cpAs
 
 
 ### Cross Product
@@ -1722,6 +1736,7 @@ They are provided here for reference with links to the functions that generate t
 @docs ColorSchemeProperty
 @docs ColorValue
 @docs ContourProperty
+@docs CountPatternProperty
 @docs CrossProperty
 @docs Data
 @docs DataColumn
@@ -1875,225 +1890,6 @@ type AxisProperty
     | AxZIndex Num
 
 
-{-| Specify an interpolation fraction indicating where, for band scales, axis ticks
-should be positioned. A value of 0 places ticks at the left edge of their bands.
-A value of 0.5 places ticks in the middle of their bands. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axBandPosition : Num -> AxisProperty
-axBandPosition =
-    AxBandPosition
-
-
-{-| Specify the color of an axis domain line. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axDomainColor : String -> AxisProperty
-axDomainColor =
-    AxDomainColor
-
-
-{-| Specify the width in pixels of an axis domain line. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axDomainWidth : Num -> AxisProperty
-axDomainWidth =
-    AxDomainWidth
-
-
-{-| Specify the color of an axis's grid lines. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axGridColor : String -> AxisProperty
-axGridColor =
-    AxGridColor
-
-
-{-| Specify the stroke dash of an axis's grid lines as a list of dash-gap lengths
-or `[]` for a solid line (default). For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axGridDash : List Value -> AxisProperty
-axGridDash =
-    AxGridDash
-
-
-{-| Specify the angle of text for an axis. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelAngle : Num -> AxisProperty
-axLabelAngle =
-    AxLabelAngle
-
-
-{-| Specify the color of an axis label. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelColor : String -> AxisProperty
-axLabelColor =
-    AxLabelColor
-
-
-{-| Specify the font name of an axis label. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelFont : String -> AxisProperty
-axLabelFont =
-    AxLabelFont
-
-
-{-| Specify the font size of an axis label. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelFontSize : Num -> AxisProperty
-axLabelFontSize =
-    AxLabelFontSize
-
-
-{-| Specify the font weight of an axis label. This can be a number (e.g. `vNum 300`)
-or text (e.g. `vStr "bold"`). For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelFontWeight : Value -> AxisProperty
-axLabelFontWeight =
-    AxLabelFontWeight
-
-
-{-| Specify the maximium length in pixels of axis tick labels. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axLabelLimit : Num -> AxisProperty
-axLabelLimit =
-    AxLabelLimit
-
-
-{-| Specify the color of an axis's ticks. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTickColor : String -> AxisProperty
-axTickColor =
-    AxTickColor
-
-
-{-| Specify whether or not an extra axis tick should be added for the initial
-position of an axis. This is useful for styling axes for band scales such that
-ticks are placed on band boundaries rather in the middle of a band.
-For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTickExtra : Boo -> AxisProperty
-axTickExtra =
-    AxTickExtra
-
-
-{-| Specify the offset in pixels of an axis's ticks, labels and gridlines. For
-details see the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTickOffset : Num -> AxisProperty
-axTickOffset =
-    AxTickOffset
-
-
-{-| Specify whether or not pixel position values for an axis's ticks should be
-rounded to the nearest integer. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTickRound : Boo -> AxisProperty
-axTickRound =
-    AxTickRound
-
-
-{-| Specify the width in pixels of an axis's ticks. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTickWidth : Num -> AxisProperty
-axTickWidth =
-    AxTickWidth
-
-
-{-| Specify the horizontal alignment of an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleAlign : HAlign -> AxisProperty
-axTitleAlign =
-    AxTitleAlign
-
-
-{-| Specify the angle of an axis's title text. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleAngle : Num -> AxisProperty
-axTitleAngle =
-    AxTitleAngle
-
-
-{-| Specify the vertical alignment of an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleBaseline : VAlign -> AxisProperty
-axTitleBaseline =
-    AxTitleBaseline
-
-
-{-| Specify the color of an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleColor : String -> AxisProperty
-axTitleColor =
-    AxTitleColor
-
-
-{-| Specify the font to be used for an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleFont : String -> AxisProperty
-axTitleFont =
-    AxTitleFont
-
-
-{-| Specify the size of font in pixels for an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleFontSize : Num -> AxisProperty
-axTitleFontSize =
-    AxTitleFontSize
-
-
-{-| Specify the font weight of an axis's title. This can be a number (e.g. `vNum 300`)
-or text (e.g. `vStr "bold"`). For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleFontWeight : Value -> AxisProperty
-axTitleFontWeight =
-    AxTitleFontWeight
-
-
-{-| Specify the maximum allowed length of an axis's title. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleLimit : Num -> AxisProperty
-axTitleLimit =
-    AxTitleLimit
-
-
-{-| Specify the X position of an axis title relative to the axis group, overriding
-the standard layout. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleX : Num -> AxisProperty
-axTitleX =
-    AxTitleX
-
-
-{-| Specify the Y position of an axis title relative to the axis group, overriding
-the standard layout. For details see the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
--}
-axTitleY : Num -> AxisProperty
-axTitleY =
-    AxTitleY
-
-
 {-| Describes a binding to some HTML input element such as a checkbox or radio button.
 Generated by [iRange](#iRange), [iCheckbox](#iCheckbox), [iRadio](#iRadio),
 [iSelect](#iSelect), [iText](#iText), [iNumber](#iNumber), [iDate](#iDate),
@@ -2196,6 +1992,18 @@ type ContourProperty
     | CnThresholds Num
     | CnCount Num
     | CnNice Boo
+
+
+{-| Optional properties of a count pattern transform. Generated by
+[cpPattern](#cpPattern), [cpCase](#cpCase), [cpStopwords](#cpStopwords) and
+[cpAs](#cprAs). For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+-}
+type CountPatternProperty
+    = CPPattern Str
+    | CPCase Case
+    | CPStopwords Str
+    | CPAs String String
 
 
 {-| Optional properties of a cross-product transform. Generated by
@@ -3029,7 +2837,7 @@ type Transform
     | TBin Field Num (List BinProperty)
     | TCollect (List ( Field, Order ))
     | TContour Num Num (List ContourProperty)
-    | TCountPattern -- TODO Add transform functions
+    | TCountPattern Field (List CountPatternProperty)
     | TCross (List CrossProperty)
     | TCrossFilter (List ( Field, Num ))
     | TCrossFilterAsSignal (List ( Field, Num )) String
@@ -3135,9 +2943,9 @@ type TriggerProperty
 or transformed value. Generated by [vStr](#vStr), [vStrs](#vStrs), [vNum](#vNum),
 [vNums](#vNums), [vBoo](#vBoo), [vBoos](#vBoos), [vObject](#vObject), [vKeyValue](#vKeyValue),
 [vValues](#vValues), [vSignal](#vSignal), [vColor](#vColor), [vField](#vField),
-[vScale](#vScale), [vBand](#vBand), [vExponent](#vExponent), [vMultiply](#vMultiply),
-[vOffset](#vOffset), [vRound](#vRound), [vNull](#vNull) and [ifElse](#ifElse).
-For details, see the
+[vScale](#vScale), [vScaleField](#vScaleField), [vBand](#vBand), [vExponent](#vExponent),
+[vMultiply](#vMultiply), [vOffset](#vOffset), [vRound](#vRound), [vNull](#vNull)
+and [ifElse](#ifElse). For details, see the
 [Vega value documentation](https://vega.github.io/vega/docs/types/#Value)
 -}
 type Value
@@ -3445,6 +3253,16 @@ autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
 
+{-| Specify an interpolation fraction indicating where, for band scales, axis ticks
+should be positioned. A value of 0 places ticks at the left edge of their bands.
+A value of 0.5 places ticks in the middle of their bands. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axBandPosition : Num -> AxisProperty
+axBandPosition =
+    AxBandPosition
+
+
 {-| Indicates if the domain (the axis baseline) should be included as part of
 an axis. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
@@ -3452,6 +3270,22 @@ an axis. For details see the
 axDomain : Boo -> AxisProperty
 axDomain =
     AxDomain
+
+
+{-| Specify the color of an axis domain line. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axDomainColor : String -> AxisProperty
+axDomainColor =
+    AxDomainColor
+
+
+{-| Specify the width in pixels of an axis domain line. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axDomainWidth : Num -> AxisProperty
+axDomainWidth =
+    AxDomainWidth
 
 
 {-| Mark encodings for custom axis styling. For details see the
@@ -3496,6 +3330,23 @@ see the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 axGrid : Boo -> AxisProperty
 axGrid =
     AxGrid
+
+
+{-| Specify the color of an axis's grid lines. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axGridColor : String -> AxisProperty
+axGridColor =
+    AxGridColor
+
+
+{-| Specify the stroke dash of an axis's grid lines as a list of dash-gap lengths
+or `[]` for a solid line (default). For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axGridDash : List Value -> AxisProperty
+axGridDash =
+    AxGridDash
 
 
 {-| Name of the scale to use for including grid lines. By default grid lines are
@@ -3546,6 +3397,22 @@ axLabelBound =
     AxLabelBound
 
 
+{-| Specify the angle of text for an axis. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelAngle : Num -> AxisProperty
+axLabelAngle =
+    AxLabelAngle
+
+
+{-| Specify the color of an axis label. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelColor : String -> AxisProperty
+axLabelColor =
+    AxLabelColor
+
+
 {-| Specify how labels at the beginning or end of the axis should be aligned
 with the scale range. If `Just` a pixel distance threshold, labels with
 anchor coordinates within the threshold distance for an axis end-point will be
@@ -3566,6 +3433,39 @@ group with corresponding axis ticks. For details see the
 axLabelFlushOffset : Num -> AxisProperty
 axLabelFlushOffset =
     AxLabelFlushOffset
+
+
+{-| Specify the font name of an axis label. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelFont : String -> AxisProperty
+axLabelFont =
+    AxLabelFont
+
+
+{-| Specify the font size of an axis label. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelFontSize : Num -> AxisProperty
+axLabelFontSize =
+    AxLabelFontSize
+
+
+{-| Specify the font weight of an axis label. This can be a number (e.g. `vNum 300`)
+or text (e.g. `vStr "bold"`). For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelFontWeight : Value -> AxisProperty
+axLabelFontWeight =
+    AxLabelFontWeight
+
+
+{-| Specify the maximium length in pixels of axis tick labels. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axLabelLimit : Num -> AxisProperty
+axLabelLimit =
+    AxLabelLimit
 
 
 {-| Specify the strategy to use for resolving overlap of axis labels. For details
@@ -3630,13 +3530,12 @@ axPosition =
     AxPosition
 
 
-{-| Specify whether or not ticks should be included as part of an axis.
-For details see the
+{-| Specify the color of an axis's ticks. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axTicks : Boo -> AxisProperty
-axTicks =
-    AxTicks
+axTickColor : String -> AxisProperty
+axTickColor =
+    AxTickColor
 
 
 {-| A desired number of ticks, for axes visualizing quantitative scales. The
@@ -3649,12 +3548,57 @@ axTickCount =
     AxTickCount
 
 
+{-| Specify whether or not an extra axis tick should be added for the initial
+position of an axis. This is useful for styling axes for band scales such that
+ticks are placed on band boundaries rather in the middle of a band.
+For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTickExtra : Boo -> AxisProperty
+axTickExtra =
+    AxTickExtra
+
+
+{-| Specify the offset in pixels of an axis's ticks, labels and gridlines. For
+details see the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTickOffset : Num -> AxisProperty
+axTickOffset =
+    AxTickOffset
+
+
+{-| Specify whether or not pixel position values for an axis's ticks should be
+rounded to the nearest integer. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTickRound : Boo -> AxisProperty
+axTickRound =
+    AxTickRound
+
+
+{-| Specify whether or not ticks should be included as part of an axis.
+For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTicks : Boo -> AxisProperty
+axTicks =
+    AxTicks
+
+
 {-| Specify the size in pixels of axis ticks. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
 axTickSize : Num -> AxisProperty
 axTickSize =
     AxTickSize
+
+
+{-| Specify the width in pixels of an axis's ticks. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTickWidth : Num -> AxisProperty
+axTickWidth =
+    AxTickWidth
 
 
 {-| A title for an axis. For details see the
@@ -3665,12 +3609,95 @@ axTitle =
     AxTitle
 
 
+{-| Specify the horizontal alignment of an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleAlign : HAlign -> AxisProperty
+axTitleAlign =
+    AxTitleAlign
+
+
+{-| Specify the angle of an axis's title text. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleAngle : Num -> AxisProperty
+axTitleAngle =
+    AxTitleAngle
+
+
+{-| Specify the vertical alignment of an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleBaseline : VAlign -> AxisProperty
+axTitleBaseline =
+    AxTitleBaseline
+
+
+{-| Specify the color of an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleColor : String -> AxisProperty
+axTitleColor =
+    AxTitleColor
+
+
+{-| Specify the font to be used for an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleFont : String -> AxisProperty
+axTitleFont =
+    AxTitleFont
+
+
+{-| Specify the size of font in pixels for an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleFontSize : Num -> AxisProperty
+axTitleFontSize =
+    AxTitleFontSize
+
+
+{-| Specify the font weight of an axis's title. This can be a number (e.g. `vNum 300`)
+or text (e.g. `vStr "bold"`). For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleFontWeight : Value -> AxisProperty
+axTitleFontWeight =
+    AxTitleFontWeight
+
+
+{-| Specify the maximum allowed length of an axis's title. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleLimit : Num -> AxisProperty
+axTitleLimit =
+    AxTitleLimit
+
+
 {-| Specify an offset in pixels between an axis's labels and title. For details
 see the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
 axTitlePadding : Value -> AxisProperty
 axTitlePadding =
     AxTitlePadding
+
+
+{-| Specify the X position of an axis title relative to the axis group, overriding
+the standard layout. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleX : Num -> AxisProperty
+axTitleX =
+    AxTitleX
+
+
+{-| Specify the Y position of an axis title relative to the axis group, overriding
+the standard layout. For details see the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+-}
+axTitleY : Num -> AxisProperty
+axTitleY =
+    AxTitleY
 
 
 {-| Explicitly set an axis tick and label values. For details
@@ -3851,6 +3878,15 @@ type BoundsCalculation
     | BoundsCalculationSignal String
 
 
+{-| Indicates a type of text case transformation. Used when pre-processing text as
+part of a count pattern transformation.
+-}
+type Case
+    = Lowercase
+    | Uppercase
+    | Mixedcase
+
+
 {-| Define a color in HCL space. Each of the three triplet values can be a numeric
 literal, a signal, or subject to some scale.
 -}
@@ -4022,6 +4058,54 @@ a single page with multiple visualizations.
 combineSpecs : List LabelledSpec -> Spec
 combineSpecs specs =
     JE.object specs
+
+
+{-| Specify the names of the two output fields generated by a count pattern transformation.
+By default they are named `text` and `count`. For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+-}
+cpAs : String -> String -> CountPatternProperty
+cpAs =
+    CPAs
+
+
+{-| Specify how text case transformation to apply before performing a count pattern
+transformation. The default of `MixedCase` will leave text untransformed. For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+-}
+cpCase : Case -> CountPatternProperty
+cpCase =
+    CPCase
+
+
+{-| Specify a regular expression to define a match in a count pattern transformation.
+The parameter should be a regular expression where any backslash symbols are escaped.
+
+    TODO: Add example here with escaped backslashes.
+    cpPattern str(\\b(he|it|she|the)\\b)
+
+For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+
+-}
+cpPattern : Str -> CountPatternProperty
+cpPattern =
+    CPPattern
+
+
+{-| Specify a regular expression to define the text to ignore when performing a
+count pattern transformation. The parameter should be a regular expression where
+any backslash symbols are escaped.
+
+    TODO: Add stopwords example (e.g. `(a|the|she|it)` here with escaped backslashes.
+
+For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+
+-}
+cpStopwords : Str -> CountPatternProperty
+cpStopwords =
+    CPStopwords
 
 
 {-| Specify the names of the two output fields of a cross-product transform. For
@@ -9312,7 +9396,7 @@ function `toVega`. For example,
                         [ mFrom [ srData (str "table") ]
                         , mEncode
                             [ enEnter
-                                [ maX [ vScale (field "xscale"), vField (field "x") ]
+                                [ maX [ vScale "xscale", vField (field "x") ]
                                 , maText [ vField (field "label") ]
                                 ]
                             ]
@@ -9402,6 +9486,8 @@ The third a list of optional contour properties. The transform generates a new
 stream of GeoJSON data as output which may be visualized using either the
 `trGeoShape` or `trGeoPath` transforms.
 
+    TODO: Add example.
+
 For details see the
 [Vega contour transform documentation](https://vega.github.io/vega/docs/transforms/contour/).
 
@@ -9409,6 +9495,26 @@ For details see the
 trContour : Num -> Num -> List ContourProperty -> Transform
 trContour =
     TContour
+
+
+{-| Perform a count pattern transform that counts the number of occurrences of a
+text pattern, as defined by a regular expression. This transform will iterate
+through each data object and count all unique pattern matches found within the
+designated text field.
+
+The first parameter is the field containing the text to count, the second a list
+of optional counting properties. The transform generates two fields named `text`
+and `count` unless renamed via `cpAs`.
+
+    TODO: Add example.
+
+For details see the
+[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
+
+-}
+trCountPattern : Field -> List CountPatternProperty -> Transform
+trCountPattern =
+    TCountPattern
 
 
 {-| Perform a cross transform that computes the cross-product of a data stream
@@ -10135,11 +10241,17 @@ vRound =
     VRound
 
 
-{-| A value representing a scale either by its name or indirectly via a signal,
-parent etc.
+{-| A value representing the name of a scale.
 -}
-vScale : Field -> Value
-vScale =
+vScale : String -> Value
+vScale s =
+    VScale (field s)
+
+
+{-| A value representing a scale field used to dynamically look up a scale name.
+-}
+vScaleField : Field -> Value
+vScaleField =
     VScale
 
 
@@ -10599,6 +10711,19 @@ boundsCalculationSpec bc =
             JE.object [ signalReferenceProperty sigName ]
 
 
+caseLabel : Case -> String
+caseLabel c =
+    case c of
+        Lowercase ->
+            "lower"
+
+        Uppercase ->
+            "upper"
+
+        Mixedcase ->
+            "mixed"
+
+
 clipSpec : Clip -> Spec
 clipSpec clip =
     case clip of
@@ -10702,6 +10827,22 @@ contourProperty cnProp =
 
         CnNice b ->
             ( "nice", booSpec b )
+
+
+countPatternProperty : CountPatternProperty -> LabelledSpec
+countPatternProperty cpProp =
+    case cpProp of
+        CPPattern s ->
+            ( "pattern", strSpec s )
+
+        CPCase c ->
+            ( "case", JE.string (caseLabel c) )
+
+        CPStopwords s ->
+            ( "stopwords", strSpec s )
+
+        CPAs s1 s2 ->
+            ( "as", JE.list [ JE.string s1, JE.string s2 ] )
 
 
 crossProperty : CrossProperty -> LabelledSpec
@@ -12820,8 +12961,12 @@ transformSpec trans =
         TCollect comp ->
             JE.object [ ( "type", JE.string "collect" ), ( "sort", JE.object (comparatorProperties comp) ) ]
 
-        TCountPattern ->
-            JE.object [ ( "type", JE.string "countpattern" ) ]
+        TCountPattern f cpps ->
+            JE.object
+                (( "type", JE.string "countpattern" )
+                    :: ( "field", fieldSpec f )
+                    :: List.map countPatternProperty cpps
+                )
 
         TCross cps ->
             JE.object (( "type", JE.string "cross" ) :: List.map crossProperty cps)

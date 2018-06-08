@@ -71,7 +71,7 @@ tree1 =
                         , enUpdate
                             [ maX [ vField (field "x") ]
                             , maY [ vField (field "y") ]
-                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
                             ]
                         ]
                     ]
@@ -170,7 +170,7 @@ tree2 =
                         , enUpdate
                             [ maX [ vField (field "x") ]
                             , maY [ vField (field "y") ]
-                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
                             ]
                         ]
                     ]
@@ -252,7 +252,7 @@ tree3 =
                     , mInteractive (boo False)
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "name") ] ]
+                            [ maFill [ vScale "cScale", vField (field "name") ] ]
                         , enUpdate
                             [ maX [ vField (field "x0") ]
                             , maY [ vField (field "y0") ]
@@ -285,8 +285,8 @@ tree3 =
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             , maFill [ vStr "black" ]
                             , maText [ vField (field "name") ]
-                            , maFontSize [ vScale (field "size"), vField (field "depth") ]
-                            , maFillOpacity [ vScale (field "opacity"), vField (field "depth") ]
+                            , maFontSize [ vScale "size", vField (field "depth") ]
+                            , maFillOpacity [ vScale "opacity", vField (field "depth") ]
                             ]
                         , enUpdate
                             [ maX [ vSignal "0.5 * (datum.x0 + datum.x1)" ]
@@ -325,7 +325,7 @@ tree4 =
                     , mEncode
                         [ enEnter
                             [ maShape [ vStr "circle" ]
-                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
                             , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
                             ]
                         , enUpdate
@@ -371,7 +371,7 @@ tree5 =
                         [ enEnter
                             [ maX [ vSignal "width / 2" ]
                             , maY [ vSignal "height / 2" ]
-                            , maFill [ vScale (field "cScale"), vField (field "depth") ]
+                            , maFill [ vScale "cScale", vField (field "depth") ]
                             , maTooltip [ vSignal "datum.name + (datum.size ? ', ' + datum.size + ' bytes' : '')" ]
                             ]
                         , enUpdate

@@ -116,9 +116,9 @@ areaTest =
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xscale"), vField (field "u") ]
-                            , maY [ vScale (field "yscale"), vField (field "v") ]
-                            , maY2 [ vScale (field "yscale"), vSignal "y2" ]
+                            [ maX [ vScale "xscale", vField (field "u") ]
+                            , maY [ vScale "yscale", vField (field "v") ]
+                            , maY2 [ vScale "yscale", vSignal "y2" ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maInterpolate [ vSignal "interpolate" ]
                             , maTension [ vSignal "tension" ]
@@ -284,8 +284,8 @@ lineTest =
                     , mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xscale"), vField (field "u") ]
-                            , maY [ vScale (field "yscale"), vField (field "v") ]
+                            [ maX [ vScale "xscale", vField (field "u") ]
+                            , maY [ vScale "yscale", vField (field "v") ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maInterpolate [ vSignal "interpolate" ]
                             , maTension [ vSignal "tension" ]
@@ -648,9 +648,9 @@ trailTest =
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xscale"), vField (field "u") ]
-                            , maY [ vScale (field "yscale"), vField (field "v") ]
-                            , maSize [ vScale (field "zscale"), vField (field "v"), vMultiply (vSignal "size") ]
+                            [ maX [ vScale "xscale", vField (field "u") ]
+                            , maY [ vScale "yscale", vField (field "v") ]
+                            , maSize [ vScale "zscale", vField (field "v"), vMultiply (vSignal "size") ]
                             , maDefined [ vSignal "defined || datum.u !== 3" ]
                             , maOpacity [ vNum 1 ]
                             ]

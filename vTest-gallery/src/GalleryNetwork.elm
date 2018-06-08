@@ -226,7 +226,7 @@ force1 =
                         ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "group") ]
+                            [ maFill [ vScale "cScale", vField (field "group") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
@@ -356,10 +356,10 @@ matrix1 =
                     [ mFrom [ srData (str "cross") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "position"), vField (field "a.order") ]
-                            , maY [ vScale (field "position"), vField (field "b.order") ]
-                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
-                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
+                            [ maX [ vScale "position", vField (field "a.order") ]
+                            , maY [ vScale "position", vField (field "b.order") ]
+                            , maWidth [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
                             , maFill [ ifElse "datum.a === src || datum.b === src" [ vStr "#ddd" ] [ vStr "#f5f5f5" ] ]
                             ]
                         ]
@@ -368,11 +368,11 @@ matrix1 =
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "position"), vField (field "sourceNode.order") ]
-                            , maY [ vScale (field "position"), vField (field "targetNode.order") ]
-                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
-                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
-                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            [ maX [ vScale "position", vField (field "sourceNode.order") ]
+                            , maY [ vScale "position", vField (field "targetNode.order") ]
+                            , maWidth [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ vScale "cScale", vField (field "group") ]
                             ]
                         ]
                     ]
@@ -380,11 +380,11 @@ matrix1 =
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
-                            [ maY [ vScale (field "position"), vField (field "sourceNode.order") ]
-                            , maX [ vScale (field "position"), vField (field "targetNode.order") ]
-                            , maWidth [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
-                            , maHeight [ vScale (field "position"), vBand (num 1), vOffset (vNum -1) ]
-                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            [ maY [ vScale "position", vField (field "sourceNode.order") ]
+                            , maX [ vScale "position", vField (field "targetNode.order") ]
+                            , maWidth [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
+                            , maHeight [ vScale "position", vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ vScale "cScale", vField (field "group") ]
                             ]
                         ]
                     ]
@@ -393,7 +393,7 @@ matrix1 =
                     , mFrom [ srData (str "nodes") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "position"), vField (field "order"), vBand (num 1) ]
+                            [ maX [ vScale "position", vField (field "order"), vBand (num 1) ]
                             , maY [ vOffset (vNum -2) ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vNum 10 ]
@@ -409,7 +409,7 @@ matrix1 =
                     , mFrom [ srData (str "nodes") ]
                     , mEncode
                         [ enUpdate
-                            [ maY [ vScale (field "position"), vField (field "order"), vBand (num 0.5) ]
+                            [ maY [ vScale "position", vField (field "order"), vBand (num 0.5) ]
                             , maX [ vOffset (vNum -2) ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vNum 10 ]
@@ -477,10 +477,10 @@ arc1 =
                     , mEncode
                         [ enEnter [ maOpacity [ vNum 0 ] ]
                         , enUpdate
-                            [ maX [ vScale (field "position"), vField (field "order") ]
+                            [ maX [ vScale "position", vField (field "order") ]
                             , maY [ vNum 0 ]
                             , maSize [ vField (field "degree"), vMultiply (vNum 5), vOffset (vNum 10) ]
-                            , maFill [ vScale (field "cScale"), vField (field "group") ]
+                            , maFill [ vScale "cScale", vField (field "group") ]
                             ]
                         ]
                     ]
@@ -522,7 +522,7 @@ arc1 =
                     [ mFrom [ srData (str "nodes") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "position"), vField (field "order") ]
+                            [ maX [ vScale "position", vField (field "order") ]
                             , maY [ vNum 7 ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vNum 9 ]
@@ -629,7 +629,7 @@ map1 =
                     [ mFrom [ srData (str "airports") ]
                     , mEncode
                         [ enEnter
-                            [ maSize [ vScale (field "size"), vField (field "traffic.flights") ]
+                            [ maSize [ vScale "size", vField (field "traffic.flights") ]
                             , maFill [ vStr "steelblue" ]
                             , maFillOpacity [ vNum 0.8 ]
                             , maStroke [ vStr "white" ]

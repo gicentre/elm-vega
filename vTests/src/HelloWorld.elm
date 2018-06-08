@@ -28,7 +28,7 @@ helloWorld =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xscale"), vField (field "x") ]
+                            [ maX [ vScale "xscale", vField (field "x") ]
                             , maText [ vField (field "label") ]
                             ]
                         ]

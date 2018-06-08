@@ -69,9 +69,9 @@ lineChart1 =
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "x") ]
-                            , maY [ vScale (field "yScale"), vField (field "y") ]
-                            , maStroke [ vScale (field "cScale"), vField (field "c") ]
+                            [ maX [ vScale "xScale", vField (field "x") ]
+                            , maY [ vScale "yScale", vField (field "y") ]
+                            , maStroke [ vScale "cScale", vField (field "c") ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
                         , enUpdate [ maInterpolate [ vSignal "interpolate" ], maStrokeOpacity [ vNum 1 ] ]
@@ -128,9 +128,9 @@ areaChart1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "u") ]
-                            , maY [ vScale (field "yScale"), vField (field "v") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "v") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enUpdate [ maInterpolate [ vSignal "interpolate" ], maFillOpacity [ vNum 1 ] ]
@@ -202,10 +202,10 @@ areaChart2 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , maX [ vScale (field "xScale"), vField (field "x") ]
-                            , maY [ vScale (field "yScale"), vField (field "y0") ]
-                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
-                            , maFill [ vScale (field "cScale"), vField (field "c") ]
+                            , maX [ vScale "xScale", vField (field "x") ]
+                            , maY [ vScale "yScale", vField (field "y0") ]
+                            , maY2 [ vScale "yScale", vField (field "y1") ]
+                            , maFill [ vScale "cScale", vField (field "c") ]
                             ]
                         , enUpdate [ maFillOpacity [ vNum 1 ] ]
                         , enHover [ maFillOpacity [ vNum 0.5 ] ]
@@ -296,12 +296,12 @@ areaChart3 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
-                            , maX [ vScale (field "xScale"), vField (field "x") ]
+                            , maX [ vScale "xScale", vField (field "x") ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (field "yScale"), vField (field "y") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maY [ vScale "yScale", vField (field "y") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFillOpacity [ vSignal "opacity" ]
                             ]
                         ]
@@ -427,11 +427,11 @@ areaChart4 =
                     [ mFrom [ srData (str "facet") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "year") ]
-                            , maY [ vScale (field "yScale"), vField (field "y0") ]
-                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
-                            , maFill [ vScale (field "cScale"), vField (field "sex") ]
-                            , maFillOpacity [ vScale (field "alphaScale"), vField (fParent (field "sum")) ]
+                            [ maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "y0") ]
+                            , maY2 [ vScale "yScale", vField (field "y1") ]
+                            , maFill [ vScale "cScale", vField (field "sex") ]
+                            , maFillOpacity [ vScale "alphaScale", vField (fParent (field "sum")) ]
                             ]
                         , enHover [ maFillOpacity [ vNum 0.2 ] ]
                         ]
@@ -451,14 +451,14 @@ areaChart4 =
                     , mInteractive (boo False)
                     , mEncode
                         [ enUpdate
-                            [ maX [ vField (field "argmax.year"), vScale (field "xScale") ]
-                            , maDx [ vField (field "argmax.year"), vScale (field "offsetScale") ]
+                            [ maX [ vField (field "argmax.year"), vScale "xScale" ]
+                            , maDx [ vField (field "argmax.year"), vScale "offsetScale" ]
                             , maY [ vSignal "scale('yScale', 0.5 * (datum.argmax.y0 + datum.argmax.y1))" ]
                             , maFill [ vStr "#000" ]
-                            , maFillOpacity [ vField (field "argmax.perc"), vScale (field "opacityScale") ]
-                            , maFontSize [ vField (field "argmax.perc"), vScale (field "fontScale"), vOffset (vNum 5) ]
+                            , maFillOpacity [ vField (field "argmax.perc"), vScale "opacityScale" ]
+                            , maFontSize [ vField (field "argmax.perc"), vScale "fontScale", vOffset (vNum 5) ]
                             , maText [ vField (field "job") ]
-                            , maAlign [ vField (field "argmax.year"), vScale (field "alignScale") ]
+                            , maAlign [ vField (field "argmax.year"), vScale "alignScale" ]
                             , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
                             ]
                         ]

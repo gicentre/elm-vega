@@ -76,9 +76,9 @@ scatterplot1 =
                     [ mFrom [ srData (str "cars") ]
                     , mEncode
                         [ enUpdate <|
-                            [ maX [ vScale (field "xScale"), vField (field "Horsepower") ]
-                            , maY [ vScale (field "yScale"), vField (field "Miles_per_Gallon") ]
-                            , maSize [ vScale (field "sizeScale"), vField (field "Acceleration") ]
+                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
+                            , maSize [ vScale "sizeScale", vField (field "Acceleration") ]
                             ]
                                 ++ shapeEncoding
                         ]
@@ -137,8 +137,8 @@ scatterplot2 =
                             , maTooltip [ vField (field "tooltip") ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vField (fSignal "xField") ]
-                            , maY [ vScale (field "yScale"), vField (fSignal "yField") ]
+                            [ maX [ vScale "xScale", vField (fSignal "xField") ]
+                            , maY [ vScale "yScale", vField (fSignal "yField") ]
                             , maFill [ vStr "steelblue" ]
                             , maFillOpacity [ vNum 0.5 ]
                             , maZIndex [ vNum 0 ]
@@ -158,7 +158,7 @@ scatterplot2 =
                             , maTooltip [ vField (field "tooltip") ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vField (fSignal "xField") ]
+                            [ maX [ vScale "xScale", vField (fSignal "xField") ]
                             , maY [ vSignal "height - nullSize/2" ]
                             , maFill [ vStr "#aaa" ]
                             , maFillOpacity [ vNum 0.2 ]
@@ -178,7 +178,7 @@ scatterplot2 =
                             ]
                         , enUpdate
                             [ maX [ vSignal "nullSize/2" ]
-                            , maY [ vScale (field "yScale"), vField (fSignal "yField") ]
+                            , maY [ vScale "yScale", vField (fSignal "yField") ]
                             , maFill [ vStr "#aaa" ]
                             , maFillOpacity [ vNum 0.2 ]
                             , maZIndex [ vNum 1 ]
@@ -317,8 +317,8 @@ scatterplot3 =
                     , mEncode
                         [ enEnter
                             [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
-                            , maX [ vScale (field "xScale"), vField (field "miles") ]
-                            , maY [ vScale (field "yScale"), vField (field "gas") ]
+                            , maX [ vScale "xScale", vField (field "miles") ]
+                            , maY [ vScale "yScale", vField (field "gas") ]
                             , maStroke [ vStr "#000" ]
                             , maStrokeWidth [ vNum 3 ]
                             ]
@@ -328,8 +328,8 @@ scatterplot3 =
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "miles") ]
-                            , maY [ vScale (field "yScale"), vField (field "gas") ]
+                            [ maX [ vScale "xScale", vField (field "miles") ]
+                            , maY [ vScale "yScale", vField (field "gas") ]
                             , maFill [ vStr "#fff" ]
                             , maStroke [ vStr "#000" ]
                             , maStrokeWidth [ vNum 1 ]
@@ -341,14 +341,14 @@ scatterplot3 =
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "miles") ]
-                            , maY [ vScale (field "yScale"), vField (field "gas") ]
-                            , maDx [ vScale (field "dx"), vField (field "side") ]
-                            , maDy [ vScale (field "dy"), vField (field "side") ]
+                            [ maX [ vScale "xScale", vField (field "miles") ]
+                            , maY [ vScale "yScale", vField (field "gas") ]
+                            , maDx [ vScale "dx", vField (field "side") ]
+                            , maDy [ vScale "dy", vField (field "side") ]
                             , maFill [ vStr "#000" ]
                             , maText [ vField (field "year") ]
-                            , maAlign [ vScale (field "alignScale"), vField (field "side") ]
-                            , maBaseline [ vScale (field "baseScale"), vField (field "side") ]
+                            , maAlign [ vScale "alignScale", vField (field "side") ]
+                            , maBaseline [ vScale "baseScale", vField (field "side") ]
                             ]
                         ]
                     ]
@@ -431,9 +431,9 @@ scatterplot4 =
                     , mEncode
                         [ enEnter [ maFill [ vStr "black" ], maHeight [ vNum 1 ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vSignal "datum[measure+'0']" ]
-                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand (num 0.5) ]
-                            , maX2 [ vScale (field "xScale"), vSignal "datum[measure+'1']" ]
+                            [ maX [ vScale "xScale", vSignal "datum[measure+'0']" ]
+                            , maY [ vScale "yScale", vField (field "variety"), vBand (num 0.5) ]
+                            , maX2 [ vScale "xScale", vSignal "datum[measure+'1']" ]
                             ]
                         ]
                     ]
@@ -442,8 +442,8 @@ scatterplot4 =
                     , mEncode
                         [ enEnter [ maFill [ vStr "back" ], maSize [ vNum 40 ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "mean") ]
-                            , maY [ vScale (field "yScale"), vField (field "variety"), vBand (num 0.5) ]
+                            [ maX [ vScale "xScale", vField (field "mean") ]
+                            , maY [ vScale "yScale", vField (field "variety"), vBand (num 0.5) ]
                             ]
                         ]
                     ]
@@ -514,9 +514,9 @@ scatterplot5 =
                     [ mFrom [ srData (str "sites") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "yield") ]
-                            , maY [ vScale (field "yScale"), vField (field "variety") ]
-                            , maStroke [ vScale (field "cScale"), vField (field "year") ]
+                            [ maX [ vScale "xScale", vField (field "yield") ]
+                            , maY [ vScale "yScale", vField (field "variety") ]
+                            , maStroke [ vScale "cScale", vField (field "year") ]
                             , maStrokeWidth [ vNum 2 ]
                             , maSize [ vNum 50 ]
                             ]
@@ -556,7 +556,7 @@ scatterplot5 =
                     , mEncode
                         [ enEnter
                             [ maY
-                                [ vScale (field "gScale")
+                                [ vScale "gScale"
                                 , vField (field "site")
                                 , vOffset (vSignal "offset")
                                 ]

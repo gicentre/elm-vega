@@ -49,7 +49,7 @@ packTest1 =
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "id") ]
+                            [ maFill [ vScale "cScale", vField (field "id") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate
@@ -155,15 +155,15 @@ stackTest1 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "key") ]
+                            [ maFill [ vScale "cScale", vField (field "key") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1 ]
-                            , maX [ vScale (field "xScale"), vField (field "key"), vOffset (vNum 0.5) ]
-                            , maWidth [ vScale (field "xScale"), vBand (num 1) ]
+                            , maX [ vScale "xScale", vField (field "key"), vOffset (vNum 0.5) ]
+                            , maWidth [ vScale "xScale", vBand (num 1) ]
                             ]
                         , enUpdate
-                            [ maY [ vScale (field "yScale"), vField (field "y0"), vOffset (vNum 0.5) ]
-                            , maY2 [ vScale (field "yScale"), vField (field "y1"), vOffset (vNum 0.5) ]
+                            [ maY [ vScale "yScale", vField (field "y0"), vOffset (vNum 0.5) ]
+                            , maY2 [ vScale "yScale", vField (field "y1"), vOffset (vNum 0.5) ]
                             ]
                         ]
                     ]
@@ -259,7 +259,7 @@ forceTest1 =
                         ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "group") ]
+                            [ maFill [ vScale "cScale", vField (field "group") ]
                             , maStroke [ vStr "white" ]
                             ]
                         , enUpdate

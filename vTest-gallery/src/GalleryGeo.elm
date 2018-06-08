@@ -84,7 +84,7 @@ geo1 =
                     [ mFrom [ srData (str "counties") ]
                     , mEncode
                         [ enEnter [ maTooltip [ vSignal "format(datum.rate, '0.1%')" ] ]
-                        , enUpdate [ maFill [ vScale (field "cScale"), vField (field "rate") ] ]
+                        , enUpdate [ maFill [ vScale "cScale", vField (field "rate") ] ]
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -154,8 +154,8 @@ geo2 =
                     , mFrom [ srData (str "obesity") ]
                     , mEncode
                         [ enEnter
-                            [ maSize [ vScale (field "sizeScale"), vField (field "rate") ]
-                            , maFill [ vScale (field "cScale"), vField (field "rate") ]
+                            [ maSize [ vScale "sizeScale", vField (field "rate") ]
+                            , maFill [ vScale "cScale", vField (field "rate") ]
                             , maStroke [ vStr "white" ]
                             , maStrokeWidth [ vNum 1.5 ]
                             , maX [ vField (field "myCentroid[0]") ]
@@ -777,7 +777,7 @@ geo8 inData =
                     [ mFrom [ srData (str "contours") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale (field "cScale"), vField (field "value") ]
+                            [ maFill [ vScale "cScale", vField (field "value") ]
                             , maStroke [ vStr "#bbb" ]
                             , maStrokeWidth [ vNum 0.5 ]
                             ]

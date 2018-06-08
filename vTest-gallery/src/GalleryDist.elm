@@ -73,10 +73,10 @@ histo1 =
                     [ mFrom [ srData (str "binned") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "bin0") ]
-                            , maX2 [ vScale (field "xScale"), vField (field "bin1"), vOffset (vSignal "binStep > 0.02 ? -0.5 : 0") ]
-                            , maY [ vScale (field "yScale"), vField (field "count") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maX [ vScale "xScale", vField (field "bin0") ]
+                            , maX2 [ vScale "xScale", vField (field "bin1"), vOffset (vSignal "binStep > 0.02 ? -0.5 : 0") ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -86,7 +86,7 @@ histo1 =
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "u") ]
+                            [ maX [ vScale "xScale", vField (field "u") ]
                             , maWidth [ vNum 1 ]
                             , maY [ vNum 25, vOffset (vSignal "height") ]
                             , maHeight [ vNum 5 ]
@@ -174,10 +174,10 @@ histo2 =
                     [ mFrom [ srData (str "counts") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "bin0"), vOffset (vNum 1) ]
-                            , maX2 [ vScale (field "xScale"), vField (field "bin1") ]
-                            , maY [ vScale (field "yScale"), vField (field "count") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maX [ vScale "xScale", vField (field "bin0"), vOffset (vNum 1) ]
+                            , maX2 [ vScale "xScale", vField (field "bin1") ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFill [ vStr "steelblue" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -187,10 +187,10 @@ histo2 =
                     [ mFrom [ srData (str "nulls") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScaleNull"), vNull, vOffset (vNum 1) ]
-                            , maX2 [ vScale (field "xScaleNull"), vBand (num 1) ]
-                            , maY [ vScale (field "yScale"), vField (field "count") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maX [ vScale "xScaleNull", vNull, vOffset (vNum 1) ]
+                            , maX2 [ vScale "xScaleNull", vBand (num 1) ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFill [ vStr "#aaa" ]
                             ]
                         , enHover [ maFill [ vStr "firebrick" ] ]
@@ -278,9 +278,9 @@ density1 =
                     [ mFrom [ srData (str "density") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "value") ]
-                            , maY [ vScale (field "yScale"), vField (field "density") ]
-                            , maY2 [ vScale (field "yScale"), vNum 0 ]
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "density") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
                             , maFill [ vSignal "scale('cScale', 'Kernel Density Estimate')" ]
                             ]
                         ]
@@ -289,8 +289,8 @@ density1 =
                     [ mFrom [ srData (str "normal") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "value") ]
-                            , maY [ vScale (field "yScale"), vField (field "density") ]
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "density") ]
                             , maStroke [ vSignal "scale('cScale', 'Normal Estimate')" ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
@@ -300,7 +300,7 @@ density1 =
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale (field "xScale"), vField (field "u") ]
+                            [ maX [ vScale "xScale", vField (field "u") ]
                             , maWidth [ vNum 1 ]
                             , maY [ vNum 25, vOffset (vSignal "height") ]
                             , maHeight [ vNum 5 ]
@@ -358,7 +358,7 @@ boxplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand (num 0.5) ]
+                            [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -389,8 +389,8 @@ boxplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2", vOffset (vNum -0.5) ]
-                            , maX [ vScale (field "xScale"), vField (field "min") ]
-                            , maX2 [ vScale (field "xScale"), vField (field "max") ]
+                            , maX [ vScale "xScale", vField (field "min") ]
+                            , maX2 [ vScale "xScale", vField (field "max") ]
                             ]
                         ]
                     ]
@@ -404,8 +404,8 @@ boxplot1 =
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
                             , maHeight [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (field "xScale"), vField (field "q1") ]
-                            , maX2 [ vScale (field "xScale"), vField (field "q3") ]
+                            , maX [ vScale "xScale", vField (field "q1") ]
+                            , maX2 [ vScale "xScale", vField (field "q3") ]
                             ]
                         ]
                     ]
@@ -419,7 +419,7 @@ boxplot1 =
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
                             , maHeight [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (field "xScale"), vField (field "median") ]
+                            , maX [ vScale "xScale", vField (field "median") ]
                             ]
                         ]
                     ]
@@ -474,7 +474,7 @@ violinplot1 =
                     [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
                     , mEncode
                         [ enEnter
-                            [ maYC [ vScale (field "layout"), vField (field "organ"), vBand (num 0.5) ]
+                            [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]
                             , maHeight [ vSignal "plotWidth" ]
                             , maWidth [ vSignal "width" ]
                             ]
@@ -518,11 +518,11 @@ violinplot1 =
                 << mark Area
                     [ mFrom [ srData (str "density") ]
                     , mEncode
-                        [ enEnter [ maFill [ vScale (field "cScale"), vField (fParent (field "organ")) ] ]
+                        [ enEnter [ maFill [ vScale "cScale", vField (fParent (field "organ")) ] ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "value") ]
-                            , maY [ vScale (field "yScale"), vField (field "y0") ]
-                            , maY2 [ vScale (field "yScale"), vField (field "y1") ]
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "y0") ]
+                            , maY2 [ vScale "yScale", vField (field "y1") ]
                             ]
                         ]
                     ]
@@ -535,8 +535,8 @@ violinplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (field "xScale"), vField (field "q1") ]
-                            , maX2 [ vScale (field "xScale"), vField (field "q3") ]
+                            , maX [ vScale "xScale", vField (field "q1") ]
+                            , maX2 [ vScale "xScale", vField (field "q3") ]
                             ]
                         ]
                     ]
@@ -550,7 +550,7 @@ violinplot1 =
                             ]
                         , enUpdate
                             [ maYC [ vSignal "plotWidth / 2" ]
-                            , maX [ vScale (field "xScale"), vField (field "median") ]
+                            , maX [ vScale "xScale", vField (field "median") ]
                             ]
                         ]
                     ]
@@ -634,10 +634,10 @@ window1 =
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vNum 0 ]
-                            , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
-                            , maY [ vScale (field "yScale"), vField (field "Director") ]
-                            , maHeight [ vScale (field "yScale"), vBand (num 1) ]
+                            [ maX [ vScale "xScale", vNum 0 ]
+                            , maX2 [ vScale "xScale", vField (field "Gross") ]
+                            , maY [ vScale "yScale", vField (field "Director") ]
+                            , maHeight [ vScale "yScale", vBand (num 1) ]
                             ]
                         ]
                     ]
@@ -732,10 +732,10 @@ window2 =
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vNum 0 ]
-                            , maX2 [ vScale (field "xScale"), vField (field "Gross") ]
-                            , maY [ vScale (field "yScale"), vField (field "Category") ]
-                            , maHeight [ vScale (field "yScale"), vBand (num 1) ]
+                            [ maX [ vScale "xScale", vNum 0 ]
+                            , maX2 [ vScale "xScale", vField (field "Gross") ]
+                            , maY [ vScale "yScale", vField (field "Category") ]
+                            , maHeight [ vScale "yScale", vBand (num 1) ]
                             ]
                         ]
                     ]
@@ -826,9 +826,9 @@ scatter1 =
                     , mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vSignal "(datum.hp0 + datum.hp1) / 2" ]
-                            , maY [ vScale (field "yScale"), vSignal "(datum.mpg0 + datum.mpg1) / 2" ]
-                            , maSize [ vScale (field "sizeScale"), vField (field "count") ]
+                            [ maX [ vScale "xScale", vSignal "(datum.hp0 + datum.hp1) / 2" ]
+                            , maY [ vScale "yScale", vSignal "(datum.mpg0 + datum.mpg1) / 2" ]
+                            , maSize [ vScale "sizeScale", vField (field "count") ]
                             , maShape [ vStr "circle" ]
                             , maStrokeWidth [ vNum 2 ]
                             , maStroke [ vStr "#4682b4" ]
@@ -916,7 +916,7 @@ contour1 =
                         [ enEnter
                             [ maStroke [ vStr "#888" ]
                             , maStrokeWidth [ vNum 1 ]
-                            , maFill [ vScale (field "cScale"), vField (field "value") ]
+                            , maFill [ vScale "cScale", vField (field "value") ]
                             , maFillOpacity [ vNum 0.35 ]
                             ]
                         ]
@@ -927,8 +927,8 @@ contour1 =
                     , mFrom [ srData (str "source") ]
                     , mEncode
                         [ enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "Horsepower") ]
-                            , maY [ vScale (field "yScale"), vField (field "Miles_per_Gallon") ]
+                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
                             , maSize [ vNum 4 ]
                             , maFill [ ifElse "points" [ vStr "black" ] [ vStr "transparent" ] ]
                             ]
@@ -1010,8 +1010,8 @@ wheat1 =
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         , enUpdate
-                            [ maX [ vScale (field "xScale"), vField (field "u") ]
-                            , maY [ vScale (field "yScale"), vField (field "y0") ]
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "y0") ]
                             , maSize [ vSignal "symbolDiameter * symbolDiameter" ]
                             , maStroke [ vStr "steelblue" ]
                             ]
