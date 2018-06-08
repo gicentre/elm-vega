@@ -53,7 +53,7 @@ tree1 =
                 << scale "cScale"
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
-                    , scRange (raScheme "magma" [])
+                    , scRange (raScheme (str "magma") [])
                     , scZero (boo True)
                     ]
 
@@ -146,7 +146,7 @@ tree2 =
                 << scale "cScale"
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
-                    , scRange (raScheme "magma" [])
+                    , scRange (raScheme (str "magma") [])
                     , scZero (boo True)
                     ]
 
@@ -316,7 +316,7 @@ tree4 =
                 ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20") []) ]
 
         mk =
             marks
@@ -361,7 +361,7 @@ tree5 =
                 ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "tableau20" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "tableau20") []) ]
 
         mk =
             marks

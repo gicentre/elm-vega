@@ -43,7 +43,7 @@ circularChart1 =
                 << signal "sort" [ siValue (vBoo False), siBind (iCheckbox []) ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20") []) ]
 
         mk =
             marks

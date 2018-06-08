@@ -213,7 +213,7 @@ force1 =
                     ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20c" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20c") []) ]
 
         mk =
             marks

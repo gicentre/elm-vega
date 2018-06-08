@@ -40,7 +40,7 @@ packTest1 =
             scales
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raScheme "category20" [])
+                    , scRange (raScheme (str "category20") [])
                     ]
 
         mk =
@@ -146,7 +146,7 @@ stackTest1 =
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raScheme "category10" [])
+                    , scRange (raScheme (str "category10") [])
                     ]
 
         mk =
@@ -246,7 +246,7 @@ forceTest1 =
                     ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme "category20c" []) ]
+            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20c") []) ]
 
         mk =
             marks

@@ -2163,9 +2163,9 @@ and [csExtent](#csExtent). For details see the
 [Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
 -}
 type ColorSchemeProperty
-    = SScheme String
-    | SCount Float
-    | SExtent Float Float
+    = SScheme Str
+    | SCount Num
+    | SExtent Num
 
 
 {-| Defines a custom color value. Can use a variety of color spaces such as RGB,
@@ -2889,7 +2889,7 @@ type ScaleRange
     | RStrs (List String)
     | RValues (List Value)
     | RSignal String
-    | RScheme String (List ColorSchemeProperty)
+    | RScheme Str (List ColorSchemeProperty)
     | RData DataReference
     | RStep Value
     | RDefault RangeDefault
@@ -4055,25 +4055,27 @@ for scale types such as quantize, which use the length of the scale range to
 determine the number of discrete bins for the scale domain. For details see the
 [Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
 -}
-csCount : Float -> ColorSchemeProperty
+csCount : Num -> ColorSchemeProperty
 csCount =
     SCount
 
 
 {-| Specify the extent of the color range to use in sequential and diverging color
-schemes. For example [0.2, 1] will rescale the color scheme such that color values
-in the range [0, 0.2] are excluded from the scheme. For details see the
+schemes. The parameter should evalute to a two-element array representing the min
+and max values of the extent. For example [0.2, 1] will rescale the color scheme
+such that color values in the range [0, 0.2] are excluded from the scheme.
+For details see the
 [Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
 -}
-csExtent : Float -> Float -> ColorSchemeProperty
-csExtent mn mx =
-    SExtent mn mx
+csExtent : Num -> ColorSchemeProperty
+csExtent =
+    SExtent
 
 
 {-| Specify the name of a color scheme to use. For details see the
 [Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
 -}
-csScheme : String -> ColorSchemeProperty
+csScheme : Str -> ColorSchemeProperty
 csScheme =
     SScheme
 
@@ -8121,9 +8123,9 @@ the name of the colour scheme to use, the second any customising properties.
 For details see the
 [Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
 -}
-raScheme : String -> List ColorSchemeProperty -> ScaleRange
-raScheme s =
-    RScheme s
+raScheme : Str -> List ColorSchemeProperty -> ScaleRange
+raScheme =
+    RScheme
 
 
 {-| A signal name used to generate a scale range. For details see the
@@ -12451,14 +12453,14 @@ scaleProperty scaleProp =
 schemeProperty : ColorSchemeProperty -> LabelledSpec
 schemeProperty sProps =
     case sProps of
-        SScheme sName ->
-            ( "scheme", JE.string sName )
+        SScheme s ->
+            ( "scheme", strSpec s )
 
-        SCount x ->
-            ( "count", JE.float x )
+        SCount n ->
+            ( "count", numSpec n )
 
-        SExtent mn mx ->
-            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
+        SExtent n ->
+            numArrayProperty 2 "extent" n
 
 
 sideLabel : Side -> String
