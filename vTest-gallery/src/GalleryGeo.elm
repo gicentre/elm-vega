@@ -73,7 +73,7 @@ geo1 =
                 << legend
                     [ leFill "cScale"
                     , leOrient BottomRight
-                    , leTitle "Unemployment"
+                    , leTitle (str "Unemployment")
                     , leFormat "0.1%"
                     , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
@@ -138,7 +138,7 @@ geo2 =
         lg =
             legends
                 << legend
-                    [ leTitle "Percentage of Obese Adults"
+                    [ leTitle (str "Percentage of Obese Adults")
                     , leOrient BottomRight
                     , leType LSymbol
                     , leSize "sizeScale"

@@ -73,7 +73,7 @@ bundle1 =
                 << legend
                     [ leStroke "cScale"
                     , leOrient BottomRight
-                    , leTitle "Dependencies"
+                    , leTitle (str "Dependencies")
                     , leEncode [ enSymbols [ enEnter [ maShape [ vStr "M-0.5,0H1" ] ] ] ]
                     ]
 

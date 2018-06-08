@@ -807,7 +807,7 @@ scatter1 =
             legends
                 << legend
                     [ leSize "sizeScale"
-                    , leTitle "Count"
+                    , leTitle (str "Count")
                     , leEncode
                         [ enSymbols
                             [ enUpdate

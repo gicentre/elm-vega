@@ -65,7 +65,7 @@ scatterplot1 =
             legends
                 << legend
                     [ leSize "sizeScale"
-                    , leTitle "Acceleration"
+                    , leTitle (str "Acceleration")
                     , leFormat "s"
                     , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
@@ -543,7 +543,7 @@ scatterplot5 =
             legends
                 << legend
                     [ leStroke "cScale"
-                    , leTitle "Year"
+                    , leTitle (str "Year")
                     , lePadding (vNum 4)
                     , leEncode [ enSymbols [ enEnter [ maStrokeWidth [ vNum 2 ], maSize [ vNum 50 ] ] ] ]
                     ]

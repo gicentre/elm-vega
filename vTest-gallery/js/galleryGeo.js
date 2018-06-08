@@ -16608,7 +16608,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
-				_1: _elm_lang$core$Json_Encode$string(_p136._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p136._0)
 			};
 		case 'LeTitleAlign':
 			return {
@@ -21796,7 +21796,8 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 				_gicentre$elm_vega$Vega$legend,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$leTitle('Percentage of Obese Adults'),
+					_0: _gicentre$elm_vega$Vega$leTitle(
+						_gicentre$elm_vega$Vega$str('Percentage of Obese Adults')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$BottomRight),
@@ -22167,7 +22168,8 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 						_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$BottomRight),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$leTitle('Unemployment'),
+							_0: _gicentre$elm_vega$Vega$leTitle(
+								_gicentre$elm_vega$Vega$str('Unemployment')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$leFormat('0.1%'),

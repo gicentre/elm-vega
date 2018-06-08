@@ -186,7 +186,7 @@ barChart3 =
                 << scale "cScale"
                     [ scType ScOrdinal
                     , scDomain (doData [ daDataset "table", daField (field "position") ])
-                    , scRange (raScheme "category20" [])
+                    , scRange (raScheme (str "category20") [])
                     ]
 
         ax =

@@ -2604,7 +2604,7 @@ type LegendProperty
     | LeSymbolType Symbol
       -- TODO: Need to account for temporal units and intervals for ticks
     | LeTickCount Int
-    | LeTitle String
+    | LeTitle Str
     | LeTitleAlign HAlign
     | LeTitleBaseline VAlign
     | LeTitleColor String
@@ -6206,7 +6206,7 @@ leTickCount =
 {-| Specify the title for the legend (none by default). For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leTitle : String -> LegendProperty
+leTitle : Str -> LegendProperty
 leTitle =
     LeTitle
 
@@ -11539,7 +11539,7 @@ legendProperty lp =
             ( "titlePadding", valueSpec val )
 
         LeTitle t ->
-            ( "title", JE.string t )
+            ( "title", strSpec t )
 
         LeTitleAlign ha ->
             ( "titleAlign", JE.string (hAlignLabel ha) )

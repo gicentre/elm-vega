@@ -7704,7 +7704,7 @@
       {
         "name": "leTitle",
         "comment": " Specify the title for the legend (none by default). For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leTitleAlign",

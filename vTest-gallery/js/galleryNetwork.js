@@ -15835,7 +15835,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
-				_1: _elm_lang$core$Json_Encode$string(_p136._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p136._0)
 			};
 		case 'LeTitleAlign':
 			return {
@@ -22453,7 +22453,8 @@ var _gicentre$elm_vega$GalleryNetwork$bundle1 = function () {
 						_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$BottomRight),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$leTitle('Dependencies'),
+							_0: _gicentre$elm_vega$Vega$leTitle(
+								_gicentre$elm_vega$Vega$str('Dependencies')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$leEncode(

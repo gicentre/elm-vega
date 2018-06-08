@@ -15835,7 +15835,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'title',
-				_1: _elm_lang$core$Json_Encode$string(_p136._0)
+				_1: _user$project$Vega$strSpec(_p136._0)
 			};
 		case 'LeTitleAlign':
 			return {
