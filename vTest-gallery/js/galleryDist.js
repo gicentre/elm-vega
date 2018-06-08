@@ -15346,25 +15346,25 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'maxExtent',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p130._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p130._0)
 			};
 		case 'AxMinExtent':
 			return {
 				ctor: '_Tuple2',
 				_0: 'minExtent',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p130._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p130._0)
 			};
 		case 'AxOffset':
 			return {
 				ctor: '_Tuple2',
 				_0: 'offset',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p130._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p130._0)
 			};
 		case 'AxPosition':
 			return {
 				ctor: '_Tuple2',
 				_0: 'position',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p130._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p130._0)
 			};
 		case 'AxTicks':
 			return {
@@ -15474,7 +15474,7 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titlePadding',
-				_1: _gicentre$elm_vega$Vega$numSpec(_p130._0)
+				_1: _gicentre$elm_vega$Vega$valueSpec(_p130._0)
 			};
 		case 'AxTitleX':
 			return {
@@ -15892,7 +15892,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p136._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p136._0)
 			};
 	}
 };
@@ -16011,7 +16011,7 @@ var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'zindex',
-				_1: _elm_lang$core$Json_Encode$int(_p137._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p137._0)
 			};
 	}
 };
@@ -19878,7 +19878,7 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axTitlePadding(
-									_gicentre$elm_vega$Vega$num(5)),
+									_gicentre$elm_vega$Vega$vNum(5)),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$axTitle(
@@ -22919,7 +22919,8 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 							_gicentre$elm_vega$Vega$vNum(0)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$leZIndex(1),
+							_0: _gicentre$elm_vega$Vega$leZIndex(
+								_gicentre$elm_vega$Vega$num(1)),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$leFill('cScale'),
@@ -23601,7 +23602,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axOffset(
-									_gicentre$elm_vega$Vega$num(5)),
+									_gicentre$elm_vega$Vega$vNum(5)),
 								_1: {ctor: '[]'}
 							}
 						},

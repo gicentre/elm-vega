@@ -166,7 +166,7 @@ histo2 =
             axes
                 << axis "xScale" SBottom [ axTickCount (num 10) ]
                 << axis "xScaleNull" SBottom []
-                << axis "yScale" SLeft [ axTickCount (num 5), axOffset (num 5) ]
+                << axis "yScale" SLeft [ axTickCount (num 5), axOffset (vNum 5) ]
 
         mk =
             marks
@@ -270,7 +270,7 @@ density1 =
             axes << axis "xScale" SBottom [ axZIndex (num 1) ]
 
         le =
-            legends << legend [ leOrient TopLeft, leOffset (vNum 0), leZIndex 1, leFill "cScale" ]
+            legends << legend [ leOrient TopLeft, leOffset (vNum 0), leZIndex (num 1), leFill "cScale" ]
 
         mk =
             marks
@@ -799,7 +799,7 @@ scatter1 =
                     SLeft
                     [ axGrid (boo True)
                     , axDomain (boo False)
-                    , axTitlePadding (num 5)
+                    , axTitlePadding (vNum 5)
                     , axTitle (str "Miles per gallon")
                     ]
 

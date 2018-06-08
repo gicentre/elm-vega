@@ -124,8 +124,8 @@ scatterplot2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axOffset (num 5), axFormat "s", axTitle (strSignal "xField") ]
-                << axis "yScale" SLeft [ axOffset (num 5), axFormat "s", axTitle (strSignal "yField") ]
+                << axis "xScale" SBottom [ axOffset (vNum 5), axFormat "s", axTitle (strSignal "xField") ]
+                << axis "yScale" SLeft [ axOffset (vNum 5), axFormat "s", axTitle (strSignal "yField") ]
 
         mk =
             marks
