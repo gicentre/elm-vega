@@ -110,3 +110,4 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach Dat
 *   For a more thorough set of examples/tutorial, see the [elm-vega walkthrough](https://github.com/gicentre/elm-vega/tree/master/docs/walkthrough/README.md).
 *   For the elm-vega API documentation see <http://package.elm-lang.org/packages/gicentre/elm-vega/latest>
 *   Further examples can be found in the [elm-vega vlExamples folder](https://github.com/gicentre/elm-vega/tree/master/vlExamples)
+*   For an example of fully embedding an elm-vega visualization in an elm SPA, see [elm-embed-vega](https://github.com/yardsale8/elm-embed-vega).
