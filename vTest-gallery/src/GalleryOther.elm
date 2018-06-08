@@ -266,8 +266,18 @@ wordcloud1 =
                         , enUpdate [ maFillOpacity [ vNum 1 ] ]
                         , enHover [ maFillOpacity [ vNum 0.5 ] ]
                         ]
-
-                    --  , mTransform [ trWordcloud [] ]
+                    , mTransform
+                        [ trWordcloud
+                            [ wcSize (nums [ 800, 400 ])
+                            , wcText (field "text")
+                            , wcRotate (numExpr (exField "datum.angle"))
+                            , wcFont (str "Helvetica Neue, Arial")
+                            , wcFontSize (numExpr (exField "datum.count"))
+                            , wcFontWeight (strExpr (exField "datum.weight"))
+                            , wcFontSizeRange (nums [ 12, 56 ])
+                            , wcPadding (num 2)
+                            ]
+                        ]
                     ]
     in
     toVega
