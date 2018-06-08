@@ -144,9 +144,92 @@ heatmap1 =
         [ width 800, height 500, ti, ds, si [], sc [], ax [], le [], mk [] ]
 
 
+parallel1 : Spec
+parallel1 =
+    let
+        --  TODO: Add config
+        ds =
+            dataSource
+                [ data "cars"
+                    [ daUrl "https://vega.github.io/vega/data/cars.json"
+                    , daFormat [ JSON, parse [ ( "Year", foDate "%Y-%m-%d" ) ] ]
+                    ]
+                    |> transform
+                        [ trFilter (expr "datum.Horsepower && datum.Miles_per_Gallon")
+                        , trFormula "isNumber(datum.year) ? datum.year : year(datum.Year)" "Year" InitOnly
+                        ]
+                , data "fields" [ daValue (vStrs [ "Cylinders", "Displacement", "Weight_in_lbs", "Horsepower", "Acceleration", "Miles_per_Gallon", "Year" ]) ]
+                ]
+
+        dimensionScale fName =
+            scale fName
+                [ scType ScLinear
+                , scRange (raDefault RHeight)
+                , scDomain (doData [ daDataset "cars", daField (field fName) ])
+                , scZero (boo False)
+                , scNice NTrue
+                ]
+
+        sc =
+            scales
+                << scale "ord"
+                    [ scType ScPoint
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "fields", daField (field "data") ])
+                    , scRound (boo True)
+                    ]
+                << dimensionScale "Cylinders"
+                << dimensionScale "Displacement"
+                << dimensionScale "Weight_in_lbs"
+                << dimensionScale "Horsepower"
+                << dimensionScale "Acceleration"
+                << dimensionScale "Miles_per_Gallon"
+                << dimensionScale "Year"
+
+        dimensionAxis sName =
+            axis sName
+                SLeft
+                [ axTitle (str sName)
+                , axOffset (vObject [ vStr sName, vScale (field "ord"), vMultiply (vNum -1) ])
+                , axZIndex (num 1)
+                ]
+
+        ax =
+            axes
+                << dimensionAxis "Cylinders"
+                << dimensionAxis "Displacement"
+                << dimensionAxis "Weight_in_lbs"
+                << dimensionAxis "Horsepower"
+                << dimensionAxis "Acceleration"
+                << dimensionAxis "Miles_per_Gallon"
+                << dimensionAxis "Year"
+
+        mk =
+            marks
+                << mark Group [ mFrom [ srData (str "cars") ], mGroup [ nestedMk [] ] ]
+
+        nestedMk =
+            marks
+                << mark Line
+                    [ mFrom [ srData (str "fields") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale (field "ord"), vField (field "data") ]
+                            , maY [ vScale (fDatum (field "data")), vField (fParent (fDatum (field "data"))) ]
+                            , maStroke [ vStr "steelblue" ]
+                            , maStrokeWidth [ vNum 1.01 ]
+                            , maStrokeOpacity [ vNum 0.3 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 700, height 400, padding 5, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    heatmap1
+    parallel1
 
 
 
@@ -157,6 +240,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "heatmap1", heatmap1 )
+        , ( "parallel1", parallel1 )
         ]
 
 
