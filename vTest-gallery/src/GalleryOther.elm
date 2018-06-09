@@ -388,9 +388,85 @@ timeline1 =
         [ width 500, height 80, padding 5, ds, sc [], ax [], mk [] ]
 
 
+beeswarm1 : Spec
+beeswarm1 =
+    let
+        ds =
+            dataSource
+                [ data "people"
+                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    , daFormat [ jsonProperty "nodes" ]
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "cx" [ siUpdate "width / 2" ]
+                << signal "cy" [ siUpdate "height / 2" ]
+                << signal "radius" [ siValue (vNum 8), siBind (iRange [ inMin 2, inMax 15, inStep 1 ]) ]
+                << signal "collide" [ siValue (vNum 1), siBind (iRange [ inMin 1, inMax 10, inStep 1 ]) ]
+                << signal "gravityX" [ siValue (vNum 0.2), siBind (iRange [ inMin 0, inMax 1 ]) ]
+                << signal "gravityY" [ siValue (vNum 0.1), siBind (iRange [ inMin 0, inMax 1 ]) ]
+                << signal "static" [ siValue (vBoo True), siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScBand
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "people", daField (field "group"), daSort [] ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raScheme (str "category20c") [])
+                    ]
+
+        ax =
+            axes << axis "xScale" SBottom []
+
+        mk =
+            marks
+                << mark Symbol
+                    [ mName "nodes"
+                    , mFrom [ srData (str "people") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale "cScale", vField (field "group") ]
+                            , maCustom "xFocus" [ vScale "xScale", vField (field "group"), vBand (num 0.5) ]
+                            , maCustom "yFocus" [ vSignal "cy" ]
+                            ]
+                        , enUpdate
+                            [ maSize [ vSignal "pow(2 * radius, 2)" ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maZIndex [ vNum 0 ]
+                            ]
+                        , enHover
+                            [ maStroke [ vStr "purple" ]
+                            , maStrokeWidth [ vNum 3 ]
+                            , maZIndex [ vNum 1 ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trForce
+                            [ fsIterations (num 300)
+                            , fsStatic (booSignal "static")
+                            , fsForces
+                                [ foCollide (numSignal "radius") [ fpIterations (numSignal "collide") ]
+                                , foX (field "xFocus") [ fpStrength (numSignal "gravityX") ]
+                                , foY (field "yFocus") [ fpStrength (numSignal "gravityY") ]
+                                ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 100, paddings 5 0 5 20, autosize [ ANone ], ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    timeline1
+    beeswarm1
 
 
 
@@ -404,6 +480,7 @@ mySpecs =
         , ( "parallel1", parallel1 )
         , ( "wordcloud1", wordcloud1 )
         , ( "timeline1", timeline1 )
+        , ( "beeswarm1", beeswarm1 )
         ]
 
 

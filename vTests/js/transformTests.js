@@ -11630,6 +11630,11 @@ var _user$project$Vega$LValues = function (a) {
 	return {ctor: 'LValues', _0: a};
 };
 var _user$project$Vega$luValues = _user$project$Vega$LValues;
+var _user$project$Vega$MCustom = F2(
+	function (a, b) {
+		return {ctor: 'MCustom', _0: a, _1: b};
+	});
+var _user$project$Vega$maCustom = _user$project$Vega$MCustom;
 var _user$project$Vega$MTheta = function (a) {
 	return {ctor: 'MTheta', _0: a};
 };
@@ -15180,11 +15185,17 @@ var _user$project$Vega$markProperty = function (mProp) {
 				_0: 'text',
 				_1: _user$project$Vega$valRef(_p131._0)
 			};
-		default:
+		case 'MTheta':
 			return {
 				ctor: '_Tuple2',
 				_0: 'theta',
 				_1: _user$project$Vega$valRef(_p131._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: _p131._0,
+				_1: _user$project$Vega$valRef(_p131._1)
 			};
 	}
 };

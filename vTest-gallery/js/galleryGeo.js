@@ -12403,6 +12403,11 @@ var _gicentre$elm_vega$Vega$LValues = function (a) {
 	return {ctor: 'LValues', _0: a};
 };
 var _gicentre$elm_vega$Vega$luValues = _gicentre$elm_vega$Vega$LValues;
+var _gicentre$elm_vega$Vega$MCustom = F2(
+	function (a, b) {
+		return {ctor: 'MCustom', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$Vega$maCustom = _gicentre$elm_vega$Vega$MCustom;
 var _gicentre$elm_vega$Vega$MTheta = function (a) {
 	return {ctor: 'MTheta', _0: a};
 };
@@ -15953,11 +15958,17 @@ var _gicentre$elm_vega$Vega$markProperty = function (mProp) {
 				_0: 'text',
 				_1: _gicentre$elm_vega$Vega$valRef(_p131._0)
 			};
-		default:
+		case 'MTheta':
 			return {
 				ctor: '_Tuple2',
 				_0: 'theta',
 				_1: _gicentre$elm_vega$Vega$valRef(_p131._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: _p131._0,
+				_1: _gicentre$elm_vega$Vega$valRef(_p131._1)
 			};
 	}
 };
