@@ -284,9 +284,113 @@ wordcloud1 =
         [ width 700, height 400, padding 5, ds, sc [], mk [] ]
 
 
+timeline1 : Spec
+timeline1 =
+    let
+        people =
+            dataFromColumns "people" []
+                << dataColumn "label" (daStrs [ "Washington", "Adams", "Jefferson", "Madison", "Monroe" ])
+                << dataColumn "born" (daNums [ -7506057600000, -7389766800000, -7154586000000, -6904544400000, -6679904400000 ])
+                << dataColumn "died" (daNums [ -5366196000000, -4528285200000, -4528285200000, -4213184400000, -4370518800000 ])
+                << dataColumn "enter" (daNums [ -5701424400000, -5453884800000, -5327740800000, -5075280000000, -4822819200000 ])
+                << dataColumn "leave" (daNums [ -5453884800000, -5327740800000, -5075280000000, -4822819200000, -4570358400000 ])
+
+        events =
+            dataFromColumns "events" [ JSON, parse [ ( "when", foDate "" ) ] ]
+                << dataColumn "name" (daStrs [ "Decl. of Independence", "U.S. Constitution", "Louisiana Purchase", "Monroe Doctrine" ])
+                << dataColumn "when" (daStrs [ "July 4, 1776", "3/4/1789", "April 30, 1803", "Dec 2, 1823" ])
+
+        ds =
+            dataSource [ people [], events [] ]
+
+        sc =
+            scales
+                << scale "yScale"
+                    [ scType ScBand
+                    , scRange (raValues [ vNum 0, vSignal "height" ])
+                    , scDomain (doData [ daDataset "people", daField (field "label") ])
+                    ]
+                << scale "xScale"
+                    [ scType ScTime
+                    , scRange (raDefault RWidth)
+                    , scDomain (doData [ daDataset "people", daFields [ field "born", field "died" ] ])
+                    , scRound (boo True)
+                    ]
+
+        ax =
+            axes << axis "xScale" SBottom [ axFormat "%Y" ]
+
+        mk =
+            marks
+                << mark Text
+                    [ mFrom [ srData (str "events") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "when") ]
+                            , maY [ vNum -10 ]
+                            , maAngle [ vNum -25 ]
+                            , maFill [ vStr "black" ]
+                            , maText [ vField (field "name") ]
+                            , maFontSize [ vNum 10 ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "events") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "when") ]
+                            , maY [ vNum -8 ]
+                            , maWidth [ vNum 1 ]
+                            , maHeight [ vField (fGroup (field "height")), vOffset (vNum 8) ]
+                            , maFill [ vStr "#888" ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "people") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "born") ]
+                            , maY [ vScale "yScale", vField (field "label"), vOffset (vNum -3) ]
+                            , maFill [ vStr "black" ]
+                            , maText [ vField (field "label") ]
+                            , maFontSize [ vNum 10 ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "people") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "born") ]
+                            , maX2 [ vScale "xScale", vField (field "died") ]
+                            , maY [ vScale "yScale", vField (field "label") ]
+                            , maHeight [ vNum 2 ]
+                            , maFill [ vStr "#557" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "people") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "enter") ]
+                            , maX2 [ vScale "xScale", vField (field "leave") ]
+                            , maY [ vScale "yScale", vField (field "label"), vOffset (vNum -1) ]
+                            , maHeight [ vNum 4 ]
+                            , maFill [ vStr "#e44" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 80, padding 5, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    wordcloud1
+    timeline1
 
 
 
@@ -299,6 +403,7 @@ mySpecs =
         [ ( "heatmap1", heatmap1 )
         , ( "parallel1", parallel1 )
         , ( "wordcloud1", wordcloud1 )
+        , ( "timeline1", timeline1 )
         ]
 
 

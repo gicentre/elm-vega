@@ -18950,8 +18950,805 @@ var _gicentre$elm_vega$Vega$DenseRank = {ctor: 'DenseRank'};
 var _gicentre$elm_vega$Vega$Rank = {ctor: 'Rank'};
 var _gicentre$elm_vega$Vega$RowNumber = {ctor: 'RowNumber'};
 
-var _gicentre$elm_vega$GalleryOther$wordcloud1 = function () {
+var _gicentre$elm_vega$GalleryOther$timeline1 = function () {
 	var mk = function (_p0) {
+		return _gicentre$elm_vega$Vega$marks(
+			A3(
+				_gicentre$elm_vega$Vega$mark,
+				_gicentre$elm_vega$Vega$Text,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$srData(
+								_gicentre$elm_vega$Vega$str('events')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$maX(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vField(
+														_gicentre$elm_vega$Vega$field('when')),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maY(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vNum(-10),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maAngle(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vNum(-25),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maFill(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vStr('black'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maText(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('name')),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maFontSize(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(10),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$mark,
+					_gicentre$elm_vega$Vega$Rect,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$srData(
+									_gicentre$elm_vega$Vega$str('events')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mEncode(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$enEnter(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maX(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vField(
+															_gicentre$elm_vega$Vega$field('when')),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maY(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vNum(-8),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maWidth(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vNum(1),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maHeight(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$fGroup(
+																		_gicentre$elm_vega$Vega$field('height'))),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vOffset(
+																		_gicentre$elm_vega$Vega$vNum(8)),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maFill(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vStr('#888'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$mark,
+						_gicentre$elm_vega$Vega$Text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mFrom(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$srData(
+										_gicentre$elm_vega$Vega$str('people')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maX(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vField(
+																_gicentre$elm_vega$Vega$field('born')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('label')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vOffset(
+																		_gicentre$elm_vega$Vega$vNum(-3)),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maFill(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vStr('black'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maText(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('label')),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maFontSize(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vNum(10),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						A3(
+							_gicentre$elm_vega$Vega$mark,
+							_gicentre$elm_vega$Vega$Rect,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mFrom(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$srData(
+											_gicentre$elm_vega$Vega$str('people')),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mEncode(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enEnter(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maX(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('born')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX2(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('died')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maY(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field('label')),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maHeight(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vNum(2),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maFill(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vStr('#557'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_gicentre$elm_vega$Vega$mark,
+								_gicentre$elm_vega$Vega$Rect,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mFrom(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$srData(
+												_gicentre$elm_vega$Vega$str('people')),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mEncode(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$enEnter(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('enter')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maX2(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field('leave')),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maY(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vField(
+																				_gicentre$elm_vega$Vega$field('label')),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vOffset(
+																					_gicentre$elm_vega$Vega$vNum(-1)),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maHeight(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vNum(4),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$maFill(
+																			{
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vStr('#e44'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								},
+								_p0))))));
+	};
+	var ax = function (_p1) {
+		return _gicentre$elm_vega$Vega$axes(
+			A4(
+				_gicentre$elm_vega$Vega$axis,
+				'xScale',
+				_gicentre$elm_vega$Vega$SBottom,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$axFormat('%Y'),
+					_1: {ctor: '[]'}
+				},
+				_p1));
+	};
+	var sc = function (_p2) {
+		return _gicentre$elm_vega$Vega$scales(
+			A3(
+				_gicentre$elm_vega$Vega$scale,
+				'yScale',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scRange(
+							_gicentre$elm_vega$Vega$raValues(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$vNum(0),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$vSignal('height'),
+										_1: {ctor: '[]'}
+									}
+								})),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scDomain(
+								_gicentre$elm_vega$Vega$doData(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$daDataset('people'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daField(
+												_gicentre$elm_vega$Vega$field('label')),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$scale,
+					'xScale',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScTime),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scRange(
+								_gicentre$elm_vega$Vega$raDefault(_gicentre$elm_vega$Vega$RWidth)),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scDomain(
+									_gicentre$elm_vega$Vega$doData(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daDataset('people'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$daFields(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$field('born'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$field('died'),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$scRound(
+										_gicentre$elm_vega$Vega$boo(true)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_p2)));
+	};
+	var events = function (_p3) {
+		return A3(
+			_gicentre$elm_vega$Vega$dataFromColumns,
+			'events',
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$JSON,
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$parse(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'when',
+								_1: _gicentre$elm_vega$Vega$foDate('')
+							},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			A3(
+				_gicentre$elm_vega$Vega$dataColumn,
+				'name',
+				_gicentre$elm_vega$Vega$daStrs(
+					{
+						ctor: '::',
+						_0: 'Decl. of Independence',
+						_1: {
+							ctor: '::',
+							_0: 'U.S. Constitution',
+							_1: {
+								ctor: '::',
+								_0: 'Louisiana Purchase',
+								_1: {
+									ctor: '::',
+									_0: 'Monroe Doctrine',
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$Vega$dataColumn,
+					'when',
+					_gicentre$elm_vega$Vega$daStrs(
+						{
+							ctor: '::',
+							_0: 'July 4, 1776',
+							_1: {
+								ctor: '::',
+								_0: '3/4/1789',
+								_1: {
+									ctor: '::',
+									_0: 'April 30, 1803',
+									_1: {
+										ctor: '::',
+										_0: 'Dec 2, 1823',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_p3)));
+	};
+	var people = function (_p4) {
+		return A3(
+			_gicentre$elm_vega$Vega$dataFromColumns,
+			'people',
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$Vega$dataColumn,
+				'label',
+				_gicentre$elm_vega$Vega$daStrs(
+					{
+						ctor: '::',
+						_0: 'Washington',
+						_1: {
+							ctor: '::',
+							_0: 'Adams',
+							_1: {
+								ctor: '::',
+								_0: 'Jefferson',
+								_1: {
+									ctor: '::',
+									_0: 'Madison',
+									_1: {
+										ctor: '::',
+										_0: 'Monroe',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$Vega$dataColumn,
+					'born',
+					_gicentre$elm_vega$Vega$daNums(
+						{
+							ctor: '::',
+							_0: -7506057600000,
+							_1: {
+								ctor: '::',
+								_0: -7389766800000,
+								_1: {
+									ctor: '::',
+									_0: -7154586000000,
+									_1: {
+										ctor: '::',
+										_0: -6904544400000,
+										_1: {
+											ctor: '::',
+											_0: -6679904400000,
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_gicentre$elm_vega$Vega$dataColumn,
+						'died',
+						_gicentre$elm_vega$Vega$daNums(
+							{
+								ctor: '::',
+								_0: -5366196000000,
+								_1: {
+									ctor: '::',
+									_0: -4528285200000,
+									_1: {
+										ctor: '::',
+										_0: -4528285200000,
+										_1: {
+											ctor: '::',
+											_0: -4213184400000,
+											_1: {
+												ctor: '::',
+												_0: -4370518800000,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						A3(
+							_gicentre$elm_vega$Vega$dataColumn,
+							'enter',
+							_gicentre$elm_vega$Vega$daNums(
+								{
+									ctor: '::',
+									_0: -5701424400000,
+									_1: {
+										ctor: '::',
+										_0: -5453884800000,
+										_1: {
+											ctor: '::',
+											_0: -5327740800000,
+											_1: {
+												ctor: '::',
+												_0: -5075280000000,
+												_1: {
+													ctor: '::',
+													_0: -4822819200000,
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}),
+							A3(
+								_gicentre$elm_vega$Vega$dataColumn,
+								'leave',
+								_gicentre$elm_vega$Vega$daNums(
+									{
+										ctor: '::',
+										_0: -5453884800000,
+										_1: {
+											ctor: '::',
+											_0: -5327740800000,
+											_1: {
+												ctor: '::',
+												_0: -5075280000000,
+												_1: {
+													ctor: '::',
+													_0: -4822819200000,
+													_1: {
+														ctor: '::',
+														_0: -4570358400000,
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}),
+								_p4))))));
+	};
+	var ds = _gicentre$elm_vega$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: people(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: events(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _gicentre$elm_vega$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$Vega$width(500),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$height(80),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$padding(5),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: sc(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: ax(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: mk(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GalleryOther$sourceExample = _gicentre$elm_vega$GalleryOther$timeline1;
+var _gicentre$elm_vega$GalleryOther$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryOther$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$GalleryOther$wordcloud1 = function () {
+	var mk = function (_p5) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19120,9 +19917,9 @@ var _gicentre$elm_vega$GalleryOther$wordcloud1 = function () {
 						}
 					}
 				},
-				_p0));
+				_p5));
 	};
-	var sc = function (_p1) {
+	var sc = function (_p6) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -19150,7 +19947,7 @@ var _gicentre$elm_vega$GalleryOther$wordcloud1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p1));
+				_p6));
 	};
 	var stopwords = '(i|me|my|myself|we|us|our|ours|ourselves|you|your|yours|yourself|yourselves|he|him|his|himself|she|her|hers|herself|it|its|itself|they|them|their|theirs|themselves|what|which|who|whom|whose|this|that|these|those|am|is|are|was|were|be|been|being|have|has|had|having|do|does|did|doing|will|would|should|can|could|ought|i\'m|you\'re|he\'s|she\'s|it\'s|we\'re|they\'re|i\'ve|you\'ve|we\'ve|they\'ve|i\'d|you\'d|he\'d|she\'d|we\'d|they\'d|i\'ll|you\'ll|he\'ll|she\'ll|we\'ll|they\'ll|isn\'t|aren\'t|wasn\'t|weren\'t|hasn\'t|haven\'t|hadn\'t|doesn\'t|don\'t|didn\'t|won\'t|wouldn\'t|shan\'t|shouldn\'t|can\'t|cannot|couldn\'t|mustn\'t|let\'s|that\'s|who\'s|what\'s|here\'s|there\'s|when\'s|where\'s|why\'s|how\'s|a|an|the|and|but|if|or|because|as|until|while|of|at|by|for|with|about|against|between|into|through|during|before|after|above|below|to|from|up|upon|down|in|out|on|off|over|under|again|further|then|once|here|there|when|where|why|how|all|any|both|each|few|more|most|other|some|such|no|nor|not|only|own|same|so|than|too|very|say|says|said|shall)';
 	var inText = {
@@ -19241,38 +20038,8 @@ var _gicentre$elm_vega$GalleryOther$wordcloud1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GalleryOther$sourceExample = _gicentre$elm_vega$GalleryOther$wordcloud1;
-var _gicentre$elm_vega$GalleryOther$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryOther$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
-	var nestedMk = function (_p2) {
+	var nestedMk = function (_p7) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19357,9 +20124,9 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p2));
+				_p7));
 	};
-	var mk = function (_p3) {
+	var mk = function (_p8) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19385,7 +20152,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p3));
+				_p8));
 	};
 	var dimensionAxis = function (sName) {
 		return A3(
@@ -19423,7 +20190,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 				}
 			});
 	};
-	var ax = function (_p4) {
+	var ax = function (_p9) {
 		return _gicentre$elm_vega$Vega$axes(
 			A2(
 				dimensionAxis,
@@ -19443,7 +20210,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 								A2(
 									dimensionAxis,
 									'Miles_per_Gallon',
-									A2(dimensionAxis, 'Year', _p4))))))));
+									A2(dimensionAxis, 'Year', _p9))))))));
 	};
 	var dimensionScale = function (fName) {
 		return A2(
@@ -19484,7 +20251,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 				}
 			});
 	};
-	var sc = function (_p5) {
+	var sc = function (_p10) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -19537,7 +20304,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 									A2(
 										dimensionScale,
 										'Miles_per_Gallon',
-										A2(dimensionScale, 'Year', _p5)))))))));
+										A2(dimensionScale, 'Year', _p10)))))))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -19662,7 +20429,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
-	var mk = function (_p6) {
+	var mk = function (_p11) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19767,9 +20534,9 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p6));
+				_p11));
 	};
-	var le = function (_p7) {
+	var le = function (_p12) {
 		return _gicentre$elm_vega$Vega$legends(
 			A2(
 				_gicentre$elm_vega$Vega$legend,
@@ -19802,9 +20569,9 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 						}
 					}
 				},
-				_p7));
+				_p12));
 	};
-	var ax = function (_p8) {
+	var ax = function (_p13) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -19867,9 +20634,9 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 							}
 						}
 					},
-					_p8)));
+					_p13)));
 	};
-	var sc = function (_p9) {
+	var sc = function (_p14) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -20060,7 +20827,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 								}
 							}
 						},
-						_p9))));
+						_p14))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -20263,7 +21030,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 			}
 		}
 	};
-	var si = function (_p10) {
+	var si = function (_p15) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -20300,7 +21067,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p10)));
+					_p15)));
 	};
 	return _gicentre$elm_vega$Vega$toVega(
 		{
@@ -20356,7 +21123,11 @@ var _gicentre$elm_vega$GalleryOther$mySpecs = _gicentre$elm_vega$Vega$combineSpe
 			_1: {
 				ctor: '::',
 				_0: {ctor: '_Tuple2', _0: 'wordcloud1', _1: _gicentre$elm_vega$GalleryOther$wordcloud1},
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'timeline1', _1: _gicentre$elm_vega$GalleryOther$timeline1},
+					_1: {ctor: '[]'}
+				}
 			}
 		}
 	});
@@ -20374,7 +21145,7 @@ var _gicentre$elm_vega$GalleryOther$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GalleryOther$view,
 		update: F2(
-			function (_p11, model) {
+			function (_p16, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
