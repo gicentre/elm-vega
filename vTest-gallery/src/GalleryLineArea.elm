@@ -35,19 +35,19 @@ lineChart1 =
             scales
                 << scale "xScale"
                     [ scType ScPoint
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange RCategory
+                    , scRange RaCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
@@ -105,13 +105,13 @@ areaChart1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scZero (boo False)
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
@@ -167,19 +167,19 @@ areaChart2 =
             scales
                 << scale "xScale"
                     [ scType ScPoint
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange RCategory
+                    , scRange RaCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
@@ -252,7 +252,7 @@ areaChart3 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scZero (boo False)
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
@@ -358,14 +358,14 @@ areaChart4 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scZero (boo False)
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "jobs", daField (field "year") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scZero (boo True)
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "jobs", daField (field "y1") ])

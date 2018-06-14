@@ -50,12 +50,12 @@ histo1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doNums (nums [ -1, 1 ]))
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "binned", daField (field "count") ])
                     , scZero (boo True)
@@ -149,7 +149,7 @@ histo2 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scRound (boo True)
                     , scNice NTrue
                     , scDomain
@@ -243,13 +243,13 @@ density1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "points", daField (field "u") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scRound (boo True)
                     , scDomain
                         (doData
@@ -334,18 +334,18 @@ boxplot1 =
             scales
                 << scale "layout"
                     [ scType ScBand
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero (boo True)
                     , scNice NTrue
                     ]
-                << scale "cScale" [ scType ScOrdinal, scRange RCategory ]
+                << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
 
         ax =
             axes
@@ -450,18 +450,18 @@ violinplot1 =
             scales
                 << scale "layout"
                     [ scType ScBand
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero (boo True)
                     , scNice NTrue
                     ]
-                << scale "cScale" [ scType ScOrdinal, scRange RCategory ]
+                << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
 
         ax =
             axes
@@ -606,13 +606,13 @@ window1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
                     [ scType ScBand
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain
                         (doData
                             [ daDataset "directors"
@@ -704,13 +704,13 @@ window2 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
                     , scNice NTrue
                     ]
                 << scale "yScale"
                     [ scType ScBand
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain
                         (doData
                             [ daDataset "directors"
@@ -765,7 +765,7 @@ scatter1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound (boo True)
                     , scNice NTrue
@@ -773,7 +773,7 @@ scatter1 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound (boo True)
                     , scNice NTrue
@@ -869,7 +869,7 @@ contour1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound (boo True)
                     , scNice NTrue
@@ -877,7 +877,7 @@ contour1 =
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound (boo True)
                     , scNice NTrue
@@ -886,7 +886,7 @@ contour1 =
                 << scale "cScale"
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "contours", daField (field "value") ])
-                    , scRange RHeatmap
+                    , scRange RaHeatmap
                     , scZero (boo True)
                     ]
 
@@ -978,12 +978,12 @@ wheat1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange RWidth
+                    , scRange RaWidth
                     , scDomain (doNums (nums [ -1, 1 ]))
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange RHeight
+                    , scRange RaHeight
                     , scDomain (doNums (numList [ num 0, numSignal "extent[1]" ]))
                     ]
 

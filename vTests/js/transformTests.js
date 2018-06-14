@@ -12800,14 +12800,14 @@ var _user$project$Vega$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
 var _user$project$Vega$scType = _user$project$Vega$SType;
-var _user$project$Vega$RHeatmap = {ctor: 'RHeatmap'};
-var _user$project$Vega$RRamp = {ctor: 'RRamp'};
-var _user$project$Vega$ROrdinal = {ctor: 'ROrdinal'};
-var _user$project$Vega$RDiverging = {ctor: 'RDiverging'};
-var _user$project$Vega$RCategory = {ctor: 'RCategory'};
-var _user$project$Vega$RSymbol = {ctor: 'RSymbol'};
-var _user$project$Vega$RHeight = {ctor: 'RHeight'};
-var _user$project$Vega$RWidth = {ctor: 'RWidth'};
+var _user$project$Vega$RaHeatmap = {ctor: 'RaHeatmap'};
+var _user$project$Vega$RaRamp = {ctor: 'RaRamp'};
+var _user$project$Vega$RaOrdinal = {ctor: 'RaOrdinal'};
+var _user$project$Vega$RaDiverging = {ctor: 'RaDiverging'};
+var _user$project$Vega$RaCategory = {ctor: 'RaCategory'};
+var _user$project$Vega$RaSymbol = {ctor: 'RaSymbol'};
+var _user$project$Vega$RaHeight = {ctor: 'RaHeight'};
+var _user$project$Vega$RaWidth = {ctor: 'RaWidth'};
 var _user$project$Vega$RCustom = function (a) {
 	return {ctor: 'RCustom', _0: a};
 };
@@ -18611,49 +18611,49 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 								_1: {ctor: '[]'}
 							})
 					};
-				case 'RWidth':
+				case 'RaWidth':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('width')
 					};
-				case 'RHeight':
+				case 'RaHeight':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('height')
 					};
-				case 'RSymbol':
+				case 'RaSymbol':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('symbol')
 					};
-				case 'RCategory':
+				case 'RaCategory':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('category')
 					};
-				case 'RDiverging':
+				case 'RaDiverging':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('diverging')
 					};
-				case 'ROrdinal':
+				case 'RaOrdinal':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('ordinal')
 					};
-				case 'RRamp':
+				case 'RaRamp':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('ramp')
 					};
-				case 'RHeatmap':
+				case 'RaHeatmap':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
@@ -19899,7 +19899,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									}))),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$scRange(_user$project$Vega$RWidth),
+							_0: _user$project$Vega$scRange(_user$project$Vega$RaWidth),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -19926,7 +19926,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$scRange(_user$project$Vega$RHeight),
+								_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
 								_1: {
 									ctor: '::',
 									_0: _user$project$Vega$scRound(

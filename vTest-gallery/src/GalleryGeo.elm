@@ -132,7 +132,7 @@ geo2 =
                     [ scType ScSequential
                     , scNice NTrue
                     , scDomain (doData [ daDataset "obesity", daField (field "rate") ])
-                    , scRange RRamp
+                    , scRange RaRamp
                     ]
 
         lg =
@@ -768,7 +768,7 @@ geo8 inData =
                 << scale "cScale"
                     [ scType ScSequential
                     , scDomain (doNums (nums [ 90, 190 ]))
-                    , scRange RHeatmap
+                    , scRange RaHeatmap
                     ]
 
         mk =

@@ -12800,14 +12800,14 @@ var _gicentre$elm_vega$Vega$SType = function (a) {
 	return {ctor: 'SType', _0: a};
 };
 var _gicentre$elm_vega$Vega$scType = _gicentre$elm_vega$Vega$SType;
-var _gicentre$elm_vega$Vega$RHeatmap = {ctor: 'RHeatmap'};
-var _gicentre$elm_vega$Vega$RRamp = {ctor: 'RRamp'};
-var _gicentre$elm_vega$Vega$ROrdinal = {ctor: 'ROrdinal'};
-var _gicentre$elm_vega$Vega$RDiverging = {ctor: 'RDiverging'};
-var _gicentre$elm_vega$Vega$RCategory = {ctor: 'RCategory'};
-var _gicentre$elm_vega$Vega$RSymbol = {ctor: 'RSymbol'};
-var _gicentre$elm_vega$Vega$RHeight = {ctor: 'RHeight'};
-var _gicentre$elm_vega$Vega$RWidth = {ctor: 'RWidth'};
+var _gicentre$elm_vega$Vega$RaHeatmap = {ctor: 'RaHeatmap'};
+var _gicentre$elm_vega$Vega$RaRamp = {ctor: 'RaRamp'};
+var _gicentre$elm_vega$Vega$RaOrdinal = {ctor: 'RaOrdinal'};
+var _gicentre$elm_vega$Vega$RaDiverging = {ctor: 'RaDiverging'};
+var _gicentre$elm_vega$Vega$RaCategory = {ctor: 'RaCategory'};
+var _gicentre$elm_vega$Vega$RaSymbol = {ctor: 'RaSymbol'};
+var _gicentre$elm_vega$Vega$RaHeight = {ctor: 'RaHeight'};
+var _gicentre$elm_vega$Vega$RaWidth = {ctor: 'RaWidth'};
 var _gicentre$elm_vega$Vega$RCustom = function (a) {
 	return {ctor: 'RCustom', _0: a};
 };
@@ -18611,49 +18611,49 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 								_1: {ctor: '[]'}
 							})
 					};
-				case 'RWidth':
+				case 'RaWidth':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('width')
 					};
-				case 'RHeight':
+				case 'RaHeight':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('height')
 					};
-				case 'RSymbol':
+				case 'RaSymbol':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('symbol')
 					};
-				case 'RCategory':
+				case 'RaCategory':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('category')
 					};
-				case 'RDiverging':
+				case 'RaDiverging':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('diverging')
 					};
-				case 'ROrdinal':
+				case 'RaOrdinal':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('ordinal')
 					};
-				case 'RRamp':
+				case 'RaRamp':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$string('ramp')
 					};
-				case 'RHeatmap':
+				case 'RaHeatmap':
 					return {
 						ctor: '_Tuple2',
 						_0: 'range',
@@ -19167,7 +19167,7 @@ var _gicentre$elm_vega$GalleryDist$wheat1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19194,7 +19194,7 @@ var _gicentre$elm_vega$GalleryDist$wheat1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19667,7 +19667,7 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19708,7 +19708,7 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19763,7 +19763,7 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeatmap),
+									_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeatmap),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scZero(
@@ -20173,7 +20173,7 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -20214,7 +20214,7 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -20568,7 +20568,7 @@ var _gicentre$elm_vega$GalleryDist$window2 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -20599,7 +20599,7 @@ var _gicentre$elm_vega$GalleryDist$window2 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -21096,7 +21096,7 @@ var _gicentre$elm_vega$GalleryDist$window1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -21127,7 +21127,7 @@ var _gicentre$elm_vega$GalleryDist$window1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -21975,7 +21975,7 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22002,7 +22002,7 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scRound(
@@ -22043,7 +22043,7 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RCategory),
+								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaCategory),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -22718,7 +22718,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22745,7 +22745,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scRound(
@@ -22786,7 +22786,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RCategory),
+								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaCategory),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -23188,7 +23188,7 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -23219,7 +23219,7 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scRound(
@@ -23912,7 +23912,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scRound(
@@ -24418,7 +24418,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RWidth),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scDomain(
@@ -24445,7 +24445,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scRound(
