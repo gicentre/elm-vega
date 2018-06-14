@@ -3819,7 +3819,7 @@ reference to something that generates a boolean value (e.g. a signal).
 -}
 bFalse : Boo
 bFalse =
-    Boo True
+    Boo False
 
 
 {-| A true value used for functions that can accept a boolean literal or a

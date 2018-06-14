@@ -7351,7 +7351,7 @@ var _user$project$Vega$boos = _user$project$Vega$Boos;
 var _user$project$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _user$project$Vega$bFalse = _user$project$Vega$Boo(true);
+var _user$project$Vega$bFalse = _user$project$Vega$Boo(false);
 var _user$project$Vega$bTrue = _user$project$Vega$Boo(true);
 var _user$project$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
