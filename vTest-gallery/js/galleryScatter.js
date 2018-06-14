@@ -10719,7 +10719,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$boo = _gicentre$elm_vega$Vega$Boo;
+var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -19078,8 +19079,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 								_gicentre$elm_vega$Vega$num(1)),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19220,12 +19220,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 						_gicentre$elm_vega$Vega$num(0)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(
-							_gicentre$elm_vega$Vega$boo(false)),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axGrid(
-								_gicentre$elm_vega$Vega$boo(true)),
+							_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axEncode(
@@ -19276,8 +19274,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 							_gicentre$elm_vega$Vega$num(0)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(
-								_gicentre$elm_vega$Vega$boo(false)),
+							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -19536,8 +19533,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRound(
-								_gicentre$elm_vega$Vega$boo(true)),
+							_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scDomain(
@@ -19575,8 +19571,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(
-											_gicentre$elm_vega$Vega$boo(false)),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -19598,8 +19593,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(
-										_gicentre$elm_vega$Vega$boo(true)),
+									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scDomain(
@@ -20008,15 +20002,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot4 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(
-											_gicentre$elm_vega$Vega$boo(false)),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20644,12 +20636,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 							_gicentre$elm_vega$Vega$num(0)),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axGrid(
-								_gicentre$elm_vega$Vega$boo(true)),
+							_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axDomain(
-									_gicentre$elm_vega$Vega$boo(false)),
+								_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$axEncode(
@@ -20743,16 +20733,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 							_gicentre$elm_vega$Vega$str('Miles driven per capita each year')),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(
-								_gicentre$elm_vega$Vega$boo(false)),
+							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axTicks(
-									_gicentre$elm_vega$Vega$boo(false)),
+								_0: _gicentre$elm_vega$Vega$axTicks(_gicentre$elm_vega$Vega$bFalse),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axLabels(
-										_gicentre$elm_vega$Vega$boo(false)),
+									_0: _gicentre$elm_vega$Vega$axLabels(_gicentre$elm_vega$Vega$bFalse),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -20772,12 +20759,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 									_gicentre$elm_vega$Vega$num(0)),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axGrid(
-										_gicentre$elm_vega$Vega$boo(true)),
+									_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$axDomain(
-											_gicentre$elm_vega$Vega$boo(false)),
+										_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$axFormat('$0.2f'),
@@ -20875,16 +20860,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 									_gicentre$elm_vega$Vega$str('Price of a gallon of gasoline (adjusted for inflation)')),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axDomain(
-										_gicentre$elm_vega$Vega$boo(false)),
+									_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$axTicks(
-											_gicentre$elm_vega$Vega$boo(false)),
+										_0: _gicentre$elm_vega$Vega$axTicks(_gicentre$elm_vega$Vega$bFalse),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$axLabels(
-												_gicentre$elm_vega$Vega$boo(false)),
+											_0: _gicentre$elm_vega$Vega$axLabels(_gicentre$elm_vega$Vega$bFalse),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -20922,12 +20904,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scZero(
-										_gicentre$elm_vega$Vega$boo(false)),
+									_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scRound(
-											_gicentre$elm_vega$Vega$boo(true)),
+										_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20963,12 +20943,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(
-											_gicentre$elm_vega$Vega$boo(false)),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$scRound(
-												_gicentre$elm_vega$Vega$boo(true)),
+											_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -21613,8 +21591,7 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot2 = function () {
 							_gicentre$elm_vega$Vega$Text,
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(
-									_gicentre$elm_vega$Vega$boo(false)),
+								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$bFalse),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$mFrom(
@@ -22240,12 +22217,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axGrid(
-						_gicentre$elm_vega$Vega$boo(true)),
+					_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(
-							_gicentre$elm_vega$Vega$boo(false)),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$axTickCount(
@@ -22265,12 +22240,10 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axGrid(
-							_gicentre$elm_vega$Vega$boo(true)),
+						_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(
-								_gicentre$elm_vega$Vega$boo(false)),
+							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axTickCount(
@@ -22296,15 +22269,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scRound(
-							_gicentre$elm_vega$Vega$boo(true)),
+						_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scZero(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22337,15 +22308,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRound(
-								_gicentre$elm_vega$Vega$boo(true)),
+							_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scZero(
-										_gicentre$elm_vega$Vega$boo(true)),
+									_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22378,15 +22347,13 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NFalse),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(
-											_gicentre$elm_vega$Vega$boo(true)),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$scDomain(

@@ -109,7 +109,7 @@ projTest =
                 << mark Shape
                     [ mFrom [ srData (str "graticule") ]
                     , mClip (clSphere (str "myProjection"))
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mEncode
                         [ enEnter
                             [ maStrokeWidth [ vNum 1 ]

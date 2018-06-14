@@ -10719,7 +10719,8 @@ var _user$project$Vega$boos = _user$project$Vega$Boos;
 var _user$project$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _user$project$Vega$boo = _user$project$Vega$Boo;
+var _user$project$Vega$bFalse = _user$project$Vega$Boo(true);
+var _user$project$Vega$bTrue = _user$project$Vega$Boo(true);
 var _user$project$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -19186,8 +19187,7 @@ var _user$project$TransformTests$forceTest1 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$mInteractive(
-								_user$project$Vega$boo(false)),
+							_0: _user$project$Vega$mInteractive(_user$project$Vega$bFalse),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Vega$mEncode(
@@ -19929,8 +19929,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 								_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$scRound(
-										_user$project$Vega$boo(true)),
+									_0: _user$project$Vega$scRound(_user$project$Vega$bTrue),
 									_1: {ctor: '[]'}
 								}
 							}

@@ -92,16 +92,16 @@ heatmap1 =
                     , scRange (raScheme (strSignal "palette") [])
                     , scDomain (doData [ daDataset "temperature", daField (field "celsius") ])
                     , scReverse (booSignal "reverse")
-                    , scZero (boo False)
+                    , scZero bFalse
                     , scNice NTrue
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axDomain (boo False), axTitle (str "Month"), axFormat "%b" ]
+                << axis "xScale" SBottom [ axDomain bFalse, axTitle (str "Month"), axFormat "%b" ]
                 << axis "yScale"
                     SLeft
-                    [ axDomain (boo False)
+                    [ axDomain bFalse
                     , axTitle (str "Hour")
                     , axEncode
                         [ ( ELabels
@@ -166,7 +166,7 @@ parallel1 =
                 [ scType ScLinear
                 , scRange RaHeight
                 , scDomain (doData [ daDataset "cars", daField (field fName) ])
-                , scZero (boo False)
+                , scZero bFalse
                 , scNice NTrue
                 ]
 
@@ -176,7 +176,7 @@ parallel1 =
                     [ scType ScPoint
                     , scRange RaWidth
                     , scDomain (doData [ daDataset "fields", daField (field "data") ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     ]
                 << dimensionScale "Cylinders"
                 << dimensionScale "Displacement"
@@ -314,7 +314,7 @@ timeline1 =
                     [ scType ScTime
                     , scRange RaWidth
                     , scDomain (doData [ daDataset "people", daFields [ field "born", field "died" ] ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     ]
 
         ax =

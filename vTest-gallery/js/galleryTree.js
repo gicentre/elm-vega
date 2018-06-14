@@ -10719,7 +10719,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$boo = _gicentre$elm_vega$Vega$Boo;
+var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -19593,8 +19594,7 @@ var _gicentre$elm_vega$GalleryTree$tree3 = function () {
 						}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mInteractive(
-							_gicentre$elm_vega$Vega$boo(false)),
+						_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$bFalse),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$mEncode(
@@ -19782,8 +19782,7 @@ var _gicentre$elm_vega$GalleryTree$tree3 = function () {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(
-									_gicentre$elm_vega$Vega$boo(false)),
+								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$bFalse),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$mEncode(
@@ -20202,8 +20201,7 @@ var _gicentre$elm_vega$GalleryTree$tree3 = function () {
 										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$tmRound(
-											_gicentre$elm_vega$Vega$boo(true)),
+										_0: _gicentre$elm_vega$Vega$tmRound(_gicentre$elm_vega$Vega$bTrue),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$tmMethod(
@@ -20618,8 +20616,7 @@ var _gicentre$elm_vega$GalleryTree$tree2 = function () {
 									{ctor: '[]'})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scZero(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -21238,8 +21235,7 @@ var _gicentre$elm_vega$GalleryTree$tree1 = function () {
 									{ctor: '[]'})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scZero(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
 								_1: {ctor: '[]'}
 							}
 						}

@@ -142,7 +142,7 @@ stackTest1 =
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     , scRange RaHeight
-                    , scRound (boo True)
+                    , scRound bTrue
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
@@ -284,7 +284,7 @@ forceTest1 =
                     ]
                 << mark Path
                     [ mFrom [ srData (str "link-data") ]
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mEncode
                         [ enUpdate
                             [ maStroke [ vStr "#ccc" ]

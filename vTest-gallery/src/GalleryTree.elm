@@ -54,7 +54,7 @@ tree1 =
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme (str "magma") [])
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
 
         mk =
@@ -147,7 +147,7 @@ tree2 =
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme (str "magma") [])
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
 
         mk =
@@ -208,7 +208,7 @@ tree3 =
                         , trTreemap
                             [ tmField (field "size")
                             , tmSort [ ( field "value", Ascend ) ]
-                            , tmRound (boo True)
+                            , tmRound bTrue
                             , tmMethod (tmMethodSignal "layout")
                             , tmRatio (numSignal "aspectRatio")
                             , tmSize (numSignals [ "width", "height" ])
@@ -249,7 +249,7 @@ tree3 =
             marks
                 << mark Rect
                     [ mFrom [ srData (str "nodes") ]
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mEncode
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (field "name") ] ]
@@ -277,7 +277,7 @@ tree3 =
                     ]
                 << mark Text
                     [ mFrom [ srData (str "nodes") ]
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mEncode
                         [ enEnter
                             [ maFont [ vStr "Helvetica Neue, Arial" ]

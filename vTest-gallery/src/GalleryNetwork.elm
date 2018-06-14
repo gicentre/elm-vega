@@ -123,7 +123,7 @@ bundle1 =
         nestedMk =
             marks
                 << mark Line
-                    [ mInteractive (boo False)
+                    [ mInteractive bFalse
                     , mFrom [ srData (str "path") ]
                     , mEncode
                         [ enEnter
@@ -250,7 +250,7 @@ force1 =
                     ]
                 << mark Path
                     [ mFrom [ srData (str "link-data") ]
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mEncode
                         [ enUpdate
                             [ maStroke [ vStr "#ccc" ]
@@ -472,7 +472,7 @@ arc1 =
             marks
                 << mark Symbol
                     [ mName "layout"
-                    , mInteractive (boo False)
+                    , mInteractive bFalse
                     , mFrom [ srData (str "nodes") ]
                     , mEncode
                         [ enEnter [ maOpacity [ vNum 0 ] ]
@@ -647,12 +647,12 @@ map1 =
                         ]
                     ]
                 << mark Path
-                    [ mInteractive (boo False)
+                    [ mInteractive bFalse
                     , mFrom [ srData (str "routes") ]
                     , mEncode [ enEnter [ maPath [ vField (field "path") ], maStroke [ vStr "black" ], maStrokeOpacity [ vNum 0.35 ] ] ]
                     ]
                 << mark Text
-                    [ mInteractive (boo False)
+                    [ mInteractive bFalse
                     , mEncode
                         [ enEnter
                             [ maX [ vNum 895 ]

@@ -10719,7 +10719,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$boo = _gicentre$elm_vega$Vega$Boo;
+var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -20018,8 +20019,7 @@ var _gicentre$elm_vega$GalleryOther$timeline1 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(
-										_gicentre$elm_vega$Vega$boo(true)),
+									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -20762,8 +20762,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 								})),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scZero(
-								_gicentre$elm_vega$Vega$boo(false)),
+							_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
@@ -20801,8 +20800,7 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(
-									_gicentre$elm_vega$Vega$boo(true)),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -21101,8 +21099,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axDomain(
-						_gicentre$elm_vega$Vega$boo(false)),
+					_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$axTitle(
@@ -21120,8 +21117,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(
-							_gicentre$elm_vega$Vega$boo(false)),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$axTitle(
@@ -21335,8 +21331,7 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 											_gicentre$elm_vega$Vega$booSignal('reverse')),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$scZero(
-												_gicentre$elm_vega$Vega$boo(false)),
+											_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
 											_1: {
 												ctor: '::',
 												_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),

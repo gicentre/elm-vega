@@ -40,7 +40,7 @@ barChart1 =
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
                     , scRange RaWidth
                     , scPadding (num 0.05)
-                    , scRound (boo True)
+                    , scRound bTrue
                     ]
                 << scale "yScale"
                     [ scDomain (doData [ daDataset "table", daField (field "amount") ])
@@ -120,7 +120,7 @@ barChart2 =
                     [ scType ScLinear
                     , scRange RaHeight
                     , scNice NTrue
-                    , scZero (boo True)
+                    , scZero bTrue
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
@@ -179,8 +179,8 @@ barChart3 =
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "value") ])
                     , scRange RaWidth
-                    , scRound (boo True)
-                    , scZero (boo True)
+                    , scRound bTrue
+                    , scZero bTrue
                     , scNice NTrue
                     ]
                 << scale "cScale"
@@ -291,8 +291,8 @@ barChart4 =
                 << scale "xScale"
                     [ scDomain (doData [ daDataset "tuples", daField (field "c") ])
                     , scNice NTrue
-                    , scZero (boo True)
-                    , scRound (boo True)
+                    , scZero bTrue
+                    , scRound bTrue
                     , scRange RaWidth
                     ]
                 << scale "cScale"
@@ -302,7 +302,7 @@ barChart4 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axDomain (boo True) ]
+            axes << axis "xScale" SBottom [ axDomain bTrue ]
 
         nestedSc =
             scales
@@ -310,14 +310,14 @@ barChart4 =
                     [ scType ScBand
                     , scPaddingInner (numSignal "innerPadding")
                     , scPaddingOuter (numSignal "outerPadding")
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doData [ daDataset "faceted_tuples", daField (field "b") ])
                     , scRange (raStep (vSignal "rangeStep"))
                     ]
 
         nestedAx =
             axes
-                << axis "yScale" SLeft [ axTicks (boo False), axDomain (boo False), axLabelPadding (num 4) ]
+                << axis "yScale" SLeft [ axTicks bFalse, axDomain bFalse, axLabelPadding (num 4) ]
 
         nestedMk =
             marks
@@ -387,7 +387,7 @@ barChart5 =
                 << scale "yScale"
                     [ scType ScBand
                     , scRange (raValues [ vSignal "height", vNum 0 ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doData [ daDataset "ageGroups", daField (field "age") ])
                     ]
                 << scale "cScale"
@@ -399,7 +399,7 @@ barChart5 =
         topMk =
             marks
                 << mark Text
-                    [ mInteractive (boo False)
+                    [ mInteractive bFalse
                     , mFrom [ srData (str "ageGroups") ]
                     , mEncode
                         [ enEnter

@@ -24,7 +24,7 @@ histo1 =
                             (nums [ -1, 1 ])
                             [ bnAnchor (numSignal "binOffset")
                             , bnStep (numSignal "binStep")
-                            , bnNice (boo False)
+                            , bnNice bFalse
                             ]
                         , trAggregate
                             [ agKey (field "bin0")
@@ -56,9 +56,9 @@ histo1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doData [ daDataset "binned", daField (field "count") ])
-                    , scZero (boo True)
+                    , scZero bTrue
                     , scNice NTrue
                     ]
 
@@ -139,18 +139,18 @@ histo2 =
                     [ scType ScBinLinear
                     , scRange (raValues [ vSignal "barStep + nullGap", vSignal "width" ])
                     , scDomain (doNums (numSignal "binDomain"))
-                    , scRound (boo True)
+                    , scRound bTrue
                     ]
                 << scale "xScaleNull"
                     [ scType ScBand
                     , scRange (raValues [ vNum 0, vSignal "barStep" ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doStrs (strs [ "null" ]))
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scNice NTrue
                     , scDomain
                         (doData
@@ -250,7 +250,7 @@ density1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain
                         (doData
                             [ daReferences
@@ -340,9 +340,9 @@ boxplot1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange RaWidth
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
-                    , scZero (boo True)
+                    , scZero bTrue
                     , scNice NTrue
                     ]
                 << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
@@ -456,9 +456,9 @@ violinplot1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange RaWidth
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
-                    , scZero (boo True)
+                    , scZero bTrue
                     , scNice NTrue
                     ]
                 << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
@@ -767,38 +767,38 @@ scatter1 =
                     [ scType ScLinear
                     , scRange RaWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scNice NTrue
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scNice NTrue
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
                 << scale "sizeScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "summary", daField (field "count") ])
                     , scRange (raNums [ 0, 360 ])
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
 
         ax =
             axes
                 << axis "xScale"
                     SBottom
-                    [ axGrid (boo True)
-                    , axDomain (boo False)
+                    [ axGrid bTrue
+                    , axDomain bFalse
                     , axTickCount (num 5)
                     , axTitle (str "Horsepower")
                     ]
                 << axis "yScale"
                     SLeft
-                    [ axGrid (boo True)
-                    , axDomain (boo False)
+                    [ axGrid bTrue
+                    , axDomain bFalse
                     , axTitlePadding (vNum 5)
                     , axTitle (str "Miles per gallon")
                     ]
@@ -871,37 +871,37 @@ contour1 =
                     [ scType ScLinear
                     , scRange RaWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scNice NTrue
-                    , scZero (boo False)
+                    , scZero bFalse
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
-                    , scRound (boo True)
+                    , scRound bTrue
                     , scNice NTrue
-                    , scZero (boo False)
+                    , scZero bFalse
                     ]
                 << scale "cScale"
                     [ scType ScSequential
                     , scDomain (doData [ daDataset "contours", daField (field "value") ])
                     , scRange RaHeatmap
-                    , scZero (boo True)
+                    , scZero bTrue
                     ]
 
         ax =
             axes
                 << axis "xScale"
                     SBottom
-                    [ axGrid (boo True)
-                    , axDomain (boo False)
+                    [ axGrid bTrue
+                    , axDomain bFalse
                     , axTitle (str "Horsepower")
                     ]
                 << axis "yScale"
                     SLeft
-                    [ axGrid (boo True)
-                    , axDomain (boo False)
+                    [ axGrid bTrue
+                    , axDomain bFalse
                     , axTitle (str "Miles per gallon")
                     ]
 
@@ -950,7 +950,7 @@ wheat1 =
                             (nums [ -1, 1 ])
                             [ bnAnchor (numSignal "binOffset")
                             , bnStep (numSignal "binStep")
-                            , bnNice (boo False)
+                            , bnNice bFalse
                             , bnSignal "bins"
                             ]
                         , trStack [ stGroupBy [ field "bin0" ], stSort [ ( field "u", Ascend ) ] ]
@@ -992,10 +992,10 @@ wheat1 =
                 << axis "xScale"
                     SBottom
                     [ axValues (vSignal "sequence(bins.start, bins.stop + bins.step, bins.step)")
-                    , axDomain (boo False)
-                    , axTicks (boo False)
-                    , axLabels (boo False)
-                    , axGrid (boo True)
+                    , axDomain bFalse
+                    , axTicks bFalse
+                    , axLabels bFalse
+                    , axGrid bTrue
                     , axZIndex (num 0)
                     ]
                 << axis "xScale" SBottom [ axZIndex (num 1) ]
