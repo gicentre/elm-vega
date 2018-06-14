@@ -7437,9 +7437,9 @@ mKey =
 
 
 {-| Specify a unique name for a mark. This name can be used to refer to the mark
-within an event stream definition. SVG renderers will add this name value as a
-CSS class name on the enclosing SVG group (g) element containing the mark instances.
-For further details see the
+in another mark or within an event stream definition. SVG renderers will add this
+name value as a CSS class name on the enclosing SVG group (g) element containing
+the mark instances. For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks).
 -}
 mName : String -> TopMarkProperty
