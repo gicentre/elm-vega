@@ -42,7 +42,7 @@ lineChart1 =
                     [ scType ScLinear
                     , scRange RaHeight
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
                 << scale "cScale"
@@ -106,14 +106,14 @@ areaChart1 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange RaWidth
-                    , scZero bFalse
+                    , scZero false
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     ]
 
@@ -174,7 +174,7 @@ areaChart2 =
                     [ scType ScLinear
                     , scRange RaHeight
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
@@ -253,15 +253,15 @@ areaChart3 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange RaWidth
-                    , scZero bFalse
-                    , scRound bTrue
+                    , scZero false
+                    , scRound true
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange (raValues [ vSignal "vheight", vNum 0 ])
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
 
@@ -359,15 +359,15 @@ areaChart4 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scRange RaWidth
-                    , scZero bFalse
-                    , scRound bTrue
+                    , scZero false
+                    , scRound true
                     , scDomain (doData [ daDataset "jobs", daField (field "year") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scRange RaHeight
-                    , scZero bTrue
-                    , scRound bTrue
+                    , scZero true
+                    , scRound true
                     , scDomain (doData [ daDataset "jobs", daField (field "y1") ])
                     ]
                 << scale "cScale"
@@ -377,15 +377,15 @@ areaChart4 =
                     ]
                 << scale "alphaScale"
                     [ scType ScLinear
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "series", daField (field "sum") ])
                     , scRange (raNums [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
                     [ scType ScSqrt
                     , scRange (raNums [ 0, 20 ])
-                    , scZero bTrue
-                    , scRound bTrue
+                    , scZero true
+                    , scRound true
                     , scDomain (doData [ daDataset "series", daField (field "argmax.perc") ])
                     ]
                 << scale "opacityScale"
@@ -396,13 +396,13 @@ areaChart4 =
                 << scale "alignScale"
                     [ scType ScQuantize
                     , scRange (raStrs [ "left", "center", "right" ])
-                    , scZero bFalse
+                    , scZero false
                     , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
                 << scale "offsetScale"
                     [ scType ScQuantize
                     , scRange (raNums [ 6, 0, -6 ])
-                    , scZero bFalse
+                    , scZero false
                     , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
 
@@ -412,8 +412,8 @@ areaChart4 =
                 << axis "yScale"
                     SRight
                     [ axFormat "%"
-                    , axGrid bTrue
-                    , axDomain bFalse
+                    , axGrid true
+                    , axDomain false
                     , axTickSize (num 12)
                     , axEncode
                         [ ( EGrid, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
@@ -448,7 +448,7 @@ areaChart4 =
                     ]
                 << mark Text
                     [ mFrom [ srData (str "series") ]
-                    , mInteractive bFalse
+                    , mInteractive false
                     , mEncode
                         [ enUpdate
                             [ maX [ vField (field "argmax.year"), vScale "xScale" ]

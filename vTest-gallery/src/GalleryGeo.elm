@@ -125,7 +125,7 @@ geo2 =
             scales
                 << scale "sizeScale"
                     [ scDomain (doData [ daDataset "obesity", daField (field "rate") ])
-                    , scZero bFalse
+                    , scZero false
                     , scRange (raNums [ 1000, 5000 ])
                     ]
                 << scale "cScale"
@@ -165,7 +165,7 @@ geo2 =
                         ]
                     , mTransform
                         [ trForce
-                            [ fsStatic bTrue
+                            [ fsStatic true
                             , fsForces
                                 [ foCollide (numExpr (expr "1 + sqrt(datum.size) / 2")) []
                                 , foX (field "datum.myCentroid[0]") []
@@ -175,7 +175,7 @@ geo2 =
                         ]
                     ]
                 << mark Text
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mFrom [ srData (str "circles") ]
                     , mEncode
                         [ enEnter
@@ -449,7 +449,7 @@ geo5 =
                 << mark Shape
                     [ mFrom [ srData (str "graticule") ]
                     , mClip (clSphere (str "myProjection"))
-                    , mInteractive bFalse
+                    , mInteractive false
                     , mEncode
                         [ enEnter
                             [ maStrokeWidth [ vNum 1 ]

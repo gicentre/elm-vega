@@ -39,7 +39,7 @@ arcTest =
         mk =
             marks
                 << mark Symbol
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
@@ -87,13 +87,13 @@ areaTest =
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange RaWidth
-                    , scZero bFalse
+                    , scZero false
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange RaHeight
-                    , scZero bTrue
+                    , scZero true
                     , scNice NTrue
                     ]
 
@@ -185,7 +185,7 @@ groupTest =
             marks
                 << mark Rect
                     [ mFrom [ srData (str "table") ]
-                    , mInteractive bFalse
+                    , mInteractive false
                     , mEncode
                         [ enEnter
                             [ maX [ vField (field "x") ]
@@ -255,13 +255,13 @@ lineTest =
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange RaWidth
-                    , scZero bFalse
+                    , scZero false
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange RaHeight
-                    , scZero bTrue
+                    , scZero true
                     , scNice NTrue
                     ]
 
@@ -573,7 +573,7 @@ textTest =
         mk =
             marks
                 << mark Symbol
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
@@ -621,13 +621,13 @@ trailTest =
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     , scRange RaWidth
-                    , scZero bFalse
+                    , scZero false
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     , scRange RaHeight
-                    , scZero bTrue
+                    , scZero true
                     , scNice NTrue
                     ]
                 << scale "zscale"

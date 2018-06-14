@@ -10719,8 +10719,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(false);
-var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$false = _gicentre$elm_vega$Vega$Boo(false);
+var _gicentre$elm_vega$Vega$true = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };

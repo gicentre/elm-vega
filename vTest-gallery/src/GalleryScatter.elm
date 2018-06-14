@@ -25,33 +25,33 @@ scatterplot1 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRound bTrue
+                    , scRound true
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
                     , scRange RaWidth
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRound bTrue
+                    , scRound true
                     , scNice NTrue
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
                     , scRange RaHeight
                     ]
                 << scale "sizeScale"
                     [ scType ScLinear
-                    , scRound bTrue
+                    , scRound true
                     , scNice NFalse
-                    , scZero bTrue
+                    , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Acceleration") ])
                     , scRange (raNums [ 4, 361 ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axGrid bTrue, axDomain bFalse, axTickCount (num 5), axTitle (str "Horsepower") ]
-                << axis "yScale" SLeft [ axGrid bTrue, axDomain bFalse, axTickCount (num 5), axTitle (str "Miles per gallon") ]
+                << axis "xScale" SBottom [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Horsepower") ]
+                << axis "yScale" SLeft [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Miles per gallon") ]
 
         shapeEncoding =
             [ maStrokeWidth [ vNum 2 ]
@@ -190,7 +190,7 @@ scatterplot2 =
                         ]
                     ]
                 << mark Text
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mFrom [ srData (str "nullXY") ]
                     , mEncode
                         [ enUpdate
@@ -222,16 +222,16 @@ scatterplot3 =
                     , scDomain (doData [ daDataset "drive", daField (field "miles") ])
                     , scRange RaWidth
                     , scNice NTrue
-                    , scZero bFalse
-                    , scRound bTrue
+                    , scZero false
+                    , scRound true
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "drive", daField (field "gas") ])
                     , scRange RaHeight
                     , scNice NTrue
-                    , scZero bFalse
-                    , scRound bTrue
+                    , scZero false
+                    , scRound true
                     ]
                 << scale "alignScale"
                     [ scType ScOrdinal
@@ -260,8 +260,8 @@ scatterplot3 =
                     STop
                     [ axTickCount (num 5)
                     , axTickSize (num 0)
-                    , axGrid bTrue
-                    , axDomain bFalse
+                    , axGrid true
+                    , axDomain false
                     , axEncode
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
@@ -278,16 +278,16 @@ scatterplot3 =
                 << axis "xScale"
                     SBottom
                     [ axTitle (str "Miles driven per capita each year")
-                    , axDomain bFalse
-                    , axTicks bFalse
-                    , axLabels bFalse
+                    , axDomain false
+                    , axTicks false
+                    , axLabels false
                     ]
                 << axis "yScale"
                     SLeft
                     [ axTickCount (num 5)
                     , axTickSize (num 0)
-                    , axGrid bTrue
-                    , axDomain bFalse
+                    , axGrid true
+                    , axDomain false
                     , axFormat "$0.2f"
                     , axEncode
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
@@ -305,9 +305,9 @@ scatterplot3 =
                 << axis "yScale"
                     SRight
                     [ axTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
-                    , axDomain bFalse
-                    , axTicks bFalse
-                    , axLabels bFalse
+                    , axDomain false
+                    , axTicks false
+                    , axLabels false
                     ]
 
         mk =
@@ -403,9 +403,9 @@ scatterplot4 =
                     [ scType ScLinear
                     , scRange RaWidth
                     , scDomain (doData [ daDataset "summary", daFields [ field "stdev0", field "stdev1" ] ])
-                    , scRound bTrue
+                    , scRound true
                     , scNice NTrue
-                    , scZero bFalse
+                    , scZero false
                     ]
                 << scale "yScale"
                     [ scType ScBand
@@ -469,7 +469,7 @@ scatterplot5 =
                 << scale "gScale"
                     [ scType ScBand
                     , scRange (raValues [ vNum 0, vSignal "height" ])
-                    , scRound bTrue
+                    , scRound true
                     , scDomain
                         (doData
                             [ daDataset "barley"
@@ -478,13 +478,13 @@ scatterplot5 =
                             ]
                         )
                     , scNice NTrue
-                    , scZero bFalse
+                    , scZero false
                     ]
                 << scale "xScale"
                     [ scType ScLinear
                     , scNice NTrue
                     , scRange RaWidth
-                    , scRound bTrue
+                    , scRound true
                     , scDomain (doData [ daDataset "barley", daField (field "yield") ])
                     ]
                 << scale "cScale"
@@ -502,11 +502,11 @@ scatterplot5 =
                 << axis "yScale"
                     SLeft
                     [ axTickSize (num 0)
-                    , axDomain bFalse
-                    , axGrid bTrue
+                    , axDomain false
+                    , axGrid true
                     , axEncode [ ( EGrid, [ enEnter [ maStrokeDash [ vNums [ 3, 3 ] ] ] ] ) ]
                     ]
-                << axis "yScale" SRight [ axTickSize (num 0), axDomain bFalse ]
+                << axis "yScale" SRight [ axTickSize (num 0), axDomain false ]
 
         nestedMk =
             marks
@@ -529,7 +529,7 @@ scatterplot5 =
                     [ scType ScPoint
                     , scRange (raValues [ vNum 0, vSignal "cellHeight" ])
                     , scPadding (num 1)
-                    , scRound bTrue
+                    , scRound true
                     , scDomain
                         (doData
                             [ daDataset "barley"

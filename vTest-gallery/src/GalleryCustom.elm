@@ -88,7 +88,7 @@ custom1 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "budgets", daField (field "value") ])
-                    , scZero bTrue
+                    , scZero true
                     , scRange RaHeight
                     ]
 
@@ -96,8 +96,8 @@ custom1 =
             axes
                 << axis "xScale"
                     SBottom
-                    [ axGrid bTrue
-                    , axDomain bFalse
+                    [ axGrid true
+                    , axDomain false
                     , axValues (vNums [ 1982, 1986, 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018 ])
                     , axTickSize (num 0)
                     , axEncode
@@ -107,8 +107,8 @@ custom1 =
                     ]
                 << axis "yScale"
                     SRight
-                    [ axGrid bTrue
-                    , axDomain bFalse
+                    [ axGrid true
+                    , axDomain false
                     , axValues (vNums [ 0, -0.5, -1, -1.5 ])
                     , axTickSize (num 0)
                     , axEncode
@@ -135,7 +135,7 @@ custom1 =
         nestedMk2 =
             marks
                 << mark Text
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mEncode
                         [ enUpdate
                             [ maX [ vNum 6 ]
@@ -147,7 +147,7 @@ custom1 =
                         ]
                     ]
                 << mark Text
-                    [ mInteractive bFalse
+                    [ mInteractive false
                     , mEncode
                         [ enUpdate
                             [ maX [ vNum 6 ]
@@ -245,7 +245,7 @@ custom1 =
                     ]
                 << mark Group
                     [ mFrom [ srData (str "tooltip") ]
-                    , mInteractive bFalse
+                    , mInteractive false
                     , mEncode
                         [ enUpdate
                             [ maX [ vScale "xScale", vField (field "argmin.forecastYear"), vOffset (vNum -5) ]
@@ -265,9 +265,58 @@ custom1 =
         [ width 700, height 400, padding 5, background (str "#edf1f7"), ds, si [], sc [], ax [], mk [] ]
 
 
+custom2 : Spec
+custom2 =
+    let
+        ds =
+            dataSource
+                [ data "wheat" [ daUrl "https://vega.github.io/vega/data/wheat.json" ]
+                , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
+                , data "monarchs" [ daUrl "https://vega.github.io/vega/data/monarchs.json" ]
+                    |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" AlwaysUpdate ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange RaWidth
+                    , scDomain (doNums (nums [ 1565, 1825 ]))
+                    , scZero false
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scDomain (doNums (nums [ 1, 2 ]))
+                    , scRange (raStrs [ "#1f77b4", "#e377c2" ])
+                    ]
+
+        mk =
+            marks
+                << mark Text
+                    [ mInteractive false
+                    , mFrom [ srData (str "ageGroups") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vSignal "chartWidth + chartPad / 2" ]
+                            , maY [ vScale "yScale", vField (field "age"), vBand (num 0.5) ]
+                            , maText [ vField (field "age") ]
+                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maFill [ vStr "#000" ]
+                            ]
+                        ]
+                    ]
+
+        ax =
+            axes << axis "xScale" SBottom [ axFormat "s" ]
+    in
+    toVega
+        [ height 900, width 465, padding 5, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    custom1
+    custom2
 
 
 
@@ -278,6 +327,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "custom1", custom1 )
+        , ( "custom2", custom2 )
         ]
 
 

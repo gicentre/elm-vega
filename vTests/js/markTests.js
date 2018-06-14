@@ -10719,8 +10719,8 @@ var _user$project$Vega$boos = _user$project$Vega$Boos;
 var _user$project$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _user$project$Vega$bFalse = _user$project$Vega$Boo(false);
-var _user$project$Vega$bTrue = _user$project$Vega$Boo(true);
+var _user$project$Vega$false = _user$project$Vega$Boo(false);
+var _user$project$Vega$true = _user$project$Vega$Boo(true);
 var _user$project$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -19188,7 +19188,7 @@ var _user$project$MarkTests$trailTest = function () {
 							_0: _user$project$Vega$scRange(_user$project$Vega$RaWidth),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$scZero(_user$project$Vega$bFalse),
+								_0: _user$project$Vega$scZero(_user$project$Vega$false),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -19219,7 +19219,7 @@ var _user$project$MarkTests$trailTest = function () {
 								_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$scZero(_user$project$Vega$bTrue),
+									_0: _user$project$Vega$scZero(_user$project$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
@@ -19382,7 +19382,7 @@ var _user$project$MarkTests$textTest = function () {
 				_user$project$Vega$Symbol,
 				{
 					ctor: '::',
-					_0: _user$project$Vega$mInteractive(_user$project$Vega$bFalse),
+					_0: _user$project$Vega$mInteractive(_user$project$Vega$false),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$mEncode(
@@ -21941,7 +21941,7 @@ var _user$project$MarkTests$groupTest = function () {
 						}),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Vega$mInteractive(_user$project$Vega$bFalse),
+						_0: _user$project$Vega$mInteractive(_user$project$Vega$false),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$mEncode(
@@ -22879,7 +22879,7 @@ var _user$project$MarkTests$areaTest = function () {
 							_0: _user$project$Vega$scRange(_user$project$Vega$RaWidth),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$scZero(_user$project$Vega$bFalse),
+								_0: _user$project$Vega$scZero(_user$project$Vega$false),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -22910,7 +22910,7 @@ var _user$project$MarkTests$areaTest = function () {
 								_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$scZero(_user$project$Vega$bTrue),
+									_0: _user$project$Vega$scZero(_user$project$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
@@ -23036,7 +23036,7 @@ var _user$project$MarkTests$arcTest = function () {
 				_user$project$Vega$Symbol,
 				{
 					ctor: '::',
-					_0: _user$project$Vega$mInteractive(_user$project$Vega$bFalse),
+					_0: _user$project$Vega$mInteractive(_user$project$Vega$false),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$mEncode(
@@ -23925,7 +23925,7 @@ var _user$project$MarkTests$lineTest = function () {
 							_0: _user$project$Vega$scRange(_user$project$Vega$RaWidth),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Vega$scZero(_user$project$Vega$bFalse),
+								_0: _user$project$Vega$scZero(_user$project$Vega$false),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -23956,7 +23956,7 @@ var _user$project$MarkTests$lineTest = function () {
 								_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$scZero(_user$project$Vega$bTrue),
+									_0: _user$project$Vega$scZero(_user$project$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),

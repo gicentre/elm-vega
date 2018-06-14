@@ -10719,8 +10719,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(false);
-var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$false = _gicentre$elm_vega$Vega$Boo(false);
+var _gicentre$elm_vega$Vega$true = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -19121,16 +19121,16 @@ var _gicentre$elm_vega$GalleryDist$wheat1 = function () {
 						_gicentre$elm_vega$Vega$vSignal('sequence(bins.start, bins.stop + bins.step, bins.step)')),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axTicks(_gicentre$elm_vega$Vega$bFalse),
+							_0: _gicentre$elm_vega$Vega$axTicks(_gicentre$elm_vega$Vega$false),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$axLabels(_gicentre$elm_vega$Vega$bFalse),
+								_0: _gicentre$elm_vega$Vega$axLabels(_gicentre$elm_vega$Vega$false),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
+									_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$axZIndex(
@@ -19331,7 +19331,7 @@ var _gicentre$elm_vega$GalleryDist$wheat1 = function () {
 									_gicentre$elm_vega$Vega$numSignal('binStep')),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$bnNice(_gicentre$elm_vega$Vega$bFalse),
+									_0: _gicentre$elm_vega$Vega$bnNice(_gicentre$elm_vega$Vega$false),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$bnSignal('bins'),
@@ -19617,10 +19617,10 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
+					_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$axTitle(
@@ -19635,10 +19635,10 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
+						_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
+							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$false),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axTitle(
@@ -19676,13 +19676,13 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$false),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -19715,13 +19715,13 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
+											_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$false),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -19754,7 +19754,7 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 									_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeatmap),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20104,10 +20104,10 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 				_gicentre$elm_vega$Vega$SBottom,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
+					_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
+						_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$axTickCount(
@@ -20127,10 +20127,10 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 					_gicentre$elm_vega$Vega$SLeft,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$bTrue),
+						_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$bFalse),
+							_0: _gicentre$elm_vega$Vega$axDomain(_gicentre$elm_vega$Vega$false),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$axTitlePadding(
@@ -20173,13 +20173,13 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -20212,13 +20212,13 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 										})),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+											_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -20261,7 +20261,7 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -21983,7 +21983,7 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22000,7 +22000,7 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
@@ -22724,7 +22724,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -22741,7 +22741,7 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
@@ -23196,7 +23196,7 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -23832,7 +23832,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 									_gicentre$elm_vega$Vega$numSignal('binDomain'))),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -23859,7 +23859,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -23886,7 +23886,7 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 								_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
@@ -24418,7 +24418,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$bTrue),
+								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$scDomain(
@@ -24435,7 +24435,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 											})),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bTrue),
+										_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
@@ -24542,7 +24542,7 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 										_gicentre$elm_vega$Vega$numSignal('binStep')),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$bnNice(_gicentre$elm_vega$Vega$bFalse),
+										_0: _gicentre$elm_vega$Vega$bnNice(_gicentre$elm_vega$Vega$false),
 										_1: {ctor: '[]'}
 									}
 								}

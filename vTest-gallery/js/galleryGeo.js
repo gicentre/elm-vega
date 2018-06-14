@@ -11492,8 +11492,8 @@ var _gicentre$elm_vega$Vega$boos = _gicentre$elm_vega$Vega$Boos;
 var _gicentre$elm_vega$Vega$Boo = function (a) {
 	return {ctor: 'Boo', _0: a};
 };
-var _gicentre$elm_vega$Vega$bFalse = _gicentre$elm_vega$Vega$Boo(false);
-var _gicentre$elm_vega$Vega$bTrue = _gicentre$elm_vega$Vega$Boo(true);
+var _gicentre$elm_vega$Vega$false = _gicentre$elm_vega$Vega$Boo(false);
+var _gicentre$elm_vega$Vega$true = _gicentre$elm_vega$Vega$Boo(true);
 var _gicentre$elm_vega$Vega$ClSphere = function (a) {
 	return {ctor: 'ClSphere', _0: a};
 };
@@ -20934,7 +20934,7 @@ var _gicentre$elm_vega$GalleryGeo$geo5 = function () {
 									_gicentre$elm_vega$Vega$str('myProjection'))),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$bFalse),
+								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$mEncode(
@@ -21930,7 +21930,7 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 										_0: _gicentre$elm_vega$Vega$trForce(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$fsStatic(_gicentre$elm_vega$Vega$bTrue),
+												_0: _gicentre$elm_vega$Vega$fsStatic(_gicentre$elm_vega$Vega$true),
 												_1: {
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$fsForces(
@@ -21972,7 +21972,7 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 					_gicentre$elm_vega$Vega$Text,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$bFalse),
+						_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$mFrom(
@@ -22128,7 +22128,7 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 							})),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$bFalse),
+						_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$scRange(
