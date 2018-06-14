@@ -284,34 +284,122 @@ custom2 =
                     , scDomain (doNums (nums [ 1565, 1825 ]))
                     , scZero false
                     ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange RaHeight
+                    , scZero true
+                    , scDomain (doData [ daDataset "wheat", daField (field "wheat") ])
+                    ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scDomain (doNums (nums [ 1, 2 ]))
-                    , scRange (raStrs [ "#1f77b4", "#e377c2" ])
+                    , scRange (raStrs [ "black", "white" ])
+                    , scDomain (doData [ daDataset "monarchs", daField (field "commonwealth") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTickCount (num 5), axFormat "04d" ]
+                << axis "yScale"
+                    SRight
+                    [ axGrid true
+                    , axDomain false
+                    , axZIndex (num 1)
+                    , axTickCount (num 5)
+                    , axOffset (vNum 5)
+                    , axTickSize (num 0)
+                    , axEncode
+                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
+                        , ( ELabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
+                        ]
                     ]
 
         mk =
             marks
-                << mark Text
-                    [ mInteractive false
-                    , mFrom [ srData (str "ageGroups") ]
+                << mark Rect
+                    [ mFrom [ srData (str "wheat") ]
                     , mEncode
                         [ enEnter
-                            [ maX [ vSignal "chartWidth + chartPad / 2" ]
-                            , maY [ vScale "yScale", vField (field "age"), vBand (num 0.5) ]
-                            , maText [ vField (field "age") ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maFill [ vStr "#000" ]
+                            [ maX [ vScale "xScale", vField (field "year") ]
+                            , maWidth [ vNum 17 ]
+                            , maY [ vScale "yScale", vField (field "wheat") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "#aaa" ]
+                            , maStroke [ vStr "#5d5d5d" ]
+                            , maStrokeWidth [ vNum 0.25 ]
                             ]
                         ]
                     ]
-
-        ax =
-            axes << axis "xScale" SBottom [ axFormat "s" ]
+                << mark Area
+                    [ mFrom [ srData (str "wheat-filtered") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            , maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "wages") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "#b3d9e6" ]
+                            , maFillOpacity [ vNum 0.8 ]
+                            ]
+                        ]
+                    ]
+                << mark Line
+                    [ mFrom [ srData (str "wheat-filtered") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            , maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "wages") ]
+                            , maStroke [ vStr "#ff7e79" ]
+                            , maStrokeWidth [ vNum 3 ]
+                            ]
+                        ]
+                    ]
+                << mark Line
+                    [ mFrom [ srData (str "wheat-filtered") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            , maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "wages") ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mName "monarch_rects"
+                    , mFrom [ srData (str "monarchs") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "start") ]
+                            , maX2 [ vScale "xScale", vField (field "end") ]
+                            , maY [ vScale "yScale", vNum 95 ]
+                            , maY2 [ vScale "yScale", vField (field "offset") ]
+                            , maFill [ vScale "cScale", vField (field "commonwealth") ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 2 ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "monarch_rects") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vField (field "x") ]
+                            , maDx [ vField (field "width"), vMultiply (vNum 0.5) ]
+                            , maY [ vField (field "y2"), vOffset (vNum 14) ]
+                            , maText [ vField (field "datum.name") ]
+                            , maAlign [ hAlignLabel AlignCenter |> vStr ]
+                            , maFill [ vStr "black" ]
+                            , maFont [ vStr "Helvetica Neue, Arial" ]
+                            , maFontSize [ vNum 10 ]
+                            , maFontStyle [ vStr "italic" ]
+                            ]
+                        ]
+                    ]
     in
     toVega
-        [ height 900, width 465, padding 5, ds, sc [], ax [], mk [] ]
+        [ width 900, height 465, padding 5, ds, sc [], ax [], mk [] ]
 
 
 sourceExample : Spec
