@@ -86,13 +86,13 @@ areaTest =
                 << scale "xscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scZero (boo True)
                     , scNice NTrue
                     ]
@@ -254,13 +254,13 @@ lineTest =
                 << scale "xscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scZero (boo True)
                     , scNice NTrue
                     ]
@@ -620,13 +620,13 @@ trailTest =
                 << scale "xscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scZero (boo False)
                     ]
                 << scale "yscale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scZero (boo True)
                     , scNice NTrue
                     ]

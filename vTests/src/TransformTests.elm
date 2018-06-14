@@ -136,12 +136,12 @@ stackTest1 =
                 << scale "xScale"
                     [ scType ScBand
                     , scDomain (doStrs (strs [ "a", "b", "c" ]))
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
                 << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scRound (boo True)
                     ]
                 << scale "cScale"

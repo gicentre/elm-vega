@@ -19,7 +19,7 @@ helloWorld =
             scales
                 << scale "xscale"
                     [ scDomain (doData [ daDataset "table", daField (field "x") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
 
         mk =

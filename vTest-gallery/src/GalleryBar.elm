@@ -38,14 +38,14 @@ barChart1 =
                 << scale "xScale"
                     [ scType ScBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scPadding (num 0.05)
                     , scRound (boo True)
                     ]
                 << scale "yScale"
                     [ scDomain (doData [ daDataset "table", daField (field "amount") ])
                     , scNice NTrue
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     ]
 
         ax =
@@ -113,19 +113,19 @@ barChart2 =
             scales
                 << scale "xScale"
                     [ scType ScBand
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
                     [ scType ScLinear
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raDefault RCategory)
+                    , scRange RCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
@@ -172,13 +172,13 @@ barChart3 =
                 << scale "yScale"
                     [ scType ScBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scPadding (num 0.2)
                     ]
                 << scale "xScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "table", daField (field "value") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scRound (boo True)
                     , scZero (boo True)
                     , scNice NTrue
@@ -202,7 +202,7 @@ barChart3 =
             scales
                 << scale "pos"
                     [ scType ScBand
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scDomain (doData [ daDataset "facet", daField (field "position") ])
                     ]
 
@@ -293,11 +293,11 @@ barChart4 =
                     , scNice NTrue
                     , scZero (boo True)
                     , scRound (boo True)
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raDefault RCategory)
+                    , scRange RCategory
                     , scDomain (doData [ daDataset "trellis", daField (field "a") ])
                     ]
 

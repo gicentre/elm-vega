@@ -80,12 +80,12 @@ heatmap1 =
                 << scale "xScale"
                     [ scType ScTime
                     , scDomain (doData [ daDataset "temperature", daField (field "day") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
                 << scale "yScale"
                     [ scType ScBand
                     , scDomain (doNums (nums [ 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5 ]))
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     ]
                 << scale "cScale"
                     [ scType ScSequential
@@ -164,7 +164,7 @@ parallel1 =
         dimensionScale fName =
             scale fName
                 [ scType ScLinear
-                , scRange (raDefault RHeight)
+                , scRange RHeight
                 , scDomain (doData [ daDataset "cars", daField (field fName) ])
                 , scZero (boo False)
                 , scNice NTrue
@@ -174,7 +174,7 @@ parallel1 =
             scales
                 << scale "ord"
                     [ scType ScPoint
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scDomain (doData [ daDataset "fields", daField (field "data") ])
                     , scRound (boo True)
                     ]
@@ -312,7 +312,7 @@ timeline1 =
                     ]
                 << scale "xScale"
                     [ scType ScTime
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scDomain (doData [ daDataset "people", daFields [ field "born", field "died" ] ])
                     , scRound (boo True)
                     ]
@@ -413,7 +413,7 @@ beeswarm1 =
             scales
                 << scale "xScale"
                     [ scType ScBand
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scDomain (doData [ daDataset "people", daField (field "group"), daSort [] ])
                     ]
                 << scale "cScale"

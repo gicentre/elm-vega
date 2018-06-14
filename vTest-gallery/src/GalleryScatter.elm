@@ -29,7 +29,7 @@ scatterplot1 =
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
                 << scale "yScale"
                     [ scType ScLinear
@@ -37,7 +37,7 @@ scatterplot1 =
                     , scNice NTrue
                     , scZero (boo True)
                     , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     ]
                 << scale "sizeScale"
                     [ scType ScLinear
@@ -220,7 +220,7 @@ scatterplot3 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "drive", daField (field "miles") ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scNice NTrue
                     , scZero (boo False)
                     , scRound (boo True)
@@ -228,7 +228,7 @@ scatterplot3 =
                 << scale "yScale"
                     [ scType ScLinear
                     , scDomain (doData [ daDataset "drive", daField (field "gas") ])
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scNice NTrue
                     , scZero (boo False)
                     , scRound (boo True)
@@ -401,7 +401,7 @@ scatterplot4 =
             scales
                 << scale "xScale"
                     [ scType ScLinear
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scDomain (doData [ daDataset "summary", daFields [ field "stdev0", field "stdev1" ] ])
                     , scRound (boo True)
                     , scNice NTrue
@@ -409,7 +409,7 @@ scatterplot4 =
                     ]
                 << scale "yScale"
                     [ scType ScBand
-                    , scRange (raDefault RHeight)
+                    , scRange RHeight
                     , scDomain
                         (doData
                             [ daDataset "summary"
@@ -483,13 +483,13 @@ scatterplot5 =
                 << scale "xScale"
                     [ scType ScLinear
                     , scNice NTrue
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     , scRound (boo True)
                     , scDomain (doData [ daDataset "barley", daField (field "yield") ])
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raDefault RCategory)
+                    , scRange RCategory
                     , scDomain (doData [ daDataset "barley", daField (field "year") ])
                     ]
 

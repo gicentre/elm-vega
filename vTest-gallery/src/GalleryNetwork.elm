@@ -341,7 +341,7 @@ matrix1 =
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raDefault RCategory)
+                    , scRange RCategory
                     , scDomain
                         (doData
                             [ daReferences [ [ daDataset "nodes", daField (field "group") ], [ daSignal "count" ] ]
@@ -460,11 +460,11 @@ arc1 =
                 << scale "position"
                     [ scType ScBand
                     , scDomain (doData [ daDataset "nodes", daField (field "order"), daSort [] ])
-                    , scRange (raDefault RWidth)
+                    , scRange RWidth
                     ]
                 << scale "cScale"
                     [ scType ScOrdinal
-                    , scRange (raDefault RCategory)
+                    , scRange RCategory
                     , scDomain (doData [ daDataset "nodes", daField (field "group") ])
                     ]
 
