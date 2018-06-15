@@ -402,9 +402,124 @@ custom2 =
         [ width 900, height 465, padding 5, ds, sc [], ax [], mk [] ]
 
 
+custom3 : Spec
+custom3 =
+    let
+        ti =
+            title (strSignal "'Population of Falkensee from ' + years[0] + ' to ' + years[1]") []
+
+        table =
+            dataFromColumns "table" []
+                << dataColumn "year" (daNums [ 1875, 1890, 1910, 1925, 1933, 1939, 1946, 1950, 1964, 1971, 1981, 1985, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014 ])
+                << dataColumn "population" (daNums [ 1309, 1558, 4512, 8180, 15915, 24824, 28275, 29189, 29881, 26007, 24029, 23340, 22307, 22087, 22139, 22105, 22242, 22801, 24273, 25640, 27393, 29505, 32124, 33791, 35297, 36179, 36829, 37493, 38376, 39008, 39366, 39821, 40179, 40511, 40465, 40905, 41258, 41777 ])
+
+        ds =
+            let
+                obj start end label =
+                    [ ( "start", vNum start ), ( "end", vNum end ), ( "text", vStr label ) ]
+                        |> List.map (\( k, v ) -> keyValue k v)
+                        |> vObject
+            in
+            dataSource
+                [ table [] |> transform [ trExtentAsSignal (field "year") "years" ]
+                , data "annotation"
+                    [ vValues [ obj 1933 1945 "Nazi Rule", obj 1948 1989 "GDR (East Germany)" ]
+                        |> daValue
+                    ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "table", daField (field "year") ])
+                    , scZero false
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange RaHeight
+                    , scZero true
+                    , scNice NTrue
+                    , scDomain (doData [ daDataset "table", daField (field "population") ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raStrs [ "black", "red" ])
+                    , scDomain (doData [ daDataset "annotation", daField (field "text") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "Year"), axTickCount (num 15), axFormat "d" ]
+                << axis "yScale" SLeft [ axTitle (str "Population"), axTitlePadding (vNum 10), axGrid true ]
+
+        le =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leTitle (str "Period")
+                    , leOrient TopLeft
+                    , leOffset (vNum 8)
+                    , leEncode
+                        [ enSymbols
+                            [ enUpdate
+                                [ maStrokeWidth [ vNum 0 ]
+                                , maShape [ symbolLabel SymSquare |> vStr ]
+                                , maOpacity [ vNum 0.3 ]
+                                ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "annotation") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "start") ]
+                            , maX2 [ vScale "xScale", vField (field "end") ]
+                            , maY [ vNum 0 ]
+                            , maY2 [ vSignal "height" ]
+                            , maFill [ vScale "cScale", vField (field "text") ]
+                            , maOpacity [ vNum 0.2 ]
+                            ]
+                        ]
+                    ]
+                << mark Line
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ markInterpolationLabel Monotone |> vStr ]
+                            , maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "population") ]
+                            , maStroke [ vStr "steelblue" ]
+                            , maStrokeWidth [ vNum 3 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "year") ]
+                            , maY [ vScale "yScale", vField (field "population") ]
+                            , maStroke [ vStr "steelblue" ]
+                            , maStrokeWidth [ vNum 1.5 ]
+                            , maFill [ vStr "white" ]
+                            , maSize [ vNum 30 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 250, padding 5, ti, ds, sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    custom2
+    custom3
 
 
 
@@ -416,6 +531,7 @@ mySpecs =
     combineSpecs
         [ ( "custom1", custom1 )
         , ( "custom2", custom2 )
+        , ( "custom3", custom3 )
         ]
 
 

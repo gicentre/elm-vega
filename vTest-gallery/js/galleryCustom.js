@@ -18997,8 +18997,964 @@ var _gicentre$elm_vega$Vega$DenseRank = {ctor: 'DenseRank'};
 var _gicentre$elm_vega$Vega$Rank = {ctor: 'Rank'};
 var _gicentre$elm_vega$Vega$RowNumber = {ctor: 'RowNumber'};
 
-var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
+var _gicentre$elm_vega$GalleryCustom$custom3 = function () {
 	var mk = function (_p0) {
+		return _gicentre$elm_vega$Vega$marks(
+			A3(
+				_gicentre$elm_vega$Vega$mark,
+				_gicentre$elm_vega$Vega$Rect,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$srData(
+								_gicentre$elm_vega$Vega$str('annotation')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$maX(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vField(
+														_gicentre$elm_vega$Vega$field('start')),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maX2(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vField(
+															_gicentre$elm_vega$Vega$field('end')),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maY(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vNum(0),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY2(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vSignal('height'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maFill(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('cScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('text')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maOpacity(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(0.2),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$mark,
+					_gicentre$elm_vega$Vega$Line,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$srData(
+									_gicentre$elm_vega$Vega$str('table')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mEncode(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$enEnter(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maInterpolate(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vStr(
+														_gicentre$elm_vega$Vega$markInterpolationLabel(_gicentre$elm_vega$Vega$Monotone)),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maX(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vField(
+																_gicentre$elm_vega$Vega$field('year')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('population')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maStroke(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maStrokeWidth(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(3),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$mark,
+						_gicentre$elm_vega$Vega$Symbol,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mFrom(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$srData(
+										_gicentre$elm_vega$Vega$str('table')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maX(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vField(
+																_gicentre$elm_vega$Vega$field('year')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('population')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maStroke(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maStrokeWidth(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(1.5),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maFill(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vStr('white'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maSize(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vNum(30),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p0))));
+	};
+	var le = function (_p1) {
+		return _gicentre$elm_vega$Vega$legends(
+			A2(
+				_gicentre$elm_vega$Vega$legend,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$leFill('cScale'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$leTitle(
+							_gicentre$elm_vega$Vega$str('Period')),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$leOrient(_gicentre$elm_vega$Vega$TopLeft),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$leOffset(
+									_gicentre$elm_vega$Vega$vNum(8)),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$leEncode(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enSymbols(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$enUpdate(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maStrokeWidth(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(0),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maShape(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vStr(
+																			_gicentre$elm_vega$Vega$symbolLabel(_gicentre$elm_vega$Vega$SymSquare)),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maOpacity(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vNum(0.3),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				_p1));
+	};
+	var ax = function (_p2) {
+		return _gicentre$elm_vega$Vega$axes(
+			A4(
+				_gicentre$elm_vega$Vega$axis,
+				'xScale',
+				_gicentre$elm_vega$Vega$SBottom,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$axTitle(
+						_gicentre$elm_vega$Vega$str('Year')),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$axTickCount(
+							_gicentre$elm_vega$Vega$num(15)),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$axFormat('d'),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A4(
+					_gicentre$elm_vega$Vega$axis,
+					'yScale',
+					_gicentre$elm_vega$Vega$SLeft,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$axTitle(
+							_gicentre$elm_vega$Vega$str('Population')),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$axTitlePadding(
+								_gicentre$elm_vega$Vega$vNum(10)),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$axGrid(_gicentre$elm_vega$Vega$true),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p2)));
+	};
+	var sc = function (_p3) {
+		return _gicentre$elm_vega$Vega$scales(
+			A3(
+				_gicentre$elm_vega$Vega$scale,
+				'xScale',
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scDomain(
+								_gicentre$elm_vega$Vega$doData(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$daDataset('table'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daField(
+												_gicentre$elm_vega$Vega$field('year')),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$false),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$scale,
+					'yScale',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scZero(_gicentre$elm_vega$Vega$true),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$scNice(_gicentre$elm_vega$Vega$NTrue),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$scDomain(
+											_gicentre$elm_vega$Vega$doData(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$daDataset('table'),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$daField(
+															_gicentre$elm_vega$Vega$field('population')),
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$scale,
+						'cScale',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScOrdinal),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$scRange(
+									_gicentre$elm_vega$Vega$raStrs(
+										{
+											ctor: '::',
+											_0: 'black',
+											_1: {
+												ctor: '::',
+												_0: 'red',
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$scDomain(
+										_gicentre$elm_vega$Vega$doData(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$daDataset('annotation'),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$daField(
+														_gicentre$elm_vega$Vega$field('text')),
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p3))));
+	};
+	var table = function (_p4) {
+		return A3(
+			_gicentre$elm_vega$Vega$dataFromColumns,
+			'table',
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$Vega$dataColumn,
+				'year',
+				_gicentre$elm_vega$Vega$daNums(
+					{
+						ctor: '::',
+						_0: 1875,
+						_1: {
+							ctor: '::',
+							_0: 1890,
+							_1: {
+								ctor: '::',
+								_0: 1910,
+								_1: {
+									ctor: '::',
+									_0: 1925,
+									_1: {
+										ctor: '::',
+										_0: 1933,
+										_1: {
+											ctor: '::',
+											_0: 1939,
+											_1: {
+												ctor: '::',
+												_0: 1946,
+												_1: {
+													ctor: '::',
+													_0: 1950,
+													_1: {
+														ctor: '::',
+														_0: 1964,
+														_1: {
+															ctor: '::',
+															_0: 1971,
+															_1: {
+																ctor: '::',
+																_0: 1981,
+																_1: {
+																	ctor: '::',
+																	_0: 1985,
+																	_1: {
+																		ctor: '::',
+																		_0: 1989,
+																		_1: {
+																			ctor: '::',
+																			_0: 1990,
+																			_1: {
+																				ctor: '::',
+																				_0: 1991,
+																				_1: {
+																					ctor: '::',
+																					_0: 1992,
+																					_1: {
+																						ctor: '::',
+																						_0: 1993,
+																						_1: {
+																							ctor: '::',
+																							_0: 1994,
+																							_1: {
+																								ctor: '::',
+																								_0: 1995,
+																								_1: {
+																									ctor: '::',
+																									_0: 1996,
+																									_1: {
+																										ctor: '::',
+																										_0: 1997,
+																										_1: {
+																											ctor: '::',
+																											_0: 1998,
+																											_1: {
+																												ctor: '::',
+																												_0: 1999,
+																												_1: {
+																													ctor: '::',
+																													_0: 2000,
+																													_1: {
+																														ctor: '::',
+																														_0: 2001,
+																														_1: {
+																															ctor: '::',
+																															_0: 2002,
+																															_1: {
+																																ctor: '::',
+																																_0: 2003,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 2004,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 2005,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 2006,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 2007,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 2008,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 2009,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 2010,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 2011,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 2012,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 2013,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 2014,
+																																											_1: {ctor: '[]'}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$Vega$dataColumn,
+					'population',
+					_gicentre$elm_vega$Vega$daNums(
+						{
+							ctor: '::',
+							_0: 1309,
+							_1: {
+								ctor: '::',
+								_0: 1558,
+								_1: {
+									ctor: '::',
+									_0: 4512,
+									_1: {
+										ctor: '::',
+										_0: 8180,
+										_1: {
+											ctor: '::',
+											_0: 15915,
+											_1: {
+												ctor: '::',
+												_0: 24824,
+												_1: {
+													ctor: '::',
+													_0: 28275,
+													_1: {
+														ctor: '::',
+														_0: 29189,
+														_1: {
+															ctor: '::',
+															_0: 29881,
+															_1: {
+																ctor: '::',
+																_0: 26007,
+																_1: {
+																	ctor: '::',
+																	_0: 24029,
+																	_1: {
+																		ctor: '::',
+																		_0: 23340,
+																		_1: {
+																			ctor: '::',
+																			_0: 22307,
+																			_1: {
+																				ctor: '::',
+																				_0: 22087,
+																				_1: {
+																					ctor: '::',
+																					_0: 22139,
+																					_1: {
+																						ctor: '::',
+																						_0: 22105,
+																						_1: {
+																							ctor: '::',
+																							_0: 22242,
+																							_1: {
+																								ctor: '::',
+																								_0: 22801,
+																								_1: {
+																									ctor: '::',
+																									_0: 24273,
+																									_1: {
+																										ctor: '::',
+																										_0: 25640,
+																										_1: {
+																											ctor: '::',
+																											_0: 27393,
+																											_1: {
+																												ctor: '::',
+																												_0: 29505,
+																												_1: {
+																													ctor: '::',
+																													_0: 32124,
+																													_1: {
+																														ctor: '::',
+																														_0: 33791,
+																														_1: {
+																															ctor: '::',
+																															_0: 35297,
+																															_1: {
+																																ctor: '::',
+																																_0: 36179,
+																																_1: {
+																																	ctor: '::',
+																																	_0: 36829,
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 37493,
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 38376,
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 39008,
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 39366,
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 39821,
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 40179,
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 40511,
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 40465,
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 40905,
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 41258,
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 41777,
+																																												_1: {ctor: '[]'}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p4)));
+	};
+	var ds = function () {
+		var obj = F3(
+			function (start, end, label) {
+				return _gicentre$elm_vega$Vega$vObject(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p5) {
+							var _p6 = _p5;
+							return A2(_gicentre$elm_vega$Vega$keyValue, _p6._0, _p6._1);
+						},
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'start',
+								_1: _gicentre$elm_vega$Vega$vNum(start)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'end',
+									_1: _gicentre$elm_vega$Vega$vNum(end)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'text',
+										_1: _gicentre$elm_vega$Vega$vStr(label)
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						}));
+			});
+		return _gicentre$elm_vega$Vega$dataSource(
+			{
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$Vega$transform,
+					{
+						ctor: '::',
+						_0: A2(
+							_gicentre$elm_vega$Vega$trExtentAsSignal,
+							_gicentre$elm_vega$Vega$field('year'),
+							'years'),
+						_1: {ctor: '[]'}
+					},
+					table(
+						{ctor: '[]'})),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gicentre$elm_vega$Vega$data,
+						'annotation',
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$daValue(
+								_gicentre$elm_vega$Vega$vValues(
+									{
+										ctor: '::',
+										_0: A3(obj, 1933, 1945, 'Nazi Rule'),
+										_1: {
+											ctor: '::',
+											_0: A3(obj, 1948, 1989, 'GDR (East Germany)'),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	}();
+	var ti = A2(
+		_gicentre$elm_vega$Vega$title,
+		_gicentre$elm_vega$Vega$strSignal('\'Population of Falkensee from \' + years[0] + \' to \' + years[1]'),
+		{ctor: '[]'});
+	return _gicentre$elm_vega$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$Vega$width(500),
+			_1: {
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$height(250),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$padding(5),
+					_1: {
+						ctor: '::',
+						_0: ti,
+						_1: {
+							ctor: '::',
+							_0: ds,
+							_1: {
+								ctor: '::',
+								_0: sc(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: ax(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: le(
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: mk(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GalleryCustom$sourceExample = _gicentre$elm_vega$GalleryCustom$custom3;
+var _gicentre$elm_vega$GalleryCustom$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryCustom$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
+	var mk = function (_p7) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -19589,9 +20545,9 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 											_1: {ctor: '[]'}
 										}
 									},
-									_p0)))))));
+									_p7)))))));
 	};
-	var ax = function (_p1) {
+	var ax = function (_p8) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -19707,9 +20663,9 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 							}
 						}
 					},
-					_p1)));
+					_p8)));
 	};
-	var sc = function (_p2) {
+	var sc = function (_p9) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -19810,7 +20766,7 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 								}
 							}
 						},
-						_p2))));
+						_p9))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -19896,38 +20852,8 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$GalleryCustom$sourceExample = _gicentre$elm_vega$GalleryCustom$custom2;
-var _gicentre$elm_vega$GalleryCustom$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$GalleryCustom$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
-	var nestedMk2 = function (_p3) {
+	var nestedMk2 = function (_p10) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -20056,9 +20982,9 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p3)));
+					_p10)));
 	};
-	var nestedMk1 = function (_p4) {
+	var nestedMk1 = function (_p11) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -20139,9 +21065,9 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p4));
+				_p11));
 	};
-	var mk = function (_p5) {
+	var mk = function (_p12) {
 		return _gicentre$elm_vega$Vega$marks(
 			A3(
 				_gicentre$elm_vega$Vega$mark,
@@ -20788,9 +21714,9 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 													}
 												}
 											},
-											_p5)))))))));
+											_p12)))))))));
 	};
-	var ax = function (_p6) {
+	var ax = function (_p13) {
 		return _gicentre$elm_vega$Vega$axes(
 			A4(
 				_gicentre$elm_vega$Vega$axis,
@@ -21017,9 +21943,9 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 							}
 						}
 					},
-					_p6)));
+					_p13)));
 	};
-	var sc = function (_p7) {
+	var sc = function (_p14) {
 		return _gicentre$elm_vega$Vega$scales(
 			A3(
 				_gicentre$elm_vega$Vega$scale,
@@ -21079,9 +22005,9 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 							}
 						}
 					},
-					_p7)));
+					_p14)));
 	};
-	var si = function (_p8) {
+	var si = function (_p15) {
 		return _gicentre$elm_vega$Vega$signals(
 			A3(
 				_gicentre$elm_vega$Vega$signal,
@@ -21281,7 +22207,7 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 											_1: {ctor: '[]'}
 										}
 									},
-									_p8)))))));
+									_p15)))))));
 	};
 	var ds = _gicentre$elm_vega$Vega$dataSource(
 		{
@@ -21504,7 +22430,11 @@ var _gicentre$elm_vega$GalleryCustom$mySpecs = _gicentre$elm_vega$Vega$combineSp
 		_1: {
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'custom2', _1: _gicentre$elm_vega$GalleryCustom$custom2},
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'custom3', _1: _gicentre$elm_vega$GalleryCustom$custom3},
+				_1: {ctor: '[]'}
+			}
 		}
 	});
 var _gicentre$elm_vega$GalleryCustom$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
@@ -21521,7 +22451,7 @@ var _gicentre$elm_vega$GalleryCustom$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GalleryCustom$view,
 		update: F2(
-			function (_p9, model) {
+			function (_p16, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
