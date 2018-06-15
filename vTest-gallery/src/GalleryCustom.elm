@@ -522,9 +522,97 @@ custom3 =
         [ cf, width 500, height 250, padding 5, ti, ds, sc [], ax [], le [], mk [] ]
 
 
+custom4 : Spec
+custom4 =
+    let
+        cf =
+            config [ cfTitle [ tiFontSize (num 14) ] ]
+
+        ti =
+            title (str "Seattle Annual Temperatures") [ tiAnchor Start, tiOffset (num 4) ]
+
+        ds =
+            dataSource
+                [ data "temperature"
+                    [ daUrl "https://vega.github.io/vega/data/seattle-temps.csv"
+                    , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
+                    ]
+                    |> transform
+                        [ trFormula "hours(datum.date)" "hour" InitOnly
+                        , trFormula "datetime(year(datum.date), month(datum.date), date(datum.date))" "date" InitOnly
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "rangeStep" [ siValue (vNum 25) ]
+                << signal "height" [ siUpdate "rangeStep * 24" ]
+
+        sc =
+            scales
+                << scale "row"
+                    [ scType ScBand
+                    , scDomain (doNums (nums [ 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5 ]))
+                    , scRange (raStep (vSignal "rangeStep"))
+                    ]
+                << scale "xScale"
+                    [ scType ScTime
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "temperature", daField (field "date") ])
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange (raValues [ vSignal "rangeStep", vNum 1 ])
+                    , scZero false
+                    , scDomain (doData [ daDataset "temperature", daField (field "temp") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "Month"), axDomain false, axFormat "%b" ]
+                << axis "row"
+                    SLeft
+                    [ axTitle (str "Hour")
+                    , axDomain false
+                    , axTickSize (num 0)
+                    , axEncode [ ( ELabels, [ enUpdate [ maText [ vSignal "datum.value === 0 ? 'Midnight' : datum.value === 12 ? 'Noon' : datum.value < 12 ? datum.value + ':00 am' : (datum.value - 12) + ':00 pm'" ] ] ] ) ]
+                    ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mFrom [ srFacet "temperature" "hour" [ faGroupBy [ "hour" ] ] ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 0 ]
+                            , maY [ vScale "row", vField (field "hour") ]
+                            , maWidth [ vSignal "width" ]
+                            , maHeight [ vSignal "rangeStep" ]
+                            ]
+                        ]
+                    , mGroup [ nestedMk [] ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark Area
+                    [ mFrom [ srData (str "hour") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "date") ]
+                            , maY [ vScale "yScale", vField (field "temp") ]
+                            , maY2 [ vSignal "rangeStep" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, width 800, padding 5, ti, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    custom1
+    custom4
 
 
 
@@ -537,6 +625,7 @@ mySpecs =
         [ ( "custom1", custom1 )
         , ( "custom2", custom2 )
         , ( "custom3", custom3 )
+        , ( "custom4", custom4 )
         ]
 
 
