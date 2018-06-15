@@ -35,7 +35,6 @@ standardProjections =
 
 geo1 : Spec
 geo1 =
-    -- TODO: Add config
     let
         ds =
             dataSource
@@ -96,8 +95,10 @@ geo1 =
 
 geo2 : Spec
 geo2 =
-    -- TODO: Add config
     let
+        cf =
+            config [ cfLegend [ leGradientDirection Horizontal, leGradientLength (num 120), leGradientThickness (num 10) ] ]
+
         ds =
             dataSource
                 [ data "states"
@@ -193,7 +194,7 @@ geo2 =
                     ]
     in
     toVega
-        [ width 900, height 520, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
+        [ cf, width 900, height 520, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
 
 
 geo3 : Spec

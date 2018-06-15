@@ -147,7 +147,17 @@ heatmap1 =
 parallel1 : Spec
 parallel1 =
     let
-        --  TODO: Add config
+        cf =
+            config
+                [ cfAxis AxY
+                    [ axTitleX (num -2)
+                    , axTitleY (num 410)
+                    , axTitleAngle (num 0)
+                    , axTitleAlign AlignRight
+                    , axTitleBaseline AlignTop
+                    ]
+                ]
+
         ds =
             dataSource
                 [ data "cars"
@@ -224,7 +234,7 @@ parallel1 =
                     ]
     in
     toVega
-        [ width 700, height 400, padding 5, ds, sc [], ax [], mk [] ]
+        [ cf, width 700, height 400, padding 5, ds, sc [], ax [], mk [] ]
 
 
 wordcloud1 : Spec

@@ -359,8 +359,10 @@ scatterplot3 =
 
 scatterplot4 : Spec
 scatterplot4 =
-    -- TODO: Add config
     let
+        cf =
+            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+
         ds =
             dataSource
                 [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ]
@@ -449,7 +451,7 @@ scatterplot4 =
                     ]
     in
     toVega
-        [ width 500, height 160, padding 5, ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 500, height 160, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 scatterplot5 : Spec

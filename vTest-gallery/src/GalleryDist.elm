@@ -316,8 +316,10 @@ density1 =
 
 boxplot1 : Spec
 boxplot1 =
-    -- TODO: Add config
     let
+        cf =
+            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+
         ds =
             dataSource
                 [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
@@ -425,13 +427,15 @@ boxplot1 =
                     ]
     in
     toVega
-        [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 violinplot1 : Spec
 violinplot1 =
-    -- TODO: Add config
     let
+        cf =
+            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+
         ds =
             dataSource
                 [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
@@ -556,7 +560,7 @@ violinplot1 =
                     ]
     in
     toVega
-        [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
 window1 : Spec
@@ -843,8 +847,10 @@ scatter1 =
 
 contour1 : Spec
 contour1 =
-    -- TODO: Add config.
     let
+        cf =
+            config [ cfScaleRange RaHeatmap (raScheme (str "greenblue") []) ]
+
         ds =
             dataSource
                 [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
@@ -936,7 +942,7 @@ contour1 =
                     ]
     in
     toVega
-        [ width 500, height 400, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
+        [ cf, width 500, height 400, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
 wheat1 : Spec

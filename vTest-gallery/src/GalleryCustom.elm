@@ -14,8 +14,10 @@ import Vega exposing (..)
 
 custom1 : Spec
 custom1 =
-    -- TODO: Add config
     let
+        cf =
+            config [ cfAxis AxBand [ axBandPosition (num 0), axLabelPadding (num 5), axTickExtra false ] ]
+
         ds =
             dataSource
                 [ data "budgets" [ daUrl "https://vega.github.io/vega/data/budgets.json" ]
@@ -262,7 +264,7 @@ custom1 =
                     ]
     in
     toVega
-        [ width 700, height 400, padding 5, background (str "#edf1f7"), ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 700, height 400, padding 5, background (str "#edf1f7"), ds, si [], sc [], ax [], mk [] ]
 
 
 custom2 : Spec
@@ -405,6 +407,9 @@ custom2 =
 custom3 : Spec
 custom3 =
     let
+        cf =
+            config [ cfTitle [ tiFontSize (num 16) ] ]
+
         ti =
             title (strSignal "'Population of Falkensee from ' + years[0] + ' to ' + years[1]") []
 
@@ -514,12 +519,12 @@ custom3 =
                     ]
     in
     toVega
-        [ width 500, height 250, padding 5, ti, ds, sc [], ax [], le [], mk [] ]
+        [ cf, width 500, height 250, padding 5, ti, ds, sc [], ax [], le [], mk [] ]
 
 
 sourceExample : Spec
 sourceExample =
-    custom3
+    custom1
 
 
 
