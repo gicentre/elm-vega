@@ -393,7 +393,7 @@ custom2 =
                             , maText [ vField (field "datum.name") ]
                             , maAlign [ hCenter ]
                             , maFill [ vStr "black" ]
-                            , maFont [ vStr "Helvetica Neue, Arial" ]
+                            , maFont (str "Helvetica Neue, Arial")
                             , maFontSize [ vNum 10 ]
                             , maFontStyle [ vStr "italic" ]
                             ]
@@ -749,9 +749,229 @@ custom5 =
         [ width 250, height 200, ds, sc [], ax [], mk [] ]
 
 
+custom6 : Spec
+custom6 =
+    let
+        obj tuples =
+            vObject (List.map (\( k, v ) -> keyValue k (vNum v)) tuples)
+
+        cf =
+            config
+                [ cfMark Text [ maFont (str "Ideal Sans, Avenir Next, Helvetica") ]
+                , cfTitle
+                    [ tiFont "Ideal Sans, Avenir Next, Helvetica"
+                    , tiFontWeight (vNum 500)
+                    , tiFontSize (num 17)
+                    , tiLimit (num -1)
+                    ]
+                , cfAxis AxAll
+                    [ axLabelFont "Ideal Sans, Avenir Next, Helvetica"
+                    , axLabelFontSize (num 12)
+                    ]
+                ]
+
+        ti =
+            title (str "A Mile-Long Global Food Market: Mapping Cuisine from “The Ave”")
+                [ tiOrient STop
+                , tiAnchor Start
+                , tiOffset (num 48)
+                , tiEncode [ enUpdate [ maDx [ vNum -1 ] ] ]
+                ]
+
+        ds =
+            dataSource
+                [ data "source"
+                    [ daUrl "https://vega.github.io/vega/data/udistrict.json" ]
+                , (dataFromColumns "annotation" []
+                    << dataColumn "name" (daStrs [ "Boat St", "40th St.", "42nd St.", "45th St.", "50th St.", "55th St." ])
+                    << dataColumn "align" (daStrs [ "left", "center", "center", "center", "center", "center" ])
+                    << dataColumn "lat" (daNums [ 47.6516, 47.655363, 47.6584, 47.6614, 47.664924, 47.668519 ])
+                  )
+                    []
+                ]
+
+        si =
+            signals
+                << signal "size" [ siValue (vNum 2.3) ]
+                << signal "domainMax" [ siValue (vNum 5000) ]
+                << signal "bandwidth" [ siValue (vNum 0.0005) ]
+                << signal "offsets" [ siValue (obj [ ( "bubbletea", -1 ), ( "chinese", -1.5 ), ( "japanese", -2 ), ( "korean", -3 ), ( "mideastern", -2 ), ( "indian", -1 ), ( "breakfast", -3.5 ), ( "latin", 31 ) ]) ]
+                << signal "categories" [ siValue (vStrs [ "coffee", "drinks", "bubbletea", "vietnamese", "thai", "chinese", "japanese", "korean", "mideastern", "indian", "burgers", "pizza", "american", "breakfast", "bakeries", "seafood", "hawaiian", "veg", "latin" ]) ]
+                << signal "names" [ siValue (vStrs [ "Coffee", "Pubs, Lounges", "Bubble Tea, Juice", "Vietnamese", "Thai", "Chinese", "Japanese", "Korean", "Middle Eastern", "Indian, Pakistani", "Pizza", "Burgers", "American", "Breakfast, Brunch", "Bakeries", "Seafood", "Hawaiian", "Vegetarian, Vegan", "Mexican, Latin American" ]) ]
+                << signal "colors" [ siValue (vStrs [ "#7f7f7f", "#7f7f7f", "#7f7f7f", "#1f77b4", "#1f77b4", "#1f77b4", "#1f77b4", "#1f77b4", "#2ca02c", "#2ca02c", "#ff7f0e", "#ff7f0e", "#ff7f0e", "#8c564b", "#8c564b", "#e377c2", "#e377c2", "#bcbd22", "#17becf" ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange RaWidth
+                    , scZero false
+                    , scDomain (doData [ daDataset "source", daField (field "lat") ])
+                    ]
+                << scale "yScale"
+                    [ scType ScBand
+                    , scRange RaHeight
+                    , scRound true
+                    , scPadding (num 0)
+                    , scDomain (doStrs (strSignal "categories"))
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raSignal "colors")
+                    , scDomain (doSignal "categories")
+                    ]
+                << scale "names"
+                    [ scType ScOrdinal
+                    , scRange (raSignal "names")
+                    , scDomain (doSignal "categories")
+                    ]
+
+        ax =
+            axes
+                << axis "yScale"
+                    SRight
+                    [ axDomain false
+                    , axTicks false
+                    , axEncode
+                        [ ( ELabels
+                          , [ enUpdate
+                                [ maDx [ vNum 2 ]
+                                , maDy [ vNum 2 ]
+                                , maY [ vScale "yScale", vField (field "value"), vBand (num 1) ]
+                                , maText [ vScale "names", vField (field "value") ]
+                                , maBaseline [ vBottom ]
+                                ]
+                            ]
+                          )
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Rule
+                    [ mFrom [ srData (str "annotation") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vSignal "round(scale('xScale', datum.lat)) + 0.5" ]
+                            , maY [ vNum 20 ]
+                            , maX2 [ vSignal "round(scale('xScale', datum.lat)) + 0.5" ]
+                            , maY2 [ vSignal "height", vOffset (vNum 6) ]
+                            , maStroke [ vStr "#ddd" ]
+                            , maStrokeDash [ vNums [ 3, 2 ] ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "annotation") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "lat"), vOffset (vNum 0) ]
+                            , maDx [ vSignal "datum.align === 'left' ? -1 : 0" ]
+                            , maY [ vSignal "height", vOffset (vNum 6) ]
+                            , maAlign [ vField (field "align") ]
+                            , maBaseline [ vTop ]
+                            , maText [ vField (field "name") ]
+                            , maFontStyle [ vStr "italic" ]
+                            ]
+                        ]
+                    ]
+                << mark Group
+                    [ mFrom
+                        [ srFacet "source"
+                            "category"
+                            [ faGroupBy [ "key" ]
+                            , faAggregate
+                                [ agOps [ Min, Max, Count ]
+                                , agFields (List.repeat 3 (field "lat"))
+                                , agAs [ "min_lat", "max_lat", "count" ]
+                                ]
+                            ]
+                        ]
+                    , mEncode
+                        [ enUpdate
+                            [ maY [ vScale "yScale", vField (field "key") ]
+                            , maWidth [ vSignal "width" ]
+                            , maHeight [ vScale "yScale", vBand (num 1) ]
+                            ]
+                        ]
+                    , mSort [ ( field "y", Ascend ) ]
+                    , mGroup [ nestedDs, nestedSi [], nestedSc [], nestedMk [] ]
+                    ]
+
+        nestedDs =
+            dataSource
+                [ data "density" [ daSource "category" ]
+                    |> transform
+                        [ trDensity (diKde "" (field "lat") (numSignal "bandwidth"))
+                            [ dnSteps (num 200), dnExtent (numSignal "domain('xScale')") ]
+                        ]
+                ]
+
+        nestedSi =
+            signals << signal "height" [ siUpdate "bandwidth('yScale')" ]
+
+        nestedSc =
+            scales
+                << scale "yInner"
+                    [ scType ScLinear
+                    , scRange (raValues [ vSignal "height", vSignal "0 - size * height" ])
+                    , scDomain (doNums (numList [ num 0, numSignal "domainMax" ]))
+                    ]
+
+        nestedMk =
+            marks
+                << mark Area
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale "cScale", vField (fParent (field "key")) ]
+                            , maFillOpacity [ vNum 0.7 ]
+                            , maStroke [ vStr "white" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yInner", vSignal "parent.count * datum.density" ]
+                            , maY2 [ vScale "yInner", vNum 0 ]
+                            ]
+                        ]
+                    ]
+                << mark Rule
+                    [ mClip (clEnabled true)
+                    , mEncode
+                        [ enUpdate
+                            [ maY [ vSignal "height", vOffset (vNum -0.5) ]
+                            , maX [ vScale "xScale", vField (fParent (field "min_lat")), vOffset (vSignal "scale('xScale', 0) - scale('xScale', 2*bandwidth) + (offsets[parent.key] || 1) - 3") ]
+                            , maX2 [ vSignal "width" ]
+                            , maStroke [ vStr "#aaa" ]
+                            , maStrokeWidth [ vNum 0.25 ]
+                            , maStrokeOpacity [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "category") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFillOpacity [ vNum 0 ]
+                            , maSize [ vNum 50 ]
+                            , maTooltip [ vField (field "name") ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vField (field "lat") ]
+                            , maY [ vScale "yScale", vBand (num 0.5) ]
+                            , maFill [ vScale "cScale", vField (field "key") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, width 500, height 380, padding 5, autosize [ APad ], ti, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    custom5
+    custom6
 
 
 
@@ -766,6 +986,7 @@ mySpecs =
         , ( "custom3", custom3 )
         , ( "custom4", custom4 )
         , ( "custom5", custom5 )
+        , ( "custom6", custom6 )
         ]
 
 
