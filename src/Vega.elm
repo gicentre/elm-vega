@@ -341,7 +341,9 @@ module Vega
         , grStep
         , grStepMajor
         , grStepMinor
-        , hAlignLabel
+        , hCenter
+        , hLeft
+        , hRight
         , hclLong
         , height
         , hslLong
@@ -729,13 +731,15 @@ module Vega
         , trigger
         , true
         , utc
-        , vAlignLabel
+        , vAlphabetic
         , vBand
         , vBoo
         , vBoos
+        , vBottom
         , vColor
         , vExponent
         , vField
+        , vMiddle
         , vMultiply
         , vNull
         , vNum
@@ -748,6 +752,7 @@ module Vega
         , vSignal
         , vStr
         , vStrs
+        , vTop
         , vValues
         , voAs
         , voExtent
@@ -1759,9 +1764,14 @@ TODO: Introductory text on scale ranges
 @docs Cursor
 @docs cursorLabel
 @docs HAlign
-@docs hAlignLabel
+@docs hLeft
+@docs hCenter
+@docs hRight
 @docs VAlign
-@docs vAlignLabel
+@docs vTop
+@docs vMiddle
+@docs vBottom
+@docs vAlphabetic
 @docs Symbol
 @docs symPath
 @docs symbolLabel
@@ -5857,24 +5867,25 @@ type HAlign
     | AlignRight
 
 
-{-| A convenience function for generating a text string representing a horizontal
-alignment type. This can be used instead of specifying an alignment type as a
-literal string to avoid problems of mistyping its name.
-
-      MEncode [ enEnter [ maAlign [vStr (hAlignLabel AlignCenter) ] ] ]
-
+{-| Convenience function for indicating a central horiztonal alignment.
 -}
-hAlignLabel : HAlign -> String
-hAlignLabel align =
-    case align of
-        AlignLeft ->
-            "left"
+hCenter : Value
+hCenter =
+    hAlignLabel AlignCenter |> vStr
 
-        AlignCenter ->
-            "center"
 
-        AlignRight ->
-            "right"
+{-| Convenience function for indicating a left horiztonal alignment.
+-}
+hLeft : Value
+hLeft =
+    hAlignLabel AlignLeft |> vStr
+
+
+{-| Convenience function for indicating a right horiztonal alignment.
+-}
+hRight : Value
+hRight =
+    hAlignLabel AlignRight |> vStr
 
 
 {-| A long-path hue-chroma-luminance color interpolation.
@@ -10292,27 +10303,11 @@ type VAlign
     | Alphabetic
 
 
-{-| A convenience function for generating a text string representing a vertical
-alignment type. This can be used instead of specifying an alignment type as a
-literal string to avoid problems of mistyping its name.
-
-      MEncode [ Enter [maBaseline [ vStr (vAlignLabel AlignBottom) ] ] ]
-
+{-| Convenience function for indicating an alphabetic vertical alignment.
 -}
-vAlignLabel : VAlign -> String
-vAlignLabel align =
-    case align of
-        AlignTop ->
-            "top"
-
-        AlignMiddle ->
-            "middle"
-
-        AlignBottom ->
-            "bottom"
-
-        Alphabetic ->
-            "alphabetic"
+vAlphabetic : Value
+vAlphabetic =
+    vAlignLabel Alphabetic |> vStr
 
 
 {-| A value representing a band number or fraction of a band number. Band scales
@@ -10338,6 +10333,13 @@ vBoos =
     VBoos
 
 
+{-| Convenience function for indicating a bottom vertical alignment.
+-}
+vBottom : Value
+vBottom =
+    vAlignLabel AlignBottom |> vStr
+
+
 {-| A value representing a color.
 -}
 vColor : ColorValue -> Value
@@ -10358,6 +10360,13 @@ parent etc.
 vField : Field -> Value
 vField =
     VField
+
+
+{-| Convenience function for indicating a middle vertical alignment.
+-}
+vMiddle : Value
+vMiddle =
+    vAlignLabel AlignMiddle |> vStr
 
 
 {-| A value representing a multiplication value modifier.
@@ -10546,6 +10555,13 @@ vStr =
 vStrs : List String -> Value
 vStrs =
     VStrs
+
+
+{-| Convenience function for indicating a top vertical alignment.
+-}
+vTop : Value
+vTop =
+    vAlignLabel AlignTop |> vStr
 
 
 {-| Represents an a list of values. This can be used for nesting collections of
@@ -12013,6 +12029,19 @@ gridAlignSpec ga =
 
         AlignColumn align ->
             JE.object [ ( "column", gridAlignSpec align ) ]
+
+
+hAlignLabel : HAlign -> String
+hAlignLabel align =
+    case align of
+        AlignLeft ->
+            "left"
+
+        AlignCenter ->
+            "center"
+
+        AlignRight ->
+            "right"
 
 
 interpolateSpec : CInterpolate -> Spec
@@ -13913,6 +13942,22 @@ triggerProperties trans =
         -- Note the one-to-many relation between this trigger property and the labelled specs it generates.
         TgModifyValues modExpr valExpr ->
             [ ( "modify", expressionSpec modExpr ), ( "values", expressionSpec valExpr ) ]
+
+
+vAlignLabel : VAlign -> String
+vAlignLabel align =
+    case align of
+        AlignTop ->
+            "top"
+
+        AlignMiddle ->
+            "middle"
+
+        AlignBottom ->
+            "bottom"
+
+        Alphabetic ->
+            "alphabetic"
 
 
 valIfElse : String -> List Value -> List Value -> List Spec -> List Spec

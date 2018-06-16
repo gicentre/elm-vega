@@ -81,7 +81,7 @@ tree1 =
                         [ enEnter
                             [ maText [ vField (field "name") ]
                             , maFontSize [ vNum 9 ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maBaseline [ vMiddle ]
                             ]
                         , enUpdate
                             [ maX [ vField (field "x") ]
@@ -180,7 +180,7 @@ tree2 =
                         [ enEnter
                             [ maText [ vField (field "name") ]
                             , maFontSize [ vNum 9 ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maBaseline [ vMiddle ]
                             ]
                         , enUpdate
                             [ maX [ vField (field "x") ]
@@ -281,8 +281,8 @@ tree3 =
                     , mEncode
                         [ enEnter
                             [ maFont [ vStr "Helvetica Neue, Arial" ]
-                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
                             , maFill [ vStr "black" ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vScale "size", vField (field "depth") ]

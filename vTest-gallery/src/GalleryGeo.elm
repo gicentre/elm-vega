@@ -180,8 +180,8 @@ geo2 =
                     , mFrom [ srData (str "circles") ]
                     , mEncode
                         [ enEnter
-                            [ maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
                             , maFontSize [ vNum 13 ]
                             , maFontWeight [ vStr "bold" ]
                             , maText [ vField (field "datum.state") ]
@@ -480,7 +480,7 @@ geo5 =
                             , maDy [ vField (field "dy") ]
                             , maX [ vNum 5 ]
                             , maY [ vNum (mapHeight - 5) ]
-                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maBaseline [ vBottom ]
                             , maFontSize [ vNum 14 ]
                             , maFontWeight [ vStr "bold" ]
                             , maText [ vSignal "parent.data" ]
@@ -493,7 +493,7 @@ geo5 =
                             [ maFill [ vStr "black" ]
                             , maX [ vNum 5 ]
                             , maY [ vNum (mapHeight - 5) ]
-                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maBaseline [ vBottom ]
                             , maFontSize [ vNum 14 ]
                             , maFontWeight [ vStr "bold" ]
                             , maText [ vSignal "parent.data" ]

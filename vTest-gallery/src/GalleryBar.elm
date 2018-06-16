@@ -71,8 +71,8 @@ barChart1 =
                 << mark Text
                     [ mEncode
                         [ enEnter
-                            [ maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
                             , maFill [ vStr "#333" ]
                             ]
                         , enUpdate
@@ -228,8 +228,8 @@ barChart3 =
                             [ maX [ vField (field "x2"), vOffset (vNum -5) ]
                             , maY [ vField (field "y"), vOffset (vObject [ vField (field "height"), vMultiply (vNum 0.5) ]) ]
                             , maFill [ vStr "white" ]
-                            , maAlign [ vStr (hAlignLabel AlignRight) ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maAlign [ hRight ]
+                            , maBaseline [ vMiddle ]
                             , maText [ vField (field "datum.value") ]
                             ]
                         ]
@@ -406,8 +406,8 @@ barChart5 =
                             [ maX [ vSignal "chartWidth + chartPad / 2" ]
                             , maY [ vScale "yScale", vField (field "age"), vBand (num 0.5) ]
                             , maText [ vField (field "age") ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
-                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
+                            , maBaseline [ vMiddle ]
+                            , maAlign [ hCenter ]
                             , maFill [ vStr "#000" ]
                             ]
                         ]

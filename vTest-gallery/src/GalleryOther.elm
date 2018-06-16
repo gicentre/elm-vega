@@ -269,8 +269,8 @@ wordcloud1 =
                     , mEncode
                         [ enEnter
                             [ maText [ vField (field "text") ]
-                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel Alphabetic) ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vAlphabetic ]
                             , maFill [ vScale "cScale", vField (field "text") ]
                             ]
                         , enUpdate [ maFillOpacity [ vNum 1 ] ]

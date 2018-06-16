@@ -459,7 +459,7 @@ areaChart4 =
                             , maFontSize [ vField (field "argmax.perc"), vScale "fontScale", vOffset (vNum 5) ]
                             , maText [ vField (field "job") ]
                             , maAlign [ vField (field "argmax.year"), vScale "alignScale" ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            , maBaseline [ vMiddle ]
                             ]
                         ]
                     ]

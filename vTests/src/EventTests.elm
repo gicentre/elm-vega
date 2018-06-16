@@ -42,7 +42,7 @@ uiEvents =
                     ]
                 << mark Text
                     [ mEncode
-                        [ enEnter [ maAlign [ vStr (hAlignLabel AlignCenter) ] ]
+                        [ enEnter [ maAlign [ hCenter ] ]
                         , enUpdate
                             [ maX [ vSignal "rSize / 2" ]
                             , maY [ vSignal "rSize / 2" ]
@@ -87,8 +87,8 @@ eventStream1 =
                 << mark Text
                     [ mEncode
                         [ enEnter
-                            [ maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel AlignMiddle) ]
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
                             , maFill [ vStr "white" ]
                             , maText [ vStr "Drag me" ]
                             ]

@@ -197,8 +197,8 @@ scatterplot2 =
                             [ maX [ vSignal "nullSize", vOffset (vNum -4) ]
                             , maY [ vSignal "height", vOffset (vNum 13) ]
                             , maText [ vSignal "datum.count + ' null'" ]
-                            , maAlign [ vStr (hAlignLabel AlignRight) ]
-                            , maBaseline [ vStr (vAlignLabel AlignTop) ]
+                            , maAlign [ hRight ]
+                            , maBaseline [ vTop ]
                             , maFill [ vStr "#999" ]
                             , maFontSize [ vNum 9 ]
                             ]
@@ -266,8 +266,8 @@ scatterplot3 =
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ enEnter
-                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
-                                , maBaseline [ vStr (vAlignLabel AlignTop) ]
+                                [ maAlign [ hLeft ]
+                                , maBaseline [ vTop ]
                                 , maFontSize [ vNum 12 ]
                                 , maFontWeight [ vStr "bold" ]
                                 ]
@@ -293,8 +293,8 @@ scatterplot3 =
                         [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
                         , ( ELabels
                           , [ enEnter
-                                [ maAlign [ vStr (hAlignLabel AlignLeft) ]
-                                , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                                [ maAlign [ hLeft ]
+                                , maBaseline [ vBottom ]
                                 , maFontSize [ vNum 12 ]
                                 , maFontWeight [ vStr "bold" ]
                                 ]
@@ -578,8 +578,8 @@ scatterplot5 =
                             , maFontSize [ vNum 11 ]
                             , maFontWeight [ vStr "bold" ]
                             , maText [ vField (field "datum.site") ]
-                            , maAlign [ vStr (hAlignLabel AlignCenter) ]
-                            , maBaseline [ vStr (vAlignLabel AlignBottom) ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
                             , maFill [ vStr "black" ]
                             ]
                         ]
