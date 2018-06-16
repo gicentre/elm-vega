@@ -156,7 +156,7 @@ custom1 =
                             , maY [ vNum 29 ]
                             , maText [ vSignal "parent.argmin.forecastYear + ': ' + format(parent.argmin.abs, '$.3f') + ' trillion ' + parent.argmin.type" ]
                             , maFill [ vStr "black" ]
-                            , maAlign [ hAlignLabel AlignLeft |> vStr ]
+                            , maAlign [ hLeft ]
                             ]
                         ]
                     ]
@@ -391,7 +391,7 @@ custom2 =
                             , maDx [ vField (field "width"), vMultiply (vNum 0.5) ]
                             , maY [ vField (field "y2"), vOffset (vNum 14) ]
                             , maText [ vField (field "datum.name") ]
-                            , maAlign [ hAlignLabel AlignCenter |> vStr ]
+                            , maAlign [ hCenter ]
                             , maFill [ vStr "black" ]
                             , maFont [ vStr "Helvetica Neue, Arial" ]
                             , maFontSize [ vNum 10 ]
@@ -610,9 +610,148 @@ custom4 =
         [ cf, width 800, padding 5, ti, ds, si [], sc [], ax [], mk [] ]
 
 
+custom5 : Spec
+custom5 =
+    let
+        ds =
+            dataSource
+                [ data "weather"
+                    [ daUrl "https://vega.github.io/vega/data/weather.json" ]
+                , data "actual"
+                    [ daSource "weather" ]
+                    |> transform [ trFilter (expr "datum.actual") ]
+                , data "forecast"
+                    [ daSource "weather" ]
+                    |> transform [ trFilter (expr "datum.forecast") ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScBand
+                    , scRange RaWidth
+                    , scPadding (num 0.1)
+                    , scRound true
+                    , scDomain (doData [ daDataset "weather", daField (field "id") ])
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange RaHeight
+                    , scNice NTrue
+                    , scZero false
+                    , scRound true
+                    , scDomain (doData [ daDataset "weather", daFields [ field "record.low", field "record.high" ] ])
+                    ]
+
+        ax =
+            axes
+                << axis "yScale"
+                    SRight
+                    [ axTickCount (num 3)
+                    , axTickSize (num 0)
+                    , axLabelPadding (num 0)
+                    , axGrid true
+                    , axDomain false
+                    , axZIndex (num 1)
+                    , axEncode [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ] ] ] ) ]
+                    ]
+
+        mk =
+            marks
+                << mark Text
+                    [ mFrom [ srData (str "weather") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id") ]
+                            , maDx [ vScale "xScale", vBand (num 0.5) ]
+                            , maY [ vNum 0 ]
+                            , maFill [ vStr "black" ]
+                            , maText [ vField (field "day") ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "weather") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id") ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -1) ]
+                            , maY [ vScale "yScale", vField (field "record.low") ]
+                            , maY2 [ vScale "yScale", vField (field "record.high") ]
+                            , maFill [ vStr "#ccc" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "weather") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id") ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -1) ]
+                            , maY [ vScale "yScale", vField (field "normal.low") ]
+                            , maY2 [ vScale "yScale", vField (field "normal.high") ]
+                            , maFill [ vStr "#999" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "actual") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id"), vOffset (vNum 4) ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
+                            , maY [ vScale "yScale", vField (field "actual.low") ]
+                            , maY2 [ vScale "yScale", vField (field "actual.high") ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "forecast") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id"), vOffset (vNum 9) ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -18) ]
+                            , maY [ vScale "yScale", vField (field "forecast.low.low") ]
+                            , maY2 [ vScale "yScale", vField (field "forecast.high.high") ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "forecast") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id"), vOffset (vNum 4) ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
+                            , maY [ vScale "yScale", vField (field "forecast.low.low") ]
+                            , maY2 [ vScale "yScale", vField (field "forecast.low.high") ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mFrom [ srData (str "forecast") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "id"), vOffset (vNum 4) ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
+                            , maY [ vScale "yScale", vField (field "forecast.high.low") ]
+                            , maY2 [ vScale "yScale", vField (field "forecast.high.high") ]
+                            , maFill [ vStr "black" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 250, height 200, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    custom4
+    custom5
 
 
 
@@ -626,6 +765,7 @@ mySpecs =
         , ( "custom2", custom2 )
         , ( "custom3", custom3 )
         , ( "custom4", custom4 )
+        , ( "custom5", custom5 )
         ]
 
 

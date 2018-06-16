@@ -19410,7 +19410,591 @@ var _gicentre$elm_vega$GalleryCustom$custom5 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p0));
+				A3(
+					_gicentre$elm_vega$Vega$mark,
+					_gicentre$elm_vega$Vega$Rect,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$srData(
+									_gicentre$elm_vega$Vega$str('weather')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mEncode(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$enEnter(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maX(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vField(
+															_gicentre$elm_vega$Vega$field('id')),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maWidth(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vBand(
+																_gicentre$elm_vega$Vega$num(1)),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vOffset(
+																	_gicentre$elm_vega$Vega$vNum(-1)),
+																_1: {ctor: '[]'}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('record.low')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maY2(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('record.high')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maFill(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vStr('#ccc'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$mark,
+						_gicentre$elm_vega$Vega$Rect,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mFrom(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$srData(
+										_gicentre$elm_vega$Vega$str('weather')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maX(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vField(
+																_gicentre$elm_vega$Vega$field('id')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maWidth(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vBand(
+																	_gicentre$elm_vega$Vega$num(1)),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vOffset(
+																		_gicentre$elm_vega$Vega$vNum(-1)),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maY(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('normal.low')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maY2(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field('normal.high')),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maFill(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vStr('#999'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						A3(
+							_gicentre$elm_vega$Vega$mark,
+							_gicentre$elm_vega$Vega$Rect,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mFrom(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$srData(
+											_gicentre$elm_vega$Vega$str('actual')),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mEncode(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enEnter(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maX(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('id')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vOffset(
+																		_gicentre$elm_vega$Vega$vNum(4)),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maWidth(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vBand(
+																		_gicentre$elm_vega$Vega$num(1)),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vOffset(
+																			_gicentre$elm_vega$Vega$vNum(-8)),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maY(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field('actual.low')),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maY2(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vField(
+																				_gicentre$elm_vega$Vega$field('actual.high')),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maFill(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vStr('black'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							A3(
+								_gicentre$elm_vega$Vega$mark,
+								_gicentre$elm_vega$Vega$Rect,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mFrom(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$srData(
+												_gicentre$elm_vega$Vega$str('forecast')),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mEncode(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$enEnter(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field('id')),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vOffset(
+																			_gicentre$elm_vega$Vega$vNum(9)),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maWidth(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vBand(
+																			_gicentre$elm_vega$Vega$num(1)),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vOffset(
+																				_gicentre$elm_vega$Vega$vNum(-18)),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maY(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vField(
+																				_gicentre$elm_vega$Vega$field('forecast.low.low')),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maY2(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vField(
+																					_gicentre$elm_vega$Vega$field('forecast.high.high')),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$maFill(
+																			{
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vStr('black'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								},
+								A3(
+									_gicentre$elm_vega$Vega$mark,
+									_gicentre$elm_vega$Vega$Rect,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mFrom(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$srData(
+													_gicentre$elm_vega$Vega$str('forecast')),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$mEncode(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$enEnter(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maX(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field('id')),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vOffset(
+																				_gicentre$elm_vega$Vega$vNum(4)),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maWidth(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vBand(
+																				_gicentre$elm_vega$Vega$num(1)),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vOffset(
+																					_gicentre$elm_vega$Vega$vNum(-8)),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maY(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vField(
+																					_gicentre$elm_vega$Vega$field('forecast.low.low')),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$maY2(
+																			{
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																				_1: {
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vField(
+																						_gicentre$elm_vega$Vega$field('forecast.low.high')),
+																					_1: {ctor: '[]'}
+																				}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$maFill(
+																				{
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vStr('black'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									},
+									A3(
+										_gicentre$elm_vega$Vega$mark,
+										_gicentre$elm_vega$Vega$Rect,
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$mFrom(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$srData(
+														_gicentre$elm_vega$Vega$str('forecast')),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$mEncode(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$enEnter(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maX(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vField(
+																				_gicentre$elm_vega$Vega$field('id')),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vOffset(
+																					_gicentre$elm_vega$Vega$vNum(4)),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maWidth(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vScale('xScale'),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vBand(
+																					_gicentre$elm_vega$Vega$num(1)),
+																				_1: {
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vOffset(
+																						_gicentre$elm_vega$Vega$vNum(-8)),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$maY(
+																			{
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																				_1: {
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vField(
+																						_gicentre$elm_vega$Vega$field('forecast.high.low')),
+																					_1: {ctor: '[]'}
+																				}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$maY2(
+																				{
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																					_1: {
+																						ctor: '::',
+																						_0: _gicentre$elm_vega$Vega$vField(
+																							_gicentre$elm_vega$Vega$field('forecast.high.high')),
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$maFill(
+																					{
+																						ctor: '::',
+																						_0: _gicentre$elm_vega$Vega$vStr('black'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										},
+										_p0))))))));
 	};
 	var ax = function (_p1) {
 		return _gicentre$elm_vega$Vega$axes(
@@ -19571,7 +20155,7 @@ var _gicentre$elm_vega$GalleryCustom$custom5 = function () {
 				'weather',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/sweather.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/weather.json'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
