@@ -590,7 +590,7 @@ textTest =
                             , maAngle [ vSignal "angle" ]
                             , maAlign [ vSignal "align" ]
                             , maBaseline [ vSignal "baseline" ]
-                            , maFont [ vSignal "font" ]
+                            , maFont (strSignal "font")
                             , maFontSize [ vSignal "fontSize" ]
                             , maFontStyle [ vSignal "fontStyle" ]
                             , maFontWeight [ vSignal "fontWeight" ]

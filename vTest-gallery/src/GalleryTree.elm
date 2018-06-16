@@ -280,7 +280,7 @@ tree3 =
                     , mInteractive false
                     , mEncode
                         [ enEnter
-                            [ maFont [ vStr "Helvetica Neue, Arial" ]
+                            [ maFont (str "Helvetica Neue, Arial")
                             , maAlign [ hCenter ]
                             , maBaseline [ vMiddle ]
                             , maFill [ vStr "black" ]

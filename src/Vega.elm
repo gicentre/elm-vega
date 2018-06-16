@@ -260,6 +260,8 @@ module Vega
         , dnSteps
         , doData
         , doNums
+        , doSignal
+        , doSignals
         , doStrs
         , dsv
         , enCustom
@@ -300,6 +302,7 @@ module Vega
         , fGroup
         , fParent
         , fSignal
+        , faAggregate
         , faField
         , faGroupBy
         , false
@@ -1429,6 +1432,8 @@ TODO: Introductory text on scale domains.
 @docs scDomainRaw
 @docs doNums
 @docs doStrs
+@docs doSignal
+@docs doSignals
 @docs doData
 
 
@@ -1688,6 +1693,7 @@ TODO: Introductory text on scale ranges
 @docs srFacet
 @docs faField
 @docs faGroupBy
+@docs faAggregate
 
 
 ## Lower-level Mark Properties
@@ -2708,7 +2714,7 @@ type MarkProperty
     | MdX (List Value)
     | MdY (List Value)
     | MEllipsis (List Value)
-    | MFont (List Value)
+    | MFont Str
     | MFontSize (List Value)
     | MFontWeight (List Value)
     | MFontStyle (List Value)
@@ -2815,8 +2821,6 @@ type ProjectionProperty
 type ScaleDomain
     = DoNums Num
     | DoStrs Str
-      -- TODO: Array can contain signals (ie. not just a single signal referencing an array).
-      -- Should we add an array of signals to basic Num and Str types?
       -- TODO: Can we have DateTimes as literals?
     | DoData (List DataReference)
 
@@ -4856,11 +4860,12 @@ description s =
     ( VDescription, JE.string s )
 
 
-{-| Specifies a kernel density estimate (smoothed probability distribution) for
-a set of numerical values. The first parameter is the data set containing the source
-data, the second the name of the field within that dataset contianing the numerical
-values and the third the bandwidth of the kernel. If the bandwidth is 0, it will
-be estimated from the input data. For details see the
+{-| Specifies a kernel density estimate (smoothed probability distribution)
+for a set of numerical values. The first parameter is the data set containing
+the source data (or empty string if not to be specified explicitly), the
+second the name of the field contianing the numerical values and the third
+the bandwidth of the kernel. If the bandwidth is 0, it will be estimated
+from the input data. For details see the
 [Vega distribution documentation](https://vega.github.io/vega/docs/transforms/density/#distributions).
 -}
 diKde : String -> Field -> Num -> Distribution
@@ -4978,6 +4983,22 @@ the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
 doNums : Num -> ScaleDomain
 doNums =
     DoNums
+
+
+{-| A signal representing a scale domain. For details see
+the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+-}
+doSignal : String -> ScaleDomain
+doSignal s =
+    DoStrs (StrSignal s)
+
+
+{-| A list of signals representing a scale domain. For details see
+the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+-}
+doSignals : List String -> ScaleDomain
+doSignals ss =
+    DoStrs (StrSignals ss)
 
 
 {-| An string array literal (`Strs`) representing a scale domain. For details see
@@ -7085,7 +7106,7 @@ font definition. This may be specified directly, via a field, a signal or any ot
 string-generating value. For further details see the
 [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
 -}
-maFont : List Value -> MarkProperty
+maFont : Str -> MarkProperty
 maFont =
     MFont
 
@@ -11552,12 +11573,19 @@ distributionSpec dist =
                 ]
 
         DiKde dSource f bw ->
-            JE.object
-                [ ( "function", JE.string "kde" )
-                , ( "from", JE.string dSource )
-                , ( "field", fieldSpec f )
-                , ( "bandwidth", numSpec bw )
-                ]
+            if dSource == "" then
+                JE.object
+                    [ ( "function", JE.string "kde" )
+                    , ( "field", fieldSpec f )
+                    , ( "bandwidth", numSpec bw )
+                    ]
+            else
+                JE.object
+                    [ ( "function", JE.string "kde" )
+                    , ( "from", JE.string dSource )
+                    , ( "field", fieldSpec f )
+                    , ( "bandwidth", numSpec bw )
+                    ]
 
         DiMixture dProbs ->
             let
@@ -12611,8 +12639,8 @@ markProperty mProp =
         MEllipsis vals ->
             ( "ellipsis", valRef vals )
 
-        MFont vals ->
-            ( "font", valRef vals )
+        MFont s ->
+            ( "font", strSpec s )
 
         MFontSize vals ->
             ( "fontSize", valRef vals )
