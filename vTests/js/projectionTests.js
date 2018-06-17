@@ -12924,6 +12924,8 @@ var _user$project$Vega$RNums = function (a) {
 	return {ctor: 'RNums', _0: a};
 };
 var _user$project$Vega$raNums = _user$project$Vega$RNums;
+var _user$project$Vega$SiPushOuter = {ctor: 'SiPushOuter'};
+var _user$project$Vega$siPushOuter = _user$project$Vega$SiPushOuter;
 var _user$project$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
@@ -14869,11 +14871,17 @@ var _user$project$Vega$signalProperty = function (sigProp) {
 				_0: 'react',
 				_1: _elm_lang$core$Json_Encode$bool(_p127._0)
 			};
-		default:
+		case 'SiValue':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
 				_1: _user$project$Vega$valueSpec(_p127._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'push',
+				_1: _elm_lang$core$Json_Encode$string('outer')
 			};
 	}
 };

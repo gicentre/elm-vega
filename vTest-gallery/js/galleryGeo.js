@@ -13697,6 +13697,8 @@ var _gicentre$elm_vega$Vega$RNums = function (a) {
 	return {ctor: 'RNums', _0: a};
 };
 var _gicentre$elm_vega$Vega$raNums = _gicentre$elm_vega$Vega$RNums;
+var _gicentre$elm_vega$Vega$SiPushOuter = {ctor: 'SiPushOuter'};
+var _gicentre$elm_vega$Vega$siPushOuter = _gicentre$elm_vega$Vega$SiPushOuter;
 var _gicentre$elm_vega$Vega$SiValue = function (a) {
 	return {ctor: 'SiValue', _0: a};
 };
@@ -15642,11 +15644,17 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 				_0: 'react',
 				_1: _elm_lang$core$Json_Encode$bool(_p127._0)
 			};
-		default:
+		case 'SiValue':
 			return {
 				ctor: '_Tuple2',
 				_0: 'value',
 				_1: _gicentre$elm_vega$Vega$valueSpec(_p127._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'push',
+				_1: _elm_lang$core$Json_Encode$string('outer')
 			};
 	}
 };
