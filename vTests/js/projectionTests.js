@@ -13080,13 +13080,13 @@ var _user$project$Vega$aggregateProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'cross',
-				_1: _elm_lang$core$Json_Encode$bool(_p91._0)
+				_1: _user$project$Vega$booSpec(_p91._0)
 			};
 		case 'AgDrop':
 			return {
 				ctor: '_Tuple2',
 				_0: 'drop',
-				_1: _elm_lang$core$Json_Encode$bool(_p91._0)
+				_1: _user$project$Vega$booSpec(_p91._0)
 			};
 		default:
 			return {
