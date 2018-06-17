@@ -220,9 +220,200 @@ interaction1 =
         [ width 500, padding 5, ds, si, sc, mk ]
 
 
+interaction2 : Spec
+interaction2 =
+    let
+        ds =
+            dataSource
+                [ data "sp500"
+                    [ daUrl "https://vega.github.io/vega/data/sp500.csv"
+                    , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
+                    ]
+                ]
+
+        si =
+            signals << signal "detailDomain" []
+
+        mk =
+            marks
+                << mark Group
+                    [ mName "detail"
+                    , mEncode [ enEnter [ maHeight [ vNum 390 ], maWidth [ vNum 720 ] ] ]
+                    , mGroup [ sc1 [], ax1 [], mk1 [] ]
+                    ]
+                << mark Group
+                    [ mName "overview"
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 0 ]
+                            , maY [ vNum 430 ]
+                            , maHeight [ vNum 70 ]
+                            , maWidth [ vNum 720 ]
+                            , maFill [ vStr "transparent" ]
+                            ]
+                        ]
+                    , mGroup [ si1 [], sc2 [], ax2 [], mk3 [] ]
+                    ]
+
+        sc1 =
+            scales
+                << scale "xDetail"
+                    [ scType ScTime
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "sp500", daField (field "date") ])
+                    , scDomainRaw (vSignal "detailDomain")
+                    ]
+                << scale "yDetail"
+                    [ scType ScLinear
+                    , scRange (raNums [ 390, 0 ])
+                    , scDomain (doData [ daDataset "sp500", daField (field "price") ])
+                    , scNice NTrue
+                    , scZero true
+                    ]
+
+        ax1 =
+            axes
+                << axis "xDetail" SBottom []
+                << axis "yDetail" SLeft []
+
+        mk1 =
+            marks
+                << mark Group
+                    [ mEncode
+                        [ enEnter
+                            [ maHeight [ vField (fGroup (field "height")) ]
+                            , maWidth [ vField (fGroup (field "width")) ]
+                            , maGroupClip [ vBoo True ]
+                            ]
+                        ]
+                    , mGroup [ mk2 [] ]
+                    ]
+
+        mk2 =
+            marks
+                << mark Area
+                    [ mFrom [ srData (str "sp500") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xDetail", vField (field "date") ]
+                            , maY [ vScale "yDetail", vField (field "price") ]
+                            , maY2 [ vScale "yDetail", vNum 0 ]
+                            , maFill [ vStr "steelblue" ]
+                            ]
+                        ]
+                    ]
+
+        si1 =
+            signals
+                << signal "brush"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler (esSelector (str "@overview:mousedown")) [ evUpdate "[x(), x()]" ]
+                        , evHandler (esSelector (str "[@overview:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "[brush[0], clamp(x(), 0, width)]" ]
+                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)" ]
+                        ]
+                    ]
+                << signal "anchor"
+                    [ siValue vNull
+                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brush)" ] ]
+                    ]
+                << signal "xDown"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "x()" ] ]
+                    ]
+                << signal "delta"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler (esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "x() - xDown" ] ]
+                    ]
+                << signal "detailDomain"
+                    [ siPushOuter
+                    , siOn [ evHandler (esSignal "brush") [ evUpdate "span(brush) ? invert('xOverview', brush) : null" ] ]
+                    ]
+
+        sc2 =
+            scales
+                << scale "xOverview"
+                    [ scType ScTime
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "sp500", daField (field "date") ])
+                    ]
+                << scale "yOverview"
+                    [ scType ScLinear
+                    , scRange (raNums [ 70, 0 ])
+                    , scDomain (doData [ daDataset "sp500", daField (field "price") ])
+                    , scNice NTrue
+                    , scZero true
+                    ]
+
+        ax2 =
+            axes
+                << axis "xOverview" SBottom []
+
+        mk3 =
+            marks
+                << mark Area
+                    [ mInteractive false
+                    , mFrom [ srData (str "sp500") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xOverview", vField (field "date") ]
+                            , maY [ vScale "yOverview", vField (field "price") ]
+                            , maY2 [ vScale "yOverview", vNum 0 ]
+                            , maFill [ vStr "steelblue" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mName "brush"
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vNum 70 ]
+                            , maFill [ vStr "#333" ]
+                            , maFillOpacity [ vNum 0.2 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "brush[0]" ]
+                            , maX2 [ vSignal "brush[1]" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vNum 70 ]
+                            , maWidth [ vNum 1 ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "brush[0]" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vNum 70 ]
+                            , maWidth [ vNum 1 ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "brush[1]" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 720, height 480, padding 5, ds, si [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction1
+    interaction2
 
 
 
@@ -233,6 +424,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "interaction1", interaction1 )
+        , ( "interaction2", interaction2 )
         ]
 
 
