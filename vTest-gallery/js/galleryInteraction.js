@@ -19326,1463 +19326,125 @@ var _gicentre$elm_vega$Vega$Rank = {ctor: 'Rank'};
 var _gicentre$elm_vega$Vega$RowNumber = {ctor: 'RowNumber'};
 
 var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
-	var mk3 = function (_p0) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
+	var ds = _gicentre$elm_vega$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$Vega$transform,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$mName('distBrush'),
+					_0: A3(
+						_gicentre$elm_vega$Vega$trBin,
+						_gicentre$elm_vega$Vega$field('delay'),
+						_gicentre$elm_vega$Vega$numSignal('delayExtent'),
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$bnStep(
+								_gicentre$elm_vega$Vega$numSignal('delayStep')),
+							_1: {
+								ctor: '::',
+								_0: A2(_gicentre$elm_vega$Vega$bnAs, 'delay0', 'delay1'),
+								_1: {ctor: '[]'}
+							}
+						}),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mEncode(
+						_0: A3(
+							_gicentre$elm_vega$Vega$trBin,
+							_gicentre$elm_vega$Vega$field('time'),
+							_gicentre$elm_vega$Vega$numSignal('timeExtent'),
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enEnter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$maY(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$vNum(0),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maHeight(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('#fcfcfc'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
+								_0: _gicentre$elm_vega$Vega$bnStep(
+									_gicentre$elm_vega$Vega$numSignal('timeStep')),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enUpdate(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maX(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('scale(\'distScale\', distRange[0])'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maX2(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vSignal('scale(\'distScale\', distRange[1])'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
+									_0: A2(_gicentre$elm_vega$Vega$bnAs, 'time0', 'time1'),
 									_1: {ctor: '[]'}
 								}
 							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Rect,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mFrom(
+							_0: A3(
+								_gicentre$elm_vega$Vega$trBin,
+								_gicentre$elm_vega$Vega$field('distance'),
+								_gicentre$elm_vega$Vega$numSignal('distanceExtent'),
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$srData(
-										_gicentre$elm_vega$Vega$str('dist-bins')),
-									_1: {ctor: '[]'}
+									_0: _gicentre$elm_vega$Vega$bnStep(
+										_gicentre$elm_vega$Vega$numSignal('distanceStep')),
+									_1: {
+										ctor: '::',
+										_0: A2(_gicentre$elm_vega$Vega$bnAs, 'distance0', 'distance1'),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
+								_0: A2(
+									_gicentre$elm_vega$Vega$trCrossFilterAsSignal,
 									{
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
+										_0: {
+											ctor: '_Tuple2',
+											_0: _gicentre$elm_vega$Vega$field('delay'),
+											_1: _gicentre$elm_vega$Vega$numSignal('delayRange')
+										},
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vScale('distScale'),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vField(
-																	_gicentre$elm_vega$Vega$field('dist0')),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX2(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vScale('distScale'),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vField(
-																		_gicentre$elm_vega$Vega$field('dist1')),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vOffset(
-																			_gicentre$elm_vega$Vega$vNum(-1)),
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maY(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vField(
-																			_gicentre$elm_vega$Vega$field('count')),
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maY2(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(0),
-																			_1: {ctor: '[]'}
-																		}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Rect,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vNum(0),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maHeight(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maFill(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('scale(\'distScale\', distRange[0])'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maWidth(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(1),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						},
-						A3(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Rect,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mEncode(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enEnter(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maY(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vNum(0),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maHeight(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maFill(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
+											_0: {
+												ctor: '_Tuple2',
+												_0: _gicentre$elm_vega$Vega$field('time'),
+												_1: _gicentre$elm_vega$Vega$numSignal('timeRange')
+											},
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enUpdate(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('scale(\'distScale\', distRange[1])'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maWidth(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vNum(1),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}),
+												_0: {
+													ctor: '_Tuple2',
+													_0: _gicentre$elm_vega$Vega$field('distance'),
+													_1: _gicentre$elm_vega$Vega$numSignal('distanceRange')
+												},
 												_1: {ctor: '[]'}
 											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							A3(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Text,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$mEncode(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enEnter(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maY(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(-5),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maText(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('Travel Distance (miles)'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maBaseline(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vBottom,
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$maFontSize(
-																		{
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(14),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$maFontWeight(
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$vStr('500'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$maFill(
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$vStr('black'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p0))))));
-	};
-	var ax3 = function (_p1) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'distScale',
-				_gicentre$elm_vega$Vega$SBottom,
-				{ctor: '[]'},
-				_p1));
-	};
-	var sc3 = function (_p2) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'yScale',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scDomain(
-							_gicentre$elm_vega$Vega$doData(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$daDataset('dist-bins'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$daField(
-											_gicentre$elm_vega$Vega$field('count')),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(
-								_gicentre$elm_vega$Vega$raValues(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$vNum(0),
-											_1: {ctor: '[]'}
 										}
-									})),
-							_1: {ctor: '[]'}
+									},
+									'xFilter'),
+								_1: {ctor: '[]'}
+							}
 						}
-					}
-				},
-				_p2));
-	};
-	var ds3 = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$Vega$transform,
-				{
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$Vega$trResolveFilter,
-						'xFilter',
-						_gicentre$elm_vega$Vega$num(4)),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$trAggregate(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$agGroupBy(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$field('dist0'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$field('dist1'),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$agKey(
-										_gicentre$elm_vega$Vega$field('dist0')),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$agDrop(_gicentre$elm_vega$Vega$false),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
 					}
 				},
 				A2(
 					_gicentre$elm_vega$Vega$data,
-					'dist-bins',
+					'flights',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daSource('flights'),
+						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flights-200k.json'),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
 		});
-	var mk2 = function (_p3) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$mName('timeBrush'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enEnter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$maY(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$vNum(0),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maHeight(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('#fcfcfc'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enUpdate(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maX(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('scale(\'timeScale\', timeRange[0])'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maX2(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vSignal('scale(\'timeScale\', timeRange[1])'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
+	var mkGenerator = function (core) {
+		var titleText = function () {
+			var _p0 = core;
+			switch (_p0) {
+				case 'delay':
+					return _gicentre$elm_vega$Vega$vStr('Arrival Delay (min)');
+				case 'time':
+					return _gicentre$elm_vega$Vega$vStr('Local Departure Time (hour)');
+				default:
+					return _gicentre$elm_vega$Vega$vStr('Travel Distance (miles)');
+			}
+		}();
+		return function (_p1) {
+			return _gicentre$elm_vega$Vega$marks(
 				A3(
 					_gicentre$elm_vega$Vega$mark,
 					_gicentre$elm_vega$Vega$Rect,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mFrom(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$srData(
-									_gicentre$elm_vega$Vega$str('time-bins')),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vScale('timeScale'),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vField(
-																	_gicentre$elm_vega$Vega$field('time0')),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX2(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vScale('timeScale'),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vField(
-																		_gicentre$elm_vega$Vega$field('time1')),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vOffset(
-																			_gicentre$elm_vega$Vega$vNum(-1)),
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maY(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vField(
-																			_gicentre$elm_vega$Vega$field('count')),
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maY2(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(0),
-																			_1: {ctor: '[]'}
-																		}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Rect,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vNum(0),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maHeight(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maFill(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('scale(\'timeScale\', timeRange[0])'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maWidth(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(1),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						},
-						A3(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Rect,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mEncode(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enEnter(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maY(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vNum(0),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maHeight(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maFill(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enUpdate(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('scale(\'timeScale\', timeRange[1])'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maWidth(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vNum(1),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							A3(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Text,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$mEncode(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enEnter(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maY(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(-5),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maText(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('Local Departure Time (hour)'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maBaseline(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vBottom,
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$maFontSize(
-																		{
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(14),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$maFontWeight(
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$vStr('500'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$maFill(
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$vStr('black'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p3))))));
-	};
-	var ax2 = function (_p4) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'timeScale',
-				_gicentre$elm_vega$Vega$SBottom,
-				{ctor: '[]'},
-				_p4));
-	};
-	var sc2 = function (_p5) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'yScale',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scDomain(
-							_gicentre$elm_vega$Vega$doData(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$daDataset('time-bins'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$daField(
-											_gicentre$elm_vega$Vega$field('count')),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(
-								_gicentre$elm_vega$Vega$raValues(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$vNum(0),
-											_1: {ctor: '[]'}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				_p5));
-	};
-	var ds2 = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$Vega$transform,
-				{
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$Vega$trResolveFilter,
-						'xFilter',
-						_gicentre$elm_vega$Vega$num(2)),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$trAggregate(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$agGroupBy(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$field('time0'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$field('time1'),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$agKey(
-										_gicentre$elm_vega$Vega$field('time0')),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$agDrop(_gicentre$elm_vega$Vega$false),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$Vega$data,
-					'time-bins',
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daSource('flights'),
-						_1: {ctor: '[]'}
-					})),
-			_1: {ctor: '[]'}
-		});
-	var mk1 = function (_p6) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Rect,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$mName('delayBrush'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mEncode(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$enEnter(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$maY(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$vNum(0),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maHeight(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('#fcfcfc'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$enUpdate(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$maX(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vSignal('scale(\'delayScale\', delayRange[0])'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maX2(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vSignal('scale(\'delayScale\', delayRange[1])'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Rect,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mFrom(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$srData(
-										_gicentre$elm_vega$Vega$str('delay-bins')),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vScale('delayScale'),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vField(
-																	_gicentre$elm_vega$Vega$field('delay0')),
-																_1: {ctor: '[]'}
-															}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX2(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vScale('delayScale'),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vField(
-																		_gicentre$elm_vega$Vega$field('delay1')),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vOffset(
-																			_gicentre$elm_vega$Vega$vNum(-1)),
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maY(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vField(
-																			_gicentre$elm_vega$Vega$field('count')),
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maY2(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(0),
-																			_1: {ctor: '[]'}
-																		}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Rect,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maY(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vNum(0),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maHeight(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maFill(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maX(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('scale(\'delayScale\', delayRange[0])'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maWidth(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(1),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						},
-						A3(
-							_gicentre$elm_vega$Vega$mark,
-							_gicentre$elm_vega$Vega$Rect,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mEncode(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enEnter(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maY(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vNum(0),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maHeight(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maFill(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
-											_1: {
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enUpdate(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maX(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('scale(\'delayScale\', delayRange[1])'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maWidth(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vNum(1),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							A3(
-								_gicentre$elm_vega$Vega$mark,
-								_gicentre$elm_vega$Vega$Text,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$mEncode(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$enEnter(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maY(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vNum(-5),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$maText(
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('Arrival Delay (min)'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$maBaseline(
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vBottom,
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$maFontSize(
-																		{
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$vNum(14),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$maFontWeight(
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$vStr('500'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$maFill(
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$vStr('black'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p6))))));
-	};
-	var ax1 = function (_p7) {
-		return _gicentre$elm_vega$Vega$axes(
-			A4(
-				_gicentre$elm_vega$Vega$axis,
-				'delayScale',
-				_gicentre$elm_vega$Vega$SBottom,
-				{ctor: '[]'},
-				_p7));
-	};
-	var sc1 = function (_p8) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'yScale',
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$scDomain(
-							_gicentre$elm_vega$Vega$doData(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$daDataset('delay-bins'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$daField(
-											_gicentre$elm_vega$Vega$field('count')),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(
-								_gicentre$elm_vega$Vega$raValues(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$vNum(0),
-											_1: {ctor: '[]'}
-										}
-									})),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				_p8));
-	};
-	var ds1 = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$Vega$transform,
-				{
-					ctor: '::',
-					_0: A2(
-						_gicentre$elm_vega$Vega$trResolveFilter,
-						'xFilter',
-						_gicentre$elm_vega$Vega$num(1)),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$trAggregate(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$agGroupBy(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$field('delay0'),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$field('delay1'),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$agKey(
-										_gicentre$elm_vega$Vega$field('delay0')),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$agDrop(_gicentre$elm_vega$Vega$false),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$Vega$data,
-					'delay-bins',
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daSource('flights'),
-						_1: {ctor: '[]'}
-					})),
-			_1: {ctor: '[]'}
-		});
-	var mk = function (_p9) {
-		return _gicentre$elm_vega$Vega$marks(
-			A3(
-				_gicentre$elm_vega$Vega$mark,
-				_gicentre$elm_vega$Vega$Group,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$mDescription('Delay Histogram'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mName('delay'),
+						_0: _gicentre$elm_vega$Vega$mName(
+							A2(_elm_lang$core$Basics_ops['++'], core, 'Brush')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$mEncode(
@@ -20794,115 +19456,202 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 											_0: _gicentre$elm_vega$Vega$maY(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$vScale('layout'),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vStr('delay'),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vOffset(
-																_gicentre$elm_vega$Vega$vNum(20)),
-															_1: {ctor: '[]'}
-														}
-													}
+													_0: _gicentre$elm_vega$Vega$vNum(0),
+													_1: {ctor: '[]'}
 												}),
 											_1: {
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maWidth(
+												_0: _gicentre$elm_vega$Vega$maHeight(
 													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vSignal('width'),
+														_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maHeight(
+													_0: _gicentre$elm_vega$Vega$maFill(
 														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
+															_0: _gicentre$elm_vega$Vega$vStr('#fcfcfc'),
 															_1: {ctor: '[]'}
 														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maFill(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr('transparent'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mGroup(
-									{
-										ctor: '::',
-										_0: ds1,
-										_1: {
-											ctor: '::',
-											_0: sc1(
-												{ctor: '[]'}),
-											_1: {
-												ctor: '::',
-												_0: ax1(
-													{ctor: '[]'}),
-												_1: {
-													ctor: '::',
-													_0: mk1(
-														{ctor: '[]'}),
 													_1: {ctor: '[]'}
 												}
 											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$Vega$mark,
-					_gicentre$elm_vega$Vega$Group,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$mDescription('Time Histogram'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mName('time'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
+										}),
+									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
+										_0: _gicentre$elm_vega$Vega$enUpdate(
 											{
 												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maY(
+												_0: _gicentre$elm_vega$Vega$maX(
 													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vScale('layout'),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vStr('time'),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vOffset(
-																	_gicentre$elm_vega$Vega$vNum(20)),
-																_1: {ctor: '[]'}
-															}
-														}
+														_0: _gicentre$elm_vega$Vega$vSignal(
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																'scale(\'',
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	core,
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		'Scale\', ',
+																		A2(_elm_lang$core$Basics_ops['++'], core, 'Range[0])'))))),
+														_1: {ctor: '[]'}
 													}),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maWidth(
+													_0: _gicentre$elm_vega$Vega$maX2(
 														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('width'),
+															_0: _gicentre$elm_vega$Vega$vSignal(
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	'scale(\'',
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		core,
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			'Scale\', ',
+																			A2(_elm_lang$core$Basics_ops['++'], core, 'Range[1])'))))),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$mark,
+						_gicentre$elm_vega$Vega$Rect,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mFrom(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$srData(
+											_gicentre$elm_vega$Vega$str(
+												A2(_elm_lang$core$Basics_ops['++'], core, '-bins'))),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mEncode(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enEnter(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maFill(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vStr('steelblue'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$enUpdate(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maX(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vScale(
+																	A2(_elm_lang$core$Basics_ops['++'], core, 'Scale')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vField(
+																		_gicentre$elm_vega$Vega$field(
+																			A2(_elm_lang$core$Basics_ops['++'], core, '0'))),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maX2(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vScale(
+																		A2(_elm_lang$core$Basics_ops['++'], core, 'Scale')),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vField(
+																			_gicentre$elm_vega$Vega$field(
+																				A2(_elm_lang$core$Basics_ops['++'], core, '1'))),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vOffset(
+																				_gicentre$elm_vega$Vega$vNum(-1)),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maY(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vField(
+																				_gicentre$elm_vega$Vega$field('count')),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maY2(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vScale('yScale'),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vNum(0),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A3(
+							_gicentre$elm_vega$Vega$mark,
+							_gicentre$elm_vega$Vega$Rect,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$mEncode(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$enEnter(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$maY(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$vNum(0),
 															_1: {ctor: '[]'}
 														}),
 													_1: {
@@ -20918,82 +19667,69 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 															_0: _gicentre$elm_vega$Vega$maFill(
 																{
 																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vStr('transparent'),
+																	_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
 																	_1: {ctor: '[]'}
 																}),
 															_1: {ctor: '[]'}
 														}
 													}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mGroup(
-										{
-											ctor: '::',
-											_0: ds2,
+												}),
 											_1: {
 												ctor: '::',
-												_0: sc2(
-													{ctor: '[]'}),
-												_1: {
-													ctor: '::',
-													_0: ax2(
-														{ctor: '[]'}),
-													_1: {
+												_0: _gicentre$elm_vega$Vega$enUpdate(
+													{
 														ctor: '::',
-														_0: mk2(
-															{ctor: '[]'}),
-														_1: {ctor: '[]'}
-													}
-												}
+														_0: _gicentre$elm_vega$Vega$maX(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vSignal(
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		'scale(\'',
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			core,
+																			A2(
+																				_elm_lang$core$Basics_ops['++'],
+																				'Scale\', ',
+																				A2(_elm_lang$core$Basics_ops['++'], core, 'Range[0])'))))),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maWidth(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(1),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
 											}
 										}),
 									_1: {ctor: '[]'}
 								}
-							}
-						}
-					},
-					A3(
-						_gicentre$elm_vega$Vega$mark,
-						_gicentre$elm_vega$Vega$Group,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mDescription('Distance Histogram'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mName('dist'),
-								_1: {
+							},
+							A3(
+								_gicentre$elm_vega$Vega$mark,
+								_gicentre$elm_vega$Vega$Rect,
+								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mEncode(
-										{
-											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enEnter(
-												{
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maY(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vScale('layout'),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr('distance'),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$vOffset(
-																		_gicentre$elm_vega$Vega$vNum(20)),
-																	_1: {ctor: '[]'}
-																}
-															}
-														}),
-													_1: {
+									_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mEncode(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$enEnter(
+													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maWidth(
+														_0: _gicentre$elm_vega$Vega$maY(
 															{
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vSignal('width'),
+																_0: _gicentre$elm_vega$Vega$vNum(0),
 																_1: {ctor: '[]'}
 															}),
 														_1: {
@@ -21009,147 +19745,638 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 																_0: _gicentre$elm_vega$Vega$maFill(
 																	{
 																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$vStr('transparent'),
+																		_0: _gicentre$elm_vega$Vega$vStr('firebrick'),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {ctor: '[]'}
 															}
 														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$mGroup(
-											{
-												ctor: '::',
-												_0: ds3,
+													}),
 												_1: {
 													ctor: '::',
-													_0: sc3(
-														{ctor: '[]'}),
-													_1: {
-														ctor: '::',
-														_0: ax3(
-															{ctor: '[]'}),
-														_1: {
+													_0: _gicentre$elm_vega$Vega$enUpdate(
+														{
 															ctor: '::',
-															_0: mk3(
-																{ctor: '[]'}),
-															_1: {ctor: '[]'}
-														}
-													}
+															_0: _gicentre$elm_vega$Vega$maX(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vSignal(
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			'scale(\'',
+																			A2(
+																				_elm_lang$core$Basics_ops['++'],
+																				core,
+																				A2(
+																					_elm_lang$core$Basics_ops['++'],
+																					'Scale\', ',
+																					A2(_elm_lang$core$Basics_ops['++'], core, 'Range[1])'))))),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maWidth(
+																	{
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$vNum(1),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
 												}
 											}),
 										_1: {ctor: '[]'}
 									}
-								}
-							}
-						},
-						_p9))));
+								},
+								A3(
+									_gicentre$elm_vega$Vega$mark,
+									_gicentre$elm_vega$Vega$Text,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mInteractive(_gicentre$elm_vega$Vega$false),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$mEncode(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$enEnter(
+														{
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maY(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vNum(-5),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$maText(
+																	{
+																		ctor: '::',
+																		_0: titleText,
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$maBaseline(
+																		{
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$vBottom,
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gicentre$elm_vega$Vega$maFontSize(
+																			{
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$vNum(14),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: _gicentre$elm_vega$Vega$maFontWeight(
+																				{
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$vStr('500'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: _gicentre$elm_vega$Vega$maFill(
+																					{
+																						ctor: '::',
+																						_0: _gicentre$elm_vega$Vega$vStr('black'),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									},
+									_p1))))));
+		};
 	};
-	var sc = function (_p10) {
-		return _gicentre$elm_vega$Vega$scales(
-			A3(
-				_gicentre$elm_vega$Vega$scale,
-				'layout',
-				{
+	var axGenerator = function (core) {
+		return function (_p2) {
+			return _gicentre$elm_vega$Vega$axes(
+				A4(
+					_gicentre$elm_vega$Vega$axis,
+					A2(_elm_lang$core$Basics_ops['++'], core, 'Scale'),
+					_gicentre$elm_vega$Vega$SBottom,
+					{ctor: '[]'},
+					_p2));
+		};
+	};
+	var topScGenerator = function (core) {
+		return A2(
+			_gicentre$elm_vega$Vega$scale,
+			A2(_elm_lang$core$Basics_ops['++'], core, 'Scale'),
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
+				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
+					_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$scDomain(
-							_gicentre$elm_vega$Vega$doStrs(
-								_gicentre$elm_vega$Vega$strs(
-									{
-										ctor: '::',
-										_0: 'delay',
-										_1: {
-											ctor: '::',
-											_0: 'time',
-											_1: {
-												ctor: '::',
-												_0: 'distance',
-												_1: {ctor: '[]'}
-											}
-										}
-									}))),
+							_gicentre$elm_vega$Vega$doSignal(
+								A2(_elm_lang$core$Basics_ops['++'], core, 'Extent'))),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
+							_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
 							_1: {ctor: '[]'}
 						}
 					}
-				},
+				}
+			});
+	};
+	var scGenerator = function (core) {
+		return function (_p3) {
+			return _gicentre$elm_vega$Vega$scales(
 				A3(
 					_gicentre$elm_vega$Vega$scale,
-					'delayScale',
+					'yScale',
 					{
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
+							_0: _gicentre$elm_vega$Vega$scDomain(
+								_gicentre$elm_vega$Vega$doData(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$daDataset(
+											A2(_elm_lang$core$Basics_ops['++'], core, '-bins')),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$daField(
+												_gicentre$elm_vega$Vega$field('count')),
+											_1: {ctor: '[]'}
+										}
+									})),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scDomain(
-									_gicentre$elm_vega$Vega$doSignal('delayExtent')),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
-									_1: {ctor: '[]'}
-								}
+								_0: _gicentre$elm_vega$Vega$scRange(
+									_gicentre$elm_vega$Vega$raValues(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vNum(0),
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {ctor: '[]'}
 							}
 						}
 					},
-					A3(
-						_gicentre$elm_vega$Vega$scale,
-						'timeScale',
-						{
+					_p3));
+		};
+	};
+	var dsGenerator = function (core) {
+		var filterMask = function () {
+			var _p4 = core;
+			switch (_p4) {
+				case 'delay':
+					return _gicentre$elm_vega$Vega$num(1);
+				case 'time':
+					return _gicentre$elm_vega$Vega$num(2);
+				default:
+					return _gicentre$elm_vega$Vega$num(4);
+			}
+		}();
+		return _gicentre$elm_vega$Vega$dataSource(
+			{
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$Vega$transform,
+					{
+						ctor: '::',
+						_0: A2(_gicentre$elm_vega$Vega$trResolveFilter, 'xFilter', filterMask),
+						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
-								_1: {
+							_0: _gicentre$elm_vega$Vega$trAggregate(
+								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scDomain(
-										_gicentre$elm_vega$Vega$doSignal('timeExtent')),
+									_0: _gicentre$elm_vega$Vega$agGroupBy(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$field(
+												A2(_elm_lang$core$Basics_ops['++'], core, '0')),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$field(
+													A2(_elm_lang$core$Basics_ops['++'], core, '1')),
+												_1: {ctor: '[]'}
+											}
+										}),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						},
-						A3(
-							_gicentre$elm_vega$Vega$scale,
-							'distScale',
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScLinear),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$scRound(_gicentre$elm_vega$Vega$true),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$scDomain(
-											_gicentre$elm_vega$Vega$doSignal('distExtent')),
+										_0: _gicentre$elm_vega$Vega$agKey(
+											_gicentre$elm_vega$Vega$field(
+												A2(_elm_lang$core$Basics_ops['++'], core, '0'))),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaWidth),
+											_0: _gicentre$elm_vega$Vega$agDrop(_gicentre$elm_vega$Vega$false),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$Vega$data,
+						A2(_elm_lang$core$Basics_ops['++'], core, '-bins'),
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$daSource('flights'),
+							_1: {ctor: '[]'}
+						})),
+				_1: {ctor: '[]'}
+			});
+	};
+	var groupGenerator = function (core) {
+		return A2(
+			_gicentre$elm_vega$Vega$mark,
+			_gicentre$elm_vega$Vega$Group,
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$mName(core),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$mEncode(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$enEnter(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$Vega$maY(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$vScale('layout'),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vStr(core),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vOffset(
+														_gicentre$elm_vega$Vega$vNum(20)),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$maWidth(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$vSignal('width'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$maHeight(
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$vSignal('chartHeight'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$maFill(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$vStr('transparent'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$mGroup(
+							{
+								ctor: '::',
+								_0: dsGenerator(core),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										scGenerator,
+										core,
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											axGenerator,
+											core,
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												mkGenerator,
+												core,
+												{ctor: '[]'}),
 											_1: {ctor: '[]'}
 										}
 									}
 								}
-							},
-							_p10)))));
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
 	};
-	var si = function (_p11) {
-		return _gicentre$elm_vega$Vega$signals(
-			A3(
+	var sigGenerator = function (core) {
+		return function (_p5) {
+			return A3(
+				_gicentre$elm_vega$Vega$signal,
+				A2(_elm_lang$core$Basics_ops['++'], core, 'Range'),
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$Vega$siUpdate(
+						A2(_elm_lang$core$Basics_ops['++'], core, 'Extent')),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$siOn(
+							{
+								ctor: '::',
+								_0: A2(
+									_gicentre$elm_vega$Vega$evHandler,
+									_gicentre$elm_vega$Vega$esSignal(
+										A2(_elm_lang$core$Basics_ops['++'], core, 'Zoom')),
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$evUpdate(
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'[(',
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													core,
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'Range[0]+',
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															core,
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																'Range[1])/2 - ',
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	core,
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		'Zoom, (',
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			core,
+																			A2(
+																				_elm_lang$core$Basics_ops['++'],
+																				'Range[0]+',
+																				A2(
+																					_elm_lang$core$Basics_ops['++'],
+																					core,
+																					A2(
+																						_elm_lang$core$Basics_ops['++'],
+																						'Range[1])/2 + ',
+																						A2(_elm_lang$core$Basics_ops['++'], core, 'Zoom]'))))))))))))),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gicentre$elm_vega$Vega$evHandler,
+										_gicentre$elm_vega$Vega$esSelector(
+											_gicentre$elm_vega$Vega$str(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'@',
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														core,
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															':dblclick!, @',
+															A2(_elm_lang$core$Basics_ops['++'], core, 'Brush:dblclick!')))))),
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$evUpdate(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'[',
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														core,
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															'Extent[0], ',
+															A2(_elm_lang$core$Basics_ops['++'], core, 'Extent[1]]'))))),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gicentre$elm_vega$Vega$evHandler,
+											_gicentre$elm_vega$Vega$esSelector(
+												_gicentre$elm_vega$Vega$str(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'[@',
+														A2(_elm_lang$core$Basics_ops['++'], core, 'Brush:mousedown, window:mouseup] > window:mousemove!')))),
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$evUpdate(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'[',
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															core,
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																'Range[0] + invert(\'',
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	core,
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		'Scale\', x()) - invert(\'',
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			core,
+																			A2(
+																				_elm_lang$core$Basics_ops['++'],
+																				'Scale\', xMove), ',
+																				A2(
+																					_elm_lang$core$Basics_ops['++'],
+																					core,
+																					A2(
+																						_elm_lang$core$Basics_ops['++'],
+																						'Range[1] + invert(\'',
+																						A2(
+																							_elm_lang$core$Basics_ops['++'],
+																							core,
+																							A2(
+																								_elm_lang$core$Basics_ops['++'],
+																								'Scale\', x()) - invert(\'',
+																								A2(_elm_lang$core$Basics_ops['++'], core, 'Scale\', xMove)]'))))))))))))),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_gicentre$elm_vega$Vega$evHandler,
+												_gicentre$elm_vega$Vega$esSelector(
+													_gicentre$elm_vega$Vega$str(
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															'[@',
+															A2(_elm_lang$core$Basics_ops['++'], core, ':mousedown, window:mouseup] > window:mousemove!')))),
+												{
+													ctor: '::',
+													_0: _gicentre$elm_vega$Vega$evUpdate(
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															'[min(',
+															A2(
+																_elm_lang$core$Basics_ops['++'],
+																core,
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	'Anchor, invert(\'',
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		core,
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			'Scale\', x())), max(',
+																			A2(
+																				_elm_lang$core$Basics_ops['++'],
+																				core,
+																				A2(
+																					_elm_lang$core$Basics_ops['++'],
+																					'Anchor, invert(\'',
+																					A2(_elm_lang$core$Basics_ops['++'], core, 'Scale\', x()))]'))))))))),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$Vega$signal,
+					A2(_elm_lang$core$Basics_ops['++'], core, 'Zoom'),
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$Vega$siValue(
+							_gicentre$elm_vega$Vega$vNum(0)),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$siOn(
+								{
+									ctor: '::',
+									_0: A2(
+										_gicentre$elm_vega$Vega$evHandler,
+										_gicentre$elm_vega$Vega$esSelector(
+											_gicentre$elm_vega$Vega$str(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'@',
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														core,
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															':wheel!, @',
+															A2(_elm_lang$core$Basics_ops['++'], core, 'Brush:wheel!')))))),
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$Vega$evUpdate(
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													'0.5 * abs(span(',
+													A2(_elm_lang$core$Basics_ops['++'], core, 'Range)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))'))),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$Vega$signal,
+						A2(_elm_lang$core$Basics_ops['++'], core, 'Anchor'),
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$Vega$siValue(
+								_gicentre$elm_vega$Vega$vNum(0)),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$siOn(
+									{
+										ctor: '::',
+										_0: A2(
+											_gicentre$elm_vega$Vega$evHandler,
+											_gicentre$elm_vega$Vega$esSelector(
+												_gicentre$elm_vega$Vega$str(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'@',
+														A2(_elm_lang$core$Basics_ops['++'], core, ':mousedown!')))),
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$evUpdate(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'invert(\'',
+														A2(_elm_lang$core$Basics_ops['++'], core, 'Scale\', x())'))),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p5)));
+		};
+	};
+	var facetNames = {
+		ctor: '::',
+		_0: 'delay',
+		_1: {
+			ctor: '::',
+			_0: 'time',
+			_1: {
+				ctor: '::',
+				_0: 'distance',
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var si = function () {
+		var coreSigs = function (_p6) {
+			return A3(
 				_gicentre$elm_vega$Vega$signal,
 				'chartHeight',
 				{
@@ -21213,7 +20440,7 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 								},
 								A3(
 									_gicentre$elm_vega$Vega$signal,
-									'distExtent',
+									'distanceExtent',
 									{
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$siValue(
@@ -21285,7 +20512,7 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 											},
 											A3(
 												_gicentre$elm_vega$Vega$signal,
-												'distStep',
+												'distanceStep',
 												{
 													ctor: '::',
 													_0: _gicentre$elm_vega$Vega$siValue(
@@ -21312,10 +20539,11 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 												},
 												A3(
 													_gicentre$elm_vega$Vega$signal,
-													'delayRange',
+													'xMove',
 													{
 														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$siUpdate('delayExtent'),
+														_0: _gicentre$elm_vega$Vega$siValue(
+															_gicentre$elm_vega$Vega$vNum(0)),
 														_1: {
 															ctor: '::',
 															_0: _gicentre$elm_vega$Vega$siOn(
@@ -21323,455 +20551,57 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 																	ctor: '::',
 																	_0: A2(
 																		_gicentre$elm_vega$Vega$evHandler,
-																		_gicentre$elm_vega$Vega$esSignal('delayZoom'),
+																		_gicentre$elm_vega$Vega$esSelector(
+																			_gicentre$elm_vega$Vega$str('window:mousemove')),
 																		{
 																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$evUpdate('[(delayRange[0]+delayRange[1])/2 - delayZoom, (delayRange[0]+delayRange[1])/2 + delayZoom]'),
+																			_0: _gicentre$elm_vega$Vega$evUpdate('x()'),
 																			_1: {ctor: '[]'}
 																		}),
-																	_1: {
-																		ctor: '::',
-																		_0: A2(
-																			_gicentre$elm_vega$Vega$evHandler,
-																			_gicentre$elm_vega$Vega$esSelector(
-																				_gicentre$elm_vega$Vega$str('@delay:dblclick!, @delayBrush:dblclick!')),
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$evUpdate('[delayExtent[0], delayExtent[1]]'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {
-																			ctor: '::',
-																			_0: A2(
-																				_gicentre$elm_vega$Vega$evHandler,
-																				_gicentre$elm_vega$Vega$esSelector(
-																					_gicentre$elm_vega$Vega$str('[@delayBrush:mousedown, window:mouseup] > window:mousemove!')),
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$evUpdate('[delayRange[0] + invert(\'delayScale\', x()) - invert(\'delayScale\', xMove), delayRange[1] + invert(\'delayScale\', x()) - invert(\'delayScale\', xMove)]'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {
-																				ctor: '::',
-																				_0: A2(
-																					_gicentre$elm_vega$Vega$evHandler,
-																					_gicentre$elm_vega$Vega$esSelector(
-																						_gicentre$elm_vega$Vega$str('[@delay:mousedown, window:mouseup] > window:mousemove!')),
-																					{
-																						ctor: '::',
-																						_0: _gicentre$elm_vega$Vega$evUpdate('[min(delayAnchor, invert(\'delayScale\', x())), max(delayAnchor, invert(\'delayScale\', x()))]'),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {ctor: '[]'}
-																			}
-																		}
-																	}
+																	_1: {ctor: '[]'}
 																}),
 															_1: {ctor: '[]'}
 														}
 													},
-													A3(
-														_gicentre$elm_vega$Vega$signal,
-														'delayZoom',
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$siValue(
-																_gicentre$elm_vega$Vega$vNum(0)),
-															_1: {
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$siOn(
-																	{
-																		ctor: '::',
-																		_0: A2(
-																			_gicentre$elm_vega$Vega$evHandler,
-																			_gicentre$elm_vega$Vega$esSelector(
-																				_gicentre$elm_vega$Vega$str('@delay:wheel!, @delayBrush:wheel!')),
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$evUpdate('0.5 * abs(span(delayRange)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))'),
-																				_1: {ctor: '[]'}
-																			}),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														},
-														A3(
-															_gicentre$elm_vega$Vega$signal,
-															'delayAnchor',
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$siValue(
-																	_gicentre$elm_vega$Vega$vNum(0)),
-																_1: {
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$siOn(
-																		{
-																			ctor: '::',
-																			_0: A2(
-																				_gicentre$elm_vega$Vega$evHandler,
-																				_gicentre$elm_vega$Vega$esSelector(
-																					_gicentre$elm_vega$Vega$str('@delay:mousedown!')),
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$evUpdate('invert(\'delayScale\', x())'),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {ctor: '[]'}
-																}
-															},
-															A3(
-																_gicentre$elm_vega$Vega$signal,
-																'timeRange',
-																{
-																	ctor: '::',
-																	_0: _gicentre$elm_vega$Vega$siUpdate('timeExtent'),
-																	_1: {
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$siOn(
-																			{
-																				ctor: '::',
-																				_0: A2(
-																					_gicentre$elm_vega$Vega$evHandler,
-																					_gicentre$elm_vega$Vega$esSignal('timeZoom'),
-																					{
-																						ctor: '::',
-																						_0: _gicentre$elm_vega$Vega$evUpdate('[(timeRange[0]+timeRange[1])/2 - timeZoom, (timeRange[0]+timeRange[1])/2 + timeZoom]'),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(
-																						_gicentre$elm_vega$Vega$evHandler,
-																						_gicentre$elm_vega$Vega$esSelector(
-																							_gicentre$elm_vega$Vega$str('@time:dblclick!, @timeBrush:dblclick!')),
-																						{
-																							ctor: '::',
-																							_0: _gicentre$elm_vega$Vega$evUpdate('[timeExtent[0], timeExtent[1]]'),
-																							_1: {ctor: '[]'}
-																						}),
-																					_1: {
-																						ctor: '::',
-																						_0: A2(
-																							_gicentre$elm_vega$Vega$evHandler,
-																							_gicentre$elm_vega$Vega$esSelector(
-																								_gicentre$elm_vega$Vega$str('[@timeBrush:mousedown, window:mouseup] > window:mousemove!')),
-																							{
-																								ctor: '::',
-																								_0: _gicentre$elm_vega$Vega$evUpdate('[timeRange[0] + invert(\'timeScale\', x()) - invert(\'timeScale\', xMove), timeRange[1] + invert(\'timeScale\', x()) - invert(\'timeScale\', xMove)]'),
-																								_1: {ctor: '[]'}
-																							}),
-																						_1: {
-																							ctor: '::',
-																							_0: A2(
-																								_gicentre$elm_vega$Vega$evHandler,
-																								_gicentre$elm_vega$Vega$esSelector(
-																									_gicentre$elm_vega$Vega$str('[@time:mousedown, window:mouseup] > window:mousemove!')),
-																								{
-																									ctor: '::',
-																									_0: _gicentre$elm_vega$Vega$evUpdate('[min(timeAnchor, invert(\'timeScale\', x())), max(timeAnchor, invert(\'timeScale\', x()))]'),
-																									_1: {ctor: '[]'}
-																								}),
-																							_1: {ctor: '[]'}
-																						}
-																					}
-																				}
-																			}),
-																		_1: {ctor: '[]'}
-																	}
-																},
-																A3(
-																	_gicentre$elm_vega$Vega$signal,
-																	'timeZoom',
-																	{
-																		ctor: '::',
-																		_0: _gicentre$elm_vega$Vega$siValue(
-																			_gicentre$elm_vega$Vega$vNum(0)),
-																		_1: {
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$siOn(
-																				{
-																					ctor: '::',
-																					_0: A2(
-																						_gicentre$elm_vega$Vega$evHandler,
-																						_gicentre$elm_vega$Vega$esSelector(
-																							_gicentre$elm_vega$Vega$str('@time:wheel!, @timeBrush:wheel!')),
-																						{
-																							ctor: '::',
-																							_0: _gicentre$elm_vega$Vega$evUpdate('0.5 * abs(span(timeRange)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))'),
-																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}),
-																			_1: {ctor: '[]'}
-																		}
-																	},
-																	A3(
-																		_gicentre$elm_vega$Vega$signal,
-																		'timeAnchor',
-																		{
-																			ctor: '::',
-																			_0: _gicentre$elm_vega$Vega$siValue(
-																				_gicentre$elm_vega$Vega$vNum(0)),
-																			_1: {
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$siOn(
-																					{
-																						ctor: '::',
-																						_0: A2(
-																							_gicentre$elm_vega$Vega$evHandler,
-																							_gicentre$elm_vega$Vega$esSelector(
-																								_gicentre$elm_vega$Vega$str('@time:mousedown!')),
-																							{
-																								ctor: '::',
-																								_0: _gicentre$elm_vega$Vega$evUpdate('invert(\'timeScale\', x())'),
-																								_1: {ctor: '[]'}
-																							}),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {ctor: '[]'}
-																			}
-																		},
-																		A3(
-																			_gicentre$elm_vega$Vega$signal,
-																			'distRange',
-																			{
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$siUpdate('distExtent'),
-																				_1: {
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$siOn(
-																						{
-																							ctor: '::',
-																							_0: A2(
-																								_gicentre$elm_vega$Vega$evHandler,
-																								_gicentre$elm_vega$Vega$esSignal('distZoom'),
-																								{
-																									ctor: '::',
-																									_0: _gicentre$elm_vega$Vega$evUpdate('[(distRange[0]+distRange[1])/2 - distZoom, (distRange[0]+distRange[1])/2 + distZoom]'),
-																									_1: {ctor: '[]'}
-																								}),
-																							_1: {
-																								ctor: '::',
-																								_0: A2(
-																									_gicentre$elm_vega$Vega$evHandler,
-																									_gicentre$elm_vega$Vega$esSelector(
-																										_gicentre$elm_vega$Vega$str('@dist:dblclick!, @distBrush:dblclick!')),
-																									{
-																										ctor: '::',
-																										_0: _gicentre$elm_vega$Vega$evUpdate('[distExtent[0], distExtent[1]]'),
-																										_1: {ctor: '[]'}
-																									}),
-																								_1: {
-																									ctor: '::',
-																									_0: A2(
-																										_gicentre$elm_vega$Vega$evHandler,
-																										_gicentre$elm_vega$Vega$esSelector(
-																											_gicentre$elm_vega$Vega$str('[@distBrush:mousedown, window:mouseup] > window:mousemove!')),
-																										{
-																											ctor: '::',
-																											_0: _gicentre$elm_vega$Vega$evUpdate('[distRange[0] + invert(\'distScale\', x()) - invert(\'distScale\', xMove), distRange[1] + invert(\'distScale\', x()) - invert(\'distScale\', xMove)]'),
-																											_1: {ctor: '[]'}
-																										}),
-																									_1: {
-																										ctor: '::',
-																										_0: A2(
-																											_gicentre$elm_vega$Vega$evHandler,
-																											_gicentre$elm_vega$Vega$esSelector(
-																												_gicentre$elm_vega$Vega$str('[@dist:mousedown, window:mouseup] > window:mousemove!')),
-																											{
-																												ctor: '::',
-																												_0: _gicentre$elm_vega$Vega$evUpdate('[min(distAnchor, invert(\'distScale\', x())), max(distAnchor, invert(\'distScale\', x()))]'),
-																												_1: {ctor: '[]'}
-																											}),
-																										_1: {ctor: '[]'}
-																									}
-																								}
-																							}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
-																			},
-																			A3(
-																				_gicentre$elm_vega$Vega$signal,
-																				'distZoom',
-																				{
-																					ctor: '::',
-																					_0: _gicentre$elm_vega$Vega$siValue(
-																						_gicentre$elm_vega$Vega$vNum(0)),
-																					_1: {
-																						ctor: '::',
-																						_0: _gicentre$elm_vega$Vega$siOn(
-																							{
-																								ctor: '::',
-																								_0: A2(
-																									_gicentre$elm_vega$Vega$evHandler,
-																									_gicentre$elm_vega$Vega$esSelector(
-																										_gicentre$elm_vega$Vega$str('@dist:wheel!, @distBrush:wheel!')),
-																									{
-																										ctor: '::',
-																										_0: _gicentre$elm_vega$Vega$evUpdate('0.5 * abs(span(distRange)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))'),
-																										_1: {ctor: '[]'}
-																									}),
-																								_1: {ctor: '[]'}
-																							}),
-																						_1: {ctor: '[]'}
-																					}
-																				},
-																				A3(
-																					_gicentre$elm_vega$Vega$signal,
-																					'distAnchor',
-																					{
-																						ctor: '::',
-																						_0: _gicentre$elm_vega$Vega$siValue(
-																							_gicentre$elm_vega$Vega$vNum(0)),
-																						_1: {
-																							ctor: '::',
-																							_0: _gicentre$elm_vega$Vega$siOn(
-																								{
-																									ctor: '::',
-																									_0: A2(
-																										_gicentre$elm_vega$Vega$evHandler,
-																										_gicentre$elm_vega$Vega$esSelector(
-																											_gicentre$elm_vega$Vega$str('@dist:mousedown!')),
-																										{
-																											ctor: '::',
-																											_0: _gicentre$elm_vega$Vega$evUpdate('invert(\'distScale\', x())'),
-																											_1: {ctor: '[]'}
-																										}),
-																									_1: {ctor: '[]'}
-																								}),
-																							_1: {ctor: '[]'}
-																						}
-																					},
-																					A3(
-																						_gicentre$elm_vega$Vega$signal,
-																						'xMove',
-																						{
-																							ctor: '::',
-																							_0: _gicentre$elm_vega$Vega$siValue(
-																								_gicentre$elm_vega$Vega$vNum(0)),
-																							_1: {
-																								ctor: '::',
-																								_0: _gicentre$elm_vega$Vega$siOn(
-																									{
-																										ctor: '::',
-																										_0: A2(
-																											_gicentre$elm_vega$Vega$evHandler,
-																											_gicentre$elm_vega$Vega$esSelector(
-																												_gicentre$elm_vega$Vega$str('window:mousemove')),
-																											{
-																												ctor: '::',
-																												_0: _gicentre$elm_vega$Vega$evUpdate('x()'),
-																												_1: {ctor: '[]'}
-																											}),
-																										_1: {ctor: '[]'}
-																									}),
-																								_1: {ctor: '[]'}
-																							}
-																						},
-																						_p11))))))))))))))))))));
-	};
-	var ds = _gicentre$elm_vega$Vega$dataSource(
-		{
-			ctor: '::',
-			_0: A2(
-				_gicentre$elm_vega$Vega$transform,
-				{
+													_p6))))))))));
+		};
+		return _gicentre$elm_vega$Vega$signals(
+			A3(
+				_elm_lang$core$List$foldl,
+				sigGenerator,
+				coreSigs(
+					{ctor: '[]'}),
+				facetNames));
+	}();
+	var sc = function () {
+		var layoutSc = A3(
+			_gicentre$elm_vega$Vega$scale,
+			'layout',
+			{
+				ctor: '::',
+				_0: _gicentre$elm_vega$Vega$scType(_gicentre$elm_vega$Vega$ScBand),
+				_1: {
 					ctor: '::',
-					_0: A3(
-						_gicentre$elm_vega$Vega$trBin,
-						_gicentre$elm_vega$Vega$field('delay'),
-						_gicentre$elm_vega$Vega$numSignal('delayExtent'),
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$bnStep(
-								_gicentre$elm_vega$Vega$numSignal('delayStep')),
-							_1: {
-								ctor: '::',
-								_0: A2(_gicentre$elm_vega$Vega$bnAs, 'delay0', 'delay1'),
-								_1: {ctor: '[]'}
-							}
-						}),
+					_0: _gicentre$elm_vega$Vega$scDomain(
+						_gicentre$elm_vega$Vega$doStrs(
+							_gicentre$elm_vega$Vega$strs(facetNames))),
 					_1: {
 						ctor: '::',
-						_0: A3(
-							_gicentre$elm_vega$Vega$trBin,
-							_gicentre$elm_vega$Vega$field('time'),
-							_gicentre$elm_vega$Vega$numSignal('timeExtent'),
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$bnStep(
-									_gicentre$elm_vega$Vega$numSignal('timeStep')),
-								_1: {
-									ctor: '::',
-									_0: A2(_gicentre$elm_vega$Vega$bnAs, 'time0', 'time1'),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A3(
-								_gicentre$elm_vega$Vega$trBin,
-								_gicentre$elm_vega$Vega$field('distance'),
-								_gicentre$elm_vega$Vega$numSignal('distExtent'),
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$bnStep(
-										_gicentre$elm_vega$Vega$numSignal('distStep')),
-									_1: {
-										ctor: '::',
-										_0: A2(_gicentre$elm_vega$Vega$bnAs, 'dist0', 'dist1'),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_gicentre$elm_vega$Vega$trCrossFilterAsSignal,
-									{
-										ctor: '::',
-										_0: {
-											ctor: '_Tuple2',
-											_0: _gicentre$elm_vega$Vega$field('delay'),
-											_1: _gicentre$elm_vega$Vega$numSignal('delayRange')
-										},
-										_1: {
-											ctor: '::',
-											_0: {
-												ctor: '_Tuple2',
-												_0: _gicentre$elm_vega$Vega$field('time'),
-												_1: _gicentre$elm_vega$Vega$numSignal('timeRange')
-											},
-											_1: {
-												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: _gicentre$elm_vega$Vega$field('distance'),
-													_1: _gicentre$elm_vega$Vega$numSignal('distRange')
-												},
-												_1: {ctor: '[]'}
-											}
-										}
-									},
-									'xFilter'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$Vega$data,
-					'flights',
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flights-200k.json'),
+						_0: _gicentre$elm_vega$Vega$scRange(_gicentre$elm_vega$Vega$RaHeight),
 						_1: {ctor: '[]'}
-					})),
-			_1: {ctor: '[]'}
-		});
+					}
+				}
+			},
+			{ctor: '[]'});
+		return _gicentre$elm_vega$Vega$scales(
+			A3(_elm_lang$core$List$foldl, topScGenerator, layoutSc, facetNames));
+	}();
+	var mk = _gicentre$elm_vega$Vega$marks(
+		A3(
+			_elm_lang$core$List$foldl,
+			groupGenerator,
+			{ctor: '[]'},
+			facetNames));
 	return _gicentre$elm_vega$Vega$toVega(
 		{
 			ctor: '::',
@@ -21784,16 +20614,13 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 					_0: ds,
 					_1: {
 						ctor: '::',
-						_0: si(
-							{ctor: '[]'}),
+						_0: si,
 						_1: {
 							ctor: '::',
-							_0: sc(
-								{ctor: '[]'}),
+							_0: sc,
 							_1: {
 								ctor: '::',
-								_0: mk(
-									{ctor: '[]'}),
+								_0: mk,
 								_1: {ctor: '[]'}
 							}
 						}
@@ -21852,7 +20679,7 @@ var _gicentre$elm_vega$GalleryInteraction$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$GalleryInteraction$view,
 		update: F2(
-			function (_p12, model) {
+			function (_p7, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
