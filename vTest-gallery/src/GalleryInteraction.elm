@@ -411,9 +411,307 @@ interaction2 =
         [ width 720, height 480, padding 5, ds, si [], mk [] ]
 
 
+interaction3 : Spec
+interaction3 =
+    let
+        scGenerator var dir =
+            let
+                ra =
+                    if dir == "X" then
+                        raValues [ vNum 0, vSignal "chartSize" ]
+                    else
+                        raValues [ vSignal "chartSize", vNum 0 ]
+            in
+            scale (var ++ dir)
+                [ scZero false
+                , scNice NTrue
+                , scRange ra
+                , scDomain (doData [ daDataset "iris", daField (field var) ])
+                ]
+
+        cf =
+            config [ cfAxis AxAll [ axTickColor "#ccc" ] ]
+
+        ds =
+            dataSource
+                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                , data "fields" [ daValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
+                , data "cross" [ daSource "fields" ]
+                    |> transform
+                        [ trCross [ crAs "x" "y" ]
+                        , trFormula "datum.x.data + 'X'" "xScale" AlwaysUpdate
+                        , trFormula "datum.y.data + 'Y'" "yScale" AlwaysUpdate
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "chartSize" [ siValue (vNum 120) ]
+                << signal "chartPad" [ siValue (vNum 15) ]
+                << signal "chartStep" [ siUpdate "chartSize + chartPad" ]
+                << signal "width" [ siUpdate "chartStep * 4" ]
+                << signal "height" [ siUpdate "chartStep * 4" ]
+                << signal "cell"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "group()" ]
+                        , evHandler (esSelector (str "@cell:mouseup")) [ evUpdate "!span(brushX) && !span(brushY) ? null : cell" ]
+                        ]
+                    ]
+                << signal "brushX"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "[x(cell), x(cell)]" ]
+                        , evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[brushX[0], clamp(x(cell), 0, chartSize)]" ]
+                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchorX[0] + delta[0], anchorX[1] + delta[0]], 0, chartSize)" ]
+                        ]
+                    ]
+                << signal "brushY"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "[y(cell), y(cell)]" ]
+                        , evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[brushY[0], clamp(y(cell), 0, chartSize)]" ]
+                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchorY[0] + delta[1], anchorY[1] + delta[1]], 0, chartSize)" ]
+                        ]
+                    ]
+                << signal "down"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "[x(cell), y(cell)]" ] ]
+                    ]
+                << signal "anchorX"
+                    [ siValue vNull
+                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brushX)" ] ]
+                    ]
+                << signal "anchorY"
+                    [ siValue vNull
+                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brushY)" ] ]
+                    ]
+                << signal "delta"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn [ evHandler (esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[x(cell) - down[0], y(cell) - down[1]]" ] ]
+                    ]
+                << signal "rangeX"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn [ evHandler (esSignal "brushX") [ evUpdate "invert(cell.datum.x.data + 'X', brushX)" ] ]
+                    ]
+                << signal "rangeY"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn [ evHandler (esSignal "brushY") [ evUpdate "invert(cell.datum.y.data + 'Y', brushY)" ] ]
+                    ]
+                << signal "cursor"
+                    [ siValue (vStr "'default'")
+                    , siOn
+                        [ evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "'nwse-resize'" ]
+                        , evHandler (esSelector (str "@brush:mousemove, [@brush:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "'move'" ]
+                        , evHandler (esSelector (str "@brush:mouseout, window:mouseup")) [ evUpdate "'default'" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "groupX"
+                    [ scType ScBand
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "fields", daField (field "data") ])
+                    ]
+                << scale "groupY"
+                    [ scType ScBand
+                    , scRange (raValues [ vSignal "height", vNum 0 ])
+                    , scDomain (doData [ daDataset "fields", daField (field "data") ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange RaCategory
+                    , scDomain (doData [ daDataset "iris", daField (field "species") ])
+                    ]
+                << scGenerator "petalWidth" "X"
+                << scGenerator "petalLength" "X"
+                << scGenerator "sepalWidth" "X"
+                << scGenerator "sepalLength" "X"
+                << scGenerator "petalWidth" "Y"
+                << scGenerator "petalLength" "Y"
+                << scGenerator "sepalWidth" "Y"
+                << scGenerator "sepalLength" "Y"
+
+        ax =
+            axes
+                << axis "petalWidthY" SLeft [ axTitle (str "Petal Width"), axPosition (vSignal "3 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "petalLengthY" SLeft [ axTitle (str "Petal Length"), axPosition (vSignal "2 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "sepalWidthY" SLeft [ axTitle (str "Sepal Width"), axPosition (vSignal "1 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "sepalLengthY" SLeft [ axTitle (str "Sepal Length"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "petalWidthX" SBottom [ axTitle (str "Petal Width"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "petalLengthX" SBottom [ axTitle (str "Petal Length"), axPosition (vSignal "1 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "sepalWidthX" SBottom [ axTitle (str "Sepal Width"), axPosition (vSignal "2 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "sepalLengthX" SBottom [ axTitle (str "Sepal Length"), axPosition (vSignal "3 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+
+        le =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leTitle (str "Species")
+                    , leOffset (vNum 0)
+                    , leEncode
+                        [ enSymbols
+                            [ enUpdate
+                                [ maFillOpacity [ vNum 0.5 ]
+                                , maStroke [ vStr "transparent" ]
+                                ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ mEncode
+                        [ enEnter
+                            [ maFill [ vStr "#eee" ]
+                            ]
+                        , enUpdate
+                            [ maOpacity [ vSignal "cell ? 1 : 0" ]
+                            , maX [ vSignal "cell ? cell.x + brushX[0] : 0" ]
+                            , maX2 [ vSignal "cell ? cell.x + brushX[1] : 0" ]
+                            , maY [ vSignal "cell ? cell.y + brushY[0] : 0" ]
+                            , maY2 [ vSignal "cell ? cell.y + brushY[1] : 0" ]
+                            ]
+                        ]
+                    ]
+                << mark Group
+                    [ mName "cell"
+                    , mFrom [ srData (str "cross") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "groupX", vField (field "x.data") ]
+                            , maY [ vScale "groupY", vField (field "y.data") ]
+                            , maWidth [ vSignal "chartSize" ]
+                            , maHeight [ vSignal "chartSize" ]
+                            , maFill [ vStr "transparent" ]
+                            , maStroke [ vStr "#ddd" ]
+                            ]
+                        ]
+                    , mGroup [ mk1 [] ]
+                    ]
+                << mark Rect
+                    [ mName "brush"
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "transparent" ] ]
+                        , enUpdate
+                            [ maX [ vSignal "cell ? cell.x + brushX[0] : 0" ]
+                            , maX2 [ vSignal "cell ? cell.x + brushX[1] : 0" ]
+                            , maY [ vSignal "cell ? cell.y + brushY[0] : 0" ]
+                            , maY2 [ vSignal "cell ? cell.y + brushY[1] : 0" ]
+                            ]
+                        ]
+                    ]
+
+        mk1 =
+            marks
+                << mark Symbol
+                    [ mFrom [ srData (str "iris") ]
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScaleField (fParent (field "xScale")), vField (fDatum (fParent (field "x.data"))) ]
+                            , maY [ vScaleField (fParent (field "yScale")), vField (fDatum (fParent (field "y.data"))) ]
+                            , maFillOpacity [ vNum 0.5 ]
+                            , maSize [ vNum 36 ]
+                            ]
+                        , enUpdate
+                            [ maFill
+                                [ ifElse "!cell || inrange(datum[cell.datum.x.data], rangeX) && inrange(datum[cell.datum.y.data], rangeY)"
+                                    [ vScale "cScale", vField (field "species") ]
+                                    [ vStr "#ddd" ]
+                                ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, padding 10, ds, si [], sc [], ax [], le [], mk [] ]
+
+
+interaction4 : Spec
+interaction4 =
+    let
+        cf =
+            config []
+
+        ds =
+            dataSource
+                [ data "wheat" [ daUrl "https://vega.github.io/vega/data/wheat.json" ]
+                , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
+                , data "monarchs" [ daUrl "https://vega.github.io/vega/data/monarchs.json" ]
+                    |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" AlwaysUpdate ]
+                ]
+
+        si =
+            signals
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange RaWidth
+                    , scDomain (doNums (nums [ 1565, 1825 ]))
+                    , scZero false
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange RaHeight
+                    , scZero true
+                    , scDomain (doData [ daDataset "wheat", daField (field "wheat") ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raStrs [ "black", "white" ])
+                    , scDomain (doData [ daDataset "monarchs", daField (field "commonwealth") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTickCount (num 5), axFormat "04d" ]
+                << axis "yScale"
+                    SRight
+                    [ axGrid true
+                    , axDomain false
+                    , axZIndex (num 1)
+                    , axTickCount (num 5)
+                    , axOffset (vNum 5)
+                    , axTickSize (num 0)
+                    , axEncode
+                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
+                        , ( ELabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
+                        ]
+                    ]
+
+        le =
+            legends
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "wheat") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "year") ]
+                            , maWidth [ vNum 17 ]
+                            , maY [ vScale "yScale", vField (field "wheat") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "#aaa" ]
+                            , maStroke [ vStr "#5d5d5d" ]
+                            , maStrokeWidth [ vNum 0.25 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, padding 10, ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction2
+    interaction3
 
 
 
@@ -425,6 +723,9 @@ mySpecs =
     combineSpecs
         [ ( "interaction1", interaction1 )
         , ( "interaction2", interaction2 )
+        , ( "interaction3", interaction3 )
+
+        -- , ( "interaction4", interaction4 )
         ]
 
 
