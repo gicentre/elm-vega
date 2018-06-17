@@ -16573,17 +16573,7 @@ var _user$project$Vega$transformSpec = function (trans) {
 								ctor: '_Tuple2',
 								_0: 'query',
 								_1: _elm_lang$core$Json_Encode$list(
-									A2(
-										_elm_lang$core$List$map,
-										function (n) {
-											return _elm_lang$core$Json_Encode$object(
-												{
-													ctor: '::',
-													_0: A3(_user$project$Vega$numArrayProperty, 2, 'query', n),
-													_1: {ctor: '[]'}
-												});
-										},
-										nums))
+									A2(_elm_lang$core$List$map, _user$project$Vega$numSpec, nums))
 							},
 							_1: {ctor: '[]'}
 						}
@@ -16615,17 +16605,7 @@ var _user$project$Vega$transformSpec = function (trans) {
 								ctor: '_Tuple2',
 								_0: 'query',
 								_1: _elm_lang$core$Json_Encode$list(
-									A2(
-										_elm_lang$core$List$map,
-										function (n) {
-											return _elm_lang$core$Json_Encode$object(
-												{
-													ctor: '::',
-													_0: A3(_user$project$Vega$numArrayProperty, 2, 'query', n),
-													_1: {ctor: '[]'}
-												});
-										},
-										nums))
+									A2(_elm_lang$core$List$map, _user$project$Vega$numSpec, nums))
 							},
 							_1: {
 								ctor: '::',

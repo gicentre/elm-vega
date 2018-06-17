@@ -13643,7 +13643,7 @@ transformSpec trans =
             JE.object
                 [ ( "type", JE.string "crossfilter" )
                 , ( "fields", JE.list (List.map fieldSpec fs) )
-                , ( "query", JE.list (List.map (\n -> JE.object [ numArrayProperty 2 "query" n ]) nums) )
+                , ( "query", JE.list (List.map numSpec nums) )
                 ]
 
         TCrossFilterAsSignal tuples s ->
@@ -13654,7 +13654,7 @@ transformSpec trans =
             JE.object
                 [ ( "type", JE.string "crossfilter" )
                 , ( "fields", JE.list (List.map fieldSpec fs) )
-                , ( "query", JE.list (List.map (\n -> JE.object [ numArrayProperty 2 "query" n ]) nums) )
+                , ( "query", JE.list (List.map numSpec nums) )
                 , ( "signal", JE.string s )
                 ]
 
