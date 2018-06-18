@@ -1250,9 +1250,143 @@ interaction6 =
         [ width 200, height 200, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
+interaction7 : Spec
+interaction7 =
+    let
+        ds =
+            dataSource
+                [ data "stocks"
+                    [ daUrl "https://vega.github.io/vega/data/stocks.csv"
+                    , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
+                    ]
+                , data "index"
+                    [ daSource "stocks" ]
+                    |> transform [ trFilter (expr "month(datum.date) == month(indexDate) && year(datum.date) == year(indexDate)") ]
+                , data "indexed_stocks"
+                    [ daSource "stocks" ]
+                    |> transform
+                        [ trLookup "index"
+                            (field "symbol")
+                            [ field "symbol" ]
+                            [ luAs [ "index" ]
+                            , luDefault (vObject [ keyValue "price" (vNum 0) ])
+                            ]
+                        , trFormula
+                            "datum.index.price > 0 ? (datum.price - datum.index.price)/datum.index.price : 0"
+                            "indexed_price"
+                            AlwaysUpdate
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "indexDate"
+                    [ siUpdate "time('Jan 1 2005')"
+                    , siOn [ evHandler [ esSelector (str "mousemove") ] [ evUpdate "invert('xScale', clamp(x(), 0, width))" ] ]
+                    ]
+                << signal "maxDate" [ siUpdate "time('Mar 1 2010')" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScTime
+                    , scDomain (doData [ daDataset "stocks", daField (field "date") ])
+                    , scRange RaWidth
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scDomain (doData [ daDataset "indexed_stocks", daField (field "indexed_price") ])
+                    , scNice NTrue
+                    , scZero true
+                    , scRange RaHeight
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scDomain (doData [ daDataset "stocks", daField (field "symbol") ])
+                    , scRange RaCategory
+                    ]
+
+        ax =
+            axes << axis "yScale" SLeft [ axGrid true, axFormat "%" ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mFrom [ srFacet "indexed_stocks" "series" [ faGroupBy [ "symbol" ] ] ]
+                    , mGroup [ ds1, mk1 [] ]
+                    ]
+                << mark Rule
+                    [ mEncode
+                        [ enUpdate
+                            [ maX [ vField (fGroup (field "xScale")) ]
+                            , maX2 [ vField (fGroup (field "width")) ]
+                            , maY [ vNum 0.5, vOffset (vObject [ vScale "yScale", vNum 0, vRound true ]) ]
+                            , maStroke [ vStr "black" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark Rule
+                    [ mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vSignal "indexDate", vOffset (vNum 0.5) ]
+                            , maY [ vNum 0 ]
+                            , maY2 [ vField (fGroup (field "height")) ]
+                            , maStroke [ vStr "firebrick" ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vSignal "indexDate" ]
+                            , maY2 [ vField (fGroup (field "height")), vOffset (vNum 15) ]
+                            , maAlign [ hCenter ]
+                            , maText [ vSignal "timeFormat(indexDate, '%b %Y')" ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        ]
+                    ]
+
+        ds1 =
+            dataSource
+                [ data "label" [ daSource "series" ]
+                    |> transform [ trFilter (expr "datum.date == maxDate") ]
+                ]
+
+        mk1 =
+            marks
+                << mark Line
+                    [ mFrom [ srData (str "series") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "date") ]
+                            , maY [ vScale "yScale", vField (field "indexed_price") ]
+                            , maStroke [ vScale "cScale", vField (field "symbol") ]
+                            , maStrokeWidth [ vNum 2 ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "label") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "date"), vOffset (vNum 2) ]
+                            , maY [ vScale "yScale", vField (field "indexed_price") ]
+                            , maFill [ vScale "cScale", vField (field "symbol") ]
+                            , maText [ vField (field "symbol") ]
+                            , maBaseline [ vMiddle ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 650, height 300, padding 5, autosize [ AFit, APadding ], ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction6
+    interaction7
 
 
 
@@ -1268,6 +1402,7 @@ mySpecs =
         , ( "interaction4", interaction4 )
         , ( "interaction5", interaction5 )
         , ( "interaction6", interaction6 )
+        , ( "interaction7", interaction7 )
         ]
 
 
