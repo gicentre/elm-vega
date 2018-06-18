@@ -19695,11 +19695,7 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 						ctor: '_Tuple2',
 						_0: 'range',
 						_1: _elm_lang$core$Json_Encode$object(
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$dataRefProperty(_p186._0),
-								_1: {ctor: '[]'}
-							})
+							A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$dataRefProperty, _p186._0))
 					};
 				case 'RStep':
 					return {

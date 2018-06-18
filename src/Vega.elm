@@ -2872,7 +2872,7 @@ type ScaleRange
     | RValues (List Value)
     | RSignal String
     | RScheme Str (List ColorSchemeProperty)
-    | RData DataReference
+    | RData (List DataReference)
     | RStep Value
     | RCustom String
     | RaWidth
@@ -8512,10 +8512,15 @@ raCustomDefault =
 
 
 {-| A scale range specified as a data reference object. This is used for specifying
-ordinal scale ranges as a series of distinct field values. For details see the
+ordinal scale ranges as a series of distinct field values.
+
+    TODO: Add example
+
+For details see the
 [Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+
 -}
-raData : DataReference -> ScaleRange
+raData : List DataReference -> ScaleRange
 raData =
     RData
 
@@ -13198,8 +13203,8 @@ scaleProperty scaleProp =
                 RScheme name options ->
                     ( "range", JE.object (List.map schemeProperty (SScheme name :: options)) )
 
-                RData dRef ->
-                    ( "range", JE.object [ dataRefProperty dRef ] )
+                RData dRefs ->
+                    ( "range", JE.object (List.map dataRefProperty dRefs) )
 
                 RStep val ->
                     ( "range", JE.object [ ( "step", valueSpec val ) ] )

@@ -8773,8 +8773,8 @@
       },
       {
         "name": "raData",
-        "comment": " A scale range specified as a data reference object. This is used for specifying\nordinal scale ranges as a series of distinct field values. For details see the\n[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).\n",
-        "type": "Vega.DataReference -> Vega.ScaleRange"
+        "comment": " A scale range specified as a data reference object. This is used for specifying\nordinal scale ranges as a series of distinct field values.\n\n    TODO: Add example\n\nFor details see the\n[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).\n\n",
+        "type": "List Vega.DataReference -> Vega.ScaleRange"
       },
       {
         "name": "raNums",
