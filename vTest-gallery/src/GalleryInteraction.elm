@@ -795,9 +795,238 @@ interaction4 =
         [ cf, width 500, height 300, paddings 40 10 10 20, autosize [ ANone ], ds, si [], sc [], ax [], mk [] ]
 
 
+interaction5 : Spec
+interaction5 =
+    let
+        table =
+            dataFromColumns "clusters" []
+                << dataColumn "id" (daNums [ 0, 1, 2, 3, 4, 5 ])
+                << dataColumn "name" (daStrs [ "South Asia", "Europe & Cental Asia", "Sub-Saharan Africa", "America", "East Asia & Pacific", "Middle East & North Africa" ])
+
+        ds =
+            dataSource
+                [ data "gapminder" [ daUrl "https://vega.github.io/vega/data/gapminder.json" ]
+                , table []
+                , data "country_timeline" [ daSource "gapminder" ]
+                    |> transform
+                        [ trFilter (expr "timeline && datum.country == timeline.country")
+                        , trCollect [ ( field "year", Ascend ) ]
+                        ]
+                , data "thisYear" [ daSource "gapminder" ]
+                    |> transform [ trFilter (expr "datum.year == currentYear") ]
+                , data "prevYear" [ daSource "gapminder" ]
+                    |> transform [ trFilter (expr "datum.year == currentYear - stepYear") ]
+                , data "nextYear" [ daSource "gapminder" ]
+                    |> transform [ trFilter (expr "datum.year == currentYear + stepYear") ]
+                , data "countries" [ daSource "gapminder" ]
+                    |> transform [ trAggregate [ agGroupBy [ field "country" ] ] ]
+                , data "interpolate" [ daSource "countries" ]
+                    |> transform
+                        [ trLookup "thisYear" (field "country") [ field "country" ] [ luAs [ "this" ], luDefault (vObject []) ]
+                        , trLookup "prevYear" (field "country") [ field "country" ] [ luAs [ "prev" ], luDefault (vObject []) ]
+                        , trLookup "nextYear" (field "country") [ field "country" ] [ luAs [ "next" ], luDefault (vObject []) ]
+                        , trFormula "interYear > currentYear ? datum.next.fertility : (datum.prev.fertility||datum.this.fertility)" "target_fertility" AlwaysUpdate
+                        , trFormula "interYear > currentYear ? datum.next.life_expect : (datum.prev.life_expect||datum.this.life_expect)" "target_life_expect" AlwaysUpdate
+                        , trFormula "interYear==2000 ? datum.this.fertility : datum.this.fertility + (datum.target_fertility-datum.this.fertility) * abs(interYear-datum.this.year)/5" "inter_fertility" AlwaysUpdate
+                        , trFormula "interYear==2000 ? datum.this.life_expect : datum.this.life_expect + (datum.target_life_expect-datum.this.life_expect) * abs(interYear-datum.this.year)/5" "inter_life_expect" AlwaysUpdate
+                        ]
+                , data "trackCountries" [ daOn [ trigger "active" [ tgToggle "{country: active.country}" ] ] ]
+                ]
+
+        si =
+            signals
+                << signal "minYear" [ siValue (vNum 1955) ]
+                << signal "maxYear" [ siValue (vNum 2005) ]
+                << signal "stepYear" [ siValue (vNum 5) ]
+                << signal "active"
+                    [ siValue (vObject [])
+                    , siOn
+                        [ evHandler [ esSelector (str "@point:mousedown, @point:touchstart") ] [ evUpdate "datum" ]
+                        , evHandler [ esSelector (str "window:mouseup, window:touchend") ] [ evUpdate "" ]
+                        ]
+                    ]
+                << signal "isActive" [ siUpdate "active.country" ]
+                << signal "timeline"
+                    [ siValue (vObject [])
+                    , siOn
+                        [ evHandler [ esSelector (str "@point:mouseover") ] [ evUpdate "isActive ? active : datum" ]
+                        , evHandler [ esSelector (str "@point:mouseout") ] [ evUpdate "active" ]
+                        , evHandler [ esSignal "active" ] [ evUpdate "active" ]
+                        ]
+                    ]
+                << signal "tX"
+                    [ siOn [ evHandler [ esSelector (str "mousemove!, touchmove!") ] [ evUpdate "isActive ? scale('xScale', active.this.fertility) : tX" ] ] ]
+                << signal "tY"
+                    [ siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? scale('yScale', active.this.life_expect) : tY" ] ] ]
+                << signal "pX"
+                    [ siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? scale('xScale', active.prev.fertility) : pX" ] ] ]
+                << signal "pY"
+                    [ siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? scale('yScale', active.prev.life_expect) : pY" ] ] ]
+                << signal "nX"
+                    [ siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? scale('xScale', active.next.fertility) : nX" ] ] ]
+                << signal "nY"
+                    [ siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? scale('yScale', active.next.life_expect) : nY" ] ] ]
+                << signal "thisDist"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? sqrt(pow(x()-tX, 2) + pow(y()-tY, 2)) : thisDist" ] ]
+                    ]
+                << signal "prevDist"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? sqrt(pow(x()-pX, 2) + pow(y()-pY, 2)): prevDist" ] ]
+                    ]
+                << signal "nextDist"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? sqrt(pow(x()-nX, 2) + pow(y()-nY, 2)) : nextDist" ] ]
+                    ]
+                << signal "prevScore"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? ((pX-tX) * (x()-tX) + (pY-tY) * (y()-tY))/prevDist || -999999 : prevScore" ] ]
+                    ]
+                << signal "nextScore"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? ((nX-tX) * (x()-tX) + (nY-tY) * (y()-tY))/nextDist || -999999 : nextScore" ] ]
+                    ]
+                << signal "interYear"
+                    [ siValue (vNum 1980)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? (min(maxYear, currentYear+5, max(minYear, currentYear-5, prevScore > nextScore ? (currentYear - 2.5*prevScore/sqrt(pow(pX-tX, 2) + pow(pY-tY, 2))) : (currentYear + 2.5*nextScore/sqrt(pow(nX-tX, 2) + pow(nY-tY, 2)))))) : interYear" ] ]
+                    ]
+                << signal "currentYear"
+                    [ siValue (vNum 1980)
+                    , siOn [ evHandler [ esSelector (str "mousemove, touchmove") ] [ evUpdate "isActive ? (min(maxYear, max(minYear, prevScore > nextScore ? (thisDist < prevDist ? currentYear : currentYear-5) : (thisDist < nextDist ? currentYear : currentYear+5)))) : currentYear" ] ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scNice NTrue
+                    , scDomain (doData [ daDataset "gapminder", daField (field "fertility") ])
+                    , scRange RaWidth
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scZero false
+                    , scNice NTrue
+                    , scDomain (doData [ daDataset "gapminder", daField (field "life_expect") ])
+                    , scRange RaHeight
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scDomain (doData [ daDataset "gapminder", daField (field "cluster") ])
+                    , scRange RaCategory
+                    ]
+                << scale "lScale"
+                    [ scType ScOrdinal
+                    , scDomain (doData [ daDataset "clusters", daField (field "id") ])
+                    , scRange (raData [ daDataset "clusters", daField (field "name") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "Fertility"), axGrid true, axTickCount (num 5) ]
+                << axis "yScale" SLeft [ axTitle (str "Life Expectancy"), axGrid true, axTickCount (num 5) ]
+
+        le =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leTitle (str "Region")
+                    , leOrient Right
+                    , leEncode
+                        [ enSymbols [ enEnter [ maFillOpacity [ vNum 0.5 ] ] ]
+                        , enLabels [ enUpdate [ maText [ vScale "lScale", vField (field "value") ] ] ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Text
+                    [ mEncode
+                        [ enUpdate
+                            [ maText [ vSignal "currentYear" ]
+                            , maX [ vNum 300 ]
+                            , maY [ vNum 300 ]
+                            , maFill [ vStr "grey" ]
+                            , maFillOpacity [ vNum 0.25 ]
+                            , maFontSize [ vNum 100 ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "country_timeline") ]
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "fertility"), vOffset (vNum 5) ]
+                            , maY [ vScale "yScale", vField (field "life_expect") ]
+                            , maFill [ vStr "#555" ]
+                            , maFillOpacity [ vNum 0.6 ]
+                            , maText [ vField (field "year") ]
+                            ]
+                        ]
+                    ]
+                << mark Line
+                    [ mFrom [ srData (str "country_timeline") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "fertility") ]
+                            , maY [ vScale "yScale", vField (field "life_expect") ]
+                            , maStroke [ vStr "#bbb" ]
+                            , maStrokeWidth [ vNum 5 ]
+                            , maFillOpacity [ vNum 0.5 ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mName "point"
+                    , mFrom [ srData (str "interpolate") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale "cScale", vField (field "this.cluster") ]
+                            , maSize [ vNum 150 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vField (field "inter_fertility") ]
+                            , maY [ vScale "yScale", vField (field "inter_life_expect") ]
+                            , maFillOpacity
+                                [ ifElse "datum.country==timeline.country || indata('trackCountries', 'country', datum.country)"
+                                    [ vNum 1 ]
+                                    [ vNum 0.5 ]
+                                ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "interpolate") ]
+                    , mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vStr "#333" ]
+                            , maFontSize [ vNum 14 ]
+                            , maFontWeight [ vStr "bold" ]
+                            , maText [ vField (field "country") ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vField (field "inter_fertility") ]
+                            , maY [ vScale "yScale", vField (field "inter_life_expect"), vOffset (vNum -7) ]
+                            , maFillOpacity
+                                [ ifElse "datum.country==timeline.country || indata('trackCountries', 'country', datum.country)"
+                                    [ vNum 0.8 ]
+                                    [ vNum 0 ]
+                                ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 600, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction4
+    interaction5
 
 
 
@@ -811,6 +1040,7 @@ mySpecs =
         , ( "interaction2", interaction2 )
         , ( "interaction3", interaction3 )
         , ( "interaction4", interaction4 )
+        , ( "interaction5", interaction5 )
         ]
 
 
