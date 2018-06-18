@@ -2276,7 +2276,7 @@ type EventHandler
     = EEvents (List EventStream)
     | EUpdate Expression
     | EEncode String
-    | EForce Bool
+    | EForce Boo
 
 
 {-| An event stream for modelling user input. This can either be an event stream
@@ -5333,7 +5333,7 @@ For example, if true and an input stream update sets the signal to its current v
 downstream signals will still be notified of an update. For details see the
 [Vega event handler documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
-evForce : Bool -> EventHandler
+evForce : Boo -> EventHandler
 evForce =
     EForce
 
@@ -11665,7 +11665,7 @@ eventHandlerSpec ehs =
                     ( "encode", JE.string s )
 
                 EForce b ->
-                    ( "force", JE.bool b )
+                    ( "force", booSpec b )
     in
     JE.object (List.map eventHandler ehs)
 

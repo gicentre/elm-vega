@@ -9815,7 +9815,7 @@ var _gicentre$elm_vega$Vega$eventHandlerSpec = function (ehs) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'force',
-					_1: _elm_lang$core$Json_Encode$bool(_p52._0)
+					_1: _gicentre$elm_vega$Vega$booSpec(_p52._0)
 				};
 		}
 	};

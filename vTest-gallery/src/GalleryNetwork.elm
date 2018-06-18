@@ -198,7 +198,7 @@ force1 =
                                 , esConsume true
                                 ]
                             ]
-                            [ evUpdate "2", evForce True ]
+                            [ evUpdate "2", evForce true ]
                         ]
                     ]
                 << signal "node"

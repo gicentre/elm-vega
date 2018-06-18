@@ -9815,7 +9815,7 @@ var _user$project$Vega$eventHandlerSpec = function (ehs) {
 				return {
 					ctor: '_Tuple2',
 					_0: 'force',
-					_1: _elm_lang$core$Json_Encode$bool(_p52._0)
+					_1: _user$project$Vega$booSpec(_p52._0)
 				};
 		}
 	};
@@ -19901,7 +19901,7 @@ var _user$project$TransformTests$forceTest1 = function () {
 																				_0: _user$project$Vega$evUpdate('2'),
 																				_1: {
 																					ctor: '::',
-																					_0: _user$project$Vega$evForce(true),
+																					_0: _user$project$Vega$evForce(_user$project$Vega$true),
 																					_1: {ctor: '[]'}
 																				}
 																			}),
