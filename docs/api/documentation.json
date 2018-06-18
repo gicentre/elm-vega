@@ -8954,7 +8954,7 @@
       {
         "name": "siReact",
         "comment": " Specify whether a signal update expression should be automatically re-evaluated\nwhen any upstream signal dependencies update. If false, the update expression will\nonly be run upon initialization. For details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals).\n",
-        "type": "Bool -> Vega.SignalProperty"
+        "type": "Vega.Boo -> Vega.SignalProperty"
       },
       {
         "name": "siUpdate",

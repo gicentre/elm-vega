@@ -2896,7 +2896,7 @@ type SignalProperty
     | SiDescription String
     | SiOn (List (List EventHandler))
     | SiUpdate Expression
-    | SiReact Bool
+    | SiReact Boo
     | SiValue Value
     | SiPushOuter
 
@@ -8924,7 +8924,7 @@ when any upstream signal dependencies update. If false, the update expression wi
 only be run upon initialization. For details see the
 [Vega signal documentation](https://vega.github.io/vega/docs/signals).
 -}
-siReact : Bool -> SignalProperty
+siReact : Boo -> SignalProperty
 siReact =
     SiReact
 
@@ -13319,7 +13319,7 @@ signalProperty sigProp =
             ( "on", JE.list (List.map eventHandlerSpec ehs) )
 
         SiReact b ->
-            ( "react", JE.bool b )
+            ( "react", booSpec b )
 
         SiValue v ->
             ( "value", valueSpec v )

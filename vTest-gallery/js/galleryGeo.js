@@ -15653,7 +15653,7 @@ var _gicentre$elm_vega$Vega$signalProperty = function (sigProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'react',
-				_1: _elm_lang$core$Json_Encode$bool(_p129._0)
+				_1: _gicentre$elm_vega$Vega$booSpec(_p129._0)
 			};
 		case 'SiValue':
 			return {
