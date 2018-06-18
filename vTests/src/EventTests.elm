@@ -66,12 +66,12 @@ eventStream1 =
                     [ siValue (vNums [ 200, 200 ])
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMark Rect, esType MouseDown ] [ esSource ESView, esType MouseUp ]
                                 , esSource ESView
                                 , esType MouseMove
                                 ]
-                            )
+                            ]
                             [ evUpdate "xy()" ]
                         ]
                     ]

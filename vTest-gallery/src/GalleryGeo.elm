@@ -525,46 +525,46 @@ geo6 =
                 << signal "myScale"
                     [ siValue (vNum 150)
                     , siOn
-                        [ evHandler (esObject [ esType Wheel, esConsume True ])
+                        [ evHandler [ esObject [ esType Wheel, esConsume true ] ]
                             [ evUpdate "clamp(myScale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)" ]
                         ]
                     ]
                 << signal "angles"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "[rotateX,centerY]" ] ]
+                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "[rotateX,centerY]" ] ]
                     ]
                 << signal "cloned"
                     [ siValue vNull
-                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "copy('myProjection')" ] ]
+                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "copy('myProjection')" ] ]
                     ]
                 << signal "start"
                     [ siValue vNull
-                    , siOn [ evHandler (esObject [ esType MouseDown ]) [ evUpdate "invert(cloned, xy())" ] ]
+                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "invert(cloned, xy())" ] ]
                     ]
                 << signal "drag"
                     [ siValue vNull
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
                                 ]
-                            )
+                            ]
                             [ evUpdate "invert(cloned, xy())" ]
                         ]
                     ]
                 << signal "delta"
                     [ siValue vNull
-                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "[drag[0] - start[0], start[1] - drag[1]]" ] ]
+                    , siOn [ evHandler [ esSelector (strSignal "drag") ] [ evUpdate "[drag[0] - start[0], start[1] - drag[1]]" ] ]
                     ]
                 << signal "rotateX"
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "angles[0] + delta[0]" ] ]
+                    , siOn [ evHandler [ esSelector (strSignal "drag") ] [ evUpdate "angles[0] + delta[0]" ] ]
                     ]
                 << signal "centerY"
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (strSignal "drag")) [ evUpdate "clamp(angles[1] + delta[1], -60, 60)" ] ]
+                    , siOn [ evHandler [ esSelector (strSignal "drag") ] [ evUpdate "clamp(angles[1] + delta[1], -60, 60)" ] ]
                     ]
 
         pr =

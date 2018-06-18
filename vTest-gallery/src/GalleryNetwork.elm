@@ -55,8 +55,8 @@ bundle1 =
                 << signal "active"
                     [ siValue vNull
                     , siOn
-                        [ evHandler (esObject [ esMark Text, esType MouseOver ]) [ evUpdate "datum.id" ]
-                        , evHandler (esObject [ esType MouseOver, esFilter [ "!event.item" ] ]) [ evUpdate "null" ]
+                        [ evHandler [ esObject [ esMark Text, esType MouseOver ] ] [ evUpdate "datum.id" ]
+                        , evHandler [ esObject [ esType MouseOver, esFilter [ "!event.item" ] ] ] [ evUpdate "null" ]
                         ]
                     ]
 
@@ -183,33 +183,33 @@ force1 =
                     , siValue (vNum 0)
                     , siOn
                         [ evHandler
-                            (esMerge
+                            [ esMerge
                                 [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
                                 , esObject [ esSource ESWindow, esType MouseUp ]
                                 ]
-                            )
+                            ]
                             [ evUpdate "0" ]
-                        , evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix || 1" ]
+                        , evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix || 1" ]
                         , evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
-                                , esConsume True
+                                , esConsume true
                                 ]
-                            )
+                            ]
                             [ evUpdate "2", evForce True ]
                         ]
                     ]
                 << signal "node"
                     [ siDescription "Graph node most recently interacted with."
                     , siValue vNull
-                    , siOn [ evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix === 1 ? item() : node" ] ]
+                    , siOn [ evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
                     , siValue (vBoo False)
-                    , siOn [ evHandler (esSelector (strSignal "fix")) [ evUpdate "fix > 1 " ] ]
+                    , siOn [ evHandler [ esSelector (strSignal "fix") ] [ evUpdate "fix > 1 " ] ]
                     ]
 
         sc =
@@ -306,28 +306,28 @@ matrix1 =
                 << signal "src"
                     [ siValue (vObject [])
                     , siOn
-                        [ evHandler (esObject [ esMark Text, esType MouseDown ]) [ evUpdate "datum" ]
-                        , evHandler (esObject [ esType MouseUp ]) [ evUpdate "{}" ]
+                        [ evHandler [ esObject [ esMark Text, esType MouseDown ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esType MouseUp ] ] [ evUpdate "{}" ]
                         ]
                     ]
                 << signal "dest"
                     [ siValue (vNum -1)
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMarkName "columns", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
                                 ]
-                            )
+                            ]
                             [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(x(), 0, width) / width) : dest" ]
                         , evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMarkName "rows", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
                                 ]
-                            )
+                            ]
                             [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(y(), 0, height) / height) : dest" ]
                         ]
                     ]
@@ -584,8 +584,8 @@ map1 =
                 << signal "hover"
                     [ siValue vNull
                     , siOn
-                        [ evHandler (esObject [ esMarkName "cell", esType MouseOver ]) [ evUpdate "datum" ]
-                        , evHandler (esObject [ esMarkName "cell", esType MouseOut ]) [ evUpdate "{}" ]
+                        [ evHandler [ esObject [ esMarkName "cell", esType MouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMarkName "cell", esType MouseOut ] ] [ evUpdate "{}" ]
                         ]
                     ]
                 << signal "title"
@@ -595,8 +595,8 @@ map1 =
                 << signal "cell_stroke"
                     [ siValue vNull
                     , siOn
-                        [ evHandler (esObject [ esType DblClick ]) [ evUpdate "cell_stroke ? null : 'brown'" ]
-                        , evHandler (esObject [ esType MouseDown, esConsume True ]) [ evUpdate "cell_stroke" ]
+                        [ evHandler [ esObject [ esType DblClick ] ] [ evUpdate "cell_stroke ? null : 'brown'" ]
+                        , evHandler [ esObject [ esType MouseDown, esConsume true ] ] [ evUpdate "cell_stroke" ]
                         ]
                     ]
 

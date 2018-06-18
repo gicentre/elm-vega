@@ -107,12 +107,12 @@ stackTest1 =
                     [ siValue (vObject [])
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esType MouseDown
-                                , esConsume True
+                                , esConsume true
                                 , esFilter [ "!event.shiftKey" ]
                                 ]
-                            )
+                            ]
                             [ evUpdate "{key: invert('xScale', x()), value: ~~(1 + 9 * random())}" ]
                         ]
                     ]
@@ -120,13 +120,13 @@ stackTest1 =
                     [ siValue (vObject [])
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esMark Rect
                                 , esType MouseDown
-                                , esConsume True
+                                , esConsume true
                                 , esFilter [ "event.shiftKey" ]
                                 ]
-                            )
+                            ]
                             [ evUpdate "datum" ]
                         ]
                     ]
@@ -216,33 +216,33 @@ forceTest1 =
                     , siValue (vNum 0)
                     , siOn
                         [ evHandler
-                            (esMerge
+                            [ esMerge
                                 [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
                                 , esObject [ esSource ESWindow, esType MouseUp ]
                                 ]
-                            )
+                            ]
                             [ evUpdate "0" ]
-                        , evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix || 1" ]
+                        , evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix || 1" ]
                         , evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
-                                , esConsume True
+                                , esConsume true
                                 ]
-                            )
+                            ]
                             [ evUpdate "2", evForce True ]
                         ]
                     ]
                 << signal "node"
                     [ siDescription "Graph node most recently interacted with."
                     , siValue vNull
-                    , siOn [ evHandler (esObject [ esMark Symbol, esType MouseOver ]) [ evUpdate "fix === 1 ? item() : node" ] ]
+                    , siOn [ evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
                     , siValue (vBoo False)
-                    , siOn [ evHandler (esSelector (strSignal "fix")) [ evUpdate "fix > 1 " ] ]
+                    , siOn [ evHandler [ esSelector (strSignal "fix") ] [ evUpdate "fix > 1 " ] ]
                     ]
 
         sc =

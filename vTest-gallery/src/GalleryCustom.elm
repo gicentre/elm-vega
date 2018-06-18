@@ -47,37 +47,37 @@ custom1 =
                 << signal "dragging"
                     [ siValue (vBoo False)
                     , siOn
-                        [ evHandler (esObject [ esMarkName "handle", esType MouseDown ]) [ evUpdate "true" ]
-                        , evHandler (esObject [ esSource ESWindow, esType MouseUp ]) [ evUpdate "false" ]
+                        [ evHandler [ esObject [ esMarkName "handle", esType MouseDown ] ] [ evUpdate "true" ]
+                        , evHandler [ esObject [ esSource ESWindow, esType MouseUp ] ] [ evUpdate "false" ]
                         ]
                     ]
                 << signal "handleYear"
                     [ siValue (vNum 2010)
                     , siOn
                         [ evHandler
-                            (esObject
+                            [ esObject
                                 [ esBetween [ esMarkName "handle", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
                                 , esSource ESWindow
                                 , esType MouseMove
-                                , esConsume True
+                                , esConsume true
                                 ]
-                            )
+                            ]
                             [ evUpdate "invert('xScale', clamp(x(), 0, width))" ]
                         ]
                     ]
                 << signal "currentYear" [ siUpdate "clamp(handleYear, 1980, 2010)" ]
                 << signal "tipYear"
                     [ siOn
-                        [ evHandler (esObject [ esType MouseMove ]) [ evUpdate "dragging ? tipYear : invert('xScale', x())" ] ]
+                        [ evHandler [ esObject [ esType MouseMove ] ] [ evUpdate "dragging ? tipYear : invert('xScale', x())" ] ]
                     ]
                 << signal "tipValue"
                     [ siOn
-                        [ evHandler (esObject [ esType MouseMove ]) [ evUpdate "dragging ? tipValue : invert('yScale', y())" ] ]
+                        [ evHandler [ esObject [ esType MouseMove ] ] [ evUpdate "dragging ? tipValue : invert('yScale', y())" ] ]
                     ]
                 << signal "cursor"
                     [ siValue (vStr "default")
                     , siOn
-                        [ evHandler (esSignal "dragging") [ evUpdate "dragging ? 'pointer' : 'default'" ] ]
+                        [ evHandler [ esSignal "dragging" ] [ evUpdate "dragging ? 'pointer' : 'default'" ] ]
                     ]
 
         sc =

@@ -2657,13 +2657,13 @@
       },
       {
         "name": "esBetween",
-        "comment": " Specify an event stream filter that lets only events that occur between the\ntwo given event streams from being handled. This is useful, for example, for\ncapturing pointer dragging as it is a pointer movement event stream that occurs\nbetween `MouseDown` and `MouseUp` events.\n\n    << signal \"myDrag\"\n        [ siValue (vNums [ 200, 200 ])\n        , siOn\n            [ evHandler\n                (esObject\n                    [ esBetween [ esMark Rect, esType MouseDown ] [ esSource ESView, esType MouseUp ]\n                    , esSource ESView\n                    , esType MouseMove\n                    ]\n                )\n                [ evUpdate \"xy()\" ]\n            ]\n        ]\n\nThe `esObject` specified above is equivalent to the more compact, but more error-prone\nevent stream selector:\n\n    esSelector (str \"[rect:mousedown, view:mouseup] > view:mousemove\")\n\nFor more details see the\n[Vega event stream object documentation](http://vega.github.io/vega/docs/event-streams/#object).\n\n",
+        "comment": " Specify an event stream filter that lets only events that occur between the\ntwo given event streams from being handled. This is useful, for example, for\ncapturing pointer dragging as it is a pointer movement event stream that occurs\nbetween `MouseDown` and `MouseUp` events.\n\n    << signal \"myDrag\"\n        [ siValue (vNums [ 200, 200 ])\n        , siOn\n            [ evHandler\n                [esObject\n                    [ esBetween [ esMark Rect, esType MouseDown ] [ esSource ESView, esType MouseUp ]\n                    , esSource ESView\n                    , esType MouseMove\n                    ]\n                ]\n                [ evUpdate \"xy()\" ]\n            ]\n        ]\n\nThe `esObject` specified above is equivalent to the more compact, but more error-prone\nevent stream selector:\n\n    esSelector (str \"[rect:mousedown, view:mouseup] > view:mousemove\")\n\nFor more details see the\n[Vega event stream object documentation](http://vega.github.io/vega/docs/event-streams/#object).\n\n",
         "type": "List Vega.EventStreamProperty -> List Vega.EventStreamProperty -> Vega.EventStreamProperty"
       },
       {
         "name": "esConsume",
         "comment": " Specify whether or not an event stream is consumed once it has been captured.\nIf false, the event is made available for subsequent event handling. For more\ndetails see the [Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).\n",
-        "type": "Bool -> Vega.EventStreamProperty"
+        "type": "Vega.Boo -> Vega.EventStreamProperty"
       },
       {
         "name": "esDebounce",
@@ -2742,8 +2742,8 @@
       },
       {
         "name": "evHandler",
-        "comment": " Specify an event event handler. The first parameter represents the stream of\nevents to respond to. The second a list of handlers that respond to the event stream.\nFor example,\n\n    signal \"tooltip\"\n        [ siValue (vObject [])\n        , siOn\n            [ evHandler (esObject [esMark Rect, esType MouseOver]) [ evUpdate \"datum\" ]\n            , evHandler (esObject [esMark Rect, esType MouseOut]) [ evUpdate \"\" ]\n            ]\n        ]\n\nFor details see the\n[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).\n\n",
-        "type": "Vega.EventStream -> List Vega.EventHandler -> List Vega.EventHandler"
+        "comment": " Specify an event event handler. The first parameter represents the stream(s) of\nevents to respond to. The second a list of handlers that respond to the event stream.\nFor example,\n\n    signal \"tooltip\"\n        [ siValue (vObject [])\n        , siOn\n            [ evHandler [esObject [esMark Rect, esType MouseOver] ] [ evUpdate \"datum\" ]\n            , evHandler [esObject [esMark Rect, esType MouseOut] ] [ evUpdate \"\" ]\n            ]\n        ]\n\nFor details see the\n[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).\n\n",
+        "type": "List Vega.EventStream -> List Vega.EventHandler -> List Vega.EventHandler"
       },
       {
         "name": "evStreamSelector",

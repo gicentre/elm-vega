@@ -2273,9 +2273,7 @@ For details see the
 [Vega handlers documentation](https://vega.github.io/vega/docs/signals/#handlers).
 -}
 type EventHandler
-    = EEvents EventStream
-      -- TODO: Need to allow signals to be combined with objects in array.
-      -- Do we make EEVents require a list of EventStreams or can we rely on esMerge?
+    = EEvents (List EventStream)
     | EUpdate Expression
     | EEncode String
     | EForce Bool
@@ -2306,7 +2304,7 @@ type EventStreamProperty
     = ESSource EventSource
     | ESType EventType
     | ESBetween (List EventStreamProperty) (List EventStreamProperty)
-    | ESConsume Bool
+    | ESConsume Boo
     | ESFilter (List Expression)
     | ESDebounce Num
     | ESMarkName String
@@ -5115,12 +5113,12 @@ between `MouseDown` and `MouseUp` events.
         [ siValue (vNums [ 200, 200 ])
         , siOn
             [ evHandler
-                (esObject
+                [esObject
                     [ esBetween [ esMark Rect, esType MouseDown ] [ esSource ESView, esType MouseUp ]
                     , esSource ESView
                     , esType MouseMove
                     ]
-                )
+                ]
                 [ evUpdate "xy()" ]
             ]
         ]
@@ -5143,7 +5141,7 @@ esBetween =
 If false, the event is made available for subsequent event handling. For more
 details see the [Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
 -}
-esConsume : Bool -> EventStreamProperty
+esConsume : Boo -> EventStreamProperty
 esConsume =
     ESConsume
 
@@ -5340,15 +5338,15 @@ evForce =
     EForce
 
 
-{-| Specify an event event handler. The first parameter represents the stream of
+{-| Specify an event event handler. The first parameter represents the stream(s) of
 events to respond to. The second a list of handlers that respond to the event stream.
 For example,
 
     signal "tooltip"
         [ siValue (vObject [])
         , siOn
-            [ evHandler (esObject [esMark Rect, esType MouseOver]) [ evUpdate "datum" ]
-            , evHandler (esObject [esMark Rect, esType MouseOut]) [ evUpdate "" ]
+            [ evHandler [esObject [esMark Rect, esType MouseOver] ] [ evUpdate "datum" ]
+            , evHandler [esObject [esMark Rect, esType MouseOut] ] [ evUpdate "" ]
             ]
         ]
 
@@ -5356,9 +5354,9 @@ For details see the
 [Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).
 
 -}
-evHandler : EventStream -> List EventHandler -> List EventHandler
-evHandler es eHandlers =
-    EEvents es :: eHandlers
+evHandler : List EventStream -> List EventHandler -> List EventHandler
+evHandler ess eHandlers =
+    EEvents ess :: eHandlers
 
 
 {-| Sepcify an event selector used to generate an event stream. For details see the
@@ -11649,8 +11647,13 @@ eventHandlerSpec ehs =
     let
         eventHandler eh =
             case eh of
-                EEvents es ->
-                    ( "events", eventStreamSpec es )
+                EEvents ess ->
+                    case ess of
+                        [ es ] ->
+                            ( "events", eventStreamSpec es )
+
+                        _ ->
+                            ( "events", JE.list (List.map eventStreamSpec ess) )
 
                 EUpdate s ->
                     if s == "" then
@@ -11717,7 +11720,7 @@ eventStreamObjectSpec ess =
                     ( "between", JE.list [ eventStreamObjectSpec ess1, eventStreamObjectSpec ess2 ] )
 
                 ESConsume b ->
-                    ( "consume", JE.bool b )
+                    ( "consume", booSpec b )
 
                 ESFilter ex ->
                     case ex of

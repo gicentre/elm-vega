@@ -239,7 +239,7 @@ areaChart3 =
                 << signal "layers"
                     [ siValue (vNum 2)
                     , siOn
-                        [ evHandler (esObject [ esType MouseDown, esConsume True ])
+                        [ evHandler [ esObject [ esType MouseDown, esConsume true ] ]
                             [ evUpdate "1 + (layers % 4)" ]
                         ]
                     , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
@@ -348,8 +348,8 @@ areaChart4 =
                 << signal "query"
                     [ siValue (vStr "")
                     , siOn
-                        [ evHandler (esObject [ esMark Area, esType Click, esConsume True ]) [ evUpdate "datum.job" ]
-                        , evHandler (esObject [ esType DblClick, esConsume True ]) [ evUpdate "''" ]
+                        [ evHandler [ esObject [ esMark Area, esType Click, esConsume true ] ] [ evUpdate "datum.job" ]
+                        , evHandler [ esObject [ esType DblClick, esConsume true ] ] [ evUpdate "''" ]
                         ]
                     , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
