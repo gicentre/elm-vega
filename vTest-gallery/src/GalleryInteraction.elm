@@ -22,19 +22,19 @@ interaction1 =
             signal (core ++ "Range")
                 [ siUpdate (core ++ "Extent")
                 , siOn
-                    [ evHandler (esSignal (core ++ "Zoom")) [ evUpdate ("[(" ++ core ++ "Range[0]+" ++ core ++ "Range[1])/2 - " ++ core ++ "Zoom, (" ++ core ++ "Range[0]+" ++ core ++ "Range[1])/2 + " ++ core ++ "Zoom]") ]
-                    , evHandler (esSelector (str ("@" ++ core ++ ":dblclick!, @" ++ core ++ "Brush:dblclick!"))) [ evUpdate ("[" ++ core ++ "Extent[0], " ++ core ++ "Extent[1]]") ]
-                    , evHandler (esSelector (str ("[@" ++ core ++ "Brush:mousedown, window:mouseup] > window:mousemove!"))) [ evUpdate ("[" ++ core ++ "Range[0] + invert('" ++ core ++ "Scale', x()) - invert('" ++ core ++ "Scale', xMove), " ++ core ++ "Range[1] + invert('" ++ core ++ "Scale', x()) - invert('" ++ core ++ "Scale', xMove)]") ]
-                    , evHandler (esSelector (str ("[@" ++ core ++ ":mousedown, window:mouseup] > window:mousemove!"))) [ evUpdate ("[min(" ++ core ++ "Anchor, invert('" ++ core ++ "Scale', x())), max(" ++ core ++ "Anchor, invert('" ++ core ++ "Scale', x()))]") ]
+                    [ evHandler [ esSignal (core ++ "Zoom") ] [ evUpdate ("[(" ++ core ++ "Range[0]+" ++ core ++ "Range[1])/2 - " ++ core ++ "Zoom, (" ++ core ++ "Range[0]+" ++ core ++ "Range[1])/2 + " ++ core ++ "Zoom]") ]
+                    , evHandler [ esSelector (str ("@" ++ core ++ ":dblclick!, @" ++ core ++ "Brush:dblclick!")) ] [ evUpdate ("[" ++ core ++ "Extent[0], " ++ core ++ "Extent[1]]") ]
+                    , evHandler [ esSelector (str ("[@" ++ core ++ "Brush:mousedown, window:mouseup] > window:mousemove!")) ] [ evUpdate ("[" ++ core ++ "Range[0] + invert('" ++ core ++ "Scale', x()) - invert('" ++ core ++ "Scale', xMove), " ++ core ++ "Range[1] + invert('" ++ core ++ "Scale', x()) - invert('" ++ core ++ "Scale', xMove)]") ]
+                    , evHandler [ esSelector (str ("[@" ++ core ++ ":mousedown, window:mouseup] > window:mousemove!")) ] [ evUpdate ("[min(" ++ core ++ "Anchor, invert('" ++ core ++ "Scale', x())), max(" ++ core ++ "Anchor, invert('" ++ core ++ "Scale', x()))]") ]
                     ]
                 ]
                 << signal (core ++ "Zoom")
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (str ("@" ++ core ++ ":wheel!, @" ++ core ++ "Brush:wheel!"))) [ evUpdate ("0.5 * abs(span(" ++ core ++ "Range)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))") ] ]
+                    , siOn [ evHandler [ esSelector (str ("@" ++ core ++ ":wheel!, @" ++ core ++ "Brush:wheel!")) ] [ evUpdate ("0.5 * abs(span(" ++ core ++ "Range)) * pow(1.0005, event.deltaY * pow(16, event.deltaMode))") ] ]
                     ]
                 << signal (core ++ "Anchor")
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (str ("@" ++ core ++ ":mousedown!"))) [ evUpdate ("invert('" ++ core ++ "Scale', x())") ] ]
+                    , siOn [ evHandler [ esSelector (str ("@" ++ core ++ ":mousedown!")) ] [ evUpdate ("invert('" ++ core ++ "Scale', x())") ] ]
                     ]
 
         dsGenerator core =
@@ -202,7 +202,7 @@ interaction1 =
                         << signal "delayStep" [ siValue (vNum 10), siBind (iRange [ inMin 2, inMax 20, inStep 1 ]) ]
                         << signal "timeStep" [ siValue (vNum 1), siBind (iRange [ inMin 0.25, inMax 2, inStep 0.25 ]) ]
                         << signal "distanceStep" [ siValue (vNum 100), siBind (iRange [ inMin 50, inMax 200, inStep 50 ]) ]
-                        << signal "xMove" [ siValue (vNum 0), siOn [ evHandler (esSelector (str "window:mousemove")) [ evUpdate "x()" ] ] ]
+                        << signal "xMove" [ siValue (vNum 0), siOn [ evHandler [ esSelector (str "window:mousemove") ] [ evUpdate "x()" ] ] ]
             in
             List.foldl sigGenerator (sigs []) facetNames |> signals
 
@@ -308,26 +308,26 @@ interaction2 =
                 << signal "brush"
                     [ siValue (vNum 0)
                     , siOn
-                        [ evHandler (esSelector (str "@overview:mousedown")) [ evUpdate "[x(), x()]" ]
-                        , evHandler (esSelector (str "[@overview:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "[brush[0], clamp(x(), 0, width)]" ]
-                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)" ]
+                        [ evHandler [ esSelector (str "@overview:mousedown") ] [ evUpdate "[x(), x()]" ]
+                        , evHandler [ esSelector (str "[@overview:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "[brush[0], clamp(x(), 0, width)]" ]
+                        , evHandler [ esSignal "delta" ] [ evUpdate "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)" ]
                         ]
                     ]
                 << signal "anchor"
                     [ siValue vNull
-                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brush)" ] ]
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "slice(brush)" ] ]
                     ]
                 << signal "xDown"
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "x()" ] ]
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "x()" ] ]
                     ]
                 << signal "delta"
                     [ siValue (vNum 0)
-                    , siOn [ evHandler (esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "x() - xDown" ] ]
+                    , siOn [ evHandler [ esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "x() - xDown" ] ]
                     ]
                 << signal "detailDomain"
                     [ siPushOuter
-                    , siOn [ evHandler (esSignal "brush") [ evUpdate "span(brush) ? invert('xOverview', brush) : null" ] ]
+                    , siOn [ evHandler [ esSignal "brush" ] [ evUpdate "span(brush) ? invert('xOverview', brush) : null" ] ]
                     ]
 
         sc2 =
@@ -454,56 +454,56 @@ interaction3 =
                 << signal "cell"
                     [ siValue vNull
                     , siOn
-                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "group()" ]
-                        , evHandler (esSelector (str "@cell:mouseup")) [ evUpdate "!span(brushX) && !span(brushY) ? null : cell" ]
+                        [ evHandler [ esSelector (str "@cell:mousedown") ] [ evUpdate "group()" ]
+                        , evHandler [ esSelector (str "@cell:mouseup") ] [ evUpdate "!span(brushX) && !span(brushY) ? null : cell" ]
                         ]
                     ]
                 << signal "brushX"
                     [ siValue (vNum 0)
                     , siOn
-                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "[x(cell), x(cell)]" ]
-                        , evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[brushX[0], clamp(x(cell), 0, chartSize)]" ]
-                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchorX[0] + delta[0], anchorX[1] + delta[0]], 0, chartSize)" ]
+                        [ evHandler [ esSelector (str "@cell:mousedown") ] [ evUpdate "[x(cell), x(cell)]" ]
+                        , evHandler [ esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove") ] [ evUpdate "[brushX[0], clamp(x(cell), 0, chartSize)]" ]
+                        , evHandler [ esSignal "delta" ] [ evUpdate "clampRange([anchorX[0] + delta[0], anchorX[1] + delta[0]], 0, chartSize)" ]
                         ]
                     ]
                 << signal "brushY"
                     [ siValue (vNum 0)
                     , siOn
-                        [ evHandler (esSelector (str "@cell:mousedown")) [ evUpdate "[y(cell), y(cell)]" ]
-                        , evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[brushY[0], clamp(y(cell), 0, chartSize)]" ]
-                        , evHandler (esSignal "delta") [ evUpdate "clampRange([anchorY[0] + delta[1], anchorY[1] + delta[1]], 0, chartSize)" ]
+                        [ evHandler [ esSelector (str "@cell:mousedown") ] [ evUpdate "[y(cell), y(cell)]" ]
+                        , evHandler [ esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove") ] [ evUpdate "[brushY[0], clamp(y(cell), 0, chartSize)]" ]
+                        , evHandler [ esSignal "delta" ] [ evUpdate "clampRange([anchorY[0] + delta[1], anchorY[1] + delta[1]], 0, chartSize)" ]
                         ]
                     ]
                 << signal "down"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "[x(cell), y(cell)]" ] ]
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "[x(cell), y(cell)]" ] ]
                     ]
                 << signal "anchorX"
                     [ siValue vNull
-                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brushX)" ] ]
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "slice(brushX)" ] ]
                     ]
                 << signal "anchorY"
                     [ siValue vNull
-                    , siOn [ evHandler (esSelector (str "@brush:mousedown")) [ evUpdate "slice(brushY)" ] ]
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "slice(brushY)" ] ]
                     ]
                 << signal "delta"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler (esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove")) [ evUpdate "[x(cell) - down[0], y(cell) - down[1]]" ] ]
+                    , siOn [ evHandler [ esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove") ] [ evUpdate "[x(cell) - down[0], y(cell) - down[1]]" ] ]
                     ]
                 << signal "rangeX"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler (esSignal "brushX") [ evUpdate "invert(cell.datum.x.data + 'X', brushX)" ] ]
+                    , siOn [ evHandler [ esSignal "brushX" ] [ evUpdate "invert(cell.datum.x.data + 'X', brushX)" ] ]
                     ]
                 << signal "rangeY"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler (esSignal "brushY") [ evUpdate "invert(cell.datum.y.data + 'Y', brushY)" ] ]
+                    , siOn [ evHandler [ esSignal "brushY" ] [ evUpdate "invert(cell.datum.y.data + 'Y', brushY)" ] ]
                     ]
                 << signal "cursor"
                     [ siValue (vStr "'default'")
                     , siOn
-                        [ evHandler (esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "'nwse-resize'" ]
-                        , evHandler (esSelector (str "@brush:mousemove, [@brush:mousedown, window:mouseup] > window:mousemove!")) [ evUpdate "'move'" ]
-                        , evHandler (esSelector (str "@brush:mouseout, window:mouseup")) [ evUpdate "'default'" ]
+                        [ evHandler [ esSelector (str "[@cell:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "'nwse-resize'" ]
+                        , evHandler [ esSelector (str "@brush:mousemove, [@brush:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "'move'" ]
+                        , evHandler [ esSelector (str "@brush:mouseout, window:mouseup") ] [ evUpdate "'default'" ]
                         ]
                     ]
 
@@ -635,83 +635,169 @@ interaction4 : Spec
 interaction4 =
     let
         cf =
-            config []
+            config
+                [ cfAxis AxAll
+                    [ axDomain false
+                    , axTickSize (num 3)
+                    , axTickColor "#888"
+                    , axLabelFont "Monaco, Courier New"
+                    ]
+                ]
 
         ds =
             dataSource
-                [ data "wheat" [ daUrl "https://vega.github.io/vega/data/wheat.json" ]
-                , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
-                , data "monarchs" [ daUrl "https://vega.github.io/vega/data/monarchs.json" ]
-                    |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" AlwaysUpdate ]
+                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                    |> transform
+                        [ trExtentAsSignal (field "u") "xExt"
+                        , trExtentAsSignal (field "v") "yExt"
+                        ]
                 ]
 
         si =
             signals
+                << signal "margin" [ siValue (vNum 20) ]
+                << signal "hover"
+                    [ siOn
+                        [ evHandler [ esSelector (str "*:mouseover") ] [ evEncode "hover" ]
+                        , evHandler [ esSelector (str "*:mouseout") ] [ evEncode "leave" ]
+                        , evHandler [ esSelector (str "*:mousedown") ] [ evEncode "select" ]
+                        , evHandler [ esSelector (str "*:mousup") ] [ evEncode "release" ]
+                        ]
+                    ]
+                << signal "xOffset" [ siUpdate "-(height + padding.bottom)" ]
+                << signal "yOffset" [ siUpdate "-(width + padding.left)" ]
+                << signal "xRange" [ siUpdate "[0, width]" ]
+                << signal "yRange" [ siUpdate "[height, 0]" ]
+                << signal "down"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler [ esSelector (str "touchend") ] [ evUpdate "null" ]
+                        , evHandler [ esSelector (str "mousedown, touchstart") ] [ evUpdate "xy()" ]
+                        ]
+                    ]
+                << signal "xCur"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler [ esSelector (str "mousedown, touchstart, touchend") ] [ evUpdate "slice(xDom)" ]
+                        ]
+                    ]
+                << signal "yCur"
+                    [ siValue vNull
+                    , siOn
+                        [ evHandler [ esSelector (str "mousedown, touchstart, touchend") ] [ evUpdate "slice(yDom)" ]
+                        ]
+                    ]
+                << signal "delta"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn
+                        [ evHandler
+                            [ esObject
+                                [ esSource ESWindow
+                                , esType MouseMove
+                                , esConsume true
+                                , esBetween [ esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                ]
+                            , esObject
+                                [ esType TouchMove
+                                , esConsume true
+                                , esFilter [ "event.touches.length === 1" ]
+                                ]
+                            ]
+                            [ evUpdate "down ? [down[0]-x(), y()-down[1]] : [0,0]" ]
+                        ]
+                    ]
+                << signal "anchor"
+                    [ siValue (vNums [ 0, 0 ])
+                    , siOn
+                        [ evHandler [ esObject [ esType Wheel ] ] [ evUpdate "[invert('xScale', x()), invert('yScale', y())]" ]
+                        , evHandler [ esObject [ esType TouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "[(xDom[0] + xDom[1]) / 2, (yDom[0] + yDom[1]) / 2]" ]
+                        ]
+                    ]
+                << signal "zoom"
+                    [ siValue (vNum 1)
+                    , siOn
+                        [ evHandler [ esObject [ esType Wheel, esConsume true ] ] [ evForce true, evUpdate "pow(1.001, event.deltaY * pow(16, event.deltaMode))" ]
+                        , evHandler [ esSignal "dist2" ] [ evForce true, evUpdate "dist1 / dist2" ]
+                        ]
+                    ]
+                << signal "dist1"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler [ esObject [ esType TouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
+                        , evHandler [ esSignal "dist2" ] [ evUpdate "dist2" ]
+                        ]
+                    ]
+                << signal "dist2"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler [ esObject [ esType TouchMove, esConsume true, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
+                        ]
+                    ]
+                << signal "xDom"
+                    [ siUpdate "slice(xExt)"
+                    , siReact false
+                    , siOn
+                        [ evHandler [ esSignal "delta" ] [ evUpdate "[xCur[0] + span(xCur) * delta[0] / width, xCur[1] + span(xCur) * delta[0] / width]" ]
+                        , evHandler [ esSignal "zoom" ] [ evUpdate "[anchor[0] + (xDom[0] - anchor[0]) * zoom, anchor[0] + (xDom[1] - anchor[0]) * zoom]" ]
+                        ]
+                    ]
+                << signal "yDom"
+                    [ siUpdate "slice(yExt)"
+                    , siReact false
+                    , siOn
+                        [ evHandler [ esSignal "delta" ] [ evUpdate "[yCur[0] + span(yCur) * delta[1] / height, yCur[1] + span(yCur) * delta[1] / height]" ]
+                        , evHandler [ esSignal "zoom" ] [ evUpdate "[anchor[1] + (yDom[0] - anchor[1]) * zoom, anchor[1] + (yDom[1] - anchor[1]) * zoom]" ]
+                        ]
+                    ]
+                << signal "size" [ siUpdate "clamp(20 / span(xDom), 1, 1000)" ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
-                    , scDomain (doNums (nums [ 1565, 1825 ]))
-                    , scZero false
+                    [ scZero false
+                    , scDomain (doSignal "xDom")
+                    , scRange (raSignal "xRange")
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scZero true
-                    , scDomain (doData [ daDataset "wheat", daField (field "wheat") ])
-                    ]
-                << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange (raStrs [ "black", "white" ])
-                    , scDomain (doData [ daDataset "monarchs", daField (field "commonwealth") ])
+                    [ scZero false
+                    , scDomain (doSignal "yDom")
+                    , scRange (raSignal "yRange")
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount (num 5), axFormat "04d" ]
-                << axis "yScale"
-                    SRight
-                    [ axGrid true
-                    , axDomain false
-                    , axZIndex (num 1)
-                    , axTickCount (num 5)
-                    , axOffset (vNum 5)
-                    , axTickSize (num 0)
-                    , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
-                        , ( ELabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
-                        ]
-                    ]
-
-        le =
-            legends
+                << axis "xScale" STop [ axOffset (vSignal "xOffset") ]
+                << axis "yScale" SRight [ axOffset (vSignal "yOffset") ]
 
         mk =
             marks
-                << mark Rect
-                    [ mFrom [ srData (str "wheat") ]
+                << mark Symbol
+                    [ mFrom [ srData (str "points") ]
+                    , mClip (clEnabled true)
                     , mEncode
                         [ enEnter
-                            [ maX [ vScale "xScale", vField (field "year") ]
-                            , maWidth [ vNum 17 ]
-                            , maY [ vScale "yScale", vField (field "wheat") ]
-                            , maY2 [ vScale "yScale", vNum 0 ]
-                            , maFill [ vStr "#aaa" ]
-                            , maStroke [ vStr "#5d5d5d" ]
-                            , maStrokeWidth [ vNum 0.25 ]
+                            [ maFillOpacity [ vNum 0.6 ]
+                            , maFill [ vStr "steelblue" ]
                             ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "v") ]
+                            , maSize [ vSignal "size" ]
+                            ]
+                        , enHover [ maFill [ vStr "firebrick" ] ]
+                        , enCustom "leave" [ maFill [ vStr "steelblue" ] ]
+                        , enCustom "select" [ maSize [ vSignal "size", vMultiply (vNum 5) ] ]
+                        , enCustom "release" [ maSize [ vSignal "size" ] ]
                         ]
                     ]
     in
     toVega
-        [ cf, padding 10, ds, si [], sc [], ax [], le [], mk [] ]
+        [ cf, width 500, height 300, paddings 40 10 10 20, autosize [ ANone ], ds, si [], sc [], ax [], mk [] ]
 
 
 sourceExample : Spec
 sourceExample =
-    interaction3
+    interaction4
 
 
 
@@ -724,8 +810,7 @@ mySpecs =
         [ ( "interaction1", interaction1 )
         , ( "interaction2", interaction2 )
         , ( "interaction3", interaction3 )
-
-        -- , ( "interaction4", interaction4 )
+        , ( "interaction4", interaction4 )
         ]
 
 
