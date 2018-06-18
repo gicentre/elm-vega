@@ -1024,9 +1024,235 @@ interaction5 =
         [ width 800, height 600, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
 
 
+interaction6 : Spec
+interaction6 =
+    let
+        ds =
+            dataSource
+                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Origin'] != null") ]
+                , data "selected"
+                    [ daOn
+                        [ trigger "clear" [ tgRemoveAll ]
+                        , trigger "!shift" [ tgRemoveAll ]
+                        , trigger "!shift && clicked" [ tgInsert "clicked" ]
+                        , trigger "shift && clicked" [ tgToggle "clicked" ]
+                        ]
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "clear"
+                    [ siValue (vBoo True)
+                    , siOn [ evHandler [ esSelector (str "mouseup[!event.item]") ] [ evUpdate "true", evForce true ] ]
+                    ]
+                << signal "shift"
+                    [ siValue (vBoo False)
+                    , siOn [ evHandler [ esSelector (str "@legendSymbol:click, @legendLabel:click") ] [ evUpdate "event.shiftKey", evForce true ] ]
+                    ]
+                << signal "clicked"
+                    [ siValue vNull
+                    , siOn [ evHandler [ esSelector (str "@legendSymbol:click, @legendLabel:click") ] [ evUpdate "{value: datum.value}", evForce true ] ]
+                    ]
+                << signal "brush"
+                    [ siValue (vNum 0)
+                    , siOn
+                        [ evHandler [ esSignal "clear" ] [ evUpdate "clear ? [0, 0] : brush" ]
+                        , evHandler [ esSelector (str "@xAxis:mousedown") ] [ evUpdate "[x(), x()]" ]
+                        , evHandler [ esSelector (str "[@xAxis:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "[brush[0], clamp(x(), 0, width)]" ]
+                        , evHandler [ esSignal "delta" ] [ evUpdate "clampRange([anchor[0] + delta, anchor[1] + delta], 0, width)" ]
+                        ]
+                    ]
+                << signal "anchor"
+                    [ siValue vNull
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "slice(brush)" ] ]
+                    ]
+                << signal "xDown"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "@brush:mousedown") ] [ evUpdate "x()" ] ]
+                    ]
+                << signal "delta"
+                    [ siValue (vNum 0)
+                    , siOn [ evHandler [ esSelector (str "[@brush:mousedown, window:mouseup] > window:mousemove!") ] [ evUpdate "x() - xDown" ] ]
+                    ]
+                << signal "domain"
+                    [ siOn
+                        [ evHandler [ esSignal "brush" ] [ evUpdate "span(brush) ? invert('xScale', brush) : null" ] ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRound true
+                    , scNice NTrue
+                    , scZero true
+                    , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
+                    , scRange (raNums [ 0, 200 ])
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRound true
+                    , scNice NTrue
+                    , scZero true
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
+                    , scRange (raNums [ 200, 0 ])
+                    ]
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scDomain (doData [ daDataset "source", daField (field "Origin") ])
+                    , scRange (raScheme (str "category10") [])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "Horsepower"), axGrid true, axDomain false, axTickCount (num 5) ]
+                << axis "yScale" SLeft [ axTitle (str "Miles per gallon"), axGrid true, axDomain false, axTitlePadding (vNum 5) ]
+
+        le =
+            legends
+                << legend
+                    [ leStroke "cScale"
+                    , leTitle (str "Origin")
+                    , leEncode
+                        [ enSymbols
+                            [ enName "legendSymbol"
+                            , enInteractive true
+                            , enUpdate
+                                [ maFill [ vStr "transparent" ]
+                                , maStrokeWidth [ vNum 2 ]
+                                , maOpacity
+                                    [ ifElse "!length(data('selected')) || indata('selected', 'value', datum.value)"
+                                        [ vNum 0.7 ]
+                                        [ vNum 0.15 ]
+                                    ]
+                                , maSize [ vNum 64 ]
+                                ]
+                            ]
+                        , enLabels
+                            [ enName "legendLabel"
+                            , enInteractive true
+                            , enUpdate
+                                [ maOpacity
+                                    [ ifElse "!length(data('selected')) || indata('selected', 'value', datum.value)"
+                                        [ vNum 1 ]
+                                        [ vNum 0.25 ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ mName "xAxis"
+                    , mInteractive true
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 0 ]
+                            , maHeight [ vNum 35 ]
+                            , maFill [ vStr "transparent" ]
+                            , maCursor [ cursorLabel CEWResize |> vStr ]
+                            ]
+                        , enUpdate
+                            [ maY [ vSignal "height" ]
+                            , maWidth [ vSignal "span(range('xScale'))" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vSignal "height" ]
+                            , maFill [ vStr "#ddd" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "brush[0]" ]
+                            , maX2 [ vSignal "brush[1]" ]
+                            , maFillOpacity [ vSignal "domain ? 0.2 : 0" ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mName "marks"
+                    , mFrom [ srData (str "source") ]
+                    , mInteractive false
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
+                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            , maStrokeWidth [ vNum 2 ]
+                            , maOpacity
+                                [ ifElse "(!domain || inrange(datum.Horsepower, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Origin))"
+                                    [ vNum 0.7 ]
+                                    [ vNum 0.15 ]
+                                ]
+                            , maStroke
+                                [ ifElse "(!domain || inrange(datum.Horsepower, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Origin))"
+                                    [ vScale "cScale", vField (field "Origin") ]
+                                    [ vStr "#ccc" ]
+                                ]
+                            , maFill [ vStr "transparent" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mName "brush"
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vSignal "height" ]
+                            , maFill [ vStr "transparent" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "brush[0]" ]
+                            , maX2 [ vSignal "brush[1]" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vSignal "height" ]
+                            , maWidth [ vNum 1 ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        , enUpdate
+                            [ maFillOpacity [ vSignal "domain ? 1 : 0" ]
+                            , maX [ vSignal "brush[0]" ]
+                            ]
+                        ]
+                    ]
+                << mark Rect
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maY [ vNum 0 ]
+                            , maHeight [ vSignal "height" ]
+                            , maWidth [ vNum 1 ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        , enUpdate
+                            [ maFillOpacity [ vSignal "domain ? 1 : 0" ]
+                            , maX [ vSignal "brush[1]" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 200, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction5
+    interaction6
 
 
 
@@ -1041,6 +1267,7 @@ mySpecs =
         , ( "interaction3", interaction3 )
         , ( "interaction4", interaction4 )
         , ( "interaction5", interaction5 )
+        , ( "interaction6", interaction6 )
         ]
 
 
