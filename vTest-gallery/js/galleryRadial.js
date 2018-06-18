@@ -11072,6 +11072,14 @@ var _gicentre$elm_vega$Vega$Custom = F2(
 var _gicentre$elm_vega$Vega$enCustom = function (name) {
 	return _gicentre$elm_vega$Vega$Custom(name);
 };
+var _gicentre$elm_vega$Vega$EnInteractive = function (a) {
+	return {ctor: 'EnInteractive', _0: a};
+};
+var _gicentre$elm_vega$Vega$enInteractive = _gicentre$elm_vega$Vega$EnInteractive;
+var _gicentre$elm_vega$Vega$EnName = function (a) {
+	return {ctor: 'EnName', _0: a};
+};
+var _gicentre$elm_vega$Vega$enName = _gicentre$elm_vega$Vega$EnName;
 var _gicentre$elm_vega$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
@@ -15359,6 +15367,18 @@ var _gicentre$elm_vega$Vega$encodingProperty = function (ep) {
 				_0: 'hover',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$markProperty, _p137._0))
+			};
+		case 'EnName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(_p137._0)
+			};
+		case 'EnInteractive':
+			return {
+				ctor: '_Tuple2',
+				_0: 'interactive',
+				_1: _gicentre$elm_vega$Vega$booSpec(_p137._0)
 			};
 		default:
 			return {

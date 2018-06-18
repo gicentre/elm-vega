@@ -11072,6 +11072,14 @@ var _user$project$Vega$Custom = F2(
 var _user$project$Vega$enCustom = function (name) {
 	return _user$project$Vega$Custom(name);
 };
+var _user$project$Vega$EnInteractive = function (a) {
+	return {ctor: 'EnInteractive', _0: a};
+};
+var _user$project$Vega$enInteractive = _user$project$Vega$EnInteractive;
+var _user$project$Vega$EnName = function (a) {
+	return {ctor: 'EnName', _0: a};
+};
+var _user$project$Vega$enName = _user$project$Vega$EnName;
 var _user$project$Vega$Hover = function (a) {
 	return {ctor: 'Hover', _0: a};
 };
@@ -15359,6 +15367,18 @@ var _user$project$Vega$encodingProperty = function (ep) {
 				_0: 'hover',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _user$project$Vega$markProperty, _p137._0))
+			};
+		case 'EnName':
+			return {
+				ctor: '_Tuple2',
+				_0: 'name',
+				_1: _elm_lang$core$Json_Encode$string(_p137._0)
+			};
+		case 'EnInteractive':
+			return {
+				ctor: '_Tuple2',
+				_0: 'interactive',
+				_1: _user$project$Vega$booSpec(_p137._0)
 			};
 		default:
 			return {
