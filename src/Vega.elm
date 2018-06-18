@@ -2,7 +2,7 @@ module Vega
     exposing
         ( AggregateProperty
         , Anchor(End, Middle, Start)
-        , AutosizeProperty(AContent, AFit, ANone, APad, APadding, AResize)
+        , AutosizeProperty(AContent, AFit, AFitX, AFitY, ANone, APad, APadding, AResize)
         , AxisElement(EAxis, EDomain, EGrid, ELabels, ETicks, ETitle)
         , AxisProperty
         , AxisType(AxAll, AxBand, AxBottom, AxLeft, AxRight, AxTop, AxX, AxY)
@@ -3336,6 +3336,8 @@ of padding, whether it should fill the parent container etc. For more details se
 type AutosizeProperty
     = AContent
     | AFit
+    | AFitX
+    | AFitY
     | ANone
     | APad
     | APadding
@@ -10937,6 +10939,12 @@ autosizeProperty asCfg =
 
         AFit ->
             ( "type", JE.string "fit" )
+
+        AFitX ->
+            ( "type", JE.string "fit-x" )
+
+        AFitY ->
+            ( "type", JE.string "fit-y" )
 
         ANone ->
             ( "type", JE.string "none" )

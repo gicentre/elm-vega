@@ -10749,6 +10749,18 @@ var _gicentre$elm_vega$Vega$autosizeProperty = function (asCfg) {
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string('fit')
 			};
+		case 'AFitX':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('fit-x')
+			};
+		case 'AFitY':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('fit-y')
+			};
 		case 'ANone':
 			return {
 				ctor: '_Tuple2',
@@ -19019,6 +19031,8 @@ var _gicentre$elm_vega$Vega$AResize = {ctor: 'AResize'};
 var _gicentre$elm_vega$Vega$APadding = {ctor: 'APadding'};
 var _gicentre$elm_vega$Vega$APad = {ctor: 'APad'};
 var _gicentre$elm_vega$Vega$ANone = {ctor: 'ANone'};
+var _gicentre$elm_vega$Vega$AFitY = {ctor: 'AFitY'};
+var _gicentre$elm_vega$Vega$AFitX = {ctor: 'AFitX'};
 var _gicentre$elm_vega$Vega$AFit = {ctor: 'AFit'};
 var _gicentre$elm_vega$Vega$AContent = {ctor: 'AContent'};
 var _gicentre$elm_vega$Vega$EDomain = {ctor: 'EDomain'};

@@ -6608,6 +6608,18 @@ var _user$project$Vega$autosizeProperty = function (asCfg) {
 				_0: 'type',
 				_1: _elm_lang$core$Json_Encode$string('fit')
 			};
+		case 'AFitX':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('fit-x')
+			};
+		case 'AFitY':
+			return {
+				ctor: '_Tuple2',
+				_0: 'type',
+				_1: _elm_lang$core$Json_Encode$string('fit-y')
+			};
 		case 'ANone':
 			return {
 				ctor: '_Tuple2',
@@ -14878,6 +14890,8 @@ var _user$project$Vega$AResize = {ctor: 'AResize'};
 var _user$project$Vega$APadding = {ctor: 'APadding'};
 var _user$project$Vega$APad = {ctor: 'APad'};
 var _user$project$Vega$ANone = {ctor: 'ANone'};
+var _user$project$Vega$AFitY = {ctor: 'AFitY'};
+var _user$project$Vega$AFitX = {ctor: 'AFitX'};
 var _user$project$Vega$AFit = {ctor: 'AFit'};
 var _user$project$Vega$AContent = {ctor: 'AContent'};
 var _user$project$Vega$EDomain = {ctor: 'EDomain'};
