@@ -439,8 +439,8 @@ interaction3 =
                 , data "cross" [ daSource "fields" ]
                     |> transform
                         [ trCross [ crAs "x" "y" ]
-                        , trFormula "datum.x.data + 'X'" "xScale" AlwaysUpdate
-                        , trFormula "datum.y.data + 'Y'" "yScale" AlwaysUpdate
+                        , trFormula "datum.x.data + 'X'" "xScale"
+                        , trFormula "datum.y.data + 'Y'" "yScale"
                         ]
                 ]
 
@@ -825,10 +825,10 @@ interaction5 =
                         [ trLookup "thisYear" (field "country") [ field "country" ] [ luAs [ "this" ], luDefault (vObject []) ]
                         , trLookup "prevYear" (field "country") [ field "country" ] [ luAs [ "prev" ], luDefault (vObject []) ]
                         , trLookup "nextYear" (field "country") [ field "country" ] [ luAs [ "next" ], luDefault (vObject []) ]
-                        , trFormula "interYear > currentYear ? datum.next.fertility : (datum.prev.fertility||datum.this.fertility)" "target_fertility" AlwaysUpdate
-                        , trFormula "interYear > currentYear ? datum.next.life_expect : (datum.prev.life_expect||datum.this.life_expect)" "target_life_expect" AlwaysUpdate
-                        , trFormula "interYear==2000 ? datum.this.fertility : datum.this.fertility + (datum.target_fertility-datum.this.fertility) * abs(interYear-datum.this.year)/5" "inter_fertility" AlwaysUpdate
-                        , trFormula "interYear==2000 ? datum.this.life_expect : datum.this.life_expect + (datum.target_life_expect-datum.this.life_expect) * abs(interYear-datum.this.year)/5" "inter_life_expect" AlwaysUpdate
+                        , trFormula "interYear > currentYear ? datum.next.fertility : (datum.prev.fertility||datum.this.fertility)" "target_fertility"
+                        , trFormula "interYear > currentYear ? datum.next.life_expect : (datum.prev.life_expect||datum.this.life_expect)" "target_life_expect"
+                        , trFormula "interYear==2000 ? datum.this.fertility : datum.this.fertility + (datum.target_fertility-datum.this.fertility) * abs(interYear-datum.this.year)/5" "inter_fertility"
+                        , trFormula "interYear==2000 ? datum.this.life_expect : datum.this.life_expect + (datum.target_life_expect-datum.this.life_expect) * abs(interYear-datum.this.year)/5" "inter_life_expect"
                         ]
                 , data "trackCountries" [ daOn [ trigger "active" [ tgToggle "{country: active.country}" ] ] ]
                 ]
@@ -1274,7 +1274,6 @@ interaction7 =
                         , trFormula
                             "datum.index.price > 0 ? (datum.price - datum.index.price)/datum.index.price : 0"
                             "indexed_price"
-                            AlwaysUpdate
                         ]
                 ]
 
@@ -1384,9 +1383,200 @@ interaction7 =
         [ width 650, height 300, padding 5, autosize [ AFit, APadding ], ds, si [], sc [], ax [], mk [] ]
 
 
+interaction8 : Spec
+interaction8 =
+    let
+        cf =
+            config [ cfAxis AxY [ axMinExtent (vNum 30) ] ]
+
+        ds =
+            dataSource
+                [ data "random_data" []
+                    |> transform
+                        [ trSequence (num 1) (num 50001) (num 1)
+                        , trFormula "random()" "x"
+                        , trFormula "random()" "y"
+                        , trFilter (expr "datum.data <= num_points")
+                        ]
+                , data "pi_estimates" [ daSource "random_data" ]
+                    |> transform
+                        [ trFormula "(datum.x * datum.x + datum.y * datum.y) < 1" "is_inside"
+                        , trWindow [ wnAggOperation Sum (Just (field "is_inside")) "num_inside" ] []
+                        , trFormula "4 * datum.num_inside / datum.data" "estimate"
+                        ]
+                , data "pi_estimate" [ daSource "pi_estimates" ]
+                    |> transform
+                        [ trFilter (expr "datum.data == num_points")
+                        , trFormula "datum.estimate" "value"
+                        ]
+                , dataFromRows "pi" [] (dataRow [ ( "value", vNum 3.141592653589793 ) ] [])
+                ]
+
+        si =
+            signals
+                << signal "num_points"
+                    [ siValue (vNum 1000)
+                    , siBind (iRange [ inMin 10, inMax 5000, inStep 1, inDebounce 10 ])
+                    ]
+
+        lo =
+            layout [ loPadding (num 10), loOffset (num 20), loBounds Full, loAlign AlignAll ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scDomain (doNums (nums [ 0, 1 ]))
+                    , scRange RaHeight
+                    , scReverse true
+                    , scNice NTrue
+                    , scZero true
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scDomain (doNums (nums [ 0, 1 ]))
+                    , scRange RaHeight
+                    , scNice NTrue
+                    , scZero true
+                    ]
+                << scale "data_point_scale"
+                    [ scType ScLinear
+                    , scDomain (doData [ daDataset "pi_estimates", daField (field "data") ])
+                    , scRange RaHeight
+                    , scReverse true
+                    , scNice NTrue
+                    , scZero true
+                    ]
+                << scale "pi_scale"
+                    [ scType ScLinear
+                    , scDomain
+                        (doData
+                            [ daReferences
+                                [ [ daValues (vNums [ 2, 4 ]) ]
+                                , [ daDataset "pi", daField (field "value") ]
+                                , [ daDataset "pi_estimates", daField (field "estimate") ]
+                                ]
+                            ]
+                        )
+                    , scRange RaHeight
+                    , scNice NTrue
+                    , scZero false
+                    ]
+
+        ax1 =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "x"), axLabelFlush (Just 1), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "xScale" SBottom [ axGrid true, axGridScale "yScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "yScale" SLeft [ axTitle (str "y"), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "yScale" SLeft [ axGrid true, axGridScale "xScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+
+        ax2 =
+            axes
+                << axis "data_point_scale" SBottom [ axTitle (str "Number of points"), axLabelFlush (Just 1), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "data_point_scale" SBottom [ axGrid true, axGridScale "pi_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "pi_scale" SLeft [ axTitle (str "Estimated pi value"), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "pi_scale" SLeft [ axGrid true, axGridScale "data_point_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+
+        mk =
+            marks
+                << mark Group
+                    [ mStyle [ "cell" ]
+                    , mEncode [ enUpdate [ maWidth [ vSignal "height" ], maHeight [ vSignal "height" ] ] ]
+                    , mGroup [ ti1, mk1 [], ax1 [] ]
+                    ]
+                << mark Group
+                    [ mStyle [ "cell" ]
+                    , mName "concat_1_group"
+                    , mEncode [ enUpdate [ maWidth [ vSignal "height" ], maHeight [ vSignal "height" ] ] ]
+                    , mGroup [ ti2, ax2 [], mk2 [] ]
+                    ]
+
+        ti1 =
+            title (str "In Points and Out Points") [ tiFrame FrGroup ]
+
+        ti2 =
+            title (str "Pi Estimate") [ tiFrame FrGroup ]
+
+        mk1 =
+            marks
+                << mark Symbol
+                    [ mStyle [ "circle" ]
+                    , mFrom [ srData (str "random_data") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maOpacity [ vNum 0.6 ]
+                            , maFill
+                                [ ifElse "sqrt(datum.x * datum.x + datum.y * datum.y) <= 1"
+                                    [ vStr "#003f5c" ]
+                                    [ vStr "#ffa600" ]
+                                ]
+                            , maX [ vScale "xScale", vField (field "x") ]
+                            , maY [ vScale "yScale", vField (field "y") ]
+                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            ]
+                        ]
+                    ]
+
+        mk2 =
+            marks
+                << mark Symbol
+                    [ mStyle [ "circle" ]
+                    , mFrom [ srData (str "pi_estimates") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maOpacity [ vNum 0.7 ]
+                            , maFill [ vStr "#4c78a8" ]
+                            , maX [ vScale "data_point_scale", vField (field "data") ]
+                            , maY [ vScale "pi_scale", vField (field "estimate") ]
+                            , maSize [ vNum 8 ]
+                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            ]
+                        ]
+                    ]
+                << mark Rule
+                    [ mFrom [ srData (str "pi") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "darkgrey" ]
+                            , maX [ vNum 0 ]
+                            , maY [ vScale "pi_scale", vField (field "value") ]
+                            , maX2 [ vField (fGroup (field "width")) ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "pi") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maAlign [ hLeft ]
+                            , maX [ vNum 10 ]
+                            , maFill [ vStr "black" ]
+                            , maY [ vScale "pi_scale", vField (field "value"), vOffset (vNum -5) ]
+                            , maText [ vStr "Real Pi: 3.1415..." ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "pi_estimate") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maAlign [ hRight ]
+                            , maX [ vSignal "height", vOffset (vNum -5) ]
+                            , maDy [ vNum -5 ]
+                            , maFill [ vStr "black" ]
+                            , maY [ vScale "pi_scale", vField (field "value") ]
+                            , maText [ vSignal "'Estimate: ' + format(datum.estimate, ',.3f')" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, height 380, padding 5, autosize [ APad ], ds, si [], sc [], lo, mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    interaction7
+    interaction8
 
 
 
@@ -1403,6 +1593,7 @@ mySpecs =
         , ( "interaction5", interaction5 )
         , ( "interaction6", interaction6 )
         , ( "interaction7", interaction7 )
+        , ( "interaction8", interaction8 )
         ]
 
 
