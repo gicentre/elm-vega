@@ -110,7 +110,7 @@ geo2 =
                     |> transform
                         [ trLookup "states" (field "id") [ field "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
-                        , trFormula "geoCentroid('myProjection', datum.geo)" "myCentroid" AlwaysUpdate
+                        , trFormula "geoCentroid('myProjection', datum.geo)" "myCentroid"
                         ]
                 ]
 
@@ -616,9 +616,9 @@ geo7 =
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                     |> transform
-                        [ trFormula "geoCentroid('projection1', datum)" "myCentroid" AlwaysUpdate
-                        , trFormula "geoArea('projection1', datum)" "area1" AlwaysUpdate
-                        , trFormula "geoArea('projection2', datum)" "area2" AlwaysUpdate
+                        [ trFormula "geoCentroid('projection1', datum)" "myCentroid"
+                        , trFormula "geoArea('projection1', datum)" "area1"
+                        , trFormula "geoArea('projection2', datum)" "area2"
                         ]
                 , data "graticule" [] |> transform [ trGraticule [] ]
                 ]

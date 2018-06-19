@@ -271,7 +271,7 @@ barChart4 =
             data "trellis" [ daSource "tuples" ]
                 |> transform
                     [ trAggregate [ agGroupBy [ field "a" ] ]
-                    , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span" AlwaysUpdate
+                    , trFormula "rangeStep * bandspace(datum.count, innerPadding, outerPadding)" "span"
                     , trStack [ stField (field "span") ]
                     , trExtentAsSignal (field "y1") "trellisExtent"
                     ]

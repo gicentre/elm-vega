@@ -671,7 +671,7 @@ window2 =
                 , data "directors" [ daSource "source" ]
                     |> transform
                         [ trLookup "ranks" (field "Director") [ field "Director" ] [ luValues [ field "rank" ] ]
-                        , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category" AlwaysUpdate
+                        , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category"
                         , trAggregate
                             [ agGroupBy [ field "Category" ]
                             , agOps [ opSignal "op" ]

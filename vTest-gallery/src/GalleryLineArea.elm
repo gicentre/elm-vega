@@ -228,7 +228,7 @@ areaChart3 =
             data "layer_indices" [ daValue (vNums [ 0, 1, 2, 3 ]) ]
                 |> transform
                     [ trFilter (expr "datum.data < layers")
-                    , trFormula "datum.data * -height" "offset" AlwaysUpdate
+                    , trFormula "datum.data * -height" "offset"
                     ]
 
         ds =

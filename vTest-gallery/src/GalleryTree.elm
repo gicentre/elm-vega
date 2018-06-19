@@ -110,11 +110,11 @@ tree2 =
                             , teSize (numList [ num 1, numSignal "radius" ])
                             , teAs "alpha" "radius" "depth" "children"
                             ]
-                        , trFormula "(rotate + extent * datum.alpha + 270) % 360" "angle" AlwaysUpdate
-                        , trFormula "PI * datum.angle / 180" "radians" AlwaysUpdate
-                        , trFormula "inrange(datum.angle, [90, 270])" "leftside" AlwaysUpdate
-                        , trFormula "originX + datum.radius * cos(datum.radians)" "x" AlwaysUpdate
-                        , trFormula "originY + datum.radius * sin(datum.radians)" "y" AlwaysUpdate
+                        , trFormula "(rotate + extent * datum.alpha + 270) % 360" "angle"
+                        , trFormula "PI * datum.angle / 180" "radians"
+                        , trFormula "inrange(datum.angle, [90, 270])" "leftside"
+                        , trFormula "originX + datum.radius * cos(datum.radians)" "x"
+                        , trFormula "originY + datum.radius * sin(datum.radians)" "y"
                         ]
                 , data "links" [ daSource "tree" ]
                     |> transform

@@ -22,8 +22,8 @@ custom1 =
             dataSource
                 [ data "budgets" [ daUrl "https://vega.github.io/vega/data/budgets.json" ]
                     |> transform
-                        [ trFormula "abs(datum.value)" "abs" AlwaysUpdate
-                        , trFormula "datum.value < 0 ? 'deficit' : 'surplus'" "type" AlwaysUpdate
+                        [ trFormula "abs(datum.value)" "abs"
+                        , trFormula "datum.value < 0 ? 'deficit' : 'surplus'" "type"
                         ]
                 , data "budgets-current" [ daSource "budgets" ]
                     |> transform [ trFilter (expr "datum.budgetYear <= currentYear") ]
@@ -33,7 +33,7 @@ custom1 =
                     |> transform
                         [ trFilter (expr "datum.budgetYear <= currentYear && datum.forecastYear == tipYear && abs(datum.value - tipValue) <= 0.1")
                         , trAggregate [ agFields [ field "value", field "value" ], agOps [ Min, ArgMin ], agAs [ "min", "argmin" ] ]
-                        , trFormula "datum.argmin.budgetYear" "tooltipYear" AlwaysUpdate
+                        , trFormula "datum.argmin.budgetYear" "tooltipYear"
                         ]
                 , data "tooltip-forecast" [ daSource "budgets" ]
                     |> transform
@@ -275,7 +275,7 @@ custom2 =
                 [ data "wheat" [ daUrl "https://vega.github.io/vega/data/wheat.json" ]
                 , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
                 , data "monarchs" [ daUrl "https://vega.github.io/vega/data/monarchs.json" ]
-                    |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" AlwaysUpdate ]
+                    |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" ]
                 ]
 
         sc =
@@ -538,8 +538,8 @@ custom4 =
                     , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
-                        [ trFormula "hours(datum.date)" "hour" InitOnly
-                        , trFormula "datetime(year(datum.date), month(datum.date), date(datum.date))" "date" InitOnly
+                        [ trFormulaInitOnly "hours(datum.date)" "hour"
+                        , trFormulaInitOnly "datetime(year(datum.date), month(datum.date), date(datum.date))" "date"
                         ]
                 ]
 

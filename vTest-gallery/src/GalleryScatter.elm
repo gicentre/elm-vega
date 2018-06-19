@@ -93,7 +93,7 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" AlwaysUpdate ]
+                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" ]
                 , data "valid" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] != null") ]
                 , data "nullXY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] == null"), trAggregate [] ]
                 , data "nullY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] == null") ]
@@ -374,10 +374,10 @@ scatterplot4 =
                             , agOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
-                        , trFormula "datum.mean - datum.stdev" "stdev0" AlwaysUpdate
-                        , trFormula "datum.mean + datum.stdev" "stdev1" AlwaysUpdate
-                        , trFormula "datum.mean - datum.stderr" "stderr0" AlwaysUpdate
-                        , trFormula "datum.mean + datum.stderr" "stderr1" AlwaysUpdate
+                        , trFormula "datum.mean - datum.stdev" "stdev0"
+                        , trFormula "datum.mean + datum.stdev" "stdev1"
+                        , trFormula "datum.mean - datum.stderr" "stderr0"
+                        , trFormula "datum.mean + datum.stderr" "stderr1"
                         ]
                 ]
 

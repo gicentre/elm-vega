@@ -45,7 +45,6 @@ module Vega
         , ForceProperty
         , ForceSimulationProperty
         , FormatProperty(CSV, JSON, ParseAuto, TSV)
-        , FormulaUpdate(AlwaysUpdate, InitOnly)
         , GeoPathProperty
         , GraticuleProperty
         , GridAlign(AlignAll, AlignEach, AlignNone)
@@ -713,6 +712,7 @@ module Vega
         , trFoldAs
         , trForce
         , trFormula
+        , trFormulaInitOnly
         , trGeoPath
         , trGeoPoint
         , trGeoPointAs
@@ -725,6 +725,7 @@ module Vega
         , trPartition
         , trPie
         , trResolveFilter
+        , trSequence
         , trStack
         , trStratify
         , trTree
@@ -1073,7 +1074,7 @@ TODO: add functions (flatten)
 ### Deriving New Fields
 
 @docs trFormula
-@docs FormulaUpdate
+@docs trFormulaInitOnly
 
 @docs trLookup
 @docs luAs
@@ -1108,7 +1109,7 @@ TODO: add functions (sample)
 
 ### Data Generation
 
-TODO: add function (sequence)
+@docs trSequence
 
 
 ## Geographic Transforms
@@ -3009,10 +3010,10 @@ by [trAggregate](#trAggregate), [trBin](#trBin), [trCollect](#trCollect),
 [trCountPattern](#trCountPattern), [trCross](#trCross), [trCrossFilter](#trCrossFilter),
 [trCrossFilterAsSignal](#trCrossFilterAsSignal), [trDensity](#trDensity),
 [trExtent](#trExtent), [trExtentAsSignal](#trExtentAsSignal), [trFilter](#trFilter),
-[trFold](#trFold), [trFoldAs](#trFoldAs), [trFormula](#trFormula), [trIdentifier](#trIdentifier),
-[trImpute](#trImpute), [trJoinAggregate](#trJoinAggregate), [trLookup](#trLookup),
-[trProject](#trProject), [trSample](#trSample), [trSequence](#trSequence), [trWindow](#trWindow),
-[trContour](#trContour), [trGeoJson](#trGeoJson), [trGeoPath](#trGeoPath),
+[trFold](#trFold), [trFoldAs](#trFoldAs), [trFormula](#trFormula), [trFormulaInitOnly](#trFormulaInitOnly),
+[trIdentifier](#trIdentifier), [trImpute](#trImpute), [trJoinAggregate](#trJoinAggregate),
+[trLookup](#trLookup), [trProject](#trProject), [trSample](#trSample), [trSequence](#trSequence),
+[trWindow](#trWindow), [trContour](#trContour), [trGeoJson](#trGeoJson), [trGeoPath](#trGeoPath),
 [trGeoPoint](#trGeoPoint), [trGeoPointAs](#trGeoPointAs), [trGeoShape](#trGeoShape),
 [trGraticule](#trGraticule), [trLinkPath](#trLinkPath), [trPie](#trPie), [trStack](#trStack),
 [trForce](#trForce), [trVoronoi](#trVoronoi), [trWordCloud](#trWordCloud), [trNest](#trNest),
@@ -3058,7 +3059,7 @@ type Transform
     | TTreemap (List TreemapProperty)
     | TResolveFilter String Num
     | TSample -- TODO Add transform functions
-    | TSequence -- TODO Add transform functions
+    | TSequence Num Num Num
     | TStack (List StackProperty)
     | TStratify Field Field
     | TTreeLinks -- (no parameters required)
@@ -5571,15 +5572,6 @@ type FormatProperty
     | TopojsonMesh String
     | Parse (List ( String, DataType ))
     | ParseAuto
-
-
-{-| Defines whether a formula transformation is a one-off operation (`InitOnly`)
-or is applied whenever an upstream dependency changes. For details see the
-[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula/).
--}
-type FormulaUpdate
-    = InitOnly
-    | AlwaysUpdate
 
 
 {-| Indicate a utc date format for parsing data. For details of how to specify a date, see
@@ -9985,7 +9977,8 @@ trForce =
 {-| Extend a data object with new values according to the given
 [Vega expression](https://vega.github.io/vega/docs/expressions/). The second
 parameter is a new field name to give the result of the evaluated expression.
-The third determines whether or not the formula is reapplied if the data changes.
+This version will reapply the formula if the data changes. To perform a one-off
+forumula calculation use [trFormulaInitOnly](#trFormulaInitOnly).
 
     dataSource
         [ data "world"
@@ -9993,16 +9986,30 @@ The third determines whether or not the formula is reapplied if the data changes
             , daFormat (topojsonFeature "countries")
             ]
             |> transform
-                [ trFormula "geoCentroid('myProj', datum)" "myCentroid" AlwaysUpdate ]
+                [ trFormula "geoCentroid('myProj', datum)" "myCentroid" ]
         ]
 
 For details see the
 [Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).
 
 -}
-trFormula : Expression -> String -> FormulaUpdate -> Transform
-trFormula =
-    TFormula
+trFormula : Expression -> String -> Transform
+trFormula exp fName =
+    TFormula exp fName AlwaysUpdate
+
+
+{-| Extend a data object with new values according to the given
+[Vega expression](https://vega.github.io/vega/docs/expressions/). The second
+parameter is a new field name to give the result of the evaluated expression.
+This version will apply the formula only once even if the data changes.
+
+For details see the
+[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).
+
+-}
+trFormulaInitOnly : Expression -> String -> Transform
+trFormulaInitOnly exp fName =
+    TFormula exp fName InitOnly
 
 
 {-| Perform a geopath transform that maps GeoJSON features to SVG path strings
@@ -10229,6 +10236,32 @@ one resolvefilter transform per chart. For details see the
 trResolveFilter : String -> Num -> Transform
 trResolveFilter =
     TResolveFilter
+
+
+{-| Generate a data stream of numbers between a start (first parameter) and end
+(second parameter) inclusive in increments specified by the third parameter. If
+the end value is less than the start value, the third parameter should be negative.
+
+This can be used to feed other transforms to generate data, for example to create
+random (x,y) coordinates:
+
+    ds =
+        dataSource
+            [ data "randomData" []
+                |> transform
+                    [ trSequence (num 1) (num 1000) (num 1)
+                    , trFormula "random()" "x"
+                    , trFormula "random()" "y"
+                    ]
+            ]
+
+For details see the
+[Vega sequence transform documentation](https://vega.github.io/vega/docs/transforms/sequence/).
+
+-}
+trSequence : Num -> Num -> Num -> Transform
+trSequence =
+    TSequence
 
 
 {-| Perform a stack transform that computes a layout by stacking groups of values.
@@ -12058,6 +12091,11 @@ forceSpec f =
             JE.object (( "force", JE.string "y" ) :: ( "y", fieldSpec field ) :: List.map forceProperty fps)
 
 
+type FormulaUpdate
+    = InitOnly
+    | AlwaysUpdate
+
+
 formulaUpdateSpec : FormulaUpdate -> Spec
 formulaUpdateSpec update =
     case update of
@@ -13809,8 +13847,32 @@ transformSpec trans =
         TSample ->
             JE.object [ ( "type", JE.string "sample" ) ]
 
-        TSequence ->
-            JE.object [ ( "type", JE.string "sequence" ) ]
+        TSequence start stop step ->
+            let
+                stepProp =
+                    case step of
+                        NumNull ->
+                            []
+
+                        Num 0 ->
+                            []
+
+                        Nums [] ->
+                            []
+
+                        NumList [] ->
+                            []
+
+                        _ ->
+                            [ ( "step", numSpec step ) ]
+            in
+            JE.object
+                ([ ( "type", JE.string "sequence" )
+                 , ( "start", numSpec start )
+                 , ( "stop", numSpec stop )
+                 ]
+                    ++ stepProp
+                )
 
         TWindow wos wps ->
             JE.object

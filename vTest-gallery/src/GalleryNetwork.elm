@@ -25,16 +25,16 @@ bundle1 =
                             , teSize (nums [ 1, 1 ])
                             , teAs "alpha" "beta" "depth" "children"
                             ]
-                        , trFormula "(rotate + extent * datum.alpha + 270) % 360" "angle" AlwaysUpdate
-                        , trFormula "inrange(datum.angle, [90, 270])" "leftside" AlwaysUpdate
-                        , trFormula "originX + radius * datum.beta * cos(PI * datum.angle / 180)" "x" AlwaysUpdate
-                        , trFormula "originY + radius * datum.beta * sin(PI * datum.angle / 180)" "y" AlwaysUpdate
+                        , trFormula "(rotate + extent * datum.alpha + 270) % 360" "angle"
+                        , trFormula "inrange(datum.angle, [90, 270])" "leftside"
+                        , trFormula "originX + radius * datum.beta * cos(PI * datum.angle / 180)" "x"
+                        , trFormula "originY + radius * datum.beta * sin(PI * datum.angle / 180)" "y"
                         ]
                 , data "leaves" [ daSource "tree" ]
                     |> transform [ trFilter (expr "!datum.children") ]
                 , data "dependencies" [ daUrl "https://vega.github.io/vega/data/flare-dependencies.json" ]
                     |> transform
-                        [ trFormula "treePath('tree', datum.source, datum.target)" "treepath" InitOnly ]
+                        [ trFormulaInitOnly "treePath('tree', datum.source, datum.target)" "treepath" ]
                 , data "selected" [ daSource "dependencies" ]
                     |> transform [ trFilter (expr "datum.source === active || datum.target === active") ]
                 ]
@@ -282,8 +282,8 @@ matrix1 =
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                     |> transform
-                        [ trFormula "datum.group" "order" AlwaysUpdate
-                        , trFormula "dest >= 0 && datum === src ? dest : datum.order" "score" AlwaysUpdate
+                        [ trFormula "datum.group" "order"
+                        , trFormula "dest >= 0 && datum === src ? dest : datum.order" "score"
                         , trWindow [ wnOperation RowNumber "order" ] [ wnSort [ ( field "score", Ascend ) ] ]
                         ]
                 , data "edges"
@@ -292,7 +292,7 @@ matrix1 =
                     ]
                     |> transform
                         [ trLookup "nodes" (field "index") [ field "source", field "target" ] [ luAs [ "sourceNode", "targetNode" ] ]
-                        , trFormula "datum.sourceNode.group === datum.targetNode.group ? datum.sourceNode.group : count" "group" AlwaysUpdate
+                        , trFormula "datum.sourceNode.group === datum.targetNode.group ? datum.sourceNode.group : count" "group"
                         ]
                 , data "cross" [ daSource "nodes" ] |> transform [ trCross [] ]
                 ]
@@ -451,7 +451,7 @@ arc1 =
                             (field "target")
                             [ field "index" ]
                             [ luAs [ "targetDegree" ], luDefault (vObject [ keyValue "count" (vNum 0) ]) ]
-                        , trFormula "datum.sourceDegree.count + datum.targetDegree.count" "degree" AlwaysUpdate
+                        , trFormula "datum.sourceDegree.count + datum.targetDegree.count" "degree"
                         ]
                 ]
 

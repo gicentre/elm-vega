@@ -64,9 +64,9 @@ heatmap1 =
                     , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
-                        [ trFormula "hours(datum.date)" "hour" InitOnly
-                        , trFormula "datetime(year(datum.date), month(datum.date), date(datum.date))" "day" InitOnly
-                        , trFormula "(datum.temp - 32) / 1.8" "celsius" InitOnly
+                        [ trFormulaInitOnly "hours(datum.date)" "hour"
+                        , trFormulaInitOnly "datetime(year(datum.date), month(datum.date), date(datum.date))" "day"
+                        , trFormulaInitOnly "(datum.temp - 32) / 1.8" "celsius"
                         ]
                 ]
 
@@ -166,7 +166,7 @@ parallel1 =
                     ]
                     |> transform
                         [ trFilter (expr "datum.Horsepower && datum.Miles_per_Gallon")
-                        , trFormula "isNumber(datum.year) ? datum.year : year(datum.Year)" "Year" InitOnly
+                        , trFormulaInitOnly "isNumber(datum.year) ? datum.year : year(datum.Year)" "Year"
                         ]
                 , data "fields" [ daValue (vStrs [ "Cylinders", "Displacement", "Weight_in_lbs", "Horsepower", "Acceleration", "Miles_per_Gallon", "Year" ]) ]
                 ]
@@ -254,8 +254,8 @@ wordcloud1 =
                 [ data "table" [ daValue (vStrs inText) ]
                     |> transform
                         [ trCountPattern (field "data") [ cpCase Uppercase, cpPattern (str "[\\w']{3,}"), cpStopwords (str stopwords) ]
-                        , trFormula "[-45, 0, 45][~~(random() * 3)]" "angle" InitOnly
-                        , trFormula "if(datum.text=='VEGA', 600, 300)" "weight" InitOnly
+                        , trFormulaInitOnly "[-45, 0, 45][~~(random() * 3)]" "angle"
+                        , trFormulaInitOnly "if(datum.text=='VEGA', 600, 300)" "weight"
                         ]
                 ]
 
