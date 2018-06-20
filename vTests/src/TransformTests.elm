@@ -306,9 +306,85 @@ forceTest1 =
         [ width 400, height 275, autosize [ ANone ], ds, si [], sc [], mk [] ]
 
 
+nestTest1 : Spec
+nestTest1 =
+    let
+        table =
+            dataFromColumns "tree" []
+                << dataColumn "id" (daStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "job" (daStrs [ "Doctor", "Doctor", "Lawyer", "Lawyer", "Doctor", "Doctor", "Lawyer", "Lawyer" ])
+                << dataColumn "region" (daStrs [ "East", "East", "East", "East", "West", "West", "West", "West" ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ trNest [ field "job", field "region" ] (booSignal "generate")
+                        , trTree [ teMethod Tidy, teSize (numSignals [ "width", "height" ]) ]
+                        ]
+                , data "links" [ daSource "tree" ]
+                    |> transform [ trTreeLinks, trLinkPath [] ]
+                ]
+
+        si =
+            signals << signal "generate" [ siValue (vBoo True), siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "cScale"
+                    [ scType ScOrdinal
+                    , scRange (raScheme (str "category20") [])
+                    ]
+
+        mk =
+            marks
+                << mark Path
+                    [ mFrom [ srData (str "links") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "#ccc" ]
+                            , maPath [ vField (field "path") ]
+                            ]
+                        ]
+                    ]
+                << mark Symbol
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vScale "cScale", vField (field "id") ]
+                            , maStroke [ vStr "white" ]
+                            , maSize [ vNum 600 ]
+                            , maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            ]
+                        ]
+                    ]
+                << mark Text
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maText [ vField (field "id") ]
+                            , maStroke [ vStr "white" ]
+                            , maFill [ vStr "white" ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
+                            , maFontWeight [ vStr "normal" ]
+                            , maFontSize [ vNum 16 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 300, height 100, padding 5, ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    forceTest1
+    nestTest1
 
 
 
@@ -321,6 +397,7 @@ mySpecs =
         [ ( "packTest1", packTest1 )
         , ( "stackTest1", stackTest1 )
         , ( "forceTest1", forceTest1 )
+        , ( "nestTest1", nestTest1 )
         ]
 
 

@@ -8,7 +8,9 @@
   <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: middle; line-height: 1.6; margin-left: 1em;}</style>
 
   <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <!-- TODO: When Vega 4 fully released, link to npm package <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  -->
+  <script src="https://vega.github.io/vega/vega.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -29,19 +31,25 @@
   <h2>Force-Directed Layout Tests</h2>
   <div id="forceTest1" class="view"></div>
 
+  <h2>Nest Tests</h2>
+  <div id="nestTest1" class="view"></div>
+
+
   <h2>Source</h2>
   <div id="elmContainer"></div>
 
   <script>
-    Elm.TransformTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: false,
-          logLevel: vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+  Elm.TransformTests.embed(
+  document.getElementById("elmContainer")
+).ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: false,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
 
 </body>
 

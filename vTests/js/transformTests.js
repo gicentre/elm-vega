@@ -17674,7 +17674,24 @@ var _user$project$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('nest')
 					},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'keys',
+							_1: _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _user$project$Vega$fieldSpec, _p161._0))
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'generate',
+								_1: _user$project$Vega$booSpec(_p161._1)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
 				});
 		case 'TStratify':
 			return _elm_lang$core$Json_Encode$object(
@@ -18184,7 +18201,11 @@ var _user$project$Vega$TPack = function (a) {
 	return {ctor: 'TPack', _0: a};
 };
 var _user$project$Vega$trPack = _user$project$Vega$TPack;
-var _user$project$Vega$TNest = {ctor: 'TNest'};
+var _user$project$Vega$TNest = F2(
+	function (a, b) {
+		return {ctor: 'TNest', _0: a, _1: b};
+	});
+var _user$project$Vega$trNest = _user$project$Vega$TNest;
 var _user$project$Vega$TLookup = F4(
 	function (a, b, c, d) {
 		return {ctor: 'TLookup', _0: a, _1: b, _2: c, _3: d};
@@ -19762,8 +19783,537 @@ var _user$project$Vega$trFormulaInitOnly = F2(
 		return A3(_user$project$Vega$TFormula, exp, fName, _user$project$Vega$InitOnly);
 	});
 
-var _user$project$TransformTests$forceTest1 = function () {
+var _user$project$TransformTests$nestTest1 = function () {
 	var mk = function (_p0) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Path,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$srData(
+								_user$project$Vega$str('links')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$enUpdate(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$maStroke(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$vStr('#ccc'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$maPath(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vField(
+														_user$project$Vega$field('path')),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Vega$mark,
+					_user$project$Vega$Symbol,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$srData(
+									_user$project$Vega$str('tree')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$mEncode(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$enUpdate(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$maFill(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vScale('cScale'),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$vField(
+															_user$project$Vega$field('id')),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$maStroke(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vStr('white'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maSize(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vNum(600),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maX(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vField(
+																	_user$project$Vega$field('x')),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$maY(
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$vField(
+																		_user$project$Vega$field('y')),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_user$project$Vega$mark,
+						_user$project$Vega$Text,
+						{
+							ctor: '::',
+							_0: _user$project$Vega$mFrom(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$srData(
+										_user$project$Vega$str('tree')),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$maText(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vField(
+															_user$project$Vega$field('id')),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maStroke(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vStr('white'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maFill(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vStr('white'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$maAlign(
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$hCenter,
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$maBaseline(
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$vMiddle,
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$maFontWeight(
+																		{
+																			ctor: '::',
+																			_0: _user$project$Vega$vStr('normal'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$Vega$maFontSize(
+																			{
+																				ctor: '::',
+																				_0: _user$project$Vega$vNum(16),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$enUpdate(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$maX(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vField(
+																_user$project$Vega$field('x')),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maY(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vField(
+																	_user$project$Vega$field('y')),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p0))));
+	};
+	var sc = function (_p1) {
+		return _user$project$Vega$scales(
+			A3(
+				_user$project$Vega$scale,
+				'cScale',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$scRange(
+							A2(
+								_user$project$Vega$raScheme,
+								_user$project$Vega$str('category20'),
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p1));
+	};
+	var si = function (_p2) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'generate',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$siValue(
+						_user$project$Vega$vBoo(true)),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$siBind(
+							_user$project$Vega$iCheckbox(
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p2));
+	};
+	var table = function (_p3) {
+		return A3(
+			_user$project$Vega$dataFromColumns,
+			'tree',
+			{ctor: '[]'},
+			A3(
+				_user$project$Vega$dataColumn,
+				'id',
+				_user$project$Vega$daStrs(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {
+									ctor: '::',
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {
+											ctor: '::',
+											_0: 'F',
+											_1: {
+												ctor: '::',
+												_0: 'G',
+												_1: {
+													ctor: '::',
+													_0: 'H',
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_user$project$Vega$dataColumn,
+					'job',
+					_user$project$Vega$daStrs(
+						{
+							ctor: '::',
+							_0: 'Doctor',
+							_1: {
+								ctor: '::',
+								_0: 'Doctor',
+								_1: {
+									ctor: '::',
+									_0: 'Lawyer',
+									_1: {
+										ctor: '::',
+										_0: 'Lawyer',
+										_1: {
+											ctor: '::',
+											_0: 'Doctor',
+											_1: {
+												ctor: '::',
+												_0: 'Doctor',
+												_1: {
+													ctor: '::',
+													_0: 'Lawyer',
+													_1: {
+														ctor: '::',
+														_0: 'Lawyer',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_user$project$Vega$dataColumn,
+						'region',
+						_user$project$Vega$daStrs(
+							{
+								ctor: '::',
+								_0: 'East',
+								_1: {
+									ctor: '::',
+									_0: 'East',
+									_1: {
+										ctor: '::',
+										_0: 'East',
+										_1: {
+											ctor: '::',
+											_0: 'East',
+											_1: {
+												ctor: '::',
+												_0: 'West',
+												_1: {
+													ctor: '::',
+													_0: 'West',
+													_1: {
+														ctor: '::',
+														_0: 'West',
+														_1: {
+															ctor: '::',
+															_0: 'West',
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}),
+						_p3))));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$transform,
+				{
+					ctor: '::',
+					_0: A2(
+						_user$project$Vega$trNest,
+						{
+							ctor: '::',
+							_0: _user$project$Vega$field('job'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$field('region'),
+								_1: {ctor: '[]'}
+							}
+						},
+						_user$project$Vega$booSignal('generate')),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$trTree(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$teMethod(_user$project$Vega$Tidy),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$teSize(
+										_user$project$Vega$numSignals(
+											{
+												ctor: '::',
+												_0: 'width',
+												_1: {
+													ctor: '::',
+													_0: 'height',
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				table(
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Vega$transform,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$trTreeLinks,
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$trLinkPath(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Vega$data,
+						'links',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$daSource('tree'),
+							_1: {ctor: '[]'}
+						})),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(300),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(100),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$padding(5),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: si(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: sc(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: mk(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$TransformTests$sourceExample = _user$project$TransformTests$nestTest1;
+var _user$project$TransformTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TransformTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$TransformTests$forceTest1 = function () {
+	var mk = function (_p4) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -20020,9 +20570,9 @@ var _user$project$TransformTests$forceTest1 = function () {
 							}
 						}
 					},
-					_p0)));
+					_p4)));
 	};
-	var sc = function (_p1) {
+	var sc = function (_p5) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -20040,9 +20590,9 @@ var _user$project$TransformTests$forceTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p1));
+				_p5));
 	};
-	var si = function (_p2) {
+	var si = function (_p6) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -20406,7 +20956,7 @@ var _user$project$TransformTests$forceTest1 = function () {
 															}
 														}
 													},
-													_p2)))))))))));
+													_p6)))))))))));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -20489,38 +21039,8 @@ var _user$project$TransformTests$forceTest1 = function () {
 			}
 		});
 }();
-var _user$project$TransformTests$sourceExample = _user$project$TransformTests$forceTest1;
-var _user$project$TransformTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TransformTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$TransformTests$stackTest1 = function () {
-	var mk = function (_p3) {
+	var mk = function (_p7) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -20654,9 +21174,9 @@ var _user$project$TransformTests$stackTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p3));
+				_p7));
 	};
-	var sc = function (_p4) {
+	var sc = function (_p8) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -20736,9 +21256,9 @@ var _user$project$TransformTests$stackTest1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p4))));
+						_p8))));
 	};
-	var si = function (_p5) {
+	var si = function (_p9) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -20930,9 +21450,9 @@ var _user$project$TransformTests$stackTest1 = function () {
 										_1: {ctor: '[]'}
 									}
 								},
-								_p5))))));
+								_p9))))));
 	};
-	var table = function (_p6) {
+	var table = function (_p10) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'table',
@@ -21019,7 +21539,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 								}
 							}
 						}),
-					_p6)));
+					_p10)));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -21133,7 +21653,7 @@ var _user$project$TransformTests$stackTest1 = function () {
 		});
 }();
 var _user$project$TransformTests$packTest1 = function () {
-	var mk = function (_p7) {
+	var mk = function (_p11) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -21216,9 +21736,9 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p7));
+				_p11));
 	};
-	var sc = function (_p8) {
+	var sc = function (_p12) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -21236,9 +21756,9 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p8));
+				_p12));
 	};
-	var si = function (_p9) {
+	var si = function (_p13) {
 		return _user$project$Vega$signals(
 			A3(
 				_user$project$Vega$signal,
@@ -21267,9 +21787,9 @@ var _user$project$TransformTests$packTest1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p9));
+				_p13));
 	};
-	var table = function (_p10) {
+	var table = function (_p14) {
 		return A3(
 			_user$project$Vega$dataFromColumns,
 			'tree',
@@ -21349,7 +21869,7 @@ var _user$project$TransformTests$packTest1 = function () {
 									}
 								}
 							}),
-						_p10))));
+						_p14))));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -21441,7 +21961,11 @@ var _user$project$TransformTests$mySpecs = _user$project$Vega$combineSpecs(
 			_1: {
 				ctor: '::',
 				_0: {ctor: '_Tuple2', _0: 'forceTest1', _1: _user$project$TransformTests$forceTest1},
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'nestTest1', _1: _user$project$TransformTests$nestTest1},
+					_1: {ctor: '[]'}
+				}
 			}
 		}
 	});
@@ -21459,7 +21983,7 @@ var _user$project$TransformTests$main = _elm_lang$html$Html$program(
 		},
 		view: _user$project$TransformTests$view,
 		update: F2(
-			function (_p11, model) {
+			function (_p15, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

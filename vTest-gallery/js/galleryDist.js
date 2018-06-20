@@ -17674,7 +17674,24 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('nest')
 					},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'keys',
+							_1: _elm_lang$core$Json_Encode$list(
+								A2(_elm_lang$core$List$map, _gicentre$elm_vega$Vega$fieldSpec, _p161._0))
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'generate',
+								_1: _gicentre$elm_vega$Vega$booSpec(_p161._1)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
 				});
 		case 'TStratify':
 			return _elm_lang$core$Json_Encode$object(
@@ -18184,7 +18201,11 @@ var _gicentre$elm_vega$Vega$TPack = function (a) {
 	return {ctor: 'TPack', _0: a};
 };
 var _gicentre$elm_vega$Vega$trPack = _gicentre$elm_vega$Vega$TPack;
-var _gicentre$elm_vega$Vega$TNest = {ctor: 'TNest'};
+var _gicentre$elm_vega$Vega$TNest = F2(
+	function (a, b) {
+		return {ctor: 'TNest', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$Vega$trNest = _gicentre$elm_vega$Vega$TNest;
 var _gicentre$elm_vega$Vega$TLookup = F4(
 	function (a, b, c, d) {
 		return {ctor: 'TLookup', _0: a, _1: b, _2: c, _3: d};

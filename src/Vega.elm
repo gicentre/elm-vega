@@ -744,6 +744,7 @@ module Vega
         , trJoinAggregate
         , trLinkPath
         , trLookup
+        , trNest
         , trPack
         , trPartition
         , trPie
@@ -1289,8 +1290,7 @@ TODO: add functions (sample)
 
 ## Hierarchy Transforms
 
-TODO: add function trNest
-
+@docs trNest
 @docs trStratify
 
 @docs trPack
@@ -3193,7 +3193,7 @@ type Transform
     | TJoinAggregate (List JoinAggregateProperty)
     | TLinkPath (List LinkPathProperty)
     | TLookup String Field (List Field) (List LookupProperty)
-    | TNest -- TODO Add transform functions
+    | TNest (List Field) Boo
     | TPack (List PackProperty)
     | TPartition (List PartitionProperty)
     | TPie (List PieProperty)
@@ -10516,6 +10516,17 @@ trLookup =
     TLookup
 
 
+{-| Perform a nesting transform that generates a tree data structure from input
+data objects by dividing children into groups based on distinct field values. This
+can provide input to tree layout methods such as [trTree](#trTree), [trTreemap](#trTreemap),
+[trPack](#trPack) and [trPartition](#trPartition). For details see the
+[Vega nest transform documentation](https://vega.github.io/vega/docs/transforms/nest/).
+-}
+trNest : List Field -> Boo -> Transform
+trNest =
+    TNest
+
+
 {-| Perform a pack transform on some data to computes an enclosure diagram that
 uses containment (nesting) to represent a hierarchy. The size of the leaf circles
 encodes a quantitative dimension of the data. The enclosing circles show the
@@ -14413,8 +14424,12 @@ transformSpec trans =
         TWordcloud wcps ->
             JE.object (( "type", JE.string "wordcloud" ) :: List.map wordcloudProperty wcps)
 
-        TNest ->
-            JE.object [ ( "type", JE.string "nest" ) ]
+        TNest fs b ->
+            JE.object
+                [ ( "type", JE.string "nest" )
+                , ( "keys", JE.list (List.map fieldSpec fs) )
+                , ( "generate", booSpec b )
+                ]
 
         TStratify key parent ->
             JE.object
