@@ -17288,7 +17288,15 @@ var _gicentre$elm_vega$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('sample')
 					},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'size',
+							_1: _gicentre$elm_vega$Vega$numSpec(_p161._0)
+						},
+						_1: {ctor: '[]'}
+					}
 				});
 		case 'TSequence':
 			var _p173 = _p161._2;
@@ -18181,7 +18189,10 @@ var _gicentre$elm_vega$Vega$TSequence = F3(
 		return {ctor: 'TSequence', _0: a, _1: b, _2: c};
 	});
 var _gicentre$elm_vega$Vega$trSequence = _gicentre$elm_vega$Vega$TSequence;
-var _gicentre$elm_vega$Vega$TSample = {ctor: 'TSample'};
+var _gicentre$elm_vega$Vega$TSample = function (a) {
+	return {ctor: 'TSample', _0: a};
+};
+var _gicentre$elm_vega$Vega$trSample = _gicentre$elm_vega$Vega$TSample;
 var _gicentre$elm_vega$Vega$TResolveFilter = F2(
 	function (a, b) {
 		return {ctor: 'TResolveFilter', _0: a, _1: b};

@@ -749,6 +749,7 @@ module Vega
         , trPartition
         , trPie
         , trResolveFilter
+        , trSample
         , trSequence
         , trStack
         , trStratify
@@ -1140,7 +1141,7 @@ TODO: add functions (project)
 
 ### Sampling
 
-TODO: add functions (sample)
+@docs trSample
 
 
 ### Data Generation
@@ -3200,7 +3201,7 @@ type Transform
     | TPivot -- TODO Add pivot transform functions
     | TProject -- TODO Add transform functions
     | TResolveFilter String Num
-    | TSample -- TODO Add transform functions
+    | TSample Num
     | TSequence Num Num Num
     | TStack (List StackProperty)
     | TStratify Field Field
@@ -10595,6 +10596,15 @@ trResolveFilter =
     TResolveFilter
 
 
+{-| Generate a random sample from a data stream to generate a smaller stream. The
+parameter determines the maximum number of data items to sample. For details see the
+[Vega sample transform documentation](https://vega.github.io/vega/docs/transforms/sample/).
+-}
+trSample : Num -> Transform
+trSample =
+    TSample
+
+
 {-| Generate a data stream of numbers between a start (first parameter) and end
 (second parameter) inclusive in increments specified by the third parameter. If
 the end value is less than the start value, the third parameter should be negative.
@@ -14303,8 +14313,8 @@ transformSpec trans =
         TProject ->
             JE.object [ ( "type", JE.string "project" ) ]
 
-        TSample ->
-            JE.object [ ( "type", JE.string "sample" ) ]
+        TSample n ->
+            JE.object [ ( "type", JE.string "sample" ), ( "size", numSpec n ) ]
 
         TSequence start stop step ->
             let

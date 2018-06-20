@@ -17288,7 +17288,15 @@ var _user$project$Vega$transformSpec = function (trans) {
 						_0: 'type',
 						_1: _elm_lang$core$Json_Encode$string('sample')
 					},
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'size',
+							_1: _user$project$Vega$numSpec(_p161._0)
+						},
+						_1: {ctor: '[]'}
+					}
 				});
 		case 'TSequence':
 			var _p173 = _p161._2;
@@ -18181,7 +18189,10 @@ var _user$project$Vega$TSequence = F3(
 		return {ctor: 'TSequence', _0: a, _1: b, _2: c};
 	});
 var _user$project$Vega$trSequence = _user$project$Vega$TSequence;
-var _user$project$Vega$TSample = {ctor: 'TSample'};
+var _user$project$Vega$TSample = function (a) {
+	return {ctor: 'TSample', _0: a};
+};
+var _user$project$Vega$trSample = _user$project$Vega$TSample;
 var _user$project$Vega$TResolveFilter = F2(
 	function (a, b) {
 		return {ctor: 'TResolveFilter', _0: a, _1: b};
