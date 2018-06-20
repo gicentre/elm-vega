@@ -177,7 +177,7 @@ force1 =
                 << signal "nodeRadius" [ siValue (vNum 8), siBind (iRange [ inMin 1, inMax 50, inStep 1 ]) ]
                 << signal "nodeCharge" [ siValue (vNum -30), siBind (iRange [ inMin -100, inMax 10, inStep 1 ]) ]
                 << signal "linkDistance" [ siValue (vNum 30), siBind (iRange [ inMin 5, inMax 100, inStep 1 ]) ]
-                << signal "static" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "static" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "fix"
                     [ siDescription "State variable for active node fix status."
                     , siValue (vNum 0)
@@ -208,7 +208,7 @@ force1 =
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
-                    , siValue (vBoo False)
+                    , siValue vFalse
                     , siOn [ evHandler [ esSelector (strSignal "fix") ] [ evUpdate "fix > 1 " ] ]
                     ]
 

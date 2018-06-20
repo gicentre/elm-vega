@@ -208,7 +208,7 @@ forceTest1 =
                     , siBind (iRange [ inMin 0, inMax 1, inStep 0.01 ])
                     ]
                 << signal "static"
-                    [ siValue (vBoo True)
+                    [ siValue vTrue
                     , siBind (iCheckbox [])
                     ]
                 << signal "fix"
@@ -241,7 +241,7 @@ forceTest1 =
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
-                    , siValue (vBoo False)
+                    , siValue vFalse
                     , siOn [ evHandler [ esSelector (strSignal "fix") ] [ evUpdate "fix > 1 " ] ]
                     ]
 
@@ -327,7 +327,7 @@ nestTest1 =
                 ]
 
         si =
-            signals << signal "generate" [ siValue (vBoo True), siBind (iCheckbox []) ]
+            signals << signal "generate" [ siValue vTrue, siBind (iCheckbox []) ]
 
         sc =
             scales

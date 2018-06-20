@@ -275,7 +275,7 @@ areaChart3 =
                         [ enUpdate
                             [ maWidth [ vField (fGroup (field "width")) ]
                             , maHeight [ vField (fGroup (field "height")) ]
-                            , maGroupClip [ vBoo True ]
+                            , maGroupClip [ vTrue ]
                             ]
                         ]
                     , mGroup [ mk1 [] ]

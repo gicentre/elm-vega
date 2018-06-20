@@ -227,7 +227,7 @@ geo3 =
                 << signal "graticuleDash" [ siValue (vNum 0), siBind (iRadio [ inOptions (vNums [ 0, 3, 5, 10 ]) ]) ]
                 << signal "borderWidth" [ siValue (vNum 1), siBind (iText []) ]
                 << signal "background" [ siValue (vStr "#ffffff"), siBind (iColor []) ]
-                << signal "invert" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "invert" [ siValue vFalse, siBind (iCheckbox []) ]
 
         pr =
             projections
@@ -434,7 +434,7 @@ geo5 =
                         [ enEnter
                             [ maWidth [ vNum mapWidth ]
                             , maHeight [ vNum mapHeight ]
-                            , maGroupClip [ vBoo True ]
+                            , maGroupClip [ vTrue ]
                             ]
                         ]
                     , mGroup [ nestedPr [], nestedMk [] ]
@@ -753,7 +753,7 @@ geo8 inData =
                         )
                     ]
                 << signal "smooth"
-                    [ siValue (vBoo True)
+                    [ siValue vTrue
                     , siBind (iRadio [ inOptions (vBoos [ True, False ]) ])
                     ]
 

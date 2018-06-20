@@ -18613,7 +18613,8 @@ var _gicentre$elm_vega$Vega$vBoos = _gicentre$elm_vega$Vega$VBoos;
 var _gicentre$elm_vega$Vega$VBoo = function (a) {
 	return {ctor: 'VBoo', _0: a};
 };
-var _gicentre$elm_vega$Vega$vBoo = _gicentre$elm_vega$Vega$VBoo;
+var _gicentre$elm_vega$Vega$vFalse = _gicentre$elm_vega$Vega$VBoo(false);
+var _gicentre$elm_vega$Vega$vTrue = _gicentre$elm_vega$Vega$VBoo(true);
 var _gicentre$elm_vega$Vega$VNums = function (a) {
 	return {ctor: 'VNums', _0: a};
 };
@@ -25921,8 +25922,7 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 				'dragging',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$siValue(
-						_gicentre$elm_vega$Vega$vBoo(false)),
+					_0: _gicentre$elm_vega$Vega$siValue(_gicentre$elm_vega$Vega$vFalse),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$siOn(

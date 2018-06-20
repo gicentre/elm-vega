@@ -38,7 +38,7 @@ tree1 =
 
         si =
             signals
-                << signal "labels" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "labels" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "layout"
                     [ siValue (vStr "tidy")
                     , siBind (iRadio [ inOptions (vStrs [ "tidy", "cluster" ]) ])
@@ -132,7 +132,7 @@ tree2 =
 
         si =
             signals
-                << signal "labels" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "labels" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "radius" [ siValue (vNum 280), siBind (iRange [ inMin 20, inMax 600 ]) ]
                 << signal "extent" [ siValue (vNum 360), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
                 << signal "rotate" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]

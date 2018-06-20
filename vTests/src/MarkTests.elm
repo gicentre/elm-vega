@@ -99,7 +99,7 @@ areaTest =
 
         si =
             signals
-                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
                     [ siValue (vStr (markInterpolationLabel Linear))
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
@@ -150,7 +150,7 @@ groupTest =
 
         si =
             signals
-                << signal "groupClip" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "groupClip" [ siValue vFalse, siBind (iCheckbox []) ]
                 << signal "x" [ siValue (vNum 25), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "y" [ siValue (vNum 25), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "w" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
@@ -211,7 +211,7 @@ imageTest =
                 << signal "y" [ siValue (vNum 75), siBind (iRange [ inMin 0, inMax 100, inStep 1 ]) ]
                 << signal "w" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "h" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
-                << signal "aspect" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "aspect" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "align" [ siValue (vStr "left"), siBind (iSelect [ inOptions (vStrs [ "left", "center", "right" ]) ]) ]
                 << signal "baseline" [ siValue (vStr "top"), siBind (iSelect [ inOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
 
@@ -267,7 +267,7 @@ lineTest =
 
         si =
             signals
-                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
                     [ siValue (vStr (markInterpolationLabel Linear))
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
@@ -638,7 +638,7 @@ trailTest =
 
         si =
             signals
-                << signal "defined" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "size" [ siValue (vNum 5), siBind (iRange [ inMin 1, inMax 10 ]) ]
 
         mk =

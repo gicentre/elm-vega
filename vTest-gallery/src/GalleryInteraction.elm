@@ -283,7 +283,7 @@ interaction2 =
                         [ enEnter
                             [ maHeight [ vField (fGroup (field "height")) ]
                             , maWidth [ vField (fGroup (field "width")) ]
-                            , maGroupClip [ vBoo True ]
+                            , maGroupClip [ vTrue ]
                             ]
                         ]
                     , mGroup [ mk2 [] ]
@@ -1044,11 +1044,11 @@ interaction6 =
         si =
             signals
                 << signal "clear"
-                    [ siValue (vBoo True)
+                    [ siValue vTrue
                     , siOn [ evHandler [ esSelector (str "mouseup[!event.item]") ] [ evUpdate "true", evForce true ] ]
                     ]
                 << signal "shift"
-                    [ siValue (vBoo False)
+                    [ siValue vFalse
                     , siOn [ evHandler [ esSelector (str "@legendSymbol:click, @legendLabel:click") ] [ evUpdate "event.shiftKey", evForce true ] ]
                     ]
                 << signal "clicked"

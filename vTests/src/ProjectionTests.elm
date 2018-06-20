@@ -93,7 +93,7 @@ projTest =
                         [ enEnter
                             [ maWidth [ vSignal "mapWidth" ]
                             , maHeight [ vSignal "mapHeight" ]
-                            , maGroupClip [ vBoo True ]
+                            , maGroupClip [ vTrue ]
                             ]
                         ]
                     , mGroup [ nestedSi [], nestedPr [], nestedMk [] ]

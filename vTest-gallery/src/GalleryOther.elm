@@ -73,7 +73,7 @@ heatmap1 =
         si =
             signals
                 << signal "palette" [ siValue (vStr "Viridis"), siBind (iSelect [ inOptions (vStrs colors) ]) ]
-                << signal "reverse" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "reverse" [ siValue vFalse, siBind (iCheckbox []) ]
 
         sc =
             scales
@@ -417,7 +417,7 @@ beeswarm1 =
                 << signal "collide" [ siValue (vNum 1), siBind (iRange [ inMin 1, inMax 10, inStep 1 ]) ]
                 << signal "gravityX" [ siValue (vNum 0.2), siBind (iRange [ inMin 0, inMax 1 ]) ]
                 << signal "gravityY" [ siValue (vNum 0.1), siBind (iRange [ inMin 0, inMax 1 ]) ]
-                << signal "static" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "static" [ siValue vTrue, siBind (iCheckbox []) ]
 
         sc =
             scales

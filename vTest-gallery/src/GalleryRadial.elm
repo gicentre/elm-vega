@@ -40,7 +40,7 @@ circularChart1 =
                 << signal "padAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
                 << signal "innerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
                 << signal "cornerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "sort" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "sort" [ siValue vFalse, siBind (iCheckbox []) ]
 
         sc =
             scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20") []) ]

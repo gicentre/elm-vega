@@ -45,7 +45,7 @@ custom1 =
         si =
             signals
                 << signal "dragging"
-                    [ siValue (vBoo False)
+                    [ siValue vFalse
                     , siOn
                         [ evHandler [ esObject [ esMarkName "handle", esType MouseDown ] ] [ evUpdate "true" ]
                         , evHandler [ esObject [ esSource ESWindow, esType MouseUp ] ] [ evUpdate "false" ]

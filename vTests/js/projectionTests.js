@@ -18613,7 +18613,8 @@ var _user$project$Vega$vBoos = _user$project$Vega$VBoos;
 var _user$project$Vega$VBoo = function (a) {
 	return {ctor: 'VBoo', _0: a};
 };
-var _user$project$Vega$vBoo = _user$project$Vega$VBoo;
+var _user$project$Vega$vFalse = _user$project$Vega$VBoo(false);
+var _user$project$Vega$vTrue = _user$project$Vega$VBoo(true);
 var _user$project$Vega$VNums = function (a) {
 	return {ctor: 'VNums', _0: a};
 };
@@ -20341,7 +20342,7 @@ var _user$project$ProjectionTests$projTest = function () {
 												_0: _user$project$Vega$maGroupClip(
 													{
 														ctor: '::',
-														_0: _user$project$Vega$vBoo(true),
+														_0: _user$project$Vega$vTrue,
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}

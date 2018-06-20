@@ -20,7 +20,7 @@ uiEvents =
                 << signal "rSize" [ siValue (vNum 100), siBind (iRange [ inMin 1, inMax 400 ]) ]
                 << signal "rColor" [ siValue (vStr "red"), siBind (iRadio [ inOptions (vStrs [ "red", "blue", "black" ]) ]) ]
                 << signal "borderColor" [ siValue black, siBind (iColor []) ]
-                << signal "rFill" [ siValue (vBoo False), siBind (iCheckbox []) ]
+                << signal "rFill" [ siValue vFalse, siBind (iCheckbox []) ]
                 << signal "rLabel" [ siValue (vStr ""), siBind (iText [ inPlaceholder "Type label here" ]) ]
                 << signal "labelSize" [ siValue (vNum 10), siBind (iNumber []) ]
                 << signal "borderWidth" [ siValue (vStr "medium"), siBind (iSelect [ inOptions (vStrs [ "thin", "medium", "thick" ]) ]) ]

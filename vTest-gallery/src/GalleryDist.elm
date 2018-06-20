@@ -869,7 +869,7 @@ contour1 =
         si =
             signals
                 << signal "count" [ siValue (vNum 10), siBind (iSelect [ inOptions (vNums [ 1, 5, 10, 20 ]) ]) ]
-                << signal "points" [ siValue (vBoo True), siBind (iCheckbox []) ]
+                << signal "points" [ siValue vTrue, siBind (iCheckbox []) ]
 
         sc =
             scales
