@@ -159,7 +159,7 @@ interaction1 =
                             , maBaseline [ vBottom ]
                             , maFontSize [ vNum 14 ]
                             , maFontWeight [ vStr "500" ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -172,7 +172,7 @@ interaction1 =
                         [ maY [ vScale "layout", vStr core, vOffset (vNum 20) ]
                         , maWidth [ vSignal "width" ]
                         , maHeight [ vSignal "chartHeight" ]
-                        , maFill [ vStr "transparent" ]
+                        , maFill [ transparent ]
                         ]
                     ]
                 , mGroup [ dsGenerator core, scGenerator core [], axGenerator core [], mkGenerator core [] ]
@@ -249,7 +249,7 @@ interaction2 =
                             , maY [ vNum 430 ]
                             , maHeight [ vNum 70 ]
                             , maWidth [ vNum 720 ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             ]
                         ]
                     , mGroup [ si1 [], sc2 [], ax2 [], mk3 [] ]
@@ -554,7 +554,7 @@ interaction3 =
                         [ enSymbols
                             [ enUpdate
                                 [ maFillOpacity [ vNum 0.5 ]
-                                , maStroke [ vStr "transparent" ]
+                                , maStroke [ transparent ]
                                 ]
                             ]
                         ]
@@ -585,7 +585,7 @@ interaction3 =
                             , maY [ vScale "groupY", vField (field "y.data") ]
                             , maWidth [ vSignal "chartSize" ]
                             , maHeight [ vSignal "chartSize" ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             , maStroke [ vStr "#ddd" ]
                             ]
                         ]
@@ -595,7 +595,7 @@ interaction3 =
                     [ mName "brush"
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "transparent" ] ]
+                            [ maFill [ transparent ] ]
                         , enUpdate
                             [ maX [ vSignal "cell ? cell.x + brushX[0] : 0" ]
                             , maX2 [ vSignal "cell ? cell.x + brushX[1] : 0" ]
@@ -1120,7 +1120,7 @@ interaction6 =
                             [ enName "legendSymbol"
                             , enInteractive true
                             , enUpdate
-                                [ maFill [ vStr "transparent" ]
+                                [ maFill [ transparent ]
                                 , maStrokeWidth [ vNum 2 ]
                                 , maOpacity
                                     [ ifElse "!length(data('selected')) || indata('selected', 'value', datum.value)"
@@ -1153,7 +1153,7 @@ interaction6 =
                         [ enEnter
                             [ maX [ vNum 0 ]
                             , maHeight [ vNum 35 ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             , maCursor [ cursorLabel CEWResize |> vStr ]
                             ]
                         , enUpdate
@@ -1197,7 +1197,7 @@ interaction6 =
                                     [ vScale "cScale", vField (field "Origin") ]
                                     [ vStr "#ccc" ]
                                 ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             ]
                         ]
                     ]
@@ -1207,7 +1207,7 @@ interaction6 =
                         [ enEnter
                             [ maY [ vNum 0 ]
                             , maHeight [ vSignal "height" ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             ]
                         , enUpdate
                             [ maX [ vSignal "brush[0]" ]
@@ -1320,7 +1320,7 @@ interaction7 =
                             [ maX [ vField (fGroup (field "xScale")) ]
                             , maX2 [ vField (fGroup (field "width")) ]
                             , maY [ vNum 0.5, vOffset (vObject [ vScale "yScale", vNum 0, vRound true ]) ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 1 ]
                             ]
                         ]
@@ -1550,7 +1550,7 @@ interaction8 =
                         [ enUpdate
                             [ maAlign [ hLeft ]
                             , maX [ vNum 10 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maY [ vScale "pi_scale", vField (field "value"), vOffset (vNum -5) ]
                             , maText [ vStr "Real Pi: 3.1415..." ]
                             ]
@@ -1563,7 +1563,7 @@ interaction8 =
                             [ maAlign [ hRight ]
                             , maX [ vSignal "height", vOffset (vNum -5) ]
                             , maDy [ vNum -5 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maY [ vScale "pi_scale", vField (field "value") ]
                             , maText [ vSignal "'Estimate: ' + format(datum.estimate, ',.3f')" ]
                             ]

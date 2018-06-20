@@ -103,12 +103,12 @@ bundle1 =
                                 ]
                             , maFill
                                 [ ifElse "datum.id === active"
-                                    [ vStr "black" ]
+                                    [ black ]
                                     [ ifElse "indata('selected', 'source', datum.id)"
                                         [ vSignal "colorIn" ]
                                         [ ifElse "indata('selected', 'target', datum.id)"
                                             [ vSignal "colorOut" ]
-                                            [ vStr "black" ]
+                                            [ black ]
                                         ]
                                     ]
                                 ]
@@ -227,7 +227,7 @@ force1 =
                     , mEncode
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (field "group") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * nodeRadius * nodeRadius" ]
@@ -400,7 +400,7 @@ matrix1 =
                             , maAngle [ vNum -90 ]
                             , maAlign [ hLeft ]
                             , maBaseline [ vMiddle ]
-                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ vStr "black" ] ]
+                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ black ] ]
                             ]
                         ]
                     ]
@@ -415,7 +415,7 @@ matrix1 =
                             , maFontSize [ vNum 10 ]
                             , maAlign [ hRight ]
                             , maBaseline [ vMiddle ]
-                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ vStr "black" ] ]
+                            , maFill [ ifElse "datum === src" [ vStr "steelblue" ] [ black ] ]
                             ]
                         ]
                     ]
@@ -488,7 +488,7 @@ arc1 =
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
-                            [ maStroke [ vStr "black" ]
+                            [ maStroke [ black ]
                             , maStrokeOpacity [ vNum 0.2 ]
                             , maStrokeWidth [ vField (field "value") ]
                             ]
@@ -621,7 +621,7 @@ map1 =
                 << mark Path
                     [ mFrom [ srData (str "states") ]
                     , mEncode
-                        [ enEnter [ maFill [ vStr "#dedede" ], maStroke [ vStr "white" ] ]
+                        [ enEnter [ maFill [ vStr "#dedede" ], maStroke [ white ] ]
                         , enUpdate [ maPath [ vField (field "path") ] ]
                         ]
                     ]
@@ -632,7 +632,7 @@ map1 =
                             [ maSize [ vScale "size", vField (field "traffic.flights") ]
                             , maFill [ vStr "steelblue" ]
                             , maFillOpacity [ vNum 0.8 ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 1.5 ]
                             ]
                         , enUpdate [ maX [ vField (field "x") ], maY [ vField (field "y") ] ]
@@ -642,14 +642,14 @@ map1 =
                     [ mName "cell"
                     , mFrom [ srData (str "airports") ]
                     , mEncode
-                        [ enEnter [ maFill [ vStr "transparent" ], maStrokeWidth [ vNum 0.35 ] ]
+                        [ enEnter [ maFill [ transparent ], maStrokeWidth [ vNum 0.35 ] ]
                         , enUpdate [ maPath [ vField (field "path") ], maStroke [ vSignal "cell_stroke" ] ]
                         ]
                     ]
                 << mark Path
                     [ mInteractive false
                     , mFrom [ srData (str "routes") ]
-                    , mEncode [ enEnter [ maPath [ vField (field "path") ], maStroke [ vStr "black" ], maStrokeOpacity [ vNum 0.35 ] ] ]
+                    , mEncode [ enEnter [ maPath [ vField (field "path") ], maStroke [ black ], maStrokeOpacity [ vNum 0.35 ] ] ]
                     ]
                 << mark Text
                     [ mInteractive false
@@ -657,7 +657,7 @@ map1 =
                         [ enEnter
                             [ maX [ vNum 895 ]
                             , maY [ vNum 0 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maFontSize [ vNum 20 ]
                             , maAlign [ hRight ]
                             ]

@@ -19,7 +19,7 @@ uiEvents =
             signals
                 << signal "rSize" [ siValue (vNum 100), siBind (iRange [ inMin 1, inMax 400 ]) ]
                 << signal "rColor" [ siValue (vStr "red"), siBind (iRadio [ inOptions (vStrs [ "red", "blue", "black" ]) ]) ]
-                << signal "borderColor" [ siValue (vStr "black"), siBind (iColor []) ]
+                << signal "borderColor" [ siValue black, siBind (iColor []) ]
                 << signal "rFill" [ siValue (vBoo False), siBind (iCheckbox []) ]
                 << signal "rLabel" [ siValue (vStr ""), siBind (iText [ inPlaceholder "Type label here" ]) ]
                 << signal "labelSize" [ siValue (vNum 10), siBind (iNumber []) ]
@@ -89,7 +89,7 @@ eventStream1 =
                         [ enEnter
                             [ maAlign [ hCenter ]
                             , maBaseline [ vMiddle ]
-                            , maFill [ vStr "white" ]
+                            , maFill [ white ]
                             , maText [ vStr "Drag me" ]
                             ]
                         , enUpdate

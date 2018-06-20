@@ -103,7 +103,7 @@ custom1 =
                     , axValues (vNums [ 1982, 1986, 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018 ])
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeOpacity [ vNum 0.75 ] ] ] )
+                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
                         , ( ELabels, [ enUpdate [ maX [ vScale "xScale", vField (field "value") ] ] ] )
                         ]
                     ]
@@ -114,7 +114,7 @@ custom1 =
                     , axValues (vNums [ 0, -0.5, -1, -1.5 ])
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeOpacity [ vNum 0.75 ] ] ] )
+                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
                         , ( ELabels, [ enEnter [ maText [ vSignal "format(datum.value, '$.1f') + ' trillion'" ] ] ] )
                         ]
                     ]
@@ -143,7 +143,7 @@ custom1 =
                             [ maX [ vNum 6 ]
                             , maY [ vNum 14 ]
                             , maText [ vSignal "'Forecast from early ' + parent.argmin.budgetYear" ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maFontWeight [ vStr "bold" ]
                             ]
                         ]
@@ -155,7 +155,7 @@ custom1 =
                             [ maX [ vNum 6 ]
                             , maY [ vNum 29 ]
                             , maText [ vSignal "parent.argmin.forecastYear + ': ' + format(parent.argmin.abs, '$.3f') + ' trillion ' + parent.argmin.type" ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maAlign [ hLeft ]
                             ]
                         ]
@@ -184,7 +184,7 @@ custom1 =
                         [ enUpdate
                             [ maX [ vScale "xScale", vField (field "forecastYear") ]
                             , maY [ vScale "yScale", vField (field "value") ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 1 ]
                             ]
                         ]
@@ -196,7 +196,7 @@ custom1 =
                             [ maX [ vScale "xScale", vField (field "argmin.forecastYear") ]
                             , maY [ vScale "yScale", vField (field "argmin.value") ]
                             , maSize [ vNum 50 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -204,7 +204,7 @@ custom1 =
                     [ mEncode
                         [ enEnter
                             [ maY [ vScale "yScale", vNum 0 ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 1 ]
                             ]
                         , enUpdate
@@ -220,7 +220,7 @@ custom1 =
                             [ maY [ vScale "yScale", vNum 0, vOffset (vNum 1) ]
                             , maShape [ symbolLabel SymTriangleDown |> vStr ]
                             , maSize [ vNum 400 ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         , enUpdate
@@ -254,7 +254,7 @@ custom1 =
                             , maY [ vScale "yScale", vField (field "argmin.value"), vOffset (vNum 20) ]
                             , maWidth [ vNum 150 ]
                             , maHeight [ vNum 35 ]
-                            , maFill [ vStr "white" ]
+                            , maFill [ white ]
                             , maFillOpacity [ vNum 0.85 ]
                             , maStroke [ vStr "#aaa" ]
                             , maStrokeWidth [ vNum 0.5 ]
@@ -310,7 +310,7 @@ custom2 =
                     , axOffset (vNum 5)
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
+                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
                         , ( ELabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
                         ]
                     ]
@@ -363,7 +363,7 @@ custom2 =
                             [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 1 ]
                             ]
                         ]
@@ -378,7 +378,7 @@ custom2 =
                             , maY [ vScale "yScale", vNum 95 ]
                             , maY2 [ vScale "yScale", vField (field "offset") ]
                             , maFill [ vScale "cScale", vField (field "commonwealth") ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 2 ]
                             ]
                         ]
@@ -392,7 +392,7 @@ custom2 =
                             , maY [ vField (field "y2"), vOffset (vNum 14) ]
                             , maText [ vField (field "datum.name") ]
                             , maAlign [ hCenter ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maFont (str "Helvetica Neue, Arial")
                             , maFontSize [ vNum 10 ]
                             , maFontStyle [ vStr "italic" ]
@@ -512,7 +512,7 @@ custom3 =
                             , maY [ vScale "yScale", vField (field "population") ]
                             , maStroke [ vStr "steelblue" ]
                             , maStrokeWidth [ vNum 1.5 ]
-                            , maFill [ vStr "white" ]
+                            , maFill [ white ]
                             , maSize [ vNum 30 ]
                             ]
                         ]
@@ -653,7 +653,7 @@ custom5 =
                     , axGrid true
                     , axDomain false
                     , axZIndex (num 1)
-                    , axEncode [ ( EGrid, [ enEnter [ maStroke [ vStr "white" ] ] ] ) ]
+                    , axEncode [ ( EGrid, [ enEnter [ maStroke [ white ] ] ] ) ]
                     ]
 
         mk =
@@ -665,7 +665,7 @@ custom5 =
                             [ maX [ vScale "xScale", vField (field "id") ]
                             , maDx [ vScale "xScale", vBand (num 0.5) ]
                             , maY [ vNum 0 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maText [ vField (field "day") ]
                             , maAlign [ hCenter ]
                             , maBaseline [ vBottom ]
@@ -704,7 +704,7 @@ custom5 =
                             , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
                             , maY [ vScale "yScale", vField (field "actual.low") ]
                             , maY2 [ vScale "yScale", vField (field "actual.high") ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -716,7 +716,7 @@ custom5 =
                             , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -18) ]
                             , maY [ vScale "yScale", vField (field "forecast.low.low") ]
                             , maY2 [ vScale "yScale", vField (field "forecast.high.high") ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -728,7 +728,7 @@ custom5 =
                             , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
                             , maY [ vScale "yScale", vField (field "forecast.low.low") ]
                             , maY2 [ vScale "yScale", vField (field "forecast.low.high") ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -740,7 +740,7 @@ custom5 =
                             , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -8) ]
                             , maY [ vScale "yScale", vField (field "forecast.high.low") ]
                             , maY2 [ vScale "yScale", vField (field "forecast.high.high") ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]
@@ -926,7 +926,7 @@ custom6 =
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (fParent (field "key")) ]
                             , maFillOpacity [ vNum 0.7 ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 1 ]
                             ]
                         , enUpdate

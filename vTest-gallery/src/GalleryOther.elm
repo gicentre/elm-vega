@@ -339,7 +339,7 @@ timeline1 =
                             [ maX [ vScale "xScale", vField (field "when") ]
                             , maY [ vNum -10 ]
                             , maAngle [ vNum -25 ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vNum 10 ]
                             ]
@@ -363,7 +363,7 @@ timeline1 =
                         [ enEnter
                             [ maX [ vScale "xScale", vField (field "born") ]
                             , maY [ vScale "yScale", vField (field "label"), vOffset (vNum -3) ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maText [ vField (field "label") ]
                             , maFontSize [ vNum 10 ]
                             ]
@@ -447,7 +447,7 @@ beeswarm1 =
                             ]
                         , enUpdate
                             [ maSize [ vSignal "pow(2 * radius, 2)" ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 1 ]
                             , maZIndex [ vNum 0 ]
                             ]

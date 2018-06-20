@@ -58,7 +58,7 @@ scatterplot1 =
             , maOpacity [ vNum 0.5 ]
             , maStroke [ vStr "#4682b4" ]
             , maShape [ vStr (symbolLabel SymCircle) ]
-            , maFill [ vStr "transparent" ]
+            , maFill [ transparent ]
             ]
 
         lg =
@@ -263,7 +263,7 @@ scatterplot3 =
                     , axGrid true
                     , axDomain false
                     , axEncode
-                        [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
+                        [ ( EDomain, [ enEnter [ maStroke [ transparent ] ] ] )
                         , ( ELabels
                           , [ enEnter
                                 [ maAlign [ hLeft ]
@@ -290,7 +290,7 @@ scatterplot3 =
                     , axDomain false
                     , axFormat "$0.2f"
                     , axEncode
-                        [ ( EDomain, [ enEnter [ maStroke [ vStr "transparent" ] ] ] )
+                        [ ( EDomain, [ enEnter [ maStroke [ transparent ] ] ] )
                         , ( ELabels
                           , [ enEnter
                                 [ maAlign [ hLeft ]
@@ -431,7 +431,7 @@ scatterplot4 =
                 << mark Rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
-                        [ enEnter [ maFill [ vStr "black" ], maHeight [ vNum 1 ] ]
+                        [ enEnter [ maFill [ black ], maHeight [ vNum 1 ] ]
                         , enUpdate
                             [ maX [ vScale "xScale", vSignal "datum[measure+'0']" ]
                             , maY [ vScale "yScale", vField (field "variety"), vBand (num 0.5) ]
@@ -580,7 +580,7 @@ scatterplot5 =
                             , maText [ vField (field "datum.site") ]
                             , maAlign [ hCenter ]
                             , maBaseline [ vBottom ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     ]

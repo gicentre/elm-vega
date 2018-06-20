@@ -125,7 +125,7 @@ projTest =
                         [ enEnter
                             [ maStrokeWidth [ vNum 0.25 ]
                             , maStroke [ vStr "#888" ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -134,7 +134,7 @@ projTest =
                     [ mFrom [ srData (str "labelOffsets") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "white" ]
+                            [ maFill [ white ]
                             , maDx [ vField (field "dx") ]
                             , maDy [ vField (field "dy") ]
                             , maX [ vNum 5 ]
@@ -149,7 +149,7 @@ projTest =
                 << mark Text
                     [ mEncode
                         [ enEnter
-                            [ maFill [ vStr "black" ]
+                            [ maFill [ black ]
                             , maX [ vNum 5 ]
                             , maY [ vSignal "mapHeight -5" ]
                             , maBaseline [ vBottom ]

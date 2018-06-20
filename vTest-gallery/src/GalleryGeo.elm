@@ -157,7 +157,7 @@ geo2 =
                         [ enEnter
                             [ maSize [ vScale "sizeScale", vField (field "rate") ]
                             , maFill [ vScale "cScale", vField (field "rate") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 1.5 ]
                             , maX [ vField (field "myCentroid[0]") ]
                             , maY [ vField (field "myCentroid[1]") ]
@@ -324,7 +324,7 @@ geo4 =
                     , mEncode
                         [ enUpdate
                             [ maFill [ vStr "aliceblue" ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 1.5 ]
                             ]
                         ]
@@ -335,7 +335,7 @@ geo4 =
                     , mEncode
                         [ enUpdate
                             [ maFill [ vStr "mintcream" ]
-                            , maStroke [ vStr "black" ]
+                            , maStroke [ black ]
                             , maStrokeWidth [ vNum 0.35 ]
                             ]
                         ]
@@ -466,7 +466,7 @@ geo5 =
                         [ enEnter
                             [ maStrokeWidth [ vNum 0.25 ]
                             , maStroke [ vStr "#888" ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -475,7 +475,7 @@ geo5 =
                     [ mFrom [ srData (str "labelOffsets") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "white" ]
+                            [ maFill [ white ]
                             , maDx [ vField (field "dx") ]
                             , maDy [ vField (field "dy") ]
                             , maX [ vNum 5 ]
@@ -490,7 +490,7 @@ geo5 =
                 << mark Text
                     [ mEncode
                         [ enEnter
-                            [ maFill [ vStr "black" ]
+                            [ maFill [ black ]
                             , maX [ vNum 5 ]
                             , maY [ vNum (mapHeight - 5) ]
                             , maBaseline [ vBottom ]

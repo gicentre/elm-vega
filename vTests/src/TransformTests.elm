@@ -50,7 +50,7 @@ packTest1 =
                     , mEncode
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (field "id") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             ]
                         , enUpdate
                             [ maX [ vField (field "x") ]
@@ -156,7 +156,7 @@ stackTest1 =
                     , mEncode
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (field "key") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 1 ]
                             , maX [ vScale "xScale", vField (field "key"), vOffset (vNum 0.5) ]
                             , maWidth [ vScale "xScale", vBand (num 1) ]
@@ -260,7 +260,7 @@ forceTest1 =
                     , mEncode
                         [ enEnter
                             [ maFill [ vScale "cScale", vField (field "group") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * collideRadius * collideRadius" ]
@@ -352,7 +352,7 @@ nestTest1 =
                     , mEncode
                         [ enUpdate
                             [ maFill [ vScale "cScale", vField (field "id") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maSize [ vNum 600 ]
                             , maX [ vField (field "x") ]
                             , maY [ vField (field "y") ]
@@ -364,8 +364,8 @@ nestTest1 =
                     , mEncode
                         [ enEnter
                             [ maText [ vField (field "id") ]
-                            , maStroke [ vStr "white" ]
-                            , maFill [ vStr "white" ]
+                            , maStroke [ white ]
+                            , maFill [ white ]
                             , maAlign [ hCenter ]
                             , maBaseline [ vMiddle ]
                             , maFontWeight [ vStr "normal" ]

@@ -386,7 +386,7 @@ boxplot1 =
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "black" ]
+                            [ maFill [ black ]
                             , maHeight [ vNum 1 ]
                             ]
                         , enUpdate
@@ -534,7 +534,7 @@ violinplot1 =
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "black" ]
+                            [ maFill [ black ]
                             , maHeight [ vNum 2 ]
                             ]
                         , enUpdate
@@ -548,7 +548,7 @@ violinplot1 =
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "black" ]
+                            [ maFill [ black ]
                             , maWidth [ vNum 2 ]
                             , maHeight [ vNum 8 ]
                             ]
@@ -836,7 +836,7 @@ scatter1 =
                             , maShape [ vStr "circle" ]
                             , maStrokeWidth [ vNum 2 ]
                             , maStroke [ vStr "#4682b4" ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             ]
                         ]
                     ]
@@ -936,7 +936,7 @@ contour1 =
                             [ maX [ vScale "xScale", vField (field "Horsepower") ]
                             , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
                             , maSize [ vNum 4 ]
-                            , maFill [ ifElse "points" [ vStr "black" ] [ vStr "transparent" ] ]
+                            , maFill [ ifElse "points" [ black ] [ transparent ] ]
                             ]
                         ]
                     ]
@@ -1012,7 +1012,7 @@ wheat1 =
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vStr "transparent" ]
+                            [ maFill [ transparent ]
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         , enUpdate

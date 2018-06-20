@@ -264,13 +264,13 @@ tree3 =
                 << mark Rect
                     [ mFrom [ srData (str "leaves") ]
                     , mEncode
-                        [ enEnter [ maStroke [ vStr "white" ] ]
+                        [ enEnter [ maStroke [ white ] ]
                         , enUpdate
                             [ maX [ vField (field "x0") ]
                             , maY [ vField (field "y0") ]
                             , maX2 [ vField (field "x1") ]
                             , maY2 [ vField (field "y1") ]
-                            , maFill [ vStr "transparent" ]
+                            , maFill [ transparent ]
                             ]
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
@@ -283,7 +283,7 @@ tree3 =
                             [ maFont (str "Helvetica Neue, Arial")
                             , maAlign [ hCenter ]
                             , maBaseline [ vMiddle ]
-                            , maFill [ vStr "black" ]
+                            , maFill [ black ]
                             , maText [ vField (field "name") ]
                             , maFontSize [ vScale "size", vField (field "depth") ]
                             , maFillOpacity [ vScale "opacity", vField (field "depth") ]
@@ -332,7 +332,7 @@ tree4 =
                             [ maX [ vField (field "x") ]
                             , maY [ vField (field "y") ]
                             , maSize [ vSignal "4 * datum.r * datum.r" ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 0.5 ]
                             ]
                         , enHover [ maStroke [ vStr "red" ], maStrokeWidth [ vNum 2 ] ]
@@ -379,7 +379,7 @@ tree5 =
                             , maEndAngle [ vField (field "a1") ]
                             , maInnerRadius [ vField (field "r0") ]
                             , maOuterRadius [ vField (field "r1") ]
-                            , maStroke [ vStr "white" ]
+                            , maStroke [ white ]
                             , maStrokeWidth [ vNum 0.5 ]
                             , maZIndex [ vNum 0 ]
                             ]

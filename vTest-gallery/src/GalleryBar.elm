@@ -227,7 +227,7 @@ barChart3 =
                         [ enEnter
                             [ maX [ vField (field "x2"), vOffset (vNum -5) ]
                             , maY [ vField (field "y"), vOffset (vObject [ vField (field "height"), vMultiply (vNum 0.5) ]) ]
-                            , maFill [ vStr "white" ]
+                            , maFill [ white ]
                             , maAlign [ hRight ]
                             , maBaseline [ vMiddle ]
                             , maText [ vField (field "datum.value") ]
