@@ -10120,31 +10120,33 @@ var _user$project$Vega$projectionLabel = function (proj) {
 	var _p69 = proj;
 	switch (_p69.ctor) {
 		case 'Albers':
-			return 'Albers';
+			return 'albers';
 		case 'AlbersUsa':
-			return 'AlbersUsa';
+			return 'albersUsa';
 		case 'AzimuthalEqualArea':
-			return 'AzimuthalEqualArea';
+			return 'azimuthalEqualArea';
 		case 'AzimuthalEquidistant':
-			return 'AzimuthalEquidistant';
+			return 'azimuthalEquidistant';
 		case 'ConicConformal':
-			return 'ConicConformal';
+			return 'conicConformal';
 		case 'ConicEqualArea':
-			return 'ConicEqualArea';
+			return 'conicEqualArea';
 		case 'ConicEquidistant':
-			return 'ConicEquidistant';
+			return 'conicEquidistant';
 		case 'Equirectangular':
-			return 'Equirectangular';
+			return 'equirectangular';
 		case 'Gnomonic':
-			return 'Gnomonic';
+			return 'gnomonic';
 		case 'Mercator':
-			return 'Mercator';
+			return 'mercator';
+		case 'NaturalEarth1':
+			return 'naturalEarth1';
 		case 'Orthographic':
-			return 'Orthographic';
+			return 'orthographic';
 		case 'Stereographic':
-			return 'Stereographic';
+			return 'stereographic';
 		case 'TransverseMercator':
-			return 'TransverseMercator';
+			return 'transverseMercator';
 		default:
 			return _user$project$Vega$strString(_p69._0);
 	}
@@ -19207,6 +19209,7 @@ var _user$project$Vega$prCustom = _user$project$Vega$Proj;
 var _user$project$Vega$TransverseMercator = {ctor: 'TransverseMercator'};
 var _user$project$Vega$Stereographic = {ctor: 'Stereographic'};
 var _user$project$Vega$Orthographic = {ctor: 'Orthographic'};
+var _user$project$Vega$NaturalEarth1 = {ctor: 'NaturalEarth1'};
 var _user$project$Vega$Mercator = {ctor: 'Mercator'};
 var _user$project$Vega$Gnomonic = {ctor: 'Gnomonic'};
 var _user$project$Vega$Equirectangular = {ctor: 'Equirectangular'};

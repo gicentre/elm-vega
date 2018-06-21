@@ -75,7 +75,7 @@ module Vega
         , PartitionProperty
         , PieProperty
         , PivotProperty
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, NaturalEarth1, Orthographic, Stereographic, TransverseMercator)
         , ProjectionProperty
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleDomain
@@ -8602,6 +8602,7 @@ type Projection
     | Equirectangular
     | Gnomonic
     | Mercator
+    | NaturalEarth1
     | Orthographic
     | Stereographic
     | TransverseMercator
@@ -8629,43 +8630,46 @@ projectionLabel : Projection -> String
 projectionLabel proj =
     case proj of
         Albers ->
-            "Albers"
+            "albers"
 
         AlbersUsa ->
-            "AlbersUsa"
+            "albersUsa"
 
         AzimuthalEqualArea ->
-            "AzimuthalEqualArea"
+            "azimuthalEqualArea"
 
         AzimuthalEquidistant ->
-            "AzimuthalEquidistant"
+            "azimuthalEquidistant"
 
         ConicConformal ->
-            "ConicConformal"
+            "conicConformal"
 
         ConicEqualArea ->
-            "ConicEqualArea"
+            "conicEqualArea"
 
         ConicEquidistant ->
-            "ConicEquidistant"
+            "conicEquidistant"
 
         Equirectangular ->
-            "Equirectangular"
+            "equirectangular"
 
         Gnomonic ->
-            "Gnomonic"
+            "gnomonic"
 
         Mercator ->
-            "Mercator"
+            "mercator"
+
+        NaturalEarth1 ->
+            "naturalEarth1"
 
         Orthographic ->
-            "Orthographic"
+            "orthographic"
 
         Stereographic ->
-            "Stereographic"
+            "stereographic"
 
         TransverseMercator ->
-            "TransverseMercator"
+            "transverseMercator"
 
         Proj str ->
             strString str

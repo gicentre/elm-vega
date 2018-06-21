@@ -10120,31 +10120,33 @@ var _user$project$Vega$projectionLabel = function (proj) {
 	var _p69 = proj;
 	switch (_p69.ctor) {
 		case 'Albers':
-			return 'Albers';
+			return 'albers';
 		case 'AlbersUsa':
-			return 'AlbersUsa';
+			return 'albersUsa';
 		case 'AzimuthalEqualArea':
-			return 'AzimuthalEqualArea';
+			return 'azimuthalEqualArea';
 		case 'AzimuthalEquidistant':
-			return 'AzimuthalEquidistant';
+			return 'azimuthalEquidistant';
 		case 'ConicConformal':
-			return 'ConicConformal';
+			return 'conicConformal';
 		case 'ConicEqualArea':
-			return 'ConicEqualArea';
+			return 'conicEqualArea';
 		case 'ConicEquidistant':
-			return 'ConicEquidistant';
+			return 'conicEquidistant';
 		case 'Equirectangular':
-			return 'Equirectangular';
+			return 'equirectangular';
 		case 'Gnomonic':
-			return 'Gnomonic';
+			return 'gnomonic';
 		case 'Mercator':
-			return 'Mercator';
+			return 'mercator';
+		case 'NaturalEarth1':
+			return 'naturalEarth1';
 		case 'Orthographic':
-			return 'Orthographic';
+			return 'orthographic';
 		case 'Stereographic':
-			return 'Stereographic';
+			return 'stereographic';
 		case 'TransverseMercator':
-			return 'TransverseMercator';
+			return 'transverseMercator';
 		default:
 			return _user$project$Vega$strString(_p69._0);
 	}
@@ -19207,6 +19209,7 @@ var _user$project$Vega$prCustom = _user$project$Vega$Proj;
 var _user$project$Vega$TransverseMercator = {ctor: 'TransverseMercator'};
 var _user$project$Vega$Stereographic = {ctor: 'Stereographic'};
 var _user$project$Vega$Orthographic = {ctor: 'Orthographic'};
+var _user$project$Vega$NaturalEarth1 = {ctor: 'NaturalEarth1'};
 var _user$project$Vega$Mercator = {ctor: 'Mercator'};
 var _user$project$Vega$Gnomonic = {ctor: 'Gnomonic'};
 var _user$project$Vega$Equirectangular = {ctor: 'Equirectangular'};
@@ -20268,7 +20271,7 @@ var _user$project$ProjectionTests$projTest = function () {
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$prScale(
-							_user$project$Vega$numSignal('projScale')),
+							_user$project$Vega$numSignal('parent.data === \'orthographic\' ? projScale * 2 : projScale')),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$prTranslate(
@@ -20446,68 +20449,76 @@ var _user$project$ProjectionTests$projTest = function () {
 										_0: 'gnomonic',
 										_1: {
 											ctor: '::',
-											_0: 'mercator',
+											_0: 'orthographic',
 											_1: {
 												ctor: '::',
-												_0: 'stereographic',
+												_0: 'mercator',
 												_1: {
 													ctor: '::',
-													_0: 'airy',
+													_0: 'stereographic',
 													_1: {
 														ctor: '::',
-														_0: 'armadillo',
+														_0: 'naturalEarth1',
 														_1: {
 															ctor: '::',
-															_0: 'baker',
+															_0: 'airy',
 															_1: {
 																ctor: '::',
-																_0: 'berghaus',
+																_0: 'armadillo',
 																_1: {
 																	ctor: '::',
-																	_0: 'bottomley',
+																	_0: 'baker',
 																	_1: {
 																		ctor: '::',
-																		_0: 'collignon',
+																		_0: 'berghaus',
 																		_1: {
 																			ctor: '::',
-																			_0: 'eckert1',
+																			_0: 'bottomley',
 																			_1: {
 																				ctor: '::',
-																				_0: 'guyou',
+																				_0: 'collignon',
 																				_1: {
 																					ctor: '::',
-																					_0: 'hammer',
+																					_0: 'eckert1',
 																					_1: {
 																						ctor: '::',
-																						_0: 'littrow',
+																						_0: 'guyou',
 																						_1: {
 																							ctor: '::',
-																							_0: 'mollweide',
+																							_0: 'hammer',
 																							_1: {
 																								ctor: '::',
-																								_0: 'wagner6',
+																								_0: 'littrow',
 																								_1: {
 																									ctor: '::',
-																									_0: 'wiechel',
+																									_0: 'mollweide',
 																									_1: {
 																										ctor: '::',
-																										_0: 'winkel3',
+																										_0: 'wagner6',
 																										_1: {
 																											ctor: '::',
-																											_0: 'interruptedSinusoidal',
+																											_0: 'wiechel',
 																											_1: {
 																												ctor: '::',
-																												_0: 'interruptedMollweide',
+																												_0: 'winkel3',
 																												_1: {
 																													ctor: '::',
-																													_0: 'interruptedMollweideHemispheres',
+																													_0: 'interruptedSinusoidal',
 																													_1: {
 																														ctor: '::',
-																														_0: 'polyhedralButterfly',
+																														_0: 'interruptedMollweide',
 																														_1: {
 																															ctor: '::',
-																															_0: 'peirceQuincuncial',
-																															_1: {ctor: '[]'}
+																															_0: 'interruptedMollweideHemispheres',
+																															_1: {
+																																ctor: '::',
+																																_0: 'polyhedralButterfly',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'peirceQuincuncial',
+																																	_1: {ctor: '[]'}
+																																}
+																															}
 																														}
 																													}
 																												}

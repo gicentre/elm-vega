@@ -23,8 +23,10 @@ projTest =
                             [ "azimuthalEquidistant"
                             , "conicConformal"
                             , "gnomonic"
+                            , "orthographic"
                             , "mercator"
                             , "stereographic"
+                            , "naturalEarth1"
                             , "airy"
                             , "armadillo"
                             , "baker"
@@ -81,7 +83,7 @@ projTest =
             projections
                 << projection "myProjection"
                     [ prType (prCustom (strSignal "parent.data"))
-                    , prScale (numSignal "projScale")
+                    , prScale (numSignal "parent.data === 'orthographic' ? projScale * 2 : projScale")
                     , prTranslate (numSignal "projTranslate")
                     ]
 
