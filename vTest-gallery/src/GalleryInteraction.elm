@@ -800,8 +800,8 @@ interaction5 =
     let
         table =
             dataFromColumns "clusters" []
-                << dataColumn "id" (daNums [ 0, 1, 2, 3, 4, 5 ])
-                << dataColumn "name" (daStrs [ "South Asia", "Europe & Cental Asia", "Sub-Saharan Africa", "America", "East Asia & Pacific", "Middle East & North Africa" ])
+                << dataColumn "id" (vNums [ 0, 1, 2, 3, 4, 5 ])
+                << dataColumn "name" (vStrs [ "South Asia", "Europe & Cental Asia", "Sub-Saharan Africa", "America", "East Asia & Pacific", "Middle East & North Africa" ])
 
         ds =
             dataSource

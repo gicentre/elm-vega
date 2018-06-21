@@ -9,8 +9,8 @@ helloWorld =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "label" (daStrs [ "Hello", "from", "elm-vega" ])
-                << dataColumn "x" (daNums [ 1, 2, 3 ])
+                << dataColumn "label" (vStrs [ "Hello", "from", "elm-vega" ])
+                << dataColumn "x" (vNums [ 1, 2, 3 ])
 
         ds =
             dataSource [ table [] ]

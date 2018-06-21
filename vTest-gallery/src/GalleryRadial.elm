@@ -17,8 +17,8 @@ circularChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "id" (daNums [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "field" (daNums [ 4, 6, 10, 3, 7, 8 ])
+                << dataColumn "id" (vNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "field" (vNums [ 4, 6, 10, 3, 7, 8 ])
 
         ds =
             dataSource

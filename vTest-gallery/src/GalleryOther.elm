@@ -299,16 +299,16 @@ timeline1 =
     let
         people =
             dataFromColumns "people" []
-                << dataColumn "label" (daStrs [ "Washington", "Adams", "Jefferson", "Madison", "Monroe" ])
-                << dataColumn "born" (daNums [ -7506057600000, -7389766800000, -7154586000000, -6904544400000, -6679904400000 ])
-                << dataColumn "died" (daNums [ -5366196000000, -4528285200000, -4528285200000, -4213184400000, -4370518800000 ])
-                << dataColumn "enter" (daNums [ -5701424400000, -5453884800000, -5327740800000, -5075280000000, -4822819200000 ])
-                << dataColumn "leave" (daNums [ -5453884800000, -5327740800000, -5075280000000, -4822819200000, -4570358400000 ])
+                << dataColumn "label" (vStrs [ "Washington", "Adams", "Jefferson", "Madison", "Monroe" ])
+                << dataColumn "born" (vNums [ -7506057600000, -7389766800000, -7154586000000, -6904544400000, -6679904400000 ])
+                << dataColumn "died" (vNums [ -5366196000000, -4528285200000, -4528285200000, -4213184400000, -4370518800000 ])
+                << dataColumn "enter" (vNums [ -5701424400000, -5453884800000, -5327740800000, -5075280000000, -4822819200000 ])
+                << dataColumn "leave" (vNums [ -5453884800000, -5327740800000, -5075280000000, -4822819200000, -4570358400000 ])
 
         events =
             dataFromColumns "events" [ JSON, parse [ ( "when", foDate "" ) ] ]
-                << dataColumn "name" (daStrs [ "Decl. of Independence", "U.S. Constitution", "Louisiana Purchase", "Monroe Doctrine" ])
-                << dataColumn "when" (daStrs [ "July 4, 1776", "3/4/1789", "April 30, 1803", "Dec 2, 1823" ])
+                << dataColumn "name" (vStrs [ "Decl. of Independence", "U.S. Constitution", "Louisiana Purchase", "Monroe Doctrine" ])
+                << dataColumn "when" (vStrs [ "July 4, 1776", "3/4/1789", "April 30, 1803", "Dec 2, 1823" ])
 
         ds =
             dataSource [ people [], events [] ]

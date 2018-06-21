@@ -75,8 +75,8 @@ areaTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -140,10 +140,10 @@ groupTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (daNums [ 5, -5, 60 ])
-                << dataColumn "y" (daNums [ 5, 70, 120 ])
-                << dataColumn "w" (daNums [ 100, 40, 100 ])
-                << dataColumn "h" (daNums [ 30, 40, 20 ])
+                << dataColumn "x" (vNums [ 5, -5, 60 ])
+                << dataColumn "y" (vNums [ 5, 70, 120 ])
+                << dataColumn "w" (vNums [ 100, 40, 100 ])
+                << dataColumn "h" (vNums [ 30, 40, 20 ])
 
         ds =
             dataSource [ table [] ]
@@ -243,8 +243,8 @@ lineTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]
@@ -609,8 +609,8 @@ trailTest =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "u" (daNums [ 1, 2, 3, 4, 5, 6 ])
-                << dataColumn "v" (daNums [ 28, 55, 42, 34, 36, 48 ])
+                << dataColumn "u" (vNums [ 1, 2, 3, 4, 5, 6 ])
+                << dataColumn "v" (vNums [ 28, 55, 42, 34, 36, 48 ])
 
         ds =
             dataSource [ table [] ]

@@ -12,8 +12,8 @@ geoTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "longitude" (daNums [ -3, 4, 4, -3, -3 ])
-                << dataColumn "latitude" (daNums [ 52, 52, 45, 45, 52 ])
+                << dataColumn "longitude" (vNums [ -3, 4, 4, -3, -3 ])
+                << dataColumn "latitude" (vNums [ 52, 52, 45, 45, 52 ])
 
         ds =
             dataSource

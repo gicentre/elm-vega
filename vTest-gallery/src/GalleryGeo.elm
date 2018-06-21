@@ -408,11 +408,11 @@ geo5 =
                     ]
                 , data "graticule" [] |> transform [ trGraticule [] ]
                 , dataFromRows "sphere" [] (dataRow [ ( "type", vStr "Sphere" ) ] [])
-                , dataFromColumns "labelOffsets"
+                , (dataFromColumns "labelOffsets" []
+                    << dataColumn "dx" (vNums [ -1, -1, 1, 1 ])
+                    << dataColumn "dy" (vNums [ -1, 1, -1, 1 ])
+                  )
                     []
-                    (dataColumn "dx" (daNums [ -1, -1, 1, 1 ]) <|
-                        dataColumn "dy" (daNums [ -1, 1, -1, 1 ]) []
-                    )
                 ]
 
         lo =

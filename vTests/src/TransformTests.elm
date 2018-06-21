@@ -12,9 +12,9 @@ packTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (daStrs [ "A", "B", "C", "D", "E" ])
-                << dataColumn "parent" (daStrs [ "", "A", "A", "C", "C" ])
-                << dataColumn "value" (daNums [ 0, 1, 0, 1, 1 ])
+                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (vStrs [ "", "A", "A", "C", "C" ])
+                << dataColumn "value" (vNums [ 0, 1, 0, 1, 1 ])
 
         ds =
             dataSource
@@ -69,8 +69,8 @@ stackTest1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "key" (daStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
-                << dataColumn "value" (daNums [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
+                << dataColumn "key" (vStrs [ "a", "a", "a", "b", "b", "b", "c", "c", "c" ])
+                << dataColumn "value" (vNums [ 5, 8, 3, 2, 7, 4, 1, 4, 6 ])
 
         ds =
             dataSource
@@ -311,9 +311,9 @@ nestTest1 =
     let
         table =
             dataFromColumns "tree" []
-                << dataColumn "id" (daStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                << dataColumn "job" (daStrs [ "Doctor", "Doctor", "Lawyer", "Lawyer", "Doctor", "Doctor", "Lawyer", "Lawyer" ])
-                << dataColumn "region" (daStrs [ "East", "East", "East", "East", "West", "West", "West", "West" ])
+                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "job" (vStrs [ "Doctor", "Doctor", "Lawyer", "Lawyer", "Doctor", "Doctor", "Lawyer", "Lawyer" ])
+                << dataColumn "region" (vStrs [ "East", "East", "East", "East", "West", "West", "West", "West" ])
 
         ds =
             dataSource

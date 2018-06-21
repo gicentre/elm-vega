@@ -17,8 +17,8 @@ barChart1 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (daStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                << dataColumn "amount" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
 
         ds =
             dataSource [ table [] ]
@@ -93,9 +93,9 @@ barChart2 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "x" (daNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
-                << dataColumn "y" (daNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
-                << dataColumn "c" (daNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
+                << dataColumn "x" (vNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
+                << dataColumn "y" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
+                << dataColumn "c" (vNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
 
         ds =
             dataSource
@@ -160,9 +160,9 @@ barChart3 =
     let
         table =
             dataFromColumns "table" []
-                << dataColumn "category" (daStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
-                << dataColumn "position" (daNums [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
-                << dataColumn "value" (daNums [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
+                << dataColumn "category" (vStrs [ "A", "A", "A", "A", "B", "B", "B", "B", "C", "C", "C", "C" ])
+                << dataColumn "position" (vNums [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3 ])
+                << dataColumn "value" (vNums [ 0.1, 0.6, 0.9, 0.4, 0.7, 0.2, 1.1, 0.8, 0.6, 0.1, 0.2, 0.7 ])
 
         ds =
             dataSource [ table [] ]
@@ -252,9 +252,9 @@ barChart4 =
     let
         table =
             dataFromColumns "tuples" []
-                << dataColumn "a" (daNums [ 0, 0, 0, 0, 1, 2, 2 ])
-                << dataColumn "b" (daStrs [ "a", "a", "b", "c", "b", "b", "c" ])
-                << dataColumn "c" (daNums [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
+                << dataColumn "a" (vNums [ 0, 0, 0, 0, 1, 2, 2 ])
+                << dataColumn "b" (vStrs [ "a", "a", "b", "c", "b", "b", "c" ])
+                << dataColumn "c" (vNums [ 6.3, 4.2, 6.8, 5.1, 4.4, 3.5, 6.2 ])
 
         agTable =
             table []
