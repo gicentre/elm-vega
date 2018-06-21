@@ -1,4 +1,4 @@
-# Specifying a Simple Bar Chart
+# Specifying a Bar Chart
 
 The purpose of this tutorial is to demonstrate how to build up Vega specifications with elm-vega.
 The result will be a simple bar chart, that while it could have been specifed more compactly with Vega-Lite, demonstrates some of the key principles for creating Vega specifications.
@@ -237,3 +237,156 @@ barchart =
 ```
 
 ![First bar chart in Vega](images/barchart1.png)
+
+## Step 6: Adding some dynamism
+
+To enliven the bar chart we can make the visualization change in response to interaction events.
+Firstly we can change the mark properties of the rectangles whenever the mouse pointer hovers over a mark.
+We can achieve this by adding `enHover` and `enUpdate` functions to the list of encodings:
+
+```elm
+mk =
+    marks
+        << mark Rect
+            [ mFrom [ srData (str "table") ]
+            , mEncode
+                [ enEnter
+                    [ maX [ vScale "xScale", vField (field "category") ]
+                    , maWidth [ vScale "xScale", vBand (num 1) ]
+                    , maY [ vScale "yScale", vField (field "amount") ]
+                    , maY2 [ vScale "yScale", vNum 0 ]
+                    ]
+                , enUpdate
+                    [ maFill [ vStr "steelblue" ] ]
+                , enHover
+                    [ maFill [ vStr "red" ] ]
+                ]
+            ]
+```
+
+When designing a visualization you can divide the encodings of a mark between those that happen only once when the mark is created and never change (placed in `enEnter`); those that may change after the mark has been initially displayed (placed in `enUpdate`) and those specific to hovering interaction (placed in `enHover`).
+In some circumstances the data backing a mark may be removed during the lifetime of a visualization, in which case mark properties may be placed inside `enExit` (for example by making a mark a light grey colour).
+
+## Step 7: Adding signals and a tooltip
+
+Finally we can add a tooltip that displays the data value represented by each bar by creating a new `Text` mark.
+To do this we need to create a _signal_.
+Signals act like variables but which update themselves whenever in incomeing signal or event changes.
+Here is one way of creating a tooltip signal that responds to mouse movement in and out of a `Rect` mark:
+
+```elm
+si =
+    signals
+        << signal "myTooltip"
+            [ siValue (vStr "")
+            , siOn
+                [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
+                , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                ]
+            ]
+```
+
+This signal, here called `myTooltip`, is initialised with an empty string.
+We allow it to respond to ineraction events with `siOn` and provide two event handlers, one to respond to the mouse pointer moving into a `Rect` mark by setting the signal's value to whatever data value (`datum`) the mark represents, and the other to reset the signal to an empty string when the ppinter moves off the mark.
+
+We can use this dynamic signal, which will contain the data item under the mouse pointer (if there is one) to change a new `Text` mark that displays the data value above the bar representing it:
+
+```elm
+<< mark Text
+    [ mEncode
+        [ enEnter
+            [ maAlign [ hCenter ]
+            , maBaseline [ vBottom ]
+            , maFill [ vStr "grey" ]
+            ]
+        , enUpdate
+            [ maX [ vScale "xScale", vSignal "myTooltip.category", vBand (num 0.5) ]
+            , maY [ vScale "yScale", vSignal "myTooltip.amount", vOffset (vNum -2) ]
+            , maText [ vSignal "myTooltip.amount" ]
+            ]
+        ]
+    ]
+```
+
+## The final specification
+
+Here is the final full specification that integrates the event handling code, signals and text marks:
+
+```elm
+barchart : Spec
+barchart =
+    let
+        ds =
+            let
+                table =
+                    dataFromColumns "table" []
+                        << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                        << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+            in
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "myTooltip"
+                    [ siValue (vStr "")
+                    , siOn
+                        [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScBand
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
+                    , scRange RaWidth
+                    , scPadding (num 0.05)
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scDomain (doData [ daDataset "table", daField (field "amount") ])
+                    , scRange RaHeight
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom []
+                << axis "yScale" SLeft []
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "category") ]
+                            , maWidth [ vScale "xScale", vBand (num 1) ]
+                            , maY [ vScale "yScale", vField (field "amount") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            ]
+                        , enUpdate
+                            [ maFill [ vStr "steelblue" ] ]
+                        , enHover
+                            [ maFill [ vStr "red" ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ mEncode
+                        [ enEnter
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
+                            , maFill [ vStr "grey" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vSignal "myTooltip.category", vBand (num 0.5) ]
+                            , maY [ vScale "yScale", vSignal "myTooltip.amount", vOffset (vNum -2) ]
+                            , maText [ vSignal "myTooltip.amount" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega [ width 400, height 200, padding 5, ds, si [], sc [], ax [], mk [] ]
+```
+
+![Interactive bar chart in Vega](images/barchart2.png)

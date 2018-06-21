@@ -9,25 +9,22 @@ barchart =
     let
         ds =
             let
-                -- table =
-                --     dataFromColumns "table" []
-                --         << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
-                --         << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
                 table =
-                    dataFromRows "table" []
-                        << dataRow [ ( "category", vStr "A" ), ( "amount", vNum 28 ) ]
-                        << dataRow [ ( "category", vStr "B" ), ( "amount", vNum 55 ) ]
-                        << dataRow [ ( "category", vStr "C" ), ( "amount", vNum 43 ) ]
-                        << dataRow [ ( "category", vStr "D" ), ( "amount", vNum 91 ) ]
-                        << dataRow [ ( "category", vStr "E" ), ( "amount", vNum 81 ) ]
-                        << dataRow [ ( "category", vStr "F" ), ( "amount", vNum 53 ) ]
-                        << dataRow [ ( "category", vStr "G" ), ( "amount", vNum 19 ) ]
-                        << dataRow [ ( "category", vStr "H" ), ( "amount", vNum 87 ) ]
+                    dataFromColumns "table" []
+                        << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                        << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
             in
             dataSource [ table [] ]
 
         si =
             signals
+                << signal "myTooltip"
+                    [ siValue (vStr "")
+                    , siOn
+                        [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                        ]
+                    ]
 
         sc =
             scales
@@ -58,6 +55,24 @@ barchart =
                             , maWidth [ vScale "xScale", vBand (num 1) ]
                             , maY [ vScale "yScale", vField (field "amount") ]
                             , maY2 [ vScale "yScale", vNum 0 ]
+                            ]
+                        , enUpdate
+                            [ maFill [ vStr "steelblue" ] ]
+                        , enHover
+                            [ maFill [ vStr "red" ] ]
+                        ]
+                    ]
+                << mark Text
+                    [ mEncode
+                        [ enEnter
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
+                            , maFill [ vStr "grey" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vSignal "myTooltip.category", vBand (num 0.5) ]
+                            , maY [ vScale "yScale", vSignal "myTooltip.amount", vOffset (vNum -2) ]
+                            , maText [ vSignal "myTooltip.amount" ]
                             ]
                         ]
                     ]

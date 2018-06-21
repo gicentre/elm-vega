@@ -16692,12 +16692,131 @@ var _user$project$Barchart$barchart = function () {
 											}
 										}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$enUpdate(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$maFill(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vStr('steelblue'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$enHover(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$maFill(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vStr('red'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}
 				},
-				_p0));
+				A3(
+					_user$project$Vega$mark,
+					_user$project$Vega$Text,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$maAlign(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$hCenter,
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$maBaseline(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vBottom,
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$maFill(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vStr('grey'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$enUpdate(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$maX(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vScale('xScale'),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$vSignal('myTooltip.category'),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$vBand(
+																_user$project$Vega$num(0.5)),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$maY(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vScale('yScale'),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$vSignal('myTooltip.amount'),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$vOffset(
+																	_user$project$Vega$vNum(-2)),
+																_1: {ctor: '[]'}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maText(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vSignal('myTooltip.amount'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					_p0)));
 	};
 	var ax = function (_p1) {
 		return _user$project$Vega$axes(
@@ -16776,166 +16895,153 @@ var _user$project$Barchart$barchart = function () {
 					},
 					_p2)));
 	};
-	var si = _user$project$Vega$signals;
-	var ds = function () {
-		var table = function (_p3) {
-			return A3(
-				_user$project$Vega$dataFromRows,
-				'table',
-				{ctor: '[]'},
-				A2(
-					_user$project$Vega$dataRow,
-					{
+	var si = function (_p3) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'myTooltip',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$siValue(
+						_user$project$Vega$vStr('')),
+					_1: {
 						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'category',
-							_1: _user$project$Vega$vStr('A')
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'amount',
-								_1: _user$project$Vega$vNum(28)
-							},
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_user$project$Vega$dataRow,
-						{
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'category',
-								_1: _user$project$Vega$vStr('B')
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: 'amount',
-									_1: _user$project$Vega$vNum(55)
-								},
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_user$project$Vega$dataRow,
+						_0: _user$project$Vega$siOn(
 							{
 								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: 'category',
-									_1: _user$project$Vega$vStr('C')
-								},
-								_1: {
-									ctor: '::',
-									_0: {
-										ctor: '_Tuple2',
-										_0: 'amount',
-										_1: _user$project$Vega$vNum(43)
-									},
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_user$project$Vega$dataRow,
-								{
-									ctor: '::',
-									_0: {
-										ctor: '_Tuple2',
-										_0: 'category',
-										_1: _user$project$Vega$vStr('D')
-									},
-									_1: {
-										ctor: '::',
-										_0: {
-											ctor: '_Tuple2',
-											_0: 'amount',
-											_1: _user$project$Vega$vNum(91)
-										},
-										_1: {ctor: '[]'}
-									}
-								},
-								A2(
-									_user$project$Vega$dataRow,
+								_0: A2(
+									_user$project$Vega$evHandler,
 									{
 										ctor: '::',
-										_0: {
-											ctor: '_Tuple2',
-											_0: 'category',
-											_1: _user$project$Vega$vStr('E')
-										},
-										_1: {
-											ctor: '::',
-											_0: {
-												ctor: '_Tuple2',
-												_0: 'amount',
-												_1: _user$project$Vega$vNum(81)
-											},
-											_1: {ctor: '[]'}
-										}
-									},
-									A2(
-										_user$project$Vega$dataRow,
-										{
-											ctor: '::',
-											_0: {
-												ctor: '_Tuple2',
-												_0: 'category',
-												_1: _user$project$Vega$vStr('F')
-											},
-											_1: {
-												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: 'amount',
-													_1: _user$project$Vega$vNum(53)
-												},
-												_1: {ctor: '[]'}
-											}
-										},
-										A2(
-											_user$project$Vega$dataRow,
+										_0: _user$project$Vega$esObject(
 											{
 												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: 'category',
-													_1: _user$project$Vega$vStr('G')
-												},
+												_0: _user$project$Vega$esMark(_user$project$Vega$Rect),
 												_1: {
 													ctor: '::',
-													_0: {
-														ctor: '_Tuple2',
-														_0: 'amount',
-														_1: _user$project$Vega$vNum(19)
-													},
+													_0: _user$project$Vega$esType(_user$project$Vega$MouseOver),
 													_1: {ctor: '[]'}
 												}
-											},
-											A2(
-												_user$project$Vega$dataRow,
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Vega$evUpdate('datum'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_user$project$Vega$evHandler,
+										{
+											ctor: '::',
+											_0: _user$project$Vega$esObject(
 												{
 													ctor: '::',
-													_0: {
-														ctor: '_Tuple2',
-														_0: 'category',
-														_1: _user$project$Vega$vStr('H')
-													},
+													_0: _user$project$Vega$esMark(_user$project$Vega$Rect),
 													_1: {
 														ctor: '::',
-														_0: {
-															ctor: '_Tuple2',
-															_0: 'amount',
-															_1: _user$project$Vega$vNum(87)
-														},
+														_0: _user$project$Vega$esType(_user$project$Vega$MouseOut),
 														_1: {ctor: '[]'}
 													}
-												},
-												_p3)))))))));
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Vega$evUpdate(''),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p3));
+	};
+	var ds = function () {
+		var table = function (_p4) {
+			return A3(
+				_user$project$Vega$dataFromColumns,
+				'table',
+				{ctor: '[]'},
+				A3(
+					_user$project$Vega$dataColumn,
+					'category',
+					_user$project$Vega$vStrs(
+						{
+							ctor: '::',
+							_0: 'A',
+							_1: {
+								ctor: '::',
+								_0: 'B',
+								_1: {
+									ctor: '::',
+									_0: 'C',
+									_1: {
+										ctor: '::',
+										_0: 'D',
+										_1: {
+											ctor: '::',
+											_0: 'E',
+											_1: {
+												ctor: '::',
+												_0: 'F',
+												_1: {
+													ctor: '::',
+													_0: 'G',
+													_1: {
+														ctor: '::',
+														_0: 'H',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					A3(
+						_user$project$Vega$dataColumn,
+						'amount',
+						_user$project$Vega$vNums(
+							{
+								ctor: '::',
+								_0: 28,
+								_1: {
+									ctor: '::',
+									_0: 55,
+									_1: {
+										ctor: '::',
+										_0: 43,
+										_1: {
+											ctor: '::',
+											_0: 91,
+											_1: {
+												ctor: '::',
+												_0: 81,
+												_1: {
+													ctor: '::',
+													_0: 53,
+													_1: {
+														ctor: '::',
+														_0: 19,
+														_1: {
+															ctor: '::',
+															_0: 87,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}),
+						_p4)));
 		};
 		return _user$project$Vega$dataSource(
 			{
@@ -17003,7 +17109,7 @@ var _user$project$Barchart$main = _elm_lang$core$Platform$program(
 			_1: _user$project$Barchart$elmToJS(_user$project$Barchart$mySpecs)
 		},
 		update: F2(
-			function (_p4, model) {
+			function (_p5, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
