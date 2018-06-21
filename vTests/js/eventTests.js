@@ -10608,10 +10608,18 @@ var _user$project$Vega$AxLabelBound = function (a) {
 	return {ctor: 'AxLabelBound', _0: a};
 };
 var _user$project$Vega$axLabelBound = _user$project$Vega$AxLabelBound;
+var _user$project$Vega$AxLabelBaseline = function (a) {
+	return {ctor: 'AxLabelBaseline', _0: a};
+};
+var _user$project$Vega$axLabelBaseline = _user$project$Vega$AxLabelBaseline;
 var _user$project$Vega$AxLabelAngle = function (a) {
 	return {ctor: 'AxLabelAngle', _0: a};
 };
 var _user$project$Vega$axLabelAngle = _user$project$Vega$AxLabelAngle;
+var _user$project$Vega$AxLabelAlign = function (a) {
+	return {ctor: 'AxLabelAlign', _0: a};
+};
+var _user$project$Vega$axLabelAlign = _user$project$Vega$AxLabelAlign;
 var _user$project$Vega$AxLabels = function (a) {
 	return {ctor: 'AxLabels', _0: a};
 };
@@ -15755,11 +15763,25 @@ var _user$project$Vega$axisProperty = function (ap) {
 				_0: 'labels',
 				_1: _user$project$Vega$booSpec(_p144._0)
 			};
+		case 'AxLabelAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Vega$hAlignLabel(_p144._0))
+			};
 		case 'AxLabelAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelAngle',
 				_1: _user$project$Vega$numSpec(_p144._0)
+			};
+		case 'AxLabelBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_user$project$Vega$vAlignLabel(_p144._0))
 			};
 		case 'AxLabelBound':
 			var _p147 = _p144._0;

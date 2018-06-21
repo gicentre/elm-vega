@@ -11381,10 +11381,18 @@ var _gicentre$elm_vega$Vega$AxLabelBound = function (a) {
 	return {ctor: 'AxLabelBound', _0: a};
 };
 var _gicentre$elm_vega$Vega$axLabelBound = _gicentre$elm_vega$Vega$AxLabelBound;
+var _gicentre$elm_vega$Vega$AxLabelBaseline = function (a) {
+	return {ctor: 'AxLabelBaseline', _0: a};
+};
+var _gicentre$elm_vega$Vega$axLabelBaseline = _gicentre$elm_vega$Vega$AxLabelBaseline;
 var _gicentre$elm_vega$Vega$AxLabelAngle = function (a) {
 	return {ctor: 'AxLabelAngle', _0: a};
 };
 var _gicentre$elm_vega$Vega$axLabelAngle = _gicentre$elm_vega$Vega$AxLabelAngle;
+var _gicentre$elm_vega$Vega$AxLabelAlign = function (a) {
+	return {ctor: 'AxLabelAlign', _0: a};
+};
+var _gicentre$elm_vega$Vega$axLabelAlign = _gicentre$elm_vega$Vega$AxLabelAlign;
 var _gicentre$elm_vega$Vega$AxLabels = function (a) {
 	return {ctor: 'AxLabels', _0: a};
 };
@@ -16528,11 +16536,25 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				_0: 'labels',
 				_1: _gicentre$elm_vega$Vega$booSpec(_p144._0)
 			};
+		case 'AxLabelAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$hAlignLabel(_p144._0))
+			};
 		case 'AxLabelAngle':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelAngle',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p144._0)
+			};
+		case 'AxLabelBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$Vega$vAlignLabel(_p144._0))
 			};
 		case 'AxLabelBound':
 			var _p147 = _p144._0;
