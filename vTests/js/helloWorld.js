@@ -9602,6 +9602,10 @@ var _user$project$Vega$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
 var _user$project$Vega$scPaddingInner = _user$project$Vega$SPaddingInner;
+var _user$project$Vega$SDomainImplicit = function (a) {
+	return {ctor: 'SDomainImplicit', _0: a};
+};
+var _user$project$Vega$scDomainImplicit = _user$project$Vega$SDomainImplicit;
 var _user$project$Vega$SAlign = function (a) {
 	return {ctor: 'SAlign', _0: a};
 };
@@ -16226,11 +16230,17 @@ var _user$project$Vega$scaleProperty = function (scaleProp) {
 				_0: 'base',
 				_1: _user$project$Vega$numSpec(_p195._0)
 			};
-		default:
+		case 'SAlign':
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
 				_1: _user$project$Vega$numSpec(_p195._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainImplicit',
+				_1: _user$project$Vega$booSpec(_p195._0)
 			};
 	}
 };

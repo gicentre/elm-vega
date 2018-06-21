@@ -13743,6 +13743,10 @@ var _gicentre$elm_vega$Vega$SPaddingInner = function (a) {
 	return {ctor: 'SPaddingInner', _0: a};
 };
 var _gicentre$elm_vega$Vega$scPaddingInner = _gicentre$elm_vega$Vega$SPaddingInner;
+var _gicentre$elm_vega$Vega$SDomainImplicit = function (a) {
+	return {ctor: 'SDomainImplicit', _0: a};
+};
+var _gicentre$elm_vega$Vega$scDomainImplicit = _gicentre$elm_vega$Vega$SDomainImplicit;
 var _gicentre$elm_vega$Vega$SAlign = function (a) {
 	return {ctor: 'SAlign', _0: a};
 };
@@ -20367,11 +20371,17 @@ var _gicentre$elm_vega$Vega$scaleProperty = function (scaleProp) {
 				_0: 'base',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p195._0)
 			};
-		default:
+		case 'SAlign':
 			return {
 				ctor: '_Tuple2',
 				_0: 'align',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p195._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainImplicit',
+				_1: _gicentre$elm_vega$Vega$booSpec(_p195._0)
 			};
 	}
 };
