@@ -124,8 +124,8 @@ scatterplot2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axOffset (vNum 5), axFormat "s", axTitle (strSignal "xField") ]
-                << axis "yScale" SLeft [ axOffset (vNum 5), axFormat "s", axTitle (strSignal "yField") ]
+                << axis "xScale" SBottom [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "xField") ]
+                << axis "yScale" SLeft [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "yField") ]
 
         mk =
             marks
@@ -288,7 +288,7 @@ scatterplot3 =
                     , axTickSize (num 0)
                     , axGrid true
                     , axDomain false
-                    , axFormat "$0.2f"
+                    , axFormat (str "$0.2f")
                     , axEncode
                         [ ( EDomain, [ enEnter [ maStroke [ transparent ] ] ] )
                         , ( ELabels

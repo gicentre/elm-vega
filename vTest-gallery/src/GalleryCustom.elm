@@ -300,7 +300,7 @@ custom2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount (num 5), axFormat "04d" ]
+                << axis "xScale" SBottom [ axTickCount (num 5), axFormat (str "04d") ]
                 << axis "yScale"
                     SRight
                     [ axGrid true
@@ -456,7 +456,7 @@ custom3 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Year"), axTickCount (num 15), axFormat "d" ]
+                << axis "xScale" SBottom [ axTitle (str "Year"), axTickCount (num 15), axFormat (str "d") ]
                 << axis "yScale" SLeft [ axTitle (str "Population"), axTitlePadding (vNum 10), axGrid true ]
 
         le =
@@ -569,7 +569,7 @@ custom4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Month"), axDomain false, axFormat "%b" ]
+                << axis "xScale" SBottom [ axTitle (str "Month"), axDomain false, axFormat (str "%b") ]
                 << axis "row"
                     SLeft
                     [ axTitle (str "Hour")
@@ -765,7 +765,7 @@ custom6 =
                     , tiLimit (num -1)
                     ]
                 , cfAxis AxAll
-                    [ axLabelFont "Ideal Sans, Avenir Next, Helvetica"
+                    [ axLabelFont (str "Ideal Sans, Avenir Next, Helvetica")
                     , axLabelFontSize (num 12)
                     ]
                 ]

@@ -1353,6 +1353,9 @@ more of the functions described below.
 
 # Signals, Triggers and Interaction Events
 
+Signals are the means by which dynamic data values may be passed around the visualization specification.
+These are commonly linked to interaction events that may vary at runtime.
+
 
 ## Signals
 
@@ -1439,7 +1442,7 @@ for details on the modelling of event streams.
 
 # Specifying Scales
 
-TODO: Add introductory text about specifying scales.
+Scales determine the mapping between data values and their visual expression (channels) such as color or position.
 
 @docs scales
 @docs scale
@@ -1474,7 +1477,7 @@ TODO: Add introductory text about specifying scales.
 
 ## Scale Domains
 
-TODO: Introductory text on scale domains.
+A scale domain describes the extent of data that inform a scaling.
 
 @docs scDomain
 @docs scDomainMax
@@ -1490,7 +1493,7 @@ TODO: Introductory text on scale domains.
 
 ## Scale Ranges
 
-TODO: Introductory text on scale ranges
+A scale range describes the extent of scaled values after transformation.
 
 @docs scRange
 @docs ScaleRange
@@ -2041,12 +2044,12 @@ type AxisProperty
     | AxSide Side
     | AxBandPosition Num
     | AxDomain Boo
-    | AxDomainColor String
+    | AxDomainColor Str
     | AxDomainWidth Num
     | AxEncode (List ( AxisElement, List EncodingProperty ))
-    | AxFormat String
+    | AxFormat Str
     | AxGrid Boo
-    | AxGridColor String
+    | AxGridColor Str
     | AxGridDash (List Value)
     | AxGridOpacity Num
     | AxGridScale String
@@ -2055,11 +2058,11 @@ type AxisProperty
     | AxLabelAlign HAlign
     | AxLabelAngle Num
     | AxLabelBaseline VAlign
-    | AxLabelBound (Maybe Float)
-    | AxLabelColor String
-    | AxLabelFlush (Maybe Float)
+    | AxLabelBound Num
+    | AxLabelColor Str
+    | AxLabelFlush Num
     | AxLabelFlushOffset Num
-    | AxLabelFont String
+    | AxLabelFont Str
     | AxLabelFontSize Num
     | AxLabelFontWeight Value
     | AxLabelLimit Num
@@ -2070,7 +2073,7 @@ type AxisProperty
     | AxOffset Value
     | AxPosition Value
     | AxTicks Boo
-    | AxTickColor String
+    | AxTickColor Str
       -- TODO: Need to account for temporal units and intervals
     | AxTickCount Num
     | AxTickExtra Boo
@@ -2082,8 +2085,8 @@ type AxisProperty
     | AxTitleAlign HAlign
     | AxTitleAngle Num
     | AxTitleBaseline VAlign
-    | AxTitleColor String
-    | AxTitleFont String
+    | AxTitleColor Str
+    | AxTitleFont Str
     | AxTitleFontSize Num
     | AxTitleFontWeight Value
     | AxTitleLimit Num
@@ -3542,7 +3545,7 @@ axDomain =
 {-| Specify the color of an axis domain line. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axDomainColor : String -> AxisProperty
+axDomainColor : Str -> AxisProperty
 axDomainColor =
     AxDomainColor
 
@@ -3586,7 +3589,7 @@ For date-time values, must be a legal
 For more details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axFormat : String -> AxisProperty
+axFormat : Str -> AxisProperty
 axFormat =
     AxFormat
 
@@ -3602,7 +3605,7 @@ axGrid =
 {-| Specify the color of an axis's grid lines. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axGridColor : String -> AxisProperty
+axGridColor : Str -> AxisProperty
 axGridColor =
     AxGridColor
 
@@ -3669,11 +3672,11 @@ type AxisType
 
 
 {-| Specify how or if labels should be hidden if they exceed the axis range. If the
-parameter is `Nothing`, no check for label size is made. A `Just` value specifies
+parameter is `NumNull`, no check for label size is made. A number specifies
 the permitted overlow in pixels that can be tolerated. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axLabelBound : Maybe Float -> AxisProperty
+axLabelBound : Num -> AxisProperty
 axLabelBound =
     AxLabelBound
 
@@ -3705,18 +3708,18 @@ axLabelBaseline =
 {-| Specify the color of an axis label. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axLabelColor : String -> AxisProperty
+axLabelColor : Str -> AxisProperty
 axLabelColor =
     AxLabelColor
 
 
 {-| Specify how labels at the beginning or end of the axis should be aligned
-with the scale range. If `Just` a pixel distance threshold, labels with
-anchor coordinates within the threshold distance for an axis end-point will be
-flush-adjusted. If `Nothing`, no flush alignment will be applied. For details see
+with the scale range. The parameter represents a pixel distance threshold. Labels
+with anchor coordinates within this threshold distance for an axis end-point will be
+flush-adjusted. If `NumNull`, no flush alignment will be applied. For details see
 the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axLabelFlush : Maybe Float -> AxisProperty
+axLabelFlush : Num -> AxisProperty
 axLabelFlush =
     AxLabelFlush
 
@@ -3735,7 +3738,7 @@ axLabelFlushOffset =
 {-| Specify the font name of an axis label. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axLabelFont : String -> AxisProperty
+axLabelFont : Str -> AxisProperty
 axLabelFont =
     AxLabelFont
 
@@ -3830,7 +3833,7 @@ axPosition =
 {-| Specify the color of an axis's ticks. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axTickColor : String -> AxisProperty
+axTickColor : Str -> AxisProperty
 axTickColor =
     AxTickColor
 
@@ -3933,7 +3936,7 @@ axTitleBaseline =
 {-| Specify the color of an axis's title. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axTitleColor : String -> AxisProperty
+axTitleColor : Str -> AxisProperty
 axTitleColor =
     AxTitleColor
 
@@ -3941,7 +3944,7 @@ axTitleColor =
 {-| Specify the font to be used for an axis's title. For details see the
 [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 -}
-axTitleFont : String -> AxisProperty
+axTitleFont : Str -> AxisProperty
 axTitleFont =
     AxTitleFont
 
@@ -8352,8 +8355,8 @@ paPadding =
     PaPadding
 
 
-{-| An explicit node radius to use in a packing transform. If null (the default),
-the radius of each leaf circle is derived from the field value. For details, see
+{-| Specify an explicit node radius to use in a packing transform. If `Nothing` (the
+default), the radius of each leaf circle is derived from the field value. For details, see
 the [Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
 -}
 paRadius : Maybe Field -> PackProperty
@@ -11527,7 +11530,7 @@ axisProperty ap =
             ( "domain", booSpec b )
 
         AxDomainColor s ->
-            ( "domainColor", JE.string s )
+            ( "domainColor", strSpec s )
 
         AxDomainWidth n ->
             ( "domainWidth", numSpec n )
@@ -11540,13 +11543,13 @@ axisProperty ap =
             ( "encode", JE.object (List.map enc elEncs) )
 
         AxFormat fmt ->
-            ( "format", JE.string fmt )
+            ( "format", strSpec fmt )
 
         AxGrid b ->
             ( "grid", booSpec b )
 
         AxGridColor s ->
-            ( "gridColor", JE.string s )
+            ( "gridColor", strSpec s )
 
         AxGridDash vals ->
             ( "gridDash", valRef vals )
@@ -11572,30 +11575,30 @@ axisProperty ap =
         AxLabelBaseline va ->
             ( "labelBaseline", JE.string (vAlignLabel va) )
 
-        AxLabelBound numOrNothing ->
-            case numOrNothing of
-                Nothing ->
+        AxLabelBound n ->
+            case n of
+                NumNull ->
                     ( "labelBound", JE.bool False )
 
-                Just x ->
-                    ( "labelBound", JE.float x )
+                _ ->
+                    ( "labelBound", numSpec n )
 
         AxLabelColor s ->
-            ( "labelColor", JE.string s )
+            ( "labelColor", strSpec s )
 
-        AxLabelFlush numOrNothing ->
-            case numOrNothing of
-                Nothing ->
+        AxLabelFlush n ->
+            case n of
+                NumNull ->
                     ( "labelFlush", JE.bool False )
 
-                Just x ->
-                    ( "labelFlush", JE.float x )
+                _ ->
+                    ( "labelFlush", numSpec n )
 
         AxLabelFlushOffset pad ->
             ( "labelFlushOffset", numSpec pad )
 
         AxLabelFont s ->
-            ( "labelFont", JE.string s )
+            ( "labelFont", strSpec s )
 
         AxLabelFontSize n ->
             ( "labelFontSize", numSpec n )
@@ -11628,7 +11631,7 @@ axisProperty ap =
             ( "ticks", booSpec b )
 
         AxTickColor s ->
-            ( "tickColor", JE.string s )
+            ( "tickColor", strSpec s )
 
         AxTickCount n ->
             ( "tickCount", numSpec n )
@@ -11661,10 +11664,10 @@ axisProperty ap =
             ( "titleBaseline", JE.string (vAlignLabel va) )
 
         AxTitleColor s ->
-            ( "titleColor", JE.string s )
+            ( "titleColor", strSpec s )
 
         AxTitleFont s ->
-            ( "titleFont", JE.string s )
+            ( "titleFont", strSpec s )
 
         AxTitleFontSize n ->
             ( "titleFontSize", numSpec n )

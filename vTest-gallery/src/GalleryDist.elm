@@ -629,7 +629,7 @@ window1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "$,d", axTickCount (num 5) ]
+                << axis "xScale" SBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
                 << axis "yScale" SLeft []
 
         mk =
@@ -727,7 +727,7 @@ window2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "$,d", axTickCount (num 5) ]
+                << axis "xScale" SBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
                 << axis "yScale" SLeft []
 
         mk =

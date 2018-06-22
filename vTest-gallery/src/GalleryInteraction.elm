@@ -430,7 +430,7 @@ interaction3 =
                 ]
 
         cf =
-            config [ cfAxis AxAll [ axTickColor "#ccc" ] ]
+            config [ cfAxis AxAll [ axTickColor (str "#ccc") ] ]
 
         ds =
             dataSource
@@ -639,8 +639,8 @@ interaction4 =
                 [ cfAxis AxAll
                     [ axDomain false
                     , axTickSize (num 3)
-                    , axTickColor "#888"
-                    , axLabelFont "Monaco, Courier New"
+                    , axTickColor (str "#888")
+                    , axLabelFont (str "Monaco, Courier New")
                     ]
                 ]
 
@@ -1306,7 +1306,7 @@ interaction7 =
                     ]
 
         ax =
-            axes << axis "yScale" SLeft [ axGrid true, axFormat "%" ]
+            axes << axis "yScale" SLeft [ axGrid true, axFormat (str "%") ]
 
         mk =
             marks
@@ -1465,14 +1465,14 @@ interaction8 =
 
         ax1 =
             axes
-                << axis "xScale" SBottom [ axTitle (str "x"), axLabelFlush (Just 1), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "xScale" SBottom [ axTitle (str "x"), axLabelFlush (num 1), axLabelOverlap OParity, axZIndex (num 1) ]
                 << axis "xScale" SBottom [ axGrid true, axGridScale "yScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
                 << axis "yScale" SLeft [ axTitle (str "y"), axLabelOverlap OParity, axZIndex (num 1) ]
                 << axis "yScale" SLeft [ axGrid true, axGridScale "xScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
 
         ax2 =
             axes
-                << axis "data_point_scale" SBottom [ axTitle (str "Number of points"), axLabelFlush (Just 1), axLabelOverlap OParity, axZIndex (num 1) ]
+                << axis "data_point_scale" SBottom [ axTitle (str "Number of points"), axLabelFlush (num 1), axLabelOverlap OParity, axZIndex (num 1) ]
                 << axis "data_point_scale" SBottom [ axGrid true, axGridScale "pi_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
                 << axis "pi_scale" SLeft [ axTitle (str "Estimated pi value"), axLabelOverlap OParity, axZIndex (num 1) ]
                 << axis "pi_scale" SLeft [ axGrid true, axGridScale "data_point_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]

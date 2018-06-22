@@ -408,10 +408,10 @@ areaChart4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat "d", axTickCount (num 15) ]
+                << axis "xScale" SBottom [ axFormat (str "d"), axTickCount (num 15) ]
                 << axis "yScale"
                     SRight
-                    [ axFormat "%"
+                    [ axFormat (str "%")
                     , axGrid true
                     , axDomain false
                     , axTickSize (num 12)

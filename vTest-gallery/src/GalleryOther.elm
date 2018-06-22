@@ -98,7 +98,7 @@ heatmap1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axDomain false, axTitle (str "Month"), axFormat "%b" ]
+                << axis "xScale" SBottom [ axDomain false, axTitle (str "Month"), axFormat (str "%b") ]
                 << axis "yScale"
                     SLeft
                     [ axDomain false
@@ -328,7 +328,7 @@ timeline1 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axFormat "%Y" ]
+            axes << axis "xScale" SBottom [ axFormat (str "%Y") ]
 
         mk =
             marks

@@ -465,7 +465,7 @@ barChart5 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axFormat "s" ]
+            axes << axis "xScale" SBottom [ axFormat (str "s") ]
     in
     toVega
         [ height 400, padding 5, ds, si [], topSc [], topMk [] ]
