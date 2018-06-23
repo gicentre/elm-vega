@@ -7292,7 +7292,7 @@
       {
         "name": "esFilter",
         "comment": " Specify the filter expressions that must evaluate to `True` in order for an\nevent to be captured. If multiple filters are provided they must all be satisfied\n(`and` operator) for the event to be captured. For more details see the\n[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).\n",
-        "type": "List Vega.Expression -> Vega.EventStreamProperty"
+        "type": "List String -> Vega.EventStreamProperty"
       },
       {
         "name": "esMark",
@@ -9107,7 +9107,7 @@
       {
         "name": "siUpdate",
         "comment": " Specify an update expression for a signal which may include other signals,\nin which case the signal will automatically update in response to upstream signal\nchanges, so long as its react property is not false. For details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals).\n",
-        "type": "Vega.Expression -> Vega.SignalProperty"
+        "type": "String -> Vega.SignalProperty"
       },
       {
         "name": "siValue",
@@ -9257,17 +9257,17 @@
       {
         "name": "tgInsert",
         "comment": " Specify an expression that evaluates to data objects to insert as triggers.\nA trigger enables dynmic updates to a visualization. Insert operations are only\napplicable to data sets, not marks. For details see the\n[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)\n",
-        "type": "Vega.Expression -> Vega.TriggerProperty"
+        "type": "String -> Vega.TriggerProperty"
       },
       {
         "name": "tgModifyValues",
         "comment": " Specify a data or mark modification trigger. The first parameter is an\nexpression that evaluates to data objects to modify and the second parameter an\nexpression that evaluates to an object of name-value pairs, indicating the field\nvalues that should be updated. For example:\n\nTODO: Check this is syntactically correct:\n\n    trigger \"myDragSignal\" [trModifyValues \"dragged\" \"{fx: x(), fy: y()}\"]\n\nwould set the `fx` and `fy` properties on mark items referenced by `myDragSignal`\nto the current mouse pointer position.\n\nModify operations are applicable to both data sets and marks. For details see the\n[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)\n\n",
-        "type": "Vega.Expression -> Vega.Expression -> Vega.TriggerProperty"
+        "type": "String -> String -> Vega.TriggerProperty"
       },
       {
         "name": "tgRemove",
         "comment": " Specify an expression that evaluates to data objects to remove.\nA trigger enables dynmic updates to a visualization. Remove operations are only\napplicable to data sets, not marks. For details see the\n[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)\n",
-        "type": "Vega.Expression -> Vega.TriggerProperty"
+        "type": "String -> Vega.TriggerProperty"
       },
       {
         "name": "tgRemoveAll",
@@ -9277,7 +9277,7 @@
       {
         "name": "tgToggle",
         "comment": " Specify an expression that evaluates to data objects to toggle. Toggled\nobjects are inserted or removed depending on whether they are already in the\ndata set. Toggle operations are only applicable to data sets, not marks. For\ndetails see the\n[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)\n",
-        "type": "Vega.Expression -> Vega.TriggerProperty"
+        "type": "String -> Vega.TriggerProperty"
       },
       {
         "name": "tiAnchor",
@@ -9542,12 +9542,12 @@
       {
         "name": "trFormula",
         "comment": " Extend a data object with new values according to the given\n[Vega expression](https://vega.github.io/vega/docs/expressions/). The second\nparameter is a new field name to give the result of the evaluated expression.\nThis version will reapply the formula if the data changes. To perform a one-off\nforumula calculation use [trFormulaInitOnly](#trFormulaInitOnly).\n\n    dataSource\n        [ data \"world\"\n            [ daUrl \"https://vega.github.io/vega/data/world-110m.json\"\n            , daFormat (topojsonFeature \"countries\")\n            ]\n            |> transform\n                [ trFormula \"geoCentroid('myProj', datum)\" \"myCentroid\" ]\n        ]\n\nFor details see the\n[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).\n\n",
-        "type": "Vega.Expression -> String -> Vega.Transform"
+        "type": "String -> String -> Vega.Transform"
       },
       {
         "name": "trFormulaInitOnly",
         "comment": " Extend a data object with new values according to the given\n[Vega expression](https://vega.github.io/vega/docs/expressions/). The second\nparameter is a new field name to give the result of the evaluated expression.\nThis version will apply the formula only once even if the data changes.\n\nFor details see the\n[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).\n\n",
-        "type": "Vega.Expression -> String -> Vega.Transform"
+        "type": "String -> String -> Vega.Transform"
       },
       {
         "name": "trGeoJson",
