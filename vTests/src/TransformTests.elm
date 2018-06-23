@@ -277,7 +277,7 @@ forceTest1 =
                                 [ foCenter (numSignal "cx") (numSignal "cy")
                                 , foCollide (numSignal "collideRadius") []
                                 , foNBody [ fpStrength (numSignal "nbodyStrength") ]
-                                , foLink "link-data" [ fpDistance (numSignal "linkDistance") ]
+                                , foLink (str "link-data") [ fpDistance (numSignal "linkDistance") ]
                                 ]
                             ]
                         ]

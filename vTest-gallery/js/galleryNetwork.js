@@ -13603,7 +13603,7 @@ var _gicentre$elm_vega$Vega$forceProperty = function (fp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'links',
-				_1: _elm_lang$core$Json_Encode$string(_p108._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p108._0)
 			};
 		case 'FpId':
 			return {
@@ -22821,7 +22821,7 @@ var _gicentre$elm_vega$GalleryNetwork$force1 = function () {
 																					ctor: '::',
 																					_0: A2(
 																						_gicentre$elm_vega$Vega$foLink,
-																						'link-data',
+																						_gicentre$elm_vega$Vega$str('link-data'),
 																						{
 																							ctor: '::',
 																							_0: _gicentre$elm_vega$Vega$fpDistance(

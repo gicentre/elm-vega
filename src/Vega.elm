@@ -2466,7 +2466,7 @@ type ForceProperty
     | FpTheta Num
     | FpDistanceMin Num
     | FpDistanceMax Num
-    | FpLinks String
+    | FpLinks Str
     | FpId Field
     | FpDistance Num
 
@@ -5792,7 +5792,7 @@ to relate link objects and node objects. Otherwise, the source and target fields
 should provide indices into the array of node objects. For details see the
 [Vega force transform documentation](https://vega.github.io/vega/docs/transforms/force/#link)
 -}
-foLink : String -> List ForceProperty -> Force
+foLink : Str -> List ForceProperty -> Force
 foLink links fps =
     FLink (FpLinks links :: fps)
 
@@ -10070,9 +10070,9 @@ topojsonMesh =
 {-| Convert a list of Vega specifications into a single JSON object that may be
 passed to Vega for graphics generation. Recommended practice for top-level
 properties that have more than a simple parameter is to create as a series of
-compact named functions (e.g. `ds` for the data source, `sc` for scales, `si` for
-signals, `ax` for axes, `mk` for marks etc.) and then pass them as a list to the
-function `toVega`. For example,
+compactly named functions (e.g. `ds` for the data source, `sc` for scales, `si`
+for signals, `ax` for axes, `mk` for marks etc.) and then pass them as a list to
+the function `toVega`. For example,
 
     helloWorld : Spec
     helloWorld =
@@ -10087,7 +10087,7 @@ function `toVega`. For example,
 
             sc =
                 scales
-                    << scale "xscale"
+                    << scale "xScale"
                         [ scDomain (doData [ daDataset "table", daField (field "x") ])
                         , scRange RaWidth
                         ]
@@ -10098,7 +10098,7 @@ function `toVega`. For example,
                         [ mFrom [ srData (str "table") ]
                         , mEncode
                             [ enEnter
-                                [ maX [ vScale "xscale", vField (field "x") ]
+                                [ maX [ vScale "xScale", vField (field "x") ]
                                 , maText [ vField (field "label") ]
                                 ]
                             ]
@@ -12572,7 +12572,7 @@ forceProperty fp =
             ( "distanceMax", numSpec n )
 
         FpLinks s ->
-            ( "links", JE.string s )
+            ( "links", strSpec s )
 
         FpId f ->
             ( "id", fieldSpec f )

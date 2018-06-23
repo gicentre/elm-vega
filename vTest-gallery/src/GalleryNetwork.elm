@@ -243,7 +243,7 @@ force1 =
                                 [ foCenter (numSignal "cx") (numSignal "cy")
                                 , foCollide (numSignal "nodeRadius") []
                                 , foNBody [ fpStrength (numSignal "nodeCharge") ]
-                                , foLink "link-data" [ fpDistance (numSignal "linkDistance") ]
+                                , foLink (str "link-data") [ fpDistance (numSignal "linkDistance") ]
                                 ]
                             ]
                         ]

@@ -14376,7 +14376,7 @@ var _gicentre$elm_vega$Vega$forceProperty = function (fp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'links',
-				_1: _elm_lang$core$Json_Encode$string(_p108._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p108._0)
 			};
 		case 'FpId':
 			return {
