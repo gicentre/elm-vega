@@ -2690,7 +2690,7 @@ type LegendProperty
     | LeSymbolStrokeWidth Num
     | LeSymbolType Symbol
       -- TODO: Need to account for temporal units and intervals for ticks
-    | LeTickCount Int
+    | LeTickCount Num
     | LeTitle Str
     | LeTitleAlign HAlign
     | LeTitleBaseline VAlign
@@ -6896,7 +6896,7 @@ leStrokeDash =
 {-| The desired number of tick values for quantitative legends. For more details
 see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leTickCount : Int -> LegendProperty
+leTickCount : Num -> LegendProperty
 leTickCount =
     LeTickCount
 
@@ -13015,7 +13015,7 @@ legendProperty lp =
             ( "symbolType", JE.string (symbolLabel s) )
 
         LeTickCount n ->
-            ( "tickCount", JE.int n )
+            ( "tickCount", numSpec n )
 
         LeTitlePadding val ->
             ( "titlePadding", valueSpec val )

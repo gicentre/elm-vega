@@ -16434,7 +16434,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'tickCount',
-				_1: _elm_lang$core$Json_Encode$int(_p152._0)
+				_1: _gicentre$elm_vega$Vega$numSpec(_p152._0)
 			};
 		case 'LeTitlePadding':
 			return {
