@@ -316,7 +316,7 @@ scatterplot3 =
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ vStr (markInterpolationLabel Cardinal) ]
+                            [ maInterpolate [ markInterpolationValue Cardinal ]
                             , maX [ vScale "xScale", vField (field "miles") ]
                             , maY [ vScale "yScale", vField (field "gas") ]
                             , maStroke [ vStr "#000" ]

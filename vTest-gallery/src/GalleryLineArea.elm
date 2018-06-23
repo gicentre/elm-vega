@@ -27,7 +27,7 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ siValue (vStr (markInterpolationLabel Linear))
+                    [ siValue (markInterpolationValue Linear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
@@ -97,7 +97,7 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ siValue (vStr (markInterpolationLabel Linear))
+                    [ siValue (markInterpolationValue Linear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
@@ -201,7 +201,7 @@ areaChart2 =
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
+                            [ maInterpolate [ markInterpolationValue Monotone ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maY [ vScale "yScale", vField (field "y0") ]
                             , maY2 [ vScale "yScale", vField (field "y1") ]
@@ -295,7 +295,7 @@ areaChart3 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ vStr (markInterpolationLabel Monotone) ]
+                            [ maInterpolate [ markInterpolationValue Monotone ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maFill [ vStr "steelblue" ]
                             ]

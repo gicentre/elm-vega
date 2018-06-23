@@ -2,7 +2,7 @@ module Vega
     exposing
         ( AggregateProperty
         , Anchor(End, Middle, Start)
-        , AutosizeProperty(AContent, AFit, AFitX, AFitY, ANone, APad, APadding, AResize)
+        , Autosize(AContent, AFit, AFitX, AFitY, ANone, APad, APadding, AResize)
         , AxisElement(EAxis, EDomain, EGrid, ELabels, ETicks, ETitle)
         , AxisProperty
         , AxisType(AxAll, AxBand, AxBottom, AxLeft, AxRight, AxTop, AxX, AxY)
@@ -120,9 +120,9 @@ module Vega
         , agGroupBy
         , agKey
         , agOps
-        , anSignal
-        , asSignal
+        , anchorSignal
         , autosize
+        , autosizeSignal
         , axBandPosition
         , axDomain
         , axDomainColor
@@ -252,15 +252,14 @@ module Vega
         , dataFromRows
         , dataRow
         , dataSource
+        , densityFunctionSignal
         , diKde
         , diMixture
         , diNormal
         , diUniform
-        , dirLabel
         , dnAs
         , dnExtent
         , dnMethod
-        , dnMethodAsSignal
         , dnSteps
         , doData
         , doNums
@@ -355,6 +354,8 @@ module Vega
         , grStep
         , grStepMajor
         , grStepMinor
+        , gridAlignSignal
+        , hAlignSignal
         , hCenter
         , hLeft
         , hRight
@@ -451,8 +452,9 @@ module Vega
         , leValues
         , leZIndex
         , legend
+        , legendOrientationSignal
         , legends
-        , linkShapeLabel
+        , linkShapeSignal
         , loAlign
         , loBounds
         , loColumns
@@ -545,8 +547,7 @@ module Vega
         , maYC
         , maZIndex
         , mark
-        , markInterpolationLabel
-        , markOrientationLabel
+        , markInterpolationValue
         , marks
         , nInterval
         , nTickCount
@@ -560,7 +561,9 @@ module Vega
         , ofSignal
         , on
         , opSignal
-        , orSignal
+        , orderSignal
+        , orientationSignal
+        , orientationValue
         , paAs
         , paField
         , paPadding
@@ -601,7 +604,7 @@ module Vega
         , prTranslate
         , prType
         , projection
-        , projectionLabel
+        , projectionValue
         , projections
         , ptAs
         , ptField
@@ -666,8 +669,10 @@ module Vega
         , strNull
         , strSignal
         , strSignals
-        , strokeCapLabel
-        , strokeJoinLabel
+        , strokeCapSignal
+        , strokeCapValue
+        , strokeJoinSignal
+        , strokeJoinValue
         , strs
         , symPath
         , symbolLabel
@@ -770,6 +775,7 @@ module Vega
         , trigger
         , true
         , utc
+        , vAlignSignal
         , vAlphabetic
         , vBand
         , vBoos
@@ -972,7 +978,7 @@ Functions for declaring the input data to a visualization.
 @docs soByField
 
 @docs Order
-@docs orSignal
+@docs orderSignal
 
 
 ## Data Formatting
@@ -1070,8 +1076,8 @@ more of the functions described below.
 @docs trDensity
 @docs dnExtent
 @docs dnMethod
-@docs dnMethodAsSignal
 @docs DensityFunction
+@docs densityFunctionSignal
 @docs dnSteps
 @docs dnAs
 
@@ -1216,7 +1222,7 @@ more of the functions described below.
 @docs lpShape
 @docs lpAs
 @docs LinkShape
-@docs linkShapeLabel
+@docs linkShapeSignal
 
 
 ### Angular Layouts
@@ -1523,7 +1529,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs projections
 @docs projection
 @docs Projection
-@docs projectionLabel
+@docs projectionValue
 @docs prCustom
 @docs prType
 @docs prClipAngle
@@ -1671,6 +1677,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs leZIndex
 @docs LegendType
 @docs LegendOrientation
+@docs legendOrientationSignal
 @docs enLegend
 @docs enTitle
 @docs enLabels
@@ -1683,7 +1690,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs tiAnchor
 @docs tiAngle
 @docs Anchor
-@docs anSignal
+@docs anchorSignal
 @docs tiBaseline
 @docs tiColor
 @docs tiEncode
@@ -1705,6 +1712,7 @@ A scale range describes the extent of scaled values after transformation.
 
 @docs layout
 @docs GridAlign
+@docs gridAlignSignal
 @docs grAlignRow
 @docs grAlignColumn
 @docs BoundsCalculation
@@ -1837,16 +1845,19 @@ list of sub-values.
 @docs enName
 @docs enInteractive
 @docs MarkInterpolation
-@docs markInterpolationLabel
+@docs markInterpolationValue
 @docs Orientation
-@docs markOrientationLabel
+@docs orientationSignal
+@docs orientationValue
 @docs Cursor
 @docs cursorLabel
 @docs HAlign
+@docs hAlignSignal
 @docs hLeft
 @docs hCenter
 @docs hRight
 @docs VAlign
+@docs vAlignSignal
 @docs vTop
 @docs vMiddle
 @docs vBottom
@@ -1855,11 +1866,12 @@ list of sub-values.
 @docs symPath
 @docs symbolLabel
 @docs StrokeCap
-@docs strokeCapLabel
+@docs strokeCapValue
+@docs strokeCapSignal
 @docs StrokeJoin
-@docs strokeJoinLabel
+@docs strokeJoinSignal
+@docs strokeJoinValue
 @docs TextDirection
-@docs dirLabel
 
 
 # Configuring Visualization Appearance
@@ -1923,8 +1935,8 @@ to the data and transform options described above.
 @docs padding
 @docs paddings
 @docs width
-@docs AutosizeProperty
-@docs asSignal
+@docs Autosize
+@docs autosizeSignal
 @docs background
 @docs encode
 
@@ -2196,7 +2208,7 @@ For details see the
 [Vega configuration documentation](https://vega.github.io/vega/docs/config/).
 -}
 type ConfigProperty
-    = CfAutosize (List AutosizeProperty)
+    = CfAutosize (List Autosize)
     | CfBackground Str
     | CfGroup (List MarkProperty)
     | CfEvents EventFilter (List EventType)
@@ -2304,14 +2316,12 @@ type alias DataTable =
 
 {-| A density transform property that specifies how a density transform is to be
 performed. Generated by the following functions: [dnExtent](#dnExtent), [dnMethod](#dnMethod),
-[dnMethodSignal](#dnMethodSignal), [dnSteps](#dnSteps) and [dnAs](#dnAs).
-For details see the
+[dnSteps](#dnSteps) and [dnAs](#dnAs). For details see the
 [Vega density transform documentation](https://vega.github.io/vega/docs/transforms/density/).
 -}
 type DensityProperty
     = DnExtent Num
     | DnMethod DensityFunction
-    | DnMethodAsSignal String
     | DnSteps Num
     | DnAs String String
 
@@ -2714,8 +2724,8 @@ type LinkPathProperty
     | LPSourceY Field
     | LPTargetX Field
     | LPTargetY Field
-    | LPOrient Str
-    | LPShape Str
+    | LPOrient Orientation
+    | LPShape LinkShape
     | LPAs String
 
 
@@ -2786,7 +2796,7 @@ type MarkProperty
     | MStrokeCap (List Value)
     | MStrokeDash (List Value)
     | MStrokeDashOffset (List Value)
-    | MStrokeJoin StrokeJoin
+    | MStrokeJoin (List Value)
     | MStrokeMiterLimit (List Value)
     | MCursor (List Value)
     | MHRef (List Value)
@@ -2825,7 +2835,7 @@ type MarkProperty
     | MdX (List Value)
     | MdY (List Value)
     | MEllipsis (List Value)
-    | MFont Str
+    | MFont (List Value)
     | MFontSize (List Value)
     | MFontWeight (List Value)
     | MFontStyle (List Value)
@@ -3441,16 +3451,16 @@ type Anchor
 {-| Indicates an anchor position is to be determined by a named signal.
 The signal should generate one of "start", "middle" or "end".
 -}
-anSignal : String -> Anchor
-anSignal =
+anchorSignal : String -> Anchor
+anchorSignal =
     AnchorSignal
 
 
 {-| Indicates an auto-sizing rule is to be determined by a named signal. For details see the
 [Vega autosize documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
 -}
-asSignal : String -> AutosizeProperty
-asSignal =
+autosizeSignal : String -> Autosize
+autosizeSignal =
     AutosizeSignal
 
 
@@ -3458,7 +3468,7 @@ asSignal =
 of padding, whether it should fill the parent container etc. For more details see the
 [Vega autosize documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
 -}
-type AutosizeProperty
+type Autosize
     = AContent
     | AFit
     | AFitX
@@ -3477,7 +3487,7 @@ type AutosizeProperty
         [ width 500, height 200, padding 5, autosize [ AFit, AResize ], ds, mk [] ]
 
 -}
-autosize : List AutosizeProperty -> ( VProperty, Spec )
+autosize : List Autosize -> ( VProperty, Spec )
 autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
@@ -4149,7 +4159,7 @@ type Case
 {-| Specify the default autosizing properties of view. For details, see the
 [Vega configuration documentation](https://vega.github.io/vega/docs/config/).
 -}
-cfAutosize : List AutosizeProperty -> ConfigProperty
+cfAutosize : List Autosize -> ConfigProperty
 cfAutosize =
     CfAutosize
 
@@ -5027,6 +5037,15 @@ For details see the
 type DensityFunction
     = PDF
     | CDF
+    | DensityFunctionSignal String
+
+
+{-| Specifies a density function based on the value in the named signal. For details see the
+[Vega density transform documentation](https://vega.github.io/vega/docs/transforms/density/).
+-}
+densityFunctionSignal : String -> DensityFunction
+densityFunctionSignal =
+    DensityFunctionSignal
 
 
 {-| Provide a text description of the visualization.
@@ -5075,8 +5094,8 @@ literal string to avoid problems of mistyping its name.
     TODO: XXX Provide example
 
 -}
-dirLabel : TextDirection -> String
-dirLabel dir =
+dirLabelx : TextDirection -> String
+dirLabelx dir =
     case dir of
         LeftToRight ->
             "ltr"
@@ -5121,17 +5140,6 @@ dnExtent =
 dnMethod : DensityFunction -> DensityProperty
 dnMethod =
     DnMethod
-
-
-{-| Specify the type of distribution to generate for a density transform based on
-a given signal. Compared to `dnMethod` this is less type-safe as it relies on the
-given signal generating a valid `DensityFunction` but it does allow dynamic change
-in density method. For details see the
-[Vega density transform documentation](https://vega.github.io/vega/docs/transforms/density/).
--}
-dnMethodAsSignal : String -> DensityProperty
-dnMethodAsSignal =
-    DnMethodAsSignal
 
 
 {-| Specify the number of uniformly spaced steps to take along an extent domain
@@ -6076,6 +6084,16 @@ type GridAlign
     | AlignNone
     | AlignRow GridAlign
     | AlignColumn GridAlign
+    | AlignSignal String
+
+
+{-| Specify a type of layout alignment based on the value of the given signal.
+For details of available alignment option names, see the
+[Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+-}
+gridAlignSignal : String -> GridAlign
+gridAlignSignal =
+    AlignSignal
 
 
 {-| Specify both the major and minor extents of a graticule to be the same values.
@@ -6155,27 +6173,36 @@ type HAlign
     = AlignCenter
     | AlignLeft
     | AlignRight
+    | HAlignSignal String
+
+
+{-| Indicates the horizontal alignment of some text based on the value of the
+given signal.
+-}
+hAlignSignal : String -> HAlign
+hAlignSignal =
+    HAlignSignal
 
 
 {-| Convenience function for indicating a central horiztonal alignment.
 -}
 hCenter : Value
 hCenter =
-    hAlignLabel AlignCenter |> vStr
+    vStr "center"
 
 
 {-| Convenience function for indicating a left horiztonal alignment.
 -}
 hLeft : Value
 hLeft =
-    hAlignLabel AlignLeft |> vStr
+    vStr "left"
 
 
 {-| Convenience function for indicating a right horiztonal alignment.
 -}
 hRight : Value
 hRight =
-    hAlignLabel AlignRight |> vStr
+    vStr "right"
 
 
 {-| A long-path hue-chroma-luminance color interpolation.
@@ -6601,6 +6628,16 @@ type LegendOrientation
     | Bottom
     | BottomLeft
     | None
+    | LegendOrientationSignal String
+
+
+{-| Specify a signal that indicates the position of a legend relative to the
+visualization it describes of options for the signal see the
+[Vega legend documentation](https://vega.github.io/vega/docs/legends/#orientation)
+-}
+legendOrientationSignal : String -> LegendOrientation
+legendOrientationSignal =
+    LegendOrientationSignal
 
 
 {-| Type of legend. `LSymbol` representing legends with discrete items and `LGradient`
@@ -6998,7 +7035,8 @@ leZIndex =
     LeZIndex
 
 
-{-| Shape of a line indicating path between nodes.
+{-| Shape of a line indicating path between nodes. For details see the `shape` parameter
+in the [Vega link path documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
 -}
 type LinkShape
     = LinkLine
@@ -7006,28 +7044,16 @@ type LinkShape
     | LinkCurve
     | LinkDiagonal
     | LinkOrthogonal
+    | LinkShapeSignal String
 
 
-{-| Convenience function to provide a textual version of a link shape used in a
-LinkPath transformation.
+{-| Specify the shape of a line indicating path between nodes using the given signal.
+For shape options see the `shape` parameter in the
+[Vega link path documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
 -}
-linkShapeLabel : LinkShape -> String
-linkShapeLabel ls =
-    case ls of
-        LinkLine ->
-            "line"
-
-        LinkArc ->
-            "arc"
-
-        LinkCurve ->
-            "curve"
-
-        LinkDiagonal ->
-            "diagonal"
-
-        LinkOrthogonal ->
-            "orthogonal"
+linkShapeSignal : String -> LinkShape
+linkShapeSignal =
+    LinkShapeSignal
 
 
 {-| Specify the alignment to apply to grid rows and columns in a grid layout.
@@ -7172,22 +7198,20 @@ lpAs =
     LPAs
 
 
-{-| Specify the orientation of a link path in a linkPath transformation. One of
-`vertical` (default), `horizontal` or `radial`. If a radial orientation is specified,
-x and y coordinate parameters will instead be interpreted as an angle (in radians)
-and radius, respectively. For details, see the
+{-| Specify the orientation of a link path in a linkPath transformation. If a radial
+orientation is specified, x and y coordinate parameters will be interpreted as an
+angle (in radians) and radius, respectively. For details, see the
 [Vega linkpath transform documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
 -}
-lpOrient : Str -> LinkPathProperty
+lpOrient : Orientation -> LinkPathProperty
 lpOrient =
     LPOrient
 
 
-{-| Specify the shape of a link path in a linkPath transformation. One of `line`
-(default), `arc`, `curve`, `diagonal`, or `orthogonal`. For details, see the
+{-| Specify the shape of a link path in a linkPath transformation. For details, see the
 [Vega linkpath transform documentation](https://vega.github.io/vega/docs/transforms/linkpath/)
 -}
-lpShape : Str -> LinkPathProperty
+lpShape : LinkShape -> LinkPathProperty
 lpShape =
     LPShape
 
@@ -7258,11 +7282,11 @@ luValues =
 
 {-| The horizontal alignment of a text or image mark. This may be specified directly,
 via a field, a signal or any other text-generating value. To guarantee valid
-alignment type names, use `hAlignLabel`. For example:
+alignment type names, use `hCenter`, `hLeft` etc. For example:
 
     << mark Text
         [ mEncode
-            [ enEnter [ maAlign [ vStr (hAlignLabel AlignCenter) ] ] ]
+            [ enEnter [ maAlign [ hCenter ] ] ]
         ]
 
 For further details see the
@@ -7295,11 +7319,11 @@ maAspect =
 
 {-| The vertical baseline of a text or image mark. This may be specified directly,
 via a field, a signal or any other text-generating value. To guarantee valid
-alignment type names, use `vAlignLabel`. For example:
+alignment type names, use `vTop`, `vMiddle` etc. For example:
 
         << mark Text
             [ mEncode
-                [ enEnter [ maBaseline [ vStr (vAlignLabel AlignTop) ] ] ]
+                [ enEnter [ maBaseline [ vTop ] ] ]
             ]
 
 For further details see the
@@ -7320,7 +7344,7 @@ maCornerRadius =
     MCornerRadius
 
 
-{-| The mouse cursor used over the mark. This may be specified directly, via a
+{-| The cursor to be displayed over a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid cursor type
 names, use `cursorLabel`. For example:
 
@@ -7439,7 +7463,7 @@ font definition. This may be specified directly, via a field, a signal or any ot
 string-generating value. For further details see the
 [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
 -}
-maFont : Str -> MarkProperty
+maFont : List Value -> MarkProperty
 maFont =
     MFont
 
@@ -7514,9 +7538,9 @@ maInnerRadius =
 
 {-| The interpolation style of a linear mark. This may be specified directly,
 via a field, a signal or any other text-generating value. To guarantee valid
-interpolation type names, use `markInterpolationLabel`. For example:
+interpolation type names, use `markInterpolation`. For example:
 
-    TODO: Add markInterpolationLabel example once API confirmed
+    TODO: Add markInterpolation example once API confirmed
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -7551,9 +7575,9 @@ maOpacity =
 defined by the x, y, and (y2 or height) properties; with a horizontal orientation,
 the y, x and (x2 or width) properties must be specified instead. The orientation
 may be specified directly, via a field, a signal or any other text-generating value.
-To guarantee valid orientation type names, use `markOrientationLabel`. For example:
+To guarantee valid orientation type names, use `orientation`. For example:
 
-    TODO: Add markOrientationLabel example once API confirmed
+    TODO: Add orientation example once API confirmed
 
 For further details see the
 [Vega area mark documentation](https://vega.github.io/vega/docs/marks/area/).
@@ -7648,66 +7672,69 @@ type MarkInterpolation
     | StepBefore
 
 
-{-| A convenience function for generating a text string representing a given mark
+{-| A convenience function for generating a value representing a given mark
 interpolation type. This can be used instead of specifying an interpolation type
 as a literal string to avoid problems of mistyping the interpolation name.
 
     signals
-       << signal "interp" [ siValue (markInterpolationLabel Linear |> Str) ]
+       << signal "interp" [ siValue (markInterpolationValue Linear) ]
 
 -}
-markInterpolationLabel : MarkInterpolation -> String
-markInterpolationLabel interp =
+markInterpolationValue : MarkInterpolation -> Value
+markInterpolationValue interp =
     case interp of
         Basis ->
-            "basis"
+            vStr "basis"
 
         Bundle ->
-            "bundle"
+            vStr "bundle"
 
         Cardinal ->
-            "cardinal"
+            vStr "cardinal"
 
         CatmullRom ->
-            "catmull-rom"
+            vStr "catmull-rom"
 
         Linear ->
-            "linear"
+            vStr "linear"
 
         Monotone ->
-            "monotone"
+            vStr "monotone"
 
         Natural ->
-            "natural"
+            vStr "natural"
 
         Stepwise ->
-            "step"
+            vStr "step"
 
         StepAfter ->
-            "step-after"
+            vStr "step-after"
 
         StepBefore ->
-            "step-before"
+            vStr "step-before"
 
 
-{-| A convenience function for generating a text string representing a given mark
+{-| A convenience function for generating a value representing a given mark
 orientation type. This can be used instead of specifying an orientation type as
 a literal string to avoid problems of mistyping its name.
 
     TODO: XXX Add example
 
 -}
-markOrientationLabel : Orientation -> String
-markOrientationLabel orient =
+orientationValue : Orientation -> Value
+orientationValue orient =
     case orient of
         Horizontal ->
-            "horizontal"
+            vStr "horizontal"
 
         Vertical ->
-            "vertical"
+            vStr "vertical"
 
         Radial ->
-            "radial"
+            vStr "radial"
+
+        OrientationSignal sig ->
+            vSignal sig
 
 
 {-| Create the marks used in the visualization.
@@ -7765,7 +7792,7 @@ maStroke =
 field, a signal or any other text-generating value. To guarantee valid stroke cap
 names, use `strokeCapLabel`. For example:
 
-    TODO: Add strokeCapLabel example once API confirmed
+    TODO: Add strokeCapValue example once API confirmed
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -7799,13 +7826,13 @@ maStrokeDashOffset =
 field, a signal or any other text-generating value. To guarantee valid stroke join
 names, use `strokeJoinLabel`. For example:
 
-    TODO: Add strokeJoinLabel example once API confirmed
+    TODO: Add strokeJoinValue example once API confirmed
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
 
 -}
-maStrokeJoin : StrokeJoin -> MarkProperty
+maStrokeJoin : List Value -> MarkProperty
 maStrokeJoin =
     MStrokeJoin
 
@@ -8251,12 +8278,12 @@ type Order
     | OrderSignal String
 
 
-{-| Indicates an orientation, for example, for a link path.
+{-| Indicates a sort order determined by a named signal for comparison operations.
+For details see the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
-type Orient
-    = OHorizontal
-    | OVertical
-    | ORadial
+orderSignal : String -> Order
+orderSignal =
+    OrderSignal
 
 
 {-| Indicates desired orientation of a mark, legend or link path (e.g. horizontally or vertically
@@ -8266,14 +8293,15 @@ type Orientation
     = Horizontal
     | Vertical
     | Radial
+    | OrientationSignal String
 
 
-{-| Indicates a sort order determined by a named signal for comparison operations.
+{-| Indicates an orientation for marks, legends and link paths as determined by a named signal.
 For details see the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
-orSignal : String -> Order
-orSignal =
-    OrderSignal
+orientationSignal : String -> Orientation
+orientationSignal =
+    OrientationSignal
 
 
 {-| Type of overlap strategy to be applied when there is not space to show all
@@ -8618,60 +8646,15 @@ projection name pps =
     (::) (JE.object (( "name", JE.string name ) :: List.map projectionProperty pps))
 
 
-{-| A convenience function for generating a string representing a given projection
-type. This can be used instead of specifying a projection type as a literal string
-to avoid problems of mistyping its name.
+{-| A convenience function for generating a value representing a given projection
+type.
 
     TODO: XXX Provide example
 
 -}
-projectionLabel : Projection -> String
-projectionLabel proj =
-    case proj of
-        Albers ->
-            "albers"
-
-        AlbersUsa ->
-            "albersUsa"
-
-        AzimuthalEqualArea ->
-            "azimuthalEqualArea"
-
-        AzimuthalEquidistant ->
-            "azimuthalEquidistant"
-
-        ConicConformal ->
-            "conicConformal"
-
-        ConicEqualArea ->
-            "conicEqualArea"
-
-        ConicEquidistant ->
-            "conicEquidistant"
-
-        Equirectangular ->
-            "equirectangular"
-
-        Gnomonic ->
-            "gnomonic"
-
-        Mercator ->
-            "mercator"
-
-        NaturalEarth1 ->
-            "naturalEarth1"
-
-        Orthographic ->
-            "orthographic"
-
-        Stereographic ->
-            "stereographic"
-
-        TransverseMercator ->
-            "transverseMercator"
-
-        Proj str ->
-            strString str
+projectionValue : Projection -> Value
+projectionValue proj =
+    vStr (projectionLabel proj)
 
 
 {-| Create the projections used to map geographic data onto a plane.
@@ -9490,26 +9473,37 @@ type StrokeCap
     = CButt
     | CRound
     | CSquare
+    | StrokeCapSignal String
 
 
-{-| A convenience function for generating a text string representing a given
-stroke cap type. This can be used instead of specifying an stroke cap type
-as a literal string to avoid problems of mistyping its name.
+{-| A convenience function for generating a value representing a given
+stroke cap type.
 
-    signal "strokeCap" [ siValue (str (strokeCapLabel CRound) )]
+    signal "strokeCap" [ siValue (strokeCapValue CRound) ]
 
 -}
-strokeCapLabel : StrokeCap -> String
-strokeCapLabel cap =
+strokeCapValue : StrokeCap -> Value
+strokeCapValue cap =
     case cap of
         CButt ->
-            "butt"
+            vStr "butt"
 
         CRound ->
-            "round"
+            vStr "round"
 
         CSquare ->
-            "square"
+            vStr "square"
+
+        StrokeCapSignal sig ->
+            vSignal sig
+
+
+{-| Specify a type of stroke cap with a given signal. Valid values generated by
+the signal are the strings `butt`, `round` and `square`.
+-}
+strokeCapSignal : String -> StrokeCap
+strokeCapSignal =
+    StrokeCapSignal
 
 
 {-| Type of stroke join.
@@ -9518,26 +9512,38 @@ type StrokeJoin
     = JMiter
     | JRound
     | JBevel
+    | StrokeJoinSignal String
+
+
+{-| Specify a type of stroke join with a given signal. Valid values generated by
+the signal are the strings `miter`, `round` and `bevel`.
+-}
+strokeJoinSignal : String -> StrokeJoin
+strokeJoinSignal =
+    StrokeJoinSignal
 
 
 {-| A convenience function for generating a text string representing a given
 stroke join type. This can be used instead of specifying an stroke join type
 as a literal string to avoid problems of mistyping its name.
 
-TODO: XXX Example
+    signal "strokeJoin" [ siValue (strokeJoinValue JBevel) ]
 
 -}
-strokeJoinLabel : StrokeJoin -> String
-strokeJoinLabel join =
-    case join of
+strokeJoinValue : StrokeJoin -> Value
+strokeJoinValue jn =
+    case jn of
         JMiter ->
-            "miter"
+            vStr "miter"
 
         JRound ->
-            "round"
+            vStr "round"
 
         JBevel ->
-            "bevel"
+            vStr "bevel"
+
+        StrokeJoinSignal sig ->
+            vSignal sig
 
 
 {-| Specify the criteria for sorting values in a stack transform.
@@ -10885,13 +10891,22 @@ type VAlign
     | AlignMiddle
     | AlignBottom
     | Alphabetic
+    | VAlignSignal String
+
+
+{-| Indicates the vertical alignment of some text based on the value of the
+given signal.
+-}
+vAlignSignal : String -> VAlign
+vAlignSignal =
+    VAlignSignal
 
 
 {-| Convenience function for indicating an alphabetic vertical alignment.
 -}
 vAlphabetic : Value
 vAlphabetic =
-    vAlignLabel Alphabetic |> vStr
+    vStr "alphabetic"
 
 
 {-| A value representing a band number or fraction of a band number. Band scales
@@ -10914,7 +10929,7 @@ vBoos =
 -}
 vBottom : Value
 vBottom =
-    vAlignLabel AlignBottom |> vStr
+    vStr "bottom"
 
 
 {-| A value representing a color.
@@ -10950,7 +10965,7 @@ vField =
 -}
 vMiddle : Value
 vMiddle =
-    vAlignLabel AlignMiddle |> vStr
+    vStr "middle"
 
 
 {-| A value representing a multiplication value modifier.
@@ -11145,7 +11160,7 @@ vStrs =
 -}
 vTop : Value
 vTop =
-    vAlignLabel AlignTop |> vStr
+    vStr "top"
 
 
 {-| A 'true' value.
@@ -11457,7 +11472,7 @@ anchorSpec anchor =
             JE.object [ signalReferenceProperty sigName ]
 
 
-autosizeProperty : AutosizeProperty -> LabelledSpec
+autosizeProperty : Autosize -> LabelledSpec
 autosizeProperty asCfg =
     case asCfg of
         APad ->
@@ -11563,13 +11578,13 @@ axisProperty ap =
             ( "labels", booSpec b )
 
         AxLabelAlign ha ->
-            ( "labelAlign", JE.string (hAlignLabel ha) )
+            ( "labelAlign", hAlignSpec ha )
 
         AxLabelAngle n ->
             ( "labelAngle", numSpec n )
 
         AxLabelBaseline va ->
-            ( "labelBaseline", JE.string (vAlignLabel va) )
+            ( "labelBaseline", vAlignSpec va )
 
         AxLabelBound n ->
             case n of
@@ -11651,13 +11666,13 @@ axisProperty ap =
             ( "title", strSpec s )
 
         AxTitleAlign ha ->
-            ( "titleAlign", JE.string (hAlignLabel ha) )
+            ( "titleAlign", hAlignSpec ha )
 
         AxTitleAngle n ->
             ( "titleAngle", numSpec n )
 
         AxTitleBaseline va ->
-            ( "titleBaseline", JE.string (vAlignLabel va) )
+            ( "titleBaseline", vAlignSpec va )
 
         AxTitleColor s ->
             ( "titleColor", strSpec s )
@@ -12148,8 +12163,8 @@ densityProperty dnp =
                 CDF ->
                     ( "method", JE.string "cdf" )
 
-        DnMethodAsSignal sigName ->
-            ( "method", JE.object [ ( "signal", JE.string sigName ) ] )
+                DensityFunctionSignal sig ->
+                    ( "method", JE.object [ ( "signal", JE.string sig ) ] )
 
         DnSteps n ->
             ( "steps", numSpec n )
@@ -12690,18 +12705,24 @@ gridAlignSpec ga =
         AlignColumn align ->
             JE.object [ ( "column", gridAlignSpec align ) ]
 
+        AlignSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
-hAlignLabel : HAlign -> String
-hAlignLabel align =
+
+hAlignSpec : HAlign -> Spec
+hAlignSpec align =
     case align of
         AlignLeft ->
-            "left"
+            JE.string "left"
 
         AlignCenter ->
-            "center"
+            JE.string "center"
 
         AlignRight ->
-            "right"
+            JE.string "right"
+
+        HAlignSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 imputeMethodLabel : ImputeMethod -> String
@@ -12885,11 +12906,11 @@ legendProperty lp =
         LeType lt ->
             ( "type", JE.string (legendTypeLabel lt) )
 
-        LeDirection ld ->
-            ( "direction", JE.string (markOrientationLabel ld) )
+        LeDirection o ->
+            ( "direction", orientationSpec o )
 
         LeOrient lo ->
-            ( "orient", JE.string (legendOrientLabel lo) )
+            ( "orient", legendOrientSpec lo )
 
         LeFill fScale ->
             ( "fill", JE.string fScale )
@@ -12949,7 +12970,7 @@ legendProperty lp =
             ( "strokeWidth", numSpec x )
 
         LeGradientDirection o ->
-            ( "gradientDirection", JE.string (markOrientationLabel o) )
+            ( "gradientDirection", orientationSpec o )
 
         LeGradientLabelLimit x ->
             ( "gradientLabelLimit", numSpec x )
@@ -12970,10 +12991,10 @@ legendProperty lp =
             ( "gradientStrokeWidth", numSpec x )
 
         LeLabelAlign ha ->
-            ( "labelAlign", JE.string (hAlignLabel ha) )
+            ( "labelAlign", hAlignSpec ha )
 
         LeLabelBaseline va ->
-            ( "labelBaseline", JE.string (vAlignLabel va) )
+            ( "labelBaseline", vAlignSpec va )
 
         LeLabelColor s ->
             ( "labelColor", strSpec s )
@@ -13024,10 +13045,10 @@ legendProperty lp =
             ( "title", strSpec t )
 
         LeTitleAlign ha ->
-            ( "titleAlign", JE.string (hAlignLabel ha) )
+            ( "titleAlign", hAlignSpec ha )
 
         LeTitleBaseline va ->
-            ( "titleBaseline", JE.string (vAlignLabel va) )
+            ( "titleBaseline", vAlignSpec va )
 
         LeTitleColor s ->
             ( "titleColor", strSpec s )
@@ -13051,35 +13072,38 @@ legendProperty lp =
             ( "zindex", numSpec n )
 
 
-legendOrientLabel : LegendOrientation -> String
-legendOrientLabel orient =
+legendOrientSpec : LegendOrientation -> Spec
+legendOrientSpec orient =
     case orient of
         Left ->
-            "left"
+            JE.string "left"
 
         TopLeft ->
-            "top-left"
+            JE.string "top-left"
 
         Top ->
-            "top"
+            JE.string "top"
 
         TopRight ->
-            "top-right"
+            JE.string "top-right"
 
         Right ->
-            "right"
+            JE.string "right"
 
         BottomRight ->
-            "bottom-right"
+            JE.string "bottom-right"
 
         Bottom ->
-            "bottom"
+            JE.string "bottom"
 
         BottomLeft ->
-            "bottom-left"
+            JE.string "bottom-left"
 
         None ->
-            "none"
+            JE.string "none"
+
+        LegendOrientationSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 legendTypeLabel : LegendType -> String
@@ -13107,14 +13131,36 @@ linkPathProperty lpProp =
         LPTargetY field ->
             ( "targetY", fieldSpec field )
 
-        LPOrient s ->
-            ( "orient", strSpec s )
+        LPOrient o ->
+            ( "orient", orientationSpec o )
 
-        LPShape s ->
-            ( "shape", strSpec s )
+        LPShape ls ->
+            ( "shape", linkShapeSpec ls )
 
         LPAs s ->
             ( "as", JE.string s )
+
+
+linkShapeSpec : LinkShape -> Spec
+linkShapeSpec ls =
+    case ls of
+        LinkLine ->
+            JE.string "line"
+
+        LinkArc ->
+            JE.string "arc"
+
+        LinkCurve ->
+            JE.string "curve"
+
+        LinkDiagonal ->
+            JE.string "diagonal"
+
+        LinkOrthogonal ->
+            JE.string "orthogonal"
+
+        LinkShapeSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 lookupProperty : LookupProperty -> LabelledSpec
@@ -13224,8 +13270,8 @@ markProperty mProp =
         MStrokeDashOffset vals ->
             ( "strokeDashOffset", valRef vals )
 
-        MStrokeJoin join ->
-            ( "strokeJoin", JE.string (strokeJoinLabel join) )
+        MStrokeJoin vals ->
+            ( "strokeJoin", valRef vals )
 
         MStrokeMiterLimit vals ->
             ( "strokeMiterLimit", valRef vals )
@@ -13322,8 +13368,8 @@ markProperty mProp =
         MEllipsis vals ->
             ( "ellipsis", valRef vals )
 
-        MFont s ->
-            ( "font", strSpec s )
+        MFont vals ->
+            ( "font", valRef vals )
 
         MFontSize vals ->
             ( "fontSize", valRef vals )
@@ -13526,8 +13572,24 @@ orderSpec order =
         Descend ->
             JE.string "descending"
 
-        OrderSignal sigName ->
-            JE.object [ signalReferenceProperty sigName ]
+        OrderSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+
+orientationSpec : Orientation -> Spec
+orientationSpec orient =
+    case orient of
+        Horizontal ->
+            JE.string "horizontal"
+
+        Vertical ->
+            JE.string "vertical"
+
+        Radial ->
+            JE.string "radial"
+
+        OrientationSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 overlapStrategyLabel : OverlapStrategy -> String
@@ -13639,14 +13701,53 @@ pivotProperty pp =
             ( "op", opSpec o )
 
 
-projectionSpec : Projection -> Spec
-projectionSpec proj =
-    case proj of
-        Proj str ->
-            strSpec str
+projectionLabel : Projection -> String
+projectionLabel pr =
+    case pr of
+        Albers ->
+            "albers"
 
-        _ ->
-            JE.string (projectionLabel proj)
+        AlbersUsa ->
+            "albersUsa"
+
+        AzimuthalEqualArea ->
+            "azimuthalEqualArea"
+
+        AzimuthalEquidistant ->
+            "azimuthalEquidistant"
+
+        ConicConformal ->
+            "conicConformal"
+
+        ConicEqualArea ->
+            "conicEqualArea"
+
+        ConicEquidistant ->
+            "conicEquidistant"
+
+        Equirectangular ->
+            "equirectangular"
+
+        Gnomonic ->
+            "gnomonic"
+
+        Mercator ->
+            "mercator"
+
+        NaturalEarth1 ->
+            "naturalEarth1"
+
+        Orthographic ->
+            "orthographic"
+
+        Stereographic ->
+            "stereographic"
+
+        TransverseMercator ->
+            "transverseMercator"
+
+        Proj s ->
+            strString s
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
@@ -13770,6 +13871,16 @@ projectionProperty projProp =
 
         PrTilt n ->
             ( "tilt", numSpec n )
+
+
+projectionSpec : Projection -> Spec
+projectionSpec proj =
+    case proj of
+        Proj str ->
+            strSpec str
+
+        _ ->
+            JE.string (projectionLabel proj)
 
 
 scaleDomainSpec : ScaleDomain -> Spec
@@ -14058,8 +14169,8 @@ stackOffsetSpec off =
         OfNormalize ->
             JE.string "normalize"
 
-        OfSignal sigName ->
-            JE.object [ signalReferenceProperty sigName ]
+        OfSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 stackProperty : StackProperty -> LabelledSpec
@@ -14195,7 +14306,7 @@ titleProperty tProp =
             ( "angle", numSpec n )
 
         TBaseline va ->
-            ( "baseline", JE.string (vAlignLabel va) )
+            ( "baseline", vAlignSpec va )
 
         TColor s ->
             ( "color", strSpec s )
@@ -14743,22 +14854,6 @@ triggerProperties trans =
             [ ( "modify", expressionSpec modExpr ), ( "values", expressionSpec valExpr ) ]
 
 
-vAlignLabel : VAlign -> String
-vAlignLabel align =
-    case align of
-        AlignTop ->
-            "top"
-
-        AlignMiddle ->
-            "middle"
-
-        AlignBottom ->
-            "bottom"
-
-        Alphabetic ->
-            "alphabetic"
-
-
 valIfElse : String -> List Value -> List Value -> List Spec -> List Spec
 valIfElse ex ifVals elseVals ifSpecs =
     case elseVals of
@@ -14767,6 +14862,25 @@ valIfElse ex ifVals elseVals ifSpecs =
 
         _ ->
             ifSpecs ++ [ valRef elseVals ]
+
+
+vAlignSpec : VAlign -> Spec
+vAlignSpec align =
+    case align of
+        AlignTop ->
+            JE.string "top"
+
+        AlignMiddle ->
+            JE.string "middle"
+
+        AlignBottom ->
+            JE.string "bottom"
+
+        Alphabetic ->
+            JE.string "alphabetic"
+
+        VAlignSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 valRef : List Value -> Spec

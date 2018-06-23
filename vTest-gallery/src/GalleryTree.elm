@@ -30,8 +30,8 @@ tree1 =
                     |> transform
                         [ trTreeLinks
                         , trLinkPath
-                            [ lpOrient (markOrientationLabel Horizontal |> str)
-                            , lpShape (strSignal "links")
+                            [ lpOrient Horizontal
+                            , lpShape (linkShapeSignal "links")
                             ]
                         ]
                 ]
@@ -120,8 +120,8 @@ tree2 =
                     |> transform
                         [ trTreeLinks
                         , trLinkPath
-                            [ lpShape (strSignal "links")
-                            , lpOrient (markOrientationLabel Radial |> str)
+                            [ lpShape (linkShapeSignal "links")
+                            , lpOrient Radial
                             , lpSourceX (field "source.radians")
                             , lpSourceY (field "source.radius")
                             , lpTargetX (field "target.radians")
@@ -280,7 +280,7 @@ tree3 =
                     , mInteractive false
                     , mEncode
                         [ enEnter
-                            [ maFont (str "Helvetica Neue, Arial")
+                            [ maFont [ vStr "Helvetica Neue, Arial" ]
                             , maAlign [ hCenter ]
                             , maBaseline [ vMiddle ]
                             , maFill [ black ]

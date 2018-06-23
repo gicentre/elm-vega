@@ -80,7 +80,7 @@ stackTest1 =
                             [ stField (field "value")
                             , stGroupBy [ field "key" ]
                             , stOffset (ofSignal "offset")
-                            , stSort [ ( fSignal "sortField", orSignal "sortOrder" ) ]
+                            , stSort [ ( fSignal "sortField", orderSignal "sortOrder" ) ]
                             ]
                         ]
                     |> on
@@ -293,7 +293,7 @@ forceTest1 =
                         ]
                     , mTransform
                         [ trLinkPath
-                            [ lpShape (str (linkShapeLabel LinkDiagonal))
+                            [ lpShape LinkDiagonal
                             , lpSourceX (field "datum.source.x")
                             , lpSourceY (field "datum.source.y")
                             , lpTargetX (field "datum.target.x")

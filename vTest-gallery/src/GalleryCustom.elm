@@ -335,7 +335,7 @@ custom2 =
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            [ maInterpolate [ markInterpolationValue Linear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maY2 [ vScale "yScale", vNum 0 ]
@@ -348,7 +348,7 @@ custom2 =
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            [ maInterpolate [ markInterpolationValue Linear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maStroke [ vStr "#ff7e79" ]
@@ -360,7 +360,7 @@ custom2 =
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Linear |> vStr ]
+                            [ maInterpolate [ markInterpolationValue Linear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maStroke [ black ]
@@ -393,7 +393,7 @@ custom2 =
                             , maText [ vField (field "datum.name") ]
                             , maAlign [ hCenter ]
                             , maFill [ black ]
-                            , maFont (str "Helvetica Neue, Arial")
+                            , maFont [ vStr "Helvetica Neue, Arial" ]
                             , maFontSize [ vNum 10 ]
                             , maFontStyle [ vStr "italic" ]
                             ]
@@ -496,7 +496,7 @@ custom3 =
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Monotone |> vStr ]
+                            [ maInterpolate [ markInterpolationValue Monotone ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "population") ]
                             , maStroke [ vStr "steelblue" ]
@@ -757,7 +757,7 @@ custom6 =
 
         cf =
             config
-                [ cfMark Text [ maFont (str "Ideal Sans, Avenir Next, Helvetica") ]
+                [ cfMark Text [ maFont [ vStr "Ideal Sans, Avenir Next, Helvetica" ] ]
                 , cfTitle
                     [ tiFont (str "Ideal Sans, Avenir Next, Helvetica")
                     , tiFontWeight (vNum 500)

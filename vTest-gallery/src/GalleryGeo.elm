@@ -15,7 +15,7 @@ import Vega exposing (..)
 
 standardProjections : Value
 standardProjections =
-    List.map projectionLabel
+    List.map projectionValue
         [ Albers
         , AlbersUsa
         , AzimuthalEqualArea
@@ -30,7 +30,7 @@ standardProjections =
         , Stereographic
         , TransverseMercator
         ]
-        |> vStrs
+        |> vValues
 
 
 geo1 : Spec
@@ -213,7 +213,7 @@ geo3 =
         si =
             signals
                 << signal "pType"
-                    [ siValue (projectionLabel Mercator |> vStr)
+                    [ siValue (projectionValue Mercator)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
@@ -375,11 +375,11 @@ geo5 =
                 [ data "projections"
                     [ daValue
                         (vStrs
-                            [ projectionLabel AzimuthalEquidistant
-                            , projectionLabel ConicConformal
-                            , projectionLabel Gnomonic
-                            , projectionLabel Mercator
-                            , projectionLabel Stereographic
+                            [ "azimuthalEquidistant"
+                            , "conicConformal"
+                            , "gnomonic"
+                            , "mercator"
+                            , "stereographic"
                             , "airy"
                             , "armadillo"
                             , "baker"
@@ -626,11 +626,11 @@ geo7 =
         si =
             signals
                 << signal "baseProjection"
-                    [ siValue (projectionLabel AzimuthalEqualArea |> vStr)
+                    [ siValue (projectionValue AzimuthalEqualArea)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "altProjection"
-                    [ siValue (projectionLabel Mercator |> vStr)
+                    [ siValue (projectionValue Mercator)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "baseColor"

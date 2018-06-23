@@ -220,7 +220,7 @@ density1 =
                         [ trDensity (diKde "points" (field "u") (numSignal "bandWidth"))
                             [ dnExtent (numSignal "domain('xScale')")
                             , dnSteps (numSignal "steps")
-                            , dnMethodAsSignal "method"
+                            , dnMethod (densityFunctionSignal "method")
                             ]
                         ]
                 , data "normal" []
@@ -228,7 +228,7 @@ density1 =
                         [ trDensity (diNormal (numSignal "data('summary')[0].mean") (numSignal "data('summary')[0].stdev"))
                             [ dnExtent (numSignal "domain('xScale')")
                             , dnSteps (numSignal "steps")
-                            , dnMethodAsSignal "method"
+                            , dnMethod (densityFunctionSignal "method")
                             ]
                         ]
                 ]

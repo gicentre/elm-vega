@@ -101,7 +101,7 @@ areaTest =
             signals
                 << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
-                    [ siValue (vStr (markInterpolationLabel Linear))
+                    [ siValue (markInterpolationValue Linear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
@@ -269,12 +269,12 @@ lineTest =
             signals
                 << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
-                    [ siValue (vStr (markInterpolationLabel Linear))
+                    [ siValue (markInterpolationValue Linear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
                 << signal "strokeWidth" [ siValue (vNum 4), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "strokeCap" [ siValue (vStr (strokeCapLabel CButt)), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ siValue (strokeCapValue CButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ siValue (vNums [ 1, 0 ]), siBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
@@ -472,7 +472,7 @@ ruleTest =
                 << signal "x2" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "y2" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "strokeWidth" [ siValue (vNum 4), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "strokeCap" [ siValue (vStr (strokeCapLabel CButt)), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ siValue (strokeCapValue CButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ siValue (vNums [ 1, 0 ]), siBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
@@ -590,7 +590,7 @@ textTest =
                             , maAngle [ vSignal "angle" ]
                             , maAlign [ vSignal "align" ]
                             , maBaseline [ vSignal "baseline" ]
-                            , maFont (strSignal "font")
+                            , maFont [ vSignal "font" ]
                             , maFontSize [ vSignal "fontSize" ]
                             , maFontStyle [ vSignal "fontStyle" ]
                             , maFontWeight [ vSignal "fontWeight" ]

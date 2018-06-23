@@ -127,7 +127,7 @@ bundle1 =
                     , mFrom [ srData (str "path") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationLabel Bundle |> vStr ]
+                            [ maInterpolate [ markInterpolationValue Bundle ]
                             , maStrokeWidth [ vNum 1.5 ]
                             ]
                         , enUpdate
@@ -259,7 +259,7 @@ force1 =
                         ]
                     , mTransform
                         [ trLinkPath
-                            [ lpShape (str (linkShapeLabel LinkLine))
+                            [ lpShape LinkLine
                             , lpSourceX (field "datum.source.x")
                             , lpSourceY (field "datum.source.y")
                             , lpTargetX (field "datum.target.x")
@@ -503,7 +503,7 @@ arc1 =
                             , lpTargetX (fExpr "max(datum.sourceNode.x, datum.targetNode.x)")
                             , lpSourceY (fExpr "0")
                             , lpTargetY (fExpr "0")
-                            , lpShape (linkShapeLabel LinkArc |> str)
+                            , lpShape LinkArc
                             ]
                         ]
                     ]
@@ -571,7 +571,7 @@ map1 =
                         [ trFilter (expr "hover && hover.iata == datum.origin")
                         , trLookup "airports" (field "iata") [ field "origin", field "destination" ] [ luAs [ "source", "target" ] ]
                         , trFilter (expr "datum.source && datum.target")
-                        , trLinkPath [ lpShape (strSignal "shape") ]
+                        , trLinkPath [ lpShape (linkShapeSignal "shape") ]
                         ]
                 ]
 
