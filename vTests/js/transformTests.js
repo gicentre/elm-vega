@@ -16225,7 +16225,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeGridAlign':
 			return {
@@ -16267,7 +16267,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'fillColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeOffset':
 			return {
@@ -16285,7 +16285,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeStrokeWidth':
 			return {
@@ -16328,7 +16328,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'gradientStrokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeGradientStrokeWidth':
 			return {
@@ -16354,13 +16354,13 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeLabelFont':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFont',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeLabelFontSize':
 			return {
@@ -16397,7 +16397,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolFillColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeSymbolOffset':
 			return {
@@ -16415,7 +16415,7 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolStrokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeSymbolStrokeWidth':
 			return {
@@ -16466,13 +16466,13 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeTitleFont':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleFont',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _user$project$Vega$strSpec(_p152._0)
 			};
 		case 'LeTitleFontSize':
 			return {

@@ -73,7 +73,7 @@ geo1 =
                     [ leFill "cScale"
                     , leOrient BottomRight
                     , leTitle (str "Unemployment")
-                    , leFormat "0.1%"
+                    , leFormat (str "0.1%")
                     , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
 
@@ -144,7 +144,7 @@ geo2 =
                     , leType LSymbol
                     , leSize "sizeScale"
                     , leFill "cScale"
-                    , leFormat ".1%"
+                    , leFormat (str ".1%")
                     , leClipHeight (num 16)
                     ]
 

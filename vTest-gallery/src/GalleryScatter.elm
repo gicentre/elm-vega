@@ -66,7 +66,7 @@ scatterplot1 =
                 << legend
                     [ leSize "sizeScale"
                     , leTitle (str "Acceleration")
-                    , leFormat "s"
+                    , leFormat (str "s")
                     , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
                     ]
 

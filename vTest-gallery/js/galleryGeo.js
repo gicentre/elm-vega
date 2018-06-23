@@ -16998,7 +16998,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'format',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeGridAlign':
 			return {
@@ -17040,7 +17040,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'fillColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeOffset':
 			return {
@@ -17058,7 +17058,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeStrokeWidth':
 			return {
@@ -17101,7 +17101,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'gradientStrokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeGradientStrokeWidth':
 			return {
@@ -17127,13 +17127,13 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeLabelFont':
 			return {
 				ctor: '_Tuple2',
 				_0: 'labelFont',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeLabelFontSize':
 			return {
@@ -17170,7 +17170,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolFillColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeSymbolOffset':
 			return {
@@ -17188,7 +17188,7 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolStrokeColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeSymbolStrokeWidth':
 			return {
@@ -17239,13 +17239,13 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleColor',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeTitleFont':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleFont',
-				_1: _elm_lang$core$Json_Encode$string(_p152._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p152._0)
 			};
 		case 'LeTitleFontSize':
 			return {
@@ -23110,7 +23110,8 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 									_0: _gicentre$elm_vega$Vega$leFill('cScale'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$leFormat('.1%'),
+										_0: _gicentre$elm_vega$Vega$leFormat(
+											_gicentre$elm_vega$Vega$str('.1%')),
 										_1: {
 											ctor: '::',
 											_0: _gicentre$elm_vega$Vega$leClipHeight(
@@ -23492,7 +23493,8 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 								_gicentre$elm_vega$Vega$str('Unemployment')),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$leFormat('0.1%'),
+								_0: _gicentre$elm_vega$Vega$leFormat(
+									_gicentre$elm_vega$Vega$str('0.1%')),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$leEncode(

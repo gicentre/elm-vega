@@ -2540,43 +2540,6 @@ type ImputeProperty
     | ImValue Value
 
 
-{-| Specify a list of fields by which to group values in an impute transform.
-Imputation is then performed on a per-group basis, such as a within group mean
-rather than global mean. For details see the
-[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
--}
-imGroupBy : List Field -> ImputeProperty
-imGroupBy =
-    ImGroupBy
-
-
-{-| Specify an additional collection of key values that should be considered for
-imputation as part of an impute transform. For details see the
-[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
--}
-imKeyVals : Value -> ImputeProperty
-imKeyVals =
-    ImKeyVals
-
-
-{-| Specify the imputation method to be used as part of an impute transform. If
-not specified the default `ByMean` method will be used. For details see the
-[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
--}
-imMethod : ImputeMethod -> ImputeProperty
-imMethod =
-    ImMethod
-
-
-{-| Specify the value to use when an imputation method is set to `ByValue` in an
-impute transform. For details see the
-[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
--}
-imValue : Value -> ImputeProperty
-imValue =
-    ImValue
-
-
 {-| The imputation method to be used when assigning values to missing data values.
 `ByValue` allows a specific value to be assigned for missing values while the other
 methods will calculate a value based on a group of existing values. For details see the
@@ -2692,38 +2655,38 @@ type LegendProperty
     | LeStroke String
     | LeStrokeDash String
     | LeEncode (List LegendEncoding)
-    | LeFormat String
+    | LeFormat Str
     | LeGridAlign GridAlign
     | LeClipHeight Num
     | LeColumns Num
     | LeColumnPadding Num
     | LeRowPadding Num
     | LeCornerRadius Num
-    | LeFillColor String
+    | LeFillColor Str
     | LeOffset Value
     | LePadding Value
-    | LeStrokeColor String
+    | LeStrokeColor Str
     | LeStrokeWidth Num
     | LeGradientDirection Orientation
     | LeGradientLabelLimit Num
     | LeGradientLabelOffset Num
     | LeGradientLength Num
     | LeGradientThickness Num
-    | LeGradientStrokeColor String
+    | LeGradientStrokeColor Str
     | LeGradientStrokeWidth Num
     | LeLabelAlign HAlign
     | LeLabelBaseline VAlign
-    | LeLabelColor String
-    | LeLabelFont String
+    | LeLabelColor Str
+    | LeLabelFont Str
     | LeLabelFontSize Num
     | LeLabelFontWeight Value
     | LeLabelLimit Num
     | LeLabelOffset Num
     | LeLabelOverlap OverlapStrategy
-    | LeSymbolFillColor String
+    | LeSymbolFillColor Str
     | LeSymbolOffset Num
     | LeSymbolSize Num
-    | LeSymbolStrokeColor String
+    | LeSymbolStrokeColor Str
     | LeSymbolStrokeWidth Num
     | LeSymbolType Symbol
       -- TODO: Need to account for temporal units and intervals for ticks
@@ -2731,8 +2694,8 @@ type LegendProperty
     | LeTitle Str
     | LeTitleAlign HAlign
     | LeTitleBaseline VAlign
-    | LeTitleColor String
-    | LeTitleFont String
+    | LeTitleColor Str
+    | LeTitleFont Str
     | LeTitleFontSize Num
     | LeTitleFontWeight Value
     | LeTitleLimit Num
@@ -6281,6 +6244,43 @@ iMonth =
     IMonth
 
 
+{-| Specify a list of fields by which to group values in an impute transform.
+Imputation is then performed on a per-group basis, such as a within group mean
+rather than global mean. For details see the
+[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
+-}
+imGroupBy : List Field -> ImputeProperty
+imGroupBy =
+    ImGroupBy
+
+
+{-| Specify an additional collection of key values that should be considered for
+imputation as part of an impute transform. For details see the
+[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
+-}
+imKeyVals : Value -> ImputeProperty
+imKeyVals =
+    ImKeyVals
+
+
+{-| Specify the imputation method to be used as part of an impute transform. If
+not specified the default `ByMean` method will be used. For details see the
+[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
+-}
+imMethod : ImputeMethod -> ImputeProperty
+imMethod =
+    ImMethod
+
+
+{-| Specify the value to use when an imputation method is set to `ByValue` in an
+impute transform. For details see the
+[Vega impute transform documentation](https://vega.github.io/vega/docs/transforms/impute/).
+-}
+imValue : Value -> ImputeProperty
+imValue =
+    ImValue
+
+
 {-| Determines if autocomplete should be turned on or off for intput elements
 that support it. For more details see the
 [Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
@@ -6550,7 +6550,7 @@ leFill =
 details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leFillColor : String -> LegendProperty
+leFillColor : Str -> LegendProperty
 leFillColor =
     LeFillColor
 
@@ -6562,7 +6562,7 @@ date-time values this should be a
 For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leFormat : String -> LegendProperty
+leFormat : Str -> LegendProperty
 leFormat =
     LeFormat
 
@@ -6639,7 +6639,7 @@ leGradientLabelOffset =
 details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leGradientStrokeColor : String -> LegendProperty
+leGradientStrokeColor : Str -> LegendProperty
 leGradientStrokeColor =
     LeGradientStrokeColor
 
@@ -6700,7 +6700,7 @@ leLabelBaseline =
 {-| Specify the text color for legend labels. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leLabelColor : String -> LegendProperty
+leLabelColor : Str -> LegendProperty
 leLabelColor =
     LeLabelColor
 
@@ -6708,7 +6708,7 @@ leLabelColor =
 {-| Specify the text font for legend labels. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leLabelFont : String -> LegendProperty
+leLabelFont : Str -> LegendProperty
 leLabelFont =
     LeLabelFont
 
@@ -6823,7 +6823,7 @@ leStroke =
 {-| Specify the border color of an enclosing legend rectangle. For more details
 see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leStrokeColor : String -> LegendProperty
+leStrokeColor : Str -> LegendProperty
 leStrokeColor =
     LeStrokeColor
 
@@ -6839,7 +6839,7 @@ leStrokeWidth =
 {-| Specify the fill color for legend symbols. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leSymbolFillColor : String -> LegendProperty
+leSymbolFillColor : Str -> LegendProperty
 leSymbolFillColor =
     LeSymbolFillColor
 
@@ -6864,7 +6864,7 @@ leSymbolSize =
 {-| Specify the border color for legend symbols. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leSymbolStrokeColor : String -> LegendProperty
+leSymbolStrokeColor : Str -> LegendProperty
 leSymbolStrokeColor =
     LeSymbolStrokeColor
 
@@ -6928,7 +6928,7 @@ leTitleBaseline =
 {-| Specify the text color for a legend title. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leTitleColor : String -> LegendProperty
+leTitleColor : Str -> LegendProperty
 leTitleColor =
     LeTitleColor
 
@@ -6936,7 +6936,7 @@ leTitleColor =
 {-| Specify the text font for a legend title. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
-leTitleFont : String -> LegendProperty
+leTitleFont : Str -> LegendProperty
 leTitleFont =
     LeTitleFont
 
@@ -12912,8 +12912,8 @@ legendProperty lp =
         LeEncode les ->
             ( "encode", JE.object (List.map legendEncodingProperty les) )
 
-        LeFormat f ->
-            ( "format", JE.string f )
+        LeFormat s ->
+            ( "format", strSpec s )
 
         LeGridAlign ga ->
             ( "gridAlign", gridAlignSpec ga )
@@ -12933,8 +12933,8 @@ legendProperty lp =
         LeCornerRadius x ->
             ( "cornerRadius", numSpec x )
 
-        LeFillColor c ->
-            ( "fillColor", JE.string c )
+        LeFillColor s ->
+            ( "fillColor", strSpec s )
 
         LeOffset val ->
             ( "offset", valueSpec val )
@@ -12942,8 +12942,8 @@ legendProperty lp =
         LePadding val ->
             ( "padding", valueSpec val )
 
-        LeStrokeColor c ->
-            ( "strokeColor", JE.string c )
+        LeStrokeColor s ->
+            ( "strokeColor", strSpec s )
 
         LeStrokeWidth x ->
             ( "strokeWidth", numSpec x )
@@ -12963,8 +12963,8 @@ legendProperty lp =
         LeGradientThickness x ->
             ( "gradientThickness", numSpec x )
 
-        LeGradientStrokeColor c ->
-            ( "gradientStrokeColor", JE.string c )
+        LeGradientStrokeColor s ->
+            ( "gradientStrokeColor", strSpec s )
 
         LeGradientStrokeWidth x ->
             ( "gradientStrokeWidth", numSpec x )
@@ -12975,11 +12975,11 @@ legendProperty lp =
         LeLabelBaseline va ->
             ( "labelBaseline", JE.string (vAlignLabel va) )
 
-        LeLabelColor c ->
-            ( "labelColor", JE.string c )
+        LeLabelColor s ->
+            ( "labelColor", strSpec s )
 
-        LeLabelFont f ->
-            ( "labelFont", JE.string f )
+        LeLabelFont s ->
+            ( "labelFont", strSpec s )
 
         LeLabelFontSize x ->
             ( "labelFontSize", numSpec x )
@@ -12996,8 +12996,8 @@ legendProperty lp =
         LeLabelOverlap os ->
             ( "labelOverlap", JE.string (overlapStrategyLabel os) )
 
-        LeSymbolFillColor c ->
-            ( "symbolFillColor", JE.string c )
+        LeSymbolFillColor s ->
+            ( "symbolFillColor", strSpec s )
 
         LeSymbolOffset x ->
             ( "symbolOffset", numSpec x )
@@ -13005,8 +13005,8 @@ legendProperty lp =
         LeSymbolSize x ->
             ( "symbolSize", numSpec x )
 
-        LeSymbolStrokeColor c ->
-            ( "symbolStrokeColor", JE.string c )
+        LeSymbolStrokeColor s ->
+            ( "symbolStrokeColor", strSpec s )
 
         LeSymbolStrokeWidth x ->
             ( "symbolStokeWidth", numSpec x )
@@ -13029,11 +13029,11 @@ legendProperty lp =
         LeTitleBaseline va ->
             ( "titleBaseline", JE.string (vAlignLabel va) )
 
-        LeTitleColor c ->
-            ( "titleColor", JE.string c )
+        LeTitleColor s ->
+            ( "titleColor", strSpec s )
 
-        LeTitleFont f ->
-            ( "titleFont", JE.string f )
+        LeTitleFont s ->
+            ( "titleFont", strSpec s )
 
         LeTitleFontSize x ->
             ( "titleFontSize", numSpec x )

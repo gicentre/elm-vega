@@ -3321,12 +3321,12 @@
       {
         "name": "leFillColor",
         "comment": " Specify the background color of an enclosing legend rectangle. For more\ndetails see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leFormat",
         "comment": " The format specifier pattern for legend labels. For numerical values this should\nbe a [d3-format specifier](https://github.com/d3/d3-format#locale_format). For\ndate-time values this should be a\n[d3-time-format specifier](https://github.com/d3/d3-time-format#locale_format).\nFor more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leGradientDirection",
@@ -3351,7 +3351,7 @@
       {
         "name": "leGradientStrokeColor",
         "comment": " Specify the color of a legend's color gradient border. For more\ndetails see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leGradientStrokeWidth",
@@ -3381,12 +3381,12 @@
       {
         "name": "leLabelColor",
         "comment": " Specify the text color for legend labels. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leLabelFont",
         "comment": " Specify the text font for legend labels. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leLabelFontSize",
@@ -3456,7 +3456,7 @@
       {
         "name": "leStrokeColor",
         "comment": " Specify the border color of an enclosing legend rectangle. For more details\nsee the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leStrokeDash",
@@ -3471,7 +3471,7 @@
       {
         "name": "leSymbolFillColor",
         "comment": " Specify the fill color for legend symbols. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leSymbolOffset",
@@ -3486,7 +3486,7 @@
       {
         "name": "leSymbolStrokeColor",
         "comment": " Specify the border color for legend symbols. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leSymbolStrokeWidth",
@@ -3521,12 +3521,12 @@
       {
         "name": "leTitleColor",
         "comment": " Specify the text color for a legend title. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leTitleFont",
         "comment": " Specify the text font for a legend title. For more details see the\n[Vega legend documentation](https://vega.github.io/vega/docs/legends/)\n",
-        "type": "String -> Vega.LegendProperty"
+        "type": "Vega.Str -> Vega.LegendProperty"
       },
       {
         "name": "leTitleFontSize",
