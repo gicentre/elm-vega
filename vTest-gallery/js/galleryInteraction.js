@@ -16554,7 +16554,7 @@ var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'color',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p153._0)
 			};
 		case 'TEncode':
 			return {
@@ -16567,7 +16567,7 @@ var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'font',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p153._0)
 			};
 		case 'TFontSize':
 			return {

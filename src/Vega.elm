@@ -3081,9 +3081,9 @@ type TitleProperty
     | TAnchor Anchor
     | TAngle Num
     | TBaseline VAlign
-    | TColor String
+    | TColor Str
     | TEncode (List EncodingProperty)
-    | TFont String
+    | TFont Str
     | TFontSize Num
     | TFontWeight Value
     | TFrame TitleFrame
@@ -9771,7 +9771,7 @@ tiBaseline =
 {-| Specify the color of a title. For details see the
 [Vega title documentation](https://vega.github.io/vega/docs/title/).
 -}
-tiColor : String -> TitleProperty
+tiColor : Str -> TitleProperty
 tiColor =
     TColor
 
@@ -9789,7 +9789,7 @@ tiEncode =
 {-| Specify the font name of a title. For details see the
 [Vega title documentation](https://vega.github.io/vega/docs/title/).
 -}
-tiFont : String -> TitleProperty
+tiFont : Str -> TitleProperty
 tiFont =
     TFont
 
@@ -14197,14 +14197,14 @@ titleProperty tProp =
         TBaseline va ->
             ( "baseline", JE.string (vAlignLabel va) )
 
-        TColor c ->
-            ( "color", JE.string c )
+        TColor s ->
+            ( "color", strSpec s )
 
         TEncode eps ->
             ( "encode", JE.object (List.map encodingProperty eps) )
 
-        TFont f ->
-            ( "font", JE.string f )
+        TFont s ->
+            ( "font", strSpec s )
 
         TFontSize n ->
             ( "fontSize", numSpec n )

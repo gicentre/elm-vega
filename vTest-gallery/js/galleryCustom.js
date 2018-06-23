@@ -16554,7 +16554,7 @@ var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'color',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p153._0)
 			};
 		case 'TEncode':
 			return {
@@ -16567,7 +16567,7 @@ var _gicentre$elm_vega$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'font',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p153._0)
 			};
 		case 'TFontSize':
 			return {
@@ -21093,7 +21093,8 @@ var _gicentre$elm_vega$GalleryCustom$custom6 = function () {
 				_0: _gicentre$elm_vega$Vega$cfTitle(
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$tiFont('Ideal Sans, Avenir Next, Helvetica'),
+						_0: _gicentre$elm_vega$Vega$tiFont(
+							_gicentre$elm_vega$Vega$str('Ideal Sans, Avenir Next, Helvetica')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$tiFontWeight(

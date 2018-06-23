@@ -13186,7 +13186,7 @@ var _user$project$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'color',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _user$project$Vega$strSpec(_p153._0)
 			};
 		case 'TEncode':
 			return {
@@ -13199,7 +13199,7 @@ var _user$project$Vega$titleProperty = function (tProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'font',
-				_1: _elm_lang$core$Json_Encode$string(_p153._0)
+				_1: _user$project$Vega$strSpec(_p153._0)
 			};
 		case 'TFontSize':
 			return {

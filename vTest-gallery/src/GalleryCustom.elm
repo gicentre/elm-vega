@@ -759,7 +759,7 @@ custom6 =
             config
                 [ cfMark Text [ maFont (str "Ideal Sans, Avenir Next, Helvetica") ]
                 , cfTitle
-                    [ tiFont "Ideal Sans, Avenir Next, Helvetica"
+                    [ tiFont (str "Ideal Sans, Avenir Next, Helvetica")
                     , tiFontWeight (vNum 500)
                     , tiFontSize (num 17)
                     , tiLimit (num -1)
