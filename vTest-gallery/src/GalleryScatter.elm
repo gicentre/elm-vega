@@ -554,7 +554,7 @@ scatterplot5 =
             marks
                 << mark Group
                     [ mName "site"
-                    , mFrom [ srFacet "barley" "sites" [ faGroupBy [ "site" ] ] ]
+                    , mFrom [ srFacet (str "barley") "sites" [ faGroupBy [ field "site" ] ] ]
                     , mEncode
                         [ enEnter
                             [ maY

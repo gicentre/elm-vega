@@ -357,7 +357,7 @@ boxplot1 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
+                    [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
                     , mEncode
                         [ enEnter
                             [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]
@@ -475,7 +475,7 @@ violinplot1 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "iris" "organs" [ faGroupBy [ "organ" ] ] ]
+                    [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
                     , mEncode
                         [ enEnter
                             [ maYC [ vScale "layout", vField (field "organ"), vBand (num 0.5) ]

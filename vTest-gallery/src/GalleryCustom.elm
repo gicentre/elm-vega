@@ -164,7 +164,7 @@ custom1 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "budgets-current" "facet" [ faGroupBy [ "budgetYear" ] ] ]
+                    [ mFrom [ srFacet (str "budgets-current") "facet" [ faGroupBy [ field "budgetYear" ] ] ]
                     , mGroup [ nestedMk1 [] ]
                     ]
                 << mark Line
@@ -581,7 +581,7 @@ custom4 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "temperature" "hour" [ faGroupBy [ "hour" ] ] ]
+                    [ mFrom [ srFacet (str "temperature") "hour" [ faGroupBy [ field "hour" ] ] ]
                     , mEncode
                         [ enEnter
                             [ maX [ vNum 0 ]
@@ -877,9 +877,9 @@ custom6 =
                     ]
                 << mark Group
                     [ mFrom
-                        [ srFacet "source"
+                        [ srFacet (str "source")
                             "category"
-                            [ faGroupBy [ "key" ]
+                            [ faGroupBy [ field "key" ]
                             , faAggregate
                                 [ agOps [ Min, Max, Count ]
                                 , agFields (List.repeat 3 (field "lat"))

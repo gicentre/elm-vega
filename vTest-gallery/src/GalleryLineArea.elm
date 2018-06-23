@@ -59,7 +59,7 @@ lineChart1 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    [ mFrom [ srFacet (str "table") "series" [ faGroupBy [ field "c" ] ] ]
                     , mGroup [ mkLine [] ]
                     ]
 
@@ -191,7 +191,7 @@ areaChart2 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "table" "series" [ faGroupBy [ "c" ] ] ]
+                    [ mFrom [ srFacet (str "table") "series" [ faGroupBy [ field "c" ] ] ]
                     , mGroup [ mkArea [] ]
                     ]
 
@@ -442,7 +442,7 @@ areaChart4 =
                 << mark Group
                     [ mFrom
                         [ srData (str "series")
-                        , srFacet "jobs" "facet" [ faGroupBy [ "job", "sex" ] ]
+                        , srFacet (str "jobs") "facet" [ faGroupBy [ field "job", field "sex" ] ]
                         ]
                     , mGroup [ mkArea [] ]
                     ]

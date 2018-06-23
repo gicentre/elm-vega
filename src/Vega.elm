@@ -1748,6 +1748,16 @@ A scale range describes the extent of scaled values after transformation.
 @docs clPath
 @docs clSphere
 @docs srData
+
+
+## Faceting
+
+Faceting splits up a data source between multiple group mark itsms. Each group
+mark is backed by an aggregate data value representing the entire group. Facets
+can be _data-driven_, in which partitions are determined by grouping data values
+by specified attributes or _pre-faceted_ when the data source already contains a
+list of sub-values.
+
 @docs srFacet
 @docs faField
 @docs faGroupBy
@@ -2395,10 +2405,10 @@ type Expr
 -}
 type Facet
     = FaName String
-    | FaData String
-    | FaField String
+    | FaData Str
+    | FaField Field
     | FaAggregate (List AggregateProperty)
-    | FaGroupBy (List String)
+    | FaGroupBy (List Field)
 
 
 {-| Represents a GeoJSON feature or feature collection for use with projections.
@@ -3057,7 +3067,7 @@ type SignalProperty
 -}
 type Source
     = SData Str
-    | SFacet String String (List Facet)
+    | SFacet Str String (List Facet)
 
 
 {-| A Vega specification. Specs can be (and usually are) nested.
@@ -5636,7 +5646,7 @@ faAggregate =
 {-| For pre-faceted data, the name of the data field containing an array of data
 values to use as the local partition. This is required if using pre-faceted data.
 -}
-faField : String -> Facet
+faField : Field -> Facet
 faField =
     FaField
 
@@ -5644,7 +5654,7 @@ faField =
 {-| For data-driven facets, an array of field names by which to partition the data.
 This is required if using pre-faceted data.
 -}
-faGroupBy : List String -> Facet
+faGroupBy : List Field -> Facet
 faGroupBy =
     FaGroupBy
 
@@ -9378,7 +9388,7 @@ For details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)
 
 -}
-srFacet : String -> String -> List Facet -> Source
+srFacet : Str -> String -> List Facet -> Source
 srFacet d name =
     SFacet d name
 
@@ -12410,13 +12420,13 @@ facetProperty fct =
             ( "name", JE.string s )
 
         FaData s ->
-            ( "data", JE.string s )
+            ( "data", strSpec s )
 
-        FaField s ->
-            ( "field", JE.string s )
+        FaField f ->
+            ( "field", fieldSpec f )
 
-        FaGroupBy ss ->
-            ( "groupby", JE.list (List.map JE.string ss) )
+        FaGroupBy fs ->
+            ( "groupby", JE.list (List.map fieldSpec fs) )
 
         FaAggregate aps ->
             ( "aggregate", JE.object (List.map aggregateProperty aps) )

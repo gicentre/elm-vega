@@ -116,7 +116,7 @@ bundle1 =
                         ]
                     ]
                 << mark Group
-                    [ mFrom [ srFacet "dependencies" "path" [ faField "treepath" ] ]
+                    [ mFrom [ srFacet (str "dependencies") "path" [ faField (field "treepath") ] ]
                     , mGroup [ nestedMk [] ]
                     ]
 

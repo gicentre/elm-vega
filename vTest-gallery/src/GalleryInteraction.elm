@@ -1311,7 +1311,7 @@ interaction7 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "indexed_stocks" "series" [ faGroupBy [ "symbol" ] ] ]
+                    [ mFrom [ srFacet (str "indexed_stocks") "series" [ faGroupBy [ field "symbol" ] ] ]
                     , mGroup [ ds1, mk1 [] ]
                     ]
                 << mark Rule

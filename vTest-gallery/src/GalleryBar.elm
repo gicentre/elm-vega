@@ -238,7 +238,7 @@ barChart3 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srFacet "table" "facet" [ faGroupBy [ "category" ] ] ]
+                    [ mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
                     , mEncode [ enEnter [ maY [ vScale "yScale", vField (field "category") ] ] ]
                     , mGroup [ nestedSi [], nestedSc [], nestedMk [] ]
                     ]
@@ -346,7 +346,7 @@ barChart4 =
         mk =
             marks
                 << mark Group
-                    [ mFrom [ srData (str "trellis"), srFacet "tuples" "faceted_tuples" [ faGroupBy [ "a" ] ] ]
+                    [ mFrom [ srData (str "trellis"), srFacet (str "tuples") "faceted_tuples" [ faGroupBy [ field "a" ] ] ]
                     , mEncode
                         [ enEnter [ maX [ vNum 0 ], maWidth [ vSignal "width" ] ]
                         , enUpdate [ maY [ vField (field "y0") ], maY2 [ vField (field "y1") ] ]
