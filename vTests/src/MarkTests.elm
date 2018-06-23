@@ -508,17 +508,17 @@ symbolTest =
                     , siBind
                         (iSelect
                             [ inOptions
-                                (vStrs
-                                    [ symbolLabel SymCircle
-                                    , symbolLabel SymSquare
-                                    , symbolLabel SymCross
-                                    , symbolLabel SymDiamond
-                                    , symbolLabel SymTriangleUp
-                                    , symbolLabel SymTriangleDown
-                                    , symbolLabel SymTriangleRight
-                                    , symbolLabel SymTriangleLeft
-                                    , "M-1,-1H1V1H-1Z"
-                                    , "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z"
+                                (vValues
+                                    [ symbolValue SymCircle
+                                    , symbolValue SymSquare
+                                    , symbolValue SymCross
+                                    , symbolValue SymDiamond
+                                    , symbolValue SymTriangleUp
+                                    , symbolValue SymTriangleDown
+                                    , symbolValue SymTriangleRight
+                                    , symbolValue SymTriangleLeft
+                                    , symbolValue (symPath "M-1,-1H1V1H-1Z")
+                                    , symbolValue (symPath "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z")
                                     ]
                                 )
                             ]

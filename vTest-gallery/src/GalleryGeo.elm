@@ -62,7 +62,7 @@ geo1 =
                     ]
 
         shapeEncoding =
-            [ maShape [ vStr (symbolLabel SymSquare) ]
+            [ maShape [ symbolValue SymSquare ]
             , maStroke [ vStr "#ccc" ]
             , maStrokeWidth [ vNum 0.2 ]
             ]

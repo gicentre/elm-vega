@@ -218,7 +218,7 @@ custom1 =
                     , mEncode
                         [ enEnter
                             [ maY [ vScale "yScale", vNum 0, vOffset (vNum 1) ]
-                            , maShape [ symbolLabel SymTriangleDown |> vStr ]
+                            , maShape [ symbolValue SymTriangleDown ]
                             , maSize [ vNum 400 ]
                             , maStroke [ black ]
                             , maStrokeWidth [ vNum 0.5 ]
@@ -470,7 +470,7 @@ custom3 =
                         [ enSymbols
                             [ enUpdate
                                 [ maStrokeWidth [ vNum 0 ]
-                                , maShape [ symbolLabel SymSquare |> vStr ]
+                                , maShape [ symbolValue SymSquare ]
                                 , maOpacity [ vNum 0.3 ]
                                 ]
                             ]

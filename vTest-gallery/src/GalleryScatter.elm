@@ -57,7 +57,7 @@ scatterplot1 =
             [ maStrokeWidth [ vNum 2 ]
             , maOpacity [ vNum 0.5 ]
             , maStroke [ vStr "#4682b4" ]
-            , maShape [ vStr (symbolLabel SymCircle) ]
+            , maShape [ symbolValue SymCircle ]
             , maFill [ transparent ]
             ]
 

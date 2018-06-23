@@ -1185,7 +1185,7 @@ interaction6 =
                         [ enUpdate
                             [ maX [ vScale "xScale", vField (field "Horsepower") ]
                             , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
-                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            , maShape [ symbolValue SymCircle ]
                             , maStrokeWidth [ vNum 2 ]
                             , maOpacity
                                 [ ifElse "(!domain || inrange(datum.Horsepower, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Origin))"
@@ -1512,7 +1512,7 @@ interaction8 =
                                 ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maY [ vScale "yScale", vField (field "y") ]
-                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            , maShape [ symbolValue SymCircle ]
                             ]
                         ]
                     ]
@@ -1529,7 +1529,7 @@ interaction8 =
                             , maX [ vScale "data_point_scale", vField (field "data") ]
                             , maY [ vScale "pi_scale", vField (field "estimate") ]
                             , maSize [ vNum 8 ]
-                            , maShape [ symbolLabel SymCircle |> vStr ]
+                            , maShape [ symbolValue SymCircle ]
                             ]
                         ]
                     ]

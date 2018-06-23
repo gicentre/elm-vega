@@ -675,7 +675,7 @@ module Vega
         , strokeJoinValue
         , strs
         , symPath
-        , symbolLabel
+        , symbolValue
         , teAs
         , teField
         , teMethod
@@ -1864,7 +1864,7 @@ list of sub-values.
 @docs vAlphabetic
 @docs Symbol
 @docs symPath
-@docs symbolLabel
+@docs symbolValue
 @docs StrokeCap
 @docs strokeCapValue
 @docs strokeCapSignal
@@ -7867,8 +7867,7 @@ maStrokeWidth =
 {-| A symbol shape that describes a symbol mark. For correct sizing, custom shape
 paths should be defined within a square with coordinates ranging from -1 to 1 along
 both the x and y dimensions. Symbol definitions may be specified directly, via a
-field, a signal or any other text-generating value. To guarantee valid symbol type
-names, use `symbolLabel`. For example:
+field, a signal or any other text-generating value. For example:
 
     TODO: Add symbol example once API confirmed
 
@@ -9573,42 +9572,15 @@ type Symbol
     | SymPath String
 
 
-{-| A convenience function for generating a text string representing a given
-symbol type. This can be used instead of specifying an symbol type as a literal
-string to avoid problems of mistyping its name.
+{-| A convenience function for generating a value representing a given
+symbol type.
 
     TODO: XXX Example
 
 -}
-symbolLabel : Symbol -> String
-symbolLabel sym =
-    case sym of
-        SymCircle ->
-            "circle"
-
-        SymSquare ->
-            "square"
-
-        SymCross ->
-            "cross"
-
-        SymDiamond ->
-            "diamond"
-
-        SymTriangleUp ->
-            "triangle-up"
-
-        SymTriangleDown ->
-            "triangle-down"
-
-        SymTriangleRight ->
-            "triangle-right"
-
-        SymTriangleLeft ->
-            "triangle-left"
-
-        SymPath svgPath ->
-            svgPath
+symbolValue : Symbol -> Value
+symbolValue sym =
+    vStr (symbolLabel sym)
 
 
 {-| Specity a custom symbol shape as an
@@ -14234,6 +14206,37 @@ strString str =
 
         StrNull ->
             "null"
+
+
+symbolLabel : Symbol -> String
+symbolLabel sym =
+    case sym of
+        SymCircle ->
+            "circle"
+
+        SymSquare ->
+            "square"
+
+        SymCross ->
+            "cross"
+
+        SymDiamond ->
+            "diamond"
+
+        SymTriangleUp ->
+            "triangle-up"
+
+        SymTriangleDown ->
+            "triangle-down"
+
+        SymTriangleRight ->
+            "triangle-right"
+
+        SymTriangleLeft ->
+            "triangle-left"
+
+        SymPath svgPath ->
+            svgPath
 
 
 teMethodSpec : TreeMethod -> Spec
