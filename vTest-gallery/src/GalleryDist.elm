@@ -573,7 +573,7 @@ window1 =
                         [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
                         , trAggregate
                             [ agGroupBy [ field "Director" ]
-                            , agOps [ opSignal "op" ]
+                            , agOps [ operationSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
@@ -661,7 +661,7 @@ window2 =
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "Director" ]
-                            , agOps [ opSignal "op" ]
+                            , agOps [ operationSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
@@ -674,7 +674,7 @@ window2 =
                         , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category"
                         , trAggregate
                             [ agGroupBy [ field "Category" ]
-                            , agOps [ opSignal "op" ]
+                            , agOps [ operationSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]

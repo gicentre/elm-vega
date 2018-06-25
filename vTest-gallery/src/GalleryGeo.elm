@@ -232,7 +232,7 @@ geo3 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (strSignal "pType"))
+                    [ prType (projectionSignal "pType")
                     , prScale (numSignal "pScale")
                     , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
                     , prCenter (numSignals [ "pCentre0", "pCentre1" ])

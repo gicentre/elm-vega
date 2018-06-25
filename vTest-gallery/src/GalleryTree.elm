@@ -21,7 +21,7 @@ tree1 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (teMethodSignal "layout")
+                            [ teMethod (treeMethodSignal "layout")
                             , teSize (numSignals [ "height", "width-100" ])
                             , teAs "y" "x" "depth" "children"
                             ]
@@ -106,7 +106,7 @@ tree2 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (teMethodSignal "layout")
+                            [ teMethod (treeMethodSignal "layout")
                             , teSize (numList [ num 1, numSignal "radius" ])
                             , teAs "alpha" "radius" "depth" "children"
                             ]
@@ -209,7 +209,7 @@ tree3 =
                             [ tmField (field "size")
                             , tmSort [ ( field "value", Ascend ) ]
                             , tmRound true
-                            , tmMethod (tmMethodSignal "layout")
+                            , tmMethod (treemapMethodSignal "layout")
                             , tmRatio (numSignal "aspectRatio")
                             , tmSize (numSignals [ "width", "height" ])
                             ]

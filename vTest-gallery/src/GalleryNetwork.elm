@@ -21,7 +21,7 @@ bundle1 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (teMethodSignal "layout")
+                            [ teMethod (treeMethodSignal "layout")
                             , teSize (nums [ 1, 1 ])
                             , teAs "alpha" "beta" "depth" "children"
                             ]

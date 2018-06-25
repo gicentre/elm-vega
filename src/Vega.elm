@@ -453,6 +453,7 @@ module Vega
         , leZIndex
         , legend
         , legendOrientationSignal
+        , legendTypeSignal
         , legends
         , linkShapeSignal
         , loAlign
@@ -558,12 +559,12 @@ module Vega
         , numSignal
         , numSignals
         , nums
-        , ofSignal
         , on
-        , opSignal
+        , operationSignal
         , orderSignal
         , orientationSignal
         , orientationValue
+        , overlapStrategySignal
         , paAs
         , paField
         , paPadding
@@ -604,6 +605,7 @@ module Vega
         , prTranslate
         , prType
         , projection
+        , projectionSignal
         , projectionValue
         , projections
         , ptAs
@@ -644,6 +646,9 @@ module Vega
         , scType
         , scZero
         , scale
+        , scaleNiceSignal
+        , scaleRangeSignal
+        , scaleSignal
         , scales
         , siBind
         , siDescription
@@ -653,10 +658,13 @@ module Vega
         , siReact
         , siUpdate
         , siValue
+        , sideSignal
         , signal
         , signals
         , soByField
         , soOp
+        , sortPropertySignal
+        , spiralSignal
         , srData
         , srFacet
         , stAs
@@ -664,6 +672,7 @@ module Vega
         , stGroupBy
         , stOffset
         , stSort
+        , stackOffsetSignal
         , str
         , strExpr
         , strNull
@@ -675,14 +684,16 @@ module Vega
         , strokeJoinValue
         , strs
         , symPath
+        , symbolSignal
+          --, symbolValue
         , symbolValue
         , teAs
         , teField
         , teMethod
-        , teMethodSignal
         , teNodeSize
         , teSize
         , teSort
+        , textDirectionSignal
         , tgInsert
         , tgModifyValues
         , tgRemove
@@ -704,11 +715,12 @@ module Vega
         , tiOrient
         , tiStyle
         , tiZIndex
+        , timeUnitSignal
         , title
+        , titleFrameSignal
         , tmAs
         , tmField
         , tmMethod
-        , tmMethodSignal
         , tmPadding
         , tmPaddingBottom
         , tmPaddingInner
@@ -772,6 +784,8 @@ module Vega
         , trWordcloud
         , transform
         , transparent
+        , treeMethodSignal
+        , treemapMethodSignal
         , trigger
         , true
         , utc
@@ -803,6 +817,7 @@ module Vega
         , voAs
         , voExtent
         , voSize
+        , wOperationSignal
         , wcAs
         , wcFont
         , wcFontSize
@@ -823,7 +838,6 @@ module Vega
         , wnOperation
         , wnOperationOn
         , wnSort
-        , woSignal
         )
 
 {-| This module will allow you to create a full Vega specification in Elm. A
@@ -934,6 +948,7 @@ can be generated with the following functions.
 ## Thematic Data Types
 
 @docs TimeUnit
+@docs timeUnitSignal
 @docs utc
 @docs cHCL
 @docs cHSL
@@ -974,6 +989,7 @@ Functions for declaring the input data to a visualization.
 
 @docs daSort
 @docs SortProperty
+@docs sortPropertySignal
 @docs soOp
 @docs soByField
 
@@ -1025,7 +1041,7 @@ more of the functions described below.
 @docs agKey
 
 @docs Operation
-@docs opSignal
+@docs operationSignal
 
 @docs trJoinAggregate
 @docs jaGroupBy
@@ -1135,7 +1151,7 @@ more of the functions described below.
 @docs wnOperation
 @docs wnOperationOn
 @docs WOperation
-@docs woSignal
+@docs wOperationSignal
 @docs wnSort
 @docs wnGroupBy
 @docs wnFrame
@@ -1244,7 +1260,7 @@ more of the functions described below.
 @docs stOffset
 @docs stAs
 @docs StackOffset
-@docs ofSignal
+@docs stackOffsetSignal
 
 
 ### Force-Generated Layouts
@@ -1299,6 +1315,7 @@ more of the functions described below.
 @docs wcSize
 @docs wcSpiral
 @docs Spiral
+@docs spiralSignal
 @docs wcAs
 
 
@@ -1328,7 +1345,7 @@ more of the functions described below.
 @docs teSort
 @docs teMethod
 @docs TreeMethod
-@docs teMethodSignal
+@docs treeMethodSignal
 @docs teSize
 @docs teNodeSize
 @docs teAs
@@ -1340,7 +1357,7 @@ more of the functions described below.
 @docs tmSort
 @docs tmMethod
 @docs TreemapMethod
-@docs tmMethodSignal
+@docs treemapMethodSignal
 @docs tmPadding
 @docs tmPaddingInner
 @docs tmPaddingOuter
@@ -1467,6 +1484,7 @@ Scales determine the mapping between data values and their visual expression (ch
 @docs scRangeStep
 
 @docs ScaleNice
+@docs scaleNiceSignal
 @docs nInterval
 @docs nTickCount
 @docs csScheme
@@ -1478,6 +1496,7 @@ Scales determine the mapping between data values and their visual expression (ch
 
 @docs scType
 @docs Scale
+@docs scaleSignal
 @docs scCustom
 
 
@@ -1503,6 +1522,7 @@ A scale range describes the extent of scaled values after transformation.
 
 @docs scRange
 @docs ScaleRange
+@docs scaleRangeSignal
 @docs raNums
 @docs raStrs
 @docs raValues
@@ -1529,6 +1549,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs projections
 @docs projection
 @docs Projection
+@docs projectionSignal
 @docs projectionValue
 @docs prCustom
 @docs prType
@@ -1612,7 +1633,9 @@ A scale range describes the extent of scaled values after transformation.
 @docs axZIndex
 @docs AxisElement
 @docs Side
+@docs sideSignal
 @docs OverlapStrategy
+@docs overlapStrategySignal
 
 
 # Specifying Legends
@@ -1676,6 +1699,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs leValues
 @docs leZIndex
 @docs LegendType
+@docs legendTypeSignal
 @docs LegendOrientation
 @docs legendOrientationSignal
 @docs enLegend
@@ -1699,6 +1723,7 @@ A scale range describes the extent of scaled values after transformation.
 @docs tiFontWeight
 @docs tiFrame
 @docs TitleFrame
+@docs titleFrameSignal
 @docs tiInteractive
 @docs tiLimit
 @docs tiName
@@ -1863,8 +1888,9 @@ list of sub-values.
 @docs vBottom
 @docs vAlphabetic
 @docs Symbol
-@docs symPath
 @docs symbolValue
+@docs symbolSignal
+@docs symPath
 @docs StrokeCap
 @docs strokeCapValue
 @docs strokeCapSignal
@@ -1872,6 +1898,7 @@ list of sub-values.
 @docs strokeJoinSignal
 @docs strokeJoinValue
 @docs TextDirection
+@docs textDirectionSignal
 
 
 # Configuring Visualization Appearance
@@ -3016,6 +3043,7 @@ type ScaleRange
     | RaOrdinal
     | RaRamp
     | RaHeatmap
+    | ScaleRangeSignal String
 
 
 {-| Individual signal property. Generated by [siName](#siName), [siBind](#siBind),
@@ -5087,23 +5115,6 @@ diNormal =
     DiNormal
 
 
-{-| A convenience function for generating a text string representing a given text
-direction type. This can be used instead of specifying an direction type as a
-literal string to avoid problems of mistyping its name.
-
-    TODO: XXX Provide example
-
--}
-dirLabelx : TextDirection -> String
-dirLabelx dir =
-    case dir of
-        LeftToRight ->
-            "ltr"
-
-        RightToLeft ->
-            "rtl"
-
-
 {-| Specifies a uniform probability distribution with given minimum (first
 parameter) and maximum (second parameter) bounds. For details see the
 [Vega distribution documentation](https://vega.github.io/vega/docs/transforms/density/#distributions).
@@ -6646,6 +6657,15 @@ for those representing continuous data.
 type LegendType
     = LSymbol
     | LGradient
+    | LegendTypeSignal String
+
+
+{-| Specify a type of legend is to be determined by the given signal. Valid values
+generated by the signal are `symbol` and `gradient`.
+-}
+legendTypeSignal : String -> LegendType
+legendTypeSignal =
+    LegendTypeSignal
 
 
 {-| Specify the direction of a color gradient in a legend. For more details see the
@@ -8214,15 +8234,6 @@ numSignals =
     NumSignals
 
 
-{-| Specify a named signal to drive the type of offsetting to apply when
-performing a stack transform. For details see the
-[Vega tack transform documentation](https://vega.github.io/vega/docs/transforms/stack)
--}
-ofSignal : String -> StackOffset
-ofSignal =
-    OfSignal
-
-
 {-| Adds list of triggers to the given data table.
 For details see the [Vega trigger documentation](https://vega.github.io/vega/docs/triggers).
 -}
@@ -8264,8 +8275,8 @@ type Operation
 signal should generate the name of a valid operation (e.g. `average`). For details see the
 [Vega aggregate documentation](https://vega.github.io/vega/docs/transforms/aggregate/#ops)
 -}
-opSignal : String -> Operation
-opSignal =
+operationSignal : String -> Operation
+operationSignal =
     OperationSignal
 
 
@@ -8295,7 +8306,7 @@ type Orientation
     | OrientationSignal String
 
 
-{-| Indicates an orientation for marks, legends and link paths as determined by a named signal.
+{-| Indicates an orientation for marks, legends and link paths is determined by a named signal.
 For details see the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
 orientationSignal : String -> Orientation
@@ -8312,6 +8323,16 @@ type OverlapStrategy
     = ONone
     | OParity
     | OGreedy
+    | OverlapStrategySignal String
+
+
+{-| Indicates an axis overlap strategy is determined by a named signal.
+For valid signal values see the
+[Vega axes documentation](https://vega.github.io/vega/docs/axes)
+-}
+overlapStrategySignal : String -> OverlapStrategy
+overlapStrategySignal =
+    OverlapStrategySignal
 
 
 {-| The names to give the output fields of a packing transform. The default is
@@ -8544,8 +8565,8 @@ prCoefficient =
     PrCoefficient
 
 
-{-| Specify a custom map projection type. Custom types need to be registered
-with the vega runtime. For details, see the
+{-| Specify a custom map projection. Custom names need to be registered with the
+vega runtime. For details, see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#register)
 -}
 prCustom : Str -> Projection
@@ -8633,6 +8654,7 @@ type Projection
     | Stereographic
     | TransverseMercator
     | Proj Str
+    | ProjectionSignal String
 
 
 {-| Create a single map projection for transforming geo data onto a plane.
@@ -8667,6 +8689,15 @@ projectionValue proj =
 projections : List Spec -> ( VProperty, Spec )
 projections prs =
     ( VProjections, JE.list prs )
+
+
+{-| Specify a global map projection type is to be determined by a signal. For
+details of valid projection values see the
+[Vega map projection documentation](https://vega.github.io/vega/docs/projections).
+-}
+projectionSignal : String -> Projection
+projectionSignal =
+    ProjectionSignal
 
 
 {-| Specify the type of global map projection to use in a projection transformation.
@@ -8958,6 +8989,7 @@ type Scale
     | ScBinLinear
     | ScBinOrdinal
     | ScCustom String
+    | ScaleSignal String
 
 
 {-| Create a single scale used to map data values to visual properties.
@@ -8986,6 +9018,25 @@ type ScaleNice
     | NTrue
     | NFalse
     | NTickCount Int
+    | ScaleNiceSignal String
+
+
+{-| Specify that the type of 'nice' scale generation is to be determined by a signal
+with the given name. For valid values of the signal see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/).
+-}
+scaleNiceSignal : String -> ScaleNice
+scaleNiceSignal =
+    ScaleNiceSignal
+
+
+{-| Specify that a default scaling (`width`, `category`, `heatmap` etc.) is to be
+determined by a signal with the given name. For valid values of the signal see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+-}
+scaleRangeSignal : String -> ScaleRange
+scaleRangeSignal =
+    ScaleRangeSignal
 
 
 {-| Create the scales used to map data values to visual properties.
@@ -8996,6 +9047,15 @@ type ScaleNice
 scales : List Spec -> ( VProperty, Spec )
 scales scs =
     ( VScales, JE.list scs )
+
+
+{-| Specify a type of scale transformation is to be determined by a signal. For
+valid values of the signal, see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/#types).
+-}
+scaleSignal : String -> Scale
+scaleSignal =
+    ScaleSignal
 
 
 {-| Specify the alignment of elements within each step of a band scale, as a
@@ -9227,6 +9287,16 @@ type Side
     | SRight
     | STop
     | SBottom
+    | SideSignal String
+
+
+{-| Specify that an axis position is to be determined by a signal with the given
+name. For valid values of the signal see the
+[Vega axes documentation](https://vega.github.io/vega/docs/axes/#orientation).
+-}
+sideSignal : String -> Side
+sideSignal =
+    SideSignal
 
 
 {-| Specify a text description of a signal, useful for inline documentation.
@@ -9341,6 +9411,17 @@ type SortProperty
     | Descending
     | Op Operation
     | ByField Str
+    | SortPropertySignal String
+
+
+{-| Specify that a sorting order is to be determined by a signal with the given
+name. The value of the signal should be either `ascending` or `descending`.
+For details see the
+[Vega sort documentation](https://vega.github.io/vega/docs/scales/#sort).
+-}
+sortPropertySignal : String -> SortProperty
+sortPropertySignal =
+    SortPropertySignal
 
 
 {-| Specify a spiraling type. Used for the sequential positioning of words in a wordcloud.
@@ -9348,6 +9429,16 @@ type SortProperty
 type Spiral
     = Archimedean
     | Rectangular
+    | SpiralSignal String
+
+
+{-| Specify that a spiral type for wordcloud allocation is to be determined by a
+signal with the given name. The value of the signal should be either `archimedean`
+or `rectangular`.
+-}
+spiralSignal : String -> Spiral
+spiralSignal =
+    SpiralSignal
 
 
 {-| Name of the source for a set of marks. For details see the
@@ -9385,7 +9476,16 @@ type StackOffset
     = OfZero
     | OfCenter
     | OfNormalize
-    | OfSignal String
+    | StackOffsetSignal String
+
+
+{-| Specify a named signal to drive the type of offsetting to apply when
+performing a stack transform. For details see the
+[Vega stack transform documentation](https://vega.github.io/vega/docs/transforms/stack)
+-}
+stackOffsetSignal : String -> StackOffset
+stackOffsetSignal =
+    StackOffsetSignal
 
 
 {-| Specify the names of the output fields for the computed start and end stack
@@ -9475,6 +9575,14 @@ type StrokeCap
     | StrokeCapSignal String
 
 
+{-| Specify a type of stroke cap with a given signal. Valid values generated by
+the signal are the strings `butt`, `round` and `square`.
+-}
+strokeCapSignal : String -> StrokeCap
+strokeCapSignal =
+    StrokeCapSignal
+
+
 {-| A convenience function for generating a value representing a given
 stroke cap type.
 
@@ -9495,14 +9603,6 @@ strokeCapValue cap =
 
         StrokeCapSignal sig ->
             vSignal sig
-
-
-{-| Specify a type of stroke cap with a given signal. Valid values generated by
-the signal are the strings `butt`, `round` and `square`.
--}
-strokeCapSignal : String -> StrokeCap
-strokeCapSignal =
-    StrokeCapSignal
 
 
 {-| Type of stroke join.
@@ -9570,6 +9670,15 @@ type Symbol
     | SymTriangleLeft
     | SymTriangleRight
     | SymPath String
+    | SymbolSignal String
+
+
+{-| Specify a type of symbol from a signal with the given name. Valid values
+generated by the signal are the strings `circle`, `square`, `cross` etc.
+-}
+symbolSignal : String -> Symbol
+symbolSignal =
+    SymbolSignal
 
 
 {-| A convenience function for generating a value representing a given
@@ -9618,14 +9727,6 @@ teMethod =
     TeMethod
 
 
-{-| Indicates a tree layout method type is to be determined by a named signal.
-The signal should generate the text "tidy" or "cluster".
--}
-teMethodSignal : String -> TreeMethod
-teMethodSignal =
-    TreeMethodSignal
-
-
 {-| Specify the size of each node in a tree layout as a [width,height] array
 (or a signal that generates such an array). For details see the
 [Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
@@ -9659,6 +9760,15 @@ truncated if it cannot be displated within a restricted space.
 type TextDirection
     = LeftToRight
     | RightToLeft
+    | TextDirectionSignal String
+
+
+{-| Specify a text direction rendering with a given signal. Valid values generated
+by the signal are the strings `ltr` and `rtl` .
+-}
+textDirectionSignal : String -> TextDirection
+textDirectionSignal =
+    TextDirectionSignal
 
 
 {-| Specify an expression that evaluates to data objects to insert as triggers.
@@ -9806,6 +9916,14 @@ tiInteractive =
     TInteractive
 
 
+{-| Specify the maximim allowed length of a title in pixels. For details see the
+[Vega title documentation](https://vega.github.io/vega/docs/title/).
+-}
+tiLimit : Num -> TitleProperty
+tiLimit =
+    TLimit
+
+
 {-| Describes a unit of time. Useful for encoding and transformations. For
 details see the
 [Vega scale documentation](https://vega.github.io/vega/docs/scales/#quantitative).
@@ -9820,14 +9938,16 @@ type TimeUnit
     | Second
     | Millisecond
     | Utc TimeUnit
+    | TimeUnitSignal String
 
 
-{-| Specify the maximim allowed length of a title in pixels. For details see the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify a time unit with a given signal. For valid values generated by
+the signal (`year`, `hour`, `second` etc), see the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales/#quantitative).
 -}
-tiLimit : Num -> TitleProperty
-tiLimit =
-    TLimit
+timeUnitSignal : String -> TimeUnit
+timeUnitSignal =
+    TimeUnitSignal
 
 
 {-| Specify a mark name to apply to a title text mark. This name can be used to
@@ -9883,6 +10003,15 @@ relative to the group width/height.
 type TitleFrame
     = FrBounds
     | FrGroup
+    | TitleFrameSignal String
+
+
+{-| Specify a title anchor positioning rule with a given signal. Valid values
+generated by the signal should be either `bounds` or `group`.
+-}
+titleFrameSignal : String -> TitleFrame
+titleFrameSignal =
+    TitleFrameSignal
 
 
 {-| Specify a z-index indicating the layering of the title group relative to
@@ -9920,15 +10049,6 @@ tmField =
 tmMethod : TreemapMethod -> TreemapProperty
 tmMethod =
     TmMethod
-
-
-{-| Indicates a treemap layout method type is to be determined by a named signal.
-The signal should generate the text "squarify", "resquarify", "binary", "dice",
-"slice" or "slicedice".
--}
-tmMethodSignal : String -> TreemapMethod
-tmMethodSignal =
-    TreemapMethodSignal
 
 
 {-| Specify the inner and outer padding values for a treemap layout transform. For details see
@@ -10265,12 +10385,29 @@ type TreemapMethod
     | TreemapMethodSignal String
 
 
+{-| Indicates a treemap layout method type is to be determined by a named signal.
+The signal should generate the one of `squarify`, `resquarify`, `binary`, `dice`,
+`slice` or `slicedice`.
+-}
+treemapMethodSignal : String -> TreemapMethod
+treemapMethodSignal =
+    TreemapMethodSignal
+
+
 {-| Represents a tree layout method used in a tree transform.
 -}
 type TreeMethod
     = Tidy
     | Cluster
     | TreeMethodSignal String
+
+
+{-| Indicates a tree layout method type is to be determined by a named signal.
+The signal should generate either `tidy` or `cluster`.
+-}
+treeMethodSignal : String -> TreeMethod
+treeMethodSignal =
+    TreeMethodSignal
 
 
 {-| Compute the minimum and maximum values for a data field, producing a [min, max]
@@ -11259,24 +11396,6 @@ width w =
     ( VWidth, JE.float w )
 
 
-{-| Operations that may be applied during a window transformation. For details see the
-[Vega window transform documentation](https://vega.github.io/vega/docs/transforms/window/#ops).
--}
-type WOperation
-    = RowNumber
-    | Rank
-    | DenseRank
-    | PercentRank
-    | CumeDist
-    | Ntile
-    | Lag
-    | Lead
-    | FirstValue
-    | LastValue
-    | NthValue
-    | WOperationSignal String
-
-
 {-| Specify an aggregate operation to be applied during a window transformation.
 This version is suitable for operations without parameters (e.g. `RowNumber`) and
 that are not applied to a specific field.
@@ -11385,13 +11504,31 @@ wnSort =
     WnSort
 
 
+{-| Operations that may be applied during a window transformation. For details see the
+[Vega window transform documentation](https://vega.github.io/vega/docs/transforms/window/#ops).
+-}
+type WOperation
+    = RowNumber
+    | Rank
+    | DenseRank
+    | PercentRank
+    | CumeDist
+    | Ntile
+    | Lag
+    | Lead
+    | FirstValue
+    | LastValue
+    | NthValue
+    | WOperationSignal String
+
+
 {-| Indicates a window operation is to be determined by a named signal. The
 signal should generate the name of a valid operation (e.g. `dense_rank`).
 For names of valid window operations see the
 [Vega window operation documentation](https://vega.github.io/vega/docs/transforms/window/#ops)
 -}
-woSignal : String -> WOperation
-woSignal =
+wOperationSignal : String -> WOperation
+wOperationSignal =
     WOperationSignal
 
 
@@ -11504,7 +11641,7 @@ axisProperty ap =
             ( "scale", JE.string scName )
 
         AxSide axSide ->
-            ( "orient", JE.string (sideLabel axSide) )
+            ( "orient", sideSpec axSide )
 
         AxBandPosition n ->
             ( "bandPosition", numSpec n )
@@ -11593,7 +11730,7 @@ axisProperty ap =
             ( "labelLimit", numSpec n )
 
         AxLabelOverlap strat ->
-            ( "labelOverlap", JE.string (overlapStrategyLabel strat) )
+            ( "labelOverlap", overlapStrategySpec strat )
 
         AxLabelPadding pad ->
             ( "labelPadding", numSpec pad )
@@ -12876,7 +13013,7 @@ legendProperty : LegendProperty -> LabelledSpec
 legendProperty lp =
     case lp of
         LeType lt ->
-            ( "type", JE.string (legendTypeLabel lt) )
+            ( "type", legendTypeSpec lt )
 
         LeDirection o ->
             ( "direction", orientationSpec o )
@@ -12987,7 +13124,7 @@ legendProperty lp =
             ( "labelOffset", numSpec x )
 
         LeLabelOverlap os ->
-            ( "labelOverlap", JE.string (overlapStrategyLabel os) )
+            ( "labelOverlap", overlapStrategySpec os )
 
         LeSymbolFillColor s ->
             ( "symbolFillColor", strSpec s )
@@ -13005,7 +13142,7 @@ legendProperty lp =
             ( "symbolStokeWidth", numSpec x )
 
         LeSymbolType s ->
-            ( "symbolType", JE.string (symbolLabel s) )
+            ( "symbolType", symbolSpec s )
 
         LeTickCount n ->
             ( "tickCount", numSpec n )
@@ -13078,14 +13215,17 @@ legendOrientSpec orient =
             JE.object [ signalReferenceProperty sig ]
 
 
-legendTypeLabel : LegendType -> String
-legendTypeLabel lt =
+legendTypeSpec : LegendType -> Spec
+legendTypeSpec lt =
     case lt of
         LSymbol ->
-            "symbol"
+            JE.string "symbol"
 
         LGradient ->
-            "gradient"
+            JE.string "gradient"
+
+        LegendTypeSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 linkPathProperty : LinkPathProperty -> LabelledSpec
@@ -13396,7 +13536,7 @@ niceSpec ni =
             JE.string "year"
 
         NInterval tu step ->
-            JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
+            JE.object [ ( "interval", timeUnitSpec tu ), ( "step", JE.int step ) ]
 
         NTrue ->
             JE.bool True
@@ -13406,6 +13546,9 @@ niceSpec ni =
 
         NTickCount n ->
             JE.int n
+
+        ScaleNiceSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 {-| For filtering Nums that represent an array of numbers of a given length.
@@ -13564,17 +13707,20 @@ orientationSpec orient =
             JE.object [ signalReferenceProperty sig ]
 
 
-overlapStrategyLabel : OverlapStrategy -> String
-overlapStrategyLabel strat =
+overlapStrategySpec : OverlapStrategy -> Spec
+overlapStrategySpec strat =
     case strat of
         ONone ->
-            "false"
+            JE.string "false"
 
         OParity ->
-            "parity"
+            JE.string "parity"
 
         OGreedy ->
-            "greedy"
+            JE.string "greedy"
+
+        OverlapStrategySignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 packProperty : PackProperty -> LabelledSpec
@@ -13719,7 +13865,10 @@ projectionLabel pr =
             "transverseMercator"
 
         Proj s ->
-            strString s
+            "" |> Debug.log ("Warning: Attempting to set projection type to " ++ strString s)
+
+        ProjectionSignal sig ->
+            "" |> Debug.log ("Warning: Attempting to set projection type to " ++ sig)
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
@@ -13848,8 +13997,11 @@ projectionProperty projProp =
 projectionSpec : Projection -> Spec
 projectionSpec proj =
     case proj of
-        Proj str ->
-            strSpec str
+        Proj s ->
+            strSpec s
+
+        ProjectionSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
         _ ->
             JE.string (projectionLabel proj)
@@ -13868,60 +14020,63 @@ scaleDomainSpec sdType =
             JE.object (List.map dataRefProperty dataRef)
 
 
-scaleLabel : Scale -> String
-scaleLabel scType =
+scaleSpec : Scale -> Spec
+scaleSpec scType =
     case scType of
         ScLinear ->
-            "linear"
+            JE.string "linear"
 
         ScPow ->
-            "pow"
+            JE.string "pow"
 
         ScSqrt ->
-            "sqrt"
+            JE.string "sqrt"
 
         ScLog ->
-            "log"
+            JE.string "log"
 
         ScTime ->
-            "time"
+            JE.string "time"
 
         ScUtc ->
-            "utc"
+            JE.string "utc"
 
         ScSequential ->
-            "sequential"
+            JE.string "sequential"
 
         ScOrdinal ->
-            "ordinal"
+            JE.string "ordinal"
 
         ScBand ->
-            "band"
+            JE.string "band"
 
         ScPoint ->
-            "point"
+            JE.string "point"
 
         ScBinLinear ->
-            "bin-linear"
+            JE.string "bin-linear"
 
         ScBinOrdinal ->
-            "bin-ordinal"
+            JE.string "bin-ordinal"
 
         ScQuantile ->
-            "quantile"
+            JE.string "quantile"
 
         ScQuantize ->
-            "quantize"
+            JE.string "quantize"
 
         ScCustom s ->
-            s
+            JE.string s
+
+        ScaleSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 scaleProperty : ScaleProperty -> LabelledSpec
 scaleProperty scaleProp =
     case scaleProp of
         SType sType ->
-            ( "type", JE.string (scaleLabel sType) )
+            ( "type", scaleSpec sType )
 
         SDomain sdType ->
             ( "domain", scaleDomainSpec sdType )
@@ -13988,6 +14143,9 @@ scaleProperty scaleProp =
                 RCustom name ->
                     ( "range", JE.string name )
 
+                ScaleRangeSignal sig ->
+                    ( "range", JE.object [ signalReferenceProperty sig ] )
+
         SPadding x ->
             ( "padding", numSpec x )
 
@@ -14044,20 +14202,23 @@ schemeProperty sProps =
             numArrayProperty 2 "extent" n
 
 
-sideLabel : Side -> String
-sideLabel orient =
+sideSpec : Side -> Spec
+sideSpec orient =
     case orient of
         SLeft ->
-            "left"
+            JE.string "left"
 
         SBottom ->
-            "bottom"
+            JE.string "bottom"
 
         SRight ->
-            "right"
+            JE.string "right"
 
         STop ->
-            "top"
+            JE.string "top"
+
+        SideSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 signalProperty : SignalProperty -> LabelledSpec
@@ -14108,6 +14269,9 @@ sortProperty sp =
         Op op ->
             ( "op", opSpec op )
 
+        SortPropertySignal sig ->
+            ( "order", JE.object [ signalReferenceProperty sig ] )
+
 
 sourceProperty : Source -> LabelledSpec
 sourceProperty src =
@@ -14119,14 +14283,17 @@ sourceProperty src =
             ( "facet", JE.object (List.map facetProperty (FaData d :: FaName name :: fcts)) )
 
 
-spiralLabel : Spiral -> String
-spiralLabel sp =
+spiralSpec : Spiral -> Spec
+spiralSpec sp =
     case sp of
         Archimedean ->
-            "archimedean"
+            JE.string "archimedean"
 
         Rectangular ->
-            "rectangular"
+            JE.string "rectangular"
+
+        SpiralSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 stackOffsetSpec : StackOffset -> Spec
@@ -14141,7 +14308,7 @@ stackOffsetSpec off =
         OfNormalize ->
             JE.string "normalize"
 
-        OfSignal sig ->
+        StackOffsetSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
 
@@ -14208,6 +14375,16 @@ strString str =
             "null"
 
 
+symbolSpec : Symbol -> Spec
+symbolSpec sym =
+    case sym of
+        SymbolSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
+
+        _ ->
+            JE.string (symbolLabel sym)
+
+
 symbolLabel : Symbol -> String
 symbolLabel sym =
     case sym of
@@ -14238,6 +14415,9 @@ symbolLabel sym =
         SymPath svgPath ->
             svgPath
 
+        SymbolSignal sig ->
+            sig |> Debug.log "Warning: Attempting to provide a signal name to signalValue"
+
 
 teMethodSpec : TreeMethod -> Spec
 teMethodSpec m =
@@ -14252,45 +14432,62 @@ teMethodSpec m =
             JE.object [ signalReferenceProperty sigName ]
 
 
-timeUnitLabel : TimeUnit -> String
-timeUnitLabel tu =
+timeUnitSpec : TimeUnit -> Spec
+timeUnitSpec tu =
+    let
+        timeUnitLabel tu =
+            case tu of
+                Year ->
+                    "year"
+
+                Month ->
+                    "month"
+
+                Week ->
+                    "week"
+
+                Day ->
+                    "day"
+
+                Hour ->
+                    "hour"
+
+                Minute ->
+                    "minute"
+
+                Second ->
+                    "second"
+
+                Millisecond ->
+                    "millisecond"
+
+                Utc timeUnit ->
+                    "utc" ++ timeUnitLabel timeUnit
+
+                TimeUnitSignal sig ->
+                    ""
+
+        -- This will never be called
+    in
     case tu of
-        Year ->
-            "year"
+        TimeUnitSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
-        Month ->
-            "month"
-
-        Week ->
-            "week"
-
-        Day ->
-            "day"
-
-        Hour ->
-            "hour"
-
-        Minute ->
-            "minute"
-
-        Second ->
-            "second"
-
-        Millisecond ->
-            "millisecond"
-
-        Utc timeUnit ->
-            "utc" ++ timeUnitLabel timeUnit
+        _ ->
+            JE.string (timeUnitLabel tu)
 
 
-titleFrameLabel : TitleFrame -> String
-titleFrameLabel tf =
+titleFrameSpec : TitleFrame -> Spec
+titleFrameSpec tf =
     case tf of
         FrGroup ->
-            "group"
+            JE.string "group"
 
         FrBounds ->
-            "bounds"
+            JE.string "bounds"
+
+        TitleFrameSignal sig ->
+            JE.object [ signalReferenceProperty sig ]
 
 
 titleProperty : TitleProperty -> LabelledSpec
@@ -14300,7 +14497,7 @@ titleProperty tProp =
             ( "text", strSpec s )
 
         TOrient s ->
-            ( "orient", JE.string (sideLabel s) )
+            ( "orient", sideSpec s )
 
         TAnchor a ->
             ( "anchor", anchorSpec a )
@@ -14327,7 +14524,7 @@ titleProperty tProp =
             ( "fontWeight", valueSpec v )
 
         TFrame fr ->
-            ( "fame", JE.string (titleFrameLabel fr) )
+            ( "fame", titleFrameSpec fr )
 
         TInteractive b ->
             ( "interactive", booSpec b )
@@ -15261,7 +15458,7 @@ wordcloudProperty wcp =
             numArrayProperty 2 "size" ns
 
         WcSpiral sp ->
-            ( "spiral", JE.string (spiralLabel sp) )
+            ( "spiral", spiralSpec sp )
 
         WcAs x y fnt fntSz fntSt fntW angle ->
             ( "as", JE.list (List.map JE.string [ x, y, fnt, fntSz, fntSt, fntW, angle ]) )
