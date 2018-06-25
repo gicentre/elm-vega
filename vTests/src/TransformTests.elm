@@ -253,6 +253,7 @@ forceTest1 =
                 << mark Symbol
                     [ mName "nodes"
                     , mFrom [ srData (str "node-data") ]
+                    , mZIndex (num 1)
                     , mOn
                         [ trigger "fix" [ tgModifyValues "node" "fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}" ]
                         , trigger "!fix" [ tgModifyValues "node" "{fx: null, fy: null}" ]

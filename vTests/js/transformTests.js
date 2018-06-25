@@ -17630,7 +17630,7 @@ var _user$project$Vega$topMarkProperty = function (mProp) {
 				},
 				_1: {ctor: '[]'}
 			};
-		default:
+		case 'MGroup':
 			return A2(
 				_elm_lang$core$List$map,
 				function (_p170) {
@@ -17642,6 +17642,16 @@ var _user$project$Vega$topMarkProperty = function (mProp) {
 					};
 				},
 				_p169._0);
+		default:
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'zindex',
+					_1: _user$project$Vega$numSpec(_p169._0)
+				},
+				_1: {ctor: '[]'}
+			};
 	}
 };
 var _user$project$Vega$StrList = function (a) {
@@ -18401,6 +18411,10 @@ var _user$project$Vega$MTransform = function (a) {
 	return {ctor: 'MTransform', _0: a};
 };
 var _user$project$Vega$mTransform = _user$project$Vega$MTransform;
+var _user$project$Vega$MTopZIndex = function (a) {
+	return {ctor: 'MTopZIndex', _0: a};
+};
+var _user$project$Vega$mZIndex = _user$project$Vega$MTopZIndex;
 var _user$project$Vega$MSort = function (a) {
 	return {ctor: 'MSort', _0: a};
 };
@@ -20821,157 +20835,162 @@ var _user$project$TransformTests$forceTest1 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Vega$mOn(
-								{
-									ctor: '::',
-									_0: A2(
-										_user$project$Vega$trigger,
-										'fix',
-										{
-											ctor: '::',
-											_0: A2(_user$project$Vega$tgModifyValues, 'node', 'fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
+							_0: _user$project$Vega$mZIndex(
+								_user$project$Vega$num(1)),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$mOn(
+									{
 										ctor: '::',
 										_0: A2(
 											_user$project$Vega$trigger,
-											'!fix',
+											'fix',
 											{
 												ctor: '::',
-												_0: A2(_user$project$Vega$tgModifyValues, 'node', '{fx: null, fy: null}'),
+												_0: A2(_user$project$Vega$tgModifyValues, 'node', 'fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}'),
 												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _user$project$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _user$project$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _user$project$Vega$vScale('cScale'),
-														_1: {
-															ctor: '::',
-															_0: _user$project$Vega$vField(
-																_user$project$Vega$field('group')),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _user$project$Vega$maStroke(
-														{
-															ctor: '::',
-															_0: _user$project$Vega$white,
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Vega$enUpdate(
+											_0: A2(
+												_user$project$Vega$trigger,
+												'!fix',
 												{
 													ctor: '::',
-													_0: _user$project$Vega$maSize(
-														{
-															ctor: '::',
-															_0: _user$project$Vega$vSignal('2 * collideRadius * collideRadius'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _user$project$Vega$maCursor(
-															{
-																ctor: '::',
-																_0: _user$project$Vega$vStr(
-																	_user$project$Vega$cursorLabel(_user$project$Vega$CPointer)),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
+													_0: A2(_user$project$Vega$tgModifyValues, 'node', '{fx: null, fy: null}'),
+													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
 										}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Vega$mTransform(
+									_0: _user$project$Vega$mEncode(
 										{
 											ctor: '::',
-											_0: _user$project$Vega$trForce(
+											_0: _user$project$Vega$enEnter(
 												{
 													ctor: '::',
-													_0: _user$project$Vega$fsIterations(
-														_user$project$Vega$num(300)),
-													_1: {
-														ctor: '::',
-														_0: _user$project$Vega$fsVelocityDecay(
-															_user$project$Vega$numSignal('velocityDecay')),
-														_1: {
+													_0: _user$project$Vega$maFill(
+														{
 															ctor: '::',
-															_0: _user$project$Vega$fsRestart(
-																_user$project$Vega$booSignal('restart')),
+															_0: _user$project$Vega$vScale('cScale'),
 															_1: {
 																ctor: '::',
-																_0: _user$project$Vega$fsStatic(
-																	_user$project$Vega$booSignal('static')),
+																_0: _user$project$Vega$vField(
+																	_user$project$Vega$field('group')),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maStroke(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$white,
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$enUpdate(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$maSize(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vSignal('2 * collideRadius * collideRadius'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$maCursor(
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$vStr(
+																		_user$project$Vega$cursorLabel(_user$project$Vega$CPointer)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$mTransform(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$trForce(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$fsIterations(
+															_user$project$Vega$num(300)),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$fsVelocityDecay(
+																_user$project$Vega$numSignal('velocityDecay')),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$fsRestart(
+																	_user$project$Vega$booSignal('restart')),
 																_1: {
 																	ctor: '::',
-																	_0: _user$project$Vega$fsForces(
-																		{
-																			ctor: '::',
-																			_0: A2(
-																				_user$project$Vega$foCenter,
-																				_user$project$Vega$numSignal('cx'),
-																				_user$project$Vega$numSignal('cy')),
-																			_1: {
+																	_0: _user$project$Vega$fsStatic(
+																		_user$project$Vega$booSignal('static')),
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$Vega$fsForces(
+																			{
 																				ctor: '::',
 																				_0: A2(
-																					_user$project$Vega$foCollide,
-																					_user$project$Vega$numSignal('collideRadius'),
-																					{ctor: '[]'}),
+																					_user$project$Vega$foCenter,
+																					_user$project$Vega$numSignal('cx'),
+																					_user$project$Vega$numSignal('cy')),
 																				_1: {
 																					ctor: '::',
-																					_0: _user$project$Vega$foNBody(
-																						{
-																							ctor: '::',
-																							_0: _user$project$Vega$fpStrength(
-																								_user$project$Vega$numSignal('nbodyStrength')),
-																							_1: {ctor: '[]'}
-																						}),
+																					_0: A2(
+																						_user$project$Vega$foCollide,
+																						_user$project$Vega$numSignal('collideRadius'),
+																						{ctor: '[]'}),
 																					_1: {
 																						ctor: '::',
-																						_0: A2(
-																							_user$project$Vega$foLink,
-																							_user$project$Vega$str('link-data'),
+																						_0: _user$project$Vega$foNBody(
 																							{
 																								ctor: '::',
-																								_0: _user$project$Vega$fpDistance(
-																									_user$project$Vega$numSignal('linkDistance')),
+																								_0: _user$project$Vega$fpStrength(
+																									_user$project$Vega$numSignal('nbodyStrength')),
 																								_1: {ctor: '[]'}
 																							}),
-																						_1: {ctor: '[]'}
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_user$project$Vega$foLink,
+																								_user$project$Vega$str('link-data'),
+																								{
+																									ctor: '::',
+																									_0: _user$project$Vega$fpDistance(
+																										_user$project$Vega$numSignal('linkDistance')),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
 																					}
 																				}
-																			}
-																		}),
-																	_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
 																}
 															}
 														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}

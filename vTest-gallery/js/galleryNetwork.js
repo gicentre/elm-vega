@@ -17630,7 +17630,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 				},
 				_1: {ctor: '[]'}
 			};
-		default:
+		case 'MGroup':
 			return A2(
 				_elm_lang$core$List$map,
 				function (_p170) {
@@ -17642,6 +17642,16 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					};
 				},
 				_p169._0);
+		default:
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'zindex',
+					_1: _gicentre$elm_vega$Vega$numSpec(_p169._0)
+				},
+				_1: {ctor: '[]'}
+			};
 	}
 };
 var _gicentre$elm_vega$Vega$StrList = function (a) {
@@ -18401,6 +18411,10 @@ var _gicentre$elm_vega$Vega$MTransform = function (a) {
 	return {ctor: 'MTransform', _0: a};
 };
 var _gicentre$elm_vega$Vega$mTransform = _gicentre$elm_vega$Vega$MTransform;
+var _gicentre$elm_vega$Vega$MTopZIndex = function (a) {
+	return {ctor: 'MTopZIndex', _0: a};
+};
+var _gicentre$elm_vega$Vega$mZIndex = _gicentre$elm_vega$Vega$MTopZIndex;
 var _gicentre$elm_vega$Vega$MSort = function (a) {
 	return {ctor: 'MSort', _0: a};
 };
@@ -22981,152 +22995,157 @@ var _gicentre$elm_vega$GalleryNetwork$force1 = function () {
 							}),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$mOn(
-								{
-									ctor: '::',
-									_0: A2(
-										_gicentre$elm_vega$Vega$trigger,
-										'fix',
-										{
-											ctor: '::',
-											_0: A2(_gicentre$elm_vega$Vega$tgModifyValues, 'node', 'fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
+							_0: _gicentre$elm_vega$Vega$mZIndex(
+								_gicentre$elm_vega$Vega$num(1)),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$Vega$mOn(
+									{
 										ctor: '::',
 										_0: A2(
 											_gicentre$elm_vega$Vega$trigger,
-											'!fix',
+											'fix',
 											{
 												ctor: '::',
-												_0: A2(_gicentre$elm_vega$Vega$tgModifyValues, 'node', '{fx: null, fy: null}'),
+												_0: A2(_gicentre$elm_vega$Vega$tgModifyValues, 'node', 'fix === 1 ? {fx:node.x, fy:node.y} : {fx:x(), fy:y()}'),
 												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _gicentre$elm_vega$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _gicentre$elm_vega$Vega$maFill(
-													{
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$vScale('cScale'),
-														_1: {
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vField(
-																_gicentre$elm_vega$Vega$field('group')),
-															_1: {ctor: '[]'}
-														}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maStroke(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$white,
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
 											}),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$enUpdate(
+											_0: A2(
+												_gicentre$elm_vega$Vega$trigger,
+												'!fix',
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$maSize(
-														{
-															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$vSignal('2 * nodeRadius * nodeRadius'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$maCursor(
-															{
-																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$vStr(
-																	_gicentre$elm_vega$Vega$cursorLabel(_gicentre$elm_vega$Vega$CPointer)),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
+													_0: A2(_gicentre$elm_vega$Vega$tgModifyValues, 'node', '{fx: null, fy: null}'),
+													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
 										}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$mTransform(
+									_0: _gicentre$elm_vega$Vega$mEncode(
 										{
 											ctor: '::',
-											_0: _gicentre$elm_vega$Vega$trForce(
+											_0: _gicentre$elm_vega$Vega$enEnter(
 												{
 													ctor: '::',
-													_0: _gicentre$elm_vega$Vega$fsIterations(
-														_gicentre$elm_vega$Vega$num(300)),
-													_1: {
-														ctor: '::',
-														_0: _gicentre$elm_vega$Vega$fsRestart(
-															_gicentre$elm_vega$Vega$booSignal('restart')),
-														_1: {
+													_0: _gicentre$elm_vega$Vega$maFill(
+														{
 															ctor: '::',
-															_0: _gicentre$elm_vega$Vega$fsStatic(
-																_gicentre$elm_vega$Vega$booSignal('static')),
+															_0: _gicentre$elm_vega$Vega$vScale('cScale'),
 															_1: {
 																ctor: '::',
-																_0: _gicentre$elm_vega$Vega$fsForces(
-																	{
-																		ctor: '::',
-																		_0: A2(
-																			_gicentre$elm_vega$Vega$foCenter,
-																			_gicentre$elm_vega$Vega$numSignal('cx'),
-																			_gicentre$elm_vega$Vega$numSignal('cy')),
-																		_1: {
-																			ctor: '::',
-																			_0: A2(
-																				_gicentre$elm_vega$Vega$foCollide,
-																				_gicentre$elm_vega$Vega$numSignal('nodeRadius'),
-																				{ctor: '[]'}),
-																			_1: {
-																				ctor: '::',
-																				_0: _gicentre$elm_vega$Vega$foNBody(
-																					{
-																						ctor: '::',
-																						_0: _gicentre$elm_vega$Vega$fpStrength(
-																							_gicentre$elm_vega$Vega$numSignal('nodeCharge')),
-																						_1: {ctor: '[]'}
-																					}),
-																				_1: {
-																					ctor: '::',
-																					_0: A2(
-																						_gicentre$elm_vega$Vega$foLink,
-																						_gicentre$elm_vega$Vega$str('link-data'),
-																						{
-																							ctor: '::',
-																							_0: _gicentre$elm_vega$Vega$fpDistance(
-																								_gicentre$elm_vega$Vega$numSignal('linkDistance')),
-																							_1: {ctor: '[]'}
-																						}),
-																					_1: {ctor: '[]'}
-																				}
-																			}
-																		}
-																	}),
+																_0: _gicentre$elm_vega$Vega$vField(
+																	_gicentre$elm_vega$Vega$field('group')),
 																_1: {ctor: '[]'}
 															}
-														}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maStroke(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$white,
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
 													}
 												}),
-											_1: {ctor: '[]'}
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$enUpdate(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$maSize(
+															{
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$vSignal('2 * nodeRadius * nodeRadius'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$maCursor(
+																{
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$vStr(
+																		_gicentre$elm_vega$Vega$cursorLabel(_gicentre$elm_vega$Vega$CPointer)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
 										}),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$Vega$mTransform(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$Vega$trForce(
+													{
+														ctor: '::',
+														_0: _gicentre$elm_vega$Vega$fsIterations(
+															_gicentre$elm_vega$Vega$num(300)),
+														_1: {
+															ctor: '::',
+															_0: _gicentre$elm_vega$Vega$fsRestart(
+																_gicentre$elm_vega$Vega$booSignal('restart')),
+															_1: {
+																ctor: '::',
+																_0: _gicentre$elm_vega$Vega$fsStatic(
+																	_gicentre$elm_vega$Vega$booSignal('static')),
+																_1: {
+																	ctor: '::',
+																	_0: _gicentre$elm_vega$Vega$fsForces(
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_gicentre$elm_vega$Vega$foCenter,
+																				_gicentre$elm_vega$Vega$numSignal('cx'),
+																				_gicentre$elm_vega$Vega$numSignal('cy')),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_gicentre$elm_vega$Vega$foCollide,
+																					_gicentre$elm_vega$Vega$numSignal('nodeRadius'),
+																					{ctor: '[]'}),
+																				_1: {
+																					ctor: '::',
+																					_0: _gicentre$elm_vega$Vega$foNBody(
+																						{
+																							ctor: '::',
+																							_0: _gicentre$elm_vega$Vega$fpStrength(
+																								_gicentre$elm_vega$Vega$numSignal('nodeCharge')),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gicentre$elm_vega$Vega$foLink,
+																							_gicentre$elm_vega$Vega$str('link-data'),
+																							{
+																								ctor: '::',
+																								_0: _gicentre$elm_vega$Vega$fpDistance(
+																									_gicentre$elm_vega$Vega$numSignal('linkDistance')),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}

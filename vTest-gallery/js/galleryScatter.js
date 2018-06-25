@@ -17630,7 +17630,7 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 				},
 				_1: {ctor: '[]'}
 			};
-		default:
+		case 'MGroup':
 			return A2(
 				_elm_lang$core$List$map,
 				function (_p170) {
@@ -17642,6 +17642,16 @@ var _gicentre$elm_vega$Vega$topMarkProperty = function (mProp) {
 					};
 				},
 				_p169._0);
+		default:
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'zindex',
+					_1: _gicentre$elm_vega$Vega$numSpec(_p169._0)
+				},
+				_1: {ctor: '[]'}
+			};
 	}
 };
 var _gicentre$elm_vega$Vega$StrList = function (a) {
@@ -18401,6 +18411,10 @@ var _gicentre$elm_vega$Vega$MTransform = function (a) {
 	return {ctor: 'MTransform', _0: a};
 };
 var _gicentre$elm_vega$Vega$mTransform = _gicentre$elm_vega$Vega$MTransform;
+var _gicentre$elm_vega$Vega$MTopZIndex = function (a) {
+	return {ctor: 'MTopZIndex', _0: a};
+};
+var _gicentre$elm_vega$Vega$mZIndex = _gicentre$elm_vega$Vega$MTopZIndex;
 var _gicentre$elm_vega$Vega$MSort = function (a) {
 	return {ctor: 'MSort', _0: a};
 };
