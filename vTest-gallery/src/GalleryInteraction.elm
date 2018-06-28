@@ -1154,7 +1154,7 @@ interaction6 =
                             [ maX [ vNum 0 ]
                             , maHeight [ vNum 35 ]
                             , maFill [ transparent ]
-                            , maCursor [ cursorLabel CEWResize |> vStr ]
+                            , maCursor [ cursorValue CEWResize ]
                             ]
                         , enUpdate
                             [ maY [ vSignal "height" ]

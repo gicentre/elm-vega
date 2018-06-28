@@ -265,7 +265,7 @@ forceTest1 =
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * collideRadius * collideRadius" ]
-                            , maCursor [ vStr (cursorLabel CPointer) ]
+                            , maCursor [ cursorValue CPointer ]
                             ]
                         ]
                     , mTransform

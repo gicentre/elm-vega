@@ -232,7 +232,7 @@ force1 =
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * nodeRadius * nodeRadius" ]
-                            , maCursor [ vStr (cursorLabel CPointer) ]
+                            , maCursor [ cursorValue CPointer ]
                             ]
                         ]
                     , mTransform

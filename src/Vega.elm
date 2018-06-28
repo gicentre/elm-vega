@@ -233,7 +233,7 @@ module Vega
         , csScheme
         , cubeHelix
         , cubeHelixLong
-        , cursorLabel
+        , cursorValue
         , daDataset
         , daField
         , daFields
@@ -1881,7 +1881,7 @@ list of sub-values.
 @docs orientationSignal
 @docs orientationValue
 @docs Cursor
-@docs cursorLabel
+@docs cursorValue
 @docs HAlign
 @docs hAlignSignal
 @docs hLeft
@@ -4284,11 +4284,12 @@ cfStyle =
     CfStyle
 
 
-{-| Specify the properties dedining named range arrays used as part of scale specification.
+{-| Specify the properties defining named range arrays used as part of scale specification.
 The first parameter is the named range label (e.g.`RaOrdinal`, `RaCategory`, `RaHeamap`
-etc.). The second is the list of values to be associated with the range.
+etc.). The second is the new range of values to be associated with the named range.
 
-    TODO: Add example
+      cf =
+          config [ cfScaleRange RaHeatmap (raScheme (str "greenblue") []) ]
 
 For details, see the
 [Vega scale range configuration documentation](https://vega.github.io/vega/docs/config/#scale-range).
@@ -4480,11 +4481,25 @@ combineSpecs specs =
     JE.object specs
 
 
-{-| Create a collection of configuration settings. For details, see the
+{-| Create a collection of configuration settings. This allows default stylings
+to be defined for a collection of visualizations or visualization components.
+For details, see the
 [Vega configuration documentation](https://vega.github.io/vega/docs/config/)
 for details.
 
-    TODO: XXX
+    cf =
+        config
+            [ cfMark Text [ maFont [ vStr "Roboto Condensed, sans-serif" ] ]
+            , cfTitle
+                [ tiFont (str "Roboto Condensed, sans-serif")
+                , tiFontWeight (vNum 500)
+                , tiFontSize (num 17)
+                ]
+            , cfAxis AxAll
+                [ axLabelFont (str "Roboto Condensed, sans-serif")
+                , axLabelFontSize (num 12)
+                ]
+            ]
 
 -}
 config : List ConfigProperty -> ( VProperty, Spec )
@@ -4513,8 +4528,7 @@ cpCase =
 {-| Specify a regular expression to define a match in a count pattern transformation.
 The parameter should be a regular expression where any backslash symbols are escaped.
 
-    TODO: Add example here with escaped backslashes.
-    cpPattern str(\\b(he|it|she|the)\\b)
+    transform [ trCountPattern (field "data") [ cpPattern (str "[\\w']{3,}") ] ]
 
 For details see the
 [Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
@@ -4529,7 +4543,12 @@ cpPattern =
 count pattern transformation. The parameter should be a regular expression where
 any backslash symbols are escaped.
 
-    TODO: Add stopwords example (e.g. `(a|the|she|it)` here with escaped backslashes.
+    transform
+        [ trCountPattern (field "data")
+            [ cpPattern (str "[\\w']{3,}")
+            , cpStopwords (str "(a|the|she|it)")
+            ]
+        ]
 
 For details see the
 [Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
@@ -4661,116 +4680,116 @@ to avoid problems of mistyping its name.
     TODO: XXX Provide example
 
 -}
-cursorLabel : Cursor -> String
-cursorLabel cur =
+cursorValue : Cursor -> Value
+cursorValue cur =
     case cur of
         CAuto ->
-            "auto"
+            vStr "auto"
 
         CDefault ->
-            "default"
+            vStr "default"
 
         CNone ->
-            "none"
+            vStr "none"
 
         CContextMenu ->
-            "context-menu"
+            vStr "context-menu"
 
         CHelp ->
-            "help"
+            vStr "help"
 
         CPointer ->
-            "pointer"
+            vStr "pointer"
 
         CProgress ->
-            "progress"
+            vStr "progress"
 
         CWait ->
-            "wait"
+            vStr "wait"
 
         CCell ->
-            "cell"
+            vStr "cell"
 
         CCrosshair ->
-            "crosshair"
+            vStr "crosshair"
 
         CText ->
-            "text"
+            vStr "text"
 
         CVerticalText ->
-            "vertical-text"
+            vStr "vertical-text"
 
         CAlias ->
-            "alias"
+            vStr "alias"
 
         CCopy ->
-            "copy"
+            vStr "copy"
 
         CMove ->
-            "move"
+            vStr "move"
 
         CNoDrop ->
-            "no-drop"
+            vStr "no-drop"
 
         CNotAllowed ->
-            "not-allowed"
+            vStr "not-allowed"
 
         CAllScroll ->
-            "all-scroll"
+            vStr "all-scroll"
 
         CColResize ->
-            "col-resize"
+            vStr "col-resize"
 
         CRowResize ->
-            "row-resize"
+            vStr "row-resize"
 
         CNResize ->
-            "n-resize"
+            vStr "n-resize"
 
         CEResize ->
-            "e-resize"
+            vStr "e-resize"
 
         CSResize ->
-            "s-resize"
+            vStr "s-resize"
 
         CWResize ->
-            "w-resize"
+            vStr "w-resize"
 
         CNEResize ->
-            "ne-resize"
+            vStr "ne-resize"
 
         CNWResize ->
-            "nw-resize"
+            vStr "nw-resize"
 
         CSEResize ->
-            "se-resize"
+            vStr "se-resize"
 
         CSWResize ->
-            "sw-resize"
+            vStr "sw-resize"
 
         CEWResize ->
-            "ew-resize"
+            vStr "ew-resize"
 
         CNSResize ->
-            "ns-resize"
+            vStr "ns-resize"
 
         CNESWResize ->
-            "nesw-resize"
+            vStr "nesw-resize"
 
         CNWSEResize ->
-            "nwse-resize"
+            vStr "nwse-resize"
 
         CZoomIn ->
-            "zoom-in"
+            vStr "zoom-in"
 
         CZoomOut ->
-            "zoom-out"
+            vStr "zoom-out"
 
         CGrab ->
-            "grab"
+            vStr "grab"
 
         CGrabbing ->
-            "grabbing"
+            vStr "grabbing"
 
 
 {-| Reference a dataset with the given name. For details see the
@@ -7406,9 +7425,13 @@ maCornerRadius =
 
 {-| The cursor to be displayed over a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid cursor type
-names, use `cursorLabel`. For example:
+names, use `cursorValue`. For example:
 
-    TODO: Add cursorLabel example once API confirmed
+    marks
+        << mark Symbol
+            [ mFrom [ srData (str "myData") ]
+            , mEncode [ enUpdate [ maCursor [ cursorValue CPointer ] ] ]
+            ]
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).

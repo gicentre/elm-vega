@@ -229,7 +229,7 @@ custom1 =
                             ]
                         , enHover
                             [ maFill [ vStr "lemonchiffon" ]
-                            , maCursor [ cursorLabel CPointer |> vStr ]
+                            , maCursor [ cursorValue CPointer ]
                             ]
                         ]
                     ]

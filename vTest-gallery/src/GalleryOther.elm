@@ -253,7 +253,11 @@ wordcloud1 =
             dataSource
                 [ data "table" [ daValue (vStrs inText) ]
                     |> transform
-                        [ trCountPattern (field "data") [ cpCase Uppercase, cpPattern (str "[\\w']{3,}"), cpStopwords (str stopwords) ]
+                        [ trCountPattern (field "data")
+                            [ cpCase Uppercase
+                            , cpPattern (str "[\\w']{3,}")
+                            , cpStopwords (str stopwords)
+                            ]
                         , trFormulaInitOnly "[-45, 0, 45][~~(random() * 3)]" "angle"
                         , trFormulaInitOnly "if(datum.text=='VEGA', 600, 300)" "weight"
                         ]
