@@ -1,7 +1,7 @@
 <!doctype html>
 
 <head>
-  <title>Vega Event Tests</title>
+  <title>Vega Temporal Tests</title>
   <meta charset="utf-8">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
@@ -14,26 +14,24 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
-  <script src="js/eventTests.js"></script>
+  <script src="js/temporalTests.js"></script>
 
 </head>
 
 <body>
 
-  <h1>Vega Event Handling Tests</h1>
+  <h1>Vega Temporal Tests</h1>
 
-  <h2>UI Components</h2>
-  <div id="uiEvents" class="view"></div>
 
-  <h2>Event Streams</h2>
-  <div id="eventStream1" class="view"></div>
+  <div id="temporalTest1" class="view"></div>
+
 
 
   <h2>Source</h2>
   <div id="elmContainer"></div>
 
   <script>
-  Elm.EventTests.embed(
+  Elm.TemporalTests.embed(
   document.getElementById("elmContainer")
 ).ports.elmToJS.subscribe(function(namedSpecs) {
   for (let name of Object.keys(namedSpecs)) {
