@@ -8325,11 +8325,6 @@ var _user$project$Vega$timeUnitSpec = function (tu) {
 				return 'second';
 			case 'Millisecond':
 				return 'millisecond';
-			case 'Utc':
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					'utc',
-					timeUnitLabel(_p8._0));
 			default:
 				return '';
 		}
@@ -11048,10 +11043,10 @@ var _user$project$Vega$FeName = function (a) {
 	return {ctor: 'FeName', _0: a};
 };
 var _user$project$Vega$feName = _user$project$Vega$FeName;
-var _user$project$Vega$FeSignal = function (a) {
-	return {ctor: 'FeSignal', _0: a};
+var _user$project$Vega$FeatureSignal = function (a) {
+	return {ctor: 'FeatureSignal', _0: a};
 };
-var _user$project$Vega$feSignal = _user$project$Vega$FeSignal;
+var _user$project$Vega$featureSignal = _user$project$Vega$FeatureSignal;
 var _user$project$Vega$FParent = function (a) {
 	return {ctor: 'FParent', _0: a};
 };
@@ -20237,12 +20232,6 @@ var _user$project$Vega$TimeUnitSignal = function (a) {
 	return {ctor: 'TimeUnitSignal', _0: a};
 };
 var _user$project$Vega$timeUnitSignal = _user$project$Vega$TimeUnitSignal;
-var _user$project$Vega$Utc = function (a) {
-	return {ctor: 'Utc', _0: a};
-};
-var _user$project$Vega$utc = function (tu) {
-	return _user$project$Vega$Utc(tu);
-};
 var _user$project$Vega$Millisecond = {ctor: 'Millisecond'};
 var _user$project$Vega$Second = {ctor: 'Second'};
 var _user$project$Vega$Minute = {ctor: 'Minute'};
@@ -20684,76 +20673,22 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 				_user$project$Vega$transform,
 				{
 					ctor: '::',
-					_0: A2(_user$project$Vega$trFormula, 'datetime(year(datum.date),month(datum.date),0,0,0,0,0)', 'year'),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Vega$trAggregate(
-							{
-								ctor: '::',
-								_0: _user$project$Vega$agOps(
-									{
-										ctor: '::',
-										_0: _user$project$Vega$Mean,
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Vega$agFields(
-										{
-											ctor: '::',
-											_0: _user$project$Vega$field('temperature'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Vega$agGroupBy(
-											{
-												ctor: '::',
-												_0: _user$project$Vega$field('year'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Vega$agAs(
-												{
-													ctor: '::',
-													_0: 'meanTemperature',
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_0: A2(_user$project$Vega$trFormula, 'geoCentroid(\'myProj\', datum)', 'myCentroid'),
+					_1: {ctor: '[]'}
 				},
 				A2(
 					_user$project$Vega$data,
-					'timeData',
+					'world',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/timeTest.tsv'),
+						_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$daFormat(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$TSV,
-									_1: {
-										ctor: '::',
-										_0: _user$project$Vega$parse(
-											{
-												ctor: '::',
-												_0: {
-													ctor: '_Tuple2',
-													_0: 'date',
-													_1: _user$project$Vega$foDate('%d/%m/%y %H:%M')
-												},
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
+									_0: _user$project$Vega$topojsonFeature('countries'),
+									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
 						}

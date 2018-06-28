@@ -9098,11 +9098,6 @@ var _gicentre$elm_vega$Vega$timeUnitSpec = function (tu) {
 				return 'second';
 			case 'Millisecond':
 				return 'millisecond';
-			case 'Utc':
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					'utc',
-					timeUnitLabel(_p8._0));
 			default:
 				return '';
 		}
@@ -11821,10 +11816,10 @@ var _gicentre$elm_vega$Vega$FeName = function (a) {
 	return {ctor: 'FeName', _0: a};
 };
 var _gicentre$elm_vega$Vega$feName = _gicentre$elm_vega$Vega$FeName;
-var _gicentre$elm_vega$Vega$FeSignal = function (a) {
-	return {ctor: 'FeSignal', _0: a};
+var _gicentre$elm_vega$Vega$FeatureSignal = function (a) {
+	return {ctor: 'FeatureSignal', _0: a};
 };
-var _gicentre$elm_vega$Vega$feSignal = _gicentre$elm_vega$Vega$FeSignal;
+var _gicentre$elm_vega$Vega$featureSignal = _gicentre$elm_vega$Vega$FeatureSignal;
 var _gicentre$elm_vega$Vega$FParent = function (a) {
 	return {ctor: 'FParent', _0: a};
 };
@@ -21010,12 +21005,6 @@ var _gicentre$elm_vega$Vega$TimeUnitSignal = function (a) {
 	return {ctor: 'TimeUnitSignal', _0: a};
 };
 var _gicentre$elm_vega$Vega$timeUnitSignal = _gicentre$elm_vega$Vega$TimeUnitSignal;
-var _gicentre$elm_vega$Vega$Utc = function (a) {
-	return {ctor: 'Utc', _0: a};
-};
-var _gicentre$elm_vega$Vega$utc = function (tu) {
-	return _gicentre$elm_vega$Vega$Utc(tu);
-};
 var _gicentre$elm_vega$Vega$Millisecond = {ctor: 'Millisecond'};
 var _gicentre$elm_vega$Vega$Second = {ctor: 'Second'};
 var _gicentre$elm_vega$Vega$Minute = {ctor: 'Minute'};

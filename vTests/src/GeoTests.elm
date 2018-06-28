@@ -32,7 +32,7 @@ geoTest1 =
                 << projection "myProjection"
                     [ prType Orthographic
                     , prSize (numSignal "[width,height]")
-                    , prFit (feSignal "feature")
+                    , prFit (featureSignal "feature")
                     ]
 
         mk =

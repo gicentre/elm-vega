@@ -8325,11 +8325,6 @@ var _user$project$Vega$timeUnitSpec = function (tu) {
 				return 'second';
 			case 'Millisecond':
 				return 'millisecond';
-			case 'Utc':
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					'utc',
-					timeUnitLabel(_p8._0));
 			default:
 				return '';
 		}
@@ -11048,10 +11043,10 @@ var _user$project$Vega$FeName = function (a) {
 	return {ctor: 'FeName', _0: a};
 };
 var _user$project$Vega$feName = _user$project$Vega$FeName;
-var _user$project$Vega$FeSignal = function (a) {
-	return {ctor: 'FeSignal', _0: a};
+var _user$project$Vega$FeatureSignal = function (a) {
+	return {ctor: 'FeatureSignal', _0: a};
 };
-var _user$project$Vega$feSignal = _user$project$Vega$FeSignal;
+var _user$project$Vega$featureSignal = _user$project$Vega$FeatureSignal;
 var _user$project$Vega$FParent = function (a) {
 	return {ctor: 'FParent', _0: a};
 };
@@ -20237,12 +20232,6 @@ var _user$project$Vega$TimeUnitSignal = function (a) {
 	return {ctor: 'TimeUnitSignal', _0: a};
 };
 var _user$project$Vega$timeUnitSignal = _user$project$Vega$TimeUnitSignal;
-var _user$project$Vega$Utc = function (a) {
-	return {ctor: 'Utc', _0: a};
-};
-var _user$project$Vega$utc = function (tu) {
-	return _user$project$Vega$Utc(tu);
-};
 var _user$project$Vega$Millisecond = {ctor: 'Millisecond'};
 var _user$project$Vega$Second = {ctor: 'Second'};
 var _user$project$Vega$Minute = {ctor: 'Minute'};
@@ -21116,7 +21105,7 @@ var _user$project$GeoTests$geoTest1 = function () {
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$prFit(
-								_user$project$Vega$feSignal('feature')),
+								_user$project$Vega$featureSignal('feature')),
 							_1: {ctor: '[]'}
 						}
 					}

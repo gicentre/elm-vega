@@ -12,19 +12,12 @@ temporalTest1 =
     let
         ds =
             dataSource
-                [ data "timeData"
-                    [ daUrl "https://gicentre.github.io/data/timeTest.tsv"
-                    , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                [ data "world"
+                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    , daFormat [ topojsonFeature "countries" ]
                     ]
                     |> transform
-                        [ trFormula "datetime(year(datum.date),month(datum.date),0,0,0,0,0)" "year"
-                        , trAggregate
-                            [ agOps [ Mean ]
-                            , agFields [ field "temperature" ]
-                            , agGroupBy [ field "year" ]
-                            , agAs [ "meanTemperature" ]
-                            ]
-                        ]
+                        [ trFormula "geoCentroid('myProj', datum)" "myCentroid" ]
                 ]
 
         sc =
