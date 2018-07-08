@@ -8913,7 +8913,13 @@ type Projection
 
 {-| Create a single map projection for transforming geo data onto a plane.
 
-    TODO: XXX
+    pr =
+        projections
+            << projection "myProjection"
+                [ prType AlbersUsa
+                , prScale (num 1100)
+                , prTranslate (numSignals [ "width / 2", "height / 2" ])
+                ]
 
 -}
 projection : String -> List ProjectionProperty -> List Spec -> List Spec
@@ -8922,9 +8928,28 @@ projection name pps =
 
 
 {-| A convenience function for generating a value representing a given projection
-type.
+type. Useful when generating signals representing projection types.
 
-    TODO: XXX Provide example
+    standardProjections : Value
+    standardProjections =
+        List.map projectionValue
+            [ Albers
+            , AzimuthalEqualArea
+            , AzimuthalEquidistant
+            , ConicConformal
+            , ConicEqualArea
+            , Equirectangular
+            , Mercator
+            , Orthographic
+            ]
+            |> vValues
+
+    si =
+        signals
+            << signal "pType"
+                [ siValue (projectionValue Mercator)
+                , siBind (iSelect [ inOptions standardProjections ])
+                ]
 
 -}
 projectionValue : Projection -> Value

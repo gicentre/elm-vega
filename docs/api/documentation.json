@@ -4350,7 +4350,7 @@
       },
       {
         "name": "projection",
-        "comment": " Create a single map projection for transforming geo data onto a plane.\n\n    TODO: XXX\n\n",
+        "comment": " Create a single map projection for transforming geo data onto a plane.\n\n    pr =\n        projections\n            << projection \"myProjection\"\n                [ prType AlbersUsa\n                , prScale (num 1100)\n                , prTranslate (numSignals [ \"width / 2\", \"height / 2\" ])\n                ]\n\n",
         "type": "String -> List Vega.ProjectionProperty -> List Vega.Spec -> List Vega.Spec"
       },
       {
@@ -4360,7 +4360,7 @@
       },
       {
         "name": "projectionValue",
-        "comment": " A convenience function for generating a value representing a given projection\ntype.\n\n    TODO: XXX Provide example\n\n",
+        "comment": " A convenience function for generating a value representing a given projection\ntype. Useful when generating signals representing projection types.\n\n    standardProjections : Value\n    standardProjections =\n        List.map projectionValue\n            [ Albers\n            , AzimuthalEqualArea\n            , AzimuthalEquidistant\n            , ConicConformal\n            , ConicEqualArea\n            , Equirectangular\n            , Mercator\n            , Orthographic\n            ]\n            |> vValues\n\n    si =\n        signals\n            << signal \"pType\"\n                [ siValue (projectionValue Mercator)\n                , siBind (iSelect [ inOptions standardProjections ])\n                ]\n\n",
         "type": "Vega.Projection -> Vega.Value"
       },
       {
