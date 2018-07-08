@@ -5,9 +5,7 @@
   <meta charset="utf-8">
 
   <!-- These scripts link to the Vega runtime -->
-  <!-- TODO: When Vega 4 fully released, link to npm package <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  -->
-  <script src="https://vega.github.io/vega/vega.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -26,15 +24,15 @@
        that need be changed is the name HelloWorld in order to match the Elm module
        you create. -->
   <script>
-    Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: false,
-          logLevel: vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+  Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: false,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
 
 </body>
 
