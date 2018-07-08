@@ -20456,8 +20456,446 @@ var _user$project$Vega$trFormulaInitOnly = F2(
 		return A3(_user$project$Vega$TFormula, exp, fName, _user$project$Vega$InitOnly);
 	});
 
-var _user$project$TemporalTests$temporalTest1 = function () {
+var _user$project$TemporalTests$temporalTest2 = function () {
 	var mk = function (_p0) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Rect,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$srData(
+								_user$project$Vega$str('binned')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$enUpdate(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$maX(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$vScale('xScale'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$vField(
+														_user$project$Vega$field('bin0')),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$maX2(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vScale('xScale'),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$vField(
+															_user$project$Vega$field('bin1')),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$vOffset(
+																_user$project$Vega$vNum(-0.5)),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$maY(
+													{
+														ctor: '::',
+														_0: _user$project$Vega$vScale('yScale'),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$vField(
+																_user$project$Vega$field('count')),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maY2(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vScale('yScale'),
+															_1: {
+																ctor: '::',
+																_0: _user$project$Vega$vNum(0),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maFill(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vScale('cScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$vField(
+																		_user$project$Vega$field('meanDate')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_p0));
+	};
+	var lg = function (_p1) {
+		return _user$project$Vega$legends(
+			A2(
+				_user$project$Vega$legend,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$leFill('cScale'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$leType(_user$project$Vega$LGradient),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$leFormat(
+								_user$project$Vega$str('%b %Y')),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_user$project$Vega$leTemporalTickCount,
+									_user$project$Vega$Month,
+									_user$project$Vega$num(6)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_p1));
+	};
+	var ax = function (_p2) {
+		return _user$project$Vega$axes(
+			A4(
+				_user$project$Vega$axis,
+				'xScale',
+				_user$project$Vega$SBottom,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$axTitle(
+						_user$project$Vega$str('temperature (C)')),
+					_1: {ctor: '[]'}
+				},
+				_p2));
+	};
+	var sc = function (_p3) {
+		return _user$project$Vega$scales(
+			A3(
+				_user$project$Vega$scale,
+				'xScale',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$scType(_user$project$Vega$ScLinear),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$scRange(_user$project$Vega$RaWidth),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$scDomain(
+								_user$project$Vega$doData(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$daDataset('timeData'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$daField(
+												_user$project$Vega$field('temperature')),
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_user$project$Vega$scale,
+					'yScale',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$scType(_user$project$Vega$ScLinear),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$scRange(_user$project$Vega$RaHeight),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$scRound(_user$project$Vega$true),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$scDomain(
+										_user$project$Vega$doData(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$daDataset('binned'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$daField(
+														_user$project$Vega$field('count')),
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$scZero(_user$project$Vega$true),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$scNice(_user$project$Vega$NTrue),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					A3(
+						_user$project$Vega$scale,
+						'cScale',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$scType(_user$project$Vega$ScTime),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$scDomain(
+									_user$project$Vega$doData(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$daDataset('binned'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$daField(
+													_user$project$Vega$field('meanDate')),
+												_1: {ctor: '[]'}
+											}
+										})),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$scRange(_user$project$Vega$RaRamp),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p3))));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$data,
+				'timeData',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/timeTest.tsv'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$daFormat(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$TSV,
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$parse(
+										{
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'date',
+												_1: _user$project$Vega$foDate('%d/%m/%y %H:%M')
+											},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Vega$transform,
+					{
+						ctor: '::',
+						_0: A3(
+							_user$project$Vega$trBin,
+							_user$project$Vega$field('temperature'),
+							_user$project$Vega$nums(
+								{
+									ctor: '::',
+									_0: 0,
+									_1: {
+										ctor: '::',
+										_0: 30,
+										_1: {ctor: '[]'}
+									}
+								}),
+							{
+								ctor: '::',
+								_0: _user$project$Vega$bnStep(
+									_user$project$Vega$num(1)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$trAggregate(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$agFields(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$field('temperature'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$field('date'),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$agGroupBy(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$field('bin0'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$field('bin1'),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$agOps(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$Count,
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$Mean,
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$agAs(
+													{
+														ctor: '::',
+														_0: 'count',
+														_1: {
+															ctor: '::',
+															_0: 'meanDate',
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_user$project$Vega$data,
+						'binned',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$daSource('timeData'),
+							_1: {ctor: '[]'}
+						})),
+				_1: {ctor: '[]'}
+			}
+		});
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(500),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(200),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$padding(5),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: sc(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: ax(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: lg(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: mk(
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$TemporalTests$sourceExample = _user$project$TemporalTests$temporalTest2;
+var _user$project$TemporalTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TemporalTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$TemporalTests$temporalTest1 = function () {
+	var mk = function (_p4) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -20572,9 +21010,9 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p0)));
+					_p4)));
 	};
-	var ax = function (_p1) {
+	var ax = function (_p5) {
 		return _user$project$Vega$axes(
 			A4(
 				_user$project$Vega$axis,
@@ -20602,9 +21040,9 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 					'yScale',
 					_user$project$Vega$SLeft,
 					{ctor: '[]'},
-					_p1)));
+					_p5)));
 	};
-	var sc = function (_p2) {
+	var sc = function (_p6) {
 		return _user$project$Vega$scales(
 			A3(
 				_user$project$Vega$scale,
@@ -20664,7 +21102,7 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 							}
 						}
 					},
-					_p2)));
+					_p6)));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -20673,22 +21111,76 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 				_user$project$Vega$transform,
 				{
 					ctor: '::',
-					_0: A2(_user$project$Vega$trFormula, 'geoCentroid(\'myProj\', datum)', 'myCentroid'),
-					_1: {ctor: '[]'}
+					_0: A2(_user$project$Vega$trFormula, 'datetime(year(datum.date),month(datum.date),0,0,0,0,0)', 'year'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$trAggregate(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$agOps(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$Mean,
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$agFields(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$field('temperature'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$agGroupBy(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$field('year'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$agAs(
+												{
+													ctor: '::',
+													_0: 'meanTemperature',
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
 				},
 				A2(
 					_user$project$Vega$data,
-					'world',
+					'timeData',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+						_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/timeTest.tsv'),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$daFormat(
 								{
 									ctor: '::',
-									_0: _user$project$Vega$topojsonFeature('countries'),
-									_1: {ctor: '[]'}
+									_0: _user$project$Vega$TSV,
+									_1: {
+										ctor: '::',
+										_0: _user$project$Vega$parse(
+											{
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'date',
+													_1: _user$project$Vega$foDate('%d/%m/%y %H:%M')
+												},
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {ctor: '[]'}
 						}
@@ -20729,41 +21221,15 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 			}
 		});
 }();
-var _user$project$TemporalTests$sourceExample = _user$project$TemporalTests$temporalTest1;
-var _user$project$TemporalTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _user$project$TemporalTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$TemporalTests$mySpecs = _user$project$Vega$combineSpecs(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'temporalTest1', _1: _user$project$TemporalTests$temporalTest1},
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'temporalTest2', _1: _user$project$TemporalTests$temporalTest2},
+			_1: {ctor: '[]'}
+		}
 	});
 var _user$project$TemporalTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
@@ -20779,7 +21245,7 @@ var _user$project$TemporalTests$main = _elm_lang$html$Html$program(
 		},
 		view: _user$project$TemporalTests$view,
 		update: F2(
-			function (_p3, model) {
+			function (_p7, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

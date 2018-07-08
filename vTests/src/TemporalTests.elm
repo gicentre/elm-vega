@@ -12,12 +12,19 @@ temporalTest1 =
     let
         ds =
             dataSource
-                [ data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
-                    , daFormat [ topojsonFeature "countries" ]
+                [ data "timeData"
+                    [ daUrl "https://gicentre.github.io/data/timeTest.tsv"
+                    , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
-                        [ trFormula "geoCentroid('myProj', datum)" "myCentroid" ]
+                        [ trFormula "datetime(year(datum.date),month(datum.date),0,0,0,0,0)" "year"
+                        , trAggregate
+                            [ agOps [ Mean ]
+                            , agFields [ field "temperature" ]
+                            , agGroupBy [ field "year" ]
+                            , agAs [ "meanTemperature" ]
+                            ]
+                        ]
                 ]
 
         sc =
@@ -70,9 +77,83 @@ temporalTest1 =
         [ width 800, height 200, padding 5, ds, sc [], ax [], mk [] ]
 
 
+temporalTest2 : Spec
+temporalTest2 =
+    let
+        ds =
+            dataSource
+                [ data "timeData"
+                    [ daUrl "https://gicentre.github.io/data/timeTest.tsv"
+                    , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                    ]
+                , data "binned" [ daSource "timeData" ]
+                    |> transform
+                        [ trBin (field "temperature") (nums [ 0, 30 ]) [ bnStep (num 1) ]
+                        , trAggregate
+                            [ agFields [ field "temperature", field "date" ]
+                            , agGroupBy [ field "bin0", field "bin1" ]
+                            , agOps [ Count, Mean ]
+                            , agAs [ "count", "meanDate" ]
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType ScLinear
+                    , scRange RaWidth
+                    , scDomain (doData [ daDataset "timeData", daField (field "temperature") ])
+                    ]
+                << scale "yScale"
+                    [ scType ScLinear
+                    , scRange RaHeight
+                    , scRound true
+                    , scDomain (doData [ daDataset "binned", daField (field "count") ])
+                    , scZero true
+                    , scNice NTrue
+                    ]
+                << scale "cScale"
+                    [ scType ScTime
+                    , scDomain (doData [ daDataset "binned", daField (field "meanDate") ])
+                    , scRange RaRamp
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" SBottom [ axTitle (str "temperature (C)") ]
+
+        lg =
+            legends
+                << legend
+                    [ leFill "cScale"
+                    , leType LGradient
+                    , leFormat (str "%b %Y")
+                    , leTemporalTickCount Month (num 6)
+                    ]
+
+        mk =
+            marks
+                << mark Rect
+                    [ mFrom [ srData (str "binned") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "bin0") ]
+                            , maX2 [ vScale "xScale", vField (field "bin1"), vOffset (vNum -0.5) ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vScale "cScale", vField (field "meanDate") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, padding 5, ds, sc [], ax [], lg [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    temporalTest1
+    temporalTest2
 
 
 
@@ -83,6 +164,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "temporalTest1", temporalTest1 )
+        , ( "temporalTest2", temporalTest2 )
         ]
 
 

@@ -2982,7 +2982,6 @@ type ProjectionProperty
 type ScaleDomain
     = DoNums Num
     | DoStrs Str
-      -- TODO: Do we need DateTimes as literals?
     | DoData (List DataReference)
 
 
@@ -4675,7 +4674,19 @@ type Cursor
 type. This can be used instead of specifying a cursor type as a literal string
 to avoid problems of mistyping its name.
 
-    TODO: XXX Provide example
+    mark Symbol
+        [ mEncode
+            [ enEnter
+                [ maY [ vScale "yScale", vNum 0, vOffset (vNum 1) ]
+                , maShape [ symbolValue SymTriangleDown ]
+                , maSize [ vNum 400 ]
+                ]
+            , enUpdate
+                [ maX [ vScale "xScale", vSignal "currentYear" ] ]
+            , enHover
+                [ maCursor [ cursorValue CPointer ] ]
+            ]
+        ]
 
 -}
 cursorValue : Cursor -> Value
@@ -5508,10 +5519,42 @@ esSource =
     ESSource
 
 
-{-| Specify an event stream that is to be the used as input into a derived event
-stream.
+{-| Specify an event stream that is to be used as input into a derived event stream.
+This can be useful if several event streams have a common element, for example:
 
-    TODO: XXXX Add example
+    si =
+        let
+            esStart =
+                esMerge
+                    [ esObject [ esType MouseDown ]
+                    , esObject [ esType TouchStart ]
+                    ]
+
+            esEnd =
+                esObject [ esType TouchEnd ]
+        in
+        signals
+            << signal "down"
+                [ siValue vNull
+                , siOn
+                    [ evHandler [ esEnd ] [ evUpdate "null" ]
+                    , evHandler [ esStart ] [ evUpdate "xy()" ]
+                    ]
+                ]
+            << signal "xCur"
+                [ siValue vNull
+                , siOn
+                    [ evHandler [ esObject [ esStream esStart, esType TouchEnd ] ]
+                        [ evUpdate "slice(xDom)" ]
+                    ]
+                ]
+            << signal "yCur"
+                [ siValue vNull
+                , siOn
+                    [ evHandler [ esObject [ esStream esStart, esType TouchEnd ] ]
+                        [ evUpdate "slice(yDom)" ]
+                    ]
+                ]
 
 For more details see the
 [Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
@@ -6550,9 +6593,11 @@ keyValue =
     VKeyValue
 
 
-{-| Create a layout used in the visualization.
+{-| Create a layout used in the visualization. For example the following creates
+a three-column layout with 20 pixel padding between columns:
 
-    TODO: XXX
+    lo =
+        layout [ loColumns (num 3), loPadding (num 20) ]
 
 -}
 layout : List LayoutProperty -> ( VProperty, Spec )
@@ -6655,7 +6700,14 @@ leFormat =
 
 {-| Create a single legend used to visualize a color, size or shape mapping.
 
-    TODO: XXX
+    legends
+        << legend
+            [ leTitle (str "Percentage of Obese Adults")
+            , leOrient BottomRight
+            , leType LSymbol
+            , leSize "mySizeScale"
+            , leFill "myColorScale"
+            ]
 
 -}
 legend : List LegendProperty -> List Spec -> List Spec
@@ -6663,9 +6715,24 @@ legend lps =
     (::) (JE.object (List.map legendProperty lps))
 
 
-{-| Create legends used to visualize color, size and shape mappings.
+{-| Create legends used to visualize color, size and shape mappings. Commonly the
+functional composition operator (`<<`) is used to combine multiple legend
+specifications. For example,
 
-    TODO: XXX
+    lg =
+        legends
+            << legend
+                [ leTitle (str "Income")
+                , leOrient BottomRight
+                , leType LSymbol
+                , leSize "mySizeScale"
+                ]
+            << legend
+                [ leTitle (str "Nationality")
+                , leOrient TopRight
+                , leType LSymbol
+                , leFill "myColorScale"
+                ]
 
 -}
 legends : List Spec -> ( VProperty, Spec )
@@ -7000,10 +7067,17 @@ leStrokeDash =
 
 {-| Specify a desired number of ticks for a temporal legends. The first parameter
 is the type of temporal interval to use and the second the number of steps of that
-interval between ticks. For example to specify a tick is requested at 3 month
-intervals (e.g. January, April, July, October):
+interval between ticks. For example to specify a tick is requested at 6 month
+intervals (e.g. January, July):
 
-    TODO: XXXX
+    lg =
+        legends
+            << legend
+                [ leFill "cScale"
+                , leType LGradient
+                , leFormat (str "%b %Y")
+                , leTemporalTickCount Month (num 6)
+                ]
 
 If the second parameter is not a positive value, the number of ticks will be
 auto-generated for the given interval type. For details see the
