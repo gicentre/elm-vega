@@ -697,6 +697,7 @@ module Vega
         , teSize
         , teSort
         , textDirectionSignal
+        , textDirectionValue
         , tgInsert
         , tgModifyValues
         , tgRemove
@@ -1901,6 +1902,7 @@ list of sub-values.
 @docs StrokeJoin
 @docs strokeJoinSignal
 @docs strokeJoinValue
+@docs textDirectionValue
 @docs TextDirection
 @docs textDirectionSignal
 
@@ -7524,7 +7526,12 @@ maCursor =
 
 {-| Create a custom mark property. For example:
 
-    TODO: Add example, such as xFocus in the Beeswarm plot
+    mEncode
+        [ enEnter
+            [ maFill [ vScale "cScale", vField (field "group") ]
+            , maCustom "myName" [ vScale "xScale", vField (field "group") ]
+            ]
+        ]
 
 For further details see the
 [Vega Beeswarm plot example](https://vega.github.io/vega/examples/beeswarm-plot/).
@@ -7549,9 +7556,16 @@ maDefined =
 {-| The direction text is rendered in a text mark. This determines which side is
 truncated in response to the text size exceeding the value of the limit parameter.
 This may be specified directly, via a field, a signal or any other string-generating
-value. To guarantee valid direction type names, use `dirLabel`. For example:
+value. To guarantee valid direction type names, use `textDirectionValue`. For example:
 
-    TODO: Add dirLabel example once API confirmed
+    << mark Text
+        [ mFrom [ srData (str "table") ]
+        , mEncode
+            [ enEnter
+                [ maText [ vField (field "date") ]
+                , maDir [ textDirectionValue RightToLeft ]
+                ]
+        ]
 
 For further details see the
 [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
@@ -7701,9 +7715,16 @@ maInnerRadius =
 
 {-| The interpolation style of a linear mark. This may be specified directly,
 via a field, a signal or any other text-generating value. To guarantee valid
-interpolation type names, use `markInterpolation`. For example:
+interpolation type names, use [markInterpolationValue](#markInterpolationValue).
+For example:
 
-    TODO: Add markInterpolation example once API confirmed
+    mark Area
+        [ mFrom [ srData (str "myData") ]
+        , mEncode
+            [ enEnter
+                [ maInterpolate [ markInterpolationValue CatmullRom ] ]
+            ]
+        ]
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -7738,9 +7759,20 @@ maOpacity =
 defined by the x, y, and (y2 or height) properties; with a horizontal orientation,
 the y, x and (x2 or width) properties must be specified instead. The orientation
 may be specified directly, via a field, a signal or any other text-generating value.
-To guarantee valid orientation type names, use `orientation`. For example:
+To guarantee valid orientation type names, use [orientationValue](#orientationValue).
+For example:
 
-    TODO: Add orientation example once API confirmed
+    mark Area
+        [ mFrom [ srData (str "myData") ]
+        , mEncode
+            [ enEnter
+                [ maOrient [ orientationValue Horizontal ]
+                , maX [ vScale "xScale", vField (field "age") ]
+                , maY [ vScale "yScale", vField (field "value") ]
+                , maX2 [ vScale "xScale", vNum 0 ]
+                ]
+            ]
+        ]
 
 For further details see the
 [Vega area mark documentation](https://vega.github.io/vega/docs/marks/area/).
@@ -7810,9 +7842,36 @@ type Mark
     | Trail
 
 
-{-| Create a single mark definition.
+{-| Create a single mark definition. Marks form the visible components of a visualization.
+For available mark types see [Mark](#mark). Each mark specification can include
+a list of mark properties (second parameter) that customise the appearance of the
+mark and relate its appearance to data streams or signals. Commonly multiple marks
+are combined with the composition operator (`<<`), for example:
 
-    TODO: XXX
+      mk =
+          marks
+              << mark Rect
+                  [ mFrom [ srData (str "myData") ]
+                  , mEncode
+                      [ enEnter
+                          [ maX [ vScale "xScale", vField (field "age") ]
+                          , maWidth [ vNum 17 ]
+                          , maY [ vScale "yScale", vField (field "value") ]
+                          , maY2 [ vScale "yScale", vNum 0 ]
+                          ]
+                      ]
+                  ]
+              << mark Area
+                  [ mFrom [ srData (str "myOtherData") ]
+                  , mEncode
+                      [ enEnter
+                          [ maX [ vScale "xScale", vField (field "age") ]
+                          , maY [ vScale "yScale", vField (field "anotherValue") ]
+                          , maY2 [ vScale "yScale", vNum 0 ]
+                          , maFill [ vStr "#b3d9e6" ]
+                          ]
+                      ]
+                  ]
 
 -}
 mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
@@ -7881,7 +7940,7 @@ markInterpolationValue interp =
 orientation type. This can be used instead of specifying an orientation type as
 a literal string to avoid problems of mistyping its name.
 
-    TODO: XXX Add example
+     maOrient [ orientationValue Horizontal ]
 
 -}
 orientationValue : Orientation -> Value
@@ -7900,9 +7959,32 @@ orientationValue orient =
             vSignal sig
 
 
-{-| Create the marks used in the visualization.
+{-| Create the marks used in the visualization. Multiple mark specifications are
+commonly combined using the functional composition opererator (`<<`). For example,
 
-    TODO: XXX
+      mk =
+          marks
+              << mark Line
+                  [ mFrom [ srData (str "myData") ]
+                  , mEncode
+                      [ enEnter
+                          [ maX [ vScale "xScale", vField (field "distance") ]
+                          , maY [ vScale "yScale", vField (field "energy") ]
+                          , maStroke [ black ]
+                          ]
+                      ]
+                  ]
+              << mark Symbol
+                  [ mFrom [ srData (str "myData") ]
+                  , mEncode
+                      [ enEnter
+                          [ maX [ vScale "xScale", vField (field "distance") ]
+                          , maY [ vScale "yScale", vField (field "energy") ]
+                          , maFill [ white ]
+                          , maStroke [ black ]
+                          ]
+                      ]
+                  ]
 
 -}
 marks : List Spec -> ( VProperty, Spec )
@@ -7911,13 +7993,27 @@ marks axs =
 
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
-Shape instances can not be specified directly, they must be generated by a data
-transform such as geoshape. For further details see the
-[Vega shape documentation](https://vega.github.io/vega/docs/marks/shape/).
+Shape instances cannot be specified directly, instead they must be generated by
+a data transform such as symbol generation or a geoshape. For further details see
+the [Vega shape documentation](https://vega.github.io/vega/docs/marks/shape/).
+For example,
+
+    shapeEncoding =
+        [ maShape [ symbolValue SymSquare ]
+        , maStroke [ black ]
+        ]
+
+    lg =
+        legends
+            << legend
+                [ leFill "cScale"
+                , leOrient BottomRight
+                , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
+                ]
+
 -}
 maShape : List Value -> MarkProperty
 maShape =
-    -- TODO: Specify how a shape generator can be stored in a Value
     MShape
 
 
@@ -7953,9 +8049,9 @@ maStroke =
 
 {-| The stroke cap ending style for a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid stroke cap
-names, use `strokeCapLabel`. For example:
+names, use [strokeCapValue](#strokeCapValue). For example:
 
-    TODO: Add strokeCapValue example once API confirmed
+      maStrokeCap [ strokeCapValue CRound ]
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -7989,7 +8085,7 @@ maStrokeDashOffset =
 field, a signal or any other text-generating value. To guarantee valid stroke join
 names, use `strokeJoinLabel`. For example:
 
-    TODO: Add strokeJoinValue example once API confirmed
+    strokeCapValue CButt
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
@@ -8027,12 +8123,17 @@ maStrokeWidth =
     MStrokeWidth
 
 
-{-| A symbol shape that describes a symbol mark. For correct sizing, custom shape
-paths should be defined within a square with coordinates ranging from -1 to 1 along
-both the x and y dimensions. Symbol definitions may be specified directly, via a
-field, a signal or any other text-generating value. For example:
+{-| A symbol shape that describes a symbol mark. For preset shapes, use
+[symbolValue](#symbolValue). For correct sizing of custom shape paths, define
+coordinates within a square ranging from -1 to 1 along both the x and y dimensions.
+Symbol definitions may be specified directly, via a field, a signal or any other
+text-generating value. For example, to generate a preset shape:
 
-    TODO: Add symbol example once API confirmed
+    maShape [ symbolValue SymTriangleLeft ]
+
+or a custom shape with an SVG path:
+
+    maShape [ symbolValue (symPath "M-1,-1H1V1H-1Z") ]
 
 For further details see the
 [Vega symbol documentation](https://vega.github.io/vega/docs/marks/symbol/).
@@ -8269,7 +8370,7 @@ items and sorting is performed after encodings are computed, allowing items to b
 sorted by size or position. To sort by underlying data properties in addition to
 mark item properties, append the prefix `datum` to a field name.
 
-    TODO: XXX Provide example
+    mSort [ ( field "datum.y", Ascend ) ]
 
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks).
@@ -8507,9 +8608,6 @@ type Padding
 interpreted will depend on the `autosize` properties. See the
 [Vega specification documentation](https://vega.github.io/vega/docs/specification/)
 for details.
-
-    TODO: XXX
-
 -}
 padding : Float -> ( VProperty, Spec )
 padding p =
@@ -8521,9 +8619,6 @@ _right_, _bottom_ order. The way padding is interpreted will depend on the
 `autosize` properties. See the
 [Vega specification documentation](https://vega.github.io/vega/docs/specification/)
 for details.
-
-    TODO: XXX
-
 -}
 paddings : Float -> Float -> Float -> Float -> ( VProperty, Spec )
 paddings l t r b =
@@ -8588,7 +8683,12 @@ paSize n =
 {-| Specify how sorting of sibling nodes is supported in a packing transform.
 The inputs to subject to sorting are tree node objects, not input data objects.
 
-    TODO: XXX Provide example
+    transform
+        [ trPack
+            [ paField (field "size")
+            , paSort [ ( field "value", Ascend ) ]
+            ]
+        ]
 
 For details, see the
 [Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
@@ -9929,6 +10029,21 @@ by the signal are the strings `ltr` and `rtl` .
 textDirectionSignal : String -> TextDirection
 textDirectionSignal =
     TextDirectionSignal
+
+
+{-| Create a text direction value. This can be used with [maDir](#maDir).
+-}
+textDirectionValue : TextDirection -> Value
+textDirectionValue dir =
+    case dir of
+        LeftToRight ->
+            vStr "ltr"
+
+        RightToLeft ->
+            vStr "rtl"
+
+        TextDirectionSignal sig ->
+            vSignal sig
 
 
 {-| Specify an expression that evaluates to data objects to insert as triggers.

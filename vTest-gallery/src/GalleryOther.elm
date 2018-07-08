@@ -274,6 +274,7 @@ wordcloud1 =
                         [ enEnter
                             [ maText [ vField (field "text") ]
                             , maAlign [ hCenter ]
+                            , maDir [ textDirectionValue LeftToRight ]
                             , maBaseline [ vAlphabetic ]
                             , maFill [ vScale "cScale", vField (field "text") ]
                             ]
