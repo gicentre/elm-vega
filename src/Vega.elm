@@ -8810,8 +8810,7 @@ prClipExtent =
     PrClipExtent
 
 
-{-| TODO: Add comments for function.
-For details see the
+{-| Specify a Hammer map projection's coefficient (defaults to 2). For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prCoefficient : Num -> ProjectionProperty
@@ -8828,8 +8827,8 @@ prCustom =
     Proj
 
 
-{-| TODO: Add comments for function.
-For details see the
+{-| Specify a Satellite map projection's distance value. Values are expressed as a
+proportion of the Earth's radius (defaults to 2). For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prDistance : Num -> ProjectionProperty
@@ -8871,7 +8870,7 @@ prFit =
     PrFit
 
 
-{-| TODO: Add comments for function.
+{-| Specify a Bottomley map projection's fraction prameter (defaults to 0.5).
 For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
@@ -8880,7 +8879,7 @@ prFraction =
     PrFraction
 
 
-{-| TODO: Add comments for function.
+{-| Specify the number of lobes in radial map projections such as the Berghaus Star.
 For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
@@ -8999,8 +8998,8 @@ prType =
     PrType
 
 
-{-| TODO: Add comments for function.
-For details see the
+{-| Specify a the parallel used for map projections such as the Armadillo (defaults
+to 20 degrees N). For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prParallel : Num -> ProjectionProperty
@@ -9028,7 +9027,7 @@ prPrecision =
     PrPrecision
 
 
-{-| TODO: Add comments for function.
+{-| Specify the radius for the Gingery map projection. Defaults to 30 degrees.
 For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
@@ -9037,8 +9036,8 @@ prRadius =
     PrRadius
 
 
-{-| TODO: Add comments for function.
-For details see the
+{-| Specify a Hill map projection's ratio allowing it to vary continuously between
+Maurer 73 (0) and Eckert IV projections (infinity). Defaults to 1. For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prRatio : Num -> ProjectionProperty
@@ -9080,7 +9079,7 @@ prSize =
     PrSize
 
 
-{-| TODO: Add comments for function.
+{-| Specify the spacing for a Lagrange conformal map projection (defaults to 0.5).
 For details see the
 [Vega map projectiondocumentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
@@ -9089,7 +9088,7 @@ prSpacing =
     PrSpacing
 
 
-{-| TODO: Add comments for function.
+{-| Specify the tilt angle for a Satellite map projection (defaults to 0 degrees).
 For details see the
 [Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
