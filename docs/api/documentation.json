@@ -8956,7 +8956,7 @@
       },
       {
         "name": "raData",
-        "comment": " A scale range specified as a data reference object. This is used for specifying\nordinal scale ranges as a series of distinct field values.\n\n    TODO: Add example\n\nFor details see the\n[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).\n\n",
+        "comment": " A scale range specified as a data reference object. This is used for specifying\nordinal scale ranges as a series of distinct field values.\n\n    scale \"myScale\"\n        [ scType ScOrdinal\n        , scDomain (doData [ daDataset \"clusters\", daField (field \"id\") ])\n        , scRange (raData [ daDataset \"clusters\", daField (field \"name\") ])\n        ]\n\nFor details see the\n[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).\n\n",
         "type": "List Vega.DataReference -> Vega.ScaleRange"
       },
       {
@@ -9106,7 +9106,7 @@
       },
       {
         "name": "scale",
-        "comment": " Create a single scale used to map data values to visual properties.\n\n    TODO: XXX\n\n",
+        "comment": " Create a single scale used to map data values to visual properties.\n\n    scale \"xScale\"\n        [ scType ScLinear\n        , scDomain (doData [ daDataset \"myData\", daField (field \"myField\") ])\n        , scRange RaWidth\n        ]\n\n",
         "type": "String -> List Vega.ScaleProperty -> List Vega.Spec -> List Vega.Spec"
       },
       {
@@ -9126,7 +9126,7 @@
       },
       {
         "name": "scales",
-        "comment": " Create the scales used to map data values to visual properties.\n\n    TODO: XXX\n\n",
+        "comment": " Create the scales used to map data values to visual properties.\n\n    sc =\n        scales\n            << scale \"xScale\"\n                [ scType ScLinear\n                , scDomain (doData [ daDataset \"myData\", daField (field \"x\") ])\n                , scRange RaWidth\n                ]\n            << scale \"yScale\"\n                [ scType ScLinear\n                , scDomain (doData [ daDataset \"myData\", daField (field \"y\") ])\n                , scRange RaHeight\n                ]\n\n",
         "type": "List Vega.Spec -> ( Vega.VProperty, Vega.Spec )"
       },
       {
@@ -9176,12 +9176,12 @@
       },
       {
         "name": "signal",
-        "comment": " Create a single signal used to add a dynamic component to a visualization.\nFor further details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals)\n\n    TODO: XXX\n\n",
+        "comment": " Create a single signal used to add a dynamic component to a visualization.\nFor further details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals)\n\n    signal \"mySignal\"\n        [ siValue (vNum 20)\n        , siBind (iRange [ inMin 5, inMax 50, inStep 1 ])\n        ]\n\n",
         "type": "String -> List Vega.SignalProperty -> List Vega.Spec -> List Vega.Spec"
       },
       {
         "name": "signals",
-        "comment": " Create the signals used to add dynamism to the visualization.\nFor further details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals)\n\n    TODO: XXX\n\n",
+        "comment": " Create the signals used to add dynamism to the visualization.\nFor further details see the\n[Vega signal documentation](https://vega.github.io/vega/docs/signals)\n\n    si =\n        signals\n            << signal \"chartSize\" [ siValue (vNum 120) ]\n            << signal \"chartPad\" [ siValue (vNum 15) ]\n            << signal \"chartStep\" [ siUpdate \"chartSize + chartPad\" ]\n            << signal \"width\" [ siUpdate \"chartStep * 4\" ]\n\n",
         "type": "List Vega.Spec -> ( Vega.VProperty, Vega.Spec )"
       },
       {
@@ -9211,7 +9211,7 @@
       },
       {
         "name": "srFacet",
-        "comment": " Create a facet directive for a set of marks. The first parameter is the name\nof the source data set from which the facet partitions are to be generated. The\nsecond parameter is the name to be given to the generated facet source. Marks\ndefined with the faceted `group` mark can reference this data source name to\nvisualize the local data partition.\n\n    TODO: Add example\n\nFor details see the\n[Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)\n\n",
+        "comment": " Create a facet directive for a set of marks. The first parameter is the name\nof the source data set from which the facet partitions are to be generated. The\nsecond parameter is the name to be given to the generated facet source. Marks\ndefined with the faceted `group` mark can reference this data source name to\nvisualize the local data partition.\n\n    mark Group\n        [ mFrom [ srFacet (str \"table\") \"facet\" [ faGroupBy [ field \"category\" ] ] ]\n        , mEncode [ enEnter [ maY [ vScale \"yScale\", vField (field \"category\") ] ] ]\n        , mGroup [ nestedMk [] ]\n        ]\n\n    nestedMk =\n        marks\n            << mark Rect\n                [ mName \"bars\"\n                , mFrom [ srData (str \"facet\") ]\n                , mEncode\n                    [ enEnter\n                        [ maY [ vScale \"pos\", vField (field \"position\") ]\n                        , maHeight [ vScale \"pos\", vBand (num 1) ]\n                        , maX [ vScale \"xScale\", vField (field \"value\") ]\n                        , maX2 [ vScale \"xScale\", vBand (num 0) ]\n                        , maFill [ vScale \"cScale\", vField (field \"position\") ]\n                        ]\n                    ]\n                ]\n\nFor details see the\n[Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)\n\n",
         "type": "Vega.Str -> String -> List Vega.Facet -> Vega.Source"
       },
       {
@@ -9236,7 +9236,7 @@
       },
       {
         "name": "stSort",
-        "comment": " Specify the criteria for sorting values in a stack transform.\n\n    TODO: XXX Provide example\n\nFor details see the\n[Vega stack transform documentation](https://vega.github.io/vega/docs/transforms/stack/)\n\n",
+        "comment": " Specify the criteria for sorting values in a stack transform.\n\n    transform\n        [ trStack\n            [ stGroupBy [ field \"x\" ]\n            , stSort [ ( field \"c\", Ascend ) ]\n            , stField (field \"y\")\n            ]\n        ]\n\nFor details see the\n[Vega stack transform documentation](https://vega.github.io/vega/docs/transforms/stack/)\n\n",
         "type": "List ( Vega.Field, Vega.Order ) -> Vega.StackProperty"
       },
       {
@@ -9306,7 +9306,7 @@
       },
       {
         "name": "symbolValue",
-        "comment": " A convenience function for generating a value representing a given\nsymbol type.\n\n    TODO: XXX Example\n\n",
+        "comment": " A convenience function for generating a value representing a given symbol type.\n\n    maShape [ symbolValue SymTriangleDown ]\n\n",
         "type": "Vega.Symbol -> Vega.Value"
       },
       {
@@ -9571,12 +9571,12 @@
       },
       {
         "name": "trContour",
-        "comment": " Perform a contour transform that generates a set of contour (iso) lines at a set\nof discrete levels. Commonly used to visualize density estimates for 2D point data.\n\nThe first two parameters are the width and height over which to compute the contours.\nThe third a list of optional contour properties. The transform generates a new\nstream of GeoJSON data as output which may be visualized using either the\n`trGeoShape` or `trGeoPath` transforms.\n\n    TODO: Add example.\n\nFor details see the\n[Vega contour transform documentation](https://vega.github.io/vega/docs/transforms/contour/).\n\n",
+        "comment": " Perform a contour transform that generates a set of contour (iso) lines at a set\nof discrete levels. Commonly used to visualize density estimates for 2D point data.\n\nThe first two parameters are the width and height over which to compute the contours.\nThe third a list of optional contour properties. The transform generates a new\nstream of GeoJSON data as output which may be visualized using either the\n`trGeoShape` or `trGeoPath` transforms.\n\n    transform\n        [ trContour (numSignal \"width\")\n            (numSignal \"height\")\n            [ cnX (fExpr \"scale('xScale', datum.Horsepower)\")\n            , cnY (fExpr \"scale('yScale', datum.Miles_per_Gallon)\")\n            , cnCount (numSignal \"count\")\n            ]\n        ]\n\nFor details see the\n[Vega contour transform documentation](https://vega.github.io/vega/docs/transforms/contour/).\n\n",
         "type": "Vega.Num -> Vega.Num -> List Vega.ContourProperty -> Vega.Transform"
       },
       {
         "name": "trCountPattern",
-        "comment": " Perform a count pattern transform that counts the number of occurrences of a\ntext pattern, as defined by a regular expression. This transform will iterate\nthrough each data object and count all unique pattern matches found within the\ndesignated text field.\n\nThe first parameter is the field containing the text to count, the second a list\nof optional counting properties. The transform generates two fields named `text`\nand `count` unless renamed via `cpAs`.\n\n    TODO: Add example.\n\nFor details see the\n[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).\n\n",
+        "comment": " Perform a count pattern transform that counts the number of occurrences of a\ntext pattern, as defined by a regular expression. This transform will iterate\nthrough each data object and count all unique pattern matches found within the\ndesignated text field.\n\nThe first parameter is the field containing the text to count, the second a list\nof optional counting properties. The transform generates two fields named `text`\nand `count` unless renamed via `cpAs`.\n\n    transform\n        [ trCountPattern (field \"data\")\n            [ cpCase Uppercase\n            , cpPattern (str \"[\\\\w']{3,}\")\n            , cpStopwords (str \"(i|me|my|myself)\")\n            ]\n        ]\n\nFor details see the\n[Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).\n\n",
         "type": "Vega.Field -> List Vega.CountPatternProperty -> Vega.Transform"
       },
       {
@@ -9661,12 +9661,12 @@
       },
       {
         "name": "trGeoPoint",
-        "comment": " Perform a geoPoint transform that projects a longitude, latitude pair to\n(x,y) coordinates according to the given map projection. The first parameter is\nthe name of the map projection to use, the second and third the fields containing\nthe longitude and latitude values respectively. This version generates\ntwo new fields with the name `x` and `y` holding the projected coordinates.\n\n    TODO: XXX Add example\n\nFor details see the\n[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).\n\n",
+        "comment": " Perform a geoPoint transform that projects a longitude, latitude pair to\n(x,y) coordinates according to the given map projection. The first parameter is\nthe name of the map projection to use, the second and third the fields containing\nthe longitude and latitude values respectively. This version generates\ntwo new fields with the name `x` and `y` holding the projected coordinates.\n\n     transform\n         [ trGeoPoint \"myProj\" (field \"longitude\") (field \"latitude\") ]\n\nFor details see the\n[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).\n\n",
         "type": "String -> Vega.Field -> Vega.Field -> Vega.Transform"
       },
       {
         "name": "trGeoPointAs",
-        "comment": " Perform a geoPoint transform that projects a longitude, latitude pair to\n(x,y) coordinates according to the given map projection. The first parameter is\nthe name of the map projection to use, the second and third the fields containing\nthe longitude and latitude values respectively. This version generates\ntwo new fields holding the projected coordinates with the names given by the last\ntwo parameters.\n\n    TODO: XXX Add example\n\nFor details see the\n[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).\n\n",
+        "comment": " Perform a geoPoint transform that projects a longitude, latitude pair to\n(x,y) coordinates according to the given map projection. The first parameter is\nthe name of the map projection to use, the second and third the fields containing\nthe longitude and latitude values respectively. This version generates\ntwo new fields holding the projected coordinates with the names given by the last\ntwo parameters.\n\n    transform\n        [ trGeoPointAs \"myProj\" (field \"longitude\") (field \"latitude\") \"lng\" \"lat\" ]\n\nFor details see the\n[Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).\n\n",
         "type": "String -> Vega.Field -> Vega.Field -> String -> String -> Vega.Transform"
       },
       {

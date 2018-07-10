@@ -688,7 +688,6 @@ module Vega
         , strs
         , symPath
         , symbolSignal
-          --, symbolValue
         , symbolValue
         , teAs
         , teField
@@ -9177,7 +9176,11 @@ raCustomDefault =
 {-| A scale range specified as a data reference object. This is used for specifying
 ordinal scale ranges as a series of distinct field values.
 
-    TODO: Add example
+    scale "myScale"
+        [ scType ScOrdinal
+        , scDomain (doData [ daDataset "clusters", daField (field "id") ])
+        , scRange (raData [ daDataset "clusters", daField (field "name") ])
+        ]
 
 For details see the
 [Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
@@ -9270,7 +9273,11 @@ type Scale
 
 {-| Create a single scale used to map data values to visual properties.
 
-    TODO: XXX
+    scale "xScale"
+        [ scType ScLinear
+        , scDomain (doData [ daDataset "myData", daField (field "myField") ])
+        , scRange RaWidth
+        ]
 
 -}
 scale : String -> List ScaleProperty -> List Spec -> List Spec
@@ -9317,7 +9324,18 @@ scaleRangeSignal =
 
 {-| Create the scales used to map data values to visual properties.
 
-    TODO: XXX
+    sc =
+        scales
+            << scale "xScale"
+                [ scType ScLinear
+                , scDomain (doData [ daDataset "myData", daField (field "x") ])
+                , scRange RaWidth
+                ]
+            << scale "yScale"
+                [ scType ScLinear
+                , scDomain (doData [ daDataset "myData", daField (field "y") ])
+                , scRange RaHeight
+                ]
 
 -}
 scales : List Spec -> ( VProperty, Spec )
@@ -9588,7 +9606,12 @@ siDescription =
 For further details see the
 [Vega signal documentation](https://vega.github.io/vega/docs/signals)
 
-    TODO: XXX
+    si =
+        signals
+            << signal "chartSize" [ siValue (vNum 120) ]
+            << signal "chartPad" [ siValue (vNum 15) ]
+            << signal "chartStep" [ siUpdate "chartSize + chartPad" ]
+            << signal "width" [ siUpdate "chartStep * 4" ]
 
 -}
 signals : List Spec -> ( VProperty, Spec )
@@ -9600,7 +9623,10 @@ signals sigs =
 For further details see the
 [Vega signal documentation](https://vega.github.io/vega/docs/signals)
 
-    TODO: XXX
+    signal "mySignal"
+        [ siValue (vNum 20)
+        , siBind (iRange [ inMin 5, inMax 50, inStep 1 ])
+        ]
 
 -}
 signal : String -> List SignalProperty -> List Spec -> List Spec
@@ -9731,7 +9757,27 @@ second parameter is the name to be given to the generated facet source. Marks
 defined with the faceted `group` mark can reference this data source name to
 visualize the local data partition.
 
-    TODO: Add example
+    mark Group
+        [ mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
+        , mEncode [ enEnter [ maY [ vScale "yScale", vField (field "category") ] ] ]
+        , mGroup [ nestedMk [] ]
+        ]
+
+    nestedMk =
+        marks
+            << mark Rect
+                [ mName "bars"
+                , mFrom [ srData (str "facet") ]
+                , mEncode
+                    [ enEnter
+                        [ maY [ vScale "pos", vField (field "position") ]
+                        , maHeight [ vScale "pos", vBand (num 1) ]
+                        , maX [ vScale "xScale", vField (field "value") ]
+                        , maX2 [ vScale "xScale", vBand (num 0) ]
+                        , maFill [ vScale "cScale", vField (field "position") ]
+                        ]
+                    ]
+                ]
 
 For details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)
@@ -9931,7 +9977,13 @@ strokeJoinValue jn =
 
 {-| Specify the criteria for sorting values in a stack transform.
 
-    TODO: XXX Provide example
+    transform
+        [ trStack
+            [ stGroupBy [ field "x" ]
+            , stSort [ ( field "c", Ascend ) ]
+            , stField (field "y")
+            ]
+        ]
 
 For details see the
 [Vega stack transform documentation](https://vega.github.io/vega/docs/transforms/stack/)
@@ -9965,10 +10017,9 @@ symbolSignal =
     SymbolSignal
 
 
-{-| A convenience function for generating a value representing a given
-symbol type.
+{-| A convenience function for generating a value representing a given symbol type.
 
-    TODO: XXX Example
+    maShape [ symbolValue SymTriangleDown ]
 
 -}
 symbolValue : Symbol -> Value
@@ -10595,7 +10646,14 @@ The third a list of optional contour properties. The transform generates a new
 stream of GeoJSON data as output which may be visualized using either the
 `trGeoShape` or `trGeoPath` transforms.
 
-    TODO: Add example.
+    transform
+        [ trContour (numSignal "width")
+            (numSignal "height")
+            [ cnX (fExpr "scale('xScale', datum.Horsepower)")
+            , cnY (fExpr "scale('yScale', datum.Miles_per_Gallon)")
+            , cnCount (numSignal "count")
+            ]
+        ]
 
 For details see the
 [Vega contour transform documentation](https://vega.github.io/vega/docs/transforms/contour/).
@@ -10615,7 +10673,13 @@ The first parameter is the field containing the text to count, the second a list
 of optional counting properties. The transform generates two fields named `text`
 and `count` unless renamed via `cpAs`.
 
-    TODO: Add example.
+    transform
+        [ trCountPattern (field "data")
+            [ cpCase Uppercase
+            , cpPattern (str "[\\w']{3,}")
+            , cpStopwords (str "(i|me|my|myself)")
+            ]
+        ]
 
 For details see the
 [Vega count pattern transform documentation](https://vega.github.io/vega/docs/transforms/countpattern/).
@@ -10874,7 +10938,8 @@ the name of the map projection to use, the second and third the fields containin
 the longitude and latitude values respectively. This version generates
 two new fields with the name `x` and `y` holding the projected coordinates.
 
-    TODO: XXX Add example
+     transform
+         [ trGeoPoint "myProj" (field "longitude") (field "latitude") ]
 
 For details see the
 [Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).
@@ -10892,7 +10957,8 @@ the longitude and latitude values respectively. This version generates
 two new fields holding the projected coordinates with the names given by the last
 two parameters.
 
-    TODO: XXX Add example
+    transform
+        [ trGeoPointAs "myProj" (field "longitude") (field "latitude") "lng" "lat" ]
 
 For details see the
 [Vega geoPoint documentation](https://vega.github.io/vega/docs/transforms/geopoint/).
