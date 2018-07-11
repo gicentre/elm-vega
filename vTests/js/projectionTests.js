@@ -9079,7 +9079,7 @@ var _user$project$Vega$formatProperty = function (fmt) {
 					ctor: '::',
 					_0: {
 						ctor: '_Tuple2',
-						_0: 'delimeter',
+						_0: 'delimiter',
 						_1: _elm_lang$core$Json_Encode$string(_p34._0)
 					},
 					_1: {ctor: '[]'}
@@ -9322,7 +9322,7 @@ var _user$project$Vega$voronoiProperty = function (vp) {
 			_elm_lang$core$Debug$log,
 			A2(
 				_elm_lang$core$Basics_ops['++'],
-				'Warning: voProperty expecting array of 2 numbers but was given ',
+				'Warning: voProperty expecting list of 2 numbers but was given ',
 				_elm_lang$core$Basics$toString(ns)),
 			_elm_lang$core$Json_Encode$null);
 	};
@@ -11970,7 +11970,7 @@ var _user$project$Vega$numArrayProperty = F3(
 							name,
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								' expecting array of ',
+								' expecting list of ',
 								A2(
 									_elm_lang$core$Basics_ops['++'],
 									_elm_lang$core$Basics$toString(len),
@@ -12005,7 +12005,7 @@ var _user$project$Vega$numArrayProperty = F3(
 							name,
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								' expecting array of ',
+								' expecting list of ',
 								A2(
 									_elm_lang$core$Basics_ops['++'],
 									_elm_lang$core$Basics$toString(len),
@@ -12033,7 +12033,7 @@ var _user$project$Vega$numArrayProperty = F3(
 							name,
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								' expecting array of ',
+								' expecting list of ',
 								A2(
 									_elm_lang$core$Basics_ops['++'],
 									_elm_lang$core$Basics$toString(len),
@@ -12053,7 +12053,7 @@ var _user$project$Vega$numArrayProperty = F3(
 							name,
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								' expecting array of 2 numbers but was given ',
+								' expecting list of 2 numbers but was given ',
 								_elm_lang$core$Basics$toString(n)))),
 					{ctor: '_Tuple2', _0: name, _1: _elm_lang$core$Json_Encode$null});
 		}
@@ -12669,7 +12669,7 @@ var _user$project$Vega$contourProperty = function (cnProp) {
 					_elm_lang$core$Debug$log,
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						'Warning: cnValues expecting array of numbers or signals but was given ',
+						'Warning: cnValues expecting list of numbers or signals but was given ',
 						_elm_lang$core$Basics$toString(_p82)),
 					{ctor: '_Tuple2', _0: 'values', _1: _elm_lang$core$Json_Encode$null});
 			} else {
@@ -12717,7 +12717,7 @@ var _user$project$Vega$contourProperty = function (cnProp) {
 					_elm_lang$core$Debug$log,
 					A2(
 						_elm_lang$core$Basics_ops['++'],
-						'Warning: cnThresholds expecting array of numbers or signals but was given ',
+						'Warning: cnThresholds expecting list of numbers or signals but was given ',
 						_elm_lang$core$Basics$toString(_p84)),
 					{ctor: '_Tuple2', _0: 'thresholds', _1: _elm_lang$core$Json_Encode$null});
 			} else {
@@ -16442,7 +16442,7 @@ var _user$project$Vega$transformSpec = function (trans) {
 						_elm_lang$core$Debug$log,
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							'trBin expecting an extent array but was given ',
+							'trBin expecting an extent list but was given ',
 							_elm_lang$core$Basics$toString(_p156)),
 						_elm_lang$core$Json_Encode$null);
 				} else {
@@ -18026,7 +18026,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 				_elm_lang$core$Debug$log,
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					'Warning: prClipExtent expecting array of 4 numbers but was given ',
+					'Warning: prClipExtent expecting list of 4 numbers but was given ',
 					_elm_lang$core$Basics$toString(_p186)),
 				{ctor: '_Tuple2', _0: 'clipExtent', _1: _elm_lang$core$Json_Encode$null});
 		case 'PrScale':
@@ -18200,7 +18200,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 				_elm_lang$core$Debug$log,
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					'Warning: prRotate expecting array of 2 or 3 numbers but was given ',
+					'Warning: prRotate expecting list of 2 or 3 numbers but was given ',
 					_elm_lang$core$Basics$toString(_p188)),
 				{ctor: '_Tuple2', _0: 'rotate', _1: _elm_lang$core$Json_Encode$null});
 		case 'PrPointRadius':
@@ -18349,7 +18349,7 @@ var _user$project$Vega$projectionProperty = function (projProp) {
 				_elm_lang$core$Debug$log,
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					'Warning: prExtent expecting array of 4 numbers but was given ',
+					'Warning: prExtent expecting list of 4 numbers but was given ',
 					_elm_lang$core$Basics$toString(_p191)),
 				{ctor: '_Tuple2', _0: 'extent', _1: _elm_lang$core$Json_Encode$null});
 		case 'PrSize':
