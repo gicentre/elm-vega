@@ -10371,6 +10371,10 @@ var _gicentre$elm_vega$Vega$AxTitlePadding = function (a) {
 	return {ctor: 'AxTitlePadding', _0: a};
 };
 var _gicentre$elm_vega$Vega$axTitlePadding = _gicentre$elm_vega$Vega$AxTitlePadding;
+var _gicentre$elm_vega$Vega$AxTitleOpacity = function (a) {
+	return {ctor: 'AxTitleOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$axTitleOpacity = _gicentre$elm_vega$Vega$AxTitleOpacity;
 var _gicentre$elm_vega$Vega$AxTitleLimit = function (a) {
 	return {ctor: 'AxTitleLimit', _0: a};
 };
@@ -10419,6 +10423,10 @@ var _gicentre$elm_vega$Vega$AxTickRound = function (a) {
 	return {ctor: 'AxTickRound', _0: a};
 };
 var _gicentre$elm_vega$Vega$axTickRound = _gicentre$elm_vega$Vega$AxTickRound;
+var _gicentre$elm_vega$Vega$AxTickOpacity = function (a) {
+	return {ctor: 'AxTickOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$axTickOpacity = _gicentre$elm_vega$Vega$AxTickOpacity;
 var _gicentre$elm_vega$Vega$AxTickOffset = function (a) {
 	return {ctor: 'AxTickOffset', _0: a};
 };
@@ -10468,6 +10476,10 @@ var _gicentre$elm_vega$Vega$AxLabelOverlap = function (a) {
 	return {ctor: 'AxLabelOverlap', _0: a};
 };
 var _gicentre$elm_vega$Vega$axLabelOverlap = _gicentre$elm_vega$Vega$AxLabelOverlap;
+var _gicentre$elm_vega$Vega$AxLabelOpacity = function (a) {
+	return {ctor: 'AxLabelOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$axLabelOpacity = _gicentre$elm_vega$Vega$AxLabelOpacity;
 var _gicentre$elm_vega$Vega$AxLabelLimit = function (a) {
 	return {ctor: 'AxLabelLimit', _0: a};
 };
@@ -10519,6 +10531,7 @@ var _gicentre$elm_vega$Vega$axLabels = _gicentre$elm_vega$Vega$AxLabels;
 var _gicentre$elm_vega$Vega$AxGridWidth = function (a) {
 	return {ctor: 'AxGridWidth', _0: a};
 };
+var _gicentre$elm_vega$Vega$axGridWidth = _gicentre$elm_vega$Vega$AxGridWidth;
 var _gicentre$elm_vega$Vega$AxGridScale = function (a) {
 	return {ctor: 'AxGridScale', _0: a};
 };
@@ -10526,6 +10539,7 @@ var _gicentre$elm_vega$Vega$axGridScale = _gicentre$elm_vega$Vega$AxGridScale;
 var _gicentre$elm_vega$Vega$AxGridOpacity = function (a) {
 	return {ctor: 'AxGridOpacity', _0: a};
 };
+var _gicentre$elm_vega$Vega$axGridOpacity = _gicentre$elm_vega$Vega$AxGridOpacity;
 var _gicentre$elm_vega$Vega$AxGridDash = function (a) {
 	return {ctor: 'AxGridDash', _0: a};
 };
@@ -10550,6 +10564,10 @@ var _gicentre$elm_vega$Vega$AxDomainWidth = function (a) {
 	return {ctor: 'AxDomainWidth', _0: a};
 };
 var _gicentre$elm_vega$Vega$axDomainWidth = _gicentre$elm_vega$Vega$AxDomainWidth;
+var _gicentre$elm_vega$Vega$AxDomainOpacity = function (a) {
+	return {ctor: 'AxDomainOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$axDomainOpacity = _gicentre$elm_vega$Vega$AxDomainOpacity;
 var _gicentre$elm_vega$Vega$AxDomainColor = function (a) {
 	return {ctor: 'AxDomainColor', _0: a};
 };
@@ -15191,6 +15209,12 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				_0: 'domainColor',
 				_1: _gicentre$elm_vega$Vega$strSpec(_p128._0)
 			};
+		case 'AxDomainOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainOpacity',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
+			};
 		case 'AxDomainWidth':
 			return {
 				ctor: '_Tuple2',
@@ -15347,6 +15371,12 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				_0: 'labelLimit',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
 			};
+		case 'AxLabelOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOpacity',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
+			};
 		case 'AxLabelOverlap':
 			return {
 				ctor: '_Tuple2',
@@ -15498,6 +15528,12 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 				_0: 'tickOffset',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
 			};
+		case 'AxTickOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickOpacity',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
+			};
 		case 'AxTickRound':
 			return {
 				ctor: '_Tuple2',
@@ -15568,6 +15604,12 @@ var _gicentre$elm_vega$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleLimit',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
+			};
+		case 'AxTitleOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleOpacity',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p128._0)
 			};
 		case 'AxTitlePadding':

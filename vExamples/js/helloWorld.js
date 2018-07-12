@@ -7003,6 +7003,10 @@ var _user$project$Vega$AxTitlePadding = function (a) {
 	return {ctor: 'AxTitlePadding', _0: a};
 };
 var _user$project$Vega$axTitlePadding = _user$project$Vega$AxTitlePadding;
+var _user$project$Vega$AxTitleOpacity = function (a) {
+	return {ctor: 'AxTitleOpacity', _0: a};
+};
+var _user$project$Vega$axTitleOpacity = _user$project$Vega$AxTitleOpacity;
 var _user$project$Vega$AxTitleLimit = function (a) {
 	return {ctor: 'AxTitleLimit', _0: a};
 };
@@ -7051,6 +7055,10 @@ var _user$project$Vega$AxTickRound = function (a) {
 	return {ctor: 'AxTickRound', _0: a};
 };
 var _user$project$Vega$axTickRound = _user$project$Vega$AxTickRound;
+var _user$project$Vega$AxTickOpacity = function (a) {
+	return {ctor: 'AxTickOpacity', _0: a};
+};
+var _user$project$Vega$axTickOpacity = _user$project$Vega$AxTickOpacity;
 var _user$project$Vega$AxTickOffset = function (a) {
 	return {ctor: 'AxTickOffset', _0: a};
 };
@@ -7100,6 +7108,10 @@ var _user$project$Vega$AxLabelOverlap = function (a) {
 	return {ctor: 'AxLabelOverlap', _0: a};
 };
 var _user$project$Vega$axLabelOverlap = _user$project$Vega$AxLabelOverlap;
+var _user$project$Vega$AxLabelOpacity = function (a) {
+	return {ctor: 'AxLabelOpacity', _0: a};
+};
+var _user$project$Vega$axLabelOpacity = _user$project$Vega$AxLabelOpacity;
 var _user$project$Vega$AxLabelLimit = function (a) {
 	return {ctor: 'AxLabelLimit', _0: a};
 };
@@ -7151,6 +7163,7 @@ var _user$project$Vega$axLabels = _user$project$Vega$AxLabels;
 var _user$project$Vega$AxGridWidth = function (a) {
 	return {ctor: 'AxGridWidth', _0: a};
 };
+var _user$project$Vega$axGridWidth = _user$project$Vega$AxGridWidth;
 var _user$project$Vega$AxGridScale = function (a) {
 	return {ctor: 'AxGridScale', _0: a};
 };
@@ -7158,6 +7171,7 @@ var _user$project$Vega$axGridScale = _user$project$Vega$AxGridScale;
 var _user$project$Vega$AxGridOpacity = function (a) {
 	return {ctor: 'AxGridOpacity', _0: a};
 };
+var _user$project$Vega$axGridOpacity = _user$project$Vega$AxGridOpacity;
 var _user$project$Vega$AxGridDash = function (a) {
 	return {ctor: 'AxGridDash', _0: a};
 };
@@ -7182,6 +7196,10 @@ var _user$project$Vega$AxDomainWidth = function (a) {
 	return {ctor: 'AxDomainWidth', _0: a};
 };
 var _user$project$Vega$axDomainWidth = _user$project$Vega$AxDomainWidth;
+var _user$project$Vega$AxDomainOpacity = function (a) {
+	return {ctor: 'AxDomainOpacity', _0: a};
+};
+var _user$project$Vega$axDomainOpacity = _user$project$Vega$AxDomainOpacity;
 var _user$project$Vega$AxDomainColor = function (a) {
 	return {ctor: 'AxDomainColor', _0: a};
 };
@@ -11823,6 +11841,12 @@ var _user$project$Vega$axisProperty = function (ap) {
 				_0: 'domainColor',
 				_1: _user$project$Vega$strSpec(_p128._0)
 			};
+		case 'AxDomainOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'domainOpacity',
+				_1: _user$project$Vega$numSpec(_p128._0)
+			};
 		case 'AxDomainWidth':
 			return {
 				ctor: '_Tuple2',
@@ -11979,6 +12003,12 @@ var _user$project$Vega$axisProperty = function (ap) {
 				_0: 'labelLimit',
 				_1: _user$project$Vega$numSpec(_p128._0)
 			};
+		case 'AxLabelOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOpacity',
+				_1: _user$project$Vega$numSpec(_p128._0)
+			};
 		case 'AxLabelOverlap':
 			return {
 				ctor: '_Tuple2',
@@ -12130,6 +12160,12 @@ var _user$project$Vega$axisProperty = function (ap) {
 				_0: 'tickOffset',
 				_1: _user$project$Vega$numSpec(_p128._0)
 			};
+		case 'AxTickOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'tickOpacity',
+				_1: _user$project$Vega$numSpec(_p128._0)
+			};
 		case 'AxTickRound':
 			return {
 				ctor: '_Tuple2',
@@ -12200,6 +12236,12 @@ var _user$project$Vega$axisProperty = function (ap) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleLimit',
+				_1: _user$project$Vega$numSpec(_p128._0)
+			};
+		case 'AxTitleOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleOpacity',
 				_1: _user$project$Vega$numSpec(_p128._0)
 			};
 		case 'AxTitlePadding':
