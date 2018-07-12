@@ -12311,6 +12311,18 @@ var _gicentre$elm_vega$Vega$LeSymbolFillColor = function (a) {
 	return {ctor: 'LeSymbolFillColor', _0: a};
 };
 var _gicentre$elm_vega$Vega$leSymbolFillColor = _gicentre$elm_vega$Vega$LeSymbolFillColor;
+var _gicentre$elm_vega$Vega$LeSymbolDirection = function (a) {
+	return {ctor: 'LeSymbolDirection', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolDirection = _gicentre$elm_vega$Vega$LeSymbolDirection;
+var _gicentre$elm_vega$Vega$LeSymbolBaseStrokeColor = function (a) {
+	return {ctor: 'LeSymbolBaseStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolBaseStrokeColor = _gicentre$elm_vega$Vega$LeSymbolBaseStrokeColor;
+var _gicentre$elm_vega$Vega$LeSymbolBaseFillColor = function (a) {
+	return {ctor: 'LeSymbolBaseFillColor', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolBaseFillColor = _gicentre$elm_vega$Vega$LeSymbolBaseFillColor;
 var _gicentre$elm_vega$Vega$LeLabelOverlap = function (a) {
 	return {ctor: 'LeLabelOverlap', _0: a};
 };
@@ -16726,6 +16738,24 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 				ctor: '_Tuple2',
 				_0: 'labelOverlap',
 				_1: _gicentre$elm_vega$Vega$overlapStrategySpec(_p139._0)
+			};
+		case 'LeSymbolBaseFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolBaseFillColor',
+				_1: _gicentre$elm_vega$Vega$strSpec(_p139._0)
+			};
+		case 'LeSymbolBaseStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolBaseStrokeColor',
+				_1: _gicentre$elm_vega$Vega$strSpec(_p139._0)
+			};
+		case 'LeSymbolDirection':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolDirection',
+				_1: _gicentre$elm_vega$Vega$orientationSpec(_p139._0)
 			};
 		case 'LeSymbolFillColor':
 			return {

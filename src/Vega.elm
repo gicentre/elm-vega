@@ -440,6 +440,9 @@ module Vega
         , leStrokeColor
         , leStrokeDash
         , leStrokeWidth
+        , leSymbolBaseFillColor
+        , leSymbolBaseStrokeColor
+        , leSymbolDirection
         , leSymbolFillColor
         , leSymbolOffset
         , leSymbolOpacity
@@ -1699,6 +1702,9 @@ A scale range describes the extent of scaled values after transformation.
 @docs leLabelOffset
 @docs leLabelOverlap
 @docs leSymbolFillColor
+@docs leSymbolBaseFillColor
+@docs leSymbolBaseStrokeColor
+@docs leSymbolDirection
 @docs leSymbolOffset
 @docs leSymbolSize
 @docs leSymbolStrokeColor
@@ -2759,6 +2765,9 @@ type LegendProperty
     | LeLabelOffset Num
     | LeLabelOpacity Num
     | LeLabelOverlap OverlapStrategy
+    | LeSymbolBaseFillColor Str
+    | LeSymbolBaseStrokeColor Str
+    | LeSymbolDirection Orientation
     | LeSymbolFillColor Str
     | LeSymbolOpacity Num
     | LeSymbolOffset Num
@@ -7102,6 +7111,32 @@ leStrokeWidth =
     LeStrokeWidth
 
 
+{-| Specify the default fill color for legend symbols. This is only applied if there
+is no fill scale color encoding for the legend. For more details
+see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolBaseFillColor : Str -> LegendProperty
+leSymbolBaseFillColor =
+    LeSymbolBaseFillColor
+
+
+{-| Specify the default stroke color for legend symbols. This is only applied if
+there is no stroke scale color encoding for the legend. For more details
+see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolBaseStrokeColor : Str -> LegendProperty
+leSymbolBaseStrokeColor =
+    LeSymbolBaseStrokeColor
+
+
+{-| Specify the default direction for legend symbols. For more details
+see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+-}
+leSymbolDirection : Orientation -> LegendProperty
+leSymbolDirection =
+    LeSymbolDirection
+
+
 {-| Specify the fill color for legend symbols. For more details see the
 [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
@@ -11172,8 +11207,13 @@ The most common use case is to draw edges in a tree or network layout. By defaul
 links are simply straight lines between source and target nodes; however, with
 additional shape and orientation information, a variety of link paths can be
 expressed. This transform writes one property to each datum, providing an SVG path
-string for the link path. For details see the
+string for the link path.
+
+    transform [ trLinkPath [ lpOrient Horizontal, lpShape LinkCurve ] ]
+
+For details see the
 [Vega link path transform documentation](https://vega.github.io/vega/docs/transforms/linkpath/).
+
 -}
 trLinkPath : List LinkPathProperty -> Transform
 trLinkPath =
@@ -11393,7 +11433,14 @@ of a tree-generating transform such as [trNest](#trNest) or [trStratify](#trStra
 The generated link objects will have `source` and `target` fields that reference
 input data objects corresponding to parent (source) and child (target) nodes.
 
-    transform [ trLinkPath [ lpOrient Horizontal, lpShape LinkCurve ] ]
+    data "links" [ daSource "tree" ]
+        |> transform
+            [ trTreeLinks
+            , trLinkPath
+                [ lpOrient Horizontal
+                , lpShape (linkShapeSignal "links")
+                ]
+            ]
 
 For details see the
 [Vega tree links transform documentation](https://vega.github.io/vega/docs/transforms/treelinks/).
@@ -13668,6 +13715,15 @@ legendProperty lp =
 
         LeLabelOverlap os ->
             ( "labelOverlap", overlapStrategySpec os )
+
+        LeSymbolBaseFillColor s ->
+            ( "symbolBaseFillColor", strSpec s )
+
+        LeSymbolBaseStrokeColor s ->
+            ( "symbolBaseStrokeColor", strSpec s )
+
+        LeSymbolDirection o ->
+            ( "symbolDirection", orientationSpec o )
 
         LeSymbolFillColor s ->
             ( "symbolFillColor", strSpec s )
