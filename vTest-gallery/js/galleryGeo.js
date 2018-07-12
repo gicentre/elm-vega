@@ -12254,6 +12254,10 @@ var _gicentre$elm_vega$Vega$LeTitleFont = function (a) {
 	return {ctor: 'LeTitleFont', _0: a};
 };
 var _gicentre$elm_vega$Vega$leTitleFont = _gicentre$elm_vega$Vega$LeTitleFont;
+var _gicentre$elm_vega$Vega$LeTitleOpacity = function (a) {
+	return {ctor: 'LeTitleOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$leTitleOpacity = _gicentre$elm_vega$Vega$LeTitleOpacity;
 var _gicentre$elm_vega$Vega$LeTitleColor = function (a) {
 	return {ctor: 'LeTitleColor', _0: a};
 };
@@ -12299,6 +12303,10 @@ var _gicentre$elm_vega$Vega$LeSymbolOffset = function (a) {
 	return {ctor: 'LeSymbolOffset', _0: a};
 };
 var _gicentre$elm_vega$Vega$leSymbolOffset = _gicentre$elm_vega$Vega$LeSymbolOffset;
+var _gicentre$elm_vega$Vega$LeSymbolOpacity = function (a) {
+	return {ctor: 'LeSymbolOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$leSymbolOpacity = _gicentre$elm_vega$Vega$LeSymbolOpacity;
 var _gicentre$elm_vega$Vega$LeSymbolFillColor = function (a) {
 	return {ctor: 'LeSymbolFillColor', _0: a};
 };
@@ -12307,6 +12315,10 @@ var _gicentre$elm_vega$Vega$LeLabelOverlap = function (a) {
 	return {ctor: 'LeLabelOverlap', _0: a};
 };
 var _gicentre$elm_vega$Vega$leLabelOverlap = _gicentre$elm_vega$Vega$LeLabelOverlap;
+var _gicentre$elm_vega$Vega$LeLabelOpacity = function (a) {
+	return {ctor: 'LeLabelOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$leLabelOpacity = _gicentre$elm_vega$Vega$LeLabelOpacity;
 var _gicentre$elm_vega$Vega$LeLabelOffset = function (a) {
 	return {ctor: 'LeLabelOffset', _0: a};
 };
@@ -12351,6 +12363,10 @@ var _gicentre$elm_vega$Vega$LeGradientThickness = function (a) {
 	return {ctor: 'LeGradientThickness', _0: a};
 };
 var _gicentre$elm_vega$Vega$leGradientThickness = _gicentre$elm_vega$Vega$LeGradientThickness;
+var _gicentre$elm_vega$Vega$LeGradientOpacity = function (a) {
+	return {ctor: 'LeGradientOpacity', _0: a};
+};
+var _gicentre$elm_vega$Vega$leGradientOpacity = _gicentre$elm_vega$Vega$LeGradientOpacity;
 var _gicentre$elm_vega$Vega$LeGradientLength = function (a) {
 	return {ctor: 'LeGradientLength', _0: a};
 };
@@ -12363,10 +12379,6 @@ var _gicentre$elm_vega$Vega$LeGradientLabelLimit = function (a) {
 	return {ctor: 'LeGradientLabelLimit', _0: a};
 };
 var _gicentre$elm_vega$Vega$leGradientLabelLimit = _gicentre$elm_vega$Vega$LeGradientLabelLimit;
-var _gicentre$elm_vega$Vega$LeGradientDirection = function (a) {
-	return {ctor: 'LeGradientDirection', _0: a};
-};
-var _gicentre$elm_vega$Vega$leGradientDirection = _gicentre$elm_vega$Vega$LeGradientDirection;
 var _gicentre$elm_vega$Vega$LeStrokeWidth = function (a) {
 	return {ctor: 'LeStrokeWidth', _0: a};
 };
@@ -16613,11 +16625,11 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 				_0: 'strokeWidth',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
 			};
-		case 'LeGradientDirection':
+		case 'LeGradientOpacity':
 			return {
 				ctor: '_Tuple2',
-				_0: 'gradientDirection',
-				_1: _gicentre$elm_vega$Vega$orientationSpec(_p139._0)
+				_0: 'gradientOpacity',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
 			};
 		case 'LeGradientLabelLimit':
 			return {
@@ -16672,6 +16684,12 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 				ctor: '_Tuple2',
 				_0: 'labelColor',
 				_1: _gicentre$elm_vega$Vega$strSpec(_p139._0)
+			};
+		case 'LeLabelOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOpacity',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
 			};
 		case 'LeLabelFont':
 			return {
@@ -16737,6 +16755,12 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolStokeWidth',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
+			};
+		case 'LeSymbolOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolOpacity',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
 			};
 		case 'LeSymbolType':
@@ -16888,6 +16912,12 @@ var _gicentre$elm_vega$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleLimit',
+				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
+			};
+		case 'LeTitleOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleOpacity',
 				_1: _gicentre$elm_vega$Vega$numSpec(_p139._0)
 			};
 		case 'LeValues':
@@ -23826,17 +23856,13 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 			_0: _gicentre$elm_vega$Vega$cfLegend(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$leGradientDirection(_gicentre$elm_vega$Vega$Horizontal),
+					_0: _gicentre$elm_vega$Vega$leGradientLength(
+						_gicentre$elm_vega$Vega$num(120)),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$leGradientLength(
-							_gicentre$elm_vega$Vega$num(120)),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$leGradientThickness(
-								_gicentre$elm_vega$Vega$num(10)),
-							_1: {ctor: '[]'}
-						}
+						_0: _gicentre$elm_vega$Vega$leGradientThickness(
+							_gicentre$elm_vega$Vega$num(10)),
+						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {ctor: '[]'}

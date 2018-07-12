@@ -97,7 +97,7 @@ geo2 : Spec
 geo2 =
     let
         cf =
-            config [ cfLegend [ leGradientDirection Horizontal, leGradientLength (num 120), leGradientThickness (num 10) ] ]
+            config [ cfLegend [ leGradientLength (num 120), leGradientThickness (num 10) ] ]
 
         ds =
             dataSource

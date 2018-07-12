@@ -8113,6 +8113,10 @@ var _user$project$Vega$LeTitleFont = function (a) {
 	return {ctor: 'LeTitleFont', _0: a};
 };
 var _user$project$Vega$leTitleFont = _user$project$Vega$LeTitleFont;
+var _user$project$Vega$LeTitleOpacity = function (a) {
+	return {ctor: 'LeTitleOpacity', _0: a};
+};
+var _user$project$Vega$leTitleOpacity = _user$project$Vega$LeTitleOpacity;
 var _user$project$Vega$LeTitleColor = function (a) {
 	return {ctor: 'LeTitleColor', _0: a};
 };
@@ -8158,6 +8162,10 @@ var _user$project$Vega$LeSymbolOffset = function (a) {
 	return {ctor: 'LeSymbolOffset', _0: a};
 };
 var _user$project$Vega$leSymbolOffset = _user$project$Vega$LeSymbolOffset;
+var _user$project$Vega$LeSymbolOpacity = function (a) {
+	return {ctor: 'LeSymbolOpacity', _0: a};
+};
+var _user$project$Vega$leSymbolOpacity = _user$project$Vega$LeSymbolOpacity;
 var _user$project$Vega$LeSymbolFillColor = function (a) {
 	return {ctor: 'LeSymbolFillColor', _0: a};
 };
@@ -8166,6 +8174,10 @@ var _user$project$Vega$LeLabelOverlap = function (a) {
 	return {ctor: 'LeLabelOverlap', _0: a};
 };
 var _user$project$Vega$leLabelOverlap = _user$project$Vega$LeLabelOverlap;
+var _user$project$Vega$LeLabelOpacity = function (a) {
+	return {ctor: 'LeLabelOpacity', _0: a};
+};
+var _user$project$Vega$leLabelOpacity = _user$project$Vega$LeLabelOpacity;
 var _user$project$Vega$LeLabelOffset = function (a) {
 	return {ctor: 'LeLabelOffset', _0: a};
 };
@@ -8210,6 +8222,10 @@ var _user$project$Vega$LeGradientThickness = function (a) {
 	return {ctor: 'LeGradientThickness', _0: a};
 };
 var _user$project$Vega$leGradientThickness = _user$project$Vega$LeGradientThickness;
+var _user$project$Vega$LeGradientOpacity = function (a) {
+	return {ctor: 'LeGradientOpacity', _0: a};
+};
+var _user$project$Vega$leGradientOpacity = _user$project$Vega$LeGradientOpacity;
 var _user$project$Vega$LeGradientLength = function (a) {
 	return {ctor: 'LeGradientLength', _0: a};
 };
@@ -8222,10 +8238,6 @@ var _user$project$Vega$LeGradientLabelLimit = function (a) {
 	return {ctor: 'LeGradientLabelLimit', _0: a};
 };
 var _user$project$Vega$leGradientLabelLimit = _user$project$Vega$LeGradientLabelLimit;
-var _user$project$Vega$LeGradientDirection = function (a) {
-	return {ctor: 'LeGradientDirection', _0: a};
-};
-var _user$project$Vega$leGradientDirection = _user$project$Vega$LeGradientDirection;
 var _user$project$Vega$LeStrokeWidth = function (a) {
 	return {ctor: 'LeStrokeWidth', _0: a};
 };
@@ -12472,11 +12484,11 @@ var _user$project$Vega$legendProperty = function (lp) {
 				_0: 'strokeWidth',
 				_1: _user$project$Vega$numSpec(_p139._0)
 			};
-		case 'LeGradientDirection':
+		case 'LeGradientOpacity':
 			return {
 				ctor: '_Tuple2',
-				_0: 'gradientDirection',
-				_1: _user$project$Vega$orientationSpec(_p139._0)
+				_0: 'gradientOpacity',
+				_1: _user$project$Vega$numSpec(_p139._0)
 			};
 		case 'LeGradientLabelLimit':
 			return {
@@ -12531,6 +12543,12 @@ var _user$project$Vega$legendProperty = function (lp) {
 				ctor: '_Tuple2',
 				_0: 'labelColor',
 				_1: _user$project$Vega$strSpec(_p139._0)
+			};
+		case 'LeLabelOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOpacity',
+				_1: _user$project$Vega$numSpec(_p139._0)
 			};
 		case 'LeLabelFont':
 			return {
@@ -12596,6 +12614,12 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolStokeWidth',
+				_1: _user$project$Vega$numSpec(_p139._0)
+			};
+		case 'LeSymbolOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolOpacity',
 				_1: _user$project$Vega$numSpec(_p139._0)
 			};
 		case 'LeSymbolType':
@@ -12747,6 +12771,12 @@ var _user$project$Vega$legendProperty = function (lp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleLimit',
+				_1: _user$project$Vega$numSpec(_p139._0)
+			};
+		case 'LeTitleOpacity':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleOpacity',
 				_1: _user$project$Vega$numSpec(_p139._0)
 			};
 		case 'LeValues':
