@@ -1,0 +1,62 @@
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 11pt;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Fjalla One", serif;
+}
+
+.view > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+.view .marks {
+  margin-right: 1em;
+}
+.view .vega-bindings {
+  font-size: 14px;
+  line-height: 20px;
+}
+.view .vega-bind-name {
+  display: inline-block;
+  text-align: right;
+  padding-right: 5px;
+  width: 90px;
+}
+.view .vega-bind input[type="range"] {
+  padding: 0;
+  width: 100px;
+}
+.view .vega-bind select {
+  max-width: 200px;
+}
+.view .vega-bind label {
+  margin-left: 4px;
+}
+.view .vega-bind-radio label {
+  margin-left: 0;
+  margin-right: 4px;
+}
+.embed > a {
+  visibility: hidden;
+  margin-right: 0.5em;
+}
+.embed:hover > a {
+  visibility: visible;
+}
+.example .embed > a {
+  display: none;
+}
+.example .view > * {
+  display: inline-block;
+  vertical-align: top;
+}
+.example .view .vega-bindings {
+  margin-top: 1em;
+}

@@ -1,0 +1,77 @@
+<!doctype html>
+
+<head>
+  <title>Vega Mark Tests</title>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: middle; line-height: 1.6; margin-left: 1em;}</style>
+
+  <!-- These scripts link to the Vega runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/markTests.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Vega Mark Tests</h1>
+
+  <h2>Arc</h2>
+  <div id="arcTest" class="view"></div>
+
+  <h2>Area</h2>
+  <div id="areaTest" class="view"></div>
+
+  <h2>Group</h2>
+  <div id="groupTest" class="view"></div>
+
+  <h2>Image</h2>
+  <div id="imageTest" class="view"></div>
+
+  <h2>Line</h2>
+  <div id="lineTest" class="view"></div>
+
+  <h2>Path</h2>
+  <div id="pathTest" class="view"></div>
+
+  <h2>Rect</h2>
+  <div id="rectTest" class="view"></div>
+
+  <h2>Rule</h2>
+  <div id="ruleTest" class="view"></div>
+
+  <h2>Shape</h2>
+  <div id="shapeTest" class="view"></div>
+
+  <h2>Symbol</h2>
+  <div id="symbolTest" class="view"></div>
+
+  <h2>Text</h2>
+  <div id="textTest" class="view"></div>
+
+  <h2>Trail</h2>
+  <div id="trailTest" class="view"></div>
+
+  <h2>Source</h2>
+  <div id="elmContainer"></div>
+
+  <script>
+  Elm.MarkTests.embed(
+  document.getElementById("elmContainer")
+).ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: false,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
+
+</body>
+
+</html>
