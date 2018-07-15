@@ -8365,6 +8365,14 @@ var _gicentre$elm_vega$VegaLite$vlPropertyLabel = function (spec) {
 			return 'repeat';
 		case 'VLFacet':
 			return 'facet';
+		case 'VLSpacing':
+			return 'spacing';
+		case 'VLAlign':
+			return 'align';
+		case 'VLBounds':
+			return 'bounds';
+		case 'VLCenter':
+			return 'center';
 		case 'VLSpec':
 			return 'spec';
 		default:
@@ -16218,6 +16226,42 @@ var _gicentre$elm_vega$VegaLite$configure = function (configs) {
 		_1: _elm_lang$core$Json_Encode$object(configs)
 	};
 };
+var _gicentre$elm_vega$VegaLite$VLCenter = {ctor: 'VLCenter'};
+var _gicentre$elm_vega$VegaLite$VLBounds = {ctor: 'VLBounds'};
+var _gicentre$elm_vega$VegaLite$VLAlign = {ctor: 'VLAlign'};
+var _gicentre$elm_vega$VegaLite$VLSpacing = {ctor: 'VLSpacing'};
+var _gicentre$elm_vega$VegaLite$spacing = function (sp) {
+	return {
+		ctor: '_Tuple2',
+		_0: _gicentre$elm_vega$VegaLite$VLSpacing,
+		_1: _elm_lang$core$Json_Encode$float(sp)
+	};
+};
+var _gicentre$elm_vega$VegaLite$spacingRC = F2(
+	function (spRow, spCol) {
+		return {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLSpacing,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'row',
+						_1: _elm_lang$core$Json_Encode$float(spRow)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'col',
+							_1: _elm_lang$core$Json_Encode$float(spCol)
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
 var _gicentre$elm_vega$VegaLite$VLResolve = {ctor: 'VLResolve'};
 var _gicentre$elm_vega$VegaLite$resolve = function (res) {
 	return {

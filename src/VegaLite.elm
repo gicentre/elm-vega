@@ -548,6 +548,8 @@ module VegaLite
         , soByField
         , soByRepeat
         , soCustom
+        , spacing
+        , spacingRC
         , specification
         , square
         , str
@@ -1123,6 +1125,8 @@ For details of creating composite views see the
 @docs hConcat
 @docs vConcat
 @docs resolve
+@docs spacing
+@docs spacingRC
 @docs resolution
 @docs reAxis
 @docs reLegend
@@ -3494,6 +3498,10 @@ type VLProperty
     | VLFacet
     | VLSpec
     | VLResolve
+    | VLSpacing
+    | VLAlign
+    | VLBounds
+    | VLCenter
     | VLConfig
     | VLSelection
 
@@ -7946,6 +7954,25 @@ soCustom =
     CustomSort
 
 
+{-| Specify the spacing between sub-views in a composition operator. This version
+sets the same spacing (in pixel units) for rows and columns. For more information see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#facet-operator).
+-}
+spacing : Float -> ( VLProperty, Spec )
+spacing sp =
+    ( VLSpacing, JE.float sp )
+
+
+{-| Specify the spacing between sub-views in a composition operator. This version
+can set different spacing (in pixel units) for rows (first parameter) and columns
+(second parameter). For more information see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#facet-operator).
+-}
+spacingRC : Float -> Float -> ( VLProperty, Spec )
+spacingRC spRow spCol =
+    ( VLSpacing, JE.object [ ( "row", JE.float spRow ), ( "col", JE.float spCol ) ] )
+
+
 {-| Defines a specification object for use with faceted and repeated small multiples.
 
     spec = ...
@@ -11460,6 +11487,18 @@ vlPropertyLabel spec =
 
         VLFacet ->
             "facet"
+
+        VLSpacing ->
+            "spacing"
+
+        VLAlign ->
+            "align"
+
+        VLBounds ->
+            "bounds"
+
+        VLCenter ->
+            "center"
 
         VLSpec ->
             "spec"
