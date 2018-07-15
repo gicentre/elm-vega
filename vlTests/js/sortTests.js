@@ -16227,6 +16227,38 @@ var _gicentre$elm_vega$VegaLite$configure = function (configs) {
 	};
 };
 var _gicentre$elm_vega$VegaLite$VLCenter = {ctor: 'VLCenter'};
+var _gicentre$elm_vega$VegaLite$center = function (c) {
+	return {
+		ctor: '_Tuple2',
+		_0: _gicentre$elm_vega$VegaLite$VLCenter,
+		_1: _elm_lang$core$Json_Encode$bool(c)
+	};
+};
+var _gicentre$elm_vega$VegaLite$centerRC = F2(
+	function (cRow, cCol) {
+		return {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLCenter,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'row',
+						_1: _elm_lang$core$Json_Encode$bool(cRow)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'col',
+							_1: _elm_lang$core$Json_Encode$bool(cCol)
+						},
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
 var _gicentre$elm_vega$VegaLite$VLBounds = {ctor: 'VLBounds'};
 var _gicentre$elm_vega$VegaLite$VLAlign = {ctor: 'VLAlign'};
 var _gicentre$elm_vega$VegaLite$VLSpacing = {ctor: 'VLSpacing'};

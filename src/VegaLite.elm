@@ -165,6 +165,8 @@ module VegaLite
         , boos
         , calculateAs
         , categoricalDomainMap
+        , center
+        , centerRC
         , circle
         , clipRect
         , coArea
@@ -1127,6 +1129,8 @@ For details of creating composite views see the
 @docs resolve
 @docs spacing
 @docs spacingRC
+@docs center
+@docs centerRC
 @docs resolution
 @docs reAxis
 @docs reLegend
@@ -3948,6 +3952,26 @@ categoricalDomainMap scaleDomainPairs =
             List.unzip scaleDomainPairs
     in
     [ SDomain (DStrings domain), SRange (RStrings range) ]
+
+
+{-| Specify whether or not sub-views specified in a composition operator should
+be centred relative to their respective rows or columns. This version sets the same
+centring for rows and columns. For more information see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#facet-operator).
+-}
+center : Bool -> ( VLProperty, Spec )
+center c =
+    ( VLCenter, JE.bool c )
+
+
+{-| Specify whether or not sub-views specified in a composition operator should
+be centred relative to their respective rows or columns. This version can set
+different centring for rows and columns. For more information see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#facet-operator).
+-}
+centerRC : Bool -> Bool -> ( VLProperty, Spec )
+centerRC cRow cCol =
+    ( VLCenter, JE.object [ ( "row", JE.bool cRow ), ( "col", JE.bool cCol ) ] )
 
 
 {-| Specify a circle mark for symbolising points. For details see the
