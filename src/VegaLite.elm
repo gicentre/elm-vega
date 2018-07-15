@@ -8,6 +8,7 @@ module VegaLite
         , BinProperty
         , Binding
         , BooleanOp
+        , Bounds
         , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
         , ClipRect(NoClip)
@@ -163,6 +164,7 @@ module VegaLite
         , binAs
         , boo
         , boos
+        , bounds
         , calculateAs
         , categoricalDomainMap
         , center
@@ -1127,6 +1129,8 @@ For details of creating composite views see the
 @docs hConcat
 @docs vConcat
 @docs resolve
+@docs bounds
+@docs Bounds
 @docs spacing
 @docs spacingRC
 @docs center
@@ -2132,6 +2136,25 @@ type BooleanOp
     | And BooleanOp BooleanOp
     | Or BooleanOp BooleanOp
     | Not BooleanOp
+
+
+{-| Specify the bounds calculation method to use for determining the extent of
+a sub-plot in a composed view. If set to `Full` (the default) the entire calculated
+bounds including axes, title and legend are used, if `Flush` only the width and
+height values for the sub-view will be used. `Flush` can be useful when laying out
+sub-plots without axes or legends into a uniform grid structure.
+-}
+bounds : Bounds -> ( VLProperty, Spec )
+bounds bnds =
+    ( VLBounds, boundsSpec bnds )
+
+
+{-| The bounds calculation method to use for determining the extent of a sub-plot
+in a composed view.
+-}
+type Bounds
+    = Full
+    | Flush
 
 
 {-| Indicates a channel type to be used in a resolution specification.
@@ -9203,6 +9226,16 @@ booleanOpSpec bo =
 
         Not operand ->
             JE.object [ ( "not", booleanOpSpec operand ) ]
+
+
+boundsSpec : Bounds -> Spec
+boundsSpec bnds =
+    case bnds of
+        Full ->
+            JE.string "full"
+
+        Flush ->
+            JE.string "flush"
 
 
 channelLabel : Channel -> String
