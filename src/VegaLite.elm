@@ -3,132 +3,84 @@ module VegaLite
         ( APosition(AEnd, AMiddle, AStart)
         , Arrangement(Column, Row)
         , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
-        , AxisConfig(BandPosition, Domain, DomainColor, DomainWidth, Grid, GridColor, GridDash, GridOpacity, GridWidth, LabelAngle, LabelColor, LabelFont, LabelFontSize, LabelLimit, LabelOverlap, LabelPadding, Labels, MaxExtent, MinExtent, ShortTimeLabels, TickColor, TickRound, TickSize, TickWidth, Ticks, TitleAlign, TitleAngle, TitleBaseline, TitleColor, TitleFont, TitleFontSize, TitleFontWeight, TitleLimit, TitleMaxLength, TitlePadding, TitleX, TitleY)
-          -- TODO: Make this the default exposure in V.3.x, AxisConfig
-        , AxisProperty(AxDates, AxDomain, AxFormat, AxGrid, AxLabelAngle, AxLabelOverlap, AxLabelPadding, AxLabels, AxMaxExtent, AxMinExtent, AxOffset, AxOrient, AxPosition, AxTickCount, AxTickSize, AxTicks, AxTitle, AxTitleAlign, AxTitleAngle, AxTitleMaxLength, AxTitlePadding, AxValues, AxZIndex)
-          -- TODO: Make this the default exposure in V.3.x, AxisProperty
-        , BinProperty(Base, Divide, Extent, MaxBins, MinStep, Nice, Step, Steps)
-          -- TODO: Make this the default exposure in V.3.x, BinProperty
-        , Binding(ICheckbox, IColor, IDate, IDateTimeLocal, IMonth, INumber, IRadio, IRange, ISelect, ITel, IText, ITime, IWeek)
-          -- TODO: Make this the default exposure in V.3.x, Binding
-        , BooleanOp(And, Expr, Not, Or, Selection, SelectionName)
-          -- TODO: Make this the default exposure in V.3.x, BooleanOp
-        , CInterpolate(CubeHelix, CubeHelixLong, Hcl, HclLong, Hsl, HslLong, Lab, Rgb)
-          -- TODO: Make this the default exposure in V.3.x, CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
+        , AxisConfig
+        , AxisProperty
+        , BinProperty
+        , Binding
+        , BooleanOp
+        , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
         , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-        , ClipRect(LTRB, NoClip)
-          -- TODO: Make this the default exposure in V.3.x, ClipRect(NoClip)
-        , ConfigurationProperty(AreaStyle, Autosize, Axis, AxisBand, AxisBottom, AxisLeft, AxisRight, AxisTop, AxisX, AxisY, Background, BarStyle, CircleStyle, CountTitle, FieldTitle, Legend, LineStyle, MarkStyle, NamedStyle, NumberFormat, Padding, PointStyle, Projection, Range, RectStyle, RemoveInvalid, RuleStyle, Scale, SelectionStyle, SquareStyle, Stack, TextStyle, TickStyle, TimeFormat, TitleStyle, View)
-          -- TODO: Make this the default exposure in V.3.x , ConfigurationProperty
+        , ClipRect(NoClip)
+        , ConfigurationProperty
         , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
         , Data
         , DataColumn
         , DataRow
-        , DataType(FoBoolean, FoDate, FoNumber, FoUtc)
-          -- TODO: Make this the default exposure in V.3.x, DataType(FoBoolean, FoNumber)
-        , DataValue(Boolean, DateTime, Number, Str)
-          -- TODO: Make this the default exposure in V.3.x, DataValue
-        , DataValues(Booleans, DateTimes, Numbers, Strings)
-          -- TODO: Make this the default exposure in V.3.x , DataValues
+        , DataType(FoBoolean, FoNumber)
+        , DataValue
+        , DataValues
         , DateTime(DTDate, DTDay, DTHours, DTMilliseconds, DTMinutes, DTMonth, DTQuarter, DTSeconds, DTYear)
-          -- TODO: Make this the default exposure in V.3.x, DateTime
         , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
-        , DetailChannel(DAggregate, DBin, DName, DTimeUnit, DmType)
-          -- TODO: Make this the default exposure in V.3.x, DetailChannel
-        , FacetChannel(FAggregate, FBin, FHeader, FName, FTimeUnit, FmType)
-          -- TODO: Make this the default exposure in V.3.x, FacetChannel
-        , FacetMapping(ColumnBy, RowBy)
-          -- TODO: Make this the default exposure in V.3.x, FacetMapping
+        , DetailChannel
+        , FacetChannel
+        , FacetMapping
         , FieldTitleProperty(Function, Plain, Verbal)
-        , Filter(FCompose, FEqual, FExpr, FOneOf, FRange, FSelection)
-          -- TODO: Make this the default exposure in V.3.x, Filter
-        , FilterRange(DateRange, NumberRange)
-          -- TODO: Make this the default exposure in V.3.x, FilterRange
+        , Filter
+        , FilterRange
         , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
-        , Format(CSV, JSON, Parse, TSV, TopojsonFeature, TopojsonMesh)
-          -- TODO: Make this the default exposure in V.3.x, Format(CSV, TSV)
-        , Geometry(GeoLine, GeoLines, GeoPoint, GeoPoints, GeoPolygon, GeoPolygons)
-          -- TODO: Make this the default exposure in V.3.x, Geometry
+        , Format(CSV, TSV)
+        , Geometry
         , HAlign(AlignCenter, AlignLeft, AlignRight)
-        , HeaderProperty(HFormat, HTitle)
-          -- TODO: Make this the default exposure in V.3.x, HeaderProperty
-        , HyperlinkChannel(HAggregate, HBin, HDataCondition, HName, HRepeat, HSelectionCondition, HString, HTimeUnit, HmType)
-          -- TODO: Make this the default exposure in V.3.x, HyperlinkChannel
-        , InputProperty(Debounce, Element, InMax, InMin, InName, InOptions, InPlaceholder, InStep)
-          -- TODO: Make this the default exposure in V.3.x, InputProperty
+        , HeaderProperty
+        , HyperlinkChannel
+        , InputProperty
         , LabelledSpec
         , Legend(Gradient, Symbol)
-        , LegendConfig(CornerRadius, EntryPadding, FillColor, GradientHeight, GradientLabelBaseline, GradientLabelLimit, GradientLabelOffset, GradientStrokeColor, GradientStrokeWidth, GradientWidth, LeLabelAlign, LeLabelBaseline, LeLabelColor, LeLabelFont, LeLabelFontSize, LeLabelLimit, LeLabelOffset, LePadding, LeShortTimeLabels, LeStrokeDash, LeStrokeWidth, LeTitleAlign, LeTitleBaseline, LeTitleColor, LeTitleFont, LeTitleFontSize, LeTitleFontWeight, LeTitleLimit, LeTitlePadding, Offset, Orient, StrokeColor, SymbolColor, SymbolSize, SymbolStrokeWidth, SymbolType)
-          -- TODO: Make this the default exposure in V.3.x, LegendConfig
+        , LegendConfig
         , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
-        , LegendProperty(LEntryPadding, LFormat, LOffset, LOrient, LPadding, LTickCount, LTitle, LType, LValues, LZIndex)
-          -- TODO: Make this the default exposure in V.3.x, LegendProperty
-        , LegendValues(LDateTimes, LNumbers, LStrings)
-          -- TODO: Make this the default exposure in V.3.x, LegendValues
-        , Mark(Area, Bar, Circle, Geoshape, Line, Point, Rect, Rule, Square, Text, Tick)
-          -- TODO: Make this the default exposure in V.3.x, Mark
-        , MarkChannel(MAggregate, MBin, MBoolean, MDataCondition, MLegend, MName, MNumber, MPath, MRepeat, MScale, MSelectionCondition, MString, MTimeUnit, MmType)
-          -- TODO: Make this the default exposure in V.3.x, MarkChannel
+        , LegendProperty
+        , LegendValues
+        , Mark
+        , MarkChannel
         , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
         , MarkOrientation(Horizontal, Vertical)
-        , MarkProperty(MAlign, MAngle, MBandSize, MBaseline, MBinSpacing, MClip, MColor, MContinuousBandSize, MCursor, MDiscreteBandSize, MFill, MFillOpacity, MFilled, MFont, MFontSize, MFontStyle, MFontWeight, MInterpolate, MOpacity, MOrient, MRadius, MShape, MShortTimeLabels, MSize, MStroke, MStrokeDash, MStrokeDashOffset, MStrokeOpacity, MStrokeWidth, MStyle, MTension, MText, MTheta, MThickness, MdX, MdY)
-          -- TODO: Make this the default exposure in V.3.x, MarkProperty
+        , MarkProperty
         , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
         , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
         , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
-        , OrderChannel(OAggregate, OBin, OName, ORepeat, OSort, OTimeUnit, OmType)
-          -- TODO: Make this the default exposure in V.3.x, OrderChannel
+        , OrderChannel
         , OverlapStrategy(OGreedy, ONone, OParity)
-        , Padding(PEdges, PSize)
-          -- TODO: Make this the default exposure in V.3.x, Padding
+        , Padding
         , PointMarker(PMNone, PMTransparent)
         , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
-        , PositionChannel(PAggregate, PAxis, PBin, PName, PRepeat, PScale, PSort, PStack, PTimeUnit, PmType)
-          -- TODO: Make this the default exposure in V.3.x, PositionChannel
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Custom, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-          -- TODO: Make this the default exposure in V.3.x, Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-        , ProjectionProperty(PCenter, PClipAngle, PClipExtent, PCoefficient, PDistance, PFraction, PLobes, PParallel, PPrecision, PRadius, PRatio, PRotate, PSpacing, PTilt, PType)
-          -- TODO: Make this the default exposure in V.3.x, ProjectionProperty
-        , RangeConfig(RCategory, RDiverging, RHeatmap, ROrdinal, RRamp, RSymbol)
-          -- TODO: Make this the default exposure in V.3.x, RangeConfig
-        , RepeatFields(ColumnFields, RowFields)
-          -- TODO: Make this the default exposure in V.3.x, RepeatFields
+        , PositionChannel
+        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
+        , ProjectionProperty
+        , RangeConfig
+        , RepeatFields
         , Resolution(Independent, Shared)
-        , Resolve(RAxis, RLegend, RScale)
-          -- TODO: Make this the default exposure in V.3.x, Resolve
+        , Resolve
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
-        , ScaleConfig(SCBandPaddingInner, SCBandPaddingOuter, SCClamp, SCMaxBandSize, SCMaxFontSize, SCMaxOpacity, SCMaxSize, SCMaxStrokeWidth, SCMinBandSize, SCMinFontSize, SCMinOpacity, SCMinSize, SCMinStrokeWidth, SCPointPadding, SCRangeStep, SCRound, SCTextXRangeStep, SCUseUnaggregatedDomain)
-          -- TODO: Make this the default exposure in V.3.x, ScaleConfig
-        , ScaleDomain(DDateTimes, DNumbers, DSelection, DStrings, Unaggregated)
-          -- TODO: Make this the default exposure in V.3.x, ScaleDomain(Unaggregated)
-        , ScaleNice(IsNice, NDay, NHour, NInterval, NMillisecond, NMinute, NMonth, NSecond, NTickCount, NWeek, NYear)
-          -- TODO: Make this the default exposure in V.3.x, ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
-        , ScaleProperty(SClamp, SDomain, SInterpolate, SNice, SPadding, SPaddingInner, SPaddingOuter, SRange, SRangeStep, SReverse, SRound, SScheme, SType, SZero)
-          -- TODO: Make this the default exposure in V.3.x, ScaleProperty
-        , ScaleRange(RName, RNumbers, RStrings)
-          -- TODO: Make this the default exposure in V.3.x, ScaleRange
+        , ScaleConfig
+        , ScaleDomain(Unaggregated)
+        , ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+        , ScaleProperty
+        , ScaleRange
         , Selection(Interval, Multi, Single)
-        , SelectionMarkProperty(SMFill, SMFillOpacity, SMStroke, SMStrokeDash, SMStrokeDashOffset, SMStrokeOpacity, SMStrokeWidth)
-          -- TODO: Make this the default exposure in V.3.x, SelectionMarkProperty
-        , SelectionProperty(Bind, BindScales, Empty, Encodings, Fields, Nearest, On, ResolveSelections, SelectionMark, Toggle, Translate, Zoom)
-          -- TODO: Make this the default exposure in V.3.x, SelectionProperty(BindScales, Empty)
+        , SelectionMarkProperty
+        , SelectionProperty(BindScales, Empty)
         , SelectionResolution(Global, Intersection, Union)
         , Side(SBottom, SLeft, SRight, STop)
-        , SortProperty(Ascending, ByField, ByRepeat, Descending, Op)
-          -- TODO: Make this the default exposure in V.3.x, SortProperty(Ascending, Descending)
+        , SortProperty(Ascending, Descending)
         , Spec
         , StackProperty(NoStack, StCenter, StNormalize, StZero)
-        , Symbol(Cross, Diamond, Path, SymCircle, SymSquare, TriangleDown, TriangleUp)
-          -- TODO: Make this the default exposure in V.3.x, Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
-        , TextChannel(TAggregate, TBin, TDataCondition, TFormat, TName, TRepeat, TSelectionCondition, TTimeUnit, TmType)
-          -- TODO: Make this the default exposure in V.3.x, TextChannel
+        , Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
+        , TextChannel
         , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
-        , TitleConfig(TAnchor, TAngle, TBaseline, TColor, TFont, TFontSize, TFontWeight, TLimit, TOffset, TOrient)
-          -- TODO: Make this the default exposure in V.3.x, TitleConfig
+        , TitleConfig
         , VAlign(AlignBottom, AlignMiddle, AlignTop)
         , VLProperty
-        , ViewConfig(Clip, Fill, FillOpacity, Stroke, StrokeDash, StrokeDashOffset, StrokeOpacity, StrokeWidth, ViewHeight, ViewWidth)
-          -- TODO: Make this the default exposure in V.3.x, ViewConfig
+        , ViewConfig
         , Window
         , WindowOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
         , WindowProperty
@@ -208,8 +160,6 @@ module VegaLite
         , biNice
         , biStep
         , biSteps
-        , bin
-          -- TODO: Make bin private in next major version.
         , binAs
         , boo
         , boos
@@ -306,6 +256,7 @@ module VegaLite
         , fName
         , fTimeUnit
         , facet
+        , false
         , fiCompose
         , fiEqual
         , fiExpr
@@ -466,7 +417,6 @@ module VegaLite
         , maText
         , maTheta
         , maThickness
-        , mark
         , name
         , not
         , num
@@ -635,6 +585,7 @@ module VegaLite
         , topojsonMesh
         , trail
         , transform
+        , true
         , utc
         , vConcat
         , vicoClip
@@ -1535,6 +1486,8 @@ In addition to more general data types like integers and string, the following t
 can carry data used in specifications.
 
 @docs boo
+@docs true
+@docs false
 @docs dt
 @docs num
 @docs str
@@ -1564,12 +1517,11 @@ can carry data used in specifications.
 ---
 
 
-# Deprecated Types and functions
+# Type Reference
 
-The following are deprecated and will be removed in a future major version release.
-Generally, the constructors of each type should be replaced with a function of
-a similar name. For example, instead of the `Rule` type use the `rule` function;
-instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
+The following types are not specified directly but instead created by various functions
+as described above.
+They are provided here for reference with links to the functions that generate them.
 
 @docs PositionChannel
 @docs MarkChannel
@@ -1580,11 +1532,9 @@ instead of `PAggregate` use `pAggregate`, instead of `TmType` use `tMType` etc.
 @docs TextChannel
 
 @docs Mark
-@docs mark
 @docs MarkProperty
 
 @docs BooleanOp
-@docs bin
 @docs Binding
 
 @docs AxisProperty
@@ -1653,14 +1603,23 @@ type Autosize
     | AResize
 
 
-{-| _Note: specifying axis configuration properties with type constructors (`BandPosition`,
-`Domain`, `Grid` etc.) is deprecated in favour of calling their equivalent property
-specifying functions (`axcoBandPosition`, `axcoDomain`, `axcoGrid` etc.)_
-
-Axis configuration options for customising all axes. See the
+{-| Axis configuration options for customising all axes. Generated by [axcoBandPosition](#axcoBandPosition),
+[axcoDomain](#axcoDomain), [axcoDomainColor](#axcoDomainColor), [axcoDomainWidth](#axcoDomainWidth),
+[axcoMaxExtent](#axcoMaxExtent), [axcoMinExtent](#axcoMinExtent), [axcoGrid](#axcoGrid),
+[axcoGridColor](#axcoGridColor), [axcoGridDash](#axcoGridDash), [axcoGridOpacity](#axcoGridOpacity),
+[axcoGridWidth](#axcoGridWidth), [axcoLabels](#axcoLabels), [axcoLabelAngle](#axcoLabelAngle),
+[axcoLabelColor](#axcoLabelColor), [axcoLabelFont](#axcoLabelFont), [axcoLabelFontSize](#axcoLabelFontSize),
+[axcoLabelLimit](#axcoLabelLimit), [axcoLabelOverlap](#axcoLabelOverlap),
+[axcoLabelPadding](#axcoLabelPadding), [axcoShortTimeLabels](#axcoShortTimeLabels),
+[axcoTicks](#axcoTicks), [axcoTickColor](#axcoTickColor), [axcoTickRound](#axcoTickRound),
+[axcoTickSize](#axcoTickSize), [axcoTickWidth](#axcoTickWidth), [axcoTitleAlign](#axcoTitleAlign),
+[axcoTitleAngle](#axcoTitleAngle), [axcoTitleBaseline](#axcoTitleBaseline),
+[axcoTitleColor](#axcoTitleColor), [axcoTitleFont](#axcoTitleFont), [axcoTitleFontSize](#axcoTitleFontSize),
+[axcoTitleFontWeight](#axcoTitleFontWeight), [axcoTitleLimit](#axcoTitleLimit),
+[axcoTitleMaxLength](#axcoTitleMaxLength), [axcoTitlePadding](#axcoTitlePadding),
+[axcoTitleX](#axcoTitleX), [axcoTitleY](#axcoTitleY). See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#general-config)
 for more details.
-
 -}
 type AxisConfig
     = BandPosition Float
@@ -2001,15 +1960,17 @@ axcoTitleY =
     TitleY
 
 
-{-| _Note: specifying axis properties with type constructors (`AxDomain`,
-`AxFormat` etc.) is deprecated in favour of calling their equivalent property
-specifying functions (`axDomain`, `axFormat` etc.)_
-
-Axis customisation properties. These are used for customising individual axes.
-To configure all axes, use `AxisConfig` with a `configuration` instead. See the
+{-| Axis customisation properties. These are used for customising individual axes.
+Generated by [axDomain](#axDomain), [axFormat](#AxFormat), [axGrid](#axGrid),
+[axLabelAngle](#axLabelAngle), [axLabelOverlap](#axLabelOverlap), [axLabelPadding](#axLabelPadding),
+[axLabels](#axLabels), [axMaxExtent](#axMaxExtent), [axMinExtent](#axMinExtent),
+[axOffset](#axOffset), [axOrient](#axOrient), [axPosition](#axPosition), [axTicks](#axTicks),
+[axTickCount](#axTickCount), [axTickSize](#axTickSize), [axTitle](#axTitle),
+[AxTitleAlign](#axTitleAlign), [axTitleAngle](#axTitleAngle), [axTitleMaxLength](#axTitleMaxLength),
+[axTitlePadding](#axTitlePadding), [axValues](#axValues), [axDates](#axDates) and
+[axZIndex](#axZIndex). To configure all axes, use `AxisConfig` with a `configuration`
+instead. For more details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/axis.html#axis-properties)
-for more details.
-
 -}
 type AxisProperty
     = AxDomain Bool
@@ -2037,15 +1998,13 @@ type AxisProperty
     | AxZIndex Int
 
 
-{-| _Note: specifying binding elements with type constructors (`IRange`,
-`ICheckbox` etc.) is deprecated in favour of calling their equivalent input binding
-functions (`iRange`, `iCheckbox` etc.)_
-
-Describes the binding property of a selection based on some HTML input element
-such as a checkbox or radio button. For details see the
+{-| Describes the binding property of a selection based on some HTML input element
+such as a checkbox or radio button. Generated by [iRange](#iRange), [iCheckbox](#iCheckbox),
+[iRadio](#iRadio), [iSelect](#iSelect), [iText](#iText), [iNumber](#iNumber),
+[iDate](#iDate), [iTime](#iTime), [iMonth](#iMonth), [iWeek](#iWeek), [iDateTimeLocal](#iDateTimeLocal),
+[iTel](#iTel) and [iColor](#iColor). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bind.html#scale-binding)
 and the [Vega input binding documentation](https://vega.github.io/vega/docs/signals/#bind)
-
 -}
 type Binding
     = IRange String (List InputProperty)
@@ -2064,18 +2023,13 @@ type Binding
     | IColor String (List InputProperty)
 
 
-{-| _Note: specifying binning properties with type constructors (`Base`,
-`Extent` etc.) is deprecated in favour of calling their equivalent property
-specifying functions (`biBase`, `biExtent` etc.)_
-
-Type of binning property to customise. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html) for
-more details.
-
+{-| Type of binning property to customise. Generated by [biBase](#biBase), [biDivide](#biDivide),
+[biExtent](#biExtent), [biMaxBins](#biMaxBins), [biMinStep](#biMinStep), [biNice](#biNice),
+[biStep](#biStep) and [biSteps](#biSteps). For more details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/bin.html).
 -}
 type BinProperty
     = Base Float
-    | Divide Float Float -- Note when made private in next major release, this option will disappear in favour of more general list of possible divisors
     | Divides (List Float)
     | Extent Float Float
     | MaxBins Int
@@ -2160,9 +2114,8 @@ biSteps =
     Steps
 
 
-{-| Used for creating logical compositions. _Note referencing BooleanOp type
-constructors (`And`, `Not`, `Expr` etc.) is deprecated in favour of calling their
-equivalent Boolean operation functions (`and`, `not`, `expr` etc.)_
+{-| Used for creating logical compositions. Generated by [expr](#expr), [selected](#selected),
+[selectionName](#selectionName), [and](#and), [or](#or) and [not](#not).
 -}
 type BooleanOp
     = Expr String
@@ -2192,8 +2145,8 @@ onto a color scale. Note that color interpolation cannot be applied with the def
 continuous scale such as `linear`, `pow` etc.
 
 Several of the interpolation options also require a `gamma` value (with 1 being
-a recommended default to provide). These should be generated with the named functions
-`cubeHelix`, `cubeHelixLong` and `rgb` rather than with a (deprecated) type constructor.
+a recommended default to provide). These can be generated with the named functions
+[cubeHelix](#cubeHelix), [cubeHelixLong](#cubeHelixLong) and [rgb](#rgb).
 
 For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
@@ -2210,23 +2163,26 @@ type CInterpolate
     | Rgb Float
 
 
-{-| Specifies whether or not a clipping rectangle is to be applied. If it is, the
-function `clipRect` should be called rather than the (deprecated) type constructor
-`LTRB`.
+{-| Specify that no clipping is to be applied. To specify a clipping rectangle
+dimenstions, see [clipRect](#clipRect).
 -}
 type ClipRect
     = NoClip
     | LTRB Float Float Float Float
 
 
-{-| _Note: referencing configuration properties with type constructors (`AreaStyle`,
-`Autosize`, `Axis` etc.) is deprecated in favour of calling their equivalent
-configuration functions (`coArea`, `coAutosize`, `coAxis` etc.)._
-
-Type of configuration property to customise. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html)
-for details.
-
+{-| Type of configuration property to customise. Generated with [coArea](#coArea),
+[coAutosize](#coAutosize), [coAxis](#coAxis), [coAxisX](#coAxisX), [coAxisY](#coAxisY),
+[coAxisLeft](#coAxisLeft), [coAxisRight](#coAxisRight), [coAxisTop](#coAxisTop),
+[coAxisBottom](#coAxisBottom), [coAxisBand](#coAxisBand), [coBackground](#coBackground),
+[coBar](#coBar), [coCircle](#coCircle), [coCountTitle](#coCountTitle), [coFieldTitle](#coFieldTitle),
+[coGeoshape](#coGeoshape), [coLegend](#coLegend), [coLine](#coLine), [coMark](#coMark),
+[coNamedStyle](#coNamedStyle), [coNumberFormat](#coNumberFormat), [coPadding](#coPadding),
+[coPoint](#coPoint), [coProjection](#coProjection), [coRange](#coRange), [coRect](#coRect),
+[coRemoveInvalid](#coRemoveInvalid), [coRule](#coRule), [coScale](#coScale), [coSelection](#coSelection),
+[coSquare](#coSquare), [coStack](#coStack), [coText](#coText), [coTick](#coTick),
+[coTitle](#coTitle), [coTimeFormat](#coTimeFormat), [coTrail](#coTrail) and [coView](#coView).
+For details, see the [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/config.html).
 -}
 type ConfigurationProperty
     = AreaStyle (List MarkProperty)
@@ -2340,9 +2296,8 @@ type alias DataRow =
     Spec
 
 
-{-| Indicates the type of data to be parsed when reading input data. When parsing
-dates, you should use the `foDate` or `foUtc` functions rather than their
-equivalent (deprecated) type constructors.
+{-| Indicates the type of data to be parsed when reading input data. To parse
+dates, see [foDate](#FoDate) and [foUtc](#foUtc).
 -}
 type DataType
     = FoNumber
@@ -2351,13 +2306,9 @@ type DataType
     | FoUtc String
 
 
-{-| _Note: referencing data types with type constructors (`Boolean`, `DateTime`,
-`Number` and `Str`) is deprecated in favour of calling their equivalent data value
-functions (`boo`, `dt`, `num` and `str`)._
-
-A single data value. This is used when a function can accept values of different
-types (e.g. either a number or a string).
-
+{-| A single data value. This is used when a function can accept values of different
+types (e.g. either a number or a string). Generated by [boo](#boo), [true](#true),
+[false](#false), [dt](#dt), [num](#num) and [str](#str).
 -}
 type DataValue
     = Boolean Bool
@@ -2366,13 +2317,9 @@ type DataValue
     | Str String
 
 
-{-| _Note: referencing lists of data types with type constructors (`Booleans`,
-`DateTimes`, `Numbers` and `Strings`) is deprecated in favour of calling their
-equivalent data value list functions (`boos`, `dts`, `nums` and `strs`)._
-
-A list of data values. This is used when a function can accept lists of
-different types (e.g. either a list of numbers or a list of strings).
-
+{-| A list of data values. This is used when a function can accept lists of
+different types (e.g. either a list of numbers or a list of strings). Generated
+by [boos](#boos), [dts](#dts), [nums](#nums) and [strs](#strs).
 -}
 type DataValues
     = Booleans (List Bool)
@@ -2381,15 +2328,13 @@ type DataValues
     | Strings (List String)
 
 
-{-| _Note: referencing dateTime type constructors (`DTYear`, `DTHours` etc.)
-is deprecated in favour of calling their equivalent dateTime functions
-(`dtYear`, `dtHour` etc.)_
-
-Allows a date or time to be represented. This is typically part of a list of
+{-| Allows a date or time to be represented. This is typically part of a list of
 functions that each generate a `DateTime` item to provide a specific point in
-time. For details see the
+time. Generated by [dtYear](#dtYear), [dtQuarter](#dtQuarter), [dtMonth](#dtMonth),
+[dtDate](#DTDate), [dtDay](#dtDay), [dtHour](#dtHour), [dtMinute](#dtMinute),
+[dtSecond](#dtSecond) and [dtMillisecond](#dtMillisecond).
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/types.html#datetime).
-
 -}
 type DateTime
     = DTYear Int
@@ -2415,14 +2360,10 @@ type DayName
     | Sun
 
 
-{-| _Note: referencing detail channel type constructors (`DName`, `DBin` etc.)
-is deprecated in favour of calling their equivalent detail channel functions
-(`dName`, `dBin` etc.)_
-
-Level of detail channel properties used for creating a grouped channel encoding.
-For details see the
+{-| Level of detail channel properties used for creating a grouped channel encoding.
+Generated by [dName](#dName), [dMType](#dMType), [dAggregate](#dAggregate),
+[DBin](#DBin) and [dTimeUnit](#dTimeUnit). For details see the
 [Vega-Lite level of detail channel documentation](https://vega.github.io/vega-lite/docs/encoding.html#detail)
-
 -}
 type DetailChannel
     = DName String
@@ -2457,13 +2398,9 @@ type DetailChannel
 --     | Wheel
 
 
-{-| _Note: facet channel type constructors (`FName`, `FBin` etc.) are
-deprecated in favour of calling their equivalent facet channel functions
-(`fName`, `fBin` etc.)_
-
-Types of facet channel property used for creating a composed facet view of small
-multiples.
-
+{-| Types of facet channel property used for creating a composed facet view of small
+multiples. Generated by [fName](#fName), [fMType](#fMType), [fAggregate](#fAggregate),
+[fBin](#fBin), [fHeader](#fHeader) and [fTimeUnit](#fTimeUnit).
 -}
 type FacetChannel
     = FName String
@@ -2474,14 +2411,10 @@ type FacetChannel
     | FHeader (List HeaderProperty)
 
 
-{-| _Note: facet mapping type constructors (`ColumnBy` and `RowBy` ) are
-deprecated in favour of calling their equivalent facet mapping functions
-(`columnBy` and `rowBy`)_
-
-Provides details of the mapping between a row or column and its field
-definitions in a set of faceted small multiples. For details see the
+{-| Provides details of the mapping between a row or column and its field
+definitions in a set of faceted small multiples. Generated by [columnBy](#columnBy)
+and [rowBy](#rowBy). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#mapping)
-
 -}
 type FacetMapping
     = ColumnBy (List FacetChannel)
@@ -2499,14 +2432,10 @@ type FieldTitleProperty
     | Plain
 
 
-{-| _Note: referencing filter type constructors (`FEqual`, `FExpr` etc.)
-is deprecated in favour of calling their equivalent filtering functions
-(`fiEqual`, `fiExpr` etc.)_
-
-Type of filtering operation. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html)
-for details.
-
+{-| Type of filtering operation. Generatede by [fiEqual](#fiEqual), [fiExpr](#fiExpr),
+[fiCompose](#fiCompose), [fiSelection](#fiSelection), [fiOneOf](#fiOneOf) and
+[fiRange](#fiRange). For more details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
 -}
 type Filter
     = FEqual String DataValue
@@ -2517,13 +2446,9 @@ type Filter
     | FRange String FilterRange
 
 
-{-| _Note: referencing filter range type constructors (`NumberRange` and `DateRange`)
-is deprecated in favour of calling their equivalent filtering range functions
-(`numRange` and `dtRange`.)_
-
-A pair of filter range data values. The first argument is the inclusive minimum
-vale to accept and the second the inclusive maximum.
-
+{-| A pair of filter range data values. The first argument is the inclusive minimum
+value to accept and the second the inclusive maximum. Generated by [numRange](#numRange)
+and [dtRange](#dtRange).
 -}
 type FilterRange
     = NumberRange Float Float
@@ -2565,16 +2490,13 @@ type Format
     | Parse (List ( String, DataType ))
 
 
-{-| _Note: referencing geometry type constructors (`GeoPoint`, `GeoLine` etc.)
-is deprecated in favour of calling their equivalent geometry functions
-(`geoPoint`, `geoLine` etc.)_
-
-Specifies the type and content of geometry specifications for programmatically
+{-| Specifies the type and content of geometry specifications for programmatically
 creating GeoShapes. These can be mapped to the
 [GeoJson geometry object types](https://tools.ietf.org/html/rfc7946#section-3.1)
 where the pluralised type names refer to their `Multi` prefixed equivalent in the
-GeoJSON specification.
-
+GeoJSON specification. Generated by [geoPoint](#geoPoint), [geoPoints](#geoPoints),
+[geoLine](#geoLine), [geoLines](#geoLines), [geoPolygon](#geoPolygon) and
+[geoPolygons](#geoPolygons).
 -}
 type Geometry
     = GeoPoint Float Float
@@ -2593,13 +2515,9 @@ type HAlign
     | AlignRight
 
 
-{-| _Note: referencing header property type constructors (`HFormat` and `HTitle`)
-is deprecated in favour of calling their equivalent header property functions
-(`hdFormat`, `hdTitle` etc.)_
-
-Represents a facet header property. For details, see the
+{-| Represents a facet header property. Generated by [hdFormat](#hdFormat) and
+[hdTitle](#hdTitle). For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/facet.html#header)
-
 -}
 type HeaderProperty
     = HFormat String
@@ -2622,12 +2540,10 @@ hdTitle =
     HTitle
 
 
-{-| _Note: referencing hyperlink channel type constructors (`HName`, `HBin` etc.)
-is deprecated in favour of calling their equivalent hyperlink channel functions
-(`hName`, `hBin` etc.)_
-
-Types of hyperlink channel property used for linking marks or text to URLs.
-
+{-| Types of hyperlink channel property used for linking marks or text to URLs.
+Generated by [hName](#hName), [hRepeat](#hRepeat), [hMType](#hMType), [HBin](#hBin),
+[hAggregate](#hAggregate), [hTimeUnit](#hTimeUnit), [hDataCondition](#hDataCondition),
+[hSelectionCondition](#hSelectionCondition) and [hStr](#hStr).
 -}
 type HyperlinkChannel
     = HName String
@@ -2641,16 +2557,13 @@ type HyperlinkChannel
     | HString String
 
 
-{-| _Note: specifying input properties with type constructors (`InMin`,
-`InOptions` etc.) is deprecated in favour of calling their equivalent property
-specifying functions (`inMin`, `inOptions` etc.)_
-
-GUI Input properties. The type of relevant property will depend on the type of
-input element selected. For example an `InRange` (slider) can have numeric min,
-max and step values; InSelect (selector) has a list of selection label options.
-For details see the
+{-| GUI Input properties. The type of relevant property will depend on the type of
+input element selected. For example a slider generated by `inRange` can have numeric
+min, max and step values; a selector generated by `inSelect` has a list of selection
+label options. Generated by [inDebounce](#inDebounce), [inElement](#inElement),
+[inOptions](#inOptions), [inMin](#inMin), [inMax](#inMax), [inName](#inName),
+[inStep](#inStep) and [inPlaceholder](#inPlaceholder). For details see the
 [Vega input element binding documentation](https://vega.github.io/vega/docs/signals/#bind).
-
 -}
 type InputProperty
     = Debounce Float
@@ -2679,14 +2592,24 @@ type Legend
     | Symbol
 
 
-{-| _Note: specifying legend configuration properties with type constructors
-(`CornerRadius`, `FillColor`, `LePadding` etc.) is deprecated in favour of
-calling their equivalent property specifying functions (`lecoCornerRadius`,
-`lecoFillColor`, `lecoPadding` etc.)_
-
-Legend configuration options. For more detail see the
+{-| Legend configuration options. Generated by [lecoCornerRadius](#lecoCornerRadius),
+[lecoFillColor](#lecoFillColor), [lecoOrient](#lecoOrient), [lecoOffset](#lecoOffset),
+[lecoStrokeColor](#lecoStrokeColor), [lecoStrokeDash](#lecoStrokeDash), [lecoStrokeWidth](#lecoStrokeWidth),
+[lecoPadding](#lecoPadding), [lecoGradientLabelBaseline](#lecoGradientLabelBaseline),
+[lecoGradientLabelLimit](#lecoGradientLabelLimit), [lecoGradientLabelOffset](#lecoGradientLabelOffset),
+[lecoGradientStrokeColor](#lecoGradientStrokeColor), [lecoGradientStrokeWidth](#lecoGradientStrokeWidth),
+[lecoGradientHeight](#lecoGradientHeight), [lecoGradientWidth](#lecoGradientWidth),
+[lecoLabelAlign](#lecoLabelAlign), [lecoLabelBaseline](#lecoLabelBaseline),
+[lecoLabelColor](#lecoLabelColor), [lecoLabelFont](#lecoLabelFont), [lecoLabelFontSize](#lecoLabelFontSize),
+[lecoLabelLimit](#lecoLabelLimit), [lecoLabelOffset](#lecoLabelOffset),
+[lecoShortTimeLabels](#lecoShortTimeLabels), [lecoEntryPadding](#lecoEntryPadding),
+[lecoSymbolColor](#lecoSymbolColor), [lecoSymbolType](#lecoSymbolType), [lecoSymbolSize](#lecoSymbolSize),
+[lecoSymbolStrokeWidth](#lecoSymbolStrokeWidth), [lecoTitleAlign](#lecoTitleAlign),
+[lecoTitleBaseline](#lecoTitleBaseline), [lecoTitleColor](#lecoTitleColor),
+[lecoTitleFont](#lecoTitleFont), [lecoTitleFontSize](#lecoTitleFontSize),
+[lecoTitleFontWeight](#lecoTitleFontWeight), [lecoTitleLimit](#lecoTitleLimit)
+and [lecoTitlePadding](#lecoTitlePadding). For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#config).
-
 -}
 type LegendConfig
     = CornerRadius Float
@@ -2741,13 +2664,11 @@ type LegendOrientation
     | TopRight
 
 
-{-| _Note: referencing legend property type constructors (`LFormat`, lTitle`etc.)
-is deprecated in favour of calling their equivalent legend property functions
-(`leFormat`,`leTitle` etc.)_
-
-Legend properties for customising a mark legend. For more detail see the
+{-| Legend properties for customising a mark legend. Generated by [leEntryPadding](#leEntryPadding),
+[leFormat](#leFormat), [leOffset](#LeOffset), [leOrient](#leOrient), [lePadding](#lePadding),
+[leTickCount](#leTickCount), [leTitle](#leTitle), [leType](#leType), [leValues](#leValues)
+and [leZIndex](#leZIndex). For more detail see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
-
 -}
 type LegendProperty
     = LEntryPadding Float
@@ -2762,12 +2683,8 @@ type LegendProperty
     | LZIndex Int
 
 
-{-| _Note: referencing legend value type constructors (`LNumbers`, `LStrings`
-and `LDateTimes`) is deprecated in favour of calling their equivalent legend value
-functions (`leNums`, `leStrs` and `leDts`)_
-
-A list of data values suitable for setting legend values.
-
+{-| A list of data values suitable for setting legend values. Generated by
+[leNums](#leNums), [leStrs](#leStrs) and [leDts](#leDts).
 -}
 type LegendValues
     = LDateTimes (List (List DateTime))
@@ -2775,11 +2692,10 @@ type LegendValues
     | LStrings (List String)
 
 
-{-| _Note: referencing mark type constructors (`mark Area`, `mark Bar` etc.) is
-deprecated in favour of calling their equivalent mark functions (`area`, `bar` etc.)_
-
-Type of visual mark used to represent data in the visualization.
-
+{-| Type of visual mark used to represent data in the visualization. Generated by
+[area](#area), [bar](#bar), [circle](#circle), [geoshape](#geoshape), [line](#line),
+[point](#point), [rect](#rect), [rule](#rule), [square](#square), [textMark](#textMark),
+[tick](#tick) and [trail](#trail).
 -}
 type Mark
     = Area
@@ -2796,12 +2712,11 @@ type Mark
     | Trail
 
 
-{-| _Note: referencing mark channel type constructors (`MName`, `MBin` etc.) is
-deprecated in favour of calling their equivalent mark channel functions
-(`mName`, `mBin` etc.)_
-
-Mark channel properties used for creating a mark channel encoding.
-
+{-| Mark channel properties used for creating a mark channel encoding. Generated
+by [mName](#mName), [mRepeat](#mRepeat), [mMType](#mMType), [mScale](#mScale),
+[mBin](#MBin), [mTimeUnit](#mTimeUnit), [mAggregate](#mAggregate), [mLegend](#mLegend),
+[mSelectionCondition](#mSelectionCondition), [mDataCondition](#mDataCondition),
+[mPath](#mPath), [mNum](#mNum), [mStr](#mStr) and [mBoo](#mBoo).
 -}
 type MarkChannel
     = MName String
@@ -2848,11 +2763,19 @@ type MarkOrientation
     | Vertical
 
 
-{-| _Note: referencing mark property type constructors (`MAlign`, `MFill` etc.)
-is deprecated in favour of calling their equivalent mark property functions
-(`maAlign`, `maFill` etc.)_
+{-| Properties for customising the appearance of a mark. Generated by [maAlign](#maAlign),
+[maAngle](#maAngle), [maBandSize](#maBandSize), [maBaseline](#maBaseline), [maBinSpacing](#maBinSpacing),
+[maClip](#maClip), [maColor](#maColor), [maCursor](#maCursor), [maContinuousBandSize](#maContinuousBandSize),
+[maDiscreteBandSize](#maDiscreteBandSize), [maDx](#maDx), [maDy](#maDy), [maFill](#maFill),
+[maFilled](#maFilled), [maFillOpacity](#maFillOpacity), [maFont](#maFont), [maFontSize](#maFontSize),
+[maFontStyle](#maFontStyle), [maFontWeight](#maFontWeight), [maInterpolate](#maInterpolate),
+[maOpacity](#maOpacity), [maOrient](#maOrient), [maPoint](#maPoint), [maRadius](#maRadius),
+[maShape](#maShape), [maShortTimeLabels](#maShortTimeLabels), [maSize](#maSize),
+[maStroke](#maStroke), [maStrokeDash](#maStrokeDash), [maStrokeDashOffset](#maStrokeDashOffset),
+[maStrokeOpacity](#maStrokeOpacity), [maStrokeWidth](#maStrokeWidth), [maStyle](#maStyle),
+[maTension](#maTension), [maText](#maText), [maTheta](#maTheta) and [maThickness](#maThickness).
 
-Properties for customising the appearance of a mark. For details see the
+For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/mark.html#config).
 
 -}
@@ -2966,12 +2889,9 @@ type Operation
     | VarianceP
 
 
-{-| _Note: referencing order channel type constructors (`OName`, `OBin` etc.) is
-deprecated in favour of calling their equivalent order channel functions
-(`oName`, `oBin` etc.)_
-
-Properties of an ordering channel used for sorting data fields.
-
+{-| Properties of an ordering channel used for sorting data fields. Generated by
+[OName](#oName), [oRepeat](#oRepeat), [oMType](#oMType), [oBin](#oBin),
+[oAggregate](#oAggregate), [oTimeUnit](#oTimeUnit) and [oSort](#oSort).
 -}
 type OrderChannel
     = OName String
@@ -2994,14 +2914,10 @@ type OverlapStrategy
     | OGreedy
 
 
-{-| _Note: referencing padding type constructors (`PSize` and `PEdges`) is
-deprecated in favour of calling their equivalent padding functions
-(`paSize` and `paEdges`)_
-
-Represents padding dimensions in pixel units. `PSize` will set the same value
-on all four edges of a rectangular container while `PEdges` can be used to specify
-different sizes on each edge in order _left_, _top_, _right_, _bottom_.
-
+{-| Represents padding dimensions in pixel units. [paSize](#paSize) will set the
+same value on all four edges of a rectangular container while [paEdges](#paEdges)
+can be used to specify different sizes on each edge in order _left_, _top_,
+_right_, _bottom_.
 -}
 type Padding
     = PSize Float
@@ -3036,12 +2952,10 @@ type Position
     | Latitude2
 
 
-{-| _Note: referencing position channel type constructors (`PName`, `PBin` etc.) is
-deprecated in favour of calling their equivalent position channel functions
-(`pName`, `pBin` etc.)_
-
-Position channel properties used for creating a position channel encoding.
-
+{-| Position channel properties used for creating a position channel encoding.
+Generated by [pName](#pName), [pRepeat](#pRepeat), [pMType](#pMType), [pBin](#PBin),
+[pTimeUnit](#pTimeUnit), [pAggregate](#pAggregate), [pScale](#pScale), [pAxis](#pAxis),
+[pSort](#pSort) and [pStack](#pStack).
 -}
 type PositionChannel
     = PName String
@@ -3061,8 +2975,7 @@ by the [d3-geo library](https://github.com/d3/d3-geo). For details of available
 projections see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html#projection-types).
 
-_Note: The use of the `Custom` type constructor is deprecated in favour of the
-`customProjection` function._
+To generate a custom projection use [customProjection](#customProjection).
 
 -}
 type Projection
@@ -3082,14 +2995,14 @@ type Projection
     | TransverseMercator
 
 
-{-| _Note: specifying projection properties with type constructors (`PType`,
-`PClipAngle` etc.) is deprecated in favour of calling their equivalent
-projection property functions (`prType`, `prClipAngle` etc.)_
-
-Properties for customising a geospatial projection that converts longitude/latitude
-pairs into planar (x,y) coordinate pairs for rendering and query. For details see the
+{-| Properties for customising a geospatial projection that converts longitude/latitude
+pairs into planar (x,y) coordinate pairs for rendering and query. Generated by
+[prType](#prType), [prClipAngle](#prClipAngle), [prClipExtent](#prClipExtent),
+[prCenter](#prCenter), [prRotate](#prRotate), [prPrecision](#prPrecision),
+[prCoefficient](#prCoefficient), [prDistance](#prDistance), [prFraction](#prFraction),
+[prLobes](#prLobes), [prParallel](#prParallel), [prRadius](#prRadius), [prRatio](#prRatio),
+[prSpacing](#prSpacing) and [prTilt](#prTilt). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/projection.html).
-
 -}
 type ProjectionProperty
     = PType Projection
@@ -3109,14 +3022,11 @@ type ProjectionProperty
     | PTilt Float
 
 
-{-| _Note: specifying range configuration properties with type constructors
-(`RCategory`, `RDiverging`, etc.) is deprecated in favour of calling their
-equivalent property specifying functions (`racoCategory`,`racoDiverging`, etc.)_
-
-Properties for customising the colors of a range. The parameter should be a
-named color scheme such as `accent` or `purpleorange-11`. For details see the
+{-| Properties for customising the colors of a range. The parameter should be a
+named color scheme such as `accent` or `purpleorange-11`. Generated by [racoCategory](#racoCategory),
+[racoDiverging](#racoDiverging), [racoHeatmap](#racoHeatmap), [racoOrdinal](#racoOrdinal),
+[racoRamp](#racoRamp) and [racoSymbol](#racoSymbol). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega/docs/schemes/#scheme-properties).
-
 -}
 type RangeConfig
     = RCategory String
@@ -3127,14 +3037,9 @@ type RangeConfig
     | RSymbol String
 
 
-{-| _Note: specifying repeat fields with type constructors (`RowFields` and
-`ColumnFields` ) is deprecated in favour of calling their equivalent functions
-(`rowFields`, `columnFields`)_
-
-Create a list of fields to use in set of repeated small multiples. The list of
+{-| Create a list of fields to use in set of repeated small multiples. The list of
 fields named here can be referenced in an encoding with `pRepeat Column`, `pRepeat Row`
-etc.
-
+etc. Generated by [rowFields](#rowFields) and [columnFields](#columnFields).
 -}
 type RepeatFields
     = RowFields (List String)
@@ -3151,15 +3056,11 @@ type Resolution
     | Independent
 
 
-{-| _Note: specifying resolve items with type constructors (`RAxis`,
-`RLegend` and `RScale`) is deprecated in favour of calling their equivalent
-resolve functions (`reAxis`, `reLegend` and `reScale`)_
-
-Used to determine how a channel's axis, scale or legend domains should be resolved
-if defined in more than one view in a composite visualization. See the
+{-| Used to determine how a channel's axis, scale or legend domains should be resolved
+if defined in more than one view in a composite visualization. Generated by
+[reAxis](#reAxis), [reLegend](#reLegend) and [reScale](#reScale). See the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/resolve.html) for
 details.
-
 -}
 type Resolve
     = RAxis (List ( Channel, Resolution ))
@@ -3214,14 +3115,16 @@ type Scale
     | ScBinOrdinal
 
 
-{-| _Note: specifying scale configuration properties with type constructors
-(`SCBandPaddingInner`, `SCClamp`, etc.) is deprecated in favour of calling their
-equivalent property specifying functions (`socoBandPaddingInner`,`sacoClamp`, etc.)_
-
-Scale configuration property. These are used to configure all scales.
+{-| Scale configuration property. These are used to configure all scales. Generated
+by [sacoBandPaddingInner](#sacoBandPaddingInner), [sacoBandPaddingOuter](#sacoBandPaddingOuter),
+[sacoClamp](#sacoClamp), [sacoMaxBandSize](#sacoMaxBandSize), [sacoMinBandSize](#sacoMinBandSize),
+[sacoMaxFontSize](#sacoMaxFontSize), [sacoMinFontSize](#sacoMinFontSize), [sacoMaxOpacity](#sacoMaxOpacity),
+[sacoMinOpacity](#sacoMinOpacity), [sacoMaxSize](#sacoMaxSize), [sacoMinSize](#sacoMinSize),
+[sacoMaxStrokeWidth](#sacoMaxStrokeWidth), [sacoMinStrokeWidth](#sacoMinStrokeWidth),
+[sacoPointPadding](#sacoPointPadding), [sacoRangeStep](#sacoRangeStep), [sacoRound](#sacoRound),
+[sacoTextXRangeStep](#sacoTextXRangeStep) and [sacoUseUnaggregatedDomain](#sacoUseUnaggregatedDomain).
 For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#scale-config)
-
 -}
 type ScaleConfig
     = SCBandPaddingInner Float
@@ -3245,12 +3148,9 @@ type ScaleConfig
 
 
 {-| Describes a scale domain (type of data in scale). To specify scale domain
-values explicitly, use the functions `doNums`, `doStrs`, `doDts` or `doSelection`
-rather than their (deprecated) type constructor equivalents.
-
-For full details see the
+values explicitly, use the functions [doNums](#doNums), [doStrs](#doStrs),
+[doDts](#doDts) or [doSelection](#doSelection). For full details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#domain).
-
 -}
 type ScaleDomain
     = DNumbers (List Float)
@@ -3261,14 +3161,10 @@ type ScaleDomain
 
 
 {-| Describes the way a scale can be rounded to 'nice' numbers. To specify nice
-time intervals use `scNiceInterval` rather then the deprecated type constructor
-`NInterval`; to switch nice scaling on or off use `scIsNice` rather than the
-deprecated type constructor `IsNice`; and to set a nice tick count use the
-`scNiceTickCount` function rather than the deprecated `NTickCount` type constructor.
-
-For details see the
+time intervals use [scNiceInterval](#scNiceInterval); to switch nice scaling on
+or off use [scIsNice](#scIsNice); and to set a nice tick count use
+[scNiceTickCount](#scNiceTickCount). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
-
 -}
 type ScaleNice
     = NMillisecond
@@ -3284,15 +3180,14 @@ type ScaleNice
     | NTickCount Int
 
 
-{-| _Note: specifying scale properties with type constructors (`SDomain`,
-`SRange` etc.) is deprecated in favour of calling their equivalent property
-specifying functions (`scDomain`, `scRange` etc.)_
-
-Individual scale property. These are used to customise an individual scale
-transformation. To customise all scales use `config` and supply relevant
+{-| Individual scale property. These are used to customise an individual scale
+transformation. Generated by [scType](#scType), [scDomain](#scDomain), [scRange](#scRange),
+[scScheme](#scScheme), [scPadding](#scPadding), [scPaddingInner](#scPaddingInner),
+[scPaddingOuter](#scPaddingOuter), [scRangeStep](#scRangeStep), [scRound](#scRound),
+[scClamp](#scClamp), [scInterpolate](#scInterpolate), [scNice](#scNice), [scZero](#scZero)
+and [scReverse](#scReverse). To customise all scales use `config` and supply relevant
 `ScaleConfig` values. For more details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html)
-
 -}
 type ScaleProperty
     = SType Scale
@@ -3312,13 +3207,9 @@ type ScaleProperty
     | SReverse Bool
 
 
-{-| _Note: specifying scale ranges with type constructors (`RNumbers`,
-`RStrings` and `RName`) is deprecated in favour of calling their equivalent
-functions (`raNums`, `raStrs` and `raName`.)_
-
-Describes a scale range of scale output values. For details see the
+{-| Specify a scale range of scale output values. Generated by [raNums](#raNums),
+[raStrs](#raStrs) and [raName](#raName). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#range).
-
 -}
 type ScaleRange
     = RNumbers (List Float)
@@ -3337,14 +3228,11 @@ type Selection
     | Interval
 
 
-{-| _Note: specifying selection mark properties with type constructors (`SMFill`,
-`SMStroke` etc.) is deprecated in favour of calling their equivalent functions
-(`smFill`, `smStroke` etc.)_
-
-Properties for customising the appearance of an interval selection mark (dragged
-rectangle). For details see the
+{-| Properties for customising the appearance of an interval selection mark (dragged
+rectangle). Generated by [smFill](#smFill), [smFillOpacity](#smFillOpacity), [smStroke](#smStroke),
+[smStrokeDash](#smStrokeDash), [smStrokeDashOffset](#smStrokeDashOffset),
+[smStrokeOpacity](#smStrokeOpacity) and [smStrokeWidth](#smStrokeWidth). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#interval-mark).
-
 -}
 type SelectionMarkProperty
     = SMFill String
@@ -3356,11 +3244,11 @@ type SelectionMarkProperty
     | SMStrokeDashOffset Float
 
 
-{-| Properties for customising the nature of an interactive selection. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties)
-for details. For parameterised properties use relevant functions (e.g. `seOn`,
-`seEncodings`, `seBind` etc.) rather than the (deprecated) type constructors
-(On, Encodings, Bind etc.).
+{-| Properties for customising the nature of an interactive selection. Parameterised
+properties generated by [seBind](#seBind), [seEncodings](#seEncodings), [seFields](#seFields),
+[seNearest](#seNearest), [seOn](#seOn), [seResolve](#seResolve), [seSelectionMark](#seSelectionMark),
+[seToggle](#seToggle), [seTranslate](#seTranslate) and [seZoom](#seZoom). For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/selection.html#selection-properties).
 -}
 type SelectionProperty
     = Empty
@@ -3397,19 +3285,13 @@ type Side
 
 
 {-| Allow type of sorting to be customised. To sort a field by the aggregated
-values of another use the `soByField` or `soByRepeat` functions rather than their
-deprecated type constructor equivalents `ByField` and `ByRepeat`.
-
-For details see the
+values of another use [soByField](#soByField) or [soByRepeat](#soByRepeat). Custom
+sorting by explicit values can be provided by [soCustom](#soCustom). For details see the
 [Vega-Lite sorting documentation](https://vega.github.io/vega-lite/docs/sort.html).
-
 -}
 type SortProperty
     = Ascending
     | Descending
-    | ByField String
-    | ByRepeat Arrangement
-    | Op Operation
     | CustomSort DataValues
     | ByRepeatOp Arrangement Operation
     | ByFieldOp String Operation
@@ -3432,11 +3314,8 @@ type StackProperty
     | NoStack
 
 
-{-| Identifies the type of symbol.
-
-_Note: The use of the `Path` type constructor is deprecated in favour of the
-`symbolPath` function._
-
+{-| Identifies the type of symbol. To create a user defined path for a symbol use
+[symPath](#symPath).
 -}
 type Symbol
     = SymCircle
@@ -3448,12 +3327,11 @@ type Symbol
     | Path String
 
 
-{-| _Note: referencing text channel type constructors (`TName`, `TBin` etc.) is
-deprecated in favour of calling their equivalent text channel functions
-(`tName`, `tBin` etc.)_
-
-Types of text channel property used for displaying text as part of the visualization.
-
+{-| Types of text channel property used for displaying text as part of the
+visualization. Generated by [tName](#tName), [tRepeat](#tRepeat), [tMType](#tMType),
+[tBin](#tBin), [tAggregate](#tAggregate), [tTimeUnit](#tTimeUnit),
+[tSelectionCondition](#tSelectionCondition), [tDataCondition](#tDataCondition)
+and [tFormat](#tFormat).
 -}
 type TextChannel
     = TName String
@@ -3505,14 +3383,13 @@ type TimeUnit
     | Utc TimeUnit
 
 
-{-| _Note: specifying title configuration properties with type constructors
-(`TAnchor`, `TAngle`, etc.) is deprecated in favour of calling their
-equivalent property specifying functions (`ticoAnchor`,`ticoAngle`, etc.)_
-
-Title configuration properties. These are used to configure the default style
-of all titles within a visualization. For further details see the
+{-| Title configuration properties. These are used to configure the default style
+of all titles within a visualization. Generated by [ticoAnchor](#ticoAnchor),
+[ticoAngle](#ticoAngle), [ticoBaseline](#ticoBaseline), [ticoColor](#ticoColor),
+[ticoFont](#ticoFont), [ticoFontSize](#ticoFontSize), [ticoFontWeight](#ticoFontWeight),
+[ticoLimit](#ticoLimit), [ticoOffset](#ticoOffset) and [ticoOrient](#ticoOrient).
+For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/title.html#config)
-
 -}
 type TitleConfig
     = TAnchor APosition
@@ -3535,15 +3412,14 @@ type VAlign
     | AlignBottom
 
 
-{-| _Note: specifying view configuration properties with type constructors
-(`Clip`, `ViewWidth`, `ViewHeight` etc.) is deprecated in favour of calling their
-equivalent property specifying functions (`vicoClip`,`vicoWidth`, `vicoHeight` etc.)_
-
-View configuration property. These are used to configure the style of a single
+{-| View configuration property. These are used to configure the style of a single
 view within a visualization such as its size and default fill and stroke colors.
+Generated by [vicoWidth](#vicoWidth), [vicoHeight](#vicoHeight), [vicoClip](#vicoClip),
+[vicoFill](#vicoFill), [vicoFillOpacity](#vicoFillOpacity), [vicoStroke](#vicoStroke),
+[vicoStrokeOpacity](#vicoStrokeOpacity), [vicoStrokeWidth](#vicoStrokeWidth),
+[vicoStrokeDash](#vicoStrokeDash) and [vicoStrokeDashOffset](#vicoStrokeDashOffset).
 For further details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/spec.html#config)
-
 -}
 type ViewConfig
     = ViewWidth Float
@@ -3983,19 +3859,6 @@ To keep the default style for the mark, just provide an empty list as the parame
 bar : List MarkProperty -> ( VLProperty, Spec )
 bar =
     mark Bar
-
-
-{-| _Deprecated in favour of channel-specific binning (e.g. `pBin`, `oBin` etc.)_
--}
-bin : List BinProperty -> LabelledSpec
-bin bProps =
-    -- TODO: This should not need to be exposed - only maintained for backward
-    -- compatiblity after its previous function was renamed to binAs. In next
-    -- major version, make private.
-    if bProps == [] then
-        ( "bin", JE.bool True )
-    else
-        ( "bin", bProps |> List.map binProperty |> JE.object )
 
 
 {-| Create a named binning transformation that may be referenced in other Transformations
@@ -5057,6 +4920,15 @@ parameter. For details, see the
 fAggregate : Operation -> FacetChannel
 fAggregate =
     FAggregate
+
+
+{-| A false value used for functions that can accept a Boolean literal or a
+reference to something that generates a Boolean value. This is a convenience
+function equivalent to `boo False`
+-}
+false : DataValue
+false =
+    Boolean False
 
 
 {-| Discretizes a series of numeric values into bins when encoding with a
@@ -6249,10 +6121,8 @@ file matches the value of `person` in the primary data source.
             << lookupAs "person" (dataFromUrl "data/lookup_people.csv" []) "name" "personDetails"
 
 -}
-lookupAs : String -> ( VLProperty, Spec ) -> String -> String -> List LabelledSpec -> List LabelledSpec
+lookupAs : String -> Data -> String -> String -> List LabelledSpec -> List LabelledSpec
 lookupAs key1 ( vlProp, spec ) key2 asName =
-    -- TODO: Change sig to use Data rather than (VLProperty, Spec) for next major releaase.
-    -- Not sure why substituting with an alias bumps up by a major release.
     (::)
         ( "lookupAs"
         , JE.list
@@ -6474,27 +6344,6 @@ For details see the
 maRadius : Float -> MarkProperty
 maRadius =
     MRadius
-
-
-{-| _Deprecated: Use mark functions (e.g. `circle`, `line`) instead._
-
-Create a mark specification. All marks must have a type (first parameter) and
-can optionally be customised with a list of mark properties such as interpolation
-style for lines.
-
--}
-mark : Mark -> List MarkProperty -> ( VLProperty, Spec )
-mark mark mProps =
-    case mProps of
-        [] ->
-            ( VLMark, JE.string (markLabel mark) )
-
-        _ ->
-            ( VLMark
-            , ( "type", JE.string (markLabel mark) )
-                :: List.map markProperty mProps
-                |> JE.object
-            )
 
 
 {-| Specify the shape of a point mark. For details see the
@@ -8642,6 +8491,15 @@ transform transforms =
         ( VLTransform, JE.list (List.map assemble transforms) )
 
 
+{-| A true value used for functions that can accept a Boolean literal or a
+reference to something that generates a Boolean value. This is a convenience
+function equivalent to `boo True`
+-}
+true : DataValue
+true =
+    Boolean True
+
+
 {-| Specify the properties of a text channel conditional on interactive selection.
 The first parameter provides the selection to evaluate, the second the encoding
 to apply if the text has been selected, the third the encoding if it is not selected.
@@ -9195,6 +9053,14 @@ axisProperty axisProp =
             ( "titlePadding", JE.float pad )
 
 
+bin : List BinProperty -> LabelledSpec
+bin bProps =
+    if bProps == [] then
+        ( "bin", JE.bool True )
+    else
+        ( "bin", bProps |> List.map binProperty |> JE.object )
+
+
 bindingSpec : Binding -> LabelledSpec
 bindingSpec bnd =
     case bnd of
@@ -9255,9 +9121,6 @@ binProperty binProp =
 
         MinStep x ->
             ( "minstep", JE.float x )
-
-        Divide x y ->
-            ( "divide", JE.list [ JE.float x, JE.float y ] )
 
         Divides xs ->
             ( "divide", JE.list (List.map JE.float xs) )
@@ -10203,6 +10066,20 @@ legendProperty legendProp =
 
         LZIndex n ->
             ( "zindex", JE.int n )
+
+
+mark : Mark -> List MarkProperty -> ( VLProperty, Spec )
+mark mark mProps =
+    case mProps of
+        [] ->
+            ( VLMark, JE.string (markLabel mark) )
+
+        _ ->
+            ( VLMark
+            , ( "type", JE.string (markLabel mark) )
+                :: List.map markProperty mProps
+                |> JE.object
+            )
 
 
 markChannelProperty : MarkChannel -> List LabelledSpec
@@ -11270,17 +11147,8 @@ sortProperty sp =
         Descending ->
             [ ( "order", JE.string "descending" ) ]
 
-        Op op ->
-            [ ( "op", JE.string (operationLabel op) ) ]
-
-        ByField field ->
-            [ ( "field", JE.string field ) ]
-
         ByFieldOp field op ->
             [ ( "field", JE.string field ), ( "op", JE.string (operationLabel op) ) ]
-
-        ByRepeat arr ->
-            [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ) ]
 
         ByRepeatOp arr op ->
             [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ), ( "op", JE.string (operationLabel op) ) ]
