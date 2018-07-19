@@ -10061,12 +10061,6 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 					_1: _elm_lang$core$Json_Encode$string('symbol')
 				};
 			}
-		case 'LEntryPadding':
-			return {
-				ctor: '_Tuple2',
-				_0: 'entryPadding',
-				_1: _elm_lang$core$Json_Encode$float(_p53._0)
-			};
 		case 'LFormat':
 			return {
 				ctor: '_Tuple2',
@@ -15253,10 +15247,6 @@ var _gicentre$elm_vega$VegaLite$LFormat = function (a) {
 	return {ctor: 'LFormat', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leFormat = _gicentre$elm_vega$VegaLite$LFormat;
-var _gicentre$elm_vega$VegaLite$LEntryPadding = function (a) {
-	return {ctor: 'LEntryPadding', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$leEntryPadding = _gicentre$elm_vega$VegaLite$LEntryPadding;
 var _gicentre$elm_vega$VegaLite$LStrings = function (a) {
 	return {ctor: 'LStrings', _0: a};
 };
