@@ -95,7 +95,7 @@ geoTest3 =
             dataSource
                 [ data "mapData"
                     [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson3.json")
-                    , daFormat [ topojsonFeature "myRegions" ]
+                    , daFormat [ topojsonFeature (str "myRegions") ]
                     ]
                 ]
 
@@ -142,7 +142,7 @@ geoTest4 =
             dataSource
                 [ data "mapData"
                     [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
-                    , daFormat [ topojsonFeature "myRegions" ]
+                    , daFormat [ topojsonFeature (str "myRegions") ]
                     ]
                 ]
 

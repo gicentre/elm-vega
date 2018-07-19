@@ -179,11 +179,11 @@ forceTest1 =
             dataSource
                 [ data "node-data"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "nodes" ]
+                    , daFormat [ jsonProperty (str "nodes") ]
                     ]
                 , data "link-data"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "links" ]
+                    , daFormat [ jsonProperty (str "links") ]
                     ]
                 ]
 
@@ -400,7 +400,7 @@ voronoiTest1 =
             dataSource
                 [ data "hull"
                     [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
-                    , daFormat [ topojsonFeature "convexHull" ]
+                    , daFormat [ topojsonFeature (str "convexHull") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
@@ -465,12 +465,12 @@ voronoiTest2 =
             dataSource
                 [ data "regions"
                     [ daUrl (str "https://gicentre.github.io/data/uk/ukConstituencies.json")
-                    , daFormat [ topojsonFeature "constituencies" ]
+                    , daFormat [ topojsonFeature (str "constituencies") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "hull"
                     [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
-                    , daFormat [ topojsonFeature "convexHull" ]
+                    , daFormat [ topojsonFeature (str "convexHull") ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"

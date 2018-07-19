@@ -162,11 +162,11 @@ force1 =
             dataSource
                 [ data "node-data"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "nodes" ]
+                    , daFormat [ jsonProperty (str "nodes") ]
                     ]
                 , data "link-data"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "links" ]
+                    , daFormat [ jsonProperty (str "links") ]
                     ]
                 ]
 
@@ -280,7 +280,7 @@ matrix1 =
             dataSource
                 [ data "nodes"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "nodes" ]
+                    , daFormat [ jsonProperty (str "nodes") ]
                     ]
                     |> transform
                         [ trFormula "datum.group" "order"
@@ -289,7 +289,7 @@ matrix1 =
                         ]
                 , data "edges"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "links" ]
+                    , daFormat [ jsonProperty (str "links") ]
                     ]
                     |> transform
                         [ trLookup "nodes" (field "index") [ field "source", field "target" ] [ luAs [ "sourceNode", "targetNode" ] ]
@@ -432,7 +432,7 @@ arc1 =
             dataSource
                 [ data "edges"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "links" ]
+                    , daFormat [ jsonProperty (str "links") ]
                     ]
                 , data "sourceDegree" [ daSource "edges" ]
                     |> transform [ trAggregate [ agGroupBy [ field "source" ] ] ]
@@ -440,7 +440,7 @@ arc1 =
                     |> transform [ trAggregate [ agGroupBy [ field "target" ] ] ]
                 , data "nodes"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "nodes" ]
+                    , daFormat [ jsonProperty (str "nodes") ]
                     ]
                     |> transform
                         [ trWindow [ wnOperation Rank "order" ] []
@@ -545,7 +545,7 @@ map1 =
             dataSource
                 [ data "states"
                     [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
-                    , daFormat [ topojsonFeature "states" ]
+                    , daFormat [ topojsonFeature (str "states") ]
                     ]
                     |> transform [ trGeoPath "myProjection" [] ]
                 , data "traffic"

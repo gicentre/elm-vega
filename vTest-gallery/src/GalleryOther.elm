@@ -410,7 +410,7 @@ beeswarm1 =
             dataSource
                 [ data "people"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
-                    , daFormat [ jsonProperty "nodes" ]
+                    , daFormat [ jsonProperty (str "nodes") ]
                     ]
                 ]
 

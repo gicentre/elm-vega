@@ -51,7 +51,7 @@ projTest =
                     ]
                 , data "world"
                     [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
-                    , daFormat [ topojsonFeature "countries" ]
+                    , daFormat [ topojsonFeature (str "countries") ]
                     ]
                 , data "graticule" [] |> transform [ trGraticule [] ]
                 , dataFromRows "sphere" [] (dataRow [ ( "type", vStr "Sphere" ) ] [])

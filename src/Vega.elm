@@ -329,6 +329,7 @@ module Vega
         , foUtc
         , foX
         , foY
+        , formatPropertySignal
         , fpDistance
         , fpDistanceMax
         , fpDistanceMin
@@ -1019,6 +1020,7 @@ Functions for parsing input data and specifying their format.
 @docs jsonProperty
 @docs topojsonMesh
 @docs topojsonFeature
+@docs formatPropertySignal
 
 @docs DataType
 @docs parse
@@ -5361,9 +5363,10 @@ doStrs =
 
 
 {-| Indicates a DSV (delimited separated value) format with a custom delimiter.
-Typically used when specifying a data URL.
+The first parameter should represent the string used to delimit fields. Typically
+used when specifying a data URL.
 -}
-dsv : String -> FormatProperty
+dsv : Str -> FormatProperty
 dsv =
     DSV
 
@@ -5984,14 +5987,26 @@ then `parse` can be used to specify the type for named fields. For details see t
 -}
 type FormatProperty
     = JSON
-    | JSONProperty String
+    | JSONProperty Str
     | CSV
     | TSV
-    | DSV String
-    | TopojsonFeature String
-    | TopojsonMesh String
+    | DSV Str
+    | TopojsonFeature Str
+    | TopojsonMesh Str
     | Parse (List ( String, DataType ))
     | ParseAuto
+    | FormatPropertySignal String
+
+
+{-| Indicates a format property is to be determined by a named signal. The
+signal should generate the name of a valid property (e.g. `csv`, `tsv`, `json`).
+This can be used when dynamic loading of data with different formats is required.
+For details see the
+[Vega data format documentation](https://vega.github.io/vega/docs/data/#format).
+-}
+formatPropertySignal : String -> FormatProperty
+formatPropertySignal =
+    FormatPropertySignal
 
 
 {-| Indicate a utc date format for parsing data. For details of how to specify a date, see
@@ -6691,7 +6706,7 @@ the property `values.features` is equivalent to retrieving `json.values.features
 from the loaded JSON object with a custom delimiter. For details, see the
 [Vega data formatting documentation](https://vega.github.io/vega/docs/data/#format).
 -}
-jsonProperty : String -> FormatProperty
+jsonProperty : Str -> FormatProperty
 jsonProperty =
     JSONProperty
 
@@ -10683,20 +10698,20 @@ tmSort =
     TmSort
 
 
-{-| Indicates a topoJSON feature format. The first parameter should be the name
-of the object set to extract. Typically used when specifying a data URL.
+{-| Indicates a topoJSON feature format. The first parameter should evaluate to
+the name of the object set to extract. Typically used when specifying a data URL.
 -}
-topojsonFeature : String -> FormatProperty
+topojsonFeature : Str -> FormatProperty
 topojsonFeature =
     TopojsonFeature
 
 
-{-| Indicates a topoJSON mesh format. The first parameter should be the name
-of the object set to extract. Unlike the `topojsonFeature`, the corresponding
+{-| Indicates a topoJSON mesh format. The first parameter should evaluate to the
+name of the object set to extract. Unlike the `topojsonFeature`, the corresponding
 geo data are returned as a single, unified mesh instance, not as individual
 GeoJSON features. Typically used when specifying a data URL.
 -}
-topojsonMesh : String -> FormatProperty
+topojsonMesh : Str -> FormatProperty
 topojsonMesh =
     TopojsonMesh
 
@@ -13264,8 +13279,8 @@ formatProperty fmt =
         JSON ->
             [ ( "type", JE.string "json" ) ]
 
-        JSONProperty prop ->
-            [ ( "type", JE.string "json" ), ( "property", JE.string prop ) ]
+        JSONProperty s ->
+            [ ( "type", JE.string "json" ), ( "property", strSpec s ) ]
 
         CSV ->
             [ ( "type", JE.string "csv" ) ]
@@ -13273,20 +13288,23 @@ formatProperty fmt =
         TSV ->
             [ ( "type", JE.string "tsv" ) ]
 
-        DSV delim ->
-            [ ( "type", JE.string "dsv" ), ( "delimiter", JE.string delim ) ]
+        DSV s ->
+            [ ( "type", JE.string "dsv" ), ( "delimiter", strSpec s ) ]
 
-        TopojsonFeature objectSet ->
-            [ ( "type", JE.string "topojson" ), ( "feature", JE.string objectSet ) ]
+        TopojsonFeature s ->
+            [ ( "type", JE.string "topojson" ), ( "feature", strSpec s ) ]
 
-        TopojsonMesh objectSet ->
-            [ ( "type", JE.string "topojson" ), ( "mesh", JE.string objectSet ) ]
+        TopojsonMesh s ->
+            [ ( "type", JE.string "topojson" ), ( "mesh", strSpec s ) ]
 
         Parse fmts ->
             [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
 
         ParseAuto ->
             [ ( "parse", JE.string "auto" ) ]
+
+        FormatPropertySignal sigName ->
+            [ signalReferenceProperty sigName ]
 
 
 forceProperty : ForceProperty -> LabelledSpec
