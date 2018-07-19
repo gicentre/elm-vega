@@ -17,7 +17,7 @@ histo1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
                 , data "binned" [ daSource "points" ]
                     |> transform
                         [ trBin (field "u")
@@ -105,7 +105,7 @@ histo2 =
     let
         ds =
             dataSource
-                [ data "table" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
+                [ data "table" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
                     |> transform
                         [ trExtentAsSignal (field "IMDB_Rating") "extent"
                         , trBin (field "IMDB_Rating")
@@ -206,7 +206,7 @@ density1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
                 , data "summary" [ daSource "points" ]
                     |> transform
                         [ trAggregate
@@ -322,7 +322,7 @@ boxplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
                     |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
@@ -438,7 +438,7 @@ violinplot1 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
                     |> transform [ trFoldAs [ fSignal "fields" ] "organ" "value" ]
                 ]
 
@@ -568,7 +568,7 @@ window1 =
     let
         ds =
             dataSource
-                [ data "directors" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
+                [ data "directors" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
                     |> transform
                         [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
                         , trAggregate
@@ -655,7 +655,7 @@ window2 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl "https://vega.github.io/vega/data/movies.json" ]
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
                     |> transform [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null") ]
                 , data "ranks" [ daSource "source" ]
                     |> transform
@@ -753,7 +753,7 @@ scatter1 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "summary" [ daSource "source" ]
                     |> transform
@@ -853,7 +853,7 @@ contour1 =
 
         ds =
             dataSource
-                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
                 , data "contours" [ daSource "source" ]
                     |> transform
@@ -950,7 +950,7 @@ wheat1 =
     let
         ds =
             dataSource
-                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
                     |> transform
                         [ trBin (field "u")
                             (nums [ -1, 1 ])

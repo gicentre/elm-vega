@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20953,7 +20953,8 @@ var _gicentre$elm_vega$GalleryDist$wheat1 = function () {
 					'points',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/normal-2d.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/normal-2d.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -21405,7 +21406,8 @@ var _gicentre$elm_vega$GalleryDist$contour1 = function () {
 					'source',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/cars.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -21872,7 +21874,8 @@ var _gicentre$elm_vega$GalleryDist$scatter1 = function () {
 					'source',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/cars.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -22328,7 +22331,8 @@ var _gicentre$elm_vega$GalleryDist$window2 = function () {
 					'source',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/movies.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/movies.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -22927,7 +22931,8 @@ var _gicentre$elm_vega$GalleryDist$window1 = function () {
 					'directors',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/movies.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/movies.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -23738,7 +23743,8 @@ var _gicentre$elm_vega$GalleryDist$violinplot1 = function () {
 					'iris',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/iris.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/iris.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -24452,7 +24458,8 @@ var _gicentre$elm_vega$GalleryDist$boxplot1 = function () {
 					'iris',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/iris.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/iris.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -25015,7 +25022,8 @@ var _gicentre$elm_vega$GalleryDist$density1 = function () {
 				'points',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/normal-2d.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/normal-2d.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -25676,7 +25684,8 @@ var _gicentre$elm_vega$GalleryDist$histo2 = function () {
 					'table',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/movies.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/movies.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -26155,7 +26164,8 @@ var _gicentre$elm_vega$GalleryDist$histo1 = function () {
 				'points',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/normal-2d.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/normal-2d.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {

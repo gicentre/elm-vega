@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20822,7 +20822,8 @@ var _gicentre$elm_vega$GalleryTree$tree5 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -21076,7 +21077,8 @@ var _gicentre$elm_vega$GalleryTree$tree4 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -21808,7 +21810,8 @@ var _gicentre$elm_vega$GalleryTree$tree3 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -22436,7 +22439,8 @@ var _gicentre$elm_vega$GalleryTree$tree2 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -22938,7 +22942,8 @@ var _gicentre$elm_vega$GalleryTree$tree1 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {

@@ -17,7 +17,7 @@ scatterplot1 =
     let
         ds =
             dataSource
-                [ data "cars" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "cars" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Acceleration'] != null") ]
                 ]
 
@@ -93,7 +93,7 @@ scatterplot2 =
     let
         ds =
             dataSource
-                [ data "movies" [ daUrl "https://vega.github.io/vega/data/movies.json" ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" ]
+                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ] |> transform [ trFormula "datum.Title + ' (' + (year(datum.Release_Date) || '?') + ')'" "tooltip" ]
                 , data "valid" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] != null") ]
                 , data "nullXY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] == null && datum[yField] == null"), trAggregate [] ]
                 , data "nullY" [ daSource "movies" ] |> transform [ trFilter (expr "datum[xField] != null && datum[yField] == null") ]
@@ -213,7 +213,7 @@ scatterplot3 : Spec
 scatterplot3 =
     let
         ds =
-            dataSource [ data "drive" [ daUrl "https://vega.github.io/vega/data/driving.json" ] ]
+            dataSource [ data "drive" [ daUrl (str "https://vega.github.io/vega/data/driving.json") ] ]
 
         sc =
             scales
@@ -365,7 +365,7 @@ scatterplot4 =
 
         ds =
             dataSource
-                [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ]
+                [ data "barley" [ daUrl (str "https://vega.github.io/vega/data/barley.json") ]
                 , data "summary" [ daSource "barley" ]
                     |> transform
                         [ trAggregate
@@ -458,7 +458,7 @@ scatterplot5 : Spec
 scatterplot5 =
     let
         ds =
-            dataSource [ data "barley" [ daUrl "https://vega.github.io/vega/data/barley.json" ] ]
+            dataSource [ data "barley" [ daUrl (str "https://vega.github.io/vega/data/barley.json") ] ]
 
         si =
             signals

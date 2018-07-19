@@ -14335,7 +14335,7 @@ var _user$project$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _user$project$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20818,7 +20818,8 @@ var _user$project$TemporalTests$temporalTest2 = function () {
 				'timeData',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/timeTest.tsv'),
+					_0: _user$project$Vega$daUrl(
+						_user$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$daFormat(
@@ -21273,7 +21274,8 @@ var _user$project$TemporalTests$temporalTest1 = function () {
 					'timeData',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/timeTest.tsv'),
+						_0: _user$project$Vega$daUrl(
+							_user$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$daFormat(

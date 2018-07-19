@@ -15108,7 +15108,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -22159,7 +22159,8 @@ var _gicentre$elm_vega$GalleryGeo$geo6 = function () {
 				'world',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -22370,7 +22371,8 @@ var _gicentre$elm_vega$GalleryGeo$geo5 = function () {
 					'world',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23341,7 +23343,8 @@ var _gicentre$elm_vega$GalleryGeo$geo4 = function () {
 					'world',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23360,7 +23363,8 @@ var _gicentre$elm_vega$GalleryGeo$geo4 = function () {
 						'earthquakes',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/earthquakes.json'),
+							_0: _gicentre$elm_vega$Vega$daUrl(
+								_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/earthquakes.json')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23821,7 +23825,8 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 				'states',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/us-10m.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23874,7 +23879,8 @@ var _gicentre$elm_vega$GalleryGeo$geo2 = function () {
 						'obesity',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/obesity.json'),
+							_0: _gicentre$elm_vega$Vega$daUrl(
+								_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/obesity.json')),
 							_1: {ctor: '[]'}
 						})),
 				_1: {ctor: '[]'}
@@ -24150,7 +24156,8 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 				'unemp',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/unemployment.tsv'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/unemployment.tsv')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -24199,7 +24206,8 @@ var _gicentre$elm_vega$GalleryGeo$geo1 = function () {
 						'counties',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/us-10m.json'),
+							_0: _gicentre$elm_vega$Vega$daUrl(
+								_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
@@ -24862,7 +24870,8 @@ var _gicentre$elm_vega$GalleryGeo$geo3 = function () {
 				'world',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -25549,7 +25558,8 @@ var _gicentre$elm_vega$GalleryGeo$geo7 = function () {
 					'world',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/world-110m.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/world-110m.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(

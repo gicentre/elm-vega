@@ -13,7 +13,7 @@ temporalTest1 =
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl "https://gicentre.github.io/data/timeTest.tsv"
+                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
                     , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
@@ -83,7 +83,7 @@ temporalTest2 =
         ds =
             dataSource
                 [ data "timeData"
-                    [ daUrl "https://gicentre.github.io/data/timeTest.tsv"
+                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
                     , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                 , data "binned" [ daSource "timeData" ]

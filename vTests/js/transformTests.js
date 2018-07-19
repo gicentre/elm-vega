@@ -14335,7 +14335,7 @@ var _user$project$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _user$project$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20569,73 +20569,7 @@ var _user$project$Vega$trFormulaInitOnly = F2(
 		return A3(_user$project$Vega$TFormula, exp, fName, _user$project$Vega$InitOnly);
 	});
 
-var _user$project$TransformTests$si = function (_p0) {
-	return _user$project$Vega$signals(
-		A3(
-			_user$project$Vega$signal,
-			'colors',
-			{
-				ctor: '::',
-				_0: _user$project$Vega$siValue(
-					_user$project$Vega$vStrs(
-						{
-							ctor: '::',
-							_0: 'white',
-							_1: {
-								ctor: '::',
-								_0: 'rgb(225,174,218)',
-								_1: {
-									ctor: '::',
-									_0: 'rgb(136,136,136)',
-									_1: {
-										ctor: '::',
-										_0: 'rgb(161,200,136)',
-										_1: {
-											ctor: '::',
-											_0: 'rgb(181,156,149)',
-											_1: {
-												ctor: '::',
-												_0: 'rgb(240,180,122)',
-												_1: {
-													ctor: '::',
-													_0: 'rgb(185,165,215)',
-													_1: {
-														ctor: '::',
-														_0: 'rgb(195,149,148)',
-														_1: {
-															ctor: '::',
-															_0: 'rgb(215,131,130)',
-															_1: {
-																ctor: '::',
-																_0: 'rgb(167,216,227)',
-																_1: {
-																	ctor: '::',
-																	_0: 'rgb(215,217,135)',
-																	_1: {
-																		ctor: '::',
-																		_0: 'rgb(146,173,210)',
-																		_1: {
-																			ctor: '::',
-																			_0: 'rgb(180,160,120)',
-																			_1: {ctor: '[]'}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						})),
-				_1: {ctor: '[]'}
-			},
-			_p0));
-};
-var _user$project$TransformTests$pr = function (_p1) {
+var _user$project$TransformTests$pr = function (_p0) {
 	return _user$project$Vega$projections(
 		A3(
 			_user$project$Vega$projection,
@@ -20664,10 +20598,10 @@ var _user$project$TransformTests$pr = function (_p1) {
 					}
 				}
 			},
-			_p1));
+			_p0));
 };
 var _user$project$TransformTests$voronoiTest1 = function () {
-	var mk = function (_p2) {
+	var mk = function (_p1) {
 		return _user$project$Vega$marks(
 			A3(
 				_user$project$Vega$mark,
@@ -20850,7 +20784,7 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p2))));
+						_p1))));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{
@@ -20870,7 +20804,8 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 					'hull',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/uk/ukConvexHull.json'),
+						_0: _user$project$Vega$daUrl(
+							_user$project$Vega$str('https://gicentre.github.io/data/uk/ukConvexHull.json')),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$daFormat(
@@ -20926,7 +20861,8 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 						'centroids',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/uk/constituencyCentroids.csv'),
+							_0: _user$project$Vega$daUrl(
+								_user$project$Vega$str('https://gicentre.github.io/data/uk/constituencyCentroids.csv')),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Vega$daFormat(
@@ -20948,7 +20884,7 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 	return _user$project$Vega$toVega(
 		{
 			ctor: '::',
-			_0: _user$project$Vega$width(420),
+			_0: _user$project$Vega$width(220),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Vega$height(670),
@@ -20974,7 +20910,540 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 			}
 		});
 }();
-var _user$project$TransformTests$sourceExample = _user$project$TransformTests$voronoiTest1;
+var _user$project$TransformTests$voronoiTest2 = function () {
+	var mk = function (_p2) {
+		return _user$project$Vega$marks(
+			A3(
+				_user$project$Vega$mark,
+				_user$project$Vega$Path,
+				{
+					ctor: '::',
+					_0: _user$project$Vega$mFrom(
+						{
+							ctor: '::',
+							_0: _user$project$Vega$srData(
+								_user$project$Vega$str('regions')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$mEncode(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$enEnter(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$maStroke(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$vStr('#eee'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$enUpdate(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$maPath(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vField(
+														_user$project$Vega$field('path')),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$maFill(
+													{
+														ctor: '::',
+														_0: A3(
+															_user$project$Vega$ifElse,
+															'!showRegions',
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vStr('#eee'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A3(
+																	_user$project$Vega$ifElse,
+																	'datum.region == 0',
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$transparent,
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$vScale('cScale'),
+																		_1: {
+																			ctor: '::',
+																			_0: _user$project$Vega$vField(
+																				_user$project$Vega$field('id')),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Vega$mark,
+					_user$project$Vega$Path,
+					{
+						ctor: '::',
+						_0: _user$project$Vega$mFrom(
+							{
+								ctor: '::',
+								_0: _user$project$Vega$srData(
+									_user$project$Vega$str('centroids')),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$mClip(
+								_user$project$Vega$clPath(
+									_user$project$Vega$strSignal('data(\'hull\')[0][\'path\']'))),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$mEncode(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$enEnter(
+											{
+												ctor: '::',
+												_0: _user$project$Vega$maFill(
+													{
+														ctor: '::',
+														_0: A3(
+															_user$project$Vega$ifElse,
+															'datum.region == 0',
+															{
+																ctor: '::',
+																_0: _user$project$Vega$transparent,
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vScale('cScale'),
+																_1: {
+																	ctor: '::',
+																	_0: _user$project$Vega$vField(
+																		_user$project$Vega$field('region')),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Vega$maStroke(
+														{
+															ctor: '::',
+															_0: A3(
+																_user$project$Vega$ifElse,
+																'datum.region == 0',
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$transparent,
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$vStr('white'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Vega$maStrokeWidth(
+															{
+																ctor: '::',
+																_0: _user$project$Vega$vNum(0.2),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Vega$maPath(
+																{
+																	ctor: '::',
+																	_0: _user$project$Vega$vField(
+																		_user$project$Vega$field('voronoi')),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p2)));
+	};
+	var sc = function (_p3) {
+		return _user$project$Vega$scales(
+			A3(
+				_user$project$Vega$scale,
+				'cScale',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$scDomain(
+							_user$project$Vega$doNums(
+								_user$project$Vega$nums(
+									{
+										ctor: '::',
+										_0: 0,
+										_1: {
+											ctor: '::',
+											_0: 1,
+											_1: {
+												ctor: '::',
+												_0: 2,
+												_1: {
+													ctor: '::',
+													_0: 3,
+													_1: {
+														ctor: '::',
+														_0: 4,
+														_1: {
+															ctor: '::',
+															_0: 5,
+															_1: {
+																ctor: '::',
+																_0: 6,
+																_1: {
+																	ctor: '::',
+																	_0: 7,
+																	_1: {
+																		ctor: '::',
+																		_0: 8,
+																		_1: {
+																			ctor: '::',
+																			_0: 9,
+																			_1: {
+																				ctor: '::',
+																				_0: 10,
+																				_1: {
+																					ctor: '::',
+																					_0: 11,
+																					_1: {
+																						ctor: '::',
+																						_0: 12,
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}))),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$scRange(
+								_user$project$Vega$raSignal('colors')),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_p3));
+	};
+	var si = function (_p4) {
+		return _user$project$Vega$signals(
+			A3(
+				_user$project$Vega$signal,
+				'centroidFile',
+				{
+					ctor: '::',
+					_0: _user$project$Vega$siValue(
+						_user$project$Vega$vStr('https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv')),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Vega$siBind(
+							_user$project$Vega$iSelect(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$inOptions(
+										_user$project$Vega$vStrs(
+											{
+												ctor: '::',
+												_0: 'https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv',
+												_1: {
+													ctor: '::',
+													_0: 'https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv',
+													_1: {ctor: '[]'}
+												}
+											})),
+									_1: {ctor: '[]'}
+								})),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_user$project$Vega$signal,
+					'showRegions',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$siBind(
+							_user$project$Vega$iCheckbox(
+								{ctor: '[]'})),
+						_1: {ctor: '[]'}
+					},
+					A3(
+						_user$project$Vega$signal,
+						'colors',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$siValue(
+								_user$project$Vega$vStrs(
+									{
+										ctor: '::',
+										_0: 'white',
+										_1: {
+											ctor: '::',
+											_0: 'rgb(225,174,218)',
+											_1: {
+												ctor: '::',
+												_0: 'rgb(136,136,136)',
+												_1: {
+													ctor: '::',
+													_0: 'rgb(161,200,136)',
+													_1: {
+														ctor: '::',
+														_0: 'rgb(181,156,149)',
+														_1: {
+															ctor: '::',
+															_0: 'rgb(240,180,122)',
+															_1: {
+																ctor: '::',
+																_0: 'rgb(185,165,215)',
+																_1: {
+																	ctor: '::',
+																	_0: 'rgb(195,149,148)',
+																	_1: {
+																		ctor: '::',
+																		_0: 'rgb(215,131,130)',
+																		_1: {
+																			ctor: '::',
+																			_0: 'rgb(167,216,227)',
+																			_1: {
+																				ctor: '::',
+																				_0: 'rgb(215,217,135)',
+																				_1: {
+																					ctor: '::',
+																					_0: 'rgb(146,173,210)',
+																					_1: {
+																						ctor: '::',
+																						_0: 'rgb(180,160,120)',
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									})),
+							_1: {ctor: '[]'}
+						},
+						_p4))));
+	};
+	var ds = _user$project$Vega$dataSource(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Vega$transform,
+				{
+					ctor: '::',
+					_0: A2(
+						_user$project$Vega$trGeoPath,
+						'projection',
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				},
+				A2(
+					_user$project$Vega$data,
+					'regions',
+					{
+						ctor: '::',
+						_0: _user$project$Vega$daUrl(
+							_user$project$Vega$str('https://gicentre.github.io/data/uk/ukConstituencies.json')),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$daFormat(
+								{
+									ctor: '::',
+									_0: _user$project$Vega$topojsonFeature('constituencies'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					})),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Vega$transform,
+					{
+						ctor: '::',
+						_0: A2(
+							_user$project$Vega$trGeoPath,
+							'projection',
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_user$project$Vega$data,
+						'hull',
+						{
+							ctor: '::',
+							_0: _user$project$Vega$daUrl(
+								_user$project$Vega$str('https://gicentre.github.io/data/uk/ukConvexHull.json')),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Vega$daFormat(
+									{
+										ctor: '::',
+										_0: _user$project$Vega$topojsonFeature('convexHull'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						})),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Vega$transform,
+						{
+							ctor: '::',
+							_0: A3(
+								_user$project$Vega$trGeoPoint,
+								'projection',
+								_user$project$Vega$field('longitude'),
+								_user$project$Vega$field('latitude')),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_user$project$Vega$trVoronoi,
+									_user$project$Vega$field('x'),
+									_user$project$Vega$field('y'),
+									{
+										ctor: '::',
+										_0: _user$project$Vega$voSize(
+											_user$project$Vega$numSignals(
+												{
+													ctor: '::',
+													_0: 'width',
+													_1: {
+														ctor: '::',
+														_0: 'height',
+														_1: {ctor: '[]'}
+													}
+												})),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$voAs('voronoi'),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_user$project$Vega$data,
+							'centroids',
+							{
+								ctor: '::',
+								_0: _user$project$Vega$daUrl(
+									_user$project$Vega$strSignal('centroidFile')),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Vega$daFormat(
+										{
+											ctor: '::',
+											_0: _user$project$Vega$CSV,
+											_1: {
+												ctor: '::',
+												_0: _user$project$Vega$ParseAuto,
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							})),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+	return _user$project$Vega$toVega(
+		{
+			ctor: '::',
+			_0: _user$project$Vega$width(420),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Vega$height(670),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Vega$padding(5),
+					_1: {
+						ctor: '::',
+						_0: ds,
+						_1: {
+							ctor: '::',
+							_0: si(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$TransformTests$pr(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: sc(
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: mk(
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$TransformTests$sourceExample = _user$project$TransformTests$voronoiTest2;
 var _user$project$TransformTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -21004,429 +21473,6 @@ var _user$project$TransformTests$view = function (spec) {
 			}
 		});
 };
-var _user$project$TransformTests$voronoiTest = F2(
-	function (centroidFile, showRegions) {
-		var fill = showRegions ? A3(
-			_user$project$Vega$ifElse,
-			'datum.region == 0',
-			{
-				ctor: '::',
-				_0: _user$project$Vega$transparent,
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Vega$vScale('cScale'),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Vega$vField(
-						_user$project$Vega$field('id')),
-					_1: {ctor: '[]'}
-				}
-			}) : _user$project$Vega$vStr('#eee');
-		var mk = function (_p3) {
-			return _user$project$Vega$marks(
-				A3(
-					_user$project$Vega$mark,
-					_user$project$Vega$Path,
-					{
-						ctor: '::',
-						_0: _user$project$Vega$mFrom(
-							{
-								ctor: '::',
-								_0: _user$project$Vega$srData(
-									_user$project$Vega$str('regions')),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Vega$mClip(
-								_user$project$Vega$clPath(
-									_user$project$Vega$strSignal('data(\'hull\')[0][\'path\']'))),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Vega$mEncode(
-									{
-										ctor: '::',
-										_0: _user$project$Vega$enEnter(
-											{
-												ctor: '::',
-												_0: _user$project$Vega$maFill(
-													{
-														ctor: '::',
-														_0: fill,
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: _user$project$Vega$maStroke(
-														{
-															ctor: '::',
-															_0: _user$project$Vega$vStr('#eee'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Vega$enUpdate(
-												{
-													ctor: '::',
-													_0: _user$project$Vega$maPath(
-														{
-															ctor: '::',
-															_0: _user$project$Vega$vField(
-																_user$project$Vega$field('path')),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A3(
-						_user$project$Vega$mark,
-						_user$project$Vega$Path,
-						{
-							ctor: '::',
-							_0: _user$project$Vega$mFrom(
-								{
-									ctor: '::',
-									_0: _user$project$Vega$srData(
-										_user$project$Vega$str('centroids')),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Vega$mClip(
-									_user$project$Vega$clPath(
-										_user$project$Vega$strSignal('data(\'hull\')[0][\'path\']'))),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Vega$mEncode(
-										{
-											ctor: '::',
-											_0: _user$project$Vega$enEnter(
-												{
-													ctor: '::',
-													_0: _user$project$Vega$maFill(
-														{
-															ctor: '::',
-															_0: A3(
-																_user$project$Vega$ifElse,
-																'datum.region == 0',
-																{
-																	ctor: '::',
-																	_0: _user$project$Vega$transparent,
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: _user$project$Vega$vScale('cScale'),
-																	_1: {
-																		ctor: '::',
-																		_0: _user$project$Vega$vField(
-																			_user$project$Vega$field('region')),
-																		_1: {ctor: '[]'}
-																	}
-																}),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: _user$project$Vega$maStroke(
-															{
-																ctor: '::',
-																_0: A3(
-																	_user$project$Vega$ifElse,
-																	'datum.region == 0',
-																	{
-																		ctor: '::',
-																		_0: _user$project$Vega$transparent,
-																		_1: {ctor: '[]'}
-																	},
-																	{
-																		ctor: '::',
-																		_0: _user$project$Vega$vStr('white'),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _user$project$Vega$maStrokeWidth(
-																{
-																	ctor: '::',
-																	_0: _user$project$Vega$vNum(0.2),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {
-																ctor: '::',
-																_0: _user$project$Vega$maPath(
-																	{
-																		ctor: '::',
-																		_0: _user$project$Vega$vField(
-																			_user$project$Vega$field('voronoi')),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						_p3)));
-		};
-		var sc = function (_p4) {
-			return _user$project$Vega$scales(
-				A3(
-					_user$project$Vega$scale,
-					'cScale',
-					{
-						ctor: '::',
-						_0: _user$project$Vega$scType(_user$project$Vega$ScOrdinal),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Vega$scDomain(
-								_user$project$Vega$doNums(
-									_user$project$Vega$nums(
-										{
-											ctor: '::',
-											_0: 0,
-											_1: {
-												ctor: '::',
-												_0: 1,
-												_1: {
-													ctor: '::',
-													_0: 2,
-													_1: {
-														ctor: '::',
-														_0: 3,
-														_1: {
-															ctor: '::',
-															_0: 4,
-															_1: {
-																ctor: '::',
-																_0: 5,
-																_1: {
-																	ctor: '::',
-																	_0: 6,
-																	_1: {
-																		ctor: '::',
-																		_0: 7,
-																		_1: {
-																			ctor: '::',
-																			_0: 8,
-																			_1: {
-																				ctor: '::',
-																				_0: 9,
-																				_1: {
-																					ctor: '::',
-																					_0: 10,
-																					_1: {
-																						ctor: '::',
-																						_0: 11,
-																						_1: {
-																							ctor: '::',
-																							_0: 12,
-																							_1: {ctor: '[]'}
-																						}
-																					}
-																				}
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}))),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Vega$scRange(
-									_user$project$Vega$raSignal('colors')),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					_p4));
-		};
-		var ds = _user$project$Vega$dataSource(
-			{
-				ctor: '::',
-				_0: A2(
-					_user$project$Vega$transform,
-					{
-						ctor: '::',
-						_0: A2(
-							_user$project$Vega$trGeoPath,
-							'projection',
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					},
-					A2(
-						_user$project$Vega$data,
-						'regions',
-						{
-							ctor: '::',
-							_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/uk/ukConstituencies.json'),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Vega$daFormat(
-									{
-										ctor: '::',
-										_0: _user$project$Vega$topojsonFeature('constituencies'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						})),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_user$project$Vega$transform,
-						{
-							ctor: '::',
-							_0: A2(
-								_user$project$Vega$trGeoPath,
-								'projection',
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						},
-						A2(
-							_user$project$Vega$data,
-							'hull',
-							{
-								ctor: '::',
-								_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/uk/ukConvexHull.json'),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Vega$daFormat(
-										{
-											ctor: '::',
-											_0: _user$project$Vega$topojsonFeature('convexHull'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							})),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_user$project$Vega$transform,
-							{
-								ctor: '::',
-								_0: A3(
-									_user$project$Vega$trGeoPoint,
-									'projection',
-									_user$project$Vega$field('longitude'),
-									_user$project$Vega$field('latitude')),
-								_1: {
-									ctor: '::',
-									_0: A3(
-										_user$project$Vega$trVoronoi,
-										_user$project$Vega$field('x'),
-										_user$project$Vega$field('y'),
-										{
-											ctor: '::',
-											_0: _user$project$Vega$voSize(
-												_user$project$Vega$numSignals(
-													{
-														ctor: '::',
-														_0: 'width',
-														_1: {
-															ctor: '::',
-															_0: 'height',
-															_1: {ctor: '[]'}
-														}
-													})),
-											_1: {
-												ctor: '::',
-												_0: _user$project$Vega$voAs('voronoi'),
-												_1: {ctor: '[]'}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_user$project$Vega$data,
-								'centroids',
-								{
-									ctor: '::',
-									_0: _user$project$Vega$daUrl(centroidFile),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Vega$daFormat(
-											{
-												ctor: '::',
-												_0: _user$project$Vega$CSV,
-												_1: {
-													ctor: '::',
-													_0: _user$project$Vega$ParseAuto,
-													_1: {ctor: '[]'}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}
-								})),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-		return _user$project$Vega$toVega(
-			{
-				ctor: '::',
-				_0: _user$project$Vega$width(420),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Vega$height(670),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Vega$padding(5),
-						_1: {
-							ctor: '::',
-							_0: ds,
-							_1: {
-								ctor: '::',
-								_0: _user$project$TransformTests$si(
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$TransformTests$pr(
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: sc(
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: mk(
-												{ctor: '[]'}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			});
-	});
-var _user$project$TransformTests$voronoiTest2 = A2(_user$project$TransformTests$voronoiTest, 'https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv', true);
-var _user$project$TransformTests$voronoiTest3 = A2(_user$project$TransformTests$voronoiTest, 'https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv', false);
 var _user$project$TransformTests$nestTest1 = function () {
 	var mk = function (_p5) {
 		return _user$project$Vega$marks(
@@ -22579,7 +22625,8 @@ var _user$project$TransformTests$forceTest1 = function () {
 				'node-data',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+					_0: _user$project$Vega$daUrl(
+						_user$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$daFormat(
@@ -22598,7 +22645,8 @@ var _user$project$TransformTests$forceTest1 = function () {
 					'link-data',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+						_0: _user$project$Vega$daUrl(
+							_user$project$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 						_1: {
 							ctor: '::',
 							_0: _user$project$Vega$daFormat(
@@ -23583,11 +23631,7 @@ var _user$project$TransformTests$mySpecs = _user$project$Vega$combineSpecs(
 						_1: {
 							ctor: '::',
 							_0: {ctor: '_Tuple2', _0: 'voronoiTest2', _1: _user$project$TransformTests$voronoiTest2},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'voronoiTest3', _1: _user$project$TransformTests$voronoiTest3},
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}
 					}
 				}

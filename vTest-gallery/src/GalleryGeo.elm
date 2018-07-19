@@ -38,9 +38,12 @@ geo1 =
     let
         ds =
             dataSource
-                [ data "unemp" [ daUrl "https://vega.github.io/vega/data/unemployment.tsv", daFormat [ TSV ] ]
+                [ data "unemp"
+                    [ daUrl (str "https://vega.github.io/vega/data/unemployment.tsv")
+                    , daFormat [ TSV ]
+                    ]
                 , data "counties"
-                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
                     , daFormat [ topojsonFeature "counties" ]
                     ]
                     |> transform
@@ -102,11 +105,11 @@ geo2 =
         ds =
             dataSource
                 [ data "states"
-                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
                     , daFormat [ topojsonFeature "states" ]
                     ]
                 , data "obesity"
-                    [ daUrl "https://vega.github.io/vega/data/obesity.json" ]
+                    [ daUrl (str "https://vega.github.io/vega/data/obesity.json") ]
                     |> transform
                         [ trLookup "states" (field "id") [ field "id" ] [ luAs [ "geo" ] ]
                         , trFilter (expr "datum.geo")
@@ -203,7 +206,7 @@ geo3 =
         ds =
             dataSource
                 [ data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                 , data "graticule" []
@@ -285,11 +288,11 @@ geo4 =
             dataSource
                 [ data "sphere" [ DaSphere ]
                 , data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                 , data "earthquakes"
-                    [ daUrl "https://vega.github.io/vega/data/earthquakes.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/earthquakes.json")
                     , daFormat [ jsonProperty "features" ]
                     ]
                 ]
@@ -403,7 +406,7 @@ geo5 =
                         )
                     ]
                 , data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                 , data "graticule" [] |> transform [ trGraticule [] ]
@@ -511,7 +514,7 @@ geo6 =
         ds =
             dataSource
                 [ data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                 , data "graticule" []
@@ -612,7 +615,7 @@ geo7 =
         ds =
             dataSource
                 [ data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                     |> transform

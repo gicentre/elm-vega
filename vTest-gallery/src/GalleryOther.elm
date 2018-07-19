@@ -60,7 +60,7 @@ heatmap1 =
         ds =
             dataSource
                 [ data "temperature"
-                    [ daUrl "https://vega.github.io/vega/data/seattle-temps.csv"
+                    [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
                     , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
@@ -161,7 +161,7 @@ parallel1 =
         ds =
             dataSource
                 [ data "cars"
-                    [ daUrl "https://vega.github.io/vega/data/cars.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/cars.json")
                     , daFormat [ JSON, parse [ ( "Year", foDate "%Y-%m-%d" ) ] ]
                     ]
                     |> transform
@@ -409,7 +409,7 @@ beeswarm1 =
         ds =
             dataSource
                 [ data "people"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                 ]

@@ -17,7 +17,7 @@ tree1 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -102,7 +102,7 @@ tree2 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -202,7 +202,7 @@ tree3 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTreemap
@@ -304,7 +304,7 @@ tree4 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trPack
@@ -348,7 +348,7 @@ tree5 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trPartition

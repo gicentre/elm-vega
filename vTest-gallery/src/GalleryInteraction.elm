@@ -181,7 +181,7 @@ interaction1 =
         ds =
             dataSource
                 [ data "flights"
-                    [ daUrl "https://vega.github.io/vega/data/flights-200k.json" ]
+                    [ daUrl (str "https://vega.github.io/vega/data/flights-200k.json") ]
                     |> transform
                         [ trBin (field "delay") (numSignal "delayExtent") [ bnStep (numSignal "delayStep"), bnAs "delay0" "delay1" ]
                         , trBin (field "time") (numSignal "timeExtent") [ bnStep (numSignal "timeStep"), bnAs "time0" "time1" ]
@@ -226,7 +226,7 @@ interaction2 =
         ds =
             dataSource
                 [ data "sp500"
-                    [ daUrl "https://vega.github.io/vega/data/sp500.csv"
+                    [ daUrl (str "https://vega.github.io/vega/data/sp500.csv")
                     , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                 ]
@@ -434,7 +434,7 @@ interaction3 =
 
         ds =
             dataSource
-                [ data "iris" [ daUrl "https://vega.github.io/vega/data/iris.json" ]
+                [ data "iris" [ daUrl (str "https://vega.github.io/vega/data/iris.json") ]
                 , data "fields" [ daValue (vStrs [ "petalWidth", "petalLength", "sepalWidth", "sepalLength" ]) ]
                 , data "cross" [ daSource "fields" ]
                     |> transform
@@ -646,7 +646,7 @@ interaction4 =
 
         ds =
             dataSource
-                [ data "points" [ daUrl "https://vega.github.io/vega/data/normal-2d.json" ]
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
                     |> transform
                         [ trExtentAsSignal (field "u") "xExt"
                         , trExtentAsSignal (field "v") "yExt"
@@ -805,7 +805,7 @@ interaction5 =
 
         ds =
             dataSource
-                [ data "gapminder" [ daUrl "https://vega.github.io/vega/data/gapminder.json" ]
+                [ data "gapminder" [ daUrl (str "https://vega.github.io/vega/data/gapminder.json") ]
                 , table []
                 , data "country_timeline" [ daSource "gapminder" ]
                     |> transform
@@ -1029,7 +1029,7 @@ interaction6 =
     let
         ds =
             dataSource
-                [ data "source" [ daUrl "https://vega.github.io/vega/data/cars.json" ]
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
                     |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null && datum['Origin'] != null") ]
                 , data "selected"
                     [ daOn
@@ -1256,7 +1256,7 @@ interaction7 =
         ds =
             dataSource
                 [ data "stocks"
-                    [ daUrl "https://vega.github.io/vega/data/stocks.csv"
+                    [ daUrl (str "https://vega.github.io/vega/data/stocks.csv")
                     , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                 , data "index"

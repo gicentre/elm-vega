@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -21521,7 +21521,8 @@ var _gicentre$elm_vega$GalleryCustom$custom6 = function () {
 				'source',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/udistrict.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/udistrict.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -22996,7 +22997,8 @@ var _gicentre$elm_vega$GalleryCustom$custom5 = function () {
 				'weather',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/weather.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/weather.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -23524,7 +23526,8 @@ var _gicentre$elm_vega$GalleryCustom$custom4 = function () {
 					'temperature',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/seattle-temps.csv'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/seattle-temps.csv')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -25384,7 +25387,8 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 				'wheat',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/wheat.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/wheat.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -25419,7 +25423,8 @@ var _gicentre$elm_vega$GalleryCustom$custom2 = function () {
 							'monarchs',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/monarchs.json'),
+								_0: _gicentre$elm_vega$Vega$daUrl(
+									_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/monarchs.json')),
 								_1: {ctor: '[]'}
 							})),
 					_1: {ctor: '[]'}
@@ -26856,7 +26861,8 @@ var _gicentre$elm_vega$GalleryCustom$custom1 = function () {
 					'budgets',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/budgets.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/budgets.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {

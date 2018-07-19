@@ -4996,7 +4996,7 @@ from an external file, from a named data source or inline literal values. See th
 [Vega data documentation](https://vega.github.io/vega/docs/data/#properties) for details.
 
       dataSource
-          [ data "pop" [ daUrl "data/population.json" ]
+          [ data "pop" [ daUrl (str "data/population.json") ]
           , data "popYear" [ daSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
           ]
 
@@ -5126,7 +5126,7 @@ type DataProperty
     | DaValue Value
     | DaSphere
     | DaOn (List Trigger)
-    | DaUrl String
+    | DaUrl Str
 
 
 {-| Create a row of data. A row comprises a list of (columnName,value) pairs.
@@ -5149,7 +5149,7 @@ result of a transformation. For details see the
 [Vega data documentation](https://vega.github.io/vega/docs/data).
 
       dataSource
-          [ data "pop" [ daUrl "data/population.json" ]
+          [ data "pop" [ daUrl (str "data/population.json") ]
           , data "popYear" [ daSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
           , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
           , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]
@@ -5172,10 +5172,12 @@ type DataType
     | FoUtc String
 
 
-{-| Specify the name of a data file to be loaded when generating a data set. For details see the
+{-| Specify the name of a data file to be loaded when generating a data set. This
+may be string literal indicating a file name or a signal for dynamic name generation.
+For details see the
 [Vega data documentation](https://vega.github.io/vega/docs/data/#properties)
 -}
-daUrl : String -> DataProperty
+daUrl : Str -> DataProperty
 daUrl =
     DaUrl
 
@@ -6455,6 +6457,19 @@ iDateTimeLocal =
 {-| A conditional list of values depending on whether an expression (first parameter)
 evaluates as true. The second and third parameters represent the 'then' and 'else'
 branches of the test.
+
+Note that to include nested conditions, subsequent `ifElse` calls should be placed
+in the 'else' branch. For example:
+
+    maFontWeight
+        [ ifElse "indata('selected', 'source', datum.id)"
+            [ vStr "bold" ]
+            [ ifElse "indata('selected', 'target', datum.id)"
+                [ vStr "bold" ]
+                [ vNull ]
+            ]
+        ]
+
 -}
 ifElse : String -> List Value -> List Value -> Value
 ifElse condition thenVals elseVals =
@@ -8412,9 +8427,34 @@ maZIndex =
     MZIndex
 
 
-{-| Indicates whether or how marks should be clipped to a specified shape.
+{-| Indicates whether or how marks should be clipped to a specified shape. For a
+simple case of clipping to the retangular 'data rectangle':
+
+    mClip (clEnabled true)
+
+To clip by some abritrary simple polygon use [clPath](#clPath) either to specify
+an SVG path string explicitly in pixel coordinates, or more usefully for geographic
+coordinates use the output of [trGeoPath](#trGeoPath):
+
+    ds =
+        dataSource
+            [ data "myClippingPoly"
+                [ daUrl (str "myPolyFile.json")
+                , daFormat [ topojsonFeature "idOfClippingPoly" ]
+                ]
+                |> transform [ trGeoPath "myProjection" [] ]
+            ...
+
+    mk =
+        marks
+              << mark Path
+                  [ mFrom [ srData (str "myMapSource") ]
+                  , mClip (clPath (strSignal "data('myClippingPoly')[0]['path']"))
+                  ...
+
 For further details see the
 [Vega mark documentation](https://vega.github.io/vega/docs/marks).
+
 -}
 mClip : Clip -> TopMarkProperty
 mClip =
@@ -8803,7 +8843,7 @@ correct type inference, such as time text:
 
     dataSource
         [ data "timeData"
-            [ daUrl "data/timeSeries.json"
+            [ daUrl (str "data/timeSeries.json")
             , daFormat [ parse [ ( "timestamp", foDate "%d/%m/%y %H:%M" ) ] ]
             ]
         ]
@@ -8994,7 +9034,7 @@ prExtent =
 fit by setting its translate and scale values.
 
     ds =
-        dataSource [ data "mapData" [ daUrl "myGeoJson.json" ] ]
+        dataSource [ data "mapData" [ daUrl (str "myGeoJson.json") ] ]
 
     pr =
         projections
@@ -10726,7 +10766,7 @@ new data fields suitable for a range of visualization and layout types. For deta
 see the [Vega transform documentation](https://vega.github.io/vega/docs/transforms).
 
     dataSource
-        [ data "pop" [ daUrl "data/population.json" ]
+        [ data "pop" [ daUrl (str "data/population.json") ]
         , data "popYear" [ daSource "pop" ]
             |> transform [ trFilter (expr "datum.year == year") ]
         , data "ageGroups" [ daSource "pop" ]
@@ -11013,7 +11053,7 @@ formula calculation use [trFormulaInitOnly](#trFormulaInitOnly).
 
     dataSource
         [ data "world"
-            [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+            [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
             , daFormat [ topojsonFeature "countries" ]
             ]
             |> transform
@@ -12798,7 +12838,7 @@ dataProperty dProp =
             ( "on", JE.list triggers )
 
         DaUrl url ->
-            ( "url", JE.string url )
+            ( "url", strSpec url )
 
         DaValue val ->
             ( "values", valueSpec val )

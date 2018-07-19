@@ -58,7 +58,7 @@ geoTest2 =
     let
         ds =
             dataSource
-                [ data "mapData" [ daUrl "https://gicentre.github.io/data/geoTutorials/geoJson1.json" ]
+                [ data "mapData" [ daUrl (str "https://gicentre.github.io/data/geoTutorials/geoJson1.json") ]
                 ]
 
         pr =
@@ -94,7 +94,7 @@ geoTest3 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl "https://gicentre.github.io/data/geoTutorials/topoJson3.json"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson3.json")
                     , daFormat [ topojsonFeature "myRegions" ]
                     ]
                 ]
@@ -141,7 +141,7 @@ geoTest4 =
         ds =
             dataSource
                 [ data "mapData"
-                    [ daUrl "https://gicentre.github.io/data/geoTutorials/topoJson6.json"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
                     , daFormat [ topojsonFeature "myRegions" ]
                     ]
                 ]

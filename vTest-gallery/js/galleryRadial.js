@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {

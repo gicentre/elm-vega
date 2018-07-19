@@ -178,11 +178,11 @@ forceTest1 =
         ds =
             dataSource
                 [ data "node-data"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                 , data "link-data"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "links" ]
                     ]
                 ]
@@ -393,42 +393,18 @@ pr =
             ]
 
 
-si : List Spec -> ( VProperty, Spec )
-si =
-    signals
-        << signal "colors"
-            [ siValue
-                (vStrs
-                    [ "white"
-                    , "rgb(225,174,218)" -- EMids
-                    , "rgb(136,136,136)" -- London
-                    , "rgb(161,200,136)" -- NW
-                    , "rgb(181,156,149)" -- WMids
-                    , "rgb(240,180,122)" -- YorkAndHumber
-                    , "rgb(185,165,215)" -- SE
-                    , "rgb(195,149,148)" -- NE
-                    , "rgb(215,131,130)" -- Wales
-                    , "rgb(167,216,227)" -- East
-                    , "rgb(215,217,135)" -- SW
-                    , "rgb(146,173,210)" -- Scotland
-                    , "rgb(180,160,120)" -- NI
-                    ]
-                )
-            ]
-
-
 voronoiTest1 : Spec
 voronoiTest1 =
     let
         ds =
             dataSource
                 [ data "hull"
-                    [ daUrl "https://gicentre.github.io/data/uk/ukConvexHull.json"
+                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
                     , daFormat [ topojsonFeature "convexHull" ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
-                    [ daUrl "https://gicentre.github.io/data/uk/constituencyCentroids.csv"
+                    [ daUrl (str "https://gicentre.github.io/data/uk/constituencyCentroids.csv")
                     , daFormat [ CSV, ParseAuto ]
                     ]
                     |> transform
@@ -479,26 +455,26 @@ voronoiTest1 =
                     ]
     in
     toVega
-        [ width 420, height 670, padding 5, ds, pr [], mk [] ]
+        [ width 220, height 670, padding 5, ds, pr [], mk [] ]
 
 
-voronoiTest : String -> Bool -> Spec
-voronoiTest centroidFile showRegions =
+voronoiTest2 : Spec
+voronoiTest2 =
     let
         ds =
             dataSource
                 [ data "regions"
-                    [ daUrl "https://gicentre.github.io/data/uk/ukConstituencies.json"
+                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConstituencies.json")
                     , daFormat [ topojsonFeature "constituencies" ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "hull"
-                    [ daUrl "https://gicentre.github.io/data/uk/ukConvexHull.json"
+                    [ daUrl (str "https://gicentre.github.io/data/uk/ukConvexHull.json")
                     , daFormat [ topojsonFeature "convexHull" ]
                     ]
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
-                    [ daUrl centroidFile
+                    [ daUrl (strSignal "centroidFile")
                     , daFormat [ CSV, ParseAuto ]
                     ]
                     |> transform
@@ -512,6 +488,42 @@ voronoiTest centroidFile showRegions =
                         ]
                 ]
 
+        si =
+            signals
+                << signal "centroidFile"
+                    [ siValue (vStr "https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv")
+                    , siBind
+                        (iSelect
+                            [ inOptions
+                                (vStrs
+                                    [ "https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv"
+                                    , "https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                << signal "showRegions" [ siBind (iCheckbox []) ]
+                << signal "colors"
+                    [ siValue
+                        (vStrs
+                            [ "white"
+                            , "rgb(225,174,218)" -- EMids
+                            , "rgb(136,136,136)" -- London
+                            , "rgb(161,200,136)" -- NW
+                            , "rgb(181,156,149)" -- WMids
+                            , "rgb(240,180,122)" -- YorkAndHumber
+                            , "rgb(185,165,215)" -- SE
+                            , "rgb(195,149,148)" -- NE
+                            , "rgb(215,131,130)" -- Wales
+                            , "rgb(167,216,227)" -- East
+                            , "rgb(215,217,135)" -- SW
+                            , "rgb(146,173,210)" -- Scotland
+                            , "rgb(180,160,120)" -- NI
+                            ]
+                        )
+                    ]
+
         sc =
             scales
                 << scale "cScale"
@@ -520,23 +532,22 @@ voronoiTest centroidFile showRegions =
                     , scRange (raSignal "colors")
                     ]
 
-        fill =
-            if showRegions then
-                ifElse "datum.region == 0" [ transparent ] [ vScale "cScale", vField (field "id") ]
-            else
-                vStr "#eee"
-
         mk =
             marks
                 << mark Path
                     [ mFrom [ srData (str "regions") ]
-                    , mClip (clPath (strSignal "data('hull')[0]['path']"))
                     , mEncode
                         [ enEnter
-                            [ maFill [ fill ]
-                            , maStroke [ vStr "#eee" ]
+                            [ maStroke [ vStr "#eee" ]
                             ]
-                        , enUpdate [ maPath [ vField (field "path") ] ]
+                        , enUpdate
+                            [ maPath [ vField (field "path") ]
+                            , maFill
+                                [ ifElse "!showRegions"
+                                    [ vStr "#eee" ]
+                                    [ ifElse "datum.region == 0" [ transparent ] [ vScale "cScale", vField (field "id") ] ]
+                                ]
+                            ]
                         ]
                     ]
                 << mark Path
@@ -556,19 +567,9 @@ voronoiTest centroidFile showRegions =
         [ width 420, height 670, padding 5, ds, si [], pr [], sc [], mk [] ]
 
 
-voronoiTest2 : Spec
-voronoiTest2 =
-    voronoiTest "https://gicentre.github.io/data/uk/constituencyCentroidsWithSpacers.csv" True
-
-
-voronoiTest3 : Spec
-voronoiTest3 =
-    voronoiTest "https://gicentre.github.io/data/uk/constituencySpacedCentroidsWithSpacers.csv" False
-
-
 sourceExample : Spec
 sourceExample =
-    voronoiTest1
+    voronoiTest2
 
 
 
@@ -584,7 +585,6 @@ mySpecs =
         , ( "nestTest1", nestTest1 )
         , ( "voronoiTest1", voronoiTest1 )
         , ( "voronoiTest2", voronoiTest2 )
-        , ( "voronoiTest3", voronoiTest3 )
         ]
 
 

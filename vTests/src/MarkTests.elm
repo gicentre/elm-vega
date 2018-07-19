@@ -359,7 +359,7 @@ shapeTest =
         ds =
             dataSource
                 [ data "world"
-                    [ daUrl "https://vega.github.io/vega/data/world-110m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature "countries" ]
                     ]
                     |> transform [ trFilter (expr "pType !== 'albersUsa' || datum.id === 840") ]

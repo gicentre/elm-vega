@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -21256,7 +21256,8 @@ var _gicentre$elm_vega$GalleryNetwork$map1 = function () {
 					'states',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/us-10m.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/us-10m.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -21319,7 +21320,8 @@ var _gicentre$elm_vega$GalleryNetwork$map1 = function () {
 						'traffic',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flights-airport.csv'),
+							_0: _gicentre$elm_vega$Vega$daUrl(
+								_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flights-airport.csv')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
@@ -21406,7 +21408,8 @@ var _gicentre$elm_vega$GalleryNetwork$map1 = function () {
 							'airports',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/airports.csv'),
+								_0: _gicentre$elm_vega$Vega$daUrl(
+									_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/airports.csv')),
 								_1: {
 									ctor: '::',
 									_0: _gicentre$elm_vega$Vega$daFormat(
@@ -21482,7 +21485,8 @@ var _gicentre$elm_vega$GalleryNetwork$map1 = function () {
 								'routes',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flights-airport.csv'),
+									_0: _gicentre$elm_vega$Vega$daUrl(
+										_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flights-airport.csv')),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$daFormat(
@@ -22033,7 +22037,8 @@ var _gicentre$elm_vega$GalleryNetwork$arc1 = function () {
 				'edges',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -22194,7 +22199,8 @@ var _gicentre$elm_vega$GalleryNetwork$arc1 = function () {
 								'nodes',
 								{
 									ctor: '::',
-									_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+									_0: _gicentre$elm_vega$Vega$daUrl(
+										_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 									_1: {
 										ctor: '::',
 										_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23133,7 +23139,8 @@ var _gicentre$elm_vega$GalleryNetwork$matrix1 = function () {
 					'nodes',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23189,7 +23196,8 @@ var _gicentre$elm_vega$GalleryNetwork$matrix1 = function () {
 						'edges',
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+							_0: _gicentre$elm_vega$Vega$daUrl(
+								_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23879,7 +23887,8 @@ var _gicentre$elm_vega$GalleryNetwork$force1 = function () {
 				'node-data',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23898,7 +23907,8 @@ var _gicentre$elm_vega$GalleryNetwork$force1 = function () {
 					'link-data',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -24751,7 +24761,8 @@ var _gicentre$elm_vega$GalleryNetwork$bundle1 = function () {
 					'tree',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -24786,7 +24797,8 @@ var _gicentre$elm_vega$GalleryNetwork$bundle1 = function () {
 							'dependencies',
 							{
 								ctor: '::',
-								_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flare-dependencies.json'),
+								_0: _gicentre$elm_vega$Vega$daUrl(
+									_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flare-dependencies.json')),
 								_1: {ctor: '[]'}
 							})),
 					_1: {

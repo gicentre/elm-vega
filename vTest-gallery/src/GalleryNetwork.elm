@@ -17,7 +17,7 @@ bundle1 =
     let
         ds =
             dataSource
-                [ data "tree" [ daUrl "https://vega.github.io/vega/data/flare.json" ]
+                [ data "tree" [ daUrl (str "https://vega.github.io/vega/data/flare.json") ]
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
@@ -32,7 +32,7 @@ bundle1 =
                         ]
                 , data "leaves" [ daSource "tree" ]
                     |> transform [ trFilter (expr "!datum.children") ]
-                , data "dependencies" [ daUrl "https://vega.github.io/vega/data/flare-dependencies.json" ]
+                , data "dependencies" [ daUrl (str "https://vega.github.io/vega/data/flare-dependencies.json") ]
                     |> transform
                         [ trFormulaInitOnly "treePath('tree', datum.source, datum.target)" "treepath" ]
                 , data "selected" [ daSource "dependencies" ]
@@ -161,11 +161,11 @@ force1 =
         ds =
             dataSource
                 [ data "node-data"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                 , data "link-data"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "links" ]
                     ]
                 ]
@@ -279,7 +279,7 @@ matrix1 =
         ds =
             dataSource
                 [ data "nodes"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                     |> transform
@@ -288,7 +288,7 @@ matrix1 =
                         , trWindow [ wnOperation RowNumber "order" ] [ wnSort [ ( field "score", Ascend ) ] ]
                         ]
                 , data "edges"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "links" ]
                     ]
                     |> transform
@@ -431,7 +431,7 @@ arc1 =
         ds =
             dataSource
                 [ data "edges"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "links" ]
                     ]
                 , data "sourceDegree" [ daSource "edges" ]
@@ -439,7 +439,7 @@ arc1 =
                 , data "targetDegree" [ daSource "edges" ]
                     |> transform [ trAggregate [ agGroupBy [ field "target" ] ] ]
                 , data "nodes"
-                    [ daUrl "https://vega.github.io/vega/data/miserables.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
                     , daFormat [ jsonProperty "nodes" ]
                     ]
                     |> transform
@@ -544,12 +544,14 @@ map1 =
         ds =
             dataSource
                 [ data "states"
-                    [ daUrl "https://vega.github.io/vega/data/us-10m.json"
+                    [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
                     , daFormat [ topojsonFeature "states" ]
                     ]
                     |> transform [ trGeoPath "myProjection" [] ]
                 , data "traffic"
-                    [ daUrl "https://vega.github.io/vega/data/flights-airport.csv", daFormat [ CSV, ParseAuto ] ]
+                    [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
+                    , daFormat [ CSV, ParseAuto ]
+                    ]
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "origin" ]
@@ -558,7 +560,10 @@ map1 =
                             , agAs [ "flights" ]
                             ]
                         ]
-                , data "airports" [ daUrl "https://vega.github.io/vega/data/airports.csv", daFormat [ CSV, ParseAuto ] ]
+                , data "airports"
+                    [ daUrl (str "https://vega.github.io/vega/data/airports.csv")
+                    , daFormat [ CSV, ParseAuto ]
+                    ]
                     |> transform
                         [ trLookup "traffic" (field "origin") [ field "iata" ] [ luAs [ "traffic" ] ]
                         , trFilter (expr "datum.traffic != null")
@@ -567,7 +572,10 @@ map1 =
                         , trVoronoi (field "x") (field "y") []
                         , trCollect [ ( field "traffic.flights", Descend ) ]
                         ]
-                , data "routes" [ daUrl "https://vega.github.io/vega/data/flights-airport.csv", daFormat [ CSV, ParseAuto ] ]
+                , data "routes"
+                    [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
+                    , daFormat [ CSV, ParseAuto ]
+                    ]
                     |> transform
                         [ trFilter (expr "hover && hover.iata == datum.origin")
                         , trLookup "airports" (field "iata") [ field "origin", field "destination" ] [ luAs [ "source", "target" ] ]

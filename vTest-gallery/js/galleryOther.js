@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20985,7 +20985,8 @@ var _gicentre$elm_vega$GalleryOther$beeswarm1 = function () {
 				'people',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/miserables.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/miserables.json')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -22425,7 +22426,8 @@ var _gicentre$elm_vega$GalleryOther$parallel1 = function () {
 					'cars',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/cars.json')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(
@@ -22983,7 +22985,8 @@ var _gicentre$elm_vega$GalleryOther$heatmap1 = function () {
 					'temperature',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/seattle-temps.csv'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/seattle-temps.csv')),
 						_1: {
 							ctor: '::',
 							_0: _gicentre$elm_vega$Vega$daFormat(

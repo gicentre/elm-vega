@@ -315,7 +315,7 @@ areaChart4 : Spec
 areaChart4 =
     let
         table =
-            data "jobs" [ daUrl "https://vega.github.io/vega/data/jobs.json" ]
+            data "jobs" [ daUrl (str "https://vega.github.io/vega/data/jobs.json") ]
                 |> transform
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack

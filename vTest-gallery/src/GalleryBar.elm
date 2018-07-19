@@ -368,7 +368,7 @@ barChart5 =
     let
         ds =
             dataSource
-                [ data "population" [ daUrl "https://vega.github.io/vega/data/population.json" ]
+                [ data "population" [ daUrl (str "https://vega.github.io/vega/data/population.json") ]
                 , data "popYear" [ daSource "population" ] |> transform [ trFilter (expr "datum.year == year") ]
                 , data "males" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 1") ]
                 , data "females" [ daSource "popYear" ] |> transform [ trFilter (expr "datum.sex == 2") ]

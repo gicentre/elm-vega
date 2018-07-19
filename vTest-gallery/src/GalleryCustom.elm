@@ -20,7 +20,7 @@ custom1 =
 
         ds =
             dataSource
-                [ data "budgets" [ daUrl "https://vega.github.io/vega/data/budgets.json" ]
+                [ data "budgets" [ daUrl (str "https://vega.github.io/vega/data/budgets.json") ]
                     |> transform
                         [ trFormula "abs(datum.value)" "abs"
                         , trFormula "datum.value < 0 ? 'deficit' : 'surplus'" "type"
@@ -272,9 +272,9 @@ custom2 =
     let
         ds =
             dataSource
-                [ data "wheat" [ daUrl "https://vega.github.io/vega/data/wheat.json" ]
+                [ data "wheat" [ daUrl (str "https://vega.github.io/vega/data/wheat.json") ]
                 , data "wheat-filtered" [ daSource "wheat" ] |> transform [ trFilter (expr "!!datum.wages") ]
-                , data "monarchs" [ daUrl "https://vega.github.io/vega/data/monarchs.json" ]
+                , data "monarchs" [ daUrl (str "https://vega.github.io/vega/data/monarchs.json") ]
                     |> transform [ trFormula "((!datum.commonwealth && datum.index % 2) ? -1: 1) * 2 + 95" "offset" ]
                 ]
 
@@ -534,7 +534,7 @@ custom4 =
         ds =
             dataSource
                 [ data "temperature"
-                    [ daUrl "https://vega.github.io/vega/data/seattle-temps.csv"
+                    [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
                     , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
@@ -616,7 +616,7 @@ custom5 =
         ds =
             dataSource
                 [ data "weather"
-                    [ daUrl "https://vega.github.io/vega/data/weather.json" ]
+                    [ daUrl (str "https://vega.github.io/vega/data/weather.json") ]
                 , data "actual"
                     [ daSource "weather" ]
                     |> transform [ trFilter (expr "datum.actual") ]
@@ -781,7 +781,7 @@ custom6 =
         ds =
             dataSource
                 [ data "source"
-                    [ daUrl "https://vega.github.io/vega/data/udistrict.json" ]
+                    [ daUrl (str "https://vega.github.io/vega/data/udistrict.json") ]
                 , (dataFromColumns "annotation" []
                     << dataColumn "name" (vStrs [ "Boat St", "40th St.", "42nd St.", "45th St.", "50th St.", "55th St." ])
                     << dataColumn "align" (vStrs [ "left", "center", "center", "center", "center", "center" ])

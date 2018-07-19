@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -21251,7 +21251,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot5 = function () {
 				'barley',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/barley.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/barley.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -21728,7 +21729,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot4 = function () {
 				'barley',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/barley.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/barley.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -22769,7 +22771,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot3 = function () {
 				'drive',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/driving.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/driving.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
@@ -23522,7 +23525,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot2 = function () {
 					'movies',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/movies.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/movies.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -23999,7 +24003,8 @@ var _gicentre$elm_vega$GalleryScatter$scatterplot1 = function () {
 					'cars',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/cars.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}

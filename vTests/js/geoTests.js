@@ -14335,7 +14335,7 @@ var _user$project$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _user$project$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -20705,7 +20705,8 @@ var _user$project$GeoTests$geoTest4 = function () {
 				'mapData',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/geoTutorials/topoJson6.json'),
+					_0: _user$project$Vega$daUrl(
+						_user$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$daFormat(
@@ -20929,7 +20930,8 @@ var _user$project$GeoTests$geoTest3 = function () {
 				'mapData',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/geoTutorials/topoJson3.json'),
+					_0: _user$project$Vega$daUrl(
+						_user$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson3.json')),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Vega$daFormat(
@@ -21094,7 +21096,8 @@ var _user$project$GeoTests$geoTest2 = function () {
 				'mapData',
 				{
 					ctor: '::',
-					_0: _user$project$Vega$daUrl('https://gicentre.github.io/data/geoTutorials/geoJson1.json'),
+					_0: _user$project$Vega$daUrl(
+						_user$project$Vega$str('https://gicentre.github.io/data/geoTutorials/geoJson1.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}

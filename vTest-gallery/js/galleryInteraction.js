@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -22465,7 +22465,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction7 = function () {
 				'stocks',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/stocks.csv'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/stocks.csv')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -23756,7 +23757,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction6 = function () {
 					'source',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/cars.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/cars.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {
@@ -25184,7 +25186,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction5 = function () {
 				'gapminder',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/gapminder.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/gapminder.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -26395,7 +26398,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction4 = function () {
 					'points',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/normal-2d.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/normal-2d.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}
@@ -27620,7 +27624,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction3 = function () {
 				'iris',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/iris.json'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/iris.json')),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -28874,7 +28879,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction2 = function () {
 				'sp500',
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/sp500.csv'),
+					_0: _gicentre$elm_vega$Vega$daUrl(
+						_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/sp500.csv')),
 					_1: {
 						ctor: '::',
 						_0: _gicentre$elm_vega$Vega$daFormat(
@@ -29028,7 +29034,8 @@ var _gicentre$elm_vega$GalleryInteraction$interaction1 = function () {
 					'flights',
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/flights-200k.json'),
+						_0: _gicentre$elm_vega$Vega$daUrl(
+							_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/flights-200k.json')),
 						_1: {ctor: '[]'}
 					})),
 			_1: {ctor: '[]'}

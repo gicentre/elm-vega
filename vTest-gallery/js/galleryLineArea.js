@@ -14335,7 +14335,7 @@ var _gicentre$elm_vega$Vega$dataProperty = function (dProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'url',
-				_1: _elm_lang$core$Json_Encode$string(_p113._0)
+				_1: _gicentre$elm_vega$Vega$strSpec(_p113._0)
 			};
 		case 'DaValue':
 			return {
@@ -21557,7 +21557,8 @@ var _gicentre$elm_vega$GalleryLineArea$areaChart4 = function () {
 			'jobs',
 			{
 				ctor: '::',
-				_0: _gicentre$elm_vega$Vega$daUrl('https://vega.github.io/vega/data/jobs.json'),
+				_0: _gicentre$elm_vega$Vega$daUrl(
+					_gicentre$elm_vega$Vega$str('https://vega.github.io/vega/data/jobs.json')),
 				_1: {ctor: '[]'}
 			}));
 	var ds = _gicentre$elm_vega$Vega$dataSource(

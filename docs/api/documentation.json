@@ -6964,8 +6964,8 @@
       },
       {
         "name": "daUrl",
-        "comment": " Specify the name of a data file to be loaded when generating a data set. For details see the\n[Vega data documentation](https://vega.github.io/vega/docs/data/#properties)\n",
-        "type": "String -> Vega.DataProperty"
+        "comment": " Specify the name of a data file to be loaded when generating a data set. This\nmay be string literal indicating a file name or a signal for dynamic name generation.\nFor details see the\n[Vega data documentation](https://vega.github.io/vega/docs/data/#properties)\n",
+        "type": "Vega.Str -> Vega.DataProperty"
       },
       {
         "name": "daValue",
@@ -6979,7 +6979,7 @@
       },
       {
         "name": "data",
-        "comment": " Declare a named data set. Depending on the properties provided this may be\nfrom an external file, from a named data source or inline literal values. See the\n[Vega data documentation](https://vega.github.io/vega/docs/data/#properties) for details.\n\n      dataSource\n          [ data \"pop\" [ daUrl \"data/population.json\" ]\n          , data \"popYear\" [ daSource \"pop\" ] |> transform [ trFilter (expr \"datum.year == year\") ]\n          ]\n\n",
+        "comment": " Declare a named data set. Depending on the properties provided this may be\nfrom an external file, from a named data source or inline literal values. See the\n[Vega data documentation](https://vega.github.io/vega/docs/data/#properties) for details.\n\n      dataSource\n          [ data \"pop\" [ daUrl (str \"data/population.json\") ]\n          , data \"popYear\" [ daSource \"pop\" ] |> transform [ trFilter (expr \"datum.year == year\") ]\n          ]\n\n",
         "type": "String -> List Vega.DataProperty -> Vega.DataTable"
       },
       {
@@ -7004,7 +7004,7 @@
       },
       {
         "name": "dataSource",
-        "comment": " Specify a data source to be used in the visualization. A data source is a collection\nof data tables which themselves may be generated inline, loaded from a URL or the\nresult of a transformation. For details see the\n[Vega data documentation](https://vega.github.io/vega/docs/data).\n\n      dataSource\n          [ data \"pop\" [ daUrl \"data/population.json\" ]\n          , data \"popYear\" [ daSource \"pop\" ] |> transform [ trFilter (expr \"datum.year == year\") ]\n          , data \"males\" [ daSource \"popYear\" ] |> transform [ trFilter (expr \"datum.sex == 1\") ]\n          , data \"females\" [ daSource \"popYear\" ] |> transform [ trFilter (expr \"datum.sex == 2\") ]\n          , data \"ageGroups\" [ daSource \"pop\" ] |> transform [ trAggregate [ agGroupBy [ field \"age\" ] ] ]\n          ]\n\n",
+        "comment": " Specify a data source to be used in the visualization. A data source is a collection\nof data tables which themselves may be generated inline, loaded from a URL or the\nresult of a transformation. For details see the\n[Vega data documentation](https://vega.github.io/vega/docs/data).\n\n      dataSource\n          [ data \"pop\" [ daUrl (str \"data/population.json\") ]\n          , data \"popYear\" [ daSource \"pop\" ] |> transform [ trFilter (expr \"datum.year == year\") ]\n          , data \"males\" [ daSource \"popYear\" ] |> transform [ trFilter (expr \"datum.sex == 1\") ]\n          , data \"females\" [ daSource \"popYear\" ] |> transform [ trFilter (expr \"datum.sex == 2\") ]\n          , data \"ageGroups\" [ daSource \"pop\" ] |> transform [ trAggregate [ agGroupBy [ field \"age\" ] ] ]\n          ]\n\n",
         "type": "List Vega.DataTable -> Vega.Data"
       },
       {
@@ -7624,7 +7624,7 @@
       },
       {
         "name": "ifElse",
-        "comment": " A conditional list of values depending on whether an expression (first parameter)\nevaluates as true. The second and third parameters represent the 'then' and 'else'\nbranches of the test.\n",
+        "comment": " A conditional list of values depending on whether an expression (first parameter)\nevaluates as true. The second and third parameters represent the 'then' and 'else'\nbranches of the test.\n\nNote that to include nested conditions, subsequent `ifElse` calls should be placed\nin the 'else' branch. For example:\n\n    maFontWeight\n        [ ifElse \"indata('selected', 'source', datum.id)\"\n            [ vStr \"bold\" ]\n            [ ifElse \"indata('selected', 'target', datum.id)\"\n                [ vStr \"bold\" ]\n                [ vNull ]\n            ]\n        ]\n\n",
         "type": "String -> List Vega.Value -> List Vega.Value -> Vega.Value"
       },
       {
@@ -8179,7 +8179,7 @@
       },
       {
         "name": "mClip",
-        "comment": " Indicates whether or how marks should be clipped to a specified shape.\nFor further details see the\n[Vega mark documentation](https://vega.github.io/vega/docs/marks).\n",
+        "comment": " Indicates whether or how marks should be clipped to a specified shape. For a\nsimple case of clipping to the retangular 'data rectangle':\n\n    mClip (clEnabled true)\n\nTo clip by some abritrary simple polygon use [clPath](#clPath) either to specify\nan SVG path string explicitly in pixel coordinates, or more usefully for geographic\ncoordinates use the output of [trGeoPath](#trGeoPath):\n\n    ds =\n        dataSource\n            [ data \"myClippingPoly\"\n                [ daUrl (str \"myPolyFile.json\")\n                , daFormat [ topojsonFeature \"idOfClippingPoly\" ]\n                ]\n                |> transform [ trGeoPath \"myProjection\" [] ]\n            ...\n\n    mk =\n        marks\n              << mark Path\n                  [ mFrom [ srData (str \"myMapSource\") ]\n                  , mClip (clPath (strSignal \"data('myClippingPoly')[0]['path']\"))\n                  ...\n\nFor further details see the\n[Vega mark documentation](https://vega.github.io/vega/docs/marks).\n\n",
         "type": "Vega.Clip -> Vega.TopMarkProperty"
       },
       {
@@ -8654,7 +8654,7 @@
       },
       {
         "name": "parse",
-        "comment": " Indicates the parsing rules when processing some data text. The parameter is\na list of tuples where each corresponds to a field name paired with its desired\ndata type. This is only necessary if there is some ambiguity that could prevent\ncorrect type inference, such as time text:\n\n    dataSource\n        [ data \"timeData\"\n            [ daUrl \"data/timeSeries.json\"\n            , daFormat [ parse [ ( \"timestamp\", foDate \"%d/%m/%y %H:%M\" ) ] ]\n            ]\n        ]\n\n",
+        "comment": " Indicates the parsing rules when processing some data text. The parameter is\na list of tuples where each corresponds to a field name paired with its desired\ndata type. This is only necessary if there is some ambiguity that could prevent\ncorrect type inference, such as time text:\n\n    dataSource\n        [ data \"timeData\"\n            [ daUrl (str \"data/timeSeries.json\")\n            , daFormat [ parse [ ( \"timestamp\", foDate \"%d/%m/%y %H:%M\" ) ] ]\n            ]\n        ]\n\n",
         "type": "List ( String, Vega.DataType ) -> Vega.FormatProperty"
       },
       {
@@ -8734,7 +8734,7 @@
       },
       {
         "name": "prFit",
-        "comment": " Specify the GeoJSON data to which a projection should attempt to automatically\nfit by setting its translate and scale values.\n\n    ds =\n        dataSource [ data \"mapData\" [ daUrl \"myGeoJson.json\" ] ]\n\n    pr =\n        projections\n            << projection \"myProjection\"\n                [ prType Orthographic\n                , prSize (numSignal \"[width,height]\")\n                , prFit (feName \"mapData\")\n                ]\n\nFor details see the\n[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)\n\n",
+        "comment": " Specify the GeoJSON data to which a projection should attempt to automatically\nfit by setting its translate and scale values.\n\n    ds =\n        dataSource [ data \"mapData\" [ daUrl (str \"myGeoJson.json\") ] ]\n\n    pr =\n        projections\n            << projection \"myProjection\"\n                [ prType Orthographic\n                , prSize (numSignal \"[width,height]\")\n                , prFit (feName \"mapData\")\n                ]\n\nFor details see the\n[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)\n\n",
         "type": "Vega.Feature -> Vega.ProjectionProperty"
       },
       {
@@ -9549,7 +9549,7 @@
       },
       {
         "name": "trFormula",
-        "comment": " Extend a data object with new values according to the given\n[Vega expression](https://vega.github.io/vega/docs/expressions/). The second\nparameter is a new field name to give the result of the evaluated expression.\nThis version will reapply the formula if the data changes. To perform a one-off\nformula calculation use [trFormulaInitOnly](#trFormulaInitOnly).\n\n    dataSource\n        [ data \"world\"\n            [ daUrl \"https://vega.github.io/vega/data/world-110m.json\"\n            , daFormat [ topojsonFeature \"countries\" ]\n            ]\n            |> transform\n                [ trFormula \"geoCentroid('myProj', datum)\" \"myCentroid\" ]\n        ]\n\nFor details see the\n[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).\n\n",
+        "comment": " Extend a data object with new values according to the given\n[Vega expression](https://vega.github.io/vega/docs/expressions/). The second\nparameter is a new field name to give the result of the evaluated expression.\nThis version will reapply the formula if the data changes. To perform a one-off\nformula calculation use [trFormulaInitOnly](#trFormulaInitOnly).\n\n    dataSource\n        [ data \"world\"\n            [ daUrl (str \"https://vega.github.io/vega/data/world-110m.json\")\n            , daFormat [ topojsonFeature \"countries\" ]\n            ]\n            |> transform\n                [ trFormula \"geoCentroid('myProj', datum)\" \"myCentroid\" ]\n        ]\n\nFor details see the\n[Vega formula transform documentation](https://vega.github.io/vega/docs/transforms/formula).\n\n",
         "type": "String -> String -> Vega.Transform"
       },
       {
@@ -9699,7 +9699,7 @@
       },
       {
         "name": "transform",
-        "comment": " Applies the given ordered list of transforms to the given data stream. Transform\nexamples include filtering, creating new data fields from expressions and creating\nnew data fields suitable for a range of visualization and layout types. For details\nsee the [Vega transform documentation](https://vega.github.io/vega/docs/transforms).\n\n    dataSource\n        [ data \"pop\" [ daUrl \"data/population.json\" ]\n        , data \"popYear\" [ daSource \"pop\" ]\n            |> transform [ trFilter (expr \"datum.year == year\") ]\n        , data \"ageGroups\" [ daSource \"pop\" ]\n            |> transform [ trAggregate [ agGroupBy [ field \"age\" ] ] ]\n        ]\n\n",
+        "comment": " Applies the given ordered list of transforms to the given data stream. Transform\nexamples include filtering, creating new data fields from expressions and creating\nnew data fields suitable for a range of visualization and layout types. For details\nsee the [Vega transform documentation](https://vega.github.io/vega/docs/transforms).\n\n    dataSource\n        [ data \"pop\" [ daUrl (str \"data/population.json\") ]\n        , data \"popYear\" [ daSource \"pop\" ]\n            |> transform [ trFilter (expr \"datum.year == year\") ]\n        , data \"ageGroups\" [ daSource \"pop\" ]\n            |> transform [ trAggregate [ agGroupBy [ field \"age\" ] ] ]\n        ]\n\n",
         "type": "List Vega.Transform -> Vega.DataTable -> Vega.DataTable"
       },
       {
