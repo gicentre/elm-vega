@@ -20988,7 +20988,7 @@ var _user$project$TransformTests$voronoiTest1 = function () {
 	return _user$project$Vega$toVega(
 		{
 			ctor: '::',
-			_0: _user$project$Vega$width(220),
+			_0: _user$project$Vega$width(420),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Vega$height(670),
@@ -21043,7 +21043,16 @@ var _user$project$TransformTests$voronoiTest2 = function () {
 												_0: _user$project$Vega$vStr('#eee'),
 												_1: {ctor: '[]'}
 											}),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$maStrokeWidth(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$vNum(0.2),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}),
 								_1: {
 									ctor: '::',
@@ -21128,37 +21137,35 @@ var _user$project$TransformTests$voronoiTest2 = function () {
 										_0: _user$project$Vega$enEnter(
 											{
 												ctor: '::',
-												_0: _user$project$Vega$maFill(
+												_0: _user$project$Vega$maStrokeWidth(
 													{
 														ctor: '::',
-														_0: A3(
-															_user$project$Vega$ifElse,
-															'datum.region == 0',
-															{
-																ctor: '::',
-																_0: _user$project$Vega$transparent,
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: _user$project$Vega$vScale('cScale'),
-																_1: {
-																	ctor: '::',
-																	_0: _user$project$Vega$vField(
-																		_user$project$Vega$field('region')),
-																	_1: {ctor: '[]'}
-																}
-															}),
+														_0: _user$project$Vega$vNum(0.2),
 														_1: {ctor: '[]'}
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$Vega$maStroke(
+													_0: _user$project$Vega$maPath(
+														{
+															ctor: '::',
+															_0: _user$project$Vega$vField(
+																_user$project$Vega$field('voronoi')),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Vega$enUpdate(
+												{
+													ctor: '::',
+													_0: _user$project$Vega$maFill(
 														{
 															ctor: '::',
 															_0: A3(
 																_user$project$Vega$ifElse,
-																'datum.region == 0',
+																'!showVoronoi || datum.region == 0',
 																{
 																	ctor: '::',
 																	_0: _user$project$Vega$transparent,
@@ -21166,34 +21173,41 @@ var _user$project$TransformTests$voronoiTest2 = function () {
 																},
 																{
 																	ctor: '::',
-																	_0: _user$project$Vega$vStr('white'),
-																	_1: {ctor: '[]'}
+																	_0: _user$project$Vega$vScale('cScale'),
+																	_1: {
+																		ctor: '::',
+																		_0: _user$project$Vega$vField(
+																			_user$project$Vega$field('region')),
+																		_1: {ctor: '[]'}
+																	}
 																}),
 															_1: {ctor: '[]'}
 														}),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Vega$maStrokeWidth(
+														_0: _user$project$Vega$maStroke(
 															{
 																ctor: '::',
-																_0: _user$project$Vega$vNum(0.2),
+																_0: A3(
+																	_user$project$Vega$ifElse,
+																	'!showVoronoi || datum.region == 0',
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$transparent,
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _user$project$Vega$vStr('white'),
+																		_1: {ctor: '[]'}
+																	}),
 																_1: {ctor: '[]'}
 															}),
-														_1: {
-															ctor: '::',
-															_0: _user$project$Vega$maPath(
-																{
-																	ctor: '::',
-																	_0: _user$project$Vega$vField(
-																		_user$project$Vega$field('voronoi')),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
+														_1: {ctor: '[]'}
 													}
-												}
-											}),
-										_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}),
 								_1: {ctor: '[]'}
 							}
@@ -21313,58 +21327,73 @@ var _user$project$TransformTests$voronoiTest2 = function () {
 					'showRegions',
 					{
 						ctor: '::',
-						_0: _user$project$Vega$siBind(
-							_user$project$Vega$iCheckbox(
-								{ctor: '[]'})),
-						_1: {ctor: '[]'}
+						_0: _user$project$Vega$siValue(_user$project$Vega$vTrue),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Vega$siBind(
+								_user$project$Vega$iCheckbox(
+									{ctor: '[]'})),
+							_1: {ctor: '[]'}
+						}
 					},
 					A3(
 						_user$project$Vega$signal,
-						'colors',
+						'showVoronoi',
 						{
 							ctor: '::',
-							_0: _user$project$Vega$siValue(
-								_user$project$Vega$vStrs(
-									{
-										ctor: '::',
-										_0: 'white',
-										_1: {
+							_0: _user$project$Vega$siBind(
+								_user$project$Vega$iCheckbox(
+									{ctor: '[]'})),
+							_1: {ctor: '[]'}
+						},
+						A3(
+							_user$project$Vega$signal,
+							'colors',
+							{
+								ctor: '::',
+								_0: _user$project$Vega$siValue(
+									_user$project$Vega$vStrs(
+										{
 											ctor: '::',
-											_0: 'rgb(225,174,218)',
+											_0: 'white',
 											_1: {
 												ctor: '::',
-												_0: 'rgb(136,136,136)',
+												_0: 'rgb(225,174,218)',
 												_1: {
 													ctor: '::',
-													_0: 'rgb(161,200,136)',
+													_0: 'rgb(136,136,136)',
 													_1: {
 														ctor: '::',
-														_0: 'rgb(181,156,149)',
+														_0: 'rgb(161,200,136)',
 														_1: {
 															ctor: '::',
-															_0: 'rgb(240,180,122)',
+															_0: 'rgb(181,156,149)',
 															_1: {
 																ctor: '::',
-																_0: 'rgb(185,165,215)',
+																_0: 'rgb(240,180,122)',
 																_1: {
 																	ctor: '::',
-																	_0: 'rgb(195,149,148)',
+																	_0: 'rgb(185,165,215)',
 																	_1: {
 																		ctor: '::',
-																		_0: 'rgb(215,131,130)',
+																		_0: 'rgb(195,149,148)',
 																		_1: {
 																			ctor: '::',
-																			_0: 'rgb(167,216,227)',
+																			_0: 'rgb(215,131,130)',
 																			_1: {
 																				ctor: '::',
-																				_0: 'rgb(215,217,135)',
+																				_0: 'rgb(167,216,227)',
 																				_1: {
 																					ctor: '::',
-																					_0: 'rgb(146,173,210)',
+																					_0: 'rgb(215,217,135)',
 																					_1: {
 																						ctor: '::',
-																						_0: 'rgb(180,160,120)',
-																						_1: {ctor: '[]'}
+																						_0: 'rgb(146,173,210)',
+																						_1: {
+																							ctor: '::',
+																							_0: 'rgb(180,160,120)',
+																							_1: {ctor: '[]'}
+																						}
 																					}
 																				}
 																			}
@@ -21376,11 +21405,10 @@ var _user$project$TransformTests$voronoiTest2 = function () {
 													}
 												}
 											}
-										}
-									})),
-							_1: {ctor: '[]'}
-						},
-						_p4))));
+										})),
+								_1: {ctor: '[]'}
+							},
+							_p4)))));
 	};
 	var ds = _user$project$Vega$dataSource(
 		{

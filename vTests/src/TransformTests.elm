@@ -455,7 +455,7 @@ voronoiTest1 =
                     ]
     in
     toVega
-        [ width 220, height 670, padding 5, ds, pr [], mk [] ]
+        [ width 420, height 670, padding 5, ds, pr [], mk [] ]
 
 
 voronoiTest2 : Spec
@@ -503,7 +503,8 @@ voronoiTest2 =
                             ]
                         )
                     ]
-                << signal "showRegions" [ siBind (iCheckbox []) ]
+                << signal "showRegions" [ siValue vTrue, siBind (iCheckbox []) ]
+                << signal "showVoronoi" [ siBind (iCheckbox []) ]
                 << signal "colors"
                     [ siValue
                         (vStrs
@@ -539,6 +540,7 @@ voronoiTest2 =
                     , mEncode
                         [ enEnter
                             [ maStroke [ vStr "#eee" ]
+                            , maStrokeWidth [ vNum 0.2 ]
                             ]
                         , enUpdate
                             [ maPath [ vField (field "path") ]
@@ -555,10 +557,20 @@ voronoiTest2 =
                     , mClip (clPath (strSignal "data('hull')[0]['path']"))
                     , mEncode
                         [ enEnter
-                            [ maFill [ ifElse "datum.region == 0" [ transparent ] [ vScale "cScale", vField (field "region") ] ]
-                            , maStroke [ ifElse "datum.region == 0" [ transparent ] [ vStr "white" ] ]
-                            , maStrokeWidth [ vNum 0.2 ]
+                            [ maStrokeWidth [ vNum 0.2 ]
                             , maPath [ vField (field "voronoi") ]
+                            ]
+                        , enUpdate
+                            [ maFill
+                                [ ifElse "!showVoronoi || datum.region == 0"
+                                    [ transparent ]
+                                    [ vScale "cScale", vField (field "region") ]
+                                ]
+                            , maStroke
+                                [ ifElse "!showVoronoi || datum.region == 0"
+                                    [ transparent ]
+                                    [ vStr "white" ]
+                                ]
                             ]
                         ]
                     ]
