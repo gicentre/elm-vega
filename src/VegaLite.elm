@@ -1291,47 +1291,50 @@ For details, see the
 
 Sometimes it is useful to make channel encoding conditional on something. For example,
 on the result of some interaction such as clicking or dragging or some data property
-such whether null or an outlier. `MSelectionCondition` (and `TSelectionCondition`) will
-encode a mark (or text) dependent on an interactive selection. `MDataCondition`
-(and `TDataCondition`) will encode it depending on some data property.
+such whether a datum is null or an outlier. `mSelectionCondition` (and
+`tSelectionCondition`) will encode a mark (or text) dependent on an interactive
+selection. `mDataCondition` (and `tDataCondition`) will encode it conditionally
+depending on some data properties.
 
 For interaction, once a selection has been defined and named, supplying a set of
-`MSelectionCondition` encodings allow mark encodings to become dependent on that selection.
-`MSelectionCondition` is followed firstly by a Boolean expression relating to the
-selection upon which it is dependent, then an 'if' and an 'else' clause. Each clause
-is a list of mark field encodings that should be applied when the selection is true
-(the 'if clause') and when it is false (the 'else clause'). The color encoding below
-is saying "whenever data marks are selected with an interval mouse drag, encode
-the cylinder field with an ordinal color scheme, else make them grey".
+encodings allow mark encodings to become dependent on that selection.
+`mSelectionCondition` is followed firstly a (Boolean) selection and then an
+encoding if that selection is true and another encoding to be applied if it is false.
+The color specification below states "whenever data marks are selected with an
+interval mouse drag, encode the cylinder field with an ordinal color scheme,
+otherwise make them grey":
 
-      sel =
-          selection << select "myBrush" Interval []
+    sel =
+        selection << select "myBrush" Interval []
 
-      enc =
-          encoding
-              << position X [ pName "Horsepower", pMType Quantitative ]
-              << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
-              << color
-                  [ mSelectionCondition (selectionName "myBrush")
-                      [ mName "Cylinders", mMType Ordinal ]
-                      [ mStr "grey" ]
-                  ]
+    enc =
+        encoding
+            << position X [ pName "Horsepower", pMType Quantitative ]
+            << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+            << color
+                [ mSelectionCondition (selectionName "myBrush")
+                    [ mName "Cylinders", mMType Ordinal ]
+                    [ mStr "grey" ]
+                ]
 
-In a similar way, `MDataCondition` will encocode a mark in one of two ways depending
-on whether a predicate test is satisfied.
+In a similar way, `mDataCondition` will encocode a mark depending on whether any
+predicate tests are satisfied. Unlike slections, multiple conditions and associated
+encodings can be specified. Each test condition is evaluated in order and only on
+failure of the test does encoding procede to the next test. If no tests are true,
+the encoding in the final parameter is applied in a similar way to 'case of'
+expressions:
 
-      enc =
-          encoding
-              << position X [ pName "IMDB_Rating", pMType Quantitative ]
-              << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
-                << color
-                    [ mDataCondition
-                        (or (expr "datum.IMDB_Rating === null")
-                            (expr "datum.Rotten_Tomatoes_Rating === null")
-                        )
-                        [ mStr "#ddd" ]
-                        [ mStr "#0099ee" ]
+    enc =
+        encoding
+            << position X [ pName "value", pMType Ordinal ]
+            << color
+                [ mDataCondition
+                    [ ( expr "datum.value < 40", [ mStr "blue" ] )
+                    , ( expr "datum.value < 50", [ mStr "red" ] )
+                    , ( expr "datum.value < 60", [ mStr "yellow" ] )
                     ]
+                    [ mStr "black" ]
+                ]
 
 For details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/condition.html).
@@ -2994,7 +2997,7 @@ type MarkChannel
     | MAggregate Operation
     | MLegend (List LegendProperty)
     | MSelectionCondition BooleanOp (List MarkChannel) (List MarkChannel)
-    | MDataCondition BooleanOp (List MarkChannel) (List MarkChannel)
+    | MDataCondition (List ( BooleanOp, List MarkChannel )) (List MarkChannel)
     | MPath String
     | MNumber Float
     | MString String
@@ -3635,7 +3638,7 @@ type TextChannel
     | TAggregate Operation
     | TTimeUnit TimeUnit
     | TSelectionCondition BooleanOp (List TextChannel) (List TextChannel)
-    | TDataCondition BooleanOp (List TextChannel) (List TextChannel)
+    | TDataCondition (List ( BooleanOp, List TextChannel )) (List TextChannel)
     | TFormat String
 
 
@@ -6394,7 +6397,10 @@ file matches the value of `person` in the primary data source.
 
     trans =
         transform
-            << lookup "person" (dataFromUrl "data/lookup_people.csv" []) "name" [ "age", "height" ]
+            << lookup "person"
+                (dataFromUrl "data/lookup_people.csv" [])
+                "name"
+                [ "age", "height" ]
 
 -}
 lookup : String -> ( VLProperty, Spec ) -> String -> List String -> List LabelledSpec -> List LabelledSpec
@@ -6880,25 +6886,23 @@ mBoo =
     MBoolean
 
 
-{-| Specify the properties of a mark channel conditional on some predicate
-expression. The first parameter provides the expression to evaluate, the second
-the encoding to apply if the expression is true, the third the encoding if the
-expression is false.
+{-| Specify the properties of a mark channel conditional on one or more predicate
+expressions. The first parameter is a list of tuples each pairing a test condition
+with the encoding if that condition evaluates to true. The second parameter is the
+encoding if none of the tests are true.
 
     color
-        [ mDataCondition
-            (expr "datum.IMDB_Rating === null")
-            [ mStr "#ddd" ]
-            [ mStr "rgb(76,120,168)" ]
+        [ mDataCondition [ ( expr "datum.myField === null", [ mStr "grey" ] ) ]
+            [ mStr "black" ]
         ]
 
 For details, see the
 [Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
 
 -}
-mDataCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
-mDataCondition op tMks fMks =
-    MDataCondition op tMks fMks
+mDataCondition : List ( BooleanOp, List MarkChannel ) -> List MarkChannel -> MarkChannel
+mDataCondition =
+    MDataCondition
 
 
 {-| Specify the properties of a legend that describes a mark's encoding. To stop
@@ -6967,12 +6971,13 @@ mScale =
 
 
 {-| Specify the properties of a mark channel conditional on interactive selection.
-The first parameter provides the selection to evaluate, the second the encoding
-to apply if the mark has been selected, the third the encoding if it is not selected.
+The first parameter is a selection condition to evaluate; the second the encoding
+to apply if that selection is true; the third parameter is the encoding if the
+selection is false.
 
     color
-        [ mSelectionCondition (selectionName "myBrush")
-            [ mName "Cylinders", mMType Ordinal ]
+        [ mSelectionCondition ( selectionName "myBrush")
+            [ mName "myField", mMType Ordinal ]
             [ mStr "grey" ]
         ]
 
@@ -6981,8 +6986,8 @@ For details, see the
 
 -}
 mSelectionCondition : BooleanOp -> List MarkChannel -> List MarkChannel -> MarkChannel
-mSelectionCondition op tMks fMks =
-    MSelectionCondition op tMks fMks
+mSelectionCondition =
+    MSelectionCondition
 
 
 {-| Provide a literal string value when encoding with a mark property channel.
@@ -7134,7 +7139,7 @@ opAs op field label =
 {-| Apply an 'or' Boolean operation as part of a logical composition.
 
     color
-        [ mSelectionCondition (or (selectionName "alex") (selectionName "morgan"))
+        [ mSelectionCondition ( or (selectionName "alex") (selectionName "morgan") )
             [ mAggregate Count, mName "*", mMType Quantitative ]
             [ mStr "gray" ]
         ]
@@ -8142,8 +8147,8 @@ selection sels =
 {-| Provide the name of a selection that is used as part of a conditional encoding.
 
     color
-        [ mSelectionCondition (selectionName "myBrush")
-            [ mName "Origin", mMType Nominal ]
+        [ mSelectionCondition ( selectionName "myBrush" )
+            [ mName "myField", mMType Nominal ]
             [ mStr "grey" ]
         ]
 
@@ -8492,15 +8497,15 @@ tBin =
     TBin
 
 
-{-| Specify the properties of a text channel conditional on some predicate
-expression. The first parameter provides the expression to evaluate, the second
-the encoding to apply if the expression is true, the third the encoding if the
-expression is false. For details, see the
+{-| Specify the properties of a text channel conditional on one or more predicate
+expressions. The first parameter is a list of tuples each pairing an expression to
+evaluate with the encoding if that expression is true. The second parameter is the
+encoding if none of the expressions are evaluated as true. For details, see the
 [Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
 -}
-tDataCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
-tDataCondition op tCh fCh =
-    TDataCondition op tCh fCh
+tDataCondition : List ( BooleanOp, List TextChannel ) -> List TextChannel -> TextChannel
+tDataCondition =
+    TDataCondition
 
 
 {-| Encode a text channel. The first parameter is a list of text channel properties
@@ -8958,14 +8963,14 @@ true =
 
 
 {-| Specify the properties of a text channel conditional on interactive selection.
-The first parameter provides the selection to evaluate, the second the encoding
-to apply if the text has been selected, the third the encoding if it is not selected.
-For details, see the
+The first parameter is a selection condition to evaluate; the second the encoding
+to apply if that selection is true; the third parameter is the encoding if the
+selection is false. For details, see the
 [Vega-Lite condition documentation](https://vega.github.io/vega-lite/docs/condition.htmll)
 -}
 tSelectionCondition : BooleanOp -> List TextChannel -> List TextChannel -> TextChannel
-tSelectionCondition op tCh fCh =
-    TSelectionCondition op tCh fCh
+tSelectionCondition =
+    TSelectionCondition
 
 
 {-| Specify the form of time unit aggregation of field values when encoding with
@@ -10636,11 +10641,23 @@ markChannelProperty field =
             [ bin bps ]
 
         MSelectionCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap markChannelProperty ifClause) )
+            ( "condition"
+            , JE.object
+                (( "selection", booleanOpSpec selName )
+                    :: List.concatMap markChannelProperty ifClause
+                )
+            )
                 :: List.concatMap markChannelProperty elseClause
 
-        MDataCondition predicate ifClause elseClause ->
-            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap markChannelProperty ifClause) )
+        MDataCondition tests elseClause ->
+            let
+                testClause ( predicate, ifClause ) =
+                    JE.object
+                        (( "test", booleanOpSpec predicate )
+                            :: List.concatMap markChannelProperty ifClause
+                        )
+            in
+            ( "condition", JE.list (List.map testClause tests) )
                 :: List.concatMap markChannelProperty elseClause
 
         MTimeUnit tu ->
@@ -11776,11 +11793,23 @@ textChannelProperty tDef =
             [ ( "format", JE.string fmt ) ]
 
         TSelectionCondition selName ifClause elseClause ->
-            ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap textChannelProperty ifClause) )
+            ( "condition"
+            , JE.object
+                (( "selection", booleanOpSpec selName )
+                    :: List.concatMap textChannelProperty ifClause
+                )
+            )
                 :: List.concatMap textChannelProperty elseClause
 
-        TDataCondition predicate ifClause elseClause ->
-            ( "condition", JE.object (( "test", booleanOpSpec predicate ) :: List.concatMap textChannelProperty ifClause) )
+        TDataCondition tests elseClause ->
+            let
+                testClause ( predicate, ifClause ) =
+                    JE.object
+                        (( "test", booleanOpSpec predicate )
+                            :: List.concatMap textChannelProperty ifClause
+                        )
+            in
+            ( "condition", JE.list (List.map testClause tests) )
                 :: List.concatMap textChannelProperty elseClause
 
 
