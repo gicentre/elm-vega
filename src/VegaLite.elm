@@ -66,7 +66,7 @@ module VegaLite
         , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScSequential, ScSqrt, ScTime, ScUtc)
         , ScaleConfig
         , ScaleDomain(Unaggregated)
-        , ScaleNice(NDay, NHour, NMillisecond, NMinute, NMonth, NSecond, NWeek, NYear)
+        , ScaleNice(NDay, NFalse, NHour, NMillisecond, NMinute, NMonth, NSecond, NTrue, NWeek, NYear)
         , ScaleProperty
         , ScaleRange
         , Selection(Interval, Multi, Single)
@@ -541,7 +541,6 @@ module VegaLite
         , scClamp
         , scDomain
         , scInterpolate
-        , scIsNice
         , scNice
         , scNiceInterval
         , scNiceTickCount
@@ -1143,7 +1142,6 @@ Used to specify how the encoding of a data field should be applied.
 @docs doSelection
 
 @docs ScaleNice
-@docs scIsNice
 @docs scNiceTickCount
 @docs scNiceInterval
 
@@ -3442,9 +3440,8 @@ type ScaleDomain
 
 
 {-| Describes the way a scale can be rounded to 'nice' numbers. To specify nice
-time intervals use [scNiceInterval](#scNiceInterval); to switch nice scaling on
-or off use [scIsNice](#scIsNice); and to set a nice tick count use
-[scNiceTickCount](#scNiceTickCount). For details see the
+time intervals use [scNiceInterval](#scNiceInterval) and to set a nice tick count
+use [scNiceTickCount](#scNiceTickCount). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
 -}
 type ScaleNice
@@ -3456,8 +3453,9 @@ type ScaleNice
     | NWeek
     | NMonth
     | NYear
+    | NTrue
+    | NFalse
     | NInterval TimeUnit Int
-    | IsNice Bool
     | NTickCount Int
 
 
@@ -4767,6 +4765,9 @@ The columns themselves are most easily generated with `dataColumn`
             << dataColumn "Age" (nums [ 28, 12, 6 ])
             << dataColumn "Year" (strs [ "2010", "2014", "2015" ])
 
+For more complex inline data tables, such as mixures of arrays and objects, consider
+using [dataFromJson](#dataFromJson).
+
 -}
 dataFromColumns : List Format -> List DataColumn -> Data
 dataFromColumns fmts cols =
@@ -4792,7 +4793,7 @@ dataFromColumns fmts cols =
 for specifying json inline is when creating [geojson](http://geojson.org) objects,
 when [`geometry`](#geometry), [`geometryCollection`](#geometryCollection) and
 [`geoFeatureCollection`](#geoFeatureCollection) functions may be used. For more
-general cases of json creation, consider
+general cases of json creation such as data tables that mix arrays and objects, consider
 [`Json.Encode`](http://package.elm-lang.org/packages/elm-lang/core/5.1.1/Json-Encode).
 
     let
@@ -4838,6 +4839,9 @@ is more efficient and less error-prone.
             << dataRow [ ( "Animal", str "Fish" ), ( "Age", num 28 ), ( "Year", str "2010" ) ]
             << dataRow [ ( "Animal", str "Dog" ), ( "Age", num 12 ), ( "Year", str "2014" ) ]
             << dataRow [ ( "Animal", str "Cat" ), ( "Age", num 6 ), ( "Year", str "2015" ) ]
+
+For more complex inline data tables, such as mixures of arrays and objects, consider
+using [dataFromJson](#dataFromJson).
 
 -}
 dataFromRows : List Format -> List DataRow -> Data
@@ -7949,14 +7953,6 @@ scDomain =
 scInterpolate : CInterpolate -> ScaleProperty
 scInterpolate =
     SInterpolate
-
-
-{-| Specify whether or not a scaling should use 'nice' values. For details see
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
--}
-scIsNice : Bool -> ScaleNice
-scIsNice =
-    IsNice
 
 
 {-| Specify 'nice' minimum and maximum values in a scaling (e.g. multiples of 10).
@@ -11519,8 +11515,11 @@ scaleNiceSpec ni =
         NInterval tu step ->
             JE.object [ ( "interval", JE.string (timeUnitLabel tu) ), ( "step", JE.int step ) ]
 
-        IsNice b ->
-            JE.bool b
+        NTrue ->
+            JE.bool True
+
+        NFalse ->
+            JE.bool False
 
         NTickCount n ->
             JE.int n
