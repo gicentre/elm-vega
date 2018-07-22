@@ -9522,6 +9522,16 @@ var _gicentre$elm_vega$VegaLite$markChannelProperty = function (field) {
 				},
 				_1: {ctor: '[]'}
 			};
+		case 'MTitle':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'title',
+					_1: _elm_lang$core$Json_Encode$string(_p95._0)
+				},
+				_1: {ctor: '[]'}
+			};
 		case 'MAggregate':
 			return {
 				ctor: '::',
@@ -9778,6 +9788,12 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 				_1: _elm_lang$core$Json_Encode$string(
 					_gicentre$elm_vega$VegaLite$timeUnitLabel(_p104._0))
 			};
+		case 'PTitle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'title',
+				_1: _elm_lang$core$Json_Encode$string(_p104._0)
+			};
 		case 'PSort':
 			var _p106 = _p104._0;
 			var _p105 = _p106;
@@ -9930,6 +9946,16 @@ var _gicentre$elm_vega$VegaLite$textChannelProperty = function (tDef) {
 					_0: 'timeUnit',
 					_1: _elm_lang$core$Json_Encode$string(
 						_gicentre$elm_vega$VegaLite$timeUnitLabel(_p109._0))
+				},
+				_1: {ctor: '[]'}
+			};
+		case 'TTitle':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'title',
+					_1: _elm_lang$core$Json_Encode$string(_p109._0)
 				},
 				_1: {ctor: '[]'}
 			};
@@ -13021,6 +13047,10 @@ var _gicentre$elm_vega$VegaLite$MAggregate = function (a) {
 	return {ctor: 'MAggregate', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$mAggregate = _gicentre$elm_vega$VegaLite$MAggregate;
+var _gicentre$elm_vega$VegaLite$MTitle = function (a) {
+	return {ctor: 'MTitle', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$mTitle = _gicentre$elm_vega$VegaLite$MTitle;
 var _gicentre$elm_vega$VegaLite$MTimeUnit = function (a) {
 	return {ctor: 'MTimeUnit', _0: a};
 };
@@ -13458,6 +13488,10 @@ var _gicentre$elm_vega$VegaLite$PAggregate = function (a) {
 	return {ctor: 'PAggregate', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$pAggregate = _gicentre$elm_vega$VegaLite$PAggregate;
+var _gicentre$elm_vega$VegaLite$PTitle = function (a) {
+	return {ctor: 'PTitle', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$pTitle = _gicentre$elm_vega$VegaLite$PTitle;
 var _gicentre$elm_vega$VegaLite$PTimeUnit = function (a) {
 	return {ctor: 'PTimeUnit', _0: a};
 };
@@ -13966,6 +14000,10 @@ var _gicentre$elm_vega$VegaLite$TSelectionCondition = F3(
 		return {ctor: 'TSelectionCondition', _0: a, _1: b, _2: c};
 	});
 var _gicentre$elm_vega$VegaLite$tSelectionCondition = _gicentre$elm_vega$VegaLite$TSelectionCondition;
+var _gicentre$elm_vega$VegaLite$TTitle = function (a) {
+	return {ctor: 'TTitle', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$tTitle = _gicentre$elm_vega$VegaLite$TTitle;
 var _gicentre$elm_vega$VegaLite$TTimeUnit = function (a) {
 	return {ctor: 'TTimeUnit', _0: a};
 };
@@ -15049,11 +15087,15 @@ var _gicentre$elm_vega$GalleryMulti$multi5 = function () {
 									_0: _gicentre$elm_vega$VegaLite$mName('weather'),
 									_1: {
 										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+										_0: _gicentre$elm_vega$VegaLite$mTitle('Weather'),
 										_1: {
 											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$mScale(weatherColors),
-											_1: {ctor: '[]'}
+											_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$mScale(weatherColors),
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								},

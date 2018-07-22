@@ -255,6 +255,7 @@ multi5 =
                 << color
                     [ mSelectionCondition (selectionName "myBrush")
                         [ mName "weather"
+                        , mTitle "Weather"
                         , mMType Nominal
                         , mScale weatherColors
                         ]

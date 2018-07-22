@@ -199,11 +199,11 @@ advanced6 =
 
         enc =
             encoding
-                << position X [ pName "label", pMType Ordinal, pSort [], pAxis [ axTitle "Months" ] ]
+                << position X [ pName "label", pMType Ordinal, pSort [], pTitle "Months" ]
 
         enc1 =
             encoding
-                << position Y [ pName "previous_sum", pMType Quantitative, pAxis [ axTitle "Amount" ] ]
+                << position Y [ pName "previous_sum", pMType Quantitative, pTitle "Amount" ]
                 << position Y2 [ pName "sum", pMType Quantitative ]
                 << color
                     [ mDataCondition
