@@ -246,6 +246,7 @@ module VegaLite
         , doSelection
         , doStrs
         , domainRangeMap
+        , dsv
         , dt
         , dtDate
         , dtDay
@@ -711,6 +712,7 @@ Functions and types for declaring the input data to the visualization.
 @docs topojsonFeature
 @docs topojsonMesh
 @docs parse
+@docs dsv
 
 @docs foDate
 @docs foUtc
@@ -2623,15 +2625,17 @@ type FontWeight
 {-| Specifies the type of format a data source uses. If the format is indicated by
 the file name extension (`.tsv`, `.csv`, `.json`) there is no need to indicate the
 format explicitly. However this can be useful if the filename extension does not
-indicate type (e.g. `.txt`). To customise the parsing of a file use one of the
-functions `parse`, `jsonProperty`, `topojsonFeature` or `topojsonMesh` in preference
-to their (depcrecated) type constructor equivalents. For details see the
+indicate type (e.g. `.txt`). To read a file with an delimiter other than comma or
+tab, use [dsv](#dsv) that allows a custom delimiter to be used. To customise the
+parsing of a file use one of the functions [parse](#parse), [jsonProperty](#jsonProperty),
+[topojsonFeature](#topojsonFeature) or [topojsonMesh](#topojsonMesh). For details see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/data.html#format).
 -}
 type Format
     = JSON String
     | CSV
     | TSV
+    | DSV Char
     | TopojsonFeature String
     | TopojsonMesh String
     | Parse (List ( String, DataType ))
@@ -5147,6 +5151,14 @@ doStrs =
     DStrings
 
 
+{-| Indicates a custom delimited file format (DSV). The parameter is the character
+that separates fields in a tabular file.
+-}
+dsv : Char -> Format
+dsv =
+    DSV
+
+
 {-| Specify a date-time data value. This is used when a function can accept values
 of different types.
 -}
@@ -6041,7 +6053,7 @@ iWeek f =
 {-| Indicates a JSON file format from which a given property is to be extracted
 when it has some surrounding structure or meta-data. For example, specifying
 the property `values.features` is equivalent to retrieving `json.values.features`
-from the loaded JSON object with a custom delimeter. For details, see the
+from the loaded JSON object with a custom delimiter. For details, see the
 [Vega-Lite JSON documentation](https://vega.github.io/vega-lite/docs/data.html#json).
 -}
 jsonProperty : String -> Format
@@ -7355,7 +7367,8 @@ pAggregate =
 
 {-| Indicates the parsing rules when processing some data text. The parameter is
 a list of tuples where each corresponds to a field name paired with its desired
-data type. Typically used when specifying a data url.
+data type. Typically used when specifying a data url. If an empty list is provided,
+type inference is based on the data.
 -}
 parse : List ( String, DataType ) -> Format
 parse =
@@ -10389,6 +10402,9 @@ formatProperty fmt =
         TSV ->
             [ ( "type", JE.string "tsv" ) ]
 
+        DSV delim ->
+            [ ( "type", JE.string "dsv" ), ( "delimiter", JE.string (String.fromChar delim) ) ]
+
         TopojsonFeature objectSet ->
             [ ( "type", JE.string "topojson" ), ( "feature", JE.string objectSet ) ]
 
@@ -10396,7 +10412,10 @@ formatProperty fmt =
             [ ( "type", JE.string "topojson" ), ( "mesh", JE.string objectSet ) ]
 
         Parse fmts ->
-            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, dataTypeSpec fmt )) fmts ) ]
+            if fmts == [] then
+                [ ( "parse", JE.null ) ]
+            else
+                [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, dataTypeSpec fmt )) fmts ) ]
 
 
 geometryTypeSpec : Geometry -> Spec

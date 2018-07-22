@@ -65,6 +65,11 @@ data5 =
 
 data6 : Spec
 data6 =
+    showData (dataFromUrl "data/dataTest.csv" [ dsv ',' ])
+
+
+data7 : Spec
+data7 =
     showData (dataFromUrl "data/dataTest.json" [])
 
 
@@ -106,18 +111,18 @@ dataSource name =
         ]
 
 
-data7 : Spec
-data7 =
-    dataSource "myData1"
-
-
 data8 : Spec
 data8 =
-    dataSource "myData2"
+    dataSource "myData1"
 
 
 data9 : Spec
 data9 =
+    dataSource "myData2"
+
+
+data10 : Spec
+data10 =
     dataSource "myData3"
 
 
@@ -215,6 +220,7 @@ mySpecs =
         , ( "data7", data7 )
         , ( "data8", data8 )
         , ( "data9", data9 )
+        , ( "data10", data10 )
         , ( "namedData1", namedData1 )
         , ( "namedData2", namedData2 )
         , ( "namedData3", namedData3 )
