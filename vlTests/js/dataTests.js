@@ -17354,6 +17354,45 @@ var _gicentre$elm_vega$VegaLite$dataFromUrl = F2(
 				})
 		};
 	});
+var _gicentre$elm_vega$VegaLite$dataName = F2(
+	function (name, data) {
+		var extract = function (d) {
+			var _p169 = A2(
+				_elm_lang$core$Json_Decode$decodeString,
+				_elm_lang$core$Json_Decode$keyValuePairs(_elm_lang$core$Json_Decode$value),
+				A2(_elm_lang$core$Json_Encode$encode, 0, d));
+			if ((((_p169.ctor === 'Ok') && (_p169._0.ctor === '::')) && (_p169._0._0.ctor === '_Tuple2')) && (_p169._0._1.ctor === '[]')) {
+				return {ctor: '_Tuple2', _0: _p169._0._0._0, _1: _p169._0._0._1};
+			} else {
+				return A2(
+					_elm_lang$core$Debug$log,
+					'Non-data spec provided to dataName',
+					{ctor: '_Tuple2', _0: '', _1: d});
+			}
+		};
+		var spec = function (_p170) {
+			var _p171 = _p170;
+			return extract(_p171._1);
+		}(data);
+		return {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLData,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'name',
+						_1: _elm_lang$core$Json_Encode$string(name)
+					},
+					_1: {
+						ctor: '::',
+						_0: spec,
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
 var _gicentre$elm_vega$VegaLite$VLBackground = {ctor: 'VLBackground'};
 var _gicentre$elm_vega$VegaLite$background = function (colour) {
 	return {
@@ -17684,7 +17723,7 @@ var _gicentre$elm_vega$DataTests$geodata1 = _gicentre$elm_vega$VegaLite$toVegaLi
 			}
 		}
 	});
-var _gicentre$elm_vega$DataTests$dataSource = function (name) {
+var _gicentre$elm_vega$DataTests$namedData3 = function () {
 	var enc = function (_p0) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
@@ -17712,6 +17751,279 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 						}
 					},
 					_p0)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataName,
+				'source',
+				A2(
+					_gicentre$elm_vega$VegaLite$dataFromColumns,
+					{ctor: '[]'},
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$bar(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$DataTests$sourceExample = _gicentre$elm_vega$DataTests$namedData3;
+var _gicentre$elm_vega$DataTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$DataTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$DataTests$namedData2 = function () {
+	var enc = function (_p1) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('cat'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('val'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p1)));
+	};
+	var data = A2(
+		_gicentre$elm_vega$VegaLite$dataName,
+		'myName',
+		A2(
+			_gicentre$elm_vega$VegaLite$dataFromUrl,
+			'data/dataTest.tsv',
+			{ctor: '[]'}));
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data,
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$bar(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$DataTests$namedData1 = function () {
+	var enc = function (_p2) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('a'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('b'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p2)));
+	};
+	var data = function (_p3) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'a',
+				_gicentre$elm_vega$VegaLite$strs(
+					{
+						ctor: '::',
+						_0: 'A',
+						_1: {
+							ctor: '::',
+							_0: 'B',
+							_1: {
+								ctor: '::',
+								_0: 'C',
+								_1: {
+									ctor: '::',
+									_0: 'D',
+									_1: {
+										ctor: '::',
+										_0: 'E',
+										_1: {
+											ctor: '::',
+											_0: 'F',
+											_1: {
+												ctor: '::',
+												_0: 'G',
+												_1: {
+													ctor: '::',
+													_0: 'H',
+													_1: {
+														ctor: '::',
+														_0: 'I',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'b',
+					_gicentre$elm_vega$VegaLite$nums(
+						{
+							ctor: '::',
+							_0: 28,
+							_1: {
+								ctor: '::',
+								_0: 55,
+								_1: {
+									ctor: '::',
+									_0: 43,
+									_1: {
+										ctor: '::',
+										_0: 91,
+										_1: {
+											ctor: '::',
+											_0: 81,
+											_1: {
+												ctor: '::',
+												_0: 53,
+												_1: {
+													ctor: '::',
+													_0: 19,
+													_1: {
+														ctor: '::',
+														_0: 87,
+														_1: {
+															ctor: '::',
+															_0: 52,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_p3)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: A2(
+				_gicentre$elm_vega$VegaLite$dataName,
+				'source',
+				data(
+					{ctor: '[]'})),
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$bar(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$DataTests$dataSource = function (name) {
+	var enc = function (_p4) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('cat'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('val'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p4)));
 	};
 	var json = _elm_lang$core$Json_Encode$list(
 		{
@@ -17778,289 +18090,7 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 				}
 			}
 		});
-	var dataRows = function (_p1) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromRows,
-			{ctor: '[]'},
-			A2(
-				_gicentre$elm_vega$VegaLite$dataRow,
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'cat',
-						_1: _gicentre$elm_vega$VegaLite$str('a')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'val',
-							_1: _gicentre$elm_vega$VegaLite$num(10)
-						},
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(
-					_gicentre$elm_vega$VegaLite$dataRow,
-					{
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'cat',
-							_1: _gicentre$elm_vega$VegaLite$str('b')
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'val',
-								_1: _gicentre$elm_vega$VegaLite$num(18)
-							},
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$dataRow,
-						{
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'cat',
-								_1: _gicentre$elm_vega$VegaLite$str('c')
-							},
-							_1: {
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: 'val',
-									_1: _gicentre$elm_vega$VegaLite$num(12)
-								},
-								_1: {ctor: '[]'}
-							}
-						},
-						_p1))));
-	};
-	var dataColumns = function (_p2) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromColumns,
-			{ctor: '[]'},
-			A3(
-				_gicentre$elm_vega$VegaLite$dataColumn,
-				'cat',
-				_gicentre$elm_vega$VegaLite$strs(
-					{
-						ctor: '::',
-						_0: 'a',
-						_1: {
-							ctor: '::',
-							_0: 'b',
-							_1: {
-								ctor: '::',
-								_0: 'c',
-								_1: {ctor: '[]'}
-							}
-						}
-					}),
-				A3(
-					_gicentre$elm_vega$VegaLite$dataColumn,
-					'val',
-					_gicentre$elm_vega$VegaLite$nums(
-						{
-							ctor: '::',
-							_0: 10,
-							_1: {
-								ctor: '::',
-								_0: 18,
-								_1: {
-									ctor: '::',
-									_0: 12,
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_p2)));
-	};
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$datasets(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'myData1',
-						_1: dataRows(
-							{ctor: '[]'})
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'myData2',
-							_1: dataColumns(
-								{ctor: '[]'})
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'myData3',
-								_1: A2(
-									_gicentre$elm_vega$VegaLite$dataFromJson,
-									json,
-									{ctor: '[]'})
-							},
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_gicentre$elm_vega$VegaLite$dataFromSource,
-					name,
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: enc(
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$bar(
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-};
-var _gicentre$elm_vega$DataTests$data7 = _gicentre$elm_vega$DataTests$dataSource('myData1');
-var _gicentre$elm_vega$DataTests$sourceExample = _gicentre$elm_vega$DataTests$data7;
-var _gicentre$elm_vega$DataTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$DataTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _gicentre$elm_vega$DataTests$data8 = _gicentre$elm_vega$DataTests$dataSource('myData2');
-var _gicentre$elm_vega$DataTests$data9 = _gicentre$elm_vega$DataTests$dataSource('myData3');
-var _gicentre$elm_vega$DataTests$showData = function (data) {
-	var enc = function (_p3) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('cat'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('val'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					_p3)));
-	};
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: data,
-			_1: {
-				ctor: '::',
-				_0: enc(
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$bar(
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _gicentre$elm_vega$DataTests$data1 = function () {
-	var data = function (_p4) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromColumns,
-			{ctor: '[]'},
-			A3(
-				_gicentre$elm_vega$VegaLite$dataColumn,
-				'cat',
-				_gicentre$elm_vega$VegaLite$strs(
-					{
-						ctor: '::',
-						_0: 'a',
-						_1: {
-							ctor: '::',
-							_0: 'b',
-							_1: {
-								ctor: '::',
-								_0: 'c',
-								_1: {ctor: '[]'}
-							}
-						}
-					}),
-				A3(
-					_gicentre$elm_vega$VegaLite$dataColumn,
-					'val',
-					_gicentre$elm_vega$VegaLite$nums(
-						{
-							ctor: '::',
-							_0: 10,
-							_1: {
-								ctor: '::',
-								_0: 18,
-								_1: {
-									ctor: '::',
-									_0: 12,
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_p4)));
-	};
-	return _gicentre$elm_vega$DataTests$showData(
-		data(
-			{ctor: '[]'}));
-}();
-var _gicentre$elm_vega$DataTests$data2 = function () {
-	var data = function (_p5) {
+	var dataRows = function (_p5) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromRows,
 			{ctor: '[]'},
@@ -18122,6 +18152,258 @@ var _gicentre$elm_vega$DataTests$data2 = function () {
 							}
 						},
 						_p5))));
+	};
+	var dataColumns = function (_p6) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'cat',
+				_gicentre$elm_vega$VegaLite$strs(
+					{
+						ctor: '::',
+						_0: 'a',
+						_1: {
+							ctor: '::',
+							_0: 'b',
+							_1: {
+								ctor: '::',
+								_0: 'c',
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'val',
+					_gicentre$elm_vega$VegaLite$nums(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 18,
+								_1: {
+									ctor: '::',
+									_0: 12,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_p6)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$datasets(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'myData1',
+						_1: dataRows(
+							{ctor: '[]'})
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'myData2',
+							_1: dataColumns(
+								{ctor: '[]'})
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'myData3',
+								_1: A2(
+									_gicentre$elm_vega$VegaLite$dataFromJson,
+									json,
+									{ctor: '[]'})
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gicentre$elm_vega$VegaLite$dataFromSource,
+					name,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$bar(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _gicentre$elm_vega$DataTests$data7 = _gicentre$elm_vega$DataTests$dataSource('myData1');
+var _gicentre$elm_vega$DataTests$data8 = _gicentre$elm_vega$DataTests$dataSource('myData2');
+var _gicentre$elm_vega$DataTests$data9 = _gicentre$elm_vega$DataTests$dataSource('myData3');
+var _gicentre$elm_vega$DataTests$showData = function (data) {
+	var enc = function (_p7) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('cat'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('val'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p7)));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data,
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$bar(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _gicentre$elm_vega$DataTests$data1 = function () {
+	var data = function (_p8) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'cat',
+				_gicentre$elm_vega$VegaLite$strs(
+					{
+						ctor: '::',
+						_0: 'a',
+						_1: {
+							ctor: '::',
+							_0: 'b',
+							_1: {
+								ctor: '::',
+								_0: 'c',
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'val',
+					_gicentre$elm_vega$VegaLite$nums(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 18,
+								_1: {
+									ctor: '::',
+									_0: 12,
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_p8)));
+	};
+	return _gicentre$elm_vega$DataTests$showData(
+		data(
+			{ctor: '[]'}));
+}();
+var _gicentre$elm_vega$DataTests$data2 = function () {
+	var data = function (_p9) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromRows,
+			{ctor: '[]'},
+			A2(
+				_gicentre$elm_vega$VegaLite$dataRow,
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'cat',
+						_1: _gicentre$elm_vega$VegaLite$str('a')
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'val',
+							_1: _gicentre$elm_vega$VegaLite$num(10)
+						},
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$dataRow,
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'cat',
+							_1: _gicentre$elm_vega$VegaLite$str('b')
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'val',
+								_1: _gicentre$elm_vega$VegaLite$num(18)
+							},
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$dataRow,
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'cat',
+								_1: _gicentre$elm_vega$VegaLite$str('c')
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'val',
+									_1: _gicentre$elm_vega$VegaLite$num(12)
+								},
+								_1: {ctor: '[]'}
+							}
+						},
+						_p9))));
 	};
 	return _gicentre$elm_vega$DataTests$showData(
 		data(
@@ -18244,11 +18526,23 @@ var _gicentre$elm_vega$DataTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSp
 										_0: {ctor: '_Tuple2', _0: 'data9', _1: _gicentre$elm_vega$DataTests$data9},
 										_1: {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'geodata1', _1: _gicentre$elm_vega$DataTests$geodata1},
+											_0: {ctor: '_Tuple2', _0: 'namedData1', _1: _gicentre$elm_vega$DataTests$namedData1},
 											_1: {
 												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'geodata2', _1: _gicentre$elm_vega$DataTests$geodata2},
-												_1: {ctor: '[]'}
+												_0: {ctor: '_Tuple2', _0: 'namedData2', _1: _gicentre$elm_vega$DataTests$namedData2},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'namedData3', _1: _gicentre$elm_vega$DataTests$namedData3},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'geodata1', _1: _gicentre$elm_vega$DataTests$geodata1},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'geodata2', _1: _gicentre$elm_vega$DataTests$geodata2},
+															_1: {ctor: '[]'}
+														}
+													}
+												}
 											}
 										}
 									}
@@ -18274,7 +18568,7 @@ var _gicentre$elm_vega$DataTests$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$DataTests$view,
 		update: F2(
-			function (_p6, model) {
+			function (_p10, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

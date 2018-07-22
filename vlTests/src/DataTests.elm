@@ -121,6 +121,47 @@ data9 =
     dataSource "myData3"
 
 
+namedData1 : Spec
+namedData1 =
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "a" (strs [ "A", "B", "C", "D", "E", "F", "G", "H", "I" ])
+                << dataColumn "b" (nums [ 28, 55, 43, 91, 81, 53, 19, 87, 52 ])
+
+        enc =
+            encoding
+                << position X [ pName "a", pMType Ordinal ]
+                << position Y [ pName "b", pMType Quantitative ]
+    in
+    toVegaLite [ data [] |> dataName "source", enc [], bar [] ]
+
+
+namedData2 : Spec
+namedData2 =
+    let
+        data =
+            dataFromUrl "data/dataTest.tsv" [] |> dataName "myName"
+
+        enc =
+            encoding
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
+    in
+    toVegaLite [ data, enc [], bar [] ]
+
+
+namedData3 : Spec
+namedData3 =
+    let
+        enc =
+            encoding
+                << position X [ pName "cat", pMType Nominal ]
+                << position Y [ pName "val", pMType Quantitative ]
+    in
+    toVegaLite [ dataFromColumns [] [] |> dataName "source", enc [], bar [] ]
+
+
 geodata1 : Spec
 geodata1 =
     toVegaLite
@@ -155,7 +196,7 @@ geodata2 =
 
 sourceExample : Spec
 sourceExample =
-    data7
+    namedData3
 
 
 
@@ -174,6 +215,9 @@ mySpecs =
         , ( "data7", data7 )
         , ( "data8", data8 )
         , ( "data9", data9 )
+        , ( "namedData1", namedData1 )
+        , ( "namedData2", namedData2 )
+        , ( "namedData3", namedData3 )
         , ( "geodata1", geodata1 )
         , ( "geodata2", geodata2 )
         ]

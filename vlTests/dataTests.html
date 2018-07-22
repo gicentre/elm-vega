@@ -4,7 +4,7 @@
   <title>Elm-Vega Data Tests</title>
   <meta charset="utf-8">
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
   <script src="js/dataTests.js"></script>
@@ -37,6 +37,11 @@
   <figure class="cell"><div id="data9"></div><figcaption>Data named inline json source</figcaption></figure>
   <div style="clear:left"></div>
 
+  <h2>Named datasets</h2>
+  <figure class="cell"><div id="namedData1"></div><figcaption>Named data inline source</figcaption></figure>
+  <figure class="cell"><div id="namedData2"></div><figcaption>Named data url source</figcaption></figure>
+  <figure class="cell"><div id="namedData3"></div><figcaption>Named data but with no data specified</figcaption></figure>
+  <div style="clear:left"></div>
 
   <h2>Loaded geo Files</h2>
 
@@ -52,15 +57,17 @@
 
 
   <script>
-    Elm.DataTests.embed(document.getElementById('elmContainer')).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: true,
-          logLevel: vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+  Elm.DataTests.embed(
+  document.getElementById("elmContainer")
+).ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: true,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
 
   </body>
 

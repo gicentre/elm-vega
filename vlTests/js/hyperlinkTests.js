@@ -17354,6 +17354,45 @@ var _gicentre$elm_vega$VegaLite$dataFromUrl = F2(
 				})
 		};
 	});
+var _gicentre$elm_vega$VegaLite$dataName = F2(
+	function (name, data) {
+		var extract = function (d) {
+			var _p169 = A2(
+				_elm_lang$core$Json_Decode$decodeString,
+				_elm_lang$core$Json_Decode$keyValuePairs(_elm_lang$core$Json_Decode$value),
+				A2(_elm_lang$core$Json_Encode$encode, 0, d));
+			if ((((_p169.ctor === 'Ok') && (_p169._0.ctor === '::')) && (_p169._0._0.ctor === '_Tuple2')) && (_p169._0._1.ctor === '[]')) {
+				return {ctor: '_Tuple2', _0: _p169._0._0._0, _1: _p169._0._0._1};
+			} else {
+				return A2(
+					_elm_lang$core$Debug$log,
+					'Non-data spec provided to dataName',
+					{ctor: '_Tuple2', _0: '', _1: d});
+			}
+		};
+		var spec = function (_p170) {
+			var _p171 = _p170;
+			return extract(_p171._1);
+		}(data);
+		return {
+			ctor: '_Tuple2',
+			_0: _gicentre$elm_vega$VegaLite$VLData,
+			_1: _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'name',
+						_1: _elm_lang$core$Json_Encode$string(name)
+					},
+					_1: {
+						ctor: '::',
+						_0: spec,
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
 var _gicentre$elm_vega$VegaLite$VLBackground = {ctor: 'VLBackground'};
 var _gicentre$elm_vega$VegaLite$background = function (colour) {
 	return {

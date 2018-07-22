@@ -236,6 +236,7 @@ module VegaLite
         , dataFromRows
         , dataFromSource
         , dataFromUrl
+        , dataName
         , dataRow
         , datasets
         , description
@@ -678,6 +679,7 @@ Functions and types for declaring the input data to the visualization.
 @docs dataFromRows
 @docs dataFromJson
 @docs dataFromSource
+@docs dataName
 @docs datasets
 @docs dataColumn
 @docs dataRow
@@ -4997,6 +4999,30 @@ datasets namedData =
             List.map (\( name, data ) -> ( name, (\( _, spec ) -> extract spec) data )) namedData
     in
     ( VLDatasets, JE.object specs )
+
+
+{-| Provide name for a data source. This can be useful when a specification needs
+to reference a data source, such as one generated via an API call.
+
+    data =
+        dataFromUrl "myData.json" [] |> dataName "myName"
+
+-}
+dataName : String -> Data -> Data
+dataName name data =
+    let
+        extract d =
+            case JD.decodeString (JD.keyValuePairs JD.value) (JE.encode 0 d) of
+                Ok [ ( dType, value ) ] ->
+                    ( dType, value )
+
+                _ ->
+                    ( "", d ) |> Debug.log "Non-data spec provided to dataName"
+
+        spec =
+            (\( _, dataSpec ) -> extract dataSpec) data
+    in
+    ( VLData, JE.object [ ( "name", JE.string name ), spec ] )
 
 
 {-| Discretizes a series of numeric values into bins when encoding with a level
