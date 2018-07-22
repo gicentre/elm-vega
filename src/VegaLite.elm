@@ -270,6 +270,10 @@ module VegaLite
         , fiCompose
         , fiEqual
         , fiExpr
+        , fiGreaterThan
+        , fiGreaterThanEq
+        , fiLessThan
+        , fiLessThanEq
         , fiOneOf
         , fiRange
         , fiSelection
@@ -773,6 +777,10 @@ data fields or geospatial coordinates before they are encoded visually.
 @docs filter
 
 @docs fiEqual
+@docs fiLessThan
+@docs fiLessThanEq
+@docs fiGreaterThan
+@docs fiGreaterThanEq
 @docs fiExpr
 @docs fiCompose
 @docs fiSelection
@@ -2560,13 +2568,19 @@ type FieldTitleProperty
     | Plain
 
 
-{-| Type of filtering operation. Generatede by [fiEqual](#fiEqual), [fiExpr](#fiExpr),
-[fiCompose](#fiCompose), [fiSelection](#fiSelection), [fiOneOf](#fiOneOf) and
-[fiRange](#fiRange). For more details, see the
+{-| Type of filtering operation. Generatede by [fiEqual](#fiEqual),
+[fiLessThan](#fiLessThan), [fiLessThanEq](#fiLessThanEq), [fiGreaterThan](#fiEqGreaterThan),
+[fiGreaterThanEq](#fiGreaterThanEq), [fiExpr](#fiExpr), [fiCompose](#fiCompose),
+[fiSelection](#fiSelection), [fiOneOf](#fiOneOf) and [fiRange](#fiRange).
+For more details, see the
 [Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
 -}
 type Filter
     = FEqual String DataValue
+    | FLessThan String DataValue
+    | FLessThanEq String DataValue
+    | FGreaterThan String DataValue
+    | FGreaterThanEq String DataValue
     | FExpr String
     | FCompose BooleanOp
     | FSelection String
@@ -5314,6 +5328,42 @@ fiExpr =
     FExpr
 
 
+{-| Filter a data stream so that only data in a given field greater than the given
+value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiGreaterThan : String -> DataValue -> Filter
+fiGreaterThan =
+    FGreaterThan
+
+
+{-| Filter a data stream so that only data in a given field greater than or equal
+to the given value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiGreaterThanEq : String -> DataValue -> Filter
+fiGreaterThanEq =
+    FGreaterThanEq
+
+
+{-| Filter a data stream so that only data in a given field less than the given
+value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiLessThan : String -> DataValue -> Filter
+fiLessThan =
+    FLessThan
+
+
+{-| Filter a data stream so that only data in a given field less than or equal to
+the given value are used. For details, see the
+[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/filter.html).
+-}
+fiLessThanEq : String -> DataValue -> Filter
+fiLessThanEq =
+    FLessThanEq
+
+
 {-| Encode a fill channel. This acts in a similar way to encoding by `color` but
 only affects the interior of closed shapes. The first parameter is a list of mark
 channel properties that characterise the way a data field is encoded by fill.
@@ -5357,6 +5407,18 @@ filter f =
 
         FEqual field val ->
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "equal", dataValueSpec val ) ] )
+
+        FLessThan field val ->
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "lt", dataValueSpec val ) ] )
+
+        FLessThanEq field val ->
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "lte", dataValueSpec val ) ] )
+
+        FGreaterThan field val ->
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "gt", dataValueSpec val ) ] )
+
+        FGreaterThanEq field val ->
+            (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "gte", dataValueSpec val ) ] )
 
         FSelection selName ->
             (::) ( "filter", JE.object [ ( "selection", JE.string selName ) ] )

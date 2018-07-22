@@ -11371,6 +11371,114 @@ var _gicentre$elm_vega$VegaLite$filter = function (f) {
 							}
 						})
 				});
+		case 'FLessThan':
+			return F2(
+				function (x, y) {
+					return {ctor: '::', _0: x, _1: y};
+				})(
+				{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'field',
+								_1: _elm_lang$core$Json_Encode$string(_p135._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'lt',
+									_1: _gicentre$elm_vega$VegaLite$dataValueSpec(_p135._1)
+								},
+								_1: {ctor: '[]'}
+							}
+						})
+				});
+		case 'FLessThanEq':
+			return F2(
+				function (x, y) {
+					return {ctor: '::', _0: x, _1: y};
+				})(
+				{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'field',
+								_1: _elm_lang$core$Json_Encode$string(_p135._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'lte',
+									_1: _gicentre$elm_vega$VegaLite$dataValueSpec(_p135._1)
+								},
+								_1: {ctor: '[]'}
+							}
+						})
+				});
+		case 'FGreaterThan':
+			return F2(
+				function (x, y) {
+					return {ctor: '::', _0: x, _1: y};
+				})(
+				{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'field',
+								_1: _elm_lang$core$Json_Encode$string(_p135._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'gt',
+									_1: _gicentre$elm_vega$VegaLite$dataValueSpec(_p135._1)
+								},
+								_1: {ctor: '[]'}
+							}
+						})
+				});
+		case 'FGreaterThanEq':
+			return F2(
+				function (x, y) {
+					return {ctor: '::', _0: x, _1: y};
+				})(
+				{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'field',
+								_1: _elm_lang$core$Json_Encode$string(_p135._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'gte',
+									_1: _gicentre$elm_vega$VegaLite$dataValueSpec(_p135._1)
+								},
+								_1: {ctor: '[]'}
+							}
+						})
+				});
 		case 'FSelection':
 			return F2(
 				function (x, y) {
@@ -12585,6 +12693,26 @@ var _gicentre$elm_vega$VegaLite$FExpr = function (a) {
 	return {ctor: 'FExpr', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$fiExpr = _gicentre$elm_vega$VegaLite$FExpr;
+var _gicentre$elm_vega$VegaLite$FGreaterThanEq = F2(
+	function (a, b) {
+		return {ctor: 'FGreaterThanEq', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$fiGreaterThanEq = _gicentre$elm_vega$VegaLite$FGreaterThanEq;
+var _gicentre$elm_vega$VegaLite$FGreaterThan = F2(
+	function (a, b) {
+		return {ctor: 'FGreaterThan', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$fiGreaterThan = _gicentre$elm_vega$VegaLite$FGreaterThan;
+var _gicentre$elm_vega$VegaLite$FLessThanEq = F2(
+	function (a, b) {
+		return {ctor: 'FLessThanEq', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$fiLessThanEq = _gicentre$elm_vega$VegaLite$FLessThanEq;
+var _gicentre$elm_vega$VegaLite$FLessThan = F2(
+	function (a, b) {
+		return {ctor: 'FLessThan', _0: a, _1: b};
+	});
+var _gicentre$elm_vega$VegaLite$fiLessThan = _gicentre$elm_vega$VegaLite$FLessThan;
 var _gicentre$elm_vega$VegaLite$FEqual = F2(
 	function (a, b) {
 		return {ctor: 'FEqual', _0: a, _1: b};
