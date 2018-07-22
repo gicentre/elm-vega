@@ -23,14 +23,37 @@ markCondition1 =
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
                     [ mDataCondition
-                        (or (expr "datum.IMDB_Rating === null")
-                            (expr "datum.Rotten_Tomatoes_Rating === null")
-                        )
-                        [ mStr "#ddd" ]
+                        [ ( or (expr "datum.IMDB_Rating === null")
+                                (expr "datum.Rotten_Tomatoes_Rating === null")
+                          , [ mStr "#ddd" ]
+                          )
+                        ]
                         [ mStr "#0099ee" ]
                     ]
     in
     toVegaLite [ config [], data, point [], enc [] ]
+
+
+markCondition2 : Spec
+markCondition2 =
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "value" (nums [ 10, 20, 30, 40, 50, 60 ])
+
+        enc =
+            encoding
+                << position X [ pName "value", pMType Ordinal ]
+                << color
+                    [ mDataCondition
+                        [ ( expr "datum.value < 40", [ mStr "blue" ] )
+                        , ( expr "datum.value < 50", [ mStr "red" ] )
+                        , ( expr "datum.value < 60", [ mStr "yellow" ] )
+                        ]
+                        [ mStr "black" ]
+                    ]
+    in
+    toVegaLite [ width 400, data [], circle [ maSize 800 ], enc [] ]
 
 
 selectionCondition1 : Spec
@@ -88,7 +111,8 @@ selectionCondition2 =
                 << position Y [ pName "Origin", pMType Ordinal ]
                 << position X [ pName "Cylinders", pMType Ordinal ]
                 << color
-                    [ mSelectionCondition (and (selectionName "alex") (selectionName "morgan"))
+                    [ mSelectionCondition
+                        (and (selectionName "alex") (selectionName "morgan"))
                         [ mAggregate Count, mName "*", mMType Quantitative ]
                         [ mStr "gray" ]
                     ]
@@ -139,6 +163,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "markCondition1", markCondition1 )
+        , ( "markCondition2", markCondition2 )
         , ( "selectionCondition1", selectionCondition1 )
         , ( "selectionCondition2", selectionCondition2 )
         , ( "selectionCondition3", selectionCondition3 )
@@ -147,7 +172,7 @@ mySpecs =
 
 sourceExample : Spec
 sourceExample =
-    selectionCondition3
+    markCondition2
 
 
 

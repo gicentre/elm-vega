@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vega-Lite Test Gallery: Bar Charts</title>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One" rel="stylesheet">
+  <link href="css/gallery.css" type="text/css" rel="stylesheet">
+
+  <!-- These scripts link to the Vega and Vega-Lite runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/galleryBar.js"></script>
+</head>
+
+<body>
+
+  <h1>Vega-LiteTest Gallery</h1>
+
+  <ul>
+    <li>bar charts</li>
+    <li><a href="scatter.html">scatter and strip plots</a></li>
+    <li><a href="line.html">line charts</a></li>
+    <li><a href="area.html">area charts and streamgraphs</a></li>
+    <li><a href="table.html">table-based charts</a></li>
+    <li><a href="dist.html">distribution charts</a></li>
+    <li><a href="advanced.html">advanced calculations</a></li>
+    <li><a href="error.html">error bars and bands</a></li>
+    <li><a href="label.html">labelling and annotation</a></li>
+    <li><a href="layer.html">other layered charts</a></li>
+    <li><a href="facet.html">faceted plots</a></li>
+    <li><a href="repeat.html">repeats and concatenation</a></li>
+    <li><a href="geo.html">geographic maps</a></li>
+    <li><a href="interaction.html">interactive charts</a></li>
+    <li><a href="multi.html">interactive multi-view displays</a></li>
+  </ul>
+
+  <h2>Bar Charts</h2>
+  <p>
+     A bar chart encodes quantitative values as the extent of rectangular bars.
+  </p>
+  <div id="bar1" class="view"></div>
+
+  <p>
+     A histogram aggregates a data field into groups and shows the number of items in each group.
+  </p>
+  <div id="bar2" class="view"></div>
+
+  <p>
+     A bar chart showing the US population distribution of age groups in 2000.
+  </p>
+  <div id="bar3" class="view"></div>
+
+  <p>
+     Grouped bar chart showing population structure by age and gender.
+  </p>
+  <div id="bar4" class="view"></div>
+
+  <p>
+     Seattle weather stacked bar chart.
+     A more compact alternative to small multiples (each weather type in its own chart), but making comparison of magnitudes of all but the bottom (yellow) value more difficult.
+  </p>
+  <div id="bar5" class="view"></div>
+
+  <p>
+     Barley crop yields as a horizontal stacked bar chart.
+     As with the previous example, compact but at the cost of accurage magnitude comparison.
+  </p>
+  <div id="bar6" class="view"></div>
+
+  <p>
+     Population structure as a normalised stacked bar chart.
+     Allows more accurate relative proportion judgements by hiding absolute magnitudes.
+  </p>
+  <div id="bar7" class="view"></div>
+
+  <p>
+     A simple bar chart with ranged data (aka Gantt Chart).
+     Unlike a conventional bar chart, bars are no longer aligned across a common baseline.
+     Allows the encoding of two values per bar rather than one, but at the cost of less accurate relative size judgement.
+  </p>
+  <div id="bar8" class="view"></div>
+
+  <p>
+     A bar chart encoding color names in the data.
+     This demonstrates how some chart attributes can be read from a dataset rather than provided in the chart specification.
+  </p>
+  <div id="bar9" class="view"></div>
+
+  <p>
+     Layered bar chart showing the US population distribution of age groups and gender in 2000.
+     Unlike a stacked bar chart, here mutliple bars in the same category all share the same baseline making magnitude comparison much more accurage.
+     This requires bars to be semi-transparent so the smaller value can be seen.
+  </p>
+  <div id="bar10" class="view"></div>
+
+  <p>
+     A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark.
+  </p>
+  <div id="bar11" class="view"></div>
+
+  <p>
+     A simple bar chart with embedded data labels.
+     The labels and bars are each drawn as separate layers that are then overlain.
+  </p>
+  <div id="bar12" class="view"></div>
+
+
+
+
+  <script>
+  Elm.GalleryBar.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: true,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vega-Lite Test Gallery: Repeats and concatenation</title>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One" rel="stylesheet">
+  <link href="css/gallery.css" type="text/css" rel="stylesheet">
+
+  <!-- These scripts link to the Vega and Vega-Lite runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/galleryRepeat.js"></script>
+</head>
+
+<body>
+
+  <h1>Vega-LiteTest Gallery</h1>
+
+  <ul>
+    <li><a href="bar.html">bar charts</a></li>
+    <li><a href="scatter.html">scatter and strip plots</a></li>
+    <li><a href="line.html">line charts</a></li>
+    <li><a href="area.html">area charts and streamgraphs</a></li>
+    <li><a href="table.html">table-based charts</a></li>
+    <li><a href="dist.html">distribution charts</a></li>
+    <li><a href="advanced.html">advanced calculations</a></li>
+    <li><a href="error.html">error bars and bands</a></li>
+    <li><a href="label.html">labelling and annotation</a></li>
+    <li><a href="layer.html">other layered charts</a></li>
+    <li><a href="facet.html">faceted plots</a></li>
+    <li>repeats and concatenation</li>
+    <li><a href="geo.html">geographic maps</a></li>
+    <li><a href="interaction.html">interactive charts</a></li>
+    <li><a href="multi.html">interactive multi-view displays</a></li>
+  </ul>
+
+  <h2>Repeats and concatenation</h2>
+  <p>
+     Monthly weather information for individual years and overall average for Seatle and New York.
+  </p>
+  <div id="repeat1" class="view"></div>
+
+  <p>
+     Two vertically concatenated charts that show a histogram of precipitation in Seattle and the relationship between min and max temperature.
+  </p>
+  <div id="repeat2" class="view"></div>
+
+  <p>
+     Horizontally repeated charts that show the histograms of different parameters of cars in different countries.
+  </p>
+  <div id="repeat3" class="view"></div>
+
+  <p>
+     Scatterplot matrix (sometimes abbreviated to 'SPLOM').
+     Drag/zoom in any scatterplot to update view of all scatterplots containing selected variables.
+     Shift-select to highlight selected points.
+  </p>
+  <div id="repeat4" class="view"></div>
+
+  <p>
+     Marginal histograms show the counts along the x and y dimension.
+  </p>
+  <div id="repeat5" class="view"></div>
+
+  <script>
+  Elm.GalleryRepeat.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: true,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
+
+</body>
+
+</html>

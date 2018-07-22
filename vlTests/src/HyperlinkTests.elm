@@ -65,8 +65,11 @@ hyperlink3 =
                 << position X [ pName "IMDB_Rating", pMType Quantitative ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << color
-                    [ mDataCondition (expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating")
-                        [ mStr "steelblue" ]
+                    [ mDataCondition
+                        [ ( expr "datum.IMDB_Rating*10 > datum.Rotten_Tomatoes_Rating"
+                          , [ mStr "steelblue" ]
+                          )
+                        ]
                         [ mStr "red" ]
                     ]
                 << hyperlink
