@@ -201,10 +201,11 @@ label4 =
                 << position Y [ pName "ThresholdValue", pMType Quantitative ]
 
         specText =
-            asSpec [ textMark [ maAlign AlignLeft, maDx 215, maDy -5 ], encText [] ]
+            asSpec [ textMark [ maAlign AlignRight, maDx -2, maDy -4 ], encText [] ]
 
         encText =
             encoding
+                << position X [ pWidth ]
                 << position Y [ pName "ThresholdValue", pMType Quantitative, pAxis [ axTitle "PM2.5 Value" ] ]
                 << text [ tName "Threshold", tMType Ordinal ]
 

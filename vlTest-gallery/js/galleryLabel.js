@@ -9859,7 +9859,7 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 			};
 		case 'PStack':
 			return _gicentre$elm_vega$VegaLite$stackProperty(_p104._0);
-		default:
+		case 'PRepeat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
@@ -9874,6 +9874,18 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 						},
 						_1: {ctor: '[]'}
 					})
+			};
+		case 'PWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string('width')
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string('height')
 			};
 	}
 };
@@ -13636,6 +13648,10 @@ var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$pRepeat = _gicentre$elm_vega$VegaLite$PRepeat;
+var _gicentre$elm_vega$VegaLite$PHeight = {ctor: 'PHeight'};
+var _gicentre$elm_vega$VegaLite$pHeight = _gicentre$elm_vega$VegaLite$PHeight;
+var _gicentre$elm_vega$VegaLite$PWidth = {ctor: 'PWidth'};
+var _gicentre$elm_vega$VegaLite$pWidth = _gicentre$elm_vega$VegaLite$PWidth;
 var _gicentre$elm_vega$VegaLite$PName = function (a) {
 	return {ctor: 'PName', _0: a};
 };
@@ -15951,37 +15967,45 @@ var _gicentre$elm_vega$GalleryLabel$label4 = function () {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$Y,
+				_gicentre$elm_vega$VegaLite$X,
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('ThresholdValue'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pAxis(
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$axTitle('PM2.5 Value'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
+					_0: _gicentre$elm_vega$VegaLite$pWidth,
+					_1: {ctor: '[]'}
 				},
-				A2(
-					_gicentre$elm_vega$VegaLite$text,
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
 					{
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$tName('Threshold'),
+						_0: _gicentre$elm_vega$VegaLite$pName('ThresholdValue'),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Ordinal),
-							_1: {ctor: '[]'}
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axTitle('PM2.5 Value'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					},
-					_p8)));
+					A2(
+						_gicentre$elm_vega$VegaLite$text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$tName('Threshold'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Ordinal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p8))));
 	};
 	var specText = _gicentre$elm_vega$VegaLite$asSpec(
 		{
@@ -15989,13 +16013,13 @@ var _gicentre$elm_vega$GalleryLabel$label4 = function () {
 			_0: _gicentre$elm_vega$VegaLite$textMark(
 				{
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$maAlign(_gicentre$elm_vega$VegaLite$AlignLeft),
+					_0: _gicentre$elm_vega$VegaLite$maAlign(_gicentre$elm_vega$VegaLite$AlignRight),
 					_1: {
 						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$maDx(215),
+						_0: _gicentre$elm_vega$VegaLite$maDx(-2),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$maDy(-5),
+							_0: _gicentre$elm_vega$VegaLite$maDy(-4),
 							_1: {ctor: '[]'}
 						}
 					}

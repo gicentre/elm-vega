@@ -12247,7 +12247,7 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 			};
 		case 'PStack':
 			return _gicentre$elm_vega$VegaLite$stackProperty(_p104._0);
-		default:
+		case 'PRepeat':
 			return {
 				ctor: '_Tuple2',
 				_0: 'field',
@@ -12262,6 +12262,18 @@ var _gicentre$elm_vega$VegaLite$positionChannelProperty = function (pDef) {
 						},
 						_1: {ctor: '[]'}
 					})
+			};
+		case 'PWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string('width')
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'value',
+				_1: _elm_lang$core$Json_Encode$string('height')
 			};
 	}
 };
@@ -16024,6 +16036,10 @@ var _gicentre$elm_vega$VegaLite$PRepeat = function (a) {
 	return {ctor: 'PRepeat', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$pRepeat = _gicentre$elm_vega$VegaLite$PRepeat;
+var _gicentre$elm_vega$VegaLite$PHeight = {ctor: 'PHeight'};
+var _gicentre$elm_vega$VegaLite$pHeight = _gicentre$elm_vega$VegaLite$PHeight;
+var _gicentre$elm_vega$VegaLite$PWidth = {ctor: 'PWidth'};
+var _gicentre$elm_vega$VegaLite$pWidth = _gicentre$elm_vega$VegaLite$PWidth;
 var _gicentre$elm_vega$VegaLite$PName = function (a) {
 	return {ctor: 'PName', _0: a};
 };
