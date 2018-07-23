@@ -1,6 +1,6 @@
 # elm-vega
 
-<img src="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg" alt="elm-vega" width="600" />
+<img srcset="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg, https://raw.githubusercontent.com/gicentre/elm-vega/master/images/bannerFull.jpg 2x" src="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg" alt="elm-vega" style="width:98vw;" />
 
 _Declarative visualization for Elm_
 
