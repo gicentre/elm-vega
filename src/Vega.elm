@@ -1406,6 +1406,15 @@ See the
 
 ## Hierarchy Transforms
 
+See the Vega
+[nest](https://vega.github.io/vega/docs/transforms/nest/),
+[stratify](https://vega.github.io/vega/docs/transforms/stratify/),
+[pack](https://vega.github.io/vega/docs/transforms/pack/),
+[partition](https://vega.github.io/vega/docs/transforms/partition/),
+[tree](https://vega.github.io/vega/docs/transforms/tree/),
+[tree links](https://vega.github.io/vega/docs/transforms/treelinks/) and
+[treemap](https://vega.github.io/vega/docs/transforms/treemap/) transform documentation.
+
 @docs trNest
 @docs trStratify
 
@@ -1456,13 +1465,11 @@ See the
 @docs tmAs
 
 
-## Cross-Filter Transforms
-
-
 # Signals, Triggers and Interaction Events
 
 Signals are the means by which dynamic data values may be passed around a
-visualization specification.
+visualization specification. See the
+[Vega signal documentation](https://vega.github.io/vega/docs/signals)
 
 
 ## Signals
@@ -1480,6 +1487,8 @@ visualization specification.
 
 
 ## User Interface Inputs
+
+See the [Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind).
 
 @docs iCheckbox
 @docs iText
@@ -1507,7 +1516,8 @@ visualization specification.
 
 ## Event Handling
 
-See the [stream documentation](http://vega.github.io/vega/docs/event-streams).
+See the Vega [event stream](https://vega.github.io/vega/docs/event-streams)
+and [event handler](https://vega.github.io/vega/docs/signals/#handlers) documentation.
 
 @docs evHandler
 @docs evUpdate
@@ -1538,6 +1548,8 @@ See the [stream documentation](http://vega.github.io/vega/docs/event-streams).
 
 ## Triggers
 
+See the [Vega trigger documentation](https://vega.github.io/vega/docs/triggers).
+
 @docs on
 @docs trigger
 @docs tgInsert
@@ -1550,7 +1562,8 @@ See the [stream documentation](http://vega.github.io/vega/docs/event-streams).
 # Specifying Scales
 
 Scales map between data values and their visual expression (channels) such as
-color or position.
+color or position. See the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales).
 
 @docs scales
 @docs scale
@@ -1572,9 +1585,6 @@ color or position.
 @docs scaleNiceSignal
 @docs nInterval
 @docs nTickCount
-@docs csScheme
-@docs csCount
-@docs csExtent
 
 
 ## Scale Types
@@ -1620,7 +1630,12 @@ The extent of scaled values after transformation.
 
 ## Color Scales
 
-See the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+See the Vega [Vega color scale](https://vega.github.io/vega/docs/scales/#properties)
+and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
+
+@docs csScheme
+@docs csCount
+@docs csExtent
 
 @docs scInterpolate
 @docs CInterpolate
@@ -1632,6 +1647,9 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#prop
 
 
 # Specifying Projections
+
+See the
+[Vega map projection documentation](https://vega.github.io/vega/docs/projections).
 
 @docs projections
 @docs projection
@@ -1736,6 +1754,9 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 
 # Specifying Legends
 
+See the
+[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+
 @docs legends
 @docs legend
 @docs leType
@@ -1810,10 +1831,15 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs enLabels
 @docs enSymbols
 @docs enGradient
+@docs enName
+@docs enInteractive
 
 
 # Specifying Titles
 
+See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
+
+@docs title
 @docs tiAnchor
 @docs tiAngle
 @docs Anchor
@@ -1839,6 +1865,8 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 
 # Specifying Layout
 
+See the [Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+
 @docs layout
 @docs GridAlign
 @docs gridAlignSignal
@@ -1862,6 +1890,9 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 
 
 # Specifying Marks
+
+See the
+[Vega mark documentation](https://vega.github.io/vega/docs/marks).
 
 ## Top-Level Marks
 
@@ -1902,6 +1933,8 @@ or _pre-faceted_ when the data source already contains a list of sub-values.
 
 
 ## Lower-level Mark Properties
+
+See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
 
 @docs maX
 @docs maX2
@@ -1966,13 +1999,13 @@ or _pre-faceted_ when the data source already contains a list of sub-values.
 
 ## Encoding
 
+See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+
 @docs enEnter
 @docs enUpdate
 @docs enHover
 @docs enExit
 @docs enCustom
-@docs enName
-@docs enInteractive
 @docs MarkInterpolation
 @docs markInterpolationValue
 @docs Orientation
@@ -2007,6 +2040,9 @@ or _pre-faceted_ when the data source already contains a list of sub-values.
 
 
 # Configuring Visualization Appearance
+
+See the
+[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
 
 @docs config
 
@@ -2058,7 +2094,9 @@ or _pre-faceted_ when the data source already contains a list of sub-values.
 
 # Supplementary Properties
 
-@docs title
+See the
+[Vega specification documentation](https://vega.github.io/vega/docs/specification/)
+
 @docs autosize
 @docs Autosize
 @docs autosizeSignal
@@ -3263,8 +3301,7 @@ type TreeProperty
     | TeAs String String String String
 
 
-{-| Generated by [trigger](#trigger). See the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
+{-| Generated by [trigger](#trigger).
 -}
 type alias Trigger =
     Spec
@@ -3373,15 +3410,15 @@ agAs =
     AgAs
 
 
-{-| Indicates if the full cross-product of all `groupby` values should be included
-in the aggregate output when performing an aggregation transformation.
+{-| Specify whether or not the full cross-product of all `groupby` values should
+be included in the output of an aggregation transformation.
 -}
 agCross : Boo -> AggregateProperty
 agCross =
     AgCross
 
 
-{-| Indicates if empty (zero count) groups should be dropped when performing an
+{-| Specify whether or not empty (zero count) groups should be dropped when in an
 aggregation transformation.
 -}
 agDrop : Boo -> AggregateProperty
@@ -3389,7 +3426,7 @@ agDrop =
     AgDrop
 
 
-{-| The data fields for which to compute aggregate functions when performing an
+{-| Specify the data fields to compute aggregate functions when performing an
 aggregation transformation. The list of fields should align with the operations
 and field names provided by `agOps` and `agAs`. If no fields and operations are
 specified, a count aggregation will be used by default.
@@ -3399,9 +3436,8 @@ agFields =
     AgFields
 
 
-{-| The data fields to group by when performing an aggregation transformation.
-If not specified, a single group containing all data objects will be used when
-aggregating.
+{-| Specify the data fields to group by when performing an aggregation transformation.
+If not specified, a single group containing all data objects will be used.
 -}
 agGroupBy : List Field -> AggregateProperty
 agGroupBy =
@@ -3446,16 +3482,16 @@ type Anchor
     | AnchorSignal String
 
 
-{-| Indicates an anchor position is to be determined by a named signal.
-The signal should generate one of "start", "middle" or "end".
+{-| Specify that an anchor position is to be determined by a named signal.
+The signal should generate one of `start`, `middle` or `end`.
 -}
 anchorSignal : String -> Anchor
 anchorSignal =
     AnchorSignal
 
 
-{-| Indicates the auto-sizing characteristics of the visualization such as amount
-of padding, whether it should fill the parent container etc.
+{-| Auto-sizing characteristics of the visualization such as amount of padding,
+whether it should fill the parent container etc.
 -}
 type Autosize
     = AContent
@@ -3469,8 +3505,7 @@ type Autosize
     | AutosizeSignal String
 
 
-{-| Declare the way the view is sized. See the
-[Vega autosize documentation](https://vega.github.io/vega/docs/specification/#autosize-types)
+{-| Specify how the view is sized.
 
     toVega
         [ width 500, padding 5, autosize [ AFit, AResize ], ds, mk [] ]
@@ -3481,7 +3516,7 @@ autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
 
-{-| Indicates an auto-sizing rule is to be determined by a named signal.
+{-| Specify that an auto-sizing rule is to be determined by a named signal.
 -}
 autosizeSignal : String -> Autosize
 autosizeSignal =
@@ -3497,8 +3532,8 @@ axBandPosition =
     AxBandPosition
 
 
-{-| Indicates if the domain (the axis baseline) should be included as part of
-an axis.
+{-| Specify whether or not the domain (the axis baseline) should be included as
+part of an axis.
 -}
 axDomain : Boo -> AxisProperty
 axDomain =
@@ -3556,7 +3591,7 @@ axFormat =
     AxFormat
 
 
-{-| Indicates if grid lines should be included as part of the axis.
+{-| Specify whether or not grid lines should be included as part of an axis.
 -}
 axGrid : Boo -> AxisProperty
 axGrid =
@@ -3625,8 +3660,7 @@ type AxisElement
     | EDomain
 
 
-{-| Identifies the type of axis to be configured with [cfAxis](#cfAxis). See the
-[Vega axis configuration documentation](https://vega.github.io/vega/docs/config/#axes).
+{-| Identifies the type of axis to be configured with [cfAxis](#cfAxis).
 -}
 type AxisType
     = AxAll
@@ -3984,15 +4018,14 @@ axZIndex =
 
 
 {-| The fill background color of a visualization. This should be specified as a
-[color string](https://vega.github.io/vega/docs/types/#Color). For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+[color string](https://vega.github.io/vega/docs/types/#Color).
 -}
 background : Str -> ( VProperty, Spec )
 background s =
     ( VBackground, strSpec s )
 
 
-{-| Indicates a bounds calculation type is to be determined by a named signal.
+{-| Specify that the bounds calculation type is to be determined by a named signal.
 -}
 bcSignal : String -> BoundsCalculation
 bcSignal =
@@ -4131,7 +4164,7 @@ type BoundsCalculation
     | BoundsCalculationSignal String
 
 
-{-| Indicates a type of text case transformation. Used when pre-processing text as
+{-| Type of text case transformation. Used when pre-processing text as
 part of a count pattern transformation.
 -}
 type Case
@@ -4140,24 +4173,21 @@ type Case
     | Mixedcase
 
 
-{-| Specify the default autosizing properties of view. For details, see the
-[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
+{-| Specify the default autosizing properties of view.
 -}
 cfAutosize : List Autosize -> ConfigProperty
 cfAutosize =
     CfAutosize
 
 
-{-| Specify the default properties of axes. For details, see the
-[Vega axis configuration documentation](https://vega.github.io/vega/docs/config/#axes).
+{-| Specify the default properties of axes.
 -}
 cfAxis : AxisType -> List AxisProperty -> ConfigProperty
 cfAxis =
     CfAxis
 
 
-{-| Specify the default background of the view. For details, see the
-[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
+{-| Specify the default background of the view.
 -}
 cfBackground : Str -> ConfigProperty
 cfBackground =
@@ -4165,8 +4195,7 @@ cfBackground =
 
 
 {-| Specify the default properties of the top-level group mark representing the
-data rectangle of a chart. For details, see the
-[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
+data rectangle of a chart.
 -}
 cfGroup : List MarkProperty -> ConfigProperty
 cfGroup =
@@ -4176,32 +4205,28 @@ cfGroup =
 {-| Specify the default filtering of events. This can specified in the first parameter
 as either a 'whitelist' (`Allow`) or 'blacklist' (`Prevent`) comprised the event types
 to be considered in the second parameter. If that list is empty, all event types
-will be placed in the black/white list. For details, see the
-[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
+will be placed in the black/white list.
 -}
 cfEvents : EventFilter -> List EventType -> ConfigProperty
 cfEvents =
     CfEvents
 
 
-{-| Specify the default properties of legends. For details, see the
-[Vega legend configuration documentation](https://vega.github.io/vega/docs/config/#legends).
+{-| Specify the default properties of legends.
 -}
 cfLegend : List LegendProperty -> ConfigProperty
 cfLegend =
     CfLegend
 
 
-{-| Specify the default properties of a given mark type. For details, see the
-[Vega mark configuration documentation](https://vega.github.io/vega/docs/config/#mark).
+{-| Specify the default properties of a given mark type.
 -}
 cfMark : Mark -> List MarkProperty -> ConfigProperty
 cfMark =
     CfMark
 
 
-{-| Specify the default properties of all marks. For details, see the
-[Vega mark configuration documentation](https://vega.github.io/vega/docs/config/#mark).
+{-| Specify the default properties of all marks.
 -}
 cfMarks : List MarkProperty -> ConfigProperty
 cfMarks =
@@ -4209,8 +4234,7 @@ cfMarks =
 
 
 {-| Specify the properties of a named style. The first property is the name to
-give the style, the second its mark properties. For details, see the
-[Vega style configuration documentation](https://vega.github.io/vega/docs/config/#style).
+give the style, the second its mark properties.
 -}
 cfStyle : String -> List MarkProperty -> ConfigProperty
 cfStyle =
@@ -4224,17 +4248,13 @@ etc.). The second is the new range of values to be associated with the named ran
     cf =
         config [ cfScaleRange RaHeatmap (raScheme (str "greenblue") []) ]
 
-For details, see the
-[Vega scale range configuration documentation](https://vega.github.io/vega/docs/config/#scale-range).
-
 -}
 cfScaleRange : ScaleRange -> ScaleRange -> ConfigProperty
 cfScaleRange =
     CfScaleRange
 
 
-{-| Specify the default properties of a title. For details, see the
-[Vega title configuration documentation](https://vega.github.io/vega/docs/config/#title).
+{-| Specify the default properties of a title.
 -}
 cfTitle : List TitleProperty -> ConfigProperty
 cfTitle =
@@ -4255,8 +4275,8 @@ cHSL =
     HSL
 
 
-{-| Indicates the type of color interpolation to apply, when mapping a data field
-onto a color scale. Additionally, parameterised interpolation types generated by
+{-| Type of color interpolation to apply when mapping a data field onto a color
+scale. Additionally, parameterised interpolation types generated by
 [cubeHelix](#cubeHelix), [cubeHelixLong](#cubeHelixLong), [hclLong](#hclLong),
 [hslLong](#hslLong) and [rgb](#rgb).
 -}
@@ -4394,8 +4414,6 @@ combineSpecs specs =
 
 {-| Create a collection of configuration settings. This allows default stylings
 to be defined for a collection of visualizations or visualization components.
-See the
-[Vega configuration documentation](https://vega.github.io/vega/docs/config/).
 
     cf =
         config
@@ -4477,8 +4495,7 @@ cRGB =
 
 {-| Specify the number of colors to use in a color scheme. This can be useful
 for scale types such as quantize, which use the length of the scale range to
-determine the number of discrete bins for the scale domain. See the
-[Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
+determine the number of discrete bins for the scale domain.
 -}
 csCount : Num -> ColorSchemeProperty
 csCount =
@@ -4489,16 +4506,13 @@ csCount =
 schemes. The parameter should evaluate to a two-element list representing the min
 and max values of the extent. For example [0.2, 1] will rescale the color scheme
 such that color values in the range [0, 0.2] are excluded from the scheme.
-See the
-[Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
 -}
 csExtent : Num -> ColorSchemeProperty
 csExtent =
     SExtent
 
 
-{-| Specify the name of a color scheme to use. See the
-[Vega color scheme documentation](https://vega.github.io/vega/docs/schemes/).
+{-| Specify the name of a color scheme to use.
 -}
 csScheme : Str -> ColorSchemeProperty
 csScheme =
@@ -5046,49 +5060,43 @@ dnSteps =
     DnSteps
 
 
-{-| A [data reference object](https://vega.github.io/vega/docs/scales/#dataref)
-that specifies field values in one or more data sets to define a scale domain.
-See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+{-| Specify a data reference object that specifies field values in one or more
+data sets to define a scale domain.
 -}
 doData : List DataReference -> ScaleDomain
 doData =
     DoData
 
 
-{-| A numeric list literal (`Nums`) representing a scale domain. For details see
-the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+{-| Specify a numeric list literal (`Nums`) representing a scale domain.
 -}
 doNums : Num -> ScaleDomain
 doNums =
     DoNums
 
 
-{-| A signal representing a scale domain. For details see
-the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+{-| Specify a signal representing a scale domain.
 -}
 doSignal : String -> ScaleDomain
 doSignal s =
     DoStrs (StrSignal s)
 
 
-{-| A list of signals representing a scale domain. For details see
-the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+{-| Specify a list of signals representing a scale domain.
 -}
 doSignals : List String -> ScaleDomain
 doSignals ss =
     DoStrs (StrSignals ss)
 
 
-{-| A string list literal (`Strs`) representing a scale domain. For details see
-the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#domain)
+{-| Specify a string list literal (`Strs`) representing a scale domain.
 -}
 doStrs : Str -> ScaleDomain
 doStrs =
     DoStrs
 
 
-{-| Indicates a DSV (delimited separated value) format with a custom delimiter.
+{-| Specify a DSV (delimited separated value) format with a custom delimiter.
 Typically used when specifying a data URL.
 -}
 dsv : Str -> FormatProperty
@@ -5096,19 +5104,16 @@ dsv =
     DSV
 
 
-{-| The properties with a named custom encoding set. To invoke the custom set a
-signal event handler with an `encode` directive should be defined. For further
-details see the
-[Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Specify the properties of a named custom encoding set. To invoke the custom set a
+signal event handler with an `encode` directive should be defined.
 -}
 enCustom : String -> List MarkProperty -> EncodingProperty
 enCustom name =
     Custom name
 
 
-{-| The properties to be encoded when a mark item is first instantiated or a
-visualization is resized. For further details see the
-[Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Specify the properties to be encoded when a mark item is first instantiated
+or a visualization is resized.
 -}
 enEnter : List MarkProperty -> EncodingProperty
 enEnter =
@@ -5124,17 +5129,14 @@ encode eps =
     ( VEncode, JE.object (List.map encodingProperty eps) )
 
 
-{-| The properties to be encoded when the data backing a mark item is removed.
-For further details see the
-[Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Specify the properties to be encoded when the data backing a mark item is removed.
 -}
 enExit : List MarkProperty -> EncodingProperty
 enExit =
     Exit
 
 
-{-| Custom encoding for gradient (continuous) legends. For more details see the
-[Vega legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom)
+{-| Custom encoding for gradient (continuous) legends.
 -}
 enGradient : List EncodingProperty -> LegendEncoding
 enGradient =
@@ -5142,33 +5144,27 @@ enGradient =
 
 
 {-| Specify whether or not a custom legend encoding set is to be interactive.
-For further details see the
-[Vega custom legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom).
 -}
 enInteractive : Boo -> EncodingProperty
 enInteractive =
     EnInteractive
 
 
-{-| The properties to be encoded when a pointer hovers over a mark item.
-For further details see the
-[Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Specify the properties to be encoded when a pointer hovers over a mark item.
 -}
 enHover : List MarkProperty -> EncodingProperty
 enHover =
     Hover
 
 
-{-| Custom encoding for legend labels. For more details see the
-[Vega legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom)
+{-| Specify a custom encoding for legend labels.
 -}
 enLabels : List EncodingProperty -> LegendEncoding
 enLabels =
     EnLabels
 
 
-{-| Custom encoding for a legend group mark. For more details see the
-[Vega legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom)
+{-| Specify a custom encoding for a legend group mark.
 -}
 enLegend : List EncodingProperty -> LegendEncoding
 enLegend =
@@ -5176,33 +5172,28 @@ enLegend =
 
 
 {-| Specify a name for a custom legend encoding set.
-For further details see the
-[Vega custom legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom).
 -}
 enName : String -> EncodingProperty
 enName =
     EnName
 
 
-{-| Custom encoding for symbol (discrete) legends. For more details see the
-[Vega legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom)
+{-| Custom encoding for symbol (discrete) legends.
 -}
 enSymbols : List EncodingProperty -> LegendEncoding
 enSymbols =
     EnSymbols
 
 
-{-| Custom ecoding for a legend title. For more details see the
-[Vega legend encoding documentation](https://vega.github.io/vega/docs/legends/#custom)
+{-| Custom ecoding for a legend title.
 -}
 enTitle : List EncodingProperty -> LegendEncoding
 enTitle =
     EnTitle
 
 
-{-| The properties to be encoded when a mark item is updated such as in response
-to a signal change. For further details see the
-[Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| Specify the properties to be encoded when a mark item is updated such as in
+response to a signal change.
 -}
 enUpdate : List MarkProperty -> EncodingProperty
 enUpdate =
@@ -5228,13 +5219,9 @@ between `MouseDown` and `MouseUp` events.
             ]
         ]
 
-The `esObject` specified above is equivalent to the more compact, but more error-prone
-event stream selector:
+This is equivalent to the more compact, but more error-prone event stream selector:
 
     esSelector (str "[rect:mousedown, view:mouseup] > view:mousemove")
-
-For more details see the
-[Vega event stream object documentation](http://vega.github.io/vega/docs/event-streams/#object).
 
 -}
 esBetween : List EventStreamProperty -> List EventStreamProperty -> EventStreamProperty
@@ -5243,8 +5230,7 @@ esBetween =
 
 
 {-| Specify whether or not an event stream is consumed once it has been captured.
-If false, the event is made available for subsequent event handling. For more
-details see the [Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
+If false, the event is made available for subsequent event handling.
 -}
 esConsume : Boo -> EventStreamProperty
 esConsume =
@@ -5253,8 +5239,7 @@ esConsume =
 
 {-| Specify the minimum time to wait between event occurrence and processing. If
 a new event arrives during a debouncing window, the debounce timer will restart
-and only the new event will be captured. For more details see the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
+and only the new event will be captured.
 -}
 esDebounce : Num -> EventStreamProperty
 esDebounce =
@@ -5263,8 +5248,6 @@ esDebounce =
 
 {-| Specify a DOM node as the source for an event selector. This should be referenced
 with a standard [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
-See the
-[Vega event stream selector documentation](http://vega.github.io/vega/docs/event-streams/#selector).
 -}
 esDom : String -> EventSource
 esDom =
@@ -5273,16 +5256,14 @@ esDom =
 
 {-| Specify the filter expressions that must evaluate to `True` in order for an
 event to be captured. If multiple filters are provided they must all be satisfied
-(`and` operator) for the event to be captured. For more details see the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
+(`and` operator) for the event to be captured.
 -}
 esFilter : List String -> EventStreamProperty
 esFilter =
     ESFilter
 
 
-{-| Specify a mark type as the source for an event stream. See the
-[Vega event stream selector documentation](http://vega.github.io/vega/docs/event-streams/#selector).
+{-| Specify a mark type as the source for an event stream.
 -}
 esMark : Mark -> EventStreamProperty
 esMark =
@@ -5290,26 +5271,23 @@ esMark =
 
 
 {-| Specify a named mark as the source for an event stream. The name given here
-must correspond to the name provided to a mark via `mName`. See the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
+must correspond to the name provided to a mark via `mName`.
 -}
 esMarkName : String -> EventStreamProperty
 esMarkName =
     ESMarkName
 
 
-{-| Specify a single event stream merging the given list of event streams. See the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object) for details.
+{-| Specify a single event stream merging the given list of event streams.
 -}
 esMerge : List EventStream -> EventStream
 esMerge =
     ESMerge
 
 
-{-| An event stream for modelling user input. This function expects a stream object
-definition which provides a more self-explanatory and robust form of specification
-than using a selector string. See the
-[Vega event stream documentation](<http://vega.github.io/vega/docs/event-streams/#object>.
+{-| Specify an event stream for modelling user input. This function expects a stream
+object definition which provides a more self-explanatory and robust form of
+specification than using a selector string.
 -}
 esObject : List EventStreamProperty -> EventStream
 esObject =
@@ -5319,8 +5297,7 @@ esObject =
 {-| Specify an event stream for modelling user input. This function expects a
 shorthand event stream selector string, which is a more compact way of specifying
 a stream than with `eventStream` but is more vulnerable to mistakes (as
-it is simply a string). For event stream selector details see the
-[Vega event stream selector documentation](http://vega.github.io/vega/docs/event-streams/#selector).
+it is simply a string).
 -}
 esSelector : Str -> EventStream
 esSelector =
@@ -5328,16 +5305,14 @@ esSelector =
 
 
 {-| Specify the name of a signal that triggers an event stream. This will allow
-an update to be triggered whenever the given signal changes. For more details, see the
-[Vega event stream signal documentation](https://vega.github.io/vega/docs/event-streams/#signal).
+an update to be triggered whenever the given signal changes.
 -}
 esSignal : String -> EventStream
 esSignal =
     ESSignal
 
 
-{-| Specify a source for an event selector. See the
-[Vega event stream selector documentation](http://vega.github.io/vega/docs/event-streams/#selector).
+{-| Specify a source for an event selector.
 -}
 esSource : EventSource -> EventStreamProperty
 esSource =
@@ -5373,16 +5348,6 @@ This can be useful if several event streams have a common element, for example:
                         [ evUpdate "slice(xDom)" ]
                     ]
                 ]
-            << signal "yCur"
-                [ siValue vNull
-                , siOn
-                    [ evHandler [ esObject [ esStream esStart, esType TouchEnd ] ]
-                        [ evUpdate "slice(yDom)" ]
-                    ]
-                ]
-
-For more details see the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
 
 -}
 esStream : EventStream -> EventStreamProperty
@@ -5392,25 +5357,22 @@ esStream =
 
 {-| Specify the minimum time in milliseconds between captured events (default 0).
 New events that arrive within the throttling window will be ignored. For timer events,
-this property determines the interval between timer ticks. For more details see the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#object).
+this property determines the interval between timer ticks.
 -}
 esThrottle : Num -> EventStreamProperty
 esThrottle =
     ESThrottle
 
 
-{-| Specify an event stream type used when handling user interaction events. See the
-[Vega event stream documentation](http://vega.github.io/vega/docs/event-streams/#types) for details.
+{-| Specify an event stream type used when handling user interaction events.
 -}
 esType : EventType -> EventStreamProperty
 esType =
     ESType
 
 
-{-| Name of a mark property encoding set to re-evaluate for the mark item that is
-the source of an input event. This is required if `evUpdate` is not specified. For
-details see the [Vega event handler documentation](https://vega.github.io/vega/docs/signals/#handlers).
+{-| Specify the name of a mark property encoding set to re-evaluate for the mark
+that is the source of an input event. This is required if `evUpdate` is not specified.
 -}
 evEncode : String -> EventHandler
 evEncode =
@@ -5418,8 +5380,7 @@ evEncode =
 
 
 {-| Used to configure default event handling. Can be used to prevent or allow a
-set of event types from being handled. See the
-[Vega event configuration documentation](https://vega.github.io/vega/docs/config/#event).
+set of event types from being handled.
 -}
 type EventFilter
     = Prevent
@@ -5427,8 +5388,7 @@ type EventFilter
 
 
 {-| A source for an event selector. To specify a DOM node as a source (using a
-CSS selector string), see [esDom](#esDom). See the
-[Vega event stream selector documentation](http://vega.github.io/vega/docs/event-streams/#selector).
+CSS selector string), use [esDom](#esDom).
 -}
 type EventSource
     = ESAll
@@ -5440,8 +5400,7 @@ type EventSource
 
 {-| Event types used when handling user interaction events. The `Timer` type will
 fire an event at a regular interval determined by the number of milliseconds provided
-to the `esThrottle` function. See the
-[Vega event stream type documentation](http://vega.github.io/vega/docs/event-streams/#types).
+to the `esThrottle` function.
 -}
 type EventType
     = Click
@@ -5465,19 +5424,17 @@ type EventType
     | Timer
 
 
-{-| Indicates whether or not updates that do not change a signal value should propagate.
+{-| Specify whether or not updates that do not change a signal value should propagate.
 For example, if true and an input stream update sets the signal to its current value,
-downstream signals will still be notified of an update. See the
-[Vega event handler documentation](https://vega.github.io/vega/docs/signals/#handlers).
+downstream signals will be notified of an update.
 -}
 evForce : Boo -> EventHandler
 evForce =
     EForce
 
 
-{-| Specify an event event handler. The first parameter represents the stream(s) of
-events to respond to. The second, a list of handlers that respond to the event stream.
-For example,
+{-| Specify an event handler. The first parameter is the stream(s) of events to
+respond to. The second, a list of handlers that respond to the event stream.
 
     signal "tooltip"
         [ siValue (vObject [])
@@ -5487,17 +5444,13 @@ For example,
             ]
         ]
 
-See the
-[Vega event stream documentation](https://vega.github.io/vega/docs/event-streams/).
-
 -}
 evHandler : List EventStream -> List EventHandler -> List EventHandler
 evHandler ess eHandlers =
     EEvents ess :: eHandlers
 
 
-{-| Specify an event selector used to generate an event stream. See the
-[Vega event stream selector documentation](https://vega.github.io/vega/docs/event-streams/#selector).
+{-| Specify an event selector used to generate an event stream.
 -}
 evStreamSelector : Str -> EventStream
 evStreamSelector =
@@ -5505,8 +5458,7 @@ evStreamSelector =
 
 
 {-| Expression to be evaluated when an event occurs, the result of which becomes
-the new signal value. See the
-[Vega event handler documentation](https://vega.github.io/vega/docs/signals/#handlers).
+the new signal value.
 -}
 evUpdate : String -> EventHandler
 evUpdate =
@@ -5941,8 +5893,7 @@ gpPointRadius =
 
 
 {-| Specify a type of layout alignment to apply to grid columns. This can be used in
-cases when alignment rules are different for rows and columns. For details, see the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+cases when alignment rules are different for rows and columns.
 -}
 grAlignColumn : GridAlign -> GridAlign
 grAlignColumn =
@@ -5950,8 +5901,7 @@ grAlignColumn =
 
 
 {-| Specify a type of layout alignment to apply to grid rows. This can be used in
-cases when alignment rules are different for rows and columns. For details, see the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+cases when alignment rules are different for rows and columns.
 -}
 grAlignRow : GridAlign -> GridAlign
 grAlignRow =
@@ -5964,8 +5914,7 @@ one after the other. `AlignEach` indicates elements will be aligned into a clean
 grid structure, but each row or column may be of variable size. `AlignAll` indicates
 elements will be aligned and each row or column will be sized identically based
 on the maximum observed size. To used different row and column layouts, use `grAlignRow`
-and `grAlignColumn`. For details, see the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+and `grAlignColumn`.
 -}
 type GridAlign
     = AlignAll
@@ -5977,8 +5926,6 @@ type GridAlign
 
 
 {-| Specify a type of layout alignment based on the value of the given signal.
-For details of available alignment option names, see the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/).
 -}
 gridAlignSignal : String -> GridAlign
 gridAlignSignal =
@@ -6048,7 +5995,7 @@ grStepMinor =
     GrStepMinor
 
 
-{-| Indicates the horizontal alignment of some text such as on an axis or legend.
+{-| Horizontal alignment of some text such as on an axis or legend.
 -}
 type HAlign
     = AlignCenter
@@ -6057,7 +6004,7 @@ type HAlign
     | HAlignSignal String
 
 
-{-| Indicates the horizontal alignment of some text based on the value of the
+{-| Specify the horizontal alignment of some text based on the value of the
 given signal.
 -}
 hAlignSignal : String -> HAlign
@@ -6210,9 +6157,8 @@ imValue =
     ImValue
 
 
-{-| Determines if autocomplete should be turned on or off for input elements that
-support it. For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify whether autocomplete should be turned on or off for input elements that
+support it.
 -}
 inAutocomplete : Bool -> InputProperty
 inAutocomplete =
@@ -6221,8 +6167,6 @@ inAutocomplete =
 
 {-| Specify that event handling should be delayed until the specified milliseconds
 have elapsed since the last event was fired. This helps to limit event broadcasting.
-For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
 -}
 inDebounce : Float -> InputProperty
 inDebounce =
@@ -6232,51 +6176,43 @@ inDebounce =
 {-| A CSS selector string indicating the parent element to which the input element
 should be added. This allows the option of the input element to be outside the
 visualization container, which could be used for linking separate visualizations.
-For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
 -}
 inElement : String -> InputProperty
 inElement =
     InElement
 
 
-{-| The maximum value for a range slider input element. For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify the maximum value for a range slider input element.
 -}
 inMax : Float -> InputProperty
 inMax =
     InMax
 
 
-{-| The minimum value for a range slider input element. For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify the minimum value for a range slider input element.
 -}
 inMin : Float -> InputProperty
 inMin =
     InMin
 
 
-{-| A collection of options to be selected from by Radio or Select input elements.
-For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify the options to be selected from a Radio or Select input element.
 -}
 inOptions : Value -> InputProperty
 inOptions =
     InOptions
 
 
-{-| The place-holding text for input elements before any value has been entered
-(for example initial text in a text field). For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify the place-holding text for input elements before any value has been
+entered.
 -}
 inPlaceholder : String -> InputProperty
 inPlaceholder =
     InPlaceholder
 
 
-{-| The step value (increment between adjacent selectable values) for a range
-slider input element. For more details see the
-[Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind)
+{-| Specify the step value (increment between adjacent selectable values) for a
+range slider input element.
 -}
 inStep : Float -> InputProperty
 inStep =
@@ -6367,10 +6303,10 @@ jaOps =
     JAOps
 
 
-{-| Indicates a JSON file format from which a given property is to be extracted
-when it has some surrounding structure or meta-data. For example, specifying the
-property `values.features` is equivalent to retrieving `json.values.features`
-from the loaded JSON object with a custom delimiter.
+{-| Specify the property to to be extracted from some JSON when it has some
+surrounding structure or meta-data. For example, specifying the property
+`values.features` is equivalent to retrieving `json.values.features` from the
+loaded JSON object with a custom delimiter.
 -}
 jsonProperty : Str -> FormatProperty
 jsonProperty =
@@ -6398,17 +6334,14 @@ layout lps =
 
 
 {-| Specify the height in pixels to clip a symbol legend entries and limit its size.
-By default no clipping is performed. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+By default no clipping is performed.
 -}
 leClipHeight : Num -> LegendProperty
 leClipHeight =
     LeClipHeight
 
 
-{-| Specify the horizontal padding between entries in a symbol legend. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the horizontal padding between entries in a symbol legend.
 -}
 leColumnPadding : Num -> LegendProperty
 leColumnPadding =
@@ -6417,26 +6350,21 @@ leColumnPadding =
 
 {-| Specify the number of columns in which to arrange symbol legend entries. A
 value of 0 or lower indicates a single row with one column per entry. The default
-is 0 for horizontal symbol legends and 1 for vertical symbol legends. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+is 0 for horizontal symbol legends and 1 for vertical symbol legends.
 -}
 leColumns : Num -> LegendProperty
 leColumns =
     LeColumns
 
 
-{-| Specify the corner radius for an enclosing legend rectangle. For more details
-see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the corner radius for an enclosing legend rectangle.
 -}
 leCornerRadius : Num -> LegendProperty
 leCornerRadius =
     LeCornerRadius
 
 
-{-| Specify the direction of a legend. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the direction of a legend.
 -}
 leDirection : Orientation -> LegendProperty
 leDirection =
@@ -6451,39 +6379,29 @@ dash symbol (using a simple SVG path) for each legend item:
         , leStroke "myColourScale"
         ]
 
-For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
-
 -}
 leEncode : List LegendEncoding -> LegendProperty
 leEncode =
     LeEncode
 
 
-{-| The name of the scale that maps to the legend symbols' fill colors. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' fill colors.
 -}
 leFill : String -> LegendProperty
 leFill =
     LeFill
 
 
-{-| Specify the background color of an enclosing legend rectangle. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the background color of an enclosing legend rectangle.
 -}
 leFillColor : Str -> LegendProperty
 leFillColor =
     LeFillColor
 
 
-{-| The format specifier pattern for legend labels. For numerical values this should
-be a [d3-format specifier](https://github.com/d3/d3-format#locale_format). For
-date-time values this should be a
+{-| Specify the format pattern for legend labels. Text should be either a
+[d3-format specifier](https://github.com/d3/d3-format#locale_format) or a
 [d3-time-format specifier](https://github.com/d3/d3-time-format#locale_format).
-For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 -}
 leFormat : Str -> LegendProperty
 leFormat =
@@ -6491,16 +6409,6 @@ leFormat =
 
 
 {-| Create a single legend used to visualize a color, size or shape mapping.
-
-    legends
-        << legend
-            [ leTitle (str "Percentage of Obese Adults")
-            , leOrient BottomRight
-            , leType LSymbol
-            , leSize "mySizeScale"
-            , leFill "myColorScale"
-            ]
-
 -}
 legend : List LegendProperty -> List Spec -> List Spec
 legend lps =
@@ -6532,9 +6440,7 @@ legends lgs =
     ( VLegends, JE.list lgs )
 
 
-{-| Indicates the position of a legend relative to the visualization it describes.
-See the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/#orientation)
+{-| Position of a legend relative to the visualization it describes.
 -}
 type LegendOrientation
     = Left
@@ -6550,8 +6456,7 @@ type LegendOrientation
 
 
 {-| Specify a signal that indicates the position of a legend relative to the
-visualization it describes of options for the signal see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/#orientation)
+visualization it describes.
 -}
 legendOrientationSignal : String -> LegendOrientation
 legendOrientationSignal =
@@ -6575,42 +6480,35 @@ legendTypeSignal =
     LegendTypeSignal
 
 
-{-| Specify the opacity of a color gradient in a legend. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the opacity of a color gradient in a legend.
 -}
 leGradientOpacity : Num -> LegendProperty
 leGradientOpacity =
     LeGradientOpacity
 
 
-{-| Specify the maximum allowed length of gradient labels in a legend. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the maximum allowed length of gradient labels in a legend.
 -}
 leGradientLabelLimit : Num -> LegendProperty
 leGradientLabelLimit =
     LeGradientLabelLimit
 
 
-{-| Specify the vertical offset in pixels for gradient labels in a legend. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the vertical offset in pixels for gradient labels in a legend.
 -}
 leGradientLabelOffset : Num -> LegendProperty
 leGradientLabelOffset =
     LeGradientLabelOffset
 
 
-{-| Specify the color of a legend's color gradient border. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the color of a legend's color gradient border.
 -}
 leGradientStrokeColor : Str -> LegendProperty
 leGradientStrokeColor =
     LeGradientStrokeColor
 
 
-{-| Specify the width of a legend's color gradient border. For more
-details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the width of a legend's color gradient border.
 -}
 leGradientStrokeWidth : Num -> LegendProperty
 leGradientStrokeWidth =
@@ -6619,8 +6517,7 @@ leGradientStrokeWidth =
 
 {-| Specify the thickness in pixels of the color gradient in a legend. This value
 corresponds to the width of a vertical gradient or the height of a horizontal
-gradient. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+gradient.
 -}
 leGradientThickness : Num -> LegendProperty
 leGradientThickness =
@@ -6629,179 +6526,156 @@ leGradientThickness =
 
 {-| Specify the length in pixels of the primary axis of a color gradient in a
 legend. This value corresponds to the height of a vertical gradient or the width
-of a horizontal gradient. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+of a horizontal gradient.
 -}
 leGradientLength : Num -> LegendProperty
 leGradientLength =
     LeGradientLength
 
 
-{-| Specify the alignment to apply to symbol legends rows and columns. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the alignment to apply to symbol legends rows and columns.
 -}
 leGridAlign : GridAlign -> LegendProperty
 leGridAlign =
     LeGridAlign
 
 
-{-| Specify the horizontal text alignment for a legend label. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the horizontal text alignment for a legend label.
 -}
 leLabelAlign : HAlign -> LegendProperty
 leLabelAlign =
     LeLabelAlign
 
 
-{-| Specify the vertical text alignment for a legend label. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the vertical text alignment for a legend label.
 -}
 leLabelBaseline : VAlign -> LegendProperty
 leLabelBaseline =
     LeLabelBaseline
 
 
-{-| Specify the text color for legend labels. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the text color for legend labels.
 -}
 leLabelColor : Str -> LegendProperty
 leLabelColor =
     LeLabelColor
 
 
-{-| Specify the text font for legend labels. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the text font for legend labels.
 -}
 leLabelFont : Str -> LegendProperty
 leLabelFont =
     LeLabelFont
 
 
-{-| Specify the font size in pixels for legend labels. For more details see
-the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the font size in pixels for legend labels.
 -}
 leLabelFontSize : Num -> LegendProperty
 leLabelFontSize =
     LeLabelFontSize
 
 
-{-| Specify the font weight for legend labels. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the font weight for legend labels.
 -}
 leLabelFontWeight : Value -> LegendProperty
 leLabelFontWeight =
     LeLabelFontWeight
 
 
-{-| Specify the maximum allowed length in pixels of a legend label. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the maximum allowed length in pixels of a legend label.
 -}
 leLabelLimit : Num -> LegendProperty
 leLabelLimit =
     LeLabelLimit
 
 
-{-| Specify the opacity for a legend's labels. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the opacity for a legend's labels.
 -}
 leLabelOpacity : Num -> LegendProperty
 leLabelOpacity =
     LeLabelOpacity
 
 
-{-| Specify the horizontal pixel offset for a legend's symbols. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the horizontal pixel offset for a legend's symbols.
 -}
 leLabelOffset : Num -> LegendProperty
 leLabelOffset =
     LeLabelOffset
 
 
-{-| Specify the strategy to use for resolving overlap of labels in gradient
-legends. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the strategy to use for resolving overlap of labels in gradient legends.
 -}
 leLabelOverlap : OverlapStrategy -> LegendProperty
 leLabelOverlap =
     LeLabelOverlap
 
 
-{-| The offset in pixels by which to displace the legend from the data rectangle
-and axes. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the offset in pixels by which to displace the legend from the data
+rectangle and axes.
 -}
 leOffset : Value -> LegendProperty
 leOffset =
     LeOffset
 
 
-{-| The name of the scale that maps to the legend symbols' opacities. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' opacities.
 -}
 leOpacity : String -> LegendProperty
 leOpacity =
     LeOpacity
 
 
-{-| The orientation of the legend, determining where the legend is placed
-relative to a chart’s data rectangle. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the orientation of the legend, determining where the legend is placed
+relative to a chart’s data rectangle.
 -}
 leOrient : LegendOrientation -> LegendProperty
 leOrient =
     LeOrient
 
 
-{-| The padding between the border and content of the legend group. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the padding between the border and content of the legend group.
 -}
 lePadding : Value -> LegendProperty
 lePadding =
     LePadding
 
 
-{-| The vertical padding between entries in a symbol legend. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the vertical padding between entries in a symbol legend.
 -}
 leRowPadding : Num -> LegendProperty
 leRowPadding =
     LeRowPadding
 
 
-{-| The name of the scale that maps to the legend symbols' shapes. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' shapes.
 -}
 leShape : String -> LegendProperty
 leShape =
     LeShape
 
 
-{-| The name of the scale that maps to the legend symbols' sizes. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' sizes.
 -}
 leSize : String -> LegendProperty
 leSize =
     LeSize
 
 
-{-| The name of the scale that maps to the legend symbols' strokes. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' strokes.
 -}
 leStroke : String -> LegendProperty
 leStroke =
     LeStroke
 
 
-{-| Specify the border color of an enclosing legend rectangle. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the border color of an enclosing legend rectangle.
 -}
 leStrokeColor : Str -> LegendProperty
 leStrokeColor =
     LeStrokeColor
 
 
-{-| Specify the stroke width of the color of a legend's gradient border. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the stroke width of the color of a legend's gradient border.
 -}
 leStrokeWidth : Num -> LegendProperty
 leStrokeWidth =
@@ -6809,8 +6683,7 @@ leStrokeWidth =
 
 
 {-| Specify the default fill color for legend symbols. This is only applied if there
-is no fill scale color encoding for the legend. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+is no fill scale color encoding for the legend.
 -}
 leSymbolBaseFillColor : Str -> LegendProperty
 leSymbolBaseFillColor =
@@ -6818,24 +6691,21 @@ leSymbolBaseFillColor =
 
 
 {-| Specify the default stroke color for legend symbols. This is only applied if
-there is no stroke scale color encoding for the legend. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+there is no stroke scale color encoding for the legend.
 -}
 leSymbolBaseStrokeColor : Str -> LegendProperty
 leSymbolBaseStrokeColor =
     LeSymbolBaseStrokeColor
 
 
-{-| Specify the default direction for legend symbols. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the default direction for legend symbols.
 -}
 leSymbolDirection : Orientation -> LegendProperty
 leSymbolDirection =
     LeSymbolDirection
 
 
-{-| Specify the fill color for legend symbols. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the fill color for legend symbols.
 -}
 leSymbolFillColor : Str -> LegendProperty
 leSymbolFillColor =
@@ -6843,56 +6713,49 @@ leSymbolFillColor =
 
 
 {-| Specify the offset in pixels between legend labels their corresponding symbol
-or gradient. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+or gradient.
 -}
 leSymbolOffset : Num -> LegendProperty
 leSymbolOffset =
     LeSymbolOffset
 
 
-{-| Specify the opacity for a legend's symbols. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the opacity for a legend's symbols.
 -}
 leSymbolOpacity : Num -> LegendProperty
 leSymbolOpacity =
     LeSymbolOpacity
 
 
-{-| Specify the default symbol area size in square pixel units. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the default symbol area size in square pixel units.
 -}
 leSymbolSize : Num -> LegendProperty
 leSymbolSize =
     LeSymbolSize
 
 
-{-| Specify the border color for legend symbols. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the border color for legend symbols.
 -}
 leSymbolStrokeColor : Str -> LegendProperty
 leSymbolStrokeColor =
     LeSymbolStrokeColor
 
 
-{-| Specify the default symbol border width used in a legend. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the default symbol border width used in a legend.
 -}
 leSymbolStrokeWidth : Num -> LegendProperty
 leSymbolStrokeWidth =
     LeSymbolStrokeWidth
 
 
-{-| Specify the default symbol shape used in a legend. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the default symbol shape used in a legend.
 -}
 leSymbolType : Symbol -> LegendProperty
 leSymbolType =
     LeSymbolType
 
 
-{-| The name of the scale that maps to the legend symbols' stroke dashing. For more
-details see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the name of the scale that maps to the legend symbols' stroke dashing.
 -}
 leStrokeDash : String -> LegendProperty
 leStrokeDash =
@@ -6914,8 +6777,7 @@ intervals (e.g. January, July):
                 ]
 
 If the second parameter is not a positive value, the number of ticks will be
-auto-generated for the given interval type. See the
-[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
+auto-generated for the given interval type.
 
 -}
 leTemporalTickCount : TimeUnit -> Num -> LegendProperty
@@ -6923,113 +6785,99 @@ leTemporalTickCount =
     LeTemporalTickCount
 
 
-{-| The desired number of tick values for quantitative legends. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the desired number of tick values for quantitative legends.
 -}
 leTickCount : Num -> LegendProperty
 leTickCount =
     LeTickCount
 
 
-{-| Specify the title for the legend (none by default). For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the title for the legend (none by default).
 -}
 leTitle : Str -> LegendProperty
 leTitle =
     LeTitle
 
 
-{-| Specify the horizontal alignment for a legend title. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the horizontal alignment for a legend title.
 -}
 leTitleAlign : HAlign -> LegendProperty
 leTitleAlign =
     LeTitleAlign
 
 
-{-| Specify the vertical alignment for a legend title. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the vertical alignment for a legend title.
 -}
 leTitleBaseline : VAlign -> LegendProperty
 leTitleBaseline =
     LeTitleBaseline
 
 
-{-| Specify the text color for a legend title. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the text color for a legend title.
 -}
 leTitleColor : Str -> LegendProperty
 leTitleColor =
     LeTitleColor
 
 
-{-| Specify the text font for a legend title. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the text font for a legend title.
 -}
 leTitleFont : Str -> LegendProperty
 leTitleFont =
     LeTitleFont
 
 
-{-| Specify the font size in pixel units for a legend title. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the font size in pixel units for a legend title.
 -}
 leTitleFontSize : Num -> LegendProperty
 leTitleFontSize =
     LeTitleFontSize
 
 
-{-| Specify the font weight for a legend title. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the font weight for a legend title.
 -}
 leTitleFontWeight : Value -> LegendProperty
 leTitleFontWeight =
     LeTitleFontWeight
 
 
-{-| Specify the maximum allowed length in pixels of a legend title. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the maximum allowed length in pixels of a legend title.
 -}
 leTitleLimit : Num -> LegendProperty
 leTitleLimit =
     LeTitleLimit
 
 
-{-| Specify the opacity for a legend's title. For more details
-see the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the opacity for a legend's title.
 -}
 leTitleOpacity : Num -> LegendProperty
 leTitleOpacity =
     LeTitleOpacity
 
 
-{-| Specify the padding between the legend title and entries. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the padding between the legend title and entries.
 -}
 leTitlePadding : Value -> LegendProperty
 leTitlePadding =
     LeTitlePadding
 
 
-{-| The type of legend to specify. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the type of legend.
 -}
 leType : LegendType -> LegendProperty
 leType =
     LeType
 
 
-{-| Explicitly set visible legend values. For more details see the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Explicitly set visible legend values.
 -}
 leValues : List Value -> LegendProperty
 leValues =
     LeValues
 
 
-{-| The integer z-index indicating the layering of the legend group relative to
-other axis, mark and legend groups. The default value is 0.For more details see
-the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+{-| Specify the integer z-index indicating the layering of the legend group relative
+to other axis, mark and legend groups. The default value is 0.
 -}
 leZIndex : Num -> LegendProperty
 leZIndex =
@@ -7055,8 +6903,6 @@ linkShapeSignal =
 
 
 {-| Specify the alignment to apply to grid rows and columns in a grid layout.
-See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
 -}
 loAlign : GridAlign -> LayoutProperty
 loAlign =
@@ -7064,8 +6910,7 @@ loAlign =
 
 
 {-| Specify the bounds calculation method to use for determining the extent of a
-sub-plot in a grid layout. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+sub-plot in a grid layout.
 -}
 loBounds : BoundsCalculation -> LayoutProperty
 loBounds =
@@ -7073,8 +6918,7 @@ loBounds =
 
 
 {-| Specify the number of columns to include in a grid layout. If unspecified, a
-single row with unlimited columns will be assumed. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+single row with unlimited columns will be assumed.
 -}
 loColumns : Num -> LayoutProperty
 loColumns =
@@ -7084,20 +6928,15 @@ loColumns =
 {-| Specify the band positioning in the interval [0,1] indicating where in a cell
 a footer should be placed in a grid layout. For a column footer, 0 maps to the left
 edge of the footer cell and 1 to right edge. For a row footer, the range maps from
-top to bottom. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+top to bottom.
 -}
 loFooterBand : Num -> LayoutProperty
 loFooterBand =
     LFooterBand
 
 
-{-| Specify the band positioning in the interval [0,1] indicating where in a cell
-a footer should be placed in a grid layout. For a column footer, 0 maps to the left
-edge of the footer cell and 1 to right edge. For a row footer, the range maps from
-top to bottom. This version allows row and column settings to be specified separately.
-See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+{-| Similar to [loFooterBand](#loFooterBand) but allowing row and column settings
+to be specified separately.
 -}
 loFooterBandRC : Num -> Num -> LayoutProperty
 loFooterBandRC r c =
@@ -7107,20 +6946,15 @@ loFooterBandRC r c =
 {-| Specify the band positioning in the interval [0,1] indicating where in a cell
 a header should be placed in a grid layout. For a column header, 0 maps to the left
 edge of the header cell and 1 to right edge. For a row footer, the range maps from
-top to bottom. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+top to bottom.
 -}
 loHeaderBand : Num -> LayoutProperty
 loHeaderBand =
     LHeaderBand
 
 
-{-| Specify the band positioning in the interval [0,1] indicating where in a cell
-a header should be placed in a grid layout. For a column header, 0 maps to the left
-edge of the footer cell and 1 to right edge. For a row header, the range maps from
-top to bottom. This version allows row and column settings to be specified separately.
-See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+{-| Similar to [loFHeaderBand](#loHeaderBand) but allowing row and column settings
+to be specified separately.
 -}
 loHeaderBandRC : Num -> Num -> LayoutProperty
 loHeaderBandRC r c =
@@ -7129,18 +6963,14 @@ loHeaderBandRC r c =
 
 {-| Specify the orthogonal offset in pixels by which to displace grid header, footer
 and title cells from their position along the edge of a grid layout.
-See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
 -}
 loOffset : Num -> LayoutProperty
 loOffset =
     LOffset
 
 
-{-| Specify the orthogonal offset in pixels by which to displace grid header, footer
-and title cells from their position along the edge of a grid layout. This version
-allows row and column settings to be specified separately. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+{-| Similar to [loOffset](#loOffset) but allowing row and column settings to be
+specified separately.
 -}
 loOffsetRC : Num -> Num -> LayoutProperty
 loOffsetRC r c =
@@ -7148,18 +6978,15 @@ loOffsetRC r c =
 
 
 {-| Specify the padding in pixels to add between elements within rows and columns
-of a grid layout. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+of a grid layout.
 -}
 loPadding : Num -> LayoutProperty
 loPadding =
     LPadding
 
 
-{-| Specify the padding in pixels to add between elements within rows and columns
-of a grid layout. This version allows row and column settings to be specified
-separately. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+{-| Similar to [loPadding](#loPadding) but allowing row and column settings to be
+specified separately.
 -}
 loPaddingRC : Num -> Num -> LayoutProperty
 loPaddingRC r c =
@@ -7168,19 +6995,15 @@ loPaddingRC r c =
 
 {-| Specify where in a cell of a grid layout, a title should be placed. For a
 column title, 0 maps to the left edge of the title cell and 1 to right edge. The
-default value is 0.5, indicating a centred position. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+default value is 0.5, indicating a centred position.
 -}
 loTitleBand : Num -> LayoutProperty
 loTitleBand =
     LTitleBand
 
 
-{-| Specify where in a cell of a grid layout, a title should be placed. For a
-column title, 0 maps to the left edge of the title cell and 1 to right edge. The
-default value is 0.5, indicating a centred position. This version allows row
-and column settings to be specified separately. See the
-[Vega layout documentation](https://vega.github.io/vega/docs/layout/)
+{-| Similar to [loTitleBand](#loTitleBand) but allowing row and column settings
+to be specified separately.
 -}
 loTitleBandRC : Num -> Num -> LayoutProperty
 loTitleBandRC r c =
@@ -7267,8 +7090,7 @@ luValues =
     LValues
 
 
-{-| The horizontal alignment of a text or image mark. This may be specified directly,
-via a field, a signal or any other text-generating value. To guarantee valid
+{-| The horizontal alignment of a text or image mark. To guarantee valid
 alignment type names, use `hCenter`, `hLeft` etc. For example:
 
     << mark Text
@@ -7276,28 +7098,22 @@ alignment type names, use `hCenter`, `hLeft` etc. For example:
             [ enEnter [ maAlign [ hCenter ] ] ]
         ]
 
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
 -}
 maAlign : List Value -> MarkProperty
 maAlign =
     MAlign
 
 
-{-| The rotation angle of the text in degrees in a text mark. This may be specified
-directly, via a field, a signal or any other number-generating value. For further
-details see the [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+{-| The rotation angle of the text in degrees in a text mark.
 -}
 maAngle : List Value -> MarkProperty
 maAngle =
     MAngle
 
 
-{-| Indicates whether the image aspect ratio should be preserved in an image mark.
+{-| Specify whether or not image aspect ratio should be preserved in an image mark.
 This may be specified directly, via a field, a signal or any other Boolean-generating
-value. For further details see the
-[Vega image mark documentation](https://vega.github.io/vega/docs/marks/image/).
+value.
 -}
 maAspect : List Value -> MarkProperty
 maAspect =
@@ -7313,18 +7129,13 @@ alignment type names, use `vTop`, `vMiddle` etc. For example:
             [ enEnter [ maBaseline [ vTop ] ] ]
         ]
 
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
 -}
 maBaseline : List Value -> MarkProperty
 maBaseline =
     MBaseline
 
 
-{-| The corner radius in pixels of an arc or rect mark. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The corner radius in pixels of an arc or rect mark.
 -}
 maCornerRadius : List Value -> MarkProperty
 maCornerRadius =
@@ -7333,17 +7144,7 @@ maCornerRadius =
 
 {-| The cursor to be displayed over a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid cursor type
-names, use `cursorValue`. For example:
-
-    marks
-        << mark Symbol
-            [ mFrom [ srData (str "myData") ]
-            , mEncode [ enUpdate [ maCursor [ cursorValue CPointer ] ] ]
-            ]
-
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
+names, use [cursorValue](#cursorValue).
 -}
 maCursor : List Value -> MarkProperty
 maCursor =
@@ -7368,11 +7169,9 @@ maCustom =
     MCustom
 
 
-{-| Indicates if the current data point in a linear mark is defined. If false, the
+{-| Indicate if the current data point in a linear mark is defined. If false, the
 corresponding line/trail segment will be omitted, creating a “break”. This may be
 specified directly, via a field, a signal or any other Boolean-generating value.
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
 maDefined : List Value -> MarkProperty
 maDefined =
@@ -7382,20 +7181,7 @@ maDefined =
 {-| The direction text is rendered in a text mark. This determines which side is
 truncated in response to the text size exceeding the value of the limit parameter.
 This may be specified directly, via a field, a signal or any other string-generating
-value. To guarantee valid direction type names, use `textDirectionValue`. For example:
-
-    << mark Text
-        [ mFrom [ srData (str "table") ]
-        , mEncode
-            [ enEnter
-                [ maText [ vField (field "date") ]
-                , maDir [ textDirectionValue RightToLeft ]
-                ]
-        ]
-
-For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
-
+value. To guarantee valid direction type names, use [textDirectionValue](#textDirectionValue).
 -}
 maDir : List Value -> MarkProperty
 maDir =
@@ -7403,9 +7189,7 @@ maDir =
 
 
 {-| The horizontal offset in pixels (before rotation), between the text and anchor
-point of a text mark. This may be specified directly, via a field, a signal or any
-other number-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+point of a text mark.
 -}
 maDx : List Value -> MarkProperty
 maDx =
@@ -7413,9 +7197,7 @@ maDx =
 
 
 {-| The vertical offset in pixels (before rotation), between the text and anchor
-point of a text mark. This may be specified directly, via a field, a signal or any
-other number-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+point of a text mark.
 -}
 maDy : List Value -> MarkProperty
 maDy =
@@ -7424,18 +7206,14 @@ maDy =
 
 {-| The ellipsis string for text truncated in response to the limit parameter of
 a text mark. This may be specified directly, via a field, a signal or any other
-string-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+string-generating value.
 -}
 maEllipsis : List Value -> MarkProperty
 maEllipsis =
     MEllipsis
 
 
-{-| The end angle in radians clockwise from north for an arc mark. This may be
-specified directly, via a field, a signal or any other number-generating value.
-For further details see the
-[Vega arc documentation](https://vega.github.io/vega/docs/marks/arc/).
+{-| The end angle in radians clockwise from north for an arc mark.
 -}
 maEndAngle : List Value -> MarkProperty
 maEndAngle =
@@ -7443,17 +7221,14 @@ maEndAngle =
 
 
 {-| The fill color of a mark. This may be specified directly, via a field,
-a signal or any other color-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+a signal or any other color-generating value.
 -}
 maFill : List Value -> MarkProperty
 maFill =
     MFill
 
 
-{-| The fill opacity of a mark in the range [0 1]. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The fill opacity of a mark in the range 0 to 1.
 -}
 maFillOpacity : List Value -> MarkProperty
 maFillOpacity =
@@ -7463,17 +7238,14 @@ maFillOpacity =
 {-| The typeface used by a text mark. This can be a generic font description such
 as `sans-serif`, `monospace` or any specific font name made accessible via a css
 font definition. This may be specified directly, via a field, a signal or any other
-string-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+string-generating value.
 -}
 maFont : List Value -> MarkProperty
 maFont =
     MFont
 
 
-{-| The font size in pixels used by a text mark. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+{-| The font size in pixels used by a text mark.
 -}
 maFontSize : List Value -> MarkProperty
 maFontSize =
@@ -7482,37 +7254,29 @@ maFontSize =
 
 {-| The font style, such as `normal` or `italic` used by a text mark. This may be
 specified directly, via a field, a signal or any other string-generating value.
-For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
 -}
 maFontStyle : List Value -> MarkProperty
 maFontStyle =
     MFontStyle
 
 
-{-| The font weight, such as `normal` or `bold` used by a text mark. This may be
-specified directly, via a field, a signal or any other string- or number-generating
-value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+{-| The font weight, such as `normal` or `bold` used by a text mark.
 -}
 maFontWeight : List Value -> MarkProperty
 maFontWeight =
     MFontWeight
 
 
-{-| Indicates if the visible group content should be clipped to the group’s
+{-| Indicate if the visible group content should be clipped to the group’s
 specified width and height. This may be specified directly, via a field, a signal
-or any other Boolean-generating value. For further details see the
-[Vega group mark documentation](https://vega.github.io/vega/docs/marks/group/).
+or any other Boolean-generating value.
 -}
 maGroupClip : List Value -> MarkProperty
 maGroupClip =
     MGroupClip
 
 
-{-| The width of a mark in pixels. This may be specified directly, via a field,
-a signal or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The height of a mark in pixels.
 -}
 maHeight : List Value -> MarkProperty
 maHeight =
@@ -7521,18 +7285,13 @@ maHeight =
 
 {-| A URL to load upon mouse click. If defined, the mark acts as a hyperlink. This
 may be specified directly, via a field, a signal or any other text-generating value.
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
 -}
 maHRef : List Value -> MarkProperty
 maHRef =
     MHRef
 
 
-{-| The inner radius in pixel units of an arc mark. This may be
-specified directly, via a field, a signal or any other number-generating value.
-For further details see the
-[Vega arc documentation](https://vega.github.io/vega/docs/marks/arc/).
+{-| The inner radius in pixel units of an arc mark.
 -}
 maInnerRadius : List Value -> MarkProperty
 maInnerRadius =
@@ -7542,19 +7301,6 @@ maInnerRadius =
 {-| The interpolation style of a linear mark. This may be specified directly,
 via a field, a signal or any other text-generating value. To guarantee valid
 interpolation type names, use [markInterpolationValue](#markInterpolationValue).
-For example:
-
-    mark Area
-        [ mFrom [ srData (str "myData") ]
-        , mEncode
-            [ enEnter
-                [ maInterpolate [ markInterpolationValue CatmullRom ] ]
-            ]
-        ]
-
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
 -}
 maInterpolate : List Value -> MarkProperty
 maInterpolate =
@@ -7563,18 +7309,14 @@ maInterpolate =
 
 {-| The maximum length of a text mark in pixels (default 0, indicating no limit).
 The text value will be automatically truncated if the rendered size exceeds this
-limit. It may be specified directly, via a field, a signal or any other
-number-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+limit.
 -}
 maLimit : List Value -> MarkProperty
 maLimit =
     MLimit
 
 
-{-| The opacity of a mark in the range [0 1]. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The opacity of a mark in the range 0 to 1.
 -}
 maOpacity : List Value -> MarkProperty
 maOpacity =
@@ -7586,43 +7328,20 @@ defined by the x, y, and (y2 or height) properties; with a horizontal orientatio
 the y, x and (x2 or width) properties must be specified instead. The orientation
 may be specified directly, via a field, a signal or any other text-generating value.
 To guarantee valid orientation type names, use [orientationValue](#orientationValue).
-For example:
-
-    mark Area
-        [ mFrom [ srData (str "myData") ]
-        , mEncode
-            [ enEnter
-                [ maOrient [ orientationValue Horizontal ]
-                , maX [ vScale "xScale", vField (field "age") ]
-                , maY [ vScale "yScale", vField (field "value") ]
-                , maX2 [ vScale "xScale", vNum 0 ]
-                ]
-            ]
-        ]
-
-For further details see the
-[Vega area mark documentation](https://vega.github.io/vega/docs/marks/area/).
-
 -}
 maOrient : List Value -> MarkProperty
 maOrient =
     MOrient
 
 
-{-| The outer radius in pixel units of an arc mark. This may be
-specified directly, via a field, a signal or any other number-generating value.
-For further details see the
-[Vega arc documentation](https://vega.github.io/vega/docs/marks/arc/).
+{-| The outer radius in pixel units of an arc mark.
 -}
 maOuterRadius : List Value -> MarkProperty
 maOuterRadius =
     MOuterRadius
 
 
-{-| The padding angle in radians clockwise from north for an arc mark. This may be
-specified directly, via a field, a signal or any other number-generating value.
-For further details see the
-[Vega arc documentation](https://vega.github.io/vega/docs/marks/arc/).
+{-| The padding angle in radians clockwise from north for an arc mark.
 -}
 maPadAngle : List Value -> MarkProperty
 maPadAngle =
@@ -7631,8 +7350,7 @@ maPadAngle =
 
 {-| The [SVG path string](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
 describing the geometry of a path mark. This may be specified directly, via a field,
-a signal or any other text-generating value. For further details see the
-[Vega path mark documentation](https://vega.github.io/vega/docs/marks/path/).
+a signal or any other text-generating value.
 -}
 maPath : List Value -> MarkProperty
 maPath =
@@ -7640,17 +7358,14 @@ maPath =
 
 
 {-| Polar coordinate radial offset in pixels, relative to the origin determined
-by the x and y properties of a text mark. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+by the x and y properties of a text mark.
 -}
 maRadius : List Value -> MarkProperty
 maRadius =
     MRadius
 
 
-{-| Type of visual mark used to represent data in the visualization. See the
-[Vega mark type documentation](https://vega.github.io/vega/docs/marks/#types).
+{-| Type of visual mark used to represent data in the visualization.
 -}
 type Mark
     = Arc
@@ -7668,16 +7383,16 @@ type Mark
 
 
 {-| Create a single mark definition. Marks form the visible components of a visualization.
-For available mark types see [Mark](#mark). Each mark specification can include
-a list of mark properties (second parameter) that customise the appearance of the
-mark and relate its appearance to data streams or signals.
+Each mark specification can include a list of mark properties (second parameter)
+that customise the appearance of the mark and relate its appearance to data streams
+or signals.
 -}
 mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
 mark mark mps =
     (::) (JE.object (MType mark :: mps |> List.concatMap topMarkProperty))
 
 
-{-| Indicates mark interpolation style.
+{-| Indicate mark interpolation style.
 -}
 type MarkInterpolation
     = Basis
@@ -7792,8 +7507,7 @@ marks axs =
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
 Shape instances cannot be specified directly, instead they must be generated by
-a data transform such as symbol generation or a geoshape. For further details see
-the [Vega shape documentation](https://vega.github.io/vega/docs/marks/shape/).
+a data transform such as symbol generation or a geoshape.
 For example,
 
     shapeEncoding =
@@ -7817,19 +7531,14 @@ maShape =
 
 {-| The area in pixels of the bounding box of point-based mark such as a symbol.
 Note that this value sets the area of the mark; the side lengths will increase with
-the square root of this value. This may be specified directly, via a field, a signal
-or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+the square root of this value.
 -}
 maSize : List Value -> MarkProperty
 maSize =
     MSize
 
 
-{-| The start angle in radians clockwise from north for an arc mark. This may be
-specified directly, via a field, a signal or any other number-generating value.
-For further details see the
-[Vega arc documentation](https://vega.github.io/vega/docs/marks/arc/).
+{-| The start angle in radians clockwise from north for an arc mark.
 -}
 maStartAngle : List Value -> MarkProperty
 maStartAngle =
@@ -7837,8 +7546,7 @@ maStartAngle =
 
 
 {-| The stroke color of a mark. This may be specified directly, via a field,
-a signal or any other color-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+a signal or any other color-generating value.
 -}
 maStroke : List Value -> MarkProperty
 maStroke =
@@ -7847,13 +7555,7 @@ maStroke =
 
 {-| The stroke cap ending style for a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid stroke cap
-names, use [strokeCapValue](#strokeCapValue). For example:
-
-      maStrokeCap [ strokeCapValue CRound ]
-
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
+names, use [strokeCapValue](#strokeCapValue).
 -}
 maStrokeCap : List Value -> MarkProperty
 maStrokeCap =
@@ -7862,17 +7564,14 @@ maStrokeCap =
 
 {-| The stroke dash style of a mark. This may be specified directly, via a
 field, a signal or any other numeric list-generating value. The list should consist
-of alternating dash-gap lengths in pixels. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+of alternating dash-gap lengths in pixels.
 -}
 maStrokeDash : List Value -> MarkProperty
 maStrokeDash =
     MStrokeDash
 
 
-{-| A mark's offset of the first stroke dash in pixels. This may be specified
-directly, via a field, a signal or any other number-generating value. For further
-details see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| A mark's offset of the first stroke dash in pixels.
 -}
 maStrokeDashOffset : List Value -> MarkProperty
 maStrokeDashOffset =
@@ -7881,40 +7580,28 @@ maStrokeDashOffset =
 
 {-| The stroke join method for a mark. This may be specified directly, via a
 field, a signal or any other text-generating value. To guarantee valid stroke join
-names, use `strokeJoinLabel`. For example:
-
-    strokeCapValue CButt
-
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
-
+names, use [strokeJoinValue](#strokeJoinValue).
 -}
 maStrokeJoin : List Value -> MarkProperty
 maStrokeJoin =
     MStrokeJoin
 
 
-{-| The miter limit at which to bevel a line join for a mark. This may be specified
-directly, via a field, a signal or any other number-generating value. For further
-details see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The miter limit at which to bevel a line join for a mark.
 -}
 maStrokeMiterLimit : List Value -> MarkProperty
 maStrokeMiterLimit =
     MStrokeMiterLimit
 
 
-{-| The stroke opacity of a mark in the range [0 1]. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The stroke opacity of a mark in the range 0 to 1.
 -}
 maStrokeOpacity : List Value -> MarkProperty
 maStrokeOpacity =
     MStrokeOpacity
 
 
-{-| The stroke width of a mark in pixels. This may be specified directly, via a
-field, a signal or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The stroke width of a mark in pixels.
 -}
 maStrokeWidth : List Value -> MarkProperty
 maStrokeWidth =
@@ -7933,19 +7620,14 @@ or a custom shape with an SVG path:
 
     maShape [ symbolValue (symPath "M-1,-1H1V1H-1Z") ]
 
-For further details see the
-[Vega symbol documentation](https://vega.github.io/vega/docs/marks/symbol/).
-
 -}
 maSymbol : List Value -> MarkProperty
 maSymbol =
     MSymbol
 
 
-{-| The interpolation tension in the range [0, 1] of a linear mark. Applies only
-to cardinal and catmull-rom interpolators. This may be specified directly, via a
-field, a signal or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The interpolation tension in the range 0 to 1 of a linear mark. Applies only
+to cardinal and catmull-rom interpolators.
 -}
 maTension : List Value -> MarkProperty
 maTension =
@@ -7953,8 +7635,7 @@ maTension =
 
 
 {-| The text to display in a text mark. This may be specified directly,
-via a field, a signal or any other string-generating value. For further details
-see the [Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+via a field, a signal or any other string-generating value.
 -}
 maText : List Value -> MarkProperty
 maText =
@@ -7962,9 +7643,7 @@ maText =
 
 
 {-| Polar coordinate angle in radians, relative to the origin determined by the
-x and y properties of a text mark. This may be specified directly, via a field,
-a signal or any other number-generating value. For further details see the
-[Vega text mark documentation](https://vega.github.io/vega/docs/marks/text/).
+x and y properties of a text mark.
 -}
 maTheta : List Value -> MarkProperty
 maTheta =
@@ -7972,8 +7651,7 @@ maTheta =
 
 
 {-| The tooltip text to show upon mouse hover over a mark. This may be specified
-directly, via a field, a signal or any other text-generating value. For further
-details see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+directly, via a field, a signal or any other text-generating value.
 -}
 maTooltip : List Value -> MarkProperty
 maTooltip =
@@ -7981,35 +7659,28 @@ maTooltip =
 
 
 {-| The URL of an image file to be displayed as an image mark. This may be specified
-directly, via a field, a signal or any other text-generating value. For further
-details see the [Vega image mark documentation](https://vega.github.io/vega/docs/marks/image/).
+directly, via a field, a signal or any other text-generating value.
 -}
 maUrl : List Value -> MarkProperty
 maUrl =
     MUrl
 
 
-{-| The width of a mark in pixels. This may be specified directly, via a field,
-a signal or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The width of a mark in pixels.
 -}
 maWidth : List Value -> MarkProperty
 maWidth =
     MWidth
 
 
-{-| The primary x-coordinate of a mark in pixels. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The primary x-coordinate of a mark in pixels.
 -}
 maX : List Value -> MarkProperty
 maX =
     MX
 
 
-{-| The secondary x-coordinate of a mark in pixels. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The secondary x-coordinate of a mark in pixels.
 -}
 maX2 : List Value -> MarkProperty
 maX2 =
@@ -8017,27 +7688,21 @@ maX2 =
 
 
 {-| The centre x-coordinate of a mark in pixels. This is an alternative to `maX`
-or `maX2`, not an addition. It may be specified directly, via a field, a signal
-or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+or `maX2`, not an addition.
 -}
 maXC : List Value -> MarkProperty
 maXC =
     MXC
 
 
-{-| The primary y-coordinate of a mark in pixels. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The primary y-coordinate of a mark in pixels.
 -}
 maY : List Value -> MarkProperty
 maY =
     MY
 
 
-{-| The secondary y-coordinate of a mark in pixels. This may be specified directly,
-via a field, a signal or any other number-generating value. For further details
-see the [Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+{-| The secondary y-coordinate of a mark in pixels.
 -}
 maY2 : List Value -> MarkProperty
 maY2 =
@@ -8045,9 +7710,7 @@ maY2 =
 
 
 {-| The centre y-coordinate of a mark in pixels. This is an alternative to `maY`
-or `maY2`, not an addition. It may be specified directly, via a field, a signal
-or any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+or `maY2`, not an addition.
 -}
 maYC : List Value -> MarkProperty
 maYC =
@@ -8058,16 +7721,14 @@ maYC =
 default value is 0. Higher values (1) will cause marks to be drawn on top of those
 with lower z-index values. Setting the z-index as an encoding property only affects
 ordering among sibling mark items; it will not change the layering relative to other
-mark definitions. The z-index may be specified directly, via a field, a signal or
-any other number-generating value. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#encode).
+mark definitions.
 -}
 maZIndex : List Value -> MarkProperty
 maZIndex =
     MZIndex
 
 
-{-| Indicates whether or how marks should be clipped to a specified shape. For a
+{-| Indicate whether or how marks should be clipped to a specified shape. For a
 simple case of clipping to the retangular 'data rectangle':
 
     mClip (clEnabled true)
@@ -8092,25 +7753,20 @@ coordinates use the output of [trGeoPath](#trGeoPath):
                   , mClip (clPath (strSignal "data('myClippingPoly')[0]['path']"))
                   ...
 
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
-
 -}
 mClip : Clip -> TopMarkProperty
 mClip =
     MClip
 
 
-{-| Specify a description of a mark, useful for inline comments. For further
-details see the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
+{-| Specify a description of a mark, useful for inline comments.
 -}
 mDescription : String -> TopMarkProperty
 mDescription =
     MDescription
 
 
-{-| Specify a set of visual encoding rules for a mark. For further details see
-the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
+{-| Specify a set of visual encoding rules for a mark.
 -}
 mEncode : List EncodingProperty -> TopMarkProperty
 mEncode =
@@ -8120,8 +7776,7 @@ mEncode =
 {-| Specify the data source to be visualized by a mark. If not specified, a single
 element data set containing an empty object is assumed. The source can either be
 a data set to use or a faceting directive to subdivide a data set across a set
-of group marks. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+of group marks.
 -}
 mFrom : List Source -> TopMarkProperty
 mFrom =
@@ -8138,9 +7793,6 @@ suppyling the specification as a series of properties. For example,
             , mGroup [ mkGroup1 [], mkGroup2 [] ]
             ]
 
-For details on the group mark see the
-[Vega group mark documentation](https://vega.github.io/vega/docs/marks/group/).
-
 -}
 mGroup : List ( VProperty, Spec ) -> TopMarkProperty
 mGroup =
@@ -8148,8 +7800,7 @@ mGroup =
 
 
 {-| Specify whether a mark can serve as an input event source. If false, no
-mouse or touch events corresponding to the mark will be generated. For further
-details see the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
+mouse or touch events corresponding to the mark will be generated.
 -}
 mInteractive : Boo -> TopMarkProperty
 mInteractive =
@@ -8159,8 +7810,7 @@ mInteractive =
 {-| Specify a data field to use as a unique key for data binding. When a
 visualization’s data is updated, the key value will be used to match data elements
 to existing mark instances. Use a key field to enable object constancy for
-transitions over dynamic data. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+transitions over dynamic data.
 -}
 mKey : Field -> TopMarkProperty
 mKey =
@@ -8170,8 +7820,7 @@ mKey =
 {-| Specify a unique name for a mark. This name can be used to refer to the mark
 in another mark or within an event stream definition. SVG renderers will add this
 name value as a CSS class name on the enclosing SVG group (g) element containing
-the mark instances. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+the mark instances.
 -}
 mName : String -> TopMarkProperty
 mName =
@@ -8179,8 +7828,7 @@ mName =
 
 
 {-| Specify a set of triggers for modifying a mark's properties in response to
-signal changes. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+signal changes.
 -}
 mOn : List Trigger -> TopMarkProperty
 mOn =
@@ -8195,9 +7843,6 @@ mark item properties, append the prefix `datum` to a field name.
 
     mSort [ ( field "datum.y", Ascend ) ]
 
-For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
-
 -}
 mSort : List ( Field, Order ) -> TopMarkProperty
 mSort =
@@ -8208,8 +7853,7 @@ mSort =
 collection of mark property defaults defined within the configuration. These
 properties will be applied to the mark’s enter encoding set, with later styles
 overriding earlier styles. Any properties explicitly defined within the mark’s
-`encode` block will override a style default. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+`encode` block will override a style default.
 -}
 mStyle : List String -> TopMarkProperty
 mStyle =
@@ -8220,8 +7864,7 @@ mStyle =
 blocks, that operate directly on mark scenegraph items (not backing data objects).
 These can be useful for performing layout with transforms that can set x, y,
 width, height, etc. properties. Only data transforms that do not generate or
-filter data objects should be used. For further details see the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+filter data objects should be used.
 -}
 mTransform : List Transform -> TopMarkProperty
 mTransform =
@@ -8237,16 +7880,14 @@ mZIndex =
     MTopZIndex
 
 
-{-| Specify a desired 'nice' temporal interval between labelled tick points. For
-full details see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/).
+{-| Specify a desired 'nice' temporal interval between labelled tick points.
 -}
 nInterval : TimeUnit -> Int -> ScaleNice
 nInterval tu step =
     NInterval tu step
 
 
-{-| Specify a desired tick count for a human-friendly 'nice' scale range. For full
-details see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/).
+{-| Specify a desired tick count for a human-friendly 'nice' scale range.
 -}
 nTickCount : Int -> ScaleNice
 nTickCount =
@@ -8308,7 +7949,6 @@ numSignals =
 
 
 {-| Add a list of triggers to the given data table.
-See the [Vega trigger documentation](https://vega.github.io/vega/docs/triggers).
 -}
 on : List Trigger -> DataTable -> DataTable
 on triggerSpecs dTable =
@@ -8342,7 +7982,7 @@ type Operation
     | OperationSignal String
 
 
-{-| Indicates an aggregation operation is to be determined by a named signal. The
+{-| Indicate an aggregation operation is to be determined by a named signal. The
 signal should generate the name of a valid operation (e.g. `average`).
 -}
 operationSignal : String -> Operation
@@ -8358,7 +7998,7 @@ type Order
     | OrderSignal String
 
 
-{-| Indicates a sort order determined by a named signal for comparison operations.
+{-| Indicate a sort order determined by a named signal for comparison operations.
 See the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
 orderSignal : String -> Order
@@ -8366,7 +8006,7 @@ orderSignal =
     OrderSignal
 
 
-{-| Indicates desired orientation of a mark, legend or link path (e.g. horizontally or vertically
+{-| Indicate desired orientation of a mark, legend or link path (e.g. horizontally or vertically
 oriented bars). Note that not all can use `Radial` orientation.
 -}
 type Orientation
@@ -8376,8 +8016,7 @@ type Orientation
     | OrientationSignal String
 
 
-{-| Indicates an orientation for marks, legends and link paths is determined by a named signal.
-See the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
+{-| Indicate an orientation for marks, legends and link paths is determined by a named signal.
 -}
 orientationSignal : String -> Orientation
 orientationSignal =
@@ -8394,7 +8033,7 @@ type OverlapStrategy
     | OverlapStrategySignal String
 
 
-{-| Indicates an axis overlap strategy is determined by a named signal.
+{-| Specify an axis overlap strategy is to be determined by a named signal.
 -}
 overlapStrategySignal : String -> OverlapStrategy
 overlapStrategySignal =
@@ -8404,8 +8043,7 @@ overlapStrategySignal =
 {-| The names to give the output fields of a packing transform. The default is
 ["x", "y", "r", "depth", "children"], where x and y are the layout coordinates,
 r is the node radius, depth is the tree depth, and children is the count of a
-node’s children in the tree. For more details, see the
-[Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
+node’s children in the tree.
 -}
 paAs : String -> String -> String -> String -> String -> PackProperty
 paAs x y r depth children =
@@ -8418,8 +8056,7 @@ type Padding
 
 
 {-| Set the padding around the visualization in pixel units. The way padding is
-interpreted will depend on the `autosize` properties. See the
-[Vega specification documentation](https://vega.github.io/vega/docs/specification/)
+interpreted will depend on the `autosize` properties.
 for details.
 -}
 padding : Float -> ( VProperty, Spec )
@@ -8429,8 +8066,7 @@ padding p =
 
 {-| Set the padding around the visualization in pixel units in _left_, _top_,
 _right_, _bottom_ order. The way padding is interpreted will depend on the
-`autosize` properties. See the
-[Vega specification documentation](https://vega.github.io/vega/docs/specification/)
+`autosize` properties.
 for details.
 -}
 paddings : Float -> Float -> Float -> Float -> ( VProperty, Spec )
@@ -8441,16 +8077,14 @@ paddings l t r b =
 {-| The data field corresponding to a numeric value for the node in a packing
 transform. The sum of values for a node and all its descendants is available on
 the node object as the value property. If radius is null, this field determines
-the node size. For details, see the
-[Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
+the node size.
 -}
 paField : Field -> PackProperty
 paField =
     PaField
 
 
-{-| The approximate padding to include between packed circles. For details, see
-the [Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
+{-| The approximate padding to include between packed circles.
 -}
 paPadding : Num -> PackProperty
 paPadding =
@@ -8458,8 +8092,7 @@ paPadding =
 
 
 {-| Specify an explicit node radius to use in a packing transform. If `Nothing` (the
-default), the radius of each leaf circle is derived from the field value. For details, see
-the [Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
+default), the radius of each leaf circle is derived from the field value.
 -}
 paRadius : Maybe Field -> PackProperty
 paRadius =
@@ -8484,8 +8117,7 @@ parse =
 
 
 {-| The size of a packing layout, provided as a two-element list in [width, height]
-order (or a signal that generates such a list). For details, see the
-[Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
+order (or a signal that generates such a list).
 -}
 paSize : Num -> PackProperty
 paSize n =
@@ -8494,17 +8126,6 @@ paSize n =
 
 {-| Specify how sorting of sibling nodes is supported in a packing transform.
 The inputs to subject to sorting are tree node objects, not input data objects.
-
-    transform
-        [ trPack
-            [ paField (field "size")
-            , paSort [ ( field "value", Ascend ) ]
-            ]
-        ]
-
-For details, see the
-[Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/)
-
 -}
 paSort : List ( Field, Order ) -> PackProperty
 paSort =
@@ -8575,17 +8196,6 @@ piStartAngle =
 
 {-| Specify a projection’s centre as a two-element list of longitude and latitude
 in degrees. The default value is [0, 0].
-
-    pr =
-        projections
-            << projection "myProjection"
-                [ prType Mercator
-                , prCenter (nums [ 40, -20 ])
-                ]
-
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
-
 -}
 prCenter : Num -> ProjectionProperty
 prCenter =
@@ -8594,8 +8204,7 @@ prCenter =
 
 {-| Specify a projection’s clipping circle radius to the specified angle in degrees.
 A value of zero indicates antimeridian cutting should be applied rather than
-small-circle clipping. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+small-circle clipping.
 -}
 prClipAngle : Num -> ProjectionProperty
 prClipAngle =
@@ -8605,16 +8214,14 @@ prClipAngle =
 {-| Specify a projection’s viewport clip extent to the specified bounds in pixels.
 The extent bounds should be specified as a list of four numbers in [x0, y0, x1, y1]
 order where x0 is the left-side of the viewport, y0 is the top, x1 is the right
-and y1 is the bottom. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+and y1 is the bottom.
 -}
 prClipExtent : Num -> ProjectionProperty
 prClipExtent =
     PrClipExtent
 
 
-{-| Specify a Hammer map projection's coefficient (defaults to 2). See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+{-| Specify a Hammer map projection's coefficient (defaults to 2).
 -}
 prCoefficient : Num -> ProjectionProperty
 prCoefficient =
@@ -8622,8 +8229,7 @@ prCoefficient =
 
 
 {-| Specify a custom map projection. Custom names need to be registered with the
-Vega runtime. For details, see the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#register)
+Vega runtime.
 -}
 prCustom : Str -> Projection
 prCustom =
@@ -8631,8 +8237,7 @@ prCustom =
 
 
 {-| Specify a Satellite map projection's distance value. Values are expressed as a
-proportion of the Earth's radius (defaults to 2). See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+proportion of the Earth's radius (defaults to 2).
 -}
 prDistance : Num -> ProjectionProperty
 prDistance =
@@ -8641,9 +8246,8 @@ prDistance =
 
 {-| Specify the display region into which the projection should be automatically fit.
 Used in conjunction with [prFit](#prFit). The region bounds should be specified
-as a list of four numbers in [x0, y0, x1, y1] order where x0 is the left-side,
-y0 is the top, x1 is the right and y1 is the bottom. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+in [x0, y0, x1, y1] order where x0 is the left-side, y0 is the top, x1 is the
+right and y1 is the bottom.
 -}
 prExtent : Num -> ProjectionProperty
 prExtent =
@@ -8664,9 +8268,6 @@ fit by setting its translate and scale values.
                 , prFit (feName "mapData")
                 ]
 
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
-
 -}
 prFit : Feature -> ProjectionProperty
 prFit =
@@ -8674,8 +8275,6 @@ prFit =
 
 
 {-| Specify a Bottomley map projection's fraction parameter (defaults to 0.5).
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prFraction : Num -> ProjectionProperty
 prFraction =
@@ -8683,16 +8282,13 @@ prFraction =
 
 
 {-| Specify the number of lobes in radial map projections such as the Berghaus Star.
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prLobes : Num -> ProjectionProperty
 prLobes =
     PrLobes
 
 
-{-| Type of global map projection. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections).
+{-| Type of global map projection.
 -}
 type Projection
     = Albers
@@ -8714,45 +8310,14 @@ type Projection
 
 
 {-| Create a single map projection for transforming geo data onto a plane.
-
-    pr =
-        projections
-            << projection "myProjection"
-                [ prType AlbersUsa
-                , prScale (num 1100)
-                , prTranslate (numSignals [ "width / 2", "height / 2" ])
-                ]
-
 -}
 projection : String -> List ProjectionProperty -> List Spec -> List Spec
 projection name pps =
     (::) (JE.object (( "name", JE.string name ) :: List.map projectionProperty pps))
 
 
-{-| A convenience function for generating a value representing a given projection
+{-| Convenience function for generating a value representing a given projection
 type. Useful when generating signals representing projection types.
-
-    standardProjections : Value
-    standardProjections =
-        List.map projectionValue
-            [ Albers
-            , AzimuthalEqualArea
-            , AzimuthalEquidistant
-            , ConicConformal
-            , ConicEqualArea
-            , Equirectangular
-            , Mercator
-            , Orthographic
-            ]
-            |> vValues
-
-    si =
-        signals
-            << signal "pType"
-                [ siValue (projectionValue Mercator)
-                , siBind (iSelect [ inOptions standardProjections ])
-                ]
-
 -}
 projectionValue : Projection -> Value
 projectionValue proj =
@@ -8772,9 +8337,7 @@ projections prs =
     ( VProjections, JE.list prs )
 
 
-{-| Specify a global map projection type is to be determined by a signal. For
-details of valid projection values see the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections).
+{-| Specify a global map projection type is to be determined by a signal.
 -}
 projectionSignal : String -> Projection
 projectionSignal =
@@ -8782,19 +8345,6 @@ projectionSignal =
 
 
 {-| Specify the type of global map projection to use in a projection transformation.
-
-    pr =
-        projections
-            << projection "myProj" [ prType Orthographic ]
-
-If the projection type is to be generated from a signal, use `projectionSignal`
-and specify the label of the signal to use.
-
-    << projection "myProj" [ prType (projectionSignal "mySignal") ]
-
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#types)
-
 -}
 prType : Projection -> ProjectionProperty
 prType =
@@ -8802,8 +8352,7 @@ prType =
 
 
 {-| Specify a the parallel used for map projections such as the Armadillo (defaults
-to 20 degrees N). See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+to 20 degrees N).
 -}
 prParallel : Num -> ProjectionProperty
 prParallel =
@@ -8811,8 +8360,7 @@ prParallel =
 
 
 {-| Specify the default radius (in pixels) to use when drawing projected GeoJSON
-Point and MultiPoint geometries. The default value is 4.5. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+Point and MultiPoint geometries. The default value is 4.5.
 -}
 prPointRadius : Num -> ProjectionProperty
 prPointRadius =
@@ -8822,8 +8370,6 @@ prPointRadius =
 {-| Specify a threshold for the projection’s adaptive resampling in pixels. This
 corresponds to the Douglas–Peucker distance. If precision is not specified, the
 projection’s current resampling precision which defaults to √0.5 ≅ 0.70710 is used.
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prPrecision : Num -> ProjectionProperty
 prPrecision =
@@ -8831,8 +8377,6 @@ prPrecision =
 
 
 {-| Specify the radius for the Gingery map projection. Defaults to 30 degrees.
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prRadius : Num -> ProjectionProperty
 prRadius =
@@ -8840,8 +8384,7 @@ prRadius =
 
 
 {-| Specify a Hill map projection's ratio allowing it to vary continuously between
-Maurer 73 (0) and Eckert IV projections (infinity). Defaults to 1. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+Maurer 73 (0) and Eckert IV projections (infinity). Defaults to 1.
 -}
 prRatio : Num -> ProjectionProperty
 prRatio =
@@ -8850,9 +8393,7 @@ prRatio =
 
 {-| Specify a projection’s three-axis rotation angle. This should be a two- or
 three-element list of numbers [lambda, phi, gamma] specifying the rotation angles
-in degrees about each spherical axis. (These correspond to yaw, pitch and roll.).
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+in degrees about each spherical axis.
 -}
 prRotate : Num -> ProjectionProperty
 prRotate =
@@ -8862,8 +8403,7 @@ prRotate =
 {-| Specify a projection’s the projection’s scale factor to the specified value.
 The default scale is projection-specific. The scale factor corresponds linearly
 to the distance between projected points; however, scale factor values are not
-equivalent across projections. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+equivalent across projections.
 -}
 prScale : Num -> ProjectionProperty
 prScale =
@@ -8873,9 +8413,8 @@ prScale =
 {-| Specify the width and height of the display region into which the projection
 should be automatically fit. Used in conjunction with [prFit](#prFit) this is equivalent
 to calling [prExtent](#prExtent) with the top-left position set to (0,0). The region
-size should be specified as a list of two numbers in [width, height] order (or
-a signal that generates such a list). See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+size should be specified in [width, height] order (or a signal that generates such
+a list).
 -}
 prSize : Num -> ProjectionProperty
 prSize =
@@ -8883,8 +8422,6 @@ prSize =
 
 
 {-| Specify the spacing for a Lagrange conformal map projection (defaults to 0.5).
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prSpacing : Num -> ProjectionProperty
 prSpacing =
@@ -8892,8 +8429,6 @@ prSpacing =
 
 
 {-| Specify the tilt angle for a Satellite map projection (defaults to 0 degrees).
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
 -}
 prTilt : Num -> ProjectionProperty
 prTilt =
@@ -8904,8 +8439,7 @@ prTilt =
 not specified as a two-element list, returns the current translation offset which
 defaults to [480, 250]. The translation offset determines the pixel coordinates
 of the projection’s centre. The default translation offset places (0°,0°) at the
-centre of a 960×500 area. See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections/#properties)
+centre of a 960×500 area.
 -}
 prTranslate : Num -> ProjectionProperty
 prTranslate =
@@ -8914,8 +8448,7 @@ prTranslate =
 
 {-| Specify the output field names for the output of a partition layout transform.
 The parameters correspond to the (default name) fields `x0`, `y0`, `x1`, `y1`,
-`depth` and `children`. See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
+`depth` and `children`.
 -}
 ptAs : String -> String -> String -> String -> String -> String -> PartitionProperty
 ptAs =
@@ -8924,8 +8457,7 @@ ptAs =
 
 {-| Specify the data field corresponding to a numeric value for a partition node.
 The sum of values for a node and all its descendants is available on the node object
-as the `value` property. This field determines the size of a node. See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
+as the `value` property. This field determines the size of a node.
 -}
 ptField : Field -> PartitionProperty
 ptField =
@@ -8933,8 +8465,6 @@ ptField =
 
 
 {-| Specify the padding between adjacent nodes for a partition layout transform.
-See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
 -}
 ptPadding : Num -> PartitionProperty
 ptPadding =
@@ -8942,8 +8472,7 @@ ptPadding =
 
 
 {-| Specify whether or not node layout values should be rounded in a partition transform.
-The default is false. See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
+The default is false.
 -}
 ptRound : Boo -> PartitionProperty
 ptRound =
@@ -8951,8 +8480,7 @@ ptRound =
 
 
 {-| Specify the size of a partition layout as two-element list corresponding to
-[width, height] (or a signal that generates such a list). See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
+[width, height] (or a signal that generates such a list).
 -}
 ptSize : Num -> PartitionProperty
 ptSize =
@@ -8960,24 +8488,22 @@ ptSize =
 
 
 {-| Specify how sorting of sibling nodes is performed during a partition layout
-transform. See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
+transform.
 -}
 ptSort : List ( Field, Order ) -> PartitionProperty
 ptSort =
     PtSort
 
 
-{-| Provide a custom range default scheme. This can be use when a new named default
-has been created as part of a config setting is required. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+{-| Specify a custom range default scheme. This can be use when a new named default
+has been created as part of a config setting is required.
 -}
 raCustomDefault : String -> ScaleRange
 raCustomDefault =
     RCustom
 
 
-{-| A scale range specified as a data reference object. This is used for specifying
+{-| Specify a scale range as a data reference object. This is used for specifying
 ordinal scale ranges as a series of distinct field values.
 
     scale "myScale"
@@ -8986,59 +8512,49 @@ ordinal scale ranges as a series of distinct field values.
         , scRange (raData [ daDataset "clusters", daField (field "name") ])
         ]
 
-See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
-
 -}
 raData : List DataReference -> ScaleRange
 raData =
     RData
 
 
-{-| A scale range specified as a list of numbers. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+{-| Specify a scale range as a list of numbers.
 -}
 raNums : List Float -> ScaleRange
 raNums =
     RNums
 
 
-{-| A scale range specified as a list of color schemes. The first parameter is
+{-| Specify a scale range as a list of color schemes. The first parameter is
 the name of the colour scheme to use, the second any customising properties.
-See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
 -}
 raScheme : Str -> List ColorSchemeProperty -> ScaleRange
 raScheme =
     RScheme
 
 
-{-| A signal name used to generate a scale range. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+{-| Specify a signal name used to generate a scale range.
 -}
 raSignal : String -> ScaleRange
 raSignal =
     RSignal
 
 
-{-| The step size for a band scale range. See the
-[Vega band scale documentation](https://vega.github.io/vega/docs/scales/).
+{-| Specify the step size for a band scale range.
 -}
 raStep : Value -> ScaleRange
 raStep =
     RStep
 
 
-{-| A scale range specified as a list of strings. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+{-| Specify a scale range as a list of strings.
 -}
 raStrs : List String -> ScaleRange
 raStrs =
     RStrs
 
 
-{-| A scale range specified as a list of values. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+{-| Specify a scale range as a list of values.
 -}
 raValues : List Value -> ScaleRange
 raValues =
@@ -9053,8 +8569,7 @@ rgb =
     Rgb
 
 
-{-| Used to indicate the type of scale transformation to apply. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#types) for more details.
+{-| Type of scale transformation to apply.
 -}
 type Scale
     = ScLinear
@@ -9076,21 +8591,13 @@ type Scale
 
 
 {-| Create a single scale used to map data values to visual properties.
-
-    scale "xScale"
-        [ scType ScLinear
-        , scDomain (doData [ daDataset "myData", daField (field "myField") ])
-        , scRange RaWidth
-        ]
-
 -}
 scale : String -> List ScaleProperty -> List Spec -> List Spec
 scale name sps =
     (::) (JE.object (( "name", JE.string name ) :: List.map scaleProperty sps))
 
 
-{-| Describes the way a scale can be rounded to 'nice' numbers. For full details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/).
+{-| Specify the way a scale can be rounded to 'nice' numbers.
 -}
 type ScaleNice
     = NMillisecond
@@ -9108,9 +8615,8 @@ type ScaleNice
     | ScaleNiceSignal String
 
 
-{-| Specify that the type of 'nice' scale generation is to be determined by a signal
-with the given name. For valid values of the signal see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/).
+{-| Specify that the type of 'nice' scale generation is to be determined by a
+signal with the given name.
 -}
 scaleNiceSignal : String -> ScaleNice
 scaleNiceSignal =
@@ -9118,8 +8624,7 @@ scaleNiceSignal =
 
 
 {-| Specify that a default scaling (`width`, `category`, `heatmap` etc.) is to be
-determined by a signal with the given name. For valid values of the signal see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#range).
+determined by a signal with the given name.
 -}
 scaleRangeSignal : String -> ScaleRange
 scaleRangeSignal =
@@ -9147,9 +8652,7 @@ scales scs =
     ( VScales, JE.list scs )
 
 
-{-| Specify a type of scale transformation is to be determined by a signal. For
-valid values of the signal, see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#types).
+{-| Specify a type of scale transformation is to be determined by a signal.
 -}
 scaleSignal : String -> Scale
 scaleSignal =
@@ -9157,16 +8660,14 @@ scaleSignal =
 
 
 {-| Specify the alignment of elements within each step of a band scale, as a
-fraction of the step size. Should be in the range [0,1]. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+fraction of the step size. Should be in the range [0,1].
 -}
 scAlign : Num -> ScaleProperty
 scAlign =
     SAlign
 
 
-{-| Specify the base of the logorithm used in a logarithmic scale. For more details
-see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the base of the logorithm used in a logarithmic scale.
 -}
 scBase : Num -> ScaleProperty
 scBase =
@@ -9177,24 +8678,21 @@ scBase =
 scale range (default false). If clamping is disabled and the scale is passed a
 value outside the domain, the scale may return a value outside the range through
 extrapolation. If clamping is enabled, the output value of the scale is always
-within the scale’s range. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+within the scale’s range.
 -}
 scClamp : Boo -> ScaleProperty
 scClamp =
     SClamp
 
 
-{-| Specify a custom named scale. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#types)
+{-| Specify a custom named scale.
 -}
 scCustom : String -> Scale
 scCustom =
     ScCustom
 
 
-{-| Specify the domain of input data values for a scale. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the domain of input data values for a scale.
 -}
 scDomain : ScaleDomain -> ScaleProperty
 scDomain =
@@ -9204,8 +8702,7 @@ scDomain =
 {-| Specify whether or not ordinal domains should be implicitly extended with new
 values. If false, a scale will return `undefined` for values not included in the
 domain; if true, new values will be appended to the domain and an updated range
-value will be returned. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+value will be returned.
 -}
 scDomainImplicit : Boo -> ScaleProperty
 scDomainImplicit =
@@ -9213,8 +8710,7 @@ scDomainImplicit =
 
 
 {-| Specify the maximum value of a scale domain, overriding a `scDomain` setting.
-This is only intended for use with scales having continuous domains. For more details
-see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+This is only intended for use with scales having continuous domains.
 -}
 scDomainMax : Num -> ScaleProperty
 scDomainMax =
@@ -9222,8 +8718,7 @@ scDomainMax =
 
 
 {-| Specify the minimum value of a scale domain, overriding a `scDomain` setting.
-This is only intended for use with scales having continuous domains. For more details
-see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+This is only used with scales having continuous domains.
 -}
 scDomainMin : Num -> ScaleProperty
 scDomainMin =
@@ -9232,19 +8727,18 @@ scDomainMin =
 
 {-| Insert a single mid-point value into a two-element scale domain. The mid-point
 value must lie between the domain minimum and maximum values. This can be useful
-for setting a midpoint for diverging color scales. It is only intended for use
-with scales having continuous, piecewise domains. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+for setting a midpoint for diverging color scales. Only used with scales having
+continuous, piecewise domains.
 -}
 scDomainMid : Num -> ScaleProperty
 scDomainMid =
     SDomainMid
 
 
-{-| Specify a list value that directly overrides the domain of a scale. This is
-useful for supporting interactions such as panning or zooming a scale. The scale
-may be initially determined using a data-driven domain, then modified in response
-to user input by using this rawDomain function.
+{-| Specify a list value that directly overrides the domain of a scale. Useful for
+supporting interactions such as panning or zooming a scale. The scale may be
+initially determined using a data-driven domain, then modified in response to user
+input.
 
     scales
         << scale "xDetail"
@@ -9254,17 +8748,13 @@ to user input by using this rawDomain function.
             , scDomainRaw (vSignal "detailDomain")
             ]
 
-For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
-
 -}
 scDomainRaw : Value -> ScaleProperty
 scDomainRaw =
     SDomainRaw
 
 
-{-| Specify the exponent to be used in power scale. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the exponent to be used in power scale.
 -}
 scExponent : Num -> ScaleProperty
 scExponent =
@@ -9279,8 +8769,7 @@ scInterpolate =
 
 
 {-| Extend the range of a scale domain so it starts and ends on 'nice' round
-values. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+values.
 -}
 scNice : ScaleNice -> ScaleProperty
 scNice =
@@ -9289,8 +8778,6 @@ scNice =
 
 {-| Expand a scale domain to accommodate the specified number of pixels on each
 end of a quantitative scale range or the padding between bands in a band scale.
-For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
 -}
 scPadding : Num -> ScaleProperty
 scPadding =
@@ -9298,8 +8785,7 @@ scPadding =
 
 
 {-| Expand a scale domain to accommodate the specified number of pixels
-between inner bands in a band scale. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+between inner bands in a band scale.
 -}
 scPaddingInner : Num -> ScaleProperty
 scPaddingInner =
@@ -9307,32 +8793,28 @@ scPaddingInner =
 
 
 {-| Expand a scale domain to accommodate the specified number of pixels
-outside the outer bands in a band scale. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+outside the outer bands in a band scale.
 -}
 scPaddingOuter : Num -> ScaleProperty
 scPaddingOuter =
     SPaddingOuter
 
 
-{-| Specify the range of a scale representing the set of visual values. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the range of a scale representing the set of visual values.
 -}
 scRange : ScaleRange -> ScaleProperty
 scRange =
     SRange
 
 
-{-| Specify the step size for band and point scales. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the step size for band and point scales.
 -}
 scRangeStep : Num -> ScaleProperty
 scRangeStep =
     SRangeStep
 
 
-{-| Reverse the order of a scale range. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Reverse the order of a scale range.
 -}
 scReverse : Boo -> ScaleProperty
 scReverse =
@@ -9340,16 +8822,14 @@ scReverse =
 
 
 {-| Specify whether to round numeric output values to integers. Helpful for
-snapping to the pixel grid. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+snapping to the pixel grid.
 -}
 scRound : Boo -> ScaleProperty
 scRound =
     SRound
 
 
-{-| Specify the type of a named scale. For more details see the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+{-| Specify the type of a named scale.
 -}
 scType : Scale -> ScaleProperty
 scType =
@@ -9357,8 +8837,7 @@ scType =
 
 
 {-| Specify whether or not a scale domain should include zero. The default is
-true for linear, sqrt and power scales and false for all others. For more details
-see the [Vega scale documentation](https://vega.github.io/vega/docs/scales/#properties)
+true for linear, sqrt and power scales and false for all others.
 -}
 scZero : Boo -> ScaleProperty
 scZero =
@@ -9366,15 +8845,14 @@ scZero =
 
 
 {-| Bind a signal to an external input element such as a slider, selection list
-or radio button group. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+or radio button group.
 -}
 siBind : Bind -> SignalProperty
 siBind =
     SiBind
 
 
-{-| Indicates a rectangular side. Can be used to specify an axis position.
+{-| Indicate a rectangular side. Can be used to specify an axis position.
 -}
 type Side
     = SLeft
@@ -9393,8 +8871,6 @@ sideSignal =
 
 
 {-| Specify a text description of a signal, useful for inline documentation.
-See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
 -}
 siDescription : String -> SignalProperty
 siDescription =
@@ -9402,8 +8878,6 @@ siDescription =
 
 
 {-| Create the signals used to add dynamism to the visualization.
-For further details see the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals)
 
     si =
         signals
@@ -9419,14 +8893,6 @@ signals sigs =
 
 
 {-| Create a single signal used to add a dynamic component to a visualization.
-For further details see the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals)
-
-    signal "mySignal"
-        [ siValue (vNum 20)
-        , siBind (iRange [ inMin 5, inMax 50, inStep 1 ])
-        ]
-
 -}
 signal : String -> List SignalProperty -> List Spec -> List Spec
 signal sigName sps =
@@ -9436,8 +8902,7 @@ signal sigName sps =
 {-| A unique name to be given to a signal. Signal names should be contain only
 alphanumeric characters (or “$”, or “_”) and may not start with a digit. Reserved
 keywords that may not be used as signal names are "datum", "event", "item", and
-"parent". See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+"parent".
 -}
 siName : String -> SignalProperty
 siName =
@@ -9445,8 +8910,7 @@ siName =
 
 
 {-| Specify event stream handlers for updating a signal value in response to
-input events. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+input events.
 -}
 siOn : List (List EventHandler) -> SignalProperty
 siOn =
@@ -9454,8 +8918,7 @@ siOn =
 
 
 {-| Specify that a signal updates should target a signal in an enclosing scope.
-Used when creating nested signals in a group mark. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+Used when creating nested signals in a group mark.
 -}
 siPushOuter : SignalProperty
 siPushOuter =
@@ -9464,8 +8927,7 @@ siPushOuter =
 
 {-| Specify whether a signal update expression should be automatically re-evaluated
 when any upstream signal dependencies update. If false, the update expression will
-only be run upon initialization. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+only be run upon initialization.
 -}
 siReact : Boo -> SignalProperty
 siReact =
@@ -9474,16 +8936,14 @@ siReact =
 
 {-| Specify an update expression for a signal which may include other signals,
 in which case the signal will automatically update in response to upstream signal
-changes, so long as its react property is not false. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+changes, so long as its react property is not false.
 -}
 siUpdate : String -> SignalProperty
 siUpdate =
     SiUpdate
 
 
-{-| Specify the initial value of a signal. See the
-[Vega signal documentation](https://vega.github.io/vega/docs/signals).
+{-| Specify the initial value of a signal.
 -}
 siValue : Value -> SignalProperty
 siValue =
@@ -9539,8 +8999,7 @@ spiralSignal =
     SpiralSignal
 
 
-{-| Name of the source for a set of marks. See the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)
+{-| Name of the source for a set of marks.
 -}
 srData : Str -> Source
 srData =
@@ -9575,16 +9034,13 @@ visualize the local data partition.
                     ]
                 ]
 
-See the
-[Vega mark documentation](https://vega.github.io/vega/docs/marks/#from)
-
 -}
 srFacet : Str -> String -> List Facet -> Source
 srFacet d name =
     SFacet d name
 
 
-{-| Indicates the type of offsetting to apply when stacking. `OfZero` uses a baseline
+{-| Indicate the type of offsetting to apply when stacking. `OfZero` uses a baseline
 at the foot of a stack, `OfCenter` uses a central baseline with stacking both above
 and below it. `OfNormalize` rescales the stack to a common height while preserving
 the relative size of stacked quantities.
@@ -9824,8 +9280,7 @@ symPath =
 
 {-| Specify the output field names within which to write the results of a tree
 layout transform. The parameters represent the names to replace the defaults in
-the following order: `x`, `y`, `depth` and `children`. See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+the following order: `x`, `y`, `depth` and `children`.
 -}
 teAs : String -> String -> String -> String -> TreeProperty
 teAs =
@@ -9833,16 +9288,14 @@ teAs =
 
 
 {-| Specify the data corresponding to a numeric value to be associated with nodes
-in a tree transform. See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+in a tree transform.
 -}
 teField : Field -> TreeProperty
 teField =
     TeField
 
 
-{-| Specify layout method used in a tree transform. See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+{-| Specify layout method used in a tree transform.
 -}
 teMethod : TreeMethod -> TreeProperty
 teMethod =
@@ -9850,8 +9303,7 @@ teMethod =
 
 
 {-| Specify the size of each node in a tree layout as a two-element [width,height]
-list (or a signal that generates such a list). See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+list (or a signal that generates such a list).
 -}
 teNodeSize : Num -> TreeProperty
 teNodeSize =
@@ -9859,8 +9311,7 @@ teNodeSize =
 
 
 {-| Specify the size of of a tree layout as a two-element [width,height] list
-(or a signal that generates such a list). See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+(or a signal that generates such a list).
 -}
 teSize : Num -> TreeProperty
 teSize =
@@ -9868,8 +9319,7 @@ teSize =
 
 
 {-| Specify how sorting of sibling nodes is performed as part of a tree layout
-transform. See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
+transform.
 -}
 teSort : List ( Field, Order ) -> TreeProperty
 teSort =
@@ -9893,7 +9343,17 @@ textDirectionSignal =
     TextDirectionSignal
 
 
-{-| Create a text direction value. This can be used with [maDir](#maDir).
+{-| Create a text direction value. For example,
+
+      << mark Text
+          [ mFrom [ srData (str "table") ]
+          , mEncode
+              [ enEnter
+                  [ maText [ vField (field "date") ]
+                  , maDir [ textDirectionValue RightToLeft ]
+                  ]
+          ]
+
 -}
 textDirectionValue : TextDirection -> Value
 textDirectionValue dir =
@@ -9910,8 +9370,7 @@ textDirectionValue dir =
 
 {-| Specify an expression that evaluates to data objects to insert as triggers.
 A trigger enables dynamic updates to a visualization. Insert operations are only
-applicable to data sets, not marks. See the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
+applicable to data sets, not marks.
 -}
 tgInsert : String -> TriggerProperty
 tgInsert =
@@ -9933,9 +9392,6 @@ values that should be updated. For example:
 would set the `fx` and `fy` properties on mark items referenced by `myDragSignal`
 to the current mouse pointer position.
 
-Modify operations are applicable to both datasets and marks. See the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
-
 -}
 tgModifyValues : String -> String -> TriggerProperty
 tgModifyValues =
@@ -9944,17 +9400,14 @@ tgModifyValues =
 
 {-| Specify an expression that evaluates to data objects to remove.
 A trigger enables dynamic updates to a visualization. Remove operations are only
-applicable to data sets, not marks. See the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
+applicable to data sets, not marks.
 -}
 tgRemove : String -> TriggerProperty
 tgRemove =
     TgRemove
 
 
-{-| Remove all data objects. A trigger enables dynamic updates to a visualization.
-See the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
+{-| Remove all data object triggers.
 -}
 tgRemoveAll : TriggerProperty
 tgRemoveAll =
@@ -9963,9 +9416,7 @@ tgRemoveAll =
 
 {-| Specify an expression that evaluates to data objects to toggle. Toggled
 objects are inserted or removed depending on whether they are already in the
-data set. Toggle operations are only applicable to data sets, not marks. For
-details see the
-[Vega trigger documentation](https://vega.github.io/vega/docs/triggers/)
+data set. Applicable only to data sets, not marks.
 -}
 tgToggle : String -> TriggerProperty
 tgToggle =
@@ -9973,40 +9424,35 @@ tgToggle =
 
 
 {-| Specify the horizontal alignment of a title. If specified this will override
-the [tiAnchor](#tiAnchor) setting (useful when aligning rotated title text). For
-details see the [Vega title documentation](https://vega.github.io/vega/docs/title/).
+the [tiAnchor](#tiAnchor) setting (useful when aligning rotated title text).
 -}
 tiAlign : HAlign -> TitleProperty
 tiAlign =
     TAlign
 
 
-{-| Specify the anchor positioning of a title. Used for aligning title text. For
-details see the [Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the anchor positioning of a title. Used for aligning title text.
 -}
 tiAnchor : Anchor -> TitleProperty
 tiAnchor =
     TAnchor
 
 
-{-| Specify the angle in degrees of a title. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the angle in degrees of a title.
 -}
 tiAngle : Num -> TitleProperty
 tiAngle =
     TAngle
 
 
-{-| Specify the vertical title text baseline. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the vertical title text baseline.
 -}
 tiBaseline : VAlign -> TitleProperty
 tiBaseline =
     TBaseline
 
 
-{-| Specify the color of a title. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the color of a title.
 -}
 tiColor : Str -> TitleProperty
 tiColor =
@@ -10015,24 +9461,21 @@ tiColor =
 
 {-| Specify optional mark encodings for custom title styling. This is a standard
 encoding for text marks and may contain `enEnter`, `enUpdate`, `enExit` and
-`enHover` specifications. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+`enHover` specifications.
 -}
 tiEncode : List EncodingProperty -> TitleProperty
 tiEncode =
     TEncode
 
 
-{-| Specify the font name of a title. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the font name of a title.
 -}
 tiFont : Str -> TitleProperty
 tiFont =
     TFont
 
 
-{-| Specify the font size of a title. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the font size of a title.
 -}
 tiFontSize : Num -> TitleProperty
 tiFontSize =
@@ -10040,16 +9483,14 @@ tiFontSize =
 
 
 {-| Specify the font weight of a title (can be a number such as `vnum 300` or text
-such as `vStr "bold"`). See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+such as `vStr "bold"`).
 -}
 tiFontWeight : Value -> TitleProperty
 tiFontWeight =
     TFontWeight
 
 
-{-| Specify the reference frame for the anchor position of a title. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the reference frame for the anchor position of a title.
 -}
 tiFrame : TitleFrame -> TitleProperty
 tiFrame =
@@ -10057,16 +9498,14 @@ tiFrame =
 
 
 {-| Specify whether or not a title's properties should respond to input events
-such as mouse hover. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+such as mouse hover.
 -}
 tiInteractive : Boo -> TitleProperty
 tiInteractive =
     TInteractive
 
 
-{-| Specify the maximim allowed length of a title in pixels. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the maximim allowed length of a title in pixels.
 -}
 tiLimit : Num -> TitleProperty
 tiLimit =
@@ -10098,8 +9537,7 @@ timeUnitSignal =
 
 {-| Specify a mark name to apply to a title text mark. This name can be used to
 refer to the title mark with an
-[event stream definition](https://vega.github.io/vega/docs/event-streams/). For
-details see the [Vega title documentation](https://vega.github.io/vega/docs/title/).
+[event stream definition](https://vega.github.io/vega/docs/event-streams/).
 -}
 tiName : String -> TitleProperty
 tiName =
@@ -10107,16 +9545,14 @@ tiName =
 
 
 {-| Specify the orthogonal offset in pixels by which to displace the title from
-its position along the edge of the chart. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+its position along the edge of the chart.
 -}
 tiOffset : Num -> TitleProperty
 tiOffset =
     TOffset
 
 
-{-| Specify the positioning of a title relative to the chart. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+{-| Specify the positioning of a title relative to the chart.
 -}
 tiOrient : Side -> TitleProperty
 tiOrient =
@@ -10124,8 +9560,7 @@ tiOrient =
 
 
 {-| Specify a mark style property to apply to the title text mark. If not
-specified the default style of `group-title` is used. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+specified the default style of `group-title` is used.
 -}
 tiStyle : Str -> TitleProperty
 tiStyle =
@@ -10134,15 +9569,14 @@ tiStyle =
 
 {-| Specify the top-level title to be displayed as part of a visualization.
 The first paramter is the text of the title to display, the second any optional
-properties for customising the title's appearance. For details, see the
-[Vega title documentation](https://vega.github.io/vega/docs/title/)
+properties for customising the title's appearance.
 -}
 title : Str -> List TitleProperty -> ( VProperty, Spec )
 title s tps =
     ( VTitle, JE.object (List.map titleProperty (TText s :: tps)) )
 
 
-{-| Indicates the wey a title anchor position is calculated. `FrBounds` implies
+{-| Indicate the way a title anchor position is calculated. `FrBounds` implies
 text anchor is relative to the full bounding box whereas `FrGroup` implies it is
 relative to the group width/height.
 -}
@@ -10161,8 +9595,7 @@ titleFrameSignal =
 
 
 {-| Specify a z-index indicating the layering of the title group relative to
-other axis, mark and legend groups. See the
-[Vega title documentation](https://vega.github.io/vega/docs/title/).
+other axis, mark and legend groups.
 -}
 tiZIndex : Num -> TitleProperty
 tiZIndex =
@@ -10171,8 +9604,7 @@ tiZIndex =
 
 {-| Specify the output field names for the output of a treemap layout transform.
 The parameters correspond to the (default name) fields `x0`, `y0`, `x1`, `y1`,
-`depth` and `children`. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+`depth` and `children`.
 -}
 tmAs : String -> String -> String -> String -> String -> String -> TreemapProperty
 tmAs =
@@ -10181,24 +9613,21 @@ tmAs =
 
 {-| Specify the data field corresponding to a numeric value for a treemap node.
 The sum of values for a node and all its descendants is available on the node object
-as the `value` property. This field determines the size of a node. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+as the `value` property. This field determines the size of a node.
 -}
 tmField : Field -> TreemapProperty
 tmField =
     TmField
 
 
-{-| Specify the layout method to use in a treemap transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+{-| Specify the layout method to use in a treemap transform.
 -}
 tmMethod : TreemapMethod -> TreemapProperty
 tmMethod =
     TmMethod
 
 
-{-| Specify the inner and outer padding values for a treemap layout transform. For details see
-the [Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+{-| Specify the inner and outer padding values for a treemap layout transform.
 -}
 tmPadding : Num -> TreemapProperty
 tmPadding =
@@ -10206,16 +9635,14 @@ tmPadding =
 
 
 {-| Specify the padding between the bottom edge of a node and its children in a treemap
-layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+layout transform.
 -}
 tmPaddingBottom : Num -> TreemapProperty
 tmPaddingBottom =
     TmPaddingBottom
 
 
-{-| Specify the inner padding values for a treemap layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+{-| Specify the inner padding values for a treemap layout transform.
 -}
 tmPaddingInner : Num -> TreemapProperty
 tmPaddingInner =
@@ -10223,16 +9650,14 @@ tmPaddingInner =
 
 
 {-| Specify the padding between the left edge of a node and its children in a treemap
-layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+layout transform.
 -}
 tmPaddingLeft : Num -> TreemapProperty
 tmPaddingLeft =
     TmPaddingLeft
 
 
-{-| Specify the outer padding values for a treemap layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+{-| Specify the outer padding values for a treemap layout transform.
 -}
 tmPaddingOuter : Num -> TreemapProperty
 tmPaddingOuter =
@@ -10240,8 +9665,7 @@ tmPaddingOuter =
 
 
 {-| Specify the padding between the right edge of a node and its children in a treemap
-layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+layout transform.
 -}
 tmPaddingRight : Num -> TreemapProperty
 tmPaddingRight =
@@ -10249,8 +9673,7 @@ tmPaddingRight =
 
 
 {-| Specify the padding between the top edge of a node and its children in a treemap
-layout transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+layout transform.
 -}
 tmPaddingTop : Num -> TreemapProperty
 tmPaddingTop =
@@ -10258,8 +9681,7 @@ tmPaddingTop =
 
 
 {-| Specify the target aspect ratio for the `Squarify` or `Resquarify` treemap layout
-trqnsformations. The default is the golden ratio, φ = (1 + sqrt(5)) / 2. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+trqnsformations. The default is the golden ratio, φ = (1 + sqrt(5)) / 2.
 -}
 tmRatio : Num -> TreemapProperty
 tmRatio =
@@ -10267,8 +9689,7 @@ tmRatio =
 
 
 {-| Specify whether or not node layout values should be rounded in a treemap transform.
-The default is false. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+The default is false.
 -}
 tmRound : Boo -> TreemapProperty
 tmRound =
@@ -10276,8 +9697,7 @@ tmRound =
 
 
 {-| Specify the size of a treemap layout as two-element list (or signal) corresponding
-to [width, height]. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+to [width, height].
 -}
 tmSize : Num -> TreemapProperty
 tmSize =
@@ -10285,8 +9705,7 @@ tmSize =
 
 
 {-| Specify how sorting of sibling nodes is performed during a treemap layout
-transform. See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
+transform.
 -}
 tmSort : List ( Field, Order ) -> TreemapProperty
 tmSort =
@@ -10516,7 +9935,7 @@ type TreemapMethod
     | TreemapMethodSignal String
 
 
-{-| Indicates a treemap layout method type is to be determined by a named signal.
+{-| Specify a treemap layout method type is to be determined by a named signal.
 The signal should generate the one of `squarify`, `resquarify`, `binary`, `dice`,
 `slice` or `slicedice`.
 -}
@@ -10533,7 +9952,7 @@ type TreeMethod
     | TreeMethodSignal String
 
 
-{-| Indicates a tree layout method type is to be determined by a named signal.
+{-| Specify that a tree layout method is to be determined by a named signal.
 The signal should generate either `tidy` or `cluster`.
 -}
 treeMethodSignal : String -> TreeMethod
@@ -10758,8 +10177,7 @@ trLookup =
 {-| Generate a tree data structure from input data objects by dividing children
 into groups based on distinct field values. This can provide input to tree layout
 methods such as [trTree](#trTree), [trTreemap](#trTreemap), [trPack](#trPack) and
-[trPartition](#trPartition). See the
-[Vega nest transform documentation](https://vega.github.io/vega/docs/transforms/nest/).
+[trPartition](#trPartition).
 -}
 trNest : List Field -> Boo -> Transform
 trNest =
@@ -10771,10 +10189,6 @@ hierarchy. The size of the leaf circles encodes a quantitative dimension of the
 data. The enclosing circles show the approximate cumulative size of each subtree,
 but due to wasted space there is some distortion; only the leaf nodes can be
 compared accurately.
-
-See the
-[Vega pack transform documentation](https://vega.github.io/vega/docs/transforms/pack/).
-
 -}
 trPack : List PackProperty -> Transform
 trPack =
@@ -10785,10 +10199,6 @@ trPack =
 tree diagram. Nodes are drawn as solid areas (either arcs or rectangles) sized by
 some quantitative field, and their placement relative to other nodes reveals their
 position in the hierarchy.
-
-See the
-[Vega partition transform documentation](https://vega.github.io/vega/docs/transforms/partition/).
-
 -}
 trPartition : List PartitionProperty -> Transform
 trPartition =
@@ -10891,8 +10301,7 @@ trStack =
 on key fields that match an id for each node (first parameter) and their parent's
 key (second parameter) nodes. Internally, this transform generates a set of tree
 node objects that can then be processed by tree layout methods such as tree,
-treemap, pack, and partition. See the
-[Vega stratify transform documentation](https://vega.github.io/vega/docs/transforms/stratify/).
+treemap, pack, and partition.
 -}
 trStratify : Field -> Field -> Transform
 trStratify =
@@ -10901,10 +10310,6 @@ trStratify =
 
 {-| Compute a node-link diagram layout for hierarchical data. Supports both cluster
 layouts (for example to create dendrograms) and tidy layouts.
-
-See the
-[Vega tree transform documentation](https://vega.github.io/vega/docs/transforms/tree/).
-
 -}
 trTree : List TreeProperty -> Transform
 trTree =
@@ -10916,10 +10321,6 @@ tree. This transform must occur downstream of a tree-generating transform such a
 [trNest](#trNest) or [trStratify](#trStratify). The generated link objects will
 have `source` and `target` fields that reference input data objects corresponding
 to parent (source) and child (target) nodes.
-
-See the
-[Vega tree links transform documentation](https://vega.github.io/vega/docs/transforms/treelinks/).
-
 -}
 trTreeLinks : Transform
 trTreeLinks =
@@ -10928,10 +10329,6 @@ trTreeLinks =
 
 {-| Recursively subdivide an area into rectangles with areas proportional to each
 node’s associated value.
-
-See the
-[Vega treemap transform documentation](https://vega.github.io/vega/docs/transforms/treemap/).
-
 -}
 trTreemap : List TreemapProperty -> Transform
 trTreemap =
@@ -10990,8 +10387,8 @@ trWordcloud =
     TWordcloud
 
 
-{-| Indicates the vertical alignment of some text or an image mark. Note that the
-`Alphabetic` type constructor applies only to text marks.
+{-| Vertical alignment of some text or an image mark. Note that the `Alphabetic`
+type constructor applies only to text marks.
 -}
 type VAlign
     = AlignTop
@@ -11001,8 +10398,8 @@ type VAlign
     | VAlignSignal String
 
 
-{-| Indicates the vertical alignment of some text based on the value of the
-given signal.
+{-| Specify the vertical alignment of some text based on the value of the
+named signal.
 -}
 vAlignSignal : String -> VAlign
 vAlignSignal =
@@ -11490,7 +10887,7 @@ type WOperation
     | WOperationSignal String
 
 
-{-| Indicates a window operation is to be determined by a named signal. The
+{-| Specify that a window operation is to be determined by a named signal. The
 signal should generate the name of a valid operation (e.g. `dense_rank`).
 For names of valid window operations see the
 [Vega window operation documentation](https://vega.github.io/vega/docs/transforms/window/#ops)
