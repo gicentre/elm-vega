@@ -4,9 +4,11 @@
   <title>Elm-Vega Colour Tests</title>
   <meta charset="utf-8">
 
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <!-- These scripts link to the Vega-Lite runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc1/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+  
   <script src="js/colorTests.js"></script>
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
@@ -61,14 +63,15 @@
     <div style="clear:left"></div>
 
   <script>
-    Elm.ColorTests.worker().ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {
-          actions: true, logLevel:vega.Warn
-        }).catch(console.warn);
-      }
-    });
-  </script>
+  Elm.ColorTests.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+  for (let name of Object.keys(namedSpecs)) {
+    vegaEmbed(`#${name}`, namedSpecs[name], {
+      actions: true,
+      logLevel: vega.Warn
+    }).catch(console.warn);
+  }
+});
+</script>
 
   </body>
 

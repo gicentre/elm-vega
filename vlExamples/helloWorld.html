@@ -5,8 +5,8 @@
   <meta charset="utf-8">
 
   <!-- These scripts link to the Vega-Lite runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc1/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -18,13 +18,13 @@
   <div id="vis"></div>
 
   <script>
-    // This function grabs the specification from Elm (here called specs).
-    // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-    Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(specs) {
-      // Change actions to true to display links to source, editor and image.
-      vegaEmbed("#vis", specs, {actions: false}).catch(console.warn);
-    });
-  </script>
+  // This function grabs the specification from Elm (here called specs).
+// Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
+Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(specs) {
+  // Change actions to true to display links to source, editor and image.
+  vegaEmbed("#vis", specs, { actions: false }).catch(console.warn);
+});
+</script>
 
 </body>
 

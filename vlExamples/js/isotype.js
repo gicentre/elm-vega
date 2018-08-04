@@ -10361,7 +10361,7 @@ var _gicentre$elm_vega$VegaLite$toVegaLite = function (spec) {
 			_0: {
 				ctor: '_Tuple2',
 				_0: '$schema',
-				_1: _elm_lang$core$Json_Encode$string('https://vega.github.io/schema/vega-lite/v2.json')
+				_1: _elm_lang$core$Json_Encode$string('https://vega.github.io/schema/vega-lite/v3.json')
 			},
 			_1: A2(
 				_elm_lang$core$List$map,
@@ -11925,9 +11925,6 @@ var _gicentre$elm_vega$VegaLite$aggregate = F2(
 					})
 			});
 	});
-var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
-var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
-var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 var _gicentre$elm_vega$VegaLite$Row = {ctor: 'Row'};
 var _gicentre$elm_vega$VegaLite$Column = {ctor: 'Column'};
 var _gicentre$elm_vega$VegaLite$AResize = {ctor: 'AResize'};
@@ -12706,9 +12703,6 @@ var _gicentre$elm_vega$VegaLite$ColumnBy = function (a) {
 	return {ctor: 'ColumnBy', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$columnBy = _gicentre$elm_vega$VegaLite$ColumnBy;
-var _gicentre$elm_vega$VegaLite$Plain = {ctor: 'Plain'};
-var _gicentre$elm_vega$VegaLite$Function = {ctor: 'Function'};
-var _gicentre$elm_vega$VegaLite$Verbal = {ctor: 'Verbal'};
 var _gicentre$elm_vega$VegaLite$FRange = F2(
 	function (a, b) {
 		return {ctor: 'FRange', _0: a, _1: b};
@@ -15168,6 +15162,12 @@ var _gicentre$elm_vega$VegaLite$WAscending = function (a) {
 	return {ctor: 'WAscending', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$wiAscending = _gicentre$elm_vega$VegaLite$WAscending;
+var _gicentre$elm_vega$VegaLite$Plain = {ctor: 'Plain'};
+var _gicentre$elm_vega$VegaLite$Function = {ctor: 'Function'};
+var _gicentre$elm_vega$VegaLite$Verbal = {ctor: 'Verbal'};
+var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
+var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
+var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 
 var _gicentre$elm_vega$Isotype$toRows = F2(
 	function (country, animalFreqs) {

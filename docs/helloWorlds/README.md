@@ -18,8 +18,8 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
   <meta charset="utf-8">
 
   <!-- These scripts link to the Vega-Lite runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc1/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -163,6 +163,6 @@ The result should look similar to this:
 You should now have the ability to embed single or multiple visualizations in your web pages.
 To understand more about how Elm-Vega itself works, and how to encode different visualization specifications, have a look at
 
-*   the [Elm-Vega Walkthrough](../walkthrough/README.md)
-*   the [simple examples](../../vlExamples) included in the `vlExamples` folder.
-*   the [vlTest-gallery](../../vlTest-gallery) for a full range of examples.
+-   the [Elm-Vega Walkthrough](../walkthrough/README.md)
+-   the [simple examples](../../vlExamples) included in the `vlExamples` folder.
+-   the [vlTest-gallery](../../vlTest-gallery) for a full range of examples.
