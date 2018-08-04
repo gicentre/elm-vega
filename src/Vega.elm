@@ -6303,7 +6303,7 @@ jaOps =
     JAOps
 
 
-{-| Specify the property to to be extracted from some JSON when it has some
+{-| Specify the property to be extracted from some JSON when it has some
 surrounding structure or meta-data. For example, specifying the property
 `values.features` is equivalent to retrieving `json.values.features` from the
 loaded JSON object with a custom delimiter.
