@@ -9219,18 +9219,6 @@ strokeJoinValue jn =
 
 
 {-| Specify the criteria for sorting values in a stack transform.
-
-    transform
-        [ trStack
-            [ stGroupBy [ field "x" ]
-            , stSort [ ( field "c", Ascend ) ]
-            , stField (field "y")
-            ]
-        ]
-
-See the
-[Vega stack transform documentation](https://vega.github.io/vega/docs/transforms/stack/)
-
 -}
 stSort : List ( Field, Order ) -> StackProperty
 stSort =
@@ -9788,15 +9776,6 @@ trAggregate =
 {-| Apply the given ordered list of transforms to the given data stream. Transform
 examples include filtering, creating new data fields from expressions and creating
 new data fields suitable for a range of visualization and layout types.
-
-    dataSource
-        [ data "pop" [ daUrl (str "data/population.json") ]
-        , data "popYear" [ daSource "pop" ]
-            |> transform [ trFilter (expr "datum.year == year") ]
-        , data "ageGroups" [ daSource "pop" ]
-            |> transform [ trAggregate [ agGroupBy [ field "age" ] ] ]
-        ]
-
 -}
 transform : List Transform -> DataTable -> DataTable
 transform transforms dTable =
@@ -9871,14 +9850,6 @@ unique pattern matches found within the designated text field.
 The first parameter is the field containing the text to count, the second a list
 of optional counting properties. The transform generates two fields named `text`
 and `count` unless renamed via `cpAs`.
-
-    transform
-        [ trCountPattern (field "data")
-            [ cpCase Uppercase
-            , cpPattern (str "[\\w']{3,}")
-            , cpStopwords (str "(i|me|my|myself)")
-            ]
-        ]
 
 -}
 trCountPattern : Field -> List CountPatternProperty -> Transform
