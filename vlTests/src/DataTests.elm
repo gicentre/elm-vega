@@ -231,9 +231,32 @@ flatten1 =
     toVegaLite [ data [], trans [], circle [], enc [] ]
 
 
+fold1 : Spec
+fold1 =
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "country" (strs [ "USA", "Canada" ])
+                << dataColumn "gold" (nums [ 10, 7 ])
+                << dataColumn "silver" (nums [ 20, 26 ])
+
+        trans =
+            transform
+                << foldAs [ "gold", "silver" ] "k" "v"
+
+        enc =
+            encoding
+                << column [ fName "k", fMType Nominal ]
+                << position X [ pName "country", pMType Nominal ]
+                << position Y [ pName "v", pMType Quantitative ]
+                << color [ mName "country", mMType Nominal ]
+    in
+    toVegaLite [ data [], trans [], bar [], enc [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    flatten1
+    fold1
 
 
 
@@ -259,6 +282,7 @@ mySpecs =
         , ( "geodata1", geodata1 )
         , ( "geodata2", geodata2 )
         , ( "flatten1", flatten1 )
+        , ( "fold1", fold1 )
         ]
 
 

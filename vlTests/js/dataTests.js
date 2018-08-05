@@ -13797,6 +13797,44 @@ var _gicentre$elm_vega$VegaLite$geoFeatureCollection = function (geoms) {
 			}
 		});
 };
+var _gicentre$elm_vega$VegaLite$foldAs = F3(
+	function (fields, keyName, valName) {
+		return F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})(
+			{
+				ctor: '_Tuple2',
+				_0: 'foldAs',
+				_1: _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Json_Encode$list(
+							A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, fields)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Json_Encode$string(keyName),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Json_Encode$string(valName),
+								_1: {ctor: '[]'}
+							}
+						}
+					})
+			});
+	});
+var _gicentre$elm_vega$VegaLite$fold = function (fields) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'fold',
+			_1: _elm_lang$core$Json_Encode$list(
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, fields))
+		});
+};
 var _gicentre$elm_vega$VegaLite$flattenAs = F2(
 	function (fields, names) {
 		return F2(
@@ -13820,7 +13858,7 @@ var _gicentre$elm_vega$VegaLite$flattenAs = F2(
 					})
 			});
 	});
-var _gicentre$elm_vega$VegaLite$flatten = function (fs) {
+var _gicentre$elm_vega$VegaLite$flatten = function (fields) {
 	return F2(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
@@ -13829,7 +13867,7 @@ var _gicentre$elm_vega$VegaLite$flatten = function (fs) {
 			ctor: '_Tuple2',
 			_0: 'flatten',
 			_1: _elm_lang$core$Json_Encode$list(
-				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, fs))
+				A2(_elm_lang$core$List$map, _elm_lang$core$Json_Encode$string, fields))
 		});
 };
 var _gicentre$elm_vega$VegaLite$filter = function (f) {
@@ -17006,15 +17044,15 @@ var _gicentre$elm_vega$VegaLite$VLTransform = {ctor: 'VLTransform'};
 var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 	var assemble = function (_p149) {
 		var _p150 = _p149;
-		var _p165 = _p150._1;
-		var _p164 = _p150._0;
-		var _p151 = _p164;
+		var _p166 = _p150._1;
+		var _p165 = _p150._0;
+		var _p151 = _p165;
 		switch (_p151) {
 			case 'aggregate':
 				var _p152 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if ((((_p152.ctor === 'Ok') && (_p152._0.ctor === '::')) && (_p152._0._1.ctor === '::')) && (_p152._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17033,7 +17071,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				var _p153 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if (((((_p153.ctor === 'Ok') && (_p153._0.ctor === '::')) && (_p153._0._1.ctor === '::')) && (_p153._0._1._1.ctor === '::')) && (_p153._0._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17056,7 +17094,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				var _p154 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if ((((_p154.ctor === 'Ok') && (_p154._0.ctor === '::')) && (_p154._0._1.ctor === '::')) && (_p154._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17075,7 +17113,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				var _p155 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if ((((((_p155.ctor === 'Ok') && (_p155._0.ctor === '::')) && (_p155._0._1.ctor === '::')) && (_p155._0._1._1.ctor === '::')) && (_p155._0._1._1._1.ctor === '::')) && (_p155._0._1._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17111,7 +17149,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				var _p156 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if ((((((_p156.ctor === 'Ok') && (_p156._0.ctor === '::')) && (_p156._0._1.ctor === '::')) && (_p156._0._1._1.ctor === '::')) && (_p156._0._1._1._1.ctor === '::')) && (_p156._0._1._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17147,7 +17185,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				var _p157 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if ((((_p157.ctor === 'Ok') && (_p157._0.ctor === '::')) && (_p157._0._1.ctor === '::')) && (_p157._0._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
@@ -17162,22 +17200,54 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				} else {
 					return _elm_lang$core$Json_Encode$null;
 				}
-			case 'timeUnit':
+			case 'foldAs':
 				var _p158 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
 				if (((((_p158.ctor === 'Ok') && (_p158._0.ctor === '::')) && (_p158._0._1.ctor === '::')) && (_p158._0._1._1.ctor === '::')) && (_p158._0._1._1._1.ctor === '[]')) {
 					return _elm_lang$core$Json_Encode$object(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'timeUnit', _1: _p158._0._0},
+							_0: {ctor: '_Tuple2', _0: 'fold', _1: _p158._0._0},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'field', _1: _p158._0._1._0},
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'as',
+									_1: _elm_lang$core$Json_Encode$list(
+										{
+											ctor: '::',
+											_0: _p158._0._1._0,
+											_1: {
+												ctor: '::',
+												_0: _p158._0._1._1._0,
+												_1: {ctor: '[]'}
+											}
+										})
+								},
+								_1: {ctor: '[]'}
+							}
+						});
+				} else {
+					return _elm_lang$core$Json_Encode$null;
+				}
+			case 'timeUnit':
+				var _p159 = A2(
+					_elm_lang$core$Json_Decode$decodeString,
+					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
+				if (((((_p159.ctor === 'Ok') && (_p159._0.ctor === '::')) && (_p159._0._1.ctor === '::')) && (_p159._0._1._1.ctor === '::')) && (_p159._0._1._1._1.ctor === '[]')) {
+					return _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'timeUnit', _1: _p159._0._0},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'field', _1: _p159._0._1._0},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'as', _1: _p158._0._1._1._0},
+									_0: {ctor: '_Tuple2', _0: 'as', _1: _p159._0._1._1._0},
 									_1: {ctor: '[]'}
 								}
 							}
@@ -17186,15 +17256,15 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 					return _elm_lang$core$Json_Encode$null;
 				}
 			case 'windowAs':
-				var _p159 = A2(
+				var _p160 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
-					A2(_elm_lang$core$Json_Encode$encode, 0, _p165));
-				if (((((((_p159.ctor === 'Ok') && (_p159._0.ctor === '::')) && (_p159._0._1.ctor === '::')) && (_p159._0._1._1.ctor === '::')) && (_p159._0._1._1._1.ctor === '::')) && (_p159._0._1._1._1._1.ctor === '::')) && (_p159._0._1._1._1._1._1.ctor === '[]')) {
-					var _p163 = _p159._0._1._1._1._1._0;
-					var _p162 = _p159._0._1._1._0;
-					var _p161 = _p159._0._1._1._1._0;
-					var _p160 = _p159._0._1._0;
+					A2(_elm_lang$core$Json_Encode$encode, 0, _p166));
+				if (((((((_p160.ctor === 'Ok') && (_p160._0.ctor === '::')) && (_p160._0._1.ctor === '::')) && (_p160._0._1._1.ctor === '::')) && (_p160._0._1._1._1.ctor === '::')) && (_p160._0._1._1._1._1.ctor === '::')) && (_p160._0._1._1._1._1._1.ctor === '[]')) {
+					var _p164 = _p160._0._1._1._1._1._0;
+					var _p163 = _p160._0._1._1._0;
+					var _p162 = _p160._0._1._1._1._0;
+					var _p161 = _p160._0._1._0;
 					return _elm_lang$core$Json_Encode$object(
 						A2(
 							_elm_lang$core$Basics_ops['++'],
@@ -17206,7 +17276,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 									_1: _elm_lang$core$Json_Encode$list(
 										{
 											ctor: '::',
-											_0: _p159._0._0,
+											_0: _p160._0._0,
 											_1: {ctor: '[]'}
 										})
 								},
@@ -17214,28 +17284,28 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 							},
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								_elm_lang$core$Native_Utils.eq(_p160, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
+								_elm_lang$core$Native_Utils.eq(_p161, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'frame', _1: _p160},
+									_0: {ctor: '_Tuple2', _0: 'frame', _1: _p161},
 									_1: {ctor: '[]'}
 								},
 								A2(
 									_elm_lang$core$Basics_ops['++'],
-									_elm_lang$core$Native_Utils.eq(_p162, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
+									_elm_lang$core$Native_Utils.eq(_p163, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
 										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ignorePeers', _1: _p162},
+										_0: {ctor: '_Tuple2', _0: 'ignorePeers', _1: _p163},
 										_1: {ctor: '[]'}
 									},
 									A2(
 										_elm_lang$core$Basics_ops['++'],
-										_elm_lang$core$Native_Utils.eq(_p161, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
+										_elm_lang$core$Native_Utils.eq(_p162, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p161},
+											_0: {ctor: '_Tuple2', _0: 'groupby', _1: _p162},
 											_1: {ctor: '[]'}
 										},
-										_elm_lang$core$Native_Utils.eq(_p163, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
+										_elm_lang$core$Native_Utils.eq(_p164, _elm_lang$core$Json_Encode$null) ? {ctor: '[]'} : {
 											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'sort', _1: _p163},
+											_0: {ctor: '_Tuple2', _0: 'sort', _1: _p164},
 											_1: {ctor: '[]'}
 										})))));
 				} else {
@@ -17245,7 +17315,7 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 				return _elm_lang$core$Json_Encode$object(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: _p164, _1: _p165},
+						_0: {ctor: '_Tuple2', _0: _p165, _1: _p166},
 						_1: {ctor: '[]'}
 					});
 		}
@@ -17260,8 +17330,8 @@ var _gicentre$elm_vega$VegaLite$transform = function (transforms) {
 var _gicentre$elm_vega$VegaLite$VLMark = {ctor: 'VLMark'};
 var _gicentre$elm_vega$VegaLite$mark = F2(
 	function (mark, mProps) {
-		var _p166 = mProps;
-		if (_p166.ctor === '[]') {
+		var _p167 = mProps;
+		if (_p167.ctor === '[]') {
 			return {
 				ctor: '_Tuple2',
 				_0: _gicentre$elm_vega$VegaLite$VLMark,
@@ -17304,27 +17374,27 @@ var _gicentre$elm_vega$VegaLite$trail = _gicentre$elm_vega$VegaLite$mark(_gicent
 var _gicentre$elm_vega$VegaLite$VLDatasets = {ctor: 'VLDatasets'};
 var _gicentre$elm_vega$VegaLite$datasets = function (namedData) {
 	var extract = function (data) {
-		var _p167 = A2(
+		var _p168 = A2(
 			_elm_lang$core$Json_Decode$decodeString,
 			_elm_lang$core$Json_Decode$keyValuePairs(_elm_lang$core$Json_Decode$value),
 			A2(_elm_lang$core$Json_Encode$encode, 0, data));
-		if ((((_p167.ctor === 'Ok') && (_p167._0.ctor === '::')) && (_p167._0._0.ctor === '_Tuple2')) && (_p167._0._1.ctor === '[]')) {
-			return _p167._0._0._1;
+		if ((((_p168.ctor === 'Ok') && (_p168._0.ctor === '::')) && (_p168._0._0.ctor === '_Tuple2')) && (_p168._0._1.ctor === '[]')) {
+			return _p168._0._0._1;
 		} else {
 			return data;
 		}
 	};
 	var specs = A2(
 		_elm_lang$core$List$map,
-		function (_p168) {
-			var _p169 = _p168;
+		function (_p169) {
+			var _p170 = _p169;
 			return {
 				ctor: '_Tuple2',
-				_0: _p169._0,
-				_1: function (_p170) {
-					var _p171 = _p170;
-					return extract(_p171._1);
-				}(_p169._1)
+				_0: _p170._0,
+				_1: function (_p171) {
+					var _p172 = _p171;
+					return extract(_p172._1);
+				}(_p170._1)
 			};
 		},
 		namedData);
@@ -17532,12 +17602,12 @@ var _gicentre$elm_vega$VegaLite$dataFromUrl = F2(
 var _gicentre$elm_vega$VegaLite$dataName = F2(
 	function (name, data) {
 		var extract = function (d) {
-			var _p172 = A2(
+			var _p173 = A2(
 				_elm_lang$core$Json_Decode$decodeString,
 				_elm_lang$core$Json_Decode$keyValuePairs(_elm_lang$core$Json_Decode$value),
 				A2(_elm_lang$core$Json_Encode$encode, 0, d));
-			if ((((_p172.ctor === 'Ok') && (_p172._0.ctor === '::')) && (_p172._0._0.ctor === '_Tuple2')) && (_p172._0._1.ctor === '[]')) {
-				return {ctor: '_Tuple2', _0: _p172._0._0._0, _1: _p172._0._0._1};
+			if ((((_p173.ctor === 'Ok') && (_p173._0.ctor === '::')) && (_p173._0._0.ctor === '_Tuple2')) && (_p173._0._1.ctor === '[]')) {
+				return {ctor: '_Tuple2', _0: _p173._0._0._0, _1: _p173._0._0._1};
 			} else {
 				return A2(
 					_elm_lang$core$Debug$log,
@@ -17545,9 +17615,9 @@ var _gicentre$elm_vega$VegaLite$dataName = F2(
 					{ctor: '_Tuple2', _0: '', _1: d});
 			}
 		};
-		var spec = function (_p173) {
-			var _p174 = _p173;
-			return extract(_p174._1);
+		var spec = function (_p174) {
+			var _p175 = _p174;
+			return extract(_p175._1);
 		}(data);
 		return {
 			ctor: '_Tuple2',
@@ -17692,8 +17762,174 @@ var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
 var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
 var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 
-var _gicentre$elm_vega$DataTests$flatten1 = function () {
+var _gicentre$elm_vega$DataTests$fold1 = function () {
 	var enc = function (_p0) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A2(
+				_gicentre$elm_vega$VegaLite$column,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$fName('k'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$fMType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('country'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pName('v'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$color,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mName('country'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							_p0)))));
+	};
+	var trans = function (_p1) {
+		return _gicentre$elm_vega$VegaLite$transform(
+			A4(
+				_gicentre$elm_vega$VegaLite$foldAs,
+				{
+					ctor: '::',
+					_0: 'gold',
+					_1: {
+						ctor: '::',
+						_0: 'silver',
+						_1: {ctor: '[]'}
+					}
+				},
+				'k',
+				'v',
+				_p1));
+	};
+	var data = function (_p2) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'country',
+				_gicentre$elm_vega$VegaLite$strs(
+					{
+						ctor: '::',
+						_0: 'USA',
+						_1: {
+							ctor: '::',
+							_0: 'Canada',
+							_1: {ctor: '[]'}
+						}
+					}),
+				A3(
+					_gicentre$elm_vega$VegaLite$dataColumn,
+					'gold',
+					_gicentre$elm_vega$VegaLite$nums(
+						{
+							ctor: '::',
+							_0: 10,
+							_1: {
+								ctor: '::',
+								_0: 7,
+								_1: {ctor: '[]'}
+							}
+						}),
+					A3(
+						_gicentre$elm_vega$VegaLite$dataColumn,
+						'silver',
+						_gicentre$elm_vega$VegaLite$nums(
+							{
+								ctor: '::',
+								_0: 20,
+								_1: {
+									ctor: '::',
+									_0: 26,
+									_1: {ctor: '[]'}
+								}
+							}),
+						_p2))));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: trans(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$bar(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: enc(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$DataTests$sourceExample = _gicentre$elm_vega$DataTests$fold1;
+var _gicentre$elm_vega$DataTests$view = function (spec) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('specSource'),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$pre,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$DataTests$sourceExample)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gicentre$elm_vega$DataTests$flatten1 = function () {
+	var enc = function (_p3) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17730,9 +17966,9 @@ var _gicentre$elm_vega$DataTests$flatten1 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p0))));
+						_p3))));
 	};
-	var trans = function (_p1) {
+	var trans = function (_p4) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A3(
 				_gicentre$elm_vega$VegaLite$flattenAs,
@@ -17754,7 +17990,7 @@ var _gicentre$elm_vega$DataTests$flatten1 = function () {
 						_1: {ctor: '[]'}
 					}
 				},
-				_p1));
+				_p4));
 	};
 	var data = _gicentre$elm_vega$VegaLite$dataFromJson(
 		_elm_lang$core$Json_Encode$list(
@@ -17892,36 +18128,6 @@ var _gicentre$elm_vega$DataTests$flatten1 = function () {
 			}
 		});
 }();
-var _gicentre$elm_vega$DataTests$sourceExample = _gicentre$elm_vega$DataTests$flatten1;
-var _gicentre$elm_vega$DataTests$view = function (spec) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('specSource'),
-					_1: {ctor: '[]'}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$pre,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$DataTests$sourceExample)),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _gicentre$elm_vega$DataTests$geodata2 = function () {
 	var geojson = _gicentre$elm_vega$VegaLite$geoFeatureCollection(
 		{
@@ -18135,7 +18341,7 @@ var _gicentre$elm_vega$DataTests$geodata1 = _gicentre$elm_vega$VegaLite$toVegaLi
 		}
 	});
 var _gicentre$elm_vega$DataTests$namedData3 = function () {
-	var enc = function (_p2) {
+	var enc = function (_p5) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18161,7 +18367,7 @@ var _gicentre$elm_vega$DataTests$namedData3 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p2)));
+					_p5)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -18187,7 +18393,7 @@ var _gicentre$elm_vega$DataTests$namedData3 = function () {
 		});
 }();
 var _gicentre$elm_vega$DataTests$namedData2 = function () {
-	var enc = function (_p3) {
+	var enc = function (_p6) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18213,7 +18419,7 @@ var _gicentre$elm_vega$DataTests$namedData2 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p3)));
+					_p6)));
 	};
 	var data = A2(
 		_gicentre$elm_vega$VegaLite$dataName,
@@ -18240,7 +18446,7 @@ var _gicentre$elm_vega$DataTests$namedData2 = function () {
 		});
 }();
 var _gicentre$elm_vega$DataTests$namedData1 = function () {
-	var enc = function (_p4) {
+	var enc = function (_p7) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18266,9 +18472,9 @@ var _gicentre$elm_vega$DataTests$namedData1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p4)));
+					_p7)));
 	};
-	var data = function (_p5) {
+	var data = function (_p8) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -18354,7 +18560,7 @@ var _gicentre$elm_vega$DataTests$namedData1 = function () {
 								}
 							}
 						}),
-					_p5)));
+					_p8)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -18378,7 +18584,7 @@ var _gicentre$elm_vega$DataTests$namedData1 = function () {
 		});
 }();
 var _gicentre$elm_vega$DataTests$dataSource = function (name) {
-	var enc = function (_p6) {
+	var enc = function (_p9) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18404,7 +18610,7 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p6)));
+					_p9)));
 	};
 	var json = _elm_lang$core$Json_Encode$list(
 		{
@@ -18471,7 +18677,7 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 				}
 			}
 		});
-	var dataRows = function (_p7) {
+	var dataRows = function (_p10) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromRows,
 			{ctor: '[]'},
@@ -18532,9 +18738,9 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p7))));
+						_p10))));
 	};
-	var dataColumns = function (_p8) {
+	var dataColumns = function (_p11) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -18572,7 +18778,7 @@ var _gicentre$elm_vega$DataTests$dataSource = function (name) {
 								}
 							}
 						}),
-					_p8)));
+					_p11)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -18632,7 +18838,7 @@ var _gicentre$elm_vega$DataTests$data8 = _gicentre$elm_vega$DataTests$dataSource
 var _gicentre$elm_vega$DataTests$data9 = _gicentre$elm_vega$DataTests$dataSource('myData2');
 var _gicentre$elm_vega$DataTests$data10 = _gicentre$elm_vega$DataTests$dataSource('myData3');
 var _gicentre$elm_vega$DataTests$showData = function (data) {
-	var enc = function (_p9) {
+	var enc = function (_p12) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18658,7 +18864,7 @@ var _gicentre$elm_vega$DataTests$showData = function (data) {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p9)));
+					_p12)));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -18678,7 +18884,7 @@ var _gicentre$elm_vega$DataTests$showData = function (data) {
 		});
 };
 var _gicentre$elm_vega$DataTests$data1 = function () {
-	var data = function (_p10) {
+	var data = function (_p13) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -18716,14 +18922,14 @@ var _gicentre$elm_vega$DataTests$data1 = function () {
 								}
 							}
 						}),
-					_p10)));
+					_p13)));
 	};
 	return _gicentre$elm_vega$DataTests$showData(
 		data(
 			{ctor: '[]'}));
 }();
 var _gicentre$elm_vega$DataTests$data2 = function () {
-	var data = function (_p11) {
+	var data = function (_p14) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromRows,
 			{ctor: '[]'},
@@ -18784,7 +18990,7 @@ var _gicentre$elm_vega$DataTests$data2 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p11))));
+						_p14))));
 	};
 	return _gicentre$elm_vega$DataTests$showData(
 		data(
@@ -18936,7 +19142,11 @@ var _gicentre$elm_vega$DataTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSp
 																_1: {
 																	ctor: '::',
 																	_0: {ctor: '_Tuple2', _0: 'flatten1', _1: _gicentre$elm_vega$DataTests$flatten1},
-																	_1: {ctor: '[]'}
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'fold1', _1: _gicentre$elm_vega$DataTests$fold1},
+																		_1: {ctor: '[]'}
+																	}
 																}
 															}
 														}
@@ -18967,7 +19177,7 @@ var _gicentre$elm_vega$DataTests$main = _elm_lang$html$Html$program(
 		},
 		view: _gicentre$elm_vega$DataTests$view,
 		update: F2(
-			function (_p12, model) {
+			function (_p15, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

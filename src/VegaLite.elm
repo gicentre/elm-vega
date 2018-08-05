@@ -289,6 +289,8 @@ module VegaLite
         , flattenAs
         , foDate
         , foUtc
+        , fold
+        , foldAs
         , geoFeatureCollection
         , geoLine
         , geoLines
@@ -827,10 +829,13 @@ See the
 
 ## Flattening
 
-See the [Vega-Lite flatten documentation](https://vega.github.io/vega-lite/docs/flatten.html).
+See the Vega-Lite [flatten](https://vega.github.io/vega-lite/docs/flatten.html)
+and [fold](https://vega.github.io/vega-lite/docs/fold.html) documentation.
 
 @docs flatten
 @docs flattenAs
+@docs fold
+@docs foldAs
 
 
 ## Relational Joining (lookup)
@@ -5267,8 +5272,8 @@ fiSelection =
 {-| Map array-valued fields to a set of individual data objects, one per array entry.
 -}
 flatten : List String -> List LabelledSpec -> List LabelledSpec
-flatten fs =
-    (::) ( "flatten", JE.list (List.map JE.string fs) )
+flatten fields =
+    (::) ( "flatten", JE.list (List.map JE.string fields) )
 
 
 {-| Similar to [flatten](#flatten) but allows the new output fields to be named
@@ -5308,6 +5313,30 @@ Being explicit about the format is usually safer.
 foDate : String -> DataType
 foDate =
     FoDate
+
+
+{-| Collapse one or more data fields into two properties: a _key_ (containing
+the original data field name) and a _value_ (containing the data value). Useful
+for mapping matrix or cross-tabulation data into a standardized format.
+-}
+fold : List String -> List LabelledSpec -> List LabelledSpec
+fold fields =
+    (::) ( "fold", JE.list (List.map JE.string fields) )
+
+
+{-| Similar to [fold](#fold) but allows the new output `key` and `value` fields
+to be given alternative names
+-}
+foldAs : List String -> String -> String -> List LabelledSpec -> List LabelledSpec
+foldAs fields keyName valName =
+    (::)
+        ( "foldAs"
+        , JE.list
+            [ JE.list (List.map JE.string fields)
+            , JE.string keyName
+            , JE.string valName
+            ]
+        )
 
 
 {-| Similar to [foDate](#foDate) but for UTC format dates.
@@ -8198,6 +8227,17 @@ transform transforms =
                             JE.object
                                 [ ( "flatten", fields )
                                 , ( "as", names )
+                                ]
+
+                        _ ->
+                            JE.null
+
+                "foldAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ fields, keyName, valName ] ->
+                            JE.object
+                                [ ( "fold", fields )
+                                , ( "as", JE.list [ keyName, valName ] )
                                 ]
 
                         _ ->
