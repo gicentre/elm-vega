@@ -199,9 +199,41 @@ geodata2 =
         ]
 
 
+flatten1 : Spec
+flatten1 =
+    let
+        data =
+            dataFromJson
+                (JE.list
+                    [ JE.object
+                        [ ( "key", JE.string "alpha" )
+                        , ( "foo", JE.list (List.map JE.float [ 1, 2 ]) )
+                        , ( "bar", JE.list (List.map JE.string [ "A", "B" ]) )
+                        ]
+                    , JE.object
+                        [ ( "key", JE.string "beta" )
+                        , ( "foo", JE.list (List.map JE.float [ 3, 4, 5 ]) )
+                        , ( "bar", JE.list (List.map JE.string [ "C", "D" ]) )
+                        ]
+                    ]
+                )
+
+        trans =
+            transform
+                << flattenAs [ "foo", "bar" ] [ "quant", "cat" ]
+
+        enc =
+            encoding
+                << position X [ pName "quant", pMType Quantitative ]
+                << position Y [ pName "cat", pMType Nominal ]
+                << color [ mName "key", mMType Nominal ]
+    in
+    toVegaLite [ data [], trans [], circle [], enc [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    namedData3
+    flatten1
 
 
 
@@ -226,6 +258,7 @@ mySpecs =
         , ( "namedData3", namedData3 )
         , ( "geodata1", geodata1 )
         , ( "geodata2", geodata2 )
+        , ( "flatten1", flatten1 )
         ]
 
 

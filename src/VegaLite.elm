@@ -285,6 +285,8 @@ module VegaLite
         , fiSelection
         , fill
         , filter
+        , flatten
+        , flattenAs
         , foDate
         , foUtc
         , geoFeatureCollection
@@ -821,6 +823,14 @@ See the
 @docs fiRange
 @docs numRange
 @docs dtRange
+
+
+## Flattening
+
+See the [Vega-Lite flatten documentation](https://vega.github.io/vega-lite/docs/flatten.html).
+
+@docs flatten
+@docs flattenAs
 
 
 ## Relational Joining (lookup)
@@ -5254,6 +5264,27 @@ fiSelection =
     FSelection
 
 
+{-| Map array-valued fields to a set of individual data objects, one per array entry.
+-}
+flatten : List String -> List LabelledSpec -> List LabelledSpec
+flatten fs =
+    (::) ( "flatten", JE.list (List.map JE.string fs) )
+
+
+{-| Similar to [flatten](#flatten) but allows the new output fields to be named
+(second parameter).
+-}
+flattenAs : List String -> List String -> List LabelledSpec -> List LabelledSpec
+flattenAs fields names =
+    (::)
+        ( "flattenAs"
+        , JE.list
+            [ JE.list (List.map JE.string fields)
+            , JE.list (List.map JE.string names)
+            ]
+        )
+
+
 {-| Provide the name of the field used for encoding with a facet channel.
 -}
 fName : String -> FacetChannel
@@ -8156,6 +8187,17 @@ transform transforms =
                                 [ ( "lookup", key1 )
                                 , ( "from", JE.object [ ( "data", dataSpec ), ( "key", key2 ) ] )
                                 , ( "as", asName )
+                                ]
+
+                        _ ->
+                            JE.null
+
+                "flattenAs" ->
+                    case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
+                        Ok [ fields, names ] ->
+                            JE.object
+                                [ ( "flatten", fields )
+                                , ( "as", names )
                                 ]
 
                         _ ->
