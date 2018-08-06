@@ -11459,6 +11459,17 @@ var _gicentre$elm_vega$VegaLite$select = F3(
 				_1: _elm_lang$core$Json_Encode$object(selProps)
 			});
 	});
+var _gicentre$elm_vega$VegaLite$sample = function (maxSize) {
+	return F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		})(
+		{
+			ctor: '_Tuple2',
+			_0: 'sample',
+			_1: _elm_lang$core$Json_Encode$float(maxSize)
+		});
+};
 var _gicentre$elm_vega$VegaLite$row = function (fFields) {
 	return F2(
 		function (x, y) {

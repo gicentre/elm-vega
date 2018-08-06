@@ -362,7 +362,6 @@ module VegaLite
         , jsonProperty
         , layer
         , leDts
-          --, leEntryPadding -- Removed as of Vega 4 as it is no longer a Vega property
         , leFormat
         , leNums
         , leOffset
@@ -571,6 +570,7 @@ module VegaLite
         , sacoRound
         , sacoTextXRangeStep
         , sacoUseUnaggregatedDomain
+        , sample
         , scClamp
         , scDomain
         , scInterpolate
@@ -870,6 +870,13 @@ Impute missing data. See the
 @docs ImMethod
 @docs imGroupBy
 @docs imValue
+
+
+## Data Sampling
+
+See the [Vega-Lite sample documentation](https://vega.github.io/vega-lite/docs/sample.html)
+
+@docs sample
 
 
 ## Window Transformations
@@ -7563,6 +7570,13 @@ sacoTextXRangeStep =
 sacoUseUnaggregatedDomain : Bool -> ScaleConfig
 sacoUseUnaggregatedDomain =
     SCUseUnaggregatedDomain
+
+
+{-| Randomly sample rows from a data source up to a given maximum.
+-}
+sample : Float -> List LabelledSpec -> List LabelledSpec
+sample maxSize =
+    (::) ( "sample", JE.float maxSize )
 
 
 {-| Specify that when scaling, values outside the data domain are clamped to the

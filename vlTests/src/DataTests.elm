@@ -370,9 +370,33 @@ impute8 =
     toVegaLite [ imputeData [], line [], enc [] ]
 
 
+sample1 : Spec
+sample1 =
+    let
+        data =
+            dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+
+        trans =
+            transform
+                << sample 200
+
+        enc =
+            encoding
+                << position X [ pName "Horsepower", pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
+
+        spec1 =
+            asSpec [ point [], enc [] ]
+
+        spec2 =
+            asSpec [ point [], trans [], enc [] ]
+    in
+    toVegaLite [ data, hConcat [ spec1, spec2 ] ]
+
+
 sourceExample : Spec
 sourceExample =
-    impute8
+    sample1
 
 
 
@@ -407,6 +431,7 @@ mySpecs =
         , ( "impute6", impute6 )
         , ( "impute7", impute7 )
         , ( "impute8", impute8 )
+        , ( "sample1", sample1 )
         ]
 
 
