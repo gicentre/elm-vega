@@ -58,6 +58,7 @@
   <div style="clear:left"></div>
 
   <h2>Data transforms</h2>
+
   <figure class="cell"><div id="flatten1"></div><figcaption>Flattened data structures from arrays.</figcaption></figure>
   <div style="clear:left"></div>
 
@@ -65,7 +66,31 @@
   <div style="clear:left"></div>
 
 
+  <h2>Data imputation</h2>
 
+  <figure class="cell"><div id="impute1"></div><figcaption>Simple imputation as a transform adding missing values when a=3 and c=1 by inserting b=0</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute2"></div><figcaption>Simple imputation as a transform adding missing values when a=3 and c=1 by inserting b= mean of non-missing b values when c=1.</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute3"></div><figcaption>Simple imputation as a transform adding missing values when a=3 and c=1 by inserting b= mean of previous two b values when c=1.</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute4"></div><figcaption>Simple imputation as a channel adding missing values when a=3 and c=1 by inserting b=0</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute5"></div><figcaption>Simple imputation as a channel adding missing values when a=3 and c=1 by inserting b= mean of non-missing b values when c=1.</figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute6"></div><figcaption>Simple imputation as a channel adding missing values when a=3 and c=1 by inserting b= mean of previous two b values when c=1. </figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute7"></div><figcaption>Simple imputation as a channel inserting b=100 when a is 4  </figcaption></figure>
+  <div style="clear:left"></div>
+
+  <figure class="cell"><div id="impute8"></div><figcaption>Simple imputation as a channel inserting b=100 when a is between 4 and less than 6</figcaption></figure>
+  <div style="clear:left"></div>
   <script>
   Elm.DataTests.embed(
   document.getElementById("elmContainer")

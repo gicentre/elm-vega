@@ -254,9 +254,125 @@ fold1 =
     toVegaLite [ data [], trans [], bar [], enc [] ]
 
 
+imputeData : List DataColumn -> Data
+imputeData =
+    dataFromColumns []
+        << dataColumn "a" (nums [ 0, 0, 1, 1, 2, 2, 3 ])
+        << dataColumn "b" (nums [ 28, 91, 43, 55, 81, 53, 19 ])
+        << dataColumn "c" (nums [ 0, 1, 0, 1, 0, 1, 0 ])
+
+
+impute1 : Spec
+impute1 =
+    let
+        trans =
+            transform
+                << impute "b" "a" [ imValue (num 0), imGroupBy [ "c" ] ]
+
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], trans [], line [], enc [] ]
+
+
+impute2 : Spec
+impute2 =
+    let
+        trans =
+            transform
+                << impute "b" "a" [ imMethod ImMean, imGroupBy [ "c" ], imFrame (Just -2) (Just 2) ]
+
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], trans [], line [], enc [] ]
+
+
+impute3 : Spec
+impute3 =
+    let
+        trans =
+            transform
+                << impute "b" "a" [ imValue (num 100), imGroupBy [ "c" ], imKeyValSequence 1 4 1 ]
+
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], trans [], line [], enc [] ]
+
+
+impute4 : Spec
+impute4 =
+    let
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 0) ] ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], line [], enc [] ]
+
+
+impute5 : Spec
+impute5 =
+    let
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod ImMean ] ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], line [], enc [] ]
+
+
+impute6 : Spec
+impute6 =
+    let
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod ImMean, imFrame (Just -2) (Just 2) ] ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], line [], enc [] ]
+
+
+impute7 : Spec
+impute7 =
+    let
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 100), imKeyVals (nums [ 4 ]) ] ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], line [], enc [] ]
+
+
+impute8 : Spec
+impute8 =
+    let
+        enc =
+            encoding
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 100), imKeyValSequence 4 6 1 ] ]
+                << color [ mName "c", mMType Nominal ]
+    in
+    toVegaLite [ imputeData [], line [], enc [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    fold1
+    impute8
 
 
 
@@ -283,6 +399,14 @@ mySpecs =
         , ( "geodata2", geodata2 )
         , ( "flatten1", flatten1 )
         , ( "fold1", fold1 )
+        , ( "impute1", impute1 )
+        , ( "impute2", impute2 )
+        , ( "impute3", impute3 )
+        , ( "impute4", impute4 )
+        , ( "impute5", impute5 )
+        , ( "impute6", impute6 )
+        , ( "impute7", impute7 )
+        , ( "impute8", impute8 )
         ]
 
 
