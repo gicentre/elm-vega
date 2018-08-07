@@ -11535,6 +11535,13 @@ var _gicentre$elm_vega$VegaLite$detailChannelProperty = function (field) {
 			};
 		case 'DBin':
 			return _gicentre$elm_vega$VegaLite$bin(_p101._0);
+		case 'DImpute':
+			return {
+				ctor: '_Tuple2',
+				_0: 'impute',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$imputeProperty, _p101._0))
+			};
 		case 'DTimeUnit':
 			return {
 				ctor: '_Tuple2',
@@ -12191,6 +12198,17 @@ var _gicentre$elm_vega$VegaLite$markChannelProperty = function (field) {
 			return {
 				ctor: '::',
 				_0: _gicentre$elm_vega$VegaLite$bin(_p107._0),
+				_1: {ctor: '[]'}
+			};
+		case 'MImpute':
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'impute',
+					_1: _elm_lang$core$Json_Encode$object(
+						A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$imputeProperty, _p107._0))
+				},
 				_1: {ctor: '[]'}
 			};
 		case 'MSelectionCondition':
@@ -15521,6 +15539,10 @@ var _gicentre$elm_vega$VegaLite$DTimeUnit = function (a) {
 	return {ctor: 'DTimeUnit', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$dTimeUnit = _gicentre$elm_vega$VegaLite$DTimeUnit;
+var _gicentre$elm_vega$VegaLite$DImpute = function (a) {
+	return {ctor: 'DImpute', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$dImpute = _gicentre$elm_vega$VegaLite$DImpute;
 var _gicentre$elm_vega$VegaLite$DBin = function (a) {
 	return {ctor: 'DBin', _0: a};
 };
@@ -16110,6 +16132,10 @@ var _gicentre$elm_vega$VegaLite$MTimeUnit = function (a) {
 	return {ctor: 'MTimeUnit', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$mTimeUnit = _gicentre$elm_vega$VegaLite$MTimeUnit;
+var _gicentre$elm_vega$VegaLite$MImpute = function (a) {
+	return {ctor: 'MImpute', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$mImpute = _gicentre$elm_vega$VegaLite$MImpute;
 var _gicentre$elm_vega$VegaLite$MBin = function (a) {
 	return {ctor: 'MBin', _0: a};
 };
