@@ -4717,7 +4717,7 @@
       },
       {
         "name": "window",
-        "comment": " Specify a window transform for performing calculations over sorted groups of\ndata objects such as ranking, lead/lag analysis, running sums and averages.\n\nThe first parameter is a list of tuples each comprising a window transform field\ndefinition and an output name. The second is the window transform definition.\n\n       trans =\n           transform\n               << [( [ wiAggregateOp Sum, wiField \"Time\" ], \"TotalTime\") ]\n                    [ wiFrame Nothing Nothing ]\n\n",
+        "comment": " Specify a window transform for performing calculations over sorted groups of\ndata objects such as ranking, lead/lag analysis, running sums and averages.\n\nThe first parameter is a list of tuples each comprising a window transform field\ndefinition and an output name. The second is the window transform definition.\n\n       trans =\n           transform\n               << window [ ( [ wiAggregateOp Sum, wiField \"Time\" ], \"TotalTime\" ) ]\n                   [ wiFrame Nothing Nothing ]\n\n",
         "type": "List ( List VegaLite.Window, String ) -> List VegaLite.WindowProperty -> List VegaLite.LabelledSpec -> List VegaLite.LabelledSpec"
       }
     ],

@@ -157,6 +157,100 @@ area6 =
     toVegaLite [ des, width 300, height 50, data [], encX [], layer [ specLower, specUpper ], config [] ]
 
 
+area7 : Spec
+area7 =
+    let
+        cars =
+            dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+
+        trans =
+            transform
+                << aggregate [ opAs Count "" "count_*" ] [ "Origin", "Cylinders" ]
+                << stack "count_*"
+                    []
+                    "stack_count_Origin1"
+                    "stack_count_Origin2"
+                    [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
+                << window
+                    [ ( [ wiAggregateOp Min, wiField "stack_count_Origin1" ], "x" )
+                    , ( [ wiAggregateOp Max, wiField "stack_count_Origin2" ], "x2" )
+                    , ( [ wiOp DenseRank ], "rank_Cylinders" )
+                    , ( [ wiAggregateOp Distinct, wiField "Cylinders" ], "distinct_Cylinders" )
+                    ]
+                    [ wiFrame Nothing Nothing, wiGroupBy [ "Origin" ], wiSort [ wiAscending "Cylinders" ] ]
+                << window
+                    [ ( [ wiOp DenseRank ], "rank_Origin" ) ]
+                    [ wiFrame Nothing Nothing, wiSort [ wiAscending "Origin" ] ]
+                << stack "count_*"
+                    [ "Origin" ]
+                    "y"
+                    "y2"
+                    [ stOffset StNormalize, stSort [ stAscending "Cylinders" ] ]
+                << calculateAs "datum.y + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3" "ny"
+                << calculateAs "datum.y2 + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3" "ny2"
+                << calculateAs "datum.x + (datum.rank_Origin - 1) * 0.01" "nx"
+                << calculateAs "datum.x2 + (datum.rank_Origin - 1) * 0.01" "nx2"
+                << calculateAs "(datum.nx+datum.nx2)/2" "xc"
+                << calculateAs "(datum.ny+datum.ny2)/2" "yc"
+
+        enc1 =
+            encoding
+                << position X
+                    [ pName "xc"
+                    , pMType Quantitative
+                    , pAggregate Min
+                    , pTitle "Origin"
+                    , pAxis [ axOrient STop ]
+                    ]
+                << color [ mName "Origin", mMType Nominal, mLegend [] ]
+                << text [ tName "Origin", tMType Nominal ]
+
+        spec1 =
+            asSpec [ textMark [ maBaseline AlignMiddle, maAlign AlignCenter ], enc1 [] ]
+
+        enc2 =
+            encoding
+                << position X [ pName "nx", pMType Quantitative, pAxis [] ]
+                << position X2 [ pName "nx2", pMType Quantitative ]
+                << position Y [ pName "ny", pMType Quantitative, pAxis [] ]
+                << position Y2 [ pName "ny2", pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal, mLegend [] ]
+                << opacity [ mName "Cylinders", mMType Quantitative, mLegend [] ]
+                << tooltips
+                    [ [ tName "Origin", tMType Nominal ]
+                    , [ tName "Cylinders", tMType Quantitative ]
+                    ]
+
+        spec2 =
+            asSpec [ rect [], enc2 [] ]
+
+        enc3 =
+            encoding
+                << position X [ pName "xc", pMType Quantitative, pAxis [] ]
+                << position Y [ pName "yc", pMType Quantitative, pAxis [ axTitle "Cylinders" ] ]
+                << text [ tName "Cylinders", tMType Nominal ]
+
+        spec3 =
+            asSpec [ textMark [ maBaseline AlignMiddle ], enc3 [] ]
+
+        config =
+            configure
+                << configuration (coView [ vicoStroke Nothing ])
+                << configuration (coAxis [ axcoDomain False, axcoTicks False, axcoLabels False, axcoGrid False ])
+
+        res =
+            resolve
+                << resolution (reScale [ ( ChX, Shared ) ])
+    in
+    toVegaLite
+        [ config []
+        , res []
+        , cars
+        , trans []
+        , vConcat [ spec1, asSpec [ layer [ spec2, spec3 ] ] ]
+        ]
+
+
 
 {- This list comprises the specifications to be provided to the Vega-Lite runtime. -}
 
@@ -170,6 +264,7 @@ mySpecs =
         , ( "area4", area4 )
         , ( "area5", area5 )
         , ( "area6", area6 )
+        , ( "area7", area7 )
         ]
 
 

@@ -15993,8 +15993,556 @@ var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
 var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
 var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 
+var _gicentre$elm_vega$GalleryBar$toRows = F2(
+	function (country, animalFreqs) {
+		var toRow = F2(
+			function (animal, n) {
+				return _gicentre$elm_vega$VegaLite$dataRow(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'country',
+							_1: _gicentre$elm_vega$VegaLite$str(country)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'animal',
+								_1: _gicentre$elm_vega$VegaLite$str(animal)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'col',
+									_1: _gicentre$elm_vega$VegaLite$num(
+										_elm_lang$core$Basics$toFloat(n))
+								},
+								_1: {ctor: '[]'}
+							}
+						}
+					});
+			});
+		var fToCol = function (_p0) {
+			var _p1 = _p0;
+			return A3(
+				_elm_lang$core$List$foldl,
+				function (n) {
+					return A2(toRow, _p1._0, n);
+				},
+				{ctor: '[]'},
+				A2(_elm_lang$core$List$range, 1, _p1._1));
+		};
+		return F2(
+			function (x, y) {
+				return A2(_elm_lang$core$Basics_ops['++'], x, y);
+			})(
+			A2(_elm_lang$core$List$concatMap, fToCol, animalFreqs));
+	});
+var _gicentre$elm_vega$GalleryBar$bar13 = function () {
+	var data = function (_p2) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromRows,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$GalleryBar$toRows,
+				'Great Britain',
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'cattle', _1: 3},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'pigs', _1: 2},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'sheep', _1: 10},
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$GalleryBar$toRows,
+					'United States',
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'pigs', _1: 6},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'sheep', _1: 7},
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p2)));
+	};
+	var config = function (_p3) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$coView(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$vicoStroke(_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}),
+				_p3));
+	};
+	var des = _gicentre$elm_vega$VegaLite$description('Isotype bar chart inspired by this Only An Ocean Between, 1943. Population Live Stock, p.13.');
+	var isotypes = function () {
+		var sheep = 'M-4.1 -0.5c0.2 0 0.2 0.2 0.5 0.2c0.3 0 0.3 -0.2 0.5 -0.2c0.2 0 0.2 0.2 0.4 0.2c0.2 0 0.2 -0.2 0.5 -0.2c0.2 0 0.2 0.2 0.4 0.2c0.2 0 0.2 -0.2 0.4 -0.2c0.1 0 0.2 0.2 0.4 0.1c0.2 0 0.2 -0.2 0.4 -0.3c0.1 0 0.1 -0.1 0.4 0c0.3 0 0.3 -0.4 0.6 -0.4c0.3 0 0.6 -0.3 0.7 -0.2c0.1 0.1 1.4 1 1.3 1.4c-0.1 0.4 -0.3 0.3 -0.4 0.3c-0.1 0 -0.5 -0.4 -0.7 -0.2c-0.3 0.2 -0.1 0.4 -0.2 0.6c-0.1 0.1 -0.2 0.2 -0.3 0.4c0 0.2 0.1 0.3 0 0.5c-0.1 0.2 -0.3 0.2 -0.3 0.5c0 0.3 -0.2 0.3 -0.3 0.6c-0.1 0.2 0 0.3 -0.1 0.5c-0.1 0.2 -0.1 0.2 -0.2 0.3c-0.1 0.1 0.3 1.1 0.3 1.1l-0.3 0c0 0 -0.3 -0.9 -0.3 -1c0 -0.1 -0.1 -0.2 -0.3 -0.2c-0.2 0 -0.3 0.1 -0.4 0.4c0 0.3 -0.2 0.8 -0.2 0.8l-0.3 0l0.3 -1c0 0 0.1 -0.6 -0.2 -0.5c-0.3 0.1 -0.2 -0.1 -0.4 -0.1c-0.2 -0.1 -0.3 0.1 -0.4 0c-0.2 -0.1 -0.3 0.1 -0.5 0c-0.2 -0.1 -0.1 0 -0.3 0.3c-0.2 0.3 -0.4 0.3 -0.4 0.3l0.2 1.1l-0.3 0l-0.2 -1.1c0 0 -0.4 -0.6 -0.5 -0.4c-0.1 0.3 -0.1 0.4 -0.3 0.4c-0.1 -0.1 -0.2 1.1 -0.2 1.1l-0.3 0l0.2 -1.1c0 0 -0.3 -0.1 -0.3 -0.5c0 -0.3 0.1 -0.5 0.1 -0.7c0.1 -0.2 -0.1 -1 -0.2 -1.1c-0.1 -0.2 -0.2 -0.8 -0.2 -0.8c0 0 -0.1 -0.5 0.4 -0.8z';
+		var pig = 'M1.2 -2c0 0 0.7 0 1.2 0.5c0.5 0.5 0.4 0.6 0.5 0.6c0.1 0 0.7 0 0.8 0.1c0.1 0 0.2 0.2 0.2 0.2c0 0 -0.6 0.2 -0.6 0.3c0 0.1 0.4 0.9 0.6 0.9c0.1 0 0.6 0 0.6 0.1c0 0.1 0 0.7 -0.1 0.7c-0.1 0 -1.2 0.4 -1.5 0.5c-0.3 0.1 -1.1 0.5 -1.1 0.7c-0.1 0.2 0.4 1.2 0.4 1.2l-0.4 0c0 0 -0.4 -0.8 -0.4 -0.9c0 -0.1 -0.1 -0.3 -0.1 -0.3l-0.2 0l-0.5 1.3l-0.4 0c0 0 -0.1 -0.4 0 -0.6c0.1 -0.1 0.3 -0.6 0.3 -0.7c0 0 -0.8 0 -1.5 -0.1c-0.7 -0.1 -1.2 -0.3 -1.2 -0.2c0 0.1 -0.4 0.6 -0.5 0.6c0 0 0.3 0.9 0.3 0.9l-0.4 0c0 0 -0.4 -0.5 -0.4 -0.6c0 -0.1 -0.2 -0.6 -0.2 -0.5c0 0 -0.4 0.4 -0.6 0.4c-0.2 0.1 -0.4 0.1 -0.4 0.1c0 0 -0.1 0.6 -0.1 0.6l-0.5 0l0 -1c0 0 0.5 -0.4 0.5 -0.5c0 -0.1 -0.7 -1.2 -0.6 -1.4c0.1 -0.1 0.1 -1.1 0.1 -1.1c0 0 -0.2 0.1 -0.2 0.1c0 0 0 0.9 0 1c0 0.1 -0.2 0.3 -0.3 0.3c-0.1 0 0 -0.5 0 -0.9c0 -0.4 0 -0.4 0.2 -0.6c0.2 -0.2 0.6 -0.3 0.8 -0.8c0.3 -0.5 1 -0.6 1 -0.6z';
+		var cow = 'M4 -2c0 0 0.9 -0.7 1.1 -0.8c0.1 -0.1 -0.1 0.5 -0.3 0.7c-0.2 0.2 1.1 1.1 1.1 1.2c0 0.2 -0.2 0.8 -0.4 0.7c-0.1 0 -0.8 -0.3 -1.3 -0.2c-0.5 0.1 -1.3 1.6 -1.5 2c-0.3 0.4 -0.6 0.4 -0.6 0.4c0 0.1 0.3 1.7 0.4 1.8c0.1 0.1 -0.4 0.1 -0.5 0c0 0 -0.6 -1.9 -0.6 -1.9c-0.1 0 -0.3 -0.1 -0.3 -0.1c0 0.1 -0.5 1.4 -0.4 1.6c0.1 0.2 0.1 0.3 0.1 0.3c0 0 -0.4 0 -0.4 0c0 0 -0.2 -0.1 -0.1 -0.3c0 -0.2 0.3 -1.7 0.3 -1.7c0 0 -2.8 -0.9 -2.9 -0.8c-0.2 0.1 -0.4 0.6 -0.4 1c0 0.4 0.5 1.9 0.5 1.9l-0.5 0l-0.6 -2l0 -0.6c0 0 -1 0.8 -1 1c0 0.2 -0.2 1.3 -0.2 1.3c0 0 0.3 0.3 0.2 0.3c0 0 -0.5 0 -0.5 0c0 0 -0.2 -0.2 -0.1 -0.4c0 -0.1 0.2 -1.6 0.2 -1.6c0 0 0.5 -0.4 0.5 -0.5c0 -0.1 0 -2.7 -0.2 -2.7c-0.1 0 -0.4 2 -0.4 2c0 0 0 0.2 -0.2 0.5c-0.1 0.4 -0.2 1.1 -0.2 1.1c0 0 -0.2 -0.1 -0.2 -0.2c0 -0.1 -0.1 -0.7 0 -0.7c0.1 -0.1 0.3 -0.8 0.4 -1.4c0 -0.6 0.2 -1.3 0.4 -1.5c0.1 -0.2 0.6 -0.4 0.6 -0.4z';
+		return _elm_lang$core$Dict$fromList(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'cow', _1: cow},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'pig', _1: pig},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'sheep', _1: sheep},
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	}();
+	var enc = function (_p4) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('col'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('animal'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$row,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$fName('country'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$fMType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$fHeader(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$hdTitle(''),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$shape,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mName('animal'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mScale(
+											_gicentre$elm_vega$VegaLite$categoricalDomainMap(
+												{
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: 'person',
+														_1: A2(
+															_elm_lang$core$Maybe$withDefault,
+															'circle',
+															A2(_elm_lang$core$Dict$get, 'person', isotypes))
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 'cattle',
+															_1: A2(
+																_elm_lang$core$Maybe$withDefault,
+																'circle',
+																A2(_elm_lang$core$Dict$get, 'cow', isotypes))
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: 'pigs',
+																_1: A2(
+																	_elm_lang$core$Maybe$withDefault,
+																	'circle',
+																	A2(_elm_lang$core$Dict$get, 'pig', isotypes))
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: 'sheep',
+																	_1: A2(
+																		_elm_lang$core$Maybe$withDefault,
+																		'circle',
+																		A2(_elm_lang$core$Dict$get, 'sheep', isotypes))
+																},
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												})),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mLegend(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							A2(
+								_gicentre$elm_vega$VegaLite$color,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mName('animal'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mLegend(
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$mScale(
+													_gicentre$elm_vega$VegaLite$categoricalDomainMap(
+														{
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'person', _1: 'rgb(162,160,152)'},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'cattle', _1: 'rgb(194,81,64)'},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'pigs', _1: 'rgb(93,93,93)'},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'sheep', _1: 'rgb(91,131,149)'},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														})),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								},
+								A2(
+									_gicentre$elm_vega$VegaLite$opacity,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mNum(1),
+										_1: {ctor: '[]'}
+									},
+									A2(
+										_gicentre$elm_vega$VegaLite$size,
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mNum(200),
+											_1: {ctor: '[]'}
+										},
+										_p4))))))));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: des,
+			_1: {
+				ctor: '::',
+				_0: config(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$width(800),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$height(200),
+						_1: {
+							ctor: '::',
+							_0: data(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$point(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$maFilled(true),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: enc(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$GalleryBar$bar14 = function () {
+	var enc = function (_p5) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('rank'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Ordinal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('animal'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$pSort(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$row,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$fName('country'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$fMType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$fHeader(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$hdTitle(''),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$text,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tName('emoji'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Nominal),
+									_1: {ctor: '[]'}
+								}
+							},
+							A2(
+								_gicentre$elm_vega$VegaLite$size,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mNum(65),
+									_1: {ctor: '[]'}
+								},
+								_p5))))));
+	};
+	var trans = function (_p6) {
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(
+				_gicentre$elm_vega$VegaLite$calculateAs,
+				'{\'cattle\': \'🐄\', \'pigs\': \'🐖\', \'sheep\': \'🐏\'}[datum.animal]',
+				'emoji',
+				A3(
+					_gicentre$elm_vega$VegaLite$window,
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$wiOp(_gicentre$elm_vega$VegaLite$Rank),
+								_1: {ctor: '[]'}
+							},
+							_1: 'rank'
+						},
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$wiGroupBy(
+							{
+								ctor: '::',
+								_0: 'country',
+								_1: {
+									ctor: '::',
+									_0: 'animal',
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					_p6)));
+	};
+	var data = function (_p7) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromRows,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$GalleryBar$toRows,
+				'Great Britain',
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'cattle', _1: 3},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'pigs', _1: 2},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'sheep', _1: 10},
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$GalleryBar$toRows,
+					'United States',
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'cattle', _1: 9},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'pigs', _1: 6},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'sheep', _1: 7},
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					_p7)));
+	};
+	var config = function (_p8) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$coView(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$vicoStroke(_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}),
+				_p8));
+	};
+	var des = _gicentre$elm_vega$VegaLite$description('Isotype bar chart using emojis for symbols');
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: des,
+			_1: {
+				ctor: '::',
+				_0: config(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$width(800),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$height(200),
+						_1: {
+							ctor: '::',
+							_0: data(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: trans(
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$textMark(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$maBaseline(_gicentre$elm_vega$VegaLite$AlignMiddle),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: enc(
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
 var _gicentre$elm_vega$GalleryBar$bar12 = function () {
-	var config = function (_p0) {
+	var config = function (_p9) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -16014,7 +16562,7 @@ var _gicentre$elm_vega$GalleryBar$bar12 = function () {
 							}
 						}
 					}),
-				_p0));
+				_p9));
 	};
 	var specText = _gicentre$elm_vega$VegaLite$asSpec(
 		{
@@ -16055,7 +16603,7 @@ var _gicentre$elm_vega$GalleryBar$bar12 = function () {
 				{ctor: '[]'}),
 			_1: {ctor: '[]'}
 		});
-	var enc = function (_p1) {
+	var enc = function (_p10) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16081,9 +16629,9 @@ var _gicentre$elm_vega$GalleryBar$bar12 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p1)));
+					_p10)));
 	};
-	var data = function (_p2) {
+	var data = function (_p11) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -16121,7 +16669,7 @@ var _gicentre$elm_vega$GalleryBar$bar12 = function () {
 								}
 							}
 						}),
-					_p2)));
+					_p11)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with embedded data labels.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16160,7 +16708,7 @@ var _gicentre$elm_vega$GalleryBar$bar12 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar11 = function () {
-	var enc = function (_p3) {
+	var enc = function (_p12) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16282,9 +16830,9 @@ var _gicentre$elm_vega$GalleryBar$bar11 = function () {
 									}
 								}
 							},
-							_p3)))));
+							_p12)))));
 	};
-	var data = function (_p4) {
+	var data = function (_p13) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -17278,7 +17826,7 @@ var _gicentre$elm_vega$GalleryBar$bar11 = function () {
 												}
 											}
 										}),
-									_p4)))))));
+									_p13)))))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A diverging stacked bar chart for sentiments towards a set of eight questions, displayed as percentages with neutral responses straddling the 0% mark.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17304,7 +17852,7 @@ var _gicentre$elm_vega$GalleryBar$bar11 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar10 = function () {
-	var enc = function (_p5) {
+	var enc = function (_p14) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17394,14 +17942,14 @@ var _gicentre$elm_vega$GalleryBar$bar10 = function () {
 								_0: _gicentre$elm_vega$VegaLite$mNum(0.7),
 								_1: {ctor: '[]'}
 							},
-							_p5)))));
+							_p14)))));
 	};
-	var trans = function (_p6) {
+	var trans = function (_p15) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$fiExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p6)));
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p15)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Layered bar chart showing the US population distribution of age groups and gender in 2000.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17434,7 +17982,7 @@ var _gicentre$elm_vega$GalleryBar$bar10 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar9 = function () {
-	var enc = function (_p7) {
+	var enc = function (_p16) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17476,9 +18024,9 @@ var _gicentre$elm_vega$GalleryBar$bar9 = function () {
 								}
 							}
 						},
-						_p7))));
+						_p16))));
 	};
-	var data = function (_p8) {
+	var data = function (_p17) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -17516,7 +18064,7 @@ var _gicentre$elm_vega$GalleryBar$bar9 = function () {
 								}
 							}
 						}),
-					_p8)));
+					_p17)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A bar chart that directly encodes color names in the data.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17542,7 +18090,7 @@ var _gicentre$elm_vega$GalleryBar$bar9 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar8 = function () {
-	var enc = function (_p9) {
+	var enc = function (_p18) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17580,9 +18128,9 @@ var _gicentre$elm_vega$GalleryBar$bar8 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p9))));
+						_p18))));
 	};
-	var data = function (_p10) {
+	var data = function (_p19) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -17637,7 +18185,7 @@ var _gicentre$elm_vega$GalleryBar$bar8 = function () {
 									}
 								}
 							}),
-						_p10))));
+						_p19))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with ranged data (aka Gantt Chart).');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17663,7 +18211,7 @@ var _gicentre$elm_vega$GalleryBar$bar8 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar7 = function () {
-	var enc = function (_p11) {
+	var enc = function (_p20) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17746,14 +18294,14 @@ var _gicentre$elm_vega$GalleryBar$bar7 = function () {
 								}
 							}
 						},
-						_p11))));
+						_p20))));
 	};
-	var trans = function (_p12) {
+	var trans = function (_p21) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$fiExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p12)));
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p21)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Population structure as a normalised stacked bar chart.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17786,7 +18334,7 @@ var _gicentre$elm_vega$GalleryBar$bar7 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar6 = function () {
-	var enc = function (_p13) {
+	var enc = function (_p22) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17827,7 +18375,7 @@ var _gicentre$elm_vega$GalleryBar$bar6 = function () {
 								_1: {ctor: '[]'}
 							}
 						},
-						_p13))));
+						_p22))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Barley crop yields as a horizontal stacked bar chart');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17877,7 +18425,7 @@ var _gicentre$elm_vega$GalleryBar$bar5 = function () {
 				}
 			}
 		});
-	var enc = function (_p14) {
+	var enc = function (_p23) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -17940,7 +18488,7 @@ var _gicentre$elm_vega$GalleryBar$bar5 = function () {
 								}
 							}
 						},
-						_p14))));
+						_p23))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Seattle weather stacked bar chart');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -17968,7 +18516,7 @@ var _gicentre$elm_vega$GalleryBar$bar5 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar4 = function () {
-	var config = function (_p15) {
+	var config = function (_p24) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -17986,9 +18534,9 @@ var _gicentre$elm_vega$GalleryBar$bar4 = function () {
 							_0: _gicentre$elm_vega$VegaLite$vicoStroke(_elm_lang$core$Maybe$Nothing),
 							_1: {ctor: '[]'}
 						}),
-					_p15)));
+					_p24)));
 	};
-	var enc = function (_p16) {
+	var enc = function (_p25) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18091,14 +18639,14 @@ var _gicentre$elm_vega$GalleryBar$bar4 = function () {
 									}
 								}
 							},
-							_p16)))));
+							_p25)))));
 	};
-	var trans = function (_p17) {
+	var trans = function (_p26) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$fiExpr('datum.year == 2000'),
-				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p17)));
+				A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.sex == 2 ? \'Female\' : \'Male\'', 'gender', _p26)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Grouped bar chart showing population structure by age and gender.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -18136,7 +18684,7 @@ var _gicentre$elm_vega$GalleryBar$bar4 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar3 = function () {
-	var enc = function (_p18) {
+	var enc = function (_p27) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18185,14 +18733,14 @@ var _gicentre$elm_vega$GalleryBar$bar3 = function () {
 							}
 						}
 					},
-					_p18)));
+					_p27)));
 	};
-	var trans = function (_p19) {
+	var trans = function (_p28) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$fiExpr('datum.year == 2000'),
-				_p19));
+				_p28));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A bar chart showing the US population distribution of age groups in 2000.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -18225,7 +18773,7 @@ var _gicentre$elm_vega$GalleryBar$bar3 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar2 = function () {
-	var enc = function (_p20) {
+	var enc = function (_p29) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18256,7 +18804,7 @@ var _gicentre$elm_vega$GalleryBar$bar2 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p20)));
+					_p29)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Simple histogram of IMDB ratings.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -18288,7 +18836,7 @@ var _gicentre$elm_vega$GalleryBar$bar2 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryBar$bar1 = function () {
-	var enc = function (_p21) {
+	var enc = function (_p30) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -18314,9 +18862,9 @@ var _gicentre$elm_vega$GalleryBar$bar1 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p21)));
+					_p30)));
 	};
-	var data = function (_p22) {
+	var data = function (_p31) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -18402,7 +18950,7 @@ var _gicentre$elm_vega$GalleryBar$bar1 = function () {
 								}
 							}
 						}),
-					_p22)));
+					_p31)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('A simple bar chart with embedded data.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -18464,7 +19012,15 @@ var _gicentre$elm_vega$GalleryBar$mySpecs = _gicentre$elm_vega$VegaLite$combineS
 												_1: {
 													ctor: '::',
 													_0: {ctor: '_Tuple2', _0: 'bar12', _1: _gicentre$elm_vega$GalleryBar$bar12},
-													_1: {ctor: '[]'}
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'bar13', _1: _gicentre$elm_vega$GalleryBar$bar13},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'bar14', _1: _gicentre$elm_vega$GalleryBar$bar14},
+															_1: {ctor: '[]'}
+														}
+													}
 												}
 											}
 										}
@@ -18490,7 +19046,7 @@ var _gicentre$elm_vega$GalleryBar$main = _elm_lang$core$Platform$program(
 			_1: _gicentre$elm_vega$GalleryBar$elmToJS(_gicentre$elm_vega$GalleryBar$mySpecs)
 		},
 		update: F2(
-			function (_p23, model) {
+			function (_p32, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

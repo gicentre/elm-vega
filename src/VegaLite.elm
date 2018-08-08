@@ -8699,8 +8699,8 @@ definition and an output name. The second is the window transform definition.
 
        trans =
            transform
-               << [( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime") ]
-                    [ wiFrame Nothing Nothing ]
+               << window [ ( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime" ) ]
+                   [ wiFrame Nothing Nothing ]
 
 -}
 window : List ( List Window, String ) -> List WindowProperty -> List LabelledSpec -> List LabelledSpec

@@ -15993,8 +15993,587 @@ var _gicentre$elm_vega$VegaLite$AEnd = {ctor: 'AEnd'};
 var _gicentre$elm_vega$VegaLite$AMiddle = {ctor: 'AMiddle'};
 var _gicentre$elm_vega$VegaLite$AStart = {ctor: 'AStart'};
 
+var _gicentre$elm_vega$GalleryArea$area7 = function () {
+	var res = function (_p0) {
+		return _gicentre$elm_vega$VegaLite$resolve(
+			A2(
+				_gicentre$elm_vega$VegaLite$resolution,
+				_gicentre$elm_vega$VegaLite$reScale(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _gicentre$elm_vega$VegaLite$ChX, _1: _gicentre$elm_vega$VegaLite$Shared},
+						_1: {ctor: '[]'}
+					}),
+				_p0));
+	};
+	var config = function (_p1) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$coView(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$vicoStroke(_elm_lang$core$Maybe$Nothing),
+						_1: {ctor: '[]'}
+					}),
+				A2(
+					_gicentre$elm_vega$VegaLite$configuration,
+					_gicentre$elm_vega$VegaLite$coAxis(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$axcoDomain(false),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$axcoTicks(false),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$axcoLabels(false),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axcoGrid(false),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_p1)));
+	};
+	var enc3 = function (_p2) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('xc'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('yc'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axTitle('Cylinders'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$tName('Cylinders'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p2))));
+	};
+	var spec3 = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$textMark(
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$maBaseline(_gicentre$elm_vega$VegaLite$AlignMiddle),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: enc3(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var enc2 = function (_p3) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('nx'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pAxis(
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$X2,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('nx2'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$VegaLite$position,
+						_gicentre$elm_vega$VegaLite$Y,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pName('ny'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$pAxis(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A3(
+							_gicentre$elm_vega$VegaLite$position,
+							_gicentre$elm_vega$VegaLite$Y2,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pName('ny2'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {ctor: '[]'}
+								}
+							},
+							A2(
+								_gicentre$elm_vega$VegaLite$color,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mName('Origin'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mLegend(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								A2(
+									_gicentre$elm_vega$VegaLite$opacity,
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mName('Cylinders'),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$mLegend(
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									A2(
+										_gicentre$elm_vega$VegaLite$tooltips,
+										{
+											ctor: '::',
+											_0: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$tName('Origin'),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Nominal),
+													_1: {ctor: '[]'}
+												}
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$VegaLite$tName('Cylinders'),
+													_1: {
+														ctor: '::',
+														_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Quantitative),
+														_1: {ctor: '[]'}
+													}
+												},
+												_1: {ctor: '[]'}
+											}
+										},
+										_p3))))))));
+	};
+	var spec2 = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$rect(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc2(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var enc1 = function (_p4) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('xc'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pAggregate(_gicentre$elm_vega$VegaLite$Min),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pTitle('Origin'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$pAxis(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$axOrient(_gicentre$elm_vega$VegaLite$STop),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$color,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$mName('Origin'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mLegend(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$text,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$tName('Origin'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$tMType(_gicentre$elm_vega$VegaLite$Nominal),
+								_1: {ctor: '[]'}
+							}
+						},
+						_p4))));
+	};
+	var spec1 = _gicentre$elm_vega$VegaLite$asSpec(
+		{
+			ctor: '::',
+			_0: _gicentre$elm_vega$VegaLite$textMark(
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$maBaseline(_gicentre$elm_vega$VegaLite$AlignMiddle),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$maAlign(_gicentre$elm_vega$VegaLite$AlignCenter),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: enc1(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var trans = function (_p5) {
+		return _gicentre$elm_vega$VegaLite$transform(
+			A3(
+				_gicentre$elm_vega$VegaLite$aggregate,
+				{
+					ctor: '::',
+					_0: A3(_gicentre$elm_vega$VegaLite$opAs, _gicentre$elm_vega$VegaLite$Count, '', 'count_*'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: 'Origin',
+					_1: {
+						ctor: '::',
+						_0: 'Cylinders',
+						_1: {ctor: '[]'}
+					}
+				},
+				A6(
+					_gicentre$elm_vega$VegaLite$stack,
+					'count_*',
+					{ctor: '[]'},
+					'stack_count_Origin1',
+					'stack_count_Origin2',
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$stOffset(_gicentre$elm_vega$VegaLite$StNormalize),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$stSort(
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$stAscending('Origin'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					A3(
+						_gicentre$elm_vega$VegaLite$window,
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$wiAggregateOp(_gicentre$elm_vega$VegaLite$Min),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$wiField('stack_count_Origin1'),
+										_1: {ctor: '[]'}
+									}
+								},
+								_1: 'x'
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$wiAggregateOp(_gicentre$elm_vega$VegaLite$Max),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$wiField('stack_count_Origin2'),
+											_1: {ctor: '[]'}
+										}
+									},
+									_1: 'x2'
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$wiOp(_gicentre$elm_vega$VegaLite$DenseRank),
+											_1: {ctor: '[]'}
+										},
+										_1: 'rank_Cylinders'
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$wiAggregateOp(_gicentre$elm_vega$VegaLite$Distinct),
+												_1: {
+													ctor: '::',
+													_0: _gicentre$elm_vega$VegaLite$wiField('Cylinders'),
+													_1: {ctor: '[]'}
+												}
+											},
+											_1: 'distinct_Cylinders'
+										},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(_gicentre$elm_vega$VegaLite$wiFrame, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$wiGroupBy(
+									{
+										ctor: '::',
+										_0: 'Origin',
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$wiSort(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$wiAscending('Cylinders'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						A3(
+							_gicentre$elm_vega$VegaLite$window,
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$wiOp(_gicentre$elm_vega$VegaLite$DenseRank),
+										_1: {ctor: '[]'}
+									},
+									_1: 'rank_Origin'
+								},
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(_gicentre$elm_vega$VegaLite$wiFrame, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$wiSort(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$wiAscending('Origin'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							A6(
+								_gicentre$elm_vega$VegaLite$stack,
+								'count_*',
+								{
+									ctor: '::',
+									_0: 'Origin',
+									_1: {ctor: '[]'}
+								},
+								'y',
+								'y2',
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$stOffset(_gicentre$elm_vega$VegaLite$StNormalize),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$stSort(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$stAscending('Cylinders'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								},
+								A3(
+									_gicentre$elm_vega$VegaLite$calculateAs,
+									'datum.y + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3',
+									'ny',
+									A3(
+										_gicentre$elm_vega$VegaLite$calculateAs,
+										'datum.y2 + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3',
+										'ny2',
+										A3(
+											_gicentre$elm_vega$VegaLite$calculateAs,
+											'datum.x + (datum.rank_Origin - 1) * 0.01',
+											'nx',
+											A3(
+												_gicentre$elm_vega$VegaLite$calculateAs,
+												'datum.x2 + (datum.rank_Origin - 1) * 0.01',
+												'nx2',
+												A3(
+													_gicentre$elm_vega$VegaLite$calculateAs,
+													'(datum.nx+datum.nx2)/2',
+													'xc',
+													A3(_gicentre$elm_vega$VegaLite$calculateAs, '(datum.ny+datum.ny2)/2', 'yc', _p5))))))))))));
+	};
+	var cars = A2(
+		_gicentre$elm_vega$VegaLite$dataFromUrl,
+		'https://vega.github.io/vega-lite/data/cars.json',
+		{ctor: '[]'});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: config(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: res(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: cars,
+					_1: {
+						ctor: '::',
+						_0: trans(
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$vConcat(
+								{
+									ctor: '::',
+									_0: spec1,
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$asSpec(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$layer(
+													{
+														ctor: '::',
+														_0: spec2,
+														_1: {
+															ctor: '::',
+															_0: spec3,
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
 var _gicentre$elm_vega$GalleryArea$area6 = function () {
-	var config = function (_p0) {
+	var config = function (_p6) {
 		return _gicentre$elm_vega$VegaLite$configure(
 			A2(
 				_gicentre$elm_vega$VegaLite$configuration,
@@ -16008,9 +16587,9 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 							_1: {ctor: '[]'}
 						}
 					}),
-				_p0));
+				_p6));
 	};
-	var encUpper = function (_p1) {
+	var encUpper = function (_p7) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16059,9 +16638,9 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 						_0: _gicentre$elm_vega$VegaLite$mNum(0.3),
 						_1: {ctor: '[]'}
 					},
-					_p1)));
+					_p7)));
 	};
-	var encLower = function (_p2) {
+	var encLower = function (_p8) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16101,7 +16680,7 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 						_0: _gicentre$elm_vega$VegaLite$mNum(0.6),
 						_1: {ctor: '[]'}
 					},
-					_p2)));
+					_p8)));
 	};
 	var specLower = _gicentre$elm_vega$VegaLite$asSpec(
 		{
@@ -16119,7 +16698,7 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 				_1: {ctor: '[]'}
 			}
 		});
-	var encX = function (_p3) {
+	var encX = function (_p9) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16146,11 +16725,11 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 						}
 					}
 				},
-				_p3));
+				_p9));
 	};
-	var trans = function (_p4) {
+	var trans = function (_p10) {
 		return _gicentre$elm_vega$VegaLite$transform(
-			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.y - 50', 'ny', _p4));
+			A3(_gicentre$elm_vega$VegaLite$calculateAs, 'datum.y - 50', 'ny', _p10));
 	};
 	var specUpper = _gicentre$elm_vega$VegaLite$asSpec(
 		{
@@ -16173,7 +16752,7 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 				}
 			}
 		});
-	var data = function (_p5) {
+	var data = function (_p11) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
@@ -16270,7 +16849,7 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 								}
 							}
 						}),
-					_p5)));
+					_p11)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Horizon chart with 2 layers. (See https://idl.cs.washington.edu/papers/horizon/ for more details on horizon charts.)');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16317,7 +16896,7 @@ var _gicentre$elm_vega$GalleryArea$area6 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryArea$area5 = function () {
-	var enc = function (_p6) {
+	var enc = function (_p12) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16396,7 +16975,7 @@ var _gicentre$elm_vega$GalleryArea$area5 = function () {
 								}
 							}
 						},
-						_p6))));
+						_p12))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a streamgraph (centred, stacked area chart).');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16432,7 +17011,7 @@ var _gicentre$elm_vega$GalleryArea$area5 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryArea$area4 = function () {
-	var enc = function (_p7) {
+	var enc = function (_p13) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16511,7 +17090,7 @@ var _gicentre$elm_vega$GalleryArea$area4 = function () {
 								}
 							}
 						},
-						_p7))));
+						_p13))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a normalised area chart.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16547,7 +17126,7 @@ var _gicentre$elm_vega$GalleryArea$area4 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryArea$area3 = function () {
-	var enc = function (_p8) {
+	var enc = function (_p14) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16613,7 +17192,7 @@ var _gicentre$elm_vega$GalleryArea$area3 = function () {
 								}
 							}
 						},
-						_p8))));
+						_p14))));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Unemployment across industries as a stacked area chart.');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16641,7 +17220,7 @@ var _gicentre$elm_vega$GalleryArea$area3 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryArea$area2 = function () {
-	var enc = function (_p9) {
+	var enc = function (_p15) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16676,14 +17255,14 @@ var _gicentre$elm_vega$GalleryArea$area2 = function () {
 							_1: {ctor: '[]'}
 						}
 					},
-					_p9)));
+					_p15)));
 	};
-	var trans = function (_p10) {
+	var trans = function (_p16) {
 		return _gicentre$elm_vega$VegaLite$transform(
 			A2(
 				_gicentre$elm_vega$VegaLite$filter,
 				_gicentre$elm_vega$VegaLite$fiExpr('datum.symbol === \'GOOG\''),
-				_p10));
+				_p16));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Area chart with overlaid lines and point markers');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16728,7 +17307,7 @@ var _gicentre$elm_vega$GalleryArea$area2 = function () {
 		});
 }();
 var _gicentre$elm_vega$GalleryArea$area1 = function () {
-	var enc = function (_p11) {
+	var enc = function (_p17) {
 		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
 				_gicentre$elm_vega$VegaLite$position,
@@ -16780,7 +17359,7 @@ var _gicentre$elm_vega$GalleryArea$area1 = function () {
 							}
 						}
 					},
-					_p11)));
+					_p17)));
 	};
 	var des = _gicentre$elm_vega$VegaLite$description('Unemployment over time (area chart)');
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
@@ -16834,7 +17413,11 @@ var _gicentre$elm_vega$GalleryArea$mySpecs = _gicentre$elm_vega$VegaLite$combine
 						_1: {
 							ctor: '::',
 							_0: {ctor: '_Tuple2', _0: 'area6', _1: _gicentre$elm_vega$GalleryArea$area6},
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'area7', _1: _gicentre$elm_vega$GalleryArea$area7},
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}
@@ -16854,7 +17437,7 @@ var _gicentre$elm_vega$GalleryArea$main = _elm_lang$core$Platform$program(
 			_1: _gicentre$elm_vega$GalleryArea$elmToJS(_gicentre$elm_vega$GalleryArea$mySpecs)
 		},
 		update: F2(
-			function (_p12, model) {
+			function (_p18, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			}),
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
