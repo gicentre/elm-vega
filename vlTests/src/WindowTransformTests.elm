@@ -16,8 +16,7 @@ window1 =
 
         trans =
             transform
-                << windowAs "TotalTime"
-                    [ wiAggregateOp Sum, wiField "Time" ]
+                << window [ ( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.Time/datum.TotalTime * 100" "PercentOfTotal"
 
@@ -43,8 +42,7 @@ window2 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << windowAs "AverageRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageRating) > 2.5")
 
@@ -81,8 +79,7 @@ window3 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << timeUnitAs Year "Release_Date" "year"
-                << windowAs "AverageYearRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
                     [ wiGroupBy [ "year" ], wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageYearRating) > 2.5")
 
@@ -117,8 +114,7 @@ window4 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << filter (fiRange "Release_Date" (dtRange [] [ dtYear 2019 ]))
-                << windowAs "AverageRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.IMDB_Rating - datum.AverageRating" "RatingDelta"
 
@@ -141,8 +137,8 @@ window5 =
 
         trans =
             transform
-                << windowAs "rank"
-                    [ wiOp Rank ]
+                << window
+                    [ ( [ wiOp Rank ], "rank" ) ]
                     [ wiSort [ wiDescending "point" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -172,7 +168,7 @@ window6 =
 
         trans =
             transform
-                << windowAs "rank" [ wiOp Rank ] [ wiSort [ wiDescending "score" ] ]
+                << window [ ( [ wiOp Rank ], "rank" ) ] [ wiSort [ wiDescending "score" ] ]
                 << filter (fiExpr "datum.rank <= 5")
 
         enc =
@@ -197,8 +193,7 @@ window7 =
             transform
                 << filter (fiExpr "datum.Miles_per_Gallon !== null")
                 << timeUnitAs Year "Year" "year"
-                << windowAs "Average_MPG"
-                    [ wiAggregateOp Mean, wiField "Miles_per_Gallon" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "Miles_per_Gallon" ], "Average_MPG" ) ]
                     [ wiSort [ wiAscending "year" ], wiIgnorePeers False, wiFrame Nothing (Just 0) ]
 
         circleEnc =

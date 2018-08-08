@@ -22,8 +22,8 @@ advanced1 =
 
         trans =
             transform
-                << windowAs "TotalTime"
-                    [ wiAggregateOp Sum, wiField "Time" ]
+                << window
+                    [ ( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.Time/datum.TotalTime * 100" "PercentOfTotal"
 
@@ -48,8 +48,7 @@ advanced2 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << windowAs "AverageRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageRating) > 2.5")
 
@@ -86,8 +85,7 @@ advanced3 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << timeUnitAs Year "Release_Date" "year"
-                << windowAs "AverageYearRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
                     [ wiGroupBy [ "year" ], wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageYearRating) > 2.5")
 
@@ -125,8 +123,7 @@ advanced4 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << filter (fiRange "Release_Date" (dtRange [] [ dtYear 2019 ]))
-                << windowAs "AverageRating"
-                    [ wiAggregateOp Mean, wiField "IMDB_Rating" ]
+                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.IMDB_Rating - datum.AverageRating" "RatingDelta"
 
@@ -153,8 +150,7 @@ advanced5 =
 
         trans =
             transform
-                << windowAs "rank"
-                    [ wiOp Rank ]
+                << window [ ( [ wiOp Rank ], "rank" ) ]
                     [ wiSort [ wiDescending "point", wiDescending "diff" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -187,8 +183,8 @@ advanced6 =
 
         trans =
             transform
-                << windowAs "sum" [ wiAggregateOp Sum, wiField "amount" ] []
-                << windowAs "lead" [ wiOp Lead, wiField "label" ] []
+                << window [ ( [ wiAggregateOp Sum, wiField "amount" ], "sum" ) ] []
+                << window [ ( [ wiOp Lead, wiField "label" ], "lead" ) ] []
                 << calculateAs "datum.lead === null ? datum.label : datum.lead" "lead"
                 << calculateAs "datum.label === 'End' ? 0 : datum.sum - datum.amount" "previous_sum"
                 << calculateAs "datum.label === 'End' ? datum.sum : datum.amount" "amount"

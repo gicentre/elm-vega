@@ -109,6 +109,15 @@ bar5 =
         des =
             description "Seattle weather stacked bar chart"
 
+        weatherColors =
+            categoricalDomainMap
+                [ ( "sun", "#e7ba52" )
+                , ( "fog", "#c7c7c7" )
+                , ( "drizzle", "#aec7ea" )
+                , ( "rain", "#1f77b4" )
+                , ( "snow", "#9467bd" )
+                ]
+
         enc =
             encoding
                 << position X [ pName "date", pMType Ordinal, pTimeUnit Month, pAxis [ axTitle "Month of the year" ] ]
@@ -116,14 +125,7 @@ bar5 =
                 << color
                     [ mName "weather"
                     , mMType Nominal
-                    , mScale <|
-                        categoricalDomainMap
-                            [ ( "sun", "#e7ba52" )
-                            , ( "fog", "#c7c7c7" )
-                            , ( "drizzle", "#aec7ea" )
-                            , ( "rain", "#1f77b4" )
-                            , ( "snow", "#9467bd" )
-                            ]
+                    , mScale weatherColors
                     , mLegend [ leTitle "Weather type" ]
                     ]
     in

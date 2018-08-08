@@ -8,7 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc1/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
-  
+
   <script src="js/sortTests.js"></script>
 
   <!-- Page formatting -->
@@ -35,6 +35,9 @@
   <figure class="cell"><div id="sortCustom"></div><caption>Bars should appear in order B-A-C (specified by custom order) -Z-Y-X (in declaration order)</caption></figure>
   <div style="clear:left"></div>
 
+  <h2>Mosaic Chart via stacking transform</h2>
+  <figure class="cell"><div id="stack1"></div><caption>Mosaic chart, blue-orange-red from left to right and dark to light top to bottom.</caption></figure>
+  <div style="clear:left"></div>
   <script>
   Elm.SortTests.embed(
   document.getElementById("elmContainer")

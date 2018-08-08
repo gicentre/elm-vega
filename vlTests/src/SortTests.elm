@@ -59,9 +59,50 @@ sortCustom =
     toVegaLite [ data [], enc [], bar [] ]
 
 
+stack1 : Spec
+stack1 =
+    let
+        cars =
+            dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
+
+        trans =
+            transform
+                << aggregate [ opAs Count "" "count_*" ] [ "Origin", "Cylinders" ]
+                << stack "count_*"
+                    []
+                    "stack_count_Origin1"
+                    "stack_count_Origin2"
+                    [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
+                << window
+                    [ ( [ wiAggregateOp Min, wiField "stack_count_Origin1" ], "x" )
+                    , ( [ wiAggregateOp Max, wiField "stack_count_Origin2" ], "x2" )
+                    ]
+                    [ wiFrame Nothing Nothing, wiGroupBy [ "Origin" ] ]
+                << stack "count_*"
+                    [ "Origin" ]
+                    "y"
+                    "y2"
+                    [ stOffset StNormalize, stSort [ stAscending "Cylinders" ] ]
+
+        enc =
+            encoding
+                << position X [ pName "x", pMType Quantitative, pAxis [] ]
+                << position X2 [ pName "x2", pMType Quantitative ]
+                << position Y [ pName "y", pMType Quantitative, pAxis [] ]
+                << position Y2 [ pName "y2", pMType Quantitative ]
+                << color [ mName "Origin", mMType Nominal ]
+                << opacity [ mName "Cylinders", mMType Quantitative, mLegend [] ]
+                << tooltips
+                    [ [ tName "Origin", tMType Nominal ]
+                    , [ tName "Cylinders", tMType Quantitative ]
+                    ]
+    in
+    toVegaLite [ cars, trans [], enc [], rect [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    sortCustom
+    stack1
 
 
 
@@ -75,6 +116,7 @@ mySpecs =
         , ( "sortDesc", sortDesc )
         , ( "sortWeight", sortWeight )
         , ( "sortCustom", sortCustom )
+        , ( "stack1", stack1 )
         ]
 
 

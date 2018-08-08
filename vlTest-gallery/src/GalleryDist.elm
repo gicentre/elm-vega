@@ -36,8 +36,7 @@ dist2 =
 
         trans =
             transform
-                << windowAs "cumulativeCount"
-                    [ wiAggregateOp Count, wiField "count" ]
+                << window [ ( [ wiAggregateOp Count, wiField "count" ], "cumulativeCount" ) ]
                     [ wiSort [ wiAscending "IMDB_Rating" ], wiFrame Nothing (Just 0) ]
 
         enc =
@@ -67,8 +66,7 @@ dist3 =
                     [ opAs Count "" "count" ]
                     [ "bin_IMDB_Rating", "bin_IMDB_Rating_end" ]
                 << filter (fiExpr "datum.bin_IMDB_Rating !== null")
-                << windowAs "cumulativeCount"
-                    [ wiAggregateOp Sum, wiField "count" ]
+                << window [ ( [ wiAggregateOp Sum, wiField "count" ], "cumulativeCount" ) ]
                     [ wiSort [ wiAscending "bin_IMDB_Rating" ], wiFrame Nothing (Just 0) ]
 
         enc =
