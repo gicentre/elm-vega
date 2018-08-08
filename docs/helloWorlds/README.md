@@ -19,7 +19,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc1/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc2/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
