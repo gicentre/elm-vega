@@ -23,7 +23,7 @@ scatter1 =
     toVegaLite
         [ des
         , dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
-        , point []
+        , point [ maTooltip TTData ]
         , enc []
         ]
 
