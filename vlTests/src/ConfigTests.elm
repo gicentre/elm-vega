@@ -75,7 +75,7 @@ darkCfg =
         << configuration (coBackground "black")
         << configuration (coTitle [ ticoFont "Roboto", ticoColor "#fff" ])
         << configuration (coAxis [ axcoDomainColor "yellow", axcoGridColor "rgb(255,255,200)", axcoGridOpacity 0.2, axcoLabelColor "#fcf", axcoTickColor "white", axcoTitleColor "rgb(200,255,200)", axcoLabelFont "Roboto", axcoTitleFont "Roboto" ])
-        << configuration (coLegend [ lecoFillColor "#333", lecoStrokeColor "#444", lecoTitleColor "rgb(200,200,200)", lecoLabelColor "white", lecoSymbolColor "red", lecoGradientStrokeColor "yellow", lecoLabelFont "Roboto", lecoTitleFont "Roboto" ])
+        << configuration (coLegend [ lecoFillColor "#333", lecoStrokeColor "#444", lecoTitleColor "rgb(200,200,200)", lecoLabelColor "white", lecoSymbolFillColor "red", lecoGradientStrokeColor "yellow", lecoLabelFont "Roboto", lecoTitleFont "Roboto" ])
         |> compositeVis
 
 

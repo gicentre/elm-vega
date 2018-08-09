@@ -7573,6 +7573,13 @@ var _gicentre$elm_vega$VegaLite$legendConfigProperty = function (legendConfig) {
 				_0: 'labelOffset',
 				_1: _elm_lang$core$Json_Encode$float(_p57._0)
 			};
+		case 'LeLabelOverlap':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOverlap',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$overlapStrategyLabel(_p57._0))
+			};
 		case 'LeShortTimeLabels':
 			return {
 				ctor: '_Tuple2',
@@ -7585,10 +7592,16 @@ var _gicentre$elm_vega$VegaLite$legendConfigProperty = function (legendConfig) {
 				_0: 'entryPadding',
 				_1: _elm_lang$core$Json_Encode$float(_p57._0)
 			};
-		case 'SymbolColor':
+		case 'SymbolFillColor':
 			return {
 				ctor: '_Tuple2',
-				_0: 'symbolColor',
+				_0: 'symbolFillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p57._0)
+			};
+		case 'SymbolStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolStrokeColor',
 				_1: _elm_lang$core$Json_Encode$string(_p57._0)
 			};
 		case 'SymbolType':
@@ -7837,6 +7850,57 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 				_0: 'gradientStrokeWidth',
 				_1: _elm_lang$core$Json_Encode$float(_p62._0)
 			};
+		case 'LLabelAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$hAlignLabel(_p62._0))
+			};
+		case 'LLabelBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$vAlignLabel(_p62._0))
+			};
+		case 'LLabelColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LLabelFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFont',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LLabelFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LLabelLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelLimit',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LLabelOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOffset',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LLabelOverlap':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelOverlap',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$overlapStrategyLabel(_p62._0))
+			};
 		case 'LOffset':
 			return {
 				ctor: '_Tuple2',
@@ -7866,6 +7930,37 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'strokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LSymbolFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolFillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LSymbolStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolStrokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LSymbolType':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolType',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$symbolLabel(_p62._0))
+			};
+		case 'LSymbolSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolSize',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LSymbolStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolStrokeWidth',
 				_1: _elm_lang$core$Json_Encode$float(_p62._0)
 			};
 		case 'LTickCount':
@@ -14230,6 +14325,10 @@ var _gicentre$elm_vega$VegaLite$LeTitleAlign = function (a) {
 	return {ctor: 'LeTitleAlign', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoTitleAlign = _gicentre$elm_vega$VegaLite$LeTitleAlign;
+var _gicentre$elm_vega$VegaLite$SymbolStrokeColor = function (a) {
+	return {ctor: 'SymbolStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoSymbolStrokeColor = _gicentre$elm_vega$VegaLite$SymbolStrokeColor;
 var _gicentre$elm_vega$VegaLite$SymbolStrokeWidth = function (a) {
 	return {ctor: 'SymbolStrokeWidth', _0: a};
 };
@@ -14242,10 +14341,10 @@ var _gicentre$elm_vega$VegaLite$SymbolType = function (a) {
 	return {ctor: 'SymbolType', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoSymbolType = _gicentre$elm_vega$VegaLite$SymbolType;
-var _gicentre$elm_vega$VegaLite$SymbolColor = function (a) {
-	return {ctor: 'SymbolColor', _0: a};
+var _gicentre$elm_vega$VegaLite$SymbolFillColor = function (a) {
+	return {ctor: 'SymbolFillColor', _0: a};
 };
-var _gicentre$elm_vega$VegaLite$lecoSymbolColor = _gicentre$elm_vega$VegaLite$SymbolColor;
+var _gicentre$elm_vega$VegaLite$lecoSymbolFillColor = _gicentre$elm_vega$VegaLite$SymbolFillColor;
 var _gicentre$elm_vega$VegaLite$LeStrokeWidth = function (a) {
 	return {ctor: 'LeStrokeWidth', _0: a};
 };
@@ -14274,6 +14373,10 @@ var _gicentre$elm_vega$VegaLite$Offset = function (a) {
 	return {ctor: 'Offset', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoOffset = _gicentre$elm_vega$VegaLite$Offset;
+var _gicentre$elm_vega$VegaLite$LeLabelOverlap = function (a) {
+	return {ctor: 'LeLabelOverlap', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoLabelOverlap = _gicentre$elm_vega$VegaLite$LeLabelOverlap;
 var _gicentre$elm_vega$VegaLite$LeLabelOffset = function (a) {
 	return {ctor: 'LeLabelOffset', _0: a};
 };
@@ -14373,6 +14476,26 @@ var _gicentre$elm_vega$VegaLite$LTickCount = function (a) {
 	return {ctor: 'LTickCount', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leTickCount = _gicentre$elm_vega$VegaLite$LTickCount;
+var _gicentre$elm_vega$VegaLite$LSymbolStrokeColor = function (a) {
+	return {ctor: 'LSymbolStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leSymbolStrokeColor = _gicentre$elm_vega$VegaLite$LSymbolStrokeColor;
+var _gicentre$elm_vega$VegaLite$LSymbolStrokeWidth = function (a) {
+	return {ctor: 'LSymbolStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leSymbolStrokeWidth = _gicentre$elm_vega$VegaLite$LSymbolStrokeWidth;
+var _gicentre$elm_vega$VegaLite$LSymbolSize = function (a) {
+	return {ctor: 'LSymbolSize', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leSymbolSize = _gicentre$elm_vega$VegaLite$LSymbolSize;
+var _gicentre$elm_vega$VegaLite$LSymbolType = function (a) {
+	return {ctor: 'LSymbolType', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leSymbolType = _gicentre$elm_vega$VegaLite$LSymbolType;
+var _gicentre$elm_vega$VegaLite$LSymbolFillColor = function (a) {
+	return {ctor: 'LSymbolFillColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leSymbolFillColor = _gicentre$elm_vega$VegaLite$LSymbolFillColor;
 var _gicentre$elm_vega$VegaLite$LStrokeWidth = function (a) {
 	return {ctor: 'LStrokeWidth', _0: a};
 };
@@ -14393,6 +14516,38 @@ var _gicentre$elm_vega$VegaLite$LOffset = function (a) {
 	return {ctor: 'LOffset', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leOffset = _gicentre$elm_vega$VegaLite$LOffset;
+var _gicentre$elm_vega$VegaLite$LLabelOverlap = function (a) {
+	return {ctor: 'LLabelOverlap', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelOverlap = _gicentre$elm_vega$VegaLite$LLabelOverlap;
+var _gicentre$elm_vega$VegaLite$LLabelOffset = function (a) {
+	return {ctor: 'LLabelOffset', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelOffset = _gicentre$elm_vega$VegaLite$LLabelOffset;
+var _gicentre$elm_vega$VegaLite$LLabelLimit = function (a) {
+	return {ctor: 'LLabelLimit', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelLimit = _gicentre$elm_vega$VegaLite$LLabelLimit;
+var _gicentre$elm_vega$VegaLite$LLabelFontSize = function (a) {
+	return {ctor: 'LLabelFontSize', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelFontSize = _gicentre$elm_vega$VegaLite$LLabelFontSize;
+var _gicentre$elm_vega$VegaLite$LLabelFont = function (a) {
+	return {ctor: 'LLabelFont', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelFont = _gicentre$elm_vega$VegaLite$LLabelFont;
+var _gicentre$elm_vega$VegaLite$LLabelColor = function (a) {
+	return {ctor: 'LLabelColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelColor = _gicentre$elm_vega$VegaLite$LLabelColor;
+var _gicentre$elm_vega$VegaLite$LLabelBaseline = function (a) {
+	return {ctor: 'LLabelBaseline', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelBaseline = _gicentre$elm_vega$VegaLite$LLabelBaseline;
+var _gicentre$elm_vega$VegaLite$LLabelAlign = function (a) {
+	return {ctor: 'LLabelAlign', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leLabelAlign = _gicentre$elm_vega$VegaLite$LLabelAlign;
 var _gicentre$elm_vega$VegaLite$LGradientStrokeWidth = function (a) {
 	return {ctor: 'LGradientStrokeWidth', _0: a};
 };
@@ -17024,7 +17179,7 @@ var _gicentre$elm_vega$ConfigTests$darkCfg = _gicentre$elm_vega$ConfigTests$comp
 												_0: _gicentre$elm_vega$VegaLite$lecoLabelColor('white'),
 												_1: {
 													ctor: '::',
-													_0: _gicentre$elm_vega$VegaLite$lecoSymbolColor('red'),
+													_0: _gicentre$elm_vega$VegaLite$lecoSymbolFillColor('red'),
 													_1: {
 														ctor: '::',
 														_0: _gicentre$elm_vega$VegaLite$lecoGradientStrokeColor('yellow'),

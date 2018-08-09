@@ -416,6 +416,14 @@ module VegaLite
         , leGradientStrokeColor
         , leGradientStrokeWidth
         , leGradientThickness
+        , leLabelAlign
+        , leLabelBaseline
+        , leLabelColor
+        , leLabelFont
+        , leLabelFontSize
+        , leLabelLimit
+        , leLabelOffset
+        , leLabelOverlap
         , leNums
         , leOffset
         , leOrient
@@ -423,6 +431,11 @@ module VegaLite
         , leStrokeColor
         , leStrokeWidth
         , leStrs
+        , leSymbolFillColor
+        , leSymbolSize
+        , leSymbolStrokeColor
+        , leSymbolStrokeWidth
+        , leSymbolType
         , leTickCount
         , leTitle
         , leType
@@ -446,6 +459,7 @@ module VegaLite
         , lecoLabelFontSize
         , lecoLabelLimit
         , lecoLabelOffset
+        , lecoLabelOverlap
         , lecoOffset
         , lecoOrient
         , lecoPadding
@@ -453,8 +467,9 @@ module VegaLite
         , lecoStrokeColor
         , lecoStrokeDash
         , lecoStrokeWidth
-        , lecoSymbolColor
+        , lecoSymbolFillColor
         , lecoSymbolSize
+        , lecoSymbolStrokeColor
         , lecoSymbolStrokeWidth
         , lecoSymbolType
         , lecoTitleAlign
@@ -1249,11 +1264,24 @@ See the
 @docs leGradientThickness
 @docs leGradientStrokeColor
 @docs leGradientStrokeWidth
+@docs leLabelAlign
+@docs leLabelBaseline
+@docs leLabelColor
+@docs leLabelFont
+@docs leLabelFontSize
+@docs leLabelLimit
+@docs leLabelOffset
+@docs leLabelOverlap
 @docs leOffset
 @docs leOrient
 @docs lePadding
 @docs leStrokeColor
 @docs leStrokeWidth
+@docs leSymbolFillColor
+@docs leSymbolSize
+@docs leSymbolStrokeColor
+@docs leSymbolStrokeWidth
+@docs leSymbolType
 @docs leTickCount
 @docs leTitle
 @docs leType
@@ -1753,12 +1781,14 @@ See the
 @docs lecoLabelFontSize
 @docs lecoLabelLimit
 @docs lecoLabelOffset
+@docs lecoLabelOverlap
 @docs lecoShortTimeLabels
 @docs lecoEntryPadding
-@docs lecoSymbolColor
-@docs lecoSymbolType
+@docs lecoSymbolFillColor
 @docs lecoSymbolSize
+@docs lecoSymbolStrokeColor
 @docs lecoSymbolStrokeWidth
+@docs lecoSymbolType
 @docs lecoTitleAlign
 @docs lecoTitleBaseline
 @docs lecoTitleColor
@@ -2637,6 +2667,7 @@ type LegendConfig
     | LeLabelFontSize Float
     | LeLabelLimit Float
     | LeLabelOffset Float
+    | LeLabelOverlap OverlapStrategy
     | Offset Float
     | Orient LegendOrientation
     | LePadding Float
@@ -2644,10 +2675,11 @@ type LegendConfig
     | StrokeColor String
     | LeStrokeDash (List Float)
     | LeStrokeWidth Float
-    | SymbolColor String
+    | SymbolFillColor String
     | SymbolType Symbol
     | SymbolSize Float
     | SymbolStrokeWidth Float
+    | SymbolStrokeColor String
     | LeTitleAlign HAlign
     | LeTitleBaseline VAlign
     | LeTitleColor String
@@ -2681,11 +2713,24 @@ type LegendProperty
     | LGradientThickness Float
     | LGradientStrokeColor String
     | LGradientStrokeWidth Float
+    | LLabelAlign HAlign
+    | LLabelBaseline VAlign
+    | LLabelColor String
+    | LLabelFont String
+    | LLabelFontSize Float
+    | LLabelLimit Float
+    | LLabelOffset Float
+    | LLabelOverlap OverlapStrategy
     | LOffset Float
     | LOrient LegendOrientation
     | LPadding Float
     | LStrokeColor String
     | LStrokeWidth Float
+    | LSymbolFillColor String
+    | LSymbolType Symbol
+    | LSymbolSize Float
+    | LSymbolStrokeWidth Float
+    | LSymbolStrokeColor String
     | LTickCount Float
     | LTitle String
     | LType Legend
@@ -2926,7 +2971,7 @@ type OrderChannel
 
 
 {-| Type of overlap strategy to be applied when there is not space to show all items
-on an axis. See the
+on an axis or legend. See the
 -}
 type OverlapStrategy
     = ONone
@@ -6415,11 +6460,11 @@ lecoStrokeWidth =
     LeStrokeWidth
 
 
-{-| Default legend symbol color.
+{-| Default legend symbol fill color.
 -}
-lecoSymbolColor : String -> LegendConfig
-lecoSymbolColor =
-    SymbolColor
+lecoSymbolFillColor : String -> LegendConfig
+lecoSymbolFillColor =
+    SymbolFillColor
 
 
 {-| Default legend symbol type.
@@ -6441,6 +6486,13 @@ lecoSymbolSize =
 lecoSymbolStrokeWidth : Float -> LegendConfig
 lecoSymbolStrokeWidth =
     SymbolStrokeWidth
+
+
+{-| Default legend symbol outline color.
+-}
+lecoSymbolStrokeColor : String -> LegendConfig
+lecoSymbolStrokeColor =
+    SymbolStrokeColor
 
 
 {-| Default horizontal alignment for legend titles.
@@ -6513,6 +6565,13 @@ lecoDirection =
     LeDirection
 
 
+{-| Strategy for resolving overlapping legend labels.
+-}
+lecoLabelOverlap : OverlapStrategy -> LegendConfig
+lecoLabelOverlap =
+    LeLabelOverlap
+
+
 {-| Direction of a legend.
 -}
 leDirection : MarkOrientation -> LegendProperty
@@ -6569,6 +6628,62 @@ leGradientThickness =
     LGradientThickness
 
 
+{-| Horizontal alignment of legend labels.
+-}
+leLabelAlign : HAlign -> LegendProperty
+leLabelAlign =
+    LLabelAlign
+
+
+{-| Vertical alignment of legend labels.
+-}
+leLabelBaseline : VAlign -> LegendProperty
+leLabelBaseline =
+    LLabelBaseline
+
+
+{-| Color for legend labels.
+-}
+leLabelColor : String -> LegendProperty
+leLabelColor =
+    LLabelColor
+
+
+{-| Font for legend labels.
+-}
+leLabelFont : String -> LegendProperty
+leLabelFont =
+    LLabelFont
+
+
+{-| Font size legend labels.
+-}
+leLabelFontSize : Float -> LegendProperty
+leLabelFontSize =
+    LLabelFontSize
+
+
+{-| Maximum width for legend labels in pixel units.
+-}
+leLabelLimit : Float -> LegendProperty
+leLabelLimit =
+    LLabelLimit
+
+
+{-| Offset for legend labels.
+-}
+leLabelOffset : Float -> LegendProperty
+leLabelOffset =
+    LLabelOffset
+
+
+{-| Strategy for resolving overlapping legend labels.
+-}
+leLabelOverlap : OverlapStrategy -> LegendProperty
+leLabelOverlap =
+    LLabelOverlap
+
+
 {-| An explicit set of numeric legend values.
 -}
 leNums : List Float -> LegendValues
@@ -6616,6 +6731,41 @@ leStrokeWidth =
 leStrs : List String -> LegendValues
 leStrs =
     LStrings
+
+
+{-| Legend symbol fill color.
+-}
+leSymbolFillColor : String -> LegendProperty
+leSymbolFillColor =
+    LSymbolFillColor
+
+
+{-| Legend symbol type.
+-}
+leSymbolType : Symbol -> LegendProperty
+leSymbolType =
+    LSymbolType
+
+
+{-| Legend symbol size.
+-}
+leSymbolSize : Float -> LegendProperty
+leSymbolSize =
+    LSymbolSize
+
+
+{-| Legend symbol stroke width.
+-}
+leSymbolStrokeWidth : Float -> LegendProperty
+leSymbolStrokeWidth =
+    LSymbolStrokeWidth
+
+
+{-| Legend symbol outline color.
+-}
+leSymbolStrokeColor : String -> LegendProperty
+leSymbolStrokeColor =
+    LSymbolStrokeColor
 
 
 {-| Number of tick marks in a quantitative legend.
@@ -10580,14 +10730,20 @@ legendConfigProperty legendConfig =
         LeLabelOffset x ->
             ( "labelOffset", JE.float x )
 
+        LeLabelOverlap lo ->
+            ( "labelOverlap", JE.string (overlapStrategyLabel lo) )
+
         LeShortTimeLabels b ->
             ( "shortTimeLabels", JE.bool b )
 
         EntryPadding x ->
             ( "entryPadding", JE.float x )
 
-        SymbolColor s ->
-            ( "symbolColor", JE.string s )
+        SymbolFillColor s ->
+            ( "symbolFillColor", JE.string s )
+
+        SymbolStrokeColor s ->
+            ( "symbolStrokeColor", JE.string s )
 
         SymbolType s ->
             ( "symbolType", JE.string (symbolLabel s) )
@@ -10683,6 +10839,30 @@ legendProperty legendProp =
         LGradientStrokeWidth n ->
             ( "gradientStrokeWidth", JE.float n )
 
+        LLabelAlign ha ->
+            ( "labelAlign", JE.string (hAlignLabel ha) )
+
+        LLabelBaseline va ->
+            ( "labelBaseline", JE.string (vAlignLabel va) )
+
+        LLabelColor s ->
+            ( "labelColor", JE.string s )
+
+        LLabelFont s ->
+            ( "labelFont", JE.string s )
+
+        LLabelFontSize x ->
+            ( "labelFontSize", JE.float x )
+
+        LLabelLimit x ->
+            ( "labelLimit", JE.float x )
+
+        LLabelOffset x ->
+            ( "labelOffset", JE.float x )
+
+        LLabelOverlap lo ->
+            ( "labelOverlap", JE.string (overlapStrategyLabel lo) )
+
         LOffset x ->
             ( "offset", JE.float x )
 
@@ -10697,6 +10877,21 @@ legendProperty legendProp =
 
         LStrokeWidth x ->
             ( "strokeWidth", JE.float x )
+
+        LSymbolFillColor s ->
+            ( "symbolFillColor", JE.string s )
+
+        LSymbolStrokeColor s ->
+            ( "symbolStrokeColor", JE.string s )
+
+        LSymbolType s ->
+            ( "symbolType", JE.string (symbolLabel s) )
+
+        LSymbolSize x ->
+            ( "symbolSize", JE.float x )
+
+        LSymbolStrokeWidth x ->
+            ( "symbolStrokeWidth", JE.float x )
 
         LTickCount x ->
             ( "tickCount", JE.float x )
