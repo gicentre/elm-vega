@@ -443,6 +443,14 @@ module VegaLite
         , leSymbolType
         , leTickCount
         , leTitle
+        , leTitleAlign
+        , leTitleBaseline
+        , leTitleColor
+        , leTitleFont
+        , leTitleFontSize
+        , leTitleFontWeight
+        , leTitleLimit
+        , leTitlePadding
         , leType
         , leValues
         , leZIndex
@@ -477,8 +485,11 @@ module VegaLite
         , lecoStrokeColor
         , lecoStrokeDash
         , lecoStrokeWidth
+        , lecoSymbolBaseFillColor
+        , lecoSymbolBaseStrokeColor
         , lecoSymbolDirection
         , lecoSymbolFillColor
+        , lecoSymbolOffset
         , lecoSymbolSize
         , lecoSymbolStrokeColor
         , lecoSymbolStrokeWidth
@@ -1300,6 +1311,14 @@ See the
 @docs leSymbolType
 @docs leTickCount
 @docs leTitle
+@docs leTitleAlign
+@docs leTitleBaseline
+@docs leTitleColor
+@docs leTitleFont
+@docs leTitleFontSize
+@docs leTitleFontWeight
+@docs leTitleLimit
+@docs leTitlePadding
 @docs leType
 @docs leValues
 @docs leZIndex
@@ -1805,8 +1824,11 @@ See the
 @docs lecoLabelOverlap
 @docs lecoShortTimeLabels
 @docs lecoEntryPadding
+@docs lecoSymbolBaseFillColor
+@docs lecoSymbolBaseStrokeColor
 @docs lecoSymbolDirection
 @docs lecoSymbolFillColor
+@docs lecoSymbolOffset
 @docs lecoSymbolSize
 @docs lecoSymbolStrokeColor
 @docs lecoSymbolStrokeWidth
@@ -2702,8 +2724,11 @@ type LegendConfig
     | StrokeColor String
     | LeStrokeDash (List Float)
     | LeStrokeWidth Float
+    | SymbolBaseFillColor String
+    | SymbolBaseStrokeColor String
     | SymbolDirection MarkOrientation
     | SymbolFillColor String
+    | SymbolOffset Float
     | SymbolType Symbol
     | SymbolSize Float
     | SymbolStrokeWidth Float
@@ -2766,6 +2791,14 @@ type LegendProperty
     | LSymbolStrokeColor String
     | LTickCount Float
     | LTitle String
+    | LTitleAlign HAlign
+    | LTitleBaseline VAlign
+    | LTitleColor String
+    | LTitleFont String
+    | LTitleFontSize Float
+    | LTitleFontWeight FontWeight
+    | LTitleLimit Float
+    | LTitlePadding Float
     | LType Legend
     | LValues LegendValues
     | LZIndex Int
@@ -6535,11 +6568,32 @@ lecoStrokeWidth =
     LeStrokeWidth
 
 
+{-| Default legend symbol fill color for when no fill scale color in legend encoding.
+-}
+lecoSymbolBaseFillColor : String -> LegendConfig
+lecoSymbolBaseFillColor =
+    SymbolBaseFillColor
+
+
+{-| Default legend symbol stroke color for when no stroke scale color in legend encoding.
+-}
+lecoSymbolBaseStrokeColor : String -> LegendConfig
+lecoSymbolBaseStrokeColor =
+    SymbolBaseStrokeColor
+
+
 {-| Default legend symbol fill color.
 -}
 lecoSymbolFillColor : String -> LegendConfig
 lecoSymbolFillColor =
     SymbolFillColor
+
+
+{-| Default horizontal pixel offset for legend symbols.
+-}
+lecoSymbolOffset : Float -> LegendConfig
+lecoSymbolOffset =
+    SymbolOffset
 
 
 {-| Default legend symbol type.
@@ -6890,6 +6944,62 @@ leTickCount =
 leTitle : String -> LegendProperty
 leTitle =
     LTitle
+
+
+{-| Horizontal alignment for legend titles.
+-}
+leTitleAlign : HAlign -> LegendProperty
+leTitleAlign =
+    LTitleAlign
+
+
+{-| Vertical alignment for legend titles.
+-}
+leTitleBaseline : VAlign -> LegendProperty
+leTitleBaseline =
+    LTitleBaseline
+
+
+{-| Color for legend title.
+-}
+leTitleColor : String -> LegendProperty
+leTitleColor =
+    LTitleColor
+
+
+{-| Font for legend titles.
+-}
+leTitleFont : String -> LegendProperty
+leTitleFont =
+    LTitleFont
+
+
+{-| Font size for legend titles.
+-}
+leTitleFontSize : Float -> LegendProperty
+leTitleFontSize =
+    LTitleFontSize
+
+
+{-| Font weight for legend titles.
+-}
+leTitleFontWeight : FontWeight -> LegendProperty
+leTitleFontWeight =
+    LTitleFontWeight
+
+
+{-| Maximum size in pixel units for legend titles.
+-}
+leTitleLimit : Float -> LegendProperty
+leTitleLimit =
+    LTitleLimit
+
+
+{-| Spacing in pixel units between title and legend.
+-}
+leTitlePadding : Float -> LegendProperty
+leTitlePadding =
+    LTitlePadding
 
 
 {-| Type of legend.
@@ -10870,8 +10980,17 @@ legendConfigProperty legendConfig =
         SymbolFillColor s ->
             ( "symbolFillColor", JE.string s )
 
+        SymbolBaseFillColor s ->
+            ( "symbolBaseFillColor", JE.string s )
+
         SymbolStrokeColor s ->
             ( "symbolStrokeColor", JE.string s )
+
+        SymbolBaseStrokeColor s ->
+            ( "symbolBaseStrokeColor", JE.string s )
+
+        SymbolOffset o ->
+            ( "symbolOffset", JE.float o )
 
         SymbolType s ->
             ( "symbolType", JE.string (symbolLabel s) )
@@ -11044,6 +11163,30 @@ legendProperty legendProp =
                 ( "title", JE.null )
             else
                 ( "title", JE.string title )
+
+        LTitleAlign ha ->
+            ( "titleAlign", JE.string (hAlignLabel ha) )
+
+        LTitleBaseline va ->
+            ( "titleBaseline", JE.string (vAlignLabel va) )
+
+        LTitleColor s ->
+            ( "titleColor", JE.string s )
+
+        LTitleFont s ->
+            ( "titleFont", JE.string s )
+
+        LTitleFontSize x ->
+            ( "titleFontSize", JE.float x )
+
+        LTitleFontWeight fw ->
+            ( "titleFontWeight", fontWeightSpec fw )
+
+        LTitleLimit x ->
+            ( "titleLimit", JE.float x )
+
+        LTitlePadding x ->
+            ( "titlePadding", JE.float x )
 
         LValues vals ->
             let

@@ -11073,11 +11073,29 @@ var _gicentre$elm_vega$VegaLite$legendConfigProperty = function (legendConfig) {
 				_0: 'symbolFillColor',
 				_1: _elm_lang$core$Json_Encode$string(_p86._0)
 			};
+		case 'SymbolBaseFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolBaseFillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p86._0)
+			};
 		case 'SymbolStrokeColor':
 			return {
 				ctor: '_Tuple2',
 				_0: 'symbolStrokeColor',
 				_1: _elm_lang$core$Json_Encode$string(_p86._0)
+			};
+		case 'SymbolBaseStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolBaseStrokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p86._0)
+			};
+		case 'SymbolOffset':
+			return {
+				ctor: '_Tuple2',
+				_0: 'symbolOffset',
+				_1: _elm_lang$core$Json_Encode$float(_p86._0)
 			};
 		case 'SymbolType':
 			return {
@@ -11372,6 +11390,56 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 				ctor: '_Tuple2',
 				_0: 'title',
 				_1: _elm_lang$core$Json_Encode$string(_p89)
+			};
+		case 'LTitleAlign':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleAlign',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$hAlignLabel(_p87._0))
+			};
+		case 'LTitleBaseline':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleBaseline',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$vAlignLabel(_p87._0))
+			};
+		case 'LTitleColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleColor',
+				_1: _elm_lang$core$Json_Encode$string(_p87._0)
+			};
+		case 'LTitleFont':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFont',
+				_1: _elm_lang$core$Json_Encode$string(_p87._0)
+			};
+		case 'LTitleFontSize':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontSize',
+				_1: _elm_lang$core$Json_Encode$float(_p87._0)
+			};
+		case 'LTitleFontWeight':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleFontWeight',
+				_1: _gicentre$elm_vega$VegaLite$fontWeightSpec(_p87._0)
+			};
+		case 'LTitleLimit':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titleLimit',
+				_1: _elm_lang$core$Json_Encode$float(_p87._0)
+			};
+		case 'LTitlePadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'titlePadding',
+				_1: _elm_lang$core$Json_Encode$float(_p87._0)
 			};
 		case 'LValues':
 			var list = function () {
@@ -16796,6 +16864,10 @@ var _gicentre$elm_vega$VegaLite$SymbolType = function (a) {
 	return {ctor: 'SymbolType', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoSymbolType = _gicentre$elm_vega$VegaLite$SymbolType;
+var _gicentre$elm_vega$VegaLite$SymbolOffset = function (a) {
+	return {ctor: 'SymbolOffset', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoSymbolOffset = _gicentre$elm_vega$VegaLite$SymbolOffset;
 var _gicentre$elm_vega$VegaLite$SymbolFillColor = function (a) {
 	return {ctor: 'SymbolFillColor', _0: a};
 };
@@ -16804,6 +16876,14 @@ var _gicentre$elm_vega$VegaLite$SymbolDirection = function (a) {
 	return {ctor: 'SymbolDirection', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoSymbolDirection = _gicentre$elm_vega$VegaLite$SymbolDirection;
+var _gicentre$elm_vega$VegaLite$SymbolBaseStrokeColor = function (a) {
+	return {ctor: 'SymbolBaseStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoSymbolBaseStrokeColor = _gicentre$elm_vega$VegaLite$SymbolBaseStrokeColor;
+var _gicentre$elm_vega$VegaLite$SymbolBaseFillColor = function (a) {
+	return {ctor: 'SymbolBaseFillColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoSymbolBaseFillColor = _gicentre$elm_vega$VegaLite$SymbolBaseFillColor;
 var _gicentre$elm_vega$VegaLite$LeStrokeWidth = function (a) {
 	return {ctor: 'LeStrokeWidth', _0: a};
 };
@@ -16947,6 +17027,38 @@ var _gicentre$elm_vega$VegaLite$LType = function (a) {
 	return {ctor: 'LType', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leType = _gicentre$elm_vega$VegaLite$LType;
+var _gicentre$elm_vega$VegaLite$LTitlePadding = function (a) {
+	return {ctor: 'LTitlePadding', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitlePadding = _gicentre$elm_vega$VegaLite$LTitlePadding;
+var _gicentre$elm_vega$VegaLite$LTitleLimit = function (a) {
+	return {ctor: 'LTitleLimit', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleLimit = _gicentre$elm_vega$VegaLite$LTitleLimit;
+var _gicentre$elm_vega$VegaLite$LTitleFontWeight = function (a) {
+	return {ctor: 'LTitleFontWeight', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleFontWeight = _gicentre$elm_vega$VegaLite$LTitleFontWeight;
+var _gicentre$elm_vega$VegaLite$LTitleFontSize = function (a) {
+	return {ctor: 'LTitleFontSize', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleFontSize = _gicentre$elm_vega$VegaLite$LTitleFontSize;
+var _gicentre$elm_vega$VegaLite$LTitleFont = function (a) {
+	return {ctor: 'LTitleFont', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleFont = _gicentre$elm_vega$VegaLite$LTitleFont;
+var _gicentre$elm_vega$VegaLite$LTitleColor = function (a) {
+	return {ctor: 'LTitleColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleColor = _gicentre$elm_vega$VegaLite$LTitleColor;
+var _gicentre$elm_vega$VegaLite$LTitleBaseline = function (a) {
+	return {ctor: 'LTitleBaseline', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleBaseline = _gicentre$elm_vega$VegaLite$LTitleBaseline;
+var _gicentre$elm_vega$VegaLite$LTitleAlign = function (a) {
+	return {ctor: 'LTitleAlign', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leTitleAlign = _gicentre$elm_vega$VegaLite$LTitleAlign;
 var _gicentre$elm_vega$VegaLite$LTitle = function (a) {
 	return {ctor: 'LTitle', _0: a};
 };
