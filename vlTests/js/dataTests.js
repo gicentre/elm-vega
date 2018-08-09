@@ -9848,6 +9848,13 @@ var _gicentre$elm_vega$VegaLite$legendConfigProperty = function (legendConfig) {
 				_0: 'strokeColor',
 				_1: _elm_lang$core$Json_Encode$string(_p57._0)
 			};
+		case 'LeDirection':
+			return {
+				ctor: '_Tuple2',
+				_0: 'direction',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$markOrientationLabel(_p57._0))
+			};
 		case 'LeStrokeDash':
 			return {
 				ctor: '_Tuple2',
@@ -10154,6 +10161,25 @@ var _gicentre$elm_vega$VegaLite$dateTimeProperty = function (dt) {
 var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 	var _p62 = legendProp;
 	switch (_p62.ctor) {
+		case 'LCornerRadius':
+			return {
+				ctor: '_Tuple2',
+				_0: 'cornerRadius',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LFillColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'fillColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LDirection':
+			return {
+				ctor: '_Tuple2',
+				_0: 'direction',
+				_1: _elm_lang$core$Json_Encode$string(
+					_gicentre$elm_vega$VegaLite$markOrientationLabel(_p62._0))
+			};
 		case 'LType':
 			var _p63 = _p62._0;
 			if (_p63.ctor === 'Gradient') {
@@ -10175,6 +10201,30 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 				_0: 'format',
 				_1: _elm_lang$core$Json_Encode$string(_p62._0)
 			};
+		case 'LGradientLength':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientLength',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LGradientThickness':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientThickness',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LGradientStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientStrokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LGradientStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'gradientStrokeWidth',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
 		case 'LOffset':
 			return {
 				ctor: '_Tuple2',
@@ -10192,6 +10242,18 @@ var _gicentre$elm_vega$VegaLite$legendProperty = function (legendProp) {
 			return {
 				ctor: '_Tuple2',
 				_0: 'padding',
+				_1: _elm_lang$core$Json_Encode$float(_p62._0)
+			};
+		case 'LStrokeColor':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeColor',
+				_1: _elm_lang$core$Json_Encode$string(_p62._0)
+			};
+		case 'LStrokeWidth':
+			return {
+				ctor: '_Tuple2',
+				_0: 'strokeWidth',
 				_1: _elm_lang$core$Json_Encode$float(_p62._0)
 			};
 		case 'LTickCount':
@@ -16572,14 +16634,34 @@ var _gicentre$elm_vega$VegaLite$SymbolColor = function (a) {
 	return {ctor: 'SymbolColor', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoSymbolColor = _gicentre$elm_vega$VegaLite$SymbolColor;
-var _gicentre$elm_vega$VegaLite$EntryPadding = function (a) {
-	return {ctor: 'EntryPadding', _0: a};
+var _gicentre$elm_vega$VegaLite$LeStrokeWidth = function (a) {
+	return {ctor: 'LeStrokeWidth', _0: a};
 };
-var _gicentre$elm_vega$VegaLite$lecoEntryPadding = _gicentre$elm_vega$VegaLite$EntryPadding;
+var _gicentre$elm_vega$VegaLite$lecoStrokeWidth = _gicentre$elm_vega$VegaLite$LeStrokeWidth;
+var _gicentre$elm_vega$VegaLite$LeStrokeDash = function (a) {
+	return {ctor: 'LeStrokeDash', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoStrokeDash = _gicentre$elm_vega$VegaLite$LeStrokeDash;
+var _gicentre$elm_vega$VegaLite$StrokeColor = function (a) {
+	return {ctor: 'StrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoStrokeColor = _gicentre$elm_vega$VegaLite$StrokeColor;
 var _gicentre$elm_vega$VegaLite$LeShortTimeLabels = function (a) {
 	return {ctor: 'LeShortTimeLabels', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoShortTimeLabels = _gicentre$elm_vega$VegaLite$LeShortTimeLabels;
+var _gicentre$elm_vega$VegaLite$LePadding = function (a) {
+	return {ctor: 'LePadding', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoPadding = _gicentre$elm_vega$VegaLite$LePadding;
+var _gicentre$elm_vega$VegaLite$Orient = function (a) {
+	return {ctor: 'Orient', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoOrient = _gicentre$elm_vega$VegaLite$Orient;
+var _gicentre$elm_vega$VegaLite$Offset = function (a) {
+	return {ctor: 'Offset', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoOffset = _gicentre$elm_vega$VegaLite$Offset;
 var _gicentre$elm_vega$VegaLite$LeLabelOffset = function (a) {
 	return {ctor: 'LeLabelOffset', _0: a};
 };
@@ -16612,10 +16694,6 @@ var _gicentre$elm_vega$VegaLite$GradientWidth = function (a) {
 	return {ctor: 'GradientWidth', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoGradientWidth = _gicentre$elm_vega$VegaLite$GradientWidth;
-var _gicentre$elm_vega$VegaLite$GradientHeight = function (a) {
-	return {ctor: 'GradientHeight', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoGradientHeight = _gicentre$elm_vega$VegaLite$GradientHeight;
 var _gicentre$elm_vega$VegaLite$GradientStrokeWidth = function (a) {
 	return {ctor: 'GradientStrokeWidth', _0: a};
 };
@@ -16636,34 +16714,22 @@ var _gicentre$elm_vega$VegaLite$GradientLabelBaseline = function (a) {
 	return {ctor: 'GradientLabelBaseline', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoGradientLabelBaseline = _gicentre$elm_vega$VegaLite$GradientLabelBaseline;
-var _gicentre$elm_vega$VegaLite$LePadding = function (a) {
-	return {ctor: 'LePadding', _0: a};
+var _gicentre$elm_vega$VegaLite$GradientHeight = function (a) {
+	return {ctor: 'GradientHeight', _0: a};
 };
-var _gicentre$elm_vega$VegaLite$lecoPadding = _gicentre$elm_vega$VegaLite$LePadding;
-var _gicentre$elm_vega$VegaLite$LeStrokeWidth = function (a) {
-	return {ctor: 'LeStrokeWidth', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoStrokeWidth = _gicentre$elm_vega$VegaLite$LeStrokeWidth;
-var _gicentre$elm_vega$VegaLite$LeStrokeDash = function (a) {
-	return {ctor: 'LeStrokeDash', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoStrokeDash = _gicentre$elm_vega$VegaLite$LeStrokeDash;
-var _gicentre$elm_vega$VegaLite$StrokeColor = function (a) {
-	return {ctor: 'StrokeColor', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoStrokeColor = _gicentre$elm_vega$VegaLite$StrokeColor;
-var _gicentre$elm_vega$VegaLite$Offset = function (a) {
-	return {ctor: 'Offset', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoOffset = _gicentre$elm_vega$VegaLite$Offset;
-var _gicentre$elm_vega$VegaLite$Orient = function (a) {
-	return {ctor: 'Orient', _0: a};
-};
-var _gicentre$elm_vega$VegaLite$lecoOrient = _gicentre$elm_vega$VegaLite$Orient;
+var _gicentre$elm_vega$VegaLite$lecoGradientHeight = _gicentre$elm_vega$VegaLite$GradientHeight;
 var _gicentre$elm_vega$VegaLite$FillColor = function (a) {
 	return {ctor: 'FillColor', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$lecoFillColor = _gicentre$elm_vega$VegaLite$FillColor;
+var _gicentre$elm_vega$VegaLite$EntryPadding = function (a) {
+	return {ctor: 'EntryPadding', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoEntryPadding = _gicentre$elm_vega$VegaLite$EntryPadding;
+var _gicentre$elm_vega$VegaLite$LeDirection = function (a) {
+	return {ctor: 'LeDirection', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$lecoDirection = _gicentre$elm_vega$VegaLite$LeDirection;
 var _gicentre$elm_vega$VegaLite$CornerRadius = function (a) {
 	return {ctor: 'CornerRadius', _0: a};
 };
@@ -16695,6 +16761,14 @@ var _gicentre$elm_vega$VegaLite$LTickCount = function (a) {
 	return {ctor: 'LTickCount', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leTickCount = _gicentre$elm_vega$VegaLite$LTickCount;
+var _gicentre$elm_vega$VegaLite$LStrokeWidth = function (a) {
+	return {ctor: 'LStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leStrokeWidth = _gicentre$elm_vega$VegaLite$LStrokeWidth;
+var _gicentre$elm_vega$VegaLite$LStrokeColor = function (a) {
+	return {ctor: 'LStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leStrokeColor = _gicentre$elm_vega$VegaLite$LStrokeColor;
 var _gicentre$elm_vega$VegaLite$LPadding = function (a) {
 	return {ctor: 'LPadding', _0: a};
 };
@@ -16707,10 +16781,38 @@ var _gicentre$elm_vega$VegaLite$LOffset = function (a) {
 	return {ctor: 'LOffset', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leOffset = _gicentre$elm_vega$VegaLite$LOffset;
+var _gicentre$elm_vega$VegaLite$LGradientStrokeWidth = function (a) {
+	return {ctor: 'LGradientStrokeWidth', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leGradientStrokeWidth = _gicentre$elm_vega$VegaLite$LGradientStrokeWidth;
+var _gicentre$elm_vega$VegaLite$LGradientStrokeColor = function (a) {
+	return {ctor: 'LGradientStrokeColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leGradientStrokeColor = _gicentre$elm_vega$VegaLite$LGradientStrokeColor;
+var _gicentre$elm_vega$VegaLite$LGradientThickness = function (a) {
+	return {ctor: 'LGradientThickness', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leGradientThickness = _gicentre$elm_vega$VegaLite$LGradientThickness;
+var _gicentre$elm_vega$VegaLite$LGradientLength = function (a) {
+	return {ctor: 'LGradientLength', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leGradientLength = _gicentre$elm_vega$VegaLite$LGradientLength;
 var _gicentre$elm_vega$VegaLite$LFormat = function (a) {
 	return {ctor: 'LFormat', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$leFormat = _gicentre$elm_vega$VegaLite$LFormat;
+var _gicentre$elm_vega$VegaLite$LFillColor = function (a) {
+	return {ctor: 'LFillColor', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leFillColor = _gicentre$elm_vega$VegaLite$LFillColor;
+var _gicentre$elm_vega$VegaLite$LDirection = function (a) {
+	return {ctor: 'LDirection', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leDirection = _gicentre$elm_vega$VegaLite$LDirection;
+var _gicentre$elm_vega$VegaLite$LCornerRadius = function (a) {
+	return {ctor: 'LCornerRadius', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$leCornerRadius = _gicentre$elm_vega$VegaLite$LCornerRadius;
 var _gicentre$elm_vega$VegaLite$LStrings = function (a) {
 	return {ctor: 'LStrings', _0: a};
 };
