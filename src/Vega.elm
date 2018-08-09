@@ -3402,7 +3402,7 @@ agAs =
     AgAs
 
 
-{-| Specify whether or not the full cross-product of all `groupby` values should
+{-| Whether or not the full cross-product of all `groupby` values should
 be included in the output of an aggregation transformation.
 -}
 agCross : Boo -> AggregateProperty
@@ -3410,7 +3410,7 @@ agCross =
     AgCross
 
 
-{-| Specify whether or not empty (zero count) groups should be dropped when in an
+{-| Whether or not empty (zero count) groups should be dropped when in an
 aggregation transformation.
 -}
 agDrop : Boo -> AggregateProperty
@@ -3418,7 +3418,7 @@ agDrop =
     AgDrop
 
 
-{-| Specify the data fields to compute aggregate functions when performing an
+{-| Data fields to compute aggregate functions when performing an
 aggregation transformation. The list of fields should align with the operations
 and field names provided by `agOps` and `agAs`. If no fields and operations are
 specified, a count aggregation will be used by default.
@@ -3428,7 +3428,7 @@ agFields =
     AgFields
 
 
-{-| Specify the data fields to group by when performing an aggregation transformation.
+{-| Data fields to group by when performing an aggregation transformation.
 If not specified, a single group containing all data objects will be used.
 -}
 agGroupBy : List Field -> AggregateProperty
@@ -3436,7 +3436,7 @@ agGroupBy =
     AgGroupBy
 
 
-{-| Specify a field to act as a unique key when performing an [agGroupBy](#agGroupBy)
+{-| Field to act as a unique key when performing an [agGroupBy](#agGroupBy)
 aggregation. This can speed up the aggregation but should only be used when there
 is redundancy in the list of groupBy fields (as there is when binning for example).
 
@@ -3456,7 +3456,7 @@ agKey =
     AgKey
 
 
-{-| The aggregation operations to apply to the fields when performing an
+{-| Aggregation operations to apply to the fields when performing an
 aggregation transformation. The list of operations should align with the fields
 output field names provided by `agFields` and `agAs`.
 -}
@@ -3474,7 +3474,7 @@ type Anchor
     | AnchorSignal String
 
 
-{-| Specify that an anchor position is to be determined by a named signal.
+{-| Indicate that an anchor position is to be determined by a named signal.
 The signal should generate one of `start`, `middle` or `end`.
 -}
 anchorSignal : String -> Anchor
@@ -3497,25 +3497,21 @@ type Autosize
     | AutosizeSignal String
 
 
-{-| Specify how the view is sized.
-
-    toVega
-        [ width 500, padding 5, autosize [ AFit, AResize ], ds, mk [] ]
-
+{-| Indicate how the view is sized.
 -}
 autosize : List Autosize -> ( VProperty, Spec )
 autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
 
-{-| Specify that an auto-sizing rule is to be determined by a named signal.
+{-| Indicate that an auto-sizing rule is to be determined by a named signal.
 -}
 autosizeSignal : String -> Autosize
 autosizeSignal =
     AutosizeSignal
 
 
-{-| Specify an interpolation fraction indicating where, for band scales, axis ticks
+{-| Interpolation fraction indicating where, for band scales, axis ticks
 should be positioned. A value of 0 places ticks at the left edge of their bands.
 A value of 0.5 places ticks in the middle of their bands.
 -}
@@ -3524,29 +3520,29 @@ axBandPosition =
     AxBandPosition
 
 
-{-| Specify whether or not the domain (the axis baseline) should be included as
-part of an axis.
+{-| Whether or not the domain (the axis baseline) should be included as part of
+an axis.
 -}
 axDomain : Boo -> AxisProperty
 axDomain =
     AxDomain
 
 
-{-| Specify the color of an axis domain line.
+{-| Color of an axis domain line.
 -}
 axDomainColor : Str -> AxisProperty
 axDomainColor =
     AxDomainColor
 
 
-{-| Specify the opacity of an axis domain line.
+{-| Opacity of an axis domain line.
 -}
 axDomainOpacity : Num -> AxisProperty
 axDomainOpacity =
     AxDomainOpacity
 
 
-{-| Specify the width in pixels of an axis domain line.
+{-| Width in pixels of an axis domain line.
 -}
 axDomainWidth : Num -> AxisProperty
 axDomainWidth =
@@ -3583,29 +3579,28 @@ axFormat =
     AxFormat
 
 
-{-| Specify whether or not grid lines should be included as part of an axis.
+{-| Whether or not grid lines should be included as part of an axis.
 -}
 axGrid : Boo -> AxisProperty
 axGrid =
     AxGrid
 
 
-{-| Specify the color of an axis's grid lines.
+{-| Color of an axis's grid lines.
 -}
 axGridColor : Str -> AxisProperty
 axGridColor =
     AxGridColor
 
 
-{-| Specify the stroke dash of an axis's grid lines as a list of dash-gap lengths
-or `[]` for a solid line (default).
+{-| Stroke dash of an axis's grid lines as a list of dash-gap lengths.
 -}
 axGridDash : List Value -> AxisProperty
 axGridDash =
     AxGridDash
 
 
-{-| Specify the opacity of an axis's grid lines.
+{-| Opacity of an axis's grid lines.
 -}
 axGridOpacity : Num -> AxisProperty
 axGridOpacity =
@@ -3620,14 +3615,14 @@ axGridScale =
     AxGridScale
 
 
-{-| Specify the width of an axis's grid lines in pixel units.
+{-| Width of an axis's grid lines in pixel units.
 -}
 axGridWidth : Num -> AxisProperty
 axGridWidth =
     AxGridWidth
 
 
-{-| Create a single axis used to visualize a spatial scale mapping. The first
+{-| Create an axis used to visualize a spatial scale mapping. The first
 parameter is the name of the scale backing this axis, the second the position of
 the axis relative to the data rectangle and the third a list of optional axis
 properties. For example,
@@ -3665,7 +3660,7 @@ type AxisType
     | AxBand
 
 
-{-| Specify how or if labels should be hidden if they exceed the axis range. If the
+{-| Indicate how or if labels should be hidden if they exceed the axis range. If the
 parameter is `NumNull`, no check for label size is made. A number specifies
 the permitted overflow in pixels that can be tolerated.
 -}
@@ -3674,35 +3669,35 @@ axLabelBound =
     AxLabelBound
 
 
-{-| Specify the horizontal alignment of axis tick labels.
+{-| Horizontal alignment of axis tick labels.
 -}
 axLabelAlign : HAlign -> AxisProperty
 axLabelAlign =
     AxLabelAlign
 
 
-{-| Specify the angle of text for an axis.
+{-| Angle of text for an axis.
 -}
 axLabelAngle : Num -> AxisProperty
 axLabelAngle =
     AxLabelAngle
 
 
-{-| Specify the vertical alignment of axis tick labels.
+{-| Vertical alignment of axis tick labels.
 -}
 axLabelBaseline : VAlign -> AxisProperty
 axLabelBaseline =
     AxLabelBaseline
 
 
-{-| Specify the color of an axis label.
+{-| Color of an axis label.
 -}
 axLabelColor : Str -> AxisProperty
 axLabelColor =
     AxLabelColor
 
 
-{-| Specify how labels at the beginning or end of the axis should be aligned
+{-| Indicate how labels at the beginning or end of an axis should be aligned
 with the scale range. The parameter represents a pixel distance threshold. Labels
 with anchor coordinates within this threshold distance for an axis end-point will be
 flush-adjusted. If `NumNull`, no flush alignment will be applied.
@@ -3712,31 +3707,28 @@ axLabelFlush =
     AxLabelFlush
 
 
-{-| Specify the number of pixels by which to offset flush-adjusted labels
-(default 0). For example, a value of 2 will push flush-adjusted labels 2 pixels
-outward from the centre of the axis. Offsets can help the labels better visually
-group with corresponding axis ticks.
+{-| Number of pixels by which to offset flush-adjusted labels.
 -}
 axLabelFlushOffset : Num -> AxisProperty
 axLabelFlushOffset =
     AxLabelFlushOffset
 
 
-{-| Specify the font name of an axis label.
+{-| Font name of an axis label.
 -}
 axLabelFont : Str -> AxisProperty
 axLabelFont =
     AxLabelFont
 
 
-{-| Specify the font size of an axis label.
+{-| Font size of an axis label.
 -}
 axLabelFontSize : Num -> AxisProperty
 axLabelFontSize =
     AxLabelFontSize
 
 
-{-| Specify the font weight of an axis label. This can be a number (e.g. `vNum 300`)
+{-| Font weight of an axis label. This can be a number (e.g. `vNum 300`)
 or text (e.g. `vStr "bold"`).
 -}
 axLabelFontWeight : Value -> AxisProperty
@@ -3744,43 +3736,42 @@ axLabelFontWeight =
     AxLabelFontWeight
 
 
-{-| Specify the maximum length in pixels of axis tick labels.
+{-| Maximum length in pixels of axis tick labels.
 -}
 axLabelLimit : Num -> AxisProperty
 axLabelLimit =
     AxLabelLimit
 
 
-{-| Specify the opacity of an axis label.
+{-| Opacity of an axis label.
 -}
 axLabelOpacity : Num -> AxisProperty
 axLabelOpacity =
     AxLabelOpacity
 
 
-{-| Specify the strategy to use for resolving overlap of axis labels.
+{-| Strategy to use for resolving overlap of axis labels.
 -}
 axLabelOverlap : OverlapStrategy -> AxisProperty
 axLabelOverlap =
     AxLabelOverlap
 
 
-{-| Specify the padding in pixels between labels and ticks.
+{-| Padding in pixels between labels and ticks.
 -}
 axLabelPadding : Num -> AxisProperty
 axLabelPadding =
     AxLabelPadding
 
 
-{-| Specify whether or not if labels should be included as part of an axis.
+{-| Whether or not if labels should be included as part of an axis.
 -}
 axLabels : Boo -> AxisProperty
 axLabels =
     AxLabels
 
 
-{-| The maximum extent in pixels that axis ticks and labels should use. This
-determines a maximum offset value for axis titles.
+{-| Maximum extent in pixels that axis ticks and labels should use.
 -}
 axMaxExtent : Value -> AxisProperty
 axMaxExtent =
@@ -3795,7 +3786,7 @@ axMinExtent =
     AxMinExtent
 
 
-{-| The orthogonal offset in pixels by which to displace the axis from its position
+{-| Orthogonal offset in pixels by which to displace the axis from its position
 along the edge of the chart.
 -}
 axOffset : Value -> AxisProperty
@@ -3812,10 +3803,9 @@ axPosition =
     AxPosition
 
 
-{-| Specify the tick interval for a temporal axis. The first parameter is
-the type of temporal interval to use and the second the number of steps of that
-interval between ticks. For example to specify a tick is requested at 3 month
-intervals (e.g. January, April, July, October):
+{-| Tick interval for a temporal axis. The first parameter is the type of temporal
+interval to use and the second the number of steps of that interval between ticks.
+e.g. to specify a tick is requested at 3 month intervals (January, April, July, October):
 
     ax =
         axes
@@ -3830,14 +3820,14 @@ axTemporalTickCount =
     AxTemporalTickCount
 
 
-{-| Specify the color of an axis's ticks.
+{-| Color of an axis's ticks.
 -}
 axTickColor : Str -> AxisProperty
 axTickColor =
     AxTickColor
 
 
-{-| A desired number of ticks, for axes visualizing quantitative scales. The
+{-| Desired number of ticks, for axes visualizing quantitative scales. The
 resulting number may be different so that values are “nice” (multiples of 2, 5, 10)
 and lie within the underlying scale’s range.
 -}
@@ -3846,7 +3836,7 @@ axTickCount =
     AxTickCount
 
 
-{-| Specify whether or not an extra axis tick should be added for the initial
+{-| Whether or not an extra axis tick should be added for the initial
 position of an axis. This is useful for styling axes for band scales such that
 ticks are placed on band boundaries rather in the middle of a band.
 -}
@@ -3855,21 +3845,21 @@ axTickExtra =
     AxTickExtra
 
 
-{-| Specify the offset in pixels of an axis's ticks, labels and gridlines.
+{-| Offset in pixels of an axis's ticks, labels and gridlines.
 -}
 axTickOffset : Num -> AxisProperty
 axTickOffset =
     AxTickOffset
 
 
-{-| Specify the opacity of an axis's ticks.
+{-| Opacity of an axis's ticks.
 -}
 axTickOpacity : Num -> AxisProperty
 axTickOpacity =
     AxTickOpacity
 
 
-{-| Specify whether or not pixel position values for an axis's ticks should be
+{-| Whether or not pixel position values for an axis's ticks should be
 rounded to the nearest integer.
 -}
 axTickRound : Boo -> AxisProperty
@@ -3877,21 +3867,21 @@ axTickRound =
     AxTickRound
 
 
-{-| Specify whether or not ticks should be included as part of an axis.
+{-| Whether or not ticks should be included as part of an axis.
 -}
 axTicks : Boo -> AxisProperty
 axTicks =
     AxTicks
 
 
-{-| Specify the size in pixels of axis ticks.
+{-| Size in pixels of axis ticks.
 -}
 axTickSize : Num -> AxisProperty
 axTickSize =
     AxTickSize
 
 
-{-| Specify the width in pixels of an axis's ticks.
+{-| Width in pixels of an axis's ticks.
 -}
 axTickWidth : Num -> AxisProperty
 axTickWidth =
@@ -3905,49 +3895,49 @@ axTitle =
     AxTitle
 
 
-{-| Specify the horizontal alignment of an axis's title.
+{-| Horizontal alignment of an axis's title.
 -}
 axTitleAlign : HAlign -> AxisProperty
 axTitleAlign =
     AxTitleAlign
 
 
-{-| Specify the angle of an axis's title text.
+{-| Angle of an axis's title text.
 -}
 axTitleAngle : Num -> AxisProperty
 axTitleAngle =
     AxTitleAngle
 
 
-{-| Specify the vertical alignment of an axis's title.
+{-| Vertical alignment of an axis's title.
 -}
 axTitleBaseline : VAlign -> AxisProperty
 axTitleBaseline =
     AxTitleBaseline
 
 
-{-| Specify the color of an axis's title.
+{-| Color of an axis's title.
 -}
 axTitleColor : Str -> AxisProperty
 axTitleColor =
     AxTitleColor
 
 
-{-| Specify the font to be used for an axis's title.
+{-| Font to be used for an axis's title.
 -}
 axTitleFont : Str -> AxisProperty
 axTitleFont =
     AxTitleFont
 
 
-{-| Specify the size of font in pixels for an axis's title.
+{-| Size of font in pixels for an axis's title.
 -}
 axTitleFontSize : Num -> AxisProperty
 axTitleFontSize =
     AxTitleFontSize
 
 
-{-| Specify the font weight of an axis's title. This can be a number (e.g. `vNum 300`)
+{-| Font weight of an axis's title. This can be a number (e.g. `vNum 300`)
 or text (e.g. `vStr "bold"`).
 -}
 axTitleFontWeight : Value -> AxisProperty
@@ -3955,28 +3945,28 @@ axTitleFontWeight =
     AxTitleFontWeight
 
 
-{-| Specify the maximum allowed length of an axis's title.
+{-| Maximum allowed length of an axis's title.
 -}
 axTitleLimit : Num -> AxisProperty
 axTitleLimit =
     AxTitleLimit
 
 
-{-| Specify the opacity of an axis's title.
+{-| Opacity of an axis's title.
 -}
 axTitleOpacity : Num -> AxisProperty
 axTitleOpacity =
     AxTitleOpacity
 
 
-{-| Specify an offset in pixels between an axis's labels and title.
+{-| Offset in pixels between an axis's labels and title.
 -}
 axTitlePadding : Value -> AxisProperty
 axTitlePadding =
     AxTitlePadding
 
 
-{-| Specify the X position of an axis title relative to the axis group, overriding
+{-| X position of an axis title relative to the axis group, overriding
 the standard layout.
 -}
 axTitleX : Num -> AxisProperty
@@ -3984,7 +3974,7 @@ axTitleX =
     AxTitleX
 
 
-{-| Specify the Y position of an axis title relative to the axis group, overriding
+{-| Y position of an axis title relative to the axis group, overriding
 the standard layout.
 -}
 axTitleY : Num -> AxisProperty
@@ -4017,7 +4007,7 @@ background s =
     ( VBackground, strSpec s )
 
 
-{-| Specify that the bounds calculation type is to be determined by a named signal.
+{-| Indicate that the bounds calculation type is to be determined by a named signal.
 -}
 bcSignal : String -> BoundsCalculation
 bcSignal =
@@ -4032,7 +4022,7 @@ black =
     vStr "black"
 
 
-{-| Specify the value in the binned domain at which to anchor the bins of a bin
+{-| Value in the binned domain at which to anchor the bins of a bin
 transform, shifting the bin boundaries if necessary to ensure that a boundary aligns
 with the anchor value. If not specified, the minimum bin extent value serves as
 the anchor.
@@ -4042,24 +4032,23 @@ bnAnchor =
     BnAnchor
 
 
-{-| Specify the output fields to contain the extent of a binning transform
-(its start and end bin values). If not specified these can be retrieved as the `bin0`
-and `bin1` fields.
+{-| Output field names to contain the extent of a binning transform (start and end
+bin values). If not specified these can be retrieved as `bin0` and `bin1`.
 -}
 bnAs : String -> String -> BinProperty
 bnAs =
     BnAs
 
 
-{-| Specify the number base to use for automatic bin determination in a bin transform.
-If not specified, base 10 is assumed.
+{-| Number base to use for automatic bin determination in a bin transform (default
+is base 100).
 -}
 bnBase : Num -> BinProperty
 bnBase =
     BnBase
 
 
-{-| Specify the allowable bin step sub-divisions when performing a binning transformation.
+{-| Allowable bin step sub-divisions when performing a binning transformation.
 The parameter should evaluate to a list of numeric values. If not specified, the
 default of [5, 2] is used, which indicates that for base 10 numbers automatic bin
 determination can consider dividing bin step sizes by 5 and/or 2.
@@ -4069,22 +4058,21 @@ bnDivide =
     BnDivide
 
 
-{-| Specify the maximum number of bins to create with a bin transform.
+{-| Maximum number of bins to create with a bin transform.
 -}
 bnMaxBins : Num -> BinProperty
 bnMaxBins =
     BnMaxBins
 
 
-{-| Specify the minimum allowable bin step size between bins when performing a bin
-transform.
+{-| Minimum allowable bin step size between bins when performing a bin transform.
 -}
 bnMinStep : Num -> BinProperty
 bnMinStep =
     BnMinStep
 
 
-{-| Specify whether or not the bin boundaries in a binning transform will use human-friendly
+{-| Whether or not the bin boundaries in a binning transform will use human-friendly
 values such as multiples of ten.
 -}
 bnNice : Boo -> BinProperty
@@ -4100,44 +4088,42 @@ bnSignal =
     BnSignal
 
 
-{-| Specify the exact step size to use between bins in a bin transform. This overrides
-some other options such as `bnMaxBins`.
+{-| Step size to use between bins in a bin transform.
 -}
 bnStep : Num -> BinProperty
 bnStep =
     BnStep
 
 
-{-| Specify a list of allowable step sizes between bins to choose from when performing
-a bin transform.
+{-| Allowable step sizes between bins to choose from when performing a bin transform.
 -}
 bnSteps : Num -> BinProperty
 bnSteps =
     BnSteps
 
 
-{-| Specify an expression that when evaluated, will be a Boolean value.
+{-| Eexpression that when evaluated, will be a Boolean value.
 -}
 booExpr : Expr -> Boo
 booExpr =
     BooExpr
 
 
-{-| Specify a list of Boolean literals.
+{-| List of Boolean literals.
 -}
 boos : List Bool -> Boo
 boos =
     Boos
 
 
-{-| Specify the name of a signal that will generate a Boolean value.
+{-| Name of a signal that will generate a Boolean value.
 -}
 booSignal : String -> Boo
 booSignal =
     BooSignal
 
 
-{-| Specify a list of signals that will generate Boolean values.
+{-| List of signals that will generate Boolean values.
 -}
 booSignals : List String -> Boo
 booSignals =
@@ -4165,28 +4151,28 @@ type Case
     | Mixedcase
 
 
-{-| Specify the default autosizing properties of view.
+{-| Default autosizing properties of view.
 -}
 cfAutosize : List Autosize -> ConfigProperty
 cfAutosize =
     CfAutosize
 
 
-{-| Specify the default properties of axes.
+{-| Default properties of axes.
 -}
 cfAxis : AxisType -> List AxisProperty -> ConfigProperty
 cfAxis =
     CfAxis
 
 
-{-| Specify the default background of the view.
+{-| Default background of the view.
 -}
 cfBackground : Str -> ConfigProperty
 cfBackground =
     CfBackground
 
 
-{-| Specify the default properties of the top-level group mark representing the
+{-| Default properties of the top-level group mark representing the
 data rectangle of a chart.
 -}
 cfGroup : List MarkProperty -> ConfigProperty
@@ -4194,7 +4180,7 @@ cfGroup =
     CfGroup
 
 
-{-| Specify the default filtering of events. This can specified in the first parameter
+{-| Default filtering of events. This can specified in the first parameter
 as either a 'whitelist' (`Allow`) or 'blacklist' (`Prevent`) comprised the event types
 to be considered in the second parameter. If that list is empty, all event types
 will be placed in the black/white list.
@@ -4204,38 +4190,38 @@ cfEvents =
     CfEvents
 
 
-{-| Specify the default properties of legends.
+{-| Default properties of legends.
 -}
 cfLegend : List LegendProperty -> ConfigProperty
 cfLegend =
     CfLegend
 
 
-{-| Specify the default properties of a given mark type.
+{-| Default properties of a given mark type.
 -}
 cfMark : Mark -> List MarkProperty -> ConfigProperty
 cfMark =
     CfMark
 
 
-{-| Specify the default properties of all marks.
+{-| Default properties of all marks.
 -}
 cfMarks : List MarkProperty -> ConfigProperty
 cfMarks =
     CfMarks
 
 
-{-| Specify the properties of a named style. The first property is the name to
-give the style, the second its mark properties.
+{-| Create a named style. The first parameter is the name to give the style, the
+second its mark properties.
 -}
 cfStyle : String -> List MarkProperty -> ConfigProperty
 cfStyle =
     CfStyle
 
 
-{-| Specify the properties defining named range lists used as part of scale specification.
-The first parameter is the named range label (e.g. `RaOrdinal`, `RaCategory`, `RaHeamap`
-etc.). The second is the new range of values to be associated with the named range.
+{-| Create a named range to be used as part of a scale specification.
+The first parameter is the named range label (e.g. `RaOrdinal`, `RaCategory`, etc.).
+The second is the new range of values to be associated with this range.
 
     cf =
         config [ cfScaleRange RaHeatmap (raScheme (str "greenblue") []) ]
@@ -4246,7 +4232,7 @@ cfScaleRange =
     CfScaleRange
 
 
-{-| Specify the default properties of a title.
+{-| Default properties of a title.
 -}
 cfTitle : List TitleProperty -> ConfigProperty
 cfTitle =
@@ -4290,16 +4276,14 @@ cLAB =
     LAB
 
 
-{-| Specify whether or not clipping should be applied to a set of marks within a
-group mark.
+{-| Whether or not clipping should be applied to a set of marks within a group mark.
 -}
 clEnabled : Boo -> Clip
 clEnabled =
     ClEnabled
 
 
-{-| Specify an arbitrary clipping path to be applied to a set of marks within a
-region. The path should be a valid
+{-| Clipping path to be applied to a set of marks within a region. Should be a valid
 [SVG path string](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
 -}
 clPath : Str -> Clip
@@ -4307,81 +4291,76 @@ clPath =
     ClPath
 
 
-{-| Specify a cartographic projection with which to clip all marks to a projected
-sphere of the globe. This is useful in conjunction with map projections that
-otherwise include projected content (such as graticule lines) outside the bounds
-of the globe.
+{-| Clip a spherical outline subject to a given map projection name. This is useful
+in conjunction with map projections that include content such as graticule lines
+outside the bounds of the globe.
 -}
 clSphere : Str -> Clip
 clSphere =
     ClSphere
 
 
-{-| Specify the kernel density estimation bandwidth used in a contour transformation.
+{-| Kernel density estimation bandwidth used in a contour transformation.
 -}
 cnBandwidth : Num -> ContourProperty
 cnBandwidth =
     CnBandwidth
 
 
-{-| Specify the size of cells used for density estimation in a contour transformation.
+{-| Size of cells used for density estimation in a contour transformation.
 -}
 cnCellSize : Num -> ContourProperty
 cnCellSize =
     CnCellSize
 
 
-{-| Specify the desired number of contours used in a contour transformation. This
-will be ignored if `cnThresholds` setting explicit contour values are provided.
+{-| Desired number of contours used in a contour transformation. Ignored if `cnThresholds`
+setting explicit contour values are provided.
 -}
 cnCount : Num -> ContourProperty
 cnCount =
     CnCount
 
 
-{-| Specify whether or not contour threshold values should be automatically aligned
-to “nice”, human-friendly values when performing a contour transformation. If true,
-the number of thresholds may deviate from that provided by `cnCount`.
+{-| Whether or not contour threshold values should be automatically aligned to
+'nice', human-friendly values when performing a contour transformation.
 -}
 cnNice : Boo -> ContourProperty
 cnNice =
     CnNice
 
 
-{-| Specify whether or not contour polygons should be smoothed in a contour transformation.
-This will be ignored if kernel density estimation is used.
+{-| Whether or not contour polygons should be smoothed in a contour transformation.
+Ignored if kernel density estimation is used.
 -}
 cnSmooth : Boo -> ContourProperty
 cnSmooth =
     CnSmooth
 
 
-{-| Specify the explicit contour values to be generated by a contour transformation.
+{-| Explicit contour values to be generated by a contour transformation.
 -}
 cnThresholds : Num -> ContourProperty
 cnThresholds =
     CnThresholds
 
 
-{-| Specify a grid of values over which to compute contours. If not provided,
-[trContour](#trContour) will instead compute contours of the kernel density
-estimate of input data.
+{-| Grid of values over which to compute contours. If not provided, [trContour](#trContour)
+will compute contours of the kernel density estimate of input data instead.
 -}
 cnValues : Num -> ContourProperty
 cnValues =
     CnValues
 
 
-{-| Specify the x-coordinate field used for density estimation in a contour
-transformation.
+{-| X-coordinate field used for density estimation in a contour transformation.
 -}
 cnX : Field -> ContourProperty
 cnX =
     CnX
 
 
-{-| Specify the y-coordinate field used for density estimation in a contour
-transformation.
+{-| Y-coordinate field used for density estimation in a contour transformation.
 -}
 cnY : Field -> ContourProperty
 cnY =
@@ -4427,7 +4406,7 @@ config cps =
     ( VConfig, JE.object (List.map configProperty cps) )
 
 
-{-| Specify the names of the two output fields generated by a count pattern transformation.
+{-| Names the two output fields generated by a count pattern transformation.
 By default they are named `text` and `count`.
 -}
 cpAs : String -> String -> CountPatternProperty
@@ -4435,16 +4414,16 @@ cpAs =
     CPAs
 
 
-{-| Specify how text case transformation to apply before performing a count pattern
-transformation. The default of `Mixedcase` will leave text untransformed.
+{-| Text case transformation to apply before performing a count pattern transformation.
+The default of `Mixedcase` will leave text untransformed.
 -}
 cpCase : Case -> CountPatternProperty
 cpCase =
     CPCase
 
 
-{-| Specify a regular expression to define a match in a count pattern transformation.
-The parameter should be a regular expression where any backslash symbols are escaped.
+{-| Define a match in a count pattern transformation with a regular expression
+(escaping backslashes):
 
     transform [ trCountPattern (field "data") [ cpPattern (str "[\\w']{3,}") ] ]
 
@@ -4454,47 +4433,43 @@ cpPattern =
     CPPattern
 
 
-{-| Specify a regular expression to define the text to ignore when performing a
-count pattern transformation. The parameter should be a regular expression where
-any backslash symbols are escaped.
+{-| Define text to ignore in a count pattern transformation with a regular
+expression (escaping backslashes).
 -}
 cpStopwords : Str -> CountPatternProperty
 cpStopwords =
     CPStopwords
 
 
-{-| Specify the names of the two output fields of a cross-product transform.
+{-| Name the two output fields of a cross-product transform.
 -}
 crAs : String -> String -> CrossProperty
 crAs =
     CrAs
 
 
-{-| Specify an optional filter for limiting the results of a cross-product transform.
+{-| Filter for limiting the results of a cross-product transform.
 -}
 crFilter : Expr -> CrossProperty
 crFilter =
     CrFilter
 
 
-{-| Define a color in RGB space. Each of the three triplet values can be a numeric
-literal, a signal, or subject to some scale.
+{-| Color in RGB space.
 -}
 cRGB : List Value -> List Value -> List Value -> ColorValue
 cRGB =
     RGB
 
 
-{-| Specify the number of colors to use in a color scheme. This can be useful
-for scale types such as quantize, which use the length of the scale range to
-determine the number of discrete bins for the scale domain.
+{-| Number of colors to use in a color scheme.
 -}
 csCount : Num -> ColorSchemeProperty
 csCount =
     SCount
 
 
-{-| Specify the extent of the color range to use in sequential and diverging color
+{-| Extent of the color range to use in sequential and diverging color
 schemes. The parameter should evaluate to a two-element list representing the min
 and max values of the extent. For example [0.2, 1] will rescale the color scheme
 such that color values in the range [0, 0.2] are excluded from the scheme.
@@ -4504,23 +4479,21 @@ csExtent =
     SExtent
 
 
-{-| Specify the name of a color scheme to use.
+{-| Name a color scheme to use.
 -}
 csScheme : Str -> ColorSchemeProperty
 csScheme =
     SScheme
 
 
-{-| Cube-helix color interpolation. The parameter is a gamma value to control the
-brightness of the color trajectory.
+{-| Cube helix color interpolation using the given gamma value (anchored at 1).
 -}
 cubeHelix : Float -> CInterpolate
 cubeHelix =
     CubeHelix
 
 
-{-| A long path cube-helix color interpolation. The parameter is a gamma value to control the
-brightness of the color trajectory.
+{-| A long path cube-helix color interpolation using the given gamma value (anchored at 1).
 -}
 cubeHelixLong : Float -> CInterpolate
 cubeHelixLong =
@@ -4569,24 +4542,8 @@ type Cursor
     | CGrabbing
 
 
-{-| A convenience function for generating a text string representing a given cursor
-type. This can be used instead of specifying a cursor type as a literal string
-to avoid problems of mistyping its name.
-
-    mark Symbol
-        [ mEncode
-            [ enEnter
-                [ maY [ vScale "yScale", vNum 0, vOffset (vNum 1) ]
-                , maShape [ symbolValue SymTriangleDown ]
-                , maSize [ vNum 400 ]
-                ]
-            , enUpdate
-                [ maX [ vScale "xScale", vSignal "currentYear" ] ]
-            , enHover
-                [ maCursor [ cursorValue CPointer ] ]
-            ]
-        ]
-
+{-| A convenience function for generating a text value representing a given cursor
+type.
 -}
 cursorValue : Cursor -> Value
 cursorValue cur =
@@ -4721,15 +4678,15 @@ daFields =
     DFields
 
 
-{-| Specify the data format when loading or generating a data set.
+{-| Data format to use when loading or generating a dataset.
 -}
 daFormat : List FormatProperty -> DataProperty
 daFormat =
     DaFormat
 
 
-{-| Specify updates to insert, remove, and toggle data values, or clear the data
-in a data set when trigger conditions are met.
+{-| Updates to insert, remove, and toggle data values, or clear the data in a
+dataset when trigger conditions are met.
 -}
 daOn : List Trigger -> DataProperty
 daOn =
@@ -4757,21 +4714,21 @@ daSort =
     DSort
 
 
-{-| Specify a named data source when generating a data set.
+{-| Name a data source when generating a dataset.
 -}
 daSource : String -> DataProperty
 daSource =
     DaSource
 
 
-{-| Specify a collection of named data sources when generating a data set.
+{-| Name a collection of data sources when generating a dataset.
 -}
 daSources : List String -> DataProperty
 daSources =
     DaSources
 
 
-{-| Declare a named data set. Depending on the properties provided this may be
+{-| Declare a named dataset. Depending on the properties provided this may be
 from an external file, from a named data source or inline literal values.
 -}
 data : String -> List DataProperty -> DataTable
@@ -4821,13 +4778,7 @@ the shortest.
 The first parameter should be the name given to the data table for later reference.
 Field formatting specifications can be provided in the second parameter or as an
 empty list to use the default formatting. The columns are most easily generated
-with `dataColumn`:
-
-    myData =
-        dataFromColumns "animals" [ parse [ ( "Year", foDate "%Y" ) ] ]
-            << dataColumn "Animal" (vStrs [ "Fish", "Dog", "Cat" ])
-            << dataColumn "Age" (vNums [ 28, 12, 6 ])
-            << dataColumn "Year" (vStrs [ "2010", "2014", "2015" ])
+with `dataColumn`.
 
 -}
 dataFromColumns : String -> List FormatProperty -> List DataColumn -> DataTable
@@ -4859,11 +4810,6 @@ Rows are most easily generated with `dataRow`. If you are creating data inline
 (as opposed to reading from a file), generally, adding data by column is more
 efficient and less error-prone.
 
-    myData =
-        dataFromRows "animals" [ parse [ ( "Year", foDate "%Y" ) ] ]
-            << dataRow [ ( "Animal", vStr "Fish" ), ( "Age", vNum 28 ), ( "Year", vStr "2010" ) ]
-            << dataRow [ ( "Animal", vStr "Dog" ), ( "Age", vNum 12 ), ( "Year", vStr "2014" ) ]
-
 -}
 dataFromRows : String -> List FormatProperty -> List DataRow -> DataTable
 dataFromRows name fmts rows =
@@ -4877,10 +4823,10 @@ dataFromRows name fmts rows =
     [ ( "name", JE.string name ), ( "values", JE.list rows ) ] ++ fmt
 
 
-{-| Specify a property to customise data loading. In addition to declaring `DaSphere`
-for a global sphere, they are more usually generated by the functions
-[daFormat](#daFormat), [daSource](#daSource), [daSources](#daSources),
-[daValue](#daValue),[daOn](#daOn) and [daUrl](#daUrl).
+{-| Data property for data loading. In addition to declaring `DaSphere` for a global
+sphere, they are more usually generated by the functions [daFormat](#daFormat),
+[daSource](#daSource), [daSources](#daSources), [daValue](#daValue),[daOn](#daOn)
+and [daUrl](#daUrl).
 -}
 type DataProperty
     = DaFormat (List FormatProperty)
@@ -4900,16 +4846,9 @@ dataRow row =
     (::) (JE.object (List.map (\( colName, val ) -> ( colName, valueSpec val )) row))
 
 
-{-| Specify a data source to be used by a visualization. A data source is a collection
-of data tables which themselves may be generated inline, loaded from a URL or the
+{-| Data source to be used by a visualization. A data source is a collection of
+data tables which themselves may be generated inline, loaded from a URL or the
 result of a transformation.
-
-      dataSource
-          [ data "pop" [ daUrl (str "data/population.json") ]
-          , data "popYear" [ daSource "pop" ] |> transform [ trFilter (expr "datum.year == year") ]
-          , data "ageGroups" [ daSource "pop" ] |> transform [ trAggregate [ agGroupBy [ field "age" ] ] ]
-          ]
-
 -}
 dataSource : List DataTable -> Data
 dataSource dataTables =
@@ -4926,14 +4865,14 @@ type DataType
     | FoUtc String
 
 
-{-| Specify the name of a data file to be loaded when generating a data set.
+{-| Data file to be loaded when generating a dataset.
 -}
 daUrl : Str -> DataProperty
 daUrl =
     DaUrl
 
 
-{-| Specify some inline data value(s) when generating a data set.
+{-| Data value(s) for generating a dataset inline.
 -}
 daValue : Value -> DataProperty
 daValue =
@@ -4960,8 +4899,7 @@ daValues =
     DValues
 
 
-{-| Specify a density function as either a Probability Density Function (PDF)
-or a Cumulative Density Function (CDF).
+{-| Probability (PDF) or cumulative (CDF) density function.
 -}
 type DensityFunction
     = PDF
@@ -4969,7 +4907,7 @@ type DensityFunction
     | DensityFunctionSignal String
 
 
-{-| Specify a density function based on the value in the named signal.
+{-| Density function referenced by the value in the named signal.
 -}
 densityFunctionSignal : String -> DensityFunction
 densityFunctionSignal =
@@ -4983,145 +4921,139 @@ description s =
     ( VDescription, JE.string s )
 
 
-{-| Specify a kernel density estimate (smoothed probability distribution)
-for a set of numerical values. The first parameter is the data set containing
-the source data (or empty string if not to be specified explicitly), the second
-the name of the field containing the numerical values and the third the bandwidth
-of the kernel. If the bandwidth is 0, it will be estimated from the input data.
+{-| Kernel density estimate (smoothed probability distribution) for a set of
+numerical values. The first parameter is the dataset containing
+the source data, the second the name of the field containing the numerical values
+and the third the kernel bandwidth. If the bandwidth is 0, it will be estimated
+from the input data.
 -}
 diKde : String -> Field -> Num -> Distribution
 diKde =
     DiKde
 
 
-{-| Specify a weighted mixture of probability distributions. The parameter should
-be a list of tuples representing the component distributions and their corresponding
-weights.
+{-| Weighted mixture of probability distributions. The parameter should be a list
+of tuples representing the component distributions and their corresponding weights.
 -}
 diMixture : List ( Distribution, Num ) -> Distribution
 diMixture =
     DiMixture
 
 
-{-| Specify a normal (Gaussian) probability distribution with a given mean (first
-parameter) and standard deviation (second parameter).
+{-| Normal (Gaussian) probability distribution with a given mean (first parameter)
+and standard deviation (second parameter).
 -}
 diNormal : Num -> Num -> Distribution
 diNormal =
     DiNormal
 
 
-{-| Specify a uniform probability distribution with given minimum (first
-parameter) and maximum (second parameter) bounds.
+{-| Uniform probability distribution with given minimum (first parameter) and
+maximum (second parameter) bounds.
 -}
 diUniform : Num -> Num -> Distribution
 diUniform =
     DiUniform
 
 
-{-| Specify the output fields to contain a density transform's values (assigned
-to a field named in the first parameter) and probabilities (field named in the
-second parameter). If not specified, the output will allocated to fields named
-`value` and `probability`.
+{-| Fields to contain a density transform's values (assigned to a new field named
+in the first parameter) and probabilities (field named in the second parameter).
+If not specified, the output will allocated to fields named `value` and `probability`.
 -}
 dnAs : String -> String -> DensityProperty
 dnAs =
     DnAs
 
 
-{-| Specify a [min, max] domain from which to sample a distribution as part of a
-density transform.
+{-| A [min, max] domain from which to sample a distribution in a density transform.
 -}
 dnExtent : Num -> DensityProperty
 dnExtent =
     DnExtent
 
 
-{-| Specify the type of distribution to generate for a density transform.
+{-| Type of distribution to generate in a density transform.
 -}
 dnMethod : DensityFunction -> DensityProperty
 dnMethod =
     DnMethod
 
 
-{-| Specify the number of uniformly spaced steps to take along an extent domain
-during a density transform.
+{-| Number of uniformly spaced steps to take along an extent domain in a density transform.
 -}
 dnSteps : Num -> DensityProperty
 dnSteps =
     DnSteps
 
 
-{-| Specify a data reference object that specifies field values in one or more
-data sets to define a scale domain.
+{-| Data reference object specifying field values in one or more datasets to
+define a scale domain.
 -}
 doData : List DataReference -> ScaleDomain
 doData =
     DoData
 
 
-{-| Specify a numeric list literal (`Nums`) representing a scale domain.
+{-| List of numeric values (`Nums`) representing a scale domain.
 -}
 doNums : Num -> ScaleDomain
 doNums =
     DoNums
 
 
-{-| Specify a signal representing a scale domain.
+{-| Scale domain referenced by the value in the named signal.
 -}
 doSignal : String -> ScaleDomain
 doSignal s =
     DoStrs (StrSignal s)
 
 
-{-| Specify a list of signals representing a scale domain.
+{-| Scale domains referenced by the values in the named signals.
 -}
 doSignals : List String -> ScaleDomain
 doSignals ss =
     DoStrs (StrSignals ss)
 
 
-{-| Specify a string list literal (`Strs`) representing a scale domain.
+{-| List of strings (`Strs`) representing a scale domain.
 -}
 doStrs : Str -> ScaleDomain
 doStrs =
     DoStrs
 
 
-{-| Specify a DSV (delimited separated value) format with a custom delimiter.
-Typically used when specifying a data URL.
+{-| DSV (delimited separated value) format with a custom delimiter.
 -}
 dsv : Str -> FormatProperty
 dsv =
     DSV
 
 
-{-| Specify the properties of a named custom encoding set. To invoke the custom set a
-signal event handler with an `encode` directive should be defined.
+{-| Named custom encoding set. Also requires a signal event handler with an
+`encode` directive.
 -}
 enCustom : String -> List MarkProperty -> EncodingProperty
 enCustom name =
     Custom name
 
 
-{-| Specify the properties to be encoded when a mark item is first instantiated
-or a visualization is resized.
+{-| Properties to be encoded when a mark item is first instantiated or resized.
 -}
 enEnter : List MarkProperty -> EncodingProperty
 enEnter =
     Enter
 
 
-{-| Specify the encoding directives for the visual properties of the top-level
-group mark representing a chart’s data rectangle. For example, this can be used
-to set a background fill color for the plotting area, rather than the entire view.
+{-| Encoding directives for the visual properties of the top-level group mark
+representing a chart’s data rectangle. For example, this can be used to set a
+background fill color for the plotting area, rather than the entire view.
 -}
 encode : List EncodingProperty -> ( VProperty, Spec )
 encode eps =
     ( VEncode, JE.object (List.map encodingProperty eps) )
 
 
-{-| Specify the properties to be encoded when the data backing a mark item is removed.
+{-| Properties to be encoded when the data backing a mark item is removed.
 -}
 enExit : List MarkProperty -> EncodingProperty
 enExit =
@@ -5135,35 +5067,35 @@ enGradient =
     EnGradient
 
 
-{-| Specify whether or not a custom legend encoding set is to be interactive.
+{-| Whether or not a custom legend encoding set is to be interactive.
 -}
 enInteractive : Boo -> EncodingProperty
 enInteractive =
     EnInteractive
 
 
-{-| Specify the properties to be encoded when a pointer hovers over a mark item.
+{-| Properties to be encoded when a pointer hovers over a mark item.
 -}
 enHover : List MarkProperty -> EncodingProperty
 enHover =
     Hover
 
 
-{-| Specify a custom encoding for legend labels.
+{-| Custom encoding for legend labels.
 -}
 enLabels : List EncodingProperty -> LegendEncoding
 enLabels =
     EnLabels
 
 
-{-| Specify a custom encoding for a legend group mark.
+{-| Custom encoding for a legend group mark.
 -}
 enLegend : List EncodingProperty -> LegendEncoding
 enLegend =
     EnLegend
 
 
-{-| Specify a name for a custom legend encoding set.
+{-| Name for a custom legend encoding set.
 -}
 enName : String -> EncodingProperty
 enName =
@@ -5184,18 +5116,17 @@ enTitle =
     EnTitle
 
 
-{-| Specify the properties to be encoded when a mark item is updated such as in
-response to a signal change.
+{-| Properties to be encoded when a mark item is updated such as in response to
+a signal change.
 -}
 enUpdate : List MarkProperty -> EncodingProperty
 enUpdate =
     Update
 
 
-{-| Specify an event stream filter that lets only events that occur between the
-two given event streams from being handled. This is useful, for example, for
-capturing pointer dragging as it is a pointer movement event stream that occurs
-between `MouseDown` and `MouseUp` events.
+{-| Event stream filter that lets only events that occur between the two given event
+streams from being handled. Useful for capturing pointer dragging as it is a pointer
+movement event stream that occurs between `MouseDown` and `MouseUp` events.
 
     << signal "myDrag"
         [ siValue (vNums [ 200, 200 ])
@@ -5221,98 +5152,94 @@ esBetween =
     ESBetween
 
 
-{-| Specify whether or not an event stream is consumed once it has been captured.
-If false, the event is made available for subsequent event handling.
+{-| Whether or not an event stream is consumed once it has been captured. If false,
+the event is made available for subsequent event handling.
 -}
 esConsume : Boo -> EventStreamProperty
 esConsume =
     ESConsume
 
 
-{-| Specify the minimum time to wait between event occurrence and processing. If
-a new event arrives during a debouncing window, the debounce timer will restart
-and only the new event will be captured.
+{-| Minimum time to wait between event occurrence and processing. If a new event
+arrives during a debouncing window, the timer will restart and only the new event
+will be captured.
 -}
 esDebounce : Num -> EventStreamProperty
 esDebounce =
     ESDebounce
 
 
-{-| Specify a DOM node as the source for an event selector. This should be referenced
-with a standard [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
+{-| DOM node to be the source for an event selector. Referenced with a standard
+[CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 -}
 esDom : String -> EventSource
 esDom =
     ESDom
 
 
-{-| Specify the filter expressions that must evaluate to `True` in order for an
-event to be captured. If multiple filters are provided they must all be satisfied
-(`and` operator) for the event to be captured.
+{-| Predicate expressions that must all evaluate to `True` for an event to be captured.
 -}
 esFilter : List String -> EventStreamProperty
 esFilter =
     ESFilter
 
 
-{-| Specify a mark type as the source for an event stream.
+{-| Mark type to be the source for an event stream.
 -}
 esMark : Mark -> EventStreamProperty
 esMark =
     ESMark
 
 
-{-| Specify a named mark as the source for an event stream. The name given here
-must correspond to the name provided to a mark via `mName`.
+{-| Named mark to be the source for an event stream. The name given here
+must correspond to that provided via `mName`.
 -}
 esMarkName : String -> EventStreamProperty
 esMarkName =
     ESMarkName
 
 
-{-| Specify a single event stream merging the given list of event streams.
+{-| Merge a list of event streams into a single stream.
 -}
 esMerge : List EventStream -> EventStream
 esMerge =
     ESMerge
 
 
-{-| Specify an event stream for modelling user input. This function expects a stream
-object definition which provides a more self-explanatory and robust form of
-specification than using a selector string.
+{-| Event stream for modelling user input. The parameter represents a stream object
+which provides a more self-explanatory and robust form of specification than using
+a selector string.
 -}
 esObject : List EventStreamProperty -> EventStream
 esObject =
     ESObject
 
 
-{-| Specify an event stream for modelling user input. This function expects a
-shorthand event stream selector string, which is a more compact way of specifying
-a stream than with `eventStream` but is more vulnerable to mistakes (as
-it is simply a string).
+{-| Compact representation of an event stream for modelling user input (alternative
+to [esObject](#esObject)).
 -}
 esSelector : Str -> EventStream
 esSelector =
     ESSelector
 
 
-{-| Specify the name of a signal that triggers an event stream. This will allow
-an update to be triggered whenever the given signal changes.
+{-| Signal that triggers an event stream. Allows an update to be triggered whenever
+the given signal changes.
 -}
 esSignal : String -> EventStream
 esSignal =
     ESSignal
 
 
-{-| Specify a source for an event selector.
+{-| Source for an event selector.
 -}
 esSource : EventSource -> EventStreamProperty
 esSource =
     ESSource
 
 
-{-| Specify an event stream that is to be used as input into a derived event stream.
-This can be useful if several event streams have a common element, for example:
+{-| Event stream to be used as input into a derived event stream. Useful if several
+event streams have a common element:
 
     si =
         let
@@ -5347,39 +5274,38 @@ esStream =
     ESDerived
 
 
-{-| Specify the minimum time in milliseconds between captured events (default 0).
-New events that arrive within the throttling window will be ignored. For timer events,
-this property determines the interval between timer ticks.
+{-| Minimum time in milliseconds between captured events. New events that arrive
+within the throttling window will be ignored. For timer events, this determines
+the interval between timer ticks.
 -}
 esThrottle : Num -> EventStreamProperty
 esThrottle =
     ESThrottle
 
 
-{-| Specify an event stream type used when handling user interaction events.
+{-| Type of event stream for handling user interaction events.
 -}
 esType : EventType -> EventStreamProperty
 esType =
     ESType
 
 
-{-| Specify the name of a mark property encoding set to re-evaluate for the mark
-that is the source of an input event. This is required if `evUpdate` is not specified.
+{-| Name of a mark property encoding set to re-evaluate for the mark that is the
+source of an input event. This is required if `evUpdate` is not specified.
 -}
 evEncode : String -> EventHandler
 evEncode =
     EEncode
 
 
-{-| Used to configure default event handling. Can be used to prevent or allow a
-set of event types from being handled.
+{-| Filter for preventing or allowing event types being handled.
 -}
 type EventFilter
     = Prevent
     | Allow
 
 
-{-| A source for an event selector. To specify a DOM node as a source (using a
+{-| Source for an event selector. To specify a DOM node as a source (using a
 CSS selector string), use [esDom](#esDom).
 -}
 type EventSource
@@ -5416,8 +5342,8 @@ type EventType
     | Timer
 
 
-{-| Specify whether or not updates that do not change a signal value should propagate.
-For example, if true and an input stream update sets the signal to its current value,
+{-| Whether or not updates that do not change a signal value should propagate.
+e.g., if true and an input stream update sets the signal to its current value,
 downstream signals will be notified of an update.
 -}
 evForce : Boo -> EventHandler
@@ -5425,7 +5351,7 @@ evForce =
     EForce
 
 
-{-| Specify an event handler. The first parameter is the stream(s) of events to
+{-| Event handler. The first parameter is the stream(s) of events to
 respond to. The second, a list of handlers that respond to the event stream.
 
     signal "tooltip"
@@ -5442,7 +5368,7 @@ evHandler ess eHandlers =
     EEvents ess :: eHandlers
 
 
-{-| Specify an event selector used to generate an event stream.
+{-| Event selector used to generate an event stream.
 -}
 evStreamSelector : Str -> EventStream
 evStreamSelector =
@@ -5457,7 +5383,7 @@ evUpdate =
     EUpdate
 
 
-{-| Specify a field lookup that forms a Vega [Expr](https://vega.github.io/vega/docs/types/#Expr).
+{-| Field lookup that forms a Vega [Expr](https://vega.github.io/vega/docs/types/#Expr).
 In contrast to an expression generated by `expr`, a field lookup is applied once
 to an entire field rather than evaluated once per datum.
 -}
@@ -5466,7 +5392,7 @@ exField =
     ExField
 
 
-{-| An expression to enable custom calculations specified in the [Vega expression
+{-| Expression to enable custom calculations specified in the [Vega expression
 language](https://vega.github.io/vega/docs/expressions). In contrast to a field
 reference or signal, the expression is evaluated once per datum behaving like an
 anonymous (lambda) function.
@@ -5500,7 +5426,7 @@ faGroupBy =
     FaGroupBy
 
 
-{-| Specify a Boolean false value.
+{-| A Boolean false value.
 -}
 false : Boo
 false =
@@ -5515,9 +5441,8 @@ fDatum =
     FDatum
 
 
-{-| Specify the name of a geoJSON feature. Can be used with [prFit](#prFit) to
-fit a map projection scaling and centre to a given geoJSON feature or feature
-collection.
+{-| Name of a geoJSON feature. Can be used with [prFit](#prFit) to fit a map
+projection scaling and centre to a given geoJSON feature or feature collection.
 
     pr =
         projections
@@ -5533,7 +5458,7 @@ feName =
     FeName
 
 
-{-| Specify the signal that generates a geoJSON feature. Can be used with
+{-| geoJSON feature referenced by the value in the named signal. Can be used with
 [prFit](#prFit) to fit a map projection scaling and centre to a given geoJSON
 feature or feature collection.
 
@@ -5562,8 +5487,8 @@ featureSignal =
     FeatureSignal
 
 
-{-| Specify an expression that references a field but can perform calculations on
-each datum in the field. For example
+{-| Expression that references a field but can perform calculations on each datum
+in the field.
 
     fExpr "scale('xScale', datum.Horsepower)"
 
@@ -5573,21 +5498,21 @@ fExpr =
     FExpr
 
 
-{-| Specify a property of the enclosing group mark instance as a field value.
+{-| Property of the enclosing group mark instance as a field value.
 -}
 fGroup : Field -> Field
 fGroup =
     FGroup
 
 
-{-| Specify the name of a field to reference.
+{-| Name of a field to reference.
 -}
 field : String -> Field
 field =
     FName
 
 
-{-| Specify a force that pulls all nodes towards a shared centre point in a force
+{-| Force that pulls all nodes towards a shared centre point in a force
 simulation. The two parameters specify the x and y coordinates of the centre point.
 -}
 foCenter : Num -> Num -> Force
@@ -5595,31 +5520,28 @@ foCenter x y =
     FCenter [ FpCx x, FpCy y ]
 
 
-{-| Specify a collision detection force that pushes apart nodes whose circular
-radii overlap in a force simulation. The first parameter specifies the radius of
-the node to which it applies. The second parameter enables the strength and number
-of iterations to be specified.
+{-| Collision detection force that pushes apart nodes whose circular radii overlap
+in a force simulation. The first parameter specifies the radius of
+the node to which it applies. The second enables the strength and number of
+iterations to be specified.
 -}
 foCollide : Num -> List ForceProperty -> Force
 foCollide r fps =
     FCollide (FpRadius r :: fps)
 
 
-{-| Specify a date format for parsing data using
+{-| Date format for parsing data using
 [D3's formatting specifiers](https://github.com/d3/d3-time-format#locale_format).
-An empty string indicates default date formatting but care should be taken as
-different browsers may have different default date parsing. Being explicit about the
-date format is usually safer.
 -}
 foDate : String -> DataType
 foDate =
     FoDate
 
 
-{-| Specify the link constraints that cause nodes to be pushed apart towards a target
-separation distance. The first parameter is the name of the data set containing the
-link objects, each of which should contain `source` and `target` fields indicating
-node objects. The second parameter enables the id, distance, strength and number
+{-| Link constraints that cause nodes to be pushed apart towards a target separation
+distance in a force simulation. The first parameter is the name of the dataset
+containing the link objects, each of which should contain `source` and `target`
+fields. The second enables the id, distance, strength and number
 of iterations to be specified. If an id field parameter is provided, it is used
 to relate link objects and node objects. Otherwise, the source and target fields
 should provide indices into the array of node objects.
@@ -5629,7 +5551,7 @@ foLink links fps =
     FLink (FpLinks links :: fps)
 
 
-{-| Specify an n-body force that causes nodes to either attract or repel each other
+{-| n-body force that causes nodes to either attract or repel each other
 in a force simulation. The parameter enables the strength, theta value, and min/max
 distances over which the force acts to be specified.
 -}
@@ -5638,9 +5560,9 @@ foNBody =
     FNBody
 
 
-{-| Specify the type of format a data source uses. `ParseAuto` can be used for
-performing automatic type inference on data types. If more explicit control is needed
-then `parse` can be used to specify the type for named fields.
+{-| Format used by a data source. `ParseAuto` can be used for performing automatic
+type inference on data types. If more explicit control is needed then `parse` can
+be used to specify the type for named fields.
 -}
 type FormatProperty
     = JSON
@@ -5655,16 +5577,15 @@ type FormatProperty
     | FormatPropertySignal String
 
 
-{-| Specify a format property via a named signal. The signal should generate a
-valid property (e.g. `csv`, `tsv`, `json`). Useful when dynamic loading of data
-with different formats is required.
+{-| Format referenced by the value in the named signal (e.g. `csv`, `tsv`, `json`).
+Useful when dynamic loading of data with different formats is required.
 -}
 formatPropertySignal : String -> FormatProperty
 formatPropertySignal =
     FormatPropertySignal
 
 
-{-| Specify a utc date format for parsing data using
+{-| UTC date format for parsing data using
 [D3's formatting specifiers](https://github.com/d3/d3-time-format#locale_format).
 -}
 foUtc : String -> DataType
@@ -5672,30 +5593,30 @@ foUtc =
     FoUtc
 
 
-{-| Specify a force attraction towards a particular x-coordinate (first parameter),
-with a given strength (second parameter) on a per-node basis.
+{-| Force attraction towards a particular x-coordinate (first parameter), with a
+given strength (second parameter) on a per-node basis.
 -}
 foX : Field -> List ForceProperty -> Force
 foX x fps =
     FX x fps
 
 
-{-| Specify a force attraction towards a particular y-coordinate (first parameter),
-with a given strength (second parameter) on a per-node basis.
+{-| Force attraction towards a particular y-coordinate (first parameter), with a
+given strength (second parameter) on a per-node basis.
 -}
 foY : Field -> List ForceProperty -> Force
 foY y fps =
     FY y fps
 
 
-{-| Specify a field of the enclosing group mark’s data object as a field.
+{-| Field of the enclosing group mark’s data object as a field.
 -}
 fParent : Field -> Field
 fParent =
     FParent
 
 
-{-| Specify the distance in pixels by which the link constraint should separate
+{-| Distance in pixels by which the link constraint should separate
 nodes (default 30).
 -}
 fpDistance : Num -> ForceProperty
@@ -5703,7 +5624,7 @@ fpDistance =
     FpDistance
 
 
-{-| Specify the maximum distance over which an n-body force acts. If two nodes
+{-| Maximum distance over which an n-body force acts. If two nodes
 exceed this value, they will not exert forces on each other.
 -}
 fpDistanceMax : Num -> ForceProperty
@@ -5711,7 +5632,7 @@ fpDistanceMax =
     FpDistanceMax
 
 
-{-| Specify the minimum distance over which an n-body force acts. If two nodes
+{-| Minimum distance over which an n-body force acts. If two nodes
 are closer than this value, the exerted forces will be as if they are distanceMin
 apart (default 1).
 -}
@@ -5720,187 +5641,180 @@ fpDistanceMin =
     FpDistanceMin
 
 
-{-| Specify an optional data field for a node’s unique identifier. If provided,
-the source and target fields of each link should use these values to indicate
-nodes.
+{-| Data field for a node’s unique identifier. If provided, the source and target
+fields of each link should use these values to indicate nodes.
 -}
 fpId : Field -> ForceProperty
 fpId =
     FpId
 
 
-{-| Specify the number of iterations to run collision detection or link constraints
-(default 1) in a force directed simulation.
+{-| Number of iterations to run collision detection or link constraints (default 1)
+in a force directed simulation.
 -}
 fpIterations : Num -> ForceProperty
 fpIterations =
     FpIterations
 
 
-{-| Specify the relative strength of a force or link constraint in a force
-simulation.
+{-| Relative strength of a force or link constraint in a force simulation.
 -}
 fpStrength : Num -> ForceProperty
 fpStrength =
     FpStrength
 
 
-{-| Specify the approximation parameter for aggregating more distance forces in
-a force-directed simulation (default 0.9).
+{-| Approximation parameter for aggregating more distance forces in a force-directed
+simulation (default 0.9).
 -}
 fpTheta : Num -> ForceProperty
 fpTheta =
     FpTheta
 
 
-{-| Specify the energy level or “temperature” of a simulation under a force transform.
-Alpha values lie in the range [0, 1]. Internally, the simulation will decrease the
-alpha value over time, causing the magnitude of updates to diminish.
+{-| Energy level or “temperature” of a simulation under a force transform. Alpha
+values lie in the range [0, 1]. Internally, the simulation will decrease the alpha
+value over time, causing the magnitude of updates to diminish.
 -}
 fsAlpha : Num -> ForceSimulationProperty
 fsAlpha =
     FsAlpha
 
 
-{-| Specify the minimum amount by which to lower the alpha value on each simulation
-iteration under a force transform.
+{-| Minimum amount by which to lower the alpha value on each simulation iteration
+under a force transform.
 -}
 fsAlphaMin : Num -> ForceSimulationProperty
 fsAlphaMin =
     FsAlphaMin
 
 
-{-| Specify the target alpha value to which a simulation converges under a force
-transformation.
+{-| Target alpha value to which a simulation converges under a force transformation.
 -}
 fsAlphaTarget : Num -> ForceSimulationProperty
 fsAlphaTarget =
     FsAlphaTarget
 
 
-{-| Specify the names of the output fields to which node positions and velocities
-are written after a force transformation. The default is ["x", "y", "vx", "vy"]
-corresponding to the order of parameter names to be provided.
+{-| Names of the output fields to which node positions and velocities are written
+after a force transformation. The default is ["x", "y", "vx", "vy"] corresponding
+to the order of parameter names.
 -}
 fsAs : String -> String -> String -> String -> ForceSimulationProperty
 fsAs x y vx vy =
     FsAs x y vx vy
 
 
-{-| Specify the forces to include in a force-directed simulation resulting from
-a force transform.
+{-| Forces to include in a force-directed simulation resulting from a force transform.
 -}
 fsForces : List Force -> ForceSimulationProperty
 fsForces =
     FsForces
 
 
-{-| Specify the name of signal that will generate a field name to reference.
+{-| Field referenced by the value in the named signal.
 -}
 fSignal : String -> Field
 fSignal =
     FSignal
 
 
-{-| Specify the number of iterations in a force transformation when in static
-mode (default 300).
+{-| Number of iterations in a force transformation when in static mode (default 300).
 -}
 fsIterations : Num -> ForceSimulationProperty
 fsIterations =
     FsIterations
 
 
-{-| Specify whether a simulation in a force transformation should restart when
-node object fields are modified.
+{-| Whether a simulation in a force transformation should restart when node object
+fields are modified.
 -}
 fsRestart : Boo -> ForceSimulationProperty
 fsRestart =
     FsRestart
 
 
-{-| Specify whether a simulation in a force transformation should be computed in
-batch to produce a static layout (true) or should be animated (false).
+{-| Whether a simulation in a force transformation should be computed in batch to
+produce a static layout (true) or should be animated (false).
 -}
 fsStatic : Boo -> ForceSimulationProperty
 fsStatic =
     FsStatic
 
 
-{-| Specify the 'friction' to be applied to a simulation in a force transformation.
-This is applied after the application of any forces during an iteration, each node’s
-velocity is multiplied by 1 - velocityDecay (default 0.4).
+{-| Friction to be applied to a simulation in a force transformation. This is applied
+after the application of any forces during an iteration.
 -}
 fsVelocityDecay : Num -> ForceSimulationProperty
 fsVelocityDecay =
     FsVelocityDecay
 
 
-{-| Specify the field containing the GeoJSON objects to be consolidated into a feature
-collection by a geoJSON transform.
+{-| Field containing the GeoJSON objects to be consolidated into a feature collection
+by a geoJSON transform.
 -}
 gjFeature : Field -> GeoJsonProperty
 gjFeature =
     GjFeature
 
 
-{-| Specify the fields containing longitude (first parameter) and latitude (second
-parameter) to be consolidated into a feature collection by a geoJSON transform.
+{-| Fields containing longitude (first parameter) and latitude (second parameter)
+to be consolidated into a feature collection by a geoJSON transform.
 -}
 gjFields : Field -> Field -> GeoJsonProperty
 gjFields =
     GjFields
 
 
-{-| Specify the name of the a new signal to capture the output of generated by
-a geoJSON transform.
+{-| Name of the a new signal to capture the output of generated by a geoJSON transform.
 -}
 gjSignal : String -> GeoJsonProperty
 gjSignal =
     GjSignal
 
 
-{-| Specify the output field in which to write a generated shape instance following
-a geoShape or geoPath transformation.
+{-| Output field in which to write a generated shape instance following a geoShape
+or geoPath transformation.
 -}
 gpAs : String -> GeoPathProperty
 gpAs =
     GeAs
 
 
-{-| Specify the data field containing GeoJSON data when applying a geoShape or
-geoPath transformation. If unspecified, the full input data object will be used.
+{-| Data field containing GeoJSON data when applying a geoShape or geoPath transformation.
+If unspecified, the full input data object will be used.
 -}
 gpField : Field -> GeoPathProperty
 gpField =
     GeField
 
 
-{-| Specify the default radius (in pixels) to use when drawing GeoJSON Point and
-MultiPoint geometries. An expression value may be used to set the point radius
-as a function of properties of the input GeoJSON.
+{-| Default radius (in pixels) to use when drawing GeoJSON Point and MultiPoint
+geometries. An expression value may be used to set the point radius as a function
+of properties of the input GeoJSON.
 -}
 gpPointRadius : Num -> GeoPathProperty
 gpPointRadius =
     GePointRadius
 
 
-{-| Specify a type of layout alignment to apply to grid columns. This can be used in
-cases when alignment rules are different for rows and columns.
+{-| Layout alignment to apply to grid columns. Used in cases when alignment rules
+are different for rows and columns.
 -}
 grAlignColumn : GridAlign -> GridAlign
 grAlignColumn =
     AlignColumn
 
 
-{-| Specify a type of layout alignment to apply to grid rows. This can be used in
-cases when alignment rules are different for rows and columns.
+{-| Layout alignment to apply to grid rows. Used in cases when alignment rules
+are different for rows and columns.
 -}
 grAlignRow : GridAlign -> GridAlign
 grAlignRow =
     AlignRow
 
 
-{-| Specify a type of layout alignment to apply to grid rows and columns. `AlignNone`
+{-| Layout alignment to apply to grid rows and columns. `AlignNone`
 indicates a flow layout will be used, in which adjacent plots are simply placed
 one after the other. `AlignEach` indicates elements will be aligned into a clean
 grid structure, but each row or column may be of variable size. `AlignAll` indicates
@@ -5917,61 +5831,61 @@ type GridAlign
     | AlignSignal String
 
 
-{-| Specify a type of layout alignment based on the value of the given signal.
+{-| Layout alignment referenced by the value in the named signal.
 -}
 gridAlignSignal : String -> GridAlign
 gridAlignSignal =
     AlignSignal
 
 
-{-| Specify both the major and minor extents of a graticule to be the same values.
-Should be a two-element list representing longitude and latitude extents.
+{-| Major and minor extents of a graticule to be the same values. Parameter should
+evaluate to a two-element list representing longitude and latitude extents.
 -}
 grExtent : Num -> GraticuleProperty
 grExtent =
     GrExtent
 
 
-{-| Specify the major extent of a graticule. Should be a two-element list representing
-longitude and latitude extents.
+{-| Major extent of a graticule. Parameter should evaluate to a two-element list
+representing longitude and latitude extents.
 -}
 grExtentMajor : Num -> GraticuleProperty
 grExtentMajor =
     GrExtentMajor
 
 
-{-| Specify the minor extent of a graticule. Should be a two-element list representing
-longitude and latitude extents.
+{-| Minor extent of a graticule. Parameter should evaluate to a two-element list
+representing longitude and latitude extents.
 -}
 grExtentMinor : Num -> GraticuleProperty
 grExtentMinor =
     GrExtentMinor
 
 
-{-| Specify the field used to bin when generating a graticule.
+{-| Field used to bin when generating a graticule.
 -}
 grField : Field -> GraticuleProperty
 grField =
     GrField
 
 
-{-| Specify the precision in degrees with which graticule arcs are generated. The
-default value is 2.5 degrees.
+{-| Precision in degrees with which graticule arcs are generated. The default value
+is 2.5 degrees.
 -}
 grPrecision : Num -> GraticuleProperty
 grPrecision =
     GrPrecision
 
 
-{-| Specify both the major and minor step angles of a graticule to be the same values.
-Should be a two-element list representing longitude and latitude spacing.
+{-| Major and minor step angles of a graticule to be the same values. Parameter
+should be a two-element list representing longitude and latitude spacing.
 -}
 grStep : Num -> GraticuleProperty
 grStep =
     GrStep
 
 
-{-| Specify the major step angles of a graticule. Should be a two-element list
+{-| Major step angles of a graticule. Parameter should be a two-element list
 representing longitude and latitude spacing.
 -}
 grStepMajor : Num -> GraticuleProperty
@@ -5979,7 +5893,7 @@ grStepMajor =
     GrStepMajor
 
 
-{-| Specify the minor step angles of a graticule. Should be a two-element list
+{-| Minor step angles of a graticule. Parameter should be a two-element list
 representing longitude and latitude spacing.
 -}
 grStepMinor : Num -> GraticuleProperty
@@ -5996,8 +5910,7 @@ type HAlign
     | HAlignSignal String
 
 
-{-| Specify the horizontal alignment of some text based on the value of the
-given signal.
+{-| Horizontal text alignment referenced by the value in the named signal.
 -}
 hAlignSignal : String -> HAlign
 hAlignSignal =
@@ -6075,12 +5988,11 @@ iDateTimeLocal =
     IDateTimeLocal
 
 
-{-| Specify a conditional list of values dependent on whether an expression (first
-parameter) evaluates as true. The second and third parameters represent the 'then'
-and 'else' branches of the test.
+{-| Values conditional on whether an expression (first parameter) evaluates as true.
+The second and third parameters represent the 'then' and 'else' branches of the test.
 
 To include nested conditions, subsequent `ifElse` calls should be placed in the
-'else' branch. For example:
+'else' branch.
 
     maFontWeight
         [ ifElse "indata('selected', 'source', datum.id)"
@@ -6104,32 +6016,32 @@ iMonth =
     IMonth
 
 
-{-| Specify a list of fields by which to group values in an impute transform.
-Imputation is then performed on a per-group basis, such as a within group mean
-rather than global mean.
+{-| List of fields by which to group values in an impute transform. Imputation is
+then performed on a per-group basis, such as a within group mean rather than global
+mean.
 -}
 imGroupBy : List Field -> ImputeProperty
 imGroupBy =
     ImGroupBy
 
 
-{-| Specify an additional collection of key values that should be considered for
-imputation as part of an impute transform.
+{-| Additional collection of key values that should be considered for imputation ]
+as part of an impute transform.
 -}
 imKeyVals : Value -> ImputeProperty
 imKeyVals =
     ImKeyVals
 
 
-{-| Specify the imputation method to be used as part of an impute transform. If
-not specified the default `ByMean` method will be used.
+{-| Imputation method to be used as part of an impute transform. If not specified
+the default `ByMean` method will be used.
 -}
 imMethod : ImputeMethod -> ImputeProperty
 imMethod =
     ImMethod
 
 
-{-| The imputation method to be used when assigning values to missing data values.
+{-| Imputation method to be used when assigning values to missing data values.
 `ByValue` allows a specific value to be assigned for missing values while the other
 methods will calculate a value based on a group of existing values.
 -}
@@ -6141,15 +6053,14 @@ type ImputeMethod
     | ByMin
 
 
-{-| Specify the value to use when an imputation method is set to `ByValue` in an
-impute transform.
+{-| Vvalue to use when an imputation method is set to `ByValue` in an impute transform.
 -}
 imValue : Value -> ImputeProperty
 imValue =
     ImValue
 
 
-{-| Specify whether autocomplete should be turned on or off for input elements that
+{-| Whether autocomplete should be turned on or off for input elements that
 support it.
 -}
 inAutocomplete : Bool -> InputProperty
@@ -6157,8 +6068,8 @@ inAutocomplete =
     InAutocomplete
 
 
-{-| Specify that event handling should be delayed until the specified milliseconds
-have elapsed since the last event was fired. This helps to limit event broadcasting.
+{-| Delay event handling until the given milliseconds have elapsed since the last
+event was fired. Helps to limit event broadcasting.
 -}
 inDebounce : Float -> InputProperty
 inDebounce =
@@ -6174,37 +6085,36 @@ inElement =
     InElement
 
 
-{-| Specify the maximum value for a range slider input element.
+{-| Maximum value for a range slider input element.
 -}
 inMax : Float -> InputProperty
 inMax =
     InMax
 
 
-{-| Specify the minimum value for a range slider input element.
+{-| Minimum value for a range slider input element.
 -}
 inMin : Float -> InputProperty
 inMin =
     InMin
 
 
-{-| Specify the options to be selected from a Radio or Select input element.
+{-| Options to be selected from a Radio or Select input element.
 -}
 inOptions : Value -> InputProperty
 inOptions =
     InOptions
 
 
-{-| Specify the place-holding text for input elements before any value has been
-entered.
+{-| Place-holding text for input elements before any value has been entered.
 -}
 inPlaceholder : String -> InputProperty
 inPlaceholder =
     InPlaceholder
 
 
-{-| Specify the step value (increment between adjacent selectable values) for a
-range slider input element.
+{-| Step value (increment between adjacent selectable values) for a range slider
+input element.
 -}
 inStep : Float -> InputProperty
 inStep =
@@ -6267,46 +6177,44 @@ iWeek =
     IWeek
 
 
-{-| Specify the output field names generated by a join aggregate transform.
+{-| Output fields to be generated by a join aggregate transform.
 -}
 jaAs : List String -> JoinAggregateProperty
 jaAs =
     JAAs
 
 
-{-| Specify the fields to aggregate in join aggregate transform.
+{-| Fields to aggregate in join aggregate transform.
 -}
 jaFields : List Field -> JoinAggregateProperty
 jaFields =
     JAFields
 
 
-{-| Specify the fields to group by in a join aggregate transform.
+{-| Fields to group by in a join aggregate transform.
 -}
 jaGroupBy : List Field -> JoinAggregateProperty
 jaGroupBy =
     JAGroupBy
 
 
-{-| Specify the operations in a join aggregate transform.
+{-| Operations in a join aggregate transform.
 -}
 jaOps : List Operation -> JoinAggregateProperty
 jaOps =
     JAOps
 
 
-{-| Specify the property to be extracted from some JSON when it has some
-surrounding structure or meta-data. For example, specifying the property
-`values.features` is equivalent to retrieving `json.values.features` from the
-loaded JSON object with a custom delimiter.
+{-| Property to be extracted from some JSON when it has some surrounding structure
+or meta-data. e.g., specifying the property `values.features` is equivalent to
+retrieving `json.values.features` from the loaded JSON object with a custom delimiter.
 -}
 jsonProperty : Str -> FormatProperty
 jsonProperty =
     JSONProperty
 
 
-{-| Specify a custom key-value pair to be stored in an object generated by
-[vObject](#vObject).
+{-| Custom key-value pair to be stored in an object generated by [vObject](#vObject).
 -}
 keyValue : String -> Value -> Value
 keyValue =
@@ -6325,7 +6233,7 @@ layout lps =
     ( VLayout, JE.object (List.map layoutProperty lps) )
 
 
-{-| Specify the height in pixels to clip a symbol legend entries and limit its size.
+{-| Height in pixels to clip a symbol legend entries and limit its size.
 By default no clipping is performed.
 -}
 leClipHeight : Num -> LegendProperty
@@ -6333,14 +6241,14 @@ leClipHeight =
     LeClipHeight
 
 
-{-| Specify the horizontal padding between entries in a symbol legend.
+{-| Horizontal padding between entries in a symbol legend.
 -}
 leColumnPadding : Num -> LegendProperty
 leColumnPadding =
     LeColumnPadding
 
 
-{-| Specify the number of columns in which to arrange symbol legend entries. A
+{-| Number of columns in which to arrange symbol legend entries. A
 value of 0 or lower indicates a single row with one column per entry. The default
 is 0 for horizontal symbol legends and 1 for vertical symbol legends.
 -}
@@ -6349,14 +6257,14 @@ leColumns =
     LeColumns
 
 
-{-| Specify the corner radius for an enclosing legend rectangle.
+{-| Corner radius for an enclosing legend rectangle.
 -}
 leCornerRadius : Num -> LegendProperty
 leCornerRadius =
     LeCornerRadius
 
 
-{-| Specify the direction of a legend.
+{-| Direction of a legend.
 -}
 leDirection : Orientation -> LegendProperty
 leDirection =
@@ -6377,21 +6285,21 @@ leEncode =
     LeEncode
 
 
-{-| Specify the name of the scale that maps to the legend symbols' fill colors.
+{-| Name of the scale that maps to the legend symbols' fill colors.
 -}
 leFill : String -> LegendProperty
 leFill =
     LeFill
 
 
-{-| Specify the background color of an enclosing legend rectangle.
+{-| Bbackground color of an enclosing legend rectangle.
 -}
 leFillColor : Str -> LegendProperty
 leFillColor =
     LeFillColor
 
 
-{-| Specify the format pattern for legend labels. Text should be either a
+{-| Format pattern for legend labels. Text should be either a
 [d3-format specifier](https://github.com/d3/d3-format#locale_format) or a
 [d3-time-format specifier](https://github.com/d3/d3-time-format#locale_format).
 -}
@@ -6400,7 +6308,7 @@ leFormat =
     LeFormat
 
 
-{-| Create a single legend used to visualize a color, size or shape mapping.
+{-| Create a legend used to visualize a color, size or shape mapping.
 -}
 legend : List LegendProperty -> List Spec -> List Spec
 legend lps =
@@ -6447,8 +6355,7 @@ type LegendOrientation
     | LegendOrientationSignal String
 
 
-{-| Specify a signal that indicates the position of a legend relative to the
-visualization it describes.
+{-| Legend position referenced by the value in the named signal.
 -}
 legendOrientationSignal : String -> LegendOrientation
 legendOrientationSignal =
@@ -6464,50 +6371,49 @@ type LegendType
     | LegendTypeSignal String
 
 
-{-| Specify a type of legend is to be determined by the given signal. Valid values
-generated by the signal are `symbol` and `gradient`.
+{-| Legend type (`symbol` or `gradient`) referenced by the value in the named signal.
 -}
 legendTypeSignal : String -> LegendType
 legendTypeSignal =
     LegendTypeSignal
 
 
-{-| Specify the opacity of a color gradient in a legend.
+{-| Opacity of a color gradient in a legend.
 -}
 leGradientOpacity : Num -> LegendProperty
 leGradientOpacity =
     LeGradientOpacity
 
 
-{-| Specify the maximum allowed length of gradient labels in a legend.
+{-| Maximum allowed length of gradient labels in a legend.
 -}
 leGradientLabelLimit : Num -> LegendProperty
 leGradientLabelLimit =
     LeGradientLabelLimit
 
 
-{-| Specify the vertical offset in pixels for gradient labels in a legend.
+{-| Vertical offset in pixels for gradient labels in a legend.
 -}
 leGradientLabelOffset : Num -> LegendProperty
 leGradientLabelOffset =
     LeGradientLabelOffset
 
 
-{-| Specify the color of a legend's color gradient border.
+{-| Color of a legend's color gradient border.
 -}
 leGradientStrokeColor : Str -> LegendProperty
 leGradientStrokeColor =
     LeGradientStrokeColor
 
 
-{-| Specify the width of a legend's color gradient border.
+{-| Width of a legend's color gradient border.
 -}
 leGradientStrokeWidth : Num -> LegendProperty
 leGradientStrokeWidth =
     LeGradientStrokeWidth
 
 
-{-| Specify the thickness in pixels of the color gradient in a legend. This value
+{-| Thickness in pixels of the color gradient in a legend. This value
 corresponds to the width of a vertical gradient or the height of a horizontal
 gradient.
 -}
@@ -6516,7 +6422,7 @@ leGradientThickness =
     LeGradientThickness
 
 
-{-| Specify the length in pixels of the primary axis of a color gradient in a
+{-| Length in pixels of the primary axis of a color gradient in a
 legend. This value corresponds to the height of a vertical gradient or the width
 of a horizontal gradient.
 -}
@@ -6525,99 +6431,98 @@ leGradientLength =
     LeGradientLength
 
 
-{-| Specify the alignment to apply to symbol legends rows and columns.
+{-| Alignment to apply to symbol legends rows and columns.
 -}
 leGridAlign : GridAlign -> LegendProperty
 leGridAlign =
     LeGridAlign
 
 
-{-| Specify the horizontal text alignment for a legend label.
+{-| Horizontal text alignment for a legend label.
 -}
 leLabelAlign : HAlign -> LegendProperty
 leLabelAlign =
     LeLabelAlign
 
 
-{-| Specify the vertical text alignment for a legend label.
+{-| Vertical text alignment for a legend label.
 -}
 leLabelBaseline : VAlign -> LegendProperty
 leLabelBaseline =
     LeLabelBaseline
 
 
-{-| Specify the text color for legend labels.
+{-| Text color for legend labels.
 -}
 leLabelColor : Str -> LegendProperty
 leLabelColor =
     LeLabelColor
 
 
-{-| Specify the text font for legend labels.
+{-| Font for legend labels.
 -}
 leLabelFont : Str -> LegendProperty
 leLabelFont =
     LeLabelFont
 
 
-{-| Specify the font size in pixels for legend labels.
+{-| Font size in pixels for legend labels.
 -}
 leLabelFontSize : Num -> LegendProperty
 leLabelFontSize =
     LeLabelFontSize
 
 
-{-| Specify the font weight for legend labels.
+{-| Font weight for legend labels.
 -}
 leLabelFontWeight : Value -> LegendProperty
 leLabelFontWeight =
     LeLabelFontWeight
 
 
-{-| Specify the maximum allowed length in pixels of a legend label.
+{-| Maximum allowed length in pixels of a legend label.
 -}
 leLabelLimit : Num -> LegendProperty
 leLabelLimit =
     LeLabelLimit
 
 
-{-| Specify the opacity for a legend's labels.
+{-| Opacity for a legend's labels.
 -}
 leLabelOpacity : Num -> LegendProperty
 leLabelOpacity =
     LeLabelOpacity
 
 
-{-| Specify the horizontal pixel offset for a legend's symbols.
+{-| Horizontal pixel offset for a legend's symbols.
 -}
 leLabelOffset : Num -> LegendProperty
 leLabelOffset =
     LeLabelOffset
 
 
-{-| Specify the strategy to use for resolving overlap of labels in gradient legends.
+{-| Strategy to use for resolving overlap of labels in gradient legends.
 -}
 leLabelOverlap : OverlapStrategy -> LegendProperty
 leLabelOverlap =
     LeLabelOverlap
 
 
-{-| Specify the offset in pixels by which to displace the legend from the data
-rectangle and axes.
+{-| Offset in pixels by which to displace the legend from the data rectangle and axes.
 -}
 leOffset : Value -> LegendProperty
 leOffset =
     LeOffset
 
 
-{-| Specify the name of the scale that maps to the legend symbols' opacities.
+{-| Name of the scale that maps to the legend symbols' opacities.
 -}
 leOpacity : String -> LegendProperty
 leOpacity =
     LeOpacity
 
 
-{-| Specify the orientation of the legend, determining where the legend is placed
+{-| Orientation of the legend, determining where the legend is placed
 relative to a chart’s data rectangle.
 -}
 leOrient : LegendOrientation -> LegendProperty
@@ -6625,56 +6530,56 @@ leOrient =
     LeOrient
 
 
-{-| Specify the padding between the border and content of the legend group.
+{-| Padding between the border and content of the legend group.
 -}
 lePadding : Value -> LegendProperty
 lePadding =
     LePadding
 
 
-{-| Specify the vertical padding between entries in a symbol legend.
+{-| Vertical padding between entries in a symbol legend.
 -}
 leRowPadding : Num -> LegendProperty
 leRowPadding =
     LeRowPadding
 
 
-{-| Specify the name of the scale that maps to the legend symbols' shapes.
+{-| Name of the scale that maps to the legend symbols' shapes.
 -}
 leShape : String -> LegendProperty
 leShape =
     LeShape
 
 
-{-| Specify the name of the scale that maps to the legend symbols' sizes.
+{-| Name of the scale that maps to the legend symbols' sizes.
 -}
 leSize : String -> LegendProperty
 leSize =
     LeSize
 
 
-{-| Specify the name of the scale that maps to the legend symbols' strokes.
+{-| Name of the scale that maps to the legend symbols' strokes.
 -}
 leStroke : String -> LegendProperty
 leStroke =
     LeStroke
 
 
-{-| Specify the border color of an enclosing legend rectangle.
+{-| Border color of an enclosing legend rectangle.
 -}
 leStrokeColor : Str -> LegendProperty
 leStrokeColor =
     LeStrokeColor
 
 
-{-| Specify the stroke width of the color of a legend's gradient border.
+{-| Stroke width of the color of a legend's gradient border.
 -}
 leStrokeWidth : Num -> LegendProperty
 leStrokeWidth =
     LeStrokeWidth
 
 
-{-| Specify the default fill color for legend symbols. This is only applied if there
+{-| Default fill color for legend symbols. This is only applied if there
 is no fill scale color encoding for the legend.
 -}
 leSymbolBaseFillColor : Str -> LegendProperty
@@ -6682,7 +6587,7 @@ leSymbolBaseFillColor =
     LeSymbolBaseFillColor
 
 
-{-| Specify the default stroke color for legend symbols. This is only applied if
+{-| Default stroke color for legend symbols. This is only applied if
 there is no stroke scale color encoding for the legend.
 -}
 leSymbolBaseStrokeColor : Str -> LegendProperty
@@ -6690,71 +6595,70 @@ leSymbolBaseStrokeColor =
     LeSymbolBaseStrokeColor
 
 
-{-| Specify the default direction for legend symbols.
+{-| Default direction for legend symbols.
 -}
 leSymbolDirection : Orientation -> LegendProperty
 leSymbolDirection =
     LeSymbolDirection
 
 
-{-| Specify the fill color for legend symbols.
+{-| Fill color for legend symbols.
 -}
 leSymbolFillColor : Str -> LegendProperty
 leSymbolFillColor =
     LeSymbolFillColor
 
 
-{-| Specify the offset in pixels between legend labels their corresponding symbol
-or gradient.
+{-| Offset in pixels between legend labels their corresponding symbol or gradient.
 -}
 leSymbolOffset : Num -> LegendProperty
 leSymbolOffset =
     LeSymbolOffset
 
 
-{-| Specify the opacity for a legend's symbols.
+{-| Opacity for a legend's symbols.
 -}
 leSymbolOpacity : Num -> LegendProperty
 leSymbolOpacity =
     LeSymbolOpacity
 
 
-{-| Specify the default symbol area size in square pixel units.
+{-| Default symbol area size in square pixel units.
 -}
 leSymbolSize : Num -> LegendProperty
 leSymbolSize =
     LeSymbolSize
 
 
-{-| Specify the border color for legend symbols.
+{-| Border color for legend symbols.
 -}
 leSymbolStrokeColor : Str -> LegendProperty
 leSymbolStrokeColor =
     LeSymbolStrokeColor
 
 
-{-| Specify the default symbol border width used in a legend.
+{-| Default symbol border width used in a legend.
 -}
 leSymbolStrokeWidth : Num -> LegendProperty
 leSymbolStrokeWidth =
     LeSymbolStrokeWidth
 
 
-{-| Specify the default symbol shape used in a legend.
+{-| Default symbol shape used in a legend.
 -}
 leSymbolType : Symbol -> LegendProperty
 leSymbolType =
     LeSymbolType
 
 
-{-| Specify the name of the scale that maps to the legend symbols' stroke dashing.
+{-| Name of the scale that maps to the legend symbols' stroke dashing.
 -}
 leStrokeDash : String -> LegendProperty
 leStrokeDash =
     LeStrokeDash
 
 
-{-| Specify a desired number of ticks for a temporal legend. The first parameter
+{-| Ddesired number of ticks for a temporal legend. The first parameter
 is the type of temporal interval to use and the second the number of steps of that
 interval between ticks. For example to specify a tick is requested at six-month
 intervals (e.g. January, July):
@@ -6777,84 +6681,84 @@ leTemporalTickCount =
     LeTemporalTickCount
 
 
-{-| Specify the desired number of tick values for quantitative legends.
+{-| Desired number of tick values for quantitative legends.
 -}
 leTickCount : Num -> LegendProperty
 leTickCount =
     LeTickCount
 
 
-{-| Specify the title for the legend (none by default).
+{-| Title for the legend (none by default).
 -}
 leTitle : Str -> LegendProperty
 leTitle =
     LeTitle
 
 
-{-| Specify the horizontal alignment for a legend title.
+{-| Horizontal alignment for a legend title.
 -}
 leTitleAlign : HAlign -> LegendProperty
 leTitleAlign =
     LeTitleAlign
 
 
-{-| Specify the vertical alignment for a legend title.
+{-| Vertical alignment for a legend title.
 -}
 leTitleBaseline : VAlign -> LegendProperty
 leTitleBaseline =
     LeTitleBaseline
 
 
-{-| Specify the text color for a legend title.
+{-| Text color for a legend title.
 -}
 leTitleColor : Str -> LegendProperty
 leTitleColor =
     LeTitleColor
 
 
-{-| Specify the text font for a legend title.
+{-| Font for a legend title.
 -}
 leTitleFont : Str -> LegendProperty
 leTitleFont =
     LeTitleFont
 
 
-{-| Specify the font size in pixel units for a legend title.
+{-| Font size in pixel units for a legend title.
 -}
 leTitleFontSize : Num -> LegendProperty
 leTitleFontSize =
     LeTitleFontSize
 
 
-{-| Specify the font weight for a legend title.
+{-| Font weight for a legend title.
 -}
 leTitleFontWeight : Value -> LegendProperty
 leTitleFontWeight =
     LeTitleFontWeight
 
 
-{-| Specify the maximum allowed length in pixels of a legend title.
+{-| Maximum allowed length in pixels of a legend title.
 -}
 leTitleLimit : Num -> LegendProperty
 leTitleLimit =
     LeTitleLimit
 
 
-{-| Specify the opacity for a legend's title.
+{-| Opacity for a legend's title.
 -}
 leTitleOpacity : Num -> LegendProperty
 leTitleOpacity =
     LeTitleOpacity
 
 
-{-| Specify the padding between the legend title and entries.
+{-| Padding between the legend title and entries.
 -}
 leTitlePadding : Value -> LegendProperty
 leTitlePadding =
     LeTitlePadding
 
 
-{-| Specify the type of legend.
+{-| Type of legend.
 -}
 leType : LegendType -> LegendProperty
 leType =
@@ -6868,8 +6772,8 @@ leValues =
     LeValues
 
 
-{-| Specify the integer z-index indicating the layering of the legend group relative
-to other axis, mark and legend groups. The default value is 0.
+{-| z-index indicating the layering of the legend group relative to other axis,
+mark and legend groups. The default value is 0.
 -}
 leZIndex : Num -> LegendProperty
 leZIndex =
@@ -6887,21 +6791,21 @@ type LinkShape
     | LinkShapeSignal String
 
 
-{-| Specify the shape of a line indicating path between nodes using the given signal.
+{-| Line shape between nodes referenced by the value in the named signal.
 -}
 linkShapeSignal : String -> LinkShape
 linkShapeSignal =
     LinkShapeSignal
 
 
-{-| Specify the alignment to apply to grid rows and columns in a grid layout.
+{-| Alignment to apply to grid rows and columns in a grid layout.
 -}
 loAlign : GridAlign -> LayoutProperty
 loAlign =
     LAlign
 
 
-{-| Specify the bounds calculation method to use for determining the extent of a
+{-| Bounds calculation method to use for determining the extent of a
 sub-plot in a grid layout.
 -}
 loBounds : BoundsCalculation -> LayoutProperty
@@ -6909,7 +6813,7 @@ loBounds =
     LBounds
 
 
-{-| Specify the number of columns to include in a grid layout. If unspecified, a
+{-| Number of columns to include in a grid layout. If unspecified, a
 single row with unlimited columns will be assumed.
 -}
 loColumns : Num -> LayoutProperty
@@ -6917,10 +6821,8 @@ loColumns =
     LColumns
 
 
-{-| Specify the band positioning in the interval [0,1] indicating where in a cell
-a footer should be placed in a grid layout. For a column footer, 0 maps to the left
-edge of the footer cell and 1 to right edge. For a row footer, the range maps from
-top to bottom.
+{-| Band positioning in the interval [0,1] indicating where in a cell
+a footer should be placed in a grid layout.
 -}
 loFooterBand : Num -> LayoutProperty
 loFooterBand =
@@ -6935,9 +6837,9 @@ loFooterBandRC r c =
     LFooterBandRC r c
 
 
-{-| Specify the band positioning in the interval [0,1] indicating where in a cell
-a header should be placed in a grid layout. For a column header, 0 maps to the left
-edge of the header cell and 1 to right edge. For a row footer, the range maps from
+{-| Band positioning in the interval [0,1] indicating where in a cell a header
+should be placed in a grid layout. For a column header, 0 maps to the left edge
+of the header cell and 1 to right edge. For a row footer, the range maps from
 top to bottom.
 -}
 loHeaderBand : Num -> LayoutProperty
@@ -6953,7 +6855,7 @@ loHeaderBandRC r c =
     LHeaderBandRC r c
 
 
-{-| Specify the orthogonal offset in pixels by which to displace grid header, footer
+{-| Orthogonal offset in pixels by which to displace grid header, footer
 and title cells from their position along the edge of a grid layout.
 -}
 loOffset : Num -> LayoutProperty
@@ -6969,7 +6871,7 @@ loOffsetRC r c =
     LOffsetRC r c
 
 
-{-| Specify the padding in pixels to add between elements within rows and columns
+{-| Padding in pixels to add between elements within rows and columns
 of a grid layout.
 -}
 loPadding : Num -> LayoutProperty
@@ -6985,9 +6887,9 @@ loPaddingRC r c =
     LPaddingRC r c
 
 
-{-| Specify where in a cell of a grid layout, a title should be placed. For a
-column title, 0 maps to the left edge of the title cell and 1 to right edge. The
-default value is 0.5, indicating a centred position.
+{-| Title placement in a grid layout. For a column title, 0 maps to the left edge
+of the title cell and 1 to right edge. The default value is 0.5, indicating a
+centred position.
 -}
 loTitleBand : Num -> LayoutProperty
 loTitleBand =
@@ -7002,7 +6904,7 @@ loTitleBandRC r c =
     LTitleBandRC r c
 
 
-{-| Specify the name for the output field of a link path in a linkPath transformation.
+{-| Name for the output field of a link path in a linkPath transformation.
 If not specified, the default is "path".
 -}
 lpAs : String -> LinkPathProperty
@@ -7010,7 +6912,7 @@ lpAs =
     LPAs
 
 
-{-| Specify the orientation of a link path in a linkPath transformation. If a radial
+{-| Orientation of a link path in a linkPath transformation. If a radial
 orientation is specified, x and y coordinate parameters will be interpreted as an
 angle (in radians) and radius, respectively.
 -}
@@ -7019,14 +6921,14 @@ lpOrient =
     LPOrient
 
 
-{-| Specify the shape of a link path in a linkPath transformation.
+{-| Shape of a link path in a linkPath transformation.
 -}
 lpShape : LinkShape -> LinkPathProperty
 lpShape =
     LPShape
 
 
-{-| Specify the data field for the source x-coordinate in a linkPath transformation.
+{-| Field for the source x-coordinate in a linkPath transformation.
 The default is `source.x`.
 -}
 lpSourceX : Field -> LinkPathProperty
@@ -7034,7 +6936,7 @@ lpSourceX =
     LPSourceX
 
 
-{-| Specify the data field for the source y-coordinate in a linkPath transformation.
+{-| Field for the source y-coordinate in a linkPath transformation.
 The default is `source.y`.
 -}
 lpSourceY : Field -> LinkPathProperty
@@ -7042,7 +6944,7 @@ lpSourceY =
     LPSourceY
 
 
-{-| Specify the data field for the target x-coordinate in a linkPath transformation.
+{-| Field for the target x-coordinate in a linkPath transformation.
 The default is `target.x`.
 -}
 lpTargetX : Field -> LinkPathProperty
@@ -7050,7 +6952,7 @@ lpTargetX =
     LPTargetX
 
 
-{-| Specify the data field for the target y-coordinate in a linkPath transformation.
+{-| Field for the target y-coordinate in a linkPath transformation.
 The default is `target.y`.
 -}
 lpTargetY : Field -> LinkPathProperty
@@ -7058,22 +6960,21 @@ lpTargetY =
     LPTargetY
 
 
-{-| Specify the output fields in which to write data found in the secondary
-stream of a lookup.
+{-| Output fields in which to write data found in the secondary stream of a lookup.
 -}
 luAs : List String -> LookupProperty
 luAs =
     LAs
 
 
-{-| Specify the default value to assign if lookup fails in a lookup transformation.
+{-| Default value to assign if lookup fails in a lookup transformation.
 -}
 luDefault : Value -> LookupProperty
 luDefault =
     LDefault
 
 
-{-| Specify the data fields to copy from the secondary stream to the primary
+{-| Fields to copy from the secondary stream to the primary
 stream in a lookup transformation. If not specified, a reference to the full data
 record is copied.
 -}
@@ -7082,7 +6983,7 @@ luValues =
     LValues
 
 
-{-| The horizontal alignment of a text or image mark. To guarantee valid
+{-| Horizontal alignment of a text or image mark. To guarantee valid
 alignment type names, use `hCenter`, `hLeft` etc. For example:
 
     << mark Text
@@ -7096,24 +6997,21 @@ maAlign =
     MAlign
 
 
-{-| The rotation angle of the text in degrees in a text mark.
+{-| Rotation angle of the text in degrees in a text mark.
 -}
 maAngle : List Value -> MarkProperty
 maAngle =
     MAngle
 
 
-{-| Specify whether or not image aspect ratio should be preserved in an image mark.
-This may be specified directly, via a field, a signal or any other Boolean-generating
-value.
+{-| Whether or not image aspect ratio should be preserved in an image mark.
 -}
 maAspect : List Value -> MarkProperty
 maAspect =
     MAspect
 
 
-{-| The vertical baseline of a text or image mark. This may be specified directly,
-via a field, a signal or any other text-generating value. To guarantee valid
+{-| Vertical baseline of a text or image mark. To guarantee valid
 alignment type names, use `vTop`, `vMiddle` etc. For example:
 
     << mark Text
@@ -7127,15 +7025,14 @@ maBaseline =
     MBaseline
 
 
-{-| The corner radius in pixels of an arc or rect mark.
+{-| Corner radius in pixels of an arc or rect mark.
 -}
 maCornerRadius : List Value -> MarkProperty
 maCornerRadius =
     MCornerRadius
 
 
-{-| The cursor to be displayed over a mark. This may be specified directly, via a
-field, a signal or any other text-generating value. To guarantee valid cursor type
+{-| Cursor to be displayed over a mark. To guarantee valid cursor type
 names, use [cursorValue](#cursorValue).
 -}
 maCursor : List Value -> MarkProperty
@@ -7162,25 +7059,23 @@ maCustom =
 
 
 {-| Indicate if the current data point in a linear mark is defined. If false, the
-corresponding line/trail segment will be omitted, creating a “break”. This may be
-specified directly, via a field, a signal or any other Boolean-generating value.
+corresponding line/trail segment will be omitted, creating a “break”.
 -}
 maDefined : List Value -> MarkProperty
 maDefined =
     MDefined
 
 
-{-| The direction text is rendered in a text mark. This determines which side is
+{-| Direction text is rendered in a text mark. This determines which side is
 truncated in response to the text size exceeding the value of the limit parameter.
-This may be specified directly, via a field, a signal or any other string-generating
-value. To guarantee valid direction type names, use [textDirectionValue](#textDirectionValue).
+To guarantee valid direction type names, use [textDirectionValue](#textDirectionValue).
 -}
 maDir : List Value -> MarkProperty
 maDir =
     MDir
 
 
-{-| The horizontal offset in pixels (before rotation), between the text and anchor
+{-| Horizontal offset in pixels (before rotation), between the text and anchor
 point of a text mark.
 -}
 maDx : List Value -> MarkProperty
@@ -7188,7 +7083,7 @@ maDx =
     MdX
 
 
-{-| The vertical offset in pixels (before rotation), between the text and anchor
+{-| Vertical offset in pixels (before rotation), between the text and anchor
 point of a text mark.
 -}
 maDy : List Value -> MarkProperty
@@ -7196,24 +7091,22 @@ maDy =
     MdY
 
 
-{-| The ellipsis string for text truncated in response to the limit parameter of
-a text mark. This may be specified directly, via a field, a signal or any other
-string-generating value.
+{-| Ellipsis string for text truncated in response to the limit parameter of
+a text mark.
 -}
 maEllipsis : List Value -> MarkProperty
 maEllipsis =
     MEllipsis
 
 
-{-| The end angle in radians clockwise from north for an arc mark.
+{-| End angle in radians clockwise from north for an arc mark.
 -}
 maEndAngle : List Value -> MarkProperty
 maEndAngle =
     MEndAngle
 
 
-{-| The fill color of a mark. This may be specified directly, via a field,
-a signal or any other color-generating value.
+{-| Fill color of a mark.
 -}
 maFill : List Value -> MarkProperty
 maFill =
@@ -7227,10 +7120,9 @@ maFillOpacity =
     MFillOpacity
 
 
-{-| The typeface used by a text mark. This can be a generic font description such
+{-| Typeface used by a text mark. This can be a generic font description such
 as `sans-serif`, `monospace` or any specific font name made accessible via a css
-font definition. This may be specified directly, via a field, a signal or any other
-string-generating value.
+font definition.
 -}
 maFont : List Value -> MarkProperty
 maFont =
@@ -7244,8 +7136,7 @@ maFontSize =
     MFontSize
 
 
-{-| The font style, such as `normal` or `italic` used by a text mark. This may be
-specified directly, via a field, a signal or any other string-generating value.
+{-| The font style, such as `normal` or `italic` used by a text mark.
 -}
 maFontStyle : List Value -> MarkProperty
 maFontStyle =
@@ -7260,23 +7151,21 @@ maFontWeight =
 
 
 {-| Indicate if the visible group content should be clipped to the group’s
-specified width and height. This may be specified directly, via a field, a signal
-or any other Boolean-generating value.
+specified width and height.
 -}
 maGroupClip : List Value -> MarkProperty
 maGroupClip =
     MGroupClip
 
 
-{-| The height of a mark in pixels.
+{-| Height of a mark in pixels.
 -}
 maHeight : List Value -> MarkProperty
 maHeight =
     MHeight
 
 
-{-| A URL to load upon mouse click. If defined, the mark acts as a hyperlink. This
-may be specified directly, via a field, a signal or any other text-generating value.
+{-| URL to load upon mouse click. If defined, the mark acts as a hyperlink.
 -}
 maHRef : List Value -> MarkProperty
 maHRef =
@@ -7290,8 +7179,7 @@ maInnerRadius =
     MInnerRadius
 
 
-{-| The interpolation style of a linear mark. This may be specified directly,
-via a field, a signal or any other text-generating value. To guarantee valid
+{-| Interpolation style of a linear mark. To guarantee valid
 interpolation type names, use [markInterpolationValue](#markInterpolationValue).
 -}
 maInterpolate : List Value -> MarkProperty
@@ -7317,8 +7205,7 @@ maOpacity =
 
 {-| The orientation of an area mark. With a vertical orientation, an area mark is
 defined by the x, y, and (y2 or height) properties; with a horizontal orientation,
-the y, x and (x2 or width) properties must be specified instead. The orientation
-may be specified directly, via a field, a signal or any other text-generating value.
+the y, x and (x2 or width) properties must be specified instead.
 To guarantee valid orientation type names, use [orientationValue](#orientationValue).
 -}
 maOrient : List Value -> MarkProperty
@@ -7341,8 +7228,7 @@ maPadAngle =
 
 
 {-| The [SVG path string](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
-describing the geometry of a path mark. This may be specified directly, via a field,
-a signal or any other text-generating value.
+describing the geometry of a path mark.
 -}
 maPath : List Value -> MarkProperty
 maPath =
@@ -7374,7 +7260,7 @@ type Mark
     | Trail
 
 
-{-| Create a single mark definition. Marks form the visible components of a visualization.
+{-| A mark definition. Marks form the visible components of a visualization.
 Each mark specification can include a list of mark properties (second parameter)
 that customise the appearance of the mark and relate its appearance to data streams
 or signals.
@@ -7400,7 +7286,7 @@ type MarkInterpolation
 
 
 {-| A convenience function for generating a value representing a given mark
-interpolation type. This can be used instead of specifying an interpolation type
+interpolation type. Used instead of specifying an interpolation type
 as a literal string to avoid problems of mistyping the interpolation name.
 
     signals
@@ -7442,7 +7328,7 @@ markInterpolationValue interp =
 
 
 {-| A convenience function for generating a value representing a given mark
-orientation type. This can be used instead of specifying an orientation type as
+orientation type. Used instead of specifying an orientation type as
 a literal string to avoid problems of mistyping its name.
 
      maOrient [ orientationValue Horizontal ]
@@ -7499,8 +7385,7 @@ marks axs =
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
 Shape instances cannot be specified directly, instead they must be generated by
-a data transform such as symbol generation or a geoshape.
-For example,
+a data transform such as symbol generation or a geoshape:
 
     shapeEncoding =
         [ maShape [ symbolValue SymSquare ]
@@ -7521,7 +7406,7 @@ maShape =
     MShape
 
 
-{-| The area in pixels of the bounding box of point-based mark such as a symbol.
+{-| Area in pixels of the bounding box of point-based mark such as a symbol.
 Note that this value sets the area of the mark; the side lengths will increase with
 the square root of this value.
 -}
@@ -7530,23 +7415,21 @@ maSize =
     MSize
 
 
-{-| The start angle in radians clockwise from north for an arc mark.
+{-| Start angle in radians clockwise from north for an arc mark.
 -}
 maStartAngle : List Value -> MarkProperty
 maStartAngle =
     MStartAngle
 
 
-{-| The stroke color of a mark. This may be specified directly, via a field,
-a signal or any other color-generating value.
+{-| Stroke color of a mark.
 -}
 maStroke : List Value -> MarkProperty
 maStroke =
     MStroke
 
 
-{-| The stroke cap ending style for a mark. This may be specified directly, via a
-field, a signal or any other text-generating value. To guarantee valid stroke cap
+{-| Stroke cap ending style for a mark.To guarantee valid stroke cap
 names, use [strokeCapValue](#strokeCapValue).
 -}
 maStrokeCap : List Value -> MarkProperty
@@ -7554,8 +7437,7 @@ maStrokeCap =
     MStrokeCap
 
 
-{-| The stroke dash style of a mark. This may be specified directly, via a
-field, a signal or any other numeric list-generating value. The list should consist
+{-| Stroke dash style of a mark. The list should consist
 of alternating dash-gap lengths in pixels.
 -}
 maStrokeDash : List Value -> MarkProperty
@@ -7570,8 +7452,7 @@ maStrokeDashOffset =
     MStrokeDashOffset
 
 
-{-| The stroke join method for a mark. This may be specified directly, via a
-field, a signal or any other text-generating value. To guarantee valid stroke join
+{-| Stroke join method for a mark. To guarantee valid stroke join
 names, use [strokeJoinValue](#strokeJoinValue).
 -}
 maStrokeJoin : List Value -> MarkProperty
@@ -7579,21 +7460,21 @@ maStrokeJoin =
     MStrokeJoin
 
 
-{-| The miter limit at which to bevel a line join for a mark.
+{-| Miter limit at which to bevel a line join for a mark.
 -}
 maStrokeMiterLimit : List Value -> MarkProperty
 maStrokeMiterLimit =
     MStrokeMiterLimit
 
 
-{-| The stroke opacity of a mark in the range 0 to 1.
+{-| Stroke opacity of a mark in the range 0 to 1.
 -}
 maStrokeOpacity : List Value -> MarkProperty
 maStrokeOpacity =
     MStrokeOpacity
 
 
-{-| The stroke width of a mark in pixels.
+{-| Stroke width of a mark in pixels.
 -}
 maStrokeWidth : List Value -> MarkProperty
 maStrokeWidth =
@@ -7603,15 +7484,6 @@ maStrokeWidth =
 {-| A symbol shape that describes a symbol mark. For preset shapes, use
 [symbolValue](#symbolValue). For correct sizing of custom shape paths, define
 coordinates within a square ranging from -1 to 1 along both the x and y dimensions.
-Symbol definitions may be specified directly, via a field, a signal or any other
-text-generating value. For example, to generate a preset shape:
-
-    maShape [ symbolValue SymTriangleLeft ]
-
-or a custom shape with an SVG path:
-
-    maShape [ symbolValue (symPath "M-1,-1H1V1H-1Z") ]
-
 -}
 maSymbol : List Value -> MarkProperty
 maSymbol =
@@ -7626,8 +7498,7 @@ maTension =
     MTension
 
 
-{-| The text to display in a text mark. This may be specified directly,
-via a field, a signal or any other string-generating value.
+{-| The text to display in a text mark.
 -}
 maText : List Value -> MarkProperty
 maText =
@@ -7751,23 +7622,23 @@ mClip =
     MClip
 
 
-{-| Specify a description of a mark, useful for inline comments.
+{-| Description of a mark, useful for inline comments.
 -}
 mDescription : String -> TopMarkProperty
 mDescription =
     MDescription
 
 
-{-| Specify a set of visual encoding rules for a mark.
+{-| The visual encoding rules for a mark.
 -}
 mEncode : List EncodingProperty -> TopMarkProperty
 mEncode =
     MEncode
 
 
-{-| Specify the data source to be visualized by a mark. If not specified, a single
-element data set containing an empty object is assumed. The source can either be
-a data set to use or a faceting directive to subdivide a data set across a set
+{-| Data source to be visualized by a mark. If not specified, a single
+element dataset containing an empty object is assumed. The source can either be
+a dataset to use or a faceting directive to subdivide a dataset across a set
 of group marks.
 -}
 mFrom : List Source -> TopMarkProperty
@@ -7775,7 +7646,7 @@ mFrom =
     MFrom
 
 
-{-| Assemble a group of top-level marks. This can be used to create nested groups
+{-| Assemble a group of top-level marks. Used to create nested groups
 of marks within a `Group` mark (including further nested group specifications) by
 suppyling the specification as a series of properties. For example,
 
@@ -7791,7 +7662,7 @@ mGroup =
     MGroup
 
 
-{-| Specify whether a mark can serve as an input event source. If false, no
+{-| Whether a mark can serve as an input event source. If false, no
 mouse or touch events corresponding to the mark will be generated.
 -}
 mInteractive : Boo -> TopMarkProperty
@@ -7799,7 +7670,7 @@ mInteractive =
     MInteractive
 
 
-{-| Specify a data field to use as a unique key for data binding. When a
+{-| Field to use as a unique key for data binding. When a
 visualization’s data is updated, the key value will be used to match data elements
 to existing mark instances. Use a key field to enable object constancy for
 transitions over dynamic data.
@@ -7809,7 +7680,7 @@ mKey =
     MKey
 
 
-{-| Specify a unique name for a mark. This name can be used to refer to the mark
+{-| Unique name to be given to a mark. This name can be used to refer to the mark
 in another mark or within an event stream definition. SVG renderers will add this
 name value as a CSS class name on the enclosing SVG group (g) element containing
 the mark instances.
@@ -7819,15 +7690,14 @@ mName =
     MName
 
 
-{-| Specify a set of triggers for modifying a mark's properties in response to
-signal changes.
+{-| Triggers for modifying a mark's properties in response to signal changes.
 -}
 mOn : List Trigger -> TopMarkProperty
 mOn =
     MOn
 
 
-{-| Specify the Fields and sort order for sorting mark items. The sort order will
+{-| Fields and sort order for sorting mark items. The sort order will
 determine the default rendering order. This is defined over generated scenegraph
 items and sorting is performed after encodings are computed, allowing items to be
 sorted by size or position. To sort by underlying data properties in addition to
@@ -7841,7 +7711,7 @@ mSort =
     MSort
 
 
-{-| Specify the names of custom styles to apply to a mark. A style is a named
+{-| Names of custom styles to apply to a mark. A style is a named
 collection of mark property defaults defined within the configuration. These
 properties will be applied to the mark’s enter encoding set, with later styles
 overriding earlier styles. Any properties explicitly defined within the mark’s
@@ -7852,7 +7722,7 @@ mStyle =
     MStyle
 
 
-{-| Specify a set of post-encoding transforms to be applied after any encode
+{-| Post-encoding transforms to be applied after any encode
 blocks, that operate directly on mark scenegraph items (not backing data objects).
 These can be useful for performing layout with transforms that can set x, y,
 width, height, etc. properties. Only data transforms that do not generate or
@@ -7863,45 +7733,45 @@ mTransform =
     MTransform
 
 
-{-| Specify the z-index (draw order) of a mark. Marks with higher values are drawn
-'on top' of marks with lower numbers. This can be useful, for example, when drawing
-node-link diagrams and the node symbol should sit on top of connected edge lines.
+{-| z-index (draw order) of a mark. Marks with higher values are drawn
+'on top' of marks with lower numbers. Useful when drawing node-link diagrams and
+the node symbol should sit on top of connected edge lines.
 -}
 mZIndex : Num -> TopMarkProperty
 mZIndex =
     MTopZIndex
 
 
-{-| Specify a desired 'nice' temporal interval between labelled tick points.
+{-| Desired 'nice' temporal interval between labelled tick points.
 -}
 nInterval : TimeUnit -> Int -> ScaleNice
 nInterval tu step =
     NInterval tu step
 
 
-{-| Specify a desired tick count for a human-friendly 'nice' scale range.
+{-| Desired tick count for a human-friendly 'nice' scale range.
 -}
 nTickCount : Int -> ScaleNice
 nTickCount =
     NTickCount
 
 
-{-| Specify a numeric literal.
+{-| A numeric literal.
 -}
 num : Float -> Num
 num =
     Num
 
 
-{-| Specify an expression that to be evaluated as a numeric value.
+{-| An expression that evaluates to a numeric value.
 -}
 numExpr : Expr -> Num
 numExpr =
     NumExpr
 
 
-{-| Specify a list of potentially mixed numeric types. This can be useful when,
-for example, a domain is specified as being bounded by 0 and some signal:
+{-| List of potentially mixed numeric types. Useful when a domain is
+specified as being bounded by 0 and some signal:
 
     scDomain (doNums (numList [ num 0, numSignal "mySignal" ] ) )
 
@@ -7911,14 +7781,14 @@ numList =
     NumList
 
 
-{-| Specify an absence of a numeric value.
+{-| An absence of a numeric value.
 -}
 numNull : Num
 numNull =
     NumNull
 
 
-{-| Specify a list of numeric literals. For lists that contain a mixture of numeric
+{-| A list of numeric literals. For lists that contain a mixture of numeric
 literals and signals use [numList](#numList) instead.
 -}
 nums : List Float -> Num
@@ -7926,14 +7796,14 @@ nums =
     Nums
 
 
-{-| Specify a signal that will provide a numeric value.
+{-| Numeric value referenced by the value in the named signal.
 -}
 numSignal : String -> Num
 numSignal =
     NumSignal
 
 
-{-| Specify a list of signals that will provide numeric values.
+{-| List of numeric values referenced by the values in the named signals.
 -}
 numSignals : List String -> Num
 numSignals =
@@ -7974,15 +7844,15 @@ type Operation
     | OperationSignal String
 
 
-{-| Indicate an aggregation operation is to be determined by a named signal. The
-signal should generate the name of a valid operation (e.g. `average`).
+{-| Aggregation operation referenced by the value in the named signal.
 -}
 operationSignal : String -> Operation
 operationSignal =
     OperationSignal
 
 
-{-| Indicate an ordering, usually when sorting.
+{-| Sorting order. See the
+[Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
 -}
 type Order
     = Ascend
@@ -7990,15 +7860,14 @@ type Order
     | OrderSignal String
 
 
-{-| Indicate a sort order determined by a named signal for comparison operations.
-See the [Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
+{-| Sorting order referenced by the value in the named signal.
 -}
 orderSignal : String -> Order
 orderSignal =
     OrderSignal
 
 
-{-| Indicate desired orientation of a mark, legend or link path (e.g. horizontally or vertically
+{-| Orientation of a mark, legend or link path (e.g. horizontally or vertically
 oriented bars). Note that not all can use `Radial` orientation.
 -}
 type Orientation
@@ -8008,15 +7877,14 @@ type Orientation
     | OrientationSignal String
 
 
-{-| Indicate an orientation for marks, legends and link paths is determined by a named signal.
+{-| Orientation referenced by the value in the named signal.
 -}
 orientationSignal : String -> Orientation
 orientationSignal =
     OrientationSignal
 
 
-{-| Type of overlap strategy to be applied when there is not space to show all
-items on an axis.
+{-| Overlap strategy to be applied when there is not space to show all items on an axis.
 -}
 type OverlapStrategy
     = ONone
@@ -8025,7 +7893,7 @@ type OverlapStrategy
     | OverlapStrategySignal String
 
 
-{-| Specify an axis overlap strategy is to be determined by a named signal.
+{-| Overlap strategy referenced by the value in the named signal.
 -}
 overlapStrategySignal : String -> OverlapStrategy
 overlapStrategySignal =
@@ -8047,7 +7915,7 @@ type Padding
     | PEdges Float Float Float Float
 
 
-{-| Set the padding around the visualization in pixel units. The way padding is
+{-| Padding around the visualization in pixel units. The way padding is
 interpreted will depend on the `autosize` properties.
 -}
 padding : Float -> ( VProperty, Spec )
@@ -8055,7 +7923,7 @@ padding p =
     ( VPadding, paddingSpec (PSize p) )
 
 
-{-| Set the padding around the visualization in pixel units in _left_, _top_,
+{-| Padding around the visualization in pixel units in _left_, _top_,
 _right_, _bottom_ order.
 -}
 paddings : Float -> Float -> Float -> Float -> ( VProperty, Spec )
@@ -8080,7 +7948,7 @@ paPadding =
     PaPadding
 
 
-{-| Specify an explicit node radius to use in a packing transform. If `Nothing` (the
+{-| Node radius to use in a packing transform. If `Nothing` (the
 default), the radius of each leaf circle is derived from the field value.
 -}
 paRadius : Maybe Field -> PackProperty
@@ -8088,7 +7956,7 @@ paRadius =
     PaRadius
 
 
-{-| Specify data parsing rules as a list of tuples where each corresponds to a
+{-| Data parsing rules as a list of tuples where each corresponds to a
 field name paired with its desired data type. This is only necessary if there is
 some ambiguity that could prevent correct type inference, such as time text:
 
@@ -8113,15 +7981,15 @@ paSize n =
     PaSize n
 
 
-{-| Specify how sorting of sibling nodes is supported in a packing transform.
-The inputs to subject to sorting are tree node objects, not input data objects.
+{-| Packing transform sorting properties. The inputs to subject to sorting are
+tree node objects, not input data objects.
 -}
 paSort : List ( Field, Order ) -> PackProperty
 paSort =
     PaSort
 
 
-{-| The output fields for the computed start and end angles for each arc in a pie
+{-| Output fields for the computed start and end angles for each arc in a pie
 transform.
 -}
 piAs : String -> String -> PieProperty
@@ -8129,7 +7997,7 @@ piAs start end =
     PiAs start end
 
 
-{-| The end angle in radians in a pie chart transform. The default is 2 PI
+{-| End angle in radians in a pie chart transform. The default is 2 PI
 indicating the final slice ends 'north'.
 -}
 piEndAngle : Num -> PieProperty
@@ -8144,7 +8012,7 @@ piField =
     PiField
 
 
-{-| Specify the fields to group by when performing a pivot transform. If not specified,
+{-| Fields to group by when performing a pivot transform. If not specified,
 a single group containing all data objects will be used.
 -}
 piGroupBy : List Field -> PivotProperty
@@ -8152,7 +8020,7 @@ piGroupBy =
     PiGroupBy
 
 
-{-| Specify the maximum number of fields to generate when performing a pivot transform
+{-| Maximum number of fields to generate when performing a pivot transform
 or 0 for no limit.
 -}
 piLimit : Num -> PivotProperty
@@ -8160,7 +8028,7 @@ piLimit =
     PiLimit
 
 
-{-| Specify the aggregation operation to use by when performing a pivot transform.
+{-| Aggregation operation to use by when performing a pivot transform.
 If not specified, fields will be aggregated by their sum.
 -}
 piOp : Operation -> PivotProperty
@@ -8183,15 +8051,15 @@ piStartAngle =
     PiStartAngle
 
 
-{-| Specify a projection’s centre as a two-element list of longitude and latitude
-in degrees. The default value is [0, 0].
+{-| Map projection’s centre as a two-element list of longitude and latitude
+in degrees.
 -}
 prCenter : Num -> ProjectionProperty
 prCenter =
     PrCenter
 
 
-{-| Specify a projection’s clipping circle radius to the specified angle in degrees.
+{-| Map projection’s clipping circle radius to the specified angle in degrees.
 A value of zero indicates antimeridian cutting should be applied rather than
 small-circle clipping.
 -}
@@ -8200,7 +8068,7 @@ prClipAngle =
     PrClipAngle
 
 
-{-| Specify a projection’s viewport clip extent to the specified bounds in pixels.
+{-| Map projection’s viewport clip extent to the specified bounds in pixels.
 The extent bounds should be specified as a list of four numbers in [x0, y0, x1, y1]
 order where x0 is the left-side of the viewport, y0 is the top, x1 is the right
 and y1 is the bottom.
@@ -8210,22 +8078,21 @@ prClipExtent =
     PrClipExtent
 
 
-{-| Specify a Hammer map projection's coefficient (defaults to 2).
+{-| 'Hammer' map projection's coefficient (defaults to 2).
 -}
 prCoefficient : Num -> ProjectionProperty
 prCoefficient =
     PrCoefficient
 
 
-{-| Specify a custom map projection. Custom names need to be registered with the
-Vega runtime.
+{-| Custom map projection. Custom names need to be registered with the Vega runtime.
 -}
 prCustom : Str -> Projection
 prCustom =
     Proj
 
 
-{-| Specify a Satellite map projection's distance value. Values are expressed as a
+{-| 'Satellite' map projection's distance value. Values are expressed as a
 proportion of the Earth's radius (defaults to 2).
 -}
 prDistance : Num -> ProjectionProperty
@@ -8233,7 +8100,7 @@ prDistance =
     PrDistance
 
 
-{-| Specify the display region into which the projection should be automatically fit.
+{-| Display region into which the projection should be automatically fit.
 Used in conjunction with [prFit](#prFit). The region bounds should be specified
 in [x0, y0, x1, y1] order where x0 is the left-side, y0 is the top, x1 is the
 right and y1 is the bottom.
@@ -8243,8 +8110,8 @@ prExtent =
     PrExtent
 
 
-{-| Specify the GeoJSON data to which a projection should attempt to automatically
-fit by setting its translate and scale values.
+{-| GeoJSON data to which a projection should attempt to automatically fit by setting
+its translate and scale values.
 
     ds =
         dataSource [ data "mapData" [ daUrl (str "myGeoJson.json") ] ]
@@ -8263,14 +8130,14 @@ prFit =
     PrFit
 
 
-{-| Specify a Bottomley map projection's fraction parameter (defaults to 0.5).
+{-| 'Bottomley' map projection's fraction parameter (defaults to 0.5).
 -}
 prFraction : Num -> ProjectionProperty
 prFraction =
     PrFraction
 
 
-{-| Specify the number of lobes in radial map projections such as the Berghaus Star.
+{-| Number of lobes in radial map projections such as the Berghaus Star.
 -}
 prLobes : Num -> ProjectionProperty
 prLobes =
@@ -8298,7 +8165,7 @@ type Projection
     | ProjectionSignal String
 
 
-{-| Create a single map projection for transforming geo data onto a plane.
+{-| Map projection for transforming geo data onto a plane.
 -}
 projection : String -> List ProjectionProperty -> List Spec -> List Spec
 projection name pps =
@@ -8326,21 +8193,21 @@ projections prs =
     ( VProjections, JE.list prs )
 
 
-{-| Specify a global map projection type is to be determined by a signal.
+{-| Map projection referenced by the value in the named signal.
 -}
 projectionSignal : String -> Projection
 projectionSignal =
     ProjectionSignal
 
 
-{-| Specify the type of global map projection to use in a projection transformation.
+{-| Type of map projection to use in a projection transformation.
 -}
 prType : Projection -> ProjectionProperty
 prType =
     PrType
 
 
-{-| Specify a the parallel used for map projections such as the Armadillo (defaults
+{-| Parallel used for map projections such as the Armadillo (defaults
 to 20 degrees N).
 -}
 prParallel : Num -> ProjectionProperty
@@ -8348,7 +8215,7 @@ prParallel =
     PrParallel
 
 
-{-| Specify the default radius (in pixels) to use when drawing projected GeoJSON
+{-| Default radius (in pixels) to use when drawing projected GeoJSON
 Point and MultiPoint geometries. The default value is 4.5.
 -}
 prPointRadius : Num -> ProjectionProperty
@@ -8356,7 +8223,7 @@ prPointRadius =
     PrPointRadius
 
 
-{-| Specify a threshold for the projection’s adaptive resampling in pixels. This
+{-| Threshold for the projection’s adaptive resampling in pixels. This
 corresponds to the Douglas–Peucker distance. If precision is not specified, the
 projection’s current resampling precision which defaults to √0.5 ≅ 0.70710 is used.
 -}
@@ -8365,14 +8232,14 @@ prPrecision =
     PrPrecision
 
 
-{-| Specify the radius for the Gingery map projection. Defaults to 30 degrees.
+{-| Radius for the 'Gingery' map projection. Defaults to 30 degrees.
 -}
 prRadius : Num -> ProjectionProperty
 prRadius =
     PrRadius
 
 
-{-| Specify a Hill map projection's ratio allowing it to vary continuously between
+{-| 'Hill' map projection's ratio allowing it to vary continuously between
 Maurer 73 (0) and Eckert IV projections (infinity). Defaults to 1.
 -}
 prRatio : Num -> ProjectionProperty
@@ -8380,7 +8247,7 @@ prRatio =
     PrRatio
 
 
-{-| Specify a projection’s three-axis rotation angle. This should be a two- or
+{-| Map projection’s three-axis rotation angle. This should be a two- or
 three-element list of numbers [lambda, phi, gamma] specifying the rotation angles
 in degrees about each spherical axis.
 -}
@@ -8389,18 +8256,17 @@ prRotate =
     PrRotate
 
 
-{-| Specify a projection’s the projection’s scale factor to the specified value.
-The default scale is projection-specific. The scale factor corresponds linearly
-to the distance between projected points; however, scale factor values are not
-equivalent across projections.
+{-| Map projection’s scale factor. The default scale is projection-specific. It
+corresponds linearly to the distance between projected points; however, scale
+factor values are not equivalent across projections.
 -}
 prScale : Num -> ProjectionProperty
 prScale =
     PrScale
 
 
-{-| Specify the width and height of the display region into which the projection
-should be automatically fit. Used in conjunction with [prFit](#prFit) this is equivalent
+{-| Width and height of the display region into which the projection should be
+automatically fit. Used in conjunction with [prFit](#prFit) this is equivalent
 to calling [prExtent](#prExtent) with the top-left position set to (0,0). The region
 size should be specified in [width, height] order (or a signal that generates such
 a list).
@@ -8410,21 +8276,21 @@ prSize =
     PrSize
 
 
-{-| Specify the spacing for a Lagrange conformal map projection (defaults to 0.5).
+{-| Spacing for a Lagrange conformal map projection (defaults to 0.5).
 -}
 prSpacing : Num -> ProjectionProperty
 prSpacing =
     PrSpacing
 
 
-{-| Specify the tilt angle for a Satellite map projection (defaults to 0 degrees).
+{-| Tilt angle for a Satellite map projection (defaults to 0 degrees).
 -}
 prTilt : Num -> ProjectionProperty
 prTilt =
     PrTilt
 
 
-{-| Specify a translation offset to the specified two-element list [tx, ty]. If
+{-| Translation offset to the specified two-element list [tx, ty]. If
 not specified as a two-element list, returns the current translation offset which
 defaults to [480, 250]. The translation offset determines the pixel coordinates
 of the projection’s centre. The default translation offset places (0°,0°) at the
@@ -8435,7 +8301,7 @@ prTranslate =
     PrTranslate
 
 
-{-| Specify the output field names for the output of a partition layout transform.
+{-| Output field names for the output of a partition layout transform.
 The parameters correspond to the (default name) fields `x0`, `y0`, `x1`, `y1`,
 `depth` and `children`.
 -}
@@ -8444,7 +8310,7 @@ ptAs =
     PtAs
 
 
-{-| Specify the data field corresponding to a numeric value for a partition node.
+{-| Data field corresponding to a numeric value for a partition node.
 The sum of values for a node and all its descendants is available on the node object
 as the `value` property. This field determines the size of a node.
 -}
@@ -8453,14 +8319,14 @@ ptField =
     PtField
 
 
-{-| Specify the padding between adjacent nodes for a partition layout transform.
+{-| Padding between adjacent nodes for a partition layout transform.
 -}
 ptPadding : Num -> PartitionProperty
 ptPadding =
     PtPadding
 
 
-{-| Specify whether or not node layout values should be rounded in a partition transform.
+{-| Whether or not node layout values should be rounded in a partition transform.
 The default is false.
 -}
 ptRound : Boo -> PartitionProperty
@@ -8468,7 +8334,7 @@ ptRound =
     PtRound
 
 
-{-| Specify the size of a partition layout as two-element list corresponding to
+{-| Size of a partition layout as two-element list corresponding to
 [width, height] (or a signal that generates such a list).
 -}
 ptSize : Num -> PartitionProperty
@@ -8476,23 +8342,22 @@ ptSize =
     PtSize
 
 
-{-| Specify how sorting of sibling nodes is performed during a partition layout
-transform.
+{-| Sorting properties of sibling nodes during a partition layout transform.
 -}
 ptSort : List ( Field, Order ) -> PartitionProperty
 ptSort =
     PtSort
 
 
-{-| Specify a custom range default scheme. This can be use when a new named default
-has been created as part of a config setting is required.
+{-| Custom range default scheme. Used when a new named default has been
+created as part of a config setting is required.
 -}
 raCustomDefault : String -> ScaleRange
 raCustomDefault =
     RCustom
 
 
-{-| Specify a scale range as a data reference object. This is used for specifying
+{-| Scale range as a data reference object. This is used for specifying
 ordinal scale ranges as a series of distinct field values.
 
     scale "myScale"
@@ -8507,14 +8372,14 @@ raData =
     RData
 
 
-{-| Specify a scale range as a list of numbers.
+{-| Scale range as a list of numbers.
 -}
 raNums : List Float -> ScaleRange
 raNums =
     RNums
 
 
-{-| Specify a scale range as a list of color schemes. The first parameter is
+{-| Scale range as a list of color schemes. The first parameter is
 the name of the colour scheme to use, the second any customising properties.
 -}
 raScheme : Str -> List ColorSchemeProperty -> ScaleRange
@@ -8522,28 +8387,28 @@ raScheme =
     RScheme
 
 
-{-| Specify a signal name used to generate a scale range.
+{-| Scale range referenced by the value in the named signal.
 -}
 raSignal : String -> ScaleRange
 raSignal =
     RSignal
 
 
-{-| Specify the step size for a band scale range.
+{-| Step size for a band scale range.
 -}
 raStep : Value -> ScaleRange
 raStep =
     RStep
 
 
-{-| Specify a scale range as a list of strings.
+{-| Scale range as a list of strings.
 -}
 raStrs : List String -> ScaleRange
 raStrs =
     RStrs
 
 
-{-| Specify a scale range as a list of values.
+{-| Scale range as a list of values.
 -}
 raValues : List Value -> ScaleRange
 raValues =
@@ -8579,14 +8444,14 @@ type Scale
     | ScaleSignal String
 
 
-{-| Create a single scale used to map data values to visual properties.
+{-| Scale to be used to map data values to visual properties.
 -}
 scale : String -> List ScaleProperty -> List Spec -> List Spec
 scale name sps =
     (::) (JE.object (( "name", JE.string name ) :: List.map scaleProperty sps))
 
 
-{-| Specify the way a scale can be rounded to 'nice' numbers.
+{-| 'nice' number-scaling options.
 -}
 type ScaleNice
     = NMillisecond
@@ -8604,16 +8469,14 @@ type ScaleNice
     | ScaleNiceSignal String
 
 
-{-| Specify that the type of 'nice' scale generation is to be determined by a
-signal with the given name.
+{-| 'nice' number-scaling type referenced by the value in the named signal.
 -}
 scaleNiceSignal : String -> ScaleNice
 scaleNiceSignal =
     ScaleNiceSignal
 
 
-{-| Specify that a default scaling (`width`, `category`, `heatmap` etc.) is to be
-determined by a signal with the given name.
+{-| Default range scaling referenced by the value in the named signal.
 -}
 scaleRangeSignal : String -> ScaleRange
 scaleRangeSignal =
@@ -8641,14 +8504,14 @@ scales scs =
     ( VScales, JE.list scs )
 
 
-{-| Specify a type of scale transformation is to be determined by a signal.
+{-| Scaling referenced by the value in the named signal.
 -}
 scaleSignal : String -> Scale
 scaleSignal =
     ScaleSignal
 
 
-{-| Specify the alignment of elements within each step of a band scale, as a
+{-| Alignment of elements within each step of a band scale, as a
 fraction of the step size. Should be in the range [0,1].
 -}
 scAlign : Num -> ScaleProperty
@@ -8656,14 +8519,14 @@ scAlign =
     SAlign
 
 
-{-| Specify the base of the logorithm used in a logarithmic scale.
+{-| Base of the logorithm used in a logarithmic scale.
 -}
 scBase : Num -> ScaleProperty
 scBase =
     SBase
 
 
-{-| Specify whether output values should be clamped to when using a quantitative
+{-| Whether output values should be clamped to when using a quantitative
 scale range (default false). If clamping is disabled and the scale is passed a
 value outside the domain, the scale may return a value outside the range through
 extrapolation. If clamping is enabled, the output value of the scale is always
@@ -8674,21 +8537,21 @@ scClamp =
     SClamp
 
 
-{-| Specify a custom named scale.
+{-| Custom named scale.
 -}
 scCustom : String -> Scale
 scCustom =
     ScCustom
 
 
-{-| Specify the domain of input data values for a scale.
+{-| Domain of input data values for a scale.
 -}
 scDomain : ScaleDomain -> ScaleProperty
 scDomain =
     SDomain
 
 
-{-| Specify whether or not ordinal domains should be implicitly extended with new
+{-| Whether or not ordinal domains should be implicitly extended with new
 values. If false, a scale will return `undefined` for values not included in the
 domain; if true, new values will be appended to the domain and an updated range
 value will be returned.
@@ -8698,15 +8561,15 @@ scDomainImplicit =
     SDomainImplicit
 
 
-{-| Specify the maximum value of a scale domain, overriding a `scDomain` setting.
-This is only intended for use with scales having continuous domains.
+{-| Maximum value of a scale domain, overriding a `scDomain` setting. Only intended
+for scales with continuous domains.
 -}
 scDomainMax : Num -> ScaleProperty
 scDomainMax =
     SDomainMax
 
 
-{-| Specify the minimum value of a scale domain, overriding a `scDomain` setting.
+{-| Minimum value of a scale domain, overriding a `scDomain` setting.
 This is only used with scales having continuous domains.
 -}
 scDomainMin : Num -> ScaleProperty
@@ -8715,16 +8578,16 @@ scDomainMin =
 
 
 {-| Insert a single mid-point value into a two-element scale domain. The mid-point
-value must lie between the domain minimum and maximum values. This can be useful
-for setting a midpoint for diverging color scales. Only used with scales having
-continuous, piecewise domains.
+value must lie between the domain minimum and maximum values. Useful for setting
+a midpoint for diverging color scales. Only used with scales having continuous,
+piecewise domains.
 -}
 scDomainMid : Num -> ScaleProperty
 scDomainMid =
     SDomainMid
 
 
-{-| Specify a list value that directly overrides the domain of a scale. Useful for
+{-| List value that directly overrides the domain of a scale. Useful for
 supporting interactions such as panning or zooming a scale. The scale may be
 initially determined using a data-driven domain, then modified in response to user
 input.
@@ -8743,14 +8606,14 @@ scDomainRaw =
     SDomainRaw
 
 
-{-| Specify the exponent to be used in power scale.
+{-| Exponent to be used in power scale.
 -}
 scExponent : Num -> ScaleProperty
 scExponent =
     SExponent
 
 
-{-| Specify the interpolation method for a quantitative scale.
+{-| Interpolation method for a quantitative scale.
 -}
 scInterpolate : CInterpolate -> ScaleProperty
 scInterpolate =
@@ -8789,14 +8652,14 @@ scPaddingOuter =
     SPaddingOuter
 
 
-{-| Specify the range of a scale representing the set of visual values.
+{-| Range of a scale representing the set of visual values.
 -}
 scRange : ScaleRange -> ScaleProperty
 scRange =
     SRange
 
 
-{-| Specify the step size for band and point scales.
+{-| Step size for band and point scales.
 -}
 scRangeStep : Num -> ScaleProperty
 scRangeStep =
@@ -8810,7 +8673,7 @@ scReverse =
     SReverse
 
 
-{-| Specify whether to round numeric output values to integers. Helpful for
+{-| Whether to round numeric output values to integers. Helpful for
 snapping to the pixel grid.
 -}
 scRound : Boo -> ScaleProperty
@@ -8818,14 +8681,14 @@ scRound =
     SRound
 
 
-{-| Specify the type of a named scale.
+{-| Type of a named scale.
 -}
 scType : Scale -> ScaleProperty
 scType =
     SType
 
 
-{-| Specify whether or not a scale domain should include zero. The default is
+{-| Whether or not a scale domain should include zero. The default is
 true for linear, sqrt and power scales and false for all others.
 -}
 scZero : Boo -> ScaleProperty
@@ -8841,7 +8704,7 @@ siBind =
     SiBind
 
 
-{-| Indicate a rectangular side. Can be used to specify an axis position.
+{-| Rectangular side. Can be used to specify an axis position.
 -}
 type Side
     = SLeft
@@ -8851,15 +8714,14 @@ type Side
     | SideSignal String
 
 
-{-| Specify that an axis side is to be determined by a signal with the given
-name.
+{-| Rectangular side referenced by the value in the named signal.
 -}
 sideSignal : String -> Side
 sideSignal =
     SideSignal
 
 
-{-| Specify a text description of a signal, useful for inline documentation.
+{-| Text description of a signal, useful for inline documentation.
 -}
 siDescription : String -> SignalProperty
 siDescription =
@@ -8881,7 +8743,7 @@ signals sigs =
     ( VSignals, JE.list sigs )
 
 
-{-| Create a single signal used to add a dynamic component to a visualization.
+{-| Signal to be used to add a dynamic component to a visualization.
 -}
 signal : String -> List SignalProperty -> List Spec -> List Spec
 signal sigName sps =
@@ -8898,23 +8760,22 @@ siName =
     SiName
 
 
-{-| Specify event stream handlers for updating a signal value in response to
-input events.
+{-| Event stream handlers for updating a signal value in response to input events.
 -}
 siOn : List (List EventHandler) -> SignalProperty
 siOn =
     SiOn
 
 
-{-| Specify that a signal updates should target a signal in an enclosing scope.
-Used when creating nested signals in a group mark.
+{-| Make signal updates target a signal in an enclosing scope. Used when creating
+nested signals in a group mark.
 -}
 siPushOuter : SignalProperty
 siPushOuter =
     SiPushOuter
 
 
-{-| Specify whether a signal update expression should be automatically re-evaluated
+{-| Whether a signal update expression should be automatically re-evaluated
 when any upstream signal dependencies update. If false, the update expression will
 only be run upon initialization.
 -}
@@ -8923,7 +8784,7 @@ siReact =
     SiReact
 
 
-{-| Specify an update expression for a signal which may include other signals,
+{-| Update expression for a signal which may include other signals,
 in which case the signal will automatically update in response to upstream signal
 changes, so long as its react property is not false.
 -}
@@ -8932,28 +8793,28 @@ siUpdate =
     SiUpdate
 
 
-{-| Specify the initial value of a signal.
+{-| Initial value of a signal.
 -}
 siValue : Value -> SignalProperty
 siValue =
     SiValue
 
 
-{-| The field to be used when sorting.
+{-| Field to be used when sorting.
 -}
 soByField : Str -> SortProperty
 soByField =
     ByField
 
 
-{-| A sorting operation.
+{-| Sorting operation.
 -}
 soOp : Operation -> SortProperty
 soOp =
     Op
 
 
-{-| Allow the type of sorting to be customised.
+{-| Sorting type.
 -}
 type SortProperty
     = Ascending
@@ -8963,15 +8824,14 @@ type SortProperty
     | SortPropertySignal String
 
 
-{-| Specify that a sorting order is to be determined by a named signal. The value
-of the signal should be either `ascending` or `descending`.
+{-| Sorting type referenced by the value in the named signal.
 -}
 sortPropertySignal : String -> SortProperty
 sortPropertySignal =
     SortPropertySignal
 
 
-{-| Specify a spiraling type. Used for the sequential positioning of words in a wordcloud.
+{-| Spiraling type for sequential positioning of words in a wordcloud.
 -}
 type Spiral
     = Archimedean
@@ -8979,9 +8839,8 @@ type Spiral
     | SpiralSignal String
 
 
-{-| Specify that a spiral type for wordcloud allocation is to be determined by a
-signal with the given name. The value of the signal should be either `archimedean`
-or `rectangular`.
+{-| Word cloud spiral type (`archimedean` or `rectangular`) referenced by the
+value in the named signal.
 -}
 spiralSignal : String -> Spiral
 spiralSignal =
@@ -8996,10 +8855,10 @@ srData =
 
 
 {-| Create a facet directive for a set of marks. The first parameter is the name
-of the source data set from which the facet partitions are to be generated. The
-second parameter is the name to be given to the generated facet source. Marks
-defined with the faceted `group` mark can reference this data source name to
-visualize the local data partition.
+of the source dataset from which the facet partitions are to be generated. The
+second is the name to be given to the generated facet source. Marks defined with
+the faceted `group` mark can reference this data source name to visualize the
+local data partition.
 
     mark Group
         [ mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
@@ -9029,10 +8888,10 @@ srFacet d name =
     SFacet d name
 
 
-{-| Indicate the type of offsetting to apply when stacking. `OfZero` uses a baseline
-at the foot of a stack, `OfCenter` uses a central baseline with stacking both above
-and below it. `OfNormalize` rescales the stack to a common height while preserving
-the relative size of stacked quantities.
+{-| Type of offsetting to apply when stacking. `OfZero` uses a baseline at the foot
+of a stack, `OfCenter` uses a central baseline with stacking both above and below
+it. `OfNormalize` rescales the stack to a common height while preserving the
+relative size of stacked quantities.
 -}
 type StackOffset
     = OfZero
@@ -9041,15 +8900,14 @@ type StackOffset
     | StackOffsetSignal String
 
 
-{-| Specify a named signal to drive the type of offsetting to apply when
-performing a stack transform.
+{-| Stacking offset referenced by the value in the named signal.
 -}
 stackOffsetSignal : String -> StackOffset
 stackOffsetSignal =
     StackOffsetSignal
 
 
-{-| Specify the names of the output fields for the computed start and end stack
+{-| Names of the output fields for the computed start and end stack
 values of a stack transform.
 -}
 stAs : String -> String -> StackProperty
@@ -9057,14 +8915,14 @@ stAs y0 y1 =
     StAs y0 y1
 
 
-{-| Specify the data field that determines the stack heights in a stack transform.
+{-| Field that determines the stack heights in a stack transform.
 -}
 stField : Field -> StackProperty
 stField =
     StField
 
 
-{-| Specify a grouping of fields with which to partition data into separate stacks
+{-| Grouping of fields with which to partition data into separate stacks
 in a stack transform.
 -}
 stGroupBy : List Field -> StackProperty
@@ -9072,56 +8930,56 @@ stGroupBy =
     StGroupBy
 
 
-{-| Specify the baseline offset used in a stack transform.
+{-| Baseline offset used in a stack transform.
 -}
 stOffset : StackOffset -> StackProperty
 stOffset =
     StOffset
 
 
-{-| Specify a string literal.
+{-| A string literal.
 -}
 str : String -> Str
 str =
     Str
 
 
-{-| Specify an expression that when evaluated, is a string.
+{-| Expression that when evaluated, is a string.
 -}
 strExpr : Expr -> Str
 strExpr =
     StrExpr
 
 
-{-| Specify a list of potentially mixed string types (e.g. literals and signals).
+{-| List of potentially mixed string types (e.g. literals and signals).
 -}
 strList : List Str -> Str
 strList =
     StrList
 
 
-{-| Specify an absence of a string value.
+{-| An absence of a string value.
 -}
 strNull : Str
 strNull =
     StrNull
 
 
-{-| Specify a list of string literals.
+{-| A list of string literals.
 -}
 strs : List String -> Str
 strs =
     Strs
 
 
-{-| Specify the name of a signal that will generate a string value.
+{-| String value referenced by the value in the named signal.
 -}
 strSignal : String -> Str
 strSignal =
     StrSignal
 
 
-{-| Specify a list of signals that will generate string values.
+{-| String values referenced by the values in the named signals.
 -}
 strSignals : List String -> Str
 strSignals =
@@ -9137,19 +8995,15 @@ type StrokeCap
     | StrokeCapSignal String
 
 
-{-| Specify a type of stroke cap with a given signal. Valid values generated by
-the signal are the strings `butt`, `round` and `square`.
+{-| Stroke cap (`butt`, `round` and `square`) referenced by the value in the
+named signal.
 -}
 strokeCapSignal : String -> StrokeCap
 strokeCapSignal =
     StrokeCapSignal
 
 
-{-| A convenience function for generating a value representing a given
-stroke cap type.
-
-    signal "strokeCap" [ siValue (strokeCapValue CRound) ]
-
+{-| Convenience function for generating a value representing a given stroke cap type.
 -}
 strokeCapValue : StrokeCap -> Value
 strokeCapValue cap =
@@ -9176,20 +9030,17 @@ type StrokeJoin
     | StrokeJoinSignal String
 
 
-{-| Specify a type of stroke join with a given signal. Valid values generated by
-the signal are the strings `miter`, `round` and `bevel`.
+{-| Stroke join (`miter`, `round` or `bevel`) referenced by the value in the
+named signal.
 -}
 strokeJoinSignal : String -> StrokeJoin
 strokeJoinSignal =
     StrokeJoinSignal
 
 
-{-| A convenience function for generating a text string representing a given
-stroke join type. This can be used instead of specifying an stroke join type
+{-| Convenience function for generating a text string representing a given
+stroke join type. Used instead of specifying an stroke join type
 as a literal string to avoid problems of mistyping its name.
-
-    signal "strokeJoin" [ siValue (strokeJoinValue JBevel) ]
-
 -}
 strokeJoinValue : StrokeJoin -> Value
 strokeJoinValue jn =
@@ -9207,14 +9058,14 @@ strokeJoinValue jn =
             vSignal sig
 
 
-{-| Specify the criteria for sorting values in a stack transform.
+{-| Criteria for sorting values in a stack transform.
 -}
 stSort : List ( Field, Order ) -> StackProperty
 stSort =
     StSort
 
 
-{-| Identifies a type of symbol.
+{-| Symbol type.
 -}
 type Symbol
     = SymCircle
@@ -9229,33 +9080,29 @@ type Symbol
     | SymbolSignal String
 
 
-{-| Specify a type of symbol from a signal with the given name. Valid values
-generated by the signal are the strings `circle`, `square`, `cross` etc.
+{-| Symbol type referenced by the value in the named signal.
 -}
 symbolSignal : String -> Symbol
 symbolSignal =
     SymbolSignal
 
 
-{-| A convenience function for generating a value representing a given symbol type.
-
-    maShape [ symbolValue SymTriangleDown ]
-
+{-| Convenience function for generating a value representing a given symbol type.
 -}
 symbolValue : Symbol -> Value
 symbolValue sym =
     vStr (symbolLabel sym)
 
 
-{-| Specify a custom symbol shape as an
-[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
+{-| [SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
+to define a custom symbol shape.
 -}
 symPath : String -> Symbol
 symPath =
     SymPath
 
 
-{-| Specify the output field names within which to write the results of a tree
+{-| Output field names within which to write the results of a tree
 layout transform. The parameters represent the names to replace the defaults in
 the following order: `x`, `y`, `depth` and `children`.
 -}
@@ -9264,7 +9111,7 @@ teAs =
     TeAs
 
 
-{-| Specify the data corresponding to a numeric value to be associated with nodes
+{-| Data corresponding to a numeric value to be associated with nodes
 in a tree transform.
 -}
 teField : Field -> TreeProperty
@@ -9272,14 +9119,14 @@ teField =
     TeField
 
 
-{-| Specify layout method used in a tree transform.
+{-| Layout method used in a tree transform.
 -}
 teMethod : TreeMethod -> TreeProperty
 teMethod =
     TeMethod
 
 
-{-| Specify the size of each node in a tree layout as a two-element [width,height]
+{-| Size of each node in a tree layout as a two-element [width,height]
 list (or a signal that generates such a list).
 -}
 teNodeSize : Num -> TreeProperty
@@ -9287,7 +9134,7 @@ teNodeSize =
     TeNodeSize
 
 
-{-| Specify the size of of a tree layout as a two-element [width,height] list
+{-| Size of of a tree layout as a two-element [width,height] list
 (or a signal that generates such a list).
 -}
 teSize : Num -> TreeProperty
@@ -9295,15 +9142,14 @@ teSize =
     TeSize
 
 
-{-| Specify how sorting of sibling nodes is performed as part of a tree layout
-transform.
+{-| Sorting properties of sibling nodes in a tree layout transform.
 -}
 teSort : List ( Field, Order ) -> TreeProperty
 teSort =
     TeSort
 
 
-{-| Direction text is rendered. This determines which end of a text string is
+{-| Text render direction. This determines which end of a text string is
 truncated if it cannot be displayed within a restricted space.
 -}
 type TextDirection
@@ -9312,25 +9158,14 @@ type TextDirection
     | TextDirectionSignal String
 
 
-{-| Specify a text direction rendering with a given signal. Valid values generated
-by the signal are the strings `ltr` and `rtl` .
+{-| Text direction (`ltr` or `rtl`) referenced by the value in the named signal.
 -}
 textDirectionSignal : String -> TextDirection
 textDirectionSignal =
     TextDirectionSignal
 
 
-{-| Create a text direction value. For example,
-
-      << mark Text
-          [ mFrom [ srData (str "table") ]
-          , mEncode
-              [ enEnter
-                  [ maText [ vField (field "date") ]
-                  , maDir [ textDirectionValue RightToLeft ]
-                  ]
-          ]
-
+{-| Create a text direction value.
 -}
 textDirectionValue : TextDirection -> Value
 textDirectionValue dir =
@@ -9345,19 +9180,18 @@ textDirectionValue dir =
             vSignal sig
 
 
-{-| Specify an expression that evaluates to data objects to insert as triggers.
-A trigger enables dynamic updates to a visualization. Insert operations are only
-applicable to data sets, not marks.
+{-| Expression that evaluates to data objects to insert as triggers. Insert
+operations are only applicable to datasets, not marks.
 -}
 tgInsert : String -> TriggerProperty
 tgInsert =
     TgInsert
 
 
-{-| Specify a data or mark modification trigger. The first parameter is an
-expression that evaluates to data objects to modify and the second parameter an
-expression that evaluates to an object of name-value pairs, indicating the field
-values that should be updated. For example:
+{-| Data or mark modification trigger. The first parameter is an
+expression that evaluates to data objects to modify and the second an expression
+that evaluates to an object of name-value pairs, indicating the field values that
+should be updated.
 
     mark Symbol
         [ mFrom [ srData (str "countries") ]
@@ -9375,9 +9209,8 @@ tgModifyValues =
     TgModifyValues
 
 
-{-| Specify an expression that evaluates to data objects to remove.
-A trigger enables dynamic updates to a visualization. Remove operations are only
-applicable to data sets, not marks.
+{-| Expression that evaluates to data objects to remove. Remove operations are only
+applicable to datasets, not marks.
 -}
 tgRemove : String -> TriggerProperty
 tgRemove =
@@ -9391,16 +9224,16 @@ tgRemoveAll =
     TgRemoveAll
 
 
-{-| Specify an expression that evaluates to data objects to toggle. Toggled
+{-| Expression that evaluates to data objects to toggle. Toggled
 objects are inserted or removed depending on whether they are already in the
-data set. Applicable only to data sets, not marks.
+dataset. Applicable only to datasets, not marks.
 -}
 tgToggle : String -> TriggerProperty
 tgToggle =
     TgToggle
 
 
-{-| Specify the horizontal alignment of a title. If specified this will override
+{-| Horizontal alignment of a title. If specified this will override
 the [tiAnchor](#tiAnchor) setting (useful when aligning rotated title text).
 -}
 tiAlign : HAlign -> TitleProperty
@@ -9408,35 +9241,35 @@ tiAlign =
     TAlign
 
 
-{-| Specify the anchor positioning of a title. Used for aligning title text.
+{-| Anchor positioning of a title. Used for aligning title text.
 -}
 tiAnchor : Anchor -> TitleProperty
 tiAnchor =
     TAnchor
 
 
-{-| Specify the angle in degrees of a title.
+{-| Angle in degrees of a title.
 -}
 tiAngle : Num -> TitleProperty
 tiAngle =
     TAngle
 
 
-{-| Specify the vertical title text baseline.
+{-| Vertical title text baseline.
 -}
 tiBaseline : VAlign -> TitleProperty
 tiBaseline =
     TBaseline
 
 
-{-| Specify the color of a title.
+{-| Color of a title.
 -}
 tiColor : Str -> TitleProperty
 tiColor =
     TColor
 
 
-{-| Specify optional mark encodings for custom title styling. This is a standard
+{-| Mark encodings for custom title styling. This is a standard
 encoding for text marks and may contain `enEnter`, `enUpdate`, `enExit` and
 `enHover` specifications.
 -}
@@ -9445,21 +9278,21 @@ tiEncode =
     TEncode
 
 
-{-| Specify the font name of a title.
+{-| Font name of a title.
 -}
 tiFont : Str -> TitleProperty
 tiFont =
     TFont
 
 
-{-| Specify the font size of a title.
+{-| Font size of a title.
 -}
 tiFontSize : Num -> TitleProperty
 tiFontSize =
     TFontSize
 
 
-{-| Specify the font weight of a title (can be a number such as `vnum 300` or text
+{-| Font weight of a title (can be a number such as `vnum 300` or text
 such as `vStr "bold"`).
 -}
 tiFontWeight : Value -> TitleProperty
@@ -9467,14 +9300,14 @@ tiFontWeight =
     TFontWeight
 
 
-{-| Specify the reference frame for the anchor position of a title.
+{-| Reference frame for the anchor position of a title.
 -}
 tiFrame : TitleFrame -> TitleProperty
 tiFrame =
     TFrame
 
 
-{-| Specify whether or not a title's properties should respond to input events
+{-| Whether or not a title's properties should respond to input events
 such as mouse hover.
 -}
 tiInteractive : Boo -> TitleProperty
@@ -9482,15 +9315,14 @@ tiInteractive =
     TInteractive
 
 
-{-| Specify the maximim allowed length of a title in pixels.
+{-| Maximim allowed length of a title in pixels.
 -}
 tiLimit : Num -> TitleProperty
 tiLimit =
     TLimit
 
 
-{-| Describes a unit of time. Useful for encoding and transformations. See the
-[Vega scale documentation](https://vega.github.io/vega/docs/scales/#quantitative).
+{-| Unit of time. Useful for encoding and transformations.
 -}
 type TimeUnit
     = Year
@@ -9504,14 +9336,14 @@ type TimeUnit
     | TimeUnitSignal String
 
 
-{-| Specify the name of a signal that will generate time unit.
+{-| Time unit referenced by the value in the named signal.
 -}
 timeUnitSignal : String -> TimeUnit
 timeUnitSignal =
     TimeUnitSignal
 
 
-{-| Specify a mark name to apply to a title text mark. This name can be used to
+{-| Mark name to apply to a title text mark. This name can be used to
 refer to the title mark with an
 [event stream definition](https://vega.github.io/vega/docs/event-streams/).
 -}
@@ -9520,7 +9352,7 @@ tiName =
     TName
 
 
-{-| Specify the orthogonal offset in pixels by which to displace the title from
+{-| Orthogonal offset in pixels by which to displace the title from
 its position along the edge of the chart.
 -}
 tiOffset : Num -> TitleProperty
@@ -9528,14 +9360,14 @@ tiOffset =
     TOffset
 
 
-{-| Specify the positioning of a title relative to the chart.
+{-| Position a title relative to the chart.
 -}
 tiOrient : Side -> TitleProperty
 tiOrient =
     TOrient
 
 
-{-| Specify a mark style property to apply to the title text mark. If not
+{-| Mark style property to apply to the title text mark. If not
 specified the default style of `group-title` is used.
 -}
 tiStyle : Str -> TitleProperty
@@ -9543,7 +9375,7 @@ tiStyle =
     TStyle
 
 
-{-| Specify the top-level title to be displayed as part of a visualization.
+{-| Top-level title to be displayed as part of a visualization.
 The first paramter is the text of the title to display, the second any optional
 properties for customising the title's appearance.
 -}
@@ -9552,9 +9384,8 @@ title s tps =
     ( VTitle, JE.object (List.map titleProperty (TText s :: tps)) )
 
 
-{-| Indicate the way a title anchor position is calculated. `FrBounds` implies
-text anchor is relative to the full bounding box whereas `FrGroup` implies it is
-relative to the group width/height.
+{-| Title anchor position calculation. `FrBounds` implies text anchor is relative
+to the full bounding box; `FrGroup` implies it is relative to the group width/height.
 -}
 type TitleFrame
     = FrBounds
@@ -9562,15 +9393,15 @@ type TitleFrame
     | TitleFrameSignal String
 
 
-{-| Specify a title anchor positioning rule with a given signal. Valid values
-generated by the signal should be either `bounds` or `group`.
+{-| Title anchor calcuation type (`bounds` or `group`) referenced by the value in
+the named signal.
 -}
 titleFrameSignal : String -> TitleFrame
 titleFrameSignal =
     TitleFrameSignal
 
 
-{-| Specify a z-index indicating the layering of the title group relative to
+{-| z-index indicating the layering of the title group relative to
 other axis, mark and legend groups.
 -}
 tiZIndex : Num -> TitleProperty
@@ -9578,7 +9409,7 @@ tiZIndex =
     TZIndex
 
 
-{-| Specify the output field names for the output of a treemap layout transform.
+{-| Output field names for the output of a treemap layout transform.
 The parameters correspond to the (default name) fields `x0`, `y0`, `x1`, `y1`,
 `depth` and `children`.
 -}
@@ -9587,7 +9418,7 @@ tmAs =
     TmAs
 
 
-{-| Specify the data field corresponding to a numeric value for a treemap node.
+{-| Field corresponding to a numeric value for a treemap node.
 The sum of values for a node and all its descendants is available on the node object
 as the `value` property. This field determines the size of a node.
 -}
@@ -9596,21 +9427,21 @@ tmField =
     TmField
 
 
-{-| Specify the layout method to use in a treemap transform.
+{-| Layout method to use in a treemap transform.
 -}
 tmMethod : TreemapMethod -> TreemapProperty
 tmMethod =
     TmMethod
 
 
-{-| Specify the inner and outer padding values for a treemap layout transform.
+{-| Inner and outer padding values for a treemap layout transform.
 -}
 tmPadding : Num -> TreemapProperty
 tmPadding =
     TmPadding
 
 
-{-| Specify the padding between the bottom edge of a node and its children in a treemap
+{-| Padding between the bottom edge of a node and its children in a treemap
 layout transform.
 -}
 tmPaddingBottom : Num -> TreemapProperty
@@ -9618,14 +9449,14 @@ tmPaddingBottom =
     TmPaddingBottom
 
 
-{-| Specify the inner padding values for a treemap layout transform.
+{-| Inner padding values for a treemap layout transform.
 -}
 tmPaddingInner : Num -> TreemapProperty
 tmPaddingInner =
     TmPaddingInner
 
 
-{-| Specify the padding between the left edge of a node and its children in a treemap
+{-| Padding between the left edge of a node and its children in a treemap
 layout transform.
 -}
 tmPaddingLeft : Num -> TreemapProperty
@@ -9633,14 +9464,14 @@ tmPaddingLeft =
     TmPaddingLeft
 
 
-{-| Specify the outer padding values for a treemap layout transform.
+{-| Outer padding values for a treemap layout transform.
 -}
 tmPaddingOuter : Num -> TreemapProperty
 tmPaddingOuter =
     TmPaddingOuter
 
 
-{-| Specify the padding between the right edge of a node and its children in a treemap
+{-| Padding between the right edge of a node and its children in a treemap
 layout transform.
 -}
 tmPaddingRight : Num -> TreemapProperty
@@ -9648,7 +9479,7 @@ tmPaddingRight =
     TmPaddingRight
 
 
-{-| Specify the padding between the top edge of a node and its children in a treemap
+{-| Padding between the top edge of a node and its children in a treemap
 layout transform.
 -}
 tmPaddingTop : Num -> TreemapProperty
@@ -9656,7 +9487,7 @@ tmPaddingTop =
     TmPaddingTop
 
 
-{-| Specify the target aspect ratio for the `Squarify` or `Resquarify` treemap layout
+{-| Target aspect ratio for the `Squarify` or `Resquarify` treemap layout
 trqnsformations. The default is the golden ratio, φ = (1 + sqrt(5)) / 2.
 -}
 tmRatio : Num -> TreemapProperty
@@ -9664,7 +9495,7 @@ tmRatio =
     TmRatio
 
 
-{-| Specify whether or not node layout values should be rounded in a treemap transform.
+{-| Whether or not node layout values should be rounded in a treemap transform.
 The default is false.
 -}
 tmRound : Boo -> TreemapProperty
@@ -9672,7 +9503,7 @@ tmRound =
     TmRound
 
 
-{-| Specify the size of a treemap layout as two-element list (or signal) corresponding
+{-| Size of a treemap layout as two-element list (or signal) corresponding
 to [width, height].
 -}
 tmSize : Num -> TreemapProperty
@@ -9680,23 +9511,22 @@ tmSize =
     TmSize
 
 
-{-| Specify how sorting of sibling nodes is performed during a treemap layout
-transform.
+{-| Sorting properties of sibling nodes is in a treemap layout transform.
 -}
 tmSort : List ( Field, Order ) -> TreemapProperty
 tmSort =
     TmSort
 
 
-{-| Specify a topoJSON feature format. The first parameter is the name of the
-featyre object set to extract.
+{-| TopoJSON feature format. The first parameter is the name of the feature object
+set to extract.
 -}
 topojsonFeature : Str -> FormatProperty
 topojsonFeature =
     TopojsonFeature
 
 
-{-| Specify a named property to extract from topoJSON file. Unlike
+{-| Named property to extract from topoJSON file. Unlike
 [topojsonFeature](#topojsonFeature), geo data are returned as a single unified
 mesh instance, not as individual GeoJSON features.
 -}
@@ -9864,7 +9694,7 @@ trCrossFilter =
 
 {-| Perform a crossfilter transform. This version can be used with
 [trResolvefilter](#trResolveFilter) to enable fast interactive querying over large
-data sets. The final parameter is the name of a new signal with which to bind the
+datasets. The final parameter is the name of a new signal with which to bind the
 results of the filter (which can then be referenced by [trResolveFilter](#trResolveFilter)).
 -}
 trCrossFilterAsSignal : List ( Field, Num ) -> String -> Transform
@@ -9894,9 +9724,7 @@ type TreemapMethod
     | TreemapMethodSignal String
 
 
-{-| Specify a treemap layout method type is to be determined by a named signal.
-The signal should generate the one of `squarify`, `resquarify`, `binary`, `dice`,
-`slice` or `slicedice`.
+{-| Treemap layout method referenced by the value in the named signal.
 -}
 treemapMethodSignal : String -> TreemapMethod
 treemapMethodSignal =
@@ -9911,8 +9739,7 @@ type TreeMethod
     | TreeMethodSignal String
 
 
-{-| Specify that a tree layout method is to be determined by a named signal.
-The signal should generate either `tidy` or `cluster`.
+{-| Tree layout method (`tidy` or `cluster`) referenced by the value in the named signal.
 -}
 treeMethodSignal : String -> TreeMethod
 treeMethodSignal =
@@ -10103,8 +9930,8 @@ trImpute =
 
 
 {-| Group and summarize an input data stream in a similar way to [trAggregate](#trAggregate)
-but which is then joined back to the input stream. This can be helpful for creating
-derived values that combine both raw data and aggregate calculations, such as percentages
+but which is then joined back to the input stream. Helpful for creating derived
+values that combine both raw data and aggregate calculations, such as percentages
 of group totals.
 -}
 trJoinAggregate : List JoinAggregateProperty -> Transform
@@ -10112,9 +9939,8 @@ trJoinAggregate =
     TJoinAggregate
 
 
-{-| Route a visual link between two nodes, for example to draw edges in a tree or
-network layout. Writes one property to each datum, providing an SVG path string
-for the link path.
+{-| Route a visual link between two nodes to draw edges in a tree or network layout.
+Writes one property to each datum, providing an SVG path string for the link path.
 -}
 trLinkPath : List LinkPathProperty -> Transform
 trLinkPath =
@@ -10220,8 +10046,8 @@ trSample =
 the end value is less than the start value, the third parameter should be negative.
 The resulting output field will be called `data`.
 
-Sequences can be used to feed other transforms to generate data, for example to
-create random (x,y) coordinates:
+Sequences can be used to feed other transforms to generate data to create random
+(x,y) coordinates:
 
     dataSource
         [ data "randomData" []
@@ -10294,7 +10120,7 @@ trTreemap =
     TTreemap
 
 
-{-| Specify a Boolean true value.
+{-| A Boolean true value.
 -}
 true : Boo
 true =
@@ -10357,8 +10183,7 @@ type VAlign
     | VAlignSignal String
 
 
-{-| Specify the vertical alignment of some text based on the value of the
-named signal.
+{-| Vertical text alignment referenced by the value in the named signal.
 -}
 vAlignSignal : String -> VAlign
 vAlignSignal =
@@ -10372,7 +10197,7 @@ vAlphabetic =
     vStr "alphabetic"
 
 
-{-| Specify a band number or fraction of a band number. Band scales are used when
+{-| Band number or fraction of a band number. Band scales are used when
 aggregating data into discrete categories such as in a frequency histogram.
 -}
 vBand : Num -> Value
@@ -10380,7 +10205,7 @@ vBand =
     VBand
 
 
-{-| Specify a list of Boolean values.
+{-| A list of Boolean values.
 -}
 vBoos : List Bool -> Value
 vBoos =
@@ -10394,28 +10219,28 @@ vBottom =
     vStr "bottom"
 
 
-{-| Specify a color value.
+{-| A color value.
 -}
 vColor : ColorValue -> Value
 vColor =
     VColor
 
 
-{-| Specify an exponential value modifier.
+{-| An exponential value modifier.
 -}
 vExponent : Value -> Value
 vExponent =
     VExponent
 
 
-{-| Specify a 'false' value.
+{-| A 'false' value.
 -}
 vFalse : Value
 vFalse =
     VBoo False
 
 
-{-| Specify a data or signal field.
+{-| A data or signal field.
 -}
 vField : Field -> Value
 vField =
@@ -10429,50 +10254,50 @@ vMiddle =
     vStr "middle"
 
 
-{-| Specify a multiplication value modifier.
+{-| A multiplication value modifier.
 -}
 vMultiply : Value -> Value
 vMultiply =
     VMultiply
 
 
-{-| Specify a absence of a value.
+{-| An absence of a value.
 -}
 vNull : Value
 vNull =
     VNull
 
 
-{-| Specify a numeric value.
+{-| A numeric value.
 -}
 vNum : Float -> Value
 vNum =
     VNum
 
 
-{-| Specify a list of numbers.
+{-| A list of numbers.
 -}
 vNums : List Float -> Value
 vNums =
     VNums
 
 
-{-| Specify the name of the output field of a voronoi transform. If not specified,
-the default is `path`.
+{-| Name of the output field of a voronoi transform. If not specified, the default
+is `path`.
 -}
 voAs : String -> VoronoiProperty
 voAs =
     VoAs
 
 
-{-| Specify an object containing a list of [key-value](#keyValue) pairs.
+{-| Object containing a list of [key-value](#keyValue) pairs.
 -}
 vObject : List Value -> Value
 vObject =
     VObject
 
 
-{-| Specify the extent of the voronoi cells in a voronoi transform. The two parameters
+{-| Extent of the voronoi cells in a voronoi transform. The two parameters
 should each evaluate to a list of two numbers representing the coordinates of the
 top-left and bottom-right of the extent respectively.
 -}
@@ -10481,14 +10306,14 @@ voExtent =
     VoExtent
 
 
-{-| Specify an additive value modifier.
+{-| An additive value modifier.
 -}
 vOffset : Value -> Value
 vOffset =
     VOffset
 
 
-{-| Specify extent of the voronoi cells in a voronoi transform. The single parameter
+{-| Extent of the voronoi cells in a voronoi transform. The single parameter
 should evaluate to a list of two numbers representing the bottom-right of the extent.
 The top-left is assumed to be [0,0].
 -}
@@ -10564,42 +10389,42 @@ type VProperty
     | VEncode
 
 
-{-| Specify a rounding value modifier. Rounding is applied after all other modifiers.
+{-| A rounding value modifier. Rounding is applied after all other modifiers.
 -}
 vRound : Boo -> Value
 vRound =
     VRound
 
 
-{-| Specify the name of a scale.
+{-| Name of a scale.
 -}
 vScale : String -> Value
 vScale s =
     VScale (field s)
 
 
-{-| Specify a scale field used to dynamically look up a scale name.
+{-| A scale field used to dynamically look up a scale name.
 -}
 vScaleField : Field -> Value
 vScaleField =
     VScale
 
 
-{-| Specify a named signal.
+{-| A named signal.
 -}
 vSignal : String -> Value
 vSignal =
     VSignal
 
 
-{-| Specify a string value.
+{-| A string value.
 -}
 vStr : String -> Value
 vStr =
     VStr
 
 
-{-| Specify a list of string values.
+{-| A list of string values.
 -}
 vStrs : List String -> Value
 vStrs =
@@ -10613,21 +10438,21 @@ vTop =
     vStr "top"
 
 
-{-| Specify a 'true' value.
+{-| A 'true' value.
 -}
 vTrue : Value
 vTrue =
     VBoo True
 
 
-{-| Specify a list of values. Used for nesting collections of possibly mixed types.
+{-| List of values. Useful for nesting collections of possibly mixed types.
 -}
 vValues : List Value -> Value
 vValues =
     Values
 
 
-{-| Specify the output fields created by a word cloud transform. The parameters
+{-| Name output fields created by a word cloud transform. The parameters
 map to the following default values: `x`, `y`, `font`, `fontSize`, `fontStyle`,
 `fontWeight` and `angle`.
 -}
@@ -10636,22 +10461,22 @@ wcAs =
     WcAs
 
 
-{-| Specify the font family to use for a word in a wordcloud.
+{-| Font family to use for a word in a wordcloud.
 -}
 wcFont : Str -> WordcloudProperty
 wcFont =
     WcFont
 
 
-{-| Specify the font size to use for a word in a wordcloud.
+{-| Font size to use for a word in a wordcloud.
 -}
 wcFontSize : Num -> WordcloudProperty
 wcFontSize =
     WcFontSize
 
 
-{-| Specify the font size range to use for words in a wordcloud. The parameter should
-resolve to a two-element list [min,max]. The size of words in a wordcloud will be
+{-| Font size range to use for words in a wordcloud. The parameter should
+resolve to a two-element list [min, max]. The size of words in a wordcloud will be
 scaled to lie in the given range according to the square root scale.
 -}
 wcFontSizeRange : Num -> WordcloudProperty
@@ -10659,35 +10484,35 @@ wcFontSizeRange =
     WcFontSizeRange
 
 
-{-| Specify the font style to use for words in a wordcloud.
+{-| Font style to use for words in a wordcloud.
 -}
 wcFontStyle : Str -> WordcloudProperty
 wcFontStyle =
     WcFontStyle
 
 
-{-| Specify the font weights to use for words in a wordcloud.
+{-| Font weights to use for words in a wordcloud.
 -}
 wcFontWeight : Str -> WordcloudProperty
 wcFontWeight =
     WcFontWeight
 
 
-{-| Specify the padding, in pixels, to be placed around words in a wordcloud.
+{-| Padding, in pixels, to be placed around words in a wordcloud.
 -}
 wcPadding : Num -> WordcloudProperty
 wcPadding =
     WcPadding
 
 
-{-| Specify the angle in degrees of words in a wordcloud layout.
+{-| Angle in degrees of words in a wordcloud layout.
 -}
 wcRotate : Num -> WordcloudProperty
 wcRotate =
     WcRotate
 
 
-{-| Specify size of layout created by a wordcloud transform. The parameter should
+{-| Size of layout created by a wordcloud transform. The parameter should
 resolve to a two-element list [width, height] in pixels.
 -}
 wcSize : Num -> WordcloudProperty
@@ -10695,14 +10520,14 @@ wcSize =
     WcSize
 
 
-{-| Specify spiral layout method for a wordcloud transform.
+{-| Spiral layout method for a wordcloud transform.
 -}
 wcSpiral : Spiral -> WordcloudProperty
 wcSpiral =
     WcSpiral
 
 
-{-| Specify data field with the input word text for a wordcloud transform.
+{-| Data field with the input word text for a wordcloud transform.
 -}
 wcText : Field -> WordcloudProperty
 wcText =
@@ -10725,7 +10550,7 @@ width w =
     ( VWidth, JE.float w )
 
 
-{-| Specify an aggregate operation to be applied during a window transformation.
+{-| Aggregate operation to be applied during a window transformation.
 This version is suitable for operations without parameters (e.g. `RowNumber`) and
 that are not applied to a specific field.
 
@@ -10745,7 +10570,7 @@ wnAggOperation op inField outFieldName =
     WnAggOperation op Nothing inField outFieldName
 
 
-{-| Specify a window-specific operation to be applied during a window transformation.
+{-| Window-specific operation to be applied during a window transformation.
 This version is suitable for operations without parameters (e.g. `RowNumber`) and
 that are not applied to a specific field.
 
@@ -10763,7 +10588,7 @@ wnOperation op outField =
     WnOperation op Nothing Nothing outField
 
 
-{-| Specify a window-specific operation to be applied during a window transformation.
+{-| Window-specific operation to be applied during a window transformation.
 This version is suitable for operations that have a parameter (e.g. `Lag` or `Lead`)
 and/or operations that require a specific field as input (e.g. `LastValue`).
 The parameters are in order: the type of operation, a possible operation parameter,
@@ -10785,17 +10610,17 @@ wnOperationOn =
     WnOperation
 
 
-{-| Specify a two-element list indicating how the sliding window should proceed
-during a window transform. The list entries should either be a number indicating
-the offset from the current data object, or `NumNull` to indicate unbounded rows
-preceding or following the current data object.
+{-| Two-element list indicating how a sliding window should proceed during a window
+transform. The list entries should either be a number indicating the offset from
+the current data object, or `NumNull` to indicate unbounded rows preceding or
+following the current data object.
 -}
 wnFrame : Num -> WindowProperty
 wnFrame =
     WnFrame
 
 
-{-| Specify the data fields by which to partition data objects into separate windows
+{-| Data fields by which to partition data objects into separate windows
 during a window transform. If not specified, a single group containing all data
 objects will be used.
 -}
@@ -10804,7 +10629,7 @@ wnGroupBy =
     WnGroupBy
 
 
-{-| Specify whether or not a sliding frame in a window transform should ignore
+{-| Whether or not a sliding frame in a window transform should ignore
 peer values.
 -}
 wnIgnorePeers : Boo -> WindowProperty
@@ -10812,7 +10637,7 @@ wnIgnorePeers =
     WnIgnorePeers
 
 
-{-| Specify how sorting data objects is applied within a window transform.
+{-| Indicate how sorting data objects is applied within a window transform.
 
     transform
         [ trWindow [ wnOperation RowNumber "order" ]
@@ -10846,9 +10671,8 @@ type WOperation
     | WOperationSignal String
 
 
-{-| Specify that a window operation is to be determined by a named signal. The
-signal should generate the name of a valid operation (e.g. `dense_rank`).
-For names of valid window operations see the
+{-| Window operation referenced by the value in the named signal. For names of
+valid window operations see the
 [Vega window operation documentation](https://vega.github.io/vega/docs/transforms/window/#ops)
 -}
 wOperationSignal : String -> WOperation
