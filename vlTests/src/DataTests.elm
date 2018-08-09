@@ -394,9 +394,27 @@ sample1 =
     toVegaLite [ data, hConcat [ spec1, spec2 ] ]
 
 
+bin1 : Spec
+bin1 =
+    let
+        data =
+            dataFromColumns []
+                << dataColumn "bin_start" (nums [ 8, 10, 12, 14, 16, 18, 20, 22 ])
+                << dataColumn "bin_end" (nums [ 10, 12, 14, 16, 18, 20, 22, 24 ])
+                << dataColumn "count" (nums [ 7, 29, 71, 127, 94, 54, 17, 5 ])
+
+        enc =
+            encoding
+                << position X [ pName "bin_start", pMType Quantitative, pBinned, pAxis [ axTickStep 2 ] ]
+                << position X2 [ pName "bin_end", pMType Quantitative ]
+                << position Y [ pName "count", pMType Quantitative ]
+    in
+    toVegaLite [ data [], enc [], bar [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    sample1
+    bin1
 
 
 
@@ -432,6 +450,7 @@ mySpecs =
         , ( "impute7", impute7 )
         , ( "impute8", impute8 )
         , ( "sample1", sample1 )
+        , ( "bin1", bin1 )
         ]
 
 

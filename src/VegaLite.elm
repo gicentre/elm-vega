@@ -102,11 +102,26 @@ module VegaLite
         , area
         , asSpec
         , autosize
+        , axBandPosition
         , axDates
         , axDomain
+        , axDomainColor
+        , axDomainOpacity
+        , axDomainWidth
         , axFormat
         , axGrid
+        , axLabelAlign
         , axLabelAngle
+        , axLabelBaseline
+        , axLabelBound
+        , axLabelColor
+        , axLabelFlush
+        , axLabelFlushOffset
+        , axLabelFont
+        , axLabelFontSize
+        , axLabelFontWeight
+        , axLabelLimit
+        , axLabelOpacity
         , axLabelOverlap
         , axLabelPadding
         , axLabels
@@ -115,14 +130,29 @@ module VegaLite
         , axOffset
         , axOrient
         , axPosition
+        , axTickColor
         , axTickCount
+        , axTickExtra
+        , axTickOffset
+        , axTickOpacity
+        , axTickRound
         , axTickSize
+        , axTickStep
+        , axTickWidth
         , axTicks
         , axTitle
         , axTitleAlign
         , axTitleAngle
-        , axTitleMaxLength
+        , axTitleBaseline
+        , axTitleColor
+        , axTitleFont
+        , axTitleFontSize
+        , axTitleFontWeight
+        , axTitleLimit
+        , axTitleOpacity
         , axTitlePadding
+        , axTitleX
+        , axTitleY
         , axValues
         , axZIndex
         , axcoBandPosition
@@ -158,7 +188,6 @@ module VegaLite
         , axcoTitleFontSize
         , axcoTitleFontWeight
         , axcoTitleLimit
-        , axcoTitleMaxLength
         , axcoTitlePadding
         , axcoTitleX
         , axcoTitleY
@@ -308,6 +337,7 @@ module VegaLite
         , geoshape
         , hAggregate
         , hBin
+        , hBinned
         , hConcat
         , hDataCondition
         , hMType
@@ -418,6 +448,7 @@ module VegaLite
         , lookupAs
         , mAggregate
         , mBin
+        , mBinned
         , mBoo
         , mDataCondition
         , mImpute
@@ -502,6 +533,7 @@ module VegaLite
         , pAggregate
         , pAxis
         , pBin
+        , pBinned
         , pHeight
         , pImpute
         , pMType
@@ -633,6 +665,7 @@ module VegaLite
         , symbolPath
         , tAggregate
         , tBin
+        , tBinned
         , tDataCondition
         , tFormat
         , tMType
@@ -1052,6 +1085,7 @@ See the
 @docs pRepeat
 @docs pMType
 @docs pBin
+@docs pBinned
 @docs pTimeUnit
 @docs pTitle
 @docs pAggregate
@@ -1095,16 +1129,47 @@ See the
 @docs axOffset
 @docs axOrient
 @docs axPosition
-@docs axTicks
+
+@docs axBandPosition
+@docs axDates
+@docs axDomainColor
+@docs axDomainOpacity
+@docs axDomainWidth
+@docs axLabelAlign
+@docs axLabelBaseline
+@docs axLabelBound
+@docs axLabelColor
+@docs axLabelFlush
+@docs axLabelFlushOffset
+@docs axLabelFont
+@docs axLabelFontSize
+@docs axLabelFontWeight
+@docs axLabelLimit
+@docs axLabelOpacity
+@docs axTickColor
 @docs axTickCount
+@docs axTickExtra
+@docs axTickOffset
+@docs axTickOpacity
+@docs axTickRound
+@docs axTicks
 @docs axTickSize
+@docs axTickStep
+@docs axTickWidth
 @docs axTitle
 @docs axTitleAlign
 @docs axTitleAngle
-@docs axTitleMaxLength
+@docs axTitleBaseline
+@docs axTitleColor
+@docs axTitleFont
+@docs axTitleFontSize
+@docs axTitleFontWeight
+@docs axTitleLimit
+@docs axTitleOpacity
 @docs axTitlePadding
+@docs axTitleX
+@docs axTitleY
 @docs axValues
-@docs axDates
 @docs axZIndex
 
 
@@ -1136,6 +1201,7 @@ color or size.
 @docs mMType
 @docs mScale
 @docs mBin
+@docs mBinned
 @docs mImpute
 @docs mTimeUnit
 @docs mTitle
@@ -1181,6 +1247,7 @@ See the
 @docs tRepeat
 @docs tMType
 @docs tBin
+@docs tBinned
 @docs tAggregate
 @docs tTimeUnit
 @docs tTitle
@@ -1201,6 +1268,7 @@ other visual channels such as marks or texts. See the
 @docs hRepeat
 @docs hMType
 @docs hBin
+@docs hBinned
 @docs hAggregate
 @docs hTimeUnit
 @docs hStr
@@ -1606,7 +1674,6 @@ See the
 @docs axcoTitleFontWeight
 @docs axcoTitleFontSize
 @docs axcoTitleLimit
-@docs axcoTitleMaxLength
 @docs axcoTitlePadding
 @docs axcoTitleX
 @docs axcoTitleY
@@ -1882,8 +1949,7 @@ type Autosize
 [axcoTitleAngle](#axcoTitleAngle), [axcoTitleBaseline](#axcoTitleBaseline),
 [axcoTitleColor](#axcoTitleColor), [axcoTitleFont](#axcoTitleFont), [axcoTitleFontSize](#axcoTitleFontSize),
 [axcoTitleFontWeight](#axcoTitleFontWeight), [axcoTitleLimit](#axcoTitleLimit),
-[axcoTitleMaxLength](#axcoTitleMaxLength), [axcoTitlePadding](#axcoTitlePadding),
-[axcoTitleX](#axcoTitleX), [axcoTitleY](#axcoTitleY).
+[axcoTitlePadding](#axcoTitlePadding), [axcoTitleX](#axcoTitleX), [axcoTitleY](#axcoTitleY).
 -}
 type AxisConfig
     = BandPosition Float
@@ -1919,7 +1985,6 @@ type AxisConfig
     | TitleFontWeight FontWeight
     | TitleFontSize Float
     | TitleLimit Float
-    | TitleMaxLength Float
     | TitlePadding Float
     | TitleX Float
     | TitleY Float
@@ -2158,14 +2223,6 @@ axcoTitleLimit =
     TitleLimit
 
 
-{-| Specify a default axis title maximum length when generated automatically from
-a field's description.
--}
-axcoTitleMaxLength : Float -> AxisConfig
-axcoTitleMaxLength =
-    TitleMaxLength
-
-
 {-| Specify a default axis title padding between axis line and text.
 -}
 axcoTitlePadding : Float -> AxisConfig
@@ -2192,15 +2249,30 @@ axcoTitleY =
 [axLabels](#axLabels), [axMaxExtent](#axMaxExtent), [axMinExtent](#axMinExtent),
 [axOffset](#axOffset), [axOrient](#axOrient), [axPosition](#axPosition), [axTicks](#axTicks),
 [axTickCount](#axTickCount), [axTickSize](#axTickSize), [axTitle](#axTitle),
-[AxTitleAlign](#axTitleAlign), [axTitleAngle](#axTitleAngle), [axTitleMaxLength](#axTitleMaxLength),
+[AxTitleAlign](#axTitleAlign), [axTitleAngle](#axTitleAngle),
 [axTitlePadding](#axTitlePadding), [axValues](#axValues), [axDates](#axDates) and
 [axZIndex](#axZIndex).
 -}
 type AxisProperty
-    = AxDomain Bool
+    = AxBandPosition Float
+    | AxDomain Bool
+    | AxDomainColor String
+    | AxDomainOpacity Float
+    | AxDomainWidth Float
     | AxFormat String
     | AxGrid Bool
+    | AxLabelAlign HAlign
     | AxLabelAngle Float
+    | AxLabelBaseline VAlign
+    | AxLabelBound (Maybe Float)
+    | AxLabelColor String
+    | AxLabelFlush (Maybe Float)
+    | AxLabelFlushOffset Float
+    | AxLabelFont String
+    | AxLabelFontSize Float
+    | AxLabelFontWeight FontWeight
+    | AxLabelLimit Float
+    | AxLabelOpacity Float
     | AxLabelOverlap OverlapStrategy
     | AxLabelPadding Float
     | AxLabels Bool
@@ -2209,17 +2281,254 @@ type AxisProperty
     | AxOffset Float
     | AxOrient Side
     | AxPosition Float
-    | AxTicks Bool
+    | AxTickColor String
     | AxTickCount Int
+    | AxTickExtra Bool
+    | AxTickOffset Float
+    | AxTickOpacity Float
+    | AxTickRound Bool
+    | AxTicks Bool
     | AxTickSize Float
+    | AxTickStep Float
+    | AxTickWidth Float
     | AxTitle String
     | AxTitleAlign HAlign
     | AxTitleAngle Float
-    | AxTitleMaxLength Float
+    | AxTitleBaseline VAlign
+    | AxTitleColor String
+    | AxTitleFont String
+    | AxTitleFontSize Float
+    | AxTitleFontWeight FontWeight
+    | AxTitleLimit Float
+    | AxTitleOpacity Float
     | AxTitlePadding Float
+    | AxTitleX Float
+    | AxTitleY Float
     | AxValues (List Float)
     | AxDates (List (List DateTime))
     | AxZIndex Int
+
+
+{-| Position of axis tick relative to a band (0 to 1).
+-}
+axBandPosition : Float -> AxisProperty
+axBandPosition =
+    AxBandPosition
+
+
+{-| Color of axis domain line.
+-}
+axDomainColor : String -> AxisProperty
+axDomainColor =
+    AxDomainColor
+
+
+{-| Opacity of axis domain line.
+-}
+axDomainOpacity : Float -> AxisProperty
+axDomainOpacity =
+    AxDomainOpacity
+
+
+{-| Width of axis domain line.
+-}
+axDomainWidth : Float -> AxisProperty
+axDomainWidth =
+    AxDomainWidth
+
+
+{-| Horizontal alignment of axis tick labels.
+-}
+axLabelAlign : HAlign -> AxisProperty
+axLabelAlign =
+    AxLabelAlign
+
+
+{-| Vertical alignment of axis tick labels.
+-}
+axLabelBaseline : VAlign -> AxisProperty
+axLabelBaseline =
+    AxLabelBaseline
+
+
+{-| How or if labels should be hidden if they exceed the axis range. If
+`Nothing`, no check for label size is made. A number specifies the permitted
+overflow in pixels.
+-}
+axLabelBound : Maybe Float -> AxisProperty
+axLabelBound =
+    AxLabelBound
+
+
+{-| Color of axis tick label.
+-}
+axLabelColor : String -> AxisProperty
+axLabelColor =
+    AxLabelColor
+
+
+{-| How or if labels at beginning or end of the axis should be aligned. Specifies
+the distance threshold from an end-point within which labels are flush-adjusted
+or if `Nothing`, no flush-adjustment made.
+-}
+axLabelFlush : Maybe Float -> AxisProperty
+axLabelFlush =
+    AxLabelFlush
+
+
+{-| Number of pixels by which to offset flush-adjusted labels.
+-}
+axLabelFlushOffset : Float -> AxisProperty
+axLabelFlushOffset =
+    AxLabelFlushOffset
+
+
+{-| Font name of an axis label.
+-}
+axLabelFont : String -> AxisProperty
+axLabelFont =
+    AxLabelFont
+
+
+{-| Font size of an axis label.
+-}
+axLabelFontSize : Float -> AxisProperty
+axLabelFontSize =
+    AxLabelFontSize
+
+
+{-| Font weight of an axis label.
+-}
+axLabelFontWeight : FontWeight -> AxisProperty
+axLabelFontWeight =
+    AxLabelFontWeight
+
+
+{-| Maximum length in pixels of axis tick labels.
+-}
+axLabelLimit : Float -> AxisProperty
+axLabelLimit =
+    AxLabelLimit
+
+
+{-| Opacity of an axis label.
+-}
+axLabelOpacity : Float -> AxisProperty
+axLabelOpacity =
+    AxLabelOpacity
+
+
+{-| Color of axis ticks.
+-}
+axTickColor : String -> AxisProperty
+axTickColor =
+    AxTickColor
+
+
+{-| Whether or not an extra axis tick should be added for the initial position
+of an axis.
+-}
+axTickExtra : Bool -> AxisProperty
+axTickExtra =
+    AxTickExtra
+
+
+{-| Offset in pixels of an axis's ticks, labels and gridlines.
+-}
+axTickOffset : Float -> AxisProperty
+axTickOffset =
+    AxTickOffset
+
+
+{-| Opacity of axis ticks.
+-}
+axTickOpacity : Float -> AxisProperty
+axTickOpacity =
+    AxTickOpacity
+
+
+{-| Whether or not axis tick positions should be rounded to nearest integer.
+-}
+axTickRound : Bool -> AxisProperty
+axTickRound =
+    AxTickRound
+
+
+{-| Desired step size for ticks. Will generate corresponding tick count and values.
+-}
+axTickStep : Float -> AxisProperty
+axTickStep =
+    AxTickStep
+
+
+{-| Width of axis ticks.
+-}
+axTickWidth : Float -> AxisProperty
+axTickWidth =
+    AxTickWidth
+
+
+{-| Vertical alignment of axis title.
+-}
+axTitleBaseline : VAlign -> AxisProperty
+axTitleBaseline =
+    AxTitleBaseline
+
+
+{-| Color of axis title.
+-}
+axTitleColor : String -> AxisProperty
+axTitleColor =
+    AxTitleColor
+
+
+{-| Font name for an axis title.
+-}
+axTitleFont : String -> AxisProperty
+axTitleFont =
+    AxTitleFont
+
+
+{-| Font size for an axis title.
+-}
+axTitleFontSize : Float -> AxisProperty
+axTitleFontSize =
+    AxTitleFontSize
+
+
+{-| Font weight of an axis title.
+-}
+axTitleFontWeight : FontWeight -> AxisProperty
+axTitleFontWeight =
+    AxTitleFontWeight
+
+
+{-| Maximum length in pixels of axis title.
+-}
+axTitleLimit : Float -> AxisProperty
+axTitleLimit =
+    AxTitleLimit
+
+
+{-| Opacity of an axis title.
+-}
+axTitleOpacity : Float -> AxisProperty
+axTitleOpacity =
+    AxTitleOpacity
+
+
+{-| X position of an axis title relative to the axis group.
+-}
+axTitleX : Float -> AxisProperty
+axTitleX =
+    AxTitleX
+
+
+{-| Y position of an axis title relative to the axis group.
+-}
+axTitleY : Float -> AxisProperty
+axTitleY =
+    AxTitleY
 
 
 {-| Generated by [iRange](#iRange), [iCheckbox](#iCheckbox),
@@ -2244,8 +2553,8 @@ type Binding
     | IColor String (List InputProperty)
 
 
-{-| Generated by [biBase](#biBase), [biDivide](#biDivide),
-[biExtent](#biExtent), [biMaxBins](#biMaxBins), [biMinStep](#biMinStep), [biNice](#biNice),
+{-| Generated by [biBase](#biBase), [biDivide](#biDivide), [biExtent](#biExtent),
+[biMaxBins](#biMaxBins), [biMinStep](#biMinStep), [biNice](#biNice),
 [biStep](#biStep) and [biSteps](#biSteps).
 -}
 type BinProperty
@@ -2259,69 +2568,6 @@ type BinProperty
     | Steps (List Float)
 
 
-{-| Specify the number base to use for automatic bin determination (default is
-base 10).
--}
-biBase : Float -> BinProperty
-biBase =
-    Base
-
-
-{-| Specify the scale factors indicating allowable subdivisions for binning.
-The default value is [5, 2], which indicates that for base 10 numbers (the
-default base), binning will consider dividing bin sizes by 5 and/or 2.
--}
-biDivide : List Float -> BinProperty
-biDivide =
-    Divides
-
-
-{-| Specify the desired range of bin values when binning a collection of values.
-The first and second parameters indicate the minimum and maximum range values
-respectively.
--}
-biExtent : Float -> Float -> BinProperty
-biExtent =
-    Extent
-
-
-{-| Specify the maximum number of bins when binning a collection of values.
--}
-biMaxBins : Int -> BinProperty
-biMaxBins =
-    MaxBins
-
-
-{-| Specify the step size between bins when binning a collection of values.
--}
-biMinStep : Float -> BinProperty
-biMinStep =
-    MinStep
-
-
-{-| Specify whether or not binning boundaries use human-friendly values such as
-multiples of ten.
--}
-biNice : Bool -> BinProperty
-biNice =
-    Nice
-
-
-{-| Specify an exact step size between bins when binning a collection of values.
--}
-biStep : Float -> BinProperty
-biStep =
-    Step
-
-
-{-| Specify the allowable step sizes between bins when binning a collection of
-values.
--}
-biSteps : List Float -> BinProperty
-biSteps =
-    Steps
-
-
 {-| Generated by [expr](#expr), [selected](#selected),
 [selectionName](#selectionName), [and](#and), [or](#or) and [not](#not).
 -}
@@ -2332,17 +2578,6 @@ type BooleanOp
     | And BooleanOp BooleanOp
     | Or BooleanOp BooleanOp
     | Not BooleanOp
-
-
-{-| Specify the bounds calculation method to use for determining the extent of
-a sub-plot in a composed view. If set to `Full` (the default) the entire calculated
-bounds including axes, title and legend are used, if `Flush` only the width and
-height values for the sub-view will be used. `Flush` can be useful when laying out
-sub-plots without axes or legends into a uniform grid structure.
--}
-bounds : Bounds -> ( VLProperty, Spec )
-bounds bnds =
-    ( VLBounds, boundsSpec bnds )
 
 
 {-| The bounds calculation method to use for determining the extent of a sub-plot
@@ -2857,15 +3092,17 @@ hdTitleLimit =
     HTitleLimit
 
 
-{-| Generated by [hName](#hName), [hRepeat](#hRepeat), [hMType](#hMType), [HBin](#hBin),
-[hAggregate](#hAggregate), [hTimeUnit](#hTimeUnit), [hDataCondition](#hDataCondition),
-[hSelectionCondition](#hSelectionCondition) and [hStr](#hStr).
+{-| Generated by [hName](#hName), [hRepeat](#hRepeat), [hMType](#hMType), [hBin](#hBin),
+[hBinned](#hBinned), [hAggregate](#hAggregate), [hTimeUnit](#hTimeUnit),
+[hDataCondition](#hDataCondition), [hSelectionCondition](#hSelectionCondition)
+and [hStr](#hStr).
 -}
 type HyperlinkChannel
     = HName String
     | HRepeat Arrangement
     | HmType Measurement
     | HBin (List BinProperty)
+    | HBinned
     | HAggregate Operation
     | HTimeUnit TimeUnit
     | HSelectionCondition BooleanOp (List HyperlinkChannel) (List HyperlinkChannel)
@@ -3041,10 +3278,10 @@ type Mark
 
 
 {-| Generated by [mName](#mName), [mRepeat](#mRepeat), [mMType](#mMType), [mScale](#mScale),
-[mBin](#MBin), [mImpute](#mImpute)[mTimeUnit](#mTimeUnit), [mTitle](#mTitle),
-[mAggregate](#mAggregate), [mLegend](#mLegend), [mSelectionCondition](#mSelectionCondition),
-[mDataCondition](#mDataCondition), [mPath](#mPath), [mNum](#mNum), [mStr](#mStr)
-and [mBoo](#mBoo).
+[mBin](#mBin), [mBinned](#mBinned), [mImpute](#mImpute)[mTimeUnit](#mTimeUnit),
+[mTitle](#mTitle), [mAggregate](#mAggregate), [mLegend](#mLegend),
+[mSelectionCondition](#mSelectionCondition), [mDataCondition](#mDataCondition),
+[mPath](#mPath), [mNum](#mNum), [mStr](#mStr) and [mBoo](#mBoo).
 -}
 type MarkChannel
     = MName String
@@ -3052,6 +3289,7 @@ type MarkChannel
     | MmType Measurement
     | MScale (List ScaleProperty)
     | MBin (List BinProperty)
+    | MBinned
     | MImpute (List ImputeProperty)
     | MTimeUnit TimeUnit
     | MTitle String
@@ -3271,7 +3509,7 @@ type Position
 
 
 {-| Generated by [pName](#pName), [pRepeat](#pRepeat), [pMType](#pMType), [pBin](#PBin),
-[pTimeUnit](#pTimeUnit), [pTitle](#pTitle), [pAggregate](#pAggregate),
+[pBinned](#pBinned), [pTimeUnit](#pTimeUnit), [pTitle](#pTitle), [pAggregate](#pAggregate),
 [pScale](#pScale), [pAxis](#pAxis), [pSort](#pSort), [pStack](#pStack),
 [pWidth](#pWidth), [pHeight](#pHeight) and [pImpute](#pImpute).
 -}
@@ -3282,6 +3520,7 @@ type PositionChannel
     | PRepeat Arrangement
     | PmType Measurement
     | PBin (List BinProperty)
+    | PBinned
     | PTimeUnit TimeUnit
     | PTitle String
     | PAggregate Operation
@@ -3647,15 +3886,16 @@ type SummaryExtent
 
 
 {-| Generated by [tName](#tName), [tRepeat](#tRepeat), [tMType](#tMType),
-[tBin](#tBin), [tAggregate](#tAggregate), [tTimeUnit](#tTimeUnit),[tTitle](#tTitle),
-[tSelectionCondition](#tSelectionCondition), [tDataCondition](#tDataCondition)
-and [tFormat](#tFormat).
+[tBin](#tBin), [tBinned](#tBinned), [tAggregate](#tAggregate), [tTimeUnit](#tTimeUnit),
+[tTitle](#tTitle), [tSelectionCondition](#tSelectionCondition),
+[tDataCondition](#tDataCondition) and [tFormat](#tFormat).
 -}
 type TextChannel
     = TName String
     | TRepeat Arrangement
     | TmType Measurement
     | TBin (List BinProperty)
+    | TBinned
     | TAggregate Operation
     | TTimeUnit TimeUnit
     | TTitle String
@@ -4075,14 +4315,6 @@ axTitleAngle =
     AxTitleAngle
 
 
-{-| Specify the maximum length for an axis title for cases where the title is
-automatically generated from a field’s description.
--}
-axTitleMaxLength : Float -> AxisProperty
-axTitleMaxLength =
-    AxTitleMaxLength
-
-
 {-| Specify the padding in pixels between a title and axis.
 -}
 axTitlePadding : Float -> AxisProperty
@@ -4123,6 +4355,54 @@ bar =
     mark Bar
 
 
+{-| Specify the number base to use for automatic bin determination (default is
+base 10).
+-}
+biBase : Float -> BinProperty
+biBase =
+    Base
+
+
+{-| Specify the scale factors indicating allowable subdivisions for binning.
+The default value is [5, 2], which indicates that for base 10 numbers (the
+default base), binning will consider dividing bin sizes by 5 and/or 2.
+-}
+biDivide : List Float -> BinProperty
+biDivide =
+    Divides
+
+
+{-| Specify the desired range of bin values when binning a collection of values.
+The first and second parameters indicate the minimum and maximum range values
+respectively.
+-}
+biExtent : Float -> Float -> BinProperty
+biExtent =
+    Extent
+
+
+{-| Specify the maximum number of bins when binning a collection of values.
+-}
+biMaxBins : Int -> BinProperty
+biMaxBins =
+    MaxBins
+
+
+{-| Specify the step size between bins when binning a collection of values.
+-}
+biMinStep : Float -> BinProperty
+biMinStep =
+    MinStep
+
+
+{-| Specify whether or not binning boundaries use human-friendly values such as
+multiples of ten.
+-}
+biNice : Bool -> BinProperty
+biNice =
+    Nice
+
+
 {-| Create a named binning transformation that may be referenced in other Transformations
 or encodings. The type of binning can be customised with a list of `BinProperty`
 generating functions ([biBase](#biBase), [biDivide](#biDivide) etc.) or an empty
@@ -4144,6 +4424,21 @@ binAs bProps field label =
         (::) ( "bin", JE.list [ bProps |> List.map binProperty |> JE.object, JE.string field, JE.string label ] )
 
 
+{-| Specify an exact step size between bins when binning a collection of values.
+-}
+biStep : Float -> BinProperty
+biStep =
+    Step
+
+
+{-| Specify the allowable step sizes between bins when binning a collection of
+values.
+-}
+biSteps : List Float -> BinProperty
+biSteps =
+    Steps
+
+
 {-| Specify a boolean data value.
 -}
 boo : Bool -> DataValue
@@ -4156,6 +4451,17 @@ boo =
 boos : List Bool -> DataValues
 boos =
     Booleans
+
+
+{-| Specify the bounds calculation method to use for determining the extent of
+a sub-plot in a composed view. If set to `Full` (the default) the entire calculated
+bounds including axes, title and legend are used, if `Flush` only the width and
+height values for the sub-view will be used. `Flush` can be useful when laying out
+sub-plots without axes or legends into a uniform grid structure.
+-}
+bounds : Bounds -> ( VLProperty, Spec )
+bounds bnds =
+    ( VLBounds, boundsSpec bnds )
 
 
 {-| Specify a [boxplot composite mark](https://vega.github.io/vega-lite/docs/boxplot.html)
@@ -5539,6 +5845,13 @@ hBin =
     HBin
 
 
+{-| Specify that data encoded with a hyperlink channel are already binned.
+-}
+hBinned : HyperlinkChannel
+hBinned =
+    HBinned
+
+
 {-| Assigns a list of specifications to be juxtaposed horizontally in a visualization.
 -}
 hConcat : List Spec -> ( VLProperty, Spec )
@@ -6691,6 +7004,13 @@ mBin =
     MBin
 
 
+{-| Specify that data encoding with a mark are already binned.
+-}
+mBinned : MarkChannel
+mBinned =
+    MBinned
+
+
 {-| Provide a literal Boolean value when encoding with a mark property channel.
 -}
 mBoo : Bool -> MarkChannel
@@ -7010,6 +7330,13 @@ pAxis =
 pBin : List BinProperty -> PositionChannel
 pBin =
     PBin
+
+
+{-| Specify that data encoded with position are already binned.
+-}
+pBinned : PositionChannel
+pBinned =
+    PBinned
 
 
 {-| Set the position to the height of the enclosing data space. Useful for placing
@@ -8091,6 +8418,13 @@ tBin =
     TBin
 
 
+{-| Specify that data encoded with a text channel are already binned.
+-}
+tBinned : TextChannel
+tBinned =
+    TBinned
+
+
 {-| Specify the properties of a text channel conditional on one or more predicate
 expressions. The first parameter is a list of tuples each pairing an expression to
 evaluate with the encoding if that expression is true. The second is the encoding
@@ -8969,9 +9303,6 @@ axisConfigProperty axisCfg =
         TitleLimit x ->
             ( "titleLimit", JE.float x )
 
-        TitleMaxLength x ->
-            ( "titleMaxLength", JE.float x )
-
         TitlePadding x ->
             ( "titlePadding", JE.float x )
 
@@ -8985,14 +9316,66 @@ axisConfigProperty axisCfg =
 axisProperty : AxisProperty -> LabelledSpec
 axisProperty axisProp =
     case axisProp of
+        AxBandPosition n ->
+            ( "bandPosition", JE.float n )
+
         AxFormat fmt ->
             ( "format", JE.string fmt )
 
         AxLabels b ->
             ( "labels", JE.bool b )
 
+        AxLabelAlign ha ->
+            ( "labelAlign", JE.string (hAlignLabel ha) )
+
+        AxLabelBaseline va ->
+            ( "labelBaseline", JE.string (vAlignLabel va) )
+
+        AxLabelBound mn ->
+            case mn of
+                Just 1 ->
+                    ( "labelBound", JE.bool True )
+
+                Just n ->
+                    ( "labelBound", JE.float n )
+
+                Nothing ->
+                    ( "labelBound", JE.bool False )
+
         AxLabelAngle angle ->
             ( "labelAngle", JE.float angle )
+
+        AxLabelColor s ->
+            ( "labelColor", JE.string s )
+
+        AxLabelFlush mn ->
+            case mn of
+                Just 0 ->
+                    ( "labelFlush", JE.bool True )
+
+                Just n ->
+                    ( "labelFlush", JE.float n )
+
+                Nothing ->
+                    ( "labelFlush", JE.bool False )
+
+        AxLabelFlushOffset n ->
+            ( "labelFlushOffset", JE.float n )
+
+        AxLabelFont s ->
+            ( "labelFont", JE.string s )
+
+        AxLabelFontSize n ->
+            ( "labelFontSize", JE.float n )
+
+        AxLabelFontWeight fw ->
+            ( "labelFontWeight", fontWeightSpec fw )
+
+        AxLabelLimit n ->
+            ( "labelLimit", JE.float n )
+
+        AxLabelOpacity n ->
+            ( "labelOpacity", JE.float n )
 
         AxLabelOverlap strat ->
             ( "labelOverlap", JE.string (overlapStrategyLabel strat) )
@@ -9002,6 +9385,15 @@ axisProperty axisProp =
 
         AxDomain b ->
             ( "domain", JE.bool b )
+
+        AxDomainColor c ->
+            ( "domainColor", JE.string c )
+
+        AxDomainOpacity n ->
+            ( "domainOpacity", JE.float n )
+
+        AxDomainWidth n ->
+            ( "domainWidth", JE.float n )
 
         AxGrid b ->
             ( "grid", JE.bool b )
@@ -9027,11 +9419,32 @@ axisProperty axisProp =
         AxTicks b ->
             ( "ticks", JE.bool b )
 
+        AxTickColor s ->
+            ( "tickColor", JE.string s )
+
         AxTickCount n ->
             ( "tickCount", JE.int n )
 
+        AxTickExtra b ->
+            ( "tickExtra", JE.bool b )
+
+        AxTickOffset n ->
+            ( "tickOffset", JE.float n )
+
+        AxTickOpacity n ->
+            ( "tickOpacity", JE.float n )
+
+        AxTickRound b ->
+            ( "tickRound", JE.bool b )
+
+        AxTickStep n ->
+            ( "tickStep", JE.float n )
+
         AxTickSize sz ->
             ( "tickSize", JE.float sz )
+
+        AxTickWidth n ->
+            ( "tickWidth", JE.float n )
 
         AxValues vals ->
             ( "values", JE.list (List.map JE.float vals) )
@@ -9048,11 +9461,35 @@ axisProperty axisProp =
         AxTitleAngle angle ->
             ( "titleAngle", JE.float angle )
 
-        AxTitleMaxLength len ->
-            ( "titleMaxLength", JE.float len )
+        AxTitleBaseline va ->
+            ( "titleBaseline", JE.string (vAlignLabel va) )
+
+        AxTitleColor s ->
+            ( "titleColor", JE.string s )
+
+        AxTitleFont s ->
+            ( "titleFont", JE.string s )
+
+        AxTitleFontSize n ->
+            ( "titleFontSize", JE.float n )
+
+        AxTitleFontWeight fw ->
+            ( "titleFontWeight", fontWeightSpec fw )
+
+        AxTitleLimit n ->
+            ( "titleLimit", JE.float n )
+
+        AxTitleOpacity n ->
+            ( "titleOpacity", JE.float n )
 
         AxTitlePadding pad ->
             ( "titlePadding", JE.float pad )
+
+        AxTitleX n ->
+            ( "titleX", JE.float n )
+
+        AxTitleY n ->
+            ( "titleY", JE.float n )
 
 
 bin : List BinProperty -> LabelledSpec
@@ -9926,6 +10363,9 @@ hyperlinkChannelProperty field =
         HBin bps ->
             [ bin bps ]
 
+        HBinned ->
+            [ ( "bin", JE.string "binned" ) ]
+
         HSelectionCondition selName ifClause elseClause ->
             ( "condition", JE.object (( "selection", booleanOpSpec selName ) :: List.concatMap hyperlinkChannelProperty ifClause) )
                 :: List.concatMap hyperlinkChannelProperty elseClause
@@ -10229,6 +10669,9 @@ markChannelProperty field =
 
         MBin bps ->
             [ bin bps ]
+
+        MBinned ->
+            [ ( "bin", JE.string "binned" ) ]
 
         MImpute ips ->
             [ ( "impute", JE.object (List.map imputeProperty ips) ) ]
@@ -10859,6 +11302,9 @@ positionChannelProperty pDef =
         PBin bps ->
             bin bps
 
+        PBinned ->
+            ( "bin", JE.string "binned" )
+
         PAggregate op ->
             ( "aggregate", JE.string (operationLabel op) )
 
@@ -11467,6 +11913,9 @@ textChannelProperty tDef =
 
         TBin bps ->
             [ bin bps ]
+
+        TBinned ->
+            [ ( "bin", JE.string "binned" ) ]
 
         TAggregate op ->
             [ ( "aggregate", JE.string (operationLabel op) ) ]
