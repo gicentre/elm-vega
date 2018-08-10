@@ -13947,6 +13947,12 @@ var _gicentre$elm_vega$VegaLite$headerProperty = function (hProp) {
 				_0: 'labelLimit',
 				_1: _elm_lang$core$Json_Encode$float(_p139._0)
 			};
+		case 'HLabelPadding':
+			return {
+				ctor: '_Tuple2',
+				_0: 'labelPadding',
+				_1: _elm_lang$core$Json_Encode$float(_p139._0)
+			};
 		case 'HTitle':
 			return {
 				ctor: '_Tuple2',
@@ -13997,10 +14003,16 @@ var _gicentre$elm_vega$VegaLite$headerProperty = function (hProp) {
 				_0: 'titleFontSize',
 				_1: _elm_lang$core$Json_Encode$float(_p139._0)
 			};
-		default:
+		case 'HTitleLimit':
 			return {
 				ctor: '_Tuple2',
 				_0: 'titleLimit',
+				_1: _elm_lang$core$Json_Encode$float(_p139._0)
+			};
+		default:
+			return {
+				ctor: '_Tuple2',
+				_0: 'titlePadding',
 				_1: _elm_lang$core$Json_Encode$float(_p139._0)
 			};
 	}
@@ -14289,6 +14301,13 @@ var _gicentre$elm_vega$VegaLite$configProperty = function (configProp) {
 				_0: 'geoshape',
 				_1: _elm_lang$core$Json_Encode$object(
 					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$markProperty, _p143._0))
+			};
+		case 'HeaderStyle':
+			return {
+				ctor: '_Tuple2',
+				_0: 'header',
+				_1: _elm_lang$core$Json_Encode$object(
+					A2(_elm_lang$core$List$map, _gicentre$elm_vega$VegaLite$headerProperty, _p143._0))
 			};
 		case 'LineStyle':
 			return {
@@ -16316,6 +16335,10 @@ var _gicentre$elm_vega$VegaLite$MarkStyle = function (a) {
 	return {ctor: 'MarkStyle', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$coMark = _gicentre$elm_vega$VegaLite$MarkStyle;
+var _gicentre$elm_vega$VegaLite$HeaderStyle = function (a) {
+	return {ctor: 'HeaderStyle', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$coHeader = _gicentre$elm_vega$VegaLite$HeaderStyle;
 var _gicentre$elm_vega$VegaLite$LineStyle = function (a) {
 	return {ctor: 'LineStyle', _0: a};
 };
@@ -16690,6 +16713,10 @@ var _gicentre$elm_vega$VegaLite$geoPoint = _gicentre$elm_vega$VegaLite$GeoPoint;
 var _gicentre$elm_vega$VegaLite$AlignRight = {ctor: 'AlignRight'};
 var _gicentre$elm_vega$VegaLite$AlignLeft = {ctor: 'AlignLeft'};
 var _gicentre$elm_vega$VegaLite$AlignCenter = {ctor: 'AlignCenter'};
+var _gicentre$elm_vega$VegaLite$HTitlePadding = function (a) {
+	return {ctor: 'HTitlePadding', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$hdTitlePadding = _gicentre$elm_vega$VegaLite$HTitlePadding;
 var _gicentre$elm_vega$VegaLite$HTitleLimit = function (a) {
 	return {ctor: 'HTitleLimit', _0: a};
 };
@@ -16722,6 +16749,10 @@ var _gicentre$elm_vega$VegaLite$HTitleAnchor = function (a) {
 	return {ctor: 'HTitleAnchor', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$hdTitleAnchor = _gicentre$elm_vega$VegaLite$HTitleAnchor;
+var _gicentre$elm_vega$VegaLite$HLabelPadding = function (a) {
+	return {ctor: 'HLabelPadding', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$hdLabelPadding = _gicentre$elm_vega$VegaLite$HLabelPadding;
 var _gicentre$elm_vega$VegaLite$HLabelLimit = function (a) {
 	return {ctor: 'HLabelLimit', _0: a};
 };
