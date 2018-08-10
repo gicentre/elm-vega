@@ -15336,7 +15336,7 @@ var _gicentre$elm_vega$VegaLite$filter = function (f) {
 							}
 						})
 				});
-		default:
+		case 'FOneOf':
 			var values = function () {
 				var _p160 = _p158._1;
 				switch (_p160.ctor) {
@@ -15378,6 +15378,33 @@ var _gicentre$elm_vega$VegaLite$filter = function (f) {
 							_1: {
 								ctor: '::',
 								_0: {ctor: '_Tuple2', _0: 'oneOf', _1: values},
+								_1: {ctor: '[]'}
+							}
+						})
+				});
+		default:
+			return F2(
+				function (x, y) {
+					return {ctor: '::', _0: x, _1: y};
+				})(
+				{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'field',
+								_1: _elm_lang$core$Json_Encode$string(_p158._0)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'valid',
+									_1: _elm_lang$core$Json_Encode$bool(true)
+								},
 								_1: {ctor: '[]'}
 							}
 						})
@@ -16593,6 +16620,10 @@ var _gicentre$elm_vega$VegaLite$columnBy = _gicentre$elm_vega$VegaLite$ColumnBy;
 var _gicentre$elm_vega$VegaLite$Plain = {ctor: 'Plain'};
 var _gicentre$elm_vega$VegaLite$Function = {ctor: 'Function'};
 var _gicentre$elm_vega$VegaLite$Verbal = {ctor: 'Verbal'};
+var _gicentre$elm_vega$VegaLite$FValid = function (a) {
+	return {ctor: 'FValid', _0: a};
+};
+var _gicentre$elm_vega$VegaLite$fiValid = _gicentre$elm_vega$VegaLite$FValid;
 var _gicentre$elm_vega$VegaLite$FRange = F2(
 	function (a, b) {
 		return {ctor: 'FRange', _0: a, _1: b};

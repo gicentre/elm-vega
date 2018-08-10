@@ -115,6 +115,68 @@ scale5 =
         |> scaleEncode
 
 
+filter1 : Spec
+filter1 =
+    let
+        config =
+            configure
+                << configuration (coRemoveInvalid False)
+
+        enc =
+            encoding
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
+                << color
+                    [ mDataCondition
+                        [ ( expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null"
+                          , [ mStr "#ddd" ]
+                          )
+                        ]
+                        [ mStr "rgb(76,120,168)" ]
+                    ]
+    in
+    toVegaLite
+        [ config []
+        , dataFromUrl "https://vega.github.io/vega-lite/data/movies.json" []
+        , point []
+        , enc []
+        ]
+
+
+filter2 : Spec
+filter2 =
+    let
+        config =
+            configure
+                << configuration (coRemoveInvalid False)
+
+        trans =
+            transform
+                << filter (fiValid "IMDB_Rating")
+                << filter (fiValid "Rotten_Tomatoes_Rating")
+
+        enc =
+            encoding
+                << position X [ pName "IMDB_Rating", pMType Quantitative ]
+                << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
+                << color
+                    [ mDataCondition
+                        [ ( expr "datum.IMDB_Rating === null || datum.Rotten_Tomatoes_Rating === null"
+                          , [ mStr "#ddd" ]
+                          )
+                        ]
+                        [ mStr "rgb(76,120,168)" ]
+                    ]
+    in
+    toVegaLite
+        [ config []
+        , trans []
+        , dataFromUrl "https://vega.github.io/vega-lite/data/movies.json" []
+        , point []
+        , enc []
+        ]
+
+
 sourceExample : Spec
 sourceExample =
     axis1
@@ -134,6 +196,8 @@ mySpecs =
         , ( "scale3", scale3 )
         , ( "scale4", scale4 )
         , ( "scale5", scale5 )
+        , ( "filter1", filter1 )
+        , ( "filter2", filter2 )
         ]
 
 
