@@ -19476,742 +19476,193 @@ var _gicentre$elm_vega$VegaLite$WAscending = function (a) {
 var _gicentre$elm_vega$VegaLite$stAscending = _gicentre$elm_vega$VegaLite$WAscending;
 var _gicentre$elm_vega$VegaLite$wiAscending = _gicentre$elm_vega$VegaLite$WAscending;
 
-var _gicentre$elm_vega$NullTests$scaleEncode = function (enc) {
-	var data = function (_p0) {
-		return A2(
-			_gicentre$elm_vega$VegaLite$dataFromColumns,
-			{ctor: '[]'},
+var _gicentre$elm_vega$ScaleTests$scale5 = function () {
+	var enc = function (_p0) {
+		return _gicentre$elm_vega$VegaLite$encoding(
 			A3(
-				_gicentre$elm_vega$VegaLite$dataColumn,
-				'x',
-				_gicentre$elm_vega$VegaLite$nums(
-					{
-						ctor: '::',
-						_0: 10,
-						_1: {
-							ctor: '::',
-							_0: 20,
-							_1: {
-								ctor: '::',
-								_0: 30,
-								_1: {
-									ctor: '::',
-									_0: 40,
-									_1: {
-										ctor: '::',
-										_0: 50,
-										_1: {
-											ctor: '::',
-											_0: 60,
-											_1: {
-												ctor: '::',
-												_0: 70,
-												_1: {
-													ctor: '::',
-													_0: 80,
-													_1: {
-														ctor: '::',
-														_0: 90,
-														_1: {
-															ctor: '::',
-															_0: 100,
-															_1: {ctor: '[]'}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}),
-				A3(
-					_gicentre$elm_vega$VegaLite$dataColumn,
-					'y',
-					_gicentre$elm_vega$VegaLite$nums(
-						{
-							ctor: '::',
-							_0: 1,
-							_1: {
-								ctor: '::',
-								_0: 2,
-								_1: {
-									ctor: '::',
-									_0: 3,
-									_1: {
-										ctor: '::',
-										_0: 4,
-										_1: {
-											ctor: '::',
-											_0: 5,
-											_1: {
-												ctor: '::',
-												_0: 6,
-												_1: {
-													ctor: '::',
-													_0: 7,
-													_1: {
-														ctor: '::',
-														_0: 8,
-														_1: {
-															ctor: '::',
-															_0: 9,
-															_1: {
-																ctor: '::',
-																_0: 10,
-																_1: {ctor: '[]'}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}),
-					A3(
-						_gicentre$elm_vega$VegaLite$dataColumn,
-						'val',
-						_gicentre$elm_vega$VegaLite$nums(
-							{
-								ctor: '::',
-								_0: 1,
-								_1: {
-									ctor: '::',
-									_0: 2,
-									_1: {
-										ctor: '::',
-										_0: 3,
-										_1: {
-											ctor: '::',
-											_0: 4,
-											_1: {
-												ctor: '::',
-												_0: 5,
-												_1: {
-													ctor: '::',
-													_0: 6,
-													_1: {
-														ctor: '::',
-														_0: 7,
-														_1: {
-															ctor: '::',
-															_0: 8,
-															_1: {
-																ctor: '::',
-																_0: 9,
-																_1: {
-																	ctor: '::',
-																	_0: 10,
-																	_1: {ctor: '[]'}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}),
-						A3(
-							_gicentre$elm_vega$VegaLite$dataColumn,
-							'cat',
-							_gicentre$elm_vega$VegaLite$strs(
-								{
-									ctor: '::',
-									_0: 'a',
-									_1: {
-										ctor: '::',
-										_0: 'b',
-										_1: {
-											ctor: '::',
-											_0: 'c',
-											_1: {
-												ctor: '::',
-												_0: 'd',
-												_1: {
-													ctor: '::',
-													_0: 'e',
-													_1: {
-														ctor: '::',
-														_0: 'f',
-														_1: {
-															ctor: '::',
-															_0: 'g',
-															_1: {
-																ctor: '::',
-																_0: 'h',
-																_1: {
-																	ctor: '::',
-																	_0: 'i',
-																	_1: {
-																		ctor: '::',
-																		_0: 'j',
-																		_1: {ctor: '[]'}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}),
-							_p0)))));
-	};
-	return _gicentre$elm_vega$VegaLite$toVegaLite(
-		{
-			ctor: '::',
-			_0: _gicentre$elm_vega$VegaLite$width(400),
-			_1: {
-				ctor: '::',
-				_0: _gicentre$elm_vega$VegaLite$height(400),
-				_1: {
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
+				{
 					ctor: '::',
-					_0: data(
-						{ctor: '[]'}),
+					_0: _gicentre$elm_vega$VegaLite$pName('b'),
 					_1: {
 						ctor: '::',
-						_0: enc,
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$point(
+							_0: _gicentre$elm_vega$VegaLite$pSort(
 								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-var _gicentre$elm_vega$NullTests$scale0 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p1) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p1))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$scale1 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p2) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pScale(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p2))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$scale2 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p3) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$pScale(
-									{ctor: '[]'}),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p3))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$scale3 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p4) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mScale(
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p4))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$scale4 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p5) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mScale(
-											{ctor: '[]'}),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {ctor: '[]'}
-									}
-								},
-								_p5))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$scale5 = _gicentre$elm_vega$NullTests$scaleEncode(
-	function (_p6) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {ctor: '[]'}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(
-						_gicentre$elm_vega$VegaLite$color,
-						{
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$mName('val'),
-							_1: {
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
-							}
-						},
-						A2(
-							_gicentre$elm_vega$VegaLite$size,
-							{
-								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$mName('val'),
-								_1: {
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
-									_1: {ctor: '[]'}
-								}
-							},
-							A2(
-								_gicentre$elm_vega$VegaLite$shape,
-								{
-									ctor: '::',
-									_0: _gicentre$elm_vega$VegaLite$mName('cat'),
-									_1: {
-										ctor: '::',
-										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Nominal),
-										_1: {
-											ctor: '::',
-											_0: _gicentre$elm_vega$VegaLite$mScale(
-												{ctor: '[]'}),
-											_1: {ctor: '[]'}
-										}
-									}
-								},
-								_p6))))));
-	}(
-		{ctor: '[]'}));
-var _gicentre$elm_vega$NullTests$axis1 = function () {
-	var enc = function (_p7) {
-		return _gicentre$elm_vega$VegaLite$encoding(
-			A3(
-				_gicentre$elm_vega$VegaLite$position,
-				_gicentre$elm_vega$VegaLite$X,
-				{
-					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$pName('x'),
-					_1: {
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pAxis(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				A3(
-					_gicentre$elm_vega$VegaLite$position,
-					_gicentre$elm_vega$VegaLite$Y,
-					{
-						ctor: '::',
-						_0: _gicentre$elm_vega$VegaLite$pName('y'),
-						_1: {
-							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
 							_1: {
 								ctor: '::',
 								_0: _gicentre$elm_vega$VegaLite$pAxis(
-									{ctor: '[]'}),
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axTicks(false),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$axDomain(false),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$axTitle(''),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$size,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$mName('b'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mScale(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScThreshold),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$scDomain(
+												_gicentre$elm_vega$VegaLite$doNums(
+													{
+														ctor: '::',
+														_0: 30,
+														_1: {
+															ctor: '::',
+															_0: 70,
+															_1: {ctor: '[]'}
+														}
+													})),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$scRange(
+													_gicentre$elm_vega$VegaLite$raNums(
+														{
+															ctor: '::',
+															_0: 80,
+															_1: {
+																ctor: '::',
+																_0: 200,
+																_1: {
+																	ctor: '::',
+																	_0: 320,
+																	_1: {ctor: '[]'}
+																}
+															}
+														})),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					A2(
-						_gicentre$elm_vega$VegaLite$order,
+						_gicentre$elm_vega$VegaLite$color,
 						{
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$oName('order'),
+							_0: _gicentre$elm_vega$VegaLite$mName('b'),
 							_1: {
 								ctor: '::',
-								_0: _gicentre$elm_vega$VegaLite$oMType(_gicentre$elm_vega$VegaLite$Ordinal),
-								_1: {ctor: '[]'}
+								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mScale(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScThreshold),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$scDomain(
+													_gicentre$elm_vega$VegaLite$doNums(
+														{
+															ctor: '::',
+															_0: 30,
+															_1: {
+																ctor: '::',
+																_0: 70,
+																_1: {ctor: '[]'}
+															}
+														})),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_gicentre$elm_vega$VegaLite$scScheme,
+														'viridis',
+														{ctor: '[]'}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mLegend(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$leTitle('Threshold'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						},
-						_p7))));
+						_p0))));
 	};
-	var data = function (_p8) {
+	var data = function (_p1) {
 		return A2(
 			_gicentre$elm_vega$VegaLite$dataFromColumns,
 			{ctor: '[]'},
 			A3(
 				_gicentre$elm_vega$VegaLite$dataColumn,
-				'x',
+				'b',
 				_gicentre$elm_vega$VegaLite$nums(
 					{
 						ctor: '::',
-						_0: 0,
+						_0: 28,
 						_1: {
 							ctor: '::',
-							_0: 1000,
+							_0: 55,
 							_1: {
 								ctor: '::',
-								_0: 1000,
+								_0: 43,
 								_1: {
 									ctor: '::',
-									_0: 0,
+									_0: 91,
 									_1: {
 										ctor: '::',
-										_0: 0,
+										_0: 81,
 										_1: {
 											ctor: '::',
-											_0: 1000,
-											_1: {ctor: '[]'}
+											_0: 53,
+											_1: {
+												ctor: '::',
+												_0: 19,
+												_1: {
+													ctor: '::',
+													_0: 87,
+													_1: {
+														ctor: '::',
+														_0: 52,
+														_1: {ctor: '[]'}
+													}
+												}
+											}
 										}
 									}
 								}
 							}
 						}
 					}),
-				A3(
-					_gicentre$elm_vega$VegaLite$dataColumn,
-					'y',
-					_gicentre$elm_vega$VegaLite$nums(
-						{
-							ctor: '::',
-							_0: 1000,
-							_1: {
-								ctor: '::',
-								_0: 1000,
-								_1: {
-									ctor: '::',
-									_0: 0,
-									_1: {
-										ctor: '::',
-										_0: 0,
-										_1: {
-											ctor: '::',
-											_0: 1000,
-											_1: {
-												ctor: '::',
-												_0: 0,
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}),
-					A3(
-						_gicentre$elm_vega$VegaLite$dataColumn,
-						'order',
-						_gicentre$elm_vega$VegaLite$nums(
-							A2(
-								_elm_lang$core$List$map,
-								_elm_lang$core$Basics$toFloat,
-								A2(_elm_lang$core$List$range, 1, 6))),
-						_p8))));
+				_p1));
 	};
 	return _gicentre$elm_vega$VegaLite$toVegaLite(
 		{
@@ -20224,15 +19675,15 @@ var _gicentre$elm_vega$NullTests$axis1 = function () {
 					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
-					_0: _gicentre$elm_vega$VegaLite$line(
+					_0: _gicentre$elm_vega$VegaLite$circle(
 						{ctor: '[]'}),
 					_1: {ctor: '[]'}
 				}
 			}
 		});
 }();
-var _gicentre$elm_vega$NullTests$sourceExample = _gicentre$elm_vega$NullTests$axis1;
-var _gicentre$elm_vega$NullTests$view = function (spec) {
+var _gicentre$elm_vega$ScaleTests$sourceExample = _gicentre$elm_vega$ScaleTests$scale5;
+var _gicentre$elm_vega$ScaleTests$view = function (spec) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -20254,56 +19705,542 @@ var _gicentre$elm_vega$NullTests$view = function (spec) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html$text(
-							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$NullTests$sourceExample)),
+							A2(_elm_lang$core$Json_Encode$encode, 2, _gicentre$elm_vega$ScaleTests$sourceExample)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
-var _gicentre$elm_vega$NullTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
-	{
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'axis1', _1: _gicentre$elm_vega$NullTests$axis1},
-		_1: {
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'scale0', _1: _gicentre$elm_vega$NullTests$scale0},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$NullTests$scale1},
-				_1: {
+var _gicentre$elm_vega$ScaleTests$scale4 = function () {
+	var enc = function (_p2) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
+				{
 					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'scale2', _1: _gicentre$elm_vega$NullTests$scale2},
+					_0: _gicentre$elm_vega$VegaLite$pName('b'),
 					_1: {
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'scale3', _1: _gicentre$elm_vega$NullTests$scale3},
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
 						_1: {
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'scale4', _1: _gicentre$elm_vega$NullTests$scale4},
+							_0: _gicentre$elm_vega$VegaLite$pSort(
+								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'scale5', _1: _gicentre$elm_vega$NullTests$scale5},
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axTicks(false),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$axDomain(false),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$axTitle(''),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
 								_1: {ctor: '[]'}
 							}
 						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$size,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$mName('b'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mScale(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScQuantize),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mName('b'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mScale(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScQuantize),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$scZero(true),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mLegend(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$leTitle('Quantize'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_p2))));
+	};
+	var data = function (_p3) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'b',
+				_gicentre$elm_vega$VegaLite$nums(
+					{
+						ctor: '::',
+						_0: 28,
+						_1: {
+							ctor: '::',
+							_0: 55,
+							_1: {
+								ctor: '::',
+								_0: 43,
+								_1: {
+									ctor: '::',
+									_0: 91,
+									_1: {
+										ctor: '::',
+										_0: 81,
+										_1: {
+											ctor: '::',
+											_0: 53,
+											_1: {
+												ctor: '::',
+												_0: 19,
+												_1: {
+													ctor: '::',
+													_0: 87,
+													_1: {
+														ctor: '::',
+														_0: 52,
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_p3));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$circle(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$ScaleTests$scale3 = function () {
+	var enc = function (_p4) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$Y,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('b'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Nominal),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pSort(
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$pAxis(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$axTicks(false),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$axDomain(false),
+											_1: {
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$axTitle(''),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A2(
+					_gicentre$elm_vega$VegaLite$size,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$mName('b'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mScale(
+									{
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScQuantile),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mName('b'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mScale(
+										{
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$scType(_gicentre$elm_vega$VegaLite$ScQuantile),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mLegend(
+											{
+												ctor: '::',
+												_0: _gicentre$elm_vega$VegaLite$leTitle('Quantile'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_p4))));
+	};
+	var data = function (_p5) {
+		return A2(
+			_gicentre$elm_vega$VegaLite$dataFromColumns,
+			{ctor: '[]'},
+			A3(
+				_gicentre$elm_vega$VegaLite$dataColumn,
+				'b',
+				_gicentre$elm_vega$VegaLite$nums(
+					{
+						ctor: '::',
+						_0: 28,
+						_1: {
+							ctor: '::',
+							_0: 55,
+							_1: {
+								ctor: '::',
+								_0: 43,
+								_1: {
+									ctor: '::',
+									_0: 91,
+									_1: {
+										ctor: '::',
+										_0: 81,
+										_1: {
+											ctor: '::',
+											_0: 53,
+											_1: {
+												ctor: '::',
+												_0: 19,
+												_1: {
+													ctor: '::',
+													_0: 87,
+													_1: {
+														ctor: '::',
+														_0: 52,
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_p5));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: data(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$circle(
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$ScaleTests$scale2 = function () {
+	var enc = function (_p6) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mName('Acceleration'),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mBin(
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						_p6))));
+	};
+	var cars = A2(
+		_gicentre$elm_vega$VegaLite$dataFromUrl,
+		'https://vega.github.io/vega-lite/data/cars.json',
+		{ctor: '[]'});
+	var conf = function (_p7) {
+		return _gicentre$elm_vega$VegaLite$configure(
+			A2(
+				_gicentre$elm_vega$VegaLite$configuration,
+				_gicentre$elm_vega$VegaLite$coRange(
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$racoRamp('reds'),
+						_1: {ctor: '[]'}
+					}),
+				_p7));
+	};
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: conf(
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: cars,
+				_1: {
+					ctor: '::',
+					_0: enc(
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$point(
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$ScaleTests$scale1 = function () {
+	var enc = function (_p8) {
+		return _gicentre$elm_vega$VegaLite$encoding(
+			A3(
+				_gicentre$elm_vega$VegaLite$position,
+				_gicentre$elm_vega$VegaLite$X,
+				{
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$pName('Horsepower'),
+					_1: {
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+						_1: {ctor: '[]'}
+					}
+				},
+				A3(
+					_gicentre$elm_vega$VegaLite$position,
+					_gicentre$elm_vega$VegaLite$Y,
+					{
+						ctor: '::',
+						_0: _gicentre$elm_vega$VegaLite$pName('Miles_per_Gallon'),
+						_1: {
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$pMType(_gicentre$elm_vega$VegaLite$Quantitative),
+							_1: {ctor: '[]'}
+						}
+					},
+					A2(
+						_gicentre$elm_vega$VegaLite$color,
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$mStr('rgb(203,24,29)'),
+							_1: {ctor: '[]'}
+						},
+						A2(
+							_gicentre$elm_vega$VegaLite$size,
+							{
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$mName('Acceleration'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mBin(
+											{ctor: '[]'}),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							A2(
+								_gicentre$elm_vega$VegaLite$opacity,
+								{
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$mName('Acceleration'),
+									_1: {
+										ctor: '::',
+										_0: _gicentre$elm_vega$VegaLite$mMType(_gicentre$elm_vega$VegaLite$Quantitative),
+										_1: {
+											ctor: '::',
+											_0: _gicentre$elm_vega$VegaLite$mBin(
+												{ctor: '[]'}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								_p8))))));
+	};
+	var cars = A2(
+		_gicentre$elm_vega$VegaLite$dataFromUrl,
+		'https://vega.github.io/vega-lite/data/cars.json',
+		{ctor: '[]'});
+	return _gicentre$elm_vega$VegaLite$toVegaLite(
+		{
+			ctor: '::',
+			_0: cars,
+			_1: {
+				ctor: '::',
+				_0: enc(
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: _gicentre$elm_vega$VegaLite$point(
+						{
+							ctor: '::',
+							_0: _gicentre$elm_vega$VegaLite$maFilled(true),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$maStroke('white'),
+								_1: {
+									ctor: '::',
+									_0: _gicentre$elm_vega$VegaLite$maStrokeWidth(0.4),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
+var _gicentre$elm_vega$ScaleTests$mySpecs = _gicentre$elm_vega$VegaLite$combineSpecs(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'scale1', _1: _gicentre$elm_vega$ScaleTests$scale1},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'scale2', _1: _gicentre$elm_vega$ScaleTests$scale2},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'scale3', _1: _gicentre$elm_vega$ScaleTests$scale3},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'scale4', _1: _gicentre$elm_vega$ScaleTests$scale4},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'scale5', _1: _gicentre$elm_vega$ScaleTests$scale5},
+						_1: {ctor: '[]'}
 					}
 				}
 			}
 		}
 	});
-var _gicentre$elm_vega$NullTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
+var _gicentre$elm_vega$ScaleTests$elmToJS = _elm_lang$core$Native_Platform.outgoingPort(
 	'elmToJS',
 	function (v) {
 		return v;
 	});
-var _gicentre$elm_vega$NullTests$main = _elm_lang$html$Html$program(
+var _gicentre$elm_vega$ScaleTests$main = _elm_lang$html$Html$program(
 	{
 		init: {
 			ctor: '_Tuple2',
-			_0: _gicentre$elm_vega$NullTests$mySpecs,
-			_1: _gicentre$elm_vega$NullTests$elmToJS(_gicentre$elm_vega$NullTests$mySpecs)
+			_0: _gicentre$elm_vega$ScaleTests$mySpecs,
+			_1: _gicentre$elm_vega$ScaleTests$elmToJS(_gicentre$elm_vega$ScaleTests$mySpecs)
 		},
-		view: _gicentre$elm_vega$NullTests$view,
+		view: _gicentre$elm_vega$ScaleTests$view,
 		update: F2(
 			function (_p9, model) {
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
@@ -20312,9 +20249,9 @@ var _gicentre$elm_vega$NullTests$main = _elm_lang$html$Html$program(
 	})();
 
 var Elm = {};
-Elm['NullTests'] = Elm['NullTests'] || {};
-if (typeof _gicentre$elm_vega$NullTests$main !== 'undefined') {
-    _gicentre$elm_vega$NullTests$main(Elm['NullTests'], 'NullTests', undefined);
+Elm['ScaleTests'] = Elm['ScaleTests'] || {};
+if (typeof _gicentre$elm_vega$ScaleTests$main !== 'undefined') {
+    _gicentre$elm_vega$ScaleTests$main(Elm['ScaleTests'], 'ScaleTests', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

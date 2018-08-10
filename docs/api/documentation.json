@@ -1250,6 +1250,18 @@
           [
             "ScBinOrdinal",
             []
+          ],
+          [
+            "ScQuantile",
+            []
+          ],
+          [
+            "ScQuantize",
+            []
+          ],
+          [
+            "ScThreshold",
+            []
           ]
         ]
       },
@@ -4707,7 +4719,7 @@
       },
       {
         "name": "scScheme",
-        "comment": " Color scheme used by a color scaling.\n",
+        "comment": " Color scheme used by a color scaling. The first parameter is the name of the\nscheme (e.g. \"viridis\") and the second an optional specifiction of the number of\ncolors to use (list of one number), or the extent of the color range to use (list\nof two numbers between 0 and 1).\n",
         "type": "String -> List Float -> VegaLite.ScaleProperty"
       },
       {

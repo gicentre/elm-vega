@@ -6338,44 +6338,83 @@ var _gicentre$elm_vega$VegaLite$selectionLabel = function (seType) {
 var _gicentre$elm_vega$VegaLite$schemeProperty = F2(
 	function (name, extent) {
 		var _p27 = extent;
-		if (((_p27.ctor === '::') && (_p27._1.ctor === '::')) && (_p27._1._1.ctor === '[]')) {
-			return {
-				ctor: '_Tuple2',
-				_0: 'scheme',
-				_1: _elm_lang$core$Json_Encode$object(
-					{
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'name',
-							_1: _elm_lang$core$Json_Encode$string(name)
-						},
-						_1: {
-							ctor: '::',
-							_0: {
-								ctor: '_Tuple2',
-								_0: 'extent',
-								_1: _elm_lang$core$Json_Encode$list(
-									{
-										ctor: '::',
-										_0: _elm_lang$core$Json_Encode$float(_p27._0),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$core$Json_Encode$float(_p27._1._0),
-											_1: {ctor: '[]'}
-										}
-									})
-							},
-							_1: {ctor: '[]'}
-						}
-					})
-			};
-		} else {
+		if (_p27.ctor === '[]') {
 			return {
 				ctor: '_Tuple2',
 				_0: 'scheme',
 				_1: _elm_lang$core$Json_Encode$string(name)
 			};
+		} else {
+			if (_p27._1.ctor === '[]') {
+				return {
+					ctor: '_Tuple2',
+					_0: 'scheme',
+					_1: _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'name',
+								_1: _elm_lang$core$Json_Encode$string(name)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'count',
+									_1: _elm_lang$core$Json_Encode$float(_p27._0)
+								},
+								_1: {ctor: '[]'}
+							}
+						})
+				};
+			} else {
+				if (_p27._1._1.ctor === '[]') {
+					return {
+						ctor: '_Tuple2',
+						_0: 'scheme',
+						_1: _elm_lang$core$Json_Encode$object(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'name',
+									_1: _elm_lang$core$Json_Encode$string(name)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'extent',
+										_1: _elm_lang$core$Json_Encode$list(
+											{
+												ctor: '::',
+												_0: _elm_lang$core$Json_Encode$float(_p27._0),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$core$Json_Encode$float(_p27._1._0),
+													_1: {ctor: '[]'}
+												}
+											})
+									},
+									_1: {ctor: '[]'}
+								}
+							})
+					};
+				} else {
+					return A2(
+						_elm_lang$core$Debug$log,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'scScheme should have 0, 1 or 2 numbers but you provided ',
+							_elm_lang$core$Basics$toString(extent)),
+						{
+							ctor: '_Tuple2',
+							_0: 'scheme',
+							_1: _elm_lang$core$Json_Encode$string(name)
+						});
+				}
+			}
 		}
 	});
 var _gicentre$elm_vega$VegaLite$scaleNiceSpec = function (ni) {
@@ -6450,8 +6489,14 @@ var _gicentre$elm_vega$VegaLite$scaleLabel = function (scType) {
 			return 'point';
 		case 'ScBinLinear':
 			return 'bin-linear';
-		default:
+		case 'ScBinOrdinal':
 			return 'bin-ordinal';
+		case 'ScQuantile':
+			return 'quantile';
+		case 'ScQuantize':
+			return 'quantize';
+		default:
+			return 'threshold';
 	}
 };
 var _gicentre$elm_vega$VegaLite$scaleConfigProperty = function (scaleCfg) {
@@ -15495,6 +15540,9 @@ var _gicentre$elm_vega$VegaLite$RAxis = function (a) {
 	return {ctor: 'RAxis', _0: a};
 };
 var _gicentre$elm_vega$VegaLite$reAxis = _gicentre$elm_vega$VegaLite$RAxis;
+var _gicentre$elm_vega$VegaLite$ScThreshold = {ctor: 'ScThreshold'};
+var _gicentre$elm_vega$VegaLite$ScQuantize = {ctor: 'ScQuantize'};
+var _gicentre$elm_vega$VegaLite$ScQuantile = {ctor: 'ScQuantile'};
 var _gicentre$elm_vega$VegaLite$ScBinOrdinal = {ctor: 'ScBinOrdinal'};
 var _gicentre$elm_vega$VegaLite$ScBinLinear = {ctor: 'ScBinLinear'};
 var _gicentre$elm_vega$VegaLite$ScPoint = {ctor: 'ScPoint'};
