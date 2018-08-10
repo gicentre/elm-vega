@@ -17302,9 +17302,13 @@ var _gicentre$elm_vega$CompositeTests$eBand = function (ext) {
 						_0: _gicentre$elm_vega$VegaLite$maExtent(ext),
 						_1: {
 							ctor: '::',
-							_0: _gicentre$elm_vega$VegaLite$maBorders(
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
+							_0: _gicentre$elm_vega$VegaLite$maInterpolate(_gicentre$elm_vega$VegaLite$Monotone),
+							_1: {
+								ctor: '::',
+								_0: _gicentre$elm_vega$VegaLite$maBorders(
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}),
 				_1: {

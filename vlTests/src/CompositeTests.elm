@@ -62,7 +62,7 @@ eBand ext =
                     , pTitle ("Miles per Gallon " ++ label)
                     ]
     in
-    toVegaLite [ cars, errorband [ maExtent ext, maBorders [] ], enc [] ]
+    toVegaLite [ cars, errorband [ maExtent ext, maInterpolate Monotone, maBorders [] ], enc [] ]
 
 
 errorband1 : Spec
