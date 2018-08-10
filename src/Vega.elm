@@ -2104,7 +2104,7 @@ See the
 
 # Type Reference
 
-Types that are not specified directly, porovided here for reference with links
+Types that are not specified directly, provided here for reference with links
 to the functions that generate them.
 
 @docs AggregateProperty
