@@ -9116,7 +9116,7 @@ trail =
 
 
 {-| Create a single transform from a list of transformation specifications. The
-order of transformations can be important, e.g. labels created with [calculateAs](#calculateas),
+order of transformations can be important, e.g. labels created with [calculateAs](#calculateAs),
 [timeUnitAs](#timeUnitAs) and [binAs](#binAs) that are used in other transformations.
 Using the functional composition pipeline idiom (as example below) allows you to
 provide the transformations in the order intended in a clear manner.
