@@ -1,791 +1,925 @@
-module VegaLite
-    exposing
-        ( APosition(AEnd, AMiddle, AStart)
-        , Arrangement(Column, Row)
-        , Autosize(AContent, AFit, ANone, APad, APadding, AResize)
-        , AxisConfig
-        , AxisProperty
-        , BinProperty
-        , Binding
-        , BooleanOp
-        , Bounds(Flush, Full)
-        , CInterpolate(Hcl, HclLong, Hsl, HslLong, Lab)
-        , Channel(ChColor, ChOpacity, ChShape, ChSize, ChX, ChX2, ChY, ChY2)
-        , ClipRect(NoClip)
-        , CompositionAlignment(CAAll, CAEach, CANone)
-        , ConfigurationProperty
-        , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
-        , Data
-        , DataColumn
-        , DataRow
-        , DataType(FoBoolean, FoNumber)
-        , DataValue
-        , DataValues
-        , DateTime
-        , DayName(Fri, Mon, Sat, Sun, Thu, Tue, Wed)
-        , DetailChannel
-        , FacetChannel
-        , FacetMapping
-        , FieldTitleProperty(Function, Plain, Verbal)
-        , Filter
-        , FilterRange
-        , FontWeight(Bold, Bolder, Lighter, Normal, W100, W200, W300, W400, W500, W600, W700, W800, W900)
-        , Format(CSV, TSV)
-        , Geometry
-        , HAlign(AlignCenter, AlignLeft, AlignRight)
-        , HeaderProperty
-        , HyperlinkChannel
-        , ImMethod(ImMax, ImMean, ImMedian, ImMin, ImValue)
-        , ImputeProperty
-        , InputProperty
-        , LabelledSpec
-        , Legend(Gradient, Symbol)
-        , LegendConfig
-        , LegendOrientation(BottomLeft, BottomRight, Left, None, Right, TopLeft, TopRight)
-        , LegendProperty
-        , LegendValues
-        , LineMarker(LMNone)
-        , Mark
-        , MarkChannel
-        , MarkInterpolation(Basis, BasisClosed, BasisOpen, Bundle, Cardinal, CardinalClosed, CardinalOpen, Linear, LinearClosed, Monotone, StepAfter, StepBefore, Stepwise)
-        , MarkOrientation(Horizontal, Vertical)
-        , MarkProperty
-        , Measurement(GeoFeature, Nominal, Ordinal, Quantitative, Temporal)
-        , MonthName(Apr, Aug, Dec, Feb, Jan, Jul, Jun, Mar, May, Nov, Oct, Sep)
-        , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, StdevP, Sum, Valid, Variance, VarianceP)
-        , OrderChannel
-        , OverlapStrategy(OGreedy, ONone, OParity)
-        , Padding
-        , PointMarker(PMNone, PMTransparent)
-        , Position(Latitude, Latitude2, Longitude, Longitude2, X, X2, Y, Y2)
-        , PositionChannel
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, Orthographic, Stereographic, TransverseMercator)
-        , ProjectionProperty
-        , RangeConfig
-        , RepeatFields
-        , Resolution(Independent, Shared)
-        , Resolve
-        , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScThreshold, ScTime, ScUtc)
-        , ScaleConfig
-        , ScaleDomain(Unaggregated)
-        , ScaleNice(NDay, NFalse, NHour, NMillisecond, NMinute, NMonth, NSecond, NTrue, NWeek, NYear)
-        , ScaleProperty
-        , ScaleRange
-        , Selection(Interval, Multi, Single)
-        , SelectionMarkProperty
-        , SelectionProperty(BindScales, Empty)
-        , SelectionResolution(Global, Intersection, Union)
-        , Side(SBottom, SLeft, SRight, STop)
-        , SortField
-        , SortProperty(Ascending, Descending)
-        , Spec
-        , StackOffset(NoStack, StCenter, StNormalize, StZero)
-        , StackProperty
-        , StrokeCap(CButt, CRound, CSquare)
-        , StrokeJoin(JBevel, JMiter, JRound)
-        , SummaryExtent(ExCI, ExIqr, ExRange, ExStderr, ExStdev)
-        , Symbol(Cross, Diamond, SymCircle, SymSquare, TriangleDown, TriangleUp)
-        , TextChannel
-        , TimeUnit(Date, Day, Hours, HoursMinutes, HoursMinutesSeconds, Milliseconds, Minutes, MinutesSeconds, Month, MonthDate, Quarter, QuarterMonth, Seconds, SecondsMilliseconds, Year, YearMonth, YearMonthDate, YearMonthDateHours, YearMonthDateHoursMinutes, YearMonthDateHoursMinutesSeconds, YearQuarter, YearQuarterMonth)
-        , TitleConfig
-        , TooltipContent(TTData, TTEncoding)
-        , VAlign(AlignBottom, AlignMiddle, AlignTop)
-        , VLProperty
-        , ViewConfig
-        , Window
-        , WindowOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
-        , WindowProperty
-        , aggregate
-        , align
-        , alignRC
-        , and
-        , area
-        , asSpec
-        , autosize
-        , axBandPosition
-        , axDates
-        , axDomain
-        , axDomainColor
-        , axDomainOpacity
-        , axDomainWidth
-        , axFormat
-        , axGrid
-        , axLabelAlign
-        , axLabelAngle
-        , axLabelBaseline
-        , axLabelBound
-        , axLabelColor
-        , axLabelFlush
-        , axLabelFlushOffset
-        , axLabelFont
-        , axLabelFontSize
-        , axLabelFontWeight
-        , axLabelLimit
-        , axLabelOpacity
-        , axLabelOverlap
-        , axLabelPadding
-        , axLabels
-        , axMaxExtent
-        , axMinExtent
-        , axOffset
-        , axOrient
-        , axPosition
-        , axTickColor
-        , axTickCount
-        , axTickExtra
-        , axTickOffset
-        , axTickOpacity
-        , axTickRound
-        , axTickSize
-        , axTickStep
-        , axTickWidth
-        , axTicks
-        , axTitle
-        , axTitleAlign
-        , axTitleAngle
-        , axTitleBaseline
-        , axTitleColor
-        , axTitleFont
-        , axTitleFontSize
-        , axTitleFontWeight
-        , axTitleLimit
-        , axTitleOpacity
-        , axTitlePadding
-        , axTitleX
-        , axTitleY
-        , axValues
-        , axZIndex
-        , axcoBandPosition
-        , axcoDomain
-        , axcoDomainColor
-        , axcoDomainOpacity
-        , axcoDomainWidth
-        , axcoGrid
-        , axcoGridColor
-        , axcoGridDash
-        , axcoGridOpacity
-        , axcoGridWidth
-        , axcoLabelAlign
-        , axcoLabelAngle
-        , axcoLabelBaseline
-        , axcoLabelBound
-        , axcoLabelColor
-        , axcoLabelFlush
-        , axcoLabelFlushOffset
-        , axcoLabelFont
-        , axcoLabelFontSize
-        , axcoLabelFontWeight
-        , axcoLabelLimit
-        , axcoLabelOpacity
-        , axcoLabelOverlap
-        , axcoLabelPadding
-        , axcoLabels
-        , axcoMaxExtent
-        , axcoMinExtent
-        , axcoShortTimeLabels
-        , axcoTickColor
-        , axcoTickExtra
-        , axcoTickOffset
-        , axcoTickOpacity
-        , axcoTickRound
-        , axcoTickSize
-        , axcoTickStep
-        , axcoTickWidth
-        , axcoTicks
-        , axcoTitleAlign
-        , axcoTitleAngle
-        , axcoTitleBaseline
-        , axcoTitleColor
-        , axcoTitleFont
-        , axcoTitleFontSize
-        , axcoTitleFontWeight
-        , axcoTitleLimit
-        , axcoTitleOpacity
-        , axcoTitlePadding
-        , axcoTitleX
-        , axcoTitleY
-        , background
-        , bar
-        , biBase
-        , biDivide
-        , biExtent
-        , biMaxBins
-        , biMinStep
-        , biNice
-        , biStep
-        , biSteps
-        , binAs
-        , boo
-        , boos
-        , bounds
-        , boxplot
-        , calculateAs
-        , categoricalDomainMap
-        , center
-        , centerRC
-        , circle
-        , clipRect
-        , coArea
-        , coAutosize
-        , coAxis
-        , coAxisBand
-        , coAxisBottom
-        , coAxisLeft
-        , coAxisRight
-        , coAxisTop
-        , coAxisX
-        , coAxisY
-        , coBackground
-        , coBar
-        , coCircle
-        , coCountTitle
-        , coFieldTitle
-        , coGeoshape
-        , coHeader
-        , coLegend
-        , coLine
-        , coMark
-        , coNamedStyle
-        , coNumberFormat
-        , coPadding
-        , coPoint
-        , coProjection
-        , coRange
-        , coRect
-        , coRemoveInvalid
-        , coRule
-        , coScale
-        , coSelection
-        , coSquare
-        , coStack
-        , coText
-        , coTick
-        , coTimeFormat
-        , coTitle
-        , coTrail
-        , coView
-        , color
-        , column
-        , columnBy
-        , columnFields
-        , combineSpecs
-        , configuration
-        , configure
-        , cubeHelix
-        , cubeHelixLong
-        , customProjection
-        , dAggregate
-        , dBin
-        , dImpute
-        , dMType
-        , dName
-        , dTimeUnit
-        , dataColumn
-        , dataFromColumns
-        , dataFromJson
-        , dataFromRows
-        , dataFromSource
-        , dataFromUrl
-        , dataName
-        , dataRow
-        , datasets
-        , description
-        , detail
-        , doDts
-        , doNums
-        , doSelection
-        , doStrs
-        , domainRangeMap
-        , dsv
-        , dt
-        , dtDate
-        , dtDay
-        , dtHour
-        , dtMillisecond
-        , dtMinute
-        , dtMonth
-        , dtQuarter
-        , dtRange
-        , dtSecond
-        , dtYear
-        , dts
-        , encoding
-        , errorband
-        , errorbar
-        , expr
-        , fAggregate
-        , fBin
-        , fHeader
-        , fMType
-        , fName
-        , fTimeUnit
-        , facet
-        , false
-        , fiCompose
-        , fiEqual
-        , fiExpr
-        , fiGreaterThan
-        , fiGreaterThanEq
-        , fiLessThan
-        , fiLessThanEq
-        , fiOneOf
-        , fiRange
-        , fiSelection
-        , fiValid
-        , fill
-        , filter
-        , flatten
-        , flattenAs
-        , foDate
-        , foUtc
-        , fold
-        , foldAs
-        , geoFeatureCollection
-        , geoLine
-        , geoLines
-        , geoPoint
-        , geoPoints
-        , geoPolygon
-        , geoPolygons
-        , geometry
-        , geometryCollection
-        , geoshape
-        , hAggregate
-        , hBin
-        , hBinned
-        , hConcat
-        , hDataCondition
-        , hMType
-        , hName
-        , hRepeat
-        , hSelectionCondition
-        , hStr
-        , hTimeUnit
-        , hdFormat
-        , hdLabelAngle
-        , hdLabelColor
-        , hdLabelFont
-        , hdLabelFontSize
-        , hdLabelLimit
-        , hdLabelPadding
-        , hdTitle
-        , hdTitleAnchor
-        , hdTitleAngle
-        , hdTitleBaseline
-        , hdTitleColor
-        , hdTitleFont
-        , hdTitleFontSize
-        , hdTitleFontWeight
-        , hdTitleLimit
-        , hdTitlePadding
-        , height
-        , hyperlink
-        , iCheckbox
-        , iColor
-        , iDate
-        , iDateTimeLocal
-        , iMonth
-        , iNumber
-        , iRadio
-        , iRange
-        , iSelect
-        , iTel
-        , iText
-        , iTime
-        , iWeek
-        , imFrame
-        , imGroupBy
-        , imKeyValSequence
-        , imKeyVals
-        , imMethod
-        , imValue
-        , impute
-        , inDebounce
-        , inElement
-        , inMax
-        , inMin
-        , inName
-        , inOptions
-        , inPlaceholder
-        , inStep
-        , iqrScale
-        , jsonProperty
-        , layer
-        , leClipHeight
-        , leColumnPadding
-        , leColumns
-        , leCornerRadius
-        , leDirection
-        , leDts
-        , leFillColor
-        , leFormat
-        , leGradientLength
-        , leGradientStrokeColor
-        , leGradientStrokeWidth
-        , leGradientThickness
-        , leGridAlign
-        , leLabelAlign
-        , leLabelBaseline
-        , leLabelColor
-        , leLabelFont
-        , leLabelFontSize
-        , leLabelLimit
-        , leLabelOffset
-        , leLabelOverlap
-        , leNums
-        , leOffset
-        , leOrient
-        , lePadding
-        , leRowPadding
-        , leStrokeColor
-        , leStrokeWidth
-        , leStrs
-        , leSymbolFillColor
-        , leSymbolSize
-        , leSymbolStrokeColor
-        , leSymbolStrokeWidth
-        , leSymbolType
-        , leTickCount
-        , leTitle
-        , leTitleAlign
-        , leTitleBaseline
-        , leTitleColor
-        , leTitleFont
-        , leTitleFontSize
-        , leTitleFontWeight
-        , leTitleLimit
-        , leTitlePadding
-        , leType
-        , leValues
-        , leZIndex
-        , lecoClipHeight
-        , lecoColumnPadding
-        , lecoColumns
-        , lecoCornerRadius
-        , lecoEntryPadding
-        , lecoFillColor
-        , lecoGradientDirection
-        , lecoGradientHeight
-        , lecoGradientLabelBaseline
-        , lecoGradientLabelLimit
-        , lecoGradientLabelOffset
-        , lecoGradientStrokeColor
-        , lecoGradientStrokeWidth
-        , lecoGradientWidth
-        , lecoGridAlign
-        , lecoLabelAlign
-        , lecoLabelBaseline
-        , lecoLabelColor
-        , lecoLabelFont
-        , lecoLabelFontSize
-        , lecoLabelLimit
-        , lecoLabelOffset
-        , lecoLabelOverlap
-        , lecoOffset
-        , lecoOrient
-        , lecoPadding
-        , lecoRowPadding
-        , lecoShortTimeLabels
-        , lecoStrokeColor
-        , lecoStrokeDash
-        , lecoStrokeWidth
-        , lecoSymbolBaseFillColor
-        , lecoSymbolBaseStrokeColor
-        , lecoSymbolDirection
-        , lecoSymbolFillColor
-        , lecoSymbolOffset
-        , lecoSymbolSize
-        , lecoSymbolStrokeColor
-        , lecoSymbolStrokeWidth
-        , lecoSymbolType
-        , lecoTitleAlign
-        , lecoTitleBaseline
-        , lecoTitleColor
-        , lecoTitleFont
-        , lecoTitleFontSize
-        , lecoTitleFontWeight
-        , lecoTitleLimit
-        , lecoTitlePadding
-        , line
-        , lmMarker
-        , lookup
-        , lookupAs
-        , mAggregate
-        , mBin
-        , mBinned
-        , mBoo
-        , mDataCondition
-        , mImpute
-        , mLegend
-        , mMType
-        , mName
-        , mNum
-        , mPath
-        , mRepeat
-        , mScale
-        , mSelectionCondition
-        , mStr
-        , mTimeUnit
-        , mTitle
-        , maAlign
-        , maAngle
-        , maBandSize
-        , maBaseline
-        , maBinSpacing
-        , maBorders
-        , maClip
-        , maColor
-        , maContinuousBandSize
-        , maCursor
-        , maDiscreteBandSize
-        , maDx
-        , maDy
-        , maExtent
-        , maFill
-        , maFillOpacity
-        , maFilled
-        , maFont
-        , maFontSize
-        , maFontStyle
-        , maFontWeight
-        , maHRef
-        , maInterpolate
-        , maLine
-        , maOpacity
-        , maOrient
-        , maPoint
-        , maRadius
-        , maRule
-        , maShape
-        , maShortTimeLabels
-        , maSize
-        , maStroke
-        , maStrokeCap
-        , maStrokeDash
-        , maStrokeDashOffset
-        , maStrokeJoin
-        , maStrokeMiterLimit
-        , maStrokeOpacity
-        , maStrokeWidth
-        , maStyle
-        , maTension
-        , maText
-        , maTheta
-        , maThickness
-        , maTicks
-        , maTooltip
-        , maX2Offset
-        , maXOffset
-        , maY2Offset
-        , maYOffset
-        , name
-        , not
-        , num
-        , numRange
-        , nums
-        , oAggregate
-        , oBin
-        , oMType
-        , oName
-        , oRepeat
-        , oSort
-        , oTimeUnit
-        , opAs
-        , opacity
-        , or
-        , order
-        , pAggregate
-        , pAxis
-        , pBin
-        , pBinned
-        , pHeight
-        , pImpute
-        , pMType
-        , pName
-        , pRepeat
-        , pScale
-        , pSort
-        , pStack
-        , pTimeUnit
-        , pTitle
-        , pWidth
-        , paEdges
-        , paSize
-        , padding
-        , parse
-        , pmMarker
-        , point
-        , position
-        , prCenter
-        , prClipAngle
-        , prClipExtent
-        , prCoefficient
-        , prDistance
-        , prFraction
-        , prLobes
-        , prParallel
-        , prPrecision
-        , prRadius
-        , prRatio
-        , prRotate
-        , prSpacing
-        , prTilt
-        , prType
-        , projection
-        , raName
-        , raNums
-        , raStrs
-        , racoCategory
-        , racoDiverging
-        , racoHeatmap
-        , racoOrdinal
-        , racoRamp
-        , racoSymbol
-        , reAxis
-        , reLegend
-        , reScale
-        , rect
-        , repeat
-        , resolution
-        , resolve
-        , rgb
-        , row
-        , rowBy
-        , rowFields
-        , rule
-        , sacoBandPaddingInner
-        , sacoBandPaddingOuter
-        , sacoClamp
-        , sacoMaxBandSize
-        , sacoMaxFontSize
-        , sacoMaxOpacity
-        , sacoMaxSize
-        , sacoMaxStrokeWidth
-        , sacoMinBandSize
-        , sacoMinFontSize
-        , sacoMinOpacity
-        , sacoMinSize
-        , sacoMinStrokeWidth
-        , sacoPointPadding
-        , sacoRangeStep
-        , sacoRound
-        , sacoTextXRangeStep
-        , sacoUseUnaggregatedDomain
-        , sample
-        , scClamp
-        , scDomain
-        , scInterpolate
-        , scNice
-        , scNiceInterval
-        , scNiceTickCount
-        , scPadding
-        , scPaddingInner
-        , scPaddingOuter
-        , scRange
-        , scRangeStep
-        , scReverse
-        , scRound
-        , scScheme
-        , scType
-        , scZero
-        , seBind
-        , seEncodings
-        , seFields
-        , seNearest
-        , seOn
-        , seResolve
-        , seSelectionMark
-        , seToggle
-        , seTranslate
-        , seZoom
-        , select
-        , selected
-        , selection
-        , selectionName
-        , shape
-        , size
-        , smFill
-        , smFillOpacity
-        , smStroke
-        , smStrokeDash
-        , smStrokeDashOffset
-        , smStrokeOpacity
-        , smStrokeWidth
-        , soByField
-        , soByRepeat
-        , soCustom
-        , spacing
-        , spacingRC
-        , specification
-        , square
-        , stAscending
-        , stDescending
-        , stOffset
-        , stSort
-        , stack
-        , str
-        , stroke
-        , strs
-        , symbolPath
-        , tAggregate
-        , tBin
-        , tBinned
-        , tDataCondition
-        , tFormat
-        , tMType
-        , tName
-        , tRepeat
-        , tSelectionCondition
-        , tTimeUnit
-        , tTitle
-        , text
-        , textMark
-        , tick
-        , ticoAnchor
-        , ticoAngle
-        , ticoBaseline
-        , ticoColor
-        , ticoFont
-        , ticoFontSize
-        , ticoFontWeight
-        , ticoLimit
-        , ticoOffset
-        , ticoOrient
-        , timeUnitAs
-        , title
-        , toVegaLite
-        , tooltip
-        , tooltips
-        , topojsonFeature
-        , topojsonMesh
-        , trail
-        , transform
-        , true
-        , utc
-        , vConcat
-        , vicoClip
-        , vicoFill
-        , vicoFillOpacity
-        , vicoHeight
-        , vicoStroke
-        , vicoStrokeDash
-        , vicoStrokeDashOffset
-        , vicoStrokeOpacity
-        , vicoStrokeWidth
-        , vicoWidth
-        , wiAggregateOp
-        , wiAscending
-        , wiDescending
-        , wiField
-        , wiFrame
-        , wiGroupBy
-        , wiIgnorePeers
-        , wiOp
-        , wiParam
-        , wiSort
-        , width
-        , window
-        )
+module VegaLite exposing
+    ( toVegaLite
+    , VLProperty
+    , Spec
+    , LabelledSpec
+    , combineSpecs
+    , dataFromUrl
+    , dataFromColumns
+    , dataFromRows
+    , dataFromJson
+    , dataFromSource
+    , dataName
+    , datasets
+    , dataColumn
+    , dataRow
+    , Data
+    , DataColumn
+    , DataRow
+    , geometry
+    , geoFeatureCollection
+    , geometryCollection
+    , geoPoint
+    , geoPoints
+    , geoLine
+    , geoLines
+    , geoPolygon
+    , geoPolygons
+    , csv
+    , tsv
+    , dsv
+    , jsonProperty
+    , topojsonFeature
+    , topojsonMesh
+    , parse
+    , foNum
+    , foBoo
+    , foDate
+    , foUtc
+    , transform
+    , projection
+    , prType
+    , prClipAngle
+    , prClipExtent
+    , prCenter
+    , prRotate
+    , prPrecision
+    , prCoefficient
+    , prDistance
+    , prFraction
+    , prLobes
+    , prParallel
+    , prRadius
+    , prRatio
+    , prSpacing
+    , prTilt
+    , albers
+    , albersUsa
+    , azimuthalEqualArea
+    , azimuthalEquidistant
+    , conicConformal
+    , conicEqualArea
+    , conicEquidistant
+    , equirectangular
+    , gnomonic
+    , mercator
+    , orthographic
+    , stereographic
+    , transverseMercator
+    , customProjection
+    , noClip
+    , clipRect
+    , aggregate
+    , opAs
+    , timeUnitAs
+    , opArgMax
+    , opArgMin
+    , opCI0
+    , opCI1
+    , opCount
+    , opDistinct
+    , opMax
+    , opMean
+    , opMedian
+    , opMin
+    , opMissing
+    , opQ1
+    , opQ3
+    , opStderr
+    , opStdev
+    , opStdevP
+    , opSum
+    , opValid
+    , opVariance
+    , opVarianceP
+    , binAs
+    , biBase
+    , biDivide
+    , biExtent
+    , biMaxBins
+    , biMinStep
+    , biNice
+    , biStep
+    , biSteps
+    , stack
+    , stOffset
+    , StackOffset(..)
+    , stSort
+    , stAscending
+    , stDescending
+    , calculateAs
+    , filter
+    , fiEqual
+    , fiLessThan
+    , fiLessThanEq
+    , fiGreaterThan
+    , fiGreaterThanEq
+    , fiExpr
+    , fiCompose
+    , fiSelection
+    , fiOneOf
+    , fiRange
+    , fiValid
+    , numRange
+    , dtRange
+    , flatten
+    , flattenAs
+    , fold
+    , foldAs
+    , lookup
+    , lookupAs
+    , impute
+    , imFrame
+    , imKeyVals
+    , imKeyValSequence
+    , imMethod
+    , imGroupBy
+    , imNewValue
+    , imValue
+    , imMean
+    , imMedian
+    , imMax
+    , imMin
+    , sample
+    , window
+    , wiAggregateOp
+    , wiOp
+    , wiParam
+    , wiField
+    , wiRowNumber
+    , wiRank
+    , wiDenseRank
+    , wiPercentRank
+    , wiCumeDist
+    , wiPercentile
+    , wiLag
+    , wiLead
+    , wiFirstValue
+    , wiLastValue
+    , wiNthValue
+    , wiFrame
+    , wiIgnorePeers
+    , wiGroupBy
+    , wiSort
+    , wiAscending
+    , wiDescending
+    , area
+    , bar
+    , boxplot
+    , errorband
+    , errorbar
+    , circle
+    , geoshape
+    , line
+    , point
+    , rect
+    , rule
+    , square
+    , textMark
+    , tick
+    , trail
+    , maAlign
+    , maAngle
+    , maBandSize
+    , maBaseline
+    , maBinSpacing
+    , maBorders
+    , maClip
+    , maColor
+    , maCursor
+    , maExtent
+    , maHRef
+    , maContinuousBandSize
+    , maDiscreteBandSize
+    , maDx
+    , maDy
+    , maFill
+    , maFilled
+    , maFillOpacity
+    , maFont
+    , maFontSize
+    , maFontStyle
+    , maFontWeight
+    , maInterpolate
+    , maOpacity
+    , maOrient
+    , maPoint
+    , maLine
+    , maRadius
+    , maRule
+    , maShape
+    , maShortTimeLabels
+    , maSize
+    , maStroke
+    , maStrokeCap
+    , StrokeCap(..)
+    , maStrokeDash
+    , maStrokeDashOffset
+    , maStrokeJoin
+    , StrokeJoin(..)
+    , maStrokeMiterLimit
+    , maStrokeOpacity
+    , maStrokeWidth
+    , maStyle
+    , maTension
+    , maText
+    , maTheta
+    , maThickness
+    , maTicks
+    , maTooltip
+    , maXOffset
+    , maYOffset
+    , maX2Offset
+    , maY2Offset
+    , MarkOrientation(..)
+    , MarkInterpolation(..)
+    , symCircle
+    , symCross
+    , symDiamond
+    , symSquare
+    , symTriangleUp
+    , symTriangleDown
+    , symPath
+    , Cursor(..)
+    , pmNone
+    , pmTransparent
+    , pmMarker
+    , lmMarker
+    , lmNone
+    , exRange
+    , exCi
+    , exIqr
+    , exIqrScale
+    , exStderr
+    , exStdev
+    , TooltipContent(..)
+    , encoding
+    , Measurement(..)
+    , position
+    , Position(..)
+    , pName
+    , pRepeat
+    , pMType
+    , pBin
+    , pBinned
+    , pTimeUnit
+    , pTitle
+    , pAggregate
+    , pScale
+    , pAxis
+    , pSort
+    , pStack
+    , pWidth
+    , pHeight
+    , pImpute
+    , soAscending
+    , soDescending
+    , soByField
+    , soByRepeat
+    , soCustom
+    , axDomain
+    , axFormat
+    , axGrid
+    , axLabelAngle
+    , axLabelOverlap
+    , axLabelPadding
+    , axLabels
+    , axMaxExtent
+    , axMinExtent
+    , axOffset
+    , axOrient
+    , axPosition
+    , axBandPosition
+    , axDates
+    , axDomainColor
+    , axDomainOpacity
+    , axDomainWidth
+    , axLabelAlign
+    , axLabelBaseline
+    , axLabelBound
+    , axLabelColor
+    , axLabelFlush
+    , axLabelFlushOffset
+    , axLabelFont
+    , axLabelFontSize
+    , axLabelFontWeight
+    , axLabelLimit
+    , axLabelOpacity
+    , axTickColor
+    , axTickCount
+    , axTickExtra
+    , axTickOffset
+    , axTickOpacity
+    , axTickRound
+    , axTicks
+    , axTickSize
+    , axTickStep
+    , axTickWidth
+    , axTitle
+    , axTitleAlign
+    , axTitleAngle
+    , axTitleBaseline
+    , axTitleColor
+    , axTitleFont
+    , axTitleFontSize
+    , axTitleFontWeight
+    , axTitleLimit
+    , axTitleOpacity
+    , axTitlePadding
+    , axTitleX
+    , axTitleY
+    , axValues
+    , axZIndex
+    , OverlapStrategy(..)
+    , Side(..)
+    , HAlign(..)
+    , VAlign(..)
+    , size
+    , color
+    , fill
+    , stroke
+    , opacity
+    , shape
+    , mName
+    , mRepeat
+    , mMType
+    , mScale
+    , mBin
+    , mBinned
+    , mImpute
+    , mTimeUnit
+    , mTitle
+    , mAggregate
+    , mLegend
+    , mPath
+    , mNum
+    , mStr
+    , mBoo
+    , leGradient
+    , leSymbol
+    , leClipHeight
+    , leColumnPadding
+    , leColumns
+    , leCornerRadius
+    , leDirection
+    , leFillColor
+    , leFormat
+    , leGradientLength
+    , leGradientThickness
+    , leGradientStrokeColor
+    , leGradientStrokeWidth
+    , leGridAlign
+    , leLabelAlign
+    , leLabelBaseline
+    , leLabelColor
+    , leLabelFont
+    , leLabelFontSize
+    , leLabelLimit
+    , leLabelOffset
+    , leLabelOverlap
+    , leOffset
+    , leOrient
+    , lePadding
+    , leRowPadding
+    , leStrokeColor
+    , leStrokeWidth
+    , leSymbolFillColor
+    , leSymbolSize
+    , leSymbolStrokeColor
+    , leSymbolStrokeWidth
+    , leSymbolType
+    , leTickCount
+    , leTitle
+    , leTitleAlign
+    , leTitleBaseline
+    , leTitleColor
+    , leTitleFont
+    , leTitleFontSize
+    , leTitleFontWeight
+    , leTitleLimit
+    , leTitlePadding
+    , leType
+    , leValues
+    , leZIndex
+    , LegendOrientation(..)
+    , leNums
+    , leStrs
+    , leDts
+    , text
+    , tooltip
+    , tooltips
+    , tName
+    , tRepeat
+    , tMType
+    , tBin
+    , tBinned
+    , tAggregate
+    , tTimeUnit
+    , tTitle
+    , tFormat
+    , FontWeight(..)
+    , hyperlink
+    , hName
+    , hRepeat
+    , hMType
+    , hBin
+    , hBinned
+    , hAggregate
+    , hTimeUnit
+    , hStr
+    , order
+    , oName
+    , oRepeat
+    , oMType
+    , oBin
+    , oAggregate
+    , oSort
+    , oTimeUnit
+    , row
+    , column
+    , detail
+    , dName
+    , dMType
+    , dAggregate
+    , dBin
+    , dImpute
+    , dTimeUnit
+    , scType
+    , scDomain
+    , scRange
+    , scScheme
+    , scPadding
+    , scPaddingInner
+    , scPaddingOuter
+    , scRangeStep
+    , scRound
+    , scClamp
+    , scInterpolate
+    , scNice
+    , scZero
+    , scReverse
+    , scBand
+    , scBinLinear
+    , scBinOrdinal
+    , scLinear
+    , scLog
+    , scOrdinal
+    , scPoint
+    , scPow
+    , scQuantile
+    , scQuantize
+    , scSequential
+    , scSqrt
+    , scThreshold
+    , scTime
+    , scUtc
+    , raName
+    , raNums
+    , raStrs
+    , categoricalDomainMap
+    , domainRangeMap
+    , doNums
+    , doStrs
+    , doDts
+    , doUnaggregated
+    , doSelection
+    , scNiceTrue
+    , scNiceFalse
+    , scNiceMillisecond
+    , scNiceSecond
+    , scNiceMinute
+    , scNiceHour
+    , scNiceDay
+    , scNiceWeek
+    , scNiceMonth
+    , scNiceYear
+    , scNiceTickCount
+    , scNiceInterval
+    , cubeHelix
+    , cubeHelixLong
+    , hcl
+    , hclLong
+    , hsl
+    , hslLong
+    , lab
+    , rgb
+    , layer
+    , hConcat
+    , vConcat
+    , resolve
+    , resolution
+    , align
+    , alignRC
+    , CompositionAlignment(..)
+    , bounds
+    , Bounds(..)
+    , spacing
+    , spacingRC
+    , center
+    , centerRC
+    , reAxis
+    , reLegend
+    , reScale
+    , chX
+    , chY
+    , chX2
+    , chY2
+    , chColor
+    , chOpacity
+    , chShape
+    , chSize
+    , Resolution(..)
+    , repeat
+    , rowFields
+    , columnFields
+    , facet
+    , columnBy
+    , rowBy
+    , fName
+    , fMType
+    , fAggregate
+    , fBin
+    , fHeader
+    , fTimeUnit
+    , asSpec
+    , specification
+    , Arrangement(..)
+    , hdLabelAngle
+    , hdLabelColor
+    , hdLabelFont
+    , hdLabelFontSize
+    , hdLabelLimit
+    , hdLabelPadding
+    , hdTitle
+    , hdTitleAnchor
+    , hdTitleAngle
+    , hdTitleBaseline
+    , hdTitleColor
+    , hdTitleFont
+    , hdTitleFontWeight
+    , hdTitleFontSize
+    , hdTitleLimit
+    , hdTitlePadding
+    , hdFormat
+    , selection
+    , select
+    , Selection(..)
+    , seEmpty
+    , seBind
+    , seEncodings
+    , seFields
+    , seNearest
+    , seOn
+    , seResolve
+    , seSelectionMark
+    , seToggle
+    , seTranslate
+    , seZoom
+    , iRange
+    , iCheckbox
+    , iRadio
+    , iSelect
+    , iText
+    , iNumber
+    , iDate
+    , iTime
+    , iMonth
+    , iWeek
+    , iDateTimeLocal
+    , iTel
+    , iColor
+    , inDebounce
+    , inElement
+    , inOptions
+    , inMin
+    , inMax
+    , inName
+    , inStep
+    , inPlaceholder
+    , SelectionResolution(..)
+    , smFill
+    , smFillOpacity
+    , smStroke
+    , smStrokeDash
+    , smStrokeDashOffset
+    , smStrokeOpacity
+    , smStrokeWidth
+    , mSelectionCondition
+    , mDataCondition
+    , tSelectionCondition
+    , tDataCondition
+    , hDataCondition
+    , hSelectionCondition
+    , and
+    , or
+    , not
+    , expr
+    , selected
+    , selectionName
+    , name
+    , title
+    , description
+    , height
+    , width
+    , padding
+    , paSize
+    , paEdges
+    , autosize
+    , Autosize(..)
+    , background
+    , configure
+    , configuration
+    , coArea
+    , coAutosize
+    , coAxis
+    , coAxisX
+    , coAxisY
+    , coAxisLeft
+    , coAxisRight
+    , coAxisTop
+    , coAxisBottom
+    , coAxisBand
+    , coBackground
+    , coBar
+    , coCircle
+    , coCountTitle
+    , coFieldTitle
+    , coGeoshape
+    , coLegend
+    , coLine
+    , coHeader
+    , coMark
+    , coNamedStyle
+    , coNumberFormat
+    , coPadding
+    , coPoint
+    , coProjection
+    , coRange
+    , coRect
+    , coRemoveInvalid
+    , coRule
+    , coScale
+    , coSelection
+    , coSquare
+    , coStack
+    , coText
+    , coTick
+    , coTitle
+    , coTimeFormat
+    , coTrail
+    , coView
+    , axcoBandPosition
+    , axcoDomain
+    , axcoDomainColor
+    , axcoDomainOpacity
+    , axcoDomainWidth
+    , axcoMaxExtent
+    , axcoMinExtent
+    , axcoGrid
+    , axcoGridColor
+    , axcoGridDash
+    , axcoGridOpacity
+    , axcoGridWidth
+    , axcoLabels
+    , axcoLabelAlign
+    , axcoLabelAngle
+    , axcoLabelBaseline
+    , axcoLabelBound
+    , axcoLabelColor
+    , axcoLabelFlush
+    , axcoLabelFlushOffset
+    , axcoLabelFontWeight
+    , axcoLabelFont
+    , axcoLabelFontSize
+    , axcoLabelLimit
+    , axcoLabelOpacity
+    , axcoLabelOverlap
+    , axcoLabelPadding
+    , axcoShortTimeLabels
+    , axcoTicks
+    , axcoTickColor
+    , axcoTickExtra
+    , axcoTickOffset
+    , axcoTickOpacity
+    , axcoTickRound
+    , axcoTickSize
+    , axcoTickStep
+    , axcoTickWidth
+    , axcoTitleAlign
+    , axcoTitleAngle
+    , axcoTitleBaseline
+    , axcoTitleColor
+    , axcoTitleFont
+    , axcoTitleFontWeight
+    , axcoTitleFontSize
+    , axcoTitleLimit
+    , axcoTitleOpacity
+    , axcoTitlePadding
+    , axcoTitleX
+    , axcoTitleY
+    , lecoClipHeight
+    , lecoColumnPadding
+    , lecoColumns
+    , lecoCornerRadius
+    , lecoFillColor
+    , lecoOrient
+    , lecoOffset
+    , lecoStrokeColor
+    , lecoStrokeDash
+    , lecoStrokeWidth
+    , lecoPadding
+    , lecoRowPadding
+    , lecoGradientDirection
+    , lecoGradientLabelBaseline
+    , lecoGradientLabelLimit
+    , lecoGradientLabelOffset
+    , lecoGradientStrokeColor
+    , lecoGradientStrokeWidth
+    , lecoGradientHeight
+    , lecoGradientWidth
+    , lecoGridAlign
+    , lecoLabelAlign
+    , lecoLabelBaseline
+    , lecoLabelColor
+    , lecoLabelFont
+    , lecoLabelFontSize
+    , lecoLabelLimit
+    , lecoLabelOffset
+    , lecoLabelOverlap
+    , lecoShortTimeLabels
+    , lecoEntryPadding
+    , lecoSymbolBaseFillColor
+    , lecoSymbolBaseStrokeColor
+    , lecoSymbolDirection
+    , lecoSymbolFillColor
+    , lecoSymbolOffset
+    , lecoSymbolSize
+    , lecoSymbolStrokeColor
+    , lecoSymbolStrokeWidth
+    , lecoSymbolType
+    , lecoTitleAlign
+    , lecoTitleBaseline
+    , lecoTitleColor
+    , lecoTitleFont
+    , lecoTitleFontSize
+    , lecoTitleFontWeight
+    , lecoTitleLimit
+    , lecoTitlePadding
+    , sacoBandPaddingInner
+    , sacoBandPaddingOuter
+    , sacoClamp
+    , sacoMaxBandSize
+    , sacoMinBandSize
+    , sacoMaxFontSize
+    , sacoMinFontSize
+    , sacoMaxOpacity
+    , sacoMinOpacity
+    , sacoMaxSize
+    , sacoMinSize
+    , sacoMaxStrokeWidth
+    , sacoMinStrokeWidth
+    , sacoPointPadding
+    , sacoRangeStep
+    , sacoRound
+    , sacoTextXRangeStep
+    , sacoUseUnaggregatedDomain
+    , racoCategory
+    , racoDiverging
+    , racoHeatmap
+    , racoOrdinal
+    , racoRamp
+    , racoSymbol
+    , ticoAnchor
+    , ticoAngle
+    , ticoBaseline
+    , ticoColor
+    , ticoFont
+    , ticoFontSize
+    , ticoFontWeight
+    , ticoLimit
+    , ticoOffset
+    , ticoOrient
+    , vicoWidth
+    , vicoHeight
+    , vicoClip
+    , vicoFill
+    , vicoFillOpacity
+    , vicoStroke
+    , vicoStrokeOpacity
+    , vicoStrokeWidth
+    , vicoStrokeDash
+    , vicoStrokeDashOffset
+    , APosition(..)
+    , FieldTitleProperty(..)
+    , boo
+    , true
+    , false
+    , dt
+    , num
+    , str
+    , boos
+    , dts
+    , nums
+    , strs
+    , dtYear
+    , dtQuarter
+    , dtMonth
+    , dtDate
+    , dtDay
+    , dtHour
+    , dtMinute
+    , dtSecond
+    , dtMillisecond
+    , MonthName(..)
+    , DayName(..)
+    , date
+    , day
+    , hours
+    , hoursMinutes
+    , hoursMinutesSeconds
+    , milliseconds
+    , minutes
+    , minutesSeconds
+    , month
+    , monthDate
+    , quarter
+    , quarterMonth
+    , seconds
+    , secondsMilliseconds
+    , year
+    , yearQuarter
+    , yearQuarterMonth
+    , yearMonth
+    , yearMonthDate
+    , yearMonthDateHours
+    , yearMonthDateHoursMinutes
+    , yearMonthDateHoursMinutesSeconds
+    , utc
+    , AxisProperty
+    , AxisConfig
+    , Binding
+    , BinProperty
+    , BooleanOp
+    , CInterpolate
+    , Channel
+    , ClipRect
+    , ConfigurationProperty
+    , DataType
+    , DataValue
+    , DataValues
+    , DateTime
+    , DetailChannel
+    , FacetChannel
+    , FacetMapping
+    , Filter
+    , FilterRange
+    , Format
+    , Geometry
+    , ImMethod
+    , InputProperty
+    , HeaderProperty
+    , HyperlinkChannel
+    , ImputeProperty
+    , Legend
+    , LegendConfig
+    , LegendProperty
+    , LegendValues
+    , LineMarker
+    , Mark
+    , MarkChannel
+    , MarkProperty
+    , Operation
+    , OrderChannel
+    , Padding
+    , PointMarker
+    , PositionChannel
+    , Projection
+    , ProjectionProperty
+    , RangeConfig
+    , RepeatFields
+    , Resolve
+    , Scale
+    , ScaleDomain
+    , ScaleNice
+    , ScaleProperty
+    , ScaleConfig
+    , ScaleRange
+    , SelectionMarkProperty
+    , SelectionProperty
+    , SortField
+    , SortProperty
+    , StackProperty
+    , SummaryExtent
+    , Symbol
+    , TextChannel
+    , TimeUnit
+    , TitleConfig
+    , ViewConfig
+    , Window
+    , WindowOperation
+    , WindowProperty
+    , seBindScales
+    )
 
 {-| Create Vega-Lite specifications in Elm. A specification can be sent to a
 Vega-Lite compiler to generate the graphics. While this a pure Elm library, to
@@ -832,7 +966,6 @@ Functions and types for declaring the data to the visualized. See the
 @docs geoLines
 @docs geoPolygon
 @docs geoPolygons
-@docs DataType
 
 
 ## Formatting Input Data
@@ -841,13 +974,16 @@ See the Vega-Lite
 [format](https://vega.github.io/vega-lite/docs/data.html#format) and
 [JSON](https://vega.github.io/vega-lite/docs/data.html#json) documentation.
 
-@docs Format
+@docs csv
+@docs tsv
+@docs dsv
 @docs jsonProperty
 @docs topojsonFeature
 @docs topojsonMesh
 @docs parse
-@docs dsv
 
+@docs foNum
+@docs foBoo
 @docs foDate
 @docs foUtc
 
@@ -883,9 +1019,21 @@ See the
 @docs prSpacing
 @docs prTilt
 
-@docs Projection
+@docs albers
+@docs albersUsa
+@docs azimuthalEqualArea
+@docs azimuthalEquidistant
+@docs conicConformal
+@docs conicEqualArea
+@docs conicEquidistant
+@docs equirectangular
+@docs gnomonic
+@docs mercator
+@docs orthographic
+@docs stereographic
+@docs transverseMercator
 @docs customProjection
-@docs ClipRect
+@docs noClip
 @docs clipRect
 
 
@@ -895,9 +1043,28 @@ See the
 [Vega-Lite aggregate documentation](https://vega.github.io/vega-lite/docs/aggregate.html).
 
 @docs aggregate
-@docs Operation
 @docs opAs
 @docs timeUnitAs
+@docs opArgMax
+@docs opArgMin
+@docs opCI0
+@docs opCI1
+@docs opCount
+@docs opDistinct
+@docs opMax
+@docs opMean
+@docs opMedian
+@docs opMin
+@docs opMissing
+@docs opQ1
+@docs opQ3
+@docs opStderr
+@docs opStdev
+@docs opStdevP
+@docs opSum
+@docs opValid
+@docs opVariance
+@docs opVarianceP
 
 
 ## Binning
@@ -986,9 +1153,13 @@ Impute missing data. See the
 @docs imKeyVals
 @docs imKeyValSequence
 @docs imMethod
-@docs ImMethod
 @docs imGroupBy
+@docs imNewValue
 @docs imValue
+@docs imMean
+@docs imMedian
+@docs imMax
+@docs imMin
 
 
 ## Data Sampling
@@ -1008,10 +1179,19 @@ documentation.
 @docs window
 @docs wiAggregateOp
 @docs wiOp
-@docs WindowOperation
 @docs wiParam
 @docs wiField
-
+@docs wiRowNumber
+@docs wiRank
+@docs wiDenseRank
+@docs wiPercentRank
+@docs wiCumeDist
+@docs wiPercentile
+@docs wiLag
+@docs wiLead
+@docs wiFirstValue
+@docs wiLastValue
+@docs wiNthValue
 @docs wiFrame
 @docs wiIgnorePeers
 @docs wiGroupBy
@@ -1113,15 +1293,25 @@ property documentation.
 
 @docs MarkOrientation
 @docs MarkInterpolation
-@docs Symbol
-@docs symbolPath
+@docs symCircle
+@docs symCross
+@docs symDiamond
+@docs symSquare
+@docs symTriangleUp
+@docs symTriangleDown
+@docs symPath
 @docs Cursor
-@docs PointMarker
+@docs pmNone
+@docs pmTransparent
 @docs pmMarker
-@docs LineMarker
 @docs lmMarker
-@docs SummaryExtent
-@docs iqrScale
+@docs lmNone
+@docs exRange
+@docs exCi
+@docs exIqr
+@docs exIqrScale
+@docs exStderr
+@docs exStdev
 @docs TooltipContent
 
 
@@ -1171,7 +1361,8 @@ See the
 See the
 [Vega-Lite sort documentation](https://vega.github.io/vega-lite/docs/sort.html).
 
-@docs SortProperty
+@docs soAscending
+@docs soDescending
 @docs soByField
 @docs soByRepeat
 @docs soCustom
@@ -1283,6 +1474,8 @@ color or size.
 See the
 [Vega-Lite legend property documentation](https://vega.github.io/vega-lite/docs/legend.html#legend-properties).
 
+@docs leGradient
+@docs leSymbol
 @docs leClipHeight
 @docs leColumnPadding
 @docs leColumns
@@ -1328,7 +1521,6 @@ See the
 @docs leValues
 @docs leZIndex
 
-@docs Legend
 @docs LegendOrientation
 @docs leNums
 @docs leStrs
@@ -1439,29 +1631,59 @@ Used to specify how the encoding of a data field should be applied. See the
 @docs scNice
 @docs scZero
 @docs scReverse
+@docs scBand
+@docs scBinLinear
+@docs scBinOrdinal
+@docs scLinear
+@docs scLog
+@docs scOrdinal
+@docs scPoint
+@docs scPow
+@docs scQuantile
+@docs scQuantize
+@docs scSequential
+@docs scSqrt
+@docs scThreshold
+@docs scTime
+@docs scUtc
 
-@docs Scale
 @docs raName
 @docs raNums
 @docs raStrs
 @docs categoricalDomainMap
 @docs domainRangeMap
-@docs ScaleDomain
 @docs doNums
 @docs doStrs
 @docs doDts
+@docs doUnaggregated
 @docs doSelection
 
-@docs ScaleNice
+@docs scNiceTrue
+@docs scNiceFalse
+@docs scNiceMillisecond
+@docs scNiceSecond
+@docs scNiceMinute
+@docs scNiceHour
+@docs scNiceDay
+@docs scNiceWeek
+@docs scNiceMonth
+@docs scNiceYear
 @docs scNiceTickCount
 @docs scNiceInterval
 
 
 ### Color Scaling
 
-@docs CInterpolate
+For color interpolation types, see the
+[Vega-Lite continouus scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
+
 @docs cubeHelix
 @docs cubeHelixLong
+@docs hcl
+@docs hclLong
+@docs hsl
+@docs hslLong
+@docs lab
 @docs rgb
 
 
@@ -1493,7 +1715,14 @@ See the
 @docs reAxis
 @docs reLegend
 @docs reScale
-@docs Channel
+@docs chX
+@docs chY
+@docs chX2
+@docs chY2
+@docs chColor
+@docs chOpacity
+@docs chShape
+@docs chSize
 @docs Resolution
 
 
@@ -1560,8 +1789,9 @@ documentation.
 @docs selection
 @docs select
 @docs Selection
-@docs SelectionProperty
+@docs seEmpty
 @docs seBind
+@docs @dosc seBindScales
 @docs seEncodings
 @docs seFields
 @docs seNearest
@@ -1948,6 +2178,7 @@ can carry data used in specifications.
 
 See the
 [Vega-Lite dateTime documentation](https://vega.github.io/vega-lite/docs/types.html#datetime)
+and the [Vega-Lite time unit documentation](https://vega.github.io/vega-lite/docs/timeunit.html).
 
 @docs dtYear
 @docs dtQuarter
@@ -1961,7 +2192,28 @@ See the
 @docs MonthName
 @docs DayName
 
-@docs TimeUnit
+@docs date
+@docs day
+@docs hours
+@docs hoursMinutes
+@docs hoursMinutesSeconds
+@docs milliseconds
+@docs minutes
+@docs minutesSeconds
+@docs month
+@docs monthDate
+@docs quarter
+@docs quarterMonth
+@docs seconds
+@docs secondsMilliseconds
+@docs year
+@docs yearQuarter
+@docs yearQuarterMonth
+@docs yearMonth
+@docs yearMonthDate
+@docs yearMonthDateHours
+@docs yearMonthDateHoursMinutes
+@docs yearMonthDateHoursMinutesSeconds
 @docs utc
 
 ---
@@ -1972,57 +2224,69 @@ See the
 Types that are not specified directly, provided here for reference with links
 to the functions that generate them.
 
-@docs PositionChannel
-@docs MarkChannel
-@docs DetailChannel
-@docs FacetChannel
-@docs HyperlinkChannel
-@docs OrderChannel
-@docs TextChannel
-
-@docs Mark
-@docs MarkProperty
-
-@docs BooleanOp
-@docs Binding
-
 @docs AxisProperty
 @docs AxisConfig
+@docs Binding
 @docs BinProperty
+@docs BooleanOp
+@docs CInterpolate
+@docs Channel
+@docs ClipRect
 @docs ConfigurationProperty
+@docs DataType
+@docs DataValue
+@docs DataValues
+@docs DateTime
+@docs DetailChannel
+@docs FacetChannel
+@docs FacetMapping
+@docs Filter
+@docs FilterRange
+@docs Format
+@docs Geometry
+@docs ImMethod
 @docs InputProperty
 @docs HeaderProperty
+@docs HyperlinkChannel
+@docs ImputeProperty
+@docs Legend
 @docs LegendConfig
 @docs LegendProperty
 @docs LegendValues
+@docs LineMarker
+@docs Mark
+@docs MarkChannel
+@docs MarkProperty
+@docs Operation
+@docs OrderChannel
+@docs Padding
+@docs PointMarker
+@docs PositionChannel
+@docs Projection
 @docs ProjectionProperty
+@docs RangeConfig
+@docs RepeatFields
+@docs Resolve
+@docs Scale
+@docs ScaleDomain
+@docs ScaleNice
 @docs ScaleProperty
 @docs ScaleConfig
-@docs StackProperty
-@docs RangeConfig
+@docs ScaleRange
 @docs SelectionMarkProperty
+@docs SelectionProperty
+@docs SortField
+@docs SortProperty
+@docs StackProperty
+@docs SummaryExtent
+@docs Symbol
+@docs TextChannel
+@docs TimeUnit
 @docs TitleConfig
 @docs ViewConfig
-
-@docs DataValue
-@docs DataValues
-@docs ImputeProperty
-@docs DateTime
-@docs Geometry
-
-@docs FacetMapping
-@docs RepeatFields
-@docs Filter
-@docs FilterRange
-
-@docs Resolve
-
-@docs Padding
-@docs ScaleRange
-
 @docs Window
+@docs WindowOperation
 @docs WindowProperty
-@docs SortField
 
 -}
 
@@ -2226,7 +2490,8 @@ type Bounds
     | Flush
 
 
-{-| Channel type to be used in a resolution specification.
+{-| Generated by [chX](#chX), [chY](#chY), [chX2](#chX2), [chY2](#chY2),
+[chColor](#chColor), [chOpacity](#chOpacity), [chShape](#chShape) and [chSize](#chSize).
 -}
 type Channel
     = ChX
@@ -2239,17 +2504,8 @@ type Channel
     | ChSize
 
 
-{-| Type of color interpolation to apply when mapping a data field onto a color
-scale. Note that color interpolation cannot be applied with the default `sequential`
-color scale, so additionally, you should set the `sType` to another continuous scale
-such as `linear`, `pow` etc.
-
-Options that require a `gamma` value (with 1 being a recommended default to provide)
-are generated by [cubeHelix](#cubeHelix), [cubeHelixLong](#cubeHelixLong) and [rgb](#rgb).
-
-See the
-[Vega-Lite continouus scale documentation](https://vega.github.io/vega-lite/docs/scale.html#continuous).
-
+{-| Generated by [cubeHelix](#cubeHelix), [cubeHelixLong](#cubeHelixLong), [hcl](#hcl),
+[hclLong](#hclLong), [hsl](#hsl), [hslLong](#hslLong), [lab](#lab) and [rgb](#rgb).
 -}
 type CInterpolate
     = CubeHelix Float
@@ -2262,8 +2518,7 @@ type CInterpolate
     | Rgb Float
 
 
-{-| No clipping to be applied. To specify a clipping rectangle dimenstions, see
-[clipRect](#clipRect).
+{-| Generatee by [noClip](#noClip) and [clipRect](#clipRect).
 -}
 type ClipRect
     = NoClip
@@ -2402,12 +2657,11 @@ type alias DataRow =
     Spec
 
 
-{-| Data type to be parsed when reading input data. To parse dates, see
-[foDate](#FoDate) and [foUtc](#foUtc).
+{-| Generated by [foBoo](#foBoo), [foNum](#foNum), [foDate](#FoDate) and [foUtc](#foUtc).
 -}
 type DataType
-    = FoNumber
-    | FoBoolean
+    = FoNum
+    | FoBoo
     | FoDate String
     | FoUtc String
 
@@ -2570,10 +2824,9 @@ type FontWeight
     | W900
 
 
-{-| Data file format (only necessary if the file extension does not indicate the
-type). To read a file with a delimiter other than comma or tab, use [dsv](#dsv).
-To customise the parsing of a file use [parse](#parse), [jsonProperty](#jsonProperty),
-[topojsonFeature](#topojsonFeature) or [topojsonMesh](#topojsonMesh).
+{-| Generated by [csv](#csv), [dsv](#dsv), [tsv](#tsv), [parse](#parse),
+[jsonProperty](#jsonProperty), [topojsonFeature](#topojsonFeature) and
+[topojsonMesh](#topojsonMesh).
 -}
 type Format
     = JSON String
@@ -2698,8 +2951,7 @@ type alias LabelledSpec =
     ( String, Spec )
 
 
-{-| Type of legend. Gradient legends are usually used for continuous quantitative
-data while symbol legends used for categorical data.
+{-| Generated by [leGradient](#leGradient) and [leSymbol](#leSymbol).
 -}
 type Legend
     = Gradient
@@ -3013,12 +3265,16 @@ type MonthName
     | Dec
 
 
-{-| Type of aggregation operation.
+{-| Generated by [opArgMax](#opArgMax), [opArgMin](#opArgMin), [opCI0](#opCI0),
+[opCI1](#opCI1), [opCount](#opCount), [opDistinct](#opDistinct), [opMax](#opMax),
+[opMean](#opMean), [opMedian](#opMedian), [opMin](#opMin), [opMissing](#opMissing),
+[opQ1](#opQ1), [opQ3](#opQ3), [opStderr](#opStderr), [opStdev](#opStdev),
+[opStdevP](#opStdevP), [opSum](#opSum), [opValid](#opValid),
+[opVariance](#opVariance) and [opVarianceP](#opVarianceP).
 -}
 type Operation
     = ArgMax
     | ArgMin
-    | Average
     | CI0
     | CI1
     | Count
@@ -3068,8 +3324,7 @@ type Padding
     | PEdges Float Float Float Float
 
 
-{-| Appearance of a point marker that is overlaid on a line or area mark. Also
-generated by [pmMarker](#pmMarker).
+{-| Generated by [pmNone](#pmNone), [pmTransparent](#pmTransparent) and [pmMarker](#pmMarker).
 -}
 type PointMarker
     = PMTransparent
@@ -3113,9 +3368,13 @@ type PositionChannel
     | PImpute (List ImputeProperty)
 
 
-{-| Types of geographic map projection. These are based on a subset of those provided
-by the [d3-geo library](https://github.com/d3/d3-geo). To generate a custom projection
-use [customProjection](#customProjection).
+{-| Generated by [albers](#albers), [albersUsa](#albersUsa),
+[azimuthalEqualArea](#azimuthalEqualArea), [azimuthalEquidistant](#azimuthalEquidistant),
+[conicConformal](#conicConformal), [conicEqualArea](#conicEqualArea),
+[conicEquidistant](#conicEquidistant), [equirectangular](#equirectangular),
+[gnomonic](#gnomonic), [mercator](#mercator), [orthographic](#), [orthographic](#),
+[stereographic](#stereographic), [transverseMercator](#transverseMercator) and
+[customProjection](#customProjection).
 -}
 type Projection
     = Albers
@@ -3237,8 +3496,8 @@ type ScaleConfig
     | SCUseUnaggregatedDomain Bool
 
 
-{-| A scale domain (type of data in scale). To specify scale domain values explicitly,
-use [doNums](#doNums), [doStrs](#doStrs), [doDts](#doDts) or [doSelection](#doSelection).
+{-| Generated by [doNums](#doNums), [doStrs](#doStrs), [doDts](#doDts),
+[doSelection](#doSelection) and [doUnaggregated](#doUnaggregated).
 -}
 type ScaleDomain
     = DNumbers (List Float)
@@ -3248,9 +3507,11 @@ type ScaleDomain
     | Unaggregated
 
 
-{-| The style of selecting 'nice' numbers. To specify nice time intervals use
-[scNiceInterval](#scNiceInterval) and to set a nice tick count use
-[scNiceTickCount](#scNiceTickCount).
+{-| Generated by [scNiceTrue](#scNiceTrue), [scNiceFalse](#scNiceFalse),
+[scNiceMillisecond](#scNiceMillisecond), [scNiceSecond](#scNiceSecond),
+[scNiceMinute](#scNiceMinute), [scNiceHour](#scNiceHour), [scNiceDay](#scNiceDay),
+[scNiceWeek](#scNiceWeek), [scNiceMonth](#scNiceMonth), [scNiceYear](#scNiceYear),
+[scNiceTickCount](#scNiceTickCount) and[scNiceInterval](#scNiceInterval).
 -}
 type ScaleNice
     = NMillisecond
@@ -3324,10 +3585,10 @@ type SelectionMarkProperty
     | SMStrokeDashOffset Float
 
 
-{-| Properties for customising the nature of an interactive selection. Parameterised
-properties generated by [seBind](#seBind), [seEncodings](#seEncodings), [seFields](#seFields),
-[seNearest](#seNearest), [seOn](#seOn), [seResolve](#seResolve), [seSelectionMark](#seSelectionMark),
-[seToggle](#seToggle), [seTranslate](#seTranslate) and [seZoom](#seZoom).
+{-| Generated by [seBind](#seBind), [seBindScales](#seBindScales),[seEmpty](#seEmpty),
+[seEncodings](#seEncodings), [seFields](#seFields), [seNearest](#seNearest), [seOn](#seOn),
+[seResolve](#seResolve), [seSelectionMark](#seSelectionMark), [seToggle](#seToggle),
+[seTranslate](#seTranslate) and [seZoom](#seZoom).
 -}
 type SelectionProperty
     = Empty
@@ -3362,9 +3623,8 @@ type Side
     | SRight
 
 
-{-| Allow type of sorting to be customised. To sort a field by the aggregated
-values of another use [soByField](#soByField) or [soByRepeat](#soByRepeat). Custom
-sorting by explicit values can be provided by [soCustom](#soCustom).
+{-| Generated by [soAscending](#soAscending), [soDescending](#soDescending),
+[soByField](#soByField), [soByRepeat](#soByRepeat) and [soCustom](#soCustom).
 -}
 type SortProperty
     = Ascending
@@ -3413,21 +3673,22 @@ type StrokeJoin
     | JBevel
 
 
-{-| Type of symbol. To create a user defined path for a symbol use
-[symPath](#symPath).
+{-| Generated by [symCircle](#symCircle), [symSquare](#symSquare), [symCross](#symCross),
+[symDiamond](#symDiamond), [symTriangleUp](#symTriangleUp), [symTriangleDown](#symTriangleDown)
+and [symPath](#symPath).
 -}
 type Symbol
     = SymCircle
     | SymSquare
-    | Cross
-    | Diamond
-    | TriangleUp
-    | TriangleDown
-    | Path String
+    | SymCross
+    | SymDiamond
+    | SymTriangleUp
+    | SymTriangleDown
+    | SymPath String
 
 
-{-| Type of extent summary of a statistical distribution. Additionally generated
-by [iqrScale](#iqrScale).
+{-| Generated by [exCi](#exCi), [exIqr](#exIqr), [exIqrScale](#exIqrScale), [exRange](#exRange),
+[exStderr](#exStderr) and [exStdev](#exStdev).
 -}
 type SummaryExtent
     = ExCI
@@ -3457,16 +3718,14 @@ type TextChannel
     | TFormat String
 
 
-{-| A unit of time. See the
-[Vega-Lite documentation](https://vega.github.io/vega-lite/docs/timeunit.html).
-
-To encode a time as UTC (coordinated universal time, independent of local time
-zones or daylight saving), provide a time unit to the `utc` function.
-For example,
-
-    encoding
-        << position X [ pName "date", pMType Temporal, pTimeUnit (utc YearMonthDateHours) ]
-
+{-| Generated by [date](#date), [day](#day), [hours](#hours), [hoursMinutes](#hoursMinutes),
+[hoursMinutesSeconds](#hoursMinutesSeconds), [milliseconds](#milliseconds),
+[minutes](#minutes), [minutesSeconds](#minutesSeconds), [month](#month), [monthDate](#monthDate),
+[quarter](#quarter), [quarterMonth](#quarterMonth), [seconds](#seconds),
+[secondsMilliseconds](#secondsMilliseconds), [year](#year), [yearQuarter](#yearQuarter),
+[yearQuarterMonth](#yearQuarterMonth), [yearMonth](#yearMonth), [yearMonthDate](#yearMonthDate),
+[yearMonthDateHours](#yearMonthDateHours), [yearMonthDateHoursMinutes](#yearMonthDateHoursMinutes),
+[yearMonthDateHoursMinutesSeconds](#yearMonthDateHoursMinutesSeconds) and [utc](#utc).
 -}
 type TimeUnit
     = Year
@@ -3666,7 +3925,21 @@ The second is a list of 'group by' fields.
 -}
 aggregate : List Spec -> List String -> List LabelledSpec -> List LabelledSpec
 aggregate ops groups =
-    (::) ( "aggregate", JE.list [ JE.list ops, JE.list (List.map JE.string groups) ] )
+    (::) ( "aggregate", toList [ toList ops, JE.list JE.string groups ] )
+
+
+{-| An Albers map projection.
+-}
+albers : Projection
+albers =
+    Albers
+
+
+{-| An Albers USA map projection that combines continental USA with Alaska and Hawaii.
+-}
+albersUsa : Projection
+albersUsa =
+    AlbersUsa
 
 
 {-| Alignment to apply to grid rows and columns generated by a composition
@@ -4466,6 +4739,20 @@ axZIndex =
     AxZIndex
 
 
+{-| An azimuthal equal area map projection.
+-}
+azimuthalEqualArea : Projection
+azimuthalEqualArea =
+    AzimuthalEqualArea
+
+
+{-| An azimuthal equidistant map projection.
+-}
+azimuthalEquidistant : Projection
+azimuthalEquidistant =
+    AzimuthalEquidistant
+
+
 {-| Background color of the visualization. Should be specified with a CSS
 string such as `#ffe` or `rgb(200,20,150)`. If not specified the background will
 be transparent.
@@ -4545,9 +4832,10 @@ of bin transformation.
 binAs : List BinProperty -> String -> String -> List LabelledSpec -> List LabelledSpec
 binAs bProps field label =
     if bProps == [] then
-        (::) ( "bin", JE.list [ JE.bool True, JE.string field, JE.string label ] )
+        (::) ( "bin", toList [ JE.bool True, JE.string field, JE.string label ] )
+
     else
-        (::) ( "bin", JE.list [ bProps |> List.map binProperty |> JE.object, JE.string field, JE.string label ] )
+        (::) ( "bin", toList [ bProps |> List.map binProperty |> JE.object, JE.string field, JE.string label ] )
 
 
 {-| Step size between bins when binning a collection of values.
@@ -4605,8 +4893,8 @@ is the name to give the newly calculated field.
 
 -}
 calculateAs : String -> String -> List LabelledSpec -> List LabelledSpec
-calculateAs expr label =
-    (::) ( "calculate", JE.list [ JE.string expr, JE.string label ] )
+calculateAs ex label =
+    (::) ( "calculate", toList [ JE.string ex, JE.string label ] )
 
 
 {-| Create a set of discrete domain to color mappings suitable for customising categorical
@@ -4649,6 +4937,62 @@ center c =
 centerRC : Bool -> Bool -> ( VLProperty, Spec )
 centerRC cRow cCol =
     ( VLCenter, JE.object [ ( "row", JE.bool cRow ), ( "col", JE.bool cCol ) ] )
+
+
+{-| Color channel to be used in a resolution specification
+-}
+chColor : Channel
+chColor =
+    ChColor
+
+
+{-| Shape channel to be used in a resolution specification
+-}
+chShape : Channel
+chShape =
+    ChShape
+
+
+{-| Size channel to be used in a resolution specification
+-}
+chSize : Channel
+chSize =
+    ChSize
+
+
+{-| Opacity channel to be used in a resolution specification
+-}
+chOpacity : Channel
+chOpacity =
+    ChOpacity
+
+
+{-| X-channel to be used in a resolution specification
+-}
+chX : Channel
+chX =
+    ChX
+
+
+{-| X2-channel to be used in a resolution specification
+-}
+chX2 : Channel
+chX2 =
+    ChX2
+
+
+{-| Y-channel to be used in a resolution specification
+-}
+chY : Channel
+chY =
+    ChY
+
+
+{-| Y2-channel to be used in a resolution specification
+-}
+chY2 : Channel
+chY2 =
+    ChY2
 
 
 {-| [Circle mark](https://vega.github.io/vega-lite/docs/circle.html) for
@@ -4886,6 +5230,27 @@ configure configs =
     ( VLConfig, JE.object configs )
 
 
+{-| A conformal conic map projection.
+-}
+conicConformal : Projection
+conicConformal =
+    ConicConformal
+
+
+{-| An equal area conic map projection.
+-}
+conicEqualArea : Projection
+conicEqualArea =
+    ConicEqualArea
+
+
+{-| An equidistant conic map projection.
+-}
+conicEquidistant : Projection
+conicEquidistant =
+    ConicEquidistant
+
+
 {-| Configure the default number formatting for axis and text labels.
 -}
 coNumberFormat : String -> ConfigurationProperty
@@ -5014,6 +5379,14 @@ coView =
     View
 
 
+{-| CSV data file format (only necessary if the file extension does not indicate the
+type).
+-}
+csv : Format
+csv =
+    CSV
+
+
 {-| Cube helix color interpolation for continuous color scales using the given
 gamma value (anchored at 1).
 -}
@@ -5030,9 +5403,9 @@ cubeHelixLong =
     CubeHelixLong
 
 
-{-| Custom projection type. Additional custom projections from d3 can
-be defined via the [Vega API](https://vega.github.io/vega/docs/projections/#register)
-and called from with this function where the parameter is the name of the D3
+{-| Custom projection type. Additional custom projections from d3 can be defined
+via the [Vega API](https://vega.github.io/vega/docs/projections/#register) and
+called from with this function where the parameter is the name of the D3
 projection to use (e.g. `customProjection "winkel3"`).
 -}
 customProjection : String -> Projection
@@ -5061,7 +5434,7 @@ dataColumn colName data =
             (::) (List.map (\s -> ( colName, JE.string s )) col)
 
         DateTimes col ->
-            (::) (List.map (\dts -> ( colName, JE.object (List.map dateTimeProperty dts) )) col)
+            (::) (List.map (\ds -> ( colName, JE.object (List.map dateTimeProperty ds) )) col)
 
         Booleans col ->
             (::) (List.map (\b -> ( colName, JE.bool b )) col)
@@ -5088,13 +5461,11 @@ dataFromColumns : List Format -> List DataColumn -> Data
 dataFromColumns fmts cols =
     let
         dataArray =
-            cols
-                |> transpose
-                |> List.map JE.object
-                |> JE.list
+            cols |> transpose |> JE.list JE.object
     in
     if fmts == [] then
         ( VLData, JE.object [ ( "values", dataArray ) ] )
+
     else
         ( VLData
         , JE.object
@@ -5128,6 +5499,7 @@ dataFromJson : Spec -> List Format -> Data
 dataFromJson json fmts =
     if fmts == [] then
         ( VLData, JE.object [ ( "values", json ) ] )
+
     else
         ( VLData
         , JE.object
@@ -5158,11 +5530,12 @@ complex inline data tables, such as mixures of arrays and objects, consider usin
 dataFromRows : List Format -> List DataRow -> Data
 dataFromRows fmts rows =
     if fmts == [] then
-        ( VLData, JE.object [ ( "values", JE.list rows ) ] )
+        ( VLData, JE.object [ ( "values", toList rows ) ] )
+
     else
         ( VLData
         , JE.object
-            [ ( "values", JE.list rows )
+            [ ( "values", toList rows )
             , ( "format", JE.object (List.concatMap formatProperty fmts) )
             ]
         )
@@ -5188,6 +5561,7 @@ dataFromSource : String -> List Format -> Data
 dataFromSource sourceName fmts =
     if fmts == [] then
         ( VLData, JE.object [ ( "name", JE.string sourceName ) ] )
+
     else
         ( VLData
         , JE.object
@@ -5205,6 +5579,7 @@ dataFromUrl : String -> List Format -> Data
 dataFromUrl url fmts =
     if fmts == [] then
         ( VLData, JE.object [ ( "url", JE.string url ) ] )
+
     else
         ( VLData
         , JE.object
@@ -5217,8 +5592,8 @@ dataFromUrl url fmts =
 {-| Create a row of data. A row comprises a list of (_columnName_, _value_) pairs.
 -}
 dataRow : List ( String, DataValue ) -> List DataRow -> List DataRow
-dataRow row =
-    (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValueSpec val )) row))
+dataRow r =
+    (::) (JE.object (List.map (\( colName, val ) -> ( colName, dataValueSpec val )) r))
 
 
 {-| Create a dataset comprising a collection of named `Data` items. Each data item
@@ -5234,9 +5609,9 @@ or [dataFromJson](#dataFromJson). These can be later referred to using
                 << dataRow [ ( "cat", str "a" ), ( "val", num 10 ) ]
                 << dataRow [ ( "cat", str "b" ), ( "val", num 18 ) ]
         json =
-            JE.list
-                [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 120 ) ]
-                , JE.object [ ( "cat", JE.string "b" ), ( "val", JE.float 180 ) ]
+            JE.list JE.object
+                [ [ ( "cat", JE.string "a" ), ( "val", JE.float 120 ) ]
+                , [ ( "cat", JE.string "b" ), ( "val", JE.float 180 ) ]
                 ]
 
         enc = ...
@@ -5262,7 +5637,7 @@ datasets namedData =
                     data
 
         specs =
-            List.map (\( name, data ) -> ( name, (\( _, spec ) -> extract spec) data )) namedData
+            List.map (\( s, data ) -> ( s, (\( _, spec ) -> extract spec) data )) namedData
     in
     ( VLDatasets, JE.object specs )
 
@@ -5275,7 +5650,7 @@ data source, such as one generated via an API call.
 
 -}
 dataName : String -> Data -> Data
-dataName name data =
+dataName s data =
     let
         extract d =
             case JD.decodeString (JD.keyValuePairs JD.value) (JE.encode 0 d) of
@@ -5288,7 +5663,21 @@ dataName name data =
         spec =
             (\( _, dataSpec ) -> extract dataSpec) data
     in
-    ( VLData, JE.object [ ( "name", JE.string name ), spec ] )
+    ( VLData, JE.object [ ( "name", JE.string s ), spec ] )
+
+
+{-| Day of the month (1-31) time unit used for discretizing temporal data.
+-}
+date : TimeUnit
+date =
+    Date
+
+
+{-| Day of the week time unit used for discretizing temporal data.
+-}
+day : TimeUnit
+day =
+    Day
 
 
 {-| Discretize numeric values into bins when encoding with a level of detail
@@ -5388,6 +5777,13 @@ doSelection =
 doStrs : List String -> ScaleDomain
 doStrs =
     DStrings
+
+
+{-| Specify an unaggregated scale domain (type of data in scale).
+-}
+doUnaggregated : ScaleDomain
+doUnaggregated =
+    Unaggregated
 
 
 {-| Delimited file format (DSV) with a given separator.
@@ -5497,6 +5893,14 @@ encoding channels =
     ( VLEncoding, JE.object channels )
 
 
+{-| An equirectangular (default) map projection that maps longitude to x and
+latitude to y.
+-}
+equirectangular : Projection
+equirectangular =
+    Equirectangular
+
+
 {-| [Errorband composite mark](https://vega.github.io/vega-lite/docs/errorband.html)
 for showing summaries of variation along a signal. By default no border is drawn.
 To add a border with default properties use [maBorders](#maBorders) with an empty list.
@@ -5515,12 +5919,47 @@ errorbar =
     mark Errorbar
 
 
+{-| Band extent between the 95% confidence intervals of a distribution.
+-}
+exCi : SummaryExtent
+exCi =
+    ExCI
+
+
+{-| Band extent between the lower and upper quartiles of a distribution.
+-}
+exIqr : SummaryExtent
+exIqr =
+    ExIqr
+
+
 {-| Expression that should evaluate to either true or false. Can use any valid
 [Vega expression](https://vega.github.io/vega/docs/expressions/).
 -}
 expr : String -> BooleanOp
 expr =
     Expr
+
+
+{-| Band extent between the minumum and maximum values in a distribution.
+-}
+exRange : SummaryExtent
+exRange =
+    ExRange
+
+
+{-| Band extent as the standard error about the mean of a distribution.
+-}
+exStderr : SummaryExtent
+exStderr =
+    ExStderr
+
+
+{-| Band extent as the standard deviation of a distribution.
+-}
+exStdev : SummaryExtent
+exStdev =
+    ExStdev
 
 
 {-| Fields to be used to facet a view in rows or columns creating a set of small
@@ -5642,8 +6081,8 @@ fill markProps =
 filter : Filter -> List LabelledSpec -> List LabelledSpec
 filter f =
     case f of
-        FExpr expr ->
-            (::) ( "filter", JE.string expr )
+        FExpr ex ->
+            (::) ( "filter", JE.string ex )
 
         FCompose boolExpr ->
             (::) ( "filter", booleanOpSpec boolExpr )
@@ -5671,21 +6110,21 @@ filter f =
                 values =
                     case vals of
                         NumberRange mn mx ->
-                            JE.list [ JE.float mn, JE.float mx ]
+                            JE.list JE.float [ mn, mx ]
 
                         DateRange [] [] ->
-                            JE.list [ JE.null, JE.null ]
+                            toList [ JE.null, JE.null ]
 
                         DateRange [] dMax ->
-                            JE.list [ JE.null, JE.object (List.map dateTimeProperty dMax) ]
+                            toList [ JE.null, JE.object (List.map dateTimeProperty dMax) ]
 
                         DateRange dMin [] ->
-                            JE.list [ JE.object (List.map dateTimeProperty dMin), JE.null ]
+                            toList [ JE.object (List.map dateTimeProperty dMin), JE.null ]
 
                         DateRange dMin dMax ->
-                            JE.list
-                                [ JE.object (List.map dateTimeProperty dMin)
-                                , JE.object (List.map dateTimeProperty dMax)
+                            JE.list JE.object
+                                [ List.map dateTimeProperty dMin
+                                , List.map dateTimeProperty dMax
                                 ]
             in
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "range", values ) ] )
@@ -5695,16 +6134,16 @@ filter f =
                 values =
                     case vals of
                         Numbers xs ->
-                            List.map JE.float xs |> JE.list
+                            JE.list JE.float xs
 
-                        DateTimes dts ->
-                            List.map (\dt -> JE.object (List.map dateTimeProperty dt)) dts |> JE.list
+                        DateTimes ds ->
+                            JE.list (\d -> JE.object (List.map dateTimeProperty d)) ds
 
                         Strings ss ->
-                            List.map JE.string ss |> JE.list
+                            JE.list JE.string ss
 
                         Booleans bs ->
-                            List.map JE.bool bs |> JE.list
+                            JE.list JE.bool bs
             in
             (::) ( "filter", JE.object [ ( "field", JE.string field ), ( "oneOf", values ) ] )
 
@@ -5748,7 +6187,7 @@ fiValid =
 -}
 flatten : List String -> List LabelledSpec -> List LabelledSpec
 flatten fields =
-    (::) ( "flatten", JE.list (List.map JE.string fields) )
+    (::) ( "flatten", JE.list JE.string fields )
 
 
 {-| Similar to [flatten](#flatten) but allows the new output fields to be named
@@ -5756,13 +6195,7 @@ flatten fields =
 -}
 flattenAs : List String -> List String -> List LabelledSpec -> List LabelledSpec
 flattenAs fields names =
-    (::)
-        ( "flattenAs"
-        , JE.list
-            [ JE.list (List.map JE.string fields)
-            , JE.list (List.map JE.string names)
-            ]
-        )
+    (::) ( "flattenAs", JE.list (JE.list JE.string) [ fields, names ] )
 
 
 {-| Field used for encoding with a facet channel.
@@ -5777,6 +6210,13 @@ fName =
 fMType : Measurement -> FacetChannel
 fMType =
     FmType
+
+
+{-| Indicate Boolean data type to be parsed when reading input data.
+-}
+foBoo : DataType
+foBoo =
+    FoBoo
 
 
 {-| Date format for parsing input data using
@@ -5794,7 +6234,7 @@ for mapping matrix or cross-tabulation data into a standardized format.
 -}
 fold : List String -> List LabelledSpec -> List LabelledSpec
 fold fields =
-    (::) ( "fold", JE.list (List.map JE.string fields) )
+    (::) ( "fold", JE.list JE.string fields )
 
 
 {-| Similar to [fold](#fold) but allows the new output `key` and `value` fields
@@ -5804,12 +6244,19 @@ foldAs : List String -> String -> String -> List LabelledSpec -> List LabelledSp
 foldAs fields keyName valName =
     (::)
         ( "foldAs"
-        , JE.list
-            [ JE.list (List.map JE.string fields)
+        , toList
+            [ JE.list JE.string fields
             , JE.string keyName
             , JE.string valName
             ]
         )
+
+
+{-| Indicate numeric data type to be parsed when reading input data.
+-}
+foNum : DataType
+foNum =
+    FoNum
 
 
 {-| Similar to [foDate](#foDate) but for UTC format dates.
@@ -5842,7 +6289,7 @@ geoFeatureCollection : List Spec -> Spec
 geoFeatureCollection geoms =
     JE.object
         [ ( "type", JE.string "FeatureCollection" )
-        , ( "features", JE.list geoms )
+        , ( "features", toList geoms )
         ]
 
 
@@ -5876,7 +6323,7 @@ geometryCollection : List Spec -> Spec
 geometryCollection geoms =
     JE.object
         [ ( "type", JE.string "GeometryCollection" )
-        , ( "geometries", JE.list geoms )
+        , ( "geometries", toList geoms )
         ]
 
 
@@ -5895,6 +6342,7 @@ geometry gType properties =
             [ ( "type", JE.string "Feature" )
             , ( "geometry", geometryTypeSpec gType )
             ]
+
     else
         JE.object
             [ ( "type", JE.string "Feature" )
@@ -5943,6 +6391,13 @@ geoshape =
     mark Geoshape
 
 
+{-| A gnomonic map projection.
+-}
+gnomonic : Projection
+gnomonic =
+    Gnomonic
+
+
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
 hyperlink channel. The type of aggregation is determined by the given operation
 parameter.
@@ -5966,11 +6421,25 @@ hBinned =
     HBinned
 
 
+{-| HCL color interpolation for continuous color scales.
+-}
+hcl : CInterpolate
+hcl =
+    Hcl
+
+
+{-| HCL color interpolation in polar coordinate space for continuous color scales.
+-}
+hclLong : CInterpolate
+hclLong =
+    HclLong
+
+
 {-| Specifications to be juxtaposed horizontally in a visualization.
 -}
 hConcat : List Spec -> ( VLProperty, Spec )
 hConcat specs =
-    ( VLHConcat, JE.list specs )
+    ( VLHConcat, toList specs )
 
 
 {-| Make a hyperlink channel conditional on some predicate expression. The first
@@ -6125,6 +6594,27 @@ hName =
     HName
 
 
+{-| Hour of the day time unit used for discretizing temporal data.
+-}
+hours : TimeUnit
+hours =
+    Hours
+
+
+{-| Hours and minutes time unit used for discretizing temporal data.
+-}
+hoursMinutes : TimeUnit
+hoursMinutes =
+    HoursMinutes
+
+
+{-| Hours, minutes and seconds time unit used for discretizing temporal data.
+-}
+hoursMinutesSeconds : TimeUnit
+hoursMinutesSeconds =
+    HoursMinutesSeconds
+
+
 {-| Reference in a hyperlink channel to a field name generated by `repeat`. The
 parameter identifies whether reference is being made to fields being laid out
 in columns or in rows.
@@ -6141,6 +6631,20 @@ has been selected, the third the encoding if it is not selected.
 hSelectionCondition : BooleanOp -> List HyperlinkChannel -> List HyperlinkChannel -> HyperlinkChannel
 hSelectionCondition op tCh fCh =
     HSelectionCondition op tCh fCh
+
+
+{-| HSL color interpolation for continuous color scales.
+-}
+hsl : CInterpolate
+hsl =
+    Hsl
+
+
+{-| HSL color interpolation in polar coordinate space for continuous color scales.
+-}
+hslLong : CInterpolate
+hslLong =
+    HslLong
 
 
 {-| Literal string value when encoding with a hyperlink channel.
@@ -6194,13 +6698,6 @@ iDateTimeLocal f =
     IDateTimeLocal f
 
 
-{-| Month input element that can bound to a named field value.
--}
-iMonth : String -> List InputProperty -> Binding
-iMonth f =
-    IMonth f
-
-
 {-| 1d window over which data imputation values are generated. The two
 parameters should either be `Just` a number indicating the offset from the current
 data object, or `Nothing` to indicate unbounded rows preceding or following the
@@ -6235,11 +6732,53 @@ imKeyValSequence =
     ImKeyValSequence
 
 
+{-| Use maximum of values when imputing missing data.
+-}
+imMax : ImMethod
+imMax =
+    ImMax
+
+
+{-| Use mean of values when imputing missing data.
+-}
+imMean : ImMethod
+imMean =
+    ImMean
+
+
+{-| Use median of values when imputing missing data.
+-}
+imMedian : ImMethod
+imMedian =
+    ImMedian
+
+
 {-| Imputation method to use when replacing values.
 -}
 imMethod : ImMethod -> ImputeProperty
 imMethod =
     ImMethod
+
+
+{-| Use maximum of values when imputing missing data.
+-}
+imMin : ImMethod
+imMin =
+    ImMin
+
+
+{-| New value to use when imputing with [imValue](#imValue).
+-}
+imNewValue : DataValue -> ImputeProperty
+imNewValue =
+    ImNewValue
+
+
+{-| Month input element that can bound to a named field value.
+-}
+iMonth : String -> List InputProperty -> Binding
+iMonth f =
+    IMonth f
 
 
 {-| Impute missing data values. The first parameter is the data field to process;
@@ -6250,7 +6789,7 @@ impute : String -> String -> List ImputeProperty -> List LabelledSpec -> List La
 impute fields key imProps =
     (::)
         ( "impute"
-        , JE.list
+        , toList
             [ JE.string fields
             , JE.string key
             , imputePropertySpec "frame" imProps
@@ -6263,11 +6802,11 @@ impute fields key imProps =
         )
 
 
-{-| New value to use when imputing with the method `ImValue`.
+{-| Use field value when imputing missing data.
 -}
-imValue : DataValue -> ImputeProperty
+imValue : ImMethod
 imValue =
-    ImNewValue
+    ImValue
 
 
 {-| Delay to introduce when processing input events in order to avoid unnecessary
@@ -6339,8 +6878,8 @@ iNumber f =
 {-| A scaling of the interquartile range to be used as whiskers in a boxplot.
 For example a value of 1.5 would extend whiskers to ±1.5x the IQR from the mean.
 -}
-iqrScale : Float -> SummaryExtent
-iqrScale =
+exIqrScale : Float -> SummaryExtent
+exIqrScale =
     ExIqrScale
 
 
@@ -6402,11 +6941,18 @@ jsonProperty =
     JSON
 
 
+{-| Lab color interpolation for continuous color scales.
+-}
+lab : CInterpolate
+lab =
+    Lab
+
+
 {-| Assign a list of specifications to superposed layers in a visualization.
 -}
 layer : List Spec -> ( VLProperty, Spec )
 layer specs =
-    ( VLLayer, JE.list specs )
+    ( VLLayer, toList specs )
 
 
 {-| Limit height of legend entries.
@@ -6802,6 +7348,13 @@ leFormat =
     LFormat
 
 
+{-| A gradient legend for continuous quantitative data.
+-}
+leGradient : Legend
+leGradient =
+    Gradient
+
+
 {-| Length in pixels of the primary axis of a color ramp legend.
 -}
 leGradientLength : Float -> LegendProperty
@@ -6949,6 +7502,13 @@ leStrs =
     LStrings
 
 
+{-| A symbol legend for categorical data.
+-}
+leSymbol : Legend
+leSymbol =
+    Symbol
+
+
 {-| Legend symbol fill color.
 -}
 leSymbolFillColor : String -> LegendProperty
@@ -7091,6 +7651,13 @@ lmMarker =
     LMMarker
 
 
+{-| Indicates no line marker on an area mark.
+-}
+lmNone : LineMarker
+lmNone =
+    LMNone
+
+
 {-| Perform a lookup of named fields between two data sources. This allows you to
 find values in one data source based on the values in another. The first parameter
 is the field in the primary data source to act as key, the second is the secondary
@@ -7103,11 +7670,11 @@ lookup : String -> ( VLProperty, Spec ) -> String -> List String -> List Labelle
 lookup key1 ( vlProp, spec ) key2 fields =
     (::)
         ( "lookup"
-        , JE.list
+        , toList
             [ JE.string key1
             , spec
             , JE.string key2
-            , JE.list (List.map JE.string fields)
+            , JE.list JE.string fields
             ]
         )
 
@@ -7120,7 +7687,7 @@ lookupAs : String -> Data -> String -> String -> List LabelledSpec -> List Label
 lookupAs key1 ( vlProp, spec ) key2 asName =
     (::)
         ( "lookupAs"
-        , JE.list
+        , toList
             [ JE.string key1
             , spec
             , JE.string key2
@@ -7538,12 +8105,40 @@ mDataCondition =
     MDataCondition
 
 
+{-| A Mercator map projection.
+-}
+mercator : Projection
+mercator =
+    Mercator
+
+
+{-| Milliseconds time unit used for discretizing temporal data.
+-}
+milliseconds : TimeUnit
+milliseconds =
+    Milliseconds
+
+
 {-| Iputation rules for a mark channel. See the
 [Vega-Lite impute documentation](https://vega.github.io/vega-lite/docs/impute.html)
 -}
 mImpute : List ImputeProperty -> MarkChannel
 mImpute =
     MImpute
+
+
+{-| Minute of the hour time unit used for discretizing temporal data.
+-}
+minutes : TimeUnit
+minutes =
+    Minutes
+
+
+{-| Minutes and seconds time unit used for discretizing temporal data.
+-}
+minutesSeconds : TimeUnit
+minutesSeconds =
+    MinutesSeconds
 
 
 {-| Properties of a legend that describes a mark's encoding. For no legend, provide
@@ -7575,6 +8170,20 @@ mNum =
     MNumber
 
 
+{-| Month of the year (1-12) time unit used for discretizing temporal data.
+-}
+month : TimeUnit
+month =
+    Month
+
+
+{-| Month and day of month time unit used for discretizing temporal data.
+-}
+monthDate : TimeUnit
+monthDate =
+    MonthDate
+
+
 {-| SVG path string used when encoding with a mark property channel. Useful
 for providing custom shapes.
 -}
@@ -7604,7 +8213,7 @@ is a selection condition to evaluate; the second the encoding to apply if that s
 is true; the third parameter is the encoding if the selection is false.
 
     color
-        [ mSelectionCondition ( selectionName "myBrush")
+        [ mSelectionCondition (selectionName "myBrush")
             [ mName "myField", mMType Ordinal ]
             [ mStr "grey" ]
         ]
@@ -7643,10 +8252,17 @@ name s =
     ( VLName, JE.string s )
 
 
+{-| Inidicate no clipping to be applied.
+-}
+noClip : ClipRect
+noClip =
+    NoClip
+
+
 {-| Apply a negation Boolean operation as part of a logical composition. Boolean
 operations can be nested to any level.
 
-    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null") )
+    not (and (expr "datum.IMDB_Rating === null") (expr "datum.Rotten_Tomatoes_Rating === null"))
 
 -}
 not : BooleanOp -> BooleanOp
@@ -7712,6 +8328,22 @@ opacity markProps =
     (::) ( "opacity", List.concatMap markChannelProperty markProps |> JE.object )
 
 
+{-| An input data object containing the maximum field value to be used in an
+aggregation operation.
+-}
+opArgMax : Operation
+opArgMax =
+    ArgMax
+
+
+{-| An input data object containing the minimum field value to be used in an
+aggregation operation.
+-}
+opArgMin : Operation
+opArgMin =
+    ArgMin
+
+
 {-| Aaggregation operation. The first parameter is the operation to use; the second
 the name of the field in which to apply it and the third the name to be given to
 this transformation.
@@ -7737,6 +8369,133 @@ opAs op field label =
         ]
 
 
+{-| Lower 95% confidence interval to be used in an aggregation operation.
+-}
+opCI0 : Operation
+opCI0 =
+    CI0
+
+
+{-| Upper 95% confidence interval to be used in an aggregation operation.
+-}
+opCI1 : Operation
+opCI1 =
+    CI1
+
+
+{-| Total count of data objects to be used in an aggregation operation.
+-}
+opCount : Operation
+opCount =
+    Count
+
+
+{-| Count of distinct data objects to be used in an aggregation operation.
+-}
+opDistinct : Operation
+opDistinct =
+    Distinct
+
+
+{-| Maximum field value to be used in an aggregation operation.
+-}
+opMax : Operation
+opMax =
+    Max
+
+
+{-| Mean value to be used in an aggregation operation.
+-}
+opMean : Operation
+opMean =
+    Mean
+
+
+{-| Median field value to be used in an aggregation operation.
+-}
+opMedian : Operation
+opMedian =
+    Median
+
+
+{-| Minimum field value to be used in an aggregation operation.
+-}
+opMin : Operation
+opMin =
+    Min
+
+
+{-| Count of null or undefined field value to be used in an aggregation operation.
+-}
+opMissing : Operation
+opMissing =
+    Missing
+
+
+{-| Lower quartile boundary of field values to be used in an aggregation operation.
+-}
+opQ1 : Operation
+opQ1 =
+    Q1
+
+
+{-| Upper quartile boundary of field values to be used in an aggregation operation.
+-}
+opQ3 : Operation
+opQ3 =
+    Q3
+
+
+{-| Standard error of field values to be used in an aggregation operation.
+-}
+opStderr : Operation
+opStderr =
+    Stderr
+
+
+{-| Sample standard deviation of field values to be used in an aggregation operation.
+-}
+opStdev : Operation
+opStdev =
+    Stdev
+
+
+{-| Population standard deviation of field values to be used in an aggregation operation.
+-}
+opStdevP : Operation
+opStdevP =
+    StdevP
+
+
+{-| Sum of field values to be used in an ggregation operation.
+-}
+opSum : Operation
+opSum =
+    Sum
+
+
+{-| Count of values that are not `null`, `undefined` or `NaN` to be used in an
+aggregation operation.
+-}
+opValid : Operation
+opValid =
+    Valid
+
+
+{-| Sample variance of field value to be used in an aggregation operation.
+-}
+opVariance : Operation
+opVariance =
+    Variance
+
+
+{-| Population variance of field value to be used in an aggregation operation.
+-}
+opVarianceP : Operation
+opVarianceP =
+    VarianceP
+
+
 {-| Apply an 'or' Boolean operation as part of a logical composition.
 -}
 or : BooleanOp -> BooleanOp -> BooleanOp
@@ -7758,6 +8517,13 @@ laid out in columns or in rows.
 oRepeat : Arrangement -> OrderChannel
 oRepeat =
     ORepeat
+
+
+{-| An orthographic map projection.
+-}
+orthographic : Projection
+orthographic =
+    Orthographic
 
 
 {-| Sort order to be used by an order channel.
@@ -7853,11 +8619,26 @@ pImpute =
     PImpute
 
 
+{-| No point marker to be shown on a line or area mark.
+-}
+pmNone : PointMarker
+pmNone =
+    PMNone
+
+
 {-| Properties of a point marker that is overlaid on a line or area mark.
 -}
 pmMarker : List MarkProperty -> PointMarker
 pmMarker =
     PMMarker
+
+
+{-| Transparent point marker to be placed on area or line mark. Useful for
+interactive selections.
+-}
+pmTransparent : PointMarker
+pmTransparent =
+    PMTransparent
 
 
 {-| Level of measurement when encoding with a position channel.
@@ -8094,6 +8875,20 @@ the data rectangle:
 pWidth : PositionChannel
 pWidth =
     PWidth
+
+
+{-| Year quarter time unit used for discretizing temporal data.
+-}
+quarter : TimeUnit
+quarter =
+    Quarter
+
+
+{-| Year quarter and month time unit used for discretizing temporal data.
+-}
+quarterMonth : TimeUnit
+quarterMonth =
+    QuarterMonth
 
 
 {-| Default color scheme for categorical ranges.
@@ -8410,6 +9205,27 @@ sample maxSize =
     (::) ( "sample", JE.float maxSize )
 
 
+{-| A band scale.
+-}
+scBand : Scale
+scBand =
+    ScBand
+
+
+{-| A linear band scale.
+-}
+scBinLinear : Scale
+scBinLinear =
+    ScBinLinear
+
+
+{-| An ordinal band scale.
+-}
+scBinOrdinal : Scale
+scBinOrdinal =
+    ScBinOrdinal
+
+
 {-| Whether or not values outside the data domain are clamped to the minimum or
 maximum value.
 -}
@@ -8432,11 +9248,46 @@ scInterpolate =
     SInterpolate
 
 
+{-| A linear scale.
+-}
+scLinear : Scale
+scLinear =
+    ScLinear
+
+
+{-| A log scale.
+-}
+scLog : Scale
+scLog =
+    ScLog
+
+
 {-| 'Nice' minimum and maximum values in a scaling (e.g. multiples of 10).
 -}
 scNice : ScaleNice -> ScaleProperty
 scNice =
     SNice
+
+
+{-| Nice time intervals that try to align with whole or rounded days.
+-}
+scNiceDay : ScaleNice
+scNiceDay =
+    NDay
+
+
+{-| Disable nice scaling.
+-}
+scNiceFalse : ScaleNice
+scNiceFalse =
+    NFalse
+
+
+{-| Nice time intervals that try to align with whole or rounded hours.
+-}
+scNiceHour : ScaleNice
+scNiceHour =
+    NHour
 
 
 {-| 'Nice' temporal interval values when scaling.
@@ -8446,11 +9297,67 @@ scNiceInterval =
     NInterval
 
 
+{-| Nice time intervals that try to align with rounded milliseconds.
+-}
+scNiceMillisecond : ScaleNice
+scNiceMillisecond =
+    NMillisecond
+
+
+{-| Nice time intervals that try to align with whole or rounded minutes.
+-}
+scNiceMinute : ScaleNice
+scNiceMinute =
+    NMinute
+
+
+{-| Nice time intervals that try to align with whole or rounded months.
+-}
+scNiceMonth : ScaleNice
+scNiceMonth =
+    NMonth
+
+
+{-| Nice time intervals that try to align with whole or rounded seconds.
+-}
+scNiceSecond : ScaleNice
+scNiceSecond =
+    NSecond
+
+
 {-| Desired number of tick marks in a 'nice' scaling.
 -}
 scNiceTickCount : Int -> ScaleNice
 scNiceTickCount =
     NTickCount
+
+
+{-| Enable nice scaling.
+-}
+scNiceTrue : ScaleNice
+scNiceTrue =
+    NTrue
+
+
+{-| Nice time intervals that try to align with whole or rounded weeks.
+-}
+scNiceWeek : ScaleNice
+scNiceWeek =
+    NWeek
+
+
+{-| Nice time intervals that try to align with whole or rounded years.
+-}
+scNiceYear : ScaleNice
+scNiceYear =
+    NYear
+
+
+{-| An ordinal scale.
+-}
+scOrdinal : Scale
+scOrdinal =
+    ScOrdinal
 
 
 {-| Padding in pixels to apply to a scaling.
@@ -8472,6 +9379,34 @@ scPaddingInner =
 scPaddingOuter : Float -> ScaleProperty
 scPaddingOuter =
     SPaddingOuter
+
+
+{-| A point scale.
+-}
+scPoint : Scale
+scPoint =
+    ScPoint
+
+
+{-| A power scale.
+-}
+scPow : Scale
+scPow =
+    ScPow
+
+
+{-| A quantile scale.
+-}
+scQuantile : Scale
+scQuantile =
+    ScQuantile
+
+
+{-| A quantizing scale.
+-}
+scQuantize : Scale
+scQuantize =
+    ScQuantize
 
 
 {-| Range of a scaling. The type of range depends on the encoding channel.
@@ -8509,8 +9444,36 @@ colors to use (list of one number), or the extent of the color range to use (lis
 of two numbers between 0 and 1).
 -}
 scScheme : String -> List Float -> ScaleProperty
-scScheme name =
-    SScheme name
+scScheme =
+    SScheme
+
+
+{-| A sequential scale.
+-}
+scSequential : Scale
+scSequential =
+    ScSequential
+
+
+{-| A square root scale.
+-}
+scSqrt : Scale
+scSqrt =
+    ScSqrt
+
+
+{-| A threshold scale.
+-}
+scThreshold : Scale
+scThreshold =
+    ScThreshold
+
+
+{-| A temporal scale.
+-}
+scTime : Scale
+scTime =
+    ScTime
 
 
 {-| Type of scaling to apply.
@@ -8518,6 +9481,13 @@ scScheme name =
 scType : Scale -> ScaleProperty
 scType =
     SType
+
+
+{-| A UTC temporal scale.
+-}
+scUtc : Scale
+scUtc =
+    ScUtc
 
 
 {-| Whether or not a numeric scaling should be forced to include a zero value.
@@ -8532,6 +9502,34 @@ scZero =
 seBind : List Binding -> SelectionProperty
 seBind =
     Bind
+
+
+{-| Enable two-way binding between a selection and the scales used in the same view.
+-}
+seBindScales : SelectionProperty
+seBindScales =
+    BindScales
+
+
+{-| Second of a minute time unit used for discretizing temporal data.
+-}
+seconds : TimeUnit
+seconds =
+    Seconds
+
+
+{-| Seconds and milliseconds time unit used for discretizing temporal data.
+-}
+secondsMilliseconds : TimeUnit
+secondsMilliseconds =
+    SecondsMilliseconds
+
+
+{-| Make a selection empty by default when nothing selected.
+-}
+seEmpty : SelectionProperty
+seEmpty =
+    Empty
 
 
 {-| Encoding channels that form a named selection.
@@ -8554,13 +9552,13 @@ reference and the type of selection made. The third allows additional selection 
 be specified.
 -}
 select : String -> Selection -> List SelectionProperty -> List LabelledSpec -> List LabelledSpec
-select name sType options =
+select selName sType options =
     let
         selProps =
             ( "type", JE.string (selectionLabel sType) )
                 :: List.map selectionProperty options
     in
-    (::) ( name, JE.object selProps )
+    (::) ( selName, JE.object selProps )
 
 
 {-| Interactive selection that will be true or false as part of a logical composition.
@@ -8593,7 +9591,7 @@ selection sels =
 {-| Name a selection that is used as part of a conditional encoding.
 
     color
-        [ mSelectionCondition ( selectionName "myBrush" )
+        [ mSelectionCondition (selectionName "myBrush")
             [ mName "myField", mMType Nominal ]
             [ mStr "grey" ]
         ]
@@ -8722,14 +9720,22 @@ smStrokeDashOffset =
     SMStrokeDashOffset
 
 
+{-| Indicate sorting is to be applied from low to high.
+-}
+soAscending : SortProperty
+soAscending =
+    Ascending
+
+
 {-| Sort by the aggregated summary of a given field using a given aggregation
 operation. e.g., sort the categorical data field `variety` by the mean age of
 the data in each variety category:
 
-    position Y [ pName "variety"
-               , pMType Ordinal
-               , pSort [ soByField "age" Mean, Descending ]
-               ]
+    position Y
+        [ pName "variety"
+        , pMType Ordinal
+        , pSort [ soByField "age" Mean, Descending ]
+        ]
 
 -}
 soByField : String -> Operation -> SortProperty
@@ -8750,6 +9756,13 @@ soByRepeat =
 soCustom : DataValues -> SortProperty
 soCustom =
     CustomSort
+
+
+{-| Indicate sorting is to be applied from hight to low.
+-}
+soDescending : SortProperty
+soDescending =
+    Descending
 
 
 {-| Spacing between sub-views in a composition operator.
@@ -8798,9 +9811,9 @@ stack : String -> List String -> String -> String -> List StackProperty -> List 
 stack f grp start end sProps =
     (::)
         ( "stack"
-        , JE.list
+        , toList
             [ JE.string f
-            , JE.list (List.map JE.string grp)
+            , JE.list JE.string grp
             , JE.string start
             , JE.string end
             , stackPropertySpec "offset" sProps
@@ -8821,6 +9834,13 @@ stAscending =
 stDescending : String -> SortField
 stDescending =
     WDescending
+
+
+{-| A stereographic map projection.
+-}
+stereographic : Projection
+stereographic =
+    Stereographic
 
 
 {-| Stack offset when applying a stack transformation.
@@ -8859,12 +9879,54 @@ strs =
     Strings
 
 
+{-| Specify a circular symbol for a shape mark.
+-}
+symCircle : Symbol
+symCircle =
+    SymCircle
+
+
+{-| Specify a cross symbol for a shape mark.
+-}
+symCross : Symbol
+symCross =
+    SymCross
+
+
+{-| Specify a diamond symbol for a shape mark.
+-}
+symDiamond : Symbol
+symDiamond =
+    SymDiamond
+
+
 {-| A custom symbol shape as an
 [SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
 -}
-symbolPath : String -> Symbol
-symbolPath =
-    Path
+symPath : String -> Symbol
+symPath =
+    SymPath
+
+
+{-| Specify a square symbol for a shape mark.
+-}
+symSquare : Symbol
+symSquare =
+    SymSquare
+
+
+{-| Specify an upward trianglular symbol for a shape mark.
+-}
+symTriangleUp : Symbol
+symTriangleUp =
+    SymTriangleUp
+
+
+{-| Specify a downward trianglular symbol for a shape mark.
+-}
+symTriangleDown : Symbol
+symTriangleDown =
+    SymTriangleDown
 
 
 {-| Compute some aggregate summaray statistics for a field to be encoded with a
@@ -9009,7 +10071,7 @@ field.
 -}
 timeUnitAs : TimeUnit -> String -> String -> List LabelledSpec -> List LabelledSpec
 timeUnitAs tu field label =
-    (::) ( "timeUnit", JE.list [ JE.string (timeUnitLabel tu), JE.string field, JE.string label ] )
+    (::) ( "timeUnit", JE.list JE.string [ timeUnitLabel tu, field, label ] )
 
 
 {-| Title to be displayed in the visualization.
@@ -9056,7 +10118,7 @@ that define the channel.
 -}
 tooltips : List (List TextChannel) -> List LabelledSpec -> List LabelledSpec
 tooltips tDefss =
-    (::) ( "tooltip", JE.list (List.map (\tDefs -> JE.object (List.concatMap textChannelProperty tDefs)) tDefss) )
+    (::) ( "tooltip", JE.list (\tDefs -> JE.object (List.concatMap textChannelProperty tDefs)) tDefss )
 
 
 {-| A topoJSON feature format containing an object with the given name.
@@ -9131,10 +10193,10 @@ transform : List LabelledSpec -> ( VLProperty, Spec )
 transform transforms =
     let
         assemble : LabelledSpec -> Spec
-        assemble ( str, val ) =
+        assemble ( trName, val ) =
             -- These special cases (aggregate, bin etc.) use decodeString because
             -- they generate more than one labelled specification from a single function.
-            case str of
+            case trName of
                 "aggregate" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
                         Ok [ ops, groups ] ->
@@ -9153,43 +10215,49 @@ transform transforms =
 
                 "calculate" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
-                        Ok [ expr, label ] ->
-                            JE.object [ ( "calculate", expr ), ( "as", label ) ]
+                        Ok [ ex, label ] ->
+                            JE.object [ ( "calculate", ex ), ( "as", label ) ]
 
                         _ ->
                             JE.null
 
                 "impute" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
-                        Ok [ impute, key, frameObj, keyValsObj, keyValSequenceObj, methodObj, groupbyObj, valueObj ] ->
-                            ([ ( "impute", impute ), ( "key", key ) ]
+                        Ok [ imp, key, frameObj, keyValsObj, keyValSequenceObj, methodObj, groupbyObj, valueObj ] ->
+                            ([ ( "impute", imp ), ( "key", key ) ]
                                 ++ (if frameObj == JE.null then
                                         []
+
                                     else
                                         [ ( "frame", frameObj ) ]
                                    )
                                 ++ (if keyValsObj == JE.null then
                                         []
+
                                     else
                                         [ ( "keyvals", keyValsObj ) ]
                                    )
                                 ++ (if keyValSequenceObj == JE.null then
                                         []
+
                                     else
                                         [ ( "keyvals", keyValSequenceObj ) ]
                                    )
                                 ++ (if methodObj == JE.null then
                                         []
+
                                     else
                                         [ ( "method", methodObj ) ]
                                    )
                                 ++ (if groupbyObj == JE.null then
                                         []
+
                                     else
                                         [ ( "groupby", groupbyObj ) ]
                                    )
                                 ++ (if valueObj == JE.null then
                                         []
+
                                     else
                                         [ ( "value", valueObj ) ]
                                    )
@@ -9238,7 +10306,7 @@ transform transforms =
                         Ok [ fields, keyName, valName ] ->
                             JE.object
                                 [ ( "fold", fields )
-                                , ( "as", JE.list [ keyName, valName ] )
+                                , ( "as", toList [ keyName, valName ] )
                                 ]
 
                         _ ->
@@ -9247,14 +10315,16 @@ transform transforms =
                 "stack" ->
                     case JD.decodeString (JD.list JD.value) (JE.encode 0 val) of
                         Ok [ field, grp, start, end, offsetObj, sortObj ] ->
-                            [ ( "stack", field ), ( "groupby", grp ), ( "as", JE.list [ start, end ] ) ]
+                            [ ( "stack", field ), ( "groupby", grp ), ( "as", toList [ start, end ] ) ]
                                 ++ (if offsetObj == JE.null then
                                         []
+
                                     else
                                         [ ( "offset", offsetObj ) ]
                                    )
                                 ++ (if sortObj == JE.null then
                                         []
+
                                     else
                                         [ ( "sort", sortObj ) ]
                                    )
@@ -9277,21 +10347,25 @@ transform transforms =
                             ([ ( "window", winObj ) ]
                                 ++ (if frameObj == JE.null then
                                         []
+
                                     else
                                         [ ( "frame", frameObj ) ]
                                    )
                                 ++ (if peersObj == JE.null then
                                         []
+
                                     else
                                         [ ( "ignorePeers", peersObj ) ]
                                    )
                                 ++ (if groupbyObj == JE.null then
                                         []
+
                                     else
                                         [ ( "groupby", groupbyObj ) ]
                                    )
                                 ++ (if sortObj == JE.null then
                                         []
+
                                     else
                                         [ ( "sort", sortObj ) ]
                                    )
@@ -9302,12 +10376,20 @@ transform transforms =
                             JE.null
 
                 _ ->
-                    JE.object [ ( str, val ) ]
+                    JE.object [ ( trName, val ) ]
     in
     if List.isEmpty transforms then
         ( VLTransform, JE.null )
+
     else
-        ( VLTransform, JE.list (List.map assemble transforms) )
+        ( VLTransform, JE.list assemble transforms )
+
+
+{-| A transverse Mercator map projection.
+-}
+transverseMercator : Projection
+transverseMercator =
+    TransverseMercator
 
 
 {-| A true value used for functions that can accept a Boolean literal or a reference
@@ -9327,6 +10409,14 @@ tSelectionCondition =
     TSelectionCondition
 
 
+{-| TSV data file format (only necessary if the file extension does not indicate the
+type).
+-}
+tsv : Format
+tsv =
+    TSV
+
+
 {-| Time unit aggregation of field values when encoding with a text channel.
 -}
 tTimeUnit : TimeUnit -> TextChannel
@@ -9342,7 +10432,13 @@ tTitle =
 
 
 {-| UTC version of a given a time (coordinated universal time, independent of local
-time zones or daylight saving).
+time zones or daylight saving). To encode a time as UTC (coordinated universal time,
+independent of local time zones or daylight saving), just use this function to convert
+another `TimeUnit` generating function. For example,
+
+    encoding
+        << position X [ pName "date", pMType Temporal, pTimeUnit (utc yearMonthDateHours) ]
+
 -}
 utc : TimeUnit -> TimeUnit
 utc tu =
@@ -9353,7 +10449,7 @@ utc tu =
 -}
 vConcat : List Spec -> ( VLProperty, Spec )
 vConcat specs =
-    ( VLVConcat, JE.list specs )
+    ( VLVConcat, toList specs )
 
 
 {-| Whether or not by default single views should be clipped.
@@ -9450,6 +10546,20 @@ wiAscending =
     WAscending
 
 
+{-| Cumulative distribution function to be applied in a window transform.
+-}
+wiCumeDist : WindowOperation
+wiCumeDist =
+    CumeDist
+
+
+{-| Dense rank function to be applied in a window transform.
+-}
+wiDenseRank : WindowOperation
+wiDenseRank =
+    DenseRank
+
+
 {-| Indicate that the given field should be sorted in descending order when performing
 a window transform.
 -}
@@ -9464,6 +10574,13 @@ operations that do not apply to fields such as `Count`, `Rank` and `DenseRank`.
 wiField : String -> Window
 wiField =
     WField
+
+
+{-| First value in a sliding window to be applied in a window transform.
+-}
+wiFirstValue : WindowOperation
+wiFirstValue =
+    FirstValue
 
 
 {-| Moving window for use by a window transform. The two parameters
@@ -9491,7 +10608,28 @@ wiIgnorePeers =
     WIgnorePeers
 
 
-{-| Wwindow transform for performing calculations over sorted groups of
+{-| Value preceding the current object in a sliding window to be applied in a window transform.
+-}
+wiLag : WindowOperation
+wiLag =
+    Lag
+
+
+{-| Last value in a sliding window to be applied in a window transform.
+-}
+wiLastValue : WindowOperation
+wiLastValue =
+    LastValue
+
+
+{-| Value following the current object in a sliding window to be applied in a window transform.
+-}
+wiLead : WindowOperation
+wiLead =
+    Lead
+
+
+{-| Window transform for performing calculations over sorted groups of
 data objects such as ranking, lead/lag analysis, running sums and averages.
 
 The first parameter is a list of tuples each comprising a window transform field
@@ -9511,8 +10649,8 @@ window wss wProps =
     in
     (::)
         ( "window"
-        , JE.list
-            [ JE.list (List.map (\( ws, out ) -> winFieldDef ws out) wss)
+        , toList
+            [ JE.list (\( ws, out ) -> winFieldDef ws out) wss
             , windowPropertySpec "frame" wProps
             , windowPropertySpec "ignorePeers" wProps
             , windowPropertySpec "groupby" wProps
@@ -9521,36 +10659,11 @@ window wss wProps =
         )
 
 
-
-{- REMOVED IN FAVOUR OF `window`.
-      Window transform to be added to a list of data stream transformations.
-      It performs calculations over sorted groups of data objects such as ranking, lead/lag
-      analysis, running sums and averages.
-
-      The first parameter is the name to give the transformed output. The second is the
-      window transform field definition and the third the window transform definition.
-
-          trans =
-              transform
-                  << windowAs "TotalTime"
-                      [ wiAggregateOp Sum, wiField "Time" ]
-                      [ wiFrame Nothing Nothing ]
-
-
-
-   windowAs : String -> List Window -> List WindowProperty -> List LabelledSpec -> List LabelledSpec
-   windowAs fName ws wProps =
-       (::)
-           ( "windowAs"
-           , JE.list
-               [ JE.object (( "as", JE.string fName ) :: List.map windowAsProperty ws)
-               , windowPropertySpec "frame" wProps
-               , windowPropertySpec "ignorePeers" wProps
-               , windowPropertySpec "groupby" wProps
-               , windowPropertySpec "sort" wProps
-               ]
-           )
+{-| Nth value in a sliding window to be applied in a window transform.
 -}
+wiNthValue : WindowOperation
+wiNthValue =
+    NthValue
 
 
 {-| Window-specific operation to be used in a window transformation.
@@ -9568,11 +10681,95 @@ wiParam =
     WParam
 
 
+{-| Value preceding the current object in a sliding window to be applied in a window transform.
+-}
+wiPercentile : WindowOperation
+wiPercentile =
+    Ntile
+
+
+{-| Percentile of values in a sliding window to be applied in a window transform.
+-}
+wiPercentRank : WindowOperation
+wiPercentRank =
+    PercentRank
+
+
+{-| Rank function to be applied in a window transform.
+-}
+wiRank : WindowOperation
+wiRank =
+    Rank
+
+
+{-| Assign consecutive row number to values in a data object to be applied in a window transform.
+-}
+wiRowNumber : WindowOperation
+wiRowNumber =
+    RowNumber
+
+
 {-| Comparator for sorting data objects within a window transform.
 -}
 wiSort : List SortField -> WindowProperty
 wiSort =
     WSort
+
+
+{-| Year time unit used for discretizing temporal data.
+-}
+year : TimeUnit
+year =
+    Year
+
+
+{-| Year and year quarter time unit used for discretizing temporal data.
+-}
+yearQuarter : TimeUnit
+yearQuarter =
+    YearQuarter
+
+
+{-| Year, quarter and month time unit used for discretizing temporal data.
+-}
+yearQuarterMonth : TimeUnit
+yearQuarterMonth =
+    YearQuarterMonth
+
+
+{-| Year and month time unit used for discretizing temporal data.
+-}
+yearMonth : TimeUnit
+yearMonth =
+    YearMonth
+
+
+{-| Year, month and day of month time unit used for discretizing temporal data.
+-}
+yearMonthDate : TimeUnit
+yearMonthDate =
+    YearMonthDate
+
+
+{-| Year, month, day of month and hour of day time unit used for discretizing temporal data.
+-}
+yearMonthDateHours : TimeUnit
+yearMonthDateHours =
+    YearMonthDateHours
+
+
+{-| Time unit used for discretizing temporal data.
+-}
+yearMonthDateHoursMinutes : TimeUnit
+yearMonthDateHoursMinutes =
+    YearMonthDateHoursMinutes
+
+
+{-| Time unit used for discretizing temporal data.
+-}
+yearMonthDateHoursMinutesSeconds : TimeUnit
+yearMonthDateHoursMinutesSeconds =
+    YearMonthDateHoursMinutesSeconds
 
 
 
@@ -9679,7 +10876,7 @@ axisConfigProperty axisCfg =
             ( "gridColor", JE.string c )
 
         GridDash ds ->
-            ( "gridDash", JE.list (List.map JE.float ds) )
+            ( "gridDash", JE.list JE.float ds )
 
         GridOpacity o ->
             ( "gridOpacity", JE.float o )
@@ -9701,11 +10898,12 @@ axisConfigProperty axisCfg =
 
         LabelBound mn ->
             case mn of
-                Just 1 ->
-                    ( "labelBound", JE.bool True )
-
                 Just n ->
-                    ( "labelBound", JE.float n )
+                    if n == 1 then
+                        ( "labelBound", JE.bool True )
+
+                    else
+                        ( "labelBound", JE.float n )
 
                 Nothing ->
                     ( "labelBound", JE.bool False )
@@ -9715,11 +10913,12 @@ axisConfigProperty axisCfg =
 
         LabelFlush mn ->
             case mn of
-                Just 0 ->
-                    ( "labelFlush", JE.bool True )
-
                 Just n ->
-                    ( "labelFlush", JE.float n )
+                    if n == 0 then
+                        ( "labelFlush", JE.bool True )
+
+                    else
+                        ( "labelFlush", JE.float n )
 
                 Nothing ->
                     ( "labelFlush", JE.bool False )
@@ -9778,8 +10977,8 @@ axisConfigProperty axisCfg =
         TickWidth x ->
             ( "tickWidth", JE.float x )
 
-        TitleAlign align ->
-            ( "titleAlign", JE.string (hAlignLabel align) )
+        TitleAlign al ->
+            ( "titleAlign", JE.string (hAlignLabel al) )
 
         TitleAngle angle ->
             ( "titleAngle", JE.float angle )
@@ -9835,11 +11034,12 @@ axisProperty axisProp =
 
         AxLabelBound mn ->
             case mn of
-                Just 1 ->
-                    ( "labelBound", JE.bool True )
-
                 Just n ->
-                    ( "labelBound", JE.float n )
+                    if n == 1 then
+                        ( "labelBound", JE.bool True )
+
+                    else
+                        ( "labelBound", JE.float n )
 
                 Nothing ->
                     ( "labelBound", JE.bool False )
@@ -9852,11 +11052,12 @@ axisProperty axisProp =
 
         AxLabelFlush mn ->
             case mn of
-                Just 0 ->
-                    ( "labelFlush", JE.bool True )
-
                 Just n ->
-                    ( "labelFlush", JE.float n )
+                    if n == 1 then
+                        ( "labelFlush", JE.bool True )
+
+                    else
+                        ( "labelFlush", JE.float n )
 
                 Nothing ->
                     ( "labelFlush", JE.bool False )
@@ -9949,16 +11150,16 @@ axisProperty axisProp =
             ( "tickWidth", JE.float n )
 
         AxValues vals ->
-            ( "values", JE.list (List.map JE.float vals) )
+            ( "values", JE.list JE.float vals )
 
         AxDates dtss ->
-            ( "values", JE.list (List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss) )
+            ( "values", JE.list (\ds -> JE.object (List.map dateTimeProperty ds)) dtss )
 
-        AxTitle title ->
-            ( "title", JE.string title )
+        AxTitle s ->
+            ( "title", JE.string s )
 
-        AxTitleAlign align ->
-            ( "titleAlign", JE.string (hAlignLabel align) )
+        AxTitleAlign al ->
+            ( "titleAlign", JE.string (hAlignLabel al) )
 
         AxTitleAngle angle ->
             ( "titleAngle", JE.float angle )
@@ -9998,6 +11199,7 @@ bin : List BinProperty -> LabelledSpec
 bin bProps =
     if bProps == [] then
         ( "bin", JE.bool True )
+
     else
         ( "bin", bProps |> List.map binProperty |> JE.object )
 
@@ -10058,16 +11260,16 @@ binProperty binProp =
             ( "step", JE.float x )
 
         Steps xs ->
-            ( "steps", JE.list (List.map JE.float xs) )
+            ( "steps", JE.list JE.float xs )
 
         MinStep x ->
             ( "minstep", JE.float x )
 
         Divides xs ->
-            ( "divide", JE.list (List.map JE.float xs) )
+            ( "divide", JE.list JE.float xs )
 
         Extent mn mx ->
-            ( "extent", JE.list [ JE.float mn, JE.float mx ] )
+            ( "extent", JE.list JE.float [ mn, mx ] )
 
         Nice b ->
             ( "nice", JE.bool b )
@@ -10076,8 +11278,8 @@ binProperty binProp =
 booleanOpSpec : BooleanOp -> Spec
 booleanOpSpec bo =
     case bo of
-        Expr expr ->
-            JE.string expr
+        Expr ex ->
+            JE.string ex
 
         SelectionName selName ->
             JE.string selName
@@ -10086,10 +11288,10 @@ booleanOpSpec bo =
             JE.object [ ( "selection", JE.string sel ) ]
 
         And operand1 operand2 ->
-            JE.object [ ( "and", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+            JE.object [ ( "and", JE.list booleanOpSpec [ operand1, operand2 ] ) ]
 
         Or operand1 operand2 ->
-            JE.object [ ( "or", JE.list [ booleanOpSpec operand1, booleanOpSpec operand2 ] ) ]
+            JE.object [ ( "or", JE.list booleanOpSpec [ operand1, operand2 ] ) ]
 
         Not operand ->
             JE.object [ ( "not", booleanOpSpec operand ) ]
@@ -10183,8 +11385,8 @@ configProperty configProp =
         Background bg ->
             ( "background", JE.string bg )
 
-        CountTitle title ->
-            ( "countTitle", JE.string title )
+        CountTitle s ->
+            ( "countTitle", JE.string s )
 
         FieldTitle ftp ->
             ( "fieldTitle", JE.string (fieldTitleLabel ftp) )
@@ -10192,6 +11394,7 @@ configProperty configProp =
         RemoveInvalid b ->
             if b then
                 ( "invalidValues", JE.string "filter" )
+
             else
                 ( "invalidValues", JE.null )
 
@@ -10276,8 +11479,8 @@ configProperty configProp =
         TitleStyle tcs ->
             ( "title", JE.object (List.map titleConfigSpec tcs) )
 
-        NamedStyle name mps ->
-            ( "style", JE.object [ ( name, JE.object (List.map markProperty mps) ) ] )
+        NamedStyle styleName mps ->
+            ( "style", JE.object [ ( styleName, JE.object (List.map markProperty mps) ) ] )
 
         Scale scs ->
             ( "scale", JE.object (List.map scaleConfigProperty scs) )
@@ -10417,21 +11620,23 @@ cursorLabel cur =
 dataTypeSpec : DataType -> Spec
 dataTypeSpec dType =
     case dType of
-        FoNumber ->
+        FoNum ->
             JE.string "number"
 
-        FoBoolean ->
+        FoBoo ->
             JE.string "boolean"
 
         FoDate dateFmt ->
             if dateFmt == "" then
                 JE.string "date"
+
             else
                 JE.string ("date:'" ++ dateFmt ++ "'")
 
         FoUtc dateFmt ->
             if dateFmt == "" then
                 JE.string "utc"
+
             else
                 JE.string ("utc:'" ++ dateFmt ++ "'")
 
@@ -10448,8 +11653,8 @@ dataValueSpec val =
         Boolean b ->
             JE.bool b
 
-        DateTime dt ->
-            JE.object (List.map dateTimeProperty dt)
+        DateTime d ->
+            JE.object (List.map dateTimeProperty d)
 
 
 dataValuesSpecs : DataValues -> List Spec
@@ -10462,15 +11667,15 @@ dataValuesSpecs dvs =
             List.map JE.string ss
 
         DateTimes dtss ->
-            List.map (\dts -> JE.object (List.map dateTimeProperty dts)) dtss
+            List.map (\ds -> JE.object (List.map dateTimeProperty ds)) dtss
 
         Booleans bs ->
             List.map JE.bool bs
 
 
 dateTimeProperty : DateTime -> LabelledSpec
-dateTimeProperty dt =
-    case dt of
+dateTimeProperty dtp =
+    case dtp of
         DTYear y ->
             ( "year", JE.int y )
 
@@ -10480,11 +11685,11 @@ dateTimeProperty dt =
         DTMonth mon ->
             ( "month", JE.string (monthNameLabel mon) )
 
-        DTDate dt ->
-            ( "date", JE.int dt )
+        DTDate d ->
+            ( "date", JE.int d )
 
-        DTDay day ->
-            ( "day", JE.string (dayLabel day) )
+        DTDay d ->
+            ( "day", JE.string (dayLabel d) )
 
         DTHours h ->
             ( "hours", JE.int h )
@@ -10500,8 +11705,8 @@ dateTimeProperty dt =
 
 
 dayLabel : DayName -> String
-dayLabel day =
-    case day of
+dayLabel dayName =
+    case dayName of
         Mon ->
             "Mon"
 
@@ -10721,6 +11926,7 @@ formatProperty fmt =
         JSON propertyName ->
             if String.trim propertyName == "" then
                 [ ( "type", JE.string "json" ) ]
+
             else
                 [ ( "type", JE.string "json" ), ( "property", JE.string propertyName ) ]
 
@@ -10742,8 +11948,9 @@ formatProperty fmt =
         Parse fmts ->
             if fmts == [] then
                 [ ( "parse", JE.null ) ]
+
             else
-                [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, dataTypeSpec fmt )) fmts ) ]
+                [ ( "parse", JE.object <| List.map (\( field, fFormat ) -> ( field, dataTypeSpec fFormat )) fmts ) ]
 
 
 geometryTypeSpec : Geometry -> Spec
@@ -10751,13 +11958,13 @@ geometryTypeSpec gType =
     let
         toCoords : List ( Float, Float ) -> Spec
         toCoords pairs =
-            JE.list <| List.map (\( x, y ) -> JE.list [ JE.float x, JE.float y ]) pairs
+            JE.list (\( x, y ) -> JE.list JE.float [ x, y ]) pairs
     in
     case gType of
         GeoPoint x y ->
             JE.object
                 [ ( "type", JE.string "Point" )
-                , ( "coordinates", JE.list [ JE.float x, JE.float y ] )
+                , ( "coordinates", JE.list JE.float [ x, y ] )
                 ]
 
         GeoPoints coords ->
@@ -10775,25 +11982,25 @@ geometryTypeSpec gType =
         GeoLines coords ->
             JE.object
                 [ ( "type", JE.string "MultiLineString" )
-                , ( "coordinates", List.map toCoords coords |> JE.list )
+                , ( "coordinates", JE.list toCoords coords )
                 ]
 
         GeoPolygon coords ->
             JE.object
                 [ ( "type", JE.string "Polygon" )
-                , ( "coordinates", List.map toCoords coords |> JE.list )
+                , ( "coordinates", JE.list toCoords coords )
                 ]
 
         GeoPolygons coords ->
             JE.object
                 [ ( "type", JE.string "MultiPolygon" )
-                , ( "coordinates", List.map (\cs -> List.map toCoords cs |> JE.list) coords |> JE.list )
+                , ( "coordinates", JE.list (\cs -> List.map toCoords cs |> toList) coords )
                 ]
 
 
 hAlignLabel : HAlign -> String
-hAlignLabel align =
-    case align of
+hAlignLabel al =
+    case al of
         AlignLeft ->
             "left"
 
@@ -10933,7 +12140,7 @@ inputProperty prop =
             ( "name", JE.string s )
 
         InOptions opts ->
-            ( "options", JE.list (List.map JE.string opts) )
+            ( "options", JE.list JE.string opts )
 
         InPlaceholder el ->
             ( "placeholder", JE.string el )
@@ -10963,8 +12170,8 @@ legendConfigProperty legendConfig =
         FillColor s ->
             ( "fillColor", JE.string s )
 
-        Orient or ->
-            ( "orient", JE.string (legendOrientLabel or) )
+        Orient orient ->
+            ( "orient", JE.string (legendOrientLabel orient) )
 
         Offset x ->
             ( "offset", JE.float x )
@@ -10973,7 +12180,7 @@ legendConfigProperty legendConfig =
             ( "strokeColor", JE.string s )
 
         LeStrokeDash xs ->
-            ( "strokeDash", JE.list (List.map JE.float xs) )
+            ( "strokeDash", JE.list JE.float xs )
 
         LeStrokeWidth x ->
             ( "strokeWidth", JE.float x )
@@ -11192,8 +12399,8 @@ legendProperty legendProp =
         LOffset x ->
             ( "offset", JE.float x )
 
-        LOrient or ->
-            ( "orient", JE.string (legendOrientLabel or) )
+        LOrient orient ->
+            ( "orient", JE.string (legendOrientLabel orient) )
 
         LPadding x ->
             ( "padding", JE.float x )
@@ -11222,11 +12429,12 @@ legendProperty legendProp =
         LTickCount x ->
             ( "tickCount", JE.float x )
 
-        LTitle title ->
-            if title == "" then
+        LTitle s ->
+            if s == "" then
                 ( "title", JE.null )
+
             else
-                ( "title", JE.string title )
+                ( "title", JE.string s )
 
         LTitleAlign ha ->
             ( "titleAlign", JE.string (hAlignLabel ha) )
@@ -11257,13 +12465,13 @@ legendProperty legendProp =
                 list =
                     case vals of
                         LNumbers xs ->
-                            List.map JE.float xs |> JE.list
+                            JE.list JE.float xs
 
-                        LDateTimes dts ->
-                            List.map (\dt -> JE.object (List.map dateTimeProperty dt)) dts |> JE.list
+                        LDateTimes ds ->
+                            JE.list (\d -> JE.object (List.map dateTimeProperty d)) ds
 
                         LStrings ss ->
-                            List.map JE.string ss |> JE.list
+                            JE.list JE.string ss
             in
             ( "values", list )
 
@@ -11282,14 +12490,14 @@ lineMarkerSpec pm =
 
 
 mark : Mark -> List MarkProperty -> ( VLProperty, Spec )
-mark mark mProps =
+mark m mProps =
     case mProps of
         [] ->
-            ( VLMark, JE.string (markLabel mark) )
+            ( VLMark, JE.string (markLabel m) )
 
         _ ->
             ( VLMark
-            , ( "type", JE.string (markLabel mark) )
+            , ( "type", JE.string (markLabel m) )
                 :: List.map markProperty mProps
                 |> JE.object
             )
@@ -11310,12 +12518,14 @@ markChannelProperty field =
         MScale sps ->
             if sps == [] then
                 [ ( "scale", JE.null ) ]
+
             else
                 [ ( "scale", JE.object (List.map scaleProperty sps) ) ]
 
         MLegend lps ->
             if lps == [] then
                 [ ( "legend", JE.null ) ]
+
             else
                 [ ( "legend", JE.object (List.map legendProperty lps) ) ]
 
@@ -11345,7 +12555,7 @@ markChannelProperty field =
                             :: List.concatMap markChannelProperty ifClause
                         )
             in
-            ( "condition", JE.list (List.map testClause tests) )
+            ( "condition", JE.list testClause tests )
                 :: List.concatMap markChannelProperty elseClause
 
         MTimeUnit tu ->
@@ -11414,8 +12624,8 @@ markInterpolationLabel interp =
 
 
 markLabel : Mark -> String
-markLabel mark =
-    case mark of
+markLabel m =
+    case m of
         Area ->
             "area"
 
@@ -11521,13 +12731,13 @@ markProperty mProp =
             ( "strokeWidth", JE.float x )
 
         MStrokeDash xs ->
-            ( "strokeDash", JE.list (List.map JE.float xs) )
+            ( "strokeDash", JE.list JE.float xs )
 
         MStrokeDashOffset x ->
             ( "strokeDashOffset", JE.float x )
 
         MStyle styles ->
-            ( "style", JE.list (List.map JE.string styles) )
+            ( "style", JE.list JE.string styles )
 
         MInterpolate interp ->
             ( "interpolate", JE.string (markInterpolationLabel interp) )
@@ -11547,8 +12757,8 @@ markProperty mProp =
         MAngle x ->
             ( "angle", JE.float x )
 
-        MAlign align ->
-            ( "align", JE.string (hAlignLabel align) )
+        MAlign al ->
+            ( "align", JE.string (hAlignLabel al) )
 
         MBaseline va ->
             ( "baseline", JE.string (vAlignLabel va) )
@@ -11699,9 +12909,6 @@ operationLabel op =
         ArgMin ->
             "argmin"
 
-        Average ->
-            "average"
-
         Count ->
             "count"
 
@@ -11790,7 +12997,7 @@ orderChannelProperty oDef =
                     ( "sort", JE.string "descending" )
 
                 [ CustomSort dvs ] ->
-                    ( "sort", JE.list (dataValuesSpecs dvs) )
+                    ( "sort", toList (dataValuesSpecs dvs) )
 
                 _ ->
                     ( "sort", JE.object (List.concatMap sortProperty sps) )
@@ -11861,8 +13068,8 @@ projectionLabel proj =
         ConicEquidistant ->
             "conicEquidistant"
 
-        Custom pName ->
-            pName
+        Custom projName ->
+            projName
 
         Equirectangular ->
             "equirectangular"
@@ -11903,13 +13110,13 @@ projectionProperty pp =
                     ( "clipExtent", JE.null )
 
                 LTRB l t r b ->
-                    ( "clipExtent", JE.list (List.map JE.float [ l, t, r, b ]) )
+                    ( "clipExtent", JE.list JE.float [ l, t, r, b ] )
 
         PCenter lon lat ->
-            ( "center", JE.list [ JE.float lon, JE.float lat ] )
+            ( "center", JE.list JE.float [ lon, lat ] )
 
         PRotate lambda phi gamma ->
-            ( "rotate", JE.list (List.map JE.float [ lambda, phi, gamma ]) )
+            ( "rotate", JE.list JE.float [ lambda, phi, gamma ] )
 
         PPrecision pr ->
             ( "precision", JE.float pr )
@@ -11978,7 +13185,7 @@ positionChannelProperty pDef =
                     ( "sort", JE.string "descending" )
 
                 [ CustomSort dvs ] ->
-                    ( "sort", JE.list (dataValuesSpecs dvs) )
+                    ( "sort", toList (dataValuesSpecs dvs) )
 
                 _ ->
                     ( "sort", JE.object (List.concatMap sortProperty sps) )
@@ -11986,12 +13193,14 @@ positionChannelProperty pDef =
         PScale sps ->
             if sps == [] then
                 ( "scale", JE.null )
+
             else
                 ( "scale", JE.object (List.map scaleProperty sps) )
 
         PAxis aps ->
             if aps == [] then
                 ( "axis", JE.null )
+
             else
                 ( "axis", JE.object (List.map axisProperty aps) )
 
@@ -12042,33 +13251,33 @@ positionLabel pChannel =
 rangeConfigProperty : RangeConfig -> LabelledSpec
 rangeConfigProperty rangeCfg =
     case rangeCfg of
-        RCategory name ->
-            ( "category", JE.object [ schemeProperty name [] ] )
+        RCategory schemeName ->
+            ( "category", JE.object [ schemeProperty schemeName [] ] )
 
-        RDiverging name ->
-            ( "diverging", JE.object [ schemeProperty name [] ] )
+        RDiverging schemeName ->
+            ( "diverging", JE.object [ schemeProperty schemeName [] ] )
 
-        RHeatmap name ->
-            ( "heatmap", JE.object [ schemeProperty name [] ] )
+        RHeatmap schemeName ->
+            ( "heatmap", JE.object [ schemeProperty schemeName [] ] )
 
-        ROrdinal name ->
-            ( "ordinal", JE.object [ schemeProperty name [] ] )
+        ROrdinal schemeName ->
+            ( "ordinal", JE.object [ schemeProperty schemeName [] ] )
 
-        RRamp name ->
-            ( "ramp", JE.object [ schemeProperty name [] ] )
+        RRamp schemeName ->
+            ( "ramp", JE.object [ schemeProperty schemeName [] ] )
 
-        RSymbol name ->
-            ( "symbol", JE.object [ schemeProperty name [] ] )
+        RSymbol schemeName ->
+            ( "symbol", JE.object [ schemeProperty schemeName [] ] )
 
 
 repeatFieldsProperty : RepeatFields -> LabelledSpec
 repeatFieldsProperty fields =
     case fields of
-        RowFields fields ->
-            ( "row", JE.list (List.map JE.string fields) )
+        RowFields fs ->
+            ( "row", JE.list JE.string fs )
 
-        ColumnFields fields ->
-            ( "column", JE.list (List.map JE.string fields) )
+        ColumnFields fs ->
+            ( "column", JE.list JE.string fs )
 
 
 resolutionLabel : Resolution -> String
@@ -12086,15 +13295,15 @@ resolveProperty res =
     case res of
         RAxis chRules ->
             --( "axis", JE.object [ ( channelLabel ch, JE.string (resolutionLabel rule) ) ] )
-            ( "axis", JE.object <| List.map (\( ch, rule ) -> ( channelLabel ch, JE.string (resolutionLabel rule) )) chRules )
+            ( "axis", JE.object <| List.map (\( ch, chRule ) -> ( channelLabel ch, JE.string (resolutionLabel chRule) )) chRules )
 
         RLegend chRules ->
             --( "legend", JE.object [ ( channelLabel ch, JE.string (resolutionLabel rule) ) ] )
-            ( "legend", JE.object <| List.map (\( ch, rule ) -> ( channelLabel ch, JE.string (resolutionLabel rule) )) chRules )
+            ( "legend", JE.object <| List.map (\( ch, chRule ) -> ( channelLabel ch, JE.string (resolutionLabel chRule) )) chRules )
 
         RScale chRules ->
             --( "scale", JE.object [ ( channelLabel ch, JE.string (resolutionLabel rule) ) ] )
-            ( "scale", JE.object <| List.map (\( ch, rule ) -> ( channelLabel ch, JE.string (resolutionLabel rule) )) chRules )
+            ( "scale", JE.object <| List.map (\( ch, chRule ) -> ( channelLabel ch, JE.string (resolutionLabel chRule) )) chRules )
 
 
 scaleConfigProperty : ScaleConfig -> LabelledSpec
@@ -12163,14 +13372,14 @@ scaleConfigProperty scaleCfg =
 scaleDomainSpec : ScaleDomain -> Spec
 scaleDomainSpec sdType =
     case sdType of
-        DNumbers nums ->
-            JE.list (List.map JE.float nums)
+        DNumbers ns ->
+            JE.list JE.float ns
 
-        DDateTimes dts ->
-            List.map (\dt -> JE.object (List.map dateTimeProperty dt)) dts |> JE.list
+        DDateTimes ds ->
+            JE.list (\d -> JE.object (List.map dateTimeProperty d)) ds
 
         DStrings cats ->
-            JE.list (List.map JE.string cats)
+            JE.list JE.string cats
 
         DSelection selName ->
             JE.object [ ( "selection", JE.string selName ) ]
@@ -12180,8 +13389,8 @@ scaleDomainSpec sdType =
 
 
 scaleLabel : Scale -> String
-scaleLabel scType =
-    case scType of
+scaleLabel sc =
+    case sc of
         ScLinear ->
             "linear"
 
@@ -12280,16 +13489,16 @@ scaleProperty scaleProp =
         SRange range ->
             case range of
                 RNumbers xs ->
-                    ( "range", JE.list (List.map JE.float xs) )
+                    ( "range", JE.list JE.float xs )
 
                 RStrings ss ->
-                    ( "range", JE.list (List.map JE.string ss) )
+                    ( "range", JE.list JE.string ss )
 
                 RName s ->
                     ( "range", JE.string s )
 
-        SScheme name extent ->
-            schemeProperty name extent
+        SScheme schName extent ->
+            schemeProperty schName extent
 
         SPadding x ->
             ( "padding", JE.float x )
@@ -12328,19 +13537,19 @@ scaleProperty scaleProp =
 
 
 schemeProperty : String -> List Float -> LabelledSpec
-schemeProperty name extent =
+schemeProperty schName extent =
     case extent of
         [] ->
-            ( "scheme", JE.string name )
+            ( "scheme", JE.string schName )
 
         [ n ] ->
-            ( "scheme", JE.object [ ( "name", JE.string name ), ( "count", JE.float n ) ] )
+            ( "scheme", JE.object [ ( "name", JE.string schName ), ( "count", JE.float n ) ] )
 
         [ mn, mx ] ->
-            ( "scheme", JE.object [ ( "name", JE.string name ), ( "extent", JE.list [ JE.float mn, JE.float mx ] ) ] )
+            ( "scheme", JE.object [ ( "name", JE.string schName ), ( "extent", JE.list JE.float [ mn, mx ] ) ] )
 
         _ ->
-            ( "scheme", JE.string name ) |> Debug.log ("scScheme should have 0, 1 or 2 numbers but you provided " ++ toString extent)
+            ( "scheme", JE.string schName ) |> Debug.log ("scScheme should have 0, 1 or 2 numbers but you provided " ++ Debug.toString extent)
 
 
 selectionLabel : Selection -> String
@@ -12375,7 +13584,7 @@ selectionMarkProperty markProp =
             ( "strokeWidth", JE.float x )
 
         SMStrokeDash xs ->
-            ( "strokeDash", JE.list (List.map JE.float xs) )
+            ( "strokeDash", JE.list JE.float xs )
 
         SMStrokeDashOffset x ->
             ( "strokeDashOffset", JE.float x )
@@ -12385,10 +13594,10 @@ selectionProperty : SelectionProperty -> LabelledSpec
 selectionProperty selProp =
     case selProp of
         Fields fNames ->
-            ( "fields", JE.list (List.map JE.string fNames) )
+            ( "fields", JE.list JE.string fNames )
 
         Encodings channels ->
-            ( "encodings", JE.list (List.map (JE.string << channelLabel) channels) )
+            ( "encodings", JE.list (JE.string << channelLabel) channels )
 
         On e ->
             ( "on", JE.string e )
@@ -12396,8 +13605,8 @@ selectionProperty selProp =
         Empty ->
             ( "empty", JE.string "none" )
 
-        ResolveSelections resolution ->
-            ( "resolve", JE.string (selectionResolutionLabel resolution) )
+        ResolveSelections res ->
+            ( "resolve", JE.string (selectionResolutionLabel res) )
 
         SelectionMark markProps ->
             ( "mark", JE.object (List.map selectionMarkProperty markProps) )
@@ -12411,18 +13620,20 @@ selectionProperty selProp =
         Nearest b ->
             ( "nearest", JE.bool b )
 
-        Toggle expr ->
-            ( "toggle", JE.string expr )
+        Toggle ex ->
+            ( "toggle", JE.string ex )
 
         Translate e ->
             if e == "" then
                 ( "translate", JE.bool False )
+
             else
                 ( "translate", JE.string e )
 
         Zoom e ->
             if e == "" then
                 ( "zoom", JE.bool False )
+
             else
                 ( "zoom", JE.string e )
 
@@ -12522,13 +13733,13 @@ stackPropertySpec sName sps =
                 "sort" ->
                     case sp of
                         StSort sfs ->
-                            JE.list (List.map sortFieldSpec sfs)
+                            JE.list sortFieldSpec sfs
 
                         _ ->
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected stack property " ++ toString sName)
+                    JE.null |> Debug.log ("Unexpected stack property " ++ Debug.toString sName)
 
         specList =
             List.map spSpec sps |> List.filter (\x -> x /= JE.null)
@@ -12576,19 +13787,19 @@ symbolLabel sym =
         SymSquare ->
             "square"
 
-        Cross ->
+        SymCross ->
             "cross"
 
-        Diamond ->
+        SymDiamond ->
             "diamond"
 
-        TriangleUp ->
+        SymTriangleUp ->
             "triangle-up"
 
-        TriangleDown ->
+        SymTriangleDown ->
             "triangle-down"
 
-        Path svgPath ->
+        SymPath svgPath ->
             svgPath
 
 
@@ -12639,7 +13850,7 @@ textChannelProperty tDef =
                             :: List.concatMap textChannelProperty ifClause
                         )
             in
-            ( "condition", JE.list (List.map testClause tests) )
+            ( "condition", JE.list testClause tests )
                 :: List.concatMap textChannelProperty elseClause
 
 
@@ -12750,6 +13961,15 @@ titleConfigSpec titleCfg =
             ( "orient", JE.string (sideLabel sd) )
 
 
+
+-- Provides an equivalent ot the Elm 0.18 Json list function.
+
+
+toList : List JE.Value -> JE.Value
+toList =
+    JE.list identity
+
+
 ttContentLabel : TooltipContent -> String
 ttContentLabel ttContent =
     case ttContent of
@@ -12761,8 +13981,8 @@ ttContentLabel ttContent =
 
 
 vAlignLabel : VAlign -> String
-vAlignLabel align =
-    case align of
+vAlignLabel al =
+    case al of
         AlignTop ->
             "top"
 
@@ -12811,7 +14031,7 @@ viewConfigProperty viewCfg =
             ( "strokeWidth", JE.float x )
 
         StrokeDash xs ->
-            ( "strokeDash", JE.list (List.map JE.float xs) )
+            ( "strokeDash", JE.list JE.float xs )
 
         StrokeDashOffset x ->
             ( "strokeDashOffset", JE.float x )
@@ -12959,19 +14179,19 @@ imputeProperty : ImputeProperty -> LabelledSpec
 imputeProperty ip =
     case ip of
         ImFrame (Just n1) (Just n2) ->
-            ( "frame", JE.list [ JE.int n1, JE.int n2 ] )
+            ( "frame", JE.list JE.int [ n1, n2 ] )
 
         ImFrame Nothing (Just n2) ->
-            ( "frame", JE.list [ JE.null, JE.int n2 ] )
+            ( "frame", toList [ JE.null, JE.int n2 ] )
 
         ImFrame (Just n1) Nothing ->
-            ( "frame", JE.list [ JE.int n1, JE.null ] )
+            ( "frame", toList [ JE.int n1, JE.null ] )
 
         ImFrame Nothing Nothing ->
-            ( "frame", JE.list [ JE.null, JE.null ] )
+            ( "frame", toList [ JE.null, JE.null ] )
 
         ImKeyVals dVals ->
-            ( "keyvals", JE.list (dataValuesSpecs dVals) )
+            ( "keyvals", toList (dataValuesSpecs dVals) )
 
         ImKeyValSequence start stop step ->
             ( "keyvals"
@@ -13000,16 +14220,16 @@ imputePropertySpec ipName ips =
                 "frame" ->
                     case ip of
                         ImFrame (Just n1) (Just n2) ->
-                            JE.list [ JE.int n1, JE.int n2 ]
+                            JE.list JE.int [ n1, n2 ]
 
                         ImFrame Nothing (Just n2) ->
-                            JE.list [ JE.null, JE.int n2 ]
+                            toList [ JE.null, JE.int n2 ]
 
                         ImFrame (Just n1) Nothing ->
-                            JE.list [ JE.int n1, JE.null ]
+                            toList [ JE.int n1, JE.null ]
 
                         ImFrame Nothing Nothing ->
-                            JE.list [ JE.null, JE.null ]
+                            toList [ JE.null, JE.null ]
 
                         _ ->
                             JE.null
@@ -13017,7 +14237,7 @@ imputePropertySpec ipName ips =
                 "keyVals" ->
                     case ip of
                         ImKeyVals dVals ->
-                            JE.list (dataValuesSpecs dVals)
+                            toList (dataValuesSpecs dVals)
 
                         _ ->
                             JE.null
@@ -13037,7 +14257,7 @@ imputePropertySpec ipName ips =
                 "groupby" ->
                     case ip of
                         ImGroupBy fields ->
-                            JE.list (List.map JE.string fields)
+                            JE.list JE.string fields
 
                         _ ->
                             JE.null
@@ -13059,7 +14279,7 @@ imputePropertySpec ipName ips =
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected impute property " ++ toString ipName)
+                    JE.null |> Debug.log ("Unexpected impute property " ++ Debug.toString ipName)
 
         specList =
             List.map ipSpec ips |> List.filter (\x -> x /= JE.null)
@@ -13080,16 +14300,16 @@ windowPropertySpec wpName wps =
                 "frame" ->
                     case wp of
                         WFrame (Just n1) (Just n2) ->
-                            JE.list [ JE.int n1, JE.int n2 ]
+                            JE.list JE.int [ n1, n2 ]
 
                         WFrame Nothing (Just n2) ->
-                            JE.list [ JE.null, JE.int n2 ]
+                            toList [ JE.null, JE.int n2 ]
 
                         WFrame (Just n1) Nothing ->
-                            JE.list [ JE.int n1, JE.null ]
+                            toList [ JE.int n1, JE.null ]
 
                         WFrame Nothing Nothing ->
-                            JE.list [ JE.null, JE.null ]
+                            toList [ JE.null, JE.null ]
 
                         _ ->
                             JE.null
@@ -13105,7 +14325,7 @@ windowPropertySpec wpName wps =
                 "groupby" ->
                     case wp of
                         WGroupBy fs ->
-                            JE.list (List.map JE.string fs)
+                            JE.list JE.string fs
 
                         _ ->
                             JE.null
@@ -13113,13 +14333,13 @@ windowPropertySpec wpName wps =
                 "sort" ->
                     case wp of
                         WSort sfs ->
-                            JE.list (List.map sortFieldSpec sfs)
+                            JE.list sortFieldSpec sfs
 
                         _ ->
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected window property name " ++ toString wpName)
+                    JE.null |> Debug.log ("Unexpected window property name " ++ Debug.toString wpName)
 
         specList =
             List.map wpSpec wps |> List.filter (\x -> x /= JE.null)
