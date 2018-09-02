@@ -35,7 +35,7 @@ myOtherVis =
         enc =
             encoding
                 << position X [ pName "Cylinders", pMType Ordinal ]
-                << position Y [ pName "Miles_per_Gallon", pAggregate Average, pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pAggregate opMean, pMType Quantitative ]
     in
     toVegaLite
         [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
@@ -66,10 +66,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

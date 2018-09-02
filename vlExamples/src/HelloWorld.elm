@@ -20,10 +20,10 @@ myVis =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( myVis, elmToJS myVis )
+    Platform.worker
+        { init = always ( myVis, elmToJS myVis )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

@@ -5658,7 +5658,8 @@ dataName s data =
                     ( dType, value )
 
                 _ ->
-                    ( "", d ) |> Debug.log "Non-data spec provided to dataName"
+                    --|> Debug.log "Non-data spec provided to dataName"
+                    ( "", d )
 
         spec =
             (\( _, dataSpec ) -> extract dataSpec) data
@@ -13549,7 +13550,8 @@ schemeProperty schName extent =
             ( "scheme", JE.object [ ( "name", JE.string schName ), ( "extent", JE.list JE.float [ mn, mx ] ) ] )
 
         _ ->
-            ( "scheme", JE.string schName ) |> Debug.log ("scScheme should have 0, 1 or 2 numbers but you provided " ++ Debug.toString extent)
+            -- |> Debug.log ("scScheme should have 0, 1 or 2 numbers but you provided " ++ Debug.toString extent)
+            ( "scheme", JE.string schName )
 
 
 selectionLabel : Selection -> String
@@ -13693,7 +13695,8 @@ sortProperty sp =
             [ ( "field", JE.object [ ( "repeat", JE.string (arrangementLabel arr) ) ] ), ( "op", JE.string (operationLabel op) ) ]
 
         CustomSort dvs ->
-            [] |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
+            -- |> Debug.log "Warning: Unexpected custom sorting provided to sortProperty"
+            []
 
 
 stackOffset : StackOffset -> LabelledSpec
@@ -13739,7 +13742,8 @@ stackPropertySpec sName sps =
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected stack property " ++ Debug.toString sName)
+                    --|> Debug.log ("Unexpected stack property " ++ Debug.toString sName)
+                    JE.null
 
         specList =
             List.map spSpec sps |> List.filter (\x -> x /= JE.null)
@@ -14209,7 +14213,8 @@ imputeProperty ip =
             ( "value", dataValueSpec dVal )
 
         ImGroupBy _ ->
-            ( "groupby", JE.null ) |> Debug.log "Warning: groupby not valud when imputing a channel"
+            -- |> Debug.log "Warning: groupby not valud when imputing a channel"
+            ( "groupby", JE.null )
 
 
 imputePropertySpec : String -> List ImputeProperty -> Spec
@@ -14279,7 +14284,8 @@ imputePropertySpec ipName ips =
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected impute property " ++ Debug.toString ipName)
+                    --|> Debug.log ("Unexpected impute property " ++ Debug.toString ipName)
+                    JE.null
 
         specList =
             List.map ipSpec ips |> List.filter (\x -> x /= JE.null)
@@ -14339,7 +14345,8 @@ windowPropertySpec wpName wps =
                             JE.null
 
                 _ ->
-                    JE.null |> Debug.log ("Unexpected window property name " ++ Debug.toString wpName)
+                    -- |> Debug.log ("Unexpected window property name " ++ Debug.toString wpName)
+                    JE.null
 
         specList =
             List.map wpSpec wps |> List.filter (\x -> x /= JE.null)
