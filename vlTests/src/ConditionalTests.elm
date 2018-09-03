@@ -1,9 +1,9 @@
 port module ConditionalTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import VegaLite exposing (..)
 
 
@@ -80,7 +80,7 @@ selectionCondition1 =
             encoding
                 << position Y [ pName "Origin", pMType Ordinal ]
                 << position X [ pName "Cylinders", pMType Ordinal ]
-                << color [ mAggregate Count, mName "*", mMType Quantitative ]
+                << color [ mAggregate opCount, mName "*", mMType Quantitative ]
     in
     toVegaLite
         [ data, sel [], rect [ maCursor CGrab ], enc [] ]
@@ -113,7 +113,7 @@ selectionCondition2 =
                 << color
                     [ mSelectionCondition
                         (and (selectionName "alex") (selectionName "morgan"))
-                        [ mAggregate Count, mName "*", mMType Quantitative ]
+                        [ mAggregate opCount, mName "*", mMType Quantitative ]
                         [ mStr "gray" ]
                     ]
     in
@@ -183,10 +183,10 @@ sourceExample =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

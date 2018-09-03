@@ -1,9 +1,11 @@
 port module ProjectionTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
 import VegaLite exposing (..)
+
 
 
 {- Some relevant data sources:
@@ -42,18 +44,18 @@ worldMapTemplate tText projProps =
 
 standardProjs : List ( String, Spec )
 standardProjs =
-    [ worldMapTemplate "Albers" [ prType Albers ]
-    , worldMapTemplate "AzimuthalEqualArea" [ prType AzimuthalEqualArea ]
-    , worldMapTemplate "AzimuthalEquidistant" [ prType AzimuthalEquidistant ]
-    , worldMapTemplate "ConicConformal" [ prType ConicConformal, prClipAngle (Just 65) ]
-    , worldMapTemplate "ConicEqualArea" [ prType ConicEqualArea ]
-    , worldMapTemplate "ConicEquidistant" [ prType ConicEquidistant ]
-    , worldMapTemplate "Equirectangular" [ prType Equirectangular ]
-    , worldMapTemplate "Gnomonic" [ prType Gnomonic ]
-    , worldMapTemplate "Mercator" [ prType Mercator ]
-    , worldMapTemplate "Orthographic" [ prType Orthographic ]
-    , worldMapTemplate "Stereographic" [ prType Stereographic ]
-    , worldMapTemplate "TransverseMercator" [ prType TransverseMercator ]
+    [ worldMapTemplate "Albers" [ prType albers ]
+    , worldMapTemplate "AzimuthalEqualArea" [ prType azimuthalEqualArea ]
+    , worldMapTemplate "AzimuthalEquidistant" [ prType azimuthalEquidistant ]
+    , worldMapTemplate "ConicConformal" [ prType conicConformal, prClipAngle (Just 65) ]
+    , worldMapTemplate "ConicEqualArea" [ prType conicEqualArea ]
+    , worldMapTemplate "ConicEquidistant" [ prType conicEquidistant ]
+    , worldMapTemplate "Equirectangular" [ prType equirectangular ]
+    , worldMapTemplate "Gnomonic" [ prType gnomonic ]
+    , worldMapTemplate "Mercator" [ prType mercator ]
+    , worldMapTemplate "Orthographic" [ prType orthographic ]
+    , worldMapTemplate "Stereographic" [ prType stereographic ]
+    , worldMapTemplate "TransverseMercator" [ prType transverseMercator ]
     ]
 
 
@@ -76,7 +78,7 @@ configExample =
                 << configuration (coTitle [ ticoFont "Roboto", ticoFontWeight W600, ticoFontSize 18 ])
                 << configuration (coView [ vicoWidth 500, vicoHeight 300, vicoStroke Nothing ])
                 << configuration (coAutosize [ AFit ])
-                << configuration (coProjection [ prType Orthographic, prRotate 0 0 0 ])
+                << configuration (coProjection [ prType orthographic, prRotate 0 0 0 ])
 
         globeSpec =
             asSpec
@@ -140,10 +142,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

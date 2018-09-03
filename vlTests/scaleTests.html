@@ -6,7 +6,7 @@
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc3/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <script src="js/scaleTests.js"></script>
@@ -36,24 +36,16 @@
   <figure class="cell"><div id="scale5"></div><figcaption>Threshold scale. Legend categories should be &lt;30, 30-70 and >=70.</figcaption></figure>
   <div style="clear:left"></div>
 
-
-
   <h2>Source</h2>
   <div id="elmContainer"></div>
 
-
   <script>
-  Elm.ScaleTests.embed(
-  document.getElementById("elmContainer")
-).ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: true,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
-</script>
+    Elm.ScaleTests.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+      }
+    });
+  </script>
 
   </body>
 

@@ -1,9 +1,11 @@
 port module GeoTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
 import VegaLite exposing (..)
+
 
 
 {- Some relevant data sources:
@@ -17,7 +19,7 @@ defaultSize1 : Spec
 defaultSize1 =
     toVegaLite
         [ description "Default map size"
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , geoshape []
         , encoding <| color [ mStr "black" ] []
@@ -29,7 +31,7 @@ defaultSize2 =
     toVegaLite
         [ description "Default map size with view width and height specified in config."
         , configure <| configuration (coView [ vicoWidth 500, vicoHeight 300 ]) <| []
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "data/us-10m.json" [ topojsonFeature "counties" ]
         , geoshape []
         , encoding <| color [ mStr "black" ] []
@@ -231,7 +233,7 @@ mapComp1 =
                 [ width 300
                 , height 300
                 , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
-                , projection [ prType Orthographic ]
+                , projection [ prType orthographic ]
                 , geoshape [ maFilled False ]
                 ]
     in
@@ -255,7 +257,7 @@ mapComp2 =
                         , geoshape [ maFill "black", maFillOpacity 0.7 ]
                         ]
             in
-            asSpec [ width 300, height 300, projection [ prType Orthographic ], layer [ graticuleSpec, countrySpec ] ]
+            asSpec [ width 300, height 300, projection [ prType orthographic ], layer [ graticuleSpec, countrySpec ] ]
     in
     toVegaLite
         [ configure <| configuration (coView [ vicoStroke Nothing ]) <| []
@@ -272,7 +274,7 @@ mapComp3 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , projection [ prType orthographic, prRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                         , geoshape [ maFilled False, maStroke "#411", maStrokeWidth 0.1 ]
                         ]
@@ -281,7 +283,7 @@ mapComp3 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , projection [ prType orthographic, prRotate rot 0 0 ]
                         , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
                         , geoshape [ maStroke "white", maFill "black", maStrokeWidth 0.5 ]
                         ]
@@ -301,7 +303,7 @@ mapComp4 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ prType Orthographic, prRotate 0 0 0 ]
+                        , projection [ prType orthographic, prRotate 0 0 0 ]
                         , dataFromUrl "data/globe.json" [ topojsonFeature "globe" ]
                         , geoshape [ maFill "#c1e7f5", maStrokeOpacity 0 ]
                         ]
@@ -310,7 +312,7 @@ mapComp4 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , projection [ prType orthographic, prRotate rot 0 0 ]
                         , dataFromUrl "data/graticule.json" [ topojsonFeature "graticule" ]
                         , geoshape [ maFilled False, maStroke "#411", maStrokeWidth 0.1 ]
                         ]
@@ -319,7 +321,7 @@ mapComp4 =
                     asSpec
                         [ width 300
                         , height 300
-                        , projection [ prType Orthographic, prRotate rot 0 0 ]
+                        , projection [ prType orthographic, prRotate rot 0 0 ]
                         , dataFromUrl "data/world-110m.json" [ topojsonFeature "countries1" ]
                         , geoshape [ maStroke "white", maFill "#242", maStrokeWidth 0.1 ]
                         ]
@@ -344,7 +346,7 @@ dotMap1 =
         [ description "US zip codes: One dot per zipcode colored by first digit"
         , width 500
         , height 300
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
         , circle []
@@ -382,7 +384,7 @@ scribbleMap1 =
         , config []
         , width 1000
         , height 600
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
         , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
@@ -421,7 +423,7 @@ scribbleMap2 =
         , config []
         , width 1000
         , height 600
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
         , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
@@ -466,10 +468,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

@@ -1,5 +1,6 @@
 port module WindowTransformTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
@@ -16,7 +17,7 @@ window1 =
 
         trans =
             transform
-                << window [ ( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime" ) ]
+                << window [ ( [ wiAggregateOp opSum, wiField "Time" ], "TotalTime" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.Time/datum.TotalTime * 100" "PercentOfTotal"
 
@@ -42,7 +43,7 @@ window2 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageRating) > 2.5")
 
@@ -56,7 +57,7 @@ window2 =
 
         ruleEnc =
             encoding
-                << position X [ pName "AverageRating", pAggregate Average, pMType Quantitative ]
+                << position X [ pName "AverageRating", pAggregate opMean, pMType Quantitative ]
 
         ruleSpec =
             asSpec [ rule [ maColor "red" ], ruleEnc [] ]
@@ -78,8 +79,8 @@ window3 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << timeUnitAs Year "Release_Date" "year"
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
+                << timeUnitAs year "Release_Date" "year"
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
                     [ wiGroupBy [ "year" ], wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageYearRating) > 2.5")
 
@@ -114,7 +115,7 @@ window4 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << filter (fiRange "Release_Date" (dtRange [] [ dtYear 2019 ]))
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.IMDB_Rating - datum.AverageRating" "RatingDelta"
 
@@ -138,7 +139,7 @@ window5 =
         trans =
             transform
                 << window
-                    [ ( [ wiOp Rank ], "rank" ) ]
+                    [ ( [ wiOp wiRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -168,7 +169,7 @@ window6 =
 
         trans =
             transform
-                << window [ ( [ wiOp Rank ], "rank" ) ] [ wiSort [ wiDescending "score" ] ]
+                << window [ ( [ wiOp wiRank ], "rank" ) ] [ wiSort [ wiDescending "score" ] ]
                 << filter (fiExpr "datum.rank <= 5")
 
         enc =
@@ -177,7 +178,7 @@ window6 =
                 << position Y
                     [ pName "student"
                     , pMType Nominal
-                    , pSort [ soByField "score" Average, Descending ]
+                    , pSort [ soByField "score" opMean, soDescending ]
                     ]
     in
     toVegaLite [ data [], trans [], enc [], bar [] ]
@@ -192,13 +193,13 @@ window7 =
         trans =
             transform
                 << filter (fiExpr "datum.Miles_per_Gallon !== null")
-                << timeUnitAs Year "Year" "year"
-                << window [ ( [ wiAggregateOp Mean, wiField "Miles_per_Gallon" ], "Average_MPG" ) ]
+                << timeUnitAs year "Year" "year"
+                << window [ ( [ wiAggregateOp opMean, wiField "Miles_per_Gallon" ], "Average_MPG" ) ]
                     [ wiSort [ wiAscending "year" ], wiIgnorePeers False, wiFrame Nothing (Just 0) ]
 
         circleEnc =
             encoding
-                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
                 << position Y [ pName "Miles_per_Gallon", pMType Quantitative ]
 
         circleSpec =
@@ -206,7 +207,7 @@ window7 =
 
         lineEnc =
             encoding
-                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
                 << position Y [ pName "Average_MPG", pMType Quantitative, pAxis [ axTitle "Miles per gallon" ] ]
 
         lineSpec =
@@ -245,10 +246,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

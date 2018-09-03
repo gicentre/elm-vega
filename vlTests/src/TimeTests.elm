@@ -1,5 +1,6 @@
 port module TimeTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
@@ -15,84 +16,84 @@ timeByUnit tu =
         enc =
             encoding
                 << position X [ pName "date", pMType Temporal, pTimeUnit tu ]
-                << position Y [ pName "temperature", pMType Quantitative, pAggregate Mean, pScale [ scZero False ] ]
+                << position Y [ pName "temperature", pMType Quantitative, pAggregate opMean, pScale [ scZero False ] ]
     in
     toVegaLite [ width 800, data, enc [], line [ maStrokeWidth 0.2 ] ]
 
 
 timeYear : Spec
 timeYear =
-    timeByUnit Year
+    timeByUnit year
 
 
 timeQuarter : Spec
 timeQuarter =
-    timeByUnit Quarter
+    timeByUnit quarter
 
 
 timeQuarterMonth : Spec
 timeQuarterMonth =
-    timeByUnit QuarterMonth
+    timeByUnit quarterMonth
 
 
 timeMonth : Spec
 timeMonth =
-    timeByUnit Month
+    timeByUnit month
 
 
 timeMonthDate : Spec
 timeMonthDate =
-    timeByUnit MonthDate
+    timeByUnit monthDate
 
 
 timeDate : Spec
 timeDate =
-    timeByUnit Date
+    timeByUnit date
 
 
 timeYearMonthDateHours : Spec
 timeYearMonthDateHours =
-    timeByUnit YearMonthDateHours
+    timeByUnit yearMonthDateHours
 
 
 timeYearMonthDateHoursMinutes : Spec
 timeYearMonthDateHoursMinutes =
-    timeByUnit YearMonthDateHoursMinutes
+    timeByUnit yearMonthDateHoursMinutes
 
 
 timeYearMonthDateHoursMinutesSeconds : Spec
 timeYearMonthDateHoursMinutesSeconds =
-    timeByUnit YearMonthDateHoursMinutesSeconds
+    timeByUnit yearMonthDateHoursMinutesSeconds
 
 
 timeDay : Spec
 timeDay =
-    timeByUnit Day
+    timeByUnit day
 
 
 timeHours : Spec
 timeHours =
-    timeByUnit Hours
+    timeByUnit hours
 
 
 timeHoursMinutes : Spec
 timeHoursMinutes =
-    timeByUnit HoursMinutes
+    timeByUnit hoursMinutes
 
 
 timeHoursMinutesSeconds : Spec
 timeHoursMinutesSeconds =
-    timeByUnit HoursMinutesSeconds
+    timeByUnit hoursMinutesSeconds
 
 
 timeMinutes : Spec
 timeMinutes =
-    timeByUnit Minutes
+    timeByUnit minutes
 
 
 timeMinutesSeconds : Spec
 timeMinutesSeconds =
-    timeByUnit MinutesSeconds
+    timeByUnit minutesSeconds
 
 
 
@@ -120,18 +121,18 @@ parseTime dType =
         tu =
             case dType of
                 Local ->
-                    pTimeUnit YearMonthDateHours
+                    pTimeUnit yearMonthDateHours
 
                 UTC ->
-                    pTimeUnit (utc YearMonthDateHours)
+                    pTimeUnit (utc yearMonthDateHours)
 
         timeScale =
             case dType of
                 Local ->
-                    pScale [ scType ScTime ]
+                    pScale [ scType scTime ]
 
                 UTC ->
-                    pScale [ scType ScUtc ]
+                    pScale [ scType scUtc ]
 
         data =
             dataFromColumns [ parse [ ( "date", format ) ] ]
@@ -159,7 +160,7 @@ utcTime =
 
 sourceExample : Spec
 sourceExample =
-    timeByUnit Year
+    timeByUnit year
 
 
 
@@ -197,10 +198,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

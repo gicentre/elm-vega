@@ -1,5 +1,6 @@
 port module DataTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode as JE
@@ -44,10 +45,10 @@ data3 : Spec
 data3 =
     let
         json =
-            JE.list
-                [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 10 ) ]
-                , JE.object [ ( "cat", JE.string "b" ), ( "val", JE.float 18 ) ]
-                , JE.object [ ( "cat", JE.string "c" ), ( "val", JE.float 12 ) ]
+            JE.list JE.object
+                [ [ ( "cat", JE.string "a" ), ( "val", JE.float 10 ) ]
+                , [ ( "cat", JE.string "b" ), ( "val", JE.float 18 ) ]
+                , [ ( "cat", JE.string "c" ), ( "val", JE.float 12 ) ]
                 ]
     in
     showData (dataFromJson json [])
@@ -88,10 +89,10 @@ dataSource name =
                 << dataRow [ ( "cat", str "c" ), ( "val", num 12 ) ]
 
         json =
-            JE.list
-                [ JE.object [ ( "cat", JE.string "a" ), ( "val", JE.float 10 ) ]
-                , JE.object [ ( "cat", JE.string "b" ), ( "val", JE.float 18 ) ]
-                , JE.object [ ( "cat", JE.string "c" ), ( "val", JE.float 12 ) ]
+            JE.list JE.object
+                [ [ ( "cat", JE.string "a" ), ( "val", JE.float 10 ) ]
+                , [ ( "cat", JE.string "b" ), ( "val", JE.float 18 ) ]
+                , [ ( "cat", JE.string "c" ), ( "val", JE.float 12 ) ]
                 ]
 
         enc =
@@ -193,7 +194,7 @@ geodata2 =
         , height 400
         , configure <| configuration (coView [ vicoStroke Nothing ]) []
         , dataFromJson geojson [ jsonProperty "features" ]
-        , projection [ prType Orthographic ]
+        , projection [ prType orthographic ]
         , encoding (color [ mName "properties.Region", mMType Nominal, mLegend [ leTitle "" ] ] [])
         , geoshape []
         ]
@@ -204,17 +205,15 @@ flatten1 =
     let
         data =
             dataFromJson
-                (JE.list
-                    [ JE.object
-                        [ ( "key", JE.string "alpha" )
-                        , ( "foo", JE.list (List.map JE.float [ 1, 2 ]) )
-                        , ( "bar", JE.list (List.map JE.string [ "A", "B" ]) )
-                        ]
-                    , JE.object
-                        [ ( "key", JE.string "beta" )
-                        , ( "foo", JE.list (List.map JE.float [ 3, 4, 5 ]) )
-                        , ( "bar", JE.list (List.map JE.string [ "C", "D" ]) )
-                        ]
+                (JE.list JE.object
+                    [ [ ( "key", JE.string "alpha" )
+                      , ( "foo", JE.list JE.float [ 1, 2 ] )
+                      , ( "bar", JE.list JE.string [ "A", "B" ] )
+                      ]
+                    , [ ( "key", JE.string "beta" )
+                      , ( "foo", JE.list JE.float [ 3, 4, 5 ] )
+                      , ( "bar", JE.list JE.string [ "C", "D" ] )
+                      ]
                     ]
                 )
 
@@ -267,11 +266,11 @@ impute1 =
     let
         trans =
             transform
-                << impute "b" "a" [ imValue (num 0), imGroupBy [ "c" ] ]
+                << impute "b" "a" [ imNewValue (num 0), imGroupBy [ "c" ] ]
 
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
                 << position Y [ pName "b", pMType Quantitative ]
                 << color [ mName "c", mMType Nominal ]
     in
@@ -283,11 +282,11 @@ impute2 =
     let
         trans =
             transform
-                << impute "b" "a" [ imMethod ImMean, imGroupBy [ "c" ], imFrame (Just -2) (Just 2) ]
+                << impute "b" "a" [ imMethod imMean, imGroupBy [ "c" ], imFrame (Just -2) (Just 2) ]
 
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
                 << position Y [ pName "b", pMType Quantitative ]
                 << color [ mName "c", mMType Nominal ]
     in
@@ -299,11 +298,11 @@ impute3 =
     let
         trans =
             transform
-                << impute "b" "a" [ imValue (num 100), imGroupBy [ "c" ], imKeyValSequence 1 4 1 ]
+                << impute "b" "a" [ imNewValue (num 100), imGroupBy [ "c" ], imKeyValSequence 1 4 1 ]
 
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
                 << position Y [ pName "b", pMType Quantitative ]
                 << color [ mName "c", mMType Nominal ]
     in
@@ -315,8 +314,8 @@ impute4 =
     let
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
-                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 0) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imNewValue (num 0) ] ]
                 << color [ mName "c", mMType Nominal ]
     in
     toVegaLite [ imputeData [], line [], enc [] ]
@@ -327,8 +326,8 @@ impute5 =
     let
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
-                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod ImMean ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod imMean ] ]
                 << color [ mName "c", mMType Nominal ]
     in
     toVegaLite [ imputeData [], line [], enc [] ]
@@ -339,8 +338,8 @@ impute6 =
     let
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
-                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod ImMean, imFrame (Just -2) (Just 2) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imMethod imMean, imFrame (Just -2) (Just 2) ] ]
                 << color [ mName "c", mMType Nominal ]
     in
     toVegaLite [ imputeData [], line [], enc [] ]
@@ -351,8 +350,8 @@ impute7 =
     let
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
-                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 100), imKeyVals (nums [ 4 ]) ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imNewValue (num 100), imKeyVals (nums [ 4 ]) ] ]
                 << color [ mName "c", mMType Nominal ]
     in
     toVegaLite [ imputeData [], line [], enc [] ]
@@ -363,8 +362,8 @@ impute8 =
     let
         enc =
             encoding
-                << position X [ pName "a", pMType Quantitative, pScale [ scNice (scNiceTickCount 1) ] ]
-                << position Y [ pName "b", pMType Quantitative, pImpute [ imValue (num 100), imKeyValSequence 4 6 1 ] ]
+                << position X [ pName "a", pMType Quantitative, pScale [ scNice (niTickCount 1) ] ]
+                << position Y [ pName "b", pMType Quantitative, pImpute [ imNewValue (num 100), imKeyValSequence 4 6 1 ] ]
                 << color [ mName "c", mMType Nominal ]
     in
     toVegaLite [ imputeData [], line [], enc [] ]
@@ -462,10 +461,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

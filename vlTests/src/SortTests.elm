@@ -1,5 +1,6 @@
 port module SortTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
@@ -26,17 +27,17 @@ sortQuant yField sps =
 
 sortAsc : Spec
 sortAsc =
-    sortQuant "Horsepower" [ Ascending ]
+    sortQuant "Horsepower" [ soAscending ]
 
 
 sortDesc : Spec
 sortDesc =
-    sortQuant "Horsepower" [ Descending ]
+    sortQuant "Horsepower" [ soDescending ]
 
 
 sortWeight : Spec
 sortWeight =
-    sortQuant "Weight_in_lbs" [ soByField "Weight_in_lbs" Mean ]
+    sortQuant "Weight_in_lbs" [ soByField "Weight_in_lbs" opMean ]
 
 
 sortCustom : Spec
@@ -67,15 +68,15 @@ stack1 =
 
         trans =
             transform
-                << aggregate [ opAs Count "" "count_*" ] [ "Origin", "Cylinders" ]
+                << aggregate [ opAs opCount "" "count_*" ] [ "Origin", "Cylinders" ]
                 << stack "count_*"
                     []
                     "stack_count_Origin1"
                     "stack_count_Origin2"
                     [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
                 << window
-                    [ ( [ wiAggregateOp Min, wiField "stack_count_Origin1" ], "x" )
-                    , ( [ wiAggregateOp Max, wiField "stack_count_Origin2" ], "x2" )
+                    [ ( [ wiAggregateOp opMin, wiField "stack_count_Origin1" ], "x" )
+                    , ( [ wiAggregateOp opMax, wiField "stack_count_Origin2" ], "x2" )
                     ]
                     [ wiFrame Nothing Nothing, wiGroupBy [ "Origin" ] ]
                 << stack "count_*"
@@ -128,10 +129,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

@@ -41,13 +41,13 @@ compositeVis config =
         barEnc =
             encoding
                 << position X [ pName "Horsepower", pMType Quantitative ]
-                << position Y [ pAggregate Count, pMType Quantitative ]
+                << position Y [ pAggregate opCount, pMType Quantitative ]
                 << color [ mName "Origin", mMType Nominal ]
 
         streamEnc =
             encoding
-                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
-                << position Y [ pAggregate Count, pMType Quantitative, pStack StCenter, pAxis [] ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
+                << position Y [ pAggregate opCount, pMType Quantitative, pStack StCenter, pAxis [] ]
                 << color [ mName "Origin", mMType Nominal ]
 
         barSpec =
@@ -58,7 +58,7 @@ compositeVis config =
 
         res =
             resolve
-                << resolution (reScale [ ( ChColor, Independent ), ( ChShape, Independent ) ])
+                << resolution (reScale [ ( chColor, Independent ), ( chShape, Independent ) ])
     in
     toVegaLite [ config [], cars, hConcat [ scatterSpec, barSpec, streamSpec ], res [] ]
 
@@ -125,10 +125,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

@@ -6,7 +6,7 @@
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc3/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <script src="js/projectionTests.js"></script>
@@ -26,7 +26,6 @@
 
   <h2>Source</h2>
   <div id="elmContainer"></div>
-
 
   <h2>Global Map Projections with Default Projection Parameters</h2>
 
@@ -106,16 +105,12 @@ vega.projection("gingery", d3.geoGingery);
 vega.projection("winkel3", d3.geoWinkel3);
 
 // vega.projection('geoNaturalEarth1', d3.geoNaturalEarth1);
-Elm.ProjectionTests.embed(
-  document.getElementById("elmContainer")
-).ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: false,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
+
+  Elm.ProjectionTests.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
+    for (let name of Object.keys(namedSpecs)) {
+      vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+    }
+  });
 </script>
 
   </body>

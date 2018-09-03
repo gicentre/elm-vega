@@ -1,5 +1,6 @@
 port module ScaleTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
@@ -60,12 +61,12 @@ scale3 =
                 << size
                     [ mName "b"
                     , mMType Quantitative
-                    , mScale [ scType ScQuantile ]
+                    , mScale [ scType scQuantile ]
                     ]
                 << color
                     [ mName "b"
                     , mMType Quantitative
-                    , mScale [ scType ScQuantile ]
+                    , mScale [ scType scQuantile ]
                     , mLegend [ leTitle "Quantile" ]
                     ]
     in
@@ -90,12 +91,12 @@ scale4 =
                 << size
                     [ mName "b"
                     , mMType Quantitative
-                    , mScale [ scType ScQuantize ]
+                    , mScale [ scType scQuantize ]
                     ]
                 << color
                     [ mName "b"
                     , mMType Quantitative
-                    , mScale [ scType ScQuantize, scZero True ]
+                    , mScale [ scType scQuantize, scZero True ]
                     , mLegend [ leTitle "Quantize" ]
                     ]
     in
@@ -121,7 +122,7 @@ scale5 =
                     [ mName "b"
                     , mMType Quantitative
                     , mScale
-                        [ scType ScThreshold
+                        [ scType scThreshold
                         , scDomain (doNums [ 30, 70 ])
                         , scRange (raNums [ 80, 200, 320 ])
                         ]
@@ -130,7 +131,7 @@ scale5 =
                     [ mName "b"
                     , mMType Quantitative
                     , mScale
-                        [ scType ScThreshold
+                        [ scType scThreshold
                         , scDomain (doNums [ 30, 70 ])
                         , scScheme "viridis" []
                         ]
@@ -168,10 +169,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

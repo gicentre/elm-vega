@@ -33,7 +33,7 @@ genderChart hdProps cProps =
                 << position Y
                     [ pName "people"
                     , pMType Quantitative
-                    , pAggregate Sum
+                    , pAggregate opSum
                     , pAxis [ axTitle "Population" ]
                     ]
                 << color
@@ -91,10 +91,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

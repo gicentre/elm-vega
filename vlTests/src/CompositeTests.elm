@@ -21,15 +21,15 @@ bPlot ext =
 
 boxplot1 : Spec
 boxplot1 =
-    bPlot ExRange
+    bPlot exRange
 
 
 boxplot2 : Spec
 boxplot2 =
-    bPlot (iqrScale 2)
+    bPlot (exIqrScale 2)
 
 
-eBand : SummaryExtent -> Spec
+eBand : String -> Spec
 eBand ext =
     let
         cars =
@@ -37,24 +37,41 @@ eBand ext =
 
         label =
             case ext of
-                ExCI ->
+                "ci" ->
                     "(95% CI)"
 
-                ExStdev ->
+                "stdev" ->
                     "(1 stdev)"
 
-                ExStderr ->
+                "stderr" ->
                     "(1 std Error)"
 
-                ExRange ->
+                "range" ->
                     "(min to max)"
 
                 _ ->
                     "(IQR)"
 
+        summary =
+            case ext of
+                "ci" ->
+                    exCi
+
+                "stdev" ->
+                    exStdev
+
+                "stderr" ->
+                    exStderr
+
+                "range" ->
+                    exRange
+
+                _ ->
+                    exIqr
+
         enc =
             encoding
-                << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+                << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
                 << position Y
                     [ pName "Miles_per_Gallon"
                     , pMType Quantitative
@@ -62,17 +79,17 @@ eBand ext =
                     , pTitle ("Miles per Gallon " ++ label)
                     ]
     in
-    toVegaLite [ cars, errorband [ maExtent ext, maInterpolate Monotone, maBorders [] ], enc [] ]
+    toVegaLite [ cars, errorband [ maExtent summary, maInterpolate Monotone, maBorders [] ], enc [] ]
 
 
 errorband1 : Spec
 errorband1 =
-    eBand ExCI
+    eBand "ci"
 
 
 errorband2 : Spec
 errorband2 =
-    eBand ExStdev
+    eBand "stdev"
 
 
 eBar : SummaryExtent -> Spec
@@ -94,12 +111,12 @@ eBar ext =
 
 errorbar1 : Spec
 errorbar1 =
-    eBar ExCI
+    eBar exCi
 
 
 errorbar2 : Spec
 errorbar2 =
-    eBar ExStdev
+    eBar exStdev
 
 
 
@@ -124,10 +141,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
