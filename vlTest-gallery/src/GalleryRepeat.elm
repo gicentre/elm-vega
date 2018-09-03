@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -17,9 +18,9 @@ repeat1 =
 
         enc1 =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
-                << position Y [ pRepeat Column, pMType Quantitative, pAggregate Mean ]
-                << detail [ dName "date", dMType Temporal, dTimeUnit Year ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
+                << position Y [ pRepeat Column, pMType Quantitative, pAggregate opMean ]
+                << detail [ dName "date", dMType Temporal, dTimeUnit year ]
                 << color [ mName "location", mMType Nominal ]
                 << opacity [ mNum 0.2 ]
 
@@ -28,8 +29,8 @@ repeat1 =
 
         enc2 =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
-                << position Y [ pRepeat Column, pMType Quantitative, pAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
+                << position Y [ pRepeat Column, pMType Quantitative, pAggregate opMean ]
                 << color [ mName "location", mMType Nominal ]
 
         spec2 =
@@ -58,8 +59,8 @@ repeat2 =
 
         enc1 =
             encoding
-                << position X [ pName "date", pTimeUnit Month, pMType Ordinal ]
-                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
+                << position X [ pName "date", pTimeUnit month, pMType Ordinal ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean ]
 
         spec1 =
             asSpec [ bar [], enc1 [] ]
@@ -68,7 +69,7 @@ repeat2 =
             encoding
                 << position X [ pName "temp_min", pMType Quantitative, pBin [] ]
                 << position Y [ pName "temp_max", pMType Quantitative, pBin [] ]
-                << size [ mAggregate Count, mMType Quantitative ]
+                << size [ mAggregate opCount, mMType Quantitative ]
 
         spec2 =
             asSpec [ point [], enc2 [] ]
@@ -90,7 +91,7 @@ repeat3 =
         enc =
             encoding
                 << position X [ pRepeat Column, pMType Quantitative, pBin [] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
                 << color [ mName "Origin", mMType Nominal ]
 
         spec =
@@ -124,7 +125,7 @@ repeat4 =
                     ]
                 << select ""
                     Interval
-                    [ BindScales
+                    [ seBindScales
                     , seTranslate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
                     , seResolve Global
@@ -178,7 +179,7 @@ repeat5 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pAxis [], pBin [] ]
                 << position Y
-                    [ pAggregate Count
+                    [ pAggregate opCount
                     , pMType Quantitative
                     , pScale [ scDomain (doNums [ 0, 1000 ]) ]
                     , pAxis [ axTitle "" ]
@@ -194,7 +195,7 @@ repeat5 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [] ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [] ]
-                << color [ mAggregate Count, mMType Quantitative ]
+                << color [ mAggregate opCount, mMType Quantitative ]
 
         spec2_1 =
             asSpec [ rect [], enc2_1 [] ]
@@ -208,7 +209,7 @@ repeat5 =
                     , pAxis []
                     ]
                 << position X
-                    [ pAggregate Count
+                    [ pAggregate opCount
                     , pMType Quantitative
                     , pScale [ scDomain (doNums [ 0, 1000 ]) ]
                     , pAxis [ axTitle "" ]
@@ -248,10 +249,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

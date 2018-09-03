@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -84,7 +85,7 @@ line4 =
         enc =
             encoding
                 << position X [ pName "year", pMType Ordinal, pScale [ scRangeStep (Just 50), scPadding 0.5 ] ]
-                << position Y [ pName "yield", pMType Quantitative, pAggregate Median ]
+                << position Y [ pName "yield", pMType Quantitative, pAggregate opMedian ]
                 << color [ mName "site", mMType Nominal ]
     in
     toVegaLite
@@ -242,7 +243,7 @@ line10 =
 
         transTextMin =
             transform
-                << aggregate [ opAs ArgMin "scaled_date" "aggregated" ] [ "decade" ]
+                << aggregate [ opAs opArgMin "scaled_date" "aggregated" ] [ "decade" ]
                 << calculateAs "datum.aggregated.scaled_date" "scaled_date"
                 << calculateAs "datum.aggregated.CO2" "CO2"
 
@@ -255,7 +256,7 @@ line10 =
 
         transTextMax =
             transform
-                << aggregate [ opAs ArgMax "scaled_date" "aggregated" ] [ "decade" ]
+                << aggregate [ opAs opArgMax "scaled_date" "aggregated" ] [ "decade" ]
                 << calculateAs "datum.aggregated.scaled_date" "scaled_date"
                 << calculateAs "datum.aggregated.CO2" "CO2"
 
@@ -296,7 +297,7 @@ line11 =
 
         trans =
             transform
-                << window [ ( [ wiOp Rank ], "rank" ) ]
+                << window [ ( [ wiOp wiRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point", wiDescending "diff" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -343,10 +344,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

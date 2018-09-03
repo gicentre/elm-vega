@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -75,12 +76,12 @@ interaction3 =
                 << filter (fiSelection "myBrush")
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate Sum ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum ]
 
         specBackground =
             asSpec [ area [], sel [] ]
@@ -131,7 +132,7 @@ interaction5 =
             description "Drag to pan. Zoom in or out with mousewheel/zoom gesture."
 
         sel =
-            selection << select "myGrid" Interval [ BindScales ]
+            selection << select "myGrid" Interval [ seBindScales ]
 
         enc =
             encoding
@@ -213,14 +214,14 @@ interaction7 =
             description "Drag over bars to update selection average"
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
 
         encPosition =
-            encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
+            encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean ]
 
         enc1 =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
                 << opacity
                     [ mSelectionCondition (selectionName "myBrush")
                         [ mNum 1 ]
@@ -280,8 +281,8 @@ interaction8 =
                     Single
                     [ seNearest True
                     , seOn "mouseover"
-                    , seEncodings [ ChX ]
-                    , Empty
+                    , seEncodings [ chX ]
+                    , seEmpty
                     ]
 
         spec2 =
@@ -338,10 +339,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -16,7 +17,7 @@ multi1 =
             description "Overview and detail."
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
 
         enc1 =
             encoding
@@ -61,7 +62,7 @@ multi2 =
                 << calculateAs "hours(datum.date)" "time"
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
 
         selTrans =
             transform
@@ -74,7 +75,7 @@ multi2 =
                     , pMType Quantitative
                     , pBin [ biMaxBins 20 ]
                     ]
-                << position Y [ pAggregate Count, pMType Quantitative ]
+                << position Y [ pAggregate opCount, pMType Quantitative ]
 
         spec1 =
             asSpec [ sel [], bar [] ]
@@ -114,7 +115,7 @@ multi3 =
                     ]
                 << select ""
                     Interval
-                    [ BindScales
+                    [ seBindScales
                     , seTranslate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
                     , seResolve Global
@@ -165,14 +166,14 @@ multi4 =
 
         enc1 =
             encoding
-                << color [ mAggregate Count, mMType Quantitative, mLegend [ leTitle "" ] ]
+                << color [ mAggregate opCount, mMType Quantitative, mLegend [ leTitle "" ] ]
 
         spec1 =
             asSpec [ width 300, rect [], enc1 [] ]
 
         enc2 =
             encoding
-                << size [ mAggregate Count, mMType Quantitative, mLegend [ leTitle "In Selected Category" ] ]
+                << size [ mAggregate opCount, mMType Quantitative, mLegend [ leTitle "In Selected Category" ] ]
                 << color [ mStr "#666" ]
 
         spec2 =
@@ -182,7 +183,7 @@ multi4 =
             asSpec [ encPosition [], layer [ spec1, spec2 ] ]
 
         sel =
-            selection << select "myPts" Single [ seEncodings [ ChX ] ]
+            selection << select "myPts" Single [ seEncodings [ chX ] ]
 
         barSpec =
             asSpec [ width 420, height 120, bar [], sel [], encBar [] ]
@@ -190,7 +191,7 @@ multi4 =
         encBar =
             encoding
                 << position X [ pName "Major_Genre", pMType Nominal, pAxis [ axLabelAngle -40 ] ]
-                << position Y [ pAggregate Count, pMType Quantitative ]
+                << position Y [ pAggregate opCount, pMType Quantitative ]
                 << color
                     [ mSelectionCondition (selectionName "myPts")
                         [ mStr "steelblue" ]
@@ -202,7 +203,7 @@ multi4 =
 
         res =
             resolve
-                << resolution (reLegend [ ( ChColor, Independent ), ( ChSize, Independent ) ])
+                << resolution (reLegend [ ( chColor, Independent ), ( chSize, Independent ) ])
     in
     toVegaLite
         [ des
@@ -224,7 +225,7 @@ multi5 =
                 [ width 600, height 300, point [], sel1 [], trans1 [], enc1 [] ]
 
         sel1 =
-            selection << select "myBrush" Interval [ seEncodings [ ChX ] ]
+            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
 
         trans1 =
             transform << filter (fiSelection "myClick")
@@ -243,7 +244,7 @@ multi5 =
                 << position X
                     [ pName "date"
                     , pMType Temporal
-                    , pTimeUnit MonthDate
+                    , pTimeUnit monthDate
                     , pAxis [ axTitle "Date", axFormat "%b" ]
                     ]
                 << position Y
@@ -271,14 +272,14 @@ multi5 =
             asSpec [ width 600, bar [], sel2 [], trans2 [], enc2 [] ]
 
         sel2 =
-            selection << select "myClick" Multi [ seEncodings [ ChColor ] ]
+            selection << select "myClick" Multi [ seEncodings [ chColor ] ]
 
         trans2 =
             transform << filter (fiSelection "myBrush")
 
         enc2 =
             encoding
-                << position X [ pAggregate Count, pMType Quantitative ]
+                << position X [ pAggregate opCount, pMType Quantitative ]
                 << position Y [ pName "weather", pMType Nominal ]
                 << color
                     [ mSelectionCondition (selectionName "myClick")
@@ -318,10 +319,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

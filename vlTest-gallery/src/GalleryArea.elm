@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -17,8 +18,8 @@ area1 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "Count" ] ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Count" ] ]
     in
     toVegaLite
         [ des
@@ -61,8 +62,8 @@ area3 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate Sum ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum ]
                 << color [ mName "series", mMType Nominal, mScale [ scScheme "category20b" [] ] ]
     in
     toVegaLite
@@ -81,8 +82,8 @@ area4 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [], pStack StNormalize ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack StNormalize ]
                 << color [ mName "series", mMType Nominal, mScale [ scScheme "category20b" [] ] ]
     in
     toVegaLite
@@ -103,8 +104,8 @@ area5 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate Sum, pAxis [], pStack StCenter ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack StCenter ]
                 << color [ mName "series", mMType Nominal, mScale [ scScheme "category20b" [] ] ]
     in
     toVegaLite
@@ -132,7 +133,7 @@ area6 =
             transform << calculateAs "datum.y - 50" "ny"
 
         encX =
-            encoding << position X [ pName "x", pMType Quantitative, pScale [ scZero False, scNice NFalse ] ]
+            encoding << position X [ pName "x", pMType Quantitative, pScale [ scZero False, scNice niFalse ] ]
 
         encLower =
             encoding
@@ -165,21 +166,21 @@ area7 =
 
         trans =
             transform
-                << aggregate [ opAs Count "" "count_*" ] [ "Origin", "Cylinders" ]
+                << aggregate [ opAs opCount "" "count_*" ] [ "Origin", "Cylinders" ]
                 << stack "count_*"
                     []
                     "stack_count_Origin1"
                     "stack_count_Origin2"
                     [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
                 << window
-                    [ ( [ wiAggregateOp Min, wiField "stack_count_Origin1" ], "x" )
-                    , ( [ wiAggregateOp Max, wiField "stack_count_Origin2" ], "x2" )
-                    , ( [ wiOp DenseRank ], "rank_Cylinders" )
-                    , ( [ wiAggregateOp Distinct, wiField "Cylinders" ], "distinct_Cylinders" )
+                    [ ( [ wiAggregateOp opMin, wiField "stack_count_Origin1" ], "x" )
+                    , ( [ wiAggregateOp opMax, wiField "stack_count_Origin2" ], "x2" )
+                    , ( [ wiOp wiDenseRank ], "rank_Cylinders" )
+                    , ( [ wiAggregateOp opDistinct, wiField "Cylinders" ], "distinct_Cylinders" )
                     ]
                     [ wiFrame Nothing Nothing, wiGroupBy [ "Origin" ], wiSort [ wiAscending "Cylinders" ] ]
                 << window
-                    [ ( [ wiOp DenseRank ], "rank_Origin" ) ]
+                    [ ( [ wiOp wiDenseRank ], "rank_Origin" ) ]
                     [ wiFrame Nothing Nothing, wiSort [ wiAscending "Origin" ] ]
                 << stack "count_*"
                     [ "Origin" ]
@@ -198,7 +199,7 @@ area7 =
                 << position X
                     [ pName "xc"
                     , pMType Quantitative
-                    , pAggregate Min
+                    , pAggregate opMin
                     , pTitle "Origin"
                     , pAxis [ axOrient STop ]
                     ]
@@ -240,7 +241,7 @@ area7 =
 
         res =
             resolve
-                << resolution (reScale [ ( ChX, Shared ) ])
+                << resolution (reScale [ ( chX, Shared ) ])
     in
     toVegaLite
         [ config []
@@ -274,10 +275,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

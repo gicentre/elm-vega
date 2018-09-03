@@ -5,6 +5,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -34,7 +35,7 @@ layer1 =
                 << position X
                     [ pName "date"
                     , pMType Temporal
-                    , pTimeUnit YearMonthDate
+                    , pTimeUnit yearMonthDate
                     , pScale [ scDomain (doDts [ [ dtMonth May, dtDate 31, dtYear 2009 ], [ dtMonth Jul, dtDate 1, dtYear 2009 ] ]) ]
                     , pAxis [ axTitle "Date in 2009", axFormat "%m/%d" ]
                     ]
@@ -47,7 +48,7 @@ layer1 =
 
         encBar =
             encoding
-                << position X [ pName "date", pMType Temporal, pTimeUnit YearMonthDate ]
+                << position X [ pName "date", pMType Temporal, pTimeUnit yearMonthDate ]
                 << position Y [ pName "open", pMType Quantitative ]
                 << position Y2 [ pName "close", pMType Quantitative ]
                 << size [ mNum 5 ]
@@ -118,14 +119,14 @@ layer3 =
         row title ranges measures marker =
             JE.object
                 [ ( "title", JE.string title )
-                , ( "ranges", JE.list (List.map JE.float ranges) )
-                , ( "measures", JE.list (List.map JE.float measures) )
-                , ( "markers", JE.list [ JE.float marker ] )
+                , ( "ranges", JE.list JE.float ranges )
+                , ( "measures", JE.list JE.float measures )
+                , ( "markers", JE.list JE.float [ marker ] )
                 ]
 
         data =
             dataFromJson
-                (JE.list
+                (JE.list identity
                     [ row "Revenue" [ 150, 225, 300 ] [ 220, 270 ] 250
                     , row "Profit" [ 20, 25, 30 ] [ 21, 23 ] 26
                     , row "Order size" [ 350, 500, 600 ] [ 100, 320 ] 550
@@ -138,7 +139,7 @@ layer3 =
             facet [ rowBy [ fName "title", fMType Ordinal, fHeader [ hdLabelAngle 30, hdTitle "" ] ] ]
 
         res =
-            resolve << resolution (reScale [ ( ChX, Independent ) ])
+            resolve << resolution (reScale [ ( chX, Independent ) ])
 
         encLine =
             encoding
@@ -151,7 +152,7 @@ layer3 =
                 << position X
                     [ pName "ranges[2]"
                     , pMType Quantitative
-                    , pScale [ scNice NFalse ]
+                    , pScale [ scNice niFalse ]
                     , pAxis [ axTitle "" ]
                     ]
 
@@ -205,18 +206,18 @@ layer4 =
             description "Layered bar/line chart with dual axes"
 
         encTime =
-            encoding << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
+            encoding << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
 
         encBar =
             encoding
-                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean, pAxis [ axGrid False ] ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean, pAxis [ axGrid False ] ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
-                << position Y [ pName "temp_max", pMType Quantitative, pAggregate Mean, pAxis [ axGrid False ], pScale [ scZero False ] ]
+                << position Y [ pName "temp_max", pMType Quantitative, pAggregate opMean, pAxis [ axGrid False ], pScale [ scZero False ] ]
                 << color [ mStr "firebrick" ]
 
         specLine =
@@ -224,7 +225,7 @@ layer4 =
 
         res =
             resolve
-                << resolution (reScale [ ( ChY, Independent ) ])
+                << resolution (reScale [ ( chY, Independent ) ])
     in
     toVegaLite
         [ des
@@ -250,7 +251,7 @@ layer5 =
             transform << calculateAs "datum.y - 50" "ny"
 
         encX =
-            encoding << position X [ pName "x", pMType Quantitative, pScale [ scZero False, scNice NFalse ] ]
+            encoding << position X [ pName "x", pMType Quantitative, pScale [ scZero False, scNice niFalse ] ]
 
         encLower =
             encoding
@@ -403,10 +404,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

@@ -1,10 +1,10 @@
 {
     "version": "1.0.0",
-    "summary": "Elm and Vega / Vega-Lite Test Gallery",
-    "repository": "https://github.com/gicentre/elm-vega.git",
+    "summary": "helpful summary of your project, less than 80 characters",
+    "repository": "https://github.com/user/project.git",
     "license": "BSD3",
     "source-directories": [
-        "src","../src"
+        "."
     ],
     "exposed-modules": [],
     "dependencies": {

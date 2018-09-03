@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -19,7 +20,7 @@ table1 =
             encoding
                 << position X [ pName "Cylinders", pMType Ordinal ]
                 << position Y [ pName "Origin", pMType Nominal ]
-                << color [ mName "Horsepower", mMType Quantitative, mAggregate Mean ]
+                << color [ mName "Horsepower", mMType Quantitative, mAggregate opMean ]
     in
     toVegaLite
         [ des
@@ -43,9 +44,9 @@ table2 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Date, pAxis [ axTitle "Day", axLabelAngle 0, axFormat "%e" ] ]
-                << position Y [ pName "date", pMType Ordinal, pTimeUnit Month, pAxis [ axTitle "Month" ] ]
-                << color [ mName "temp", mMType Quantitative, mAggregate Max, mLegend [ leTitle "" ] ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit date, pAxis [ axTitle "Day", axLabelAngle 0, axFormat "%e" ] ]
+                << position Y [ pName "date", pMType Ordinal, pTimeUnit month, pAxis [ axTitle "Month" ] ]
+                << color [ mName "temp", mMType Quantitative, mAggregate opMax, mLegend [ leTitle "" ] ]
     in
     toVegaLite
         [ des
@@ -66,7 +67,7 @@ table3 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [ biMaxBins 60 ] ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [ biMaxBins 40 ] ]
-                << color [ mMType Quantitative, mAggregate Count ]
+                << color [ mMType Quantitative, mAggregate opCount ]
 
         config =
             configure
@@ -92,9 +93,9 @@ table4 =
 
         enc =
             encoding
-                << position X [ pName "time", pMType Ordinal, pTimeUnit Hours ]
-                << position Y [ pName "time", pMType Ordinal, pTimeUnit Day ]
-                << size [ mName "count", mMType Quantitative, mAggregate Sum ]
+                << position X [ pName "time", pMType Ordinal, pTimeUnit hours ]
+                << position Y [ pName "time", pMType Ordinal, pTimeUnit day ]
+                << size [ mName "count", mMType Quantitative, mAggregate opSum ]
     in
     toVegaLite
         [ des
@@ -117,7 +118,7 @@ table5 =
 
         encRect =
             encoding
-                << color [ mName "*", mMType Quantitative, mAggregate Count ]
+                << color [ mName "*", mMType Quantitative, mAggregate opCount ]
 
         specRect =
             asSpec [ rect [], encRect [] ]
@@ -125,7 +126,7 @@ table5 =
         encText =
             encoding
                 << color [ mStr "white" ]
-                << text [ tName "*", tMType Quantitative, tAggregate Count ]
+                << text [ tName "*", tMType Quantitative, tAggregate opCount ]
 
         specText =
             asSpec [ textMark [], encText [] ]
@@ -165,10 +166,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

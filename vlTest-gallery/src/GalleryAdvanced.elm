@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -23,7 +24,7 @@ advanced1 =
         trans =
             transform
                 << window
-                    [ ( [ wiAggregateOp Sum, wiField "Time" ], "TotalTime" ) ]
+                    [ ( [ wiAggregateOp opSum, wiField "Time" ], "TotalTime" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.Time/datum.TotalTime * 100" "PercentOfTotal"
 
@@ -48,7 +49,7 @@ advanced2 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageRating) > 2.5")
 
@@ -62,7 +63,7 @@ advanced2 =
 
         ruleEnc =
             encoding
-                << position X [ pName "AverageRating", pAggregate Average, pMType Quantitative ]
+                << position X [ pName "AverageRating", pAggregate opMean, pMType Quantitative ]
 
         ruleSpec =
             asSpec [ rule [ maColor "red" ], ruleEnc [] ]
@@ -84,8 +85,8 @@ advanced3 =
         trans =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
-                << timeUnitAs Year "Release_Date" "year"
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
+                << timeUnitAs year "Release_Date" "year"
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageYearRating" ) ]
                     [ wiGroupBy [ "year" ], wiFrame Nothing Nothing ]
                 << filter (fiExpr "(datum.IMDB_Rating - datum.AverageYearRating) > 2.5")
 
@@ -123,7 +124,7 @@ advanced4 =
             transform
                 << filter (fiExpr "datum.IMDB_Rating != null")
                 << filter (fiRange "Release_Date" (dtRange [] [ dtYear 2019 ]))
-                << window [ ( [ wiAggregateOp Mean, wiField "IMDB_Rating" ], "AverageRating" ) ]
+                << window [ ( [ wiAggregateOp opMean, wiField "IMDB_Rating" ], "AverageRating" ) ]
                     [ wiFrame Nothing Nothing ]
                 << calculateAs "datum.IMDB_Rating - datum.AverageRating" "RatingDelta"
 
@@ -150,7 +151,7 @@ advanced5 =
 
         trans =
             transform
-                << window [ ( [ wiOp Rank ], "rank" ) ]
+                << window [ ( [ wiOp wiRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point", wiDescending "diff" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -183,8 +184,8 @@ advanced6 =
 
         trans =
             transform
-                << window [ ( [ wiAggregateOp Sum, wiField "amount" ], "sum" ) ] []
-                << window [ ( [ wiOp Lead, wiField "label" ], "lead" ) ] []
+                << window [ ( [ wiAggregateOp opSum, wiField "amount" ], "sum" ) ] []
+                << window [ ( [ wiOp wiLead, wiField "label" ], "lead" ) ] []
                 << calculateAs "datum.lead === null ? datum.label : datum.lead" "lead"
                 << calculateAs "datum.label === 'End' ? 0 : datum.sum - datum.amount" "previous_sum"
                 << calculateAs "datum.label === 'End' ? datum.sum : datum.amount" "amount"
@@ -303,7 +304,7 @@ advanced7 =
         enc =
             encoding
                 << position X [ pName "group", pMType Ordinal ]
-                << position Y [ pName "age", pMType Quantitative, pAggregate Mean ]
+                << position Y [ pName "age", pMType Quantitative, pAggregate opMean ]
     in
     toVegaLite
         [ des
@@ -337,10 +338,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

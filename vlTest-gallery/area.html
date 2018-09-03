@@ -8,7 +8,7 @@
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc3/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -75,7 +75,7 @@
   <div id="area7" class="view"></div>
 
   <script>
-  Elm.GalleryArea.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+  Elm.GalleryArea.init().ports.elmToJS.subscribe(function(namedSpecs) {
   for (let name of Object.keys(namedSpecs)) {
     vegaEmbed(`#${name}`, namedSpecs[name], {
       actions: true,

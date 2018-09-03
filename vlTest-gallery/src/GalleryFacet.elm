@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -23,7 +24,7 @@ facet1 =
         enc =
             encoding
                 << position X [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "Population" ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ] ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#EA98D2", "#659CCA" ]) ] ]
                 << row [ fName "gender", fMType Nominal ]
     in
@@ -44,7 +45,7 @@ facet2 =
 
         enc =
             encoding
-                << position X [ pName "yield", pMType Quantitative, pAggregate Sum ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate opSum ]
                 << position Y [ pName "variety", pMType Nominal ]
                 << color [ mName "site", mMType Nominal ]
                 << column [ fName "year", fMType Ordinal ]
@@ -86,7 +87,7 @@ facet4 =
         enc =
             encoding
                 << position X [ pName "Horsepower", pMType Quantitative, pBin [ biMaxBins 15 ] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
                 << row [ fName "Origin", fMType Ordinal ]
     in
     toVegaLite
@@ -121,8 +122,8 @@ facet6 =
 
         enc =
             encoding
-                << position X [ pName "yield", pMType Quantitative, pAggregate Median, pScale [ scZero False ] ]
-                << position Y [ pName "variety", pMType Ordinal, pSort [ soByField "Horsepower" Mean, Descending ], pScale [ scRangeStep (Just 12) ] ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate opMedian, pScale [ scZero False ] ]
+                << position Y [ pName "variety", pMType Ordinal, pSort [ soByField "Horsepower" opMean, soDescending ], pScale [ scRangeStep (Just 12) ] ]
                 << color [ mName "year", mMType Nominal ]
                 << row [ fName "site", fMType Ordinal ]
     in
@@ -184,10 +185,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

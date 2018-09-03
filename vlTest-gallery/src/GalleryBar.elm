@@ -5,6 +5,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -38,7 +39,7 @@ bar2 =
         enc =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
     in
     toVegaLite
         [ des
@@ -59,7 +60,7 @@ bar3 =
 
         enc =
             encoding
-                << position X [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "population" ] ]
+                << position X [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "population" ] ]
                 << position Y [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
     in
     toVegaLite
@@ -85,7 +86,7 @@ bar4 =
         enc =
             encoding
                 << position X [ pName "gender", pMType Nominal, pScale [ scRangeStep (Just 12) ], pAxis [ axTitle "" ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "population", axGrid False ] ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "population", axGrid False ] ]
                 << column [ fName "age", fMType Ordinal ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#EA98D2", "#659CCA" ]) ] ]
 
@@ -121,8 +122,8 @@ bar5 =
 
         enc =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Month, pAxis [ axTitle "Month of the year" ] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit month, pAxis [ axTitle "Month of the year" ] ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
                 << color
                     [ mName "weather"
                     , mMType Nominal
@@ -146,7 +147,7 @@ bar6 =
 
         enc =
             encoding
-                << position X [ pName "yield", pMType Quantitative, pAggregate Sum ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate opSum ]
                 << position Y [ pName "variety", pMType Nominal ]
                 << color [ mName "site", mMType Nominal ]
     in
@@ -172,7 +173,7 @@ bar7 =
         enc =
             encoding
                 << position X [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "Population" ], pStack StNormalize ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack StNormalize ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#EA98D2", "#659CCA" ]) ] ]
     in
     toVegaLite
@@ -239,7 +240,7 @@ bar10 =
         enc =
             encoding
                 << position X [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate Sum, pAxis [ axTitle "Population" ], pStack NoStack ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack NoStack ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#e377c2", "#1f77b4" ]) ] ]
                 << opacity [ mNum 0.7 ]
     in
@@ -277,7 +278,7 @@ bar11 =
                     , mMType Nominal
                     , mLegend [ leTitle "Response" ]
                     , mScale <|
-                        scType ScOrdinal
+                        scType scOrdinal
                             :: categoricalDomainMap
                                 [ ( "Strongly disagree", "#c30d24" )
                                 , ( "Disagree", "#f3a583" )
@@ -412,7 +413,7 @@ bar14 =
         trans =
             transform
                 << calculateAs "{'cattle': '🐄', 'pigs': '🐖', 'sheep': '🐏'}[datum.animal]" "emoji"
-                << window [ ( [ wiOp Rank ], "rank" ) ] [ wiGroupBy [ "country", "animal" ] ]
+                << window [ ( [ wiOp wiRank ], "rank" ) ] [ wiGroupBy [ "country", "animal" ] ]
 
         enc =
             encoding
@@ -455,10 +456,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

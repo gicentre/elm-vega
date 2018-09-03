@@ -5190,14 +5190,13 @@ var elm$core$Platform$Sub$none = elm$core$Platform$Sub$batch(_List_Nil);
 var elm$json$Json$Decode$succeed = _Json_succeed;
 var author$project$HelloWorld$main = elm$core$Platform$worker(
 	{
-		at: function (_n0) {
-			return _Utils_Tuple2(
+		at: elm$core$Basics$always(
+			_Utils_Tuple2(
 				author$project$HelloWorld$myVis,
-				author$project$HelloWorld$elmToJS(author$project$HelloWorld$myVis));
-		},
+				author$project$HelloWorld$elmToJS(author$project$HelloWorld$myVis))),
 		az: elm$core$Basics$always(elm$core$Platform$Sub$none),
 		aB: F2(
-			function (_n1, model) {
+			function (_n0, model) {
 				return _Utils_Tuple2(model, elm$core$Platform$Cmd$none);
 			})
 	});

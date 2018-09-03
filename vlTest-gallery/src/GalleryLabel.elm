@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -50,7 +51,7 @@ label2 =
 
         encRect =
             encoding
-                << color [ mName "*", mMType Quantitative, mAggregate Count ]
+                << color [ mName "*", mMType Quantitative, mAggregate opCount ]
 
         specRect =
             asSpec [ rect [], encRect [] ]
@@ -58,7 +59,7 @@ label2 =
         encText =
             encoding
                 << color [ mStr "white" ]
-                << text [ tName "*", tMType Quantitative, tAggregate Count ]
+                << text [ tName "*", tMType Quantitative, tAggregate opCount ]
 
         specText =
             asSpec [ textMark [], encText [] ]
@@ -113,7 +114,7 @@ label3 =
 
         transTextMin =
             transform
-                << aggregate [ opAs ArgMin "scaled_date" "aggregated" ] [ "decade" ]
+                << aggregate [ opAs opArgMin "scaled_date" "aggregated" ] [ "decade" ]
                 << calculateAs "datum.aggregated.scaled_date" "scaled_date"
                 << calculateAs "datum.aggregated.CO2" "CO2"
 
@@ -126,7 +127,7 @@ label3 =
 
         transTextMax =
             transform
-                << aggregate [ opAs ArgMax "scaled_date" "aggregated" ] [ "decade" ]
+                << aggregate [ opAs opArgMax "scaled_date" "aggregated" ] [ "decade" ]
                 << calculateAs "datum.aggregated.scaled_date" "scaled_date"
                 << calculateAs "datum.aggregated.CO2" "CO2"
 
@@ -223,15 +224,15 @@ label5 =
 
         encBar =
             encoding
-                << position X [ pName "date", pMType Ordinal, pTimeUnit Month ]
-                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
+                << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean ]
 
         specBar =
             asSpec [ bar [], encBar [] ]
 
         encLine =
             encoding
-                << position Y [ pName "precipitation", pMType Quantitative, pAggregate Mean ]
+                << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean ]
                 << color [ mStr "red" ]
                 << size [ mNum 3 ]
 
@@ -254,14 +255,14 @@ label6 =
         encBars =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [], pAxis [] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
 
         specBars =
             asSpec [ bar [], encBars [] ]
 
         encMean =
             encoding
-                << position X [ pName "IMDB_Rating", pMType Quantitative, pAggregate Mean ]
+                << position X [ pName "IMDB_Rating", pMType Quantitative, pAggregate opMean ]
                 << color [ mStr "red" ]
                 << size [ mNum 5 ]
 
@@ -294,8 +295,8 @@ label7 =
 
         encRects =
             encoding
-                << position X [ pName "start", pMType Temporal, pTimeUnit Year, pAxis [] ]
-                << position X2 [ pName "end", pMType Temporal, pTimeUnit Year ]
+                << position X [ pName "start", pMType Temporal, pTimeUnit year, pAxis [] ]
+                << position X2 [ pName "end", pMType Temporal, pTimeUnit year ]
                 << color [ mName "event", mMType Nominal ]
 
         specRects =
@@ -303,7 +304,7 @@ label7 =
 
         encPopulation =
             encoding
-                << position X [ pName "year", pMType Temporal, pTimeUnit Year, pAxis [ axTitle "" ] ]
+                << position X [ pName "year", pMType Temporal, pTimeUnit year, pAxis [ axTitle "" ] ]
                 << position Y [ pName "population", pMType Quantitative ]
                 << color [ mStr "#333" ]
 
@@ -339,10 +340,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -15,7 +16,7 @@ geo1 =
         [ description "Choropleth of US unemployment rate by county"
         , width 500
         , height 300
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "https://vega.github.io/vega-lite/data/us-10m.json" [ topojsonFeature "counties" ]
         , transform <| lookup "id" (dataFromUrl "https://vega.github.io/vega-lite/data/unemployment.tsv" []) "id" [ "rate" ] <| []
         , geoshape []
@@ -37,7 +38,7 @@ geo2 =
         [ description "US zip codes: One dot per zipcode colored by first digit"
         , width 500
         , height 300
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , dataFromUrl "https://vega.github.io/vega-lite/data/zipcodes.csv" []
         , transform <| calculateAs "substring(datum.zip_code, 0, 1)" "digit" <| []
         , circle []
@@ -76,7 +77,7 @@ geo3 =
         [ des
         , width 500
         , height 300
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , layer [ backdropSpec, overlaySpec ]
         ]
 
@@ -134,7 +135,7 @@ geo4 =
         [ description "Rules (line segments) connecting SEA to every airport reachable via direct flight"
         , width 800
         , height 500
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , layer [ backdropSpec, airportsSpec, flightsSpec ]
         ]
 
@@ -153,7 +154,7 @@ geo5 =
                 , height 300
                 , dataFromUrl "https://vega.github.io/vega-lite/data/population_engineers_hurricanes.csv" []
                 , transform <| lookupAs "id" (dataFromUrl "https://vega.github.io/vega-lite/data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
-                , projection [ prType AlbersUsa ]
+                , projection [ prType albersUsa ]
                 , geoshape []
                 , enc []
                 ]
@@ -161,7 +162,7 @@ geo5 =
     toVegaLite
         [ description "Population per state, engineers per state, and hurricanes per state"
         , repeat [ rowFields [ "population", "engineers", "hurricanes" ] ]
-        , resolve <| resolution (reScale [ ( ChColor, Independent ) ]) []
+        , resolve <| resolution (reScale [ ( chColor, Independent ) ]) []
         , specification spec
         ]
 
@@ -196,7 +197,7 @@ geo6 =
         [ des
         , width 800
         , height 500
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , layer [ backdropSpec, overlaySpec ]
         ]
 
@@ -252,7 +253,7 @@ geo7 =
         [ description "Line drawn between airports in the U.S. simulating a flight itinerary"
         , width 800
         , height 500
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , layer [ backdropSpec, airportsSpec, flightsSpec ]
         ]
 
@@ -272,7 +273,7 @@ geo8 =
         , height 300
         , dataFromUrl "https://vega.github.io/vega-lite/data/income.json" []
         , transform <| lookupAs "id" (dataFromUrl "https://vega.github.io/vega-lite/data/us-10m.json" [ topojsonFeature "states" ]) "id" "geo" []
-        , projection [ prType AlbersUsa ]
+        , projection [ prType albersUsa ]
         , geoshape []
         , enc []
         ]
@@ -369,10 +370,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

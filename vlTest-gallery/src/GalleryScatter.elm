@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -96,7 +97,7 @@ scatter5 =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [ biMaxBins 10 ] ]
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative, pBin [ biMaxBins 10 ] ]
-                << size [ mAggregate Count, mMType Quantitative ]
+                << size [ mAggregate opCount, mMType Quantitative ]
     in
     toVegaLite
         [ des
@@ -185,13 +186,13 @@ scatter9 =
 
         enc =
             encoding
-                << position X [ pName "income", pMType Quantitative, pScale [ scType ScLog ] ]
+                << position X [ pName "income", pMType Quantitative, pScale [ scType scLog ] ]
                 << position Y [ pName "health", pMType Quantitative, pScale [ scZero False ] ]
                 << size [ mName "population", mMType Quantitative ]
                 << color [ mStr "#000" ]
 
         sel =
-            selection << select "view" Interval [ BindScales ]
+            selection << select "view" Interval [ seBindScales ]
     in
     toVegaLite
         [ des
@@ -290,10 +291,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

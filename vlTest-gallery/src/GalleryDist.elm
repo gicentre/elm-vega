@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -18,7 +19,7 @@ dist1 =
         enc =
             encoding
                 << position X [ pName "IMDB_Rating", pMType Quantitative, pBin [] ]
-                << position Y [ pMType Quantitative, pAggregate Count ]
+                << position Y [ pMType Quantitative, pAggregate opCount ]
     in
     toVegaLite
         [ des
@@ -36,7 +37,7 @@ dist2 =
 
         trans =
             transform
-                << window [ ( [ wiAggregateOp Count, wiField "count" ], "cumulativeCount" ) ]
+                << window [ ( [ wiAggregateOp opCount, wiField "count" ], "cumulativeCount" ) ]
                     [ wiSort [ wiAscending "IMDB_Rating" ], wiFrame Nothing (Just 0) ]
 
         enc =
@@ -63,10 +64,10 @@ dist3 =
             transform
                 << binAs [] "IMDB_Rating" "bin_IMDB_Rating"
                 << aggregate
-                    [ opAs Count "" "count" ]
+                    [ opAs opCount "" "count" ]
                     [ "bin_IMDB_Rating", "bin_IMDB_Rating_end" ]
                 << filter (fiExpr "datum.bin_IMDB_Rating !== null")
-                << window [ ( [ wiAggregateOp Sum, wiField "count" ], "cumulativeCount" ) ]
+                << window [ ( [ wiAggregateOp opSum, wiField "count" ], "cumulativeCount" ) ]
                     [ wiSort [ wiAscending "bin_IMDB_Rating" ], wiFrame Nothing (Just 0) ]
 
         enc =
@@ -111,11 +112,11 @@ dist4 =
         trans =
             transform
                 << aggregate
-                    [ opAs Min "people" "lowerWhisker"
-                    , opAs Q1 "people" "lowerBox"
-                    , opAs Median "people" "midBox"
-                    , opAs Q3 "people" "upperBox"
-                    , opAs Max "people" "upperWhisker"
+                    [ opAs opMin "people" "lowerWhisker"
+                    , opAs opQ1 "people" "lowerBox"
+                    , opAs opMedian "people" "midBox"
+                    , opAs opQ3 "people" "upperBox"
+                    , opAs opMax "people" "upperWhisker"
                     ]
                     [ "age" ]
 
@@ -174,9 +175,9 @@ dist5 =
         trans =
             transform
                 << aggregate
-                    [ opAs Q1 "people" "lowerBox"
-                    , opAs Q3 "people" "upperBox"
-                    , opAs Median "people" "midBox"
+                    [ opAs opQ1 "people" "lowerBox"
+                    , opAs opQ3 "people" "upperBox"
+                    , opAs opMedian "people" "midBox"
                     ]
                     [ "age" ]
                 << calculateAs "datum.upperBox - datum.lowerBox" "IQR"
@@ -252,10 +253,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

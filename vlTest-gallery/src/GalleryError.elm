@@ -4,6 +4,7 @@ import Platform
 import VegaLite exposing (..)
 
 
+
 -- NOTE: All data sources in these examples originally provided at
 -- https://github.com/vega/vega-datasets
 -- The examples themselves reproduce those at https://vega.github.io/vega-lite/examples/
@@ -23,7 +24,7 @@ error1 =
                 << position X
                     [ pName "yield"
                     , pMType Quantitative
-                    , pAggregate Mean
+                    , pAggregate opMean
                     , pScale [ scZero False ]
                     , pAxis [ axTitle "Barley Yield" ]
                     ]
@@ -34,8 +35,8 @@ error1 =
 
         encCIs =
             encoding
-                << position X [ pName "yield", pMType Quantitative, pAggregate CI0 ]
-                << position X2 [ pName "yield", pMType Quantitative, pAggregate CI1 ]
+                << position X [ pName "yield", pMType Quantitative, pAggregate opCI0 ]
+                << position X2 [ pName "yield", pMType Quantitative, pAggregate opCI1 ]
 
         specCIs =
             asSpec [ rule [], encCIs [] ]
@@ -56,7 +57,7 @@ error2 =
 
         trans =
             transform
-                << aggregate [ opAs Mean "yield" "mean", opAs Stdev "yield" "stdev" ] [ "variety" ]
+                << aggregate [ opAs opMean "yield" "mean", opAs opStdev "yield" "stdev" ] [ "variety" ]
                 << calculateAs "datum.mean-datum.stdev" "lower"
                 << calculateAs "datum.mean+datum.stdev" "upper"
 
@@ -100,20 +101,20 @@ error3 =
             description "Line chart with confidence interval band."
 
         encTime =
-            encoding << position X [ pName "Year", pMType Temporal, pTimeUnit Year ]
+            encoding << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
 
         encBand =
             encoding
                 << position Y
                     [ pName "Miles_per_Gallon"
                     , pMType Quantitative
-                    , pAggregate CI0
+                    , pAggregate opCI0
                     , pAxis [ axTitle "Miles/Gallon" ]
                     ]
                 << position Y2
                     [ pName "Miles_per_Gallon"
                     , pMType Quantitative
-                    , pAggregate CI1
+                    , pAggregate opCI1
                     ]
                 << opacity [ mNum 0.3 ]
 
@@ -125,7 +126,7 @@ error3 =
                 << position Y
                     [ pName "Miles_per_Gallon"
                     , pMType Quantitative
-                    , pAggregate Mean
+                    , pAggregate opMean
                     ]
 
         specLine =
@@ -156,8 +157,8 @@ error4 =
         trans =
             transform
                 << aggregate
-                    [ opAs Mean "Miles_per_Gallon" "mean_MPG"
-                    , opAs Stdev "Miles_per_Gallon" "dev_MPG"
+                    [ opAs opMean "Miles_per_Gallon" "mean_MPG"
+                    , opAs opStdev "Miles_per_Gallon" "dev_MPG"
                     ]
                     []
                 << calculateAs "datum.mean_MPG+datum.dev_MPG" "upper"
@@ -208,10 +209,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
