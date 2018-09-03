@@ -23,7 +23,7 @@ To get started, copy this example to a file `helloWorld.html` somewhere on your 
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc3/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -37,7 +37,7 @@ To get started, copy this example to a file `helloWorld.html` somewhere on your 
   <script>
     // This function grabs the specification from Elm (here called specs).
     // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-    Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(specs) {
+    Elm.HelloWorld.init().ports.elmToJS.subscribe(function(specs) {
       // Change actions to true to display links to source, editor and image.
       vegaEmbed("#vis", specs, {actions: false}).catch(console.warn);
     });
@@ -58,8 +58,8 @@ The key elements are:
 -   A `<div>` container with an ID (here called `vis`) that will be the location in the HTML page that will contain your visualization.
 
 -   An _Elm subscription_ that links this page with the Elm program that generates the Vega-Lite specification.
-    Here `Elm.HelloWorld.worker()` references an Elm module that must be called `HelloWorld`.
-    When you create Elm-Vega modules with different names, you must match that name here (for example, `Elm.MyNewModule.worker()`).
+    Here `Elm.HelloWorld.init()` references an Elm module that must be called `HelloWorld`.
+    When you create Elm-Vega modules with different names, you must match that name here (for example, `Elm.MyNewModule.init()`).
 
 ## 3. Create an Elm-Vega Program
 
@@ -89,10 +89,10 @@ myVis =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
     Platform.program
-        { init = ( myVis, elmToJS myVis )
+        { init = always ( myVis, elmToJS myVis )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
@@ -114,9 +114,10 @@ It symbolises each with a `circle` mark and positions each along a horizontal (`
 The final task is to convert the Elm file into JavaScript so it can be used by the HTML.
 To do this, open a command line window (e.g. a Terminal on MacOS or PowerShell on Windows), change to the directory containing your HTML and Elm files and type
 
-    elm make helloWorld.elm --output=js/helloWorld.js
+    elm make helloWorld.elm --output=js/helloWorld.js --optimize
 
 This should create the `helloWorld.js` file required by the HTML.
+If you are making use of elm `Debug` functions while you develop your code, you will need to drop the `--optimize` flag.
 
 Opening `helloWorld.html` in the browser should display the graphical output similar to this:
 

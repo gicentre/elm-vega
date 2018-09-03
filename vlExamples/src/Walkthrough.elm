@@ -334,7 +334,7 @@ interactiveScatter1 =
             selection
                 << select "picked" Single []
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter2 : Spec
@@ -354,7 +354,7 @@ interactiveScatter3 =
             selection
                 << select "picked" Multi [ seOn "mouseover" ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter4 : Spec
@@ -364,7 +364,7 @@ interactiveScatter4 =
             selection
                 << select "picked" Single [ seEmpty, seFields [ "Cylinders" ] ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter5 : Spec
@@ -378,7 +378,7 @@ interactiveScatter5 =
                     , seBind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                     ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter6 : Spec
@@ -395,7 +395,7 @@ interactiveScatter6 =
                         ]
                     ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter7 : Spec
@@ -405,7 +405,7 @@ interactiveScatter7 =
             selection
                 << select "picked" Interval []
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter8 : Spec
@@ -415,7 +415,7 @@ interactiveScatter8 =
             selection
                 << select "picked" Interval [ seEncodings [ chX ] ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 interactiveScatter9 : Spec
@@ -425,7 +425,7 @@ interactiveScatter9 =
             selection
                 << select "picked" Interval [ seEncodings [ chX ], seBindScales ]
     in
-    toVegaLite <| sel [] :: scatterProps
+    toVegaLite (sel [] :: scatterProps)
 
 
 coordinatedScatter1 : Spec

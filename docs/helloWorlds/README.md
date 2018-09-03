@@ -19,7 +19,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
 
   <!-- These scripts link to the Vega-Lite runtime -->
   <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc3/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
   <!-- This is the script generated from Elm -->
@@ -38,7 +38,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
   <div id="vis3"></div>
 
   <script>
-    Elm.HelloWorlds.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+    Elm.HelloWorlds.init().ports.elmToJS.subscribe(function(namedSpecs) {
       for (let name of Object.keys(namedSpecs)) {
         vegaEmbed(`#${name}`, namedSpecs[name], {
           actions: false, logLevel:vega.Warn
@@ -54,7 +54,7 @@ You can copy this example to a file `helloWorlds.html` somewhere on your machine
 
 ## 2. Create an Elm-Vega Program
 
-As previously, next create a file (here called `HelloWorlds.elm`) in the same location as `helloWorlds.html`, within which you should provide the elm-vega specifications and the boilerplate for passing the specs to JavaScript.
+Next, create a file (here called `HelloWorlds.elm`) in the `src` folder relative to `helloWorlds.html`, within which you should provide the elm-vega specifications and the boilerplate for passing the specs to JavaScript.
 
 Here is an example containing three visualizations:
 
@@ -96,13 +96,14 @@ myOtherVis =
         enc =
             encoding
                 << position X [ pName "Cylinders", pMType Ordinal ]
-                << position Y [ pName "Miles_per_Gallon", pAggregate Average, pMType Quantitative ]
+                << position Y [ pName "Miles_per_Gallon", pAggregate opMean, pMType Quantitative ]
     in
     toVegaLite
         [ dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
         , bar []
         , enc []
         ]
+
 
 
 
@@ -127,10 +128,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
     Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
@@ -148,7 +149,7 @@ These are then combined (with `combineSpecs`) into a single JSON object in the f
 
 The final task, as before, is to convert the Elm file into JavaScript:
 
-    elm make helloWorlds.elm --output=js/helloWorlds.js
+    elm make helloWorlds.elm --output=js/helloWorlds.js --optimize
 
 This should create the `helloWorlds.js` file required by the HTML.
 
