@@ -1,10 +1,11 @@
 port module EventTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 {- These tests converted from the examples under 'Marks' on the offical Vega site:
@@ -28,7 +29,7 @@ uiEvents =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mEncode
                         [ enUpdate
                             [ maFillOpacity [ vSignal "rFill ? 1 : 0" ]
@@ -40,7 +41,7 @@ uiEvents =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter [ maAlign [ hCenter ] ]
                         , enUpdate
@@ -67,9 +68,9 @@ eventStream1 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esBetween [ esMark Rect, esType MouseDown ] [ esSource ESView, esType MouseUp ]
-                                , esSource ESView
-                                , esType MouseMove
+                                [ esBetween [ esMark rect, esType etMouseDown ] [ esSource esView, esType etMouseUp ]
+                                , esSource esView
+                                , esType etMouseMove
                                 ]
                             ]
                             [ evUpdate "xy()" ]
@@ -78,13 +79,13 @@ eventStream1 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maWidth [ vNum 80 ], maHeight [ vNum 50 ] ]
                         , enUpdate [ maX [ vSignal "myDrag[0]" ], maY [ vSignal "myDrag[1]" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maAlign [ hCenter ]
@@ -128,10 +129,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

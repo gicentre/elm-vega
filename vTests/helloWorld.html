@@ -20,19 +20,17 @@
   <!-- The vega visualization will appear in the div with an id matching that named in elm-vega -->
   <div id="helloWorld"></div>
 
-  <!-- This is the boilerplate that links this page with elm-vega. The only thing
-       that need be changed is the name HelloWorld in order to match the Elm module
-       you create. -->
   <script>
-  Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: false,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
-</script>
+  // This function grabs the specifications from Elm (here called namedSpecs).
+  // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
+  Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
+    for (let name of Object.keys(namedSpecs)) {
+      vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
+        console.warn
+      );
+    }
+  });
+  </script>
 
 </body>
 

@@ -74,16 +74,11 @@ vega.projection(
 vega.projection("polyhedralButterfly", d3.geoPolyhedralButterfly);
 vega.projection("peirceQuincuncial", d3.geoPeirceQuincuncial);
 
-Elm.ProjectionTests.embed(
-  document.getElementById("elmContainer")
-).ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: false,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
+  Elm.ProjectionTests.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
+    for (let name of Object.keys(namedSpecs)) {
+      vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+    }
+  });
 </script>
 
 </body>

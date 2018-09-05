@@ -1,9 +1,9 @@
 port module TransformTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
 
 
@@ -39,13 +39,13 @@ packTest1 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raScheme (str "category20") [])
                     ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -79,7 +79,7 @@ stackTest1 =
                         [ trStack
                             [ stField (field "value")
                             , stGroupBy [ field "key" ]
-                            , stOffset (stackOffsetSignal "offset")
+                            , stOffset (stSignal "offset")
                             , stSort [ ( fSignal "sortField", orderSignal "sortOrder" ) ]
                             ]
                         ]
@@ -108,7 +108,7 @@ stackTest1 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esType MouseDown
+                                [ esType etMouseDown
                                 , esConsume true
                                 , esFilter [ "!event.shiftKey" ]
                                 ]
@@ -121,8 +121,8 @@ stackTest1 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esMark Rect
-                                , esType MouseDown
+                                [ esMark rect
+                                , esType etMouseDown
                                 , esConsume true
                                 , esFilter [ "event.shiftKey" ]
                                 ]
@@ -134,24 +134,24 @@ stackTest1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doStrs (strs [ "a", "b", "c" ]))
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scRound true
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raScheme (str "category10") [])
                     ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -169,7 +169,7 @@ stackTest1 =
                     ]
     in
     toVega
-        [ width 300, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 300, height 200, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 forceTest1 : Spec
@@ -217,17 +217,17 @@ forceTest1 =
                     , siOn
                         [ evHandler
                             [ esMerge
-                                [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
-                                , esObject [ esSource ESWindow, esType MouseUp ]
+                                [ esObject [ esMark symbol, esType etMouseOut, esFilter [ "!event.buttons" ] ]
+                                , esObject [ esSource esWindow, esType etMouseUp ]
                                 ]
                             ]
                             [ evUpdate "0" ]
-                        , evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix || 1" ]
+                        , evHandler [ esObject [ esMark symbol, esType etMouseOver ] ] [ evUpdate "fix || 1" ]
                         , evHandler
                             [ esObject
-                                [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esMark symbol, esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 , esConsume true
                                 ]
                             ]
@@ -237,7 +237,7 @@ forceTest1 =
                 << signal "node"
                     [ siDescription "Graph node most recently interacted with."
                     , siValue vNull
-                    , siOn [ evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
+                    , siOn [ evHandler [ esObject [ esMark symbol, esType etMouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
@@ -246,11 +246,11 @@ forceTest1 =
                     ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20c") []) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20c") []) ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "nodes"
                     , mFrom [ srData (str "node-data") ]
                     , mZIndex (num 1)
@@ -265,7 +265,7 @@ forceTest1 =
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * collideRadius * collideRadius" ]
-                            , maCursor [ cursorValue CPointer ]
+                            , maCursor [ cursorValue cuPointer ]
                             ]
                         ]
                     , mTransform
@@ -283,7 +283,7 @@ forceTest1 =
                             ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "link-data") ]
                     , mInteractive false
                     , mEncode
@@ -294,7 +294,7 @@ forceTest1 =
                         ]
                     , mTransform
                         [ trLinkPath
-                            [ lpShape LinkDiagonal
+                            [ lpShape lsDiagonal
                             , lpSourceX (field "datum.source.x")
                             , lpSourceY (field "datum.source.y")
                             , lpTargetX (field "datum.target.x")
@@ -304,7 +304,7 @@ forceTest1 =
                     ]
     in
     toVega
-        [ width 400, height 275, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 400, height 275, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 nestTest1 : Spec
@@ -321,7 +321,7 @@ nestTest1 =
                 [ table []
                     |> transform
                         [ trNest [ field "job", field "region" ] (booSignal "generate")
-                        , trTree [ teMethod Tidy, teSize (numSignals [ "width", "height" ]) ]
+                        , trTree [ teMethod meTidy, teSize (numSignals [ "width", "height" ]) ]
                         ]
                 , data "links" [ daSource "tree" ]
                     |> transform [ trTreeLinks, trLinkPath [] ]
@@ -333,13 +333,13 @@ nestTest1 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raScheme (str "category20") [])
                     ]
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "links") ]
                     , mEncode
                         [ enUpdate
@@ -348,7 +348,7 @@ nestTest1 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enUpdate
@@ -360,7 +360,7 @@ nestTest1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -387,7 +387,7 @@ pr : List Spec -> ( VProperty, Spec )
 pr =
     projections
         << projection "projection"
-            [ prType TransverseMercator
+            [ prType transverseMercator
             , prScale (num 3700)
             , prTranslate (nums [ 320, 3855 ])
             ]
@@ -405,7 +405,7 @@ voronoiTest1 =
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
                     [ daUrl (str "https://gicentre.github.io/data/uk/constituencyCentroids.csv")
-                    , daFormat [ CSV, ParseAuto ]
+                    , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
                         [ trGeoPoint "projection" (field "longitude") (field "latitude")
@@ -420,7 +420,7 @@ voronoiTest1 =
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "centroids") ]
                     , mClip (clPath (strSignal "data('hull')[0]['path']"))
                     , mEncode
@@ -432,7 +432,7 @@ voronoiTest1 =
                             ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "hull") ]
                     , mEncode
                         [ enEnter
@@ -443,7 +443,7 @@ voronoiTest1 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "centroids") ]
                     , mEncode
                         [ enEnter
@@ -475,7 +475,7 @@ voronoiTest2 =
                     |> transform [ trGeoPath "projection" [] ]
                 , data "centroids"
                     [ daUrl (strSignal "centroidFile")
-                    , daFormat [ CSV, ParseAuto ]
+                    , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
                         [ trGeoPoint "projection" (field "longitude") (field "latitude")
@@ -528,14 +528,14 @@ voronoiTest2 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doNums (nums [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]))
                     , scRange (raSignal "colors")
                     ]
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "regions") ]
                     , mEncode
                         [ enEnter
@@ -552,7 +552,7 @@ voronoiTest2 =
                             ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "centroids") ]
                     , mClip (clPath (strSignal "data('hull')[0]['path']"))
                     , mEncode
@@ -608,10 +608,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

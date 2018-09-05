@@ -1,10 +1,11 @@
 port module ProjectionTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 {- This test is converted from 'Projections Example' on the offical Vega site:
@@ -82,14 +83,14 @@ projTest =
         nestedPr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (strSignal "parent.data"))
+                    [ prType (customProjection (strSignal "parent.data"))
                     , prScale (numSignal "parent.data === 'orthographic' ? projScale * 2 : projScale")
                     , prTranslate (numSignal "projTranslate")
                     ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srData (str "projections") ]
                     , mEncode
                         [ enEnter
@@ -103,12 +104,12 @@ projTest =
 
         nestedMk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "sphere") ]
                     , mEncode [ enEnter [ maFill [ vStr "aliceblue" ] ] ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mClip (clSphere (str "myProjection"))
                     , mInteractive false
@@ -120,7 +121,7 @@ projTest =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mClip (clSphere (str "myProjection"))
                     , mEncode
@@ -132,7 +133,7 @@ projTest =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "labelOffsets") ]
                     , mEncode
                         [ enEnter
@@ -148,7 +149,7 @@ projTest =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maFill [ black ]
@@ -163,7 +164,7 @@ projTest =
                     ]
     in
     toVega
-        [ autosize [ APad ], ds, si [], lo, mk [] ]
+        [ autosize [ asPad ], ds, si [], lo, mk [] ]
 
 
 sourceExample : Spec
@@ -190,10 +191,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

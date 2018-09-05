@@ -1,9 +1,9 @@
 port module GeoTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
 
 
@@ -30,14 +30,14 @@ geoTest1 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
+                    [ prType orthographic
                     , prSize (numSignal "[width,height]")
                     , prFit (featureSignal "feature")
                     ]
 
         mk =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enUpdate
@@ -50,7 +50,7 @@ geoTest1 =
                     ]
     in
     toVega
-        [ width 250, height 250, autosize [ APad ], ds, pr [], mk [] ]
+        [ width 250, height 250, autosize [ asPad ], ds, pr [], mk [] ]
 
 
 geoTest2 : Spec
@@ -64,14 +64,14 @@ geoTest2 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
+                    [ prType orthographic
                     , prSize (numSignal "[width,height]")
                     , prFit (feName "mapData")
                     ]
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "mapData") ]
                     , mEncode
                         [ enUpdate
@@ -85,7 +85,7 @@ geoTest2 =
                     ]
     in
     toVega
-        [ width 250, height 250, autosize [ APad ], ds, pr [], mk [] ]
+        [ width 250, height 250, autosize [ asPad ], ds, pr [], mk [] ]
 
 
 geoTest3 : Spec
@@ -102,7 +102,7 @@ geoTest3 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
+                    [ prType orthographic
                     , prSize (numSignal "[width,height]")
                     , prFit (feName "mapData")
                     ]
@@ -110,9 +110,9 @@ geoTest3 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "mapData", daField (field "id") ])
-                    , scRange RaCategory
+                    , scRange raCategory
                     ]
 
         le =
@@ -120,7 +120,7 @@ geoTest3 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "mapData") ]
                     , mEncode
                         [ enUpdate
@@ -132,7 +132,7 @@ geoTest3 =
                     ]
     in
     toVega
-        [ width 250, height 250, autosize [ APad ], ds, pr [], sc [], le [], mk [] ]
+        [ width 250, height 250, autosize [ asPad ], ds, pr [], sc [], le [], mk [] ]
 
 
 geoTest4 : Spec
@@ -149,7 +149,7 @@ geoTest4 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
+                    [ prType orthographic
                     , prSize (numSignal "[width,height]")
                     , prFit (feName "mapData")
                     ]
@@ -157,9 +157,9 @@ geoTest4 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "mapData", daField (field "properties.myRegionName") ])
-                    , scRange RaCategory
+                    , scRange raCategory
                     ]
 
         le =
@@ -167,7 +167,7 @@ geoTest4 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "mapData") ]
                     , mEncode
                         [ enUpdate
@@ -179,7 +179,7 @@ geoTest4 =
                     ]
     in
     toVega
-        [ width 250, height 250, autosize [ APad ], ds, pr [], sc [], le [], mk [] ]
+        [ width 250, height 250, autosize [ asPad ], ds, pr [], sc [], le [], mk [] ]
 
 
 sourceExample : Spec
@@ -209,10 +209,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

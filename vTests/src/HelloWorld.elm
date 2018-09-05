@@ -19,12 +19,12 @@ helloWorld =
             scales
                 << scale "xscale"
                     [ scDomain (doData [ daDataset "table", daField (field "x") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -57,10 +57,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

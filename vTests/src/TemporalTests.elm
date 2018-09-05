@@ -1,9 +1,9 @@
 port module TemporalTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
 
 
@@ -14,12 +14,12 @@ temporalTest1 =
             dataSource
                 [ data "timeData"
                     [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
-                    , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                    , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                     |> transform
                         [ trFormula "datetime(year(datum.date),month(datum.date),0,0,0,0,0)" "year"
                         , trAggregate
-                            [ agOps [ Mean ]
+                            [ agOps [ opMean ]
                             , agFields [ field "temperature" ]
                             , agGroupBy [ field "year" ]
                             , agAs [ "meanTemperature" ]
@@ -30,30 +30,30 @@ temporalTest1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScTime
+                    [ scType scTime
                     , scDomain (doData [ daDataset "timeData", daField (field "year") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "timeData", daField (field "meanTemperature") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scZero false
                     ]
 
         ax =
             axes
                 << axis "xScale"
-                    SBottom
-                    [ axTemporalTickCount Month (num 1)
+                    siBottom
+                    [ axTemporalTickCount month (num 1)
                     , axLabelAngle (num 60)
-                    , axLabelAlign AlignLeft
+                    , axLabelAlign haLeft
                     ]
-                << axis "yScale" SLeft []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "timeData") ]
                     , mEncode
                         [ enEnter
@@ -63,7 +63,7 @@ temporalTest1 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "timeData") ]
                     , mEncode
                         [ enEnter
@@ -84,7 +84,7 @@ temporalTest2 =
             dataSource
                 [ data "timeData"
                     [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
-                    , daFormat [ TSV, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                    , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
                 , data "binned" [ daSource "timeData" ]
                     |> transform
@@ -92,7 +92,7 @@ temporalTest2 =
                         , trAggregate
                             [ agFields [ field "temperature", field "date" ]
                             , agGroupBy [ field "bin0", field "bin1" ]
-                            , agOps [ Count, Mean ]
+                            , agOps [ opCount, opMean ]
                             , agAs [ "count", "meanDate" ]
                             ]
                         ]
@@ -101,40 +101,40 @@ temporalTest2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "timeData", daField (field "temperature") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scRound true
                     , scDomain (doData [ daDataset "binned", daField (field "count") ])
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "cScale"
-                    [ scType ScTime
+                    [ scType scTime
                     , scDomain (doData [ daDataset "binned", daField (field "meanDate") ])
-                    , scRange RaRamp
+                    , scRange raRamp
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "temperature (C)") ]
+                << axis "xScale" siBottom [ axTitle (str "temperature (C)") ]
 
         lg =
             legends
                 << legend
                     [ leFill "cScale"
-                    , leType LGradient
+                    , leType ltGradient
                     , leFormat (str "%b %Y")
-                    , leTemporalTickCount Month (num 6)
+                    , leTemporalTickCount month (num 6)
                     ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "binned") ]
                     , mEncode
                         [ enUpdate
@@ -176,10 +176,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

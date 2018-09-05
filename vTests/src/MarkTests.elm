@@ -1,10 +1,11 @@
 port module MarkTests exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 {- These tests converted from the examples under 'Marks' on the offical Vega site:
@@ -38,14 +39,14 @@ arcTest =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mInteractive false
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
-                << mark Arc
+                << mark arc
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -84,24 +85,24 @@ areaTest =
         sc =
             scales
                 << scale "xscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scZero false
                     ]
                 << scale "yscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
 
         si =
             signals
                 << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
-                    [ siValue (markInterpolationValue Linear)
+                    [ siValue (markInterpolationValue miLinear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
@@ -111,7 +112,7 @@ areaTest =
 
         mk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
@@ -161,7 +162,7 @@ groupTest =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -183,7 +184,7 @@ groupTest =
 
         nestedMk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mInteractive false
                     , mEncode
@@ -217,7 +218,7 @@ imageTest =
 
         mk =
             marks
-                << mark Image
+                << mark image
                     [ mEncode
                         [ enEnter [ maUrl [ vStr "https://vega.github.io/images/idl-logo.png" ] ]
                         , enUpdate
@@ -252,34 +253,34 @@ lineTest =
         sc =
             scales
                 << scale "xscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scZero false
                     ]
                 << scale "yscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
 
         si =
             signals
                 << signal "defined" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "interpolate"
-                    [ siValue (markInterpolationValue Linear)
+                    [ siValue (markInterpolationValue miLinear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
                 << signal "tension" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 1, inStep 0.05 ]) ]
                 << signal "strokeWidth" [ siValue (vNum 4), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "strokeCap" [ siValue (strokeCapValue CButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ siValue (strokeCapValue caButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ siValue (vNums [ 1, 0 ]), siBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
@@ -315,7 +316,7 @@ pathTest =
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -369,7 +370,7 @@ shapeTest =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (strSignal "pType"))
+                    [ prType (customProjection (strSignal "pType"))
                     , prClipAngle (numSignal "pClipAngle")
                     , prScale (numSignal "pScale")
                     , prRotate (numSignals [ "rotate0", "rotate1", "rotate2" ])
@@ -392,7 +393,7 @@ shapeTest =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mEncode
                         [ enUpdate
@@ -403,7 +404,7 @@ shapeTest =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
@@ -422,7 +423,7 @@ shapeTest =
                     ]
     in
     toVega
-        [ width 432, height 240, autosize [ ANone ], ds, pr [], si [], mk [] ]
+        [ width 432, height 240, autosize [ asNone ], ds, pr [], si [], mk [] ]
 
 
 rectTest : Spec
@@ -440,7 +441,7 @@ rectTest =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -472,12 +473,12 @@ ruleTest =
                 << signal "x2" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "y2" [ siValue (vNum 150), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "strokeWidth" [ siValue (vNum 4), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
-                << signal "strokeCap" [ siValue (strokeCapValue CButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeCap" [ siValue (strokeCapValue caButt), siBind (iSelect [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
                 << signal "strokeDash" [ siValue (vNums [ 1, 0 ]), siBind (iSelect [ inOptions (toValue [ ( 1, 0 ), ( 8, 8 ), ( 8, 4 ), ( 4, 4 ), ( 4, 2 ), ( 2, 1 ), ( 1, 1 ) ]) ]) ]
 
         mk =
             marks
-                << mark Rule
+                << mark rule
                     [ mEncode
                         [ enEnter [ maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -509,14 +510,14 @@ symbolTest =
                         (iSelect
                             [ inOptions
                                 (vValues
-                                    [ symbolValue SymCircle
-                                    , symbolValue SymSquare
-                                    , symbolValue SymCross
-                                    , symbolValue SymDiamond
-                                    , symbolValue SymTriangleUp
-                                    , symbolValue SymTriangleDown
-                                    , symbolValue SymTriangleRight
-                                    , symbolValue SymTriangleLeft
+                                    [ symbolValue symCircle
+                                    , symbolValue symSquare
+                                    , symbolValue symCross
+                                    , symbolValue symDiamond
+                                    , symbolValue symTriangleUp
+                                    , symbolValue symTriangleDown
+                                    , symbolValue symTriangleRight
+                                    , symbolValue symTriangleLeft
                                     , symbolValue (symPath "M-1,-1H1V1H-1Z")
                                     , symbolValue (symPath "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z")
                                     ]
@@ -532,7 +533,7 @@ symbolTest =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
                         , enUpdate
@@ -572,14 +573,14 @@ textTest =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mInteractive false
                     , mEncode
                         [ enEnter [ maFill [ vStr "firebrick" ], maSize [ vNum 25 ] ]
                         , enUpdate [ maX [ vSignal "x" ], maY [ vSignal "y" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter [ maFill [ vStr "#000" ], maText [ vStr "Text Label" ] ]
                         , enUpdate
@@ -618,20 +619,20 @@ trailTest =
         sc =
             scales
                 << scale "xscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scZero false
                     ]
                 << scale "yscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "zscale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raNums [ 5, 1 ])
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     ]
@@ -643,7 +644,7 @@ trailTest =
 
         mk =
             marks
-                << mark Trail
+                << mark trail
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter [ maFill [ vStr "#939597" ] ]
@@ -697,10 +698,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
