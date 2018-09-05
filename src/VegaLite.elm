@@ -566,6 +566,7 @@ module VegaLite exposing
     , Selection(..)
     , seEmpty
     , seBind
+    , seBindScales
     , seEncodings
     , seFields
     , seNearest
@@ -918,7 +919,6 @@ module VegaLite exposing
     , Window
     , WOperation
     , WindowProperty
-    , seBindScales
     )
 
 {-| Create Vega-Lite specifications in Elm. A specification can be sent to a
@@ -1791,7 +1791,7 @@ documentation.
 @docs Selection
 @docs seEmpty
 @docs seBind
-@docs @dosc seBindScales
+@docs seBindScales
 @docs seEncodings
 @docs seFields
 @docs seNearest
