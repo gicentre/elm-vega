@@ -1,861 +1,1145 @@
-module Vega
-    exposing
-        ( AggregateProperty
-        , Anchor(End, Middle, Start)
-        , Autosize(AContent, AFit, AFitX, AFitY, ANone, APad, APadding, AResize)
-        , AxisElement(EAxis, EDomain, EGrid, ELabels, ETicks, ETitle)
-        , AxisProperty
-        , AxisType(AxAll, AxBand, AxBottom, AxLeft, AxRight, AxTop, AxX, AxY)
-        , BinProperty
-        , Bind
-        , Boo
-        , BoundsCalculation(Flush, Full)
-        , CInterpolate(Hcl, Hsl, Lab)
-        , Case(Lowercase, Mixedcase, Uppercase)
-        , Clip
-        , ColorSchemeProperty
-        , ColorValue
-        , ConfigProperty
-        , ContourProperty
-        , CountPatternProperty
-        , CrossProperty
-        , Cursor(CAlias, CAllScroll, CAuto, CCell, CColResize, CContextMenu, CCopy, CCrosshair, CDefault, CEResize, CEWResize, CGrab, CGrabbing, CHelp, CMove, CNEResize, CNESWResize, CNResize, CNSResize, CNWResize, CNWSEResize, CNoDrop, CNone, CNotAllowed, CPointer, CProgress, CRowResize, CSEResize, CSResize, CSWResize, CText, CVerticalText, CWResize, CWait, CZoomIn, CZoomOut)
-        , Data
-        , DataColumn
-        , DataProperty(DaSphere)
-        , DataReference
-        , DataRow
-        , DataTable
-        , DataType(FoBoo, FoNum)
-        , DensityFunction(CDF, PDF)
-        , DensityProperty
-        , Distribution
-        , EncodingProperty
-        , EventFilter(Allow, Prevent)
-        , EventHandler
-        , EventSource(ESAll, ESScope, ESView, ESWindow)
-        , EventStream
-        , EventStreamProperty
-        , EventType(Click, DblClick, DragEnter, DragLeave, DragOver, KeyDown, KeyPress, KeyUp, MouseDown, MouseMove, MouseOut, MouseOver, MouseUp, MouseWheel, Timer, TouchEnd, TouchMove, TouchStart, Wheel)
-        , Expr
-        , Facet
-        , Feature
-        , Field
-        , Force
-        , ForceProperty
-        , ForceSimulationProperty
-        , FormatProperty(CSV, JSON, ParseAuto, TSV)
-        , GeoJsonProperty
-        , GeoPathProperty
-        , GraticuleProperty
-        , GridAlign(AlignAll, AlignEach, AlignNone)
-        , HAlign(AlignCenter, AlignLeft, AlignRight)
-        , ImputeMethod(ByMax, ByMean, ByMedian, ByMin, ByValue)
-        , ImputeProperty
-        , InputProperty
-        , JoinAggregateProperty
-        , LayoutProperty
-        , LegendEncoding
-        , LegendOrientation(Bottom, BottomLeft, BottomRight, Left, None, Right, Top, TopLeft, TopRight)
-        , LegendProperty
-        , LegendType(LGradient, LSymbol)
-        , LinkPathProperty
-        , LinkShape(LinkArc, LinkCurve, LinkDiagonal, LinkLine, LinkOrthogonal)
-        , LookupProperty
-        , Mark(Arc, Area, Group, Image, Line, Path, Rect, Rule, Shape, Symbol, Text, Trail)
-        , MarkInterpolation(Basis, Bundle, Cardinal, CatmullRom, Linear, Monotone, Natural, StepAfter, StepBefore, Stepwise)
-        , MarkProperty
-        , Num
-        , Operation(ArgMax, ArgMin, Average, CI0, CI1, Count, Distinct, Max, Mean, Median, Min, Missing, Q1, Q3, Stderr, Stdev, Stdevp, Sum, Valid, Variance, Variancep)
-        , Order(Ascend, Descend)
-        , Orientation(Horizontal, Radial, Vertical)
-        , OverlapStrategy(OGreedy, ONone, OParity)
-        , PackProperty
-        , PartitionProperty
-        , PieProperty
-        , PivotProperty
-        , Projection(Albers, AlbersUsa, AzimuthalEqualArea, AzimuthalEquidistant, ConicConformal, ConicEqualArea, ConicEquidistant, Equirectangular, Gnomonic, Mercator, NaturalEarth1, Orthographic, Stereographic, TransverseMercator)
-        , ProjectionProperty
-        , Scale(ScBand, ScBinLinear, ScBinOrdinal, ScLinear, ScLog, ScOrdinal, ScPoint, ScPow, ScQuantile, ScQuantize, ScSequential, ScSqrt, ScTime, ScUtc)
-        , ScaleDomain
-        , ScaleNice(NDay, NFalse, NHour, NMillisecond, NMinute, NMonth, NSecond, NTrue, NWeek, NYear)
-        , ScaleProperty
-        , ScaleRange(RaCategory, RaDiverging, RaHeatmap, RaHeight, RaOrdinal, RaRamp, RaSymbol, RaWidth)
-        , Side(SBottom, SLeft, SRight, STop)
-        , SignalProperty
-        , SortProperty(Ascending, Descending)
-        , Source
-        , Spec
-        , Spiral(Archimedean, Rectangular)
-        , StackOffset(OfCenter, OfNormalize, OfZero)
-        , StackProperty
-        , Str
-        , StrokeCap(CButt, CRound, CSquare)
-        , StrokeJoin(JBevel, JMiter, JRound)
-        , Symbol(SymCircle, SymCross, SymDiamond, SymSquare, SymTriangleDown, SymTriangleLeft, SymTriangleRight, SymTriangleUp)
-        , TextDirection(LeftToRight, RightToLeft)
-        , TimeUnit(Day, Hour, Millisecond, Minute, Month, Second, Week, Year)
-        , TitleFrame(FrBounds, FrGroup)
-        , TitleProperty
-        , TopMarkProperty
-        , Transform
-        , TreeMethod(Cluster, Tidy)
-        , TreeProperty
-        , TreemapMethod(Binary, Dice, Resquarify, Slice, SliceDice, Squarify)
-        , TreemapProperty
-        , Trigger
-        , TriggerProperty
-        , VAlign(AlignBottom, AlignMiddle, AlignTop, Alphabetic)
-        , VProperty
-        , Value
-        , VoronoiProperty
-        , WOperation(CumeDist, DenseRank, FirstValue, Lag, LastValue, Lead, NthValue, Ntile, PercentRank, Rank, RowNumber)
-        , WindowOperation
-        , WindowProperty
-        , WordcloudProperty
-        , agAs
-        , agCross
-        , agDrop
-        , agFields
-        , agGroupBy
-        , agKey
-        , agOps
-        , anchorSignal
-        , autosize
-        , autosizeSignal
-        , axBandPosition
-        , axDomain
-        , axDomainColor
-        , axDomainOpacity
-        , axDomainWidth
-        , axEncode
-        , axFormat
-        , axGrid
-        , axGridColor
-        , axGridDash
-        , axGridOpacity
-        , axGridScale
-        , axGridWidth
-        , axLabelAlign
-        , axLabelAngle
-        , axLabelBaseline
-        , axLabelBound
-        , axLabelColor
-        , axLabelFlush
-        , axLabelFlushOffset
-        , axLabelFont
-        , axLabelFontSize
-        , axLabelFontWeight
-        , axLabelLimit
-        , axLabelOpacity
-        , axLabelOverlap
-        , axLabelPadding
-        , axLabels
-        , axMaxExtent
-        , axMinExtent
-        , axOffset
-        , axPosition
-        , axTemporalTickCount
-        , axTickColor
-        , axTickCount
-        , axTickExtra
-        , axTickOffset
-        , axTickOpacity
-        , axTickRound
-        , axTickSize
-        , axTickWidth
-        , axTicks
-        , axTitle
-        , axTitleAlign
-        , axTitleAngle
-        , axTitleBaseline
-        , axTitleColor
-        , axTitleFont
-        , axTitleFontSize
-        , axTitleFontWeight
-        , axTitleLimit
-        , axTitleOpacity
-        , axTitlePadding
-        , axTitleX
-        , axTitleY
-        , axValues
-        , axZIndex
-        , axes
-        , axis
-        , background
-        , bcSignal
-        , black
-        , bnAnchor
-        , bnAs
-        , bnBase
-        , bnDivide
-        , bnMaxBins
-        , bnMinStep
-        , bnNice
-        , bnSignal
-        , bnStep
-        , bnSteps
-        , booExpr
-        , booSignal
-        , booSignals
-        , boos
-        , cHCL
-        , cHSL
-        , cLAB
-        , cRGB
-        , cfAutosize
-        , cfAxis
-        , cfBackground
-        , cfEvents
-        , cfGroup
-        , cfLegend
-        , cfMark
-        , cfMarks
-        , cfScaleRange
-        , cfStyle
-        , cfTitle
-        , clEnabled
-        , clPath
-        , clSphere
-        , cnBandwidth
-        , cnCellSize
-        , cnCount
-        , cnNice
-        , cnSmooth
-        , cnThresholds
-        , cnValues
-        , cnX
-        , cnY
-        , combineSpecs
-        , config
-        , cpAs
-        , cpCase
-        , cpPattern
-        , cpStopwords
-        , crAs
-        , crFilter
-        , csCount
-        , csExtent
-        , csScheme
-        , cubeHelix
-        , cubeHelixLong
-        , cursorValue
-        , daDataset
-        , daField
-        , daFields
-        , daFormat
-        , daOn
-        , daReferences
-        , daSignal
-        , daSort
-        , daSource
-        , daSources
-        , daUrl
-        , daValue
-        , daValues
-        , data
-        , dataColumn
-        , dataFromColumns
-        , dataFromRows
-        , dataRow
-        , dataSource
-        , densityFunctionSignal
-        , diKde
-        , diMixture
-        , diNormal
-        , diUniform
-        , dnAs
-        , dnExtent
-        , dnMethod
-        , dnSteps
-        , doData
-        , doNums
-        , doSignal
-        , doSignals
-        , doStrs
-        , dsv
-        , enCustom
-        , enEnter
-        , enExit
-        , enGradient
-        , enHover
-        , enInteractive
-        , enLabels
-        , enLegend
-        , enName
-        , enSymbols
-        , enTitle
-        , enUpdate
-        , encode
-        , esBetween
-        , esConsume
-        , esDebounce
-        , esDom
-        , esFilter
-        , esMark
-        , esMarkName
-        , esMerge
-        , esObject
-        , esSelector
-        , esSignal
-        , esSource
-        , esStream
-        , esThrottle
-        , esType
-        , evEncode
-        , evForce
-        , evHandler
-        , evStreamSelector
-        , evUpdate
-        , exField
-        , expr
-        , fDatum
-        , fExpr
-        , fGroup
-        , fParent
-        , fSignal
-        , faAggregate
-        , faField
-        , faGroupBy
-        , false
-        , feName
-        , featureSignal
-        , field
-        , foCenter
-        , foCollide
-        , foDate
-        , foLink
-        , foNBody
-        , foUtc
-        , foX
-        , foY
-        , formatPropertySignal
-        , fpDistance
-        , fpDistanceMax
-        , fpDistanceMin
-        , fpId
-        , fpIterations
-        , fpStrength
-        , fpTheta
-        , fsAlpha
-        , fsAlphaMin
-        , fsAlphaTarget
-        , fsAs
-        , fsForces
-        , fsIterations
-        , fsRestart
-        , fsStatic
-        , fsVelocityDecay
-        , gjFeature
-        , gjFields
-        , gjSignal
-        , gpAs
-        , gpField
-        , gpPointRadius
-        , grAlignColumn
-        , grAlignRow
-        , grExtent
-        , grExtentMajor
-        , grExtentMinor
-        , grField
-        , grPrecision
-        , grStep
-        , grStepMajor
-        , grStepMinor
-        , gridAlignSignal
-        , hAlignSignal
-        , hCenter
-        , hLeft
-        , hRight
-        , hclLong
-        , height
-        , hslLong
-        , iCheckbox
-        , iColor
-        , iDate
-        , iDateTimeLocal
-        , iMonth
-        , iNumber
-        , iRadio
-        , iRange
-        , iSelect
-        , iTel
-        , iText
-        , iTime
-        , iWeek
-        , ifElse
-        , imGroupBy
-        , imKeyVals
-        , imMethod
-        , imValue
-        , inAutocomplete
-        , inDebounce
-        , inElement
-        , inMax
-        , inMin
-        , inOptions
-        , inPlaceholder
-        , inStep
-        , jaAs
-        , jaFields
-        , jaGroupBy
-        , jaOps
-        , jsonProperty
-        , keyValue
-        , layout
-        , leClipHeight
-        , leColumnPadding
-        , leColumns
-        , leCornerRadius
-        , leDirection
-        , leEncode
-        , leFill
-        , leFillColor
-        , leFormat
-        , leGradientLabelLimit
-        , leGradientLabelOffset
-        , leGradientLength
-        , leGradientOpacity
-        , leGradientStrokeColor
-        , leGradientStrokeWidth
-        , leGradientThickness
-        , leGridAlign
-        , leLabelAlign
-        , leLabelBaseline
-        , leLabelColor
-        , leLabelFont
-        , leLabelFontSize
-        , leLabelFontWeight
-        , leLabelLimit
-        , leLabelOffset
-        , leLabelOpacity
-        , leLabelOverlap
-        , leOffset
-        , leOpacity
-        , leOrient
-        , lePadding
-        , leRowPadding
-        , leShape
-        , leSize
-        , leStroke
-        , leStrokeColor
-        , leStrokeDash
-        , leStrokeWidth
-        , leSymbolBaseFillColor
-        , leSymbolBaseStrokeColor
-        , leSymbolDirection
-        , leSymbolFillColor
-        , leSymbolOffset
-        , leSymbolOpacity
-        , leSymbolSize
-        , leSymbolStrokeColor
-        , leSymbolStrokeWidth
-        , leSymbolType
-        , leTemporalTickCount
-        , leTickCount
-        , leTitle
-        , leTitleAlign
-        , leTitleBaseline
-        , leTitleColor
-        , leTitleFont
-        , leTitleFontSize
-        , leTitleFontWeight
-        , leTitleLimit
-        , leTitleOpacity
-        , leTitlePadding
-        , leType
-        , leValues
-        , leZIndex
-        , legend
-        , legendOrientationSignal
-        , legendTypeSignal
-        , legends
-        , linkShapeSignal
-        , loAlign
-        , loBounds
-        , loColumns
-        , loFooterBand
-        , loFooterBandRC
-        , loHeaderBand
-        , loHeaderBandRC
-        , loOffset
-        , loOffsetRC
-        , loPadding
-        , loPaddingRC
-        , loTitleBand
-        , loTitleBandRC
-        , lpAs
-        , lpOrient
-        , lpShape
-        , lpSourceX
-        , lpSourceY
-        , lpTargetX
-        , lpTargetY
-        , luAs
-        , luDefault
-        , luValues
-        , mClip
-        , mDescription
-        , mEncode
-        , mFrom
-        , mGroup
-        , mInteractive
-        , mKey
-        , mName
-        , mOn
-        , mSort
-        , mStyle
-        , mTransform
-        , mZIndex
-        , maAlign
-        , maAngle
-        , maAspect
-        , maBaseline
-        , maCornerRadius
-        , maCursor
-        , maCustom
-        , maDefined
-        , maDir
-        , maDx
-        , maDy
-        , maEllipsis
-        , maEndAngle
-        , maFill
-        , maFillOpacity
-        , maFont
-        , maFontSize
-        , maFontStyle
-        , maFontWeight
-        , maGroupClip
-        , maHRef
-        , maHeight
-        , maInnerRadius
-        , maInterpolate
-        , maLimit
-        , maOpacity
-        , maOrient
-        , maOuterRadius
-        , maPadAngle
-        , maPath
-        , maRadius
-        , maShape
-        , maSize
-        , maStartAngle
-        , maStroke
-        , maStrokeCap
-        , maStrokeDash
-        , maStrokeDashOffset
-        , maStrokeJoin
-        , maStrokeMiterLimit
-        , maStrokeOpacity
-        , maStrokeWidth
-        , maSymbol
-        , maTension
-        , maText
-        , maTheta
-        , maTooltip
-        , maUrl
-        , maWidth
-        , maX
-        , maX2
-        , maXC
-        , maY
-        , maY2
-        , maYC
-        , maZIndex
-        , mark
-        , markInterpolationValue
-        , marks
-        , nInterval
-        , nTickCount
-        , num
-        , numExpr
-        , numList
-        , numNull
-        , numSignal
-        , numSignals
-        , nums
-        , on
-        , operationSignal
-        , orderSignal
-        , orientationSignal
-        , orientationValue
-        , overlapStrategySignal
-        , paAs
-        , paField
-        , paPadding
-        , paRadius
-        , paSize
-        , paSort
-        , padding
-        , paddings
-        , parse
-        , piAs
-        , piEndAngle
-        , piField
-        , piGroupBy
-        , piLimit
-        , piOp
-        , piSort
-        , piStartAngle
-        , prCenter
-        , prClipAngle
-        , prClipExtent
-        , prCoefficient
-        , prCustom
-        , prDistance
-        , prExtent
-        , prFit
-        , prFraction
-        , prLobes
-        , prParallel
-        , prPointRadius
-        , prPrecision
-        , prRadius
-        , prRatio
-        , prRotate
-        , prScale
-        , prSize
-        , prSpacing
-        , prTilt
-        , prTranslate
-        , prType
-        , projection
-        , projectionSignal
-        , projectionValue
-        , projections
-        , ptAs
-        , ptField
-        , ptPadding
-        , ptRound
-        , ptSize
-        , ptSort
-        , raCustomDefault
-        , raData
-        , raNums
-        , raScheme
-        , raSignal
-        , raStep
-        , raStrs
-        , raValues
-        , rgb
-        , scAlign
-        , scBase
-        , scClamp
-        , scCustom
-        , scDomain
-        , scDomainImplicit
-        , scDomainMax
-        , scDomainMid
-        , scDomainMin
-        , scDomainRaw
-        , scExponent
-        , scInterpolate
-        , scNice
-        , scPadding
-        , scPaddingInner
-        , scPaddingOuter
-        , scRange
-        , scRangeStep
-        , scReverse
-        , scRound
-        , scType
-        , scZero
-        , scale
-        , scaleNiceSignal
-        , scaleRangeSignal
-        , scaleSignal
-        , scales
-        , siBind
-        , siDescription
-        , siName
-        , siOn
-        , siPushOuter
-        , siReact
-        , siUpdate
-        , siValue
-        , sideSignal
-        , signal
-        , signals
-        , soByField
-        , soOp
-        , sortPropertySignal
-        , spiralSignal
-        , srData
-        , srFacet
-        , stAs
-        , stField
-        , stGroupBy
-        , stOffset
-        , stSort
-        , stackOffsetSignal
-        , str
-        , strExpr
-        , strNull
-        , strSignal
-        , strSignals
-        , strokeCapSignal
-        , strokeCapValue
-        , strokeJoinSignal
-        , strokeJoinValue
-        , strs
-        , symPath
-        , symbolSignal
-        , symbolValue
-        , teAs
-        , teField
-        , teMethod
-        , teNodeSize
-        , teSize
-        , teSort
-        , textDirectionSignal
-        , textDirectionValue
-        , tgInsert
-        , tgModifyValues
-        , tgRemove
-        , tgRemoveAll
-        , tgToggle
-        , tiAlign
-        , tiAnchor
-        , tiAngle
-        , tiBaseline
-        , tiColor
-        , tiEncode
-        , tiFont
-        , tiFontSize
-        , tiFontWeight
-        , tiFrame
-        , tiInteractive
-        , tiLimit
-        , tiName
-        , tiOffset
-        , tiOrient
-        , tiStyle
-        , tiZIndex
-        , timeUnitSignal
-        , title
-        , titleFrameSignal
-        , tmAs
-        , tmField
-        , tmMethod
-        , tmPadding
-        , tmPaddingBottom
-        , tmPaddingInner
-        , tmPaddingLeft
-        , tmPaddingOuter
-        , tmPaddingRight
-        , tmPaddingTop
-        , tmRatio
-        , tmRound
-        , tmSize
-        , tmSort
-        , toVega
-        , topojsonFeature
-        , topojsonMesh
-        , trAggregate
-        , trBin
-        , trCollect
-        , trContour
-        , trCountPattern
-        , trCross
-        , trCrossFilter
-        , trCrossFilterAsSignal
-        , trDensity
-        , trExtent
-        , trExtentAsSignal
-        , trFilter
-        , trFlatten
-        , trFlattenAs
-        , trFold
-        , trFoldAs
-        , trForce
-        , trFormula
-        , trFormulaInitOnly
-        , trGeoJson
-        , trGeoPath
-        , trGeoPoint
-        , trGeoPointAs
-        , trGeoShape
-        , trGraticule
-        , trIdentifier
-        , trImpute
-        , trJoinAggregate
-        , trLinkPath
-        , trLookup
-        , trNest
-        , trPack
-        , trPartition
-        , trPie
-        , trPivot
-        , trProject
-        , trResolveFilter
-        , trSample
-        , trSequence
-        , trSequenceAs
-        , trStack
-        , trStratify
-        , trTree
-        , trTreeLinks
-        , trTreemap
-        , trVoronoi
-        , trWindow
-        , trWordcloud
-        , transform
-        , transparent
-        , treeMethodSignal
-        , treemapMethodSignal
-        , trigger
-        , true
-        , vAlignSignal
-        , vAlphabetic
-        , vBand
-        , vBoos
-        , vBottom
-        , vColor
-        , vExponent
-        , vFalse
-        , vField
-        , vMiddle
-        , vMultiply
-        , vNull
-        , vNum
-        , vNums
-        , vObject
-        , vOffset
-        , vRound
-        , vScale
-        , vScaleField
-        , vSignal
-        , vStr
-        , vStrs
-        , vTop
-        , vTrue
-        , vValues
-        , voAs
-        , voExtent
-        , voSize
-        , wOperationSignal
-        , wcAs
-        , wcFont
-        , wcFontSize
-        , wcFontSizeRange
-        , wcFontStyle
-        , wcFontWeight
-        , wcPadding
-        , wcRotate
-        , wcSize
-        , wcSpiral
-        , wcText
-        , white
-        , width
-        , wnAggOperation
-        , wnFrame
-        , wnGroupBy
-        , wnIgnorePeers
-        , wnOperation
-        , wnOperationOn
-        , wnSort
-        )
+module Vega exposing
+    ( toVega
+    , combineSpecs
+    , VProperty
+    , num
+    , nums
+    , numSignal
+    , numSignals
+    , numExpr
+    , numList
+    , numNull
+    , str
+    , strs
+    , strSignal
+    , strSignals
+    , strExpr
+    , strNull
+    , true
+    , false
+    , boos
+    , booSignal
+    , booSignals
+    , booExpr
+    , vNum
+    , vNums
+    , vStr
+    , vStrs
+    , vTrue
+    , vFalse
+    , vBoos
+    , vSignal
+    , vField
+    , vColor
+    , vBand
+    , vObject
+    , keyValue
+    , vValues
+    , ifElse
+    , vNull
+    , vMultiply
+    , vExponent
+    , vOffset
+    , vRound
+    , vScale
+    , vScaleField
+    , field
+    , fSignal
+    , fExpr
+    , fDatum
+    , fGroup
+    , fParent
+    , expr
+    , exField
+    , year
+    , month
+    , week
+    , day
+    , hour
+    , minute
+    , second
+    , millisecond
+    , tuSignal
+    , cHCL
+    , cHSL
+    , cLAB
+    , cRGB
+    , dataSource
+    , data
+    , dataFromColumns
+    , dataColumn
+    , dataFromRows
+    , dataRow
+    , daUrl
+    , daFormat
+    , daSource
+    , daSources
+    , daValue
+    , daOn
+    , daSphere
+    , daDataset
+    , daField
+    , daFields
+    , daValues
+    , daSignal
+    , daReferences
+    , daSort
+    , soAscending
+    , soDescending
+    , soOp
+    , soByField
+    , soSignal
+    , ascend
+    , descend
+    , orderSignal
+    , csv
+    , tsv
+    , dsv
+    , json
+    , jsonProperty
+    , topojsonMesh
+    , topojsonFeature
+    , fpSignal
+    , parseAuto
+    , parse
+    , foNum
+    , foBoo
+    , foDate
+    , foUtc
+    , transform
+    , trAggregate
+    , agGroupBy
+    , agFields
+    , agOps
+    , agAs
+    , agCross
+    , agDrop
+    , agKey
+    , opArgMax
+    , opArgMin
+    , opCI0
+    , opCI1
+    , opCount
+    , opDistinct
+    , opMax
+    , opMean
+    , opMedian
+    , opMin
+    , opMissing
+    , opQ1
+    , opQ3
+    , opStderr
+    , opStdev
+    , opStdevP
+    , opSum
+    , opValid
+    , opVariance
+    , opVarianceP
+    , opSignal
+    , trJoinAggregate
+    , jaGroupBy
+    , jaFields
+    , jaOps
+    , jaAs
+    , trBin
+    , bnAnchor
+    , bnMaxBins
+    , bnBase
+    , bnStep
+    , bnSteps
+    , bnMinStep
+    , bnDivide
+    , bnNice
+    , bnSignal
+    , bnAs
+    , trCollect
+    , trCountPattern
+    , cpPattern
+    , cpCase
+    , lowercase
+    , uppercase
+    , mixedcase
+    , cpStopwords
+    , cpAs
+    , trCross
+    , crFilter
+    , crAs
+    , trDensity
+    , dnExtent
+    , dnMethod
+    , dnPdf
+    , dnCdf
+    , dnSignal
+    , dnSteps
+    , dnAs
+    , diNormal
+    , diUniform
+    , diKde
+    , diMixture
+    , trExtent
+    , trExtentAsSignal
+    , trFilter
+    , trCrossFilter
+    , trCrossFilterAsSignal
+    , trResolveFilter
+    , trFlatten
+    , trFlattenAs
+    , trFold
+    , trFoldAs
+    , trPivot
+    , piGroupBy
+    , piLimit
+    , piOp
+    , trFormula
+    , trFormulaInitOnly
+    , trLookup
+    , luAs
+    , luValues
+    , luDefault
+    , trIdentifier
+    , trProject
+    , trWindow
+    , wnAggOperation
+    , wnOperation
+    , wnOperationOn
+    , woRowNumber
+    , woRank
+    , woDenseRank
+    , woPercentRank
+    , woCumeDist
+    , woPercentile
+    , woLag
+    , woLead
+    , woFirstValue
+    , woLastValue
+    , woNthValue
+    , woSignal
+    , wnSort
+    , wnGroupBy
+    , wnFrame
+    , wnIgnorePeers
+    , trImpute
+    , imByMin
+    , imByMax
+    , imByMean
+    , imByMedian
+    , imByValue
+    , imKeyVals
+    , imMethod
+    , imGroupBy
+    , imValue
+    , trSample
+    , trSequence
+    , trSequenceAs
+    , trContour
+    , cnValues
+    , cnX
+    , cnY
+    , cnCellSize
+    , cnBandwidth
+    , cnSmooth
+    , cnThresholds
+    , cnCount
+    , cnNice
+    , trGeoShape
+    , trGeoPath
+    , gpField
+    , gpPointRadius
+    , gpAs
+    , trGeoJson
+    , gjFields
+    , gjFeature
+    , gjSignal
+    , trGeoPoint
+    , trGeoPointAs
+    , trGraticule
+    , grExtent
+    , grExtentMajor
+    , grExtentMinor
+    , grStep
+    , grStepMajor
+    , grStepMinor
+    , grField
+    , grPrecision
+    , trLinkPath
+    , lpSourceX
+    , lpSourceY
+    , lpTargetX
+    , lpTargetY
+    , lpOrient
+    , lpShape
+    , lpAs
+    , lsLine
+    , lsArc
+    , lsCurve
+    , lsDiagonal
+    , lsOrthogonal
+    , lsSignal
+    , trPie
+    , piField
+    , piStartAngle
+    , piEndAngle
+    , piSort
+    , piAs
+    , trStack
+    , stField
+    , stGroupBy
+    , stSort
+    , stOffset
+    , stAs
+    , stZero
+    , stCenter
+    , stNormalize
+    , stSignal
+    , trForce
+    , fsStatic
+    , fsRestart
+    , fsIterations
+    , fsAlpha
+    , fsAlphaMin
+    , fsAlphaTarget
+    , fsVelocityDecay
+    , fsForces
+    , fsAs
+    , foCenter
+    , foCollide
+    , foNBody
+    , foLink
+    , foX
+    , foY
+    , fpStrength
+    , fpDistance
+    , fpIterations
+    , fpTheta
+    , fpDistanceMin
+    , fpDistanceMax
+    , fpId
+    , trVoronoi
+    , voSize
+    , voExtent
+    , voAs
+    , trWordcloud
+    , wcFont
+    , wcFontStyle
+    , wcFontWeight
+    , wcFontSize
+    , wcFontSizeRange
+    , wcPadding
+    , wcRotate
+    , wcText
+    , wcSize
+    , wcSpiral
+    , spArchimedean
+    , spRectangular
+    , spSignal
+    , wcAs
+    , trNest
+    , trStratify
+    , trPack
+    , paField
+    , paSort
+    , paSize
+    , paRadius
+    , paPadding
+    , paAs
+    , trPartition
+    , ptField
+    , ptSort
+    , ptPadding
+    , ptRound
+    , ptSize
+    , ptAs
+    , trTree
+    , teField
+    , teSort
+    , teMethod
+    , meCluster
+    , meTidy
+    , meSignal
+    , teSize
+    , teNodeSize
+    , teAs
+    , trTreeLinks
+    , trTreemap
+    , tmField
+    , tmSort
+    , tmMethod
+    , tmSquarify
+    , tmResquarify
+    , tmBinary
+    , tmSlice
+    , tmDice
+    , tmSliceDice
+    , tmSignal
+    , tmPadding
+    , tmPaddingInner
+    , tmPaddingOuter
+    , tmPaddingTop
+    , tmPaddingLeft
+    , tmPaddingBottom
+    , tmPaddingRight
+    , tmRatio
+    , tmRound
+    , tmSize
+    , tmAs
+    , signals
+    , signal
+    , siName
+    , siValue
+    , siBind
+    , siDescription
+    , siOn
+    , siUpdate
+    , siReact
+    , siPushOuter
+    , iCheckbox
+    , iText
+    , iNumber
+    , iDate
+    , iDateTimeLocal
+    , iTime
+    , iMonth
+    , iWeek
+    , iRadio
+    , iRange
+    , iSelect
+    , iTel
+    , iColor
+    , inDebounce
+    , inElement
+    , inOptions
+    , inMin
+    , inMax
+    , inStep
+    , inPlaceholder
+    , inAutocomplete
+    , evHandler
+    , evUpdate
+    , evEncode
+    , evForce
+    , esObject
+    , esSignal
+    , esMerge
+    , esStream
+    , esSelector
+    , esSource
+    , esType
+    , esBetween
+    , esConsume
+    , esFilter
+    , efPrevent
+    , efAllow
+    , esDebounce
+    , esMarkName
+    , esMark
+    , esThrottle
+    , evStreamSelector
+    , esAll
+    , esScope
+    , esView
+    , esWindow
+    , esDom
+    , etClick
+    , etDblClick
+    , etDragEnter
+    , etDragLeave
+    , etDragOver
+    , etKeyDown
+    , etKeyPress
+    , etKeyUp
+    , etMouseDown
+    , etMouseMove
+    , etMouseOut
+    , etMouseOver
+    , etMouseUp
+    , etMouseWheel
+    , etTouchEnd
+    , etTouchMove
+    , etTouchStart
+    , etWheel
+    , etTimer
+    , on
+    , trigger
+    , tgInsert
+    , tgRemove
+    , tgRemoveAll
+    , tgToggle
+    , tgModifyValues
+    , scales
+    , scale
+    , scReverse
+    , scRound
+    , scClamp
+    , scPadding
+    , scNice
+    , scZero
+    , scExponent
+    , scBase
+    , scAlign
+    , scDomainImplicit
+    , scPaddingInner
+    , scPaddingOuter
+    , scRangeStep
+    , niTrue
+    , niFalse
+    , niMillisecond
+    , niSecond
+    , niMinute
+    , niHour
+    , niDay
+    , niWeek
+    , niMonth
+    , niYear
+    , niTickCount
+    , niInterval
+    , niSignal
+    , scType
+    , scBand
+    , scBinLinear
+    , scBinOrdinal
+    , scLinear
+    , scLog
+    , scOrdinal
+    , scPoint
+    , scPow
+    , scQuantile
+    , scQuantize
+    , scThreshold
+    , scSequential
+    , scSqrt
+    , scTime
+    , scUtc
+    , scCustom
+    , scSignal
+    , scDomain
+    , scDomainMax
+    , scDomainMin
+    , scDomainMid
+    , scDomainRaw
+    , doNums
+    , doStrs
+    , doSignal
+    , doSignals
+    , doData
+    , scRange
+    , raWidth
+    , raHeight
+    , raSymbol
+    , raCategory
+    , raDiverging
+    , raOrdinal
+    , raRamp
+    , raNums
+    , raStrs
+    , raValues
+    , raSignal
+    , raScheme
+    , raData
+    , raStep
+    , raCustomDefault
+    , csScheme
+    , csCount
+    , csExtent
+    , scInterpolate
+    , cubeHelix
+    , cubeHelixLong
+    , hcl
+    , hclLong
+    , hsl
+    , hslLong
+    , rgb
+    , lab
+    , projections
+    , projection
+    , albers
+    , albersUsa
+    , azimuthalEqualArea
+    , azimuthalEquidistant
+    , conicConformal
+    , conicEqualArea
+    , conicEquidistant
+    , equirectangular
+    , gnomonic
+    , mercator
+    , naturalEarth1
+    , orthographic
+    , stereographic
+    , transverseMercator
+    , customProjection
+    , prSignal
+    , projectionValue
+    , prType
+    , prClipAngle
+    , prClipExtent
+    , prScale
+    , prTranslate
+    , prCenter
+    , prRotate
+    , prPointRadius
+    , prPrecision
+    , prCoefficient
+    , prDistance
+    , prFraction
+    , prLobes
+    , prParallel
+    , prRadius
+    , prRatio
+    , prSpacing
+    , prTilt
+    , prFit
+    , feName
+    , featureSignal
+    , prExtent
+    , prSize
+    , axes
+    , axis
+    , axBandPosition
+    , axDomain
+    , axDomainColor
+    , axDomainOpacity
+    , axDomainWidth
+    , axEncode
+    , axFormat
+    , axGrid
+    , axGridColor
+    , axGridOpacity
+    , axGridDash
+    , axGridScale
+    , axGridWidth
+    , axLabels
+    , axLabelBound
+    , axLabelAlign
+    , axLabelBaseline
+    , axLabelAngle
+    , axLabelColor
+    , axLabelOpacity
+    , axLabelFont
+    , axLabelFontSize
+    , axLabelFontWeight
+    , axLabelFlush
+    , axLabelFlushOffset
+    , axLabelLimit
+    , axLabelPadding
+    , axLabelOverlap
+    , axMinExtent
+    , axMaxExtent
+    , axOffset
+    , axPosition
+    , axTicks
+    , axTickCount
+    , axTemporalTickCount
+    , axTickColor
+    , axTickOpacity
+    , axTickExtra
+    , axTickOffset
+    , axTickRound
+    , axTickWidth
+    , axTickSize
+    , axTitle
+    , axTitleAlign
+    , axTitleAngle
+    , axTitleBaseline
+    , axTitleColor
+    , axTitleOpacity
+    , axTitleFont
+    , axTitleFontSize
+    , axTitleFontWeight
+    , axTitleLimit
+    , axTitlePadding
+    , axTitleX
+    , axTitleY
+    , axValues
+    , axZIndex
+    , aeAxis
+    , aeTicks
+    , aeGrid
+    , aeLabels
+    , aeTitle
+    , aeDomain
+    , siLeft
+    , siRight
+    , siTop
+    , siBottom
+    , siSignal
+    , osNone
+    , osParity
+    , osGreedy
+    , osSignal
+    , legends
+    , legend
+    , leType
+    , leDirection
+    , leOrient
+    , leFill
+    , leOpacity
+    , leShape
+    , leSize
+    , leStroke
+    , leStrokeDash
+    , leEncode
+    , leFormat
+    , leGridAlign
+    , leClipHeight
+    , leColumns
+    , leColumnPadding
+    , leRowPadding
+    , leCornerRadius
+    , leFillColor
+    , leOffset
+    , lePadding
+    , leStrokeColor
+    , leStrokeWidth
+    , leGradientOpacity
+    , leGradientLabelLimit
+    , leGradientLabelOffset
+    , leGradientLength
+    , leGradientThickness
+    , leGradientStrokeColor
+    , leGradientStrokeWidth
+    , leLabelAlign
+    , leLabelBaseline
+    , leLabelColor
+    , leLabelFont
+    , leLabelFontSize
+    , leLabelFontWeight
+    , leLabelLimit
+    , leLabelOpacity
+    , leLabelOffset
+    , leLabelOverlap
+    , leSymbolFillColor
+    , leSymbolBaseFillColor
+    , leSymbolBaseStrokeColor
+    , leSymbolDirection
+    , leSymbolOffset
+    , leSymbolSize
+    , leSymbolStrokeColor
+    , leSymbolStrokeWidth
+    , leSymbolOpacity
+    , leSymbolType
+    , leTickCount
+    , leTemporalTickCount
+    , leTitle
+    , leTitleAlign
+    , leTitleBaseline
+    , leTitleColor
+    , leTitleOpacity
+    , leTitleFont
+    , leTitleFontSize
+    , leTitleFontWeight
+    , leTitleLimit
+    , leTitlePadding
+    , leValues
+    , leZIndex
+    , ltSymbol
+    , ltGradient
+    , ltSignal
+    , loLeft
+    , loTopLeft
+    , loTop
+    , loTopRight
+    , loRight
+    , loBottomRight
+    , loBottom
+    , loBottomLeft
+    , loNone
+    , loSignal
+    , enLegend
+    , enTitle
+    , enLabels
+    , enSymbols
+    , enGradient
+    , enName
+    , enInteractive
+    , title
+    , tiAnchor
+    , tiAngle
+    , anStart
+    , anMiddle
+    , anEnd
+    , anchorSignal
+    , tiAlign
+    , tiBaseline
+    , tiColor
+    , tiEncode
+    , tiFont
+    , tiFontSize
+    , tiFontWeight
+    , tiFrame
+    , tfBounds
+    , tfGroup
+    , tfSignal
+    , tiInteractive
+    , tiLimit
+    , tiName
+    , tiOffset
+    , tiOrient
+    , tiStyle
+    , tiZIndex
+    , layout
+    , grAlignAll
+    , grAlignEach
+    , grAlignNone
+    , grAlignSignal
+    , grAlignRow
+    , grAlignColumn
+    , bcFlush
+    , bcFull
+    , bcSignal
+    , loAlign
+    , loBounds
+    , loColumns
+    , loPadding
+    , loPaddingRC
+    , loOffset
+    , loOffsetRC
+    , loHeaderBand
+    , loHeaderBandRC
+    , loFooterBand
+    , loFooterBandRC
+    , loTitleBand
+    , loTitleBandRC
+    , marks
+    , mark
+    , arc
+    , area
+    , image
+    , group
+    , line
+    , path
+    , rect
+    , rule
+    , shape
+    , symbol
+    , text
+    , trail
+    , mClip
+    , mDescription
+    , mEncode
+    , mFrom
+    , mInteractive
+    , mKey
+    , mName
+    , mOn
+    , mSort
+    , mTransform
+    , mStyle
+    , mGroup
+    , mZIndex
+    , clEnabled
+    , clPath
+    , clSphere
+    , srData
+    , srFacet
+    , faField
+    , faGroupBy
+    , faAggregate
+    , maX
+    , maX2
+    , maXC
+    , maWidth
+    , maY
+    , maY2
+    , maYC
+    , maHeight
+    , maOpacity
+    , maFill
+    , maFillOpacity
+    , maStroke
+    , transparent
+    , black
+    , white
+    , maStrokeOpacity
+    , maStrokeWidth
+    , maStrokeCap
+    , maStrokeDash
+    , maStrokeDashOffset
+    , maStrokeJoin
+    , maStrokeMiterLimit
+    , maCursor
+    , maHRef
+    , maTooltip
+    , maZIndex
+    , maAlign
+    , maBaseline
+    , maCornerRadius
+    , maInterpolate
+    , maTension
+    , maDefined
+    , maSize
+    , maStartAngle
+    , maEndAngle
+    , maPadAngle
+    , maInnerRadius
+    , maOuterRadius
+    , maOrient
+    , maGroupClip
+    , maUrl
+    , maAspect
+    , maPath
+    , maShape
+    , maSymbol
+    , maAngle
+    , maDir
+    , maDx
+    , maDy
+    , maEllipsis
+    , maFont
+    , maFontSize
+    , maFontWeight
+    , maFontStyle
+    , maLimit
+    , maRadius
+    , maText
+    , maTheta
+    , maCustom
+    , enEnter
+    , enUpdate
+    , enHover
+    , enExit
+    , enCustom
+    , miBasis
+    , miBundle
+    , miCardinal
+    , miCatmullRom
+    , miLinear
+    , miMonotone
+    , miNatural
+    , miStepwise
+    , miStepAfter
+    , miStepBefore
+    , markInterpolationValue
+    , orHorizontal
+    , orVertical
+    , orRadial
+    , orSignal
+    , orientationValue
+    , haLeft
+    , haCenter
+    , haRight
+    , haSignal
+    , hLeft
+    , hCenter
+    , hRight
+    , vaTop
+    , vaMiddle
+    , vaBottom
+    , vaAlphabetic
+    , vaSignal
+    , vTop
+    , vMiddle
+    , vBottom
+    , vAlphabetic
+    , symCircle
+    , symCross
+    , symDiamond
+    , symSquare
+    , symTriangleUp
+    , symTriangleDown
+    , symTriangleLeft
+    , symTriangleRight
+    , symPath
+    , symSignal
+    , symbolValue
+    , caButt
+    , caSquare
+    , caRound
+    , caSignal
+    , strokeCapValue
+    , joMiter
+    , joBevel
+    , joRound
+    , joSignal
+    , strokeJoinValue
+    , tdLeftToRight
+    , tdRightToLeft
+    , tdSignal
+    , textDirectionValue
+    , cuAuto
+    , cuDefault
+    , cuNone
+    , cuContextMenu
+    , cuHelp
+    , cuPointer
+    , cuProgress
+    , cuWait
+    , cuCell
+    , cuCrosshair
+    , cuText
+    , cuVerticalText
+    , cuAlias
+    , cuCopy
+    , cuMove
+    , cuNoDrop
+    , cuNotAllowed
+    , cuAllScroll
+    , cuColResize
+    , cuRowResize
+    , cuNResize
+    , cuEResize
+    , cuSResize
+    , cuWResize
+    , cuNEResize
+    , cuNWResize
+    , cuSEResize
+    , cuSWResize
+    , cuEWResize
+    , cuNSResize
+    , cuNESWResize
+    , cuNWSEResize
+    , cuZoomIn
+    , cuZoomOut
+    , cuGrab
+    , cuGrabbing
+    , cursorValue
+    , config
+    , cfAutosize
+    , cfBackground
+    , cfGroup
+    , cfEvents
+    , cfMark
+    , cfMarks
+    , cfStyle
+    , cfAxis
+    , axAll
+    , axLeft
+    , axTop
+    , axRight
+    , axBottom
+    , axX
+    , axY
+    , axBand
+    , cfLegend
+    , cfTitle
+    , cfScaleRange
+    , autosize
+    , asContent
+    , asFit
+    , asFitX
+    , asFitY
+    , asNone
+    , asPad
+    , asPadding
+    , asResize
+    , asSignal
+    , height
+    , padding
+    , paddings
+    , width
+    , background
+    , encode
+    , AggregateProperty
+    , Anchor
+    , Autosize
+    , AxisElement
+    , AxisProperty
+    , AxisType
+    , Bind
+    , BinProperty
+    , Boo
+    , BoundsCalculation
+    , Case
+    , CInterpolate
+    , Clip
+    , ColorSchemeProperty
+    , ColorValue
+    , ConfigProperty
+    , ContourProperty
+    , CountPatternProperty
+    , CrossProperty
+    , Cursor
+    , Data
+    , DataColumn
+    , DataProperty
+    , DataReference
+    , DataRow
+    , DataTable
+    , DataType
+    , DensityFunction
+    , DensityProperty
+    , Distribution
+    , EncodingProperty
+    , EventFilter
+    , EventHandler
+    , EventSource
+    , EventStream
+    , EventStreamProperty
+    , EventType
+    , Expr
+    , Facet
+    , Feature
+    , Field
+    , Force
+    , ForceProperty
+    , ForceSimulationProperty
+    , FormatProperty
+    , GeoJsonProperty
+    , GeoPathProperty
+    , GraticuleProperty
+    , GridAlign
+    , HAlign
+    , ImputeMethod
+    , ImputeProperty
+    , InputProperty
+    , JoinAggregateProperty
+    , LayoutProperty
+    , LegendEncoding
+    , LegendOrientation
+    , LegendProperty
+    , LegendType
+    , LinkPathProperty
+    , LinkShape
+    , LookupProperty
+    , Mark
+    , MarkInterpolation
+    , MarkProperty
+    , Num
+    , Operation
+    , Order
+    , Orientation
+    , OverlapStrategy
+    , PackProperty
+    , PartitionProperty
+    , PieProperty
+    , PivotProperty
+    , Projection
+    , ProjectionProperty
+    , Scale
+    , ScaleDomain
+    , ScaleNice
+    , ScaleProperty
+    , ScaleRange
+    , Side
+    , SignalProperty
+    , SortProperty
+    , Source
+    , Spec
+    , Spiral
+    , StackOffset
+    , StackProperty
+    , Str
+    , StrokeCap
+    , StrokeJoin
+    , Symbol
+    , TextDirection
+    , TimeUnit
+    , TitleFrame
+    , TitleProperty
+    , TopMarkProperty
+    , Transform
+    , TreemapMethod
+    , TreemapProperty
+    , TreeMethod
+    , TreeProperty
+    , Trigger
+    , TriggerProperty
+    , VAlign
+    , Value
+    , VoronoiProperty
+    , WindowOperation
+    , WindowProperty
+    , WOperation
+    , WordcloudProperty
+    )
 
 {-| Create full Vega specifications in Elm. The module can generate JSON specs
 that may be passed to the Vega runtime library to activate the visualization.
@@ -953,8 +1237,22 @@ See the
 
 ## Thematic Data Types
 
-@docs TimeUnit
-@docs timeUnitSignal
+
+### Temporal
+
+@docs year
+@docs month
+@docs week
+@docs day
+@docs hour
+@docs minute
+@docs second
+@docs millisecond
+@docs tuSignal
+
+
+### Color
+
 @docs cHCL
 @docs cHSL
 @docs cLAB
@@ -974,7 +1272,6 @@ See the [Vega data](https://vega.github.io/vega/docs/data) and the
 
 @docs dataFromRows
 @docs dataRow
-@docs DataProperty
 
 @docs daUrl
 @docs daFormat
@@ -982,6 +1279,7 @@ See the [Vega data](https://vega.github.io/vega/docs/data) and the
 @docs daSources
 @docs daValue
 @docs daOn
+@docs daSphere
 
 @docs daDataset
 @docs daField
@@ -994,29 +1292,36 @@ See the [Vega data](https://vega.github.io/vega/docs/data) and the
 ## Data Sorting
 
 See the
-[Vega sort documentation](https://vega.github.io/vega/docs/scales/#sort).
+[Vega sort ](https://vega.github.io/vega/docs/scales/#sort) and
+[Vega type comparison](https://vega.github.io/vega/docs/types/#Compare) documentation.
 
 @docs daSort
-@docs SortProperty
 @docs sortPropertySignal
+@docs soAscending
+@docs soDescending
 @docs soOp
 @docs soByField
+@docs soSignal
 
-@docs Order
+@docs ascend
+@docs descend
 @docs orderSignal
 
 
 ## Data Parsing and Formatting
 
-@docs FormatProperty
+@docs csv
+@docs tsv
 @docs dsv
+@docs json
 @docs jsonProperty
 @docs topojsonMesh
 @docs topojsonFeature
-@docs formatPropertySignal
-
-@docs DataType
+@docs fpSignal
+@docs parseAuto
 @docs parse
+@docs foNum
+@docs foBoo
 @docs foDate
 @docs foUtc
 
@@ -1048,8 +1353,27 @@ See the
 @docs agDrop
 @docs agKey
 
-@docs Operation
-@docs operationSignal
+@docs opArgMax
+@docs opArgMin
+@docs opCI0
+@docs opCI1
+@docs opCount
+@docs opDistinct
+@docs opMax
+@docs opMean
+@docs opMedian
+@docs opMin
+@docs opMissing
+@docs opQ1
+@docs opQ3
+@docs opStderr
+@docs opStdev
+@docs opStdevP
+@docs opSum
+@docs opValid
+@docs opVariance
+@docs opVarianceP
+@docs opSignal
 
 
 ### Join Aggregation
@@ -1098,7 +1422,9 @@ See the
 @docs trCountPattern
 @docs cpPattern
 @docs cpCase
-@docs Case
+@docs lowercase
+@docs uppercase
+@docs mixedcase
 @docs cpStopwords
 @docs cpAs
 
@@ -1121,8 +1447,9 @@ See the
 @docs trDensity
 @docs dnExtent
 @docs dnMethod
-@docs DensityFunction
-@docs densityFunctionSignal
+@docs dnPdf
+@docs dnCdf
+@docs dnSignal
 @docs dnSteps
 @docs dnAs
 
@@ -1195,8 +1522,18 @@ See the Vega [formula](https://vega.github.io/vega/docs/transforms/formula),
 @docs wnAggOperation
 @docs wnOperation
 @docs wnOperationOn
-@docs WOperation
-@docs wOperationSignal
+@docs woRowNumber
+@docs woRank
+@docs woDenseRank
+@docs woPercentRank
+@docs woCumeDist
+@docs woPercentile
+@docs woLag
+@docs woLead
+@docs woFirstValue
+@docs woLastValue
+@docs woNthValue
+@docs woSignal
 @docs wnSort
 @docs wnGroupBy
 @docs wnFrame
@@ -1209,9 +1546,13 @@ See the
 [Vega impute documentation](https://vega.github.io/vega/docs/transforms/impute/).
 
 @docs trImpute
+@docs imByMin
+@docs imByMax
+@docs imByMean
+@docs imByMedian
+@docs imByValue
 @docs imKeyVals
 @docs imMethod
-@docs ImputeMethod
 @docs imGroupBy
 @docs imValue
 
@@ -1307,8 +1648,12 @@ See the
 @docs lpOrient
 @docs lpShape
 @docs lpAs
-@docs LinkShape
-@docs linkShapeSignal
+@docs lsLine
+@docs lsArc
+@docs lsCurve
+@docs lsDiagonal
+@docs lsOrthogonal
+@docs lsSignal
 
 
 ### Angular Layouts
@@ -1335,8 +1680,10 @@ See the
 @docs stSort
 @docs stOffset
 @docs stAs
-@docs StackOffset
-@docs stackOffsetSignal
+@docs stZero
+@docs stCenter
+@docs stNormalize
+@docs stSignal
 
 
 ### Force-Generated Layouts
@@ -1399,8 +1746,9 @@ See the
 @docs wcText
 @docs wcSize
 @docs wcSpiral
-@docs Spiral
-@docs spiralSignal
+@docs spArchimedean
+@docs spRectangular
+@docs spSignal
 @docs wcAs
 
 
@@ -1438,8 +1786,9 @@ See the Vega
 @docs teField
 @docs teSort
 @docs teMethod
-@docs TreeMethod
-@docs treeMethodSignal
+@docs meCluster
+@docs meTidy
+@docs meSignal
 @docs teSize
 @docs teNodeSize
 @docs teAs
@@ -1450,8 +1799,13 @@ See the Vega
 @docs tmField
 @docs tmSort
 @docs tmMethod
-@docs TreemapMethod
-@docs treemapMethodSignal
+@docs tmSquarify
+@docs tmResquarify
+@docs tmBinary
+@docs tmSlice
+@docs tmDice
+@docs tmSliceDice
+@docs tmSignal
 @docs tmPadding
 @docs tmPaddingInner
 @docs tmPaddingOuter
@@ -1514,13 +1868,18 @@ See the [Vega signal binding documentation](https://vega.github.io/vega/docs/sig
 
 ## Event Handling
 
-See the Vega [event stream](https://vega.github.io/vega/docs/event-streams)
-and [event handler](https://vega.github.io/vega/docs/signals/#handlers) documentation.
+See the Vega
+[event handler documentation](https://vega.github.io/vega/docs/signals/#handlers) documentation.
 
 @docs evHandler
 @docs evUpdate
 @docs evEncode
 @docs evForce
+
+
+### Event Streams
+
+See the Vega [event stream documentation](https://vega.github.io/vega/docs/event-streams)
 
 @docs esObject
 @docs esSignal
@@ -1532,16 +1891,41 @@ and [event handler](https://vega.github.io/vega/docs/signals/#handlers) document
 @docs esBetween
 @docs esConsume
 @docs esFilter
+@docs efPrevent
+@docs efAllow
 @docs esDebounce
 @docs esMarkName
 @docs esMark
 @docs esThrottle
-
 @docs evStreamSelector
-@docs EventSource
-
+@docs esAll
+@docs esScope
+@docs esView
+@docs esWindow
 @docs esDom
-@docs EventType
+
+
+### Event types
+
+@docs etClick
+@docs etDblClick
+@docs etDragEnter
+@docs etDragLeave
+@docs etDragOver
+@docs etKeyDown
+@docs etKeyPress
+@docs etKeyUp
+@docs etMouseDown
+@docs etMouseMove
+@docs etMouseOut
+@docs etMouseOver
+@docs etMouseUp
+@docs etMouseWheel
+@docs etTouchEnd
+@docs etTouchMove
+@docs etTouchStart
+@docs etWheel
+@docs etTimer
 
 
 ## Triggers
@@ -1577,18 +1961,42 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs scPaddingOuter
 @docs scRangeStep
 
-@docs ScaleNice
-@docs scaleNiceSignal
-@docs nInterval
-@docs nTickCount
+@docs niTrue
+@docs niFalse
+@docs niMillisecond
+@docs niSecond
+@docs niMinute
+@docs niHour
+@docs niDay
+@docs niWeek
+@docs niMonth
+@docs niYear
+@docs niTickCount
+@docs niInterval
+@docs niSignal
 
 
 ## Scale Types
 
 @docs scType
-@docs Scale
-@docs scaleSignal
+
+@docs scBand
+@docs scBinLinear
+@docs scBinOrdinal
+@docs scLinear
+@docs scLog
+@docs scOrdinal
+@docs scPoint
+@docs scPow
+@docs scQuantile
+@docs scQuantize
+@docs scThreshold
+@docs scSequential
+@docs scSqrt
+@docs scTime
+@docs scUtc
 @docs scCustom
+@docs scSignal
 
 
 ## Scale Domains
@@ -1612,8 +2020,16 @@ The extent scaling input data.
 The extent of scaled values after transformation.
 
 @docs scRange
-@docs ScaleRange
-@docs scaleRangeSignal
+@docs srSignal
+@docs raWidth
+@docs raHeight
+@docs raSymbol
+@docs raCategory
+@docs raDiverging
+@docs raOrdinal
+@docs raRamp
+@docs raHeatmap)
+
 @docs raNums
 @docs raStrs
 @docs raValues
@@ -1634,12 +2050,14 @@ and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
 @docs csExtent
 
 @docs scInterpolate
-@docs CInterpolate
 @docs cubeHelix
 @docs cubeHelixLong
+@docs hcl
 @docs hclLong
+@docs hsl
 @docs hslLong
 @docs rgb
+@docs lab
 
 
 # Specifying Projections
@@ -1649,10 +2067,25 @@ See the
 
 @docs projections
 @docs projection
-@docs Projection
-@docs projectionSignal
+
+@docs albers
+@docs albersUsa
+@docs azimuthalEqualArea
+@docs azimuthalEquidistant
+@docs conicConformal
+@docs conicEqualArea
+@docs conicEquidistant
+@docs equirectangular
+@docs gnomonic
+@docs mercator
+@docs naturalEarth1
+@docs orthographic
+@docs stereographic
+@docs transverseMercator
+@docs customProjection
+@docs prSignal
+
 @docs projectionValue
-@docs prCustom
 @docs prType
 @docs prClipAngle
 @docs prClipExtent
@@ -1741,11 +2174,21 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs axTitleY
 @docs axValues
 @docs axZIndex
-@docs AxisElement
-@docs Side
-@docs sideSignal
-@docs OverlapStrategy
-@docs overlapStrategySignal
+@docs aeAxis
+@docs aeTicks
+@docs aeGrid
+@docs aeLabels
+@docs aeTitle
+@docs aeDomain
+@docs siLeft
+@docs siRight
+@docs siTop
+@docs siBottom
+@docs siSignal
+@docs osNone
+@docs osParity
+@docs osGreedy
+@docs osSignal
 
 
 # Specifying Legends
@@ -1818,10 +2261,19 @@ See the
 @docs leTitlePadding
 @docs leValues
 @docs leZIndex
-@docs LegendType
-@docs legendTypeSignal
-@docs LegendOrientation
-@docs legendOrientationSignal
+@docs ltSymbol
+@docs ltGradient
+@docs ltSignal
+@docs loLeft
+@docs loTopLeft
+@docs loTop
+@docs loTopRight
+@docs loRight
+@docs loBottomRight
+@docs loBottom
+@docs loBottomLeft
+@docs loNone
+@docs loSignal
 @docs enLegend
 @docs enTitle
 @docs enLabels
@@ -1838,7 +2290,9 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 @docs title
 @docs tiAnchor
 @docs tiAngle
-@docs Anchor
+@docs anStart
+@docs anMiddle
+@docs anEnd
 @docs anchorSignal
 @docs tiAlign
 @docs tiBaseline
@@ -1848,8 +2302,9 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 @docs tiFontSize
 @docs tiFontWeight
 @docs tiFrame
-@docs TitleFrame
-@docs titleFrameSignal
+@docs tfBounds
+@docs tfGroup
+@docs tfSignal
 @docs tiInteractive
 @docs tiLimit
 @docs tiName
@@ -1864,11 +2319,14 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 See the [Vega layout documentation](https://vega.github.io/vega/docs/layout/).
 
 @docs layout
-@docs GridAlign
-@docs gridAlignSignal
+@docs grAlignAll
+@docs grAlignEach
+@docs grAlignNone
+@docs grAlignSignal
 @docs grAlignRow
 @docs grAlignColumn
-@docs BoundsCalculation
+@docs bcFlush
+@docs bcFull
 @docs bcSignal
 @docs loAlign
 @docs loBounds
@@ -1893,7 +2351,18 @@ See the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
 
 @docs marks
 @docs mark
-@docs Mark
+@docs arc
+@docs area
+@docs image
+@docs group
+@docs line
+@docs path
+@docs rect
+@docs rule
+@docs shape
+@docs symbol
+@docs text
+@docs trail
 @docs mClip
 @docs mDescription
 @docs mEncode
@@ -1998,37 +2467,109 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs enHover
 @docs enExit
 @docs enCustom
-@docs MarkInterpolation
+@docs miBasis
+@docs miBundle
+@docs miCardinal
+@docs miCatmullRom
+@docs miLinear
+@docs miMonotone
+@docs miNatural
+@docs miStepwise
+@docs miStepAfter
+@docs miStepBefore
 @docs markInterpolationValue
-@docs Orientation
-@docs orientationSignal
+@docs orHorizontal
+@docs orVertical
+@docs orRadial
+@docs orSignal
 @docs orientationValue
-@docs Cursor
-@docs cursorValue
-@docs HAlign
-@docs hAlignSignal
+@docs haLeft
+@docs haCenter
+@docs haRight
+@docs haSignal
 @docs hLeft
 @docs hCenter
 @docs hRight
-@docs VAlign
-@docs vAlignSignal
+@docs vaTop
+@docs vaMiddle
+@docs vaBottom
+@docs vaAlphabetic
+@docs vaSignal
 @docs vTop
 @docs vMiddle
 @docs vBottom
 @docs vAlphabetic
-@docs Symbol
-@docs symbolValue
-@docs symbolSignal
+
+@docs symCircle
+@docs symCross
+@docs symDiamond
+@docs symSquare
+@docs symTriangleUp
+@docs symTriangleDown
+@docs symTriangleLeft
+@docs symTriangleRight
 @docs symPath
-@docs StrokeCap
+@docs symSignal
+@docs symbolValue
+
+@docs caButt
+@docs caSquare
+@docs caRound
+@docs caSignal
 @docs strokeCapValue
-@docs strokeCapSignal
-@docs StrokeJoin
-@docs strokeJoinSignal
+@docs joMiter
+@docs joBevel
+@docs joRound
+@docs joSignal
 @docs strokeJoinValue
+@docs tdLeftToRight
+@docs tdRightToLeft
+@docs tdSignal
 @docs textDirectionValue
-@docs TextDirection
-@docs textDirectionSignal
+
+
+## Cursors
+
+See the
+[CSS cursor documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
+
+@docs cuAuto
+@docs cuDefault
+@docs cuNone
+@docs cuContextMenu
+@docs cuHelp
+@docs cuPointer
+@docs cuProgress
+@docs cuWait
+@docs cuCell
+@docs cuCrosshair
+@docs cuText
+@docs cuVerticalText
+@docs cuAlias
+@docs cuCopy
+@docs cuMove
+@docs cuNoDrop
+@docs cuNotAllowed
+@docs cuAllScroll
+@docs cuColResize
+@docs cuRowResize
+@docs cuNResize
+@docs cuEResize
+@docs cuSResize
+@docs cuWResize
+@docs cuNEResize
+@docs cuNWResize
+@docs cuSEResize
+@docs cuSWResize
+@docs cuEWResize
+@docs cuNSResize
+@docs cuNESWResize
+@docs cuNWSEResize
+@docs cuZoomIn
+@docs cuZoomOut
+@docs cuGrab
+@docs cuGrabbing
+@docs cursorValue
 
 
 # Configuring Visualization Appearance
@@ -2049,7 +2590,6 @@ See the
 ## Event Configuration
 
 @docs cfEvents
-@docs EventFilter
 
 
 ## Mark Configuration
@@ -2066,7 +2606,14 @@ See the
 ## Axis Configuration
 
 @docs cfAxis
-@docs AxisType
+@docs axAll
+@docs axLeft
+@docs axTop
+@docs axRight
+@docs axBottom
+@docs axX
+@docs axY
+@docs axBand
 
 
 ## Legend Configuration
@@ -2090,8 +2637,15 @@ See the
 [Vega specification documentation](https://vega.github.io/vega/docs/specification/)
 
 @docs autosize
-@docs Autosize
-@docs autosizeSignal
+@docs asContent
+@docs asFit
+@docs asFitX
+@docs asFitY
+@docs asNone
+@docs asPad
+@docs asPadding
+@docs asResize
+@docs asSignal
 @docs height
 @docs padding
 @docs paddings
@@ -2108,10 +2662,17 @@ Types that are not specified directly, provided here for reference with links
 to the functions that generate them.
 
 @docs AggregateProperty
+@docs Anchor
+@docs Autosize
+@docs AxisElement
 @docs AxisProperty
+@docs AxisType
 @docs Bind
 @docs BinProperty
 @docs Boo
+@docs BoundsCalculation
+@docs Case
+@docs CInterpolate
 @docs Clip
 @docs ColorSchemeProperty
 @docs ColorValue
@@ -2119,17 +2680,24 @@ to the functions that generate them.
 @docs ContourProperty
 @docs CountPatternProperty
 @docs CrossProperty
+@docs Cursor
 @docs Data
 @docs DataColumn
+@docs DataProperty
 @docs DataReference
 @docs DataRow
 @docs DataTable
+@docs DataType
+@docs DensityFunction
 @docs DensityProperty
 @docs Distribution
 @docs EncodingProperty
+@docs EventFilter
 @docs EventHandler
+@docs EventSource
 @docs EventStream
 @docs EventStreamProperty
+@docs EventType
 @docs Expr
 @docs Facet
 @docs Feature
@@ -2137,42 +2705,73 @@ to the functions that generate them.
 @docs Force
 @docs ForceProperty
 @docs ForceSimulationProperty
+@docs FormatProperty
 @docs GeoJsonProperty
 @docs GeoPathProperty
 @docs GraticuleProperty
+@docs GridAlign
+@docs HAlign
+@docs ImputeMethod
 @docs ImputeProperty
 @docs InputProperty
 @docs JoinAggregateProperty
 @docs LayoutProperty
 @docs LegendEncoding
+@docs LegendOrientation
 @docs LegendProperty
+@docs LegendType
 @docs LinkPathProperty
+@docs LinkShape
 @docs LookupProperty
+@docs Mark
+@docs MarkInterpolation
 @docs MarkProperty
 @docs Num
+@docs Operation
+@docs Order
+@docs Orientation
+@docs OverlapStrategy
 @docs PackProperty
 @docs PartitionProperty
 @docs PieProperty
 @docs PivotProperty
+@docs Projection
 @docs ProjectionProperty
+@docs Scale
 @docs ScaleDomain
+@docs ScaleNice
 @docs ScaleProperty
+@docs ScaleRange
+@docs Side
 @docs SignalProperty
+@docs SortProperty
 @docs Source
 @docs Spec
+@docs Spiral
+@docs StackOffset
 @docs StackProperty
 @docs Str
+@docs StrokeCap
+@docs StrokeJoin
+@docs Symbol
+@docs TextDirection
+@docs TimeUnit
+@docs TitleFrame
 @docs TitleProperty
 @docs TopMarkProperty
 @docs Transform
+@docs TreemapMethod
 @docs TreemapProperty
+@docs TreeMethod
 @docs TreeProperty
 @docs Trigger
 @docs TriggerProperty
+@docs VAlign
 @docs Value
 @docs VoronoiProperty
 @docs WindowOperation
 @docs WindowProperty
+@docs WOperation
 @docs WordcloudProperty
 
 -}
@@ -2180,12 +2779,12 @@ to the functions that generate them.
 import Json.Encode as JE
 
 
+
 -- Opaque Types
 -- ############
 
 
-{-| Generated by [agAs](#agAs),
-[agCross](#agCross), [agDrop](#agDrop), [agFields](#agFields),
+{-| Generated by [agAs](#agAs), [agCross](#agCross), [agDrop](#agDrop), [agFields](#agFields),
 [agGroupBy](#agGroupBy), [agOps](#agOps) and [agKey](#agKey).
 -}
 type AggregateProperty
@@ -2196,6 +2795,44 @@ type AggregateProperty
     | AgCross Boo
     | AgDrop Boo
     | AgKey Field
+
+
+{-| Generated by [anStart](#anStart), [anMiddle](#anMiddle), [anEnd](#anEnd) and
+[anchorSignal](#anchorSignal).
+-}
+type Anchor
+    = Start
+    | Middle
+    | End
+    | AnchorSignal String
+
+
+{-| Generated by [asContent](#asContent), [asFit](#asFit), [asFitX](#asFitX),
+[asFitY](#asFitY), [asNone](#asNone), [asPad](#asPad), [asPadding](#asPadding),
+[asResize](#asReeize) and [asSignal](#asSignal).
+-}
+type Autosize
+    = AContent
+    | AFit
+    | AFitX
+    | AFitY
+    | ANone
+    | APad
+    | APadding
+    | AResize
+    | AutosizeSignal String
+
+
+{-| Generated by [aeAxis](#aeAxis), [aeTicks](#aeTicks), [aeGrid](#aeGrid),
+[aeLabels](#aeLabels), [aeTitle](#aeTitle) and [aeDomain](#aeDomain).
+-}
+type AxisElement
+    = EAxis
+    | ETicks
+    | EGrid
+    | ELabels
+    | ETitle
+    | EDomain
 
 
 {-| Generated by [axBandPosition](#axBandPosition), [axDomain](#axDomain),
@@ -2281,6 +2918,20 @@ type AxisProperty
     | AxZIndex Num
 
 
+{-| Generated by [axAll](#axAll), [axLeft](#axLeft), [axTop](#axTop), [axRight](#axRight),
+[axBottom](#axBottom), [axX](#axX), [axY](#axY) and [axBand](#axBand)
+-}
+type AxisType
+    = AxAll
+    | AxLeft
+    | AxTop
+    | AxRight
+    | AxBottom
+    | AxX
+    | AxY
+    | AxBand
+
+
 {-| Generated by [iRange](#iRange), [iCheckbox](#iCheckbox), [iRadio](#iRadio),
 [iSelect](#iSelect), [iText](#iText), [iNumber](#iNumber), [iDate](#iDate),
 [iTime](#iTime), [iMonth](#iMonth), [iWeek](#iWeek), [iDateTimeLocal](#iDateTimeLocal),
@@ -2302,10 +2953,9 @@ type Bind
     | IColor (List InputProperty)
 
 
-{-| Generated by [bnAnchor](#bnAnchor),
-[bnMaxBins](#bnMaxBins), [bnBase](#bnBase), [bnStep](#bnStep), [bnSteps](#bnSteps),
-[bnMinStep](#bnMinStep), [bnDivide](#bnDivide), [bnNice](#bnNice), [bnSignal](#bnSignal)
-and [bnAs](#bnAs).
+{-| Generated by [bnAnchor](#bnAnchor), [bnMaxBins](#bnMaxBins), [bnBase](#bnBase),
+[bnStep](#bnStep), [bnSteps](#bnSteps), [bnMinStep](#bnMinStep), [bnDivide](#bnDivide),
+[bnNice](#bnNice), [bnSignal](#bnSignal) and [bnAs](#bnAs).
 -}
 type BinProperty
     = BnAnchor Num
@@ -2320,8 +2970,8 @@ type BinProperty
     | BnAs String String
 
 
-{-| Generated by [true](#true), [false](#false),
-[boos](#boos), [booSignal](#booSignal), [booSignals](#booSignals) and [booExpr](#booExpr)
+{-| Generated by [true](#true), [false](#false), [boos](#boos), [booSignal](#booSignal),
+[booSignals](#booSignals) and [booExpr](#booExpr)
 -}
 type Boo
     = Boo Bool
@@ -2329,6 +2979,36 @@ type Boo
     | BooSignal String
     | BooSignals (List String)
     | BooExpr Expr
+
+
+{-| Generated by [bcFull](#bcFull), [bcFlush](#bcFlush) and [bc](#bcSignal).
+-}
+type BoundsCalculation
+    = Full
+    | Flush
+    | BoundsCalculationSignal String
+
+
+{-| Generated by [lowercase](#lowercase), [uppercase](#uppercase) and [mixedcase](#mixedcase).
+-}
+type Case
+    = Lowercase
+    | Uppercase
+    | Mixedcase
+
+
+{-| Generated by [hcl](#hcl), [hsl](#hsl), [lab](#lab), [cubeHelix](#cubeHelix),
+[cubeHelixLong](#cubeHelixLong), [hclLong](#hclLong), [hslLong](#hslLong) and [rgb](#rgb).
+-}
+type CInterpolate
+    = CubeHelix Float
+    | CubeHelixLong Float
+    | Hcl
+    | HclLong
+    | Hsl
+    | HslLong
+    | Lab
+    | Rgb Float
 
 
 {-| Generated by [clEnabled](#clEnabled), [clPath](#clPath) and [clSphere](#clSphere).
@@ -2339,8 +3019,7 @@ type Clip
     | ClSphere Str
 
 
-{-| Generated by [csScheme](#csScheme), [csCount](#csCount)
-and [csExtent](#csExtent).
+{-| Generated by [csScheme](#csScheme), [csCount](#csCount) and [csExtent](#csExtent).
 -}
 type ColorSchemeProperty
     = SScheme Str
@@ -2357,8 +3036,7 @@ type ColorValue
     | HCL (List Value) (List Value) (List Value)
 
 
-{-| Generated by
-[cfAutosize](#cfAutosize), [cfBackground](#cfBackground), [cfGroup](#cfGroup),
+{-| Generated by [cfAutosize](#cfAutosize), [cfBackground](#cfBackground), [cfGroup](#cfGroup),
 [cfEvents](#cfEvents), [cfMark](#cfMark), [cfMarks](#cfMarks), [cfStyle](#cfStyle),
 [cfAxis](#cfAxis), [cfLegend](#cfLegend), [cfTitle](#cfTitle), and [cfScaleRange](#cfScaleRange).
 -}
@@ -2376,8 +3054,7 @@ type ConfigProperty
     | CfScaleRange ScaleRange ScaleRange
 
 
-{-| Generated by
-[cnValues](#cnValues), [cnX](#cnX), [cnY](#cnY), [cnCellSize](#cnCellSize),
+{-| Generated by [cnValues](#cnValues), [cnX](#cnX), [cnY](#cnY), [cnCellSize](#cnCellSize),
 [cnBandwidth](#cnBandWidth), [cnSmooth](#cnSmooth), [cnThresholds](#cnThresholds),
 [cnCount](#cnCount) and [cnNice](#cnNice).
 -}
@@ -2393,9 +3070,8 @@ type ContourProperty
     | CnNice Boo
 
 
-{-| Generated by
-[cpPattern](#cpPattern), [cpCase](#cpCase), [cpStopwords](#cpStopwords) and
-[cpAs](#cprAs).
+{-| Generated by [cpPattern](#cpPattern), [cpCase](#cpCase), [cpStopwords](#cpStopwords)
+and [cpAs](#cprAs).
 -}
 type CountPatternProperty
     = CPPattern Str
@@ -2409,6 +3085,47 @@ type CountPatternProperty
 type CrossProperty
     = CrFilter Expr
     | CrAs String String
+
+
+{-| Generated by functions that start with `cu`.
+-}
+type Cursor
+    = CAuto
+    | CDefault
+    | CNone
+    | CContextMenu
+    | CHelp
+    | CPointer
+    | CProgress
+    | CWait
+    | CCell
+    | CCrosshair
+    | CText
+    | CVerticalText
+    | CAlias
+    | CCopy
+    | CMove
+    | CNoDrop
+    | CNotAllowed
+    | CAllScroll
+    | CColResize
+    | CRowResize
+    | CNResize
+    | CEResize
+    | CSResize
+    | CWResize
+    | CNEResize
+    | CNWResize
+    | CSEResize
+    | CSWResize
+    | CEWResize
+    | CNSResize
+    | CNESWResize
+    | CNWSEResize
+    | CZoomIn
+    | CZoomOut
+    | CGrab
+    | CGrabbing
 
 
 {-| Convenience type annotation label for use with data generation functions.
@@ -2434,6 +3151,19 @@ type alias DataColumn =
     List LabelledSpec
 
 
+{-| Generated by [daFormat](#daFormat), [daSource](#daSource), [daSources](#daSources),
+[daValue](#daValue),[daOn](#daOn), [daUrl](#daUrl) and [daSphere](#daSphere).
+-}
+type DataProperty
+    = DaFormat (List FormatProperty)
+    | DaSource String
+    | DaSources (List String)
+    | DaValue Value
+    | DaSphere
+    | DaOn (List Trigger)
+    | DaUrl Str
+
+
 {-| Generated by [daDataset](#daDataset), [daField](#daField), [daFields](#daFields),
 [daSignal](#daSignal), [daValues](#daValues) [daReferences](#daReferences) and
 [daSort](#daSort).
@@ -2448,8 +3178,7 @@ type DataReference
     | DSort (List SortProperty)
 
 
-{-| A single row of data. Generated when creating inline data with
-[dataRow](#dataRow).
+{-| A single row of data. Generated when creating inline data with [dataRow](#dataRow).
 -}
 type alias DataRow =
     Spec
@@ -2463,8 +3192,25 @@ type alias DataTable =
     List LabelledSpec
 
 
-{-| Generated by [dnExtent](#dnExtent), [dnMethod](#dnMethod),
-[dnSteps](#dnSteps) and [dnAs](#dnAs).
+{-| Generated by [foNum](#foNum), [foBoo](#foBoo), [foDate](#foDate) and [foUtc](#foUtc).
+-}
+type DataType
+    = FoNum
+    | FoBoo
+    | FoDate String
+    | FoUtc String
+
+
+{-| Generated by [dnPdf](#dnPdf), [dnCdf](#dnCdf) and [dnSignal](#dnSignal)
+-}
+type DensityFunction
+    = PDF
+    | CDF
+    | DensityFunctionSignal String
+
+
+{-| Generated by [dnExtent](#dnExtent), [dnMethod](#dnMethod), [dnSteps](#dnSteps)
+and [dnAs](#dnAs).
 -}
 type DensityProperty
     = DnExtent Num
@@ -2473,8 +3219,8 @@ type DensityProperty
     | DnAs String String
 
 
-{-| Generated by [diNormal](#diNormal),
-[diUniform](#diUniform), [diKde](#diKde) and [diMixture](#diMixture).
+{-| Generated by [diNormal](#diNormal), [diUniform](#diUniform), [diKde](#diKde)
+and [diMixture](#diMixture).
 -}
 type Distribution
     = DiNormal Num Num
@@ -2483,14 +3229,32 @@ type Distribution
     | DiMixture (List ( Distribution, Num ))
 
 
-{-| Generated by [evHandler](#evHandler),
-[evUpdate](#evUpdate), [evEncode](#evEncode) and [evForce](#evForce).
+{-| Generated by [efPrevent](#efPrevent) and [efAllow](#efAllow).
+-}
+type EventFilter
+    = Prevent
+    | Allow
+
+
+{-| Generated by [evHandler](#evHandler), [evUpdate](#evUpdate), [evEncode](#evEncode)
+and [evForce](#evForce).
 -}
 type EventHandler
     = EEvents (List EventStream)
     | EUpdate String
     | EEncode String
     | EForce Boo
+
+
+{-| Generated by [esAll](#esAll), [esView](#esView), [esScope](#esScope),
+[esWindow](#esWindow) and [esDom](#esDom).
+-}
+type EventSource
+    = ESAll
+    | ESView
+    | ESScope
+    | ESWindow
+    | ESDom String
 
 
 {-| Generated by [esObject](#esObject), [esSelector](#esSelector), [esSignal](#esSignal)
@@ -2521,9 +3285,39 @@ type EventStreamProperty
     | ESDerived EventStream
 
 
-{-| Generated by [enEnter](#enEnter), [enUpdate](#enUpdate),
-[enExit](#enExit), [enHover](#enHover), [enName](#enName), [enInteractive](#enInteractive)
-and [enCustom](#enCustom).
+{-| Generated by [etClick](#etClick), [etDblClick](#etDblClick), [etDragEnter](#etDragEnter),
+[etDragLeave](#etDragLeave), [etDragOver](#etDragOver), [etKeyDown](#etKeyDown),
+[etKeyPress](#etKeyPress), [etKeyUp](#etKeyUp), [etMouseDown](#etMouseDown),
+[etMouseMove](#etMouseMove), [etMouseOut](#etMouseOut), [etMouseOver](#etMouseOver),
+[etMouseUp](#etMouseUp), [etMouseWheel](#etMouseWheel), [etTouchEnd](#etTouchEnd),
+[etTouchMove](#etTouchMove), [etTouchStart](#etTouchStart), [etWheel](#etWheel)
+and [etTimer](#etTimer).
+-}
+type EventType
+    = Click
+    | DblClick
+    | DragEnter
+    | DragLeave
+    | DragOver
+    | KeyDown
+    | KeyPress
+    | KeyUp
+    | MouseDown
+    | MouseMove
+    | MouseOut
+    | MouseOver
+    | MouseUp
+    | MouseWheel
+    | TouchEnd
+    | TouchMove
+    | TouchStart
+    | Wheel
+    | Timer
+
+
+{-| Generated by [enEnter](#enEnter), [enUpdate](#enUpdate), [enExit](#enExit),
+[enHover](#enHover), [enName](#enName), [enInteractive](#enInteractive) and
+[enCustom](#enCustom).
 -}
 type EncodingProperty
     = Enter (List MarkProperty)
@@ -2535,17 +3329,14 @@ type EncodingProperty
     | Custom String (List MarkProperty)
 
 
-{-| A Vega [Expr](https://vega.github.io/vega/docs/types/#Expr) that can be either
-a field lookup or a full expression that is evaluated once per datum. Generated
-by [exField](#exField) and [expr](#expr).
+{-| Generated by [exField](#exField) and [expr](#expr).
 -}
 type Expr
     = ExField String
     | Expr String
 
 
-{-| Generated by [faAggregate](#faAggregate),
-[faField](#faField) and [faGroupBy](#faGroupBy).
+{-| Generated by [faAggregate](#faAggregate), [faField](#faField) and [faGroupBy](#faGroupBy).
 -}
 type Facet
     = FaName String
@@ -2562,9 +3353,8 @@ type Feature
     | FeName String
 
 
-{-| Generated by [fExpr](#fExpr),
-[fDatum](#fDatum), [fGroup](#fGroup), [field](#field), [fParent](#fParent) and
-[fSignal](#fSignal).
+{-| Generated by [fExpr](#fExpr), [fDatum](#fDatum), [fGroup](#fGroup),
+[field](#field), [fParent](#fParent) and [fSignal](#fSignal).
 -}
 type Field
     = FName String
@@ -2624,6 +3414,24 @@ type ForceSimulationProperty
     | FsAs String String String String
 
 
+{-| Generated by [csv](#csv), [tsv](#tsv), [dsv](#dsv), [json](#json),
+[jsonProperty](#jsonProperty), [topojsonFeature](#topojsonFeature),
+[topojsonMesh](#topojsonMesh), [parse](#parse), [parseAuto](#parseAuto) and
+[fpSignal](#fpSignal).
+-}
+type FormatProperty
+    = JSON
+    | JSONProperty Str
+    | CSV
+    | TSV
+    | DSV Str
+    | TopojsonFeature Str
+    | TopojsonMesh Str
+    | Parse (List ( String, DataType ))
+    | ParseAuto
+    | FormatPropertySignal String
+
+
 {-| Generated by [gjFields](#gjFields), [gjFeature](#gjFeature) and [gjSignal](#gjSignal).
 -}
 type GeoJsonProperty
@@ -2654,6 +3462,40 @@ type GraticuleProperty
     | GrStepMinor Num
     | GrStep Num
     | GrPrecision Num
+
+
+{-| Generated by [grAlignAll](#grAlignAll), [grAlignEach](#grAlignEach),
+[grAlignNone](#grAlignNone), [grAlignRow](#grAlignRow), [grAlignColumn](#grAlignColumn)
+and [grAlignSignal](#grAlignSignal).
+-}
+type GridAlign
+    = AlignAll
+    | AlignEach
+    | AlignNone
+    | AlignRow GridAlign
+    | AlignColumn GridAlign
+    | AlignSignal String
+
+
+{-| Generated by [haLeft](#haLeft), [haCenter](#haCenter), [haRight](#haRight)
+and [haSignal](#haSignal).
+-}
+type HAlign
+    = AlignCenter
+    | AlignLeft
+    | AlignRight
+    | HAlignSignal String
+
+
+{-| Generated by [imByMin](#imByMin), [imByMax](#imByMax), [imByMean](#imByMean),
+[imByMedian](#imByMedian) and [imByValue](#imByValue).
+-}
+type ImputeMethod
+    = ByValue
+    | ByMean
+    | ByMedian
+    | ByMax
+    | ByMin
 
 
 {-| Generated by
@@ -2724,6 +3566,24 @@ type LegendEncoding
     | EnLabels (List EncodingProperty)
     | EnSymbols (List EncodingProperty)
     | EnGradient (List EncodingProperty)
+
+
+{-| Generated by [loLeft](#loLeft), [loTopLeft](#loTopLeft), [loTop](#loTop),
+[loTopRight](#loTopRight), [loRight](#loRight), [loBottomRight](#loBottomRight),
+[loBottom](#loBottom), [loBottomLeft](#loBottomLeft), [loNone](#loNone) and
+[loSignal](#loSignal).
+-}
+type LegendOrientation
+    = Left
+    | TopLeft
+    | Top
+    | TopRight
+    | Right
+    | BottomRight
+    | Bottom
+    | BottomLeft
+    | None
+    | LegendOrientationSignal String
 
 
 {-| Generated by [leType](#leType), [leDirection](#leDirection), [leOrient](#leOrient),
@@ -2817,6 +3677,14 @@ type LegendProperty
     | LeZIndex Num
 
 
+{-| Generated by [ltSymbol](#ltSymbol), [ltGradient](#ltGradient) and [ltSignal](#ltSignal).
+-}
+type LegendType
+    = LSymbol
+    | LGradient
+    | LegendTypeSignal String
+
+
 {-| Generated by [lpSourceY](#lpSourceY),
 [lpTargetX](#lpTargetX), [lpTargetY](#lpTargetY), [lpOrient](#lpOrient),
 [lpShape](#lpShape) and [lpAs](#lpAs).
@@ -2831,6 +3699,18 @@ type LinkPathProperty
     | LPAs String
 
 
+{-| Generated by [lsLine](#lsLine), [lsArc](#lsArc), [lsCurve](#lsCurve),
+[lsDiagonal](#lsDiagonal), [lsOrthogonal](#lsOrthogonal) and [lsSignal](#lsSignal).
+-}
+type LinkShape
+    = LinkLine
+    | LinkArc
+    | LinkCurve
+    | LinkDiagonal
+    | LinkOrthogonal
+    | LinkShapeSignal String
+
+
 {-| Generated by [luValues](#luValues),
 [luAs](#luAs) and [luDefault](#luDefault).
 -}
@@ -2838,6 +3718,43 @@ type LookupProperty
     = LValues (List Field)
     | LAs (List String)
     | LDefault Value
+
+
+{-| Generated by [arc](#arc), [area](#area), [image](#image), [group](#group),
+[line](#line), [path](#path), [rect](#rect), [rule](#rule), [shape](#shape),
+[symbol](#symbol), [text](#text) and [trail](#trail).
+-}
+type Mark
+    = Arc
+    | Area
+    | Image
+    | Group
+    | Line
+    | Path
+    | Rect
+    | Rule
+    | Shape
+    | Symbol
+    | Text
+    | Trail
+
+
+{-| Generated by [miBasis](#miBasis), [miBundle](#miBundle), [miCardinal](#miCardinal),
+[miCatmullRom](#miCatmullRom), [miLinear](#miLinear), [miMonotone](#miMonotone),
+[miNatural](#miNatural), [miStepwise](#miStepwise), [miStepwiseAfter](#miStepwiseAfter)
+and [miStepwiseBefore](#miStepwiseBefore).
+-}
+type MarkInterpolation
+    = Basis
+    | Bundle
+    | Cardinal
+    | CatmullRom
+    | Linear
+    | Monotone
+    | Natural
+    | Stepwise
+    | StepAfter
+    | StepBefore
 
 
 {-| Generated by [maX](#maX),
@@ -2939,6 +3856,65 @@ type Num
     | NumNull
 
 
+{-| Generated by [opArgMax](#opArgMax), [opArgMin](#opArgMin), [opCI0](#opCI0),
+[opCI1](#opCI1), [opCount](#opCount), [opDistinct](#opDistinct), [opMax](#opMax),
+[opMean](#opMean), [opMedian](#opMedian), [opMin](#opMin), [opMissing](#opMissing),
+[opQ1](#opQ1), [opQ3](#opQ3), [opStderr](#opStderr), [opStdev](#opStdev),
+[opStdevP](#opStdevP), [opSum](#opSum), [opValid](#opValid),
+[opVariance](#opVariance), [opVarianceP](#opVarianceP). and [opSignal](#opSignal).
+-}
+type Operation
+    = ArgMax
+    | ArgMin
+    | CI0
+    | CI1
+    | Count
+    | Distinct
+    | Max
+    | Mean
+    | Median
+    | Min
+    | Missing
+    | Q1
+    | Q3
+    | Stderr
+    | Stdev
+    | StdevP
+    | Sum
+    | Valid
+    | Variance
+    | VarianceP
+    | OperationSignal String
+
+
+{-| Generated by [ascend](#ascend), [descend](#descend) and [orderSignal](#orderSignal).
+-}
+type Order
+    = Ascend
+    | Descend
+    | OrderSignal String
+
+
+{-| Generated by [orHorizontal](#orHorizontal), [orVertical](#orVertical),
+[orRadial](#orRadial) and [orSignal](#orSignal).
+-}
+type Orientation
+    = Horizontal
+    | Vertical
+    | Radial
+    | OrientationSignal String
+
+
+{-| Generated by [osNone](#osNone), [osGreedy](#osGreedy), [osParity](#osParity)
+and [osSignal](#osSignal).
+-}
+type OverlapStrategy
+    = ONone
+    | OParity
+    | OGreedy
+    | OverlapStrategySignal String
+
+
 {-| Generated by [paField](#paField),
 [paSort](#paSort), [paSize](#paSize), [paRadius](#paRadius), [paPadding](#paPadding)
 and [paAs](#paAs).
@@ -2985,6 +3961,34 @@ type PivotProperty
     | PiOp Operation
 
 
+{-| Generated by [albers](#albers), [albersUsa](#albersUsa),
+[azimuthalEqualArea](#azimuthalEqualArea), [azimuthalEquidistant](#azimuthalEquidistant),
+[conicConformal](#conicConformal), [conicEqualArea](#conicEqualArea),
+[conicEquidistant](#conicEquidistant), [equirectangular](#equirectangular),
+[gnomonic](#gnomonic), [mercator](#mercator), [naturalEarth1](#naturalEarth1),
+[orthographic](#orthographic), [stereographic](#stereographic),
+[transverseMercator](#transverseMercator), [customProjection](#customProjection)
+and [prSignal](#prSignal).
+-}
+type Projection
+    = Albers
+    | AlbersUsa
+    | AzimuthalEqualArea
+    | AzimuthalEquidistant
+    | ConicConformal
+    | ConicEqualArea
+    | ConicEquidistant
+    | Equirectangular
+    | Gnomonic
+    | Mercator
+    | NaturalEarth1
+    | Orthographic
+    | Stereographic
+    | TransverseMercator
+    | Proj Str
+    | ProjectionSignal String
+
+
 {-| Generated by
 [prType](#prType), [prClipAngle](#prClipAngle), [prClipExtent](#prClipExtent),
 [prScale](#prScale), [prTranslate](#prTranslate), [prCenter](#prCenter), [prRotate](#prRotate),
@@ -3018,13 +4022,59 @@ type ProjectionProperty
     | PrTilt Num
 
 
-{-| Generated by [doNums](#doNums),
-[doStrs](#doStrs) and [doData](#doData).
+{-| Generated by [scLinear](#scLinear), [scPow](#scPow), [scSqrt](#scSqrt), [scLog](#scLog),
+[scTime](#scTime), [scUtc](#scUtc), [scSequential](#scSequential), [scOrdinal](#scOrdinal),
+[scBand](#scBand), [scPoint](#scPoint), [scBinLinear](#scBinLinear), [scBinOrdinal](#scBinOrdinal),
+[scQuantile](#scQuantile), [scQuantize](#scQuantize),[scThreshold](#scThreshold),
+[scCustom](#scCustom) and [scSignal](#scSignal).
+-}
+type Scale
+    = ScLinear
+    | ScPow
+    | ScSqrt
+    | ScLog
+    | ScTime
+    | ScUtc
+    | ScSequential
+    | ScOrdinal
+    | ScBand
+    | ScPoint
+    | ScQuantile
+    | ScQuantize
+    | ScThreshold
+    | ScBinLinear
+    | ScBinOrdinal
+    | ScCustom String
+    | ScaleSignal String
+
+
+{-| Generated by [doNums](#doNums), [doStrs](#doStrs) and [doData](#doData).
 -}
 type ScaleDomain
     = DoNums Num
     | DoStrs Str
     | DoData (List DataReference)
+
+
+{-| Generated by [niTrue](#niTrue), [niFalse](#niFalse), [niMillisecond](#niMillisecond),
+[niSecond](#niSecond), [niMinute](#niMinute), [niHour](#niHour), [niDay](#niDay),
+[niWeek](#niWeek), [niMonth](#niMonth), [niYear](#niYear), [niTickCount](#niTickCount),
+[niInterval](#niInterval) and [niSignal](#niSignal).
+-}
+type ScaleNice
+    = NMillisecond
+    | NSecond
+    | NMinute
+    | NHour
+    | NDay
+    | NWeek
+    | NMonth
+    | NYear
+    | NInterval TimeUnit Int
+    | NTrue
+    | NFalse
+    | NTickCount Int
+    | ScaleNiceSignal String
 
 
 {-| Generated by [scType](#scType), [scDomain](#scDomain),
@@ -3060,20 +4110,19 @@ type ScaleProperty
     | SRangeStep Num
 
 
-{-| Describes a scale range of scale output values. In addition to the preset default
-options (`RaWidth`, `RaHeight` etc.), scale ranges can be generated by [raNums](#raNums),
-[raStrs](#raStrs), [raValues](#raValues), [raSignal](#raSignal), [raScheme](#raScheme),
-[raData](#raData), [raStep](#raStep) and [raCustomDefault](#raCustomDefault).
+{-| Generated by [raWidth](#raWidth), [raHeight](#raHeight), [raSymbol](#raSymbol),
+[raCategory](#raCategory), [raDiverging](#raDiverging), [raOrdinal](#raOrdinal),
+[raRamp](#raRamp), [raHeatmap](#raHeatmap), [raNums](#raNums), [raStrs](#raStrs),
+[raValues](#raValues), [raScheme](#raScheme), [raData](#raData), [raStep](#raStep),
+[raCustomDefault](#raCustomDefault) and [raSignal](#raSignal).
 -}
 type ScaleRange
-    = RNums (List Float)
-    | RStrs (List String)
-    | RValues (List Value)
-    | RSignal String
-    | RScheme Str (List ColorSchemeProperty)
-    | RData (List DataReference)
-    | RStep Value
-    | RCustom String
+    = RaNums (List Float)
+    | RaStrs (List String)
+    | RaValues (List Value)
+    | RaScheme Str (List ColorSchemeProperty)
+    | RaData (List DataReference)
+    | RaStep Value
     | RaWidth
     | RaHeight
     | RaSymbol
@@ -3082,7 +4131,19 @@ type ScaleRange
     | RaOrdinal
     | RaRamp
     | RaHeatmap
-    | ScaleRangeSignal String
+    | RaCustom String
+    | RaSignal String
+
+
+{-| Generated by [siLeft](#siLeft), [siRight](#siRight), [siTop](#siTop),
+[siBottom](#siBottom) and [siSignal](#siSignal).
+-}
+type Side
+    = SLeft
+    | SRight
+    | STop
+    | SBottom
+    | SideSignal String
 
 
 {-| Generated by [siName](#siName), [siBind](#siBind),
@@ -3100,6 +4161,17 @@ type SignalProperty
     | SiPushOuter
 
 
+{-| Generated by [soAscending](#soAscending), [soDescending](#soDescending),
+[soOp](#soOp), [soByField](#soByField) and [soSignal](#soSignal).
+-}
+type SortProperty
+    = Ascending
+    | Descending
+    | Op Operation
+    | ByField Str
+    | SortPropertySignal String
+
+
 {-| Generated by [srData](#srData) and [srFacet](#srFacet).
 -}
 type Source
@@ -3112,6 +4184,25 @@ They can range from a single Boolean value up to the entire Vega specification.
 -}
 type alias Spec =
     JE.Value
+
+
+{-| Generated by [spArchimedean](#spArchimedean), [spRectangular](#spRectangular)
+and [spSignal](#spSignal).
+-}
+type Spiral
+    = Archimedean
+    | Rectangular
+    | SpiralSignal String
+
+
+{-| Generated by [stZero](#stZero), [stCenter](#stCenter), [stNormaize](#stNormalize)
+and [stOffset](#stOffset).
+-}
+type StackOffset
+    = OfZero
+    | OfCenter
+    | OfNormalize
+    | StackOffsetSignal String
 
 
 {-| Generated by [stField](#stField),
@@ -3137,6 +4228,77 @@ type Str
     | StrList (List Str)
     | StrExpr Expr
     | StrNull
+
+
+{-| Generated by [caButt](#caButt), [caRound](#caRound), [caSquare](#caSquare)
+and [caSignal](#caSignal).
+-}
+type StrokeCap
+    = CButt
+    | CRound
+    | CSquare
+    | StrokeCapSignal String
+
+
+{-| Generated by [joMiter](#joMiter), [joRound](#joRound), [joBevel](#joBevel)
+and [joSignal](#joSignal)
+-}
+type StrokeJoin
+    = JMiter
+    | JRound
+    | JBevel
+    | StrokeJoinSignal String
+
+
+{-| Generated by [symCircle](#symCircle), [symSquare](#symSquare), [symCross](#symCross),
+[symDiamond](#symDiamond), [symTriangleUp](#symTriangleUp), [symTriangleDown](#symTriangleDown),
+[symTriangleLeft](#symTriangleLeft), [symTriangleRight](#symTriangleRight), [symPath](#symPath)
+and [symSignal](#symSignal).
+-}
+type Symbol
+    = SymCircle
+    | SymSquare
+    | SymCross
+    | SymDiamond
+    | SymTriangleUp
+    | SymTriangleDown
+    | SymTriangleLeft
+    | SymTriangleRight
+    | SymPath String
+    | SymbolSignal String
+
+
+{-| Generated by [tdLeftToRight](#tdLeftToRight), [tdRightToLeft](#tdRightToLeft)
+and [tdSignal](#tdSignal).
+-}
+type TextDirection
+    = LeftToRight
+    | RightToLeft
+    | TextDirectionSignal String
+
+
+{-| Generated by [year](#year), [month](#month), [week](#week), [day](#day),
+[hour](#hour), [minute](#minute),[second](#second), [millisecond](#millisecond)
+and [tuSignal](#tuSignal).
+-}
+type TimeUnit
+    = Year
+    | Month
+    | Week
+    | Day
+    | Hour
+    | Minute
+    | Second
+    | Millisecond
+    | TimeUnitSignal String
+
+
+{-| Generated by [tfBounds](#tfBounds), [tfGroup](#tfGroup) and [tfSignal](#tfSignal).
+-}
+type TitleFrame
+    = FrBounds
+    | FrGroup
+    | TitleFrameSignal String
 
 
 {-| Generated by [tiOrient](#tiOrient),
@@ -3258,6 +4420,20 @@ type Transform
     | TWordcloud (List WordcloudProperty)
 
 
+{-| Generated by [tmSquarify](#tmSquarify), [tmResquarify](#tmResquarify),
+[tmBinary](#tmBinary), [tmDice](#tmDice), [tmSlice](#tmSlice), [tmSliceDice](#tmSliceDice)
+and [tmSignal](#tmSignal).
+-}
+type TreemapMethod
+    = TmSquarify
+    | TmResquarify
+    | TmBinary
+    | TmDice
+    | TmSlice
+    | TmSliceDice
+    | TmSignal String
+
+
 {-| Generated by [tmField](#tmField), [tmSort](#tmSort), [tmMethod](#tmMethod),
 [tmPadding](#tmPadding), [tmPaddingInner](#tmPaddingInner), [tmPaddingOuter](#tmPaddingOuter),
 [tmPaddingTop](#tmPaddingTop), [tmPaddingRight](#tmPaddingRight), [tmPaddingBottom](#tmPaddingBottom),
@@ -3279,6 +4455,14 @@ type TreemapProperty
     | TmRound Boo
     | TmSize Num
     | TmAs String String String String String String
+
+
+{-| Generated by [meTidy](#meTidy), [meCluster](#meCluster) and [meSignal](#meSignal).
+-}
+type TreeMethod
+    = Tidy
+    | Cluster
+    | TreeMethodSignal String
 
 
 {-| Generated by [teField](#teField), [teSort](#teSort), [teMethod](#teMethod),
@@ -3392,6 +4576,48 @@ type WordcloudProperty
 -- ###########################
 
 
+{-| Reference the axis element when customising an axis.
+-}
+aeAxis : AxisElement
+aeAxis =
+    EAxis
+
+
+{-| Reference the domain (line) element when customising an axis.
+-}
+aeDomain : AxisElement
+aeDomain =
+    EDomain
+
+
+{-| Reference the grid element when customising an axis.
+-}
+aeGrid : AxisElement
+aeGrid =
+    EGrid
+
+
+{-| Reference the label element when customising an axis.
+-}
+aeLabels : AxisElement
+aeLabels =
+    ELabels
+
+
+{-| Reference the tick element when customising an axis.
+-}
+aeTicks : AxisElement
+aeTicks =
+    ETicks
+
+
+{-| Reference the title element when customising an axis.
+-}
+aeTitle : AxisElement
+aeTitle =
+    ETitle
+
+
 {-| The output field names generated when performing an aggregation transformation.
 The list of field names should align with the fields operations provided by `agFields`
 and `agOps`. If not provided, automatic names are generated by appending `_field`
@@ -3465,13 +4691,18 @@ agOps =
     AgOps
 
 
-{-| An anchor position, as used for example, in placing title text.
+{-| An Albers map projection.
 -}
-type Anchor
-    = Start
-    | Middle
-    | End
-    | AnchorSignal String
+albers : Projection
+albers =
+    Albers
+
+
+{-| An Albers USA map projection that combines continental USA with Alaska and Hawaii.
+-}
+albersUsa : Projection
+albersUsa =
+    AlbersUsa
 
 
 {-| Indicate that an anchor position is to be determined by a named signal.
@@ -3482,19 +4713,115 @@ anchorSignal =
     AnchorSignal
 
 
-{-| Auto-sizing characteristics of the visualization such as amount of padding,
-whether it should fill the parent container etc.
+{-| Anchor some text at its end.
 -}
-type Autosize
-    = AContent
-    | AFit
-    | AFitX
-    | AFitY
-    | ANone
-    | APad
-    | APadding
-    | AResize
-    | AutosizeSignal String
+anEnd : Anchor
+anEnd =
+    End
+
+
+{-| Anchor some text in its start.
+-}
+anMiddle : Anchor
+anMiddle =
+    Middle
+
+
+{-| Anchor some text at its start.
+-}
+anStart : Anchor
+anStart =
+    Start
+
+
+{-| An arc mark.
+-}
+arc : Mark
+arc =
+    Arc
+
+
+{-| An area mark.
+-}
+area : Mark
+area =
+    Area
+
+
+{-| Indicate ascending order when sorting.
+-}
+ascend : Order
+ascend =
+    Ascend
+
+
+{-| Interpret visualization dimensions to be for the data rectangle (external
+padding added to this size).
+-}
+asContent : Autosize
+asContent =
+    AContent
+
+
+{-| Interpret visualization dimensions to be for the entire visualization (data
+rectangle is shrunk to accommodate external decorations padding).
+-}
+asFit : Autosize
+asFit =
+    AFit
+
+
+{-| Interpret visualization width to be for the entire visualization (data
+rectangle is shrunk to accommodate external decorations and padding).
+-}
+asFitX : Autosize
+asFitX =
+    AFitX
+
+
+{-| Interpret visualization height to be for the entire visualization (data
+rectangle is shrunk to accommodate external padding).
+-}
+asFitY : Autosize
+asFitY =
+    AFitY
+
+
+{-| No autosizing to be applied.
+-}
+asNone : Autosize
+asNone =
+    ANone
+
+
+{-| Automatically expand size of visulization from the given dimensions in order
+to fit in all supplemtary decorations (legends etc.).
+-}
+asPad : Autosize
+asPad =
+    APad
+
+
+{-| Interpret visualization width to be for the entire visualization (data
+rectangle is shrunk to accommodate external padding).
+-}
+asPadding : Autosize
+asPadding =
+    APadding
+
+
+{-| Recalculate autosizing on every view update.
+-}
+asResize : Autosize
+asResize =
+    AResize
+
+
+{-| Indicate that an auto-sizing rule is to be determined by a named signal.
+-}
+asSignal : String -> Autosize
+asSignal =
+    AutosizeSignal
 
 
 {-| Indicate how the view is sized.
@@ -3504,11 +4831,18 @@ autosize aus =
     ( VAutosize, JE.object (List.map autosizeProperty aus) )
 
 
-{-| Indicate that an auto-sizing rule is to be determined by a named signal.
+{-| All axis types to be configured with [cfAxis](#cfAxis).
 -}
-autosizeSignal : String -> Autosize
-autosizeSignal =
-    AutosizeSignal
+axAll : AxisType
+axAll =
+    AxAll
+
+
+{-| Band axes to be configured with [cfAxis](#cfAxis).
+-}
+axBand : AxisType
+axBand =
+    AxBand
 
 
 {-| Interpolation fraction indicating where, for band scales, axis ticks
@@ -3518,6 +4852,13 @@ A value of 0.5 places ticks in the middle of their bands.
 axBandPosition : Num -> AxisProperty
 axBandPosition =
     AxBandPosition
+
+
+{-| Bottom axes to be configured with [cfAxis](#cfAxis).
+-}
+axBottom : AxisType
+axBottom =
+    AxBottom
 
 
 {-| Whether or not the domain (the axis baseline) should be included as part of
@@ -3566,7 +4907,7 @@ axEncode =
 -}
 axes : List Spec -> ( VProperty, Spec )
 axes axs =
-    ( VAxes, JE.list axs )
+    ( VAxes, JE.list identity axs )
 
 
 {-| The format specifier pattern for axis labels. For numerical values, must be
@@ -3634,30 +4975,6 @@ properties. For example,
 axis : String -> Side -> List AxisProperty -> List Spec -> List Spec
 axis scName side aps =
     (::) (JE.object (AxScale scName :: AxSide side :: aps |> List.map axisProperty))
-
-
-{-| Encodable axis element. Used for customising some part of an axis.
--}
-type AxisElement
-    = EAxis
-    | ETicks
-    | EGrid
-    | ELabels
-    | ETitle
-    | EDomain
-
-
-{-| Identifies the type of axis to be configured with [cfAxis](#cfAxis).
--}
-type AxisType
-    = AxAll
-    | AxLeft
-    | AxTop
-    | AxRight
-    | AxBottom
-    | AxX
-    | AxY
-    | AxBand
 
 
 {-| Indicate how or if labels should be hidden if they exceed the axis range. If the
@@ -3771,6 +5088,13 @@ axLabels =
     AxLabels
 
 
+{-| Left axes to be configured with [cfAxis](#cfAxis).
+-}
+axLeft : AxisType
+axLeft =
+    AxLeft
+
+
 {-| Maximum extent in pixels that axis ticks and labels should use.
 -}
 axMaxExtent : Value -> AxisProperty
@@ -3801,6 +5125,13 @@ orientation, this sets the axis group y coordinate.
 axPosition : Value -> AxisProperty
 axPosition =
     AxPosition
+
+
+{-| Right axes to be configured with [cfAxis](#cfAxis).
+-}
+axRight : AxisType
+axRight =
+    AxRight
 
 
 {-| Tick interval for a temporal axis. The first parameter is the type of temporal
@@ -3982,11 +5313,32 @@ axTitleY =
     AxTitleY
 
 
+{-| Top axes to be configured with [cfAxis](#cfAxis).
+-}
+axTop : AxisType
+axTop =
+    AxTop
+
+
 {-| Explicitly set an axis tick and label values.
 -}
 axValues : Value -> AxisProperty
 axValues =
     AxValues
+
+
+{-| x-axes to be configured with [cfAxis](#cfAxis).
+-}
+axX : AxisType
+axX =
+    AxX
+
+
+{-| y-axes to be configured with [cfAxis](#cfAxis).
+-}
+axY : AxisType
+axY =
+    AxY
 
 
 {-| The z-index indicating the layering of an axis group relative to other axis,
@@ -3999,12 +5351,43 @@ axZIndex =
     AxZIndex
 
 
+{-| An azimuthal equal area map projection.
+-}
+azimuthalEqualArea : Projection
+azimuthalEqualArea =
+    AzimuthalEqualArea
+
+
+{-| An azimuthal equidistant map projection.
+-}
+azimuthalEquidistant : Projection
+azimuthalEquidistant =
+    AzimuthalEquidistant
+
+
 {-| The fill background color of a visualization. This should be specified as a
 [color string](https://vega.github.io/vega/docs/types/#Color).
 -}
 background : Str -> ( VProperty, Spec )
 background s =
     ( VBackground, strSpec s )
+
+
+{-| Only the width and height values of a group mark are to determine the extent
+of a sub-plot in a grid layout. Useful when attempting to place sub-plots without
+axes or legends into a uniform grid structure.
+-}
+bcFlush : BoundsCalculation
+bcFlush =
+    Flush
+
+
+{-| Entire calculated bounds (including axes, title, and legend) to determine the
+extent of a sub-plot in a grid layout.
+-}
+bcFull : BoundsCalculation
+bcFull =
+    Full
 
 
 {-| Indicate that the bounds calculation type is to be determined by a named signal.
@@ -4130,25 +5513,33 @@ booSignals =
     BooSignals
 
 
-{-| The bounds calculation method to determine the extent of a sub-plot in a grid
-layout. `Full` indicates the entire calculated bounds (including axes, title, and
-legend) will be used. `Flush` indicates only the specified width and height values
-for the group mark will be used. The flush setting can be useful when attempting
-to place sub-plots without axes or legends into a uniform grid structure.
+{-| Butt stroke cap.
 -}
-type BoundsCalculation
-    = Full
-    | Flush
-    | BoundsCalculationSignal String
+caButt : StrokeCap
+caButt =
+    CButt
 
 
-{-| Type of text case transformation. Used when pre-processing text as
-part of a count pattern transformation.
+{-| Rounded stroke cap.
 -}
-type Case
-    = Lowercase
-    | Uppercase
-    | Mixedcase
+caRound : StrokeCap
+caRound =
+    CRound
+
+
+{-| Stroke cap (`butt`, `round` and `square`) referenced by the value in the
+named signal.
+-}
+caSignal : String -> StrokeCap
+caSignal =
+    StrokeCapSignal
+
+
+{-| Square stroke cap.
+-}
+caSquare : StrokeCap
+caSquare =
+    CSquare
 
 
 {-| Default autosizing properties of view.
@@ -4251,22 +5642,6 @@ cHCL =
 cHSL : List Value -> List Value -> List Value -> ColorValue
 cHSL =
     HSL
-
-
-{-| Type of color interpolation to apply when mapping a data field onto a color
-scale. Additionally, parameterised interpolation types generated by
-[cubeHelix](#cubeHelix), [cubeHelixLong](#cubeHelixLong), [hclLong](#hclLong),
-[hslLong](#hslLong) and [rgb](#rgb).
--}
-type CInterpolate
-    = CubeHelix Float
-    | CubeHelixLong Float
-    | Hcl
-    | HclLong
-    | Hsl
-    | HslLong
-    | Lab
-    | Rgb Float
 
 
 {-| Define a color in CIELab space (parameters in L - A - B order).
@@ -4406,6 +5781,27 @@ config cps =
     ( VConfig, JE.object (List.map configProperty cps) )
 
 
+{-| A conformal conic map projection.
+-}
+conicConformal : Projection
+conicConformal =
+    ConicConformal
+
+
+{-| An equal area conic map projection.
+-}
+conicEqualArea : Projection
+conicEqualArea =
+    ConicEqualArea
+
+
+{-| An equidistant conic map projection.
+-}
+conicEquidistant : Projection
+conicEquidistant =
+    ConicEquidistant
+
+
 {-| Names the two output fields generated by a count pattern transformation.
 By default they are named `text` and `count`.
 -}
@@ -4486,6 +5882,34 @@ csScheme =
     SScheme
 
 
+{-| Indicate a CSV (comma-separated) format when parsing a data source.
+-}
+csv : FormatProperty
+csv =
+    CSV
+
+
+{-| Scrolling cursor.
+-}
+cuAllScroll : Cursor
+cuAllScroll =
+    CAllScroll
+
+
+{-| Automatically determine a cursor type depending on interaction context.
+-}
+cuAuto : Cursor
+cuAuto =
+    CAuto
+
+
+{-| Alias cursor.
+-}
+cuAlias : Cursor
+cuAlias =
+    CAlias
+
+
 {-| Cube helix color interpolation using the given gamma value (anchored at 1).
 -}
 cubeHelix : Float -> CInterpolate
@@ -4500,46 +5924,172 @@ cubeHelixLong =
     CubeHelixLong
 
 
-{-| Type of cursor to display. See the
-[CSS cursor documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
+{-| Cell cursor.
 -}
-type Cursor
-    = CAuto
-    | CDefault
-    | CNone
-    | CContextMenu
-    | CHelp
-    | CPointer
-    | CProgress
-    | CWait
-    | CCell
-    | CCrosshair
-    | CText
-    | CVerticalText
-    | CAlias
-    | CCopy
-    | CMove
-    | CNoDrop
-    | CNotAllowed
-    | CAllScroll
-    | CColResize
-    | CRowResize
-    | CNResize
-    | CEResize
-    | CSResize
-    | CWResize
-    | CNEResize
-    | CNWResize
-    | CSEResize
-    | CSWResize
-    | CEWResize
-    | CNSResize
-    | CNESWResize
-    | CNWSEResize
-    | CZoomIn
-    | CZoomOut
-    | CGrab
-    | CGrabbing
+cuCell : Cursor
+cuCell =
+    CCell
+
+
+{-| Resizing cursor.
+-}
+cuColResize : Cursor
+cuColResize =
+    CColResize
+
+
+{-| Context menu cursor.
+-}
+cuContextMenu : Cursor
+cuContextMenu =
+    CContextMenu
+
+
+{-| Copy cursor.
+-}
+cuCopy : Cursor
+cuCopy =
+    CCopy
+
+
+{-| Crosshair cursor.
+-}
+cuCrosshair : Cursor
+cuCrosshair =
+    CCrosshair
+
+
+{-| Default cursor.
+-}
+cuDefault : Cursor
+cuDefault =
+    CDefault
+
+
+{-| Resizing cursor.
+-}
+cuEResize : Cursor
+cuEResize =
+    CEResize
+
+
+{-| Resizing cursor.
+-}
+cuEWResize : Cursor
+cuEWResize =
+    CEWResize
+
+
+{-| Grab cursor.
+-}
+cuGrab : Cursor
+cuGrab =
+    CGrab
+
+
+{-| Grabbing cursor.
+-}
+cuGrabbing : Cursor
+cuGrabbing =
+    CGrabbing
+
+
+{-| Help cursor.
+-}
+cuHelp : Cursor
+cuHelp =
+    CHelp
+
+
+{-| Move cursor.
+-}
+cuMove : Cursor
+cuMove =
+    CMove
+
+
+{-| Resizing cursor.
+-}
+cuNEResize : Cursor
+cuNEResize =
+    CNEResize
+
+
+{-| Resizing cursor.
+-}
+cuNESWResize : Cursor
+cuNESWResize =
+    CNESWResize
+
+
+{-| 'No drop' cursor.
+-}
+cuNoDrop : Cursor
+cuNoDrop =
+    CNoDrop
+
+
+{-| No cursor.
+-}
+cuNone : Cursor
+cuNone =
+    CNone
+
+
+{-| 'Not allowed' cursor.
+-}
+cuNotAllowed : Cursor
+cuNotAllowed =
+    CNotAllowed
+
+
+{-| Resizing cursor.
+-}
+cuNResize : Cursor
+cuNResize =
+    CNResize
+
+
+{-| Resizing cursor.
+-}
+cuNSResize : Cursor
+cuNSResize =
+    CNSResize
+
+
+{-| Resizing cursor.
+-}
+cuNWResize : Cursor
+cuNWResize =
+    CNWResize
+
+
+{-| Resizing cursor.
+-}
+cuNWSEResize : Cursor
+cuNWSEResize =
+    CNESWResize
+
+
+{-| Pointer cursor.
+-}
+cuPointer : Cursor
+cuPointer =
+    CPointer
+
+
+{-| Progress cursor.
+-}
+cuProgress : Cursor
+cuProgress =
+    CProgress
+
+
+{-| Resizing cursor.
+-}
+cuRowResize : Cursor
+cuRowResize =
+    CRowResize
 
 
 {-| A convenience function for generating a text value representing a given cursor
@@ -4657,6 +6207,79 @@ cursorValue cur =
             vStr "grabbing"
 
 
+{-| Resizing cursor.
+-}
+cuSEResize : Cursor
+cuSEResize =
+    CSEResize
+
+
+{-| Resizing cursor.
+-}
+cuSResize : Cursor
+cuSResize =
+    CSResize
+
+
+{-| Custom projection type. Additional custom projections from d3 can be defined
+via the [Vega API](https://vega.github.io/vega/docs/projections/#register) and
+called from with this function where the parameter is the name of the D3
+projection to use (e.g. `customProjection (str "winkel3")`).
+-}
+customProjection : Str -> Projection
+customProjection =
+    Proj
+
+
+{-| Resizing cursor.
+-}
+cuSWResize : Cursor
+cuSWResize =
+    CSWResize
+
+
+{-| Text cursor.
+-}
+cuText : Cursor
+cuText =
+    CText
+
+
+{-| Verticla text cursor.
+-}
+cuVerticalText : Cursor
+cuVerticalText =
+    CVerticalText
+
+
+{-| Waiting cursor.
+-}
+cuWait : Cursor
+cuWait =
+    CWait
+
+
+{-| Resizing cursor.
+-}
+cuWResize : Cursor
+cuWResize =
+    CWResize
+
+
+{-| Zooming cursor.
+-}
+cuZoomIn : Cursor
+cuZoomIn =
+    CZoomIn
+
+
+{-| Zooming cursor.
+-}
+cuZoomOut : Cursor
+cuZoomOut =
+    CZoomOut
+
+
 {-| Reference a dataset with the given name.
 -}
 daDataset : String -> DataReference
@@ -4728,6 +6351,13 @@ daSources =
     DaSources
 
 
+{-| Generate a global sphere dataset.
+-}
+daSphere : DataProperty
+daSphere =
+    DaSphere
+
+
 {-| Declare a named dataset. Depending on the properties provided this may be
 from an external file, from a named data source or inline literal values.
 -}
@@ -4764,7 +6394,7 @@ dataColumn colName val =
             (::) [ ( colName, JE.object (List.concatMap valueProperties vals) ) ]
 
         Values vals ->
-            (::) [ ( colName, JE.list (List.map valueSpec vals) ) ]
+            (::) [ ( colName, JE.list valueSpec vals ) ]
 
         _ ->
             (::) [ ( colName, JE.null ) ]
@@ -4785,14 +6415,12 @@ dataFromColumns : String -> List FormatProperty -> List DataColumn -> DataTable
 dataFromColumns name fmts cols =
     let
         dataArray =
-            cols
-                |> transpose
-                |> List.map JE.object
-                |> JE.list
+            JE.list JE.object (transpose cols)
 
         fmt =
             if fmts == [] then
                 []
+
             else
                 [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
     in
@@ -4817,25 +6445,11 @@ dataFromRows name fmts rows =
         fmt =
             if fmts == [] then
                 []
+
             else
                 [ ( "format", JE.object (List.concatMap formatProperty fmts) ) ]
     in
-    [ ( "name", JE.string name ), ( "values", JE.list rows ) ] ++ fmt
-
-
-{-| Data property for data loading. In addition to declaring `DaSphere` for a global
-sphere, they are more usually generated by the functions [daFormat](#daFormat),
-[daSource](#daSource), [daSources](#daSources), [daValue](#daValue),[daOn](#daOn)
-and [daUrl](#daUrl).
--}
-type DataProperty
-    = DaFormat (List FormatProperty)
-    | DaSource String
-    | DaSources (List String)
-    | DaValue Value
-    | DaSphere
-    | DaOn (List Trigger)
-    | DaUrl Str
+    [ ( "name", JE.string name ), ( "values", JE.list identity rows ) ] ++ fmt
 
 
 {-| Create a row of data. A row comprises a list of (_columnName_, _value_) pairs.
@@ -4852,17 +6466,7 @@ result of a transformation.
 -}
 dataSource : List DataTable -> Data
 dataSource dataTables =
-    ( VData, JE.list (List.map JE.object dataTables) )
-
-
-{-| Type of data to be parsed when reading input data. Additional parameterised
-data type format specifications generated by [foDate](#foDate) and [foUtc](#foUtc).
--}
-type DataType
-    = FoNum
-    | FoBoo
-    | FoDate String
-    | FoUtc String
+    ( VData, JE.list JE.object dataTables )
 
 
 {-| Data file to be loaded when generating a dataset.
@@ -4883,15 +6487,15 @@ daValue =
 data references from existing data streams. For example
 
     scale "myScale"
-      [ scDomain
-          (doData
-              [ daReferences
-                  [ [ daValues (vNums [ 2, 4 ]) ]
-                  , [ daDataset "myData", daField (field "myField") ]
-                  ]
-              ]
-          )
-      ]
+        [ scDomain
+            (doData
+                [ daReferences
+                    [ [ daValues (vNums [ 2, 4 ]) ]
+                    , [ daDataset "myData", daField (field "myField") ]
+                    ]
+                ]
+            )
+        ]
 
 -}
 daValues : Value -> DataReference
@@ -4899,19 +6503,18 @@ daValues =
     DValues
 
 
-{-| Probability (PDF) or cumulative (CDF) density function.
+{-| A day time unit.
 -}
-type DensityFunction
-    = PDF
-    | CDF
-    | DensityFunctionSignal String
+day : TimeUnit
+day =
+    Day
 
 
-{-| Density function referenced by the value in the named signal.
+{-| Indicate descending order when sorting.
 -}
-densityFunctionSignal : String -> DensityFunction
-densityFunctionSignal =
-    DensityFunctionSignal
+descend : Order
+descend =
+    Descend
 
 
 {-| Provide a text description of the visualization.
@@ -4965,6 +6568,13 @@ dnAs =
     DnAs
 
 
+{-| Cumulative density function (CDF).
+-}
+dnCdf : DensityFunction
+dnCdf =
+    CDF
+
+
 {-| A [min, max] domain from which to sample a distribution in a density transform.
 -}
 dnExtent : Num -> DensityProperty
@@ -4977,6 +6587,20 @@ dnExtent =
 dnMethod : DensityFunction -> DensityProperty
 dnMethod =
     DnMethod
+
+
+{-| Probability density function (PDF).
+-}
+dnPdf : DensityFunction
+dnPdf =
+    PDF
+
+
+{-| Density function referenced by the value in the named signal.
+-}
+dnSignal : String -> DensityFunction
+dnSignal =
+    DensityFunctionSignal
 
 
 {-| Number of uniformly spaced steps to take along an extent domain in a density transform.
@@ -5027,6 +6651,20 @@ doStrs =
 dsv : Str -> FormatProperty
 dsv =
     DSV
+
+
+{-| Allow events of a certain type to be handled.
+-}
+efAllow : EventFilter
+efAllow =
+    Allow
+
+
+{-| Prevent events of a certain type from being handled.
+-}
+efPrevent : EventFilter
+efPrevent =
+    Prevent
 
 
 {-| Named custom encoding set. Also requires a signal event handler with an
@@ -5122,6 +6760,14 @@ a signal change.
 enUpdate : List MarkProperty -> EncodingProperty
 enUpdate =
     Update
+
+
+{-| An equirectangular (default) map projection that maps longitude to x and
+latitude to y.
+-}
+equirectangular : Projection
+equirectangular =
+    Equirectangular
 
 
 {-| Event stream filter that lets only events that occur between the two given event
@@ -5298,48 +6944,166 @@ evEncode =
     EEncode
 
 
-{-| Filter for preventing or allowing event types being handled.
+{-| Event source from any mark. Equivalent to the `*` selector.
 -}
-type EventFilter
-    = Prevent
-    | Allow
+esAll : EventSource
+esAll =
+    ESAll
 
 
-{-| Source for an event selector. To specify a DOM node as a source (using a
-CSS selector string), use [esDom](#esDom).
+{-| Limit event source to events from the main group in which a nested group sits.
 -}
-type EventSource
-    = ESAll
-    | ESView
-    | ESScope
-    | ESWindow
-    | ESDom String
+esScope : EventSource
+esScope =
+    ESScope
 
 
-{-| Event types used when handling user interaction events. The `Timer` type will
-fire an event at a regular interval determined by the number of milliseconds provided
-to the `esThrottle` function.
+{-| Event source from the current Vega view component.
 -}
-type EventType
-    = Click
-    | DblClick
-    | DragEnter
-    | DragLeave
-    | DragOver
-    | KeyDown
-    | KeyPress
-    | KeyUp
-    | MouseDown
-    | MouseMove
-    | MouseOut
-    | MouseOver
-    | MouseUp
-    | MouseWheel
-    | TouchEnd
-    | TouchMove
-    | TouchStart
-    | Wheel
-    | Timer
+esView : EventSource
+esView =
+    ESView
+
+
+{-| Event source from the browser window object.
+-}
+esWindow : EventSource
+esWindow =
+    ESWindow
+
+
+{-| Click interaction event type.
+-}
+etClick : EventType
+etClick =
+    Click
+
+
+{-| Double click interaction event type.
+-}
+etDblClick : EventType
+etDblClick =
+    DblClick
+
+
+{-| Drag entry interaction event type.
+-}
+etDragEnter : EventType
+etDragEnter =
+    DragEnter
+
+
+{-| Drag exit interaction event type.
+-}
+etDragLeave : EventType
+etDragLeave =
+    DragLeave
+
+
+{-| Drag over interaction event type.
+-}
+etDragOver : EventType
+etDragOver =
+    DragOver
+
+
+{-| Key down interaction event type.
+-}
+etKeyDown : EventType
+etKeyDown =
+    KeyDown
+
+
+{-| Key press interaction event type.
+-}
+etKeyPress : EventType
+etKeyPress =
+    KeyPress
+
+
+{-| Key up interaction event type.
+-}
+etKeyUp : EventType
+etKeyUp =
+    KeyUp
+
+
+{-| Mouse down interaction event type.
+-}
+etMouseDown : EventType
+etMouseDown =
+    MouseDown
+
+
+{-| Mouse movement interaction event type.
+-}
+etMouseMove : EventType
+etMouseMove =
+    MouseMove
+
+
+{-| Mouse exit interaction event type.
+-}
+etMouseOut : EventType
+etMouseOut =
+    MouseOut
+
+
+{-| Mouse over interaction event type.
+-}
+etMouseOver : EventType
+etMouseOver =
+    MouseOver
+
+
+{-| Mouse up interaction event type.
+-}
+etMouseUp : EventType
+etMouseUp =
+    MouseUp
+
+
+{-| Mouse wheel interaction event type.
+-}
+etMouseWheel : EventType
+etMouseWheel =
+    MouseWheel
+
+
+{-| Fire an event at a regular interval determined by the number of milliseconds
+provided with `esThrottle`.
+-}
+etTimer : EventType
+etTimer =
+    Timer
+
+
+{-| Touch end interaction event type.
+-}
+etTouchEnd : EventType
+etTouchEnd =
+    TouchEnd
+
+
+{-| Touch move interaction event type.
+-}
+etTouchMove : EventType
+etTouchMove =
+    TouchMove
+
+
+{-| Touch start interaction event type.
+-}
+etTouchStart : EventType
+etTouchStart =
+    TouchStart
+
+
+{-| Wheel interaction event type.
+-}
+etWheel : EventType
+etWheel =
+    Wheel
 
 
 {-| Whether or not updates that do not change a signal value should propagate.
@@ -5357,8 +7121,8 @@ respond to. The second, a list of handlers that respond to the event stream.
     signal "tooltip"
         [ siValue (vObject [])
         , siOn
-            [ evHandler [esObject [esMark Rect, esType MouseOver] ] [ evUpdate "datum" ]
-            , evHandler [esObject [esMark Rect, esType MouseOut] ] [ evUpdate "" ]
+            [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
+            , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
             ]
         ]
 
@@ -5512,6 +7276,13 @@ field =
     FName
 
 
+{-| Specify Boolean values are to be parsed when reading input data.
+-}
+foBoo : DataType
+foBoo =
+    FoBoo
+
+
 {-| Force that pulls all nodes towards a shared centre point in a force
 simulation. The two parameters specify the x and y coordinates of the centre point.
 -}
@@ -5560,28 +7331,18 @@ foNBody =
     FNBody
 
 
-{-| Format used by a data source. `ParseAuto` can be used for performing automatic
-type inference on data types. If more explicit control is needed then `parse` can
-be used to specify the type for named fields.
+{-| Specify numeric values are to be parsed when reading input data.
 -}
-type FormatProperty
-    = JSON
-    | JSONProperty Str
-    | CSV
-    | TSV
-    | DSV Str
-    | TopojsonFeature Str
-    | TopojsonMesh Str
-    | Parse (List ( String, DataType ))
-    | ParseAuto
-    | FormatPropertySignal String
+foNum : DataType
+foNum =
+    FoNum
 
 
 {-| Format referenced by the value in the named signal (e.g. `csv`, `tsv`, `json`).
 Useful when dynamic loading of data with different formats is required.
 -}
-formatPropertySignal : String -> FormatProperty
-formatPropertySignal =
+fpSignal : String -> FormatProperty
+fpSignal =
     FormatPropertySignal
 
 
@@ -5773,6 +7534,13 @@ gjSignal =
     GjSignal
 
 
+{-| A gnomonic map projection.
+-}
+gnomonic : Projection
+gnomonic =
+    Gnomonic
+
+
 {-| Output field in which to write a generated shape instance following a geoShape
 or geoPath transformation.
 -}
@@ -5798,12 +7566,36 @@ gpPointRadius =
     GePointRadius
 
 
+{-| Indicate grid elements will be aligned and each row or column will be sized
+identically based on the maximum observed size.
+-}
+grAlignAll : GridAlign
+grAlignAll =
+    AlignAll
+
+
 {-| Layout alignment to apply to grid columns. Used in cases when alignment rules
 are different for rows and columns.
 -}
 grAlignColumn : GridAlign -> GridAlign
 grAlignColumn =
     AlignColumn
+
+
+{-| Indicate grid elements will be aligned into a clean grid structure, but each
+row or column may be of variable size.
+-}
+grAlignEach : GridAlign
+grAlignEach =
+    AlignEach
+
+
+{-| Indicate a flow grid layout will be used in which adjacent plots are placed
+one after the other.
+-}
+grAlignNone : GridAlign
+grAlignNone =
+    AlignNone
 
 
 {-| Layout alignment to apply to grid rows. Used in cases when alignment rules
@@ -5814,27 +7606,10 @@ grAlignRow =
     AlignRow
 
 
-{-| Layout alignment to apply to grid rows and columns. `AlignNone`
-indicates a flow layout will be used, in which adjacent plots are simply placed
-one after the other. `AlignEach` indicates elements will be aligned into a clean
-grid structure, but each row or column may be of variable size. `AlignAll` indicates
-elements will be aligned and each row or column will be sized identically based
-on the maximum observed size. To used different row and column layouts, use `grAlignRow`
-and `grAlignColumn`.
--}
-type GridAlign
-    = AlignAll
-    | AlignEach
-    | AlignNone
-    | AlignRow GridAlign
-    | AlignColumn GridAlign
-    | AlignSignal String
-
-
 {-| Layout alignment referenced by the value in the named signal.
 -}
-gridAlignSignal : String -> GridAlign
-gridAlignSignal =
+grAlignSignal : String -> GridAlign
+grAlignSignal =
     AlignSignal
 
 
@@ -5869,6 +7644,13 @@ grField =
     GrField
 
 
+{-| An group mark for assembling nested marks.
+-}
+group : Mark
+group =
+    Group
+
+
 {-| Precision in degrees with which graticule arcs are generated. The default value
 is 2.5 degrees.
 -}
@@ -5901,19 +7683,31 @@ grStepMinor =
     GrStepMinor
 
 
-{-| Horizontal alignment of some text such as on an axis or legend.
+{-| Center horizontal text alignment.
 -}
-type HAlign
-    = AlignCenter
-    | AlignLeft
-    | AlignRight
-    | HAlignSignal String
+haCenter : HAlign
+haCenter =
+    AlignCenter
+
+
+{-| Left horizontal text alignment.
+-}
+haLeft : HAlign
+haLeft =
+    AlignLeft
+
+
+{-| Right horizontal text alignment.
+-}
+haRight : HAlign
+haRight =
+    AlignRight
 
 
 {-| Horizontal text alignment referenced by the value in the named signal.
 -}
-hAlignSignal : String -> HAlign
-hAlignSignal =
+haSignal : String -> HAlign
+haSignal =
     HAlignSignal
 
 
@@ -5931,11 +7725,25 @@ hLeft =
     vStr "left"
 
 
+{-| A hour time unit.
+-}
+hour : TimeUnit
+hour =
+    Hour
+
+
 {-| Convenience function for indicating a right horizontal alignment.
 -}
 hRight : Value
 hRight =
     vStr "right"
+
+
+{-| A hue-chroma-luminance color interpolation.
+-}
+hcl : CInterpolate
+hcl =
+    Hcl
 
 
 {-| A long-path hue-chroma-luminance color interpolation.
@@ -5951,6 +7759,13 @@ will be calculated based on the content of the visualization.
 height : Float -> ( VProperty, Spec )
 height w =
     ( VHeight, JE.float w )
+
+
+{-| A hue-saturation-lightness color interpolation.
+-}
+hsl : CInterpolate
+hsl =
+    Hsl
 
 
 {-| A long-path hue-saturation-lightness color interpolation.
@@ -6009,11 +7824,46 @@ ifElse condition thenVals elseVals =
     VIfElse condition thenVals elseVals
 
 
-{-| A month selector input element.
+{-| An image mark.
 -}
-iMonth : List InputProperty -> Bind
-iMonth =
-    IMonth
+image : Mark
+image =
+    Image
+
+
+{-| Use maximum of a group when imputing a missing value.
+-}
+imByMax : ImputeMethod
+imByMax =
+    ByMax
+
+
+{-| Use the mean value of a group when imputing a missing value.
+-}
+imByMean : ImputeMethod
+imByMean =
+    ByMean
+
+
+{-| Use the median value of a group when imputing a missing value.
+-}
+imByMedian : ImputeMethod
+imByMedian =
+    ByMedian
+
+
+{-| Use minimum of a group when imputing a missing value.
+-}
+imByMin : ImputeMethod
+imByMin =
+    ByMin
+
+
+{-| Use a specific value when imputating a missing value.
+-}
+imByValue : ImputeMethod
+imByValue =
+    ByValue
 
 
 {-| List of fields by which to group values in an impute transform. Imputation is
@@ -6041,19 +7891,14 @@ imMethod =
     ImMethod
 
 
-{-| Imputation method to be used when assigning values to missing data values.
-`ByValue` allows a specific value to be assigned for missing values while the other
-methods will calculate a value based on a group of existing values.
+{-| A month selector input element.
 -}
-type ImputeMethod
-    = ByValue
-    | ByMean
-    | ByMedian
-    | ByMax
-    | ByMin
+iMonth : List InputProperty -> Bind
+iMonth =
+    IMonth
 
 
-{-| Vvalue to use when an imputation method is set to `ByValue` in an impute transform.
+{-| Value to use when an imputation method is set with `imByValue` in an impute transform.
 -}
 imValue : Value -> ImputeProperty
 imValue =
@@ -6205,6 +8050,42 @@ jaOps =
     JAOps
 
 
+{-| Bevelled stroke join.
+-}
+joBevel : StrokeJoin
+joBevel =
+    JBevel
+
+
+{-| Mitered stroke join.
+-}
+joMiter : StrokeJoin
+joMiter =
+    JMiter
+
+
+{-| Rounded stroke join.
+-}
+joRound : StrokeJoin
+joRound =
+    JRound
+
+
+{-| Stroke join (`miter`, `round` or `bevel`) referenced by the value in the
+named signal.
+-}
+joSignal : String -> StrokeJoin
+joSignal =
+    StrokeJoinSignal
+
+
+{-| Indicate a JSON format when parsing a data source.
+-}
+json : FormatProperty
+json =
+    JSON
+
+
 {-| Property to be extracted from some JSON when it has some surrounding structure
 or meta-data. e.g., specifying the property `values.features` is equivalent to
 retrieving `json.values.features` from the loaded JSON object with a custom delimiter.
@@ -6219,6 +8100,13 @@ jsonProperty =
 keyValue : String -> Value -> Value
 keyValue =
     VKeyValue
+
+
+{-| An CIELab color interpolation.
+-}
+lab : CInterpolate
+lab =
+    Lab
 
 
 {-| Create a layout used in the visualization. For example the following creates
@@ -6337,45 +8225,7 @@ specifications. For example,
 -}
 legends : List Spec -> ( VProperty, Spec )
 legends lgs =
-    ( VLegends, JE.list lgs )
-
-
-{-| Position of a legend relative to the visualization it describes.
--}
-type LegendOrientation
-    = Left
-    | TopLeft
-    | Top
-    | TopRight
-    | Right
-    | BottomRight
-    | Bottom
-    | BottomLeft
-    | None
-    | LegendOrientationSignal String
-
-
-{-| Legend position referenced by the value in the named signal.
--}
-legendOrientationSignal : String -> LegendOrientation
-legendOrientationSignal =
-    LegendOrientationSignal
-
-
-{-| Type of legend. `LSymbol` representing legends with discrete items and `LGradient`
-for those representing continuous data.
--}
-type LegendType
-    = LSymbol
-    | LGradient
-    | LegendTypeSignal String
-
-
-{-| Legend type (`symbol` or `gradient`) referenced by the value in the named signal.
--}
-legendTypeSignal : String -> LegendType
-legendTypeSignal =
-    LegendTypeSignal
+    ( VLegends, JE.list identity lgs )
 
 
 {-| Opacity of a color gradient in a legend.
@@ -6780,22 +8630,11 @@ leZIndex =
     LeZIndex
 
 
-{-| Shape of a line indicating path between nodes.
+{-| A line mark.
 -}
-type LinkShape
-    = LinkLine
-    | LinkArc
-    | LinkCurve
-    | LinkDiagonal
-    | LinkOrthogonal
-    | LinkShapeSignal String
-
-
-{-| Line shape between nodes referenced by the value in the named signal.
--}
-linkShapeSignal : String -> LinkShape
-linkShapeSignal =
-    LinkShapeSignal
+line : Mark
+line =
+    Line
 
 
 {-| Alignment to apply to grid rows and columns in a grid layout.
@@ -6803,6 +8642,27 @@ linkShapeSignal =
 loAlign : GridAlign -> LayoutProperty
 loAlign =
     LAlign
+
+
+{-| Position legend at the bottom of the visualization it describes.
+-}
+loBottom : LegendOrientation
+loBottom =
+    Bottom
+
+
+{-| Position legend to the bottom-left of the visualization it describes.
+-}
+loBottomLeft : LegendOrientation
+loBottomLeft =
+    BottomLeft
+
+
+{-| Position legend to the bottom-right of the visualization it describes.
+-}
+loBottomRight : LegendOrientation
+loBottomRight =
+    BottomRight
 
 
 {-| Bounds calculation method to use for determining the extent of a
@@ -6855,6 +8715,21 @@ loHeaderBandRC r c =
     LHeaderBandRC r c
 
 
+{-| Position legend to the left of the visualization it describes.
+-}
+loLeft : LegendOrientation
+loLeft =
+    Left
+
+
+{-| Do not perform automatic legend positioning (allows legend to be located explicitly
+via `x` `y` coordinates).
+-}
+loNone : LegendOrientation
+loNone =
+    None
+
+
 {-| Orthogonal offset in pixels by which to displace grid header, footer
 and title cells from their position along the edge of a grid layout.
 -}
@@ -6887,6 +8762,13 @@ loPaddingRC r c =
     LPaddingRC r c
 
 
+{-| Position legend to the right of the visualization it describes.
+-}
+loRight : LegendOrientation
+loRight =
+    Right
+
+
 {-| Title placement in a grid layout. For a column title, 0 maps to the left edge
 of the title cell and 1 to right edge. The default value is 0.5, indicating a
 centred position.
@@ -6902,6 +8784,41 @@ to be specified separately.
 loTitleBandRC : Num -> Num -> LayoutProperty
 loTitleBandRC r c =
     LTitleBandRC r c
+
+
+{-| Position legend at the top of the visualization it describes.
+-}
+loTop : LegendOrientation
+loTop =
+    Top
+
+
+{-| Position legend to the top-left of the visualization it describes.
+-}
+loTopLeft : LegendOrientation
+loTopLeft =
+    TopLeft
+
+
+{-| Position legend to the top-right of the visualization it describes.
+-}
+loTopRight : LegendOrientation
+loTopRight =
+    TopRight
+
+
+{-| Legend position referenced by the value in the named signal.
+-}
+loSignal : String -> LegendOrientation
+loSignal =
+    LegendOrientationSignal
+
+
+{-| Make text lowercase when pre-processing as part of a count pattern transformation.
+-}
+lowercase : Case
+lowercase =
+    Lowercase
 
 
 {-| Name for the output field of a link path in a linkPath transformation.
@@ -6960,6 +8877,69 @@ lpTargetY =
     LPTargetY
 
 
+{-| Arcs of circles linking nodes in a link diagram.
+-}
+lsArc : LinkShape
+lsArc =
+    LinkArc
+
+
+{-| Curved lines linking nodes in a link diagram.
+-}
+lsCurve : LinkShape
+lsCurve =
+    LinkCurve
+
+
+{-| Curved diagonal lines linking nodes in a link diagram.
+-}
+lsDiagonal : LinkShape
+lsDiagonal =
+    LinkDiagonal
+
+
+{-| Straight lines linking nodes in a link diagram.
+-}
+lsLine : LinkShape
+lsLine =
+    LinkLine
+
+
+{-| Orthogonal lines linking nodes in a link diagram.
+-}
+lsOrthogonal : LinkShape
+lsOrthogonal =
+    LinkOrthogonal
+
+
+{-| Line shape between nodes referenced by the value in the named signal.
+-}
+lsSignal : String -> LinkShape
+lsSignal =
+    LinkShapeSignal
+
+
+{-| legend with discrete items.
+-}
+ltSymbol : LegendType
+ltSymbol =
+    LSymbol
+
+
+{-| Legend to represent continuous data.
+-}
+ltGradient : LegendType
+ltGradient =
+    LGradient
+
+
+{-| Legend type (`symbol` or `gradient`) referenced by the value in the named signal.
+-}
+ltSignal : String -> LegendType
+ltSignal =
+    LegendTypeSignal
+
+
 {-| Output fields in which to write data found in the secondary stream of a lookup.
 -}
 luAs : List String -> LookupProperty
@@ -6986,7 +8966,7 @@ luValues =
 {-| Horizontal alignment of a text or image mark. To guarantee valid
 alignment type names, use `hCenter`, `hLeft` etc. For example:
 
-    << mark Text
+    << mark text
         [ mEncode
             [ enEnter [ maAlign [ hCenter ] ] ]
         ]
@@ -7014,7 +8994,7 @@ maAspect =
 {-| Vertical baseline of a text or image mark. To guarantee valid
 alignment type names, use `vTop`, `vMiddle` etc. For example:
 
-    << mark Text
+    << mark text
         [ mEncode
             [ enEnter [ maBaseline [ vTop ] ] ]
         ]
@@ -7243,46 +9223,14 @@ maRadius =
     MRadius
 
 
-{-| Type of visual mark used to represent data in the visualization.
--}
-type Mark
-    = Arc
-    | Area
-    | Image
-    | Group
-    | Line
-    | Path
-    | Rect
-    | Rule
-    | Shape
-    | Symbol
-    | Text
-    | Trail
-
-
 {-| A mark definition. Marks form the visible components of a visualization.
 Each mark specification can include a list of mark properties (second parameter)
 that customise the appearance of the mark and relate its appearance to data streams
 or signals.
 -}
 mark : Mark -> List TopMarkProperty -> List Spec -> List Spec
-mark mark mps =
-    (::) (JE.object (MType mark :: mps |> List.concatMap topMarkProperty))
-
-
-{-| Indicate mark interpolation style.
--}
-type MarkInterpolation
-    = Basis
-    | Bundle
-    | Cardinal
-    | CatmullRom
-    | Linear
-    | Monotone
-    | Natural
-    | Stepwise
-    | StepAfter
-    | StepBefore
+mark m mps =
+    (::) (JE.object (MType m :: mps |> List.concatMap topMarkProperty))
 
 
 {-| A convenience function for generating a value representing a given mark
@@ -7290,7 +9238,7 @@ interpolation type. Used instead of specifying an interpolation type
 as a literal string to avoid problems of mistyping the interpolation name.
 
     signals
-       << signal "interp" [ siValue (markInterpolationValue Linear) ]
+        << signal "interp" [ siValue (markInterpolationValue miLinear) ]
 
 -}
 markInterpolationValue : MarkInterpolation -> Value
@@ -7327,35 +9275,12 @@ markInterpolationValue interp =
             vStr "step-before"
 
 
-{-| A convenience function for generating a value representing a given mark
-orientation type. Used instead of specifying an orientation type as
-a literal string to avoid problems of mistyping its name.
-
-     maOrient [ orientationValue Horizontal ]
-
--}
-orientationValue : Orientation -> Value
-orientationValue orient =
-    case orient of
-        Horizontal ->
-            vStr "horizontal"
-
-        Vertical ->
-            vStr "vertical"
-
-        Radial ->
-            vStr "radial"
-
-        OrientationSignal sig ->
-            vSignal sig
-
-
 {-| Create the marks used in the visualization. Multiple mark specifications are
 commonly combined using the functional composition operator (`<<`). For example,
 
       mk =
           marks
-              << mark Line
+              << mark line
                   [ mFrom [ srData (str "myData") ]
                   , mEncode
                       [ enEnter
@@ -7365,7 +9290,7 @@ commonly combined using the functional composition operator (`<<`). For example,
                           ]
                       ]
                   ]
-              << mark Symbol
+              << mark symbol
                   [ mFrom [ srData (str "myData") ]
                   , mEncode
                       [ enEnter
@@ -7380,7 +9305,7 @@ commonly combined using the functional composition operator (`<<`). For example,
 -}
 marks : List Spec -> ( VProperty, Spec )
 marks axs =
-    ( VMarks, JE.list axs )
+    ( VMarks, JE.list identity axs )
 
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
@@ -7611,7 +9536,7 @@ coordinates use the output of [trGeoPath](#trGeoPath):
 
     mk =
         marks
-              << mark Path
+              << mark path
                   [ mFrom [ srData (str "myMapSource") ]
                   , mClip (clPath (strSignal "data('myClippingPoly')[0]['path']"))
                   ...
@@ -7629,11 +9554,39 @@ mDescription =
     MDescription
 
 
+{-| A clustering tree layout method to be used in a tree transform.
+-}
+meCluster : TreeMethod
+meCluster =
+    Cluster
+
+
 {-| The visual encoding rules for a mark.
 -}
 mEncode : List EncodingProperty -> TopMarkProperty
 mEncode =
     MEncode
+
+
+{-| A Mercator map projection.
+-}
+mercator : Projection
+mercator =
+    Mercator
+
+
+{-| Tree layout method (`tidy` or `cluster`) referenced by the value in the named signal.
+-}
+meSignal : String -> TreeMethod
+meSignal =
+    TreeMethodSignal
+
+
+{-| A tidy tree layout method to be used in a tree transform.
+-}
+meTidy : TreeMethod
+meTidy =
+    Tidy
 
 
 {-| Data source to be visualized by a mark. If not specified, a single
@@ -7651,7 +9604,7 @@ of marks within a `Group` mark (including further nested group specifications) b
 suppyling the specification as a series of properties. For example,
 
     marks
-        << mark Group
+        << mark group
             [ mFrom [ srData (str "myData") ]
             , mGroup [ mkGroup1 [], mkGroup2 [] ]
             ]
@@ -7662,12 +9615,104 @@ mGroup =
     MGroup
 
 
+{-| Cubic basis spline interpolation between points.
+-}
+miBasis : MarkInterpolation
+miBasis =
+    Basis
+
+
+{-| Bundle curve interpolation between points.
+-}
+miBundle : MarkInterpolation
+miBundle =
+    Bundle
+
+
+{-| Cubic cardinal spline interpolation between points.
+-}
+miCardinal : MarkInterpolation
+miCardinal =
+    Cardinal
+
+
+{-| Cubic Catmull-Rom spline interpolation between points.
+-}
+miCatmullRom : MarkInterpolation
+miCatmullRom =
+    CatmullRom
+
+
+{-| Linear (straight) interpolation between points.
+-}
+miLinear : MarkInterpolation
+miLinear =
+    Linear
+
+
+{-| A millisecond time unit.
+-}
+millisecond : TimeUnit
+millisecond =
+    Millisecond
+
+
 {-| Whether a mark can serve as an input event source. If false, no
 mouse or touch events corresponding to the mark will be generated.
 -}
 mInteractive : Boo -> TopMarkProperty
 mInteractive =
     MInteractive
+
+
+{-| Cubic spline interpolation that preserves monotonicity between points.
+-}
+miMonotone : MarkInterpolation
+miMonotone =
+    Monotone
+
+
+{-| Natural cubic spline interpolation between points.
+-}
+miNatural : MarkInterpolation
+miNatural =
+    Natural
+
+
+{-| A minute time unit.
+-}
+minute : TimeUnit
+minute =
+    Minute
+
+
+{-| Piecewise (stepped) constant interpolation function centred on each point in
+a squence.
+-}
+miStepwise : MarkInterpolation
+miStepwise =
+    Stepwise
+
+
+{-| Piecewise (stepped) constant interpolation function after each point in a squence.
+-}
+miStepAfter : MarkInterpolation
+miStepAfter =
+    StepAfter
+
+
+{-| Piecewise (stepped) constant interpolation function before each point in a squence.
+-}
+miStepBefore : MarkInterpolation
+miStepBefore =
+    StepBefore
+
+
+{-| Leave text unchanged when pre-processing as part of a count pattern transformation.
+-}
+mixedcase : Case
+mixedcase =
+    Mixedcase
 
 
 {-| Field to use as a unique key for data binding. When a
@@ -7695,6 +9740,13 @@ mName =
 mOn : List Trigger -> TopMarkProperty
 mOn =
     MOn
+
+
+{-| A month time unit.
+-}
+month : TimeUnit
+month =
+    Month
 
 
 {-| Fields and sort order for sorting mark items. The sort order will
@@ -7742,18 +9794,102 @@ mZIndex =
     MTopZIndex
 
 
-{-| Desired 'nice' temporal interval between labelled tick points.
+{-| A natural earth map projection.
 -}
-nInterval : TimeUnit -> Int -> ScaleNice
-nInterval tu step =
-    NInterval tu step
+naturalEarth1 : Projection
+naturalEarth1 =
+    NaturalEarth1
 
 
-{-| Desired tick count for a human-friendly 'nice' scale range.
+{-| Nice time intervals that try to align with whole or rounded days.
 -}
-nTickCount : Int -> ScaleNice
-nTickCount =
+niDay : ScaleNice
+niDay =
+    NDay
+
+
+{-| Disable nice scaling.
+-}
+niFalse : ScaleNice
+niFalse =
+    NFalse
+
+
+{-| Nice time intervals that try to align with whole or rounded hours.
+-}
+niHour : ScaleNice
+niHour =
+    NHour
+
+
+{-| 'Nice' temporal interval values when scaling.
+-}
+niInterval : TimeUnit -> Int -> ScaleNice
+niInterval =
+    NInterval
+
+
+{-| Nice time intervals that try to align with rounded milliseconds.
+-}
+niMillisecond : ScaleNice
+niMillisecond =
+    NMillisecond
+
+
+{-| Nice time intervals that try to align with whole or rounded minutes.
+-}
+niMinute : ScaleNice
+niMinute =
+    NMinute
+
+
+{-| Nice time intervals that try to align with whole or rounded months.
+-}
+niMonth : ScaleNice
+niMonth =
+    NMonth
+
+
+{-| Nice time intervals that try to align with whole or rounded seconds.
+-}
+niSecond : ScaleNice
+niSecond =
+    NSecond
+
+
+{-| 'nice' number-scaling type referenced by the value in the named signal.
+-}
+niSignal : String -> ScaleNice
+niSignal =
+    ScaleNiceSignal
+
+
+{-| Desired number of tick marks in a 'nice' scaling.
+-}
+niTickCount : Int -> ScaleNice
+niTickCount =
     NTickCount
+
+
+{-| Enable nice scaling.
+-}
+niTrue : ScaleNice
+niTrue =
+    NTrue
+
+
+{-| Nice time intervals that try to align with whole or rounded weeks.
+-}
+niWeek : ScaleNice
+niWeek =
+    NWeek
+
+
+{-| Nice time intervals that try to align with whole or rounded years.
+-}
+niYear : ScaleNice
+niYear =
+    NYear
 
 
 {-| A numeric literal.
@@ -7773,7 +9909,7 @@ numExpr =
 {-| List of potentially mixed numeric types. Useful when a domain is
 specified as being bounded by 0 and some signal:
 
-    scDomain (doNums (numList [ num 0, numSignal "mySignal" ] ) )
+    scDomain (doNums (numList [ num 0, numSignal "mySignal" ]))
 
 -}
 numList : List Num -> Num
@@ -7814,50 +9950,157 @@ numSignals =
 -}
 on : List Trigger -> DataTable -> DataTable
 on triggerSpecs dTable =
-    dTable ++ [ ( "on", JE.list triggerSpecs ) ]
+    dTable ++ [ ( "on", JE.list identity triggerSpecs ) ]
 
 
-{-| Type of aggregation operation.
+{-| An input data object containing the maximum field value to be used in an
+aggregation operation.
 -}
-type Operation
-    = ArgMax
-    | ArgMin
-    | Average
-    | CI0
-    | CI1
-    | Count
-    | Distinct
-    | Max
-    | Mean
-    | Median
-    | Min
-    | Missing
-    | Q1
-    | Q3
-    | Stderr
-    | Stdev
-    | Stdevp
-    | Sum
-    | Valid
-    | Variance
-    | Variancep
-    | OperationSignal String
+opArgMax : Operation
+opArgMax =
+    ArgMax
+
+
+{-| An input data object containing the minimum field value to be used in an
+aggregation operation.
+-}
+opArgMin : Operation
+opArgMin =
+    ArgMin
+
+
+{-| Lower 95% confidence interval to be used in an aggregation operation.
+-}
+opCI0 : Operation
+opCI0 =
+    CI0
+
+
+{-| Upper 95% confidence interval to be used in an aggregation operation.
+-}
+opCI1 : Operation
+opCI1 =
+    CI1
+
+
+{-| Total count of data objects to be used in an aggregation operation.
+-}
+opCount : Operation
+opCount =
+    Count
+
+
+{-| Count of distinct data objects to be used in an aggregation operation.
+-}
+opDistinct : Operation
+opDistinct =
+    Distinct
+
+
+{-| Maximum field value to be used in an aggregation operation.
+-}
+opMax : Operation
+opMax =
+    Max
+
+
+{-| Mean value to be used in an aggregation operation.
+-}
+opMean : Operation
+opMean =
+    Mean
+
+
+{-| Median field value to be used in an aggregation operation.
+-}
+opMedian : Operation
+opMedian =
+    Median
+
+
+{-| Minimum field value to be used in an aggregation operation.
+-}
+opMin : Operation
+opMin =
+    Min
+
+
+{-| Count of null or undefined field value to be used in an aggregation operation.
+-}
+opMissing : Operation
+opMissing =
+    Missing
+
+
+{-| Lower quartile boundary of field values to be used in an aggregation operation.
+-}
+opQ1 : Operation
+opQ1 =
+    Q1
+
+
+{-| Upper quartile boundary of field values to be used in an aggregation operation.
+-}
+opQ3 : Operation
+opQ3 =
+    Q3
 
 
 {-| Aggregation operation referenced by the value in the named signal.
 -}
-operationSignal : String -> Operation
-operationSignal =
+opSignal : String -> Operation
+opSignal =
     OperationSignal
 
 
-{-| Sorting order. See the
-[Vega type comparison documentation](https://vega.github.io/vega/docs/types/#Compare).
+{-| Standard error of field values to be used in an aggregation operation.
 -}
-type Order
-    = Ascend
-    | Descend
-    | OrderSignal String
+opStderr : Operation
+opStderr =
+    Stderr
+
+
+{-| Sample standard deviation of field values to be used in an aggregation operation.
+-}
+opStdev : Operation
+opStdev =
+    Stdev
+
+
+{-| Population standard deviation of field values to be used in an aggregation operation.
+-}
+opStdevP : Operation
+opStdevP =
+    StdevP
+
+
+{-| Sum of field values to be used in an ggregation operation.
+-}
+opSum : Operation
+opSum =
+    Sum
+
+
+{-| Count of values that are not `null`, `undefined` or `NaN` to be used in an
+aggregation operation.
+-}
+opValid : Operation
+opValid =
+    Valid
+
+
+{-| Sample variance of field value to be used in an aggregation operation.
+-}
+opVariance : Operation
+opVariance =
+    Variance
+
+
+{-| Population variance of field value to be used in an aggregation operation.
+-}
+opVarianceP : Operation
+opVarianceP =
+    VarianceP
 
 
 {-| Sorting order referenced by the value in the named signal.
@@ -7867,37 +10110,94 @@ orderSignal =
     OrderSignal
 
 
-{-| Orientation of a mark, legend or link path (e.g. horizontally or vertically
-oriented bars). Note that not all can use `Radial` orientation.
+{-| Specify a horizontal orientation of a mark, legend or link path (e.g. horizontally or vertically
+oriented bars).
 -}
-type Orientation
-    = Horizontal
-    | Vertical
-    | Radial
-    | OrientationSignal String
+orHorizontal : Orientation
+orHorizontal =
+    Horizontal
+
+
+{-| A convenience function for generating a value representing a given mark
+orientation type. Used instead of specifying an orientation type as
+a literal string to avoid problems of mistyping its name.
+
+     maOrient [ orientationValue Horizontal ]
+
+-}
+orientationValue : Orientation -> Value
+orientationValue orient =
+    case orient of
+        Horizontal ->
+            vStr "horizontal"
+
+        Vertical ->
+            vStr "vertical"
+
+        Radial ->
+            vStr "radial"
+
+        OrientationSignal sig ->
+            vSignal sig
+
+
+{-| Specify a radial orientation of a mark or link path. Note that not all marks
+can use a radial orientation.
+-}
+orRadial : Orientation
+orRadial =
+    Radial
 
 
 {-| Orientation referenced by the value in the named signal.
 -}
-orientationSignal : String -> Orientation
-orientationSignal =
+orSignal : String -> Orientation
+orSignal =
     OrientationSignal
 
 
-{-| Overlap strategy to be applied when there is not space to show all items on an axis.
+{-| Specify a vertical orientation of a mark, legend or link path (e.g. horizontally or vertically
+oriented bars).
 -}
-type OverlapStrategy
-    = ONone
-    | OParity
-    | OGreedy
-    | OverlapStrategySignal String
+orVertical : Orientation
+orVertical =
+    Vertical
+
+
+{-| Greedy overlap strategy to be applied when there is not space to show all items on an axis.
+-}
+osGreedy : OverlapStrategy
+osGreedy =
+    OGreedy
+
+
+{-| No overlap strategy to be applied when there is not space to show all items on an axis.
+-}
+osNone : OverlapStrategy
+osNone =
+    ONone
+
+
+{-| Give all items equal weight in overlap strategy to be applied when there is
+not space to show them all on an axis.
+-}
+osParity : OverlapStrategy
+osParity =
+    OParity
 
 
 {-| Overlap strategy referenced by the value in the named signal.
 -}
-overlapStrategySignal : String -> OverlapStrategy
-overlapStrategySignal =
+osSignal : String -> OverlapStrategy
+osSignal =
     OverlapStrategySignal
+
+
+{-| An orthographic map projection.
+-}
+orthographic : Projection
+orthographic =
+    Orthographic
 
 
 {-| The names to give the output fields of a packing transform. The default is
@@ -7910,17 +10210,12 @@ paAs x y r depth children =
     PaAs x y r depth children
 
 
-type Padding
-    = PSize Float
-    | PEdges Float Float Float Float
-
-
 {-| Padding around the visualization in pixel units. The way padding is
 interpreted will depend on the `autosize` properties.
 -}
 padding : Float -> ( VProperty, Spec )
 padding p =
-    ( VPadding, paddingSpec (PSize p) )
+    ( VPadding, JE.float p )
 
 
 {-| Padding around the visualization in pixel units in _left_, _top_,
@@ -7928,7 +10223,14 @@ _right_, _bottom_ order.
 -}
 paddings : Float -> Float -> Float -> Float -> ( VProperty, Spec )
 paddings l t r b =
-    ( VPadding, paddingSpec (PEdges l t r b) )
+    ( VPadding
+    , JE.object
+        [ ( "left", JE.float l )
+        , ( "top", JE.float t )
+        , ( "right", JE.float r )
+        , ( "bottom", JE.float b )
+        ]
+    )
 
 
 {-| The data field corresponding to a numeric value for the node in a packing
@@ -7939,6 +10241,13 @@ the node size.
 paField : Field -> PackProperty
 paField =
     PaField
+
+
+{-| A path mark.
+-}
+path : Mark
+path =
+    Path
 
 
 {-| The approximate padding to include between packed circles.
@@ -7971,6 +10280,14 @@ some ambiguity that could prevent correct type inference, such as time text:
 parse : List ( String, DataType ) -> FormatProperty
 parse =
     Parse
+
+
+{-| Indicate automatic type inference on data types should be applied when parsing
+a data source.
+-}
+parseAuto : FormatProperty
+parseAuto =
+    ParseAuto
 
 
 {-| The size of a packing layout, provided as a two-element list in [width, height]
@@ -8085,13 +10402,6 @@ prCoefficient =
     PrCoefficient
 
 
-{-| Custom map projection. Custom names need to be registered with the Vega runtime.
--}
-prCustom : Str -> Projection
-prCustom =
-    Proj
-
-
 {-| 'Satellite' map projection's distance value. Values are expressed as a
 proportion of the Earth's radius (defaults to 2).
 -}
@@ -8144,27 +10454,6 @@ prLobes =
     PrLobes
 
 
-{-| Type of global map projection.
--}
-type Projection
-    = Albers
-    | AlbersUsa
-    | AzimuthalEqualArea
-    | AzimuthalEquidistant
-    | ConicConformal
-    | ConicEqualArea
-    | ConicEquidistant
-    | Equirectangular
-    | Gnomonic
-    | Mercator
-    | NaturalEarth1
-    | Orthographic
-    | Stereographic
-    | TransverseMercator
-    | Proj Str
-    | ProjectionSignal String
-
-
 {-| Map projection for transforming geo data onto a plane.
 -}
 projection : String -> List ProjectionProperty -> List Spec -> List Spec
@@ -8190,13 +10479,13 @@ projectionValue proj =
 -}
 projections : List Spec -> ( VProperty, Spec )
 projections prs =
-    ( VProjections, JE.list prs )
+    ( VProjections, JE.list identity prs )
 
 
 {-| Map projection referenced by the value in the named signal.
 -}
-projectionSignal : String -> Projection
-projectionSignal =
+prSignal : String -> Projection
+prSignal =
     ProjectionSignal
 
 
@@ -8349,12 +10638,19 @@ ptSort =
     PtSort
 
 
+{-| Use default category range of scale output values.
+-}
+raCategory : ScaleRange
+raCategory =
+    RaCategory
+
+
 {-| Custom range default scheme. Used when a new named default has been
 created as part of a config setting is required.
 -}
 raCustomDefault : String -> ScaleRange
 raCustomDefault =
-    RCustom
+    RaCustom
 
 
 {-| Scale range as a data reference object. This is used for specifying
@@ -8369,14 +10665,49 @@ ordinal scale ranges as a series of distinct field values.
 -}
 raData : List DataReference -> ScaleRange
 raData =
-    RData
+    RaData
+
+
+{-| Use default diverging range of scale output values.
+-}
+raDiverging : ScaleRange
+raDiverging =
+    RaDiverging
+
+
+{-| Use default heatmap range of scale output values.
+-}
+raHeatmap : ScaleRange
+raHeatmap =
+    RaHeatmap
+
+
+{-| Use default height range of scale output values.
+-}
+raHeight : ScaleRange
+raHeight =
+    RaHeight
 
 
 {-| Scale range as a list of numbers.
 -}
 raNums : List Float -> ScaleRange
 raNums =
-    RNums
+    RaNums
+
+
+{-| Use default ordinal range of scale output values.
+-}
+raOrdinal : ScaleRange
+raOrdinal =
+    RaOrdinal
+
+
+{-| Use default (continuous) ramp range of scale output values.
+-}
+raRamp : ScaleRange
+raRamp =
+    RaRamp
 
 
 {-| Scale range as a list of color schemes. The first parameter is
@@ -8384,35 +10715,56 @@ the name of the colour scheme to use, the second any customising properties.
 -}
 raScheme : Str -> List ColorSchemeProperty -> ScaleRange
 raScheme =
-    RScheme
+    RaScheme
 
 
-{-| Scale range referenced by the value in the named signal.
+{-| Default range scaling referenced by the value in the named signal.
 -}
 raSignal : String -> ScaleRange
 raSignal =
-    RSignal
+    RaSignal
 
 
 {-| Step size for a band scale range.
 -}
 raStep : Value -> ScaleRange
 raStep =
-    RStep
+    RaStep
 
 
 {-| Scale range as a list of strings.
 -}
 raStrs : List String -> ScaleRange
 raStrs =
-    RStrs
+    RaStrs
+
+
+{-| Use default (discrete) symbol range of scale output values.
+-}
+raSymbol : ScaleRange
+raSymbol =
+    RaSymbol
 
 
 {-| Scale range as a list of values.
 -}
 raValues : List Value -> ScaleRange
 raValues =
-    RValues
+    RaValues
+
+
+{-| Use default width range of scale output values.
+-}
+raWidth : ScaleRange
+raWidth =
+    RaWidth
+
+
+{-| A rectangle mark.
+-}
+rect : Mark
+rect =
+    Rect
 
 
 {-| RGB color interpolation. The parameter is a gamma value to control the
@@ -8423,25 +10775,11 @@ rgb =
     Rgb
 
 
-{-| Type of scale transformation to apply.
+{-| A rule (single line) mark.
 -}
-type Scale
-    = ScLinear
-    | ScPow
-    | ScSqrt
-    | ScLog
-    | ScTime
-    | ScUtc
-    | ScSequential
-    | ScOrdinal
-    | ScBand
-    | ScPoint
-    | ScQuantile
-    | ScQuantize
-    | ScBinLinear
-    | ScBinOrdinal
-    | ScCustom String
-    | ScaleSignal String
+rule : Mark
+rule =
+    Rule
 
 
 {-| Scale to be used to map data values to visual properties.
@@ -8449,38 +10787,6 @@ type Scale
 scale : String -> List ScaleProperty -> List Spec -> List Spec
 scale name sps =
     (::) (JE.object (( "name", JE.string name ) :: List.map scaleProperty sps))
-
-
-{-| 'nice' number-scaling options.
--}
-type ScaleNice
-    = NMillisecond
-    | NSecond
-    | NMinute
-    | NHour
-    | NDay
-    | NWeek
-    | NMonth
-    | NYear
-    | NInterval TimeUnit Int
-    | NTrue
-    | NFalse
-    | NTickCount Int
-    | ScaleNiceSignal String
-
-
-{-| 'nice' number-scaling type referenced by the value in the named signal.
--}
-scaleNiceSignal : String -> ScaleNice
-scaleNiceSignal =
-    ScaleNiceSignal
-
-
-{-| Default range scaling referenced by the value in the named signal.
--}
-scaleRangeSignal : String -> ScaleRange
-scaleRangeSignal =
-    ScaleRangeSignal
 
 
 {-| Create the scales used to map data values to visual properties.
@@ -8501,14 +10807,7 @@ scaleRangeSignal =
 -}
 scales : List Spec -> ( VProperty, Spec )
 scales scs =
-    ( VScales, JE.list scs )
-
-
-{-| Scaling referenced by the value in the named signal.
--}
-scaleSignal : String -> Scale
-scaleSignal =
-    ScaleSignal
+    ( VScales, JE.list identity scs )
 
 
 {-| Alignment of elements within each step of a band scale, as a
@@ -8519,11 +10818,32 @@ scAlign =
     SAlign
 
 
+{-| A band scale.
+-}
+scBand : Scale
+scBand =
+    ScBand
+
+
 {-| Base of the logorithm used in a logarithmic scale.
 -}
 scBase : Num -> ScaleProperty
 scBase =
     SBase
+
+
+{-| A linear band scale.
+-}
+scBinLinear : Scale
+scBinLinear =
+    ScBinLinear
+
+
+{-| An ordinal band scale.
+-}
+scBinOrdinal : Scale
+scBinOrdinal =
+    ScBinOrdinal
 
 
 {-| Whether output values should be clamped to when using a quantitative
@@ -8620,12 +10940,33 @@ scInterpolate =
     SInterpolate
 
 
+{-| A linear scale.
+-}
+scLinear : Scale
+scLinear =
+    ScLinear
+
+
+{-| A log scale.
+-}
+scLog : Scale
+scLog =
+    ScLog
+
+
 {-| Extend the range of a scale domain so it starts and ends on 'nice' round
 values.
 -}
 scNice : ScaleNice -> ScaleProperty
 scNice =
     SNice
+
+
+{-| An ordinal scale.
+-}
+scOrdinal : Scale
+scOrdinal =
+    ScOrdinal
 
 
 {-| Expand a scale domain to accommodate the specified number of pixels on each
@@ -8650,6 +10991,34 @@ outside the outer bands in a band scale.
 scPaddingOuter : Num -> ScaleProperty
 scPaddingOuter =
     SPaddingOuter
+
+
+{-| A point scale.
+-}
+scPoint : Scale
+scPoint =
+    ScPoint
+
+
+{-| A power scale.
+-}
+scPow : Scale
+scPow =
+    ScPow
+
+
+{-| A quantile scale.
+-}
+scQuantile : Scale
+scQuantile =
+    ScQuantile
+
+
+{-| A quantizing scale.
+-}
+scQuantize : Scale
+scQuantize =
+    ScQuantize
 
 
 {-| Range of a scale representing the set of visual values.
@@ -8681,11 +11050,53 @@ scRound =
     SRound
 
 
+{-| A sequential scale.
+-}
+scSequential : Scale
+scSequential =
+    ScSequential
+
+
+{-| Scaling referenced by the value in the named signal.
+-}
+scSignal : String -> Scale
+scSignal =
+    ScaleSignal
+
+
+{-| A square root scale.
+-}
+scSqrt : Scale
+scSqrt =
+    ScSqrt
+
+
 {-| Type of a named scale.
 -}
 scType : Scale -> ScaleProperty
 scType =
     SType
+
+
+{-| A threshold scale.
+-}
+scThreshold : Scale
+scThreshold =
+    ScThreshold
+
+
+{-| A temporal scale.
+-}
+scTime : Scale
+scTime =
+    ScTime
+
+
+{-| A UTC temporal scale.
+-}
+scUtc : Scale
+scUtc =
+    ScUtc
 
 
 {-| Whether or not a scale domain should include zero. The default is
@@ -8696,6 +11107,20 @@ scZero =
     SZero
 
 
+{-| A second time unit.
+-}
+second : TimeUnit
+second =
+    Second
+
+
+{-| A shape mark.
+-}
+shape : Mark
+shape =
+    Shape
+
+
 {-| Bind a signal to an external input element such as a slider, selection list
 or radio button group.
 -}
@@ -8704,21 +11129,11 @@ siBind =
     SiBind
 
 
-{-| Rectangular side. Can be used to specify an axis position.
+{-| Bottom side, used to specify an axis position.
 -}
-type Side
-    = SLeft
-    | SRight
-    | STop
-    | SBottom
-    | SideSignal String
-
-
-{-| Rectangular side referenced by the value in the named signal.
--}
-sideSignal : String -> Side
-sideSignal =
-    SideSignal
+siBottom : Side
+siBottom =
+    SBottom
 
 
 {-| Text description of a signal, useful for inline documentation.
@@ -8740,7 +11155,7 @@ siDescription =
 -}
 signals : List Spec -> ( VProperty, Spec )
 signals sigs =
-    ( VSignals, JE.list sigs )
+    ( VSignals, JE.list identity sigs )
 
 
 {-| Signal to be used to add a dynamic component to a visualization.
@@ -8750,8 +11165,15 @@ signal sigName sps =
     (::) (JE.object (SiName sigName :: sps |> List.map signalProperty))
 
 
+{-| Left side, used to specify an axis position.
+-}
+siLeft : Side
+siLeft =
+    SLeft
+
+
 {-| A unique name to be given to a signal. Signal names should be contain only
-alphanumeric characters (or “$”, or “_”) and may not start with a digit. Reserved
+alphanumeric characters (or “$”, or “\_”) and may not start with a digit. Reserved
 keywords that may not be used as signal names are "datum", "event", "item", and
 "parent".
 -}
@@ -8784,6 +11206,27 @@ siReact =
     SiReact
 
 
+{-| Right side, used to specify an axis position.
+-}
+siRight : Side
+siRight =
+    SRight
+
+
+{-| Rectangular side referenced by the value in the named signal.
+-}
+siSignal : String -> Side
+siSignal =
+    SideSignal
+
+
+{-| Top side, used to specify an axis position.
+-}
+siTop : Side
+siTop =
+    STop
+
+
 {-| Update expression for a signal which may include other signals,
 in which case the signal will automatically update in response to upstream signal
 changes, so long as its react property is not false.
@@ -8800,11 +11243,25 @@ siValue =
     SiValue
 
 
+{-| Indicate sorting is to be applied from low to high.
+-}
+soAscending : SortProperty
+soAscending =
+    Ascending
+
+
 {-| Field to be used when sorting.
 -}
 soByField : Str -> SortProperty
 soByField =
     ByField
+
+
+{-| Indicate sorting is to be applied from high to low.
+-}
+soDescending : SortProperty
+soDescending =
+    Descending
 
 
 {-| Sorting operation.
@@ -8814,36 +11271,32 @@ soOp =
     Op
 
 
-{-| Sorting type.
--}
-type SortProperty
-    = Ascending
-    | Descending
-    | Op Operation
-    | ByField Str
-    | SortPropertySignal String
-
-
 {-| Sorting type referenced by the value in the named signal.
 -}
-sortPropertySignal : String -> SortProperty
-sortPropertySignal =
+soSignal : String -> SortProperty
+soSignal =
     SortPropertySignal
 
 
-{-| Spiraling type for sequential positioning of words in a wordcloud.
+{-| Archimedean spiraling for sequential positioning of words in a wordcloud.
 -}
-type Spiral
-    = Archimedean
-    | Rectangular
-    | SpiralSignal String
+spArchimedean : Spiral
+spArchimedean =
+    Archimedean
+
+
+{-| Rectangular spiraling for sequential positioning of words in a wordcloud.
+-}
+spRectangular : Spiral
+spRectangular =
+    Rectangular
 
 
 {-| Word cloud spiral type (`archimedean` or `rectangular`) referenced by the
 value in the named signal.
 -}
-spiralSignal : String -> Spiral
-spiralSignal =
+spSignal : String -> Spiral
+spSignal =
     SpiralSignal
 
 
@@ -8860,7 +11313,7 @@ second is the name to be given to the generated facet source. Marks defined with
 the faceted `group` mark can reference this data source name to visualize the
 local data partition.
 
-    mark Group
+    mark group
         [ mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
         , mEncode [ enEnter [ maY [ vScale "yScale", vField (field "category") ] ] ]
         , mGroup [ nestedMk [] ]
@@ -8868,7 +11321,7 @@ local data partition.
 
     nestedMk =
         marks
-            << mark Rect
+            << mark rect
                 [ mName "bars"
                 , mFrom [ srData (str "facet") ]
                 , mEncode
@@ -8888,31 +11341,26 @@ srFacet d name =
     SFacet d name
 
 
-{-| Type of offsetting to apply when stacking. `OfZero` uses a baseline at the foot
-of a stack, `OfCenter` uses a central baseline with stacking both above and below
-it. `OfNormalize` rescales the stack to a common height while preserving the
-relative size of stacked quantities.
--}
-type StackOffset
-    = OfZero
-    | OfCenter
-    | OfNormalize
-    | StackOffsetSignal String
-
-
-{-| Stacking offset referenced by the value in the named signal.
--}
-stackOffsetSignal : String -> StackOffset
-stackOffsetSignal =
-    StackOffsetSignal
-
-
 {-| Names of the output fields for the computed start and end stack
 values of a stack transform.
 -}
 stAs : String -> String -> StackProperty
 stAs y0 y1 =
     StAs y0 y1
+
+
+{-| Offset a stacked layout using a central stack baseline.
+-}
+stCenter : StackOffset
+stCenter =
+    OfCenter
+
+
+{-| A stereographic map projection.
+-}
+stereographic : Projection
+stereographic =
+    Stereographic
 
 
 {-| Field that determines the stack heights in a stack transform.
@@ -8935,6 +11383,14 @@ stGroupBy =
 stOffset : StackOffset -> StackProperty
 stOffset =
     StOffset
+
+
+{-| Rescale a stacked layout to use a common height while preserving relative size
+of stacked quantities.
+-}
+stNormalize : StackOffset
+stNormalize =
+    OfNormalize
 
 
 {-| A string literal.
@@ -8986,23 +11442,6 @@ strSignals =
     StrSignals
 
 
-{-| Type of stroke cap.
--}
-type StrokeCap
-    = CButt
-    | CRound
-    | CSquare
-    | StrokeCapSignal String
-
-
-{-| Stroke cap (`butt`, `round` and `square`) referenced by the value in the
-named signal.
--}
-strokeCapSignal : String -> StrokeCap
-strokeCapSignal =
-    StrokeCapSignal
-
-
 {-| Convenience function for generating a value representing a given stroke cap type.
 -}
 strokeCapValue : StrokeCap -> Value
@@ -9019,23 +11458,6 @@ strokeCapValue cap =
 
         StrokeCapSignal sig ->
             vSignal sig
-
-
-{-| Type of stroke join.
--}
-type StrokeJoin
-    = JMiter
-    | JRound
-    | JBevel
-    | StrokeJoinSignal String
-
-
-{-| Stroke join (`miter`, `round` or `bevel`) referenced by the value in the
-named signal.
--}
-strokeJoinSignal : String -> StrokeJoin
-strokeJoinSignal =
-    StrokeJoinSignal
 
 
 {-| Convenience function for generating a text string representing a given
@@ -9058,6 +11480,13 @@ strokeJoinValue jn =
             vSignal sig
 
 
+{-| Stacking offset referenced by the value in the named signal.
+-}
+stSignal : String -> StackOffset
+stSignal =
+    StackOffsetSignal
+
+
 {-| Criteria for sorting values in a stack transform.
 -}
 stSort : List ( Field, Order ) -> StackProperty
@@ -9065,26 +11494,18 @@ stSort =
     StSort
 
 
-{-| Symbol type.
+{-| Offset a stacked layout using a baseline at the foot of a stack.
 -}
-type Symbol
-    = SymCircle
-    | SymSquare
-    | SymCross
-    | SymDiamond
-    | SymTriangleUp
-    | SymTriangleDown
-    | SymTriangleLeft
-    | SymTriangleRight
-    | SymPath String
-    | SymbolSignal String
+stZero : StackOffset
+stZero =
+    OfZero
 
 
-{-| Symbol type referenced by the value in the named signal.
+{-| A symbol mark.
 -}
-symbolSignal : String -> Symbol
-symbolSignal =
-    SymbolSignal
+symbol : Mark
+symbol =
+    Symbol
 
 
 {-| Convenience function for generating a value representing a given symbol type.
@@ -9094,12 +11515,98 @@ symbolValue sym =
     vStr (symbolLabel sym)
 
 
-{-| [SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths)
-to define a custom symbol shape.
+{-| Specify a circular symbol for a shape mark.
+-}
+symCircle : Symbol
+symCircle =
+    SymCircle
+
+
+{-| Specify a cross symbol for a shape mark.
+-}
+symCross : Symbol
+symCross =
+    SymCross
+
+
+{-| Specify a diamond symbol for a shape mark.
+-}
+symDiamond : Symbol
+symDiamond =
+    SymDiamond
+
+
+{-| A custom symbol shape as an
+[SVG path description](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths).
 -}
 symPath : String -> Symbol
 symPath =
     SymPath
+
+
+{-| Specify a square symbol for a shape mark.
+-}
+symSquare : Symbol
+symSquare =
+    SymSquare
+
+
+{-| Specify an upward trianglular symbol for a shape mark.
+-}
+symTriangleUp : Symbol
+symTriangleUp =
+    SymTriangleUp
+
+
+{-| Specify a downward trianglular symbol for a shape mark.
+-}
+symTriangleDown : Symbol
+symTriangleDown =
+    SymTriangleDown
+
+
+{-| Specify a left-pointing trianglular symbol for a shape mark.
+-}
+symTriangleLeft : Symbol
+symTriangleLeft =
+    SymTriangleLeft
+
+
+{-| Specify a right-pointing trianglular symbol for a shape mark.
+-}
+symTriangleRight : Symbol
+symTriangleRight =
+    SymTriangleRight
+
+
+{-| Symbol type referenced by the value in the named signal.
+-}
+symSignal : String -> Symbol
+symSignal =
+    SymbolSignal
+
+
+{-| Left-to-right text render direction determining which end of a text string is
+truncated if it cannot be displayed within a restricted space.
+-}
+tdLeftToRight : TextDirection
+tdLeftToRight =
+    LeftToRight
+
+
+{-| Right-to-left text render direction determining which end of a text string is
+truncated if it cannot be displayed within a restricted space.
+-}
+tdRightToLeft : TextDirection
+tdRightToLeft =
+    RightToLeft
+
+
+{-| Text direction (`ltr` or `rtl`) referenced by the value in the named signal.
+-}
+tdSignal : String -> TextDirection
+tdSignal =
+    TextDirectionSignal
 
 
 {-| Output field names within which to write the results of a tree
@@ -9149,20 +11656,11 @@ teSort =
     TeSort
 
 
-{-| Text render direction. This determines which end of a text string is
-truncated if it cannot be displayed within a restricted space.
+{-| A text mark.
 -}
-type TextDirection
-    = LeftToRight
-    | RightToLeft
-    | TextDirectionSignal String
-
-
-{-| Text direction (`ltr` or `rtl`) referenced by the value in the named signal.
--}
-textDirectionSignal : String -> TextDirection
-textDirectionSignal =
-    TextDirectionSignal
+text : Mark
+text =
+    Text
 
 
 {-| Create a text direction value.
@@ -9180,6 +11678,30 @@ textDirectionValue dir =
             vSignal sig
 
 
+{-| Title anchor position calculation assuming text anchor is relative to the full
+bounding box.
+-}
+tfBounds : TitleFrame
+tfBounds =
+    FrBounds
+
+
+{-| Title anchor position calculation assuming text anchor is relative to the group
+width / height.
+-}
+tfGroup : TitleFrame
+tfGroup =
+    FrGroup
+
+
+{-| Title anchor calcuation type (`bounds` or `group`) referenced by the value in
+the named signal.
+-}
+tfSignal : String -> TitleFrame
+tfSignal =
+    TitleFrameSignal
+
+
 {-| Expression that evaluates to data objects to insert as triggers. Insert
 operations are only applicable to datasets, not marks.
 -}
@@ -9193,7 +11715,7 @@ expression that evaluates to data objects to modify and the second an expression
 that evaluates to an object of name-value pairs, indicating the field values that
 should be updated.
 
-    mark Symbol
+    mark symbol
         [ mFrom [ srData (str "countries") ]
         , mOn
             [ trigger "myDragSignal"
@@ -9322,27 +11844,6 @@ tiLimit =
     TLimit
 
 
-{-| Unit of time. Useful for encoding and transformations.
--}
-type TimeUnit
-    = Year
-    | Month
-    | Week
-    | Day
-    | Hour
-    | Minute
-    | Second
-    | Millisecond
-    | TimeUnitSignal String
-
-
-{-| Time unit referenced by the value in the named signal.
--}
-timeUnitSignal : String -> TimeUnit
-timeUnitSignal =
-    TimeUnitSignal
-
-
 {-| Mark name to apply to a title text mark. This name can be used to
 refer to the title mark with an
 [event stream definition](https://vega.github.io/vega/docs/event-streams/).
@@ -9384,23 +11885,6 @@ title s tps =
     ( VTitle, JE.object (List.map titleProperty (TText s :: tps)) )
 
 
-{-| Title anchor position calculation. `FrBounds` implies text anchor is relative
-to the full bounding box; `FrGroup` implies it is relative to the group width/height.
--}
-type TitleFrame
-    = FrBounds
-    | FrGroup
-    | TitleFrameSignal String
-
-
-{-| Title anchor calcuation type (`bounds` or `group`) referenced by the value in
-the named signal.
--}
-titleFrameSignal : String -> TitleFrame
-titleFrameSignal =
-    TitleFrameSignal
-
-
 {-| z-index indicating the layering of the title group relative to
 other axis, mark and legend groups.
 -}
@@ -9416,6 +11900,20 @@ The parameters correspond to the (default name) fields `x0`, `y0`, `x1`, `y1`,
 tmAs : String -> String -> String -> String -> String -> String -> TreemapProperty
 tmAs =
     TmAs
+
+
+{-| A binary treemap layout method used in a treemap transform.
+-}
+tmBinary : TreemapMethod
+tmBinary =
+    TmBinary
+
+
+{-| A dicing treemap layout method used in a treemap transform.
+-}
+tmDice : TreemapMethod
+tmDice =
+    TmDice
 
 
 {-| Field corresponding to a numeric value for a treemap node.
@@ -9495,12 +11993,26 @@ tmRatio =
     TmRatio
 
 
+{-| A resquarifying treemap layout method used in a treemap transform.
+-}
+tmResquarify : TreemapMethod
+tmResquarify =
+    TmResquarify
+
+
 {-| Whether or not node layout values should be rounded in a treemap transform.
 The default is false.
 -}
 tmRound : Boo -> TreemapProperty
 tmRound =
     TmRound
+
+
+{-| Treemap layout method referenced by the value in the named signal.
+-}
+tmSignal : String -> TreemapMethod
+tmSignal =
+    TmSignal
 
 
 {-| Size of a treemap layout as two-element list (or signal) corresponding
@@ -9511,11 +12023,32 @@ tmSize =
     TmSize
 
 
+{-| A slicing treemap layout method used in a treemap transform.
+-}
+tmSlice : TreemapMethod
+tmSlice =
+    TmSlice
+
+
+{-| A slice and dice treemap layout method used in a treemap transform.
+-}
+tmSliceDice : TreemapMethod
+tmSliceDice =
+    TmSliceDice
+
+
 {-| Sorting properties of sibling nodes is in a treemap layout transform.
 -}
 tmSort : List ( Field, Order ) -> TreemapProperty
 tmSort =
     TmSort
+
+
+{-| A squarifying treemap layout method used in a treemap transform.
+-}
+tmSquarify : TreemapMethod
+tmSquarify =
+    TmSquarify
 
 
 {-| TopoJSON feature format. The first parameter is the name of the feature object
@@ -9561,7 +12094,7 @@ for signals, `ax` for axes etc.) and construct a list of them. For example,
 
             mk =
                 marks
-                    << mark Text
+                    << mark text
                         [ mFrom [ srData (str "table") ]
                         , mEncode
                             [ enEnter
@@ -9591,13 +12124,20 @@ trAggregate =
     TAggregate
 
 
+{-| A trail mark (line with variable width).
+-}
+trail : Mark
+trail =
+    Trail
+
+
 {-| Apply the given ordered list of transforms to the given data stream. Transform
 examples include filtering, creating new data fields from expressions and creating
 new data fields suitable for a range of visualization and layout types.
 -}
 transform : List Transform -> DataTable -> DataTable
 transform transforms dTable =
-    dTable ++ [ ( "transform", JE.list (List.map transformSpec transforms) ) ]
+    dTable ++ [ ( "transform", JE.list transformSpec transforms ) ]
 
 
 {-| Convenience function for specifying a transparent setting for marks that can
@@ -9606,6 +12146,13 @@ be colored (e.g. with [maFill](#maFill))
 transparent : Value
 transparent =
     vStr "transparent"
+
+
+{-| A transverse Mercator map projection.
+-}
+transverseMercator : Projection
+transverseMercator =
+    TransverseMercator
 
 
 {-| Discretises numeric values into a set of bins. The first parameter is the
@@ -9710,40 +12257,6 @@ distributions from discrete samples through kernel density estimation.
 trDensity : Distribution -> List DensityProperty -> Transform
 trDensity =
     TDensity
-
-
-{-| A treemap layout method used in a treemap transform.
--}
-type TreemapMethod
-    = Squarify
-    | Resquarify
-    | Binary
-    | Dice
-    | Slice
-    | SliceDice
-    | TreemapMethodSignal String
-
-
-{-| Treemap layout method referenced by the value in the named signal.
--}
-treemapMethodSignal : String -> TreemapMethod
-treemapMethodSignal =
-    TreemapMethodSignal
-
-
-{-| A tree layout method used in a tree transform.
--}
-type TreeMethod
-    = Tidy
-    | Cluster
-    | TreeMethodSignal String
-
-
-{-| Tree layout method (`tidy` or `cluster`) referenced by the value in the named signal.
--}
-treeMethodSignal : String -> TreeMethod
-treeMethodSignal =
-    TreeMethodSignal
 
 
 {-| Compute the minimum and maximum values for a data field, producing a two-element
@@ -10153,7 +12666,7 @@ trWindow =
 {-| Compute a word cloud layour similar to a 'wordle'. Useful for visualising the
 relative frequency of words or phrases.
 
-    mark Text
+    mark text
         [ mTransform
             [ trWordcloud
                 [ wcSize (nums [ 800, 400 ])
@@ -10172,8 +12685,36 @@ trWordcloud =
     TWordcloud
 
 
-{-| Vertical alignment of some text or an image mark. Note that the `Alphabetic`
-type constructor applies only to text marks.
+{-| Indicate a TSV (tab-separated) format when parsing a data source.
+-}
+tsv : FormatProperty
+tsv =
+    TSV
+
+
+{-| Time unit referenced by the value in the named signal.
+-}
+tuSignal : String -> TimeUnit
+tuSignal =
+    TimeUnitSignal
+
+
+{-| Make text uppercase when pre-processing as part of a count pattern transformation.
+-}
+uppercase : Case
+uppercase =
+    Uppercase
+
+
+{-| Bottom vertical text alignment.
+-}
+vaBottom : VAlign
+vaBottom =
+    AlignBottom
+
+
+{-| Generated by [vaTop](#vaTop), [vaMiddle](#vaMiddle), [vaBottom](#vaBottom),
+[vaAlphabetic](#vaAlphabetic) and [vaSignal](#vaSignal).
 -}
 type VAlign
     = AlignTop
@@ -10183,11 +12724,12 @@ type VAlign
     | VAlignSignal String
 
 
-{-| Vertical text alignment referenced by the value in the named signal.
+{-| 'Alphabetic' vertical alignment aligning font baseline. Applies to text
+marks only.
 -}
-vAlignSignal : String -> VAlign
-vAlignSignal =
-    VAlignSignal
+vaAlphabetic : VAlign
+vaAlphabetic =
+    Alphabetic
 
 
 {-| Convenience function for indicating an alphabetic vertical alignment.
@@ -10195,6 +12737,27 @@ vAlignSignal =
 vAlphabetic : Value
 vAlphabetic =
     vStr "alphabetic"
+
+
+{-| Middle vertical text alignment.
+-}
+vaMiddle : VAlign
+vaMiddle =
+    AlignMiddle
+
+
+{-| Vertical text alignment referenced by the value in the named signal.
+-}
+vaSignal : String -> VAlign
+vaSignal =
+    VAlignSignal
+
+
+{-| Top vertical text alignment.
+-}
+vaTop : VAlign
+vaTop =
+    AlignTop
 
 
 {-| Band number or fraction of a band number. Band scales are used when
@@ -10348,7 +12911,7 @@ size are visualized. Generated by [`legends`](#legends).
 **Title properties** specify how a visualization title should appear. Generated
 by [`title`](#title).
 
-** Layout properties** specify how a group of visual marks are organised within
+\*\* Layout properties\*\* specify how a group of visual marks are organised within
 a grid. This allows visualizations to be composed of other visualizations, for
 example in a dashboard or collection of small multiples. Generated by [`layout`](#layout).
 
@@ -10534,6 +13097,13 @@ wcText =
     WcText
 
 
+{-| A week time unit.
+-}
+week : TimeUnit
+week =
+    Week
+
+
 {-| Convenience function for specifying a white color setting for marks that can
 be colored (e.g. with [maStroke](#maStroke))
 -}
@@ -10641,7 +13211,7 @@ wnIgnorePeers =
 
     transform
         [ trWindow [ wnOperation RowNumber "order" ]
-          [ wnSort [ ( field "score", Ascend ) ] ]
+            [ wnSort [ ( field "score", Ascend ) ] ]
         ]
 
 If two objects are equal in terms of sorting field datum by they are considered
@@ -10654,7 +13224,10 @@ wnSort =
     WnSort
 
 
-{-| Operations that may be applied during a window transformation.
+{-| Generated by [woRowNumber](#woRowNumber), [woRank](#woRank), [woDenseRank](#woDenseRank),
+[woPercentRank](#woPercentRank), [woCumeDist](#woCumeDist), [woPercentile](#woPercentile),
+[woLag](#woLag), [woLead](#woLead), [woFirstValue](#woFirstValue), [woLastValue](#woLastValue),
+[woNthValue](#woNthValue) and [woSignal](#woSignal).
 -}
 type WOperation
     = RowNumber
@@ -10671,13 +13244,97 @@ type WOperation
     | WOperationSignal String
 
 
+{-| Cumulative distribution function to be applied in a window transform.
+-}
+woCumeDist : WOperation
+woCumeDist =
+    CumeDist
+
+
+{-| Dense rank function to be applied in a window transform.
+-}
+woDenseRank : WOperation
+woDenseRank =
+    DenseRank
+
+
+{-| First value in a sliding window to be applied in a window transform.
+-}
+woFirstValue : WOperation
+woFirstValue =
+    FirstValue
+
+
+{-| Value preceding the current object in a sliding window to be applied in a window transform.
+-}
+woLag : WOperation
+woLag =
+    Lag
+
+
+{-| Last value in a sliding window to be applied in a window transform.
+-}
+woLastValue : WOperation
+woLastValue =
+    LastValue
+
+
+{-| Value following the current object in a sliding window to be applied in a window transform.
+-}
+woLead : WOperation
+woLead =
+    Lead
+
+
+{-| Nth value in a sliding window to be applied in a window transform.
+-}
+woNthValue : WOperation
+woNthValue =
+    NthValue
+
+
+{-| Value preceding the current object in a sliding window to be applied in a window transform.
+-}
+woPercentile : WOperation
+woPercentile =
+    Ntile
+
+
+{-| Percentile of values in a sliding window to be applied in a window transform.
+-}
+woPercentRank : WOperation
+woPercentRank =
+    PercentRank
+
+
+{-| Rank function to be applied in a window transform.
+-}
+woRank : WOperation
+woRank =
+    Rank
+
+
+{-| Assign consecutive row number to values in a data object to be applied in a window transform.
+-}
+woRowNumber : WOperation
+woRowNumber =
+    RowNumber
+
+
 {-| Window operation referenced by the value in the named signal. For names of
 valid window operations see the
 [Vega window operation documentation](https://vega.github.io/vega/docs/transforms/window/#ops)
 -}
-wOperationSignal : String -> WOperation
-wOperationSignal =
+woSignal : String -> WOperation
+woSignal =
     WOperationSignal
+
+
+{-| A year time unit.
+-}
+year : TimeUnit
+year =
+    Year
 
 
 
@@ -10692,16 +13349,16 @@ aggregateProperty : AggregateProperty -> LabelledSpec
 aggregateProperty ap =
     case ap of
         AgGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         AgFields fs ->
-            ( "fields", JE.list (List.map fieldSpec fs) )
+            ( "fields", JE.list fieldSpec fs )
 
         AgOps ops ->
-            ( "ops", JE.list (List.map opSpec ops) )
+            ( "ops", JE.list opSpec ops )
 
         AgAs labels ->
-            ( "as", JE.list (List.map JE.string labels) )
+            ( "as", JE.list JE.string labels )
 
         AgCross b ->
             ( "cross", booSpec b )
@@ -10915,6 +13572,7 @@ axisProperty ap =
                 Num step ->
                     if step <= 0 then
                         ( "tickCount", timeUnitSpec tu )
+
                     else
                         ( "tickCount", JE.object [ ( "interval", timeUnitSpec tu ), ( "step", numSpec n ) ] )
 
@@ -11084,10 +13742,10 @@ binProperty bnProp =
         BnSteps ns ->
             case ns of
                 Num _ ->
-                    ( "steps", JE.list [ numSpec ns ] )
+                    ( "steps", JE.list numSpec [ ns ] )
 
                 NumSignal _ ->
-                    ( "steps", JE.list [ numSpec ns ] )
+                    ( "steps", JE.list numSpec [ ns ] )
 
                 _ ->
                     ( "steps", numSpec ns )
@@ -11105,26 +13763,26 @@ binProperty bnProp =
             ( "signal", JE.string s )
 
         BnAs mn mx ->
-            ( "as", JE.list [ JE.string mn, JE.string mx ] )
+            ( "as", JE.list JE.string [ mn, mx ] )
 
 
 booSpec : Boo -> Spec
-booSpec b =
-    case b of
+booSpec boo =
+    case boo of
         Boo b ->
             JE.bool b
 
         Boos bs ->
-            JE.list (List.map JE.bool bs)
+            JE.list JE.bool bs
 
         BooSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
         BooSignals sigs ->
-            JE.list (List.map (\sig -> JE.object [ signalReferenceProperty sig ]) sigs)
+            JE.list (\sig -> JE.object [ signalReferenceProperty sig ]) sigs
 
-        BooExpr expr ->
-            JE.object [ exprProperty expr ]
+        BooExpr ex ->
+            JE.object [ exprProperty ex ]
 
 
 boundsCalculationSpec : BoundsCalculation -> Spec
@@ -11212,8 +13870,8 @@ comparatorProperties comp =
         ( fs, os ) =
             List.unzip comp
     in
-    [ ( "field", JE.list (List.map fieldSpec fs) )
-    , ( "order", JE.list (List.map orderSpec os) )
+    [ ( "field", JE.list fieldSpec fs )
+    , ( "order", JE.list orderSpec os )
     ]
 
 
@@ -11234,14 +13892,16 @@ configProperty cp =
                 filterLabel =
                     if ef == Allow then
                         "allow"
+
                     else
                         "prevent"
 
                 listSpec =
                     if ets == [] then
                         JE.bool True
+
                     else
-                        JE.list (List.map (\et -> JE.string (eventTypeLabel et)) ets)
+                        JE.list (\et -> JE.string (eventTypeLabel et)) ets
             in
             ( "events", JE.object [ ( "defaults", JE.object [ ( filterLabel, listSpec ) ] ) ] )
 
@@ -11286,21 +13946,23 @@ configProperty cp =
                             "heatmap"
 
                         _ ->
-                            "" |> Debug.log ("Warning: cfScale range should be a scale range definition but was " ++ toString ra1)
+                            --|> Debug.log ("Warning: cfScale range should be a scale range definition but was " ++ Debug.toString ra1)
+                            ""
 
                 raVals =
                     case ra2 of
-                        RStrs ss ->
-                            JE.list (List.map JE.string ss)
+                        RaStrs ss ->
+                            JE.list JE.string ss
 
-                        RSignal sig ->
+                        RaSignal sig ->
                             JE.object [ signalReferenceProperty sig ]
 
-                        RScheme name options ->
+                        RaScheme name options ->
                             JE.object (List.map schemeProperty (SScheme name :: options))
 
                         _ ->
-                            JE.null |> Debug.log ("Warning: cfScale range values should be color strings or scheme but was " ++ toString ra2)
+                            -- |> Debug.log ("Warning: cfScale range values should be color strings or scheme but was " ++ Debug.toString ra2)
+                            JE.null
             in
             ( "range", JE.object [ ( raLabel, raVals ) ] )
 
@@ -11311,7 +13973,8 @@ contourProperty cnProp =
         CnValues n ->
             case n of
                 Num _ ->
-                    ( "values", JE.null ) |> Debug.log ("Warning: cnValues expecting list of numbers or signals but was given " ++ toString n)
+                    --|> Debug.log ("Warning: cnValues expecting list of numbers or signals but was given " ++ Debug.toString n)
+                    ( "values", JE.null )
 
                 _ ->
                     ( "values", numSpec n )
@@ -11334,7 +13997,8 @@ contourProperty cnProp =
         CnThresholds n ->
             case n of
                 Num _ ->
-                    ( "thresholds", JE.null ) |> Debug.log ("Warning: cnThresholds expecting list of numbers or signals but was given " ++ toString n)
+                    -- |> Debug.log ("Warning: cnThresholds expecting list of numbers or signals but was given " ++ Debug.toString n)
+                    ( "thresholds", JE.null )
 
                 _ ->
                     ( "thresholds", numSpec n )
@@ -11359,7 +14023,7 @@ countPatternProperty cpProp =
             ( "stopwords", strSpec s )
 
         CPAs s1 s2 ->
-            ( "as", JE.list [ JE.string s1, JE.string s2 ] )
+            ( "as", JE.list JE.string [ s1, s2 ] )
 
 
 crossProperty : CrossProperty -> LabelledSpec
@@ -11369,7 +14033,7 @@ crossProperty crProp =
             ( "filter", JE.object [ exprProperty ex ] )
 
         CrAs a b ->
-            ( "as", JE.list [ JE.string a, JE.string b ] )
+            ( "as", JE.list JE.string [ a, b ] )
 
 
 dataProperty : DataProperty -> LabelledSpec
@@ -11382,10 +14046,10 @@ dataProperty dProp =
             ( "source", JE.string src )
 
         DaSources srcs ->
-            ( "source", JE.list (List.map JE.string srcs) )
+            ( "source", JE.list JE.string srcs )
 
         DaOn triggers ->
-            ( "on", JE.list triggers )
+            ( "on", JE.list identity triggers )
 
         DaUrl url ->
             ( "url", strSpec url )
@@ -11416,7 +14080,7 @@ dataRefProperty dataRef =
             ( "field", fieldSpec f )
 
         DFields fs ->
-            ( "fields", JE.list (List.map fieldSpec fs) )
+            ( "fields", JE.list fieldSpec fs )
 
         DValues val ->
             ( "values", valueSpec val )
@@ -11426,11 +14090,12 @@ dataRefProperty dataRef =
 
         DReferences drss ->
             --( "fields", JE.list (List.map (\drs -> JE.object (List.map dataRefProperty drs)) drss) )
-            ( "fields", JE.list (List.map (\drs -> nestedSpec drs) drss) )
+            ( "fields", JE.list (\drs -> nestedSpec drs) drss )
 
         DSort sps ->
             if sps == [ Ascending ] || sps == [] then
                 ( "sort", JE.bool True )
+
             else
                 ( "sort", JE.object (List.map sortProperty sps) )
 
@@ -11456,7 +14121,7 @@ densityProperty dnp =
             ( "steps", numSpec n )
 
         DnAs s1 s2 ->
-            ( "as", JE.list [ JE.string s1, JE.string s2 ] )
+            ( "as", JE.list JE.string [ s1, s2 ] )
 
 
 distributionSpec : Distribution -> Spec
@@ -11483,6 +14148,7 @@ distributionSpec dist =
                     , ( "field", fieldSpec f )
                     , ( "bandwidth", numSpec bw )
                     ]
+
             else
                 JE.object
                     [ ( "function", JE.string "kde" )
@@ -11501,8 +14167,8 @@ distributionSpec dist =
             in
             JE.object
                 [ ( "function", JE.string "mixture" )
-                , ( "distributions", JE.list dists )
-                , ( "weights", JE.list probs )
+                , ( "distributions", JE.list identity dists )
+                , ( "weights", JE.list identity probs )
                 ]
 
 
@@ -11542,11 +14208,12 @@ eventHandlerSpec ehs =
                             ( "events", eventStreamSpec es )
 
                         _ ->
-                            ( "events", JE.list (List.map eventStreamSpec ess) )
+                            ( "events", JE.list eventStreamSpec ess )
 
                 EUpdate s ->
                     if s == "" then
                         ( "update", JE.string "{}" )
+
                     else
                         ( "update", JE.string s )
 
@@ -11591,7 +14258,7 @@ eventStreamSpec es =
             JE.object [ ( "signal", JE.string esSig ) ]
 
         ESMerge ess ->
-            JE.object [ ( "merge", JE.list (List.map eventStreamSpec ess) ) ]
+            JE.object [ ( "merge", JE.list eventStreamSpec ess ) ]
 
 
 eventStreamObjectSpec : List EventStreamProperty -> Spec
@@ -11606,7 +14273,7 @@ eventStreamObjectSpec ess =
                     ( "type", JE.string (eventTypeLabel et) )
 
                 ESBetween ess1 ess2 ->
-                    ( "between", JE.list [ eventStreamObjectSpec ess1, eventStreamObjectSpec ess2 ] )
+                    ( "between", JE.list eventStreamObjectSpec [ ess1, ess2 ] )
 
                 ESConsume b ->
                     ( "consume", booSpec b )
@@ -11617,7 +14284,7 @@ eventStreamObjectSpec ess =
                             ( "filter", JE.string s )
 
                         _ ->
-                            ( "filter", JE.list (List.map JE.string ex) )
+                            ( "filter", JE.list JE.string ex )
 
                 ESDebounce n ->
                     ( "debounce", numSpec n )
@@ -11631,8 +14298,8 @@ eventStreamObjectSpec ess =
                 ESThrottle n ->
                     ( "throttle", numSpec n )
 
-                ESDerived es ->
-                    ( "stream", eventStreamSpec es )
+                ESDerived evStream ->
+                    ( "stream", eventStreamSpec evStream )
     in
     JE.object (List.map esProperty ess)
 
@@ -11699,19 +14366,19 @@ eventTypeLabel et =
 
 
 exprProperty : Expr -> LabelledSpec
-exprProperty expr =
-    case expr of
-        ExField field ->
-            ( "field", JE.string field )
+exprProperty ex =
+    case ex of
+        ExField f ->
+            ( "field", JE.string f )
 
-        Expr expr ->
-            ( "expr", expressionSpec expr )
+        Expr e ->
+            ( "expr", expressionSpec e )
 
 
 expressionSpec : String -> Spec
-expressionSpec expr =
+expressionSpec =
     -- TODO: Would be better to parse expressions for correctness
-    JE.string expr
+    JE.string
 
 
 facetProperty : Facet -> LabelledSpec
@@ -11727,7 +14394,7 @@ facetProperty fct =
             ( "field", fieldSpec f )
 
         FaGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         FaAggregate aps ->
             ( "aggregate", JE.object (List.map aggregateProperty aps) )
@@ -11767,12 +14434,14 @@ foDataTypeSpec dType =
         FoDate dateFmt ->
             if dateFmt == "" then
                 JE.string "date"
+
             else
                 JE.string ("date:'" ++ dateFmt ++ "'")
 
         FoUtc dateFmt ->
             if dateFmt == "" then
                 JE.string "utc"
+
             else
                 JE.string ("utc:'" ++ dateFmt ++ "'")
 
@@ -11802,10 +14471,10 @@ forceSimulationProperty fProp =
             ( "velocityDecay", numSpec n )
 
         FsForces forces ->
-            ( "forces", JE.list (List.map forceSpec forces) )
+            ( "forces", JE.list forceSpec forces )
 
         FsAs x y vx vy ->
-            ( "as", JE.list [ JE.string x, JE.string y, JE.string vx, JE.string vy ] )
+            ( "as", JE.list JE.string [ x, y, vx, vy ] )
 
 
 formatProperty : FormatProperty -> List LabelledSpec
@@ -11833,7 +14502,7 @@ formatProperty fmt =
             [ ( "type", JE.string "topojson" ), ( "mesh", strSpec s ) ]
 
         Parse fmts ->
-            [ ( "parse", JE.object <| List.map (\( field, fmt ) -> ( field, foDataTypeSpec fmt )) fmts ) ]
+            [ ( "parse", JE.object <| List.map (\( f, fm ) -> ( f, foDataTypeSpec fm )) fmts ) ]
 
         ParseAuto ->
             [ ( "parse", JE.string "auto" ) ]
@@ -11886,8 +14555,8 @@ forceProperty fp =
 
 
 forceSpec : Force -> Spec
-forceSpec f =
-    case f of
+forceSpec force =
+    case force of
         FCenter fps ->
             JE.object (( "force", JE.string "center" ) :: List.map forceProperty fps)
 
@@ -11900,11 +14569,11 @@ forceSpec f =
         FLink fps ->
             JE.object (( "force", JE.string "link" ) :: List.map forceProperty fps)
 
-        FX field fps ->
-            JE.object (( "force", JE.string "x" ) :: ( "x", fieldSpec field ) :: List.map forceProperty fps)
+        FX f fps ->
+            JE.object (( "force", JE.string "x" ) :: ( "x", fieldSpec f ) :: List.map forceProperty fps)
 
-        FY field fps ->
-            JE.object (( "force", JE.string "y" ) :: ( "y", fieldSpec field ) :: List.map forceProperty fps)
+        FY f fps ->
+            JE.object (( "force", JE.string "y" ) :: ( "y", fieldSpec f ) :: List.map forceProperty fps)
 
 
 type FormulaUpdate
@@ -11926,7 +14595,7 @@ geoJsonProperty : GeoJsonProperty -> LabelledSpec
 geoJsonProperty gjProp =
     case gjProp of
         GjFields lng lat ->
-            ( "fields", JE.list [ fieldSpec lng, fieldSpec lat ] )
+            ( "fields", JE.list fieldSpec [ lng, lat ] )
 
         GjFeature f ->
             ( "geojson", fieldSpec f )
@@ -11938,11 +14607,11 @@ geoJsonProperty gjProp =
 geoPathProperty : GeoPathProperty -> LabelledSpec
 geoPathProperty gpProp =
     case gpProp of
-        GeField field ->
-            ( "field", fieldSpec field )
+        GeField f ->
+            ( "field", fieldSpec f )
 
-        GePointRadius num ->
-            ( "pointRadius", numSpec num )
+        GePointRadius n ->
+            ( "pointRadius", numSpec n )
 
         GeAs s ->
             ( "as", JE.string s )
@@ -11951,8 +14620,8 @@ geoPathProperty gpProp =
 graticuleProperty : GraticuleProperty -> LabelledSpec
 graticuleProperty grProp =
     case grProp of
-        GrField field ->
-            ( "field", fieldSpec field )
+        GrField f ->
+            ( "field", fieldSpec f )
 
         GrExtentMajor n ->
             numArrayProperty 2 "extentMajor" n
@@ -12043,7 +14712,7 @@ imputeProperty ip =
             ( "method", JE.string (imputeMethodLabel m) )
 
         ImGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         ImValue val ->
             ( "value", valueSpec val )
@@ -12107,6 +14776,7 @@ inputProperty prop =
         InAutocomplete b ->
             if b then
                 ( "autocomplete", JE.string "on" )
+
             else
                 ( "autocomplete", JE.string "off" )
 
@@ -12115,16 +14785,16 @@ joinAggregateProperty : JoinAggregateProperty -> LabelledSpec
 joinAggregateProperty ap =
     case ap of
         JAGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         JAFields fs ->
-            ( "fields", JE.list (List.map fieldSpec fs) )
+            ( "fields", JE.list fieldSpec fs )
 
         JAOps ops ->
-            ( "ops", JE.list (List.map opSpec ops) )
+            ( "ops", JE.list opSpec ops )
 
         JAAs labels ->
-            ( "as", JE.list (List.map JE.string labels) )
+            ( "as", JE.list JE.string labels )
 
 
 layoutProperty : LayoutProperty -> LabelledSpec
@@ -12347,6 +15017,7 @@ legendProperty lp =
                 Num step ->
                     if step <= 0 then
                         ( "tickCount", timeUnitSpec tu )
+
                     else
                         ( "tickCount", JE.object [ ( "interval", timeUnitSpec tu ), ( "step", numSpec n ) ] )
 
@@ -12390,7 +15061,7 @@ legendProperty lp =
             ( "titleOpacity", numSpec n )
 
         LeValues vals ->
-            ( "values", JE.list (List.map valueSpec vals) )
+            ( "values", JE.list valueSpec vals )
 
         LeZIndex n ->
             ( "zindex", numSpec n )
@@ -12446,17 +15117,17 @@ legendTypeSpec lt =
 linkPathProperty : LinkPathProperty -> LabelledSpec
 linkPathProperty lpProp =
     case lpProp of
-        LPSourceX field ->
-            ( "sourceX", fieldSpec field )
+        LPSourceX f ->
+            ( "sourceX", fieldSpec f )
 
-        LPSourceY field ->
-            ( "sourceY", fieldSpec field )
+        LPSourceY f ->
+            ( "sourceY", fieldSpec f )
 
-        LPTargetX field ->
-            ( "targetX", fieldSpec field )
+        LPTargetX f ->
+            ( "targetX", fieldSpec f )
 
-        LPTargetY field ->
-            ( "targetY", fieldSpec field )
+        LPTargetY f ->
+            ( "targetY", fieldSpec f )
 
         LPOrient o ->
             ( "orient", orientationSpec o )
@@ -12494,10 +15165,10 @@ lookupProperty : LookupProperty -> LabelledSpec
 lookupProperty luProp =
     case luProp of
         LValues fields ->
-            ( "values", JE.list (List.map fieldSpec fields) )
+            ( "values", JE.list fieldSpec fields )
 
         LAs fields ->
-            ( "as", JE.list (List.map JE.string fields) )
+            ( "as", JE.list JE.string fields )
 
         LDefault val ->
             ( "default", valueSpec val )
@@ -12775,9 +15446,11 @@ numArrayProperty len name n =
     case n of
         Nums ns ->
             if List.length ns == len then
-                ( name, JE.list (List.map JE.float ns) )
+                ( name, JE.list JE.float ns )
+
             else
-                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ toString len ++ " numbers but was given " ++ toString ns)
+                --|> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ Debug.toString len ++ " numbers but was given " ++ Debug.toString ns)
+                ( name, JE.null )
 
         NumSignal sig ->
             ( name, numSpec (NumSignal sig) )
@@ -12785,39 +15458,44 @@ numArrayProperty len name n =
         NumSignals sigs ->
             if List.length sigs == len then
                 ( name, numSpec (NumSignals sigs) )
+
             else
-                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ toString len ++ " signals but was given " ++ toString sigs)
+                --|> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ Debug.toString len ++ " signals but was given " ++ Debug.toString sigs)
+                ( name, JE.null )
 
         NumList ns ->
             if List.length ns == len then
-                ( name, JE.list (List.map numSpec ns) )
+                ( name, JE.list numSpec ns )
+
             else
-                ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ toString len ++ " nums but was given " ++ toString ns)
+                --|> Debug.log ("Warning: " ++ name ++ " expecting list of " ++ Debug.toString len ++ " nums but was given " ++ Debug.toString ns)
+                ( name, JE.null )
 
         _ ->
-            ( name, JE.null ) |> Debug.log ("Warning: " ++ name ++ " expecting list of 2 numbers but was given " ++ toString n)
+            --|> Debug.log ("Warning: " ++ name ++ " expecting list of 2 numbers but was given " ++ Debug.toString n)
+            ( name, JE.null )
 
 
 numSpec : Num -> Spec
-numSpec num =
-    case num of
-        Num num ->
-            JE.float num
+numSpec nm =
+    case nm of
+        Num n ->
+            JE.float n
 
-        Nums nums ->
-            JE.list (List.map JE.float nums)
+        Nums ns ->
+            JE.list JE.float ns
 
         NumSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
         NumSignals sigs ->
-            JE.list (List.map (\sig -> JE.object [ signalReferenceProperty sig ]) sigs)
+            JE.list (\sig -> JE.object [ signalReferenceProperty sig ]) sigs
 
-        NumExpr expr ->
-            JE.object [ exprProperty expr ]
+        NumExpr ex ->
+            JE.object [ exprProperty ex ]
 
-        NumList nums ->
-            JE.list (List.map numSpec nums)
+        NumList ns ->
+            JE.list numSpec ns
 
         NumNull ->
             JE.null
@@ -12831,9 +15509,6 @@ opSpec op =
 
         ArgMin ->
             JE.string "argmin"
-
-        Average ->
-            JE.string "average"
 
         Count ->
             JE.string "count"
@@ -12871,7 +15546,7 @@ opSpec op =
         Stdev ->
             JE.string "stdev"
 
-        Stdevp ->
+        StdevP ->
             JE.string "stdevp"
 
         Sum ->
@@ -12886,7 +15561,7 @@ opSpec op =
         Variance ->
             JE.string "variance"
 
-        Variancep ->
+        VarianceP ->
             JE.string "variancep"
 
         OperationSignal sigName ->
@@ -12962,22 +15637,7 @@ packProperty pp =
             ( "padding", numSpec padSize )
 
         PaAs x y r depth children ->
-            ( "as", JE.list (List.map JE.string [ x, y, r, depth, children ]) )
-
-
-paddingSpec : Padding -> Spec
-paddingSpec pad =
-    case pad of
-        PSize p ->
-            JE.float p
-
-        PEdges l t r b ->
-            JE.object
-                [ ( "left", JE.float l )
-                , ( "top", JE.float t )
-                , ( "right", JE.float r )
-                , ( "bottom", JE.float b )
-                ]
+            ( "as", JE.list JE.string [ x, y, r, depth, children ] )
 
 
 partitionProperty : PartitionProperty -> LabelledSpec
@@ -12999,7 +15659,7 @@ partitionProperty pp =
             numArrayProperty 2 "size" n
 
         PtAs x0 y0 x1 y1 depth children ->
-            ( "as", JE.list [ JE.string x0, JE.string y0, JE.string x1, JE.string y1, JE.string depth, JE.string children ] )
+            ( "as", JE.list JE.string [ x0, y0, x1, y1, depth, children ] )
 
 
 pieProperty : PieProperty -> LabelledSpec
@@ -13018,14 +15678,14 @@ pieProperty pp =
             ( "sort", booSpec b )
 
         PiAs y0 y1 ->
-            ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
+            ( "as", JE.list JE.string [ y0, y1 ] )
 
 
 pivotProperty : PivotProperty -> LabelledSpec
 pivotProperty pp =
     case pp of
         PiGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         PiLimit n ->
             ( "limit", numSpec n )
@@ -13080,10 +15740,12 @@ projectionLabel pr =
             "transverseMercator"
 
         Proj s ->
-            "" |> Debug.log ("Warning: Attempting to set projection type to " ++ strString s)
+            --|> Debug.log ("Warning: Attempting to set projection type to " ++ strString s)
+            ""
 
         ProjectionSignal sig ->
-            "" |> Debug.log ("Warning: Attempting to set projection type to " ++ sig)
+            --|> Debug.log ("Warning: Attempting to set projection type to " ++ sig)
+            ""
 
 
 projectionProperty : ProjectionProperty -> LabelledSpec
@@ -13092,28 +15754,33 @@ projectionProperty projProp =
         PrType pType ->
             ( "type", projectionSpec pType )
 
-        PrClipAngle n ->
-            case n of
-                Num 0 ->
-                    -- Anitmeridian cutting
-                    ( "clipAngle", JE.null )
+        PrClipAngle nm ->
+            case nm of
+                Num n ->
+                    if n == 0 then
+                        -- Anitmeridian cutting
+                        ( "clipAngle", JE.null )
+
+                    else
+                        ( "clipAngle", JE.float n )
 
                 _ ->
-                    ( "clipAngle", numSpec n )
+                    ( "clipAngle", numSpec nm )
 
         PrClipExtent n ->
             case n of
                 Nums [ x0, y0, x1, y1 ] ->
-                    ( "clipExtent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x1, JE.float y1 ] ] )
+                    ( "clipExtent", JE.list (JE.list JE.float) [ [ x0, y0 ], [ x1, y1 ] ] )
 
                 NumSignal sig ->
                     ( "clipExtent", numSpec (NumSignal sig) )
 
                 NumSignals [ sigX0, sigY0, sigX1, sigY1 ] ->
-                    ( "clipExtent", JE.list [ numSpec (NumSignals [ sigX0, sigY0 ]), numSpec (NumSignals [ sigX1, sigY1 ]) ] )
+                    ( "clipExtent", JE.list numSpec [ NumSignals [ sigX0, sigY0 ], NumSignals [ sigX1, sigY1 ] ] )
 
                 _ ->
-                    ( "clipExtent", JE.null ) |> Debug.log ("Warning: prClipExtent expecting list of 4 numbers but was given " ++ toString n)
+                    --|> Debug.log ("Warning: prClipExtent expecting list of 4 numbers but was given " ++ Debug.toString n)
+                    ( "clipExtent", JE.null )
 
         PrScale n ->
             ( "scale", numSpec n )
@@ -13127,10 +15794,10 @@ projectionProperty projProp =
         PrRotate n ->
             case n of
                 Nums [ lambda, phi ] ->
-                    ( "rotate", JE.list [ JE.float lambda, JE.float phi ] )
+                    ( "rotate", JE.list JE.float [ lambda, phi ] )
 
                 Nums [ lambda, phi, gamma ] ->
-                    ( "rotate", JE.list [ JE.float lambda, JE.float phi, JE.float gamma ] )
+                    ( "rotate", JE.list JE.float [ lambda, phi, gamma ] )
 
                 NumSignal sig ->
                     ( "rotate", numSpec (NumSignal sig) )
@@ -13148,7 +15815,8 @@ projectionProperty projProp =
                     ( "rotate", numSpec (NumList [ numLambda, numPhi, numGamma ]) )
 
                 _ ->
-                    ( "rotate", JE.null ) |> Debug.log ("Warning: prRotate expecting list of 2 or 3 numbers but was given " ++ toString n)
+                    --|> Debug.log ("Warning: prRotate expecting list of 2 or 3 numbers but was given " ++ Debug.toString n)
+                    ( "rotate", JE.null )
 
         PrPointRadius n ->
             ( "pointRadius", numSpec n )
@@ -13167,16 +15835,17 @@ projectionProperty projProp =
         PrExtent n ->
             case n of
                 Nums [ x0, y0, x1, y1 ] ->
-                    ( "extent", JE.list [ JE.list [ JE.float x0, JE.float y0 ], JE.list [ JE.float x1, JE.float y1 ] ] )
+                    ( "extent", JE.list (JE.list JE.float) [ [ x0, y0 ], [ x1, y1 ] ] )
 
                 NumSignal sig ->
                     ( "extent", numSpec (NumSignal sig) )
 
                 NumSignals [ sigX0, sigY0, sigX1, sigY1 ] ->
-                    ( "extent", JE.list [ numSpec (NumSignals [ sigX0, sigY0 ]), numSpec (NumSignals [ sigX1, sigY1 ]) ] )
+                    ( "extent", JE.list numSpec [ NumSignals [ sigX0, sigY0 ], NumSignals [ sigX1, sigY1 ] ] )
 
                 _ ->
-                    ( "extent", JE.null ) |> Debug.log ("Warning: prExtent expecting list of 4 numbers but was given " ++ toString n)
+                    --|> Debug.log ("Warning: prExtent expecting list of 4 numbers but was given " ++ Debug.toString n)
+                    ( "extent", JE.null )
 
         PrSize n ->
             numArrayProperty 2 "size" n
@@ -13225,8 +15894,8 @@ projectionSpec proj =
 scaleDomainSpec : ScaleDomain -> Spec
 scaleDomainSpec sdType =
     case sdType of
-        DoNums nums ->
-            numSpec nums
+        DoNums ns ->
+            numSpec ns
 
         DoStrs cats ->
             strSpec cats
@@ -13236,8 +15905,8 @@ scaleDomainSpec sdType =
 
 
 scaleSpec : Scale -> Spec
-scaleSpec scType =
-    case scType of
+scaleSpec sct =
+    case sct of
         ScLinear ->
             JE.string "linear"
 
@@ -13280,6 +15949,9 @@ scaleSpec scType =
         ScQuantize ->
             JE.string "quantize"
 
+        ScThreshold ->
+            JE.string "threshold"
+
         ScCustom s ->
             JE.string s
 
@@ -13310,25 +15982,25 @@ scaleProperty scaleProp =
 
         SRange range ->
             case range of
-                RNums xs ->
-                    ( "range", JE.list (List.map JE.float xs) )
+                RaNums xs ->
+                    ( "range", JE.list JE.float xs )
 
-                RStrs ss ->
-                    ( "range", JE.list (List.map JE.string ss) )
+                RaStrs ss ->
+                    ( "range", JE.list JE.string ss )
 
-                RValues vals ->
-                    ( "range", JE.list (List.map valueSpec vals) )
+                RaValues vals ->
+                    ( "range", JE.list valueSpec vals )
 
-                RSignal sig ->
+                RaSignal sig ->
                     ( "range", JE.object [ signalReferenceProperty sig ] )
 
-                RScheme name options ->
+                RaScheme name options ->
                     ( "range", JE.object (List.map schemeProperty (SScheme name :: options)) )
 
-                RData dRefs ->
+                RaData dRefs ->
                     ( "range", JE.object (List.map dataRefProperty dRefs) )
 
-                RStep val ->
+                RaStep val ->
                     ( "range", JE.object [ ( "step", valueSpec val ) ] )
 
                 RaWidth ->
@@ -13355,11 +16027,8 @@ scaleProperty scaleProp =
                 RaHeatmap ->
                     ( "range", JE.string "heatmap" )
 
-                RCustom name ->
+                RaCustom name ->
                     ( "range", JE.string name )
-
-                ScaleRangeSignal sig ->
-                    ( "range", JE.object [ signalReferenceProperty sig ] )
 
         SPadding x ->
             ( "padding", numSpec x )
@@ -13439,20 +16108,20 @@ sideSpec orient =
 signalProperty : SignalProperty -> LabelledSpec
 signalProperty sigProp =
     case sigProp of
-        SiName siName ->
-            ( "name", JE.string siName )
+        SiName s ->
+            ( "name", JE.string s )
 
-        SiBind bind ->
-            bindingProperty bind
+        SiBind bd ->
+            bindingProperty bd
 
         SiDescription s ->
             ( "description", JE.string s )
 
-        SiUpdate expr ->
-            ( "update", expressionSpec expr )
+        SiUpdate ex ->
+            ( "update", expressionSpec ex )
 
         SiOn ehs ->
-            ( "on", JE.list (List.map eventHandlerSpec ehs) )
+            ( "on", JE.list eventHandlerSpec ehs )
 
         SiReact b ->
             ( "react", booSpec b )
@@ -13478,8 +16147,8 @@ sortProperty sp =
         Descending ->
             ( "order", JE.string "descending" )
 
-        ByField field ->
-            ( "field", strSpec field )
+        ByField f ->
+            ( "field", strSpec f )
 
         Op op ->
             ( "op", opSpec op )
@@ -13534,7 +16203,7 @@ stackProperty sp =
             ( "field", fieldSpec f )
 
         StGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         StSort comp ->
             ( "sort", JE.object (comparatorProperties comp) )
@@ -13543,72 +16212,32 @@ stackProperty sp =
             ( "offset", stackOffsetSpec off )
 
         StAs y0 y1 ->
-            ( "as", JE.list (List.map JE.string [ y0, y1 ]) )
+            ( "as", JE.list JE.string [ y0, y1 ] )
 
 
 strSpec : Str -> Spec
-strSpec str =
-    case str of
+strSpec string =
+    case string of
         Str s ->
             JE.string s
 
         Strs ss ->
-            JE.list (List.map JE.string ss)
+            JE.list JE.string ss
 
         StrList ss ->
-            JE.list (List.map strSpec ss)
+            JE.list strSpec ss
 
         StrSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
         StrSignals sigs ->
-            JE.list (List.map (\sig -> JE.object [ signalReferenceProperty sig ]) sigs)
+            JE.list (\sig -> JE.object [ signalReferenceProperty sig ]) sigs
 
-        StrExpr expr ->
-            JE.object [ exprProperty expr ]
+        StrExpr ex ->
+            JE.object [ exprProperty ex ]
 
         StrNull ->
             JE.null
-
-
-strString : Str -> String
-strString strVal =
-    case strVal of
-        Str s ->
-            s
-
-        Strs ss ->
-            toString ss
-
-        StrList ss ->
-            case ss of
-                [] ->
-                    "[]"
-
-                [ s ] ->
-                    strString s
-
-                _ ->
-                    let
-                        notLast =
-                            ss |> List.reverse |> List.drop 1 |> List.reverse
-
-                        lastStr =
-                            ss |> List.reverse |> List.head |> Maybe.withDefault (str "")
-                    in
-                    "[" ++ (List.map (\s -> strString s ++ ",") notLast |> String.concat) ++ strString lastStr ++ "]"
-
-        StrSignal sig ->
-            "{'signal': '" ++ sig ++ "'}"
-
-        StrSignals sigs ->
-            toString sigs
-
-        StrExpr ex ->
-            toString ex
-
-        StrNull ->
-            "null"
 
 
 symbolSpec : Symbol -> Spec
@@ -13652,7 +16281,8 @@ symbolLabel sym =
             svgPath
 
         SymbolSignal sig ->
-            sig |> Debug.log "Warning: Attempting to provide a signal name to signalValue"
+            --|> Debug.log "Warning: Attempting to provide a signal name to signalValue"
+            sig
 
 
 teMethodSpec : TreeMethod -> Spec
@@ -13669,7 +16299,7 @@ teMethodSpec m =
 
 
 timeUnitSpec : TimeUnit -> Spec
-timeUnitSpec tu =
+timeUnitSpec tUnit =
     let
         timeUnitLabel tu =
             case tu of
@@ -13704,12 +16334,12 @@ timeUnitSpec tu =
 
         -- This will never be called
     in
-    case tu of
+    case tUnit of
         TimeUnitSignal sig ->
             JE.object [ signalReferenceProperty sig ]
 
         _ ->
-            JE.string (timeUnitLabel tu)
+            JE.string (timeUnitLabel tUnit)
 
 
 titleFrameSpec : TitleFrame -> Spec
@@ -13786,25 +16416,25 @@ titleProperty tProp =
 tmMethodSpec : TreemapMethod -> Spec
 tmMethodSpec m =
     case m of
-        Squarify ->
+        TmSquarify ->
             JE.string "squarify"
 
-        Resquarify ->
+        TmResquarify ->
             JE.string "resquarify"
 
-        Binary ->
+        TmBinary ->
             JE.string "binary"
 
-        Dice ->
+        TmDice ->
             JE.string "dice"
 
-        Slice ->
+        TmSlice ->
             JE.string "slice"
 
-        SliceDice ->
+        TmSliceDice ->
             JE.string "slicedice"
 
-        TreemapMethodSignal sigName ->
+        TmSignal sigName ->
             JE.object [ signalReferenceProperty sigName ]
 
 
@@ -13836,7 +16466,7 @@ topMarkProperty mProp =
             [ ( "name", JE.string s ) ]
 
         MOn triggers ->
-            [ ( "on", JE.list triggers ) ]
+            [ ( "on", JE.list identity triggers ) ]
 
         MRole s ->
             [ ( "role", JE.string s ) ]
@@ -13845,10 +16475,10 @@ topMarkProperty mProp =
             [ ( "sort", JE.object (comparatorProperties comp) ) ]
 
         MTransform trans ->
-            [ ( "transform", JE.list (List.map transformSpec trans) ) ]
+            [ ( "transform", JE.list transformSpec trans ) ]
 
         MStyle ss ->
-            [ ( "style", JE.list (List.map JE.string ss) ) ]
+            [ ( "style", JE.list JE.string ss ) ]
 
         MGroup props ->
             List.map (\( vProp, spec ) -> ( vPropertyLabel vProp, spec )) props
@@ -13868,7 +16498,8 @@ transformSpec trans =
                 extSpec =
                     case extent of
                         Num _ ->
-                            JE.null |> Debug.log ("trBin expecting an extent list but was given " ++ toString extent)
+                            --|> Debug.log ("trBin expecting an extent list but was given " ++ Debug.toString extent)
+                            JE.null
 
                         _ ->
                             numSpec extent
@@ -13895,24 +16526,24 @@ transformSpec trans =
 
         TCrossFilter tuples ->
             let
-                ( fs, nums ) =
+                ( fs, ns ) =
                     List.unzip tuples
             in
             JE.object
                 [ ( "type", JE.string "crossfilter" )
-                , ( "fields", JE.list (List.map fieldSpec fs) )
-                , ( "query", JE.list (List.map numSpec nums) )
+                , ( "fields", JE.list fieldSpec fs )
+                , ( "query", JE.list numSpec ns )
                 ]
 
         TCrossFilterAsSignal tuples s ->
             let
-                ( fs, nums ) =
+                ( fs, ns ) =
                     List.unzip tuples
             in
             JE.object
                 [ ( "type", JE.string "crossfilter" )
-                , ( "fields", JE.list (List.map fieldSpec fs) )
-                , ( "query", JE.list (List.map numSpec nums) )
+                , ( "fields", JE.list fieldSpec fs )
+                , ( "query", JE.list numSpec ns )
                 , ( "signal", JE.string s )
                 ]
 
@@ -13923,30 +16554,30 @@ transformSpec trans =
                     :: List.map densityProperty dnps
                 )
 
-        TExtent field ->
+        TExtent f ->
             JE.object
                 [ ( "type", JE.string "extent" )
-                , ( "field", fieldSpec field )
+                , ( "field", fieldSpec f )
                 ]
 
-        TExtentAsSignal field sigName ->
+        TExtentAsSignal f sigName ->
             JE.object
                 [ ( "type", JE.string "extent" )
-                , ( "field", fieldSpec field )
+                , ( "field", fieldSpec f )
                 , ( "signal", JE.string sigName )
                 ]
 
-        TFilter expr ->
-            JE.object [ ( "type", JE.string "filter" ), exprProperty expr ]
+        TFilter ex ->
+            JE.object [ ( "type", JE.string "filter" ), exprProperty ex ]
 
         TFlatten fs ->
-            JE.object [ ( "type", JE.string "flatten" ), ( "fields", JE.list (List.map fieldSpec fs) ) ]
+            JE.object [ ( "type", JE.string "flatten" ), ( "fields", JE.list fieldSpec fs ) ]
 
         TFlattenAs fs ss ->
             JE.object
                 [ ( "type", JE.string "flatten" )
-                , ( "fields", JE.list (List.map fieldSpec fs) )
-                , ( "as", JE.list (List.map JE.string ss) )
+                , ( "fields", JE.list fieldSpec fs )
+                , ( "as", JE.list JE.string ss )
                 ]
 
         TFold fs ->
@@ -13955,7 +16586,7 @@ transformSpec trans =
                     JE.object [ ( "type", JE.string "fold" ), ( "fields", fieldSpec f ) ]
 
                 _ ->
-                    JE.object [ ( "type", JE.string "fold" ), ( "fields", JE.list (List.map fieldSpec fs) ) ]
+                    JE.object [ ( "type", JE.string "fold" ), ( "fields", JE.list fieldSpec fs ) ]
 
         TFoldAs fs k v ->
             case fs of
@@ -13963,20 +16594,20 @@ transformSpec trans =
                     JE.object
                         [ ( "type", JE.string "fold" )
                         , ( "fields", fieldSpec f )
-                        , ( "as", JE.list [ JE.string k, JE.string v ] )
+                        , ( "as", JE.list JE.string [ k, v ] )
                         ]
 
                 _ ->
                     JE.object
                         [ ( "type", JE.string "fold" )
-                        , ( "fields", JE.list (List.map fieldSpec fs) )
-                        , ( "as", JE.list [ JE.string k, JE.string v ] )
+                        , ( "fields", JE.list fieldSpec fs )
+                        , ( "as", JE.list JE.string [ k, v ] )
                         ]
 
-        TFormula expr name update ->
+        TFormula ex name update ->
             JE.object
                 [ ( "type", JE.string "formula" )
-                , ( "expr", expressionSpec expr )
+                , ( "expr", expressionSpec ex )
                 , ( "as", JE.string name )
                 , ( "initonly", formulaUpdateSpec update )
                 ]
@@ -14003,7 +16634,7 @@ transformSpec trans =
                 (( "type", JE.string "lookup" )
                     :: ( "from", JE.string from )
                     :: ( "key", fieldSpec key )
-                    :: ( "fields", JE.list (List.map fieldSpec fields) )
+                    :: ( "fields", JE.list fieldSpec fields )
                     :: List.map lookupProperty lups
                 )
 
@@ -14022,8 +16653,8 @@ transformSpec trans =
             in
             JE.object
                 [ ( "type", JE.string "project" )
-                , ( "fields", JE.list (List.map fieldSpec fields) )
-                , ( "as", JE.list (List.map JE.string names) )
+                , ( "fields", JE.list fieldSpec fields )
+                , ( "as", JE.list JE.string names )
                 ]
 
         TSample n ->
@@ -14036,8 +16667,12 @@ transformSpec trans =
                         NumNull ->
                             []
 
-                        Num 0 ->
-                            []
+                        Num n ->
+                            if n == 0 then
+                                []
+
+                            else
+                                [ ( "step", numSpec step ) ]
 
                         Nums [] ->
                             []
@@ -14063,8 +16698,12 @@ transformSpec trans =
                         NumNull ->
                             []
 
-                        Num 0 ->
-                            []
+                        Num n ->
+                            if n == 0 then
+                                []
+
+                            else
+                                [ ( "step", numSpec step ) ]
 
                         Nums [] ->
                             []
@@ -14094,7 +16733,7 @@ transformSpec trans =
         TContour x y cps ->
             JE.object
                 (( "type", JE.string "contour" )
-                    :: ( "size", JE.list [ numSpec x, numSpec y ] )
+                    :: ( "size", JE.list numSpec [ x, y ] )
                     :: List.map contourProperty cps
                 )
 
@@ -14123,15 +16762,15 @@ transformSpec trans =
             JE.object
                 [ ( "type", JE.string "geopoint" )
                 , ( "projection", JE.string pName )
-                , ( "fields", JE.list [ fieldSpec fLon, fieldSpec fLat ] )
+                , ( "fields", JE.list fieldSpec [ fLon, fLat ] )
                 ]
 
         TGeoPointAs pName fLon fLat asLon asLat ->
             JE.object
                 [ ( "type", JE.string "geopoint" )
                 , ( "projection", JE.string pName )
-                , ( "fields", JE.list [ fieldSpec fLon, fieldSpec fLat ] )
-                , ( "as", JE.list [ JE.string asLon, JE.string asLat ] )
+                , ( "fields", JE.list fieldSpec [ fLon, fLat ] )
+                , ( "as", JE.list JE.string [ asLon, asLat ] )
                 ]
 
         TGeoShape pName gsps ->
@@ -14178,7 +16817,7 @@ transformSpec trans =
         TNest fs b ->
             JE.object
                 [ ( "type", JE.string "nest" )
-                , ( "keys", JE.list (List.map fieldSpec fs) )
+                , ( "keys", JE.list fieldSpec fs )
                 , ( "generate", booSpec b )
                 ]
 
@@ -14275,7 +16914,7 @@ treemapProperty tp =
             numArrayProperty 2 "size" n
 
         TmAs x0 y0 x1 y1 depth children ->
-            ( "as", JE.list [ JE.string x0, JE.string y0, JE.string x1, JE.string y1, JE.string depth, JE.string children ] )
+            ( "as", JE.list JE.string [ x0, y0, x1, y1, depth, children ] )
 
 
 treeProperty : TreeProperty -> LabelledSpec
@@ -14297,26 +16936,26 @@ treeProperty tp =
             numArrayProperty 2 "nodeSize" n
 
         TeAs x y depth children ->
-            ( "as", JE.list [ JE.string x, JE.string y, JE.string depth, JE.string children ] )
+            ( "as", JE.list JE.string [ x, y, depth, children ] )
 
 
 triggerProperties : TriggerProperty -> List LabelledSpec
 triggerProperties trans =
     case trans of
-        TgTrigger expr ->
-            [ ( "trigger", expressionSpec expr ) ]
+        TgTrigger ex ->
+            [ ( "trigger", expressionSpec ex ) ]
 
-        TgInsert expr ->
-            [ ( "insert", expressionSpec expr ) ]
+        TgInsert ex ->
+            [ ( "insert", expressionSpec ex ) ]
 
-        TgRemove expr ->
-            [ ( "remove", expressionSpec expr ) ]
+        TgRemove ex ->
+            [ ( "remove", expressionSpec ex ) ]
 
         TgRemoveAll ->
             [ ( "remove", JE.bool True ) ]
 
-        TgToggle expr ->
-            [ ( "toggle", expressionSpec expr ) ]
+        TgToggle ex ->
+            [ ( "toggle", expressionSpec ex ) ]
 
         -- Note the one-to-many relation between this trigger property and the labelled specs it generates.
         TgModifyValues modExpr valExpr ->
@@ -14356,7 +16995,7 @@ valRef : List Value -> Spec
 valRef vs =
     case vs of
         [ VIfElse ex ifs elses ] ->
-            JE.list (valIfElse ex ifs elses [ JE.object (( "test", JE.string ex ) :: List.concatMap valueProperties ifs) ])
+            JE.list identity (valIfElse ex ifs elses [ JE.object (( "test", JE.string ex ) :: List.concatMap valueProperties ifs) ])
 
         _ ->
             JE.object (List.concatMap valueProperties vs)
@@ -14365,11 +17004,11 @@ valRef vs =
 valueProperties : Value -> List LabelledSpec
 valueProperties val =
     case val of
-        VStr str ->
-            [ ( "value", JE.string str ) ]
+        VStr s ->
+            [ ( "value", JE.string s ) ]
 
-        VStrs strs ->
-            [ ( "value", JE.list (List.map JE.string strs) ) ]
+        VStrs ss ->
+            [ ( "value", JE.list JE.string ss ) ]
 
         VSignal sig ->
             [ signalReferenceProperty sig ]
@@ -14383,57 +17022,57 @@ valueProperties val =
         VScale fVal ->
             [ ( "scale", fieldSpec fVal ) ]
 
-        VKeyValue key val ->
-            [ ( key, valueSpec val ) ]
+        VKeyValue key v ->
+            [ ( key, valueSpec v ) ]
 
         VBand n ->
             [ ( "band", numSpec n ) ]
 
-        VExponent val ->
-            [ ( "exponent", valueSpec val ) ]
+        VExponent v ->
+            [ ( "exponent", valueSpec v ) ]
 
-        VMultiply val ->
-            [ ( "mult", valueSpec val ) ]
+        VMultiply v ->
+            [ ( "mult", valueSpec v ) ]
 
-        VOffset val ->
-            [ ( "offset", valueSpec val ) ]
+        VOffset v ->
+            [ ( "offset", valueSpec v ) ]
 
         VRound b ->
             [ ( "round", booSpec b ) ]
 
-        VNum num ->
-            [ ( "value", JE.float num ) ]
+        VNum n ->
+            [ ( "value", JE.float n ) ]
 
-        VNums nums ->
-            [ ( "value", JE.list (List.map JE.float nums) ) ]
+        VNums ns ->
+            [ ( "value", JE.list JE.float ns ) ]
 
         VObject vals ->
             [ ( "value", JE.object (List.concatMap valueProperties vals) ) ]
 
         Values vals ->
-            [ ( "value", JE.list (List.map valueSpec vals) ) ]
+            [ ( "value", JE.list valueSpec vals ) ]
 
         VBoo b ->
             [ ( "value", JE.bool b ) ]
 
         VBoos bs ->
-            [ ( "value", JE.list (List.map JE.bool bs) ) ]
+            [ ( "value", JE.list JE.bool bs ) ]
 
         VNull ->
             [ ( "value", JE.null ) ]
 
-        VIfElse expr ifs elses ->
-            ( "test", JE.string expr ) :: List.concatMap valueProperties ifs
+        VIfElse ex ifs elses ->
+            ( "test", JE.string ex ) :: List.concatMap valueProperties ifs
 
 
 valueSpec : Value -> Spec
 valueSpec val =
     case val of
-        VStr str ->
-            JE.string str
+        VStr s ->
+            JE.string s
 
-        VStrs strs ->
-            JE.list (List.map JE.string strs)
+        VStrs ss ->
+            JE.list JE.string ss
 
         VSignal sig ->
             JE.object [ signalReferenceProperty sig ]
@@ -14450,43 +17089,43 @@ valueSpec val =
         VBand n ->
             JE.object [ ( "band", numSpec n ) ]
 
-        VExponent val ->
-            JE.object [ ( "exponent", valueSpec val ) ]
+        VExponent v ->
+            JE.object [ ( "exponent", valueSpec v ) ]
 
-        VMultiply val ->
-            JE.object [ ( "mult", valueSpec val ) ]
+        VMultiply v ->
+            JE.object [ ( "mult", valueSpec v ) ]
 
-        VOffset val ->
-            JE.object [ ( "offset", valueSpec val ) ]
+        VOffset v ->
+            JE.object [ ( "offset", valueSpec v ) ]
 
         VRound b ->
             JE.object [ ( "round", booSpec b ) ]
 
-        VNum num ->
-            JE.float num
+        VNum n ->
+            JE.float n
 
-        VNums nums ->
-            JE.list (List.map JE.float nums)
+        VNums ns ->
+            JE.list JE.float ns
 
-        VKeyValue key val ->
-            JE.object [ ( key, valueSpec val ) ]
+        VKeyValue key v ->
+            JE.object [ ( key, valueSpec v ) ]
 
         VObject objs ->
             JE.object (List.concatMap valueProperties objs)
 
         Values objs ->
-            JE.list (List.map valueSpec objs)
+            JE.list valueSpec objs
 
         VBoo b ->
             JE.bool b
 
         VBoos bs ->
-            JE.list (List.map JE.bool bs)
+            JE.list JE.bool bs
 
         VNull ->
             JE.null
 
-        VIfElse expr ifs elses ->
+        VIfElse _ _ _ ->
             JE.null
 
 
@@ -14508,11 +17147,12 @@ voronoiProperty vp =
                     numSpec ns
 
                 _ ->
-                    JE.null |> Debug.log ("Warning: voProperty expecting list of 2 numbers but was given " ++ toString ns)
+                    --|> Debug.log ("Warning: voProperty expecting list of 2 numbers but was given " ++ Debug.toString ns)
+                    JE.null
     in
     case vp of
         VoExtent tl br ->
-            ( "extent", JE.list [ numPairSpec tl, numPairSpec br ] )
+            ( "extent", JE.list numPairSpec [ tl, br ] )
 
         VoSize sz ->
             ( "size", numPairSpec sz )
@@ -14633,10 +17273,10 @@ windowOperationProperties wos =
                 WnAggOperation _ _ _ s ->
                     JE.string s
     in
-    [ ( "ops", JE.list (List.map windowOpSpec wos) )
-    , ( "params", JE.list (List.map windowParamSpec wos) )
-    , ( "fields", JE.list (List.map windowFieldSpec wos) )
-    , ( "as", JE.list (List.map windowAsSpec wos) )
+    [ ( "ops", JE.list windowOpSpec wos )
+    , ( "params", JE.list windowParamSpec wos )
+    , ( "fields", JE.list windowFieldSpec wos )
+    , ( "as", JE.list windowAsSpec wos )
     ]
 
 
@@ -14687,7 +17327,7 @@ windowProperty wp =
             ( "sort", JE.object (comparatorProperties comp) )
 
         WnGroupBy fs ->
-            ( "groupby", JE.list (List.map fieldSpec fs) )
+            ( "groupby", JE.list fieldSpec fs )
 
         WnFrame n ->
             numArrayProperty 2 "frame" n
@@ -14730,4 +17370,4 @@ wordcloudProperty wcp =
             ( "spiral", spiralSpec sp )
 
         WcAs x y fnt fntSz fntSt fntW angle ->
-            ( "as", JE.list (List.map JE.string [ x, y, fnt, fntSz, fntSt, fntW, angle ]) )
+            ( "as", JE.list JE.string [ x, y, fnt, fntSz, fntSt, fntW, angle ] )

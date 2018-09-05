@@ -37,7 +37,7 @@ To get started, copy this example to a file `helloWorld.html` somewhere on your 
 <script>
 // This function grabs the specifications from Elm (here called namedSpecs).
 // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-Elm.HelloWorld.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
   for (let name of Object.keys(namedSpecs)) {
     vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
       console.warn
@@ -61,8 +61,8 @@ The key elements are:
 -   A `<div>` container with an ID (here called `helloWorld`) that will be the location in the HTML page that will contain your visualization.
 
 -   An _Elm subscription_ that links this page with the Elm program that generates the Vega specification.
-    Here `Elm.HelloWorld.worker()` references an Elm module that must be called `HelloWorld`.
-    When you create Elm-Vega modules with different names, you must match that name here (for example, `Elm.MyNewModule.worker()`).
+    Here `Elm.HelloWorld.init()` references an Elm module that must be called `HelloWorld`.
+    When you create Elm-Vega modules with different names, you must match that name here (for example, `Elm.MyNewModule.init()`).
 
 ## 3. Create an Elm-Vega Program
 
@@ -88,7 +88,7 @@ helloWorld =
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "myData") ]
                     , mEncode [ enEnter [ maText [ vField (field "label") ] ] ]
                     ]
@@ -111,13 +111,14 @@ mySpecs =
 {- ---------------------------------------------------------------------------
    The code below is boilerplate for creating a headless Elm module that opens
    an outgoing port to JavaScript and sends the Vega specs (mySpecs) to it.
+   There should be no need to change this.
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
@@ -139,7 +140,7 @@ This Vega example creates a simple data source called `myData` comprising a sing
 The final task is to convert the Elm file into JavaScript so it can be used by the HTML.
 To do this, open a command line window (e.g. a Terminal on MacOS or PowerShell on Windows), change to the directory containing your HTML and Elm files and type
 
-    elm make helloWorld.elm --output=js/helloWorld.js
+    elm make helloWorld.elm --output=js/helloWorld.js --optimize
 
 This should create the `helloWorld.js` file required by the HTML.
 

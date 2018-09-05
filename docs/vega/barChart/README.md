@@ -111,15 +111,15 @@ Here is how those two scales are specified:
 sc =
     scales
         << scale "xScale"
-            [ scType ScBand
+            [ scType scBand
             , scDomain (doData [ daDataset "table", daField (field "category") ])
-            , scRange RaWidth
+            , scRange raWidth
             , scPadding (num 0.05)
             ]
         << scale "yScale"
-            [ scType ScLinear
+            [ scType scLinear
             , scDomain (doData [ daDataset "table", daField (field "amount") ])
-            , scRange RaHeight
+            , scRange raHeight
             ]
 ```
 
@@ -127,11 +127,11 @@ Each scale is specified with the `scale` function that takes as its first parame
 The second parameter is a list of scale properties that define the mapping between data and channel.
 Usually, a scale will have at least these three properties defined: (a) the type of scale; (b) the _domain_ or source of values used to determine the extent of data that inform the scaling; (c) the _range_ that determines the extent of the scaled values after transformation.
 
-In this example, `xScale` will generate the discrete bar positions corresponding to the `category` field values and so is given the type `ScBand` and a domain based on the categorical data field.
-We wish the bands (bars) to extend across the full width of the visualization 'data rectangle' so we set the scale range to be `RaWidth`.
+In this example, `xScale` will generate the discrete bar positions corresponding to the `category` field values and so is given the type determined by `scBand` and a domain based on the categorical data field.
+We wish the bands (bars) to extend across the full width of the visualization 'data rectangle' so we set the scale range with `raWidth`.
 And we refine things a little by introducing a small horizontal gap between bars with `scPadding` setting it to the numeric literal 0.05 band units (i.e. 5% of a bar's width).
 
-In a similar way `yScale` is based on the `amount` data field and we wish bars to range across the full height of the data rectangle, but this time we give it the type `ScLinear` to indicate a continuous linear mapping from 0 to the maximum value of `amount`.
+In a similar way `yScale` is based on the `amount` data field and we wish bars to range across the full height of the data rectangle, but this time we give it the type with `scLinear` to indicate a continuous linear mapping from 0 to the maximum value of `amount`.
 
 ## Step 4: Specifying Axes
 
@@ -141,8 +141,8 @@ The third parameter is a list of customising properties such as placement of tic
 ```elm
 ax =
     axes
-        << axis "xScale" SBottom []
-        << axis "yScale" SLeft []
+        << axis "xScale" siBottom []
+        << axis "yScale" siLeft []
 ```
 
 Note how we reference the scales (`"xScale"` and `"yScale"`) specified in the previous step.
@@ -151,12 +151,12 @@ Note how we reference the scales (`"xScale"` and `"yScale"`) specified in the pr
 
 The final step to produce a usable bar chart is to specify the _marks_ that will represent the data values.
 
-Vega has plenty of different mark types, but for a simple bar chart we can use the `Rect` mark:
+Vega has plenty of different mark types, but for a simple bar chart we can use the `rect` mark:
 
 ```elm
 mk =
     marks
-        << mark Rect
+        << mark rect
             [ mFrom [ srData (str "table") ]
             , mEncode
                 [ enEnter
@@ -206,25 +206,25 @@ barchart =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scPadding (num 0.05)
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "amount") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom []
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -250,7 +250,7 @@ We can achieve this by adding `enHover` and `enUpdate` functions to the list of 
 ```elm
 mk =
     marks
-        << mark Rect
+        << mark rect
             [ mFrom [ srData (str "table") ]
             , mEncode
                 [ enEnter
@@ -275,7 +275,7 @@ In some circumstances the data backing a mark may be removed during the lifetime
 Finally we can add a tooltip that displays the data value represented by each bar by creating a new `Text` mark.
 To do this we need to create a _signal_.
 Signals act like variables but which update themselves whenever in incomeing signal or event changes.
-Here is one way of creating a tooltip signal that responds to mouse movement in and out of a `Rect` mark:
+Here is one way of creating a tooltip signal that responds to mouse movement in and out of a `rect` mark:
 
 ```elm
 si =
@@ -283,19 +283,19 @@ si =
         << signal "myTooltip"
             [ siValue (vStr "")
             , siOn
-                [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
-                , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                [ evHandler [ esObject [ esMark rect, esType etMouseOver ] ] [ evUpdate "datum" ]
+                , evHandler [ esObject [ esMark rect, esType etMouseOut ] ] [ evUpdate "" ]
                 ]
             ]
 ```
 
 This signal, here called `myTooltip`, is initialised with an empty string.
-We allow it to respond to interaction events with `siOn` and provide two event handlers, one to respond to the mouse pointer moving into a `Rect` mark by setting the signal's value to whatever data value (`datum`) the mark represents, and the other to reset the signal to an empty string when the ppinter moves off the mark.
+We allow it to respond to interaction events with `siOn` and provide two event handlers, one to respond to the mouse pointer moving into a `rect` mark by setting the signal's value to whatever data value (`datum`) the mark represents, and the other to reset the signal to an empty string when the ppinter moves off the mark.
 
 We can use this dynamic signal, which will contain the data item under the mouse pointer (if there is one), to change a new `Text` mark that displays the data value above the bar representing it:
 
 ```elm
-<< mark Text
+<< mark text
     [ mEncode
         [ enEnter
             [ maAlign [ hCenter ]
@@ -333,33 +333,33 @@ barchart =
                 << signal "myTooltip"
                     [ siValue (vStr "")
                     , siOn
-                        [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
-                        , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                        [ evHandler [ esObject [ esMark rect, esType etMouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark rect, esType etMouseOut ] ] [ evUpdate "" ]
                         ]
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scPadding (num 0.05)
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "amount") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom []
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -374,7 +374,7 @@ barchart =
                             [ maFill [ vStr "red" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maAlign [ hCenter ]

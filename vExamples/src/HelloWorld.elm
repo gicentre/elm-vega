@@ -16,7 +16,7 @@ helloWorld =
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "myData") ]
                     , mEncode [ enEnter [ maText [ vField (field "label") ] ] ]
                     ]
@@ -43,10 +43,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

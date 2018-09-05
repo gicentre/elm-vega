@@ -21,33 +21,33 @@ barchart =
                 << signal "myTooltip"
                     [ siValue (vStr "")
                     , siOn
-                        [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
-                        , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                        [ evHandler [ esObject [ esMark rect, esType etMouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark rect, esType etMouseOut ] ] [ evUpdate "" ]
                         ]
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scPadding (num 0.05)
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "amount") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom []
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -62,7 +62,7 @@ barchart =
                             [ maFill [ vStr "red" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maAlign [ hCenter ]
@@ -99,10 +99,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Platform.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Platform.worker
+        { init = always ( mySpecs, elmToJS mySpecs )
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }

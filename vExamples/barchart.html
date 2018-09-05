@@ -19,7 +19,7 @@
 
 <script>
 // This function grabs the specifications from Elm (here called namedSpecs).
-Elm.Barchart.worker().ports.elmToJS.subscribe(function(namedSpecs) {
+Elm.Barchart.init().ports.elmToJS.subscribe(function(namedSpecs) {
   for (let name of Object.keys(namedSpecs)) {
     vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
       console.warn
