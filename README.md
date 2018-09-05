@@ -4,12 +4,12 @@
 
 _Declarative visualization for Elm_
 
-This library allows you to create Vega and Vega-Lite specifications in Elm providing a pure functional interface for declarative visualization.
+These packages allow you to create Vega and Vega-Lite specifications in Elm providing a pure functional interface for declarative visualization.
 
-The library does not generate graphical output directly, but instead it allows you to create a JSON _specification_ that can be sent to the Vega and Vega-Lite runtime to create the output.
-This is therefore a 'pure' Elm package without any external non-Elm dependencies.
+They do not generate graphical output directly, but instead allow you to create JSON _specifications_ that can be sent to the Vega and Vega-Lite runtime to create the output.
+They are therefore 'pure' Elm packages without any external non-Elm dependencies.
 
-## Example
+## Elm-vegaLite Example
 
 A simple scatterplot encoding engine power and efficiency as x- and y-position and country of origin with colour:
 
@@ -69,12 +69,12 @@ And there are certainly plenty of data visualization packages available, ranging
 The designs of each reflects a trade-off between concise expression, generalisability and comprehensive functionality.
 
 Despite the numbers of libraries, there is a space for a higher level data visualization package (avoiding, for example the need for explicit construction of chart axes) but one that offers the flexibility to create a wide range data visualization types and styles.
-In particular no existing libraries offer easily constructed interaction and view composition (building 'dashboards' comprising many chart types).
+In particular no existing libraries offer easy interaction and view composition (building 'dashboards' comprising many chart types).
 elm-vega is designed to fill that gap.
 
 **Characteristics of elm-vega**
 
--   Built upon the widely used [Vega](https://vega.github.io/vega/) and [Vega-Lite](https://vega.github.io/vega-lite/) specifications that have an academic robustness and momentum behind its development (Vega-Lite is itself built upon the hugely influential [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447)).
+-   Built upon the widely used [Vega](https://vega.github.io/vega/) and [Vega-Lite](https://vega.github.io/vega-lite/) specifications that have an academic robustness and momentum behind their development (Vega-Lite is itself built upon the hugely influential [Grammar of Graphics](http://www.springer.com/gb/book/9780387245447)).
 
 -   High-level declarative specification (a chart can be fully specified in as few as five lines of code)
 
@@ -109,6 +109,6 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach Dat
 -   If you are interested in working with Vega, see [Creating your first Vega Visualization with Elm-Vega](https://github.com/gicentre/elm-vega/tree/master/docs/vega/helloWorld) and [Specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/vega/barChart).
 -   For a more thorough set of Vega-Lite examples/tutorial, see the [Vega-Lite walkthrough](https://github.com/gicentre/elm-vega/tree/master/docs/walkthrough/README.md).
 -   For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/vTest-gallery).
--   For the elm-vega API documentation see <http://package.elm-lang.org/packages/gicentre/elm-vega/latest>
--   Further examples can be found in the [elm-vega vlExamples](https://github.com/gicentre/elm-vega/tree/master/vlExamples) and [elm-vega vExamples](https://github.com/gicentre/elm-vega/tree/master/vExamples) folders.
+-   To get coding, see the [elm-vegaLite API](http://package.elm-lang.org/packages/gicentre/elm-vega/latest) and the [elm-vega API]() documentation.
+-   Further examples can be found in the [elm-vegaLite examples](https://github.com/gicentre/elm-vega/tree/master/vlExamples) and [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/vExamples) folders.
 -   For an example of fully embedding an elm-vega visualization in an elm SPA, see [elm-embed-vega](https://github.com/yardsale8/elm-embed-vega).
