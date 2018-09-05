@@ -3372,7 +3372,7 @@ type PositionChannel
 [azimuthalEqualArea](#azimuthalEqualArea), [azimuthalEquidistant](#azimuthalEquidistant),
 [conicConformal](#conicConformal), [conicEqualArea](#conicEqualArea),
 [conicEquidistant](#conicEquidistant), [equirectangular](#equirectangular),
-[gnomonic](#gnomonic), [mercator](#mercator), [orthographic](#), [orthographic](#),
+[gnomonic](#gnomonic), [mercator](#mercator), [orthographic](#orthographic),
 [stereographic](#stereographic), [transverseMercator](#transverseMercator) and
 [customProjection](#customProjection).
 -}
