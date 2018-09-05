@@ -151,7 +151,7 @@ advanced5 =
 
         trans =
             transform
-                << window [ ( [ wiOp wiRank ], "rank" ) ]
+                << window [ ( [ wiOp woRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point", wiDescending "diff" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -185,7 +185,7 @@ advanced6 =
         trans =
             transform
                 << window [ ( [ wiAggregateOp opSum, wiField "amount" ], "sum" ) ] []
-                << window [ ( [ wiOp wiLead, wiField "label" ], "lead" ) ] []
+                << window [ ( [ wiOp woLead, wiField "label" ], "lead" ) ] []
                 << calculateAs "datum.lead === null ? datum.label : datum.lead" "lead"
                 << calculateAs "datum.label === 'End' ? 0 : datum.sum - datum.amount" "previous_sum"
                 << calculateAs "datum.label === 'End' ? datum.sum : datum.amount" "amount"

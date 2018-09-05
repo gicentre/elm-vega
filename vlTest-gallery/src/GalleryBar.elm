@@ -413,7 +413,7 @@ bar14 =
         trans =
             transform
                 << calculateAs "{'cattle': '🐄', 'pigs': '🐖', 'sheep': '🐏'}[datum.animal]" "emoji"
-                << window [ ( [ wiOp wiRank ], "rank" ) ] [ wiGroupBy [ "country", "animal" ] ]
+                << window [ ( [ wiOp woRank ], "rank" ) ] [ wiGroupBy [ "country", "animal" ] ]
 
         enc =
             encoding

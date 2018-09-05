@@ -7114,12 +7114,12 @@ var author$project$VegaLite$WOp = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$VegaLite$wiOp = author$project$VegaLite$WOp;
-var author$project$VegaLite$Rank = 1;
-var author$project$VegaLite$wiRank = 1;
 var author$project$VegaLite$WSort = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$VegaLite$wiSort = author$project$VegaLite$WSort;
+var author$project$VegaLite$Rank = 1;
+var author$project$VegaLite$woRank = 1;
 var elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -7134,7 +7134,7 @@ var author$project$GalleryAdvanced$advanced5 = function () {
 					_Utils_Tuple2(
 					_List_fromArray(
 						[
-							author$project$VegaLite$wiOp(author$project$VegaLite$wiRank)
+							author$project$VegaLite$wiOp(author$project$VegaLite$woRank)
 						]),
 					'rank')
 				]),
@@ -7422,14 +7422,14 @@ var author$project$VegaLite$text = function (tDefs) {
 };
 var author$project$VegaLite$Text = 12;
 var author$project$VegaLite$textMark = author$project$VegaLite$mark(12);
-var author$project$VegaLite$Lead = 7;
-var author$project$VegaLite$wiLead = 7;
 var author$project$VegaLite$VLWidth = 3;
 var author$project$VegaLite$width = function (w) {
 	return _Utils_Tuple2(
 		3,
 		elm$json$Json$Encode$float(w));
 };
+var author$project$VegaLite$Lead = 7;
+var author$project$VegaLite$woLead = 7;
 var author$project$GalleryAdvanced$advanced6 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -7470,7 +7470,7 @@ var author$project$GalleryAdvanced$advanced6 = function () {
 												_Utils_Tuple2(
 												_List_fromArray(
 													[
-														author$project$VegaLite$wiOp(author$project$VegaLite$wiLead),
+														author$project$VegaLite$wiOp(author$project$VegaLite$woLead),
 														author$project$VegaLite$wiField('label')
 													]),
 												'lead')

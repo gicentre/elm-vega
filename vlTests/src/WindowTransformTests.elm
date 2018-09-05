@@ -139,7 +139,7 @@ window5 =
         trans =
             transform
                 << window
-                    [ ( [ wiOp wiRank ], "rank" ) ]
+                    [ ( [ wiOp woRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point" ], wiGroupBy [ "matchday" ] ]
 
         enc =
@@ -169,7 +169,7 @@ window6 =
 
         trans =
             transform
-                << window [ ( [ wiOp wiRank ], "rank" ) ] [ wiSort [ wiDescending "score" ] ]
+                << window [ ( [ wiOp woRank ], "rank" ) ] [ wiSort [ wiDescending "score" ] ]
                 << filter (fiExpr "datum.rank <= 5")
 
         enc =

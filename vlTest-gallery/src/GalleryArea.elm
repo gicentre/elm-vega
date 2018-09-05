@@ -175,12 +175,12 @@ area7 =
                 << window
                     [ ( [ wiAggregateOp opMin, wiField "stack_count_Origin1" ], "x" )
                     , ( [ wiAggregateOp opMax, wiField "stack_count_Origin2" ], "x2" )
-                    , ( [ wiOp wiDenseRank ], "rank_Cylinders" )
+                    , ( [ wiOp woDenseRank ], "rank_Cylinders" )
                     , ( [ wiAggregateOp opDistinct, wiField "Cylinders" ], "distinct_Cylinders" )
                     ]
                     [ wiFrame Nothing Nothing, wiGroupBy [ "Origin" ], wiSort [ wiAscending "Cylinders" ] ]
                 << window
-                    [ ( [ wiOp wiDenseRank ], "rank_Origin" ) ]
+                    [ ( [ wiOp woDenseRank ], "rank_Origin" ) ]
                     [ wiFrame Nothing Nothing, wiSort [ wiAscending "Origin" ] ]
                 << stack "count_*"
                     [ "Origin" ]

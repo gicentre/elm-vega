@@ -9206,8 +9206,6 @@ var author$project$VegaLite$WOp = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$VegaLite$wiOp = author$project$VegaLite$WOp;
-var author$project$VegaLite$Rank = 1;
-var author$project$VegaLite$wiRank = 1;
 var author$project$VegaLite$wOperationLabel = function (op) {
 	switch (op) {
 		case 0:
@@ -9415,6 +9413,8 @@ var author$project$VegaLite$window = F2(
 							A2(author$project$VegaLite$windowPropertySpec, 'sort', wProps)
 						]))));
 	});
+var author$project$VegaLite$Rank = 1;
+var author$project$VegaLite$woRank = 1;
 var author$project$GalleryBar$bar14 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9429,7 +9429,7 @@ var author$project$GalleryBar$bar14 = function () {
 					_Utils_Tuple2(
 					_List_fromArray(
 						[
-							author$project$VegaLite$wiOp(author$project$VegaLite$wiRank)
+							author$project$VegaLite$wiOp(author$project$VegaLite$woRank)
 						]),
 					'rank')
 				]),

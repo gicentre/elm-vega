@@ -9013,8 +9013,6 @@ var author$project$VegaLite$WAggregateOp = function (a) {
 };
 var author$project$VegaLite$wiAggregateOp = author$project$VegaLite$WAggregateOp;
 var author$project$VegaLite$wiAscending = author$project$VegaLite$WAscending;
-var author$project$VegaLite$DenseRank = 2;
-var author$project$VegaLite$wiDenseRank = 2;
 var author$project$VegaLite$WField = function (a) {
 	return {$: 3, a: a};
 };
@@ -9204,6 +9202,8 @@ var author$project$VegaLite$window = F2(
 							A2(author$project$VegaLite$windowPropertySpec, 'sort', wProps)
 						]))));
 	});
+var author$project$VegaLite$DenseRank = 2;
+var author$project$VegaLite$woDenseRank = 2;
 var author$project$GalleryArea$area7 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9272,7 +9272,7 @@ var author$project$GalleryArea$area7 = function () {
 													_Utils_Tuple2(
 													_List_fromArray(
 														[
-															author$project$VegaLite$wiOp(author$project$VegaLite$wiDenseRank)
+															author$project$VegaLite$wiOp(author$project$VegaLite$woDenseRank)
 														]),
 													'rank_Cylinders'),
 													_Utils_Tuple2(
@@ -9302,7 +9302,7 @@ var author$project$GalleryArea$area7 = function () {
 												_Utils_Tuple2(
 												_List_fromArray(
 													[
-														author$project$VegaLite$wiOp(author$project$VegaLite$wiDenseRank)
+														author$project$VegaLite$wiOp(author$project$VegaLite$woDenseRank)
 													]),
 												'rank_Origin')
 											]),

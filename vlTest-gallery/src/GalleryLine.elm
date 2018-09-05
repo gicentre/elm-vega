@@ -297,7 +297,7 @@ line11 =
 
         trans =
             transform
-                << window [ ( [ wiOp wiRank ], "rank" ) ]
+                << window [ ( [ wiOp woRank ], "rank" ) ]
                     [ wiSort [ wiDescending "point", wiDescending "diff" ], wiGroupBy [ "matchday" ] ]
 
         enc =

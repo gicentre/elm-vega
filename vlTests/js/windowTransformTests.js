@@ -9093,12 +9093,12 @@ var author$project$VegaLite$WOp = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$VegaLite$wiOp = author$project$VegaLite$WOp;
-var author$project$VegaLite$Rank = 1;
-var author$project$VegaLite$wiRank = 1;
 var author$project$VegaLite$WSort = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$VegaLite$wiSort = author$project$VegaLite$WSort;
+var author$project$VegaLite$Rank = 1;
+var author$project$VegaLite$woRank = 1;
 var author$project$WindowTransformTests$window5 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9110,7 +9110,7 @@ var author$project$WindowTransformTests$window5 = function () {
 					_Utils_Tuple2(
 					_List_fromArray(
 						[
-							author$project$VegaLite$wiOp(author$project$VegaLite$wiRank)
+							author$project$VegaLite$wiOp(author$project$VegaLite$woRank)
 						]),
 					'rank')
 				]),
@@ -9225,7 +9225,7 @@ var author$project$WindowTransformTests$window6 = function () {
 						_Utils_Tuple2(
 						_List_fromArray(
 							[
-								author$project$VegaLite$wiOp(author$project$VegaLite$wiRank)
+								author$project$VegaLite$wiOp(author$project$VegaLite$woRank)
 							]),
 						'rank')
 					]),
