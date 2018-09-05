@@ -1,6 +1,6 @@
-vlExamples/js/*.js linguist-generated=true
-vlTests/js/*.js linguist-generated=true
-vlTest-gallery/js/*.js linguist-generated=true
-vExamples/js/*.js linguist-generated=true
-vTests/js/*.js linguist-generated=true
-vTest-gallery/js/*.js linguist-generated=true
+elm-vegaLite/examples/js/*.js linguist-generated=true
+elm-vegaLite/tests/js/*.js linguist-generated=true
+elm-vegaLite/test-gallery/js/*.js linguist-generated=true
+elm-vega/examples/js/*.js linguist-generated=true
+elm-vega/tests/js/*.js linguist-generated=true
+elm-vega/test-gallery/js/*.js linguist-generated=true
