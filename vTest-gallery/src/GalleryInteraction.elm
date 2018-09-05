@@ -1,10 +1,11 @@
 port module GalleryInteraction exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -65,21 +66,21 @@ interaction1 =
         scGenerator core =
             scales
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset (core ++ "-bins"), daField (field "count") ])
                     , scRange (raValues [ vSignal "chartHeight", vNum 0 ])
                     ]
 
         topScGenerator core =
             scale (core ++ "Scale")
-                [ scType ScLinear
+                [ scType scLinear
                 , scRound true
                 , scDomain (doSignal (core ++ "Extent"))
-                , scRange RaWidth
+                , scRange raWidth
                 ]
 
         axGenerator core =
-            axes << axis (core ++ "Scale") SBottom []
+            axes << axis (core ++ "Scale") siBottom []
 
         mkGenerator core =
             let
@@ -95,7 +96,7 @@ interaction1 =
                             vStr "Travel Distance (miles)"
             in
             marks
-                << mark Rect
+                << mark rect
                     [ mName (core ++ "Brush")
                     , mEncode
                         [ enEnter
@@ -109,7 +110,7 @@ interaction1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mFrom [ srData (str (core ++ "-bins")) ]
                     , mEncode
@@ -122,7 +123,7 @@ interaction1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -136,7 +137,7 @@ interaction1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -150,7 +151,7 @@ interaction1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -165,7 +166,7 @@ interaction1 =
                     ]
 
         groupGenerator core =
-            mark Group
+            mark group
                 [ mName core
                 , mEncode
                     [ enEnter
@@ -209,7 +210,7 @@ interaction1 =
         sc =
             let
                 layoutSc =
-                    scale "layout" [ scType ScBand, scDomain (doStrs (strs facetNames)), scRange RaHeight ] []
+                    scale "layout" [ scType scBand, scDomain (doStrs (strs facetNames)), scRange raHeight ] []
             in
             List.foldl topScGenerator layoutSc facetNames |> scales
 
@@ -227,7 +228,7 @@ interaction2 =
             dataSource
                 [ data "sp500"
                     [ daUrl (str "https://vega.github.io/vega/data/sp500.csv")
-                    , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
+                    , daFormat [ csv, parse [ ( "price", foNum ), ( "date", foDate "" ) ] ]
                     ]
                 ]
 
@@ -236,12 +237,12 @@ interaction2 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mName "detail"
                     , mEncode [ enEnter [ maHeight [ vNum 390 ], maWidth [ vNum 720 ] ] ]
                     , mGroup [ sc1 [], ax1 [], mk1 [] ]
                     ]
-                << mark Group
+                << mark group
                     [ mName "overview"
                     , mEncode
                         [ enEnter
@@ -258,27 +259,27 @@ interaction2 =
         sc1 =
             scales
                 << scale "xDetail"
-                    [ scType ScTime
-                    , scRange RaWidth
+                    [ scType scTime
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "sp500", daField (field "date") ])
                     , scDomainRaw (vSignal "detailDomain")
                     ]
                 << scale "yDetail"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raNums [ 390, 0 ])
                     , scDomain (doData [ daDataset "sp500", daField (field "price") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
 
         ax1 =
             axes
-                << axis "xDetail" SBottom []
-                << axis "yDetail" SLeft []
+                << axis "xDetail" siBottom []
+                << axis "yDetail" siLeft []
 
         mk1 =
             marks
-                << mark Group
+                << mark group
                     [ mEncode
                         [ enEnter
                             [ maHeight [ vField (fGroup (field "height")) ]
@@ -291,7 +292,7 @@ interaction2 =
 
         mk2 =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "sp500") ]
                     , mEncode
                         [ enUpdate
@@ -333,25 +334,25 @@ interaction2 =
         sc2 =
             scales
                 << scale "xOverview"
-                    [ scType ScTime
-                    , scRange RaWidth
+                    [ scType scTime
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "sp500", daField (field "date") ])
                     ]
                 << scale "yOverview"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raNums [ 70, 0 ])
                     , scDomain (doData [ daDataset "sp500", daField (field "price") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
 
         ax2 =
             axes
-                << axis "xOverview" SBottom []
+                << axis "xOverview" siBottom []
 
         mk3 =
             marks
-                << mark Area
+                << mark area
                     [ mInteractive false
                     , mFrom [ srData (str "sp500") ]
                     , mEncode
@@ -363,7 +364,7 @@ interaction2 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mName "brush"
                     , mEncode
                         [ enEnter
@@ -378,7 +379,7 @@ interaction2 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -392,7 +393,7 @@ interaction2 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -419,18 +420,19 @@ interaction3 =
                 ra =
                     if dir == "X" then
                         raValues [ vNum 0, vSignal "chartSize" ]
+
                     else
                         raValues [ vSignal "chartSize", vNum 0 ]
             in
             scale (var ++ dir)
                 [ scZero false
-                , scNice NTrue
+                , scNice niTrue
                 , scRange ra
                 , scDomain (doData [ daDataset "iris", daField (field var) ])
                 ]
 
         cf =
-            config [ cfAxis AxAll [ axTickColor (str "#ccc") ] ]
+            config [ cfAxis axAll [ axTickColor (str "#ccc") ] ]
 
         ds =
             dataSource
@@ -510,18 +512,18 @@ interaction3 =
         sc =
             scales
                 << scale "groupX"
-                    [ scType ScBand
-                    , scRange RaWidth
+                    [ scType scBand
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "fields", daField (field "data") ])
                     ]
                 << scale "groupY"
-                    [ scType ScBand
+                    [ scType scBand
                     , scRange (raValues [ vSignal "height", vNum 0 ])
                     , scDomain (doData [ daDataset "fields", daField (field "data") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "iris", daField (field "species") ])
                     ]
                 << scGenerator "petalWidth" "X"
@@ -535,14 +537,14 @@ interaction3 =
 
         ax =
             axes
-                << axis "petalWidthY" SLeft [ axTitle (str "Petal Width"), axPosition (vSignal "3 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "petalLengthY" SLeft [ axTitle (str "Petal Length"), axPosition (vSignal "2 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "sepalWidthY" SLeft [ axTitle (str "Sepal Width"), axPosition (vSignal "1 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "sepalLengthY" SLeft [ axTitle (str "Sepal Length"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
-                << axis "petalWidthX" SBottom [ axTitle (str "Petal Width"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "petalLengthX" SBottom [ axTitle (str "Petal Length"), axPosition (vSignal "1 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "sepalWidthX" SBottom [ axTitle (str "Sepal Width"), axPosition (vSignal "2 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
-                << axis "sepalLengthX" SBottom [ axTitle (str "Sepal Length"), axPosition (vSignal "3 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "petalWidthY" siLeft [ axTitle (str "Petal Width"), axPosition (vSignal "3 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "petalLengthY" siLeft [ axTitle (str "Petal Length"), axPosition (vSignal "2 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "sepalWidthY" siLeft [ axTitle (str "Sepal Width"), axPosition (vSignal "1 * chartStep"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "sepalLengthY" siLeft [ axTitle (str "Sepal Length"), axMinExtent (vNum 25), axTickCount (num 5), axDomain false ]
+                << axis "petalWidthX" siBottom [ axTitle (str "Petal Width"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "petalLengthX" siBottom [ axTitle (str "Petal Length"), axPosition (vSignal "1 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "sepalWidthX" siBottom [ axTitle (str "Sepal Width"), axPosition (vSignal "2 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
+                << axis "sepalLengthX" siBottom [ axTitle (str "Sepal Length"), axPosition (vSignal "3 * chartStep"), axOffset (vSignal "-chartPad"), axTickCount (num 5), axDomain false ]
 
         le =
             legends
@@ -562,7 +564,7 @@ interaction3 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mEncode
                         [ enEnter
                             [ maFill [ vStr "#eee" ]
@@ -576,7 +578,7 @@ interaction3 =
                             ]
                         ]
                     ]
-                << mark Group
+                << mark group
                     [ mName "cell"
                     , mFrom [ srData (str "cross") ]
                     , mEncode
@@ -591,7 +593,7 @@ interaction3 =
                         ]
                     , mGroup [ mk1 [] ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mName "brush"
                     , mEncode
                         [ enEnter
@@ -607,7 +609,7 @@ interaction3 =
 
         mk1 =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "iris") ]
                     , mInteractive false
                     , mEncode
@@ -636,7 +638,7 @@ interaction4 =
     let
         cf =
             config
-                [ cfAxis AxAll
+                [ cfAxis axAll
                     [ axDomain false
                     , axTickSize (num 3)
                     , axTickColor (str "#888")
@@ -692,13 +694,13 @@ interaction4 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esSource ESWindow
-                                , esType MouseMove
+                                [ esSource esWindow
+                                , esType etMouseMove
                                 , esConsume true
-                                , esBetween [ esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
+                                , esBetween [ esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
                                 ]
                             , esObject
-                                [ esType TouchMove
+                                [ esType etTouchMove
                                 , esConsume true
                                 , esFilter [ "event.touches.length === 1" ]
                                 ]
@@ -709,28 +711,28 @@ interaction4 =
                 << signal "anchor"
                     [ siValue (vNums [ 0, 0 ])
                     , siOn
-                        [ evHandler [ esObject [ esType Wheel ] ] [ evUpdate "[invert('xScale', x()), invert('yScale', y())]" ]
-                        , evHandler [ esObject [ esType TouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "[(xDom[0] + xDom[1]) / 2, (yDom[0] + yDom[1]) / 2]" ]
+                        [ evHandler [ esObject [ esType etWheel ] ] [ evUpdate "[invert('xScale', x()), invert('yScale', y())]" ]
+                        , evHandler [ esObject [ esType etTouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "[(xDom[0] + xDom[1]) / 2, (yDom[0] + yDom[1]) / 2]" ]
                         ]
                     ]
                 << signal "zoom"
                     [ siValue (vNum 1)
                     , siOn
-                        [ evHandler [ esObject [ esType Wheel, esConsume true ] ] [ evForce true, evUpdate "pow(1.001, event.deltaY * pow(16, event.deltaMode))" ]
+                        [ evHandler [ esObject [ esType etWheel, esConsume true ] ] [ evForce true, evUpdate "pow(1.001, event.deltaY * pow(16, event.deltaMode))" ]
                         , evHandler [ esSignal "dist2" ] [ evForce true, evUpdate "dist1 / dist2" ]
                         ]
                     ]
                 << signal "dist1"
                     [ siValue (vNum 0)
                     , siOn
-                        [ evHandler [ esObject [ esType TouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
+                        [ evHandler [ esObject [ esType etTouchStart, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
                         , evHandler [ esSignal "dist2" ] [ evUpdate "dist2" ]
                         ]
                     ]
                 << signal "dist2"
                     [ siValue (vNum 0)
                     , siOn
-                        [ evHandler [ esObject [ esType TouchMove, esConsume true, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
+                        [ evHandler [ esObject [ esType etTouchMove, esConsume true, esFilter [ "event.touches.length===2" ] ] ] [ evUpdate "pinchDistance(event)" ]
                         ]
                     ]
                 << signal "xDom"
@@ -766,12 +768,12 @@ interaction4 =
 
         ax =
             axes
-                << axis "xScale" STop [ axOffset (vSignal "xOffset") ]
-                << axis "yScale" SRight [ axOffset (vSignal "yOffset") ]
+                << axis "xScale" siTop [ axOffset (vSignal "xOffset") ]
+                << axis "yScale" siRight [ axOffset (vSignal "yOffset") ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "points") ]
                     , mClip (clEnabled true)
                     , mEncode
@@ -792,7 +794,7 @@ interaction4 =
                     ]
     in
     toVega
-        [ cf, width 500, height 300, paddings 40 10 10 20, autosize [ ANone ], ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 500, height 300, paddings 40 10 10 20, autosize [ asNone ], ds, si [], sc [], ax [], mk [] ]
 
 
 interaction5 : Spec
@@ -810,7 +812,7 @@ interaction5 =
                 , data "country_timeline" [ daSource "gapminder" ]
                     |> transform
                         [ trFilter (expr "timeline && datum.country == timeline.country")
-                        , trCollect [ ( field "year", Ascend ) ]
+                        , trCollect [ ( field "year", ascend ) ]
                         ]
                 , data "thisYear" [ daSource "gapminder" ]
                     |> transform [ trFilter (expr "datum.year == currentYear") ]
@@ -898,40 +900,40 @@ interaction5 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scNice niTrue
                     , scDomain (doData [ daDataset "gapminder", daField (field "fertility") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scZero false
-                    , scNice NTrue
+                    , scNice niTrue
                     , scDomain (doData [ daDataset "gapminder", daField (field "life_expect") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "gapminder", daField (field "cluster") ])
-                    , scRange RaCategory
+                    , scRange raCategory
                     ]
                 << scale "lScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "clusters", daField (field "id") ])
                     , scRange (raData [ daDataset "clusters", daField (field "name") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Fertility"), axGrid true, axTickCount (num 5) ]
-                << axis "yScale" SLeft [ axTitle (str "Life Expectancy"), axGrid true, axTickCount (num 5) ]
+                << axis "xScale" siBottom [ axTitle (str "Fertility"), axGrid true, axTickCount (num 5) ]
+                << axis "yScale" siLeft [ axTitle (str "Life Expectancy"), axGrid true, axTickCount (num 5) ]
 
         le =
             legends
                 << legend
                     [ leFill "cScale"
                     , leTitle (str "Region")
-                    , leOrient Right
+                    , leOrient loRight
                     , leEncode
                         [ enSymbols [ enEnter [ maFillOpacity [ vNum 0.5 ] ] ]
                         , enLabels [ enUpdate [ maText [ vScale "lScale", vField (field "value") ] ] ]
@@ -940,7 +942,7 @@ interaction5 =
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enUpdate
                             [ maText [ vSignal "currentYear" ]
@@ -952,7 +954,7 @@ interaction5 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "country_timeline") ]
                     , mInteractive false
                     , mEncode
@@ -965,7 +967,7 @@ interaction5 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "country_timeline") ]
                     , mEncode
                         [ enUpdate
@@ -977,7 +979,7 @@ interaction5 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mName "point"
                     , mFrom [ srData (str "interpolate") ]
                     , mEncode
@@ -996,7 +998,7 @@ interaction5 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "interpolate") ]
                     , mInteractive false
                     , mEncode
@@ -1084,31 +1086,31 @@ interaction6 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRange (raNums [ 0, 200 ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRange (raNums [ 200, 0 ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "source", daField (field "Origin") ])
                     , scRange (raScheme (str "category10") [])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Horsepower"), axGrid true, axDomain false, axTickCount (num 5) ]
-                << axis "yScale" SLeft [ axTitle (str "Miles per gallon"), axGrid true, axDomain false, axTitlePadding (vNum 5) ]
+                << axis "xScale" siBottom [ axTitle (str "Horsepower"), axGrid true, axDomain false, axTickCount (num 5) ]
+                << axis "yScale" siLeft [ axTitle (str "Miles per gallon"), axGrid true, axDomain false, axTitlePadding (vNum 5) ]
 
         le =
             legends
@@ -1146,7 +1148,7 @@ interaction6 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mName "xAxis"
                     , mInteractive true
                     , mEncode
@@ -1154,7 +1156,7 @@ interaction6 =
                             [ maX [ vNum 0 ]
                             , maHeight [ vNum 35 ]
                             , maFill [ transparent ]
-                            , maCursor [ cursorValue CEWResize ]
+                            , maCursor [ cursorValue cuEWResize ]
                             ]
                         , enUpdate
                             [ maY [ vSignal "height" ]
@@ -1162,7 +1164,7 @@ interaction6 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -1177,7 +1179,7 @@ interaction6 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mName "marks"
                     , mFrom [ srData (str "source") ]
                     , mInteractive false
@@ -1185,7 +1187,7 @@ interaction6 =
                         [ enUpdate
                             [ maX [ vScale "xScale", vField (field "Horsepower") ]
                             , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
-                            , maShape [ symbolValue SymCircle ]
+                            , maShape [ symbolValue symCircle ]
                             , maStrokeWidth [ vNum 2 ]
                             , maOpacity
                                 [ ifElse "(!domain || inrange(datum.Horsepower, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.Origin))"
@@ -1201,7 +1203,7 @@ interaction6 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mName "brush"
                     , mEncode
                         [ enEnter
@@ -1215,7 +1217,7 @@ interaction6 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -1230,7 +1232,7 @@ interaction6 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -1247,7 +1249,7 @@ interaction6 =
                     ]
     in
     toVega
-        [ width 200, height 200, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
+        [ width 200, height 200, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
 interaction7 : Spec
@@ -1257,7 +1259,7 @@ interaction7 =
             dataSource
                 [ data "stocks"
                     [ daUrl (str "https://vega.github.io/vega/data/stocks.csv")
-                    , daFormat [ CSV, parse [ ( "price", FoNum ), ( "date", foDate "" ) ] ]
+                    , daFormat [ csv, parse [ ( "price", foNum ), ( "date", foDate "" ) ] ]
                     ]
                 , data "index"
                     [ daSource "stocks" ]
@@ -1288,33 +1290,33 @@ interaction7 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScTime
+                    [ scType scTime
                     , scDomain (doData [ daDataset "stocks", daField (field "date") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "indexed_stocks", daField (field "indexed_price") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "stocks", daField (field "symbol") ])
-                    , scRange RaCategory
+                    , scRange raCategory
                     ]
 
         ax =
-            axes << axis "yScale" SLeft [ axGrid true, axFormat (str "%") ]
+            axes << axis "yScale" siLeft [ axGrid true, axFormat (str "%") ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "indexed_stocks") "series" [ faGroupBy [ field "symbol" ] ] ]
                     , mGroup [ ds1, mk1 [] ]
                     ]
-                << mark Rule
+                << mark rule
                     [ mEncode
                         [ enUpdate
                             [ maX [ vField (fGroup (field "xScale")) ]
@@ -1325,7 +1327,7 @@ interaction7 =
                             ]
                         ]
                     ]
-                << mark Rule
+                << mark rule
                     [ mEncode
                         [ enUpdate
                             [ maX [ vScale "xScale", vSignal "indexDate", vOffset (vNum 0.5) ]
@@ -1335,7 +1337,7 @@ interaction7 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enUpdate
                             [ maX [ vScale "xScale", vSignal "indexDate" ]
@@ -1355,7 +1357,7 @@ interaction7 =
 
         mk1 =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enUpdate
@@ -1366,7 +1368,7 @@ interaction7 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "label") ]
                     , mEncode
                         [ enUpdate
@@ -1380,14 +1382,14 @@ interaction7 =
                     ]
     in
     toVega
-        [ width 650, height 300, padding 5, autosize [ AFit, APadding ], ds, si [], sc [], ax [], mk [] ]
+        [ width 650, height 300, padding 5, autosize [ asFit, asPadding ], ds, si [], sc [], ax [], mk [] ]
 
 
 interaction8 : Spec
 interaction8 =
     let
         cf =
-            config [ cfAxis AxY [ axMinExtent (vNum 30) ] ]
+            config [ cfAxis axY [ axMinExtent (vNum 30) ] ]
 
         ds =
             dataSource
@@ -1401,7 +1403,7 @@ interaction8 =
                 , data "pi_estimates" [ daSource "random_data" ]
                     |> transform
                         [ trFormula "(datum.x * datum.x + datum.y * datum.y) < 1" "is_inside"
-                        , trWindow [ wnAggOperation Sum (Just (field "is_inside")) "num_inside" ] []
+                        , trWindow [ wnAggOperation opSum (Just (field "is_inside")) "num_inside" ] []
                         , trFormula "4 * datum.num_inside / datum.data" "estimate"
                         ]
                 , data "pi_estimate" [ daSource "pi_estimates" ]
@@ -1420,35 +1422,35 @@ interaction8 =
                     ]
 
         lo =
-            layout [ loPadding (num 10), loOffset (num 20), loBounds Full, loAlign AlignAll ]
+            layout [ loPadding (num 10), loOffset (num 20), loBounds bcFull, loAlign grAlignAll ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doNums (nums [ 0, 1 ]))
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scReverse true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doNums (nums [ 0, 1 ]))
-                    , scRange RaHeight
-                    , scNice NTrue
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero true
                     ]
                 << scale "data_point_scale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "pi_estimates", daField (field "data") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scReverse true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
                 << scale "pi_scale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain
                         (doData
                             [ daReferences
@@ -1458,33 +1460,33 @@ interaction8 =
                                 ]
                             ]
                         )
-                    , scRange RaHeight
-                    , scNice NTrue
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero false
                     ]
 
         ax1 =
             axes
-                << axis "xScale" SBottom [ axTitle (str "x"), axLabelFlush (num 1), axLabelOverlap OParity, axZIndex (num 1) ]
-                << axis "xScale" SBottom [ axGrid true, axGridScale "yScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
-                << axis "yScale" SLeft [ axTitle (str "y"), axLabelOverlap OParity, axZIndex (num 1) ]
-                << axis "yScale" SLeft [ axGrid true, axGridScale "xScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "xScale" siBottom [ axTitle (str "x"), axLabelFlush (num 1), axLabelOverlap osParity, axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axGrid true, axGridScale "yScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "yScale" siLeft [ axTitle (str "y"), axLabelOverlap osParity, axZIndex (num 1) ]
+                << axis "yScale" siLeft [ axGrid true, axGridScale "xScale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
 
         ax2 =
             axes
-                << axis "data_point_scale" SBottom [ axTitle (str "Number of points"), axLabelFlush (num 1), axLabelOverlap OParity, axZIndex (num 1) ]
-                << axis "data_point_scale" SBottom [ axGrid true, axGridScale "pi_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
-                << axis "pi_scale" SLeft [ axTitle (str "Estimated pi value"), axLabelOverlap OParity, axZIndex (num 1) ]
-                << axis "pi_scale" SLeft [ axGrid true, axGridScale "data_point_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "data_point_scale" siBottom [ axTitle (str "Number of points"), axLabelFlush (num 1), axLabelOverlap osParity, axZIndex (num 1) ]
+                << axis "data_point_scale" siBottom [ axGrid true, axGridScale "pi_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
+                << axis "pi_scale" siLeft [ axTitle (str "Estimated pi value"), axLabelOverlap osParity, axZIndex (num 1) ]
+                << axis "pi_scale" siLeft [ axGrid true, axGridScale "data_point_scale", axDomain false, axLabels false, axMaxExtent (vNum 0), axMinExtent (vNum 0), axTicks false, axZIndex (num 0) ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mStyle [ "cell" ]
                     , mEncode [ enUpdate [ maWidth [ vSignal "height" ], maHeight [ vSignal "height" ] ] ]
                     , mGroup [ ti1, mk1 [], ax1 [] ]
                     ]
-                << mark Group
+                << mark group
                     [ mStyle [ "cell" ]
                     , mName "concat_1_group"
                     , mEncode [ enUpdate [ maWidth [ vSignal "height" ], maHeight [ vSignal "height" ] ] ]
@@ -1492,14 +1494,14 @@ interaction8 =
                     ]
 
         ti1 =
-            title (str "In Points and Out Points") [ tiFrame FrGroup ]
+            title (str "In Points and Out Points") [ tiFrame tfGroup ]
 
         ti2 =
-            title (str "Pi Estimate") [ tiFrame FrGroup ]
+            title (str "Pi Estimate") [ tiFrame tfGroup ]
 
         mk1 =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mStyle [ "circle" ]
                     , mFrom [ srData (str "random_data") ]
                     , mEncode
@@ -1512,14 +1514,14 @@ interaction8 =
                                 ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maY [ vScale "yScale", vField (field "y") ]
-                            , maShape [ symbolValue SymCircle ]
+                            , maShape [ symbolValue symCircle ]
                             ]
                         ]
                     ]
 
         mk2 =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mStyle [ "circle" ]
                     , mFrom [ srData (str "pi_estimates") ]
                     , mEncode
@@ -1529,11 +1531,11 @@ interaction8 =
                             , maX [ vScale "data_point_scale", vField (field "data") ]
                             , maY [ vScale "pi_scale", vField (field "estimate") ]
                             , maSize [ vNum 8 ]
-                            , maShape [ symbolValue SymCircle ]
+                            , maShape [ symbolValue symCircle ]
                             ]
                         ]
                     ]
-                << mark Rule
+                << mark rule
                     [ mFrom [ srData (str "pi") ]
                     , mEncode
                         [ enUpdate
@@ -1544,7 +1546,7 @@ interaction8 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "pi") ]
                     , mEncode
                         [ enUpdate
@@ -1556,7 +1558,7 @@ interaction8 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "pi_estimate") ]
                     , mEncode
                         [ enUpdate
@@ -1571,7 +1573,7 @@ interaction8 =
                     ]
     in
     toVega
-        [ cf, height 380, padding 5, autosize [ APad ], ds, si [], sc [], lo, mk [] ]
+        [ cf, height 380, padding 5, autosize [ asPad ], ds, si [], sc [], lo, mk [] ]
 
 
 sourceExample : Spec
@@ -1605,10 +1607,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

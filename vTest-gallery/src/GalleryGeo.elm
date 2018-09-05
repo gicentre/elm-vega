@@ -1,11 +1,12 @@
 port module GalleryGeo exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Http
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -16,19 +17,19 @@ import Vega exposing (..)
 standardProjections : Value
 standardProjections =
     List.map projectionValue
-        [ Albers
-        , AlbersUsa
-        , AzimuthalEqualArea
-        , AzimuthalEquidistant
-        , ConicConformal
-        , ConicEqualArea
-        , ConicEquidistant
-        , Equirectangular
-        , Gnomonic
-        , Mercator
-        , Orthographic
-        , Stereographic
-        , TransverseMercator
+        [ albers
+        , albersUsa
+        , azimuthalEqualArea
+        , azimuthalEquidistant
+        , conicConformal
+        , conicEqualArea
+        , conicEquidistant
+        , equirectangular
+        , gnomonic
+        , mercator
+        , orthographic
+        , stereographic
+        , transverseMercator
         ]
         |> vValues
 
@@ -40,7 +41,7 @@ geo1 =
             dataSource
                 [ data "unemp"
                     [ daUrl (str "https://vega.github.io/vega/data/unemployment.tsv")
-                    , daFormat [ TSV ]
+                    , daFormat [ tsv ]
                     ]
                 , data "counties"
                     [ daUrl (str "https://vega.github.io/vega/data/us-10m.json")
@@ -54,18 +55,18 @@ geo1 =
 
         pr =
             projections
-                << projection "myProjection" [ prType AlbersUsa ]
+                << projection "myProjection" [ prType albersUsa ]
 
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScQuantize
+                    [ scType scQuantize
                     , scDomain (doNums (nums [ 0, 0.15 ]))
                     , scRange (raScheme (str "blues-9") [])
                     ]
 
         shapeEncoding =
-            [ maShape [ symbolValue SymSquare ]
+            [ maShape [ symbolValue symSquare ]
             , maStroke [ vStr "#ccc" ]
             , maStrokeWidth [ vNum 0.2 ]
             ]
@@ -74,7 +75,7 @@ geo1 =
             legends
                 << legend
                     [ leFill "cScale"
-                    , leOrient BottomRight
+                    , leOrient loBottomRight
                     , leTitle (str "Unemployment")
                     , leFormat (str "0.1%")
                     , leEncode [ enSymbols [ enUpdate shapeEncoding ] ]
@@ -82,7 +83,7 @@ geo1 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "counties") ]
                     , mEncode
                         [ enEnter [ maTooltip [ vSignal "format(datum.rate, '0.1%')" ] ]
@@ -93,7 +94,7 @@ geo1 =
                     ]
     in
     toVega
-        [ width 960, height 500, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
+        [ width 960, height 500, autosize [ asNone ], ds, pr [], sc [], lg [], mk [] ]
 
 
 geo2 : Spec
@@ -120,7 +121,7 @@ geo2 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType AlbersUsa
+                    [ prType albersUsa
                     , prScale (num 1100)
                     , prTranslate (numSignals [ "width / 2", "height / 2" ])
                     ]
@@ -133,18 +134,18 @@ geo2 =
                     , scRange (raNums [ 1000, 5000 ])
                     ]
                 << scale "cScale"
-                    [ scType ScSequential
-                    , scNice NTrue
+                    [ scType scSequential
+                    , scNice niTrue
                     , scDomain (doData [ daDataset "obesity", daField (field "rate") ])
-                    , scRange RaRamp
+                    , scRange raRamp
                     ]
 
         lg =
             legends
                 << legend
                     [ leTitle (str "Percentage of Obese Adults")
-                    , leOrient BottomRight
-                    , leType LSymbol
+                    , leOrient loBottomRight
+                    , leType ltSymbol
                     , leSize "sizeScale"
                     , leFill "cScale"
                     , leFormat (str ".1%")
@@ -153,7 +154,7 @@ geo2 =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "circles"
                     , mFrom [ srData (str "obesity") ]
                     , mEncode
@@ -178,7 +179,7 @@ geo2 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mFrom [ srData (str "circles") ]
                     , mEncode
@@ -197,7 +198,7 @@ geo2 =
                     ]
     in
     toVega
-        [ cf, width 900, height 520, autosize [ ANone ], ds, pr [], sc [], lg [], mk [] ]
+        [ cf, width 900, height 520, autosize [ asNone ], ds, pr [], sc [], lg [], mk [] ]
 
 
 geo3 : Spec
@@ -216,7 +217,7 @@ geo3 =
         si =
             signals
                 << signal "pType"
-                    [ siValue (projectionValue Mercator)
+                    [ siValue (projectionValue mercator)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
@@ -235,7 +236,7 @@ geo3 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (projectionSignal "pType")
+                    [ prType (prSignal "pType")
                     , prScale (numSignal "pScale")
                     , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
                     , prCenter (numSignals [ "pCentre0", "pCentre1" ])
@@ -244,7 +245,7 @@ geo3 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mEncode
                         [ enUpdate
@@ -256,7 +257,7 @@ geo3 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
@@ -278,7 +279,7 @@ geo3 =
             encode [ enUpdate [ maFill [ vSignal "background" ] ] ]
     in
     toVega
-        [ width 900, height 500, autosize [ ANone ], enc, ds, si [], pr [], mk [] ]
+        [ width 900, height 500, autosize [ asNone ], enc, ds, si [], pr [], mk [] ]
 
 
 geo4 : Spec
@@ -286,7 +287,7 @@ geo4 =
     let
         ds =
             dataSource
-                [ data "sphere" [ DaSphere ]
+                [ data "sphere" [ daSphere ]
                 , data "world"
                     [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
                     , daFormat [ topojsonFeature (str "countries") ]
@@ -306,7 +307,7 @@ geo4 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Orthographic
+                    [ prType orthographic
                     , prScale (num 225)
                     , prRotate (numList [ numSignal "pRotate0", numSignal "pRotate1", num 0 ])
                     , prTranslate (numSignals [ "width/2", "height/2" ])
@@ -315,14 +316,14 @@ geo4 =
         sc =
             scales
                 << scale "scSize"
-                    [ scType ScSqrt
+                    [ scType scSqrt
                     , scRange (raValues [ vNum 0, vSignal "quakeSize" ])
                     , scDomain (doNums (nums [ 0, 100 ]))
                     ]
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "sphere") ]
                     , mEncode
                         [ enUpdate
@@ -333,7 +334,7 @@ geo4 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
@@ -344,7 +345,7 @@ geo4 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "earthquakes") ]
                     , mEncode
                         [ enUpdate
@@ -358,7 +359,7 @@ geo4 =
                     ]
     in
     toVega
-        [ width 450, height 450, padding 10, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
+        [ width 450, height 450, padding 10, autosize [ asNone ], ds, si [], pr [], sc [], mk [] ]
 
 
 geo5 : Spec
@@ -424,14 +425,14 @@ geo5 =
         nestedPr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (strSignal "parent.data"))
+                    [ prType (customProjection (strSignal "parent.data"))
                     , prScale (num projScale)
                     , prTranslate (nums [ mapWidth / 2, mapHeight / 2 ])
                     ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srData (str "projections") ]
                     , mEncode
                         [ enEnter
@@ -445,12 +446,12 @@ geo5 =
 
         nestedMk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "sphere") ]
                     , mEncode [ enEnter [ maFill [ vStr "aliceblue" ] ] ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mClip (clSphere (str "myProjection"))
                     , mInteractive false
@@ -462,7 +463,7 @@ geo5 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mClip (clSphere (str "myProjection"))
                     , mEncode
@@ -474,7 +475,7 @@ geo5 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "labelOffsets") ]
                     , mEncode
                         [ enEnter
@@ -490,7 +491,7 @@ geo5 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maFill [ black ]
@@ -505,7 +506,7 @@ geo5 =
                     ]
     in
     toVega
-        [ autosize [ APad ], ds, lo, mk [] ]
+        [ autosize [ asPad ], ds, lo, mk [] ]
 
 
 geo6 : Spec
@@ -528,30 +529,30 @@ geo6 =
                 << signal "myScale"
                     [ siValue (vNum 150)
                     , siOn
-                        [ evHandler [ esObject [ esType Wheel, esConsume true ] ]
+                        [ evHandler [ esObject [ esType etWheel, esConsume true ] ]
                             [ evUpdate "clamp(myScale * pow(1.0005, -event.deltaY * pow(16, event.deltaMode)), 150, 3000)" ]
                         ]
                     ]
                 << signal "angles"
                     [ siValue (vNums [ 0, 0 ])
-                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "[rotateX,centerY]" ] ]
+                    , siOn [ evHandler [ esObject [ esType etMouseDown ] ] [ evUpdate "[rotateX,centerY]" ] ]
                     ]
                 << signal "cloned"
                     [ siValue vNull
-                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "copy('myProjection')" ] ]
+                    , siOn [ evHandler [ esObject [ esType etMouseDown ] ] [ evUpdate "copy('myProjection')" ] ]
                     ]
                 << signal "start"
                     [ siValue vNull
-                    , siOn [ evHandler [ esObject [ esType MouseDown ] ] [ evUpdate "invert(cloned, xy())" ] ]
+                    , siOn [ evHandler [ esObject [ esType etMouseDown ] ] [ evUpdate "invert(cloned, xy())" ] ]
                     ]
                 << signal "drag"
                     [ siValue vNull
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esBetween [ esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 ]
                             ]
                             [ evUpdate "invert(cloned, xy())" ]
@@ -573,7 +574,7 @@ geo6 =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType Mercator
+                    [ prType mercator
                     , prScale (numSignal "myScale")
                     , prRotate (numList [ numSignal "rotateX", num 0, num 0 ])
                     , prCenter (numList [ num 0, numSignal "centerY" ])
@@ -582,7 +583,7 @@ geo6 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mEncode
                         [ enEnter
@@ -593,7 +594,7 @@ geo6 =
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enEnter
@@ -606,7 +607,7 @@ geo6 =
                     ]
     in
     toVega
-        [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
+        [ width 900, height 500, autosize [ asNone ], ds, si [], pr [], mk [] ]
 
 
 geo7 : Spec
@@ -629,11 +630,11 @@ geo7 =
         si =
             signals
                 << signal "baseProjection"
-                    [ siValue (projectionValue AzimuthalEqualArea)
+                    [ siValue (projectionValue azimuthalEqualArea)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "altProjection"
-                    [ siValue (projectionValue Mercator)
+                    [ siValue (projectionValue mercator)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
                 << signal "baseColor"
@@ -656,14 +657,14 @@ geo7 =
         pr =
             projections
                 << projection "projection1"
-                    [ prType (prCustom (strSignal "baseProjection"))
+                    [ prType (customProjection (strSignal "baseProjection"))
                     , prScale (num 150)
                     , prRotate (nums [ 0, 0, 0 ])
                     , prCenter (nums [ 0, 0 ])
                     , prTranslate (numSignals [ "width / 2", "height / 2" ])
                     ]
                 << projection "projection2"
-                    [ prType (prCustom (strSignal "altProjection"))
+                    [ prType (customProjection (strSignal "altProjection"))
                     , prScale (num 150)
                     , prRotate (nums [ 0, 0, 0 ])
                     , prCenter (nums [ 0, 0 ])
@@ -672,7 +673,7 @@ geo7 =
 
         mk =
             marks
-                << mark Shape
+                << mark shape
                     [ mFrom [ srData (str "graticule") ]
                     , mEncode
                         [ enUpdate
@@ -683,7 +684,7 @@ geo7 =
                         ]
                     , mTransform [ trGeoShape "projection1" [] ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
@@ -703,7 +704,7 @@ geo7 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "world") ]
                     , mEncode
                         [ enUpdate
@@ -725,7 +726,7 @@ geo7 =
                     ]
     in
     toVega
-        [ width 900, height 500, autosize [ ANone ], ds, si [], pr [], mk [] ]
+        [ width 900, height 500, autosize [ asNone ], ds, si [], pr [], mk [] ]
 
 
 geo8 : List Float -> Spec
@@ -763,21 +764,21 @@ geo8 inData =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (prCustom (str "identity"))
+                    [ prType (customProjection (str "identity"))
                     , prScale (numSignal "width / volcano.width")
                     ]
 
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScSequential
+                    [ scType scSequential
                     , scDomain (doNums (nums [ 90, 190 ]))
-                    , scRange RaHeatmap
+                    , scRange raHeatmap
                     ]
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "contours") ]
                     , mEncode
                         [ enEnter
@@ -790,7 +791,7 @@ geo8 inData =
                     ]
     in
     toVega
-        [ width 960, height 673, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
+        [ width 960, height 673, autosize [ asNone ], ds, si [], pr [], sc [], mk [] ]
 
 
 sourceExample : List Float -> Spec
@@ -824,10 +825,10 @@ mySpecs inData =
 -}
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Html.program
-        { init = init "data/volcanoData.txt"
+    Browser.element
+        { init = always (init "data/volcanoData.txt")
         , view = view
         , update = update
         , subscriptions = always Sub.none
@@ -878,7 +879,7 @@ update msg model =
                 dataVals =
                     input
                         |> String.split ","
-                        |> List.map (\s -> String.toFloat s |> Result.withDefault 0)
+                        |> List.map (\s -> String.toFloat s |> Maybe.withDefault 0)
             in
             ( { model
                 | input = dataVals
@@ -887,7 +888,7 @@ update msg model =
             )
 
         FileRead (Err err) ->
-            ( { model | input = [] }, Cmd.none ) |> Debug.log (toString err)
+            ( { model | input = [] }, Cmd.none )
 
 
 port elmToJS : Spec -> Cmd msg

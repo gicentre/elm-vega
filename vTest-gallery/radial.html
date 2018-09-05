@@ -51,20 +51,13 @@
     <div id="elmContainer"></div>
   </details>
 
-
-
   <script>
-  Elm.GalleryRadial.embed(
-  document.getElementById("elmContainer")
-).ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: false,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
-</script>
+    Elm.GalleryRadial.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+      }
+    });
+  </script>
 
 </body>
 

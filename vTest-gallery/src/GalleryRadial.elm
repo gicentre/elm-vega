@@ -1,10 +1,11 @@
 port module GalleryRadial exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -43,11 +44,11 @@ circularChart1 =
                 << signal "sort" [ siValue vFalse, siBind (iCheckbox []) ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20") []) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20") []) ]
 
         mk =
             marks
-                << mark Arc
+                << mark arc
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -67,7 +68,7 @@ circularChart1 =
                     ]
     in
     toVega
-        [ width 200, height 200, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 200, height 200, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 circularChart2 : Spec
@@ -82,14 +83,14 @@ circularChart2 =
         sc =
             scales
                 << scale "rScale"
-                    [ scType ScSqrt
+                    [ scType scSqrt
                     , scDomain (doData [ daDataset "table", daField (field "data") ])
                     , scRange (raNums [ 20, 100 ])
                     ]
 
         mk =
             marks
-                << mark Arc
+                << mark arc
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -105,7 +106,7 @@ circularChart2 =
                         , enHover [ maFill [ vStr "pink" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -150,10 +151,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

@@ -1,10 +1,11 @@
 port module GalleryOther exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -51,9 +52,9 @@ heatmap1 =
 
         ti =
             title (str "Seattle Annual Temperatures")
-                [ tiAnchor Middle
+                [ tiAnchor anMiddle
                 , tiFontSize (num 16)
-                , tiFrame FrGroup
+                , tiFrame tfGroup
                 , tiOffset (num 4)
                 ]
 
@@ -61,7 +62,7 @@ heatmap1 =
             dataSource
                 [ data "temperature"
                     [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
-                    , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
+                    , daFormat [ csv, parse [ ( "temp", foNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
                         [ trFormulaInitOnly "hours(datum.date)" "hour"
@@ -78,33 +79,33 @@ heatmap1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScTime
+                    [ scType scTime
                     , scDomain (doData [ daDataset "temperature", daField (field "day") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doNums (nums [ 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5 ]))
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
                 << scale "cScale"
-                    [ scType ScSequential
+                    [ scType scSequential
                     , scRange (raScheme (strSignal "palette") [])
                     , scDomain (doData [ daDataset "temperature", daField (field "celsius") ])
                     , scReverse (booSignal "reverse")
                     , scZero false
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axDomain false, axTitle (str "Month"), axFormat (str "%b") ]
+                << axis "xScale" siBottom [ axDomain false, axTitle (str "Month"), axFormat (str "%b") ]
                 << axis "yScale"
-                    SLeft
+                    siLeft
                     [ axDomain false
                     , axTitle (str "Hour")
                     , axEncode
-                        [ ( ELabels
+                        [ ( aeLabels
                           , [ enUpdate
                                 [ maText [ vSignal "datum.value === 0 ? 'Midnight' : datum.value === 12 ? 'Noon' : datum.value < 12 ? datum.value + ':00 am' : (datum.value - 12) + ':00 pm'" ]
                                 ]
@@ -117,7 +118,7 @@ heatmap1 =
             legends
                 << legend
                     [ leFill "cScale"
-                    , leType LGradient
+                    , leType ltGradient
                     , leTitle (str "Avg. Temp (°C)")
                     , leTitleFontSize (num 12)
                     , leTitlePadding (vNum 4)
@@ -126,7 +127,7 @@ heatmap1 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "temperature") ]
                     , mEncode
                         [ enEnter
@@ -149,12 +150,12 @@ parallel1 =
     let
         cf =
             config
-                [ cfAxis AxY
+                [ cfAxis axY
                     [ axTitleX (num -2)
                     , axTitleY (num 410)
                     , axTitleAngle (num 0)
-                    , axTitleAlign AlignRight
-                    , axTitleBaseline AlignTop
+                    , axTitleAlign haRight
+                    , axTitleBaseline vaTop
                     ]
                 ]
 
@@ -162,7 +163,7 @@ parallel1 =
             dataSource
                 [ data "cars"
                     [ daUrl (str "https://vega.github.io/vega/data/cars.json")
-                    , daFormat [ JSON, parse [ ( "Year", foDate "%Y-%m-%d" ) ] ]
+                    , daFormat [ json, parse [ ( "Year", foDate "%Y-%m-%d" ) ] ]
                     ]
                     |> transform
                         [ trFilter (expr "datum.Horsepower && datum.Miles_per_Gallon")
@@ -173,18 +174,18 @@ parallel1 =
 
         dimensionScale fName =
             scale fName
-                [ scType ScLinear
-                , scRange RaHeight
+                [ scType scLinear
+                , scRange raHeight
                 , scDomain (doData [ daDataset "cars", daField (field fName) ])
                 , scZero false
-                , scNice NTrue
+                , scNice niTrue
                 ]
 
         sc =
             scales
                 << scale "ord"
-                    [ scType ScPoint
-                    , scRange RaWidth
+                    [ scType scPoint
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "fields", daField (field "data") ])
                     , scRound true
                     ]
@@ -198,7 +199,7 @@ parallel1 =
 
         dimensionAxis sName =
             axis sName
-                SLeft
+                siLeft
                 [ axTitle (str sName)
                 , axOffset (vObject [ vStr sName, vScale "ord", vMultiply (vNum -1) ])
                 , axZIndex (num 1)
@@ -216,11 +217,11 @@ parallel1 =
 
         mk =
             marks
-                << mark Group [ mFrom [ srData (str "cars") ], mGroup [ nestedMk [] ] ]
+                << mark group [ mFrom [ srData (str "cars") ], mGroup [ nestedMk [] ] ]
 
         nestedMk =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "fields") ]
                     , mEncode
                         [ enEnter
@@ -254,7 +255,7 @@ wordcloud1 =
                 [ data "table" [ daValue (vStrs inText) ]
                     |> transform
                         [ trCountPattern (field "data")
-                            [ cpCase Uppercase
+                            [ cpCase uppercase
                             , cpPattern (str "[\\w']{3,}")
                             , cpStopwords (str stopwords)
                             ]
@@ -264,17 +265,17 @@ wordcloud1 =
                 ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raStrs [ "#d5a928", "#652c90", "#939597" ]) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raStrs [ "#d5a928", "#652c90", "#939597" ]) ]
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
                             [ maText [ vField (field "text") ]
                             , maAlign [ hCenter ]
-                            , maDir [ textDirectionValue LeftToRight ]
+                            , maDir [ textDirectionValue tdLeftToRight ]
                             , maBaseline [ vAlphabetic ]
                             , maFill [ vScale "cScale", vField (field "text") ]
                             ]
@@ -311,7 +312,7 @@ timeline1 =
                 << dataColumn "leave" (vNums [ -5453884800000, -5327740800000, -5075280000000, -4822819200000, -4570358400000 ])
 
         events =
-            dataFromColumns "events" [ JSON, parse [ ( "when", foDate "" ) ] ]
+            dataFromColumns "events" [ json, parse [ ( "when", foDate "" ) ] ]
                 << dataColumn "name" (vStrs [ "Decl. of Independence", "U.S. Constitution", "Louisiana Purchase", "Monroe Doctrine" ])
                 << dataColumn "when" (vStrs [ "July 4, 1776", "3/4/1789", "April 30, 1803", "Dec 2, 1823" ])
 
@@ -321,23 +322,23 @@ timeline1 =
         sc =
             scales
                 << scale "yScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scRange (raValues [ vNum 0, vSignal "height" ])
                     , scDomain (doData [ daDataset "people", daField (field "label") ])
                     ]
                 << scale "xScale"
-                    [ scType ScTime
-                    , scRange RaWidth
+                    [ scType scTime
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "people", daFields [ field "born", field "died" ] ])
                     , scRound true
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axFormat (str "%Y") ]
+            axes << axis "xScale" siBottom [ axFormat (str "%Y") ]
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "events") ]
                     , mEncode
                         [ enEnter
@@ -350,7 +351,7 @@ timeline1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "events") ]
                     , mEncode
                         [ enEnter
@@ -362,7 +363,7 @@ timeline1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "people") ]
                     , mEncode
                         [ enEnter
@@ -374,7 +375,7 @@ timeline1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "people") ]
                     , mEncode
                         [ enEnter
@@ -386,7 +387,7 @@ timeline1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "people") ]
                     , mEncode
                         [ enEnter
@@ -427,21 +428,21 @@ beeswarm1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
-                    , scRange RaWidth
+                    [ scType scBand
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "people", daField (field "group"), daSort [] ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raScheme (str "category20c") [])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom []
+            axes << axis "xScale" siBottom []
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "nodes"
                     , mFrom [ srData (str "people") ]
                     , mEncode
@@ -476,7 +477,7 @@ beeswarm1 =
                     ]
     in
     toVega
-        [ width 800, height 100, paddings 5 0 5 20, autosize [ ANone ], ds, si [], sc [], ax [], mk [] ]
+        [ width 800, height 100, paddings 5 0 5 20, autosize [ asNone ], ds, si [], sc [], ax [], mk [] ]
 
 
 sourceExample : Spec
@@ -507,10 +508,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

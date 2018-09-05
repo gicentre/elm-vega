@@ -1,10 +1,11 @@
 port module GalleryNetwork exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -21,7 +22,7 @@ bundle1 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (treeMethodSignal "layout")
+                            [ teMethod (meSignal "layout")
                             , teSize (nums [ 1, 1 ])
                             , teAs "alpha" "beta" "depth" "children"
                             ]
@@ -55,15 +56,15 @@ bundle1 =
                 << signal "active"
                     [ siValue vNull
                     , siOn
-                        [ evHandler [ esObject [ esMark Text, esType MouseOver ] ] [ evUpdate "datum.id" ]
-                        , evHandler [ esObject [ esType MouseOver, esFilter [ "!event.item" ] ] ] [ evUpdate "null" ]
+                        [ evHandler [ esObject [ esMark text, esType etMouseOver ] ] [ evUpdate "datum.id" ]
+                        , evHandler [ esObject [ esType etMouseOver, esFilter [ "!event.item" ] ] ] [ evUpdate "null" ]
                         ]
                     ]
 
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "depends on", "imported by" ]))
                     , scRange (raValues [ vSignal "colorIn", vSignal "colorOut" ])
                     ]
@@ -72,14 +73,14 @@ bundle1 =
             legends
                 << legend
                     [ leStroke "cScale"
-                    , leOrient BottomRight
+                    , leOrient loBottomRight
                     , leTitle (str "Dependencies")
                     , leEncode [ enSymbols [ enEnter [ maShape [ vStr "M-0.5,0H1" ] ] ] ]
                     ]
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "leaves") ]
                     , mEncode
                         [ enEnter
@@ -115,19 +116,19 @@ bundle1 =
                             ]
                         ]
                     ]
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "dependencies") "path" [ faField (field "treepath") ] ]
                     , mGroup [ nestedMk [] ]
                     ]
 
         nestedMk =
             marks
-                << mark Line
+                << mark line
                     [ mInteractive false
                     , mFrom [ srData (str "path") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Bundle ]
+                            [ maInterpolate [ markInterpolationValue miBundle ]
                             , maStrokeWidth [ vNum 1.5 ]
                             ]
                         , enUpdate
@@ -152,7 +153,7 @@ bundle1 =
                     ]
     in
     toVega
-        [ width 720, height 720, padding 5, autosize [ ANone ], ds, si [], sc [], le [], mk [] ]
+        [ width 720, height 720, padding 5, autosize [ asNone ], ds, si [], sc [], le [], mk [] ]
 
 
 force1 : Spec
@@ -184,17 +185,17 @@ force1 =
                     , siOn
                         [ evHandler
                             [ esMerge
-                                [ esObject [ esMark Symbol, esType MouseOut, esFilter [ "!event.buttons" ] ]
-                                , esObject [ esSource ESWindow, esType MouseUp ]
+                                [ esObject [ esMark symbol, esType etMouseOut, esFilter [ "!event.buttons" ] ]
+                                , esObject [ esSource esWindow, esType etMouseUp ]
                                 ]
                             ]
                             [ evUpdate "0" ]
-                        , evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix || 1" ]
+                        , evHandler [ esObject [ esMark symbol, esType etMouseOver ] ] [ evUpdate "fix || 1" ]
                         , evHandler
                             [ esObject
-                                [ esBetween [ esMark Symbol, esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esMark symbol, esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 , esConsume true
                                 ]
                             ]
@@ -204,7 +205,7 @@ force1 =
                 << signal "node"
                     [ siDescription "Graph node most recently interacted with."
                     , siValue vNull
-                    , siOn [ evHandler [ esObject [ esMark Symbol, esType MouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
+                    , siOn [ evHandler [ esObject [ esMark symbol, esType etMouseOver ] ] [ evUpdate "fix === 1 ? item() : node" ] ]
                     ]
                 << signal "restart"
                     [ siDescription "Flag to restart Force simulation upon data changes."
@@ -213,11 +214,11 @@ force1 =
                     ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20c") []) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20c") []) ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "nodes"
                     , mFrom [ srData (str "node-data") ]
                     , mZIndex (num 1)
@@ -232,7 +233,7 @@ force1 =
                             ]
                         , enUpdate
                             [ maSize [ vSignal "2 * nodeRadius * nodeRadius" ]
-                            , maCursor [ cursorValue CPointer ]
+                            , maCursor [ cursorValue cuPointer ]
                             ]
                         ]
                     , mTransform
@@ -249,7 +250,7 @@ force1 =
                             ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "link-data") ]
                     , mInteractive false
                     , mEncode
@@ -260,7 +261,7 @@ force1 =
                         ]
                     , mTransform
                         [ trLinkPath
-                            [ lpShape LinkLine
+                            [ lpShape lsLine
                             , lpSourceX (field "datum.source.x")
                             , lpSourceY (field "datum.source.y")
                             , lpTargetX (field "datum.target.x")
@@ -270,7 +271,7 @@ force1 =
                     ]
     in
     toVega
-        [ width 700, height 500, padding 0, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 700, height 500, padding 0, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 matrix1 : Spec
@@ -285,7 +286,7 @@ matrix1 =
                     |> transform
                         [ trFormula "datum.group" "order"
                         , trFormula "dest >= 0 && datum === src ? dest : datum.order" "score"
-                        , trWindow [ wnOperation RowNumber "order" ] [ wnSort [ ( field "score", Ascend ) ] ]
+                        , trWindow [ wnOperation woRowNumber "order" ] [ wnSort [ ( field "score", ascend ) ] ]
                         ]
                 , data "edges"
                     [ daUrl (str "https://vega.github.io/vega/data/miserables.json")
@@ -307,8 +308,8 @@ matrix1 =
                 << signal "src"
                     [ siValue (vObject [])
                     , siOn
-                        [ evHandler [ esObject [ esMark Text, esType MouseDown ] ] [ evUpdate "datum" ]
-                        , evHandler [ esObject [ esType MouseUp ] ] [ evUpdate "{}" ]
+                        [ evHandler [ esObject [ esMark text, esType etMouseDown ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esType etMouseUp ] ] [ evUpdate "{}" ]
                         ]
                     ]
                 << signal "dest"
@@ -316,17 +317,17 @@ matrix1 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esBetween [ esMarkName "columns", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esMarkName "columns", esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 ]
                             ]
                             [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(x(), 0, width) / width) : dest" ]
                         , evHandler
                             [ esObject
-                                [ esBetween [ esMarkName "rows", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esMarkName "rows", esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 ]
                             ]
                             [ evUpdate "src.name && datum !== src ? (0.5 + count * clamp(y(), 0, height) / height) : dest" ]
@@ -336,13 +337,13 @@ matrix1 =
         sc =
             scales
                 << scale "position"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "nodes", daField (field "order"), daSort [] ])
                     , scRange (raStep (vSignal "cellSize"))
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain
                         (doData
                             [ daReferences [ [ daDataset "nodes", daField (field "group") ], [ daSignal "count" ] ]
@@ -353,7 +354,7 @@ matrix1 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "cross") ]
                     , mEncode
                         [ enUpdate
@@ -365,7 +366,7 @@ matrix1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
@@ -377,7 +378,7 @@ matrix1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
@@ -389,7 +390,7 @@ matrix1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mName "columns"
                     , mFrom [ srData (str "nodes") ]
                     , mEncode
@@ -405,7 +406,7 @@ matrix1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mName "rows"
                     , mFrom [ srData (str "nodes") ]
                     , mEncode
@@ -443,7 +444,7 @@ arc1 =
                     , daFormat [ jsonProperty (str "nodes") ]
                     ]
                     |> transform
-                        [ trWindow [ wnOperation Rank "order" ] []
+                        [ trWindow [ wnOperation woRank "order" ] []
                         , trLookup "sourceDegree"
                             (field "source")
                             [ field "index" ]
@@ -459,19 +460,19 @@ arc1 =
         sc =
             scales
                 << scale "position"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "nodes", daField (field "order"), daSort [] ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "nodes", daField (field "group") ])
                     ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "layout"
                     , mInteractive false
                     , mFrom [ srData (str "nodes") ]
@@ -485,7 +486,7 @@ arc1 =
                             ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "edges") ]
                     , mEncode
                         [ enUpdate
@@ -504,11 +505,11 @@ arc1 =
                             , lpTargetX (fExpr "max(datum.sourceNode.x, datum.targetNode.x)")
                             , lpSourceY (fExpr "0")
                             , lpTargetY (fExpr "0")
-                            , lpShape LinkArc
+                            , lpShape lsArc
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "layout") ]
                     , mEncode
                         [ enUpdate
@@ -519,7 +520,7 @@ arc1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "nodes") ]
                     , mEncode
                         [ enUpdate
@@ -550,19 +551,19 @@ map1 =
                     |> transform [ trGeoPath "myProjection" [] ]
                 , data "traffic"
                     [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
-                    , daFormat [ CSV, ParseAuto ]
+                    , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "origin" ]
-                            , agOps [ Sum ]
+                            , agOps [ opSum ]
                             , agFields [ field "count" ]
                             , agAs [ "flights" ]
                             ]
                         ]
                 , data "airports"
                     [ daUrl (str "https://vega.github.io/vega/data/airports.csv")
-                    , daFormat [ CSV, ParseAuto ]
+                    , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
                         [ trLookup "traffic" (field "origin") [ field "iata" ] [ luAs [ "traffic" ] ]
@@ -570,17 +571,17 @@ map1 =
                         , trGeoPoint "myProjection" (field "longitude") (field "latitude")
                         , trFilter (expr "datum.x != null && datum.y != null")
                         , trVoronoi (field "x") (field "y") []
-                        , trCollect [ ( field "traffic.flights", Descend ) ]
+                        , trCollect [ ( field "traffic.flights", descend ) ]
                         ]
                 , data "routes"
                     [ daUrl (str "https://vega.github.io/vega/data/flights-airport.csv")
-                    , daFormat [ CSV, ParseAuto ]
+                    , daFormat [ csv, parseAuto ]
                     ]
                     |> transform
                         [ trFilter (expr "hover && hover.iata == datum.origin")
                         , trLookup "airports" (field "iata") [ field "origin", field "destination" ] [ luAs [ "source", "target" ] ]
                         , trFilter (expr "datum.source && datum.target")
-                        , trLinkPath [ lpShape (linkShapeSignal "shape") ]
+                        , trLinkPath [ lpShape (lsSignal "shape") ]
                         ]
                 ]
 
@@ -593,8 +594,8 @@ map1 =
                 << signal "hover"
                     [ siValue vNull
                     , siOn
-                        [ evHandler [ esObject [ esMarkName "cell", esType MouseOver ] ] [ evUpdate "datum" ]
-                        , evHandler [ esObject [ esMarkName "cell", esType MouseOut ] ] [ evUpdate "{}" ]
+                        [ evHandler [ esObject [ esMarkName "cell", esType etMouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMarkName "cell", esType etMouseOut ] ] [ evUpdate "{}" ]
                         ]
                     ]
                 << signal "title"
@@ -604,15 +605,15 @@ map1 =
                 << signal "cell_stroke"
                     [ siValue vNull
                     , siOn
-                        [ evHandler [ esObject [ esType DblClick ] ] [ evUpdate "cell_stroke ? null : 'brown'" ]
-                        , evHandler [ esObject [ esType MouseDown, esConsume true ] ] [ evUpdate "cell_stroke" ]
+                        [ evHandler [ esObject [ esType etDblClick ] ] [ evUpdate "cell_stroke ? null : 'brown'" ]
+                        , evHandler [ esObject [ esType etMouseDown, esConsume true ] ] [ evUpdate "cell_stroke" ]
                         ]
                     ]
 
         pr =
             projections
                 << projection "myProjection"
-                    [ prType AlbersUsa
+                    [ prType albersUsa
                     , prScale (numSignal "pScale")
                     , prTranslate (numSignals [ "pTranslateX", "pTranslateY" ])
                     ]
@@ -620,21 +621,21 @@ map1 =
         sc =
             scales
                 << scale "size"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "traffic", daField (field "flights") ])
                     , scRange (raNums [ 16, 1000 ])
                     ]
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "states") ]
                     , mEncode
                         [ enEnter [ maFill [ vStr "#dedede" ], maStroke [ white ] ]
                         , enUpdate [ maPath [ vField (field "path") ] ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "airports") ]
                     , mEncode
                         [ enEnter
@@ -647,7 +648,7 @@ map1 =
                         , enUpdate [ maX [ vField (field "x") ], maY [ vField (field "y") ] ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mName "cell"
                     , mFrom [ srData (str "airports") ]
                     , mEncode
@@ -655,12 +656,12 @@ map1 =
                         , enUpdate [ maPath [ vField (field "path") ], maStroke [ vSignal "cell_stroke" ] ]
                         ]
                     ]
-                << mark Path
+                << mark path
                     [ mInteractive false
                     , mFrom [ srData (str "routes") ]
                     , mEncode [ enEnter [ maPath [ vField (field "path") ], maStroke [ black ], maStrokeOpacity [ vNum 0.35 ] ] ]
                     ]
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mEncode
                         [ enEnter
@@ -675,7 +676,7 @@ map1 =
                     ]
     in
     toVega
-        [ width 900, height 560, paddings 0 25 0 0, autosize [ ANone ], ds, si [], pr [], sc [], mk [] ]
+        [ width 900, height 560, paddings 0 25 0 0, autosize [ asNone ], ds, si [], pr [], sc [], mk [] ]
 
 
 sourceExample : Spec
@@ -706,10 +707,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

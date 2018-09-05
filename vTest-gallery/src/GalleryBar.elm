@@ -1,10 +1,11 @@
 port module GalleryBar exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -28,34 +29,34 @@ barChart1 =
                 << signal "tooltip"
                     [ siValue (vObject [])
                     , siOn
-                        [ evHandler [ esObject [ esMark Rect, esType MouseOver ] ] [ evUpdate "datum" ]
-                        , evHandler [ esObject [ esMark Rect, esType MouseOut ] ] [ evUpdate "" ]
+                        [ evHandler [ esObject [ esMark rect, esType etMouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark rect, esType etMouseOut ] ] [ evUpdate "" ]
                         ]
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scPadding (num 0.05)
                     , scRound true
                     ]
                 << scale "yScale"
                     [ scDomain (doData [ daDataset "table", daField (field "amount") ])
-                    , scNice NTrue
-                    , scRange RaHeight
+                    , scNice niTrue
+                    , scRange raHeight
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom []
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -68,7 +69,7 @@ barChart1 =
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maAlign [ hCenter ]
@@ -103,7 +104,7 @@ barChart2 =
                     |> transform
                         [ trStack
                             [ stGroupBy [ field "x" ]
-                            , stSort [ ( field "c", Ascend ) ]
+                            , stSort [ ( field "c", ascend ) ]
                             , stField (field "y")
                             ]
                         ]
@@ -112,31 +113,31 @@ barChart2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
-                    , scRange RaWidth
+                    [ scType scBand
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
-                << axis "yScale" SLeft [ axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "yScale" siLeft [ axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -170,29 +171,29 @@ barChart3 =
         sc =
             scales
                 << scale "yScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "table", daField (field "category") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     , scPadding (num 0.2)
                     ]
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "table", daField (field "value") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     , scRound true
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doData [ daDataset "table", daField (field "position") ])
                     , scRange (raScheme (str "category20") [])
                     ]
 
         ax =
             axes
-                << axis "yScale" SLeft [ axTickSize (num 0), axLabelPadding (num 4), axZIndex (num 1) ]
-                << axis "xScale" SBottom []
+                << axis "yScale" siLeft [ axTickSize (num 0), axLabelPadding (num 4), axZIndex (num 1) ]
+                << axis "xScale" siBottom []
 
         nestedSi =
             signals
@@ -201,14 +202,14 @@ barChart3 =
         nestedSc =
             scales
                 << scale "pos"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain (doData [ daDataset "facet", daField (field "position") ])
                     ]
 
         nestedMk =
             marks
-                << mark Rect
+                << mark rect
                     [ mName "bars"
                     , mFrom [ srData (str "facet") ]
                     , mEncode
@@ -221,7 +222,7 @@ barChart3 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "bars") ]
                     , mEncode
                         [ enEnter
@@ -237,7 +238,7 @@ barChart3 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
                     , mEncode [ enEnter [ maY [ vScale "yScale", vField (field "category") ] ] ]
                     , mGroup [ nestedSi [], nestedSc [], nestedMk [] ]
@@ -262,7 +263,7 @@ barChart4 =
                     [ trAggregate
                         [ agGroupBy [ field "a", field "b" ]
                         , agFields [ field "c" ]
-                        , agOps [ Average ]
+                        , agOps [ opMean ]
                         , agAs [ "c" ]
                         ]
                     ]
@@ -290,24 +291,24 @@ barChart4 =
             scales
                 << scale "xScale"
                     [ scDomain (doData [ daDataset "tuples", daField (field "c") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scRound true
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "trellis", daField (field "a") ])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axDomain true ]
+            axes << axis "xScale" siBottom [ axDomain true ]
 
         nestedSc =
             scales
                 << scale "yScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scPaddingInner (numSignal "innerPadding")
                     , scPaddingOuter (numSignal "outerPadding")
                     , scRound true
@@ -317,11 +318,11 @@ barChart4 =
 
         nestedAx =
             axes
-                << axis "yScale" SLeft [ axTicks false, axDomain false, axLabelPadding (num 4) ]
+                << axis "yScale" siLeft [ axTicks false, axDomain false, axLabelPadding (num 4) ]
 
         nestedMk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "faceted_tuples") ]
                     , mEncode
                         [ enEnter
@@ -345,7 +346,7 @@ barChart4 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srData (str "trellis"), srFacet (str "tuples") "faceted_tuples" [ faGroupBy [ field "a" ] ] ]
                     , mEncode
                         [ enEnter [ maX [ vNum 0 ], maWidth [ vSignal "width" ] ]
@@ -355,7 +356,7 @@ barChart4 =
                     ]
     in
     toVega
-        [ width 300, padding 5, autosize [ APad ], ds, si [], sc [], ax [], mk [] ]
+        [ width 300, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], mk [] ]
 
 
 type Gender
@@ -385,20 +386,20 @@ barChart5 =
         topSc =
             scales
                 << scale "yScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scRange (raValues [ vSignal "height", vNum 0 ])
                     , scRound true
                     , scDomain (doData [ daDataset "ageGroups", daField (field "age") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doNums (nums [ 1, 2 ]))
                     , scRange (raStrs [ "#1f77b4", "#e377c2" ])
                     ]
 
         topMk =
             marks
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mFrom [ srData (str "ageGroups") ]
                     , mEncode
@@ -412,11 +413,11 @@ barChart5 =
                             ]
                         ]
                     ]
-                << mark Group
+                << mark group
                     [ mEncode [ enUpdate [ maX [ vNum 0 ], maHeight [ vSignal "height" ] ] ]
                     , mGroup [ sc Female [], ax [], mk Female [] ]
                     ]
-                << mark Group
+                << mark group
                     [ mEncode [ enUpdate [ maX [ vSignal "chartWidth + chartPad" ], maHeight [ vSignal "height" ] ] ]
                     , mGroup [ sc Male [], ax [], mk Male [] ]
                     ]
@@ -433,9 +434,9 @@ barChart5 =
             in
             scales
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , range
-                    , scNice NTrue
+                    , scNice niTrue
                     , scDomain (doData [ daDataset "population", daField (field "people") ])
                     ]
 
@@ -450,7 +451,7 @@ barChart5 =
                             "males"
             in
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str genderField) ]
                     , mEncode
                         [ enEnter
@@ -465,7 +466,7 @@ barChart5 =
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axFormat (str "s") ]
+            axes << axis "xScale" siBottom [ axFormat (str "s") ]
     in
     toVega
         [ height 400, padding 5, ds, si [], topSc [], topMk [] ]
@@ -499,10 +500,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

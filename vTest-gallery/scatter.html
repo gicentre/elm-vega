@@ -74,17 +74,12 @@
   </details>
 
   <script>
-  Elm.GalleryScatter.embed(
-  document.getElementById("elmContainer")
-).ports.elmToJS.subscribe(function(namedSpecs) {
-  for (let name of Object.keys(namedSpecs)) {
-    vegaEmbed(`#${name}`, namedSpecs[name], {
-      actions: false,
-      logLevel: vega.Warn
-    }).catch(console.warn);
-  }
-});
-</script>
+    Elm.GalleryScatter.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
+      for (let name of Object.keys(namedSpecs)) {
+        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+      }
+    });
+  </script>
 
 </body>
 

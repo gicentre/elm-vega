@@ -1,10 +1,11 @@
 port module GalleryTree exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -21,7 +22,7 @@ tree1 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (treeMethodSignal "layout")
+                            [ teMethod (meSignal "layout")
                             , teSize (numSignals [ "height", "width-100" ])
                             , teAs "y" "x" "depth" "children"
                             ]
@@ -30,8 +31,8 @@ tree1 =
                     |> transform
                         [ trTreeLinks
                         , trLinkPath
-                            [ lpOrient Horizontal
-                            , lpShape (linkShapeSignal "links")
+                            [ lpOrient orHorizontal
+                            , lpShape (lsSignal "links")
                             ]
                         ]
                 ]
@@ -51,7 +52,7 @@ tree1 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScSequential
+                    [ scType scSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme (str "magma") [])
                     , scZero true
@@ -59,12 +60,12 @@ tree1 =
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "links") ]
                     , mEncode
                         [ enUpdate [ maPath [ vField (field "path") ], maStroke [ vStr "#ccc" ] ] ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter [ maSize [ vNum 100 ], maStroke [ vStr "#fff" ] ]
@@ -75,7 +76,7 @@ tree1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -106,7 +107,7 @@ tree2 =
                     |> transform
                         [ trStratify (field "id") (field "parent")
                         , trTree
-                            [ teMethod (treeMethodSignal "layout")
+                            [ teMethod (meSignal "layout")
                             , teSize (numList [ num 1, numSignal "radius" ])
                             , teAs "alpha" "radius" "depth" "children"
                             ]
@@ -120,8 +121,8 @@ tree2 =
                     |> transform
                         [ trTreeLinks
                         , trLinkPath
-                            [ lpShape (linkShapeSignal "links")
-                            , lpOrient Radial
+                            [ lpShape (lsSignal "links")
+                            , lpOrient orRadial
                             , lpSourceX (field "source.radians")
                             , lpSourceY (field "source.radius")
                             , lpTargetX (field "target.radians")
@@ -144,7 +145,7 @@ tree2 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScSequential
+                    [ scType scSequential
                     , scDomain (doData [ daDataset "tree", daField (field "depth") ])
                     , scRange (raScheme (str "magma") [])
                     , scZero true
@@ -152,7 +153,7 @@ tree2 =
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "links") ]
                     , mEncode
                         [ enUpdate
@@ -163,7 +164,7 @@ tree2 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter [ maSize [ vNum 100 ], maStroke [ vStr "#fff" ] ]
@@ -174,7 +175,7 @@ tree2 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -194,7 +195,7 @@ tree2 =
                     ]
     in
     toVega
-        [ width 720, height 720, padding 5, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 720, height 720, padding 5, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 tree3 : Spec
@@ -207,9 +208,9 @@ tree3 =
                         [ trStratify (field "id") (field "parent")
                         , trTreemap
                             [ tmField (field "size")
-                            , tmSort [ ( field "value", Ascend ) ]
+                            , tmSort [ ( field "value", ascend ) ]
                             , tmRound true
-                            , tmMethod (treemapMethodSignal "layout")
+                            , tmMethod (tmSignal "layout")
                             , tmRatio (numSignal "aspectRatio")
                             , tmSize (numSignals [ "width", "height" ])
                             ]
@@ -231,23 +232,23 @@ tree3 =
         sc =
             scales
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raStrs [ "#3182bd", "#6baed6", "#9ecae1", "#c6dbef", "#e6550d", "#fd8d3c", "#fdae6b", "#fdd0a2", "#31a354", "#74c476", "#a1d99b", "#c7e9c0", "#756bb1", "#9e9ac8", "#bcbddc", "#dadaeb", "#636363", "#969696", "#bdbdbd", "#d9d9d9" ])
                     ]
                 << scale "size"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doNums (nums [ 0, 1, 2, 3 ]))
                     , scRange (raNums [ 256, 28, 20, 14 ])
                     ]
                 << scale "opacity"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doNums (nums [ 0, 1, 2, 3 ]))
                     , scRange (raNums [ 0.15, 0.5, 0.8, 1.0 ])
                     ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "nodes") ]
                     , mInteractive false
                     , mEncode
@@ -261,7 +262,7 @@ tree3 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "leaves") ]
                     , mEncode
                         [ enEnter [ maStroke [ white ] ]
@@ -275,7 +276,7 @@ tree3 =
                         , enHover [ maFill [ vStr "red" ] ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "nodes") ]
                     , mInteractive false
                     , mEncode
@@ -296,7 +297,7 @@ tree3 =
                     ]
     in
     toVega
-        [ width 960, height 500, padding 2.5, autosize [ ANone ], ds, si [], sc [], mk [] ]
+        [ width 960, height 500, padding 2.5, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 tree4 : Spec
@@ -309,18 +310,18 @@ tree4 =
                         [ trStratify (field "id") (field "parent")
                         , trPack
                             [ paField (field "size")
-                            , paSort [ ( field "value", Ascend ) ]
+                            , paSort [ ( field "value", ascend ) ]
                             , paSize (numSignals [ "width", "height" ])
                             ]
                         ]
                 ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "category20") []) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20") []) ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -340,7 +341,7 @@ tree4 =
                     ]
     in
     toVega
-        [ width 600, height 600, padding 5, autosize [ ANone ], ds, sc [], mk [] ]
+        [ width 600, height 600, padding 5, autosize [ asNone ], ds, sc [], mk [] ]
 
 
 tree5 : Spec
@@ -353,7 +354,7 @@ tree5 =
                         [ trStratify (field "id") (field "parent")
                         , trPartition
                             [ ptField (field "size")
-                            , ptSort [ ( field "value", Ascend ) ]
+                            , ptSort [ ( field "value", ascend ) ]
                             , ptSize (numSignals [ "2 * PI", "width / 2" ])
                             , ptAs "a0" "r0" "a1" "r1" "depth" "children"
                             ]
@@ -361,11 +362,11 @@ tree5 =
                 ]
 
         sc =
-            scales << scale "cScale" [ scType ScOrdinal, scRange (raScheme (str "tableau20") []) ]
+            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "tableau20") []) ]
 
         mk =
             marks
-                << mark Arc
+                << mark arc
                     [ mFrom [ srData (str "tree") ]
                     , mEncode
                         [ enEnter
@@ -392,7 +393,7 @@ tree5 =
                     ]
     in
     toVega
-        [ width 600, height 600, padding 5, autosize [ ANone ], ds, sc [], mk [] ]
+        [ width 600, height 600, padding 5, autosize [ asNone ], ds, sc [], mk [] ]
 
 
 sourceExample : Spec
@@ -423,10 +424,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

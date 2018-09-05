@@ -1,10 +1,11 @@
 port module GalleryCustom exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -16,7 +17,7 @@ custom1 : Spec
 custom1 =
     let
         cf =
-            config [ cfAxis AxBand [ axBandPosition (num 0), axLabelPadding (num 5), axTickExtra false ] ]
+            config [ cfAxis axBand [ axBandPosition (num 0), axLabelPadding (num 5), axTickExtra false ] ]
 
         ds =
             dataSource
@@ -32,7 +33,7 @@ custom1 =
                 , data "tooltip" [ daSource "budgets" ]
                     |> transform
                         [ trFilter (expr "datum.budgetYear <= currentYear && datum.forecastYear == tipYear && abs(datum.value - tipValue) <= 0.1")
-                        , trAggregate [ agFields [ field "value", field "value" ], agOps [ Min, ArgMin ], agAs [ "min", "argmin" ] ]
+                        , trAggregate [ agFields [ field "value", field "value" ], agOps [ opMin, opArgMin ], agAs [ "min", "argmin" ] ]
                         , trFormula "datum.argmin.budgetYear" "tooltipYear"
                         ]
                 , data "tooltip-forecast" [ daSource "budgets" ]
@@ -47,8 +48,8 @@ custom1 =
                 << signal "dragging"
                     [ siValue vFalse
                     , siOn
-                        [ evHandler [ esObject [ esMarkName "handle", esType MouseDown ] ] [ evUpdate "true" ]
-                        , evHandler [ esObject [ esSource ESWindow, esType MouseUp ] ] [ evUpdate "false" ]
+                        [ evHandler [ esObject [ esMarkName "handle", esType etMouseDown ] ] [ evUpdate "true" ]
+                        , evHandler [ esObject [ esSource esWindow, esType etMouseUp ] ] [ evUpdate "false" ]
                         ]
                     ]
                 << signal "handleYear"
@@ -56,9 +57,9 @@ custom1 =
                     , siOn
                         [ evHandler
                             [ esObject
-                                [ esBetween [ esMarkName "handle", esType MouseDown ] [ esSource ESWindow, esType MouseUp ]
-                                , esSource ESWindow
-                                , esType MouseMove
+                                [ esBetween [ esMarkName "handle", esType etMouseDown ] [ esSource esWindow, esType etMouseUp ]
+                                , esSource esWindow
+                                , esType etMouseMove
                                 , esConsume true
                                 ]
                             ]
@@ -68,11 +69,11 @@ custom1 =
                 << signal "currentYear" [ siUpdate "clamp(handleYear, 1980, 2010)" ]
                 << signal "tipYear"
                     [ siOn
-                        [ evHandler [ esObject [ esType MouseMove ] ] [ evUpdate "dragging ? tipYear : invert('xScale', x())" ] ]
+                        [ evHandler [ esObject [ esType etMouseMove ] ] [ evUpdate "dragging ? tipYear : invert('xScale', x())" ] ]
                     ]
                 << signal "tipValue"
                     [ siOn
-                        [ evHandler [ esObject [ esType MouseMove ] ] [ evUpdate "dragging ? tipValue : invert('yScale', y())" ] ]
+                        [ evHandler [ esObject [ esType etMouseMove ] ] [ evUpdate "dragging ? tipValue : invert('yScale', y())" ] ]
                     ]
                 << signal "cursor"
                     [ siValue (vStr "default")
@@ -83,45 +84,45 @@ custom1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doData [ daDataset "budgets", daField (field "forecastYear") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "budgets", daField (field "value") ])
                     , scZero true
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
 
         ax =
             axes
                 << axis "xScale"
-                    SBottom
+                    siBottom
                     [ axGrid true
                     , axDomain false
                     , axValues (vNums [ 1982, 1986, 1990, 1994, 1998, 2002, 2006, 2010, 2014, 2018 ])
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
-                        , ( ELabels, [ enUpdate [ maX [ vScale "xScale", vField (field "value") ] ] ] )
+                        [ ( aeGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
+                        , ( aeLabels, [ enUpdate [ maX [ vScale "xScale", vField (field "value") ] ] ] )
                         ]
                     ]
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axGrid true
                     , axDomain false
                     , axValues (vNums [ 0, -0.5, -1, -1.5 ])
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
-                        , ( ELabels, [ enEnter [ maText [ vSignal "format(datum.value, '$.1f') + ' trillion'" ] ] ] )
+                        [ ( aeGrid, [ enEnter [ maStroke [ white ], maStrokeOpacity [ vNum 0.75 ] ] ] )
+                        , ( aeLabels, [ enEnter [ maText [ vSignal "format(datum.value, '$.1f') + ' trillion'" ] ] ] )
                         ]
                     ]
 
         nestedMk1 =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "facet") ]
                     , mEncode
                         [ enUpdate
@@ -136,7 +137,7 @@ custom1 =
 
         nestedMk2 =
             marks
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mEncode
                         [ enUpdate
@@ -148,7 +149,7 @@ custom1 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mEncode
                         [ enUpdate
@@ -163,11 +164,11 @@ custom1 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "budgets-current") "facet" [ faGroupBy [ field "budgetYear" ] ] ]
                     , mGroup [ nestedMk1 [] ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "budgets-actual") ]
                     , mEncode
                         [ enUpdate
@@ -178,7 +179,7 @@ custom1 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "tooltip-forecast") ]
                     , mEncode
                         [ enUpdate
@@ -189,7 +190,7 @@ custom1 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "tooltip") ]
                     , mEncode
                         [ enUpdate
@@ -200,7 +201,7 @@ custom1 =
                             ]
                         ]
                     ]
-                << mark Rule
+                << mark rule
                     [ mEncode
                         [ enEnter
                             [ maY [ vScale "yScale", vNum 0 ]
@@ -213,12 +214,12 @@ custom1 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mName "handle"
                     , mEncode
                         [ enEnter
                             [ maY [ vScale "yScale", vNum 0, vOffset (vNum 1) ]
-                            , maShape [ symbolValue SymTriangleDown ]
+                            , maShape [ symbolValue symTriangleDown ]
                             , maSize [ vNum 400 ]
                             , maStroke [ black ]
                             , maStrokeWidth [ vNum 0.5 ]
@@ -229,11 +230,11 @@ custom1 =
                             ]
                         , enHover
                             [ maFill [ vStr "lemonchiffon" ]
-                            , maCursor [ cursorValue CPointer ]
+                            , maCursor [ cursorValue cuPointer ]
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mEncode
                         [ enEnter
                             [ maX [ vNum 0 ]
@@ -245,7 +246,7 @@ custom1 =
                         , enUpdate [ maText [ vSignal "currentYear" ] ]
                         ]
                     ]
-                << mark Group
+                << mark group
                     [ mFrom [ srData (str "tooltip") ]
                     , mInteractive false
                     , mEncode
@@ -281,28 +282,28 @@ custom2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doNums (nums [ 1565, 1825 ]))
                     , scZero false
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scZero true
                     , scDomain (doData [ daDataset "wheat", daField (field "wheat") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raStrs [ "black", "white" ])
                     , scDomain (doData [ daDataset "monarchs", daField (field "commonwealth") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount (num 5), axFormat (str "04d") ]
+                << axis "xScale" siBottom [ axTickCount (num 5), axFormat (str "04d") ]
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axGrid true
                     , axDomain false
                     , axZIndex (num 1)
@@ -310,14 +311,14 @@ custom2 =
                     , axOffset (vNum 5)
                     , axTickSize (num 0)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ white ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
-                        , ( ELabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
+                        [ ( aeGrid, [ enEnter [ maStroke [ white ], maStrokeWidth [ vNum 1 ], maStrokeOpacity [ vNum 0.25 ] ] ] )
+                        , ( aeLabels, [ enEnter [ maFontStyle [ vStr "italic" ] ] ] )
                         ]
                     ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "wheat") ]
                     , mEncode
                         [ enEnter
@@ -331,11 +332,11 @@ custom2 =
                             ]
                         ]
                     ]
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Linear ]
+                            [ maInterpolate [ markInterpolationValue miLinear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maY2 [ vScale "yScale", vNum 0 ]
@@ -344,11 +345,11 @@ custom2 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Linear ]
+                            [ maInterpolate [ markInterpolationValue miLinear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maStroke [ vStr "#ff7e79" ]
@@ -356,11 +357,11 @@ custom2 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "wheat-filtered") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Linear ]
+                            [ maInterpolate [ markInterpolationValue miLinear ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "wages") ]
                             , maStroke [ black ]
@@ -368,7 +369,7 @@ custom2 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mName "monarch_rects"
                     , mFrom [ srData (str "monarchs") ]
                     , mEncode
@@ -383,7 +384,7 @@ custom2 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "monarch_rects") ]
                     , mEncode
                         [ enEnter
@@ -436,41 +437,41 @@ custom3 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "table", daField (field "year") ])
                     , scZero false
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scDomain (doData [ daDataset "table", daField (field "population") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raStrs [ "black", "red" ])
                     , scDomain (doData [ daDataset "annotation", daField (field "text") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Year"), axTickCount (num 15), axFormat (str "d") ]
-                << axis "yScale" SLeft [ axTitle (str "Population"), axTitlePadding (vNum 10), axGrid true ]
+                << axis "xScale" siBottom [ axTitle (str "Year"), axTickCount (num 15), axFormat (str "d") ]
+                << axis "yScale" siLeft [ axTitle (str "Population"), axTitlePadding (vNum 10), axGrid true ]
 
         le =
             legends
                 << legend
                     [ leFill "cScale"
                     , leTitle (str "Period")
-                    , leOrient TopLeft
+                    , leOrient loTopLeft
                     , leOffset (vNum 8)
                     , leEncode
                         [ enSymbols
                             [ enUpdate
                                 [ maStrokeWidth [ vNum 0 ]
-                                , maShape [ symbolValue SymSquare ]
+                                , maShape [ symbolValue symSquare ]
                                 , maOpacity [ vNum 0.3 ]
                                 ]
                             ]
@@ -479,7 +480,7 @@ custom3 =
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "annotation") ]
                     , mEncode
                         [ enEnter
@@ -492,11 +493,11 @@ custom3 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Monotone ]
+                            [ maInterpolate [ markInterpolationValue miMonotone ]
                             , maX [ vScale "xScale", vField (field "year") ]
                             , maY [ vScale "yScale", vField (field "population") ]
                             , maStroke [ vStr "steelblue" ]
@@ -504,7 +505,7 @@ custom3 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -529,13 +530,13 @@ custom4 =
             config [ cfTitle [ tiFontSize (num 14) ] ]
 
         ti =
-            title (str "Seattle Annual Temperatures") [ tiAnchor Start, tiOffset (num 4) ]
+            title (str "Seattle Annual Temperatures") [ tiAnchor anStart, tiOffset (num 4) ]
 
         ds =
             dataSource
                 [ data "temperature"
                     [ daUrl (str "https://vega.github.io/vega/data/seattle-temps.csv")
-                    , daFormat [ CSV, parse [ ( "temp", FoNum ), ( "date", foDate "" ) ] ]
+                    , daFormat [ csv, parse [ ( "temp", foNum ), ( "date", foDate "" ) ] ]
                     ]
                     |> transform
                         [ trFormulaInitOnly "hours(datum.date)" "hour"
@@ -551,17 +552,17 @@ custom4 =
         sc =
             scales
                 << scale "row"
-                    [ scType ScBand
+                    [ scType scBand
                     , scDomain (doNums (nums [ 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5 ]))
                     , scRange (raStep (vSignal "rangeStep"))
                     ]
                 << scale "xScale"
-                    [ scType ScTime
-                    , scRange RaWidth
+                    [ scType scTime
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "temperature", daField (field "date") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raValues [ vSignal "rangeStep", vNum 1 ])
                     , scZero false
                     , scDomain (doData [ daDataset "temperature", daField (field "temp") ])
@@ -569,18 +570,18 @@ custom4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTitle (str "Month"), axDomain false, axFormat (str "%b") ]
+                << axis "xScale" siBottom [ axTitle (str "Month"), axDomain false, axFormat (str "%b") ]
                 << axis "row"
-                    SLeft
+                    siLeft
                     [ axTitle (str "Hour")
                     , axDomain false
                     , axTickSize (num 0)
-                    , axEncode [ ( ELabels, [ enUpdate [ maText [ vSignal "datum.value === 0 ? 'Midnight' : datum.value === 12 ? 'Noon' : datum.value < 12 ? datum.value + ':00 am' : (datum.value - 12) + ':00 pm'" ] ] ] ) ]
+                    , axEncode [ ( aeLabels, [ enUpdate [ maText [ vSignal "datum.value === 0 ? 'Midnight' : datum.value === 12 ? 'Noon' : datum.value < 12 ? datum.value + ':00 am' : (datum.value - 12) + ':00 pm'" ] ] ] ) ]
                     ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "temperature") "hour" [ faGroupBy [ field "hour" ] ] ]
                     , mEncode
                         [ enEnter
@@ -595,7 +596,7 @@ custom4 =
 
         nestedMk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "hour") ]
                     , mEncode
                         [ enEnter
@@ -628,16 +629,16 @@ custom5 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBand
-                    , scRange RaWidth
+                    [ scType scBand
+                    , scRange raWidth
                     , scPadding (num 0.1)
                     , scRound true
                     , scDomain (doData [ daDataset "weather", daField (field "id") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero false
                     , scRound true
                     , scDomain (doData [ daDataset "weather", daFields [ field "record.low", field "record.high" ] ])
@@ -646,19 +647,19 @@ custom5 =
         ax =
             axes
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axTickCount (num 3)
                     , axTickSize (num 0)
                     , axLabelPadding (num 0)
                     , axGrid true
                     , axDomain false
                     , axZIndex (num 1)
-                    , axEncode [ ( EGrid, [ enEnter [ maStroke [ white ] ] ] ) ]
+                    , axEncode [ ( aeGrid, [ enEnter [ maStroke [ white ] ] ] ) ]
                     ]
 
         mk =
             marks
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "weather") ]
                     , mEncode
                         [ enEnter
@@ -672,7 +673,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "weather") ]
                     , mEncode
                         [ enEnter
@@ -684,7 +685,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "weather") ]
                     , mEncode
                         [ enEnter
@@ -696,7 +697,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "actual") ]
                     , mEncode
                         [ enEnter
@@ -708,7 +709,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "forecast") ]
                     , mEncode
                         [ enEnter
@@ -720,7 +721,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "forecast") ]
                     , mEncode
                         [ enEnter
@@ -732,7 +733,7 @@ custom5 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "forecast") ]
                     , mEncode
                         [ enEnter
@@ -757,14 +758,14 @@ custom6 =
 
         cf =
             config
-                [ cfMark Text [ maFont [ vStr "Ideal Sans, Avenir Next, Helvetica" ] ]
+                [ cfMark text [ maFont [ vStr "Ideal Sans, Avenir Next, Helvetica" ] ]
                 , cfTitle
                     [ tiFont (str "Ideal Sans, Avenir Next, Helvetica")
                     , tiFontWeight (vNum 500)
                     , tiFontSize (num 17)
                     , tiLimit (num -1)
                     ]
-                , cfAxis AxAll
+                , cfAxis axAll
                     [ axLabelFont (str "Ideal Sans, Avenir Next, Helvetica")
                     , axLabelFontSize (num 12)
                     ]
@@ -772,8 +773,8 @@ custom6 =
 
         ti =
             title (str "A Mile-Long Global Food Market: Mapping Cuisine from “The Ave”")
-                [ tiOrient STop
-                , tiAnchor Start
+                [ tiOrient siTop
+                , tiAnchor anStart
                 , tiOffset (num 48)
                 , tiEncode [ enUpdate [ maDx [ vNum -1 ] ] ]
                 ]
@@ -803,25 +804,25 @@ custom6 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scZero false
                     , scDomain (doData [ daDataset "source", daField (field "lat") ])
                     ]
                 << scale "yScale"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scRound true
                     , scPadding (num 0)
                     , scDomain (doStrs (strSignal "categories"))
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raSignal "colors")
                     , scDomain (doSignal "categories")
                     ]
                 << scale "names"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scRange (raSignal "names")
                     , scDomain (doSignal "categories")
                     ]
@@ -829,11 +830,11 @@ custom6 =
         ax =
             axes
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axDomain false
                     , axTicks false
                     , axEncode
-                        [ ( ELabels
+                        [ ( aeLabels
                           , [ enUpdate
                                 [ maDx [ vNum 2 ]
                                 , maDy [ vNum 2 ]
@@ -848,7 +849,7 @@ custom6 =
 
         mk =
             marks
-                << mark Rule
+                << mark rule
                     [ mFrom [ srData (str "annotation") ]
                     , mEncode
                         [ enUpdate
@@ -861,7 +862,7 @@ custom6 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "annotation") ]
                     , mEncode
                         [ enUpdate
@@ -875,13 +876,13 @@ custom6 =
                             ]
                         ]
                     ]
-                << mark Group
+                << mark group
                     [ mFrom
                         [ srFacet (str "source")
                             "category"
                             [ faGroupBy [ field "key" ]
                             , faAggregate
-                                [ agOps [ Min, Max, Count ]
+                                [ agOps [ opMin, opMax, opCount ]
                                 , agFields (List.repeat 3 (field "lat"))
                                 , agAs [ "min_lat", "max_lat", "count" ]
                                 ]
@@ -894,7 +895,7 @@ custom6 =
                             , maHeight [ vScale "yScale", vBand (num 1) ]
                             ]
                         ]
-                    , mSort [ ( field "y", Ascend ) ]
+                    , mSort [ ( field "y", ascend ) ]
                     , mGroup [ nestedDs, nestedSi [], nestedSc [], nestedMk [] ]
                     ]
 
@@ -913,14 +914,14 @@ custom6 =
         nestedSc =
             scales
                 << scale "yInner"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raValues [ vSignal "height", vSignal "0 - size * height" ])
                     , scDomain (doNums (numList [ num 0, numSignal "domainMax" ]))
                     ]
 
         nestedMk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "density") ]
                     , mEncode
                         [ enEnter
@@ -936,7 +937,7 @@ custom6 =
                             ]
                         ]
                     ]
-                << mark Rule
+                << mark rule
                     [ mClip (clEnabled true)
                     , mEncode
                         [ enUpdate
@@ -949,7 +950,7 @@ custom6 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "category") ]
                     , mEncode
                         [ enEnter
@@ -966,7 +967,7 @@ custom6 =
                     ]
     in
     toVega
-        [ cf, width 500, height 380, padding 5, autosize [ APad ], ti, ds, si [], sc [], ax [], mk [] ]
+        [ cf, width 500, height 380, padding 5, autosize [ asPad ], ti, ds, si [], sc [], ax [], mk [] ]
 
 
 sourceExample : Spec
@@ -998,10 +999,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

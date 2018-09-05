@@ -1,10 +1,11 @@
 port module GalleryLineArea exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -27,45 +28,45 @@ lineChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ siValue (markInterpolationValue Linear)
+                    [ siValue (markInterpolationValue miLinear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScPoint
-                    , scRange RaWidth
+                    [ scType scPoint
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom []
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "table") "series" [ faGroupBy [ field "c" ] ] ]
                     , mGroup [ mkLine [] ]
                     ]
 
         mkLine =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enEnter
@@ -97,34 +98,34 @@ areaChart1 =
         si =
             signals
                 << signal "interpolate"
-                    [ siValue (markInterpolationValue Linear)
+                    [ siValue (markInterpolationValue miLinear)
                     , siBind (iSelect [ inOptions (vStrs [ "basis", "cardinal", "catmull-rom", "linear", "monotone", "natural", "step", "step-after", "step-before" ]) ])
                     ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scZero false
                     , scDomain (doData [ daDataset "table", daField (field "u") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "v") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount (num 20) ]
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom [ axTickCount (num 20) ]
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
@@ -157,7 +158,7 @@ areaChart2 =
                     |> transform
                         [ trStack
                             [ stGroupBy [ field "x" ]
-                            , stSort [ ( field "c", Ascend ) ]
+                            , stSort [ ( field "c", ascend ) ]
                             , stField (field "y")
                             ]
                         ]
@@ -166,42 +167,42 @@ areaChart2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScPoint
-                    , scRange RaWidth
+                    [ scType scPoint
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y1") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "table", daField (field "c") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
-                << axis "yScale" SLeft [ axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "yScale" siLeft [ axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "table") "series" [ faGroupBy [ field "c" ] ] ]
                     , mGroup [ mkArea [] ]
                     ]
 
         mkArea =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "series") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Monotone ]
+                            [ maInterpolate [ markInterpolationValue miMonotone ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maY [ vScale "yScale", vField (field "y0") ]
                             , maY2 [ vScale "yScale", vField (field "y1") ]
@@ -239,7 +240,7 @@ areaChart3 =
                 << signal "layers"
                     [ siValue (vNum 2)
                     , siOn
-                        [ evHandler [ esObject [ esType MouseDown, esConsume true ] ]
+                        [ evHandler [ esObject [ esType etMouseDown, esConsume true ] ]
                             [ evUpdate "1 + (layers % 4)" ]
                         ]
                     , siBind (iSelect [ inOptions (vNums [ 1, 2, 3, 4 ]) ])
@@ -251,26 +252,26 @@ areaChart3 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scZero false
                     , scRound true
                     , scDomain (doData [ daDataset "table", daField (field "x") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raValues [ vSignal "vheight", vNum 0 ])
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "table", daField (field "y") ])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axTickCount (num 20) ]
+            axes << axis "xScale" siBottom [ axTickCount (num 20) ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mEncode
                         [ enUpdate
                             [ maWidth [ vField (fGroup (field "width")) ]
@@ -283,7 +284,7 @@ areaChart3 =
 
         mk1 =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srData (str "layer_indices") ]
                     , mEncode [ enUpdate [ maY [ vField (field "offset") ] ] ]
                     , mGroup [ mkArea [] ]
@@ -291,11 +292,11 @@ areaChart3 =
 
         mkArea =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "table") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Monotone ]
+                            [ maInterpolate [ markInterpolationValue miMonotone ]
                             , maX [ vScale "xScale", vField (field "x") ]
                             , maFill [ vStr "steelblue" ]
                             ]
@@ -320,7 +321,7 @@ areaChart4 =
                     [ trFilter (expr "(sex === 'all' || datum.sex === sex) && (!query || test(regexp(query,'i'), datum.job))")
                     , trStack
                         [ stGroupBy [ field "year" ]
-                        , stSort [ ( field "job", Descend ), ( field "sex", Descend ) ]
+                        , stSort [ ( field "job", descend ), ( field "sex", descend ) ]
                         , stField (field "perc")
                         ]
                     ]
@@ -331,7 +332,7 @@ areaChart4 =
                     [ trAggregate
                         [ agGroupBy [ field "job", field "sex" ]
                         , agFields [ field "perc", field "perc" ]
-                        , agOps [ Sum, ArgMax ]
+                        , agOps [ opSum, opArgMax ]
                         , agAs [ "sum", "argmax" ]
                         ]
                     ]
@@ -348,8 +349,8 @@ areaChart4 =
                 << signal "query"
                     [ siValue (vStr "")
                     , siOn
-                        [ evHandler [ esObject [ esMark Area, esType Click, esConsume true ] ] [ evUpdate "datum.job" ]
-                        , evHandler [ esObject [ esType DblClick, esConsume true ] ] [ evUpdate "''" ]
+                        [ evHandler [ esObject [ esMark area, esType etClick, esConsume true ] ] [ evUpdate "datum.job" ]
+                        , evHandler [ esObject [ esType etDblClick, esConsume true ] ] [ evUpdate "''" ]
                         ]
                     , siBind (iText [ inPlaceholder "search", inAutocomplete False ])
                     ]
@@ -357,50 +358,50 @@ areaChart4 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scZero false
                     , scRound true
                     , scDomain (doData [ daDataset "jobs", daField (field "year") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scZero true
                     , scRound true
                     , scDomain (doData [ daDataset "jobs", daField (field "y1") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "men", "women" ]))
                     , scRange (raStrs [ "#33f", "#f33" ])
                     ]
                 << scale "alphaScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scZero true
                     , scDomain (doData [ daDataset "series", daField (field "sum") ])
                     , scRange (raNums [ 0.4, 0.8 ])
                     ]
                 << scale "fontScale"
-                    [ scType ScSqrt
+                    [ scType scSqrt
                     , scRange (raNums [ 0, 20 ])
                     , scZero true
                     , scRound true
                     , scDomain (doData [ daDataset "series", daField (field "argmax.perc") ])
                     ]
                 << scale "opacityScale"
-                    [ scType ScQuantile
+                    [ scType scQuantile
                     , scRange (raNums [ 0, 0, 0, 0, 0, 0.1, 0.2, 0.4, 0.7, 1.0 ])
                     , scDomain (doData [ daDataset "series", daField (field "argmax.perc") ])
                     ]
                 << scale "alignScale"
-                    [ scType ScQuantize
+                    [ scType scQuantize
                     , scRange (raStrs [ "left", "center", "right" ])
                     , scZero false
                     , scDomain (doNums (nums [ 1730, 2130 ]))
                     ]
                 << scale "offsetScale"
-                    [ scType ScQuantize
+                    [ scType scQuantize
                     , scRange (raNums [ 6, 0, -6 ])
                     , scZero false
                     , scDomain (doNums (nums [ 1730, 2130 ]))
@@ -408,22 +409,22 @@ areaChart4 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat (str "d"), axTickCount (num 15) ]
+                << axis "xScale" siBottom [ axFormat (str "d"), axTickCount (num 15) ]
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axFormat (str "%")
                     , axGrid true
                     , axDomain false
                     , axTickSize (num 12)
                     , axEncode
-                        [ ( EGrid, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
-                        , ( ETicks, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
+                        [ ( aeGrid, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
+                        , ( aeTicks, [ enEnter [ maStroke [ vStr "#ccc" ] ] ] )
                         ]
                     ]
 
         mkArea =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "facet") ]
                     , mEncode
                         [ enUpdate
@@ -439,14 +440,14 @@ areaChart4 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom
                         [ srData (str "series")
                         , srFacet (str "jobs") "facet" [ faGroupBy [ field "job", field "sex" ] ]
                         ]
                     , mGroup [ mkArea [] ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "series") ]
                     , mInteractive false
                     , mEncode
@@ -496,10 +497,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

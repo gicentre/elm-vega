@@ -1,10 +1,11 @@
 port module GalleryDist exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -29,7 +30,7 @@ histo1 =
                         , trAggregate
                             [ agKey (field "bin0")
                             , agGroupBy [ field "bin0", field "bin1" ]
-                            , agOps [ Count ]
+                            , agOps [ opCount ]
                             , agAs [ "count" ]
                             ]
                         ]
@@ -49,27 +50,27 @@ histo1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doNums (nums [ -1, 1 ]))
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scRound true
                     , scDomain (doData [ daDataset "binned", daField (field "count") ])
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
-                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "yScale" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "binned") ]
                     , mEncode
                         [ enUpdate
@@ -82,7 +83,7 @@ histo1 =
                         , enHover [ maFill [ vStr "firebrick" ] ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
@@ -136,22 +137,22 @@ histo2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScBinLinear
+                    [ scType scBinLinear
                     , scRange (raValues [ vSignal "barStep + nullGap", vSignal "width" ])
                     , scDomain (doNums (numSignal "binDomain"))
                     , scRound true
                     ]
                 << scale "xScaleNull"
-                    [ scType ScBand
+                    [ scType scBand
                     , scRange (raValues [ vNum 0, vSignal "barStep" ])
                     , scRound true
                     , scDomain (doStrs (strs [ "null" ]))
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scDomain
                         (doData
                             [ daReferences
@@ -164,13 +165,13 @@ histo2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axTickCount (num 10) ]
-                << axis "xScaleNull" SBottom []
-                << axis "yScale" SLeft [ axTickCount (num 5), axOffset (vNum 5) ]
+                << axis "xScale" siBottom [ axTickCount (num 10) ]
+                << axis "xScaleNull" siBottom []
+                << axis "yScale" siLeft [ axTickCount (num 5), axOffset (vNum 5) ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "counts") ]
                     , mEncode
                         [ enUpdate
@@ -183,7 +184,7 @@ histo2 =
                         , enHover [ maFill [ vStr "firebrick" ] ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "nulls") ]
                     , mEncode
                         [ enUpdate
@@ -198,7 +199,7 @@ histo2 =
                     ]
     in
     toVega
-        [ width 500, height 200, padding 5, autosize [ AFit, AResize ], ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 200, padding 5, autosize [ asFit, asResize ], ds, si [], sc [], ax [], mk [] ]
 
 
 density1 : Spec
@@ -211,7 +212,7 @@ density1 =
                     |> transform
                         [ trAggregate
                             [ agFields [ field "u", field "u" ]
-                            , agOps [ Mean, Stdev ]
+                            , agOps [ opMean, opStdev ]
                             , agAs [ "mean", "stdev" ]
                             ]
                         ]
@@ -220,7 +221,7 @@ density1 =
                         [ trDensity (diKde "points" (field "u") (numSignal "bandWidth"))
                             [ dnExtent (numSignal "domain('xScale')")
                             , dnSteps (numSignal "steps")
-                            , dnMethod (densityFunctionSignal "method")
+                            , dnMethod (dnSignal "method")
                             ]
                         ]
                 , data "normal" []
@@ -228,7 +229,7 @@ density1 =
                         [ trDensity (diNormal (numSignal "data('summary')[0].mean") (numSignal "data('summary')[0].stdev"))
                             [ dnExtent (numSignal "domain('xScale')")
                             , dnSteps (numSignal "steps")
-                            , dnMethod (densityFunctionSignal "method")
+                            , dnMethod (dnSignal "method")
                             ]
                         ]
                 ]
@@ -242,14 +243,14 @@ density1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "points", daField (field "u") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scRound true
                     , scDomain
                         (doData
@@ -261,20 +262,20 @@ density1 =
                         )
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "Normal Estimate", "Kernel Density Estimate" ]))
                     , scRange (raStrs [ "#444", "steelblue" ])
                     ]
 
         ax =
-            axes << axis "xScale" SBottom [ axZIndex (num 1) ]
+            axes << axis "xScale" siBottom [ axZIndex (num 1) ]
 
         le =
-            legends << legend [ leOrient TopLeft, leOffset (vNum 0), leZIndex (num 1), leFill "cScale" ]
+            legends << legend [ leOrient loTopLeft, leOffset (vNum 0), leZIndex (num 1), leFill "cScale" ]
 
         mk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "density") ]
                     , mEncode
                         [ enUpdate
@@ -285,7 +286,7 @@ density1 =
                             ]
                         ]
                     ]
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "normal") ]
                     , mEncode
                         [ enUpdate
@@ -296,7 +297,7 @@ density1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
@@ -318,7 +319,7 @@ boxplot1 : Spec
 boxplot1 =
     let
         cf =
-            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+            config [ cfAxis axBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
 
         ds =
             dataSource
@@ -335,28 +336,28 @@ boxplot1 =
         sc =
             scales
                 << scale "layout"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scRound true
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
-                << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
+                << scale "cScale" [ scType scOrdinal, scRange raCategory ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
-                << axis "layout" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "layout" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
                     , mEncode
                         [ enEnter
@@ -374,7 +375,7 @@ boxplot1 =
                     |> transform
                         [ trAggregate
                             [ agFields (List.repeat 5 (field "value"))
-                            , agOps [ Min, Q1, Median, Q3, Max ]
+                            , agOps [ opMin, opQ1, opMedian, opQ3, opMax ]
                             , agAs [ "min", "q1", "median", "q3", "max" ]
                             ]
                         ]
@@ -382,7 +383,7 @@ boxplot1 =
 
         nestedMk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
@@ -396,7 +397,7 @@ boxplot1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
@@ -411,7 +412,7 @@ boxplot1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
@@ -434,7 +435,7 @@ violinplot1 : Spec
 violinplot1 =
     let
         cf =
-            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+            config [ cfAxis axBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
 
         ds =
             dataSource
@@ -453,28 +454,28 @@ violinplot1 =
         sc =
             scales
                 << scale "layout"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain (doData [ daDataset "iris", daField (field "organ") ])
                     ]
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scRound true
                     , scDomain (doData [ daDataset "iris", daField (field "value") ])
                     , scZero true
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
-                << scale "cScale" [ scType ScOrdinal, scRange RaCategory ]
+                << scale "cScale" [ scType scOrdinal, scRange raCategory ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
-                << axis "layout" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
+                << axis "layout" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mFrom [ srFacet (str "iris") "organs" [ faGroupBy [ field "organ" ] ] ]
                     , mEncode
                         [ enEnter
@@ -495,7 +496,7 @@ violinplot1 =
                         , trStack
                             [ stGroupBy [ field "value" ]
                             , stField (field "density")
-                            , stOffset OfCenter
+                            , stOffset stCenter
                             , stAs "y0" "y1"
                             ]
                         ]
@@ -503,7 +504,7 @@ violinplot1 =
                     |> transform
                         [ trAggregate
                             [ agFields (List.map field [ "value", "value", "value" ])
-                            , agOps [ Q1, Median, Q3 ]
+                            , agOps [ opQ1, opMedian, opQ3 ]
                             , agAs [ "q1", "median", "q3" ]
                             ]
                         ]
@@ -512,14 +513,14 @@ violinplot1 =
         nestedSc =
             scales
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRange (raValues [ vNum 0, vSignal "plotWidth" ])
                     , scDomain (doData [ daDataset "density", daField (field "density") ])
                     ]
 
         nestedMk =
             marks
-                << mark Area
+                << mark area
                     [ mFrom [ srData (str "density") ]
                     , mEncode
                         [ enEnter [ maFill [ vScale "cScale", vField (fParent (field "organ")) ] ]
@@ -530,7 +531,7 @@ violinplot1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
@@ -544,7 +545,7 @@ violinplot1 =
                             ]
                         ]
                     ]
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter
@@ -573,12 +574,12 @@ window1 =
                         [ trFilter (expr "datum.Director != null && datum.Worldwide_Gross != null")
                         , trAggregate
                             [ agGroupBy [ field "Director" ]
-                            , agOps [ operationSignal "op" ]
+                            , agOps [ opSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
-                        , trWindow [ wnOperation RowNumber "rank" ]
-                            [ wnSort [ ( field "Gross", Descend ) ] ]
+                        , trWindow [ wnOperation woRowNumber "rank" ]
+                            [ wnSort [ ( field "Gross", descend ) ] ]
                         , trFilter (expr "datum.rank <= k")
                         ]
                 ]
@@ -604,24 +605,24 @@ window1 =
                     ]
 
         ti =
-            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor Start ]
+            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor anStart ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "yScale"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain
                         (doData
                             [ daDataset "directors"
                             , daField (field "Director")
-                            , daSort [ soOp Max, soByField (str "Gross"), Descending ]
+                            , daSort [ soOp opMax, soByField (str "Gross"), soDescending ]
                             ]
                         )
                     , scPadding (num 0.1)
@@ -629,12 +630,12 @@ window1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
@@ -647,7 +648,7 @@ window1 =
                     ]
     in
     toVega
-        [ width 500, height 410, padding 5, autosize [ AFit ], ti, ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 410, padding 5, autosize [ asFit ], ti, ds, si [], sc [], ax [], mk [] ]
 
 
 window2 : Spec
@@ -661,12 +662,12 @@ window2 =
                     |> transform
                         [ trAggregate
                             [ agGroupBy [ field "Director" ]
-                            , agOps [ operationSignal "op" ]
+                            , agOps [ opSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
-                        , trWindow [ wnOperation RowNumber "rank" ]
-                            [ wnSort [ ( field "Gross", Descend ) ] ]
+                        , trWindow [ wnOperation woRowNumber "rank" ]
+                            [ wnSort [ ( field "Gross", descend ) ] ]
                         ]
                 , data "directors" [ daSource "source" ]
                     |> transform
@@ -674,7 +675,7 @@ window2 =
                         , trFormula "datum.rank < k ? datum.Director : 'All Others'" "Category"
                         , trAggregate
                             [ agGroupBy [ field "Category" ]
-                            , agOps [ operationSignal "op" ]
+                            , agOps [ opSignal "op" ]
                             , agFields [ field "Worldwide_Gross" ]
                             , agAs [ "Gross" ]
                             ]
@@ -702,24 +703,24 @@ window2 =
                     ]
 
         ti =
-            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor Start ]
+            title (strSignal "'Top Directors by ' + label[op] + ' Worldwide Gross'") [ tiAnchor anStart ]
 
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "directors", daField (field "Gross") ])
-                    , scNice NTrue
+                    , scNice niTrue
                     ]
                 << scale "yScale"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain
                         (doData
                             [ daDataset "directors"
                             , daField (field "Category")
-                            , daSort [ soOp Max, soByField (str "Gross"), Descending ]
+                            , daSort [ soOp opMax, soByField (str "Gross"), soDescending ]
                             ]
                         )
                     , scPadding (num 0.1)
@@ -727,12 +728,12 @@ window2 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
-                << axis "yScale" SLeft []
+                << axis "xScale" siBottom [ axFormat (str "$,d"), axTickCount (num 5) ]
+                << axis "yScale" siLeft []
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "directors") ]
                     , mEncode
                         [ enUpdate
@@ -745,7 +746,7 @@ window2 =
                     ]
     in
     toVega
-        [ width 500, height 410, padding 5, autosize [ AFit ], ti, ds, si [], sc [], ax [], mk [] ]
+        [ width 500, height 410, padding 5, autosize [ asFit ], ti, ds, si [], sc [], ax [], mk [] ]
 
 
 scatter1 : Spec
@@ -768,23 +769,23 @@ scatter1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     ]
                 << scale "sizeScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "summary", daField (field "count") ])
                     , scRange (raNums [ 0, 360 ])
                     , scZero true
@@ -793,14 +794,14 @@ scatter1 =
         ax =
             axes
                 << axis "xScale"
-                    SBottom
+                    siBottom
                     [ axGrid true
                     , axDomain false
                     , axTickCount (num 5)
                     , axTitle (str "Horsepower")
                     ]
                 << axis "yScale"
-                    SLeft
+                    siLeft
                     [ axGrid true
                     , axDomain false
                     , axTitlePadding (vNum 5)
@@ -825,7 +826,7 @@ scatter1 =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mName "marks"
                     , mFrom [ srData (str "summary") ]
                     , mEncode
@@ -842,14 +843,14 @@ scatter1 =
                     ]
     in
     toVega
-        [ width 200, height 200, padding 5, autosize [ APad ], ds, sc [], ax [], le [], mk [] ]
+        [ width 200, height 200, padding 5, autosize [ asPad ], ds, sc [], ax [], le [], mk [] ]
 
 
 contour1 : Spec
 contour1 =
     let
         cf =
-            config [ cfScaleRange RaHeatmap (raScheme (str "greenblue") []) ]
+            config [ cfScaleRange raHeatmap (raScheme (str "greenblue") []) ]
 
         ds =
             dataSource
@@ -874,49 +875,49 @@ contour1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero false
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero false
                     ]
                 << scale "cScale"
-                    [ scType ScSequential
+                    [ scType scSequential
                     , scDomain (doData [ daDataset "contours", daField (field "value") ])
-                    , scRange RaHeatmap
+                    , scRange raHeatmap
                     , scZero true
                     ]
 
         ax =
             axes
                 << axis "xScale"
-                    SBottom
+                    siBottom
                     [ axGrid true
                     , axDomain false
                     , axTitle (str "Horsepower")
                     ]
                 << axis "yScale"
-                    SLeft
+                    siLeft
                     [ axGrid true
                     , axDomain false
                     , axTitle (str "Miles per gallon")
                     ]
 
         le =
-            legends << legend [ leFill "cScale", leType LGradient ]
+            legends << legend [ leFill "cScale", leType ltGradient ]
 
         mk =
             marks
-                << mark Path
+                << mark path
                     [ mFrom [ srData (str "contours") ]
                     , mEncode
                         [ enEnter
@@ -928,7 +929,7 @@ contour1 =
                         ]
                     , mTransform [ trGeoPath "" [ gpField (field "datum") ] ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mName "marks"
                     , mFrom [ srData (str "source") ]
                     , mEncode
@@ -942,7 +943,7 @@ contour1 =
                     ]
     in
     toVega
-        [ cf, width 500, height 400, padding 5, autosize [ APad ], ds, si [], sc [], ax [], le [], mk [] ]
+        [ cf, width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
 wheat1 : Spec
@@ -959,7 +960,7 @@ wheat1 =
                             , bnNice false
                             , bnSignal "bins"
                             ]
-                        , trStack [ stGroupBy [ field "bin0" ], stSort [ ( field "u", Ascend ) ] ]
+                        , trStack [ stGroupBy [ field "bin0" ], stSort [ ( field "u", ascend ) ] ]
                         , trExtentAsSignal (field "y1") "extent"
                         ]
                 ]
@@ -983,20 +984,20 @@ wheat1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doNums (nums [ -1, 1 ]))
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scRange RaHeight
+                    [ scType scLinear
+                    , scRange raHeight
                     , scDomain (doNums (numList [ num 0, numSignal "extent[1]" ]))
                     ]
 
         ax =
             axes
                 << axis "xScale"
-                    SBottom
+                    siBottom
                     [ axValues (vSignal "sequence(bins.start, bins.stop + bins.step, bins.step)")
                     , axDomain false
                     , axTicks false
@@ -1004,11 +1005,11 @@ wheat1 =
                     , axGrid true
                     , axZIndex (num 0)
                     ]
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "points") ]
                     , mEncode
                         [ enEnter
@@ -1062,10 +1063,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

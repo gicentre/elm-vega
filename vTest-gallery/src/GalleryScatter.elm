@@ -1,10 +1,11 @@
 port module GalleryScatter exposing (elmToJS)
 
+import Browser
 import Html exposing (Html, div, pre)
 import Html.Attributes exposing (id)
 import Json.Encode
-import Platform
 import Vega exposing (..)
+
 
 
 -- NOTE: All data sources in these examples originally provided at
@@ -24,25 +25,25 @@ scatterplot1 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
-                    , scRange RaWidth
+                    , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
-                    , scRange RaHeight
+                    , scRange raHeight
                     ]
                 << scale "sizeScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scRound true
-                    , scNice NFalse
+                    , scNice niFalse
                     , scZero true
                     , scDomain (doData [ daDataset "cars", daField (field "Acceleration") ])
                     , scRange (raNums [ 4, 361 ])
@@ -50,14 +51,14 @@ scatterplot1 =
 
         ax =
             axes
-                << axis "xScale" SBottom [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Horsepower") ]
-                << axis "yScale" SLeft [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Miles per gallon") ]
+                << axis "xScale" siBottom [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Horsepower") ]
+                << axis "yScale" siLeft [ axGrid true, axDomain false, axTickCount (num 5), axTitle (str "Miles per gallon") ]
 
         shapeEncoding =
             [ maStrokeWidth [ vNum 2 ]
             , maOpacity [ vNum 0.5 ]
             , maStroke [ vStr "#4682b4" ]
-            , maShape [ symbolValue SymCircle ]
+            , maShape [ symbolValue symCircle ]
             , maFill [ transparent ]
             ]
 
@@ -72,7 +73,7 @@ scatterplot1 =
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "cars") ]
                     , mEncode
                         [ enUpdate <|
@@ -110,26 +111,26 @@ scatterplot2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scNice niTrue
                     , scRange (raValues [ vSignal "nullGap", vSignal "width" ])
                     , scDomain (doData [ daDataset "valid", daField (fSignal "xField") ])
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
-                    , scNice NTrue
+                    [ scType scLinear
+                    , scNice niTrue
                     , scRange (raValues [ vSignal "height - nullGap", vNum 0 ])
                     , scDomain (doData [ daDataset "valid", daField (fSignal "yField") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "xField") ]
-                << axis "yScale" SLeft [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "yField") ]
+                << axis "xScale" siBottom [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "xField") ]
+                << axis "yScale" siLeft [ axOffset (vNum 5), axFormat (str "s"), axTitle (strSignal "yField") ]
 
         mk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "valid") ]
                     , mEncode
                         [ enEnter
@@ -150,7 +151,7 @@ scatterplot2 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "nullY") ]
                     , mEncode
                         [ enEnter
@@ -169,7 +170,7 @@ scatterplot2 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "nullX") ]
                     , mEncode
                         [ enEnter
@@ -189,7 +190,7 @@ scatterplot2 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mInteractive false
                     , mFrom [ srData (str "nullXY") ]
                     , mEncode
@@ -218,38 +219,38 @@ scatterplot3 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "drive", daField (field "miles") ])
-                    , scRange RaWidth
-                    , scNice NTrue
+                    , scRange raWidth
+                    , scNice niTrue
                     , scZero false
                     , scRound true
                     ]
                 << scale "yScale"
-                    [ scType ScLinear
+                    [ scType scLinear
                     , scDomain (doData [ daDataset "drive", daField (field "gas") ])
-                    , scRange RaHeight
-                    , scNice NTrue
+                    , scRange raHeight
+                    , scNice niTrue
                     , scZero false
                     , scRound true
                     ]
                 << scale "alignScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
                     , scRange (raStrs [ "right", "left", "center", "center" ])
                     ]
                 << scale "baseScale"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
                     , scRange (raStrs [ "middle", "middle", "bottom", "top" ])
                     ]
                 << scale "dx"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
                     , scRange (raNums [ -7, 6, 0, 0 ])
                     ]
                 << scale "dy"
-                    [ scType ScOrdinal
+                    [ scType scOrdinal
                     , scDomain (doStrs (strs [ "left", "right", "top", "bottom" ]))
                     , scRange (raNums [ 1, 1, -5, 6 ])
                     ]
@@ -257,14 +258,14 @@ scatterplot3 =
         ax =
             axes
                 << axis "xScale"
-                    STop
+                    siTop
                     [ axTickCount (num 5)
                     , axTickSize (num 0)
                     , axGrid true
                     , axDomain false
                     , axEncode
-                        [ ( EDomain, [ enEnter [ maStroke [ transparent ] ] ] )
-                        , ( ELabels
+                        [ ( aeDomain, [ enEnter [ maStroke [ transparent ] ] ] )
+                        , ( aeLabels
                           , [ enEnter
                                 [ maAlign [ hLeft ]
                                 , maBaseline [ vTop ]
@@ -276,22 +277,22 @@ scatterplot3 =
                         ]
                     ]
                 << axis "xScale"
-                    SBottom
+                    siBottom
                     [ axTitle (str "Miles driven per capita each year")
                     , axDomain false
                     , axTicks false
                     , axLabels false
                     ]
                 << axis "yScale"
-                    SLeft
+                    siLeft
                     [ axTickCount (num 5)
                     , axTickSize (num 0)
                     , axGrid true
                     , axDomain false
                     , axFormat (str "$0.2f")
                     , axEncode
-                        [ ( EDomain, [ enEnter [ maStroke [ transparent ] ] ] )
-                        , ( ELabels
+                        [ ( aeDomain, [ enEnter [ maStroke [ transparent ] ] ] )
+                        , ( aeLabels
                           , [ enEnter
                                 [ maAlign [ hLeft ]
                                 , maBaseline [ vBottom ]
@@ -303,7 +304,7 @@ scatterplot3 =
                         ]
                     ]
                 << axis "yScale"
-                    SRight
+                    siRight
                     [ axTitle (str "Price of a gallon of gasoline (adjusted for inflation)")
                     , axDomain false
                     , axTicks false
@@ -312,11 +313,11 @@ scatterplot3 =
 
         mk =
             marks
-                << mark Line
+                << mark line
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
-                            [ maInterpolate [ markInterpolationValue Cardinal ]
+                            [ maInterpolate [ markInterpolationValue miCardinal ]
                             , maX [ vScale "xScale", vField (field "miles") ]
                             , maY [ vScale "yScale", vField (field "gas") ]
                             , maStroke [ vStr "#000" ]
@@ -324,7 +325,7 @@ scatterplot3 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
@@ -337,7 +338,7 @@ scatterplot3 =
                             ]
                         ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "drive") ]
                     , mEncode
                         [ enEnter
@@ -361,7 +362,7 @@ scatterplot4 : Spec
 scatterplot4 =
     let
         cf =
-            config [ cfAxis AxBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
+            config [ cfAxis axBand [ axBandPosition (num 1), axTickExtra true, axTickOffset (num 0) ] ]
 
         ds =
             dataSource
@@ -371,7 +372,7 @@ scatterplot4 =
                         [ trAggregate
                             [ agGroupBy [ field "variety" ]
                             , agFields (List.repeat 7 (field "yield"))
-                            , agOps [ Mean, Stdev, Stderr, CI0, CI1, Q1, Q3 ]
+                            , agOps [ opMean, opStdev, opStderr, opCI0, opCI1, opQ1, opQ3 ]
                             , agAs [ "mean", "stdev", "stderr", "ci0", "ci1", "iqr0", "iqr1" ]
                             ]
                         , trFormula "datum.mean - datum.stdev" "stdev0"
@@ -402,33 +403,33 @@ scatterplot4 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scRange raWidth
                     , scDomain (doData [ daDataset "summary", daFields [ field "stdev0", field "stdev1" ] ])
                     , scRound true
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero false
                     ]
                 << scale "yScale"
-                    [ scType ScBand
-                    , scRange RaHeight
+                    [ scType scBand
+                    , scRange raHeight
                     , scDomain
                         (doData
                             [ daDataset "summary"
                             , daField (field "variety")
-                            , daSort [ soOp Max, soByField (str "mean"), Descending ]
+                            , daSort [ soOp opMax, soByField (str "mean"), soDescending ]
                             ]
                         )
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1), axTitle (str "Barley Yield") ]
-                << axis "yScale" SLeft [ axTickCount (num 5), axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1), axTitle (str "Barley Yield") ]
+                << axis "yScale" siLeft [ axTickCount (num 5), axZIndex (num 1) ]
 
         mk =
             marks
-                << mark Rect
+                << mark rect
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter [ maFill [ black ], maHeight [ vNum 1 ] ]
@@ -439,7 +440,7 @@ scatterplot4 =
                             ]
                         ]
                     ]
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "summary") ]
                     , mEncode
                         [ enEnter [ maFill [ vStr "back" ], maSize [ vNum 40 ] ]
@@ -469,50 +470,50 @@ scatterplot5 =
         sc =
             scales
                 << scale "gScale"
-                    [ scType ScBand
+                    [ scType scBand
                     , scRange (raValues [ vNum 0, vSignal "height" ])
                     , scRound true
                     , scDomain
                         (doData
                             [ daDataset "barley"
                             , daField (field "site")
-                            , daSort [ soByField (str "yield"), soOp Median, Descending ]
+                            , daSort [ soByField (str "yield"), soOp opMedian, soDescending ]
                             ]
                         )
-                    , scNice NTrue
+                    , scNice niTrue
                     , scZero false
                     ]
                 << scale "xScale"
-                    [ scType ScLinear
-                    , scNice NTrue
-                    , scRange RaWidth
+                    [ scType scLinear
+                    , scNice niTrue
+                    , scRange raWidth
                     , scRound true
                     , scDomain (doData [ daDataset "barley", daField (field "yield") ])
                     ]
                 << scale "cScale"
-                    [ scType ScOrdinal
-                    , scRange RaCategory
+                    [ scType scOrdinal
+                    , scRange raCategory
                     , scDomain (doData [ daDataset "barley", daField (field "year") ])
                     ]
 
         ax =
             axes
-                << axis "xScale" SBottom [ axZIndex (num 1) ]
+                << axis "xScale" siBottom [ axZIndex (num 1) ]
 
         nestedAx =
             axes
                 << axis "yScale"
-                    SLeft
+                    siLeft
                     [ axTickSize (num 0)
                     , axDomain false
                     , axGrid true
-                    , axEncode [ ( EGrid, [ enEnter [ maStrokeDash [ vNums [ 3, 3 ] ] ] ] ) ]
+                    , axEncode [ ( aeGrid, [ enEnter [ maStrokeDash [ vNums [ 3, 3 ] ] ] ] ) ]
                     ]
-                << axis "yScale" SRight [ axTickSize (num 0), axDomain false ]
+                << axis "yScale" siRight [ axTickSize (num 0), axDomain false ]
 
         nestedMk =
             marks
-                << mark Symbol
+                << mark symbol
                     [ mFrom [ srData (str "sites") ]
                     , mEncode
                         [ enEnter
@@ -528,7 +529,7 @@ scatterplot5 =
         nestedSc =
             scales
                 << scale "yScale"
-                    [ scType ScPoint
+                    [ scType scPoint
                     , scRange (raValues [ vNum 0, vSignal "cellHeight" ])
                     , scPadding (num 1)
                     , scRound true
@@ -536,7 +537,7 @@ scatterplot5 =
                         (doData
                             [ daDataset "barley"
                             , daField (field "variety")
-                            , daSort [ soByField (str "yield"), soOp Median, Descending ]
+                            , daSort [ soByField (str "yield"), soOp opMedian, soDescending ]
                             ]
                         )
                     ]
@@ -552,7 +553,7 @@ scatterplot5 =
 
         mk =
             marks
-                << mark Group
+                << mark group
                     [ mName "site"
                     , mFrom [ srFacet (str "barley") "sites" [ faGroupBy [ field "site" ] ] ]
                     , mEncode
@@ -569,7 +570,7 @@ scatterplot5 =
                         ]
                     , mGroup [ nestedSc [], nestedAx [], nestedMk [] ]
                     ]
-                << mark Text
+                << mark text
                     [ mFrom [ srData (str "site") ]
                     , mEncode
                         [ enEnter
@@ -617,10 +618,10 @@ mySpecs =
 -}
 
 
-main : Program Never Spec msg
+main : Program () Spec msg
 main =
-    Html.program
-        { init = ( mySpecs, elmToJS mySpecs )
+    Browser.element
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
         , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none

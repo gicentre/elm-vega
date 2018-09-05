@@ -529,6 +529,7 @@ module Vega exposing
     , raDiverging
     , raOrdinal
     , raRamp
+    , raHeatmap
     , raNums
     , raStrs
     , raValues
@@ -2028,7 +2029,7 @@ The extent of scaled values after transformation.
 @docs raDiverging
 @docs raOrdinal
 @docs raRamp
-@docs raHeatmap)
+@docs raHeatmap
 
 @docs raNums
 @docs raStrs
