@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<head>
+  <title>SPC and CUSUM Charts with elm-vega</title>
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link rel="stylesheet" href="css/tufte.css"/>
+
+  <!-- These scripts link to the Vega-Lite runtime -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.0.0-rc5/build/vega-lite.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+
+  <!-- This is the script generated from Elm -->
+  <script src="js/spc.js"></script>
+</head>
+
+<body>
+  <article>
+    <h1>SPC and Cusum Charts</h1>
+
+    <h2>Bulding an SPC Chart</h2>
+    <section>
+      <p>
+        First, let's start with some simple Elm-Vega to show change in a variable (notional reported crimes) over time:
+      </p>
+      <figure><div id="lineChart"></div></figure>
+
+       <p>
+         Add some formatting to clean up the presentation:
+       </p>
+       <figure><div id="lineChartFormatted"></div></figure>
+
+       <p>
+         We can provide some context for the variation by rescaling the y-axis to focus on the range in the data while showing lines representing z-scores of 0, ±1, ±1.5 and ±3 standard deviations from the mean:
+         <span class="marginnote">Each horizontal line is displayed in it's own layer in elm-vega.</span>
+       </p>
+       <figure><div id="spcWithRules"></div></figure>
+
+      <p>
+        To make this a true SPC chart we can highlight parts of the time series that are consistently above or below some threshold.
+        Here we distinguish runs of 7 or more that are above or below the mean and additionally symbolise points with a z-score outside the ±3 range.
+        <span class="marginnote">The design intentionally mimics that of the original SPCs in the Dynamic Document Design page.</span>
+      </p>
+     <figure><div id="spcWithRulesAndPoints"></div></figure>
+
+     <p>
+       The chart looks a little cluttered, so let's change the z-score lines to regions and point symbols to line colours:
+      <span class="spcWithRegions">Elm-vega uses two layers for the lines, one for the thin grey line, the other for the highlighted SPC shifts</span>
+     </p>
+     <figure><div id="spcWithRegions"></div></figure>
+    </section>
+
+    <h2>CUSUM Charts</h2>
+    <section>
+      <p>
+        An alternative to the SPC chart is the CUSUM chart which shows not the raw (crime) data values but the cumulatative difference between each data value and some target.
+        In the example below, we set the target to be average number of reported crimes per month over the whole time period.
+      </p>
+      <p>
+        Consider some point in time along the line.
+        If at that point, the line is above 0, it indicates that the total number of crimes up to that point has exceeded what we would expect if instead the crime rate had remained at the target level.
+        <span class="marginnote">Note the three 'bumps' in the falling trend between 2013-15. Separating the signal from the noise is easer than with an SPC.</span>
+      </p>
+      <figure><div id="cusumMean"></div></figure>
+
+      <p>
+        One advantage of the CUSUM chart is that it smooths out minor fluctuations in the data making trends more obvious.
+        Another is that early trend detection is easier than with an SPC chart as we don't have to wait for a run of 7 years before signalling a trend.
+      </p>
+
+      <p>
+         The orientation of the CUSUM line is in part determined by the target.
+         Suppose instead of setting the target to the mean (21,840) we set a stricter target of 21,000 reported crimes:
+      </p>
+      <figure><div id="cusumStrict"></div></figure>
+
+      <p>
+         The form of the line can very sensitive to the target when there are many data items as only small but sytematic deviation from a target value soon leads to a trend away from the baseline.
+         We can explore the effect of different targets interactively by allowing the baseline target crime rate to be changed with a slider:
+      </p>
+
+      <figure><div id="main"></div></figure>
+
+    </section>
+
+  </article>
+
+  <script>
+  Elm.Spc.init({node: document.getElementById('main')}).ports.elmToJS.subscribe(function(namedSpecs) {
+    for (let name of Object.keys(namedSpecs)) {
+      vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+    }
+  });
+</script>
+
+  </body>
+
+  </html>
