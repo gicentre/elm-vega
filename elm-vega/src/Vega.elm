@@ -6246,7 +6246,7 @@ cuText =
     CText
 
 
-{-| Verticla text cursor.
+{-| Vertical text cursor.
 -}
 cuVerticalText : Cursor
 cuVerticalText =
