@@ -6742,7 +6742,6 @@ var author$project$GalleryGeo$geo4 = function () {
 			]));
 }();
 var author$project$VegaLite$GeoFeature = 4;
-var author$project$VegaLite$Independent = 1;
 var author$project$VegaLite$Row = 1;
 var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$ChColor = 4;
@@ -6767,6 +6766,8 @@ var author$project$VegaLite$MRepeat = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$VegaLite$mRepeat = author$project$VegaLite$MRepeat;
+var author$project$VegaLite$RIndependent = 1;
+var author$project$VegaLite$reIndependent = 1;
 var author$project$VegaLite$RScale = function (a) {
 	return {$: 2, a: a};
 };
@@ -6958,7 +6959,7 @@ var author$project$GalleryGeo$geo5 = function () {
 					author$project$VegaLite$reScale(
 						_List_fromArray(
 							[
-								_Utils_Tuple2(author$project$VegaLite$chColor, 1)
+								_Utils_Tuple2(author$project$VegaLite$chColor, author$project$VegaLite$reIndependent)
 							])),
 					_List_Nil)),
 				author$project$VegaLite$specification(spec)
@@ -7767,7 +7768,6 @@ var author$project$GalleryGeo$geo8 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$BottomRight = 1;
 var author$project$VegaLite$DStrings = function (a) {
 	return {$: 1, a: a};
 };
@@ -9287,6 +9287,8 @@ var author$project$VegaLite$LTitle = function (a) {
 	return {$: 32, a: a};
 };
 var author$project$VegaLite$leTitle = author$project$VegaLite$LTitle;
+var author$project$VegaLite$BottomRight = 1;
+var author$project$VegaLite$loBottomRight = 1;
 var author$project$VegaLite$MLegend = function (a) {
 	return {$: 10, a: a};
 };
@@ -9347,7 +9349,7 @@ var author$project$GalleryGeo$geo9 = function () {
 					_List_fromArray(
 						[
 							author$project$VegaLite$leTitle(''),
-							author$project$VegaLite$leOrient(1),
+							author$project$VegaLite$leOrient(author$project$VegaLite$loBottomRight),
 							author$project$VegaLite$leOffset(0)
 						])),
 					author$project$VegaLite$mScale(tubeLineColors)

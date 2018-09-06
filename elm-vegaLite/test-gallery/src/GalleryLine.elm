@@ -114,7 +114,7 @@ line5 =
         [ des
         , dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
         , trans []
-        , line [ maInterpolate StepAfter ]
+        , line [ maInterpolate miStepAfter ]
         , enc []
         ]
 
@@ -137,7 +137,7 @@ line6 =
         [ des
         , dataFromUrl "https://vega.github.io/vega-lite/data/stocks.csv" []
         , trans []
-        , line [ maInterpolate Monotone ]
+        , line [ maInterpolate miMonotone ]
         , enc []
         ]
 
@@ -239,7 +239,7 @@ line10 =
                 << color [ mName "decade", mMType Nominal, mLegend [] ]
 
         specLine =
-            asSpec [ line [ maOrient Vertical ], encLine [] ]
+            asSpec [ line [ maOrient moVertical ], encLine [] ]
 
         transTextMin =
             transform
@@ -314,7 +314,7 @@ line11 =
                 , ( "Sweden", "#0c71ab" )
                 ]
     in
-    toVegaLite [ des, data [], trans [], enc [], line [ maOrient Vertical ] ]
+    toVegaLite [ des, data [], trans [], enc [], line [ maOrient moVertical ] ]
 
 
 

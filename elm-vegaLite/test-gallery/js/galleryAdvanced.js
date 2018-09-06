@@ -7046,7 +7046,6 @@ var author$project$GalleryAdvanced$advanced4 = function () {
 					]))
 			]));
 }();
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$DStrings = function (a) {
 	return {$: 1, a: a};
 };
@@ -7106,6 +7105,8 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$VegaLite$WDescending = function (a) {
 	return {$: 1, a: a};
 };
@@ -7232,12 +7233,10 @@ var author$project$GalleryAdvanced$advanced5 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					]))
 			]));
 }();
-var author$project$VegaLite$AlignMiddle = 1;
-var author$project$VegaLite$AlignTop = 0;
 var author$project$VegaLite$Bold = 0;
 var author$project$VegaLite$Expr = function (a) {
 	return {$: 0, a: a};
@@ -7422,6 +7421,10 @@ var author$project$VegaLite$text = function (tDefs) {
 };
 var author$project$VegaLite$Text = 12;
 var author$project$VegaLite$textMark = author$project$VegaLite$mark(12);
+var author$project$VegaLite$AlignMiddle = 1;
+var author$project$VegaLite$vaMiddle = 1;
+var author$project$VegaLite$AlignTop = 0;
+var author$project$VegaLite$vaTop = 0;
 var author$project$VegaLite$VLWidth = 3;
 var author$project$VegaLite$width = function (w) {
 	return _Utils_Tuple2(
@@ -7530,7 +7533,7 @@ var author$project$GalleryAdvanced$advanced6 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle),
 						author$project$VegaLite$maFontWeight(0)
 					]))
 			]));
@@ -7561,7 +7564,7 @@ var author$project$GalleryAdvanced$advanced6 = function () {
 				_List_fromArray(
 					[
 						author$project$VegaLite$maDy(8),
-						author$project$VegaLite$maBaseline(0),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaTop),
 						author$project$VegaLite$maFontWeight(0),
 						author$project$VegaLite$maColor('#404040')
 					]))

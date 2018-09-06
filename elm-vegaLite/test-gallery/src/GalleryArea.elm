@@ -83,7 +83,7 @@ area4 =
         enc =
             encoding
                 << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack StNormalize ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack stNormalize ]
                 << color [ mName "series", mMType Nominal, mScale [ scScheme "category20b" [] ] ]
     in
     toVegaLite
@@ -105,7 +105,7 @@ area5 =
         enc =
             encoding
                 << position X [ pName "date", pMType Temporal, pTimeUnit yearMonth, pAxis [ axDomain False, axFormat "%Y" ] ]
-                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack StCenter ]
+                << position Y [ pName "count", pMType Quantitative, pAggregate opSum, pAxis [], pStack stCenter ]
                 << color [ mName "series", mMType Nominal, mScale [ scScheme "category20b" [] ] ]
     in
     toVegaLite
@@ -153,7 +153,7 @@ area6 =
 
         config =
             configure
-                << configuration (coArea [ maInterpolate Monotone, maOrient Vertical ])
+                << configuration (coArea [ maInterpolate miMonotone, maOrient moVertical ])
     in
     toVegaLite [ des, width 300, height 50, data [], encX [], layer [ specLower, specUpper ], config [] ]
 
@@ -171,7 +171,7 @@ area7 =
                     []
                     "stack_count_Origin1"
                     "stack_count_Origin2"
-                    [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
+                    [ stOffset stNormalize, stSort [ stAscending "Origin" ] ]
                 << window
                     [ ( [ wiAggregateOp opMin, wiField "stack_count_Origin1" ], "x" )
                     , ( [ wiAggregateOp opMax, wiField "stack_count_Origin2" ], "x2" )
@@ -186,7 +186,7 @@ area7 =
                     [ "Origin" ]
                     "y"
                     "y2"
-                    [ stOffset StNormalize, stSort [ stAscending "Cylinders" ] ]
+                    [ stOffset stNormalize, stSort [ stAscending "Cylinders" ] ]
                 << calculateAs "datum.y + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3" "ny"
                 << calculateAs "datum.y2 + (datum.rank_Cylinders - 1) * datum.distinct_Cylinders * 0.01 / 3" "ny2"
                 << calculateAs "datum.x + (datum.rank_Origin - 1) * 0.01" "nx"
@@ -201,7 +201,7 @@ area7 =
                     , pMType Quantitative
                     , pAggregate opMin
                     , pTitle "Origin"
-                    , pAxis [ axOrient STop ]
+                    , pAxis [ axOrient siTop ]
                     ]
                 << color [ mName "Origin", mMType Nominal, mLegend [] ]
                 << text [ tName "Origin", tMType Nominal ]
@@ -232,7 +232,7 @@ area7 =
                 << text [ tName "Cylinders", tMType Nominal ]
 
         spec3 =
-            asSpec [ textMark [ maBaseline AlignMiddle ], enc3 [] ]
+            asSpec [ textMark [ maBaseline vaMiddle ], enc3 [] ]
 
         config =
             configure
@@ -241,7 +241,7 @@ area7 =
 
         res =
             resolve
-                << resolution (reScale [ ( chX, Shared ) ])
+                << resolution (reScale [ ( chX, reShared ) ])
     in
     toVegaLite
         [ config []

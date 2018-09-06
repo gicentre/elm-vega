@@ -162,7 +162,7 @@ geo5 =
     toVegaLite
         [ description "Population per state, engineers per state, and hurricanes per state"
         , repeat [ rowFields [ "population", "engineers", "hurricanes" ] ]
-        , resolve <| resolution (reScale [ ( chColor, Independent ) ]) []
+        , resolve <| resolution (reScale [ ( chColor, reIndependent ) ]) []
         , specification spec
         ]
 
@@ -325,7 +325,7 @@ geo9 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ leTitle "", leOrient BottomRight, leOffset 0 ]
+                    , mLegend [ leTitle "", leOrient loBottomRight, leOffset 0 ]
                     , mScale tubeLineColors
                     ]
 

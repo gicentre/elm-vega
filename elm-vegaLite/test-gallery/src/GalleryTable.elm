@@ -134,7 +134,7 @@ table5 =
         config =
             configure
                 << configuration (coScale [ sacoBandPaddingInner 0, sacoBandPaddingOuter 0 ])
-                << configuration (coText [ maBaseline AlignMiddle ])
+                << configuration (coText [ maBaseline vaMiddle ])
     in
     toVegaLite
         [ des

@@ -7650,7 +7650,6 @@ var author$project$GalleryTable$table4 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$asSpec = function (specs) {
 	return elm$json$Json$Encode$object(
 		A2(
@@ -7830,6 +7829,8 @@ var author$project$VegaLite$text = function (tDefs) {
 };
 var author$project$VegaLite$Text = 12;
 var author$project$VegaLite$textMark = author$project$VegaLite$mark(12);
+var author$project$VegaLite$AlignMiddle = 1;
+var author$project$VegaLite$vaMiddle = 1;
 var author$project$GalleryTable$table5 = function () {
 	var encText = A2(
 		elm$core$Basics$composeL,
@@ -7908,7 +7909,7 @@ var author$project$GalleryTable$table5 = function () {
 			author$project$VegaLite$coText(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1)
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle)
 					]))));
 	return author$project$VegaLite$toVegaLite(
 		_List_fromArray(

@@ -9577,7 +9577,6 @@ var author$project$ConditionalTests$markCondition2 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$CGrab = 34;
 var author$project$VegaLite$cuGrab = 34;
 var author$project$VegaLite$MAggregate = function (a) {
@@ -9600,6 +9599,8 @@ var author$project$VegaLite$Count = 4;
 var author$project$VegaLite$opCount = 4;
 var author$project$VegaLite$Rect = 9;
 var author$project$VegaLite$rect = author$project$VegaLite$mark(9);
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$On = function (a) {
 	return {$: 2, a: a};
 };
@@ -9653,7 +9654,7 @@ var author$project$ConditionalTests$selectionCondition1 = function () {
 			A3(
 				author$project$VegaLite$select,
 				'alex',
-				2,
+				author$project$VegaLite$seInterval,
 				_List_fromArray(
 					[
 						author$project$VegaLite$seOn('[mousedown[!event.shiftKey], mouseup] > mousemove'),
@@ -9662,7 +9663,7 @@ var author$project$ConditionalTests$selectionCondition1 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'morgan',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seOn('[mousedown[event.shiftKey], mouseup] > mousemove'),
@@ -9745,7 +9746,7 @@ var author$project$ConditionalTests$selectionCondition2 = function () {
 			A3(
 				author$project$VegaLite$select,
 				'alex',
-				2,
+				author$project$VegaLite$seInterval,
 				_List_fromArray(
 					[
 						author$project$VegaLite$seOn('[mousedown[!event.shiftKey], mouseup] > mousemove'),
@@ -9754,7 +9755,7 @@ var author$project$ConditionalTests$selectionCondition2 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'morgan',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seOn('[mousedown[event.shiftKey], mouseup] > mousemove'),
@@ -10462,7 +10463,7 @@ var author$project$ConditionalTests$selectionCondition3 = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'brush', 2, _List_Nil));
+		A3(author$project$VegaLite$select, 'brush', author$project$VegaLite$seInterval, _List_Nil));
 	var enc2 = A2(
 		elm$core$Basics$composeL,
 		A2(

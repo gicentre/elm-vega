@@ -139,7 +139,7 @@ layer3 =
             facet [ rowBy [ fName "title", fMType Ordinal, fHeader [ hdLabelAngle 30, hdTitle "" ] ] ]
 
         res =
-            resolve << resolution (reScale [ ( chX, Independent ) ])
+            resolve << resolution (reScale [ ( chX, reIndependent ) ])
 
         encLine =
             encoding
@@ -225,7 +225,7 @@ layer4 =
 
         res =
             resolve
-                << resolution (reScale [ ( chY, Independent ) ])
+                << resolution (reScale [ ( chY, reIndependent ) ])
     in
     toVegaLite
         [ des
@@ -271,7 +271,7 @@ layer5 =
 
         config =
             configure
-                << configuration (coArea [ maInterpolate Monotone, maOrient Vertical ])
+                << configuration (coArea [ maInterpolate miMonotone, maOrient moVertical ])
     in
     toVegaLite
         [ des
@@ -364,7 +364,7 @@ layer6 =
                         , axLabels False
                         , axTitle "Day"
                         , axTitlePadding 25
-                        , axOrient STop
+                        , axOrient siTop
                         ]
                     ]
                 << text [ tName "day", tMType Nominal ]

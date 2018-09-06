@@ -44,7 +44,7 @@ interaction2 =
             description "Drag out a rectangular brush to highlight points"
 
         sel =
-            selection << select "myBrush" Interval []
+            selection << select "myBrush" seInterval []
 
         enc =
             encoding
@@ -76,7 +76,7 @@ interaction3 =
                 << filter (fiSelection "myBrush")
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
+            selection << select "myBrush" seInterval [ seEncodings [ chX ] ]
 
         enc =
             encoding
@@ -104,7 +104,7 @@ interaction4 =
             description "Mouse over individual points or select multiple points with the shift key"
 
         sel =
-            selection << select "myPaintbrush" Multi [ seOn "mouseover", seNearest True ]
+            selection << select "myPaintbrush" seMulti [ seOn "mouseover", seNearest True ]
 
         enc =
             encoding
@@ -132,7 +132,7 @@ interaction5 =
             description "Drag to pan. Zoom in or out with mousewheel/zoom gesture."
 
         sel =
-            selection << select "myGrid" Interval [ seBindScales ]
+            selection << select "myGrid" seInterval [ seBindScales ]
 
         enc =
             encoding
@@ -162,7 +162,7 @@ interaction6 =
         sel1 =
             selection
                 << select "CylYr"
-                    Single
+                    seSingle
                     [ seFields [ "Cylinders", "Year" ]
                     , seBind
                         [ iRange "Cylinders" [ inName "Cylinders ", inMin 3, inMax 8, inStep 1 ]
@@ -214,7 +214,7 @@ interaction7 =
             description "Drag over bars to update selection average"
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
+            selection << select "myBrush" seInterval [ seEncodings [ chX ] ]
 
         encPosition =
             encoding << position Y [ pName "precipitation", pMType Quantitative, pAggregate opMean ]
@@ -278,7 +278,7 @@ interaction8 =
         sel1_2 =
             selection
                 << select "myTooltip"
-                    Single
+                    seSingle
                     [ seNearest True
                     , seOn "mouseover"
                     , seEncodings [ chX ]

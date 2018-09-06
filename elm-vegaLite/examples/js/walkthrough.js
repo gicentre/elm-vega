@@ -5303,7 +5303,6 @@ var author$project$Walkthrough$barChartWithAverage = function () {
 					]))
 			]));
 }();
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$Temporal = 3;
 var author$project$VegaLite$Area = 0;
 var author$project$VegaLite$area = author$project$VegaLite$mark(0);
@@ -5351,6 +5350,8 @@ var author$project$VegaLite$Encodings = function (a) {
 	return {$: 6, a: a};
 };
 var author$project$VegaLite$seEncodings = author$project$VegaLite$Encodings;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$selectionLabel = function (seType) {
 	switch (seType) {
 		case 0:
@@ -5739,7 +5740,7 @@ var author$project$Walkthrough$contextAndFocus = function () {
 		A3(
 			author$project$VegaLite$select,
 			'brush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -6394,7 +6395,7 @@ var author$project$Walkthrough$coordinatedScatter1 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -6473,7 +6474,7 @@ var author$project$Walkthrough$coordinatedScatter2 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[author$project$VegaLite$seBindScales])));
 	var enc = A2(
@@ -7197,7 +7198,7 @@ var author$project$Walkthrough$crossFilter = function () {
 		A3(
 			author$project$VegaLite$select,
 			'brush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -7821,7 +7822,8 @@ var author$project$Walkthrough$histogram = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Single = 0;
+var author$project$VegaLite$SeSingle = 0;
+var author$project$VegaLite$seSingle = 0;
 var author$project$Walkthrough$scatterProps = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -7878,19 +7880,20 @@ var author$project$Walkthrough$interactiveScatter1 = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'picked', 0, _List_Nil));
+		A3(author$project$VegaLite$select, 'picked', author$project$VegaLite$seSingle, _List_Nil));
 	return author$project$VegaLite$toVegaLite(
 		A2(
 			elm$core$List$cons,
 			sel(_List_Nil),
 			author$project$Walkthrough$scatterProps));
 }();
-var author$project$VegaLite$Multi = 1;
+var author$project$VegaLite$SeMulti = 1;
+var author$project$VegaLite$seMulti = 1;
 var author$project$Walkthrough$interactiveScatter2 = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'picked', 1, _List_Nil));
+		A3(author$project$VegaLite$select, 'picked', author$project$VegaLite$seMulti, _List_Nil));
 	return author$project$VegaLite$toVegaLite(
 		A2(
 			elm$core$List$cons,
@@ -7908,7 +7911,7 @@ var author$project$Walkthrough$interactiveScatter3 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			1,
+			author$project$VegaLite$seMulti,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seOn('mouseover')
@@ -7932,7 +7935,7 @@ var author$project$Walkthrough$interactiveScatter4 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEmpty,
@@ -7976,7 +7979,7 @@ var author$project$Walkthrough$interactiveScatter5 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seFields(
@@ -8009,7 +8012,7 @@ var author$project$Walkthrough$interactiveScatter6 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seFields(
@@ -8048,7 +8051,7 @@ var author$project$Walkthrough$interactiveScatter7 = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'picked', 2, _List_Nil));
+		A3(author$project$VegaLite$select, 'picked', author$project$VegaLite$seInterval, _List_Nil));
 	return author$project$VegaLite$toVegaLite(
 		A2(
 			elm$core$List$cons,
@@ -8062,7 +8065,7 @@ var author$project$Walkthrough$interactiveScatter8 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -8082,7 +8085,7 @@ var author$project$Walkthrough$interactiveScatter9 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'picked',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(

@@ -9025,7 +9025,6 @@ var author$project$WindowTransformTests$window4 = function () {
 					]))
 			]));
 }();
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$DStrings = function (a) {
 	return {$: 1, a: a};
 };
@@ -9085,6 +9084,8 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$VegaLite$WDescending = function (a) {
 	return {$: 1, a: a};
 };
@@ -9197,7 +9198,7 @@ var author$project$WindowTransformTests$window5 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					]))
 			]));
 }();

@@ -156,7 +156,7 @@ window5 =
                 , ( "Spurs", "#d1d1d1" )
                 ]
     in
-    toVegaLite [ data [], trans [], enc [], line [ maOrient Vertical ] ]
+    toVegaLite [ data [], trans [], enc [], line [ maOrient moVertical ] ]
 
 
 window6 : Spec

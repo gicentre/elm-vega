@@ -17,7 +17,7 @@ multi1 =
             description "Overview and detail."
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
+            selection << select "myBrush" seInterval [ seEncodings [ chX ] ]
 
         enc1 =
             encoding
@@ -62,7 +62,7 @@ multi2 =
                 << calculateAs "hours(datum.date)" "time"
 
         sel =
-            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
+            selection << select "myBrush" seInterval [ seEncodings [ chX ] ]
 
         selTrans =
             transform
@@ -107,18 +107,18 @@ multi3 =
         sel =
             selection
                 << select "myBrush"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
                     , seTranslate "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
-                    , seResolve Union
+                    , seResolve seUnion
                     ]
                 << select ""
-                    Interval
+                    seInterval
                     [ seBindScales
                     , seTranslate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
-                    , seResolve Global
+                    , seResolve seGlobal
                     ]
 
         enc =
@@ -183,7 +183,7 @@ multi4 =
             asSpec [ encPosition [], layer [ spec1, spec2 ] ]
 
         sel =
-            selection << select "myPts" Single [ seEncodings [ chX ] ]
+            selection << select "myPts" seSingle [ seEncodings [ chX ] ]
 
         barSpec =
             asSpec [ width 420, height 120, bar [], sel [], encBar [] ]
@@ -203,7 +203,7 @@ multi4 =
 
         res =
             resolve
-                << resolution (reLegend [ ( chColor, Independent ), ( chSize, Independent ) ])
+                << resolution (reLegend [ ( chColor, reIndependent ), ( chSize, reIndependent ) ])
     in
     toVegaLite
         [ des
@@ -225,7 +225,7 @@ multi5 =
                 [ width 600, height 300, point [], sel1 [], trans1 [], enc1 [] ]
 
         sel1 =
-            selection << select "myBrush" Interval [ seEncodings [ chX ] ]
+            selection << select "myBrush" seInterval [ seEncodings [ chX ] ]
 
         trans1 =
             transform << filter (fiSelection "myClick")
@@ -272,7 +272,7 @@ multi5 =
             asSpec [ width 600, bar [], sel2 [], trans2 [], enc2 [] ]
 
         sel2 =
-            selection << select "myClick" Multi [ seEncodings [ chColor ] ]
+            selection << select "myClick" seMulti [ seEncodings [ chColor ] ]
 
         trans2 =
             transform << filter (fiSelection "myBrush")

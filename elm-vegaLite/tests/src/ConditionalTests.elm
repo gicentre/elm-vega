@@ -65,12 +65,12 @@ selectionCondition1 =
         sel =
             selection
                 << select "alex"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
                     , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
                     , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
@@ -95,12 +95,12 @@ selectionCondition2 =
         sel =
             selection
                 << select "alex"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     , seTranslate "[mousedown[!event.shiftKey], mouseup] > mousemove"
                     ]
                 << select "morgan"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[event.shiftKey], mouseup] > mousemove"
                     , seTranslate "[mousedown[event.shiftKey], mouseup] > mousemove"
                     , seSelectionMark [ smFill "#fdbb84", smFillOpacity 0.5, smStroke "#e34a33" ]
@@ -133,7 +133,7 @@ selectionCondition3 =
 
         sel =
             selection
-                << select "brush" Interval []
+                << select "brush" seInterval []
 
         enc1 =
             encoding

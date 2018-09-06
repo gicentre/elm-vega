@@ -47,7 +47,7 @@ compositeVis config =
         streamEnc =
             encoding
                 << position X [ pName "Year", pMType Temporal, pTimeUnit year ]
-                << position Y [ pAggregate opCount, pMType Quantitative, pStack StCenter, pAxis [] ]
+                << position Y [ pAggregate opCount, pMType Quantitative, pStack stCenter, pAxis [] ]
                 << color [ mName "Origin", mMType Nominal ]
 
         barSpec =
@@ -58,7 +58,7 @@ compositeVis config =
 
         res =
             resolve
-                << resolution (reScale [ ( chColor, Independent ), ( chShape, Independent ) ])
+                << resolution (reScale [ ( chColor, reIndependent ), ( chShape, reIndependent ) ])
     in
     toVegaLite [ config [], cars, hConcat [ scatterSpec, barSpec, streamSpec ], res [] ]
 

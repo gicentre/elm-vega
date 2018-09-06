@@ -6574,9 +6574,6 @@ var author$project$GalleryRepeat$repeat3 = function () {
 				author$project$VegaLite$specification(spec)
 			]));
 }();
-var author$project$VegaLite$Global = 0;
-var author$project$VegaLite$Interval = 2;
-var author$project$VegaLite$Union = 1;
 var author$project$VegaLite$Row = 1;
 var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$MSelectionCondition = F3(
@@ -6594,6 +6591,10 @@ var author$project$VegaLite$RowFields = function (a) {
 var author$project$VegaLite$rowFields = author$project$VegaLite$RowFields;
 var author$project$VegaLite$BindScales = {$: 1};
 var author$project$VegaLite$seBindScales = author$project$VegaLite$BindScales;
+var author$project$VegaLite$SeGlobal = 0;
+var author$project$VegaLite$seGlobal = 0;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$On = function (a) {
 	return {$: 2, a: a};
 };
@@ -6606,6 +6607,8 @@ var author$project$VegaLite$Translate = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$VegaLite$seTranslate = author$project$VegaLite$Translate;
+var author$project$VegaLite$SeUnion = 1;
+var author$project$VegaLite$seUnion = 1;
 var author$project$VegaLite$Zoom = function (a) {
 	return {$: 4, a: a};
 };
@@ -6998,24 +7001,24 @@ var author$project$GalleryRepeat$repeat4 = function () {
 			A3(
 				author$project$VegaLite$select,
 				'myBrush',
-				2,
+				author$project$VegaLite$seInterval,
 				_List_fromArray(
 					[
 						author$project$VegaLite$seOn('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 						author$project$VegaLite$seTranslate('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 						author$project$VegaLite$seZoom('wheel![event.shiftKey]'),
-						author$project$VegaLite$seResolve(1)
+						author$project$VegaLite$seResolve(author$project$VegaLite$seUnion)
 					]))),
 		A3(
 			author$project$VegaLite$select,
 			'',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seBindScales,
 					author$project$VegaLite$seTranslate('[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!'),
 					author$project$VegaLite$seZoom('wheel![event.shiftKey]'),
-					author$project$VegaLite$seResolve(0)
+					author$project$VegaLite$seResolve(author$project$VegaLite$seGlobal)
 				])));
 	var enc = A2(
 		elm$core$Basics$composeL,

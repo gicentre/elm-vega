@@ -2299,11 +2299,9 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$ConfigTests$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$Independent = 1;
 var author$project$VegaLite$Nominal = 0;
 var author$project$VegaLite$Ordinal = 1;
 var author$project$VegaLite$Quantitative = 2;
-var author$project$VegaLite$StCenter = 2;
 var author$project$VegaLite$Temporal = 3;
 var author$project$VegaLite$X = 0;
 var author$project$VegaLite$Y = 1;
@@ -5638,6 +5636,8 @@ var author$project$VegaLite$position = F2(
 							A2(elm$core$List$map, author$project$VegaLite$positionChannelProperty, pDefs))));
 		}
 	});
+var author$project$VegaLite$RIndependent = 1;
+var author$project$VegaLite$reIndependent = 1;
 var author$project$VegaLite$RScale = function (a) {
 	return {$: 2, a: a};
 };
@@ -5745,6 +5745,8 @@ var author$project$VegaLite$size = function (markProps) {
 			elm$json$Json$Encode$object(
 				A2(elm$core$List$concatMap, author$project$VegaLite$markChannelProperty, markProps))));
 };
+var author$project$VegaLite$OfCenter = 2;
+var author$project$VegaLite$stCenter = 2;
 var author$project$VegaLite$VLTitle = 2;
 var author$project$VegaLite$title = function (s) {
 	return _Utils_Tuple2(
@@ -5806,7 +5808,7 @@ var author$project$ConfigTests$compositeVis = function (config) {
 					[
 						author$project$VegaLite$pAggregate(author$project$VegaLite$opCount),
 						author$project$VegaLite$pMType(2),
-						author$project$VegaLite$pStack(2),
+						author$project$VegaLite$pStack(author$project$VegaLite$stCenter),
 						author$project$VegaLite$pAxis(_List_Nil)
 					]))),
 		author$project$VegaLite$color(
@@ -5888,8 +5890,8 @@ var author$project$ConfigTests$compositeVis = function (config) {
 			author$project$VegaLite$reScale(
 				_List_fromArray(
 					[
-						_Utils_Tuple2(author$project$VegaLite$chColor, 1),
-						_Utils_Tuple2(author$project$VegaLite$chShape, 1)
+						_Utils_Tuple2(author$project$VegaLite$chColor, author$project$VegaLite$reIndependent),
+						_Utils_Tuple2(author$project$VegaLite$chShape, author$project$VegaLite$reIndependent)
 					]))));
 	var cars = A2(author$project$VegaLite$dataFromUrl, 'data/cars.json', _List_Nil);
 	var barEnc = A2(

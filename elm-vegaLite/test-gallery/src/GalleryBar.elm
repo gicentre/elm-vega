@@ -173,7 +173,7 @@ bar7 =
         enc =
             encoding
                 << position X [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack StNormalize ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack stNormalize ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#EA98D2", "#659CCA" ]) ] ]
     in
     toVegaLite
@@ -240,7 +240,7 @@ bar10 =
         enc =
             encoding
                 << position X [ pName "age", pMType Ordinal, pScale [ scRangeStep (Just 17) ] ]
-                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack NoStack ]
+                << position Y [ pName "people", pMType Quantitative, pAggregate opSum, pAxis [ axTitle "Population" ], pStack stNone ]
                 << color [ mName "gender", mMType Nominal, mScale [ scRange (raStrs [ "#e377c2", "#1f77b4" ]) ] ]
                 << opacity [ mNum 0.7 ]
     in
@@ -314,7 +314,7 @@ bar12 =
             asSpec [ textMark [ maStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
 
         config =
-            configure << configuration (coNamedStyle "label" [ maAlign haLeft, maBaseline AlignMiddle, maDx 3 ])
+            configure << configuration (coNamedStyle "label" [ maAlign haLeft, maBaseline vaMiddle, maDx 3 ])
     in
     toVegaLite [ des, data [], enc [], layer [ specBar, specText ], config [] ]
 
@@ -423,7 +423,7 @@ bar14 =
                 << text [ tName "emoji", tMType Nominal ]
                 << size [ mNum 65 ]
     in
-    toVegaLite [ des, config [], width 800, height 200, data [], trans [], textMark [ maBaseline AlignMiddle ], enc [] ]
+    toVegaLite [ des, config [], width 800, height 200, data [], trans [], textMark [ maBaseline vaMiddle ], enc [] ]
 
 
 

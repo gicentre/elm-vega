@@ -168,7 +168,7 @@ advanced5 =
                 , ( "Sweden", "#0c71ab" )
                 ]
     in
-    toVegaLite [ des, data [], trans [], enc [], line [ maOrient Vertical ] ]
+    toVegaLite [ des, data [], trans [], enc [], line [ maOrient moVertical ] ]
 
 
 advanced6 : Spec
@@ -255,7 +255,7 @@ advanced6 =
                 [ enc4 []
                 , textMark
                     [ maDy 8
-                    , maBaseline AlignTop
+                    , maBaseline vaTop
                     , maFontWeight Bold
                     , maColor "#404040"
                     ]
@@ -275,7 +275,7 @@ advanced6 =
                     ]
 
         spec5 =
-            asSpec [ enc5 [], textMark [ maBaseline AlignMiddle, maFontWeight Bold ] ]
+            asSpec [ enc5 [], textMark [ maBaseline vaMiddle, maFontWeight Bold ] ]
     in
     toVegaLite
         [ des

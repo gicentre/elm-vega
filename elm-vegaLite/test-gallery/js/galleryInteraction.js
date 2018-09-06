@@ -6263,7 +6263,6 @@ var author$project$GalleryInteraction$interaction1 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$Ordinal = 1;
 var author$project$VegaLite$MSelectionCondition = F3(
 	function (a, b, c) {
@@ -6274,6 +6273,8 @@ var author$project$VegaLite$MString = function (a) {
 	return {$: 15, a: a};
 };
 var author$project$VegaLite$mStr = author$project$VegaLite$MString;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$selectionLabel = function (seType) {
 	switch (seType) {
 		case 0:
@@ -6657,7 +6658,7 @@ var author$project$GalleryInteraction$interaction2 = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'myBrush', 2, _List_Nil));
+		A3(author$project$VegaLite$select, 'myBrush', author$project$VegaLite$seInterval, _List_Nil));
 	var enc = A2(
 		elm$core$Basics$composeL,
 		A2(
@@ -7001,7 +7002,7 @@ var author$project$GalleryInteraction$interaction3 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myBrush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -7049,11 +7050,12 @@ var author$project$GalleryInteraction$interaction3 = function () {
 					[specBackground, specHighlight]))
 			]));
 }();
-var author$project$VegaLite$Multi = 1;
 var author$project$VegaLite$MNumber = function (a) {
 	return {$: 14, a: a};
 };
 var author$project$VegaLite$mNum = author$project$VegaLite$MNumber;
+var author$project$VegaLite$SeMulti = 1;
+var author$project$VegaLite$seMulti = 1;
 var author$project$VegaLite$Nearest = function (a) {
 	return {$: 10, a: a};
 };
@@ -7076,7 +7078,7 @@ var author$project$GalleryInteraction$interaction4 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myPaintbrush',
-			1,
+			author$project$VegaLite$seMulti,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seOn('mouseover'),
@@ -7154,7 +7156,7 @@ var author$project$GalleryInteraction$interaction5 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myGrid',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[author$project$VegaLite$seBindScales])));
 	var enc = A2(
@@ -7213,7 +7215,6 @@ var author$project$GalleryInteraction$interaction5 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Single = 0;
 var author$project$VegaLite$IRange = F2(
 	function (a, b) {
 		return {$: 0, a: a, b: b};
@@ -7245,6 +7246,8 @@ var author$project$VegaLite$Fields = function (a) {
 	return {$: 5, a: a};
 };
 var author$project$VegaLite$seFields = author$project$VegaLite$Fields;
+var author$project$VegaLite$SeSingle = 0;
+var author$project$VegaLite$seSingle = 0;
 var author$project$GalleryInteraction$interaction6 = function () {
 	var trans2 = A2(
 		elm$core$Basics$composeL,
@@ -7261,7 +7264,7 @@ var author$project$GalleryInteraction$interaction6 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'CylYr',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seFields(
@@ -7402,7 +7405,7 @@ var author$project$GalleryInteraction$interaction7 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myBrush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -7557,7 +7560,7 @@ var author$project$GalleryInteraction$interaction8 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myTooltip',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seNearest(true),

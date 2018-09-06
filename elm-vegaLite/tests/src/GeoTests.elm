@@ -105,7 +105,7 @@ tubeLines2 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ leTitle "", leOrient BottomRight ]
+                    , mLegend [ leTitle "", leOrient loBottomRight ]
                     , mScale tubeLineColors
                     ]
     in
@@ -149,7 +149,7 @@ tubeLines3 =
                 << color
                     [ mName "id"
                     , mMType Nominal
-                    , mLegend [ leTitle "", leOrient BottomRight, leOffset 0 ]
+                    , mLegend [ leTitle "", leOrient loBottomRight, leOffset 0 ]
                     , mScale tubeLineColors
                     ]
 
@@ -387,7 +387,7 @@ scribbleMap1 =
         , projection [ prType albersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
+        , line [ maStrokeWidth 0.2, maInterpolate miMonotone ]
         , enc []
         ]
 
@@ -426,7 +426,7 @@ scribbleMap2 =
         , projection [ prType albersUsa ]
         , dataFromUrl "data/zipcodes.csv" []
         , trans []
-        , line [ maStrokeWidth 0.2, maInterpolate Monotone ]
+        , line [ maStrokeWidth 0.2, maInterpolate miMonotone ]
         , enc []
         ]
 

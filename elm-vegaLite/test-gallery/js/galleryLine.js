@@ -5739,7 +5739,6 @@ var author$project$GalleryLine$line1 = function () {
 			]));
 }();
 var author$project$VegaLite$Nominal = 0;
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$aggregate = F2(
 	function (ops, groups) {
 		return elm$core$List$cons(
@@ -8033,6 +8032,8 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$VegaLite$ArgMax = 0;
 var author$project$VegaLite$opArgMax = 0;
 var author$project$VegaLite$ArgMin = 1;
@@ -8366,7 +8367,7 @@ var author$project$GalleryLine$line10 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					])),
 				encLine(_List_Nil)
 			]));
@@ -8935,7 +8936,7 @@ var author$project$GalleryLine$line11 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					]))
 			]));
 }();
@@ -9111,11 +9112,12 @@ var author$project$GalleryLine$line4 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$StepAfter = 10;
 var author$project$VegaLite$MInterpolate = function (a) {
 	return {$: 22, a: a};
 };
 var author$project$VegaLite$maInterpolate = author$project$VegaLite$MInterpolate;
+var author$project$VegaLite$StepAfter = 10;
+var author$project$VegaLite$miStepAfter = 10;
 var author$project$GalleryLine$line5 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9158,12 +9160,13 @@ var author$project$GalleryLine$line5 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maInterpolate(10)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miStepAfter)
 					])),
 				enc(_List_Nil)
 			]));
 }();
 var author$project$VegaLite$Monotone = 9;
+var author$project$VegaLite$miMonotone = 9;
 var author$project$GalleryLine$line6 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9206,7 +9209,7 @@ var author$project$GalleryLine$line6 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maInterpolate(9)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone)
 					])),
 				enc(_List_Nil)
 			]));

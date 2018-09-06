@@ -5211,7 +5211,6 @@ var author$project$GalleryBar$bar1 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$NoStack = 3;
 var author$project$VegaLite$Nominal = 0;
 var author$project$VegaLite$AxTitle = function (a) {
 	return {$: 37, a: a};
@@ -6055,6 +6054,8 @@ var author$project$VegaLite$SRangeStep = function (a) {
 	return {$: 7, a: a};
 };
 var author$project$VegaLite$scRangeStep = author$project$VegaLite$SRangeStep;
+var author$project$VegaLite$OfNone = 3;
+var author$project$VegaLite$stNone = 3;
 var author$project$VegaLite$VLTransform = 11;
 var elm$core$List$isEmpty = function (xs) {
 	if (!xs.b) {
@@ -6463,7 +6464,7 @@ var author$project$GalleryBar$bar10 = function () {
 								[
 									author$project$VegaLite$axTitle('Population')
 								])),
-							author$project$VegaLite$pStack(3)
+							author$project$VegaLite$pStack(author$project$VegaLite$stNone)
 						]))),
 			author$project$VegaLite$color(
 				_List_fromArray(
@@ -6694,7 +6695,6 @@ var author$project$GalleryBar$bar11 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$asSpec = function (specs) {
 	return elm$json$Json$Encode$object(
 		A2(
@@ -8597,6 +8597,8 @@ var author$project$VegaLite$text = function (tDefs) {
 };
 var author$project$VegaLite$Text = 12;
 var author$project$VegaLite$textMark = author$project$VegaLite$mark(12);
+var author$project$VegaLite$AlignMiddle = 1;
+var author$project$VegaLite$vaMiddle = 1;
 var author$project$GalleryBar$bar12 = function () {
 	var specText = author$project$VegaLite$asSpec(
 		_List_fromArray(
@@ -8672,7 +8674,7 @@ var author$project$GalleryBar$bar12 = function () {
 				_List_fromArray(
 					[
 						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
-						author$project$VegaLite$maBaseline(1),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle),
 						author$project$VegaLite$maDx(3)
 					]))));
 	return author$project$VegaLite$toVegaLite(
@@ -9537,7 +9539,7 @@ var author$project$GalleryBar$bar14 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1)
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle)
 					])),
 				enc(_List_Nil)
 			]));
@@ -9867,7 +9869,8 @@ var author$project$GalleryBar$bar6 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$StNormalize = 1;
+var author$project$VegaLite$OfNormalize = 1;
+var author$project$VegaLite$stNormalize = 1;
 var author$project$GalleryBar$bar7 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9911,7 +9914,7 @@ var author$project$GalleryBar$bar7 = function () {
 							[
 								author$project$VegaLite$axTitle('Population')
 							])),
-						author$project$VegaLite$pStack(1)
+						author$project$VegaLite$pStack(author$project$VegaLite$stNormalize)
 					]))),
 		author$project$VegaLite$color(
 			_List_fromArray(

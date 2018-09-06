@@ -52,7 +52,7 @@ personGrid =
 
         sel =
             selection
-                << select "highlight" Interval []
+                << select "highlight" seInterval []
 
         enc =
             encoding

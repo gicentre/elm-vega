@@ -7835,7 +7835,6 @@ var author$project$Isotype$livestock = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$calculateAs = F2(
 	function (ex, label) {
 		return elm$core$List$cons(
@@ -8002,6 +8001,8 @@ var author$project$VegaLite$Numbers = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$VegaLite$nums = author$project$VegaLite$Numbers;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$select = F3(
 	function (selName, sType, options) {
 		var selProps = A2(
@@ -8400,7 +8401,7 @@ var author$project$Isotype$personGrid = function () {
 	var sel = A2(
 		elm$core$Basics$composeL,
 		author$project$VegaLite$selection,
-		A3(author$project$VegaLite$select, 'highlight', 2, _List_Nil));
+		A3(author$project$VegaLite$select, 'highlight', author$project$VegaLite$seInterval, _List_Nil));
 	var enc = A2(
 		elm$core$Basics$composeL,
 		A2(

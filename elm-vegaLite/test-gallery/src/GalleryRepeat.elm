@@ -117,18 +117,18 @@ repeat4 =
         sel =
             selection
                 << select "myBrush"
-                    Interval
+                    seInterval
                     [ seOn "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
                     , seTranslate "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
-                    , seResolve Union
+                    , seResolve seUnion
                     ]
                 << select ""
-                    Interval
+                    seInterval
                     [ seBindScales
                     , seTranslate "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!"
                     , seZoom "wheel![event.shiftKey]"
-                    , seResolve Global
+                    , seResolve seGlobal
                     ]
 
         enc =

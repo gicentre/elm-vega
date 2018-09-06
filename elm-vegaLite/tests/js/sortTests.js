@@ -7406,7 +7406,6 @@ var author$project$SortTests$sortWeight = A2(
 			A2(author$project$VegaLite$soByField, 'Weight_in_lbs', author$project$VegaLite$opMean)
 		]));
 var author$project$VegaLite$Nominal = 0;
-var author$project$VegaLite$StNormalize = 1;
 var author$project$VegaLite$aggregate = F2(
 	function (ops, groups) {
 		return elm$core$List$cons(
@@ -8017,6 +8016,8 @@ var author$project$VegaLite$WAscending = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$VegaLite$stAscending = author$project$VegaLite$WAscending;
+var author$project$VegaLite$OfNormalize = 1;
+var author$project$VegaLite$stNormalize = 1;
 var author$project$VegaLite$StOffset = function (a) {
 	return {$: 0, a: a};
 };
@@ -8828,7 +8829,7 @@ var author$project$SortTests$stack1 = function () {
 					'stack_count_Origin2',
 					_List_fromArray(
 						[
-							author$project$VegaLite$stOffset(1),
+							author$project$VegaLite$stOffset(author$project$VegaLite$stNormalize),
 							author$project$VegaLite$stSort(
 							_List_fromArray(
 								[
@@ -8870,7 +8871,7 @@ var author$project$SortTests$stack1 = function () {
 			'y2',
 			_List_fromArray(
 				[
-					author$project$VegaLite$stOffset(1),
+					author$project$VegaLite$stOffset(author$project$VegaLite$stNormalize),
 					author$project$VegaLite$stSort(
 					_List_fromArray(
 						[

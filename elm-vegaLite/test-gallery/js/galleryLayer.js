@@ -6910,7 +6910,6 @@ var author$project$GalleryLayer$layer2 = function () {
 					[specLine, specPoints]))
 			]));
 }();
-var author$project$VegaLite$Independent = 1;
 var author$project$VegaLite$ChX = 0;
 var author$project$VegaLite$chX = 0;
 var author$project$VegaLite$TickStyle = function (a) {
@@ -8753,6 +8752,8 @@ var author$project$VegaLite$MThickness = function (a) {
 var author$project$VegaLite$maThickness = author$project$VegaLite$MThickness;
 var author$project$VegaLite$NFalse = {$: 9};
 var author$project$VegaLite$niFalse = author$project$VegaLite$NFalse;
+var author$project$VegaLite$RIndependent = 1;
+var author$project$VegaLite$reIndependent = 1;
 var author$project$VegaLite$RScale = function (a) {
 	return {$: 2, a: a};
 };
@@ -8871,7 +8872,7 @@ var author$project$GalleryLayer$layer3 = function () {
 			author$project$VegaLite$reScale(
 				_List_fromArray(
 					[
-						_Utils_Tuple2(author$project$VegaLite$chX, 1)
+						_Utils_Tuple2(author$project$VegaLite$chX, author$project$VegaLite$reIndependent)
 					]))));
 	var fac = author$project$VegaLite$facet(
 		_List_fromArray(
@@ -9150,7 +9151,7 @@ var author$project$GalleryLayer$layer4 = function () {
 			author$project$VegaLite$reScale(
 				_List_fromArray(
 					[
-						_Utils_Tuple2(author$project$VegaLite$chY, 1)
+						_Utils_Tuple2(author$project$VegaLite$chY, author$project$VegaLite$reIndependent)
 					]))));
 	var encTime = A2(
 		elm$core$Basics$composeL,
@@ -9235,8 +9236,6 @@ var author$project$GalleryLayer$layer4 = function () {
 				res(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Monotone = 9;
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$Area = 0;
 var author$project$VegaLite$area = author$project$VegaLite$mark(0);
 var author$project$VegaLite$AreaStyle = function (a) {
@@ -9262,6 +9261,10 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$Monotone = 9;
+var author$project$VegaLite$miMonotone = 9;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$GalleryLayer$layer5 = function () {
 	var trans = A2(
 		elm$core$Basics$composeL,
@@ -9389,8 +9392,8 @@ var author$project$GalleryLayer$layer5 = function () {
 			author$project$VegaLite$coArea(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maInterpolate(9),
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone),
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					]))));
 	return author$project$VegaLite$toVegaLite(
 		_List_fromArray(
@@ -9406,7 +9409,6 @@ var author$project$GalleryLayer$layer5 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$STop = 0;
 var author$project$VegaLite$AxLabels = function (a) {
 	return {$: 21, a: a};
 };
@@ -9429,6 +9431,8 @@ var author$project$VegaLite$MdY = function (a) {
 	return {$: 13, a: a};
 };
 var author$project$VegaLite$maDy = author$project$VegaLite$MdY;
+var author$project$VegaLite$STop = 0;
+var author$project$VegaLite$siTop = 0;
 var author$project$VegaLite$TmType = function (a) {
 	return {$: 2, a: a};
 };
@@ -9592,7 +9596,7 @@ var author$project$GalleryLayer$layer6 = function () {
 								author$project$VegaLite$axLabels(false),
 								author$project$VegaLite$axTitle('Day'),
 								author$project$VegaLite$axTitlePadding(25),
-								author$project$VegaLite$axOrient(0)
+								author$project$VegaLite$axOrient(author$project$VegaLite$siTop)
 							]))
 					]))),
 		author$project$VegaLite$text(

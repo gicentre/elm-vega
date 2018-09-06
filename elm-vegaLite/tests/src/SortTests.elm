@@ -73,7 +73,7 @@ stack1 =
                     []
                     "stack_count_Origin1"
                     "stack_count_Origin2"
-                    [ stOffset StNormalize, stSort [ stAscending "Origin" ] ]
+                    [ stOffset stNormalize, stSort [ stAscending "Origin" ] ]
                 << window
                     [ ( [ wiAggregateOp opMin, wiField "stack_count_Origin1" ], "x" )
                     , ( [ wiAggregateOp opMax, wiField "stack_count_Origin2" ], "x2" )
@@ -83,7 +83,7 @@ stack1 =
                     [ "Origin" ]
                     "y"
                     "y2"
-                    [ stOffset StNormalize, stSort [ stAscending "Cylinders" ] ]
+                    [ stOffset stNormalize, stSort [ stAscending "Cylinders" ] ]
 
         enc =
             encoding

@@ -332,7 +332,7 @@ interactiveScatter1 =
     let
         sel =
             selection
-                << select "picked" Single []
+                << select "picked" seSingle []
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -342,7 +342,7 @@ interactiveScatter2 =
     let
         sel =
             selection
-                << select "picked" Multi []
+                << select "picked" seMulti []
     in
     toVegaLite <| sel [] :: scatterProps
 
@@ -352,7 +352,7 @@ interactiveScatter3 =
     let
         sel =
             selection
-                << select "picked" Multi [ seOn "mouseover" ]
+                << select "picked" seMulti [ seOn "mouseover" ]
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -362,7 +362,7 @@ interactiveScatter4 =
     let
         sel =
             selection
-                << select "picked" Single [ seEmpty, seFields [ "Cylinders" ] ]
+                << select "picked" seSingle [ seEmpty, seFields [ "Cylinders" ] ]
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -373,7 +373,7 @@ interactiveScatter5 =
         sel =
             selection
                 << select "picked"
-                    Single
+                    seSingle
                     [ seFields [ "Cylinders" ]
                     , seBind [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ] ]
                     ]
@@ -387,7 +387,7 @@ interactiveScatter6 =
         sel =
             selection
                 << select "picked"
-                    Single
+                    seSingle
                     [ seFields [ "Cylinders", "Year" ]
                     , seBind
                         [ iRange "Cylinders" [ inMin 3, inMax 8, inStep 1 ]
@@ -403,7 +403,7 @@ interactiveScatter7 =
     let
         sel =
             selection
-                << select "picked" Interval []
+                << select "picked" seInterval []
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -413,7 +413,7 @@ interactiveScatter8 =
     let
         sel =
             selection
-                << select "picked" Interval [ seEncodings [ chX ] ]
+                << select "picked" seInterval [ seEncodings [ chX ] ]
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -423,7 +423,7 @@ interactiveScatter9 =
     let
         sel =
             selection
-                << select "picked" Interval [ seEncodings [ chX ], seBindScales ]
+                << select "picked" seInterval [ seEncodings [ chX ], seBindScales ]
     in
     toVegaLite (sel [] :: scatterProps)
 
@@ -443,7 +443,7 @@ coordinatedScatter1 =
 
         sel =
             selection
-                << select "picked" Interval [ seEncodings [ chX ] ]
+                << select "picked" seInterval [ seEncodings [ chX ] ]
 
         spec =
             asSpec
@@ -473,7 +473,7 @@ coordinatedScatter2 =
 
         sel =
             selection
-                << select "picked" Interval [ seBindScales ]
+                << select "picked" seInterval [ seBindScales ]
 
         spec =
             asSpec
@@ -496,7 +496,7 @@ contextAndFocus : Spec
 contextAndFocus =
     let
         sel =
-            selection << select "brush" Interval [ seEncodings [ chX ] ]
+            selection << select "brush" seInterval [ seEncodings [ chX ] ]
 
         encContext =
             encoding
@@ -538,7 +538,7 @@ crossFilter =
                 << calculateAs "hours(datum.date)" "hour"
 
         sel =
-            selection << select "brush" Interval [ seEncodings [ chX ] ]
+            selection << select "brush" seInterval [ seEncodings [ chX ] ]
 
         filterTrans =
             transform

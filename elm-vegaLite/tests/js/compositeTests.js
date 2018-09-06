@@ -5096,7 +5096,6 @@ var author$project$VegaLite$ExIqrScale = function (a) {
 var author$project$VegaLite$exIqrScale = author$project$VegaLite$ExIqrScale;
 var author$project$CompositeTests$boxplot2 = author$project$CompositeTests$bPlot(
 	author$project$VegaLite$exIqrScale(2));
-var author$project$VegaLite$Monotone = 9;
 var author$project$VegaLite$Temporal = 3;
 var author$project$VegaLite$Errorband = 3;
 var author$project$VegaLite$errorband = author$project$VegaLite$mark(3);
@@ -5116,6 +5115,8 @@ var author$project$VegaLite$MInterpolate = function (a) {
 	return {$: 22, a: a};
 };
 var author$project$VegaLite$maInterpolate = author$project$VegaLite$MInterpolate;
+var author$project$VegaLite$Monotone = 9;
+var author$project$VegaLite$miMonotone = 9;
 var author$project$VegaLite$PScale = function (a) {
 	return {$: 10, a: a};
 };
@@ -5200,7 +5201,7 @@ var author$project$CompositeTests$eBand = function (ext) {
 				_List_fromArray(
 					[
 						author$project$VegaLite$maExtent(summary),
-						author$project$VegaLite$maInterpolate(9),
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone),
 						author$project$VegaLite$maBorders(_List_Nil)
 					])),
 				enc(_List_Nil)

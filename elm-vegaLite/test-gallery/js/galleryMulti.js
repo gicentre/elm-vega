@@ -2299,7 +2299,6 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$GalleryMulti$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$Quantitative = 2;
 var author$project$VegaLite$Temporal = 3;
 var author$project$VegaLite$X = 0;
@@ -5076,6 +5075,8 @@ var author$project$VegaLite$Encodings = function (a) {
 	return {$: 6, a: a};
 };
 var author$project$VegaLite$seEncodings = author$project$VegaLite$Encodings;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$selectionLabel = function (seType) {
 	switch (seType) {
 		case 0:
@@ -5493,7 +5494,7 @@ var author$project$GalleryMulti$multi1 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myBrush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -6813,7 +6814,7 @@ var author$project$GalleryMulti$multi2 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myBrush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -6889,9 +6890,7 @@ var author$project$GalleryMulti$multi2 = function () {
 				author$project$VegaLite$specification(spec)
 			]));
 }();
-var author$project$VegaLite$Global = 0;
 var author$project$VegaLite$Nominal = 0;
-var author$project$VegaLite$Union = 1;
 var author$project$VegaLite$Row = 1;
 var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$MmType = function (a) {
@@ -6915,6 +6914,8 @@ var author$project$VegaLite$RowFields = function (a) {
 var author$project$VegaLite$rowFields = author$project$VegaLite$RowFields;
 var author$project$VegaLite$BindScales = {$: 1};
 var author$project$VegaLite$seBindScales = author$project$VegaLite$BindScales;
+var author$project$VegaLite$SeGlobal = 0;
+var author$project$VegaLite$seGlobal = 0;
 var author$project$VegaLite$On = function (a) {
 	return {$: 2, a: a};
 };
@@ -6927,6 +6928,8 @@ var author$project$VegaLite$Translate = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$VegaLite$seTranslate = author$project$VegaLite$Translate;
+var author$project$VegaLite$SeUnion = 1;
+var author$project$VegaLite$seUnion = 1;
 var author$project$VegaLite$Zoom = function (a) {
 	return {$: 4, a: a};
 };
@@ -6944,24 +6947,24 @@ var author$project$GalleryMulti$multi3 = function () {
 			A3(
 				author$project$VegaLite$select,
 				'myBrush',
-				2,
+				author$project$VegaLite$seInterval,
 				_List_fromArray(
 					[
 						author$project$VegaLite$seOn('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 						author$project$VegaLite$seTranslate('[mousedown[event.shiftKey], window:mouseup] > window:mousemove!'),
 						author$project$VegaLite$seZoom('wheel![event.shiftKey]'),
-						author$project$VegaLite$seResolve(1)
+						author$project$VegaLite$seResolve(author$project$VegaLite$seUnion)
 					]))),
 		A3(
 			author$project$VegaLite$select,
 			'',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seBindScales,
 					author$project$VegaLite$seTranslate('[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!'),
 					author$project$VegaLite$seZoom('wheel![event.shiftKey]'),
-					author$project$VegaLite$seResolve(0)
+					author$project$VegaLite$seResolve(author$project$VegaLite$seGlobal)
 				])));
 	var enc = A2(
 		elm$core$Basics$composeL,
@@ -7028,8 +7031,6 @@ var author$project$GalleryMulti$multi3 = function () {
 				author$project$VegaLite$specification(spec)
 			]));
 }();
-var author$project$VegaLite$Independent = 1;
-var author$project$VegaLite$Single = 0;
 var author$project$VegaLite$AxLabelAngle = function (a) {
 	return {$: 8, a: a};
 };
@@ -8427,6 +8428,8 @@ var author$project$VegaLite$RHeatmap = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$VegaLite$racoHeatmap = author$project$VegaLite$RHeatmap;
+var author$project$VegaLite$RIndependent = 1;
+var author$project$VegaLite$reIndependent = 1;
 var author$project$VegaLite$RLegend = function (a) {
 	return {$: 1, a: a};
 };
@@ -8502,6 +8505,8 @@ var author$project$VegaLite$resolve = function (res) {
 		20,
 		elm$json$Json$Encode$object(res));
 };
+var author$project$VegaLite$SeSingle = 0;
+var author$project$VegaLite$seSingle = 0;
 var author$project$VegaLite$size = function (markProps) {
 	return elm$core$List$cons(
 		_Utils_Tuple2(
@@ -8524,7 +8529,7 @@ var author$project$GalleryMulti$multi4 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myPts',
-			0,
+			author$project$VegaLite$seSingle,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -8538,8 +8543,8 @@ var author$project$GalleryMulti$multi4 = function () {
 			author$project$VegaLite$reLegend(
 				_List_fromArray(
 					[
-						_Utils_Tuple2(author$project$VegaLite$chColor, 1),
-						_Utils_Tuple2(author$project$VegaLite$chSize, 1)
+						_Utils_Tuple2(author$project$VegaLite$chColor, author$project$VegaLite$reIndependent),
+						_Utils_Tuple2(author$project$VegaLite$chSize, author$project$VegaLite$reIndependent)
 					]))));
 	var encPosition = A2(
 		elm$core$Basics$composeL,
@@ -8703,7 +8708,6 @@ var author$project$GalleryMulti$multi4 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Multi = 1;
 var author$project$VegaLite$DStrings = function (a) {
 	return {$: 1, a: a};
 };
@@ -8760,6 +8764,8 @@ var author$project$VegaLite$PTimeUnit = function (a) {
 	return {$: 7, a: a};
 };
 var author$project$VegaLite$pTimeUnit = author$project$VegaLite$PTimeUnit;
+var author$project$VegaLite$SeMulti = 1;
+var author$project$VegaLite$seMulti = 1;
 var author$project$VegaLite$VLTitle = 2;
 var author$project$VegaLite$title = function (s) {
 	return _Utils_Tuple2(
@@ -8792,7 +8798,7 @@ var author$project$GalleryMulti$multi5 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myClick',
-			1,
+			author$project$VegaLite$seMulti,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(
@@ -8805,7 +8811,7 @@ var author$project$GalleryMulti$multi5 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'myBrush',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[
 					author$project$VegaLite$seEncodings(

@@ -24,7 +24,7 @@ scatter1 =
     toVegaLite
         [ des
         , dataFromUrl "https://vega.github.io/vega-lite/data/cars.json" []
-        , point [ maTooltip TTData ]
+        , point [ maTooltip ttData ]
         , enc []
         ]
 
@@ -192,7 +192,7 @@ scatter9 =
                 << color [ mStr "#000" ]
 
         sel =
-            selection << select "view" Interval [ seBindScales ]
+            selection << select "view" seInterval [ seBindScales ]
     in
     toVegaLite
         [ des

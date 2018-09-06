@@ -7820,7 +7820,7 @@ var author$project$GalleryLabel$label2 = function () {
 			author$project$VegaLite$coText(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1)
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle)
 					]))));
 	return author$project$VegaLite$toVegaLite(
 		_List_fromArray(
@@ -7835,7 +7835,6 @@ var author$project$GalleryLabel$label2 = function () {
 			]));
 }();
 var author$project$VegaLite$Nominal = 0;
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$aggregate = F2(
 	function (ops, groups) {
 		return elm$core$List$cons(
@@ -7900,6 +7899,8 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$VegaLite$ArgMax = 0;
 var author$project$VegaLite$opArgMax = 0;
 var author$project$VegaLite$ArgMin = 1;
@@ -8464,7 +8465,7 @@ var author$project$GalleryLabel$label3 = function () {
 				author$project$VegaLite$line(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					])),
 				encLine(_List_Nil)
 			]));

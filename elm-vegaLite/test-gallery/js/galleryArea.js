@@ -6371,7 +6371,6 @@ var author$project$GalleryArea$area3 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$StNormalize = 1;
 var author$project$VegaLite$AxDomain = function (a) {
 	return {$: 1, a: a};
 };
@@ -6380,6 +6379,8 @@ var author$project$VegaLite$PStack = function (a) {
 	return {$: 13, a: a};
 };
 var author$project$VegaLite$pStack = author$project$VegaLite$PStack;
+var author$project$VegaLite$OfNormalize = 1;
+var author$project$VegaLite$stNormalize = 1;
 var author$project$GalleryArea$area4 = function () {
 	var enc = A2(
 		elm$core$Basics$composeL,
@@ -6412,7 +6413,7 @@ var author$project$GalleryArea$area4 = function () {
 						author$project$VegaLite$pMType(2),
 						author$project$VegaLite$pAggregate(author$project$VegaLite$opSum),
 						author$project$VegaLite$pAxis(_List_Nil),
-						author$project$VegaLite$pStack(1)
+						author$project$VegaLite$pStack(author$project$VegaLite$stNormalize)
 					]))),
 		author$project$VegaLite$color(
 			_List_fromArray(
@@ -6437,7 +6438,8 @@ var author$project$GalleryArea$area4 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$StCenter = 2;
+var author$project$VegaLite$OfCenter = 2;
+var author$project$VegaLite$stCenter = 2;
 var author$project$GalleryArea$area5 = function () {
 	var enc = A2(
 		elm$core$Basics$composeL,
@@ -6470,7 +6472,7 @@ var author$project$GalleryArea$area5 = function () {
 						author$project$VegaLite$pMType(2),
 						author$project$VegaLite$pAggregate(author$project$VegaLite$opSum),
 						author$project$VegaLite$pAxis(_List_Nil),
-						author$project$VegaLite$pStack(2)
+						author$project$VegaLite$pStack(author$project$VegaLite$stCenter)
 					]))),
 		author$project$VegaLite$color(
 			_List_fromArray(
@@ -6495,8 +6497,6 @@ var author$project$GalleryArea$area5 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Monotone = 9;
-var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$asSpec = function (specs) {
 	return elm$json$Json$Encode$object(
 		A2(
@@ -8413,6 +8413,10 @@ var author$project$VegaLite$MOrient = function (a) {
 	return {$: 25, a: a};
 };
 var author$project$VegaLite$maOrient = author$project$VegaLite$MOrient;
+var author$project$VegaLite$Monotone = 9;
+var author$project$VegaLite$miMonotone = 9;
+var author$project$VegaLite$MOVertical = 1;
+var author$project$VegaLite$moVertical = 1;
 var author$project$VegaLite$NFalse = {$: 9};
 var author$project$VegaLite$niFalse = author$project$VegaLite$NFalse;
 var author$project$VegaLite$Numbers = function (a) {
@@ -8569,8 +8573,8 @@ var author$project$GalleryArea$area6 = function () {
 			author$project$VegaLite$coArea(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maInterpolate(9),
-						author$project$VegaLite$maOrient(1)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone),
+						author$project$VegaLite$maOrient(author$project$VegaLite$moVertical)
 					]))));
 	return author$project$VegaLite$toVegaLite(
 		_List_fromArray(
@@ -8586,9 +8590,6 @@ var author$project$GalleryArea$area6 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignMiddle = 1;
-var author$project$VegaLite$STop = 0;
-var author$project$VegaLite$Shared = 0;
 var author$project$VegaLite$aggregate = F2(
 	function (ops, groups) {
 		return elm$core$List$cons(
@@ -8678,6 +8679,8 @@ var author$project$VegaLite$RScale = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$VegaLite$reScale = author$project$VegaLite$RScale;
+var author$project$VegaLite$RShared = 0;
+var author$project$VegaLite$reShared = 0;
 var author$project$VegaLite$Rect = 9;
 var author$project$VegaLite$rect = author$project$VegaLite$mark(9);
 var author$project$VegaLite$resolutionLabel = function (res) {
@@ -8749,6 +8752,8 @@ var author$project$VegaLite$resolve = function (res) {
 		20,
 		elm$json$Json$Encode$object(res));
 };
+var author$project$VegaLite$STop = 0;
+var author$project$VegaLite$siTop = 0;
 var author$project$VegaLite$WAscending = function (a) {
 	return {$: 0, a: a};
 };
@@ -9005,6 +9010,7 @@ var author$project$VegaLite$vConcat = function (specs) {
 		16,
 		author$project$VegaLite$toList(specs));
 };
+var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$vaMiddle = 1;
 var author$project$VegaLite$Stroke = function (a) {
 	return {$: 5, a: a};
@@ -9246,7 +9252,7 @@ var author$project$GalleryArea$area7 = function () {
 												'stack_count_Origin2',
 												_List_fromArray(
 													[
-														author$project$VegaLite$stOffset(1),
+														author$project$VegaLite$stOffset(author$project$VegaLite$stNormalize),
 														author$project$VegaLite$stSort(
 														_List_fromArray(
 															[
@@ -9326,7 +9332,7 @@ var author$project$GalleryArea$area7 = function () {
 									'y2',
 									_List_fromArray(
 										[
-											author$project$VegaLite$stOffset(1),
+											author$project$VegaLite$stOffset(author$project$VegaLite$stNormalize),
 											author$project$VegaLite$stSort(
 											_List_fromArray(
 												[
@@ -9346,7 +9352,7 @@ var author$project$GalleryArea$area7 = function () {
 			author$project$VegaLite$reScale(
 				_List_fromArray(
 					[
-						_Utils_Tuple2(author$project$VegaLite$chX, 0)
+						_Utils_Tuple2(author$project$VegaLite$chX, author$project$VegaLite$reShared)
 					]))));
 	var enc3 = A2(
 		elm$core$Basics$composeL,
@@ -9389,7 +9395,7 @@ var author$project$GalleryArea$area7 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1)
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle)
 					])),
 				enc3(_List_Nil)
 			]));
@@ -9495,7 +9501,7 @@ var author$project$GalleryArea$area7 = function () {
 							author$project$VegaLite$pAxis(
 							_List_fromArray(
 								[
-									author$project$VegaLite$axOrient(0)
+									author$project$VegaLite$axOrient(author$project$VegaLite$siTop)
 								]))
 						]))),
 			author$project$VegaLite$color(

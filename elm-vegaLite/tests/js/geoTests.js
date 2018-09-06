@@ -10551,7 +10551,6 @@ var author$project$GeoTests$mapComp4 = function () {
 					]))
 			]));
 }();
-var author$project$VegaLite$Monotone = 9;
 var author$project$VegaLite$W300 = 6;
 var author$project$VegaLite$TitleStyle = function (a) {
 	return {$: 35, a: a};
@@ -10841,6 +10840,8 @@ var author$project$VegaLite$MInterpolate = function (a) {
 	return {$: 22, a: a};
 };
 var author$project$VegaLite$maInterpolate = author$project$VegaLite$MInterpolate;
+var author$project$VegaLite$Monotone = 9;
+var author$project$VegaLite$miMonotone = 9;
 var author$project$VegaLite$OmType = function (a) {
 	return {$: 2, a: a};
 };
@@ -11054,7 +11055,7 @@ var author$project$GeoTests$scribbleMap1 = function () {
 				_List_fromArray(
 					[
 						author$project$VegaLite$maStrokeWidth(0.2),
-						author$project$VegaLite$maInterpolate(9)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone)
 					])),
 				enc(_List_Nil)
 			]));
@@ -11162,7 +11163,7 @@ var author$project$GeoTests$scribbleMap2 = function () {
 				_List_fromArray(
 					[
 						author$project$VegaLite$maStrokeWidth(0.2),
-						author$project$VegaLite$maInterpolate(9)
+						author$project$VegaLite$maInterpolate(author$project$VegaLite$miMonotone)
 					])),
 				enc(_List_Nil)
 			]));
@@ -11210,7 +11211,6 @@ var author$project$GeoTests$tubeLineColors = author$project$VegaLite$categorical
 			_Utils_Tuple2('Victoria', 'rgb(0,160,226)'),
 			_Utils_Tuple2('Waterloo & City', 'rgb(106,187,170)')
 		]));
-var author$project$VegaLite$BottomRight = 1;
 var author$project$VegaLite$LOrient = function (a) {
 	return {$: 21, a: a};
 };
@@ -11219,6 +11219,8 @@ var author$project$VegaLite$LTitle = function (a) {
 	return {$: 32, a: a};
 };
 var author$project$VegaLite$leTitle = author$project$VegaLite$LTitle;
+var author$project$VegaLite$BottomRight = 1;
+var author$project$VegaLite$loBottomRight = 1;
 var author$project$GeoTests$tubeLines2 = function () {
 	var enc = A2(
 		elm$core$Basics$composeL,
@@ -11232,7 +11234,7 @@ var author$project$GeoTests$tubeLines2 = function () {
 					_List_fromArray(
 						[
 							author$project$VegaLite$leTitle(''),
-							author$project$VegaLite$leOrient(1)
+							author$project$VegaLite$leOrient(author$project$VegaLite$loBottomRight)
 						])),
 					author$project$VegaLite$mScale(author$project$GeoTests$tubeLineColors)
 				])));
@@ -11283,7 +11285,7 @@ var author$project$GeoTests$tubeLines3 = function () {
 					_List_fromArray(
 						[
 							author$project$VegaLite$leTitle(''),
-							author$project$VegaLite$leOrient(1),
+							author$project$VegaLite$leOrient(author$project$VegaLite$loBottomRight),
 							author$project$VegaLite$leOffset(0)
 						])),
 					author$project$VegaLite$mScale(author$project$GeoTests$tubeLineColors)

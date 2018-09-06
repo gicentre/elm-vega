@@ -2300,7 +2300,6 @@ var elm$core$Basics$identity = function (x) {
 };
 var author$project$GalleryScatter$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
 var author$project$VegaLite$Quantitative = 2;
-var author$project$VegaLite$TTData = 1;
 var author$project$VegaLite$X = 0;
 var author$project$VegaLite$Y = 1;
 var author$project$VegaLite$VLData = 8;
@@ -5040,6 +5039,8 @@ var author$project$VegaLite$toVegaLite = function (spec) {
 				},
 				spec)));
 };
+var author$project$VegaLite$TTData = 1;
+var author$project$VegaLite$ttData = 1;
 var elm$core$Basics$composeL = F3(
 	function (g, f, x) {
 		return g(
@@ -5076,7 +5077,7 @@ var author$project$GalleryScatter$scatter1 = function () {
 				author$project$VegaLite$point(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maTooltip(1)
+						author$project$VegaLite$maTooltip(author$project$VegaLite$ttData)
 					])),
 				enc(_List_Nil)
 			]));
@@ -8602,7 +8603,6 @@ var author$project$GalleryScatter$scatter8 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$Interval = 2;
 var author$project$VegaLite$PScale = function (a) {
 	return {$: 10, a: a};
 };
@@ -8619,6 +8619,8 @@ var author$project$VegaLite$SZero = function (a) {
 var author$project$VegaLite$scZero = author$project$VegaLite$SZero;
 var author$project$VegaLite$BindScales = {$: 1};
 var author$project$VegaLite$seBindScales = author$project$VegaLite$BindScales;
+var author$project$VegaLite$SeInterval = 2;
+var author$project$VegaLite$seInterval = 2;
 var author$project$VegaLite$select = F3(
 	function (selName, sType, options) {
 		var selProps = A2(
@@ -8646,7 +8648,7 @@ var author$project$GalleryScatter$scatter9 = function () {
 		A3(
 			author$project$VegaLite$select,
 			'view',
-			2,
+			author$project$VegaLite$seInterval,
 			_List_fromArray(
 				[author$project$VegaLite$seBindScales])));
 	var enc = A2(
