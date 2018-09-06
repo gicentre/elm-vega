@@ -252,7 +252,7 @@ line10 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMin =
-            asSpec [ transTextMin [], textMark [ maAlign AlignLeft, maBaseline AlignTop, maDx 3, maDy 1 ], encTextMin [] ]
+            asSpec [ transTextMin [], textMark [ maAlign haLeft, maBaseline vaTop, maDx 3, maDy 1 ], encTextMin [] ]
 
         transTextMax =
             transform
@@ -265,7 +265,7 @@ line10 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMax =
-            asSpec [ transTextMax [], textMark [ maAlign AlignLeft, maBaseline AlignBottom, maDx 3, maDy 1 ], encTextMax [] ]
+            asSpec [ transTextMax [], textMark [ maAlign haLeft, maBaseline vaBottom, maDx 3, maDy 1 ], encTextMax [] ]
 
         config =
             configure << configuration (coView [ vicoStroke Nothing ])

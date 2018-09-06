@@ -298,7 +298,7 @@ interaction8 =
             encoding << position X [ pName "date", pMType Temporal ]
 
         spec2_2 =
-            asSpec [ textMark [ maAlign AlignLeft, maDx 5, maDy -5 ], enc2_2 [] ]
+            asSpec [ textMark [ maAlign haLeft, maDx 5, maDy -5 ], enc2_2 [] ]
 
         enc2_2 =
             encoding

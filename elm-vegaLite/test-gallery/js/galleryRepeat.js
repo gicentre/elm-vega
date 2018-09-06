@@ -2299,13 +2299,14 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$GalleryRepeat$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$Column = 0;
 var author$project$VegaLite$Nominal = 0;
 var author$project$VegaLite$Ordinal = 1;
 var author$project$VegaLite$Quantitative = 2;
 var author$project$VegaLite$Temporal = 3;
 var author$project$VegaLite$X = 0;
 var author$project$VegaLite$Y = 1;
+var author$project$VegaLite$Column = 0;
+var author$project$VegaLite$arColumn = 0;
 var author$project$VegaLite$vlPropertyLabel = function (spec) {
 	switch (spec) {
 		case 0:
@@ -5727,7 +5728,7 @@ var author$project$GalleryRepeat$repeat1 = function () {
 				1,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(0),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 						author$project$VegaLite$pMType(2),
 						author$project$VegaLite$pAggregate(author$project$VegaLite$opMean)
 					]))),
@@ -5768,7 +5769,7 @@ var author$project$GalleryRepeat$repeat1 = function () {
 						1,
 						_List_fromArray(
 							[
-								author$project$VegaLite$pRepeat(0),
+								author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 								author$project$VegaLite$pMType(2),
 								author$project$VegaLite$pAggregate(author$project$VegaLite$opMean)
 							]))),
@@ -6533,7 +6534,7 @@ var author$project$GalleryRepeat$repeat3 = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2),
 							author$project$VegaLite$pBin(_List_Nil)
 						]))),
@@ -6575,8 +6576,9 @@ var author$project$GalleryRepeat$repeat3 = function () {
 }();
 var author$project$VegaLite$Global = 0;
 var author$project$VegaLite$Interval = 2;
-var author$project$VegaLite$Row = 1;
 var author$project$VegaLite$Union = 1;
+var author$project$VegaLite$Row = 1;
+var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$MSelectionCondition = F3(
 	function (a, b, c) {
 		return {$: 11, a: a, b: b, c: c};
@@ -7027,7 +7029,7 @@ var author$project$GalleryRepeat$repeat4 = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2)
 						]))),
 			A2(
@@ -7035,7 +7037,7 @@ var author$project$GalleryRepeat$repeat4 = function () {
 				1,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(1),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 						author$project$VegaLite$pMType(2)
 					]))),
 		author$project$VegaLite$color(
@@ -7080,7 +7082,6 @@ var author$project$GalleryRepeat$repeat4 = function () {
 				author$project$VegaLite$specification(spec)
 			]));
 }();
-var author$project$VegaLite$Flush = 1;
 var author$project$VegaLite$AxTitle = function (a) {
 	return {$: 37, a: a};
 };
@@ -7089,6 +7090,8 @@ var author$project$VegaLite$MaxBins = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$VegaLite$biMaxBins = author$project$VegaLite$MaxBins;
+var author$project$VegaLite$Flush = 1;
+var author$project$VegaLite$boFlush = 1;
 var author$project$VegaLite$VLBounds = 23;
 var author$project$VegaLite$boundsSpec = function (bnds) {
 	if (!bnds) {
@@ -8645,7 +8648,7 @@ var author$project$GalleryRepeat$repeat5 = function () {
 		_List_fromArray(
 			[
 				author$project$VegaLite$spacing(15),
-				author$project$VegaLite$bounds(1),
+				author$project$VegaLite$bounds(author$project$VegaLite$boFlush),
 				author$project$VegaLite$hConcat(
 				_List_fromArray(
 					[spec2_1, spec2_2]))
@@ -8716,7 +8719,7 @@ var author$project$GalleryRepeat$repeat5 = function () {
 			[
 				des,
 				author$project$VegaLite$spacing(15),
-				author$project$VegaLite$bounds(1),
+				author$project$VegaLite$bounds(author$project$VegaLite$boFlush),
 				config(_List_Nil),
 				A2(author$project$VegaLite$dataFromUrl, 'https://vega.github.io/vega-lite/data/movies.json', _List_Nil),
 				author$project$VegaLite$vConcat(

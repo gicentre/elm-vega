@@ -9577,8 +9577,9 @@ var author$project$ConditionalTests$markCondition2 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$CGrab = 34;
 var author$project$VegaLite$Interval = 2;
+var author$project$VegaLite$CGrab = 34;
+var author$project$VegaLite$cuGrab = 34;
 var author$project$VegaLite$MAggregate = function (a) {
 	return {$: 9, a: a};
 };
@@ -9713,7 +9714,7 @@ var author$project$ConditionalTests$selectionCondition1 = function () {
 				author$project$VegaLite$rect(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maCursor(34)
+						author$project$VegaLite$maCursor(author$project$VegaLite$cuGrab)
 					])),
 				enc(_List_Nil)
 			]));
@@ -9818,7 +9819,7 @@ var author$project$ConditionalTests$selectionCondition2 = function () {
 				author$project$VegaLite$rect(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maCursor(34)
+						author$project$VegaLite$maCursor(author$project$VegaLite$cuGrab)
 					])),
 				enc(_List_Nil)
 			]));

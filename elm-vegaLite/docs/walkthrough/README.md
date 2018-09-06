@@ -322,7 +322,7 @@ let
     enc =
         encoding
             << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-            << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+            << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
     spec =
         asSpec
@@ -347,8 +347,8 @@ We can combine repeated rows and repeated columns to create a grid of views, suc
 let
     enc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
-            << position Y [ pRepeat Row, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
+            << position Y [ pRepeat arRow, pMType Quantitative ]
 
     spec =
         asSpec
@@ -394,8 +394,8 @@ let
 
     scatterEnc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
-            << position Y [ pRepeat Row, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
+            << position Y [ pRepeat arRow, pMType Quantitative ]
 
     scatterSpec =
         asSpec [ point [], scatterEnc [] ]
@@ -403,11 +403,11 @@ let
     barEnc =
         encoding
             << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-            << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+            << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
     annotationEnc =
         encoding
-            << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+            << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
     layerSpec =
         asSpec
@@ -677,8 +677,8 @@ One of the more powerful aspects of selection-based interaction is in coordinati
 let
     enc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
-            << position Y [ pRepeat Row, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
+            << position Y [ pRepeat arRow, pMType Quantitative ]
             << color
                 [ mSelectionCondition (selectionName "picked")
                     [ mName "Origin", mMType Nominal ]
@@ -717,8 +717,8 @@ It is a simple step to bind the scales of the scatterplots in the same way to co
 let
     enc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
-            << position Y [ pRepeat Row, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
+            << position Y [ pRepeat arRow, pMType Quantitative ]
             << color [ mName "Origin", mMType Nominal ]
 
     sel =
@@ -811,12 +811,12 @@ let
 
     totalEnc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
             << position Y [ pAggregate opCount, pMType Quantitative ]
 
     selectedEnc =
         encoding
-            << position X [ pRepeat Column, pMType Quantitative ]
+            << position X [ pRepeat arColumn, pMType Quantitative ]
             << position Y [ pAggregate opCount, pMType Quantitative ]
             << color [ mStr "goldenrod" ]
 in

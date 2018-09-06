@@ -2299,8 +2299,6 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$GalleryLabel$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$AlignLeft = 1;
-var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$Ordinal = 1;
 var author$project$VegaLite$Quantitative = 2;
 var author$project$VegaLite$X = 0;
@@ -5750,6 +5748,8 @@ var author$project$VegaLite$encoding = function (channels) {
 		13,
 		elm$json$Json$Encode$object(channels));
 };
+var author$project$VegaLite$AlignLeft = 1;
+var author$project$VegaLite$haLeft = 1;
 var author$project$VegaLite$VLLayer = 14;
 var author$project$VegaLite$toList = elm$json$Json$Encode$list(elm$core$Basics$identity);
 var author$project$VegaLite$layer = function (specs) {
@@ -7148,6 +7148,8 @@ var author$project$VegaLite$toVegaLite = function (spec) {
 				},
 				spec)));
 };
+var author$project$VegaLite$AlignMiddle = 1;
+var author$project$VegaLite$vaMiddle = 1;
 var author$project$GalleryLabel$label1 = function () {
 	var specText = author$project$VegaLite$asSpec(
 		_List_fromArray(
@@ -7222,8 +7224,8 @@ var author$project$GalleryLabel$label1 = function () {
 				'label',
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(1),
-						author$project$VegaLite$maBaseline(1),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle),
 						author$project$VegaLite$maDx(3)
 					]))));
 	return author$project$VegaLite$toVegaLite(
@@ -7832,8 +7834,6 @@ var author$project$GalleryLabel$label2 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignBottom = 2;
-var author$project$VegaLite$AlignTop = 0;
 var author$project$VegaLite$Nominal = 0;
 var author$project$VegaLite$Vertical = 1;
 var author$project$VegaLite$aggregate = F2(
@@ -8300,6 +8300,10 @@ var author$project$VegaLite$transform = function (transforms) {
 		11,
 		A2(elm$json$Json$Encode$list, assemble, transforms));
 };
+var author$project$VegaLite$AlignBottom = 2;
+var author$project$VegaLite$vaBottom = 2;
+var author$project$VegaLite$AlignTop = 0;
+var author$project$VegaLite$vaTop = 0;
 var author$project$VegaLite$Stroke = function (a) {
 	return {$: 5, a: a};
 };
@@ -8374,8 +8378,8 @@ var author$project$GalleryLabel$label3 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(1),
-						author$project$VegaLite$maBaseline(0),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaTop),
 						author$project$VegaLite$maDx(3),
 						author$project$VegaLite$maDy(1)
 					])),
@@ -8397,8 +8401,8 @@ var author$project$GalleryLabel$label3 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(1),
-						author$project$VegaLite$maBaseline(2),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaBottom),
 						author$project$VegaLite$maDx(3),
 						author$project$VegaLite$maDy(1)
 					])),
@@ -8501,7 +8505,6 @@ var author$project$GalleryLabel$label3 = function () {
 					[specLine, specTextMin, specTextMax]))
 			]));
 }();
-var author$project$VegaLite$AlignRight = 2;
 var author$project$VegaLite$AxLabelAngle = function (a) {
 	return {$: 8, a: a};
 };
@@ -8771,6 +8774,8 @@ var author$project$VegaLite$filter = function (f) {
 							]))));
 	}
 };
+var author$project$VegaLite$AlignRight = 2;
+var author$project$VegaLite$haRight = 2;
 var author$project$VegaLite$Number = function (a) {
 	return {$: 2, a: a};
 };
@@ -8895,7 +8900,7 @@ var author$project$GalleryLabel$label4 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(2),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haRight),
 						author$project$VegaLite$maDx(-2),
 						author$project$VegaLite$maDy(-4)
 					])),

@@ -370,7 +370,7 @@ layer6 =
                 << text [ tName "day", tMType Nominal ]
 
         spec7 =
-            asSpec [ textMark [ maAlign AlignCenter, maDy -105 ], enc7 [] ]
+            asSpec [ textMark [ maAlign haCenter, maDy -105 ], enc7 [] ]
     in
     toVegaLite
         [ description "A layered bar chart with floating bars representing weekly weather data"

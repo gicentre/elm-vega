@@ -314,7 +314,7 @@ bar12 =
             asSpec [ textMark [ maStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
 
         config =
-            configure << configuration (coNamedStyle "label" [ maAlign AlignLeft, maBaseline AlignMiddle, maDx 3 ])
+            configure << configuration (coNamedStyle "label" [ maAlign haLeft, maBaseline AlignMiddle, maDx 3 ])
     in
     toVegaLite [ des, data [], enc [], layer [ specBar, specText ], config [] ]
 

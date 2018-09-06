@@ -160,7 +160,7 @@ barChartTriplet =
         enc =
             encoding
                 << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-                << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+                << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
         spec =
             asSpec
@@ -180,8 +180,8 @@ splom =
     let
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
 
         spec =
             asSpec
@@ -254,8 +254,8 @@ dashboard2 =
 
         scatterEnc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
 
         scatterSpec =
             asSpec [ point [], scatterEnc [] ]
@@ -263,11 +263,11 @@ dashboard2 =
         barEnc =
             encoding
                 << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-                << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+                << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
         annotationEnc =
             encoding
-                << position Y [ pRepeat Row, pMType Quantitative, pAggregate opMean ]
+                << position Y [ pRepeat arRow, pMType Quantitative, pAggregate opMean ]
 
         layerSpec =
             asSpec
@@ -433,8 +433,8 @@ coordinatedScatter1 =
     let
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
                 << color
                     [ mSelectionCondition (selectionName "picked")
                         [ mName "Origin", mMType Nominal ]
@@ -467,8 +467,8 @@ coordinatedScatter2 =
     let
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
                 << color [ mName "Origin", mMType Nominal ]
 
         sel =
@@ -546,12 +546,12 @@ crossFilter =
 
         totalEnc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
                 << position Y [ pAggregate opCount, pMType Quantitative ]
 
         selectedEnc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
                 << position Y [ pAggregate opCount, pMType Quantitative ]
                 << color [ mStr "goldenrod" ]
     in

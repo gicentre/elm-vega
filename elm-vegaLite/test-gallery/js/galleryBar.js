@@ -6694,7 +6694,6 @@ var author$project$GalleryBar$bar11 = function () {
 				enc(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignLeft = 1;
 var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$asSpec = function (specs) {
 	return elm$json$Json$Encode$object(
@@ -8438,6 +8437,8 @@ var author$project$VegaLite$configure = function (configs) {
 		25,
 		elm$json$Json$Encode$object(configs));
 };
+var author$project$VegaLite$AlignLeft = 1;
+var author$project$VegaLite$haLeft = 1;
 var author$project$VegaLite$VLLayer = 14;
 var author$project$VegaLite$layer = function (specs) {
 	return _Utils_Tuple2(
@@ -8670,7 +8671,7 @@ var author$project$GalleryBar$bar12 = function () {
 				'label',
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(1),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
 						author$project$VegaLite$maBaseline(1),
 						author$project$VegaLite$maDx(3)
 					]))));

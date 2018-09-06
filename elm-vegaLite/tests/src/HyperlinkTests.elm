@@ -30,7 +30,7 @@ hyperlink1 =
                 << size [ mNum 16 ]
 
         symbolSpec =
-            asSpec [ circle [ maCursor CPointer ], encCircle [] ]
+            asSpec [ circle [ maCursor cuPointer ], encCircle [] ]
 
         labelSpec =
             asSpec [ textMark [], encLabel [] ]
@@ -51,7 +51,7 @@ hyperlink2 =
                 << position Y [ pName "Rotten_Tomatoes_Rating", pMType Quantitative ]
                 << hyperlink [ hStr "http://www.imdb.com" ]
     in
-    toVegaLite [ data, point [ maCursor CPointer ], enc [] ]
+    toVegaLite [ data, point [ maCursor cuPointer ], enc [] ]
 
 
 hyperlink3 : Spec
@@ -78,7 +78,7 @@ hyperlink3 =
                         [ hStr "https://www.rottentomatoes.com" ]
                     ]
     in
-    toVegaLite [ data, point [ maCursor CPointer ], enc [] ]
+    toVegaLite [ data, point [ maCursor cuPointer ], enc [] ]
 
 
 

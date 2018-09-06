@@ -7897,6 +7897,7 @@ var author$project$ConfigTests$singleVis = function (config) {
 			]));
 };
 var author$project$VegaLite$AFit = 1;
+var author$project$VegaLite$asFit = 1;
 var author$project$VegaLite$Autosize = function (a) {
 	return {$: 1, a: a};
 };
@@ -7919,7 +7920,7 @@ var author$project$ConfigTests$paddingCfg = author$project$ConfigTests$singleVis
 			author$project$VegaLite$configuration(
 				author$project$VegaLite$coAutosize(
 					_List_fromArray(
-						[1])))),
+						[author$project$VegaLite$asFit])))),
 		author$project$VegaLite$configuration(
 			author$project$VegaLite$coPadding(
 				A4(author$project$VegaLite$paEdges, 90, 60, 30, 0)))));

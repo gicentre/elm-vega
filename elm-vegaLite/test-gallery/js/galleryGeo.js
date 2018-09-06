@@ -6744,6 +6744,7 @@ var author$project$GalleryGeo$geo4 = function () {
 var author$project$VegaLite$GeoFeature = 4;
 var author$project$VegaLite$Independent = 1;
 var author$project$VegaLite$Row = 1;
+var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$ChColor = 4;
 var author$project$VegaLite$chColor = 4;
 var author$project$VegaLite$lookupAs = F4(
@@ -6909,7 +6910,7 @@ var author$project$GalleryGeo$geo5 = function () {
 		author$project$VegaLite$color(
 			_List_fromArray(
 				[
-					author$project$VegaLite$mRepeat(1),
+					author$project$VegaLite$mRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$mMType(2)
 				])));
 	var spec = author$project$VegaLite$asSpec(

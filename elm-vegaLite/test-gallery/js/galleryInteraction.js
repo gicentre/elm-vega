@@ -7491,7 +7491,6 @@ var author$project$GalleryInteraction$interaction7 = function () {
 					[spec1, spec2]))
 			]));
 }();
-var author$project$VegaLite$AlignLeft = 1;
 var author$project$VegaLite$Expr = function (a) {
 	return {$: 0, a: a};
 };
@@ -7500,6 +7499,8 @@ var author$project$VegaLite$FoDate = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$VegaLite$foDate = author$project$VegaLite$FoDate;
+var author$project$VegaLite$AlignLeft = 1;
+var author$project$VegaLite$haLeft = 1;
 var author$project$VegaLite$VLHeight = 4;
 var author$project$VegaLite$height = function (h) {
 	return _Utils_Tuple2(
@@ -7609,7 +7610,7 @@ var author$project$GalleryInteraction$interaction8 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(1),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haLeft),
 						author$project$VegaLite$maDx(5),
 						author$project$VegaLite$maDy(-5)
 					])),

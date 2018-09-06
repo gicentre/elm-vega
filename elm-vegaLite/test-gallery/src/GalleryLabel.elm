@@ -33,7 +33,7 @@ label1 =
             asSpec [ textMark [ maStyle [ "label" ] ], encoding (text [ tName "b", tMType Quantitative ] []) ]
 
         config =
-            configure << configuration (coNamedStyle "label" [ maAlign AlignLeft, maBaseline AlignMiddle, maDx 3 ])
+            configure << configuration (coNamedStyle "label" [ maAlign haLeft, maBaseline vaMiddle, maDx 3 ])
     in
     toVegaLite [ des, data [], enc [], layer [ specBar, specText ], config [] ]
 
@@ -123,7 +123,7 @@ label3 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMin =
-            asSpec [ transTextMin [], textMark [ maAlign AlignLeft, maBaseline AlignTop, maDx 3, maDy 1 ], encTextMin [] ]
+            asSpec [ transTextMin [], textMark [ maAlign haLeft, maBaseline vaTop, maDx 3, maDy 1 ], encTextMin [] ]
 
         transTextMax =
             transform
@@ -136,7 +136,7 @@ label3 =
                 << text [ tName "aggregated.year", tMType Nominal ]
 
         specTextMax =
-            asSpec [ transTextMax [], textMark [ maAlign AlignLeft, maBaseline AlignBottom, maDx 3, maDy 1 ], encTextMax [] ]
+            asSpec [ transTextMax [], textMark [ maAlign haLeft, maBaseline vaBottom, maDx 3, maDy 1 ], encTextMax [] ]
 
         config =
             configure << configuration (coView [ vicoStroke Nothing ])
@@ -202,7 +202,7 @@ label4 =
                 << position Y [ pName "ThresholdValue", pMType Quantitative ]
 
         specText =
-            asSpec [ textMark [ maAlign AlignRight, maDx -2, maDy -4 ], encText [] ]
+            asSpec [ textMark [ maAlign haRight, maDx -2, maDy -4 ], encText [] ]
 
         encText =
             encoding

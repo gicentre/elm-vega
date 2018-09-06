@@ -9406,7 +9406,6 @@ var author$project$GalleryLayer$layer5 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignCenter = 0;
 var author$project$VegaLite$STop = 0;
 var author$project$VegaLite$AxLabels = function (a) {
 	return {$: 21, a: a};
@@ -9420,6 +9419,8 @@ var author$project$VegaLite$AxTitlePadding = function (a) {
 	return {$: 47, a: a};
 };
 var author$project$VegaLite$axTitlePadding = author$project$VegaLite$AxTitlePadding;
+var author$project$VegaLite$AlignCenter = 0;
+var author$project$VegaLite$haCenter = 0;
 var author$project$VegaLite$MAlign = function (a) {
 	return {$: 0, a: a};
 };
@@ -9606,7 +9607,7 @@ var author$project$GalleryLayer$layer6 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maAlign(0),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haCenter),
 						author$project$VegaLite$maDy(-105)
 					])),
 				enc7(_List_Nil)

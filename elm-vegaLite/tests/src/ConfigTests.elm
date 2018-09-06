@@ -99,7 +99,7 @@ markCfg2 =
 paddingCfg : Spec
 paddingCfg =
     configure
-        << configuration (coAutosize [ AFit ])
+        << configuration (coAutosize [ asFit ])
         << configuration (coPadding (paEdges 90 60 30 0))
         |> singleVis
 

@@ -8586,7 +8586,6 @@ var author$project$GalleryArea$area6 = function () {
 				config(_List_Nil)
 			]));
 }();
-var author$project$VegaLite$AlignCenter = 0;
 var author$project$VegaLite$AlignMiddle = 1;
 var author$project$VegaLite$STop = 0;
 var author$project$VegaLite$Shared = 0;
@@ -8632,6 +8631,8 @@ var author$project$VegaLite$View = function (a) {
 	return {$: 38, a: a};
 };
 var author$project$VegaLite$coView = author$project$VegaLite$View;
+var author$project$VegaLite$AlignCenter = 0;
+var author$project$VegaLite$haCenter = 0;
 var author$project$VegaLite$MLegend = function (a) {
 	return {$: 10, a: a};
 };
@@ -9004,6 +9005,7 @@ var author$project$VegaLite$vConcat = function (specs) {
 		16,
 		author$project$VegaLite$toList(specs));
 };
+var author$project$VegaLite$vaMiddle = 1;
 var author$project$VegaLite$Stroke = function (a) {
 	return {$: 5, a: a};
 };
@@ -9515,8 +9517,8 @@ var author$project$GalleryArea$area7 = function () {
 				author$project$VegaLite$textMark(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maBaseline(1),
-						author$project$VegaLite$maAlign(0)
+						author$project$VegaLite$maBaseline(author$project$VegaLite$vaMiddle),
+						author$project$VegaLite$maAlign(author$project$VegaLite$haCenter)
 					])),
 				enc1(_List_Nil)
 			]));

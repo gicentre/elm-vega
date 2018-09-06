@@ -4289,8 +4289,9 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$ProjectionTests$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$AFit = 1;
 var author$project$VegaLite$W600 = 9;
+var author$project$VegaLite$AFit = 1;
+var author$project$VegaLite$asFit = 1;
 var author$project$VegaLite$vlPropertyLabel = function (spec) {
 	switch (spec) {
 		case 0:
@@ -8915,7 +8916,7 @@ var author$project$ProjectionTests$configExample = function () {
 			author$project$VegaLite$configuration(
 				author$project$VegaLite$coAutosize(
 					_List_fromArray(
-						[1])))),
+						[author$project$VegaLite$asFit])))),
 		author$project$VegaLite$configuration(
 			author$project$VegaLite$coProjection(
 				_List_fromArray(

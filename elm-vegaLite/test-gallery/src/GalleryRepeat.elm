@@ -19,7 +19,7 @@ repeat1 =
         enc1 =
             encoding
                 << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-                << position Y [ pRepeat Column, pMType Quantitative, pAggregate opMean ]
+                << position Y [ pRepeat arColumn, pMType Quantitative, pAggregate opMean ]
                 << detail [ dName "date", dMType Temporal, dTimeUnit year ]
                 << color [ mName "location", mMType Nominal ]
                 << opacity [ mNum 0.2 ]
@@ -30,7 +30,7 @@ repeat1 =
         enc2 =
             encoding
                 << position X [ pName "date", pMType Ordinal, pTimeUnit month ]
-                << position Y [ pRepeat Column, pMType Quantitative, pAggregate opMean ]
+                << position Y [ pRepeat arColumn, pMType Quantitative, pAggregate opMean ]
                 << color [ mName "location", mMType Nominal ]
 
         spec2 =
@@ -90,7 +90,7 @@ repeat3 =
 
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative, pBin [] ]
+                << position X [ pRepeat arColumn, pMType Quantitative, pBin [] ]
                 << position Y [ pMType Quantitative, pAggregate opCount ]
                 << color [ mName "Origin", mMType Nominal ]
 
@@ -133,8 +133,8 @@ repeat4 =
 
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
                 << color
                     [ mSelectionCondition (selectionName "myBrush")
                         [ mName "Origin", mMType Nominal ]
@@ -189,7 +189,7 @@ repeat5 =
             asSpec [ height 60, bar [], enc1 [] ]
 
         spec2 =
-            asSpec [ spacing 15, bounds Flush, hConcat [ spec2_1, spec2_2 ] ]
+            asSpec [ spacing 15, bounds boFlush, hConcat [ spec2_1, spec2_2 ] ]
 
         enc2_1 =
             encoding
@@ -221,7 +221,7 @@ repeat5 =
     toVegaLite
         [ des
         , spacing 15
-        , bounds Flush
+        , bounds boFlush
         , config []
         , dataFromUrl "https://vega.github.io/vega-lite/data/movies.json" []
         , vConcat [ spec1, spec2 ]

@@ -207,7 +207,7 @@ area7 =
                 << text [ tName "Origin", tMType Nominal ]
 
         spec1 =
-            asSpec [ textMark [ maBaseline AlignMiddle, maAlign AlignCenter ], enc1 [] ]
+            asSpec [ textMark [ maBaseline vaMiddle, maAlign haCenter ], enc1 [] ]
 
         enc2 =
             encoding

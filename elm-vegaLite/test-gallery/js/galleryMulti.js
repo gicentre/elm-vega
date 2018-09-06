@@ -5592,6 +5592,7 @@ var author$project$GalleryMulti$multi1 = function () {
 			]));
 }();
 var author$project$VegaLite$Column = 0;
+var author$project$VegaLite$arColumn = 0;
 var author$project$VegaLite$Bar = 1;
 var author$project$VegaLite$bar = author$project$VegaLite$mark(1);
 var author$project$VegaLite$MaxBins = function (a) {
@@ -6835,7 +6836,7 @@ var author$project$GalleryMulti$multi2 = function () {
 				0,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(0),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 						author$project$VegaLite$pMType(2),
 						author$project$VegaLite$pBin(
 						_List_fromArray(
@@ -6890,8 +6891,9 @@ var author$project$GalleryMulti$multi2 = function () {
 }();
 var author$project$VegaLite$Global = 0;
 var author$project$VegaLite$Nominal = 0;
-var author$project$VegaLite$Row = 1;
 var author$project$VegaLite$Union = 1;
+var author$project$VegaLite$Row = 1;
+var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$MmType = function (a) {
 	return {$: 2, a: a};
 };
@@ -6973,7 +6975,7 @@ var author$project$GalleryMulti$multi3 = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2)
 						]))),
 			A2(
@@ -6981,7 +6983,7 @@ var author$project$GalleryMulti$multi3 = function () {
 				1,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(1),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 						author$project$VegaLite$pMType(2)
 					]))),
 		author$project$VegaLite$color(

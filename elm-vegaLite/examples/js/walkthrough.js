@@ -5171,6 +5171,7 @@ var author$project$Walkthrough$barChartPair = function () {
 			]));
 }();
 var author$project$VegaLite$Row = 1;
+var author$project$VegaLite$arRow = 1;
 var author$project$VegaLite$PRepeat = function (a) {
 	return {$: 3, a: a};
 };
@@ -5223,7 +5224,7 @@ var author$project$Walkthrough$barChartTriplet = function () {
 			1,
 			_List_fromArray(
 				[
-					author$project$VegaLite$pRepeat(1),
+					author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$pMType(2),
 					author$project$VegaLite$pAggregate(author$project$VegaLite$opMean)
 				])));
@@ -5834,8 +5835,9 @@ var author$project$Walkthrough$contextAndFocus = function () {
 					[specContext, specDetail]))
 			]));
 }();
-var author$project$VegaLite$Column = 0;
 var author$project$VegaLite$Nominal = 0;
+var author$project$VegaLite$Column = 0;
+var author$project$VegaLite$arColumn = 0;
 var author$project$VegaLite$Circle = 5;
 var author$project$VegaLite$circle = author$project$VegaLite$mark(5);
 var author$project$VegaLite$booleanOpSpec = function (bo) {
@@ -6411,7 +6413,7 @@ var author$project$Walkthrough$coordinatedScatter1 = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2)
 						]))),
 			A2(
@@ -6419,7 +6421,7 @@ var author$project$Walkthrough$coordinatedScatter1 = function () {
 				1,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(1),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 						author$project$VegaLite$pMType(2)
 					]))),
 		author$project$VegaLite$color(
@@ -6486,7 +6488,7 @@ var author$project$Walkthrough$coordinatedScatter2 = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2)
 						]))),
 			A2(
@@ -6494,7 +6496,7 @@ var author$project$Walkthrough$coordinatedScatter2 = function () {
 				1,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(1),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 						author$project$VegaLite$pMType(2)
 					]))),
 		author$project$VegaLite$color(
@@ -7150,7 +7152,7 @@ var author$project$Walkthrough$crossFilter = function () {
 				0,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(0),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 						author$project$VegaLite$pMType(2)
 					]))),
 		A2(
@@ -7173,7 +7175,7 @@ var author$project$Walkthrough$crossFilter = function () {
 					0,
 					_List_fromArray(
 						[
-							author$project$VegaLite$pRepeat(0),
+							author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 							author$project$VegaLite$pMType(2)
 						]))),
 			A2(
@@ -7625,7 +7627,7 @@ var author$project$Walkthrough$dashboard2 = function () {
 				0,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(0),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 						author$project$VegaLite$pMType(2)
 					]))),
 		A2(
@@ -7633,7 +7635,7 @@ var author$project$Walkthrough$dashboard2 = function () {
 			1,
 			_List_fromArray(
 				[
-					author$project$VegaLite$pRepeat(1),
+					author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$pMType(2)
 				])));
 	var scatterSpec = author$project$VegaLite$asSpec(
@@ -7722,7 +7724,7 @@ var author$project$Walkthrough$dashboard2 = function () {
 			1,
 			_List_fromArray(
 				[
-					author$project$VegaLite$pRepeat(1),
+					author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$pMType(2),
 					author$project$VegaLite$pAggregate(author$project$VegaLite$opMean)
 				])));
@@ -7734,7 +7736,7 @@ var author$project$Walkthrough$dashboard2 = function () {
 			1,
 			_List_fromArray(
 				[
-					author$project$VegaLite$pRepeat(1),
+					author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$pMType(2),
 					author$project$VegaLite$pAggregate(author$project$VegaLite$opMean)
 				])));
@@ -8196,7 +8198,7 @@ var author$project$Walkthrough$splom = function () {
 				0,
 				_List_fromArray(
 					[
-						author$project$VegaLite$pRepeat(0),
+						author$project$VegaLite$pRepeat(author$project$VegaLite$arColumn),
 						author$project$VegaLite$pMType(2)
 					]))),
 		A2(
@@ -8204,7 +8206,7 @@ var author$project$Walkthrough$splom = function () {
 			1,
 			_List_fromArray(
 				[
-					author$project$VegaLite$pRepeat(1),
+					author$project$VegaLite$pRepeat(author$project$VegaLite$arRow),
 					author$project$VegaLite$pMType(2)
 				])));
 	var spec = author$project$VegaLite$asSpec(

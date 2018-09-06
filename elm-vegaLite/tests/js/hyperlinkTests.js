@@ -4289,7 +4289,6 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$HyperlinkTests$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$VegaLite$CPointer = 5;
 var author$project$VegaLite$Nominal = 0;
 var author$project$VegaLite$X = 0;
 var author$project$VegaLite$vlPropertyLabel = function (spec) {
@@ -6803,6 +6802,8 @@ var author$project$VegaLite$color = function (markProps) {
 			elm$json$Json$Encode$object(
 				A2(elm$core$List$concatMap, author$project$VegaLite$markChannelProperty, markProps))));
 };
+var author$project$VegaLite$CPointer = 5;
+var author$project$VegaLite$cuPointer = 5;
 var author$project$VegaLite$dataColumn = F2(
 	function (colName, data) {
 		switch (data.$) {
@@ -8059,7 +8060,7 @@ var author$project$HyperlinkTests$hyperlink1 = function () {
 				author$project$VegaLite$circle(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maCursor(5)
+						author$project$VegaLite$maCursor(author$project$VegaLite$cuPointer)
 					])),
 				encCircle(_List_Nil)
 			]));
@@ -8157,7 +8158,7 @@ var author$project$HyperlinkTests$hyperlink2 = function () {
 				author$project$VegaLite$point(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maCursor(5)
+						author$project$VegaLite$maCursor(author$project$VegaLite$cuPointer)
 					])),
 				enc(_List_Nil)
 			]));
@@ -8247,7 +8248,7 @@ var author$project$HyperlinkTests$hyperlink3 = function () {
 				author$project$VegaLite$point(
 				_List_fromArray(
 					[
-						author$project$VegaLite$maCursor(5)
+						author$project$VegaLite$maCursor(author$project$VegaLite$cuPointer)
 					])),
 				enc(_List_Nil)
 			]));

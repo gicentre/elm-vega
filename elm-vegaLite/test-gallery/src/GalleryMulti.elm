@@ -71,7 +71,7 @@ multi2 =
         encPosition =
             encoding
                 << position X
-                    [ pRepeat Column
+                    [ pRepeat arColumn
                     , pMType Quantitative
                     , pBin [ biMaxBins 20 ]
                     ]
@@ -123,8 +123,8 @@ multi3 =
 
         enc =
             encoding
-                << position X [ pRepeat Column, pMType Quantitative ]
-                << position Y [ pRepeat Row, pMType Quantitative ]
+                << position X [ pRepeat arColumn, pMType Quantitative ]
+                << position Y [ pRepeat arRow, pMType Quantitative ]
                 << color
                     [ mSelectionCondition (selectionName "myBrush")
                         [ mName "Origin", mMType Nominal ]

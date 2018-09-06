@@ -146,7 +146,7 @@ geo5 =
         enc =
             encoding
                 << shape [ mName "geo", mMType GeoFeature ]
-                << color [ mRepeat Row, mMType Quantitative ]
+                << color [ mRepeat arRow, mMType Quantitative ]
 
         spec =
             asSpec
