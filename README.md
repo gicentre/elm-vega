@@ -98,8 +98,13 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach mor
 ## Further Reading
 
 -   If you have not done so already, to get familiar with the approach of declarative visualization you may find it helpful to look first at the simpler [elm-vegaLite](https://github.com/gicentre/elm-vegaLite).
--   Then try [creating your first Vega visualization with elm-vega](https://github.com/gicentre/elm-vega/tree/master/docs/vega/helloWorld) and [specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/vega/barChart).
--   For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/vTest-gallery).
+-   Then try [creating your first Vega visualization with elm-vega](https://github.com/gicentre/elm-vega/tree/master/docs/helloWorld) and [specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/barChart).
+-   For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/test-gallery).
 -   To get coding, see the [elm-vega API]() documentation.
--   Further examples can be found in the [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/vExamples) folders.
+-   Further examples can be found in the [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/examples) and [elm-vega tests](https://github.com/gicentre/elm-vega/tree/master/tests) folders.
 -   You can also work with elm-vega in a [litvis](https://github.com/gicentre/litvis) – a _literate visualization_ environment for embedding visualization specifications in a formatted text environment.
+
+## Looking for an older version?
+
+If you are using Elm 0.18, you will need to use [elm-vega 3.0](https://github.com/gicentre/elm-vega/tree/v3.0) and its [API documentation](https://package.elm-lang.org/packages/gicentre/elm-vega/3.0.1).
+This older version combines modules for working with both Vega and Vega-Lite.
