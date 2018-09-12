@@ -1297,7 +1297,6 @@ See the
 [Vega type comparison](https://vega.github.io/vega/docs/types/#Compare) documentation.
 
 @docs daSort
-@docs sortPropertySignal
 @docs soAscending
 @docs soDescending
 @docs soOp
@@ -2021,7 +2020,6 @@ The extent scaling input data.
 The extent of scaled values after transformation.
 
 @docs scRange
-@docs srSignal
 @docs raWidth
 @docs raHeight
 @docs raSymbol
