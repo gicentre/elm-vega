@@ -1,10 +1,12 @@
 # elm-vega
 
-<h1><img srcset="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg, https://raw.githubusercontent.com/gicentre/elm-vega/master/images/bannerFull.jpg 2x" src="https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg" alt="elm-vega" style="max-width: 100%;" /></h1>
+![elm-vega banner](https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg)
+
+[![elm version](https://img.shields.io/badge/elm-v0.19-blue.svg?style=flat-square)](http://elm-lang.org)
 
 _Declarative visualization for Elm_
 
-This package allows you to create Vega specifications in Elm providing a pure functional approach to declarative visualization.
+This package allows you to create [Vega](https://vega.github.io/vega/) specifications in Elm providing a pure functional approach to declarative visualization.
 It does not generate graphical output directly, but instead allows you to create JSON _specifications_ that can be sent to the Vega runtime to create the output.
 
 _Note: If you are wishing to create Vega-Lite specifications, use the sister-package [elm-vegaLite](https://github.com/gicentre/elm-vegaLite)._
@@ -70,7 +72,7 @@ This generates a JSON specification that when sent to the Vega runtime produces 
 
 There is a [demand for good visualization packages with Elm](https://package.elm-lang.org/packages/elm/svg/latest), especially ones that incorporate good practice in visualization design.
 [Vega](https://vega.github.io/vega/) provides a theoretically robust and flexible grammar for specifying visualization design but is based on the JSON format.
-elm-vega provides a typed functional mapping of Vega, so affording the advntages of the Elm language in building up higher level visualization functions.
+elm-vega provides a typed functional mapping of Vega, so affording the advantages of the Elm language in building up higher level visualization functions.
 Because Vega is widely used, you can take advantage of the many thousands of visualizations already shared in the Vega language.
 
 **Characteristics of elm-vega**
@@ -100,7 +102,7 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach mor
 -   If you have not done so already, to get familiar with the approach of declarative visualization you may find it helpful to look first at the simpler [elm-vegaLite](https://github.com/gicentre/elm-vegaLite).
 -   Then try [creating your first Vega visualization with elm-vega](https://github.com/gicentre/elm-vega/tree/master/docs/helloWorld) and [specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/barChart).
 -   For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/test-gallery).
--   To get coding, see the [elm-vega API]() documentation.
+-   To get coding, see the [elm-vega API](https://package.elm-lang.org/packages/gicentre/elm-vega/latest) documentation.
 -   Further examples can be found in the [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/examples) and [elm-vega tests](https://github.com/gicentre/elm-vega/tree/master/tests) folders.
 -   You can also work with elm-vega in a [litvis](https://github.com/gicentre/litvis) – a _literate visualization_ environment for embedding visualization specifications in a formatted text environment.
 

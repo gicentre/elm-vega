@@ -1,6 +1,3 @@
-elm-vegaLite/examples/js/*.js linguist-generated=true
-elm-vegaLite/tests/js/*.js linguist-generated=true
-elm-vegaLite/test-gallery/js/*.js linguist-generated=true
-elm-vega/examples/js/*.js linguist-generated=true
-elm-vega/tests/js/*.js linguist-generated=true
-elm-vega/test-gallery/js/*.js linguist-generated=true
+examples/js/*.js linguist-generated=true
+tests/js/*.js linguist-generated=true
+test-gallery/js/*.js linguist-generated=true
