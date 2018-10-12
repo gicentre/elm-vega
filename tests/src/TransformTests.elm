@@ -383,6 +383,72 @@ nestTest1 =
         [ width 300, height 100, padding 5, ds, si [], sc [], mk [] ]
 
 
+treeTest1 : Spec
+treeTest1 =
+    let
+        table =
+            dataFromColumns "tree" []
+                << dataColumn "id" (vStrs [ "A", "B", "C", "D", "E" ])
+                << dataColumn "parent" (vStrs [ "", "A", "A", "C", "C" ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ trStratify (field "id") (field "parent")
+                        , trTree
+                            [ teMethod (meSignal "method")
+                            , teSeparation (booSignal "separation")
+                            , teSize (numSignals [ "width", "height" ])
+                            ]
+                        ]
+                , data "links" [ daSource "tree" ]
+                    |> transform [ trTreeLinks, trLinkPath [] ]
+                ]
+
+        si =
+            signals
+                << signal "method"
+                    [ siValue (vStr "tidy")
+                    , siBind (iSelect [ inOptions (vStrs [ "tidy", "cluster" ]) ])
+                    ]
+                << signal "separation" [ siValue vTrue, siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange (raScheme (str "category20") [])
+                    ]
+
+        mk =
+            marks
+                << mark path
+                    [ mFrom [ srData (str "links") ]
+                    , mEncode
+                        [ enEnter [ maStroke [ vStr "#ccc" ] ]
+                        , enUpdate [ maPath [ vField (field "path") ] ]
+                        ]
+                    ]
+                << mark symbol
+                    [ mFrom [ srData (str "tree") ]
+                    , mEncode
+                        [ enEnter
+                            [ maFill [ vScale "cScale", vField (field "id") ]
+                            , maStroke [ white ]
+                            , maSize [ vNum 400 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vField (field "x") ]
+                            , maY [ vField (field "y") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 200, height 100, padding 5, ds, si [], sc [], mk [] ]
+
+
 pr : List Spec -> ( VProperty, Spec )
 pr =
     projections
@@ -581,7 +647,7 @@ voronoiTest2 =
 
 sourceExample : Spec
 sourceExample =
-    voronoiTest2
+    treeTest1
 
 
 
@@ -595,6 +661,7 @@ mySpecs =
         , ( "stackTest1", stackTest1 )
         , ( "forceTest1", forceTest1 )
         , ( "nestTest1", nestTest1 )
+        , ( "treeTest1", treeTest1 )
         , ( "voronoiTest1", voronoiTest1 )
         , ( "voronoiTest2", voronoiTest2 )
         ]

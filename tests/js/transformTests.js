@@ -7695,10 +7695,15 @@ var author$project$Vega$treeProperty = function (tp) {
 			return _Utils_Tuple2(
 				'method',
 				author$project$Vega$teMethodSpec(m));
-		case 3:
+		case 4:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'size', n);
-		case 4:
+		case 3:
+			var b = tp.a;
+			return _Utils_Tuple2(
+				'separation',
+				author$project$Vega$booSpec(b));
+		case 5:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'nodeSize', n);
 		default:
@@ -10910,7 +10915,7 @@ var author$project$Vega$TeMethod = function (a) {
 };
 var author$project$Vega$teMethod = author$project$Vega$TeMethod;
 var author$project$Vega$TeSize = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var author$project$Vega$teSize = author$project$Vega$TeSize;
 var author$project$Vega$Text = 10;
@@ -11819,6 +11824,221 @@ var author$project$TransformTests$stackTest1 = function () {
 				author$project$Vega$autosize(
 				_List_fromArray(
 					[author$project$Vega$asNone])),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
+var author$project$Vega$TreeMethodSignal = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$meSignal = author$project$Vega$TreeMethodSignal;
+var author$project$Vega$TeSeparation = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$teSeparation = author$project$Vega$TeSeparation;
+var author$project$TransformTests$treeTest1 = function () {
+	var table = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(author$project$Vega$dataFromColumns, 'tree', _List_Nil),
+			A2(
+				author$project$Vega$dataColumn,
+				'id',
+				author$project$Vega$vStrs(
+					_List_fromArray(
+						['A', 'B', 'C', 'D', 'E'])))),
+		A2(
+			author$project$Vega$dataColumn,
+			'parent',
+			author$project$Vega$vStrs(
+				_List_fromArray(
+					['', 'A', 'A', 'C', 'C']))));
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$signals,
+			A2(
+				author$project$Vega$signal,
+				'method',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$vStr('tidy')),
+						author$project$Vega$siBind(
+						author$project$Vega$iSelect(
+							_List_fromArray(
+								[
+									author$project$Vega$inOptions(
+									author$project$Vega$vStrs(
+										_List_fromArray(
+											['tidy', 'cluster'])))
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'separation',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(author$project$Vega$vTrue),
+					author$project$Vega$siBind(
+					author$project$Vega$iCheckbox(_List_Nil))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$scales,
+		A2(
+			author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scType(author$project$Vega$scOrdinal),
+					author$project$Vega$scRange(
+					A2(
+						author$project$Vega$raScheme,
+						author$project$Vega$str('category20'),
+						_List_Nil))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$path,
+				_List_fromArray(
+					[
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('links'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												author$project$Vega$vStr('#ccc')
+											]))
+									])),
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maPath(
+										_List_fromArray(
+											[
+												author$project$Vega$vField(
+												author$project$Vega$field('path'))
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$symbol,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('tree'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('cScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('id'))
+										])),
+									author$project$Vega$maStroke(
+									_List_fromArray(
+										[author$project$Vega$white])),
+									author$project$Vega$maSize(
+									_List_fromArray(
+										[
+											author$project$Vega$vNum(400)
+										]))
+								])),
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vField(
+											author$project$Vega$field('x'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vField(
+											author$project$Vega$field('y'))
+										]))
+								]))
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						author$project$Vega$trStratify,
+						author$project$Vega$field('id'),
+						author$project$Vega$field('parent')),
+						author$project$Vega$trTree(
+						_List_fromArray(
+							[
+								author$project$Vega$teMethod(
+								author$project$Vega$meSignal('method')),
+								author$project$Vega$teSeparation(
+								author$project$Vega$booSignal('separation')),
+								author$project$Vega$teSize(
+								author$project$Vega$numSignals(
+									_List_fromArray(
+										['width', 'height'])))
+							]))
+					]),
+				table(_List_Nil)),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						author$project$Vega$trTreeLinks,
+						author$project$Vega$trLinkPath(_List_Nil)
+					]),
+				A2(
+					author$project$Vega$data,
+					'links',
+					_List_fromArray(
+						[
+							author$project$Vega$daSource('tree')
+						])))
+			]));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(200),
+				author$project$Vega$height(100),
+				author$project$Vega$padding(5),
 				ds,
 				si(_List_Nil),
 				sc(_List_Nil),
@@ -12861,10 +13081,11 @@ var author$project$TransformTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('stackTest1', author$project$TransformTests$stackTest1),
 			_Utils_Tuple2('forceTest1', author$project$TransformTests$forceTest1),
 			_Utils_Tuple2('nestTest1', author$project$TransformTests$nestTest1),
+			_Utils_Tuple2('treeTest1', author$project$TransformTests$treeTest1),
 			_Utils_Tuple2('voronoiTest1', author$project$TransformTests$voronoiTest1),
 			_Utils_Tuple2('voronoiTest2', author$project$TransformTests$voronoiTest2)
 		]));
-var author$project$TransformTests$sourceExample = author$project$TransformTests$voronoiTest2;
+var author$project$TransformTests$sourceExample = author$project$TransformTests$treeTest1;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;

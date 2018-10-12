@@ -7461,10 +7461,15 @@ var author$project$Vega$treeProperty = function (tp) {
 			return _Utils_Tuple2(
 				'method',
 				author$project$Vega$teMethodSpec(m));
-		case 3:
+		case 4:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'size', n);
-		case 4:
+		case 3:
+			var b = tp.a;
+			return _Utils_Tuple2(
+				'separation',
+				author$project$Vega$booSpec(b));
+		case 5:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'nodeSize', n);
 		default:
@@ -11175,7 +11180,7 @@ var author$project$Vega$Strs = function (a) {
 var author$project$Vega$strs = author$project$Vega$Strs;
 var author$project$Vega$TeAs = F4(
 	function (a, b, c, d) {
-		return {$: 5, a: a, b: b, c: c, d: d};
+		return {$: 6, a: a, b: b, c: c, d: d};
 	});
 var author$project$Vega$teAs = author$project$Vega$TeAs;
 var author$project$Vega$TeMethod = function (a) {
@@ -11183,7 +11188,7 @@ var author$project$Vega$TeMethod = function (a) {
 };
 var author$project$Vega$teMethod = author$project$Vega$TeMethod;
 var author$project$Vega$TeSize = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var author$project$Vega$teSize = author$project$Vega$TeSize;
 var author$project$Vega$TFilter = function (a) {

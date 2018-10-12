@@ -7986,10 +7986,15 @@ var author$project$Vega$treeProperty = function (tp) {
 			return _Utils_Tuple2(
 				'method',
 				author$project$Vega$teMethodSpec(m));
-		case 3:
+		case 4:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'size', n);
-		case 4:
+		case 3:
+			var b = tp.a;
+			return _Utils_Tuple2(
+				'separation',
+				author$project$Vega$booSpec(b));
+		case 5:
 			var n = tp.a;
 			return A3(author$project$Vega$numArrayProperty, 2, 'nodeSize', n);
 		default:
