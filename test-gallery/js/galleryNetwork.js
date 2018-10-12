@@ -7209,6 +7209,17 @@ var author$project$Vega$linkPathProperty = function (lpProp) {
 			return _Utils_Tuple2(
 				'shape',
 				author$project$Vega$linkShapeSpec(ls));
+		case 6:
+			var sig = lpProp.a;
+			return _Utils_Tuple2(
+				'require',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'signal',
+							elm$json$Json$Encode$string(sig))
+						])));
 		default:
 			var s = lpProp.a;
 			return _Utils_Tuple2(
