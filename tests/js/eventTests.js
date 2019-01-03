@@ -8665,11 +8665,11 @@ var author$project$Vega$padding = function (p) {
 var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
 var author$project$Vega$SiOn = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var author$project$Vega$siOn = author$project$Vega$SiOn;
 var author$project$Vega$SiValue = function (a) {
-	return {$: 6, a: a};
+	return {$: 7, a: a};
 };
 var author$project$Vega$siValue = author$project$Vega$SiValue;
 var author$project$Vega$SiName = function (a) {
@@ -8986,22 +8986,27 @@ var author$project$Vega$signalProperty = function (sigProp) {
 			return _Utils_Tuple2(
 				'description',
 				elm$json$Json$Encode$string(s));
-		case 4:
+		case 3:
+			var ex = sigProp.a;
+			return _Utils_Tuple2(
+				'init',
+				author$project$Vega$expressionSpec(ex));
+		case 5:
 			var ex = sigProp.a;
 			return _Utils_Tuple2(
 				'update',
 				author$project$Vega$expressionSpec(ex));
-		case 3:
+		case 4:
 			var ehs = sigProp.a;
 			return _Utils_Tuple2(
 				'on',
 				A2(elm$json$Json$Encode$list, author$project$Vega$eventHandlerSpec, ehs));
-		case 5:
+		case 6:
 			var b = sigProp.a;
 			return _Utils_Tuple2(
 				'react',
 				author$project$Vega$booSpec(b));
-		case 6:
+		case 7:
 			var v = sigProp.a;
 			return _Utils_Tuple2(
 				'value',

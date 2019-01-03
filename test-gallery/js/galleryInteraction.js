@@ -9981,15 +9981,15 @@ var author$project$Vega$siBind = author$project$Vega$SiBind;
 var author$project$Vega$SBottom = {$: 3};
 var author$project$Vega$siBottom = author$project$Vega$SBottom;
 var author$project$Vega$SiOn = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var author$project$Vega$siOn = author$project$Vega$SiOn;
 var author$project$Vega$SiUpdate = function (a) {
-	return {$: 4, a: a};
+	return {$: 5, a: a};
 };
 var author$project$Vega$siUpdate = author$project$Vega$SiUpdate;
 var author$project$Vega$SiValue = function (a) {
-	return {$: 6, a: a};
+	return {$: 7, a: a};
 };
 var author$project$Vega$siValue = author$project$Vega$SiValue;
 var author$project$Vega$SiName = function (a) {
@@ -10306,22 +10306,27 @@ var author$project$Vega$signalProperty = function (sigProp) {
 			return _Utils_Tuple2(
 				'description',
 				elm$json$Json$Encode$string(s));
-		case 4:
+		case 3:
+			var ex = sigProp.a;
+			return _Utils_Tuple2(
+				'init',
+				author$project$Vega$expressionSpec(ex));
+		case 5:
 			var ex = sigProp.a;
 			return _Utils_Tuple2(
 				'update',
 				author$project$Vega$expressionSpec(ex));
-		case 3:
+		case 4:
 			var ehs = sigProp.a;
 			return _Utils_Tuple2(
 				'on',
 				A2(elm$json$Json$Encode$list, author$project$Vega$eventHandlerSpec, ehs));
-		case 5:
+		case 6:
 			var b = sigProp.a;
 			return _Utils_Tuple2(
 				'react',
 				author$project$Vega$booSpec(b));
-		case 6:
+		case 7:
 			var v = sigProp.a;
 			return _Utils_Tuple2(
 				'value',
@@ -11251,7 +11256,7 @@ var author$project$Vega$SZero = function (a) {
 var author$project$Vega$scZero = author$project$Vega$SZero;
 var author$project$Vega$SLeft = {$: 0};
 var author$project$Vega$siLeft = author$project$Vega$SLeft;
-var author$project$Vega$SiPushOuter = {$: 7};
+var author$project$Vega$SiPushOuter = {$: 8};
 var author$project$Vega$siPushOuter = author$project$Vega$SiPushOuter;
 var author$project$Vega$VNull = {$: 18};
 var author$project$Vega$vNull = author$project$Vega$VNull;
@@ -13960,7 +13965,7 @@ var author$project$Vega$RaSignal = function (a) {
 };
 var author$project$Vega$raSignal = author$project$Vega$RaSignal;
 var author$project$Vega$SiReact = function (a) {
-	return {$: 5, a: a};
+	return {$: 6, a: a};
 };
 var author$project$Vega$siReact = author$project$Vega$SiReact;
 var author$project$Vega$SRight = {$: 1};

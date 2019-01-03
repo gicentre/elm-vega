@@ -2,14 +2,15 @@
 
 ![elm-vega banner](https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg)
 
-[![elm version](https://img.shields.io/badge/elm-v0.19-blue.svg?style=flat-square)](http://elm-lang.org)
+[![elm version](https://img.shields.io/badge/Elm-v0.19-blue.svg?style=flat-square)](https://elm-lang.org)
+[![vega version](https://img.shields.io/badge/Vega-v4.4-purple.svg?style=flat-square)](https://vega.github.io/vega/)
 
 _Declarative visualization for Elm_
 
 This package allows you to create [Vega](https://vega.github.io/vega/) specifications in Elm providing a pure functional approach to declarative visualization.
 It does not generate graphical output directly, but instead allows you to create JSON _specifications_ that can be sent to the Vega runtime to create the output.
 
-_Note: If you are wishing to create Vega-Lite specifications, use the sister-package [elm-vegaLite](https://github.com/gicentre/elm-vegaLite)._
+_Note: If you wish to create Vega-Lite specifications, use the sister-package [elm-vegaLite](https://github.com/gicentre/elm-vegaLite)._
 
 ## Example
 
@@ -77,11 +78,11 @@ Because Vega is widely used, you can take advantage of the many thousands of vis
 
 **Characteristics of elm-vega**
 
--   Built upon the widely used [Vega](https://vega.github.io/vega/) specification that has an academic robustness and momentum behind its development.
+- Built upon the widely used [Vega](https://vega.github.io/vega/) specification that has an academic robustness and momentum behind its development.
 
--   Full access to lower level expressive visualization design.
+- Full access to lower level expressive visualization design.
 
--   Strict typing and friendly error messages means "the compiler is your friend" when building and debugging complex visualizations.
+- Strict typing and friendly error messages means "the compiler is your friend" when building and debugging complex visualizations.
 
 ### A rationale for data visualisers
 
@@ -95,16 +96,16 @@ Elm and elm-vega provide an ideal environment for educators wishing to teach mor
 
 ## Limitations
 
--   elm-vega does not render graphics directly, but instead generates data visualization specifications that may be passed to JavaScript for rendering.
+- elm-vega does not render graphics directly, but instead generates data visualization specifications that may be passed to JavaScript for rendering.
 
 ## Further Reading
 
--   If you have not done so already, to get familiar with the approach of declarative visualization you may find it helpful to look first at the simpler [elm-vegaLite](https://github.com/gicentre/elm-vegaLite).
--   Then try [creating your first Vega visualization with elm-vega](https://github.com/gicentre/elm-vega/tree/master/docs/helloWorld) and [specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/barChart).
--   For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/test-gallery).
--   To get coding, see the [elm-vega API](https://package.elm-lang.org/packages/gicentre/elm-vega/latest) documentation.
--   Further examples can be found in the [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/examples) and [elm-vega tests](https://github.com/gicentre/elm-vega/tree/master/tests) folders.
--   You can also work with elm-vega in a [litvis](https://github.com/gicentre/litvis) – a _literate visualization_ environment for embedding visualization specifications in a formatted text environment.
+- If you have not done so already, to get familiar with the approach of declarative visualization you may find it helpful to look first at the simpler [elm-vegaLite](https://github.com/gicentre/elm-vegaLite).
+- Then try [creating your first Vega visualization with elm-vega](https://github.com/gicentre/elm-vega/tree/master/docs/helloWorld) and [specifying a Vega bar chart](https://github.com/gicentre/elm-vega/tree/master/docs/barChart).
+- For a rich set of Vega examples see the [Vega example gallery](https://github.com/gicentre/elm-vega/tree/master/test-gallery).
+- To get coding, see the [elm-vega API](https://package.elm-lang.org/packages/gicentre/elm-vega/latest) documentation.
+- Further examples can be found in the [elm-vega examples](https://github.com/gicentre/elm-vega/tree/master/examples) and [elm-vega tests](https://github.com/gicentre/elm-vega/tree/master/tests) folders.
+- You can also work with elm-vega in a [litvis](https://github.com/gicentre/litvis) – a _literate visualization_ environment for embedding visualization specifications in a formatted text environment.
 
 ## Looking for an older version?
 
