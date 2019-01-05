@@ -1,59 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 
-<head>
-  <title>Vega Transform Tests</title>
-  <meta charset="utf-8">
+<html>
+  <head>
+    <title>Vega Transform Tests</title>
+    <meta charset="utf-8" />
 
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: middle; line-height: 1.6; margin-left: 1em;}</style>
-
-  <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
-
-  <!-- This is the script generated from Elm -->
-  <script src="js/transformTests.js"></script>
-
-</head>
-
-<body>
-
-  <h1>Vega Transform Tests</h1>
-
-  <h2>Pack Tests</h2>
-  <div id="packTest1" class="view"></div>
-
-  <h2>Stack Tests</h2>
-  <div id="stackTest1" class="view"></div>
-
-  <h2>Force-Directed Layout Tests</h2>
-  <div id="forceTest1" class="view"></div>
-
-  <h2>Nest Tests</h2>
-  <div id="nestTest1" class="view"></div>
-
-  <h2>Tree Tests</h2>
-  <div id="treeTest1" class="view"></div>
-
-  <h3>Voronoi Tests</h2>
-
-  <p>Clipping a Voronoi diagram to an arbitrary polygon</p>
-  <div id="voronoiTest1" class="view"></div>
-
-  <p>Voronoi cells constrained by invisible 'dummy' cells</p>
-  <div id="voronoiTest2" class="view"></div>
-
-  <h2>Source</h2>
-  <div id="elmContainer"></div>
-
-  <script>
-    Elm.TransformTests.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
       }
-    });
-  </script>
+      #elmContainer {
+        background-color: rgb(252, 247, 236);
+      }
+      .view > * {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.6;
+        margin-left: 1em;
+      }
+    </style>
 
-</body>
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
+    <!-- This is the script generated from Elm -->
+    <script src="js/transformTests.js"></script>
+  </head>
+
+  <body>
+    <h1>Vega Transform Tests</h1>
+
+    <h2>Pack Tests</h2>
+    <div id="packTest1" class="view"></div>
+
+    <h2>Stack Tests</h2>
+    <div id="stackTest1" class="view"></div>
+
+    <h2>Force-Directed Layout Tests</h2>
+    <div id="forceTest1" class="view"></div>
+
+    <h2>Nest Tests</h2>
+    <div id="nestTest1" class="view"></div>
+
+    <h2>Tree Tests</h2>
+    <div id="treeTest1" class="view"></div>
+
+    <h2>Voronoi Tests</h2>
+
+    <p>Clipping a Voronoi diagram to an arbitrary polygon</p>
+    <div id="voronoiTest1" class="view"></div>
+
+    <p>Voronoi cells constrained by invisible 'dummy' cells</p>
+    <div id="voronoiTest2" class="view"></div>
+
+    <p>Contours through KDE weighted by x position</p>
+    <div id="contourTest1" class="view"></div>
+
+    <h2>Source</h2>
+    <div id="elmContainer"></div>
+
+    <script>
+      Elm.TransformTests.init({
+        node: document.getElementById("elmContainer")
+      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
 </html>

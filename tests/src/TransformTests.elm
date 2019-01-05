@@ -645,9 +645,110 @@ voronoiTest2 =
         [ width 420, height 670, padding 5, ds, si [], pr [], sc [], mk [] ]
 
 
+contourTest1 : Spec
+contourTest1 =
+    let
+        cf =
+            config [ cfScaleRange raHeatmap (raScheme (str "greenblue") []) ]
+
+        ds =
+            dataSource
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
+                , data "contours" [ daSource "source" ]
+                    |> transform
+                        [ trContour (numSignal "width")
+                            (numSignal "height")
+                            [ cnX (fExpr "scale('xScale', datum.Horsepower)")
+                            , cnY (fExpr "scale('yScale', datum.Miles_per_Gallon)")
+                            , cnWeight (fExpr "scale('xScale', datum.Horsepower)")
+                            , cnCount (numSignal "count")
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "count" [ siValue (vNum 10), siBind (iSelect [ inOptions (vNums [ 1, 5, 10, 20 ]) ]) ]
+                << signal "points" [ siValue vTrue, siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scLinear
+                    , scRange raWidth
+                    , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
+                    , scRound true
+                    , scNice niTrue
+                    , scZero false
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
+                    , scRound true
+                    , scNice niTrue
+                    , scZero false
+                    ]
+                << scale "cScale"
+                    [ scType scSequential
+                    , scDomain (doData [ daDataset "contours", daField (field "value") ])
+                    , scRange raHeatmap
+                    , scZero true
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    siBottom
+                    [ axGrid true
+                    , axDomain false
+                    , axTitle (str "Horsepower")
+                    ]
+                << axis "yScale"
+                    siLeft
+                    [ axGrid true
+                    , axDomain false
+                    , axTitle (str "Miles per gallon")
+                    ]
+
+        le =
+            legends << legend [ leFill "cScale", leType ltGradient ]
+
+        mk =
+            marks
+                << mark path
+                    [ mFrom [ srData (str "contours") ]
+                    , mEncode
+                        [ enEnter
+                            [ maStroke [ vStr "#888" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maFill [ vScale "cScale", vField (field "value") ]
+                            , maFillOpacity [ vNum 0.35 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoPath "" [ gpField (field "datum") ] ]
+                    ]
+                << mark symbol
+                    [ mName "marks"
+                    , mFrom [ srData (str "source") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
+                            , maSize [ vNum 4 ]
+                            , maFill [ ifElse "points" [ black ] [ transparent ] ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ cf, width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    treeTest1
+    contourTest1
 
 
 
@@ -664,6 +765,7 @@ mySpecs =
         , ( "treeTest1", treeTest1 )
         , ( "voronoiTest1", voronoiTest1 )
         , ( "voronoiTest2", voronoiTest2 )
+        , ( "contourTest1", contourTest1 )
         ]
 
 

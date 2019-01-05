@@ -4289,8 +4289,8 @@ var elm$core$Basics$identity = function (x) {
 	return x;
 };
 var author$project$TransformTests$elmToJS = _Platform_outgoingPort('elmToJS', elm$core$Basics$identity);
-var author$project$Vega$ANone = {$: 4};
-var author$project$Vega$asNone = author$project$Vega$ANone;
+var author$project$Vega$APad = {$: 5};
+var author$project$Vega$asPad = author$project$Vega$APad;
 var author$project$Vega$VAutosize = 5;
 var elm$core$Array$branchFactor = 32;
 var elm$core$Array$Array_elm_builtin = F4(
@@ -4901,112 +4901,53 @@ var author$project$Vega$autosize = function (aus) {
 		elm$json$Json$Encode$object(
 			A2(elm$core$List$map, author$project$Vega$autosizeProperty, aus)));
 };
-var author$project$Vega$BooSignal = function (a) {
-	return {$: 2, a: a};
+var author$project$Vega$AxDomain = function (a) {
+	return {$: 3, a: a};
 };
-var author$project$Vega$booSignal = author$project$Vega$BooSignal;
-var author$project$Vega$CPointer = 5;
-var author$project$Vega$cuPointer = 5;
-var author$project$Vega$VStr = function (a) {
+var author$project$Vega$axDomain = author$project$Vega$AxDomain;
+var author$project$Vega$AxGrid = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$axGrid = author$project$Vega$AxGrid;
+var author$project$Vega$AxTitle = function (a) {
+	return {$: 44, a: a};
+};
+var author$project$Vega$axTitle = author$project$Vega$AxTitle;
+var author$project$Vega$VAxes = 11;
+var elm$json$Json$Encode$list = F2(
+	function (func, entries) {
+		return _Json_wrap(
+			A3(
+				elm$core$List$foldl,
+				_Json_addEntry(func),
+				_Json_emptyArray(0),
+				entries));
+	});
+var author$project$Vega$axes = function (axs) {
+	return _Utils_Tuple2(
+		11,
+		A2(elm$json$Json$Encode$list, elm$core$Basics$identity, axs));
+};
+var author$project$Vega$AxScale = function (a) {
 	return {$: 0, a: a};
 };
-var author$project$Vega$vStr = author$project$Vega$VStr;
-var author$project$Vega$cursorValue = function (cur) {
-	switch (cur) {
+var author$project$Vega$AxSide = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$axisElementLabel = function (el) {
+	switch (el) {
 		case 0:
-			return author$project$Vega$vStr('auto');
+			return 'axis';
 		case 1:
-			return author$project$Vega$vStr('default');
+			return 'ticks';
 		case 2:
-			return author$project$Vega$vStr('none');
+			return 'grid';
 		case 3:
-			return author$project$Vega$vStr('context-menu');
+			return 'labels';
 		case 4:
-			return author$project$Vega$vStr('help');
-		case 5:
-			return author$project$Vega$vStr('pointer');
-		case 6:
-			return author$project$Vega$vStr('progress');
-		case 7:
-			return author$project$Vega$vStr('wait');
-		case 8:
-			return author$project$Vega$vStr('cell');
-		case 9:
-			return author$project$Vega$vStr('crosshair');
-		case 10:
-			return author$project$Vega$vStr('text');
-		case 11:
-			return author$project$Vega$vStr('vertical-text');
-		case 12:
-			return author$project$Vega$vStr('alias');
-		case 13:
-			return author$project$Vega$vStr('copy');
-		case 14:
-			return author$project$Vega$vStr('move');
-		case 15:
-			return author$project$Vega$vStr('no-drop');
-		case 16:
-			return author$project$Vega$vStr('not-allowed');
-		case 17:
-			return author$project$Vega$vStr('all-scroll');
-		case 18:
-			return author$project$Vega$vStr('col-resize');
-		case 19:
-			return author$project$Vega$vStr('row-resize');
-		case 20:
-			return author$project$Vega$vStr('n-resize');
-		case 21:
-			return author$project$Vega$vStr('e-resize');
-		case 22:
-			return author$project$Vega$vStr('s-resize');
-		case 23:
-			return author$project$Vega$vStr('w-resize');
-		case 24:
-			return author$project$Vega$vStr('ne-resize');
-		case 25:
-			return author$project$Vega$vStr('nw-resize');
-		case 26:
-			return author$project$Vega$vStr('se-resize');
-		case 27:
-			return author$project$Vega$vStr('sw-resize');
-		case 28:
-			return author$project$Vega$vStr('ew-resize');
-		case 29:
-			return author$project$Vega$vStr('ns-resize');
-		case 30:
-			return author$project$Vega$vStr('nesw-resize');
-		case 31:
-			return author$project$Vega$vStr('nwse-resize');
-		case 32:
-			return author$project$Vega$vStr('zoom-in');
-		case 33:
-			return author$project$Vega$vStr('zoom-out');
-		case 34:
-			return author$project$Vega$vStr('grab');
+			return 'title';
 		default:
-			return author$project$Vega$vStr('grabbing');
-	}
-};
-var author$project$Vega$DaFormat = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$daFormat = author$project$Vega$DaFormat;
-var author$project$Vega$DaUrl = function (a) {
-	return {$: 6, a: a};
-};
-var author$project$Vega$daUrl = author$project$Vega$DaUrl;
-var author$project$Vega$foDataTypeSpec = function (dType) {
-	switch (dType.$) {
-		case 0:
-			return elm$json$Json$Encode$string('number');
-		case 1:
-			return elm$json$Json$Encode$string('boolean');
-		case 2:
-			var dateFmt = dType.a;
-			return (dateFmt === '') ? elm$json$Json$Encode$string('date') : elm$json$Json$Encode$string('date:\'' + (dateFmt + '\''));
-		default:
-			var dateFmt = dType.a;
-			return (dateFmt === '') ? elm$json$Json$Encode$string('utc') : elm$json$Json$Encode$string('utc:\'' + (dateFmt + '\''));
+			return 'domain';
 	}
 };
 var author$project$Vega$expressionSpec = elm$json$Json$Encode$string;
@@ -5021,157 +4962,6 @@ var author$project$Vega$exprProperty = function (ex) {
 		return _Utils_Tuple2(
 			'expr',
 			author$project$Vega$expressionSpec(e));
-	}
-};
-var elm$json$Json$Encode$list = F2(
-	function (func, entries) {
-		return _Json_wrap(
-			A3(
-				elm$core$List$foldl,
-				_Json_addEntry(func),
-				_Json_emptyArray(0),
-				entries));
-	});
-var elm$json$Json$Encode$null = _Json_encodeNull;
-var author$project$Vega$strSpec = function (string) {
-	switch (string.$) {
-		case 0:
-			var s = string.a;
-			return elm$json$Json$Encode$string(s);
-		case 1:
-			var ss = string.a;
-			return A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, ss);
-		case 4:
-			var ss = string.a;
-			return A2(elm$json$Json$Encode$list, author$project$Vega$strSpec, ss);
-		case 2:
-			var sig = string.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						author$project$Vega$signalReferenceProperty(sig)
-					]));
-		case 3:
-			var sigs = string.a;
-			return A2(
-				elm$json$Json$Encode$list,
-				function (sig) {
-					return elm$json$Json$Encode$object(
-						_List_fromArray(
-							[
-								author$project$Vega$signalReferenceProperty(sig)
-							]));
-				},
-				sigs);
-		case 5:
-			var ex = string.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						author$project$Vega$exprProperty(ex)
-					]));
-		default:
-			return elm$json$Json$Encode$null;
-	}
-};
-var author$project$Vega$formatProperty = function (fmt) {
-	switch (fmt.$) {
-		case 0:
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('json'))
-				]);
-		case 1:
-			var s = fmt.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('json')),
-					_Utils_Tuple2(
-					'property',
-					author$project$Vega$strSpec(s))
-				]);
-		case 2:
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('csv'))
-				]);
-		case 3:
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('tsv'))
-				]);
-		case 4:
-			var s = fmt.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('dsv')),
-					_Utils_Tuple2(
-					'delimiter',
-					author$project$Vega$strSpec(s))
-				]);
-		case 5:
-			var s = fmt.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('topojson')),
-					_Utils_Tuple2(
-					'feature',
-					author$project$Vega$strSpec(s))
-				]);
-		case 6:
-			var s = fmt.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'type',
-					elm$json$Json$Encode$string('topojson')),
-					_Utils_Tuple2(
-					'mesh',
-					author$project$Vega$strSpec(s))
-				]);
-		case 7:
-			var fmts = fmt.a;
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'parse',
-					elm$json$Json$Encode$object(
-						A2(
-							elm$core$List$map,
-							function (_n1) {
-								var f = _n1.a;
-								var fm = _n1.b;
-								return _Utils_Tuple2(
-									f,
-									author$project$Vega$foDataTypeSpec(fm));
-							},
-							fmts)))
-				]);
-		case 8:
-			return _List_fromArray(
-				[
-					_Utils_Tuple2(
-					'parse',
-					elm$json$Json$Encode$string('auto'))
-				]);
-		default:
-			var sigName = fmt.a;
-			return _List_fromArray(
-				[
-					author$project$Vega$signalReferenceProperty(sigName)
-				]);
 	}
 };
 var author$project$Vega$booSpec = function (boo) {
@@ -5218,6 +5008,48 @@ var author$project$Vega$StrExpr = function (a) {
 	return {$: 5, a: a};
 };
 var author$project$Vega$strExpr = author$project$Vega$StrExpr;
+var elm$json$Json$Encode$null = _Json_encodeNull;
+var author$project$Vega$strSpec = function (string) {
+	switch (string.$) {
+		case 0:
+			var s = string.a;
+			return elm$json$Json$Encode$string(s);
+		case 1:
+			var ss = string.a;
+			return A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, ss);
+		case 4:
+			var ss = string.a;
+			return A2(elm$json$Json$Encode$list, author$project$Vega$strSpec, ss);
+		case 2:
+			var sig = string.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+		case 3:
+			var sigs = string.a;
+			return A2(
+				elm$json$Json$Encode$list,
+				function (sig) {
+					return elm$json$Json$Encode$object(
+						_List_fromArray(
+							[
+								author$project$Vega$signalReferenceProperty(sig)
+							]));
+				},
+				sigs);
+		case 5:
+			var ex = string.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$exprProperty(ex)
+					]));
+		default:
+			return elm$json$Json$Encode$null;
+	}
+};
 var author$project$Vega$fieldSpec = function (fVal) {
 	switch (fVal.$) {
 		case 0:
@@ -5683,401 +5515,6 @@ var author$project$Vega$valueSpec = function (val) {
 			return elm$json$Json$Encode$null;
 	}
 };
-var author$project$Vega$dataProperty = function (dProp) {
-	switch (dProp.$) {
-		case 0:
-			var fmts = dProp.a;
-			return _Utils_Tuple2(
-				'format',
-				elm$json$Json$Encode$object(
-					A2(elm$core$List$concatMap, author$project$Vega$formatProperty, fmts)));
-		case 1:
-			var src = dProp.a;
-			return _Utils_Tuple2(
-				'source',
-				elm$json$Json$Encode$string(src));
-		case 2:
-			var srcs = dProp.a;
-			return _Utils_Tuple2(
-				'source',
-				A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, srcs));
-		case 5:
-			var triggers = dProp.a;
-			return _Utils_Tuple2(
-				'on',
-				A2(elm$json$Json$Encode$list, elm$core$Basics$identity, triggers));
-		case 6:
-			var url = dProp.a;
-			return _Utils_Tuple2(
-				'url',
-				author$project$Vega$strSpec(url));
-		case 3:
-			var val = dProp.a;
-			return _Utils_Tuple2(
-				'values',
-				author$project$Vega$valueSpec(val));
-		default:
-			return _Utils_Tuple2(
-				'values',
-				elm$json$Json$Encode$object(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							'type',
-							elm$json$Json$Encode$string('Sphere'))
-						])));
-	}
-};
-var author$project$Vega$data = F2(
-	function (name, dProps) {
-		return A2(
-			elm$core$List$cons,
-			_Utils_Tuple2(
-				'name',
-				elm$json$Json$Encode$string(name)),
-			A2(elm$core$List$map, author$project$Vega$dataProperty, dProps));
-	});
-var author$project$Vega$VData = 8;
-var author$project$Vega$dataSource = function (dataTables) {
-	return _Utils_Tuple2(
-		8,
-		A2(elm$json$Json$Encode$list, elm$json$Json$Encode$object, dataTables));
-};
-var author$project$Vega$Enter = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$enEnter = author$project$Vega$Enter;
-var author$project$Vega$Update = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$enUpdate = author$project$Vega$Update;
-var author$project$Vega$ESBetween = F2(
-	function (a, b) {
-		return {$: 2, a: a, b: b};
-	});
-var author$project$Vega$esBetween = author$project$Vega$ESBetween;
-var author$project$Vega$ESConsume = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$esConsume = author$project$Vega$ESConsume;
-var author$project$Vega$ESFilter = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$esFilter = author$project$Vega$ESFilter;
-var author$project$Vega$ESMark = function (a) {
-	return {$: 7, a: a};
-};
-var author$project$Vega$esMark = author$project$Vega$ESMark;
-var author$project$Vega$ESMerge = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$esMerge = author$project$Vega$ESMerge;
-var author$project$Vega$ESObject = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$esObject = author$project$Vega$ESObject;
-var author$project$Vega$ESSelector = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$esSelector = author$project$Vega$ESSelector;
-var author$project$Vega$ESSource = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$esSource = author$project$Vega$ESSource;
-var author$project$Vega$ESType = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$esType = author$project$Vega$ESType;
-var author$project$Vega$ESWindow = {$: 3};
-var author$project$Vega$esWindow = author$project$Vega$ESWindow;
-var author$project$Vega$MouseDown = 8;
-var author$project$Vega$etMouseDown = 8;
-var author$project$Vega$MouseMove = 9;
-var author$project$Vega$etMouseMove = 9;
-var author$project$Vega$MouseOut = 10;
-var author$project$Vega$etMouseOut = 10;
-var author$project$Vega$MouseOver = 11;
-var author$project$Vega$etMouseOver = 11;
-var author$project$Vega$MouseUp = 12;
-var author$project$Vega$etMouseUp = 12;
-var author$project$Vega$EForce = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$evForce = author$project$Vega$EForce;
-var author$project$Vega$EEvents = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$evHandler = F2(
-	function (ess, eHandlers) {
-		return A2(
-			elm$core$List$cons,
-			author$project$Vega$EEvents(ess),
-			eHandlers);
-	});
-var author$project$Vega$EUpdate = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$evUpdate = author$project$Vega$EUpdate;
-var author$project$Vega$Boo = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$false = author$project$Vega$Boo(false);
-var author$project$Vega$FName = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$field = author$project$Vega$FName;
-var author$project$Vega$FCenter = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$FpCx = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$FpCy = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$foCenter = F2(
-	function (x, y) {
-		return author$project$Vega$FCenter(
-			_List_fromArray(
-				[
-					author$project$Vega$FpCx(x),
-					author$project$Vega$FpCy(y)
-				]));
-	});
-var author$project$Vega$FCollide = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$FpRadius = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$foCollide = F2(
-	function (r, fps) {
-		return author$project$Vega$FCollide(
-			A2(
-				elm$core$List$cons,
-				author$project$Vega$FpRadius(r),
-				fps));
-	});
-var author$project$Vega$FLink = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$FpLinks = function (a) {
-	return {$: 10, a: a};
-};
-var author$project$Vega$foLink = F2(
-	function (links, fps) {
-		return author$project$Vega$FLink(
-			A2(
-				elm$core$List$cons,
-				author$project$Vega$FpLinks(links),
-				fps));
-	});
-var author$project$Vega$FNBody = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$foNBody = author$project$Vega$FNBody;
-var author$project$Vega$FpDistance = function (a) {
-	return {$: 12, a: a};
-};
-var author$project$Vega$fpDistance = author$project$Vega$FpDistance;
-var author$project$Vega$FpStrength = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$fpStrength = author$project$Vega$FpStrength;
-var author$project$Vega$FsForces = function (a) {
-	return {$: 7, a: a};
-};
-var author$project$Vega$fsForces = author$project$Vega$FsForces;
-var author$project$Vega$FsIterations = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$fsIterations = author$project$Vega$FsIterations;
-var author$project$Vega$FsRestart = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$fsRestart = author$project$Vega$FsRestart;
-var author$project$Vega$FsStatic = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$fsStatic = author$project$Vega$FsStatic;
-var author$project$Vega$FsVelocityDecay = function (a) {
-	return {$: 6, a: a};
-};
-var author$project$Vega$fsVelocityDecay = author$project$Vega$FsVelocityDecay;
-var author$project$Vega$VHeight = 3;
-var author$project$Vega$height = function (w) {
-	return _Utils_Tuple2(
-		3,
-		elm$json$Json$Encode$float(w));
-};
-var author$project$Vega$ICheckbox = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$iCheckbox = author$project$Vega$ICheckbox;
-var author$project$Vega$IRange = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$iRange = author$project$Vega$IRange;
-var author$project$Vega$InMax = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$inMax = author$project$Vega$InMax;
-var author$project$Vega$InMin = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$inMin = author$project$Vega$InMin;
-var author$project$Vega$InStep = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$inStep = author$project$Vega$InStep;
-var author$project$Vega$JSONProperty = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$jsonProperty = author$project$Vega$JSONProperty;
-var author$project$Vega$LPShape = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$lpShape = author$project$Vega$LPShape;
-var author$project$Vega$LPSourceX = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$lpSourceX = author$project$Vega$LPSourceX;
-var author$project$Vega$LPSourceY = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$lpSourceY = author$project$Vega$LPSourceY;
-var author$project$Vega$LPTargetX = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$lpTargetX = author$project$Vega$LPTargetX;
-var author$project$Vega$LPTargetY = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$lpTargetY = author$project$Vega$LPTargetY;
-var author$project$Vega$LinkDiagonal = {$: 3};
-var author$project$Vega$lsDiagonal = author$project$Vega$LinkDiagonal;
-var author$project$Vega$MEncode = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$mEncode = author$project$Vega$MEncode;
-var author$project$Vega$MFrom = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$mFrom = author$project$Vega$MFrom;
-var author$project$Vega$MInteractive = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$mInteractive = author$project$Vega$MInteractive;
-var author$project$Vega$MName = function (a) {
-	return {$: 7, a: a};
-};
-var author$project$Vega$mName = author$project$Vega$MName;
-var author$project$Vega$MOn = function (a) {
-	return {$: 8, a: a};
-};
-var author$project$Vega$mOn = author$project$Vega$MOn;
-var author$project$Vega$MTransform = function (a) {
-	return {$: 11, a: a};
-};
-var author$project$Vega$mTransform = author$project$Vega$MTransform;
-var author$project$Vega$MTopZIndex = function (a) {
-	return {$: 10, a: a};
-};
-var author$project$Vega$mZIndex = author$project$Vega$MTopZIndex;
-var author$project$Vega$MCursor = function (a) {
-	return {$: 19, a: a};
-};
-var author$project$Vega$maCursor = author$project$Vega$MCursor;
-var author$project$Vega$MFill = function (a) {
-	return {$: 9, a: a};
-};
-var author$project$Vega$maFill = author$project$Vega$MFill;
-var author$project$Vega$MSize = function (a) {
-	return {$: 29, a: a};
-};
-var author$project$Vega$maSize = author$project$Vega$MSize;
-var author$project$Vega$MStroke = function (a) {
-	return {$: 11, a: a};
-};
-var author$project$Vega$maStroke = author$project$Vega$MStroke;
-var author$project$Vega$MStrokeWidth = function (a) {
-	return {$: 13, a: a};
-};
-var author$project$Vega$maStrokeWidth = author$project$Vega$MStrokeWidth;
-var author$project$Vega$MType = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$clipSpec = function (clip) {
-	switch (clip.$) {
-		case 0:
-			var b = clip.a;
-			return author$project$Vega$booSpec(b);
-		case 1:
-			var p = clip.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						_Utils_Tuple2(
-						'path',
-						author$project$Vega$strSpec(p))
-					]));
-		default:
-			var s = clip.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						_Utils_Tuple2(
-						'sphere',
-						author$project$Vega$strSpec(s))
-					]));
-	}
-};
-var author$project$Vega$orderSpec = function (order) {
-	switch (order.$) {
-		case 0:
-			return elm$json$Json$Encode$string('ascending');
-		case 1:
-			return elm$json$Json$Encode$string('descending');
-		default:
-			var sig = order.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						author$project$Vega$signalReferenceProperty(sig)
-					]));
-	}
-};
-var elm$core$List$unzip = function (pairs) {
-	var step = F2(
-		function (_n0, _n1) {
-			var x = _n0.a;
-			var y = _n0.b;
-			var xs = _n1.a;
-			var ys = _n1.b;
-			return _Utils_Tuple2(
-				A2(elm$core$List$cons, x, xs),
-				A2(elm$core$List$cons, y, ys));
-		});
-	return A3(
-		elm$core$List$foldr,
-		step,
-		_Utils_Tuple2(_List_Nil, _List_Nil),
-		pairs);
-};
-var author$project$Vega$comparatorProperties = function (comp) {
-	var _n0 = elm$core$List$unzip(comp);
-	var fs = _n0.a;
-	var os = _n0.b;
-	return _List_fromArray(
-		[
-			_Utils_Tuple2(
-			'field',
-			A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fs)),
-			_Utils_Tuple2(
-			'order',
-			A2(elm$json$Json$Encode$list, author$project$Vega$orderSpec, os))
-		]);
-};
 var author$project$Vega$valIfElse = F4(
 	function (ex, ifVals, elseVals, ifSpecs) {
 		valIfElse:
@@ -6476,6 +5913,1123 @@ var author$project$Vega$encodingProperty = function (ep) {
 					A2(elm$core$List$map, author$project$Vega$markProperty, mProps)));
 	}
 };
+var author$project$Vega$hAlignSpec = function (align) {
+	switch (align.$) {
+		case 1:
+			return elm$json$Json$Encode$string('left');
+		case 0:
+			return elm$json$Json$Encode$string('center');
+		case 2:
+			return elm$json$Json$Encode$string('right');
+		default:
+			var sig = align.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$overlapStrategySpec = function (strat) {
+	switch (strat.$) {
+		case 0:
+			return elm$json$Json$Encode$string('false');
+		case 1:
+			return elm$json$Json$Encode$string('parity');
+		case 2:
+			return elm$json$Json$Encode$string('greedy');
+		default:
+			var sig = strat.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$sideSpec = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return elm$json$Json$Encode$string('left');
+		case 3:
+			return elm$json$Json$Encode$string('bottom');
+		case 1:
+			return elm$json$Json$Encode$string('right');
+		case 2:
+			return elm$json$Json$Encode$string('top');
+		default:
+			var sig = orient.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$timeUnitSpec = function (tUnit) {
+	var timeUnitLabel = function (tu) {
+		switch (tu.$) {
+			case 0:
+				return 'year';
+			case 1:
+				return 'month';
+			case 2:
+				return 'week';
+			case 3:
+				return 'day';
+			case 4:
+				return 'hour';
+			case 5:
+				return 'minute';
+			case 6:
+				return 'second';
+			case 7:
+				return 'millisecond';
+			default:
+				var sig = tu.a;
+				return '';
+		}
+	};
+	if (tUnit.$ === 8) {
+		var sig = tUnit.a;
+		return elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					author$project$Vega$signalReferenceProperty(sig)
+				]));
+	} else {
+		return elm$json$Json$Encode$string(
+			timeUnitLabel(tUnit));
+	}
+};
+var author$project$Vega$vAlignSpec = function (align) {
+	switch (align.$) {
+		case 0:
+			return elm$json$Json$Encode$string('top');
+		case 1:
+			return elm$json$Json$Encode$string('middle');
+		case 2:
+			return elm$json$Json$Encode$string('bottom');
+		case 3:
+			return elm$json$Json$Encode$string('alphabetic');
+		default:
+			var sig = align.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$axisProperty = function (ap) {
+	switch (ap.$) {
+		case 0:
+			var scName = ap.a;
+			return _Utils_Tuple2(
+				'scale',
+				elm$json$Json$Encode$string(scName));
+		case 1:
+			var axSide = ap.a;
+			return _Utils_Tuple2(
+				'orient',
+				author$project$Vega$sideSpec(axSide));
+		case 2:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'bandPosition',
+				author$project$Vega$numSpec(n));
+		case 3:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'domain',
+				author$project$Vega$booSpec(b));
+		case 4:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'domainColor',
+				author$project$Vega$strSpec(s));
+		case 5:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'domainOpacity',
+				author$project$Vega$numSpec(n));
+		case 6:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'domainWidth',
+				author$project$Vega$numSpec(n));
+		case 7:
+			var elEncs = ap.a;
+			var enc = function (_n1) {
+				var el = _n1.a;
+				var encProps = _n1.b;
+				return _Utils_Tuple2(
+					author$project$Vega$axisElementLabel(el),
+					elm$json$Json$Encode$object(
+						A2(elm$core$List$map, author$project$Vega$encodingProperty, encProps)));
+			};
+			return _Utils_Tuple2(
+				'encode',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, enc, elEncs)));
+		case 8:
+			var fmt = ap.a;
+			return _Utils_Tuple2(
+				'format',
+				author$project$Vega$strSpec(fmt));
+		case 9:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'grid',
+				author$project$Vega$booSpec(b));
+		case 10:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'gridColor',
+				author$project$Vega$strSpec(s));
+		case 11:
+			var vals = ap.a;
+			return _Utils_Tuple2(
+				'gridDash',
+				author$project$Vega$valRef(vals));
+		case 12:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'gridOpacity',
+				author$project$Vega$numSpec(n));
+		case 13:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'gridScale',
+				elm$json$Json$Encode$string(s));
+		case 14:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'gridWidth',
+				author$project$Vega$numSpec(n));
+		case 15:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'labels',
+				author$project$Vega$booSpec(b));
+		case 16:
+			var ha = ap.a;
+			return _Utils_Tuple2(
+				'labelAlign',
+				author$project$Vega$hAlignSpec(ha));
+		case 17:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'labelAngle',
+				author$project$Vega$numSpec(n));
+		case 18:
+			var va = ap.a;
+			return _Utils_Tuple2(
+				'labelBaseline',
+				author$project$Vega$vAlignSpec(va));
+		case 19:
+			var n = ap.a;
+			if (n.$ === 6) {
+				return _Utils_Tuple2(
+					'labelBound',
+					elm$json$Json$Encode$bool(false));
+			} else {
+				return _Utils_Tuple2(
+					'labelBound',
+					author$project$Vega$numSpec(n));
+			}
+		case 20:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'labelColor',
+				author$project$Vega$strSpec(s));
+		case 21:
+			var n = ap.a;
+			if (n.$ === 6) {
+				return _Utils_Tuple2(
+					'labelFlush',
+					elm$json$Json$Encode$bool(false));
+			} else {
+				return _Utils_Tuple2(
+					'labelFlush',
+					author$project$Vega$numSpec(n));
+			}
+		case 22:
+			var pad = ap.a;
+			return _Utils_Tuple2(
+				'labelFlushOffset',
+				author$project$Vega$numSpec(pad));
+		case 23:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'labelFont',
+				author$project$Vega$strSpec(s));
+		case 24:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'labelFontSize',
+				author$project$Vega$numSpec(n));
+		case 25:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'labelFontWeight',
+				author$project$Vega$valueSpec(val));
+		case 26:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'labelLimit',
+				author$project$Vega$numSpec(n));
+		case 27:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'labelOpacity',
+				author$project$Vega$numSpec(n));
+		case 28:
+			var strat = ap.a;
+			return _Utils_Tuple2(
+				'labelOverlap',
+				author$project$Vega$overlapStrategySpec(strat));
+		case 29:
+			var pad = ap.a;
+			return _Utils_Tuple2(
+				'labelPadding',
+				author$project$Vega$numSpec(pad));
+		case 31:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'maxExtent',
+				author$project$Vega$valueSpec(val));
+		case 30:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'minExtent',
+				author$project$Vega$valueSpec(val));
+		case 32:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'offset',
+				author$project$Vega$valueSpec(val));
+		case 33:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'position',
+				author$project$Vega$valueSpec(val));
+		case 34:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'ticks',
+				author$project$Vega$booSpec(b));
+		case 35:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'tickColor',
+				author$project$Vega$strSpec(s));
+		case 36:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'tickCount',
+				author$project$Vega$numSpec(n));
+		case 37:
+			var tu = ap.a;
+			var n = ap.b;
+			switch (n.$) {
+				case 0:
+					var step = n.a;
+					return (step <= 0) ? _Utils_Tuple2(
+						'tickCount',
+						author$project$Vega$timeUnitSpec(tu)) : _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				case 2:
+					return _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				case 5:
+					return _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				default:
+					return _Utils_Tuple2(
+						'tickCount',
+						author$project$Vega$timeUnitSpec(tu));
+			}
+		case 38:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'tickExtra',
+				author$project$Vega$booSpec(b));
+		case 39:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'tickOffset',
+				author$project$Vega$numSpec(n));
+		case 40:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'tickOpacity',
+				author$project$Vega$numSpec(n));
+		case 41:
+			var b = ap.a;
+			return _Utils_Tuple2(
+				'tickRound',
+				author$project$Vega$booSpec(b));
+		case 42:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'tickSize',
+				author$project$Vega$numSpec(n));
+		case 43:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'tickWidth',
+				author$project$Vega$numSpec(n));
+		case 44:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'title',
+				author$project$Vega$strSpec(s));
+		case 45:
+			var ha = ap.a;
+			return _Utils_Tuple2(
+				'titleAlign',
+				author$project$Vega$hAlignSpec(ha));
+		case 46:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleAngle',
+				author$project$Vega$numSpec(n));
+		case 47:
+			var va = ap.a;
+			return _Utils_Tuple2(
+				'titleBaseline',
+				author$project$Vega$vAlignSpec(va));
+		case 48:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'titleColor',
+				author$project$Vega$strSpec(s));
+		case 49:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'titleFont',
+				author$project$Vega$strSpec(s));
+		case 50:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleFontSize',
+				author$project$Vega$numSpec(n));
+		case 51:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'titleFontWeight',
+				author$project$Vega$valueSpec(val));
+		case 52:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleLimit',
+				author$project$Vega$numSpec(n));
+		case 53:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleOpacity',
+				author$project$Vega$numSpec(n));
+		case 54:
+			var val = ap.a;
+			return _Utils_Tuple2(
+				'titlePadding',
+				author$project$Vega$valueSpec(val));
+		case 55:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleX',
+				author$project$Vega$numSpec(n));
+		case 56:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'titleY',
+				author$project$Vega$numSpec(n));
+		case 57:
+			var vals = ap.a;
+			return _Utils_Tuple2(
+				'values',
+				author$project$Vega$valueSpec(vals));
+		default:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'zindex',
+				author$project$Vega$numSpec(n));
+	}
+};
+var author$project$Vega$axis = F3(
+	function (scName, side, aps) {
+		return elm$core$List$cons(
+			elm$json$Json$Encode$object(
+				A2(
+					elm$core$List$map,
+					author$project$Vega$axisProperty,
+					A2(
+						elm$core$List$cons,
+						author$project$Vega$AxScale(scName),
+						A2(
+							elm$core$List$cons,
+							author$project$Vega$AxSide(side),
+							aps)))));
+	});
+var author$project$Vega$VStr = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$vStr = author$project$Vega$VStr;
+var author$project$Vega$black = author$project$Vega$vStr('black');
+var author$project$Vega$CfScaleRange = F2(
+	function (a, b) {
+		return {$: 10, a: a, b: b};
+	});
+var author$project$Vega$cfScaleRange = author$project$Vega$CfScaleRange;
+var author$project$Vega$CnCount = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$cnCount = author$project$Vega$CnCount;
+var author$project$Vega$CnWeight = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$cnWeight = author$project$Vega$CnWeight;
+var author$project$Vega$CnX = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$cnX = author$project$Vega$CnX;
+var author$project$Vega$CnY = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$cnY = author$project$Vega$CnY;
+var author$project$Vega$VConfig = 6;
+var author$project$Vega$Allow = 1;
+var author$project$Vega$SScheme = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$axTypeLabel = function (axType) {
+	switch (axType) {
+		case 0:
+			return 'axis';
+		case 1:
+			return 'axisLeft';
+		case 2:
+			return 'axisTop';
+		case 3:
+			return 'axisRight';
+		case 4:
+			return 'axisBottom';
+		case 5:
+			return 'axisX';
+		case 6:
+			return 'axisY';
+		default:
+			return 'axisBand';
+	}
+};
+var author$project$Vega$eventTypeLabel = function (et) {
+	switch (et) {
+		case 0:
+			return 'click';
+		case 1:
+			return 'dblclick';
+		case 2:
+			return 'dragenter';
+		case 3:
+			return 'dragleave';
+		case 4:
+			return 'dragover';
+		case 5:
+			return 'keydown';
+		case 6:
+			return 'keypress';
+		case 7:
+			return 'keyup';
+		case 8:
+			return 'mousedown';
+		case 9:
+			return 'mousemove';
+		case 10:
+			return 'mouseout';
+		case 11:
+			return 'mouseover';
+		case 12:
+			return 'mouseup';
+		case 13:
+			return 'mousewheel';
+		case 14:
+			return 'touchend';
+		case 15:
+			return 'touchmove';
+		case 16:
+			return 'touchstart';
+		case 17:
+			return 'wheel';
+		default:
+			return 'timer';
+	}
+};
+var author$project$Vega$gridAlignSpec = function (ga) {
+	switch (ga.$) {
+		case 0:
+			return elm$json$Json$Encode$string('all');
+		case 1:
+			return elm$json$Json$Encode$string('each');
+		case 2:
+			return elm$json$Json$Encode$string('none');
+		case 3:
+			var align = ga.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'row',
+						author$project$Vega$gridAlignSpec(align))
+					]));
+		case 4:
+			var align = ga.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'column',
+						author$project$Vega$gridAlignSpec(align))
+					]));
+		default:
+			var sig = ga.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$legendEncodingProperty = function (le) {
+	switch (le.$) {
+		case 0:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'legend',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		case 1:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'title',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		case 2:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'labels',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		case 3:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'symbols',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		default:
+			var eps = le.a;
+			return _Utils_Tuple2(
+				'gradient',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+	}
+};
+var author$project$Vega$legendOrientSpec = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return elm$json$Json$Encode$string('left');
+		case 1:
+			return elm$json$Json$Encode$string('top-left');
+		case 2:
+			return elm$json$Json$Encode$string('top');
+		case 3:
+			return elm$json$Json$Encode$string('top-right');
+		case 4:
+			return elm$json$Json$Encode$string('right');
+		case 5:
+			return elm$json$Json$Encode$string('bottom-right');
+		case 6:
+			return elm$json$Json$Encode$string('bottom');
+		case 7:
+			return elm$json$Json$Encode$string('bottom-left');
+		case 8:
+			return elm$json$Json$Encode$string('none');
+		default:
+			var sig = orient.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$legendTypeSpec = function (lt) {
+	switch (lt.$) {
+		case 0:
+			return elm$json$Json$Encode$string('symbol');
+		case 1:
+			return elm$json$Json$Encode$string('gradient');
+		default:
+			var sig = lt.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$orientationSpec = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return elm$json$Json$Encode$string('horizontal');
+		case 1:
+			return elm$json$Json$Encode$string('vertical');
+		case 2:
+			return elm$json$Json$Encode$string('radial');
+		default:
+			var sig = orient.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$symbolLabel = function (sym) {
+	switch (sym.$) {
+		case 0:
+			return 'circle';
+		case 1:
+			return 'square';
+		case 2:
+			return 'cross';
+		case 3:
+			return 'diamond';
+		case 4:
+			return 'triangle-up';
+		case 5:
+			return 'triangle-down';
+		case 7:
+			return 'triangle-right';
+		case 6:
+			return 'triangle-left';
+		case 8:
+			var svgPath = sym.a;
+			return svgPath;
+		default:
+			var sig = sym.a;
+			return sig;
+	}
+};
+var author$project$Vega$symbolSpec = function (sym) {
+	if (sym.$ === 9) {
+		var sig = sym.a;
+		return elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					author$project$Vega$signalReferenceProperty(sig)
+				]));
+	} else {
+		return elm$json$Json$Encode$string(
+			author$project$Vega$symbolLabel(sym));
+	}
+};
+var author$project$Vega$legendProperty = function (lp) {
+	switch (lp.$) {
+		case 0:
+			var lt = lp.a;
+			return _Utils_Tuple2(
+				'type',
+				author$project$Vega$legendTypeSpec(lt));
+		case 1:
+			var o = lp.a;
+			return _Utils_Tuple2(
+				'direction',
+				author$project$Vega$orientationSpec(o));
+		case 2:
+			var lo = lp.a;
+			return _Utils_Tuple2(
+				'orient',
+				author$project$Vega$legendOrientSpec(lo));
+		case 3:
+			var fScale = lp.a;
+			return _Utils_Tuple2(
+				'fill',
+				elm$json$Json$Encode$string(fScale));
+		case 4:
+			var oScale = lp.a;
+			return _Utils_Tuple2(
+				'opacity',
+				elm$json$Json$Encode$string(oScale));
+		case 5:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'shape',
+				elm$json$Json$Encode$string(sScale));
+		case 6:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'size',
+				elm$json$Json$Encode$string(sScale));
+		case 7:
+			var sScale = lp.a;
+			return _Utils_Tuple2(
+				'stroke',
+				elm$json$Json$Encode$string(sScale));
+		case 8:
+			var sdScale = lp.a;
+			return _Utils_Tuple2(
+				'strokeDash',
+				elm$json$Json$Encode$string(sdScale));
+		case 9:
+			var les = lp.a;
+			return _Utils_Tuple2(
+				'encode',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$legendEncodingProperty, les)));
+		case 10:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'format',
+				author$project$Vega$strSpec(s));
+		case 11:
+			var ga = lp.a;
+			return _Utils_Tuple2(
+				'gridAlign',
+				author$project$Vega$gridAlignSpec(ga));
+		case 12:
+			var h = lp.a;
+			return _Utils_Tuple2(
+				'clipHeight',
+				author$project$Vega$numSpec(h));
+		case 13:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'columns',
+				author$project$Vega$numSpec(n));
+		case 14:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'columnPadding',
+				author$project$Vega$numSpec(x));
+		case 15:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'rowPadding',
+				author$project$Vega$numSpec(x));
+		case 16:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'cornerRadius',
+				author$project$Vega$numSpec(x));
+		case 17:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'fillColor',
+				author$project$Vega$strSpec(s));
+		case 18:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'offset',
+				author$project$Vega$valueSpec(val));
+		case 19:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'padding',
+				author$project$Vega$valueSpec(val));
+		case 20:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'strokeColor',
+				author$project$Vega$strSpec(s));
+		case 21:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'strokeWidth',
+				author$project$Vega$numSpec(x));
+		case 25:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'gradientOpacity',
+				author$project$Vega$numSpec(n));
+		case 22:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLabelLimit',
+				author$project$Vega$numSpec(x));
+		case 23:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLabelOffset',
+				author$project$Vega$numSpec(x));
+		case 24:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientLength',
+				author$project$Vega$numSpec(x));
+		case 26:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientThickness',
+				author$project$Vega$numSpec(x));
+		case 27:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'gradientStrokeColor',
+				author$project$Vega$strSpec(s));
+		case 28:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'gradientStrokeWidth',
+				author$project$Vega$numSpec(x));
+		case 29:
+			var ha = lp.a;
+			return _Utils_Tuple2(
+				'labelAlign',
+				author$project$Vega$hAlignSpec(ha));
+		case 30:
+			var va = lp.a;
+			return _Utils_Tuple2(
+				'labelBaseline',
+				author$project$Vega$vAlignSpec(va));
+		case 31:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelColor',
+				author$project$Vega$strSpec(s));
+		case 37:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'labelOpacity',
+				author$project$Vega$numSpec(n));
+		case 32:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelFont',
+				author$project$Vega$strSpec(s));
+		case 33:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelFontSize',
+				author$project$Vega$numSpec(x));
+		case 34:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'labelFontWeight',
+				author$project$Vega$valueSpec(val));
+		case 35:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelLimit',
+				author$project$Vega$numSpec(x));
+		case 36:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelOffset',
+				author$project$Vega$numSpec(x));
+		case 38:
+			var os = lp.a;
+			return _Utils_Tuple2(
+				'labelOverlap',
+				author$project$Vega$overlapStrategySpec(os));
+		case 39:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolBaseFillColor',
+				author$project$Vega$strSpec(s));
+		case 40:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolBaseStrokeColor',
+				author$project$Vega$strSpec(s));
+		case 41:
+			var o = lp.a;
+			return _Utils_Tuple2(
+				'symbolDirection',
+				author$project$Vega$orientationSpec(o));
+		case 42:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolFillColor',
+				author$project$Vega$strSpec(s));
+		case 44:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolOffset',
+				author$project$Vega$numSpec(x));
+		case 45:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolSize',
+				author$project$Vega$numSpec(x));
+		case 46:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolStrokeColor',
+				author$project$Vega$strSpec(s));
+		case 47:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'symbolStokeWidth',
+				author$project$Vega$numSpec(x));
+		case 43:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'symbolOpacity',
+				author$project$Vega$numSpec(n));
+		case 48:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'symbolType',
+				author$project$Vega$symbolSpec(s));
+		case 49:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'tickCount',
+				author$project$Vega$numSpec(n));
+		case 50:
+			var tu = lp.a;
+			var n = lp.b;
+			switch (n.$) {
+				case 0:
+					var step = n.a;
+					return (step <= 0) ? _Utils_Tuple2(
+						'tickCount',
+						author$project$Vega$timeUnitSpec(tu)) : _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				case 2:
+					return _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				case 5:
+					return _Utils_Tuple2(
+						'tickCount',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									author$project$Vega$timeUnitSpec(tu)),
+									_Utils_Tuple2(
+									'step',
+									author$project$Vega$numSpec(n))
+								])));
+				default:
+					return _Utils_Tuple2(
+						'tickCount',
+						author$project$Vega$timeUnitSpec(tu));
+			}
+		case 60:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'titlePadding',
+				author$project$Vega$valueSpec(val));
+		case 51:
+			var t = lp.a;
+			return _Utils_Tuple2(
+				'title',
+				author$project$Vega$strSpec(t));
+		case 52:
+			var ha = lp.a;
+			return _Utils_Tuple2(
+				'titleAlign',
+				author$project$Vega$hAlignSpec(ha));
+		case 53:
+			var va = lp.a;
+			return _Utils_Tuple2(
+				'titleBaseline',
+				author$project$Vega$vAlignSpec(va));
+		case 54:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleColor',
+				author$project$Vega$strSpec(s));
+		case 56:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleFont',
+				author$project$Vega$strSpec(s));
+		case 57:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'titleFontSize',
+				author$project$Vega$numSpec(x));
+		case 58:
+			var val = lp.a;
+			return _Utils_Tuple2(
+				'titleFontWeight',
+				author$project$Vega$valueSpec(val));
+		case 59:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'titleLimit',
+				author$project$Vega$numSpec(x));
+		case 55:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'titleOpacity',
+				author$project$Vega$numSpec(n));
+		case 61:
+			var vals = lp.a;
+			return _Utils_Tuple2(
+				'values',
+				A2(elm$json$Json$Encode$list, author$project$Vega$valueSpec, vals));
+		default:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'zindex',
+				author$project$Vega$numSpec(n));
+	}
+};
 var author$project$Vega$markLabel = function (m) {
 	switch (m) {
 		case 0:
@@ -6503,6 +7057,725 @@ var author$project$Vega$markLabel = function (m) {
 		default:
 			return 'trail';
 	}
+};
+var author$project$Vega$NumSignal = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$NumSignals = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$numArrayProperty = F3(
+	function (len, name, n) {
+		switch (n.$) {
+			case 1:
+				var ns = n.a;
+				return _Utils_eq(
+					elm$core$List$length(ns),
+					len) ? _Utils_Tuple2(
+					name,
+					A2(elm$json$Json$Encode$list, elm$json$Json$Encode$float, ns)) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
+			case 2:
+				var sig = n.a;
+				return _Utils_Tuple2(
+					name,
+					author$project$Vega$numSpec(
+						author$project$Vega$NumSignal(sig)));
+			case 3:
+				var sigs = n.a;
+				return _Utils_eq(
+					elm$core$List$length(sigs),
+					len) ? _Utils_Tuple2(
+					name,
+					author$project$Vega$numSpec(
+						author$project$Vega$NumSignals(sigs))) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
+			case 4:
+				var ns = n.a;
+				return _Utils_eq(
+					elm$core$List$length(ns),
+					len) ? _Utils_Tuple2(
+					name,
+					A2(elm$json$Json$Encode$list, author$project$Vega$numSpec, ns)) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
+			default:
+				return _Utils_Tuple2(name, elm$json$Json$Encode$null);
+		}
+	});
+var author$project$Vega$schemeProperty = function (sProps) {
+	switch (sProps.$) {
+		case 0:
+			var s = sProps.a;
+			return _Utils_Tuple2(
+				'scheme',
+				author$project$Vega$strSpec(s));
+		case 1:
+			var n = sProps.a;
+			return _Utils_Tuple2(
+				'count',
+				author$project$Vega$numSpec(n));
+		default:
+			var n = sProps.a;
+			return A3(author$project$Vega$numArrayProperty, 2, 'extent', n);
+	}
+};
+var author$project$Vega$anchorSpec = function (anchor) {
+	switch (anchor.$) {
+		case 0:
+			return elm$json$Json$Encode$string('start');
+		case 1:
+			return elm$json$Json$Encode$string('middle');
+		case 2:
+			return elm$json$Json$Encode$string('end');
+		default:
+			var sigName = anchor.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sigName)
+					]));
+	}
+};
+var author$project$Vega$titleFrameSpec = function (tf) {
+	switch (tf.$) {
+		case 1:
+			return elm$json$Json$Encode$string('group');
+		case 0:
+			return elm$json$Json$Encode$string('bounds');
+		default:
+			var sig = tf.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$titleProperty = function (tProp) {
+	switch (tProp.$) {
+		case 0:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'text',
+				author$project$Vega$strSpec(s));
+		case 1:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'orient',
+				author$project$Vega$sideSpec(s));
+		case 2:
+			var ha = tProp.a;
+			return _Utils_Tuple2(
+				'align',
+				author$project$Vega$hAlignSpec(ha));
+		case 3:
+			var a = tProp.a;
+			return _Utils_Tuple2(
+				'anchor',
+				author$project$Vega$anchorSpec(a));
+		case 4:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'angle',
+				author$project$Vega$numSpec(n));
+		case 5:
+			var va = tProp.a;
+			return _Utils_Tuple2(
+				'baseline',
+				author$project$Vega$vAlignSpec(va));
+		case 6:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'color',
+				author$project$Vega$strSpec(s));
+		case 7:
+			var eps = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		case 8:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'font',
+				author$project$Vega$strSpec(s));
+		case 9:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'fontSize',
+				author$project$Vega$numSpec(n));
+		case 10:
+			var v = tProp.a;
+			return _Utils_Tuple2(
+				'fontWeight',
+				author$project$Vega$valueSpec(v));
+		case 11:
+			var fr = tProp.a;
+			return _Utils_Tuple2(
+				'fame',
+				author$project$Vega$titleFrameSpec(fr));
+		case 12:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'interactive',
+				author$project$Vega$booSpec(b));
+		case 13:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'limit',
+				author$project$Vega$numSpec(n));
+		case 14:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'name',
+				elm$json$Json$Encode$string(s));
+		case 15:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'style',
+				author$project$Vega$strSpec(s));
+		case 16:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'offset',
+				author$project$Vega$numSpec(n));
+		default:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'zindex',
+				author$project$Vega$numSpec(n));
+	}
+};
+var author$project$Vega$configProperty = function (cp) {
+	switch (cp.$) {
+		case 0:
+			var aps = cp.a;
+			return _Utils_Tuple2(
+				'autosize',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$autosizeProperty, aps)));
+		case 1:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'background',
+				author$project$Vega$strSpec(s));
+		case 2:
+			var mps = cp.a;
+			return _Utils_Tuple2(
+				'group',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$markProperty, mps)));
+		case 3:
+			var ef = cp.a;
+			var ets = cp.b;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(true) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			var filterLabel = (ef === 1) ? 'allow' : 'prevent';
+			return _Utils_Tuple2(
+				'events',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'defaults',
+							elm$json$Json$Encode$object(
+								_List_fromArray(
+									[
+										_Utils_Tuple2(filterLabel, listSpec)
+									])))
+						])));
+		case 4:
+			var mk = cp.a;
+			var mps = cp.b;
+			return _Utils_Tuple2(
+				author$project$Vega$markLabel(mk),
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$markProperty, mps)));
+		case 5:
+			var mps = cp.a;
+			return _Utils_Tuple2(
+				'mark',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$markProperty, mps)));
+		case 6:
+			var sName = cp.a;
+			var mps = cp.b;
+			return _Utils_Tuple2(
+				'style',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							sName,
+							elm$json$Json$Encode$object(
+								A2(elm$core$List$map, author$project$Vega$markProperty, mps)))
+						])));
+		case 7:
+			var axType = cp.a;
+			var aps = cp.b;
+			return _Utils_Tuple2(
+				author$project$Vega$axTypeLabel(axType),
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$axisProperty, aps)));
+		case 8:
+			var lps = cp.a;
+			return _Utils_Tuple2(
+				'legend',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$legendProperty, lps)));
+		case 9:
+			var tps = cp.a;
+			return _Utils_Tuple2(
+				'title',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$titleProperty, tps)));
+		default:
+			var ra1 = cp.a;
+			var ra2 = cp.b;
+			var raVals = function () {
+				switch (ra2.$) {
+					case 1:
+						var ss = ra2.a;
+						return A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, ss);
+					case 15:
+						var sig = ra2.a;
+						return elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									author$project$Vega$signalReferenceProperty(sig)
+								]));
+					case 3:
+						var name = ra2.a;
+						var options = ra2.b;
+						return elm$json$Json$Encode$object(
+							A2(
+								elm$core$List$map,
+								author$project$Vega$schemeProperty,
+								A2(
+									elm$core$List$cons,
+									author$project$Vega$SScheme(name),
+									options)));
+					default:
+						return elm$json$Json$Encode$null;
+				}
+			}();
+			var raLabel = function () {
+				switch (ra1.$) {
+					case 8:
+						return 'symbol';
+					case 9:
+						return 'category';
+					case 10:
+						return 'diverging';
+					case 11:
+						return 'ordinal';
+					case 12:
+						return 'ramp';
+					case 13:
+						return 'heatmap';
+					default:
+						return '';
+				}
+			}();
+			return _Utils_Tuple2(
+				'range',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(raLabel, raVals)
+						])));
+	}
+};
+var author$project$Vega$config = function (cps) {
+	return _Utils_Tuple2(
+		6,
+		elm$json$Json$Encode$object(
+			A2(elm$core$List$map, author$project$Vega$configProperty, cps)));
+};
+var author$project$Vega$DDataset = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$daDataset = author$project$Vega$DDataset;
+var author$project$Vega$DField = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$daField = author$project$Vega$DField;
+var author$project$Vega$DaSource = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$daSource = author$project$Vega$DaSource;
+var author$project$Vega$DaUrl = function (a) {
+	return {$: 6, a: a};
+};
+var author$project$Vega$daUrl = author$project$Vega$DaUrl;
+var author$project$Vega$foDataTypeSpec = function (dType) {
+	switch (dType.$) {
+		case 0:
+			return elm$json$Json$Encode$string('number');
+		case 1:
+			return elm$json$Json$Encode$string('boolean');
+		case 2:
+			var dateFmt = dType.a;
+			return (dateFmt === '') ? elm$json$Json$Encode$string('date') : elm$json$Json$Encode$string('date:\'' + (dateFmt + '\''));
+		default:
+			var dateFmt = dType.a;
+			return (dateFmt === '') ? elm$json$Json$Encode$string('utc') : elm$json$Json$Encode$string('utc:\'' + (dateFmt + '\''));
+	}
+};
+var author$project$Vega$formatProperty = function (fmt) {
+	switch (fmt.$) {
+		case 0:
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('json'))
+				]);
+		case 1:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('json')),
+					_Utils_Tuple2(
+					'property',
+					author$project$Vega$strSpec(s))
+				]);
+		case 2:
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('csv'))
+				]);
+		case 3:
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('tsv'))
+				]);
+		case 4:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('dsv')),
+					_Utils_Tuple2(
+					'delimiter',
+					author$project$Vega$strSpec(s))
+				]);
+		case 5:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'feature',
+					author$project$Vega$strSpec(s))
+				]);
+		case 6:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'mesh',
+					author$project$Vega$strSpec(s))
+				]);
+		case 7:
+			var fmts = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'parse',
+					elm$json$Json$Encode$object(
+						A2(
+							elm$core$List$map,
+							function (_n1) {
+								var f = _n1.a;
+								var fm = _n1.b;
+								return _Utils_Tuple2(
+									f,
+									author$project$Vega$foDataTypeSpec(fm));
+							},
+							fmts)))
+				]);
+		case 8:
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'parse',
+					elm$json$Json$Encode$string('auto'))
+				]);
+		default:
+			var sigName = fmt.a;
+			return _List_fromArray(
+				[
+					author$project$Vega$signalReferenceProperty(sigName)
+				]);
+	}
+};
+var author$project$Vega$dataProperty = function (dProp) {
+	switch (dProp.$) {
+		case 0:
+			var fmts = dProp.a;
+			return _Utils_Tuple2(
+				'format',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$concatMap, author$project$Vega$formatProperty, fmts)));
+		case 1:
+			var src = dProp.a;
+			return _Utils_Tuple2(
+				'source',
+				elm$json$Json$Encode$string(src));
+		case 2:
+			var srcs = dProp.a;
+			return _Utils_Tuple2(
+				'source',
+				A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, srcs));
+		case 5:
+			var triggers = dProp.a;
+			return _Utils_Tuple2(
+				'on',
+				A2(elm$json$Json$Encode$list, elm$core$Basics$identity, triggers));
+		case 6:
+			var url = dProp.a;
+			return _Utils_Tuple2(
+				'url',
+				author$project$Vega$strSpec(url));
+		case 3:
+			var val = dProp.a;
+			return _Utils_Tuple2(
+				'values',
+				author$project$Vega$valueSpec(val));
+		default:
+			return _Utils_Tuple2(
+				'values',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'type',
+							elm$json$Json$Encode$string('Sphere'))
+						])));
+	}
+};
+var author$project$Vega$data = F2(
+	function (name, dProps) {
+		return A2(
+			elm$core$List$cons,
+			_Utils_Tuple2(
+				'name',
+				elm$json$Json$Encode$string(name)),
+			A2(elm$core$List$map, author$project$Vega$dataProperty, dProps));
+	});
+var author$project$Vega$VData = 8;
+var author$project$Vega$dataSource = function (dataTables) {
+	return _Utils_Tuple2(
+		8,
+		A2(elm$json$Json$Encode$list, elm$json$Json$Encode$object, dataTables));
+};
+var author$project$Vega$DoData = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$doData = author$project$Vega$DoData;
+var author$project$Vega$Enter = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$enEnter = author$project$Vega$Enter;
+var author$project$Vega$Update = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$enUpdate = author$project$Vega$Update;
+var author$project$Vega$FExpr = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$fExpr = author$project$Vega$FExpr;
+var author$project$Vega$Boo = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$false = author$project$Vega$Boo(false);
+var author$project$Vega$FName = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$field = author$project$Vega$FName;
+var author$project$Vega$GeField = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$gpField = author$project$Vega$GeField;
+var author$project$Vega$VHeight = 3;
+var author$project$Vega$height = function (w) {
+	return _Utils_Tuple2(
+		3,
+		elm$json$Json$Encode$float(w));
+};
+var author$project$Vega$ICheckbox = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$iCheckbox = author$project$Vega$ICheckbox;
+var author$project$Vega$ISelect = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$iSelect = author$project$Vega$ISelect;
+var author$project$Vega$VIfElse = F3(
+	function (a, b, c) {
+		return {$: 19, a: a, b: b, c: c};
+	});
+var author$project$Vega$ifElse = F3(
+	function (condition, thenVals, elseVals) {
+		return A3(author$project$Vega$VIfElse, condition, thenVals, elseVals);
+	});
+var author$project$Vega$InOptions = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$inOptions = author$project$Vega$InOptions;
+var author$project$Vega$LeFill = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$leFill = author$project$Vega$LeFill;
+var author$project$Vega$LeType = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$leType = author$project$Vega$LeType;
+var author$project$Vega$legend = function (lps) {
+	return elm$core$List$cons(
+		elm$json$Json$Encode$object(
+			A2(elm$core$List$map, author$project$Vega$legendProperty, lps)));
+};
+var author$project$Vega$VLegends = 12;
+var author$project$Vega$legends = function (lgs) {
+	return _Utils_Tuple2(
+		12,
+		A2(elm$json$Json$Encode$list, elm$core$Basics$identity, lgs));
+};
+var author$project$Vega$LGradient = {$: 1};
+var author$project$Vega$ltGradient = author$project$Vega$LGradient;
+var author$project$Vega$MEncode = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$mEncode = author$project$Vega$MEncode;
+var author$project$Vega$MFrom = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$mFrom = author$project$Vega$MFrom;
+var author$project$Vega$MName = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$mName = author$project$Vega$MName;
+var author$project$Vega$MTransform = function (a) {
+	return {$: 11, a: a};
+};
+var author$project$Vega$mTransform = author$project$Vega$MTransform;
+var author$project$Vega$MFill = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$maFill = author$project$Vega$MFill;
+var author$project$Vega$MFillOpacity = function (a) {
+	return {$: 10, a: a};
+};
+var author$project$Vega$maFillOpacity = author$project$Vega$MFillOpacity;
+var author$project$Vega$MSize = function (a) {
+	return {$: 29, a: a};
+};
+var author$project$Vega$maSize = author$project$Vega$MSize;
+var author$project$Vega$MStroke = function (a) {
+	return {$: 11, a: a};
+};
+var author$project$Vega$maStroke = author$project$Vega$MStroke;
+var author$project$Vega$MStrokeWidth = function (a) {
+	return {$: 13, a: a};
+};
+var author$project$Vega$maStrokeWidth = author$project$Vega$MStrokeWidth;
+var author$project$Vega$MX = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$maX = author$project$Vega$MX;
+var author$project$Vega$MY = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$maY = author$project$Vega$MY;
+var author$project$Vega$MType = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$clipSpec = function (clip) {
+	switch (clip.$) {
+		case 0:
+			var b = clip.a;
+			return author$project$Vega$booSpec(b);
+		case 1:
+			var p = clip.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'path',
+						author$project$Vega$strSpec(p))
+					]));
+		default:
+			var s = clip.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'sphere',
+						author$project$Vega$strSpec(s))
+					]));
+	}
+};
+var author$project$Vega$orderSpec = function (order) {
+	switch (order.$) {
+		case 0:
+			return elm$json$Json$Encode$string('ascending');
+		case 1:
+			return elm$json$Json$Encode$string('descending');
+		default:
+			var sig = order.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var elm$core$List$unzip = function (pairs) {
+	var step = F2(
+		function (_n0, _n1) {
+			var x = _n0.a;
+			var y = _n0.b;
+			var xs = _n1.a;
+			var ys = _n1.b;
+			return _Utils_Tuple2(
+				A2(elm$core$List$cons, x, xs),
+				A2(elm$core$List$cons, y, ys));
+		});
+	return A3(
+		elm$core$List$foldr,
+		step,
+		_Utils_Tuple2(_List_Nil, _List_Nil),
+		pairs);
+};
+var author$project$Vega$comparatorProperties = function (comp) {
+	var _n0 = elm$core$List$unzip(comp);
+	var fs = _n0.a;
+	var os = _n0.b;
+	return _List_fromArray(
+		[
+			_Utils_Tuple2(
+			'field',
+			A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fs)),
+			_Utils_Tuple2(
+			'order',
+			A2(elm$json$Json$Encode$list, author$project$Vega$orderSpec, os))
+		]);
 };
 var author$project$Vega$FaData = function (a) {
 	return {$: 1, a: a};
@@ -6857,47 +8130,6 @@ var author$project$Vega$crossProperty = function (crProp) {
 					[a, b])));
 	}
 };
-var author$project$Vega$NumSignal = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$NumSignals = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$numArrayProperty = F3(
-	function (len, name, n) {
-		switch (n.$) {
-			case 1:
-				var ns = n.a;
-				return _Utils_eq(
-					elm$core$List$length(ns),
-					len) ? _Utils_Tuple2(
-					name,
-					A2(elm$json$Json$Encode$list, elm$json$Json$Encode$float, ns)) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
-			case 2:
-				var sig = n.a;
-				return _Utils_Tuple2(
-					name,
-					author$project$Vega$numSpec(
-						author$project$Vega$NumSignal(sig)));
-			case 3:
-				var sigs = n.a;
-				return _Utils_eq(
-					elm$core$List$length(sigs),
-					len) ? _Utils_Tuple2(
-					name,
-					author$project$Vega$numSpec(
-						author$project$Vega$NumSignals(sigs))) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
-			case 4:
-				var ns = n.a;
-				return _Utils_eq(
-					elm$core$List$length(ns),
-					len) ? _Utils_Tuple2(
-					name,
-					A2(elm$json$Json$Encode$list, author$project$Vega$numSpec, ns)) : _Utils_Tuple2(name, elm$json$Json$Encode$null);
-			default:
-				return _Utils_Tuple2(name, elm$json$Json$Encode$null);
-		}
-	});
 var author$project$Vega$densityProperty = function (dnp) {
 	switch (dnp.$) {
 		case 0:
@@ -7392,23 +8624,6 @@ var author$project$Vega$linkShapeSpec = function (ls) {
 			return elm$json$Json$Encode$string('orthogonal');
 		default:
 			var sig = ls.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						author$project$Vega$signalReferenceProperty(sig)
-					]));
-	}
-};
-var author$project$Vega$orientationSpec = function (orient) {
-	switch (orient.$) {
-		case 0:
-			return elm$json$Json$Encode$string('horizontal');
-		case 1:
-			return elm$json$Json$Encode$string('vertical');
-		case 2:
-			return elm$json$Json$Encode$string('radial');
-		default:
-			var sig = orient.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -9134,31 +10349,56 @@ var author$project$Vega$marks = function (axs) {
 		15,
 		A2(elm$json$Json$Encode$list, elm$core$Basics$identity, axs));
 };
-var author$project$Vega$Num = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$num = author$project$Vega$Num;
+var author$project$Vega$NTrue = {$: 9};
+var author$project$Vega$niTrue = author$project$Vega$NTrue;
 var author$project$Vega$numSignal = author$project$Vega$NumSignal;
+var author$project$Vega$VPadding = 4;
+var author$project$Vega$padding = function (p) {
+	return _Utils_Tuple2(
+		4,
+		elm$json$Json$Encode$float(p));
+};
 var author$project$Vega$Path = 5;
 var author$project$Vega$path = 5;
+var author$project$Vega$RaHeatmap = {$: 13};
+var author$project$Vega$raHeatmap = author$project$Vega$RaHeatmap;
+var author$project$Vega$RaHeight = {$: 7};
+var author$project$Vega$raHeight = author$project$Vega$RaHeight;
 var author$project$Vega$RaScheme = F2(
 	function (a, b) {
 		return {$: 3, a: a, b: b};
 	});
 var author$project$Vega$raScheme = author$project$Vega$RaScheme;
-var author$project$Vega$ScOrdinal = {$: 7};
-var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
+var author$project$Vega$RaWidth = {$: 6};
+var author$project$Vega$raWidth = author$project$Vega$RaWidth;
+var author$project$Vega$SDomain = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$scDomain = author$project$Vega$SDomain;
+var author$project$Vega$ScLinear = {$: 0};
+var author$project$Vega$scLinear = author$project$Vega$ScLinear;
+var author$project$Vega$SNice = function (a) {
+	return {$: 12, a: a};
+};
+var author$project$Vega$scNice = author$project$Vega$SNice;
 var author$project$Vega$SRange = function (a) {
 	return {$: 6, a: a};
 };
 var author$project$Vega$scRange = author$project$Vega$SRange;
+var author$project$Vega$SRound = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$scRound = author$project$Vega$SRound;
+var author$project$Vega$ScSequential = {$: 6};
+var author$project$Vega$scSequential = author$project$Vega$ScSequential;
 var author$project$Vega$SType = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$scType = author$project$Vega$SType;
-var author$project$Vega$SScheme = function (a) {
-	return {$: 0, a: a};
+var author$project$Vega$SZero = function (a) {
+	return {$: 13, a: a};
 };
+var author$project$Vega$scZero = author$project$Vega$SZero;
 var author$project$Vega$Ascending = {$: 0};
 var author$project$Vega$sortProperty = function (sp) {
 	switch (sp.$) {
@@ -9330,42 +10570,6 @@ var author$project$Vega$interpolateSpec = function (iType) {
 					]));
 	}
 };
-var author$project$Vega$timeUnitSpec = function (tUnit) {
-	var timeUnitLabel = function (tu) {
-		switch (tu.$) {
-			case 0:
-				return 'year';
-			case 1:
-				return 'month';
-			case 2:
-				return 'week';
-			case 3:
-				return 'day';
-			case 4:
-				return 'hour';
-			case 5:
-				return 'minute';
-			case 6:
-				return 'second';
-			case 7:
-				return 'millisecond';
-			default:
-				var sig = tu.a;
-				return '';
-		}
-	};
-	if (tUnit.$ === 8) {
-		var sig = tUnit.a;
-		return elm$json$Json$Encode$object(
-			_List_fromArray(
-				[
-					author$project$Vega$signalReferenceProperty(sig)
-				]));
-	} else {
-		return elm$json$Json$Encode$string(
-			timeUnitLabel(tUnit));
-	}
-};
 var elm$json$Json$Encode$int = _Json_wrap;
 var author$project$Vega$niceSpec = function (ni) {
 	switch (ni.$) {
@@ -9470,23 +10674,6 @@ var author$project$Vega$scaleSpec = function (sct) {
 					[
 						author$project$Vega$signalReferenceProperty(sig)
 					]));
-	}
-};
-var author$project$Vega$schemeProperty = function (sProps) {
-	switch (sProps.$) {
-		case 0:
-			var s = sProps.a;
-			return _Utils_Tuple2(
-				'scheme',
-				author$project$Vega$strSpec(s));
-		case 1:
-			var n = sProps.a;
-			return _Utils_Tuple2(
-				'count',
-				author$project$Vega$numSpec(n));
-		default:
-			var n = sProps.a;
-			return A3(author$project$Vega$numArrayProperty, 2, 'extent', n);
 	}
 };
 var author$project$Vega$scaleProperty = function (scaleProp) {
@@ -9709,18 +10896,10 @@ var author$project$Vega$SiBind = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Vega$siBind = author$project$Vega$SiBind;
-var author$project$Vega$SiDescription = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$siDescription = author$project$Vega$SiDescription;
-var author$project$Vega$SiOn = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$siOn = author$project$Vega$SiOn;
-var author$project$Vega$SiUpdate = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$siUpdate = author$project$Vega$SiUpdate;
+var author$project$Vega$SBottom = {$: 3};
+var author$project$Vega$siBottom = author$project$Vega$SBottom;
+var author$project$Vega$SLeft = {$: 0};
+var author$project$Vega$siLeft = author$project$Vega$SLeft;
 var author$project$Vega$SiValue = function (a) {
 	return {$: 7, a: a};
 };
@@ -9842,48 +11021,6 @@ var author$project$Vega$eventSourceLabel = function (es) {
 		default:
 			var s = es.a;
 			return s;
-	}
-};
-var author$project$Vega$eventTypeLabel = function (et) {
-	switch (et) {
-		case 0:
-			return 'click';
-		case 1:
-			return 'dblclick';
-		case 2:
-			return 'dragenter';
-		case 3:
-			return 'dragleave';
-		case 4:
-			return 'dragover';
-		case 5:
-			return 'keydown';
-		case 6:
-			return 'keypress';
-		case 7:
-			return 'keyup';
-		case 8:
-			return 'mousedown';
-		case 9:
-			return 'mousemove';
-		case 10:
-			return 'mouseout';
-		case 11:
-			return 'mouseover';
-		case 12:
-			return 'mouseup';
-		case 13:
-			return 'mousewheel';
-		case 14:
-			return 'touchend';
-		case 15:
-			return 'touchmove';
-		case 16:
-			return 'touchstart';
-		case 17:
-			return 'wheel';
-		default:
-			return 'timer';
 	}
 };
 var author$project$Vega$eventStreamObjectSpec = function (ess) {
@@ -10096,17 +11233,8 @@ var author$project$Vega$Str = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$str = author$project$Vega$Str;
-var author$project$Vega$StrSignal = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$strSignal = author$project$Vega$StrSignal;
 var author$project$Vega$Symbol = 9;
 var author$project$Vega$symbol = 9;
-var author$project$Vega$TgModifyValues = F2(
-	function (a, b) {
-		return {$: 5, a: a, b: b};
-	});
-var author$project$Vega$tgModifyValues = author$project$Vega$TgModifyValues;
 var author$project$Vega$toVega = function (spec) {
 	return elm$json$Json$Encode$object(
 		A2(
@@ -10125,6 +11253,700 @@ var author$project$Vega$toVega = function (spec) {
 				},
 				spec)));
 };
+var author$project$Vega$TContour = F3(
+	function (a, b, c) {
+		return {$: 3, a: a, b: b, c: c};
+	});
+var author$project$Vega$trContour = author$project$Vega$TContour;
+var author$project$Vega$TFilter = function (a) {
+	return {$: 11, a: a};
+};
+var author$project$Vega$trFilter = author$project$Vega$TFilter;
+var author$project$Vega$TGeoPath = F2(
+	function (a, b) {
+		return {$: 19, a: a, b: b};
+	});
+var author$project$Vega$trGeoPath = author$project$Vega$TGeoPath;
+var author$project$Vega$transform = F2(
+	function (transforms, dTable) {
+		return _Utils_ap(
+			dTable,
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'transform',
+					A2(elm$json$Json$Encode$list, author$project$Vega$transformSpec, transforms))
+				]));
+	});
+var author$project$Vega$transparent = author$project$Vega$vStr('transparent');
+var author$project$Vega$true = author$project$Vega$Boo(true);
+var author$project$Vega$VField = function (a) {
+	return {$: 11, a: a};
+};
+var author$project$Vega$vField = author$project$Vega$VField;
+var author$project$Vega$VNum = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$vNum = author$project$Vega$VNum;
+var author$project$Vega$VNums = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$vNums = author$project$Vega$VNums;
+var author$project$Vega$VScale = function (a) {
+	return {$: 12, a: a};
+};
+var author$project$Vega$vScale = function (s) {
+	return author$project$Vega$VScale(
+		author$project$Vega$field(s));
+};
+var author$project$Vega$VBoo = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$vTrue = author$project$Vega$VBoo(true);
+var author$project$Vega$VWidth = 2;
+var author$project$Vega$width = function (w) {
+	return _Utils_Tuple2(
+		2,
+		elm$json$Json$Encode$float(w));
+};
+var elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var author$project$TransformTests$contourTest1 = function () {
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$signals,
+			A2(
+				author$project$Vega$signal,
+				'count',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$vNum(10)),
+						author$project$Vega$siBind(
+						author$project$Vega$iSelect(
+							_List_fromArray(
+								[
+									author$project$Vega$inOptions(
+									author$project$Vega$vNums(
+										_List_fromArray(
+											[1, 5, 10, 20])))
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'points',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(author$project$Vega$vTrue),
+					author$project$Vega$siBind(
+					author$project$Vega$iCheckbox(_List_Nil))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				author$project$Vega$scales,
+				A2(
+					author$project$Vega$scale,
+					'xScale',
+					_List_fromArray(
+						[
+							author$project$Vega$scType(author$project$Vega$scLinear),
+							author$project$Vega$scRange(author$project$Vega$raWidth),
+							author$project$Vega$scDomain(
+							author$project$Vega$doData(
+								_List_fromArray(
+									[
+										author$project$Vega$daDataset('source'),
+										author$project$Vega$daField(
+										author$project$Vega$field('Horsepower'))
+									]))),
+							author$project$Vega$scRound(author$project$Vega$true),
+							author$project$Vega$scNice(author$project$Vega$niTrue),
+							author$project$Vega$scZero(author$project$Vega$false)
+						]))),
+			A2(
+				author$project$Vega$scale,
+				'yScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scType(author$project$Vega$scLinear),
+						author$project$Vega$scRange(author$project$Vega$raHeight),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daDataset('source'),
+									author$project$Vega$daField(
+									author$project$Vega$field('Miles_per_Gallon'))
+								]))),
+						author$project$Vega$scRound(author$project$Vega$true),
+						author$project$Vega$scNice(author$project$Vega$niTrue),
+						author$project$Vega$scZero(author$project$Vega$false)
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scType(author$project$Vega$scSequential),
+					author$project$Vega$scDomain(
+					author$project$Vega$doData(
+						_List_fromArray(
+							[
+								author$project$Vega$daDataset('contours'),
+								author$project$Vega$daField(
+								author$project$Vega$field('value'))
+							]))),
+					author$project$Vega$scRange(author$project$Vega$raHeatmap),
+					author$project$Vega$scZero(author$project$Vega$true)
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$path,
+				_List_fromArray(
+					[
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('contours'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												author$project$Vega$vStr('#888')
+											])),
+										author$project$Vega$maStrokeWidth(
+										_List_fromArray(
+											[
+												author$project$Vega$vNum(1)
+											])),
+										author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('cScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('value'))
+											])),
+										author$project$Vega$maFillOpacity(
+										_List_fromArray(
+											[
+												author$project$Vega$vNum(0.35)
+											]))
+									]))
+							])),
+						author$project$Vega$mTransform(
+						_List_fromArray(
+							[
+								A2(
+								author$project$Vega$trGeoPath,
+								'',
+								_List_fromArray(
+									[
+										author$project$Vega$gpField(
+										author$project$Vega$field('datum'))
+									]))
+							]))
+					]))),
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$symbol,
+			_List_fromArray(
+				[
+					author$project$Vega$mName('marks'),
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('source'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('Horsepower'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('Miles_per_Gallon'))
+										])),
+									author$project$Vega$maSize(
+									_List_fromArray(
+										[
+											author$project$Vega$vNum(4)
+										])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											A3(
+											author$project$Vega$ifElse,
+											'points',
+											_List_fromArray(
+												[author$project$Vega$black]),
+											_List_fromArray(
+												[author$project$Vega$transparent]))
+										]))
+								]))
+						]))
+				])));
+	var le = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$legends,
+		author$project$Vega$legend(
+			_List_fromArray(
+				[
+					author$project$Vega$leFill('cScale'),
+					author$project$Vega$leType(author$project$Vega$ltGradient)
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						author$project$Vega$trFilter(
+						author$project$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null'))
+					]),
+				A2(
+					author$project$Vega$data,
+					'source',
+					_List_fromArray(
+						[
+							author$project$Vega$daUrl(
+							author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+						]))),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A3(
+						author$project$Vega$trContour,
+						author$project$Vega$numSignal('width'),
+						author$project$Vega$numSignal('height'),
+						_List_fromArray(
+							[
+								author$project$Vega$cnX(
+								author$project$Vega$fExpr('scale(\'xScale\', datum.Horsepower)')),
+								author$project$Vega$cnY(
+								author$project$Vega$fExpr('scale(\'yScale\', datum.Miles_per_Gallon)')),
+								author$project$Vega$cnWeight(
+								author$project$Vega$fExpr('scale(\'xScale\', datum.Horsepower)')),
+								author$project$Vega$cnCount(
+								author$project$Vega$numSignal('count'))
+							]))
+					]),
+				A2(
+					author$project$Vega$data,
+					'contours',
+					_List_fromArray(
+						[
+							author$project$Vega$daSource('source')
+						])))
+			]));
+	var cf = author$project$Vega$config(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$cfScaleRange,
+				author$project$Vega$raHeatmap,
+				A2(
+					author$project$Vega$raScheme,
+					author$project$Vega$str('greenblue'),
+					_List_Nil))
+			]));
+	var ax = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$axes,
+			A3(
+				author$project$Vega$axis,
+				'xScale',
+				author$project$Vega$siBottom,
+				_List_fromArray(
+					[
+						author$project$Vega$axGrid(author$project$Vega$true),
+						author$project$Vega$axDomain(author$project$Vega$false),
+						author$project$Vega$axTitle(
+						author$project$Vega$str('Horsepower'))
+					]))),
+		A3(
+			author$project$Vega$axis,
+			'yScale',
+			author$project$Vega$siLeft,
+			_List_fromArray(
+				[
+					author$project$Vega$axGrid(author$project$Vega$true),
+					author$project$Vega$axDomain(author$project$Vega$false),
+					author$project$Vega$axTitle(
+					author$project$Vega$str('Miles per gallon'))
+				])));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				cf,
+				author$project$Vega$width(500),
+				author$project$Vega$height(400),
+				author$project$Vega$padding(5),
+				author$project$Vega$autosize(
+				_List_fromArray(
+					[author$project$Vega$asPad])),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				ax(_List_Nil),
+				le(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
+var author$project$Vega$ANone = {$: 4};
+var author$project$Vega$asNone = author$project$Vega$ANone;
+var author$project$Vega$BooSignal = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$booSignal = author$project$Vega$BooSignal;
+var author$project$Vega$CPointer = 5;
+var author$project$Vega$cuPointer = 5;
+var author$project$Vega$cursorValue = function (cur) {
+	switch (cur) {
+		case 0:
+			return author$project$Vega$vStr('auto');
+		case 1:
+			return author$project$Vega$vStr('default');
+		case 2:
+			return author$project$Vega$vStr('none');
+		case 3:
+			return author$project$Vega$vStr('context-menu');
+		case 4:
+			return author$project$Vega$vStr('help');
+		case 5:
+			return author$project$Vega$vStr('pointer');
+		case 6:
+			return author$project$Vega$vStr('progress');
+		case 7:
+			return author$project$Vega$vStr('wait');
+		case 8:
+			return author$project$Vega$vStr('cell');
+		case 9:
+			return author$project$Vega$vStr('crosshair');
+		case 10:
+			return author$project$Vega$vStr('text');
+		case 11:
+			return author$project$Vega$vStr('vertical-text');
+		case 12:
+			return author$project$Vega$vStr('alias');
+		case 13:
+			return author$project$Vega$vStr('copy');
+		case 14:
+			return author$project$Vega$vStr('move');
+		case 15:
+			return author$project$Vega$vStr('no-drop');
+		case 16:
+			return author$project$Vega$vStr('not-allowed');
+		case 17:
+			return author$project$Vega$vStr('all-scroll');
+		case 18:
+			return author$project$Vega$vStr('col-resize');
+		case 19:
+			return author$project$Vega$vStr('row-resize');
+		case 20:
+			return author$project$Vega$vStr('n-resize');
+		case 21:
+			return author$project$Vega$vStr('e-resize');
+		case 22:
+			return author$project$Vega$vStr('s-resize');
+		case 23:
+			return author$project$Vega$vStr('w-resize');
+		case 24:
+			return author$project$Vega$vStr('ne-resize');
+		case 25:
+			return author$project$Vega$vStr('nw-resize');
+		case 26:
+			return author$project$Vega$vStr('se-resize');
+		case 27:
+			return author$project$Vega$vStr('sw-resize');
+		case 28:
+			return author$project$Vega$vStr('ew-resize');
+		case 29:
+			return author$project$Vega$vStr('ns-resize');
+		case 30:
+			return author$project$Vega$vStr('nesw-resize');
+		case 31:
+			return author$project$Vega$vStr('nwse-resize');
+		case 32:
+			return author$project$Vega$vStr('zoom-in');
+		case 33:
+			return author$project$Vega$vStr('zoom-out');
+		case 34:
+			return author$project$Vega$vStr('grab');
+		default:
+			return author$project$Vega$vStr('grabbing');
+	}
+};
+var author$project$Vega$DaFormat = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$daFormat = author$project$Vega$DaFormat;
+var author$project$Vega$ESBetween = F2(
+	function (a, b) {
+		return {$: 2, a: a, b: b};
+	});
+var author$project$Vega$esBetween = author$project$Vega$ESBetween;
+var author$project$Vega$ESConsume = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$esConsume = author$project$Vega$ESConsume;
+var author$project$Vega$ESFilter = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$esFilter = author$project$Vega$ESFilter;
+var author$project$Vega$ESMark = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$esMark = author$project$Vega$ESMark;
+var author$project$Vega$ESMerge = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$esMerge = author$project$Vega$ESMerge;
+var author$project$Vega$ESObject = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$esObject = author$project$Vega$ESObject;
+var author$project$Vega$ESSelector = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$esSelector = author$project$Vega$ESSelector;
+var author$project$Vega$ESSource = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$esSource = author$project$Vega$ESSource;
+var author$project$Vega$ESType = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$esType = author$project$Vega$ESType;
+var author$project$Vega$ESWindow = {$: 3};
+var author$project$Vega$esWindow = author$project$Vega$ESWindow;
+var author$project$Vega$MouseDown = 8;
+var author$project$Vega$etMouseDown = 8;
+var author$project$Vega$MouseMove = 9;
+var author$project$Vega$etMouseMove = 9;
+var author$project$Vega$MouseOut = 10;
+var author$project$Vega$etMouseOut = 10;
+var author$project$Vega$MouseOver = 11;
+var author$project$Vega$etMouseOver = 11;
+var author$project$Vega$MouseUp = 12;
+var author$project$Vega$etMouseUp = 12;
+var author$project$Vega$EForce = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$evForce = author$project$Vega$EForce;
+var author$project$Vega$EEvents = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$evHandler = F2(
+	function (ess, eHandlers) {
+		return A2(
+			elm$core$List$cons,
+			author$project$Vega$EEvents(ess),
+			eHandlers);
+	});
+var author$project$Vega$EUpdate = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$evUpdate = author$project$Vega$EUpdate;
+var author$project$Vega$FCenter = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$FpCx = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$FpCy = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$foCenter = F2(
+	function (x, y) {
+		return author$project$Vega$FCenter(
+			_List_fromArray(
+				[
+					author$project$Vega$FpCx(x),
+					author$project$Vega$FpCy(y)
+				]));
+	});
+var author$project$Vega$FCollide = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$FpRadius = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$foCollide = F2(
+	function (r, fps) {
+		return author$project$Vega$FCollide(
+			A2(
+				elm$core$List$cons,
+				author$project$Vega$FpRadius(r),
+				fps));
+	});
+var author$project$Vega$FLink = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$FpLinks = function (a) {
+	return {$: 10, a: a};
+};
+var author$project$Vega$foLink = F2(
+	function (links, fps) {
+		return author$project$Vega$FLink(
+			A2(
+				elm$core$List$cons,
+				author$project$Vega$FpLinks(links),
+				fps));
+	});
+var author$project$Vega$FNBody = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$foNBody = author$project$Vega$FNBody;
+var author$project$Vega$FpDistance = function (a) {
+	return {$: 12, a: a};
+};
+var author$project$Vega$fpDistance = author$project$Vega$FpDistance;
+var author$project$Vega$FpStrength = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$fpStrength = author$project$Vega$FpStrength;
+var author$project$Vega$FsForces = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$fsForces = author$project$Vega$FsForces;
+var author$project$Vega$FsIterations = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$fsIterations = author$project$Vega$FsIterations;
+var author$project$Vega$FsRestart = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$fsRestart = author$project$Vega$FsRestart;
+var author$project$Vega$FsStatic = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$fsStatic = author$project$Vega$FsStatic;
+var author$project$Vega$FsVelocityDecay = function (a) {
+	return {$: 6, a: a};
+};
+var author$project$Vega$fsVelocityDecay = author$project$Vega$FsVelocityDecay;
+var author$project$Vega$IRange = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$iRange = author$project$Vega$IRange;
+var author$project$Vega$InMax = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$inMax = author$project$Vega$InMax;
+var author$project$Vega$InMin = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$inMin = author$project$Vega$InMin;
+var author$project$Vega$InStep = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$inStep = author$project$Vega$InStep;
+var author$project$Vega$JSONProperty = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$jsonProperty = author$project$Vega$JSONProperty;
+var author$project$Vega$LPShape = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$lpShape = author$project$Vega$LPShape;
+var author$project$Vega$LPSourceX = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$lpSourceX = author$project$Vega$LPSourceX;
+var author$project$Vega$LPSourceY = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$lpSourceY = author$project$Vega$LPSourceY;
+var author$project$Vega$LPTargetX = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$lpTargetX = author$project$Vega$LPTargetX;
+var author$project$Vega$LPTargetY = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$lpTargetY = author$project$Vega$LPTargetY;
+var author$project$Vega$LinkDiagonal = {$: 3};
+var author$project$Vega$lsDiagonal = author$project$Vega$LinkDiagonal;
+var author$project$Vega$MInteractive = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$mInteractive = author$project$Vega$MInteractive;
+var author$project$Vega$MOn = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$mOn = author$project$Vega$MOn;
+var author$project$Vega$MTopZIndex = function (a) {
+	return {$: 10, a: a};
+};
+var author$project$Vega$mZIndex = author$project$Vega$MTopZIndex;
+var author$project$Vega$MCursor = function (a) {
+	return {$: 19, a: a};
+};
+var author$project$Vega$maCursor = author$project$Vega$MCursor;
+var author$project$Vega$Num = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$num = author$project$Vega$Num;
+var author$project$Vega$ScOrdinal = {$: 7};
+var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
+var author$project$Vega$SiDescription = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$siDescription = author$project$Vega$SiDescription;
+var author$project$Vega$SiOn = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$siOn = author$project$Vega$SiOn;
+var author$project$Vega$SiUpdate = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$siUpdate = author$project$Vega$SiUpdate;
+var author$project$Vega$StrSignal = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$strSignal = author$project$Vega$StrSignal;
+var author$project$Vega$TgModifyValues = F2(
+	function (a, b) {
+		return {$: 5, a: a, b: b};
+	});
+var author$project$Vega$tgModifyValues = author$project$Vega$TgModifyValues;
 var author$project$Vega$TForce = function (a) {
 	return {$: 16, a: a};
 };
@@ -10202,45 +12024,14 @@ var author$project$Vega$trigger = F2(
 					author$project$Vega$TgTrigger(trName),
 					trProps)));
 	});
-var author$project$Vega$true = author$project$Vega$Boo(true);
-var author$project$Vega$VBoo = function (a) {
-	return {$: 4, a: a};
-};
 var author$project$Vega$vFalse = author$project$Vega$VBoo(false);
-var author$project$Vega$VField = function (a) {
-	return {$: 11, a: a};
-};
-var author$project$Vega$vField = author$project$Vega$VField;
 var author$project$Vega$VNull = {$: 18};
 var author$project$Vega$vNull = author$project$Vega$VNull;
-var author$project$Vega$VNum = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$vNum = author$project$Vega$VNum;
-var author$project$Vega$VScale = function (a) {
-	return {$: 12, a: a};
-};
-var author$project$Vega$vScale = function (s) {
-	return author$project$Vega$VScale(
-		author$project$Vega$field(s));
-};
 var author$project$Vega$VSignal = function (a) {
 	return {$: 9, a: a};
 };
 var author$project$Vega$vSignal = author$project$Vega$VSignal;
-var author$project$Vega$vTrue = author$project$Vega$VBoo(true);
 var author$project$Vega$white = author$project$Vega$vStr('white');
-var author$project$Vega$VWidth = 2;
-var author$project$Vega$width = function (w) {
-	return _Utils_Tuple2(
-		2,
-		elm$json$Json$Encode$float(w));
-};
-var elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
 var elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -10709,10 +12500,6 @@ var author$project$TransformTests$forceTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var author$project$Vega$DaSource = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$daSource = author$project$Vega$DaSource;
 var author$project$Vega$dataColumn = F2(
 	function (colName, val) {
 		switch (val.$) {
@@ -10914,23 +12701,9 @@ var author$project$Vega$MText = function (a) {
 	return {$: 53, a: a};
 };
 var author$project$Vega$maText = author$project$Vega$MText;
-var author$project$Vega$MX = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$maX = author$project$Vega$MX;
-var author$project$Vega$MY = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$maY = author$project$Vega$MY;
 var author$project$Vega$Tidy = {$: 0};
 var author$project$Vega$meTidy = author$project$Vega$Tidy;
 var author$project$Vega$numSignals = author$project$Vega$NumSignals;
-var author$project$Vega$VPadding = 4;
-var author$project$Vega$padding = function (p) {
-	return _Utils_Tuple2(
-		4,
-		elm$json$Json$Encode$float(p));
-};
 var author$project$Vega$TeMethod = function (a) {
 	return {$: 2, a: a};
 };
@@ -10952,17 +12725,6 @@ var author$project$Vega$TTree = function (a) {
 var author$project$Vega$trTree = author$project$Vega$TTree;
 var author$project$Vega$TTreeLinks = {$: 42};
 var author$project$Vega$trTreeLinks = author$project$Vega$TTreeLinks;
-var author$project$Vega$transform = F2(
-	function (transforms, dTable) {
-		return _Utils_ap(
-			dTable,
-			_List_fromArray(
-				[
-					_Utils_Tuple2(
-					'transform',
-					A2(elm$json$Json$Encode$list, author$project$Vega$transformSpec, transforms))
-				]));
-	});
 var author$project$Vega$vMiddle = author$project$Vega$vStr('middle');
 var author$project$Vega$VStrs = function (a) {
 	return {$: 1, a: a};
@@ -11246,10 +13008,6 @@ var author$project$Vega$TStratify = F2(
 		return {$: 40, a: a, b: b};
 	});
 var author$project$Vega$trStratify = author$project$Vega$TStratify;
-var author$project$Vega$VNums = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$vNums = author$project$Vega$VNums;
 var author$project$TransformTests$packTest1 = function () {
 	var table = A2(
 		elm$core$Basics$composeL,
@@ -11402,18 +13160,6 @@ var author$project$TransformTests$packTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var author$project$Vega$DDataset = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$daDataset = author$project$Vega$DDataset;
-var author$project$Vega$DField = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$daField = author$project$Vega$DField;
-var author$project$Vega$DoData = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$doData = author$project$Vega$DoData;
 var author$project$Vega$DoStrs = function (a) {
 	return {$: 1, a: a};
 };
@@ -11426,14 +13172,6 @@ var author$project$Vega$IRadio = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$Vega$iRadio = author$project$Vega$IRadio;
-var author$project$Vega$ISelect = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$iSelect = author$project$Vega$ISelect;
-var author$project$Vega$InOptions = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$inOptions = author$project$Vega$InOptions;
 var author$project$Vega$MWidth = function (a) {
 	return {$: 3, a: a};
 };
@@ -11457,24 +13195,10 @@ var author$project$Vega$OrderSignal = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$Vega$orderSignal = author$project$Vega$OrderSignal;
-var author$project$Vega$RaHeight = {$: 7};
-var author$project$Vega$raHeight = author$project$Vega$RaHeight;
-var author$project$Vega$RaWidth = {$: 6};
-var author$project$Vega$raWidth = author$project$Vega$RaWidth;
 var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
 var author$project$Vega$ScBand = {$: 8};
 var author$project$Vega$scBand = author$project$Vega$ScBand;
-var author$project$Vega$SDomain = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$scDomain = author$project$Vega$SDomain;
-var author$project$Vega$ScLinear = {$: 0};
-var author$project$Vega$scLinear = author$project$Vega$ScLinear;
-var author$project$Vega$SRound = function (a) {
-	return {$: 8, a: a};
-};
-var author$project$Vega$scRound = author$project$Vega$SRound;
 var author$project$Vega$StField = function (a) {
 	return {$: 0, a: a};
 };
@@ -12548,7 +14272,6 @@ var author$project$TransformTests$pr = A2(
 					_List_fromArray(
 						[320, 3855])))
 			])));
-var author$project$Vega$black = author$project$Vega$vStr('black');
 var author$project$Vega$ClPath = function (a) {
 	return {$: 1, a: a};
 };
@@ -12565,11 +14288,6 @@ var author$project$Vega$TopojsonFeature = function (a) {
 	return {$: 5, a: a};
 };
 var author$project$Vega$topojsonFeature = author$project$Vega$TopojsonFeature;
-var author$project$Vega$TGeoPath = F2(
-	function (a, b) {
-		return {$: 19, a: a, b: b};
-	});
-var author$project$Vega$trGeoPath = author$project$Vega$TGeoPath;
 var author$project$Vega$TGeoPoint = F3(
 	function (a, b, c) {
 		return {$: 20, a: a, b: b, c: c};
@@ -12580,7 +14298,6 @@ var author$project$Vega$TVoronoi = F3(
 		return {$: 44, a: a, b: b, c: c};
 	});
 var author$project$Vega$trVoronoi = author$project$Vega$TVoronoi;
-var author$project$Vega$transparent = author$project$Vega$vStr('transparent');
 var author$project$Vega$VoAs = function (a) {
 	return {$: 2, a: a};
 };
@@ -12783,14 +14500,6 @@ var author$project$Vega$DoNums = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$doNums = author$project$Vega$DoNums;
-var author$project$Vega$VIfElse = F3(
-	function (a, b, c) {
-		return {$: 19, a: a, b: b, c: c};
-	});
-var author$project$Vega$ifElse = F3(
-	function (condition, thenVals, elseVals) {
-		return A3(author$project$Vega$VIfElse, condition, thenVals, elseVals);
-	});
 var author$project$Vega$RaSignal = function (a) {
 	return {$: 15, a: a};
 };
@@ -13104,9 +14813,10 @@ var author$project$TransformTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('nestTest1', author$project$TransformTests$nestTest1),
 			_Utils_Tuple2('treeTest1', author$project$TransformTests$treeTest1),
 			_Utils_Tuple2('voronoiTest1', author$project$TransformTests$voronoiTest1),
-			_Utils_Tuple2('voronoiTest2', author$project$TransformTests$voronoiTest2)
+			_Utils_Tuple2('voronoiTest2', author$project$TransformTests$voronoiTest2),
+			_Utils_Tuple2('contourTest1', author$project$TransformTests$contourTest1)
 		]));
-var author$project$TransformTests$sourceExample = author$project$TransformTests$treeTest1;
+var author$project$TransformTests$sourceExample = author$project$TransformTests$contourTest1;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
