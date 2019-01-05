@@ -1,37 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vega Hello World</title>
+    <meta charset="utf-8" />
 
-<head>
-  <title>Vega Hello World</title>
-  <meta charset="utf-8">
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
-  <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+    <!-- This is the script generated from Elm -->
+    <script src="js/helloWorld.js"></script>
+  </head>
 
-  <!-- This is the script generated from Elm -->
-  <script src="js/helloWorld.js"></script>
+  <body>
+    <h1>Hello from Vega</h1>
 
-</head>
+    <!-- The vega visualization will appear in the div with an id matching that named in elm-vega -->
+    <div id="helloWorld"></div>
 
-<body>
-
-  <h1>Hello from Vega</h1>
-
-  <!-- The vega visualization will appear in the div with an id matching that named in elm-vega -->
-  <div id="helloWorld"></div>
-
-  <script>
-  // This function grabs the specifications from Elm (here called namedSpecs).
-  // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
-  Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
-    for (let name of Object.keys(namedSpecs)) {
-      vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
-        console.warn
-      );
-    }
-  });
-  </script>
-
-</body>
-
+    <script>
+      // This function grabs the specifications from Elm (here called namedSpecs).
+      // Replace 'HelloWorld' in line below with name of your Elm module when you write your own.
+      Elm.HelloWorld.init().ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], { actions: false }).catch(
+            console.warn
+          );
+        }
+      });
+    </script>
+  </body>
 </html>

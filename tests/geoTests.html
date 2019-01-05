@@ -1,61 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vega Geo Tests</title>
+    <meta charset="utf-8" />
 
-<head>
-  <title>Vega Geo Tests</title>
-  <meta charset="utf-8">
-
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-  <style>body {font-family: 'Roboto', sans-serif;} #elmContainer{background-color: rgb(252,247,236);} .view > * { display: inline-block; vertical-align: middle; line-height: 1.6; margin-left: 1em;}</style>
-
-  <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
-
-  <!-- This is the script generated from Elm -->
-  <script src="js/geoTests.js"></script>
-
-</head>
-
-<body>
-
-  <h1>Vega Geo Tests</h1>
-
-  <h2>Line marks between (lng,lat) coordinates</h2>
-  <p>
-    Lines should be straight but with lower side longer than upper side because of the orthographic projection.
-  </p>
-  <div id="geoTest1" class="view"></div>
-
-
-  <h2>Shape mark from simple geoJson file</h2>
-  <p>
-    Similar to above but with solid interior and curved upper and lower boundaries because boundaries of geoJSON files interpolated along great circles.
-  </p>
-  <div id="geoTest2" class="view"></div>
-
-  <h2>Shape mark from simple topoJson file</h2>
-  <p>
-    Two regions with separate IDs and coloured interiors.
-  </p>
-  <div id="geoTest3" class="view"></div>
-
-  <h2>Shape mark from multi-part topoJson file</h2>
-  <p>
-    Four regions including region with hole and coloured interiors.
-  </p>
-  <div id="geoTest4" class="view"></div>
-
-  <h2>Source</h2>
-  <div id="elmContainer"></div>
-
-  <script>
-    Elm.GeoTests.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
       }
-    });
-  </script>
+      #elmContainer {
+        background-color: rgb(252, 247, 236);
+      }
+      .view > * {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.6;
+        margin-left: 1em;
+      }
+    </style>
 
-</body>
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
+    <!-- This is the script generated from Elm -->
+    <script src="js/geoTests.js"></script>
+  </head>
+
+  <body>
+    <h1>Vega Geo Tests</h1>
+
+    <h2>Line marks between (lng,lat) coordinates</h2>
+    <p>
+      Lines should be straight but with lower side longer than upper side
+      because of the orthographic projection.
+    </p>
+    <div id="geoTest1" class="view"></div>
+
+    <h2>Shape mark from simple geoJson file</h2>
+    <p>
+      Similar to above but with solid interior and curved upper and lower
+      boundaries because boundaries of geoJSON files interpolated along great
+      circles.
+    </p>
+    <div id="geoTest2" class="view"></div>
+
+    <h2>Shape mark from simple topoJson file</h2>
+    <p>Two regions with separate IDs and coloured interiors.</p>
+    <div id="geoTest3" class="view"></div>
+
+    <h2>Shape mark from multi-part topoJson file</h2>
+    <p>Four regions including region with hole and coloured interiors.</p>
+    <div id="geoTest4" class="view"></div>
+
+    <h2>Source</h2>
+    <div id="elmContainer"></div>
+
+    <script>
+      Elm.GeoTests.init({
+        node: document.getElementById("elmContainer")
+      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
 </html>
