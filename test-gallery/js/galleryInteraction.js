@@ -14774,23 +14774,10 @@ var author$project$Vega$dataColumn = F2(
 						]));
 		}
 	});
-var elm$core$List$maybeCons = F3(
-	function (f, mx, xs) {
-		var _n0 = f(mx);
-		if (!_n0.$) {
-			var x = _n0.a;
-			return A2(elm$core$List$cons, x, xs);
-		} else {
-			return xs;
-		}
-	});
-var elm$core$List$filterMap = F2(
-	function (f, xs) {
-		return A3(
-			elm$core$List$foldr,
-			elm$core$List$maybeCons(f),
-			_List_Nil,
-			xs);
+var elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
 	});
 var elm$core$List$head = function (list) {
 	if (list.b) {
@@ -14801,41 +14788,52 @@ var elm$core$List$head = function (list) {
 		return elm$core$Maybe$Nothing;
 	}
 };
-var elm$core$List$tail = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return elm$core$Maybe$Just(xs);
-	} else {
-		return elm$core$Maybe$Nothing;
-	}
-};
-var author$project$Vega$transpose = function (ll) {
-	transpose:
-	while (true) {
-		if (!ll.b) {
-			return _List_Nil;
-		} else {
-			if (!ll.a.b) {
-				var xss = ll.b;
-				var $temp$ll = xss;
-				ll = $temp$ll;
-				continue transpose;
+var elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
 			} else {
-				var _n1 = ll.a;
-				var x = _n1.a;
-				var xs = _n1.b;
-				var xss = ll.b;
-				var tails = A2(elm$core$List$filterMap, elm$core$List$tail, xss);
-				var heads = A2(elm$core$List$filterMap, elm$core$List$head, xss);
-				return A2(
-					elm$core$List$cons,
-					A2(elm$core$List$cons, x, heads),
-					author$project$Vega$transpose(
-						A2(elm$core$List$cons, xs, tails)));
+				var $temp$result = A2(elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
 			}
 		}
-	}
+	});
+var elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3(elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (!maybe.$) {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var author$project$Vega$transpose = function (xss) {
+	var numCols = A2(
+		elm$core$Basics$composeR,
+		elm$core$List$head,
+		A2(
+			elm$core$Basics$composeR,
+			elm$core$Maybe$withDefault(_List_Nil),
+			elm$core$List$length));
+	return A3(
+		elm$core$List$foldr,
+		elm$core$List$map2(elm$core$List$cons),
+		A2(
+			elm$core$List$repeat,
+			numCols(xss),
+			_List_Nil),
+		xss);
 };
 var author$project$Vega$dataFromColumns = F3(
 	function (name, fmts, cols) {

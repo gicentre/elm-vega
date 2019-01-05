@@ -16908,23 +16908,12 @@ transformSpec trans =
 
 
 transpose : List (List a) -> List (List a)
-transpose ll =
-    case ll of
-        [] ->
-            []
-
-        [] :: xss ->
-            transpose xss
-
-        (x :: xs) :: xss ->
-            let
-                heads =
-                    List.filterMap List.head xss
-
-                tails =
-                    List.filterMap List.tail xss
-            in
-            (x :: heads) :: transpose (xs :: tails)
+transpose xss =
+    let
+        numCols =
+            List.head >> Maybe.withDefault [] >> List.length
+    in
+    List.foldr (List.map2 (::)) (List.repeat (numCols xss) []) xss
 
 
 treemapProperty : TreemapProperty -> LabelledSpec
