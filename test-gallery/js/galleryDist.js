@@ -13427,6 +13427,261 @@ var author$project$GalleryDist$histo2 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var author$project$Vega$ESObject = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$esObject = author$project$Vega$ESObject;
+var author$project$Vega$ESThrottle = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$esThrottle = author$project$Vega$ESThrottle;
+var author$project$Vega$ESType = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$esType = author$project$Vega$ESType;
+var author$project$Vega$Timer = 18;
+var author$project$Vega$etTimer = 18;
+var author$project$Vega$EEvents = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$evHandler = F2(
+	function (ess, eHandlers) {
+		return A2(
+			elm$core$List$cons,
+			author$project$Vega$EEvents(ess),
+			eHandlers);
+	});
+var author$project$Vega$EUpdate = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$evUpdate = author$project$Vega$EUpdate;
+var author$project$Vega$SiOn = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$siOn = author$project$Vega$SiOn;
+var author$project$Vega$AlwaysUpdate = 1;
+var author$project$Vega$TFormula = F3(
+	function (a, b, c) {
+		return {$: 17, a: a, b: b, c: c};
+	});
+var author$project$Vega$trFormula = F2(
+	function (exp, fName) {
+		return A3(author$project$Vega$TFormula, exp, fName, 1);
+	});
+var author$project$Vega$TSequence = F3(
+	function (a, b, c) {
+		return {$: 37, a: a, b: b, c: c};
+	});
+var author$project$Vega$trSequence = author$project$Vega$TSequence;
+var author$project$GalleryDist$hops1 = function () {
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				A2(
+					elm$core$Basics$composeL,
+					author$project$Vega$signals,
+					A2(
+						author$project$Vega$signal,
+						'baseline',
+						_List_fromArray(
+							[
+								author$project$Vega$siValue(
+								author$project$Vega$vNum(5))
+							]))),
+				A2(
+					author$project$Vega$signal,
+					'noise',
+					_List_fromArray(
+						[
+							author$project$Vega$siValue(
+							author$project$Vega$vNum(2)),
+							author$project$Vega$siBind(
+							author$project$Vega$iRange(
+								_List_fromArray(
+									[
+										author$project$Vega$inMin(0),
+										author$project$Vega$inMax(4),
+										author$project$Vega$inStep(0.1)
+									])))
+						]))),
+			A2(
+				author$project$Vega$signal,
+				'trend',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$vNum(0)),
+						author$project$Vega$siBind(
+						author$project$Vega$iRange(
+							_List_fromArray(
+								[
+									author$project$Vega$inMin(-1),
+									author$project$Vega$inMax(1),
+									author$project$Vega$inStep(0.1)
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'sample',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(
+					author$project$Vega$vNum(1)),
+					author$project$Vega$siOn(
+					_List_fromArray(
+						[
+							A2(
+							author$project$Vega$evHandler,
+							_List_fromArray(
+								[
+									author$project$Vega$esObject(
+									_List_fromArray(
+										[
+											author$project$Vega$esType(author$project$Vega$etTimer),
+											author$project$Vega$esThrottle(
+											author$project$Vega$num(1000))
+										]))
+								]),
+							_List_fromArray(
+								[
+									author$project$Vega$evUpdate('1 + ((sample + 1) % 3)')
+								]))
+						]))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$scales,
+			A2(
+				author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scType(author$project$Vega$scBand),
+						author$project$Vega$scRange(author$project$Vega$raWidth),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daDataset('steps'),
+									author$project$Vega$daField(
+									author$project$Vega$field('month'))
+								])))
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scType(author$project$Vega$scLinear),
+					author$project$Vega$scRange(author$project$Vega$raHeight),
+					author$project$Vega$scDomain(
+					author$project$Vega$doNums(
+						author$project$Vega$nums(
+							_List_fromArray(
+								[0, 10]))))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$marks,
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$rect,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('steps'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('month'))
+										])),
+									author$project$Vega$maWidth(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vBand(
+											author$project$Vega$num(1)),
+											author$project$Vega$vOffset(
+											author$project$Vega$vNum(-1))
+										])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											author$project$Vega$vStr('steelblue')
+										]))
+								])),
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('value'))
+										])),
+									author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vNum(0)
+										]))
+								]))
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A3(
+						author$project$Vega$trSequence,
+						author$project$Vega$num(0),
+						author$project$Vega$num(12),
+						author$project$Vega$num(1)),
+						A2(author$project$Vega$trFormula, 'timeFormat(datetime(2015, datum.data, 1), \'%b\')', 'month'),
+						A2(author$project$Vega$trFormula, 'clamp(sample && (baseline - 0.5 * trend * (5.5 - datum.data) + noise * (2 * random() - 1)), 0, 10)', 'value')
+					]),
+				A2(author$project$Vega$data, 'steps', _List_Nil))
+			]));
+	var ax = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$axes,
+			A3(author$project$Vega$axis, 'xScale', author$project$Vega$siBottom, _List_Nil)),
+		A3(author$project$Vega$axis, 'yScale', author$project$Vega$siLeft, _List_Nil));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(300),
+				author$project$Vega$height(200),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var author$project$Vega$AxTitlePadding = function (a) {
 	return {$: 54, a: a};
 };
@@ -14904,15 +15159,6 @@ var author$project$Vega$LValues = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$luValues = author$project$Vega$LValues;
-var author$project$Vega$AlwaysUpdate = 1;
-var author$project$Vega$TFormula = F3(
-	function (a, b, c) {
-		return {$: 17, a: a, b: b, c: c};
-	});
-var author$project$Vega$trFormula = F2(
-	function (exp, fName) {
-		return A3(author$project$Vega$TFormula, exp, fName, 1);
-	});
 var author$project$Vega$TLookup = F4(
 	function (a, b, c, d) {
 		return {$: 28, a: a, b: b, c: c, d: d};
@@ -15256,9 +15502,10 @@ var author$project$GalleryDist$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('window2', author$project$GalleryDist$window2),
 			_Utils_Tuple2('scatter1', author$project$GalleryDist$scatter1),
 			_Utils_Tuple2('contour1', author$project$GalleryDist$contour1),
-			_Utils_Tuple2('wheat1', author$project$GalleryDist$wheat1)
+			_Utils_Tuple2('wheat1', author$project$GalleryDist$wheat1),
+			_Utils_Tuple2('hops1', author$project$GalleryDist$hops1)
 		]));
-var author$project$GalleryDist$sourceExample = author$project$GalleryDist$violinplot1;
+var author$project$GalleryDist$sourceExample = author$project$GalleryDist$hops1;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;

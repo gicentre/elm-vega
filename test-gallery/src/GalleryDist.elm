@@ -1030,9 +1030,75 @@ wheat1 =
         [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+hops1 : Spec
+hops1 =
+    let
+        ds =
+            dataSource
+                [ data "steps" []
+                    |> transform
+                        [ trSequence (num 0) (num 12) (num 1)
+                        , trFormula "timeFormat(datetime(2015, datum.data, 1), '%b')" "month"
+                        , trFormula "clamp(sample && (baseline - 0.5 * trend * (5.5 - datum.data) + noise * (2 * random() - 1)), 0, 10)" "value"
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "baseline" [ siValue (vNum 5) ]
+                << signal "noise" [ siValue (vNum 2), siBind (iRange [ inMin 0, inMax 4, inStep 0.1 ]) ]
+                << signal "trend" [ siValue (vNum 0), siBind (iRange [ inMin -1, inMax 1, inStep 0.1 ]) ]
+                << signal "sample"
+                    [ siValue (vNum 1)
+                    , siOn
+                        [ evHandler
+                            [ esObject [ esType etTimer, esThrottle (num 1000) ] ]
+                            [ evUpdate "1 + ((sample + 1) % 3)" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scBand
+                    , scRange raWidth
+                    , scDomain (doData [ daDataset "steps", daField (field "month") ])
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scDomain (doNums (nums [ 0, 10 ]))
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "steps") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "month") ]
+                            , maWidth [ vScale "xScale", vBand (num 1), vOffset (vNum -1) ]
+                            , maFill [ vStr "steelblue" ]
+                            ]
+                        , enUpdate
+                            [ maY [ vScale "yScale", vField (field "value") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 300, height 200, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    violinplot1
+    hops1
 
 
 
@@ -1052,6 +1118,7 @@ mySpecs =
         , ( "scatter1", scatter1 )
         , ( "contour1", contour1 )
         , ( "wheat1", wheat1 )
+        , ( "hops1", hops1 )
         ]
 
 
