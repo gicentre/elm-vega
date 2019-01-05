@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Vega Test Gallery: Geographic Maps</title>
-  <meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One" rel="stylesheet">
-  <link href="css/gallery.css" type="text/css" rel="stylesheet">
+  <head>
+    <title>Vega Test Gallery: Geographic Maps</title>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One"
+      rel="stylesheet"
+    />
+    <link href="css/gallery.css" type="text/css" rel="stylesheet" />
 
-  <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
-  <!-- The following is only needed when using custom D3 projections. -->
-  <script src="https://d3js.org/d3-array.v1.min.js"></script>
-  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-  <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <!-- The following is only needed when using custom D3 projections. -->
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
+    <!-- This is the script generated from Elm -->
+    <script src="js/galleryGeo.js"></script>
+  </head>
 
-  <!-- This is the script generated from Elm -->
-  <script src="js/galleryGeo.js"></script>
-</head>
+  <body>
+    <h1>Vega Test Gallery</h1>
+    <p>
+      From the
+      <a href="https://vega.github.io/vega/examples/" target="_blank"
+        >Vega Example Gallery</a
+      >
+    </p>
 
-<body>
-
-  <h1>Vega Test Gallery</h1>
-
-  <ul>
+    <ul>
       <li><a href="bar.html">bar charts</a></li>
       <li><a href="lineArea.html">line and area charts</a></li>
       <li><a href="radial.html">radial charts</a></li>
@@ -36,123 +43,149 @@
       <li><a href="other.html">other chart types</a></li>
       <li><a href="custom.html">custom visual designs</a></li>
       <li><a href="interaction.html">interaction techniques</a></li>
+    </ul>
 
-  </ul>
+    <h2>Geographic</h2>
+    <p>
+      A choropleth map of 2009 U.S. unemployment rates by county. A quantize
+      scale is used to divide the color range into 9 discrete, uniformly-spaced
+      bins.
+    </p>
+    <div id="geo1" class="view"></div>
 
-  <h2>Geographic</h2>
-  <p>
-    A choropleth map of 2009 U.S. unemployment rates by county.
-    A quantize scale is used to divide the color range into 9 discrete, uniformly-spaced bins.
-  </p>
-  <div id="geo1" class="view"></div>
+    <p>
+      A Dorling cartogram is a thematic map that uses sized circles to represent
+      a quantity of interest per geographic region. This example visualizes the
+      ratio of obese adults (BMI >= 30) by U.S. state in 2008. A double encoding
+      uses both circle area and fill color to convey the obesity rate. Vega’s
+      force transform and geoCentroid expression function are used to compute
+      the layout.
+    </p>
+    <div id="geo2" class="view"></div>
 
-  <p>
-    A Dorling cartogram is a thematic map that uses sized circles to represent a quantity of interest per geographic region.
-    This example visualizes the ratio of obese adults (BMI >= 30) by U.S. state in 2008.
-    A double encoding uses both circle area and fill color to convey the obesity rate.
-    Vega’s force transform and geoCentroid expression function are used to compute the layout.
-  </p>
-  <div id="geo2" class="view"></div>
+    <p>
+      A configurable map of world countries. Explore the results of applying
+      different map projections and parameter settings. This example loads
+      TopoJSON data and applies the Vega geoshape and graticule transforms.
+    </p>
+    <div id="geo3" class="view"></div>
 
+    <p>
+      A globe visualization of earthquakes reported by the USGS for the week of
+      February 6, 2018. The earthquakes are formatted as GeoJSON data, and the
+      geoshape transform’s pointRadius parameter is used to visualize earthquake
+      magnitude as a circular area. This example is based on Jeremy Ashkenas’
+      <a
+        href="https://beta.observablehq.com/@jashkenas/quakespotter-0-1"
+        target="_blank"
+        >USGS World Earthquake Map</a
+      >.
+    </p>
+    <div id="geo4" class="view"></div>
 
-  <p>
-    A configurable map of world countries. Explore the results of applying different map projections and parameter settings.
-    This example loads TopoJSON data and applies the Vega geoshape and graticule transforms.
-  </p>
-  <div id="geo3" class="view"></div>
+    <p>
+      A gallery of world maps using various cartographic projections. Each map
+      clips the projected land masses and graticule to the sphere of the Earth
+      to ensure no extraneous shapes are shown. This example uses projections
+      from the
+      <a href="https://github.com/d3/d3-geo-projection" target="_blank"
+        >d3-geo-projection library</a
+      >
+      that are not included in the standard Vega release.
+    </p>
+    <div id="geo5" class="view"></div>
 
-  <p>
-    A globe visualization of earthquakes reported by the USGS for the week of February 6, 2018.
-    The earthquakes are formatted as GeoJSON data, and the geoshape transform’s pointRadius parameter is used to visualize earthquake magnitude as a circular area.
-    This example is based on Jeremy Ashkenas’ <a href="https://beta.observablehq.com/@jashkenas/quakespotter-0-1" target="_blank">USGS World Earthquake Map</a>.
-  </p>
-  <div id="geo4" class="view"></div>
+    <p>
+      A world map that pans and zooms in response to mouse drag and scroll wheel
+      input. This example applies an inverse map projection (using Vega’s invert
+      expression function) to map changes in pixel space to updated projection
+      parameters.
+    </p>
+    <div id="geo6" class="view"></div>
 
-  <p>
-    A gallery of world maps using various cartographic projections.
-    Each map clips the projected land masses and graticule to the sphere of the Earth to ensure no extraneous shapes are shown.
-    This example uses projections from the <a href="https://github.com/d3/d3-geo-projection" target="_blank">d3-geo-projection library</a> that are not included in the standard Vega release.
-  </p>
-  <div id="geo5" class="view"></div>
+    <p>
+      This example visualizes the difference in projected area of countries
+      using two different map projections. Each country is abstracted to a
+      circle, sized by the area of that country under a particular map
+      projection. Country circles are positioned based on the centroid position
+      of the country under a primary projection. A second set of circles are
+      then overlaid, with projected areas based on a secondary projection. This
+      example demonstrates Vega’s geoArea and geoCentroid expression language
+      functions.
+    </p>
+    <div id="geo7" class="view"></div>
 
-  <p>
-    A world map that pans and zooms in response to mouse drag and scroll wheel input.
-    This example applies an inverse map projection (using Vega’s invert expression function) to map changes in pixel space to updated projection parameters.
-  </p>
-  <div id="geo6" class="view"></div>
+    <p>
+      A colored contour plot of the Maungawhau volcano in New Zealand. This
+      example demonstrates contour generation directly from a provided grid of
+      data values, rather than performing kernel density estimation on a
+      discrete point set.
+    </p>
+    <div id="geo8" class="view"></div>
 
-  <p>
-    This example visualizes the difference in projected area of countries using two different map projections.
-    Each country is abstracted to a circle, sized by the area of that country under a particular map projection.
-    Country circles are positioned based on the centroid position of the country under a primary projection.
-    A second set of circles are then overlaid, with projected areas based on a secondary projection.
-    This example demonstrates Vega’s geoArea and geoCentroid expression language functions.
-  </p>
-  <div id="geo7" class="view"></div>
+    <h2>Source</h2>
+    <details
+      ><summary>click to see code</summary>
+      <div id="elmContainer"></div>
+    </details>
 
+    <script>
+      vega.projection("airy", d3.geoAiry);
+      vega.projection("aitoff", d3.geoAitoff);
+      vega.projection("armadillo", d3.geoArmadillo);
+      vega.projection("august", d3.geoAugust);
+      vega.projection("baker", d3.geoBaker);
+      vega.projection("berghaus", d3.geoBerghaus);
+      vega.projection("bertin1953", d3.geoBertin1953);
+      vega.projection("boggs", d3.geoBoggs);
+      vega.projection("bonne", d3.geoBonne);
+      vega.projection("bottomley", d3.geoBottomley);
+      vega.projection("collignon", d3.geoCollignon);
+      vega.projection("craig", d3.geoCraig);
+      vega.projection("craster", d3.geoCraster);
+      vega.projection("cylindricalequalarea", d3.geoCylindricalEqualArea);
+      vega.projection(
+        "cylindricalstereographic",
+        d3.geoCylindricalStereographic
+      );
+      vega.projection("eckert1", d3.geoEckert1);
+      vega.projection("eckert2", d3.geoEckert2);
+      vega.projection("eckert3", d3.geoEckert3);
+      vega.projection("eckert4", d3.geoEckert4);
+      vega.projection("eckert5", d3.geoEckert5);
+      vega.projection("eckert6", d3.geoEckert6);
+      vega.projection("eisenlohr", d3.geoEisenlohr);
+      vega.projection("fahey", d3.geoFahey);
+      vega.projection("foucaut", d3.geoFoucaut);
+      vega.projection("gingery", d3.geoGingery);
+      vega.projection("guyou", d3.geoGuyou);
+      vega.projection("hammer", d3.geoHammer);
+      vega.projection("littrow", d3.geoLittrow);
+      vega.projection("mollweide", d3.geoMollweide);
+      vega.projection("wagner6", d3.geoWagner6);
+      vega.projection("wiechel", d3.geoWiechel);
+      vega.projection("winkel3", d3.geoWinkel3);
+      vega.projection("interruptedSinusoidal", d3.geoInterruptedSinusoidal);
+      vega.projection("interruptedMollweide", d3.geoInterruptedMollweide);
+      vega.projection(
+        "interruptedMollweideHemispheres",
+        d3.geoInterruptedMollweideHemispheres
+      );
+      vega.projection("polyhedralButterfly", d3.geoPolyhedralButterfly);
+      vega.projection("peirceQuincuncial", d3.geoPeirceQuincuncial);
+    </script>
 
-  <p>
-    A colored contour plot of the Maungawhau volcano in New Zealand.
-    This example demonstrates contour generation directly from a provided grid of data values, rather than performing kernel density estimation on a discrete point set.
-  </p>
-  <div id="geo8" class="view"></div>
-
-  <h2>Source</h2>
-  <details><summary>click to see code</summary>
-    <div id="elmContainer"></div>
-  </details>
-
-  <script>
-  vega.projection("airy", d3.geoAiry);
-vega.projection("aitoff", d3.geoAitoff);
-vega.projection("armadillo", d3.geoArmadillo);
-vega.projection("august", d3.geoAugust);
-vega.projection("baker", d3.geoBaker);
-vega.projection("berghaus", d3.geoBerghaus);
-vega.projection("bertin1953", d3.geoBertin1953);
-vega.projection("boggs", d3.geoBoggs);
-vega.projection("bonne", d3.geoBonne);
-vega.projection("bottomley", d3.geoBottomley);
-vega.projection("collignon", d3.geoCollignon);
-vega.projection("craig", d3.geoCraig);
-vega.projection("craster", d3.geoCraster);
-vega.projection("cylindricalequalarea", d3.geoCylindricalEqualArea);
-vega.projection("cylindricalstereographic", d3.geoCylindricalStereographic);
-vega.projection("eckert1", d3.geoEckert1);
-vega.projection("eckert2", d3.geoEckert2);
-vega.projection("eckert3", d3.geoEckert3);
-vega.projection("eckert4", d3.geoEckert4);
-vega.projection("eckert5", d3.geoEckert5);
-vega.projection("eckert6", d3.geoEckert6);
-vega.projection("eisenlohr", d3.geoEisenlohr);
-vega.projection("fahey", d3.geoFahey);
-vega.projection("foucaut", d3.geoFoucaut);
-vega.projection("gingery", d3.geoGingery);
-vega.projection("guyou", d3.geoGuyou);
-vega.projection("hammer", d3.geoHammer);
-vega.projection("littrow", d3.geoLittrow);
-vega.projection("mollweide", d3.geoMollweide);
-vega.projection("wagner6", d3.geoWagner6);
-vega.projection("wiechel", d3.geoWiechel);
-vega.projection("winkel3", d3.geoWinkel3);
-vega.projection("interruptedSinusoidal", d3.geoInterruptedSinusoidal);
-vega.projection("interruptedMollweide", d3.geoInterruptedMollweide);
-vega.projection(
-  "interruptedMollweideHemispheres",
-  d3.geoInterruptedMollweideHemispheres
-);
-vega.projection("polyhedralButterfly", d3.geoPolyhedralButterfly);
-vega.projection("peirceQuincuncial", d3.geoPeirceQuincuncial);
-</script>
-
-<script>
-  Elm.GalleryGeo.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
-    for (let name of Object.keys(namedSpecs)) {
-      vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
-    }
-  });
-</script>
-
-</body>
-
+    <script>
+      Elm.GalleryGeo.init({
+        node: document.getElementById("elmContainer")
+      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
 </html>
