@@ -6964,21 +6964,26 @@ var author$project$Vega$contourProperty = function (cnProp) {
 				'y',
 				author$project$Vega$fieldSpec(f));
 		case 3:
+			var f = cnProp.a;
+			return _Utils_Tuple2(
+				'weight',
+				author$project$Vega$fieldSpec(f));
+		case 4:
 			var n = cnProp.a;
 			return _Utils_Tuple2(
 				'cellSize',
 				author$project$Vega$numSpec(n));
-		case 4:
+		case 5:
 			var n = cnProp.a;
 			return _Utils_Tuple2(
 				'bandwidth',
 				author$project$Vega$numSpec(n));
-		case 5:
+		case 6:
 			var b = cnProp.a;
 			return _Utils_Tuple2(
 				'smooth',
 				author$project$Vega$booSpec(b));
-		case 6:
+		case 7:
 			var n = cnProp.a;
 			if (!n.$) {
 				return _Utils_Tuple2('thresholds', elm$json$Json$Encode$null);
@@ -6987,7 +6992,7 @@ var author$project$Vega$contourProperty = function (cnProp) {
 					'thresholds',
 					author$project$Vega$numSpec(n));
 			}
-		case 7:
+		case 8:
 			var n = cnProp.a;
 			return _Utils_Tuple2(
 				'count',
