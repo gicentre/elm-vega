@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Vega Test Gallery: Distributions</title>
-  <meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One" rel="stylesheet">
-  <link href="css/gallery.css" type="text/css" rel="stylesheet">
+  <head>
+    <title>Vega Test Gallery: Distributions</title>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Fjalla+One"
+      rel="stylesheet"
+    />
+    <link href="css/gallery.css" type="text/css" rel="stylesheet" />
 
-  <!-- These scripts link to the Vega runtime -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@3"></script>
 
-  <!-- This is the script generated from Elm -->
-  <script src="js/galleryDist.js"></script>
-</head>
+    <!-- This is the script generated from Elm -->
+    <script src="js/galleryDist.js"></script>
+  </head>
 
-<body>
+  <body>
+    <h1>Vega Test Gallery</h1>
 
-  <h1>Vega Test Gallery</h1>
-
-  <ul>
+    <ul>
       <li><a href="bar.html">bar charts</a></li>
       <li><a href="lineArea.html">line and area charts</a></li>
       <li><a href="radial.html">radial charts</a></li>
@@ -30,94 +32,116 @@
       <li><a href="other.html">other chart types</a></li>
       <li><a href="custom.html">custom visual designs</a></li>
       <li><a href="interaction.html">interaction techniques</a></li>
-  </ul>
+    </ul>
 
-  <h2>Distributions</h2>
+    <h2>Distributions</h2>
 
-  <p>
-    A histogram subdivides a numerical range into bins, and counts the number of data points with each segment.
-    The resulting bar chart provides a discrete estimate of the probability density function.
-  </p>
-  <div id="histo1" class="view"></div>
+    <p>
+      A histogram subdivides a numerical range into bins, and counts the number
+      of data points with each segment. The resulting bar chart provides a
+      discrete estimate of the probability density function.
+    </p>
+    <div id="histo1" class="view"></div>
 
-  <p>
-    This example demonstrates a histogram over a numerical range, with a segment to show the prevalence of null values.
-  </p>
-  <div id="histo2" class="view"></div>
+    <p>
+      This example demonstrates a histogram over a numerical range, with a
+      segment to show the prevalence of null values.
+    </p>
+    <div id="histo2" class="view"></div>
 
-  <p>
-    Visual comparison of estimated probability distributions for a sample of numeric values.
-    A normal (Gaussian) distribution parameterized by the mean and standard deviation, and a kernel density estimate.
-    This example supports estimates of either probability density functions (pdf) or cumulative distribution functions (cdf), using Vega’s density transform.
-  </p>
-  <div id="density1" class="view"></div>
+    <p>
+      Visual comparison of estimated probability distributions for a sample of
+      numeric values. A normal (Gaussian) distribution parameterized by the mean
+      and standard deviation, and a kernel density estimate. This example
+      supports estimates of either probability density functions (pdf) or
+      cumulative distribution functions (cdf), using Vega’s density transform.
+    </p>
+    <div id="density1" class="view"></div>
 
-  <p>
-    A box plot summarizes a distribution of quantitative values using a set of summary statistics.
-    Here, the boxes show the interquartile range (IQR), with the white bar indicating the median value.
-    The thin lines (“whiskers”) currently show the extent of the minimum and maximum values;
-    other values, such as whiskers extending 1.5 * IQR from each end of the box, are often used as well.
-    See the violin plot example for an alternative approach.
-  </p>
-  <div id="boxplot1" class="view"></div>
+    <p>
+      A box plot summarizes a distribution of quantitative values using a set of
+      summary statistics. Here, the boxes show the interquartile range (IQR),
+      with the white bar indicating the median value. The thin lines
+      (“whiskers”) currently show the extent of the minimum and maximum values;
+      other values, such as whiskers extending 1.5 * IQR from each end of the
+      box, are often used as well. See the violin plot example for an
+      alternative approach.
+    </p>
+    <div id="boxplot1" class="view"></div>
 
-  <p>
-    A violin plot visualizes a distribution of quantitative values as a continuous approximation of the probability density function, computed using kernel density estimation (KDE).
-    The densities are additionally annotated with the median value and interquartile range, shown as black lines.
-    Violin plots can be more informative than classical box plots.
-  </p>
-  <div id="violinplot1" class="view"></div>
+    <p>
+      A violin plot visualizes a distribution of quantitative values as a
+      continuous approximation of the probability density function, computed
+      using kernel density estimation (KDE). The densities are additionally
+      annotated with the median value and interquartile range, shown as black
+      lines. Violin plots can be more informative than classical box plots.
+    </p>
+    <div id="violinplot1" class="view"></div>
 
-  <p>
-    A plot of the top-k film directors by aggregate worldwide gross.
-    Performs an aggregation of all directors, ranks them, and filters to only the top results, using the 'window' transform.
-  </p>
-  <div id="window1" class="view"></div>
+    <p>
+      A plot of the top-k film directors by aggregate worldwide gross. Performs
+      an aggregation of all directors, ranks them, and filters to only the top
+      results, using the 'window' transform.
+    </p>
+    <div id="window1" class="view"></div>
 
-  <p>
-    A plot of the top-k film directors, plus all other directors, by aggregate worldwide gross.
-    Unlike the previous example, this chart includes a category of all other directors aggregated together.
-    The visualization spec first computes aggregates for all directors and ranks them.
-    It then copies these ranks back to the source data using a lookup transform, and determines which directors belong in the “other” category before performing a final aggregation.
-  </p>
-  <div id="window2" class="view"></div>
+    <p>
+      A plot of the top-k film directors, plus all other directors, by aggregate
+      worldwide gross. Unlike the previous example, this chart includes a
+      category of all other directors aggregated together. The visualization
+      spec first computes aggregates for all directors and ranks them. It then
+      copies these ranks back to the source data using a lookup transform, and
+      determines which directors belong in the “other” category before
+      performing a final aggregation.
+    </p>
+    <div id="window2" class="view"></div>
 
-  <p>
-    A binned scatterplot is a more scalable alternative to the standard scatter plot.
-    The data points are grouped into bins, and an aggregate statistic is used to summarize each bin.
-    Here we use a circular area encoding to depict the count of records, visualizing the density of data points.
-    For higher bin counts color might instead be used, though with some loss of perceptual comparison accuracy.
-  </p>
-  <div id="scatter1" class="view"></div>
+    <p>
+      A binned scatterplot is a more scalable alternative to the standard
+      scatter plot. The data points are grouped into bins, and an aggregate
+      statistic is used to summarize each bin. Here we use a circular area
+      encoding to depict the count of records, visualizing the density of data
+      points. For higher bin counts color might instead be used, though with
+      some loss of perceptual comparison accuracy.
+    </p>
+    <div id="scatter1" class="view"></div>
 
-  <p>
-    A contour plot depicts the density of data points using a set of discrete levels.
-    Akin to contour lines on topographic maps, each contour boundary is an isoline of constant density.
-    Kernel density estimation is performed to generate a continuous approximation of the sample density.
-  </p>
-  <div id="contour1" class="view"></div>
+    <p>
+      A contour plot depicts the density of data points using a set of discrete
+      levels. Akin to contour lines on topographic maps, each contour boundary
+      is an isoline of constant density. Kernel density estimation is performed
+      to generate a continuous approximation of the sample density.
+    </p>
+    <div id="contour1" class="view"></div>
 
-  <p>
-    A wheat plot is an alternative to standard dot plots and histograms that incorporates aspects of both.
-    The x-coordinate of a point is based on its exact value.
-    The y-coordinate is determined by grouping points into histogram bins, then stacking them based on their rank order within each bin.
-    While not scalable to large numbers of data points, wheat plots allow inspection of (and interaction with) individual points without overplotting.
-  </p>
-  <div id="wheat1" class="view"></div>
+    <p>
+      A wheat plot is an alternative to standard dot plots and histograms that
+      incorporates aspects of both. The x-coordinate of a point is based on its
+      exact value. The y-coordinate is determined by grouping points into
+      histogram bins, then stacking them based on their rank order within each
+      bin. While not scalable to large numbers of data points, wheat plots allow
+      inspection of (and interaction with) individual points without
+      overplotting.
+    </p>
+    <div id="wheat1" class="view"></div>
 
-  <h2>Source</h2>
-  <details><summary>click to see code</summary>
-    <div id="elmContainer"></div>
-  </details>
+    <h2>Source</h2>
+    <details
+      ><summary>click to see code</summary>
+      <div id="elmContainer"></div>
+    </details>
 
-  <<script>
-    Elm.GalleryDist.init({node: document.getElementById('elmContainer')}).ports.elmToJS.subscribe(function(namedSpecs) {
-      for (let name of Object.keys(namedSpecs)) {
-        vegaEmbed(`#${name}`, namedSpecs[name], {actions: true, logLevel: vega.Warn}).catch(console.warn);
-      }
-    });
-  </script>
-
-</body>
-
+    <script>
+      Elm.GalleryDist.init({
+        node: document.getElementById("elmContainer")
+      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
 </html>
