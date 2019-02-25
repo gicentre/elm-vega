@@ -7840,7 +7840,7 @@ var author$project$Vega$toVega = function (spec) {
 			elm$core$List$cons,
 			_Utils_Tuple2(
 				'$schema',
-				elm$json$Json$Encode$string('https://vega.github.io/schema/vega/v4.0.json')),
+				elm$json$Json$Encode$string('https://vega.github.io/schema/vega/v5.json')),
 			A2(
 				elm$core$List$map,
 				function (_n0) {

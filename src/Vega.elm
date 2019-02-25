@@ -12156,7 +12156,7 @@ for signals, `ax` for axes etc.) and construct a list of them. For example,
 -}
 toVega : List ( VProperty, Spec ) -> Spec
 toVega spec =
-    ( "$schema", JE.string "https://vega.github.io/schema/vega/v4.0.json" )
+    ( "$schema", JE.string "https://vega.github.io/schema/vega/v5.json" )
         :: List.map (\( s, v ) -> ( vPropertyLabel s, v )) spec
         |> JE.object
 
