@@ -9094,7 +9094,7 @@ maAlign =
     MAlign
 
 
-{-| Rotation angle of the text in degrees in a text mark.
+{-| Rotation angle in degrees of a text or symbol mark.
 -}
 maAngle : List Value -> MarkProperty
 maAngle =
