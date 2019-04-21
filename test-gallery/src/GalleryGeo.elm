@@ -62,7 +62,7 @@ geo1 =
                 << scale "cScale"
                     [ scType scQuantize
                     , scDomain (doNums (nums [ 0, 0.15 ]))
-                    , scRange (raScheme (str "blues-9") [])
+                    , scRange (raScheme (str "blues") [])
                     ]
 
         shapeEncoding =

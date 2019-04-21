@@ -6858,6 +6858,30 @@ var author$project$Vega$binProperty = function (bnProp) {
 						'steps',
 						author$project$Vega$numSpec(ns));
 			}
+		case 8:
+			var ns = bnProp.a;
+			switch (ns.$) {
+				case 0:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				case 2:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				default:
+					return _Utils_Tuple2(
+						'bins',
+						author$project$Vega$numSpec(ns));
+			}
 		case 5:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
@@ -6873,7 +6897,7 @@ var author$project$Vega$binProperty = function (bnProp) {
 			return _Utils_Tuple2(
 				'nice',
 				author$project$Vega$booSpec(b));
-		case 8:
+		case 9:
 			var s = bnProp.a;
 			return _Utils_Tuple2(
 				'signal',
