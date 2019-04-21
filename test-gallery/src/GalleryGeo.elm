@@ -794,9 +794,87 @@ geo8 inData =
         [ width 960, height 673, autosize [ asNone ], ds, si [], pr [], sc [], mk [] ]
 
 
-sourceExample : List Float -> Spec
+geo9 : Spec
+geo9 =
+    let
+        ds =
+            dataSource
+                [ data "vectors"
+                    [ daUrl (str "https://vega.github.io/vega/data/windvectors.csv")
+                    , daFormat [ csv, parseAuto ]
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "shape"
+                    [ siValue (symbolValue symWedge)
+                    , siBind (iSelect [ inOptions (vStrs [ "wedge", "arrow" ]) ])
+                    ]
+                << signal "maxSize"
+                    [ siValue (vNum 7000)
+                    , siBind (iRange [ inMin 1000, inMax 20000, inStep 100 ])
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scPoint
+                    , scRange raWidth
+                    , scPaddingOuter (num 0.5)
+                    , scDomain (doData [ daDataset "vectors", daField (field "longitude"), daSort [ soAscending ] ])
+                    ]
+                << scale "yScale"
+                    [ scType scPoint
+                    , scRange raHeight
+                    , scReverse true
+                    , scPaddingOuter (num 0.5)
+                    , scDomain (doData [ daDataset "vectors", daField (field "latitude"), daSort [ soAscending ] ])
+                    ]
+                << scale "size"
+                    [ scZero true
+                    , scDomain (doData [ daDataset "vectors", daField (field "dir") ])
+                    , scRange (raValues [ vNum 0, vSignal "maxSize" ])
+                    ]
+                << scale "cScale"
+                    [ scDomain (doNums (nums [ 0, 360 ]))
+                    , scRange (raScheme (str "rainbow") [])
+                    ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "vectors") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "longitude") ]
+                            , maY [ vScale "yScale", vField (field "latitude") ]
+                            , maFill [ vScale "cScale", vField (field "dir") ]
+                            , maAngle [ vField (field "dir"), vOffset (vNum 180) ]
+                            ]
+                        , enUpdate
+                            [ maShape [ vSignal "shape" ]
+                            , maSize [ vScale "size", vField (field "speed") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800
+        , height 600
+        , padding 5
+        , autosize [ asNone, asPadding ]
+        , background (str "#111")
+        , ds
+        , si []
+        , sc []
+        , mk []
+        ]
+
+
+sourceExample : Spec
 sourceExample =
-    geo8
+    geo9
 
 
 
@@ -814,6 +892,7 @@ mySpecs inData =
         , ( "geo6", geo6 )
         , ( "geo7", geo7 )
         , ( "geo8", geo8 inData )
+        , ( "geo9", geo9 )
         ]
 
 
@@ -844,7 +923,7 @@ view model =
     div []
         [ div [ id "specSource" ] []
         , pre []
-            [ Html.text (Json.Encode.encode 2 (sourceExample model.input)) ]
+            [ Html.text (Json.Encode.encode 2 sourceExample) ]
         ]
 
 

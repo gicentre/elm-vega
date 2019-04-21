@@ -1836,7 +1836,7 @@ var _Http_toTask = F2(function(request, maybeProgress)
 			callback(_Scheduler_fail(elm$http$Http$Timeout));
 		});
 		xhr.addEventListener('load', function() {
-			callback(_Http_handleResponse(xhr, request.M.a));
+			callback(_Http_handleResponse(xhr, request.L.a));
 		});
 
 		try
@@ -1886,7 +1886,7 @@ function _Http_configureRequest(xhr, request)
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
 
-	xhr.responseType = request.M.b;
+	xhr.responseType = request.L.b;
 	xhr.withCredentials = request.U;
 
 	elm$core$Maybe$isJust(request.T) && (xhr.timeout = request.T.a);
@@ -4346,8 +4346,8 @@ function _Browser_getViewport()
 	return {
 		an: _Browser_getScene(),
 		aq: {
-			K: _Browser_window.pageXOffset,
-			L: _Browser_window.pageYOffset,
+			J: _Browser_window.pageXOffset,
+			K: _Browser_window.pageYOffset,
 			x: _Browser_doc.documentElement.clientWidth,
 			s: _Browser_doc.documentElement.clientHeight
 		}
@@ -4388,8 +4388,8 @@ function _Browser_getViewportOf(id)
 				s: node.scrollHeight
 			},
 			aq: {
-				K: node.scrollLeft,
-				L: node.scrollTop,
+				J: node.scrollLeft,
+				K: node.scrollTop,
 				x: node.clientWidth,
 				s: node.clientHeight
 			}
@@ -4423,14 +4423,14 @@ function _Browser_getElement(id)
 		return {
 			an: _Browser_getScene(),
 			aq: {
-				K: x,
-				L: y,
+				J: x,
+				K: y,
 				x: _Browser_doc.documentElement.clientWidth,
 				s: _Browser_doc.documentElement.clientHeight
 			},
 			ay: {
-				K: x + rect.left,
-				L: y + rect.top,
+				J: x + rect.left,
+				K: y + rect.top,
 				x: rect.width,
 				s: rect.height
 			}
@@ -4470,7 +4470,7 @@ function _Browser_load(url)
 var author$project$GalleryGeo$FileRead = elm$core$Basics$identity;
 var author$project$GalleryGeo$Model = F2(
 	function (input, spec) {
-		return {J: input, aJ: spec};
+		return {M: input, aJ: spec};
 	});
 var author$project$Vega$AlbersUsa = {$: 1};
 var author$project$Vega$albersUsa = author$project$Vega$AlbersUsa;
@@ -6466,16 +6466,20 @@ var author$project$Vega$symbolLabel = function (sym) {
 		case 2:
 			return 'cross';
 		case 3:
-			return 'diamond';
+			return 'wedge';
 		case 4:
-			return 'triangle-up';
+			return 'arrow';
 		case 5:
-			return 'triangle-down';
-		case 7:
-			return 'triangle-right';
+			return 'diamond';
 		case 6:
-			return 'triangle-left';
+			return 'triangle-up';
+		case 7:
+			return 'triangle-down';
+		case 9:
+			return 'triangle-right';
 		case 8:
+			return 'triangle-left';
+		case 10:
 			var svgPath = sym.a;
 			return svgPath;
 		default:
@@ -6484,7 +6488,7 @@ var author$project$Vega$symbolLabel = function (sym) {
 	}
 };
 var author$project$Vega$symbolSpec = function (sym) {
-	if (sym.$ === 9) {
+	if (sym.$ === 11) {
 		var sig = sym.a;
 		return elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -15290,6 +15294,276 @@ var author$project$GalleryGeo$geo8 = function (inData) {
 				mk(_List_Nil)
 			]));
 };
+var author$project$Vega$APadding = {$: 6};
+var author$project$Vega$asPadding = author$project$Vega$APadding;
+var author$project$Vega$VBackground = 1;
+var author$project$Vega$background = function (s) {
+	return _Utils_Tuple2(
+		1,
+		author$project$Vega$strSpec(s));
+};
+var author$project$Vega$CSV = {$: 2};
+var author$project$Vega$csv = author$project$Vega$CSV;
+var author$project$Vega$DSort = function (a) {
+	return {$: 6, a: a};
+};
+var author$project$Vega$daSort = author$project$Vega$DSort;
+var author$project$Vega$MAngle = function (a) {
+	return {$: 42, a: a};
+};
+var author$project$Vega$maAngle = author$project$Vega$MAngle;
+var author$project$Vega$ParseAuto = {$: 8};
+var author$project$Vega$parseAuto = author$project$Vega$ParseAuto;
+var author$project$Vega$RaHeight = {$: 7};
+var author$project$Vega$raHeight = author$project$Vega$RaHeight;
+var author$project$Vega$RaWidth = {$: 6};
+var author$project$Vega$raWidth = author$project$Vega$RaWidth;
+var author$project$Vega$SPaddingOuter = function (a) {
+	return {$: 21, a: a};
+};
+var author$project$Vega$scPaddingOuter = author$project$Vega$SPaddingOuter;
+var author$project$Vega$ScPoint = {$: 10};
+var author$project$Vega$scPoint = author$project$Vega$ScPoint;
+var author$project$Vega$SReverse = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$scReverse = author$project$Vega$SReverse;
+var author$project$Vega$soAscending = author$project$Vega$Ascending;
+var author$project$Vega$SymWedge = {$: 3};
+var author$project$Vega$symWedge = author$project$Vega$SymWedge;
+var author$project$Vega$VOffset = function (a) {
+	return {$: 16, a: a};
+};
+var author$project$Vega$vOffset = author$project$Vega$VOffset;
+var author$project$GalleryGeo$geo9 = function () {
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$signals,
+			A2(
+				author$project$Vega$signal,
+				'shape',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$symbolValue(author$project$Vega$symWedge)),
+						author$project$Vega$siBind(
+						author$project$Vega$iSelect(
+							_List_fromArray(
+								[
+									author$project$Vega$inOptions(
+									author$project$Vega$vStrs(
+										_List_fromArray(
+											['wedge', 'arrow'])))
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'maxSize',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(
+					author$project$Vega$vNum(7000)),
+					author$project$Vega$siBind(
+					author$project$Vega$iRange(
+						_List_fromArray(
+							[
+								author$project$Vega$inMin(1000),
+								author$project$Vega$inMax(20000),
+								author$project$Vega$inStep(100)
+							])))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				A2(
+					elm$core$Basics$composeL,
+					author$project$Vega$scales,
+					A2(
+						author$project$Vega$scale,
+						'xScale',
+						_List_fromArray(
+							[
+								author$project$Vega$scType(author$project$Vega$scPoint),
+								author$project$Vega$scRange(author$project$Vega$raWidth),
+								author$project$Vega$scPaddingOuter(
+								author$project$Vega$num(0.5)),
+								author$project$Vega$scDomain(
+								author$project$Vega$doData(
+									_List_fromArray(
+										[
+											author$project$Vega$daDataset('vectors'),
+											author$project$Vega$daField(
+											author$project$Vega$field('longitude')),
+											author$project$Vega$daSort(
+											_List_fromArray(
+												[author$project$Vega$soAscending]))
+										])))
+							]))),
+				A2(
+					author$project$Vega$scale,
+					'yScale',
+					_List_fromArray(
+						[
+							author$project$Vega$scType(author$project$Vega$scPoint),
+							author$project$Vega$scRange(author$project$Vega$raHeight),
+							author$project$Vega$scReverse(author$project$Vega$true),
+							author$project$Vega$scPaddingOuter(
+							author$project$Vega$num(0.5)),
+							author$project$Vega$scDomain(
+							author$project$Vega$doData(
+								_List_fromArray(
+									[
+										author$project$Vega$daDataset('vectors'),
+										author$project$Vega$daField(
+										author$project$Vega$field('latitude')),
+										author$project$Vega$daSort(
+										_List_fromArray(
+											[author$project$Vega$soAscending]))
+									])))
+						]))),
+			A2(
+				author$project$Vega$scale,
+				'size',
+				_List_fromArray(
+					[
+						author$project$Vega$scZero(author$project$Vega$true),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daDataset('vectors'),
+									author$project$Vega$daField(
+									author$project$Vega$field('dir'))
+								]))),
+						author$project$Vega$scRange(
+						author$project$Vega$raValues(
+							_List_fromArray(
+								[
+									author$project$Vega$vNum(0),
+									author$project$Vega$vSignal('maxSize')
+								])))
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scDomain(
+					author$project$Vega$doNums(
+						author$project$Vega$nums(
+							_List_fromArray(
+								[0, 360])))),
+					author$project$Vega$scRange(
+					A2(
+						author$project$Vega$raScheme,
+						author$project$Vega$str('rainbow'),
+						_List_Nil))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$marks,
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$symbol,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('vectors'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('longitude'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('latitude'))
+										])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('cScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('dir'))
+										])),
+									author$project$Vega$maAngle(
+									_List_fromArray(
+										[
+											author$project$Vega$vField(
+											author$project$Vega$field('dir')),
+											author$project$Vega$vOffset(
+											author$project$Vega$vNum(180))
+										]))
+								])),
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maShape(
+									_List_fromArray(
+										[
+											author$project$Vega$vSignal('shape')
+										])),
+									author$project$Vega$maSize(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('size'),
+											author$project$Vega$vField(
+											author$project$Vega$field('speed'))
+										]))
+								]))
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'vectors',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://vega.github.io/vega/data/windvectors.csv')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[author$project$Vega$csv, author$project$Vega$parseAuto]))
+					]))
+			]));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(800),
+				author$project$Vega$height(600),
+				author$project$Vega$padding(5),
+				author$project$Vega$autosize(
+				_List_fromArray(
+					[author$project$Vega$asNone, author$project$Vega$asPadding])),
+				author$project$Vega$background(
+				author$project$Vega$str('#111')),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var author$project$Vega$combineSpecs = function (specs) {
 	return elm$json$Json$Encode$object(specs);
 };
@@ -15306,7 +15580,8 @@ var author$project$GalleryGeo$mySpecs = function (inData) {
 				_Utils_Tuple2('geo7', author$project$GalleryGeo$geo7),
 				_Utils_Tuple2(
 				'geo8',
-				author$project$GalleryGeo$geo8(inData))
+				author$project$GalleryGeo$geo8(inData)),
+				_Utils_Tuple2('geo9', author$project$GalleryGeo$geo9)
 			]));
 };
 var elm$http$Http$Internal$EmptyBody = {$: 0};
@@ -15875,7 +16150,7 @@ var elm$http$Http$Internal$Request = elm$core$Basics$identity;
 var elm$http$Http$request = elm$core$Basics$identity;
 var elm$http$Http$getString = function (url) {
 	return elm$http$Http$request(
-		{at: elm$http$Http$emptyBody, M: elm$http$Http$expectString, I: _List_Nil, O: 'GET', T: elm$core$Maybe$Nothing, aO: url, U: false});
+		{at: elm$http$Http$emptyBody, L: elm$http$Http$expectString, I: _List_Nil, O: 'GET', T: elm$core$Maybe$Nothing, aO: url, U: false});
 };
 var elm$core$Task$Perform = elm$core$Basics$identity;
 var elm$core$Task$andThen = _Scheduler_andThen;
@@ -16008,7 +16283,7 @@ var author$project$GalleryGeo$update = F2(
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{J: dataVals}),
+					{M: dataVals}),
 				author$project$GalleryGeo$elmToJS(
 					author$project$GalleryGeo$mySpecs(dataVals)));
 		} else {
@@ -16016,11 +16291,11 @@ var author$project$GalleryGeo$update = F2(
 			return _Utils_Tuple2(
 				_Utils_update(
 					model,
-					{J: _List_Nil}),
+					{M: _List_Nil}),
 				elm$core$Platform$Cmd$none);
 		}
 	});
-var author$project$GalleryGeo$sourceExample = author$project$GalleryGeo$geo8;
+var author$project$GalleryGeo$sourceExample = author$project$GalleryGeo$geo9;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
@@ -16067,10 +16342,7 @@ var author$project$GalleryGeo$view = function (model) {
 				_List_fromArray(
 					[
 						elm$html$Html$text(
-						A2(
-							elm$json$Json$Encode$encode,
-							2,
-							author$project$GalleryGeo$sourceExample(model.J)))
+						A2(elm$json$Json$Encode$encode, 2, author$project$GalleryGeo$sourceExample))
 					]))
 			]));
 };
