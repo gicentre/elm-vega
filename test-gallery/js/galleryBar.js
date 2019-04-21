@@ -9531,7 +9531,7 @@ var author$project$Vega$RaWidth = {$: 6};
 var author$project$Vega$raWidth = author$project$Vega$RaWidth;
 var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
-var author$project$Vega$ScBand = {$: 8};
+var author$project$Vega$ScBand = {$: 9};
 var author$project$Vega$scBand = author$project$Vega$ScBand;
 var author$project$Vega$SDomain = function (a) {
 	return {$: 1, a: a};
@@ -9826,26 +9826,28 @@ var author$project$Vega$scaleSpec = function (sct) {
 		case 3:
 			return elm$json$Json$Encode$string('log');
 		case 4:
-			return elm$json$Json$Encode$string('time');
+			return elm$json$Json$Encode$string('symlog');
 		case 5:
-			return elm$json$Json$Encode$string('utc');
+			return elm$json$Json$Encode$string('time');
 		case 6:
-			return elm$json$Json$Encode$string('sequential');
+			return elm$json$Json$Encode$string('utc');
 		case 7:
-			return elm$json$Json$Encode$string('ordinal');
+			return elm$json$Json$Encode$string('sequential');
 		case 8:
-			return elm$json$Json$Encode$string('band');
+			return elm$json$Json$Encode$string('ordinal');
 		case 9:
-			return elm$json$Json$Encode$string('point');
-		case 13:
-			return elm$json$Json$Encode$string('bin-ordinal');
+			return elm$json$Json$Encode$string('band');
 		case 10:
-			return elm$json$Json$Encode$string('quantile');
-		case 11:
-			return elm$json$Json$Encode$string('quantize');
-		case 12:
-			return elm$json$Json$Encode$string('threshold');
+			return elm$json$Json$Encode$string('point');
 		case 14:
+			return elm$json$Json$Encode$string('bin-ordinal');
+		case 11:
+			return elm$json$Json$Encode$string('quantile');
+		case 12:
+			return elm$json$Json$Encode$string('quantize');
+		case 13:
+			return elm$json$Json$Encode$string('threshold');
+		case 15:
 			var s = sct.a;
 			return elm$json$Json$Encode$string(s);
 		default:
@@ -10037,17 +10039,17 @@ var author$project$Vega$scaleProperty = function (scaleProp) {
 			return _Utils_Tuple2(
 				'padding',
 				author$project$Vega$numSpec(x));
-		case 19:
+		case 20:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'paddingInner',
 				author$project$Vega$numSpec(x));
-		case 20:
+		case 21:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'paddingOuter',
 				author$project$Vega$numSpec(x));
-		case 21:
+		case 22:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'rangeStep',
@@ -10090,9 +10092,14 @@ var author$project$Vega$scaleProperty = function (scaleProp) {
 		case 16:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
-				'base',
+				'constant',
 				author$project$Vega$numSpec(x));
 		case 17:
+			var x = scaleProp.a;
+			return _Utils_Tuple2(
+				'base',
+				author$project$Vega$numSpec(x));
+		case 18:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'align',
@@ -10855,7 +10862,7 @@ var author$project$Vega$RaCategory = {$: 9};
 var author$project$Vega$raCategory = author$project$Vega$RaCategory;
 var author$project$Vega$ScLinear = {$: 0};
 var author$project$Vega$scLinear = author$project$Vega$ScLinear;
-var author$project$Vega$ScOrdinal = {$: 7};
+var author$project$Vega$ScOrdinal = {$: 8};
 var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
 var author$project$Vega$SZero = function (a) {
 	return {$: 14, a: a};
@@ -11654,11 +11661,11 @@ var author$project$Vega$RaStep = function (a) {
 };
 var author$project$Vega$raStep = author$project$Vega$RaStep;
 var author$project$Vega$SPaddingInner = function (a) {
-	return {$: 19, a: a};
+	return {$: 20, a: a};
 };
 var author$project$Vega$scPaddingInner = author$project$Vega$SPaddingInner;
 var author$project$Vega$SPaddingOuter = function (a) {
-	return {$: 20, a: a};
+	return {$: 21, a: a};
 };
 var author$project$Vega$scPaddingOuter = author$project$Vega$SPaddingOuter;
 var author$project$Vega$SiBind = function (a) {
