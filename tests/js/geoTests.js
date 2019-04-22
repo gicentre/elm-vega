@@ -9818,6 +9818,23 @@ var author$project$Vega$LeFill = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$Vega$leFill = author$project$Vega$LeFill;
+var author$project$Vega$anchorSpec = function (anchor) {
+	switch (anchor.$) {
+		case 0:
+			return elm$json$Json$Encode$string('start');
+		case 1:
+			return elm$json$Json$Encode$string('middle');
+		case 2:
+			return elm$json$Json$Encode$string('end');
+		default:
+			var sigName = anchor.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sigName)
+					]));
+	}
+};
 var author$project$Vega$gridAlignSpec = function (ga) {
 	switch (ga.$) {
 		case 0:
@@ -9958,6 +9975,25 @@ var author$project$Vega$overlapStrategySpec = function (strat) {
 			return elm$json$Json$Encode$string('greedy');
 		default:
 			var sig = strat.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$sideSpec = function (orient) {
+	switch (orient.$) {
+		case 0:
+			return elm$json$Json$Encode$string('left');
+		case 3:
+			return elm$json$Json$Encode$string('bottom');
+		case 1:
+			return elm$json$Json$Encode$string('right');
+		case 2:
+			return elm$json$Json$Encode$string('top');
+		default:
+			var sig = orient.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -10110,213 +10146,246 @@ var author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'strokeDash',
 				elm$json$Json$Encode$string(sdScale));
-		case 9:
+		case 10:
 			var les = lp.a;
 			return _Utils_Tuple2(
 				'encode',
 				elm$json$Json$Encode$object(
 					A2(elm$core$List$map, author$project$Vega$legendEncodingProperty, les)));
-		case 10:
+		case 11:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'format',
 				author$project$Vega$strSpec(s));
-		case 11:
+		case 12:
+			return _Utils_Tuple2(
+				'formatType',
+				elm$json$Json$Encode$string('number'));
+		case 13:
+			return _Utils_Tuple2(
+				'formatType',
+				elm$json$Json$Encode$string('time'));
+		case 14:
 			var ga = lp.a;
 			return _Utils_Tuple2(
 				'gridAlign',
 				author$project$Vega$gridAlignSpec(ga));
-		case 12:
+		case 15:
 			var h = lp.a;
 			return _Utils_Tuple2(
 				'clipHeight',
 				author$project$Vega$numSpec(h));
-		case 13:
+		case 16:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'columns',
 				author$project$Vega$numSpec(n));
-		case 14:
+		case 17:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'columnPadding',
 				author$project$Vega$numSpec(x));
-		case 15:
+		case 18:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'rowPadding',
 				author$project$Vega$numSpec(x));
-		case 16:
+		case 19:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'cornerRadius',
 				author$project$Vega$numSpec(x));
-		case 17:
+		case 20:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'fillColor',
 				author$project$Vega$strSpec(s));
-		case 18:
+		case 21:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'offset',
 				author$project$Vega$valueSpec(val));
-		case 19:
+		case 22:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'padding',
 				author$project$Vega$valueSpec(val));
-		case 20:
+		case 23:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'strokeColor',
 				author$project$Vega$strSpec(s));
-		case 21:
-			var x = lp.a;
+		case 9:
+			var s = lp.a;
 			return _Utils_Tuple2(
 				'strokeWidth',
-				author$project$Vega$numSpec(x));
-		case 25:
+				elm$json$Json$Encode$string(s));
+		case 27:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'gradientOpacity',
 				author$project$Vega$numSpec(n));
-		case 22:
+		case 24:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLabelLimit',
 				author$project$Vega$numSpec(x));
-		case 23:
+		case 25:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLabelOffset',
 				author$project$Vega$numSpec(x));
-		case 24:
+		case 26:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLength',
 				author$project$Vega$numSpec(x));
-		case 26:
+		case 28:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientThickness',
 				author$project$Vega$numSpec(x));
-		case 27:
+		case 29:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'gradientStrokeColor',
 				author$project$Vega$strSpec(s));
-		case 28:
+		case 30:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientStrokeWidth',
 				author$project$Vega$numSpec(x));
-		case 29:
+		case 31:
 			var ha = lp.a;
 			return _Utils_Tuple2(
 				'labelAlign',
 				author$project$Vega$hAlignSpec(ha));
-		case 30:
+		case 32:
 			var va = lp.a;
 			return _Utils_Tuple2(
 				'labelBaseline',
 				author$project$Vega$vAlignSpec(va));
-		case 31:
+		case 33:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'labelColor',
 				author$project$Vega$strSpec(s));
-		case 37:
+		case 40:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'labelOpacity',
 				author$project$Vega$numSpec(n));
-		case 32:
+		case 34:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'labelFont',
 				author$project$Vega$strSpec(s));
-		case 33:
+		case 35:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelFontSize',
 				author$project$Vega$numSpec(x));
-		case 34:
+		case 36:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'labelFontStyle',
+				author$project$Vega$strSpec(s));
+		case 37:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'labelFontWeight',
 				author$project$Vega$valueSpec(val));
-		case 35:
+		case 38:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelLimit',
 				author$project$Vega$numSpec(x));
-		case 36:
+		case 39:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelOffset',
 				author$project$Vega$numSpec(x));
-		case 38:
+		case 41:
 			var os = lp.a;
 			return _Utils_Tuple2(
 				'labelOverlap',
 				author$project$Vega$overlapStrategySpec(os));
-		case 39:
+		case 42:
+			var x = lp.a;
+			return _Utils_Tuple2(
+				'labelSeparation',
+				author$project$Vega$numSpec(x));
+		case 43:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolBaseFillColor',
 				author$project$Vega$strSpec(s));
-		case 40:
+		case 44:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolBaseStrokeColor',
 				author$project$Vega$strSpec(s));
-		case 41:
+		case 45:
+			var vals = lp.a;
+			return _Utils_Tuple2(
+				'symbolDash',
+				author$project$Vega$valRef(vals));
+		case 46:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'symbolDashOffset',
+				author$project$Vega$numSpec(n));
+		case 47:
 			var o = lp.a;
 			return _Utils_Tuple2(
 				'symbolDirection',
 				author$project$Vega$orientationSpec(o));
-		case 42:
+		case 48:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolFillColor',
 				author$project$Vega$strSpec(s));
-		case 44:
+		case 50:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolOffset',
 				author$project$Vega$numSpec(x));
-		case 45:
+		case 51:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolSize',
 				author$project$Vega$numSpec(x));
-		case 46:
+		case 52:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolStrokeColor',
 				author$project$Vega$strSpec(s));
-		case 47:
+		case 53:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolStokeWidth',
 				author$project$Vega$numSpec(x));
-		case 43:
+		case 49:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'symbolOpacity',
 				author$project$Vega$numSpec(n));
-		case 48:
+		case 54:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolType',
 				author$project$Vega$symbolSpec(s));
-		case 49:
+		case 55:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'tickCount',
 				author$project$Vega$numSpec(n));
-		case 50:
+		case 56:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'tickMinStep',
+				author$project$Vega$numSpec(n));
+		case 57:
 			var tu = lp.a;
 			var n = lp.b;
 			switch (n.$) {
@@ -10367,57 +10436,72 @@ var author$project$Vega$legendProperty = function (lp) {
 						'tickCount',
 						author$project$Vega$timeUnitSpec(tu));
 			}
-		case 60:
+		case 70:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'titlePadding',
 				author$project$Vega$valueSpec(val));
-		case 51:
+		case 58:
 			var t = lp.a;
 			return _Utils_Tuple2(
 				'title',
 				author$project$Vega$strSpec(t));
-		case 52:
+		case 59:
 			var ha = lp.a;
 			return _Utils_Tuple2(
 				'titleAlign',
 				author$project$Vega$hAlignSpec(ha));
-		case 53:
+		case 60:
+			var an = lp.a;
+			return _Utils_Tuple2(
+				'titleAnchor',
+				author$project$Vega$anchorSpec(an));
+		case 61:
 			var va = lp.a;
 			return _Utils_Tuple2(
 				'titleBaseline',
 				author$project$Vega$vAlignSpec(va));
-		case 54:
+		case 62:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleColor',
 				author$project$Vega$strSpec(s));
-		case 56:
+		case 64:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleFont',
 				author$project$Vega$strSpec(s));
-		case 57:
+		case 65:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'titleFontSize',
 				author$project$Vega$numSpec(x));
-		case 58:
+		case 66:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleFontStyle',
+				author$project$Vega$strSpec(s));
+		case 67:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'titleFontWeight',
 				author$project$Vega$valueSpec(val));
-		case 59:
+		case 68:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'titleLimit',
 				author$project$Vega$numSpec(x));
-		case 55:
+		case 63:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'titleOpacity',
 				author$project$Vega$numSpec(n));
-		case 61:
+		case 69:
+			var s = lp.a;
+			return _Utils_Tuple2(
+				'titleOrient',
+				author$project$Vega$sideSpec(s));
+		case 71:
 			var vals = lp.a;
 			return _Utils_Tuple2(
 				'values',
