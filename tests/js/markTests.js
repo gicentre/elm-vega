@@ -13292,18 +13292,18 @@ var author$project$Vega$symCross = author$project$Vega$SymCross;
 var author$project$Vega$SymDiamond = {$: 6};
 var author$project$Vega$symDiamond = author$project$Vega$SymDiamond;
 var author$project$Vega$SymPath = function (a) {
-	return {$: 11, a: a};
+	return {$: 12, a: a};
 };
 var author$project$Vega$symPath = author$project$Vega$SymPath;
 var author$project$Vega$SymSquare = {$: 1};
 var author$project$Vega$symSquare = author$project$Vega$SymSquare;
-var author$project$Vega$SymTriangleDown = {$: 8};
+var author$project$Vega$SymTriangleDown = {$: 9};
 var author$project$Vega$symTriangleDown = author$project$Vega$SymTriangleDown;
-var author$project$Vega$SymTriangleLeft = {$: 9};
+var author$project$Vega$SymTriangleLeft = {$: 10};
 var author$project$Vega$symTriangleLeft = author$project$Vega$SymTriangleLeft;
-var author$project$Vega$SymTriangleRight = {$: 10};
+var author$project$Vega$SymTriangleRight = {$: 11};
 var author$project$Vega$symTriangleRight = author$project$Vega$SymTriangleRight;
-var author$project$Vega$SymTriangleUp = {$: 7};
+var author$project$Vega$SymTriangleUp = {$: 8};
 var author$project$Vega$symTriangleUp = author$project$Vega$SymTriangleUp;
 var author$project$Vega$symbolLabel = function (sym) {
 	switch (sym.$) {
@@ -13322,14 +13322,16 @@ var author$project$Vega$symbolLabel = function (sym) {
 		case 6:
 			return 'diamond';
 		case 7:
-			return 'triangle-up';
+			return 'triangle';
 		case 8:
-			return 'triangle-down';
-		case 10:
-			return 'triangle-right';
+			return 'triangle-up';
 		case 9:
-			return 'triangle-left';
+			return 'triangle-down';
 		case 11:
+			return 'triangle-right';
+		case 10:
+			return 'triangle-left';
+		case 12:
 			var svgPath = sym.a;
 			return svgPath;
 		default:

@@ -6736,14 +6736,16 @@ var author$project$Vega$symbolLabel = function (sym) {
 		case 6:
 			return 'diamond';
 		case 7:
-			return 'triangle-up';
+			return 'triangle';
 		case 8:
-			return 'triangle-down';
-		case 10:
-			return 'triangle-right';
+			return 'triangle-up';
 		case 9:
-			return 'triangle-left';
+			return 'triangle-down';
 		case 11:
+			return 'triangle-right';
+		case 10:
+			return 'triangle-left';
+		case 12:
 			var svgPath = sym.a;
 			return svgPath;
 		default:
@@ -6752,7 +6754,7 @@ var author$project$Vega$symbolLabel = function (sym) {
 	}
 };
 var author$project$Vega$symbolSpec = function (sym) {
-	if (sym.$ === 12) {
+	if (sym.$ === 13) {
 		var sig = sym.a;
 		return elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -11587,7 +11589,7 @@ var author$project$Vega$Str = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$str = author$project$Vega$Str;
-var author$project$Vega$SymTriangleDown = {$: 8};
+var author$project$Vega$SymTriangleDown = {$: 9};
 var author$project$Vega$symTriangleDown = author$project$Vega$SymTriangleDown;
 var author$project$Vega$Symbol = 9;
 var author$project$Vega$symbol = 9;
