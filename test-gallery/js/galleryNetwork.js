@@ -10144,10 +10144,6 @@ var author$project$Vega$DoStrs = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Vega$doStrs = author$project$Vega$DoStrs;
-var author$project$Vega$EnSymbols = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$enSymbols = author$project$Vega$EnSymbols;
 var author$project$Vega$ESFilter = function (a) {
 	return {$: 4, a: a};
 };
@@ -10224,10 +10220,6 @@ var author$project$Vega$InStep = function (a) {
 	return {$: 5, a: a};
 };
 var author$project$Vega$inStep = author$project$Vega$InStep;
-var author$project$Vega$LeEncode = function (a) {
-	return {$: 10, a: a};
-};
-var author$project$Vega$leEncode = author$project$Vega$LeEncode;
 var author$project$Vega$LeOrient = function (a) {
 	return {$: 2, a: a};
 };
@@ -10236,6 +10228,10 @@ var author$project$Vega$LeStroke = function (a) {
 	return {$: 7, a: a};
 };
 var author$project$Vega$leStroke = author$project$Vega$LeStroke;
+var author$project$Vega$LeSymbolType = function (a) {
+	return {$: 54, a: a};
+};
+var author$project$Vega$leSymbolType = author$project$Vega$LeSymbolType;
 var author$project$Vega$LeTitle = function (a) {
 	return {$: 58, a: a};
 };
@@ -10436,16 +10432,18 @@ var author$project$Vega$symbolLabel = function (sym) {
 		case 4:
 			return 'arrow';
 		case 5:
-			return 'diamond';
+			return 'stroke';
 		case 6:
-			return 'triangle-up';
+			return 'diamond';
 		case 7:
-			return 'triangle-down';
-		case 9:
-			return 'triangle-right';
+			return 'triangle-up';
 		case 8:
-			return 'triangle-left';
+			return 'triangle-down';
 		case 10:
+			return 'triangle-right';
+		case 9:
+			return 'triangle-left';
+		case 11:
 			var svgPath = sym.a;
 			return svgPath;
 		default:
@@ -10454,7 +10452,7 @@ var author$project$Vega$symbolLabel = function (sym) {
 	}
 };
 var author$project$Vega$symbolSpec = function (sym) {
-	if (sym.$ === 11) {
+	if (sym.$ === 12) {
 		var sig = sym.a;
 		return elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -10930,10 +10928,6 @@ var author$project$Vega$MInterpolate = function (a) {
 	return {$: 26, a: a};
 };
 var author$project$Vega$maInterpolate = author$project$Vega$MInterpolate;
-var author$project$Vega$MShape = function (a) {
-	return {$: 40, a: a};
-};
-var author$project$Vega$maShape = author$project$Vega$MShape;
 var author$project$Vega$MTension = function (a) {
 	return {$: 27, a: a};
 };
@@ -11367,6 +11361,8 @@ var author$project$Vega$Strs = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Vega$strs = author$project$Vega$Strs;
+var author$project$Vega$SymStroke = {$: 5};
+var author$project$Vega$symStroke = author$project$Vega$SymStroke;
 var author$project$Vega$TeAs = F4(
 	function (a, b, c, d) {
 		return {$: 6, a: a, b: b, c: c, d: d};
@@ -11894,23 +11890,7 @@ var author$project$GalleryNetwork$bundle1 = function () {
 					author$project$Vega$leOrient(author$project$Vega$loBottomRight),
 					author$project$Vega$leTitle(
 					author$project$Vega$str('Dependencies')),
-					author$project$Vega$leEncode(
-					_List_fromArray(
-						[
-							author$project$Vega$enSymbols(
-							_List_fromArray(
-								[
-									author$project$Vega$enEnter(
-									_List_fromArray(
-										[
-											author$project$Vega$maShape(
-											_List_fromArray(
-												[
-													author$project$Vega$vStr('M-0.5,0H1')
-												]))
-										]))
-								]))
-						]))
+					author$project$Vega$leSymbolType(author$project$Vega$symStroke)
 				])));
 	var ds = author$project$Vega$dataSource(
 		_List_fromArray(
