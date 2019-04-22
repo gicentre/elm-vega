@@ -10258,7 +10258,7 @@ var author$project$Vega$SDomain = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Vega$scDomain = author$project$Vega$SDomain;
-var author$project$Vega$ScQuantize = {$: 12};
+var author$project$Vega$ScQuantize = {$: 11};
 var author$project$Vega$scQuantize = author$project$Vega$ScQuantize;
 var author$project$Vega$SRange = function (a) {
 	return {$: 6, a: a};
@@ -10543,22 +10543,20 @@ var author$project$Vega$scaleSpec = function (sct) {
 		case 6:
 			return elm$json$Json$Encode$string('utc');
 		case 7:
-			return elm$json$Json$Encode$string('sequential');
-		case 8:
 			return elm$json$Json$Encode$string('ordinal');
-		case 9:
+		case 8:
 			return elm$json$Json$Encode$string('band');
-		case 10:
+		case 9:
 			return elm$json$Json$Encode$string('point');
-		case 14:
-			return elm$json$Json$Encode$string('bin-ordinal');
-		case 11:
-			return elm$json$Json$Encode$string('quantile');
-		case 12:
-			return elm$json$Json$Encode$string('quantize');
 		case 13:
+			return elm$json$Json$Encode$string('bin-ordinal');
+		case 10:
+			return elm$json$Json$Encode$string('quantile');
+		case 11:
+			return elm$json$Json$Encode$string('quantize');
+		case 12:
 			return elm$json$Json$Encode$string('threshold');
-		case 15:
+		case 14:
 			var s = sct.a;
 			return elm$json$Json$Encode$string(s);
 		default:
@@ -12048,8 +12046,8 @@ var author$project$Vega$SNice = function (a) {
 	return {$: 13, a: a};
 };
 var author$project$Vega$scNice = author$project$Vega$SNice;
-var author$project$Vega$ScSequential = {$: 7};
-var author$project$Vega$scSequential = author$project$Vega$ScSequential;
+var author$project$Vega$ScLinear = {$: 0};
+var author$project$Vega$scSequential = author$project$Vega$ScLinear;
 var author$project$Vega$SZero = function (a) {
 	return {$: 14, a: a};
 };
@@ -15428,7 +15426,7 @@ var author$project$Vega$SPaddingOuter = function (a) {
 	return {$: 21, a: a};
 };
 var author$project$Vega$scPaddingOuter = author$project$Vega$SPaddingOuter;
-var author$project$Vega$ScPoint = {$: 10};
+var author$project$Vega$ScPoint = {$: 9};
 var author$project$Vega$scPoint = author$project$Vega$ScPoint;
 var author$project$Vega$SReverse = function (a) {
 	return {$: 8, a: a};

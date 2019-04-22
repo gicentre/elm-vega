@@ -9545,7 +9545,7 @@ var author$project$Vega$RaWidth = {$: 6};
 var author$project$Vega$raWidth = author$project$Vega$RaWidth;
 var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
-var author$project$Vega$ScBand = {$: 9};
+var author$project$Vega$ScBand = {$: 8};
 var author$project$Vega$scBand = author$project$Vega$ScBand;
 var author$project$Vega$SDomain = function (a) {
 	return {$: 1, a: a};
@@ -9840,22 +9840,20 @@ var author$project$Vega$scaleSpec = function (sct) {
 		case 6:
 			return elm$json$Json$Encode$string('utc');
 		case 7:
-			return elm$json$Json$Encode$string('sequential');
-		case 8:
 			return elm$json$Json$Encode$string('ordinal');
-		case 9:
+		case 8:
 			return elm$json$Json$Encode$string('band');
-		case 10:
+		case 9:
 			return elm$json$Json$Encode$string('point');
-		case 14:
-			return elm$json$Json$Encode$string('bin-ordinal');
-		case 11:
-			return elm$json$Json$Encode$string('quantile');
-		case 12:
-			return elm$json$Json$Encode$string('quantize');
 		case 13:
+			return elm$json$Json$Encode$string('bin-ordinal');
+		case 10:
+			return elm$json$Json$Encode$string('quantile');
+		case 11:
+			return elm$json$Json$Encode$string('quantize');
+		case 12:
 			return elm$json$Json$Encode$string('threshold');
-		case 15:
+		case 14:
 			var s = sct.a;
 			return elm$json$Json$Encode$string(s);
 		default:
@@ -13067,7 +13065,7 @@ var author$project$Vega$MStroke = function (a) {
 var author$project$Vega$maStroke = author$project$Vega$MStroke;
 var author$project$Vega$RaCategory = {$: 9};
 var author$project$Vega$raCategory = author$project$Vega$RaCategory;
-var author$project$Vega$ScOrdinal = {$: 8};
+var author$project$Vega$ScOrdinal = {$: 7};
 var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
 var author$project$Vega$Symbol = 9;
 var author$project$Vega$symbol = 9;
