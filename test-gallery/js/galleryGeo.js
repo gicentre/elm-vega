@@ -15213,8 +15213,7 @@ var author$project$Vega$VKeyValue = F2(
 var author$project$Vega$keyValue = author$project$Vega$VKeyValue;
 var author$project$Vega$Path = 5;
 var author$project$Vega$path = 5;
-var author$project$Vega$RaHeatmap = {$: 13};
-var author$project$Vega$raHeatmap = author$project$Vega$RaHeatmap;
+var author$project$Vega$scLinear = author$project$Vega$ScLinear;
 var author$project$Vega$TContour = F3(
 	function (a, b, c) {
 		return {$: 3, a: a, b: b, c: c};
@@ -15286,13 +15285,17 @@ var author$project$GalleryGeo$geo8 = function (inData) {
 			'cScale',
 			_List_fromArray(
 				[
-					author$project$Vega$scType(author$project$Vega$scSequential),
+					author$project$Vega$scType(author$project$Vega$scLinear),
 					author$project$Vega$scDomain(
 					author$project$Vega$doNums(
 						author$project$Vega$nums(
 							_List_fromArray(
 								[90, 190])))),
-					author$project$Vega$scRange(author$project$Vega$raHeatmap)
+					author$project$Vega$scRange(
+					A2(
+						author$project$Vega$raScheme,
+						author$project$Vega$str('blueorange'),
+						_List_Nil))
 				])));
 	var pr = A2(
 		elm$core$Basics$composeL,

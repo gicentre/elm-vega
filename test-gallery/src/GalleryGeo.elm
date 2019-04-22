@@ -771,9 +771,9 @@ geo8 inData =
         sc =
             scales
                 << scale "cScale"
-                    [ scType scSequential
+                    [ scType scLinear
                     , scDomain (doNums (nums [ 90, 190 ]))
-                    , scRange raHeatmap
+                    , scRange (raScheme (str "blueorange") [])
                     ]
 
         mk =
