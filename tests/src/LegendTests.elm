@@ -21,13 +21,11 @@ chartCore cf le =
         sc =
             scales
                 << scale "xScale"
-                    [ scType scLinear
-                    , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
+                    [ scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
                     , scRange raWidth
                     ]
                 << scale "yScale"
-                    [ scType scLinear
-                    , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
+                    [ scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
                     , scRange raHeight
                     ]
                 << scale "cScale"
@@ -36,15 +34,18 @@ chartCore cf le =
                     , scRange raCategory
                     ]
                 << scale "oScale"
-                    [ scType scLinear
-                    , scDomain (doData [ daDataset "cars", daField (field "Miles_per_Gallon") ])
+                    [ scDomain (doData [ daDataset "cars", daField (field "Weight_in_lbs") ])
                     , scRange (raNums [ 0.3, 0.8 ])
                     ]
                 << scale "sScale"
-                    [ scType scLinear
-                    , scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
+                    [ scDomain (doData [ daDataset "cars", daField (field "Horsepower") ])
                     , scRange (raNums [ 0, 361 ])
                     ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
 
         mk =
             marks
@@ -54,7 +55,7 @@ chartCore cf le =
                         [ enEnter
                             [ maX [ vScale "xScale", vField (field "Horsepower") ]
                             , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
-                            , maOpacity [ vScale "oScale", vField (field "Miles_per_Gallon") ]
+                            , maOpacity [ vScale "oScale", vField (field "Weight_in_lbs") ]
                             , maFill [ vScale "cScale", vField (field "Origin") ]
                             , maSize [ vScale "sScale", vField (field "Horsepower") ]
                             , maShape [ symbolValue symCircle ]
@@ -62,7 +63,7 @@ chartCore cf le =
                         ]
                     ]
     in
-    toVega [ cf, width 300, height 300, padding 5, ds, sc [], le [], mk [] ]
+    toVega [ cf, width 400, height 400, padding 5, ds, sc [], ax [], le [], mk [] ]
 
 
 legendTest1 : Spec
@@ -81,7 +82,7 @@ legendTest1 =
             , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ], maFill [ black ], maFillOpacity [ vNum 0.7 ], maOpacity [ vNum 0.7 ], maStroke [ transparent ] ] ] ]
             ]
         << legend
-            [ leTitle (str "Miles per gallon")
+            [ leTitle (str "Weight")
             , leOpacity "oScale"
             , leSymbolType symCircle
             , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ], maFill [ black ], maFillOpacity [ vNum 0.7 ], maStroke [ transparent ] ] ] ]
@@ -103,13 +104,13 @@ legendTest2 =
             , leSize "sScale"
             , leSymbolType symCircle
             , leStrokeColor (str "red")
-            , lePadding (vNum 20)
+            , lePadding (num 20)
             , leTitleFontSize (num 28)
             , leTitleFontStyle (str "italic")
             , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ], maFill [ black ], maFillOpacity [ vNum 0.7 ], maOpacity [ vNum 0.7 ], maStroke [ transparent ] ] ] ]
             ]
         << legend
-            [ leTitle (str "Miles per gallon")
+            [ leTitle (str "Weight")
             , leOpacity "oScale"
             , leSymbolType symCircle
             , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ], maFill [ black ], maFillOpacity [ vNum 0.7 ], maStroke [ transparent ] ] ] ]
@@ -128,28 +129,63 @@ legendTest3 =
                     , leSymbolFillColor (str "black")
                     , leRowPadding (num 5)
                     , leTitlePadding (num 10)
-                    , leLayout [ llDirection orHorizontal, llMargin (num 25) ]
+                    , leStrokeColor (str "lightgrey")
+                    , lePadding (num 10)
+                    , leLayout
+                        [ llDirection orHorizontal
+                        , llMargin (num 25)
+                        , llOffset (num 50)
+                        , llAnchor anMiddle
+                        , llCenter true
+                        ]
                     ]
                 ]
     in
     legends
         << legend [ leTitle (str "Origin"), leFill "cScale", leSymbolType symCircle ]
-        << legend
-            [ leTitle (str "Horsepower")
-            , leSize "sScale"
-            , leSymbolType symCircle
-            ]
-        << legend
-            [ leTitle (str "Miles per gallon")
-            , leOpacity "oScale"
-            , leSymbolType symCircle
-            ]
+        << legend [ leTitle (str "Horsepower"), leSize "sScale", leSymbolType symCircle ]
+        << legend [ leTitle (str "Weight"), leOpacity "oScale", leSymbolType symCircle ]
+        |> chartCore cf
+
+
+legendTest4 : Spec
+legendTest4 =
+    let
+        cf =
+            config
+                [ cfLegend
+                    [ leSymbolStrokeWidth (num 0)
+                    , leSymbolOpacity (num 0.5)
+                    , leSymbolFillColor (str "black")
+                    , leRowPadding (num 5)
+                    , leTitlePadding (num 10)
+                    , leStrokeColor (str "lightgrey")
+                    , lePadding (num 10)
+                    , leOrient loBottom
+                    , leOrientLayout
+                        [ ( loBottom
+                          , [ llDirection orHorizontal
+                            , llOffset (num 10)
+                            , llAnchor anEnd
+                            ]
+                          )
+
+                        -- Large margin should have no effect as no top legends.
+                        , ( loTop, [ llMargin (num 200) ] )
+                        ]
+                    ]
+                ]
+    in
+    legends
+        << legend [ leTitle (str "Origin"), leFill "cScale", leSymbolType symCircle ]
+        << legend [ leTitle (str "Horsepower"), leSize "sScale", leSymbolType symCircle ]
+        << legend [ leTitle (str "Weight"), leOpacity "oScale", leSymbolType symCircle ]
         |> chartCore cf
 
 
 sourceExample : Spec
 sourceExample =
-    legendTest3
+    legendTest4
 
 
 
@@ -162,6 +198,7 @@ mySpecs =
         [ ( "legendTest1", legendTest1 )
         , ( "legendTest2", legendTest2 )
         , ( "legendTest3", legendTest3 )
+        , ( "legendTest4", legendTest4 )
         ]
 
 

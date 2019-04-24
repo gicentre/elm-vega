@@ -733,7 +733,6 @@ module Vega exposing
     , leLabelOffset
     , leLabelOverlap
     , leLabelSeparation
-    , leLayout
     , llAnchor
     , llBounds
     , llCenter
@@ -1053,6 +1052,8 @@ module Vega exposing
     , axY
     , axBand
     , cfLegend
+    , leLayout
+    , leOrientLayout
     , cfTitle
     , cfScaleRange
     , autosize
@@ -2312,7 +2313,6 @@ See the
 @docs leLabelOffset
 @docs leLabelOverlap
 @docs leLabelSeparation
-@docs leLayout
 @docs llAnchor
 @docs llBounds
 @docs llCenter
@@ -2711,6 +2711,8 @@ See the
 ## Legend Configuration
 
 @docs cfLegend
+@docs leLayout
+@docs leOrientLayout
 
 
 ## Title Configuration
@@ -3786,6 +3788,7 @@ type LegendProperty
     | LeLabelOverlap OverlapStrategy
     | LeLabelSeparation Num
     | LeLayout (List LeLayoutProperty)
+    | LeOrientLayout (List ( LegendOrientation, List LeLayoutProperty ))
     | LeSymbolBaseFillColor Str
     | LeSymbolBaseStrokeColor Str
     | LeSymbolDash (List Value)
@@ -8701,7 +8704,9 @@ leLabelSeparation =
     LeLabelSeparation
 
 
-{-| Specify legend layout properties when arranging multiple legends.
+{-| Specify legend layout properties when arranging multiple legends. This only
+has an effect when specified as part of a global legend configuration (via
+[cfLegend](#cfLegend))
 -}
 leLayout : List LeLayoutProperty -> LegendProperty
 leLayout =
@@ -8728,6 +8733,22 @@ relative to a chart’s data rectangle.
 leOrient : LegendOrientation -> LegendProperty
 leOrient =
     LeOrient
+
+
+{-| Specify legend layout properties for specific orientations when arranging
+multiple legends. This only has an effect when specified as part of a global
+legend configuration (via [cfLegend](#cfLegend)). Each tuple in the list should
+match an orientation with a list of layout properties. For example,
+
+    leOrientLayout
+        [ ( loBottom, [ llAnchor anEnd ] )
+        , ( loTop, [ llMargin (num 50), llCenter true ] )
+        ]
+
+-}
+leOrientLayout : List ( LegendOrientation, List LeLayoutProperty ) -> LegendProperty
+leOrientLayout =
+    LeOrientLayout
 
 
 {-| Padding between the border and content of the legend group.
@@ -15472,6 +15493,17 @@ legendProperty lp =
         LeLayout ll ->
             ( "layout", JE.object (List.map legendLayoutProperty ll) )
 
+        LeOrientLayout oLayouts ->
+            ( "layout"
+            , JE.object
+                (List.map
+                    (\( lo, ll ) ->
+                        ( legendOrientLabel lo, JE.object (List.map legendLayoutProperty ll) )
+                    )
+                    oLayouts
+                )
+            )
+
         LeDirection o ->
             ( "direction", orientationSpec o )
 
@@ -15704,38 +15736,48 @@ legendProperty lp =
             ( "zindex", numSpec n )
 
 
+legendOrientLabel : LegendOrientation -> String
+legendOrientLabel orient =
+    case orient of
+        Left ->
+            "left"
+
+        TopLeft ->
+            "top-left"
+
+        Top ->
+            "top"
+
+        TopRight ->
+            "top-right"
+
+        Right ->
+            "right"
+
+        BottomRight ->
+            "bottom-right"
+
+        Bottom ->
+            "bottom"
+
+        BottomLeft ->
+            "bottom-left"
+
+        None ->
+            "none"
+
+        LegendOrientationSignal sig ->
+            sig
+
+
 legendOrientSpec : LegendOrientation -> Spec
 legendOrientSpec orient =
     case orient of
-        Left ->
-            JE.string "left"
-
-        TopLeft ->
-            JE.string "top-left"
-
-        Top ->
-            JE.string "top"
-
-        TopRight ->
-            JE.string "top-right"
-
-        Right ->
-            JE.string "right"
-
-        BottomRight ->
-            JE.string "bottom-right"
-
-        Bottom ->
-            JE.string "bottom"
-
-        BottomLeft ->
-            JE.string "bottom-left"
-
-        None ->
-            JE.string "none"
-
         LegendOrientationSignal sig ->
             JE.object [ signalReferenceProperty sig ]
+
+        _ ->
+            JE.string (legendOrientLabel orient)
 
 
 legendTypeSpec : LegendType -> Spec
