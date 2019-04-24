@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Vega Temporal Tests</title>
+    <title>Vega Legend Tests</title>
     <meta charset="utf-8" />
 
     <link
@@ -28,23 +28,28 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
 
     <!-- This is the script generated from Elm -->
-    <script src="js/temporalTests.js"></script>
+    <script src="js/legendTests.js"></script>
   </head>
 
   <body>
-    <h1>Vega Temporal Tests</h1>
+    <h1>Vega Legend Tests</h1>
 
-    <p>Timeline aggregated by month.</p>
-    <div id="temporalTest1" class="view"></div>
+    <p>Standard Legend Layout (3 legends)</p>
+    <div id="legendTest1" class="view"></div>
 
-    <p>Aggregated temperature coloured by average date.</p>
-    <div id="temporalTest2" class="view"></div>
+    <p>Standard Legend Layout (3 legends, cusomtised central legend)</p>
+    <div id="legendTest2" class="view"></div>
+
+    <p>
+      Horizontal Legend Layout (3 legends styled only though config options)
+    </p>
+    <div id="legendTest3" class="view"></div>
 
     <h2>Source</h2>
     <div id="elmContainer"></div>
 
     <script>
-      Elm.TemporalTests.init({
+      Elm.LegendTests.init({
         node: document.getElementById("elmContainer")
       }).ports.elmToJS.subscribe(function(namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
