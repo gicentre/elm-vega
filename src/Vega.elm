@@ -3763,8 +3763,8 @@ type LegendProperty
     | LeRowPadding Num
     | LeCornerRadius Num
     | LeFillColor Str
-    | LeOffset Value
-    | LePadding Value
+    | LeOffset Num
+    | LePadding Num
     | LeStrokeColor Str
     | LeGradientLabelLimit Num
     | LeGradientLabelOffset Num
@@ -3813,7 +3813,7 @@ type LegendProperty
     | LeTitleFontWeight Value
     | LeTitleLimit Num
     | LeTitleOrient Side
-    | LeTitlePadding Value
+    | LeTitlePadding Num
     | LeValues (List Value)
     | LeZIndex Num
 
@@ -8710,7 +8710,7 @@ leLayout =
 
 {-| Offset in pixels by which to displace the legend from the data rectangle and axes.
 -}
-leOffset : Value -> LegendProperty
+leOffset : Num -> LegendProperty
 leOffset =
     LeOffset
 
@@ -8732,7 +8732,7 @@ leOrient =
 
 {-| Padding between the border and content of the legend group.
 -}
-lePadding : Value -> LegendProperty
+lePadding : Num -> LegendProperty
 lePadding =
     LePadding
 
@@ -8996,7 +8996,7 @@ leTitleOrient =
 
 {-| Padding between the legend title and entries.
 -}
-leTitlePadding : Value -> LegendProperty
+leTitlePadding : Num -> LegendProperty
 leTitlePadding =
     LeTitlePadding
 
@@ -15529,11 +15529,11 @@ legendProperty lp =
         LeFillColor s ->
             ( "fillColor", strSpec s )
 
-        LeOffset val ->
-            ( "offset", valueSpec val )
+        LeOffset n ->
+            ( "offset", numSpec n )
 
-        LePadding val ->
-            ( "padding", valueSpec val )
+        LePadding n ->
+            ( "padding", numSpec n )
 
         LeStrokeColor s ->
             ( "strokeColor", strSpec s )
@@ -15658,8 +15658,8 @@ legendProperty lp =
                 _ ->
                     ( "tickCount", timeUnitSpec tu )
 
-        LeTitlePadding val ->
-            ( "titlePadding", valueSpec val )
+        LeTitlePadding n ->
+            ( "titlePadding", numSpec n )
 
         LeTitle t ->
             ( "title", strSpec t )
