@@ -137,9 +137,10 @@ histo2 =
         sc =
             scales
                 << scale "xScale"
-                    [ scType scBinLinear
+                    [ scType scLinear
                     , scRange (raValues [ vSignal "barStep + nullGap", vSignal "width" ])
-                    , scDomain (doNums (numSignal "binDomain"))
+                    , scDomain (doNums (numSignal "[bins.start, bins.stop]"))
+                    , scBins (bsSignal "bins")
                     , scRound true
                     ]
                 << scale "xScaleNull"

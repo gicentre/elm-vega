@@ -478,6 +478,7 @@ module Vega exposing
     , scNice
     , scZero
     , scExponent
+    , scConstant
     , scBase
     , scAlign
     , scDomainImplicit
@@ -499,17 +500,17 @@ module Vega exposing
     , niSignal
     , scType
     , scBand
-    , scBinLinear
+    , scBins
     , scBinOrdinal
     , scLinear
     , scLog
+    , scSymLog
     , scOrdinal
     , scPoint
     , scPow
     , scQuantile
     , scQuantize
     , scThreshold
-    , scSequential
     , scSqrt
     , scTime
     , scUtc
@@ -554,6 +555,11 @@ module Vega exposing
     , hslLong
     , rgb
     , lab
+    , bsNums
+    , bsSignal
+    , bsBins
+    , bsStart
+    , bsStop
     , projections
     , projection
     , albers
@@ -601,14 +607,19 @@ module Vega exposing
     , axBandPosition
     , axDomain
     , axDomainColor
+    , axDomainDash
+    , axDomainDashOffset
     , axDomainOpacity
     , axDomainWidth
     , axEncode
     , axFormat
+    , axFormatAsNum
+    , axFormatAsTemporal
     , axGrid
     , axGridColor
     , axGridOpacity
     , axGridDash
+    , axGridDashOffset
     , axGridScale
     , axGridWidth
     , axLabels
@@ -620,12 +631,14 @@ module Vega exposing
     , axLabelOpacity
     , axLabelFont
     , axLabelFontSize
+    , axLabelFontStyle
     , axLabelFontWeight
     , axLabelFlush
     , axLabelFlushOffset
     , axLabelLimit
     , axLabelPadding
     , axLabelOverlap
+    , axLabelSeparation
     , axMinExtent
     , axMaxExtent
     , axOffset
@@ -634,20 +647,25 @@ module Vega exposing
     , axTickCount
     , axTemporalTickCount
     , axTickColor
+    , axTickDash
+    , axTickDashOffset
     , axTickOpacity
     , axTickExtra
+    , axTickMinStep
     , axTickOffset
     , axTickRound
     , axTickWidth
     , axTickSize
     , axTitle
     , axTitleAlign
+    , axTitleAnchor
     , axTitleAngle
     , axTitleBaseline
     , axTitleColor
     , axTitleOpacity
     , axTitleFont
     , axTitleFontSize
+    , axTitleFontStyle
     , axTitleFontWeight
     , axTitleLimit
     , axTitlePadding
@@ -683,6 +701,8 @@ module Vega exposing
     , leStrokeDash
     , leEncode
     , leFormat
+    , leFormatAsNum
+    , leFormatAsTemporal
     , leGridAlign
     , leClipHeight
     , leColumns
@@ -706,14 +726,24 @@ module Vega exposing
     , leLabelColor
     , leLabelFont
     , leLabelFontSize
+    , leLabelFontStyle
     , leLabelFontWeight
     , leLabelLimit
     , leLabelOpacity
     , leLabelOffset
     , leLabelOverlap
+    , leLabelSeparation
+    , llAnchor
+    , llBounds
+    , llCenter
+    , llDirection
+    , llMargin
+    , llOffset
     , leSymbolFillColor
     , leSymbolBaseFillColor
     , leSymbolBaseStrokeColor
+    , leSymbolDash
+    , leSymbolDashOffset
     , leSymbolDirection
     , leSymbolOffset
     , leSymbolSize
@@ -722,16 +752,20 @@ module Vega exposing
     , leSymbolOpacity
     , leSymbolType
     , leTickCount
+    , leTickMinStep
     , leTemporalTickCount
     , leTitle
     , leTitleAlign
+    , leTitleAnchor
     , leTitleBaseline
     , leTitleColor
     , leTitleOpacity
     , leTitleFont
     , leTitleFontSize
+    , leTitleFontStyle
     , leTitleFontWeight
     , leTitleLimit
+    , leTitleOrient
     , leTitlePadding
     , leValues
     , leZIndex
@@ -765,9 +799,12 @@ module Vega exposing
     , tiAlign
     , tiBaseline
     , tiColor
+    , tiDx
+    , tiDy
     , tiEncode
     , tiFont
     , tiFontSize
+    , tiFontStyle
     , tiFontWeight
     , tiFrame
     , tfBounds
@@ -938,10 +975,14 @@ module Vega exposing
     , symCross
     , symDiamond
     , symSquare
+    , symArrow
+    , symWedge
+    , symTriangle
     , symTriangleUp
     , symTriangleDown
     , symTriangleLeft
     , symTriangleRight
+    , symStroke
     , symPath
     , symSignal
     , symbolValue
@@ -1014,6 +1055,9 @@ module Vega exposing
     , axY
     , axBand
     , cfLegend
+    , leBorderStrokeWidth
+    , leLayout
+    , leOrientLayout
     , cfTitle
     , cfScaleRange
     , autosize
@@ -1040,6 +1084,7 @@ module Vega exposing
     , AxisType
     , Bind
     , BinProperty
+    , BinsProperty
     , Boo
     , BoundsCalculation
     , Case
@@ -1109,6 +1154,7 @@ module Vega exposing
     , Projection
     , ProjectionProperty
     , Scale
+    , ScaleBins
     , ScaleDomain
     , ScaleNice
     , ScaleProperty
@@ -1144,6 +1190,7 @@ module Vega exposing
     , WindowProperty
     , WOperation
     , WordcloudProperty
+    , scSequential
     )
 
 {-| Create Vega visualization specifications in Elm. This package allows you to
@@ -1962,6 +2009,7 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs scNice
 @docs scZero
 @docs scExponent
+@docs scConstant
 @docs scBase
 @docs scAlign
 @docs scDomainImplicit
@@ -1989,17 +2037,17 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs scType
 
 @docs scBand
-@docs scBinLinear
+@docs scBins
 @docs scBinOrdinal
 @docs scLinear
 @docs scLog
+@docs scSymLog
 @docs scOrdinal
 @docs scPoint
 @docs scPow
 @docs scQuantile
 @docs scQuantize
 @docs scThreshold
-@docs scSequential
 @docs scSqrt
 @docs scTime
 @docs scUtc
@@ -2067,6 +2115,15 @@ and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
 @docs lab
 
 
+## Scale Bins
+
+@docs bsNums
+@docs bsSignal
+@docs bsBins
+@docs bsStart
+@docs bsStop
+
+
 # Specifying Projections
 
 See the
@@ -2127,14 +2184,19 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs axBandPosition
 @docs axDomain
 @docs axDomainColor
+@docs axDomainDash
+@docs axDomainDashOffset
 @docs axDomainOpacity
 @docs axDomainWidth
 @docs axEncode
 @docs axFormat
+@docs axFormatAsNum
+@docs axFormatAsTemporal
 @docs axGrid
 @docs axGridColor
 @docs axGridOpacity
 @docs axGridDash
+@docs axGridDashOffset
 @docs axGridScale
 @docs axGridWidth
 @docs axLabels
@@ -2146,12 +2208,14 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs axLabelOpacity
 @docs axLabelFont
 @docs axLabelFontSize
+@docs axLabelFontStyle
 @docs axLabelFontWeight
 @docs axLabelFlush
 @docs axLabelFlushOffset
 @docs axLabelLimit
 @docs axLabelPadding
 @docs axLabelOverlap
+@docs axLabelSeparation
 @docs axMinExtent
 @docs axMaxExtent
 @docs axOffset
@@ -2160,20 +2224,25 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs axTickCount
 @docs axTemporalTickCount
 @docs axTickColor
+@docs axTickDash
+@docs axTickDashOffset
 @docs axTickOpacity
 @docs axTickExtra
+@docs axTickMinStep
 @docs axTickOffset
 @docs axTickRound
 @docs axTickWidth
 @docs axTickSize
 @docs axTitle
 @docs axTitleAlign
+@docs axTitleAnchor
 @docs axTitleAngle
 @docs axTitleBaseline
 @docs axTitleColor
 @docs axTitleOpacity
 @docs axTitleFont
 @docs axTitleFontSize
+@docs axTitleFontStyle
 @docs axTitleFontWeight
 @docs axTitleLimit
 @docs axTitlePadding
@@ -2216,6 +2285,8 @@ See the
 @docs leStrokeDash
 @docs leEncode
 @docs leFormat
+@docs leFormatAsNum
+@docs leFormatAsTemporal
 @docs leGridAlign
 @docs leClipHeight
 @docs leColumns
@@ -2239,14 +2310,24 @@ See the
 @docs leLabelColor
 @docs leLabelFont
 @docs leLabelFontSize
+@docs leLabelFontStyle
 @docs leLabelFontWeight
 @docs leLabelLimit
 @docs leLabelOpacity
 @docs leLabelOffset
 @docs leLabelOverlap
+@docs leLabelSeparation
+@docs llAnchor
+@docs llBounds
+@docs llCenter
+@docs llDirection
+@docs llMargin
+@docs llOffset
 @docs leSymbolFillColor
 @docs leSymbolBaseFillColor
 @docs leSymbolBaseStrokeColor
+@docs leSymbolDash
+@docs leSymbolDashOffset
 @docs leSymbolDirection
 @docs leSymbolOffset
 @docs leSymbolSize
@@ -2255,16 +2336,20 @@ See the
 @docs leSymbolOpacity
 @docs leSymbolType
 @docs leTickCount
+@docs leTickMinStep
 @docs leTemporalTickCount
 @docs leTitle
 @docs leTitleAlign
+@docs leTitleAnchor
 @docs leTitleBaseline
 @docs leTitleColor
 @docs leTitleOpacity
 @docs leTitleFont
 @docs leTitleFontSize
+@docs leTitleFontStyle
 @docs leTitleFontWeight
 @docs leTitleLimit
+@docs leTitleOrient
 @docs leTitlePadding
 @docs leValues
 @docs leZIndex
@@ -2304,9 +2389,12 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 @docs tiAlign
 @docs tiBaseline
 @docs tiColor
+@docs tiDx
+@docs tiDy
 @docs tiEncode
 @docs tiFont
 @docs tiFontSize
+@docs tiFontStyle
 @docs tiFontWeight
 @docs tiFrame
 @docs tfBounds
@@ -2511,10 +2599,14 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs symCross
 @docs symDiamond
 @docs symSquare
+@docs symArrow
+@docs symWedge
+@docs symTriangle
 @docs symTriangleUp
 @docs symTriangleDown
 @docs symTriangleLeft
 @docs symTriangleRight
+@docs symStroke
 @docs symPath
 @docs symSignal
 @docs symbolValue
@@ -2626,6 +2718,9 @@ See the
 ## Legend Configuration
 
 @docs cfLegend
+@docs leBorderStrokeWidth
+@docs leLayout
+@docs leOrientLayout
 
 
 ## Title Configuration
@@ -2676,6 +2771,7 @@ to the functions that generate them.
 @docs AxisType
 @docs Bind
 @docs BinProperty
+@docs BinsProperty
 @docs Boo
 @docs BoundsCalculation
 @docs Case
@@ -2745,6 +2841,7 @@ to the functions that generate them.
 @docs Projection
 @docs ProjectionProperty
 @docs Scale
+@docs ScaleBins
 @docs ScaleDomain
 @docs ScaleNice
 @docs ScaleProperty
@@ -2780,6 +2877,13 @@ to the functions that generate them.
 @docs WindowProperty
 @docs WOperation
 @docs WordcloudProperty
+
+---
+
+
+# Deprecated Functions
+
+@docs scSequential
 
 -}
 
@@ -2843,22 +2947,26 @@ type AxisElement
 
 
 {-| Generated by [axBandPosition](#axBandPosition), [axDomain](#axDomain),
-[axDomainColor](#axDomainColor), [axDomainOpacity](#axDomainOpacity),
-[axDomainWidth](#axDomainWidth), [axEncode](#axEncode), [axFormat](#axFormat),
+[axDomainColor](#axDomainColor), [axDomainDash](#axDomainDash), [axDomainDashOffset](#axDomainDashOffset),
+[axDomainOpacity](#axDomainOpacity), [axDomainWidth](#axDomainWidth), [axEncode](#axEncode),
+[axFormat](#axFormat), [axFormatAsNum](#axFormatAsNum), [axFormatAsTemporal](#axFormatAsTemporal),
 [axGrid](#axGrid), [axGridColor](#axGridColor), [axGridDash](#axGridDash),
-[axGridOpacity](#axGridOpacity), [axGridScale](#axGridScale), [axGridWidth](#axGridWidth),
-[axLabels](#axLabels), [axLabelAlign](#axLabelAlign), [axLabelBaseline](#axLabelBaseline),
-[axLabelBound](#axLabelBound), [axLabelColor](#axLabelColor), [axLabelFlush](#axLabelFlush),
-[axLabelFlushOffset](#axLabelFlushOffset), [axLabelFont](#axLabelFont), [axLabelFontSize](#axLabelFontSize)
+[axGridDashOffset](#axGridDashOffset), [axGridOpacity](#axGridOpacity), [axGridScale](#axGridScale),
+[axGridWidth](#axGridWidth), [axLabels](#axLabels), [axLabelAlign](#axLabelAlign),
+[axLabelBaseline](#axLabelBaseline), [axLabelBound](#axLabelBound), [axLabelColor](#axLabelColor),
+[axLabelFlush](#axLabelFlush), [axLabelFlushOffset](#axLabelFlushOffset), [axLabelFont](#axLabelFont),
+[axLabelFontSize](#axLabelFontSize), [axLabelFontStyle](#axLabelFontStyle),
 [axLabelFontWeight](#axLabelFontWeight), [axLabelLimit](#axLabelLimit), [axLabelOpacity](#axLabelOpacity)
-[axLabelOverlap](#axLabelOverlap), [axLabelPadding](#axLabelPadding), [axMaxExtent](#axMaxExtent),
-[axMinExtent](#axMinExtent), [axOffset](#axOffset), [axPosition](#axPosition),
-[axTicks](#axTicks), [axTickColor](#axTickColor), [axTickCount](#axTickCount),
-[axTemporalTickCount](#axTemporalTickCount), [axTickExtra](#axTickExtra),
+[axLabelOverlap](#axLabelOverlap), [axLabelPadding](#axLabelPadding),
+[axLabelSeparation](#axLabelSeparation), [axMaxExtent](#axMaxExtent), [axMinExtent](#axMinExtent),
+[axOffset](#axOffset), [axPosition](#axPosition), [axTicks](#axTicks), [axTickColor](#axTickColor),
+[axTickCount](#axTickCount), [axTemporalTickCount](#axTemporalTickCount), [axTickDash](#axTickDash),
+[axTickDashOffset](#axTickDashOffset), [axTickExtra](#axTickExtra), [axTickMinStep](#axTickMinStep),
 [axTickOffset](#axTickOffset), [axTickOpacity](#axTickOpacity), [axTickRound](#axTickRound),
 [axTickSize](#axTickSize), [axTickWidth](#axTickWidth), [axTitle](#axTitle),
-[axTitleAlign](#axTitleAlign), [axTitleAngle](#axTitleAngle), [axTitleBaseline](#axTitleBaseline),
-[axTitleColor](#axTitleColor),[axTitleFont](#axTitleFont), [axTitleFontSize](#axTitleFontSize),
+[axTitleAlign](#axTitleAlign), [axTitleAnchor](#axTitleAnchor), [axTitleAngle](#axTitleAngle),
+[axTitleBaseline](#axTitleBaseline), [axTitleColor](#axTitleColor),[axTitleFont](#axTitleFont),
+[axTitleFontSize](#axTitleFontSize), [axTitleFontStyle](#axTitleFontStyle),
 [axTitleFontWeight](#axTitleFontWeight), [axTitleLimit](#axTitleLimit), [axTitleOpacity](#axTitleOpacity),
 [axTitlePadding](#axTitlePadding), [axTitleX](#axTitleX), [axTitleY](#axTitleY),
 [axValues](#axValues) and [axZIndex](#axZIndex).
@@ -2868,14 +2976,19 @@ type AxisProperty
     | AxSide Side
     | AxBandPosition Num
     | AxDomain Boo
+    | AxDomainDash (List Value)
+    | AxDomainDashOffset Num
     | AxDomainColor Str
     | AxDomainOpacity Num
     | AxDomainWidth Num
     | AxEncode (List ( AxisElement, List EncodingProperty ))
     | AxFormat Str
+    | AxFormatAsNum
+    | AxFormatAsTemporal
     | AxGrid Boo
     | AxGridColor Str
     | AxGridDash (List Value)
+    | AxGridDashOffset Num
     | AxGridOpacity Num
     | AxGridScale String
     | AxGridWidth Num
@@ -2889,11 +3002,13 @@ type AxisProperty
     | AxLabelFlushOffset Num
     | AxLabelFont Str
     | AxLabelFontSize Num
+    | AxLabelFontStyle Str
     | AxLabelFontWeight Value
     | AxLabelLimit Num
     | AxLabelOpacity Num
     | AxLabelOverlap OverlapStrategy
     | AxLabelPadding Num
+    | AxLabelSeparation Num
     | AxMinExtent Value
     | AxMaxExtent Value
     | AxOffset Value
@@ -2902,6 +3017,9 @@ type AxisProperty
     | AxTickColor Str
     | AxTickCount Num
     | AxTemporalTickCount TimeUnit Num
+    | AxTickDash (List Value)
+    | AxTickDashOffset Num
+    | AxTickMinStep Num
     | AxTickExtra Boo
     | AxTickOffset Num
     | AxTickOpacity Num
@@ -2909,12 +3027,14 @@ type AxisProperty
     | AxTickSize Num
     | AxTickWidth Num
     | AxTitle Str
+    | AxTitleAnchor Anchor
     | AxTitleAlign HAlign
     | AxTitleAngle Num
     | AxTitleBaseline VAlign
     | AxTitleColor Str
     | AxTitleFont Str
     | AxTitleFontSize Num
+    | AxTitleFontStyle Str
     | AxTitleFontWeight Value
     | AxTitleLimit Num
     | AxTitleOpacity Num
@@ -2961,8 +3081,8 @@ type Bind
 
 
 {-| Generated by [bnAnchor](#bnAnchor), [bnMaxBins](#bnMaxBins), [bnBase](#bnBase),
-[bnStep](#bnStep), [bnSteps](#bnSteps), [bnMinStep](#bnMinStep), [bnDivide](#bnDivide),
-[bnNice](#bnNice), [bnSignal](#bnSignal) and [bnAs](#bnAs).
+[bnStep](#bnStep), [bnSteps](#bnSteps), [bnNums](#bnNums), [bnMinStep](#bnMinStep),
+[bnDivide](#bnDivide), [bnNice](#bnNice), [bnSignal](#bnSignal) and [bnAs](#bnAs).
 -}
 type BinProperty
     = BnAnchor Num
@@ -2973,8 +3093,17 @@ type BinProperty
     | BnMinStep Num
     | BnDivide Num
     | BnNice Boo
+    | BnNums Num
     | BnSignal String
     | BnAs String String
+
+
+{-| Generated by [bsStart](#bsStart) and [bsStop](#bsStop).
+-}
+type BinsProperty
+    = BnsStep Num
+    | BnsStart Num
+    | BnsStop Num
 
 
 {-| Generated by [true](#true), [false](#false), [boos](#boos), [booSignal](#booSignal),
@@ -3596,27 +3725,30 @@ type LegendOrientation
 
 {-| Generated by [leType](#leType), [leDirection](#leDirection), [leOrient](#leOrient),
 [leFill](#leFill), [leOpacity](#leOpacity), [leShape](#leShape), [leSize](#leSize),
-[leStroke](#leStroke), [leStrokeDash](#leStrokeDash), [leEncode](#leEncode),
-[leFormat](#leFormat), [leGridAlign](#leGridAlign), [leClipHeight](#leClipHeight),
-[leColumns](#leColumns), [leColumnPadding](#leColumnPadding), [leRowPadding](#leRowPadding),
-[leCornerRadius](#leCornerRadius), [leFillColor](#leFillColor), [leOffset](#leOffset),
-[lePadding](#lePadding), [leStrokeColor](#leStrokeColor), [leStrokeWidth](#leStrokeWidth),
+[leStroke](#leStroke), [leStrokeDash](#leStrokeDash), [leStrokeWidth](#leStrokeWidth),
+[leBoderStrokeWidth](#leBorderStrokeWidth), [leEncode](#leEncode), [leFormat](#leFormat),
+[LeFormatAsNum](#LeFormatAsNum), [LeFormatAsTemporal](#LeFormatAsTemporal), [leGridAlign](#leGridAlign),
+[leClipHeight](#leClipHeight), [leColumns](#leColumns), [leColumnPadding](#leColumnPadding),
+[leRowPadding](#leRowPadding), [leCornerRadius](#leCornerRadius), [leFillColor](#leFillColor),
+[leOffset](#leOffset), [lePadding](#lePadding), [leStrokeColor](#leStrokeColor),
 [leGradientLength](#leGradientLength), [leGradientLabelLimit](#leGradientLabelLimit),
 [leGradientLabelOffset](#leGraidentLabelOffset), [leGradientOpacity](#leGradientOpacity),
 [leGradientThickness](#leGradientThickness), [leGradientStrokeColor](#leGradientStrokeColor),
 [leGradientStrokeWidth](#leGradientStrokeWidth), [leLabelAlign](#leLabelAlign),
 [leLabelBaseline](#leLabelBaseline), [leLabelColor](#leLabelColor), [leLabelFont](#leLabelFont),
-[leLabelFontSize](#leLabelFontSize), [leLabelFontWeight](#leLabelFontWeight),
+[leLabelFontSize](#leLabelFontSize), [LeLabelFontStyle](#LeLabelFontStyle),
+[LeLabelSeparation](#LeLabelSeparation), [leLabelFontWeight](#leLabelFontWeight),
 [leLabelLimit](#leLabelLimit), [leLabelOpacity](#leLabelOpacity), [leLabelOffset](#leLabelOffset),
-[leLabelOverlap](#leLabelOverlap), [leSymbolFillColor](#leSymbolFillColor),
-[leSymbolOpacity](#leSymbolOpacity), [leSymbolOffset](#leSymbolOffset),
-[leSymbolSize](#leSymbolSize), [leSymbolStrokeColor](#leSymbolStrokeColor),
-[leSymbolStrokeWidth](#leSymbolStrokeWidth), [leSymbolType](#leSymbolType),
-[leTickCount](#leTickCount), [leTemporalTickCount](#leTemporalTickCount),
-[leTitle](#leTitle), [leTitleAlign](#leTitleAlign), [leTitleBaseline](#leTitleBaseline),
-[leTitleColor](#leTitleColor), [leTitleFont](#leTitleFont), [leTitleFontSize](#leTitleFontSize),
+[leLabelOverlap](#leLabelOverlap), [LeSymbolDash](#LeSymbolDash), [LeSymbolDashOffset](#LeSymbolDashOffset),
+[leSymbolFillColor](#leSymbolFillColor), [leSymbolOpacity](#leSymbolOpacity),
+[leSymbolOffset](#leSymbolOffset), [leSymbolSize](#leSymbolSize), [leSymbolStrokeColor](#leSymbolStrokeColor),
+[leSymbolStrokeWidth](#leSymbolStrokeWidth), [leSymbolType](#leSymbolType), [leTickCount](#leTickCount),
+[LeTickMinStep](#LeTickMinStep), [leTemporalTickCount](#leTemporalTickCount),
+[leTitle](#leTitle), [leTitleAlign](#leTitleAlign), [leTitleAnchor](#leTitleAnchor),
+[leTitleBaseline](#leTitleBaseline), [leTitleColor](#leTitleColor), [leTitleFont](#leTitleFont),
+[LeTitleFontStyle](#LeTitleFontStyle), [leTitleFontSize](#leTitleFontSize),
 [leTitleFontWeight](#leTitleFontWeight), [leTitleLimit](#leTitleLimit),
-[leTitleOpacity](#leTitleOpacity) [leTitlePadding](#leTitlePadding),
+[leTitleOpacity](#leTitleOpacity), [LeTitleOrient](#leTitleOrient), [leTitlePadding](#leTitlePadding),
 [leValues](#leValues) and [leZIndex](#leZIndex).
 -}
 type LegendProperty
@@ -3629,8 +3761,12 @@ type LegendProperty
     | LeSize String
     | LeStroke String
     | LeStrokeDash String
+    | LeStrokeWidth String
+    | LeBorderStrokeWidth Num
     | LeEncode (List LegendEncoding)
     | LeFormat Str
+    | LeFormatAsNum
+    | LeFormatAsTemporal
     | LeGridAlign GridAlign
     | LeClipHeight Num
     | LeColumns Num
@@ -3638,10 +3774,9 @@ type LegendProperty
     | LeRowPadding Num
     | LeCornerRadius Num
     | LeFillColor Str
-    | LeOffset Value
-    | LePadding Value
+    | LeOffset Num
+    | LePadding Num
     | LeStrokeColor Str
-    | LeStrokeWidth Num
     | LeGradientLabelLimit Num
     | LeGradientLabelOffset Num
     | LeGradientLength Num
@@ -3654,13 +3789,19 @@ type LegendProperty
     | LeLabelColor Str
     | LeLabelFont Str
     | LeLabelFontSize Num
+    | LeLabelFontStyle Str
     | LeLabelFontWeight Value
     | LeLabelLimit Num
     | LeLabelOffset Num
     | LeLabelOpacity Num
     | LeLabelOverlap OverlapStrategy
+    | LeLabelSeparation Num
+    | LeLayout (List LeLayoutProperty)
+    | LeOrientLayout (List ( LegendOrientation, List LeLayoutProperty ))
     | LeSymbolBaseFillColor Str
     | LeSymbolBaseStrokeColor Str
+    | LeSymbolDash (List Value)
+    | LeSymbolDashOffset Num
     | LeSymbolDirection Orientation
     | LeSymbolFillColor Str
     | LeSymbolOpacity Num
@@ -3670,17 +3811,21 @@ type LegendProperty
     | LeSymbolStrokeWidth Num
     | LeSymbolType Symbol
     | LeTickCount Num
+    | LeTickMinStep Num
     | LeTemporalTickCount TimeUnit Num
     | LeTitle Str
     | LeTitleAlign HAlign
+    | LeTitleAnchor Anchor
     | LeTitleBaseline VAlign
     | LeTitleColor Str
     | LeTitleOpacity Num
     | LeTitleFont Str
     | LeTitleFontSize Num
+    | LeTitleFontStyle Str
     | LeTitleFontWeight Value
     | LeTitleLimit Num
-    | LeTitlePadding Value
+    | LeTitleOrient Side
+    | LeTitlePadding Num
     | LeValues (List Value)
     | LeZIndex Num
 
@@ -3691,6 +3836,18 @@ type LegendType
     = LSymbol
     | LGradient
     | LegendTypeSignal String
+
+
+{-| Generated by [llAnchor](#llAnchor), [llBounds](#llBounds), [llCenter](#llCenter),
+[llDirection](#llDirection), [llMargin](#llMargin) and [llOffset](#llOffset).
+-}
+type LeLayoutProperty
+    = LLAnchor Anchor
+    | LLBounds BoundsCalculation
+    | LLCenter Boo
+    | LLDirection Orientation
+    | LLMargin Num
+    | LLOffset Num
 
 
 {-| Generated by [lpSourceY](#lpSourceY), [lpTargetX](#lpTargetX), [lpTargetY](#lpTargetY),
@@ -4031,8 +4188,8 @@ type ProjectionProperty
 
 
 {-| Generated by [scLinear](#scLinear), [scPow](#scPow), [scSqrt](#scSqrt), [scLog](#scLog),
-[scTime](#scTime), [scUtc](#scUtc), [scSequential](#scSequential), [scOrdinal](#scOrdinal),
-[scBand](#scBand), [scPoint](#scPoint), [scBinLinear](#scBinLinear), [scBinOrdinal](#scBinOrdinal),
+[scSymLog](#scSymLoc), [scTime](#scTime), [scUtc](#scUtc), [scOrdinal](#scOrdinal),
+[scBand](#scBand), [scPoint](#scPoint), [scBinOrdinal](#scBinOrdinal),
 [scQuantile](#scQuantile), [scQuantize](#scQuantize),[scThreshold](#scThreshold),
 [scCustom](#scCustom) and [scSignal](#scSignal).
 -}
@@ -4041,19 +4198,26 @@ type Scale
     | ScPow
     | ScSqrt
     | ScLog
+    | ScSymLog
     | ScTime
     | ScUtc
-    | ScSequential
     | ScOrdinal
     | ScBand
     | ScPoint
     | ScQuantile
     | ScQuantize
     | ScThreshold
-    | ScBinLinear
     | ScBinOrdinal
     | ScCustom String
     | ScaleSignal String
+
+
+{-| Generated by [bsNums](#bsNums), [bsBins](#bsBins) and [bsSignal](#bsSignal).
+-}
+type ScaleBins
+    = BnsNums Num
+    | BnsBins Num (List BinsProperty)
+    | BnsSignal String
 
 
 {-| Generated by [doNums](#doNums), [doStrs](#doStrs) and [doData](#doData).
@@ -4087,12 +4251,12 @@ type ScaleNice
 
 {-| Generated by [scType](#scType), [scDomain](#scDomain),
 [scDomainMax](#scDomainMax), [scDomainMin](#scDomainMin), [scDomainMid](#scDomainMid),
-[scDomainRaw](#scDomainRaw), [scRange](#scRange), [scReverse](#scReverse),
+[scDomainRaw](#scDomainRaw), [scRange](#scRange), [scBins](#scBins), [scReverse](#scReverse),
 [scRound](#scRound), [scClamp](#scClamp), [scInterpolate](#scInterpolate),
 [scPadding](#scPadding), [scNice](#scNice), [scZero](#scZero), [scExponent](#scExponent),
-[scBase](#scBase), [scAlign](#scAlign), [scDomainImplicit](#scDomainImplicit),
-[scPaddingInner](#scPaddingInner), [scPaddingOuter](#scPaddingOuter) and
-[scRangeStep](#scRangeStep).
+[scConstant](#scConstant), [scBase](#scBase), [scAlign](#scAlign),
+[scDomainImplicit](#scDomainImplicit), [scPaddingInner](#scPaddingInner),
+[scPaddingOuter](#scPaddingOuter) and [scRangeStep](#scRangeStep).
 -}
 type ScaleProperty
     = SType Scale
@@ -4102,6 +4266,7 @@ type ScaleProperty
     | SDomainMid Num
     | SDomainRaw Value
     | SRange ScaleRange
+    | SBins ScaleBins
     | SReverse Boo
     | SRound Boo
     | SClamp Boo
@@ -4110,6 +4275,7 @@ type ScaleProperty
     | SNice ScaleNice
     | SZero Boo
     | SExponent Num
+    | SConstant Num
     | SBase Num
     | SAlign Num
     | SDomainImplicit Boo
@@ -4260,15 +4426,20 @@ type StrokeJoin
 
 
 {-| Generated by [symCircle](#symCircle), [symSquare](#symSquare), [symCross](#symCross),
-[symDiamond](#symDiamond), [symTriangleUp](#symTriangleUp), [symTriangleDown](#symTriangleDown),
-[symTriangleLeft](#symTriangleLeft), [symTriangleRight](#symTriangleRight), [symPath](#symPath)
-and [symSignal](#symSignal).
+[symWedge](#symWedge), [symArrow](#symArrow), [symStroke](#symStroke),
+[symDiamond](#symDiamond), [symTriangle](#symTriangle), [symTriangleUp](#symTriangleUp),
+[symTriangleDown](#symTriangleDown), [symTriangleLeft](#symTriangleLeft),
+[symTriangleRight](#symTriangleRight), [symPath](#symPath) and [symSignal](#symSignal).
 -}
 type Symbol
     = SymCircle
     | SymSquare
     | SymCross
+    | SymWedge
+    | SymArrow
+    | SymStroke
     | SymDiamond
+    | SymTriangle
     | SymTriangleUp
     | SymTriangleDown
     | SymTriangleLeft
@@ -4312,29 +4483,33 @@ type TitleFrame
 
 {-| Generated by [tiOrient](#tiOrient),
 [tiAnchor](#tiAnchor), [tiAngle](#tiAngle), [tiAlign](#tiAlign), [tiBaseline](#tiBaseline),
-[tiColor](#tiColor), [tiEncode](#tiEncode), [tiFont](#tiFont), [tiFontSize](#tiFontSize),
+[tiColor](#tiColor), [tiDx](#tiDx), [tiDy](#tiDy) ,[tiEncode](#tiEncode),
+[tiFont](#tiFont), [tiFontSize](#tiFontSize), [tiFontStyle](#tiFontStyle),
 [tiFontWeight](#tiFontWeight), [tiFrame](#tiFrame), [tiInteractive](#tiInteractive),
 [tiLimit](#tiLimit), [tiName](#tiName), [tiStyle](#tiStyle), [tiOffset](#tiOffset) and
 [tiZIndex](#tiZIndex).
 -}
 type TitleProperty
     = TText Str
-    | TOrient Side
     | TAlign HAlign
     | TAnchor Anchor
     | TAngle Num
     | TBaseline VAlign
     | TColor Str
+    | TDx Num
+    | TDy Num
     | TEncode (List EncodingProperty)
     | TFont Str
     | TFontSize Num
+    | TFontStyle Str
     | TFontWeight Value
     | TFrame TitleFrame
     | TInteractive Boo
     | TLimit Num
+    | TOffset Num
+    | TOrient Side
     | TName String
     | TStyle Str
-    | TOffset Num
     | TZIndex Num
 
 
@@ -4887,6 +5062,21 @@ axDomainColor =
     AxDomainColor
 
 
+{-| Stroke dash of an axis's domain line as a list of dash-gap lengths or empty
+list for solid line.
+-}
+axDomainDash : List Value -> AxisProperty
+axDomainDash =
+    AxDomainDash
+
+
+{-| Pixel offset from which to start the domain dash list.
+-}
+axDomainDashOffset : Num -> AxisProperty
+axDomainDashOffset =
+    AxDomainDashOffset
+
+
 {-| Opacity of an axis domain line.
 -}
 axDomainOpacity : Num -> AxisProperty
@@ -4931,6 +5121,24 @@ axFormat =
     AxFormat
 
 
+{-| Indicate that axis labels should be formatted as numbers. To control the precise
+numeric format, additionally use [axFormat](#axFormat) providing a
+[d3 numeric format string](https://github.com/d3/d3-format#locale_format).
+-}
+axFormatAsNum : AxisProperty
+axFormatAsNum =
+    AxFormatAsNum
+
+
+{-| Indicate that axis labels should be formatted as dates/times. To control the
+precise temporal format, additionally use [axFormat](#axFormat) providing a
+[d3 date/time format string](https://github.com/d3/d3-time-format#locale_format).
+-}
+axFormatAsTemporal : AxisProperty
+axFormatAsTemporal =
+    AxFormatAsTemporal
+
+
 {-| Whether or not grid lines should be included as part of an axis.
 -}
 axGrid : Boo -> AxisProperty
@@ -4945,11 +5153,19 @@ axGridColor =
     AxGridColor
 
 
-{-| Stroke dash of an axis's grid lines as a list of dash-gap lengths.
+{-| Stroke dash of an axis's grid lines as a list of dash-gap lengths or empty
+list for solid lines.
 -}
 axGridDash : List Value -> AxisProperty
 axGridDash =
     AxGridDash
+
+
+{-| Pixel offset from which to start the grid line dash list.
+-}
+axGridDashOffset : Num -> AxisProperty
+axGridDashOffset =
+    AxGridDashOffset
 
 
 {-| Opacity of an axis's grid lines.
@@ -5056,6 +5272,13 @@ axLabelFontSize =
     AxLabelFontSize
 
 
+{-| Font style of an axis label such as `str "normal"` or `str "italic"`.
+-}
+axLabelFontStyle : Str -> AxisProperty
+axLabelFontStyle =
+    AxLabelFontStyle
+
+
 {-| Font weight of an axis label. This can be a number (e.g. `vNum 300`)
 or text (e.g. `vStr "bold"`).
 -}
@@ -5097,6 +5320,14 @@ axLabelPadding =
 axLabels : Boo -> AxisProperty
 axLabels =
     AxLabels
+
+
+{-| Minimum separation that must be between labels for them to be considered
+non-overlapping. Ignored if [axLabelOverlap](#axLabelOverlap) resolution not enabled.
+-}
+axLabelSeparation : Num -> AxisProperty
+axLabelSeparation =
+    AxLabelSeparation
 
 
 {-| Left axes to be configured with [cfAxis](#cfAxis).
@@ -5178,6 +5409,21 @@ axTickCount =
     AxTickCount
 
 
+{-| Stroke dash of an axis's tick marks as a list of dash-gap lengths or empty
+list for solid lines.
+-}
+axTickDash : List Value -> AxisProperty
+axTickDash =
+    AxTickDash
+
+
+{-| Pixel offset from which to start the tick dash list.
+-}
+axTickDashOffset : Num -> AxisProperty
+axTickDashOffset =
+    AxTickDashOffset
+
+
 {-| Whether or not an extra axis tick should be added for the initial
 position of an axis. This is useful for styling axes for band scales such that
 ticks are placed on band boundaries rather in the middle of a band.
@@ -5185,6 +5431,13 @@ ticks are placed on band boundaries rather in the middle of a band.
 axTickExtra : Boo -> AxisProperty
 axTickExtra =
     AxTickExtra
+
+
+{-| Minimum desired step between axis ticks in scale domain units.
+-}
+axTickMinStep : Num -> AxisProperty
+axTickMinStep =
+    AxTickMinStep
 
 
 {-| Offset in pixels of an axis's ticks, labels and gridlines.
@@ -5244,6 +5497,13 @@ axTitleAlign =
     AxTitleAlign
 
 
+{-| The anchor position for placing an axis title.
+-}
+axTitleAnchor : Anchor -> AxisProperty
+axTitleAnchor =
+    AxTitleAnchor
+
+
 {-| Angle of an axis's title text.
 -}
 axTitleAngle : Num -> AxisProperty
@@ -5277,6 +5537,13 @@ axTitleFont =
 axTitleFontSize : Num -> AxisProperty
 axTitleFontSize =
     AxTitleFontSize
+
+
+{-| Font style of an axis title such as `str "normal"` or `str "italic"`.
+-}
+axTitleFontStyle : Str -> AxisProperty
+axTitleFontStyle =
+    AxTitleFontStyle
 
 
 {-| Font weight of an axis's title. This can be a number (e.g. `vNum 300`)
@@ -5384,17 +5651,17 @@ background s =
     ( VBackground, strSpec s )
 
 
-{-| Only the width and height values of a group mark are to determine the extent
-of a sub-plot in a grid layout. Useful when attempting to place sub-plots without
-axes or legends into a uniform grid structure.
+{-| Only the width and height values of a group mark or legend are to determine
+the extent of a sub-plot or in a grid layout or arrangement of legends. Useful
+when attempting to lay out items in a uniform grid structure.
 -}
 bcFlush : BoundsCalculation
 bcFlush =
     Flush
 
 
-{-| Entire calculated bounds (including axes, title, and legend) to determine the
-extent of a sub-plot in a grid layout.
+{-| Entire calculated bounds (including an items such as axes or title or legend
+border) to determine the extent of a sub-plot in a grid layout.
 -}
 bcFull : BoundsCalculation
 bcFull =
@@ -5522,6 +5789,46 @@ booSignal =
 booSignals : List String -> Boo
 booSignals =
     BooSignals
+
+
+{-| Specify the bin scaling to categorise numeric values. The first parameter is
+the step size between bins. The second parameter is a list of optional start and
+end values for the list of bins. If not specified, the start and end are assumed
+to span the full range of data to scale.
+-}
+bsBins : Num -> List BinsProperty -> ScaleBins
+bsBins =
+    BnsBins
+
+
+{-| List of numeric values (`nums`) specifying bin boundaries. For example the list
+`[0, 5, 10, 15, 20]` would generate bins of [0-5), [5-10), [10-15), [15-20].
+-}
+bsNums : Num -> ScaleBins
+bsNums =
+    BnsNums
+
+
+{-| Name of a signal that resolves to a list of bin boundaries or a bins object
+that defines the start, stop and step size of a a set of bins.
+-}
+bsSignal : String -> ScaleBins
+bsSignal =
+    BnsSignal
+
+
+{-| First bin in a series of bins.
+-}
+bsStart : Num -> BinsProperty
+bsStart =
+    BnsStart
+
+
+{-| Last bin in a series of bins.
+-}
+bsStop : Num -> BinsProperty
+bsStop =
+    BnsStop
 
 
 {-| Butt stroke cap.
@@ -5884,7 +6191,7 @@ csCount =
     SCount
 
 
-{-| Extent of the color range to use in sequential and diverging color
+{-| Extent of the color range to use in linear and diverging color
 schemes. The parameter should evaluate to a two-element list representing the min
 and max values of the extent. For example [0.2, 1] will rescale the color scheme
 such that color values in the range [0, 0.2] are excluded from the scheme.
@@ -8215,6 +8522,24 @@ leFormat =
     LeFormat
 
 
+{-| Indicate that legend labels should be formatted as numbers. To control the precise
+numeric format, additionally use [leFormat](#leFormat) providing a
+[d3 numeric format string](https://github.com/d3/d3-format#locale_format).
+-}
+leFormatAsNum : LegendProperty
+leFormatAsNum =
+    LeFormatAsNum
+
+
+{-| Indicate that legend labels should be formatted as dates/times. To control the
+precise temporal format, additionally use [leFormat](#leFormat) providing a
+[d3 date/time format string](https://github.com/d3/d3-time-format#locale_format).
+-}
+leFormatAsTemporal : LegendProperty
+leFormatAsTemporal =
+    LeFormatAsTemporal
+
+
 {-| Create a legend used to visualize a color, size or shape mapping.
 -}
 legend : List LegendProperty -> List Spec -> List Spec
@@ -8342,6 +8667,13 @@ leLabelFontSize =
     LeLabelFontSize
 
 
+{-| Font style of an legend label such as `str "normal"` or `str "italic"`.
+-}
+leLabelFontStyle : Str -> LegendProperty
+leLabelFontStyle =
+    LeLabelFontStyle
+
+
 {-| Font weight for legend labels.
 -}
 leLabelFontWeight : Value -> LegendProperty
@@ -8377,9 +8709,26 @@ leLabelOverlap =
     LeLabelOverlap
 
 
+{-| Minimum separation that must be between labels for them to be considered
+non-overlapping. Ignored if [leLabelOverlap](#leLabelOverlap) resolution not enabled.
+-}
+leLabelSeparation : Num -> LegendProperty
+leLabelSeparation =
+    LeLabelSeparation
+
+
+{-| Specify legend layout properties when arranging multiple legends. This only
+has an effect when specified as part of a global legend configuration (via
+[cfLegend](#cfLegend))
+-}
+leLayout : List LeLayoutProperty -> LegendProperty
+leLayout =
+    LeLayout
+
+
 {-| Offset in pixels by which to displace the legend from the data rectangle and axes.
 -}
-leOffset : Value -> LegendProperty
+leOffset : Num -> LegendProperty
 leOffset =
     LeOffset
 
@@ -8399,9 +8748,25 @@ leOrient =
     LeOrient
 
 
+{-| Specify legend layout properties for specific orientations when arranging
+multiple legends. This only has an effect when specified as part of a global
+legend configuration (via [cfLegend](#cfLegend)). Each tuple in the list should
+match an orientation with a list of layout properties. For example,
+
+    leOrientLayout
+        [ ( loBottom, [ llAnchor anEnd ] )
+        , ( loTop, [ llMargin (num 50), llCenter true ] )
+        ]
+
+-}
+leOrientLayout : List ( LegendOrientation, List LeLayoutProperty ) -> LegendProperty
+leOrientLayout =
+    LeOrientLayout
+
+
 {-| Padding between the border and content of the legend group.
 -}
-lePadding : Value -> LegendProperty
+lePadding : Num -> LegendProperty
 lePadding =
     LePadding
 
@@ -8441,11 +8806,19 @@ leStrokeColor =
     LeStrokeColor
 
 
-{-| Stroke width of the color of a legend's gradient border.
+{-| Name of the scale that maps to a stroke width used in a legend.
 -}
-leStrokeWidth : Num -> LegendProperty
+leStrokeWidth : String -> LegendProperty
 leStrokeWidth =
     LeStrokeWidth
+
+
+{-| Default stroke width of the border around legends in pixel units. Used only
+when configuring legends via [cfLegend](#cfLegend)
+-}
+leBorderStrokeWidth : Num -> LegendProperty
+leBorderStrokeWidth =
+    LeBorderStrokeWidth
 
 
 {-| Default fill color for legend symbols. This is only applied if there
@@ -8527,6 +8900,21 @@ leStrokeDash =
     LeStrokeDash
 
 
+{-| Stroke dash of an legend's symbols as a list of dash-gap lengths or empty
+list for solid lines.
+-}
+leSymbolDash : List Value -> LegendProperty
+leSymbolDash =
+    LeSymbolDash
+
+
+{-| Pixel offset from which to start a legend's symbol dash list.
+-}
+leSymbolDashOffset : Num -> LegendProperty
+leSymbolDashOffset =
+    LeSymbolDashOffset
+
+
 {-| Ddesired number of ticks for a temporal legend. The first parameter
 is the type of temporal interval to use and the second the number of steps of that
 interval between ticks. For example to specify a tick is requested at six-month
@@ -8557,6 +8945,13 @@ leTickCount =
     LeTickCount
 
 
+{-| Minimum desired step between quantitative legend's ticks in scale domain units.
+-}
+leTickMinStep : Num -> LegendProperty
+leTickMinStep =
+    LeTickMinStep
+
+
 {-| Title for the legend (none by default).
 -}
 leTitle : Str -> LegendProperty
@@ -8569,6 +8964,13 @@ leTitle =
 leTitleAlign : HAlign -> LegendProperty
 leTitleAlign =
     LeTitleAlign
+
+
+{-| The anchor position for placing a legend title.
+-}
+leTitleAnchor : Anchor -> LegendProperty
+leTitleAnchor =
+    LeTitleAnchor
 
 
 {-| Vertical alignment for a legend title.
@@ -8599,6 +9001,13 @@ leTitleFontSize =
     LeTitleFontSize
 
 
+{-| Font style of an legend title such as `str "normal"` or `str "italic"`.
+-}
+leTitleFontStyle : Str -> LegendProperty
+leTitleFontStyle =
+    LeTitleFontStyle
+
+
 {-| Font weight for a legend title.
 -}
 leTitleFontWeight : Value -> LegendProperty
@@ -8620,9 +9029,16 @@ leTitleOpacity =
     LeTitleOpacity
 
 
+{-| Positioning of a legend's title relative to its content.
+-}
+leTitleOrient : Side -> LegendProperty
+leTitleOrient =
+    LeTitleOrient
+
+
 {-| Padding between the legend title and entries.
 -}
-leTitlePadding : Value -> LegendProperty
+leTitlePadding : Num -> LegendProperty
 leTitlePadding =
     LeTitlePadding
 
@@ -8654,6 +9070,49 @@ leZIndex =
 line : Mark
 line =
     Line
+
+
+{-| The anchor position for placing a legend relative to its nearest axis.
+-}
+llAnchor : Anchor -> LeLayoutProperty
+llAnchor =
+    LLAnchor
+
+
+{-| The type of bounding box calculation to use for determining legend extents.
+-}
+llBounds : BoundsCalculation -> LeLayoutProperty
+llBounds =
+    LLBounds
+
+
+{-| Whether or not a legend should be centred within its layout area. Default is `false`.
+-}
+llCenter : Boo -> LeLayoutProperty
+llCenter =
+    LLCenter
+
+
+{-| The direction in which subsequent legends should be positioned in a
+multi-legend layout. Should be one of `orHorizontal` or `orVertical`.
+-}
+llDirection : Orientation -> LeLayoutProperty
+llDirection =
+    LLDirection
+
+
+{-| Margin in pixel units to place between adjacent legends in a multi-legend layout.
+-}
+llMargin : Num -> LeLayoutProperty
+llMargin =
+    LLMargin
+
+
+{-| Offset of a legend from the chart body in pixel units.
+-}
+llOffset : Num -> LeLayoutProperty
+llOffset =
+    LLOffset
 
 
 {-| Alignment to apply to grid rows and columns in a grid layout.
@@ -9006,7 +9465,7 @@ maAlign =
     MAlign
 
 
-{-| Rotation angle of the text in degrees in a text mark.
+{-| Rotation angle in degrees of a text or symbol mark.
 -}
 maAngle : List Value -> MarkProperty
 maAngle =
@@ -10861,13 +11320,6 @@ scBase =
     SBase
 
 
-{-| A linear band scale.
--}
-scBinLinear : Scale
-scBinLinear =
-    ScBinLinear
-
-
 {-| An ordinal band scale.
 -}
 scBinOrdinal : Scale
@@ -10875,7 +11327,18 @@ scBinOrdinal =
     ScBinOrdinal
 
 
-{-| Whether output values should be clamped to when using a quantitative
+{-| Specify the bins to be used when scaling into categories. For example the
+following would specify a linear bin scaling between 100 and 160 in steps of 10.
+
+     scBins (bsBins (num 10) [ bsStart (num 100), bsStop (num 160) ])
+
+-}
+scBins : ScaleBins -> ScaleProperty
+scBins =
+    SBins
+
+
+{-| Whether output values should be clamped when using a quantitative
 scale range (default false). If clamping is disabled and the scale is passed a
 value outside the domain, the scale may return a value outside the range through
 extrapolation. If clamping is enabled, the output value of the scale is always
@@ -10884,6 +11347,14 @@ within the scale’s range.
 scClamp : Boo -> ScaleProperty
 scClamp =
     SClamp
+
+
+{-| The desired desired slope of the [scSymLog](#scSymLog) function at zero. If
+unspecified, the default is 1.
+-}
+scConstant : Num -> ScaleProperty
+scConstant =
+    SConstant
 
 
 {-| Custom named scale.
@@ -11079,11 +11550,11 @@ scRound =
     SRound
 
 
-{-| A sequential scale.
+{-| **Deprecated:** in favour of [scLinear](#scLinear).
 -}
 scSequential : Scale
 scSequential =
-    ScSequential
+    ScLinear
 
 
 {-| Scaling referenced by the value in the named signal.
@@ -11098,6 +11569,15 @@ scSignal =
 scSqrt : Scale
 scSqrt =
     ScSqrt
+
+
+{-| A [symmetrical log](https://www.researchgate.net/profile/John_Webber4/publication/233967063_A_bi-symmetric_log_transformation_for_wide-range_data/links/0fcfd50d791c85082e000000.pdf)
+scale. Similar to a log scale but supports zero and negative values. The slope of
+the function at zero can be set with [scConstant](#scConstant).
+-}
+scSymLog : Scale
+scSymLog =
+    ScSymLog
 
 
 {-| Type of a named scale.
@@ -11539,6 +12019,14 @@ stZero =
     OfZero
 
 
+{-| Specify an arrow symbol for a shape mark. Useful when encoding symbol with a
+direction.
+-}
+symArrow : Symbol
+symArrow =
+    SymArrow
+
+
 {-| A symbol mark.
 -}
 symbol : Mark
@@ -11589,6 +12077,21 @@ symSquare =
     SymSquare
 
 
+{-| Specify a stroke (line) symbol. Can be used, for example, to show legend
+symbols as lines.
+-}
+symStroke : Symbol
+symStroke =
+    SymStroke
+
+
+{-| Specify a triangular symbol for a shape mark.
+-}
+symTriangle : Symbol
+symTriangle =
+    SymTriangle
+
+
 {-| Specify an upward triangular symbol for a shape mark.
 -}
 symTriangleUp : Symbol
@@ -11622,6 +12125,14 @@ symTriangleRight =
 symSignal : String -> Symbol
 symSignal =
     SymbolSignal
+
+
+{-| Specify a triangular wedge symbol for a shape mark. Useful when encoding
+symbol with a direction.
+-}
+symWedge : Symbol
+symWedge =
+    SymWedge
 
 
 {-| Left-to-right text render direction determining which end of a text string is
@@ -11837,6 +12348,20 @@ tiColor =
     TColor
 
 
+{-| Additional horizontal offset of a title's position.
+-}
+tiDx : Num -> TitleProperty
+tiDx =
+    TDx
+
+
+{-| Additional vertical offset of a title's position.
+-}
+tiDy : Num -> TitleProperty
+tiDy =
+    TDy
+
+
 {-| Mark encodings for custom title styling. This is a standard
 encoding for text marks and may contain `enEnter`, `enUpdate`, `enExit` and
 `enHover` specifications.
@@ -11858,6 +12383,13 @@ tiFont =
 tiFontSize : Num -> TitleProperty
 tiFontSize =
     TFontSize
+
+
+{-| Font style of a title such as `str "normal"` or `str "italic"`.
+-}
+tiFontStyle : Str -> TitleProperty
+tiFontStyle =
+    TFontStyle
 
 
 {-| Font weight of a title (can be a number such as `vnum 300` or text
@@ -12156,7 +12688,7 @@ for signals, `ax` for axes etc.) and construct a list of them. For example,
 -}
 toVega : List ( VProperty, Spec ) -> Spec
 toVega spec =
-    ( "$schema", JE.string "https://vega.github.io/schema/vega/v4.0.json" )
+    ( "$schema", JE.string "https://vega.github.io/schema/vega/v5.json" )
         :: List.map (\( s, v ) -> ( vPropertyLabel s, v )) spec
         |> JE.object
 
@@ -12343,16 +12875,19 @@ trFlattenAs =
     TFlattenAs
 
 
-{-| Collapse one or more data fields into two properties: a _key_ containing the
-original data field name and a _value_ containing the data value.
+{-| Perform a _gather_ operation to _tidy_ a table. Collapse multiple data fields
+into two new data fields: `key` containing the original data field names and `value`
+containing the corresponding data values. This performs the same function as the
+[gather operation in R](https://tidyr.tidyverse.org/reference/gather.html) and in the
+[Tidy Elm package](https://package.elm-lang.org/packages/gicentre/tidy/latest/Tidy#gather).
 -}
 trFold : List Field -> Transform
 trFold =
     TFold
 
 
-{-| Perform a fold transform generating the key and value fields named by the second
-and third parameters.
+{-| Similar to [trFold](#trFold) but allows the new output `key` and `value` fields
+to be given alternative names (second and third parameters respectively).
 -}
 trFoldAs : List Field -> String -> String -> Transform
 trFoldAs =
@@ -13504,6 +14039,12 @@ axisProperty ap =
         AxDomainColor s ->
             ( "domainColor", strSpec s )
 
+        AxDomainDash vals ->
+            ( "domainDash", valRef vals )
+
+        AxDomainDashOffset n ->
+            ( "domainDashOffset", numSpec n )
+
         AxDomainOpacity n ->
             ( "domainOpacity", numSpec n )
 
@@ -13520,6 +14061,12 @@ axisProperty ap =
         AxFormat fmt ->
             ( "format", strSpec fmt )
 
+        AxFormatAsNum ->
+            ( "formatType", JE.string "number" )
+
+        AxFormatAsTemporal ->
+            ( "formatType", JE.string "time" )
+
         AxGrid b ->
             ( "grid", booSpec b )
 
@@ -13528,6 +14075,9 @@ axisProperty ap =
 
         AxGridDash vals ->
             ( "gridDash", valRef vals )
+
+        AxGridDashOffset n ->
+            ( "gridDashOffset", numSpec n )
 
         AxGridOpacity n ->
             ( "gridOpacity", numSpec n )
@@ -13578,6 +14128,9 @@ axisProperty ap =
         AxLabelFontSize n ->
             ( "labelFontSize", numSpec n )
 
+        AxLabelFontStyle s ->
+            ( "labelFontStyle", strSpec s )
+
         AxLabelFontWeight val ->
             ( "labelFontWeight", valueSpec val )
 
@@ -13592,6 +14145,9 @@ axisProperty ap =
 
         AxLabelPadding pad ->
             ( "labelPadding", numSpec pad )
+
+        AxLabelSeparation n ->
+            ( "labelSeparation", numSpec n )
 
         AxMaxExtent val ->
             ( "maxExtent", valueSpec val )
@@ -13632,8 +14188,17 @@ axisProperty ap =
                 _ ->
                     ( "tickCount", timeUnitSpec tu )
 
+        AxTickDash vals ->
+            ( "tickDash", valRef vals )
+
+        AxTickDashOffset n ->
+            ( "tickDashOffset", numSpec n )
+
         AxTickExtra b ->
             ( "tickExtra", booSpec b )
+
+        AxTickMinStep n ->
+            ( "tickMinStep", numSpec n )
 
         AxTickOffset n ->
             ( "tickOffset", numSpec n )
@@ -13656,6 +14221,9 @@ axisProperty ap =
         AxTitleAlign ha ->
             ( "titleAlign", hAlignSpec ha )
 
+        AxTitleAnchor an ->
+            ( "titleAnchor", anchorSpec an )
+
         AxTitleAngle n ->
             ( "titleAngle", numSpec n )
 
@@ -13670,6 +14238,9 @@ axisProperty ap =
 
         AxTitleFontSize n ->
             ( "titleFontSize", numSpec n )
+
+        AxTitleFontStyle s ->
+            ( "titleFontStyle", strSpec s )
 
         AxTitleFontWeight val ->
             ( "titleFontWeight", valueSpec val )
@@ -13797,6 +14368,17 @@ binProperty bnProp =
                 _ ->
                     ( "steps", numSpec ns )
 
+        BnNums ns ->
+            case ns of
+                Num _ ->
+                    ( "bins", JE.list numSpec [ ns ] )
+
+                NumSignal _ ->
+                    ( "bins", JE.list numSpec [ ns ] )
+
+                _ ->
+                    ( "bins", numSpec ns )
+
         BnMinStep n ->
             ( "minstep", numSpec n )
 
@@ -13811,6 +14393,19 @@ binProperty bnProp =
 
         BnAs mn mx ->
             ( "as", JE.list JE.string [ mn, mx ] )
+
+
+binsProperty : BinsProperty -> LabelledSpec
+binsProperty bProps =
+    case bProps of
+        BnsStep n ->
+            ( "step", numSpec n )
+
+        BnsStart n ->
+            ( "start", numSpec n )
+
+        BnsStop n ->
+            ( "stop", numSpec n )
 
 
 booSpec : Boo -> Spec
@@ -14909,11 +15504,47 @@ legendEncodingProperty le =
             ( "gradient", JE.object (List.map encodingProperty eps) )
 
 
+legendLayoutProperty : LeLayoutProperty -> LabelledSpec
+legendLayoutProperty ll =
+    case ll of
+        LLAnchor an ->
+            ( "anchor", anchorSpec an )
+
+        LLBounds bc ->
+            ( "bounds", boundsCalculationSpec bc )
+
+        LLCenter b ->
+            ( "center", booSpec b )
+
+        LLDirection o ->
+            ( "direction", orientationSpec o )
+
+        LLMargin n ->
+            ( "margin", numSpec n )
+
+        LLOffset n ->
+            ( "offset", numSpec n )
+
+
 legendProperty : LegendProperty -> LabelledSpec
 legendProperty lp =
     case lp of
         LeType lt ->
             ( "type", legendTypeSpec lt )
+
+        LeLayout ll ->
+            ( "layout", JE.object (List.map legendLayoutProperty ll) )
+
+        LeOrientLayout oLayouts ->
+            ( "layout"
+            , JE.object
+                (List.map
+                    (\( lo, ll ) ->
+                        ( legendOrientLabel lo, JE.object (List.map legendLayoutProperty ll) )
+                    )
+                    oLayouts
+                )
+            )
 
         LeDirection o ->
             ( "direction", orientationSpec o )
@@ -14945,6 +15576,12 @@ legendProperty lp =
         LeFormat s ->
             ( "format", strSpec s )
 
+        LeFormatAsNum ->
+            ( "formatType", JE.string "number" )
+
+        LeFormatAsTemporal ->
+            ( "formatType", JE.string "time" )
+
         LeGridAlign ga ->
             ( "gridAlign", gridAlignSpec ga )
 
@@ -14966,17 +15603,20 @@ legendProperty lp =
         LeFillColor s ->
             ( "fillColor", strSpec s )
 
-        LeOffset val ->
-            ( "offset", valueSpec val )
+        LeOffset n ->
+            ( "offset", numSpec n )
 
-        LePadding val ->
-            ( "padding", valueSpec val )
+        LePadding n ->
+            ( "padding", numSpec n )
 
         LeStrokeColor s ->
             ( "strokeColor", strSpec s )
 
-        LeStrokeWidth x ->
-            ( "strokeWidth", numSpec x )
+        LeStrokeWidth s ->
+            ( "strokeWidth", JE.string s )
+
+        LeBorderStrokeWidth n ->
+            ( "strokeWidth", numSpec n )
 
         LeGradientOpacity n ->
             ( "gradientOpacity", numSpec n )
@@ -15017,6 +15657,9 @@ legendProperty lp =
         LeLabelFontSize x ->
             ( "labelFontSize", numSpec x )
 
+        LeLabelFontStyle s ->
+            ( "labelFontStyle", strSpec s )
+
         LeLabelFontWeight val ->
             ( "labelFontWeight", valueSpec val )
 
@@ -15029,11 +15672,20 @@ legendProperty lp =
         LeLabelOverlap os ->
             ( "labelOverlap", overlapStrategySpec os )
 
+        LeLabelSeparation x ->
+            ( "labelSeparation", numSpec x )
+
         LeSymbolBaseFillColor s ->
             ( "symbolBaseFillColor", strSpec s )
 
         LeSymbolBaseStrokeColor s ->
             ( "symbolBaseStrokeColor", strSpec s )
+
+        LeSymbolDash vals ->
+            ( "symbolDash", valRef vals )
+
+        LeSymbolDashOffset n ->
+            ( "symbolDashOffset", numSpec n )
 
         LeSymbolDirection o ->
             ( "symbolDirection", orientationSpec o )
@@ -15051,7 +15703,7 @@ legendProperty lp =
             ( "symbolStrokeColor", strSpec s )
 
         LeSymbolStrokeWidth x ->
-            ( "symbolStokeWidth", numSpec x )
+            ( "symbolStrokeWidth", numSpec x )
 
         LeSymbolOpacity n ->
             ( "symbolOpacity", numSpec n )
@@ -15061,6 +15713,9 @@ legendProperty lp =
 
         LeTickCount n ->
             ( "tickCount", numSpec n )
+
+        LeTickMinStep n ->
+            ( "tickMinStep", numSpec n )
 
         LeTemporalTickCount tu n ->
             case n of
@@ -15080,14 +15735,17 @@ legendProperty lp =
                 _ ->
                     ( "tickCount", timeUnitSpec tu )
 
-        LeTitlePadding val ->
-            ( "titlePadding", valueSpec val )
+        LeTitlePadding n ->
+            ( "titlePadding", numSpec n )
 
         LeTitle t ->
             ( "title", strSpec t )
 
         LeTitleAlign ha ->
             ( "titleAlign", hAlignSpec ha )
+
+        LeTitleAnchor an ->
+            ( "titleAnchor", anchorSpec an )
 
         LeTitleBaseline va ->
             ( "titleBaseline", vAlignSpec va )
@@ -15101,6 +15759,9 @@ legendProperty lp =
         LeTitleFontSize x ->
             ( "titleFontSize", numSpec x )
 
+        LeTitleFontStyle s ->
+            ( "titleFontStyle", strSpec s )
+
         LeTitleFontWeight val ->
             ( "titleFontWeight", valueSpec val )
 
@@ -15110,6 +15771,9 @@ legendProperty lp =
         LeTitleOpacity n ->
             ( "titleOpacity", numSpec n )
 
+        LeTitleOrient s ->
+            ( "titleOrient", sideSpec s )
+
         LeValues vals ->
             ( "values", JE.list valueSpec vals )
 
@@ -15117,38 +15781,48 @@ legendProperty lp =
             ( "zindex", numSpec n )
 
 
+legendOrientLabel : LegendOrientation -> String
+legendOrientLabel orient =
+    case orient of
+        Left ->
+            "left"
+
+        TopLeft ->
+            "top-left"
+
+        Top ->
+            "top"
+
+        TopRight ->
+            "top-right"
+
+        Right ->
+            "right"
+
+        BottomRight ->
+            "bottom-right"
+
+        Bottom ->
+            "bottom"
+
+        BottomLeft ->
+            "bottom-left"
+
+        None ->
+            "none"
+
+        LegendOrientationSignal sig ->
+            sig
+
+
 legendOrientSpec : LegendOrientation -> Spec
 legendOrientSpec orient =
     case orient of
-        Left ->
-            JE.string "left"
-
-        TopLeft ->
-            JE.string "top-left"
-
-        Top ->
-            JE.string "top"
-
-        TopRight ->
-            JE.string "top-right"
-
-        Right ->
-            JE.string "right"
-
-        BottomRight ->
-            JE.string "bottom-right"
-
-        Bottom ->
-            JE.string "bottom"
-
-        BottomLeft ->
-            JE.string "bottom-left"
-
-        None ->
-            JE.string "none"
-
         LegendOrientationSignal sig ->
             JE.object [ signalReferenceProperty sig ]
+
+        _ ->
+            JE.string (legendOrientLabel orient)
 
 
 legendTypeSpec : LegendType -> Spec
@@ -15397,7 +16071,7 @@ markProperty mProp =
         MSymbol vals ->
             ( "shape", valRef vals )
 
-        -- Text Mark specific (MAlign shared with other marks):
+        -- Text Mark specific (MAlign and MAngle shared with other marks):
         MAlign vals ->
             ( "align", valRef vals )
 
@@ -15972,14 +16646,14 @@ scaleSpec sct =
         ScLog ->
             JE.string "log"
 
+        ScSymLog ->
+            JE.string "symlog"
+
         ScTime ->
             JE.string "time"
 
         ScUtc ->
             JE.string "utc"
-
-        ScSequential ->
-            JE.string "sequential"
 
         ScOrdinal ->
             JE.string "ordinal"
@@ -15989,9 +16663,6 @@ scaleSpec sct =
 
         ScPoint ->
             JE.string "point"
-
-        ScBinLinear ->
-            JE.string "bin-linear"
 
         ScBinOrdinal ->
             JE.string "bin-ordinal"
@@ -16083,6 +16754,17 @@ scaleProperty scaleProp =
                 RaCustom name ->
                     ( "range", JE.string name )
 
+        SBins bsProps ->
+            case bsProps of
+                BnsNums ns ->
+                    ( "bins", numSpec ns )
+
+                BnsSignal sig ->
+                    ( "bins", JE.object [ signalReferenceProperty sig ] )
+
+                BnsBins step options ->
+                    ( "bins", JE.object (List.map binsProperty (BnsStep step :: options)) )
+
         SPadding x ->
             ( "padding", numSpec x )
 
@@ -16115,6 +16797,9 @@ scaleProperty scaleProp =
 
         SExponent x ->
             ( "exponent", numSpec x )
+
+        SConstant x ->
+            ( "constant", numSpec x )
 
         SBase x ->
             ( "base", numSpec x )
@@ -16318,8 +17003,20 @@ symbolLabel sym =
         SymCross ->
             "cross"
 
+        SymWedge ->
+            "wedge"
+
+        SymArrow ->
+            "arrow"
+
+        SymStroke ->
+            "stroke"
+
         SymDiamond ->
             "diamond"
+
+        SymTriangle ->
+            "triangle"
 
         SymTriangleUp ->
             "triangle-up"
@@ -16435,6 +17132,12 @@ titleProperty tProp =
         TColor s ->
             ( "color", strSpec s )
 
+        TDx n ->
+            ( "dx", numSpec n )
+
+        TDy n ->
+            ( "dy", numSpec n )
+
         TEncode eps ->
             ( "encode", JE.object (List.map encodingProperty eps) )
 
@@ -16443,6 +17146,9 @@ titleProperty tProp =
 
         TFontSize n ->
             ( "fontSize", numSpec n )
+
+        TFontStyle s ->
+            ( "fontStyle", strSpec s )
 
         TFontWeight v ->
             ( "fontWeight", valueSpec v )

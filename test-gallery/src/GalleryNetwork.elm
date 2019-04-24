@@ -75,7 +75,7 @@ bundle1 =
                     [ leStroke "cScale"
                     , leOrient loBottomRight
                     , leTitle (str "Dependencies")
-                    , leEncode [ enSymbols [ enEnter [ maShape [ vStr "M-0.5,0H1" ] ] ] ]
+                    , leSymbolType symStroke
                     ]
 
         mk =

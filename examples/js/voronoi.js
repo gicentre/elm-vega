@@ -4359,6 +4359,30 @@ var author$project$Vega$binProperty = function (bnProp) {
 						'steps',
 						author$project$Vega$numSpec(ns));
 			}
+		case 8:
+			var ns = bnProp.a;
+			switch (ns.$) {
+				case 0:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				case 2:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				default:
+					return _Utils_Tuple2(
+						'bins',
+						author$project$Vega$numSpec(ns));
+			}
 		case 5:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
@@ -4374,7 +4398,7 @@ var author$project$Vega$binProperty = function (bnProp) {
 			return _Utils_Tuple2(
 				'nice',
 				author$project$Vega$booSpec(b));
-		case 8:
+		case 9:
 			var s = bnProp.a;
 			return _Utils_Tuple2(
 				'signal',
@@ -7277,8 +7301,30 @@ var author$project$Vega$SType = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$scType = author$project$Vega$SType;
+var author$project$Vega$BnsStep = function (a) {
+	return {$: 0, a: a};
+};
 var author$project$Vega$SScheme = function (a) {
 	return {$: 0, a: a};
+};
+var author$project$Vega$binsProperty = function (bProps) {
+	switch (bProps.$) {
+		case 0:
+			var n = bProps.a;
+			return _Utils_Tuple2(
+				'step',
+				author$project$Vega$numSpec(n));
+		case 1:
+			var n = bProps.a;
+			return _Utils_Tuple2(
+				'start',
+				author$project$Vega$numSpec(n));
+		default:
+			var n = bProps.a;
+			return _Utils_Tuple2(
+				'stop',
+				author$project$Vega$numSpec(n));
+	}
 };
 var author$project$Vega$Ascending = {$: 0};
 var author$project$Vega$sortProperty = function (sp) {
@@ -7560,11 +7606,11 @@ var author$project$Vega$scaleSpec = function (sct) {
 		case 3:
 			return elm$json$Json$Encode$string('log');
 		case 4:
-			return elm$json$Json$Encode$string('time');
+			return elm$json$Json$Encode$string('symlog');
 		case 5:
-			return elm$json$Json$Encode$string('utc');
+			return elm$json$Json$Encode$string('time');
 		case 6:
-			return elm$json$Json$Encode$string('sequential');
+			return elm$json$Json$Encode$string('utc');
 		case 7:
 			return elm$json$Json$Encode$string('ordinal');
 		case 8:
@@ -7572,8 +7618,6 @@ var author$project$Vega$scaleSpec = function (sct) {
 		case 9:
 			return elm$json$Json$Encode$string('point');
 		case 13:
-			return elm$json$Json$Encode$string('bin-linear');
-		case 14:
 			return elm$json$Json$Encode$string('bin-ordinal');
 		case 10:
 			return elm$json$Json$Encode$string('quantile');
@@ -7581,7 +7625,7 @@ var author$project$Vega$scaleSpec = function (sct) {
 			return elm$json$Json$Encode$string('quantize');
 		case 12:
 			return elm$json$Json$Encode$string('threshold');
-		case 15:
+		case 14:
 			var s = sct.a;
 			return elm$json$Json$Encode$string(s);
 		default:
@@ -7737,67 +7781,103 @@ var author$project$Vega$scaleProperty = function (scaleProp) {
 						'range',
 						elm$json$Json$Encode$string(name));
 			}
-		case 11:
+		case 7:
+			var bsProps = scaleProp.a;
+			switch (bsProps.$) {
+				case 0:
+					var ns = bsProps.a;
+					return _Utils_Tuple2(
+						'bins',
+						author$project$Vega$numSpec(ns));
+				case 2:
+					var sig = bsProps.a;
+					return _Utils_Tuple2(
+						'bins',
+						elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									author$project$Vega$signalReferenceProperty(sig)
+								])));
+				default:
+					var step = bsProps.a;
+					var options = bsProps.b;
+					return _Utils_Tuple2(
+						'bins',
+						elm$json$Json$Encode$object(
+							A2(
+								elm$core$List$map,
+								author$project$Vega$binsProperty,
+								A2(
+									elm$core$List$cons,
+									author$project$Vega$BnsStep(step),
+									options))));
+			}
+		case 12:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'padding',
 				author$project$Vega$numSpec(x));
-		case 18:
+		case 20:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'paddingInner',
 				author$project$Vega$numSpec(x));
-		case 19:
+		case 21:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'paddingOuter',
 				author$project$Vega$numSpec(x));
-		case 20:
+		case 22:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'rangeStep',
 				author$project$Vega$numSpec(x));
-		case 8:
+		case 9:
 			var b = scaleProp.a;
 			return _Utils_Tuple2(
 				'round',
 				author$project$Vega$booSpec(b));
-		case 9:
+		case 10:
 			var b = scaleProp.a;
 			return _Utils_Tuple2(
 				'clamp',
 				author$project$Vega$booSpec(b));
-		case 10:
+		case 11:
 			var interp = scaleProp.a;
 			return _Utils_Tuple2(
 				'interpolate',
 				author$project$Vega$interpolateSpec(interp));
-		case 12:
+		case 13:
 			var ni = scaleProp.a;
 			return _Utils_Tuple2(
 				'nice',
 				author$project$Vega$niceSpec(ni));
-		case 13:
+		case 14:
 			var b = scaleProp.a;
 			return _Utils_Tuple2(
 				'zero',
 				author$project$Vega$booSpec(b));
-		case 7:
+		case 8:
 			var b = scaleProp.a;
 			return _Utils_Tuple2(
 				'reverse',
 				author$project$Vega$booSpec(b));
-		case 14:
+		case 15:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'exponent',
 				author$project$Vega$numSpec(x));
-		case 15:
+		case 16:
+			var x = scaleProp.a;
+			return _Utils_Tuple2(
+				'constant',
+				author$project$Vega$numSpec(x));
+		case 17:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'base',
 				author$project$Vega$numSpec(x));
-		case 16:
+		case 18:
 			var x = scaleProp.a;
 			return _Utils_Tuple2(
 				'align',
@@ -7840,7 +7920,7 @@ var author$project$Vega$toVega = function (spec) {
 			elm$core$List$cons,
 			_Utils_Tuple2(
 				'$schema',
-				elm$json$Json$Encode$string('https://vega.github.io/schema/vega/v4.0.json')),
+				elm$json$Json$Encode$string('https://vega.github.io/schema/vega/v5.json')),
 			A2(
 				elm$core$List$map,
 				function (_n0) {
