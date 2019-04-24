@@ -7368,78 +7368,93 @@ var author$project$Vega$titleProperty = function (tProp) {
 			return _Utils_Tuple2(
 				'text',
 				author$project$Vega$strSpec(s));
-		case 1:
+		case 17:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
 				author$project$Vega$sideSpec(s));
-		case 2:
+		case 1:
 			var ha = tProp.a;
 			return _Utils_Tuple2(
 				'align',
 				author$project$Vega$hAlignSpec(ha));
-		case 3:
+		case 2:
 			var a = tProp.a;
 			return _Utils_Tuple2(
 				'anchor',
 				author$project$Vega$anchorSpec(a));
-		case 4:
+		case 3:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'angle',
 				author$project$Vega$numSpec(n));
-		case 5:
+		case 4:
 			var va = tProp.a;
 			return _Utils_Tuple2(
 				'baseline',
 				author$project$Vega$vAlignSpec(va));
-		case 6:
+		case 5:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'color',
 				author$project$Vega$strSpec(s));
+		case 6:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dx',
+				author$project$Vega$numSpec(n));
 		case 7:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dy',
+				author$project$Vega$numSpec(n));
+		case 8:
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
 				elm$json$Json$Encode$object(
 					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
-		case 8:
+		case 9:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				author$project$Vega$strSpec(s));
-		case 9:
+		case 10:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				author$project$Vega$numSpec(n));
-		case 10:
+		case 11:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'fontStyle',
+				author$project$Vega$strSpec(s));
+		case 12:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				author$project$Vega$valueSpec(v));
-		case 11:
+		case 13:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'fame',
 				author$project$Vega$titleFrameSpec(fr));
-		case 12:
+		case 14:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				author$project$Vega$booSpec(b));
-		case 13:
+		case 15:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				author$project$Vega$numSpec(n));
-		case 14:
+		case 18:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				elm$json$Json$Encode$string(s));
-		case 15:
+		case 19:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
@@ -13644,7 +13659,7 @@ var author$project$Vega$strSignal = author$project$Vega$StrSignal;
 var author$project$Vega$SymSquare = {$: 1};
 var author$project$Vega$symSquare = author$project$Vega$SymSquare;
 var author$project$Vega$TFontSize = function (a) {
-	return {$: 9, a: a};
+	return {$: 10, a: a};
 };
 var author$project$Vega$tiFontSize = author$project$Vega$TFontSize;
 var author$project$Vega$TText = function (a) {
@@ -14100,7 +14115,7 @@ var author$project$Vega$raValues = author$project$Vega$RaValues;
 var author$project$Vega$ScTime = {$: 5};
 var author$project$Vega$scTime = author$project$Vega$ScTime;
 var author$project$Vega$TAnchor = function (a) {
-	return {$: 3, a: a};
+	return {$: 2, a: a};
 };
 var author$project$Vega$tiAnchor = author$project$Vega$TAnchor;
 var author$project$Vega$TOffset = function (a) {
@@ -15062,23 +15077,23 @@ var author$project$Vega$raSignal = author$project$Vega$RaSignal;
 var author$project$Vega$STop = {$: 2};
 var author$project$Vega$siTop = author$project$Vega$STop;
 var author$project$Vega$TEncode = function (a) {
-	return {$: 7, a: a};
+	return {$: 8, a: a};
 };
 var author$project$Vega$tiEncode = author$project$Vega$TEncode;
 var author$project$Vega$TFont = function (a) {
-	return {$: 8, a: a};
+	return {$: 9, a: a};
 };
 var author$project$Vega$tiFont = author$project$Vega$TFont;
 var author$project$Vega$TFontWeight = function (a) {
-	return {$: 10, a: a};
+	return {$: 12, a: a};
 };
 var author$project$Vega$tiFontWeight = author$project$Vega$TFontWeight;
 var author$project$Vega$TLimit = function (a) {
-	return {$: 13, a: a};
+	return {$: 15, a: a};
 };
 var author$project$Vega$tiLimit = author$project$Vega$TLimit;
 var author$project$Vega$TOrient = function (a) {
-	return {$: 1, a: a};
+	return {$: 17, a: a};
 };
 var author$project$Vega$tiOrient = author$project$Vega$TOrient;
 var author$project$Vega$TDensity = F2(

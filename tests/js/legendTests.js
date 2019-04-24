@@ -10077,6 +10077,148 @@ var author$project$Vega$symbolValue = function (sym) {
 	return author$project$Vega$vStr(
 		author$project$Vega$symbolLabel(sym));
 };
+var author$project$Vega$TText = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$VTitle = 13;
+var author$project$Vega$titleFrameSpec = function (tf) {
+	switch (tf.$) {
+		case 1:
+			return elm$json$Json$Encode$string('group');
+		case 0:
+			return elm$json$Json$Encode$string('bounds');
+		default:
+			var sig = tf.a;
+			return elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var author$project$Vega$titleProperty = function (tProp) {
+	switch (tProp.$) {
+		case 0:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'text',
+				author$project$Vega$strSpec(s));
+		case 17:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'orient',
+				author$project$Vega$sideSpec(s));
+		case 1:
+			var ha = tProp.a;
+			return _Utils_Tuple2(
+				'align',
+				author$project$Vega$hAlignSpec(ha));
+		case 2:
+			var a = tProp.a;
+			return _Utils_Tuple2(
+				'anchor',
+				author$project$Vega$anchorSpec(a));
+		case 3:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'angle',
+				author$project$Vega$numSpec(n));
+		case 4:
+			var va = tProp.a;
+			return _Utils_Tuple2(
+				'baseline',
+				author$project$Vega$vAlignSpec(va));
+		case 5:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'color',
+				author$project$Vega$strSpec(s));
+		case 6:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dx',
+				author$project$Vega$numSpec(n));
+		case 7:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'dy',
+				author$project$Vega$numSpec(n));
+		case 8:
+			var eps = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+		case 9:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'font',
+				author$project$Vega$strSpec(s));
+		case 10:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'fontSize',
+				author$project$Vega$numSpec(n));
+		case 11:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'fontStyle',
+				author$project$Vega$strSpec(s));
+		case 12:
+			var v = tProp.a;
+			return _Utils_Tuple2(
+				'fontWeight',
+				author$project$Vega$valueSpec(v));
+		case 13:
+			var fr = tProp.a;
+			return _Utils_Tuple2(
+				'fame',
+				author$project$Vega$titleFrameSpec(fr));
+		case 14:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'interactive',
+				author$project$Vega$booSpec(b));
+		case 15:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'limit',
+				author$project$Vega$numSpec(n));
+		case 18:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'name',
+				elm$json$Json$Encode$string(s));
+		case 19:
+			var s = tProp.a;
+			return _Utils_Tuple2(
+				'style',
+				author$project$Vega$strSpec(s));
+		case 16:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'offset',
+				author$project$Vega$numSpec(n));
+		default:
+			var n = tProp.a;
+			return _Utils_Tuple2(
+				'zindex',
+				author$project$Vega$numSpec(n));
+	}
+};
+var author$project$Vega$title = F2(
+	function (s, tps) {
+		return _Utils_Tuple2(
+			13,
+			elm$json$Json$Encode$object(
+				A2(
+					elm$core$List$map,
+					author$project$Vega$titleProperty,
+					A2(
+						elm$core$List$cons,
+						author$project$Vega$TText(s),
+						tps))));
+	});
 var author$project$Vega$toVega = function (spec) {
 	return elm$json$Json$Encode$object(
 		A2(
@@ -10304,6 +10446,10 @@ var author$project$LegendTests$chartCore = F2(
 			_List_fromArray(
 				[
 					cf,
+					A2(
+					author$project$Vega$title,
+					author$project$Vega$str('A mighty fine chart'),
+					_List_Nil),
 					author$project$Vega$width(400),
 					author$project$Vega$height(400),
 					author$project$Vega$padding(5),
@@ -11038,116 +11184,6 @@ var author$project$Vega$legendProperty = function (lp) {
 				author$project$Vega$numSpec(n));
 	}
 };
-var author$project$Vega$titleFrameSpec = function (tf) {
-	switch (tf.$) {
-		case 1:
-			return elm$json$Json$Encode$string('group');
-		case 0:
-			return elm$json$Json$Encode$string('bounds');
-		default:
-			var sig = tf.a;
-			return elm$json$Json$Encode$object(
-				_List_fromArray(
-					[
-						author$project$Vega$signalReferenceProperty(sig)
-					]));
-	}
-};
-var author$project$Vega$titleProperty = function (tProp) {
-	switch (tProp.$) {
-		case 0:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'text',
-				author$project$Vega$strSpec(s));
-		case 1:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'orient',
-				author$project$Vega$sideSpec(s));
-		case 2:
-			var ha = tProp.a;
-			return _Utils_Tuple2(
-				'align',
-				author$project$Vega$hAlignSpec(ha));
-		case 3:
-			var a = tProp.a;
-			return _Utils_Tuple2(
-				'anchor',
-				author$project$Vega$anchorSpec(a));
-		case 4:
-			var n = tProp.a;
-			return _Utils_Tuple2(
-				'angle',
-				author$project$Vega$numSpec(n));
-		case 5:
-			var va = tProp.a;
-			return _Utils_Tuple2(
-				'baseline',
-				author$project$Vega$vAlignSpec(va));
-		case 6:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'color',
-				author$project$Vega$strSpec(s));
-		case 7:
-			var eps = tProp.a;
-			return _Utils_Tuple2(
-				'encode',
-				elm$json$Json$Encode$object(
-					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
-		case 8:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'font',
-				author$project$Vega$strSpec(s));
-		case 9:
-			var n = tProp.a;
-			return _Utils_Tuple2(
-				'fontSize',
-				author$project$Vega$numSpec(n));
-		case 10:
-			var v = tProp.a;
-			return _Utils_Tuple2(
-				'fontWeight',
-				author$project$Vega$valueSpec(v));
-		case 11:
-			var fr = tProp.a;
-			return _Utils_Tuple2(
-				'fame',
-				author$project$Vega$titleFrameSpec(fr));
-		case 12:
-			var b = tProp.a;
-			return _Utils_Tuple2(
-				'interactive',
-				author$project$Vega$booSpec(b));
-		case 13:
-			var n = tProp.a;
-			return _Utils_Tuple2(
-				'limit',
-				author$project$Vega$numSpec(n));
-		case 14:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'name',
-				elm$json$Json$Encode$string(s));
-		case 15:
-			var s = tProp.a;
-			return _Utils_Tuple2(
-				'style',
-				author$project$Vega$strSpec(s));
-		case 16:
-			var n = tProp.a;
-			return _Utils_Tuple2(
-				'offset',
-				author$project$Vega$numSpec(n));
-		default:
-			var n = tProp.a;
-			return _Utils_Tuple2(
-				'zindex',
-				author$project$Vega$numSpec(n));
-	}
-};
 var author$project$Vega$configProperty = function (cp) {
 	switch (cp.$) {
 		case 0:
@@ -11623,6 +11659,10 @@ var author$project$Vega$CfLegend = function (a) {
 	return {$: 8, a: a};
 };
 var author$project$Vega$cfLegend = author$project$Vega$CfLegend;
+var author$project$Vega$CfTitle = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$cfTitle = author$project$Vega$CfTitle;
 var author$project$Vega$LeLayout = function (a) {
 	return {$: 43, a: a};
 };
@@ -11669,10 +11709,29 @@ var author$project$Vega$LLOffset = function (a) {
 var author$project$Vega$llOffset = author$project$Vega$LLOffset;
 var author$project$Vega$Horizontal = {$: 0};
 var author$project$Vega$orHorizontal = author$project$Vega$Horizontal;
+var author$project$Vega$TDx = function (a) {
+	return {$: 6, a: a};
+};
+var author$project$Vega$tiDx = author$project$Vega$TDx;
+var author$project$Vega$TDy = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$tiDy = author$project$Vega$TDy;
+var author$project$Vega$TFontSize = function (a) {
+	return {$: 10, a: a};
+};
+var author$project$Vega$tiFontSize = author$project$Vega$TFontSize;
+var author$project$Vega$TFontStyle = function (a) {
+	return {$: 11, a: a};
+};
+var author$project$Vega$tiFontStyle = author$project$Vega$TFontStyle;
 var author$project$Vega$Boo = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$true = author$project$Vega$Boo(true);
+var elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var author$project$LegendTests$legendTest3 = function () {
 	var cf = author$project$Vega$config(
 		_List_fromArray(
@@ -11705,6 +11764,18 @@ var author$project$LegendTests$legendTest3 = function () {
 								author$project$Vega$llAnchor(author$project$Vega$anMiddle),
 								author$project$Vega$llCenter(author$project$Vega$true)
 							]))
+					])),
+				author$project$Vega$cfTitle(
+				_List_fromArray(
+					[
+						author$project$Vega$tiFontSize(
+						author$project$Vega$num(24)),
+						author$project$Vega$tiDx(
+						author$project$Vega$num(-100)),
+						author$project$Vega$tiDy(
+						author$project$Vega$num(80)),
+						author$project$Vega$tiFontStyle(
+						author$project$Vega$str('italic'))
 					]))
 			]));
 	return A2(

@@ -63,7 +63,7 @@ chartCore cf le =
                         ]
                     ]
     in
-    toVega [ cf, width 400, height 400, padding 5, ds, sc [], ax [], le [], mk [] ]
+    toVega [ cf, title (str "A mighty fine chart") [], width 400, height 400, padding 5, ds, sc [], ax [], le [], mk [] ]
 
 
 legendTest1 : Spec
@@ -139,6 +139,7 @@ legendTest3 =
                         , llCenter true
                         ]
                     ]
+                , cfTitle [ tiFontSize (num 24), tiDx (num -100), tiDy (num 80), tiFontStyle (str "italic") ]
                 ]
     in
     legends
