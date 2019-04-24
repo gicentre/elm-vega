@@ -131,6 +131,7 @@ legendTest3 =
                     , leTitlePadding (num 10)
                     , leStrokeColor (str "lightgrey")
                     , lePadding (num 10)
+                    , leBorderStrokeWidth (num 5)
                     , leLayout
                         [ llDirection orHorizontal
                         , llMargin (num 25)
@@ -163,6 +164,7 @@ legendTest4 =
                     , leStrokeColor (str "lightgrey")
                     , lePadding (num 10)
                     , leOrient loBottom
+                    , leBorderStrokeWidth (num 0)
                     , leOrientLayout
                         [ ( loBottom
                           , [ llDirection orHorizontal
