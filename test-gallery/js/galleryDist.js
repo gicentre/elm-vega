@@ -12873,7 +12873,7 @@ var author$project$GalleryDist$density1 = function () {
 				[
 					author$project$Vega$leOrient(author$project$Vega$loTopLeft),
 					author$project$Vega$leOffset(
-					author$project$Vega$vNum(0)),
+					author$project$Vega$num(0)),
 					author$project$Vega$leZIndex(
 					author$project$Vega$num(1)),
 					author$project$Vega$leFill('cScale')

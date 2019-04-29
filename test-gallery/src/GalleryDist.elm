@@ -272,7 +272,7 @@ density1 =
             axes << axis "xScale" siBottom [ axZIndex (num 1) ]
 
         le =
-            legends << legend [ leOrient loTopLeft, leOffset (vNum 0), leZIndex (num 1), leFill "cScale" ]
+            legends << legend [ leOrient loTopLeft, leOffset (num 0), leZIndex (num 1), leFill "cScale" ]
 
         mk =
             marks
