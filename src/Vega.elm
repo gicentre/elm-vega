@@ -9122,21 +9122,21 @@ loAlign =
     LAlign
 
 
-{-| Position legend at the bottom of the visualization it describes.
+{-| Position legend below the bottom of the visualization it describes.
 -}
 loBottom : LegendOrientation
 loBottom =
     Bottom
 
 
-{-| Position legend to the bottom-left of the visualization it describes.
+{-| Position legend to be witin the bottom-left of the visualization it describes.
 -}
 loBottomLeft : LegendOrientation
 loBottomLeft =
     BottomLeft
 
 
-{-| Position legend to the bottom-right of the visualization it describes.
+{-| Position legend to be witihin the bottom-right of the visualization it describes.
 -}
 loBottomRight : LegendOrientation
 loBottomRight =
@@ -9201,7 +9201,16 @@ loLeft =
 
 
 {-| Do not perform automatic legend positioning (allows legend to be located explicitly
-via `x` `y` coordinates).
+via `x` `y` coordinates). For example,
+
+    legend
+        [ leTitle (str "Weight")
+        , leOpacity "oScale"
+        , leSymbolType symCircle
+        , leOrient loNone
+        , leEncode [ enLegend [ enEnter [ maX [ vNum 320 ], maY [ vNum 30 ] ] ] ]
+        ]
+
 -}
 loNone : LegendOrientation
 loNone =
@@ -9264,21 +9273,21 @@ loTitleBandRC r c =
     LTitleBandRC r c
 
 
-{-| Position legend at the top of the visualization it describes.
+{-| Position legend above the top of the visualization it describes.
 -}
 loTop : LegendOrientation
 loTop =
     Top
 
 
-{-| Position legend to the top-left of the visualization it describes.
+{-| Position legend to be within the top-left of the visualization it describes.
 -}
 loTopLeft : LegendOrientation
 loTopLeft =
     TopLeft
 
 
-{-| Position legend to the top-right of the visualization it describes.
+{-| Position legend to be within the top-right of the visualization it describes.
 -}
 loTopRight : LegendOrientation
 loTopRight =
