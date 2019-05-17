@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Apache Arrow Example</title>
+    <meta charset="utf-8" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 2em;
+      }
+    </style>
+
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apache-arrow"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-loader-arrow"></script>
+
+    <!-- This is the script generated from Elm -->
+    <script src="js/apacheArrow.js"></script>
+  </head>
+
+  <body>
+    <h1>Apache Arrow Data</h1>
+
+    <p>
+      <a
+        href="https://observablehq.com/@theneuralbit/introduction-to-apache-arrow"
+        target="_blank"
+        >Apache arrow</a
+      >
+      is a cross-platform binary format for in-memory data storage. Being much
+      more compact than JSON it is suitable for larger datasets as well as for
+      interoperability with other software that generates apache-arrow format
+      files:
+    </p>
+
+    <p>
+      To use Apache Arrow data with Vega (or Vega-Lite) you need to link to the
+      <a href="https://github.com/vega/vega-loader-arrow" target="_blank"
+        >vega-loader-arrow</a
+      >
+      and apache-arrow javascript packages in the head of your HTML along with
+      the normal links to the vega and vega-lite runtimes:
+    </p>
+
+    <pre>
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/apache-arrow&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vega-loader-arrow&quot;&gt;&lt;/script&gt;
+    </pre>
+
+    <h2>Flight Data Example</h2>
+
+    <p>
+      Data source contains 200,000 flight records as a binary arrow file.
+    </p>
+
+    <div id="arrow1"></div>
+
+    <script>
+      Elm.ApacheArrow.init().ports.elmToJS.subscribe(function(namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: false,
+            logLevel: vega.Warn
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
+</html>

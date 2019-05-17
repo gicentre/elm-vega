@@ -7681,6 +7681,13 @@ var author$project$Vega$formatProperty = function (fmt) {
 					author$project$Vega$strSpec(s))
 				]);
 		case 5:
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('arrow'))
+				]);
+		case 6:
 			var s = fmt.a;
 			return _List_fromArray(
 				[
@@ -7691,7 +7698,7 @@ var author$project$Vega$formatProperty = function (fmt) {
 					'feature',
 					author$project$Vega$strSpec(s))
 				]);
-		case 6:
+		case 7:
 			var s = fmt.a;
 			return _List_fromArray(
 				[
@@ -7702,7 +7709,7 @@ var author$project$Vega$formatProperty = function (fmt) {
 					'mesh',
 					author$project$Vega$strSpec(s))
 				]);
-		case 7:
+		case 8:
 			var fmts = fmt.a;
 			return _List_fromArray(
 				[
@@ -7720,7 +7727,7 @@ var author$project$Vega$formatProperty = function (fmt) {
 							},
 							fmts)))
 				]);
-		case 8:
+		case 9:
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
