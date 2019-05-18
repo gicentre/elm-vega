@@ -214,9 +214,38 @@ legendTest5 =
         |> chartCore cf
 
 
+legendTest6 : Spec
+legendTest6 =
+    let
+        cf =
+            config
+                [ cfLegend
+                    [ leSymbolStrokeWidth (num 0)
+                    , leSymbolOpacity (num 0.5)
+                    , leSymbolFillColor (str "black")
+                    , leRowPadding (num 5)
+                    , leTitlePadding (num 10)
+                    , leStrokeColor (str "lightgrey")
+                    , lePadding (num 10)
+                    , leOrient loNone
+                    , leBorderStrokeWidth (num 0)
+                    ]
+                ]
+    in
+    legends
+        << legend
+            [ leTitle (str "Weight")
+            , leOpacity "oScale"
+            , leSymbolType symCircle
+            , leX (num 320)
+            , leY (num 30)
+            ]
+        |> chartCore cf
+
+
 sourceExample : Spec
 sourceExample =
-    legendTest5
+    legendTest6
 
 
 
@@ -231,6 +260,7 @@ mySpecs =
         , ( "legendTest3", legendTest3 )
         , ( "legendTest4", legendTest4 )
         , ( "legendTest5", legendTest5 )
+        , ( "legendTest6", legendTest6 )
         ]
 
 

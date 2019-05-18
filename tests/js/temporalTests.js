@@ -11028,6 +11028,16 @@ var author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'values',
 				A2(elm$json$Json$Encode$list, author$project$Vega$valueSpec, vals));
+		case 75:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendX',
+				author$project$Vega$numSpec(n));
+		case 76:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendY',
+				author$project$Vega$numSpec(n));
 		default:
 			var n = lp.a;
 			return _Utils_Tuple2(

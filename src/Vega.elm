@@ -769,6 +769,8 @@ module Vega exposing
     , leTitleOrient
     , leTitlePadding
     , leValues
+    , leX
+    , leY
     , leZIndex
     , ltSymbol
     , ltGradient
@@ -2354,6 +2356,8 @@ See the
 @docs leTitleOrient
 @docs leTitlePadding
 @docs leValues
+@docs leX
+@docs leY
 @docs leZIndex
 @docs ltSymbol
 @docs ltGradient
@@ -3752,7 +3756,7 @@ type LegendOrientation
 [LeTitleFontStyle](#LeTitleFontStyle), [leTitleFontSize](#leTitleFontSize),
 [leTitleFontWeight](#leTitleFontWeight), [leTitleLimit](#leTitleLimit),
 [leTitleOpacity](#leTitleOpacity), [LeTitleOrient](#leTitleOrient), [leTitlePadding](#leTitlePadding),
-[leValues](#leValues) and [leZIndex](#leZIndex).
+[leValues](#leValues), [leX](#leX), [leY](#leY) and [leZIndex](#leZIndex).
 -}
 type LegendProperty
     = LeType LegendType
@@ -3830,6 +3834,8 @@ type LegendProperty
     | LeTitleOrient Side
     | LeTitlePadding Num
     | LeValues (List Value)
+    | LeX Num
+    | LeY Num
     | LeZIndex Num
 
 
@@ -9065,6 +9071,22 @@ leType =
 leValues : List Value -> LegendProperty
 leValues =
     LeValues
+
+
+{-| x-position of legend group in pixel units for absolute positioning when
+[leOrient](#leOrient) is set to `loNone`.
+-}
+leX : Num -> LegendProperty
+leX =
+    LeX
+
+
+{-| y-position of legend group in pixel units for absolute positioning when
+[leOrient](#leOrient) is set to `loNone`.
+-}
+leY : Num -> LegendProperty
+leY =
+    LeY
 
 
 {-| z-index indicating the layering of the legend group relative to other axis,
@@ -15798,6 +15820,12 @@ legendProperty lp =
 
         LeValues vals ->
             ( "values", JE.list valueSpec vals )
+
+        LeX n ->
+            ( "legendX", numSpec n )
+
+        LeY n ->
+            ( "legendY", numSpec n )
 
         LeZIndex n ->
             ( "zindex", numSpec n )

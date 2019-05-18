@@ -7236,6 +7236,16 @@ var author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'values',
 				A2(elm$json$Json$Encode$list, author$project$Vega$valueSpec, vals));
+		case 75:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendX',
+				author$project$Vega$numSpec(n));
+		case 76:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendY',
+				author$project$Vega$numSpec(n));
 		default:
 			var n = lp.a;
 			return _Utils_Tuple2(
@@ -12563,7 +12573,7 @@ var author$project$Vega$LeOrient = function (a) {
 };
 var author$project$Vega$leOrient = author$project$Vega$LeOrient;
 var author$project$Vega$LeZIndex = function (a) {
-	return {$: 75, a: a};
+	return {$: 77, a: a};
 };
 var author$project$Vega$leZIndex = author$project$Vega$LeZIndex;
 var author$project$Vega$Line = 4;

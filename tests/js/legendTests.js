@@ -11189,6 +11189,16 @@ var author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'values',
 				A2(elm$json$Json$Encode$list, author$project$Vega$valueSpec, vals));
+		case 75:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendX',
+				author$project$Vega$numSpec(n));
+		case 76:
+			var n = lp.a;
+			return _Utils_Tuple2(
+				'legendY',
+				author$project$Vega$numSpec(n));
 		default:
 			var n = lp.a;
 			return _Utils_Tuple2(
@@ -11995,6 +12005,59 @@ var author$project$LegendTests$legendTest5 = function () {
 							]))
 					]))));
 }();
+var author$project$Vega$LeX = function (a) {
+	return {$: 75, a: a};
+};
+var author$project$Vega$leX = author$project$Vega$LeX;
+var author$project$Vega$LeY = function (a) {
+	return {$: 76, a: a};
+};
+var author$project$Vega$leY = author$project$Vega$LeY;
+var author$project$LegendTests$legendTest6 = function () {
+	var cf = author$project$Vega$config(
+		_List_fromArray(
+			[
+				author$project$Vega$cfLegend(
+				_List_fromArray(
+					[
+						author$project$Vega$leSymbolStrokeWidth(
+						author$project$Vega$num(0)),
+						author$project$Vega$leSymbolOpacity(
+						author$project$Vega$num(0.5)),
+						author$project$Vega$leSymbolFillColor(
+						author$project$Vega$str('black')),
+						author$project$Vega$leRowPadding(
+						author$project$Vega$num(5)),
+						author$project$Vega$leTitlePadding(
+						author$project$Vega$num(10)),
+						author$project$Vega$leStrokeColor(
+						author$project$Vega$str('lightgrey')),
+						author$project$Vega$lePadding(
+						author$project$Vega$num(10)),
+						author$project$Vega$leOrient(author$project$Vega$loNone),
+						author$project$Vega$leBorderStrokeWidth(
+						author$project$Vega$num(0))
+					]))
+			]));
+	return A2(
+		author$project$LegendTests$chartCore,
+		cf,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$legends,
+			author$project$Vega$legend(
+				_List_fromArray(
+					[
+						author$project$Vega$leTitle(
+						author$project$Vega$str('Weight')),
+						author$project$Vega$leOpacity('oScale'),
+						author$project$Vega$leSymbolType(author$project$Vega$symCircle),
+						author$project$Vega$leX(
+						author$project$Vega$num(320)),
+						author$project$Vega$leY(
+						author$project$Vega$num(30))
+					]))));
+}();
 var author$project$Vega$combineSpecs = function (specs) {
 	return elm$json$Json$Encode$object(specs);
 };
@@ -12005,9 +12068,10 @@ var author$project$LegendTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('legendTest2', author$project$LegendTests$legendTest2),
 			_Utils_Tuple2('legendTest3', author$project$LegendTests$legendTest3),
 			_Utils_Tuple2('legendTest4', author$project$LegendTests$legendTest4),
-			_Utils_Tuple2('legendTest5', author$project$LegendTests$legendTest5)
+			_Utils_Tuple2('legendTest5', author$project$LegendTests$legendTest5),
+			_Utils_Tuple2('legendTest6', author$project$LegendTests$legendTest6)
 		]));
-var author$project$LegendTests$sourceExample = author$project$LegendTests$legendTest5;
+var author$project$LegendTests$sourceExample = author$project$LegendTests$legendTest6;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
