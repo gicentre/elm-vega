@@ -6551,6 +6551,34 @@ var author$project$Vega$formatProperty = function (fmt) {
 					author$project$Vega$strSpec(s))
 				]);
 		case 8:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'mesh',
+					author$project$Vega$strSpec(s)),
+					_Utils_Tuple2(
+					'filter',
+					elm$json$Json$Encode$string('exterior'))
+				]);
+		case 9:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'mesh',
+					author$project$Vega$strSpec(s)),
+					_Utils_Tuple2(
+					'filter',
+					elm$json$Json$Encode$string('interior'))
+				]);
+		case 10:
 			var fmts = fmt.a;
 			return _List_fromArray(
 				[
@@ -6568,7 +6596,7 @@ var author$project$Vega$formatProperty = function (fmt) {
 							},
 							fmts)))
 				]);
-		case 9:
+		case 11:
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
@@ -9464,7 +9492,7 @@ var author$project$Vega$padding = function (p) {
 		elm$json$Json$Encode$float(p));
 };
 var author$project$Vega$Parse = function (a) {
-	return {$: 8, a: a};
+	return {$: 10, a: a};
 };
 var author$project$Vega$parse = author$project$Vega$Parse;
 var author$project$Vega$RaHeight = {$: 7};

@@ -88,17 +88,9 @@ geoTest2 =
         [ width 250, height 250, autosize [ asPad ], ds, pr [], mk [] ]
 
 
-geoTest3 : Spec
-geoTest3 =
+featureSpec : Data -> String -> Spec
+featureSpec ds fld =
     let
-        ds =
-            dataSource
-                [ data "mapData"
-                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson3.json")
-                    , daFormat [ topojsonFeature (str "myRegions") ]
-                    ]
-                ]
-
         pr =
             projections
                 << projection "myProjection"
@@ -111,7 +103,7 @@ geoTest3 =
             scales
                 << scale "cScale"
                     [ scType scOrdinal
-                    , scDomain (doData [ daDataset "mapData", daField (field "id") ])
+                    , scDomain (doData [ daDataset "mapData", daField (field fld) ])
                     , scRange raCategory
                     ]
 
@@ -125,7 +117,7 @@ geoTest3 =
                     , mEncode
                         [ enUpdate
                             [ maStroke [ vStr "#4c78a8" ]
-                            , maFill [ vScale "cScale", vField (field "id") ]
+                            , maFill [ vScale "cScale", vField (field fld) ]
                             ]
                         ]
                     , mTransform [ trGeoShape "myProjection" [] ]
@@ -133,6 +125,48 @@ geoTest3 =
     in
     toVega
         [ width 250, height 250, autosize [ asPad ], ds, pr [], sc [], le [], mk [] ]
+
+
+meshSpec : Data -> Spec
+meshSpec ds =
+    let
+        pr =
+            projections
+                << projection "myProjection"
+                    [ prType orthographic
+                    , prSize (numSignal "[width,height]")
+                    , prFit (feName "mapData")
+                    ]
+
+        mk =
+            marks
+                << mark shape
+                    [ mFrom [ srData (str "mapData") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maStroke [ vStr "black" ]
+                            , maFill [ vStr "steelblue" ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+    in
+    toVega
+        [ width 250, height 250, autosize [ asPad ], ds, pr [], mk [] ]
+
+
+geoTest3 : Spec
+geoTest3 =
+    let
+        ds =
+            dataSource
+                [ data "mapData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson3.json")
+                    , daFormat [ topojsonFeature (str "myRegions") ]
+                    ]
+                ]
+    in
+    featureSpec ds "id"
 
 
 geoTest4 : Spec
@@ -145,46 +179,104 @@ geoTest4 =
                     , daFormat [ topojsonFeature (str "myRegions") ]
                     ]
                 ]
+    in
+    featureSpec ds "properties.myRegionName"
+
+
+geoTest5 : Spec
+geoTest5 =
+    let
+        ds =
+            dataSource
+                [ data "mapData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    , daFormat [ topojsonMesh (str "myRegions") ]
+                    ]
+                ]
+    in
+    meshSpec ds
+
+
+geoTest6 : Spec
+geoTest6 =
+    let
+        ds =
+            dataSource
+                [ data "mapData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    , daFormat [ topojsonMeshInterior (str "myRegions") ]
+                    ]
+                ]
+    in
+    meshSpec ds
+
+
+geoTest7 : Spec
+geoTest7 =
+    let
+        ds =
+            dataSource
+                [ data "mapData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/topoJson6.json")
+                    , daFormat [ topojsonMeshExterior (str "myRegions") ]
+                    ]
+                ]
+    in
+    meshSpec ds
+
+
+geoTest8 : Spec
+geoTest8 =
+    let
+        ds =
+            dataSource
+                [ data "featureData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    , daFormat [ topojsonFeature (str "boroughs") ]
+                    ]
+                , data "interiorData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    , daFormat [ topojsonMeshInterior (str "boroughs") ]
+                    ]
+                , data "exteriorData"
+                    [ daUrl (str "https://gicentre.github.io/data/geoTutorials/londonBoroughs.json")
+                    , daFormat [ topojsonMeshExterior (str "boroughs") ]
+                    ]
+                ]
 
         pr =
             projections
                 << projection "myProjection"
-                    [ prType orthographic
+                    [ prType naturalEarth1
                     , prSize (numSignal "[width,height]")
-                    , prFit (feName "mapData")
+                    , prFit (feName "featureData")
                     ]
-
-        sc =
-            scales
-                << scale "cScale"
-                    [ scType scOrdinal
-                    , scDomain (doData [ daDataset "mapData", daField (field "properties.myRegionName") ])
-                    , scRange raCategory
-                    ]
-
-        le =
-            legends << legend [ leFill "cScale" ]
 
         mk =
             marks
                 << mark shape
-                    [ mFrom [ srData (str "mapData") ]
-                    , mEncode
-                        [ enUpdate
-                            [ maStroke [ vStr "#4c78a8" ]
-                            , maFill [ vScale "cScale", vField (field "properties.myRegionName") ]
-                            ]
-                        ]
+                    [ mFrom [ srData (str "featureData") ]
+                    , mEncode [ enUpdate [ maFill [ vStr "#eee" ] ] ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark shape
+                    [ mFrom [ srData (str "interiorData") ]
+                    , mEncode [ enUpdate [ maStroke [ vStr "red" ] ] ]
+                    , mTransform [ trGeoShape "myProjection" [] ]
+                    ]
+                << mark shape
+                    [ mFrom [ srData (str "exteriorData") ]
+                    , mEncode [ enUpdate [ maStroke [ vStr "black" ] ] ]
                     , mTransform [ trGeoShape "myProjection" [] ]
                     ]
     in
     toVega
-        [ width 250, height 250, autosize [ asPad ], ds, pr [], sc [], le [], mk [] ]
+        [ width 600, height 450, autosize [ asPad ], ds, pr [], mk [] ]
 
 
 sourceExample : Spec
 sourceExample =
-    geoTest4
+    geoTest8
 
 
 
@@ -198,6 +290,10 @@ mySpecs =
         , ( "geoTest2", geoTest2 )
         , ( "geoTest3", geoTest3 )
         , ( "geoTest4", geoTest4 )
+        , ( "geoTest5", geoTest5 )
+        , ( "geoTest6", geoTest6 )
+        , ( "geoTest7", geoTest7 )
+        , ( "geoTest8", geoTest8 )
         ]
 
 

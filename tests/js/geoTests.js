@@ -5654,6 +5654,34 @@ var author$project$Vega$formatProperty = function (fmt) {
 					author$project$Vega$strSpec(s))
 				]);
 		case 8:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'mesh',
+					author$project$Vega$strSpec(s)),
+					_Utils_Tuple2(
+					'filter',
+					elm$json$Json$Encode$string('exterior'))
+				]);
+		case 9:
+			var s = fmt.a;
+			return _List_fromArray(
+				[
+					_Utils_Tuple2(
+					'type',
+					elm$json$Json$Encode$string('topojson')),
+					_Utils_Tuple2(
+					'mesh',
+					author$project$Vega$strSpec(s)),
+					_Utils_Tuple2(
+					'filter',
+					elm$json$Json$Encode$string('interior'))
+				]);
+		case 10:
 			var fmts = fmt.a;
 			return _List_fromArray(
 				[
@@ -5671,7 +5699,7 @@ var author$project$Vega$formatProperty = function (fmt) {
 							},
 							fmts)))
 				]);
-		case 9:
+		case 11:
 			return _List_fromArray(
 				[
 					_Utils_Tuple2(
@@ -9813,10 +9841,6 @@ var author$project$Vega$DField = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Vega$daField = author$project$Vega$DField;
-var author$project$Vega$DaFormat = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$daFormat = author$project$Vega$DaFormat;
 var author$project$Vega$DoData = function (a) {
 	return {$: 2, a: a};
 };
@@ -11215,10 +11239,6 @@ var author$project$Vega$scales = function (scs) {
 		9,
 		A2(elm$json$Json$Encode$list, elm$core$Basics$identity, scs));
 };
-var author$project$Vega$TopojsonFeature = function (a) {
-	return {$: 6, a: a};
-};
-var author$project$Vega$topojsonFeature = author$project$Vega$TopojsonFeature;
 var author$project$Vega$VScale = function (a) {
 	return {$: 12, a: a};
 };
@@ -11226,88 +11246,113 @@ var author$project$Vega$vScale = function (s) {
 	return author$project$Vega$VScale(
 		author$project$Vega$field(s));
 };
-var author$project$GeoTests$geoTest3 = function () {
-	var sc = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$scales,
-		A2(
-			author$project$Vega$scale,
-			'cScale',
-			_List_fromArray(
-				[
-					author$project$Vega$scType(author$project$Vega$scOrdinal),
-					author$project$Vega$scDomain(
-					author$project$Vega$doData(
-						_List_fromArray(
-							[
-								author$project$Vega$daDataset('mapData'),
-								author$project$Vega$daField(
-								author$project$Vega$field('id'))
-							]))),
-					author$project$Vega$scRange(author$project$Vega$raCategory)
-				])));
-	var pr = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$projections,
-		A2(
-			author$project$Vega$projection,
-			'myProjection',
-			_List_fromArray(
-				[
-					author$project$Vega$prType(author$project$Vega$orthographic),
-					author$project$Vega$prSize(
-					author$project$Vega$numSignal('[width,height]')),
-					author$project$Vega$prFit(
-					author$project$Vega$feName('mapData'))
-				])));
-	var mk = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$marks,
-		A2(
-			author$project$Vega$mark,
-			author$project$Vega$shape,
-			_List_fromArray(
-				[
-					author$project$Vega$mFrom(
-					_List_fromArray(
-						[
-							author$project$Vega$srData(
-							author$project$Vega$str('mapData'))
-						])),
-					author$project$Vega$mEncode(
-					_List_fromArray(
-						[
-							author$project$Vega$enUpdate(
+var author$project$GeoTests$featureSpec = F2(
+	function (ds, fld) {
+		var sc = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$scales,
+			A2(
+				author$project$Vega$scale,
+				'cScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scType(author$project$Vega$scOrdinal),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
 							_List_fromArray(
 								[
-									author$project$Vega$maStroke(
-									_List_fromArray(
-										[
-											author$project$Vega$vStr('#4c78a8')
-										])),
-									author$project$Vega$maFill(
-									_List_fromArray(
-										[
-											author$project$Vega$vScale('cScale'),
-											author$project$Vega$vField(
-											author$project$Vega$field('id'))
-										]))
-								]))
-						])),
-					author$project$Vega$mTransform(
-					_List_fromArray(
-						[
-							A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
-						]))
-				])));
-	var le = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$legends,
-		author$project$Vega$legend(
+									author$project$Vega$daDataset('mapData'),
+									author$project$Vega$daField(
+									author$project$Vega$field(fld))
+								]))),
+						author$project$Vega$scRange(author$project$Vega$raCategory)
+					])));
+		var pr = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$projections,
+			A2(
+				author$project$Vega$projection,
+				'myProjection',
+				_List_fromArray(
+					[
+						author$project$Vega$prType(author$project$Vega$orthographic),
+						author$project$Vega$prSize(
+						author$project$Vega$numSignal('[width,height]')),
+						author$project$Vega$prFit(
+						author$project$Vega$feName('mapData'))
+					])));
+		var mk = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$shape,
+				_List_fromArray(
+					[
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('mapData'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												author$project$Vega$vStr('#4c78a8')
+											])),
+										author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('cScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field(fld))
+											]))
+									]))
+							])),
+						author$project$Vega$mTransform(
+						_List_fromArray(
+							[
+								A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
+							]))
+					])));
+		var le = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$legends,
+			author$project$Vega$legend(
+				_List_fromArray(
+					[
+						author$project$Vega$leFill('cScale')
+					])));
+		return author$project$Vega$toVega(
 			_List_fromArray(
 				[
-					author$project$Vega$leFill('cScale')
-				])));
+					author$project$Vega$width(250),
+					author$project$Vega$height(250),
+					author$project$Vega$autosize(
+					_List_fromArray(
+						[author$project$Vega$asPad])),
+					ds,
+					pr(_List_Nil),
+					sc(_List_Nil),
+					le(_List_Nil),
+					mk(_List_Nil)
+				]));
+	});
+var author$project$Vega$DaFormat = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$daFormat = author$project$Vega$DaFormat;
+var author$project$Vega$TopojsonFeature = function (a) {
+	return {$: 6, a: a};
+};
+var author$project$Vega$topojsonFeature = author$project$Vega$TopojsonFeature;
+var author$project$GeoTests$geoTest3 = function () {
 	var ds = author$project$Vega$dataSource(
 		_List_fromArray(
 			[
@@ -11326,41 +11371,30 @@ var author$project$GeoTests$geoTest3 = function () {
 							]))
 					]))
 			]));
-	return author$project$Vega$toVega(
-		_List_fromArray(
-			[
-				author$project$Vega$width(250),
-				author$project$Vega$height(250),
-				author$project$Vega$autosize(
-				_List_fromArray(
-					[author$project$Vega$asPad])),
-				ds,
-				pr(_List_Nil),
-				sc(_List_Nil),
-				le(_List_Nil),
-				mk(_List_Nil)
-			]));
+	return A2(author$project$GeoTests$featureSpec, ds, 'id');
 }();
 var author$project$GeoTests$geoTest4 = function () {
-	var sc = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$scales,
-		A2(
-			author$project$Vega$scale,
-			'cScale',
-			_List_fromArray(
-				[
-					author$project$Vega$scType(author$project$Vega$scOrdinal),
-					author$project$Vega$scDomain(
-					author$project$Vega$doData(
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'mapData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						author$project$Vega$daFormat(
 						_List_fromArray(
 							[
-								author$project$Vega$daDataset('mapData'),
-								author$project$Vega$daField(
-								author$project$Vega$field('properties.myRegionName'))
-							]))),
-					author$project$Vega$scRange(author$project$Vega$raCategory)
-				])));
+								author$project$Vega$topojsonFeature(
+								author$project$Vega$str('myRegions'))
+							]))
+					]))
+			]));
+	return A2(author$project$GeoTests$featureSpec, ds, 'properties.myRegionName');
+}();
+var author$project$GeoTests$meshSpec = function (ds) {
 	var pr = A2(
 		elm$core$Basics$composeL,
 		author$project$Vega$projections,
@@ -11398,14 +11432,12 @@ var author$project$GeoTests$geoTest4 = function () {
 									author$project$Vega$maStroke(
 									_List_fromArray(
 										[
-											author$project$Vega$vStr('#4c78a8')
+											author$project$Vega$vStr('black')
 										])),
 									author$project$Vega$maFill(
 									_List_fromArray(
 										[
-											author$project$Vega$vScale('cScale'),
-											author$project$Vega$vField(
-											author$project$Vega$field('properties.myRegionName'))
+											author$project$Vega$vStr('steelblue')
 										]))
 								]))
 						])),
@@ -11415,14 +11447,24 @@ var author$project$GeoTests$geoTest4 = function () {
 							A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
 						]))
 				])));
-	var le = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$legends,
-		author$project$Vega$legend(
-			_List_fromArray(
-				[
-					author$project$Vega$leFill('cScale')
-				])));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(250),
+				author$project$Vega$height(250),
+				author$project$Vega$autosize(
+				_List_fromArray(
+					[author$project$Vega$asPad])),
+				ds,
+				pr(_List_Nil),
+				mk(_List_Nil)
+			]));
+};
+var author$project$Vega$TopojsonMesh = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$topojsonMesh = author$project$Vega$TopojsonMesh;
+var author$project$GeoTests$geoTest5 = function () {
 	var ds = author$project$Vega$dataSource(
 		_List_fromArray(
 			[
@@ -11436,23 +11478,233 @@ var author$project$GeoTests$geoTest4 = function () {
 						author$project$Vega$daFormat(
 						_List_fromArray(
 							[
-								author$project$Vega$topojsonFeature(
+								author$project$Vega$topojsonMesh(
 								author$project$Vega$str('myRegions'))
+							]))
+					]))
+			]));
+	return author$project$GeoTests$meshSpec(ds);
+}();
+var author$project$Vega$TopojsonMeshInterior = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$topojsonMeshInterior = author$project$Vega$TopojsonMeshInterior;
+var author$project$GeoTests$geoTest6 = function () {
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'mapData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[
+								author$project$Vega$topojsonMeshInterior(
+								author$project$Vega$str('myRegions'))
+							]))
+					]))
+			]));
+	return author$project$GeoTests$meshSpec(ds);
+}();
+var author$project$Vega$TopojsonMeshExterior = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$topojsonMeshExterior = author$project$Vega$TopojsonMeshExterior;
+var author$project$GeoTests$geoTest7 = function () {
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'mapData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/topoJson6.json')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[
+								author$project$Vega$topojsonMeshExterior(
+								author$project$Vega$str('myRegions'))
+							]))
+					]))
+			]));
+	return author$project$GeoTests$meshSpec(ds);
+}();
+var author$project$Vega$NaturalEarth1 = {$: 10};
+var author$project$Vega$naturalEarth1 = author$project$Vega$NaturalEarth1;
+var author$project$GeoTests$geoTest8 = function () {
+	var pr = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$projections,
+		A2(
+			author$project$Vega$projection,
+			'myProjection',
+			_List_fromArray(
+				[
+					author$project$Vega$prType(author$project$Vega$naturalEarth1),
+					author$project$Vega$prSize(
+					author$project$Vega$numSignal('[width,height]')),
+					author$project$Vega$prFit(
+					author$project$Vega$feName('featureData'))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				author$project$Vega$marks,
+				A2(
+					author$project$Vega$mark,
+					author$project$Vega$shape,
+					_List_fromArray(
+						[
+							author$project$Vega$mFrom(
+							_List_fromArray(
+								[
+									author$project$Vega$srData(
+									author$project$Vega$str('featureData'))
+								])),
+							author$project$Vega$mEncode(
+							_List_fromArray(
+								[
+									author$project$Vega$enUpdate(
+									_List_fromArray(
+										[
+											author$project$Vega$maFill(
+											_List_fromArray(
+												[
+													author$project$Vega$vStr('#eee')
+												]))
+										]))
+								])),
+							author$project$Vega$mTransform(
+							_List_fromArray(
+								[
+									A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
+								]))
+						]))),
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$shape,
+				_List_fromArray(
+					[
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('interiorData'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												author$project$Vega$vStr('red')
+											]))
+									]))
+							])),
+						author$project$Vega$mTransform(
+						_List_fromArray(
+							[
+								A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
+							]))
+					]))),
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$shape,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('exteriorData'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maStroke(
+									_List_fromArray(
+										[
+											author$project$Vega$vStr('black')
+										]))
+								]))
+						])),
+					author$project$Vega$mTransform(
+					_List_fromArray(
+						[
+							A2(author$project$Vega$trGeoShape, 'myProjection', _List_Nil)
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'featureData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[
+								author$project$Vega$topojsonFeature(
+								author$project$Vega$str('boroughs'))
+							]))
+					])),
+				A2(
+				author$project$Vega$data,
+				'interiorData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[
+								author$project$Vega$topojsonMeshInterior(
+								author$project$Vega$str('boroughs'))
+							]))
+					])),
+				A2(
+				author$project$Vega$data,
+				'exteriorData',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://gicentre.github.io/data/geoTutorials/londonBoroughs.json')),
+						author$project$Vega$daFormat(
+						_List_fromArray(
+							[
+								author$project$Vega$topojsonMeshExterior(
+								author$project$Vega$str('boroughs'))
 							]))
 					]))
 			]));
 	return author$project$Vega$toVega(
 		_List_fromArray(
 			[
-				author$project$Vega$width(250),
-				author$project$Vega$height(250),
+				author$project$Vega$width(600),
+				author$project$Vega$height(450),
 				author$project$Vega$autosize(
 				_List_fromArray(
 					[author$project$Vega$asPad])),
 				ds,
 				pr(_List_Nil),
-				sc(_List_Nil),
-				le(_List_Nil),
 				mk(_List_Nil)
 			]));
 }();
@@ -11465,9 +11717,13 @@ var author$project$GeoTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('geoTest1', author$project$GeoTests$geoTest1),
 			_Utils_Tuple2('geoTest2', author$project$GeoTests$geoTest2),
 			_Utils_Tuple2('geoTest3', author$project$GeoTests$geoTest3),
-			_Utils_Tuple2('geoTest4', author$project$GeoTests$geoTest4)
+			_Utils_Tuple2('geoTest4', author$project$GeoTests$geoTest4),
+			_Utils_Tuple2('geoTest5', author$project$GeoTests$geoTest5),
+			_Utils_Tuple2('geoTest6', author$project$GeoTests$geoTest6),
+			_Utils_Tuple2('geoTest7', author$project$GeoTests$geoTest7),
+			_Utils_Tuple2('geoTest8', author$project$GeoTests$geoTest8)
 		]));
-var author$project$GeoTests$sourceExample = author$project$GeoTests$geoTest4;
+var author$project$GeoTests$sourceExample = author$project$GeoTests$geoTest8;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
