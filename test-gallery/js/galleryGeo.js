@@ -8871,8 +8871,12 @@ var author$project$Vega$wOperationSpec = function (wnOp) {
 			return elm$json$Json$Encode$string('first_value');
 		case 9:
 			return elm$json$Json$Encode$string('last_value');
-		case 10:
+		case 12:
 			return elm$json$Json$Encode$string('nth_value');
+		case 10:
+			return elm$json$Json$Encode$string('prev_value');
+		case 11:
+			return elm$json$Json$Encode$string('next_value');
 		default:
 			var sigName = wnOp.a;
 			return elm$json$Json$Encode$object(
