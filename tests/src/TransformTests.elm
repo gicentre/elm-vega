@@ -746,9 +746,175 @@ contourTest1 =
         [ cf, width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], mk [] ]
 
 
+densityTest1 : Spec
+densityTest1 =
+    let
+        ds =
+            dataSource
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                , data "summary" [ daSource "points" ]
+                    |> transform
+                        [ trAggregate
+                            [ agFields [ field "u", field "u" ]
+                            , agOps [ opMean, opStdev ]
+                            , agAs [ "mean", "stdev" ]
+                            ]
+                        ]
+                , data "density" [ daSource "points" ]
+                    |> transform
+                        [ trDensity (diKde "points" (field "u") (numSignal "bandwidth"))
+                            [ dnExtent (numSignal "domain('xScale')")
+                            , dnMinSteps (numSignal "minSteps")
+                            , dnMaxSteps (numSignal "maxSteps")
+                            , dnMethod (dnSignal "method")
+                            ]
+                        ]
+                , data "normal" []
+                    |> transform
+                        [ trDensity (diNormal (numSignal "data('summary')[0].mean") (numSignal "data('summary')[0].stdev"))
+                            [ dnExtent (numSignal "domain('xScale')")
+                            , dnMinSteps (numSignal "minSteps")
+                            , dnMaxSteps (numSignal "maxSteps")
+                            , dnMethod (dnSignal "method")
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "bandwidth" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 0.1, inStep 0.001 ]) ]
+                << signal "minSteps" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
+                << signal "maxSteps" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
+                << signal "method" [ siValue (vStr "pdf"), siBind (iRadio [ inOptions (vStrs [ "pdf", "cdf" ]) ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scLinear
+                    , scRange raWidth
+                    , scDomain (doData [ daDataset "points", daField (field "u") ])
+                    , scNice niTrue
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scRound true
+                    , scDomain
+                        (doData
+                            [ daReferences
+                                [ [ daDataset "density", daField (field "density") ]
+                                , [ daDataset "normal", daField (field "density") ]
+                                ]
+                            ]
+                        )
+                    ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scDomain (doStrs (strs [ "Normal Estimate", "Kernel Density Estimate" ]))
+                    , scRange (raStrs [ "#444", "steelblue" ])
+                    ]
+
+        ax =
+            axes << axis "xScale" siBottom [ axZIndex (num 1) ]
+
+        le =
+            legends << legend [ leOrient loTopLeft, leOffset (num 0), leZIndex (num 1), leFill "cScale" ]
+
+        mk =
+            marks
+                << mark area
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "density") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vSignal "scale('cScale', 'Kernel Density Estimate')" ]
+                            ]
+                        ]
+                    ]
+                << mark line
+                    [ mFrom [ srData (str "normal") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "density") ]
+                            , maStroke [ vSignal "scale('cScale', 'Normal Estimate')" ]
+                            , maStrokeWidth [ vNum 2 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 250, padding 5, ds, si [], sc [], ax [], le [], mk [] ]
+
+
+kdeTest1 : Spec
+kdeTest1 =
+    let
+        ds =
+            dataSource
+                [ data "points" [ daUrl (str "https://vega.github.io/vega/data/normal-2d.json") ]
+                , data "density" [ daSource "points" ]
+                    |> transform
+                        [ trKde (field "u")
+                            [ kdCumulative (booSignal "isCumulative")
+                            , kdCounts (booSignal "counts")
+                            , kdBandwidth (numSignal "bandwidth")
+                            , kdSteps (numSignal "steps")
+                            , kdExtent (numSignal "minExtent") (numSignal "maxExtent")
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "bandwidth" [ siValue (vNum 0.02), siBind (iRange [ inMin 0.001, inMax 0.1, inStep 0.001 ]) ]
+                << signal "steps" [ siValue (vNum 50), siBind (iRange [ inMin 10, inMax 500, inStep 1 ]) ]
+                << signal "isCumulative" [ siValue vFalse, siBind (iCheckbox []) ]
+                << signal "counts" [ siValue vFalse, siBind (iCheckbox []) ]
+                << signal "minExtent" [ siValue (vNum -0.6), siBind (iRange [ inMin -0.6, inMax 0.6 ]) ]
+                << signal "maxExtent" [ siValue (vNum 0.6), siBind (iRange [ inMin -0.6, inMax 0.6 ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doData [ daDataset "points", daField (field "u") ])
+                    , scNice niTrue
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scRound true
+                    , scDomain (doData [ daReferences [ [ daDataset "density", daField (field "density") ] ] ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark area
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "density") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "steelblue" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 250, padding 20, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    contourTest1
+    kdeTest1
 
 
 
@@ -766,6 +932,8 @@ mySpecs =
         , ( "voronoiTest1", voronoiTest1 )
         , ( "voronoiTest2", voronoiTest2 )
         , ( "contourTest1", contourTest1 )
+        , ( "densityTest1", densityTest1 )
+        , ( "kdeTest1", kdeTest1 )
         ]
 
 

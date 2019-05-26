@@ -8385,10 +8385,20 @@ var author$project$Vega$densityProperty = function (dnp) {
 									elm$json$Json$Encode$string(sig))
 								])));
 			}
-		case 2:
+		case 4:
 			var n = dnp.a;
 			return _Utils_Tuple2(
 				'steps',
+				author$project$Vega$numSpec(n));
+		case 2:
+			var n = dnp.a;
+			return _Utils_Tuple2(
+				'minsteps',
+				author$project$Vega$numSpec(n));
+		case 3:
+			var n = dnp.a;
+			return _Utils_Tuple2(
+				'maxsteps',
 				author$project$Vega$numSpec(n));
 		default:
 			var s1 = dnp.a;
@@ -8835,6 +8845,65 @@ var author$project$Vega$joinAggregateProperty = function (ap) {
 			return _Utils_Tuple2(
 				'as',
 				A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, labels));
+	}
+};
+var author$project$Vega$kdeProperty = function (kp) {
+	switch (kp.$) {
+		case 0:
+			var fs = kp.a;
+			return _Utils_Tuple2(
+				'groupby',
+				A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fs));
+		case 1:
+			var b = kp.a;
+			return _Utils_Tuple2(
+				'cumulative',
+				author$project$Vega$booSpec(b));
+		case 2:
+			var b = kp.a;
+			return _Utils_Tuple2(
+				'counts',
+				author$project$Vega$booSpec(b));
+		case 3:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'bandwidth',
+				author$project$Vega$numSpec(n));
+		case 4:
+			var nMin = kp.a;
+			var nMax = kp.b;
+			return _Utils_Tuple2(
+				'extent',
+				A2(
+					elm$json$Json$Encode$list,
+					author$project$Vega$numSpec,
+					_List_fromArray(
+						[nMin, nMax])));
+		case 5:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'minsteps',
+				author$project$Vega$numSpec(n));
+		case 6:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'maxsteps',
+				author$project$Vega$numSpec(n));
+		case 7:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'steps',
+				author$project$Vega$numSpec(n));
+		default:
+			var s1 = kp.a;
+			var s2 = kp.b;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					elm$json$Json$Encode$list,
+					elm$json$Json$Encode$string,
+					_List_fromArray(
+						[s1, s2])));
 	}
 };
 var author$project$Vega$linkShapeSpec = function (ls) {
@@ -9877,7 +9946,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('joinaggregate')),
 					A2(elm$core$List$map, author$project$Vega$joinAggregateProperty, japs)));
-		case 28:
+		case 29:
 			var from = trans.a;
 			var key = trans.b;
 			var fields = trans.c;
@@ -9904,7 +9973,22 @@ var author$project$Vega$transformSpec = function (trans) {
 									'fields',
 									A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fields)),
 								A2(elm$core$List$map, author$project$Vega$lookupProperty, lups))))));
-		case 33:
+		case 27:
+			var f = trans.a;
+			var kps = trans.b;
+			return elm$json$Json$Encode$object(
+				A2(
+					elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						elm$json$Json$Encode$string('kde')),
+					A2(
+						elm$core$List$cons,
+						_Utils_Tuple2(
+							'field',
+							author$project$Vega$fieldSpec(f)),
+						A2(elm$core$List$map, author$project$Vega$kdeProperty, kps))));
+		case 34:
 			var f = trans.a;
 			var v = trans.b;
 			var pps = trans.c;
@@ -9925,7 +10009,7 @@ var author$project$Vega$transformSpec = function (trans) {
 								'value',
 								author$project$Vega$fieldSpec(v)),
 							A2(elm$core$List$map, author$project$Vega$pivotProperty, pps)))));
-		case 34:
+		case 35:
 			var fns = trans.a;
 			var _n6 = elm$core$List$unzip(fns);
 			var fields = _n6.a;
@@ -9943,7 +10027,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'as',
 						A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, names))
 					]));
-		case 36:
+		case 37:
 			var n = trans.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -9955,7 +10039,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'size',
 						author$project$Vega$numSpec(n))
 					]));
-		case 37:
+		case 38:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -10011,7 +10095,7 @@ var author$project$Vega$transformSpec = function (trans) {
 							author$project$Vega$numSpec(stop))
 						]),
 					stepProp));
-		case 38:
+		case 39:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -10071,7 +10155,7 @@ var author$project$Vega$transformSpec = function (trans) {
 							elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 45:
+		case 46:
 			var wos = trans.a;
 			var wps = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10222,7 +10306,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('graticule')),
 					A2(elm$core$List$map, author$project$Vega$graticuleProperty, grps)));
-		case 27:
+		case 28:
 			var lpps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10231,7 +10315,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('linkpath')),
 					A2(elm$core$List$map, author$project$Vega$linkPathProperty, lpps)));
-		case 32:
+		case 33:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10240,7 +10324,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('pie')),
 					A2(elm$core$List$map, author$project$Vega$pieProperty, pps)));
-		case 39:
+		case 40:
 			var sps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10258,7 +10342,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('force')),
 					A2(elm$core$List$map, author$project$Vega$forceSimulationProperty, fps)));
-		case 44:
+		case 45:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -10279,7 +10363,7 @@ var author$project$Vega$transformSpec = function (trans) {
 								'y',
 								author$project$Vega$fieldSpec(y)),
 							A2(elm$core$List$map, author$project$Vega$voronoiProperty, vps)))));
-		case 46:
+		case 47:
 			var wcps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10288,7 +10372,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('wordcloud')),
 					A2(elm$core$List$map, author$project$Vega$wordcloudProperty, wcps)));
-		case 29:
+		case 30:
 			var fs = trans.a;
 			var b = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10304,7 +10388,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'generate',
 						author$project$Vega$booSpec(b))
 					]));
-		case 40:
+		case 41:
 			var key = trans.a;
 			var parent = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10320,7 +10404,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						author$project$Vega$fieldSpec(parent))
 					]));
-		case 42:
+		case 43:
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -10328,7 +10412,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('treelinks'))
 					]));
-		case 30:
+		case 31:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10337,7 +10421,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('pack')),
 					A2(elm$core$List$map, author$project$Vega$packProperty, pps)));
-		case 31:
+		case 32:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10346,7 +10430,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('partition')),
 					A2(elm$core$List$map, author$project$Vega$partitionProperty, pps)));
-		case 41:
+		case 42:
 			var tps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10355,7 +10439,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('tree')),
 					A2(elm$core$List$map, author$project$Vega$treeProperty, tps)));
-		case 43:
+		case 44:
 			var tps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -12565,7 +12649,7 @@ var author$project$Vega$DensityFunctionSignal = function (a) {
 };
 var author$project$Vega$dnSignal = author$project$Vega$DensityFunctionSignal;
 var author$project$Vega$DnSteps = function (a) {
-	return {$: 2, a: a};
+	return {$: 4, a: a};
 };
 var author$project$Vega$dnSteps = author$project$Vega$DnSteps;
 var author$project$Vega$DoStrs = function (a) {
@@ -13816,7 +13900,7 @@ var author$project$Vega$trFormula = F2(
 	});
 var author$project$Vega$TSequence = F3(
 	function (a, b, c) {
-		return {$: 37, a: a, b: b, c: c};
+		return {$: 38, a: a, b: b, c: c};
 	});
 var author$project$Vega$trSequence = author$project$Vega$TSequence;
 var author$project$GalleryDist$hops1 = function () {
@@ -14368,7 +14452,7 @@ var author$project$Vega$StOffset = function (a) {
 };
 var author$project$Vega$stOffset = author$project$Vega$StOffset;
 var author$project$Vega$TStack = function (a) {
-	return {$: 39, a: a};
+	return {$: 40, a: a};
 };
 var author$project$Vega$trStack = author$project$Vega$TStack;
 var author$project$GalleryDist$violinplot1 = function () {
@@ -15218,7 +15302,7 @@ var author$project$Vega$title = F2(
 	});
 var author$project$Vega$TWindow = F2(
 	function (a, b) {
-		return {$: 45, a: a, b: b};
+		return {$: 46, a: a, b: b};
 	});
 var author$project$Vega$trWindow = author$project$Vega$TWindow;
 var author$project$Vega$VObject = function (a) {
@@ -15507,7 +15591,7 @@ var author$project$Vega$LValues = function (a) {
 var author$project$Vega$luValues = author$project$Vega$LValues;
 var author$project$Vega$TLookup = F4(
 	function (a, b, c, d) {
-		return {$: 28, a: a, b: b, c: c, d: d};
+		return {$: 29, a: a, b: b, c: c, d: d};
 	});
 var author$project$Vega$trLookup = author$project$Vega$TLookup;
 var author$project$GalleryDist$window2 = function () {

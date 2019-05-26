@@ -8441,10 +8441,20 @@ var author$project$Vega$densityProperty = function (dnp) {
 									elm$json$Json$Encode$string(sig))
 								])));
 			}
-		case 2:
+		case 4:
 			var n = dnp.a;
 			return _Utils_Tuple2(
 				'steps',
+				author$project$Vega$numSpec(n));
+		case 2:
+			var n = dnp.a;
+			return _Utils_Tuple2(
+				'minsteps',
+				author$project$Vega$numSpec(n));
+		case 3:
+			var n = dnp.a;
+			return _Utils_Tuple2(
+				'maxsteps',
 				author$project$Vega$numSpec(n));
 		default:
 			var s1 = dnp.a;
@@ -8891,6 +8901,65 @@ var author$project$Vega$joinAggregateProperty = function (ap) {
 			return _Utils_Tuple2(
 				'as',
 				A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, labels));
+	}
+};
+var author$project$Vega$kdeProperty = function (kp) {
+	switch (kp.$) {
+		case 0:
+			var fs = kp.a;
+			return _Utils_Tuple2(
+				'groupby',
+				A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fs));
+		case 1:
+			var b = kp.a;
+			return _Utils_Tuple2(
+				'cumulative',
+				author$project$Vega$booSpec(b));
+		case 2:
+			var b = kp.a;
+			return _Utils_Tuple2(
+				'counts',
+				author$project$Vega$booSpec(b));
+		case 3:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'bandwidth',
+				author$project$Vega$numSpec(n));
+		case 4:
+			var nMin = kp.a;
+			var nMax = kp.b;
+			return _Utils_Tuple2(
+				'extent',
+				A2(
+					elm$json$Json$Encode$list,
+					author$project$Vega$numSpec,
+					_List_fromArray(
+						[nMin, nMax])));
+		case 5:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'minsteps',
+				author$project$Vega$numSpec(n));
+		case 6:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'maxsteps',
+				author$project$Vega$numSpec(n));
+		case 7:
+			var n = kp.a;
+			return _Utils_Tuple2(
+				'steps',
+				author$project$Vega$numSpec(n));
+		default:
+			var s1 = kp.a;
+			var s2 = kp.b;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					elm$json$Json$Encode$list,
+					elm$json$Json$Encode$string,
+					_List_fromArray(
+						[s1, s2])));
 	}
 };
 var author$project$Vega$linkShapeSpec = function (ls) {
@@ -9933,7 +10002,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('joinaggregate')),
 					A2(elm$core$List$map, author$project$Vega$joinAggregateProperty, japs)));
-		case 28:
+		case 29:
 			var from = trans.a;
 			var key = trans.b;
 			var fields = trans.c;
@@ -9960,7 +10029,22 @@ var author$project$Vega$transformSpec = function (trans) {
 									'fields',
 									A2(elm$json$Json$Encode$list, author$project$Vega$fieldSpec, fields)),
 								A2(elm$core$List$map, author$project$Vega$lookupProperty, lups))))));
-		case 33:
+		case 27:
+			var f = trans.a;
+			var kps = trans.b;
+			return elm$json$Json$Encode$object(
+				A2(
+					elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						elm$json$Json$Encode$string('kde')),
+					A2(
+						elm$core$List$cons,
+						_Utils_Tuple2(
+							'field',
+							author$project$Vega$fieldSpec(f)),
+						A2(elm$core$List$map, author$project$Vega$kdeProperty, kps))));
+		case 34:
 			var f = trans.a;
 			var v = trans.b;
 			var pps = trans.c;
@@ -9981,7 +10065,7 @@ var author$project$Vega$transformSpec = function (trans) {
 								'value',
 								author$project$Vega$fieldSpec(v)),
 							A2(elm$core$List$map, author$project$Vega$pivotProperty, pps)))));
-		case 34:
+		case 35:
 			var fns = trans.a;
 			var _n6 = elm$core$List$unzip(fns);
 			var fields = _n6.a;
@@ -9999,7 +10083,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'as',
 						A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, names))
 					]));
-		case 36:
+		case 37:
 			var n = trans.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -10011,7 +10095,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'size',
 						author$project$Vega$numSpec(n))
 					]));
-		case 37:
+		case 38:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -10067,7 +10151,7 @@ var author$project$Vega$transformSpec = function (trans) {
 							author$project$Vega$numSpec(stop))
 						]),
 					stepProp));
-		case 38:
+		case 39:
 			var start = trans.a;
 			var stop = trans.b;
 			var step = trans.c;
@@ -10127,7 +10211,7 @@ var author$project$Vega$transformSpec = function (trans) {
 							elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 45:
+		case 46:
 			var wos = trans.a;
 			var wps = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10278,7 +10362,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('graticule')),
 					A2(elm$core$List$map, author$project$Vega$graticuleProperty, grps)));
-		case 27:
+		case 28:
 			var lpps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10287,7 +10371,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('linkpath')),
 					A2(elm$core$List$map, author$project$Vega$linkPathProperty, lpps)));
-		case 32:
+		case 33:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10296,7 +10380,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('pie')),
 					A2(elm$core$List$map, author$project$Vega$pieProperty, pps)));
-		case 39:
+		case 40:
 			var sps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10314,7 +10398,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('force')),
 					A2(elm$core$List$map, author$project$Vega$forceSimulationProperty, fps)));
-		case 44:
+		case 45:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -10335,7 +10419,7 @@ var author$project$Vega$transformSpec = function (trans) {
 								'y',
 								author$project$Vega$fieldSpec(y)),
 							A2(elm$core$List$map, author$project$Vega$voronoiProperty, vps)))));
-		case 46:
+		case 47:
 			var wcps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10344,7 +10428,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('wordcloud')),
 					A2(elm$core$List$map, author$project$Vega$wordcloudProperty, wcps)));
-		case 29:
+		case 30:
 			var fs = trans.a;
 			var b = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10360,7 +10444,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'generate',
 						author$project$Vega$booSpec(b))
 					]));
-		case 40:
+		case 41:
 			var key = trans.a;
 			var parent = trans.b;
 			return elm$json$Json$Encode$object(
@@ -10376,7 +10460,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						author$project$Vega$fieldSpec(parent))
 					]));
-		case 42:
+		case 43:
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -10384,7 +10468,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('treelinks'))
 					]));
-		case 30:
+		case 31:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10393,7 +10477,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('pack')),
 					A2(elm$core$List$map, author$project$Vega$packProperty, pps)));
-		case 31:
+		case 32:
 			var pps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10402,7 +10486,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('partition')),
 					A2(elm$core$List$map, author$project$Vega$partitionProperty, pps)));
-		case 41:
+		case 42:
 			var tps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -10411,7 +10495,7 @@ var author$project$Vega$transformSpec = function (trans) {
 						'type',
 						elm$json$Json$Encode$string('tree')),
 					A2(elm$core$List$map, author$project$Vega$treeProperty, tps)));
-		case 43:
+		case 44:
 			var tps = trans.a;
 			return elm$json$Json$Encode$object(
 				A2(
@@ -11967,6 +12051,508 @@ var author$project$TransformTests$contourTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var author$project$Vega$AgAs = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$agAs = author$project$Vega$AgAs;
+var author$project$Vega$AgFields = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$agFields = author$project$Vega$AgFields;
+var author$project$Vega$AgOps = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$agOps = author$project$Vega$AgOps;
+var author$project$Vega$Area = 1;
+var author$project$Vega$area = 1;
+var author$project$Vega$AxZIndex = function (a) {
+	return {$: 70, a: a};
+};
+var author$project$Vega$axZIndex = author$project$Vega$AxZIndex;
+var author$project$Vega$DReferences = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$daReferences = author$project$Vega$DReferences;
+var author$project$Vega$DiKde = F3(
+	function (a, b, c) {
+		return {$: 2, a: a, b: b, c: c};
+	});
+var author$project$Vega$diKde = author$project$Vega$DiKde;
+var author$project$Vega$DiNormal = F2(
+	function (a, b) {
+		return {$: 0, a: a, b: b};
+	});
+var author$project$Vega$diNormal = author$project$Vega$DiNormal;
+var author$project$Vega$DnExtent = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$dnExtent = author$project$Vega$DnExtent;
+var author$project$Vega$DnMaxSteps = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$dnMaxSteps = author$project$Vega$DnMaxSteps;
+var author$project$Vega$DnMethod = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$dnMethod = author$project$Vega$DnMethod;
+var author$project$Vega$DnMinSteps = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$dnMinSteps = author$project$Vega$DnMinSteps;
+var author$project$Vega$DensityFunctionSignal = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$dnSignal = author$project$Vega$DensityFunctionSignal;
+var author$project$Vega$DoStrs = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$doStrs = author$project$Vega$DoStrs;
+var author$project$Vega$IRadio = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$iRadio = author$project$Vega$IRadio;
+var author$project$Vega$IRange = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$iRange = author$project$Vega$IRange;
+var author$project$Vega$InMax = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$inMax = author$project$Vega$InMax;
+var author$project$Vega$InMin = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$inMin = author$project$Vega$InMin;
+var author$project$Vega$InStep = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$inStep = author$project$Vega$InStep;
+var author$project$Vega$LeOffset = function (a) {
+	return {$: 22, a: a};
+};
+var author$project$Vega$leOffset = author$project$Vega$LeOffset;
+var author$project$Vega$LeOrient = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$leOrient = author$project$Vega$LeOrient;
+var author$project$Vega$LeZIndex = function (a) {
+	return {$: 77, a: a};
+};
+var author$project$Vega$leZIndex = author$project$Vega$LeZIndex;
+var author$project$Vega$Line = 4;
+var author$project$Vega$line = 4;
+var author$project$Vega$TopLeft = {$: 1};
+var author$project$Vega$loTopLeft = author$project$Vega$TopLeft;
+var author$project$Vega$MY2 = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$maY2 = author$project$Vega$MY2;
+var author$project$Vega$Num = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$num = author$project$Vega$Num;
+var author$project$Vega$Mean = {$: 7};
+var author$project$Vega$opMean = author$project$Vega$Mean;
+var author$project$Vega$Stdev = {$: 14};
+var author$project$Vega$opStdev = author$project$Vega$Stdev;
+var author$project$Vega$RaStrs = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$raStrs = author$project$Vega$RaStrs;
+var author$project$Vega$ScOrdinal = {$: 7};
+var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
+var author$project$Vega$Strs = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$strs = author$project$Vega$Strs;
+var author$project$Vega$TAggregate = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$trAggregate = author$project$Vega$TAggregate;
+var author$project$Vega$TDensity = F2(
+	function (a, b) {
+		return {$: 8, a: a, b: b};
+	});
+var author$project$Vega$trDensity = author$project$Vega$TDensity;
+var author$project$Vega$VSignal = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$vSignal = author$project$Vega$VSignal;
+var author$project$Vega$VStrs = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$vStrs = author$project$Vega$VStrs;
+var author$project$TransformTests$densityTest1 = function () {
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				A2(
+					elm$core$Basics$composeL,
+					author$project$Vega$signals,
+					A2(
+						author$project$Vega$signal,
+						'bandwidth',
+						_List_fromArray(
+							[
+								author$project$Vega$siValue(
+								author$project$Vega$vNum(0)),
+								author$project$Vega$siBind(
+								author$project$Vega$iRange(
+									_List_fromArray(
+										[
+											author$project$Vega$inMin(0),
+											author$project$Vega$inMax(0.1),
+											author$project$Vega$inStep(1.0e-3)
+										])))
+							]))),
+				A2(
+					author$project$Vega$signal,
+					'minSteps',
+					_List_fromArray(
+						[
+							author$project$Vega$siValue(
+							author$project$Vega$vNum(100)),
+							author$project$Vega$siBind(
+							author$project$Vega$iRange(
+								_List_fromArray(
+									[
+										author$project$Vega$inMin(10),
+										author$project$Vega$inMax(500),
+										author$project$Vega$inStep(1)
+									])))
+						]))),
+			A2(
+				author$project$Vega$signal,
+				'maxSteps',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$vNum(100)),
+						author$project$Vega$siBind(
+						author$project$Vega$iRange(
+							_List_fromArray(
+								[
+									author$project$Vega$inMin(10),
+									author$project$Vega$inMax(500),
+									author$project$Vega$inStep(1)
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'method',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(
+					author$project$Vega$vStr('pdf')),
+					author$project$Vega$siBind(
+					author$project$Vega$iRadio(
+						_List_fromArray(
+							[
+								author$project$Vega$inOptions(
+								author$project$Vega$vStrs(
+									_List_fromArray(
+										['pdf', 'cdf'])))
+							])))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				author$project$Vega$scales,
+				A2(
+					author$project$Vega$scale,
+					'xScale',
+					_List_fromArray(
+						[
+							author$project$Vega$scType(author$project$Vega$scLinear),
+							author$project$Vega$scRange(author$project$Vega$raWidth),
+							author$project$Vega$scDomain(
+							author$project$Vega$doData(
+								_List_fromArray(
+									[
+										author$project$Vega$daDataset('points'),
+										author$project$Vega$daField(
+										author$project$Vega$field('u'))
+									]))),
+							author$project$Vega$scNice(author$project$Vega$niTrue)
+						]))),
+			A2(
+				author$project$Vega$scale,
+				'yScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scType(author$project$Vega$scLinear),
+						author$project$Vega$scRange(author$project$Vega$raHeight),
+						author$project$Vega$scRound(author$project$Vega$true),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daReferences(
+									_List_fromArray(
+										[
+											_List_fromArray(
+											[
+												author$project$Vega$daDataset('density'),
+												author$project$Vega$daField(
+												author$project$Vega$field('density'))
+											]),
+											_List_fromArray(
+											[
+												author$project$Vega$daDataset('normal'),
+												author$project$Vega$daField(
+												author$project$Vega$field('density'))
+											])
+										]))
+								])))
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scType(author$project$Vega$scOrdinal),
+					author$project$Vega$scDomain(
+					author$project$Vega$doStrs(
+						author$project$Vega$strs(
+							_List_fromArray(
+								['Normal Estimate', 'Kernel Density Estimate'])))),
+					author$project$Vega$scRange(
+					author$project$Vega$raStrs(
+						_List_fromArray(
+							['#444', 'steelblue'])))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$area,
+				_List_fromArray(
+					[
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('density'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maX(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('xScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('value'))
+											])),
+										author$project$Vega$maY(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('yScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('density'))
+											])),
+										author$project$Vega$maY2(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('yScale'),
+												author$project$Vega$vNum(0)
+											])),
+										author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												author$project$Vega$vSignal('scale(\'cScale\', \'Kernel Density Estimate\')')
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$line,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('normal'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('value'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('density'))
+										])),
+									author$project$Vega$maStroke(
+									_List_fromArray(
+										[
+											author$project$Vega$vSignal('scale(\'cScale\', \'Normal Estimate\')')
+										])),
+									author$project$Vega$maStrokeWidth(
+									_List_fromArray(
+										[
+											author$project$Vega$vNum(2)
+										]))
+								]))
+						]))
+				])));
+	var le = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$legends,
+		author$project$Vega$legend(
+			_List_fromArray(
+				[
+					author$project$Vega$leOrient(author$project$Vega$loTopLeft),
+					author$project$Vega$leOffset(
+					author$project$Vega$num(0)),
+					author$project$Vega$leZIndex(
+					author$project$Vega$num(1)),
+					author$project$Vega$leFill('cScale')
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'points',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+					])),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								author$project$Vega$agFields(
+								_List_fromArray(
+									[
+										author$project$Vega$field('u'),
+										author$project$Vega$field('u')
+									])),
+								author$project$Vega$agOps(
+								_List_fromArray(
+									[author$project$Vega$opMean, author$project$Vega$opStdev])),
+								author$project$Vega$agAs(
+								_List_fromArray(
+									['mean', 'stdev']))
+							]))
+					]),
+				A2(
+					author$project$Vega$data,
+					'summary',
+					_List_fromArray(
+						[
+							author$project$Vega$daSource('points')
+						]))),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						author$project$Vega$trDensity,
+						A3(
+							author$project$Vega$diKde,
+							'points',
+							author$project$Vega$field('u'),
+							author$project$Vega$numSignal('bandwidth')),
+						_List_fromArray(
+							[
+								author$project$Vega$dnExtent(
+								author$project$Vega$numSignal('domain(\'xScale\')')),
+								author$project$Vega$dnMinSteps(
+								author$project$Vega$numSignal('minSteps')),
+								author$project$Vega$dnMaxSteps(
+								author$project$Vega$numSignal('maxSteps')),
+								author$project$Vega$dnMethod(
+								author$project$Vega$dnSignal('method'))
+							]))
+					]),
+				A2(
+					author$project$Vega$data,
+					'density',
+					_List_fromArray(
+						[
+							author$project$Vega$daSource('points')
+						]))),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						author$project$Vega$trDensity,
+						A2(
+							author$project$Vega$diNormal,
+							author$project$Vega$numSignal('data(\'summary\')[0].mean'),
+							author$project$Vega$numSignal('data(\'summary\')[0].stdev')),
+						_List_fromArray(
+							[
+								author$project$Vega$dnExtent(
+								author$project$Vega$numSignal('domain(\'xScale\')')),
+								author$project$Vega$dnMinSteps(
+								author$project$Vega$numSignal('minSteps')),
+								author$project$Vega$dnMaxSteps(
+								author$project$Vega$numSignal('maxSteps')),
+								author$project$Vega$dnMethod(
+								author$project$Vega$dnSignal('method'))
+							]))
+					]),
+				A2(author$project$Vega$data, 'normal', _List_Nil))
+			]));
+	var ax = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$axes,
+		A3(
+			author$project$Vega$axis,
+			'xScale',
+			author$project$Vega$siBottom,
+			_List_fromArray(
+				[
+					author$project$Vega$axZIndex(
+					author$project$Vega$num(1))
+				])));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(500),
+				author$project$Vega$height(250),
+				author$project$Vega$padding(5),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				ax(_List_Nil),
+				le(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var author$project$Vega$ANone = {$: 4};
 var author$project$Vega$asNone = author$project$Vega$ANone;
 var author$project$Vega$BooSignal = function (a) {
@@ -12200,22 +12786,6 @@ var author$project$Vega$FsVelocityDecay = function (a) {
 	return {$: 6, a: a};
 };
 var author$project$Vega$fsVelocityDecay = author$project$Vega$FsVelocityDecay;
-var author$project$Vega$IRange = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$iRange = author$project$Vega$IRange;
-var author$project$Vega$InMax = function (a) {
-	return {$: 4, a: a};
-};
-var author$project$Vega$inMax = author$project$Vega$InMax;
-var author$project$Vega$InMin = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$inMin = author$project$Vega$InMin;
-var author$project$Vega$InStep = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$inStep = author$project$Vega$InStep;
 var author$project$Vega$JSONProperty = function (a) {
 	return {$: 1, a: a};
 };
@@ -12258,12 +12828,6 @@ var author$project$Vega$MCursor = function (a) {
 	return {$: 19, a: a};
 };
 var author$project$Vega$maCursor = author$project$Vega$MCursor;
-var author$project$Vega$Num = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$num = author$project$Vega$Num;
-var author$project$Vega$ScOrdinal = {$: 7};
-var author$project$Vega$scOrdinal = author$project$Vega$ScOrdinal;
 var author$project$Vega$SiDescription = function (a) {
 	return {$: 2, a: a};
 };
@@ -12290,7 +12854,7 @@ var author$project$Vega$TForce = function (a) {
 };
 var author$project$Vega$trForce = author$project$Vega$TForce;
 var author$project$Vega$TLinkPath = function (a) {
-	return {$: 27, a: a};
+	return {$: 28, a: a};
 };
 var author$project$Vega$trLinkPath = author$project$Vega$TLinkPath;
 var author$project$Vega$TgTrigger = function (a) {
@@ -12365,10 +12929,6 @@ var author$project$Vega$trigger = F2(
 var author$project$Vega$vFalse = author$project$Vega$VBoo(false);
 var author$project$Vega$VNull = {$: 18};
 var author$project$Vega$vNull = author$project$Vega$VNull;
-var author$project$Vega$VSignal = function (a) {
-	return {$: 9, a: a};
-};
-var author$project$Vega$vSignal = author$project$Vega$VSignal;
 var author$project$Vega$white = author$project$Vega$vStr('white');
 var elm$core$Basics$negate = function (n) {
 	return -n;
@@ -12838,6 +13398,280 @@ var author$project$TransformTests$forceTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var author$project$Vega$KdBandwidth = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$kdBandwidth = author$project$Vega$KdBandwidth;
+var author$project$Vega$KdCounts = function (a) {
+	return {$: 2, a: a};
+};
+var author$project$Vega$kdCounts = author$project$Vega$KdCounts;
+var author$project$Vega$KdCumulative = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$kdCumulative = author$project$Vega$KdCumulative;
+var author$project$Vega$KdExtent = F2(
+	function (a, b) {
+		return {$: 4, a: a, b: b};
+	});
+var author$project$Vega$kdExtent = author$project$Vega$KdExtent;
+var author$project$Vega$KdSteps = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$kdSteps = author$project$Vega$KdSteps;
+var author$project$Vega$TKde = F2(
+	function (a, b) {
+		return {$: 27, a: a, b: b};
+	});
+var author$project$Vega$trKde = author$project$Vega$TKde;
+var author$project$TransformTests$kdeTest1 = function () {
+	var si = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				A2(
+					elm$core$Basics$composeL,
+					A2(
+						elm$core$Basics$composeL,
+						A2(
+							elm$core$Basics$composeL,
+							author$project$Vega$signals,
+							A2(
+								author$project$Vega$signal,
+								'bandwidth',
+								_List_fromArray(
+									[
+										author$project$Vega$siValue(
+										author$project$Vega$vNum(2.0e-2)),
+										author$project$Vega$siBind(
+										author$project$Vega$iRange(
+											_List_fromArray(
+												[
+													author$project$Vega$inMin(1.0e-3),
+													author$project$Vega$inMax(0.1),
+													author$project$Vega$inStep(1.0e-3)
+												])))
+									]))),
+						A2(
+							author$project$Vega$signal,
+							'steps',
+							_List_fromArray(
+								[
+									author$project$Vega$siValue(
+									author$project$Vega$vNum(50)),
+									author$project$Vega$siBind(
+									author$project$Vega$iRange(
+										_List_fromArray(
+											[
+												author$project$Vega$inMin(10),
+												author$project$Vega$inMax(500),
+												author$project$Vega$inStep(1)
+											])))
+								]))),
+					A2(
+						author$project$Vega$signal,
+						'isCumulative',
+						_List_fromArray(
+							[
+								author$project$Vega$siValue(author$project$Vega$vFalse),
+								author$project$Vega$siBind(
+								author$project$Vega$iCheckbox(_List_Nil))
+							]))),
+				A2(
+					author$project$Vega$signal,
+					'counts',
+					_List_fromArray(
+						[
+							author$project$Vega$siValue(author$project$Vega$vFalse),
+							author$project$Vega$siBind(
+							author$project$Vega$iCheckbox(_List_Nil))
+						]))),
+			A2(
+				author$project$Vega$signal,
+				'minExtent',
+				_List_fromArray(
+					[
+						author$project$Vega$siValue(
+						author$project$Vega$vNum(-0.6)),
+						author$project$Vega$siBind(
+						author$project$Vega$iRange(
+							_List_fromArray(
+								[
+									author$project$Vega$inMin(-0.6),
+									author$project$Vega$inMax(0.6)
+								])))
+					]))),
+		A2(
+			author$project$Vega$signal,
+			'maxExtent',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(
+					author$project$Vega$vNum(0.6)),
+					author$project$Vega$siBind(
+					author$project$Vega$iRange(
+						_List_fromArray(
+							[
+								author$project$Vega$inMin(-0.6),
+								author$project$Vega$inMax(0.6)
+							])))
+				])));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$scales,
+			A2(
+				author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scRange(author$project$Vega$raWidth),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daDataset('points'),
+									author$project$Vega$daField(
+									author$project$Vega$field('u'))
+								]))),
+						author$project$Vega$scNice(author$project$Vega$niTrue)
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scRange(author$project$Vega$raHeight),
+					author$project$Vega$scRound(author$project$Vega$true),
+					author$project$Vega$scDomain(
+					author$project$Vega$doData(
+						_List_fromArray(
+							[
+								author$project$Vega$daReferences(
+								_List_fromArray(
+									[
+										_List_fromArray(
+										[
+											author$project$Vega$daDataset('density'),
+											author$project$Vega$daField(
+											author$project$Vega$field('density'))
+										])
+									]))
+							])))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$marks,
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$area,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('density'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('value'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('density'))
+										])),
+									author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vNum(0)
+										])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											author$project$Vega$vStr('steelblue')
+										]))
+								]))
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$data,
+				'points',
+				_List_fromArray(
+					[
+						author$project$Vega$daUrl(
+						author$project$Vega$str('https://vega.github.io/vega/data/normal-2d.json'))
+					])),
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						author$project$Vega$trKde,
+						author$project$Vega$field('u'),
+						_List_fromArray(
+							[
+								author$project$Vega$kdCumulative(
+								author$project$Vega$booSignal('isCumulative')),
+								author$project$Vega$kdCounts(
+								author$project$Vega$booSignal('counts')),
+								author$project$Vega$kdBandwidth(
+								author$project$Vega$numSignal('bandwidth')),
+								author$project$Vega$kdSteps(
+								author$project$Vega$numSignal('steps')),
+								A2(
+								author$project$Vega$kdExtent,
+								author$project$Vega$numSignal('minExtent'),
+								author$project$Vega$numSignal('maxExtent'))
+							]))
+					]),
+				A2(
+					author$project$Vega$data,
+					'density',
+					_List_fromArray(
+						[
+							author$project$Vega$daSource('points')
+						])))
+			]));
+	var ax = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$axes,
+			A3(author$project$Vega$axis, 'xScale', author$project$Vega$siBottom, _List_Nil)),
+		A3(author$project$Vega$axis, 'yScale', author$project$Vega$siLeft, _List_Nil));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(500),
+				author$project$Vega$height(250),
+				author$project$Vega$padding(20),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var author$project$Vega$dataColumn = F2(
 	function (colName, val) {
 		switch (val.$) {
@@ -13052,20 +13886,16 @@ var author$project$Vega$Text = 10;
 var author$project$Vega$text = 10;
 var author$project$Vega$TNest = F2(
 	function (a, b) {
-		return {$: 29, a: a, b: b};
+		return {$: 30, a: a, b: b};
 	});
 var author$project$Vega$trNest = author$project$Vega$TNest;
 var author$project$Vega$TTree = function (a) {
-	return {$: 41, a: a};
+	return {$: 42, a: a};
 };
 var author$project$Vega$trTree = author$project$Vega$TTree;
-var author$project$Vega$TTreeLinks = {$: 42};
+var author$project$Vega$TTreeLinks = {$: 43};
 var author$project$Vega$trTreeLinks = author$project$Vega$TTreeLinks;
 var author$project$Vega$vMiddle = author$project$Vega$vStr('middle');
-var author$project$Vega$VStrs = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$vStrs = author$project$Vega$VStrs;
 var author$project$TransformTests$nestTest1 = function () {
 	var table = A2(
 		elm$core$Basics$composeL,
@@ -13336,12 +14166,12 @@ var author$project$Vega$paSize = function (n) {
 	return author$project$Vega$PaSize(n);
 };
 var author$project$Vega$TPack = function (a) {
-	return {$: 30, a: a};
+	return {$: 31, a: a};
 };
 var author$project$Vega$trPack = author$project$Vega$TPack;
 var author$project$Vega$TStratify = F2(
 	function (a, b) {
-		return {$: 40, a: a, b: b};
+		return {$: 41, a: a, b: b};
 	});
 var author$project$Vega$trStratify = author$project$Vega$TStratify;
 var author$project$TransformTests$packTest1 = function () {
@@ -13496,26 +14326,14 @@ var author$project$TransformTests$packTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var author$project$Vega$DoStrs = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$doStrs = author$project$Vega$DoStrs;
 var author$project$Vega$FSignal = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$Vega$fSignal = author$project$Vega$FSignal;
-var author$project$Vega$IRadio = function (a) {
-	return {$: 2, a: a};
-};
-var author$project$Vega$iRadio = author$project$Vega$IRadio;
 var author$project$Vega$MWidth = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$Vega$maWidth = author$project$Vega$MWidth;
-var author$project$Vega$MY2 = function (a) {
-	return {$: 5, a: a};
-};
-var author$project$Vega$maY2 = author$project$Vega$MY2;
 var author$project$Vega$on = F2(
 	function (triggerSpecs, dTable) {
 		return _Utils_ap(
@@ -13555,10 +14373,6 @@ var author$project$Vega$StSort = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$Vega$stSort = author$project$Vega$StSort;
-var author$project$Vega$Strs = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$strs = author$project$Vega$Strs;
 var author$project$Vega$TgInsert = function (a) {
 	return {$: 1, a: a};
 };
@@ -13568,7 +14382,7 @@ var author$project$Vega$TgRemove = function (a) {
 };
 var author$project$Vega$tgRemove = author$project$Vega$TgRemove;
 var author$project$Vega$TStack = function (a) {
-	return {$: 39, a: a};
+	return {$: 40, a: a};
 };
 var author$project$Vega$trStack = author$project$Vega$TStack;
 var author$project$Vega$VBand = function (a) {
@@ -14631,7 +15445,7 @@ var author$project$Vega$TGeoPoint = F3(
 var author$project$Vega$trGeoPoint = author$project$Vega$TGeoPoint;
 var author$project$Vega$TVoronoi = F3(
 	function (a, b, c) {
-		return {$: 44, a: a, b: b, c: c};
+		return {$: 45, a: a, b: b, c: c};
 	});
 var author$project$Vega$trVoronoi = author$project$Vega$TVoronoi;
 var author$project$Vega$VoAs = function (a) {
@@ -15150,9 +15964,11 @@ var author$project$TransformTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('treeTest1', author$project$TransformTests$treeTest1),
 			_Utils_Tuple2('voronoiTest1', author$project$TransformTests$voronoiTest1),
 			_Utils_Tuple2('voronoiTest2', author$project$TransformTests$voronoiTest2),
-			_Utils_Tuple2('contourTest1', author$project$TransformTests$contourTest1)
+			_Utils_Tuple2('contourTest1', author$project$TransformTests$contourTest1),
+			_Utils_Tuple2('densityTest1', author$project$TransformTests$densityTest1),
+			_Utils_Tuple2('kdeTest1', author$project$TransformTests$kdeTest1)
 		]));
-var author$project$TransformTests$sourceExample = author$project$TransformTests$contourTest1;
+var author$project$TransformTests$sourceExample = author$project$TransformTests$kdeTest1;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
