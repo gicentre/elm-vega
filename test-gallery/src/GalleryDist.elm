@@ -1097,9 +1097,81 @@ hops1 =
         [ width 300, height 200, ds, si [], sc [], ax [], mk [] ]
 
 
+regression1 : Spec
+regression1 =
+    let
+        ds =
+            dataSource
+                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                    |> transform [ trFilter (expr "datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null") ]
+                , data "trend" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                    |> transform
+                        [ trLoess (field "Rotten_Tomatoes_Rating")
+                            (field "IMDB_Rating")
+                            [ lsGroupBy [ fSignal "groupby === 'genre' ? 'Major_Genre' : 'foo'" ]
+                            , lsBandwidth (numSignal "bandwidth")
+                            , lsAs "u" "v"
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "bandwidth" [ siValue (vNum 0.3), siBind (iRange [ inMin 0.05, inMax 1 ]) ]
+                << signal "groupby" [ siValue (vStr "none"), siBind (iSelect [ inOptions (vStrs [ "none", "genre" ]) ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doData [ daDataset "movies", daField (field "Rotten_Tomatoes_Rating") ])
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "movies", daField (field "IMDB_Rating") ])
+                    ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "movies") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "Rotten_Tomatoes_Rating") ]
+                            , maY [ vScale "yScale", vField (field "IMDB_Rating") ]
+                            , maFillOpacity [ vNum 0.2 ]
+                            , maSize [ vNum 12 ]
+                            ]
+                        ]
+                    ]
+                << mark group
+                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major_Genre" ] ] ]
+                    , mGroup [ nestedMk [] ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark line
+                    [ mFrom [ srData (str "curve") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "v") ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maStrokeOpacity [ vNum 0.6 ]
+                            , maInterpolate [ markInterpolationValue miMonotone ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 500, padding 5, autosize [ asPad ], ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    hops1
+    regression1
 
 
 
@@ -1120,6 +1192,7 @@ mySpecs =
         , ( "contour1", contour1 )
         , ( "wheat1", wheat1 )
         , ( "hops1", hops1 )
+        , ( "regression1", regression1 )
         ]
 
 

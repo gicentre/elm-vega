@@ -121,7 +121,7 @@ heatmap1 =
                     , leType ltGradient
                     , leTitle (str "Avg. Temp (°C)")
                     , leTitleFontSize (num 12)
-                    , leTitlePadding (vNum 4)
+                    , leTitlePadding (num 4)
                     , leGradientLength (numSignal "height - 16")
                     ]
 

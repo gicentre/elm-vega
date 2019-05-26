@@ -466,7 +466,7 @@ custom3 =
                     [ leFill "cScale"
                     , leTitle (str "Period")
                     , leOrient loTopLeft
-                    , leOffset (vNum 8)
+                    , leOffset (num 8)
                     , leEncode
                         [ enSymbols
                             [ enUpdate

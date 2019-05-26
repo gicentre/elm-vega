@@ -547,7 +547,7 @@ scatterplot5 =
                 << legend
                     [ leStroke "cScale"
                     , leTitle (str "Year")
-                    , lePadding (vNum 4)
+                    , lePadding (num 4)
                     , leEncode [ enSymbols [ enEnter [ maStrokeWidth [ vNum 2 ], maSize [ vNum 50 ] ] ] ]
                     ]
 

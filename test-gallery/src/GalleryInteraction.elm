@@ -551,7 +551,7 @@ interaction3 =
                 << legend
                     [ leFill "cScale"
                     , leTitle (str "Species")
-                    , leOffset (vNum 0)
+                    , leOffset (num 0)
                     , leEncode
                         [ enSymbols
                             [ enUpdate
