@@ -1104,7 +1104,84 @@ regression1 =
             dataSource
                 [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
                     |> transform [ trFilter (expr "datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null") ]
-                , data "trend" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                , data "trend" [ daSource "movies" ]
+                    |> transform
+                        [ trRegression (field "Rotten_Tomatoes_Rating")
+                            (field "IMDB_Rating")
+                            [ reGroupBy [ fSignal "groupby === 'genre' ? 'Major_Genre' : 'foo'" ]
+                            , reMethod (reSignal "method")
+                            , reOrder (numSignal "polyOrder")
+                            , reExtent (numSignal "domain('xScale')")
+                            , reAs "u" "v"
+                            ]
+                        ]
+                ]
+
+        methods =
+            List.map reMethodValue [ reLinear, reLog, reExp, rePow, reQuad, rePoly ] |> vValues
+
+        si =
+            signals
+                << signal "method" [ siValue (reMethodValue reLinear), siBind (iSelect [ inOptions methods ]) ]
+                << signal "polyOrder" [ siValue (vNum 3), siBind (iRange [ inMin 1, inMax 10, inStep 1 ]) ]
+                << signal "groupby" [ siValue (vStr "none"), siBind (iSelect [ inOptions (vStrs [ "none", "genre" ]) ]) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doData [ daDataset "movies", daField (field "Rotten_Tomatoes_Rating") ])
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "movies", daField (field "IMDB_Rating") ])
+                    ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "movies") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "Rotten_Tomatoes_Rating") ]
+                            , maY [ vScale "yScale", vField (field "IMDB_Rating") ]
+                            , maFillOpacity [ vNum 0.2 ]
+                            , maSize [ vNum 12 ]
+                            ]
+                        ]
+                    ]
+                << mark group
+                    [ mFrom [ srFacet (str "trend") "curve" [ faGroupBy [ field "Major_Genre" ] ] ]
+                    , mGroup [ nestedMk [] ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark line
+                    [ mFrom [ srData (str "curve") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "u") ]
+                            , maY [ vScale "yScale", vField (field "v") ]
+                            , maStroke [ vStr "firebrick" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maStrokeOpacity [ vNum 0.6 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 500, padding 5, autosize [ asPad ], ds, si [], sc [], mk [] ]
+
+
+regression2 : Spec
+regression2 =
+    let
+        ds =
+            dataSource
+                [ data "movies" [ daUrl (str "https://vega.github.io/vega/data/movies.json") ]
+                    |> transform [ trFilter (expr "datum.Rotten_Tomatoes_Rating != null && datum.IMDB_Rating != null") ]
+                , data "trend" [ daSource "movies" ]
                     |> transform
                         [ trLoess (field "Rotten_Tomatoes_Rating")
                             (field "IMDB_Rating")
@@ -1193,6 +1270,7 @@ mySpecs =
         , ( "wheat1", wheat1 )
         , ( "hops1", hops1 )
         , ( "regression1", regression1 )
+        , ( "regression2", regression2 )
         ]
 
 

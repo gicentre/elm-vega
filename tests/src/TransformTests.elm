@@ -862,7 +862,7 @@ kdeTest1 =
                             , kdCounts (booSignal "counts")
                             , kdBandwidth (numSignal "bandwidth")
                             , kdSteps (numSignal "steps")
-                            , kdExtent (numSignal "minExtent") (numSignal "maxExtent")
+                            , kdExtent (numSignals [ "minExtent", "maxExtent" ])
                             ]
                         ]
                 ]
