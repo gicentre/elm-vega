@@ -94,6 +94,64 @@ barChart2 =
     let
         table =
             dataFromColumns "table" []
+                << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+
+        ds =
+            dataSource [ table [] ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scBand
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
+                    , scRange raWidth
+                    , scPadding (num 0.05)
+                    , scRound true
+                    ]
+                << scale "yScale"
+                    [ scDomain (doData [ daDataset "table", daField (field "amount") ])
+                    , scNice niTrue
+                    , scRange raHeight
+                    ]
+                << scale "cScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "table", daField (field "amount") ])
+                    , scRange (raScheme (str "browns") [])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "category") ]
+                            , maWidth [ vScale "xScale", vBand (num 1) ]
+                            , maY [ vScale "yScale", vField (field "amount") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill
+                                [ vGradientScale (vScale "cScale")
+                                    [ grStart (nums [ 1, 0 ]), grStop (nums [ 1, 3 ]) ]
+                                ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 400, height 200, padding 5, ds, sc [], ax [], mk [] ]
+
+
+barChart3 : Spec
+barChart3 =
+    let
+        table =
+            dataFromColumns "table" []
                 << dataColumn "x" (vNums [ 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9 ])
                 << dataColumn "y" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87, 52, 48, 24, 49, 87, 66, 17, 27, 68, 16, 49, 15 ])
                 << dataColumn "c" (vNums [ 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 ])
@@ -156,8 +214,8 @@ barChart2 =
         [ width 400, height 200, padding 5, ds, sc [], ax [], mk [] ]
 
 
-barChart3 : Spec
-barChart3 =
+barChart4 : Spec
+barChart4 =
     let
         table =
             dataFromColumns "table" []
@@ -248,8 +306,8 @@ barChart3 =
         [ width 300, height 240, padding 5, ds, sc [], ax [], mk [] ]
 
 
-barChart4 : Spec
-barChart4 =
+barChart5 : Spec
+barChart5 =
     let
         table =
             dataFromColumns "tuples" []
@@ -364,8 +422,8 @@ type Gender
     | Female
 
 
-barChart5 : Spec
-barChart5 =
+barChart6 : Spec
+barChart6 =
     let
         ds =
             dataSource
@@ -474,7 +532,7 @@ barChart5 =
 
 sourceExample : Spec
 sourceExample =
-    barChart1
+    barChart2
 
 
 
@@ -489,6 +547,7 @@ mySpecs =
         , ( "barChart3", barChart3 )
         , ( "barChart4", barChart4 )
         , ( "barChart5", barChart5 )
+        , ( "barChart6", barChart6 )
         ]
 
 

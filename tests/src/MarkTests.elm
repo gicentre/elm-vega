@@ -443,7 +443,20 @@ rectTest =
             marks
                 << mark rect
                     [ mEncode
-                        [ enEnter [ maFill [ vStr "#939597" ], maStroke [ vStr "#652c90" ] ]
+                        [ enEnter
+                            [ maStroke [ vStr "#652c90" ]
+                            , maFill
+                                [ vGradient grRadial
+                                    [ grStops [ ( num 0.1, "#652c90" ), ( num 1, "#939597" ) ]
+                                    , grX1 (num 0.2)
+                                    , grX2 (num 0.3)
+                                    , grY1 (num 0.8)
+                                    , grY2 (num 0.7)
+                                    , grR1 (num 0.3)
+                                    , grR2 (num 0.8)
+                                    ]
+                                ]
+                            ]
                         , enUpdate
                             [ maX [ vSignal "x" ]
                             , maY [ vSignal "y" ]
@@ -665,7 +678,7 @@ trailTest =
 
 sourceExample : Spec
 sourceExample =
-    shapeTest
+    rectTest
 
 
 
