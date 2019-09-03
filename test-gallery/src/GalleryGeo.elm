@@ -24,9 +24,12 @@ standardProjections =
         , conicConformal
         , conicEqualArea
         , conicEquidistant
+        , equalEarth
         , equirectangular
         , gnomonic
+        , identityProjection
         , mercator
+        , naturalEarth1
         , orthographic
         , stereographic
         , transverseMercator
@@ -217,10 +220,10 @@ geo3 =
         si =
             signals
                 << signal "pType"
-                    [ siValue (projectionValue mercator)
+                    [ siValue (projectionValue equalEarth)
                     , siBind (iSelect [ inOptions standardProjections ])
                     ]
-                << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 50, inMax 2000, inStep 1 ]) ]
+                << signal "pScale" [ siValue (vNum 150), siBind (iRange [ inMin 1, inMax 2000, inStep 0.1 ]) ]
                 << signal "pRotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
                 << signal "pRotate1" [ siValue (vNum 0), siBind (iRange [ inMin -90, inMax 90, inStep 1 ]) ]
                 << signal "pRotate2" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
@@ -241,6 +244,9 @@ geo3 =
                     , prRotate (numSignals [ "pRotate0", "pRotate1", "pRotate2" ])
                     , prCenter (numSignals [ "pCentre0", "pCentre1" ])
                     , prTranslate (numSignals [ "pTranslate0", "pTranslate1" ])
+
+                    -- y-reflection applies only to the identity projection
+                    , prReflectY true
                     ]
 
         mk =
@@ -764,7 +770,7 @@ geo8 inData =
         pr =
             projections
                 << projection "myProjection"
-                    [ prType (customProjection (str "identity"))
+                    [ prType identityProjection
                     , prScale (numSignal "width / volcano.width")
                     ]
 
