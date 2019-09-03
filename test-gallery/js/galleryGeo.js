@@ -10309,20 +10309,24 @@ var author$project$Vega$projectionLabel = function (pr) {
 		case 6:
 			return 'conicEquidistant';
 		case 7:
-			return 'equirectangular';
+			return 'equalEarth';
 		case 8:
-			return 'gnomonic';
+			return 'equirectangular';
 		case 9:
-			return 'mercator';
+			return 'gnomonic';
 		case 10:
-			return 'naturalEarth1';
+			return 'identity';
 		case 11:
-			return 'orthographic';
+			return 'mercator';
 		case 12:
-			return 'stereographic';
+			return 'naturalEarth1';
 		case 13:
-			return 'transverseMercator';
+			return 'orthographic';
 		case 14:
+			return 'stereographic';
+		case 15:
+			return 'transverseMercator';
+		case 16:
 			var s = pr.a;
 			return '';
 		default:
@@ -10332,10 +10336,10 @@ var author$project$Vega$projectionLabel = function (pr) {
 };
 var author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 14:
+		case 16:
 			var s = proj.a;
 			return author$project$Vega$strSpec(s);
-		case 15:
+		case 17:
 			var sig = proj.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -10713,11 +10717,21 @@ var author$project$Vega$projectionProperty = function (projProp) {
 			return _Utils_Tuple2(
 				'spacing',
 				author$project$Vega$numSpec(n));
-		default:
+		case 20:
 			var n = projProp.a;
 			return _Utils_Tuple2(
 				'tilt',
 				author$project$Vega$numSpec(n));
+		case 21:
+			var b = projProp.a;
+			return _Utils_Tuple2(
+				'reflectX',
+				author$project$Vega$booSpec(b));
+		default:
+			var b = projProp.a;
+			return _Utils_Tuple2(
+				'reflectY',
+				author$project$Vega$booSpec(b));
 	}
 };
 var author$project$Vega$projection = F2(
@@ -12888,21 +12902,27 @@ var author$project$Vega$ConicEqualArea = {$: 5};
 var author$project$Vega$conicEqualArea = author$project$Vega$ConicEqualArea;
 var author$project$Vega$ConicEquidistant = {$: 6};
 var author$project$Vega$conicEquidistant = author$project$Vega$ConicEquidistant;
-var author$project$Vega$Equirectangular = {$: 7};
+var author$project$Vega$EqualEarth = {$: 7};
+var author$project$Vega$equalEarth = author$project$Vega$EqualEarth;
+var author$project$Vega$Equirectangular = {$: 8};
 var author$project$Vega$equirectangular = author$project$Vega$Equirectangular;
-var author$project$Vega$Gnomonic = {$: 8};
+var author$project$Vega$Gnomonic = {$: 9};
 var author$project$Vega$gnomonic = author$project$Vega$Gnomonic;
-var author$project$Vega$Mercator = {$: 9};
+var author$project$Vega$Identity = {$: 10};
+var author$project$Vega$identityProjection = author$project$Vega$Identity;
+var author$project$Vega$Mercator = {$: 11};
 var author$project$Vega$mercator = author$project$Vega$Mercator;
-var author$project$Vega$Orthographic = {$: 11};
+var author$project$Vega$NaturalEarth1 = {$: 12};
+var author$project$Vega$naturalEarth1 = author$project$Vega$NaturalEarth1;
+var author$project$Vega$Orthographic = {$: 13};
 var author$project$Vega$orthographic = author$project$Vega$Orthographic;
 var author$project$Vega$projectionValue = function (proj) {
 	return author$project$Vega$vStr(
 		author$project$Vega$projectionLabel(proj));
 };
-var author$project$Vega$Stereographic = {$: 12};
+var author$project$Vega$Stereographic = {$: 14};
 var author$project$Vega$stereographic = author$project$Vega$Stereographic;
-var author$project$Vega$TransverseMercator = {$: 13};
+var author$project$Vega$TransverseMercator = {$: 15};
 var author$project$Vega$transverseMercator = author$project$Vega$TransverseMercator;
 var author$project$Vega$Values = function (a) {
 	return {$: 8, a: a};
@@ -12913,7 +12933,7 @@ var author$project$GalleryGeo$standardProjections = author$project$Vega$vValues(
 		elm$core$List$map,
 		author$project$Vega$projectionValue,
 		_List_fromArray(
-			[author$project$Vega$albers, author$project$Vega$albersUsa, author$project$Vega$azimuthalEqualArea, author$project$Vega$azimuthalEquidistant, author$project$Vega$conicConformal, author$project$Vega$conicEqualArea, author$project$Vega$conicEquidistant, author$project$Vega$equirectangular, author$project$Vega$gnomonic, author$project$Vega$mercator, author$project$Vega$orthographic, author$project$Vega$stereographic, author$project$Vega$transverseMercator])));
+			[author$project$Vega$albers, author$project$Vega$albersUsa, author$project$Vega$azimuthalEqualArea, author$project$Vega$azimuthalEquidistant, author$project$Vega$conicConformal, author$project$Vega$conicEqualArea, author$project$Vega$conicEquidistant, author$project$Vega$equalEarth, author$project$Vega$equirectangular, author$project$Vega$gnomonic, author$project$Vega$identityProjection, author$project$Vega$mercator, author$project$Vega$naturalEarth1, author$project$Vega$orthographic, author$project$Vega$stereographic, author$project$Vega$transverseMercator])));
 var author$project$Vega$VEncode = 16;
 var author$project$Vega$encode = function (eps) {
 	return _Utils_Tuple2(
@@ -12974,12 +12994,16 @@ var author$project$Vega$PrCenter = function (a) {
 	return {$: 5, a: a};
 };
 var author$project$Vega$prCenter = author$project$Vega$PrCenter;
+var author$project$Vega$PrReflectY = function (a) {
+	return {$: 22, a: a};
+};
+var author$project$Vega$prReflectY = author$project$Vega$PrReflectY;
 var author$project$Vega$PrRotate = function (a) {
 	return {$: 6, a: a};
 };
 var author$project$Vega$prRotate = author$project$Vega$PrRotate;
 var author$project$Vega$ProjectionSignal = function (a) {
-	return {$: 15, a: a};
+	return {$: 17, a: a};
 };
 var author$project$Vega$prSignal = author$project$Vega$ProjectionSignal;
 var author$project$Vega$SiBind = function (a) {
@@ -13364,7 +13388,7 @@ var author$project$GalleryGeo$geo3 = function () {
 															_List_fromArray(
 																[
 																	author$project$Vega$siValue(
-																	author$project$Vega$projectionValue(author$project$Vega$mercator)),
+																	author$project$Vega$projectionValue(author$project$Vega$equalEarth)),
 																	author$project$Vega$siBind(
 																	author$project$Vega$iSelect(
 																		_List_fromArray(
@@ -13383,9 +13407,9 @@ var author$project$GalleryGeo$geo3 = function () {
 																author$project$Vega$iRange(
 																	_List_fromArray(
 																		[
-																			author$project$Vega$inMin(50),
+																			author$project$Vega$inMin(1),
 																			author$project$Vega$inMax(2000),
-																			author$project$Vega$inStep(1)
+																			author$project$Vega$inStep(0.1)
 																		])))
 															]))),
 												A2(
@@ -13551,7 +13575,8 @@ var author$project$GalleryGeo$geo3 = function () {
 					author$project$Vega$prTranslate(
 					author$project$Vega$numSignals(
 						_List_fromArray(
-							['pTranslate0', 'pTranslate1'])))
+							['pTranslate0', 'pTranslate1']))),
+					author$project$Vega$prReflectY(author$project$Vega$true)
 				])));
 	var mk = A2(
 		elm$core$Basics$composeL,
@@ -14029,7 +14054,7 @@ var author$project$Vega$ClSphere = function (a) {
 };
 var author$project$Vega$clSphere = author$project$Vega$ClSphere;
 var author$project$Vega$Proj = function (a) {
-	return {$: 14, a: a};
+	return {$: 16, a: a};
 };
 var author$project$Vega$customProjection = author$project$Vega$Proj;
 var author$project$Vega$DaValue = function (a) {
@@ -15793,9 +15818,7 @@ var author$project$GalleryGeo$geo8 = function (inData) {
 			'myProjection',
 			_List_fromArray(
 				[
-					author$project$Vega$prType(
-					author$project$Vega$customProjection(
-						author$project$Vega$str('identity'))),
+					author$project$Vega$prType(author$project$Vega$identityProjection),
 					author$project$Vega$prScale(
 					author$project$Vega$numSignal('width / volcano.width'))
 				])));

@@ -12804,7 +12804,7 @@ var author$project$Vega$autosize = function (aus) {
 			A2(elm$core$List$map, author$project$Vega$autosizeProperty, aus)));
 };
 var author$project$Vega$Proj = function (a) {
-	return {$: 14, a: a};
+	return {$: 16, a: a};
 };
 var author$project$Vega$customProjection = author$project$Vega$Proj;
 var author$project$Vega$DaFormat = function (a) {
@@ -12923,20 +12923,24 @@ var author$project$Vega$projectionLabel = function (pr) {
 		case 6:
 			return 'conicEquidistant';
 		case 7:
-			return 'equirectangular';
+			return 'equalEarth';
 		case 8:
-			return 'gnomonic';
+			return 'equirectangular';
 		case 9:
-			return 'mercator';
+			return 'gnomonic';
 		case 10:
-			return 'naturalEarth1';
+			return 'identity';
 		case 11:
-			return 'orthographic';
+			return 'mercator';
 		case 12:
-			return 'stereographic';
+			return 'naturalEarth1';
 		case 13:
-			return 'transverseMercator';
+			return 'orthographic';
 		case 14:
+			return 'stereographic';
+		case 15:
+			return 'transverseMercator';
+		case 16:
 			var s = pr.a;
 			return '';
 		default:
@@ -12946,10 +12950,10 @@ var author$project$Vega$projectionLabel = function (pr) {
 };
 var author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 14:
+		case 16:
 			var s = proj.a;
 			return author$project$Vega$strSpec(s);
-		case 15:
+		case 17:
 			var sig = proj.a;
 			return elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -13327,11 +13331,21 @@ var author$project$Vega$projectionProperty = function (projProp) {
 			return _Utils_Tuple2(
 				'spacing',
 				author$project$Vega$numSpec(n));
-		default:
+		case 20:
 			var n = projProp.a;
 			return _Utils_Tuple2(
 				'tilt',
 				author$project$Vega$numSpec(n));
+		case 21:
+			var b = projProp.a;
+			return _Utils_Tuple2(
+				'reflectX',
+				author$project$Vega$booSpec(b));
+		default:
+			var b = projProp.a;
+			return _Utils_Tuple2(
+				'reflectY',
+				author$project$Vega$booSpec(b));
 	}
 };
 var author$project$Vega$projection = F2(
