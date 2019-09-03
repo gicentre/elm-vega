@@ -11013,7 +11013,7 @@ var author$project$ProjectionTests$projTest = function () {
 						author$project$Vega$daValue(
 						author$project$Vega$vStrs(
 							_List_fromArray(
-								['azimuthalEquidistant', 'conicConformal', 'gnomonic', 'orthographic', 'mercator', 'stereographic', 'naturalEarth1', 'airy', 'armadillo', 'baker', 'berghaus', 'bottomley', 'collignon', 'eckert1', 'guyou', 'hammer', 'littrow', 'mollweide', 'wagner6', 'wiechel', 'winkel3', 'interruptedSinusoidal', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'polyhedralButterfly', 'peirceQuincuncial'])))
+								['azimuthalEquidistant', 'conicConformal', 'mercator', 'orthographic', 'equalEarth', 'naturalEarth1', 'stereographic', 'gnomonic', 'airy', 'armadillo', 'baker', 'berghaus', 'bottomley', 'collignon', 'eckert1', 'guyou', 'hammer', 'littrow', 'mollweide', 'wagner6', 'wiechel', 'winkel3', 'interruptedSinusoidal', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'polyhedralButterfly', 'peirceQuincuncial'])))
 					])),
 				A2(
 				author$project$Vega$data,
