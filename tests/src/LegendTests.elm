@@ -132,6 +132,7 @@ legendTest3 =
                     , leStrokeColor (str "lightgrey")
                     , lePadding (num 10)
                     , leBorderStrokeWidth (num 5)
+                    , leBorderStrokeDash [ vNums [ 4, 8, 2 ] ]
                     , leLayout
                         [ llDirection orHorizontal
                         , llMargin (num 25)
