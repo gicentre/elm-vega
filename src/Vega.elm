@@ -8896,6 +8896,23 @@ layout lps =
     ( VLayout, JE.object (List.map layoutProperty lps) )
 
 
+{-| Stroke dash style of the border of a legend block. The list should consist
+of alternating dash-gap lengths in pixels or an empty list for a solid line.
+Used only when configuring legends via [cfLegend](#cfLegend).
+-}
+leBorderStrokeDash : List Value -> LegendProperty
+leBorderStrokeDash =
+    LeBorderStrokeDash
+
+
+{-| Default stroke width of the border around legends in pixel units. Used only
+when configuring legends via [cfLegend](#cfLegend).
+-}
+leBorderStrokeWidth : Num -> LegendProperty
+leBorderStrokeWidth =
+    LeBorderStrokeWidth
+
+
 {-| Height in pixels to clip a symbol legend entries and limit its size.
 By default no clipping is performed.
 -}
@@ -9028,14 +9045,16 @@ leGradientOpacity =
     LeGradientOpacity
 
 
-{-| Maximum allowed length of gradient labels in a legend.
+{-| Maximum allowed length of gradient labels in a legend. Used only when
+configuring legends via [cfLegend](#cfLegend).
 -}
 leGradientLabelLimit : Num -> LegendProperty
 leGradientLabelLimit =
     LeGradientLabelLimit
 
 
-{-| Vertical offset in pixels for gradient labels in a legend.
+{-| Vertical offset in pixels for gradient labels in a legend. Used only when
+configuring legends via [cfLegend](#cfLegend).
 -}
 leGradientLabelOffset : Num -> LegendProperty
 leGradientLabelOffset =
@@ -9166,9 +9185,8 @@ leLabelSeparation =
     LeLabelSeparation
 
 
-{-| Specify legend layout properties when arranging multiple legends. This only
-has an effect when specified as part of a global legend configuration (via
-[cfLegend](#cfLegend))
+{-| Specify legend layout properties when arranging multiple legends. Used only
+when configuring legends via [cfLegend](#cfLegend).
 -}
 leLayout : List LeLayoutProperty -> LegendProperty
 leLayout =
@@ -9198,14 +9216,15 @@ leOrient =
 
 
 {-| Specify legend layout properties for specific orientations when arranging
-multiple legends. This only has an effect when specified as part of a global
-legend configuration (via [cfLegend](#cfLegend)). Each tuple in the list should
-match an orientation with a list of layout properties. For example,
+multiple legends. Each tuple in the list should match an orientation with a list
+of layout properties. For example,
 
     leOrientLayout
         [ ( loBottom, [ llAnchor anEnd ] )
         , ( loTop, [ llMargin (num 50), llCenter true ] )
         ]
+
+Used only when configuring legends via [cfLegend](#cfLegend).
 
 -}
 leOrientLayout : List ( LegendOrientation, List LeLayoutProperty ) -> LegendProperty
@@ -9262,40 +9281,26 @@ leStrokeWidth =
     LeStrokeWidth
 
 
-{-| Stroke dash style of the border of a legend block. The list should consist
-of alternating dash-gap lengths in pixels or an empty list for a solid line.
-Used only when configuring legends via [cfLegend](#cfLegend)
--}
-leBorderStrokeDash : List Value -> LegendProperty
-leBorderStrokeDash =
-    LeBorderStrokeDash
-
-
-{-| Default stroke width of the border around legends in pixel units. Used only
-when configuring legends via [cfLegend](#cfLegend)
--}
-leBorderStrokeWidth : Num -> LegendProperty
-leBorderStrokeWidth =
-    LeBorderStrokeWidth
-
-
 {-| Default fill color for legend symbols. This is only applied if there
-is no fill scale color encoding for the legend.
+is no fill scale color encoding for the legend and when configuring legends
+via [cfLegend](#cfLegend).
 -}
 leSymbolBaseFillColor : Str -> LegendProperty
 leSymbolBaseFillColor =
     LeSymbolBaseFillColor
 
 
-{-| Default stroke color for legend symbols. This is only applied if
-there is no stroke scale color encoding for the legend.
+{-| Default stroke color for legend symbols. This is only applied if there is no
+stroke scale color encoding for the legend and when configuring legends via
+[cfLegend](#cfLegend).
 -}
 leSymbolBaseStrokeColor : Str -> LegendProperty
 leSymbolBaseStrokeColor =
     LeSymbolBaseStrokeColor
 
 
-{-| Default direction for legend symbols.
+{-| Default direction for legend symbols. This is only applied when configuring
+legends via [cfLegend](#cfLegend).
 -}
 leSymbolDirection : Orientation -> LegendProperty
 leSymbolDirection =
