@@ -5456,7 +5456,7 @@ axis scName side aps =
 
 
 {-| Indicate how or if labels should be hidden if they exceed the axis range. If the
-parameter is `NumNull`, no check for label size is made. A number specifies
+parameter is [numNull](#numNull), no check for label size is made. A number specifies
 the permitted overflow in pixels that can be tolerated.
 -}
 axLabelBound : Num -> AxisProperty
@@ -5495,7 +5495,7 @@ axLabelColor =
 {-| Indicate how labels at the beginning or end of an axis should be aligned
 with the scale range. The parameter represents a pixel distance threshold. Labels
 with anchor coordinates within this threshold distance for an axis end-point will be
-flush-adjusted. If `NumNull`, no flush alignment will be applied.
+flush-adjusted. If [numNull](#numNull), no flush alignment will be applied.
 -}
 axLabelFlush : Num -> AxisProperty
 axLabelFlush =
@@ -6141,7 +6141,7 @@ cfGroup =
 
 
 {-| Default filtering of events. This can specified in the first parameter
-as either a 'whitelist' (`Allow`) or 'blacklist' (`Prevent`) comprised the event types
+as either a 'whitelist' (`cfAllow`) or 'blacklist' (`cfPrevent`) comprised the event types
 to be considered in the second parameter. If that list is empty, all event types
 will be placed in the black/white list.
 -}
@@ -7230,7 +7230,7 @@ doData =
     DoData
 
 
-{-| List of numeric values (`Nums`) representing a scale domain.
+{-| List of numeric values (e.g. `nums [1981, 2019]`) representing a scale domain.
 -}
 doNums : Num -> ScaleDomain
 doNums =
@@ -7251,7 +7251,7 @@ doSignals ss =
     DoStrs (StrSignals ss)
 
 
-{-| List of strings (`Strs`) representing a scale domain.
+{-| List of strings (e.g. `strs ["cat","dog","fish"]`) representing a scale domain.
 -}
 doStrs : Str -> ScaleDomain
 doStrs =
@@ -7392,7 +7392,7 @@ equirectangular =
 
 {-| Event stream filter that lets only events that occur between the two given event
 streams from being handled. Useful for capturing pointer dragging as it is a pointer
-movement event stream that occurs between `MouseDown` and `MouseUp` events.
+movement event stream that occurs between `etMouseDown` and `etMouseUp` events.
 
     << signal "myDrag"
         [ siValue (vNums [ 200, 200 ])
@@ -7443,7 +7443,8 @@ esDom =
     ESDom
 
 
-{-| Predicate expressions that must all evaluate to `True` for an event to be captured.
+{-| Predicate expressions that must all evaluate to `true` for an event to be
+captured.
 -}
 esFilter : List String -> EventStreamProperty
 esFilter =
@@ -8611,7 +8612,7 @@ imKeyVals =
 
 
 {-| Imputation method to be used as part of an impute transform. If not specified
-the default `ByMean` method will be used.
+the default `imByMean` method will be used.
 -}
 imMethod : ImputeMethod -> ImputeProperty
 imMethod =
@@ -10637,8 +10638,8 @@ mFrom =
 
 
 {-| Assemble a group of top-level marks. Used to create nested groups
-of marks within a `Group` mark (including further nested group specifications) by
-suppyling the specification as a series of properties. For example,
+of marks within a [group](#group) mark (including further nested group specifications)
+by suppyling the specification as a series of properties. For example,
 
     marks
         << mark group
@@ -13224,8 +13225,9 @@ tmPaddingTop =
     TmPaddingTop
 
 
-{-| Target aspect ratio for the `Squarify` or `Resquarify` treemap layout
-trqnsformations. The default is the golden ratio, φ = (1 + sqrt(5)) / 2.
+{-| Target aspect ratio for the [tmSquarify](#tmSquarify) or
+[tmResquarify](#tmResquarify) treemap layout trqnsformations. The default is the
+golden ratio, φ = (1 + sqrt(5)) / 2.
 -}
 tmRatio : Num -> TreemapProperty
 tmRatio =
@@ -14511,8 +14513,8 @@ wnOperationOn =
 
 {-| Two-element list indicating how a sliding window should proceed during a window
 transform. The list entries should either be a number indicating the offset from
-the current data object, or `NumNull` to indicate unbounded rows preceding or
-following the current data object.
+the current data object, or [numNull](#numNull) to indicate unbounded rows preceding
+or following the current data object.
 -}
 wnFrame : Num -> WindowProperty
 wnFrame =
