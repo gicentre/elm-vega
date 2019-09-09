@@ -8811,80 +8811,85 @@ var author$project$Vega$binProperty = function (bnProp) {
 			return _Utils_Tuple2(
 				'maxbins',
 				author$project$Vega$numSpec(n));
+		case 3:
+			var n = bnProp.a;
+			return _Utils_Tuple2(
+				'span',
+				author$project$Vega$numSpec(n));
 		case 2:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
 				'base',
 				author$project$Vega$numSpec(n));
-		case 3:
+		case 4:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
 				'step',
 				author$project$Vega$numSpec(n));
-		case 4:
-			var ns = bnProp.a;
-			switch (ns.$) {
-				case 0:
-					return _Utils_Tuple2(
-						'steps',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				case 2:
-					return _Utils_Tuple2(
-						'steps',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				default:
-					return _Utils_Tuple2(
-						'steps',
-						author$project$Vega$numSpec(ns));
-			}
-		case 8:
-			var ns = bnProp.a;
-			switch (ns.$) {
-				case 0:
-					return _Utils_Tuple2(
-						'bins',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				case 2:
-					return _Utils_Tuple2(
-						'bins',
-						A2(
-							elm$json$Json$Encode$list,
-							author$project$Vega$numSpec,
-							_List_fromArray(
-								[ns])));
-				default:
-					return _Utils_Tuple2(
-						'bins',
-						author$project$Vega$numSpec(ns));
-			}
 		case 5:
+			var ns = bnProp.a;
+			switch (ns.$) {
+				case 0:
+					return _Utils_Tuple2(
+						'steps',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				case 2:
+					return _Utils_Tuple2(
+						'steps',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				default:
+					return _Utils_Tuple2(
+						'steps',
+						author$project$Vega$numSpec(ns));
+			}
+		case 9:
+			var ns = bnProp.a;
+			switch (ns.$) {
+				case 0:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				case 2:
+					return _Utils_Tuple2(
+						'bins',
+						A2(
+							elm$json$Json$Encode$list,
+							author$project$Vega$numSpec,
+							_List_fromArray(
+								[ns])));
+				default:
+					return _Utils_Tuple2(
+						'bins',
+						author$project$Vega$numSpec(ns));
+			}
+		case 6:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
 				'minstep',
 				author$project$Vega$numSpec(n));
-		case 6:
+		case 7:
 			var n = bnProp.a;
 			return _Utils_Tuple2(
 				'divide',
 				author$project$Vega$numSpec(n));
-		case 7:
+		case 8:
 			var b = bnProp.a;
 			return _Utils_Tuple2(
 				'nice',
 				author$project$Vega$booSpec(b));
-		case 9:
+		case 10:
 			var s = bnProp.a;
 			return _Utils_Tuple2(
 				'signal',
@@ -9515,6 +9520,13 @@ var author$project$Vega$joinAggregateProperty = function (ap) {
 				A2(elm$json$Json$Encode$list, elm$json$Json$Encode$string, labels));
 	}
 };
+var author$project$Vega$resolutionSpec = function (res) {
+	if (!res) {
+		return elm$json$Json$Encode$string('shared');
+	} else {
+		return elm$json$Json$Encode$string('independent');
+	}
+};
 var author$project$Vega$kdeProperty = function (kp) {
 	switch (kp.$) {
 		case 0:
@@ -9551,6 +9563,11 @@ var author$project$Vega$kdeProperty = function (kp) {
 				'maxsteps',
 				author$project$Vega$numSpec(n));
 		case 7:
+			var r = kp.a;
+			return _Utils_Tuple2(
+				'resolve',
+				author$project$Vega$resolutionSpec(r));
+		case 8:
 			var n = kp.a;
 			return _Utils_Tuple2(
 				'steps',
