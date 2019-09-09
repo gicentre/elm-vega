@@ -4,6 +4,8 @@ _Minor release supporting Vega 5.6._
 
 ## Additions
 
+- `kdResolve` and associated `reShared` and `reIndependent` functions for resolving multiple densities in a KDE transform.
+- `bnSpan` for setting the span over which bins are calculated.
 - `equalEarth` core map projection added.
 - `identityProjection` and associated `reflectX` and `reflectY` map projection functions added.
 - `leBorderStrokeDash` for configuring legend border dash style.
