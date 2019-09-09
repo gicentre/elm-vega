@@ -165,9 +165,65 @@ configTest3 =
     scatter cf
 
 
+dragSpec : ( VProperty, Spec ) -> Spec
+dragSpec cf =
+    let
+        si =
+            signals
+                << signal "myDrag"
+                    [ siValue (vNums [ 200, 200 ])
+                    , siOn
+                        [ evHandler
+                            [ esObject
+                                [ esBetween [ esMark rect, esType etMouseDown ] [ esSource esView, esType etMouseUp ]
+                                , esSource esView
+                                , esType etMouseMove
+                                ]
+                            ]
+                            [ evUpdate "xy()" ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark rect
+                    [ mEncode
+                        [ enEnter [ maFill [ vStr "firebrick" ], maWidth [ vNum 80 ], maHeight [ vNum 50 ] ]
+                        , enUpdate [ maX [ vSignal "myDrag[0]" ], maY [ vSignal "myDrag[1]" ] ]
+                        ]
+                    ]
+                << mark text
+                    [ mEncode
+                        [ enEnter
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
+                            , maFill [ white ]
+                            , maText [ vStr "Drag me" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vSignal "myDrag[0]+40" ]
+                            , maY [ vSignal "myDrag[1]+25" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 400, height 300, cf, background (str "rgb(252,247,236)"), si [], mk [] ]
+
+
+configTest4 : Spec
+configTest4 =
+    dragSpec (config [])
+
+
+configTest5 : Spec
+configTest5 =
+    dragSpec (config [ cfEventHandling [ cfeView [] ] ])
+
+
 sourceExample : Spec
 sourceExample =
-    configTest3
+    configTest5
 
 
 
@@ -180,6 +236,8 @@ mySpecs =
         [ ( "configTest1", configTest1 )
         , ( "configTest2", configTest2 )
         , ( "configTest3", configTest3 )
+        , ( "configTest4", configTest4 )
+        , ( "configTest5", configTest5 )
         ]
 
 
