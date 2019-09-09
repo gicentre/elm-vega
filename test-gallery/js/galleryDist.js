@@ -6641,7 +6641,6 @@ var author$project$Vega$CfAxis = F2(
 	});
 var author$project$Vega$cfAxis = author$project$Vega$CfAxis;
 var author$project$Vega$VConfig = 6;
-var author$project$Vega$Allow = 1;
 var author$project$Vega$SScheme = function (a) {
 	return {$: 0, a: a};
 };
@@ -6704,6 +6703,7 @@ var author$project$Vega$axTypeLabel = function (axType) {
 			return 'axisBand';
 	}
 };
+var author$project$Vega$Allow = 1;
 var author$project$Vega$eventTypeLabel = function (et) {
 	switch (et) {
 		case 0:
@@ -6744,6 +6744,78 @@ var author$project$Vega$eventTypeLabel = function (et) {
 			return 'wheel';
 		default:
 			return 'timer';
+	}
+};
+var author$project$Vega$signalBindSpec = function (sb) {
+	switch (sb) {
+		case 0:
+			return elm$json$Json$Encode$string('any');
+		case 1:
+			return elm$json$Json$Encode$string('container');
+		default:
+			return elm$json$Json$Encode$string('none');
+	}
+};
+var author$project$Vega$configEventProperty = function (ceh) {
+	switch (ceh.$) {
+		case 0:
+			var sb = ceh.a;
+			return _Utils_Tuple2(
+				'bind',
+				author$project$Vega$signalBindSpec(sb));
+		case 1:
+			var ef = ceh.a;
+			var ets = ceh.b;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(true) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			var filterLabel = (ef === 1) ? 'allow' : 'prevent';
+			return _Utils_Tuple2(
+				'defaults',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(filterLabel, listSpec)
+						])));
+		case 2:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('selector', listSpec);
+		case 3:
+			var b = ceh.a;
+			return _Utils_Tuple2(
+				'timer',
+				author$project$Vega$booSpec(b));
+		case 4:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('view', listSpec);
+		default:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('window', listSpec);
 	}
 };
 var author$project$Vega$groupMarkProperty = function (mProp) {
@@ -7870,36 +7942,18 @@ var author$project$Vega$configProperty = function (cp) {
 			return _Utils_Tuple2(
 				'background',
 				author$project$Vega$strSpec(s));
+		case 3:
+			var ceps = cp.a;
+			return _Utils_Tuple2(
+				'events',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$configEventProperty, ceps)));
 		case 2:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'group',
 				elm$json$Json$Encode$object(
 					A2(elm$core$List$map, author$project$Vega$groupMarkProperty, mps)));
-		case 3:
-			var ef = cp.a;
-			var ets = cp.b;
-			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(true) : A2(
-				elm$json$Json$Encode$list,
-				function (et) {
-					return elm$json$Json$Encode$string(
-						author$project$Vega$eventTypeLabel(et));
-				},
-				ets);
-			var filterLabel = (ef === 1) ? 'allow' : 'prevent';
-			return _Utils_Tuple2(
-				'events',
-				elm$json$Json$Encode$object(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							'defaults',
-							elm$json$Json$Encode$object(
-								_List_fromArray(
-									[
-										_Utils_Tuple2(filterLabel, listSpec)
-									])))
-						])));
 		case 4:
 			var mk = cp.a;
 			var mps = cp.b;

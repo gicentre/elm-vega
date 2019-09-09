@@ -11542,7 +11542,6 @@ var author$project$ConfigTests$scatter = function (cf) {
 			]));
 };
 var author$project$Vega$VConfig = 6;
-var author$project$Vega$Allow = 1;
 var author$project$Vega$autosizeProperty = function (asCfg) {
 	switch (asCfg.$) {
 		case 5:
@@ -11602,6 +11601,7 @@ var author$project$Vega$axTypeLabel = function (axType) {
 			return 'axisBand';
 	}
 };
+var author$project$Vega$Allow = 1;
 var author$project$Vega$eventTypeLabel = function (et) {
 	switch (et) {
 		case 0:
@@ -11642,6 +11642,78 @@ var author$project$Vega$eventTypeLabel = function (et) {
 			return 'wheel';
 		default:
 			return 'timer';
+	}
+};
+var author$project$Vega$signalBindSpec = function (sb) {
+	switch (sb) {
+		case 0:
+			return elm$json$Json$Encode$string('any');
+		case 1:
+			return elm$json$Json$Encode$string('container');
+		default:
+			return elm$json$Json$Encode$string('none');
+	}
+};
+var author$project$Vega$configEventProperty = function (ceh) {
+	switch (ceh.$) {
+		case 0:
+			var sb = ceh.a;
+			return _Utils_Tuple2(
+				'bind',
+				author$project$Vega$signalBindSpec(sb));
+		case 1:
+			var ef = ceh.a;
+			var ets = ceh.b;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(true) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			var filterLabel = (ef === 1) ? 'allow' : 'prevent';
+			return _Utils_Tuple2(
+				'defaults',
+				elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(filterLabel, listSpec)
+						])));
+		case 2:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('selector', listSpec);
+		case 3:
+			var b = ceh.a;
+			return _Utils_Tuple2(
+				'timer',
+				author$project$Vega$booSpec(b));
+		case 4:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('view', listSpec);
+		default:
+			var ets = ceh.a;
+			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(false) : A2(
+				elm$json$Json$Encode$list,
+				function (et) {
+					return elm$json$Json$Encode$string(
+						author$project$Vega$eventTypeLabel(et));
+				},
+				ets);
+			return _Utils_Tuple2('window', listSpec);
 	}
 };
 var author$project$Vega$groupMarkProperty = function (mProp) {
@@ -11907,36 +11979,18 @@ var author$project$Vega$configProperty = function (cp) {
 			return _Utils_Tuple2(
 				'background',
 				author$project$Vega$strSpec(s));
+		case 3:
+			var ceps = cp.a;
+			return _Utils_Tuple2(
+				'events',
+				elm$json$Json$Encode$object(
+					A2(elm$core$List$map, author$project$Vega$configEventProperty, ceps)));
 		case 2:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'group',
 				elm$json$Json$Encode$object(
 					A2(elm$core$List$map, author$project$Vega$groupMarkProperty, mps)));
-		case 3:
-			var ef = cp.a;
-			var ets = cp.b;
-			var listSpec = _Utils_eq(ets, _List_Nil) ? elm$json$Json$Encode$bool(true) : A2(
-				elm$json$Json$Encode$list,
-				function (et) {
-					return elm$json$Json$Encode$string(
-						author$project$Vega$eventTypeLabel(et));
-				},
-				ets);
-			var filterLabel = (ef === 1) ? 'allow' : 'prevent';
-			return _Utils_Tuple2(
-				'events',
-				elm$json$Json$Encode$object(
-					_List_fromArray(
-						[
-							_Utils_Tuple2(
-							'defaults',
-							elm$json$Json$Encode$object(
-								_List_fromArray(
-									[
-										_Utils_Tuple2(filterLabel, listSpec)
-									])))
-						])));
 		case 4:
 			var mk = cp.a;
 			var mps = cp.b;
@@ -12647,6 +12701,271 @@ var author$project$ConfigTests$configTest3 = function () {
 			]));
 	return author$project$ConfigTests$scatter(cf);
 }();
+var author$project$Vega$VBackground = 1;
+var author$project$Vega$background = function (s) {
+	return _Utils_Tuple2(
+		1,
+		author$project$Vega$strSpec(s));
+};
+var author$project$Vega$Enter = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$enEnter = author$project$Vega$Enter;
+var author$project$Vega$ESBetween = F2(
+	function (a, b) {
+		return {$: 2, a: a, b: b};
+	});
+var author$project$Vega$esBetween = author$project$Vega$ESBetween;
+var author$project$Vega$ESMark = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$esMark = author$project$Vega$ESMark;
+var author$project$Vega$ESObject = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$esObject = author$project$Vega$ESObject;
+var author$project$Vega$ESSource = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$esSource = author$project$Vega$ESSource;
+var author$project$Vega$ESType = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$esType = author$project$Vega$ESType;
+var author$project$Vega$ESView = {$: 1};
+var author$project$Vega$esView = author$project$Vega$ESView;
+var author$project$Vega$MouseDown = 8;
+var author$project$Vega$etMouseDown = 8;
+var author$project$Vega$MouseMove = 9;
+var author$project$Vega$etMouseMove = 9;
+var author$project$Vega$MouseUp = 12;
+var author$project$Vega$etMouseUp = 12;
+var author$project$Vega$EEvents = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$evHandler = F2(
+	function (ess, eHandlers) {
+		return A2(
+			elm$core$List$cons,
+			author$project$Vega$EEvents(ess),
+			eHandlers);
+	});
+var author$project$Vega$EUpdate = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$evUpdate = author$project$Vega$EUpdate;
+var author$project$Vega$hCenter = author$project$Vega$vStr('center');
+var author$project$Vega$MAlign = function (a) {
+	return {$: 23, a: a};
+};
+var author$project$Vega$maAlign = author$project$Vega$MAlign;
+var author$project$Vega$MBaseline = function (a) {
+	return {$: 24, a: a};
+};
+var author$project$Vega$maBaseline = author$project$Vega$MBaseline;
+var author$project$Vega$MHeight = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$maHeight = author$project$Vega$MHeight;
+var author$project$Vega$MText = function (a) {
+	return {$: 53, a: a};
+};
+var author$project$Vega$maText = author$project$Vega$MText;
+var author$project$Vega$MWidth = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$maWidth = author$project$Vega$MWidth;
+var author$project$Vega$Rect = 6;
+var author$project$Vega$rect = 6;
+var author$project$Vega$SiOn = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$siOn = author$project$Vega$SiOn;
+var author$project$Vega$VSignals = 7;
+var author$project$Vega$signals = function (sigs) {
+	return _Utils_Tuple2(
+		7,
+		A2(elm$json$Json$Encode$list, elm$core$Basics$identity, sigs));
+};
+var author$project$Vega$Text = 10;
+var author$project$Vega$text = 10;
+var author$project$Vega$vMiddle = author$project$Vega$vStr('middle');
+var author$project$Vega$VNums = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$vNums = author$project$Vega$VNums;
+var author$project$Vega$VSignal = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$vSignal = author$project$Vega$VSignal;
+var author$project$Vega$white = author$project$Vega$vStr('white');
+var author$project$ConfigTests$dragSpec = function (cf) {
+	var si = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$signals,
+		A2(
+			author$project$Vega$signal,
+			'myDrag',
+			_List_fromArray(
+				[
+					author$project$Vega$siValue(
+					author$project$Vega$vNums(
+						_List_fromArray(
+							[200, 200]))),
+					author$project$Vega$siOn(
+					_List_fromArray(
+						[
+							A2(
+							author$project$Vega$evHandler,
+							_List_fromArray(
+								[
+									author$project$Vega$esObject(
+									_List_fromArray(
+										[
+											A2(
+											author$project$Vega$esBetween,
+											_List_fromArray(
+												[
+													author$project$Vega$esMark(author$project$Vega$rect),
+													author$project$Vega$esType(author$project$Vega$etMouseDown)
+												]),
+											_List_fromArray(
+												[
+													author$project$Vega$esSource(author$project$Vega$esView),
+													author$project$Vega$esType(author$project$Vega$etMouseUp)
+												])),
+											author$project$Vega$esSource(author$project$Vega$esView),
+											author$project$Vega$esType(author$project$Vega$etMouseMove)
+										]))
+								]),
+							_List_fromArray(
+								[
+									author$project$Vega$evUpdate('xy()')
+								]))
+						]))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$rect,
+				_List_fromArray(
+					[
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												author$project$Vega$vStr('firebrick')
+											])),
+										author$project$Vega$maWidth(
+										_List_fromArray(
+											[
+												author$project$Vega$vNum(80)
+											])),
+										author$project$Vega$maHeight(
+										_List_fromArray(
+											[
+												author$project$Vega$vNum(50)
+											]))
+									])),
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maX(
+										_List_fromArray(
+											[
+												author$project$Vega$vSignal('myDrag[0]')
+											])),
+										author$project$Vega$maY(
+										_List_fromArray(
+											[
+												author$project$Vega$vSignal('myDrag[1]')
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$text,
+			_List_fromArray(
+				[
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									author$project$Vega$maAlign(
+									_List_fromArray(
+										[author$project$Vega$hCenter])),
+									author$project$Vega$maBaseline(
+									_List_fromArray(
+										[author$project$Vega$vMiddle])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[author$project$Vega$white])),
+									author$project$Vega$maText(
+									_List_fromArray(
+										[
+											author$project$Vega$vStr('Drag me')
+										]))
+								])),
+							author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vSignal('myDrag[0]+40')
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vSignal('myDrag[1]+25')
+										]))
+								]))
+						]))
+				])));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(400),
+				author$project$Vega$height(300),
+				cf,
+				author$project$Vega$background(
+				author$project$Vega$str('rgb(252,247,236)')),
+				si(_List_Nil),
+				mk(_List_Nil)
+			]));
+};
+var author$project$ConfigTests$configTest4 = author$project$ConfigTests$dragSpec(
+	author$project$Vega$config(_List_Nil));
+var author$project$Vega$CfEventHandling = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$cfEventHandling = author$project$Vega$CfEventHandling;
+var author$project$Vega$CfEView = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$cfeView = author$project$Vega$CfEView;
+var author$project$ConfigTests$configTest5 = author$project$ConfigTests$dragSpec(
+	author$project$Vega$config(
+		_List_fromArray(
+			[
+				author$project$Vega$cfEventHandling(
+				_List_fromArray(
+					[
+						author$project$Vega$cfeView(_List_Nil)
+					]))
+			])));
 var author$project$Vega$combineSpecs = function (specs) {
 	return elm$json$Json$Encode$object(specs);
 };
@@ -12655,9 +12974,11 @@ var author$project$ConfigTests$mySpecs = author$project$Vega$combineSpecs(
 		[
 			_Utils_Tuple2('configTest1', author$project$ConfigTests$configTest1),
 			_Utils_Tuple2('configTest2', author$project$ConfigTests$configTest2),
-			_Utils_Tuple2('configTest3', author$project$ConfigTests$configTest3)
+			_Utils_Tuple2('configTest3', author$project$ConfigTests$configTest3),
+			_Utils_Tuple2('configTest4', author$project$ConfigTests$configTest4),
+			_Utils_Tuple2('configTest5', author$project$ConfigTests$configTest5)
 		]));
-var author$project$ConfigTests$sourceExample = author$project$ConfigTests$configTest3;
+var author$project$ConfigTests$sourceExample = author$project$ConfigTests$configTest5;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
