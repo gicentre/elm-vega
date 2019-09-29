@@ -11,6 +11,8 @@ _Minor release supporting Vega 5.6._
 - `leBorderStrokeDash` for configuring legend border dash style.
 - `cfSignals` for supporting configuration signals (Vega 5.5).
 - `cfEventHandling` and associated `cfe` functions for more flexible Vega 5.5 event configuration.
+- `description` top-level metadata option (previously inadvertently hidden).
+- `userMeta` top-level custom metadata options.
 
 ## Deprecations
 
