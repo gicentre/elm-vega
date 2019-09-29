@@ -14447,6 +14447,279 @@ var author$project$Vega$dataFromColumns = F3(
 				]),
 			fmt);
 	});
+var author$project$Vega$FaGroupBy = function (a) {
+	return {$: 4, a: a};
+};
+var author$project$Vega$faGroupBy = author$project$Vega$FaGroupBy;
+var author$project$Vega$Group = 3;
+var author$project$Vega$group = 3;
+var author$project$Vega$KdGroupBy = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$kdGroupBy = author$project$Vega$KdGroupBy;
+var author$project$Vega$KdResolve = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$kdResolve = author$project$Vega$KdResolve;
+var author$project$Vega$MGroup = function (a) {
+	return {$: 14, a: a};
+};
+var author$project$Vega$mGroup = author$project$Vega$MGroup;
+var author$project$Vega$Nums = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$nums = author$project$Vega$Nums;
+var author$project$Vega$RaCategory = {$: 9};
+var author$project$Vega$raCategory = author$project$Vega$RaCategory;
+var author$project$Vega$RShared = 0;
+var author$project$Vega$reShared = 0;
+var author$project$Vega$SFacet = F3(
+	function (a, b, c) {
+		return {$: 1, a: a, b: b, c: c};
+	});
+var author$project$Vega$srFacet = F2(
+	function (d, name) {
+		return A2(author$project$Vega$SFacet, d, name);
+	});
+var author$project$Vega$StAs = F2(
+	function (a, b) {
+		return {$: 4, a: a, b: b};
+	});
+var author$project$Vega$stAs = F2(
+	function (y0, y1) {
+		return A2(author$project$Vega$StAs, y0, y1);
+	});
+var author$project$Vega$OfCenter = {$: 1};
+var author$project$Vega$stCenter = author$project$Vega$OfCenter;
+var author$project$Vega$StField = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$stField = author$project$Vega$StField;
+var author$project$Vega$StGroupBy = function (a) {
+	return {$: 1, a: a};
+};
+var author$project$Vega$stGroupBy = author$project$Vega$StGroupBy;
+var author$project$Vega$StOffset = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$stOffset = author$project$Vega$StOffset;
+var author$project$Vega$TStack = function (a) {
+	return {$: 42, a: a};
+};
+var author$project$Vega$trStack = author$project$Vega$TStack;
+var author$project$TransformTests$kdeTest2 = function () {
+	var table = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(author$project$Vega$dataFromColumns, 'table', _List_Nil),
+			A2(
+				author$project$Vega$dataColumn,
+				'obs',
+				author$project$Vega$vNums(
+					_List_fromArray(
+						[1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 9, 5, 6, 6, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 12, 12, 13, 13, 14, 15])))),
+		A2(
+			author$project$Vega$dataColumn,
+			'cat',
+			author$project$Vega$vNums(
+				_List_fromArray(
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2]))));
+	var sc = A2(
+		elm$core$Basics$composeL,
+		A2(
+			elm$core$Basics$composeL,
+			A2(
+				elm$core$Basics$composeL,
+				author$project$Vega$scales,
+				A2(
+					author$project$Vega$scale,
+					'xScale',
+					_List_fromArray(
+						[
+							author$project$Vega$scRange(author$project$Vega$raWidth),
+							author$project$Vega$scDomain(
+							author$project$Vega$doData(
+								_List_fromArray(
+									[
+										author$project$Vega$daDataset('table'),
+										author$project$Vega$daField(
+										author$project$Vega$field('value'))
+									]))),
+							author$project$Vega$scZero(author$project$Vega$false)
+						]))),
+			A2(
+				author$project$Vega$scale,
+				'yScale',
+				_List_fromArray(
+					[
+						author$project$Vega$scRange(author$project$Vega$raHeight),
+						author$project$Vega$scDomain(
+						author$project$Vega$doData(
+							_List_fromArray(
+								[
+									author$project$Vega$daDataset('table'),
+									author$project$Vega$daField(
+									author$project$Vega$field('upper'))
+								]))),
+						author$project$Vega$scNice(author$project$Vega$niTrue),
+						author$project$Vega$scZero(author$project$Vega$true)
+					]))),
+		A2(
+			author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					author$project$Vega$scType(author$project$Vega$scOrdinal),
+					author$project$Vega$scRange(author$project$Vega$raCategory)
+				])));
+	var nestedMk = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$marks,
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$area,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							author$project$Vega$srData(
+							author$project$Vega$str('stackedFacets'))
+						])),
+					author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									author$project$Vega$maX(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('xScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('value'))
+										])),
+									author$project$Vega$maY(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('lower'))
+										])),
+									author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('yScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('upper'))
+										])),
+									author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											author$project$Vega$vScale('cScale'),
+											author$project$Vega$vField(
+											author$project$Vega$field('cat'))
+										]))
+								]))
+						]))
+				])));
+	var mk = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$marks,
+		A2(
+			author$project$Vega$mark,
+			author$project$Vega$group,
+			_List_fromArray(
+				[
+					author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							A3(
+							author$project$Vega$srFacet,
+							author$project$Vega$str('table'),
+							'stackedFacets',
+							_List_fromArray(
+								[
+									author$project$Vega$faGroupBy(
+									_List_fromArray(
+										[
+											author$project$Vega$field('cat')
+										]))
+								]))
+						])),
+					author$project$Vega$mGroup(
+					_List_fromArray(
+						[
+							nestedMk(_List_Nil)
+						]))
+				])));
+	var ds = author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						author$project$Vega$trKde,
+						author$project$Vega$field('obs'),
+						_List_fromArray(
+							[
+								author$project$Vega$kdGroupBy(
+								_List_fromArray(
+									[
+										author$project$Vega$field('cat')
+									])),
+								author$project$Vega$kdBandwidth(
+								author$project$Vega$num(1)),
+								author$project$Vega$kdExtent(
+								author$project$Vega$nums(
+									_List_fromArray(
+										[1, 15]))),
+								author$project$Vega$kdSteps(
+								author$project$Vega$num(100)),
+								author$project$Vega$kdResolve(author$project$Vega$reShared)
+							])),
+						author$project$Vega$trStack(
+						_List_fromArray(
+							[
+								author$project$Vega$stField(
+								author$project$Vega$field('density')),
+								author$project$Vega$stGroupBy(
+								_List_fromArray(
+									[
+										author$project$Vega$field('value')
+									])),
+								author$project$Vega$stOffset(author$project$Vega$stCenter),
+								A2(author$project$Vega$stAs, 'lower', 'upper')
+							]))
+					]),
+				table(_List_Nil))
+			]));
+	var ax = A2(
+		elm$core$Basics$composeL,
+		author$project$Vega$axes,
+		A3(
+			author$project$Vega$axis,
+			'xScale',
+			author$project$Vega$siBottom,
+			_List_fromArray(
+				[
+					author$project$Vega$axTitle(
+					author$project$Vega$str('observation'))
+				])));
+	return author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				author$project$Vega$width(500),
+				author$project$Vega$height(200),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var author$project$Vega$hCenter = author$project$Vega$vStr('center');
 var author$project$Vega$MAlign = function (a) {
 	return {$: 23, a: a};
@@ -14953,18 +15226,6 @@ var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
 var author$project$Vega$ScBand = {$: 8};
 var author$project$Vega$scBand = author$project$Vega$ScBand;
-var author$project$Vega$StField = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$stField = author$project$Vega$StField;
-var author$project$Vega$StGroupBy = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$stGroupBy = author$project$Vega$StGroupBy;
-var author$project$Vega$StOffset = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$stOffset = author$project$Vega$StOffset;
 var author$project$Vega$StackOffsetSignal = function (a) {
 	return {$: 3, a: a};
 };
@@ -14981,10 +15242,6 @@ var author$project$Vega$TgRemove = function (a) {
 	return {$: 2, a: a};
 };
 var author$project$Vega$tgRemove = author$project$Vega$TgRemove;
-var author$project$Vega$TStack = function (a) {
-	return {$: 42, a: a};
-};
-var author$project$Vega$trStack = author$project$Vega$TStack;
 var author$project$Vega$VBand = function (a) {
 	return {$: 15, a: a};
 };
@@ -15540,10 +15797,6 @@ var author$project$TransformTests$treeTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var author$project$Vega$Nums = function (a) {
-	return {$: 1, a: a};
-};
-var author$project$Vega$nums = author$project$Vega$Nums;
 var author$project$Vega$PrScale = function (a) {
 	return {$: 3, a: a};
 };
@@ -16580,9 +16833,10 @@ var author$project$TransformTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('voronoiTest2', author$project$TransformTests$voronoiTest2),
 			_Utils_Tuple2('contourTest1', author$project$TransformTests$contourTest1),
 			_Utils_Tuple2('densityTest1', author$project$TransformTests$densityTest1),
-			_Utils_Tuple2('kdeTest1', author$project$TransformTests$kdeTest1)
+			_Utils_Tuple2('kdeTest1', author$project$TransformTests$kdeTest1),
+			_Utils_Tuple2('kdeTest2', author$project$TransformTests$kdeTest2)
 		]));
-var author$project$TransformTests$sourceExample = author$project$TransformTests$kdeTest1;
+var author$project$TransformTests$sourceExample = author$project$TransformTests$kdeTest2;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;

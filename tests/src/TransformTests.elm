@@ -912,9 +912,84 @@ kdeTest1 =
         [ width 500, height 250, padding 20, ds, si [], sc [], ax [], mk [] ]
 
 
+kdeTest2 : Spec
+kdeTest2 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "obs" (vNums [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 9, 5, 6, 6, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 12, 12, 13, 13, 14, 15 ])
+                << dataColumn "cat" (vNums [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2 ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ trKde (field "obs")
+                            [ kdGroupBy [ field "cat" ]
+                            , kdBandwidth (num 1)
+                            , kdExtent (nums [ 1, 15 ])
+                            , kdSteps (num 100)
+                            , kdResolve reShared
+                            ]
+                        , trStack
+                            [ stField (field "density")
+                            , stGroupBy [ field "value" ]
+                            , stOffset stCenter
+                            , stAs "lower" "upper"
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doData [ daDataset "table", daField (field "value") ])
+                    , scZero false
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "table", daField (field "upper") ])
+                    , scNice niTrue
+                    , scZero true
+                    ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange raCategory
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axTitle (str "observation") ]
+
+        mk =
+            marks
+                << mark group
+                    [ mFrom [ srFacet (str "table") "stackedFacets" [ faGroupBy [ field "cat" ] ] ]
+                    , mGroup [ nestedMk [] ]
+                    ]
+
+        nestedMk =
+            marks
+                << mark area
+                    [ mFrom [ srData (str "stackedFacets") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "value") ]
+                            , maY [ vScale "yScale", vField (field "lower") ]
+                            , maY2 [ vScale "yScale", vField (field "upper") ]
+                            , maFill [ vScale "cScale", vField (field "cat") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 200, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    kdeTest1
+    kdeTest2
 
 
 
@@ -934,6 +1009,7 @@ mySpecs =
         , ( "contourTest1", contourTest1 )
         , ( "densityTest1", densityTest1 )
         , ( "kdeTest1", kdeTest1 )
+        , ( "kdeTest2", kdeTest2 )
         ]
 
 
