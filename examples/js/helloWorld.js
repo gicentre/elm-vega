@@ -7018,6 +7018,8 @@ var author$project$Vega$vPropertyLabel = function (spec) {
 			return 'marks';
 		case 16:
 			return 'encode';
+		case 17:
+			return 'usermeta';
 		default:
 			return 'layout';
 	}
