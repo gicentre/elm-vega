@@ -1031,6 +1031,103 @@ wheat1 =
         [ width 500, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+dotbin1 : Spec
+dotbin1 =
+    let
+        ds =
+            dataSource
+                [ data "quantiles" []
+                    |> transform
+                        [ trSequenceAs (numSignal "0.5 / quantiles") (num 1) (numSignal "1 / quantiles") "p"
+                        , trFormula "quantileLogNormal(datum.p, mean, sd)" "value"
+                        , trDotBin (field "value") [ dbStep (numSignal "step") ]
+                        , trStack [ stGroupBy [ field "bin" ] ]
+                        , trExtentAsSignal (field "y1") "ext"
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "quantiles"
+                    [ siValue (vNum 20)
+                    , siBind (iRange [ inMin 10, inMax 200, inStep 1 ])
+                    ]
+                << signal "mean" [ siUpdate "log(11.4)" ]
+                << signal "sd" [ siUpdate "0.2" ]
+                << signal "step" [ siUpdate "1.25 * sqrt(20 / quantiles)" ]
+                << signal "size" [ siUpdate "scale('xScale', step) - scale('xScale', 0)" ]
+                << signal "area" [ siUpdate "size*size" ]
+                << signal "select"
+                    [ siInit "quantileLogNormal(0.05, mean, sd)"
+                    , siOn
+                        [ evHandler
+                            [ esSelector (str "click, [mousedown, window:mouseup] > mousemove") ]
+                            [ evUpdate "clamp(invert('xScale', x()), 0.0001, 30)" ]
+                        , evHandler
+                            [ esSelector (str "dblclick") ]
+                            [ evUpdate "0" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doNums (nums [ 0, 30 ]))
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doSignal "[0, height / size]")
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+
+        mk =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "quantiles") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "bin") ]
+                            , maY [ vScale "yScale", vSignal "datum.y0 + 0.5" ]
+                            , maSize [ vSignal "area" ]
+                            ]
+                        , enUpdate
+                            [ maFill [ vSignal "datum.bin < select ? 'firebrick' : 'steelblue'" ] ]
+                        ]
+                    ]
+                << mark rule
+                    [ mInteractive false
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vSignal "select" ]
+                            , maY [ vNum 0 ]
+                            , maY2 [ vSignal "height" ]
+                            , maStroke [ vSignal "select ? '#ccc': 'transparent'" ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mInteractive false
+                    , mEncode
+                        [ enEnter
+                            [ maBaseline [ vTop ]
+                            , maDx [ vNum 3 ]
+                            , maY [ vNum 2 ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vSignal "select" ]
+                            , maText [ vSignal "format(cumulativeLogNormal(select, mean, sd), '.1%')" ]
+                            , maFill [ vSignal "select ? '#000': 'transparent'" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega [ width 400, height 90, padding 5, ds, si [], sc [], ax [], mk [] ]
+
+
 hops1 : Spec
 hops1 =
     let
@@ -1066,8 +1163,7 @@ hops1 =
                     , scDomain (doData [ daDataset "steps", daField (field "month") ])
                     ]
                 << scale "yScale"
-                    [ scType scLinear
-                    , scRange raHeight
+                    [ scRange raHeight
                     , scDomain (doNums (nums [ 0, 10 ]))
                     ]
 
@@ -1248,7 +1344,7 @@ regression2 =
 
 sourceExample : Spec
 sourceExample =
-    regression1
+    dotbin1
 
 
 
@@ -1268,6 +1364,7 @@ mySpecs =
         , ( "scatter1", scatter1 )
         , ( "contour1", contour1 )
         , ( "wheat1", wheat1 )
+        , ( "dotbin1", dotbin1 )
         , ( "hops1", hops1 )
         , ( "regression1", regression1 )
         , ( "regression2", regression2 )
