@@ -11,7 +11,7 @@ scatter : ( VProperty, Spec ) -> Spec
 scatter cf =
     let
         ti =
-            title (str "Engine Efficiency") []
+            title (strs [ "Engine size", "vs", "Engine Efficiency" ]) []
 
         ds =
             dataSource
@@ -62,7 +62,7 @@ scatter cf =
             legends
                 << legend
                     [ leFill "cScale"
-                    , leTitle (str "Country of Manufacture")
+                    , leTitle (strs [ "Origin", "(country of Manufacture)" ])
                     , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ] ] ] ]
                     ]
 

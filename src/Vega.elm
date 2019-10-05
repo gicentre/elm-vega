@@ -5866,7 +5866,11 @@ axTickWidth =
     AxTickWidth
 
 
-{-| A title for an axis.
+{-| A title for an axis. To specify a multi-line axis title, provide an array of
+title lines, one element per line. For example,
+
+    axTitle (strs [ "Speed", "(kph)" ])
+
 -}
 axTitle : Str -> AxisProperty
 axTitle =
@@ -9614,7 +9618,11 @@ leTickMinStep =
     LeTickMinStep
 
 
-{-| Title for the legend (none by default).
+{-| Title for the legend (none by default). To specify a multi-line legend title,
+provide an array of title lines, one element per line. For example,
+
+      leTitle (strs [ "Origin", "(country of Manufacture)" ])
+
 -}
 leTitle : Str -> LegendProperty
 leTitle =
@@ -13323,9 +13331,10 @@ tiStyle =
     TStyle
 
 
-{-| Top-level title to be displayed as part of a visualization.
-The first parameter is the text of the title to display, the second any optional
-properties for customising the title's appearance.
+{-| Top-level title to be displayed as part of a visualization. The first parameter
+is the text of the title to display, the second any optional properties for customising
+the title's appearance. For titles that span multiple lines, provide an array of
+strings ([strs](#strs)) rather than a single string ([str](#str)).
 -}
 title : Str -> List TitleProperty -> ( VProperty, Spec )
 title s tps =
