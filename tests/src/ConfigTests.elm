@@ -143,6 +143,7 @@ configTest3 =
                     [ tiFontSize (numSignal "baseFontSize*1.6")
                     , tiColor (strSignal "textColor")
                     , tiFont (strSignal "font")
+                    , tiLineHeight (numSignal "baseFontSize*2.5")
                     ]
                 , cfAxis axAll
                     [ axTitleColor (strSignal "textColor")

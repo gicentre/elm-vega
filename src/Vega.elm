@@ -873,6 +873,7 @@ module Vega exposing
     , tfSignal
     , tiInteractive
     , tiLimit
+    , tiLineHeight
     , tiName
     , tiOffset
     , tiOrient
@@ -2559,6 +2560,7 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 @docs tfSignal
 @docs tiInteractive
 @docs tiLimit
+@docs tiLineHeight
 @docs tiName
 @docs tiOffset
 @docs tiOrient
@@ -4862,8 +4864,8 @@ type TitleFrame
 [tiColor](#tiColor), [tiDx](#tiDx), [tiDy](#tiDy) ,[tiEncode](#tiEncode),
 [tiFont](#tiFont), [tiFontSize](#tiFontSize), [tiFontStyle](#tiFontStyle),
 [tiFontWeight](#tiFontWeight), [tiFrame](#tiFrame), [tiInteractive](#tiInteractive),
-[tiLimit](#tiLimit), [tiName](#tiName), [tiStyle](#tiStyle), [tiOffset](#tiOffset) and
-[tiZIndex](#tiZIndex).
+[tiLimit](#tiLimit), [tiLineHeight](#tiLineHeight), [tiName](#tiName), [tiStyle](#tiStyle),
+[tiOffset](#tiOffset) and [tiZIndex](#tiZIndex).
 -}
 type TitleProperty
     = TText Str
@@ -4882,6 +4884,7 @@ type TitleProperty
     | TFrame TitleFrame
     | TInteractive Boo
     | TLimit Num
+    | TLineHeight Num
     | TOffset Num
     | TOrient Side
     | TName String
@@ -13321,6 +13324,13 @@ tiLimit =
     TLimit
 
 
+{-| Line height in pixels of each line of text in a title.
+-}
+tiLineHeight : Num -> TitleProperty
+tiLineHeight =
+    TLineHeight
+
+
 {-| Mark name to apply to a title text mark. This name can be used to
 refer to the title mark with an
 [event stream definition](https://vega.github.io/vega/docs/event-streams/).
@@ -18563,6 +18573,9 @@ titleProperty tProp =
 
         TLimit n ->
             ( "limit", numSpec n )
+
+        TLineHeight n ->
+            ( "lineHeight", numSpec n )
 
         TName s ->
             ( "name", JE.string s )
