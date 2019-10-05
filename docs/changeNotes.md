@@ -4,7 +4,7 @@ _Minor release supporting Vega 5.7._
 
 ## Additions
 
-- Multi-line axis titles (`axTitleLineHeight`)
+- Multi-line titles and spacing (`axTitleLineHeight`, `leTitleLineHeight`)
 - Legend symbol limit (`leSymbolLimit`)
 
 ## Other Changes

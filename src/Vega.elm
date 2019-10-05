@@ -823,6 +823,7 @@ module Vega exposing
     , leTitleFontStyle
     , leTitleFontWeight
     , leTitleLimit
+    , leTitleLineHeight
     , leTitleOrient
     , leTitlePadding
     , leValues
@@ -2502,6 +2503,7 @@ See the
 @docs leTitleFontStyle
 @docs leTitleFontWeight
 @docs leTitleLimit
+@docs leTitleLineHeight
 @docs leTitleOrient
 @docs leTitlePadding
 @docs leValues
@@ -4063,8 +4065,8 @@ type LegendOrientation
 [leTitleBaseline](#leTitleBaseline), [leTitleColor](#leTitleColor), [leTitleFont](#leTitleFont),
 [LeTitleFontStyle](#LeTitleFontStyle), [leTitleFontSize](#leTitleFontSize),
 [leTitleFontWeight](#leTitleFontWeight), [leTitleLimit](#leTitleLimit),
-[leTitleOpacity](#leTitleOpacity), [LeTitleOrient](#leTitleOrient), [leTitlePadding](#leTitlePadding),
-[leValues](#leValues), [leX](#leX), [leY](#leY) and [leZIndex](#leZIndex).
+[leTitleLineHeight](#leTitleLineHeight), [leTitleOpacity](#leTitleOpacity), [LeTitleOrient](#leTitleOrient),
+[leTitlePadding](#leTitlePadding), [leValues](#leValues), [leX](#leX), [leY](#leY) and [leZIndex](#leZIndex).
 -}
 type LegendProperty
     = LeType LegendType
@@ -4142,6 +4144,7 @@ type LegendProperty
     | LeTitleFontStyle Str
     | LeTitleFontWeight Value
     | LeTitleLimit Num
+    | LeTitleLineHeight Num
     | LeTitleOpacity Num
     | LeTitleOrient Side
     | LeTitlePadding Num
@@ -5951,7 +5954,7 @@ axTitleLimit =
     AxTitleLimit
 
 
-{-| Line height in pixels of a multi-line axis title.
+{-| Line height in pixels of each line of text in a multi-line axis title.
 -}
 axTitleLineHeight : Num -> AxisProperty
 axTitleLineHeight =
@@ -9702,6 +9705,13 @@ leTitleFontWeight =
 leTitleLimit : Num -> LegendProperty
 leTitleLimit =
     LeTitleLimit
+
+
+{-| Line height in pixels of each line of text in a multi-line legend title.
+-}
+leTitleLineHeight : Num -> LegendProperty
+leTitleLineHeight =
+    LeTitleLineHeight
 
 
 {-| Opacity for a legend's title.
@@ -16952,6 +16962,9 @@ legendProperty lp =
 
         LeTitleLimit x ->
             ( "titleLimit", numSpec x )
+
+        LeTitleLineHeight n ->
+            ( "titleLineHeight", numSpec n )
 
         LeTitleOpacity n ->
             ( "titleOpacity", numSpec n )
