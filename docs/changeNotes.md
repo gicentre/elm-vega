@@ -4,8 +4,9 @@ _Minor release supporting Vega 5.7._
 
 ## Additions
 
-- Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`)
-- Legend symbol limit (`leSymbolLimit`)
+- Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`).
+- Subtitles and associated customisation (`tiSubtitle`, `tiSubtitleColor`, `tiSubtitleFont`, `tiSubtitleFontSize`, `tiSubtitleFontStyle`, `tiSubtitleFontWeight`, `tiSubtitleLineHeight` and `tiSubtitlePadding`).
+- Legend symbol limit (`leSymbolLimit`).
 
 ## Other Changes
 

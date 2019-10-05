@@ -11,7 +11,9 @@ scatter : ( VProperty, Spec ) -> Spec
 scatter cf =
     let
         ti =
-            title (strs [ "Engine size", "vs", "Engine Efficiency" ]) []
+            title (strs [ "Engine size", "vs", "Engine Efficiency" ])
+                [ tiSubtitle (strs [ "Being a graphical comparison", "of two quantitative variables" ])
+                ]
 
         ds =
             dataSource
@@ -144,6 +146,7 @@ configTest3 =
                     , tiColor (strSignal "textColor")
                     , tiFont (strSignal "font")
                     , tiLineHeight (numSignal "baseFontSize*2.5")
+                    , tiOffset (numSignal "baseFontSize*3")
                     ]
                 , cfAxis axAll
                     [ axTitleColor (strSignal "textColor")
@@ -163,6 +166,31 @@ configTest3 =
                     , leLabelFontSize (numSignal "baseFontSize*1.1")
                     , leSymbolLimit (num 2)
                     , leTitleLineHeight (numSignal "baseFontSize*1.5")
+                    ]
+                ]
+    in
+    scatter cf
+
+
+configTest4 : Spec
+configTest4 =
+    let
+        cf =
+            config
+                [ (cfSignals
+                    << signal "baseFontSize" [ siValue (vNum 10) ]
+                    << signal "textColor" [ siValue (vStr "#339") ]
+                    << signal "font" [ siValue (vStr "serif") ]
+                  )
+                    []
+                , cfTitle
+                    [ tiSubtitleFontSize (numSignal "baseFontSize*0.9")
+                    , tiSubtitleColor (strSignal "textColor")
+                    , tiSubtitleLineHeight (numSignal "baseFontSize*1.2")
+                    , tiSubtitleFont (strSignal "font")
+                    , tiSubtitleFontStyle (str "italic")
+                    , tiSubtitleFontWeight (vStr "bold")
+                    , tiSubtitlePadding (numSignal "baseFontSize*2")
                     ]
                 ]
     in
@@ -215,19 +243,19 @@ dragSpec cf =
         [ width 400, height 300, cf, background (str "rgb(252,247,236)"), si [], mk [] ]
 
 
-configTest4 : Spec
-configTest4 =
+configTest5 : Spec
+configTest5 =
     dragSpec (config [])
 
 
-configTest5 : Spec
-configTest5 =
+configTest6 : Spec
+configTest6 =
     dragSpec (config [ cfEventHandling [ cfeView [] ] ])
 
 
 sourceExample : Spec
 sourceExample =
-    configTest5
+    configTest4
 
 
 
@@ -242,6 +270,7 @@ mySpecs =
         , ( "configTest3", configTest3 )
         , ( "configTest4", configTest4 )
         , ( "configTest5", configTest5 )
+        , ( "configTest6", configTest6 )
         ]
 
 
