@@ -7,10 +7,12 @@ _Minor release supporting Vega 5.7._
 - Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`).
 - Subtitles and associated customisation (`tiSubtitle`, `tiSubtitleColor`, `tiSubtitleFont`, `tiSubtitleFontSize`, `tiSubtitleFontStyle`, `tiSubtitleFontWeight`, `tiSubtitleLineHeight` and `tiSubtitlePadding`).
 - Legend symbol limit (`leSymbolLimit`).
+- `trDotBin` transform for dotplot binning
 
 ## Other Changes
 
 - Documentation indicates titles can span multiple lines via a `strs` array.
+- Some additions to the test gallery for new distribution transformations (dotplot, quantile plot).
 
 ---
 
