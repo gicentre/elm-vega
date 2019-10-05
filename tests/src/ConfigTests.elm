@@ -55,7 +55,7 @@ scatter cf =
                     siLeft
                     [ axGrid true
                     , axTickCount (num 6)
-                    , axTitle (str "Miles per gallon")
+                    , axTitle (strs [ "Efficiency", "(miles per gallon)" ])
                     ]
 
         lg =
@@ -151,6 +151,7 @@ configTest3 =
                     , axLabelColor (strSignal "textColor")
                     , axLabelFont (strSignal "font")
                     , axLabelFontSize (numSignal "baseFontSize")
+                    , axTitleLineHeight (numSignal "baseFontSize * 1.5")
                     ]
                 , cfLegend
                     [ leTitleColor (strSignal "textColor")

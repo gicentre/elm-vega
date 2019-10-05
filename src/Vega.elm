@@ -724,6 +724,7 @@ module Vega exposing
     , axTitleFontStyle
     , axTitleFontWeight
     , axTitleLimit
+    , axTitleLineHeight
     , axTitlePadding
     , axTitleX
     , axTitleY
@@ -2394,6 +2395,7 @@ See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 @docs axTitleFontStyle
 @docs axTitleFontWeight
 @docs axTitleLimit
+@docs axTitleLineHeight
 @docs axTitlePadding
 @docs axTitleX
 @docs axTitleY
@@ -3151,7 +3153,8 @@ type AxisElement
 [axTitleAlign](#axTitleAlign), [axTitleAnchor](#axTitleAnchor), [axTitleAngle](#axTitleAngle),
 [axTitleBaseline](#axTitleBaseline), [axTitleColor](#axTitleColor),[axTitleFont](#axTitleFont),
 [axTitleFontSize](#axTitleFontSize), [axTitleFontStyle](#axTitleFontStyle),
-[axTitleFontWeight](#axTitleFontWeight), [axTitleLimit](#axTitleLimit), [axTitleOpacity](#axTitleOpacity),
+[axTitleFontWeight](#axTitleFontWeight), [axTitleLimit](#axTitleLimit),
+[axTitleLineHeight](#axTitleLineHeight)[axTitleOpacity](#axTitleOpacity),
 [axTitlePadding](#axTitlePadding), [axTitleX](#axTitleX), [axTitleY](#axTitleY),
 [axValues](#axValues) and [axZIndex](#axZIndex).
 -}
@@ -3221,6 +3224,7 @@ type AxisProperty
     | AxTitleFontStyle Str
     | AxTitleFontWeight Value
     | AxTitleLimit Num
+    | AxTitleLineHeight Num
     | AxTitleOpacity Num
     | AxTitlePadding Value
     | AxTitleX Num
@@ -5938,6 +5942,13 @@ axTitleFontWeight =
 axTitleLimit : Num -> AxisProperty
 axTitleLimit =
     AxTitleLimit
+
+
+{-| Line height in pixels of a multi-line axis title.
+-}
+axTitleLineHeight : Num -> AxisProperty
+axTitleLineHeight =
+    AxTitleLineHeight
 
 
 {-| Opacity of an axis's title.
@@ -15229,6 +15240,9 @@ axisProperty ap =
 
         AxTitleLimit n ->
             ( "titleLimit", numSpec n )
+
+        AxTitleLineHeight n ->
+            ( "titleLineHeight", numSpec n )
 
         AxTitleOpacity n ->
             ( "titleOpacity", numSpec n )

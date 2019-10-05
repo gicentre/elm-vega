@@ -1,3 +1,13 @@
+# V5.2 ➡ V5.3
+
+_Minor release supporting Vega 5.7._
+
+## Additions
+
+- Multi-line axis titles (`axTitleLineHeight`)
+
+---
+
 # V5.1 ➡ V5.2
 
 _Minor release supporting Vega 5.6._
