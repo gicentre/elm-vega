@@ -802,11 +802,12 @@ module Vega exposing
     , leSymbolDash
     , leSymbolDashOffset
     , leSymbolDirection
+    , leSymbolLimit
     , leSymbolOffset
+    , leSymbolOpacity
     , leSymbolSize
     , leSymbolStrokeColor
     , leSymbolStrokeWidth
-    , leSymbolOpacity
     , leSymbolType
     , leTickCount
     , leTickMinStep
@@ -2480,11 +2481,12 @@ See the
 @docs leSymbolDash
 @docs leSymbolDashOffset
 @docs leSymbolDirection
+@docs leSymbolLimit
 @docs leSymbolOffset
+@docs leSymbolOpacity
 @docs leSymbolSize
 @docs leSymbolStrokeColor
 @docs leSymbolStrokeWidth
-@docs leSymbolOpacity
 @docs leSymbolType
 @docs leTickCount
 @docs leTickMinStep
@@ -4053,7 +4055,7 @@ type LegendOrientation
 [LeLabelSeparation](#LeLabelSeparation), [leLabelFontWeight](#leLabelFontWeight),
 [leLabelLimit](#leLabelLimit), [leLabelOpacity](#leLabelOpacity), [leLabelOffset](#leLabelOffset),
 [leLabelOverlap](#leLabelOverlap), [LeSymbolDash](#LeSymbolDash), [LeSymbolDashOffset](#LeSymbolDashOffset),
-[leSymbolFillColor](#leSymbolFillColor), [leSymbolOpacity](#leSymbolOpacity),
+[leSymbolFillColor](#leSymbolFillColor), [leSymbolLimit](#leSymbolLimit), [leSymbolOpacity](#leSymbolOpacity),
 [leSymbolOffset](#leSymbolOffset), [leSymbolSize](#leSymbolSize), [leSymbolStrokeColor](#leSymbolStrokeColor),
 [leSymbolStrokeWidth](#leSymbolStrokeWidth), [leSymbolType](#leSymbolType), [leTickCount](#leTickCount),
 [LeTickMinStep](#LeTickMinStep), [leTemporalTickCount](#leTemporalTickCount),
@@ -4120,6 +4122,7 @@ type LegendProperty
     | LeSymbolDashOffset Num
     | LeSymbolDirection Orientation
     | LeSymbolFillColor Str
+    | LeSymbolLimit Num
     | LeSymbolOffset Num
     | LeSymbolOpacity Num
     | LeSymbolSize Num
@@ -9515,6 +9518,15 @@ leSymbolDirection =
 leSymbolFillColor : Str -> LegendProperty
 leSymbolFillColor =
     LeSymbolFillColor
+
+
+{-| Maximum number of allowed entries for a symbol legend. Entries exceeding this
+limit are replaced with a single ellipsis and an indication of how many entries
+have been dropped.
+-}
+leSymbolLimit : Num -> LegendProperty
+leSymbolLimit =
+    LeSymbolLimit
 
 
 {-| Offset in pixels between legend labels their corresponding symbol or gradient.
@@ -16862,6 +16874,9 @@ legendProperty lp =
 
         LeSymbolFillColor s ->
             ( "symbolFillColor", strSpec s )
+
+        LeSymbolLimit n ->
+            ( "symbolLimit", numSpec n )
 
         LeSymbolOffset x ->
             ( "symbolOffset", numSpec x )

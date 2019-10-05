@@ -5,6 +5,11 @@ _Minor release supporting Vega 5.7._
 ## Additions
 
 - Multi-line axis titles (`axTitleLineHeight`)
+- Legend symbol limit (`leSymbolLimit`)
+
+## Other Changes
+
+- Documentation indicates titles can span multiple lines via a `strs` array.
 
 ---
 

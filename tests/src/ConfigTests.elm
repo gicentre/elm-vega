@@ -160,6 +160,7 @@ configTest3 =
                     , leLabelColor (strSignal "textColor")
                     , leLabelFont (strSignal "font")
                     , leLabelFontSize (numSignal "baseFontSize*1.1")
+                    , leSymbolLimit (num 2)
                     ]
                 ]
     in
