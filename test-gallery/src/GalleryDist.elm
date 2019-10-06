@@ -1128,6 +1128,137 @@ dotbin1 =
     toVega [ width 400, height 90, padding 5, ds, si [], sc [], ax [], mk [] ]
 
 
+quantile1 : Spec
+quantile1 =
+    let
+        ds =
+            dataSource
+                [ data "points" [ daUrl (strSignal "url") ]
+                , data "quantiles" [ daSource "points" ]
+                    |> transform
+                        [ trQuantile (field "u") [ quStep (numSignal "1 / (numQuantiles + 1)") ]
+                        , trFormula "quantileUniform(datum.prob)" "quniform"
+                        , trFormula "quantileNormal(datum.prob)" "qnormal"
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "plotWidth" [ siValue (vNum 250) ]
+                << signal "height" [ siUpdate "plotWidth" ]
+                << signal "numQuantiles"
+                    [ siValue (vNum 100)
+                    , siBind (iRange [ inMin 20, inMax 200, inStep 1 ])
+                    ]
+                << signal "url"
+                    [ siValue (vStr "https://vega.github.io/vega/data/normal-2d.json")
+                    , siBind
+                        (iSelect
+                            [ inOptions
+                                (vStrs
+                                    [ "https://vega.github.io/vega/data/normal-2d.json"
+                                    , "https://vega.github.io/vega/data/uniform-2d.json"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+
+        sc =
+            scales
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "points", daField (field "u") ])
+                    , scNice niTrue
+                    ]
+
+        lo =
+            layout [ loColumns (num 2), loPadding (num 10) ]
+
+        mk =
+            marks
+                << mark group
+                    [ mEncode
+                        [ enUpdate
+                            [ maWidth [ vSignal "plotWidth" ]
+                            , maHeight [ vSignal "plotWidth" ]
+                            ]
+                        ]
+                    , mGroup [ si1 [], sc1 [], ax1 [], mk1 [] ]
+                    ]
+                << mark group
+                    [ mEncode
+                        [ enUpdate
+                            [ maWidth [ vSignal "plotWidth" ]
+                            , maHeight [ vSignal "plotWidth" ]
+                            ]
+                        ]
+                    , mGroup [ si2 [], sc2 [], ax2 [], mk2 [] ]
+                    ]
+
+        si1 =
+            signals
+                << signal "width" [ siUpdate "plotWidth" ]
+
+        sc1 =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doNums (nums [ 0, 1 ]))
+                    ]
+
+        ax1 =
+            axes
+                << axis "xScale" siBottom [ axGrid true, axTitle (str "Theoretical Uniform Quantiles") ]
+                << axis "yScale" siLeft [ axGrid true, axOffset (vNum 10), axTitle (str "Empirical Data Quantiles") ]
+
+        mk1 =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "quantiles") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "quniform") ]
+                            , maY [ vScale "yScale", vField (field "value") ]
+                            , maFill [ vStr "steelblue" ]
+                            , maSize [ vNum 16 ]
+                            ]
+                        ]
+                    ]
+
+        si2 =
+            signals
+                << signal "width" [ siUpdate "plotWidth" ]
+
+        sc2 =
+            scales
+                << scale "xScale"
+                    [ scRange raWidth
+                    , scDomain (doNums (nums [ -3, 3 ]))
+                    ]
+
+        ax2 =
+            axes
+                << axis "xScale" siBottom [ axGrid true, axTitle (str "Theoretical Normal Quantiles") ]
+                << axis "yScale" siLeft [ axGrid true, axDomain false, axLabels false, axTicks false ]
+
+        mk2 =
+            marks
+                << mark symbol
+                    [ mFrom [ srData (str "quantiles") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "qnormal") ]
+                            , maY [ vScale "yScale", vField (field "value") ]
+                            , maFill [ vStr "steelblue" ]
+                            , maSize [ vNum 16 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega [ width 400, height 200, padding 5, ds, si [], sc [], lo, mk [] ]
+
+
 hops1 : Spec
 hops1 =
     let
@@ -1344,7 +1475,7 @@ regression2 =
 
 sourceExample : Spec
 sourceExample =
-    dotbin1
+    quantile1
 
 
 
@@ -1365,6 +1496,7 @@ mySpecs =
         , ( "contour1", contour1 )
         , ( "wheat1", wheat1 )
         , ( "dotbin1", dotbin1 )
+        , ( "quantile1", quantile1 )
         , ( "hops1", hops1 )
         , ( "regression1", regression1 )
         , ( "regression2", regression2 )

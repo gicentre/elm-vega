@@ -162,6 +162,26 @@
     <div id="dotbin1" class="view"></div>
 
     <p>
+      A quantile-quantile (or Q-Q) plot visually compares two probability
+      distributions by plotting a set of matching quantile values for both. For
+      example, plotting the corresponding 1st, 2nd, 3rd, etc., percentiles for
+      each distribution. Q-Q plots are often used to plot an empirical data
+      distribution against a theoretical distribution. If the two distributions
+      are similar, they will lie along a line; notable deviations from a line
+      are evidence of different distribution functions.
+    </p>
+
+    <p>
+      This example compares an empirical sample against two theoretical
+      distributions. Change the input data source (samples from normal or
+      uniform distributions) to observe how different samples compare with the
+      theoretical distributions. The quantile transform produces quantile values
+      for input data; the quantileUniform and quantileNormal expression
+      functions produce the theoretical quantile values.
+    </p>
+    <div id="quantile1" class="view"></div>
+
+    <p>
       Rather than showing a continuous probability distribution, Hypothetical
       Outcome Plots (or HOPs) visualize a set of draws from a distribution,
       where each draw is shown as a new plot in either a small multiples or
