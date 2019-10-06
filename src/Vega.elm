@@ -13822,10 +13822,7 @@ tiFrame =
     TFrame
 
 
-{-| Deprecated in favour of defining a title encoding. For example,
-
-TODO: XXX
-
+{-| Deprecated in favour of defining a title encoding.
 -}
 tiInteractive : Boo -> TitleProperty
 tiInteractive =
@@ -13846,10 +13843,7 @@ tiLineHeight =
     TLineHeight
 
 
-{-| Deprecated in favour of defining a title encoding. For example,
-
-TODO: XXX
-
+{-| Deprecated in favour of defining a title encoding.
 -}
 tiName : String -> TitleProperty
 tiName =
@@ -13871,10 +13865,7 @@ tiOrient =
     TOrient
 
 
-{-| Deprecated in favour of defining a title encoding. For example,
-
-TODO: XXX
-
+{-| Deprecated in favour of defining a title encoding.
 -}
 tiStyle : Str -> TitleProperty
 tiStyle =
