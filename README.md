@@ -3,7 +3,7 @@
 ![elm-vega banner](https://raw.githubusercontent.com/gicentre/elm-vega/master/images/banner.jpg)
 
 [![elm version](https://img.shields.io/badge/Elm-v0.19-blue.svg?style=flat-square)](https://elm-lang.org)
-[![vega version](https://img.shields.io/badge/Vega-v5.6-purple.svg?style=flat-square)](https://vega.github.io/vega/)
+[![vega version](https://img.shields.io/badge/Vega-v5.7-purple.svg?style=flat-square)](https://vega.github.io/vega/)
 
 _Declarative visualization for Elm_
 
@@ -26,8 +26,10 @@ let
                 ]
                 |> transform
                     [ trGeoPoint "projection"
-                        (field "longitude") (field "latitude")
-                    , trVoronoi (field "x") (field "y")
+                        (field "longitude")
+                        (field "latitude")
+                    , trVoronoi (field "x")
+                        (field "y")
                         [ voSize (numSignals [ "width", "height" ]) ]
                     ]
             ]
@@ -41,7 +43,8 @@ let
                 ]
 
     sc =
-        scales << scale "cScale" [ scType scOrdinal, scRange raCategory ]
+        scales
+            << scale "cScale" [ scType scOrdinal, scRange raCategory ]
 
     mk =
         marks
