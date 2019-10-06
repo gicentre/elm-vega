@@ -11,6 +11,7 @@ _Minor release supporting Vega 5.7._
 
 ## Other Changes
 
+- Restructured API documentation to use better thematic grouping of functions with tables of contents.
 - Documentation indicates titles can span multiple lines via a `strs` array.
 - Some additions to the test gallery for new distribution transformations (dotplot, quantile plot).
 

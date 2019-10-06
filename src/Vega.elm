@@ -618,27 +618,31 @@ module Vega exposing
     , bsBins
     , bsStart
     , bsStop
+    , layout
+    , loColumns
+    , loPadding
+    , loPaddingRC
+    , loOffset
+    , loOffsetRC
+    , loHeaderBand
+    , loHeaderBandRC
+    , loFooterBand
+    , loFooterBandRC
+    , loTitleBand
+    , loTitleBandRC
+    , loBounds
+    , bcFlush
+    , bcFull
+    , bcSignal
+    , loAlign
+    , grAlignRow
+    , grAlignColumn
+    , grAlignAll
+    , grAlignEach
+    , grAlignNone
+    , grAlignSignal
     , projections
     , projection
-    , albers
-    , albersUsa
-    , azimuthalEqualArea
-    , azimuthalEquidistant
-    , conicConformal
-    , conicEqualArea
-    , conicEquidistant
-    , equalEarth
-    , equirectangular
-    , gnomonic
-    , identityProjection
-    , mercator
-    , naturalEarth1
-    , orthographic
-    , stereographic
-    , transverseMercator
-    , customProjection
-    , prSignal
-    , projectionValue
     , prType
     , prClipAngle
     , prClipExtent
@@ -659,210 +663,33 @@ module Vega exposing
     , prReflectY
     , prSpacing
     , prTilt
+    , prExtent
+    , prSize
     , prFit
     , feName
     , featureSignal
-    , prExtent
-    , prSize
-    , axes
-    , axis
-    , axBandPosition
-    , axDomain
-    , axDomainColor
-    , axDomainDash
-    , axDomainDashOffset
-    , axDomainOpacity
-    , axDomainWidth
-    , axEncode
-    , axFormat
-    , axFormatAsNum
-    , axFormatAsTemporal
-    , axGrid
-    , axGridColor
-    , axGridOpacity
-    , axGridDash
-    , axGridDashOffset
-    , axGridScale
-    , axGridWidth
-    , axLabels
-    , axLabelBound
-    , axLabelAlign
-    , axLabelBaseline
-    , axLabelAngle
-    , axLabelColor
-    , axLabelOpacity
-    , axLabelFont
-    , axLabelFontSize
-    , axLabelFontStyle
-    , axLabelFontWeight
-    , axLabelFlush
-    , axLabelFlushOffset
-    , axLabelLimit
-    , axLabelPadding
-    , axLabelOverlap
-    , axLabelSeparation
-    , axMinExtent
-    , axMaxExtent
-    , axOffset
-    , axPosition
-    , axTicks
-    , axTickCount
-    , axTemporalTickCount
-    , axTickColor
-    , axTickDash
-    , axTickDashOffset
-    , axTickOpacity
-    , axTickExtra
-    , axTickMinStep
-    , axTickOffset
-    , axTickRound
-    , axTickWidth
-    , axTickSize
-    , axTitle
-    , axTitleAlign
-    , axTitleAnchor
-    , axTitleAngle
-    , axTitleBaseline
-    , axTitleColor
-    , axTitleOpacity
-    , axTitleFont
-    , axTitleFontSize
-    , axTitleFontStyle
-    , axTitleFontWeight
-    , axTitleLimit
-    , axTitleLineHeight
-    , axTitlePadding
-    , axTitleX
-    , axTitleY
-    , axValues
-    , axZIndex
-    , aeAxis
-    , aeTicks
-    , aeGrid
-    , aeLabels
-    , aeTitle
-    , aeDomain
-    , siLeft
-    , siRight
-    , siTop
-    , siBottom
-    , siSignal
-    , osNone
-    , osParity
-    , osGreedy
-    , osSignal
-    , legends
-    , legend
-    , leType
-    , leDirection
-    , leOrient
-    , leFill
-    , leOpacity
-    , leShape
-    , leSize
-    , leStroke
-    , leStrokeDash
-    , leEncode
-    , leFormat
-    , leFormatAsNum
-    , leFormatAsTemporal
-    , leGridAlign
-    , leClipHeight
-    , leColumns
-    , leColumnPadding
-    , leRowPadding
-    , leCornerRadius
-    , leFillColor
-    , leOffset
-    , lePadding
-    , leStrokeColor
-    , leStrokeWidth
-    , leGradientOpacity
-    , leGradientLabelLimit
-    , leGradientLabelOffset
-    , leGradientLength
-    , leGradientThickness
-    , leGradientStrokeColor
-    , leGradientStrokeWidth
-    , leLabelAlign
-    , leLabelBaseline
-    , leLabelColor
-    , leLabelFont
-    , leLabelFontSize
-    , leLabelFontStyle
-    , leLabelFontWeight
-    , leLabelLimit
-    , leLabelOpacity
-    , leLabelOffset
-    , leLabelOverlap
-    , leLabelSeparation
-    , llAnchor
-    , llBounds
-    , llCenter
-    , llDirection
-    , llMargin
-    , llOffset
-    , leSymbolFillColor
-    , leSymbolBaseFillColor
-    , leSymbolBaseStrokeColor
-    , leSymbolDash
-    , leSymbolDashOffset
-    , leSymbolDirection
-    , leSymbolLimit
-    , leSymbolOffset
-    , leSymbolOpacity
-    , leSymbolSize
-    , leSymbolStrokeColor
-    , leSymbolStrokeWidth
-    , leSymbolType
-    , leTickCount
-    , leTickMinStep
-    , leTemporalTickCount
-    , leTitle
-    , leTitleAlign
-    , leTitleAnchor
-    , leTitleBaseline
-    , leTitleColor
-    , leTitleOpacity
-    , leTitleFont
-    , leTitleFontSize
-    , leTitleFontStyle
-    , leTitleFontWeight
-    , leTitleLimit
-    , leTitleLineHeight
-    , leTitleOrient
-    , leTitlePadding
-    , leValues
-    , leX
-    , leY
-    , leZIndex
-    , ltSymbol
-    , ltGradient
-    , ltSignal
-    , loLeft
-    , loTopLeft
-    , loTop
-    , loTopRight
-    , loRight
-    , loBottomRight
-    , loBottom
-    , loBottomLeft
-    , loNone
-    , loSignal
-    , enLegend
-    , enTitle
-    , enLabels
-    , enSymbols
-    , enGradient
-    , enName
-    , enInteractive
+    , albers
+    , albersUsa
+    , azimuthalEqualArea
+    , azimuthalEquidistant
+    , conicConformal
+    , conicEqualArea
+    , conicEquidistant
+    , equalEarth
+    , equirectangular
+    , gnomonic
+    , identityProjection
+    , mercator
+    , naturalEarth1
+    , orthographic
+    , stereographic
+    , transverseMercator
+    , customProjection
+    , prSignal
+    , projectionValue
     , title
     , tiAnchor
     , tiAngle
-    , anStart
-    , anMiddle
-    , anEnd
-    , anchorSignal
     , tiAlign
     , tiBaseline
     , tiColor
@@ -890,29 +717,202 @@ module Vega exposing
     , tiOffset
     , tiOrient
     , tiZIndex
-    , layout
-    , grAlignAll
-    , grAlignEach
-    , grAlignNone
-    , grAlignSignal
-    , grAlignRow
-    , grAlignColumn
-    , bcFlush
-    , bcFull
-    , bcSignal
-    , loAlign
-    , loBounds
-    , loColumns
-    , loPadding
-    , loPaddingRC
-    , loOffset
-    , loOffsetRC
-    , loHeaderBand
-    , loHeaderBandRC
-    , loFooterBand
-    , loFooterBandRC
-    , loTitleBand
-    , loTitleBandRC
+    , anStart
+    , anMiddle
+    , anEnd
+    , anchorSignal
+    , axes
+    , axis
+    , axEncode
+    , axMinExtent
+    , axMaxExtent
+    , axOffset
+    , axPosition
+    , axZIndex
+    , siLeft
+    , siRight
+    , siTop
+    , siBottom
+    , siSignal
+    , osNone
+    , osParity
+    , osGreedy
+    , osSignal
+    , axDomain
+    , axDomainColor
+    , axDomainDash
+    , axDomainDashOffset
+    , axDomainOpacity
+    , axDomainWidth
+    , axGrid
+    , axGridColor
+    , axGridOpacity
+    , axGridDash
+    , axGridDashOffset
+    , axGridScale
+    , axGridWidth
+    , axLabels
+    , axLabelBound
+    , axLabelAlign
+    , axLabelBaseline
+    , axLabelAngle
+    , axLabelColor
+    , axLabelOpacity
+    , axLabelFont
+    , axLabelFontSize
+    , axLabelFontStyle
+    , axLabelFontWeight
+    , axLabelFlush
+    , axLabelFlushOffset
+    , axLabelLimit
+    , axLabelPadding
+    , axLabelOverlap
+    , axLabelSeparation
+    , axFormat
+    , axFormatAsNum
+    , axFormatAsTemporal
+    , axValues
+    , axTicks
+    , axTickCount
+    , axTemporalTickCount
+    , axTickColor
+    , axTickDash
+    , axTickDashOffset
+    , axTickOpacity
+    , axTickExtra
+    , axTickMinStep
+    , axTickOffset
+    , axTickRound
+    , axTickWidth
+    , axTickSize
+    , axBandPosition
+    , axTitle
+    , axTitleAlign
+    , axTitleAnchor
+    , axTitleAngle
+    , axTitleBaseline
+    , axTitleColor
+    , axTitleOpacity
+    , axTitleFont
+    , axTitleFontSize
+    , axTitleFontStyle
+    , axTitleFontWeight
+    , axTitleLimit
+    , axTitleLineHeight
+    , axTitlePadding
+    , axTitleX
+    , axTitleY
+    , aeAxis
+    , aeTicks
+    , aeGrid
+    , aeLabels
+    , aeTitle
+    , aeDomain
+    , legends
+    , legend
+    , leValues
+    , leType
+    , ltSymbol
+    , ltGradient
+    , ltSignal
+    , leGradientOpacity
+    , leGradientLabelLimit
+    , leGradientLabelOffset
+    , leGradientLength
+    , leGradientThickness
+    , leGradientStrokeColor
+    , leGradientStrokeWidth
+    , leLabelAlign
+    , leLabelBaseline
+    , leLabelColor
+    , leLabelFont
+    , leLabelFontSize
+    , leLabelFontStyle
+    , leLabelFontWeight
+    , leLabelLimit
+    , leLabelOpacity
+    , leLabelOffset
+    , leLabelOverlap
+    , leLabelSeparation
+    , leFormat
+    , leFormatAsNum
+    , leFormatAsTemporal
+    , leSymbolFillColor
+    , leSymbolBaseFillColor
+    , leSymbolBaseStrokeColor
+    , leSymbolDash
+    , leSymbolDashOffset
+    , leSymbolDirection
+    , leSymbolLimit
+    , leSymbolOffset
+    , leSymbolOpacity
+    , leSymbolSize
+    , leSymbolStrokeColor
+    , leSymbolStrokeWidth
+    , leSymbolType
+    , leClipHeight
+    , leTickCount
+    , leTickMinStep
+    , leTemporalTickCount
+    , leTitle
+    , leTitleAlign
+    , leTitleAnchor
+    , leTitleBaseline
+    , leTitleColor
+    , leTitleOpacity
+    , leTitleFont
+    , leTitleFontSize
+    , leTitleFontStyle
+    , leTitleFontWeight
+    , leTitleLimit
+    , leTitleLineHeight
+    , leTitleOrient
+    , leTitlePadding
+    , leDirection
+    , leOrient
+    , loLeft
+    , loTopLeft
+    , loTop
+    , loTopRight
+    , loRight
+    , loBottomRight
+    , loBottom
+    , loBottomLeft
+    , loNone
+    , loSignal
+    , leOffset
+    , lePadding
+    , leX
+    , leY
+    , leZIndex
+    , leGridAlign
+    , leColumns
+    , leColumnPadding
+    , leRowPadding
+    , llAnchor
+    , llBounds
+    , llCenter
+    , llDirection
+    , llMargin
+    , llOffset
+    , leFill
+    , leOpacity
+    , leShape
+    , leSize
+    , leStroke
+    , leStrokeDash
+    , leCornerRadius
+    , leFillColor
+    , leStrokeColor
+    , leStrokeWidth
+    , leEncode
+    , enLegend
+    , enTitle
+    , enLabels
+    , enSymbols
+    , enGradient
+    , enName
+    , enInteractive
     , marks
     , mark
     , arc
@@ -956,6 +956,8 @@ module Vega exposing
     , maY2
     , maYC
     , maHeight
+    , maSize
+    , maZIndex
     , maOpacity
     , maFill
     , maFillOpacity
@@ -970,17 +972,27 @@ module Vega exposing
     , maStrokeDashOffset
     , maStrokeJoin
     , maStrokeMiterLimit
+    , maFont
+    , maFontSize
+    , maFontWeight
+    , maFontStyle
+    , maLimit
+    , maDir
+    , maDx
+    , maDy
+    , maEllipsis
+    , maRadius
+    , maText
+    , maTheta
     , maCursor
     , maHRef
     , maTooltip
-    , maZIndex
     , maAlign
     , maBaseline
     , maCornerRadius
     , maInterpolate
     , maTension
     , maDefined
-    , maSize
     , maStartAngle
     , maEndAngle
     , maPadAngle
@@ -994,18 +1006,6 @@ module Vega exposing
     , maShape
     , maSymbol
     , maAngle
-    , maDir
-    , maDx
-    , maDy
-    , maEllipsis
-    , maFont
-    , maFontSize
-    , maFontWeight
-    , maFontStyle
-    , maLimit
-    , maRadius
-    , maText
-    , maTheta
     , maCustom
     , enEnter
     , enUpdate
@@ -1111,7 +1111,6 @@ module Vega exposing
     , cuGrabbing
     , cursorValue
     , config
-    , cfSignals
     , cfAutosize
     , cfBackground
     , cfGroup
@@ -1129,7 +1128,6 @@ module Vega exposing
     , cfeWindow
     , cfMark
     , cfMarks
-    , cfStyle
     , cfAxis
     , axAll
     , axLeft
@@ -1146,6 +1144,8 @@ module Vega exposing
     , leOrientLayout
     , cfTitle
     , cfScaleRange
+    , cfStyle
+    , cfSignals
     , autosize
     , asContent
     , asFit
@@ -1300,24 +1300,51 @@ module Vega exposing
 generate the JSON specs that may be passed to the Vega runtime library to activate
 the visualization.
 
+1.  [Creating a specification](#1-creating-a-vega-specification)
+2.  [Passing values into a specification](#2-passing-values-into-a-vega-specification)
+3.  [Specifying input data](#3-specifying-input-data)
+4.  [Transforming data](#4-transforming-data)
+5.  [Signals, triggers and interaction events](#5-signals-triggers-and-interaction-events)
+6.  [Scales](#6-scales)
+7.  [Layout composition](#7-layout-composition)
+8.  [Map projections](#8-map-projections)
+9.  [Titles](#9-titles)
+10. [Axes](#10-axes)
+11. [Legends](#11-legends)
+12. [Marks](#12-marks)
+13. [Configuration](#13-configuration)
+14. [Supplementary Properties](#14-supplementary-properties)
+15. [Type Reference](#15-type-reference)
 
-# Creating A Vega Specification
+---
+
+
+# 1. Creating A Vega Specification
 
 @docs toVega
 @docs combineSpecs
 
 @docs VProperty
 
+---
 
-# Passing Values into a Vega Specification
+
+# 2. Passing Values into a Vega Specification
 
 Data types such as numbers, strings and Booleans are generated by functions. For
 example, _expressions_ generate new values based on operations applied to
 existing ones; _fields_ reference a column of a data table; _signals_
 respond dynamically to data or interaction.
 
+  - [2.1 Numbers](#2-1-numbers)
+  - [2.2 Strings](#2-2-strings)
+  - [2.3 Booleans](#2-3-booleans)
+  - [2.4 Generic values](#2-4-generic-values)
+  - [2.5 Indirect references](#2-5-indirect-references)
+  - [2.6 Thematic Data Types](#2-6-thematic-data-types)
 
-## Numbers
+
+## 2.1 Numbers
 
 @docs num
 @docs nums
@@ -1328,7 +1355,7 @@ respond dynamically to data or interaction.
 @docs numNull
 
 
-## Strings
+## 2.2 Strings
 
 @docs str
 @docs strs
@@ -1338,7 +1365,7 @@ respond dynamically to data or interaction.
 @docs strNull
 
 
-## Booleans
+## 2.3 Booleans
 
 @docs true
 @docs false
@@ -1348,7 +1375,7 @@ respond dynamically to data or interaction.
 @docs booExpr
 
 
-## Generic Values
+## 2.4 Generic Values
 
 Used by functions that expect values of mixed types.
 
@@ -1375,7 +1402,7 @@ Used by functions that expect values of mixed types.
 @docs vScaleField
 
 
-## Indirect References
+## 2.5 Indirect References
 
 See the
 [Vega field value documentation](https://vega.github.io/vega/docs/types/#FieldValue).
@@ -1390,7 +1417,7 @@ See the
 @docs exField
 
 
-## Thematic Data Types
+## 2.6 Thematic Data Types
 
 
 ### Temporal
@@ -1430,11 +1457,20 @@ See the
 @docs grStop
 @docs grCount
 
+---
 
-# Creating an Input Data Specification
+
+# 3. Specifying Input Data
 
 See the [Vega data](https://vega.github.io/vega/docs/data) and the
 [Vega data reference](https://vega.github.io/vega/docs/scales/#dataref) documentation.
+
+  - [3.1 Data sources](#3-1-data-sources)
+  - [3.2 Data sorting](#3-2-data-sorting)
+  - [3.3 Data parsing and formatting](#3-3-data-parsing-and-formatting)
+
+
+## 3.1 Data Sources
 
 @docs dataSource
 @docs data
@@ -1461,7 +1497,7 @@ See the [Vega data](https://vega.github.io/vega/docs/data) and the
 @docs daReferences
 
 
-## Data Sorting
+## 3.2 Data Sorting
 
 See the
 [Vega sort ](https://vega.github.io/vega/docs/scales/#sort) and
@@ -1479,7 +1515,7 @@ See the
 @docs orderSignal
 
 
-## Data Parsing and Formatting
+## 3.3 Data Parsing and Formatting
 
 @docs csv
 @docs tsv
@@ -1499,18 +1535,41 @@ See the
 @docs foDate
 @docs foUtc
 
+---
 
-# Transforming Data
+
+# 4. Transforming Data
 
 Applying a transform to a data stream can filter or generate new fields in the
 stream, or derive new data streams. Pipe (`|>`) the stream into the `transform`
 function and specify the transform to apply via one or more of these functions.
 See the [Vega transform documentation](https://vega.github.io/vega/docs/transforms).
 
+  - [4.1 Basic Transforms](#4-1-basic-transforms)
+  - [4.2 Geographic Transforms](#4-2-geographic-transforms)
+  - [4.3 Layout Transforms](#4-3-layout-transforms)
+  - [4.4 Hierarchy Transforms](#4-4-hierarchy-transforms)
+
 @docs transform
 
 
-## Basic Transforms
+## 4.1 Basic Transforms
+
+  - [Aggregation](#aggregation)
+  - [Binning](#binning)
+  - [Collection](#collection)
+  - [Text pattern counting](#text-pattern-counting)
+  - [Cross product](#cross-product)
+  - [Probability density functions](#probability-density-function-calculation)
+  - [Regression](#regression)
+  - [Range calculation](#range-calculation)
+  - [Filtering](#filtering)
+  - [Flattening](#flattening)
+  - [Folding and pivoting](#folding-and-pivoting)
+  - [Deriving new fields](#deriving-new-fields)
+  - [Handling missing values](#handling-missing-values)
+  - [Sampling](#sampling)
+  - [Data generation](#data-generation)
 
 
 ### Aggregation
@@ -1799,7 +1858,11 @@ See the
 @docs trSequenceAs
 
 
-## Geographic Transforms
+## 4.2 Geographic Transforms
+
+  - [Contouring](#contouring)
+  - [GeoJSON transformation](#geojson-transformation)
+  - [Graticule generation](#graticule-eneration)
 
 
 ### Contouring
@@ -1858,7 +1921,14 @@ See the
 @docs grPrecision
 
 
-## Layout Transforms
+## 4.3 Layout Transforms
+
+  - [Link paths](#link-paths)
+  - [Angular layouts](#angular-layouts)
+  - [Stacked layouts](#stacked-layouts)
+  - [Force generated layouts](#force-generated-layouts)
+  - [Voronoi diagrams](#voronoi-diagrams)
+  - [Word cloud layouts](#word-cloud-layouts)
 
 
 ### Link Paths
@@ -1913,7 +1983,7 @@ See the
 @docs stSignal
 
 
-### Force-Generated Layouts
+### Force Generated Layouts
 
 See the
 [Vega force documentation](https://vega.github.io/vega/docs/transforms/force/).
@@ -1946,7 +2016,7 @@ See the
 @docs fpId
 
 
-### Voronoi Diagram
+### Voronoi Diagrams
 
 See the
 [Vega Voronoi documentation](https://vega.github.io/vega/docs/transforms/voronoi/).
@@ -1957,7 +2027,7 @@ See the
 @docs voAs
 
 
-### Word Cloud layout
+### Word Cloud Layouts
 
 See the
 [Vega wordcloud documentation](https://vega.github.io/vega/docs/transforms/wordcloud/).
@@ -1979,19 +2049,28 @@ See the
 @docs wcAs
 
 
-## Hierarchy Transforms
+## 4.4 Hierarchy Transforms
+
+  - [Nesting and Stratification](#nesting-and-stratification)
+  - [Packing](#packing)
+  - [Partitioning](#partitioning)
+  - [Trees](#trees)
+  - [Tree maps](#tree-maps)
+
+
+### Nesting and Stratification
 
 See the Vega
 [nest](https://vega.github.io/vega/docs/transforms/nest/),
-[stratify](https://vega.github.io/vega/docs/transforms/stratify/),
-[pack](https://vega.github.io/vega/docs/transforms/pack/),
-[partition](https://vega.github.io/vega/docs/transforms/partition/),
-[tree](https://vega.github.io/vega/docs/transforms/tree/),
-[tree links](https://vega.github.io/vega/docs/transforms/treelinks/) and
-[treemap](https://vega.github.io/vega/docs/transforms/treemap/) documentation.
+[stratify](https://vega.github.io/vega/docs/transforms/stratify/) documentation.
 
 @docs trNest
 @docs trStratify
+
+
+### Packing
+
+See the [Vega pack documentation](https://vega.github.io/vega/docs/transforms/pack/).
 
 @docs trPack
 @docs paField
@@ -2001,6 +2080,11 @@ See the Vega
 @docs paPadding
 @docs paAs
 
+
+### Partitioning
+
+See the [Vega partition documentation](https://vega.github.io/vega/docs/transforms/partition/).
+
 @docs trPartition
 @docs ptField
 @docs ptSort
@@ -2008,6 +2092,13 @@ See the Vega
 @docs ptRound
 @docs ptSize
 @docs ptAs
+
+
+### Trees
+
+See the Vega
+[tree](https://vega.github.io/vega/docs/transforms/tree/) and
+[tree links](https://vega.github.io/vega/docs/transforms/treelinks/) documentation.
 
 @docs trTree
 @docs teField
@@ -2022,6 +2113,11 @@ See the Vega
 @docs teAs
 
 @docs trTreeLinks
+
+
+## Tree Maps
+
+See the [Vega treemap documentation](https://vega.github.io/vega/docs/transforms/treemap/).
 
 @docs trTreemap
 @docs tmField
@@ -2046,13 +2142,20 @@ See the Vega
 @docs tmSize
 @docs tmAs
 
+---
 
-# Signals, Triggers and Interaction Events
+
+# 5. Signals, Triggers and Interaction Events
 
 See the [Vega signal documentation](https://vega.github.io/vega/docs/signals)
 
+  - [5.1 Signals](#5-1-signals)
+  - [5.2 User interface inputs](#5-2-user-interface-inputs)
+  - [5.3 Event handling](#5-3-event-handling)
+  - [5.4 Triggers](#5-4-triggers)
 
-## Signals
+
+## 5.1 Signals
 
 @docs signals
 @docs signal
@@ -2067,7 +2170,7 @@ See the [Vega signal documentation](https://vega.github.io/vega/docs/signals)
 @docs siPushOuter
 
 
-## User Interface Inputs
+## 5.2 User Interface Inputs
 
 See the [Vega signal binding documentation](https://vega.github.io/vega/docs/signals/#bind).
 
@@ -2095,7 +2198,10 @@ See the [Vega signal binding documentation](https://vega.github.io/vega/docs/sig
 @docs inAutocomplete
 
 
-## Event Handling
+## 5.3 Event Handling
+
+  - [Event streams](#event-streams)
+  - [Event types](#event-types)
 
 See the Vega
 [event handler documentation](https://vega.github.io/vega/docs/signals/#handlers) documentation.
@@ -2155,7 +2261,7 @@ See the Vega [event stream documentation](https://vega.github.io/vega/docs/event
 @docs etTimer
 
 
-## Triggers
+## 5.4 Triggers
 
 See the [Vega trigger documentation](https://vega.github.io/vega/docs/triggers).
 
@@ -2167,13 +2273,27 @@ See the [Vega trigger documentation](https://vega.github.io/vega/docs/triggers).
 @docs tgToggle
 @docs tgModifyValues
 
+---
 
-# Specifying Scales
 
-See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
+# 6. Scales
+
+The mapping of data values to visualization channels. See the
+[Vega scale documentation](https://vega.github.io/vega/docs/scales).
+
+  - [6.1 Scale properties](#6-1-scale-properties)
+  - [6.2 Scale types](#6-2-scale-types)
+  - [6.3 Scale domains](#6-3-scale-domains)
+  - [6.4 Scale ranges](#6-4-scale-ranges)
+  - [6.5 Color scales ](#6-5-color-scales)
+  - [6.6 Scale bins](#6-6-scale-bins)
 
 @docs scales
 @docs scale
+
+
+## 6.1 Scale Properties
+
 @docs scReverse
 @docs scRound
 @docs scClamp
@@ -2188,6 +2308,11 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs scPaddingInner
 @docs scPaddingOuter
 @docs scRangeStep
+
+
+### Aligning Scales to Nice Values.
+
+'Nice' values are ones rounded for easy interpretation, such as 100,200,300.
 
 @docs niTrue
 @docs niFalse
@@ -2204,7 +2329,7 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs niSignal
 
 
-## Scale Types
+## 6.2 Scale Types
 
 @docs scType
 
@@ -2227,7 +2352,7 @@ See the [Vega scale documentation](https://vega.github.io/vega/docs/scales).
 @docs scSignal
 
 
-## Scale Domains
+## 6.3 Scale Domains
 
 The extent scaling input data.
 
@@ -2243,7 +2368,7 @@ The extent scaling input data.
 @docs doData
 
 
-## Scale Ranges
+## 6.4 Scale Ranges
 
 The extent of scaled values after transformation.
 
@@ -2267,7 +2392,7 @@ The extent of scaled values after transformation.
 @docs raCustomDefault
 
 
-## Color Scales
+## 6.5 Color Scales
 
 See the Vega [Vega color scale](https://vega.github.io/vega/docs/scales/#properties)
 and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
@@ -2287,7 +2412,7 @@ and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
 @docs lab
 
 
-## Scale Bins
+## 6.6 Scale Bins
 
 @docs bsNums
 @docs bsSignal
@@ -2295,35 +2420,75 @@ and [color scheme](https://vega.github.io/vega/docs/schemes/) documentation.
 @docs bsStart
 @docs bsStop
 
+---
 
-# Specifying Projections
 
-See the
-[Vega map projection documentation](https://vega.github.io/vega/docs/projections).
+# 7. Layout Composition
+
+For arranging collections of marks in a grid to create small multiples, faceted plots etc.
+See the [Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+
+  - [7.1 Arrangement](#7-1-arrangement)
+  - [7.2 Headers, footers and titles](#7-2-headers-footers-and-titles)
+  - [7.3 Bounds calculation](#7-3-bounds-calculation)
+
+@docs layout
+
+
+## 7.1 Arrangement
+
+@docs loColumns
+@docs loPadding
+@docs loPaddingRC
+@docs loOffset
+@docs loOffsetRC
+
+
+## 7.2 Headers, Footers and Titles
+
+@docs loHeaderBand
+@docs loHeaderBandRC
+@docs loFooterBand
+@docs loFooterBandRC
+@docs loTitleBand
+@docs loTitleBandRC
+
+
+## 7.3 Bounds Calculation
+
+@docs loBounds
+@docs bcFlush
+@docs bcFull
+@docs bcSignal
+@docs loAlign
+
+
+### Grid Alignment
+
+@docs grAlignRow
+@docs grAlignColumn
+@docs grAlignAll
+@docs grAlignEach
+@docs grAlignNone
+@docs grAlignSignal
+
+---
+
+
+# 8. Map Projections
+
+The transformation of global longitude/latitude locations into 2d screen position.
+See the [Vega map projection documentation](https://vega.github.io/vega/docs/projections).
+
+  - [8.1 Projection properties](#8-1-projection-properties)
+  - [8.2 Projection types](#8-2-projection-types)
 
 @docs projections
 @docs projection
 
-@docs albers
-@docs albersUsa
-@docs azimuthalEqualArea
-@docs azimuthalEquidistant
-@docs conicConformal
-@docs conicEqualArea
-@docs conicEquidistant
-@docs equalEarth
-@docs equirectangular
-@docs gnomonic
-@docs identityProjection
-@docs mercator
-@docs naturalEarth1
-@docs orthographic
-@docs stereographic
-@docs transverseMercator
-@docs customProjection
-@docs prSignal
 
-@docs projectionValue
+## 8.1 Projection Properties
+
 @docs prType
 @docs prClipAngle
 @docs prClipExtent
@@ -2344,229 +2509,53 @@ See the
 @docs prReflectY
 @docs prSpacing
 @docs prTilt
-@docs prFit
-@docs feName
-@docs featureSignal
 @docs prExtent
 @docs prSize
 
-
-# Specifying Axes
-
-See the [Vega axis documentation](https://vega.github.io/vega/docs/axes/).
-
-@docs axes
-@docs axis
-@docs axBandPosition
-@docs axDomain
-@docs axDomainColor
-@docs axDomainDash
-@docs axDomainDashOffset
-@docs axDomainOpacity
-@docs axDomainWidth
-@docs axEncode
-@docs axFormat
-@docs axFormatAsNum
-@docs axFormatAsTemporal
-@docs axGrid
-@docs axGridColor
-@docs axGridOpacity
-@docs axGridDash
-@docs axGridDashOffset
-@docs axGridScale
-@docs axGridWidth
-@docs axLabels
-@docs axLabelBound
-@docs axLabelAlign
-@docs axLabelBaseline
-@docs axLabelAngle
-@docs axLabelColor
-@docs axLabelOpacity
-@docs axLabelFont
-@docs axLabelFontSize
-@docs axLabelFontStyle
-@docs axLabelFontWeight
-@docs axLabelFlush
-@docs axLabelFlushOffset
-@docs axLabelLimit
-@docs axLabelPadding
-@docs axLabelOverlap
-@docs axLabelSeparation
-@docs axMinExtent
-@docs axMaxExtent
-@docs axOffset
-@docs axPosition
-@docs axTicks
-@docs axTickCount
-@docs axTemporalTickCount
-@docs axTickColor
-@docs axTickDash
-@docs axTickDashOffset
-@docs axTickOpacity
-@docs axTickExtra
-@docs axTickMinStep
-@docs axTickOffset
-@docs axTickRound
-@docs axTickWidth
-@docs axTickSize
-@docs axTitle
-@docs axTitleAlign
-@docs axTitleAnchor
-@docs axTitleAngle
-@docs axTitleBaseline
-@docs axTitleColor
-@docs axTitleOpacity
-@docs axTitleFont
-@docs axTitleFontSize
-@docs axTitleFontStyle
-@docs axTitleFontWeight
-@docs axTitleLimit
-@docs axTitleLineHeight
-@docs axTitlePadding
-@docs axTitleX
-@docs axTitleY
-@docs axValues
-@docs axZIndex
-@docs aeAxis
-@docs aeTicks
-@docs aeGrid
-@docs aeLabels
-@docs aeTitle
-@docs aeDomain
-@docs siLeft
-@docs siRight
-@docs siTop
-@docs siBottom
-@docs siSignal
-@docs osNone
-@docs osParity
-@docs osGreedy
-@docs osSignal
+@docs prFit
+@docs feName
+@docs featureSignal
 
 
-# Specifying Legends
+## 8.2 Projection Types
 
-See the
-[Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+@docs albers
+@docs albersUsa
+@docs azimuthalEqualArea
+@docs azimuthalEquidistant
+@docs conicConformal
+@docs conicEqualArea
+@docs conicEquidistant
+@docs equalEarth
+@docs equirectangular
+@docs gnomonic
+@docs identityProjection
+@docs mercator
+@docs naturalEarth1
+@docs orthographic
+@docs stereographic
+@docs transverseMercator
+@docs customProjection
+@docs prSignal
+@docs projectionValue
 
-@docs legends
-@docs legend
-@docs leType
-@docs leDirection
-@docs leOrient
-@docs leFill
-@docs leOpacity
-@docs leShape
-@docs leSize
-@docs leStroke
-@docs leStrokeDash
-@docs leEncode
-@docs leFormat
-@docs leFormatAsNum
-@docs leFormatAsTemporal
-@docs leGridAlign
-@docs leClipHeight
-@docs leColumns
-@docs leColumnPadding
-@docs leRowPadding
-@docs leCornerRadius
-@docs leFillColor
-@docs leOffset
-@docs lePadding
-@docs leStrokeColor
-@docs leStrokeWidth
-@docs leGradientOpacity
-@docs leGradientLabelLimit
-@docs leGradientLabelOffset
-@docs leGradientLength
-@docs leGradientThickness
-@docs leGradientStrokeColor
-@docs leGradientStrokeWidth
-@docs leLabelAlign
-@docs leLabelBaseline
-@docs leLabelColor
-@docs leLabelFont
-@docs leLabelFontSize
-@docs leLabelFontStyle
-@docs leLabelFontWeight
-@docs leLabelLimit
-@docs leLabelOpacity
-@docs leLabelOffset
-@docs leLabelOverlap
-@docs leLabelSeparation
-@docs llAnchor
-@docs llBounds
-@docs llCenter
-@docs llDirection
-@docs llMargin
-@docs llOffset
-@docs leSymbolFillColor
-@docs leSymbolBaseFillColor
-@docs leSymbolBaseStrokeColor
-@docs leSymbolDash
-@docs leSymbolDashOffset
-@docs leSymbolDirection
-@docs leSymbolLimit
-@docs leSymbolOffset
-@docs leSymbolOpacity
-@docs leSymbolSize
-@docs leSymbolStrokeColor
-@docs leSymbolStrokeWidth
-@docs leSymbolType
-@docs leTickCount
-@docs leTickMinStep
-@docs leTemporalTickCount
-@docs leTitle
-@docs leTitleAlign
-@docs leTitleAnchor
-@docs leTitleBaseline
-@docs leTitleColor
-@docs leTitleOpacity
-@docs leTitleFont
-@docs leTitleFontSize
-@docs leTitleFontStyle
-@docs leTitleFontWeight
-@docs leTitleLimit
-@docs leTitleLineHeight
-@docs leTitleOrient
-@docs leTitlePadding
-@docs leValues
-@docs leX
-@docs leY
-@docs leZIndex
-@docs ltSymbol
-@docs ltGradient
-@docs ltSignal
-@docs loLeft
-@docs loTopLeft
-@docs loTop
-@docs loTopRight
-@docs loRight
-@docs loBottomRight
-@docs loBottom
-@docs loBottomLeft
-@docs loNone
-@docs loSignal
-@docs enLegend
-@docs enTitle
-@docs enLabels
-@docs enSymbols
-@docs enGradient
-@docs enName
-@docs enInteractive
+---
 
 
-# Specifying Titles
+# 9. Titles
 
-See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
+See the [Vega title documentation](https://vega.github.io/vega/docs/title/).
+
+  - [9.1 Title properties](#9-1-title-properties)
+  - [9.2 Text anchors](#9-2-test-anchors)
 
 @docs title
+
+
+## 9.1 Title Properties
+
 @docs tiAnchor
 @docs tiAngle
-@docs anStart
-@docs anMiddle
-@docs anEnd
-@docs anchorSignal
 @docs tiAlign
 @docs tiBaseline
 @docs tiColor
@@ -2596,43 +2585,341 @@ See the [Vega title documentation](https://vega.github.io/vega/docs/title/)
 @docs tiZIndex
 
 
-# Specifying Layout
+## 9.2 Text Anchors
 
-See the [Vega layout documentation](https://vega.github.io/vega/docs/layout/).
+@docs anStart
+@docs anMiddle
+@docs anEnd
+@docs anchorSignal
 
-@docs layout
-@docs grAlignAll
-@docs grAlignEach
-@docs grAlignNone
-@docs grAlignSignal
-@docs grAlignRow
-@docs grAlignColumn
-@docs bcFlush
-@docs bcFull
-@docs bcSignal
-@docs loAlign
-@docs loBounds
-@docs loColumns
-@docs loPadding
-@docs loPaddingRC
-@docs loOffset
-@docs loOffsetRC
-@docs loHeaderBand
-@docs loHeaderBandRC
-@docs loFooterBand
-@docs loFooterBandRC
-@docs loTitleBand
-@docs loTitleBandRC
+---
 
 
-# Specifying Marks
+# 10. Axes
 
-See the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
+The visual appearance of chart axes. See the
+[Vega axis documentation](https://vega.github.io/vega/docs/axes/).
 
-## Top-Level Marks
+  - [10.1 Axis positioning and extent](#10-1-axis-positioning-and-extent)
+  - [10.2 Axis line](#10-2-axis-line)
+  - [10.3 Axis grid Lines](#10-3-axis-grid-lines)
+  - [10.4 Axis labels](#10-4-axis-labels)
+  - [10.5 Axis ticks](#10-5-axis-ticks)
+  - [10.6 Axis title](#10-6-axis-title)
+  - [10.7 Axis elements](#10-7-axis-elements)
+
+@docs axes
+@docs axis
+
+@docs axEncode
+
+
+## 10.1 Axis Positioning and Extent
+
+@docs axMinExtent
+@docs axMaxExtent
+@docs axOffset
+@docs axPosition
+@docs axZIndex
+
+
+### Positioning
+
+@docs siLeft
+@docs siRight
+@docs siTop
+@docs siBottom
+@docs siSignal
+
+
+### Overlap Strategies
+
+@docs osNone
+@docs osParity
+@docs osGreedy
+@docs osSignal
+
+
+## 10.2 Axis line
+
+@docs axDomain
+@docs axDomainColor
+@docs axDomainDash
+@docs axDomainDashOffset
+@docs axDomainOpacity
+@docs axDomainWidth
+
+
+## 10.3 Axis Grid Lines
+
+@docs axGrid
+@docs axGridColor
+@docs axGridOpacity
+@docs axGridDash
+@docs axGridDashOffset
+@docs axGridScale
+@docs axGridWidth
+
+
+## 10.4 Axis Labels
+
+@docs axLabels
+@docs axLabelBound
+@docs axLabelAlign
+@docs axLabelBaseline
+@docs axLabelAngle
+@docs axLabelColor
+@docs axLabelOpacity
+@docs axLabelFont
+@docs axLabelFontSize
+@docs axLabelFontStyle
+@docs axLabelFontWeight
+@docs axLabelFlush
+@docs axLabelFlushOffset
+@docs axLabelLimit
+@docs axLabelPadding
+@docs axLabelOverlap
+@docs axLabelSeparation
+@docs axFormat
+@docs axFormatAsNum
+@docs axFormatAsTemporal
+@docs axValues
+
+
+## 10.5 Axis Ticks
+
+@docs axTicks
+@docs axTickCount
+@docs axTemporalTickCount
+@docs axTickColor
+@docs axTickDash
+@docs axTickDashOffset
+@docs axTickOpacity
+@docs axTickExtra
+@docs axTickMinStep
+@docs axTickOffset
+@docs axTickRound
+@docs axTickWidth
+@docs axTickSize
+@docs axBandPosition
+
+
+## 10.6 Axis Title
+
+@docs axTitle
+@docs axTitleAlign
+@docs axTitleAnchor
+@docs axTitleAngle
+@docs axTitleBaseline
+@docs axTitleColor
+@docs axTitleOpacity
+@docs axTitleFont
+@docs axTitleFontSize
+@docs axTitleFontStyle
+@docs axTitleFontWeight
+@docs axTitleLimit
+@docs axTitleLineHeight
+@docs axTitlePadding
+@docs axTitleX
+@docs axTitleY
+
+
+## 10.7 Axis Elements
+
+@docs aeAxis
+@docs aeTicks
+@docs aeGrid
+@docs aeLabels
+@docs aeTitle
+@docs aeDomain
+
+---
+
+
+# 11. Legends
+
+See the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
+
+  - [11.1 Legend type](#11-1-legend-type)
+  - [11.2 Legend gradient](#11-2-legend-gradient)
+  - [11.3 Legend labels](#11-3-legend-labels)
+  - [11.4 Legend symbols](#11-4-legend-symbols)
+  - [11.5 Legend ticks](#11-5-legend-ticks)
+  - [11.6 Legend title](#11-6-legend-title)
+  - [11.7 Legend positioning and layout](#11-7-legend-positioning-and-layout)
+  - [11.8 Legend appearance](#11-8-legend-appearance)
+  - [11.9 Legend encoding](#11-9-legend-encoding)
+
+@docs legends
+@docs legend
+@docs leValues
+
+
+## 11.1 Legend Type
+
+@docs leType
+@docs ltSymbol
+@docs ltGradient
+@docs ltSignal
+
+
+## 11.2 Legend Gradient
+
+@docs leGradientOpacity
+@docs leGradientLabelLimit
+@docs leGradientLabelOffset
+@docs leGradientLength
+@docs leGradientThickness
+@docs leGradientStrokeColor
+@docs leGradientStrokeWidth
+
+
+## 11.3 Legend Labels
+
+@docs leLabelAlign
+@docs leLabelBaseline
+@docs leLabelColor
+@docs leLabelFont
+@docs leLabelFontSize
+@docs leLabelFontStyle
+@docs leLabelFontWeight
+@docs leLabelLimit
+@docs leLabelOpacity
+@docs leLabelOffset
+@docs leLabelOverlap
+@docs leLabelSeparation
+@docs leFormat
+@docs leFormatAsNum
+@docs leFormatAsTemporal
+
+
+## 11.4 Legend Symbols
+
+@docs leSymbolFillColor
+@docs leSymbolBaseFillColor
+@docs leSymbolBaseStrokeColor
+@docs leSymbolDash
+@docs leSymbolDashOffset
+@docs leSymbolDirection
+@docs leSymbolLimit
+@docs leSymbolOffset
+@docs leSymbolOpacity
+@docs leSymbolSize
+@docs leSymbolStrokeColor
+@docs leSymbolStrokeWidth
+@docs leSymbolType
+@docs leClipHeight
+
+
+## 11.5 Legend Ticks
+
+@docs leTickCount
+@docs leTickMinStep
+@docs leTemporalTickCount
+
+
+## 11.6 Legend Title
+
+@docs leTitle
+@docs leTitleAlign
+@docs leTitleAnchor
+@docs leTitleBaseline
+@docs leTitleColor
+@docs leTitleOpacity
+@docs leTitleFont
+@docs leTitleFontSize
+@docs leTitleFontStyle
+@docs leTitleFontWeight
+@docs leTitleLimit
+@docs leTitleLineHeight
+@docs leTitleOrient
+@docs leTitlePadding
+
+
+## 11.7 Legend Positioning and Layout
+
+@docs leDirection
+@docs leOrient
+@docs loLeft
+@docs loTopLeft
+@docs loTop
+@docs loTopRight
+@docs loRight
+@docs loBottomRight
+@docs loBottom
+@docs loBottomLeft
+@docs loNone
+@docs loSignal
+@docs leOffset
+@docs lePadding
+@docs leX
+@docs leY
+@docs leZIndex
+
+
+### Layout
+
+@docs leGridAlign
+@docs leColumns
+@docs leColumnPadding
+@docs leRowPadding
+@docs llAnchor
+@docs llBounds
+@docs llCenter
+@docs llDirection
+@docs llMargin
+@docs llOffset
+
+
+## 11.8 Legend Appearance
+
+@docs leFill
+@docs leOpacity
+@docs leShape
+@docs leSize
+@docs leStroke
+@docs leStrokeDash
+@docs leCornerRadius
+@docs leFillColor
+@docs leStrokeColor
+@docs leStrokeWidth
+
+
+## 11.9 Legend Encoding
+
+For custom encoding of legend appearance.
+
+@docs leEncode
+@docs enLegend
+@docs enTitle
+@docs enLabels
+@docs enSymbols
+@docs enGradient
+@docs enName
+@docs enInteractive
+
+---
+
+
+# 12. Marks
+
+The primary means of providing a visual representation of data values. See the
+[Vega mark documentation](https://vega.github.io/vega/docs/marks).
+
+  - [12.1 Top-level marks](#12-1-top-level-marks)
+  - [12.2 Faceting](#12-2-faceting)
+  - [12.3 Lower-level mark properties](#12-3-lower-level-mark-properties)
+  - [12.4 Mark encoding](#12-4-mark-encoding)
+  - [12.5 Cursors](#12-5-cursors)
+
+## 12.1 Top-Level Marks
 
 @docs marks
 @docs mark
+
+
+### Mark Types
+
 @docs arc
 @docs area
 @docs image
@@ -2645,6 +2932,10 @@ See the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
 @docs symbol
 @docs text
 @docs trail
+
+
+### Top-Level Mark Properties
+
 @docs mClip
 @docs mDescription
 @docs mEncode
@@ -2665,7 +2956,7 @@ See the [Vega mark documentation](https://vega.github.io/vega/docs/marks).
 @docs srData
 
 
-## Faceting
+## 12.2 Faceting
 
 Split up a data source between group mark items.
 
@@ -2675,9 +2966,12 @@ Split up a data source between group mark items.
 @docs faAggregate
 
 
-## Lower-level Mark Properties
+## 12.3 Lower-level Mark Properties
 
 See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
+
+
+### Mark Positioning and Size
 
 @docs maX
 @docs maX2
@@ -2687,6 +2981,12 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maY2
 @docs maYC
 @docs maHeight
+@docs maSize
+@docs maZIndex
+
+
+### Mark Coloring
+
 @docs maOpacity
 @docs maFill
 @docs maFillOpacity
@@ -2695,23 +2995,49 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs black
 @docs white
 @docs maStrokeOpacity
+
+
+### Mark Stroke Appearance
+
 @docs maStrokeWidth
 @docs maStrokeCap
 @docs maStrokeDash
 @docs maStrokeDashOffset
 @docs maStrokeJoin
 @docs maStrokeMiterLimit
+
+
+### Mark Text
+
+@docs maFont
+@docs maFontSize
+@docs maFontWeight
+@docs maFontStyle
+@docs maLimit
+@docs maDir
+@docs maDx
+@docs maDy
+@docs maEllipsis
+@docs maRadius
+@docs maText
+@docs maTheta
+
+
+### Interaction Cues
+
 @docs maCursor
 @docs maHRef
 @docs maTooltip
-@docs maZIndex
+
+
+### Mark-Specific Properties
+
 @docs maAlign
 @docs maBaseline
 @docs maCornerRadius
 @docs maInterpolate
 @docs maTension
 @docs maDefined
-@docs maSize
 @docs maStartAngle
 @docs maEndAngle
 @docs maPadAngle
@@ -2725,22 +3051,11 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maShape
 @docs maSymbol
 @docs maAngle
-@docs maDir
-@docs maDx
-@docs maDy
-@docs maEllipsis
-@docs maFont
-@docs maFontSize
-@docs maFontWeight
-@docs maFontStyle
-@docs maLimit
-@docs maRadius
-@docs maText
-@docs maTheta
+
 @docs maCustom
 
 
-## Encoding
+## 12.4 Mark Encoding
 
 See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/marks/#encode).
 
@@ -2814,7 +3129,7 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs textDirectionValue
 
 
-## Cursors
+## 12.5 Cursors
 
 See the
 [CSS cursor documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor#Keyword%20values)
@@ -2857,28 +3172,35 @@ See the
 @docs cuGrabbing
 @docs cursorValue
 
+---
 
-# Configuring Visualization Appearance
 
-See the
+# 13. Configuration
+
+Providing consistent default settings across a specification. See the
 [Vega configuration documentation](https://vega.github.io/vega/docs/config/).
+
+  - [13.1 Configuring the view](#13-1-configuring-the-view)
+  - [13.2 Configuring events](#13-2-configuring-events)
+  - [13.3 Configuring marks](#13-3-configuring-marks)
+  - [13.4 Configuring axes](#13-4-configuring-axes)
+  - [13.5 Configuring legends](#13-5-configuring-legends)
+  - [13.6 Configuring titles](#13-6-configuring-titles)
+  - [13.7 Configuring scales](#13-7-configuring-scales)
+  - [13.8 Configuring styles](#13-8-configuring-styles)
+  - [13.9 Configuration signals](#13-9-configuration-signals)
 
 @docs config
 
 
-## Configuration Signals
-
-@docs cfSignals
-
-
-## View Configuration
+## 13.1 Configuring the View
 
 @docs cfAutosize
 @docs cfBackground
 @docs cfGroup
 
 
-## Event Configuration
+## 13.2 Configuring Events
 
 @docs cfEventHandling
 
@@ -2897,18 +3219,13 @@ See the
 @docs cfeWindow
 
 
-## Mark Configuration
+## 13.3 Configuring Marks
 
 @docs cfMark
 @docs cfMarks
 
 
-## Style Configuration
-
-@docs cfStyle
-
-
-## Axis Configuration
+## 13.4 Configuring Axes
 
 @docs cfAxis
 @docs axAll
@@ -2921,7 +3238,7 @@ See the
 @docs axBand
 
 
-## Legend Configuration
+## 13.5 Configuring Legends
 
 @docs cfLegend
 @docs leBorderStrokeDash
@@ -2930,17 +3247,29 @@ See the
 @docs leOrientLayout
 
 
-## Title Configuration
+## 13.6 Configuring Titles
 
 @docs cfTitle
 
 
-## Scale Range Configuration
+## 13.7 Configuring Scales
 
 @docs cfScaleRange
 
 
-# Supplementary Properties
+## 13.8 Configuring Styles
+
+@docs cfStyle
+
+
+## 13.9 Configuration Signals
+
+@docs cfSignals
+
+---
+
+
+# 14. Supplementary Properties
 
 See the
 [Vega specification documentation](https://vega.github.io/vega/docs/specification/)
@@ -2967,7 +3296,7 @@ See the
 ---
 
 
-# Type Reference
+# 15. Type Reference
 
 Types that are not specified directly, provided here for reference with links
 to the functions that generate them.
