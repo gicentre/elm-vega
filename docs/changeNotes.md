@@ -5,6 +5,7 @@ _Minor release supporting Vega 5.7._
 ## Additions
 
 - Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`).
+- `maLineBreak` and `maLineHeight` for multi-line text marks.
 - Subtitles and associated customisation (`tiSubtitle`, `tiSubtitleColor`, `tiSubtitleFont`, `tiSubtitleFontSize`, `tiSubtitleFontStyle`, `tiSubtitleFontWeight`, `tiSubtitleLineHeight` and `tiSubtitlePadding`).
 - Legend symbol limit (`leSymbolLimit`).
 - `trDotBin` transform and associated property functions (`dbroupBy`, `dbStep`, `dbSmooth`, `dbSignal`, `dbAs`) for dotplot binning.

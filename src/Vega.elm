@@ -982,6 +982,8 @@ module Vega exposing
     , maFontWeight
     , maFontStyle
     , maLimit
+    , maLineBreak
+    , maLineHeight
     , maDir
     , maDx
     , maDy
@@ -3030,6 +3032,8 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maFontWeight
 @docs maFontStyle
 @docs maLimit
+@docs maLineBreak
+@docs maLineHeight
 @docs maDir
 @docs maDx
 @docs maDy
@@ -4658,8 +4662,9 @@ type MarkInterpolation
 [maUrl](#maUrl), [maAspect](#maAspect), [maPath](#maPath), [maShape](#maShape),
 [maSymbol](#maSymbol), [maAngle](#maAngle), [maDir](#maDir), [maDx](#maDx), [maDy](#maDy),
 [maEllipsis](#maEllipsis), [maFont](#maFont), [maFontSize](#maFontSize),
-[maFontWeight](#maFontWeight), [maFontStyle](#maFontStyle), [maLimit](#maLimit),
-[maRadius](#maRadius), [maText](#maText) and [maTheta](#maTheta).
+[maFontWeight](#maFontWeight), [maFontStyle](#maFontStyle), [maLineBreak](#maLineBreak),
+[maLineHeight](#maLineHeight), [maLimit](#maLimit), [maRadius](#maRadius), [maText](#maText)
+and [maTheta](#maTheta).
 -}
 type MarkProperty
     = MX (List Value)
@@ -4722,6 +4727,8 @@ type MarkProperty
     | MFontSize (List Value)
     | MFontWeight (List Value)
     | MFontStyle (List Value)
+    | MLineBreak (List Value)
+    | MLineHeight (List Value)
     | MLimit (List Value)
     | MRadius (List Value)
     | MText (List Value)
@@ -10859,6 +10866,21 @@ limit.
 maLimit : List Value -> MarkProperty
 maLimit =
     MLimit
+
+
+{-| A delimeter, such as a newline character, used to break text strings into
+multiple lines. Ignored if input text is specified via multi-line `strs`.
+-}
+maLineBreak : List Value -> MarkProperty
+maLineBreak =
+    MLineBreak
+
+
+{-| The height in pixels of each line of text in a multi-line text mark.
+-}
+maLineHeight : List Value -> MarkProperty
+maLineHeight =
+    MLineHeight
 
 
 {-| The opacity of a mark in the range 0 to 1.
@@ -17997,6 +18019,12 @@ markProperty mProp =
 
         MLimit vals ->
             ( "limit", valRef vals )
+
+        MLineBreak vals ->
+            ( "lineBreak", valRef vals )
+
+        MLineHeight vals ->
+            ( "lineHeight", valRef vals )
 
         MRadius vals ->
             ( "radius", valRef vals )

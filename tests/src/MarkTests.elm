@@ -595,7 +595,11 @@ textTest =
                     ]
                 << mark text
                     [ mEncode
-                        [ enEnter [ maFill [ vStr "#000" ], maText [ vStr "Text Label" ] ]
+                        [ enEnter
+                            [ maFill [ vStr "#000" ]
+                            , maText [ vStr "Text Label\nsplit over\nthree lines" ]
+                            , maLineBreak [ vStr "\n" ]
+                            ]
                         , enUpdate
                             [ maOpacity [ vNum 1 ]
                             , maX [ vSignal "x" ]
@@ -609,6 +613,7 @@ textTest =
                             , maFontStyle [ vSignal "fontStyle" ]
                             , maFontWeight [ vSignal "fontWeight" ]
                             , maLimit [ vSignal "limit" ]
+                            , maLineHeight [ vSignal "fontSize*1.2" ]
                             ]
                         , enHover [ maOpacity [ vNum 0.5 ] ]
                         ]
