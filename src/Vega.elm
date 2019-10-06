@@ -14426,7 +14426,8 @@ trFormulaInitOnly exp fName =
 
 
 {-| Consolidate geographic data into a single feature collection. This can be
-captured as a signal that will represent the consolidated feature collection.
+captured as a signal that will represent the consolidated feature collection. If
+an empty list is provided as the parameter, the data are not projected (identity projection).
 -}
 trGeoJson : List GeoJsonProperty -> Transform
 trGeoJson =
