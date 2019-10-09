@@ -5,11 +5,16 @@ _Minor release supporting Vega 5.7._
 ## Additions
 
 - Multi-line titles and spacing (`tiLineHeight`, `axTitleLineHeight`, `leTitleLineHeight`).
-- `maLineBreak` and `maLineHeight` for multi-line text marks.
 - Subtitles and associated customisation (`tiSubtitle`, `tiSubtitleColor`, `tiSubtitleFont`, `tiSubtitleFontSize`, `tiSubtitleFontStyle`, `tiSubtitleFontWeight`, `tiSubtitleLineHeight` and `tiSubtitlePadding`).
+- `tiEncodeElements` and associated `teTitle`, `teSubtitle` and `teGroup` for dynamic customization of title elements.
+- `maLineBreak` and `maLineHeight` for multi-line text marks.
 - Legend symbol limit (`leSymbolLimit`).
 - `trDotBin` transform and associated property functions (`dbroupBy`, `dbStep`, `dbSmooth`, `dbSignal`, `dbAs`) for dotplot binning.
 - `trQuantile` transform and associated property functions (`quGroupBy`, `quProbs`, `quStep`, `quAs`) for quantile generation.
+
+## Deprecations
+
+- `tiEncode` deprecated in favour of `tiEncodeElements`.
 
 ## Other Changes
 
