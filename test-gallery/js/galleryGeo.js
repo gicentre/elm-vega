@@ -12596,6 +12596,32 @@ var author$project$Vega$groupMarkProperty = function (mProp) {
 	}
 	return author$project$Vega$markProperty(mProp);
 };
+var author$project$Vega$TeTitle = 0;
+var author$project$Vega$teTitle = 0;
+var author$project$Vega$titleElementLabel = function (te) {
+	switch (te) {
+		case 0:
+			return 'title';
+		case 1:
+			return 'subtitle';
+		default:
+			return 'group';
+	}
+};
+var author$project$Vega$titleEncodingSpec = function (encs) {
+	return elm$json$Json$Encode$object(
+		A2(
+			elm$core$List$map,
+			function (_n0) {
+				var el = _n0.a;
+				var eps = _n0.b;
+				return _Utils_Tuple2(
+					author$project$Vega$titleElementLabel(el),
+					elm$json$Json$Encode$object(
+						A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+			},
+			encs));
+};
 var author$project$Vega$titleFrameSpec = function (tf) {
 	switch (tf.$) {
 		case 1:
@@ -12618,7 +12644,7 @@ var author$project$Vega$titleProperty = function (tProp) {
 			return _Utils_Tuple2(
 				'text',
 				author$project$Vega$strSpec(s));
-		case 18:
+		case 19:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
@@ -12662,99 +12688,107 @@ var author$project$Vega$titleProperty = function (tProp) {
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
-				elm$json$Json$Encode$object(
-					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+				author$project$Vega$titleEncodingSpec(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(author$project$Vega$teTitle, eps)
+						])));
 		case 9:
+			var encs = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				author$project$Vega$titleEncodingSpec(encs));
+		case 10:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				author$project$Vega$strSpec(s));
-		case 10:
+		case 11:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				author$project$Vega$numSpec(n));
-		case 11:
+		case 12:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				author$project$Vega$strSpec(s));
-		case 12:
+		case 13:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				author$project$Vega$valueSpec(v));
-		case 13:
+		case 14:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'fame',
 				author$project$Vega$titleFrameSpec(fr));
-		case 14:
+		case 15:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				author$project$Vega$booSpec(b));
-		case 15:
+		case 16:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				author$project$Vega$numSpec(n));
-		case 16:
+		case 17:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				author$project$Vega$numSpec(n));
-		case 19:
+		case 20:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				elm$json$Json$Encode$string(s));
-		case 20:
+		case 21:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
 				author$project$Vega$strSpec(s));
-		case 21:
+		case 22:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitle',
 				author$project$Vega$strSpec(s));
-		case 22:
+		case 23:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleColor',
 				author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFont',
 				author$project$Vega$strSpec(s));
-		case 24:
+		case 25:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontSize',
 				author$project$Vega$numSpec(n));
-		case 25:
+		case 26:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontStyle',
 				author$project$Vega$strSpec(s));
-		case 26:
+		case 27:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontWeight',
 				author$project$Vega$valueSpec(v));
-		case 27:
+		case 28:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleLineHeight',
 				author$project$Vega$numSpec(n));
-		case 28:
+		case 29:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitlePadding',
 				author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'offset',

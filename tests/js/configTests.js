@@ -11273,13 +11273,39 @@ var author$project$Vega$symbolValue = function (sym) {
 		author$project$Vega$symbolLabel(sym));
 };
 var author$project$Vega$TSubtitle = function (a) {
-	return {$: 21, a: a};
+	return {$: 22, a: a};
 };
 var author$project$Vega$tiSubtitle = author$project$Vega$TSubtitle;
 var author$project$Vega$TText = function (a) {
 	return {$: 0, a: a};
 };
 var author$project$Vega$VTitle = 13;
+var author$project$Vega$TeTitle = 0;
+var author$project$Vega$teTitle = 0;
+var author$project$Vega$titleElementLabel = function (te) {
+	switch (te) {
+		case 0:
+			return 'title';
+		case 1:
+			return 'subtitle';
+		default:
+			return 'group';
+	}
+};
+var author$project$Vega$titleEncodingSpec = function (encs) {
+	return elm$json$Json$Encode$object(
+		A2(
+			elm$core$List$map,
+			function (_n0) {
+				var el = _n0.a;
+				var eps = _n0.b;
+				return _Utils_Tuple2(
+					author$project$Vega$titleElementLabel(el),
+					elm$json$Json$Encode$object(
+						A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+			},
+			encs));
+};
 var author$project$Vega$titleFrameSpec = function (tf) {
 	switch (tf.$) {
 		case 1:
@@ -11302,7 +11328,7 @@ var author$project$Vega$titleProperty = function (tProp) {
 			return _Utils_Tuple2(
 				'text',
 				author$project$Vega$strSpec(s));
-		case 18:
+		case 19:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
@@ -11346,99 +11372,107 @@ var author$project$Vega$titleProperty = function (tProp) {
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
-				elm$json$Json$Encode$object(
-					A2(elm$core$List$map, author$project$Vega$encodingProperty, eps)));
+				author$project$Vega$titleEncodingSpec(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(author$project$Vega$teTitle, eps)
+						])));
 		case 9:
+			var encs = tProp.a;
+			return _Utils_Tuple2(
+				'encode',
+				author$project$Vega$titleEncodingSpec(encs));
+		case 10:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				author$project$Vega$strSpec(s));
-		case 10:
+		case 11:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				author$project$Vega$numSpec(n));
-		case 11:
+		case 12:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				author$project$Vega$strSpec(s));
-		case 12:
+		case 13:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				author$project$Vega$valueSpec(v));
-		case 13:
+		case 14:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'fame',
 				author$project$Vega$titleFrameSpec(fr));
-		case 14:
+		case 15:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				author$project$Vega$booSpec(b));
-		case 15:
+		case 16:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				author$project$Vega$numSpec(n));
-		case 16:
+		case 17:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				author$project$Vega$numSpec(n));
-		case 19:
+		case 20:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				elm$json$Json$Encode$string(s));
-		case 20:
+		case 21:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
 				author$project$Vega$strSpec(s));
-		case 21:
+		case 22:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitle',
 				author$project$Vega$strSpec(s));
-		case 22:
+		case 23:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleColor',
 				author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFont',
 				author$project$Vega$strSpec(s));
-		case 24:
+		case 25:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontSize',
 				author$project$Vega$numSpec(n));
-		case 25:
+		case 26:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontStyle',
 				author$project$Vega$strSpec(s));
-		case 26:
+		case 27:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontWeight',
 				author$project$Vega$valueSpec(v));
-		case 27:
+		case 28:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleLineHeight',
 				author$project$Vega$numSpec(n));
-		case 28:
+		case 29:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitlePadding',
 				author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'offset',
@@ -11522,29 +11556,51 @@ var elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
-var author$project$ConfigTests$scatter = function (cf) {
-	var ti = A2(
-		author$project$Vega$title,
-		author$project$Vega$strs(
-			_List_fromArray(
-				['Engine size', 'vs', 'Engine Efficiency'])),
-		_List_fromArray(
-			[
-				author$project$Vega$tiSubtitle(
-				author$project$Vega$strs(
-					_List_fromArray(
-						['Being a graphical comparison', 'of two quantitative variables'])))
-			]));
-	var sc = A2(
-		elm$core$Basics$composeL,
-		A2(
+var author$project$ConfigTests$scatter = F2(
+	function (tps, cf) {
+		var ti = A2(
+			author$project$Vega$title,
+			author$project$Vega$strs(
+				_List_fromArray(
+					['Engine size', 'vs', 'Engine Efficiency'])),
+			_Utils_ap(
+				tps,
+				_List_fromArray(
+					[
+						author$project$Vega$tiSubtitle(
+						author$project$Vega$strs(
+							_List_fromArray(
+								['Being a graphical comparison', 'of two quantitative variables'])))
+					])));
+		var sc = A2(
 			elm$core$Basics$composeL,
 			A2(
 				elm$core$Basics$composeL,
-				author$project$Vega$scales,
+				A2(
+					elm$core$Basics$composeL,
+					author$project$Vega$scales,
+					A2(
+						author$project$Vega$scale,
+						'xScale',
+						_List_fromArray(
+							[
+								author$project$Vega$scType(author$project$Vega$scLinear),
+								author$project$Vega$scRound(author$project$Vega$true),
+								author$project$Vega$scNice(author$project$Vega$niTrue),
+								author$project$Vega$scZero(author$project$Vega$true),
+								author$project$Vega$scDomain(
+								author$project$Vega$doData(
+									_List_fromArray(
+										[
+											author$project$Vega$daDataset('cars'),
+											author$project$Vega$daField(
+											author$project$Vega$field('Horsepower'))
+										]))),
+								author$project$Vega$scRange(author$project$Vega$raWidth)
+							]))),
 				A2(
 					author$project$Vega$scale,
-					'xScale',
+					'yScale',
 					_List_fromArray(
 						[
 							author$project$Vega$scType(author$project$Vega$scLinear),
@@ -11557,187 +11613,168 @@ var author$project$ConfigTests$scatter = function (cf) {
 									[
 										author$project$Vega$daDataset('cars'),
 										author$project$Vega$daField(
-										author$project$Vega$field('Horsepower'))
+										author$project$Vega$field('Miles_per_Gallon'))
 									]))),
-							author$project$Vega$scRange(author$project$Vega$raWidth)
+							author$project$Vega$scRange(author$project$Vega$raHeight)
 						]))),
 			A2(
 				author$project$Vega$scale,
-				'yScale',
+				'cScale',
 				_List_fromArray(
 					[
-						author$project$Vega$scType(author$project$Vega$scLinear),
-						author$project$Vega$scRound(author$project$Vega$true),
-						author$project$Vega$scNice(author$project$Vega$niTrue),
-						author$project$Vega$scZero(author$project$Vega$true),
+						author$project$Vega$scType(author$project$Vega$scOrdinal),
+						author$project$Vega$scRange(author$project$Vega$raCategory),
 						author$project$Vega$scDomain(
 						author$project$Vega$doData(
 							_List_fromArray(
 								[
 									author$project$Vega$daDataset('cars'),
 									author$project$Vega$daField(
-									author$project$Vega$field('Miles_per_Gallon'))
-								]))),
-						author$project$Vega$scRange(author$project$Vega$raHeight)
-					]))),
-		A2(
-			author$project$Vega$scale,
-			'cScale',
-			_List_fromArray(
-				[
-					author$project$Vega$scType(author$project$Vega$scOrdinal),
-					author$project$Vega$scRange(author$project$Vega$raCategory),
-					author$project$Vega$scDomain(
-					author$project$Vega$doData(
-						_List_fromArray(
-							[
-								author$project$Vega$daDataset('cars'),
-								author$project$Vega$daField(
-								author$project$Vega$field('Origin'))
-							])))
-				])));
-	var mk = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$marks,
-		A2(
-			author$project$Vega$mark,
-			author$project$Vega$symbol,
-			_List_fromArray(
-				[
-					author$project$Vega$mFrom(
-					_List_fromArray(
-						[
-							author$project$Vega$srData(
-							author$project$Vega$str('cars'))
-						])),
-					author$project$Vega$mEncode(
-					_List_fromArray(
-						[
-							author$project$Vega$enUpdate(
-							_List_fromArray(
-								[
-									author$project$Vega$maX(
-									_List_fromArray(
-										[
-											author$project$Vega$vScale('xScale'),
-											author$project$Vega$vField(
-											author$project$Vega$field('Horsepower'))
-										])),
-									author$project$Vega$maY(
-									_List_fromArray(
-										[
-											author$project$Vega$vScale('yScale'),
-											author$project$Vega$vField(
-											author$project$Vega$field('Miles_per_Gallon'))
-										])),
-									author$project$Vega$maFill(
-									_List_fromArray(
-										[
-											author$project$Vega$vScale('cScale'),
-											author$project$Vega$vField(
-											author$project$Vega$field('Origin'))
-										])),
-									author$project$Vega$maShape(
-									_List_fromArray(
-										[
-											author$project$Vega$symbolValue(author$project$Vega$symCircle)
-										]))
-								]))
-						]))
-				])));
-	var lg = A2(
-		elm$core$Basics$composeL,
-		author$project$Vega$legends,
-		author$project$Vega$legend(
-			_List_fromArray(
-				[
-					author$project$Vega$leFill('cScale'),
-					author$project$Vega$leTitle(
-					author$project$Vega$strs(
-						_List_fromArray(
-							['Origin', '(country of Manufacture)']))),
-					author$project$Vega$leEncode(
-					_List_fromArray(
-						[
-							author$project$Vega$enSymbols(
-							_List_fromArray(
-								[
-									author$project$Vega$enUpdate(
-									_List_fromArray(
-										[
-											author$project$Vega$maShape(
-											_List_fromArray(
-												[
-													author$project$Vega$symbolValue(author$project$Vega$symCircle)
-												]))
-										]))
-								]))
-						]))
-				])));
-	var ds = author$project$Vega$dataSource(
-		_List_fromArray(
-			[
-				A2(
-				author$project$Vega$transform,
+									author$project$Vega$field('Origin'))
+								])))
+					])));
+		var mk = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$marks,
+			A2(
+				author$project$Vega$mark,
+				author$project$Vega$symbol,
 				_List_fromArray(
 					[
-						author$project$Vega$trFilter(
-						author$project$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null'))
-					]),
-				A2(
-					author$project$Vega$data,
-					'cars',
+						author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								author$project$Vega$srData(
+								author$project$Vega$str('cars'))
+							])),
+						author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enUpdate(
+								_List_fromArray(
+									[
+										author$project$Vega$maX(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('xScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('Horsepower'))
+											])),
+										author$project$Vega$maY(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('yScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('Miles_per_Gallon'))
+											])),
+										author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												author$project$Vega$vScale('cScale'),
+												author$project$Vega$vField(
+												author$project$Vega$field('Origin'))
+											])),
+										author$project$Vega$maShape(
+										_List_fromArray(
+											[
+												author$project$Vega$symbolValue(author$project$Vega$symCircle)
+											]))
+									]))
+							]))
+					])));
+		var lg = A2(
+			elm$core$Basics$composeL,
+			author$project$Vega$legends,
+			author$project$Vega$legend(
+				_List_fromArray(
+					[
+						author$project$Vega$leFill('cScale'),
+						author$project$Vega$leTitle(
+						author$project$Vega$strs(
+							_List_fromArray(
+								['Origin', '(country of Manufacture)']))),
+						author$project$Vega$leEncode(
+						_List_fromArray(
+							[
+								author$project$Vega$enSymbols(
+								_List_fromArray(
+									[
+										author$project$Vega$enUpdate(
+										_List_fromArray(
+											[
+												author$project$Vega$maShape(
+												_List_fromArray(
+													[
+														author$project$Vega$symbolValue(author$project$Vega$symCircle)
+													]))
+											]))
+									]))
+							]))
+					])));
+		var ds = author$project$Vega$dataSource(
+			_List_fromArray(
+				[
+					A2(
+					author$project$Vega$transform,
 					_List_fromArray(
 						[
-							author$project$Vega$daUrl(
-							author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
-						])))
-			]));
-	var ax = A2(
-		elm$core$Basics$composeL,
-		A2(
+							author$project$Vega$trFilter(
+							author$project$Vega$expr('datum[\'Horsepower\'] != null && datum[\'Miles_per_Gallon\'] != null && datum[\'Acceleration\'] != null'))
+						]),
+					A2(
+						author$project$Vega$data,
+						'cars',
+						_List_fromArray(
+							[
+								author$project$Vega$daUrl(
+								author$project$Vega$str('https://vega.github.io/vega/data/cars.json'))
+							])))
+				]));
+		var ax = A2(
 			elm$core$Basics$composeL,
-			author$project$Vega$axes,
+			A2(
+				elm$core$Basics$composeL,
+				author$project$Vega$axes,
+				A3(
+					author$project$Vega$axis,
+					'xScale',
+					author$project$Vega$siBottom,
+					_List_fromArray(
+						[
+							author$project$Vega$axGrid(author$project$Vega$true),
+							author$project$Vega$axTickCount(
+							author$project$Vega$num(6)),
+							author$project$Vega$axTitle(
+							author$project$Vega$str('Horsepower'))
+						]))),
 			A3(
 				author$project$Vega$axis,
-				'xScale',
-				author$project$Vega$siBottom,
+				'yScale',
+				author$project$Vega$siLeft,
 				_List_fromArray(
 					[
 						author$project$Vega$axGrid(author$project$Vega$true),
 						author$project$Vega$axTickCount(
 						author$project$Vega$num(6)),
 						author$project$Vega$axTitle(
-						author$project$Vega$str('Horsepower'))
-					]))),
-		A3(
-			author$project$Vega$axis,
-			'yScale',
-			author$project$Vega$siLeft,
+						author$project$Vega$strs(
+							_List_fromArray(
+								['Efficiency', '(miles per gallon)'])))
+					])));
+		return author$project$Vega$toVega(
 			_List_fromArray(
 				[
-					author$project$Vega$axGrid(author$project$Vega$true),
-					author$project$Vega$axTickCount(
-					author$project$Vega$num(6)),
-					author$project$Vega$axTitle(
-					author$project$Vega$strs(
-						_List_fromArray(
-							['Efficiency', '(miles per gallon)'])))
-				])));
-	return author$project$Vega$toVega(
-		_List_fromArray(
-			[
-				author$project$Vega$width(400),
-				author$project$Vega$height(300),
-				cf,
-				ti,
-				ds,
-				sc(_List_Nil),
-				ax(_List_Nil),
-				lg(_List_Nil),
-				mk(_List_Nil)
-			]));
-};
+					author$project$Vega$width(400),
+					author$project$Vega$height(300),
+					cf,
+					ti,
+					ds,
+					sc(_List_Nil),
+					ax(_List_Nil),
+					lg(_List_Nil),
+					mk(_List_Nil)
+				]));
+	});
 var author$project$Vega$VConfig = 6;
 var author$project$Vega$autosizeProperty = function (asCfg) {
 	switch (asCfg.$) {
@@ -12301,7 +12338,9 @@ var author$project$Vega$config = function (cps) {
 		elm$json$Json$Encode$object(
 			A2(elm$core$List$map, author$project$Vega$configProperty, cps)));
 };
-var author$project$ConfigTests$configTest1 = author$project$ConfigTests$scatter(
+var author$project$ConfigTests$configTest1 = A2(
+	author$project$ConfigTests$scatter,
+	_List_Nil,
 	author$project$Vega$config(_List_Nil));
 var author$project$Vega$AxAll = 0;
 var author$project$Vega$axAll = 0;
@@ -12377,11 +12416,11 @@ var author$project$Vega$TDx = function (a) {
 };
 var author$project$Vega$tiDx = author$project$Vega$TDx;
 var author$project$Vega$TFontSize = function (a) {
-	return {$: 10, a: a};
+	return {$: 11, a: a};
 };
 var author$project$Vega$tiFontSize = author$project$Vega$TFontSize;
 var author$project$Vega$TFontWeight = function (a) {
-	return {$: 12, a: a};
+	return {$: 13, a: a};
 };
 var author$project$Vega$tiFontWeight = author$project$Vega$TFontWeight;
 var elm$core$Basics$negate = function (n) {
@@ -12446,7 +12485,7 @@ var author$project$ConfigTests$configTest2 = function () {
 					_List_fromArray(
 						['rgb(248,118,109)', 'rgb(0,186,56)', 'rgb(97,156,255)'])))
 			]));
-	return author$project$ConfigTests$scatter(cf);
+	return A2(author$project$ConfigTests$scatter, _List_Nil, cf);
 }();
 var author$project$Vega$AxLabelFontSize = function (a) {
 	return {$: 29, a: a};
@@ -12821,15 +12860,15 @@ var author$project$Vega$TColor = function (a) {
 };
 var author$project$Vega$tiColor = author$project$Vega$TColor;
 var author$project$Vega$TFont = function (a) {
-	return {$: 9, a: a};
+	return {$: 10, a: a};
 };
 var author$project$Vega$tiFont = author$project$Vega$TFont;
 var author$project$Vega$TLineHeight = function (a) {
-	return {$: 16, a: a};
+	return {$: 17, a: a};
 };
 var author$project$Vega$tiLineHeight = author$project$Vega$TLineHeight;
 var author$project$Vega$TOffset = function (a) {
-	return {$: 17, a: a};
+	return {$: 18, a: a};
 };
 var author$project$Vega$tiOffset = author$project$Vega$TOffset;
 var author$project$Vega$VNum = function (a) {
@@ -12926,37 +12965,180 @@ var author$project$ConfigTests$configTest3 = function () {
 						author$project$Vega$numSignal('baseFontSize*1.5'))
 					]))
 			]));
-	return author$project$ConfigTests$scatter(cf);
+	return A2(author$project$ConfigTests$scatter, _List_Nil, cf);
+}();
+var author$project$Vega$Enter = function (a) {
+	return {$: 0, a: a};
+};
+var author$project$Vega$enEnter = author$project$Vega$Enter;
+var author$project$Vega$Hover = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$enHover = author$project$Vega$Hover;
+var author$project$Vega$EnInteractive = function (a) {
+	return {$: 5, a: a};
+};
+var author$project$Vega$enInteractive = author$project$Vega$EnInteractive;
+var author$project$Vega$MFontStyle = function (a) {
+	return {$: 50, a: a};
+};
+var author$project$Vega$maFontStyle = author$project$Vega$MFontStyle;
+var author$project$Vega$MHeight = function (a) {
+	return {$: 7, a: a};
+};
+var author$project$Vega$maHeight = author$project$Vega$MHeight;
+var author$project$Vega$MWidth = function (a) {
+	return {$: 3, a: a};
+};
+var author$project$Vega$maWidth = author$project$Vega$MWidth;
+var author$project$Vega$TeGroup = 2;
+var author$project$Vega$teGroup = 2;
+var author$project$Vega$TeSubtitle = 1;
+var author$project$Vega$teSubtitle = 1;
+var author$project$Vega$TEncodeElements = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$tiEncodeElements = author$project$Vega$TEncodeElements;
+var author$project$Vega$VSignal = function (a) {
+	return {$: 9, a: a};
+};
+var author$project$Vega$vSignal = author$project$Vega$VSignal;
+var author$project$ConfigTests$configTest4 = function () {
+	var titleEnc = _List_fromArray(
+		[
+			author$project$Vega$enEnter(
+			_List_fromArray(
+				[
+					author$project$Vega$maFill(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('steelBlue')
+						]))
+				]))
+		]);
+	var subtitleEnc = _List_fromArray(
+		[
+			author$project$Vega$enEnter(
+			_List_fromArray(
+				[
+					author$project$Vega$maFill(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('firebrick')
+						]))
+				])),
+			author$project$Vega$enUpdate(
+			_List_fromArray(
+				[
+					author$project$Vega$maFontStyle(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('normal')
+						]))
+				])),
+			author$project$Vega$enHover(
+			_List_fromArray(
+				[
+					author$project$Vega$maFontStyle(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('italic')
+						]))
+				])),
+			author$project$Vega$enInteractive(author$project$Vega$true)
+		]);
+	var groupEnc = _List_fromArray(
+		[
+			author$project$Vega$enEnter(
+			_List_fromArray(
+				[
+					author$project$Vega$maFill(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('#eee')
+						])),
+					author$project$Vega$maWidth(
+					_List_fromArray(
+						[
+							author$project$Vega$vSignal('width')
+						])),
+					author$project$Vega$maHeight(
+					_List_fromArray(
+						[
+							author$project$Vega$vNum(75)
+						]))
+				]))
+		]);
+	var tes = _List_fromArray(
+		[
+			author$project$Vega$tiEncodeElements(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(author$project$Vega$teTitle, titleEnc),
+					_Utils_Tuple2(author$project$Vega$teSubtitle, subtitleEnc),
+					_Utils_Tuple2(author$project$Vega$teGroup, groupEnc)
+				]))
+		]);
+	return A2(
+		author$project$ConfigTests$scatter,
+		tes,
+		author$project$Vega$config(_List_Nil));
+}();
+var author$project$Vega$TEncode = function (a) {
+	return {$: 8, a: a};
+};
+var author$project$Vega$tiEncode = author$project$Vega$TEncode;
+var author$project$ConfigTests$configTest5 = function () {
+	var tiEnc = _List_fromArray(
+		[
+			author$project$Vega$enEnter(
+			_List_fromArray(
+				[
+					author$project$Vega$maFill(
+					_List_fromArray(
+						[
+							author$project$Vega$vStr('steelBlue')
+						]))
+				]))
+		]);
+	var tes = _List_fromArray(
+		[
+			author$project$Vega$tiEncode(tiEnc)
+		]);
+	return A2(
+		author$project$ConfigTests$scatter,
+		tes,
+		author$project$Vega$config(_List_Nil));
 }();
 var author$project$Vega$TSubtitleColor = function (a) {
-	return {$: 22, a: a};
+	return {$: 23, a: a};
 };
 var author$project$Vega$tiSubtitleColor = author$project$Vega$TSubtitleColor;
 var author$project$Vega$TSubtitleFont = function (a) {
-	return {$: 23, a: a};
+	return {$: 24, a: a};
 };
 var author$project$Vega$tiSubtitleFont = author$project$Vega$TSubtitleFont;
 var author$project$Vega$TSubtitleFontSize = function (a) {
-	return {$: 24, a: a};
+	return {$: 25, a: a};
 };
 var author$project$Vega$tiSubtitleFontSize = author$project$Vega$TSubtitleFontSize;
 var author$project$Vega$TSubtitleFontStyle = function (a) {
-	return {$: 25, a: a};
+	return {$: 26, a: a};
 };
 var author$project$Vega$tiSubtitleFontStyle = author$project$Vega$TSubtitleFontStyle;
 var author$project$Vega$TSubtitleFontWeight = function (a) {
-	return {$: 26, a: a};
+	return {$: 27, a: a};
 };
 var author$project$Vega$tiSubtitleFontWeight = author$project$Vega$TSubtitleFontWeight;
 var author$project$Vega$TSubtitleLineHeight = function (a) {
-	return {$: 27, a: a};
+	return {$: 28, a: a};
 };
 var author$project$Vega$tiSubtitleLineHeight = author$project$Vega$TSubtitleLineHeight;
 var author$project$Vega$TSubtitlePadding = function (a) {
-	return {$: 28, a: a};
+	return {$: 29, a: a};
 };
 var author$project$Vega$tiSubtitlePadding = author$project$Vega$TSubtitlePadding;
-var author$project$ConfigTests$configTest4 = function () {
+var author$project$ConfigTests$configTest6 = function () {
 	var cf = author$project$Vega$config(
 		_List_fromArray(
 			[
@@ -13010,7 +13192,7 @@ var author$project$ConfigTests$configTest4 = function () {
 						author$project$Vega$numSignal('baseFontSize*2'))
 					]))
 			]));
-	return author$project$ConfigTests$scatter(cf);
+	return A2(author$project$ConfigTests$scatter, _List_Nil, cf);
 }();
 var author$project$Vega$VBackground = 1;
 var author$project$Vega$background = function (s) {
@@ -13018,10 +13200,6 @@ var author$project$Vega$background = function (s) {
 		1,
 		author$project$Vega$strSpec(s));
 };
-var author$project$Vega$Enter = function (a) {
-	return {$: 0, a: a};
-};
-var author$project$Vega$enEnter = author$project$Vega$Enter;
 var author$project$Vega$ESBetween = F2(
 	function (a, b) {
 		return {$: 2, a: a, b: b};
@@ -13074,18 +13252,10 @@ var author$project$Vega$MBaseline = function (a) {
 	return {$: 24, a: a};
 };
 var author$project$Vega$maBaseline = author$project$Vega$MBaseline;
-var author$project$Vega$MHeight = function (a) {
-	return {$: 7, a: a};
-};
-var author$project$Vega$maHeight = author$project$Vega$MHeight;
 var author$project$Vega$MText = function (a) {
 	return {$: 55, a: a};
 };
 var author$project$Vega$maText = author$project$Vega$MText;
-var author$project$Vega$MWidth = function (a) {
-	return {$: 3, a: a};
-};
-var author$project$Vega$maWidth = author$project$Vega$MWidth;
 var author$project$Vega$Rect = 6;
 var author$project$Vega$rect = 6;
 var author$project$Vega$SiOn = function (a) {
@@ -13105,10 +13275,6 @@ var author$project$Vega$VNums = function (a) {
 	return {$: 3, a: a};
 };
 var author$project$Vega$vNums = author$project$Vega$VNums;
-var author$project$Vega$VSignal = function (a) {
-	return {$: 9, a: a};
-};
-var author$project$Vega$vSignal = author$project$Vega$VSignal;
 var author$project$Vega$white = author$project$Vega$vStr('white');
 var author$project$ConfigTests$dragSpec = function (cf) {
 	var si = A2(
@@ -13257,7 +13423,7 @@ var author$project$ConfigTests$dragSpec = function (cf) {
 				mk(_List_Nil)
 			]));
 };
-var author$project$ConfigTests$configTest5 = author$project$ConfigTests$dragSpec(
+var author$project$ConfigTests$configTest7 = author$project$ConfigTests$dragSpec(
 	author$project$Vega$config(_List_Nil));
 var author$project$Vega$CfEventHandling = function (a) {
 	return {$: 3, a: a};
@@ -13267,7 +13433,7 @@ var author$project$Vega$CfEView = function (a) {
 	return {$: 4, a: a};
 };
 var author$project$Vega$cfeView = author$project$Vega$CfEView;
-var author$project$ConfigTests$configTest6 = author$project$ConfigTests$dragSpec(
+var author$project$ConfigTests$configTest8 = author$project$ConfigTests$dragSpec(
 	author$project$Vega$config(
 		_List_fromArray(
 			[
@@ -13288,9 +13454,11 @@ var author$project$ConfigTests$mySpecs = author$project$Vega$combineSpecs(
 			_Utils_Tuple2('configTest3', author$project$ConfigTests$configTest3),
 			_Utils_Tuple2('configTest4', author$project$ConfigTests$configTest4),
 			_Utils_Tuple2('configTest5', author$project$ConfigTests$configTest5),
-			_Utils_Tuple2('configTest6', author$project$ConfigTests$configTest6)
+			_Utils_Tuple2('configTest6', author$project$ConfigTests$configTest6),
+			_Utils_Tuple2('configTest7', author$project$ConfigTests$configTest7),
+			_Utils_Tuple2('configTest8', author$project$ConfigTests$configTest8)
 		]));
-var author$project$ConfigTests$sourceExample = author$project$ConfigTests$configTest4;
+var author$project$ConfigTests$sourceExample = author$project$ConfigTests$configTest5;
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
