@@ -7,13 +7,12 @@ import Json.Encode
 import Vega exposing (..)
 
 
-scatter : ( VProperty, Spec ) -> Spec
-scatter cf =
+scatter : List TitleProperty -> ( VProperty, Spec ) -> Spec
+scatter tps cf =
     let
         ti =
             title (strs [ "Engine size", "vs", "Engine Efficiency" ])
-                [ tiSubtitle (strs [ "Being a graphical comparison", "of two quantitative variables" ])
-                ]
+                (tps ++ [ tiSubtitle (strs [ "Being a graphical comparison", "of two quantitative variables" ]) ])
 
         ds =
             dataSource
@@ -88,7 +87,7 @@ scatter cf =
 
 configTest1 : Spec
 configTest1 =
-    scatter (config [])
+    scatter [] (config [])
 
 
 configTest2 : Spec
@@ -127,7 +126,7 @@ configTest2 =
                     )
                 ]
     in
-    scatter cf
+    scatter [] cf
 
 
 configTest3 : Spec
@@ -169,11 +168,45 @@ configTest3 =
                     ]
                 ]
     in
-    scatter cf
+    scatter [] cf
 
 
 configTest4 : Spec
 configTest4 =
+    let
+        titleEnc =
+            [ enEnter [ maFill [ vStr "steelBlue" ] ] ]
+
+        subtitleEnc =
+            [ enEnter [ maFill [ vStr "firebrick" ] ]
+            , enUpdate [ maFontStyle [ vStr "normal" ] ]
+            , enHover [ maFontStyle [ vStr "italic" ] ]
+            , enInteractive true
+            ]
+
+        groupEnc =
+            [ enEnter [ maFill [ vStr "#eee" ], maWidth [ vSignal "width" ], maHeight [ vNum 75 ] ] ]
+
+        tes =
+            [ tiEncodeElements [ ( teTitle, titleEnc ), ( teSubtitle, subtitleEnc ), ( teGroup, groupEnc ) ] ]
+    in
+    scatter tes (config [])
+
+
+configTest5 : Spec
+configTest5 =
+    let
+        tiEnc =
+            [ enEnter [ maFill [ vStr "steelBlue" ] ] ]
+
+        tes =
+            [ tiEncode tiEnc ]
+    in
+    scatter tes (config [])
+
+
+configTest6 : Spec
+configTest6 =
     let
         cf =
             config
@@ -194,7 +227,7 @@ configTest4 =
                     ]
                 ]
     in
-    scatter cf
+    scatter [] cf
 
 
 dragSpec : ( VProperty, Spec ) -> Spec
@@ -243,19 +276,19 @@ dragSpec cf =
         [ width 400, height 300, cf, background (str "rgb(252,247,236)"), si [], mk [] ]
 
 
-configTest5 : Spec
-configTest5 =
+configTest7 : Spec
+configTest7 =
     dragSpec (config [])
 
 
-configTest6 : Spec
-configTest6 =
+configTest8 : Spec
+configTest8 =
     dragSpec (config [ cfEventHandling [ cfeView [] ] ])
 
 
 sourceExample : Spec
 sourceExample =
-    configTest4
+    configTest5
 
 
 
@@ -271,6 +304,8 @@ mySpecs =
         , ( "configTest4", configTest4 )
         , ( "configTest5", configTest5 )
         , ( "configTest6", configTest6 )
+        , ( "configTest7", configTest7 )
+        , ( "configTest8", configTest8 )
         ]
 
 
