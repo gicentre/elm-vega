@@ -1,3 +1,11 @@
+# V5.3 ➡ V5.4
+
+_Minor release supporting Vega 5.8._
+
+## Additions
+
+- Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
+
 # V5.2 ➡ V5.3
 
 _Minor release supporting Vega 5.7._
