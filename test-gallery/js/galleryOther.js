@@ -6124,27 +6124,27 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'zindex',
 				$author$project$Vega$valRef(vals));
-		case 30:
+		case 34:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'startAngle',
 				$author$project$Vega$valRef(vals));
-		case 31:
+		case 35:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'endAngle',
 				$author$project$Vega$valRef(vals));
-		case 32:
+		case 36:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'padAngle',
 				$author$project$Vega$valRef(vals));
-		case 33:
+		case 37:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'innerRadius',
 				$author$project$Vega$valRef(vals));
-		case 34:
+		case 38:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'outerRadius',
@@ -6154,57 +6154,77 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'cornerRadius',
 				$author$project$Vega$valRef(vals));
-		case 35:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'orient',
-				$author$project$Vega$valRef(vals));
 		case 26:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
-				'interpolate',
+				'cornerRadiusTopLeft',
 				$author$project$Vega$valRef(vals));
 		case 27:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
-				'tension',
+				'cornerRadiusTopRight',
 				$author$project$Vega$valRef(vals));
 		case 28:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
-				'defined',
-				$author$project$Vega$valRef(vals));
-		case 36:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'clip',
-				$author$project$Vega$valRef(vals));
-		case 38:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'aspect',
-				$author$project$Vega$valRef(vals));
-		case 37:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'url',
-				$author$project$Vega$valRef(vals));
-		case 39:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'path',
-				$author$project$Vega$valRef(vals));
-		case 40:
-			var vals = mProp.a;
-			return _Utils_Tuple2(
-				'shape',
+				'cornerRadiusBottomLeft',
 				$author$project$Vega$valRef(vals));
 		case 29:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
-				'size',
+				'cornerRadiusBottomRight',
+				$author$project$Vega$valRef(vals));
+		case 39:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'orient',
+				$author$project$Vega$valRef(vals));
+		case 30:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'interpolate',
+				$author$project$Vega$valRef(vals));
+		case 31:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'tension',
+				$author$project$Vega$valRef(vals));
+		case 32:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'defined',
+				$author$project$Vega$valRef(vals));
+		case 40:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'clip',
+				$author$project$Vega$valRef(vals));
+		case 42:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'aspect',
 				$author$project$Vega$valRef(vals));
 		case 41:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'url',
+				$author$project$Vega$valRef(vals));
+		case 43:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'path',
+				$author$project$Vega$valRef(vals));
+		case 44:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'shape',
+				$author$project$Vega$valRef(vals));
+		case 33:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'size',
+				$author$project$Vega$valRef(vals));
+		case 45:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6214,7 +6234,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$valRef(vals));
-		case 42:
+		case 46:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'angle',
@@ -6224,72 +6244,72 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$valRef(vals));
-		case 43:
+		case 47:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dir',
 				$author$project$Vega$valRef(vals));
-		case 44:
+		case 48:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$valRef(vals));
-		case 45:
+		case 49:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$valRef(vals));
-		case 46:
+		case 50:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'ellipsis',
 				$author$project$Vega$valRef(vals));
-		case 47:
+		case 51:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$valRef(vals));
-		case 48:
+		case 52:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$valRef(vals));
-		case 49:
+		case 53:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valRef(vals));
-		case 50:
+		case 54:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$valRef(vals));
-		case 53:
+		case 57:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$valRef(vals));
-		case 51:
+		case 55:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineBreak',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 56:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$valRef(vals));
-		case 54:
+		case 58:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'radius',
 				$author$project$Vega$valRef(vals));
-		case 55:
+		case 59:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$valRef(vals));
-		case 56:
+		case 60:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'theta',
@@ -7255,7 +7275,7 @@ var $author$project$Vega$MTransform = function (a) {
 var $author$project$Vega$mTransform = $author$project$Vega$MTransform;
 var $author$project$Vega$MCustom = F2(
 	function (a, b) {
-		return {$: 57, a: a, b: b};
+		return {$: 61, a: a, b: b};
 	});
 var $author$project$Vega$maCustom = $author$project$Vega$MCustom;
 var $author$project$Vega$MFill = function (a) {
@@ -7263,7 +7283,7 @@ var $author$project$Vega$MFill = function (a) {
 };
 var $author$project$Vega$maFill = $author$project$Vega$MFill;
 var $author$project$Vega$MSize = function (a) {
-	return {$: 29, a: a};
+	return {$: 33, a: a};
 };
 var $author$project$Vega$maSize = $author$project$Vega$MSize;
 var $author$project$Vega$MStroke = function (a) {
@@ -12458,7 +12478,7 @@ var $author$project$Vega$MHeight = function (a) {
 };
 var $author$project$Vega$maHeight = $author$project$Vega$MHeight;
 var $author$project$Vega$MText = function (a) {
-	return {$: 55, a: a};
+	return {$: 59, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$MTooltip = function (a) {
@@ -13188,7 +13208,7 @@ var $author$project$Vega$groupMarkProperty = function (mProp) {
 	_v0$24:
 	while (true) {
 		switch (mProp.$) {
-			case 36:
+			case 40:
 				if ((mProp.a.b && (mProp.a.a.$ === 4)) && (!mProp.a.b.b)) {
 					var _v1 = mProp.a;
 					var b = _v1.a.a;
@@ -14070,11 +14090,11 @@ var $author$project$Vega$FGroup = function (a) {
 };
 var $author$project$Vega$fGroup = $author$project$Vega$FGroup;
 var $author$project$Vega$MAngle = function (a) {
-	return {$: 42, a: a};
+	return {$: 46, a: a};
 };
 var $author$project$Vega$maAngle = $author$project$Vega$MAngle;
 var $author$project$Vega$MFontSize = function (a) {
-	return {$: 48, a: a};
+	return {$: 52, a: a};
 };
 var $author$project$Vega$maFontSize = $author$project$Vega$MFontSize;
 var $author$project$Vega$MX2 = function (a) {
@@ -14538,7 +14558,7 @@ var $author$project$Vega$MBaseline = function (a) {
 };
 var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
 var $author$project$Vega$MDir = function (a) {
-	return {$: 43, a: a};
+	return {$: 47, a: a};
 };
 var $author$project$Vega$maDir = $author$project$Vega$MDir;
 var $author$project$Vega$MFillOpacity = function (a) {
