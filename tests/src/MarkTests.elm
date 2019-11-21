@@ -361,6 +361,7 @@ shapeTest =
                     , "conicConformal"
                     , "conicEqualArea"
                     , "conicEquidistant"
+                    , "equalEarth"
                     , "equirectangular"
                     , "gnomonic"
                     , "mercator"
