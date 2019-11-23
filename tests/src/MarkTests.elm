@@ -323,7 +323,12 @@ pathTest =
                 << signal "path" [ siValue (vStr "M-50,-50 L50,50 V-50 L-50,50 Z"), siBind (iText [ inPlaceholder "SVG path string" ]) ]
                 << signal "x" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
                 << signal "y" [ siValue (vNum 100), siBind (iRange [ inMin 10, inMax 190, inStep 1 ]) ]
+                << signal "scaleX" [ siValue (vNum 1), siBind (iRange [ inMin 0.1, inMax 2, inStep 0.01 ]) ]
+                << signal "scaleY" [ siValue (vNum 1), siBind (iRange [ inMin 0.1, inMax 2, inStep 0.01 ]) ]
+                << signal "angle" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
                 << signal "strokeWidth" [ siValue (vNum 4), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
+                << signal "strokeCap" [ siValue (vStr "butt"), siBind (iRadio [ inOptions (vStrs [ "butt", "round", "square" ]) ]) ]
+                << signal "strokeJoin" [ siValue (vStr "miter"), siBind (iRadio [ inOptions (vStrs [ "bevel", "miter", "round" ]) ]) ]
                 << signal "color" [ siValue (vStr "both"), siBind (iRadio [ inOptions (vStrs [ "fill", "stroke", "both" ]) ]) ]
 
         mk =
@@ -334,9 +339,14 @@ pathTest =
                         , enUpdate
                             [ maX [ vSignal "x" ]
                             , maY [ vSignal "y" ]
+                            , maScaleX [ vSignal "scaleX" ]
+                            , maScaleY [ vSignal "scaleY" ]
                             , maPath [ vSignal "path" ]
                             , maOpacity [ vNum 1 ]
+                            , maAngle [ vSignal "angle" ]
                             , maStrokeWidth [ vSignal "strokeWidth" ]
+                            , maStrokeCap [ vSignal "strokeCap" ]
+                            , maStrokeJoin [ vSignal "strokeJoin" ]
                             , maFillOpacity [ vSignal "color === 'fill' || color === 'both' ? 1 : 0" ]
                             , maStrokeOpacity [ vSignal "color === 'stroke' || color === 'both' ? 1 : 0" ]
                             ]

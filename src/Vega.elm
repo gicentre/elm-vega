@@ -1020,6 +1020,8 @@ module Vega exposing
     , maShape
     , maSymbol
     , maAngle
+    , maScaleX
+    , maScaleY
     , maCustom
     , enEnter
     , enUpdate
@@ -3087,6 +3089,8 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maShape
 @docs maSymbol
 @docs maAngle
+@docs maScaleX
+@docs maScaleY
 
 @docs maCustom
 
@@ -4683,8 +4687,8 @@ type MarkInterpolation
 [maSymbol](#maSymbol), [maAngle](#maAngle), [maDir](#maDir), [maDx](#maDx), [maDy](#maDy),
 [maEllipsis](#maEllipsis), [maFont](#maFont), [maFontSize](#maFontSize),
 [maFontWeight](#maFontWeight), [maFontStyle](#maFontStyle), [maLineBreak](#maLineBreak),
-[maLineHeight](#maLineHeight), [maLimit](#maLimit), [maRadius](#maRadius), [maText](#maText)
-and [maTheta](#maTheta).
+[maLineHeight](#maLineHeight), [maLimit](#maLimit), [maRadius](#maRadius), [maScaleX](#maScaleX),
+[maScaleY](#maScaleY), [maText](#maText) and [maTheta](#maTheta).
 -}
 type MarkProperty
     = MX (List Value)
@@ -4737,6 +4741,8 @@ type MarkProperty
     | MAspect (List Value)
       -- Path mark specific:
     | MPath (List Value)
+    | MScaleX (List Value)
+    | MScaleY (List Value)
       -- Shape mark specific:
     | MShape (List Value)
       -- Symbol mark specific:
@@ -10702,7 +10708,7 @@ maAlign =
     MAlign
 
 
-{-| Rotation angle in degrees of a text or symbol mark.
+{-| Rotation angle in degrees of a text, path or symbol mark.
 -}
 maAngle : List Value -> MarkProperty
 maAngle =
@@ -11078,6 +11084,20 @@ commonly combined using the functional composition operator (`<<`). For example,
 marks : List Spec -> ( VProperty, Spec )
 marks axs =
     ( VMarks, JE.list identity axs )
+
+
+{-| Amount by which to scale a path mark horizontally before applying any rotation.
+-}
+maScaleX : List Value -> MarkProperty
+maScaleX =
+    MScaleX
+
+
+{-| Amount by which to scale a path mark vertically before applying any rotation.
+-}
+maScaleY : List Value -> MarkProperty
+maScaleY =
+    MScaleY
 
 
 {-| A shape instance that provides a drawing method to invoke within the renderer.
@@ -18080,6 +18100,12 @@ markProperty mProp =
         -- Path Mark specific:
         MPath vals ->
             ( "path", valRef vals )
+
+        MScaleX vals ->
+            ( "scaleX", valRef vals )
+
+        MScaleY vals ->
+            ( "scaleY", valRef vals )
 
         -- Shape Mark specific:
         MShape vals ->

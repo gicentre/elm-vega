@@ -5,6 +5,13 @@ _Minor release supporting Vega 5.8._
 ## Additions
 
 - Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
+- Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
+
+## Other Changes
+
+- Additional tests to reflect new additions.
+
+---
 
 # V5.2 ➡ V5.3
 
