@@ -225,6 +225,7 @@ imageTest =
                 << signal "w" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "h" [ siValue (vNum 50), siBind (iRange [ inMin 0, inMax 200, inStep 1 ]) ]
                 << signal "aspect" [ siValue vTrue, siBind (iCheckbox []) ]
+                << signal "smooth" [ siValue vTrue, siBind (iCheckbox []) ]
                 << signal "align" [ siValue (vStr "left"), siBind (iSelect [ inOptions (vStrs [ "left", "center", "right" ]) ]) ]
                 << signal "baseline" [ siValue (vStr "top"), siBind (iSelect [ inOptions (vStrs [ "top", "middle", "bottom" ]) ]) ]
 
@@ -240,6 +241,7 @@ imageTest =
                             , maWidth [ vSignal "w" ]
                             , maHeight [ vSignal "h" ]
                             , maAspect [ vSignal "aspect" ]
+                            , maSmooth [ vSignal "smooth" ]
                             , maAlign [ vSignal "align" ]
                             , maBaseline [ vSignal "baseline" ]
                             ]

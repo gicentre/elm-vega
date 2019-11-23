@@ -1016,6 +1016,7 @@ module Vega exposing
     , maGroupClip
     , maUrl
     , maAspect
+    , maSmooth
     , maPath
     , maShape
     , maSymbol
@@ -3085,6 +3086,7 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maGroupClip
 @docs maUrl
 @docs maAspect
+@docs maSmooth
 @docs maPath
 @docs maShape
 @docs maSymbol
@@ -4683,7 +4685,7 @@ type MarkInterpolation
 [maTension](#maTension), [maDefined](#maDefined), [maSize](#maSize), [maStartAngle](#maStartAngle),
 [maEndAngle](#maEndAngle), [maPadAngle](#maPadAngle), [maInnerRadius](#maInnerRadius),
 [maOuterRadius](#maOuterRadius), [maOrient](#maOrient), [maGroupClip](#maGroupClip),
-[maUrl](#maUrl), [maAspect](#maAspect), [maPath](#maPath), [maShape](#maShape),
+[maUrl](#maUrl), [maAspect](#maAspect), [maSmooth](#maSmooth), [maPath](#maPath), [maShape](#maShape),
 [maSymbol](#maSymbol), [maAngle](#maAngle), [maDir](#maDir), [maDx](#maDx), [maDy](#maDy),
 [maEllipsis](#maEllipsis), [maFont](#maFont), [maFontSize](#maFontSize),
 [maFontWeight](#maFontWeight), [maFontStyle](#maFontStyle), [maLineBreak](#maLineBreak),
@@ -4739,6 +4741,7 @@ type MarkProperty
       -- Image mark specific:
     | MUrl (List Value)
     | MAspect (List Value)
+    | MSmooth (List Value)
       -- Path mark specific:
     | MPath (List Value)
     | MScaleX (List Value)
@@ -11130,6 +11133,13 @@ the square root of this value.
 maSize : List Value -> MarkProperty
 maSize =
     MSize
+
+
+{-| Whether or not an image is smoothed when interpolating to its non-native size.
+-}
+maSmooth : List Value -> MarkProperty
+maSmooth =
+    MSmooth
 
 
 {-| Start angle in radians clockwise from north for an arc mark.
@@ -18093,6 +18103,9 @@ markProperty mProp =
         -- Image Mark specific:
         MAspect vals ->
             ( "aspect", valRef vals )
+
+        MSmooth vals ->
+            ( "smooth", valRef vals )
 
         MUrl vals ->
             ( "url", valRef vals )
