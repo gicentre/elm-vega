@@ -6210,27 +6210,32 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'aspect',
 				$author$project$Vega$valRef(vals));
+		case 43:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
+				'smooth',
+				$author$project$Vega$valRef(vals));
 		case 41:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'url',
 				$author$project$Vega$valRef(vals));
-		case 43:
+		case 44:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'path',
 				$author$project$Vega$valRef(vals));
-		case 44:
+		case 45:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleX',
 				$author$project$Vega$valRef(vals));
-		case 45:
+		case 46:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleY',
 				$author$project$Vega$valRef(vals));
-		case 46:
+		case 47:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6240,7 +6245,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'size',
 				$author$project$Vega$valRef(vals));
-		case 47:
+		case 48:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6250,7 +6255,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$valRef(vals));
-		case 48:
+		case 49:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'angle',
@@ -6260,72 +6265,72 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$valRef(vals));
-		case 49:
+		case 50:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dir',
 				$author$project$Vega$valRef(vals));
-		case 50:
+		case 51:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$valRef(vals));
-		case 51:
+		case 52:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 53:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'ellipsis',
 				$author$project$Vega$valRef(vals));
-		case 53:
+		case 54:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$valRef(vals));
-		case 54:
+		case 55:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$valRef(vals));
-		case 55:
+		case 56:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valRef(vals));
-		case 56:
+		case 57:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$valRef(vals));
-		case 59:
+		case 60:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$valRef(vals));
-		case 57:
+		case 58:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineBreak',
 				$author$project$Vega$valRef(vals));
-		case 58:
+		case 59:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$valRef(vals));
-		case 60:
+		case 61:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'radius',
 				$author$project$Vega$valRef(vals));
-		case 61:
+		case 62:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$valRef(vals));
-		case 62:
+		case 63:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'theta',
@@ -8696,7 +8701,7 @@ var $author$project$Vega$MFill = function (a) {
 };
 var $author$project$Vega$maFill = $author$project$Vega$MFill;
 var $author$project$Vega$MShape = function (a) {
-	return {$: 46, a: a};
+	return {$: 47, a: a};
 };
 var $author$project$Vega$maShape = $author$project$Vega$MShape;
 var $author$project$Vega$MX = function (a) {
@@ -13253,7 +13258,7 @@ var $author$project$Vega$EnInteractive = function (a) {
 };
 var $author$project$Vega$enInteractive = $author$project$Vega$EnInteractive;
 var $author$project$Vega$MFontStyle = function (a) {
-	return {$: 56, a: a};
+	return {$: 57, a: a};
 };
 var $author$project$Vega$maFontStyle = $author$project$Vega$MFontStyle;
 var $author$project$Vega$MHeight = function (a) {
@@ -13526,7 +13531,7 @@ var $author$project$Vega$MBaseline = function (a) {
 };
 var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
 var $author$project$Vega$MText = function (a) {
-	return {$: 61, a: a};
+	return {$: 62, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$Rect = 6;
