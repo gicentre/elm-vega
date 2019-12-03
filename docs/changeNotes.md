@@ -9,6 +9,7 @@ _Minor release supporting Vega 5.8._
 - Add `maSmooth` to `image` mark properties.
 - Add `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
 - `quarter` and `date` added as time units.
+- Add `trKde2d` two-dimensional (raster) density estimation transform and its associated parameterisation functions `kd2Weight`, `kd2CellSize`, `kd2Bandwidth`, `kd2Counts` and `kd2As`.
 
 ## Other Changes
 
