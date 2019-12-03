@@ -5177,6 +5177,7 @@ var $author$project$Vega$AxScale = function (a) {
 var $author$project$Vega$AxSide = function (a) {
 	return {$: 1, a: a};
 };
+var $author$project$Vega$Month = {$: 2};
 var $author$project$Vega$anchorSpec = function (anchor) {
 	switch (anchor.$) {
 		case 0:
@@ -6222,6 +6223,11 @@ var $author$project$Vega$markProperty = function (mProp) {
 		case 43:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
+				'image',
+				$author$project$Vega$valRef(vals));
+		case 44:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
 				'smooth',
 				$author$project$Vega$valRef(vals));
 		case 41:
@@ -6229,22 +6235,22 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'url',
 				$author$project$Vega$valRef(vals));
-		case 44:
+		case 45:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'path',
 				$author$project$Vega$valRef(vals));
-		case 45:
+		case 46:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleX',
 				$author$project$Vega$valRef(vals));
-		case 46:
+		case 47:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleY',
 				$author$project$Vega$valRef(vals));
-		case 47:
+		case 48:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6254,7 +6260,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'size',
 				$author$project$Vega$valRef(vals));
-		case 48:
+		case 49:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6264,7 +6270,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$valRef(vals));
-		case 49:
+		case 50:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'angle',
@@ -6274,72 +6280,72 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$valRef(vals));
-		case 50:
+		case 51:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dir',
 				$author$project$Vega$valRef(vals));
-		case 51:
+		case 52:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 53:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$valRef(vals));
-		case 53:
+		case 54:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'ellipsis',
 				$author$project$Vega$valRef(vals));
-		case 54:
+		case 55:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$valRef(vals));
-		case 55:
+		case 56:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$valRef(vals));
-		case 56:
+		case 57:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valRef(vals));
-		case 57:
+		case 58:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$valRef(vals));
-		case 60:
+		case 61:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$valRef(vals));
-		case 58:
+		case 59:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineBreak',
 				$author$project$Vega$valRef(vals));
-		case 59:
+		case 60:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$valRef(vals));
-		case 61:
+		case 62:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'radius',
 				$author$project$Vega$valRef(vals));
-		case 62:
+		case 63:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$valRef(vals));
-		case 63:
+		case 64:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'theta',
@@ -6414,6 +6420,7 @@ var $author$project$Vega$hAlignSpec = function (align) {
 					]));
 	}
 };
+var $elm$json$Json$Encode$int = _Json_wrap;
 var $author$project$Vega$overlapStrategySpec = function (strat) {
 	switch (strat.$) {
 		case 0:
@@ -6431,6 +6438,8 @@ var $author$project$Vega$overlapStrategySpec = function (strat) {
 					]));
 	}
 };
+var $author$project$Vega$Quarter = {$: 1};
+var $author$project$Vega$quarter = $author$project$Vega$Quarter;
 var $author$project$Vega$sideSpec = function (orient) {
 	switch (orient.$) {
 		case 0:
@@ -6450,31 +6459,35 @@ var $author$project$Vega$sideSpec = function (orient) {
 					]));
 	}
 };
-var $author$project$Vega$timeUnitSpec = function (tUnit) {
-	var timeUnitLabel = function (tu) {
+var $author$project$Vega$timeUnitSpecShort = function (tUnit) {
+	var timeUnitLabelShort = function (tu) {
 		switch (tu.$) {
 			case 0:
 				return 'year';
 			case 1:
-				return 'month';
+				return 'quarter';
 			case 2:
-				return 'week';
+				return 'month';
 			case 3:
 				return 'day';
 			case 4:
-				return 'hour';
+				return 'week';
 			case 5:
-				return 'minute';
+				return 'day';
 			case 6:
-				return 'second';
+				return 'hour';
 			case 7:
+				return 'minute';
+			case 8:
+				return 'second';
+			case 9:
 				return 'millisecond';
 			default:
 				var sig = tu.a;
 				return '';
 		}
 	};
-	if (tUnit.$ === 8) {
+	if (tUnit.$ === 10) {
 		var sig = tUnit.a;
 		return $elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -6483,7 +6496,7 @@ var $author$project$Vega$timeUnitSpec = function (tUnit) {
 				]));
 	} else {
 		return $elm$json$Json$Encode$string(
-			timeUnitLabel(tUnit));
+			timeUnitLabelShort(tUnit));
 	}
 };
 var $author$project$Vega$vAlignSpec = function (align) {
@@ -6752,20 +6765,42 @@ var $author$project$Vega$axisProperty = function (ap) {
 			switch (n.$) {
 				case 0:
 					var step = n.a;
-					return (step <= 0) ? _Utils_Tuple2(
-						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu)) : _Utils_Tuple2(
+					return (step <= 0) ? (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
 						'tickCount',
 						$elm$json$Json$Encode$object(
 							_List_fromArray(
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$int(3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$author$project$Vega$timeUnitSpecShort(tu))) : (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$float(step * 3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
-								])));
+								]))));
 				case 2:
 					return _Utils_Tuple2(
 						'tickCount',
@@ -6774,7 +6809,7 @@ var $author$project$Vega$axisProperty = function (ap) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -6787,7 +6822,7 @@ var $author$project$Vega$axisProperty = function (ap) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -6795,7 +6830,7 @@ var $author$project$Vega$axisProperty = function (ap) {
 				default:
 					return _Utils_Tuple2(
 						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu));
+						$author$project$Vega$timeUnitSpecShort(tu));
 			}
 		case 45:
 			var vals = ap.a;
@@ -7933,20 +7968,42 @@ var $author$project$Vega$legendProperty = function (lp) {
 			switch (n.$) {
 				case 0:
 					var step = n.a;
-					return (step <= 0) ? _Utils_Tuple2(
-						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu)) : _Utils_Tuple2(
+					return (step <= 0) ? (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
 						'tickCount',
 						$elm$json$Json$Encode$object(
 							_List_fromArray(
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$int(3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$author$project$Vega$timeUnitSpecShort(tu))) : (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$float(step * 3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
-								])));
+								]))));
 				case 2:
 					return _Utils_Tuple2(
 						'tickCount',
@@ -7955,7 +8012,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -7968,7 +8025,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -7976,7 +8033,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 				default:
 					return _Utils_Tuple2(
 						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu));
+						$author$project$Vega$timeUnitSpecShort(tu));
 			}
 		case 78:
 			var n = lp.a;
@@ -10245,6 +10302,115 @@ var $author$project$Vega$stackProperty = function (sp) {
 						[y0, y1])));
 	}
 };
+var $author$project$Vega$dateTimeSpec = function (dt) {
+	if (!dt.$) {
+		var dtExp = dt.a;
+		return $author$project$Vega$expressionSpec(dtExp);
+	} else {
+		var millis = dt.a;
+		return $elm$json$Json$Encode$int(millis);
+	}
+};
+var $author$project$Vega$timeUnitSpec = function (tUnit) {
+	switch (tUnit.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('year');
+		case 1:
+			return $elm$json$Json$Encode$string('quarter');
+		case 2:
+			return $elm$json$Json$Encode$string('month');
+		case 3:
+			return $elm$json$Json$Encode$string('date');
+		case 4:
+			return $elm$json$Json$Encode$string('week');
+		case 5:
+			return $elm$json$Json$Encode$string('day');
+		case 6:
+			return $elm$json$Json$Encode$string('hours');
+		case 7:
+			return $elm$json$Json$Encode$string('minutes');
+		case 8:
+			return $elm$json$Json$Encode$string('seconds');
+		case 9:
+			return $elm$json$Json$Encode$string('milliseconds');
+		default:
+			var sig = tUnit.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$timezoneSpec = function (tz) {
+	switch (tz.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('local');
+		case 1:
+			return $elm$json$Json$Encode$string('utc');
+		default:
+			var sig = tz.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$timeBinProperty = function (tbProp) {
+	switch (tbProp.$) {
+		case 0:
+			var tus = tbProp.a;
+			return _Utils_Tuple2(
+				'units',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$timeUnitSpec, tus));
+		case 1:
+			var step = tbProp.a;
+			return _Utils_Tuple2(
+				'step',
+				$author$project$Vega$numSpec(step));
+		case 2:
+			var tz = tbProp.a;
+			return _Utils_Tuple2(
+				'timezone',
+				$author$project$Vega$timezoneSpec(tz));
+		case 3:
+			var b = tbProp.a;
+			return _Utils_Tuple2(
+				'interval',
+				$author$project$Vega$booSpec(b));
+		case 4:
+			var dtMin = tbProp.a;
+			var dtMax = tbProp.b;
+			return _Utils_Tuple2(
+				'extent',
+				A2(
+					$elm$json$Json$Encode$list,
+					$author$project$Vega$dateTimeSpec,
+					_List_fromArray(
+						[dtMin, dtMax])));
+		case 5:
+			var n = tbProp.a;
+			return _Utils_Tuple2(
+				'maxbins',
+				$author$project$Vega$numSpec(n));
+		case 6:
+			var sig = tbProp.a;
+			return _Utils_Tuple2(
+				'signal',
+				$elm$json$Json$Encode$string(sig));
+		default:
+			var f1 = tbProp.a;
+			var f2 = tbProp.b;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					$elm$json$Json$Encode$list,
+					$elm$json$Json$Encode$string,
+					_List_fromArray(
+						[f1, f2])));
+	}
+};
 var $author$project$Vega$teMethodSpec = function (m) {
 	switch (m.$) {
 		case 0:
@@ -10867,6 +11033,21 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$regressionProperty, rps)))));
+		case 46:
+			var f = trans.a;
+			var tbps = trans.b;
+			return $elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						$elm$json$Json$Encode$string('timeunit')),
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2(
+							'field',
+							$author$project$Vega$fieldSpec(f)),
+						A2($elm$core$List$map, $author$project$Vega$timeBinProperty, tbps))));
 		case 10:
 			var f = trans.a;
 			return $elm$json$Json$Encode$object(
@@ -11287,7 +11468,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 50:
+		case 51:
 			var wos = trans.a;
 			var wps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -11474,7 +11655,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('force')),
 					A2($elm$core$List$map, $author$project$Vega$forceSimulationProperty, fps)));
-		case 49:
+		case 50:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -11495,7 +11676,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$voronoiProperty, vps)))));
-		case 51:
+		case 52:
 			var wcps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11536,7 +11717,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						$author$project$Vega$fieldSpec(parent))
 					]));
-		case 47:
+		case 48:
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -11562,7 +11743,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('partition')),
 					A2($elm$core$List$map, $author$project$Vega$partitionProperty, pps)));
-		case 46:
+		case 47:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -11571,7 +11752,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('tree')),
 					A2($elm$core$List$map, $author$project$Vega$treeProperty, tps)));
-		case 48:
+		case 49:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -12036,7 +12217,6 @@ var $author$project$Vega$interpolateSpec = function (iType) {
 					]));
 	}
 };
-var $elm$json$Json$Encode$int = _Json_wrap;
 var $author$project$Vega$niceSpec = function (ni) {
 	switch (ni.$) {
 		case 0:
@@ -12058,12 +12238,21 @@ var $author$project$Vega$niceSpec = function (ni) {
 		case 8:
 			var tu = ni.a;
 			var step = ni.b;
-			return $elm$json$Json$Encode$object(
+			return _Utils_eq(tu, $author$project$Vega$Quarter) ? $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
 						_Utils_Tuple2(
 						'interval',
-						$author$project$Vega$timeUnitSpec(tu)),
+						$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+						_Utils_Tuple2(
+						'step',
+						$elm$json$Json$Encode$int(step * 3))
+					])) : $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'interval',
+						$author$project$Vega$timeUnitSpecShort(tu)),
 						_Utils_Tuple2(
 						'step',
 						$elm$json$Json$Encode$int(step))
@@ -15202,19 +15391,19 @@ var $author$project$Vega$MBaseline = function (a) {
 };
 var $author$project$Vega$maBaseline = $author$project$Vega$MBaseline;
 var $author$project$Vega$MFontSize = function (a) {
-	return {$: 55, a: a};
+	return {$: 56, a: a};
 };
 var $author$project$Vega$maFontSize = $author$project$Vega$MFontSize;
 var $author$project$Vega$MFontWeight = function (a) {
-	return {$: 56, a: a};
+	return {$: 57, a: a};
 };
 var $author$project$Vega$maFontWeight = $author$project$Vega$MFontWeight;
 var $author$project$Vega$MPath = function (a) {
-	return {$: 44, a: a};
+	return {$: 45, a: a};
 };
 var $author$project$Vega$maPath = $author$project$Vega$MPath;
 var $author$project$Vega$MText = function (a) {
-	return {$: 62, a: a};
+	return {$: 63, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$Tidy = {$: 0};
@@ -15235,10 +15424,10 @@ var $author$project$Vega$TNest = F2(
 	});
 var $author$project$Vega$trNest = $author$project$Vega$TNest;
 var $author$project$Vega$TTree = function (a) {
-	return {$: 46, a: a};
+	return {$: 47, a: a};
 };
 var $author$project$Vega$trTree = $author$project$Vega$TTree;
-var $author$project$Vega$TTreeLinks = {$: 47};
+var $author$project$Vega$TTreeLinks = {$: 48};
 var $author$project$Vega$trTreeLinks = $author$project$Vega$TTreeLinks;
 var $author$project$Vega$vMiddle = $author$project$Vega$vStr('middle');
 var $author$project$TransformTests$nestTest1 = function () {
@@ -16054,6 +16243,277 @@ var $author$project$TransformTests$stackTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$DFields = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$daFields = $author$project$Vega$DFields;
+var $author$project$Vega$MOpacity = function (a) {
+	return {$: 8, a: a};
+};
+var $author$project$Vega$maOpacity = $author$project$Vega$MOpacity;
+var $author$project$Vega$MX2 = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$maX2 = $author$project$Vega$MX2;
+var $author$project$Vega$ScUtc = {$: 6};
+var $author$project$Vega$scUtc = $author$project$Vega$ScUtc;
+var $author$project$Vega$TBAs = F2(
+	function (a, b) {
+		return {$: 7, a: a, b: b};
+	});
+var $author$project$Vega$tbAs = $author$project$Vega$TBAs;
+var $author$project$Vega$TBStep = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$tbStep = $author$project$Vega$TBStep;
+var $author$project$Vega$TBTimezone = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$tbTimezone = $author$project$Vega$TBTimezone;
+var $author$project$Vega$TBUnits = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$tbUnits = $author$project$Vega$TBUnits;
+var $author$project$Vega$AlwaysUpdate = 1;
+var $author$project$Vega$TFormula = F3(
+	function (a, b, c) {
+		return {$: 18, a: a, b: b, c: c};
+	});
+var $author$project$Vega$trFormula = F2(
+	function (exp, fName) {
+		return A3($author$project$Vega$TFormula, exp, fName, 1);
+	});
+var $author$project$Vega$TTimeUnit = F2(
+	function (a, b) {
+		return {$: 46, a: a, b: b};
+	});
+var $author$project$Vega$trTimeUnit = $author$project$Vega$TTimeUnit;
+var $author$project$Vega$TZUtc = {$: 1};
+var $author$project$Vega$tzUtc = $author$project$Vega$TZUtc;
+var $author$project$Vega$Week = {$: 4};
+var $author$project$Vega$week = $author$project$Vega$Week;
+var $author$project$Vega$Year = {$: 0};
+var $author$project$Vega$year = $author$project$Vega$Year;
+var $author$project$TransformTests$timeUnitTest1 = function () {
+	var table = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					A2($author$project$Vega$dataFromColumns, 'table', _List_Nil),
+					A2(
+						$author$project$Vega$dataColumn,
+						'year',
+						$author$project$Vega$vNums(
+							_List_fromArray(
+								[2018, 2018, 2018, 2018])))),
+				A2(
+					$author$project$Vega$dataColumn,
+					'month',
+					$author$project$Vega$vNums(
+						_List_fromArray(
+							[1, 5, 9, 12])))),
+			A2(
+				$author$project$Vega$dataColumn,
+				'day',
+				$author$project$Vega$vNums(
+					_List_fromArray(
+						[11, 12, 7, 23])))),
+		A2(
+			$author$project$Vega$dataColumn,
+			'count',
+			$author$project$Vega$vNums(
+				_List_fromArray(
+					[1, 1, 1, 1]))));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scUtc),
+						$author$project$Vega$scRange($author$project$Vega$raWidth),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('table'),
+									$author$project$Vega$daFields(
+									_List_fromArray(
+										[
+											$author$project$Vega$field('first'),
+											$author$project$Vega$field('last')
+										]))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scRange($author$project$Vega$raHeight),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('table'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('count'))
+							])))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$marks,
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$rect,
+				_List_fromArray(
+					[
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('table'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('xScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('first'))
+											])),
+										$author$project$Vega$maX2(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('xScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('last'))
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('yScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('count'))
+											])),
+										$author$project$Vega$maY2(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('yScale'),
+												$author$project$Vega$vNum(0)
+											])),
+										$author$project$Vega$maOpacity(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(0.3)
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$rect,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('table'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('date'))
+										])),
+									$author$project$Vega$maWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(2)
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('count'))
+										])),
+									$author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vNum(0)
+										])),
+									$author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('firebrick')
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2($author$project$Vega$trFormula, 'datetime(datum.year,  datum.month-1, datum.day)', 'date'),
+						A2(
+						$author$project$Vega$trTimeUnit,
+						$author$project$Vega$field('date'),
+						_List_fromArray(
+							[
+								$author$project$Vega$tbUnits(
+								_List_fromArray(
+									[$author$project$Vega$year, $author$project$Vega$week])),
+								$author$project$Vega$tbStep(
+								$author$project$Vega$num(2)),
+								$author$project$Vega$tbTimezone($author$project$Vega$tzUtc),
+								A2($author$project$Vega$tbAs, 'first', 'last')
+							]))
+					]),
+				table(_List_Nil))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$axes,
+		A3($author$project$Vega$axis, 'xScale', $author$project$Vega$siBottom, _List_Nil));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(700),
+				$author$project$Vega$height(200),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$TreeMethodSignal = function (a) {
 	return {$: 2, a: a};
 };
@@ -16784,7 +17244,7 @@ var $author$project$Vega$TGeoPoint = F3(
 var $author$project$Vega$trGeoPoint = $author$project$Vega$TGeoPoint;
 var $author$project$Vega$TVoronoi = F3(
 	function (a, b, c) {
-		return {$: 49, a: a, b: b, c: c};
+		return {$: 50, a: a, b: b, c: c};
 	});
 var $author$project$Vega$trVoronoi = $author$project$Vega$TVoronoi;
 var $author$project$Vega$VoAs = function (a) {
@@ -17303,7 +17763,8 @@ var $author$project$TransformTests$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('contourTest1', $author$project$TransformTests$contourTest1),
 			_Utils_Tuple2('densityTest1', $author$project$TransformTests$densityTest1),
 			_Utils_Tuple2('kdeTest1', $author$project$TransformTests$kdeTest1),
-			_Utils_Tuple2('kdeTest2', $author$project$TransformTests$kdeTest2)
+			_Utils_Tuple2('kdeTest2', $author$project$TransformTests$kdeTest2),
+			_Utils_Tuple2('timeUnitTest1', $author$project$TransformTests$timeUnitTest1)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -17319,7 +17780,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$TransformTests$sourceExample = $author$project$TransformTests$kdeTest2;
+var $author$project$TransformTests$sourceExample = $author$project$TransformTests$timeUnitTest1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$TransformTests$view = function (spec) {

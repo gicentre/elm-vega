@@ -6163,7 +6163,7 @@ var $author$project$Vega$MAlign = function (a) {
 };
 var $author$project$Vega$maAlign = $author$project$Vega$MAlign;
 var $author$project$Vega$MAngle = function (a) {
-	return {$: 49, a: a};
+	return {$: 50, a: a};
 };
 var $author$project$Vega$maAngle = $author$project$Vega$MAngle;
 var $author$project$Vega$MBaseline = function (a) {
@@ -6175,7 +6175,7 @@ var $author$project$Vega$MFill = function (a) {
 };
 var $author$project$Vega$maFill = $author$project$Vega$MFill;
 var $author$project$Vega$MFontSize = function (a) {
-	return {$: 55, a: a};
+	return {$: 56, a: a};
 };
 var $author$project$Vega$maFontSize = $author$project$Vega$MFontSize;
 var $author$project$Vega$MOpacity = function (a) {
@@ -6199,7 +6199,7 @@ var $author$project$Vega$MStrokeWidth = function (a) {
 };
 var $author$project$Vega$maStrokeWidth = $author$project$Vega$MStrokeWidth;
 var $author$project$Vega$MText = function (a) {
-	return {$: 62, a: a};
+	return {$: 63, a: a};
 };
 var $author$project$Vega$maText = $author$project$Vega$MText;
 var $author$project$Vega$MX = function (a) {
@@ -6571,6 +6571,11 @@ var $author$project$Vega$markProperty = function (mProp) {
 		case 43:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
+				'image',
+				$author$project$Vega$valRef(vals));
+		case 44:
+			var vals = mProp.a;
+			return _Utils_Tuple2(
 				'smooth',
 				$author$project$Vega$valRef(vals));
 		case 41:
@@ -6578,22 +6583,22 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'url',
 				$author$project$Vega$valRef(vals));
-		case 44:
+		case 45:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'path',
 				$author$project$Vega$valRef(vals));
-		case 45:
+		case 46:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleX',
 				$author$project$Vega$valRef(vals));
-		case 46:
+		case 47:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'scaleY',
 				$author$project$Vega$valRef(vals));
-		case 47:
+		case 48:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6603,7 +6608,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'size',
 				$author$project$Vega$valRef(vals));
-		case 48:
+		case 49:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'shape',
@@ -6613,7 +6618,7 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$valRef(vals));
-		case 49:
+		case 50:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'angle',
@@ -6623,72 +6628,72 @@ var $author$project$Vega$markProperty = function (mProp) {
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$valRef(vals));
-		case 50:
+		case 51:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dir',
 				$author$project$Vega$valRef(vals));
-		case 51:
+		case 52:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 53:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$valRef(vals));
-		case 53:
+		case 54:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'ellipsis',
 				$author$project$Vega$valRef(vals));
-		case 54:
+		case 55:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$valRef(vals));
-		case 55:
+		case 56:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$valRef(vals));
-		case 56:
+		case 57:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valRef(vals));
-		case 57:
+		case 58:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$valRef(vals));
-		case 60:
+		case 61:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$valRef(vals));
-		case 58:
+		case 59:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineBreak',
 				$author$project$Vega$valRef(vals));
-		case 59:
+		case 60:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$valRef(vals));
-		case 61:
+		case 62:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'radius',
 				$author$project$Vega$valRef(vals));
-		case 62:
+		case 63:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$valRef(vals));
-		case 63:
+		case 64:
 			var vals = mProp.a;
 			return _Utils_Tuple2(
 				'theta',
@@ -8161,6 +8166,116 @@ var $author$project$Vega$stackProperty = function (sp) {
 						[y0, y1])));
 	}
 };
+var $elm$json$Json$Encode$int = _Json_wrap;
+var $author$project$Vega$dateTimeSpec = function (dt) {
+	if (!dt.$) {
+		var dtExp = dt.a;
+		return $author$project$Vega$expressionSpec(dtExp);
+	} else {
+		var millis = dt.a;
+		return $elm$json$Json$Encode$int(millis);
+	}
+};
+var $author$project$Vega$timeUnitSpec = function (tUnit) {
+	switch (tUnit.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('year');
+		case 1:
+			return $elm$json$Json$Encode$string('quarter');
+		case 2:
+			return $elm$json$Json$Encode$string('month');
+		case 3:
+			return $elm$json$Json$Encode$string('date');
+		case 4:
+			return $elm$json$Json$Encode$string('week');
+		case 5:
+			return $elm$json$Json$Encode$string('day');
+		case 6:
+			return $elm$json$Json$Encode$string('hours');
+		case 7:
+			return $elm$json$Json$Encode$string('minutes');
+		case 8:
+			return $elm$json$Json$Encode$string('seconds');
+		case 9:
+			return $elm$json$Json$Encode$string('milliseconds');
+		default:
+			var sig = tUnit.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$timezoneSpec = function (tz) {
+	switch (tz.$) {
+		case 0:
+			return $elm$json$Json$Encode$string('local');
+		case 1:
+			return $elm$json$Json$Encode$string('utc');
+		default:
+			var sig = tz.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						$author$project$Vega$signalReferenceProperty(sig)
+					]));
+	}
+};
+var $author$project$Vega$timeBinProperty = function (tbProp) {
+	switch (tbProp.$) {
+		case 0:
+			var tus = tbProp.a;
+			return _Utils_Tuple2(
+				'units',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$timeUnitSpec, tus));
+		case 1:
+			var step = tbProp.a;
+			return _Utils_Tuple2(
+				'step',
+				$author$project$Vega$numSpec(step));
+		case 2:
+			var tz = tbProp.a;
+			return _Utils_Tuple2(
+				'timezone',
+				$author$project$Vega$timezoneSpec(tz));
+		case 3:
+			var b = tbProp.a;
+			return _Utils_Tuple2(
+				'interval',
+				$author$project$Vega$booSpec(b));
+		case 4:
+			var dtMin = tbProp.a;
+			var dtMax = tbProp.b;
+			return _Utils_Tuple2(
+				'extent',
+				A2(
+					$elm$json$Json$Encode$list,
+					$author$project$Vega$dateTimeSpec,
+					_List_fromArray(
+						[dtMin, dtMax])));
+		case 5:
+			var n = tbProp.a;
+			return _Utils_Tuple2(
+				'maxbins',
+				$author$project$Vega$numSpec(n));
+		case 6:
+			var sig = tbProp.a;
+			return _Utils_Tuple2(
+				'signal',
+				$elm$json$Json$Encode$string(sig));
+		default:
+			var f1 = tbProp.a;
+			var f2 = tbProp.b;
+			return _Utils_Tuple2(
+				'as',
+				A2(
+					$elm$json$Json$Encode$list,
+					$elm$json$Json$Encode$string,
+					_List_fromArray(
+						[f1, f2])));
+	}
+};
 var $author$project$Vega$teMethodSpec = function (m) {
 	switch (m.$) {
 		case 0:
@@ -8783,6 +8898,21 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$regressionProperty, rps)))));
+		case 46:
+			var f = trans.a;
+			var tbps = trans.b;
+			return $elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$cons,
+					_Utils_Tuple2(
+						'type',
+						$elm$json$Json$Encode$string('timeunit')),
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2(
+							'field',
+							$author$project$Vega$fieldSpec(f)),
+						A2($elm$core$List$map, $author$project$Vega$timeBinProperty, tbps))));
 		case 10:
 			var f = trans.a;
 			return $elm$json$Json$Encode$object(
@@ -9203,7 +9333,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 							$elm$json$Json$Encode$string(out))
 						]),
 					stepProp));
-		case 50:
+		case 51:
 			var wos = trans.a;
 			var wps = trans.b;
 			return $elm$json$Json$Encode$object(
@@ -9390,7 +9520,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('force')),
 					A2($elm$core$List$map, $author$project$Vega$forceSimulationProperty, fps)));
-		case 49:
+		case 50:
 			var x = trans.a;
 			var y = trans.b;
 			var vps = trans.c;
@@ -9411,7 +9541,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 								'y',
 								$author$project$Vega$fieldSpec(y)),
 							A2($elm$core$List$map, $author$project$Vega$voronoiProperty, vps)))));
-		case 51:
+		case 52:
 			var wcps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9452,7 +9582,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'parentKey',
 						$author$project$Vega$fieldSpec(parent))
 					]));
-		case 47:
+		case 48:
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
@@ -9478,7 +9608,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('partition')),
 					A2($elm$core$List$map, $author$project$Vega$partitionProperty, pps)));
-		case 46:
+		case 47:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9487,7 +9617,7 @@ var $author$project$Vega$transformSpec = function (trans) {
 						'type',
 						$elm$json$Json$Encode$string('tree')),
 					A2($elm$core$List$map, $author$project$Vega$treeProperty, tps)));
-		case 48:
+		case 49:
 			var tps = trans.a;
 			return $elm$json$Json$Encode$object(
 				A2(
@@ -9937,32 +10067,37 @@ var $author$project$Vega$interpolateSpec = function (iType) {
 					]));
 	}
 };
-var $elm$json$Json$Encode$int = _Json_wrap;
-var $author$project$Vega$timeUnitSpec = function (tUnit) {
-	var timeUnitLabel = function (tu) {
+var $author$project$Vega$Month = {$: 2};
+var $author$project$Vega$Quarter = {$: 1};
+var $author$project$Vega$timeUnitSpecShort = function (tUnit) {
+	var timeUnitLabelShort = function (tu) {
 		switch (tu.$) {
 			case 0:
 				return 'year';
 			case 1:
-				return 'month';
+				return 'quarter';
 			case 2:
-				return 'week';
+				return 'month';
 			case 3:
 				return 'day';
 			case 4:
-				return 'hour';
+				return 'week';
 			case 5:
-				return 'minute';
+				return 'day';
 			case 6:
-				return 'second';
+				return 'hour';
 			case 7:
+				return 'minute';
+			case 8:
+				return 'second';
+			case 9:
 				return 'millisecond';
 			default:
 				var sig = tu.a;
 				return '';
 		}
 	};
-	if (tUnit.$ === 8) {
+	if (tUnit.$ === 10) {
 		var sig = tUnit.a;
 		return $elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -9971,7 +10106,7 @@ var $author$project$Vega$timeUnitSpec = function (tUnit) {
 				]));
 	} else {
 		return $elm$json$Json$Encode$string(
-			timeUnitLabel(tUnit));
+			timeUnitLabelShort(tUnit));
 	}
 };
 var $author$project$Vega$niceSpec = function (ni) {
@@ -9995,12 +10130,21 @@ var $author$project$Vega$niceSpec = function (ni) {
 		case 8:
 			var tu = ni.a;
 			var step = ni.b;
-			return $elm$json$Json$Encode$object(
+			return _Utils_eq(tu, $author$project$Vega$Quarter) ? $elm$json$Json$Encode$object(
 				_List_fromArray(
 					[
 						_Utils_Tuple2(
 						'interval',
-						$author$project$Vega$timeUnitSpec(tu)),
+						$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+						_Utils_Tuple2(
+						'step',
+						$elm$json$Json$Encode$int(step * 3))
+					])) : $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'interval',
+						$author$project$Vega$timeUnitSpecShort(tu)),
 						_Utils_Tuple2(
 						'step',
 						$elm$json$Json$Encode$int(step))
@@ -10400,7 +10544,7 @@ var $author$project$Vega$TLookup = F4(
 var $author$project$Vega$trLookup = $author$project$Vega$TLookup;
 var $author$project$Vega$TWindow = F2(
 	function (a, b) {
-		return {$: 50, a: a, b: b};
+		return {$: 51, a: a, b: b};
 	});
 var $author$project$Vega$trWindow = $author$project$Vega$TWindow;
 var $author$project$Vega$transform = F2(
@@ -11239,6 +11383,7 @@ var $author$project$Vega$overlapStrategySpec = function (strat) {
 					]));
 	}
 };
+var $author$project$Vega$quarter = $author$project$Vega$Quarter;
 var $author$project$Vega$sideSpec = function (orient) {
 	switch (orient.$) {
 		case 0:
@@ -11653,20 +11798,42 @@ var $author$project$Vega$legendProperty = function (lp) {
 			switch (n.$) {
 				case 0:
 					var step = n.a;
-					return (step <= 0) ? _Utils_Tuple2(
-						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu)) : _Utils_Tuple2(
+					return (step <= 0) ? (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
 						'tickCount',
 						$elm$json$Json$Encode$object(
 							_List_fromArray(
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$int(3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$author$project$Vega$timeUnitSpecShort(tu))) : (_Utils_eq(tu, $author$project$Vega$quarter) ? _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort($author$project$Vega$Month)),
+									_Utils_Tuple2(
+									'step',
+									$elm$json$Json$Encode$float(step * 3))
+								]))) : _Utils_Tuple2(
+						'tickCount',
+						$elm$json$Json$Encode$object(
+							_List_fromArray(
+								[
+									_Utils_Tuple2(
+									'interval',
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
-								])));
+								]))));
 				case 2:
 					return _Utils_Tuple2(
 						'tickCount',
@@ -11675,7 +11842,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -11688,7 +11855,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 								[
 									_Utils_Tuple2(
 									'interval',
-									$author$project$Vega$timeUnitSpec(tu)),
+									$author$project$Vega$timeUnitSpecShort(tu)),
 									_Utils_Tuple2(
 									'step',
 									$author$project$Vega$numSpec(n))
@@ -11696,7 +11863,7 @@ var $author$project$Vega$legendProperty = function (lp) {
 				default:
 					return _Utils_Tuple2(
 						'tickCount',
-						$author$project$Vega$timeUnitSpec(tu));
+						$author$project$Vega$timeUnitSpecShort(tu));
 			}
 		case 78:
 			var n = lp.a;
@@ -11810,11 +11977,11 @@ var $author$project$Vega$MGroup = function (a) {
 };
 var $author$project$Vega$mGroup = $author$project$Vega$MGroup;
 var $author$project$Vega$MdX = function (a) {
-	return {$: 51, a: a};
+	return {$: 52, a: a};
 };
 var $author$project$Vega$maDx = $author$project$Vega$MdX;
 var $author$project$Vega$MFontWeight = function (a) {
-	return {$: 56, a: a};
+	return {$: 57, a: a};
 };
 var $author$project$Vega$maFontWeight = $author$project$Vega$MFontWeight;
 var $author$project$Vega$MInterpolate = function (a) {
@@ -12284,7 +12451,7 @@ var $author$project$Vega$TStratify = F2(
 	});
 var $author$project$Vega$trStratify = $author$project$Vega$TStratify;
 var $author$project$Vega$TTree = function (a) {
-	return {$: 46, a: a};
+	return {$: 47, a: a};
 };
 var $author$project$Vega$trTree = $author$project$Vega$TTree;
 var $author$project$Vega$VNull = {$: 20};
@@ -13673,7 +13840,7 @@ var $author$project$Vega$MFillOpacity = function (a) {
 };
 var $author$project$Vega$maFillOpacity = $author$project$Vega$MFillOpacity;
 var $author$project$Vega$MPath = function (a) {
-	return {$: 44, a: a};
+	return {$: 45, a: a};
 };
 var $author$project$Vega$maPath = $author$project$Vega$MPath;
 var $author$project$Vega$numSignals = $author$project$Vega$NumSignals;
@@ -14202,7 +14369,7 @@ var $author$project$Vega$TGeoPoint = F3(
 var $author$project$Vega$trGeoPoint = $author$project$Vega$TGeoPoint;
 var $author$project$Vega$TVoronoi = F3(
 	function (a, b, c) {
-		return {$: 49, a: a, b: b, c: c};
+		return {$: 50, a: a, b: b, c: c};
 	});
 var $author$project$Vega$trVoronoi = $author$project$Vega$TVoronoi;
 var $author$project$Vega$transparent = $author$project$Vega$vStr('transparent');
