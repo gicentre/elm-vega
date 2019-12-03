@@ -987,9 +987,80 @@ kdeTest2 =
         [ width 500, height 200, ds, sc [], ax [], mk [] ]
 
 
+timeUnitTest1 : Spec
+timeUnitTest1 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "year" (vNums [ 2018, 2018, 2018, 2018 ])
+                << dataColumn "month" (vNums [ 1, 5, 9, 12 ])
+                << dataColumn "day" (vNums [ 11, 12, 7, 23 ])
+                << dataColumn "count" (vNums [ 1, 1, 1, 1 ])
+
+        ds =
+            dataSource
+                [ table []
+                    |> transform
+                        [ trFormula "datetime(datum.year,  datum.month-1, datum.day)" "date"
+                        , trTimeUnit (field "date")
+                            [ tbUnits [ year, week ]
+                            , tbStep (num 2)
+                            , tbTimezone tzUtc
+                            , tbAs "first" "last"
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scUtc
+                    , scRange raWidth
+                    , scDomain (doData [ daDataset "table", daFields [ field "first", field "last" ] ])
+                    ]
+                << scale "yScale"
+                    [ scRange raHeight
+                    , scDomain (doData [ daDataset "table", daField (field "count") ])
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom []
+
+        mk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "first") ]
+                            , maX2 [ vScale "xScale", vField (field "last") ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maOpacity [ vNum 0.3 ]
+                            ]
+                        ]
+                    ]
+                << mark rect
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "date") ]
+                            , maWidth [ vNum 2 ]
+                            , maY [ vScale "yScale", vField (field "count") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "firebrick" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 700, height 200, ds, sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    kdeTest2
+    timeUnitTest1
 
 
 
@@ -1010,6 +1081,7 @@ mySpecs =
         , ( "densityTest1", densityTest1 )
         , ( "kdeTest1", kdeTest1 )
         , ( "kdeTest2", kdeTest2 )
+        , ( "timeUnitTest1", timeUnitTest1 )
         ]
 
 

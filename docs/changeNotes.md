@@ -7,10 +7,13 @@ _Minor release supporting Vega 5.8._
 - Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
 - Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
 - Add `maSmooth` to `image` mark properties.
+- Add `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
+- `quarter` and `date` added as time units.
 
 ## Other Changes
 
 - Additional tests to reflect new additions.
+- Internal refactoring of time unit handling.
 
 ---
 
