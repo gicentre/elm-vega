@@ -14846,6 +14846,207 @@ var $author$project$TransformTests$forceTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$dataFromRows = F3(
+	function (name, fmts, rows) {
+		var fmt = _Utils_eq(fmts, _List_Nil) ? _List_Nil : _List_fromArray(
+			[
+				_Utils_Tuple2(
+				'format',
+				$elm$json$Json$Encode$object(
+					A2($elm$core$List$concatMap, $author$project$Vega$formatProperty, fmts)))
+			]);
+		return _Utils_ap(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'name',
+					$elm$json$Json$Encode$string(name)),
+					_Utils_Tuple2(
+					'values',
+					A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, rows))
+				]),
+			fmt);
+	});
+var $author$project$Vega$dataRow = function (row) {
+	return $elm$core$List$cons(
+		$elm$json$Json$Encode$object(
+			A2(
+				$elm$core$List$map,
+				function (_v0) {
+					var colName = _v0.a;
+					var val = _v0.b;
+					return _Utils_Tuple2(
+						colName,
+						$author$project$Vega$valueSpec(val));
+				},
+				row)));
+};
+var $author$project$Vega$DoNums = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$doNums = $author$project$Vega$DoNums;
+var $author$project$Vega$HmColor = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$hmColor = $author$project$Vega$HmColor;
+var $author$project$Vega$HmOpacity = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$hmOpacity = $author$project$Vega$HmOpacity;
+var $author$project$Vega$Image = 2;
+var $author$project$Vega$image = 2;
+var $author$project$Vega$MAspect = function (a) {
+	return {$: 42, a: a};
+};
+var $author$project$Vega$maAspect = $author$project$Vega$MAspect;
+var $author$project$Vega$MHeight = function (a) {
+	return {$: 7, a: a};
+};
+var $author$project$Vega$maHeight = $author$project$Vega$MHeight;
+var $author$project$Vega$MWidth = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$maWidth = $author$project$Vega$MWidth;
+var $author$project$Vega$Nums = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$nums = $author$project$Vega$Nums;
+var $author$project$Vega$THeatmap = function (a) {
+	return {$: 25, a: a};
+};
+var $author$project$Vega$trHeatmap = $author$project$Vega$THeatmap;
+var $author$project$TransformTests$heatmapTest1 = function () {
+	var table = A2(
+		$elm$core$Basics$composeL,
+		A2($author$project$Vega$dataFromRows, 'heatmap', _List_Nil),
+		$author$project$Vega$dataRow(
+			_List_fromArray(
+				[
+					_Utils_Tuple2(
+					'width',
+					$author$project$Vega$vNum(150)),
+					_Utils_Tuple2(
+					'height',
+					$author$project$Vega$vNum(100))
+				])));
+	var si = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$signals,
+		A2(
+			$author$project$Vega$signal,
+			'scale',
+			_List_fromArray(
+				[
+					$author$project$Vega$siValue(
+					$author$project$Vega$vNum(0.01)),
+					$author$project$Vega$siBind(
+					$author$project$Vega$iRange(
+						_List_fromArray(
+							[
+								$author$project$Vega$inMin(0.005),
+								$author$project$Vega$inMax(0.1),
+								$author$project$Vega$inStep(0.005)
+							])))
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$scales,
+		A2(
+			$author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scLinear),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doNums(
+						$author$project$Vega$nums(
+							_List_fromArray(
+								[-1, 1])))),
+					$author$project$Vega$scRange(
+					A2(
+						$author$project$Vega$raScheme,
+						$author$project$Vega$str('spectral'),
+						_List_Nil))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$marks,
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$image,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('heatmap'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(0)
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(0)
+										])),
+									$author$project$Vega$maWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('width')
+										])),
+									$author$project$Vega$maHeight(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('height')
+										])),
+									$author$project$Vega$maAspect(
+									_List_fromArray(
+										[$author$project$Vega$vFalse]))
+								]))
+						])),
+					$author$project$Vega$mTransform(
+					_List_fromArray(
+						[
+							$author$project$Vega$trHeatmap(
+							_List_fromArray(
+								[
+									$author$project$Vega$hmColor(
+									$author$project$Vega$strExpr(
+										$author$project$Vega$expr('scale(\'cScale\', sin(scale * (datum.$x + datum.$y)) * sin(scale * (datum.$x - datum.$y)))'))),
+									$author$project$Vega$hmOpacity(
+									$author$project$Vega$num(1))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				table(_List_Nil)
+			]));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(500),
+				$author$project$Vega$height(400),
+				$author$project$Vega$padding(5),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[$author$project$Vega$asPad])),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$KdBandwidth = function (a) {
 	return {$: 3, a: a};
 };
@@ -15312,10 +15513,6 @@ var $author$project$Vega$MGroup = function (a) {
 	return {$: 14, a: a};
 };
 var $author$project$Vega$mGroup = $author$project$Vega$MGroup;
-var $author$project$Vega$Nums = function (a) {
-	return {$: 1, a: a};
-};
-var $author$project$Vega$nums = $author$project$Vega$Nums;
 var $author$project$Vega$RaCategory = {$: 9};
 var $author$project$Vega$raCategory = $author$project$Vega$RaCategory;
 var $author$project$Vega$RShared = {$: 0};
@@ -16050,10 +16247,6 @@ var $author$project$Vega$FSignal = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$fSignal = $author$project$Vega$FSignal;
-var $author$project$Vega$MWidth = function (a) {
-	return {$: 3, a: a};
-};
-var $author$project$Vega$maWidth = $author$project$Vega$MWidth;
 var $author$project$Vega$on = F2(
 	function (triggerSpecs, dTable) {
 		return _Utils_ap(
@@ -17631,10 +17824,6 @@ var $author$project$TransformTests$voronoiTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var $author$project$Vega$DoNums = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$doNums = $author$project$Vega$DoNums;
 var $author$project$Vega$RaSignal = function (a) {
 	return {$: 15, a: a};
 };
@@ -17950,7 +18139,8 @@ var $author$project$TransformTests$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('densityTest1', $author$project$TransformTests$densityTest1),
 			_Utils_Tuple2('kdeTest1', $author$project$TransformTests$kdeTest1),
 			_Utils_Tuple2('kdeTest2', $author$project$TransformTests$kdeTest2),
-			_Utils_Tuple2('timeUnitTest1', $author$project$TransformTests$timeUnitTest1)
+			_Utils_Tuple2('timeUnitTest1', $author$project$TransformTests$timeUnitTest1),
+			_Utils_Tuple2('heatmapTest1', $author$project$TransformTests$heatmapTest1)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -17966,7 +18156,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$TransformTests$sourceExample = $author$project$TransformTests$timeUnitTest1;
+var $author$project$TransformTests$sourceExample = $author$project$TransformTests$heatmapTest1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$TransformTests$view = function (spec) {

@@ -1058,9 +1058,60 @@ timeUnitTest1 =
         [ width 700, height 200, ds, sc [], ax [], mk [] ]
 
 
+heatmapTest1 : Spec
+heatmapTest1 =
+    let
+        table =
+            dataFromRows "heatmap" []
+                << dataRow [ ( "width", vNum 150 ), ( "height", vNum 100 ) ]
+
+        ds =
+            dataSource
+                [ table [] ]
+
+        si =
+            signals
+                << signal "scale"
+                    [ siValue (vNum 0.01)
+                    , siBind (iRange [ inMin 0.005, inMax 0.1, inStep 0.005 ])
+                    ]
+
+        sc =
+            scales
+                << scale "cScale"
+                    [ scType scLinear
+                    , scDomain (doNums (nums [ -1, 1 ]))
+                    , scRange (raScheme (str "spectral") [])
+                    ]
+
+        mk =
+            marks
+                << mark image
+                    [ mFrom [ srData (str "heatmap") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vNum 0 ]
+                            , maY [ vNum 0 ]
+                            , maWidth [ vSignal "width" ]
+                            , maHeight [ vSignal "height" ]
+                            , maAspect [ vFalse ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trHeatmap
+                            [ hmColor (strExpr (expr "scale('cScale', sin(scale * (datum.$x + datum.$y)) * sin(scale * (datum.$x - datum.$y)))"))
+                            , hmOpacity (num 1)
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    timeUnitTest1
+    heatmapTest1
 
 
 
@@ -1082,6 +1133,7 @@ mySpecs =
         , ( "kdeTest1", kdeTest1 )
         , ( "kdeTest2", kdeTest2 )
         , ( "timeUnitTest1", timeUnitTest1 )
+        , ( "heatmapTest1", heatmapTest1 )
         ]
 
 
