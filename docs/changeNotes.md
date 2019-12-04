@@ -4,12 +4,23 @@ _Minor release supporting Vega 5.8._
 
 ## Additions
 
-- Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
-- Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
-- Add `maSmooth` to `image` mark properties.
+### New transforms
+
 - Add `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
 - `quarter` and `date` added as time units.
 - Add `trKde2d` two-dimensional (raster) density estimation transform and its associated parameterisation functions `kd2Weight`, `kd2CellSize`, `kd2Bandwidth`, `kd2Counts` and `kd2As`.
+- Add `trIsocontour` transform and associated property functions `icField`, `icThresholds`, `icLevels`, `icNice`, `icResolve`, `icZero`, `icSmooth`, `icScale` and `icAs` for more flexible contouring.
+- Add `trHeatmap` transform and associated property functions `hmField`, `hmColor`, `hmOpacity`, `hmResolve` and `hmAs`
+
+### New properties
+
+- Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
+- Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
+- Add `maSmooth` to `image` mark properties.
+
+## Deprecations
+
+- `trContour` and its associated `cn` property functions are now deprecated in favour of `trIsocontour` (Vega 5.8)
 
 ## Other Changes
 
