@@ -850,6 +850,135 @@ scatter1 =
 contour1 : Spec
 contour1 =
     let
+        ds =
+            dataSource
+                [ data "source" [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                    |> transform [ trFilter (expr "datum['Horsepower'] != null && datum['Miles_per_Gallon'] != null") ]
+                , data "density" [ daSource "source" ]
+                    |> transform
+                        [ trKde2d (numSignal "width")
+                            (numSignal "height")
+                            (fExpr "scale('xScale', datum.Horsepower)")
+                            (fExpr "scale('yScale', datum.Miles_per_Gallon)")
+                            [ kd2GroupBy [ field "Origin" ]
+                            , kd2Bandwidth (numSignal "bandwidth") (numSignal "bandwidth")
+                            , kd2Counts (booSignal "counts")
+                            ]
+                        ]
+                , data "contours" [ daSource "density" ]
+                    |> transform
+                        [ trIsocontour
+                            [ icField (field "grid")
+                            , icResolve (resolveSignal "resolve")
+                            , icLevels (numSignal "levels")
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "levels" [ siValue (vNum 3), siBind (iRange [ inMin 1, inMax 20, inStep 1 ]) ]
+                << signal "bandwidth" [ siValue (vNum -1), siBind (iRange [ inMin -1, inMax 100, inStep 1 ]) ]
+                << signal "resolve" [ siValue (vStr "shares"), siBind (iSelect [ inOptions (vStrs [ "independent", "shared" ]) ]) ]
+                << signal "counts" [ siValue vTrue, siBind (iCheckbox []) ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scLinear
+                    , scRange raWidth
+                    , scDomain (doData [ daDataset "source", daField (field "Horsepower") ])
+                    , scRound true
+                    , scNice niTrue
+                    , scZero true
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
+                    , scRound true
+                    , scNice niTrue
+                    , scZero true
+                    ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scDomain (doData [ daDataset "source", daField (field "Origin"), daSort [ soDescending ] ])
+                    , scRange raCategory
+                    ]
+
+        ax =
+            axes
+                << axis "xScale"
+                    siBottom
+                    [ axGrid true
+                    , axDomain false
+                    , axTickCount (num 5)
+                    , axTitle (str "Horsepower")
+                    ]
+                << axis "yScale"
+                    siLeft
+                    [ axGrid true
+                    , axDomain false
+                    , axTitle (str "Miles per gallon")
+                    , axTitlePadding (vNum 5)
+                    ]
+
+        le =
+            legends << legend [ leStroke "cScale", leType ltSymbol ]
+
+        mk =
+            marks
+                << mark symbol
+                    [ mName "marks"
+                    , mFrom [ srData (str "source") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
+                            , maSize [ vNum 4 ]
+                            , maFill [ vStr "#ccc" ]
+                            ]
+                        ]
+                    ]
+                << mark image
+                    [ mFrom [ srData (str "density") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vNum 0 ]
+                            , maY [ vNum 0 ]
+                            , maWidth [ vSignal "width" ]
+                            , maHeight [ vSignal "height" ]
+                            , maAspect [ vFalse ]
+                            ]
+                        ]
+                    , mTransform
+                        [ trHeatmap
+                            [ hmField (field "datum.grid")
+                            , hmResolve (resolveSignal "resolve")
+                            , hmColor (strExpr (expr "scale('cScale', datum.datum.Origin)"))
+                            ]
+                        ]
+                    ]
+                << mark path
+                    [ mClip (clEnabled true)
+                    , mFrom [ srData (str "contours") ]
+                    , mEncode
+                        [ enEnter
+                            [ maStroke [ vScale "cScale", vField (field "Origin") ]
+                            , maStrokeOpacity [ vNum 1 ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    , mTransform [ trGeoPath "" [ gpField (field "datum.contour") ] ]
+                    ]
+    in
+    toVega
+        [ width 500, height 400, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], mk [] ]
+
+
+contour2 : Spec
+contour2 =
+    let
         cf =
             config [ cfScaleRange raHeatmap (raScheme (str "greenblue") []) ]
 
@@ -1475,7 +1604,7 @@ regression2 =
 
 sourceExample : Spec
 sourceExample =
-    quantile1
+    contour2
 
 
 
@@ -1494,6 +1623,7 @@ mySpecs =
         , ( "window2", window2 )
         , ( "scatter1", scatter1 )
         , ( "contour1", contour1 )
+        , ( "contour2", contour2 )
         , ( "wheat1", wheat1 )
         , ( "dotbin1", dotbin1 )
         , ( "quantile1", quantile1 )
