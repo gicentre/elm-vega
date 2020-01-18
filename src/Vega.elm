@@ -842,6 +842,7 @@ module Vega exposing
     , axTitlePadding
     , axTitleX
     , axTitleY
+    , axTranslate
     , aeAxis
     , aeTicks
     , aeGrid
@@ -2864,6 +2865,7 @@ The visual appearance of chart axes. See the
 @docs axTitlePadding
 @docs axTitleX
 @docs axTitleY
+@docs axTranslate
 
 
 ## 10.7 Axis Elements
@@ -3694,7 +3696,7 @@ type AxisElement
 [axTitleFontWeight](#axTitleFontWeight), [axTitleLimit](#axTitleLimit),
 [axTitleLineHeight](#axTitleLineHeight)[axTitleOpacity](#axTitleOpacity),
 [axTitlePadding](#axTitlePadding), [axTitleX](#axTitleX), [axTitleY](#axTitleY),
-[axValues](#axValues) and [axZIndex](#axZIndex).
+[axTranslate](#axTranslate), [axValues](#axValues) and [axZIndex](#axZIndex).
 -}
 type AxisProperty
     = AxScale String
@@ -3768,6 +3770,7 @@ type AxisProperty
     | AxTitlePadding Value
     | AxTitleX Num
     | AxTitleY Num
+    | AxTranslate Num
     | AxValues Value
     | AxZIndex Num
 
@@ -6639,6 +6642,14 @@ axTitleY =
 axTop : AxisType
 axTop =
     AxTop
+
+
+{-| Translate the axis coordinate system by a give number of pixels. Can be used
+for detailed alignment of axes when generating precise SVG output.
+-}
+axTranslate : Num -> AxisProperty
+axTranslate =
+    AxTranslate
 
 
 {-| Explicitly set an axis tick and label values.
@@ -16650,6 +16661,9 @@ axisProperty ap =
 
         AxTitleY n ->
             ( "titleY", numSpec n )
+
+        AxTranslate n ->
+            ( "translate", numSpec n )
 
         AxValues vals ->
             ( "values", valueSpec vals )

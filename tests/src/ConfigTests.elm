@@ -368,6 +368,7 @@ configTest9 =
                     , axLabelColor (str "red")
                     , axLabelFontSize (num 18)
                     , axTickBand abExtent
+                    , axTranslate (num 4)
                     ]
                 ]
     in

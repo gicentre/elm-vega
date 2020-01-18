@@ -15,6 +15,7 @@ _Minor release supporting Vega 5.8._
 ### New properties
 
 - Add `axTickBand` for aligning ticks on band scales (Vega 5.8)
+- Add `axTranslate` for moving axes relative to main plot area.
 - Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
 - Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
 - Add `maSmooth` to `image` mark properties.
