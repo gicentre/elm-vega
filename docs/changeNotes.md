@@ -23,6 +23,8 @@ _Minor release supporting Vega release 5.8 and 5.9._
 - `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks (Vega 5.8).
 - `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API) (Vega 5.8).
 - `maSmooth` added to `image` mark properties (Vega 5.8).
+- `maStrokeForeground` for overlaying group stroke over content (Vega 5.9).
+- `maStrokeOffset` for shifting group stroke and fill (Vega 5.9).
 - `mollweide` map projection (Vega 5.9).
 
 ## Deprecations

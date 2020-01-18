@@ -4824,17 +4824,17 @@ type MarkInterpolation
 [maHRef](#maHRef), [maTooltip](#maTooltip), [maZIndex](#maZIndex), [maAlign](#maAlign),
 [maBaseline](#maBaseline), [maCornerRadius](#maCornerRadius), [maCornerRadiusTopLeft](#maCornerRadiusTopLeft),
 [maCornerRadiusTopRight](#maCornerRadiusTopRight), [maCornerRadiusBottomLeft](#maCornerRadiusBottomLeft),
-[maCornerRadiusBottomRight](#maCornerRadiusBottomRight), [maInterpolate](#maInterpolate),
-[maTension](#maTension), [maDefined](#maDefined), [maSize](#maSize), [maStartAngle](#maStartAngle),
-[maEndAngle](#maEndAngle), [maPadAngle](#maPadAngle), [maInnerRadius](#maInnerRadius),
-[maOuterRadius](#maOuterRadius), [maOrient](#maOrient), [maGroupClip](#maGroupClip),
-[maUrl](#maUrl), [maImage](#maImage), [maAspect](#maAspect), [maSmooth](#maSmooth),
-[maPath](#maPath), [maShape](#maShape), [maSymbol](#maSymbol), [maAngle](#maAngle),
-[maDir](#maDir), [maDx](#maDx), [maDy](#maDy), [maEllipsis](#maEllipsis), [maFont](#maFont),
-[maFontSize](#maFontSize), [maFontWeight](#maFontWeight), [maFontStyle](#maFontStyle),
-[maLineBreak](#maLineBreak), [maLineHeight](#maLineHeight), [maLimit](#maLimit),
-[maRadius](#maRadius), [maScaleX](#maScaleX), [maScaleY](#maScaleY), [maText](#maText)
-and [maTheta](#maTheta).
+[maCornerRadiusBottomRight](#maCornerRadiusBottomRight), [maStrokeForeground](#maStrokeForeground),
+[maStrokeOffset](#maStrokeOffset), [maInterpolate](#maInterpolate), [maTension](#maTension),
+[maDefined](#maDefined), [maSize](#maSize), [maStartAngle](#maStartAngle), [maEndAngle](#maEndAngle),
+[maPadAngle](#maPadAngle), [maInnerRadius](#maInnerRadius), [maOuterRadius](#maOuterRadius),
+[maOrient](#maOrient), [maGroupClip](#maGroupClip), [maUrl](#maUrl), [maImage](#maImage),
+[maAspect](#maAspect), [maSmooth](#maSmooth), [maPath](#maPath), [maShape](#maShape),
+[maSymbol](#maSymbol), [maAngle](#maAngle), [maDir](#maDir), [maDx](#maDx), [maDy](#maDy),
+[maEllipsis](#maEllipsis), [maFont](#maFont), [maFontSize](#maFontSize), [maFontWeight](#maFontWeight),
+[maFontStyle](#maFontStyle), [maLineBreak](#maLineBreak), [maLineHeight](#maLineHeight),
+[maLimit](#maLimit), [maRadius](#maRadius), [maScaleX](#maScaleX), [maScaleY](#maScaleY), ]
+[maText](#maText) and [maTheta](#maTheta).
 -}
 type MarkProperty
     = MX (List Value)
@@ -4868,6 +4868,8 @@ type MarkProperty
     | MCornerRadiusTR (List Value)
     | MCornerRadiusBL (List Value)
     | MCornerRadiusBR (List Value)
+    | MStrokeForeground (List Value)
+    | MStrokeOffset (List Value)
     | MInterpolate (List Value)
     | MTension (List Value)
     | MDefined (List Value)
@@ -11725,6 +11727,14 @@ maStrokeDashOffset =
     MStrokeDashOffset
 
 
+{-| Whether or not a group stroke should be drawn on top of group content rather
+than in the background.
+-}
+maStrokeForeground : List Value -> MarkProperty
+maStrokeForeground =
+    MStrokeForeground
+
+
 {-| Stroke join method for a mark. To guarantee valid stroke join
 names, use [strokeJoinValue](#strokeJoinValue).
 -}
@@ -11738,6 +11748,13 @@ maStrokeJoin =
 maStrokeMiterLimit : List Value -> MarkProperty
 maStrokeMiterLimit =
     MStrokeMiterLimit
+
+
+{-| Offset in pixels at which to draw a group stroke and fill.
+-}
+maStrokeOffset : List Value -> MarkProperty
+maStrokeOffset =
+    MStrokeOffset
 
 
 {-| Stroke opacity of a mark in the range 0 to 1.
@@ -18909,6 +18926,12 @@ markProperty mProp =
 
         MCornerRadiusBR vals ->
             ( "cornerRadiusBottomRight", valRef vals )
+
+        MStrokeForeground vals ->
+            ( "strokeForeground", valRef vals )
+
+        MStrokeOffset vals ->
+            ( "strokeOffset", valRef vals )
 
         -- Area Mark specific:
         MOrient vals ->
