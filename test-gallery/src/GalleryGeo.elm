@@ -735,43 +735,29 @@ geo7 =
         [ width 900, height 500, autosize [ asNone ], ds, si [], pr [], mk [] ]
 
 
-geo8 : List Float -> Spec
-geo8 inData =
+geo8 : Spec
+geo8 =
     let
         ds =
             dataSource
-                [ data "contours" []
+                [ data "volcano" [ daUrl (str "https://vega.github.io/vega/data/volcano.json") ]
+                , data "contours" [ daSource "volcano" ]
                     |> transform
-                        [ trContour (numSignal "volcano.width")
-                            (numSignal "volcano.height")
-                            [ cnValues (numSignal "volcano.values")
-                            , cnSmooth (booSignal "smooth")
-                            , cnThresholds (numSignal "sequence(90,195,5)")
+                        [ trIsocontour
+                            [ icScale (numExpr (expr "width / datum.width"))
+                            , icSmooth (booSignal "smooth")
+                            , icThresholds (numSignal "sequence(90, 195, 5)")
                             ]
                         ]
                 ]
 
         si =
             signals
-                << signal "volcano"
-                    [ siValue
-                        (vObject
-                            [ keyValue "width" (vNum 87)
-                            , keyValue "height" (vNum 61)
-                            , keyValue "values" (vNums inData)
-                            ]
-                        )
-                    ]
+                << signal "grid" [ siInit "data('volcano')[0]" ]
+                << signal "height" [ siUpdate "round(grid.height * width / grid.width)" ]
                 << signal "smooth"
                     [ siValue vTrue
                     , siBind (iRadio [ inOptions (vBoos [ True, False ]) ])
-                    ]
-
-        pr =
-            projections
-                << projection "myProjection"
-                    [ prType identityProjection
-                    , prScale (numSignal "width / volcano.width")
                     ]
 
         sc =
@@ -788,16 +774,16 @@ geo8 inData =
                     [ mFrom [ srData (str "contours") ]
                     , mEncode
                         [ enEnter
-                            [ maFill [ vScale "cScale", vField (field "value") ]
-                            , maStroke [ vStr "#bbb" ]
-                            , maStrokeWidth [ vNum 0.5 ]
+                            [ maFill [ vScale "cScale", vField (field "contour.value") ]
+                            , maStroke [ vStr "#ccc" ]
+                            , maStrokeWidth [ vNum 1 ]
                             ]
                         ]
-                    , mTransform [ trGeoPath "myProjection" [ gpField (field "datum") ] ]
+                    , mTransform [ trGeoPath "" [ gpField (field "datum.contour") ] ]
                     ]
     in
     toVega
-        [ width 960, height 673, autosize [ asNone ], ds, si [], pr [], sc [], mk [] ]
+        [ width 960, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
 geo9 : Spec
@@ -887,8 +873,8 @@ sourceExample =
 {- This list comprises the specifications to be provided to the Vega runtime. -}
 
 
-mySpecs : List Float -> Spec
-mySpecs inData =
+mySpecs : Spec
+mySpecs =
     combineSpecs
         [ ( "geo1", geo1 )
         , ( "geo2", geo2 )
@@ -897,7 +883,7 @@ mySpecs inData =
         , ( "geo5", geo5 )
         , ( "geo6", geo6 )
         , ( "geo7", geo7 )
-        , ( "geo8", geo8 inData )
+        , ( "geo8", geo8 )
         , ( "geo9", geo9 )
         ]
 
@@ -910,12 +896,12 @@ mySpecs inData =
 -}
 
 
-main : Program () Model Msg
+main : Program () Spec msg
 main =
     Browser.element
-        { init = always (init "data/volcanoData.txt")
+        { init = always ( mySpecs, elmToJS mySpecs )
         , view = view
-        , update = update
+        , update = \_ model -> ( model, Cmd.none )
         , subscriptions = always Sub.none
         }
 
@@ -924,56 +910,13 @@ main =
 -- View
 
 
-view : Model -> Html Msg
-view model =
+view : Spec -> Html msg
+view spec =
     div []
         [ div [ id "specSource" ] []
         , pre []
             [ Html.text (Json.Encode.encode 2 sourceExample) ]
         ]
-
-
-
--- Model (specs and input file)
-
-
-type alias Model =
-    { input : List Float
-    , spec : Spec
-    }
-
-
-init : String -> ( Model, Cmd Msg )
-init filename =
-    ( Model [] (mySpecs []), filename |> Http.send FileRead << Http.getString )
-
-
-
--- Update (used for asynchronous file reading for Volcano dataset)
-
-
-type Msg
-    = FileRead (Result Http.Error String)
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-    case msg of
-        FileRead (Ok input) ->
-            let
-                dataVals =
-                    input
-                        |> String.split ","
-                        |> List.map (\s -> String.toFloat s |> Maybe.withDefault 0)
-            in
-            ( { model
-                | input = dataVals
-              }
-            , elmToJS (mySpecs dataVals)
-            )
-
-        FileRead (Err err) ->
-            ( { model | input = [] }, Cmd.none )
 
 
 port elmToJS : Spec -> Cmd msg
