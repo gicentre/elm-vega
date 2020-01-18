@@ -93,7 +93,12 @@ stackTest1 =
             signals
                 << signal "offset"
                     [ siValue (vStr "zero")
-                    , siBind (iSelect [ inOptions (vStrs [ "zero", "center", "normalize" ]) ])
+                    , siBind
+                        (iSelect
+                            [ inOptions (vStrs [ "zero", "center", "normalize" ])
+                            , inLabels (vStrs [ "baseline offset", "centre offset", "normalised" ])
+                            ]
+                        )
                     ]
                 << signal "sortField"
                     [ siValue vNull

@@ -26,6 +26,7 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `maStrokeForeground` for overlaying group stroke over content (Vega 5.9).
 - `maStrokeOffset` for shifting group stroke and fill (Vega 5.9).
 - `mollweide` map projection (Vega 5.9).
+- `inLabels` for providing input element labels that may differ from their option values (Vega 5.9).
 
 ## Deprecations
 
