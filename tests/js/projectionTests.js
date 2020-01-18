@@ -5159,7 +5159,7 @@ var $elm$core$Basics$composeL = F3(
 			f(x));
 	});
 var $author$project$Vega$Proj = function (a) {
-	return {$: 16, a: a};
+	return {$: 17, a: a};
 };
 var $author$project$Vega$customProjection = $author$project$Vega$Proj;
 var $author$project$Vega$DaFormat = function (a) {
@@ -10511,14 +10511,16 @@ var $author$project$Vega$projectionLabel = function (pr) {
 		case 11:
 			return 'mercator';
 		case 12:
-			return 'naturalEarth1';
+			return 'mollweide';
 		case 13:
-			return 'orthographic';
+			return 'naturalEarth1';
 		case 14:
-			return 'stereographic';
+			return 'orthographic';
 		case 15:
-			return 'transverseMercator';
+			return 'stereographic';
 		case 16:
+			return 'transverseMercator';
+		case 17:
 			var s = pr.a;
 			return '';
 		default:
@@ -10528,10 +10530,10 @@ var $author$project$Vega$projectionLabel = function (pr) {
 };
 var $author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 16:
+		case 17:
 			var s = proj.a;
 			return $author$project$Vega$strSpec(s);
-		case 17:
+		case 18:
 			var sig = proj.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -11765,7 +11767,7 @@ var $author$project$ProjectionTests$projTest = function () {
 						$author$project$Vega$daValue(
 						$author$project$Vega$vStrs(
 							_List_fromArray(
-								['azimuthalEquidistant', 'conicConformal', 'mercator', 'orthographic', 'equalEarth', 'naturalEarth1', 'stereographic', 'gnomonic', 'airy', 'armadillo', 'baker', 'berghaus', 'bottomley', 'collignon', 'eckert1', 'guyou', 'hammer', 'littrow', 'mollweide', 'wagner6', 'wiechel', 'winkel3', 'interruptedSinusoidal', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'polyhedralButterfly', 'peirceQuincuncial'])))
+								['azimuthalEquidistant', 'conicConformal', 'mercator', 'orthographic', 'equalEarth', 'naturalEarth1', 'mollweide', 'stereographic', 'gnomonic', 'airy', 'armadillo', 'baker', 'berghaus', 'bottomley', 'collignon', 'eckert1', 'guyou', 'hammer', 'littrow', 'mollweide', 'wagner6', 'wiechel', 'winkel3', 'interruptedSinusoidal', 'interruptedMollweide', 'interruptedMollweideHemispheres', 'polyhedralButterfly', 'peirceQuincuncial'])))
 					])),
 				A2(
 				$author$project$Vega$data,

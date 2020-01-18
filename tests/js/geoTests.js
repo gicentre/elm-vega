@@ -10126,7 +10126,7 @@ var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
 var $author$project$Vega$numSignal = $author$project$Vega$NumSignal;
-var $author$project$Vega$Orthographic = {$: 13};
+var $author$project$Vega$Orthographic = {$: 14};
 var $author$project$Vega$orthographic = $author$project$Vega$Orthographic;
 var $author$project$Vega$PrFit = function (a) {
 	return {$: 9, a: a};
@@ -10170,14 +10170,16 @@ var $author$project$Vega$projectionLabel = function (pr) {
 		case 11:
 			return 'mercator';
 		case 12:
-			return 'naturalEarth1';
+			return 'mollweide';
 		case 13:
-			return 'orthographic';
+			return 'naturalEarth1';
 		case 14:
-			return 'stereographic';
+			return 'orthographic';
 		case 15:
-			return 'transverseMercator';
+			return 'stereographic';
 		case 16:
+			return 'transverseMercator';
+		case 17:
 			var s = pr.a;
 			return '';
 		default:
@@ -10187,10 +10189,10 @@ var $author$project$Vega$projectionLabel = function (pr) {
 };
 var $author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 16:
+		case 17:
 			var s = proj.a;
 			return $author$project$Vega$strSpec(s);
-		case 17:
+		case 18:
 			var sig = proj.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -12711,7 +12713,7 @@ var $author$project$GeoTests$geoTest7 = function () {
 			]));
 	return $author$project$GeoTests$meshSpec(ds);
 }();
-var $author$project$Vega$NaturalEarth1 = {$: 12};
+var $author$project$Vega$NaturalEarth1 = {$: 13};
 var $author$project$Vega$naturalEarth1 = $author$project$Vega$NaturalEarth1;
 var $author$project$GeoTests$geoTest8 = function () {
 	var pr = A2(

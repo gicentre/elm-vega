@@ -7778,14 +7778,16 @@ var $author$project$Vega$projectionLabel = function (pr) {
 		case 11:
 			return 'mercator';
 		case 12:
-			return 'naturalEarth1';
+			return 'mollweide';
 		case 13:
-			return 'orthographic';
+			return 'naturalEarth1';
 		case 14:
-			return 'stereographic';
+			return 'orthographic';
 		case 15:
-			return 'transverseMercator';
+			return 'stereographic';
 		case 16:
+			return 'transverseMercator';
+		case 17:
 			var s = pr.a;
 			return '';
 		default:
@@ -7795,10 +7797,10 @@ var $author$project$Vega$projectionLabel = function (pr) {
 };
 var $author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 16:
+		case 17:
 			var s = proj.a;
 			return $author$project$Vega$strSpec(s);
-		case 17:
+		case 18:
 			var sig = proj.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -8893,7 +8895,7 @@ var $author$project$Vega$VStr = function (a) {
 };
 var $author$project$Vega$vStr = $author$project$Vega$VStr;
 var $author$project$Vega$transparent = $author$project$Vega$vStr('transparent');
-var $author$project$Vega$TransverseMercator = {$: 15};
+var $author$project$Vega$TransverseMercator = {$: 16};
 var $author$project$Vega$transverseMercator = $author$project$Vega$TransverseMercator;
 var $author$project$Vega$VField = function (a) {
 	return {$: 13, a: a};

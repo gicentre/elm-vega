@@ -10938,14 +10938,16 @@ var $author$project$Vega$projectionLabel = function (pr) {
 		case 11:
 			return 'mercator';
 		case 12:
-			return 'naturalEarth1';
+			return 'mollweide';
 		case 13:
-			return 'orthographic';
+			return 'naturalEarth1';
 		case 14:
-			return 'stereographic';
+			return 'orthographic';
 		case 15:
-			return 'transverseMercator';
+			return 'stereographic';
 		case 16:
+			return 'transverseMercator';
+		case 17:
 			var s = pr.a;
 			return '';
 		default:
@@ -10955,10 +10957,10 @@ var $author$project$Vega$projectionLabel = function (pr) {
 };
 var $author$project$Vega$projectionSpec = function (proj) {
 	switch (proj.$) {
-		case 16:
+		case 17:
 			var s = proj.a;
 			return $author$project$Vega$strSpec(s);
-		case 17:
+		case 18:
 			var sig = proj.a;
 			return $elm$json$Json$Encode$object(
 				_List_fromArray(
@@ -14022,7 +14024,7 @@ var $author$project$Vega$PrRotate = function (a) {
 };
 var $author$project$Vega$prRotate = $author$project$Vega$PrRotate;
 var $author$project$Vega$ProjectionSignal = function (a) {
-	return {$: 17, a: a};
+	return {$: 18, a: a};
 };
 var $author$project$Vega$prSignal = $author$project$Vega$ProjectionSignal;
 var $author$project$Vega$projectionValue = function (proj) {
@@ -14382,13 +14384,13 @@ var $author$project$Vega$Identity = {$: 10};
 var $author$project$Vega$identityProjection = $author$project$Vega$Identity;
 var $author$project$Vega$Mercator = {$: 11};
 var $author$project$Vega$mercator = $author$project$Vega$Mercator;
-var $author$project$Vega$NaturalEarth1 = {$: 12};
+var $author$project$Vega$NaturalEarth1 = {$: 13};
 var $author$project$Vega$naturalEarth1 = $author$project$Vega$NaturalEarth1;
-var $author$project$Vega$Orthographic = {$: 13};
+var $author$project$Vega$Orthographic = {$: 14};
 var $author$project$Vega$orthographic = $author$project$Vega$Orthographic;
-var $author$project$Vega$Stereographic = {$: 14};
+var $author$project$Vega$Stereographic = {$: 15};
 var $author$project$Vega$stereographic = $author$project$Vega$Stereographic;
-var $author$project$Vega$TransverseMercator = {$: 15};
+var $author$project$Vega$TransverseMercator = {$: 16};
 var $author$project$Vega$transverseMercator = $author$project$Vega$TransverseMercator;
 var $author$project$Vega$Values = function (a) {
 	return {$: 8, a: a};
@@ -15112,7 +15114,7 @@ var $author$project$Vega$ClSphere = function (a) {
 };
 var $author$project$Vega$clSphere = $author$project$Vega$ClSphere;
 var $author$project$Vega$Proj = function (a) {
-	return {$: 16, a: a};
+	return {$: 17, a: a};
 };
 var $author$project$Vega$customProjection = $author$project$Vega$Proj;
 var $author$project$Vega$DaValue = function (a) {
