@@ -1043,6 +1043,8 @@ module Vega exposing
     , maCornerRadiusTopRight
     , maCornerRadiusBottomLeft
     , maCornerRadiusBottomRight
+    , maStrokeForeground
+    , maStrokeOffset
     , maInterpolate
     , maTension
     , maDefined
@@ -3197,6 +3199,8 @@ See the [Vega mark encoding documentation](https://vega.github.io/vega/docs/mark
 @docs maCornerRadiusTopRight
 @docs maCornerRadiusBottomLeft
 @docs maCornerRadiusBottomRight
+@docs maStrokeForeground
+@docs maStrokeOffset
 @docs maInterpolate
 @docs maTension
 @docs maDefined

@@ -1,6 +1,6 @@
 # V5.3 ➡ V5.4
 
-_Minor release supporting Vega release 5.8 and 5.9._
+_Minor release supporting Vega releases 5.8 and 5.9._
 
 ## Additions
 
