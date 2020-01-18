@@ -11421,17 +11421,17 @@ var $author$project$Vega$SiName = function (a) {
 };
 var $author$project$Vega$inputProperty = function (prop) {
 	switch (prop.$) {
-		case 3:
+		case 4:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'min',
 				$elm$json$Json$Encode$float(x));
-		case 4:
+		case 5:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'max',
 				$elm$json$Json$Encode$float(x));
-		case 5:
+		case 6:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'step',
@@ -11446,7 +11446,12 @@ var $author$project$Vega$inputProperty = function (prop) {
 			return _Utils_Tuple2(
 				'options',
 				$author$project$Vega$valueSpec(opts));
-		case 6:
+		case 3:
+			var labels = prop.a;
+			return _Utils_Tuple2(
+				'labels',
+				$author$project$Vega$valueSpec(labels));
+		case 7:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'placeholder',
@@ -12863,11 +12868,11 @@ var $author$project$Vega$IText = function (a) {
 };
 var $author$project$Vega$iText = $author$project$Vega$IText;
 var $author$project$Vega$InAutocomplete = function (a) {
-	return {$: 7, a: a};
+	return {$: 8, a: a};
 };
 var $author$project$Vega$inAutocomplete = $author$project$Vega$InAutocomplete;
 var $author$project$Vega$InPlaceholder = function (a) {
-	return {$: 6, a: a};
+	return {$: 7, a: a};
 };
 var $author$project$Vega$inPlaceholder = $author$project$Vega$InPlaceholder;
 var $author$project$Vega$MInteractive = function (a) {

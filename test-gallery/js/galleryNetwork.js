@@ -11367,11 +11367,11 @@ var $author$project$Vega$ifElse = F3(
 		return A3($author$project$Vega$VIfElse, condition, thenVals, elseVals);
 	});
 var $author$project$Vega$InMax = function (a) {
-	return {$: 4, a: a};
+	return {$: 5, a: a};
 };
 var $author$project$Vega$inMax = $author$project$Vega$InMax;
 var $author$project$Vega$InMin = function (a) {
-	return {$: 3, a: a};
+	return {$: 4, a: a};
 };
 var $author$project$Vega$inMin = $author$project$Vega$InMin;
 var $author$project$Vega$InOptions = function (a) {
@@ -11379,7 +11379,7 @@ var $author$project$Vega$InOptions = function (a) {
 };
 var $author$project$Vega$inOptions = $author$project$Vega$InOptions;
 var $author$project$Vega$InStep = function (a) {
-	return {$: 5, a: a};
+	return {$: 6, a: a};
 };
 var $author$project$Vega$inStep = $author$project$Vega$InStep;
 var $author$project$Vega$LeOrient = function (a) {
@@ -12292,17 +12292,17 @@ var $author$project$Vega$SiName = function (a) {
 };
 var $author$project$Vega$inputProperty = function (prop) {
 	switch (prop.$) {
-		case 3:
+		case 4:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'min',
 				$elm$json$Json$Encode$float(x));
-		case 4:
+		case 5:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'max',
 				$elm$json$Json$Encode$float(x));
-		case 5:
+		case 6:
 			var x = prop.a;
 			return _Utils_Tuple2(
 				'step',
@@ -12317,7 +12317,12 @@ var $author$project$Vega$inputProperty = function (prop) {
 			return _Utils_Tuple2(
 				'options',
 				$author$project$Vega$valueSpec(opts));
-		case 6:
+		case 3:
+			var labels = prop.a;
+			return _Utils_Tuple2(
+				'labels',
+				$author$project$Vega$valueSpec(labels));
+		case 7:
 			var el = prop.a;
 			return _Utils_Tuple2(
 				'placeholder',
