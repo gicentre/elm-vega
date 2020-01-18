@@ -80,190 +80,6 @@ function A9(fun, a, b, c, d, e, f, g, h, i) {
 
 
 
-// EQUALITY
-
-function _Utils_eq(x, y)
-{
-	for (
-		var pair, stack = [], isEqual = _Utils_eqHelp(x, y, 0, stack);
-		isEqual && (pair = stack.pop());
-		isEqual = _Utils_eqHelp(pair.a, pair.b, 0, stack)
-		)
-	{}
-
-	return isEqual;
-}
-
-function _Utils_eqHelp(x, y, depth, stack)
-{
-	if (depth > 100)
-	{
-		stack.push(_Utils_Tuple2(x,y));
-		return true;
-	}
-
-	if (x === y)
-	{
-		return true;
-	}
-
-	if (typeof x !== 'object' || x === null || y === null)
-	{
-		typeof x === 'function' && _Debug_crash(5);
-		return false;
-	}
-
-	/**_UNUSED/
-	if (x.$ === 'Set_elm_builtin')
-	{
-		x = $elm$core$Set$toList(x);
-		y = $elm$core$Set$toList(y);
-	}
-	if (x.$ === 'RBNode_elm_builtin' || x.$ === 'RBEmpty_elm_builtin')
-	{
-		x = $elm$core$Dict$toList(x);
-		y = $elm$core$Dict$toList(y);
-	}
-	//*/
-
-	/**/
-	if (x.$ < 0)
-	{
-		x = $elm$core$Dict$toList(x);
-		y = $elm$core$Dict$toList(y);
-	}
-	//*/
-
-	for (var key in x)
-	{
-		if (!_Utils_eqHelp(x[key], y[key], depth + 1, stack))
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-var _Utils_equal = F2(_Utils_eq);
-var _Utils_notEqual = F2(function(a, b) { return !_Utils_eq(a,b); });
-
-
-
-// COMPARISONS
-
-// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
-// the particular integer values assigned to LT, EQ, and GT.
-
-function _Utils_cmp(x, y, ord)
-{
-	if (typeof x !== 'object')
-	{
-		return x === y ? /*EQ*/ 0 : x < y ? /*LT*/ -1 : /*GT*/ 1;
-	}
-
-	/**_UNUSED/
-	if (x instanceof String)
-	{
-		var a = x.valueOf();
-		var b = y.valueOf();
-		return a === b ? 0 : a < b ? -1 : 1;
-	}
-	//*/
-
-	/**/
-	if (!x.$)
-	//*/
-	/**_UNUSED/
-	if (x.$[0] === '#')
-	//*/
-	{
-		return (ord = _Utils_cmp(x.a, y.a))
-			? ord
-			: (ord = _Utils_cmp(x.b, y.b))
-				? ord
-				: _Utils_cmp(x.c, y.c);
-	}
-
-	// traverse conses until end of a list or a mismatch
-	for (; x.b && y.b && !(ord = _Utils_cmp(x.a, y.a)); x = x.b, y = y.b) {} // WHILE_CONSES
-	return ord || (x.b ? /*GT*/ 1 : y.b ? /*LT*/ -1 : /*EQ*/ 0);
-}
-
-var _Utils_lt = F2(function(a, b) { return _Utils_cmp(a, b) < 0; });
-var _Utils_le = F2(function(a, b) { return _Utils_cmp(a, b) < 1; });
-var _Utils_gt = F2(function(a, b) { return _Utils_cmp(a, b) > 0; });
-var _Utils_ge = F2(function(a, b) { return _Utils_cmp(a, b) >= 0; });
-
-var _Utils_compare = F2(function(x, y)
-{
-	var n = _Utils_cmp(x, y);
-	return n < 0 ? $elm$core$Basics$LT : n ? $elm$core$Basics$GT : $elm$core$Basics$EQ;
-});
-
-
-// COMMON VALUES
-
-var _Utils_Tuple0 = 0;
-var _Utils_Tuple0_UNUSED = { $: '#0' };
-
-function _Utils_Tuple2(a, b) { return { a: a, b: b }; }
-function _Utils_Tuple2_UNUSED(a, b) { return { $: '#2', a: a, b: b }; }
-
-function _Utils_Tuple3(a, b, c) { return { a: a, b: b, c: c }; }
-function _Utils_Tuple3_UNUSED(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
-
-function _Utils_chr(c) { return c; }
-function _Utils_chr_UNUSED(c) { return new String(c); }
-
-
-// RECORDS
-
-function _Utils_update(oldRecord, updatedFields)
-{
-	var newRecord = {};
-
-	for (var key in oldRecord)
-	{
-		newRecord[key] = oldRecord[key];
-	}
-
-	for (var key in updatedFields)
-	{
-		newRecord[key] = updatedFields[key];
-	}
-
-	return newRecord;
-}
-
-
-// APPEND
-
-var _Utils_append = F2(_Utils_ap);
-
-function _Utils_ap(xs, ys)
-{
-	// append Strings
-	if (typeof xs === 'string')
-	{
-		return xs + ys;
-	}
-
-	// append Lists
-	if (!xs.b)
-	{
-		return ys;
-	}
-	var root = _List_Cons(xs.a, ys);
-	xs = xs.b
-	for (var curr = root; xs.b; xs = xs.b) // WHILE_CONS
-	{
-		curr = curr.b = _List_Cons(xs.a, ys);
-	}
-	return root;
-}
-
-
-
 var _List_Nil = { $: 0 };
 var _List_Nil_UNUSED = { $: '[]' };
 
@@ -770,11 +586,195 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.O.A === region.U.A)
+	if (region.N.A === region.T.A)
 	{
-		return 'on line ' + region.O.A;
+		return 'on line ' + region.N.A;
 	}
-	return 'on lines ' + region.O.A + ' through ' + region.U.A;
+	return 'on lines ' + region.N.A + ' through ' + region.T.A;
+}
+
+
+
+// EQUALITY
+
+function _Utils_eq(x, y)
+{
+	for (
+		var pair, stack = [], isEqual = _Utils_eqHelp(x, y, 0, stack);
+		isEqual && (pair = stack.pop());
+		isEqual = _Utils_eqHelp(pair.a, pair.b, 0, stack)
+		)
+	{}
+
+	return isEqual;
+}
+
+function _Utils_eqHelp(x, y, depth, stack)
+{
+	if (depth > 100)
+	{
+		stack.push(_Utils_Tuple2(x,y));
+		return true;
+	}
+
+	if (x === y)
+	{
+		return true;
+	}
+
+	if (typeof x !== 'object' || x === null || y === null)
+	{
+		typeof x === 'function' && _Debug_crash(5);
+		return false;
+	}
+
+	/**_UNUSED/
+	if (x.$ === 'Set_elm_builtin')
+	{
+		x = $elm$core$Set$toList(x);
+		y = $elm$core$Set$toList(y);
+	}
+	if (x.$ === 'RBNode_elm_builtin' || x.$ === 'RBEmpty_elm_builtin')
+	{
+		x = $elm$core$Dict$toList(x);
+		y = $elm$core$Dict$toList(y);
+	}
+	//*/
+
+	/**/
+	if (x.$ < 0)
+	{
+		x = $elm$core$Dict$toList(x);
+		y = $elm$core$Dict$toList(y);
+	}
+	//*/
+
+	for (var key in x)
+	{
+		if (!_Utils_eqHelp(x[key], y[key], depth + 1, stack))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+var _Utils_equal = F2(_Utils_eq);
+var _Utils_notEqual = F2(function(a, b) { return !_Utils_eq(a,b); });
+
+
+
+// COMPARISONS
+
+// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
+// the particular integer values assigned to LT, EQ, and GT.
+
+function _Utils_cmp(x, y, ord)
+{
+	if (typeof x !== 'object')
+	{
+		return x === y ? /*EQ*/ 0 : x < y ? /*LT*/ -1 : /*GT*/ 1;
+	}
+
+	/**_UNUSED/
+	if (x instanceof String)
+	{
+		var a = x.valueOf();
+		var b = y.valueOf();
+		return a === b ? 0 : a < b ? -1 : 1;
+	}
+	//*/
+
+	/**/
+	if (!x.$)
+	//*/
+	/**_UNUSED/
+	if (x.$[0] === '#')
+	//*/
+	{
+		return (ord = _Utils_cmp(x.a, y.a))
+			? ord
+			: (ord = _Utils_cmp(x.b, y.b))
+				? ord
+				: _Utils_cmp(x.c, y.c);
+	}
+
+	// traverse conses until end of a list or a mismatch
+	for (; x.b && y.b && !(ord = _Utils_cmp(x.a, y.a)); x = x.b, y = y.b) {} // WHILE_CONSES
+	return ord || (x.b ? /*GT*/ 1 : y.b ? /*LT*/ -1 : /*EQ*/ 0);
+}
+
+var _Utils_lt = F2(function(a, b) { return _Utils_cmp(a, b) < 0; });
+var _Utils_le = F2(function(a, b) { return _Utils_cmp(a, b) < 1; });
+var _Utils_gt = F2(function(a, b) { return _Utils_cmp(a, b) > 0; });
+var _Utils_ge = F2(function(a, b) { return _Utils_cmp(a, b) >= 0; });
+
+var _Utils_compare = F2(function(x, y)
+{
+	var n = _Utils_cmp(x, y);
+	return n < 0 ? $elm$core$Basics$LT : n ? $elm$core$Basics$GT : $elm$core$Basics$EQ;
+});
+
+
+// COMMON VALUES
+
+var _Utils_Tuple0 = 0;
+var _Utils_Tuple0_UNUSED = { $: '#0' };
+
+function _Utils_Tuple2(a, b) { return { a: a, b: b }; }
+function _Utils_Tuple2_UNUSED(a, b) { return { $: '#2', a: a, b: b }; }
+
+function _Utils_Tuple3(a, b, c) { return { a: a, b: b, c: c }; }
+function _Utils_Tuple3_UNUSED(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
+
+function _Utils_chr(c) { return c; }
+function _Utils_chr_UNUSED(c) { return new String(c); }
+
+
+// RECORDS
+
+function _Utils_update(oldRecord, updatedFields)
+{
+	var newRecord = {};
+
+	for (var key in oldRecord)
+	{
+		newRecord[key] = oldRecord[key];
+	}
+
+	for (var key in updatedFields)
+	{
+		newRecord[key] = updatedFields[key];
+	}
+
+	return newRecord;
+}
+
+
+// APPEND
+
+var _Utils_append = F2(_Utils_ap);
+
+function _Utils_ap(xs, ys)
+{
+	// append Strings
+	if (typeof xs === 'string')
+	{
+		return xs + ys;
+	}
+
+	// append Lists
+	if (!xs.b)
+	{
+		return ys;
+	}
+	var root = _List_Cons(xs.a, ys);
+	xs = xs.b
+	for (var curr = root; xs.b; xs = xs.b) // WHILE_CONS
+	{
+		curr = curr.b = _List_Cons(xs.a, ys);
+	}
+	return root;
 }
 
 
@@ -1841,9 +1841,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aB,
-		impl.aM,
+		impl.aA,
 		impl.aK,
+		impl.aI,
 		function() { return function() {} }
 	);
 });
@@ -2644,8 +2644,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		k: func(record.k),
-		P: record.P,
-		M: record.M
+		O: record.O,
+		L: record.L
 	}
 });
 
@@ -2914,10 +2914,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.k;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.P;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.O;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.M) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.L) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3863,11 +3863,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aB,
-		impl.aM,
+		impl.aA,
 		impl.aK,
+		impl.aI,
 		function(sendToApp, initialModel) {
-			var view = impl.aN;
+			var view = impl.aL;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3899,12 +3899,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.aB,
-		impl.aM,
+		impl.aA,
 		impl.aK,
+		impl.aI,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.N && impl.N(sendToApp)
-			var view = impl.aN;
+			var divertHrefToApp = impl.M && impl.M(sendToApp)
+			var view = impl.aL;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3912,12 +3912,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.as);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.ar);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.aL) && (_VirtualDom_doc.title = title = doc.aL);
+				(title !== doc.aJ) && (_VirtualDom_doc.title = title = doc.aJ);
 			});
 		}
 	);
@@ -3968,12 +3968,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.aE;
-	var onUrlRequest = impl.aF;
+	var onUrlChange = impl.aD;
+	var onUrlRequest = impl.aE;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		N: function(sendToApp)
+		M: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -3989,9 +3989,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.ah === next.ah
-							&& curr.Z === next.Z
-							&& curr.ae.a === next.ae.a
+							&& curr.ag === next.ag
+							&& curr.Y === next.Y
+							&& curr.ad.a === next.ad.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -3999,13 +3999,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		aB: function(flags)
+		aA: function(flags)
 		{
-			return A3(impl.aB, flags, _Browser_getUrl(), key);
+			return A3(impl.aA, flags, _Browser_getUrl(), key);
 		},
-		aN: impl.aN,
-		aM: impl.aM,
-		aK: impl.aK
+		aL: impl.aL,
+		aK: impl.aK,
+		aI: impl.aI
 	});
 }
 
@@ -4071,17 +4071,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { az: 'hidden', z: 'visibilitychange' }
+		? { ay: 'hidden', z: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { az: 'mozHidden', z: 'mozvisibilitychange' }
+		? { ay: 'mozHidden', z: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { az: 'msHidden', z: 'msvisibilitychange' }
+		? { ay: 'msHidden', z: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { az: 'webkitHidden', z: 'webkitvisibilitychange' }
-		: { az: 'hidden', z: 'visibilitychange' };
+		? { ay: 'webkitHidden', z: 'webkitvisibilitychange' }
+		: { ay: 'hidden', z: 'visibilitychange' };
 }
 
 
@@ -4162,8 +4162,8 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		al: _Browser_getScene(),
-		ap: {
+		ak: _Browser_getScene(),
+		ao: {
 			H: _Browser_window.pageXOffset,
 			I: _Browser_window.pageYOffset,
 			x: _Browser_doc.documentElement.clientWidth,
@@ -4201,11 +4201,11 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			al: {
+			ak: {
 				x: node.scrollWidth,
 				s: node.scrollHeight
 			},
-			ap: {
+			ao: {
 				H: node.scrollLeft,
 				I: node.scrollTop,
 				x: node.clientWidth,
@@ -4239,14 +4239,14 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			al: _Browser_getScene(),
-			ap: {
+			ak: _Browser_getScene(),
+			ao: {
 				H: x,
 				I: y,
 				x: _Browser_doc.documentElement.clientWidth,
 				s: _Browser_doc.documentElement.clientHeight
 			},
-			ax: {
+			aw: {
 				H: x + rect.left,
 				I: y + rect.top,
 				x: rect.width,
@@ -4285,196 +4285,33 @@ function _Browser_load(url)
 		}
 	}));
 }
-
-
-
-// SEND REQUEST
-
-var _Http_toTask = F2(function(request, maybeProgress)
-{
-	return _Scheduler_binding(function(callback)
-	{
-		var xhr = new XMLHttpRequest();
-
-		_Http_configureProgress(xhr, maybeProgress);
-
-		xhr.addEventListener('error', function() {
-			callback(_Scheduler_fail($elm$http$Http$NetworkError));
-		});
-		xhr.addEventListener('timeout', function() {
-			callback(_Scheduler_fail($elm$http$Http$Timeout));
-		});
-		xhr.addEventListener('load', function() {
-			callback(_Http_handleResponse(xhr, request.W.a));
-		});
-
-		try
-		{
-			xhr.open(request.aC, request.Q, true);
-		}
-		catch (e)
-		{
-			return callback(_Scheduler_fail($elm$http$Http$BadUrl(request.Q)));
-		}
-
-		_Http_configureRequest(xhr, request);
-
-		var body = request.as;
-		xhr.send($elm$http$Http$Internal$isStringBody(body)
-			? (xhr.setRequestHeader('Content-Type', body.a), body.b)
-			: body.a
-		);
-
-		return function() { xhr.abort(); };
-	});
-});
-
-function _Http_configureProgress(xhr, maybeProgress)
-{
-	if (!$elm$core$Maybe$isJust(maybeProgress))
-	{
-		return;
-	}
-
-	xhr.addEventListener('progress', function(event) {
-		if (!event.lengthComputable)
-		{
-			return;
-		}
-		_Scheduler_rawSpawn(maybeProgress.a({
-			at: event.loaded,
-			au: event.total
-		}));
-	});
-}
-
-function _Http_configureRequest(xhr, request)
-{
-	for (var headers = request.Y; headers.b; headers = headers.b) // WHILE_CONS
-	{
-		xhr.setRequestHeader(headers.a.a, headers.a.b);
-	}
-
-	xhr.responseType = request.W.b;
-	xhr.withCredentials = request.aO;
-
-	$elm$core$Maybe$isJust(request.ao) && (xhr.timeout = request.ao.a);
-}
-
-
-// RESPONSES
-
-function _Http_handleResponse(xhr, responseToResult)
-{
-	var response = _Http_toResponse(xhr);
-
-	if (xhr.status < 200 || 300 <= xhr.status)
-	{
-		response.body = xhr.responseText;
-		return _Scheduler_fail($elm$http$Http$BadStatus(response));
-	}
-
-	var result = responseToResult(response);
-
-	if ($elm$core$Result$isOk(result))
-	{
-		return _Scheduler_succeed(result.a);
-	}
-	else
-	{
-		response.body = xhr.responseText;
-		return _Scheduler_fail(A2($elm$http$Http$BadPayload, result.a, response));
-	}
-}
-
-function _Http_toResponse(xhr)
-{
-	return {
-		Q: xhr.responseURL,
-		aJ: { aw: xhr.status, k: xhr.statusText },
-		Y: _Http_parseHeaders(xhr.getAllResponseHeaders()),
-		as: xhr.response
-	};
-}
-
-function _Http_parseHeaders(rawHeaders)
-{
-	var headers = $elm$core$Dict$empty;
-
-	if (!rawHeaders)
-	{
-		return headers;
-	}
-
-	var headerPairs = rawHeaders.split('\u000d\u000a');
-	for (var i = headerPairs.length; i--; )
-	{
-		var headerPair = headerPairs[i];
-		var index = headerPair.indexOf('\u003a\u0020');
-		if (index > 0)
-		{
-			var key = headerPair.substring(0, index);
-			var value = headerPair.substring(index + 2);
-
-			headers = A3($elm$core$Dict$update, key, function(oldValue) {
-				return $elm$core$Maybe$Just($elm$core$Maybe$isJust(oldValue)
-					? value + ', ' + oldValue.a
-					: value
-				);
-			}, headers);
-		}
-	}
-
-	return headers;
-}
-
-
-// EXPECTORS
-
-function _Http_expectStringResponse(responseToResult)
-{
-	return {
-		$: 0,
-		b: 'text',
-		a: responseToResult
-	};
-}
-
-var _Http_mapExpect = F2(function(func, expect)
-{
-	return {
-		$: 0,
-		b: expect.b,
-		a: function(response) {
-			var convertedResponse = expect.a(response);
-			return A2($elm$core$Result$map, func, convertedResponse);
-		}
-	};
-});
-
-
-// BODY
-
-function _Http_multipart(parts)
-{
-
-
-	for (var formData = new FormData(); parts.b; parts = parts.b) // WHILE_CONS
-	{
-		var part = parts.a;
-		formData.append(part.a, part.b);
-	}
-
-	return $elm$http$Http$Internal$FormDataBody(formData);
-}
-var $elm$core$Basics$always = F2(
-	function (a, _v0) {
-		return a;
-	});
 var $elm$core$Basics$EQ = 1;
-var $elm$core$Basics$GT = 2;
 var $elm$core$Basics$LT = 0;
 var $elm$core$List$cons = _List_cons;
+var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
+var $elm$core$Array$foldr = F3(
+	function (func, baseCase, _v0) {
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var helper = F2(
+			function (node, acc) {
+				if (!node.$) {
+					var subTree = node.a;
+					return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
+				} else {
+					var values = node.a;
+					return A3($elm$core$Elm$JsArray$foldr, func, acc, values);
+				}
+			});
+		return A3(
+			$elm$core$Elm$JsArray$foldr,
+			helper,
+			A3($elm$core$Elm$JsArray$foldr, func, baseCase, tail),
+			tree);
+	});
+var $elm$core$Array$toList = function (array) {
+	return A3($elm$core$Array$foldr, $elm$core$List$cons, _List_Nil, array);
+};
 var $elm$core$Dict$foldr = F3(
 	function (func, acc, t) {
 		foldr:
@@ -4527,30 +4364,11 @@ var $elm$core$Set$toList = function (_v0) {
 	var dict = _v0;
 	return $elm$core$Dict$keys(dict);
 };
-var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
-var $elm$core$Array$foldr = F3(
-	function (func, baseCase, _v0) {
-		var tree = _v0.c;
-		var tail = _v0.d;
-		var helper = F2(
-			function (node, acc) {
-				if (!node.$) {
-					var subTree = node.a;
-					return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
-				} else {
-					var values = node.a;
-					return A3($elm$core$Elm$JsArray$foldr, func, acc, values);
-				}
-			});
-		return A3(
-			$elm$core$Elm$JsArray$foldr,
-			helper,
-			A3($elm$core$Elm$JsArray$foldr, func, baseCase, tail),
-			tree);
+var $elm$core$Basics$GT = 2;
+var $elm$core$Basics$always = F2(
+	function (a, _v0) {
+		return a;
 	});
-var $elm$core$Array$toList = function (array) {
-	return A3($elm$core$Array$foldr, $elm$core$List$cons, _List_Nil, array);
-};
 var $elm$core$Result$Err = function (a) {
 	return {$: 1, a: a};
 };
@@ -4975,7 +4793,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {X: fragment, Z: host, ac: path, ae: port_, ah: protocol, ai: query};
+		return {W: fragment, Y: host, ab: path, ad: port_, ag: protocol, ah: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5254,584 +5072,7 @@ var $elm$core$Task$perform = F2(
 			A2($elm$core$Task$map, toMessage, task));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$GalleryGeo$FileRead = $elm$core$Basics$identity;
-var $author$project$GalleryGeo$Model = F2(
-	function (input, spec) {
-		return {J: input, aI: spec};
-	});
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
-var $elm$http$Http$Internal$EmptyBody = {$: 0};
-var $elm$http$Http$emptyBody = $elm$http$Http$Internal$EmptyBody;
-var $elm$http$Http$BadPayload = F2(
-	function (a, b) {
-		return {$: 4, a: a, b: b};
-	});
-var $elm$http$Http$BadStatus = function (a) {
-	return {$: 3, a: a};
-};
-var $elm$http$Http$BadUrl = function (a) {
-	return {$: 0, a: a};
-};
-var $elm$http$Http$Internal$FormDataBody = function (a) {
-	return {$: 2, a: a};
-};
-var $elm$http$Http$NetworkError = {$: 2};
-var $elm$http$Http$Timeout = {$: 1};
-var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
-var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
-var $elm$core$Maybe$isJust = function (maybe) {
-	if (!maybe.$) {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $elm$http$Http$Internal$isStringBody = function (body) {
-	if (body.$ === 1) {
-		return true;
-	} else {
-		return false;
-	}
-};
-var $elm$core$Result$map = F2(
-	function (func, ra) {
-		if (!ra.$) {
-			var a = ra.a;
-			return $elm$core$Result$Ok(
-				func(a));
-		} else {
-			var e = ra.a;
-			return $elm$core$Result$Err(e);
-		}
-	});
-var $elm$core$Basics$compare = _Utils_compare;
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === -2) {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1) {
-					case 0:
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 1:
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
-var $elm$core$Dict$Black = 1;
-var $elm$core$Dict$RBNode_elm_builtin = F5(
-	function (a, b, c, d, e) {
-		return {$: -1, a: a, b: b, c: c, d: d, e: e};
-	});
-var $elm$core$Dict$Red = 0;
-var $elm$core$Dict$balance = F5(
-	function (color, key, value, left, right) {
-		if ((right.$ === -1) && (!right.a)) {
-			var _v1 = right.a;
-			var rK = right.b;
-			var rV = right.c;
-			var rLeft = right.d;
-			var rRight = right.e;
-			if ((left.$ === -1) && (!left.a)) {
-				var _v3 = left.a;
-				var lK = left.b;
-				var lV = left.c;
-				var lLeft = left.d;
-				var lRight = left.e;
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					0,
-					key,
-					value,
-					A5($elm$core$Dict$RBNode_elm_builtin, 1, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rLeft, rRight));
-			} else {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					color,
-					rK,
-					rV,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, left, rLeft),
-					rRight);
-			}
-		} else {
-			if ((((left.$ === -1) && (!left.a)) && (left.d.$ === -1)) && (!left.d.a)) {
-				var _v5 = left.a;
-				var lK = left.b;
-				var lV = left.c;
-				var _v6 = left.d;
-				var _v7 = _v6.a;
-				var llK = _v6.b;
-				var llV = _v6.c;
-				var llLeft = _v6.d;
-				var llRight = _v6.e;
-				var lRight = left.e;
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					0,
-					lK,
-					lV,
-					A5($elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 1, key, value, lRight, right));
-			} else {
-				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
-			}
-		}
-	});
-var $elm$core$Dict$insertHelp = F3(
-	function (key, value, dict) {
-		if (dict.$ === -2) {
-			return A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
-		} else {
-			var nColor = dict.a;
-			var nKey = dict.b;
-			var nValue = dict.c;
-			var nLeft = dict.d;
-			var nRight = dict.e;
-			var _v1 = A2($elm$core$Basics$compare, key, nKey);
-			switch (_v1) {
-				case 0:
-					return A5(
-						$elm$core$Dict$balance,
-						nColor,
-						nKey,
-						nValue,
-						A3($elm$core$Dict$insertHelp, key, value, nLeft),
-						nRight);
-				case 1:
-					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
-				default:
-					return A5(
-						$elm$core$Dict$balance,
-						nColor,
-						nKey,
-						nValue,
-						nLeft,
-						A3($elm$core$Dict$insertHelp, key, value, nRight));
-			}
-		}
-	});
-var $elm$core$Dict$insert = F3(
-	function (key, value, dict) {
-		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
-		if ((_v0.$ === -1) && (!_v0.a)) {
-			var _v1 = _v0.a;
-			var k = _v0.b;
-			var v = _v0.c;
-			var l = _v0.d;
-			var r = _v0.e;
-			return A5($elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
-		} else {
-			var x = _v0;
-			return x;
-		}
-	});
-var $elm$core$Dict$getMin = function (dict) {
-	getMin:
-	while (true) {
-		if ((dict.$ === -1) && (dict.d.$ === -1)) {
-			var left = dict.d;
-			var $temp$dict = left;
-			dict = $temp$dict;
-			continue getMin;
-		} else {
-			return dict;
-		}
-	}
-};
-var $elm$core$Dict$moveRedLeft = function (dict) {
-	if (((dict.$ === -1) && (dict.d.$ === -1)) && (dict.e.$ === -1)) {
-		if ((dict.e.d.$ === -1) && (!dict.e.d.a)) {
-			var clr = dict.a;
-			var k = dict.b;
-			var v = dict.c;
-			var _v1 = dict.d;
-			var lClr = _v1.a;
-			var lK = _v1.b;
-			var lV = _v1.c;
-			var lLeft = _v1.d;
-			var lRight = _v1.e;
-			var _v2 = dict.e;
-			var rClr = _v2.a;
-			var rK = _v2.b;
-			var rV = _v2.c;
-			var rLeft = _v2.d;
-			var _v3 = rLeft.a;
-			var rlK = rLeft.b;
-			var rlV = rLeft.c;
-			var rlL = rLeft.d;
-			var rlR = rLeft.e;
-			var rRight = _v2.e;
-			return A5(
-				$elm$core$Dict$RBNode_elm_builtin,
-				0,
-				rlK,
-				rlV,
-				A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
-					rlL),
-				A5($elm$core$Dict$RBNode_elm_builtin, 1, rK, rV, rlR, rRight));
-		} else {
-			var clr = dict.a;
-			var k = dict.b;
-			var v = dict.c;
-			var _v4 = dict.d;
-			var lClr = _v4.a;
-			var lK = _v4.b;
-			var lV = _v4.c;
-			var lLeft = _v4.d;
-			var lRight = _v4.e;
-			var _v5 = dict.e;
-			var rClr = _v5.a;
-			var rK = _v5.b;
-			var rV = _v5.c;
-			var rLeft = _v5.d;
-			var rRight = _v5.e;
-			if (clr === 1) {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
-			} else {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
-			}
-		}
-	} else {
-		return dict;
-	}
-};
-var $elm$core$Dict$moveRedRight = function (dict) {
-	if (((dict.$ === -1) && (dict.d.$ === -1)) && (dict.e.$ === -1)) {
-		if ((dict.d.d.$ === -1) && (!dict.d.d.a)) {
-			var clr = dict.a;
-			var k = dict.b;
-			var v = dict.c;
-			var _v1 = dict.d;
-			var lClr = _v1.a;
-			var lK = _v1.b;
-			var lV = _v1.c;
-			var _v2 = _v1.d;
-			var _v3 = _v2.a;
-			var llK = _v2.b;
-			var llV = _v2.c;
-			var llLeft = _v2.d;
-			var llRight = _v2.e;
-			var lRight = _v1.e;
-			var _v4 = dict.e;
-			var rClr = _v4.a;
-			var rK = _v4.b;
-			var rV = _v4.c;
-			var rLeft = _v4.d;
-			var rRight = _v4.e;
-			return A5(
-				$elm$core$Dict$RBNode_elm_builtin,
-				0,
-				lK,
-				lV,
-				A5($elm$core$Dict$RBNode_elm_builtin, 1, llK, llV, llLeft, llRight),
-				A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					lRight,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight)));
-		} else {
-			var clr = dict.a;
-			var k = dict.b;
-			var v = dict.c;
-			var _v5 = dict.d;
-			var lClr = _v5.a;
-			var lK = _v5.b;
-			var lV = _v5.c;
-			var lLeft = _v5.d;
-			var lRight = _v5.e;
-			var _v6 = dict.e;
-			var rClr = _v6.a;
-			var rK = _v6.b;
-			var rV = _v6.c;
-			var rLeft = _v6.d;
-			var rRight = _v6.e;
-			if (clr === 1) {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
-			} else {
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					1,
-					k,
-					v,
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, lK, lV, lLeft, lRight),
-					A5($elm$core$Dict$RBNode_elm_builtin, 0, rK, rV, rLeft, rRight));
-			}
-		}
-	} else {
-		return dict;
-	}
-};
-var $elm$core$Dict$removeHelpPrepEQGT = F7(
-	function (targetKey, dict, color, key, value, left, right) {
-		if ((left.$ === -1) && (!left.a)) {
-			var _v1 = left.a;
-			var lK = left.b;
-			var lV = left.c;
-			var lLeft = left.d;
-			var lRight = left.e;
-			return A5(
-				$elm$core$Dict$RBNode_elm_builtin,
-				color,
-				lK,
-				lV,
-				lLeft,
-				A5($elm$core$Dict$RBNode_elm_builtin, 0, key, value, lRight, right));
-		} else {
-			_v2$2:
-			while (true) {
-				if ((right.$ === -1) && (right.a === 1)) {
-					if (right.d.$ === -1) {
-						if (right.d.a === 1) {
-							var _v3 = right.a;
-							var _v4 = right.d;
-							var _v5 = _v4.a;
-							return $elm$core$Dict$moveRedRight(dict);
-						} else {
-							break _v2$2;
-						}
-					} else {
-						var _v6 = right.a;
-						var _v7 = right.d;
-						return $elm$core$Dict$moveRedRight(dict);
-					}
-				} else {
-					break _v2$2;
-				}
-			}
-			return dict;
-		}
-	});
-var $elm$core$Dict$removeMin = function (dict) {
-	if ((dict.$ === -1) && (dict.d.$ === -1)) {
-		var color = dict.a;
-		var key = dict.b;
-		var value = dict.c;
-		var left = dict.d;
-		var lColor = left.a;
-		var lLeft = left.d;
-		var right = dict.e;
-		if (lColor === 1) {
-			if ((lLeft.$ === -1) && (!lLeft.a)) {
-				var _v3 = lLeft.a;
-				return A5(
-					$elm$core$Dict$RBNode_elm_builtin,
-					color,
-					key,
-					value,
-					$elm$core$Dict$removeMin(left),
-					right);
-			} else {
-				var _v4 = $elm$core$Dict$moveRedLeft(dict);
-				if (_v4.$ === -1) {
-					var nColor = _v4.a;
-					var nKey = _v4.b;
-					var nValue = _v4.c;
-					var nLeft = _v4.d;
-					var nRight = _v4.e;
-					return A5(
-						$elm$core$Dict$balance,
-						nColor,
-						nKey,
-						nValue,
-						$elm$core$Dict$removeMin(nLeft),
-						nRight);
-				} else {
-					return $elm$core$Dict$RBEmpty_elm_builtin;
-				}
-			}
-		} else {
-			return A5(
-				$elm$core$Dict$RBNode_elm_builtin,
-				color,
-				key,
-				value,
-				$elm$core$Dict$removeMin(left),
-				right);
-		}
-	} else {
-		return $elm$core$Dict$RBEmpty_elm_builtin;
-	}
-};
-var $elm$core$Dict$removeHelp = F2(
-	function (targetKey, dict) {
-		if (dict.$ === -2) {
-			return $elm$core$Dict$RBEmpty_elm_builtin;
-		} else {
-			var color = dict.a;
-			var key = dict.b;
-			var value = dict.c;
-			var left = dict.d;
-			var right = dict.e;
-			if (_Utils_cmp(targetKey, key) < 0) {
-				if ((left.$ === -1) && (left.a === 1)) {
-					var _v4 = left.a;
-					var lLeft = left.d;
-					if ((lLeft.$ === -1) && (!lLeft.a)) {
-						var _v6 = lLeft.a;
-						return A5(
-							$elm$core$Dict$RBNode_elm_builtin,
-							color,
-							key,
-							value,
-							A2($elm$core$Dict$removeHelp, targetKey, left),
-							right);
-					} else {
-						var _v7 = $elm$core$Dict$moveRedLeft(dict);
-						if (_v7.$ === -1) {
-							var nColor = _v7.a;
-							var nKey = _v7.b;
-							var nValue = _v7.c;
-							var nLeft = _v7.d;
-							var nRight = _v7.e;
-							return A5(
-								$elm$core$Dict$balance,
-								nColor,
-								nKey,
-								nValue,
-								A2($elm$core$Dict$removeHelp, targetKey, nLeft),
-								nRight);
-						} else {
-							return $elm$core$Dict$RBEmpty_elm_builtin;
-						}
-					}
-				} else {
-					return A5(
-						$elm$core$Dict$RBNode_elm_builtin,
-						color,
-						key,
-						value,
-						A2($elm$core$Dict$removeHelp, targetKey, left),
-						right);
-				}
-			} else {
-				return A2(
-					$elm$core$Dict$removeHelpEQGT,
-					targetKey,
-					A7($elm$core$Dict$removeHelpPrepEQGT, targetKey, dict, color, key, value, left, right));
-			}
-		}
-	});
-var $elm$core$Dict$removeHelpEQGT = F2(
-	function (targetKey, dict) {
-		if (dict.$ === -1) {
-			var color = dict.a;
-			var key = dict.b;
-			var value = dict.c;
-			var left = dict.d;
-			var right = dict.e;
-			if (_Utils_eq(targetKey, key)) {
-				var _v1 = $elm$core$Dict$getMin(right);
-				if (_v1.$ === -1) {
-					var minKey = _v1.b;
-					var minValue = _v1.c;
-					return A5(
-						$elm$core$Dict$balance,
-						color,
-						minKey,
-						minValue,
-						left,
-						$elm$core$Dict$removeMin(right));
-				} else {
-					return $elm$core$Dict$RBEmpty_elm_builtin;
-				}
-			} else {
-				return A5(
-					$elm$core$Dict$balance,
-					color,
-					key,
-					value,
-					left,
-					A2($elm$core$Dict$removeHelp, targetKey, right));
-			}
-		} else {
-			return $elm$core$Dict$RBEmpty_elm_builtin;
-		}
-	});
-var $elm$core$Dict$remove = F2(
-	function (key, dict) {
-		var _v0 = A2($elm$core$Dict$removeHelp, key, dict);
-		if ((_v0.$ === -1) && (!_v0.a)) {
-			var _v1 = _v0.a;
-			var k = _v0.b;
-			var v = _v0.c;
-			var l = _v0.d;
-			var r = _v0.e;
-			return A5($elm$core$Dict$RBNode_elm_builtin, 1, k, v, l, r);
-		} else {
-			var x = _v0;
-			return x;
-		}
-	});
-var $elm$core$Dict$update = F3(
-	function (targetKey, alter, dictionary) {
-		var _v0 = alter(
-			A2($elm$core$Dict$get, targetKey, dictionary));
-		if (!_v0.$) {
-			var value = _v0.a;
-			return A3($elm$core$Dict$insert, targetKey, value, dictionary);
-		} else {
-			return A2($elm$core$Dict$remove, targetKey, dictionary);
-		}
-	});
-var $elm$http$Http$expectStringResponse = _Http_expectStringResponse;
-var $elm$http$Http$expectString = $elm$http$Http$expectStringResponse(
-	function (response) {
-		return $elm$core$Result$Ok(response.as);
-	});
-var $elm$http$Http$Internal$Request = $elm$core$Basics$identity;
-var $elm$http$Http$request = $elm$core$Basics$identity;
-var $elm$http$Http$getString = function (url) {
-	return $elm$http$Http$request(
-		{as: $elm$http$Http$emptyBody, W: $elm$http$Http$expectString, Y: _List_Nil, aC: 'GET', ao: $elm$core$Maybe$Nothing, Q: url, aO: false});
-};
+var $author$project$GalleryGeo$elmToJS = _Platform_outgoingPort('elmToJS', $elm$core$Basics$identity);
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
 		A3(
@@ -5905,6 +5146,11 @@ var $author$project$Vega$autosize = function (aus) {
 		$elm$json$Json$Encode$object(
 			A2($elm$core$List$map, $author$project$Vega$autosizeProperty, aus)));
 };
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
 var $author$project$Vega$DaFormat = function (a) {
 	return {$: 0, a: a};
 };
@@ -6903,7 +6149,7 @@ var $author$project$Vega$LeOrient = function (a) {
 };
 var $author$project$Vega$leOrient = $author$project$Vega$LeOrient;
 var $author$project$Vega$LeTitle = function (a) {
-	return {$: 65, a: a};
+	return {$: 66, a: a};
 };
 var $author$project$Vega$leTitle = $author$project$Vega$LeTitle;
 var $author$project$Vega$Month = {$: 2};
@@ -7748,13 +6994,13 @@ var $author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'type',
 				$author$project$Vega$legendTypeSpec(lt));
-		case 47:
+		case 48:
 			var ll = lp.a;
 			return _Utils_Tuple2(
 				'layout',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$legendLayoutProperty, ll)));
-		case 48:
+		case 49:
 			var oLayouts = lp.a;
 			return _Utils_Tuple2(
 				'layout',
@@ -7835,51 +7081,55 @@ var $author$project$Vega$legendProperty = function (lp) {
 				'formatType',
 				$elm$json$Json$Encode$string('time'));
 		case 16:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('utc'));
+		case 17:
 			var ga = lp.a;
 			return _Utils_Tuple2(
 				'gridAlign',
 				$author$project$Vega$gridAlignSpec(ga));
-		case 17:
+		case 18:
 			var h = lp.a;
 			return _Utils_Tuple2(
 				'clipHeight',
 				$author$project$Vega$numSpec(h));
-		case 18:
+		case 19:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'columns',
 				$author$project$Vega$numSpec(n));
-		case 19:
+		case 20:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'columnPadding',
 				$author$project$Vega$numSpec(x));
-		case 20:
+		case 21:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'rowPadding',
 				$author$project$Vega$numSpec(x));
-		case 21:
+		case 22:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'cornerRadius',
 				$author$project$Vega$numSpec(x));
-		case 22:
+		case 23:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'fillColor',
 				$author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'offset',
 				$author$project$Vega$numSpec(n));
-		case 24:
+		case 25:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'padding',
 				$author$project$Vega$numSpec(n));
-		case 25:
+		case 26:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'strokeColor',
@@ -7894,177 +7144,177 @@ var $author$project$Vega$legendProperty = function (lp) {
 			return _Utils_Tuple2(
 				'strokeWidth',
 				$author$project$Vega$numSpec(n));
-		case 29:
+		case 30:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'gradientOpacity',
 				$author$project$Vega$numSpec(n));
-		case 26:
+		case 27:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLabelLimit',
 				$author$project$Vega$numSpec(x));
-		case 27:
+		case 28:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLabelOffset',
 				$author$project$Vega$numSpec(x));
-		case 28:
+		case 29:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientLength',
 				$author$project$Vega$numSpec(x));
-		case 30:
+		case 31:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientThickness',
 				$author$project$Vega$numSpec(x));
-		case 31:
+		case 32:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'gradientStrokeColor',
 				$author$project$Vega$strSpec(s));
-		case 32:
+		case 33:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'gradientStrokeWidth',
 				$author$project$Vega$numSpec(x));
-		case 33:
+		case 34:
 			var ha = lp.a;
 			return _Utils_Tuple2(
 				'labelAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 34:
+		case 35:
 			var va = lp.a;
 			return _Utils_Tuple2(
 				'labelBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 35:
+		case 36:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'labelColor',
 				$author$project$Vega$strSpec(s));
-		case 42:
+		case 43:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'labelOpacity',
 				$author$project$Vega$numSpec(n));
-		case 36:
+		case 37:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'labelFont',
 				$author$project$Vega$strSpec(s));
-		case 37:
+		case 38:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelFontSize',
 				$author$project$Vega$numSpec(x));
-		case 38:
+		case 39:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'labelFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 39:
+		case 40:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'labelFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 40:
+		case 41:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelLimit',
 				$author$project$Vega$numSpec(x));
-		case 41:
+		case 42:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelOffset',
 				$author$project$Vega$numSpec(x));
-		case 43:
+		case 44:
 			var os = lp.a;
 			return _Utils_Tuple2(
 				'labelOverlap',
 				$author$project$Vega$overlapStrategySpec(os));
-		case 44:
+		case 45:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'labelSeparation',
 				$author$project$Vega$numSpec(x));
-		case 49:
+		case 50:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolBaseFillColor',
 				$author$project$Vega$strSpec(s));
-		case 50:
+		case 51:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolBaseStrokeColor',
 				$author$project$Vega$strSpec(s));
-		case 51:
+		case 52:
 			var vals = lp.a;
 			return _Utils_Tuple2(
 				'symbolDash',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 53:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'symbolDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 53:
+		case 54:
 			var o = lp.a;
 			return _Utils_Tuple2(
 				'symbolDirection',
 				$author$project$Vega$orientationSpec(o));
-		case 54:
+		case 55:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolFillColor',
 				$author$project$Vega$strSpec(s));
-		case 55:
+		case 56:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'symbolLimit',
 				$author$project$Vega$numSpec(n));
-		case 56:
+		case 57:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolOffset',
 				$author$project$Vega$numSpec(x));
-		case 58:
+		case 59:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolSize',
 				$author$project$Vega$numSpec(x));
-		case 59:
+		case 60:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolStrokeColor',
 				$author$project$Vega$strSpec(s));
-		case 60:
+		case 61:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'symbolStrokeWidth',
 				$author$project$Vega$numSpec(x));
-		case 57:
+		case 58:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'symbolOpacity',
 				$author$project$Vega$numSpec(n));
-		case 61:
+		case 62:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'symbolType',
 				$author$project$Vega$symbolSpec(s));
-		case 62:
+		case 63:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'tickCount',
 				$author$project$Vega$numSpec(n));
-		case 64:
+		case 65:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'tickMinStep',
 				$author$project$Vega$numSpec(n));
-		case 63:
+		case 64:
 			var tu = lp.a;
 			var n = lp.b;
 			switch (n.$) {
@@ -8137,87 +7387,87 @@ var $author$project$Vega$legendProperty = function (lp) {
 						'tickCount',
 						$author$project$Vega$timeUnitSpecShort(tu));
 			}
-		case 78:
+		case 79:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'titlePadding',
 				$author$project$Vega$numSpec(n));
-		case 65:
+		case 66:
 			var t = lp.a;
 			return _Utils_Tuple2(
 				'title',
 				$author$project$Vega$strSpec(t));
-		case 67:
+		case 68:
 			var ha = lp.a;
 			return _Utils_Tuple2(
 				'titleAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 66:
+		case 67:
 			var an = lp.a;
 			return _Utils_Tuple2(
 				'titleAnchor',
 				$author$project$Vega$anchorSpec(an));
-		case 68:
+		case 69:
 			var va = lp.a;
 			return _Utils_Tuple2(
 				'titleBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 69:
+		case 70:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleColor',
 				$author$project$Vega$strSpec(s));
-		case 70:
+		case 71:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleFont',
 				$author$project$Vega$strSpec(s));
-		case 71:
+		case 72:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'titleFontSize',
 				$author$project$Vega$numSpec(x));
-		case 72:
+		case 73:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 73:
+		case 74:
 			var val = lp.a;
 			return _Utils_Tuple2(
 				'titleFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 74:
+		case 75:
 			var x = lp.a;
 			return _Utils_Tuple2(
 				'titleLimit',
 				$author$project$Vega$numSpec(x));
-		case 75:
+		case 76:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'titleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 76:
+		case 77:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'titleOpacity',
 				$author$project$Vega$numSpec(n));
-		case 77:
+		case 78:
 			var s = lp.a;
 			return _Utils_Tuple2(
 				'titleOrient',
 				$author$project$Vega$sideSpec(s));
-		case 79:
+		case 80:
 			var vals = lp.a;
 			return _Utils_Tuple2(
 				'values',
 				A2($elm$json$Json$Encode$list, $author$project$Vega$valueSpec, vals));
-		case 45:
+		case 46:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'legendX',
 				$author$project$Vega$numSpec(n));
-		case 46:
+		case 47:
 			var n = lp.a;
 			return _Utils_Tuple2(
 				'legendY',
@@ -13001,6 +12251,13 @@ var $author$project$Vega$axisElementLabel = function (el) {
 			return 'domain';
 	}
 };
+var $author$project$Vega$axisTickBandSpec = function (tb) {
+	if (!tb) {
+		return $elm$json$Json$Encode$string('center');
+	} else {
+		return $elm$json$Json$Encode$string('extent');
+	}
+};
 var $author$project$Vega$axisProperty = function (ap) {
 	switch (ap.$) {
 		case 0:
@@ -13076,61 +12333,65 @@ var $author$project$Vega$axisProperty = function (ap) {
 				'formatType',
 				$elm$json$Json$Encode$string('time'));
 		case 13:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('utc'));
+		case 14:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'grid',
 				$author$project$Vega$booSpec(b));
-		case 14:
+		case 15:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'gridColor',
 				$author$project$Vega$strSpec(s));
-		case 15:
+		case 16:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'gridDash',
 				$author$project$Vega$valRef(vals));
-		case 16:
+		case 17:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridOpacity',
 				$author$project$Vega$numSpec(n));
-		case 18:
+		case 19:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'gridScale',
 				$elm$json$Json$Encode$string(s));
-		case 19:
+		case 20:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridWidth',
 				$author$project$Vega$numSpec(n));
-		case 20:
+		case 21:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'labels',
 				$author$project$Vega$booSpec(b));
-		case 21:
+		case 22:
 			var ha = ap.a;
 			return _Utils_Tuple2(
 				'labelAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 22:
+		case 23:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelAngle',
 				$author$project$Vega$numSpec(n));
-		case 23:
+		case 24:
 			var va = ap.a;
 			return _Utils_Tuple2(
 				'labelBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 24:
+		case 25:
 			var n = ap.a;
 			if (n.$ === 6) {
 				return _Utils_Tuple2(
@@ -13141,12 +12402,12 @@ var $author$project$Vega$axisProperty = function (ap) {
 					'labelBound',
 					$author$project$Vega$numSpec(n));
 			}
-		case 25:
+		case 26:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'labelColor',
 				$author$project$Vega$strSpec(s));
-		case 26:
+		case 27:
 			var n = ap.a;
 			if (n.$ === 6) {
 				return _Utils_Tuple2(
@@ -13157,92 +12418,97 @@ var $author$project$Vega$axisProperty = function (ap) {
 					'labelFlush',
 					$author$project$Vega$numSpec(n));
 			}
-		case 27:
+		case 28:
 			var pad = ap.a;
 			return _Utils_Tuple2(
 				'labelFlushOffset',
 				$author$project$Vega$numSpec(pad));
-		case 28:
+		case 29:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'labelFont',
 				$author$project$Vega$strSpec(s));
-		case 29:
+		case 30:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelFontSize',
 				$author$project$Vega$numSpec(n));
-		case 30:
+		case 31:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'labelFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 31:
+		case 32:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'labelFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 32:
+		case 33:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelLimit',
 				$author$project$Vega$numSpec(n));
-		case 33:
+		case 34:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelOpacity',
 				$author$project$Vega$numSpec(n));
-		case 34:
+		case 35:
 			var strat = ap.a;
 			return _Utils_Tuple2(
 				'labelOverlap',
 				$author$project$Vega$overlapStrategySpec(strat));
-		case 35:
+		case 36:
 			var pad = ap.a;
 			return _Utils_Tuple2(
 				'labelPadding',
 				$author$project$Vega$numSpec(pad));
-		case 36:
+		case 37:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelSeparation',
 				$author$project$Vega$numSpec(n));
-		case 38:
+		case 39:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'maxExtent',
 				$author$project$Vega$valueSpec(val));
-		case 37:
+		case 38:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'minExtent',
 				$author$project$Vega$valueSpec(val));
-		case 39:
+		case 40:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'offset',
 				$author$project$Vega$valueSpec(val));
-		case 40:
+		case 41:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'position',
 				$author$project$Vega$valueSpec(val));
-		case 41:
+		case 42:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'ticks',
 				$author$project$Vega$booSpec(b));
-		case 42:
+		case 43:
+			var tb = ap.a;
+			return _Utils_Tuple2(
+				'tickBand',
+				$author$project$Vega$axisTickBandSpec(tb));
+		case 44:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'tickColor',
 				$author$project$Vega$strSpec(s));
-		case 43:
+		case 45:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickCount',
 				$author$project$Vega$numSpec(n));
-		case 44:
+		case 46:
 			var tu = ap.a;
 			var n = ap.b;
 			switch (n.$) {
@@ -13315,132 +12581,137 @@ var $author$project$Vega$axisProperty = function (ap) {
 						'tickCount',
 						$author$project$Vega$timeUnitSpecShort(tu));
 			}
-		case 45:
+		case 47:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'tickDash',
 				$author$project$Vega$valRef(vals));
-		case 46:
+		case 48:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 48:
+		case 50:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickExtra',
 				$author$project$Vega$booSpec(b));
-		case 47:
+		case 49:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickMinStep',
 				$author$project$Vega$numSpec(n));
-		case 49:
+		case 51:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOffset',
 				$author$project$Vega$numSpec(n));
-		case 50:
+		case 52:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOpacity',
 				$author$project$Vega$numSpec(n));
-		case 51:
+		case 53:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickRound',
 				$author$project$Vega$booSpec(b));
-		case 52:
+		case 54:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickSize',
 				$author$project$Vega$numSpec(n));
-		case 53:
+		case 55:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickWidth',
 				$author$project$Vega$numSpec(n));
-		case 54:
+		case 56:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'title',
 				$author$project$Vega$strSpec(s));
-		case 56:
+		case 58:
 			var ha = ap.a;
 			return _Utils_Tuple2(
 				'titleAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 55:
+		case 57:
 			var an = ap.a;
 			return _Utils_Tuple2(
 				'titleAnchor',
 				$author$project$Vega$anchorSpec(an));
-		case 57:
+		case 59:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleAngle',
 				$author$project$Vega$numSpec(n));
-		case 58:
+		case 60:
 			var va = ap.a;
 			return _Utils_Tuple2(
 				'titleBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 59:
+		case 61:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleColor',
 				$author$project$Vega$strSpec(s));
-		case 60:
+		case 62:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFont',
 				$author$project$Vega$strSpec(s));
-		case 61:
+		case 63:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 62:
+		case 64:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 63:
+		case 65:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titleFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 64:
+		case 66:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLimit',
 				$author$project$Vega$numSpec(n));
-		case 65:
+		case 67:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 66:
+		case 68:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleOpacity',
 				$author$project$Vega$numSpec(n));
-		case 67:
+		case 69:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titlePadding',
 				$author$project$Vega$valueSpec(val));
-		case 68:
+		case 70:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleX',
 				$author$project$Vega$numSpec(n));
-		case 69:
+		case 71:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleY',
 				$author$project$Vega$numSpec(n));
-		case 70:
+		case 72:
+			var n = ap.a;
+			return _Utils_Tuple2(
+				'translate',
+				$author$project$Vega$numSpec(n));
+		case 73:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'values',
@@ -14215,15 +13486,15 @@ var $author$project$Vega$FsStatic = function (a) {
 var $author$project$Vega$fsStatic = $author$project$Vega$FsStatic;
 var $author$project$Vega$hCenter = $author$project$Vega$vStr('center');
 var $author$project$Vega$LeClipHeight = function (a) {
-	return {$: 17, a: a};
+	return {$: 18, a: a};
 };
 var $author$project$Vega$leClipHeight = $author$project$Vega$LeClipHeight;
 var $author$project$Vega$LeGradientLength = function (a) {
-	return {$: 28, a: a};
+	return {$: 29, a: a};
 };
 var $author$project$Vega$leGradientLength = $author$project$Vega$LeGradientLength;
 var $author$project$Vega$LeGradientThickness = function (a) {
-	return {$: 30, a: a};
+	return {$: 31, a: a};
 };
 var $author$project$Vega$leGradientThickness = $author$project$Vega$LeGradientThickness;
 var $author$project$Vega$LeSize = function (a) {
@@ -17449,76 +16720,67 @@ var $author$project$Vega$BooSignal = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$booSignal = $author$project$Vega$BooSignal;
-var $author$project$Vega$CnSmooth = function (a) {
-	return {$: 6, a: a};
+var $author$project$Vega$DaSource = function (a) {
+	return {$: 1, a: a};
 };
-var $author$project$Vega$cnSmooth = $author$project$Vega$CnSmooth;
-var $author$project$Vega$CnThresholds = function (a) {
-	return {$: 7, a: a};
-};
-var $author$project$Vega$cnThresholds = $author$project$Vega$CnThresholds;
-var $author$project$Vega$CnValues = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$cnValues = $author$project$Vega$CnValues;
+var $author$project$Vega$daSource = $author$project$Vega$DaSource;
 var $author$project$Vega$GeField = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$gpField = $author$project$Vega$GeField;
-var $author$project$Vega$VKeyValue = F2(
-	function (a, b) {
-		return {$: 7, a: a, b: b};
-	});
-var $author$project$Vega$keyValue = $author$project$Vega$VKeyValue;
+var $author$project$Vega$ICScale = function (a) {
+	return {$: 7, a: a};
+};
+var $author$project$Vega$icScale = $author$project$Vega$ICScale;
+var $author$project$Vega$ICSmooth = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$icSmooth = $author$project$Vega$ICSmooth;
+var $author$project$Vega$ICThresholds = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$icThresholds = $author$project$Vega$ICThresholds;
 var $author$project$Vega$Path = 5;
 var $author$project$Vega$path = 5;
 var $author$project$Vega$scLinear = $author$project$Vega$ScLinear;
-var $author$project$Vega$TContour = F3(
-	function (a, b, c) {
-		return {$: 3, a: a, b: b, c: c};
-	});
-var $author$project$Vega$trContour = $author$project$Vega$TContour;
+var $author$project$Vega$SiInit = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$siInit = $author$project$Vega$SiInit;
 var $author$project$Vega$TGeoPath = F2(
 	function (a, b) {
 		return {$: 20, a: a, b: b};
 	});
 var $author$project$Vega$trGeoPath = $author$project$Vega$TGeoPath;
+var $author$project$Vega$TIsocontour = function (a) {
+	return {$: 28, a: a};
+};
+var $author$project$Vega$trIsocontour = $author$project$Vega$TIsocontour;
 var $author$project$Vega$VBoos = function (a) {
 	return {$: 5, a: a};
 };
 var $author$project$Vega$vBoos = $author$project$Vega$VBoos;
-var $author$project$Vega$VObject = function (a) {
-	return {$: 6, a: a};
-};
-var $author$project$Vega$vObject = $author$project$Vega$VObject;
-var $author$project$GalleryGeo$geo8 = function (inData) {
+var $author$project$GalleryGeo$geo8 = function () {
 	var si = A2(
 		$elm$core$Basics$composeL,
 		A2(
 			$elm$core$Basics$composeL,
-			$author$project$Vega$signals,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$signals,
+				A2(
+					$author$project$Vega$signal,
+					'grid',
+					_List_fromArray(
+						[
+							$author$project$Vega$siInit('data(\'volcano\')[0]')
+						]))),
 			A2(
 				$author$project$Vega$signal,
-				'volcano',
+				'height',
 				_List_fromArray(
 					[
-						$author$project$Vega$siValue(
-						$author$project$Vega$vObject(
-							_List_fromArray(
-								[
-									A2(
-									$author$project$Vega$keyValue,
-									'width',
-									$author$project$Vega$vNum(87)),
-									A2(
-									$author$project$Vega$keyValue,
-									'height',
-									$author$project$Vega$vNum(61)),
-									A2(
-									$author$project$Vega$keyValue,
-									'values',
-									$author$project$Vega$vNums(inData))
-								])))
+						$author$project$Vega$siUpdate('round(grid.height * width / grid.width)')
 					]))),
 		A2(
 			$author$project$Vega$signal,
@@ -17556,18 +16818,6 @@ var $author$project$GalleryGeo$geo8 = function (inData) {
 						$author$project$Vega$str('blueorange'),
 						_List_Nil))
 				])));
-	var pr = A2(
-		$elm$core$Basics$composeL,
-		$author$project$Vega$projections,
-		A2(
-			$author$project$Vega$projection,
-			'myProjection',
-			_List_fromArray(
-				[
-					$author$project$Vega$prType($author$project$Vega$identityProjection),
-					$author$project$Vega$prScale(
-					$author$project$Vega$numSignal('width / volcano.width'))
-				])));
 	var mk = A2(
 		$elm$core$Basics$composeL,
 		$author$project$Vega$marks,
@@ -17593,17 +16843,17 @@ var $author$project$GalleryGeo$geo8 = function (inData) {
 										[
 											$author$project$Vega$vScale('cScale'),
 											$author$project$Vega$vField(
-											$author$project$Vega$field('value'))
+											$author$project$Vega$field('contour.value'))
 										])),
 									$author$project$Vega$maStroke(
 									_List_fromArray(
 										[
-											$author$project$Vega$vStr('#bbb')
+											$author$project$Vega$vStr('#ccc')
 										])),
 									$author$project$Vega$maStrokeWidth(
 									_List_fromArray(
 										[
-											$author$project$Vega$vNum(0.5)
+											$author$project$Vega$vNum(1)
 										]))
 								]))
 						])),
@@ -17612,11 +16862,11 @@ var $author$project$GalleryGeo$geo8 = function (inData) {
 						[
 							A2(
 							$author$project$Vega$trGeoPath,
-							'myProjection',
+							'',
 							_List_fromArray(
 								[
 									$author$project$Vega$gpField(
-									$author$project$Vega$field('datum'))
+									$author$project$Vega$field('datum.contour'))
 								]))
 						]))
 				])));
@@ -17624,40 +16874,50 @@ var $author$project$GalleryGeo$geo8 = function (inData) {
 		_List_fromArray(
 			[
 				A2(
+				$author$project$Vega$data,
+				'volcano',
+				_List_fromArray(
+					[
+						$author$project$Vega$daUrl(
+						$author$project$Vega$str('https://vega.github.io/vega/data/volcano.json'))
+					])),
+				A2(
 				$author$project$Vega$transform,
 				_List_fromArray(
 					[
-						A3(
-						$author$project$Vega$trContour,
-						$author$project$Vega$numSignal('volcano.width'),
-						$author$project$Vega$numSignal('volcano.height'),
+						$author$project$Vega$trIsocontour(
 						_List_fromArray(
 							[
-								$author$project$Vega$cnValues(
-								$author$project$Vega$numSignal('volcano.values')),
-								$author$project$Vega$cnSmooth(
+								$author$project$Vega$icScale(
+								$author$project$Vega$numExpr(
+									$author$project$Vega$expr('width / datum.width'))),
+								$author$project$Vega$icSmooth(
 								$author$project$Vega$booSignal('smooth')),
-								$author$project$Vega$cnThresholds(
-								$author$project$Vega$numSignal('sequence(90,195,5)'))
+								$author$project$Vega$icThresholds(
+								$author$project$Vega$numSignal('sequence(90, 195, 5)'))
 							]))
 					]),
-				A2($author$project$Vega$data, 'contours', _List_Nil))
+				A2(
+					$author$project$Vega$data,
+					'contours',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('volcano')
+						])))
 			]));
 	return $author$project$Vega$toVega(
 		_List_fromArray(
 			[
 				$author$project$Vega$width(960),
-				$author$project$Vega$height(673),
 				$author$project$Vega$autosize(
 				_List_fromArray(
 					[$author$project$Vega$asNone])),
 				ds,
 				si(_List_Nil),
-				pr(_List_Nil),
 				sc(_List_Nil),
 				mk(_List_Nil)
 			]));
-};
+}();
 var $author$project$Vega$APadding = {$: 6};
 var $author$project$Vega$asPadding = $author$project$Vega$APadding;
 var $author$project$Vega$VBackground = 1;
@@ -17928,98 +17188,23 @@ var $author$project$GalleryGeo$geo9 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var $author$project$GalleryGeo$mySpecs = function (inData) {
-	return $author$project$Vega$combineSpecs(
-		_List_fromArray(
-			[
-				_Utils_Tuple2('geo1', $author$project$GalleryGeo$geo1),
-				_Utils_Tuple2('geo2', $author$project$GalleryGeo$geo2),
-				_Utils_Tuple2('geo3', $author$project$GalleryGeo$geo3),
-				_Utils_Tuple2('geo4', $author$project$GalleryGeo$geo4),
-				_Utils_Tuple2('geo5', $author$project$GalleryGeo$geo5),
-				_Utils_Tuple2('geo6', $author$project$GalleryGeo$geo6),
-				_Utils_Tuple2('geo7', $author$project$GalleryGeo$geo7),
-				_Utils_Tuple2(
-				'geo8',
-				$author$project$GalleryGeo$geo8(inData)),
-				_Utils_Tuple2('geo9', $author$project$GalleryGeo$geo9)
-			]));
-};
-var $elm$core$Task$onError = _Scheduler_onError;
-var $elm$core$Task$attempt = F2(
-	function (resultToMessage, task) {
-		return $elm$core$Task$command(
-			A2(
-				$elm$core$Task$onError,
-				A2(
-					$elm$core$Basics$composeL,
-					A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
-					$elm$core$Result$Err),
-				A2(
-					$elm$core$Task$andThen,
-					A2(
-						$elm$core$Basics$composeL,
-						A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
-						$elm$core$Result$Ok),
-					task)));
-	});
-var $elm$http$Http$toTask = function (_v0) {
-	var request_ = _v0;
-	return A2(_Http_toTask, request_, $elm$core$Maybe$Nothing);
-};
-var $elm$http$Http$send = F2(
-	function (resultToMessage, request_) {
-		return A2(
-			$elm$core$Task$attempt,
-			resultToMessage,
-			$elm$http$Http$toTask(request_));
-	});
-var $author$project$GalleryGeo$init = function (filename) {
-	return _Utils_Tuple2(
-		A2(
-			$author$project$GalleryGeo$Model,
-			_List_Nil,
-			$author$project$GalleryGeo$mySpecs(_List_Nil)),
-		A3(
-			$elm$core$Basics$composeL,
-			$elm$http$Http$send($elm$core$Basics$identity),
-			$elm$http$Http$getString,
-			filename));
-};
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$GalleryGeo$elmToJS = _Platform_outgoingPort('elmToJS', $elm$core$Basics$identity);
+var $author$project$GalleryGeo$mySpecs = $author$project$Vega$combineSpecs(
+	_List_fromArray(
+		[
+			_Utils_Tuple2('geo1', $author$project$GalleryGeo$geo1),
+			_Utils_Tuple2('geo2', $author$project$GalleryGeo$geo2),
+			_Utils_Tuple2('geo3', $author$project$GalleryGeo$geo3),
+			_Utils_Tuple2('geo4', $author$project$GalleryGeo$geo4),
+			_Utils_Tuple2('geo5', $author$project$GalleryGeo$geo5),
+			_Utils_Tuple2('geo6', $author$project$GalleryGeo$geo6),
+			_Utils_Tuple2('geo7', $author$project$GalleryGeo$geo7),
+			_Utils_Tuple2('geo8', $author$project$GalleryGeo$geo8),
+			_Utils_Tuple2('geo9', $author$project$GalleryGeo$geo9)
+		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $elm$core$String$toFloat = _String_toFloat;
-var $author$project$GalleryGeo$update = F2(
-	function (msg, model) {
-		if (!msg.$) {
-			var input = msg.a;
-			var dataVals = A2(
-				$elm$core$List$map,
-				function (s) {
-					return A2(
-						$elm$core$Maybe$withDefault,
-						0,
-						$elm$core$String$toFloat(s));
-				},
-				A2($elm$core$String$split, ',', input));
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{J: dataVals}),
-				$author$project$GalleryGeo$elmToJS(
-					$author$project$GalleryGeo$mySpecs(dataVals)));
-		} else {
-			var err = msg.a;
-			return _Utils_Tuple2(
-				_Utils_update(
-					model,
-					{J: _List_Nil}),
-				$elm$core$Platform$Cmd$none);
-		}
-	});
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -18033,7 +17218,7 @@ var $elm$html$Html$pre = _VirtualDom_node('pre');
 var $author$project$GalleryGeo$sourceExample = $author$project$GalleryGeo$geo9;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$GalleryGeo$view = function (model) {
+var $author$project$GalleryGeo$view = function (spec) {
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -18058,11 +17243,16 @@ var $author$project$GalleryGeo$view = function (model) {
 };
 var $author$project$GalleryGeo$main = $elm$browser$Browser$element(
 	{
-		aB: $elm$core$Basics$always(
-			$author$project$GalleryGeo$init('data/volcanoData.txt')),
-		aK: $elm$core$Basics$always($elm$core$Platform$Sub$none),
-		aM: $author$project$GalleryGeo$update,
-		aN: $author$project$GalleryGeo$view
+		aA: $elm$core$Basics$always(
+			_Utils_Tuple2(
+				$author$project$GalleryGeo$mySpecs,
+				$author$project$GalleryGeo$elmToJS($author$project$GalleryGeo$mySpecs))),
+		aI: $elm$core$Basics$always($elm$core$Platform$Sub$none),
+		aK: F2(
+			function (_v0, model) {
+				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+			}),
+		aL: $author$project$GalleryGeo$view
 	});
 _Platform_export({'GalleryGeo':{'init':$author$project$GalleryGeo$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
