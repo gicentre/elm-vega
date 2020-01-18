@@ -808,6 +808,7 @@ module Vega exposing
     , axFormat
     , axFormatAsNum
     , axFormatAsTemporal
+    , axFormatAsTemporalUtc
     , axValues
     , axTicks
     , axTickBand
@@ -878,6 +879,7 @@ module Vega exposing
     , leFormat
     , leFormatAsNum
     , leFormatAsTemporal
+    , leFormatAsTemporalUtc
     , leSymbolFillColor
     , leSymbolBaseFillColor
     , leSymbolBaseStrokeColor
@@ -2823,6 +2825,7 @@ The visual appearance of chart axes. See the
 @docs axFormat
 @docs axFormatAsNum
 @docs axFormatAsTemporal
+@docs axFormatAsTemporalUtc
 @docs axValues
 
 
@@ -2935,6 +2938,7 @@ See the [Vega legend documentation](https://vega.github.io/vega/docs/legends/)
 @docs leFormat
 @docs leFormatAsNum
 @docs leFormatAsTemporal
+@docs leFormatAsTemporalUtc
 
 
 ## 11.4 Legend Symbols
@@ -3676,12 +3680,12 @@ type AxisElement
 [axDomainColor](#axDomainColor), [axDomainDash](#axDomainDash), [axDomainDashOffset](#axDomainDashOffset),
 [axDomainOpacity](#axDomainOpacity), [axDomainWidth](#axDomainWidth), [axEncode](#axEncode),
 [axFormat](#axFormat), [axFormatAsNum](#axFormatAsNum), [axFormatAsTemporal](#axFormatAsTemporal),
-[axGrid](#axGrid), [axGridColor](#axGridColor), [axGridDash](#axGridDash),
-[axGridDashOffset](#axGridDashOffset), [axGridOpacity](#axGridOpacity), [axGridScale](#axGridScale),
-[axGridWidth](#axGridWidth), [axLabels](#axLabels), [axLabelAlign](#axLabelAlign),
-[axLabelBaseline](#axLabelBaseline), [axLabelBound](#axLabelBound), [axLabelColor](#axLabelColor),
-[axLabelFlush](#axLabelFlush), [axLabelFlushOffset](#axLabelFlushOffset), [axLabelFont](#axLabelFont),
-[axLabelFontSize](#axLabelFontSize), [axLabelFontStyle](#axLabelFontStyle),
+[axFormatAsTemporalUtc](#axFormatAsTemporalUtc), [axGrid](#axGrid), [axGridColor](#axGridColor),
+[axGridDash](#axGridDash), [axGridDashOffset](#axGridDashOffset), [axGridOpacity](#axGridOpacity),
+[axGridScale](#axGridScale), [axGridWidth](#axGridWidth), [axLabels](#axLabels),
+[axLabelAlign](#axLabelAlign), [axLabelBaseline](#axLabelBaseline), [axLabelBound](#axLabelBound),
+[axLabelColor](#axLabelColor), [axLabelFlush](#axLabelFlush), [axLabelFlushOffset](#axLabelFlushOffset),
+[axLabelFont](#axLabelFont), [axLabelFontSize](#axLabelFontSize), [axLabelFontStyle](#axLabelFontStyle),
 [axLabelFontWeight](#axLabelFontWeight), [axLabelLimit](#axLabelLimit), [axLabelOpacity](#axLabelOpacity)
 [axLabelOverlap](#axLabelOverlap), [axLabelPadding](#axLabelPadding),
 [axLabelSeparation](#axLabelSeparation), [axMaxExtent](#axMaxExtent), [axMinExtent](#axMinExtent),
@@ -3712,6 +3716,7 @@ type AxisProperty
     | AxFormat Str
     | AxFormatAsNum
     | AxFormatAsTemporal
+    | AxFormatAsTemporalUtc
     | AxGrid Boo
     | AxGridColor Str
     | AxGridDash (List Value)
@@ -4589,30 +4594,31 @@ type LegendOrientation
 [leFill](#leFill), [leOpacity](#leOpacity), [leShape](#leShape), [leSize](#leSize),
 [leStroke](#leStroke), [leStrokeDash](#leStrokeDash), [leStrokeWidth](#leStrokeWidth),
 [leBorderStrokeDash](#leBorderStrokeDash), [leBorderStrokeWidth](#leBorderStrokeWidth),
-[leEncode](#leEncode), [leFormat](#leFormat), [LeFormatAsNum](#LeFormatAsNum),
-[LeFormatAsTemporal](#LeFormatAsTemporal), [leGridAlign](#leGridAlign),
-[leClipHeight](#leClipHeight), [leColumns](#leColumns), [leColumnPadding](#leColumnPadding),
-[leRowPadding](#leRowPadding), [leCornerRadius](#leCornerRadius), [leFillColor](#leFillColor),
-[leOffset](#leOffset), [lePadding](#lePadding), [leStrokeColor](#leStrokeColor),
+[leEncode](#leEncode), [leFormat](#leFormat), [leFormatAsNum](#leFormatAsNum),
+[leFormatAsTemporal](#leFormatAsTemporal), [leFormatAsTemporalUtc](#leFormatAsTemporalUtc),
+[leGridAlign](#leGridAlign), [leClipHeight](#leClipHeight), [leColumns](#leColumns),
+[leColumnPadding](#leColumnPadding), [leRowPadding](#leRowPadding), [leCornerRadius](#leCornerRadius),
+[leFillColor](#leFillColor), [leOffset](#leOffset), [lePadding](#lePadding), [leStrokeColor](#leStrokeColor),
 [leGradientLength](#leGradientLength), [leGradientLabelLimit](#leGradientLabelLimit),
 [leGradientLabelOffset](#leGraidentLabelOffset), [leGradientOpacity](#leGradientOpacity),
 [leGradientThickness](#leGradientThickness), [leGradientStrokeColor](#leGradientStrokeColor),
 [leGradientStrokeWidth](#leGradientStrokeWidth), [leLabelAlign](#leLabelAlign),
 [leLabelBaseline](#leLabelBaseline), [leLabelColor](#leLabelColor), [leLabelFont](#leLabelFont),
-[leLabelFontSize](#leLabelFontSize), [LeLabelFontStyle](#LeLabelFontStyle),
-[LeLabelSeparation](#LeLabelSeparation), [leLabelFontWeight](#leLabelFontWeight),
+[leLabelFontSize](#leLabelFontSize), [leLabelFontStyle](#leLabelFontStyle),
+[leLabelSeparation](#leLabelSeparation), [leLabelFontWeight](#leLabelFontWeight),
 [leLabelLimit](#leLabelLimit), [leLabelOpacity](#leLabelOpacity), [leLabelOffset](#leLabelOffset),
-[leLabelOverlap](#leLabelOverlap), [LeSymbolDash](#LeSymbolDash), [LeSymbolDashOffset](#LeSymbolDashOffset),
+[leLabelOverlap](#leLabelOverlap), [leSymbolDash](#leSymbolDash), [leSymbolDashOffset](#leSymbolDashOffset),
 [leSymbolFillColor](#leSymbolFillColor), [leSymbolLimit](#leSymbolLimit), [leSymbolOpacity](#leSymbolOpacity),
 [leSymbolOffset](#leSymbolOffset), [leSymbolSize](#leSymbolSize), [leSymbolStrokeColor](#leSymbolStrokeColor),
 [leSymbolStrokeWidth](#leSymbolStrokeWidth), [leSymbolType](#leSymbolType), [leTickCount](#leTickCount),
-[LeTickMinStep](#LeTickMinStep), [leTemporalTickCount](#leTemporalTickCount),
+[leTickMinStep](#leTickMinStep), [leTemporalTickCount](#leTemporalTickCount),
 [leTitle](#leTitle), [leTitleAlign](#leTitleAlign), [leTitleAnchor](#leTitleAnchor),
 [leTitleBaseline](#leTitleBaseline), [leTitleColor](#leTitleColor), [leTitleFont](#leTitleFont),
-[LeTitleFontStyle](#LeTitleFontStyle), [leTitleFontSize](#leTitleFontSize),
+[leTitleFontStyle](#leTitleFontStyle), [leTitleFontSize](#leTitleFontSize),
 [leTitleFontWeight](#leTitleFontWeight), [leTitleLimit](#leTitleLimit),
-[leTitleLineHeight](#leTitleLineHeight), [leTitleOpacity](#leTitleOpacity), [LeTitleOrient](#leTitleOrient),
-[leTitlePadding](#leTitlePadding), [leValues](#leValues), [leX](#leX), [leY](#leY) and [leZIndex](#leZIndex).
+[leTitleLineHeight](#leTitleLineHeight), [leTitleOpacity](#leTitleOpacity),
+[leTitleOrient](#leTitleOrient), [leTitlePadding](#leTitlePadding), [leValues](#leValues),
+[leX](#leX), [leY](#leY) and [leZIndex](#leZIndex).
 -}
 type LegendProperty
     = LeType LegendType
@@ -4631,6 +4637,7 @@ type LegendProperty
     | LeFormat Str
     | LeFormatAsNum
     | LeFormatAsTemporal
+    | LeFormatAsTemporalUtc
     | LeGridAlign GridAlign
     | LeClipHeight Num
     | LeColumns Num
@@ -6165,6 +6172,13 @@ precise temporal format, additionally use [axFormat](#axFormat) providing a
 axFormatAsTemporal : AxisProperty
 axFormatAsTemporal =
     AxFormatAsTemporal
+
+
+{-| Indicate that axis labels should be formatted as UTC dates/times.
+-}
+axFormatAsTemporalUtc : AxisProperty
+axFormatAsTemporalUtc =
+    AxFormatAsTemporalUtc
 
 
 {-| Whether or not grid lines should be included as part of an axis.
@@ -10209,6 +10223,14 @@ precise temporal format, additionally use [leFormat](#leFormat) providing a
 leFormatAsTemporal : LegendProperty
 leFormatAsTemporal =
     LeFormatAsTemporal
+
+
+{-| Indicate that legend labels should be formatted as UTC dates/times. To control the
+precise temporal format.
+-}
+leFormatAsTemporalUtc : LegendProperty
+leFormatAsTemporalUtc =
+    LeFormatAsTemporalUtc
 
 
 {-| Create a legend used to visualize a color, size or shape mapping.
@@ -16456,6 +16478,9 @@ axisProperty ap =
         AxFormatAsTemporal ->
             ( "formatType", JE.string "time" )
 
+        AxFormatAsTemporalUtc ->
+            ( "formatType", JE.string "utc" )
+
         AxGrid b ->
             ( "grid", booSpec b )
 
@@ -18267,6 +18292,9 @@ legendProperty lp =
 
         LeFormatAsTemporal ->
             ( "formatType", JE.string "time" )
+
+        LeFormatAsTemporalUtc ->
+            ( "formatType", JE.string "utc" )
 
         LeGridAlign ga ->
             ( "gridAlign", gridAlignSpec ga )
