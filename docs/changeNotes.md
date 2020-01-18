@@ -14,6 +14,7 @@ _Minor release supporting Vega 5.8._
 
 ### New properties
 
+- Add `axTickBand` for aligning ticks on band scales (Vega 5.8)
 - Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
 - Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
 - Add `maSmooth` to `image` mark properties.
@@ -94,7 +95,7 @@ _Minor release to align with Vega 5.4._
 ## Additions
 
 - `leX` and `leY` for top level legend positioning.
-- `topojsonMeshInterior` and `topojsonMeshExterior` for interior and exterior filtering of topoJson meshes.
+- `topojsonMeshInterior` and `topojsonMeshExterior` for interior and exterior filtering of topoJSON meshes.
 - `dnMinSteps` and `dnMaxSteps` added to `trDensity` options
 - `trKde` transform for 1-d KDE from a distribution.
 - `trRegression` transformation function.

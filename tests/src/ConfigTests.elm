@@ -286,9 +286,97 @@ configTest8 =
     dragSpec (config [ cfEventHandling [ cfeView [] ] ])
 
 
+configTest9 : Spec
+configTest9 =
+    let
+        ds =
+            let
+                table =
+                    dataFromColumns "table" []
+                        << dataColumn "category" (vStrs [ "A", "B", "C", "D", "E", "F", "G", "H" ])
+                        << dataColumn "amount" (vNums [ 28, 55, 43, 91, 81, 53, 19, 87 ])
+            in
+            dataSource [ table [] ]
+
+        si =
+            signals
+                << signal "myTooltip"
+                    [ siValue (vStr "")
+                    , siOn
+                        [ evHandler [ esObject [ esMark rect, esType etMouseOver ] ] [ evUpdate "datum" ]
+                        , evHandler [ esObject [ esMark rect, esType etMouseOut ] ] [ evUpdate "" ]
+                        ]
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scBand
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
+                    , scRange raWidth
+                    , scPadding (num 0.05)
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "table", daField (field "amount") ])
+                    , scRange raHeight
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axTitle (str "Category") ]
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "table") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "category") ]
+                            , maWidth [ vScale "xScale", vBand (num 1) ]
+                            , maY [ vScale "yScale", vField (field "amount") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            ]
+                        , enUpdate
+                            [ maFill [ vStr "steelblue" ] ]
+                        , enHover
+                            [ maFill [ vStr "red" ] ]
+                        ]
+                    ]
+                << mark text
+                    [ mEncode
+                        [ enEnter
+                            [ maAlign [ hCenter ]
+                            , maBaseline [ vBottom ]
+                            , maFill [ vStr "grey" ]
+                            ]
+                        , enUpdate
+                            [ maX [ vScale "xScale", vSignal "myTooltip.category", vBand (num 0.5) ]
+                            , maY [ vScale "yScale", vSignal "myTooltip.amount", vOffset (vNum -2) ]
+                            , maText [ vSignal "myTooltip.amount" ]
+                            ]
+                        ]
+                    ]
+
+        cf =
+            config
+                [ cfAxis axBottom
+                    [ axTitleFontWeight (vStr "normal")
+                    , axTitleColor (str "red")
+                    , axLabelFont (str "monospace")
+                    , axLabelColor (str "red")
+                    , axLabelFontSize (num 18)
+                    , axTickBand abExtent
+                    ]
+                ]
+    in
+    toVega [ width 400, height 200, cf, padding 5, ds, si [], sc [], ax [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    configTest5
+    configTest9
 
 
 
@@ -306,6 +394,7 @@ mySpecs =
         , ( "configTest6", configTest6 )
         , ( "configTest7", configTest7 )
         , ( "configTest8", configTest8 )
+        , ( "configTest9", configTest9 )
         ]
 
 
