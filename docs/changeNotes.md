@@ -6,21 +6,23 @@ _Minor release supporting Vega 5.8._
 
 ### New transforms
 
-- Add `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
+- `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
 - `quarter` and `date` added as time units.
-- Add `trKde2d` two-dimensional (raster) density estimation transform and its associated parameterisation functions `kd2Weight`, `kd2CellSize`, `kd2Bandwidth`, `kd2Counts` and `kd2As`.
-- Add `trIsocontour` transform and associated property functions `icField`, `icThresholds`, `icLevels`, `icNice`, `icResolve`, `icZero`, `icSmooth`, `icScale` and `icAs` for more flexible contouring.
-- Add `trHeatmap` transform and associated property functions `hmField`, `hmColor`, `hmOpacity`, `hmResolve` and `hmAs`
+- `trKde2d` two-dimensional (raster) density estimation transform and its associated parameterisation functions `kd2Weight`, `kd2CellSize`, `kd2Bandwidth`, `kd2Counts` and `kd2As`.
+- `trIsocontour` transform and associated property functions `icField`, `icThresholds`, `icLevels`, `icNice`, `icResolve`, `icZero`, `icSmooth`, `icScale` and `icAs` for more flexible contouring.
+- `trHeatmap` transform and associated property functions `hmField`, `hmColor`, `hmOpacity`, `hmResolve` and `hmAs`
+- `trFlattenWithIndex` and `trFlattenWithIndexAs` for nested array flattening that output the array index of flattened data.
 
 ### New properties
 
-- Add `axTickBand` for aligning ticks on band scales (Vega 5.8).
-- Add `axTranslate` for moving axes relative to main plot area (Vega 5.8).
-- Add `axFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
-- Add `leFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
-- Add `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
-- Add `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
-- Add `maSmooth` to `image` mark properties.
+- `axTickBand` for aligning ticks on band scales (Vega 5.8).
+- `axTranslate` for moving axes relative to main plot area (Vega 5.8).
+- `axFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
+- `leFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
+- `bnInterval` for specifying whether or not both bin boundaries are output in bin transform.
+- `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
+- `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
+- `maSmooth` to `image` mark properties.
 
 ## Deprecations
 
