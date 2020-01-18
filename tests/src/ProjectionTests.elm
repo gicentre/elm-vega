@@ -27,6 +27,7 @@ projTest =
                             , "orthographic"
                             , "equalEarth"
                             , "naturalEarth1"
+                            , "mollweide"
                             , "stereographic"
                             , "gnomonic"
                             , "airy"

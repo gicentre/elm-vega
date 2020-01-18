@@ -717,6 +717,7 @@ module Vega exposing
     , gnomonic
     , identityProjection
     , mercator
+    , mollweide
     , naturalEarth1
     , orthographic
     , stereographic
@@ -2676,6 +2677,7 @@ See the [Vega map projection documentation](https://vega.github.io/vega/docs/pro
 @docs gnomonic
 @docs identityProjection
 @docs mercator
+@docs mollweide
 @docs naturalEarth1
 @docs orthographic
 @docs stereographic
@@ -5035,7 +5037,7 @@ type PivotProperty
 [conicConformal](#conicConformal), [conicEqualArea](#conicEqualArea),
 [conicEquidistant](#conicEquidistant), [equalEarth](#equalEarth),
 [equirectangular](#equirectangular), [gnomonic](#gnomonic),
-[identityProjection](#identityProjection), [mercator](#mercator),
+[identityProjection](#identityProjection), [mercator](#mercator), [mollweide](#mollweide),
 [naturalEarth1](#naturalEarth1), [orthographic](#orthographic), [stereographic](#stereographic),
 [transverseMercator](#transverseMercator), [customProjection](#customProjection)
 and [prSignal](#prSignal).
@@ -5053,6 +5055,7 @@ type Projection
     | Gnomonic
     | Identity
     | Mercator
+    | Mollweide
     | NaturalEarth1
     | Orthographic
     | Stereographic
@@ -12093,6 +12096,13 @@ mName =
 mOn : List Trigger -> TopMarkProperty
 mOn =
     MOn
+
+
+{-| A mollweide global map projection.
+-}
+mollweide : Projection
+mollweide =
+    Mollweide
 
 
 {-| A month time unit.
@@ -19349,6 +19359,9 @@ projectionLabel pr =
 
         Mercator ->
             "mercator"
+
+        Mollweide ->
+            "mollweide"
 
         NaturalEarth1 ->
             "naturalEarth1"

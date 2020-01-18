@@ -1,6 +1,6 @@
 # V5.3 ➡ V5.4
 
-_Minor release supporting Vega 5.8._
+_Minor release supporting Vega release 5.8 and 5.9._
 
 ## Additions
 
@@ -19,10 +19,11 @@ _Minor release supporting Vega 5.8._
 - `axTranslate` for moving axes relative to main plot area (Vega 5.8).
 - `axFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
 - `leFormatAsTemporalUtc` for UTC formatting (Vega 5.8).
-- `bnInterval` for specifying whether or not both bin boundaries are output in bin transform.
-- `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks.
-- `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API).
-- `maSmooth` to `image` mark properties.
+- `bnInterval` for specifying whether or not both bin boundaries are output in bin transform (Vega 5.8).
+- `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks (Vega 5.8).
+- `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API) (Vega 5.8).
+- `maSmooth` added to `image` mark properties (Vega 5.8).
+- `mollweide` map projection (Vega 5.9).
 
 ## Deprecations
 
