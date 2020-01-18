@@ -15181,9 +15181,9 @@ trGeoJson =
     TGeoJson
 
 
-{-| Map GeoJSON features to SVG path strings according to a provided cartographic
-projection for use with the path mark. Similar to the [trGeoShape](#trGeoShape)
-but immediately generates SVG path strings.
+{-| Map GeoJSON features to SVG path strings. The first parameter can be the name
+of a projection to apply to the mapping, or an empty string if no map projection.
+Similar to the [trGeoShape](#trGeoShape) but immediately generates SVG path strings.
 -}
 trGeoPath : String -> List GeoPathProperty -> Transform
 trGeoPath =
