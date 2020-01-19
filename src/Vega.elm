@@ -20358,7 +20358,7 @@ titleProperty tProp =
             ( "fontWeight", valueSpec v )
 
         TFrame fr ->
-            ( "fame", titleFrameSpec fr )
+            ( "frame", titleFrameSpec fr )
 
         TInteractive b ->
             ( "interactive", booSpec b )

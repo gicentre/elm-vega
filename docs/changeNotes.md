@@ -29,13 +29,17 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `mollweide` map projection (Vega 5.9).
 - `inLabels` for providing input element labels that may differ from their option values (Vega 5.9).
 
+## Bug Fixes
+
+- correct `tiFrame` output that was previously generating 'fame' output.
+
 ## Deprecations
 
 - `trContour` and its associated `cn` property functions are now deprecated in favour of `trIsocontour` (Vega 5.8)
 
 ## Other Changes
 
-- Additional tests to reflect new additions.
+- Additional tests and gallery examples to reflect new additions.
 - Internal refactoring of time unit handling.
 
 ---
