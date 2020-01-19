@@ -1602,9 +1602,106 @@ regression2 =
         [ width 500, height 500, padding 5, autosize [ asPad ], ds, si [], sc [], mk [] ]
 
 
+timeUnits1 : Spec
+timeUnits1 =
+    let
+        ti =
+            title (str "U.S. Flight Statisitcs")
+                [ tiSubtitle (str "20k Sample, January - March 2001")
+                , tiSubtitleFontStyle (str "italic")
+                , tiFrame tfGroup
+                , tiAnchor anStart
+                , tiOffset (num 10)
+                ]
+
+        ds =
+            dataSource
+                [ data "flights"
+                    [ daUrl (str "https://vega.github.io/vega/data/flights-20k.json")
+                    , daFormat [ json, parseAuto ]
+                    ]
+                    |> transform
+                        [ trTimeUnit (field "date") [ tbUnits [ tuSignal "timeunit" ], tbSignal "tbin" ]
+                        , trAggregate
+                            [ agGroupBy [ field "unit0" ]
+                            , agOps [ opCount, opMean ]
+                            , agFields [ fExpr "null", field "delay" ]
+                            , agAs [ "count", "delay" ]
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "timeunit"
+                    [ siValue (vStrs [ "day" ])
+                    , siBind (iSelect [ inOptions (vStrs [ "year", "month", "date", "day", "hours" ]) ])
+                    ]
+                << signal "measure"
+                    [ siValue (vStr "delay")
+                    , siBind (iSelect [ inOptions (vStrs [ "count", "delay" ]) ])
+                    ]
+                << signal "title"
+                    [ siUpdate "measure == 'delay' ? 'Average Delay (min)' : 'Number of Flights'" ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scBand
+                    , scRange raWidth
+                    , scDomain (doSignal "timeSequence(tbin.unit, tbin.start, tbin.stop)")
+                    , scPadding (num 0.05)
+                    , scRound true
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scRange raHeight
+                    , scDomain (doData [ daDataset "flights", daField (fSignal "measure") ])
+                    , scZero true
+                    , scNice niTrue
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axFormatAsTemporal, axFormat (strSignal "timeUnitSpecifier(tbin.units, {hours: '%H'})") ]
+                << axis "yScale" siLeft [ axTickCount (num 7), axTitle (strSignal "title") ]
+
+        mk =
+            marks
+                << mark rect
+                    [ mFrom [ srData (str "flights") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vScale "xScale", vField (field "unit0") ]
+                            , maWidth [ vScale "xScale", vBand (num 1) ]
+                            , maY [ vScale "yScale", vField (fSignal "measure") ]
+                            , maY2 [ vScale "yScale", vNum 0 ]
+                            , maFill [ vStr "steelblue" ]
+                            , maTooltip [ vSignal "{timeunit: timeFormat(datum.unit0, timeUnitSpecifier(tbin.units)), count: format(datum.count, ',') + ' flights', delay: format(datum.delay, '.1f') + ' min (avg)'}" ]
+                            ]
+                        , enHover
+                            [ maFill [ vStr "firebrick" ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 600
+        , height 300
+        , padding 5
+        , autosize [ asFit, asResize, asPadding ]
+        , ti
+        , ds
+        , si []
+        , sc []
+        , ax []
+        , mk []
+        ]
+
+
 sourceExample : Spec
 sourceExample =
-    contour2
+    timeUnits1
 
 
 
@@ -1630,6 +1727,7 @@ mySpecs =
         , ( "hops1", hops1 )
         , ( "regression1", regression1 )
         , ( "regression2", regression2 )
+        , ( "timeUnits1", timeUnits1 )
         ]
 
 

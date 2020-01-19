@@ -18056,6 +18056,354 @@ var $author$project$GalleryDist$scatter1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$Start = {$: 0};
+var $author$project$Vega$anStart = $author$project$Vega$Start;
+var $author$project$Vega$APadding = {$: 6};
+var $author$project$Vega$asPadding = $author$project$Vega$APadding;
+var $author$project$Vega$AxFormat = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Vega$axFormat = $author$project$Vega$AxFormat;
+var $author$project$Vega$AxFormatAsTemporal = {$: 12};
+var $author$project$Vega$axFormatAsTemporal = $author$project$Vega$AxFormatAsTemporal;
+var $author$project$Vega$DaFormat = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$daFormat = $author$project$Vega$DaFormat;
+var $author$project$Vega$JSON = {$: 0};
+var $author$project$Vega$json = $author$project$Vega$JSON;
+var $author$project$Vega$MTooltip = function (a) {
+	return {$: 21, a: a};
+};
+var $author$project$Vega$maTooltip = $author$project$Vega$MTooltip;
+var $author$project$Vega$ParseAuto = {$: 11};
+var $author$project$Vega$parseAuto = $author$project$Vega$ParseAuto;
+var $author$project$Vega$SPadding = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$scPadding = $author$project$Vega$SPadding;
+var $author$project$Vega$TimeBinSignal = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$tbSignal = $author$project$Vega$TimeBinSignal;
+var $author$project$Vega$TBUnits = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$tbUnits = $author$project$Vega$TBUnits;
+var $author$project$Vega$FrGroup = {$: 1};
+var $author$project$Vega$tfGroup = $author$project$Vega$FrGroup;
+var $author$project$Vega$TAnchor = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$tiAnchor = $author$project$Vega$TAnchor;
+var $author$project$Vega$TFrame = function (a) {
+	return {$: 14, a: a};
+};
+var $author$project$Vega$tiFrame = $author$project$Vega$TFrame;
+var $author$project$Vega$TOffset = function (a) {
+	return {$: 18, a: a};
+};
+var $author$project$Vega$tiOffset = $author$project$Vega$TOffset;
+var $author$project$Vega$TSubtitle = function (a) {
+	return {$: 22, a: a};
+};
+var $author$project$Vega$tiSubtitle = $author$project$Vega$TSubtitle;
+var $author$project$Vega$TSubtitleFontStyle = function (a) {
+	return {$: 26, a: a};
+};
+var $author$project$Vega$tiSubtitleFontStyle = $author$project$Vega$TSubtitleFontStyle;
+var $author$project$Vega$TText = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$VTitle = 13;
+var $author$project$Vega$title = F2(
+	function (s, tps) {
+		return _Utils_Tuple2(
+			13,
+			$elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$map,
+					$author$project$Vega$titleProperty,
+					A2(
+						$elm$core$List$cons,
+						$author$project$Vega$TText(s),
+						tps))));
+	});
+var $author$project$Vega$TTimeUnit = F2(
+	function (a, b) {
+		return {$: 51, a: a, b: b};
+	});
+var $author$project$Vega$trTimeUnit = $author$project$Vega$TTimeUnit;
+var $author$project$Vega$TimeUnitSignal = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Vega$tuSignal = $author$project$Vega$TimeUnitSignal;
+var $author$project$GalleryDist$timeUnits1 = function () {
+	var ti = A2(
+		$author$project$Vega$title,
+		$author$project$Vega$str('U.S. Flight Statisitcs'),
+		_List_fromArray(
+			[
+				$author$project$Vega$tiSubtitle(
+				$author$project$Vega$str('20k Sample, January - March 2001')),
+				$author$project$Vega$tiSubtitleFontStyle(
+				$author$project$Vega$str('italic')),
+				$author$project$Vega$tiFrame($author$project$Vega$tfGroup),
+				$author$project$Vega$tiAnchor($author$project$Vega$anStart),
+				$author$project$Vega$tiOffset(
+				$author$project$Vega$num(10))
+			]));
+	var si = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$signals,
+				A2(
+					$author$project$Vega$signal,
+					'timeunit',
+					_List_fromArray(
+						[
+							$author$project$Vega$siValue(
+							$author$project$Vega$vStrs(
+								_List_fromArray(
+									['day']))),
+							$author$project$Vega$siBind(
+							$author$project$Vega$iSelect(
+								_List_fromArray(
+									[
+										$author$project$Vega$inOptions(
+										$author$project$Vega$vStrs(
+											_List_fromArray(
+												['year', 'month', 'date', 'day', 'hours'])))
+									])))
+						]))),
+			A2(
+				$author$project$Vega$signal,
+				'measure',
+				_List_fromArray(
+					[
+						$author$project$Vega$siValue(
+						$author$project$Vega$vStr('delay')),
+						$author$project$Vega$siBind(
+						$author$project$Vega$iSelect(
+							_List_fromArray(
+								[
+									$author$project$Vega$inOptions(
+									$author$project$Vega$vStrs(
+										_List_fromArray(
+											['count', 'delay'])))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$signal,
+			'title',
+			_List_fromArray(
+				[
+					$author$project$Vega$siUpdate('measure == \'delay\' ? \'Average Delay (min)\' : \'Number of Flights\'')
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scBand),
+						$author$project$Vega$scRange($author$project$Vega$raWidth),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doSignal('timeSequence(tbin.unit, tbin.start, tbin.stop)')),
+						$author$project$Vega$scPadding(
+						$author$project$Vega$num(0.05)),
+						$author$project$Vega$scRound($author$project$Vega$true)
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scLinear),
+					$author$project$Vega$scRange($author$project$Vega$raHeight),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('flights'),
+								$author$project$Vega$daField(
+								$author$project$Vega$fSignal('measure'))
+							]))),
+					$author$project$Vega$scZero($author$project$Vega$true),
+					$author$project$Vega$scNice($author$project$Vega$niTrue)
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$marks,
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$rect,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('flights'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enUpdate(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('unit0'))
+										])),
+									$author$project$Vega$maWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vBand(
+											$author$project$Vega$num(1))
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$fSignal('measure'))
+										])),
+									$author$project$Vega$maY2(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vNum(0)
+										])),
+									$author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('steelblue')
+										])),
+									$author$project$Vega$maTooltip(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('{timeunit: timeFormat(datum.unit0, timeUnitSpecifier(tbin.units)), count: format(datum.count, \',\') + \' flights\', delay: format(datum.delay, \'.1f\') + \' min (avg)\'}')
+										]))
+								])),
+							$author$project$Vega$enHover(
+							_List_fromArray(
+								[
+									$author$project$Vega$maFill(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('firebrick')
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						$author$project$Vega$trTimeUnit,
+						$author$project$Vega$field('date'),
+						_List_fromArray(
+							[
+								$author$project$Vega$tbUnits(
+								_List_fromArray(
+									[
+										$author$project$Vega$tuSignal('timeunit')
+									])),
+								$author$project$Vega$tbSignal('tbin')
+							])),
+						$author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								$author$project$Vega$agGroupBy(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('unit0')
+									])),
+								$author$project$Vega$agOps(
+								_List_fromArray(
+									[$author$project$Vega$opCount, $author$project$Vega$opMean])),
+								$author$project$Vega$agFields(
+								_List_fromArray(
+									[
+										$author$project$Vega$fExpr('null'),
+										$author$project$Vega$field('delay')
+									])),
+								$author$project$Vega$agAs(
+								_List_fromArray(
+									['count', 'delay']))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'flights',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str('https://vega.github.io/vega/data/flights-20k.json')),
+							$author$project$Vega$daFormat(
+							_List_fromArray(
+								[$author$project$Vega$json, $author$project$Vega$parseAuto]))
+						])))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$axes,
+			A3(
+				$author$project$Vega$axis,
+				'xScale',
+				$author$project$Vega$siBottom,
+				_List_fromArray(
+					[
+						$author$project$Vega$axFormatAsTemporal,
+						$author$project$Vega$axFormat(
+						$author$project$Vega$strSignal('timeUnitSpecifier(tbin.units, {hours: \'%H\'})'))
+					]))),
+		A3(
+			$author$project$Vega$axis,
+			'yScale',
+			$author$project$Vega$siLeft,
+			_List_fromArray(
+				[
+					$author$project$Vega$axTickCount(
+					$author$project$Vega$num(7)),
+					$author$project$Vega$axTitle(
+					$author$project$Vega$strSignal('title'))
+				])));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(600),
+				$author$project$Vega$height(300),
+				$author$project$Vega$padding(5),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[$author$project$Vega$asFit, $author$project$Vega$asResize, $author$project$Vega$asPadding])),
+				ti,
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$FParent = function (a) {
 	return {$: 5, a: a};
 };
@@ -18855,12 +19203,6 @@ var $author$project$GalleryDist$wheat1 = function () {
 				mk(_List_Nil)
 			]));
 }();
-var $author$project$Vega$Start = {$: 0};
-var $author$project$Vega$anStart = $author$project$Vega$Start;
-var $author$project$Vega$AxFormat = function (a) {
-	return {$: 10, a: a};
-};
-var $author$project$Vega$axFormat = $author$project$Vega$AxFormat;
 var $author$project$Vega$Descend = {$: 1};
 var $author$project$Vega$descend = $author$project$Vega$Descend;
 var $author$project$Vega$VKeyValue = F2(
@@ -18872,10 +19214,6 @@ var $author$project$Vega$OperationSignal = function (a) {
 	return {$: 20, a: a};
 };
 var $author$project$Vega$opSignal = $author$project$Vega$OperationSignal;
-var $author$project$Vega$SPadding = function (a) {
-	return {$: 12, a: a};
-};
-var $author$project$Vega$scPadding = $author$project$Vega$SPadding;
 var $author$project$Vega$ByField = function (a) {
 	return {$: 3, a: a};
 };
@@ -18884,27 +19222,6 @@ var $author$project$Vega$Op = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$soOp = $author$project$Vega$Op;
-var $author$project$Vega$TAnchor = function (a) {
-	return {$: 2, a: a};
-};
-var $author$project$Vega$tiAnchor = $author$project$Vega$TAnchor;
-var $author$project$Vega$TText = function (a) {
-	return {$: 0, a: a};
-};
-var $author$project$Vega$VTitle = 13;
-var $author$project$Vega$title = F2(
-	function (s, tps) {
-		return _Utils_Tuple2(
-			13,
-			$elm$json$Json$Encode$object(
-				A2(
-					$elm$core$List$map,
-					$author$project$Vega$titleProperty,
-					A2(
-						$elm$core$List$cons,
-						$author$project$Vega$TText(s),
-						tps))));
-	});
 var $author$project$Vega$TWindow = F2(
 	function (a, b) {
 		return {$: 56, a: a, b: b};
@@ -19540,7 +19857,8 @@ var $author$project$GalleryDist$mySpecs = $author$project$Vega$combineSpecs(
 			_Utils_Tuple2('quantile1', $author$project$GalleryDist$quantile1),
 			_Utils_Tuple2('hops1', $author$project$GalleryDist$hops1),
 			_Utils_Tuple2('regression1', $author$project$GalleryDist$regression1),
-			_Utils_Tuple2('regression2', $author$project$GalleryDist$regression2)
+			_Utils_Tuple2('regression2', $author$project$GalleryDist$regression2),
+			_Utils_Tuple2('timeUnits1', $author$project$GalleryDist$timeUnits1)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -19556,7 +19874,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryDist$sourceExample = $author$project$GalleryDist$contour2;
+var $author$project$GalleryDist$sourceExample = $author$project$GalleryDist$timeUnits1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryDist$view = function (spec) {
