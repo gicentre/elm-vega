@@ -9,7 +9,7 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `trTimeUnit` transform and associated time binning parameterisation functions `tbUnits`, `tbStep`, `tbTimezone`, `tzLocal`, `tzUtc`, `tzSignal`, `tbInterval`, `tbExtent`, `dtMillis`, `dtExpr`, `tbMaxBins`, `tbSignal`, and `tbAs`.
 - `quarter` and `date` added as time units.
 - `trKde2d` two-dimensional (raster) density estimation transform and its associated parameterisation functions `kd2Weight`, `kd2CellSize`, `kd2Bandwidth`, `kd2Counts` and `kd2As`.
-- `trIsocontour` transform and associated property functions `icField`, `icThresholds`, `icLevels`, `icNice`, `icResolve`, `icZero`, `icSmooth`, `icScale` and `icAs` for more flexible contouring.
+- `trIsocontour` transform and associated property functions `icField`, `icThresholds`, `icLevels`, `icNice`, `icResolve`, `icZero`, `icSmooth`, `icScale` `icTranslate` and `icAs` for more flexible contouring.
 - `trHeatmap` transform and associated property functions `hmField`, `hmColor`, `hmOpacity`, `hmResolve` and `hmAs`
 - `trFlattenWithIndex` and `trFlattenWithIndexAs` for nested array flattening that output the array index of flattened data.
 
@@ -23,6 +23,7 @@ _Minor release supporting Vega releases 5.8 and 5.9._
 - `maCornerRadiusTopLeft`, `maCornerRadiusTopRight`, `maCornerRadiusBottomLeft` and `maCornerRadiusBottomRight` for use with `rect` and `group` marks (Vega 5.8).
 - `maScaleX` and `maScaleY` to `path` mark properties (`maAngle` for path marks now rotates path although no changes to API) (Vega 5.8).
 - `maSmooth` added to `image` mark properties (Vega 5.8).
+- `maImage` for dynamically created image marks added to `image` mark properties (Vega 5.8).
 - `maStrokeForeground` for overlaying group stroke over content (Vega 5.9).
 - `maStrokeOffset` for shifting group stroke and fill (Vega 5.9).
 - `mollweide` map projection (Vega 5.9).
