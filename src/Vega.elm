@@ -14289,7 +14289,7 @@ tbMaxBins =
 
 
 {-| Bind [trTimeUnit](#trTimeUnit) output to a signal with the given name. The
-bound signal has properies `unit` (smalled time unit), `units` (all time units),
+bound signal has properies `unit` (smallest time unit), `units` (all time units),
 `step`, `start` and `stop` properties.
 -}
 tbSignal : String -> TimeBinProperty
