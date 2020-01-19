@@ -864,9 +864,117 @@ geo9 =
         ]
 
 
+geo10 : Spec
+geo10 =
+    let
+        cf =
+            config [ cfLegend [ leLayout [ llAnchor anMiddle ] ] ]
+
+        ds =
+            dataSource
+                [ data "precipitation"
+                    [ daUrl (str "https://vega.github.io/vega/data/annual-precip.json") ]
+                , data "contours" [ daSource "precipitation" ]
+                    |> transform [ trIsocontour [ icThresholds (numSignal "sequence(step, stop, step)") ] ]
+                , data "world"
+                    [ daUrl (str "https://vega.github.io/vega/data/world-110m.json")
+                    , daFormat [ topojsonFeature (str "countries") ]
+                    ]
+                ]
+
+        si =
+            signals
+                << signal "projection"
+                    [ siValue (vStr "naturalEarth1")
+                    , siBind
+                        (iSelect
+                            [ inOptions
+                                (vStrs
+                                    [ "azimuthalEqualArea"
+                                    , "equalEarth"
+                                    , "equirectangular"
+                                    , "naturalEarth1"
+                                    , "mollweide"
+                                    , "orthographic"
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                << signal "scale" [ siValue (vNum 110), siBind (iRange [ inMin 50, inMax 400, inStep 5 ]) ]
+                << signal "rotate0" [ siValue (vNum 0), siBind (iRange [ inMin -180, inMax 180, inStep 1 ]) ]
+                << signal "rotate1" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "rotate2" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
+                << signal "opacity" [ siValue (vNum 0.5), siBind (iRange [ inMin 0, inMax 1, inStep 0.01 ]) ]
+                << signal "levels" [ siValue (vNum 6), siBind (iRange [ inMin 2, inMax 12, inStep 1 ]) ]
+                << signal "stop" [ siValue (vNum 3000) ]
+                << signal "step" [ siUpdate "stop / levels" ]
+
+        pr =
+            projections
+                << projection "projection"
+                    [ prType (prSignal "projection")
+                    , prScale (numSignal "scale")
+                    , prRotate (numSignal "[rotate0, rotate1, rotate2]")
+                    , prTranslate (numSignal "[width/2, height/2]")
+                    ]
+
+        sc =
+            scales
+                << scale "cScale"
+                    [ scType scQuantize
+                    , scDomain (doNums (numSignals [ "0", "stop" ]))
+                    , scRange (raScheme (str "bluepurple") [ csCount (numSignal "levels") ])
+                    ]
+
+        le =
+            legends
+                << legend
+                    [ leTitle (str "Annual Precipitation (mm)")
+                    , leOrient loBottom
+                    , leFill "cScale"
+                    , leType ltGradient
+                    , leOffset (num 5)
+                    , leGradientLength (num 300)
+                    , leGradientThickness (num 12)
+                    , leTitlePadding (num 10)
+                    , leTitleOrient siLeft
+                    , leTitleAnchor anEnd
+                    , leDirection orHorizontal
+                    ]
+
+        mk =
+            marks
+                << mark shape
+                    [ mFrom [ srData (str "world") ]
+                    , mClip (clEnabled true)
+                    , mEncode
+                        [ enUpdate
+                            [ maStrokeWidth [ vNum 1 ]
+                            , maStroke [ vStr "#eee" ]
+                            , maFill [ vStr "#ddd" ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "projection" [] ]
+                    ]
+                << mark shape
+                    [ mFrom [ srData (str "contours") ]
+                    , mClip (clEnabled true)
+                    , mEncode
+                        [ enUpdate
+                            [ maFill [ vScale "cScale", vField (field "contour.value") ]
+                            , maFillOpacity [ vSignal "opacity" ]
+                            ]
+                        ]
+                    , mTransform [ trGeoShape "projection" [ gpField (field "datum.contour") ] ]
+                    ]
+    in
+    toVega [ cf, width 600, height 300, autosize [ asFitX ], ds, si [], pr [], sc [], le [], mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    geo9
+    geo10
 
 
 
@@ -885,6 +993,7 @@ mySpecs =
         , ( "geo7", geo7 )
         , ( "geo8", geo8 )
         , ( "geo9", geo9 )
+        , ( "geo10", geo10 )
         ]
 
 

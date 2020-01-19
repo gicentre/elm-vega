@@ -130,6 +130,18 @@
     </p>
     <div id="geo9" class="view"></div>
 
+    <p>
+      2016 annual global precipitation data from the
+      <a
+        href="https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/climate-forecast-system-version2-cfsv2"
+        target="_blank"
+        >NOAA Climate Forecast System (CFS) v2</a
+      >. The data are provided as a raster grid of longitude and latitude (1°
+      per cell). Isocontours are computed against the grid and projected.
+      Adapted from an example by @mattijn.
+    </p>
+    <div id="geo10" class="view"></div>
+
     <h2>Source</h2>
     <details
       ><summary>click to see code</summary>
@@ -168,7 +180,6 @@
       vega.projection("guyou", d3.geoGuyou);
       vega.projection("hammer", d3.geoHammer);
       vega.projection("littrow", d3.geoLittrow);
-      vega.projection("mollweide", d3.geoMollweide);
       vega.projection("wagner6", d3.geoWagner6);
       vega.projection("wiechel", d3.geoWiechel);
       vega.projection("winkel3", d3.geoWinkel3);
