@@ -13661,7 +13661,7 @@ var $author$project$GalleryBar$barChart6 = function () {
 					$author$project$Vega$scRange(
 					$author$project$Vega$raStrs(
 						_List_fromArray(
-							['#1f77b4', '#e377c2'])))
+							['#d5855a', '#6c4e97'])))
 				])));
 	var si = A2(
 		$elm$core$Basics$composeL,

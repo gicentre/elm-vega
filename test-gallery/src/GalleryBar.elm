@@ -452,7 +452,7 @@ barChart6 =
                 << scale "cScale"
                     [ scType scOrdinal
                     , scDomain (doNums (nums [ 1, 2 ]))
-                    , scRange (raStrs [ "#1f77b4", "#e377c2" ])
+                    , scRange (raStrs [ "#d5855a", "#6c4e97" ])
                     ]
 
         topMk =
