@@ -8351,7 +8351,7 @@ var $author$project$Vega$titleProperty = function (tProp) {
 		case 14:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
-				'fame',
+				'frame',
 				$author$project$Vega$titleFrameSpec(fr));
 		case 15:
 			var b = tProp.a;
@@ -10106,6 +10106,16 @@ var $author$project$Vega$isocontourProperty = function (icProp) {
 			return _Utils_Tuple2(
 				'scale',
 				$author$project$Vega$numSpec(n));
+		case 8:
+			var tx = icProp.a;
+			var ty = icProp.b;
+			return _Utils_Tuple2(
+				'scale',
+				A2(
+					$elm$json$Json$Encode$list,
+					$author$project$Vega$numSpec,
+					_List_fromArray(
+						[tx, ty])));
 		default:
 			var f = icProp.a;
 			return _Utils_Tuple2(
