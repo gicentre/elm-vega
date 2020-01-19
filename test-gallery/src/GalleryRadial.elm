@@ -46,13 +46,20 @@ pieDonut maybeR =
             case maybeR of
                 Just innerR ->
                     commonSigs
-                        << signal "innerRadius" [ siValue (vNum innerR), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
+                        << signal "innerRadius"
+                            [ siValue (vNum innerR)
+                            , siBind (iRange [ inMin 0, inMax 90, inStep 1 ])
+                            ]
 
                 Nothing ->
                     commonSigs
 
         sc =
-            scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20") []) ]
+            scales
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scRange (raScheme (str "category20") [])
+                    ]
 
         commonUpdate =
             [ maStartAngle [ vField (field "startAngle") ]
@@ -153,9 +160,158 @@ circularChart3 =
         [ width 200, height 200, ds, sc [], mk [] ]
 
 
+radarChart1 : Spec
+radarChart1 =
+    let
+        table =
+            dataFromColumns "table" []
+                << dataColumn "key"
+                    (List.range 0 6
+                        |> List.map (\n -> "key-" ++ String.fromInt n)
+                        |> List.repeat 2
+                        |> List.concat
+                        |> vStrs
+                    )
+                << dataColumn "value" (vNums [ 19, 22, 14, 38, 23, 5, 27, 13, 12, 42, 13, 6, 15, 8 ])
+                << dataColumn "category" (vNums (List.repeat 7 0 ++ List.repeat 7 1))
+
+        ds =
+            dataSource
+                [ table []
+                , data "keys" [ daSource "table" ]
+                    |> transform [ trAggregate [ agGroupBy [ field "key" ] ] ]
+                ]
+
+        si =
+            signals
+                << signal "radius" [ siUpdate "width / 2" ]
+
+        sc =
+            scales
+                << scale "angular"
+                    [ scType scPoint
+                    , scDomain (doData [ daDataset "table", daField (field "key") ])
+                    , scRange (raNums [ -pi, pi ])
+                    , scPadding (num 0.5)
+                    ]
+                << scale "radial"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "table", daField (field "value") ])
+                    , scDomainMin (num 0)
+                    , scRange (raSignal "[0, radius]")
+                    , scZero true
+                    , scNice niFalse
+                    ]
+                << scale "cScale"
+                    [ scType scOrdinal
+                    , scDomain (doData [ daDataset "table", daField (field "category") ])
+                    , scRange (raScheme (str "category10") [])
+                    ]
+
+        en =
+            encode [ enEnter [ maX [ vSignal "radius" ], maY [ vSignal "radius" ] ] ]
+
+        nestedMk =
+            marks
+                << mark line
+                    [ mName "category-line"
+                    , mFrom [ srData (str "facet") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ vStr "linear-closed" ]
+                            , maX [ vSignal "scale('radial', datum.value) * cos(scale('angular', datum.key))" ]
+                            , maY [ vSignal "scale('radial', datum.value) * sin(scale('angular', datum.key))" ]
+                            , maStroke [ vScale "cScale", vField (field "category") ]
+                            , maStrokeWidth [ vNum 1 ]
+                            , maFill [ vScale "cScale", vField (field "category") ]
+                            , maFillOpacity [ vNum 0.1 ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mName "value-text"
+                    , mFrom [ srData (str "category-line") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vSignal "datum.x" ]
+                            , maY [ vSignal "datum.y" ]
+                            , maText [ vSignal "datum.datum.value" ]
+                            , maAlign [ hCenter ]
+                            , maBaseline [ vMiddle ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark group
+                    [ mName "categories"
+                    , mZIndex (num 1)
+                    , mFrom [ srFacet (str "table") "facet" [ faGroupBy [ field "category" ] ] ]
+                    , mGroup [ nestedMk [] ]
+                    ]
+                << mark rule
+                    [ mName "radial-grid"
+                    , mFrom [ srData (str "keys") ]
+                    , mZIndex (num 0)
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vNum 0 ]
+                            , maY [ vNum 0 ]
+                            , maX2 [ vSignal "radius * cos(scale('angular', datum.key))" ]
+                            , maY2 [ vSignal "radius * sin(scale('angular', datum.key))" ]
+                            , maStroke [ vStr "lightGrey" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+                << mark text
+                    [ mName "key-label"
+                    , mFrom [ srData (str "keys") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vSignal "(radius + 5) * cos(scale('angular', datum.key))" ]
+                            , maY [ vSignal "(radius + 5) * sin(scale('angular', datum.key))" ]
+                            , maText [ vField (field "key") ]
+                            , maAlign
+                                [ ifElse "abs(scale('angular', datum.key)) > PI / 2"
+                                    [ vStr "right" ]
+                                    [ vStr "left" ]
+                                ]
+                            , maBaseline
+                                [ ifElse "scale('angular', datum.key) > 0"
+                                    [ vStr "top" ]
+                                    [ ifElse "scale('angular', datum.key) == 0"
+                                        [ vStr "middle" ]
+                                        [ vStr "bottom" ]
+                                    ]
+                                ]
+                            , maFill [ black ]
+                            , maFontWeight [ vStr "bold" ]
+                            ]
+                        ]
+                    ]
+                << mark line
+                    [ mName "outer-line"
+                    , mFrom [ srData (str "radial-grid") ]
+                    , mEncode
+                        [ enEnter
+                            [ maInterpolate [ vStr "linear-closed" ]
+                            , maX [ vField (field "x2") ]
+                            , maY [ vField (field "y2") ]
+                            , maStroke [ vStr "lightGrey" ]
+                            , maStrokeWidth [ vNum 1 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 400, height 400, padding 40, autosize [ asNone, asPadding ], ds, si [], sc [], en, mk [] ]
+
+
 sourceExample : Spec
 sourceExample =
-    circularChart2
+    radarChart1
 
 
 
@@ -168,6 +324,7 @@ mySpecs =
         [ ( "circularChart1", circularChart1 )
         , ( "circularChart2", circularChart2 )
         , ( "circularChart3", circularChart3 )
+        , ( "radarChart1", radarChart1 )
         ]
 
 

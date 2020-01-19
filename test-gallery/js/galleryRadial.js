@@ -11891,12 +11891,655 @@ var $author$project$GalleryRadial$circularChart3 = function () {
 var $author$project$Vega$combineSpecs = function (specs) {
 	return $elm$json$Json$Encode$object(specs);
 };
+var $author$project$Vega$AgGroupBy = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$agGroupBy = $author$project$Vega$AgGroupBy;
+var $author$project$Vega$APadding = {$: 6};
+var $author$project$Vega$asPadding = $author$project$Vega$APadding;
+var $author$project$Vega$black = $author$project$Vega$vStr('black');
+var $author$project$Vega$DaSource = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$daSource = $author$project$Vega$DaSource;
+var $author$project$Vega$VEncode = 16;
+var $author$project$Vega$encode = function (eps) {
+	return _Utils_Tuple2(
+		16,
+		$elm$json$Json$Encode$object(
+			A2($elm$core$List$map, $author$project$Vega$encodingProperty, eps)));
+};
+var $author$project$Vega$FaGroupBy = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$faGroupBy = $author$project$Vega$FaGroupBy;
+var $author$project$Vega$Group = 3;
+var $author$project$Vega$group = 3;
+var $author$project$Vega$VIfElse = F3(
+	function (a, b, c) {
+		return {$: 21, a: a, b: b, c: c};
+	});
+var $author$project$Vega$ifElse = F3(
+	function (condition, thenVals, elseVals) {
+		return A3($author$project$Vega$VIfElse, condition, thenVals, elseVals);
+	});
+var $author$project$Vega$Line = 4;
+var $author$project$Vega$line = 4;
+var $author$project$Vega$MGroup = function (a) {
+	return {$: 14, a: a};
+};
+var $author$project$Vega$mGroup = $author$project$Vega$MGroup;
+var $author$project$Vega$MName = function (a) {
+	return {$: 7, a: a};
+};
+var $author$project$Vega$mName = $author$project$Vega$MName;
+var $author$project$Vega$MTopZIndex = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Vega$mZIndex = $author$project$Vega$MTopZIndex;
+var $author$project$Vega$MFillOpacity = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Vega$maFillOpacity = $author$project$Vega$MFillOpacity;
+var $author$project$Vega$MFontWeight = function (a) {
+	return {$: 59, a: a};
+};
+var $author$project$Vega$maFontWeight = $author$project$Vega$MFontWeight;
+var $author$project$Vega$MInterpolate = function (a) {
+	return {$: 32, a: a};
+};
+var $author$project$Vega$maInterpolate = $author$project$Vega$MInterpolate;
+var $author$project$Vega$MStrokeWidth = function (a) {
+	return {$: 13, a: a};
+};
+var $author$project$Vega$maStrokeWidth = $author$project$Vega$MStrokeWidth;
+var $author$project$Vega$MX2 = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$maX2 = $author$project$Vega$MX2;
+var $author$project$Vega$MY2 = function (a) {
+	return {$: 5, a: a};
+};
+var $author$project$Vega$maY2 = $author$project$Vega$MY2;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $author$project$Vega$NFalse = {$: 10};
+var $author$project$Vega$niFalse = $author$project$Vega$NFalse;
+var $author$project$Vega$Num = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$num = $author$project$Vega$Num;
+var $author$project$Vega$VPadding = 4;
+var $author$project$Vega$padding = function (p) {
+	return _Utils_Tuple2(
+		4,
+		$elm$json$Json$Encode$float(p));
+};
+var $elm$core$Basics$pi = _Basics_pi;
+var $author$project$Vega$RaSignal = function (a) {
+	return {$: 15, a: a};
+};
+var $author$project$Vega$raSignal = $author$project$Vega$RaSignal;
+var $author$project$Vega$Rule = 7;
+var $author$project$Vega$rule = 7;
+var $author$project$Vega$SDomainMin = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$scDomainMin = $author$project$Vega$SDomainMin;
+var $author$project$Vega$ScLinear = {$: 0};
+var $author$project$Vega$scLinear = $author$project$Vega$ScLinear;
+var $author$project$Vega$SNice = function (a) {
+	return {$: 13, a: a};
+};
+var $author$project$Vega$scNice = $author$project$Vega$SNice;
+var $author$project$Vega$SPadding = function (a) {
+	return {$: 12, a: a};
+};
+var $author$project$Vega$scPadding = $author$project$Vega$SPadding;
+var $author$project$Vega$ScPoint = {$: 9};
+var $author$project$Vega$scPoint = $author$project$Vega$ScPoint;
+var $author$project$Vega$SZero = function (a) {
+	return {$: 14, a: a};
+};
+var $author$project$Vega$scZero = $author$project$Vega$SZero;
+var $author$project$Vega$SiUpdate = function (a) {
+	return {$: 5, a: a};
+};
+var $author$project$Vega$siUpdate = $author$project$Vega$SiUpdate;
+var $author$project$Vega$SFacet = F3(
+	function (a, b, c) {
+		return {$: 1, a: a, b: b, c: c};
+	});
+var $author$project$Vega$srFacet = F2(
+	function (d, name) {
+		return A2($author$project$Vega$SFacet, d, name);
+	});
+var $author$project$Vega$TAggregate = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$trAggregate = $author$project$Vega$TAggregate;
+var $author$project$Vega$Boo = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$true = $author$project$Vega$Boo(true);
+var $author$project$Vega$VStrs = function (a) {
+	return {$: 1, a: a};
+};
+var $author$project$Vega$vStrs = $author$project$Vega$VStrs;
+var $author$project$GalleryRadial$radarChart1 = function () {
+	var table = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2($author$project$Vega$dataFromColumns, 'table', _List_Nil),
+				A2(
+					$author$project$Vega$dataColumn,
+					'key',
+					$author$project$Vega$vStrs(
+						$elm$core$List$concat(
+							A2(
+								$elm$core$List$repeat,
+								2,
+								A2(
+									$elm$core$List$map,
+									function (n) {
+										return 'key-' + $elm$core$String$fromInt(n);
+									},
+									A2($elm$core$List$range, 0, 6))))))),
+			A2(
+				$author$project$Vega$dataColumn,
+				'value',
+				$author$project$Vega$vNums(
+					_List_fromArray(
+						[19, 22, 14, 38, 23, 5, 27, 13, 12, 42, 13, 6, 15, 8])))),
+		A2(
+			$author$project$Vega$dataColumn,
+			'category',
+			$author$project$Vega$vNums(
+				_Utils_ap(
+					A2($elm$core$List$repeat, 7, 0),
+					A2($elm$core$List$repeat, 7, 1)))));
+	var si = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$signals,
+		A2(
+			$author$project$Vega$signal,
+			'radius',
+			_List_fromArray(
+				[
+					$author$project$Vega$siUpdate('width / 2')
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				$author$project$Vega$scales,
+				A2(
+					$author$project$Vega$scale,
+					'angular',
+					_List_fromArray(
+						[
+							$author$project$Vega$scType($author$project$Vega$scPoint),
+							$author$project$Vega$scDomain(
+							$author$project$Vega$doData(
+								_List_fromArray(
+									[
+										$author$project$Vega$daDataset('table'),
+										$author$project$Vega$daField(
+										$author$project$Vega$field('key'))
+									]))),
+							$author$project$Vega$scRange(
+							$author$project$Vega$raNums(
+								_List_fromArray(
+									[-$elm$core$Basics$pi, $elm$core$Basics$pi]))),
+							$author$project$Vega$scPadding(
+							$author$project$Vega$num(0.5))
+						]))),
+			A2(
+				$author$project$Vega$scale,
+				'radial',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scLinear),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('table'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('value'))
+								]))),
+						$author$project$Vega$scDomainMin(
+						$author$project$Vega$num(0)),
+						$author$project$Vega$scRange(
+						$author$project$Vega$raSignal('[0, radius]')),
+						$author$project$Vega$scZero($author$project$Vega$true),
+						$author$project$Vega$scNice($author$project$Vega$niFalse)
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'cScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scOrdinal),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('table'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('category'))
+							]))),
+					$author$project$Vega$scRange(
+					A2(
+						$author$project$Vega$raScheme,
+						$author$project$Vega$str('category10'),
+						_List_Nil))
+				])));
+	var nestedMk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$marks,
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$line,
+				_List_fromArray(
+					[
+						$author$project$Vega$mName('category-line'),
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('facet'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maInterpolate(
+										_List_fromArray(
+											[
+												$author$project$Vega$vStr('linear-closed')
+											])),
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('scale(\'radial\', datum.value) * cos(scale(\'angular\', datum.key))')
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('scale(\'radial\', datum.value) * sin(scale(\'angular\', datum.key))')
+											])),
+										$author$project$Vega$maStroke(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('cScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('category'))
+											])),
+										$author$project$Vega$maStrokeWidth(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(1)
+											])),
+										$author$project$Vega$maFill(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('cScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('category'))
+											])),
+										$author$project$Vega$maFillOpacity(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(0.1)
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$text,
+			_List_fromArray(
+				[
+					$author$project$Vega$mName('value-text'),
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('category-line'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('datum.x')
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('datum.y')
+										])),
+									$author$project$Vega$maText(
+									_List_fromArray(
+										[
+											$author$project$Vega$vSignal('datum.datum.value')
+										])),
+									$author$project$Vega$maAlign(
+									_List_fromArray(
+										[$author$project$Vega$hCenter])),
+									$author$project$Vega$maBaseline(
+									_List_fromArray(
+										[$author$project$Vega$vMiddle]))
+								]))
+						]))
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					$author$project$Vega$marks,
+					A2(
+						$author$project$Vega$mark,
+						$author$project$Vega$group,
+						_List_fromArray(
+							[
+								$author$project$Vega$mName('categories'),
+								$author$project$Vega$mZIndex(
+								$author$project$Vega$num(1)),
+								$author$project$Vega$mFrom(
+								_List_fromArray(
+									[
+										A3(
+										$author$project$Vega$srFacet,
+										$author$project$Vega$str('table'),
+										'facet',
+										_List_fromArray(
+											[
+												$author$project$Vega$faGroupBy(
+												_List_fromArray(
+													[
+														$author$project$Vega$field('category')
+													]))
+											]))
+									])),
+								$author$project$Vega$mGroup(
+								_List_fromArray(
+									[
+										nestedMk(_List_Nil)
+									]))
+							]))),
+				A2(
+					$author$project$Vega$mark,
+					$author$project$Vega$rule,
+					_List_fromArray(
+						[
+							$author$project$Vega$mName('radial-grid'),
+							$author$project$Vega$mFrom(
+							_List_fromArray(
+								[
+									$author$project$Vega$srData(
+									$author$project$Vega$str('keys'))
+								])),
+							$author$project$Vega$mZIndex(
+							$author$project$Vega$num(0)),
+							$author$project$Vega$mEncode(
+							_List_fromArray(
+								[
+									$author$project$Vega$enEnter(
+									_List_fromArray(
+										[
+											$author$project$Vega$maX(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(0)
+												])),
+											$author$project$Vega$maY(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(0)
+												])),
+											$author$project$Vega$maX2(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('radius * cos(scale(\'angular\', datum.key))')
+												])),
+											$author$project$Vega$maY2(
+											_List_fromArray(
+												[
+													$author$project$Vega$vSignal('radius * sin(scale(\'angular\', datum.key))')
+												])),
+											$author$project$Vega$maStroke(
+											_List_fromArray(
+												[
+													$author$project$Vega$vStr('lightGrey')
+												])),
+											$author$project$Vega$maStrokeWidth(
+											_List_fromArray(
+												[
+													$author$project$Vega$vNum(1)
+												]))
+										]))
+								]))
+						]))),
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$text,
+				_List_fromArray(
+					[
+						$author$project$Vega$mName('key-label'),
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('keys'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('(radius + 5) * cos(scale(\'angular\', datum.key))')
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vSignal('(radius + 5) * sin(scale(\'angular\', datum.key))')
+											])),
+										$author$project$Vega$maText(
+										_List_fromArray(
+											[
+												$author$project$Vega$vField(
+												$author$project$Vega$field('key'))
+											])),
+										$author$project$Vega$maAlign(
+										_List_fromArray(
+											[
+												A3(
+												$author$project$Vega$ifElse,
+												'abs(scale(\'angular\', datum.key)) > PI / 2',
+												_List_fromArray(
+													[
+														$author$project$Vega$vStr('right')
+													]),
+												_List_fromArray(
+													[
+														$author$project$Vega$vStr('left')
+													]))
+											])),
+										$author$project$Vega$maBaseline(
+										_List_fromArray(
+											[
+												A3(
+												$author$project$Vega$ifElse,
+												'scale(\'angular\', datum.key) > 0',
+												_List_fromArray(
+													[
+														$author$project$Vega$vStr('top')
+													]),
+												_List_fromArray(
+													[
+														A3(
+														$author$project$Vega$ifElse,
+														'scale(\'angular\', datum.key) == 0',
+														_List_fromArray(
+															[
+																$author$project$Vega$vStr('middle')
+															]),
+														_List_fromArray(
+															[
+																$author$project$Vega$vStr('bottom')
+															]))
+													]))
+											])),
+										$author$project$Vega$maFill(
+										_List_fromArray(
+											[$author$project$Vega$black])),
+										$author$project$Vega$maFontWeight(
+										_List_fromArray(
+											[
+												$author$project$Vega$vStr('bold')
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$line,
+			_List_fromArray(
+				[
+					$author$project$Vega$mName('outer-line'),
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('radial-grid'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maInterpolate(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('linear-closed')
+										])),
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('x2'))
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('y2'))
+										])),
+									$author$project$Vega$maStroke(
+									_List_fromArray(
+										[
+											$author$project$Vega$vStr('lightGrey')
+										])),
+									$author$project$Vega$maStrokeWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(1)
+										]))
+								]))
+						]))
+				])));
+	var en = $author$project$Vega$encode(
+		_List_fromArray(
+			[
+				$author$project$Vega$enEnter(
+				_List_fromArray(
+					[
+						$author$project$Vega$maX(
+						_List_fromArray(
+							[
+								$author$project$Vega$vSignal('radius')
+							])),
+						$author$project$Vega$maY(
+						_List_fromArray(
+							[
+								$author$project$Vega$vSignal('radius')
+							]))
+					]))
+			]));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				table(_List_Nil),
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								$author$project$Vega$agGroupBy(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('key')
+									]))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'keys',
+					_List_fromArray(
+						[
+							$author$project$Vega$daSource('table')
+						])))
+			]));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(400),
+				$author$project$Vega$height(400),
+				$author$project$Vega$padding(40),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[$author$project$Vega$asNone, $author$project$Vega$asPadding])),
+				ds,
+				si(_List_Nil),
+				sc(_List_Nil),
+				en,
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$GalleryRadial$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
 			_Utils_Tuple2('circularChart1', $author$project$GalleryRadial$circularChart1),
 			_Utils_Tuple2('circularChart2', $author$project$GalleryRadial$circularChart2),
-			_Utils_Tuple2('circularChart3', $author$project$GalleryRadial$circularChart3)
+			_Utils_Tuple2('circularChart3', $author$project$GalleryRadial$circularChart3),
+			_Utils_Tuple2('radarChart1', $author$project$GalleryRadial$radarChart1)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -11912,7 +12555,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryRadial$sourceExample = $author$project$GalleryRadial$circularChart2;
+var $author$project$GalleryRadial$sourceExample = $author$project$GalleryRadial$radarChart1;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryRadial$view = function (spec) {
