@@ -145,6 +145,161 @@ heatmap1 =
         [ width 800, height 500, ti, ds, si [], sc [], ax [], le [], mk [] ]
 
 
+heatmap2 : Spec
+heatmap2 =
+    let
+        ds =
+            dataSource
+                [ data "source"
+                    [ daUrl (str "https://vega.github.io/vega/data/cars.json") ]
+                    |> transform
+                        [ trFilter (expr "datum[fieldX] != null && datum.Miles_per_Gallon != null") ]
+                , data "density" [ daSource "source" ]
+                    |> transform
+                        [ trKde2d
+                            (numSignal "width")
+                            (numSignal "height")
+                            (fExpr "scale('xScale', datum[fieldX])")
+                            (fExpr "scale('yScale', datum.Miles_per_Gallon)")
+                            [ kd2Bandwidth (numSignal "bandWidthX") (numSignal "bandWidthY")
+                            , kd2CellSize (numSignal "cellSize")
+                            , kd2Counts (booSignal "counts")
+                            , kd2GroupBy [ field "Origin" ]
+                            ]
+                        , trHeatmap
+                            [ hmField (field "grid")
+                            , hmResolve (resolveSignal "resolve")
+                            , hmColor (strExpr (expr "scale('density', datum.$value / datum.$max)"))
+                            , hmOpacity (num 1)
+                            ]
+                        ]
+                ]
+
+        si =
+            signals
+                << signal "fieldX"
+                    [ siValue (vStr "Acceleration")
+                    , siBind (iSelect [ inOptions (vStrs [ "Acceleration", "Displacement", "Horsepower" ]) ])
+                    ]
+                << signal "bandWidthX"
+                    [ siValue (vNum -1)
+                    , siBind (iRange [ inMin -1, inMax 100, inStep 1 ])
+                    ]
+                << signal "bandWidthY"
+                    [ siValue (vNum -1)
+                    , siBind (iRange [ inMin -1, inMax 100, inStep 1 ])
+                    ]
+                << signal "resolve"
+                    [ siValue (vStr "independent")
+                    , siBind (iSelect [ inOptions (vStrs [ "independent", "shared" ]) ])
+                    ]
+                << signal "counts"
+                    [ siValue vFalse
+                    , siBind (iCheckbox [])
+                    ]
+                << signal "smooth"
+                    [ siValue vTrue
+                    , siBind (iCheckbox [])
+                    ]
+                << signal "cellSize"
+                    [ siValue (vNum 4)
+                    , siBind (iSelect [ inOptions (vNums [ 1, 2, 4, 8, 16 ]) ])
+                    ]
+                << signal "title"
+                    [ siValue (vStr "Density")
+                    , siUpdate "[if(resolve == 'shared', 'Global' + if(counts, ' Count', ' Prob.'), 'Local Density'), '(Normalized)']"
+                    ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "source", daField (fSignal "fieldX") ])
+                    , scRange raWidth
+                    , scRound true
+                    , scZero true
+                    , scNice niTrue
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "source", daField (field "Miles_per_Gallon") ])
+                    , scRange raHeight
+                    , scRound true
+                    , scZero true
+                    , scNice niTrue
+                    ]
+                << scale "density"
+                    [ scType scLinear
+                    , scDomain (doNums (nums [ 0, 1 ]))
+                    , scRange (raScheme (str "viridis") [])
+                    , scZero true
+                    ]
+
+        ax =
+            axes
+                << axis "yScale"
+                    siLeft
+                    [ axDomain false
+                    , axTitlePadding (vNum 5)
+                    , axOffset (vNum 2)
+                    , axTitle (str "Miles per Gallon")
+                    ]
+
+        le =
+            legends
+                << legend
+                    [ leFill "density"
+                    , leTitle (strSignal "title")
+                    , leGradientLength (numSignal "height - 28")
+                    ]
+
+        lo =
+            layout [ loBounds bcFlush, loColumns (num 3), loPadding (num 10) ]
+
+        nestedAx =
+            axes
+                << axis "xScale"
+                    siBottom
+                    [ axDomain false
+                    , axTickCount (num 5)
+                    , axLabelFlush (num 1)
+                    , axTitle (strSignal "fieldX")
+                    ]
+
+        nestedMk =
+            marks
+                << mark image
+                    [ mFrom [ srData (str "facet") ]
+                    , mEncode
+                        [ enUpdate
+                            [ maX [ vNum 0 ]
+                            , maY [ vNum 0 ]
+                            , maImage [ vField (field "image") ]
+                            , maWidth [ vSignal "width" ]
+                            , maHeight [ vSignal "height" ]
+                            , maAspect [ vFalse ]
+                            , maSmooth [ vSignal "smooth" ]
+                            ]
+                        ]
+                    ]
+
+        mk =
+            marks
+                << mark group
+                    [ mFrom [ srFacet (str "density") "facet" [ faGroupBy [ field "Origin" ] ] ]
+                    , mSort [ ( field "datum.Origin", ascend ) ]
+                    , mGroup
+                        [ title (strSignal "parent.Origin") [ tiFrame tfGroup ]
+                        , nestedAx []
+                        , nestedMk []
+                        ]
+                    , mEncode [ enUpdate [ maWidth [ vSignal "width" ], maHeight [ vSignal "height" ] ] ]
+                    ]
+    in
+    toVega
+        [ width 250, height 250, padding 5, autosize [ asPad ], ds, si [], sc [], ax [], le [], lo, mk [] ]
+
+
 parallel1 : Spec
 parallel1 =
     let
@@ -493,6 +648,7 @@ mySpecs : Spec
 mySpecs =
     combineSpecs
         [ ( "heatmap1", heatmap1 )
+        , ( "heatmap2", heatmap2 )
         , ( "parallel1", parallel1 )
         , ( "wordcloud1", wordcloud1 )
         , ( "timeline1", timeline1 )
