@@ -11275,7 +11275,7 @@ var $author$project$Vega$width = function (w) {
 		2,
 		$elm$json$Json$Encode$float(w));
 };
-var $author$project$GalleryRadial$circularChart1 = function () {
+var $author$project$GalleryRadial$pieDonut = function (maybeR) {
 	var table = A2(
 		$elm$core$Basics$composeL,
 		A2(
@@ -11293,108 +11293,6 @@ var $author$project$GalleryRadial$circularChart1 = function () {
 			$author$project$Vega$vNums(
 				_List_fromArray(
 					[4, 6, 10, 3, 7, 8]))));
-	var si = A2(
-		$elm$core$Basics$composeL,
-		A2(
-			$elm$core$Basics$composeL,
-			A2(
-				$elm$core$Basics$composeL,
-				A2(
-					$elm$core$Basics$composeL,
-					A2(
-						$elm$core$Basics$composeL,
-						A2(
-							$elm$core$Basics$composeL,
-							$author$project$Vega$signals,
-							A2(
-								$author$project$Vega$signal,
-								'startAngle',
-								_List_fromArray(
-									[
-										$author$project$Vega$siValue(
-										$author$project$Vega$vNum(0)),
-										$author$project$Vega$siBind(
-										$author$project$Vega$iRange(
-											_List_fromArray(
-												[
-													$author$project$Vega$inMin(0),
-													$author$project$Vega$inMax(360),
-													$author$project$Vega$inStep(1)
-												])))
-									]))),
-						A2(
-							$author$project$Vega$signal,
-							'endAngle',
-							_List_fromArray(
-								[
-									$author$project$Vega$siValue(
-									$author$project$Vega$vNum(360)),
-									$author$project$Vega$siBind(
-									$author$project$Vega$iRange(
-										_List_fromArray(
-											[
-												$author$project$Vega$inMin(0),
-												$author$project$Vega$inMax(360),
-												$author$project$Vega$inStep(1)
-											])))
-								]))),
-					A2(
-						$author$project$Vega$signal,
-						'padAngle',
-						_List_fromArray(
-							[
-								$author$project$Vega$siValue(
-								$author$project$Vega$vNum(0)),
-								$author$project$Vega$siBind(
-								$author$project$Vega$iRange(
-									_List_fromArray(
-										[
-											$author$project$Vega$inMin(0),
-											$author$project$Vega$inMax(10),
-											$author$project$Vega$inStep(0.1)
-										])))
-							]))),
-				A2(
-					$author$project$Vega$signal,
-					'innerRadius',
-					_List_fromArray(
-						[
-							$author$project$Vega$siValue(
-							$author$project$Vega$vNum(0)),
-							$author$project$Vega$siBind(
-							$author$project$Vega$iRange(
-								_List_fromArray(
-									[
-										$author$project$Vega$inMin(0),
-										$author$project$Vega$inMax(90),
-										$author$project$Vega$inStep(1)
-									])))
-						]))),
-			A2(
-				$author$project$Vega$signal,
-				'cornerRadius',
-				_List_fromArray(
-					[
-						$author$project$Vega$siValue(
-						$author$project$Vega$vNum(0)),
-						$author$project$Vega$siBind(
-						$author$project$Vega$iRange(
-							_List_fromArray(
-								[
-									$author$project$Vega$inMin(0),
-									$author$project$Vega$inMax(10),
-									$author$project$Vega$inStep(0.5)
-								])))
-					]))),
-		A2(
-			$author$project$Vega$signal,
-			'sort',
-			_List_fromArray(
-				[
-					$author$project$Vega$siValue($author$project$Vega$vFalse),
-					$author$project$Vega$siBind(
-					$author$project$Vega$iCheckbox(_List_Nil))
-				])));
 	var sc = A2(
 		$elm$core$Basics$composeL,
 		$author$project$Vega$scales,
@@ -11410,6 +11308,73 @@ var $author$project$GalleryRadial$circularChart1 = function () {
 						$author$project$Vega$str('category20'),
 						_List_Nil))
 				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						$author$project$Vega$trPie(
+						_List_fromArray(
+							[
+								$author$project$Vega$piField(
+								$author$project$Vega$field('field')),
+								$author$project$Vega$piStartAngle(
+								$author$project$Vega$numSignal('PI * startAngle / 180')),
+								$author$project$Vega$piEndAngle(
+								$author$project$Vega$numSignal('PI * endAngle / 180')),
+								$author$project$Vega$piSort(
+								$author$project$Vega$booSignal('sort'))
+							]))
+					]),
+				table(_List_Nil))
+			]));
+	var commonUpdate = _List_fromArray(
+		[
+			$author$project$Vega$maStartAngle(
+			_List_fromArray(
+				[
+					$author$project$Vega$vField(
+					$author$project$Vega$field('startAngle'))
+				])),
+			$author$project$Vega$maEndAngle(
+			_List_fromArray(
+				[
+					$author$project$Vega$vField(
+					$author$project$Vega$field('endAngle'))
+				])),
+			$author$project$Vega$maPadAngle(
+			_List_fromArray(
+				[
+					$author$project$Vega$vSignal('PI * padAngle / 180')
+				])),
+			$author$project$Vega$maOuterRadius(
+			_List_fromArray(
+				[
+					$author$project$Vega$vSignal('width / 2')
+				])),
+			$author$project$Vega$maCornerRadius(
+			_List_fromArray(
+				[
+					$author$project$Vega$vSignal('cornerRadius')
+				]))
+		]);
+	var updates = function () {
+		if (!maybeR.$) {
+			var _float = maybeR.a;
+			return A2(
+				$elm$core$List$cons,
+				$author$project$Vega$maInnerRadius(
+					_List_fromArray(
+						[
+							$author$project$Vega$vSignal('innerRadius')
+						])),
+				commonUpdate);
+		} else {
+			return commonUpdate;
+		}
+	}();
 	var mk = A2(
 		$elm$core$Basics$composeL,
 		$author$project$Vega$marks,
@@ -11448,66 +11413,119 @@ var $author$project$GalleryRadial$circularChart1 = function () {
 											$author$project$Vega$vSignal('height / 2')
 										]))
 								])),
-							$author$project$Vega$enUpdate(
-							_List_fromArray(
-								[
-									$author$project$Vega$maStartAngle(
-									_List_fromArray(
-										[
-											$author$project$Vega$vField(
-											$author$project$Vega$field('startAngle'))
-										])),
-									$author$project$Vega$maEndAngle(
-									_List_fromArray(
-										[
-											$author$project$Vega$vField(
-											$author$project$Vega$field('endAngle'))
-										])),
-									$author$project$Vega$maPadAngle(
-									_List_fromArray(
-										[
-											$author$project$Vega$vSignal('PI * padAngle / 180')
-										])),
-									$author$project$Vega$maInnerRadius(
-									_List_fromArray(
-										[
-											$author$project$Vega$vSignal('innerRadius')
-										])),
-									$author$project$Vega$maOuterRadius(
-									_List_fromArray(
-										[
-											$author$project$Vega$vSignal('width / 2')
-										])),
-									$author$project$Vega$maCornerRadius(
-									_List_fromArray(
-										[
-											$author$project$Vega$vSignal('cornerRadius')
-										]))
-								]))
+							$author$project$Vega$enUpdate(updates)
 						]))
 				])));
-	var ds = $author$project$Vega$dataSource(
-		_List_fromArray(
-			[
+	var commonSigs = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
 				A2(
-				$author$project$Vega$transform,
-				_List_fromArray(
-					[
-						$author$project$Vega$trPie(
+					$elm$core$Basics$composeL,
+					A2(
+						$elm$core$Basics$composeL,
+						$author$project$Vega$signals,
+						A2(
+							$author$project$Vega$signal,
+							'startAngle',
+							_List_fromArray(
+								[
+									$author$project$Vega$siValue(
+									$author$project$Vega$vNum(0)),
+									$author$project$Vega$siBind(
+									$author$project$Vega$iRange(
+										_List_fromArray(
+											[
+												$author$project$Vega$inMin(0),
+												$author$project$Vega$inMax(360),
+												$author$project$Vega$inStep(1)
+											])))
+								]))),
+					A2(
+						$author$project$Vega$signal,
+						'endAngle',
 						_List_fromArray(
 							[
-								$author$project$Vega$piField(
-								$author$project$Vega$field('field')),
-								$author$project$Vega$piStartAngle(
-								$author$project$Vega$numSignal('PI * startAngle / 180')),
-								$author$project$Vega$piEndAngle(
-								$author$project$Vega$numSignal('PI * endAngle / 180')),
-								$author$project$Vega$piSort(
-								$author$project$Vega$booSignal('sort'))
-							]))
-					]),
-				table(_List_Nil))
-			]));
+								$author$project$Vega$siValue(
+								$author$project$Vega$vNum(360)),
+								$author$project$Vega$siBind(
+								$author$project$Vega$iRange(
+									_List_fromArray(
+										[
+											$author$project$Vega$inMin(0),
+											$author$project$Vega$inMax(360),
+											$author$project$Vega$inStep(1)
+										])))
+							]))),
+				A2(
+					$author$project$Vega$signal,
+					'padAngle',
+					_List_fromArray(
+						[
+							$author$project$Vega$siValue(
+							$author$project$Vega$vNum(0)),
+							$author$project$Vega$siBind(
+							$author$project$Vega$iRange(
+								_List_fromArray(
+									[
+										$author$project$Vega$inMin(0),
+										$author$project$Vega$inMax(10),
+										$author$project$Vega$inStep(0.1)
+									])))
+						]))),
+			A2(
+				$author$project$Vega$signal,
+				'cornerRadius',
+				_List_fromArray(
+					[
+						$author$project$Vega$siValue(
+						$author$project$Vega$vNum(0)),
+						$author$project$Vega$siBind(
+						$author$project$Vega$iRange(
+							_List_fromArray(
+								[
+									$author$project$Vega$inMin(0),
+									$author$project$Vega$inMax(10),
+									$author$project$Vega$inStep(0.5)
+								])))
+					]))),
+		A2(
+			$author$project$Vega$signal,
+			'sort',
+			_List_fromArray(
+				[
+					$author$project$Vega$siValue($author$project$Vega$vFalse),
+					$author$project$Vega$siBind(
+					$author$project$Vega$iCheckbox(_List_Nil))
+				])));
+	var si = function () {
+		if (!maybeR.$) {
+			var innerR = maybeR.a;
+			return A2(
+				$elm$core$Basics$composeL,
+				commonSigs,
+				A2(
+					$author$project$Vega$signal,
+					'innerRadius',
+					_List_fromArray(
+						[
+							$author$project$Vega$siValue(
+							$author$project$Vega$vNum(innerR)),
+							$author$project$Vega$siBind(
+							$author$project$Vega$iRange(
+								_List_fromArray(
+									[
+										$author$project$Vega$inMin(0),
+										$author$project$Vega$inMax(90),
+										$author$project$Vega$inStep(1)
+									])))
+						])));
+		} else {
+			return commonSigs;
+		}
+	}();
 	return $author$project$Vega$toVega(
 		_List_fromArray(
 			[
@@ -11521,7 +11539,10 @@ var $author$project$GalleryRadial$circularChart1 = function () {
 				sc(_List_Nil),
 				mk(_List_Nil)
 			]));
-}();
+};
+var $author$project$GalleryRadial$circularChart1 = $author$project$GalleryRadial$pieDonut($elm$core$Maybe$Nothing);
+var $author$project$GalleryRadial$circularChart2 = $author$project$GalleryRadial$pieDonut(
+	$elm$core$Maybe$Just(60));
 var $author$project$Vega$DDataset = function (a) {
 	return {$: 0, a: a};
 };
@@ -11650,7 +11671,7 @@ var $author$project$Vega$VOffset = function (a) {
 	return {$: 18, a: a};
 };
 var $author$project$Vega$vOffset = $author$project$Vega$VOffset;
-var $author$project$GalleryRadial$circularChart2 = function () {
+var $author$project$GalleryRadial$circularChart3 = function () {
 	var sc = A2(
 		$elm$core$Basics$composeL,
 		$author$project$Vega$scales,
@@ -11874,7 +11895,8 @@ var $author$project$GalleryRadial$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
 			_Utils_Tuple2('circularChart1', $author$project$GalleryRadial$circularChart1),
-			_Utils_Tuple2('circularChart2', $author$project$GalleryRadial$circularChart2)
+			_Utils_Tuple2('circularChart2', $author$project$GalleryRadial$circularChart2),
+			_Utils_Tuple2('circularChart3', $author$project$GalleryRadial$circularChart3)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -11890,7 +11912,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$GalleryRadial$sourceExample = $author$project$GalleryRadial$circularChart1;
+var $author$project$GalleryRadial$sourceExample = $author$project$GalleryRadial$circularChart2;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$GalleryRadial$view = function (spec) {

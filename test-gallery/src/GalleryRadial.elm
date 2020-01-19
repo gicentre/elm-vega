@@ -13,8 +13,8 @@ import Vega exposing (..)
 -- The examples themselves reproduce those at https://vega.github.io/vega/examples/
 
 
-circularChart1 : Spec
-circularChart1 =
+pieDonut : Maybe Float -> Spec
+pieDonut maybeR =
     let
         table =
             dataFromColumns "table" []
@@ -34,17 +34,41 @@ circularChart1 =
                         ]
                 ]
 
-        si =
+        commonSigs =
             signals
                 << signal "startAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
                 << signal "endAngle" [ siValue (vNum 360), siBind (iRange [ inMin 0, inMax 360, inStep 1 ]) ]
                 << signal "padAngle" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.1 ]) ]
-                << signal "innerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
                 << signal "cornerRadius" [ siValue (vNum 0), siBind (iRange [ inMin 0, inMax 10, inStep 0.5 ]) ]
                 << signal "sort" [ siValue vFalse, siBind (iCheckbox []) ]
 
+        si =
+            case maybeR of
+                Just innerR ->
+                    commonSigs
+                        << signal "innerRadius" [ siValue (vNum innerR), siBind (iRange [ inMin 0, inMax 90, inStep 1 ]) ]
+
+                Nothing ->
+                    commonSigs
+
         sc =
             scales << scale "cScale" [ scType scOrdinal, scRange (raScheme (str "category20") []) ]
+
+        commonUpdate =
+            [ maStartAngle [ vField (field "startAngle") ]
+            , maEndAngle [ vField (field "endAngle") ]
+            , maPadAngle [ vSignal "PI * padAngle / 180" ]
+            , maOuterRadius [ vSignal "width / 2" ]
+            , maCornerRadius [ vSignal "cornerRadius" ]
+            ]
+
+        updates =
+            case maybeR of
+                Just float ->
+                    maInnerRadius [ vSignal "innerRadius" ] :: commonUpdate
+
+                Nothing ->
+                    commonUpdate
 
         mk =
             marks
@@ -56,14 +80,7 @@ circularChart1 =
                             , maX [ vSignal "width / 2" ]
                             , maY [ vSignal "height / 2" ]
                             ]
-                        , enUpdate
-                            [ maStartAngle [ vField (field "startAngle") ]
-                            , maEndAngle [ vField (field "endAngle") ]
-                            , maPadAngle [ vSignal "PI * padAngle / 180" ]
-                            , maInnerRadius [ vSignal "innerRadius" ]
-                            , maOuterRadius [ vSignal "width / 2" ]
-                            , maCornerRadius [ vSignal "cornerRadius" ]
-                            ]
+                        , enUpdate updates
                         ]
                     ]
     in
@@ -71,8 +88,18 @@ circularChart1 =
         [ width 200, height 200, autosize [ asNone ], ds, si [], sc [], mk [] ]
 
 
+circularChart1 : Spec
+circularChart1 =
+    pieDonut Nothing
+
+
 circularChart2 : Spec
 circularChart2 =
+    pieDonut (Just 60)
+
+
+circularChart3 : Spec
+circularChart3 =
     let
         ds =
             dataSource
@@ -128,7 +155,7 @@ circularChart2 =
 
 sourceExample : Spec
 sourceExample =
-    circularChart1
+    circularChart2
 
 
 
@@ -140,6 +167,7 @@ mySpecs =
     combineSpecs
         [ ( "circularChart1", circularChart1 )
         , ( "circularChart2", circularChart2 )
+        , ( "circularChart3", circularChart3 )
         ]
 
 
