@@ -8150,22 +8150,24 @@ var $author$project$Vega$opSpec = function (op) {
 		case 10:
 			return $elm$json$Json$Encode$string('missing');
 		case 11:
-			return $elm$json$Json$Encode$string('q1');
+			return $elm$json$Json$Encode$string('product');
 		case 12:
-			return $elm$json$Json$Encode$string('q3');
-		case 14:
-			return $elm$json$Json$Encode$string('stdev');
-		case 15:
-			return $elm$json$Json$Encode$string('stdevp');
-		case 16:
-			return $elm$json$Json$Encode$string('sum');
+			return $elm$json$Json$Encode$string('q1');
 		case 13:
-			return $elm$json$Json$Encode$string('stderr');
+			return $elm$json$Json$Encode$string('q3');
+		case 15:
+			return $elm$json$Json$Encode$string('stdev');
+		case 16:
+			return $elm$json$Json$Encode$string('stdevp');
 		case 17:
-			return $elm$json$Json$Encode$string('valid');
+			return $elm$json$Json$Encode$string('sum');
+		case 14:
+			return $elm$json$Json$Encode$string('stderr');
 		case 18:
-			return $elm$json$Json$Encode$string('variance');
+			return $elm$json$Json$Encode$string('valid');
 		case 19:
+			return $elm$json$Json$Encode$string('variance');
+		case 20:
 			return $elm$json$Json$Encode$string('variancep');
 		default:
 			var sigName = op.a;
@@ -14680,13 +14682,13 @@ var $author$project$Vega$Max = {$: 6};
 var $author$project$Vega$opMax = $author$project$Vega$Max;
 var $author$project$Vega$Mean = {$: 7};
 var $author$project$Vega$opMean = $author$project$Vega$Mean;
-var $author$project$Vega$Q1 = {$: 11};
+var $author$project$Vega$Q1 = {$: 12};
 var $author$project$Vega$opQ1 = $author$project$Vega$Q1;
-var $author$project$Vega$Q3 = {$: 12};
+var $author$project$Vega$Q3 = {$: 13};
 var $author$project$Vega$opQ3 = $author$project$Vega$Q3;
-var $author$project$Vega$Stderr = {$: 13};
+var $author$project$Vega$Stderr = {$: 14};
 var $author$project$Vega$opStderr = $author$project$Vega$Stderr;
-var $author$project$Vega$Stdev = {$: 14};
+var $author$project$Vega$Stdev = {$: 15};
 var $author$project$Vega$opStdev = $author$project$Vega$Stdev;
 var $author$project$Vega$Rect = 6;
 var $author$project$Vega$rect = 6;

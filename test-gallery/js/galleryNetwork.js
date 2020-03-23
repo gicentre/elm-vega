@@ -6820,22 +6820,24 @@ var $author$project$Vega$opSpec = function (op) {
 		case 10:
 			return $elm$json$Json$Encode$string('missing');
 		case 11:
-			return $elm$json$Json$Encode$string('q1');
+			return $elm$json$Json$Encode$string('product');
 		case 12:
-			return $elm$json$Json$Encode$string('q3');
-		case 14:
-			return $elm$json$Json$Encode$string('stdev');
-		case 15:
-			return $elm$json$Json$Encode$string('stdevp');
-		case 16:
-			return $elm$json$Json$Encode$string('sum');
+			return $elm$json$Json$Encode$string('q1');
 		case 13:
-			return $elm$json$Json$Encode$string('stderr');
+			return $elm$json$Json$Encode$string('q3');
+		case 15:
+			return $elm$json$Json$Encode$string('stdev');
+		case 16:
+			return $elm$json$Json$Encode$string('stdevp');
 		case 17:
-			return $elm$json$Json$Encode$string('valid');
+			return $elm$json$Json$Encode$string('sum');
+		case 14:
+			return $elm$json$Json$Encode$string('stderr');
 		case 18:
-			return $elm$json$Json$Encode$string('variance');
+			return $elm$json$Json$Encode$string('valid');
 		case 19:
+			return $elm$json$Json$Encode$string('variance');
+		case 20:
 			return $elm$json$Json$Encode$string('variancep');
 		default:
 			var sigName = op.a;
@@ -14100,7 +14102,7 @@ var $author$project$Vega$MPath = function (a) {
 };
 var $author$project$Vega$maPath = $author$project$Vega$MPath;
 var $author$project$Vega$numSignals = $author$project$Vega$NumSignals;
-var $author$project$Vega$Sum = {$: 16};
+var $author$project$Vega$Sum = {$: 17};
 var $author$project$Vega$opSum = $author$project$Vega$Sum;
 var $author$project$Vega$paddings = F4(
 	function (l, t, r, b) {
