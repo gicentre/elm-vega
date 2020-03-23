@@ -1,3 +1,11 @@
+# Pending changes
+
+## Additions
+
+- `opProduct` for aggregation of numeric values by their product (V5.10).
+
+---
+
 # V5.3 ➡ V5.4
 
 _Minor release supporting Vega releases 5.8 and 5.9._
