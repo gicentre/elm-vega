@@ -2,6 +2,7 @@
 
 ## Additions
 
+- `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
 - `opProduct` for aggregation of numeric values by their product (V5.10).
 
 ---
