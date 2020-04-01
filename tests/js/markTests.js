@@ -5098,10 +5098,10 @@ var $author$project$Vega$Boo = function (a) {
 var $author$project$Vega$false = $author$project$Vega$Boo(false);
 var $author$project$Vega$VHeight = 3;
 var $elm$json$Json$Encode$float = _Json_wrap;
-var $author$project$Vega$height = function (w) {
+var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
-		$elm$json$Json$Encode$float(w));
+		$elm$json$Json$Encode$float(h));
 };
 var $author$project$Vega$IRadio = function (a) {
 	return {$: 2, a: a};

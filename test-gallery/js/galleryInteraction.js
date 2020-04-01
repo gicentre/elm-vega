@@ -12608,10 +12608,10 @@ var $author$project$Vega$foDate = $author$project$Vega$FoDate;
 var $author$project$Vega$FoNum = {$: 0};
 var $author$project$Vega$foNum = $author$project$Vega$FoNum;
 var $author$project$Vega$VHeight = 3;
-var $author$project$Vega$height = function (w) {
+var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
-		$elm$json$Json$Encode$float(w));
+		$elm$json$Json$Encode$float(h));
 };
 var $author$project$Vega$MFillOpacity = function (a) {
 	return {$: 10, a: a};

@@ -6234,10 +6234,10 @@ var $author$project$Vega$GjSignal = function (a) {
 };
 var $author$project$Vega$gjSignal = $author$project$Vega$GjSignal;
 var $author$project$Vega$VHeight = 3;
-var $author$project$Vega$height = function (w) {
+var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
-		$elm$json$Json$Encode$float(w));
+		$elm$json$Json$Encode$float(h));
 };
 var $author$project$Vega$Line = 4;
 var $author$project$Vega$line = 4;

@@ -10979,11 +10979,654 @@ var $author$project$TopLevelTests$topLevelTest2 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$AutosizeSignal = function (a) {
+	return {$: 8, a: a};
+};
+var $author$project$Vega$asSignal = $author$project$Vega$AutosizeSignal;
+var $author$project$Vega$VAutosize = 5;
+var $author$project$Vega$autosizeProperty = function (asCfg) {
+	switch (asCfg.$) {
+		case 5:
+			return _Utils_Tuple2(
+				'type',
+				$elm$json$Json$Encode$string('pad'));
+		case 1:
+			return _Utils_Tuple2(
+				'type',
+				$elm$json$Json$Encode$string('fit'));
+		case 2:
+			return _Utils_Tuple2(
+				'type',
+				$elm$json$Json$Encode$string('fit-x'));
+		case 3:
+			return _Utils_Tuple2(
+				'type',
+				$elm$json$Json$Encode$string('fit-y'));
+		case 4:
+			return _Utils_Tuple2(
+				'type',
+				$elm$json$Json$Encode$string('none'));
+		case 7:
+			return _Utils_Tuple2(
+				'resize',
+				$elm$json$Json$Encode$bool(true));
+		case 0:
+			return _Utils_Tuple2(
+				'contains',
+				$elm$json$Json$Encode$string('content'));
+		case 6:
+			return _Utils_Tuple2(
+				'contains',
+				$elm$json$Json$Encode$string('padding'));
+		default:
+			var sigName = asCfg.a;
+			return $author$project$Vega$signalReferenceProperty(sigName);
+	}
+};
+var $author$project$Vega$autosize = function (aus) {
+	return _Utils_Tuple2(
+		5,
+		$elm$json$Json$Encode$object(
+			A2($elm$core$List$map, $author$project$Vega$autosizeProperty, aus)));
+};
+var $author$project$Vega$VBackground = 1;
+var $author$project$Vega$background = function (s) {
+	return _Utils_Tuple2(
+		1,
+		$author$project$Vega$strSpec(s));
+};
+var $author$project$Vega$VHeight = 3;
+var $author$project$Vega$heightSignal = function (s) {
+	return _Utils_Tuple2(
+		3,
+		$elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					$author$project$Vega$signalReferenceProperty(s)
+				])));
+};
+var $author$project$Vega$VKeyValue = F2(
+	function (a, b) {
+		return {$: 7, a: a, b: b};
+	});
+var $author$project$Vega$keyValue = $author$project$Vega$VKeyValue;
+var $author$project$Vega$MY = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$maY = $author$project$Vega$MY;
+var $author$project$Vega$VPadding = 4;
+var $author$project$Vega$paddingSignal = function (s) {
+	return _Utils_Tuple2(
+		4,
+		$elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					$author$project$Vega$signalReferenceProperty(s)
+				])));
+};
+var $author$project$Vega$RaHeight = {$: 7};
+var $author$project$Vega$raHeight = $author$project$Vega$RaHeight;
+var $author$project$Vega$SiInit = function (a) {
+	return {$: 3, a: a};
+};
+var $author$project$Vega$siInit = $author$project$Vega$SiInit;
+var $author$project$Vega$SiValue = function (a) {
+	return {$: 7, a: a};
+};
+var $author$project$Vega$siValue = $author$project$Vega$SiValue;
+var $author$project$Vega$SiName = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$inputProperty = function (prop) {
+	switch (prop.$) {
+		case 4:
+			var x = prop.a;
+			return _Utils_Tuple2(
+				'min',
+				$elm$json$Json$Encode$float(x));
+		case 5:
+			var x = prop.a;
+			return _Utils_Tuple2(
+				'max',
+				$elm$json$Json$Encode$float(x));
+		case 6:
+			var x = prop.a;
+			return _Utils_Tuple2(
+				'step',
+				$elm$json$Json$Encode$float(x));
+		case 0:
+			var x = prop.a;
+			return _Utils_Tuple2(
+				'debounce',
+				$elm$json$Json$Encode$float(x));
+		case 2:
+			var opts = prop.a;
+			return _Utils_Tuple2(
+				'options',
+				$author$project$Vega$valueSpec(opts));
+		case 3:
+			var labels = prop.a;
+			return _Utils_Tuple2(
+				'labels',
+				$author$project$Vega$valueSpec(labels));
+		case 7:
+			var el = prop.a;
+			return _Utils_Tuple2(
+				'placeholder',
+				$elm$json$Json$Encode$string(el));
+		case 1:
+			var el = prop.a;
+			return _Utils_Tuple2(
+				'element',
+				$elm$json$Json$Encode$string(el));
+		default:
+			var b = prop.a;
+			return b ? _Utils_Tuple2(
+				'autocomplete',
+				$elm$json$Json$Encode$string('on')) : _Utils_Tuple2(
+				'autocomplete',
+				$elm$json$Json$Encode$string('off'));
+	}
+};
+var $author$project$Vega$bindingProperty = function (bnd) {
+	var bSpec = F2(
+		function (iType, props) {
+			return _Utils_Tuple2(
+				'bind',
+				$elm$json$Json$Encode$object(
+					A2(
+						$elm$core$List$cons,
+						_Utils_Tuple2(
+							'input',
+							$elm$json$Json$Encode$string(iType)),
+						A2($elm$core$List$map, $author$project$Vega$inputProperty, props))));
+		});
+	switch (bnd.$) {
+		case 0:
+			var props = bnd.a;
+			return A2(bSpec, 'range', props);
+		case 1:
+			var props = bnd.a;
+			return A2(bSpec, 'checkbox', props);
+		case 2:
+			var props = bnd.a;
+			return A2(bSpec, 'radio', props);
+		case 3:
+			var props = bnd.a;
+			return A2(bSpec, 'select', props);
+		case 4:
+			var props = bnd.a;
+			return A2(bSpec, 'text', props);
+		case 5:
+			var props = bnd.a;
+			return A2(bSpec, 'number', props);
+		case 6:
+			var props = bnd.a;
+			return A2(bSpec, 'date', props);
+		case 7:
+			var props = bnd.a;
+			return A2(bSpec, 'time', props);
+		case 8:
+			var props = bnd.a;
+			return A2(bSpec, 'month', props);
+		case 9:
+			var props = bnd.a;
+			return A2(bSpec, 'week', props);
+		case 10:
+			var props = bnd.a;
+			return A2(bSpec, 'datetimelocal', props);
+		case 11:
+			var props = bnd.a;
+			return A2(bSpec, 'tel', props);
+		default:
+			var props = bnd.a;
+			return A2(bSpec, 'color', props);
+	}
+};
+var $author$project$Vega$eventSourceLabel = function (es) {
+	switch (es.$) {
+		case 0:
+			return '*';
+		case 1:
+			return 'view';
+		case 2:
+			return 'scope';
+		case 3:
+			return 'window';
+		default:
+			var s = es.a;
+			return s;
+	}
+};
+var $author$project$Vega$eventTypeLabel = function (et) {
+	switch (et) {
+		case 0:
+			return 'click';
+		case 1:
+			return 'dblclick';
+		case 2:
+			return 'dragenter';
+		case 3:
+			return 'dragleave';
+		case 4:
+			return 'dragover';
+		case 5:
+			return 'keydown';
+		case 6:
+			return 'keypress';
+		case 7:
+			return 'keyup';
+		case 8:
+			return 'mousedown';
+		case 9:
+			return 'mousemove';
+		case 10:
+			return 'mouseout';
+		case 11:
+			return 'mouseover';
+		case 12:
+			return 'mouseup';
+		case 13:
+			return 'mousewheel';
+		case 14:
+			return 'touchend';
+		case 15:
+			return 'touchmove';
+		case 16:
+			return 'touchstart';
+		case 17:
+			return 'wheel';
+		default:
+			return 'timer';
+	}
+};
+var $author$project$Vega$eventStreamObjectSpec = function (ess) {
+	var esProperty = function (es) {
+		switch (es.$) {
+			case 0:
+				var src = es.a;
+				return _Utils_Tuple2(
+					'source',
+					$elm$json$Json$Encode$string(
+						$author$project$Vega$eventSourceLabel(src)));
+			case 1:
+				var et = es.a;
+				return _Utils_Tuple2(
+					'type',
+					$elm$json$Json$Encode$string(
+						$author$project$Vega$eventTypeLabel(et)));
+			case 2:
+				var ess1 = es.a;
+				var ess2 = es.b;
+				return _Utils_Tuple2(
+					'between',
+					A2(
+						$elm$json$Json$Encode$list,
+						$author$project$Vega$eventStreamObjectSpec,
+						_List_fromArray(
+							[ess1, ess2])));
+			case 3:
+				var b = es.a;
+				return _Utils_Tuple2(
+					'consume',
+					$author$project$Vega$booSpec(b));
+			case 4:
+				var ex = es.a;
+				if (ex.b && (!ex.b.b)) {
+					var s = ex.a;
+					return _Utils_Tuple2(
+						'filter',
+						$elm$json$Json$Encode$string(s));
+				} else {
+					return _Utils_Tuple2(
+						'filter',
+						A2($elm$json$Json$Encode$list, $elm$json$Json$Encode$string, ex));
+				}
+			case 5:
+				var n = es.a;
+				return _Utils_Tuple2(
+					'debounce',
+					$author$project$Vega$numSpec(n));
+			case 6:
+				var s = es.a;
+				return _Utils_Tuple2(
+					'markname',
+					$elm$json$Json$Encode$string(s));
+			case 7:
+				var mk = es.a;
+				return _Utils_Tuple2(
+					'marktype',
+					$elm$json$Json$Encode$string(
+						$author$project$Vega$markLabel(mk)));
+			case 8:
+				var n = es.a;
+				return _Utils_Tuple2(
+					'throttle',
+					$author$project$Vega$numSpec(n));
+			default:
+				var evStream = es.a;
+				return _Utils_Tuple2(
+					'stream',
+					$author$project$Vega$eventStreamSpec(evStream));
+		}
+	};
+	return $elm$json$Json$Encode$object(
+		A2($elm$core$List$map, esProperty, ess));
+};
+var $author$project$Vega$eventStreamSpec = function (es) {
+	switch (es.$) {
+		case 1:
+			var s = es.a;
+			return $author$project$Vega$strSpec(s);
+		case 0:
+			var ess = es.a;
+			return $author$project$Vega$eventStreamObjectSpec(ess);
+		case 2:
+			var esSig = es.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'signal',
+						$elm$json$Json$Encode$string(esSig))
+					]));
+		default:
+			var ess = es.a;
+			return $elm$json$Json$Encode$object(
+				_List_fromArray(
+					[
+						_Utils_Tuple2(
+						'merge',
+						A2($elm$json$Json$Encode$list, $author$project$Vega$eventStreamSpec, ess))
+					]));
+	}
+};
+var $author$project$Vega$eventHandlerSpec = function (ehs) {
+	var eventHandler = function (eh) {
+		switch (eh.$) {
+			case 0:
+				var ess = eh.a;
+				if (ess.b && (!ess.b.b)) {
+					var es = ess.a;
+					return _Utils_Tuple2(
+						'events',
+						$author$project$Vega$eventStreamSpec(es));
+				} else {
+					return _Utils_Tuple2(
+						'events',
+						A2($elm$json$Json$Encode$list, $author$project$Vega$eventStreamSpec, ess));
+				}
+			case 1:
+				var s = eh.a;
+				return (s === '') ? _Utils_Tuple2(
+					'update',
+					$elm$json$Json$Encode$string('{}')) : _Utils_Tuple2(
+					'update',
+					$elm$json$Json$Encode$string(s));
+			case 2:
+				var s = eh.a;
+				return _Utils_Tuple2(
+					'encode',
+					$elm$json$Json$Encode$string(s));
+			default:
+				var b = eh.a;
+				return _Utils_Tuple2(
+					'force',
+					$author$project$Vega$booSpec(b));
+		}
+	};
+	return $elm$json$Json$Encode$object(
+		A2($elm$core$List$map, eventHandler, ehs));
+};
+var $author$project$Vega$signalProperty = function (sigProp) {
+	switch (sigProp.$) {
+		case 0:
+			var s = sigProp.a;
+			return _Utils_Tuple2(
+				'name',
+				$elm$json$Json$Encode$string(s));
+		case 1:
+			var bd = sigProp.a;
+			return $author$project$Vega$bindingProperty(bd);
+		case 2:
+			var s = sigProp.a;
+			return _Utils_Tuple2(
+				'description',
+				$elm$json$Json$Encode$string(s));
+		case 3:
+			var ex = sigProp.a;
+			return _Utils_Tuple2(
+				'init',
+				$author$project$Vega$expressionSpec(ex));
+		case 5:
+			var ex = sigProp.a;
+			return _Utils_Tuple2(
+				'update',
+				$author$project$Vega$expressionSpec(ex));
+		case 4:
+			var ehs = sigProp.a;
+			return _Utils_Tuple2(
+				'on',
+				A2($elm$json$Json$Encode$list, $author$project$Vega$eventHandlerSpec, ehs));
+		case 6:
+			var b = sigProp.a;
+			return _Utils_Tuple2(
+				'react',
+				$author$project$Vega$booSpec(b));
+		case 7:
+			var v = sigProp.a;
+			return _Utils_Tuple2(
+				'value',
+				$author$project$Vega$valueSpec(v));
+		default:
+			return _Utils_Tuple2(
+				'push',
+				$elm$json$Json$Encode$string('outer'));
+	}
+};
+var $author$project$Vega$signal = F2(
+	function (sigName, sps) {
+		return $elm$core$List$cons(
+			$elm$json$Json$Encode$object(
+				A2(
+					$elm$core$List$map,
+					$author$project$Vega$signalProperty,
+					A2(
+						$elm$core$List$cons,
+						$author$project$Vega$SiName(sigName),
+						sps))));
+	});
+var $author$project$Vega$VSignals = 7;
+var $author$project$Vega$signals = function (sigs) {
+	return _Utils_Tuple2(
+		7,
+		A2($elm$json$Json$Encode$list, $elm$core$Basics$identity, sigs));
+};
+var $author$project$Vega$StrSignal = function (a) {
+	return {$: 2, a: a};
+};
+var $author$project$Vega$strSignal = $author$project$Vega$StrSignal;
+var $author$project$Vega$VObject = function (a) {
+	return {$: 6, a: a};
+};
+var $author$project$Vega$vObject = $author$project$Vega$VObject;
+var $author$project$Vega$widthSignal = function (s) {
+	return _Utils_Tuple2(
+		2,
+		$elm$json$Json$Encode$object(
+			_List_fromArray(
+				[
+					$author$project$Vega$signalReferenceProperty(s)
+				])));
+};
+var $author$project$TopLevelTests$topLevelTest3 = function () {
+	var table = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2($author$project$Vega$dataFromColumns, 'table', _List_Nil),
+			A2(
+				$author$project$Vega$dataColumn,
+				'label',
+				$author$project$Vega$vStrs(
+					_List_fromArray(
+						['Pink background', '300px wide', '60px tall', 'L-T-R-B padding 20,30,40 & 50px'])))),
+		A2(
+			$author$project$Vega$dataColumn,
+			'y',
+			$author$project$Vega$vNums(
+				_List_fromArray(
+					[1, 2, 3, 4]))));
+	var si = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			A2(
+				$elm$core$Basics$composeL,
+				A2(
+					$elm$core$Basics$composeL,
+					$author$project$Vega$signals,
+					A2(
+						$author$project$Vega$signal,
+						'myBgColor',
+						_List_fromArray(
+							[
+								$author$project$Vega$siInit('rgb(255,200,200)')
+							]))),
+				A2(
+					$author$project$Vega$signal,
+					'myHeight',
+					_List_fromArray(
+						[
+							$author$project$Vega$siInit('60')
+						]))),
+			A2(
+				$author$project$Vega$signal,
+				'myPadding',
+				_List_fromArray(
+					[
+						$author$project$Vega$siValue(
+						$author$project$Vega$vObject(
+							_List_fromArray(
+								[
+									A2(
+									$author$project$Vega$keyValue,
+									'left',
+									$author$project$Vega$vNum(20)),
+									A2(
+									$author$project$Vega$keyValue,
+									'top',
+									$author$project$Vega$vNum(30)),
+									A2(
+									$author$project$Vega$keyValue,
+									'right',
+									$author$project$Vega$vNum(40)),
+									A2(
+									$author$project$Vega$keyValue,
+									'bottom',
+									$author$project$Vega$vNum(50))
+								])))
+					]))),
+		A2(
+			$author$project$Vega$signal,
+			'myAutosize',
+			_List_fromArray(
+				[
+					$author$project$Vega$siValue(
+					$author$project$Vega$vObject(
+						_List_fromArray(
+							[
+								A2(
+								$author$project$Vega$keyValue,
+								'type',
+								$author$project$Vega$vStr('fit'))
+							])))
+				])));
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$scales,
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('table'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('y'))
+							]))),
+					$author$project$Vega$scRange($author$project$Vega$raHeight)
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$marks,
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$text,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('table'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('y'))
+										])),
+									$author$project$Vega$maText(
+									_List_fromArray(
+										[
+											$author$project$Vega$vField(
+											$author$project$Vega$field('label'))
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				table(_List_Nil)
+			]));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$description('Hello from Elm-Vega'),
+				$author$project$Vega$background(
+				$author$project$Vega$strSignal('myBgColor')),
+				$author$project$Vega$widthSignal('600/2'),
+				$author$project$Vega$heightSignal('myHeight'),
+				$author$project$Vega$paddingSignal('myPadding'),
+				$author$project$Vega$autosize(
+				_List_fromArray(
+					[
+						$author$project$Vega$asSignal('myAutosize')
+					])),
+				si(_List_Nil),
+				ds,
+				sc(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$TopLevelTests$mySpecs = $author$project$Vega$combineSpecs(
 	_List_fromArray(
 		[
 			_Utils_Tuple2('topLevelTest1', $author$project$TopLevelTests$topLevelTest1),
-			_Utils_Tuple2('topLevelTest2', $author$project$TopLevelTests$topLevelTest2)
+			_Utils_Tuple2('topLevelTest2', $author$project$TopLevelTests$topLevelTest2),
+			_Utils_Tuple2('topLevelTest3', $author$project$TopLevelTests$topLevelTest3)
 		]));
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -10999,7 +11642,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$pre = _VirtualDom_node('pre');
-var $author$project$TopLevelTests$sourceExample = $author$project$TopLevelTests$topLevelTest1;
+var $author$project$TopLevelTests$sourceExample = $author$project$TopLevelTests$topLevelTest3;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$TopLevelTests$view = function (spec) {

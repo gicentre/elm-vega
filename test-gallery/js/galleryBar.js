@@ -7350,10 +7350,10 @@ var $author$project$Vega$VStr = function (a) {
 var $author$project$Vega$vStr = $author$project$Vega$VStr;
 var $author$project$Vega$hCenter = $author$project$Vega$vStr('center');
 var $author$project$Vega$VHeight = 3;
-var $author$project$Vega$height = function (w) {
+var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
-		$elm$json$Json$Encode$float(w));
+		$elm$json$Json$Encode$float(h));
 };
 var $author$project$Vega$VIfElse = F3(
 	function (a, b, c) {

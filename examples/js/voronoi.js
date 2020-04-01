@@ -3837,10 +3837,10 @@ var $author$project$Vega$FName = function (a) {
 };
 var $author$project$Vega$field = $author$project$Vega$FName;
 var $author$project$Vega$VHeight = 3;
-var $author$project$Vega$height = function (w) {
+var $author$project$Vega$height = function (h) {
 	return _Utils_Tuple2(
 		3,
-		$elm$json$Json$Encode$float(w));
+		$elm$json$Json$Encode$float(h));
 };
 var $author$project$Vega$VIfElse = F3(
 	function (a, b, c) {
