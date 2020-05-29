@@ -6463,19 +6463,21 @@ var $author$project$Vega$timeUnitSpecShort = function (tUnit) {
 			case 5:
 				return 'day';
 			case 6:
-				return 'hour';
+				return 'dayofyear';
 			case 7:
-				return 'minute';
+				return 'hour';
 			case 8:
-				return 'second';
+				return 'minute';
 			case 9:
+				return 'second';
+			case 10:
 				return 'millisecond';
 			default:
 				var sig = tu.a;
 				return '';
 		}
 	};
-	if (tUnit.$ === 10) {
+	if (tUnit.$ === 11) {
 		var sig = tUnit.a;
 		return $elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -10530,12 +10532,14 @@ var $author$project$Vega$timeUnitSpec = function (tUnit) {
 		case 5:
 			return $elm$json$Json$Encode$string('day');
 		case 6:
-			return $elm$json$Json$Encode$string('hours');
+			return $elm$json$Json$Encode$string('dayofyear');
 		case 7:
-			return $elm$json$Json$Encode$string('minutes');
+			return $elm$json$Json$Encode$string('hours');
 		case 8:
-			return $elm$json$Json$Encode$string('seconds');
+			return $elm$json$Json$Encode$string('minutes');
 		case 9:
+			return $elm$json$Json$Encode$string('seconds');
+		case 10:
 			return $elm$json$Json$Encode$string('milliseconds');
 		default:
 			var sig = tUnit.a;
@@ -18212,7 +18216,7 @@ var $author$project$Vega$TTimeUnit = F2(
 	});
 var $author$project$Vega$trTimeUnit = $author$project$Vega$TTimeUnit;
 var $author$project$Vega$TimeUnitSignal = function (a) {
-	return {$: 10, a: a};
+	return {$: 11, a: a};
 };
 var $author$project$Vega$tuSignal = $author$project$Vega$TimeUnitSignal;
 var $author$project$GalleryDist$timeUnits1 = function () {

@@ -6463,19 +6463,21 @@ var $author$project$Vega$timeUnitSpecShort = function (tUnit) {
 			case 5:
 				return 'day';
 			case 6:
-				return 'hour';
+				return 'dayofyear';
 			case 7:
-				return 'minute';
+				return 'hour';
 			case 8:
-				return 'second';
+				return 'minute';
 			case 9:
+				return 'second';
+			case 10:
 				return 'millisecond';
 			default:
 				var sig = tu.a;
 				return '';
 		}
 	};
-	if (tUnit.$ === 10) {
+	if (tUnit.$ === 11) {
 		var sig = tUnit.a;
 		return $elm$json$Json$Encode$object(
 			_List_fromArray(
@@ -8932,12 +8934,14 @@ var $author$project$Vega$timeUnitSpec = function (tUnit) {
 		case 5:
 			return $elm$json$Json$Encode$string('day');
 		case 6:
-			return $elm$json$Json$Encode$string('hours');
+			return $elm$json$Json$Encode$string('dayofyear');
 		case 7:
-			return $elm$json$Json$Encode$string('minutes');
+			return $elm$json$Json$Encode$string('hours');
 		case 8:
-			return $elm$json$Json$Encode$string('seconds');
+			return $elm$json$Json$Encode$string('minutes');
 		case 9:
+			return $elm$json$Json$Encode$string('seconds');
+		case 10:
 			return $elm$json$Json$Encode$string('milliseconds');
 		default:
 			var sig = tUnit.a;
@@ -11563,10 +11567,396 @@ var $author$project$TemporalTests$temporalTest1 = function () {
 				mk(_List_Nil)
 			]));
 }();
+var $author$project$Vega$AxFormat = function (a) {
+	return {$: 10, a: a};
+};
+var $author$project$Vega$axFormat = $author$project$Vega$AxFormat;
+var $author$project$Vega$TBUnits = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$tbUnits = $author$project$Vega$TBUnits;
+var $author$project$Vega$TTimeUnit = F2(
+	function (a, b) {
+		return {$: 51, a: a, b: b};
+	});
+var $author$project$Vega$trTimeUnit = $author$project$Vega$TTimeUnit;
+var $author$project$TemporalTests$temporalTest2 = function () {
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scTime),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('timeData'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('month'))
+								]))),
+						$author$project$Vega$scRange($author$project$Vega$raWidth)
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scLinear),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('timeData'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('meanTemperature'))
+							]))),
+					$author$project$Vega$scRange($author$project$Vega$raHeight),
+					$author$project$Vega$scZero($author$project$Vega$false)
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$marks,
+			A2(
+				$author$project$Vega$mark,
+				$author$project$Vega$line,
+				_List_fromArray(
+					[
+						$author$project$Vega$mFrom(
+						_List_fromArray(
+							[
+								$author$project$Vega$srData(
+								$author$project$Vega$str('timeData'))
+							])),
+						$author$project$Vega$mEncode(
+						_List_fromArray(
+							[
+								$author$project$Vega$enEnter(
+								_List_fromArray(
+									[
+										$author$project$Vega$maX(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('xScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('month'))
+											])),
+										$author$project$Vega$maY(
+										_List_fromArray(
+											[
+												$author$project$Vega$vScale('yScale'),
+												$author$project$Vega$vField(
+												$author$project$Vega$field('meanTemperature'))
+											])),
+										$author$project$Vega$maStrokeWidth(
+										_List_fromArray(
+											[
+												$author$project$Vega$vNum(0.5)
+											]))
+									]))
+							]))
+					]))),
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$symbol,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('timeData'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('month'))
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('meanTemperature'))
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						$author$project$Vega$trTimeUnit,
+						$author$project$Vega$field('date'),
+						_List_fromArray(
+							[
+								$author$project$Vega$tbUnits(
+								_List_fromArray(
+									[$author$project$Vega$month]))
+							])),
+						A2($author$project$Vega$trFormula, 'datetime(2012,month(datum.unit0),0,0,0,0,0)', 'month'),
+						$author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								$author$project$Vega$agOps(
+								_List_fromArray(
+									[$author$project$Vega$opMean])),
+								$author$project$Vega$agFields(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('temperature')
+									])),
+								$author$project$Vega$agGroupBy(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('month')
+									])),
+								$author$project$Vega$agAs(
+								_List_fromArray(
+									['meanTemperature']))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'timeData',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+							$author$project$Vega$daFormat(
+							_List_fromArray(
+								[
+									$author$project$Vega$tsv,
+									$author$project$Vega$parse(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'date',
+											$author$project$Vega$foDate('%d/%m/%y %H:%M'))
+										]))
+								]))
+						])))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$axes,
+			A3(
+				$author$project$Vega$axis,
+				'xScale',
+				$author$project$Vega$siBottom,
+				_List_fromArray(
+					[
+						$author$project$Vega$axFormat(
+						$author$project$Vega$str('%B'))
+					]))),
+		A3($author$project$Vega$axis, 'yScale', $author$project$Vega$siLeft, _List_Nil));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(800),
+				$author$project$Vega$height(200),
+				$author$project$Vega$padding(5),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$AxTitle = function (a) {
 	return {$: 56, a: a};
 };
 var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
+var $author$project$Vega$DayOfYear = {$: 6};
+var $author$project$Vega$dayOfYear = $author$project$Vega$DayOfYear;
+var $author$project$Vega$scSequential = $author$project$Vega$ScLinear;
+var $author$project$TemporalTests$temporalTest3 = function () {
+	var sc = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$scales,
+			A2(
+				$author$project$Vega$scale,
+				'xScale',
+				_List_fromArray(
+					[
+						$author$project$Vega$scType($author$project$Vega$scSequential),
+						$author$project$Vega$scDomain(
+						$author$project$Vega$doData(
+							_List_fromArray(
+								[
+									$author$project$Vega$daDataset('timeData'),
+									$author$project$Vega$daField(
+									$author$project$Vega$field('doy'))
+								]))),
+						$author$project$Vega$scRange($author$project$Vega$raWidth)
+					]))),
+		A2(
+			$author$project$Vega$scale,
+			'yScale',
+			_List_fromArray(
+				[
+					$author$project$Vega$scType($author$project$Vega$scLinear),
+					$author$project$Vega$scDomain(
+					$author$project$Vega$doData(
+						_List_fromArray(
+							[
+								$author$project$Vega$daDataset('timeData'),
+								$author$project$Vega$daField(
+								$author$project$Vega$field('meanTemperature'))
+							]))),
+					$author$project$Vega$scRange($author$project$Vega$raHeight),
+					$author$project$Vega$scZero($author$project$Vega$false)
+				])));
+	var mk = A2(
+		$elm$core$Basics$composeL,
+		$author$project$Vega$marks,
+		A2(
+			$author$project$Vega$mark,
+			$author$project$Vega$line,
+			_List_fromArray(
+				[
+					$author$project$Vega$mFrom(
+					_List_fromArray(
+						[
+							$author$project$Vega$srData(
+							$author$project$Vega$str('timeData'))
+						])),
+					$author$project$Vega$mEncode(
+					_List_fromArray(
+						[
+							$author$project$Vega$enEnter(
+							_List_fromArray(
+								[
+									$author$project$Vega$maX(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('xScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('doy'))
+										])),
+									$author$project$Vega$maY(
+									_List_fromArray(
+										[
+											$author$project$Vega$vScale('yScale'),
+											$author$project$Vega$vField(
+											$author$project$Vega$field('meanTemperature'))
+										])),
+									$author$project$Vega$maStrokeWidth(
+									_List_fromArray(
+										[
+											$author$project$Vega$vNum(0.5)
+										]))
+								]))
+						]))
+				])));
+	var ds = $author$project$Vega$dataSource(
+		_List_fromArray(
+			[
+				A2(
+				$author$project$Vega$transform,
+				_List_fromArray(
+					[
+						A2(
+						$author$project$Vega$trTimeUnit,
+						$author$project$Vega$field('date'),
+						_List_fromArray(
+							[
+								$author$project$Vega$tbUnits(
+								_List_fromArray(
+									[$author$project$Vega$dayOfYear]))
+							])),
+						A2($author$project$Vega$trFormula, 'dayofyear(datum.unit0)', 'doy'),
+						$author$project$Vega$trAggregate(
+						_List_fromArray(
+							[
+								$author$project$Vega$agOps(
+								_List_fromArray(
+									[$author$project$Vega$opMean])),
+								$author$project$Vega$agFields(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('temperature')
+									])),
+								$author$project$Vega$agGroupBy(
+								_List_fromArray(
+									[
+										$author$project$Vega$field('doy')
+									])),
+								$author$project$Vega$agAs(
+								_List_fromArray(
+									['meanTemperature']))
+							]))
+					]),
+				A2(
+					$author$project$Vega$data,
+					'timeData',
+					_List_fromArray(
+						[
+							$author$project$Vega$daUrl(
+							$author$project$Vega$str('https://gicentre.github.io/data/timeTest.tsv')),
+							$author$project$Vega$daFormat(
+							_List_fromArray(
+								[
+									$author$project$Vega$tsv,
+									$author$project$Vega$parse(
+									_List_fromArray(
+										[
+											_Utils_Tuple2(
+											'date',
+											$author$project$Vega$foDate('%d/%m/%y %H:%M'))
+										]))
+								]))
+						])))
+			]));
+	var ax = A2(
+		$elm$core$Basics$composeL,
+		A2(
+			$elm$core$Basics$composeL,
+			$author$project$Vega$axes,
+			A3(
+				$author$project$Vega$axis,
+				'xScale',
+				$author$project$Vega$siBottom,
+				_List_fromArray(
+					[
+						$author$project$Vega$axTitle(
+						$author$project$Vega$str('Day of year'))
+					]))),
+		A3($author$project$Vega$axis, 'yScale', $author$project$Vega$siLeft, _List_Nil));
+	return $author$project$Vega$toVega(
+		_List_fromArray(
+			[
+				$author$project$Vega$width(800),
+				$author$project$Vega$height(200),
+				$author$project$Vega$padding(5),
+				ds,
+				sc(_List_Nil),
+				ax(_List_Nil),
+				mk(_List_Nil)
+			]));
+}();
 var $author$project$Vega$BnStep = function (a) {
 	return {$: 5, a: a};
 };
@@ -12364,7 +12754,7 @@ var $author$project$Vega$VOffset = function (a) {
 	return {$: 18, a: a};
 };
 var $author$project$Vega$vOffset = $author$project$Vega$VOffset;
-var $author$project$TemporalTests$temporalTest2 = function () {
+var $author$project$TemporalTests$temporalTest4 = function () {
 	var sc = A2(
 		$elm$core$Basics$composeL,
 		A2(
@@ -12594,7 +12984,9 @@ var $author$project$TemporalTests$temporalTest2 = function () {
 var $author$project$TemporalTests$specs = _List_fromArray(
 	[
 		_Utils_Tuple2('temporalTest1', $author$project$TemporalTests$temporalTest1),
-		_Utils_Tuple2('temporalTest2', $author$project$TemporalTests$temporalTest2)
+		_Utils_Tuple2('temporalTest2', $author$project$TemporalTests$temporalTest2),
+		_Utils_Tuple2('temporalTest3', $author$project$TemporalTests$temporalTest3),
+		_Utils_Tuple2('temporalTest4', $author$project$TemporalTests$temporalTest4)
 	]);
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
