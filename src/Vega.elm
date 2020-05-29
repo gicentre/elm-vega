@@ -8138,7 +8138,9 @@ descend =
     Descend
 
 
-{-| Provide a text description of the visualization.
+{-| Provide a text description of the visualization. This also determines the
+[aria-label attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute)
+for accessiblity purposes.
 -}
 description : String -> ( VProperty, Spec )
 description s =
