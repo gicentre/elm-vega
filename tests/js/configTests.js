@@ -6552,32 +6552,37 @@ var $author$project$Vega$axisProperty = function (ap) {
 			return _Utils_Tuple2(
 				'domain',
 				$author$project$Vega$booSpec(b));
-		case 6:
+		case 4:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'domainCap',
+				$author$project$Vega$strSpec(s));
+		case 7:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'domainColor',
 				$author$project$Vega$strSpec(s));
-		case 4:
+		case 5:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'domainDash',
 				$author$project$Vega$valRef(vals));
-		case 5:
+		case 6:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'domainDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 7:
+		case 8:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'domainOpacity',
 				$author$project$Vega$numSpec(n));
-		case 8:
+		case 9:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'domainWidth',
 				$author$project$Vega$numSpec(n));
-		case 9:
+		case 10:
 			var elEncs = ap.a;
 			var enc = function (_v1) {
 				var el = _v1.a;
@@ -6591,98 +6596,103 @@ var $author$project$Vega$axisProperty = function (ap) {
 				'encode',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, enc, elEncs)));
-		case 10:
+		case 11:
 			var fmt = ap.a;
 			return _Utils_Tuple2(
 				'format',
 				$author$project$Vega$strSpec(fmt));
-		case 11:
-			return _Utils_Tuple2(
-				'formatType',
-				$elm$json$Json$Encode$string('number'));
 		case 12:
 			return _Utils_Tuple2(
 				'formatType',
-				$elm$json$Json$Encode$string('time'));
+				$elm$json$Json$Encode$string('number'));
 		case 13:
 			return _Utils_Tuple2(
 				'formatType',
-				$elm$json$Json$Encode$string('utc'));
+				$elm$json$Json$Encode$string('time'));
 		case 14:
+			return _Utils_Tuple2(
+				'formatType',
+				$elm$json$Json$Encode$string('utc'));
+		case 15:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'grid',
 				$author$project$Vega$booSpec(b));
-		case 15:
+		case 16:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'gridCap',
+				$author$project$Vega$strSpec(s));
+		case 17:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'gridColor',
 				$author$project$Vega$strSpec(s));
-		case 16:
+		case 18:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'gridDash',
 				$author$project$Vega$valRef(vals));
-		case 17:
+		case 19:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 18:
+		case 20:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridOpacity',
 				$author$project$Vega$numSpec(n));
-		case 19:
+		case 21:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'gridScale',
 				$elm$json$Json$Encode$string(s));
-		case 20:
+		case 22:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'gridWidth',
 				$author$project$Vega$numSpec(n));
-		case 21:
+		case 23:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'labels',
 				$author$project$Vega$booSpec(b));
-		case 22:
+		case 24:
 			var ha = ap.a;
 			return _Utils_Tuple2(
 				'labelAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 23:
+		case 25:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelAngle',
 				$author$project$Vega$numSpec(n));
-		case 24:
+		case 26:
 			var va = ap.a;
 			return _Utils_Tuple2(
 				'labelBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 25:
-			var n = ap.a;
-			if (n.$ === 6) {
-				return _Utils_Tuple2(
-					'labelBound',
-					$elm$json$Json$Encode$bool(false));
-			} else {
-				return _Utils_Tuple2(
-					'labelBound',
-					$author$project$Vega$numSpec(n));
-			}
-		case 26:
-			var s = ap.a;
-			return _Utils_Tuple2(
-				'labelColor',
-				$author$project$Vega$strSpec(s));
 		case 27:
 			var n = ap.a;
 			if (n.$ === 6) {
 				return _Utils_Tuple2(
+					'labelBound',
+					$elm$json$Json$Encode$bool(false));
+			} else {
+				return _Utils_Tuple2(
+					'labelBound',
+					$author$project$Vega$numSpec(n));
+			}
+		case 28:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'labelColor',
+				$author$project$Vega$strSpec(s));
+		case 29:
+			var n = ap.a;
+			if (n.$ === 6) {
+				return _Utils_Tuple2(
 					'labelFlush',
 					$elm$json$Json$Encode$bool(false));
 			} else {
@@ -6690,97 +6700,97 @@ var $author$project$Vega$axisProperty = function (ap) {
 					'labelFlush',
 					$author$project$Vega$numSpec(n));
 			}
-		case 28:
+		case 30:
 			var pad = ap.a;
 			return _Utils_Tuple2(
 				'labelFlushOffset',
 				$author$project$Vega$numSpec(pad));
-		case 29:
+		case 31:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'labelFont',
 				$author$project$Vega$strSpec(s));
-		case 30:
+		case 32:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelFontSize',
 				$author$project$Vega$numSpec(n));
-		case 31:
+		case 33:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'labelFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 32:
+		case 34:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'labelFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 33:
+		case 35:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelLimit',
 				$author$project$Vega$numSpec(n));
-		case 34:
+		case 36:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelOpacity',
 				$author$project$Vega$numSpec(n));
-		case 35:
+		case 37:
 			var strat = ap.a;
 			return _Utils_Tuple2(
 				'labelOverlap',
 				$author$project$Vega$overlapStrategySpec(strat));
-		case 36:
+		case 38:
 			var pad = ap.a;
 			return _Utils_Tuple2(
 				'labelPadding',
 				$author$project$Vega$numSpec(pad));
-		case 37:
+		case 39:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'labelSeparation',
 				$author$project$Vega$numSpec(n));
-		case 39:
+		case 41:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'maxExtent',
 				$author$project$Vega$valueSpec(val));
-		case 38:
+		case 40:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'minExtent',
 				$author$project$Vega$valueSpec(val));
-		case 40:
+		case 42:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'offset',
 				$author$project$Vega$valueSpec(val));
-		case 41:
+		case 43:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'position',
 				$author$project$Vega$valueSpec(val));
-		case 42:
+		case 44:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'ticks',
 				$author$project$Vega$booSpec(b));
-		case 43:
+		case 45:
 			var tb = ap.a;
 			return _Utils_Tuple2(
 				'tickBand',
 				$author$project$Vega$axisTickBandSpec(tb));
-		case 44:
+		case 46:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'tickColor',
 				$author$project$Vega$strSpec(s));
-		case 45:
+		case 47:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickCount',
 				$author$project$Vega$numSpec(n));
-		case 46:
+		case 48:
 			var tu = ap.a;
 			var n = ap.b;
 			switch (n.$) {
@@ -6853,137 +6863,137 @@ var $author$project$Vega$axisProperty = function (ap) {
 						'tickCount',
 						$author$project$Vega$timeUnitSpecShort(tu));
 			}
-		case 47:
+		case 49:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'tickDash',
 				$author$project$Vega$valRef(vals));
-		case 48:
+		case 50:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 50:
+		case 52:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickExtra',
 				$author$project$Vega$booSpec(b));
-		case 49:
+		case 51:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickMinStep',
 				$author$project$Vega$numSpec(n));
-		case 51:
+		case 53:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOffset',
 				$author$project$Vega$numSpec(n));
-		case 52:
+		case 54:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOpacity',
 				$author$project$Vega$numSpec(n));
-		case 53:
+		case 55:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickRound',
 				$author$project$Vega$booSpec(b));
-		case 54:
+		case 56:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickSize',
 				$author$project$Vega$numSpec(n));
-		case 55:
+		case 57:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickWidth',
 				$author$project$Vega$numSpec(n));
-		case 56:
+		case 58:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'title',
 				$author$project$Vega$strSpec(s));
-		case 58:
+		case 60:
 			var ha = ap.a;
 			return _Utils_Tuple2(
 				'titleAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 57:
+		case 59:
 			var an = ap.a;
 			return _Utils_Tuple2(
 				'titleAnchor',
 				$author$project$Vega$anchorSpec(an));
-		case 59:
+		case 61:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleAngle',
 				$author$project$Vega$numSpec(n));
-		case 60:
+		case 62:
 			var va = ap.a;
 			return _Utils_Tuple2(
 				'titleBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 61:
+		case 63:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleColor',
 				$author$project$Vega$strSpec(s));
-		case 62:
+		case 64:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFont',
 				$author$project$Vega$strSpec(s));
-		case 63:
+		case 65:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 64:
+		case 66:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 65:
+		case 67:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titleFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 66:
+		case 68:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLimit',
 				$author$project$Vega$numSpec(n));
-		case 67:
+		case 69:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 68:
+		case 70:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleOpacity',
 				$author$project$Vega$numSpec(n));
-		case 69:
+		case 71:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titlePadding',
 				$author$project$Vega$valueSpec(val));
-		case 70:
+		case 72:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleX',
 				$author$project$Vega$numSpec(n));
-		case 71:
+		case 73:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleY',
 				$author$project$Vega$numSpec(n));
-		case 72:
+		case 74:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'translate',
 				$author$project$Vega$numSpec(n));
-		case 73:
+		case 75:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'values',
@@ -8550,15 +8560,15 @@ var $author$project$Vega$config = function (cps) {
 			A2($elm$core$List$map, $author$project$Vega$configProperty, cps)));
 };
 var $author$project$Vega$AxGrid = function (a) {
-	return {$: 14, a: a};
+	return {$: 15, a: a};
 };
 var $author$project$Vega$axGrid = $author$project$Vega$AxGrid;
 var $author$project$Vega$AxTickCount = function (a) {
-	return {$: 45, a: a};
+	return {$: 47, a: a};
 };
 var $author$project$Vega$axTickCount = $author$project$Vega$AxTickCount;
 var $author$project$Vega$AxTitle = function (a) {
-	return {$: 56, a: a};
+	return {$: 58, a: a};
 };
 var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
 var $author$project$Vega$VAxes = 11;
@@ -13171,27 +13181,27 @@ var $author$project$Vega$AxDomain = function (a) {
 };
 var $author$project$Vega$axDomain = $author$project$Vega$AxDomain;
 var $author$project$Vega$AxGridColor = function (a) {
-	return {$: 15, a: a};
+	return {$: 17, a: a};
 };
 var $author$project$Vega$axGridColor = $author$project$Vega$AxGridColor;
 var $author$project$Vega$AxGridWidth = function (a) {
-	return {$: 20, a: a};
+	return {$: 22, a: a};
 };
 var $author$project$Vega$axGridWidth = $author$project$Vega$AxGridWidth;
 var $author$project$Vega$AxLabelColor = function (a) {
-	return {$: 26, a: a};
+	return {$: 28, a: a};
 };
 var $author$project$Vega$axLabelColor = $author$project$Vega$AxLabelColor;
 var $author$project$Vega$AxLabelFont = function (a) {
-	return {$: 29, a: a};
+	return {$: 31, a: a};
 };
 var $author$project$Vega$axLabelFont = $author$project$Vega$AxLabelFont;
 var $author$project$Vega$AxTitleColor = function (a) {
-	return {$: 61, a: a};
+	return {$: 63, a: a};
 };
 var $author$project$Vega$axTitleColor = $author$project$Vega$AxTitleColor;
 var $author$project$Vega$AxTitleFontWeight = function (a) {
-	return {$: 65, a: a};
+	return {$: 67, a: a};
 };
 var $author$project$Vega$axTitleFontWeight = $author$project$Vega$AxTitleFontWeight;
 var $author$project$Vega$CfAxis = F2(
@@ -13309,22 +13319,38 @@ var $author$project$ConfigTests$configTest2 = function () {
 			]));
 	return A2($author$project$ConfigTests$scatter, _List_Nil, cf);
 }();
+var $author$project$Vega$AxDomainCap = function (a) {
+	return {$: 4, a: a};
+};
+var $author$project$Vega$axDomainCap = $author$project$Vega$AxDomainCap;
+var $author$project$Vega$AxDomainWidth = function (a) {
+	return {$: 9, a: a};
+};
+var $author$project$Vega$axDomainWidth = $author$project$Vega$AxDomainWidth;
+var $author$project$Vega$AxGridCap = function (a) {
+	return {$: 16, a: a};
+};
+var $author$project$Vega$axGridCap = $author$project$Vega$AxGridCap;
 var $author$project$Vega$AxLabelFontSize = function (a) {
-	return {$: 30, a: a};
+	return {$: 32, a: a};
 };
 var $author$project$Vega$axLabelFontSize = $author$project$Vega$AxLabelFontSize;
 var $author$project$Vega$AxTitleFont = function (a) {
-	return {$: 62, a: a};
+	return {$: 64, a: a};
 };
 var $author$project$Vega$axTitleFont = $author$project$Vega$AxTitleFont;
 var $author$project$Vega$AxTitleFontSize = function (a) {
-	return {$: 63, a: a};
+	return {$: 65, a: a};
 };
 var $author$project$Vega$axTitleFontSize = $author$project$Vega$AxTitleFontSize;
 var $author$project$Vega$AxTitleLineHeight = function (a) {
-	return {$: 67, a: a};
+	return {$: 69, a: a};
 };
 var $author$project$Vega$axTitleLineHeight = $author$project$Vega$AxTitleLineHeight;
+var $author$project$Vega$CRound = {$: 1};
+var $author$project$Vega$caRound = $author$project$Vega$CRound;
+var $author$project$Vega$CSquare = {$: 2};
+var $author$project$Vega$caSquare = $author$project$Vega$CSquare;
 var $author$project$Vega$CfSignals = function (a) {
 	return {$: 20, a: a};
 };
@@ -13682,6 +13708,19 @@ var $author$project$Vega$StrSignal = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$strSignal = $author$project$Vega$StrSignal;
+var $author$project$Vega$strokeCapStr = function (cap) {
+	switch (cap.$) {
+		case 0:
+			return $author$project$Vega$str('butt');
+		case 1:
+			return $author$project$Vega$str('round');
+		case 2:
+			return $author$project$Vega$str('square');
+		default:
+			var sig = cap.a;
+			return $author$project$Vega$strSignal(sig);
+	}
+};
 var $author$project$Vega$TColor = function (a) {
 	return {$: 5, a: a};
 };
@@ -13769,7 +13808,15 @@ var $author$project$ConfigTests$configTest3 = function () {
 						$author$project$Vega$axLabelFontSize(
 						$author$project$Vega$numSignal('baseFontSize')),
 						$author$project$Vega$axTitleLineHeight(
-						$author$project$Vega$numSignal('baseFontSize * 1.5'))
+						$author$project$Vega$numSignal('baseFontSize * 1.5')),
+						$author$project$Vega$axDomainWidth(
+						$author$project$Vega$num(5)),
+						$author$project$Vega$axGridWidth(
+						$author$project$Vega$num(3)),
+						$author$project$Vega$axDomainCap(
+						$author$project$Vega$strokeCapStr($author$project$Vega$caSquare)),
+						$author$project$Vega$axGridCap(
+						$author$project$Vega$strokeCapStr($author$project$Vega$caRound))
 					])),
 				$author$project$Vega$cfLegend(
 				_List_fromArray(
@@ -14275,11 +14322,11 @@ var $author$project$Vega$abExtent = 1;
 var $author$project$Vega$AxBottom = 4;
 var $author$project$Vega$axBottom = 4;
 var $author$project$Vega$AxTickBand = function (a) {
-	return {$: 43, a: a};
+	return {$: 45, a: a};
 };
 var $author$project$Vega$axTickBand = $author$project$Vega$AxTickBand;
 var $author$project$Vega$AxTranslate = function (a) {
-	return {$: 72, a: a};
+	return {$: 74, a: a};
 };
 var $author$project$Vega$axTranslate = $author$project$Vega$AxTranslate;
 var $author$project$Vega$dataColumn = F2(
