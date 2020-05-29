@@ -2,12 +2,14 @@
 
 ## Additions
 
-- `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
-- `cfPadding`, `cfPaddings` and `cfPaddingSignal` for configuring default padding (V5.10).
-- `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V.5.10).
-- `cfDescription` for configuring default ARIA-friendly description for visualizations (V5.10).
-- `cfLineBreak` for setting default line break character(s) (V5.10).
-- `opProduct` for aggregation of numeric values by their product (V5.10).
+- Add `dayOfYear` time unit (V5.11).
+
+* `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
+* `cfPadding`, `cfPaddings` and `cfPaddingSignal` for configuring default padding (V5.10).
+* `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
+* `cfDescription` for configuring default ARIA-friendly description for visualizations (V5.10).
+* `cfLineBreak` for setting default line break character(s) (V5.10).
+* `opProduct` for aggregation of numeric values by their product (V5.10).
 
 ---
 

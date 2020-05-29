@@ -34,23 +34,29 @@
   <body>
     <h1>Vega Temporal Tests</h1>
 
-    <p>Timeline aggregated by month.</p>
+    <p>Timeline aggregated by year and month using trFormula.</p>
     <div id="temporalTest1" class="view"></div>
 
-    <p>Aggregated temperature coloured by average date.</p>
+    <p>Timeline aggregated by month using trTimeUnit.</p>
     <div id="temporalTest2" class="view"></div>
+
+    <p>Timeline aggregated by day of year using trTimeUnit.</p>
+    <div id="temporalTest3" class="view"></div>
+
+    <p>Aggregated temperature coloured by average date.</p>
+    <div id="temporalTest4" class="view"></div>
 
     <h2>Source</h2>
     <div id="elmContainer"></div>
 
     <script>
       Elm.TemporalTests.init({
-        node: document.getElementById("elmContainer")
-      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], {
             actions: true,
-            logLevel: vega.Warn
+            logLevel: vega.Warn,
           }).catch(console.warn);
         }
       });

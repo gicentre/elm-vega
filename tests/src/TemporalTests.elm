@@ -88,6 +88,129 @@ temporalTest2 =
                     [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
                     , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
                     ]
+                    |> transform
+                        [ trTimeUnit (field "date") [ tbUnits [ month ] ]
+                        , trFormula "datetime(2012,month(datum.unit0),0,0,0,0,0)" "month"
+                        , trAggregate
+                            [ agOps [ opMean ]
+                            , agFields [ field "temperature" ]
+                            , agGroupBy [ field "month" ]
+                            , agAs [ "meanTemperature" ]
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scTime
+                    , scDomain (doData [ daDataset "timeData", daField (field "month") ])
+                    , scRange raWidth
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "timeData", daField (field "meanTemperature") ])
+                    , scRange raHeight
+                    , scZero false
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axFormat (str "%B") ]
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark line
+                    [ mFrom [ srData (str "timeData") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "month") ]
+                            , maY [ vScale "yScale", vField (field "meanTemperature") ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        ]
+                    ]
+                << mark symbol
+                    [ mFrom [ srData (str "timeData") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "month") ]
+                            , maY [ vScale "yScale", vField (field "meanTemperature") ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 200, padding 5, ds, sc [], ax [], mk [] ]
+
+
+temporalTest3 : Spec
+temporalTest3 =
+    let
+        ds =
+            dataSource
+                [ data "timeData"
+                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                    ]
+                    |> transform
+                        [ trTimeUnit (field "date") [ tbUnits [ dayOfYear ] ]
+                        , trFormula "dayofyear(datum.unit0)" "doy"
+                        , trAggregate
+                            [ agOps [ opMean ]
+                            , agFields [ field "temperature" ]
+                            , agGroupBy [ field "doy" ]
+                            , agAs [ "meanTemperature" ]
+                            ]
+                        ]
+                ]
+
+        sc =
+            scales
+                << scale "xScale"
+                    [ scType scSequential
+                    , scDomain (doData [ daDataset "timeData", daField (field "doy") ])
+                    , scRange raWidth
+                    ]
+                << scale "yScale"
+                    [ scType scLinear
+                    , scDomain (doData [ daDataset "timeData", daField (field "meanTemperature") ])
+                    , scRange raHeight
+                    , scZero false
+                    ]
+
+        ax =
+            axes
+                << axis "xScale" siBottom [ axTitle (str "Day of year") ]
+                << axis "yScale" siLeft []
+
+        mk =
+            marks
+                << mark line
+                    [ mFrom [ srData (str "timeData") ]
+                    , mEncode
+                        [ enEnter
+                            [ maX [ vScale "xScale", vField (field "doy") ]
+                            , maY [ vScale "yScale", vField (field "meanTemperature") ]
+                            , maStrokeWidth [ vNum 0.5 ]
+                            ]
+                        ]
+                    ]
+    in
+    toVega
+        [ width 800, height 200, padding 5, ds, sc [], ax [], mk [] ]
+
+
+temporalTest4 : Spec
+temporalTest4 =
+    let
+        ds =
+            dataSource
+                [ data "timeData"
+                    [ daUrl (str "https://gicentre.github.io/data/timeTest.tsv")
+                    , daFormat [ tsv, parse [ ( "date", foDate "%d/%m/%y %H:%M" ) ] ]
+                    ]
                 , data "binned" [ daSource "timeData" ]
                     |> transform
                         [ trBin (field "temperature") (nums [ 0, 30 ]) [ bnStep (num 1) ]
@@ -161,6 +284,8 @@ specs : List ( String, Spec )
 specs =
     [ ( "temporalTest1", temporalTest1 )
     , ( "temporalTest2", temporalTest2 )
+    , ( "temporalTest3", temporalTest3 )
+    , ( "temporalTest4", temporalTest4 )
     ]
 
 
