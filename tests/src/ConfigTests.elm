@@ -157,6 +157,10 @@ configTest3 =
                     , axLabelFont (strSignal "font")
                     , axLabelFontSize (numSignal "baseFontSize")
                     , axTitleLineHeight (numSignal "baseFontSize * 1.5")
+                    , axDomainWidth (num 5)
+                    , axGridWidth (num 3)
+                    , axDomainCap (strokeCapStr caSquare)
+                    , axGridCap (strokeCapStr caRound)
                     ]
                 , cfLegend
                     [ leTitleColor (strSignal "textColor")

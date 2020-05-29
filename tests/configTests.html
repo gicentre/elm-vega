@@ -42,7 +42,10 @@
     <p>ggplot2 style configuration</p>
     <div id="configTest2" class="view"></div>
 
-    <p>signal determining base font size</p>
+    <p>
+      signal determining base font size and configuration of thick capped grid
+      and domain
+    </p>
     <div id="configTest3" class="view"></div>
 
     <p>Title, subtitle and group encoding (hover pointer over subtitle)</p>
@@ -76,12 +79,12 @@
 
     <script>
       Elm.ConfigTests.init({
-        node: document.getElementById("elmContainer")
-      }).ports.elmToJS.subscribe(function(namedSpecs) {
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
         for (let name of Object.keys(namedSpecs)) {
           vegaEmbed(`#${name}`, namedSpecs[name], {
             actions: true,
-            logLevel: vega.Warn
+            logLevel: vega.Warn,
           }).catch(console.warn);
         }
       });
