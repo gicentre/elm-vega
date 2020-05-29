@@ -13331,7 +13331,7 @@ var $author$project$Vega$AxTitle = function (a) {
 var $author$project$Vega$axTitle = $author$project$Vega$AxTitle;
 var $author$project$Vega$CfAxis = F2(
 	function (a, b) {
-		return {$: 7, a: a, b: b};
+		return {$: 16, a: a, b: b};
 	});
 var $author$project$Vega$cfAxis = $author$project$Vega$CfAxis;
 var $author$project$Vega$VConfig = 6;
@@ -14644,32 +14644,107 @@ var $author$project$Vega$configProperty = function (cp) {
 			return _Utils_Tuple2(
 				'background',
 				$author$project$Vega$strSpec(s));
+		case 2:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'description',
+				$elm$json$Json$Encode$string(s));
 		case 3:
+			var f = cp.a;
+			return _Utils_Tuple2(
+				'padding',
+				$elm$json$Json$Encode$float(f));
+		case 4:
+			var l = cp.a;
+			var t = cp.b;
+			var r = cp.c;
+			var b = cp.d;
+			return _Utils_Tuple2(
+				'padding',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							_Utils_Tuple2(
+							'left',
+							$elm$json$Json$Encode$float(l)),
+							_Utils_Tuple2(
+							'top',
+							$elm$json$Json$Encode$float(t)),
+							_Utils_Tuple2(
+							'right',
+							$elm$json$Json$Encode$float(r)),
+							_Utils_Tuple2(
+							'bottom',
+							$elm$json$Json$Encode$float(b))
+						])));
+		case 5:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'padding',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							$author$project$Vega$signalReferenceProperty(s)
+						])));
+		case 6:
+			var w = cp.a;
+			return _Utils_Tuple2(
+				'width',
+				$elm$json$Json$Encode$float(w));
+		case 7:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'width',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							$author$project$Vega$signalReferenceProperty(s)
+						])));
+		case 8:
+			var h = cp.a;
+			return _Utils_Tuple2(
+				'height',
+				$elm$json$Json$Encode$float(h));
+		case 9:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'height',
+				$elm$json$Json$Encode$object(
+					_List_fromArray(
+						[
+							$author$project$Vega$signalReferenceProperty(s)
+						])));
+		case 12:
 			var ceps = cp.a;
 			return _Utils_Tuple2(
 				'events',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$configEventProperty, ceps)));
-		case 2:
+		case 10:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'group',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$groupMarkProperty, mps)));
-		case 4:
+		case 11:
+			var s = cp.a;
+			return _Utils_Tuple2(
+				'lineBreak',
+				$author$project$Vega$strSpec(s));
+		case 13:
 			var mk = cp.a;
 			var mps = cp.b;
 			return _Utils_Tuple2(
 				$author$project$Vega$markLabel(mk),
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$markProperty, mps)));
-		case 5:
+		case 14:
 			var mps = cp.a;
 			return _Utils_Tuple2(
 				'mark',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$markProperty, mps)));
-		case 6:
+		case 15:
 			var sName = cp.a;
 			var mps = cp.b;
 			return _Utils_Tuple2(
@@ -14682,26 +14757,26 @@ var $author$project$Vega$configProperty = function (cp) {
 							$elm$json$Json$Encode$object(
 								A2($elm$core$List$map, $author$project$Vega$markProperty, mps)))
 						])));
-		case 7:
+		case 16:
 			var axType = cp.a;
 			var aps = cp.b;
 			return _Utils_Tuple2(
 				$author$project$Vega$axTypeLabel(axType),
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$axisProperty, aps)));
-		case 8:
+		case 17:
 			var lps = cp.a;
 			return _Utils_Tuple2(
 				'legend',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$legendProperty, lps)));
-		case 9:
+		case 18:
 			var tps = cp.a;
 			return _Utils_Tuple2(
 				'title',
 				$elm$json$Json$Encode$object(
 					A2($elm$core$List$map, $author$project$Vega$titleProperty, tps)));
-		case 10:
+		case 19:
 			var ra1 = cp.a;
 			var ra2 = cp.b;
 			var raVals = function () {
