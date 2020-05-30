@@ -9,12 +9,14 @@ import Json.Encode
 import Vega exposing (..)
 
 
-scatter : List AxisProperty -> List LegendProperty -> Spec
-scatter axps leps =
+scatter : Boo -> List AxisProperty -> List LegendProperty -> Spec
+scatter titleAria axps leps =
     let
         ti =
             title (strs [ "Engine Efficiency" ])
-                [ tiSubtitle (strs [ "Size vs efficiency" ]) ]
+                [ tiSubtitle (strs [ "Size vs efficiency" ])
+                , tiAria titleAria
+                ]
 
         ds =
             dataSource
@@ -95,37 +97,42 @@ scatter axps leps =
 
 ariaTest1 : Spec
 ariaTest1 =
-    scatter [] []
+    scatter true [] []
 
 
 ariaTest2 : Spec
 ariaTest2 =
-    scatter [ axAria [] ] []
+    scatter true [ axAria [] ] []
 
 
 ariaTest3 : Spec
 ariaTest3 =
-    scatter [ axAria [ arDisable ] ] []
+    scatter true [ axAria [ arDisable ] ] []
 
 
 ariaTest4 : Spec
 ariaTest4 =
-    scatter [ axAria [ arDescription (str "my ARIA description") ] ] []
+    scatter true [ axAria [ arDescription (str "my ARIA description") ] ] []
 
 
 ariaTest5 : Spec
 ariaTest5 =
-    scatter [] [ leAria [] ]
+    scatter true [] [ leAria [] ]
 
 
 ariaTest6 : Spec
 ariaTest6 =
-    scatter [] [ leAria [ arDisable ] ]
+    scatter true [] [ leAria [ arDisable ] ]
 
 
 ariaTest7 : Spec
 ariaTest7 =
-    scatter [] [ leAria [ arDescription (str "my ARIA description") ] ]
+    scatter true [] [ leAria [ arDescription (str "my ARIA description") ] ]
+
+
+ariaTest8 : Spec
+ariaTest8 =
+    scatter false [] []
 
 
 
@@ -141,6 +148,7 @@ specs =
     , ( "ariaTest5", ariaTest5 )
     , ( "ariaTest6", ariaTest6 )
     , ( "ariaTest7", ariaTest7 )
+    , ( "ariaTest8", ariaTest8 )
     ]
 
 

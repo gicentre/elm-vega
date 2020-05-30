@@ -5,6 +5,7 @@
 - `dayOfYear` time unit (V5.11).
 - `axDomainCap`, `axGridCap` and `axTickCap` with convenience function `strokeCapStr` for axis line cap styling (V5.11).
 - `axAria` and `leAria` with associated properties `arEnable`, `arDisable` and `arDescription` for setting ARIA support on a per axis/legend basis (V5.11).
+- `tiAria` for setting/unsetting ARIA description from title (V5.11).
 
 * `vaLineTop` and `vaLineBottom` for vertical alignment relative to line height (V5.10).
 * `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
