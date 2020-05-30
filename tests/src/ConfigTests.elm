@@ -168,6 +168,10 @@ configTest3 =
                     , axLabelLineHeight (num 45)
                     , axLabelOffset (num 10)
                     ]
+                , cfAxis axY
+                    [ axTickCap (strokeCapStr caRound)
+                    , axTickWidth (num 5)
+                    ]
                 , cfLegend
                     [ leTitleColor (strSignal "textColor")
                     , leTitleFont (strSignal "font")

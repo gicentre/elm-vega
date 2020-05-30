@@ -829,6 +829,7 @@ module Vega exposing
     , abExtent
     , axTickCount
     , axTemporalTickCount
+    , axTickCap
     , axTickColor
     , axTickDash
     , axTickDashOffset
@@ -2882,6 +2883,7 @@ The visual appearance of chart axes. See the
 @docs abExtent
 @docs axTickCount
 @docs axTemporalTickCount
+@docs axTickCap
 @docs axTickColor
 @docs axTickDash
 @docs axTickDashOffset
@@ -3815,6 +3817,7 @@ type AxisProperty
     | AxPosition Value
     | AxTicks Boo
     | AxTickBand AxisTickBand
+    | AxTickCap Str
     | AxTickColor Str
     | AxTickCount Num
     | AxTemporalTickCount TimeUnit Num
@@ -6562,6 +6565,14 @@ axTemporalTickCount =
 axTickBand : AxisTickBand -> AxisProperty
 axTickBand =
     AxTickBand
+
+
+{-| Line capping style for axis ticks. To guarantee valid cap names, use
+[strokeCapStr](#strokeCapStr) to generate the parameter.
+-}
+axTickCap : Str -> AxisProperty
+axTickCap =
+    AxTickCap
 
 
 {-| Color of an axis's ticks.
@@ -16939,6 +16950,9 @@ axisProperty ap =
 
         AxTickBand tb ->
             ( "tickBand", axisTickBandSpec tb )
+
+        AxTickCap s ->
+            ( "tickCap", strSpec s )
 
         AxTickColor s ->
             ( "tickColor", strSpec s )

@@ -3,7 +3,7 @@
 ## Additions
 
 - `dayOfYear` time unit (V5.11).
-- `axDomainCap` and `axGridCap` with convenience function `strokeCapStr` for axis line capping (V5.11).
+- `axDomainCap`, `axGridCap` and `axTickCap` with convenience function `strokeCapStr` for axis line cap styling (V5.11).
 
 * `vaLineTop` and `vaLineBottom` for vertical alignment relative to line height (V5.10).
 * `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
