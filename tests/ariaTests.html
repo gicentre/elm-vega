@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vega Aria Tests</title>
+    <meta charset="utf-8" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      #elmContainer {
+        background-color: rgb(252, 247, 236);
+      }
+      .view > * {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.6;
+        margin-left: 1em;
+      }
+    </style>
+
+    <!-- These scripts link to the Vega runtime -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@5"></script>
+
+    <!-- This is the script generated from Elm -->
+    <script src="js/ariaTests.js"></script>
+  </head>
+
+  <body>
+    <h1>Vega Aria Tests</h1>
+
+    <p>Original plot with default ARIA settigs</p>
+    <div id="ariaTest1" class="view"></div>
+
+    <p>With ARIA labels disabled for axes</p>
+    <div id="ariaTest2" class="view"></div>
+
+    <p>With ARIA labels disabled for axes via explicit call to arDisable</p>
+    <div id="ariaTest3" class="view"></div>
+
+    <p>With custom ARIA description for axes</p>
+    <div id="ariaTest4" class="view"></div>
+
+    <h2>Source</h2>
+    <div id="elmContainer"></div>
+
+    <script>
+      Elm.AriaTests.init({
+        node: document.getElementById("elmContainer"),
+      }).ports.elmToJS.subscribe(function (namedSpecs) {
+        for (let name of Object.keys(namedSpecs)) {
+          vegaEmbed(`#${name}`, namedSpecs[name], {
+            actions: true,
+            logLevel: vega.Warn,
+          }).catch(console.warn);
+        }
+      });
+    </script>
+  </body>
+</html>
