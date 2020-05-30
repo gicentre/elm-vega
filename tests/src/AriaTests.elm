@@ -9,8 +9,8 @@ import Json.Encode
 import Vega exposing (..)
 
 
-scatter : List AxisProperty -> Spec
-scatter axps =
+scatter : List AxisProperty -> List LegendProperty -> Spec
+scatter axps leps =
     let
         ti =
             title (strs [ "Engine Efficiency" ])
@@ -68,10 +68,12 @@ scatter axps =
         lg =
             legends
                 << legend
-                    [ leFill "cScale"
-                    , leTitle (strs [ "Country of Manufacture" ])
-                    , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ] ] ] ]
-                    ]
+                    (leps
+                        ++ [ leFill "cScale"
+                           , leTitle (strs [ "Country of Manufacture" ])
+                           , leEncode [ enSymbols [ enUpdate [ maShape [ symbolValue symCircle ] ] ] ]
+                           ]
+                    )
 
         mk =
             marks
@@ -93,22 +95,37 @@ scatter axps =
 
 ariaTest1 : Spec
 ariaTest1 =
-    scatter []
+    scatter [] []
 
 
 ariaTest2 : Spec
 ariaTest2 =
-    scatter [ axAria [] ]
+    scatter [ axAria [] ] []
 
 
 ariaTest3 : Spec
 ariaTest3 =
-    scatter [ axAria [ arDisable ] ]
+    scatter [ axAria [ arDisable ] ] []
 
 
 ariaTest4 : Spec
 ariaTest4 =
-    scatter [ axAria [ arDescription (str "my ARIA description") ] ]
+    scatter [ axAria [ arDescription (str "my ARIA description") ] ] []
+
+
+ariaTest5 : Spec
+ariaTest5 =
+    scatter [] [ leAria [] ]
+
+
+ariaTest6 : Spec
+ariaTest6 =
+    scatter [] [ leAria [ arDisable ] ]
+
+
+ariaTest7 : Spec
+ariaTest7 =
+    scatter [] [ leAria [ arDescription (str "my ARIA description") ] ]
 
 
 
@@ -121,6 +138,9 @@ specs =
     , ( "ariaTest2", ariaTest2 )
     , ( "ariaTest3", ariaTest3 )
     , ( "ariaTest4", ariaTest4 )
+    , ( "ariaTest5", ariaTest5 )
+    , ( "ariaTest6", ariaTest6 )
+    , ( "ariaTest7", ariaTest7 )
     ]
 
 
