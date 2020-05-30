@@ -12619,12 +12619,16 @@ var $author$project$Vega$symbolValue = function (sym) {
 	return $author$project$Vega$vStr(
 		$author$project$Vega$symbolLabel(sym));
 };
+var $author$project$Vega$TAria = function (a) {
+	return {$: 0, a: a};
+};
+var $author$project$Vega$tiAria = $author$project$Vega$TAria;
 var $author$project$Vega$TSubtitle = function (a) {
-	return {$: 22, a: a};
+	return {$: 23, a: a};
 };
 var $author$project$Vega$tiSubtitle = $author$project$Vega$TSubtitle;
 var $author$project$Vega$TText = function (a) {
-	return {$: 0, a: a};
+	return {$: 1, a: a};
 };
 var $author$project$Vega$VTitle = 13;
 var $author$project$Vega$TeTitle = 0;
@@ -12671,51 +12675,56 @@ var $author$project$Vega$titleFrameSpec = function (tf) {
 var $author$project$Vega$titleProperty = function (tProp) {
 	switch (tProp.$) {
 		case 0:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'aria',
+				$author$project$Vega$booSpec(b));
+		case 1:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$strSpec(s));
-		case 19:
+		case 20:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
 				$author$project$Vega$sideSpec(s));
-		case 1:
+		case 2:
 			var ha = tProp.a;
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$hAlignSpec(ha));
-		case 2:
+		case 3:
 			var a = tProp.a;
 			return _Utils_Tuple2(
 				'anchor',
 				$author$project$Vega$anchorSpec(a));
-		case 3:
+		case 4:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'angle',
 				$author$project$Vega$numSpec(n));
-		case 4:
+		case 5:
 			var va = tProp.a;
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 5:
+		case 6:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'color',
 				$author$project$Vega$strSpec(s));
-		case 6:
+		case 7:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$numSpec(n));
-		case 7:
+		case 8:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$numSpec(n));
-		case 8:
+		case 9:
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
@@ -12724,102 +12733,102 @@ var $author$project$Vega$titleProperty = function (tProp) {
 						[
 							_Utils_Tuple2($author$project$Vega$teTitle, eps)
 						])));
-		case 9:
+		case 10:
 			var encs = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
 				$author$project$Vega$titleEncodingSpec(encs));
-		case 10:
+		case 11:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$strSpec(s));
-		case 11:
+		case 12:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$numSpec(n));
-		case 12:
+		case 13:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$strSpec(s));
-		case 13:
+		case 14:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 14:
+		case 15:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'frame',
 				$author$project$Vega$titleFrameSpec(fr));
-		case 15:
+		case 16:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				$author$project$Vega$booSpec(b));
-		case 16:
+		case 17:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$numSpec(n));
-		case 20:
+		case 21:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				$elm$json$Json$Encode$string(s));
-		case 21:
+		case 22:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
 				$author$project$Vega$strSpec(s));
-		case 22:
+		case 23:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitle',
 				$author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleColor',
 				$author$project$Vega$strSpec(s));
-		case 24:
+		case 25:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFont',
 				$author$project$Vega$strSpec(s));
-		case 25:
+		case 26:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 26:
+		case 27:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 27:
+		case 28:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 28:
+		case 29:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 29:
+		case 30:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitlePadding',
 				$author$project$Vega$numSpec(n));
-		case 18:
+		case 19:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'offset',
@@ -12898,8 +12907,8 @@ var $author$project$Vega$width = function (w) {
 		2,
 		$elm$json$Json$Encode$float(w));
 };
-var $author$project$AriaTests$scatter = F2(
-	function (axps, leps) {
+var $author$project$AriaTests$scatter = F3(
+	function (titleAria, axps, leps) {
 		var ti = A2(
 			$author$project$Vega$title,
 			$author$project$Vega$strs(
@@ -12910,7 +12919,8 @@ var $author$project$AriaTests$scatter = F2(
 					$author$project$Vega$tiSubtitle(
 					$author$project$Vega$strs(
 						_List_fromArray(
-							['Size vs efficiency'])))
+							['Size vs efficiency']))),
+					$author$project$Vega$tiAria(titleAria)
 				]));
 		var sc = A2(
 			$elm$core$Basics$composeL,
@@ -13120,21 +13130,23 @@ var $author$project$AriaTests$scatter = F2(
 					mk(_List_Nil)
 				]));
 	});
-var $author$project$AriaTests$ariaTest1 = A2($author$project$AriaTests$scatter, _List_Nil, _List_Nil);
+var $author$project$AriaTests$ariaTest1 = A3($author$project$AriaTests$scatter, $author$project$Vega$true, _List_Nil, _List_Nil);
 var $author$project$Vega$AxAria = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$axAria = $author$project$Vega$AxAria;
-var $author$project$AriaTests$ariaTest2 = A2(
+var $author$project$AriaTests$ariaTest2 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_fromArray(
 		[
 			$author$project$Vega$axAria(_List_Nil)
 		]),
 	_List_Nil);
 var $author$project$Vega$arDisable = $author$project$Vega$ArAria(false);
-var $author$project$AriaTests$ariaTest3 = A2(
+var $author$project$AriaTests$ariaTest3 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_fromArray(
 		[
 			$author$project$Vega$axAria(
@@ -13146,8 +13158,9 @@ var $author$project$Vega$ArDescription = function (a) {
 	return {$: 1, a: a};
 };
 var $author$project$Vega$arDescription = $author$project$Vega$ArDescription;
-var $author$project$AriaTests$ariaTest4 = A2(
+var $author$project$AriaTests$ariaTest4 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_fromArray(
 		[
 			$author$project$Vega$axAria(
@@ -13162,15 +13175,17 @@ var $author$project$Vega$LeAria = function (a) {
 	return {$: 0, a: a};
 };
 var $author$project$Vega$leAria = $author$project$Vega$LeAria;
-var $author$project$AriaTests$ariaTest5 = A2(
+var $author$project$AriaTests$ariaTest5 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_Nil,
 	_List_fromArray(
 		[
 			$author$project$Vega$leAria(_List_Nil)
 		]));
-var $author$project$AriaTests$ariaTest6 = A2(
+var $author$project$AriaTests$ariaTest6 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_Nil,
 	_List_fromArray(
 		[
@@ -13178,8 +13193,9 @@ var $author$project$AriaTests$ariaTest6 = A2(
 			_List_fromArray(
 				[$author$project$Vega$arDisable]))
 		]));
-var $author$project$AriaTests$ariaTest7 = A2(
+var $author$project$AriaTests$ariaTest7 = A3(
 	$author$project$AriaTests$scatter,
+	$author$project$Vega$true,
 	_List_Nil,
 	_List_fromArray(
 		[
@@ -13190,6 +13206,8 @@ var $author$project$AriaTests$ariaTest7 = A2(
 					$author$project$Vega$str('my ARIA description'))
 				]))
 		]));
+var $author$project$Vega$false = $author$project$Vega$Boo(false);
+var $author$project$AriaTests$ariaTest8 = A3($author$project$AriaTests$scatter, $author$project$Vega$false, _List_Nil, _List_Nil);
 var $author$project$AriaTests$specs = _List_fromArray(
 	[
 		_Utils_Tuple2('ariaTest1', $author$project$AriaTests$ariaTest1),
@@ -13198,7 +13216,8 @@ var $author$project$AriaTests$specs = _List_fromArray(
 		_Utils_Tuple2('ariaTest4', $author$project$AriaTests$ariaTest4),
 		_Utils_Tuple2('ariaTest5', $author$project$AriaTests$ariaTest5),
 		_Utils_Tuple2('ariaTest6', $author$project$AriaTests$ariaTest6),
-		_Utils_Tuple2('ariaTest7', $author$project$AriaTests$ariaTest7)
+		_Utils_Tuple2('ariaTest7', $author$project$AriaTests$ariaTest7),
+		_Utils_Tuple2('ariaTest8', $author$project$AriaTests$ariaTest8)
 	]);
 var $elm$core$Dict$RBEmpty_elm_builtin = {$: -2};
 var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;

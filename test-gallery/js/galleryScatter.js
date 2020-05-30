@@ -14954,51 +14954,56 @@ var $author$project$Vega$titleFrameSpec = function (tf) {
 var $author$project$Vega$titleProperty = function (tProp) {
 	switch (tProp.$) {
 		case 0:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'aria',
+				$author$project$Vega$booSpec(b));
+		case 1:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$strSpec(s));
-		case 19:
+		case 20:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
 				$author$project$Vega$sideSpec(s));
-		case 1:
+		case 2:
 			var ha = tProp.a;
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$hAlignSpec(ha));
-		case 2:
+		case 3:
 			var a = tProp.a;
 			return _Utils_Tuple2(
 				'anchor',
 				$author$project$Vega$anchorSpec(a));
-		case 3:
+		case 4:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'angle',
 				$author$project$Vega$numSpec(n));
-		case 4:
+		case 5:
 			var va = tProp.a;
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 5:
+		case 6:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'color',
 				$author$project$Vega$strSpec(s));
-		case 6:
+		case 7:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$numSpec(n));
-		case 7:
+		case 8:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$numSpec(n));
-		case 8:
+		case 9:
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
@@ -15007,102 +15012,102 @@ var $author$project$Vega$titleProperty = function (tProp) {
 						[
 							_Utils_Tuple2($author$project$Vega$teTitle, eps)
 						])));
-		case 9:
+		case 10:
 			var encs = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
 				$author$project$Vega$titleEncodingSpec(encs));
-		case 10:
+		case 11:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$strSpec(s));
-		case 11:
+		case 12:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$numSpec(n));
-		case 12:
+		case 13:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$strSpec(s));
-		case 13:
+		case 14:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 14:
+		case 15:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'frame',
 				$author$project$Vega$titleFrameSpec(fr));
-		case 15:
+		case 16:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				$author$project$Vega$booSpec(b));
-		case 16:
+		case 17:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$numSpec(n));
-		case 20:
+		case 21:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				$elm$json$Json$Encode$string(s));
-		case 21:
+		case 22:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
 				$author$project$Vega$strSpec(s));
-		case 22:
+		case 23:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitle',
 				$author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleColor',
 				$author$project$Vega$strSpec(s));
-		case 24:
+		case 25:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFont',
 				$author$project$Vega$strSpec(s));
-		case 25:
+		case 26:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 26:
+		case 27:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 27:
+		case 28:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 28:
+		case 29:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 29:
+		case 30:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitlePadding',
 				$author$project$Vega$numSpec(n));
-		case 18:
+		case 19:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'offset',

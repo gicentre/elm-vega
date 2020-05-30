@@ -8771,51 +8771,56 @@ var $author$project$Vega$titleFrameSpec = function (tf) {
 var $author$project$Vega$titleProperty = function (tProp) {
 	switch (tProp.$) {
 		case 0:
+			var b = tProp.a;
+			return _Utils_Tuple2(
+				'aria',
+				$author$project$Vega$booSpec(b));
+		case 1:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'text',
 				$author$project$Vega$strSpec(s));
-		case 19:
+		case 20:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'orient',
 				$author$project$Vega$sideSpec(s));
-		case 1:
+		case 2:
 			var ha = tProp.a;
 			return _Utils_Tuple2(
 				'align',
 				$author$project$Vega$hAlignSpec(ha));
-		case 2:
+		case 3:
 			var a = tProp.a;
 			return _Utils_Tuple2(
 				'anchor',
 				$author$project$Vega$anchorSpec(a));
-		case 3:
+		case 4:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'angle',
 				$author$project$Vega$numSpec(n));
-		case 4:
+		case 5:
 			var va = tProp.a;
 			return _Utils_Tuple2(
 				'baseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 5:
+		case 6:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'color',
 				$author$project$Vega$strSpec(s));
-		case 6:
+		case 7:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dx',
 				$author$project$Vega$numSpec(n));
-		case 7:
+		case 8:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'dy',
 				$author$project$Vega$numSpec(n));
-		case 8:
+		case 9:
 			var eps = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
@@ -8824,102 +8829,102 @@ var $author$project$Vega$titleProperty = function (tProp) {
 						[
 							_Utils_Tuple2($author$project$Vega$teTitle, eps)
 						])));
-		case 9:
+		case 10:
 			var encs = tProp.a;
 			return _Utils_Tuple2(
 				'encode',
 				$author$project$Vega$titleEncodingSpec(encs));
-		case 10:
+		case 11:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'font',
 				$author$project$Vega$strSpec(s));
-		case 11:
+		case 12:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'fontSize',
 				$author$project$Vega$numSpec(n));
-		case 12:
+		case 13:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'fontStyle',
 				$author$project$Vega$strSpec(s));
-		case 13:
+		case 14:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'fontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 14:
+		case 15:
 			var fr = tProp.a;
 			return _Utils_Tuple2(
 				'frame',
 				$author$project$Vega$titleFrameSpec(fr));
-		case 15:
+		case 16:
 			var b = tProp.a;
 			return _Utils_Tuple2(
 				'interactive',
 				$author$project$Vega$booSpec(b));
-		case 16:
+		case 17:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'limit',
 				$author$project$Vega$numSpec(n));
-		case 17:
+		case 18:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'lineHeight',
 				$author$project$Vega$numSpec(n));
-		case 20:
+		case 21:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'name',
 				$elm$json$Json$Encode$string(s));
-		case 21:
+		case 22:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'style',
 				$author$project$Vega$strSpec(s));
-		case 22:
+		case 23:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitle',
 				$author$project$Vega$strSpec(s));
-		case 23:
+		case 24:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleColor',
 				$author$project$Vega$strSpec(s));
-		case 24:
+		case 25:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFont',
 				$author$project$Vega$strSpec(s));
-		case 25:
+		case 26:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 26:
+		case 27:
 			var s = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 27:
+		case 28:
 			var v = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleFontWeight',
 				$author$project$Vega$valueSpec(v));
-		case 28:
+		case 29:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 29:
+		case 30:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'subtitlePadding',
 				$author$project$Vega$numSpec(n));
-		case 18:
+		case 19:
 			var n = tProp.a;
 			return _Utils_Tuple2(
 				'offset',
@@ -13462,11 +13467,11 @@ var $author$project$Vega$symbolValue = function (sym) {
 		$author$project$Vega$symbolLabel(sym));
 };
 var $author$project$Vega$TSubtitle = function (a) {
-	return {$: 22, a: a};
+	return {$: 23, a: a};
 };
 var $author$project$Vega$tiSubtitle = $author$project$Vega$TSubtitle;
 var $author$project$Vega$TText = function (a) {
-	return {$: 0, a: a};
+	return {$: 1, a: a};
 };
 var $author$project$Vega$VTitle = 13;
 var $author$project$Vega$title = F2(
@@ -13832,15 +13837,15 @@ var $author$project$Vega$RaStrs = function (a) {
 };
 var $author$project$Vega$raStrs = $author$project$Vega$RaStrs;
 var $author$project$Vega$TDx = function (a) {
-	return {$: 6, a: a};
+	return {$: 7, a: a};
 };
 var $author$project$Vega$tiDx = $author$project$Vega$TDx;
 var $author$project$Vega$TFontSize = function (a) {
-	return {$: 11, a: a};
+	return {$: 12, a: a};
 };
 var $author$project$Vega$tiFontSize = $author$project$Vega$TFontSize;
 var $author$project$Vega$TFontWeight = function (a) {
-	return {$: 13, a: a};
+	return {$: 14, a: a};
 };
 var $author$project$Vega$tiFontWeight = $author$project$Vega$TFontWeight;
 var $author$project$ConfigTests$configTest2 = function () {
@@ -14331,19 +14336,19 @@ var $author$project$Vega$strokeCapStr = function (cap) {
 	}
 };
 var $author$project$Vega$TColor = function (a) {
-	return {$: 5, a: a};
+	return {$: 6, a: a};
 };
 var $author$project$Vega$tiColor = $author$project$Vega$TColor;
 var $author$project$Vega$TFont = function (a) {
-	return {$: 10, a: a};
+	return {$: 11, a: a};
 };
 var $author$project$Vega$tiFont = $author$project$Vega$TFont;
 var $author$project$Vega$TLineHeight = function (a) {
-	return {$: 17, a: a};
+	return {$: 18, a: a};
 };
 var $author$project$Vega$tiLineHeight = $author$project$Vega$TLineHeight;
 var $author$project$Vega$TOffset = function (a) {
-	return {$: 18, a: a};
+	return {$: 19, a: a};
 };
 var $author$project$Vega$tiOffset = $author$project$Vega$TOffset;
 var $author$project$Vega$VNum = function (a) {
@@ -14504,7 +14509,7 @@ var $author$project$Vega$teGroup = 2;
 var $author$project$Vega$TeSubtitle = 1;
 var $author$project$Vega$teSubtitle = 1;
 var $author$project$Vega$TEncodeElements = function (a) {
-	return {$: 9, a: a};
+	return {$: 10, a: a};
 };
 var $author$project$Vega$tiEncodeElements = $author$project$Vega$TEncodeElements;
 var $author$project$Vega$VSignal = function (a) {
@@ -14593,7 +14598,7 @@ var $author$project$ConfigTests$configTest4 = function () {
 		$author$project$Vega$config(_List_Nil));
 }();
 var $author$project$Vega$TEncode = function (a) {
-	return {$: 8, a: a};
+	return {$: 9, a: a};
 };
 var $author$project$Vega$tiEncode = $author$project$Vega$TEncode;
 var $author$project$ConfigTests$configTest5 = function () {
@@ -14619,31 +14624,31 @@ var $author$project$ConfigTests$configTest5 = function () {
 		$author$project$Vega$config(_List_Nil));
 }();
 var $author$project$Vega$TSubtitleColor = function (a) {
-	return {$: 23, a: a};
+	return {$: 24, a: a};
 };
 var $author$project$Vega$tiSubtitleColor = $author$project$Vega$TSubtitleColor;
 var $author$project$Vega$TSubtitleFont = function (a) {
-	return {$: 24, a: a};
+	return {$: 25, a: a};
 };
 var $author$project$Vega$tiSubtitleFont = $author$project$Vega$TSubtitleFont;
 var $author$project$Vega$TSubtitleFontSize = function (a) {
-	return {$: 25, a: a};
+	return {$: 26, a: a};
 };
 var $author$project$Vega$tiSubtitleFontSize = $author$project$Vega$TSubtitleFontSize;
 var $author$project$Vega$TSubtitleFontStyle = function (a) {
-	return {$: 26, a: a};
+	return {$: 27, a: a};
 };
 var $author$project$Vega$tiSubtitleFontStyle = $author$project$Vega$TSubtitleFontStyle;
 var $author$project$Vega$TSubtitleFontWeight = function (a) {
-	return {$: 27, a: a};
+	return {$: 28, a: a};
 };
 var $author$project$Vega$tiSubtitleFontWeight = $author$project$Vega$TSubtitleFontWeight;
 var $author$project$Vega$TSubtitleLineHeight = function (a) {
-	return {$: 28, a: a};
+	return {$: 29, a: a};
 };
 var $author$project$Vega$tiSubtitleLineHeight = $author$project$Vega$TSubtitleLineHeight;
 var $author$project$Vega$TSubtitlePadding = function (a) {
-	return {$: 29, a: a};
+	return {$: 30, a: a};
 };
 var $author$project$Vega$tiSubtitlePadding = $author$project$Vega$TSubtitlePadding;
 var $author$project$ConfigTests$configTest6 = function () {
