@@ -4515,14 +4515,19 @@ var $author$project$Vega$axisProperty = function (ap) {
 		case 48:
 			var s = ap.a;
 			return _Utils_Tuple2(
-				'tickColor',
+				'tickCap',
 				$author$project$Vega$strSpec(s));
 		case 49:
+			var s = ap.a;
+			return _Utils_Tuple2(
+				'tickColor',
+				$author$project$Vega$strSpec(s));
+		case 50:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickCount',
 				$author$project$Vega$numSpec(n));
-		case 50:
+		case 51:
 			var tu = ap.a;
 			var n = ap.b;
 			switch (n.$) {
@@ -4595,137 +4600,137 @@ var $author$project$Vega$axisProperty = function (ap) {
 						'tickCount',
 						$author$project$Vega$timeUnitSpecShort(tu));
 			}
-		case 51:
+		case 52:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'tickDash',
 				$author$project$Vega$valRef(vals));
-		case 52:
+		case 53:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickDashOffset',
 				$author$project$Vega$numSpec(n));
-		case 54:
+		case 55:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickExtra',
 				$author$project$Vega$booSpec(b));
-		case 53:
+		case 54:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickMinStep',
 				$author$project$Vega$numSpec(n));
-		case 55:
+		case 56:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOffset',
 				$author$project$Vega$numSpec(n));
-		case 56:
+		case 57:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickOpacity',
 				$author$project$Vega$numSpec(n));
-		case 57:
+		case 58:
 			var b = ap.a;
 			return _Utils_Tuple2(
 				'tickRound',
 				$author$project$Vega$booSpec(b));
-		case 58:
+		case 59:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickSize',
 				$author$project$Vega$numSpec(n));
-		case 59:
+		case 60:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'tickWidth',
 				$author$project$Vega$numSpec(n));
-		case 60:
+		case 61:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'title',
 				$author$project$Vega$strSpec(s));
-		case 62:
+		case 63:
 			var ha = ap.a;
 			return _Utils_Tuple2(
 				'titleAlign',
 				$author$project$Vega$hAlignSpec(ha));
-		case 61:
+		case 62:
 			var an = ap.a;
 			return _Utils_Tuple2(
 				'titleAnchor',
 				$author$project$Vega$anchorSpec(an));
-		case 63:
+		case 64:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleAngle',
 				$author$project$Vega$numSpec(n));
-		case 64:
+		case 65:
 			var va = ap.a;
 			return _Utils_Tuple2(
 				'titleBaseline',
 				$author$project$Vega$vAlignSpec(va));
-		case 65:
+		case 66:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleColor',
 				$author$project$Vega$strSpec(s));
-		case 66:
+		case 67:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFont',
 				$author$project$Vega$strSpec(s));
-		case 67:
+		case 68:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleFontSize',
 				$author$project$Vega$numSpec(n));
-		case 68:
+		case 69:
 			var s = ap.a;
 			return _Utils_Tuple2(
 				'titleFontStyle',
 				$author$project$Vega$strSpec(s));
-		case 69:
+		case 70:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titleFontWeight',
 				$author$project$Vega$valueSpec(val));
-		case 70:
+		case 71:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLimit',
 				$author$project$Vega$numSpec(n));
-		case 71:
+		case 72:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleLineHeight',
 				$author$project$Vega$numSpec(n));
-		case 72:
+		case 73:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleOpacity',
 				$author$project$Vega$numSpec(n));
-		case 73:
+		case 74:
 			var val = ap.a;
 			return _Utils_Tuple2(
 				'titlePadding',
 				$author$project$Vega$valueSpec(val));
-		case 74:
+		case 75:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleX',
 				$author$project$Vega$numSpec(n));
-		case 75:
+		case 76:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'titleY',
 				$author$project$Vega$numSpec(n));
-		case 76:
+		case 77:
 			var n = ap.a;
 			return _Utils_Tuple2(
 				'translate',
 				$author$project$Vega$numSpec(n));
-		case 77:
+		case 78:
 			var vals = ap.a;
 			return _Utils_Tuple2(
 				'values',
