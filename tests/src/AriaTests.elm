@@ -9,8 +9,8 @@ import Json.Encode
 import Vega exposing (..)
 
 
-scatter : Boo -> List AxisProperty -> List LegendProperty -> Spec
-scatter titleAria axps leps =
+scatter : Boo -> List AxisProperty -> List LegendProperty -> List TopMarkProperty -> Spec
+scatter titleAria axps leps mps =
     let
         ti =
             title (strs [ "Engine Efficiency" ])
@@ -80,16 +80,18 @@ scatter titleAria axps leps =
         mk =
             marks
                 << mark symbol
-                    [ mFrom [ srData (str "cars") ]
-                    , mEncode
-                        [ enUpdate
-                            [ maX [ vScale "xScale", vField (field "Horsepower") ]
-                            , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
-                            , maFill [ vScale "cScale", vField (field "Origin") ]
-                            , maShape [ symbolValue symCircle ]
-                            ]
-                        ]
-                    ]
+                    (mps
+                        ++ [ mFrom [ srData (str "cars") ]
+                           , mEncode
+                                [ enUpdate
+                                    [ maX [ vScale "xScale", vField (field "Horsepower") ]
+                                    , maY [ vScale "yScale", vField (field "Miles_per_Gallon") ]
+                                    , maFill [ vScale "cScale", vField (field "Origin") ]
+                                    , maShape [ symbolValue symCircle ]
+                                    ]
+                                ]
+                           ]
+                    )
     in
     toVega
         [ width 400, height 300, ti, ds, sc [], ax [], lg [], mk [] ]
@@ -97,42 +99,57 @@ scatter titleAria axps leps =
 
 ariaTest1 : Spec
 ariaTest1 =
-    scatter true [] []
+    scatter true [] [] []
 
 
 ariaTest2 : Spec
 ariaTest2 =
-    scatter true [ axAria [] ] []
+    scatter true [ axAria [] ] [] []
 
 
 ariaTest3 : Spec
 ariaTest3 =
-    scatter true [ axAria [ arDisable ] ] []
+    scatter true [ axAria [ arDisable ] ] [] []
 
 
 ariaTest4 : Spec
 ariaTest4 =
-    scatter true [ axAria [ arDescription (str "my ARIA description") ] ] []
+    scatter true [ axAria [ arDescription (str "my ARIA description") ] ] [] []
 
 
 ariaTest5 : Spec
 ariaTest5 =
-    scatter true [] [ leAria [] ]
+    scatter true [] [ leAria [] ] []
 
 
 ariaTest6 : Spec
 ariaTest6 =
-    scatter true [] [ leAria [ arDisable ] ]
+    scatter true [] [ leAria [ arDisable ] ] []
 
 
 ariaTest7 : Spec
 ariaTest7 =
-    scatter true [] [ leAria [ arDescription (str "my ARIA description") ] ]
+    scatter true [] [ leAria [ arDescription (str "my ARIA description") ] ] []
 
 
 ariaTest8 : Spec
 ariaTest8 =
-    scatter false [] []
+    scatter false [] [] []
+
+
+ariaTest9 : Spec
+ariaTest9 =
+    scatter true [] [] [ mAria [] ]
+
+
+ariaTest10 : Spec
+ariaTest10 =
+    scatter true [] [] [ mAria [ arDisable ] ]
+
+
+ariaTest11 : Spec
+ariaTest11 =
+    scatter true [] [] [ mAria [ arDescription (str "my ARIA description") ] ]
 
 
 
@@ -149,6 +166,9 @@ specs =
     , ( "ariaTest6", ariaTest6 )
     , ( "ariaTest7", ariaTest7 )
     , ( "ariaTest8", ariaTest8 )
+    , ( "ariaTest9", ariaTest9 )
+    , ( "ariaTest10", ariaTest10 )
+    , ( "ariaTest11", ariaTest11 )
     ]
 
 
