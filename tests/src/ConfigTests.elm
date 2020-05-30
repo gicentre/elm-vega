@@ -165,6 +165,8 @@ configTest3 =
                 , cfAxis axX
                     [ axLabelBaseline vaLineTop
                     , axLabelFontSize (numSignal "baseFontSize*2")
+                    , axLabelLineHeight (num 45)
+                    , axLabelOffset (num 10)
                     ]
                 , cfLegend
                     [ leTitleColor (strSignal "textColor")

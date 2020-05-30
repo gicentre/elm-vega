@@ -813,6 +813,8 @@ module Vega exposing
     , axLabelFlush
     , axLabelFlushOffset
     , axLabelLimit
+    , axLabelLineHeight
+    , axLabelOffset
     , axLabelPadding
     , axLabelOverlap
     , axLabelSeparation
@@ -2860,6 +2862,8 @@ The visual appearance of chart axes. See the
 @docs axLabelFlush
 @docs axLabelFlushOffset
 @docs axLabelLimit
+@docs axLabelLineHeight
+@docs axLabelOffset
 @docs axLabelPadding
 @docs axLabelOverlap
 @docs axLabelSeparation
@@ -3746,15 +3750,15 @@ type AxisElement
 [axLabelAlign](#axLabelAlign), [axLabelBaseline](#axLabelBaseline), [axLabelBound](#axLabelBound),
 [axLabelColor](#axLabelColor), [axLabelFlush](#axLabelFlush), [axLabelFlushOffset](#axLabelFlushOffset),
 [axLabelFont](#axLabelFont), [axLabelFontSize](#axLabelFontSize), [axLabelFontStyle](#axLabelFontStyle),
-[axLabelFontWeight](#axLabelFontWeight), [axLabelLimit](#axLabelLimit), [axLabelOpacity](#axLabelOpacity)
-[axLabelOverlap](#axLabelOverlap), [axLabelPadding](#axLabelPadding),
-[axLabelSeparation](#axLabelSeparation), [axMaxExtent](#axMaxExtent), [axMinExtent](#axMinExtent),
-[axOffset](#axOffset), [axPosition](#axPosition), [axTicks](#axTicks), [axTickBand](#axTickBand),
-[axTickColor](#axTickColor), [axTickCount](#axTickCount), [axTemporalTickCount](#axTemporalTickCount),
-[axTickDash](#axTickDash), [axTickDashOffset](#axTickDashOffset), [axTickExtra](#axTickExtra),
-[axTickMinStep](#axTickMinStep), [axTickOffset](#axTickOffset), [axTickOpacity](#axTickOpacity),
-[axTickRound](#axTickRound), [axTickSize](#axTickSize), [axTickWidth](#axTickWidth),
-[axTitle](#axTitle), [axTitleAlign](#axTitleAlign), [axTitleAnchor](#axTitleAnchor),
+[axLabelFontWeight](#axLabelFontWeight), [axLabelLimit](#axLabelLimit), [axLabelLineHeight](#axLabelLineHeight),
+[axLabelOffset](#axLabelOffset), [axLabelOpacity](#axLabelOpacity) [axLabelOverlap](#axLabelOverlap),
+[axLabelPadding](#axLabelPadding), [axLabelSeparation](#axLabelSeparation), [axMaxExtent](#axMaxExtent),
+[axMinExtent](#axMinExtent), [axOffset](#axOffset), [axPosition](#axPosition), [axTicks](#axTicks),
+[axTickBand](#axTickBand), [axTickColor](#axTickColor), [axTickCount](#axTickCount),
+[axTemporalTickCount](#axTemporalTickCount), [axTickDash](#axTickDash), [axTickDashOffset](#axTickDashOffset),
+[axTickExtra](#axTickExtra), [axTickMinStep](#axTickMinStep), [axTickOffset](#axTickOffset),
+[axTickOpacity](#axTickOpacity), [axTickRound](#axTickRound), [axTickSize](#axTickSize),
+[axTickWidth](#axTickWidth), [axTitle](#axTitle), [axTitleAlign](#axTitleAlign), [axTitleAnchor](#axTitleAnchor),
 [axTitleAngle](#axTitleAngle), [axTitleBaseline](#axTitleBaseline), [axTitleColor](#axTitleColor),
 [axTitleFont](#axTitleFont), [axTitleFontSize](#axTitleFontSize), [axTitleFontStyle](#axTitleFontStyle),
 [axTitleFontWeight](#axTitleFontWeight), [axTitleLimit](#axTitleLimit),
@@ -3799,6 +3803,8 @@ type AxisProperty
     | AxLabelFontStyle Str
     | AxLabelFontWeight Value
     | AxLabelLimit Num
+    | AxLabelLineHeight Num
+    | AxLabelOffset Num
     | AxLabelOpacity Num
     | AxLabelOverlap OverlapStrategy
     | AxLabelPadding Num
@@ -6435,6 +6441,21 @@ axLabelFontWeight =
 axLabelLimit : Num -> AxisProperty
 axLabelLimit =
     AxLabelLimit
+
+
+{-| Line height in pixels for multi-line label text or label text with
+[valineTop](#vaLineTop) or [vaLineBottom](#vaLineBottom) baselines.
+-}
+axLabelLineHeight : Num -> AxisProperty
+axLabelLineHeight =
+    AxLabelLineHeight
+
+
+{-| Offset in pixels to apply to labels, in addition to [axTickOffset](#axTickOffset).
+-}
+axLabelOffset : Num -> AxisProperty
+axLabelOffset =
+    AxLabelOffset
 
 
 {-| Opacity of an axis label.
@@ -16882,6 +16903,12 @@ axisProperty ap =
 
         AxLabelLimit n ->
             ( "labelLimit", numSpec n )
+
+        AxLabelLineHeight n ->
+            ( "labelLineHeight", numSpec n )
+
+        AxLabelOffset n ->
+            ( "labelOffset", numSpec n )
 
         AxLabelOpacity n ->
             ( "labelOpacity", numSpec n )

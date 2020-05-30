@@ -6,6 +6,8 @@
 - `axDomainCap` and `axGridCap` with convenience function `strokeCapStr` for axis line capping (V5.11).
 
 * `vaLineTop` and `vaLineBottom` for vertical alignment relative to line height (V5.10).
+* `axLabelLineHeight` for multi-lined or line-aligned axis labels (V5.10).
+* `axLabelOffset` for displacing axis labels relative to tick marks (V5.10).
 * `widthSignal`, `heightSignal` and `paddingSignal` to allow dimensions and padding to be specified via signal expressions that are used as the `update` property (V5.10).
 * `cfPadding`, `cfPaddings` and `cfPaddingSignal` for configuring default padding (V5.10).
 * `cfWidth`, `cfWidthSignal`, `cfHeight` and `cfHeightSignal` for configuring default dimensions (V5.10).
