@@ -4233,10 +4233,14 @@ var $author$project$Vega$vAlignSpec = function (align) {
 	switch (align.$) {
 		case 0:
 			return $elm$json$Json$Encode$string('top');
+		case 4:
+			return $elm$json$Json$Encode$string('line-top');
 		case 1:
 			return $elm$json$Json$Encode$string('middle');
 		case 2:
 			return $elm$json$Json$Encode$string('bottom');
+		case 5:
+			return $elm$json$Json$Encode$string('line-bottom');
 		case 3:
 			return $elm$json$Json$Encode$string('alphabetic');
 		default:

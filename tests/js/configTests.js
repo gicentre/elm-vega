@@ -6515,10 +6515,14 @@ var $author$project$Vega$vAlignSpec = function (align) {
 	switch (align.$) {
 		case 0:
 			return $elm$json$Json$Encode$string('top');
+		case 4:
+			return $elm$json$Json$Encode$string('line-top');
 		case 1:
 			return $elm$json$Json$Encode$string('middle');
 		case 2:
 			return $elm$json$Json$Encode$string('bottom');
+		case 5:
+			return $elm$json$Json$Encode$string('line-bottom');
 		case 3:
 			return $elm$json$Json$Encode$string('alphabetic');
 		default:
@@ -13331,6 +13335,10 @@ var $author$project$Vega$AxGridCap = function (a) {
 	return {$: 16, a: a};
 };
 var $author$project$Vega$axGridCap = $author$project$Vega$AxGridCap;
+var $author$project$Vega$AxLabelBaseline = function (a) {
+	return {$: 26, a: a};
+};
+var $author$project$Vega$axLabelBaseline = $author$project$Vega$AxLabelBaseline;
 var $author$project$Vega$AxLabelFontSize = function (a) {
 	return {$: 32, a: a};
 };
@@ -13347,6 +13355,8 @@ var $author$project$Vega$AxTitleLineHeight = function (a) {
 	return {$: 69, a: a};
 };
 var $author$project$Vega$axTitleLineHeight = $author$project$Vega$AxTitleLineHeight;
+var $author$project$Vega$AxX = 5;
+var $author$project$Vega$axX = 5;
 var $author$project$Vega$CRound = {$: 1};
 var $author$project$Vega$caRound = $author$project$Vega$CRound;
 var $author$project$Vega$CSquare = {$: 2};
@@ -13741,6 +13751,8 @@ var $author$project$Vega$VNum = function (a) {
 	return {$: 2, a: a};
 };
 var $author$project$Vega$vNum = $author$project$Vega$VNum;
+var $author$project$Vega$LineTop = {$: 4};
+var $author$project$Vega$vaLineTop = $author$project$Vega$LineTop;
 var $author$project$ConfigTests$configTest3 = function () {
 	var cf = $author$project$Vega$config(
 		_List_fromArray(
@@ -13817,6 +13829,15 @@ var $author$project$ConfigTests$configTest3 = function () {
 						$author$project$Vega$strokeCapStr($author$project$Vega$caSquare)),
 						$author$project$Vega$axGridCap(
 						$author$project$Vega$strokeCapStr($author$project$Vega$caRound))
+					])),
+				A2(
+				$author$project$Vega$cfAxis,
+				$author$project$Vega$axX,
+				_List_fromArray(
+					[
+						$author$project$Vega$axLabelBaseline($author$project$Vega$vaLineTop),
+						$author$project$Vega$axLabelFontSize(
+						$author$project$Vega$numSignal('baseFontSize*2'))
 					])),
 				$author$project$Vega$cfLegend(
 				_List_fromArray(
